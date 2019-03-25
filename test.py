@@ -1,5 +1,5 @@
-import keywdarg
+import PowerPlant
 
-a = keywdarg
-a.parrot(0, "a","b", "c")
+a = PowerPlant.construct()
+
 
