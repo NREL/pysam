@@ -46,6 +46,8 @@ if(MSVC)
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SUBSYSTEM:WINDOWS")
     set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} 
         PROPERTY VS_STARTUP_PROJECT ${pysam})
+
+	set(CMAKE_LINKER_FLAGS "${CMAKE_LINKER_FLAGS} /NODEFAULTLIB")
 else()
     target_compile_options(pysam PUBLIC -O3 -framework Python)
 
