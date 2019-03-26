@@ -1,7 +1,7 @@
 #ifndef SYSTEM_ADVISOR_MODEL_SAM_API_H
 #define SYSTEM_ADVISOR_MODEL_SAM_API_H
 
-#include "lib/visibility.h"
+#include "visibility.h"
 
 #ifdef __cplusplus
 extern "C" {

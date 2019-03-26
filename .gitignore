@@ -1,4 +1,19 @@
+# building
+lib/
 build/
 cmake-build-debug/
 cmake-build-release/
+
+#os specific
 .idea/
+.DS_Store
+
+#python virutal environments
+env/
+venv/
+venv34/
+
+#distributions
+dist/
+manylinux/
+PowerPlant.egg-info

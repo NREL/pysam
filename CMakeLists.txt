@@ -4,19 +4,19 @@ cmake_minimum_required(VERSION 3.12)
 
 
 if(APPLE)
-    set(CMAKE_OSX_DEPLOYMENT_TARGET "10.13" CACHE STRING "Minimum OS X deployment version")
+    set(CMAKE_OSX_DEPLOYMENT_TARGET "10.7" CACHE STRING "Minimum OS X deployment version")
 endif()
 
 Project(PYSAM)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}")
 
 
-include_directories(.. $ENV{SSCDIR} $ENV{SSCDIR}/ssc $ENV{PY3DIR})
+include_directories(. $ENV{PY3DIR})
 
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
-add_library(pysam
-        keywdarg.c
+add_library(pysam SHARED
+        PowerPlant.c
         )
 
 set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG}")
@@ -28,15 +28,12 @@ set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG}")
 unset(SSC_LIB CACHE)
 unset(SAM_API_LIB CACHE)
 find_library( SSC_LIB
-        NAMES sscd.dylib sscd.so sscd.lib
+        NAMES lib/libsscd.so sscd.so sscd.lib
         PATHS $ENV{SSCDIR}/ssc $ENV{SSCDIR}/build_vs2017/x64/Debug)
 find_library( SAM_API_LIB
-        NAMES SAM_apid.dylib SAM_apid.so SAM_apid.lib
+        NAMES lib/libSAM_apid.so SAM_apid.so SAM_apid.lib
         PATHS $ENV{SAMNTDIR}/api)
 target_link_libraries(pysam ${SSC_LIB} ${SAM_API_LIB})
-
-
-
 
 
 #setup compile options

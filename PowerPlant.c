@@ -7,7 +7,7 @@
 #include <Python.h>
 
 #include "SAM_api.h"
-#include "lib/SAM_GenericSystem.h"
+#include "SAM_GenericSystem.h"
 
 //static PyObject *ErrorObject;
 

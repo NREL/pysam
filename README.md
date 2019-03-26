@@ -1,15 +1,17 @@
 # PySAM Package
 
 ## Requirements
-1. Python 3.4+
-2. macosx-10.7-x86_64
+1. Python 3.4
+2. Operating system:
+	- macosx-10.7-x86_64
+	- most linux distributions
 3. CMake 2.8
 
 ## Structure
 
 1. Python User Script (Python)
 2. __PySAM Package (Python)__
-3. PySAM Extension (C)
+3. __PySAM Extension (C)__
 4. SAM API (C)
 5. SAM Library & SSC API (C/C++)
 6. SSC Library (C++)
@@ -35,8 +37,8 @@
 		PySAM/                          Top-level package
 			__init__.py               	Initialize the package
 			lib/						Binaries directory
-				sam.dll/.so/.dylib					
-				ssc.dll/.so/.dylib
+				sam.dll/.so					
+				ssc.dll/.so
 			PVWatts/                  	Subpackage for PVWatts Technology System
 				__init__.py
 				PVWatts.py
