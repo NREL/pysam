@@ -17,7 +17,7 @@ if sys.platform == 'linux':
     libfiles = ['libSAM_apid.so', 'libsscd.so']
 
 if sys.platform == 'win32':
-    libs = ['SAM_apid.dll', 'sscd.dll']
+    libs = ['SAM_apid', 'sscd']
     libfiles = ['SAM_apid.dll', 'sscd.dll', 'SAM_apid.lib', 'sscd.lib']
     extra_link_args = ['']
 
