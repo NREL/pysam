@@ -16,115 +16,136 @@
 
 #include <Python.h>
 
+#include "SAM_GenericSystem.h"
+#include "SAM_api.h"
+
+
+#define ERROR_CHECK(error_type) \
+const char* c = error_message(error); \
+if ((c != NULL) && (c[0] != '\0')) { PyErr_SetString(PyExc_RuntimeError, c); \
+    error_destruct(error); return error_type; } error_destruct(error); \
+
 static PyObject *ErrorObject;
+
+
+/*
+ *  PowerPlant Group
+ */
 
 typedef struct {
     PyObject_HEAD
-    PyObject            *x_attr;        /* Attributes dictionary: data is reference to ssc_data_t */
+    PyObject            *x_attr;        /* Attributes dictionary */
+    SAM_GenericSystem   data_ptr;
 } PowerPlantObject;
 
-static PyTypeObject Xxo_Type;
+static PyTypeObject PowerPlant_Type;
 
-#define PowerPlantObject_Check(v)      (Py_TYPE(v) == &Xxo_Type)
+#define PowerPlantObject_Check(v)      (Py_TYPE(v) == &PowerPlant_Type)
 
 static PowerPlantObject *
-newPowerPlantObject(PyObject *arg)
+newPowerPlantObject(PyObject *arg, SAM_GenericSystem ptr)
 {
     PowerPlantObject *self;
-    self = PyObject_New(PowerPlantObject, &PowerPlantType);
+    self = PyObject_New(PowerPlantObject, &PowerPlant_Type);
     if (self == NULL)
         return NULL;
-    self->x_attr = NULL;
+
+    PyObject* attr_dict = PyDict_New();
+    Py_XINCREF(attr_dict);
+
+    PyDict_SetItemString(attr_dict, "name", PyUnicode_FromString("PowerPlant"));
+    PyDict_SetItemString(attr_dict, "technology", PyUnicode_FromString("GenericSystem"));
+
+    self->x_attr = attr_dict;
+
+    self->data_ptr = ptr;
+
     return self;
 }
 
 /* PowerPlant methods */
 
 static void
-Xxo_dealloc(XxoObject *self)
+PowerPlant_dealloc(PowerPlantObject *self)
 {
     Py_XDECREF(self->x_attr);
     PyObject_Del(self);
 }
 
-static PyObject *
-PowerPlant_set_derate(PowerPlantObject *self, PyObject *args)
+
+static int
+PowerPlant_set_derate(PowerPlantObject *self, PyObject *value, void *closure)
 {
-    float derate;
-    if (!PyArg_ParseTuple(args, "f", derate))
+
+    SAM_error error = new_error();
+
+    if (value == NULL) {
+        PyErr_SetString(PyExc_TypeError, "No value provided");
         return NULL;
-    SAM_GenericSystem_PowerPlant_derate_set(PyDict_GetItemString(self->x_attr, "data_ref"), derate, 0);
-    Py_INCREF(Py_None);
-    return Py_None;
+    }
+
+    if (! PyNumber_Float(value)) {
+        PyErr_SetString(PyExc_TypeError,
+                        "Value must be numeric");
+        return NULL;
+    }
+
+    float derate = (float)PyFloat_AsDouble(value);
+    printf("powerplant set derate to %f\n", derate);
+    SAM_GenericSystem_PowerPlant_derate_set(self->data_ptr, derate, &error);
+
+    ERROR_CHECK(-1)
+
+    return 0;
 }
 
 static PyObject *
-PowerPlant_get_derate(PowerPlantObject *self, PyObject *args)
+PowerPlant_get_derate(PowerPlantObject *self, void *closure)
 {
+    printf("powerplant get derate\n");
+
     double derate;
-    if (!PyArg_ParseTuple(args, ""))
-        return NULL;
-    derate = SAM_GenericSystem_PowerPlant_derate_get(PyDict_GetItemString(self->x_attr, "data_ref"), 0);
+    SAM_error error = new_error();
+
+    printf("here");
+
+    derate = SAM_GenericSystem_PowerPlant_derate_get(self->data_ptr, &error);
+
+    ERROR_CHECK(NULL)
+
     PyObject* result = PyFloat_FromDouble(derate);
     Py_INCREF(result);
     return result;
 }
 
-static PyMethodDef Xxo_methods[] = {
-        {"set_derate",            (PyCFunction)PowerPlant_set_derate,  METH_VARARGS,
-                PyDoc_STR("set_derate() -> None\n Derate [%]")},
-        {"get_derate",            (PyCFunction)PowerPlant_get_derate,  METH_VARARGS,
-                PyDoc_STR("get_derate() -> Float\n Derate [%]")},
-        {NULL,              NULL}           /* sentinel */
+//static PyMethodDef PowerPlant_methods[] = {
+//        {"set_derate",            (PyCFunction)PowerPlant_set_derate,  METH_VARARGS,
+//                PyDoc_STR("set_derate() -> None\n Derate [%]")},
+//        {"get_derate",            (PyCFunction)PowerPlant_get_derate,  METH_VARARGS,
+//                PyDoc_STR("get_derate() -> Float\n Derate [%]")},
+//        {NULL,              NULL}           /* sentinel */
+//};
+
+
+static PyGetSetDef PowerPlant_getset[] = {
+    {"derate", (getter)PowerPlant_get_derate, (setter)PowerPlant_set_derate,
+        "Derate [%]", NULL},
+    {NULL}  /* Sentinel */
 };
 
-static PyObject *
-Xxo_getattro(XxoObject *self, PyObject *name)
-{
-    if (self->x_attr != NULL) {
-        PyObject *v = PyDict_GetItemWithError(self->x_attr, name);
-        if (v != NULL) {
-            Py_INCREF(v);
-            return v;
-        }
-        else if (PyErr_Occurred()) {
-            return NULL;
-        }
-    }
-    return PyObject_GenericGetAttr((PyObject *)self, name);
-}
 
-static int
-Xxo_setattr(XxoObject *self, const char *name, PyObject *v)
-{
-    if (self->x_attr == NULL) {
-        self->x_attr = PyDict_New();
-        if (self->x_attr == NULL)
-            return -1;
-    }
-    if (v == NULL) {
-        int rv = PyDict_DelItemString(self->x_attr, name);
-        if (rv < 0 && PyErr_ExceptionMatches(PyExc_KeyError))
-            PyErr_SetString(PyExc_AttributeError,
-                            "delete non-existing Xxo attribute");
-        return rv;
-    }
-    else
-        return PyDict_SetItemString(self->x_attr, name, v);
-}
-
-static PyTypeObject PowerPlantType = {
+static PyTypeObject PowerPlant_Type = {
         /* The ob_type field must be initialized in the module init function
          * to be portable to Windows without using C++. */
         PyVarObject_HEAD_INIT(NULL, 0)
-        "xxmodule.Xxo",             /*tp_name*/
-        sizeof(XxoObject),          /*tp_basicsize*/
+        "GenericSystem.PowerPlant",             /*tp_name*/
+        sizeof(PowerPlantObject),          /*tp_basicsize*/
         0,                          /*tp_itemsize*/
         /* methods */
-        (destructor)Xxo_dealloc,    /*tp_dealloc*/
+        (destructor)PowerPlant_dealloc,    /*tp_dealloc*/
         0,                          /*tp_print*/
         (getattrfunc)0,             /*tp_getattr*/
-        (setattrfunc)Xxo_setattr,   /*tp_setattr*/
+        0,                          /*tp_setattr*/
         0,                          /*tp_reserved*/
         0,                          /*tp_repr*/
         0,                          /*tp_as_number*/
@@ -133,7 +154,7 @@ static PyTypeObject PowerPlantType = {
         0,                          /*tp_hash*/
         0,                          /*tp_call*/
         0,                          /*tp_str*/
-        (getattrofunc)Xxo_getattro, /*tp_getattro*/
+        0,                          /*tp_getattro*/
         0,                          /*tp_setattro*/
         0,                          /*tp_as_buffer*/
         Py_TPFLAGS_DEFAULT,         /*tp_flags*/
@@ -144,9 +165,9 @@ static PyTypeObject PowerPlantType = {
         0,                          /*tp_weaklistoffset*/
         0,                          /*tp_iter*/
         0,                          /*tp_iternext*/
-        Xxo_methods,                /*tp_methods*/
+        0,         /*tp_methods*/
         0,                          /*tp_members*/
-        0,                          /*tp_getset*/
+        PowerPlant_getset,          /*tp_getset*/
         0,                          /*tp_base*/
         0,                          /*tp_dict*/
         0,                          /*tp_descr_get*/
@@ -158,91 +179,148 @@ static PyTypeObject PowerPlantType = {
         0,                          /*tp_free*/
         0,                          /*tp_is_gc*/
 };
-/* --------------------------------------------------------------------- */
 
-/* Function of two integers returning integer */
 
-PyDoc_STRVAR(xx_foo_doc,
-             "foo(i,j)\n\
-\n\
-Return the sum of i and j.");
+/*
+ * Generic System
+ */
 
-static PyObject *
-xx_foo(PyObject *self, PyObject *args)
+typedef struct {
+    PyObject_HEAD
+    PyObject            *x_attr;        /* Attributes dictionary */
+    SAM_GenericSystem   data_ptr;
+} GenericSystemObject;
+
+static PyTypeObject GenericSystem_Type;
+
+#define GenericSystemObject_Check(v)      (Py_TYPE(v) == &GenericSystem_Type)
+
+static GenericSystemObject *
+newGenericSystemObject(PyObject *arg)
 {
-    long i, j;
-    long res;
-    if (!PyArg_ParseTuple(args, "ll:foo", &i, &j))
+    GenericSystemObject *self;
+    self = PyObject_New(GenericSystemObject, &GenericSystem_Type);
+    if (self == NULL)
         return NULL;
-    res = i+j; /* XXX Do something here */
-    return PyLong_FromLong(res);
+
+    SAM_error error = new_error();
+    self->data_ptr = SAM_GenericSystem_construct(0, &error);
+
+    ERROR_CHECK(NULL)
+
+    PyObject* attr_dict = PyDict_New();
+    Py_XINCREF(attr_dict);
+
+    PyDict_SetItemString(attr_dict, "technology", PyUnicode_FromString("GenericSystem"));
+
+    PyDict_SetItemString(attr_dict, "PowerPlant", newPowerPlantObject(0, self->data_ptr));
+
+    self->x_attr = attr_dict;
+
+    return self;
+}
+
+/* GenericSystem methods */
+
+static void
+GenericSystem_dealloc(GenericSystemObject *self)
+{
+    Py_XDECREF(self->x_attr);
+//    Py_XDECREF(self->powerplant);
+    SAM_GenericSystem_destruct(self->data_ptr);
+    PyObject_Del(self);
 }
 
 
-/* Function of no arguments returning new Xxo object */
-
 static PyObject *
-xx_new(PyObject *self, PyObject *args)
+GenericSystem_execute(GenericSystemObject *self, PyObject *args)
 {
-    XxoObject *rv;
+    float derate;
+    SAM_error error = new_error();
 
-    if (!PyArg_ParseTuple(args, ":new"))
+    if (!PyArg_ParseTuple(args, "f", &derate))
         return NULL;
-    rv = newXxoObject(args);
-    if (rv == NULL)
-        return NULL;
-    return (PyObject *)rv;
+
+    SAM_GenericSystem_PowerPlant_derate_set(self->data_ptr, derate, &error);
+
+    ERROR_CHECK(NULL)
+
+    Py_INCREF(Py_None);
+    return Py_None;
 }
 
-/* Example with subtle bug from extensions manual ("Thin Ice"). */
+
+static PyMethodDef GenericSystem_methods[] = {
+        {"execute",            (PyCFunction)GenericSystem_execute,  METH_VARARGS,
+                PyDoc_STR("execute() -> None\n Execute simulation")},
+        {NULL,              NULL}           /* sentinel */
+};
+
+static PyObject*
+GenericSystem_get_PowerPlant(GenericSystemObject* self, void* closure)
+{
+    printf("genericsystem get powerplant\n\n");
+    return self->x_attr;
+}
+
+static PyGetSetDef GenericSystem_getset[] = {
+    {"PowerPlant", (getter)GenericSystem_get_PowerPlant, NULL, "Power Plant properties", NULL},
+    {NULL}  /* Sentinel */
+};
+
 
 static PyObject *
-xx_bug(PyObject *self, PyObject *args)
+GenericSystem_getattro(GenericSystemObject *self, PyObject *name)
 {
-    PyObject *list, *item;
-
-    if (!PyArg_ParseTuple(args, "O:bug", &list))
-        return NULL;
-
-    item = PyList_GetItem(list, 0);
-    /* Py_INCREF(item); */
-    PyList_SetItem(list, 1, PyLong_FromLong(0L));
-    PyObject_Print(item, stdout, 0);
+//    printf("get attro");
+    PyObject_Print(name, stdout, Py_PRINT_RAW);
     printf("\n");
-    /* Py_DECREF(item); */
 
-    Py_INCREF(Py_None);
-    return Py_None;
+    if (self->x_attr != NULL) {
+        PyObject *v = PyDict_GetItemWithError(self->x_attr, name);
+        if (v != NULL) {
+            Py_INCREF(v);
+//            printf("found");
+            return v;
+        }
+        else if (PyErr_Occurred()) {
+            return NULL;
+        }
+    }
+    return PyObject_GenericGetAttr((PyObject *)self, name);
 }
 
-/* Test bad format character */
-
-static PyObject *
-xx_roj(PyObject *self, PyObject *args)
+static int
+GenericSystem_setattr(GenericSystemObject *self, const char *name, PyObject *v)
 {
-    PyObject *a;
-    long b;
-    if (!PyArg_ParseTuple(args, "O#:roj", &a, &b))
-        return NULL;
-    Py_INCREF(Py_None);
-    return Py_None;
+    if (self->x_attr == NULL) {
+        self->x_attr = PyDict_New();
+        if (self->x_attr == NULL)
+            return -1;
+    }
+    if (v == NULL) {
+        int rv = PyDict_DelItemString(self->x_attr, name);
+        if (rv < 0 && PyErr_ExceptionMatches(PyExc_KeyError))
+            PyErr_SetString(PyExc_AttributeError,
+                            "delete non-existing GenericSystem attribute");
+        return rv;
+    }
+    else
+        return PyDict_SetItemString(self->x_attr, name, v);
 }
 
-
-/* ---------- */
-
-static PyTypeObject Str_Type = {
+static PyTypeObject GenericSystem_Type = {
         /* The ob_type field must be initialized in the module init function
          * to be portable to Windows without using C++. */
         PyVarObject_HEAD_INIT(NULL, 0)
-        "xxmodule.Str",             /*tp_name*/
-        0,                          /*tp_basicsize*/
+        "GenericSystem",            /*tp_name*/
+        sizeof(GenericSystemObject),/*tp_basicsize*/
         0,                          /*tp_itemsize*/
         /* methods */
-        0,                          /*tp_dealloc*/
+        (destructor)GenericSystem_dealloc,    /*tp_dealloc*/
         0,                          /*tp_print*/
-        0,                          /*tp_getattr*/
-        0,                          /*tp_setattr*/
+        (getattrfunc)0,             /*tp_getattr*/
+        (setattrfunc)GenericSystem_setattr,   /*tp_setattr*/
         0,                          /*tp_reserved*/
         0,                          /*tp_repr*/
         0,                          /*tp_as_number*/
@@ -251,21 +329,21 @@ static PyTypeObject Str_Type = {
         0,                          /*tp_hash*/
         0,                          /*tp_call*/
         0,                          /*tp_str*/
-        0,                          /*tp_getattro*/
+        (getattrofunc)GenericSystem_getattro, /*tp_getattro*/
         0,                          /*tp_setattro*/
         0,                          /*tp_as_buffer*/
-        Py_TPFLAGS_DEFAULT | Py_TPFLAGS_BASETYPE, /*tp_flags*/
-        0,                          /*tp_doc*/
+        Py_TPFLAGS_DEFAULT,         /*tp_flags*/
+        "see html for help",        /*tp_doc*/
         0,                          /*tp_traverse*/
         0,                          /*tp_clear*/
         0,                          /*tp_richcompare*/
         0,                          /*tp_weaklistoffset*/
         0,                          /*tp_iter*/
         0,                          /*tp_iternext*/
-        0,                          /*tp_methods*/
+        GenericSystem_methods,      /*tp_methods*/
         0,                          /*tp_members*/
-        0,                          /*tp_getset*/
-        0, /* see PyInit_xx */      /*tp_base*/
+        GenericSystem_getset,       /*tp_getset*/
+        0,                          /*tp_base*/
         0,                          /*tp_dict*/
         0,                          /*tp_descr_get*/
         0,                          /*tp_descr_set*/
@@ -277,60 +355,24 @@ static PyTypeObject Str_Type = {
         0,                          /*tp_is_gc*/
 };
 
-/* ---------- */
+/* --------------------------------------------------------------------- */
+
+
+/* Function of no arguments returning new GenericSystem object */
 
 static PyObject *
-null_richcompare(PyObject *self, PyObject *other, int op)
+GenericSystem_new(PyObject *self, PyObject *args)
 {
-    Py_INCREF(Py_NotImplemented);
-    return Py_NotImplemented;
+    GenericSystemObject *rv;
+
+    if (!PyArg_ParseTuple(args, ":new"))
+        return NULL;
+    rv = newGenericSystemObject(args);
+    if (rv == NULL)
+        return NULL;
+    return (PyObject *)rv;
 }
 
-static PyTypeObject Null_Type = {
-        /* The ob_type field must be initialized in the module init function
-         * to be portable to Windows without using C++. */
-        PyVarObject_HEAD_INIT(NULL, 0)
-        "xxmodule.Null",            /*tp_name*/
-        0,                          /*tp_basicsize*/
-        0,                          /*tp_itemsize*/
-        /* methods */
-        0,                          /*tp_dealloc*/
-        0,                          /*tp_print*/
-        0,                          /*tp_getattr*/
-        0,                          /*tp_setattr*/
-        0,                          /*tp_reserved*/
-        0,                          /*tp_repr*/
-        0,                          /*tp_as_number*/
-        0,                          /*tp_as_sequence*/
-        0,                          /*tp_as_mapping*/
-        0,                          /*tp_hash*/
-        0,                          /*tp_call*/
-        0,                          /*tp_str*/
-        0,                          /*tp_getattro*/
-        0,                          /*tp_setattro*/
-        0,                          /*tp_as_buffer*/
-        Py_TPFLAGS_DEFAULT | Py_TPFLAGS_BASETYPE, /*tp_flags*/
-        0,                          /*tp_doc*/
-        0,                          /*tp_traverse*/
-        0,                          /*tp_clear*/
-        null_richcompare,           /*tp_richcompare*/
-        0,                          /*tp_weaklistoffset*/
-        0,                          /*tp_iter*/
-        0,                          /*tp_iternext*/
-        0,                          /*tp_methods*/
-        0,                          /*tp_members*/
-        0,                          /*tp_getset*/
-        0, /* see PyInit_xx */      /*tp_base*/
-        0,                          /*tp_dict*/
-        0,                          /*tp_descr_get*/
-        0,                          /*tp_descr_set*/
-        0,                          /*tp_dictoffset*/
-        0,                          /*tp_init*/
-        0,                          /*tp_alloc*/
-        PyType_GenericNew,          /*tp_new*/
-        0,                          /*tp_free*/
-        0,                          /*tp_is_gc*/
-};
 
 
 /* ---------- */
@@ -338,15 +380,9 @@ static PyTypeObject Null_Type = {
 
 /* List of functions defined in the module */
 
-static PyMethodDef xx_methods[] = {
-        {"roj",             xx_roj,         METH_VARARGS,
-                PyDoc_STR("roj(a,b) -> None")},
-        {"foo",             xx_foo,         METH_VARARGS,
-                xx_foo_doc},
-        {"new",             xx_new,         METH_VARARGS,
-                PyDoc_STR("new() -> new Xx object")},
-        {"bug",             xx_bug,         METH_VARARGS,
-                PyDoc_STR("bug(o) -> None")},
+static PyMethodDef GenericSystemModule_methods[] = {
+        {"new",             GenericSystem_new,         METH_VARARGS,
+                PyDoc_STR("new() -> new GenericSystem object")},
         {NULL,              NULL}           /* sentinel */
 };
 
@@ -355,7 +391,7 @@ PyDoc_STRVAR(module_doc,
 
 
 static int
-xx_exec(PyObject *m)
+GenericSystemModule_exec(PyObject *m)
 {
     /* Slot initialization is subject to the rules of initializing globals.
        C99 requires the initializers to be "address constants".  Function
@@ -369,59 +405,54 @@ xx_exec(PyObject *m)
        Both compilers are strictly standard conforming in this particular
        behavior.
     */
-    Null_Type.tp_base = &PyBaseObject_Type;
-    Str_Type.tp_base = &PyUnicode_Type;
+
 
     /* Finalize the type object including setting type of the new type
      * object; doing it here is required for portability, too. */
-    if (PyType_Ready(&PowerPlantType) < 0)
+
+    if (PyType_Ready(&PowerPlant_Type) < 0)
+        goto fail;
+
+    if (PyType_Ready(&GenericSystem_Type) < 0)
         goto fail;
 
     /* Add some symbolic constants to the module */
     if (ErrorObject == NULL) {
-        ErrorObject = PyErr_NewException("xx.error", NULL, NULL);
+        ErrorObject = PyErr_NewException("GenericSystem.error", NULL, NULL);
         if (ErrorObject == NULL)
             goto fail;
     }
     Py_INCREF(ErrorObject);
     PyModule_AddObject(m, "error", ErrorObject);
 
-    /* Add Str */
-    if (PyType_Ready(&Str_Type) < 0)
-        goto fail;
-    PyModule_AddObject(m, "Str", (PyObject *)&Str_Type);
 
-    /* Add Null */
-    if (PyType_Ready(&Null_Type) < 0)
-        goto fail;
-    PyModule_AddObject(m, "Null", (PyObject *)&Null_Type);
     return 0;
     fail:
     Py_XDECREF(m);
     return -1;
 }
 
-static struct PyModuleDef_Slot xx_slots[] = {
-        {Py_mod_exec, xx_exec},
+static struct PyModuleDef_Slot GenericSystemModule_slots[] = {
+        {Py_mod_exec, GenericSystemModule_exec},
         {0, NULL},
 };
 
-static struct PyModuleDef xxmodule = {
+static struct PyModuleDef GenericSystemModule = {
         PyModuleDef_HEAD_INIT,
-        "xx",
+        "GenericSystem",
         module_doc,
         0,
-        xx_methods,
-        xx_slots,
+        GenericSystemModule_methods,
+        GenericSystemModule_slots,
         NULL,
         NULL,
         NULL
 };
 
-/* Export function for the module (*must* be called PyInit_xx) */
+/* Export function for the module (*must* be called PyInit_GenericSystem) */
 
 PyMODINIT_FUNC
-PyInit_xx(void)
+PyInit_GenericSystem(void)
 {
-    return PyModuleDef_Init(&xxmodule);
+    return PyModuleDef_Init(&GenericSystemModule);
 }

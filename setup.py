@@ -30,8 +30,8 @@ setup(
     package_dir={'': 'lib'},
     package_data={
         '': libfiles},
-    ext_modules=[Extension('xx',
-                           ['xxmodule.c'],
+    ext_modules=[Extension('GenericSystem',
+                           ['GenericSystem.c'],
                            include_dirs=[libpath],
                            library_dirs=[libpath],
                            libraries=libs,
