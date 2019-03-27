@@ -1,5 +1,7 @@
-import PowerPlant
+import xx
 
-a = PowerPlant.construct()
+a = xx.new()
+a.get_derate()
+
 
 

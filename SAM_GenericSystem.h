@@ -2,6 +2,7 @@
 #define SAM_GENERICSYSTEM_FUNCTIONS_H_
 
 #include "visibility.h"
+#include "SAM_api.h"
 
 // need to figure out how to encode these headers in PYSAM since ssc headers should be available
 //#include "ErrorHandler.h"

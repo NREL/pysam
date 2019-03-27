@@ -1,10 +1,11 @@
 # PySAM Package
 
 ## Requirements
-1. Python 3.4
+1. Python 3.5, multi-phase initialization
 2. Operating system:
-	- macosx-10.7-x86_64
+	- Mac: macosx-10.7-x86_64
 	- most linux distributions
+	- Windows, 3.5
 3. CMake 2.8
 
 ## Structure
@@ -26,9 +27,18 @@
 ## Error Handling
 
 1. Most detailed error message is created by C API layer functions, inside `TranslateError()`, which throws exceptions upon failure of the C function. The error indication should be propagated up the callers, but without changing the message. [1]
-	- PyErr_* functions are called by the layer above the C API, using message information from the C API.
+	- PyErr_* functions are called by the layer above the C API, using message information from the C API. [14]
 	- If PyErr_Clear() is called, then the extension layer is handling the error itself instead of passing it on.
 	- Garbage must be cleaned when returning an error indication using `Py_XDECREF()`, which decrements the reference count for an object, whose destructor is called when the count is 0.
+
+
+## Docstring
+1. Declared for methods and objects, accessed via `x.__doc__` or `help(x)`
+
+
+## Pythonic Arguments
+1. Dictionary of values as argument to constructors [15]
+	- Mutable default arguments are evaluated once only at function definition time and then becomes a (mutable) property of the function. Always make all `PyObject*` references to default arguments `static`.
 
 
 ## PySAM Package
@@ -41,11 +51,11 @@
 				ssc.dll/.so
 			PVWatts/                  	Subpackage for PVWatts Technology System
 				__init__.py
-				PVWatts.py
+				PVWatts.c
 				PVWatts-defaults.json 	Subpackage for Wind Technology System
 			Windpower/
 				__init__.py
-				Windpower.py
+				Windpower.c
 				Windpower-defaults.json
 			...
 
@@ -83,6 +93,9 @@
 [10] https://stackoverflow.com/questions/31380578/how-to-avoid-building-c-library-with-my-python-package
 [11] https://stackoverflow.com/questions/47380150/dealing-with-dylibs-when-distributing-python-packages
 [12] https://github.com/matthew-brett/delocate
+[13] https://docs.python.org/3.5/extending/windows.html
+[14] https://pythonextensionpatterns.readthedocs.io/en/latest/exceptions.html
+[15] https://pythonextensionpatterns.readthedocs.io/en/latest/parsing_arguments.html#being-pythonic-with-default-arguments
 
 ## Testing distribution
 
@@ -103,6 +116,8 @@
 		-- `ldconfig`
 		-- `auditwheel repair (wheel_name).whl`
 	- https://github.com/pypa/python-manylinux-demo/blob/master/travis/build-wheels.sh
+
+3. Windows
 
 ### Uploading
 python3 -m twine upload --repository-url https://test.pypi.org/legacy/ dist/PowerPlant-1.0-cp37-cp37m-macosx_10_14_x86_64.whl
