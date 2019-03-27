@@ -1,31 +1,9 @@
-
-/* Use this file as a template to start implementing a module that
-   also declares object types. All occurrences of 'Xxo' should be changed
-   to something reasonable for your objects. After that, all other
-   occurrences of 'xx' should be changed to something reasonable for your
-   module. If your module is named foo your sourcefile should be named
-   foomodule.c.
-
-   You will probably want to delete all references to 'x_attr' and add
-   your own types of attributes instead.  Maybe you want to name your
-   local variables other than 'self'.  If your object type is needed in
-   other files, you'll have to create a file "foobarobject.h"; see
-   floatobject.h for an example. */
-
-/* Xxo objects */
-
 #include <Python.h>
 
 #include "SAM_GenericSystem.h"
 #include "SAM_api.h"
 
-
-#define ERROR_CHECK(error_type) \
-const char* c = error_message(error); \
-if ((c != NULL) && (c[0] != '\0')) { PyErr_SetString(PyExc_RuntimeError, c); \
-    error_destruct(error); return error_type; } error_destruct(error); \
-
-static PyObject *ErrorObject;
+#include "PySAM_utils.h"
 
 
 /*
@@ -47,18 +25,8 @@ newPowerPlantObject(PyObject *arg, SAM_GenericSystem ptr)
 {
     PowerPlantObject *self;
     self = PyObject_New(PowerPlantObject, &PowerPlant_Type);
-    if (self == NULL)
-        return NULL;
 
-    PyObject* attr_dict = PyDict_New();
-    Py_XINCREF(attr_dict);
-
-    PyDict_SetItemString(attr_dict, "name", PyUnicode_FromString("PowerPlant"));
-    PyDict_SetItemString(attr_dict, "technology", PyUnicode_FromString("GenericSystem"));
-
-    self->x_attr = attr_dict;
-
-    self->data_ptr = ptr;
+    SAM_GROUP_ATTR("PowerPlant", "GenericSystem")
 
     return self;
 }
@@ -76,55 +44,14 @@ PowerPlant_dealloc(PowerPlantObject *self)
 static int
 PowerPlant_set_derate(PowerPlantObject *self, PyObject *value, void *closure)
 {
-
-    SAM_error error = new_error();
-
-    if (value == NULL) {
-        PyErr_SetString(PyExc_TypeError, "No value provided");
-        return NULL;
-    }
-
-    if (! PyNumber_Float(value)) {
-        PyErr_SetString(PyExc_TypeError,
-                        "Value must be numeric");
-        return NULL;
-    }
-
-    float derate = (float)PyFloat_AsDouble(value);
-    printf("powerplant set derate to %f\n", derate);
-    SAM_GenericSystem_PowerPlant_derate_set(self->data_ptr, derate, &error);
-
-    ERROR_CHECK(-1)
-
-    return 0;
+    SAM_FLOAT_SETTER(SAM_GenericSystem_PowerPlant_derate_set)
 }
 
 static PyObject *
 PowerPlant_get_derate(PowerPlantObject *self, void *closure)
 {
-    printf("powerplant get derate\n");
-
-    double derate;
-    SAM_error error = new_error();
-
-    printf("here");
-
-    derate = SAM_GenericSystem_PowerPlant_derate_get(self->data_ptr, &error);
-
-    ERROR_CHECK(NULL)
-
-    PyObject* result = PyFloat_FromDouble(derate);
-    Py_INCREF(result);
-    return result;
+    SAM_FLOAT_GETTER(SAM_GenericSystem_PowerPlant_derate_get)
 }
-
-//static PyMethodDef PowerPlant_methods[] = {
-//        {"set_derate",            (PyCFunction)PowerPlant_set_derate,  METH_VARARGS,
-//                PyDoc_STR("set_derate() -> None\n Derate [%]")},
-//        {"get_derate",            (PyCFunction)PowerPlant_get_derate,  METH_VARARGS,
-//                PyDoc_STR("get_derate() -> Float\n Derate [%]")},
-//        {NULL,              NULL}           /* sentinel */
-//};
 
 
 static PyGetSetDef PowerPlant_getset[] = {
@@ -200,22 +127,11 @@ newGenericSystemObject(PyObject *arg)
 {
     GenericSystemObject *self;
     self = PyObject_New(GenericSystemObject, &GenericSystem_Type);
-    if (self == NULL)
-        return NULL;
 
-    SAM_error error = new_error();
-    self->data_ptr = SAM_GenericSystem_construct(0, &error);
-
-    ERROR_CHECK(NULL)
-
-    PyObject* attr_dict = PyDict_New();
-    Py_XINCREF(attr_dict);
-
-    PyDict_SetItemString(attr_dict, "technology", PyUnicode_FromString("GenericSystem"));
+    SAM_TECH_ATTR("GenericSystem", SAM_GenericSystem_construct)
 
     PyDict_SetItemString(attr_dict, "PowerPlant", newPowerPlantObject(0, self->data_ptr));
 
-    self->x_attr = attr_dict;
 
     return self;
 }
@@ -259,7 +175,6 @@ static PyMethodDef GenericSystem_methods[] = {
 static PyObject*
 GenericSystem_get_PowerPlant(GenericSystemObject* self, void* closure)
 {
-    printf("genericsystem get powerplant\n\n");
     return self->x_attr;
 }
 
@@ -272,41 +187,13 @@ static PyGetSetDef GenericSystem_getset[] = {
 static PyObject *
 GenericSystem_getattro(GenericSystemObject *self, PyObject *name)
 {
-//    printf("get attro");
-    PyObject_Print(name, stdout, Py_PRINT_RAW);
-    printf("\n");
-
-    if (self->x_attr != NULL) {
-        PyObject *v = PyDict_GetItemWithError(self->x_attr, name);
-        if (v != NULL) {
-            Py_INCREF(v);
-//            printf("found");
-            return v;
-        }
-        else if (PyErr_Occurred()) {
-            return NULL;
-        }
-    }
-    return PyObject_GenericGetAttr((PyObject *)self, name);
+    SAM_GET_ATTR()
 }
 
 static int
 GenericSystem_setattr(GenericSystemObject *self, const char *name, PyObject *v)
 {
-    if (self->x_attr == NULL) {
-        self->x_attr = PyDict_New();
-        if (self->x_attr == NULL)
-            return -1;
-    }
-    if (v == NULL) {
-        int rv = PyDict_DelItemString(self->x_attr, name);
-        if (rv < 0 && PyErr_ExceptionMatches(PyExc_KeyError))
-            PyErr_SetString(PyExc_AttributeError,
-                            "delete non-existing GenericSystem attribute");
-        return rv;
-    }
-    else
-        return PyDict_SetItemString(self->x_attr, name, v);
+    SAM_SET_ATTR()
 }
 
 static PyTypeObject GenericSystem_Type = {
@@ -415,16 +302,6 @@ GenericSystemModule_exec(PyObject *m)
 
     if (PyType_Ready(&GenericSystem_Type) < 0)
         goto fail;
-
-    /* Add some symbolic constants to the module */
-    if (ErrorObject == NULL) {
-        ErrorObject = PyErr_NewException("GenericSystem.error", NULL, NULL);
-        if (ErrorObject == NULL)
-            goto fail;
-    }
-    Py_INCREF(ErrorObject);
-    PyModule_AddObject(m, "error", ErrorObject);
-
 
     return 0;
     fail:

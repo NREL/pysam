@@ -16,8 +16,8 @@ include_directories(. $ENV{PY3DIR})
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 add_library(pysam SHARED
-        PowerPlant.c
-		xxo.c)
+        GenericSystem.c
+		SAM_utils.h)
 
 set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG}")
 
@@ -28,11 +28,11 @@ set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG}")
 unset(SSC_LIB CACHE)
 unset(SAM_API_LIB CACHE)
 find_library( SSC_LIB
-        NAMES lib/libsscd.so sscd.so sscd.lib
-        PATHS $ENV{SSCDIR}/ssc $ENV{SSCDIR}/build_vs2017/x64/Debug)
+        NAMES libsscd.so sscd.lib
+        PATHS lib )
 find_library( SAM_API_LIB
-        NAMES lib/libSAM_apid.so SAM_apid.so SAM_apid.lib
-        PATHS $ENV{SAMNTDIR}/api)
+        NAMES libSAM_apid.so SAM_apid.lib
+        PATHS lib)
 target_link_libraries(pysam ${SSC_LIB} ${SAM_API_LIB})
 
 
