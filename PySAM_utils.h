@@ -3,6 +3,20 @@
 
 #include <Python.h>
 
+static char* SAM_lib_path = NULL;
+#if defined(__WINDOWS__) || defined(__CYGWIN__)
+static const char SAM_sep = '\\';
+static char* SAM_lib = "SAM_apid.lib";
+#else
+static const char SAM_sep = '/';
+static char* SAM_lib = "libSAM_apid.so";
+#endif
+
+static PyObject *SAM_ErrorObject;
+
+
+
+
 #define SAM_GROUP_ATTR(name, tech) \
 if (self == NULL) return NULL; self->data_ptr = ptr; \
 PyObject* attr_dict = PyDict_New(); Py_XINCREF(attr_dict); self->x_attr = attr_dict; \
@@ -11,19 +25,39 @@ PyDict_SetItemString(attr_dict, "technology", PyUnicode_FromString(tech));
 
 
 
-#define ERROR_CHECK(error_type) \
+#define SAM_TECH_ATTR(tech, ctor) \
+if (self == NULL) return NULL; SAM_error error = new_error(); self->data_ptr = (*ctor)(0, &error); \
+if (!success(&error)) return NULL; \
+PyObject* attr_dict = PyDict_New(); Py_XINCREF(attr_dict); self->x_attr = attr_dict; \
+PyDict_SetItemString(attr_dict, "technology", PyUnicode_FromString(tech));
+
+
+
+#define ERROR_CHECK_CLEAN(error_type) ;\
 const char* c = error_message(error); \
-if ((c != NULL) && (c[0] != '\0')) { PyErr_SetString(PyExc_RuntimeError, c); \
-    error_destruct(error); return error_type; } error_destruct(error); \
+if ((c != NULL) && (c[0] != '\0')) { PyErr_SetString(SAM_ErrorObject, c); \
+    error_destruct(error); return error_type; } error_destruct(error);
+
+
+
+static int success(SAM_error* error){
+    const char* cc = error_message(*error);
+    if ((cc != NULL) && (cc[0] != '\0')) {
+        PyErr_SetString(SAM_ErrorObject, cc);
+        error_destruct(*error);
+        return 0;
+    }
+    return 1;
+}
 
 
 
 #define SAM_FLOAT_GETTER(func) \
 double val; SAM_error error = new_error(); \
 val = (*func)(self->data_ptr, &error); \
-ERROR_CHECK(NULL) \
+if (!success(&error)) return NULL;  \
 PyObject* result = PyFloat_FromDouble(val); \
-Py_INCREF(result); return result;
+return result;
 
 
 
@@ -32,15 +66,7 @@ if (value == NULL) { PyErr_SetString(PyExc_TypeError, "No value provided"); retu
 if (!PyNumber_Float(value)) { PyErr_SetString(PyExc_TypeError, "Value must be numeric"); return -1; } \
 float val = (float)PyFloat_AsDouble(value); SAM_error error = new_error(); \
 (*func)(self->data_ptr, val, &error); \
-ERROR_CHECK(-1) return 0; \
-
-
-
-#define SAM_TECH_ATTR(tech, ctor) \
-if (self == NULL) return NULL; SAM_error error = new_error(); self->data_ptr = (*ctor)(0, &error); \
-ERROR_CHECK(NULL) \
-PyObject* attr_dict = PyDict_New(); Py_XINCREF(attr_dict); self->x_attr = attr_dict; \
-PyDict_SetItemString(attr_dict, "technology", PyUnicode_FromString(tech));
+if (!success(&error)) return -1;  return 0; \
 
 
 
@@ -59,5 +85,8 @@ if (v == NULL) { int rv = PyDict_DelItemString(self->x_attr, name); \
     if (rv < 0 && PyErr_ExceptionMatches(PyExc_KeyError)) \
     PyErr_SetString(PyExc_AttributeError, "delete non-existing attribute"); return rv; } \
 else return PyDict_SetItemString(self->x_attr, name, v);
+
+
+
 
 #endif //PYSAM_SAM_UTILS_H

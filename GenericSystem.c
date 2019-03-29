@@ -40,6 +40,165 @@ PowerPlant_dealloc(PowerPlantObject *self)
     PyObject_Del(self);
 }
 
+#define ASSIGNMENT_ERROR_STR(msg) \
+char assignment_err_str[256] = "error assigning "; \
+strncat(assignment_err_str, name, strlen(name) - 2); \
+strncat(assignment_err_str, msg, sizeof(assignment_err_str) - strlen(msg) - 1);
+
+
+static PyObject *
+PowerPlant_assign(PowerPlantObject *self, PyObject *args)
+{
+    PyObject* dict;
+
+    if (!PyArg_ParseTuple(args, "O:assign", &dict))
+        return NULL;
+
+    SAM_error error = new_error();
+    void* handle = SAM_load_library(SAM_lib_path, &error);
+    ERROR_CHECK_CLEAN(NULL)
+
+    PyObject* key;
+    PyObject* value;
+    Py_ssize_t pos = 0;
+
+    while (PyDict_Next(dict, &pos, &key, &value)){
+        PyObject* ascii_mystring = PyUnicode_AsASCIIString(key);
+        char* name = PyBytes_AsString(ascii_mystring);
+
+        if (PyNumber_Check(value)){
+            float val = (float)PyFloat_AsDouble(value);
+            error = new_error();
+            SAM_set_float_t func = SAM_set_float_func(handle, "GenericSystem", "PowerPlant", name, &error);
+            if (!success(&error)) return NULL;
+
+            error = new_error();
+            func(self->data_ptr, val, &error);
+            ERROR_CHECK_CLEAN(NULL);
+        }
+        else if (PySequence_Check(value)){
+            PyObject* first = PySequence_GetItem(value, 0);
+            if (!first){
+                ASSIGNMENT_ERROR_STR("empty tuple");
+                PyErr_SetString(SAM_ErrorObject, assignment_err_str);
+                Py_XDECREF(first);
+                return NULL;
+            }
+
+            Py_ssize_t n = PySequence_Size(value);
+
+            // matrix
+            if (PySequence_Check(first)){
+                Py_ssize_t cols = PySequence_Size(first);
+                float* mat = malloc(n*cols*sizeof(float));
+
+                for (Py_ssize_t i = 0; i < n; i++){
+                    PyObject* row = PySequence_GetItem(value, i);
+                                    printf("set mat %d x %d", (int)n, (int)PySequence_Size(row));
+
+
+                    if (PySequence_Size(row) != cols){
+                            ASSIGNMENT_ERROR_STR(", matrix must be rectangular");
+                            PyErr_SetString(SAM_ErrorObject, assignment_err_str);
+                            return NULL;
+                        }
+                    for (Py_ssize_t j = 0; j < cols; j++){
+                        PyObject* val_o = PySequence_GetItem(row, j);
+
+                        if (!PyNumber_Check(val_o)){
+                            ASSIGNMENT_ERROR_STR(", matrix entries must be numeric");
+                            PyErr_SetString(SAM_ErrorObject, assignment_err_str);
+                            Py_XDECREF(val_o);
+                            return NULL;
+                        }
+                        float val = (float)PyFloat_AsDouble(val_o);
+                        Py_XDECREF(val_o);
+                        mat[i * cols + j] = val;
+
+                    }
+                    Py_XDECREF(row);
+                }
+
+                SAM_set_matrix_t func = SAM_set_matrix_func(handle, "GenericSystem", "PowerPlant", name, &error);
+                if (!success(&error)) return NULL;
+
+                error = new_error();
+                func(self->data_ptr, mat, n, cols, &error);
+                ERROR_CHECK_CLEAN(NULL);
+
+                free(mat);
+            }
+            // array
+            else{
+                float* arr = malloc(n*sizeof(float));
+
+                printf("set array %d", (int)n);
+
+                for (Py_ssize_t i = 0; i < n; i++){
+                    PyObject* val_o = PySequence_GetItem(value, i);
+
+                    float val = (float)PyFloat_AsDouble(val_o);
+                    printf("set array %f", val);
+
+                    if (PyErr_Occurred()){
+                        printf("err name %s", name);
+                        ASSIGNMENT_ERROR_STR(", array entries must be convertable to numbers");
+                        PyErr_SetString(SAM_ErrorObject, assignment_err_str);
+                        Py_XDECREF(val_o);
+                        return NULL;
+                    }
+                    Py_XDECREF(val_o);
+                    arr[i] = val;
+                }
+                SAM_set_array_t func = SAM_set_array_func(handle, "GenericSystem", "PowerPlant", name, &error);
+                if (!success(&error)) return NULL;
+
+                error = new_error();
+                func(self->data_ptr, arr, n, &error);
+                ERROR_CHECK_CLEAN(NULL);
+
+                free(arr);
+            }
+        }
+        else if (PyUnicode_Check(value)){
+            PyObject* ascii_val = PyUnicode_AsASCIIString(value);
+            char* val = PyBytes_AsString(ascii_val); \
+
+            error = new_error();
+            SAM_set_string_t func = SAM_set_string_func(handle, "GenericSystem", "PowerPlant", name, &error);
+            if (!success(&error)) return NULL;
+
+            error = new_error();
+            func(self->data_ptr, val, &error);
+            ERROR_CHECK_CLEAN(NULL);
+
+            Py_DECREF(ascii_val);
+        }
+        else {
+            ASSIGNMENT_ERROR_STR( ", assigned types must be numeric, string or tuple.")
+            PyErr_SetString(SAM_ErrorObject, assignment_err_str);
+            return NULL;
+        }
+        Py_DECREF(ascii_mystring);
+    }
+
+
+    Py_INCREF(Py_None);
+    return Py_None;
+}
+
+
+static PyMethodDef PowerPlant_methods[] = {
+        {"assign",            (PyCFunction)PowerPlant_assign,  METH_VARARGS,
+                PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+        {NULL,              NULL}           /* sentinel */
+};
+
+static PyObject *
+PowerPlant_get_derate(PowerPlantObject *self, void *closure)
+{
+    SAM_FLOAT_GETTER(SAM_GenericSystem_PowerPlant_derate_get)
+}
 
 static int
 PowerPlant_set_derate(PowerPlantObject *self, PyObject *value, void *closure)
@@ -48,15 +207,77 @@ PowerPlant_set_derate(PowerPlantObject *self, PyObject *value, void *closure)
 }
 
 static PyObject *
-PowerPlant_get_derate(PowerPlantObject *self, void *closure)
+PowerPlant_get_energy_output_array(PowerPlantObject *self, void *closure)
 {
-    SAM_FLOAT_GETTER(SAM_GenericSystem_PowerPlant_derate_get)
+    float* arr;
+    int seqlen;
+    int i = 0;
+
+    SAM_error error = new_error();
+    arr = SAM_GenericSystem_PowerPlant_energy_output_array_get(self->data_ptr, &seqlen, &error);
+    ERROR_CHECK_CLEAN(NULL);
+
+    PyObject* seq = PyTuple_New(seqlen);
+    for(i=0; i < seqlen; i++) {
+        PyTuple_SetItem(seq, i, PyFloat_FromDouble(arr[i]));
+    }
+    return seq;
 }
 
+static int
+PowerPlant_set_energy_output_array(PowerPlantObject *self, PyObject *value, void *closure)
+{
+    PyObject* seq;
+    float *arr;
+    int seqlen;
+    int i;
+
+    seq = PySequence_Fast(value, "argument must be iterable");
+    if(!seq)
+        return -1;
+
+    seqlen = PySequence_Fast_GET_SIZE(seq);
+    arr = malloc(seqlen*sizeof(float));
+    if(!arr) {
+        Py_DECREF(seq);
+        PyErr_NoMemory(  );
+        return -1;
+    }
+    for(i=0; i < seqlen; i++) {
+        PyObject *fitem;
+        PyObject *item = PySequence_Fast_GET_ITEM(seq, i);
+        if(!item) {
+            Py_DECREF(seq);
+            free(arr);
+            return -1;
+        }
+        fitem = PyNumber_Float(item);
+        if(!fitem) {
+            Py_DECREF(seq);
+            free(arr);
+            PyErr_SetString(PyExc_TypeError, "all items must be numbers");
+            return -1;
+        }
+        arr[i] = (float)PyFloat_AS_DOUBLE(fitem);
+        Py_DECREF(fitem);
+    }
+
+    /* clean up, compute, and return result */
+    Py_DECREF(seq);
+
+    SAM_error error = new_error();
+    SAM_GenericSystem_PowerPlant_energy_output_array_set(self->data_ptr, arr, seqlen, &error);
+
+    ERROR_CHECK_CLEAN(-1)
+
+    return 0;
+}
 
 static PyGetSetDef PowerPlant_getset[] = {
     {"derate", (getter)PowerPlant_get_derate, (setter)PowerPlant_set_derate,
         "Derate [%]", NULL},
+    {"energy_output_array", (getter)PowerPlant_get_energy_output_array, (setter)PowerPlant_set_energy_output_array,
+        "Array of Energy Output Profile [kW]", NULL},
     {NULL}  /* Sentinel */
 };
 
@@ -92,7 +313,7 @@ static PyTypeObject PowerPlant_Type = {
         0,                          /*tp_weaklistoffset*/
         0,                          /*tp_iter*/
         0,                          /*tp_iternext*/
-        0,         /*tp_methods*/
+        PowerPlant_methods,         /*tp_methods*/
         0,                          /*tp_members*/
         PowerPlant_getset,          /*tp_getset*/
         0,                          /*tp_base*/
@@ -130,7 +351,7 @@ newGenericSystemObject(PyObject *arg)
 
     SAM_TECH_ATTR("GenericSystem", SAM_GenericSystem_construct)
 
-    PyDict_SetItemString(attr_dict, "PowerPlant", newPowerPlantObject(0, self->data_ptr));
+    PyDict_SetItemString(attr_dict, "PowerPlant", (PyObject *)newPowerPlantObject(0, self->data_ptr));
 
 
     return self;
@@ -152,14 +373,13 @@ static PyObject *
 GenericSystem_execute(GenericSystemObject *self, PyObject *args)
 {
     float derate;
-    SAM_error error = new_error();
 
     if (!PyArg_ParseTuple(args, "f", &derate))
         return NULL;
 
+    SAM_error error = new_error();
     SAM_GenericSystem_PowerPlant_derate_set(self->data_ptr, derate, &error);
-
-    ERROR_CHECK(NULL)
+    ERROR_CHECK_CLEAN(NULL)
 
     Py_INCREF(Py_None);
     return Py_None;
@@ -302,6 +522,29 @@ GenericSystemModule_exec(PyObject *m)
 
     if (PyType_Ready(&GenericSystem_Type) < 0)
         goto fail;
+
+    if (SAM_ErrorObject == NULL) {
+        SAM_ErrorObject = PyErr_NewException("PySAM.error", NULL, NULL);
+        if (SAM_ErrorObject == NULL)
+            goto fail;
+    }
+
+    if (!SAM_lib_path){
+        PyObject* file = PyModule_GetFilenameObject(m);
+
+        PyObject* ascii_mystring = PyUnicode_AsASCIIString(file);
+        char* filename = PyBytes_AsString(ascii_mystring);
+
+        char* lastSlash = strrchr(filename, SAM_sep);
+        char* dir = strndup(filename, strlen(filename) - strlen(lastSlash) + 1);
+
+        SAM_lib_path = malloc(strlen(dir) + strlen(SAM_lib) + 1);
+        strcpy(SAM_lib_path, dir);
+        strcat(SAM_lib_path, SAM_lib);
+
+        Py_DECREF(ascii_mystring);
+        Py_XDECREF(file);
+    }
 
     return 0;
     fail:
