@@ -1,8 +1,8 @@
-import os
-os.system("rm -r /Users/dguittet/SAM-Dev/PySAM/build")
-
-from setuptools import sandbox
-sandbox.run_setup('setup.py', ['clean', 'install'])
+# import os
+# os.system("rm -r /Users/dguittet/SAM-Dev/PySAM/build")
+#
+# from setuptools import sandbox
+# sandbox.run_setup('setup.py', ['install'])
 
 import GenericSystem
 
@@ -69,4 +69,9 @@ except:
     print("Passed test", 6)
     n_tests_passed += 1
 
-assert(b.energy_output_array == (10, 20))
+PowerPlantDict = {'derate': 1,
+                  'energy_output_array': (10,20)}
+
+print(b.export())
+
+assert(b.energy_output_array == (10, 20) and b.derate == 1)

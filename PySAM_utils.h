@@ -88,7 +88,7 @@ else return PyDict_SetItemString(self->x_attr, name, v);
 double val; SAM_error error = new_error(); \
 val = (*func)(self->data_ptr, &error); \
 if (SAM_has_error(&error)) return NULL;  \
-PyObject* result = PyFloat_FromDouble(val); \
+PyObject* result = PyFloat_FromDouble(val); Py_XINCREF(result);\
 return result;
 
 #define SAM_FLOAT_SETTER(func) \
@@ -160,8 +160,6 @@ static int SAM_assign_from_dict(void* data_ptr, PyObject* dict, const char* tech
 
                 for (Py_ssize_t i = 0; i < n; i++){
                     PyObject* row = PySequence_GetItem(value, i);
-                    printf("set mat %d x %d", (int)n, (int)PySequence_Size(row));
-
 
                     if (PySequence_Size(row) != cols){
                         char* str = SAM_concat_msg(name, " matrix must be rectangular");
@@ -205,10 +203,8 @@ static int SAM_assign_from_dict(void* data_ptr, PyObject* dict, const char* tech
                     PyObject* val_o = PySequence_GetItem(value, i);
 
                     float val = (float)PyFloat_AsDouble(val_o);
-                    printf("set array %f", val);
 
                     if (PyErr_Occurred()){
-                        printf("err name %s", name);
                         char* str = SAM_concat_msg(name, " array entries must be convertable to numbers");
                         PyErr_SetString(SAM_ErrorObject, str);
                         free((void*)str);
@@ -256,11 +252,6 @@ static int SAM_assign_from_dict(void* data_ptr, PyObject* dict, const char* tech
 // Methods for reading class attributes into a dictionary
 //
 
-#define SAM_READ_ERROR_STR(msg) \
-char assignment_err_str[256] = "Error reading "; \
-strncat(assignment_err_str, name, strlen(name) - 2); \
-strncat(assignment_err_str, msg, sizeof(assignment_err_str) - strlen(msg) - 1);
-
 static int SAM_read_into_dict(void* data_ptr, PyObject* dict, const char* tech, const char* group){
     if (SAM_lib_handle == NULL){
         SAM_error error = new_error();
@@ -290,8 +281,8 @@ static int SAM_read_into_dict(void* data_ptr, PyObject* dict, const char* tech, 
         else if (PySequence_Check(value)){
             PyObject* first = PySequence_GetItem(value, 0);
             if (!first){
-                SAM_READ_ERROR_STR("empty tuple");
-                PyErr_SetString(SAM_ErrorObject, assignment_err_str);
+//                SAM_READ_ERROR_STR("empty tuple");
+//                PyErr_SetString(SAM_ErrorObject, assignment_err_str);
                 Py_XDECREF(first);
                 return 0;
             }
@@ -309,16 +300,16 @@ static int SAM_read_into_dict(void* data_ptr, PyObject* dict, const char* tech, 
 
 
                     if (PySequence_Size(row) != cols){
-                        SAM_READ_ERROR_STR(", matrix must be rectangular");
-                        PyErr_SetString(SAM_ErrorObject, assignment_err_str);
+//                        SAM_READ_ERROR_STR(", matrix must be rectangular");
+//                        PyErr_SetString(SAM_ErrorObject, assignment_err_str);
                         return 0;
                     }
                     for (Py_ssize_t j = 0; j < cols; j++){
                         PyObject* val_o = PySequence_GetItem(row, j);
 
                         if (!PyNumber_Check(val_o)){
-                            SAM_READ_ERROR_STR(", matrix entries must be numeric");
-                            PyErr_SetString(SAM_ErrorObject, assignment_err_str);
+//                            SAM_READ_ERROR_STR(", matrix entries must be numeric");
+//                            PyErr_SetString(SAM_ErrorObject, assignment_err_str);
                             Py_XDECREF(val_o);
                             return 0;
                         }
@@ -354,8 +345,8 @@ static int SAM_read_into_dict(void* data_ptr, PyObject* dict, const char* tech, 
 
                     if (PyErr_Occurred()){
                         printf("err name %s", name);
-                        SAM_READ_ERROR_STR(", array entries must be convertable to numbers");
-                        PyErr_SetString(SAM_ErrorObject, assignment_err_str);
+//                        SAM_READ_ERROR_STR(", array entries must be convertable to numbers");
+//                        PyErr_SetString(SAM_ErrorObject, assignment_err_str);
                         Py_XDECREF(val_o);
                         return 0;
                     }
@@ -388,8 +379,8 @@ static int SAM_read_into_dict(void* data_ptr, PyObject* dict, const char* tech, 
             Py_DECREF(ascii_val);
         }
         else {
-            SAM_READ_ERROR_STR( ", assigned types must be numeric, string or tuple.")
-            PyErr_SetString(SAM_ErrorObject, assignment_err_str);
+//            SAM_READ_ERROR_STR( ", assigned types must be numeric, string or tuple.")
+//            PyErr_SetString(SAM_ErrorObject, assignment_err_str);
             return 0;
         }
         Py_DECREF(ascii_mystring);

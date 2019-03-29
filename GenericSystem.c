@@ -58,10 +58,24 @@ PowerPlant_assign(PowerPlantObject *self, PyObject *args)
     return Py_None;
 }
 
+static PyObject *
+PowerPlant_export(PowerPlantObject *self, PyObject *args)
+{
+//    PyObject* dict = PyDict_New();
+
+    PyObject* dict = PyObject_GenericGetDict((PyObject*)&PowerPlant_Type, NULL);
+
+//    if (!SAM_read_into_dict(self->data_ptr, dict, "GenericSystem", "PowerPlant"))
+//        return NULL;
+
+    return self->x_attr;
+}
 
 static PyMethodDef PowerPlant_methods[] = {
         {"assign",            (PyCFunction)PowerPlant_assign,  METH_VARARGS,
                 PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+        {"export",            (PyCFunction)PowerPlant_export,  METH_VARARGS,
+                PyDoc_STR("assign() -> None\n Export attributes into dictionary")},
         {NULL,              NULL}           /* sentinel */
 };
 
@@ -92,6 +106,7 @@ PowerPlant_get_energy_output_array(PowerPlantObject *self, void *closure)
     for(i=0; i < seqlen; i++) {
         PyTuple_SetItem(seq, i, PyFloat_FromDouble(arr[i]));
     }
+//    Py_XINCREF(seq);
     return seq;
 }
 
@@ -404,6 +419,11 @@ GenericSystemModule_exec(PyObject *m)
     if (!SAM_lib_path){
         PyObject* file = PyModule_GetFilenameObject(m);
 
+        if (!file){
+            PyErr_SetString(SAM_ErrorObject, "Could not get module filepath");
+            Py_XDECREF(file);
+            return -1;
+        }
         PyObject* ascii_mystring = PyUnicode_AsASCIIString(file);
         char* filename = PyBytes_AsString(ascii_mystring);
 
@@ -414,7 +434,7 @@ GenericSystemModule_exec(PyObject *m)
         strcpy(SAM_lib_path, dir);
         strcat(SAM_lib_path, SAM_lib);
 
-        Py_XDECREF(ascii_mystring);
+        Py_XDECREF(file);
     }
 
     return 0;
