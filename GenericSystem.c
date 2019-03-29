@@ -56,7 +56,8 @@ PowerPlant_assign(PowerPlantObject *self, PyObject *args)
 
     SAM_error error = new_error();
     void* handle = SAM_load_library(SAM_lib_path, &error);
-    ERROR_CHECK_CLEAN(NULL)
+    if (has_error(&error)) return NULL;
+
 
     PyObject* key;
     PyObject* value;
@@ -70,11 +71,12 @@ PowerPlant_assign(PowerPlantObject *self, PyObject *args)
             float val = (float)PyFloat_AsDouble(value);
             error = new_error();
             SAM_set_float_t func = SAM_set_float_func(handle, "GenericSystem", "PowerPlant", name, &error);
-            if (!success(&error)) return NULL;
+            if (has_error(&error)) return NULL;
 
             error = new_error();
             func(self->data_ptr, val, &error);
-            ERROR_CHECK_CLEAN(NULL);
+            if (has_error(&error)) return NULL;
+
         }
         else if (PySequence_Check(value)){
             PyObject* first = PySequence_GetItem(value, 0);
@@ -119,12 +121,13 @@ PowerPlant_assign(PowerPlantObject *self, PyObject *args)
                     Py_XDECREF(row);
                 }
 
+                error = new_error();
                 SAM_set_matrix_t func = SAM_set_matrix_func(handle, "GenericSystem", "PowerPlant", name, &error);
-                if (!success(&error)) return NULL;
+                if (has_error(&error)) return NULL;
 
                 error = new_error();
                 func(self->data_ptr, mat, n, cols, &error);
-                ERROR_CHECK_CLEAN(NULL);
+                if (has_error(&error)) return NULL;
 
                 free(mat);
             }
@@ -150,12 +153,13 @@ PowerPlant_assign(PowerPlantObject *self, PyObject *args)
                     Py_XDECREF(val_o);
                     arr[i] = val;
                 }
+                error = new_error();
                 SAM_set_array_t func = SAM_set_array_func(handle, "GenericSystem", "PowerPlant", name, &error);
-                if (!success(&error)) return NULL;
+                if (has_error(&error)) return NULL;
 
                 error = new_error();
-                func(self->data_ptr, arr, n, &error);
-                ERROR_CHECK_CLEAN(NULL);
+                func(self->data_ptr, arr, (int)n, &error);
+                if (has_error(&error)) return NULL;
 
                 free(arr);
             }
@@ -166,11 +170,11 @@ PowerPlant_assign(PowerPlantObject *self, PyObject *args)
 
             error = new_error();
             SAM_set_string_t func = SAM_set_string_func(handle, "GenericSystem", "PowerPlant", name, &error);
-            if (!success(&error)) return NULL;
+            if (has_error(&error)) return NULL;
 
             error = new_error();
             func(self->data_ptr, val, &error);
-            ERROR_CHECK_CLEAN(NULL);
+            if (has_error(&error)) return NULL;
 
             Py_DECREF(ascii_val);
         }
@@ -215,7 +219,7 @@ PowerPlant_get_energy_output_array(PowerPlantObject *self, void *closure)
 
     SAM_error error = new_error();
     arr = SAM_GenericSystem_PowerPlant_energy_output_array_get(self->data_ptr, &seqlen, &error);
-    ERROR_CHECK_CLEAN(NULL);
+    if (has_error(&error)) return NULL;
 
     PyObject* seq = PyTuple_New(seqlen);
     for(i=0; i < seqlen; i++) {
@@ -268,7 +272,8 @@ PowerPlant_set_energy_output_array(PowerPlantObject *self, PyObject *value, void
     SAM_error error = new_error();
     SAM_GenericSystem_PowerPlant_energy_output_array_set(self->data_ptr, arr, seqlen, &error);
 
-    ERROR_CHECK_CLEAN(-1)
+    if (has_error(&error)) return -1;
+
 
     return 0;
 }
@@ -379,7 +384,7 @@ GenericSystem_execute(GenericSystemObject *self, PyObject *args)
 
     SAM_error error = new_error();
     SAM_GenericSystem_PowerPlant_derate_set(self->data_ptr, derate, &error);
-    ERROR_CHECK_CLEAN(NULL)
+    if (has_error(&error)) return NULL;
 
     Py_INCREF(Py_None);
     return Py_None;

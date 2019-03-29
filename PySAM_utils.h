@@ -27,27 +27,22 @@ PyDict_SetItemString(attr_dict, "technology", PyUnicode_FromString(tech));
 
 #define SAM_TECH_ATTR(tech, ctor) \
 if (self == NULL) return NULL; SAM_error error = new_error(); self->data_ptr = (*ctor)(0, &error); \
-if (!success(&error)) return NULL; \
+if (has_error(&error)) return NULL; \
 PyObject* attr_dict = PyDict_New(); Py_XINCREF(attr_dict); self->x_attr = attr_dict; \
 PyDict_SetItemString(attr_dict, "technology", PyUnicode_FromString(tech));
 
 
 
-#define ERROR_CHECK_CLEAN(error_type) ;\
-const char* c = error_message(error); \
-if ((c != NULL) && (c[0] != '\0')) { PyErr_SetString(SAM_ErrorObject, c); \
-    error_destruct(error); return error_type; } error_destruct(error);
 
-
-
-static int success(SAM_error* error){
+static int has_error(SAM_error* error){
     const char* cc = error_message(*error);
     if ((cc != NULL) && (cc[0] != '\0')) {
         PyErr_SetString(SAM_ErrorObject, cc);
         error_destruct(*error);
-        return 0;
+        return 1;
     }
-    return 1;
+    error_destruct(*error);
+    return 0;
 }
 
 
@@ -55,7 +50,7 @@ static int success(SAM_error* error){
 #define SAM_FLOAT_GETTER(func) \
 double val; SAM_error error = new_error(); \
 val = (*func)(self->data_ptr, &error); \
-if (!success(&error)) return NULL;  \
+if (has_error(&error)) return NULL;  \
 PyObject* result = PyFloat_FromDouble(val); \
 return result;
 
@@ -66,7 +61,7 @@ if (value == NULL) { PyErr_SetString(PyExc_TypeError, "No value provided"); retu
 if (!PyNumber_Float(value)) { PyErr_SetString(PyExc_TypeError, "Value must be numeric"); return -1; } \
 float val = (float)PyFloat_AsDouble(value); SAM_error error = new_error(); \
 (*func)(self->data_ptr, val, &error); \
-if (!success(&error)) return -1;  return 0; \
+if (has_error(&error)) return -1;  return 0; \
 
 
 
