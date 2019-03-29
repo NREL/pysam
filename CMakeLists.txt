@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 3.12)
 
 
 if(APPLE)
-    set(CMAKE_OSX_DEPLOYMENT_TARGET "10.7" CACHE STRING "Minimum OS X deployment version")
+    set(CMAKE_OSX_DEPLOYMENT_TARGET "10.9" CACHE STRING "Minimum OS X deployment version")
 endif()
 
 Project(PYSAM)
@@ -17,7 +17,7 @@ set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 add_library(pysam SHARED
         GenericSystem.c
-		SAM_utils.h)
+		PySAM_utils.h)
 
 set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG}")
 
