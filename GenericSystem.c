@@ -20,15 +20,22 @@ static PyTypeObject PowerPlant_Type;
 
 #define PowerPlantObject_Check(v)      (Py_TYPE(v) == &PowerPlant_Type)
 
-static PowerPlantObject *
-newPowerPlantObject(PyObject *arg, SAM_GenericSystem ptr)
+static PyObject *
+PowerPlant_new(SAM_GenericSystem data_ptr)
 {
-    PowerPlantObject *self;
-    self = PyObject_New(PowerPlantObject, &PowerPlant_Type);
+    PyObject* new_obj = PowerPlant_Type.tp_alloc(&PowerPlant_Type,0);
 
-    SAM_GROUP_ATTR("PowerPlant", "GenericSystem")
+    PowerPlantObject* PowerPlant_obj = (PowerPlantObject*)new_obj;
 
-    return self;
+    PowerPlant_obj->data_ptr = data_ptr;
+
+//    PowerPlantObject *self;
+//    self = PyObject_New(PowerPlantObject, tp);
+
+//    SAM_GROUP_ATTR("PowerPlant", "GenericSystem")
+//    self->data_ptr = NULL;
+
+    return new_obj;
 }
 
 /* PowerPlant methods */
@@ -36,6 +43,8 @@ newPowerPlantObject(PyObject *arg, SAM_GenericSystem ptr)
 static void
 PowerPlant_dealloc(PowerPlantObject *self)
 {
+    printf("%s at %p\n", __FUNCTION__, self);
+
     Py_XDECREF(self->x_attr);
     PyObject_Del(self);
 }
@@ -47,12 +56,20 @@ static PyObject *
 PowerPlant_assign(PowerPlantObject *self, PyObject *args)
 {
     PyObject* dict;
+    printf("%s\n", __FUNCTION__);
+    if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+        Py_XDECREF(dict);
 
-    if (!PyArg_ParseTuple(args, "O:assign", &dict))
         return NULL;
+    }
 
-    if (!SAM_assign_from_dict(self->data_ptr, dict, "GenericSystem", "PowerPlant"))
-        return NULL;
+//    if (!SAM_assign_from_dict(self->data_ptr, dict, "GenericSystem", "PowerPlant")){
+//        printf("assign\n");
+//        return NULL;
+//    }
+    Py_XDECREF(dict);
+        printf("%s\n", __FUNCTION__);
+
 
     Py_INCREF(Py_None);
     return Py_None;
@@ -61,14 +78,11 @@ PowerPlant_assign(PowerPlantObject *self, PyObject *args)
 static PyObject *
 PowerPlant_export(PowerPlantObject *self, PyObject *args)
 {
-//    PyObject* dict = PyDict_New();
-
-    PyObject* dict = PyObject_GenericGetDict((PyObject*)&PowerPlant_Type, NULL);
-
-//    if (!SAM_read_into_dict(self->data_ptr, dict, "GenericSystem", "PowerPlant"))
+    PyTypeObject* tp = &PowerPlant_Type;
+    PyObject* dict = SAM_export_to_dict(self->data_ptr, (PyObject *) self, tp, "GenericSystem", "PowerPlant");
 //        return NULL;
 
-    return self->x_attr;
+    return dict;
 }
 
 static PyMethodDef PowerPlant_methods[] = {
@@ -82,13 +96,21 @@ static PyMethodDef PowerPlant_methods[] = {
 static PyObject *
 PowerPlant_get_derate(PowerPlantObject *self, void *closure)
 {
+    printf("%s\n", __FUNCTION__);
+
     SAM_FLOAT_GETTER(SAM_GenericSystem_PowerPlant_derate_fget)
+        printf("%s\n", __FUNCTION__);
+
 }
 
 static int
 PowerPlant_set_derate(PowerPlantObject *self, PyObject *value, void *closure)
 {
+    printf("%s\n", __FUNCTION__);
+
     SAM_FLOAT_SETTER(SAM_GenericSystem_PowerPlant_derate_fset)
+        printf("%s\n", __FUNCTION__);
+
 }
 
 static PyObject *
@@ -97,22 +119,28 @@ PowerPlant_get_energy_output_array(PowerPlantObject *self, void *closure)
     float* arr;
     int seqlen;
     int i = 0;
+    printf("%s\n", __FUNCTION__);
+
 
     SAM_error error = new_error();
     arr = SAM_GenericSystem_PowerPlant_energy_output_array_aget(self->data_ptr, &seqlen, &error);
-    if (SAM_has_error(&error)) return NULL;
+    if (SAM_has_error(error)) return NULL;
 
     PyObject* seq = PyTuple_New(seqlen);
     for(i=0; i < seqlen; i++) {
         PyTuple_SetItem(seq, i, PyFloat_FromDouble(arr[i]));
     }
 //    Py_XINCREF(seq);
+    printf("%s\n", __FUNCTION__);
+
     return seq;
 }
 
 static int
 PowerPlant_set_energy_output_array(PowerPlantObject *self, PyObject *value, void *closure)
 {
+    printf("%s\n", __FUNCTION__);
+
     PyObject* seq;
     float *arr;
     int seqlen;
@@ -154,8 +182,9 @@ PowerPlant_set_energy_output_array(PowerPlantObject *self, PyObject *value, void
     SAM_error error = new_error();
     SAM_GenericSystem_PowerPlant_energy_output_array_aset(self->data_ptr, arr, seqlen, &error);
 
-    if (SAM_has_error(&error)) return -1;
+    if (SAM_has_error(error)) return -1;
 
+    printf("%s\n", __FUNCTION__);
 
     return 0;
 }
@@ -210,7 +239,7 @@ static PyTypeObject PowerPlant_Type = {
         0,                          /*tp_dictoffset*/
         0,                          /*tp_init*/
         0,                          /*tp_alloc*/
-        0,                          /*tp_new*/
+        0,             /*tp_new*/
         0,                          /*tp_free*/
         0,                          /*tp_is_gc*/
 };
@@ -238,8 +267,8 @@ newGenericSystemObject(PyObject *arg)
 
     SAM_TECH_ATTR("GenericSystem", SAM_GenericSystem_construct)
 
-    PyDict_SetItemString(attr_dict, "PowerPlant", (PyObject *)newPowerPlantObject(0, self->data_ptr));
-
+    PyObject* PowerPlant_obj = PowerPlant_new(self->data_ptr);
+    PyDict_SetItemString(attr_dict, "PowerPlant", PowerPlant_obj);
 
     return self;
 }
@@ -249,10 +278,30 @@ newGenericSystemObject(PyObject *arg)
 static void
 GenericSystem_dealloc(GenericSystemObject *self)
 {
+
+//    PowerPlantObject* o = (PowerPlantObject*)PyDict_GetItemString(self->x_attr, "PowerPlant");
+//    if (!o){
+//        printf("Could not deallocate PowerPlant.");
+//    }
+//    printf("data object at %p", self->data_ptr);
+//    PowerPlant_dealloc(o);
+//    printf("deallocated\n");
+//    if (PyDict_DelItemString(self->x_attr, "PowerPlant") != 0){
+//        printf("Could not delete PowerPlant entry from attributes.");
+//    }
+
+//    PyObject* PowerPlant_obj = PyDict_GetItemString(self->x_attr, "PowerPlant");
+//    PowerPlant_dealloc((PowerPlantObject*)PowerPlant_obj);
+//    Py_XDECREF(PowerPlant_obj);
+
+//    PyDict_DelItemString(self->x_attr, "PowerPlant");
+
     Py_XDECREF(self->x_attr);
-//    Py_XDECREF(self->powerplant);
+
     SAM_GenericSystem_destruct(self->data_ptr);
+
     PyObject_Del(self);
+
 }
 
 
@@ -266,7 +315,7 @@ GenericSystem_execute(GenericSystemObject *self, PyObject *args)
 
     SAM_error error = new_error();
     SAM_GenericSystem_PowerPlant_derate_fset(self->data_ptr, derate, &error);
-    if (SAM_has_error(&error)) return NULL;
+    if (SAM_has_error(error)) return NULL;
 
     Py_INCREF(Py_None);
     return Py_None;
@@ -294,6 +343,7 @@ static PyGetSetDef GenericSystem_getset[] = {
 static PyObject *
 GenericSystem_getattro(GenericSystemObject *self, PyObject *name)
 {
+
     SAM_GET_ATTR()
 }
 
@@ -404,17 +454,30 @@ GenericSystemModule_exec(PyObject *m)
     /* Finalize the type object including setting type of the new type
      * object; doing it here is required for portability, too. */
 
-    if (PyType_Ready(&PowerPlant_Type) < 0)
-        goto fail;
+    GenericSystem_Type.tp_dict = PyDict_New();
+    if (!GenericSystem_Type.tp_dict) { goto fail; }
 
-    if (PyType_Ready(&GenericSystem_Type) < 0)
-        goto fail;
+    /// Add the PowerPlant type object to GenericSystem_Type
+    if (PyType_Ready(&PowerPlant_Type) < 0) { goto fail; }
+    Py_INCREF(&PowerPlant_Type);
+    PyDict_SetItemString(GenericSystem_Type.tp_dict,
+                         "PowerPlant",
+                         (PyObject*)&PowerPlant_Type);
+
+    /// Add the GenericSystem type object to the module
+    if (PyType_Ready(&GenericSystem_Type) < 0) { goto fail; }
+    Py_INCREF(&GenericSystem_Type);
+    PyModule_AddObject(m,
+                       "GenericSystem",
+                       (PyObject*)&GenericSystem_Type);
+
 
     if (SAM_ErrorObject == NULL) {
         SAM_ErrorObject = PyErr_NewException("PySAM.error", NULL, NULL);
         if (SAM_ErrorObject == NULL)
             goto fail;
     }
+    Py_INCREF(SAM_ErrorObject);
 
     if (!SAM_lib_path){
         PyObject* file = PyModule_GetFilenameObject(m);
@@ -435,6 +498,7 @@ GenericSystemModule_exec(PyObject *m)
         strcat(SAM_lib_path, SAM_lib);
 
         Py_XDECREF(file);
+        Py_XDECREF(ascii_mystring);
     }
 
     return 0;

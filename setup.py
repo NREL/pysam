@@ -1,6 +1,8 @@
 import sys, os
 from setuptools import setup, Extension
 
+os.system("rm -r /Users/dguittet/SAM-Dev/PySAM/build")
+
 libs = []
 libpath = os.path.dirname(os.path.abspath(__file__))+"/lib"
 libfiles = []

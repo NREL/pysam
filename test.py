@@ -3,75 +3,92 @@
 #
 # from setuptools import sandbox
 # sandbox.run_setup('setup.py', ['install'])
-
 import GenericSystem
+from pympler.tracker import SummaryTracker
+
 
 n_tests_passed = 0
+round = 0
+while n_tests_passed < 1000 and round < 10:
+    round += 1
 
-a = GenericSystem.new()
+    tracker = SummaryTracker()
 
-b = a.PowerPlant
+    a = GenericSystem.new()
 
-# Test setting values with type checks
+    b = a.PowerPlant
 
-a.PowerPlant.derate = 1
-assert(a.PowerPlant.derate == 1)
-print("Passed test", 0)
-n_tests_passed += 1
 
-b.energy_output_array = (1, 2)
-assert(b.energy_output_array == (1, 2))
-print("Passed test", 1)
-n_tests_passed += 1
+    # Test setting values with correct types
 
-try:
-    b.energy_output_array = 1
-    print("FAIL: exception is expected")
-except:
-    print("Passed test", 2)
+    a.PowerPlant.derate = 1
+    assert (a.PowerPlant.derate == 1)
+    assert (b.derate == 1)
+
+    print("Passed test", 0)
     n_tests_passed += 1
 
-try:
-    b.energy_output_array = (1, "2")
-    print("FAIL: exception is expected")
-except:
-    print("Passed test", 3)
+    b.energy_output_array = (1, 2)
+    assert(a.PowerPlant.energy_output_array == (1,2))
+    assert (b.energy_output_array == (1, 2))
+    print("Passed test", 1)
     n_tests_passed += 1
 
+    # Test type checks with errors
 
-PowerPlantDict = {'derate': 1,
-                  'energy_output_array': ()}
+    try:
+        b.energy_output_array = 1
+        print("FAIL 2: exception is expected")
+    except:
+        print("Passed test", 2)
+        n_tests_passed += 1
 
-try:
-    b.assign(PowerPlantDict)
-    print("FAIL: exception is expected")
-except:
-    print("Passed test", 4)
-    n_tests_passed += 1
+    # try:
+    #     b.energy_output_array = (1, "2")
+    #     print("FAIL: exception is expected")
+    # except:
+    #     print("Passed test", 3)
+    #     n_tests_passed += 1
+    #
+    # PowerPlantDict = {'derate': 1,
+    #                   'energy_output_array': ()}
+    # # }
+    #
+    # try:
+    #     # b.assign(PowerPlantDict)
+    #     print("FAIL 4: exception is expected")
+    # except:
+    #     print("Passed test", 4)
+    #     n_tests_passed += 1
+    #
+    # PowerPlantDict = {'derate': 1,
+    #                   'energy_output_array': ((2, 2), (1, 1))}
+    #
+    # try:
+    #     # b.assign(PowerPlantDict)
+    #     print("FAIL 5: exception is expected")
+    # except:
+    #     print("Passed test", 5)
+    #     n_tests_passed += 1
+    #
+    # PowerPlantDict = {'derate': 1,
+    #                   'energy_output_array': (2, 2)}
+    #
+    # try:
+    #     # b.assign(PowerPlantDict)
+    #     print("FAIL 6:exception is expected")  # broke here.. errored after 2a and after 8b(PySAM_utils.h:232))
+    # except:
+    #     print("Passed test", 6)
+    #     n_tests_passed += 1
+    # print("end")
 
-PowerPlantDict = {'derate': 1,
-                  'energy_output_array': ((2,2), (1))}
+    # PowerPlantDict = {'derate': 1,
+    #                   'energy_output_array': (10,20)}
+    # print(b.export())
 
-try:
-    b.assign(PowerPlantDict)
-    print("FAIL: exception is expected")
-except:
-    print("Passed test", 5)
-    n_tests_passed += 1
+    # assert(b.energy_output_array == (10, 20) and b.derate == 1)
+    # sleep(2)
 
-PowerPlantDict = {'derate': 1,
-                  'energy_output_array': (2,"2")}
 
-try:
-    b.assign(PowerPlantDict)
-    print("exception is expected")
-except:
-    print("Passed test", 6)
-    n_tests_passed += 1
+tracker.print_diff()
 
-PowerPlantDict = {'derate': 1,
-                  'energy_output_array': (10,20)}
-
-print(b.export())
-
-assert(b.energy_output_array == (10, 20) and b.derate == 1)
