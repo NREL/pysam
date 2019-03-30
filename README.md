@@ -39,6 +39,7 @@
 ## Pythonic Arguments
 1. Dictionary of values as argument to constructors [15]
 	- Mutable default arguments are evaluated once only at function definition time and then becomes a (mutable) property of the function. Always make all `PyObject*` references to default arguments `static`.
+	- Objects returned from PyArg_ParseTuple are borrowed, do not decrement reference count.
 
 
 ## PySAM Package

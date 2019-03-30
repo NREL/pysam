@@ -43,8 +43,6 @@ PowerPlant_new(SAM_GenericSystem data_ptr)
 static void
 PowerPlant_dealloc(PowerPlantObject *self)
 {
-    printf("%s at %p\n", __FUNCTION__, self);
-
     Py_XDECREF(self->x_attr);
     PyObject_Del(self);
 }
@@ -56,20 +54,13 @@ static PyObject *
 PowerPlant_assign(PowerPlantObject *self, PyObject *args)
 {
     PyObject* dict;
-    printf("%s\n", __FUNCTION__);
     if (!PyArg_ParseTuple(args, "O:assign", &dict)){
-        Py_XDECREF(dict);
-
         return NULL;
     }
 
-//    if (!SAM_assign_from_dict(self->data_ptr, dict, "GenericSystem", "PowerPlant")){
-//        printf("assign\n");
-//        return NULL;
-//    }
-    Py_XDECREF(dict);
-        printf("%s\n", __FUNCTION__);
-
+    if (!SAM_assign_from_dict(self->data_ptr, dict, "GenericSystem", "PowerPlant")){
+        return NULL;
+    }
 
     Py_INCREF(Py_None);
     return Py_None;
@@ -96,21 +87,13 @@ static PyMethodDef PowerPlant_methods[] = {
 static PyObject *
 PowerPlant_get_derate(PowerPlantObject *self, void *closure)
 {
-    printf("%s\n", __FUNCTION__);
-
     SAM_FLOAT_GETTER(SAM_GenericSystem_PowerPlant_derate_fget)
-        printf("%s\n", __FUNCTION__);
-
 }
 
 static int
 PowerPlant_set_derate(PowerPlantObject *self, PyObject *value, void *closure)
 {
-    printf("%s\n", __FUNCTION__);
-
     SAM_FLOAT_SETTER(SAM_GenericSystem_PowerPlant_derate_fset)
-        printf("%s\n", __FUNCTION__);
-
 }
 
 static PyObject *
@@ -119,8 +102,6 @@ PowerPlant_get_energy_output_array(PowerPlantObject *self, void *closure)
     float* arr;
     int seqlen;
     int i = 0;
-    printf("%s\n", __FUNCTION__);
-
 
     SAM_error error = new_error();
     arr = SAM_GenericSystem_PowerPlant_energy_output_array_aget(self->data_ptr, &seqlen, &error);
@@ -131,16 +112,12 @@ PowerPlant_get_energy_output_array(PowerPlantObject *self, void *closure)
         PyTuple_SetItem(seq, i, PyFloat_FromDouble(arr[i]));
     }
 //    Py_XINCREF(seq);
-    printf("%s\n", __FUNCTION__);
-
     return seq;
 }
 
 static int
 PowerPlant_set_energy_output_array(PowerPlantObject *self, PyObject *value, void *closure)
 {
-    printf("%s\n", __FUNCTION__);
-
     PyObject* seq;
     float *arr;
     int seqlen;
@@ -183,8 +160,6 @@ PowerPlant_set_energy_output_array(PowerPlantObject *self, PyObject *value, void
     SAM_GenericSystem_PowerPlant_energy_output_array_aset(self->data_ptr, arr, seqlen, &error);
 
     if (SAM_has_error(error)) return -1;
-
-    printf("%s\n", __FUNCTION__);
 
     return 0;
 }
