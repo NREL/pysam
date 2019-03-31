@@ -29,6 +29,8 @@ extern "C"
 
 	SAM_EXPORT SAM_GenericSystem SAM_GenericSystem_construct(const char* def, SAM_error* err);
 
+	SAM_EXPORT SAM_GenericSystem_execute(SAM_GenericSystem, int verbosity, SAM_error* err);
+
     SAM_EXPORT void SAM_GenericSystem_destruct(SAM_GenericSystem gs_system);
 
     //

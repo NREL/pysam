@@ -6,10 +6,11 @@
 import GenericSystem
 from pympler.tracker import SummaryTracker
 
+check_error_cases = True
 
 n_tests_passed = 0
 round = 0
-while n_tests_passed < 1000 and round < 5:
+while round < 50:
 
     if round == 0:
         tracker = SummaryTracker()
@@ -18,7 +19,6 @@ while n_tests_passed < 1000 and round < 5:
     round += 1
 
     a = GenericSystem.new()
-
     b = a.PowerPlant
 
 
@@ -32,7 +32,7 @@ while n_tests_passed < 1000 and round < 5:
     n_tests_passed += 1
 
     b.energy_output_array = (1, 2)
-    assert(a.PowerPlant.energy_output_array == (1,2))
+    assert(a.PowerPlant.energy_output_array == (1, 2))
     assert (b.energy_output_array == (1, 2))
     print("Passed test", 1)
     n_tests_passed += 1
@@ -40,19 +40,19 @@ while n_tests_passed < 1000 and round < 5:
     # Test type checks with errors
 
     try:
-        b.energy_output_array = 1
+        c = GenericSystem.new()
+        c.PowerPlant.energy_output_array = 1
         print("FAIL 2: exception is expected")
     except:
-        assert(b.energy_output_array == (1, 2))
         print("Passed test", 2)
         n_tests_passed += 1
 
 
     try:
-        b.energy_output_array = (1, "2")
+        c = GenericSystem.new()
+        c.PowerPlant.energy_output_array = (1, "2")
         print("FAIL 3: exception is expected")
     except:
-        assert(b.energy_output_array == (1, 2))
         print("Passed test", 3)
         n_tests_passed += 1
 
@@ -76,8 +76,39 @@ while n_tests_passed < 1000 and round < 5:
     print("Passed test", 5)
     n_tests_passed += 1
 
+    PowerPlantDict = {'derate': 10,
+                      'energy_output_array': (10, 20)}
 
-    # assigning to dictionary
+    try:
+        c = GenericSystem.new()
+        PowerPlantDict['energy_output_array'] = ()
+        c.PowerPlant.assign(PowerPlantDict)
+        print("FAIL 1: exception is expected")
+    except:
+        print("Error caught", 1)
+        n_tests_passed += 1
+
+    try:
+        c = GenericSystem.new()
+        PowerPlantDict['energy_output_array'] = ((12, 20), (1, 1))
+        c.PowerPlant.assign(PowerPlantDict)
+        print("FAIL 2: exception is expected")
+    except:
+        print("Error caught", 2)
+        n_tests_passed += 1
+
+    try:
+        c = GenericSystem.new()
+        PowerPlantDict['derate'] = "derate"
+        PowerPlantDict['energy_output_array'] = (1, 2)
+        c.PowerPlant.assign(PowerPlantDict)
+        print("FAIL 3: exception is expected")
+    except:
+        print("Error caught", 3)
+        n_tests_passed += 1
+
+
+    # exporting to dictionary
 
     ValDict = b.export()
     assert(ValDict['derate'] == 1 and ValDict['energy_output_array'] == (2, 2))
@@ -87,36 +118,8 @@ while n_tests_passed < 1000 and round < 5:
     if round == 3:
         tracker.print_diff()
 
+
+    # execution
+    # a.execute(1)
+
 tracker.print_diff()
-
-
-# error cases
-
-PowerPlantDict = {'derate': 10,
-                      'energy_output_array': (10, 20)}
-
-try:
-    PowerPlantDict['energy_output_array'] = ()
-    b.assign(PowerPlantDict)
-    print("FAIL 1: exception is expected")
-    print(b.energy_output_array)
-except:
-    print("Error caught", 1)
-    n_tests_passed += 1
-
-try:
-    PowerPlantDict['energy_output_array'] = ((12, 20), (1, 1))
-    b.assign(PowerPlantDict)
-    print("FAIL 2: exception is expected")
-except:
-    print("Error caught", 2)
-    n_tests_passed += 1
-
-try:
-    PowerPlantDict['derate'] = "derate"
-    PowerPlantDict['energy_output_array'] = (1, 2)
-    b.assign(PowerPlantDict)
-    print("FAIL 3: exception is expected")
-except:
-    print("Error caught", 3)
-    n_tests_passed += 1
