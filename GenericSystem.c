@@ -279,6 +279,21 @@ newGenericSystemObject(PyObject *arg)
     PyObject* GenericSystemOutput_obj = GenericSystemOutput_new(self->data_ptr);
     PyDict_SetItemString(attr_dict, "Outputs", GenericSystemOutput_obj);
 
+    PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
+
+    PyObject* name = PyUnicode_FromString("new");
+    PyObject* data_cap = PyCapsule_New(self->data_ptr, NULL, NULL);
+    PyObject* Adjust_obj = PyObject_CallMethod(AdjustmentFactorsModule, "new", "(O)", data_cap);
+    Py_XDECREF(data_cap);
+    Py_XDECREF(name);
+
+    if (!Adjust_obj){
+    printf("couldn't get object\n");
+        return NULL;
+    }
+
+    PyDict_SetItemString(attr_dict, "AdjustmentFactors", Adjust_obj);
+
     return self;
 }
 
@@ -438,6 +453,24 @@ GenericSystemModule_exec(PyObject *m)
     PyDict_SetItemString(GenericSystem_Type.tp_dict,
                          "PowerPlant",
                          (PyObject*)&PowerPlant_Type);
+
+    /// Add the AdjustmentFactors type object to GenericSystem_Type
+    PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
+    if (!AdjustmentFactorsModule){
+        PyErr_SetImportError(PyUnicode_FromString("Could not import AdjustmentFactors module."), NULL, NULL);
+    }
+
+    PyTypeObject* AdjustmentFactors_Type = (PyTypeObject*)PyObject_GetAttrString(AdjustmentFactorsModule, "AdjustmentFactors");
+    if (!AdjustmentFactors_Type){
+        PyErr_SetImportError(PyUnicode_FromString("Could not import AdjustmentFactors type."), NULL, NULL);
+    }
+    Py_XDECREF(AdjustmentFactorsModule);
+
+    if (PyType_Ready(AdjustmentFactors_Type) < 0) { goto fail; }
+    PyDict_SetItemString(GenericSystem_Type.tp_dict,
+                         "AdjustmentFactors",
+                         (PyObject*)AdjustmentFactors_Type);
+    Py_XDECREF(AdjustmentFactors_Type);
 
     /// Add the Output type object to GenericSystem_Type
     if (PyType_Ready(&GenericSystemOutput_Type) < 0) { goto fail; }

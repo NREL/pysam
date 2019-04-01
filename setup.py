@@ -25,19 +25,27 @@ if sys.platform == 'win32':
 
 
 setup(
-    name='xx',
-    version='1.3',
+    name='System-Advisor-Model',
+    version='0.0',
     include_package_data=True,
     packages=[''],
     package_dir={'': 'lib'},
     package_data={
         '': libfiles},
-    ext_modules=[Extension('GenericSystem',
+    ext_modules=[Extension('AdjustmentFactors',
+                           ['AdjustmentFactors.c'],
+                           include_dirs=[libpath],
+                           library_dirs=[libpath],
+                           libraries=libs,
+                           extra_link_args=extra_link_args
+                           ),
+                 Extension('GenericSystem',
                            ['GenericSystem.c'],
                            include_dirs=[libpath],
                            library_dirs=[libpath],
                            libraries=libs,
                            extra_link_args=extra_link_args
-                           )]
+                           )
+                 ]
     )
 

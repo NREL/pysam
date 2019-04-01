@@ -18,6 +18,16 @@ static char* SAM_lib = "libSAM_apid.so";
 
 static void* SAM_lib_handle = NULL;
 
+////
+//// Common Types
+////
+//
+//PyTypeObject AdjustmentFactors_Type;
+//
+//struct AdjustmentFactorObject;
+//
+//PyObject * AdjustmentFactors_new(void* ptr);
+
 //
 // Error Handling
 //
@@ -108,51 +118,118 @@ static PyObject* PySAM_array_getter(SAM_get_array_t func,void *data_ptr){
     return seq;
 }
 
-static int PySAM_array_setter(PyObject *value, SAM_set_array_t func, void *data_ptr) {
+static int PySAM_get_array(PyObject *value, float** arr, int* seqlen){
     PyObject* seq;
-    float *arr;
-    int seqlen;
     int i;
 
     seq = PySequence_Fast(value, "argument must be iterable");
     if(!seq)
         return -1;
 
-    seqlen = PySequence_Fast_GET_SIZE(seq);
-    arr = malloc(seqlen*sizeof(float));
+    *seqlen = PySequence_Fast_GET_SIZE(seq);
+    *arr = malloc(*seqlen*sizeof(float));
     if(!arr) {
         Py_DECREF(seq);
         PyErr_NoMemory(  );
-        return -1;
+        return -2;
     }
-    for(i=0; i < seqlen; i++) {
+    for(i=0; i < *seqlen; i++) {
         PyObject *fitem;
         PyObject *item = PySequence_Fast_GET_ITEM(seq, i);
         if(!item) {
             Py_DECREF(seq);
-            free(arr);
-            return -1;
+            free(*arr);
+            return -3;
         }
         if(!PyNumber_Check(item)) {
             Py_DECREF(seq);
-            free(arr);
+            free(*arr);
             PyErr_SetString(PyExc_TypeError, "all items must be numbers");
-            return -1;
+            return -4;
         }
         fitem = PyNumber_Float(item);
-        arr[i] = (float)PyFloat_AS_DOUBLE(fitem);
+        (*arr)[i] = (float)PyFloat_AS_DOUBLE(fitem);
         Py_DECREF(fitem);
     }
 
     Py_DECREF(seq);
+    return 0;
+}
+
+static int PySAM_array_setter(PyObject *value, SAM_set_array_t func, void *data_ptr) {
+
+    float* arr = NULL;
+    int seqlen;
+    int res = PySAM_get_array(value, &arr, &seqlen);
+
+    if (res < 0) return res;
 
     SAM_error error = new_error();
     (*func)(data_ptr, arr, seqlen, &error);
+
     if (PySAM_has_error(error)){
         free(arr);
-        return -1;
+        return -5;
     }
     free(arr);
+    return 0;
+}
+
+static PyObject* PySAM_matrix_getter(SAM_get_matrix_t func,void *data_ptr){
+    float* mat;
+    int rows, cols;
+    int i = 0, j = 0;
+
+    SAM_error error = new_error();
+    mat = (*func)(data_ptr, &rows, &cols, &error);
+    if (PySAM_has_error(error)) return NULL;
+
+    PyObject* seq = PyTuple_New(rows);
+    for(i=0; i < rows; i++) {
+        PyObject* row = PyTuple_New(cols);
+        for (j = 0; j < cols; j++)
+            PyTuple_SetItem(row, j, PyFloat_FromDouble(mat[i * cols + j]));
+        PyTuple_SetItem(seq, i, row);
+    }
+    return seq;
+}
+
+
+static int PySAM_matrix_setter(PyObject *value, SAM_set_matrix_t func, void *data_ptr){
+    Py_ssize_t rows = PySequence_Size(value);
+
+    Py_ssize_t cols = PySequence_Size(PySequence_GetItem(value, 0));
+
+    float* mat = malloc(rows*cols*sizeof(float));
+
+    for (Py_ssize_t i = 0; i < rows; i++){
+        PyObject* row = PySequence_GetItem(value, i);
+
+        if (PySequence_Size(row) != cols){
+            PyErr_SetString(PyExc_TypeError, "matrix must be rectangular");
+            free(mat);
+            return -6;
+        }
+
+        float* arr = NULL;
+        int seqlen;
+
+        int res = PySAM_get_array(row, &arr, &seqlen);
+        if (res < 0) return res;
+
+        memcpy(&mat[i * cols], arr, cols* sizeof(float));
+
+        free(arr);
+        Py_XDECREF(row);
+    }
+
+    SAM_error error = new_error();
+    func(data_ptr, mat, (int)rows, (int)cols, &error);
+    if (PySAM_has_error(error)){
+        free(mat);
+        return -5;
+    }
+    free(mat);
     return 0;
 }
 
@@ -178,8 +255,6 @@ static int PySAM_assign_from_dict(void *data_ptr, PyObject *dict, const char *te
     Py_ssize_t pos = 0;
 
     PyObject* ascii_mystring = NULL;
-    float* mat = NULL;
-    float* arr = NULL;
 
     while (PyDict_Next(dict, &pos, &key, &value)){
         ascii_mystring = PyUnicode_AsASCIIString(key);
@@ -223,50 +298,31 @@ static int PySAM_assign_from_dict(void *data_ptr, PyObject *dict, const char *te
                 goto fail;
             }
 
-            Py_ssize_t n = PySequence_Size(value);
-
             // matrix
             if (PySequence_Check(first)){
                 SAM_error error = new_error();
                 SAM_set_matrix_t func = SAM_set_matrix_func(SAM_lib_handle, "GenericSystem", "PowerPlant", name, &error);
                 if (PySAM_has_error_msg(error, "Either parameter does not exist or is not matrix type.")) goto fail;
 
-                Py_ssize_t cols = PySequence_Size(first);
-                mat = malloc(n*cols*sizeof(float));
-
-                for (Py_ssize_t i = 0; i < n; i++){
-                    PyObject* row = PySequence_GetItem(value, i);
-
-                    if (PySequence_Size(row) != cols){
-                        char str[256];
-                        PySAM_concat_msg(str, name, " matrix must be rectangular");
-                        PyErr_SetString(PySAM_ErrorObject, str);
+                char str[256];
+                switch(PySAM_matrix_setter(value, func, data_ptr)){
+                    case 0: // no error
+                        continue;
+                    case -5:
                         goto fail;
-                    }
-                    for (Py_ssize_t j = 0; j < cols; j++){
-                        PyObject* val_o = PySequence_GetItem(row, j);
-
-                        if (!PyNumber_Check(val_o)){
-                            char str[256];
-
-                            PySAM_concat_msg(str, name, " must have numeric matrix entries.");
-                            PyErr_SetString(PySAM_ErrorObject, str);
-                            Py_XDECREF(val_o);
-                            goto fail;
-                        }
-                        float val = (float)PyFloat_AsDouble(val_o);
-                        Py_XDECREF(val_o);
-                        mat[i * cols + j] = val;
-
-                    }
-                    Py_XDECREF(row);
+                    case -1:
+                        PySAM_concat_msg(str, name, " must be iterable.");
+                        break;
+                    case -2:
+                        PySAM_concat_msg(str, name, " memory unavailble.");
+                        break;
+                    case -3:
+                    case -4:
+                        PySAM_concat_msg(str, name, " items must be numeric.");
+                        break;
                 }
-
-                error = new_error();
-                func(data_ptr, mat, (int)n, (int)cols, &error);
-                if (PySAM_has_error(error)) goto fail;
-
-                free(mat);
+                PyErr_SetString(PySAM_ErrorObject, str);
+                goto fail;
             }
             // array
             else{
@@ -274,29 +330,28 @@ static int PySAM_assign_from_dict(void *data_ptr, PyObject *dict, const char *te
                 SAM_set_array_t func = SAM_set_array_func(SAM_lib_handle, "GenericSystem", "PowerPlant", name, &error);
                 if (PySAM_has_error_msg(error, "Either parameter does not exist or is not array type.")) goto fail;
 
-                arr = malloc(n*sizeof(float));
-
-                for (Py_ssize_t i = 0; i < n; i++){
-                    PyObject* val_o = PySequence_GetItem(value, i);
-                    Py_XINCREF(val_o);
-
-                    float val = (float)PyFloat_AsDouble(val_o);
-
-                    if (PyErr_Occurred()){
-                        char str[256];
-                        PySAM_concat_msg(str, name, " array entries must be convertable to numbers");
-                        PyErr_SetString(PySAM_ErrorObject, str);
-                        Py_XDECREF(val_o);
+                char str[256];
+                switch(PySAM_array_setter(value, func, data_ptr)){
+                    case 0: // no error
+                        continue;
+                    case -5:
                         goto fail;
-                    }
-                    Py_XDECREF(val_o);
-                    arr[i] = val;
+                    case -1:
+                        PySAM_concat_msg(str, name, "must be iterable.");
+                        break;
+                    case -2:
+                        PySAM_concat_msg(str, name, " memory unavailble.");
+                        break;
+                    case -3:
+                    case -4:
+                        PySAM_concat_msg(str, name, " items must be numeric.");
+                        break;
+                    case -6:
+                        PySAM_concat_msg(str, name, "must be iterable matrix must be rectangular.");
+                        break;
                 }
-
-                error = new_error();
-                func(data_ptr, arr, (int)n, &error);
-                if (PySAM_has_error(error)) goto fail;
-                free(arr);
+                PyErr_SetString(PySAM_ErrorObject, str);
+                goto fail;
             }
         }
         else {
@@ -312,8 +367,6 @@ static int PySAM_assign_from_dict(void *data_ptr, PyObject *dict, const char *te
     fail:
     Py_XDECREF(ascii_mystring);
     Py_XDECREF(dict);
-    if (mat) free(mat);
-    if (arr) free(arr);
     return 0;
 }
 

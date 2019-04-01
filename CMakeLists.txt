@@ -17,7 +17,7 @@ set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 add_library(pysam SHARED
         GenericSystem.c
-		PySAM_utils.h)
+		PySAM_utils.h AdjustmentFactors.c)
 
 set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG}")
 

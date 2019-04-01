@@ -133,6 +133,8 @@ SAM_get_table_func(void *handle, const char *cmod_symbol, const char *group, con
 
 SAM_EXPORT int SAM_module_exec(const char* cmod, void* data, int verbosity, SAM_error *err);
 
+
+
 #ifdef __cplusplus
 } // extern "C"
 #endif

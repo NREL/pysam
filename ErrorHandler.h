@@ -40,8 +40,8 @@ static bool translateExceptions(SAM_error* out_error, Fn&& fn)
 }
 
 void make_access_error(
-        const std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>> &obj_name,
-        const std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>> &var);
+        const std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > &obj_name,
+        const std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > &var);
 
 //
 // Error handling

@@ -122,4 +122,23 @@ while round < 50:
     # execution
     # a.execute(1)
 
+
+    # Test shared module (AdjustmentFactors)
+    d = a.AdjustmentFactors
+
+    d.ac_constant = 1
+    assert(d.ac_constant == 1)
+    print("Passed test", 7)
+    n_tests_passed += 1
+
+    d.ac_hourly = (1, 2)
+    assert(d.ac_hourly == (1, 2))
+    print("Passed test", 8)
+    n_tests_passed += 1
+
+    d.ac_periods = ((1, 2), (3, 4))
+    assert(d.ac_periods == ((1, 2), (3, 4)))
+    print("Passed test", 9)
+    n_tests_passed += 1
+
 tracker.print_diff()
