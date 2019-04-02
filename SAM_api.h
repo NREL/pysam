@@ -46,6 +46,8 @@ SAM_EXPORT void SAM_table_set_matrix(SAM_table t, const char* key, float* arr, i
 
 SAM_EXPORT void SAM_table_set_string(SAM_table t, const char* key, const char* str, SAM_error *err);
 
+SAM_EXPORT void SAM_table_set_table(SAM_table t, const char *key, SAM_table tab, SAM_error *err);
+
 /// Get references to table entries
 
 SAM_EXPORT float * SAM_table_get_num(SAM_table t, const char *key, SAM_error *err);
@@ -53,6 +55,9 @@ SAM_EXPORT float * SAM_table_get_num(SAM_table t, const char *key, SAM_error *er
 SAM_EXPORT float * SAM_table_get_array(SAM_table t, const char *key, int *n, SAM_error *err);
 
 SAM_EXPORT float * SAM_table_get_matrix(SAM_table t, const char *key, int *nrows, int *ncols, SAM_error *err);
+
+SAM_EXPORT SAM_table SAM_table_get_table(SAM_table t, const char *key, SAM_error *err);
+
 
 /// Read table entries
 
@@ -63,6 +68,20 @@ SAM_EXPORT const float * SAM_table_read_array(SAM_table t, const char *key, int 
 SAM_EXPORT const float * SAM_table_read_matrix(SAM_table t, const char *key, int *nrows, int *ncols, SAM_error *err);
 
 SAM_EXPORT const char * SAM_table_read_string(SAM_table t, const char* key, SAM_error *err);
+
+/// Iterator functions
+
+#define SAM_INVALID 0
+#define SAM_STRING 1
+#define SAM_NUMBER 2
+#define SAM_ARRAY 3
+#define SAM_MATRIX 4
+#define SAM_TABLE 5
+
+SAM_EXPORT int SAM_table_size(SAM_table t, SAM_error *err);
+
+// populates type and returns key name of entry at pos
+SAM_EXPORT const char* SAM_table_key(SAM_table t, int pos, int *type, SAM_error *err);
 
 
 

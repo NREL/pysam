@@ -7,39 +7,39 @@
 
 
 /*
- *  PowerPlant Group
+ *  Plant Group
  */
 
 typedef struct {
     PyObject_HEAD
     SAM_GenericSystem   data_ptr;
-} PowerPlantObject;
+} PlantObject;
 
-static PyTypeObject PowerPlant_Type;
+static PyTypeObject Plant_Type;
 
 static PyObject *
-PowerPlant_new(SAM_GenericSystem data_ptr)
+Plant_new(SAM_GenericSystem data_ptr)
 {
-    PyObject* new_obj = PowerPlant_Type.tp_alloc(&PowerPlant_Type,0);
+    PyObject* new_obj = Plant_Type.tp_alloc(&Plant_Type,0);
 
-    PowerPlantObject* PowerPlant_obj = (PowerPlantObject*)new_obj;
+    PlantObject* Plant_obj = (PlantObject*)new_obj;
 
-    PowerPlant_obj->data_ptr = data_ptr;
+    Plant_obj->data_ptr = data_ptr;
 
     return new_obj;
 }
 
-/* PowerPlant methods */
+/* Plant methods */
 
 static PyObject *
-PowerPlant_assign(PowerPlantObject *self, PyObject *args)
+Plant_assign(PlantObject *self, PyObject *args)
 {
     PyObject* dict;
     if (!PyArg_ParseTuple(args, "O:assign", &dict)){
         return NULL;
     }
 
-    if (!PySAM_assign_from_dict(self->data_ptr, dict, "GenericSystem", "PowerPlant")){
+    if (!PySAM_assign_from_dict(self->data_ptr, dict, "GenericSystem", "Plant")){
         return NULL;
     }
 
@@ -48,60 +48,89 @@ PowerPlant_assign(PowerPlantObject *self, PyObject *args)
 }
 
 static PyObject *
-PowerPlant_export(PowerPlantObject *self, PyObject *args)
+Plant_export(PlantObject *self, PyObject *args)
 {
-    PyTypeObject* tp = &PowerPlant_Type;
-    PyObject* dict = PySAM_export_to_dict(self->data_ptr, (PyObject *) self, tp, "GenericSystem", "PowerPlant");
+    PyTypeObject* tp = &Plant_Type;
+    PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
     return dict;
 }
 
-static PyMethodDef PowerPlant_methods[] = {
-        {"assign",            (PyCFunction)PowerPlant_assign,  METH_VARARGS,
+static PyMethodDef Plant_methods[] = {
+        {"assign",            (PyCFunction)Plant_assign,  METH_VARARGS,
                 PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
-        {"export",            (PyCFunction)PowerPlant_export,  METH_VARARGS,
-                PyDoc_STR("assign() -> None\n Export attributes into dictionary")},
+        {"export",            (PyCFunction)Plant_export,  METH_VARARGS,
+                PyDoc_STR("export() -> None\n Export attributes into dictionary")},
         {NULL,              NULL}           /* sentinel */
 };
 
 static PyObject *
-PowerPlant_get_derate(PowerPlantObject *self, void *closure)
+Plant_get_derate(PlantObject *self, void *closure)
 {
-    PySAM_FLOAT_GETTER(SAM_GenericSystem_PowerPlant_derate_fget)
+
+    return PySAM_float_getter(SAM_GenericSystem_Plant_derate_fget, self->data_ptr);
 }
 
 static int
-PowerPlant_set_derate(PowerPlantObject *self, PyObject *value, void *closure)
+Plant_set_derate(PlantObject *self, PyObject *value, void *closure)
 {
-    PySAM_FLOAT_SETTER(SAM_GenericSystem_PowerPlant_derate_fset)
+    return PySAM_float_setter(value, SAM_GenericSystem_Plant_derate_fset, self->data_ptr);
 }
 
 static PyObject *
-PowerPlant_get_energy_output_array(PowerPlantObject *self, void *closure)
+Plant_get_energy_output_array(PlantObject *self, void *closure)
 {
-    return PySAM_array_getter(SAM_GenericSystem_PowerPlant_energy_output_array_aget, self->data_ptr);
+    return PySAM_array_getter(SAM_GenericSystem_Plant_energy_output_array_aget, self->data_ptr);
 }
 
 static int
-PowerPlant_set_energy_output_array(PowerPlantObject *self, PyObject *value, void *closure)
+Plant_set_energy_output_array(PlantObject *self, PyObject *value, void *closure)
 {
-    return PySAM_array_setter(value, SAM_GenericSystem_PowerPlant_energy_output_array_aset, self->data_ptr);
+    return PySAM_array_setter(value, SAM_GenericSystem_Plant_energy_output_array_aset, self->data_ptr);
 }
 
-static PyGetSetDef PowerPlant_getset[] = {
-    {"derate", (getter)PowerPlant_get_derate, (setter)PowerPlant_set_derate,
-        "Derate [%]", NULL},
-    {"energy_output_array", (getter)PowerPlant_get_energy_output_array, (setter)PowerPlant_set_energy_output_array,
-        "Array of Energy Output Profile [kW]", NULL},
+static PyObject *
+Plant_get_file(PlantObject *self, void *closure)
+{
+    return PySAM_string_getter(SAM_GenericSystem_Plant_file_sget, self->data_ptr);
+}
+
+static int
+Plant_set_file(PlantObject *self, PyObject *value, void *closure)
+{
+    return PySAM_string_setter(value, SAM_GenericSystem_Plant_file_sset, self->data_ptr);
+}
+
+static PyObject *
+Plant_get_data(PlantObject *self, void *closure)
+{
+    return PySAM_table_getter(SAM_GenericSystem_Plant_data_tget, self->data_ptr);
+}
+
+static int
+Plant_set_data(PlantObject *self, PyObject *value, void *closure)
+{
+    return PySAM_table_setter(value, SAM_GenericSystem_Plant_data_tset, self->data_ptr);
+}
+
+static PyGetSetDef Plant_getset[] = {
+    {"derate", (getter)Plant_get_derate, (setter)Plant_set_derate,
+        "Derate [%], number", NULL},
+    {"energy_output_array", (getter)Plant_get_energy_output_array, (setter)Plant_set_energy_output_array,
+        "Array of Energy Output Profile [kW], tuple", NULL},
+    {"file", (getter)Plant_get_file, (setter)Plant_set_file,
+            "string [%], string", NULL},
+    {"data", (getter)Plant_get_data, (setter)Plant_set_data,
+            "table [%], dict", NULL},
     {NULL}  /* Sentinel */
 };
 
 
-static PyTypeObject PowerPlant_Type = {
+static PyTypeObject Plant_Type = {
         /* The ob_type field must be initialized in the module init function
          * to be portable to Windows without using C++. */
         PyVarObject_HEAD_INIT(NULL, 0)
-        "GenericSystem.PowerPlant",             /*tp_name*/
-        sizeof(PowerPlantObject),          /*tp_basicsize*/
+        "GenericSystem.Plant",             /*tp_name*/
+        sizeof(PlantObject),          /*tp_basicsize*/
         0,                          /*tp_itemsize*/
         /* methods */
         0,    /*tp_dealloc*/
@@ -127,9 +156,9 @@ static PyTypeObject PowerPlant_Type = {
         0,                          /*tp_weaklistoffset*/
         0,                          /*tp_iter*/
         0,                          /*tp_iternext*/
-        PowerPlant_methods,         /*tp_methods*/
+        Plant_methods,         /*tp_methods*/
         0,                          /*tp_members*/
-        PowerPlant_getset,          /*tp_getset*/
+        Plant_getset,          /*tp_getset*/
         0,                          /*tp_base*/
         0,                          /*tp_dict*/
         0,                          /*tp_descr_get*/
@@ -172,24 +201,24 @@ static PyObject *
 GenericSystemOutput_export(GenericSystemOutputObject *self, PyObject *args)
 {
     PyTypeObject* tp = &GenericSystemOutput_Type;
-    PyObject* dict = PySAM_export_to_dict(self->data_ptr, (PyObject *) self, tp, "GenericSystem", "");
+    PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
     return dict;
 }
 
 static PyMethodDef GenericSystemOutput_methods[] = {
         {"export",            (PyCFunction)GenericSystemOutput_export,  METH_VARARGS,
-                PyDoc_STR("assign() -> None\n Export attributes into dictionary")},
+                PyDoc_STR("export() -> None\n Export attributes into nested dictionary")},
         {NULL,              NULL}           /* sentinel */
 };
 
 static PyObject *
-GenericSystemOutput_get_derate(PowerPlantObject *self, void *closure)
+GenericSystemOutput_get_derate(PlantObject *self, void *closure)
 {
     return PyLong_FromDouble(1.0);
 }
 
 static PyObject *
-GenericSystemOutput_get_energy_output_array(PowerPlantObject *self, void *closure)
+GenericSystemOutput_get_energy_output_array(PlantObject *self, void *closure)
 {
     return PyLong_FromDouble(2.0);
 }
@@ -209,7 +238,7 @@ static PyTypeObject GenericSystemOutput_Type = {
          * to be portable to Windows without using C++. */
         PyVarObject_HEAD_INIT(NULL, 0)
         "GenericSystem.Outputs",             /*tp_name*/
-        sizeof(PowerPlantObject),          /*tp_basicsize*/
+        sizeof(PlantObject),          /*tp_basicsize*/
         0,                          /*tp_itemsize*/
         /* methods */
         0,    /*tp_dealloc*/
@@ -266,29 +295,27 @@ static PyTypeObject GenericSystem_Type;
 #define GenericSystemObject_Check(v)      (Py_TYPE(v) == &GenericSystem_Type)
 
 static GenericSystemObject *
-newGenericSystemObject(PyObject *arg)
+newGenericSystemObject(void* data_ptr)
 {
     GenericSystemObject *self;
     self = PyObject_New(GenericSystemObject, &GenericSystem_Type);
 
     PySAM_TECH_ATTR("GenericSystem", SAM_GenericSystem_construct)
 
-    PyObject* PowerPlant_obj = PowerPlant_new(self->data_ptr);
-    PyDict_SetItemString(attr_dict, "PowerPlant", PowerPlant_obj);
+    PyObject* Plant_obj = Plant_new(self->data_ptr);
+    PyDict_SetItemString(attr_dict, "Plant", Plant_obj);
 
     PyObject* GenericSystemOutput_obj = GenericSystemOutput_new(self->data_ptr);
     PyDict_SetItemString(attr_dict, "Outputs", GenericSystemOutput_obj);
 
     PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
 
-    PyObject* name = PyUnicode_FromString("new");
     PyObject* data_cap = PyCapsule_New(self->data_ptr, NULL, NULL);
     PyObject* Adjust_obj = PyObject_CallMethod(AdjustmentFactorsModule, "new", "(O)", data_cap);
     Py_XDECREF(data_cap);
-    Py_XDECREF(name);
 
     if (!Adjust_obj){
-    printf("couldn't get object\n");
+        PyErr_SetString(PySAM_ErrorObject, "Couldn't create AdjustmentFactorsObject\n");
         return NULL;
     }
 
@@ -325,9 +352,38 @@ GenericSystem_execute(GenericSystemObject *self, PyObject *args)
 }
 
 
+static PyObject *
+GenericSystem_assign(GenericSystemObject *self, PyObject *args)
+{
+    PyObject* dict;
+    if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+        return NULL;
+    }
+
+    if (!PySAM_assign_from_nested_dict(self, self->x_attr, self->data_ptr, dict, "GenericSystem"))
+        return NULL;
+
+    Py_INCREF(Py_None);
+    return Py_None;
+}
+
+
+static PyObject *
+GenericSystem_export(GenericSystemObject *self, PyObject *args)
+{
+    PyObject* export = PyDict_New();
+    PySAM_export_to_nested_dict((PyObject *) self, self->x_attr, export);
+    return export;
+}
+
+
 static PyMethodDef GenericSystem_methods[] = {
         {"execute",            (PyCFunction)GenericSystem_execute,  METH_VARARGS,
                 PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
+        {"assign",            (PyCFunction)GenericSystem_assign,  METH_VARARGS,
+                PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary")},
+        {"export",            (PyCFunction)GenericSystem_export,  METH_VARARGS,
+                PyDoc_STR("assign() -> None\n Export attributes into dictionary")},
         {NULL,              NULL}           /* sentinel */
 };
 
@@ -398,10 +454,10 @@ static PyObject *
 GenericSystem_new(PyObject *self, PyObject *args)
 {
     GenericSystemObject *rv;
-
-    if (!PyArg_ParseTuple(args, ":new"))
+    long int ptr = 0;
+    if (!PyArg_ParseTuple(args, "|l:new", &ptr))
         return NULL;
-    rv = newGenericSystemObject(args);
+    rv = newGenericSystemObject((void*)ptr);
     if (rv == NULL)
         return NULL;
     return (PyObject *)rv;
@@ -416,7 +472,7 @@ GenericSystem_new(PyObject *self, PyObject *args)
 
 static PyMethodDef GenericSystemModule_methods[] = {
         {"new",             GenericSystem_new,         METH_VARARGS,
-                PyDoc_STR("new() -> new GenericSystem object")},
+                PyDoc_STR("new(optional data_ptr) -> new GenericSystem object")},
         {NULL,              NULL}           /* sentinel */
 };
 
@@ -447,12 +503,12 @@ GenericSystemModule_exec(PyObject *m)
     GenericSystem_Type.tp_dict = PyDict_New();
     if (!GenericSystem_Type.tp_dict) { goto fail; }
 
-    /// Add the PowerPlant type object to GenericSystem_Type
-    if (PyType_Ready(&PowerPlant_Type) < 0) { goto fail; }
-    Py_INCREF(&PowerPlant_Type);
+    /// Add the Plant type object to GenericSystem_Type
+    if (PyType_Ready(&Plant_Type) < 0) { goto fail; }
+    Py_INCREF(&Plant_Type);
     PyDict_SetItemString(GenericSystem_Type.tp_dict,
-                         "PowerPlant",
-                         (PyObject*)&PowerPlant_Type);
+                         "Plant",
+                         (PyObject*)&Plant_Type);
 
     /// Add the AdjustmentFactors type object to GenericSystem_Type
     PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
