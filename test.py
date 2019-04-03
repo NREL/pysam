@@ -5,12 +5,16 @@
 # sandbox.run_setup('setup.py', ['install'])
 import GenericSystem
 from pympler.tracker import SummaryTracker
+import gc
+from sscapi import PySSC
+
+ssc = PySSC()
 
 check_error_cases = True
 
 n_tests_passed = 0
 round = 0
-while round < 1:
+while round < 100:
 
     if round == 0:
         tracker = SummaryTracker()
@@ -115,12 +119,7 @@ while round < 1:
     print("Passed test", 6)
     n_tests_passed += 1
 
-    if round == 3:
-        tracker.print_diff()
 
-
-    # execution
-    # a.execute(1)
 
 
     # Test shared module (AdjustmentFactors)
@@ -140,6 +139,13 @@ while round < 1:
     assert(d.ac_periods == ((1, 2), (3, 4)))
     print("Passed test", 9)
     n_tests_passed += 1
+
+    try:
+        d.ac_periods = ((1, 2))
+        print("FAIL 4: exception is expected")
+    except:
+        print("Error caught", 4)
+        n_tests_passed += 1
 
     ValDict = d.export()
     assert(ValDict['ac_constant'] == 1 and ValDict['ac_hourly'] == (1, 2) and ValDict['ac_periods'] == ((1, 2), (3, 4)))
@@ -169,9 +175,7 @@ while round < 1:
     n_tests_passed += 1
 
     # Test reading from PySSC
-    from sscapi import PySSC
 
-    ssc = PySSC()
     data = ssc.data_create()
     ssc.data_set_number(data, b'derate', 1000)
     ssc.data_set_array(data, b'energy_output_array', [1000, 2000])
@@ -192,9 +196,12 @@ while round < 1:
 
     c = GenericSystem.new()
     dat = {'yo': 0}
-    c.Plant.data = {'num': 1, 'arr': (1, 2), 'mat': ((1,2 ), (3, 4)), 'str': 'str', 'table': dat}
+    datDict = {'num': 1, 'arr': (1, 2),  'str': 'str', 'mat': ((1, 2), (3, 4)), 'table': dat}
+    c.Plant.data = datDict
     DataDict = c.Plant.data
-    assert(DataDict['num'] == 1 and DataDict['arr'] == (1,2) and DataDict['mat'] == ((1, 2), (3, 4)) and DataDict['str'] == 'str')
+    assert(DataDict['num'] == 1 and DataDict['arr'] == (1, 2))
+    assert(DataDict['mat'] == ((1.0, 2.0), (3.0, 4.0)))
+    assert(DataDict['str'] == 'str')
     assert(DataDict['table'] == dat)
     print("Passed test", 16)
     n_tests_passed += 1
@@ -207,7 +214,7 @@ while round < 1:
         n_tests_passed += 1
 
     try:
-        c.Plant.data = {'num': 1, 'arr': (1, "2"), 'mat': ((1,2 ), (3, 4)), 'str': 'str', 'table': dat}
+        c.Plant.data = {'num': 1, 'arr': (1, "2"), 'mat': ((1, 2), (3, 4)), 'str': 'str', 'table': dat}
         print("FAIL 18: exception is expected")
     except:
         print("Error caught", 18)
@@ -220,6 +227,13 @@ while round < 1:
         print("Error caught", 19)
         n_tests_passed += 1
 
+
+    if round == 3:
+        tracker.print_diff()
+
+
+    # execution
+    # a.execute(1)
 
 
 tracker.print_diff()

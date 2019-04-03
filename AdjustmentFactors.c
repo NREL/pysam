@@ -41,28 +41,7 @@ AdjustmentFactors_new(PyObject* self, PyObject* args)
 static PyObject *
 AdjustmentFactors_assign(AdjustmentFactorsObject *self, PyObject *args)
 {
-    PyObject* dict;
-    if (!PyArg_ParseTuple(args, "O:assign", &dict)){
-        return NULL;
-    }
-
-    if (SAM_lib_handle == NULL){
-        SAM_error error = new_error();
-        SAM_lib_handle = SAM_load_library(SAM_lib_path, &error);
-        if (PySAM_has_error(error)) return 0;
-    }
-
-    PyGetSetDef* getset = AdjustmentFactors_Type.tp_getset;
-    while(getset->name){
-        PyObject* val = PyDict_GetItemString(dict, getset->name);
-        if (val){
-            (*getset->set)((PyObject*)self, val, NULL);
-        }
-        getset++;
-    }
-
-    Py_INCREF(Py_None);
-    return Py_None;
+    return PySAM_assign_from_attr(&AdjustmentFactors_Type, self, args);
 }
 
 static PyObject *
@@ -291,7 +270,6 @@ AdjustmentFactorsModule_exec(PyObject *m)
 
     /// Add the AdjustmentFactors type object to the module
     if (PyType_Ready(&AdjustmentFactors_Type) < 0) { goto fail; }
-    Py_INCREF(&AdjustmentFactors_Type);
     PyModule_AddObject(m,
                        "AdjustmentFactors",
                        (PyObject*)&AdjustmentFactors_Type);

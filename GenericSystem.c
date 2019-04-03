@@ -304,15 +304,18 @@ newGenericSystemObject(void* data_ptr)
 
     PyObject* Plant_obj = Plant_new(self->data_ptr);
     PyDict_SetItemString(attr_dict, "Plant", Plant_obj);
+    Py_DECREF(Plant_obj);
 
     PyObject* GenericSystemOutput_obj = GenericSystemOutput_new(self->data_ptr);
     PyDict_SetItemString(attr_dict, "Outputs", GenericSystemOutput_obj);
+    Py_DECREF(GenericSystemOutput_obj);
 
     PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
 
     PyObject* data_cap = PyCapsule_New(self->data_ptr, NULL, NULL);
     PyObject* Adjust_obj = PyObject_CallMethod(AdjustmentFactorsModule, "new", "(O)", data_cap);
     Py_XDECREF(data_cap);
+    Py_XDECREF(AdjustmentFactorsModule);
 
     if (!Adjust_obj){
         PyErr_SetString(PySAM_ErrorObject, "Couldn't create AdjustmentFactorsObject\n");
@@ -320,6 +323,7 @@ newGenericSystemObject(void* data_ptr)
     }
 
     PyDict_SetItemString(attr_dict, "AdjustmentFactors", Adjust_obj);
+    Py_DECREF(Adjust_obj);
 
     return self;
 }
@@ -390,13 +394,13 @@ static PyMethodDef GenericSystem_methods[] = {
 static PyObject *
 GenericSystem_getattro(GenericSystemObject *self, PyObject *name)
 {
-    PySAM_GET_ATTR()
+    return PySAM_get_attr((PyObject*) self, (PyObject*) self->x_attr, name);
 }
 
 static int
 GenericSystem_setattr(GenericSystemObject *self, const char *name, PyObject *v)
 {
-    PySAM_SET_ATTR()
+    return PySAM_set_attr((PyObject*)self, (PyObject*)self->x_attr, name, v);
 }
 
 static PyTypeObject GenericSystem_Type = {
@@ -505,10 +509,10 @@ GenericSystemModule_exec(PyObject *m)
 
     /// Add the Plant type object to GenericSystem_Type
     if (PyType_Ready(&Plant_Type) < 0) { goto fail; }
-    Py_INCREF(&Plant_Type);
     PyDict_SetItemString(GenericSystem_Type.tp_dict,
                          "Plant",
                          (PyObject*)&Plant_Type);
+    Py_DECREF(&Plant_Type);
 
     /// Add the AdjustmentFactors type object to GenericSystem_Type
     PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
@@ -526,18 +530,18 @@ GenericSystemModule_exec(PyObject *m)
     PyDict_SetItemString(GenericSystem_Type.tp_dict,
                          "AdjustmentFactors",
                          (PyObject*)AdjustmentFactors_Type);
+    Py_DECREF(&AdjustmentFactors_Type);
     Py_XDECREF(AdjustmentFactors_Type);
 
     /// Add the Output type object to GenericSystem_Type
     if (PyType_Ready(&GenericSystemOutput_Type) < 0) { goto fail; }
-    Py_INCREF(&GenericSystemOutput_Type);
     PyDict_SetItemString(GenericSystem_Type.tp_dict,
                          "Outputs",
                          (PyObject*)&GenericSystemOutput_Type);
+    Py_DECREF(&GenericSystemOutput_Type);
 
     /// Add the GenericSystem type object to the module
     if (PyType_Ready(&GenericSystem_Type) < 0) { goto fail; }
-    Py_INCREF(&GenericSystem_Type);
     PyModule_AddObject(m,
                        "GenericSystem",
                        (PyObject*)&GenericSystem_Type);

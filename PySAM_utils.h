@@ -64,21 +64,40 @@ if (self == NULL) return NULL; SAM_error error = new_error(); \
 if(!data_ptr) self->data_ptr = (*ctor)(0, &error); else self->data_ptr = data_ptr; \
 if (PySAM_has_error(error)) return NULL; \
 PyObject* attr_dict = PyDict_New(); self->x_attr = attr_dict; \
-PyDict_SetItemString(attr_dict, "technology", PyUnicode_FromString(tech));
+PyObject* tech_obj = PyUnicode_FromString(tech); \
+PyDict_SetItemString(attr_dict, "technology", tech_obj); Py_DECREF(tech_obj);
 
-#define PySAM_GET_ATTR() \
-if (self->x_attr != NULL) { PyObject *v = PyDict_GetItemWithError(self->x_attr, name); \
-    if (v != NULL) { Py_INCREF(v); return v; } \
-    else if (PyErr_Occurred()) { return NULL; }  \
-    return PyObject_GenericGetAttr((PyObject *)self, name); }
 
-#define PySAM_SET_ATTR() \
-if (self->x_attr == NULL) { self->x_attr = PyDict_New(); \
-    if (self->x_attr == NULL) return -1; } \
-if (v == NULL) { int rv = PyDict_DelItemString(self->x_attr, name); \
-    if (rv < 0 && PyErr_ExceptionMatches(PyExc_KeyError)) \
-    PyErr_SetString(PyExc_AttributeError, "delete non-existing attribute"); return rv; } \
-else return PyDict_SetItemString(self->x_attr, name, v);
+static PyObject * PySAM_get_attr(PyObject *self, PyObject* x_attr, PyObject *name){
+    if (x_attr != NULL) {
+        PyObject *v = PyDict_GetItemWithError(x_attr, name);
+        if (v != NULL) {
+            Py_INCREF(v);
+            return v;
+        }
+        else if (PyErr_Occurred()) {
+            return NULL;
+        }
+        return PyObject_GenericGetAttr((PyObject *)self, name);
+    }
+}
+
+static int PySAM_set_attr(PyObject *self, PyObject* x_attr, const char *name, PyObject *v){
+    if (x_attr == NULL) {
+        x_attr = PyDict_New();
+        if (x_attr == NULL)
+            return -1;
+    }
+    if (v == NULL) {
+        int rv = PyDict_DelItemString(x_attr, name);
+        if (rv < 0 && PyErr_ExceptionMatches(PyExc_KeyError))
+            PyErr_SetString(PyExc_AttributeError, "delete non-existing attribute");
+        return rv;
+    }
+    else
+        return PyDict_SetItemString(x_attr, name, v);
+}
+
 
 //
 // Functions for converting between Python and C types
@@ -88,7 +107,7 @@ static int PySAM_seq_to_array(PyObject *value, float **arr, int *seqlen){
     PyObject* seq;
     int i;
 
-    seq = PySequence_Fast(value, "argument must be iterable");
+    seq = PySequence_Fast(value, "error converting tuple to array: argument must be iterable");
     if(!seq)
         return -1;
 
@@ -99,76 +118,77 @@ static int PySAM_seq_to_array(PyObject *value, float **arr, int *seqlen){
         PyErr_NoMemory(  );
         return -2;
     }
+
     for(i=0; i < *seqlen; i++) {
         PyObject *fitem;
         PyObject *item = PySequence_Fast_GET_ITEM(seq, i);
+
         if(!item) {
             Py_DECREF(seq);
             free(*arr);
+            PyErr_SetString(PyExc_TypeError, "error converting tuple to array: could not get item");
             return -3;
         }
         if(!PyNumber_Check(item)) {
             Py_DECREF(seq);
             free(*arr);
-            PyErr_SetString(PyExc_TypeError, "all items must be numbers");
+            PyErr_SetString(PyExc_TypeError, "error converting tuple to array: all items must be numbers");
             return -4;
         }
         fitem = PyNumber_Float(item);
+
         (*arr)[i] = (float)PyFloat_AS_DOUBLE(fitem);
         Py_DECREF(fitem);
     }
-
     Py_DECREF(seq);
     return 0;
 }
 
 static int PySAM_seq_to_matrix(PyObject *value, float **mat, int *nrows, int *ncols){
     PyObject* seq, *row;
-    int i, j;
+    int i;
 
     seq = PySequence_Fast(value, "argument must be iterable");
     if(!seq)
         return -1;
 
-    *nrows = PySequence_Fast_GET_SIZE(seq);
     row = PySequence_Fast_GET_ITEM(seq, 0);
+
+    *nrows = PySequence_Fast_GET_SIZE(seq);
     *ncols = PySequence_Fast_GET_SIZE(row);
+
     *mat = malloc((*nrows)*(*ncols)*sizeof(float));
+    float *arr = NULL;
+    int seqlen;
+
     if(!*mat) {
         Py_DECREF(seq);
-        Py_DECREF(row);
         PyErr_NoMemory(  );
         return -2;
     }
     for(i=0; i < *nrows; i++) {
         row = PySequence_Fast_GET_ITEM(seq, i);
         if (PySequence_Fast_GET_SIZE(row) != *ncols){
+            free(*mat);
+            Py_DECREF(seq);
             PyErr_SetString(PyExc_TypeError, "Matrix must be rectangular.");
             return -6;
         }
-        for(j=0; j < *ncols; j++) {
-            PyObject *fitem;
-            PyObject *item = PySequence_Fast_GET_ITEM(row, j);
-            if(!item) {
-                Py_DECREF(seq);
-                Py_DECREF(row);
-                free(*mat);
-                return -3;
-            }
-            if(!PyNumber_Check(item)) {
-                Py_DECREF(seq);
-                Py_DECREF(row);
-                free(*mat);
-                PyErr_SetString(PyExc_TypeError, "all items must be numbers");
-                return -4;
-            }
-            fitem = PyNumber_Float(item);
-            (*mat)[i * (*ncols) + j] = (float)PyFloat_AS_DOUBLE(fitem);
-            Py_DECREF(fitem);
+        int res = PySAM_seq_to_array(row, &arr, &seqlen);
+        if ( res < 0){
+            free(*mat);
+            Py_DECREF(seq);
+            char str[256];
+            sprintf(str, "Error converting nested tuple %d into row in matrix.", i);
+            PyErr_SetString(PyExc_TypeError, str);
+            return res;
         }
+        float* mat_pos = &((*mat)[*ncols * i]);
+        memcpy(mat_pos, arr, (*ncols)*sizeof(float));
+
+        free(arr);
     }
     Py_DECREF(seq);
-    Py_DECREF(row);
     return 0;
 }
 
@@ -195,26 +215,31 @@ static PyObject* PySAM_table_to_dict(SAM_table table){
         switch(type){
             case SAM_STRING:
                 str = SAM_table_read_string(table, key, &error);
-                if (PySAM_has_error(error)) return NULL;
-                PyDict_SetItemString(table_dict, key, PyUnicode_FromString(str));
+                if (PySAM_has_error(error)) goto fail;
+                PyObject* str_obj = PyUnicode_FromString(str);
+                PyDict_SetItemString(table_dict, key, str_obj);
+                Py_DECREF(str_obj);
                 break;
             case SAM_NUMBER:
                 num = SAM_table_read_num(table, key, &error);
-                if (PySAM_has_error(error)) return NULL;
-                PyDict_SetItemString(table_dict, key, PyLong_FromDouble((double)num));
+                if (PySAM_has_error(error)) goto fail;
+                PyObject* long_obj = PyLong_FromDouble((double)num);
+                PyDict_SetItemString(table_dict, key, long_obj);
+                Py_DECREF(long_obj);
                 break;
             case SAM_ARRAY:
                 arr = SAM_table_read_array(table, key, &n, &error);
+                if (PySAM_has_error(error)) goto fail;
                 seq = PyTuple_New(n);
                 for(i=0; i < n; i++) {
                     PyTuple_SET_ITEM(seq, i, PyFloat_FromDouble(arr[i]));
                 }
-                if (PySAM_has_error(error)) return NULL;
                 PyDict_SetItemString(table_dict, key, seq);
+                Py_DECREF(seq);
                 break;
             case SAM_MATRIX:
                 arr = SAM_table_read_matrix(table, key, &n, &m, &error);
-
+                if (PySAM_has_error(error)) goto fail;
                 seq = PyTuple_New(n);
                 for(i=0; i < n; i++) {
                     seqq = PyTuple_New(m);
@@ -223,18 +248,20 @@ static PyObject* PySAM_table_to_dict(SAM_table table){
                     }
                     PyTuple_SET_ITEM(seq, i, seqq);
                 }
-                if (PySAM_has_error(error)) return NULL;
                 PyDict_SetItemString(table_dict, key, seq);
+                Py_XDECREF(seq);
                 break;
             case SAM_TABLE:
                 data = SAM_table_get_table(table, key, &error);
+                if (PySAM_has_error(error)) goto fail;
                 seq = PySAM_table_to_dict(data);
-                if (PySAM_has_error(error)) return NULL;
                 PyDict_SetItemString(table_dict, key, seq);
+                Py_DECREF(seq);
                 break;
             case SAM_INVALID:
             default:
-                PyErr_SetString(PySAM_ErrorObject, "Table contains entry with invalid type.");
+                PyErr_SetString(PySAM_ErrorObject, "Table contains entry with invalid type. Types must be number, string"
+                                                   ", sequence, or dict.");
                 goto fail;
         }
     }
@@ -256,7 +283,12 @@ static SAM_table PySAM_dict_to_table(PyObject* dict){
         return NULL;
     }
 
+    Py_INCREF(dict);
     PyObject* ascii_mystring, *first;
+
+    float *mat = NULL;
+    float *arr = NULL;
+    SAM_table data_tab = NULL;
     while (PyDict_Next(dict, &pos, &key, &value)){
         ascii_mystring = PyUnicode_AsASCIIString(key);
         char* name = PyBytes_AsString(ascii_mystring);
@@ -294,7 +326,6 @@ static SAM_table PySAM_dict_to_table(PyObject* dict){
 
             // matrix
             if (PySequence_Check(first)){
-                float* mat;
                 int nrows, ncols;
                 if(PySAM_seq_to_matrix(value, &mat, &nrows, &ncols) < 0){
                     goto fail;
@@ -302,16 +333,17 @@ static SAM_table PySAM_dict_to_table(PyObject* dict){
                 SAM_error error = new_error();
                 SAM_table_set_matrix(table, name, mat, nrows, ncols, &error);
                 if (PySAM_has_error(error)) goto fail;
+                free(mat);
             }
             // array
             else{
-                float* arr;
                 int seqlen;
                 if(PySAM_seq_to_array(value, &arr, &seqlen) < 0)
                     goto fail;
                 SAM_error error = new_error();
                 SAM_table_set_array(table, name, arr, seqlen, &error);
                 if (PySAM_has_error(error)) goto fail;
+                free(arr);
             }
             Py_XDECREF(first);
         }
@@ -322,14 +354,19 @@ static SAM_table PySAM_dict_to_table(PyObject* dict){
             SAM_error error = new_error();
             SAM_table_set_table(table, name, data_tab, &error);
             if (PySAM_has_error(error)) goto fail;
+            SAM_table_destruct(data_tab, NULL);
         }
         Py_DECREF(ascii_mystring);
     }
+    Py_XDECREF(dict);
+
     return table;
     fail:
+    if (data_tab) SAM_table_destruct(data_tab, NULL);
+    Py_XDECREF(dict);
     Py_DECREF(ascii_mystring);
     Py_XDECREF(first);
-    SAM_table_destruct(table, NULL);
+    if (table) SAM_table_destruct(table, NULL);
     return NULL;
 }
 
@@ -344,7 +381,6 @@ static PyObject* PySAM_float_getter(SAM_get_float_t func, void *data_ptr){
     if (PySAM_has_error(error))
         return NULL;
     PyObject* result = PyFloat_FromDouble(val);
-    Py_XINCREF(result);
     return result;
 }
 
@@ -374,7 +410,6 @@ static PyObject* PySAM_string_getter(SAM_get_string_t func, void *data_ptr){
     if (PySAM_has_error(error))
         return NULL;
     PyObject* result = PyUnicode_FromString(val);
-    Py_XINCREF(result);
     return result;
 }
 
@@ -455,37 +490,19 @@ static PyObject* PySAM_matrix_getter(SAM_get_matrix_t func,void *data_ptr){
 
 
 static int PySAM_matrix_setter(PyObject *value, SAM_set_matrix_t func, void *data_ptr){
-    Py_ssize_t rows = PySequence_Size(value);
-    Py_ssize_t cols = PySequence_Size(PySequence_GetItem(value, 0));
 
-    float* mat = malloc(rows*cols*sizeof(float));
-
-    for (Py_ssize_t i = 0; i < rows; i++){
-        PyObject* row = PySequence_GetItem(value, i);
-
-        if (PySequence_Size(row) != cols){
-            PyErr_SetString(PyExc_TypeError, "matrix must be rectangular");
-            free(mat);
-            return -6;
-        }
-
-        float* arr = NULL;
-        int seqlen;
-
-        int res = PySAM_seq_to_array(row, &arr, &seqlen);
-        if (res < 0) return res;
-
-        memcpy(&mat[i * cols], arr, cols* sizeof(float));
-
-        free(arr);
-        Py_XDECREF(row);
+    int rows, cols;
+    float* mat = NULL;
+    int res = PySAM_seq_to_matrix(value, &mat, &rows, &cols);
+    if (res < 0){
+        return -1;
     }
 
     SAM_error error = new_error();
     func(data_ptr, mat, (int)rows, (int)cols, &error);
     if (PySAM_has_error(error)){
         free(mat);
-        return -5;
+        return -1;
     }
     free(mat);
     return 0;
@@ -670,7 +687,13 @@ static int PySAM_assign_from_dict(void *data_ptr, PyObject *dict, const char *te
     return 0;
 }
 
-static int PySAM_assign_from_attr(PyObject* self, PyTypeObject* tp, PyObject* dict){
+static PyObject*
+PySAM_assign_from_attr(PyTypeObject *tp, PyObject *self, PyObject *args){
+    PyObject* dict;
+    if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+        return NULL;
+    }
+
     if (SAM_lib_handle == NULL){
         SAM_error error = new_error();
         SAM_lib_handle = SAM_load_library(SAM_lib_path, &error);
@@ -679,15 +702,15 @@ static int PySAM_assign_from_attr(PyObject* self, PyTypeObject* tp, PyObject* di
 
     PyGetSetDef* getset = tp->tp_getset;
     while(getset->name){
-        printf("heree in PySAM_assign_from_attr %s\n", getset->name);
-
         PyObject* val = PyDict_GetItemString(dict, getset->name);
         if (val){
             (*getset->set)((PyObject*)self, val, NULL);
         }
         getset++;
     }
-    return 1;
+
+    Py_INCREF(Py_None);
+    return Py_None;
 }
 
 static int PySAM_assign_from_nested_dict(PyObject* self, PyObject* x_attr, void *data_ptr, PyObject *dict, const char *tech){
@@ -745,6 +768,7 @@ PySAM_export_to_dict(PyObject *self, PyTypeObject *tp) {
 
         if(val) PyDict_SetItemString(export, getset->name, val);
         else PyErr_Clear();    // clear error warning about unassigned value
+        Py_XDECREF(val);       // PyDict_Set* does not steal reference
         getset++;
     }
 

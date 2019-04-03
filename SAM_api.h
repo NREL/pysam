@@ -91,6 +91,8 @@ SAM_EXPORT const char* SAM_table_key(SAM_table t, int pos, int *type, SAM_error 
 
 SAM_EXPORT void *SAM_load_library(const char *filepath, SAM_error *err);
 
+SAM_EXPORT typedef void* (*SAM_construct_t)(const char*, SAM_error*);
+
 SAM_EXPORT typedef void (*SAM_set_float_t)(void*, float, SAM_error*);
 
 SAM_EXPORT typedef void (*SAM_set_array_t)(void*, float*, int, SAM_error*);
