@@ -11,13 +11,15 @@ Project(PYSAM)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}")
 
 
-include_directories(. $ENV{PY3DIR})
+include_directories(. src $ENV{PY3DIR} $ENV{SAMNTDIR}/api/include)
 
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 add_library(pysam SHARED
-        GenericSystem.c
-		PySAM_utils.h AdjustmentFactors.c)
+        TestSystem.c
+		src/PySAM_utils.h src/AdjustmentFactors.c
+		src/GenericSystem.c)
+
 
 set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG}")
 
@@ -29,10 +31,10 @@ unset(SSC_LIB CACHE)
 unset(SAM_API_LIB CACHE)
 find_library( SSC_LIB
         NAMES libsscd.so sscd.lib
-        PATHS lib )
+        PATHS data )
 find_library( SAM_API_LIB
         NAMES libSAM_apid.so SAM_apid.lib
-        PATHS lib)
+        PATHS data)
 target_link_libraries(pysam ${SSC_LIB} ${SAM_API_LIB})
 
 
@@ -60,8 +62,8 @@ add_custom_command(
 	TARGET pysam
 		POST_BUILD 
 		COMMAND ${CMAKE_COMMAND} -E copy_if_different
-		$ENV{SSCDIR}/build_vs2017/x64/Debug/sscd.dll ${CMAKE_CURRENT_SOURCE_DIR}
+			$ENV{SSCDIR}/build_vs2017/x64/Debug/sscd.dll ${CMAKE_CURRENT_SOURCE_DIR}
 		COMMAND ${CMAKE_COMMAND} -E copy_if_different
-		$ENV{SAMNTDIR}/api/SAM_apid.dll ${CMAKE_CURRENT_SOURCE_DIR}
+			$ENV{SAMNTDIR}/api/SAM_apid.dll ${CMAKE_CURRENT_SOURCE_DIR}
 	)
 endif()

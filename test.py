@@ -158,7 +158,9 @@ while round < 100:
     print("Passed test", 11)
     n_tests_passed += 1
 
+
     # Test nested dictionary assignment and export
+
     TechDict = {'Plant': {'derate': 100,
                                'energy_output_array': (100, 200)},
                 'AdjustmentFactors': {'ac_constant': 100, "ac_hourly": (100, 200), "ac_periods": ((100, 200), (300, 400))}}
@@ -174,59 +176,85 @@ while round < 100:
     print("Passed test", 13)
     n_tests_passed += 1
 
+
     # Test reading from PySSC
 
     data = ssc.data_create()
     ssc.data_set_number(data, b'derate', 1000)
     ssc.data_set_array(data, b'energy_output_array', [1000, 2000])
-    a = GenericSystem.new(data)
+    a = GenericSystem.wrap(data)
     assert(a.Plant.derate == 1000)
     assert(a.Plant.energy_output_array == (1000, 2000))
 
+
     # Test strings and tables with error cases
 
-    a.Plant.file = "file"
-    assert(a.Plant.file == "file")
-    print("Passed test", 14)
-    n_tests_passed += 1
+    # a.Plant.file = "file"
+    # assert(a.Plant.file == "file")
+    # print("Passed test", 14)
+    # n_tests_passed += 1
+    #
+    # assert(a.Plant.export()['file'] == 'file')
+    # print("Passed test", 15)
+    # n_tests_passed += 1
+    #
+    # c = GenericSystem.new()
+    # dat = {'yo': 0}
+    # datDict = {'num': 1, 'arr': (1, 2),  'str': 'str', 'mat': ((1, 2), (3, 4)), 'table': dat}
+    # c.Plant.data = datDict
+    # DataDict = c.Plant.data
+    # assert(DataDict['num'] == 1 and DataDict['arr'] == (1, 2))
+    # assert(DataDict['mat'] == ((1.0, 2.0), (3.0, 4.0)))
+    # assert(DataDict['str'] == 'str')
+    # assert(DataDict['table'] == dat)
+    # print("Passed test", 16)
+    # n_tests_passed += 1
+    #
+    # try:
+    #     a.Plant.file = 100
+    #     print("FAIL 5: exception is expected")
+    # except:
+    #     print("Error caught", 5)
+    #     n_tests_passed += 1
+    #
+    # try:
+    #     c.Plant.data = {'num': 1, 'arr': (1, "2"), 'mat': ((1, 2), (3, 4)), 'str': 'str', 'table': dat}
+    #     print("FAIL 6: exception is expected")
+    # except:
+    #     print("Error caught", 6)
+    #     n_tests_passed += 1
+    #
+    # try:
+    #     c.Plant.data = {'num': 1, 'arr': (1, 2), 'mat': (("1",2 ), (3, 4)), 'str': 'str', 'table': dat}
+    #     print("FAIL 7: exception is expected")
+    # except:
+    #     print("Error caught", 7)
+    #     n_tests_passed += 1
+    #
+    # a.Plant.data = {'num': 1, 'arr': (1, 2), 'mat': ((1, 2), (3, 4)), 'str': 'str', 'table': {}}
+    # assert(a.Plant.data['table'] == {})
+    # print("Passed test", 17)
+    # n_tests_passed += 1
+    #
+    #
+    #
+    # # Test conversion between technology attributes and nested dictionary
+    #
+    # genDict = a.export()
+    # assert(genDict['Plant']['data']['str'] == 'str' and genDict['AdjustmentFactors'] == {} and genDict['Outputs'])
+    # print("Passed test", 18)
+    # n_tests_passed += 1
+    #
+    # a = GenericSystem.new()
+    # assert(a.export()['Plant'] == {})
+    # a.assign(genDict)
+    # assert(a.export() == genDict)
+    # print("Passed test", 19)
+    # n_tests_passed += 1
 
-    assert(a.Plant.export()['file'] == 'file')
-    print("Passed test", 15)
-    n_tests_passed += 1
-
-    c = GenericSystem.new()
-    dat = {'yo': 0}
-    datDict = {'num': 1, 'arr': (1, 2),  'str': 'str', 'mat': ((1, 2), (3, 4)), 'table': dat}
-    c.Plant.data = datDict
-    DataDict = c.Plant.data
-    assert(DataDict['num'] == 1 and DataDict['arr'] == (1, 2))
-    assert(DataDict['mat'] == ((1.0, 2.0), (3.0, 4.0)))
-    assert(DataDict['str'] == 'str')
-    assert(DataDict['table'] == dat)
-    print("Passed test", 16)
-    n_tests_passed += 1
-
-    try:
-        a.Plant.file = 100
-        print("FAIL 17: exception is expected")
-    except:
-        print("Error caught", 17)
-        n_tests_passed += 1
-
-    try:
-        c.Plant.data = {'num': 1, 'arr': (1, "2"), 'mat': ((1, 2), (3, 4)), 'str': 'str', 'table': dat}
-        print("FAIL 18: exception is expected")
-    except:
-        print("Error caught", 18)
-        n_tests_passed += 1
-
-    try:
-        c.Plant.data = {'num': 1, 'arr': (1, 2), 'mat': (("1",2 ), (3, 4)), 'str': 'str', 'table': dat}
-        print("FAIL 19: exception is expected")
-    except:
-        print("Error caught", 19)
-        n_tests_passed += 1
-
+    # Test loading from serialized dict
+    a = GenericSystem.default("None")
+    print(a.export())
 
     if round == 3:
         tracker.print_diff()
