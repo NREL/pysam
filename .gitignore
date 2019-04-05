@@ -13,8 +13,9 @@ env/
 venv/
 venv34/
 venv35/
+__pycache__
 
 #distributions
 dist/
 manylinux/
-PowerPlant.egg-info
+System_Advisor_Model.egg-info

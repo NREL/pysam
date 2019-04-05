@@ -79,13 +79,13 @@ Weather_set_azimuth(WeatherObject *self, PyObject *value, void *closure)
 static PyObject *
 Weather_get_file_name(WeatherObject *self, void *closure)
 {
-	return PySAM_string_getter(SAM_TcslinearFresnel_Weather_file_sget, self->data_ptr);
+	return PySAM_string_getter(SAM_TcslinearFresnel_Weather_file_name_sget, self->data_ptr);
 }
 
 static int
 Weather_set_file_name(WeatherObject *self, PyObject *value, void *closure)
 {
-	return PySAM_string_setter(value, SAM_TcslinearFresnel_Weather_file_sset, self->data_ptr);
+	return PySAM_string_setter(value, SAM_TcslinearFresnel_Weather_file_name_sset, self->data_ptr);
 }
 
 static PyObject *
@@ -3422,7 +3422,7 @@ TcslinearFresnel_assign(TcslinearFresnelObject *self, PyObject *args)
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_nested_dict(self, self->x_attr, self->data_ptr, dict, "TcslinearFresnel"))
+	if (!PySAM_assign_from_nested_dict((PyObject*)self, self->x_attr, self->data_ptr, dict, "TcslinearFresnel"))
 		return NULL;
 
 	Py_INCREF(Py_None);
@@ -3548,7 +3548,7 @@ TcslinearFresnel_default(PyObject *self, PyObject *args)
 	if (rv == NULL)
 		return NULL;
 
-	PySAM_load_defaults(rv, rv->x_attr, rv->data_ptr, "TcslinearFresnel", fin);
+	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "TcslinearFresnel", fin);
 
 	return (PyObject *)rv;
 }

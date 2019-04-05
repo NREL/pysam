@@ -1195,13 +1195,13 @@ Biopower_set_biopwr_plant_temp_eff_f4(BiopowerObject *self, PyObject *value, voi
 static PyObject *
 Biopower_get_biopwr_plant_tou_grid(BiopowerObject *self, void *closure)
 {
-	return PySAM_string_getter(SAM_Biomass_Biopower_file_sget, self->data_ptr);
+	return PySAM_string_getter(SAM_Biomass_Biopower_biopwr_plant_tou_grid_sget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_plant_tou_grid(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_string_setter(value, SAM_Biomass_Biopower_file_sset, self->data_ptr);
+	return PySAM_string_setter(value, SAM_Biomass_Biopower_biopwr_plant_tou_grid_sset, self->data_ptr);
 }
 
 static PyObject *
@@ -1219,13 +1219,13 @@ Biopower_set_biopwr_plant_tou_option(BiopowerObject *self, PyObject *value, void
 static PyObject *
 Biopower_get_file_name(BiopowerObject *self, void *closure)
 {
-	return PySAM_string_getter(SAM_Biomass_Biopower_file_sget, self->data_ptr);
+	return PySAM_string_getter(SAM_Biomass_Biopower_file_name_sget, self->data_ptr);
 }
 
 static int
 Biopower_set_file_name(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_string_setter(value, SAM_Biomass_Biopower_file_sset, self->data_ptr);
+	return PySAM_string_setter(value, SAM_Biomass_Biopower_file_name_sset, self->data_ptr);
 }
 
 static PyObject *
@@ -2081,6 +2081,12 @@ Outputs_get_system_emissions_uptake(OutputsObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_system_heat_rate(OutputsObject *self, void *closure)
+{
+	return PySAM_float_getter(SAM_Biomass_Outputs_system_heat_rate_fget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_system_hhv_heatrate(OutputsObject *self, void *closure)
 {
 	return PySAM_float_getter(SAM_Biomass_Outputs_system_hhv_heatrate_fget, self->data_ptr);
@@ -2108,12 +2114,6 @@ static PyObject *
 Outputs_get_system_total_moisture(OutputsObject *self, void *closure)
 {
 	return PySAM_float_getter(SAM_Biomass_Outputs_system_total_moisture_fget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_system_heat_rate(OutputsObject *self, void *closure)
-{
-	return PySAM_float_getter(SAM_Biomass_Outputs_system_heat_rate_fget, self->data_ptr);
 }
 
 static PyGetSetDef Outputs_getset[] = {
@@ -2336,6 +2336,9 @@ static PyGetSetDef Outputs_getset[] = {
 {"system_emissions_uptake", (getter)Outputs_get_system_emissions_uptake,(setter)0,
 	"Biomass CO2 Uptake [kWh], number.",
  	NULL},
+{"system_heat_rate", (getter)Outputs_get_system_heat_rate,(setter)0,
+	"Heat Rate Conversion Factor (MMBTUs/MWhe) [MMBTUs/MWhe], number.",
+ 	NULL},
 {"system_hhv_heatrate", (getter)Outputs_get_system_hhv_heatrate,(setter)0,
 	"Gross Heat Rate (MMBtu/MWh) [MMBtu/MWh], number.",
  	NULL},
@@ -2350,9 +2353,6 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"system_total_moisture", (getter)Outputs_get_system_total_moisture,(setter)0,
 	"Overall Moisture Content (dry %) [%], number.",
- 	NULL},
-{"system_heat_rate", (getter)Outputs_get_system_heat_rate,(setter)0,
-	"Heat Rate Conversion Factor (MMBTUs/MWhe) [MMBTUs/MWhe], number.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -2487,7 +2487,7 @@ Biomass_assign(BiomassObject *self, PyObject *args)
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_nested_dict(self, self->x_attr, self->data_ptr, dict, "Biomass"))
+	if (!PySAM_assign_from_nested_dict((PyObject*)self, self->x_attr, self->data_ptr, dict, "Biomass"))
 		return NULL;
 
 	Py_INCREF(Py_None);
@@ -2613,7 +2613,7 @@ Biomass_default(PyObject *self, PyObject *args)
 	if (rv == NULL)
 		return NULL;
 
-	PySAM_load_defaults(rv, rv->x_attr, rv->data_ptr, "Biomass", fin);
+	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Biomass", fin);
 
 	return (PyObject *)rv;
 }

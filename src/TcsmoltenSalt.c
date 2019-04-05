@@ -79,13 +79,13 @@ LocationAndResource_set_solar_resource_data(LocationAndResourceObject *self, PyO
 static PyObject *
 LocationAndResource_get_solar_resource_file(LocationAndResourceObject *self, void *closure)
 {
-	return PySAM_string_getter(SAM_TcsmoltenSalt_LocationAndResource_file_sget, self->data_ptr);
+	return PySAM_string_getter(SAM_TcsmoltenSalt_LocationAndResource_solar_resource_file_sget, self->data_ptr);
 }
 
 static int
 LocationAndResource_set_solar_resource_file(LocationAndResourceObject *self, PyObject *value, void *closure)
 {
-	return PySAM_string_setter(value, SAM_TcsmoltenSalt_LocationAndResource_file_sset, self->data_ptr);
+	return PySAM_string_setter(value, SAM_TcsmoltenSalt_LocationAndResource_solar_resource_file_sset, self->data_ptr);
 }
 
 static PyGetSetDef LocationAndResource_getset[] = {
@@ -3589,25 +3589,25 @@ SystemControl_set_F_wc(SystemControlObject *self, PyObject *value, void *closure
 static PyObject *
 SystemControl_get_ampl_data_dir(SystemControlObject *self, void *closure)
 {
-	return PySAM_string_getter(SAM_TcsmoltenSalt_SystemControl_file_sget, self->data_ptr);
+	return PySAM_string_getter(SAM_TcsmoltenSalt_SystemControl_ampl_data_dir_sget, self->data_ptr);
 }
 
 static int
 SystemControl_set_ampl_data_dir(SystemControlObject *self, PyObject *value, void *closure)
 {
-	return PySAM_string_setter(value, SAM_TcsmoltenSalt_SystemControl_file_sset, self->data_ptr);
+	return PySAM_string_setter(value, SAM_TcsmoltenSalt_SystemControl_ampl_data_dir_sset, self->data_ptr);
 }
 
 static PyObject *
 SystemControl_get_ampl_exec_call(SystemControlObject *self, void *closure)
 {
-	return PySAM_string_getter(SAM_TcsmoltenSalt_SystemControl_file_sget, self->data_ptr);
+	return PySAM_string_getter(SAM_TcsmoltenSalt_SystemControl_ampl_exec_call_sget, self->data_ptr);
 }
 
 static int
 SystemControl_set_ampl_exec_call(SystemControlObject *self, PyObject *value, void *closure)
 {
-	return PySAM_string_setter(value, SAM_TcsmoltenSalt_SystemControl_file_sset, self->data_ptr);
+	return PySAM_string_setter(value, SAM_TcsmoltenSalt_SystemControl_ampl_exec_call_sset, self->data_ptr);
 }
 
 static PyObject *
@@ -6636,7 +6636,7 @@ TcsmoltenSalt_assign(TcsmoltenSaltObject *self, PyObject *args)
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_nested_dict(self, self->x_attr, self->data_ptr, dict, "TcsmoltenSalt"))
+	if (!PySAM_assign_from_nested_dict((PyObject*)self, self->x_attr, self->data_ptr, dict, "TcsmoltenSalt"))
 		return NULL;
 
 	Py_INCREF(Py_None);
@@ -6762,7 +6762,7 @@ TcsmoltenSalt_default(PyObject *self, PyObject *args)
 	if (rv == NULL)
 		return NULL;
 
-	PySAM_load_defaults(rv, rv->x_attr, rv->data_ptr, "TcsmoltenSalt", fin);
+	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "TcsmoltenSalt", fin);
 
 	return (PyObject *)rv;
 }

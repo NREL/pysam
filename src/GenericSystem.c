@@ -640,7 +640,7 @@ GenericSystem_assign(GenericSystemObject *self, PyObject *args)
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_nested_dict(self, self->x_attr, self->data_ptr, dict, "GenericSystem"))
+	if (!PySAM_assign_from_nested_dict((PyObject*)self, self->x_attr, self->data_ptr, dict, "GenericSystem"))
 		return NULL;
 
 	Py_INCREF(Py_None);
@@ -766,7 +766,7 @@ GenericSystem_default(PyObject *self, PyObject *args)
 	if (rv == NULL)
 		return NULL;
 
-	PySAM_load_defaults(rv, rv->x_attr, rv->data_ptr, "GenericSystem", fin);
+	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "GenericSystem", fin);
 
 	return (PyObject *)rv;
 }

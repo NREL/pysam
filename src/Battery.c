@@ -3423,7 +3423,7 @@ Battery_assign(BatteryObject *self, PyObject *args)
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_nested_dict(self, self->x_attr, self->data_ptr, dict, "Battery"))
+	if (!PySAM_assign_from_nested_dict((PyObject*)self, self->x_attr, self->data_ptr, dict, "Battery"))
 		return NULL;
 
 	Py_INCREF(Py_None);
@@ -3549,7 +3549,7 @@ Battery_default(PyObject *self, PyObject *args)
 	if (rv == NULL)
 		return NULL;
 
-	PySAM_load_defaults(rv, rv->x_attr, rv->data_ptr, "Battery", fin);
+	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Battery", fin);
 
 	return (PyObject *)rv;
 }

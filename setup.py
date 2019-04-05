@@ -1,26 +1,33 @@
 import json, marshal, os, ntpath
 
+
+
 # serialize all defaults into dict
 def _decode(o):
-    # Note the "unicode" part is only for python2
     if isinstance(o, str):
         try:
             return float(o)
         except ValueError:
             return o
     elif isinstance(o, dict):
-        return {k: _decode(v) for k, v in o.items()}
+        dic = {}
+        for k, v in o.items():
+            if k != "hybrid_dispatch_schedule" and k != "biopwr_plant_tou_grid":
+                dic[k] = _decode(v)
+            else:
+                dic[k] = v
+        return dic
     elif isinstance(o, list):
         return [_decode(v) for v in o]
     else:
         return o
 
-
 defaults_dir = os.environ['SAMNTDIR']+"/api_autogen/library/defaults/"
 
 for filename in os.listdir(defaults_dir):
     with open(defaults_dir+'/'+filename) as f:
-        data = json.load(f, object_hook=_decode)
+        data = json.load(f)
+
         dic = data[list(data.keys())[0]]
         with open('data/defaults/'+os.path.splitext(filename)[0]+'.df', "wb") as out:
             marshal.dump(dic, out)
@@ -75,129 +82,126 @@ setup(
                            library_dirs=[libpath],
                            libraries=libs,
                            extra_link_args=extra_link_args
+                           ),
+                 Extension('LinearFresnelDsgIph',
+                           ['src/LinearFresnelDsgIph.c'],
+                           include_dirs=[includepath],
+                           library_dirs=[libpath],
+                           libraries=libs,
+                           extra_link_args=extra_link_args
+                           ),
+                 Extension('TcsmoltenSalt',
+                           ['src/TcsmoltenSalt.c'],
+                           include_dirs=[includepath],
+                           library_dirs=[libpath],
+                           libraries=libs,
+                           extra_link_args=extra_link_args
+                           ),
+                 Extension('Biomass',
+                           ['src/Biomass.c'],
+                           include_dirs=[includepath],
+                           library_dirs=[libpath],
+                           libraries=libs,
+                           extra_link_args=extra_link_args
+                           ),
+                 Extension('Tcsdish',
+                           ['src/Tcsdish.c'],
+                           include_dirs=[includepath],
+                           library_dirs=[libpath],
+                           libraries=libs,
+                           extra_link_args=extra_link_args
+                           ),
+                 Extension('Hcpv',
+                           ['src/Hcpv.c'],
+                           include_dirs=[includepath],
+                           library_dirs=[libpath],
+                           libraries=libs,
+                           extra_link_args=extra_link_args
+                           ),
+                 Extension('TcsgenericSolar',
+                           ['src/TcsgenericSolar.c'],
+                           include_dirs=[includepath],
+                           library_dirs=[libpath],
+                           libraries=libs,
+                           extra_link_args=extra_link_args
+                           ),
+                 Extension('Pvsamv1',
+                           ['src/Pvsamv1.c'],
+                           include_dirs=[includepath],
+                           library_dirs=[libpath],
+                           libraries=libs,
+                           extra_link_args=extra_link_args
+                           ),
+                 Extension('Geothermal',
+                           ['src/Geothermal.c'],
+                           include_dirs=[includepath],
+                           library_dirs=[libpath],
+                           libraries=libs,
+                           extra_link_args=extra_link_args
+                           ),
+                 Extension('Swh',
+                           ['src/Swh.c'],
+                           include_dirs=[includepath],
+                           library_dirs=[libpath],
+                           libraries=libs,
+                           extra_link_args=extra_link_args
+                           ),
+                 Extension('TcsMSLF',
+                           ['src/TcsMSLF.c'],
+                           include_dirs=[includepath],
+                           library_dirs=[libpath],
+                           libraries=libs,
+                           extra_link_args=extra_link_args
+                           ),
+                 # Extension('Battery',
+                 #           ['src/Battery.c'],
+                 #           include_dirs=[includepath],
+                 #           library_dirs=[libpath],
+                 #           libraries=libs,
+                 #           extra_link_args=extra_link_args
+                 #           ),
+                 Extension('Pvwattsv5',
+                           ['src/Pvwattsv5.c'],
+                           include_dirs=[includepath],
+                           library_dirs=[libpath],
+                           libraries=libs,
+                           extra_link_args=extra_link_args
+                           ),
+                 Extension('TcstroughPhysical',
+                           ['src/TcstroughPhysical.c'],
+                           include_dirs=[includepath],
+                           library_dirs=[libpath],
+                           libraries=libs,
+                           extra_link_args=extra_link_args
+                           ),
+                 Extension('TroughPhysicalProcessHeat',
+                           ['src/TroughPhysicalProcessHeat.c'],
+                           include_dirs=[includepath],
+                           library_dirs=[libpath],
+                           libraries=libs,
+                           extra_link_args=extra_link_args
+                           ),
+                 Extension('TcslinearFresnel',
+                           ['src/TcslinearFresnel.c'],
+                           include_dirs=[includepath],
+                           library_dirs=[libpath],
+                           libraries=libs,
+                           extra_link_args=extra_link_args
+                           ),
+                 Extension('Windpower',
+                           ['src/Windpower.c'],
+                           include_dirs=[includepath],
+                           library_dirs=[libpath],
+                           libraries=libs,
+                           extra_link_args=extra_link_args
+                           ),
+                 Extension('TcstroughEmpirical',
+                           ['src/TcstroughEmpirical.c'],
+                           include_dirs=[includepath],
+                           library_dirs=[libpath],
+                           libraries=libs,
+                           extra_link_args=extra_link_args
                            )
                  ]
-)
+    )
 
-    #              Extension('LinearFresnelDsgIph',
-    #                        ['LinearFresnelDsgIph.c'],
-    #                        include_dirs=[includepath],
-    #                        library_dirs=[libpath],
-    #                        libraries=libs,
-    #                        extra_link_args=extra_link_args
-    #                        ),
-    #              Extension('TcsmoltenSalt',
-    #                        ['TcsmoltenSalt.c'],
-    #                        include_dirs=[includepath],
-    #                        library_dirs=[libpath],
-    #                        libraries=libs,
-    #                        extra_link_args=extra_link_args
-    #                        ),
-    #              Extension('Biomass',
-    #                        ['Biomass.c'],
-    #                        include_dirs=[includepath],
-    #                        library_dirs=[libpath],
-    #                        libraries=libs,
-    #                        extra_link_args=extra_link_args
-    #                        ),
-    #              Extension('Tcsdish',
-    #                        ['Tcsdish.c'],
-    #                        include_dirs=[includepath],
-    #                        library_dirs=[libpath],
-    #                        libraries=libs,
-    #                        extra_link_args=extra_link_args
-    #                        ),
-    #              Extension('Hcpv',
-    #                        ['Hcpv.c'],
-    #                        include_dirs=[includepath],
-    #                        library_dirs=[libpath],
-    #                        libraries=libs,
-    #                        extra_link_args=extra_link_args
-    #                        ),
-    #              Extension('TcsgenericSolar',
-    #                        ['TcsgenericSolar.c'],
-    #                        include_dirs=[includepath],
-    #                        library_dirs=[libpath],
-    #                        libraries=libs,
-    #                        extra_link_args=extra_link_args
-    #                        ),
-    #              Extension('Pvsamv1',
-    #                        ['Pvsamv1.c'],
-    #                        include_dirs=[includepath],
-    #                        library_dirs=[libpath],
-    #                        libraries=libs,
-    #                        extra_link_args=extra_link_args
-    #                        ),
-    #              Extension('Geothermal',
-    #                        ['Geothermal.c'],
-    #                        include_dirs=[includepath],
-    #                        library_dirs=[libpath],
-    #                        libraries=libs,
-    #                        extra_link_args=extra_link_args
-    #                        ),
-    #              Extension('Swh',
-    #                        ['Swh.c'],
-    #                        include_dirs=[includepath],
-    #                        library_dirs=[libpath],
-    #                        libraries=libs,
-    #                        extra_link_args=extra_link_args
-    #                        ),
-    #              Extension('TcsMSLF',
-    #                        ['TcsMSLF.c'],
-    #                        include_dirs=[includepath],
-    #                        library_dirs=[libpath],
-    #                        libraries=libs,
-    #                        extra_link_args=extra_link_args
-    #                        ),
-    #              Extension('Battery',
-    #                        ['Battery.c'],
-    #                        include_dirs=[includepath],
-    #                        library_dirs=[libpath],
-    #                        libraries=libs,
-    #                        extra_link_args=extra_link_args
-    #                        ),
-    #              Extension('Pvwattsv5',
-    #                        ['Pvwattsv5.c'],
-    #                        include_dirs=[includepath],
-    #                        library_dirs=[libpath],
-    #                        libraries=libs,
-    #                        extra_link_args=extra_link_args
-    #                        ),
-    #              Extension('TcstroughPhysical',
-    #                        ['TcstroughPhysical.c'],
-    #                        include_dirs=[includepath],
-    #                        library_dirs=[libpath],
-    #                        libraries=libs,
-    #                        extra_link_args=extra_link_args
-    #                        ),
-    #              Extension('TroughPhysicalProcessHeat',
-    #                        ['TroughPhysicalProcessHeat.c'],
-    #                        include_dirs=[includepath],
-    #                        library_dirs=[libpath],
-    #                        libraries=libs,
-    #                        extra_link_args=extra_link_args
-    #                        ),
-    #              Extension('TcslinearFresnel',
-    #                        ['TcslinearFresnel.c'],
-    #                        include_dirs=[includepath],
-    #                        library_dirs=[libpath],
-    #                        libraries=libs,
-    #                        extra_link_args=extra_link_args
-    #                        ),
-    #              Extension('Windpower',
-    #                        ['Windpower.c'],
-    #                        include_dirs=[includepath],
-    #                        library_dirs=[libpath],
-    #                        libraries=libs,
-    #                        extra_link_args=extra_link_args
-    #                        ),
-    #              Extension('TcstroughEmpirical',
-    #                        ['TcstroughEmpirical.c'],
-    #                        include_dirs=[includepath],
-    #                        library_dirs=[libpath],
-    #                        libraries=libs,
-    #                        extra_link_args=extra_link_args
-    #                        )
-    #              ]
-    # )
-    #

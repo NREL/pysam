@@ -487,13 +487,13 @@ GeoHourly_set_hr_pl_nlev(GeoHourlyObject *self, PyObject *value, void *closure)
 static PyObject *
 GeoHourly_get_hybrid_dispatch_schedule(GeoHourlyObject *self, void *closure)
 {
-	return PySAM_string_getter(SAM_Geothermal_GeoHourly_file_sget, self->data_ptr);
+	return PySAM_string_getter(SAM_Geothermal_GeoHourly_hybrid_dispatch_schedule_sget, self->data_ptr);
 }
 
 static int
 GeoHourly_set_hybrid_dispatch_schedule(GeoHourlyObject *self, PyObject *value, void *closure)
 {
-	return PySAM_string_setter(value, SAM_Geothermal_GeoHourly_file_sset, self->data_ptr);
+	return PySAM_string_setter(value, SAM_Geothermal_GeoHourly_hybrid_dispatch_schedule_sset, self->data_ptr);
 }
 
 static PyObject *
@@ -1225,13 +1225,13 @@ static PyMethodDef Weather_methods[] = {
 static PyObject *
 Weather_get_file_name(WeatherObject *self, void *closure)
 {
-	return PySAM_string_getter(SAM_Geothermal_Weather_file_sget, self->data_ptr);
+	return PySAM_string_getter(SAM_Geothermal_Weather_file_name_sget, self->data_ptr);
 }
 
 static int
 Weather_set_file_name(WeatherObject *self, PyObject *value, void *closure)
 {
-	return PySAM_string_setter(value, SAM_Geothermal_Weather_file_sset, self->data_ptr);
+	return PySAM_string_setter(value, SAM_Geothermal_Weather_file_name_sset, self->data_ptr);
 }
 
 static PyGetSetDef Weather_getset[] = {
@@ -1924,7 +1924,7 @@ Geothermal_assign(GeothermalObject *self, PyObject *args)
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_nested_dict(self, self->x_attr, self->data_ptr, dict, "Geothermal"))
+	if (!PySAM_assign_from_nested_dict((PyObject*)self, self->x_attr, self->data_ptr, dict, "Geothermal"))
 		return NULL;
 
 	Py_INCREF(Py_None);
@@ -2050,7 +2050,7 @@ Geothermal_default(PyObject *self, PyObject *args)
 	if (rv == NULL)
 		return NULL;
 
-	PySAM_load_defaults(rv, rv->x_attr, rv->data_ptr, "Geothermal", fin);
+	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Geothermal", fin);
 
 	return (PyObject *)rv;
 }

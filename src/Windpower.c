@@ -79,13 +79,13 @@ WindResourceFile_set_wind_resource_data(WindResourceFileObject *self, PyObject *
 static PyObject *
 WindResourceFile_get_wind_resource_filename(WindResourceFileObject *self, void *closure)
 {
-	return PySAM_string_getter(SAM_Windpower_WindResourceFile_file_sget, self->data_ptr);
+	return PySAM_string_getter(SAM_Windpower_WindResourceFile_wind_resource_filename_sget, self->data_ptr);
 }
 
 static int
 WindResourceFile_set_wind_resource_filename(WindResourceFileObject *self, PyObject *value, void *closure)
 {
-	return PySAM_string_setter(value, SAM_Windpower_WindResourceFile_file_sset, self->data_ptr);
+	return PySAM_string_setter(value, SAM_Windpower_WindResourceFile_wind_resource_filename_sset, self->data_ptr);
 }
 
 static PyGetSetDef WindResourceFile_getset[] = {
@@ -1198,7 +1198,7 @@ Windpower_assign(WindpowerObject *self, PyObject *args)
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_nested_dict(self, self->x_attr, self->data_ptr, dict, "Windpower"))
+	if (!PySAM_assign_from_nested_dict((PyObject*)self, self->x_attr, self->data_ptr, dict, "Windpower"))
 		return NULL;
 
 	Py_INCREF(Py_None);
@@ -1324,7 +1324,7 @@ Windpower_default(PyObject *self, PyObject *args)
 	if (rv == NULL)
 		return NULL;
 
-	PySAM_load_defaults(rv, rv->x_attr, rv->data_ptr, "Windpower", fin);
+	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Windpower", fin);
 
 	return (PyObject *)rv;
 }
