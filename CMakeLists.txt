@@ -30,10 +30,10 @@ set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG}")
 unset(SSC_LIB CACHE)
 unset(SAM_API_LIB CACHE)
 find_library( SSC_LIB
-        NAMES libsscd.so sscd.lib
+        NAMES libssc.so ssc.lib
         PATHS data )
 find_library( SAM_API_LIB
-        NAMES libSAM_apid.so SAM_apid.lib
+        NAMES libSAM_api.so SAM_api.lib
         PATHS data)
 target_link_libraries(pysam ${SSC_LIB} ${SAM_API_LIB})
 

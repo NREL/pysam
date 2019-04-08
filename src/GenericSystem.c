@@ -221,39 +221,39 @@ static PyTypeObject Plant_Type = {
 
 
 	/*
-	 * Common Group
+	 * Lifetime Group
 	 */ 
 
 typedef struct {
 	PyObject_HEAD
 	SAM_GenericSystem   data_ptr;
-} CommonObject;
+} LifetimeObject;
 
-static PyTypeObject Common_Type;
+static PyTypeObject Lifetime_Type;
 
 static PyObject *
-Common_new(SAM_GenericSystem data_ptr)
+Lifetime_new(SAM_GenericSystem data_ptr)
 {
-	PyObject* new_obj = Common_Type.tp_alloc(&Common_Type,0);
+	PyObject* new_obj = Lifetime_Type.tp_alloc(&Lifetime_Type,0);
 
-	CommonObject* Common_obj = (CommonObject*)new_obj;
+	LifetimeObject* Lifetime_obj = (LifetimeObject*)new_obj;
 
-	Common_obj->data_ptr = data_ptr;
+	Lifetime_obj->data_ptr = data_ptr;
 
 	return new_obj;
 }
 
-/* Common methods */
+/* Lifetime methods */
 
 static PyObject *
-Common_assign(CommonObject *self, PyObject *args)
+Lifetime_assign(LifetimeObject *self, PyObject *args)
 {
 	PyObject* dict;
 	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "GenericSystem", "Common")){
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "GenericSystem", "Lifetime")){
 		return NULL;
 	}
 
@@ -262,76 +262,76 @@ Common_assign(CommonObject *self, PyObject *args)
 }
 
 static PyObject *
-Common_export(CommonObject *self, PyObject *args)
+Lifetime_export(LifetimeObject *self, PyObject *args)
 {
-	PyTypeObject* tp = &Common_Type;
+	PyTypeObject* tp = &Lifetime_Type;
 	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
 	return dict;
 }
 
-static PyMethodDef Common_methods[] = {
-		{"assign",            (PyCFunction)Common_assign,  METH_VARARGS,
+static PyMethodDef Lifetime_methods[] = {
+		{"assign",            (PyCFunction)Lifetime_assign,  METH_VARARGS,
 			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
-		{"export",            (PyCFunction)Common_export,  METH_VARARGS,
+		{"export",            (PyCFunction)Lifetime_export,  METH_VARARGS,
 			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 static PyObject *
-Common_get_analysis_period(CommonObject *self, void *closure)
+Lifetime_get_analysis_period(LifetimeObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_GenericSystem_Common_analysis_period_fget, self->data_ptr);
+	return PySAM_float_getter(SAM_GenericSystem_Lifetime_analysis_period_fget, self->data_ptr);
 }
 
 static int
-Common_set_analysis_period(CommonObject *self, PyObject *value, void *closure)
+Lifetime_set_analysis_period(LifetimeObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_GenericSystem_Common_analysis_period_fset, self->data_ptr);
+	return PySAM_float_setter(value, SAM_GenericSystem_Lifetime_analysis_period_fset, self->data_ptr);
 }
 
 static PyObject *
-Common_get_generic_degradation(CommonObject *self, void *closure)
+Lifetime_get_generic_degradation(LifetimeObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_GenericSystem_Common_generic_degradation_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_GenericSystem_Lifetime_generic_degradation_aget, self->data_ptr);
 }
 
 static int
-Common_set_generic_degradation(CommonObject *self, PyObject *value, void *closure)
+Lifetime_set_generic_degradation(LifetimeObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_GenericSystem_Common_generic_degradation_aset, self->data_ptr);
+		return PySAM_array_setter(value, SAM_GenericSystem_Lifetime_generic_degradation_aset, self->data_ptr);
 }
 
 static PyObject *
-Common_get_system_use_lifetime_output(CommonObject *self, void *closure)
+Lifetime_get_system_use_lifetime_output(LifetimeObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_GenericSystem_Common_system_use_lifetime_output_fget, self->data_ptr);
+	return PySAM_float_getter(SAM_GenericSystem_Lifetime_system_use_lifetime_output_fget, self->data_ptr);
 }
 
 static int
-Common_set_system_use_lifetime_output(CommonObject *self, PyObject *value, void *closure)
+Lifetime_set_system_use_lifetime_output(LifetimeObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_GenericSystem_Common_system_use_lifetime_output_fset, self->data_ptr);
+	return PySAM_float_setter(value, SAM_GenericSystem_Lifetime_system_use_lifetime_output_fset, self->data_ptr);
 }
 
-static PyGetSetDef Common_getset[] = {
-{"analysis_period", (getter)Common_get_analysis_period,(setter)Common_set_analysis_period,
+static PyGetSetDef Lifetime_getset[] = {
+{"analysis_period", (getter)Lifetime_get_analysis_period,(setter)Lifetime_set_analysis_period,
 	"Lifetime analysis period [years], number.\n Required if: system_use_lifetime_output=1.",
  	NULL},
-{"generic_degradation", (getter)Common_get_generic_degradation,(setter)Common_set_generic_degradation,
+{"generic_degradation", (getter)Lifetime_get_generic_degradation,(setter)Lifetime_set_generic_degradation,
 	"Annual module degradation [%/year], array.\n Required if: system_use_lifetime_output=1.",
  	NULL},
-{"system_use_lifetime_output", (getter)Common_get_system_use_lifetime_output,(setter)Common_set_system_use_lifetime_output,
+{"system_use_lifetime_output", (getter)Lifetime_get_system_use_lifetime_output,(setter)Lifetime_set_system_use_lifetime_output,
 	"Generic lifetime simulation [0/1], number.\n Constraints: INTEGER,MIN=0,MAX=1; Required if: ?=0.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
 
-static PyTypeObject Common_Type = {
+static PyTypeObject Lifetime_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"GenericSystem.Common",             /*tp_name*/
-		sizeof(CommonObject),          /*tp_basicsize*/
+		"GenericSystem.Lifetime",             /*tp_name*/
+		sizeof(LifetimeObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
 		0,    /*tp_dealloc*/
@@ -357,9 +357,9 @@ static PyTypeObject Common_Type = {
 		0,                          /*tp_weaklistoffset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
-		Common_methods,         /*tp_methods*/
+		Lifetime_methods,         /*tp_methods*/
 		0,                          /*tp_members*/
-		Common_getset,          /*tp_getset*/
+		Lifetime_getset,          /*tp_getset*/
 		0,                          /*tp_base*/
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
@@ -578,9 +578,9 @@ PyObject* Plant_obj = Plant_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Plant", Plant_obj);
 	Py_DECREF(Plant_obj);
 
-PyObject* Common_obj = Common_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "Common", Common_obj);
-	Py_DECREF(Common_obj);
+PyObject* Lifetime_obj = Lifetime_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "Lifetime", Lifetime_obj);
+	Py_DECREF(Lifetime_obj);
 
 PyObject* Outputs_obj = Outputs_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
@@ -653,7 +653,6 @@ GenericSystem_export(GenericSystemObject *self, PyObject *args)
 {
 	return PySAM_export_to_nested_dict((PyObject *) self, self->x_attr);
 }
-
 
 static PyMethodDef GenericSystem_methods[] = {
 		{"execute",            (PyCFunction)GenericSystem_execute,  METH_VARARGS,
@@ -779,14 +778,16 @@ GenericSystem_default(PyObject *self, PyObject *args)
 static PyMethodDef GenericSystemModule_methods[] = {
 		{"new",             GenericSystem_new,         METH_VARARGS,
 				PyDoc_STR("new() -> new GenericSystem object")},
-		{"wrap",             GenericSystem_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> new GenericSystem object around existing data")},
 		{"default",             GenericSystem_default,         METH_VARARGS,
-				PyDoc_STR("default(financial) -> new GenericSystem object with financial model-specific default attributes")},		{NULL,              NULL}           /* sentinel */
+				PyDoc_STR("default(financial) -> new GenericSystem object with financial model-specific default attributes\n"
+				"Options: All Equity Partnership Flip, None, LCOE Calculator, Independent Power Producer, Commercial, Third Party, Residential, Leveraged Partnership Flip, Single Owner, Sale Leaseback, Commercial PPA, Host Developer, ")},
+		{"wrap",             GenericSystem_wrap,         METH_VARARGS,
+				PyDoc_STR("wrap(ssc_data_t) -> new GenericSystem object around existing PySSC data")},
+		{NULL,              NULL}           /* sentinel */
 };
 
 PyDoc_STRVAR(module_doc,
-			 "This is a template module just for instruction.");
+			 "Refer to http://www.github.com/nrel/PySAM for source code.");
 
 
 static int
@@ -824,12 +825,12 @@ GenericSystemModule_exec(PyObject *m)
 				(PyObject*)&Plant_Type);
 	Py_DECREF(&Plant_Type);
 
-	/// Add the Common type object to GenericSystem_Type
-	if (PyType_Ready(&Common_Type) < 0) { goto fail; }
+	/// Add the Lifetime type object to GenericSystem_Type
+	if (PyType_Ready(&Lifetime_Type) < 0) { goto fail; }
 	PyDict_SetItemString(GenericSystem_Type.tp_dict,
-				"Common",
-				(PyObject*)&Common_Type);
-	Py_DECREF(&Common_Type);
+				"Lifetime",
+				(PyObject*)&Lifetime_Type);
+	Py_DECREF(&Lifetime_Type);
 
 	/// Add the Outputs type object to GenericSystem_Type
 	if (PyType_Ready(&Outputs_Type) < 0) { goto fail; }

@@ -2501,7 +2501,6 @@ Biomass_export(BiomassObject *self, PyObject *args)
 	return PySAM_export_to_nested_dict((PyObject *) self, self->x_attr);
 }
 
-
 static PyMethodDef Biomass_methods[] = {
 		{"execute",            (PyCFunction)Biomass_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
@@ -2626,14 +2625,16 @@ Biomass_default(PyObject *self, PyObject *args)
 static PyMethodDef BiomassModule_methods[] = {
 		{"new",             Biomass_new,         METH_VARARGS,
 				PyDoc_STR("new() -> new Biomass object")},
-		{"wrap",             Biomass_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> new Biomass object around existing data")},
 		{"default",             Biomass_default,         METH_VARARGS,
-				PyDoc_STR("default(financial) -> new Biomass object with financial model-specific default attributes")},		{NULL,              NULL}           /* sentinel */
+				PyDoc_STR("default(financial) -> new Biomass object with financial model-specific default attributes\n"
+				"Options: None, LCOE Calculator, Single Owner, Sale Leaseback, All Equity Partnership Flip, Independent Power Producer, Commercial PPA, Leveraged Partnership Flip, Commercial, ")},
+		{"wrap",             Biomass_wrap,         METH_VARARGS,
+				PyDoc_STR("wrap(ssc_data_t) -> new Biomass object around existing PySSC data")},
+		{NULL,              NULL}           /* sentinel */
 };
 
 PyDoc_STRVAR(module_doc,
-			 "This is a template module just for instruction.");
+			 "Refer to http://www.github.com/nrel/PySAM for source code.");
 
 
 static int

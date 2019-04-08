@@ -5235,7 +5235,6 @@ TcstroughPhysical_export(TcstroughPhysicalObject *self, PyObject *args)
 	return PySAM_export_to_nested_dict((PyObject *) self, self->x_attr);
 }
 
-
 static PyMethodDef TcstroughPhysical_methods[] = {
 		{"execute",            (PyCFunction)TcstroughPhysical_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
@@ -5360,14 +5359,16 @@ TcstroughPhysical_default(PyObject *self, PyObject *args)
 static PyMethodDef TcstroughPhysicalModule_methods[] = {
 		{"new",             TcstroughPhysical_new,         METH_VARARGS,
 				PyDoc_STR("new() -> new TcstroughPhysical object")},
-		{"wrap",             TcstroughPhysical_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> new TcstroughPhysical object around existing data")},
 		{"default",             TcstroughPhysical_default,         METH_VARARGS,
-				PyDoc_STR("default(financial) -> new TcstroughPhysical object with financial model-specific default attributes")},		{NULL,              NULL}           /* sentinel */
+				PyDoc_STR("default(financial) -> new TcstroughPhysical object with financial model-specific default attributes\n"
+				"Options: IPH-LCOH Calculator, Single Owner, Commercial, Sale Leaseback, None, LCOE Calculator, IPH-None, All Equity Partnership Flip, Independent Power Producer, Leveraged Partnership Flip, ")},
+		{"wrap",             TcstroughPhysical_wrap,         METH_VARARGS,
+				PyDoc_STR("wrap(ssc_data_t) -> new TcstroughPhysical object around existing PySSC data")},
+		{NULL,              NULL}           /* sentinel */
 };
 
 PyDoc_STRVAR(module_doc,
-			 "This is a template module just for instruction.");
+			 "Refer to http://www.github.com/nrel/PySAM for source code.");
 
 
 static int

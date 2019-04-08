@@ -1938,7 +1938,6 @@ Geothermal_export(GeothermalObject *self, PyObject *args)
 	return PySAM_export_to_nested_dict((PyObject *) self, self->x_attr);
 }
 
-
 static PyMethodDef Geothermal_methods[] = {
 		{"execute",            (PyCFunction)Geothermal_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
@@ -2063,14 +2062,16 @@ Geothermal_default(PyObject *self, PyObject *args)
 static PyMethodDef GeothermalModule_methods[] = {
 		{"new",             Geothermal_new,         METH_VARARGS,
 				PyDoc_STR("new() -> new Geothermal object")},
-		{"wrap",             Geothermal_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> new Geothermal object around existing data")},
 		{"default",             Geothermal_default,         METH_VARARGS,
-				PyDoc_STR("default(financial) -> new Geothermal object with financial model-specific default attributes")},		{NULL,              NULL}           /* sentinel */
+				PyDoc_STR("default(financial) -> new Geothermal object with financial model-specific default attributes\n"
+				"Options: Leveraged Partnership Flip, Single Owner, None, Sale Leaseback, All Equity Partnership Flip, Independent Power Producer, LCOE Calculator, ")},
+		{"wrap",             Geothermal_wrap,         METH_VARARGS,
+				PyDoc_STR("wrap(ssc_data_t) -> new Geothermal object around existing PySSC data")},
+		{NULL,              NULL}           /* sentinel */
 };
 
 PyDoc_STRVAR(module_doc,
-			 "This is a template module just for instruction.");
+			 "Refer to http://www.github.com/nrel/PySAM for source code.");
 
 
 static int

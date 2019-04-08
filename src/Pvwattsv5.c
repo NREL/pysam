@@ -978,7 +978,6 @@ Pvwattsv5_export(Pvwattsv5Object *self, PyObject *args)
 	return PySAM_export_to_nested_dict((PyObject *) self, self->x_attr);
 }
 
-
 static PyMethodDef Pvwattsv5_methods[] = {
 		{"execute",            (PyCFunction)Pvwattsv5_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
@@ -1103,14 +1102,16 @@ Pvwattsv5_default(PyObject *self, PyObject *args)
 static PyMethodDef Pvwattsv5Module_methods[] = {
 		{"new",             Pvwattsv5_new,         METH_VARARGS,
 				PyDoc_STR("new() -> new Pvwattsv5 object")},
-		{"wrap",             Pvwattsv5_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> new Pvwattsv5 object around existing data")},
 		{"default",             Pvwattsv5_default,         METH_VARARGS,
-				PyDoc_STR("default(financial) -> new Pvwattsv5 object with financial model-specific default attributes")},		{NULL,              NULL}           /* sentinel */
+				PyDoc_STR("default(financial) -> new Pvwattsv5 object with financial model-specific default attributes\n"
+				"Options: Single Owner, None, Sale Leaseback, Commercial, Residential, Third Party, Commercial PPA, Host Developer, Leveraged Partnership Flip, Independent Power Producer, All Equity Partnership Flip, LCOE Calculator, ")},
+		{"wrap",             Pvwattsv5_wrap,         METH_VARARGS,
+				PyDoc_STR("wrap(ssc_data_t) -> new Pvwattsv5 object around existing PySSC data")},
+		{NULL,              NULL}           /* sentinel */
 };
 
 PyDoc_STRVAR(module_doc,
-			 "This is a template module just for instruction.");
+			 "Refer to http://www.github.com/nrel/PySAM for source code.");
 
 
 static int

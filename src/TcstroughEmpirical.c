@@ -3598,7 +3598,6 @@ TcstroughEmpirical_export(TcstroughEmpiricalObject *self, PyObject *args)
 	return PySAM_export_to_nested_dict((PyObject *) self, self->x_attr);
 }
 
-
 static PyMethodDef TcstroughEmpirical_methods[] = {
 		{"execute",            (PyCFunction)TcstroughEmpirical_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
@@ -3723,14 +3722,16 @@ TcstroughEmpirical_default(PyObject *self, PyObject *args)
 static PyMethodDef TcstroughEmpiricalModule_methods[] = {
 		{"new",             TcstroughEmpirical_new,         METH_VARARGS,
 				PyDoc_STR("new() -> new TcstroughEmpirical object")},
-		{"wrap",             TcstroughEmpirical_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> new TcstroughEmpirical object around existing data")},
 		{"default",             TcstroughEmpirical_default,         METH_VARARGS,
-				PyDoc_STR("default(financial) -> new TcstroughEmpirical object with financial model-specific default attributes")},		{NULL,              NULL}           /* sentinel */
+				PyDoc_STR("default(financial) -> new TcstroughEmpirical object with financial model-specific default attributes\n"
+				"Options: LCOE Calculator, Independent Power Producer, Commercial, Commercial PPA, Leveraged Partnership Flip, Single Owner, None, All Equity Partnership Flip, Sale Leaseback, ")},
+		{"wrap",             TcstroughEmpirical_wrap,         METH_VARARGS,
+				PyDoc_STR("wrap(ssc_data_t) -> new TcstroughEmpirical object around existing PySSC data")},
+		{NULL,              NULL}           /* sentinel */
 };
 
 PyDoc_STRVAR(module_doc,
-			 "This is a template module just for instruction.");
+			 "Refer to http://www.github.com/nrel/PySAM for source code.");
 
 
 static int

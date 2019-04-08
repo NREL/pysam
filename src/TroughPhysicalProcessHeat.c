@@ -3413,7 +3413,6 @@ TroughPhysicalProcessHeat_export(TroughPhysicalProcessHeatObject *self, PyObject
 	return PySAM_export_to_nested_dict((PyObject *) self, self->x_attr);
 }
 
-
 static PyMethodDef TroughPhysicalProcessHeat_methods[] = {
 		{"execute",            (PyCFunction)TroughPhysicalProcessHeat_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
@@ -3538,14 +3537,16 @@ TroughPhysicalProcessHeat_default(PyObject *self, PyObject *args)
 static PyMethodDef TroughPhysicalProcessHeatModule_methods[] = {
 		{"new",             TroughPhysicalProcessHeat_new,         METH_VARARGS,
 				PyDoc_STR("new() -> new TroughPhysicalProcessHeat object")},
-		{"wrap",             TroughPhysicalProcessHeat_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> new TroughPhysicalProcessHeat object around existing data")},
 		{"default",             TroughPhysicalProcessHeat_default,         METH_VARARGS,
-				PyDoc_STR("default(financial) -> new TroughPhysicalProcessHeat object with financial model-specific default attributes")},		{NULL,              NULL}           /* sentinel */
+				PyDoc_STR("default(financial) -> new TroughPhysicalProcessHeat object with financial model-specific default attributes\n"
+				"Options: LCOH Calculator, None, ")},
+		{"wrap",             TroughPhysicalProcessHeat_wrap,         METH_VARARGS,
+				PyDoc_STR("wrap(ssc_data_t) -> new TroughPhysicalProcessHeat object around existing PySSC data")},
+		{NULL,              NULL}           /* sentinel */
 };
 
 PyDoc_STRVAR(module_doc,
-			 "This is a template module just for instruction.");
+			 "Refer to http://www.github.com/nrel/PySAM for source code.");
 
 
 static int
