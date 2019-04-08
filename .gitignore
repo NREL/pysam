@@ -12,6 +12,7 @@ cmake-build-release/
 env/
 venv/
 venv34/
+venv35/
 
 #distributions
 dist/

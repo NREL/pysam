@@ -7,7 +7,7 @@
 #include <string>
 
 #include "visibility.h"
-#include "SAM_api.h"
+#include "include/SAM_api.h"
 
 extern "C" {
 
@@ -39,7 +39,9 @@ static bool translateExceptions(SAM_error* out_error, Fn&& fn)
     return true;
 }
 
-void make_access_error(std::string obj_name, std::string var);
+void make_access_error(
+        const std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > &obj_name,
+        const std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > &var);
 
 //
 // Error handling

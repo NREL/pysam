@@ -6,10 +6,11 @@
 
 #include <Python.h>
 
-#include "SAM_api.h"
+#include "include/SAM_api.h"
 #include "SAM_GenericSystem.h"
 
-//static PyObject *ErrorObject;
+static PyObject *ErrorObject;
+
 
 // construct
 static PyObject *
