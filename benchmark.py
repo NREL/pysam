@@ -267,3 +267,14 @@ def test4(n):
     print("Time w/o importing w/ dict:\t", round(t_old,5), "\t", round(t_new, 5), "\t", round(t_old/t_new,5))
 
 
+
+for n in (1,5,20,100):
+
+    print("Testing over", n, "loops:\t\t t_old\t\tt_new\t\tfactor")
+
+    test1(n)
+    test2(n)
+    test3(n)
+    test4(n)
+
+    print()

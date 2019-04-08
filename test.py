@@ -202,14 +202,13 @@ while round < 50:
     n_tests_passed += 1
 
     c = Pvwattsv5.new()
-    dat = {'yo': 0}
-    datDict = {'num': 1, 'arr': (1, 2),  'str': 'str', 'mat': ((1, 2), (3, 4)), 'table': dat}
+    datDict = {'num': 1, 'arr': (1, 2),  'str': 'str', 'mat': ((1, 2), (3, 4)), 'table': {'yo': 0}}
     c.LocationAndResource.solar_resource_data = datDict
     DataDict = c.LocationAndResource.solar_resource_data
     assert(DataDict['num'] == 1 and DataDict['arr'] == (1, 2))
     assert(DataDict['mat'] == ((1.0, 2.0), (3.0, 4.0)))
     assert(DataDict['str'] == 'str')
-    assert(DataDict['table'] == dat)
+    assert(DataDict['table'] == {'yo': 0})
     print("Passed test", 16)
     n_tests_passed += 1
 
@@ -223,7 +222,7 @@ while round < 50:
 
     try:
         c = Pvwattsv5.new()
-        c.LocationAndResource.solar_resource_data = {'num': 1, 'arr': (1, "2"), 'mat': ((1, 2), (3, 4)), 'str': 'str', 'table': dat}
+        c.LocationAndResource.solar_resource_data = {'num': 1, 'arr': (1, "2"), 'mat': ((1, 2), (3, 4)), 'str': 'str', 'table': {'yo': 0}}
         print("FAIL 6: exception is expected")
     except:
         print("Error caught", 6)
@@ -231,7 +230,7 @@ while round < 50:
 
     try:
         c = Pvwattsv5.new()
-        c.LocationAndResource.solar_resource_data = {'num': 1, 'arr': (1, 2), 'mat': (("1",2 ), (3, 4)), 'str': 'str', 'table': {'yo': 0}}
+        c.LocationAndResource.solar_resource_data = {'num': 1, 'arr': (1, 2), 'mat': (("1", 2), (3, 4)), 'str': 'str', 'table': {'yo': 0}}
         print("FAIL 7: exception is expected")
     except:
         print("Error caught", 7)
@@ -274,10 +273,10 @@ while round < 50:
 tracker.print_diff()
 
 
-sf = "/Users/dguittet/SAM-Dev/sam/deploy/solar_resource/tucson_az_32.116521_-110.933042_psmv3_60_tmy.csv"
-sf2 = "/Users/dguittet/SAM-Dev/sam/deploy/solar_resource/phoenix_az_33.450495_-111.983688_psmv3_60_tmy.csv"
-sf3 = '/Users/dguittet/SAM-Dev/sam/deploy/solar_resource/fargo_nd_46.9_-96.8_mts1_60_tmy.csv'
-wf = "/Users/dguittet/SAM-Dev/sam/deploy/wind_resource/OH Northern-Lake.srw"
+sf = "../sam/deploy/solar_resource/tucson_az_32.116521_-110.933042_psmv3_60_tmy.csv"
+sf2 = "../sam/deploy/solar_resource/phoenix_az_33.450495_-111.983688_psmv3_60_tmy.csv"
+sf3 = '../sam/deploy/solar_resource/fargo_nd_46.9_-96.8_mts1_60_tmy.csv'
+wf = "../sam/deploy/wind_resource/OH Northern-Lake.srw"
 def assign_file(mod, i):
     if mod == "TcsmoltenSalt" or mod == "Pvwattsv5Lifetime" or mod == "TcsdirectSteam":
         m = i.default("SingleOwner")

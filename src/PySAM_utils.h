@@ -385,12 +385,16 @@ static SAM_table PySAM_dict_to_table(PyObject* dict){
         }
         else {
             data_tab = PySAM_dict_to_table(value);
+
             if (!data_tab)
                 return NULL;
+
             SAM_error error = new_error();
             SAM_table_set_table(table, name, data_tab, &error);
             if (PySAM_has_error(error)) goto fail;
+
             SAM_table_destruct(data_tab, NULL);
+            data_tab = NULL;
         }
         Py_DECREF(ascii_mystring);
     }

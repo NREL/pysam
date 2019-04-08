@@ -10,9 +10,7 @@ cmake-build-release/
 
 #python virutal environments
 env/
-venv/
-venv34/
-venv35/
+venv*/
 __pycache__
 
 #distributions
