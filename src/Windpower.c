@@ -79,13 +79,13 @@ WindResourceFile_set_wind_resource_data(WindResourceFileObject *self, PyObject *
 static PyObject *
 WindResourceFile_get_wind_resource_filename(WindResourceFileObject *self, void *closure)
 {
-	return PySAM_string_getter(SAM_Windpower_WindResourceFile_file_sget, self->data_ptr);
+	return PySAM_string_getter(SAM_Windpower_WindResourceFile_wind_resource_filename_sget, self->data_ptr);
 }
 
 static int
 WindResourceFile_set_wind_resource_filename(WindResourceFileObject *self, PyObject *value, void *closure)
 {
-	return PySAM_string_setter(value, SAM_Windpower_WindResourceFile_file_sset, self->data_ptr);
+	return PySAM_string_setter(value, SAM_Windpower_WindResourceFile_wind_resource_filename_sset, self->data_ptr);
 }
 
 static PyGetSetDef WindResourceFile_getset[] = {
@@ -1198,7 +1198,7 @@ Windpower_assign(WindpowerObject *self, PyObject *args)
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_nested_dict(self, self->x_attr, self->data_ptr, dict, "Windpower"))
+	if (!PySAM_assign_from_nested_dict((PyObject*)self, self->x_attr, self->data_ptr, dict, "Windpower"))
 		return NULL;
 
 	Py_INCREF(Py_None);
@@ -1211,7 +1211,6 @@ Windpower_export(WindpowerObject *self, PyObject *args)
 {
 	return PySAM_export_to_nested_dict((PyObject *) self, self->x_attr);
 }
-
 
 static PyMethodDef Windpower_methods[] = {
 		{"execute",            (PyCFunction)Windpower_execute,  METH_VARARGS,
@@ -1324,7 +1323,7 @@ Windpower_default(PyObject *self, PyObject *args)
 	if (rv == NULL)
 		return NULL;
 
-	PySAM_load_defaults(rv, rv->x_attr, rv->data_ptr, "Windpower", fin);
+	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Windpower", fin);
 
 	return (PyObject *)rv;
 }
@@ -1337,14 +1336,16 @@ Windpower_default(PyObject *self, PyObject *args)
 static PyMethodDef WindpowerModule_methods[] = {
 		{"new",             Windpower_new,         METH_VARARGS,
 				PyDoc_STR("new() -> new Windpower object")},
-		{"wrap",             Windpower_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> new Windpower object around existing data")},
 		{"default",             Windpower_default,         METH_VARARGS,
-				PyDoc_STR("default(financial) -> new Windpower object with financial model-specific default attributes")},		{NULL,              NULL}           /* sentinel */
+				PyDoc_STR("default(financial) -> new Windpower object with financial model-specific default attributes\n"
+				"Options: Sale Leaseback, Leveraged Partnership Flip, Single Owner, LCOE Calculator, All Equity Partnership Flip, Residential, Commercial PPA, Independent Power Producer, Commercial, None, ")},
+		{"wrap",             Windpower_wrap,         METH_VARARGS,
+				PyDoc_STR("wrap(ssc_data_t) -> new Windpower object around existing PySSC data")},
+		{NULL,              NULL}           /* sentinel */
 };
 
 PyDoc_STRVAR(module_doc,
-			 "This is a template module just for instruction.");
+			 "Refer to http://www.github.com/nrel/PySAM for source code.");
 
 
 static int

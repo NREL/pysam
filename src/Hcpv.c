@@ -67,13 +67,13 @@ static PyMethodDef SolarResourceData_methods[] = {
 static PyObject *
 SolarResourceData_get_file_name(SolarResourceDataObject *self, void *closure)
 {
-	return PySAM_string_getter(SAM_Hcpv_SolarResourceData_file_sget, self->data_ptr);
+	return PySAM_string_getter(SAM_Hcpv_SolarResourceData_file_name_sget, self->data_ptr);
 }
 
 static int
 SolarResourceData_set_file_name(SolarResourceDataObject *self, PyObject *value, void *closure)
 {
-	return PySAM_string_setter(value, SAM_Hcpv_SolarResourceData_file_sset, self->data_ptr);
+	return PySAM_string_setter(value, SAM_Hcpv_SolarResourceData_file_name_sset, self->data_ptr);
 }
 
 static PyGetSetDef SolarResourceData_getset[] = {
@@ -1792,7 +1792,7 @@ Hcpv_assign(HcpvObject *self, PyObject *args)
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_nested_dict(self, self->x_attr, self->data_ptr, dict, "Hcpv"))
+	if (!PySAM_assign_from_nested_dict((PyObject*)self, self->x_attr, self->data_ptr, dict, "Hcpv"))
 		return NULL;
 
 	Py_INCREF(Py_None);
@@ -1805,7 +1805,6 @@ Hcpv_export(HcpvObject *self, PyObject *args)
 {
 	return PySAM_export_to_nested_dict((PyObject *) self, self->x_attr);
 }
-
 
 static PyMethodDef Hcpv_methods[] = {
 		{"execute",            (PyCFunction)Hcpv_execute,  METH_VARARGS,
@@ -1918,7 +1917,7 @@ Hcpv_default(PyObject *self, PyObject *args)
 	if (rv == NULL)
 		return NULL;
 
-	PySAM_load_defaults(rv, rv->x_attr, rv->data_ptr, "Hcpv", fin);
+	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Hcpv", fin);
 
 	return (PyObject *)rv;
 }
@@ -1931,14 +1930,16 @@ Hcpv_default(PyObject *self, PyObject *args)
 static PyMethodDef HcpvModule_methods[] = {
 		{"new",             Hcpv_new,         METH_VARARGS,
 				PyDoc_STR("new() -> new Hcpv object")},
-		{"wrap",             Hcpv_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> new Hcpv object around existing data")},
 		{"default",             Hcpv_default,         METH_VARARGS,
-				PyDoc_STR("default(financial) -> new Hcpv object with financial model-specific default attributes")},		{NULL,              NULL}           /* sentinel */
+				PyDoc_STR("default(financial) -> new Hcpv object with financial model-specific default attributes\n"
+				"Options: None, LCOE Calculator, Sale Leaseback, All Equity Partnership Flip, Independent Power Producer, Leveraged Partnership Flip, Single Owner, ")},
+		{"wrap",             Hcpv_wrap,         METH_VARARGS,
+				PyDoc_STR("wrap(ssc_data_t) -> new Hcpv object around existing PySSC data")},
+		{NULL,              NULL}           /* sentinel */
 };
 
 PyDoc_STRVAR(module_doc,
-			 "This is a template module just for instruction.");
+			 "Refer to http://www.github.com/nrel/PySAM for source code.");
 
 
 static int

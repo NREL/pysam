@@ -67,13 +67,13 @@ static PyMethodDef Weather_methods[] = {
 static PyObject *
 Weather_get_solar_resource_file(WeatherObject *self, void *closure)
 {
-	return PySAM_string_getter(SAM_Swh_Weather_file_sget, self->data_ptr);
+	return PySAM_string_getter(SAM_Swh_Weather_solar_resource_file_sget, self->data_ptr);
 }
 
 static int
 Weather_set_solar_resource_file(WeatherObject *self, PyObject *value, void *closure)
 {
-	return PySAM_string_setter(value, SAM_Swh_Weather_file_sset, self->data_ptr);
+	return PySAM_string_setter(value, SAM_Swh_Weather_solar_resource_file_sset, self->data_ptr);
 }
 
 static PyGetSetDef Weather_getset[] = {
@@ -488,15 +488,51 @@ SWH_set_scaled_draw(SWHObject *self, PyObject *value, void *closure)
 }
 
 static PyObject *
-SWH_get_shading(SWHObject *self, void *closure)
+SWH_get_shading_azal(SWHObject *self, void *closure)
 {
-	return PySAM_table_getter(SAM_Swh_SWH_shading_tget, self->data_ptr);
+	return PySAM_matrix_getter(SAM_Swh_SWH_shading_azal_mget, self->data_ptr);
 }
 
 static int
-SWH_set_shading(SWHObject *self, PyObject *value, void *closure)
+SWH_set_shading_azal(SWHObject *self, PyObject *value, void *closure)
 {
-	return PySAM_table_setter(value, SAM_Swh_SWH_shading_tset, self->data_ptr);
+		return PySAM_matrix_setter(value, SAM_Swh_SWH_shading_azal_mset, self->data_ptr);
+}
+
+static PyObject *
+SWH_get_shading_diff(SWHObject *self, void *closure)
+{
+	return PySAM_float_getter(SAM_Swh_SWH_shading_diff_fget, self->data_ptr);
+}
+
+static int
+SWH_set_shading_diff(SWHObject *self, PyObject *value, void *closure)
+{
+	return PySAM_float_setter(value, SAM_Swh_SWH_shading_diff_fset, self->data_ptr);
+}
+
+static PyObject *
+SWH_get_shading_mxh(SWHObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Swh_SWH_shading_mxh_mget, self->data_ptr);
+}
+
+static int
+SWH_set_shading_mxh(SWHObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Swh_SWH_shading_mxh_mset, self->data_ptr);
+}
+
+static PyObject *
+SWH_get_shading_timestep(SWHObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Swh_SWH_shading_timestep_mget, self->data_ptr);
+}
+
+static int
+SWH_set_shading_timestep(SWHObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Swh_SWH_shading_timestep_mset, self->data_ptr);
 }
 
 static PyObject *
@@ -671,8 +707,17 @@ static PyGetSetDef SWH_getset[] = {
 {"scaled_draw", (getter)SWH_get_scaled_draw,(setter)SWH_set_scaled_draw,
 	"Hot water draw [kg/hr], array.\n Constraints: LENGTH=8760; Required if: *.",
  	NULL},
-{"shading", (getter)SWH_get_shading,(setter)SWH_set_shading,
-	", table.\n ",
+{"shading_azal", (getter)SWH_get_shading_azal,(setter)SWH_set_shading_azal,
+	"Azimuth x altitude beam shading loss [%], matrix.\n Required if: ?.",
+ 	NULL},
+{"shading_diff", (getter)SWH_get_shading_diff,(setter)SWH_set_shading_diff,
+	"Diffuse shading loss [%], number.\n Required if: ?.",
+ 	NULL},
+{"shading_mxh", (getter)SWH_get_shading_mxh,(setter)SWH_set_shading_mxh,
+	"Month x Hour beam shading loss [%], matrix.\n Required if: ?.",
+ 	NULL},
+{"shading_timestep", (getter)SWH_get_shading_timestep,(setter)SWH_set_shading_timestep,
+	"Time step beam shading loss [%], matrix.\n Required if: ?.",
  	NULL},
 {"sky_model", (getter)SWH_get_sky_model,(setter)SWH_set_sky_model,
 	"Tilted surface irradiance model [0/1/2], number.\n Isotropic,HDKR,Perez; Constraints: INTEGER,MIN=0,MAX=2; Required if: ?=1.",
@@ -1258,7 +1303,7 @@ Swh_assign(SwhObject *self, PyObject *args)
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_nested_dict(self, self->x_attr, self->data_ptr, dict, "Swh"))
+	if (!PySAM_assign_from_nested_dict((PyObject*)self, self->x_attr, self->data_ptr, dict, "Swh"))
 		return NULL;
 
 	Py_INCREF(Py_None);
@@ -1271,7 +1316,6 @@ Swh_export(SwhObject *self, PyObject *args)
 {
 	return PySAM_export_to_nested_dict((PyObject *) self, self->x_attr);
 }
-
 
 static PyMethodDef Swh_methods[] = {
 		{"execute",            (PyCFunction)Swh_execute,  METH_VARARGS,
@@ -1384,7 +1428,7 @@ Swh_default(PyObject *self, PyObject *args)
 	if (rv == NULL)
 		return NULL;
 
-	PySAM_load_defaults(rv, rv->x_attr, rv->data_ptr, "Swh", fin);
+	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Swh", fin);
 
 	return (PyObject *)rv;
 }
@@ -1397,14 +1441,16 @@ Swh_default(PyObject *self, PyObject *args)
 static PyMethodDef SwhModule_methods[] = {
 		{"new",             Swh_new,         METH_VARARGS,
 				PyDoc_STR("new() -> new Swh object")},
-		{"wrap",             Swh_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> new Swh object around existing data")},
 		{"default",             Swh_default,         METH_VARARGS,
-				PyDoc_STR("default(financial) -> new Swh object with financial model-specific default attributes")},		{NULL,              NULL}           /* sentinel */
+				PyDoc_STR("default(financial) -> new Swh object with financial model-specific default attributes\n"
+				"Options: Commercial, None, Residential, LCOE Calculator, ")},
+		{"wrap",             Swh_wrap,         METH_VARARGS,
+				PyDoc_STR("wrap(ssc_data_t) -> new Swh object around existing PySSC data")},
+		{NULL,              NULL}           /* sentinel */
 };
 
 PyDoc_STRVAR(module_doc,
-			 "This is a template module just for instruction.");
+			 "Refer to http://www.github.com/nrel/PySAM for source code.");
 
 
 static int

@@ -11,16 +11,15 @@ static char* SAM_lib_dir = NULL;
 static char* SAM_lib_path = NULL;
 #if defined(__WINDOWS__) || defined(__CYGWIN__)
 static const char SAM_sep = '\\';
-static char* SAM_lib = "SAM_apid.lib";
+static char* SAM_lib = "SAM_api.lib";
 #else
 static const char SAM_sep = '/';
-static char* SAM_lib = "libSAM_apid.so";
+static char* SAM_lib = "libSAM_api.so";
 #endif
 
 static void* SAM_lib_handle = NULL;
 
 static PyObject *PySAM_ErrorObject;
-
 
 static int PySAM_load_lib(PyObject* m){
     if (!SAM_lib_path){
@@ -907,6 +906,7 @@ static int PySAM_load_defaults(PyObject* self, PyObject* x_attr, void* data_ptr,
 
     if (PySAM_assign_from_nested_dict(self, x_attr, data_ptr, dict, tech) < 0)
         return -1;
+    Py_DECREF(dict);
     return 0;
 }
 

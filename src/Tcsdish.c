@@ -67,13 +67,13 @@ static PyMethodDef Weather_methods[] = {
 static PyObject *
 Weather_get_file_name(WeatherObject *self, void *closure)
 {
-	return PySAM_string_getter(SAM_Tcsdish_Weather_file_sget, self->data_ptr);
+	return PySAM_string_getter(SAM_Tcsdish_Weather_file_name_sget, self->data_ptr);
 }
 
 static int
 Weather_set_file_name(WeatherObject *self, PyObject *value, void *closure)
 {
-	return PySAM_string_setter(value, SAM_Tcsdish_Weather_file_sset, self->data_ptr);
+	return PySAM_string_setter(value, SAM_Tcsdish_Weather_file_name_sset, self->data_ptr);
 }
 
 static PyGetSetDef Weather_getset[] = {
@@ -2582,7 +2582,7 @@ Tcsdish_assign(TcsdishObject *self, PyObject *args)
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_nested_dict(self, self->x_attr, self->data_ptr, dict, "Tcsdish"))
+	if (!PySAM_assign_from_nested_dict((PyObject*)self, self->x_attr, self->data_ptr, dict, "Tcsdish"))
 		return NULL;
 
 	Py_INCREF(Py_None);
@@ -2595,7 +2595,6 @@ Tcsdish_export(TcsdishObject *self, PyObject *args)
 {
 	return PySAM_export_to_nested_dict((PyObject *) self, self->x_attr);
 }
-
 
 static PyMethodDef Tcsdish_methods[] = {
 		{"execute",            (PyCFunction)Tcsdish_execute,  METH_VARARGS,
@@ -2708,7 +2707,7 @@ Tcsdish_default(PyObject *self, PyObject *args)
 	if (rv == NULL)
 		return NULL;
 
-	PySAM_load_defaults(rv, rv->x_attr, rv->data_ptr, "Tcsdish", fin);
+	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Tcsdish", fin);
 
 	return (PyObject *)rv;
 }
@@ -2721,14 +2720,16 @@ Tcsdish_default(PyObject *self, PyObject *args)
 static PyMethodDef TcsdishModule_methods[] = {
 		{"new",             Tcsdish_new,         METH_VARARGS,
 				PyDoc_STR("new() -> new Tcsdish object")},
-		{"wrap",             Tcsdish_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> new Tcsdish object around existing data")},
 		{"default",             Tcsdish_default,         METH_VARARGS,
-				PyDoc_STR("default(financial) -> new Tcsdish object with financial model-specific default attributes")},		{NULL,              NULL}           /* sentinel */
+				PyDoc_STR("default(financial) -> new Tcsdish object with financial model-specific default attributes\n"
+				"Options: None, LCOE Calculator, Single Owner, Sale Leaseback, Commercial PPA, Commercial, Leveraged Partnership Flip, All Equity Partnership Flip, Independent Power Producer, ")},
+		{"wrap",             Tcsdish_wrap,         METH_VARARGS,
+				PyDoc_STR("wrap(ssc_data_t) -> new Tcsdish object around existing PySSC data")},
+		{NULL,              NULL}           /* sentinel */
 };
 
 PyDoc_STRVAR(module_doc,
-			 "This is a template module just for instruction.");
+			 "Refer to http://www.github.com/nrel/PySAM for source code.");
 
 
 static int

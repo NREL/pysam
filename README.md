@@ -46,19 +46,21 @@
 
 1. Structure: [7]
 		PySAM/                          Top-level package
-			__init__.py               	Initialize the package
-			lib/						Binaries directory
+			data/						
 				sam.dll/.so					
 				ssc.dll/.so
-			PVWatts/                  	Subpackage for PVWatts Technology System
-				__init__.py
+				defaults/				Binaries directory
+					PVWatts_None.df
+					Windpower_None.df
+					...
+			src/                 		Python Extension source 	
+				PySAM_utils.h
 				PVWatts.c
-				PVWatts-defaults.json 	Subpackage for Wind Technology System
-			Windpower/
-				__init__.py
 				Windpower.c
-				Windpower-defaults.json
-			...
+				...
+			setup.py
+			README.md
+			LICENSE.md
 
 
 

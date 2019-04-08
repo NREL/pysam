@@ -79,13 +79,13 @@ Weather_set_azimuth(WeatherObject *self, PyObject *value, void *closure)
 static PyObject *
 Weather_get_file_name(WeatherObject *self, void *closure)
 {
-	return PySAM_string_getter(SAM_TcslinearFresnel_Weather_file_sget, self->data_ptr);
+	return PySAM_string_getter(SAM_TcslinearFresnel_Weather_file_name_sget, self->data_ptr);
 }
 
 static int
 Weather_set_file_name(WeatherObject *self, PyObject *value, void *closure)
 {
-	return PySAM_string_setter(value, SAM_TcslinearFresnel_Weather_file_sset, self->data_ptr);
+	return PySAM_string_setter(value, SAM_TcslinearFresnel_Weather_file_name_sset, self->data_ptr);
 }
 
 static PyObject *
@@ -3422,7 +3422,7 @@ TcslinearFresnel_assign(TcslinearFresnelObject *self, PyObject *args)
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_nested_dict(self, self->x_attr, self->data_ptr, dict, "TcslinearFresnel"))
+	if (!PySAM_assign_from_nested_dict((PyObject*)self, self->x_attr, self->data_ptr, dict, "TcslinearFresnel"))
 		return NULL;
 
 	Py_INCREF(Py_None);
@@ -3435,7 +3435,6 @@ TcslinearFresnel_export(TcslinearFresnelObject *self, PyObject *args)
 {
 	return PySAM_export_to_nested_dict((PyObject *) self, self->x_attr);
 }
-
 
 static PyMethodDef TcslinearFresnel_methods[] = {
 		{"execute",            (PyCFunction)TcslinearFresnel_execute,  METH_VARARGS,
@@ -3548,7 +3547,7 @@ TcslinearFresnel_default(PyObject *self, PyObject *args)
 	if (rv == NULL)
 		return NULL;
 
-	PySAM_load_defaults(rv, rv->x_attr, rv->data_ptr, "TcslinearFresnel", fin);
+	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "TcslinearFresnel", fin);
 
 	return (PyObject *)rv;
 }
@@ -3561,14 +3560,16 @@ TcslinearFresnel_default(PyObject *self, PyObject *args)
 static PyMethodDef TcslinearFresnelModule_methods[] = {
 		{"new",             TcslinearFresnel_new,         METH_VARARGS,
 				PyDoc_STR("new() -> new TcslinearFresnel object")},
-		{"wrap",             TcslinearFresnel_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> new TcslinearFresnel object around existing data")},
 		{"default",             TcslinearFresnel_default,         METH_VARARGS,
-				PyDoc_STR("default(financial) -> new TcslinearFresnel object with financial model-specific default attributes")},		{NULL,              NULL}           /* sentinel */
+				PyDoc_STR("default(financial) -> new TcslinearFresnel object with financial model-specific default attributes\n"
+				"Options: Single Owner, Sale Leaseback, Commercial, Leveraged Partnership Flip, All Equity Partnership Flip, LCOE Calculator, None, ")},
+		{"wrap",             TcslinearFresnel_wrap,         METH_VARARGS,
+				PyDoc_STR("wrap(ssc_data_t) -> new TcslinearFresnel object around existing PySSC data")},
+		{NULL,              NULL}           /* sentinel */
 };
 
 PyDoc_STRVAR(module_doc,
-			 "This is a template module just for instruction.");
+			 "Refer to http://www.github.com/nrel/PySAM for source code.");
 
 
 static int

@@ -117,7 +117,7 @@ static PyTypeObject Simulation_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"Battery.Simulation",             /*tp_name*/
+		"StandAloneBattery.Simulation",             /*tp_name*/
 		sizeof(SimulationObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -1470,7 +1470,7 @@ static PyTypeObject Battery_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"Battery.Battery",             /*tp_name*/
+		"StandAloneBattery.Battery",             /*tp_name*/
 		sizeof(BatteryObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -1608,7 +1608,7 @@ static PyTypeObject System_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"Battery.System",             /*tp_name*/
+		"StandAloneBattery.System",             /*tp_name*/
 		sizeof(SystemObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -1731,7 +1731,7 @@ static PyTypeObject ElectricLoad_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"Battery.ElectricLoad",             /*tp_name*/
+		"StandAloneBattery.ElectricLoad",             /*tp_name*/
 		sizeof(ElectricLoadObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -1854,7 +1854,7 @@ static PyTypeObject Common_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"Battery.Common",             /*tp_name*/
+		"StandAloneBattery.Common",             /*tp_name*/
 		sizeof(CommonObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -2097,7 +2097,7 @@ static PyTypeObject Inverter_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"Battery.Inverter",             /*tp_name*/
+		"StandAloneBattery.Inverter",             /*tp_name*/
 		sizeof(InverterObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -2220,7 +2220,7 @@ static PyTypeObject PV_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"Battery.PV",             /*tp_name*/
+		"StandAloneBattery.PV",             /*tp_name*/
 		sizeof(PVObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -2358,7 +2358,7 @@ static PyTypeObject FuelCell_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"Battery.FuelCell",             /*tp_name*/
+		"StandAloneBattery.FuelCell",             /*tp_name*/
 		sizeof(FuelCellObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -2526,7 +2526,7 @@ static PyTypeObject ElectricityRate_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"Battery.ElectricityRate",             /*tp_name*/
+		"StandAloneBattery.ElectricityRate",             /*tp_name*/
 		sizeof(ElectricityRateObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -2694,7 +2694,7 @@ static PyTypeObject EnergyMarket_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"Battery.EnergyMarket",             /*tp_name*/
+		"StandAloneBattery.EnergyMarket",             /*tp_name*/
 		sizeof(EnergyMarketObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -3261,7 +3261,7 @@ static PyTypeObject Outputs_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"Battery.Outputs",             /*tp_name*/
+		"StandAloneBattery.Outputs",             /*tp_name*/
 		sizeof(OutputsObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -3304,26 +3304,26 @@ static PyTypeObject Outputs_Type = {
 };
 
 /*
- * Battery
+ * StandAloneBattery
  */
 
 typedef struct {
 	PyObject_HEAD
 	PyObject            *x_attr;        /* Attributes dictionary */
 	SAM_Battery   data_ptr;
-} BatteryObject;
+} StandAloneBatteryObject;
 
-static PyTypeObject Battery_Type;
+static PyTypeObject StandAloneBattery_Type;
 
-#define BatteryObject_Check(v)      (Py_TYPE(v) == &Battery_Type)
+#define StandAloneBatteryObject_Check(v)      (Py_TYPE(v) == &StandAloneBattery_Type)
 
-static BatteryObject *
-newBatteryObject(void* data_ptr)
+static StandAloneBatteryObject *
+newStandAloneBatteryObject(void* data_ptr)
 {
-	BatteryObject *self;
-	self = PyObject_New(BatteryObject, &Battery_Type);
+	StandAloneBatteryObject *self;
+	self = PyObject_New(StandAloneBatteryObject, &StandAloneBattery_Type);
 
-	PySAM_TECH_ATTR("Battery", SAM_Battery_construct)
+	PySAM_TECH_ATTR("StandAloneBattery", SAM_Battery_construct)
 
 PyObject* Simulation_obj = Simulation_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Simulation", Simulation_obj);
@@ -3387,10 +3387,10 @@ PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
 	return self;
 }
 
-/* Battery methods */
+/* StandAloneBattery methods */
 
 static void
-Battery_dealloc(BatteryObject *self)
+StandAloneBattery_dealloc(StandAloneBatteryObject *self)
 {
 	Py_XDECREF(self->x_attr);
 	SAM_Battery_destruct(self->data_ptr);
@@ -3399,7 +3399,7 @@ Battery_dealloc(BatteryObject *self)
 
 
 static PyObject *
-Battery_execute(BatteryObject *self, PyObject *args)
+StandAloneBattery_execute(StandAloneBatteryObject *self, PyObject *args)
 {
 	int verbosity = 0;
 
@@ -3416,14 +3416,14 @@ Battery_execute(BatteryObject *self, PyObject *args)
 
 
 static PyObject *
-Battery_assign(BatteryObject *self, PyObject *args)
+StandAloneBattery_assign(StandAloneBatteryObject *self, PyObject *args)
 {
 	PyObject* dict;
 	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_nested_dict(self, self->x_attr, self->data_ptr, dict, "Battery"))
+	if (!PySAM_assign_from_nested_dict((PyObject*)self, self->x_attr, self->data_ptr, dict, "StandAloneBattery"))
 		return NULL;
 
 	Py_INCREF(Py_None);
@@ -3432,46 +3432,45 @@ Battery_assign(BatteryObject *self, PyObject *args)
 
 
 static PyObject *
-Battery_export(BatteryObject *self, PyObject *args)
+StandAloneBattery_export(StandAloneBatteryObject *self, PyObject *args)
 {
 	return PySAM_export_to_nested_dict((PyObject *) self, self->x_attr);
 }
 
-
-static PyMethodDef Battery_methods[] = {
-		{"execute",            (PyCFunction)Battery_execute,  METH_VARARGS,
+static PyMethodDef StandAloneBattery_methods[] = {
+		{"execute",            (PyCFunction)StandAloneBattery_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
-		{"assign",            (PyCFunction)Battery_assign,  METH_VARARGS,
+		{"assign",            (PyCFunction)StandAloneBattery_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs")},
-		{"export",            (PyCFunction)Battery_export,  METH_VARARGS,
+		{"export",            (PyCFunction)StandAloneBattery_export,  METH_VARARGS,
 				PyDoc_STR("assign() -> None\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 static PyObject *
-Battery_getattro(BatteryObject *self, PyObject *name)
+StandAloneBattery_getattro(StandAloneBatteryObject *self, PyObject *name)
 {
 	return PySAM_get_attr((PyObject*) self, (PyObject*) self->x_attr, name);
 }
 
 static int
-Battery_setattr(BatteryObject *self, const char *name, PyObject *v)
+StandAloneBattery_setattr(StandAloneBatteryObject *self, const char *name, PyObject *v)
 {
 	return PySAM_set_attr((PyObject*)self, (PyObject*)self->x_attr, name, v);
 }
 
-static PyTypeObject Battery_Type = {
+static PyTypeObject StandAloneBattery_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"Battery",            /*tp_name*/
-		sizeof(BatteryObject),/*tp_basicsize*/
+		"StandAloneBattery",            /*tp_name*/
+		sizeof(StandAloneBatteryObject),/*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
-		(destructor)Battery_dealloc,    /*tp_dealloc*/
+		(destructor)StandAloneBattery_dealloc,    /*tp_dealloc*/
 		0,                          /*tp_print*/
 		(getattrfunc)0,             /*tp_getattr*/
-		(setattrfunc)Battery_setattr,   /*tp_setattr*/
+		(setattrfunc)StandAloneBattery_setattr,   /*tp_setattr*/
 		0,                          /*tp_reserved*/
 		0,                          /*tp_repr*/
 		0,                          /*tp_as_number*/
@@ -3480,7 +3479,7 @@ static PyTypeObject Battery_Type = {
 		0,                          /*tp_hash*/
 		0,                          /*tp_call*/
 		0,                          /*tp_str*/
-		(getattrofunc)Battery_getattro, /*tp_getattro*/
+		(getattrofunc)StandAloneBattery_getattro, /*tp_getattro*/
 		0,                          /*tp_setattro*/
 		0,                          /*tp_as_buffer*/
 		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
@@ -3491,7 +3490,7 @@ static PyTypeObject Battery_Type = {
 		0,                          /*tp_weaklistoffset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
-		Battery_methods,      /*tp_methods*/
+		StandAloneBattery_methods,      /*tp_methods*/
 		0,                          /*tp_members*/
 		0,       /*tp_getset*/
 		0,                          /*tp_base*/
@@ -3509,47 +3508,47 @@ static PyTypeObject Battery_Type = {
 /* --------------------------------------------------------------------- */
 
 
-/* Function of no arguments returning new Battery object */
+/* Function of no arguments returning new StandAloneBattery object */
 
 static PyObject *
-Battery_new(PyObject *self, PyObject *args)
+StandAloneBattery_new(PyObject *self, PyObject *args)
 {
-	BatteryObject *rv;
-	rv = newBatteryObject(0);
+	StandAloneBatteryObject *rv;
+	rv = newStandAloneBatteryObject(0);
 	if (rv == NULL)
 		return NULL;
 	return (PyObject *)rv;
 }
 
 static PyObject *
-Battery_wrap(PyObject *self, PyObject *args)
+StandAloneBattery_wrap(PyObject *self, PyObject *args)
 {
-	BatteryObject *rv;
+	StandAloneBatteryObject *rv;
 	long int ptr = 0;
 	if (!PyArg_ParseTuple(args, "l:wrap", &ptr)){
 		PyErr_BadArgument();
 		return NULL;
 	}
-	rv = newBatteryObject((void*)ptr);
+	rv = newStandAloneBatteryObject((void*)ptr);
 	if (rv == NULL)
 		return NULL;
 	return (PyObject *)rv;
 }
 
 static PyObject *
-Battery_default(PyObject *self, PyObject *args)
+StandAloneBattery_default(PyObject *self, PyObject *args)
 {
-	BatteryObject *rv;
+	StandAloneBatteryObject *rv;
 	char* fin = 0;
 	if (!PyArg_ParseTuple(args, "s:default", &fin)){
 		PyErr_BadArgument();
 		return NULL;
 	}
-	rv = newBatteryObject(0);
+	rv = newStandAloneBatteryObject(0);
 	if (rv == NULL)
 		return NULL;
 
-	PySAM_load_defaults(rv, rv->x_attr, rv->data_ptr, "Battery", fin);
+	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Battery", fin);
 
 	return (PyObject *)rv;
 }
@@ -3559,29 +3558,31 @@ Battery_default(PyObject *self, PyObject *args)
 
 /* List of functions defined in the module */
 
-static PyMethodDef BatteryModule_methods[] = {
-		{"new",             Battery_new,         METH_VARARGS,
-				PyDoc_STR("new() -> new Battery object")},
-		{"wrap",             Battery_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> new Battery object around existing data")},
-		{"default",             Battery_default,         METH_VARARGS,
-				PyDoc_STR("default(financial) -> new Battery object with financial model-specific default attributes")},		{NULL,              NULL}           /* sentinel */
+static PyMethodDef StandAloneBatteryModule_methods[] = {
+		{"new",             StandAloneBattery_new,         METH_VARARGS,
+				PyDoc_STR("new() -> new StandAloneBattery object")},
+		{"default",             StandAloneBattery_default,         METH_VARARGS,
+				PyDoc_STR("default(financial) -> new StandAloneBattery object with financial model-specific default attributes\n"
+				"Options: None, ")},
+		{"wrap",             StandAloneBattery_wrap,         METH_VARARGS,
+				PyDoc_STR("wrap(ssc_data_t) -> new StandAloneBattery object around existing PySSC data")},
+		{NULL,              NULL}           /* sentinel */
 };
 
 PyDoc_STRVAR(module_doc,
-			 "This is a template module just for instruction.");
+			 "Refer to http://www.github.com/nrel/PySAM for source code.");
 
 
 static int
-BatteryModule_exec(PyObject *m)
+StandAloneBatteryModule_exec(PyObject *m)
 {
 	/* Finalize the type object including setting type of the new type
 	 * object; doing it here is required for portability, too. */
 
-	Battery_Type.tp_dict = PyDict_New();
-	if (!Battery_Type.tp_dict) { goto fail; }
+	StandAloneBattery_Type.tp_dict = PyDict_New();
+	if (!StandAloneBattery_Type.tp_dict) { goto fail; }
 
-	/// Add the AdjustmentFactors type object to Battery_Type
+	/// Add the AdjustmentFactors type object to StandAloneBattery_Type
 	PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
 	if (!AdjustmentFactorsModule){
 		PyErr_SetImportError(PyUnicode_FromString("Could not import AdjustmentFactors module."), NULL, NULL);
@@ -3594,94 +3595,94 @@ BatteryModule_exec(PyObject *m)
 	Py_XDECREF(AdjustmentFactorsModule);
 
 	if (PyType_Ready(AdjustmentFactors_Type) < 0) { goto fail; }
-	PyDict_SetItemString(Battery_Type.tp_dict,
+	PyDict_SetItemString(StandAloneBattery_Type.tp_dict,
 						 "AdjustmentFactors",
 						 (PyObject*)AdjustmentFactors_Type);
 	Py_DECREF(&AdjustmentFactors_Type);
 	Py_XDECREF(AdjustmentFactors_Type);
 
-	/// Add the Simulation type object to Battery_Type
+	/// Add the Simulation type object to StandAloneBattery_Type
 	if (PyType_Ready(&Simulation_Type) < 0) { goto fail; }
-	PyDict_SetItemString(Battery_Type.tp_dict,
+	PyDict_SetItemString(StandAloneBattery_Type.tp_dict,
 				"Simulation",
 				(PyObject*)&Simulation_Type);
 	Py_DECREF(&Simulation_Type);
 
-	/// Add the Battery type object to Battery_Type
+	/// Add the Battery type object to StandAloneBattery_Type
 	if (PyType_Ready(&Battery_Type) < 0) { goto fail; }
-	PyDict_SetItemString(Battery_Type.tp_dict,
+	PyDict_SetItemString(StandAloneBattery_Type.tp_dict,
 				"Battery",
 				(PyObject*)&Battery_Type);
 	Py_DECREF(&Battery_Type);
 
-	/// Add the System type object to Battery_Type
+	/// Add the System type object to StandAloneBattery_Type
 	if (PyType_Ready(&System_Type) < 0) { goto fail; }
-	PyDict_SetItemString(Battery_Type.tp_dict,
+	PyDict_SetItemString(StandAloneBattery_Type.tp_dict,
 				"System",
 				(PyObject*)&System_Type);
 	Py_DECREF(&System_Type);
 
-	/// Add the ElectricLoad type object to Battery_Type
+	/// Add the ElectricLoad type object to StandAloneBattery_Type
 	if (PyType_Ready(&ElectricLoad_Type) < 0) { goto fail; }
-	PyDict_SetItemString(Battery_Type.tp_dict,
+	PyDict_SetItemString(StandAloneBattery_Type.tp_dict,
 				"ElectricLoad",
 				(PyObject*)&ElectricLoad_Type);
 	Py_DECREF(&ElectricLoad_Type);
 
-	/// Add the Common type object to Battery_Type
+	/// Add the Common type object to StandAloneBattery_Type
 	if (PyType_Ready(&Common_Type) < 0) { goto fail; }
-	PyDict_SetItemString(Battery_Type.tp_dict,
+	PyDict_SetItemString(StandAloneBattery_Type.tp_dict,
 				"Common",
 				(PyObject*)&Common_Type);
 	Py_DECREF(&Common_Type);
 
-	/// Add the Inverter type object to Battery_Type
+	/// Add the Inverter type object to StandAloneBattery_Type
 	if (PyType_Ready(&Inverter_Type) < 0) { goto fail; }
-	PyDict_SetItemString(Battery_Type.tp_dict,
+	PyDict_SetItemString(StandAloneBattery_Type.tp_dict,
 				"Inverter",
 				(PyObject*)&Inverter_Type);
 	Py_DECREF(&Inverter_Type);
 
-	/// Add the PV type object to Battery_Type
+	/// Add the PV type object to StandAloneBattery_Type
 	if (PyType_Ready(&PV_Type) < 0) { goto fail; }
-	PyDict_SetItemString(Battery_Type.tp_dict,
+	PyDict_SetItemString(StandAloneBattery_Type.tp_dict,
 				"PV",
 				(PyObject*)&PV_Type);
 	Py_DECREF(&PV_Type);
 
-	/// Add the FuelCell type object to Battery_Type
+	/// Add the FuelCell type object to StandAloneBattery_Type
 	if (PyType_Ready(&FuelCell_Type) < 0) { goto fail; }
-	PyDict_SetItemString(Battery_Type.tp_dict,
+	PyDict_SetItemString(StandAloneBattery_Type.tp_dict,
 				"FuelCell",
 				(PyObject*)&FuelCell_Type);
 	Py_DECREF(&FuelCell_Type);
 
-	/// Add the ElectricityRate type object to Battery_Type
+	/// Add the ElectricityRate type object to StandAloneBattery_Type
 	if (PyType_Ready(&ElectricityRate_Type) < 0) { goto fail; }
-	PyDict_SetItemString(Battery_Type.tp_dict,
+	PyDict_SetItemString(StandAloneBattery_Type.tp_dict,
 				"ElectricityRate",
 				(PyObject*)&ElectricityRate_Type);
 	Py_DECREF(&ElectricityRate_Type);
 
-	/// Add the EnergyMarket type object to Battery_Type
+	/// Add the EnergyMarket type object to StandAloneBattery_Type
 	if (PyType_Ready(&EnergyMarket_Type) < 0) { goto fail; }
-	PyDict_SetItemString(Battery_Type.tp_dict,
+	PyDict_SetItemString(StandAloneBattery_Type.tp_dict,
 				"EnergyMarket",
 				(PyObject*)&EnergyMarket_Type);
 	Py_DECREF(&EnergyMarket_Type);
 
-	/// Add the Outputs type object to Battery_Type
+	/// Add the Outputs type object to StandAloneBattery_Type
 	if (PyType_Ready(&Outputs_Type) < 0) { goto fail; }
-	PyDict_SetItemString(Battery_Type.tp_dict,
+	PyDict_SetItemString(StandAloneBattery_Type.tp_dict,
 				"Outputs",
 				(PyObject*)&Outputs_Type);
 	Py_DECREF(&Outputs_Type);
 
-	/// Add the Battery type object to the module
-	if (PyType_Ready(&Battery_Type) < 0) { goto fail; }
+	/// Add the StandAloneBattery type object to the module
+	if (PyType_Ready(&StandAloneBattery_Type) < 0) { goto fail; }
 	PyModule_AddObject(m,
-				"Battery",
-				(PyObject*)&Battery_Type);
+				"StandAloneBattery",
+				(PyObject*)&StandAloneBattery_Type);
 
 	if (PySAM_load_lib(m) < 0) goto fail;
 	if (PySAM_init_error() < 0) goto fail;
@@ -3692,18 +3693,18 @@ BatteryModule_exec(PyObject *m)
 	return -1;
 }
 
-static struct PyModuleDef_Slot BatteryModule_slots[] = {
-		{Py_mod_exec, BatteryModule_exec},
+static struct PyModuleDef_Slot StandAloneBatteryModule_slots[] = {
+		{Py_mod_exec, StandAloneBatteryModule_exec},
 		{0, NULL},
 };
 
-static struct PyModuleDef BatteryModule = {
+static struct PyModuleDef StandAloneBatteryModule = {
 		PyModuleDef_HEAD_INIT,
-		"Battery",
+		"StandAloneBattery",
 		module_doc,
 		0,
-		BatteryModule_methods,
-		BatteryModule_slots,
+		StandAloneBatteryModule_methods,
+		StandAloneBatteryModule_slots,
 		NULL,
 		NULL,
 		NULL
@@ -3712,7 +3713,7 @@ static struct PyModuleDef BatteryModule = {
 /* Export function for the module */
 
 PyMODINIT_FUNC
-PyInit_Battery(void)
+PyInit_StandAloneBattery(void)
 {
-	return PyModuleDef_Init(&BatteryModule);
+	return PyModuleDef_Init(&StandAloneBatteryModule);
 }

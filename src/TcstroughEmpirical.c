@@ -79,13 +79,13 @@ Weather_set_azimuth(WeatherObject *self, PyObject *value, void *closure)
 static PyObject *
 Weather_get_file_name(WeatherObject *self, void *closure)
 {
-	return PySAM_string_getter(SAM_TcstroughEmpirical_Weather_file_sget, self->data_ptr);
+	return PySAM_string_getter(SAM_TcstroughEmpirical_Weather_file_name_sget, self->data_ptr);
 }
 
 static int
 Weather_set_file_name(WeatherObject *self, PyObject *value, void *closure)
 {
-	return PySAM_string_setter(value, SAM_TcstroughEmpirical_Weather_file_sset, self->data_ptr);
+	return PySAM_string_setter(value, SAM_TcstroughEmpirical_Weather_file_name_sset, self->data_ptr);
 }
 
 static PyObject *
@@ -3584,7 +3584,7 @@ TcstroughEmpirical_assign(TcstroughEmpiricalObject *self, PyObject *args)
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_nested_dict(self, self->x_attr, self->data_ptr, dict, "TcstroughEmpirical"))
+	if (!PySAM_assign_from_nested_dict((PyObject*)self, self->x_attr, self->data_ptr, dict, "TcstroughEmpirical"))
 		return NULL;
 
 	Py_INCREF(Py_None);
@@ -3597,7 +3597,6 @@ TcstroughEmpirical_export(TcstroughEmpiricalObject *self, PyObject *args)
 {
 	return PySAM_export_to_nested_dict((PyObject *) self, self->x_attr);
 }
-
 
 static PyMethodDef TcstroughEmpirical_methods[] = {
 		{"execute",            (PyCFunction)TcstroughEmpirical_execute,  METH_VARARGS,
@@ -3710,7 +3709,7 @@ TcstroughEmpirical_default(PyObject *self, PyObject *args)
 	if (rv == NULL)
 		return NULL;
 
-	PySAM_load_defaults(rv, rv->x_attr, rv->data_ptr, "TcstroughEmpirical", fin);
+	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "TcstroughEmpirical", fin);
 
 	return (PyObject *)rv;
 }
@@ -3723,14 +3722,16 @@ TcstroughEmpirical_default(PyObject *self, PyObject *args)
 static PyMethodDef TcstroughEmpiricalModule_methods[] = {
 		{"new",             TcstroughEmpirical_new,         METH_VARARGS,
 				PyDoc_STR("new() -> new TcstroughEmpirical object")},
-		{"wrap",             TcstroughEmpirical_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> new TcstroughEmpirical object around existing data")},
 		{"default",             TcstroughEmpirical_default,         METH_VARARGS,
-				PyDoc_STR("default(financial) -> new TcstroughEmpirical object with financial model-specific default attributes")},		{NULL,              NULL}           /* sentinel */
+				PyDoc_STR("default(financial) -> new TcstroughEmpirical object with financial model-specific default attributes\n"
+				"Options: LCOE Calculator, Independent Power Producer, Commercial, Commercial PPA, Leveraged Partnership Flip, Single Owner, None, All Equity Partnership Flip, Sale Leaseback, ")},
+		{"wrap",             TcstroughEmpirical_wrap,         METH_VARARGS,
+				PyDoc_STR("wrap(ssc_data_t) -> new TcstroughEmpirical object around existing PySSC data")},
+		{NULL,              NULL}           /* sentinel */
 };
 
 PyDoc_STRVAR(module_doc,
-			 "This is a template module just for instruction.");
+			 "Refer to http://www.github.com/nrel/PySAM for source code.");
 
 
 static int

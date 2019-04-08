@@ -487,13 +487,13 @@ GeoHourly_set_hr_pl_nlev(GeoHourlyObject *self, PyObject *value, void *closure)
 static PyObject *
 GeoHourly_get_hybrid_dispatch_schedule(GeoHourlyObject *self, void *closure)
 {
-	return PySAM_string_getter(SAM_Geothermal_GeoHourly_file_sget, self->data_ptr);
+	return PySAM_string_getter(SAM_Geothermal_GeoHourly_hybrid_dispatch_schedule_sget, self->data_ptr);
 }
 
 static int
 GeoHourly_set_hybrid_dispatch_schedule(GeoHourlyObject *self, PyObject *value, void *closure)
 {
-	return PySAM_string_setter(value, SAM_Geothermal_GeoHourly_file_sset, self->data_ptr);
+	return PySAM_string_setter(value, SAM_Geothermal_GeoHourly_hybrid_dispatch_schedule_sset, self->data_ptr);
 }
 
 static PyObject *
@@ -1225,13 +1225,13 @@ static PyMethodDef Weather_methods[] = {
 static PyObject *
 Weather_get_file_name(WeatherObject *self, void *closure)
 {
-	return PySAM_string_getter(SAM_Geothermal_Weather_file_sget, self->data_ptr);
+	return PySAM_string_getter(SAM_Geothermal_Weather_file_name_sget, self->data_ptr);
 }
 
 static int
 Weather_set_file_name(WeatherObject *self, PyObject *value, void *closure)
 {
-	return PySAM_string_setter(value, SAM_Geothermal_Weather_file_sset, self->data_ptr);
+	return PySAM_string_setter(value, SAM_Geothermal_Weather_file_name_sset, self->data_ptr);
 }
 
 static PyGetSetDef Weather_getset[] = {
@@ -1924,7 +1924,7 @@ Geothermal_assign(GeothermalObject *self, PyObject *args)
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_nested_dict(self, self->x_attr, self->data_ptr, dict, "Geothermal"))
+	if (!PySAM_assign_from_nested_dict((PyObject*)self, self->x_attr, self->data_ptr, dict, "Geothermal"))
 		return NULL;
 
 	Py_INCREF(Py_None);
@@ -1937,7 +1937,6 @@ Geothermal_export(GeothermalObject *self, PyObject *args)
 {
 	return PySAM_export_to_nested_dict((PyObject *) self, self->x_attr);
 }
-
 
 static PyMethodDef Geothermal_methods[] = {
 		{"execute",            (PyCFunction)Geothermal_execute,  METH_VARARGS,
@@ -2050,7 +2049,7 @@ Geothermal_default(PyObject *self, PyObject *args)
 	if (rv == NULL)
 		return NULL;
 
-	PySAM_load_defaults(rv, rv->x_attr, rv->data_ptr, "Geothermal", fin);
+	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Geothermal", fin);
 
 	return (PyObject *)rv;
 }
@@ -2063,14 +2062,16 @@ Geothermal_default(PyObject *self, PyObject *args)
 static PyMethodDef GeothermalModule_methods[] = {
 		{"new",             Geothermal_new,         METH_VARARGS,
 				PyDoc_STR("new() -> new Geothermal object")},
-		{"wrap",             Geothermal_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> new Geothermal object around existing data")},
 		{"default",             Geothermal_default,         METH_VARARGS,
-				PyDoc_STR("default(financial) -> new Geothermal object with financial model-specific default attributes")},		{NULL,              NULL}           /* sentinel */
+				PyDoc_STR("default(financial) -> new Geothermal object with financial model-specific default attributes\n"
+				"Options: Leveraged Partnership Flip, Single Owner, None, Sale Leaseback, All Equity Partnership Flip, Independent Power Producer, LCOE Calculator, ")},
+		{"wrap",             Geothermal_wrap,         METH_VARARGS,
+				PyDoc_STR("wrap(ssc_data_t) -> new Geothermal object around existing PySSC data")},
+		{NULL,              NULL}           /* sentinel */
 };
 
 PyDoc_STRVAR(module_doc,
-			 "This is a template module just for instruction.");
+			 "Refer to http://www.github.com/nrel/PySAM for source code.");
 
 
 static int

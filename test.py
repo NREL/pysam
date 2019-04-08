@@ -3,6 +3,8 @@
 #
 # from setuptools import sandbox
 # sandbox.run_setup('setup.py', ['install'])
+
+
 import GenericSystem
 from pympler.tracker import SummaryTracker
 import gc
@@ -14,7 +16,7 @@ check_error_cases = True
 
 n_tests_passed = 0
 round = 0
-while round < 100:
+while round < 50:
 
     if round == 0:
         tracker = SummaryTracker()
@@ -125,36 +127,36 @@ while round < 100:
     # Test shared module (AdjustmentFactors)
     d = a.AdjustmentFactors
 
-    d.ac_constant = 1
-    assert(d.ac_constant == 1)
+    d.constant = 1
+    assert(d.constant == 1)
     print("Passed test", 7)
     n_tests_passed += 1
 
-    d.ac_hourly = (1, 2)
-    assert(d.ac_hourly == (1, 2))
+    d.hourly = (1, 2)
+    assert(d.hourly == (1, 2))
     print("Passed test", 8)
     n_tests_passed += 1
 
-    d.ac_periods = ((1, 2), (3, 4))
-    assert(d.ac_periods == ((1, 2), (3, 4)))
+    d.periods = ((1, 2), (3, 4))
+    assert(d.periods == ((1, 2), (3, 4)))
     print("Passed test", 9)
     n_tests_passed += 1
 
     try:
-        d.ac_periods = ((1, 2))
+        d.periods = ((1, 2))
         print("FAIL 4: exception is expected")
     except:
         print("Error caught", 4)
         n_tests_passed += 1
 
     ValDict = d.export()
-    assert(ValDict['ac_constant'] == 1 and ValDict['ac_hourly'] == (1, 2) and ValDict['ac_periods'] == ((1, 2), (3, 4)))
+    assert(ValDict['constant'] == 1 and ValDict['hourly'] == (1, 2) and ValDict['periods'] == ((1, 2), (3, 4)))
     print("Passed test", 10)
     n_tests_passed += 1
 
-    ValDict = {'ac_constant': 10, "ac_hourly": (10, 20), "ac_periods": ((10, 20), (30, 40))}
+    ValDict = {'constant': 10, "hourly": (10, 20), "periods": ((10, 20), (30, 40))}
     d.assign(ValDict)
-    assert(ValDict['ac_constant'] == 10 and ValDict['ac_hourly'] == (10, 20) and ValDict['ac_periods'] == ((10, 20), (30, 40)))
+    assert(ValDict['constant'] == 10 and ValDict['hourly'] == (10, 20) and ValDict['periods'] == ((10, 20), (30, 40)))
     print("Passed test", 11)
     n_tests_passed += 1
 
@@ -163,7 +165,7 @@ while round < 100:
 
     TechDict = {'Plant': {'derate': 100,
                                'energy_output_array': (100, 200)},
-                'AdjustmentFactors': {'ac_constant': 100, "ac_hourly": (100, 200), "ac_periods": ((100, 200), (300, 400))}}
+                'AdjustmentFactors': {'constant': 100, "hourly": (100, 200), "periods": ((100, 200), (300, 400))}}
     a.assign(TechDict)
     ValDict = a.Plant.export()
     assert (ValDict['derate'] == 100 and ValDict['energy_output_array'] == (100, 200))
@@ -171,7 +173,7 @@ while round < 100:
     n_tests_passed += 1
 
     ValDict = a.AdjustmentFactors.export()
-    assert (ValDict['ac_constant'] == 100 and ValDict['ac_hourly'] == (100, 200) and ValDict['ac_periods'] == (
+    assert (ValDict['constant'] == 100 and ValDict['hourly'] == (100, 200) and ValDict['periods'] == (
     (100, 200), (300, 400)))
     print("Passed test", 13)
     n_tests_passed += 1
@@ -188,73 +190,78 @@ while round < 100:
 
 
     # Test strings and tables with error cases
+    import Pvwattsv5
+    a = Pvwattsv5.new()
+    a.LocationAndResource.solar_resource_file = "file"
+    assert(a.LocationAndResource.solar_resource_file == "file")
+    print("Passed test", 14)
+    n_tests_passed += 1
 
-    # a.Plant.file = "file"
-    # assert(a.Plant.file == "file")
-    # print("Passed test", 14)
-    # n_tests_passed += 1
-    #
-    # assert(a.Plant.export()['file'] == 'file')
-    # print("Passed test", 15)
-    # n_tests_passed += 1
-    #
-    # c = GenericSystem.new()
-    # dat = {'yo': 0}
-    # datDict = {'num': 1, 'arr': (1, 2),  'str': 'str', 'mat': ((1, 2), (3, 4)), 'table': dat}
-    # c.Plant.data = datDict
-    # DataDict = c.Plant.data
-    # assert(DataDict['num'] == 1 and DataDict['arr'] == (1, 2))
-    # assert(DataDict['mat'] == ((1.0, 2.0), (3.0, 4.0)))
-    # assert(DataDict['str'] == 'str')
-    # assert(DataDict['table'] == dat)
-    # print("Passed test", 16)
-    # n_tests_passed += 1
-    #
-    # try:
-    #     a.Plant.file = 100
-    #     print("FAIL 5: exception is expected")
-    # except:
-    #     print("Error caught", 5)
-    #     n_tests_passed += 1
-    #
-    # try:
-    #     c.Plant.data = {'num': 1, 'arr': (1, "2"), 'mat': ((1, 2), (3, 4)), 'str': 'str', 'table': dat}
-    #     print("FAIL 6: exception is expected")
-    # except:
-    #     print("Error caught", 6)
-    #     n_tests_passed += 1
-    #
-    # try:
-    #     c.Plant.data = {'num': 1, 'arr': (1, 2), 'mat': (("1",2 ), (3, 4)), 'str': 'str', 'table': dat}
-    #     print("FAIL 7: exception is expected")
-    # except:
-    #     print("Error caught", 7)
-    #     n_tests_passed += 1
-    #
-    # a.Plant.data = {'num': 1, 'arr': (1, 2), 'mat': ((1, 2), (3, 4)), 'str': 'str', 'table': {}}
-    # assert(a.Plant.data['table'] == {})
-    # print("Passed test", 17)
-    # n_tests_passed += 1
-    #
-    #
-    #
-    # # Test conversion between technology attributes and nested dictionary
-    #
-    # genDict = a.export()
-    # assert(genDict['Plant']['data']['str'] == 'str' and genDict['AdjustmentFactors'] == {} and genDict['Outputs'])
-    # print("Passed test", 18)
-    # n_tests_passed += 1
-    #
-    # a = GenericSystem.new()
-    # assert(a.export()['Plant'] == {})
-    # a.assign(genDict)
-    # assert(a.export() == genDict)
-    # print("Passed test", 19)
-    # n_tests_passed += 1
+    assert(a.LocationAndResource.export()['solar_resource_file'] == 'file')
+    print("Passed test", 15)
+    n_tests_passed += 1
+
+    c = Pvwattsv5.new()
+    dat = {'yo': 0}
+    datDict = {'num': 1, 'arr': (1, 2),  'str': 'str', 'mat': ((1, 2), (3, 4)), 'table': dat}
+    c.LocationAndResource.solar_resource_data = datDict
+    DataDict = c.LocationAndResource.solar_resource_data
+    assert(DataDict['num'] == 1 and DataDict['arr'] == (1, 2))
+    assert(DataDict['mat'] == ((1.0, 2.0), (3.0, 4.0)))
+    assert(DataDict['str'] == 'str')
+    assert(DataDict['table'] == dat)
+    print("Passed test", 16)
+    n_tests_passed += 1
+
+    try:
+        c = Pvwattsv5.new()
+        c.LocationAndResource.solar_resource_file = 100
+        print("FAIL 5: exception is expected")
+    except:
+        print("Error caught", 5)
+        n_tests_passed += 1
+
+    try:
+        c = Pvwattsv5.new()
+        c.LocationAndResource.solar_resource_data = {'num': 1, 'arr': (1, "2"), 'mat': ((1, 2), (3, 4)), 'str': 'str', 'table': dat}
+        print("FAIL 6: exception is expected")
+    except:
+        print("Error caught", 6)
+        n_tests_passed += 1
+
+    try:
+        c = Pvwattsv5.new()
+        c.LocationAndResource.solar_resource_data = {'num': 1, 'arr': (1, 2), 'mat': (("1",2 ), (3, 4)), 'str': 'str', 'table': {'yo': 0}}
+        print("FAIL 7: exception is expected")
+    except:
+        print("Error caught", 7)
+        n_tests_passed += 1
+
+    a.LocationAndResource.solar_resource_data = {'num': 1, 'arr': (1, 2), 'mat': ((1, 2), (3, 4)), 'str': 'str', 'table': {}}
+    assert(a.LocationAndResource.solar_resource_data['table'] == {})
+    print("Passed test", 17)
+    n_tests_passed += 1
+
+
+
+    # Test conversion between technology attributes and nested dictionary
+
+    genDict = a.export()
+    assert(genDict['LocationAndResource']['solar_resource_data']['str'] == 'str' )
+    print("Passed test", 18)
+    n_tests_passed += 1
+
+    a = Pvwattsv5.new()
+    assert(a.export()['LocationAndResource'] == {})
+    a.assign(genDict)
+    assert(a.export() == genDict)
+    print("Passed test", 19)
+    n_tests_passed += 1
 
     # Test loading from serialized dict
     a = GenericSystem.default("None")
     print(a.export())
+    gc.collect()
 
     if round == 3:
         tracker.print_diff()
@@ -265,3 +272,129 @@ while round < 100:
 
 
 tracker.print_diff()
+
+
+sf = "/Users/dguittet/SAM-Dev/sam/deploy/solar_resource/tucson_az_32.116521_-110.933042_psmv3_60_tmy.csv"
+sf2 = "/Users/dguittet/SAM-Dev/sam/deploy/solar_resource/phoenix_az_33.450495_-111.983688_psmv3_60_tmy.csv"
+sf3 = '/Users/dguittet/SAM-Dev/sam/deploy/solar_resource/fargo_nd_46.9_-96.8_mts1_60_tmy.csv'
+wf = "/Users/dguittet/SAM-Dev/sam/deploy/wind_resource/OH Northern-Lake.srw"
+def assign_file(mod, i):
+    if mod == "TcsmoltenSalt" or mod == "Pvwattsv5Lifetime" or mod == "TcsdirectSteam":
+        m = i.default("SingleOwner")
+    else:
+        m = i.default("None")
+    if mod == "Pvsamv1":
+        m.SolarResource.solar_resource_file = sf
+    elif mod == "Biomass":
+        m.Biopower.file_name = sf3
+    elif mod == "Hcpv":
+        m.SolarResourceData.file_name = sf
+    elif mod == "Pvwattsv5" or mod == "TcsmoltenSalt":
+        m.LocationAndResource.solar_resource_file = sf2
+    elif mod == "Swh" or mod == "Pvwattsv5Lifetime" or mod == "TcsdirectSteam" or mod == "Tcsiscc":
+        m.Weather.solar_resource_file = sf2
+    elif mod == "Windpower":
+        m.WindResourceFile.wind_resource_filename = wf
+    elif mod == "GenericSystem":
+        pass
+    else:
+        try:
+            m.Weather.file_name = sf2
+        except:
+            pass
+
+    try:
+        m.Common.gen = [1 for i in range(8760)]
+    except:
+        pass
+
+    try:
+        m.TimeSeries.gen = [1 for i in range(8760)]
+    except:
+        pass
+
+    return m
+
+def test_importing_all():
+    import os
+    outputs = {}
+
+    for filename in os.listdir("data/defaults"):
+        names = os.path.splitext(filename)[0].split('_')
+        mod = names[0]
+        if mod == 'Battery':
+            mod = 'StandAloneBattery'
+        if mod == 'Cashloan':
+            mod = 'CashloanModel'
+        # if mod == "GenericSystem":
+        #     continue
+        fin = names[1]
+
+
+        import importlib
+        try:
+            i = importlib.import_module(mod)
+        except:
+            print("error importing", mod, fin, "\n")
+            continue
+
+        try:
+            i = importlib.import_module(mod)
+            m = i.default(fin)
+        except:
+            print("error defaults", mod, fin, "\n")
+            continue
+
+        try:
+            i = importlib.import_module(mod)
+            m = assign_file(mod, i)
+            m.execute(0)
+            try:
+                outputs[mod] = (m.Outputs.export()['annual_energy'], m.Outputs.export()['capacity_factor'])
+            except:
+                try:
+                    outputs[mod] = m.Outputs.export()['annual_energy']
+                except:
+                    outputs[mod] = m.Outputs.export()
+        except:
+            print("error executing", mod, fin, "\n")
+
+    print(outputs)
+
+
+
+# test simulating all financial models of all modules
+tech = ["Geothermal", "Pvsamv1", "TcsMSLF", "TcslinearFresnel", "TcstroughPhysical", "Biomass", "Hcpv",
+        "Pvwattsv5", "Tcsdish", "TcsmoltenSalt", "GenericSystem", "LinearFresnelDsgIph", "Swh", "TcsgenericSolar",
+        "TcstroughEmpirical", "Windpower", "TroughPhysicalProcessHeat", "Pvwattsv5Lifetime", "TcsdirectSteam",
+        "StandAloneBattery"]
+
+fin = ["IphToLcoefcr", "Thermalrate", "Belpe", "Lcoefcr", "Thirdpartyownership", "Levpartflip", "Saleleaseback",
+       "Cashloan", "Singleowner", "Utilityrate5", "Equpartflip", "HostDeveloper", ]
+
+test_importing_all()
+
+
+#
+# Geothermal Power_None, 2.628e+08
+# MSLF_None, 3.304e+08
+# DSLF_None, 2.406e+08
+# DSGL IPH_None, 1.082e+07
+# Physical Trough_None, 3.619e+08
+# High-X Concentrating PV_None, 2326831.25
+# Generic System_None, 3.667e+08
+# Empirical Trough_None, 3.443e+08
+# Physical Trough IPH_None, 2.448e+07
+
+# Flat Plate PV_None, 8689.201, different due to inverter
+# PVWatts_None, 6818.81, different due to default weather file
+# Wind Power_None, 2.416e+08 due to wind file
+# Solar Water Heating_None, 2337.31
+# Dish Stirling_None, 2.037e+08
+# Generic CSP System_None, 5.712e+08
+#
+# Biopower_None, 7.045e+07
+#
+# Fuel Cell_None, 2337.31
+
+

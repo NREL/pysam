@@ -115,13 +115,13 @@ SolarResource_set_solar_resource_data(SolarResourceObject *self, PyObject *value
 static PyObject *
 SolarResource_get_solar_resource_file(SolarResourceObject *self, void *closure)
 {
-	return PySAM_string_getter(SAM_Pvsamv1_SolarResource_file_sget, self->data_ptr);
+	return PySAM_string_getter(SAM_Pvsamv1_SolarResource_solar_resource_file_sget, self->data_ptr);
 }
 
 static int
 SolarResource_set_solar_resource_file(SolarResourceObject *self, PyObject *value, void *closure)
 {
-	return PySAM_string_setter(value, SAM_Pvsamv1_SolarResource_file_sset, self->data_ptr);
+	return PySAM_string_setter(value, SAM_Pvsamv1_SolarResource_solar_resource_file_sset, self->data_ptr);
 }
 
 static PyObject *
@@ -1964,15 +1964,63 @@ Shading_set_subarray1_shade_mode(ShadingObject *self, PyObject *value, void *clo
 }
 
 static PyObject *
-Shading_get_subarray1_shading(ShadingObject *self, void *closure)
+Shading_get_subarray1_shading_azal(ShadingObject *self, void *closure)
 {
-	return PySAM_table_getter(SAM_Pvsamv1_Shading_subarray1_shading_tget, self->data_ptr);
+	return PySAM_matrix_getter(SAM_Pvsamv1_Shading_subarray1_shading_azal_mget, self->data_ptr);
 }
 
 static int
-Shading_set_subarray1_shading(ShadingObject *self, PyObject *value, void *closure)
+Shading_set_subarray1_shading_azal(ShadingObject *self, PyObject *value, void *closure)
 {
-	return PySAM_table_setter(value, SAM_Pvsamv1_Shading_subarray1_shading_tset, self->data_ptr);
+		return PySAM_matrix_setter(value, SAM_Pvsamv1_Shading_subarray1_shading_azal_mset, self->data_ptr);
+}
+
+static PyObject *
+Shading_get_subarray1_shading_diff(ShadingObject *self, void *closure)
+{
+	return PySAM_float_getter(SAM_Pvsamv1_Shading_subarray1_shading_diff_fget, self->data_ptr);
+}
+
+static int
+Shading_set_subarray1_shading_diff(ShadingObject *self, PyObject *value, void *closure)
+{
+	return PySAM_float_setter(value, SAM_Pvsamv1_Shading_subarray1_shading_diff_fset, self->data_ptr);
+}
+
+static PyObject *
+Shading_get_subarray1_shading_mxh(ShadingObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Pvsamv1_Shading_subarray1_shading_mxh_mget, self->data_ptr);
+}
+
+static int
+Shading_set_subarray1_shading_mxh(ShadingObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Pvsamv1_Shading_subarray1_shading_mxh_mset, self->data_ptr);
+}
+
+static PyObject *
+Shading_get_subarray1_shading_string_option(ShadingObject *self, void *closure)
+{
+	return PySAM_float_getter(SAM_Pvsamv1_Shading_subarray1_shading_string_option_fget, self->data_ptr);
+}
+
+static int
+Shading_set_subarray1_shading_string_option(ShadingObject *self, PyObject *value, void *closure)
+{
+	return PySAM_float_setter(value, SAM_Pvsamv1_Shading_subarray1_shading_string_option_fset, self->data_ptr);
+}
+
+static PyObject *
+Shading_get_subarray1_shading_timestep(ShadingObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Pvsamv1_Shading_subarray1_shading_timestep_mget, self->data_ptr);
+}
+
+static int
+Shading_set_subarray1_shading_timestep(ShadingObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Pvsamv1_Shading_subarray1_shading_timestep_mset, self->data_ptr);
 }
 
 static PyObject *
@@ -1988,15 +2036,63 @@ Shading_set_subarray2_shade_mode(ShadingObject *self, PyObject *value, void *clo
 }
 
 static PyObject *
-Shading_get_subarray2_shading(ShadingObject *self, void *closure)
+Shading_get_subarray2_shading_azal(ShadingObject *self, void *closure)
 {
-	return PySAM_table_getter(SAM_Pvsamv1_Shading_subarray2_shading_tget, self->data_ptr);
+	return PySAM_matrix_getter(SAM_Pvsamv1_Shading_subarray2_shading_azal_mget, self->data_ptr);
 }
 
 static int
-Shading_set_subarray2_shading(ShadingObject *self, PyObject *value, void *closure)
+Shading_set_subarray2_shading_azal(ShadingObject *self, PyObject *value, void *closure)
 {
-	return PySAM_table_setter(value, SAM_Pvsamv1_Shading_subarray2_shading_tset, self->data_ptr);
+		return PySAM_matrix_setter(value, SAM_Pvsamv1_Shading_subarray2_shading_azal_mset, self->data_ptr);
+}
+
+static PyObject *
+Shading_get_subarray2_shading_diff(ShadingObject *self, void *closure)
+{
+	return PySAM_float_getter(SAM_Pvsamv1_Shading_subarray2_shading_diff_fget, self->data_ptr);
+}
+
+static int
+Shading_set_subarray2_shading_diff(ShadingObject *self, PyObject *value, void *closure)
+{
+	return PySAM_float_setter(value, SAM_Pvsamv1_Shading_subarray2_shading_diff_fset, self->data_ptr);
+}
+
+static PyObject *
+Shading_get_subarray2_shading_mxh(ShadingObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Pvsamv1_Shading_subarray2_shading_mxh_mget, self->data_ptr);
+}
+
+static int
+Shading_set_subarray2_shading_mxh(ShadingObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Pvsamv1_Shading_subarray2_shading_mxh_mset, self->data_ptr);
+}
+
+static PyObject *
+Shading_get_subarray2_shading_string_option(ShadingObject *self, void *closure)
+{
+	return PySAM_float_getter(SAM_Pvsamv1_Shading_subarray2_shading_string_option_fget, self->data_ptr);
+}
+
+static int
+Shading_set_subarray2_shading_string_option(ShadingObject *self, PyObject *value, void *closure)
+{
+	return PySAM_float_setter(value, SAM_Pvsamv1_Shading_subarray2_shading_string_option_fset, self->data_ptr);
+}
+
+static PyObject *
+Shading_get_subarray2_shading_timestep(ShadingObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Pvsamv1_Shading_subarray2_shading_timestep_mget, self->data_ptr);
+}
+
+static int
+Shading_set_subarray2_shading_timestep(ShadingObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Pvsamv1_Shading_subarray2_shading_timestep_mset, self->data_ptr);
 }
 
 static PyObject *
@@ -2012,15 +2108,63 @@ Shading_set_subarray3_shade_mode(ShadingObject *self, PyObject *value, void *clo
 }
 
 static PyObject *
-Shading_get_subarray3_shading(ShadingObject *self, void *closure)
+Shading_get_subarray3_shading_azal(ShadingObject *self, void *closure)
 {
-	return PySAM_table_getter(SAM_Pvsamv1_Shading_subarray3_shading_tget, self->data_ptr);
+	return PySAM_matrix_getter(SAM_Pvsamv1_Shading_subarray3_shading_azal_mget, self->data_ptr);
 }
 
 static int
-Shading_set_subarray3_shading(ShadingObject *self, PyObject *value, void *closure)
+Shading_set_subarray3_shading_azal(ShadingObject *self, PyObject *value, void *closure)
 {
-	return PySAM_table_setter(value, SAM_Pvsamv1_Shading_subarray3_shading_tset, self->data_ptr);
+		return PySAM_matrix_setter(value, SAM_Pvsamv1_Shading_subarray3_shading_azal_mset, self->data_ptr);
+}
+
+static PyObject *
+Shading_get_subarray3_shading_diff(ShadingObject *self, void *closure)
+{
+	return PySAM_float_getter(SAM_Pvsamv1_Shading_subarray3_shading_diff_fget, self->data_ptr);
+}
+
+static int
+Shading_set_subarray3_shading_diff(ShadingObject *self, PyObject *value, void *closure)
+{
+	return PySAM_float_setter(value, SAM_Pvsamv1_Shading_subarray3_shading_diff_fset, self->data_ptr);
+}
+
+static PyObject *
+Shading_get_subarray3_shading_mxh(ShadingObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Pvsamv1_Shading_subarray3_shading_mxh_mget, self->data_ptr);
+}
+
+static int
+Shading_set_subarray3_shading_mxh(ShadingObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Pvsamv1_Shading_subarray3_shading_mxh_mset, self->data_ptr);
+}
+
+static PyObject *
+Shading_get_subarray3_shading_string_option(ShadingObject *self, void *closure)
+{
+	return PySAM_float_getter(SAM_Pvsamv1_Shading_subarray3_shading_string_option_fget, self->data_ptr);
+}
+
+static int
+Shading_set_subarray3_shading_string_option(ShadingObject *self, PyObject *value, void *closure)
+{
+	return PySAM_float_setter(value, SAM_Pvsamv1_Shading_subarray3_shading_string_option_fset, self->data_ptr);
+}
+
+static PyObject *
+Shading_get_subarray3_shading_timestep(ShadingObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Pvsamv1_Shading_subarray3_shading_timestep_mget, self->data_ptr);
+}
+
+static int
+Shading_set_subarray3_shading_timestep(ShadingObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Pvsamv1_Shading_subarray3_shading_timestep_mset, self->data_ptr);
 }
 
 static PyObject *
@@ -2036,41 +2180,137 @@ Shading_set_subarray4_shade_mode(ShadingObject *self, PyObject *value, void *clo
 }
 
 static PyObject *
-Shading_get_subarray4_shading(ShadingObject *self, void *closure)
+Shading_get_subarray4_shading_azal(ShadingObject *self, void *closure)
 {
-	return PySAM_table_getter(SAM_Pvsamv1_Shading_subarray4_shading_tget, self->data_ptr);
+	return PySAM_matrix_getter(SAM_Pvsamv1_Shading_subarray4_shading_azal_mget, self->data_ptr);
 }
 
 static int
-Shading_set_subarray4_shading(ShadingObject *self, PyObject *value, void *closure)
+Shading_set_subarray4_shading_azal(ShadingObject *self, PyObject *value, void *closure)
 {
-	return PySAM_table_setter(value, SAM_Pvsamv1_Shading_subarray4_shading_tset, self->data_ptr);
+		return PySAM_matrix_setter(value, SAM_Pvsamv1_Shading_subarray4_shading_azal_mset, self->data_ptr);
+}
+
+static PyObject *
+Shading_get_subarray4_shading_diff(ShadingObject *self, void *closure)
+{
+	return PySAM_float_getter(SAM_Pvsamv1_Shading_subarray4_shading_diff_fget, self->data_ptr);
+}
+
+static int
+Shading_set_subarray4_shading_diff(ShadingObject *self, PyObject *value, void *closure)
+{
+	return PySAM_float_setter(value, SAM_Pvsamv1_Shading_subarray4_shading_diff_fset, self->data_ptr);
+}
+
+static PyObject *
+Shading_get_subarray4_shading_mxh(ShadingObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Pvsamv1_Shading_subarray4_shading_mxh_mget, self->data_ptr);
+}
+
+static int
+Shading_set_subarray4_shading_mxh(ShadingObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Pvsamv1_Shading_subarray4_shading_mxh_mset, self->data_ptr);
+}
+
+static PyObject *
+Shading_get_subarray4_shading_string_option(ShadingObject *self, void *closure)
+{
+	return PySAM_float_getter(SAM_Pvsamv1_Shading_subarray4_shading_string_option_fget, self->data_ptr);
+}
+
+static int
+Shading_set_subarray4_shading_string_option(ShadingObject *self, PyObject *value, void *closure)
+{
+	return PySAM_float_setter(value, SAM_Pvsamv1_Shading_subarray4_shading_string_option_fset, self->data_ptr);
+}
+
+static PyObject *
+Shading_get_subarray4_shading_timestep(ShadingObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Pvsamv1_Shading_subarray4_shading_timestep_mget, self->data_ptr);
+}
+
+static int
+Shading_set_subarray4_shading_timestep(ShadingObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Pvsamv1_Shading_subarray4_shading_timestep_mset, self->data_ptr);
 }
 
 static PyGetSetDef Shading_getset[] = {
 {"subarray1_shade_mode", (getter)Shading_get_subarray1_shade_mode,(setter)Shading_set_subarray1_shade_mode,
 	"Sub-array 1 shading mode (fixed tilt or 1x tracking) [0/1/2], number.\n 0=none,1=standard(non-linear),2=thin film(linear); Constraints: INTEGER,MIN=0,MAX=2; Required if: *.",
  	NULL},
-{"subarray1_shading", (getter)Shading_get_subarray1_shading,(setter)Shading_set_subarray1_shading,
-	", table.\n ",
+{"subarray1_shading_azal", (getter)Shading_get_subarray1_shading_azal,(setter)Shading_set_subarray1_shading_azal,
+	"Sub-array 1 Azimuth x altitude beam shading losses [%], matrix.\n Required if: ?.",
+ 	NULL},
+{"subarray1_shading_diff", (getter)Shading_get_subarray1_shading_diff,(setter)Shading_set_subarray1_shading_diff,
+	"Sub-array 1 Diffuse shading loss [%], number.\n Required if: ?.",
+ 	NULL},
+{"subarray1_shading_mxh", (getter)Shading_get_subarray1_shading_mxh,(setter)Shading_set_subarray1_shading_mxh,
+	"Sub-array 1 Month x Hour beam shading losses [%], matrix.\n Required if: ?.",
+ 	NULL},
+{"subarray1_shading_string_option", (getter)Shading_get_subarray1_shading_string_option,(setter)Shading_set_subarray1_shading_string_option,
+	"Sub-array 1 shading string option [], number.\n 0=shadingdb,1=shadingdb_notc,2=average,3=maximum,4=minimum; Constraints: INTEGER,MIN=-1,MAX=4; Required if: ?=-1.",
+ 	NULL},
+{"subarray1_shading_timestep", (getter)Shading_get_subarray1_shading_timestep,(setter)Shading_set_subarray1_shading_timestep,
+	"Sub-array 1 timestep beam shading losses [%], matrix.\n Required if: ?.",
  	NULL},
 {"subarray2_shade_mode", (getter)Shading_get_subarray2_shade_mode,(setter)Shading_set_subarray2_shade_mode,
 	"Sub-array 2 Shading mode (fixed tilt or 1x tracking) [0/1/2], number.\n 0=none,1=standard(non-linear),2=thin film(linear); Constraints: INTEGER,MIN=0,MAX=2; Required if: subarray2_enable=1.",
  	NULL},
-{"subarray2_shading", (getter)Shading_get_subarray2_shading,(setter)Shading_set_subarray2_shading,
-	", table.\n ",
+{"subarray2_shading_azal", (getter)Shading_get_subarray2_shading_azal,(setter)Shading_set_subarray2_shading_azal,
+	"Sub-array 2 Azimuth x altitude beam shading losses [%], matrix.\n Required if: ?.",
+ 	NULL},
+{"subarray2_shading_diff", (getter)Shading_get_subarray2_shading_diff,(setter)Shading_set_subarray2_shading_diff,
+	"Sub-array 2 Diffuse shading loss [%], number.\n Required if: ?.",
+ 	NULL},
+{"subarray2_shading_mxh", (getter)Shading_get_subarray2_shading_mxh,(setter)Shading_set_subarray2_shading_mxh,
+	"Sub-array 2 Month x Hour beam shading losses [%], matrix.\n Required if: ?.",
+ 	NULL},
+{"subarray2_shading_string_option", (getter)Shading_get_subarray2_shading_string_option,(setter)Shading_set_subarray2_shading_string_option,
+	"Sub-array 2 Shading string option [], number.\n 0=shadingdb,1=shadingdb_notc,2=average,3=maximum,4=minimum; Constraints: INTEGER,MIN=-1,MAX=4; Required if: ?=-1.",
+ 	NULL},
+{"subarray2_shading_timestep", (getter)Shading_get_subarray2_shading_timestep,(setter)Shading_set_subarray2_shading_timestep,
+	"Sub-array 2 Timestep beam shading losses [%], matrix.\n Required if: ?.",
  	NULL},
 {"subarray3_shade_mode", (getter)Shading_get_subarray3_shade_mode,(setter)Shading_set_subarray3_shade_mode,
 	"Sub-array 3 Shading mode (fixed tilt or 1x tracking) [0/1/2], number.\n 0=none,1=standard(non-linear),2=thin film(linear); Constraints: INTEGER,MIN=0,MAX=2; Required if: subarray3_enable=1.",
  	NULL},
-{"subarray3_shading", (getter)Shading_get_subarray3_shading,(setter)Shading_set_subarray3_shading,
-	", table.\n ",
+{"subarray3_shading_azal", (getter)Shading_get_subarray3_shading_azal,(setter)Shading_set_subarray3_shading_azal,
+	"Sub-array 3 Azimuth x altitude beam shading losses [%], matrix.\n Required if: ?.",
+ 	NULL},
+{"subarray3_shading_diff", (getter)Shading_get_subarray3_shading_diff,(setter)Shading_set_subarray3_shading_diff,
+	"Sub-array 3 Diffuse shading loss [%], number.\n Required if: ?.",
+ 	NULL},
+{"subarray3_shading_mxh", (getter)Shading_get_subarray3_shading_mxh,(setter)Shading_set_subarray3_shading_mxh,
+	"Sub-array 3 Month x Hour beam shading losses [%], matrix.\n Required if: ?.",
+ 	NULL},
+{"subarray3_shading_string_option", (getter)Shading_get_subarray3_shading_string_option,(setter)Shading_set_subarray3_shading_string_option,
+	"Sub-array 3 Shading string option [], number.\n 0=shadingdb,1=shadingdb_notc,2=average,3=maximum,4=minimum; Constraints: INTEGER,MIN=-1,MAX=4; Required if: ?=-1.",
+ 	NULL},
+{"subarray3_shading_timestep", (getter)Shading_get_subarray3_shading_timestep,(setter)Shading_set_subarray3_shading_timestep,
+	"Sub-array 3 Timestep beam shading losses [%], matrix.\n Required if: ?.",
  	NULL},
 {"subarray4_shade_mode", (getter)Shading_get_subarray4_shade_mode,(setter)Shading_set_subarray4_shade_mode,
 	"Sub-array 4 shading mode (fixed tilt or 1x tracking) [0/1/2], number.\n 0=none,1=standard(non-linear),2=thin film(linear); Constraints: INTEGER,MIN=0,MAX=2; Required if: subarray4_enable=1.",
  	NULL},
-{"subarray4_shading", (getter)Shading_get_subarray4_shading,(setter)Shading_set_subarray4_shading,
-	", table.\n ",
+{"subarray4_shading_azal", (getter)Shading_get_subarray4_shading_azal,(setter)Shading_set_subarray4_shading_azal,
+	"Sub-array 4 Azimuth x altitude beam shading losses [%], matrix.\n Required if: ?.",
+ 	NULL},
+{"subarray4_shading_diff", (getter)Shading_get_subarray4_shading_diff,(setter)Shading_set_subarray4_shading_diff,
+	"Sub-array 4 Diffuse shading loss [%], number.\n Required if: ?.",
+ 	NULL},
+{"subarray4_shading_mxh", (getter)Shading_get_subarray4_shading_mxh,(setter)Shading_set_subarray4_shading_mxh,
+	"Sub-array 4 Month x Hour beam shading losses [%], matrix.\n Required if: ?.",
+ 	NULL},
+{"subarray4_shading_string_option", (getter)Shading_get_subarray4_shading_string_option,(setter)Shading_set_subarray4_shading_string_option,
+	"Sub-array 4 Shading string option [], number.\n 0=shadingdb,1=shadingdb_notc,2=average,3=maximum,4=minimum; Constraints: INTEGER,MIN=-1,MAX=4; Required if: ?=-1.",
+ 	NULL},
+{"subarray4_shading_timestep", (getter)Shading_get_subarray4_shading_timestep,(setter)Shading_set_subarray4_shading_timestep,
+	"Sub-array 4 Timestep beam shading losses [%], matrix.\n Required if: ?.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -7438,25 +7678,25 @@ InverterMermoudLejeuneModel_set_ond_Aux_Loss(InverterMermoudLejeuneModelObject *
 static PyObject *
 InverterMermoudLejeuneModel_get_ond_CompPMax(InverterMermoudLejeuneModelObject *self, void *closure)
 {
-	return PySAM_string_getter(SAM_Pvsamv1_InverterMermoudLejeuneModel_file_sget, self->data_ptr);
+	return PySAM_string_getter(SAM_Pvsamv1_InverterMermoudLejeuneModel_ond_CompPMax_sget, self->data_ptr);
 }
 
 static int
 InverterMermoudLejeuneModel_set_ond_CompPMax(InverterMermoudLejeuneModelObject *self, PyObject *value, void *closure)
 {
-	return PySAM_string_setter(value, SAM_Pvsamv1_InverterMermoudLejeuneModel_file_sset, self->data_ptr);
+	return PySAM_string_setter(value, SAM_Pvsamv1_InverterMermoudLejeuneModel_ond_CompPMax_sset, self->data_ptr);
 }
 
 static PyObject *
 InverterMermoudLejeuneModel_get_ond_CompVMax(InverterMermoudLejeuneModelObject *self, void *closure)
 {
-	return PySAM_string_getter(SAM_Pvsamv1_InverterMermoudLejeuneModel_file_sget, self->data_ptr);
+	return PySAM_string_getter(SAM_Pvsamv1_InverterMermoudLejeuneModel_ond_CompVMax_sget, self->data_ptr);
 }
 
 static int
 InverterMermoudLejeuneModel_set_ond_CompVMax(InverterMermoudLejeuneModelObject *self, PyObject *value, void *closure)
 {
-	return PySAM_string_setter(value, SAM_Pvsamv1_InverterMermoudLejeuneModel_file_sset, self->data_ptr);
+	return PySAM_string_setter(value, SAM_Pvsamv1_InverterMermoudLejeuneModel_ond_CompVMax_sset, self->data_ptr);
 }
 
 static PyObject *
@@ -7510,25 +7750,25 @@ InverterMermoudLejeuneModel_set_ond_INomDC(InverterMermoudLejeuneModelObject *se
 static PyObject *
 InverterMermoudLejeuneModel_get_ond_ModeAffEnum(InverterMermoudLejeuneModelObject *self, void *closure)
 {
-	return PySAM_string_getter(SAM_Pvsamv1_InverterMermoudLejeuneModel_file_sget, self->data_ptr);
+	return PySAM_string_getter(SAM_Pvsamv1_InverterMermoudLejeuneModel_ond_ModeAffEnum_sget, self->data_ptr);
 }
 
 static int
 InverterMermoudLejeuneModel_set_ond_ModeAffEnum(InverterMermoudLejeuneModelObject *self, PyObject *value, void *closure)
 {
-	return PySAM_string_setter(value, SAM_Pvsamv1_InverterMermoudLejeuneModel_file_sset, self->data_ptr);
+	return PySAM_string_setter(value, SAM_Pvsamv1_InverterMermoudLejeuneModel_ond_ModeAffEnum_sset, self->data_ptr);
 }
 
 static PyObject *
 InverterMermoudLejeuneModel_get_ond_ModeOper(InverterMermoudLejeuneModelObject *self, void *closure)
 {
-	return PySAM_string_getter(SAM_Pvsamv1_InverterMermoudLejeuneModel_file_sget, self->data_ptr);
+	return PySAM_string_getter(SAM_Pvsamv1_InverterMermoudLejeuneModel_ond_ModeOper_sget, self->data_ptr);
 }
 
 static int
 InverterMermoudLejeuneModel_set_ond_ModeOper(InverterMermoudLejeuneModelObject *self, PyObject *value, void *closure)
 {
-	return PySAM_string_setter(value, SAM_Pvsamv1_InverterMermoudLejeuneModel_file_sset, self->data_ptr);
+	return PySAM_string_setter(value, SAM_Pvsamv1_InverterMermoudLejeuneModel_ond_ModeOper_sset, self->data_ptr);
 }
 
 static PyObject *
@@ -13378,7 +13618,7 @@ Pvsamv1_assign(Pvsamv1Object *self, PyObject *args)
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_nested_dict(self, self->x_attr, self->data_ptr, dict, "Pvsamv1"))
+	if (!PySAM_assign_from_nested_dict((PyObject*)self, self->x_attr, self->data_ptr, dict, "Pvsamv1"))
 		return NULL;
 
 	Py_INCREF(Py_None);
@@ -13391,7 +13631,6 @@ Pvsamv1_export(Pvsamv1Object *self, PyObject *args)
 {
 	return PySAM_export_to_nested_dict((PyObject *) self, self->x_attr);
 }
-
 
 static PyMethodDef Pvsamv1_methods[] = {
 		{"execute",            (PyCFunction)Pvsamv1_execute,  METH_VARARGS,
@@ -13504,7 +13743,7 @@ Pvsamv1_default(PyObject *self, PyObject *args)
 	if (rv == NULL)
 		return NULL;
 
-	PySAM_load_defaults(rv, rv->x_attr, rv->data_ptr, "Pvsamv1", fin);
+	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Pvsamv1", fin);
 
 	return (PyObject *)rv;
 }
@@ -13517,14 +13756,16 @@ Pvsamv1_default(PyObject *self, PyObject *args)
 static PyMethodDef Pvsamv1Module_methods[] = {
 		{"new",             Pvsamv1_new,         METH_VARARGS,
 				PyDoc_STR("new() -> new Pvsamv1 object")},
-		{"wrap",             Pvsamv1_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> new Pvsamv1 object around existing data")},
 		{"default",             Pvsamv1_default,         METH_VARARGS,
-				PyDoc_STR("default(financial) -> new Pvsamv1 object with financial model-specific default attributes")},		{NULL,              NULL}           /* sentinel */
+				PyDoc_STR("default(financial) -> new Pvsamv1 object with financial model-specific default attributes\n"
+				"Options: None, Commercial, All Equity Partnership Flip, Host Developer, Leveraged Partnership Flip, Single Owner, Independent Power Producer, Sale Leaseback, Commercial PPA, Third Party, Residential, LCOE Calculator, ")},
+		{"wrap",             Pvsamv1_wrap,         METH_VARARGS,
+				PyDoc_STR("wrap(ssc_data_t) -> new Pvsamv1 object around existing PySSC data")},
+		{NULL,              NULL}           /* sentinel */
 };
 
 PyDoc_STRVAR(module_doc,
-			 "This is a template module just for instruction.");
+			 "Refer to http://www.github.com/nrel/PySAM for source code.");
 
 
 static int

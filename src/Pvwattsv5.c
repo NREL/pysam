@@ -79,13 +79,13 @@ LocationAndResource_set_solar_resource_data(LocationAndResourceObject *self, PyO
 static PyObject *
 LocationAndResource_get_solar_resource_file(LocationAndResourceObject *self, void *closure)
 {
-	return PySAM_string_getter(SAM_Pvwattsv5_LocationAndResource_file_sget, self->data_ptr);
+	return PySAM_string_getter(SAM_Pvwattsv5_LocationAndResource_solar_resource_file_sget, self->data_ptr);
 }
 
 static int
 LocationAndResource_set_solar_resource_file(LocationAndResourceObject *self, PyObject *value, void *closure)
 {
-	return PySAM_string_setter(value, SAM_Pvwattsv5_LocationAndResource_file_sset, self->data_ptr);
+	return PySAM_string_setter(value, SAM_Pvwattsv5_LocationAndResource_solar_resource_file_sset, self->data_ptr);
 }
 
 static PyGetSetDef LocationAndResource_getset[] = {
@@ -299,15 +299,51 @@ SystemDesign_set_module_type(SystemDesignObject *self, PyObject *value, void *cl
 }
 
 static PyObject *
-SystemDesign_get_shading(SystemDesignObject *self, void *closure)
+SystemDesign_get_shading_azal(SystemDesignObject *self, void *closure)
 {
-	return PySAM_table_getter(SAM_Pvwattsv5_SystemDesign_shading_tget, self->data_ptr);
+	return PySAM_matrix_getter(SAM_Pvwattsv5_SystemDesign_shading_azal_mget, self->data_ptr);
 }
 
 static int
-SystemDesign_set_shading(SystemDesignObject *self, PyObject *value, void *closure)
+SystemDesign_set_shading_azal(SystemDesignObject *self, PyObject *value, void *closure)
 {
-	return PySAM_table_setter(value, SAM_Pvwattsv5_SystemDesign_shading_tset, self->data_ptr);
+		return PySAM_matrix_setter(value, SAM_Pvwattsv5_SystemDesign_shading_azal_mset, self->data_ptr);
+}
+
+static PyObject *
+SystemDesign_get_shading_diff(SystemDesignObject *self, void *closure)
+{
+	return PySAM_float_getter(SAM_Pvwattsv5_SystemDesign_shading_diff_fget, self->data_ptr);
+}
+
+static int
+SystemDesign_set_shading_diff(SystemDesignObject *self, PyObject *value, void *closure)
+{
+	return PySAM_float_setter(value, SAM_Pvwattsv5_SystemDesign_shading_diff_fset, self->data_ptr);
+}
+
+static PyObject *
+SystemDesign_get_shading_mxh(SystemDesignObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Pvwattsv5_SystemDesign_shading_mxh_mget, self->data_ptr);
+}
+
+static int
+SystemDesign_set_shading_mxh(SystemDesignObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Pvwattsv5_SystemDesign_shading_mxh_mset, self->data_ptr);
+}
+
+static PyObject *
+SystemDesign_get_shading_timestep(SystemDesignObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Pvwattsv5_SystemDesign_shading_timestep_mget, self->data_ptr);
+}
+
+static int
+SystemDesign_set_shading_timestep(SystemDesignObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Pvwattsv5_SystemDesign_shading_timestep_mset, self->data_ptr);
 }
 
 static PyObject *
@@ -359,8 +395,17 @@ static PyGetSetDef SystemDesign_getset[] = {
 {"module_type", (getter)SystemDesign_get_module_type,(setter)SystemDesign_set_module_type,
 	"Module type [0/1/2], number.\n Standard,Premium,Thin film; Constraints: MIN=0,MAX=2,INTEGER; Required if: ?=0.",
  	NULL},
-{"shading", (getter)SystemDesign_get_shading,(setter)SystemDesign_set_shading,
-	", table.\n ",
+{"shading_azal", (getter)SystemDesign_get_shading_azal,(setter)SystemDesign_set_shading_azal,
+	"Azimuth x altitude beam shading loss [%], matrix.\n Required if: ?.",
+ 	NULL},
+{"shading_diff", (getter)SystemDesign_get_shading_diff,(setter)SystemDesign_set_shading_diff,
+	"Diffuse shading loss [%], number.\n Required if: ?.",
+ 	NULL},
+{"shading_mxh", (getter)SystemDesign_get_shading_mxh,(setter)SystemDesign_set_shading_mxh,
+	"Month x Hour beam shading loss [%], matrix.\n Required if: ?.",
+ 	NULL},
+{"shading_timestep", (getter)SystemDesign_get_shading_timestep,(setter)SystemDesign_set_shading_timestep,
+	"Time step beam shading loss [%], matrix.\n Required if: ?.",
  	NULL},
 {"system_capacity", (getter)SystemDesign_get_system_capacity,(setter)SystemDesign_set_system_capacity,
 	"System size (DC nameplate) [kW], number.\n Required if: *.",
@@ -514,7 +559,7 @@ Outputs_get_capacity_factor(OutputsObject *self, void *closure)
 static PyObject *
 Outputs_get_city(OutputsObject *self, void *closure)
 {
-	return PySAM_string_getter(SAM_Pvwattsv5_Outputs_file_sget, self->data_ptr);
+	return PySAM_string_getter(SAM_Pvwattsv5_Outputs_city_sget, self->data_ptr);
 }
 
 static PyObject *
@@ -580,7 +625,7 @@ Outputs_get_lat(OutputsObject *self, void *closure)
 static PyObject *
 Outputs_get_location(OutputsObject *self, void *closure)
 {
-	return PySAM_string_getter(SAM_Pvwattsv5_Outputs_file_sget, self->data_ptr);
+	return PySAM_string_getter(SAM_Pvwattsv5_Outputs_location_sget, self->data_ptr);
 }
 
 static PyObject *
@@ -628,7 +673,7 @@ Outputs_get_solrad_monthly(OutputsObject *self, void *closure)
 static PyObject *
 Outputs_get_state(OutputsObject *self, void *closure)
 {
-	return PySAM_string_getter(SAM_Pvwattsv5_Outputs_file_sget, self->data_ptr);
+	return PySAM_string_getter(SAM_Pvwattsv5_Outputs_state_sget, self->data_ptr);
 }
 
 static PyObject *
@@ -919,7 +964,7 @@ Pvwattsv5_assign(Pvwattsv5Object *self, PyObject *args)
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_nested_dict(self, self->x_attr, self->data_ptr, dict, "Pvwattsv5"))
+	if (!PySAM_assign_from_nested_dict((PyObject*)self, self->x_attr, self->data_ptr, dict, "Pvwattsv5"))
 		return NULL;
 
 	Py_INCREF(Py_None);
@@ -932,7 +977,6 @@ Pvwattsv5_export(Pvwattsv5Object *self, PyObject *args)
 {
 	return PySAM_export_to_nested_dict((PyObject *) self, self->x_attr);
 }
-
 
 static PyMethodDef Pvwattsv5_methods[] = {
 		{"execute",            (PyCFunction)Pvwattsv5_execute,  METH_VARARGS,
@@ -1045,7 +1089,7 @@ Pvwattsv5_default(PyObject *self, PyObject *args)
 	if (rv == NULL)
 		return NULL;
 
-	PySAM_load_defaults(rv, rv->x_attr, rv->data_ptr, "Pvwattsv5", fin);
+	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Pvwattsv5", fin);
 
 	return (PyObject *)rv;
 }
@@ -1058,14 +1102,16 @@ Pvwattsv5_default(PyObject *self, PyObject *args)
 static PyMethodDef Pvwattsv5Module_methods[] = {
 		{"new",             Pvwattsv5_new,         METH_VARARGS,
 				PyDoc_STR("new() -> new Pvwattsv5 object")},
-		{"wrap",             Pvwattsv5_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> new Pvwattsv5 object around existing data")},
 		{"default",             Pvwattsv5_default,         METH_VARARGS,
-				PyDoc_STR("default(financial) -> new Pvwattsv5 object with financial model-specific default attributes")},		{NULL,              NULL}           /* sentinel */
+				PyDoc_STR("default(financial) -> new Pvwattsv5 object with financial model-specific default attributes\n"
+				"Options: Single Owner, None, Sale Leaseback, Commercial, Residential, Third Party, Commercial PPA, Host Developer, Leveraged Partnership Flip, Independent Power Producer, All Equity Partnership Flip, LCOE Calculator, ")},
+		{"wrap",             Pvwattsv5_wrap,         METH_VARARGS,
+				PyDoc_STR("wrap(ssc_data_t) -> new Pvwattsv5 object around existing PySSC data")},
+		{NULL,              NULL}           /* sentinel */
 };
 
 PyDoc_STRVAR(module_doc,
-			 "This is a template module just for instruction.");
+			 "Refer to http://www.github.com/nrel/PySAM for source code.");
 
 
 static int

@@ -79,13 +79,13 @@ Weather_set_azimuth(WeatherObject *self, PyObject *value, void *closure)
 static PyObject *
 Weather_get_file_name(WeatherObject *self, void *closure)
 {
-	return PySAM_string_getter(SAM_TcstroughPhysical_Weather_file_sget, self->data_ptr);
+	return PySAM_string_getter(SAM_TcstroughPhysical_Weather_file_name_sget, self->data_ptr);
 }
 
 static int
 Weather_set_file_name(WeatherObject *self, PyObject *value, void *closure)
 {
-	return PySAM_string_setter(value, SAM_TcstroughPhysical_Weather_file_sset, self->data_ptr);
+	return PySAM_string_setter(value, SAM_TcstroughPhysical_Weather_file_name_sset, self->data_ptr);
 }
 
 static PyObject *
@@ -5221,7 +5221,7 @@ TcstroughPhysical_assign(TcstroughPhysicalObject *self, PyObject *args)
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_nested_dict(self, self->x_attr, self->data_ptr, dict, "TcstroughPhysical"))
+	if (!PySAM_assign_from_nested_dict((PyObject*)self, self->x_attr, self->data_ptr, dict, "TcstroughPhysical"))
 		return NULL;
 
 	Py_INCREF(Py_None);
@@ -5234,7 +5234,6 @@ TcstroughPhysical_export(TcstroughPhysicalObject *self, PyObject *args)
 {
 	return PySAM_export_to_nested_dict((PyObject *) self, self->x_attr);
 }
-
 
 static PyMethodDef TcstroughPhysical_methods[] = {
 		{"execute",            (PyCFunction)TcstroughPhysical_execute,  METH_VARARGS,
@@ -5347,7 +5346,7 @@ TcstroughPhysical_default(PyObject *self, PyObject *args)
 	if (rv == NULL)
 		return NULL;
 
-	PySAM_load_defaults(rv, rv->x_attr, rv->data_ptr, "TcstroughPhysical", fin);
+	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "TcstroughPhysical", fin);
 
 	return (PyObject *)rv;
 }
@@ -5360,14 +5359,16 @@ TcstroughPhysical_default(PyObject *self, PyObject *args)
 static PyMethodDef TcstroughPhysicalModule_methods[] = {
 		{"new",             TcstroughPhysical_new,         METH_VARARGS,
 				PyDoc_STR("new() -> new TcstroughPhysical object")},
-		{"wrap",             TcstroughPhysical_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> new TcstroughPhysical object around existing data")},
 		{"default",             TcstroughPhysical_default,         METH_VARARGS,
-				PyDoc_STR("default(financial) -> new TcstroughPhysical object with financial model-specific default attributes")},		{NULL,              NULL}           /* sentinel */
+				PyDoc_STR("default(financial) -> new TcstroughPhysical object with financial model-specific default attributes\n"
+				"Options: IPH-LCOH Calculator, Single Owner, Commercial, Sale Leaseback, None, LCOE Calculator, IPH-None, All Equity Partnership Flip, Independent Power Producer, Leveraged Partnership Flip, ")},
+		{"wrap",             TcstroughPhysical_wrap,         METH_VARARGS,
+				PyDoc_STR("wrap(ssc_data_t) -> new TcstroughPhysical object around existing PySSC data")},
+		{NULL,              NULL}           /* sentinel */
 };
 
 PyDoc_STRVAR(module_doc,
-			 "This is a template module just for instruction.");
+			 "Refer to http://www.github.com/nrel/PySAM for source code.");
 
 
 static int

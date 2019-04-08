@@ -41,7 +41,7 @@ AdjustmentFactors_new(PyObject* self, PyObject* args)
 static PyObject *
 AdjustmentFactors_assign(AdjustmentFactorsObject *self, PyObject *args)
 {
-    return PySAM_assign_from_attr(&AdjustmentFactors_Type, self, args);
+    return PySAM_assign_from_attr(&AdjustmentFactors_Type, (PyObject*)self, args);
 }
 
 static PyObject *
