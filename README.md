@@ -113,7 +113,7 @@
 	- docker:	`for PYBIN in /opt/python/*/bin; do
     				"${PYBIN}/pip" wheel /io/PySAM -w wheelhouse/
 	  			done`
-	- docker: auditwheels
+	- docker: auditwheels does not work for multimodule packages since it ends up copying libSAM_api and libssc for each module...
 		-- `echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/io/PySAM/lib' >> ~/.bashrc`
 		-- `source ~/.bashrc`
 		-- `ldconfig`

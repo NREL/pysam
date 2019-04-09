@@ -1,8 +1,0 @@
-README.md
-setup.py
-data/System_Advisor_Model.egg-info/PKG-INFO
-data/System_Advisor_Model.egg-info/SOURCES.txt
-data/System_Advisor_Model.egg-info/dependency_links.txt
-data/System_Advisor_Model.egg-info/top_level.txt
-src/AdjustmentFactors.c
-src/GenericSystem.c
