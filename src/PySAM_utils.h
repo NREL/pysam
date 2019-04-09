@@ -4,14 +4,19 @@
 #include <Python.h>
 #include <marshal.h>
 #include <stdio.h>
+
+#if defined(__WINDOWS__)
+#define strcasecmp _stricmp
+#endif
+
 //
 // Runtime linking to SAM shared library
 //
-static char* SAM_lib_dir = NULL;
+static char* SAM_lib_dir = NULL;	// dir ends with '/' 
 static char* SAM_lib_path = NULL;
 #if defined(__WINDOWS__) || defined(__CYGWIN__)
 static const char SAM_sep = '\\';
-static char* SAM_lib = "SAM_api.lib";
+static char* SAM_lib = "SAM_api.dll";
 #else
 static const char SAM_sep = '/';
 static char* SAM_lib = "libSAM_api.so";
@@ -34,13 +39,15 @@ static int PySAM_load_lib(PyObject* m){
         char* filename = PyBytes_AsString(ascii_mystring);
 
         char* lastSlash = strrchr(filename, SAM_sep);
-        char* dir = strndup(filename, strlen(filename) - strlen(lastSlash) + 1);
 
-        SAM_lib_path = malloc(strlen(dir) + strlen(SAM_lib) + 1);
-        strcpy(SAM_lib_path, dir);
+		SAM_lib_dir = malloc(strlen(filename) - strlen(lastSlash) + 2);
+		memcpy(SAM_lib_dir, filename, strlen(filename) - strlen(lastSlash) + 1);
+		SAM_lib_dir[strlen(filename) - strlen(lastSlash) + 1] = '\0';
+
+        SAM_lib_path = malloc(strlen(SAM_lib_dir) + strlen(SAM_lib) + 1);
+
+		memcpy(SAM_lib_path, SAM_lib_dir, strlen(SAM_lib_dir) + 1);
         strcat(SAM_lib_path, SAM_lib);
-
-        SAM_lib_dir = dir;
 
         Py_XDECREF(file);
         Py_XDECREF(ascii_mystring);
@@ -147,7 +154,7 @@ static int PySAM_seq_to_array(PyObject *value, float **arr, int *seqlen){
     if(!seq)
         return -1;
 
-    *seqlen = PySequence_Fast_GET_SIZE(seq);
+    *seqlen = (int)PySequence_Fast_GET_SIZE(seq);
     *arr = malloc(*seqlen*sizeof(float));
     if(!*arr) {
         Py_DECREF(seq);
@@ -190,8 +197,8 @@ static int PySAM_seq_to_matrix(PyObject *value, float **mat, int *nrows, int *nc
 
     row = PySequence_Fast_GET_ITEM(seq, 0);
 
-    *nrows = PySequence_Fast_GET_SIZE(seq);
-    *ncols = PySequence_Fast_GET_SIZE(row);
+    *nrows = (int)PySequence_Fast_GET_SIZE(seq);
+    *ncols = (int)PySequence_Fast_GET_SIZE(row);
 
     *mat = malloc((*nrows)*(*ncols)*sizeof(float));
     float *arr = NULL;
@@ -859,39 +866,39 @@ static int PySAM_load_defaults(PyObject* self, PyObject* x_attr, void* data_ptr,
     FILE* f = NULL;
     char path[256];
     if (strcasecmp(fin, "None") == 0){
-        sprintf(path, "%s/defaults/%s_None.df", SAM_lib_dir, tech);
+        sprintf(path, "%sdefaults/%s_None.df", SAM_lib_dir, tech);
     }
     else if (strcasecmp(fin, "Residential") == 0){
-        sprintf(path, "%s/defaults/%s_Residential.df", SAM_lib_dir, tech);
+        sprintf(path, "%sdefaults/%s_Residential.df", SAM_lib_dir, tech);
     }
     else if (strcasecmp(fin, "ThirdParty") == 0){
-        sprintf(path, "%s/defaults/%s_ThirdParty.df", SAM_lib_dir, tech);
+        sprintf(path, "%sdefaults/%s_ThirdParty.df", SAM_lib_dir, tech);
     }
     else if (strcasecmp(fin, "Commercial") == 0){
-        sprintf(path, "%s/defaults/%s_Commercial.df", SAM_lib_dir, tech);
+        sprintf(path, "%sdefaults/%s_Commercial.df", SAM_lib_dir, tech);
     }
     else if (strcasecmp(fin, "LCOECalculator") == 0){
-        sprintf(path, "%s/defaults/%s_LCOECalculator.df", SAM_lib_dir, tech);
+        sprintf(path, "%sdefaults/%s_LCOECalculator.df", SAM_lib_dir, tech);
     }
     else if (strcasecmp(fin, "SaleLeaseback") == 0){
-        sprintf(path, "%s/defaults/%s_SaleLeaseback.df", SAM_lib_dir, tech);
+        sprintf(path, "%sdefaults/%s_SaleLeaseback.df", SAM_lib_dir, tech);
     }
     else if (strcasecmp(fin, "SingleOwner") == 0){
-        sprintf(path, "%s/defaults/%s_SingleOwner.df", SAM_lib_dir, tech);
+        sprintf(path, "%sdefaults/%s_SingleOwner.df", SAM_lib_dir, tech);
     }
     else if (strcasecmp(fin, "LeveragedPartnershipFlip") == 0){
-        sprintf(path, "%s/defaults/%s_LeveragedPartnershipFlip.df", SAM_lib_dir, tech);
+        sprintf(path, "%sdefaults/%s_LeveragedPartnershipFlip.df", SAM_lib_dir, tech);
     }
     else if (strcasecmp(fin, "AllEquityPartnershipFlip") == 0){
-        sprintf(path, "%s/defaults/%s_AllEquityPartnershipFlip.df", SAM_lib_dir, tech);
+        sprintf(path, "%sdefaults/%s_AllEquityPartnershipFlip.df", SAM_lib_dir, tech);
     }
     else if (strcasecmp(fin, "HostDeveloper") == 0){
-        sprintf(path, "%s/defaults/%s_HostDeveloper.df", SAM_lib_dir, tech);
+        sprintf(path, "%sdefaults/%s_HostDeveloper.df", SAM_lib_dir, tech);
     }
     else if (strcasecmp(fin, "LCOHCalculator") == 0){
-        sprintf(path, "%s/defaults/%s_LCOHCalculator.df", SAM_lib_dir, tech);
+        sprintf(path, "%sdefaults/%s_LCOHCalculator.df", SAM_lib_dir, tech);
     }
-    f = fopen(path, "r");
+    f = fopen(path, "rb");
 
     if (!f){
         PyErr_SetString(PySAM_ErrorObject, "Could not open defaults file.");

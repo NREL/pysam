@@ -274,34 +274,8 @@ AdjustmentFactorsModule_exec(PyObject *m)
                        "AdjustmentFactors",
                        (PyObject*)&AdjustmentFactors_Type);
 
-    if (PySAM_ErrorObject == NULL) {
-        PySAM_ErrorObject = PyErr_NewException("PySAM.error", NULL, NULL);
-        if (PySAM_ErrorObject == NULL)
-            goto fail;
-    }
-    Py_INCREF(PySAM_ErrorObject);
-
-    if (!SAM_lib_path){
-        PyObject* file = PyModule_GetFilenameObject(m);
-
-        if (!file){
-            PyErr_SetString(PySAM_ErrorObject, "Could not get module filepath");
-            Py_XDECREF(file);
-            return -1;
-        }
-        PyObject* ascii_mystring = PyUnicode_AsASCIIString(file);
-        char* filename = PyBytes_AsString(ascii_mystring);
-
-        char* lastSlash = strrchr(filename, SAM_sep);
-        char* dir = strndup(filename, strlen(filename) - strlen(lastSlash) + 1);
-
-        SAM_lib_path = malloc(strlen(dir) + strlen(SAM_lib) + 1);
-        strcpy(SAM_lib_path, dir);
-        strcat(SAM_lib_path, SAM_lib);
-
-        Py_XDECREF(file);
-        Py_XDECREF(ascii_mystring);
-    }
+	if (PySAM_load_lib(m) < 0) goto fail;
+	if (PySAM_init_error() < 0) goto fail;
 
     return 0;
     fail:
