@@ -3,6 +3,8 @@ lib/
 build/
 cmake-build-debug/
 cmake-build-release/
+*.pyproj
+*.sln
 
 #os specific
 .idea/
@@ -18,4 +20,5 @@ __pycache__
 #distributions
 dist/
 manylinux/
-System_Advisor_Model.egg-info
+*.egg-info
+\.vs/
