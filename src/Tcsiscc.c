@@ -3217,8 +3217,8 @@ static PyObject *
 Tcsiscc_wrap(PyObject *self, PyObject *args)
 {
 	TcsisccObject *rv;
-	long int ptr = 0;
-	if (!PyArg_ParseTuple(args, "l:wrap", &ptr)){
+	long long int ptr = 0;  // 64 bit arch
+	if (!PyArg_ParseTuple(args, "L:wrap", &ptr)){
 		PyErr_BadArgument();
 		return NULL;
 	}
