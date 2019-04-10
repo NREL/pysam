@@ -268,7 +268,7 @@ def test4(n):
 
 
 
-for n in (1,5,20,100):
+for n in (100, 1000):
 
     print("Testing over", n, "loops:\t\t t_old\t\tt_new\t\tfactor")
 
