@@ -1088,6 +1088,12 @@ Outputs_get_annual_fuel_usage(OutputsObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_fuelcell_electrical_efficiency(OutputsObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Fuelcell_Outputs_fuelcell_electrical_efficiency_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_fuelcell_fuel_consumption_mcf(OutputsObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Fuelcell_Outputs_fuelcell_fuel_consumption_mcf_aget, self->data_ptr);
@@ -1150,6 +1156,9 @@ Outputs_get_system_heat_rate(OutputsObject *self, void *closure)
 static PyGetSetDef Outputs_getset[] = {
 {"annual_fuel_usage", (getter)Outputs_get_annual_fuel_usage,(setter)0,
 	"Annual Fuel Usage [kWht], number.",
+ 	NULL},
+{"fuelcell_electrical_efficiency", (getter)Outputs_get_fuelcell_electrical_efficiency,(setter)0,
+	"Fuel cell electrical efficiency [%], array.",
  	NULL},
 {"fuelcell_fuel_consumption_mcf", (getter)Outputs_get_fuelcell_fuel_consumption_mcf,(setter)0,
 	"Fuel consumption of fuel cell [MCf], array.",
@@ -1427,8 +1436,8 @@ static PyObject *
 Fuelcell_wrap(PyObject *self, PyObject *args)
 {
 	FuelcellObject *rv;
-	long int ptr = 0;
-	if (!PyArg_ParseTuple(args, "l:wrap", &ptr)){
+	long long int ptr = 0;  // 64 bit arch
+	if (!PyArg_ParseTuple(args, "L:wrap", &ptr)){
 		PyErr_BadArgument();
 		return NULL;
 	}

@@ -54,7 +54,7 @@ if sys.platform == 'darwin':
 if sys.platform == 'linux':
     libs = ['SAM_api', 'ssc']
     libfiles = ['libSAM_api.so', 'libssc.so']
-    extra_link_args = ["-Wl,-rpath,@loader_path/"]
+    extra_link_args = ["-Wl,-rpath,$ORIGIN/"]
 
 if sys.platform == 'win32':
     libs = ['SAM_api', 'ssc']
@@ -62,13 +62,13 @@ if sys.platform == 'win32':
     defines = [('__WINDOWS__', '1')]
 
 defaults_dir = os.environ['SAMNTDIR']+"/api_autogen/library/defaults/"
-copy_defaults()
+# copy_defaults()
 for filename in os.listdir(defaults_dir):
     libfiles.append('defaults/' + os.path.splitext(filename)[0] + '.df')
 
 setup(
     name='NREL-PySAM',
-    version='1.0',
+    version='1.0.1',
     url='http://www.github.com/nrel/pysam',
     description="National Renewable Energy Laboratory's System Advisor Model Python Wrapper",
     license='BSD 3-Clause',

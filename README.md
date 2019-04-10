@@ -1,12 +1,13 @@
 # PySAM Package
 
 ## Requirements
-1. Python 3.5, multi-phase initialization
+1. Python 3.5, 64 bit
 2. Operating system:
 	- Mac: macosx-10.7-x86_64
 	- most linux distributions
 	- Windows, 3.5
 3. CMake 2.8
+
 
 ## Structure
 
