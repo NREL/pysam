@@ -102,13 +102,13 @@ Simulation_set_system_use_lifetime_output(SimulationObject *self, PyObject *valu
 
 static PyGetSetDef Simulation_getset[] = {
 {"analysis_period", (getter)Simulation_get_analysis_period,(setter)Simulation_set_analysis_period,
-	"Lifetime analysis period [years], number.\n The number of years in the simulation; Required if: system_use_lifetime_output=1.",
+	"Lifetime analysis period [years], number.\n The number of years in the simulation; Required if system_use_lifetime_output=1.",
  	NULL},
 {"percent_complete", (getter)Simulation_get_percent_complete,(setter)Simulation_set_percent_complete,
 	"Estimated simulation status [%], number.\n ",
  	NULL},
 {"system_use_lifetime_output", (getter)Simulation_get_system_use_lifetime_output,(setter)Simulation_set_system_use_lifetime_output,
-	"Lifetime simulation [0/1], number.\n 0=SingleYearRepeated,1=RunEveryYear; Constraints: BOOLEAN; Required if: ?=0.",
+	"Lifetime simulation [0/1], number.\n 0=SingleYearRepeated,1=RunEveryYear; Constraints: BOOLEAN; 0 if not set.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1227,10 +1227,10 @@ static PyGetSetDef Battery_getset[] = {
 	"Time to discharge [h], number.\n ",
  	NULL},
 {"annual_energy", (getter)Battery_get_annual_energy,(setter)Battery_set_annual_energy,
-	"Annual Energy [kWh], number.\n Required if: ?=0.",
+	"Annual Energy [kWh], number.\n 0 if not set.",
  	NULL},
 {"batt_C_rate", (getter)Battery_get_batt_C_rate,(setter)Battery_set_batt_C_rate,
-	"Rate at which voltage vs. capacity curve input [], number.\n ",
+	"Rate at which voltage vs. capacity curve input, number.\n ",
  	NULL},
 {"batt_Cp", (getter)Battery_get_batt_Cp,(setter)Battery_set_batt_Cp,
 	"Battery specific heat capacity [J/KgK], number.\n ",
@@ -1260,10 +1260,10 @@ static PyGetSetDef Battery_getset[] = {
 	"Default nominal cell voltage [V], number.\n ",
  	NULL},
 {"batt_ac_dc_efficiency", (getter)Battery_get_batt_ac_dc_efficiency,(setter)Battery_set_batt_ac_dc_efficiency,
-	"Inverter AC to battery DC efficiency [], number.\n ",
+	"Inverter AC to battery DC efficiency, number.\n ",
  	NULL},
 {"batt_ac_or_dc", (getter)Battery_get_batt_ac_or_dc,(setter)Battery_set_batt_ac_or_dc,
-	"Battery interconnection (AC or DC) [], number.\n 0=DC_Connected,1=AC_Connected; ",
+	"Battery interconnection (AC or DC), number.\n 0=DC_Connected,1=AC_Connected; ",
  	NULL},
 {"batt_auto_gridcharge_max_daily", (getter)Battery_get_batt_auto_gridcharge_max_daily,(setter)Battery_set_batt_auto_gridcharge_max_daily,
 	"Allowed grid charging percent per day for automated dispatch [kW], number.\n ",
@@ -1281,34 +1281,34 @@ static PyGetSetDef Battery_getset[] = {
 	"Calendar life degradation input option [0/1/2], number.\n 0=NoCalendarDegradation,1=LithiomIonModel,2=InputLossTable; ",
  	NULL},
 {"batt_calendar_lifetime_matrix", (getter)Battery_get_batt_calendar_lifetime_matrix,(setter)Battery_set_batt_calendar_lifetime_matrix,
-	"Days vs capacity [], matrix.\n ",
+	"Days vs capacity, matrix.\n ",
  	NULL},
 {"batt_calendar_q0", (getter)Battery_get_batt_calendar_q0,(setter)Battery_set_batt_calendar_q0,
-	"Calendar life model initial capacity cofficient [], number.\n ",
+	"Calendar life model initial capacity cofficient, number.\n ",
  	NULL},
 {"batt_chem", (getter)Battery_get_batt_chem,(setter)Battery_set_batt_chem,
-	"Battery chemistry [], number.\n 0=LeadAcid,1=LiIon; ",
+	"Battery chemistry, number.\n 0=LeadAcid,1=LiIon; ",
  	NULL},
 {"batt_computed_bank_capacity", (getter)Battery_get_batt_computed_bank_capacity,(setter)Battery_set_batt_computed_bank_capacity,
 	"Computed bank capacity [kWh], number.\n ",
  	NULL},
 {"batt_computed_series", (getter)Battery_get_batt_computed_series,(setter)Battery_set_batt_computed_series,
-	"Number of cells in series [], number.\n ",
+	"Number of cells in series, number.\n ",
  	NULL},
 {"batt_computed_strings", (getter)Battery_get_batt_computed_strings,(setter)Battery_set_batt_computed_strings,
-	"Number of strings of cells [], number.\n ",
+	"Number of strings of cells, number.\n ",
  	NULL},
 {"batt_current_charge_max", (getter)Battery_get_batt_current_charge_max,(setter)Battery_set_batt_current_charge_max,
 	"Maximum charge current [A], number.\n ",
  	NULL},
 {"batt_current_choice", (getter)Battery_get_batt_current_choice,(setter)Battery_set_batt_current_choice,
-	"Limit cells by current or power [], number.\n ",
+	"Limit cells by current or power, number.\n ",
  	NULL},
 {"batt_current_discharge_max", (getter)Battery_get_batt_current_discharge_max,(setter)Battery_set_batt_current_discharge_max,
 	"Maximum discharge current [A], number.\n ",
  	NULL},
 {"batt_custom_dispatch", (getter)Battery_get_batt_custom_dispatch,(setter)Battery_set_batt_custom_dispatch,
-	"Custom battery power for every time step [kW], array.\n Required if: en_batt=1&batt_dispatch_choice=3.",
+	"Custom battery power for every time step [kW], array.\n Required if en_batt=1&batt_dispatch_choice=3.",
  	NULL},
 {"batt_cycle_cost", (getter)Battery_get_batt_cycle_cost,(setter)Battery_set_batt_cycle_cost,
 	"Input battery cycle costs [$/cycle-kWh], number.\n ",
@@ -1317,10 +1317,10 @@ static PyGetSetDef Battery_getset[] = {
 	"Use SAM model for cycle costs or input custom [0/1], number.\n 0=UseCostModel,1=InputCost; ",
  	NULL},
 {"batt_dc_ac_efficiency", (getter)Battery_get_batt_dc_ac_efficiency,(setter)Battery_set_batt_dc_ac_efficiency,
-	"Battery DC to AC efficiency [], number.\n ",
+	"Battery DC to AC efficiency, number.\n ",
  	NULL},
 {"batt_dc_dc_efficiency", (getter)Battery_get_batt_dc_dc_efficiency,(setter)Battery_set_batt_dc_dc_efficiency,
-	"PV DC to battery DC efficiency [], number.\n ",
+	"PV DC to battery DC efficiency, number.\n ",
  	NULL},
 {"batt_dispatch_auto_can_charge", (getter)Battery_get_batt_dispatch_auto_can_charge,(setter)Battery_set_batt_dispatch_auto_can_charge,
 	"PV charging allowed for automated dispatch? [kW], number.\n ",
@@ -1335,7 +1335,7 @@ static PyGetSetDef Battery_getset[] = {
 	"Grid charging allowed for automated dispatch? [kW], number.\n ",
  	NULL},
 {"batt_dispatch_choice", (getter)Battery_get_batt_dispatch_choice,(setter)Battery_set_batt_dispatch_choice,
-	"Battery dispatch algorithm [0/1/2/3/4], number.\n If behind the meter: 0=PeakShavingLookAhead,1=PeakShavingLookBehind,2=InputGridTarget,3=InputBatteryPower,4=ManualDispatch, if front of meter: 0=AutomatedLookAhead,1=AutomatedLookBehind,2=AutomatedInputForecast,3=InputBatteryPower,4=ManualDispatch; Required if: en_batt=1.",
+	"Battery dispatch algorithm [0/1/2/3/4], number.\n If behind the meter: 0=PeakShavingLookAhead,1=PeakShavingLookBehind,2=InputGridTarget,3=InputBatteryPower,4=ManualDispatch, if front of meter: 0=AutomatedLookAhead,1=AutomatedLookBehind,2=AutomatedInputForecast,3=InputBatteryPower,4=ManualDispatch; Required if en_batt=1.",
  	NULL},
 {"batt_dispatch_update_frequency_hours", (getter)Battery_get_batt_dispatch_update_frequency_hours,(setter)Battery_set_batt_dispatch_update_frequency_hours,
 	"Frequency to update the look-ahead dispatch [hours], number.\n ",
@@ -1353,25 +1353,25 @@ static PyGetSetDef Battery_getset[] = {
 	"Battery length [m], number.\n ",
  	NULL},
 {"batt_lifetime_matrix", (getter)Battery_get_batt_lifetime_matrix,(setter)Battery_set_batt_lifetime_matrix,
-	"Cycles vs capacity at different depths-of-discharge [], matrix.\n ",
+	"Cycles vs capacity at different depths-of-discharge, matrix.\n ",
  	NULL},
 {"batt_look_ahead_hours", (getter)Battery_get_batt_look_ahead_hours,(setter)Battery_set_batt_look_ahead_hours,
 	"Hours to look ahead in automated dispatch [hours], number.\n ",
  	NULL},
 {"batt_loss_choice", (getter)Battery_get_batt_loss_choice,(setter)Battery_set_batt_loss_choice,
-	"Loss power input option [0/1], number.\n 0=Monthly,1=TimeSeries; Required if: ?=0.",
+	"Loss power input option [0/1], number.\n 0=Monthly,1=TimeSeries; 0 if not set.",
  	NULL},
 {"batt_losses", (getter)Battery_get_batt_losses,(setter)Battery_set_batt_losses,
-	"Battery system losses at each timestep [kW], array.\n Required if: ?=0.",
+	"Battery system losses at each timestep [kW], array.\n 0 if not set.",
  	NULL},
 {"batt_losses_charging", (getter)Battery_get_batt_losses_charging,(setter)Battery_set_batt_losses_charging,
-	"Battery system losses when charging [kW], array.\n Required if: ?=0.",
+	"Battery system losses when charging [kW], array.\n 0 if not set.",
  	NULL},
 {"batt_losses_discharging", (getter)Battery_get_batt_losses_discharging,(setter)Battery_set_batt_losses_discharging,
-	"Battery system losses when discharging [kW], array.\n Required if: ?=0.",
+	"Battery system losses when discharging [kW], array.\n 0 if not set.",
  	NULL},
 {"batt_losses_idle", (getter)Battery_get_batt_losses_idle,(setter)Battery_set_batt_losses_idle,
-	"Battery system losses when idle [kW], array.\n Required if: ?=0.",
+	"Battery system losses when idle [kW], array.\n 0 if not set.",
  	NULL},
 {"batt_mass", (getter)Battery_get_batt_mass,(setter)Battery_set_batt_mass,
 	"Battery mass [kg], number.\n ",
@@ -1380,7 +1380,7 @@ static PyGetSetDef Battery_getset[] = {
 	"Maximum allowed state-of-charge [%], number.\n ",
  	NULL},
 {"batt_meter_position", (getter)Battery_get_batt_meter_position,(setter)Battery_set_batt_meter_position,
-	"Position of battery relative to electric meter [], number.\n 0=BehindTheMeter,1=FrontOfMeter; ",
+	"Position of battery relative to electric meter, number.\n 0=BehindTheMeter,1=FrontOfMeter; ",
  	NULL},
 {"batt_minimum_SOC", (getter)Battery_get_batt_minimum_SOC,(setter)Battery_set_batt_minimum_SOC,
 	"Minimum allowed state-of-charge [%], number.\n ",
@@ -1395,19 +1395,19 @@ static PyGetSetDef Battery_getset[] = {
 	"Maximum discharge power [kW], number.\n ",
  	NULL},
 {"batt_pv_clipping_forecast", (getter)Battery_get_batt_pv_clipping_forecast,(setter)Battery_set_batt_pv_clipping_forecast,
-	"PV clipping forecast [kW], array.\n Required if: en_batt=1&batt_meter_position=1&batt_dispatch_choice=2.",
+	"PV clipping forecast [kW], array.\n Required if en_batt=1&batt_meter_position=1&batt_dispatch_choice=2.",
  	NULL},
 {"batt_pv_dc_forecast", (getter)Battery_get_batt_pv_dc_forecast,(setter)Battery_set_batt_pv_dc_forecast,
-	"PV dc power forecast [kW], array.\n Required if: en_batt=1&batt_meter_position=1&batt_dispatch_choice=2.",
+	"PV dc power forecast [kW], array.\n Required if en_batt=1&batt_meter_position=1&batt_dispatch_choice=2.",
  	NULL},
 {"batt_replacement_capacity", (getter)Battery_get_batt_replacement_capacity,(setter)Battery_set_batt_replacement_capacity,
 	"Capacity degradation at which to replace battery [%], number.\n ",
  	NULL},
 {"batt_replacement_option", (getter)Battery_get_batt_replacement_option,(setter)Battery_set_batt_replacement_option,
-	"Enable battery replacement? [0=none,1=capacity based,2=user schedule], number.\n Constraints: INTEGER,MIN=0,MAX=2; Required if: ?=0.",
+	"Enable battery replacement? [0=none,1=capacity based,2=user schedule], number.\n Constraints: INTEGER,MIN=0,MAX=2; 0 if not set.",
  	NULL},
 {"batt_replacement_schedule", (getter)Battery_get_batt_replacement_schedule,(setter)Battery_set_batt_replacement_schedule,
-	"Battery bank replacements per year (user specified) [number/year], array.\n Required if: batt_replacement_option=2.",
+	"Battery bank replacements per year (user specified) [number/year], array.\n Required if batt_replacement_option=2.",
  	NULL},
 {"batt_resistance", (getter)Battery_get_batt_resistance,(setter)Battery_set_batt_resistance,
 	"Internal resistance [Ohm], number.\n ",
@@ -1416,19 +1416,19 @@ static PyGetSetDef Battery_getset[] = {
 	"Temperature of storage room [C], array.\n ",
  	NULL},
 {"batt_target_choice", (getter)Battery_get_batt_target_choice,(setter)Battery_set_batt_target_choice,
-	"Target power input option [0/1], number.\n 0=InputMonthlyTarget,1=InputFullTimeSeries; Required if: en_batt=1&batt_meter_position=0&batt_dispatch_choice=2.",
+	"Target power input option [0/1], number.\n 0=InputMonthlyTarget,1=InputFullTimeSeries; Required if en_batt=1&batt_meter_position=0&batt_dispatch_choice=2.",
  	NULL},
 {"batt_target_power", (getter)Battery_get_batt_target_power,(setter)Battery_set_batt_target_power,
-	"Grid target power for every time step [kW], array.\n Required if: en_batt=1&batt_meter_position=0&batt_dispatch_choice=2.",
+	"Grid target power for every time step [kW], array.\n Required if en_batt=1&batt_meter_position=0&batt_dispatch_choice=2.",
  	NULL},
 {"batt_target_power_monthly", (getter)Battery_get_batt_target_power_monthly,(setter)Battery_set_batt_target_power_monthly,
-	"Grid target power on monthly basis [kW], array.\n Required if: en_batt=1&batt_meter_position=0&batt_dispatch_choice=2.",
+	"Grid target power on monthly basis [kW], array.\n Required if en_batt=1&batt_meter_position=0&batt_dispatch_choice=2.",
  	NULL},
 {"batt_voltage_choice", (getter)Battery_get_batt_voltage_choice,(setter)Battery_set_batt_voltage_choice,
-	"Battery voltage input option [0/1], number.\n 0=UseVoltageModel,1=InputVoltageTable; Required if: ?=0.",
+	"Battery voltage input option [0/1], number.\n 0=UseVoltageModel,1=InputVoltageTable; 0 if not set.",
  	NULL},
 {"batt_voltage_matrix", (getter)Battery_get_batt_voltage_matrix,(setter)Battery_set_batt_voltage_matrix,
-	"Battery voltage vs. depth-of-discharge [], matrix.\n ",
+	"Battery voltage vs. depth-of-discharge, matrix.\n ",
  	NULL},
 {"batt_width", (getter)Battery_get_batt_width,(setter)Battery_set_batt_width,
 	"Battery width [m], number.\n ",
@@ -1437,28 +1437,28 @@ static PyGetSetDef Battery_getset[] = {
 	"Effective capacity as function of temperature [C,%], matrix.\n ",
  	NULL},
 {"dispatch_manual_charge", (getter)Battery_get_dispatch_manual_charge,(setter)Battery_set_dispatch_manual_charge,
-	"Periods 1-6 charging from system allowed? [], array.\n Required if: en_batt=1&batt_dispatch_choice=4.",
+	"Periods 1-6 charging from system allowed?, array.\n Required if en_batt=1&batt_dispatch_choice=4.",
  	NULL},
 {"dispatch_manual_discharge", (getter)Battery_get_dispatch_manual_discharge,(setter)Battery_set_dispatch_manual_discharge,
-	"Periods 1-6 discharging allowed? [], array.\n Required if: en_batt=1&batt_dispatch_choice=4.",
+	"Periods 1-6 discharging allowed?, array.\n Required if en_batt=1&batt_dispatch_choice=4.",
  	NULL},
 {"dispatch_manual_gridcharge", (getter)Battery_get_dispatch_manual_gridcharge,(setter)Battery_set_dispatch_manual_gridcharge,
-	"Periods 1-6 grid charging allowed? [], array.\n Required if: en_batt=1&batt_dispatch_choice=4.",
+	"Periods 1-6 grid charging allowed?, array.\n Required if en_batt=1&batt_dispatch_choice=4.",
  	NULL},
 {"dispatch_manual_percent_discharge", (getter)Battery_get_dispatch_manual_percent_discharge,(setter)Battery_set_dispatch_manual_percent_discharge,
-	"Periods 1-6 discharge percent [%], array.\n Required if: en_batt=1&batt_dispatch_choice=4.",
+	"Periods 1-6 discharge percent [%], array.\n Required if en_batt=1&batt_dispatch_choice=4.",
  	NULL},
 {"dispatch_manual_percent_gridcharge", (getter)Battery_get_dispatch_manual_percent_gridcharge,(setter)Battery_set_dispatch_manual_percent_gridcharge,
-	"Periods 1-6 gridcharge percent [%], array.\n Required if: en_batt=1&batt_dispatch_choice=4.",
+	"Periods 1-6 gridcharge percent [%], array.\n Required if en_batt=1&batt_dispatch_choice=4.",
  	NULL},
 {"dispatch_manual_sched", (getter)Battery_get_dispatch_manual_sched,(setter)Battery_set_dispatch_manual_sched,
-	"Battery dispatch schedule for weekday [], matrix.\n Required if: en_batt=1&batt_dispatch_choice=4.",
+	"Battery dispatch schedule for weekday, matrix.\n Required if en_batt=1&batt_dispatch_choice=4.",
  	NULL},
 {"dispatch_manual_sched_weekend", (getter)Battery_get_dispatch_manual_sched_weekend,(setter)Battery_set_dispatch_manual_sched_weekend,
-	"Battery dispatch schedule for weekend [], matrix.\n Required if: en_batt=1&batt_dispatch_choice=4.",
+	"Battery dispatch schedule for weekend, matrix.\n Required if en_batt=1&batt_dispatch_choice=4.",
  	NULL},
 {"en_batt", (getter)Battery_get_en_batt,(setter)Battery_set_en_batt,
-	"Enable battery storage model [0/1], number.\n Required if: ?=0.",
+	"Enable battery storage model [0/1], number.\n 0 if not set.",
  	NULL},
 {"om_replacement_cost1", (getter)Battery_get_om_replacement_cost1,(setter)Battery_set_om_replacement_cost1,
 	"Cost to replace battery per kWh [$/kWh], array.\n ",
@@ -1596,7 +1596,7 @@ System_set_gen(SystemObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef System_getset[] = {
 {"capacity_factor", (getter)System_get_capacity_factor,(setter)System_set_capacity_factor,
-	"Capacity factor [%], number.\n Required if: ?=0.",
+	"Capacity factor [%], number.\n 0 if not set.",
  	NULL},
 {"gen", (getter)System_get_gen,(setter)System_set_gen,
 	"System power generated [kW], array.\n ",
@@ -1845,7 +1845,7 @@ Common_set_inverter_model(CommonObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef Common_getset[] = {
 {"inverter_model", (getter)Common_get_inverter_model,(setter)Common_set_inverter_model,
-	"Inverter model specifier [], number.\n 0=cec,1=datasheet,2=partload,3=coefficientgenerator,4=generic; Constraints: INTEGER,MIN=0,MAX=4; ",
+	"Inverter model specifier, number.\n 0=cec,1=datasheet,2=partload,3=coefficientgenerator,4=generic; Constraints: INTEGER,MIN=0,MAX=4; ",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -2088,7 +2088,7 @@ static PyGetSetDef Inverter_getset[] = {
 	"Inverter Sandia Maximum AC Power [Wac], number.\n ",
  	NULL},
 {"inverter_count", (getter)Inverter_get_inverter_count,(setter)Inverter_set_inverter_count,
-	"Number of inverters [], number.\n ",
+	"Number of inverters, number.\n ",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -2211,7 +2211,7 @@ PV_set_dcoptimizer_loss(PVObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef PV_getset[] = {
 {"dcoptimizer_loss", (getter)PV_get_dcoptimizer_loss,(setter)PV_set_dcoptimizer_loss,
-	"PV loss in DC/DC w/MPPT conversion [], number.\n ",
+	"PV loss in DC/DC w/MPPT conversion, number.\n ",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -2346,7 +2346,7 @@ FuelCell_set_fuelcell_power(FuelCellObject *self, PyObject *value, void *closure
 
 static PyGetSetDef FuelCell_getset[] = {
 {"dispatch_manual_fuelcellcharge", (getter)FuelCell_get_dispatch_manual_fuelcellcharge,(setter)FuelCell_set_dispatch_manual_fuelcellcharge,
-	"Periods 1-6 charging from fuel cell allowed? [], array.\n ",
+	"Periods 1-6 charging from fuel cell allowed?, array.\n ",
  	NULL},
 {"fuelcell_power", (getter)FuelCell_get_fuelcell_power,(setter)FuelCell_set_fuelcell_power,
 	"Electricity from fuel cell [kW], array.\n ",
@@ -2511,13 +2511,13 @@ static PyGetSetDef ElectricityRate_getset[] = {
 	"Enable Electricity Rates [0/1], number.\n 0=EnableElectricityRates,1=NoRates; ",
  	NULL},
 {"ur_ec_sched_weekday", (getter)ElectricityRate_get_ur_ec_sched_weekday,(setter)ElectricityRate_set_ur_ec_sched_weekday,
-	"Energy charge weekday schedule [], matrix.\n 12 x 24 matrix; Required if: en_batt=1&batt_meter_position=1&batt_dispatch_choice=2.",
+	"Energy charge weekday schedule, matrix.\n 12 x 24 matrix; Required if en_batt=1&batt_meter_position=1&batt_dispatch_choice=2.",
  	NULL},
 {"ur_ec_sched_weekend", (getter)ElectricityRate_get_ur_ec_sched_weekend,(setter)ElectricityRate_set_ur_ec_sched_weekend,
-	"Energy charge weekend schedule [], matrix.\n 12 x 24 matrix; Required if: en_batt=1&batt_meter_position=1&batt_dispatch_choice=2.",
+	"Energy charge weekend schedule, matrix.\n 12 x 24 matrix; Required if en_batt=1&batt_meter_position=1&batt_dispatch_choice=2.",
  	NULL},
 {"ur_ec_tou_mat", (getter)ElectricityRate_get_ur_ec_tou_mat,(setter)ElectricityRate_set_ur_ec_tou_mat,
-	"Energy rates table [], matrix.\n Required if: en_batt=1&batt_meter_position=1&batt_dispatch_choice=2.",
+	"Energy rates table, matrix.\n Required if en_batt=1&batt_meter_position=1&batt_dispatch_choice=2.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -2676,16 +2676,16 @@ EnergyMarket_set_ppa_price_input(EnergyMarketObject *self, PyObject *value, void
 
 static PyGetSetDef EnergyMarket_getset[] = {
 {"dispatch_sched_weekday", (getter)EnergyMarket_get_dispatch_sched_weekday,(setter)EnergyMarket_set_dispatch_sched_weekday,
-	"Diurnal weekday TOD periods [1..9], matrix.\n 12 x 24 matrix; Required if: en_batt=1&batt_meter_position=1&batt_dispatch_choice=2.",
+	"Diurnal weekday TOD periods [1..9], matrix.\n 12 x 24 matrix; Required if en_batt=1&batt_meter_position=1&batt_dispatch_choice=2.",
  	NULL},
 {"dispatch_sched_weekend", (getter)EnergyMarket_get_dispatch_sched_weekend,(setter)EnergyMarket_set_dispatch_sched_weekend,
-	"Diurnal weekend TOD periods [1..9], matrix.\n 12 x 24 matrix; Required if: en_batt=1&batt_meter_position=1&batt_dispatch_choice=2.",
+	"Diurnal weekend TOD periods [1..9], matrix.\n 12 x 24 matrix; Required if en_batt=1&batt_meter_position=1&batt_dispatch_choice=2.",
  	NULL},
 {"dispatch_tod_factors", (getter)EnergyMarket_get_dispatch_tod_factors,(setter)EnergyMarket_set_dispatch_tod_factors,
-	"TOD factors for periods 1-9 [], array.\n Required if: en_batt=1&batt_meter_position=1&batt_dispatch_choice=2.",
+	"TOD factors for periods 1-9, array.\n Required if en_batt=1&batt_meter_position=1&batt_dispatch_choice=2.",
  	NULL},
 {"ppa_price_input", (getter)EnergyMarket_get_ppa_price_input,(setter)EnergyMarket_set_ppa_price_input,
-	"PPA Price Input [], number.\n Required if: en_batt=1&batt_meter_position=1&batt_dispatch_choice=2.",
+	"PPA Price Input, number.\n Required if en_batt=1&batt_meter_position=1&batt_dispatch_choice=2.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -3159,10 +3159,10 @@ static PyGetSetDef Outputs_getset[] = {
 	"Computed cost to cycle [$/cycle], array.",
  	NULL},
 {"batt_cycles", (getter)Outputs_get_batt_cycles,(setter)0,
-	"Battery number of cycles [], array.",
+	"Battery number of cycles, array.",
  	NULL},
 {"batt_dispatch_sched", (getter)Outputs_get_batt_dispatch_sched,(setter)0,
-	"Battery dispatch schedule [], matrix.",
+	"Battery dispatch schedule, matrix.",
  	NULL},
 {"batt_power", (getter)Outputs_get_batt_power,(setter)0,
 	"Electricity to/from battery [kW], array.",
@@ -3325,64 +3325,50 @@ newStandAloneBatteryObject(void* data_ptr)
 
 	PySAM_TECH_ATTR("StandAloneBattery", SAM_Battery_construct)
 
-PyObject* Simulation_obj = Simulation_new(self->data_ptr);
+	PyObject* Simulation_obj = Simulation_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Simulation", Simulation_obj);
 	Py_DECREF(Simulation_obj);
 
-PyObject* Battery_obj = Battery_new(self->data_ptr);
+	PyObject* Battery_obj = Battery_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Battery", Battery_obj);
 	Py_DECREF(Battery_obj);
 
-PyObject* System_obj = System_new(self->data_ptr);
+	PyObject* System_obj = System_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "System", System_obj);
 	Py_DECREF(System_obj);
 
-PyObject* ElectricLoad_obj = ElectricLoad_new(self->data_ptr);
+	PyObject* ElectricLoad_obj = ElectricLoad_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "ElectricLoad", ElectricLoad_obj);
 	Py_DECREF(ElectricLoad_obj);
 
-PyObject* Common_obj = Common_new(self->data_ptr);
+	PyObject* Common_obj = Common_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Common", Common_obj);
 	Py_DECREF(Common_obj);
 
-PyObject* Inverter_obj = Inverter_new(self->data_ptr);
+	PyObject* Inverter_obj = Inverter_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Inverter", Inverter_obj);
 	Py_DECREF(Inverter_obj);
 
-PyObject* PV_obj = PV_new(self->data_ptr);
+	PyObject* PV_obj = PV_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "PV", PV_obj);
 	Py_DECREF(PV_obj);
 
-PyObject* FuelCell_obj = FuelCell_new(self->data_ptr);
+	PyObject* FuelCell_obj = FuelCell_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "FuelCell", FuelCell_obj);
 	Py_DECREF(FuelCell_obj);
 
-PyObject* ElectricityRate_obj = ElectricityRate_new(self->data_ptr);
+	PyObject* ElectricityRate_obj = ElectricityRate_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "ElectricityRate", ElectricityRate_obj);
 	Py_DECREF(ElectricityRate_obj);
 
-PyObject* EnergyMarket_obj = EnergyMarket_new(self->data_ptr);
+	PyObject* EnergyMarket_obj = EnergyMarket_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "EnergyMarket", EnergyMarket_obj);
 	Py_DECREF(EnergyMarket_obj);
 
-PyObject* Outputs_obj = Outputs_new(self->data_ptr);
+	PyObject* Outputs_obj = Outputs_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
 	Py_DECREF(Outputs_obj);
 
-PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
-
-	PyObject* data_cap = PyCapsule_New(self->data_ptr, NULL, NULL);
-	PyObject* Adjust_obj = PyObject_CallMethod(AdjustmentFactorsModule, "new", "(O)", data_cap);
-	Py_XDECREF(data_cap);
-	Py_XDECREF(AdjustmentFactorsModule);
-
-	if (!Adjust_obj){
-		PyErr_SetString(PySAM_ErrorObject, "Couldn't create AdjustmentFactorsObject\n");
-		return NULL;
-	}
-
-	PyDict_SetItemString(attr_dict, "AdjustmentFactors", Adjust_obj);
-	Py_DECREF(Adjust_obj);
 
 	return self;
 }
@@ -3539,8 +3525,8 @@ static PyObject *
 StandAloneBattery_default(PyObject *self, PyObject *args)
 {
 	StandAloneBatteryObject *rv;
-	char* fin = 0;
-	if (!PyArg_ParseTuple(args, "s:default", &fin)){
+	char* def = 0;
+	if (!PyArg_ParseTuple(args, "s:default", &def)){
 		PyErr_BadArgument();
 		return NULL;
 	}
@@ -3548,7 +3534,7 @@ StandAloneBattery_default(PyObject *self, PyObject *args)
 	if (rv == NULL)
 		return NULL;
 
-	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Battery", fin);
+	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Battery", def);
 
 	return (PyObject *)rv;
 }
@@ -3563,14 +3549,14 @@ static PyMethodDef StandAloneBatteryModule_methods[] = {
 				PyDoc_STR("new() -> new StandAloneBattery object")},
 		{"default",             StandAloneBattery_default,         METH_VARARGS,
 				PyDoc_STR("default(financial) -> new StandAloneBattery object with financial model-specific default attributes\n"
-				"Options: None, ")},
+				"Options: LinearFresnelDsgIph, Biomass, Tcsdish, Hcpv, TcsgenericSolar, GenericSystem, Pvsamv1, Geothermal, Swh, TcsMSLF, StandAloneBattery, Pvwattsv5, TcstroughPhysical, TroughPhysicalProcessHeat, TcslinearFresnel, Windpower, TcstroughEmpirical")},
 		{"wrap",             StandAloneBattery_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> new StandAloneBattery object around existing PySSC data")},
+				PyDoc_STR("wrap(ssc_data_t) -> new StandAloneBattery object around existing PySSC data, taking over memory ownership")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 PyDoc_STRVAR(module_doc,
-			 "Refer to http://www.github.com/nrel/PySAM for source code.");
+			 "Detailed battery storage model");
 
 
 static int
@@ -3579,27 +3565,11 @@ StandAloneBatteryModule_exec(PyObject *m)
 	/* Finalize the type object including setting type of the new type
 	 * object; doing it here is required for portability, too. */
 
+	if (PySAM_load_lib(m) < 0) goto fail;
+	if (PySAM_init_error(m) < 0) goto fail;
+
 	StandAloneBattery_Type.tp_dict = PyDict_New();
 	if (!StandAloneBattery_Type.tp_dict) { goto fail; }
-
-	/// Add the AdjustmentFactors type object to StandAloneBattery_Type
-	PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
-	if (!AdjustmentFactorsModule){
-		PyErr_SetImportError(PyUnicode_FromString("Could not import AdjustmentFactors module."), NULL, NULL);
-	}
-
-	PyTypeObject* AdjustmentFactors_Type = (PyTypeObject*)PyObject_GetAttrString(AdjustmentFactorsModule, "AdjustmentFactors");
-	if (!AdjustmentFactors_Type){
-		PyErr_SetImportError(PyUnicode_FromString("Could not import AdjustmentFactors type."), NULL, NULL);
-	}
-	Py_XDECREF(AdjustmentFactorsModule);
-
-	if (PyType_Ready(AdjustmentFactors_Type) < 0) { goto fail; }
-	PyDict_SetItemString(StandAloneBattery_Type.tp_dict,
-						 "AdjustmentFactors",
-						 (PyObject*)AdjustmentFactors_Type);
-	Py_DECREF(&AdjustmentFactors_Type);
-	Py_XDECREF(AdjustmentFactors_Type);
 
 	/// Add the Simulation type object to StandAloneBattery_Type
 	if (PyType_Ready(&Simulation_Type) < 0) { goto fail; }
@@ -3683,9 +3653,6 @@ StandAloneBatteryModule_exec(PyObject *m)
 	PyModule_AddObject(m,
 				"StandAloneBattery",
 				(PyObject*)&StandAloneBattery_Type);
-
-	if (PySAM_load_lib(m) < 0) goto fail;
-	if (PySAM_init_error() < 0) goto fail;
 
 	return 0;
 	fail:

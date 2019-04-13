@@ -78,7 +78,7 @@ Weather_set_solar_resource_file(WeatherObject *self, PyObject *value, void *clos
 
 static PyGetSetDef Weather_getset[] = {
 {"solar_resource_file", (getter)Weather_get_solar_resource_file,(setter)Weather_set_solar_resource_file,
-	"local weather file path [], string.\n Constraints: LOCAL_FILE; Required if: *.",
+	"local weather file path, string.\n Constraints: LOCAL_FILE; Required.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -633,115 +633,115 @@ SWH_set_use_custom_set(SWHObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef SWH_getset[] = {
 {"FRUL", (getter)SWH_get_FRUL,(setter)SWH_set_FRUL,
-	"FRUL [], number.\n Required if: *.",
+	"FRUL, number.\n Required.",
  	NULL},
 {"FRta", (getter)SWH_get_FRta,(setter)SWH_set_FRta,
-	"FRta [], number.\n Required if: *.",
+	"FRta, number.\n Required.",
  	NULL},
 {"T_room", (getter)SWH_get_T_room,(setter)SWH_set_T_room,
-	"Temperature around solar tank [C], number.\n Constraints: POSITIVE; Required if: *.",
+	"Temperature around solar tank [C], number.\n Constraints: POSITIVE; Required.",
  	NULL},
 {"T_set", (getter)SWH_get_T_set,(setter)SWH_set_T_set,
-	"Set temperature [C], number.\n Constraints: POSITIVE; Required if: *.",
+	"Set temperature [C], number.\n Constraints: POSITIVE; Required.",
  	NULL},
 {"T_tank_max", (getter)SWH_get_T_tank_max,(setter)SWH_set_T_tank_max,
-	"Max temperature in solar tank [C], number.\n Constraints: POSITIVE; Required if: *.",
+	"Max temperature in solar tank [C], number.\n Constraints: POSITIVE; Required.",
  	NULL},
 {"U_tank", (getter)SWH_get_U_tank,(setter)SWH_set_U_tank,
-	"Solar tank heat loss coefficient [W/m2K], number.\n Constraints: POSITIVE; Required if: *.",
+	"Solar tank heat loss coefficient [W/m2K], number.\n Constraints: POSITIVE; Required.",
  	NULL},
 {"V_tank", (getter)SWH_get_V_tank,(setter)SWH_set_V_tank,
-	"Solar tank volume [m3], number.\n Constraints: POSITIVE; Required if: *.",
+	"Solar tank volume [m3], number.\n Constraints: POSITIVE; Required.",
  	NULL},
 {"albedo", (getter)SWH_get_albedo,(setter)SWH_set_albedo,
-	"Ground reflectance factor [0..1], number.\n Constraints: FACTOR; Required if: *.",
+	"Ground reflectance factor [0..1], number.\n Constraints: FACTOR; Required.",
  	NULL},
 {"area_coll", (getter)SWH_get_area_coll,(setter)SWH_set_area_coll,
-	"Single collector area [m2], number.\n Constraints: POSITIVE; Required if: *.",
+	"Single collector area [m2], number.\n Constraints: POSITIVE; Required.",
  	NULL},
 {"azimuth", (getter)SWH_get_azimuth,(setter)SWH_set_azimuth,
-	"Collector azimuth [deg], number.\n 90=E,180=S; Constraints: MIN=0,MAX=360; Required if: *.",
+	"Collector azimuth [deg], number.\n 90=E,180=S; Constraints: MIN=0,MAX=360; Required.",
  	NULL},
 {"custom_mains", (getter)SWH_get_custom_mains,(setter)SWH_set_custom_mains,
-	"Custom mains [C], array.\n Constraints: LENGTH=8760; Required if: *.",
+	"Custom mains [C], array.\n Constraints: LENGTH=8760; Required.",
  	NULL},
 {"custom_set", (getter)SWH_get_custom_set,(setter)SWH_set_custom_set,
-	"Custom set points [C], array.\n Constraints: LENGTH=8760; Required if: *.",
+	"Custom set points [C], array.\n Constraints: LENGTH=8760; Required.",
  	NULL},
 {"fluid", (getter)SWH_get_fluid,(setter)SWH_set_fluid,
-	"Working fluid in system [], number.\n Water,Glycol; Constraints: INTEGER,MIN=0,MAX=1; Required if: *.",
+	"Working fluid in system, number.\n Water,Glycol; Constraints: INTEGER,MIN=0,MAX=1; Required.",
  	NULL},
 {"hx_eff", (getter)SWH_get_hx_eff,(setter)SWH_set_hx_eff,
-	"Heat exchanger effectiveness [0..1], number.\n Constraints: POSITIVE; Required if: *.",
+	"Heat exchanger effectiveness [0..1], number.\n Constraints: POSITIVE; Required.",
  	NULL},
 {"iam", (getter)SWH_get_iam,(setter)SWH_set_iam,
-	"Incidence angle modifier [], number.\n Required if: *.",
+	"Incidence angle modifier, number.\n Required.",
  	NULL},
 {"irrad_mode", (getter)SWH_get_irrad_mode,(setter)SWH_set_irrad_mode,
-	"Irradiance input mode [0/1/2], number.\n Beam+Diff,Global+Beam,Global+Diff; Constraints: INTEGER,MIN=0,MAX=2; Required if: ?=0.",
+	"Irradiance input mode [0/1/2], number.\n Beam+Diff,Global+Beam,Global+Diff; Constraints: INTEGER,MIN=0,MAX=2; 0 if not set.",
  	NULL},
 {"mdot", (getter)SWH_get_mdot,(setter)SWH_set_mdot,
-	"Total system mass flow rate [kg/s], number.\n Constraints: POSITIVE; Required if: *.",
+	"Total system mass flow rate [kg/s], number.\n Constraints: POSITIVE; Required.",
  	NULL},
 {"ncoll", (getter)SWH_get_ncoll,(setter)SWH_set_ncoll,
-	"Number of collectors [], number.\n Constraints: POSITIVE,INTEGER; Required if: *.",
+	"Number of collectors, number.\n Constraints: POSITIVE,INTEGER; Required.",
  	NULL},
 {"pipe_diam", (getter)SWH_get_pipe_diam,(setter)SWH_set_pipe_diam,
-	"Pipe diameter [m], number.\n Constraints: POSITIVE; Required if: *.",
+	"Pipe diameter [m], number.\n Constraints: POSITIVE; Required.",
  	NULL},
 {"pipe_insul", (getter)SWH_get_pipe_insul,(setter)SWH_set_pipe_insul,
-	"Pipe insulation thickness [m], number.\n Constraints: POSITIVE; Required if: *.",
+	"Pipe insulation thickness [m], number.\n Constraints: POSITIVE; Required.",
  	NULL},
 {"pipe_k", (getter)SWH_get_pipe_k,(setter)SWH_set_pipe_k,
-	"Pipe insulation conductivity [W/m2.C], number.\n Constraints: POSITIVE; Required if: *.",
+	"Pipe insulation conductivity [W/m2.C], number.\n Constraints: POSITIVE; Required.",
  	NULL},
 {"pipe_length", (getter)SWH_get_pipe_length,(setter)SWH_set_pipe_length,
-	"Length of piping in system [m], number.\n Constraints: POSITIVE; Required if: *.",
+	"Length of piping in system [m], number.\n Constraints: POSITIVE; Required.",
  	NULL},
 {"pump_eff", (getter)SWH_get_pump_eff,(setter)SWH_set_pump_eff,
-	"Pumping efficiency [%], number.\n Constraints: PERCENT; Required if: *.",
+	"Pumping efficiency [%], number.\n Constraints: PERCENT; Required.",
  	NULL},
 {"pump_power", (getter)SWH_get_pump_power,(setter)SWH_set_pump_power,
-	"Pump power [W], number.\n Constraints: POSITIVE; Required if: *.",
+	"Pump power [W], number.\n Constraints: POSITIVE; Required.",
  	NULL},
 {"scaled_draw", (getter)SWH_get_scaled_draw,(setter)SWH_set_scaled_draw,
-	"Hot water draw [kg/hr], array.\n Constraints: LENGTH=8760; Required if: *.",
+	"Hot water draw [kg/hr], array.\n Constraints: LENGTH=8760; Required.",
  	NULL},
 {"shading_azal", (getter)SWH_get_shading_azal,(setter)SWH_set_shading_azal,
-	"Azimuth x altitude beam shading loss [%], matrix.\n Required if: ?.",
+	"Azimuth x altitude beam shading loss [%], matrix.\n Required if ?.",
  	NULL},
 {"shading_diff", (getter)SWH_get_shading_diff,(setter)SWH_set_shading_diff,
-	"Diffuse shading loss [%], number.\n Required if: ?.",
+	"Diffuse shading loss [%], number.\n Required if ?.",
  	NULL},
 {"shading_mxh", (getter)SWH_get_shading_mxh,(setter)SWH_set_shading_mxh,
-	"Month x Hour beam shading loss [%], matrix.\n Required if: ?.",
+	"Month x Hour beam shading loss [%], matrix.\n Required if ?.",
  	NULL},
 {"shading_timestep", (getter)SWH_get_shading_timestep,(setter)SWH_set_shading_timestep,
-	"Time step beam shading loss [%], matrix.\n Required if: ?.",
+	"Time step beam shading loss [%], matrix.\n Required if ?.",
  	NULL},
 {"sky_model", (getter)SWH_get_sky_model,(setter)SWH_set_sky_model,
-	"Tilted surface irradiance model [0/1/2], number.\n Isotropic,HDKR,Perez; Constraints: INTEGER,MIN=0,MAX=2; Required if: ?=1.",
+	"Tilted surface irradiance model [0/1/2], number.\n Isotropic,HDKR,Perez; Constraints: INTEGER,MIN=0,MAX=2; Required if ?=1.",
  	NULL},
 {"system_capacity", (getter)SWH_get_system_capacity,(setter)SWH_set_system_capacity,
-	"Nameplate capacity [kW], number.\n Required if: *.",
+	"Nameplate capacity [kW], number.\n Required.",
  	NULL},
 {"tank_h2d_ratio", (getter)SWH_get_tank_h2d_ratio,(setter)SWH_set_tank_h2d_ratio,
-	"Solar tank height to diameter ratio [], number.\n Constraints: POSITIVE; Required if: *.",
+	"Solar tank height to diameter ratio, number.\n Constraints: POSITIVE; Required.",
  	NULL},
 {"test_flow", (getter)SWH_get_test_flow,(setter)SWH_set_test_flow,
-	"Flow rate used in collector test [kg/s], number.\n Constraints: POSITIVE; Required if: *.",
+	"Flow rate used in collector test [kg/s], number.\n Constraints: POSITIVE; Required.",
  	NULL},
 {"test_fluid", (getter)SWH_get_test_fluid,(setter)SWH_set_test_fluid,
-	"Fluid used in collector test [], number.\n Water,Glycol; Constraints: INTEGER,MIN=0,MAX=1; Required if: *.",
+	"Fluid used in collector test, number.\n Water,Glycol; Constraints: INTEGER,MIN=0,MAX=1; Required.",
  	NULL},
 {"tilt", (getter)SWH_get_tilt,(setter)SWH_set_tilt,
-	"Collector tilt [deg], number.\n Constraints: MIN=0,MAX=90; Required if: *.",
+	"Collector tilt [deg], number.\n Constraints: MIN=0,MAX=90; Required.",
  	NULL},
 {"use_custom_mains", (getter)SWH_get_use_custom_mains,(setter)SWH_set_use_custom_mains,
-	"Use custom mains [%], number.\n Constraints: INTEGER,MIN=0,MAX=1; Required if: *.",
+	"Use custom mains [%], number.\n Constraints: INTEGER,MIN=0,MAX=1; Required.",
  	NULL},
 {"use_custom_set", (getter)SWH_get_use_custom_set,(setter)SWH_set_use_custom_set,
-	"Use custom set points [%], number.\n Constraints: INTEGER,MIN=0,MAX=1; Required if: *.",
+	"Use custom set points [%], number.\n Constraints: INTEGER,MIN=0,MAX=1; Required.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1143,7 +1143,7 @@ static PyGetSetDef Outputs_getset[] = {
 	"First year kWh/kW [kWh/kW], number.",
  	NULL},
 {"mode", (getter)Outputs_get_mode,(setter)0,
-	"Operation mode [], array.",
+	"Operation mode, array.",
  	NULL},
 {"monthly_Q_aux", (getter)Outputs_get_monthly_Q_aux,(setter)0,
 	"Q auxiliary [kWh], array.",
@@ -1161,7 +1161,7 @@ static PyGetSetDef Outputs_getset[] = {
 	"Shading losses [%], array.",
  	NULL},
 {"solar_fraction", (getter)Outputs_get_solar_fraction,(setter)0,
-	"Solar fraction [], number.",
+	"Solar fraction, number.",
  	NULL},
 {"ts_shift_hours", (getter)Outputs_get_ts_shift_hours,(setter)0,
 	"Time offset for interpreting time series outputs [hours], number.",
@@ -1237,19 +1237,15 @@ newSwhObject(void* data_ptr)
 
 	PySAM_TECH_ATTR("Swh", SAM_Swh_construct)
 
-PyObject* Weather_obj = Weather_new(self->data_ptr);
+	PyObject* Weather_obj = Weather_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Weather", Weather_obj);
 	Py_DECREF(Weather_obj);
 
-PyObject* SWH_obj = SWH_new(self->data_ptr);
+	PyObject* SWH_obj = SWH_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "SWH", SWH_obj);
 	Py_DECREF(SWH_obj);
 
-PyObject* Outputs_obj = Outputs_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
-	Py_DECREF(Outputs_obj);
-
-PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
+	PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
 
 	PyObject* data_cap = PyCapsule_New(self->data_ptr, NULL, NULL);
 	PyObject* Adjust_obj = PyObject_CallMethod(AdjustmentFactorsModule, "new", "(O)", data_cap);
@@ -1263,6 +1259,11 @@ PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
 
 	PyDict_SetItemString(attr_dict, "AdjustmentFactors", Adjust_obj);
 	Py_DECREF(Adjust_obj);
+
+	PyObject* Outputs_obj = Outputs_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
+	Py_DECREF(Outputs_obj);
+
 
 	return self;
 }
@@ -1419,8 +1420,8 @@ static PyObject *
 Swh_default(PyObject *self, PyObject *args)
 {
 	SwhObject *rv;
-	char* fin = 0;
-	if (!PyArg_ParseTuple(args, "s:default", &fin)){
+	char* def = 0;
+	if (!PyArg_ParseTuple(args, "s:default", &def)){
 		PyErr_BadArgument();
 		return NULL;
 	}
@@ -1428,7 +1429,7 @@ Swh_default(PyObject *self, PyObject *args)
 	if (rv == NULL)
 		return NULL;
 
-	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Swh", fin);
+	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Swh", def);
 
 	return (PyObject *)rv;
 }
@@ -1443,14 +1444,14 @@ static PyMethodDef SwhModule_methods[] = {
 				PyDoc_STR("new() -> new Swh object")},
 		{"default",             Swh_default,         METH_VARARGS,
 				PyDoc_STR("default(financial) -> new Swh object with financial model-specific default attributes\n"
-				"Options: Commercial, None, Residential, LCOE Calculator, ")},
+				"Options: Commercial, None, Residential, Lcoefcr")},
 		{"wrap",             Swh_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> new Swh object around existing PySSC data")},
+				PyDoc_STR("wrap(ssc_data_t) -> new Swh object around existing PySSC data, taking over memory ownership")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 PyDoc_STRVAR(module_doc,
-			 "Refer to http://www.github.com/nrel/PySAM for source code.");
+			 "Solar water heating model for residential and commercial building applications");
 
 
 static int
@@ -1458,6 +1459,9 @@ SwhModule_exec(PyObject *m)
 {
 	/* Finalize the type object including setting type of the new type
 	 * object; doing it here is required for portability, too. */
+
+	if (PySAM_load_lib(m) < 0) goto fail;
+	if (PySAM_init_error(m) < 0) goto fail;
 
 	Swh_Type.tp_dict = PyDict_New();
 	if (!Swh_Type.tp_dict) { goto fail; }
@@ -1507,9 +1511,6 @@ SwhModule_exec(PyObject *m)
 	PyModule_AddObject(m,
 				"Swh",
 				(PyObject*)&Swh_Type);
-
-	if (PySAM_load_lib(m) < 0) goto fail;
-	if (PySAM_init_error() < 0) goto fail;
 
 	return 0;
 	fail:

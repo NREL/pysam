@@ -138,22 +138,22 @@ BatteryModelSimple_set_batt_simple_meter_position(BatteryModelSimpleObject *self
 
 static PyGetSetDef BatteryModelSimple_getset[] = {
 {"batt_simple_chemistry", (getter)BatteryModelSimple_get_batt_simple_chemistry,(setter)BatteryModelSimple_set_batt_simple_chemistry,
-	"Battery Chemistry [0=lead acid/1=Li-ion/2], number.\n Required if: ?=0.",
+	"Battery Chemistry [0=lead acid/1=Li-ion/2], number.\n 0 if not set.",
  	NULL},
 {"batt_simple_dispatch", (getter)BatteryModelSimple_get_batt_simple_dispatch,(setter)BatteryModelSimple_set_batt_simple_dispatch,
-	"Battery Dispatch [0=peak shaving look ahead/1=peak shaving look behind], number.\n Required if: ?=0.",
+	"Battery Dispatch [0=peak shaving look ahead/1=peak shaving look behind], number.\n 0 if not set.",
  	NULL},
 {"batt_simple_enable", (getter)BatteryModelSimple_get_batt_simple_enable,(setter)BatteryModelSimple_set_batt_simple_enable,
-	"Enable Battery [0/1], number.\n Constraints: BOOLEAN; Required if: ?=0.",
+	"Enable Battery [0/1], number.\n Constraints: BOOLEAN; 0 if not set.",
  	NULL},
 {"batt_simple_kw", (getter)BatteryModelSimple_get_batt_simple_kw,(setter)BatteryModelSimple_set_batt_simple_kw,
-	"Battery Power [kW], number.\n Required if: ?=0.",
+	"Battery Power [kW], number.\n 0 if not set.",
  	NULL},
 {"batt_simple_kwh", (getter)BatteryModelSimple_get_batt_simple_kwh,(setter)BatteryModelSimple_set_batt_simple_kwh,
-	"Battery Capacity [kWh], number.\n Required if: ?=0.",
+	"Battery Capacity [kWh], number.\n 0 if not set.",
  	NULL},
 {"batt_simple_meter_position", (getter)BatteryModelSimple_get_batt_simple_meter_position,(setter)BatteryModelSimple_set_batt_simple_meter_position,
-	"Battery Meter Position [0=behind meter/1=front of meter], number.\n Required if: ?=0.",
+	"Battery Meter Position [0=behind meter/1=front of meter], number.\n 0 if not set.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -321,7 +321,7 @@ static PyGetSetDef Common_getset[] = {
 	"Inverter Efficiency [%], number.\n ",
  	NULL},
 {"inverter_model", (getter)Common_get_inverter_model,(setter)Common_set_inverter_model,
-	"Inverter model specifier [], number.\n 0=cec,1=datasheet,2=partload,3=coefficientgenerator,4=generic; Constraints: INTEGER,MIN=0,MAX=4; ",
+	"Inverter model specifier, number.\n 0=cec,1=datasheet,2=partload,3=coefficientgenerator,4=generic; Constraints: INTEGER,MIN=0,MAX=4; ",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -924,10 +924,10 @@ static PyGetSetDef Outputs_getset[] = {
 	"Computed cost to cycle [$/cycle], array.",
  	NULL},
 {"batt_cycles", (getter)Outputs_get_batt_cycles,(setter)0,
-	"Battery number of cycles [], array.",
+	"Battery number of cycles, array.",
  	NULL},
 {"batt_dispatch_sched", (getter)Outputs_get_batt_dispatch_sched,(setter)0,
-	"Battery dispatch schedule [], matrix.",
+	"Battery dispatch schedule, matrix.",
  	NULL},
 {"batt_power", (getter)Outputs_get_batt_power,(setter)0,
 	"Electricity to/from battery [kW], array.",
@@ -1093,36 +1093,22 @@ newBattwattsObject(void* data_ptr)
 
 	PySAM_TECH_ATTR("Battwatts", SAM_Battwatts_construct)
 
-PyObject* BatteryModelSimple_obj = BatteryModelSimple_new(self->data_ptr);
+	PyObject* BatteryModelSimple_obj = BatteryModelSimple_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "BatteryModelSimple", BatteryModelSimple_obj);
 	Py_DECREF(BatteryModelSimple_obj);
 
-PyObject* Common_obj = Common_new(self->data_ptr);
+	PyObject* Common_obj = Common_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Common", Common_obj);
 	Py_DECREF(Common_obj);
 
-PyObject* ElectricLoadOther_obj = ElectricLoadOther_new(self->data_ptr);
+	PyObject* ElectricLoadOther_obj = ElectricLoadOther_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "ElectricLoadOther", ElectricLoadOther_obj);
 	Py_DECREF(ElectricLoadOther_obj);
 
-PyObject* Outputs_obj = Outputs_new(self->data_ptr);
+	PyObject* Outputs_obj = Outputs_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
 	Py_DECREF(Outputs_obj);
 
-PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
-
-	PyObject* data_cap = PyCapsule_New(self->data_ptr, NULL, NULL);
-	PyObject* Adjust_obj = PyObject_CallMethod(AdjustmentFactorsModule, "new", "(O)", data_cap);
-	Py_XDECREF(data_cap);
-	Py_XDECREF(AdjustmentFactorsModule);
-
-	if (!Adjust_obj){
-		PyErr_SetString(PySAM_ErrorObject, "Couldn't create AdjustmentFactorsObject\n");
-		return NULL;
-	}
-
-	PyDict_SetItemString(attr_dict, "AdjustmentFactors", Adjust_obj);
-	Py_DECREF(Adjust_obj);
 
 	return self;
 }
@@ -1279,8 +1265,8 @@ static PyObject *
 Battwatts_default(PyObject *self, PyObject *args)
 {
 	BattwattsObject *rv;
-	char* fin = 0;
-	if (!PyArg_ParseTuple(args, "s:default", &fin)){
+	char* def = 0;
+	if (!PyArg_ParseTuple(args, "s:default", &def)){
 		PyErr_BadArgument();
 		return NULL;
 	}
@@ -1288,7 +1274,7 @@ Battwatts_default(PyObject *self, PyObject *args)
 	if (rv == NULL)
 		return NULL;
 
-	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Battwatts", fin);
+	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Battwatts", def);
 
 	return (PyObject *)rv;
 }
@@ -1303,14 +1289,14 @@ static PyMethodDef BattwattsModule_methods[] = {
 				PyDoc_STR("new() -> new Battwatts object")},
 		{"default",             Battwatts_default,         METH_VARARGS,
 				PyDoc_STR("default(financial) -> new Battwatts object with financial model-specific default attributes\n"
-				"Options: Single Owner, None, Sale Leaseback, Commercial, Residential, Third Party, Commercial PPA, Host Developer, Leveraged Partnership Flip, Independent Power Producer, All Equity Partnership Flip, LCOE Calculator, ")},
+				"Options: TcsMSLF, TcslinearFresnel, Swh, Tcsdish, GenericSystem, Pvsamv1, Fuelcell, TcsgenericSolar, TcstroughPhysical, Pvwattsv5, TcstroughEmpirical, Biomass, Windpower")},
 		{"wrap",             Battwatts_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> new Battwatts object around existing PySSC data")},
+				PyDoc_STR("wrap(ssc_data_t) -> new Battwatts object around existing PySSC data, taking over memory ownership")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 PyDoc_STRVAR(module_doc,
-			 "Refer to http://www.github.com/nrel/PySAM for source code.");
+			 "Simplified battery storage model");
 
 
 static int
@@ -1319,27 +1305,11 @@ BattwattsModule_exec(PyObject *m)
 	/* Finalize the type object including setting type of the new type
 	 * object; doing it here is required for portability, too. */
 
+	if (PySAM_load_lib(m) < 0) goto fail;
+	if (PySAM_init_error(m) < 0) goto fail;
+
 	Battwatts_Type.tp_dict = PyDict_New();
 	if (!Battwatts_Type.tp_dict) { goto fail; }
-
-	/// Add the AdjustmentFactors type object to Battwatts_Type
-	PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
-	if (!AdjustmentFactorsModule){
-		PyErr_SetImportError(PyUnicode_FromString("Could not import AdjustmentFactors module."), NULL, NULL);
-	}
-
-	PyTypeObject* AdjustmentFactors_Type = (PyTypeObject*)PyObject_GetAttrString(AdjustmentFactorsModule, "AdjustmentFactors");
-	if (!AdjustmentFactors_Type){
-		PyErr_SetImportError(PyUnicode_FromString("Could not import AdjustmentFactors type."), NULL, NULL);
-	}
-	Py_XDECREF(AdjustmentFactorsModule);
-
-	if (PyType_Ready(AdjustmentFactors_Type) < 0) { goto fail; }
-	PyDict_SetItemString(Battwatts_Type.tp_dict,
-						 "AdjustmentFactors",
-						 (PyObject*)AdjustmentFactors_Type);
-	Py_DECREF(&AdjustmentFactors_Type);
-	Py_XDECREF(AdjustmentFactors_Type);
 
 	/// Add the BatteryModelSimple type object to Battwatts_Type
 	if (PyType_Ready(&BatteryModelSimple_Type) < 0) { goto fail; }
@@ -1374,9 +1344,6 @@ BattwattsModule_exec(PyObject *m)
 	PyModule_AddObject(m,
 				"Battwatts",
 				(PyObject*)&Battwatts_Type);
-
-	if (PySAM_load_lib(m) < 0) goto fail;
-	if (PySAM_init_error() < 0) goto fail;
 
 	return 0;
 	fail:

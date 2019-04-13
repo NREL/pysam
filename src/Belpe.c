@@ -342,73 +342,73 @@ LoadProfileEstimator_set_solar_resource_file(LoadProfileEstimatorObject *self, P
 
 static PyGetSetDef LoadProfileEstimator_getset[] = {
 {"Monthly_util", (getter)LoadProfileEstimator_get_Monthly_util,(setter)LoadProfileEstimator_set_Monthly_util,
-	"Monthly consumption from utility bill [kWh], array.\n Constraints: LENGTH=12; Required if: en_belpe=1.",
+	"Monthly consumption from utility bill [kWh], array.\n Constraints: LENGTH=12; Required if en_belpe=1.",
  	NULL},
 {"Occ_Schedule", (getter)LoadProfileEstimator_get_Occ_Schedule,(setter)LoadProfileEstimator_set_Occ_Schedule,
-	"Hourly occupant schedule [frac/hr], array.\n Constraints: LENGTH=24; Required if: en_belpe=1.",
+	"Hourly occupant schedule [frac/hr], array.\n Constraints: LENGTH=24; Required if en_belpe=1.",
  	NULL},
 {"Occupants", (getter)LoadProfileEstimator_get_Occupants,(setter)LoadProfileEstimator_set_Occupants,
-	"Occupants [#], number.\n Required if: en_belpe=1.",
+	"Occupants [#], number.\n Required if en_belpe=1.",
  	NULL},
 {"Retrofits", (getter)LoadProfileEstimator_get_Retrofits,(setter)LoadProfileEstimator_set_Retrofits,
-	"Energy retrofitted [0/1], number.\n 0=No, 1=Yes; Required if: en_belpe=1.",
+	"Energy retrofitted [0/1], number.\n 0=No, 1=Yes; Required if en_belpe=1.",
  	NULL},
 {"Stories", (getter)LoadProfileEstimator_get_Stories,(setter)LoadProfileEstimator_set_Stories,
-	"Number of stories [#], number.\n Required if: en_belpe=1.",
+	"Number of stories [#], number.\n Required if en_belpe=1.",
  	NULL},
 {"TCool", (getter)LoadProfileEstimator_get_TCool,(setter)LoadProfileEstimator_set_TCool,
-	"Cooling setpoint [degF], number.\n Required if: en_belpe=1.",
+	"Cooling setpoint [degF], number.\n Required if en_belpe=1.",
  	NULL},
 {"TCoolSB", (getter)LoadProfileEstimator_get_TCoolSB,(setter)LoadProfileEstimator_set_TCoolSB,
-	"Cooling setpoint setback [degF], number.\n Required if: en_belpe=1.",
+	"Cooling setpoint setback [degF], number.\n Required if en_belpe=1.",
  	NULL},
 {"THeat", (getter)LoadProfileEstimator_get_THeat,(setter)LoadProfileEstimator_set_THeat,
-	"Heating setpoint [degF], number.\n Required if: en_belpe=1.",
+	"Heating setpoint [degF], number.\n Required if en_belpe=1.",
  	NULL},
 {"THeatSB", (getter)LoadProfileEstimator_get_THeatSB,(setter)LoadProfileEstimator_set_THeatSB,
-	"Heating setpoint setback [degf], number.\n Required if: en_belpe=1.",
+	"Heating setpoint setback [degf], number.\n Required if en_belpe=1.",
  	NULL},
 {"T_Sched", (getter)LoadProfileEstimator_get_T_Sched,(setter)LoadProfileEstimator_set_T_Sched,
-	"Temperature schedule [0/1], array.\n Constraints: LENGTH=24; Required if: en_belpe=1.",
+	"Temperature schedule [0/1], array.\n Constraints: LENGTH=24; Required if en_belpe=1.",
  	NULL},
 {"YrBuilt", (getter)LoadProfileEstimator_get_YrBuilt,(setter)LoadProfileEstimator_set_YrBuilt,
-	"Year built [yr], number.\n Required if: en_belpe=1.",
+	"Year built [yr], number.\n Required if en_belpe=1.",
  	NULL},
 {"en_belpe", (getter)LoadProfileEstimator_get_en_belpe,(setter)LoadProfileEstimator_set_en_belpe,
-	"Enable building load calculator [0/1], number.\n Constraints: BOOLEAN; Required if: *.",
+	"Enable building load calculator [0/1], number.\n Constraints: BOOLEAN; Required.",
  	NULL},
 {"en_cool", (getter)LoadProfileEstimator_get_en_cool,(setter)LoadProfileEstimator_set_en_cool,
-	"Enable electric cool [0/1], number.\n Constraints: BOOLEAN; Required if: en_belpe=1.",
+	"Enable electric cool [0/1], number.\n Constraints: BOOLEAN; Required if en_belpe=1.",
  	NULL},
 {"en_dish", (getter)LoadProfileEstimator_get_en_dish,(setter)LoadProfileEstimator_set_en_dish,
-	"Enable electric dishwasher [0/1], number.\n Constraints: BOOLEAN; Required if: en_belpe=1.",
+	"Enable electric dishwasher [0/1], number.\n Constraints: BOOLEAN; Required if en_belpe=1.",
  	NULL},
 {"en_dry", (getter)LoadProfileEstimator_get_en_dry,(setter)LoadProfileEstimator_set_en_dry,
-	"Enable electric dryer [0/1], number.\n Constraints: BOOLEAN; Required if: en_belpe=1.",
+	"Enable electric dryer [0/1], number.\n Constraints: BOOLEAN; Required if en_belpe=1.",
  	NULL},
 {"en_fridge", (getter)LoadProfileEstimator_get_en_fridge,(setter)LoadProfileEstimator_set_en_fridge,
-	"Enable electric fridge [0/1], number.\n Constraints: BOOLEAN; Required if: en_belpe=1.",
+	"Enable electric fridge [0/1], number.\n Constraints: BOOLEAN; Required if en_belpe=1.",
  	NULL},
 {"en_heat", (getter)LoadProfileEstimator_get_en_heat,(setter)LoadProfileEstimator_set_en_heat,
-	"Enable electric heat [0/1], number.\n Constraints: BOOLEAN; Required if: en_belpe=1.",
+	"Enable electric heat [0/1], number.\n Constraints: BOOLEAN; Required if en_belpe=1.",
  	NULL},
 {"en_mels", (getter)LoadProfileEstimator_get_en_mels,(setter)LoadProfileEstimator_set_en_mels,
-	"Enable misc electric loads [0/1], number.\n Constraints: BOOLEAN; Required if: en_belpe=1.",
+	"Enable misc electric loads [0/1], number.\n Constraints: BOOLEAN; Required if en_belpe=1.",
  	NULL},
 {"en_range", (getter)LoadProfileEstimator_get_en_range,(setter)LoadProfileEstimator_set_en_range,
-	"Enable electric range [0/1], number.\n Constraints: BOOLEAN; Required if: en_belpe=1.",
+	"Enable electric range [0/1], number.\n Constraints: BOOLEAN; Required if en_belpe=1.",
  	NULL},
 {"en_wash", (getter)LoadProfileEstimator_get_en_wash,(setter)LoadProfileEstimator_set_en_wash,
-	"Enable electric washer [0/1], number.\n Constraints: BOOLEAN; Required if: en_belpe=1.",
+	"Enable electric washer [0/1], number.\n Constraints: BOOLEAN; Required if en_belpe=1.",
  	NULL},
 {"floor_area", (getter)LoadProfileEstimator_get_floor_area,(setter)LoadProfileEstimator_set_floor_area,
-	"Building floor area [m2], number.\n Required if: en_belpe=1.",
+	"Building floor area [m2], number.\n Required if en_belpe=1.",
  	NULL},
 {"load", (getter)LoadProfileEstimator_get_load,(setter)LoadProfileEstimator_set_load,
-	"Electricity load (year 1) [kW], array.\n Required if: en_belpe=0.",
+	"Electricity load (year 1) [kW], array.\n Required if en_belpe=0.",
  	NULL},
 {"solar_resource_file", (getter)LoadProfileEstimator_get_solar_resource_file,(setter)LoadProfileEstimator_set_solar_resource_file,
-	"Weather Data file [n/a], string.\n Constraints: LOCAL_FILE; Required if: en_belpe=1.",
+	"Weather Data file [n/a], string.\n Constraints: LOCAL_FILE; Required if en_belpe=1.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -589,28 +589,14 @@ newBelpeObject(void* data_ptr)
 
 	PySAM_TECH_ATTR("Belpe", SAM_Belpe_construct)
 
-PyObject* LoadProfileEstimator_obj = LoadProfileEstimator_new(self->data_ptr);
+	PyObject* LoadProfileEstimator_obj = LoadProfileEstimator_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "LoadProfileEstimator", LoadProfileEstimator_obj);
 	Py_DECREF(LoadProfileEstimator_obj);
 
-PyObject* Outputs_obj = Outputs_new(self->data_ptr);
+	PyObject* Outputs_obj = Outputs_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
 	Py_DECREF(Outputs_obj);
 
-PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
-
-	PyObject* data_cap = PyCapsule_New(self->data_ptr, NULL, NULL);
-	PyObject* Adjust_obj = PyObject_CallMethod(AdjustmentFactorsModule, "new", "(O)", data_cap);
-	Py_XDECREF(data_cap);
-	Py_XDECREF(AdjustmentFactorsModule);
-
-	if (!Adjust_obj){
-		PyErr_SetString(PySAM_ErrorObject, "Couldn't create AdjustmentFactorsObject\n");
-		return NULL;
-	}
-
-	PyDict_SetItemString(attr_dict, "AdjustmentFactors", Adjust_obj);
-	Py_DECREF(Adjust_obj);
 
 	return self;
 }
@@ -767,8 +753,8 @@ static PyObject *
 Belpe_default(PyObject *self, PyObject *args)
 {
 	BelpeObject *rv;
-	char* fin = 0;
-	if (!PyArg_ParseTuple(args, "s:default", &fin)){
+	char* def = 0;
+	if (!PyArg_ParseTuple(args, "s:default", &def)){
 		PyErr_BadArgument();
 		return NULL;
 	}
@@ -776,7 +762,7 @@ Belpe_default(PyObject *self, PyObject *args)
 	if (rv == NULL)
 		return NULL;
 
-	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Belpe", fin);
+	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Belpe", def);
 
 	return (PyObject *)rv;
 }
@@ -791,14 +777,14 @@ static PyMethodDef BelpeModule_methods[] = {
 				PyDoc_STR("new() -> new Belpe object")},
 		{"default",             Belpe_default,         METH_VARARGS,
 				PyDoc_STR("default(financial) -> new Belpe object with financial model-specific default attributes\n"
-				"Options: Single Owner, None, Sale Leaseback, Commercial, Residential, Third Party, Commercial PPA, Host Developer, Leveraged Partnership Flip, Independent Power Producer, All Equity Partnership Flip, LCOE Calculator, ")},
+				"Options: GenericSystem, Windpower, Pvwattsv5, Swh, Pvsamv1")},
 		{"wrap",             Belpe_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> new Belpe object around existing PySSC data")},
+				PyDoc_STR("wrap(ssc_data_t) -> new Belpe object around existing PySSC data, taking over memory ownership")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 PyDoc_STRVAR(module_doc,
-			 "Refer to http://www.github.com/nrel/PySAM for source code.");
+			 "Electric load calculator for residential buildings");
 
 
 static int
@@ -807,27 +793,11 @@ BelpeModule_exec(PyObject *m)
 	/* Finalize the type object including setting type of the new type
 	 * object; doing it here is required for portability, too. */
 
+	if (PySAM_load_lib(m) < 0) goto fail;
+	if (PySAM_init_error(m) < 0) goto fail;
+
 	Belpe_Type.tp_dict = PyDict_New();
 	if (!Belpe_Type.tp_dict) { goto fail; }
-
-	/// Add the AdjustmentFactors type object to Belpe_Type
-	PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
-	if (!AdjustmentFactorsModule){
-		PyErr_SetImportError(PyUnicode_FromString("Could not import AdjustmentFactors module."), NULL, NULL);
-	}
-
-	PyTypeObject* AdjustmentFactors_Type = (PyTypeObject*)PyObject_GetAttrString(AdjustmentFactorsModule, "AdjustmentFactors");
-	if (!AdjustmentFactors_Type){
-		PyErr_SetImportError(PyUnicode_FromString("Could not import AdjustmentFactors type."), NULL, NULL);
-	}
-	Py_XDECREF(AdjustmentFactorsModule);
-
-	if (PyType_Ready(AdjustmentFactors_Type) < 0) { goto fail; }
-	PyDict_SetItemString(Belpe_Type.tp_dict,
-						 "AdjustmentFactors",
-						 (PyObject*)AdjustmentFactors_Type);
-	Py_DECREF(&AdjustmentFactors_Type);
-	Py_XDECREF(AdjustmentFactors_Type);
 
 	/// Add the LoadProfileEstimator type object to Belpe_Type
 	if (PyType_Ready(&LoadProfileEstimator_Type) < 0) { goto fail; }
@@ -848,9 +818,6 @@ BelpeModule_exec(PyObject *m)
 	PyModule_AddObject(m,
 				"Belpe",
 				(PyObject*)&Belpe_Type);
-
-	if (PySAM_load_lib(m) < 0) goto fail;
-	if (PySAM_init_error() < 0) goto fail;
 
 	return 0;
 	fail:

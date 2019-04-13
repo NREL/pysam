@@ -49,6 +49,9 @@ static int PySAM_load_lib(PyObject* m){
 		memcpy(SAM_lib_path, SAM_lib_dir, strlen(SAM_lib_dir) + 1);
         strcat(SAM_lib_path, SAM_lib);
 
+        PyObject *sys_path = PySys_GetObject("path");
+        PyList_Append(sys_path, PyUnicode_FromString(SAM_lib_dir));
+
         Py_XDECREF(file);
         Py_XDECREF(ascii_mystring);
     }
@@ -59,13 +62,14 @@ static int PySAM_load_lib(PyObject* m){
 // Error Handling
 //
 
-static int PySAM_init_error(){
+static int PySAM_init_error(PyObject* m){
     if (PySAM_ErrorObject == NULL) {
         PySAM_ErrorObject = PyErr_NewException("PySAM.error", NULL, NULL);
         if (PySAM_ErrorObject == NULL)
             return -1;
     }
     Py_INCREF(PySAM_ErrorObject);
+    PyModule_AddObject(m, "error", PySAM_ErrorObject);
     return 0;
 }
 
@@ -866,42 +870,11 @@ PySAM_export_to_nested_dict(PyObject *self, PyObject *x_attr) {
 }
 
 /// Loading defaults from marshalled data
-static int PySAM_load_defaults(PyObject* self, PyObject* x_attr, void* data_ptr, const char* tech, char* fin){
+static int PySAM_load_defaults(PyObject* self, PyObject* x_attr, void* data_ptr, const char* cmod, char* def){
     FILE* f = NULL;
     char path[256];
-    if (strcasecmp(fin, "None") == 0){
-        sprintf(path, "%sdefaults/%s_None.df", SAM_lib_dir, tech);
-    }
-    else if (strcasecmp(fin, "Residential") == 0){
-        sprintf(path, "%sdefaults/%s_Residential.df", SAM_lib_dir, tech);
-    }
-    else if (strcasecmp(fin, "ThirdParty") == 0){
-        sprintf(path, "%sdefaults/%s_ThirdParty.df", SAM_lib_dir, tech);
-    }
-    else if (strcasecmp(fin, "Commercial") == 0){
-        sprintf(path, "%sdefaults/%s_Commercial.df", SAM_lib_dir, tech);
-    }
-    else if (strcasecmp(fin, "LCOECalculator") == 0){
-        sprintf(path, "%sdefaults/%s_LCOECalculator.df", SAM_lib_dir, tech);
-    }
-    else if (strcasecmp(fin, "SaleLeaseback") == 0){
-        sprintf(path, "%sdefaults/%s_SaleLeaseback.df", SAM_lib_dir, tech);
-    }
-    else if (strcasecmp(fin, "SingleOwner") == 0){
-        sprintf(path, "%sdefaults/%s_SingleOwner.df", SAM_lib_dir, tech);
-    }
-    else if (strcasecmp(fin, "LeveragedPartnershipFlip") == 0){
-        sprintf(path, "%sdefaults/%s_LeveragedPartnershipFlip.df", SAM_lib_dir, tech);
-    }
-    else if (strcasecmp(fin, "AllEquityPartnershipFlip") == 0){
-        sprintf(path, "%sdefaults/%s_AllEquityPartnershipFlip.df", SAM_lib_dir, tech);
-    }
-    else if (strcasecmp(fin, "HostDeveloper") == 0){
-        sprintf(path, "%sdefaults/%s_HostDeveloper.df", SAM_lib_dir, tech);
-    }
-    else if (strcasecmp(fin, "LCOHCalculator") == 0){
-        sprintf(path, "%sdefaults/%s_LCOHCalculator.df", SAM_lib_dir, tech);
-    }
+
+    sprintf(path, "%sdefaults/%s_%s.df", SAM_lib_dir, cmod, def);
     f = fopen(path, "rb");
 
     if (!f){
@@ -915,7 +888,7 @@ static int PySAM_load_defaults(PyObject* self, PyObject* x_attr, void* data_ptr,
         return -1;
     }
 
-    if (PySAM_assign_from_nested_dict(self, x_attr, data_ptr, dict, tech) < 0)
+    if (PySAM_assign_from_nested_dict(self, x_attr, data_ptr, dict, cmod) < 0)
         return -1;
     Py_DECREF(dict);
     return 0;

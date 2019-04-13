@@ -78,7 +78,7 @@ SolarResourceData_set_file_name(SolarResourceDataObject *self, PyObject *value, 
 
 static PyGetSetDef SolarResourceData_getset[] = {
 {"file_name", (getter)SolarResourceData_get_file_name,(setter)SolarResourceData_set_file_name,
-	"Weather file in TMY2, TMY3, EPW, or SMW. [], string.\n Constraints: LOCAL_FILE; Required if: *.",
+	"Weather file in TMY2, TMY3, EPW, or SMW., string.\n Constraints: LOCAL_FILE; Required.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -201,7 +201,7 @@ PVWatts_set_system_capacity(PVWattsObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef PVWatts_getset[] = {
 {"system_capacity", (getter)PVWatts_get_system_capacity,(setter)PVWatts_set_system_capacity,
-	"Nameplate capacity [kW], number.\n Required if: *.",
+	"Nameplate capacity [kW], number.\n Required.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -528,58 +528,58 @@ HCPVModule_set_module_temp_coeff(HCPVModuleObject *self, PyObject *value, void *
 
 static PyGetSetDef HCPVModule_getset[] = {
 {"module_a", (getter)HCPVModule_get_module_a,(setter)HCPVModule_set_module_a,
-	"Equation variable (a), at high irradiance & low wind speed [none], number.\n Required if: *.",
+	"Equation variable (a), at high irradiance & low wind speed [none], number.\n Required.",
  	NULL},
 {"module_a0", (getter)HCPVModule_get_module_a0,(setter)HCPVModule_set_module_a0,
-	"Air mass modifier coefficient 0 [none], number.\n Required if: *.",
+	"Air mass modifier coefficient 0 [none], number.\n Required.",
  	NULL},
 {"module_a1", (getter)HCPVModule_get_module_a1,(setter)HCPVModule_set_module_a1,
-	"Air mass modifier coefficient 1 [none], number.\n Required if: *.",
+	"Air mass modifier coefficient 1 [none], number.\n Required.",
  	NULL},
 {"module_a2", (getter)HCPVModule_get_module_a2,(setter)HCPVModule_set_module_a2,
-	"Air mass modifier coefficient 2 [none], number.\n Required if: *.",
+	"Air mass modifier coefficient 2 [none], number.\n Required.",
  	NULL},
 {"module_a3", (getter)HCPVModule_get_module_a3,(setter)HCPVModule_set_module_a3,
-	"Air mass modifier coefficient 3 [none], number.\n Required if: *.",
+	"Air mass modifier coefficient 3 [none], number.\n Required.",
  	NULL},
 {"module_a4", (getter)HCPVModule_get_module_a4,(setter)HCPVModule_set_module_a4,
-	"Air mass modifier coefficient 4 [none], number.\n Required if: *.",
+	"Air mass modifier coefficient 4 [none], number.\n Required.",
  	NULL},
 {"module_alignment_error", (getter)HCPVModule_get_module_alignment_error,(setter)HCPVModule_set_module_alignment_error,
-	"Alignment loss factor [0..1], number.\n Required if: *.",
+	"Alignment loss factor [0..1], number.\n Required.",
  	NULL},
 {"module_b", (getter)HCPVModule_get_module_b,(setter)HCPVModule_set_module_b,
-	"Equation variable (b), rate at which module temp drops [none], number.\n Required if: *.",
+	"Equation variable (b), rate at which module temp drops [none], number.\n Required.",
  	NULL},
 {"module_cell_area", (getter)HCPVModule_get_module_cell_area,(setter)HCPVModule_set_module_cell_area,
-	"Single cell area [cm^2], number.\n Required if: *.",
+	"Single cell area [cm^2], number.\n Required.",
  	NULL},
 {"module_concentration", (getter)HCPVModule_get_module_concentration,(setter)HCPVModule_set_module_concentration,
-	"Concentration ratio [none], number.\n Required if: *.",
+	"Concentration ratio [none], number.\n Required.",
  	NULL},
 {"module_dT", (getter)HCPVModule_get_module_dT,(setter)HCPVModule_set_module_dT,
-	"Equation variable (dT), temp diff between heat sink & cell [C], number.\n Required if: *.",
+	"Equation variable (dT), temp diff between heat sink & cell [C], number.\n Required.",
  	NULL},
 {"module_flutter_loss_coeff", (getter)HCPVModule_get_module_flutter_loss_coeff,(setter)HCPVModule_set_module_flutter_loss_coeff,
-	"Wind flutter loss factor [0..1 per m/s], number.\n Required if: *.",
+	"Wind flutter loss factor [0..1 per m/s], number.\n Required.",
  	NULL},
 {"module_mjeff", (getter)HCPVModule_get_module_mjeff,(setter)HCPVModule_set_module_mjeff,
-	"Module junction efficiency array [percent], array.\n Required if: *.",
+	"Module junction efficiency array [percent], array.\n Required.",
  	NULL},
 {"module_ncells", (getter)HCPVModule_get_module_ncells,(setter)HCPVModule_set_module_ncells,
-	"Number of cells [none], number.\n Constraints: INTEGER; Required if: *.",
+	"Number of cells [none], number.\n Constraints: INTEGER; Required.",
  	NULL},
 {"module_optical_error", (getter)HCPVModule_get_module_optical_error,(setter)HCPVModule_set_module_optical_error,
-	"Optical error factor [0..1], number.\n Required if: *.",
+	"Optical error factor [0..1], number.\n Required.",
  	NULL},
 {"module_rad", (getter)HCPVModule_get_module_rad,(setter)HCPVModule_set_module_rad,
-	"POA irradiance array [W/m^2], array.\n Required if: *.",
+	"POA irradiance array [W/m^2], array.\n Required.",
  	NULL},
 {"module_reference", (getter)HCPVModule_get_module_reference,(setter)HCPVModule_set_module_reference,
-	"Index in arrays of the reference condition [none], number.\n Constraints: INTEGER; Required if: *.",
+	"Index in arrays of the reference condition [none], number.\n Constraints: INTEGER; Required.",
  	NULL},
 {"module_temp_coeff", (getter)HCPVModule_get_module_temp_coeff,(setter)HCPVModule_set_module_temp_coeff,
-	"Temperature coefficient [%/C], number.\n Required if: *.",
+	"Temperature coefficient [%/C], number.\n Required.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -810,34 +810,34 @@ InverterCECDatabase_set_inv_snl_vdco(InverterCECDatabaseObject *self, PyObject *
 
 static PyGetSetDef InverterCECDatabase_getset[] = {
 {"inv_snl_c0", (getter)InverterCECDatabase_get_inv_snl_c0,(setter)InverterCECDatabase_set_inv_snl_c0,
-	"Parameter defining the curvature (parabolic) of the relationship between ac-power and dc-power at the reference operating condition, default value of zero gives a linear relationship, (1/W) [xxx], number.\n Required if: *.",
+	"Parameter defining the curvature (parabolic) of the relationship between ac-power and dc-power at the reference operating condition, default value of zero gives a linear relationship, (1/W) [xxx], number.\n Required.",
  	NULL},
 {"inv_snl_c1", (getter)InverterCECDatabase_get_inv_snl_c1,(setter)InverterCECDatabase_set_inv_snl_c1,
-	"Empirical coefficient allowing Pdco to vary linearly with dc-voltage input, default value is zero, (1/V) [xxx], number.\n Required if: *.",
+	"Empirical coefficient allowing Pdco to vary linearly with dc-voltage input, default value is zero, (1/V) [xxx], number.\n Required.",
  	NULL},
 {"inv_snl_c2", (getter)InverterCECDatabase_get_inv_snl_c2,(setter)InverterCECDatabase_set_inv_snl_c2,
-	"Empirical coefficient allowing Pso to vary linearly with dc-voltage input, default value is zero, (1/V) [xxx], number.\n Required if: *.",
+	"Empirical coefficient allowing Pso to vary linearly with dc-voltage input, default value is zero, (1/V) [xxx], number.\n Required.",
  	NULL},
 {"inv_snl_c3", (getter)InverterCECDatabase_get_inv_snl_c3,(setter)InverterCECDatabase_set_inv_snl_c3,
-	"Empirical coefficient allowing Co to vary linearly with dc-voltage input, default value is zero, (1/V) [xxx], number.\n Required if: *.",
+	"Empirical coefficient allowing Co to vary linearly with dc-voltage input, default value is zero, (1/V) [xxx], number.\n Required.",
  	NULL},
 {"inv_snl_paco", (getter)InverterCECDatabase_get_inv_snl_paco,(setter)InverterCECDatabase_set_inv_snl_paco,
-	"W maximum ac-power rating for inverter at reference or nominal operating condition, assumed to be an upper limit value, (W) [xxx], number.\n Required if: *.",
+	"W maximum ac-power rating for inverter at reference or nominal operating condition, assumed to be an upper limit value, (W) [xxx], number.\n Required.",
  	NULL},
 {"inv_snl_pdco", (getter)InverterCECDatabase_get_inv_snl_pdco,(setter)InverterCECDatabase_set_inv_snl_pdco,
-	"W dc-power level at which the ac-power rating is achieved at the reference operating condition, (W) [xxx], number.\n Required if: *.",
+	"W dc-power level at which the ac-power rating is achieved at the reference operating condition, (W) [xxx], number.\n Required.",
  	NULL},
 {"inv_snl_pnt", (getter)InverterCECDatabase_get_inv_snl_pnt,(setter)InverterCECDatabase_set_inv_snl_pnt,
-	"W ac-power consumed by inverter at night (night tare) to maintain circuitry required to sense PV array voltage, (W) [xxx], number.\n Required if: *.",
+	"W ac-power consumed by inverter at night (night tare) to maintain circuitry required to sense PV array voltage, (W) [xxx], number.\n Required.",
  	NULL},
 {"inv_snl_pso", (getter)InverterCECDatabase_get_inv_snl_pso,(setter)InverterCECDatabase_set_inv_snl_pso,
-	"W dc-power required to start the inversion process, or self-consumption by inverter, strongly influences inverter efficiency at low power levels, (W) [xxx], number.\n Required if: *.",
+	"W dc-power required to start the inversion process, or self-consumption by inverter, strongly influences inverter efficiency at low power levels, (W) [xxx], number.\n Required.",
  	NULL},
 {"inv_snl_vdcmax", (getter)InverterCECDatabase_get_inv_snl_vdcmax,(setter)InverterCECDatabase_set_inv_snl_vdcmax,
-	"V (Vdcmax) dc-voltage maximum operating voltage, (V) [xxx], number.\n Required if: *.",
+	"V (Vdcmax) dc-voltage maximum operating voltage, (V) [xxx], number.\n Required.",
  	NULL},
 {"inv_snl_vdco", (getter)InverterCECDatabase_get_inv_snl_vdco,(setter)InverterCECDatabase_set_inv_snl_vdco,
-	"V (Vnom) dc-voltage level at which the ac-power rating is achieved at the reference operating condition, (V) [xxx], number.\n Required if: *.",
+	"V (Vnom) dc-voltage level at which the ac-power rating is achieved at the reference operating condition, (V) [xxx], number.\n Required.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1152,55 +1152,55 @@ HCPVArray_set_azaltsf(HCPVArrayObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef HCPVArray_getset[] = {
 {"array_ac_wiring_loss", (getter)HCPVArray_get_array_ac_wiring_loss,(setter)HCPVArray_set_array_ac_wiring_loss,
-	"AC wiring loss factor [0..1], number.\n Required if: *.",
+	"AC wiring loss factor [0..1], number.\n Required.",
  	NULL},
 {"array_dc_mismatch_loss", (getter)HCPVArray_get_array_dc_mismatch_loss,(setter)HCPVArray_set_array_dc_mismatch_loss,
-	"DC module mismatch loss factor [0..1], number.\n Required if: *.",
+	"DC module mismatch loss factor [0..1], number.\n Required.",
  	NULL},
 {"array_dc_wiring_loss", (getter)HCPVArray_get_array_dc_wiring_loss,(setter)HCPVArray_set_array_dc_wiring_loss,
-	"DC Wiring loss factor [0..1], number.\n Required if: *.",
+	"DC Wiring loss factor [0..1], number.\n Required.",
  	NULL},
 {"array_diode_conn_loss", (getter)HCPVArray_get_array_diode_conn_loss,(setter)HCPVArray_set_array_diode_conn_loss,
-	"Diodes and connections loss factor [0..1], number.\n Required if: *.",
+	"Diodes and connections loss factor [0..1], number.\n Required.",
  	NULL},
 {"array_enable_azalt_sf", (getter)HCPVArray_get_array_enable_azalt_sf,(setter)HCPVArray_set_array_enable_azalt_sf,
-	"Boolean for irradiance derate [0-1], number.\n Constraints: INTEGER; Required if: *.",
+	"Boolean for irradiance derate [0-1], number.\n Constraints: INTEGER; Required.",
  	NULL},
 {"array_modules_per_tracker", (getter)HCPVArray_get_array_modules_per_tracker,(setter)HCPVArray_set_array_modules_per_tracker,
-	"Modules on each tracker [none], number.\n Constraints: INTEGER; Required if: *.",
+	"Modules on each tracker [none], number.\n Constraints: INTEGER; Required.",
  	NULL},
 {"array_monthly_soiling", (getter)HCPVArray_get_array_monthly_soiling,(setter)HCPVArray_set_array_monthly_soiling,
-	"Monthly soiling factors array [0..1], array.\n Required if: *.",
+	"Monthly soiling factors array [0..1], array.\n Required.",
  	NULL},
 {"array_num_inverters", (getter)HCPVArray_get_array_num_inverters,(setter)HCPVArray_set_array_num_inverters,
-	"Number of inverters [none], number.\n Required if: *.",
+	"Number of inverters [none], number.\n Required.",
  	NULL},
 {"array_num_trackers", (getter)HCPVArray_get_array_num_trackers,(setter)HCPVArray_set_array_num_trackers,
-	"Number of trackers [none], number.\n Constraints: INTEGER; Required if: *.",
+	"Number of trackers [none], number.\n Constraints: INTEGER; Required.",
  	NULL},
 {"array_rlim_az_max", (getter)HCPVArray_get_array_rlim_az_max,(setter)HCPVArray_set_array_rlim_az_max,
-	"Tracker maximum azimuth angle [deg], number.\n Required if: *.",
+	"Tracker maximum azimuth angle [deg], number.\n Required.",
  	NULL},
 {"array_rlim_az_min", (getter)HCPVArray_get_array_rlim_az_min,(setter)HCPVArray_set_array_rlim_az_min,
-	"Tracker minimum azimuth angle [deg], number.\n Required if: *.",
+	"Tracker minimum azimuth angle [deg], number.\n Required.",
  	NULL},
 {"array_rlim_el_max", (getter)HCPVArray_get_array_rlim_el_max,(setter)HCPVArray_set_array_rlim_el_max,
-	"Tracker maximum elevation angle [deg], number.\n Required if: *.",
+	"Tracker maximum elevation angle [deg], number.\n Required.",
  	NULL},
 {"array_rlim_el_min", (getter)HCPVArray_get_array_rlim_el_min,(setter)HCPVArray_set_array_rlim_el_min,
-	"Tracker minimum elevation angle [deg], number.\n Required if: *.",
+	"Tracker minimum elevation angle [deg], number.\n Required.",
  	NULL},
 {"array_tracker_power_fraction", (getter)HCPVArray_get_array_tracker_power_fraction,(setter)HCPVArray_set_array_tracker_power_fraction,
-	"Single tracker power fraction [0..1], number.\n Required if: *.",
+	"Single tracker power fraction [0..1], number.\n Required.",
  	NULL},
 {"array_tracking_error", (getter)HCPVArray_get_array_tracking_error,(setter)HCPVArray_set_array_tracking_error,
-	"General racking error [0..1], number.\n Required if: *.",
+	"General racking error [0..1], number.\n Required.",
  	NULL},
 {"array_wind_stow_speed", (getter)HCPVArray_get_array_wind_stow_speed,(setter)HCPVArray_set_array_wind_stow_speed,
-	"Allowed wind speed before stowing [m/s], number.\n Required if: *.",
+	"Allowed wind speed before stowing [m/s], number.\n Required.",
  	NULL},
 {"azaltsf", (getter)HCPVArray_get_azaltsf,(setter)HCPVArray_set_azaltsf,
-	"Azimuth-Altitude Shading Table [], matrix.\n Required if: *.",
+	"Azimuth-Altitude Shading Table, matrix.\n Required.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1714,31 +1714,27 @@ newHcpvObject(void* data_ptr)
 
 	PySAM_TECH_ATTR("Hcpv", SAM_Hcpv_construct)
 
-PyObject* SolarResourceData_obj = SolarResourceData_new(self->data_ptr);
+	PyObject* SolarResourceData_obj = SolarResourceData_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "SolarResourceData", SolarResourceData_obj);
 	Py_DECREF(SolarResourceData_obj);
 
-PyObject* PVWatts_obj = PVWatts_new(self->data_ptr);
+	PyObject* PVWatts_obj = PVWatts_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "PVWatts", PVWatts_obj);
 	Py_DECREF(PVWatts_obj);
 
-PyObject* HCPVModule_obj = HCPVModule_new(self->data_ptr);
+	PyObject* HCPVModule_obj = HCPVModule_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "HCPVModule", HCPVModule_obj);
 	Py_DECREF(HCPVModule_obj);
 
-PyObject* InverterCECDatabase_obj = InverterCECDatabase_new(self->data_ptr);
+	PyObject* InverterCECDatabase_obj = InverterCECDatabase_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "InverterCECDatabase", InverterCECDatabase_obj);
 	Py_DECREF(InverterCECDatabase_obj);
 
-PyObject* HCPVArray_obj = HCPVArray_new(self->data_ptr);
+	PyObject* HCPVArray_obj = HCPVArray_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "HCPVArray", HCPVArray_obj);
 	Py_DECREF(HCPVArray_obj);
 
-PyObject* Outputs_obj = Outputs_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
-	Py_DECREF(Outputs_obj);
-
-PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
+	PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
 
 	PyObject* data_cap = PyCapsule_New(self->data_ptr, NULL, NULL);
 	PyObject* Adjust_obj = PyObject_CallMethod(AdjustmentFactorsModule, "new", "(O)", data_cap);
@@ -1752,6 +1748,11 @@ PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
 
 	PyDict_SetItemString(attr_dict, "AdjustmentFactors", Adjust_obj);
 	Py_DECREF(Adjust_obj);
+
+	PyObject* Outputs_obj = Outputs_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
+	Py_DECREF(Outputs_obj);
+
 
 	return self;
 }
@@ -1908,8 +1909,8 @@ static PyObject *
 Hcpv_default(PyObject *self, PyObject *args)
 {
 	HcpvObject *rv;
-	char* fin = 0;
-	if (!PyArg_ParseTuple(args, "s:default", &fin)){
+	char* def = 0;
+	if (!PyArg_ParseTuple(args, "s:default", &def)){
 		PyErr_BadArgument();
 		return NULL;
 	}
@@ -1917,7 +1918,7 @@ Hcpv_default(PyObject *self, PyObject *args)
 	if (rv == NULL)
 		return NULL;
 
-	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Hcpv", fin);
+	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Hcpv", def);
 
 	return (PyObject *)rv;
 }
@@ -1932,14 +1933,14 @@ static PyMethodDef HcpvModule_methods[] = {
 				PyDoc_STR("new() -> new Hcpv object")},
 		{"default",             Hcpv_default,         METH_VARARGS,
 				PyDoc_STR("default(financial) -> new Hcpv object with financial model-specific default attributes\n"
-				"Options: None, LCOE Calculator, Sale Leaseback, All Equity Partnership Flip, Independent Power Producer, Leveraged Partnership Flip, Single Owner, ")},
+				"Options: None, Lcoefcr, Saleleaseback, Equpartflip, , Levpartflip, Singleowner")},
 		{"wrap",             Hcpv_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> new Hcpv object around existing PySSC data")},
+				PyDoc_STR("wrap(ssc_data_t) -> new Hcpv object around existing PySSC data, taking over memory ownership")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 PyDoc_STRVAR(module_doc,
-			 "Refer to http://www.github.com/nrel/PySAM for source code.");
+			 "Concentrating photovoltaic system with a high concentration photovoltaic module model and separate inverter model");
 
 
 static int
@@ -1947,6 +1948,9 @@ HcpvModule_exec(PyObject *m)
 {
 	/* Finalize the type object including setting type of the new type
 	 * object; doing it here is required for portability, too. */
+
+	if (PySAM_load_lib(m) < 0) goto fail;
+	if (PySAM_init_error(m) < 0) goto fail;
 
 	Hcpv_Type.tp_dict = PyDict_New();
 	if (!Hcpv_Type.tp_dict) { goto fail; }
@@ -2017,9 +2021,6 @@ HcpvModule_exec(PyObject *m)
 	PyModule_AddObject(m,
 				"Hcpv",
 				(PyObject*)&Hcpv_Type);
-
-	if (PySAM_load_lib(m) < 0) goto fail;
-	if (PySAM_init_error() < 0) goto fail;
 
 	return 0;
 	fail:

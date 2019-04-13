@@ -114,16 +114,16 @@ Weather_set_track_mode(WeatherObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef Weather_getset[] = {
 {"azimuth", (getter)Weather_get_azimuth,(setter)Weather_set_azimuth,
-	"Azimuth angle of surface/axis [none], number.\n Required if: *.",
+	"Azimuth angle of surface/axis [none], number.\n Required.",
  	NULL},
 {"file_name", (getter)Weather_get_file_name,(setter)Weather_set_file_name,
-	"Local weather file with path [none], string.\n Constraints: LOCAL_FILE; Required if: *.",
+	"Local weather file with path [none], string.\n Constraints: LOCAL_FILE; Required.",
  	NULL},
 {"tilt", (getter)Weather_get_tilt,(setter)Weather_set_tilt,
-	"Tilt angle of surface/axis [none], number.\n Required if: *.",
+	"Tilt angle of surface/axis [none], number.\n Required.",
  	NULL},
 {"track_mode", (getter)Weather_get_track_mode,(setter)Weather_set_track_mode,
-	"Tracking mode [none], number.\n Required if: *.",
+	"Tracking mode [none], number.\n Required.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1494,319 +1494,319 @@ SolarField_set_wind_stow_speed(SolarFieldObject *self, PyObject *value, void *cl
 
 static PyGetSetDef SolarField_getset[] = {
 {"A_aperture", (getter)SolarField_get_A_aperture,(setter)SolarField_set_A_aperture,
-	"Reflective aperture area of the collector [m2], array.\n Required if: *.",
+	"Reflective aperture area of the collector [m2], array.\n Required.",
  	NULL},
 {"AbsorberMaterial", (getter)SolarField_get_AbsorberMaterial,(setter)SolarField_set_AbsorberMaterial,
-	"Absorber material type [none], matrix.\n Required if: *.",
+	"Absorber material type [none], matrix.\n Required.",
  	NULL},
 {"AnnulusGas", (getter)SolarField_get_AnnulusGas,(setter)SolarField_set_AnnulusGas,
-	"Annulus gas type (1=air, 26=Ar, 27=H2) [none], matrix.\n Required if: *.",
+	"Annulus gas type (1=air, 26=Ar, 27=H2) [none], matrix.\n Required.",
  	NULL},
 {"Ave_Focal_Length", (getter)SolarField_get_Ave_Focal_Length,(setter)SolarField_set_Ave_Focal_Length,
-	"Average focal length of the collector  [m], array.\n Required if: *.",
+	"Average focal length of the collector  [m], array.\n Required.",
  	NULL},
 {"ColperSCA", (getter)SolarField_get_ColperSCA,(setter)SolarField_set_ColperSCA,
-	"Number of individual collector sections in an SCA  [none], array.\n Required if: *.",
+	"Number of individual collector sections in an SCA  [none], array.\n Required.",
  	NULL},
 {"D_2", (getter)SolarField_get_D_2,(setter)SolarField_set_D_2,
-	"Inner absorber tube diameter [m], matrix.\n Required if: *.",
+	"Inner absorber tube diameter [m], matrix.\n Required.",
  	NULL},
 {"D_3", (getter)SolarField_get_D_3,(setter)SolarField_set_D_3,
-	"Outer absorber tube diameter [m], matrix.\n Required if: *.",
+	"Outer absorber tube diameter [m], matrix.\n Required.",
  	NULL},
 {"D_4", (getter)SolarField_get_D_4,(setter)SolarField_set_D_4,
-	"Inner glass envelope diameter  [m], matrix.\n Required if: *.",
+	"Inner glass envelope diameter  [m], matrix.\n Required.",
  	NULL},
 {"D_5", (getter)SolarField_get_D_5,(setter)SolarField_set_D_5,
-	"Outer glass envelope diameter  [m], matrix.\n Required if: *.",
+	"Outer glass envelope diameter  [m], matrix.\n Required.",
  	NULL},
 {"D_cpnt", (getter)SolarField_get_D_cpnt,(setter)SolarField_set_D_cpnt,
-	"Interconnect component diameters, row=intc, col=cpnt [none], matrix.\n Required if: *.",
+	"Interconnect component diameters, row=intc, col=cpnt [none], matrix.\n Required.",
  	NULL},
 {"D_p", (getter)SolarField_get_D_p,(setter)SolarField_set_D_p,
-	"Diameter of the absorber flow plug (optional)  [m], matrix.\n Required if: *.",
+	"Diameter of the absorber flow plug (optional)  [m], matrix.\n Required.",
  	NULL},
 {"Design_loss", (getter)SolarField_get_Design_loss,(setter)SolarField_set_Design_loss,
-	"Receiver heat loss at design [W/m], matrix.\n Required if: *.",
+	"Receiver heat loss at design [W/m], matrix.\n Required.",
  	NULL},
 {"Dirt_HCE", (getter)SolarField_get_Dirt_HCE,(setter)SolarField_set_Dirt_HCE,
-	"Loss due to dirt on the receiver envelope [none], matrix.\n Required if: *.",
+	"Loss due to dirt on the receiver envelope [none], matrix.\n Required.",
  	NULL},
 {"Dirt_mirror", (getter)SolarField_get_Dirt_mirror,(setter)SolarField_set_Dirt_mirror,
-	"User-defined dirt on mirror derate [none], array.\n Required if: *.",
+	"User-defined dirt on mirror derate [none], array.\n Required.",
  	NULL},
 {"Distance_SCA", (getter)SolarField_get_Distance_SCA,(setter)SolarField_set_Distance_SCA,
-	"Piping distance between SCA's in the field [m], array.\n Required if: *.",
+	"Piping distance between SCA's in the field [m], array.\n Required.",
  	NULL},
 {"EPSILON_4", (getter)SolarField_get_EPSILON_4,(setter)SolarField_set_EPSILON_4,
-	"Inner glass envelope emissivities (Pyrex)  [none], matrix.\n Required if: *.",
+	"Inner glass envelope emissivities (Pyrex)  [none], matrix.\n Required.",
  	NULL},
 {"EPSILON_5", (getter)SolarField_get_EPSILON_5,(setter)SolarField_set_EPSILON_5,
-	"Outer glass envelope emissivities (Pyrex)  [none], matrix.\n Required if: *.",
+	"Outer glass envelope emissivities (Pyrex)  [none], matrix.\n Required.",
  	NULL},
 {"Error", (getter)SolarField_get_Error,(setter)SolarField_set_Error,
-	"User-defined general optical error derate  [none], array.\n Required if: *.",
+	"User-defined general optical error derate  [none], array.\n Required.",
  	NULL},
 {"FieldConfig", (getter)SolarField_get_FieldConfig,(setter)SolarField_set_FieldConfig,
-	"Number of subfield headers [none], number.\n Required if: *.",
+	"Number of subfield headers [none], number.\n Required.",
  	NULL},
 {"Flow_type", (getter)SolarField_get_Flow_type,(setter)SolarField_set_Flow_type,
-	"Flow type through the absorber [none], matrix.\n Required if: *.",
+	"Flow type through the absorber [none], matrix.\n Required.",
  	NULL},
 {"Fluid", (getter)SolarField_get_Fluid,(setter)SolarField_set_Fluid,
-	"Field HTF fluid ID number [none], number.\n Required if: *.",
+	"Field HTF fluid ID number [none], number.\n Required.",
  	NULL},
 {"GeomEffects", (getter)SolarField_get_GeomEffects,(setter)SolarField_set_GeomEffects,
-	"User-defined geometry effects derate [none], array.\n Required if: *.",
+	"User-defined geometry effects derate [none], array.\n Required.",
  	NULL},
 {"GlazingIntactIn", (getter)SolarField_get_GlazingIntactIn,(setter)SolarField_set_GlazingIntactIn,
-	"Glazing intact (broken glass) flag {1=true, else=false} [none], matrix.\n Required if: *.",
+	"Glazing intact (broken glass) flag {1=true, else=false} [none], matrix.\n Required.",
  	NULL},
 {"HCE_FieldFrac", (getter)SolarField_get_HCE_FieldFrac,(setter)SolarField_set_HCE_FieldFrac,
-	"Fraction of the field occupied by this HCE type  [none], matrix.\n Required if: *.",
+	"Fraction of the field occupied by this HCE type  [none], matrix.\n Required.",
  	NULL},
 {"HDR_rough", (getter)SolarField_get_HDR_rough,(setter)SolarField_set_HDR_rough,
-	"Header pipe roughness [m], number.\n Required if: *.",
+	"Header pipe roughness [m], number.\n Required.",
  	NULL},
 {"IAM_matrix", (getter)SolarField_get_IAM_matrix,(setter)SolarField_set_IAM_matrix,
-	"IAM coefficients, matrix for 4 collectors [none], matrix.\n Required if: *.",
+	"IAM coefficients, matrix for 4 collectors [none], matrix.\n Required.",
  	NULL},
 {"I_bn_des", (getter)SolarField_get_I_bn_des,(setter)SolarField_set_I_bn_des,
-	"Solar irradiation at design [C], number.\n Required if: *.",
+	"Solar irradiation at design [C], number.\n Required.",
  	NULL},
 {"K_cpnt", (getter)SolarField_get_K_cpnt,(setter)SolarField_set_K_cpnt,
-	"Interconnect component minor loss coefficients, row=intc, col=cpnt [none], matrix.\n Required if: *.",
+	"Interconnect component minor loss coefficients, row=intc, col=cpnt [none], matrix.\n Required.",
  	NULL},
 {"L_SCA", (getter)SolarField_get_L_SCA,(setter)SolarField_set_L_SCA,
-	"Length of the SCA  [m], array.\n Required if: *.",
+	"Length of the SCA  [m], array.\n Required.",
  	NULL},
 {"L_aperture", (getter)SolarField_get_L_aperture,(setter)SolarField_set_L_aperture,
-	"Length of a single mirror/HCE unit [m], array.\n Required if: *.",
+	"Length of a single mirror/HCE unit [m], array.\n Required.",
  	NULL},
 {"L_cpnt", (getter)SolarField_get_L_cpnt,(setter)SolarField_set_L_cpnt,
-	"Interconnect component lengths, row=intc, col=cpnt [none], matrix.\n Required if: *.",
+	"Interconnect component lengths, row=intc, col=cpnt [none], matrix.\n Required.",
  	NULL},
 {"L_heat_sink_piping", (getter)SolarField_get_L_heat_sink_piping,(setter)SolarField_set_L_heat_sink_piping,
-	"Length of piping (full mass flow) through heat sink (if applicable) [none], number.\n Required if: *.",
+	"Length of piping (full mass flow) through heat sink (if applicable) [none], number.\n Required.",
  	NULL},
 {"L_rnr_per_xpan", (getter)SolarField_get_L_rnr_per_xpan,(setter)SolarField_set_L_rnr_per_xpan,
-	"Threshold length of straight runner pipe without an expansion loop [m], number.\n Required if: *.",
+	"Threshold length of straight runner pipe without an expansion loop [m], number.\n Required.",
  	NULL},
 {"L_xpan_hdr", (getter)SolarField_get_L_xpan_hdr,(setter)SolarField_set_L_xpan_hdr,
-	"Compined perpendicular lengths of each header expansion loop [m], number.\n Required if: *.",
+	"Compined perpendicular lengths of each header expansion loop [m], number.\n Required.",
  	NULL},
 {"L_xpan_rnr", (getter)SolarField_get_L_xpan_rnr,(setter)SolarField_set_L_xpan_rnr,
-	"Compined perpendicular lengths of each runner expansion loop [m], number.\n Required if: *.",
+	"Compined perpendicular lengths of each runner expansion loop [m], number.\n Required.",
  	NULL},
 {"Min_rnr_xpans", (getter)SolarField_get_Min_rnr_xpans,(setter)SolarField_set_Min_rnr_xpans,
-	"Minimum number of expansion loops per single-diameter runner section [none], number.\n Required if: *.",
+	"Minimum number of expansion loops per single-diameter runner section [none], number.\n Required.",
  	NULL},
 {"N_hdr_per_xpan", (getter)SolarField_get_N_hdr_per_xpan,(setter)SolarField_set_N_hdr_per_xpan,
-	"Number of collector loops per expansion loop [none], number.\n Required if: *.",
+	"Number of collector loops per expansion loop [none], number.\n Required.",
  	NULL},
 {"N_max_hdr_diams", (getter)SolarField_get_N_max_hdr_diams,(setter)SolarField_set_N_max_hdr_diams,
-	"Maximum number of diameters in each of the hot and cold headers [none], number.\n Required if: *.",
+	"Maximum number of diameters in each of the hot and cold headers [none], number.\n Required.",
  	NULL},
 {"P_a", (getter)SolarField_get_P_a,(setter)SolarField_set_P_a,
-	"Annulus gas pressure [torr], matrix.\n Required if: *.",
+	"Annulus gas pressure [torr], matrix.\n Required.",
  	NULL},
 {"Pipe_hl_coef", (getter)SolarField_get_Pipe_hl_coef,(setter)SolarField_set_Pipe_hl_coef,
-	"Loss coefficient from the header, runner pipe, and non-HCE piping [m/s], number.\n Required if: *.",
+	"Loss coefficient from the header, runner pipe, and non-HCE piping [m/s], number.\n Required.",
  	NULL},
 {"Rho_mirror_clean", (getter)SolarField_get_Rho_mirror_clean,(setter)SolarField_set_Rho_mirror_clean,
-	"User-defined clean mirror reflectivity [none], array.\n Required if: *.",
+	"User-defined clean mirror reflectivity [none], array.\n Required.",
  	NULL},
 {"Rough", (getter)SolarField_get_Rough,(setter)SolarField_set_Rough,
-	"Roughness of the internal surface  [m], matrix.\n Required if: *.",
+	"Roughness of the internal surface  [m], matrix.\n Required.",
  	NULL},
 {"Row_Distance", (getter)SolarField_get_Row_Distance,(setter)SolarField_set_Row_Distance,
-	"Spacing between rows (centerline to centerline) [m], number.\n Required if: *.",
+	"Spacing between rows (centerline to centerline) [m], number.\n Required.",
  	NULL},
 {"SCADefocusArray", (getter)SolarField_get_SCADefocusArray,(setter)SolarField_set_SCADefocusArray,
-	"Collector defocus order [none], array.\n Required if: *.",
+	"Collector defocus order [none], array.\n Required.",
  	NULL},
 {"SCAInfoArray", (getter)SolarField_get_SCAInfoArray,(setter)SolarField_set_SCAInfoArray,
-	"Receiver (,1) and collector (,2) type for each assembly in loop [none], matrix.\n Required if: *.",
+	"Receiver (,1) and collector (,2) type for each assembly in loop [none], matrix.\n Required.",
  	NULL},
 {"SCA_drives_elec", (getter)SolarField_get_SCA_drives_elec,(setter)SolarField_set_SCA_drives_elec,
-	"Tracking power, in Watts per SCA drive [W/m2-K], number.\n Required if: *.",
+	"Tracking power, in Watts per SCA drive [W/m2-K], number.\n Required.",
  	NULL},
 {"Shadowing", (getter)SolarField_get_Shadowing,(setter)SolarField_set_Shadowing,
-	"Receiver bellows shadowing loss factor [none], matrix.\n Required if: *.",
+	"Receiver bellows shadowing loss factor [none], matrix.\n Required.",
  	NULL},
 {"T_fp", (getter)SolarField_get_T_fp,(setter)SolarField_set_T_fp,
-	"Freeze protection temperature (heat trace activation temperature) [none], number.\n Required if: *.",
+	"Freeze protection temperature (heat trace activation temperature) [none], number.\n Required.",
  	NULL},
 {"T_loop_in_des", (getter)SolarField_get_T_loop_in_des,(setter)SolarField_set_T_loop_in_des,
-	"Design loop inlet temperature [C], number.\n Required if: *.",
+	"Design loop inlet temperature [C], number.\n Required.",
  	NULL},
 {"T_loop_out", (getter)SolarField_get_T_loop_out,(setter)SolarField_set_T_loop_out,
-	"Target loop outlet temperature [C], number.\n Required if: *.",
+	"Target loop outlet temperature [C], number.\n Required.",
  	NULL},
 {"Tau_envelope", (getter)SolarField_get_Tau_envelope,(setter)SolarField_set_Tau_envelope,
-	"Envelope transmittance [none], matrix.\n Required if: *.",
+	"Envelope transmittance [none], matrix.\n Required.",
  	NULL},
 {"TrackingError", (getter)SolarField_get_TrackingError,(setter)SolarField_set_TrackingError,
-	"User-defined tracking error derate [none], array.\n Required if: *.",
+	"User-defined tracking error derate [none], array.\n Required.",
  	NULL},
 {"Type_cpnt", (getter)SolarField_get_Type_cpnt,(setter)SolarField_set_Type_cpnt,
-	"Interconnect component type, row=intc, col=cpnt [none], matrix.\n Required if: *.",
+	"Interconnect component type, row=intc, col=cpnt [none], matrix.\n Required.",
  	NULL},
 {"V_hdr_max", (getter)SolarField_get_V_hdr_max,(setter)SolarField_set_V_hdr_max,
-	"Maximum HTF velocity in the header at design [W/m2], number.\n Required if: *.",
+	"Maximum HTF velocity in the header at design [W/m2], number.\n Required.",
  	NULL},
 {"V_hdr_min", (getter)SolarField_get_V_hdr_min,(setter)SolarField_set_V_hdr_min,
-	"Minimum HTF velocity in the header at design [m/s], number.\n Required if: *.",
+	"Minimum HTF velocity in the header at design [m/s], number.\n Required.",
  	NULL},
 {"W_aperture", (getter)SolarField_get_W_aperture,(setter)SolarField_set_W_aperture,
-	"The collector aperture width (Total structural area used for shadowing) [m], array.\n Required if: *.",
+	"The collector aperture width (Total structural area used for shadowing) [m], array.\n Required.",
  	NULL},
 {"accept_init", (getter)SolarField_get_accept_init,(setter)SolarField_set_accept_init,
-	"In acceptance testing mode - require steady-state startup [none], number.\n Required if: *.",
+	"In acceptance testing mode - require steady-state startup [none], number.\n Required.",
  	NULL},
 {"accept_loc", (getter)SolarField_get_accept_loc,(setter)SolarField_set_accept_loc,
-	"In acceptance testing mode - temperature sensor location [1/2], number.\n hx/loop; Required if: *.",
+	"In acceptance testing mode - temperature sensor location [1/2], number.\n hx/loop; Required.",
  	NULL},
 {"accept_mode", (getter)SolarField_get_accept_mode,(setter)SolarField_set_accept_mode,
-	"Acceptance testing mode? [0/1], number.\n no/yes; Required if: *.",
+	"Acceptance testing mode? [0/1], number.\n no/yes; Required.",
  	NULL},
 {"alpha_abs", (getter)SolarField_get_alpha_abs,(setter)SolarField_set_alpha_abs,
-	"Absorber absorptance  [none], matrix.\n Required if: *.",
+	"Absorber absorptance  [none], matrix.\n Required.",
  	NULL},
 {"alpha_env", (getter)SolarField_get_alpha_env,(setter)SolarField_set_alpha_env,
-	"Envelope absorptance  [none], matrix.\n Required if: *.",
+	"Envelope absorptance  [none], matrix.\n Required.",
  	NULL},
 {"calc_design_pipe_vals", (getter)SolarField_get_calc_design_pipe_vals,(setter)SolarField_set_calc_design_pipe_vals,
-	"Calculate temps and pressures at design conditions for runners and headers [none], number.\n Required if: *.",
+	"Calculate temps and pressures at design conditions for runners and headers [none], number.\n Required.",
  	NULL},
 {"custom_sf_pipe_sizes", (getter)SolarField_get_custom_sf_pipe_sizes,(setter)SolarField_set_custom_sf_pipe_sizes,
-	"Use custom solar field pipe diams, wallthks, and lengths [none], number.\n Required if: *.",
+	"Use custom solar field pipe diams, wallthks, and lengths [none], number.\n Required.",
  	NULL},
 {"epsilon_3_11", (getter)SolarField_get_epsilon_3_11,(setter)SolarField_set_epsilon_3_11,
-	"Absorber emittance for receiver type 1 variation 1 [none], matrix.\n Required if: *.",
+	"Absorber emittance for receiver type 1 variation 1 [none], matrix.\n Required.",
  	NULL},
 {"epsilon_3_12", (getter)SolarField_get_epsilon_3_12,(setter)SolarField_set_epsilon_3_12,
-	"Absorber emittance for receiver type 1 variation 2 [none], matrix.\n Required if: *.",
+	"Absorber emittance for receiver type 1 variation 2 [none], matrix.\n Required.",
  	NULL},
 {"epsilon_3_13", (getter)SolarField_get_epsilon_3_13,(setter)SolarField_set_epsilon_3_13,
-	"Absorber emittance for receiver type 1 variation 3 [none], matrix.\n Required if: *.",
+	"Absorber emittance for receiver type 1 variation 3 [none], matrix.\n Required.",
  	NULL},
 {"epsilon_3_14", (getter)SolarField_get_epsilon_3_14,(setter)SolarField_set_epsilon_3_14,
-	"Absorber emittance for receiver type 1 variation 4 [none], matrix.\n Required if: *.",
+	"Absorber emittance for receiver type 1 variation 4 [none], matrix.\n Required.",
  	NULL},
 {"epsilon_3_21", (getter)SolarField_get_epsilon_3_21,(setter)SolarField_set_epsilon_3_21,
-	"Absorber emittance for receiver type 2 variation 1 [none], matrix.\n Required if: *.",
+	"Absorber emittance for receiver type 2 variation 1 [none], matrix.\n Required.",
  	NULL},
 {"epsilon_3_22", (getter)SolarField_get_epsilon_3_22,(setter)SolarField_set_epsilon_3_22,
-	"Absorber emittance for receiver type 2 variation 2 [none], matrix.\n Required if: *.",
+	"Absorber emittance for receiver type 2 variation 2 [none], matrix.\n Required.",
  	NULL},
 {"epsilon_3_23", (getter)SolarField_get_epsilon_3_23,(setter)SolarField_set_epsilon_3_23,
-	"Absorber emittance for receiver type 2 variation 3 [none], matrix.\n Required if: *.",
+	"Absorber emittance for receiver type 2 variation 3 [none], matrix.\n Required.",
  	NULL},
 {"epsilon_3_24", (getter)SolarField_get_epsilon_3_24,(setter)SolarField_set_epsilon_3_24,
-	"Absorber emittance for receiver type 2 variation 4 [none], matrix.\n Required if: *.",
+	"Absorber emittance for receiver type 2 variation 4 [none], matrix.\n Required.",
  	NULL},
 {"epsilon_3_31", (getter)SolarField_get_epsilon_3_31,(setter)SolarField_set_epsilon_3_31,
-	"Absorber emittance for receiver type 3 variation 1 [none], matrix.\n Required if: *.",
+	"Absorber emittance for receiver type 3 variation 1 [none], matrix.\n Required.",
  	NULL},
 {"epsilon_3_32", (getter)SolarField_get_epsilon_3_32,(setter)SolarField_set_epsilon_3_32,
-	"Absorber emittance for receiver type 3 variation 2 [none], matrix.\n Required if: *.",
+	"Absorber emittance for receiver type 3 variation 2 [none], matrix.\n Required.",
  	NULL},
 {"epsilon_3_33", (getter)SolarField_get_epsilon_3_33,(setter)SolarField_set_epsilon_3_33,
-	"Absorber emittance for receiver type 3 variation 3 [none], matrix.\n Required if: *.",
+	"Absorber emittance for receiver type 3 variation 3 [none], matrix.\n Required.",
  	NULL},
 {"epsilon_3_34", (getter)SolarField_get_epsilon_3_34,(setter)SolarField_set_epsilon_3_34,
-	"Absorber emittance for receiver type 3 variation 4 [none], matrix.\n Required if: *.",
+	"Absorber emittance for receiver type 3 variation 4 [none], matrix.\n Required.",
  	NULL},
 {"epsilon_3_41", (getter)SolarField_get_epsilon_3_41,(setter)SolarField_set_epsilon_3_41,
-	"Absorber emittance for receiver type 4 variation 1 [none], matrix.\n Required if: *.",
+	"Absorber emittance for receiver type 4 variation 1 [none], matrix.\n Required.",
  	NULL},
 {"epsilon_3_42", (getter)SolarField_get_epsilon_3_42,(setter)SolarField_set_epsilon_3_42,
-	"Absorber emittance for receiver type 4 variation 2 [none], matrix.\n Required if: *.",
+	"Absorber emittance for receiver type 4 variation 2 [none], matrix.\n Required.",
  	NULL},
 {"epsilon_3_43", (getter)SolarField_get_epsilon_3_43,(setter)SolarField_set_epsilon_3_43,
-	"Absorber emittance for receiver type 4 variation 3 [none], matrix.\n Required if: *.",
+	"Absorber emittance for receiver type 4 variation 3 [none], matrix.\n Required.",
  	NULL},
 {"epsilon_3_44", (getter)SolarField_get_epsilon_3_44,(setter)SolarField_set_epsilon_3_44,
-	"Absorber emittance for receiver type 4 variation 4 [none], matrix.\n Required if: *.",
+	"Absorber emittance for receiver type 4 variation 4 [none], matrix.\n Required.",
  	NULL},
 {"eta_pump", (getter)SolarField_get_eta_pump,(setter)SolarField_set_eta_pump,
-	"HTF pump efficiency [none], number.\n Required if: *.",
+	"HTF pump efficiency [none], number.\n Required.",
  	NULL},
 {"is_model_heat_sink_piping", (getter)SolarField_get_is_model_heat_sink_piping,(setter)SolarField_set_is_model_heat_sink_piping,
-	"Should model consider piping through heat sink? [none], number.\n Required if: *.",
+	"Should model consider piping through heat sink? [none], number.\n Required.",
  	NULL},
 {"m_dot_htfmax", (getter)SolarField_get_m_dot_htfmax,(setter)SolarField_set_m_dot_htfmax,
-	"Maximum loop HTF flow rate [kg/s], number.\n Required if: *.",
+	"Maximum loop HTF flow rate [kg/s], number.\n Required.",
  	NULL},
 {"m_dot_htfmin", (getter)SolarField_get_m_dot_htfmin,(setter)SolarField_set_m_dot_htfmin,
-	"Minimum loop HTF flow rate [kg/s], number.\n Required if: *.",
+	"Minimum loop HTF flow rate [kg/s], number.\n Required.",
  	NULL},
 {"mc_bal_cold", (getter)SolarField_get_mc_bal_cold,(setter)SolarField_set_mc_bal_cold,
-	"Heat capacity of the balance of plant on the cold side [kWht/K-MWt], number.\n Required if: *.",
+	"Heat capacity of the balance of plant on the cold side [kWht/K-MWt], number.\n Required.",
  	NULL},
 {"mc_bal_hot", (getter)SolarField_get_mc_bal_hot,(setter)SolarField_set_mc_bal_hot,
-	"Heat capacity of the balance of plant on the hot side [kWht/K-MWt], number.\n none; Required if: *.",
+	"Heat capacity of the balance of plant on the hot side [kWht/K-MWt], number.\n none; Required.",
  	NULL},
 {"mc_bal_sca", (getter)SolarField_get_mc_bal_sca,(setter)SolarField_set_mc_bal_sca,
-	"Non-HTF heat capacity associated with each SCA - per meter basis [Wht/K-m], number.\n Required if: *.",
+	"Non-HTF heat capacity associated with each SCA - per meter basis [Wht/K-m], number.\n Required.",
  	NULL},
 {"nColt", (getter)SolarField_get_nColt,(setter)SolarField_set_nColt,
-	"Number of collector types [none], number.\n constant=4; Required if: *.",
+	"Number of collector types [none], number.\n constant=4; Required.",
  	NULL},
 {"nHCEVar", (getter)SolarField_get_nHCEVar,(setter)SolarField_set_nHCEVar,
-	"Number of HCE variants per type [none], number.\n Required if: *.",
+	"Number of HCE variants per type [none], number.\n Required.",
  	NULL},
 {"nHCEt", (getter)SolarField_get_nHCEt,(setter)SolarField_set_nHCEt,
-	"Number of HCE types [none], number.\n Required if: *.",
+	"Number of HCE types [none], number.\n Required.",
  	NULL},
 {"nLoops", (getter)SolarField_get_nLoops,(setter)SolarField_set_nLoops,
-	"Number of loops in the field [none], number.\n Required if: *.",
+	"Number of loops in the field [none], number.\n Required.",
  	NULL},
 {"nSCA", (getter)SolarField_get_nSCA,(setter)SolarField_set_nSCA,
-	"Number of SCAs in a loop [none], number.\n Required if: *.",
+	"Number of SCAs in a loop [none], number.\n Required.",
  	NULL},
 {"northsouth_field_sep", (getter)SolarField_get_northsouth_field_sep,(setter)SolarField_set_northsouth_field_sep,
-	"North/south separation between subfields. 0 = SCAs are touching [m], number.\n Required if: *.",
+	"North/south separation between subfields. 0 = SCAs are touching [m], number.\n Required.",
  	NULL},
 {"offset_xpan_hdr", (getter)SolarField_get_offset_xpan_hdr,(setter)SolarField_set_offset_xpan_hdr,
-	"Location of first header expansion loop. 1 = after first collector loop [none], number.\n Required if: *.",
+	"Location of first header expansion loop. 1 = after first collector loop [none], number.\n Required.",
  	NULL},
 {"sf_hdr_diams", (getter)SolarField_get_sf_hdr_diams,(setter)SolarField_set_sf_hdr_diams,
-	"Custom header diameters [m], matrix.\n Required if: *.",
+	"Custom header diameters [m], matrix.\n Required.",
  	NULL},
 {"sf_hdr_lengths", (getter)SolarField_get_sf_hdr_lengths,(setter)SolarField_set_sf_hdr_lengths,
-	"Custom header lengths [m], matrix.\n Required if: *.",
+	"Custom header lengths [m], matrix.\n Required.",
  	NULL},
 {"sf_hdr_wallthicks", (getter)SolarField_get_sf_hdr_wallthicks,(setter)SolarField_set_sf_hdr_wallthicks,
-	"Custom header wall thicknesses [m], matrix.\n Required if: *.",
+	"Custom header wall thicknesses [m], matrix.\n Required.",
  	NULL},
 {"sf_rnr_diams", (getter)SolarField_get_sf_rnr_diams,(setter)SolarField_set_sf_rnr_diams,
-	"Custom runner diameters [m], matrix.\n Required if: *.",
+	"Custom runner diameters [m], matrix.\n Required.",
  	NULL},
 {"sf_rnr_lengths", (getter)SolarField_get_sf_rnr_lengths,(setter)SolarField_set_sf_rnr_lengths,
-	"Custom runner lengths [m], matrix.\n Required if: *.",
+	"Custom runner lengths [m], matrix.\n Required.",
  	NULL},
 {"sf_rnr_wallthicks", (getter)SolarField_get_sf_rnr_wallthicks,(setter)SolarField_set_sf_rnr_wallthicks,
-	"Custom runner wall thicknesses [m], matrix.\n Required if: *.",
+	"Custom runner wall thicknesses [m], matrix.\n Required.",
  	NULL},
 {"solar_mult", (getter)SolarField_get_solar_mult,(setter)SolarField_set_solar_mult,
-	"Solar multiple [none], number.\n Required if: *.",
+	"Solar multiple [none], number.\n Required.",
  	NULL},
 {"theta_dep", (getter)SolarField_get_theta_dep,(setter)SolarField_set_theta_dep,
-	"Deploy angle [deg], number.\n Required if: *.",
+	"Deploy angle [deg], number.\n Required.",
  	NULL},
 {"theta_stow", (getter)SolarField_get_theta_stow,(setter)SolarField_set_theta_stow,
-	"Stow angle [deg], number.\n Required if: *.",
+	"Stow angle [deg], number.\n Required.",
  	NULL},
 {"washing_frequency", (getter)SolarField_get_washing_frequency,(setter)SolarField_set_washing_frequency,
-	"Mirror washing frequency [-/year], number.\n Required if: *.",
+	"Mirror washing frequency [-/year], number.\n Required.",
  	NULL},
 {"water_usage_per_wash", (getter)SolarField_get_water_usage_per_wash,(setter)SolarField_set_water_usage_per_wash,
-	"Water usage per wash [L/m2_aper], number.\n Required if: *.",
+	"Water usage per wash [L/m2_aper], number.\n Required.",
  	NULL},
 {"wind_stow_speed", (getter)SolarField_get_wind_stow_speed,(setter)SolarField_set_wind_stow_speed,
-	"Trough wind stow speed [m/s], number.\n Required if: ?=50.",
+	"Trough wind stow speed [m/s], number.\n Required if ?=50.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1953,13 +1953,13 @@ Controller_set_q_pb_design(ControllerObject *self, PyObject *value, void *closur
 
 static PyGetSetDef Controller_getset[] = {
 {"field_fl_props", (getter)Controller_get_field_fl_props,(setter)Controller_set_field_fl_props,
-	"User defined field fluid property data [-], matrix.\n Required if: *.",
+	"User defined field fluid property data [-], matrix.\n Required.",
  	NULL},
 {"pb_pump_coef", (getter)Controller_get_pb_pump_coef,(setter)Controller_set_pb_pump_coef,
-	"Pumping power to move 1kg of HTF through PB loop [kW/kg], number.\n Required if: *.",
+	"Pumping power to move 1kg of HTF through PB loop [kW/kg], number.\n Required.",
  	NULL},
 {"q_pb_design", (getter)Controller_get_q_pb_design,(setter)Controller_set_q_pb_design,
-	"Design heat input to power block [MWt], number.\n Required if: *.",
+	"Design heat input to power block [MWt], number.\n Required.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -2082,7 +2082,7 @@ SystemDesign_set_tshours(SystemDesignObject *self, PyObject *value, void *closur
 
 static PyGetSetDef SystemDesign_getset[] = {
 {"tshours", (getter)SystemDesign_get_tshours,(setter)SystemDesign_set_tshours,
-	"Equivalent full-load thermal storage hours [hr], number.\n Required if: *.",
+	"Equivalent full-load thermal storage hours [hr], number.\n Required.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -2265,22 +2265,22 @@ TES_set_u_tank(TESObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef TES_getset[] = {
 {"cold_tank_Thtr", (getter)TES_get_cold_tank_Thtr,(setter)TES_set_cold_tank_Thtr,
-	"Minimum allowable cold tank HTF temp [C], number.\n Required if: *.",
+	"Minimum allowable cold tank HTF temp [C], number.\n Required.",
  	NULL},
 {"cold_tank_max_heat", (getter)TES_get_cold_tank_max_heat,(setter)TES_set_cold_tank_max_heat,
-	"Rated heater capacity for cold tank heating [MW], number.\n Required if: *.",
+	"Rated heater capacity for cold tank heating [MW], number.\n Required.",
  	NULL},
 {"h_tank", (getter)TES_get_h_tank,(setter)TES_set_h_tank,
-	"Total height of tank (height of HTF when tank is full [m], number.\n Required if: *.",
+	"Total height of tank (height of HTF when tank is full [m], number.\n Required.",
  	NULL},
 {"init_hot_htf_percent", (getter)TES_get_init_hot_htf_percent,(setter)TES_set_init_hot_htf_percent,
-	"Initial fraction of avail. vol that is hot [%], number.\n Required if: *.",
+	"Initial fraction of avail. vol that is hot [%], number.\n Required.",
  	NULL},
 {"tank_pairs", (getter)TES_get_tank_pairs,(setter)TES_set_tank_pairs,
-	"Number of equivalent tank pairs [-], number.\n Constraints: INTEGER; Required if: *.",
+	"Number of equivalent tank pairs [-], number.\n Constraints: INTEGER; Required.",
  	NULL},
 {"u_tank", (getter)TES_get_u_tank,(setter)TES_set_u_tank,
-	"Loss coefficient from the tank [W/m2-K], number.\n Required if: *.",
+	"Loss coefficient from the tank [W/m2-K], number.\n Required.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -2427,13 +2427,13 @@ TES2tank_set_hot_tank_max_heat(TES2tankObject *self, PyObject *value, void *clos
 
 static PyGetSetDef TES2tank_getset[] = {
 {"h_tank_min", (getter)TES2tank_get_h_tank_min,(setter)TES2tank_set_h_tank_min,
-	"Minimum allowable HTF height in storage tank [m], number.\n Required if: *.",
+	"Minimum allowable HTF height in storage tank [m], number.\n Required.",
  	NULL},
 {"hot_tank_Thtr", (getter)TES2tank_get_hot_tank_Thtr,(setter)TES2tank_set_hot_tank_Thtr,
-	"Minimum allowable hot tank HTF temp [C], number.\n Required if: *.",
+	"Minimum allowable hot tank HTF temp [C], number.\n Required.",
  	NULL},
 {"hot_tank_max_heat", (getter)TES2tank_get_hot_tank_max_heat,(setter)TES2tank_set_hot_tank_max_heat,
-	"Rated heater capacity for hot tank heating [MW], number.\n Required if: *.",
+	"Rated heater capacity for hot tank heating [MW], number.\n Required.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -2556,7 +2556,7 @@ Powerblock_set_L_rnr_pb(PowerblockObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef Powerblock_getset[] = {
 {"L_rnr_pb", (getter)Powerblock_get_L_rnr_pb,(setter)Powerblock_set_L_rnr_pb,
-	"Length of runner pipe in power block [m], number.\n Required if: *.",
+	"Length of runner pipe in power block [m], number.\n Required.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -3051,22 +3051,22 @@ Outputs_get_wspd(OutputsObject *self, void *closure)
 
 static PyGetSetDef Outputs_getset[] = {
 {"CosTh_ave", (getter)Outputs_get_CosTh_ave,(setter)0,
-	"Field collector cosine efficiency [], array.",
+	"Field collector cosine efficiency, array.",
  	NULL},
 {"EndLoss_ave", (getter)Outputs_get_EndLoss_ave,(setter)0,
-	"Field collector optical end loss [], array.",
+	"Field collector optical end loss, array.",
  	NULL},
 {"EqOpteff", (getter)Outputs_get_EqOpteff,(setter)0,
-	"Field optical efficiency before defocus [], array.",
+	"Field optical efficiency before defocus, array.",
  	NULL},
 {"IAM_ave", (getter)Outputs_get_IAM_ave,(setter)0,
-	"Field collector incidence angle modifier [], array.",
+	"Field collector incidence angle modifier, array.",
  	NULL},
 {"RowShadow_ave", (getter)Outputs_get_RowShadow_ave,(setter)0,
-	"Field collector row shadowing loss [], array.",
+	"Field collector row shadowing loss, array.",
  	NULL},
 {"SCAs_def", (getter)Outputs_get_SCAs_def,(setter)0,
-	"Field fraction of focused SCAs [], array.",
+	"Field fraction of focused SCAs, array.",
  	NULL},
 {"T_field_cold_in", (getter)Outputs_get_T_field_cold_in,(setter)0,
 	"Field timestep-averaged inlet temperature [C], array.",
@@ -3144,10 +3144,10 @@ static PyGetSetDef Outputs_getset[] = {
 	"Field change in material/htf internal energy [MWt], array.",
  	NULL},
 {"hour_day", (getter)Outputs_get_hour_day,(setter)0,
-	"Resource Hour of Day [], array.",
+	"Resource Hour of Day, array.",
  	NULL},
 {"m_dot_balance", (getter)Outputs_get_m_dot_balance,(setter)0,
-	"Relative mass flow balance error [], array.",
+	"Relative mass flow balance error, array.",
  	NULL},
 {"m_dot_field_delivered", (getter)Outputs_get_m_dot_field_delivered,(setter)0,
 	"Field total mass flow delivered [kg/s], array.",
@@ -3168,22 +3168,22 @@ static PyGetSetDef Outputs_getset[] = {
 	"TES discharge mass flow rate [kg/s], array.",
  	NULL},
 {"month", (getter)Outputs_get_month,(setter)0,
-	"Resource Month [], array.",
+	"Resource Month, array.",
  	NULL},
 {"op_mode_1", (getter)Outputs_get_op_mode_1,(setter)0,
-	"1st operating mode [], array.",
+	"1st operating mode, array.",
  	NULL},
 {"op_mode_2", (getter)Outputs_get_op_mode_2,(setter)0,
-	"2nd op. mode, if applicable [], array.",
+	"2nd op. mode, if applicable, array.",
  	NULL},
 {"op_mode_3", (getter)Outputs_get_op_mode_3,(setter)0,
-	"3rd op. mode, if applicable [], array.",
+	"3rd op. mode, if applicable, array.",
  	NULL},
 {"pres", (getter)Outputs_get_pres,(setter)0,
 	"Resource Pressure [mbar], array.",
  	NULL},
 {"q_balance", (getter)Outputs_get_q_balance,(setter)0,
-	"Relative energy balance error [], array.",
+	"Relative energy balance error, array.",
  	NULL},
 {"q_ch_tes", (getter)Outputs_get_q_ch_tes,(setter)0,
 	"TES charge thermal power [MWt], array.",
@@ -3313,39 +3313,35 @@ newTroughPhysicalProcessHeatObject(void* data_ptr)
 
 	PySAM_TECH_ATTR("TroughPhysicalProcessHeat", SAM_TroughPhysicalProcessHeat_construct)
 
-PyObject* Weather_obj = Weather_new(self->data_ptr);
+	PyObject* Weather_obj = Weather_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Weather", Weather_obj);
 	Py_DECREF(Weather_obj);
 
-PyObject* SolarField_obj = SolarField_new(self->data_ptr);
+	PyObject* SolarField_obj = SolarField_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "SolarField", SolarField_obj);
 	Py_DECREF(SolarField_obj);
 
-PyObject* Controller_obj = Controller_new(self->data_ptr);
+	PyObject* Controller_obj = Controller_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Controller", Controller_obj);
 	Py_DECREF(Controller_obj);
 
-PyObject* SystemDesign_obj = SystemDesign_new(self->data_ptr);
+	PyObject* SystemDesign_obj = SystemDesign_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "SystemDesign", SystemDesign_obj);
 	Py_DECREF(SystemDesign_obj);
 
-PyObject* TES_obj = TES_new(self->data_ptr);
+	PyObject* TES_obj = TES_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "TES", TES_obj);
 	Py_DECREF(TES_obj);
 
-PyObject* TES2tank_obj = TES2tank_new(self->data_ptr);
+	PyObject* TES2tank_obj = TES2tank_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "TES2tank", TES2tank_obj);
 	Py_DECREF(TES2tank_obj);
 
-PyObject* Powerblock_obj = Powerblock_new(self->data_ptr);
+	PyObject* Powerblock_obj = Powerblock_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Powerblock", Powerblock_obj);
 	Py_DECREF(Powerblock_obj);
 
-PyObject* Outputs_obj = Outputs_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
-	Py_DECREF(Outputs_obj);
-
-PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
+	PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
 
 	PyObject* data_cap = PyCapsule_New(self->data_ptr, NULL, NULL);
 	PyObject* Adjust_obj = PyObject_CallMethod(AdjustmentFactorsModule, "new", "(O)", data_cap);
@@ -3359,6 +3355,11 @@ PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
 
 	PyDict_SetItemString(attr_dict, "AdjustmentFactors", Adjust_obj);
 	Py_DECREF(Adjust_obj);
+
+	PyObject* Outputs_obj = Outputs_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
+	Py_DECREF(Outputs_obj);
+
 
 	return self;
 }
@@ -3515,8 +3516,8 @@ static PyObject *
 TroughPhysicalProcessHeat_default(PyObject *self, PyObject *args)
 {
 	TroughPhysicalProcessHeatObject *rv;
-	char* fin = 0;
-	if (!PyArg_ParseTuple(args, "s:default", &fin)){
+	char* def = 0;
+	if (!PyArg_ParseTuple(args, "s:default", &def)){
 		PyErr_BadArgument();
 		return NULL;
 	}
@@ -3524,7 +3525,7 @@ TroughPhysicalProcessHeat_default(PyObject *self, PyObject *args)
 	if (rv == NULL)
 		return NULL;
 
-	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "TroughPhysicalProcessHeat", fin);
+	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "TroughPhysicalProcessHeat", def);
 
 	return (PyObject *)rv;
 }
@@ -3539,14 +3540,14 @@ static PyMethodDef TroughPhysicalProcessHeatModule_methods[] = {
 				PyDoc_STR("new() -> new TroughPhysicalProcessHeat object")},
 		{"default",             TroughPhysicalProcessHeat_default,         METH_VARARGS,
 				PyDoc_STR("default(financial) -> new TroughPhysicalProcessHeat object with financial model-specific default attributes\n"
-				"Options: LCOH Calculator, None, ")},
+				"Options: IphToLcoefcr, None")},
 		{"wrap",             TroughPhysicalProcessHeat_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> new TroughPhysicalProcessHeat object around existing PySSC data")},
+				PyDoc_STR("wrap(ssc_data_t) -> new TroughPhysicalProcessHeat object around existing PySSC data, taking over memory ownership")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 PyDoc_STRVAR(module_doc,
-			 "Refer to http://www.github.com/nrel/PySAM for source code.");
+			 "Parabolic trough for industrial process heat applications");
 
 
 static int
@@ -3554,6 +3555,9 @@ TroughPhysicalProcessHeatModule_exec(PyObject *m)
 {
 	/* Finalize the type object including setting type of the new type
 	 * object; doing it here is required for portability, too. */
+
+	if (PySAM_load_lib(m) < 0) goto fail;
+	if (PySAM_init_error(m) < 0) goto fail;
 
 	TroughPhysicalProcessHeat_Type.tp_dict = PyDict_New();
 	if (!TroughPhysicalProcessHeat_Type.tp_dict) { goto fail; }
@@ -3638,9 +3642,6 @@ TroughPhysicalProcessHeatModule_exec(PyObject *m)
 	PyModule_AddObject(m,
 				"TroughPhysicalProcessHeat",
 				(PyObject*)&TroughPhysicalProcessHeat_Type);
-
-	if (PySAM_load_lib(m) < 0) goto fail;
-	if (PySAM_init_error() < 0) goto fail;
 
 	return 0;
 	fail:

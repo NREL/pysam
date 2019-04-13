@@ -114,16 +114,16 @@ Weather_set_track_mode(WeatherObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef Weather_getset[] = {
 {"azimuth", (getter)Weather_get_azimuth,(setter)Weather_set_azimuth,
-	"Azimuth angle of surface/axis [], number.\n Required if: *.",
+	"Azimuth angle of surface/axis, number.\n Required.",
  	NULL},
 {"file_name", (getter)Weather_get_file_name,(setter)Weather_set_file_name,
-	"local weather file path [], string.\n Constraints: LOCAL_FILE; Required if: *.",
+	"local weather file path, string.\n Constraints: LOCAL_FILE; Required.",
  	NULL},
 {"tilt", (getter)Weather_get_tilt,(setter)Weather_set_tilt,
-	"Tilt angle of surface/axis [], number.\n Required if: *.",
+	"Tilt angle of surface/axis, number.\n Required.",
  	NULL},
 {"track_mode", (getter)Weather_get_track_mode,(setter)Weather_set_track_mode,
-	"Tracking mode [], number.\n Required if: *.",
+	"Tracking mode, number.\n Required.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -246,7 +246,7 @@ GenericSolar_set_system_capacity(GenericSolarObject *self, PyObject *value, void
 
 static PyGetSetDef GenericSolar_getset[] = {
 {"system_capacity", (getter)GenericSolar_get_system_capacity,(setter)GenericSolar_set_system_capacity,
-	"Nameplate capacity [kW], number.\n Required if: *.",
+	"Nameplate capacity [kW], number.\n Required.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -381,10 +381,10 @@ TouTranslator_set_weekend_schedule(TouTranslatorObject *self, PyObject *value, v
 
 static PyGetSetDef TouTranslator_getset[] = {
 {"weekday_schedule", (getter)TouTranslator_get_weekday_schedule,(setter)TouTranslator_set_weekday_schedule,
-	"12x24 Time of Use Values for week days [], matrix.\n Required if: *.",
+	"12x24 Time of Use Values for week days, matrix.\n Required.",
  	NULL},
 {"weekend_schedule", (getter)TouTranslator_get_weekend_schedule,(setter)TouTranslator_set_weekend_schedule,
-	"12x24 Time of Use Values for week end days [], matrix.\n Required if: *.",
+	"12x24 Time of Use Values for week end days, matrix.\n Required.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1143,166 +1143,166 @@ Type260_set_w_des(Type260Object *self, PyObject *value, void *closure)
 
 static PyGetSetDef Type260_getset[] = {
 {"OpticalTable", (getter)Type260_get_OpticalTable,(setter)Type260_set_OpticalTable,
-	"Optical table [none], matrix.\n Required if: *.",
+	"Optical table [none], matrix.\n Required.",
  	NULL},
 {"PC_T_corr", (getter)Type260_get_PC_T_corr,(setter)Type260_set_PC_T_corr,
-	"Power conversion temperature correction mode (1=wetb, 2=dryb) [none], number.\n Constraints: INTEGER; Required if: *.",
+	"Power conversion temperature correction mode (1=wetb, 2=dryb) [none], number.\n Constraints: INTEGER; Required.",
  	NULL},
 {"T_pcdes", (getter)Type260_get_T_pcdes,(setter)Type260_set_T_pcdes,
-	"Power conversion reference temperature [C], number.\n Required if: *.",
+	"Power conversion reference temperature [C], number.\n Required.",
  	NULL},
 {"T_sfdes", (getter)Type260_get_T_sfdes,(setter)Type260_set_T_sfdes,
-	"Solar field design point temperature (dry bulb) [C], number.\n Required if: *.",
+	"Solar field design point temperature (dry bulb) [C], number.\n Required.",
  	NULL},
 {"Wpar_prodD_coefs", (getter)Type260_get_Wpar_prodD_coefs,(setter)Type260_set_Wpar_prodD_coefs,
-	"DNI-based production parasitic adjustment coefs. [m2/W], array.\n Required if: *.",
+	"DNI-based production parasitic adjustment coefs. [m2/W], array.\n Required.",
  	NULL},
 {"Wpar_prodQ_coefs", (getter)Type260_get_Wpar_prodQ_coefs,(setter)Type260_set_Wpar_prodQ_coefs,
-	"Part-load production parasitic adjustment coefs. [1/MWe], array.\n Required if: *.",
+	"Part-load production parasitic adjustment coefs. [1/MWe], array.\n Required.",
  	NULL},
 {"Wpar_prodT_coefs", (getter)Type260_get_Wpar_prodT_coefs,(setter)Type260_set_Wpar_prodT_coefs,
-	"Temp.-based production parasitic adjustment coefs. [1/C], array.\n Required if: *.",
+	"Temp.-based production parasitic adjustment coefs. [1/C], array.\n Required.",
  	NULL},
 {"diswos", (getter)Type260_get_diswos,(setter)Type260_set_diswos,
-	"Time-of-dispatch control for without-solar conditions [none], array.\n Required if: *.",
+	"Time-of-dispatch control for without-solar conditions [none], array.\n Required.",
  	NULL},
 {"disws", (getter)Type260_get_disws,(setter)Type260_set_disws,
-	"Time-of-dispatch control for with-solar conditions [none], array.\n Required if: *.",
+	"Time-of-dispatch control for with-solar conditions [none], array.\n Required.",
  	NULL},
 {"etaQ_coefs", (getter)Type260_get_etaQ_coefs,(setter)Type260_set_etaQ_coefs,
-	"Part-load power conversion efficiency adjustment coefficients [1/MWt], array.\n Required if: *.",
+	"Part-load power conversion efficiency adjustment coefficients [1/MWt], array.\n Required.",
  	NULL},
 {"etaT_coefs", (getter)Type260_get_etaT_coefs,(setter)Type260_set_etaT_coefs,
-	"Temp.-based power conversion efficiency adjustment coefs. [1/C], array.\n Required if: *.",
+	"Temp.-based power conversion efficiency adjustment coefs. [1/C], array.\n Required.",
  	NULL},
 {"eta_des", (getter)Type260_get_eta_des,(setter)Type260_set_eta_des,
-	"Design power cycle gross efficiency [none], number.\n Required if: *.",
+	"Design power cycle gross efficiency [none], number.\n Required.",
  	NULL},
 {"eta_lhv", (getter)Type260_get_eta_lhv,(setter)Type260_set_eta_lhv,
-	"Fossil backup lower heating value efficiency [none], number.\n Required if: *.",
+	"Fossil backup lower heating value efficiency [none], number.\n Required.",
  	NULL},
 {"eta_opt_gen", (getter)Type260_get_eta_opt_gen,(setter)Type260_set_eta_opt_gen,
-	"General/other optical derate [none], number.\n Required if: *.",
+	"General/other optical derate [none], number.\n Required.",
  	NULL},
 {"eta_opt_soil", (getter)Type260_get_eta_opt_soil,(setter)Type260_set_eta_opt_soil,
-	"Soiling optical derate factor [none], number.\n Required if: *.",
+	"Soiling optical derate factor [none], number.\n Required.",
  	NULL},
 {"exergy_table", (getter)Type260_get_exergy_table,(setter)Type260_set_exergy_table,
-	"Exergy table [none], matrix.\n Required if: *.",
+	"Exergy table [none], matrix.\n Required.",
  	NULL},
 {"f_Wpar_fixed", (getter)Type260_get_f_Wpar_fixed,(setter)Type260_set_f_Wpar_fixed,
-	"Fixed capacity-based parasitic loss fraction [MWe/MWcap], number.\n Required if: *.",
+	"Fixed capacity-based parasitic loss fraction [MWe/MWcap], number.\n Required.",
  	NULL},
 {"f_Wpar_prod", (getter)Type260_get_f_Wpar_prod,(setter)Type260_set_f_Wpar_prod,
-	"Production-based parasitic loss fraction [MWe/MWe], number.\n Required if: *.",
+	"Production-based parasitic loss fraction [MWe/MWe], number.\n Required.",
  	NULL},
 {"f_charge", (getter)Type260_get_f_charge,(setter)Type260_set_f_charge,
-	"Storage charging energy derate [none], number.\n Required if: *.",
+	"Storage charging energy derate [none], number.\n Required.",
  	NULL},
 {"f_disch", (getter)Type260_get_f_disch,(setter)Type260_set_f_disch,
-	"Storage discharging energy derate [none], number.\n Required if: *.",
+	"Storage discharging energy derate [none], number.\n Required.",
  	NULL},
 {"f_etes_0", (getter)Type260_get_f_etes_0,(setter)Type260_set_f_etes_0,
-	"Initial fractional charge level of thermal storage (0..1) [none], number.\n Required if: *.",
+	"Initial fractional charge level of thermal storage (0..1) [none], number.\n Required.",
  	NULL},
 {"f_sfhl_ref", (getter)Type260_get_f_sfhl_ref,(setter)Type260_set_f_sfhl_ref,
-	"Reference solar field thermal loss fraction [MW/MWcap], number.\n Required if: *.",
+	"Reference solar field thermal loss fraction [MW/MWcap], number.\n Required.",
  	NULL},
 {"f_startup", (getter)Type260_get_f_startup,(setter)Type260_set_f_startup,
-	"Equivalent full-load hours required for power system startup [hours], number.\n Required if: *.",
+	"Equivalent full-load hours required for power system startup [hours], number.\n Required.",
  	NULL},
 {"f_teshl_ref", (getter)Type260_get_f_teshl_ref,(setter)Type260_set_f_teshl_ref,
-	"Reference heat loss from storage per max stored capacity [kWt/MWhr-stored], number.\n Required if: *.",
+	"Reference heat loss from storage per max stored capacity [kWt/MWhr-stored], number.\n Required.",
  	NULL},
 {"f_wmax", (getter)Type260_get_f_wmax,(setter)Type260_set_f_wmax,
-	"Maximum over-design power cycle operation fraction [none], number.\n Required if: *.",
+	"Maximum over-design power cycle operation fraction [none], number.\n Required.",
  	NULL},
 {"f_wmin", (getter)Type260_get_f_wmin,(setter)Type260_set_f_wmin,
-	"Minimum part-load power cycle operation fraction [none], number.\n Required if: *.",
+	"Minimum part-load power cycle operation fraction [none], number.\n Required.",
  	NULL},
 {"fdisp", (getter)Type260_get_fdisp,(setter)Type260_set_fdisp,
-	"Fossil backup output control factors [none], array.\n Required if: *.",
+	"Fossil backup output control factors [none], array.\n Required.",
  	NULL},
 {"hrs_tes", (getter)Type260_get_hrs_tes,(setter)Type260_set_hrs_tes,
-	"Equivalent full-load hours of storage [hours], number.\n Required if: *.",
+	"Equivalent full-load hours of storage [hours], number.\n Required.",
  	NULL},
 {"ibh", (getter)Type260_get_ibh,(setter)Type260_set_ibh,
-	"Beam-horizontal irradiation [kJ/hr-m^2], number.\n Required if: *.",
+	"Beam-horizontal irradiation [kJ/hr-m^2], number.\n Required.",
  	NULL},
 {"ibn", (getter)Type260_get_ibn,(setter)Type260_set_ibn,
-	"Beam-normal (DNI) irradiation [kJ/hr-m^2], number.\n Required if: *.",
+	"Beam-normal (DNI) irradiation [kJ/hr-m^2], number.\n Required.",
  	NULL},
 {"interp_arr", (getter)Type260_get_interp_arr,(setter)Type260_set_interp_arr,
-	"Interpolate the array or find nearest neighbor? (1=interp,2=no) [none], number.\n Constraints: INTEGER; Required if: *.",
+	"Interpolate the array or find nearest neighbor? (1=interp,2=no) [none], number.\n Constraints: INTEGER; Required.",
  	NULL},
 {"irr_des", (getter)Type260_get_irr_des,(setter)Type260_set_irr_des,
-	"Irradiation design point [W/m2], number.\n Required if: *.",
+	"Irradiation design point [W/m2], number.\n Required.",
  	NULL},
 {"istableunsorted", (getter)Type260_get_istableunsorted,(setter)Type260_set_istableunsorted,
-	"Is optical table unsorted format? [none], number.\n Required if: *.",
+	"Is optical table unsorted format? [none], number.\n Required.",
  	NULL},
 {"itoth", (getter)Type260_get_itoth,(setter)Type260_set_itoth,
-	"Total horizontal irradiation [kJ/hr-m^2], number.\n Required if: *.",
+	"Total horizontal irradiation [kJ/hr-m^2], number.\n Required.",
  	NULL},
 {"latitude", (getter)Type260_get_latitude,(setter)Type260_set_latitude,
-	"Site latitude [], number.\n Required if: *.",
+	"Site latitude, number.\n Required.",
  	NULL},
 {"longitude", (getter)Type260_get_longitude,(setter)Type260_set_longitude,
-	"Site longitude [], number.\n Required if: *.",
+	"Site longitude, number.\n Required.",
  	NULL},
 {"ntod", (getter)Type260_get_ntod,(setter)Type260_set_ntod,
-	"Number of time-of-dispatch periods in the dispatch schedule [none], number.\n Required if: *.",
+	"Number of time-of-dispatch periods in the dispatch schedule [none], number.\n Required.",
  	NULL},
 {"qdisp", (getter)Type260_get_qdisp,(setter)Type260_set_qdisp,
-	"TOD power output control factors [none], array.\n Required if: *.",
+	"TOD power output control factors [none], array.\n Required.",
  	NULL},
 {"qsf_des", (getter)Type260_get_qsf_des,(setter)Type260_set_qsf_des,
-	"Solar field thermal production at design [MWt], number.\n Required if: *.",
+	"Solar field thermal production at design [MWt], number.\n Required.",
  	NULL},
 {"rad_type", (getter)Type260_get_rad_type,(setter)Type260_set_rad_type,
-	"Solar resource radiation type (1=DNI,2=horiz.beam,3=tot.horiz) [none], number.\n Constraints: INTEGER; Required if: *.",
+	"Solar resource radiation type (1=DNI,2=horiz.beam,3=tot.horiz) [none], number.\n Constraints: INTEGER; Required.",
  	NULL},
 {"sfhlQ_coefs", (getter)Type260_get_sfhlQ_coefs,(setter)Type260_set_sfhlQ_coefs,
-	"Irr-based solar field thermal loss adjustment coefficients [1/MWt], array.\n Required if: *.",
+	"Irr-based solar field thermal loss adjustment coefficients [1/MWt], array.\n Required.",
  	NULL},
 {"sfhlT_coefs", (getter)Type260_get_sfhlT_coefs,(setter)Type260_set_sfhlT_coefs,
-	"Temp.-based solar field thermal loss adjustment coefficients [1/C], array.\n Required if: *.",
+	"Temp.-based solar field thermal loss adjustment coefficients [1/C], array.\n Required.",
  	NULL},
 {"sfhlV_coefs", (getter)Type260_get_sfhlV_coefs,(setter)Type260_set_sfhlV_coefs,
-	"Wind-based solar field thermal loss adjustment coefficients [1/(m/s)], array.\n Required if: *.",
+	"Wind-based solar field thermal loss adjustment coefficients [1/(m/s)], array.\n Required.",
  	NULL},
 {"solarm", (getter)Type260_get_solarm,(setter)Type260_set_solarm,
-	"Solar multiple [none], number.\n Required if: *.",
+	"Solar multiple [none], number.\n Required.",
  	NULL},
 {"storage_config", (getter)Type260_get_storage_config,(setter)Type260_set_storage_config,
-	"Thermal storage configuration [none], number.\n Required if: *.",
+	"Thermal storage configuration [none], number.\n Required.",
  	NULL},
 {"tdb", (getter)Type260_get_tdb,(setter)Type260_set_tdb,
-	"Ambient dry-bulb temperature [C], number.\n Required if: *.",
+	"Ambient dry-bulb temperature [C], number.\n Required.",
  	NULL},
 {"teshlT_coefs", (getter)Type260_get_teshlT_coefs,(setter)Type260_set_teshlT_coefs,
-	"Temp.-based thermal loss adjustment - constant coef. [1/C], array.\n Required if: *.",
+	"Temp.-based thermal loss adjustment - constant coef. [1/C], array.\n Required.",
  	NULL},
 {"teshlX_coefs", (getter)Type260_get_teshlX_coefs,(setter)Type260_set_teshlX_coefs,
-	"Charge-based thermal loss adjustment - constant coef. [1/MWhr-stored], array.\n Required if: *.",
+	"Charge-based thermal loss adjustment - constant coef. [1/MWhr-stored], array.\n Required.",
  	NULL},
 {"theta_dep", (getter)Type260_get_theta_dep,(setter)Type260_set_theta_dep,
-	"Solar elevation angle at which the solar field begins operating [deg], number.\n Required if: *.",
+	"Solar elevation angle at which the solar field begins operating [deg], number.\n Required.",
  	NULL},
 {"theta_stow", (getter)Type260_get_theta_stow,(setter)Type260_set_theta_stow,
-	"Solar elevation angle at which the solar field stops operating [deg], number.\n Required if: *.",
+	"Solar elevation angle at which the solar field stops operating [deg], number.\n Required.",
  	NULL},
 {"timezone", (getter)Type260_get_timezone,(setter)Type260_set_timezone,
-	"Site timezone [hr], number.\n Required if: *.",
+	"Site timezone [hr], number.\n Required.",
  	NULL},
 {"twb", (getter)Type260_get_twb,(setter)Type260_set_twb,
-	"Ambient wet-bulb temperature [C], number.\n Required if: *.",
+	"Ambient wet-bulb temperature [C], number.\n Required.",
  	NULL},
 {"vwind", (getter)Type260_get_vwind,(setter)Type260_set_vwind,
-	"Wind velocity [m/s], number.\n Required if: *.",
+	"Wind velocity [m/s], number.\n Required.",
  	NULL},
 {"w_des", (getter)Type260_get_w_des,(setter)Type260_set_w_des,
-	"Design power cycle gross output [MWe], number.\n Required if: *.",
+	"Design power cycle gross output [MWe], number.\n Required.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1887,16 +1887,16 @@ static PyGetSetDef Outputs_getset[] = {
 	"Cycle electrical power output (net) [MWe], array.",
  	NULL},
 {"eta_cycle", (getter)Outputs_get_eta_cycle,(setter)0,
-	"Cycle efficiency (gross) [], array.",
+	"Cycle efficiency (gross), array.",
  	NULL},
 {"eta_opt_sf", (getter)Outputs_get_eta_opt_sf,(setter)0,
 	"Field collector optical efficiency [none], array.",
  	NULL},
 {"f_effpc_qtpb", (getter)Outputs_get_f_effpc_qtpb,(setter)0,
-	"Cycle efficiency load-based correction [], array.",
+	"Cycle efficiency load-based correction, array.",
  	NULL},
 {"f_effpc_tamb", (getter)Outputs_get_f_effpc_tamb,(setter)0,
-	"Cycle efficiency temperature-based correction [], array.",
+	"Cycle efficiency temperature-based correction, array.",
  	NULL},
 {"f_sfhl_qdni", (getter)Outputs_get_f_sfhl_qdni,(setter)0,
 	"Field thermal power load-based loss correction [none], array.",
@@ -1914,13 +1914,13 @@ static PyGetSetDef Outputs_getset[] = {
 	"Resource Global horizontal irradiance [W/m2], array.",
  	NULL},
 {"hour", (getter)Outputs_get_hour,(setter)0,
-	"Resource Hour of Day [], array.",
+	"Resource Hour of Day, array.",
  	NULL},
 {"kwh_per_kw", (getter)Outputs_get_kwh_per_kw,(setter)0,
 	"First year kWh/kW [kWh/kW], number.",
  	NULL},
 {"month", (getter)Outputs_get_month,(setter)0,
-	"Resource Month [], array.",
+	"Resource Month, array.",
  	NULL},
 {"monthly_energy", (getter)Outputs_get_monthly_energy,(setter)0,
 	"Monthly Energy [kWh], array.",
@@ -2113,27 +2113,23 @@ newTcsgenericSolarObject(void* data_ptr)
 
 	PySAM_TECH_ATTR("TcsgenericSolar", SAM_TcsgenericSolar_construct)
 
-PyObject* Weather_obj = Weather_new(self->data_ptr);
+	PyObject* Weather_obj = Weather_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Weather", Weather_obj);
 	Py_DECREF(Weather_obj);
 
-PyObject* GenericSolar_obj = GenericSolar_new(self->data_ptr);
+	PyObject* GenericSolar_obj = GenericSolar_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "GenericSolar", GenericSolar_obj);
 	Py_DECREF(GenericSolar_obj);
 
-PyObject* TouTranslator_obj = TouTranslator_new(self->data_ptr);
+	PyObject* TouTranslator_obj = TouTranslator_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "TouTranslator", TouTranslator_obj);
 	Py_DECREF(TouTranslator_obj);
 
-PyObject* Type260_obj = Type260_new(self->data_ptr);
+	PyObject* Type260_obj = Type260_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Type260", Type260_obj);
 	Py_DECREF(Type260_obj);
 
-PyObject* Outputs_obj = Outputs_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
-	Py_DECREF(Outputs_obj);
-
-PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
+	PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
 
 	PyObject* data_cap = PyCapsule_New(self->data_ptr, NULL, NULL);
 	PyObject* Adjust_obj = PyObject_CallMethod(AdjustmentFactorsModule, "new", "(O)", data_cap);
@@ -2147,6 +2143,11 @@ PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
 
 	PyDict_SetItemString(attr_dict, "AdjustmentFactors", Adjust_obj);
 	Py_DECREF(Adjust_obj);
+
+	PyObject* Outputs_obj = Outputs_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
+	Py_DECREF(Outputs_obj);
+
 
 	return self;
 }
@@ -2303,8 +2304,8 @@ static PyObject *
 TcsgenericSolar_default(PyObject *self, PyObject *args)
 {
 	TcsgenericSolarObject *rv;
-	char* fin = 0;
-	if (!PyArg_ParseTuple(args, "s:default", &fin)){
+	char* def = 0;
+	if (!PyArg_ParseTuple(args, "s:default", &def)){
 		PyErr_BadArgument();
 		return NULL;
 	}
@@ -2312,7 +2313,7 @@ TcsgenericSolar_default(PyObject *self, PyObject *args)
 	if (rv == NULL)
 		return NULL;
 
-	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "TcsgenericSolar", fin);
+	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "TcsgenericSolar", def);
 
 	return (PyObject *)rv;
 }
@@ -2327,14 +2328,14 @@ static PyMethodDef TcsgenericSolarModule_methods[] = {
 				PyDoc_STR("new() -> new TcsgenericSolar object")},
 		{"default",             TcsgenericSolar_default,         METH_VARARGS,
 				PyDoc_STR("default(financial) -> new TcsgenericSolar object with financial model-specific default attributes\n"
-				"Options: LCOE Calculator, Leveraged Partnership Flip, Single Owner, Independent Power Producer, None, All Equity Partnership Flip, Sale Leaseback, Commercial PPA, Commercial, ")},
+				"Options: Lcoefcr, Levpartflip, Singleowner, , None, Equpartflip, Saleleaseback, , Commercial")},
 		{"wrap",             TcsgenericSolar_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> new TcsgenericSolar object around existing PySSC data")},
+				PyDoc_STR("wrap(ssc_data_t) -> new TcsgenericSolar object around existing PySSC data, taking over memory ownership")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 PyDoc_STRVAR(module_doc,
-			 "Refer to http://www.github.com/nrel/PySAM for source code.");
+			 "CSP power system model with solar field characterized using a table of optical efficiency values");
 
 
 static int
@@ -2342,6 +2343,9 @@ TcsgenericSolarModule_exec(PyObject *m)
 {
 	/* Finalize the type object including setting type of the new type
 	 * object; doing it here is required for portability, too. */
+
+	if (PySAM_load_lib(m) < 0) goto fail;
+	if (PySAM_init_error(m) < 0) goto fail;
 
 	TcsgenericSolar_Type.tp_dict = PyDict_New();
 	if (!TcsgenericSolar_Type.tp_dict) { goto fail; }
@@ -2405,9 +2409,6 @@ TcsgenericSolarModule_exec(PyObject *m)
 	PyModule_AddObject(m,
 				"TcsgenericSolar",
 				(PyObject*)&TcsgenericSolar_Type);
-
-	if (PySAM_load_lib(m) < 0) goto fail;
-	if (PySAM_init_error() < 0) goto fail;
 
 	return 0;
 	fail:

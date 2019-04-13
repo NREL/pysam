@@ -78,7 +78,7 @@ Weather_set_file_name(WeatherObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef Weather_getset[] = {
 {"file_name", (getter)Weather_get_file_name,(setter)Weather_set_file_name,
-	"local weather file path [], string.\n Constraints: LOCAL_FILE; Required if: *.",
+	"local weather file path, string.\n Constraints: LOCAL_FILE; Required.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -201,7 +201,7 @@ Dish_set_system_capacity(DishObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef Dish_getset[] = {
 {"system_capacity", (getter)Dish_get_system_capacity,(setter)Dish_set_system_capacity,
-	"Nameplate capacity [kW], number.\n Required if: *.",
+	"Nameplate capacity [kW], number.\n Required.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -516,55 +516,55 @@ Type295_set_wind_stow_speed(Type295Object *self, PyObject *value, void *closure)
 
 static PyGetSetDef Type295_getset[] = {
 {"A_proj", (getter)Type295_get_A_proj,(setter)Type295_set_A_proj,
-	"Projected mirror area [m^2], number.\n Required if: *.",
+	"Projected mirror area [m^2], number.\n Required.",
  	NULL},
 {"A_total", (getter)Type295_get_A_total,(setter)Type295_set_A_total,
-	"Total Area [m^2], number.\n Required if: *.",
+	"Total Area [m^2], number.\n Required.",
  	NULL},
 {"I_cut_in", (getter)Type295_get_I_cut_in,(setter)Type295_set_I_cut_in,
-	"Insolation cut in value [W/m^2], number.\n Required if: *.",
+	"Insolation cut in value [W/m^2], number.\n Required.",
  	NULL},
 {"d_ap", (getter)Type295_get_d_ap,(setter)Type295_set_d_ap,
-	"Dish aperture diameter [m], number.\n Required if: *.",
+	"Dish aperture diameter [m], number.\n Required.",
  	NULL},
 {"d_ap_test", (getter)Type295_get_d_ap_test,(setter)Type295_set_d_ap_test,
-	"Receiver aperture diameter during test [m], number.\n Required if: *.",
+	"Receiver aperture diameter during test [m], number.\n Required.",
  	NULL},
 {"ew_dish_sep", (getter)Type295_get_ew_dish_sep,(setter)Type295_set_ew_dish_sep,
-	"Collector separation East-West [m], number.\n Required if: *.",
+	"Collector separation East-West [m], number.\n Required.",
  	NULL},
 {"h_slot_gap", (getter)Type295_get_h_slot_gap,(setter)Type295_set_h_slot_gap,
-	"Slot gap height [m], number.\n Required if: *.",
+	"Slot gap height [m], number.\n Required.",
  	NULL},
 {"n_ew", (getter)Type295_get_n_ew,(setter)Type295_set_n_ew,
-	"Number of collectors East-West [-], number.\n Constraints: INTEGER; Required if: *.",
+	"Number of collectors East-West [-], number.\n Constraints: INTEGER; Required.",
  	NULL},
 {"n_ns", (getter)Type295_get_n_ns,(setter)Type295_set_n_ns,
-	"Number of collectors North-South [-], number.\n Constraints: INTEGER; Required if: *.",
+	"Number of collectors North-South [-], number.\n Constraints: INTEGER; Required.",
  	NULL},
 {"ns_dish_sep", (getter)Type295_get_ns_dish_sep,(setter)Type295_set_ns_dish_sep,
-	"Collector separation North-South [m], number.\n Required if: *.",
+	"Collector separation North-South [m], number.\n Required.",
  	NULL},
 {"rho", (getter)Type295_get_rho,(setter)Type295_set_rho,
-	"Mirror surface reflectivity [-], number.\n Required if: *.",
+	"Mirror surface reflectivity [-], number.\n Required.",
  	NULL},
 {"slope_ew", (getter)Type295_get_slope_ew,(setter)Type295_set_slope_ew,
-	"East-West ground slope [%], number.\n Required if: *.",
+	"East-West ground slope [%], number.\n Required.",
  	NULL},
 {"slope_ns", (getter)Type295_get_slope_ns,(setter)Type295_set_slope_ns,
-	"North-South ground slope [%], number.\n Required if: *.",
+	"North-South ground slope [%], number.\n Required.",
  	NULL},
 {"test_L_focal", (getter)Type295_get_test_L_focal,(setter)Type295_set_test_L_focal,
-	"Focal length of mirror system [m], number.\n Required if: *.",
+	"Focal length of mirror system [m], number.\n Required.",
  	NULL},
 {"test_if", (getter)Type295_get_test_if,(setter)Type295_set_test_if,
-	"Test intercept factor [-], number.\n Required if: *.",
+	"Test intercept factor [-], number.\n Required.",
  	NULL},
 {"w_slot_gap", (getter)Type295_get_w_slot_gap,(setter)Type295_set_w_slot_gap,
-	"Slot gap width [m], number.\n Required if: *.",
+	"Slot gap width [m], number.\n Required.",
  	NULL},
 {"wind_stow_speed", (getter)Type295_get_wind_stow_speed,(setter)Type295_set_wind_stow_speed,
-	"Wind stow speed [m/s], number.\n Required if: *.",
+	"Wind stow speed [m/s], number.\n Required.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -855,49 +855,49 @@ Type296_set_transmittance_cover(Type296Object *self, PyObject *value, void *clos
 
 static PyGetSetDef Type296_getset[] = {
 {"A_absorber", (getter)Type296_get_A_absorber,(setter)Type296_set_A_absorber,
-	"Absorber surface area [m^2], number.\n Required if: *.",
+	"Absorber surface area [m^2], number.\n Required.",
  	NULL},
 {"A_wall", (getter)Type296_get_A_wall,(setter)Type296_set_A_wall,
-	"Cavity surface area [m^2], number.\n Required if: *.",
+	"Cavity surface area [m^2], number.\n Required.",
  	NULL},
 {"DELTA_T_DIR", (getter)Type296_get_DELTA_T_DIR,(setter)Type296_set_DELTA_T_DIR,
-	"Delta temperature for DIR receiver [K], number.\n Required if: *.",
+	"Delta temperature for DIR receiver [K], number.\n Required.",
  	NULL},
 {"DELTA_T_REFLUX", (getter)Type296_get_DELTA_T_REFLUX,(setter)Type296_set_DELTA_T_REFLUX,
-	"Delta temp for REFLUX receiver (always = 40) [K], number.\n Required if: *.",
+	"Delta temp for REFLUX receiver (always = 40) [K], number.\n Required.",
  	NULL},
 {"L_cav", (getter)Type296_get_L_cav,(setter)Type296_set_L_cav,
-	"Internal depth of cavity perp to aperture [m], number.\n Required if: *.",
+	"Internal depth of cavity perp to aperture [m], number.\n Required.",
  	NULL},
 {"L_insulation", (getter)Type296_get_L_insulation,(setter)Type296_set_L_insulation,
-	"Insulation thickness [m], number.\n Required if: *.",
+	"Insulation thickness [m], number.\n Required.",
  	NULL},
 {"P_cav", (getter)Type296_get_P_cav,(setter)Type296_set_P_cav,
-	"Internal cavity pressure with aperture covered [kPa], number.\n Required if: *.",
+	"Internal cavity pressure with aperture covered [kPa], number.\n Required.",
  	NULL},
 {"T_heater_head_high", (getter)Type296_get_T_heater_head_high,(setter)Type296_set_T_heater_head_high,
-	"Heater Head Set Temperature [K], number.\n Required if: *.",
+	"Heater Head Set Temperature [K], number.\n Required.",
  	NULL},
 {"T_heater_head_low", (getter)Type296_get_T_heater_head_low,(setter)Type296_set_T_heater_head_low,
-	"Header Head Lowest Temperature [K], number.\n Required if: *.",
+	"Header Head Lowest Temperature [K], number.\n Required.",
  	NULL},
 {"alpha_absorber", (getter)Type296_get_alpha_absorber,(setter)Type296_set_alpha_absorber,
-	"Absorber absorptance [-], number.\n Required if: *.",
+	"Absorber absorptance [-], number.\n Required.",
  	NULL},
 {"alpha_wall", (getter)Type296_get_alpha_wall,(setter)Type296_set_alpha_wall,
-	"Cavity absorptance [-], number.\n Required if: *.",
+	"Cavity absorptance [-], number.\n Required.",
  	NULL},
 {"d_cav", (getter)Type296_get_d_cav,(setter)Type296_set_d_cav,
-	"Internal diameter of cavity perp to aperture [m], number.\n Required if: *.",
+	"Internal diameter of cavity perp to aperture [m], number.\n Required.",
  	NULL},
 {"k_insulation", (getter)Type296_get_k_insulation,(setter)Type296_set_k_insulation,
-	"Insulation thermal conductivity [W/m-K], number.\n Required if: *.",
+	"Insulation thermal conductivity [W/m-K], number.\n Required.",
  	NULL},
 {"rec_type", (getter)Type296_get_rec_type,(setter)Type296_set_rec_type,
-	"Receiver type (always = 1) [-], number.\n Required if: *.",
+	"Receiver type (always = 1) [-], number.\n Required.",
  	NULL},
 {"transmittance_cover", (getter)Type296_get_transmittance_cover,(setter)Type296_set_transmittance_cover,
-	"Transmittance cover (always = 1) [-], number.\n Required if: *.",
+	"Transmittance cover (always = 1) [-], number.\n Required.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1128,34 +1128,34 @@ Type297_set_engine_speed(Type297Object *self, PyObject *value, void *closure)
 
 static PyGetSetDef Type297_getset[] = {
 {"Beale_const_coef", (getter)Type297_get_Beale_const_coef,(setter)Type297_set_Beale_const_coef,
-	"Beale Constant Coefficient [-], number.\n Required if: *.",
+	"Beale Constant Coefficient [-], number.\n Required.",
  	NULL},
 {"Beale_first_coef", (getter)Type297_get_Beale_first_coef,(setter)Type297_set_Beale_first_coef,
-	"Beale first-order coefficient [1/W], number.\n Required if: *.",
+	"Beale first-order coefficient [1/W], number.\n Required.",
  	NULL},
 {"Beale_fourth_coef", (getter)Type297_get_Beale_fourth_coef,(setter)Type297_set_Beale_fourth_coef,
-	"Beale fourth-order coefficient [1/W^4], number.\n Required if: *.",
+	"Beale fourth-order coefficient [1/W^4], number.\n Required.",
  	NULL},
 {"Beale_square_coef", (getter)Type297_get_Beale_square_coef,(setter)Type297_set_Beale_square_coef,
-	"Beale second-order coefficient [1/W^2], number.\n Required if: *.",
+	"Beale second-order coefficient [1/W^2], number.\n Required.",
  	NULL},
 {"Beale_third_coef", (getter)Type297_get_Beale_third_coef,(setter)Type297_set_Beale_third_coef,
-	"Beale third-order coefficient [1/W^3], number.\n Required if: *.",
+	"Beale third-order coefficient [1/W^3], number.\n Required.",
  	NULL},
 {"Pressure_coef", (getter)Type297_get_Pressure_coef,(setter)Type297_set_Pressure_coef,
-	"Pressure constant coefficient [MPa], number.\n Required if: *.",
+	"Pressure constant coefficient [MPa], number.\n Required.",
  	NULL},
 {"Pressure_first", (getter)Type297_get_Pressure_first,(setter)Type297_set_Pressure_first,
-	"Pressure first-order coefficient [MPa/W], number.\n Required if: *.",
+	"Pressure first-order coefficient [MPa/W], number.\n Required.",
  	NULL},
 {"T_compression_in", (getter)Type297_get_T_compression_in,(setter)Type297_set_T_compression_in,
-	"Receiver efficiency [C], number.\n Required if: *.",
+	"Receiver efficiency [C], number.\n Required.",
  	NULL},
 {"V_displaced", (getter)Type297_get_V_displaced,(setter)Type297_set_V_displaced,
-	"Displaced engine volume [m3], number.\n Required if: *.",
+	"Displaced engine volume [m3], number.\n Required.",
  	NULL},
 {"engine_speed", (getter)Type297_get_engine_speed,(setter)Type297_set_engine_speed,
-	"Engine operating speed [rpm], number.\n Required if: *.",
+	"Engine operating speed [rpm], number.\n Required.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1686,109 +1686,109 @@ Type298_set_tower_pipe_material(Type298Object *self, PyObject *value, void *clos
 
 static PyGetSetDef Type298_getset[] = {
 {"P_controls", (getter)Type298_get_P_controls,(setter)Type298_set_P_controls,
-	"Control System Parasitic Power, Avg. [W], number.\n Required if: *.",
+	"Control System Parasitic Power, Avg. [W], number.\n Required.",
  	NULL},
 {"P_tower_fan", (getter)Type298_get_P_tower_fan,(setter)Type298_set_P_tower_fan,
-	"Tower fan power (set to 0) [kJ/hr], number.\n Required if: *.",
+	"Tower fan power (set to 0) [kJ/hr], number.\n Required.",
  	NULL},
 {"T_cool_speed2", (getter)Type298_get_T_cool_speed2,(setter)Type298_set_T_cool_speed2,
-	"Cooling Fluid Temp. For Fan Speed 2 Cut-In [C], number.\n Required if: *.",
+	"Cooling Fluid Temp. For Fan Speed 2 Cut-In [C], number.\n Required.",
  	NULL},
 {"T_cool_speed3", (getter)Type298_get_T_cool_speed3,(setter)Type298_set_T_cool_speed3,
-	"Cooling Fluid Temp. For Fan Speed 3 Cut-In [C], number.\n Required if: *.",
+	"Cooling Fluid Temp. For Fan Speed 3 Cut-In [C], number.\n Required.",
  	NULL},
 {"Tower_water_outlet_temp", (getter)Type298_get_Tower_water_outlet_temp,(setter)Type298_set_Tower_water_outlet_temp,
-	"Tower water outlet temperature (set to 20) [C], number.\n Required if: *.",
+	"Tower water outlet temperature (set to 20) [C], number.\n Required.",
  	NULL},
 {"b_cooler", (getter)Type298_get_b_cooler,(setter)Type298_set_b_cooler,
-	"b_cooler parameter [-], number.\n Required if: *.",
+	"b_cooler parameter [-], number.\n Required.",
  	NULL},
 {"b_radiator", (getter)Type298_get_b_radiator,(setter)Type298_set_b_radiator,
-	"b_radiator parameter [-], number.\n Required if: *.",
+	"b_radiator parameter [-], number.\n Required.",
  	NULL},
 {"cooling_fluid", (getter)Type298_get_cooling_fluid,(setter)Type298_set_cooling_fluid,
-	"Reference Condition Cooling Fluid: 1=Water,2=V50%EG,3=V25%EG,4=V40%PG,5=V25%PG [-], number.\n Constraints: INTEGER; Required if: *.",
+	"Reference Condition Cooling Fluid: 1=Water,2=V50%EG,3=V25%EG,4=V40%PG,5=V25%PG [-], number.\n Constraints: INTEGER; Required.",
  	NULL},
 {"cooling_tower_on", (getter)Type298_get_cooling_tower_on,(setter)Type298_set_cooling_tower_on,
-	"Option to use a cooling tower (set to 0=off) [-], number.\n Required if: *.",
+	"Option to use a cooling tower (set to 0=off) [-], number.\n Required.",
  	NULL},
 {"d_pipe_tower", (getter)Type298_get_d_pipe_tower,(setter)Type298_set_d_pipe_tower,
-	"Runner pipe diameter to the cooling tower (set to 0.4m) [m], number.\n Required if: *.",
+	"Runner pipe diameter to the cooling tower (set to 0.4m) [m], number.\n Required.",
  	NULL},
 {"epsilon_cooler_test", (getter)Type298_get_epsilon_cooler_test,(setter)Type298_set_epsilon_cooler_test,
-	"Cooler effectiveness [-], number.\n Required if: *.",
+	"Cooler effectiveness [-], number.\n Required.",
  	NULL},
 {"epsilon_power_test", (getter)Type298_get_epsilon_power_test,(setter)Type298_set_epsilon_power_test,
-	"Test value for cooling tower effectiveness (set to 0.7) [-], number.\n Required if: *.",
+	"Test value for cooling tower effectiveness (set to 0.7) [-], number.\n Required.",
  	NULL},
 {"epsilon_radiator_test", (getter)Type298_get_epsilon_radiator_test,(setter)Type298_set_epsilon_radiator_test,
-	"Radiator effectiveness [-], number.\n Required if: *.",
+	"Radiator effectiveness [-], number.\n Required.",
  	NULL},
 {"eta_tower_pump", (getter)Type298_get_eta_tower_pump,(setter)Type298_set_eta_tower_pump,
-	"Tower pump efficiency (set to 0.6) [-], number.\n Required if: *.",
+	"Tower pump efficiency (set to 0.6) [-], number.\n Required.",
  	NULL},
 {"ew_dish_separation", (getter)Type298_get_ew_dish_separation,(setter)Type298_set_ew_dish_separation,
-	"East-West dish separation used in the simulation [m], number.\n Required if: *.",
+	"East-West dish separation used in the simulation [m], number.\n Required.",
  	NULL},
 {"fan_control_signal", (getter)Type298_get_fan_control_signal,(setter)Type298_set_fan_control_signal,
-	"Fan control signal (set to 1, not used in this model) [-], number.\n Required if: *.",
+	"Fan control signal (set to 1, not used in this model) [-], number.\n Required.",
  	NULL},
 {"fan_speed1", (getter)Type298_get_fan_speed1,(setter)Type298_set_fan_speed1,
-	"Cooling system fan speed 1 [rpm], number.\n Required if: *.",
+	"Cooling system fan speed 1 [rpm], number.\n Required.",
  	NULL},
 {"fan_speed2", (getter)Type298_get_fan_speed2,(setter)Type298_set_fan_speed2,
-	"Cooling system fan speed 2 [rpm], number.\n Required if: *.",
+	"Cooling system fan speed 2 [rpm], number.\n Required.",
  	NULL},
 {"fan_speed3", (getter)Type298_get_fan_speed3,(setter)Type298_set_fan_speed3,
-	"Cooling system fan speed 3 [rpm], number.\n Required if: *.",
+	"Cooling system fan speed 3 [rpm], number.\n Required.",
  	NULL},
 {"ns_dish_separation", (getter)Type298_get_ns_dish_separation,(setter)Type298_set_ns_dish_separation,
-	"North-South dish separation used in the simulation [m], number.\n Required if: *.",
+	"North-South dish separation used in the simulation [m], number.\n Required.",
  	NULL},
 {"pump_speed", (getter)Type298_get_pump_speed,(setter)Type298_set_pump_speed,
-	"Reference Condition Pump Speed [rpm], number.\n Required if: *.",
+	"Reference Condition Pump Speed [rpm], number.\n Required.",
  	NULL},
 {"system_availability", (getter)Type298_get_system_availability,(setter)Type298_set_system_availability,
-	"System availability (set to 1.0) [-], number.\n Required if: *.",
+	"System availability (set to 1.0) [-], number.\n Required.",
  	NULL},
 {"test_P_fan", (getter)Type298_get_test_P_fan,(setter)Type298_set_test_P_fan,
-	"Reference Condition Cooling System Fan Power [W], number.\n Required if: *.",
+	"Reference Condition Cooling System Fan Power [W], number.\n Required.",
  	NULL},
 {"test_P_pump", (getter)Type298_get_test_P_pump,(setter)Type298_set_test_P_pump,
-	"Reference Condition Pump Parasitic Power [W], number.\n Required if: *.",
+	"Reference Condition Pump Parasitic Power [W], number.\n Required.",
  	NULL},
 {"test_T_fluid", (getter)Type298_get_test_T_fluid,(setter)Type298_set_test_T_fluid,
-	"Reference Condition Cooling Fluid Temperature [K], number.\n Required if: *.",
+	"Reference Condition Cooling Fluid Temperature [K], number.\n Required.",
  	NULL},
 {"test_V_dot_fluid", (getter)Type298_get_test_V_dot_fluid,(setter)Type298_set_test_V_dot_fluid,
-	"Reference Condition Cooling Fluid Volumetric Flow Rate [gpm], number.\n Required if: *.",
+	"Reference Condition Cooling Fluid Volumetric Flow Rate [gpm], number.\n Required.",
  	NULL},
 {"test_cooling_fluid", (getter)Type298_get_test_cooling_fluid,(setter)Type298_set_test_cooling_fluid,
-	"Reference Condition Cooling Fluid [-], number.\n Constraints: INTEGER; Required if: *.",
+	"Reference Condition Cooling Fluid [-], number.\n Constraints: INTEGER; Required.",
  	NULL},
 {"test_fan_cfm", (getter)Type298_get_test_fan_cfm,(setter)Type298_set_test_fan_cfm,
-	"Reference condition van volumentric flow rate [cfm], number.\n Required if: *.",
+	"Reference condition van volumentric flow rate [cfm], number.\n Required.",
  	NULL},
 {"test_fan_rho_air", (getter)Type298_get_test_fan_rho_air,(setter)Type298_set_test_fan_rho_air,
-	"Reference condition fan air density [kg/m^3], number.\n Required if: *.",
+	"Reference condition fan air density [kg/m^3], number.\n Required.",
  	NULL},
 {"test_fan_speed", (getter)Type298_get_test_fan_speed,(setter)Type298_set_test_fan_speed,
-	"Reference Condition Cooling System Fan Speed [rpm], number.\n Required if: *.",
+	"Reference Condition Cooling System Fan Speed [rpm], number.\n Required.",
  	NULL},
 {"test_pump_speed", (getter)Type298_get_test_pump_speed,(setter)Type298_set_test_pump_speed,
-	"Reference Condition Pump Speed [rpm], number.\n Required if: *.",
+	"Reference Condition Pump Speed [rpm], number.\n Required.",
  	NULL},
 {"tower_m_dot_water", (getter)Type298_get_tower_m_dot_water,(setter)Type298_set_tower_m_dot_water,
-	"Tower cooling water flow rate (set to 134,000 kg/hr) [kg/s], number.\n Required if: *.",
+	"Tower cooling water flow rate (set to 134,000 kg/hr) [kg/s], number.\n Required.",
  	NULL},
 {"tower_m_dot_water_test", (getter)Type298_get_tower_m_dot_water_test,(setter)Type298_set_tower_m_dot_water_test,
-	"Test value for the cooling water flow rate (set to 134,000 kg/hr) [kg/s], number.\n Required if: *.",
+	"Test value for the cooling water flow rate (set to 134,000 kg/hr) [kg/s], number.\n Required.",
  	NULL},
 {"tower_mode", (getter)Type298_get_tower_mode,(setter)Type298_set_tower_mode,
-	"Cooling tower type (natural or forced draft) [-], number.\n Required if: *.",
+	"Cooling tower type (natural or forced draft) [-], number.\n Required.",
  	NULL},
 {"tower_pipe_material", (getter)Type298_get_tower_pipe_material,(setter)Type298_set_tower_pipe_material,
-	"Tower pipe material (1=plastic, 2=new cast iron, 3=riveted steel) [-], number.\n Required if: *.",
+	"Tower pipe material (1=plastic, 2=new cast iron, 3=riveted steel) [-], number.\n Required.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -2268,7 +2268,7 @@ static PyGetSetDef Outputs_getset[] = {
 	"Parasitic power [We], array.",
  	NULL},
 {"Phi_shade", (getter)Outputs_get_Phi_shade,(setter)0,
-	"Collector shading efficiency [], array.",
+	"Collector shading efficiency, array.",
  	NULL},
 {"Power_in_collector", (getter)Outputs_get_Power_in_collector,(setter)0,
 	"Collector thermal power incident [kWt], array.",
@@ -2334,22 +2334,22 @@ static PyGetSetDef Outputs_getset[] = {
 	"Engine pressure [Pa], array.",
  	NULL},
 {"eta_SE", (getter)Outputs_get_eta_SE,(setter)0,
-	"Engine efficiency [], array.",
+	"Engine efficiency, array.",
  	NULL},
 {"eta_collector", (getter)Outputs_get_eta_collector,(setter)0,
-	"Collector efficiency [], array.",
+	"Collector efficiency, array.",
  	NULL},
 {"eta_net", (getter)Outputs_get_eta_net,(setter)0,
-	"System total: Net efficiency [], array.",
+	"System total: Net efficiency, array.",
  	NULL},
 {"eta_rec", (getter)Outputs_get_eta_rec,(setter)0,
-	"Receiver efficiency [], array.",
+	"Receiver efficiency, array.",
  	NULL},
 {"gen", (getter)Outputs_get_gen,(setter)0,
 	"System power generated [kW], array.",
  	NULL},
 {"hour", (getter)Outputs_get_hour,(setter)0,
-	"Resource Hour of Day [], array.",
+	"Resource Hour of Day, array.",
  	NULL},
 {"hourly_Collector_Losses", (getter)Outputs_get_hourly_Collector_Losses,(setter)0,
 	"System total: Collector loss total [MWt], array.",
@@ -2379,7 +2379,7 @@ static PyGetSetDef Outputs_getset[] = {
 	"First year kWh/kW [kWh/kW], number.",
  	NULL},
 {"month", (getter)Outputs_get_month,(setter)0,
-	"Resource Month [], array.",
+	"Resource Month, array.",
  	NULL},
 {"monthly_Collector_Losses", (getter)Outputs_get_monthly_Collector_Losses,(setter)0,
 	"Total collector losses (Incident - P_out) [MWh], array.",
@@ -2500,35 +2500,31 @@ newTcsdishObject(void* data_ptr)
 
 	PySAM_TECH_ATTR("Tcsdish", SAM_Tcsdish_construct)
 
-PyObject* Weather_obj = Weather_new(self->data_ptr);
+	PyObject* Weather_obj = Weather_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Weather", Weather_obj);
 	Py_DECREF(Weather_obj);
 
-PyObject* Dish_obj = Dish_new(self->data_ptr);
+	PyObject* Dish_obj = Dish_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Dish", Dish_obj);
 	Py_DECREF(Dish_obj);
 
-PyObject* Type295_obj = Type295_new(self->data_ptr);
+	PyObject* Type295_obj = Type295_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Type295", Type295_obj);
 	Py_DECREF(Type295_obj);
 
-PyObject* Type296_obj = Type296_new(self->data_ptr);
+	PyObject* Type296_obj = Type296_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Type296", Type296_obj);
 	Py_DECREF(Type296_obj);
 
-PyObject* Type297_obj = Type297_new(self->data_ptr);
+	PyObject* Type297_obj = Type297_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Type297", Type297_obj);
 	Py_DECREF(Type297_obj);
 
-PyObject* Type298_obj = Type298_new(self->data_ptr);
+	PyObject* Type298_obj = Type298_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Type298", Type298_obj);
 	Py_DECREF(Type298_obj);
 
-PyObject* Outputs_obj = Outputs_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
-	Py_DECREF(Outputs_obj);
-
-PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
+	PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
 
 	PyObject* data_cap = PyCapsule_New(self->data_ptr, NULL, NULL);
 	PyObject* Adjust_obj = PyObject_CallMethod(AdjustmentFactorsModule, "new", "(O)", data_cap);
@@ -2542,6 +2538,11 @@ PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
 
 	PyDict_SetItemString(attr_dict, "AdjustmentFactors", Adjust_obj);
 	Py_DECREF(Adjust_obj);
+
+	PyObject* Outputs_obj = Outputs_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
+	Py_DECREF(Outputs_obj);
+
 
 	return self;
 }
@@ -2698,8 +2699,8 @@ static PyObject *
 Tcsdish_default(PyObject *self, PyObject *args)
 {
 	TcsdishObject *rv;
-	char* fin = 0;
-	if (!PyArg_ParseTuple(args, "s:default", &fin)){
+	char* def = 0;
+	if (!PyArg_ParseTuple(args, "s:default", &def)){
 		PyErr_BadArgument();
 		return NULL;
 	}
@@ -2707,7 +2708,7 @@ Tcsdish_default(PyObject *self, PyObject *args)
 	if (rv == NULL)
 		return NULL;
 
-	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Tcsdish", fin);
+	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Tcsdish", def);
 
 	return (PyObject *)rv;
 }
@@ -2722,14 +2723,14 @@ static PyMethodDef TcsdishModule_methods[] = {
 				PyDoc_STR("new() -> new Tcsdish object")},
 		{"default",             Tcsdish_default,         METH_VARARGS,
 				PyDoc_STR("default(financial) -> new Tcsdish object with financial model-specific default attributes\n"
-				"Options: None, LCOE Calculator, Single Owner, Sale Leaseback, Commercial PPA, Commercial, Leveraged Partnership Flip, All Equity Partnership Flip, Independent Power Producer, ")},
+				"Options: None, Lcoefcr, Singleowner, Saleleaseback, , Commercial, Levpartflip, Equpartflip, ")},
 		{"wrap",             Tcsdish_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> new Tcsdish object around existing PySSC data")},
+				PyDoc_STR("wrap(ssc_data_t) -> new Tcsdish object around existing PySSC data, taking over memory ownership")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 PyDoc_STRVAR(module_doc,
-			 "Refer to http://www.github.com/nrel/PySAM for source code.");
+			 "CSP dish-Stirling model with parameters for SES and WGA-ADDS systems for power generation");
 
 
 static int
@@ -2737,6 +2738,9 @@ TcsdishModule_exec(PyObject *m)
 {
 	/* Finalize the type object including setting type of the new type
 	 * object; doing it here is required for portability, too. */
+
+	if (PySAM_load_lib(m) < 0) goto fail;
+	if (PySAM_init_error(m) < 0) goto fail;
 
 	Tcsdish_Type.tp_dict = PyDict_New();
 	if (!Tcsdish_Type.tp_dict) { goto fail; }
@@ -2814,9 +2818,6 @@ TcsdishModule_exec(PyObject *m)
 	PyModule_AddObject(m,
 				"Tcsdish",
 				(PyObject*)&Tcsdish_Type);
-
-	if (PySAM_load_lib(m) < 0) goto fail;
-	if (PySAM_init_error() < 0) goto fail;
 
 	return 0;
 	fail:

@@ -102,13 +102,13 @@ Common_set_ur_sell_eq_buy(CommonObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef Common_getset[] = {
 {"TOU_demand_single_peak", (getter)Common_get_TOU_demand_single_peak,(setter)Common_set_TOU_demand_single_peak,
-	"Use single monthly peak for TOU demand charge [0/1], number.\n 0=use TOU peak,1=use flat peak; Constraints: INTEGER,MIN=0,MAX=1; Required if: ?=0.",
+	"Use single monthly peak for TOU demand charge [0/1], number.\n 0=use TOU peak,1=use flat peak; Constraints: INTEGER,MIN=0,MAX=1; 0 if not set.",
  	NULL},
 {"en_electricity_rates", (getter)Common_get_en_electricity_rates,(setter)Common_set_en_electricity_rates,
 	"Optionally enable/disable electricity_rate [years], number.\n Constraints: INTEGER,MIN=0,MAX=1; ",
  	NULL},
 {"ur_sell_eq_buy", (getter)Common_get_ur_sell_eq_buy,(setter)Common_set_ur_sell_eq_buy,
-	"Set sell rate equal to buy rate [0/1], number.\n Optional override; Constraints: BOOLEAN; Required if: ?=0.",
+	"Set sell rate equal to buy rate [0/1], number.\n Optional override; Constraints: BOOLEAN; 0 if not set.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -161,39 +161,39 @@ static PyTypeObject Common_Type = {
 
 
 	/*
-	 * FinancialAnalysis Group
+	 * Lifetime Group
 	 */ 
 
 typedef struct {
 	PyObject_HEAD
 	SAM_Utilityrate5   data_ptr;
-} FinancialAnalysisObject;
+} LifetimeObject;
 
-static PyTypeObject FinancialAnalysis_Type;
+static PyTypeObject Lifetime_Type;
 
 static PyObject *
-FinancialAnalysis_new(SAM_Utilityrate5 data_ptr)
+Lifetime_new(SAM_Utilityrate5 data_ptr)
 {
-	PyObject* new_obj = FinancialAnalysis_Type.tp_alloc(&FinancialAnalysis_Type,0);
+	PyObject* new_obj = Lifetime_Type.tp_alloc(&Lifetime_Type,0);
 
-	FinancialAnalysisObject* FinancialAnalysis_obj = (FinancialAnalysisObject*)new_obj;
+	LifetimeObject* Lifetime_obj = (LifetimeObject*)new_obj;
 
-	FinancialAnalysis_obj->data_ptr = data_ptr;
+	Lifetime_obj->data_ptr = data_ptr;
 
 	return new_obj;
 }
 
-/* FinancialAnalysis methods */
+/* Lifetime methods */
 
 static PyObject *
-FinancialAnalysis_assign(FinancialAnalysisObject *self, PyObject *args)
+Lifetime_assign(LifetimeObject *self, PyObject *args)
 {
 	PyObject* dict;
 	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Utilityrate5", "FinancialAnalysis")){
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Utilityrate5", "Lifetime")){
 		return NULL;
 	}
 
@@ -202,61 +202,76 @@ FinancialAnalysis_assign(FinancialAnalysisObject *self, PyObject *args)
 }
 
 static PyObject *
-FinancialAnalysis_export(FinancialAnalysisObject *self, PyObject *args)
+Lifetime_export(LifetimeObject *self, PyObject *args)
 {
-	PyTypeObject* tp = &FinancialAnalysis_Type;
+	PyTypeObject* tp = &Lifetime_Type;
 	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
 	return dict;
 }
 
-static PyMethodDef FinancialAnalysis_methods[] = {
-		{"assign",            (PyCFunction)FinancialAnalysis_assign,  METH_VARARGS,
+static PyMethodDef Lifetime_methods[] = {
+		{"assign",            (PyCFunction)Lifetime_assign,  METH_VARARGS,
 			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
-		{"export",            (PyCFunction)FinancialAnalysis_export,  METH_VARARGS,
+		{"export",            (PyCFunction)Lifetime_export,  METH_VARARGS,
 			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 static PyObject *
-FinancialAnalysis_get_analysis_period(FinancialAnalysisObject *self, void *closure)
+Lifetime_get_analysis_period(LifetimeObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Utilityrate5_FinancialAnalysis_analysis_period_fget, self->data_ptr);
+	return PySAM_float_getter(SAM_Utilityrate5_Lifetime_analysis_period_fget, self->data_ptr);
 }
 
 static int
-FinancialAnalysis_set_analysis_period(FinancialAnalysisObject *self, PyObject *value, void *closure)
+Lifetime_set_analysis_period(LifetimeObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Utilityrate5_FinancialAnalysis_analysis_period_fset, self->data_ptr);
+	return PySAM_float_setter(value, SAM_Utilityrate5_Lifetime_analysis_period_fset, self->data_ptr);
 }
 
 static PyObject *
-FinancialAnalysis_get_system_use_lifetime_output(FinancialAnalysisObject *self, void *closure)
+Lifetime_get_inflation_rate(LifetimeObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Utilityrate5_FinancialAnalysis_system_use_lifetime_output_fget, self->data_ptr);
+	return PySAM_float_getter(SAM_Utilityrate5_Lifetime_inflation_rate_fget, self->data_ptr);
 }
 
 static int
-FinancialAnalysis_set_system_use_lifetime_output(FinancialAnalysisObject *self, PyObject *value, void *closure)
+Lifetime_set_inflation_rate(LifetimeObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Utilityrate5_FinancialAnalysis_system_use_lifetime_output_fset, self->data_ptr);
+	return PySAM_float_setter(value, SAM_Utilityrate5_Lifetime_inflation_rate_fset, self->data_ptr);
 }
 
-static PyGetSetDef FinancialAnalysis_getset[] = {
-{"analysis_period", (getter)FinancialAnalysis_get_analysis_period,(setter)FinancialAnalysis_set_analysis_period,
-	"Number of years in analysis [years], number.\n Constraints: INTEGER,POSITIVE; Required if: *.",
+static PyObject *
+Lifetime_get_system_use_lifetime_output(LifetimeObject *self, void *closure)
+{
+	return PySAM_float_getter(SAM_Utilityrate5_Lifetime_system_use_lifetime_output_fget, self->data_ptr);
+}
+
+static int
+Lifetime_set_system_use_lifetime_output(LifetimeObject *self, PyObject *value, void *closure)
+{
+	return PySAM_float_setter(value, SAM_Utilityrate5_Lifetime_system_use_lifetime_output_fset, self->data_ptr);
+}
+
+static PyGetSetDef Lifetime_getset[] = {
+{"analysis_period", (getter)Lifetime_get_analysis_period,(setter)Lifetime_set_analysis_period,
+	"Number of years in analysis [years], number.\n Constraints: INTEGER,POSITIVE; Required.",
  	NULL},
-{"system_use_lifetime_output", (getter)FinancialAnalysis_get_system_use_lifetime_output,(setter)FinancialAnalysis_set_system_use_lifetime_output,
-	"Lifetime hourly system outputs [0/1], number.\n 0=hourly first year,1=hourly lifetime; Constraints: INTEGER,MIN=0,MAX=1; Required if: *.",
+{"inflation_rate", (getter)Lifetime_get_inflation_rate,(setter)Lifetime_set_inflation_rate,
+	"Inflation rate [%], number.\n Constraints: MIN=-99; Required.",
+ 	NULL},
+{"system_use_lifetime_output", (getter)Lifetime_get_system_use_lifetime_output,(setter)Lifetime_set_system_use_lifetime_output,
+	"Lifetime hourly system outputs [0/1], number.\n 0=hourly first year,1=hourly lifetime; Constraints: INTEGER,MIN=0,MAX=1; Required.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
 
-static PyTypeObject FinancialAnalysis_Type = {
+static PyTypeObject Lifetime_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"Utilityrate5.FinancialAnalysis",             /*tp_name*/
-		sizeof(FinancialAnalysisObject),          /*tp_basicsize*/
+		"Utilityrate5.Lifetime",             /*tp_name*/
+		sizeof(LifetimeObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
 		0,    /*tp_dealloc*/
@@ -282,9 +297,147 @@ static PyTypeObject FinancialAnalysis_Type = {
 		0,                          /*tp_weaklistoffset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
-		FinancialAnalysis_methods,         /*tp_methods*/
+		Lifetime_methods,         /*tp_methods*/
 		0,                          /*tp_members*/
-		FinancialAnalysis_getset,          /*tp_getset*/
+		Lifetime_getset,          /*tp_getset*/
+		0,                          /*tp_base*/
+		0,                          /*tp_dict*/
+		0,                          /*tp_descr_get*/
+		0,                          /*tp_descr_set*/
+		0,                          /*tp_dictoffset*/
+		0,                          /*tp_init*/
+		0,                          /*tp_alloc*/
+		0,             /*tp_new*/
+		0,                          /*tp_free*/
+		0,                          /*tp_is_gc*/
+};
+
+
+	/*
+	 * SystemOutput Group
+	 */ 
+
+typedef struct {
+	PyObject_HEAD
+	SAM_Utilityrate5   data_ptr;
+} SystemOutputObject;
+
+static PyTypeObject SystemOutput_Type;
+
+static PyObject *
+SystemOutput_new(SAM_Utilityrate5 data_ptr)
+{
+	PyObject* new_obj = SystemOutput_Type.tp_alloc(&SystemOutput_Type,0);
+
+	SystemOutputObject* SystemOutput_obj = (SystemOutputObject*)new_obj;
+
+	SystemOutput_obj->data_ptr = data_ptr;
+
+	return new_obj;
+}
+
+/* SystemOutput methods */
+
+static PyObject *
+SystemOutput_assign(SystemOutputObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Utilityrate5", "SystemOutput")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+SystemOutput_export(SystemOutputObject *self, PyObject *args)
+{
+	PyTypeObject* tp = &SystemOutput_Type;
+	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
+	return dict;
+}
+
+static PyMethodDef SystemOutput_methods[] = {
+		{"assign",            (PyCFunction)SystemOutput_assign,  METH_VARARGS,
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+		{"export",            (PyCFunction)SystemOutput_export,  METH_VARARGS,
+			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+		{NULL,              NULL}           /* sentinel */
+};
+
+static PyObject *
+SystemOutput_get_degradation(SystemOutputObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Utilityrate5_SystemOutput_degradation_aget, self->data_ptr);
+}
+
+static int
+SystemOutput_set_degradation(SystemOutputObject *self, PyObject *value, void *closure)
+{
+		return PySAM_array_setter(value, SAM_Utilityrate5_SystemOutput_degradation_aset, self->data_ptr);
+}
+
+static PyObject *
+SystemOutput_get_gen(SystemOutputObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Utilityrate5_SystemOutput_gen_aget, self->data_ptr);
+}
+
+static int
+SystemOutput_set_gen(SystemOutputObject *self, PyObject *value, void *closure)
+{
+		return PySAM_array_setter(value, SAM_Utilityrate5_SystemOutput_gen_aset, self->data_ptr);
+}
+
+static PyGetSetDef SystemOutput_getset[] = {
+{"degradation", (getter)SystemOutput_get_degradation,(setter)SystemOutput_set_degradation,
+	"Annual energy degradation [%], array.\n Required.",
+ 	NULL},
+{"gen", (getter)SystemOutput_get_gen,(setter)SystemOutput_set_gen,
+	"System power generated [kW], array.\n Required.",
+ 	NULL},
+	{NULL}  /* Sentinel */
+};
+
+static PyTypeObject SystemOutput_Type = {
+		/* The ob_type field must be initialized in the module init function
+		 * to be portable to Windows without using C++. */
+		PyVarObject_HEAD_INIT(NULL, 0)
+		"Utilityrate5.SystemOutput",             /*tp_name*/
+		sizeof(SystemOutputObject),          /*tp_basicsize*/
+		0,                          /*tp_itemsize*/
+		/* methods */
+		0,    /*tp_dealloc*/
+		0,                          /*tp_print*/
+		(getattrfunc)0,             /*tp_getattr*/
+		0,                          /*tp_setattr*/
+		0,                          /*tp_reserved*/
+		0,                          /*tp_repr*/
+		0,                          /*tp_as_number*/
+		0,                          /*tp_as_sequence*/
+		0,                          /*tp_as_mapping*/
+		0,                          /*tp_hash*/
+		0,                          /*tp_call*/
+		0,                          /*tp_str*/
+		0,                          /*tp_getattro*/
+		0,                          /*tp_setattro*/
+		0,                          /*tp_as_buffer*/
+		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
+		0,                          /*tp_doc*/
+		0,                          /*tp_traverse*/
+		0,                          /*tp_clear*/
+		0,                          /*tp_richcompare*/
+		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_iter*/
+		0,                          /*tp_iternext*/
+		SystemOutput_methods,         /*tp_methods*/
+		0,                          /*tp_members*/
+		SystemOutput_getset,          /*tp_getset*/
 		0,                          /*tp_base*/
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
@@ -356,18 +509,6 @@ static PyMethodDef TimeSeries_methods[] = {
 };
 
 static PyObject *
-TimeSeries_get_gen(TimeSeriesObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Utilityrate5_TimeSeries_gen_aget, self->data_ptr);
-}
-
-static int
-TimeSeries_set_gen(TimeSeriesObject *self, PyObject *value, void *closure)
-{
-		return PySAM_array_setter(value, SAM_Utilityrate5_TimeSeries_gen_aset, self->data_ptr);
-}
-
-static PyObject *
 TimeSeries_get_load(TimeSeriesObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Utilityrate5_TimeSeries_load_aget, self->data_ptr);
@@ -380,9 +521,6 @@ TimeSeries_set_load(TimeSeriesObject *self, PyObject *value, void *closure)
 }
 
 static PyGetSetDef TimeSeries_getset[] = {
-{"gen", (getter)TimeSeries_get_gen,(setter)TimeSeries_set_gen,
-	"System power generated [kW], array.\n Required if: *.",
- 	NULL},
 {"load", (getter)TimeSeries_get_load,(setter)TimeSeries_set_load,
 	"Electricity load (year 1) [kW], array.\n ",
  	NULL},
@@ -423,252 +561,6 @@ static PyTypeObject TimeSeries_Type = {
 		TimeSeries_methods,         /*tp_methods*/
 		0,                          /*tp_members*/
 		TimeSeries_getset,          /*tp_getset*/
-		0,                          /*tp_base*/
-		0,                          /*tp_dict*/
-		0,                          /*tp_descr_get*/
-		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
-		0,                          /*tp_init*/
-		0,                          /*tp_alloc*/
-		0,             /*tp_new*/
-		0,                          /*tp_free*/
-		0,                          /*tp_is_gc*/
-};
-
-
-	/*
-	 * Financials Group
-	 */ 
-
-typedef struct {
-	PyObject_HEAD
-	SAM_Utilityrate5   data_ptr;
-} FinancialsObject;
-
-static PyTypeObject Financials_Type;
-
-static PyObject *
-Financials_new(SAM_Utilityrate5 data_ptr)
-{
-	PyObject* new_obj = Financials_Type.tp_alloc(&Financials_Type,0);
-
-	FinancialsObject* Financials_obj = (FinancialsObject*)new_obj;
-
-	Financials_obj->data_ptr = data_ptr;
-
-	return new_obj;
-}
-
-/* Financials methods */
-
-static PyObject *
-Financials_assign(FinancialsObject *self, PyObject *args)
-{
-	PyObject* dict;
-	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
-		return NULL;
-	}
-
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Utilityrate5", "Financials")){
-		return NULL;
-	}
-
-	Py_INCREF(Py_None);
-	return Py_None;
-}
-
-static PyObject *
-Financials_export(FinancialsObject *self, PyObject *args)
-{
-	PyTypeObject* tp = &Financials_Type;
-	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
-	return dict;
-}
-
-static PyMethodDef Financials_methods[] = {
-		{"assign",            (PyCFunction)Financials_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
-		{"export",            (PyCFunction)Financials_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
-		{NULL,              NULL}           /* sentinel */
-};
-
-static PyObject *
-Financials_get_inflation_rate(FinancialsObject *self, void *closure)
-{
-	return PySAM_float_getter(SAM_Utilityrate5_Financials_inflation_rate_fget, self->data_ptr);
-}
-
-static int
-Financials_set_inflation_rate(FinancialsObject *self, PyObject *value, void *closure)
-{
-	return PySAM_float_setter(value, SAM_Utilityrate5_Financials_inflation_rate_fset, self->data_ptr);
-}
-
-static PyGetSetDef Financials_getset[] = {
-{"inflation_rate", (getter)Financials_get_inflation_rate,(setter)Financials_set_inflation_rate,
-	"Inflation rate [%], number.\n Constraints: MIN=-99; Required if: *.",
- 	NULL},
-	{NULL}  /* Sentinel */
-};
-
-static PyTypeObject Financials_Type = {
-		/* The ob_type field must be initialized in the module init function
-		 * to be portable to Windows without using C++. */
-		PyVarObject_HEAD_INIT(NULL, 0)
-		"Utilityrate5.Financials",             /*tp_name*/
-		sizeof(FinancialsObject),          /*tp_basicsize*/
-		0,                          /*tp_itemsize*/
-		/* methods */
-		0,    /*tp_dealloc*/
-		0,                          /*tp_print*/
-		(getattrfunc)0,             /*tp_getattr*/
-		0,                          /*tp_setattr*/
-		0,                          /*tp_reserved*/
-		0,                          /*tp_repr*/
-		0,                          /*tp_as_number*/
-		0,                          /*tp_as_sequence*/
-		0,                          /*tp_as_mapping*/
-		0,                          /*tp_hash*/
-		0,                          /*tp_call*/
-		0,                          /*tp_str*/
-		0,                          /*tp_getattro*/
-		0,                          /*tp_setattro*/
-		0,                          /*tp_as_buffer*/
-		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
-		0,                          /*tp_doc*/
-		0,                          /*tp_traverse*/
-		0,                          /*tp_clear*/
-		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
-		0,                          /*tp_iter*/
-		0,                          /*tp_iternext*/
-		Financials_methods,         /*tp_methods*/
-		0,                          /*tp_members*/
-		Financials_getset,          /*tp_getset*/
-		0,                          /*tp_base*/
-		0,                          /*tp_dict*/
-		0,                          /*tp_descr_get*/
-		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
-		0,                          /*tp_init*/
-		0,                          /*tp_alloc*/
-		0,             /*tp_new*/
-		0,                          /*tp_free*/
-		0,                          /*tp_is_gc*/
-};
-
-
-	/*
-	 * AnnualOutput Group
-	 */ 
-
-typedef struct {
-	PyObject_HEAD
-	SAM_Utilityrate5   data_ptr;
-} AnnualOutputObject;
-
-static PyTypeObject AnnualOutput_Type;
-
-static PyObject *
-AnnualOutput_new(SAM_Utilityrate5 data_ptr)
-{
-	PyObject* new_obj = AnnualOutput_Type.tp_alloc(&AnnualOutput_Type,0);
-
-	AnnualOutputObject* AnnualOutput_obj = (AnnualOutputObject*)new_obj;
-
-	AnnualOutput_obj->data_ptr = data_ptr;
-
-	return new_obj;
-}
-
-/* AnnualOutput methods */
-
-static PyObject *
-AnnualOutput_assign(AnnualOutputObject *self, PyObject *args)
-{
-	PyObject* dict;
-	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
-		return NULL;
-	}
-
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Utilityrate5", "AnnualOutput")){
-		return NULL;
-	}
-
-	Py_INCREF(Py_None);
-	return Py_None;
-}
-
-static PyObject *
-AnnualOutput_export(AnnualOutputObject *self, PyObject *args)
-{
-	PyTypeObject* tp = &AnnualOutput_Type;
-	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
-	return dict;
-}
-
-static PyMethodDef AnnualOutput_methods[] = {
-		{"assign",            (PyCFunction)AnnualOutput_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
-		{"export",            (PyCFunction)AnnualOutput_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
-		{NULL,              NULL}           /* sentinel */
-};
-
-static PyObject *
-AnnualOutput_get_degradation(AnnualOutputObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Utilityrate5_AnnualOutput_degradation_aget, self->data_ptr);
-}
-
-static int
-AnnualOutput_set_degradation(AnnualOutputObject *self, PyObject *value, void *closure)
-{
-		return PySAM_array_setter(value, SAM_Utilityrate5_AnnualOutput_degradation_aset, self->data_ptr);
-}
-
-static PyGetSetDef AnnualOutput_getset[] = {
-{"degradation", (getter)AnnualOutput_get_degradation,(setter)AnnualOutput_set_degradation,
-	"Annual energy degradation [%], array.\n Required if: *.",
- 	NULL},
-	{NULL}  /* Sentinel */
-};
-
-static PyTypeObject AnnualOutput_Type = {
-		/* The ob_type field must be initialized in the module init function
-		 * to be portable to Windows without using C++. */
-		PyVarObject_HEAD_INIT(NULL, 0)
-		"Utilityrate5.AnnualOutput",             /*tp_name*/
-		sizeof(AnnualOutputObject),          /*tp_basicsize*/
-		0,                          /*tp_itemsize*/
-		/* methods */
-		0,    /*tp_dealloc*/
-		0,                          /*tp_print*/
-		(getattrfunc)0,             /*tp_getattr*/
-		0,                          /*tp_setattr*/
-		0,                          /*tp_reserved*/
-		0,                          /*tp_repr*/
-		0,                          /*tp_as_number*/
-		0,                          /*tp_as_sequence*/
-		0,                          /*tp_as_mapping*/
-		0,                          /*tp_hash*/
-		0,                          /*tp_call*/
-		0,                          /*tp_str*/
-		0,                          /*tp_getattro*/
-		0,                          /*tp_setattro*/
-		0,                          /*tp_as_buffer*/
-		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
-		0,                          /*tp_doc*/
-		0,                          /*tp_traverse*/
-		0,                          /*tp_clear*/
-		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
-		0,                          /*tp_iter*/
-		0,                          /*tp_iternext*/
-		AnnualOutput_methods,         /*tp_methods*/
-		0,                          /*tp_members*/
-		AnnualOutput_getset,          /*tp_getset*/
 		0,                          /*tp_base*/
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
@@ -753,7 +645,7 @@ ElectricLoad_set_load_escalation(ElectricLoadObject *self, PyObject *value, void
 
 static PyGetSetDef ElectricLoad_getset[] = {
 {"load_escalation", (getter)ElectricLoad_get_load_escalation,(setter)ElectricLoad_set_load_escalation,
-	"Annual load escalation [%/year], array.\n Required if: ?=0.",
+	"Annual load escalation [%/year], array.\n 0 if not set.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -960,25 +852,25 @@ UtilityRateFlat_set_ur_ts_sell_rate(UtilityRateFlatObject *self, PyObject *value
 
 static PyGetSetDef UtilityRateFlat_getset[] = {
 {"rate_escalation", (getter)UtilityRateFlat_get_rate_escalation,(setter)UtilityRateFlat_set_rate_escalation,
-	"Annual electricity rate escalation [%/year], array.\n Required if: ?=0.",
+	"Annual electricity rate escalation [%/year], array.\n 0 if not set.",
  	NULL},
 {"ur_annual_min_charge", (getter)UtilityRateFlat_get_ur_annual_min_charge,(setter)UtilityRateFlat_set_ur_annual_min_charge,
-	"Annual minimum charge [$], number.\n Required if: ?=0.0.",
+	"Annual minimum charge [$], number.\n Required if ?=0.0.",
  	NULL},
 {"ur_en_ts_sell_rate", (getter)UtilityRateFlat_get_ur_en_ts_sell_rate,(setter)UtilityRateFlat_set_ur_en_ts_sell_rate,
-	"Enable time step sell rates [0/1], number.\n Constraints: BOOLEAN; Required if: ?=0.",
+	"Enable time step sell rates [0/1], number.\n Constraints: BOOLEAN; 0 if not set.",
  	NULL},
 {"ur_metering_option", (getter)UtilityRateFlat_get_ur_metering_option,(setter)UtilityRateFlat_set_ur_metering_option,
-	"Metering options [0=Single meter with monthly rollover credits in kWh,1=Single meter with monthly rollover credits in $,2=Single meter with no monthly rollover credits (Net Billing),3=Single meter with monthly rollover credits in $ (Net Billing $),4=Two meters with all generation sold and all load purchased], number.\n Net metering monthly excess; Constraints: INTEGER,MIN=0,MAX=4; Required if: ?=0.",
+	"Metering options [0=Single meter with monthly rollover credits in kWh,1=Single meter with monthly rollover credits in $,2=Single meter with no monthly rollover credits (Net Billing),3=Single meter with monthly rollover credits in $ (Net Billing $),4=Two meters with all generation sold and all load purchased], number.\n Net metering monthly excess; Constraints: INTEGER,MIN=0,MAX=4; 0 if not set.",
  	NULL},
 {"ur_monthly_fixed_charge", (getter)UtilityRateFlat_get_ur_monthly_fixed_charge,(setter)UtilityRateFlat_set_ur_monthly_fixed_charge,
-	"Monthly fixed charge [$], number.\n Required if: ?=0.0.",
+	"Monthly fixed charge [$], number.\n Required if ?=0.0.",
  	NULL},
 {"ur_monthly_min_charge", (getter)UtilityRateFlat_get_ur_monthly_min_charge,(setter)UtilityRateFlat_set_ur_monthly_min_charge,
-	"Monthly minimum charge [$], number.\n Required if: ?=0.0.",
+	"Monthly minimum charge [$], number.\n Required if ?=0.0.",
  	NULL},
 {"ur_nm_yearend_sell_rate", (getter)UtilityRateFlat_get_ur_nm_yearend_sell_rate,(setter)UtilityRateFlat_set_ur_nm_yearend_sell_rate,
-	"Year end sell rate [$/kWh], number.\n Required if: ?=0.0.",
+	"Year end sell rate [$/kWh], number.\n Required if ?=0.0.",
  	NULL},
 {"ur_ts_sell_rate", (getter)UtilityRateFlat_get_ur_ts_sell_rate,(setter)UtilityRateFlat_set_ur_ts_sell_rate,
 	"Time step sell rates [0/1], array.\n ",
@@ -1128,13 +1020,13 @@ UtilityRateEnergyCharge_set_ur_ec_tou_mat(UtilityRateEnergyChargeObject *self, P
 
 static PyGetSetDef UtilityRateEnergyCharge_getset[] = {
 {"ur_ec_sched_weekday", (getter)UtilityRateEnergyCharge_get_ur_ec_sched_weekday,(setter)UtilityRateEnergyCharge_set_ur_ec_sched_weekday,
-	"Energy charge weekday schedule [], matrix.\n 12x24; Required if: *.",
+	"Energy charge weekday schedule, matrix.\n 12x24; Required.",
  	NULL},
 {"ur_ec_sched_weekend", (getter)UtilityRateEnergyCharge_get_ur_ec_sched_weekend,(setter)UtilityRateEnergyCharge_set_ur_ec_sched_weekend,
-	"Energy charge weekend schedule [], matrix.\n 12x24; Required if: *.",
+	"Energy charge weekend schedule, matrix.\n 12x24; Required.",
  	NULL},
 {"ur_ec_tou_mat", (getter)UtilityRateEnergyCharge_get_ur_ec_tou_mat,(setter)UtilityRateEnergyCharge_set_ur_ec_tou_mat,
-	"Energy rates table [], matrix.\n Required if: *.",
+	"Energy rates table, matrix.\n Required.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1305,19 +1197,19 @@ UtilityRateDemandCharge_set_ur_dc_tou_mat(UtilityRateDemandChargeObject *self, P
 
 static PyGetSetDef UtilityRateDemandCharge_getset[] = {
 {"ur_dc_enable", (getter)UtilityRateDemandCharge_get_ur_dc_enable,(setter)UtilityRateDemandCharge_set_ur_dc_enable,
-	"Enable demand charge [0/1], number.\n Constraints: BOOLEAN; Required if: ?=0.",
+	"Enable demand charge [0/1], number.\n Constraints: BOOLEAN; 0 if not set.",
  	NULL},
 {"ur_dc_flat_mat", (getter)UtilityRateDemandCharge_get_ur_dc_flat_mat,(setter)UtilityRateDemandCharge_set_ur_dc_flat_mat,
-	"Demand rates (flat) table [], matrix.\n Required if: ur_dc_enable=1.",
+	"Demand rates (flat) table, matrix.\n Required if ur_dc_enable=1.",
  	NULL},
 {"ur_dc_sched_weekday", (getter)UtilityRateDemandCharge_get_ur_dc_sched_weekday,(setter)UtilityRateDemandCharge_set_ur_dc_sched_weekday,
-	"Demand charge weekday schedule [], matrix.\n 12x24; ",
+	"Demand charge weekday schedule, matrix.\n 12x24; ",
  	NULL},
 {"ur_dc_sched_weekend", (getter)UtilityRateDemandCharge_get_ur_dc_sched_weekend,(setter)UtilityRateDemandCharge_set_ur_dc_sched_weekend,
-	"Demand charge weekend schedule [], matrix.\n 12x24; ",
+	"Demand charge weekend schedule, matrix.\n 12x24; ",
  	NULL},
 {"ur_dc_tou_mat", (getter)UtilityRateDemandCharge_get_ur_dc_tou_mat,(setter)UtilityRateDemandCharge_set_ur_dc_tou_mat,
-	"Demand rates (TOU) table [], matrix.\n Required if: ur_dc_enable=1.",
+	"Demand rates (TOU) table, matrix.\n Required if ur_dc_enable=1.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -2610,7 +2502,7 @@ static PyGetSetDef Outputs_getset[] = {
 	"Electricity peak from grid per TOU period (year 1 hourly) [kW], array.",
  	NULL},
 {"year1_hourly_dc_tou_schedule", (getter)Outputs_get_year1_hourly_dc_tou_schedule,(setter)0,
-	"TOU period for demand charges (year 1 hourly) [], array.",
+	"TOU period for demand charges (year 1 hourly), array.",
  	NULL},
 {"year1_hourly_dc_with_system", (getter)Outputs_get_year1_hourly_dc_with_system,(setter)0,
 	"Demand charge with system (year 1 hourly) [$], array.",
@@ -2628,7 +2520,7 @@ static PyGetSetDef Outputs_getset[] = {
 	"Electricity to grid (year 1 hourly) [kWh], array.",
  	NULL},
 {"year1_hourly_ec_tou_schedule", (getter)Outputs_get_year1_hourly_ec_tou_schedule,(setter)0,
-	"TOU period for energy charges (year 1 hourly) [], array.",
+	"TOU period for energy charges (year 1 hourly), array.",
  	NULL},
 {"year1_hourly_ec_with_system", (getter)Outputs_get_year1_hourly_ec_with_system,(setter)0,
 	"Energy charge with system (year 1 hourly) [$], array.",
@@ -2785,60 +2677,42 @@ newUtilityrate5Object(void* data_ptr)
 
 	PySAM_TECH_ATTR("Utilityrate5", SAM_Utilityrate5_construct)
 
-PyObject* Common_obj = Common_new(self->data_ptr);
+	PyObject* Common_obj = Common_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Common", Common_obj);
 	Py_DECREF(Common_obj);
 
-PyObject* FinancialAnalysis_obj = FinancialAnalysis_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "FinancialAnalysis", FinancialAnalysis_obj);
-	Py_DECREF(FinancialAnalysis_obj);
+	PyObject* Lifetime_obj = Lifetime_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "Lifetime", Lifetime_obj);
+	Py_DECREF(Lifetime_obj);
 
-PyObject* TimeSeries_obj = TimeSeries_new(self->data_ptr);
+	PyObject* SystemOutput_obj = SystemOutput_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "SystemOutput", SystemOutput_obj);
+	Py_DECREF(SystemOutput_obj);
+
+	PyObject* TimeSeries_obj = TimeSeries_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "TimeSeries", TimeSeries_obj);
 	Py_DECREF(TimeSeries_obj);
 
-PyObject* Financials_obj = Financials_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "Financials", Financials_obj);
-	Py_DECREF(Financials_obj);
-
-PyObject* AnnualOutput_obj = AnnualOutput_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "AnnualOutput", AnnualOutput_obj);
-	Py_DECREF(AnnualOutput_obj);
-
-PyObject* ElectricLoad_obj = ElectricLoad_new(self->data_ptr);
+	PyObject* ElectricLoad_obj = ElectricLoad_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "ElectricLoad", ElectricLoad_obj);
 	Py_DECREF(ElectricLoad_obj);
 
-PyObject* UtilityRateFlat_obj = UtilityRateFlat_new(self->data_ptr);
+	PyObject* UtilityRateFlat_obj = UtilityRateFlat_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "UtilityRateFlat", UtilityRateFlat_obj);
 	Py_DECREF(UtilityRateFlat_obj);
 
-PyObject* UtilityRateEnergyCharge_obj = UtilityRateEnergyCharge_new(self->data_ptr);
+	PyObject* UtilityRateEnergyCharge_obj = UtilityRateEnergyCharge_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "UtilityRateEnergyCharge", UtilityRateEnergyCharge_obj);
 	Py_DECREF(UtilityRateEnergyCharge_obj);
 
-PyObject* UtilityRateDemandCharge_obj = UtilityRateDemandCharge_new(self->data_ptr);
+	PyObject* UtilityRateDemandCharge_obj = UtilityRateDemandCharge_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "UtilityRateDemandCharge", UtilityRateDemandCharge_obj);
 	Py_DECREF(UtilityRateDemandCharge_obj);
 
-PyObject* Outputs_obj = Outputs_new(self->data_ptr);
+	PyObject* Outputs_obj = Outputs_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
 	Py_DECREF(Outputs_obj);
 
-PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
-
-	PyObject* data_cap = PyCapsule_New(self->data_ptr, NULL, NULL);
-	PyObject* Adjust_obj = PyObject_CallMethod(AdjustmentFactorsModule, "new", "(O)", data_cap);
-	Py_XDECREF(data_cap);
-	Py_XDECREF(AdjustmentFactorsModule);
-
-	if (!Adjust_obj){
-		PyErr_SetString(PySAM_ErrorObject, "Couldn't create AdjustmentFactorsObject\n");
-		return NULL;
-	}
-
-	PyDict_SetItemString(attr_dict, "AdjustmentFactors", Adjust_obj);
-	Py_DECREF(Adjust_obj);
 
 	return self;
 }
@@ -2995,8 +2869,8 @@ static PyObject *
 Utilityrate5_default(PyObject *self, PyObject *args)
 {
 	Utilityrate5Object *rv;
-	char* fin = 0;
-	if (!PyArg_ParseTuple(args, "s:default", &fin)){
+	char* def = 0;
+	if (!PyArg_ParseTuple(args, "s:default", &def)){
 		PyErr_BadArgument();
 		return NULL;
 	}
@@ -3004,7 +2878,7 @@ Utilityrate5_default(PyObject *self, PyObject *args)
 	if (rv == NULL)
 		return NULL;
 
-	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Utilityrate5", fin);
+	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Utilityrate5", def);
 
 	return (PyObject *)rv;
 }
@@ -3019,14 +2893,14 @@ static PyMethodDef Utilityrate5Module_methods[] = {
 				PyDoc_STR("new() -> new Utilityrate5 object")},
 		{"default",             Utilityrate5_default,         METH_VARARGS,
 				PyDoc_STR("default(financial) -> new Utilityrate5 object with financial model-specific default attributes\n"
-				"Options: Single Owner, Sale Leaseback, Leveraged Partnership Flip, Commercial, LCOE Calculator, All Equity Partnership Flip, None, ")},
+				"Options: TcsMSLF, TcslinearFresnel, Swh, Tcsdish, GenericSystem, Pvsamv1, Fuelcell, TcsgenericSolar, TcstroughPhysical, Pvwattsv5, TcstroughEmpirical, Biomass, Windpower")},
 		{"wrap",             Utilityrate5_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> new Utilityrate5 object around existing PySSC data")},
+				PyDoc_STR("wrap(ssc_data_t) -> new Utilityrate5 object around existing PySSC data, taking over memory ownership")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 PyDoc_STRVAR(module_doc,
-			 "Refer to http://www.github.com/nrel/PySAM for source code.");
+			 "Retail electricity bill calculator");
 
 
 static int
@@ -3035,27 +2909,11 @@ Utilityrate5Module_exec(PyObject *m)
 	/* Finalize the type object including setting type of the new type
 	 * object; doing it here is required for portability, too. */
 
+	if (PySAM_load_lib(m) < 0) goto fail;
+	if (PySAM_init_error(m) < 0) goto fail;
+
 	Utilityrate5_Type.tp_dict = PyDict_New();
 	if (!Utilityrate5_Type.tp_dict) { goto fail; }
-
-	/// Add the AdjustmentFactors type object to Utilityrate5_Type
-	PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
-	if (!AdjustmentFactorsModule){
-		PyErr_SetImportError(PyUnicode_FromString("Could not import AdjustmentFactors module."), NULL, NULL);
-	}
-
-	PyTypeObject* AdjustmentFactors_Type = (PyTypeObject*)PyObject_GetAttrString(AdjustmentFactorsModule, "AdjustmentFactors");
-	if (!AdjustmentFactors_Type){
-		PyErr_SetImportError(PyUnicode_FromString("Could not import AdjustmentFactors type."), NULL, NULL);
-	}
-	Py_XDECREF(AdjustmentFactorsModule);
-
-	if (PyType_Ready(AdjustmentFactors_Type) < 0) { goto fail; }
-	PyDict_SetItemString(Utilityrate5_Type.tp_dict,
-						 "AdjustmentFactors",
-						 (PyObject*)AdjustmentFactors_Type);
-	Py_DECREF(&AdjustmentFactors_Type);
-	Py_XDECREF(AdjustmentFactors_Type);
 
 	/// Add the Common type object to Utilityrate5_Type
 	if (PyType_Ready(&Common_Type) < 0) { goto fail; }
@@ -3064,12 +2922,19 @@ Utilityrate5Module_exec(PyObject *m)
 				(PyObject*)&Common_Type);
 	Py_DECREF(&Common_Type);
 
-	/// Add the FinancialAnalysis type object to Utilityrate5_Type
-	if (PyType_Ready(&FinancialAnalysis_Type) < 0) { goto fail; }
+	/// Add the Lifetime type object to Utilityrate5_Type
+	if (PyType_Ready(&Lifetime_Type) < 0) { goto fail; }
 	PyDict_SetItemString(Utilityrate5_Type.tp_dict,
-				"FinancialAnalysis",
-				(PyObject*)&FinancialAnalysis_Type);
-	Py_DECREF(&FinancialAnalysis_Type);
+				"Lifetime",
+				(PyObject*)&Lifetime_Type);
+	Py_DECREF(&Lifetime_Type);
+
+	/// Add the SystemOutput type object to Utilityrate5_Type
+	if (PyType_Ready(&SystemOutput_Type) < 0) { goto fail; }
+	PyDict_SetItemString(Utilityrate5_Type.tp_dict,
+				"SystemOutput",
+				(PyObject*)&SystemOutput_Type);
+	Py_DECREF(&SystemOutput_Type);
 
 	/// Add the TimeSeries type object to Utilityrate5_Type
 	if (PyType_Ready(&TimeSeries_Type) < 0) { goto fail; }
@@ -3077,20 +2942,6 @@ Utilityrate5Module_exec(PyObject *m)
 				"TimeSeries",
 				(PyObject*)&TimeSeries_Type);
 	Py_DECREF(&TimeSeries_Type);
-
-	/// Add the Financials type object to Utilityrate5_Type
-	if (PyType_Ready(&Financials_Type) < 0) { goto fail; }
-	PyDict_SetItemString(Utilityrate5_Type.tp_dict,
-				"Financials",
-				(PyObject*)&Financials_Type);
-	Py_DECREF(&Financials_Type);
-
-	/// Add the AnnualOutput type object to Utilityrate5_Type
-	if (PyType_Ready(&AnnualOutput_Type) < 0) { goto fail; }
-	PyDict_SetItemString(Utilityrate5_Type.tp_dict,
-				"AnnualOutput",
-				(PyObject*)&AnnualOutput_Type);
-	Py_DECREF(&AnnualOutput_Type);
 
 	/// Add the ElectricLoad type object to Utilityrate5_Type
 	if (PyType_Ready(&ElectricLoad_Type) < 0) { goto fail; }
@@ -3132,9 +2983,6 @@ Utilityrate5Module_exec(PyObject *m)
 	PyModule_AddObject(m,
 				"Utilityrate5",
 				(PyObject*)&Utilityrate5_Type);
-
-	if (PySAM_load_lib(m) < 0) goto fail;
-	if (PySAM_init_error() < 0) goto fail;
 
 	return 0;
 	fail:
