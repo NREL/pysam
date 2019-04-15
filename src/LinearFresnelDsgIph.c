@@ -78,7 +78,7 @@ Weather_set_file_name(WeatherObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef Weather_getset[] = {
 {"file_name", (getter)Weather_get_file_name,(setter)Weather_set_file_name,
-	"local weather file path [], string.\n Constraints: LOCAL_FILE; Required if: *.",
+	"local weather file path, string.\n Constraints: LOCAL_FILE; Required.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -921,187 +921,187 @@ Solarfield_set_x_b_des(SolarfieldObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef Solarfield_getset[] = {
 {"A_aperture", (getter)Solarfield_get_A_aperture,(setter)Solarfield_set_A_aperture,
-	"(boiler, SH) Reflective aperture area of the collector module [m^2], matrix.\n Required if: *.",
+	"(boiler, SH) Reflective aperture area of the collector module [m^2], matrix.\n Required.",
  	NULL},
 {"AbsorberMaterial", (getter)Solarfield_get_AbsorberMaterial,(setter)Solarfield_set_AbsorberMaterial,
-	"(boiler, SH) Absorber material type [none], matrix.\n Required if: *.",
+	"(boiler, SH) Absorber material type [none], matrix.\n Required.",
  	NULL},
 {"AnnulusGas", (getter)Solarfield_get_AnnulusGas,(setter)Solarfield_set_AnnulusGas,
-	"(boiler, SH) Annulus gas type {1=air; 26=Ar; 27=H2} (4: # field fracs) [none], matrix.\n Required if: *.",
+	"(boiler, SH) Annulus gas type {1=air; 26=Ar; 27=H2} (4: # field fracs) [none], matrix.\n Required.",
  	NULL},
 {"ColAz", (getter)Solarfield_get_ColAz,(setter)Solarfield_set_ColAz,
-	"Collector azimuth angle [deg], number.\n Required if: *.",
+	"Collector azimuth angle [deg], number.\n Required.",
  	NULL},
 {"D_2", (getter)Solarfield_get_D_2,(setter)Solarfield_set_D_2,
-	"(boiler, SH) The inner absorber tube diameter [m], matrix.\n Required if: *.",
+	"(boiler, SH) The inner absorber tube diameter [m], matrix.\n Required.",
  	NULL},
 {"D_3", (getter)Solarfield_get_D_3,(setter)Solarfield_set_D_3,
-	"(boiler, SH) The outer absorber tube diameter [m], matrix.\n Required if: *.",
+	"(boiler, SH) The outer absorber tube diameter [m], matrix.\n Required.",
  	NULL},
 {"D_4", (getter)Solarfield_get_D_4,(setter)Solarfield_set_D_4,
-	"(boiler, SH) The inner glass envelope diameter [m], matrix.\n Required if: *.",
+	"(boiler, SH) The inner glass envelope diameter [m], matrix.\n Required.",
  	NULL},
 {"D_5", (getter)Solarfield_get_D_5,(setter)Solarfield_set_D_5,
-	"(boiler, SH) The outer glass envelope diameter [m], matrix.\n Required if: *.",
+	"(boiler, SH) The outer glass envelope diameter [m], matrix.\n Required.",
  	NULL},
 {"D_p", (getter)Solarfield_get_D_p,(setter)Solarfield_set_D_p,
-	"(boiler, SH) The diameter of the absorber flow plug (optional) [m], matrix.\n Required if: *.",
+	"(boiler, SH) The diameter of the absorber flow plug (optional) [m], matrix.\n Required.",
  	NULL},
 {"Design_loss", (getter)Solarfield_get_Design_loss,(setter)Solarfield_set_Design_loss,
-	"(boiler, SH) Receiver heat loss at design (4: # field fracs) [W/m], matrix.\n Required if: *.",
+	"(boiler, SH) Receiver heat loss at design (4: # field fracs) [W/m], matrix.\n Required.",
  	NULL},
 {"Dirt_HCE", (getter)Solarfield_get_Dirt_HCE,(setter)Solarfield_set_Dirt_HCE,
-	"(boiler, SH) Loss due to dirt on the receiver envelope (4: # field fracs) [none], matrix.\n Required if: *.",
+	"(boiler, SH) Loss due to dirt on the receiver envelope (4: # field fracs) [none], matrix.\n Required.",
  	NULL},
 {"EPSILON_4", (getter)Solarfield_get_EPSILON_4,(setter)Solarfield_set_EPSILON_4,
-	"(boiler, SH) Inner glass envelope emissivities (Pyrex) (4: # field fracs) [none], matrix.\n Required if: *.",
+	"(boiler, SH) Inner glass envelope emissivities (Pyrex) (4: # field fracs) [none], matrix.\n Required.",
  	NULL},
 {"Flow_type", (getter)Solarfield_get_Flow_type,(setter)Solarfield_set_Flow_type,
-	"(boiler, SH) The flow type through the absorber [none], matrix.\n Required if: *.",
+	"(boiler, SH) The flow type through the absorber [none], matrix.\n Required.",
  	NULL},
 {"GeomEffects", (getter)Solarfield_get_GeomEffects,(setter)Solarfield_set_GeomEffects,
-	"(boiler, SH) User-defined geometry effects derate [none], matrix.\n Required if: *.",
+	"(boiler, SH) User-defined geometry effects derate [none], matrix.\n Required.",
  	NULL},
 {"GlazingIntactIn", (getter)Solarfield_get_GlazingIntactIn,(setter)Solarfield_set_GlazingIntactIn,
-	"(boiler, SH) The glazing intact flag {true=0; false=1} (4: # field fracs) [none], matrix.\n Required if: *.",
+	"(boiler, SH) The glazing intact flag {true=0; false=1} (4: # field fracs) [none], matrix.\n Required.",
  	NULL},
 {"HCE_FieldFrac", (getter)Solarfield_get_HCE_FieldFrac,(setter)Solarfield_set_HCE_FieldFrac,
-	"(boiler, SH) The fraction of the field occupied by this HCE type (4: # field fracs) [none], matrix.\n Required if: *.",
+	"(boiler, SH) The fraction of the field occupied by this HCE type (4: # field fracs) [none], matrix.\n Required.",
  	NULL},
 {"HLCharType", (getter)Solarfield_get_HLCharType,(setter)Solarfield_set_HLCharType,
-	"(boiler, SH) Flag indicating the heat loss model type {1=poly.; 2=Forristall} [none], matrix.\n Required if: *.",
+	"(boiler, SH) Flag indicating the heat loss model type {1=poly.; 2=Forristall} [none], matrix.\n Required.",
  	NULL},
 {"HL_W", (getter)Solarfield_get_HL_W,(setter)Solarfield_set_HL_W,
-	"(boiler, SH) Heat loss coef adj wind velocity (0,1,2,3,4 order terms) [1/(m/s)^order], matrix.\n Required if: *.",
+	"(boiler, SH) Heat loss coef adj wind velocity (0,1,2,3,4 order terms) [1/(m/s)^order], matrix.\n Required.",
  	NULL},
 {"HL_dT", (getter)Solarfield_get_HL_dT,(setter)Solarfield_set_HL_dT,
-	"(boiler, SH) Heat loss coefficient - HTF temperature (0,1,2,3,4 order terms) [W/m-K^order], matrix.\n Required if: *.",
+	"(boiler, SH) Heat loss coefficient - HTF temperature (0,1,2,3,4 order terms) [W/m-K^order], matrix.\n Required.",
  	NULL},
 {"IAM_L", (getter)Solarfield_get_IAM_L,(setter)Solarfield_set_IAM_L,
-	"(boiler, SH) Longitudinal Incident angle modifiers (0,1,2,3,4 order terms) [none], matrix.\n Required if: *.",
+	"(boiler, SH) Longitudinal Incident angle modifiers (0,1,2,3,4 order terms) [none], matrix.\n Required.",
  	NULL},
 {"IAM_T", (getter)Solarfield_get_IAM_T,(setter)Solarfield_set_IAM_T,
-	"(boiler, SH) Transverse Incident angle modifiers (0,1,2,3,4 order terms) [none], matrix.\n Required if: *.",
+	"(boiler, SH) Transverse Incident angle modifiers (0,1,2,3,4 order terms) [none], matrix.\n Required.",
  	NULL},
 {"I_bn_des", (getter)Solarfield_get_I_bn_des,(setter)Solarfield_set_I_bn_des,
-	"Design point irradiation value [W/m2], number.\n Required if: *.",
+	"Design point irradiation value [W/m2], number.\n Required.",
  	NULL},
 {"L_col", (getter)Solarfield_get_L_col,(setter)Solarfield_set_L_col,
-	"(boiler, SH) Active length of the superheater section collector module [m], matrix.\n Required if: *.",
+	"(boiler, SH) Active length of the superheater section collector module [m], matrix.\n Required.",
  	NULL},
 {"OptCharType", (getter)Solarfield_get_OptCharType,(setter)Solarfield_set_OptCharType,
-	"(boiler, SH) The optical characterization method [none], matrix.\n Required if: *.",
+	"(boiler, SH) The optical characterization method [none], matrix.\n Required.",
  	NULL},
 {"P_a", (getter)Solarfield_get_P_a,(setter)Solarfield_set_P_a,
-	"(boiler, SH) Annulus gas pressure (4: # field fracs) [torr], matrix.\n Required if: *.",
+	"(boiler, SH) Annulus gas pressure (4: # field fracs) [torr], matrix.\n Required.",
  	NULL},
 {"P_turb_des", (getter)Solarfield_get_P_turb_des,(setter)Solarfield_set_P_turb_des,
-	"Design-point turbine inlet pressure [bar], number.\n Required if: *.",
+	"Design-point turbine inlet pressure [bar], number.\n Required.",
  	NULL},
 {"Pipe_hl_coef", (getter)Solarfield_get_Pipe_hl_coef,(setter)Solarfield_set_Pipe_hl_coef,
-	"Loss coefficient from the header.. runner pipe.. and non-HCE pipin [W/m2-K], number.\n Required if: *.",
+	"Loss coefficient from the header.. runner pipe.. and non-HCE pipin [W/m2-K], number.\n Required.",
  	NULL},
 {"Rough", (getter)Solarfield_get_Rough,(setter)Solarfield_set_Rough,
-	"(boiler, SH) Roughness of the internal surface [m], matrix.\n Required if: *.",
+	"(boiler, SH) Roughness of the internal surface [m], matrix.\n Required.",
  	NULL},
 {"SCA_drives_elec", (getter)Solarfield_get_SCA_drives_elec,(setter)Solarfield_set_SCA_drives_elec,
-	"Tracking power.. in Watts per m2 [W/m2], number.\n Required if: *.",
+	"Tracking power.. in Watts per m2 [W/m2], number.\n Required.",
  	NULL},
 {"Shadowing", (getter)Solarfield_get_Shadowing,(setter)Solarfield_set_Shadowing,
-	"(boiler, SH) Receiver bellows shadowing loss factor (4: # field fracs) [none], matrix.\n Required if: *.",
+	"(boiler, SH) Receiver bellows shadowing loss factor (4: # field fracs) [none], matrix.\n Required.",
  	NULL},
 {"T_amb_des_sf", (getter)Solarfield_get_T_amb_des_sf,(setter)Solarfield_set_T_amb_des_sf,
-	"Design-point ambient temperature [C], number.\n Required if: *.",
+	"Design-point ambient temperature [C], number.\n Required.",
  	NULL},
 {"T_fp", (getter)Solarfield_get_T_fp,(setter)Solarfield_set_T_fp,
-	"Freeze protection temperature (heat trace activation temperature) [C], number.\n Required if: *.",
+	"Freeze protection temperature (heat trace activation temperature) [C], number.\n Required.",
  	NULL},
 {"Tau_envelope", (getter)Solarfield_get_Tau_envelope,(setter)Solarfield_set_Tau_envelope,
-	"(boiler, SH) Envelope transmittance (4: # field fracs) [none], matrix.\n Required if: *.",
+	"(boiler, SH) Envelope transmittance (4: # field fracs) [none], matrix.\n Required.",
  	NULL},
 {"TrackingError", (getter)Solarfield_get_TrackingError,(setter)Solarfield_set_TrackingError,
-	"(boiler, SH) User-defined tracking error derate [none], matrix.\n Required if: *.",
+	"(boiler, SH) User-defined tracking error derate [none], matrix.\n Required.",
  	NULL},
 {"V_wind_max", (getter)Solarfield_get_V_wind_max,(setter)Solarfield_set_V_wind_max,
-	"Maximum allowable wind velocity before safety stow [m/s], number.\n Required if: *.",
+	"Maximum allowable wind velocity before safety stow [m/s], number.\n Required.",
  	NULL},
 {"alpha_abs", (getter)Solarfield_get_alpha_abs,(setter)Solarfield_set_alpha_abs,
-	"(boiler, SH) Absorber absorptance (4: # field fracs) [none], matrix.\n Required if: *.",
+	"(boiler, SH) Absorber absorptance (4: # field fracs) [none], matrix.\n Required.",
  	NULL},
 {"alpha_env", (getter)Solarfield_get_alpha_env,(setter)Solarfield_set_alpha_env,
-	"(boiler, SH) Envelope absorptance (4: # field fracs) [none], matrix.\n Required if: *.",
+	"(boiler, SH) Envelope absorptance (4: # field fracs) [none], matrix.\n Required.",
  	NULL},
 {"b_OpticalTable", (getter)Solarfield_get_b_OpticalTable,(setter)Solarfield_set_b_OpticalTable,
-	"Values of the optical efficiency table [none], matrix.\n Required if: *.",
+	"Values of the optical efficiency table [none], matrix.\n Required.",
  	NULL},
 {"b_eps_HCE1", (getter)Solarfield_get_b_eps_HCE1,(setter)Solarfield_set_b_eps_HCE1,
-	"(temperature) Absorber emittance (eps) [none], matrix.\n Required if: *.",
+	"(temperature) Absorber emittance (eps) [none], matrix.\n Required.",
  	NULL},
 {"b_eps_HCE2", (getter)Solarfield_get_b_eps_HCE2,(setter)Solarfield_set_b_eps_HCE2,
-	"(temperature) Absorber emittance (eps) [none], matrix.\n Required if: *.",
+	"(temperature) Absorber emittance (eps) [none], matrix.\n Required.",
  	NULL},
 {"b_eps_HCE3", (getter)Solarfield_get_b_eps_HCE3,(setter)Solarfield_set_b_eps_HCE3,
-	"(temperature) Absorber emittance (eps) [none], matrix.\n Required if: *.",
+	"(temperature) Absorber emittance (eps) [none], matrix.\n Required.",
  	NULL},
 {"b_eps_HCE4", (getter)Solarfield_get_b_eps_HCE4,(setter)Solarfield_set_b_eps_HCE4,
-	"(temperature) Absorber emittance (eps) [none], matrix.\n Required if: *.",
+	"(temperature) Absorber emittance (eps) [none], matrix.\n Required.",
  	NULL},
 {"dirt_mirror", (getter)Solarfield_get_dirt_mirror,(setter)Solarfield_set_dirt_mirror,
-	"(boiler, SH) User-defined dirt on mirror derate [none], matrix.\n Required if: *.",
+	"(boiler, SH) User-defined dirt on mirror derate [none], matrix.\n Required.",
  	NULL},
 {"e_startup", (getter)Solarfield_get_e_startup,(setter)Solarfield_set_e_startup,
-	"Thermal inertia contribution per sq meter of solar field [kJ/K-m2], number.\n Required if: *.",
+	"Thermal inertia contribution per sq meter of solar field [kJ/K-m2], number.\n Required.",
  	NULL},
 {"error", (getter)Solarfield_get_error,(setter)Solarfield_set_error,
-	"(boiler, SH) User-defined general optical error derate [none], matrix.\n Required if: *.",
+	"(boiler, SH) User-defined general optical error derate [none], matrix.\n Required.",
  	NULL},
 {"eta_pump", (getter)Solarfield_get_eta_pump,(setter)Solarfield_set_eta_pump,
-	"Feedwater pump efficiency [none], number.\n Required if: *.",
+	"Feedwater pump efficiency [none], number.\n Required.",
  	NULL},
 {"fP_hdr_c", (getter)Solarfield_get_fP_hdr_c,(setter)Solarfield_set_fP_hdr_c,
-	"Average design-point cold header pressure drop fraction [none], number.\n Required if: *.",
+	"Average design-point cold header pressure drop fraction [none], number.\n Required.",
  	NULL},
 {"fP_hdr_h", (getter)Solarfield_get_fP_hdr_h,(setter)Solarfield_set_fP_hdr_h,
-	"Average design-point hot header pressure drop fraction [none], number.\n Required if: *.",
+	"Average design-point hot header pressure drop fraction [none], number.\n Required.",
  	NULL},
 {"fP_sf_boil", (getter)Solarfield_get_fP_sf_boil,(setter)Solarfield_set_fP_sf_boil,
-	"Design-point pressure drop across the solar field boiler fraction [none], number.\n Required if: *.",
+	"Design-point pressure drop across the solar field boiler fraction [none], number.\n Required.",
  	NULL},
 {"nLoops", (getter)Solarfield_get_nLoops,(setter)Solarfield_set_nLoops,
-	"Number of loops [none], number.\n Required if: *.",
+	"Number of loops [none], number.\n Required.",
  	NULL},
 {"nModBoil", (getter)Solarfield_get_nModBoil,(setter)Solarfield_set_nModBoil,
-	"Number of modules in the boiler section [none], number.\n Constraints: INTEGER; Required if: *.",
+	"Number of modules in the boiler section [none], number.\n Constraints: INTEGER; Required.",
  	NULL},
 {"q_pb_des", (getter)Solarfield_get_q_pb_des,(setter)Solarfield_set_q_pb_des,
-	"Design heat input to the power block [MW], number.\n Required if: *.",
+	"Design heat input to the power block [MW], number.\n Required.",
  	NULL},
 {"rho_mirror_clean", (getter)Solarfield_get_rho_mirror_clean,(setter)Solarfield_set_rho_mirror_clean,
-	"(boiler, SH) User-defined clean mirror reflectivity [none], matrix.\n Required if: *.",
+	"(boiler, SH) User-defined clean mirror reflectivity [none], matrix.\n Required.",
  	NULL},
 {"sh_OpticalTable", (getter)Solarfield_get_sh_OpticalTable,(setter)Solarfield_set_sh_OpticalTable,
-	"Values of the optical efficiency table [none], matrix.\n Required if: *.",
+	"Values of the optical efficiency table [none], matrix.\n Required.",
  	NULL},
 {"sh_eps_HCE1", (getter)Solarfield_get_sh_eps_HCE1,(setter)Solarfield_set_sh_eps_HCE1,
-	"(temperature) Absorber emittance (eps) [none], matrix.\n Required if: *.",
+	"(temperature) Absorber emittance (eps) [none], matrix.\n Required.",
  	NULL},
 {"sh_eps_HCE2", (getter)Solarfield_get_sh_eps_HCE2,(setter)Solarfield_set_sh_eps_HCE2,
-	"(temperature) Absorber emittance (eps) [none], matrix.\n Required if: *.",
+	"(temperature) Absorber emittance (eps) [none], matrix.\n Required.",
  	NULL},
 {"sh_eps_HCE3", (getter)Solarfield_get_sh_eps_HCE3,(setter)Solarfield_set_sh_eps_HCE3,
-	"(temperature) Absorber emittance (eps) [none], matrix.\n Required if: *.",
+	"(temperature) Absorber emittance (eps) [none], matrix.\n Required.",
  	NULL},
 {"sh_eps_HCE4", (getter)Solarfield_get_sh_eps_HCE4,(setter)Solarfield_set_sh_eps_HCE4,
-	"(temperature) Absorber emittance (eps) [none], matrix.\n Required if: *.",
+	"(temperature) Absorber emittance (eps) [none], matrix.\n Required.",
  	NULL},
 {"theta_dep", (getter)Solarfield_get_theta_dep,(setter)Solarfield_set_theta_dep,
-	"deploy angle [deg], number.\n Required if: *.",
+	"deploy angle [deg], number.\n Required.",
  	NULL},
 {"theta_stow", (getter)Solarfield_get_theta_stow,(setter)Solarfield_set_theta_stow,
-	"stow angle [deg], number.\n Required if: *.",
+	"stow angle [deg], number.\n Required.",
  	NULL},
 {"x_b_des", (getter)Solarfield_get_x_b_des,(setter)Solarfield_set_x_b_des,
-	"Design point boiler outlet steam quality [none], number.\n Required if: *.",
+	"Design point boiler outlet steam quality [none], number.\n Required.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1236,10 +1236,10 @@ Powerblock_set_T_hot(PowerblockObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef Powerblock_getset[] = {
 {"T_cold_ref", (getter)Powerblock_get_T_cold_ref,(setter)Powerblock_set_T_cold_ref,
-	"Reference HTF outlet temperature at design [C], number.\n Required if: *.",
+	"Reference HTF outlet temperature at design [C], number.\n Required.",
  	NULL},
 {"T_hot", (getter)Powerblock_get_T_hot,(setter)Powerblock_set_T_hot,
-	"Hot HTF inlet temperature, from storage tank [C], number.\n Required if: *.",
+	"Hot HTF inlet temperature, from storage tank [C], number.\n Required.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1374,10 +1374,10 @@ Heliostat_set_csp_lf_sf_water_per_wash(HeliostatObject *self, PyObject *value, v
 
 static PyGetSetDef Heliostat_getset[] = {
 {"csp_lf_sf_washes_per_year", (getter)Heliostat_get_csp_lf_sf_washes_per_year,(setter)Heliostat_set_csp_lf_sf_washes_per_year,
-	"Mirror washing frequency [-/year], number.\n Required if: *.",
+	"Mirror washing frequency [-/year], number.\n Required.",
  	NULL},
 {"csp_lf_sf_water_per_wash", (getter)Heliostat_get_csp_lf_sf_water_per_wash,(setter)Heliostat_set_csp_lf_sf_water_per_wash,
-	"Water usage per wash [L/m2_aper], number.\n Required if: *.",
+	"Water usage per wash [L/m2_aper], number.\n Required.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1500,7 +1500,7 @@ HeatSink_set_heat_sink_dP_frac(HeatSinkObject *self, PyObject *value, void *clos
 
 static PyGetSetDef HeatSink_getset[] = {
 {"heat_sink_dP_frac", (getter)HeatSink_get_heat_sink_dP_frac,(setter)HeatSink_set_heat_sink_dP_frac,
-	"Fractional pressure drop through heat sink [], number.\n Required if: *.",
+	"Fractional pressure drop through heat sink, number.\n Required.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1923,7 +1923,7 @@ static PyGetSetDef Outputs_getset[] = {
 	"Resource Beam normal irradiance [W/m2], array.",
  	NULL},
 {"defocus", (getter)Outputs_get_defocus,(setter)0,
-	"Field collector focus fraction [], array.",
+	"Field collector focus fraction, array.",
  	NULL},
 {"deltaP_field", (getter)Outputs_get_deltaP_field,(setter)0,
 	"Field pressure drop [bar], array.",
@@ -1938,7 +1938,7 @@ static PyGetSetDef Outputs_getset[] = {
 	"System power generated [kW], array.",
  	NULL},
 {"hour_day", (getter)Outputs_get_hour_day,(setter)0,
-	"Resource Hour of Day [], array.",
+	"Resource Hour of Day, array.",
  	NULL},
 {"m_dot_field", (getter)Outputs_get_m_dot_field,(setter)0,
 	"Field total mass flow rate [kg/s], array.",
@@ -1947,16 +1947,16 @@ static PyGetSetDef Outputs_getset[] = {
 	"Receiver mass flow rate [kg/s], array.",
  	NULL},
 {"month", (getter)Outputs_get_month,(setter)0,
-	"Resource Month [], array.",
+	"Resource Month, array.",
  	NULL},
 {"op_mode_1", (getter)Outputs_get_op_mode_1,(setter)0,
-	"1st operating mode [], array.",
+	"1st operating mode, array.",
  	NULL},
 {"op_mode_2", (getter)Outputs_get_op_mode_2,(setter)0,
-	"2nd op. mode, if applicable [], array.",
+	"2nd op. mode, if applicable, array.",
  	NULL},
 {"op_mode_3", (getter)Outputs_get_op_mode_3,(setter)0,
-	"3rd op. mode, if applicable [], array.",
+	"3rd op. mode, if applicable, array.",
  	NULL},
 {"pres", (getter)Outputs_get_pres,(setter)0,
 	"Resource Pressure [mbar], array.",
@@ -2010,10 +2010,10 @@ static PyGetSetDef Outputs_getset[] = {
 	"Resource Wind Speed [m/s], array.",
  	NULL},
 {"x_field_hot_out", (getter)Outputs_get_x_field_hot_out,(setter)0,
-	"Field timestep-averaged outlet quality [], array.",
+	"Field timestep-averaged outlet quality, array.",
  	NULL},
 {"x_rec_hot_out", (getter)Outputs_get_x_rec_hot_out,(setter)0,
-	"Loop timestep-averaged outlet quality [], array.",
+	"Loop timestep-averaged outlet quality, array.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -2086,31 +2086,27 @@ newLinearFresnelDsgIphObject(void* data_ptr)
 
 	PySAM_TECH_ATTR("LinearFresnelDsgIph", SAM_LinearFresnelDsgIph_construct)
 
-PyObject* Weather_obj = Weather_new(self->data_ptr);
+	PyObject* Weather_obj = Weather_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Weather", Weather_obj);
 	Py_DECREF(Weather_obj);
 
-PyObject* Solarfield_obj = Solarfield_new(self->data_ptr);
+	PyObject* Solarfield_obj = Solarfield_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Solarfield", Solarfield_obj);
 	Py_DECREF(Solarfield_obj);
 
-PyObject* Powerblock_obj = Powerblock_new(self->data_ptr);
+	PyObject* Powerblock_obj = Powerblock_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Powerblock", Powerblock_obj);
 	Py_DECREF(Powerblock_obj);
 
-PyObject* Heliostat_obj = Heliostat_new(self->data_ptr);
+	PyObject* Heliostat_obj = Heliostat_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Heliostat", Heliostat_obj);
 	Py_DECREF(Heliostat_obj);
 
-PyObject* HeatSink_obj = HeatSink_new(self->data_ptr);
+	PyObject* HeatSink_obj = HeatSink_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "HeatSink", HeatSink_obj);
 	Py_DECREF(HeatSink_obj);
 
-PyObject* Outputs_obj = Outputs_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
-	Py_DECREF(Outputs_obj);
-
-PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
+	PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
 
 	PyObject* data_cap = PyCapsule_New(self->data_ptr, NULL, NULL);
 	PyObject* Adjust_obj = PyObject_CallMethod(AdjustmentFactorsModule, "new", "(O)", data_cap);
@@ -2124,6 +2120,11 @@ PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
 
 	PyDict_SetItemString(attr_dict, "AdjustmentFactors", Adjust_obj);
 	Py_DECREF(Adjust_obj);
+
+	PyObject* Outputs_obj = Outputs_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
+	Py_DECREF(Outputs_obj);
+
 
 	return self;
 }
@@ -2280,8 +2281,8 @@ static PyObject *
 LinearFresnelDsgIph_default(PyObject *self, PyObject *args)
 {
 	LinearFresnelDsgIphObject *rv;
-	char* fin = 0;
-	if (!PyArg_ParseTuple(args, "s:default", &fin)){
+	char* def = 0;
+	if (!PyArg_ParseTuple(args, "s:default", &def)){
 		PyErr_BadArgument();
 		return NULL;
 	}
@@ -2289,7 +2290,7 @@ LinearFresnelDsgIph_default(PyObject *self, PyObject *args)
 	if (rv == NULL)
 		return NULL;
 
-	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "LinearFresnelDsgIph", fin);
+	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "LinearFresnelDsgIph", def);
 
 	return (PyObject *)rv;
 }
@@ -2304,14 +2305,14 @@ static PyMethodDef LinearFresnelDsgIphModule_methods[] = {
 				PyDoc_STR("new() -> new LinearFresnelDsgIph object")},
 		{"default",             LinearFresnelDsgIph_default,         METH_VARARGS,
 				PyDoc_STR("default(financial) -> new LinearFresnelDsgIph object with financial model-specific default attributes\n"
-				"Options: None, LCOH Calculator, ")},
+				"Options: None, IphToLcoefcr")},
 		{"wrap",             LinearFresnelDsgIph_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> new LinearFresnelDsgIph object around existing PySSC data")},
+				PyDoc_STR("wrap(ssc_data_t) -> new LinearFresnelDsgIph object around existing PySSC data, taking over memory ownership")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 PyDoc_STRVAR(module_doc,
-			 "Refer to http://www.github.com/nrel/PySAM for source code.");
+			 "Linear Fresnel model with steam heat transfer fluid for industrial process heat applications");
 
 
 static int
@@ -2319,6 +2320,9 @@ LinearFresnelDsgIphModule_exec(PyObject *m)
 {
 	/* Finalize the type object including setting type of the new type
 	 * object; doing it here is required for portability, too. */
+
+	if (PySAM_load_lib(m) < 0) goto fail;
+	if (PySAM_init_error(m) < 0) goto fail;
 
 	LinearFresnelDsgIph_Type.tp_dict = PyDict_New();
 	if (!LinearFresnelDsgIph_Type.tp_dict) { goto fail; }
@@ -2389,9 +2393,6 @@ LinearFresnelDsgIphModule_exec(PyObject *m)
 	PyModule_AddObject(m,
 				"LinearFresnelDsgIph",
 				(PyObject*)&LinearFresnelDsgIph_Type);
-
-	if (PySAM_load_lib(m) < 0) goto fail;
-	if (PySAM_init_error() < 0) goto fail;
 
 	return 0;
 	fail:

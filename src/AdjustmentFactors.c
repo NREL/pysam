@@ -275,7 +275,7 @@ AdjustmentFactorsModule_exec(PyObject *m)
                        (PyObject*)&AdjustmentFactors_Type);
 
 	if (PySAM_load_lib(m) < 0) goto fail;
-	if (PySAM_init_error() < 0) goto fail;
+	if (PySAM_init_error(m) < 0) goto fail;
 
     return 0;
     fail:

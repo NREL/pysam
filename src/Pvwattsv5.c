@@ -90,10 +90,10 @@ LocationAndResource_set_solar_resource_file(LocationAndResourceObject *self, PyO
 
 static PyGetSetDef LocationAndResource_getset[] = {
 {"solar_resource_data", (getter)LocationAndResource_get_solar_resource_data,(setter)LocationAndResource_set_solar_resource_data,
-	"Weather data [], table.\n dn,df,tdry,wspd,lat,lon,tz; Required if: ?.",
+	"Weather data, table.\n dn,df,tdry,wspd,lat,lon,tz; Required if ?.",
  	NULL},
 {"solar_resource_file", (getter)LocationAndResource_get_solar_resource_file,(setter)LocationAndResource_set_solar_resource_file,
-	"Weather file path [], string.\n Required if: ?.",
+	"Weather file path, string.\n Required if ?.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -372,46 +372,46 @@ SystemDesign_set_tilt(SystemDesignObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef SystemDesign_getset[] = {
 {"array_type", (getter)SystemDesign_get_array_type,(setter)SystemDesign_set_array_type,
-	"Array type [0/1/2/3/4], number.\n Fixed OR,Fixed Roof,1Axis,Backtracked,2Axis; Constraints: MIN=0,MAX=4,INTEGER; Required if: *.",
+	"Array type [0/1/2/3/4], number.\n Fixed OR,Fixed Roof,1Axis,Backtracked,2Axis; Constraints: MIN=0,MAX=4,INTEGER; Required.",
  	NULL},
 {"azimuth", (getter)SystemDesign_get_azimuth,(setter)SystemDesign_set_azimuth,
-	"Azimuth angle [deg], number.\n E=90,S=180,W=270; Constraints: MIN=0,MAX=360; Required if: array_type<4.",
+	"Azimuth angle [deg], number.\n E=90,S=180,W=270; Constraints: MIN=0,MAX=360; Required if array_type<4.",
  	NULL},
 {"batt_simple_enable", (getter)SystemDesign_get_batt_simple_enable,(setter)SystemDesign_set_batt_simple_enable,
-	"Enable Battery [0/1], number.\n Constraints: BOOLEAN; Required if: ?=0.",
+	"Enable Battery [0/1], number.\n Constraints: BOOLEAN; 0 if not set.",
  	NULL},
 {"dc_ac_ratio", (getter)SystemDesign_get_dc_ac_ratio,(setter)SystemDesign_set_dc_ac_ratio,
-	"DC to AC ratio [ratio], number.\n Constraints: POSITIVE; Required if: ?=1.1.",
+	"DC to AC ratio [ratio], number.\n Constraints: POSITIVE; Required if ?=1.1.",
  	NULL},
 {"gcr", (getter)SystemDesign_get_gcr,(setter)SystemDesign_set_gcr,
-	"Ground coverage ratio [0..1], number.\n Constraints: MIN=0,MAX=3; Required if: ?=0.4.",
+	"Ground coverage ratio [0..1], number.\n Constraints: MIN=0,MAX=3; Required if ?=0.4.",
  	NULL},
 {"inv_eff", (getter)SystemDesign_get_inv_eff,(setter)SystemDesign_set_inv_eff,
-	"Inverter efficiency at rated power [%], number.\n Constraints: MIN=90,MAX=99.5; Required if: ?=96.",
+	"Inverter efficiency at rated power [%], number.\n Constraints: MIN=90,MAX=99.5; Required if ?=96.",
  	NULL},
 {"losses", (getter)SystemDesign_get_losses,(setter)SystemDesign_set_losses,
-	"System losses [%], number.\n Total system losses; Constraints: MIN=-5,MAX=99; Required if: *.",
+	"System losses [%], number.\n Total system losses; Constraints: MIN=-5,MAX=99; Required.",
  	NULL},
 {"module_type", (getter)SystemDesign_get_module_type,(setter)SystemDesign_set_module_type,
-	"Module type [0/1/2], number.\n Standard,Premium,Thin film; Constraints: MIN=0,MAX=2,INTEGER; Required if: ?=0.",
+	"Module type [0/1/2], number.\n Standard,Premium,Thin film; Constraints: MIN=0,MAX=2,INTEGER; 0 if not set.",
  	NULL},
 {"shading_azal", (getter)SystemDesign_get_shading_azal,(setter)SystemDesign_set_shading_azal,
-	"Azimuth x altitude beam shading loss [%], matrix.\n Required if: ?.",
+	"Azimuth x altitude beam shading loss [%], matrix.\n Required if ?.",
  	NULL},
 {"shading_diff", (getter)SystemDesign_get_shading_diff,(setter)SystemDesign_set_shading_diff,
-	"Diffuse shading loss [%], number.\n Required if: ?.",
+	"Diffuse shading loss [%], number.\n Required if ?.",
  	NULL},
 {"shading_mxh", (getter)SystemDesign_get_shading_mxh,(setter)SystemDesign_set_shading_mxh,
-	"Month x Hour beam shading loss [%], matrix.\n Required if: ?.",
+	"Month x Hour beam shading loss [%], matrix.\n Required if ?.",
  	NULL},
 {"shading_timestep", (getter)SystemDesign_get_shading_timestep,(setter)SystemDesign_set_shading_timestep,
-	"Time step beam shading loss [%], matrix.\n Required if: ?.",
+	"Time step beam shading loss [%], matrix.\n Required if ?.",
  	NULL},
 {"system_capacity", (getter)SystemDesign_get_system_capacity,(setter)SystemDesign_set_system_capacity,
-	"System size (DC nameplate) [kW], number.\n Required if: *.",
+	"System size (DC nameplate) [kW], number.\n Required.",
  	NULL},
 {"tilt", (getter)SystemDesign_get_tilt,(setter)SystemDesign_set_tilt,
-	"Tilt angle [deg], number.\n H=0,V=90; Constraints: MIN=0,MAX=90; Required if: array_type<4.",
+	"Tilt angle [deg], number.\n H=0,V=90; Constraints: MIN=0,MAX=90; Required if array_type<4.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -744,7 +744,7 @@ static PyGetSetDef Outputs_getset[] = {
 	"Capacity factor [%], number.",
  	NULL},
 {"city", (getter)Outputs_get_city,(setter)0,
-	"City [], string.",
+	"City, string.",
  	NULL},
 {"dc", (getter)Outputs_get_dc,(setter)0,
 	"DC array power [W], array.",
@@ -768,16 +768,16 @@ static PyGetSetDef Outputs_getset[] = {
 	"Inverter efficiency at rated power [%], number.",
  	NULL},
 {"inverter_model", (getter)Outputs_get_inverter_model,(setter)0,
-	"Inverter model specifier [], number.",
+	"Inverter model specifier, number.",
  	NULL},
 {"kwh_per_kw", (getter)Outputs_get_kwh_per_kw,(setter)0,
-	"First year kWh/kW [], number.",
+	"First year kWh/kW, number.",
  	NULL},
 {"lat", (getter)Outputs_get_lat,(setter)0,
 	"Latitude [deg], number.",
  	NULL},
 {"location", (getter)Outputs_get_location,(setter)0,
-	"Location ID [], string.",
+	"Location ID, string.",
  	NULL},
 {"lon", (getter)Outputs_get_lon,(setter)0,
 	"Longitude [deg], number.",
@@ -792,7 +792,7 @@ static PyGetSetDef Outputs_getset[] = {
 	"Plane of array irradiance [kWh/m2], array.",
  	NULL},
 {"shad_beam_factor", (getter)Outputs_get_shad_beam_factor,(setter)0,
-	"Shading factor for beam radiation [], array.",
+	"Shading factor for beam radiation, array.",
  	NULL},
 {"solrad_annual", (getter)Outputs_get_solrad_annual,(setter)0,
 	"Daily average solar irradiance [kWh/m2/day], number.",
@@ -801,7 +801,7 @@ static PyGetSetDef Outputs_getset[] = {
 	"Daily average solar irradiance [kWh/m2/day], array.",
  	NULL},
 {"state", (getter)Outputs_get_state,(setter)0,
-	"State [], string.",
+	"State, string.",
  	NULL},
 {"sunup", (getter)Outputs_get_sunup,(setter)0,
 	"Sun up over horizon [0/1], array.",
@@ -898,19 +898,15 @@ newPvwattsv5Object(void* data_ptr)
 
 	PySAM_TECH_ATTR("Pvwattsv5", SAM_Pvwattsv5_construct)
 
-PyObject* LocationAndResource_obj = LocationAndResource_new(self->data_ptr);
+	PyObject* LocationAndResource_obj = LocationAndResource_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "LocationAndResource", LocationAndResource_obj);
 	Py_DECREF(LocationAndResource_obj);
 
-PyObject* SystemDesign_obj = SystemDesign_new(self->data_ptr);
+	PyObject* SystemDesign_obj = SystemDesign_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "SystemDesign", SystemDesign_obj);
 	Py_DECREF(SystemDesign_obj);
 
-PyObject* Outputs_obj = Outputs_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
-	Py_DECREF(Outputs_obj);
-
-PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
+	PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
 
 	PyObject* data_cap = PyCapsule_New(self->data_ptr, NULL, NULL);
 	PyObject* Adjust_obj = PyObject_CallMethod(AdjustmentFactorsModule, "new", "(O)", data_cap);
@@ -924,6 +920,11 @@ PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
 
 	PyDict_SetItemString(attr_dict, "AdjustmentFactors", Adjust_obj);
 	Py_DECREF(Adjust_obj);
+
+	PyObject* Outputs_obj = Outputs_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
+	Py_DECREF(Outputs_obj);
+
 
 	return self;
 }
@@ -1080,8 +1081,8 @@ static PyObject *
 Pvwattsv5_default(PyObject *self, PyObject *args)
 {
 	Pvwattsv5Object *rv;
-	char* fin = 0;
-	if (!PyArg_ParseTuple(args, "s:default", &fin)){
+	char* def = 0;
+	if (!PyArg_ParseTuple(args, "s:default", &def)){
 		PyErr_BadArgument();
 		return NULL;
 	}
@@ -1089,7 +1090,7 @@ Pvwattsv5_default(PyObject *self, PyObject *args)
 	if (rv == NULL)
 		return NULL;
 
-	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Pvwattsv5", fin);
+	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Pvwattsv5", def);
 
 	return (PyObject *)rv;
 }
@@ -1104,14 +1105,14 @@ static PyMethodDef Pvwattsv5Module_methods[] = {
 				PyDoc_STR("new() -> new Pvwattsv5 object")},
 		{"default",             Pvwattsv5_default,         METH_VARARGS,
 				PyDoc_STR("default(financial) -> new Pvwattsv5 object with financial model-specific default attributes\n"
-				"Options: Single Owner, None, Sale Leaseback, Commercial, Residential, Third Party, Commercial PPA, Host Developer, Leveraged Partnership Flip, Independent Power Producer, All Equity Partnership Flip, LCOE Calculator, ")},
+				"Options: Singleowner, None, Saleleaseback, Commercial, Residential, Thirdpartyownership, , HostDeveloper, Levpartflip, , Equpartflip, Lcoefcr")},
 		{"wrap",             Pvwattsv5_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> new Pvwattsv5 object around existing PySSC data")},
+				PyDoc_STR("wrap(ssc_data_t) -> new Pvwattsv5 object around existing PySSC data, taking over memory ownership")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 PyDoc_STRVAR(module_doc,
-			 "Refer to http://www.github.com/nrel/PySAM for source code.");
+			 "PVWatts photovoltaic system model with simple inputs");
 
 
 static int
@@ -1119,6 +1120,9 @@ Pvwattsv5Module_exec(PyObject *m)
 {
 	/* Finalize the type object including setting type of the new type
 	 * object; doing it here is required for portability, too. */
+
+	if (PySAM_load_lib(m) < 0) goto fail;
+	if (PySAM_init_error(m) < 0) goto fail;
 
 	Pvwattsv5_Type.tp_dict = PyDict_New();
 	if (!Pvwattsv5_Type.tp_dict) { goto fail; }
@@ -1168,9 +1172,6 @@ Pvwattsv5Module_exec(PyObject *m)
 	PyModule_AddObject(m,
 				"Pvwattsv5",
 				(PyObject*)&Pvwattsv5_Type);
-
-	if (PySAM_load_lib(m) < 0) goto fail;
-	if (PySAM_init_error() < 0) goto fail;
 
 	return 0;
 	fail:

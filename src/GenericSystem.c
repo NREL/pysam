@@ -150,25 +150,25 @@ Plant_set_user_capacity_factor(PlantObject *self, PyObject *value, void *closure
 
 static PyGetSetDef Plant_getset[] = {
 {"conv_eff", (getter)Plant_get_conv_eff,(setter)Plant_set_conv_eff,
-	"Conversion Efficiency [%], number.\n Required if: *.",
+	"Conversion Efficiency [%], number.\n Required.",
  	NULL},
 {"derate", (getter)Plant_get_derate,(setter)Plant_set_derate,
-	"Derate [%], number.\n Required if: *.",
+	"Derate [%], number.\n Required.",
  	NULL},
 {"energy_output_array", (getter)Plant_get_energy_output_array,(setter)Plant_set_energy_output_array,
-	"Array of Energy Output Profile [kW], array.\n Required if: *.",
+	"Array of Energy Output Profile [kW], array.\n Required if spec_mode=1.",
  	NULL},
 {"heat_rate", (getter)Plant_get_heat_rate,(setter)Plant_set_heat_rate,
-	"Heat Rate [MMBTUs/MWhe], number.\n Required if: *.",
+	"Heat Rate [MMBTUs/MWhe], number.\n Required.",
  	NULL},
 {"spec_mode", (getter)Plant_get_spec_mode,(setter)Plant_set_spec_mode,
-	"Spec mode: 0=constant CF,1=profile [], number.\n Required if: *.",
+	"Spec mode: 0=constant CF,1=profile, number.\n Required.",
  	NULL},
 {"system_capacity", (getter)Plant_get_system_capacity,(setter)Plant_set_system_capacity,
-	"Nameplace Capcity [kW], number.\n Required if: *.",
+	"Nameplace Capcity [kW], number.\n Required.",
  	NULL},
 {"user_capacity_factor", (getter)Plant_get_user_capacity_factor,(setter)Plant_set_user_capacity_factor,
-	"Capacity Factor [%], number.\n Required if: *.",
+	"Capacity Factor [%], number.\n Required.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -315,13 +315,13 @@ Lifetime_set_system_use_lifetime_output(LifetimeObject *self, PyObject *value, v
 
 static PyGetSetDef Lifetime_getset[] = {
 {"analysis_period", (getter)Lifetime_get_analysis_period,(setter)Lifetime_set_analysis_period,
-	"Lifetime analysis period [years], number.\n Required if: system_use_lifetime_output=1.",
+	"Lifetime analysis period [years], number.\n Required if system_use_lifetime_output=1.",
  	NULL},
 {"generic_degradation", (getter)Lifetime_get_generic_degradation,(setter)Lifetime_set_generic_degradation,
-	"Annual module degradation [%/year], array.\n Required if: system_use_lifetime_output=1.",
+	"Annual module degradation [%/year], array.\n Required if system_use_lifetime_output=1.",
  	NULL},
 {"system_use_lifetime_output", (getter)Lifetime_get_system_use_lifetime_output,(setter)Lifetime_set_system_use_lifetime_output,
-	"Generic lifetime simulation [0/1], number.\n Constraints: INTEGER,MIN=0,MAX=1; Required if: ?=0.",
+	"Generic lifetime simulation [0/1], number.\n Constraints: INTEGER,MIN=0,MAX=1; 0 if not set.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -501,7 +501,7 @@ static PyGetSetDef Outputs_getset[] = {
 	"Heat Rate Conversion Factor [MMBTUs/MWhe], number.",
  	NULL},
 {"water_usage", (getter)Outputs_get_water_usage,(setter)0,
-	"Annual Water Usage [], number.",
+	"Annual Water Usage, number.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -574,19 +574,15 @@ newGenericSystemObject(void* data_ptr)
 
 	PySAM_TECH_ATTR("GenericSystem", SAM_GenericSystem_construct)
 
-PyObject* Plant_obj = Plant_new(self->data_ptr);
+	PyObject* Plant_obj = Plant_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Plant", Plant_obj);
 	Py_DECREF(Plant_obj);
 
-PyObject* Lifetime_obj = Lifetime_new(self->data_ptr);
+	PyObject* Lifetime_obj = Lifetime_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Lifetime", Lifetime_obj);
 	Py_DECREF(Lifetime_obj);
 
-PyObject* Outputs_obj = Outputs_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
-	Py_DECREF(Outputs_obj);
-
-PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
+	PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
 
 	PyObject* data_cap = PyCapsule_New(self->data_ptr, NULL, NULL);
 	PyObject* Adjust_obj = PyObject_CallMethod(AdjustmentFactorsModule, "new", "(O)", data_cap);
@@ -600,6 +596,11 @@ PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
 
 	PyDict_SetItemString(attr_dict, "AdjustmentFactors", Adjust_obj);
 	Py_DECREF(Adjust_obj);
+
+	PyObject* Outputs_obj = Outputs_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
+	Py_DECREF(Outputs_obj);
+
 
 	return self;
 }
@@ -756,8 +757,8 @@ static PyObject *
 GenericSystem_default(PyObject *self, PyObject *args)
 {
 	GenericSystemObject *rv;
-	char* fin = 0;
-	if (!PyArg_ParseTuple(args, "s:default", &fin)){
+	char* def = 0;
+	if (!PyArg_ParseTuple(args, "s:default", &def)){
 		PyErr_BadArgument();
 		return NULL;
 	}
@@ -765,7 +766,7 @@ GenericSystem_default(PyObject *self, PyObject *args)
 	if (rv == NULL)
 		return NULL;
 
-	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "GenericSystem", fin);
+	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "GenericSystem", def);
 
 	return (PyObject *)rv;
 }
@@ -780,14 +781,14 @@ static PyMethodDef GenericSystemModule_methods[] = {
 				PyDoc_STR("new() -> new GenericSystem object")},
 		{"default",             GenericSystem_default,         METH_VARARGS,
 				PyDoc_STR("default(financial) -> new GenericSystem object with financial model-specific default attributes\n"
-				"Options: All Equity Partnership Flip, None, LCOE Calculator, Independent Power Producer, Commercial, Third Party, Residential, Leveraged Partnership Flip, Single Owner, Sale Leaseback, Commercial PPA, Host Developer, ")},
+				"Options: Equpartflip, None, Lcoefcr, , Commercial, Thirdpartyownership, Residential, Levpartflip, Singleowner, Saleleaseback, , HostDeveloper")},
 		{"wrap",             GenericSystem_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> new GenericSystem object around existing PySSC data")},
+				PyDoc_STR("wrap(ssc_data_t) -> new GenericSystem object around existing PySSC data, taking over memory ownership")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 PyDoc_STRVAR(module_doc,
-			 "Refer to http://www.github.com/nrel/PySAM for source code.");
+			 "Basic power system model using either capacity, capacity factor, and heat rate, or an hourly power generation profile as input");
 
 
 static int
@@ -795,6 +796,9 @@ GenericSystemModule_exec(PyObject *m)
 {
 	/* Finalize the type object including setting type of the new type
 	 * object; doing it here is required for portability, too. */
+
+	if (PySAM_load_lib(m) < 0) goto fail;
+	if (PySAM_init_error(m) < 0) goto fail;
 
 	GenericSystem_Type.tp_dict = PyDict_New();
 	if (!GenericSystem_Type.tp_dict) { goto fail; }
@@ -844,9 +848,6 @@ GenericSystemModule_exec(PyObject *m)
 	PyModule_AddObject(m,
 				"GenericSystem",
 				(PyObject*)&GenericSystem_Type);
-
-	if (PySAM_load_lib(m) < 0) goto fail;
-	if (PySAM_init_error() < 0) goto fail;
 
 	return 0;
 	fail:

@@ -114,16 +114,16 @@ Weather_set_track_mode(WeatherObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef Weather_getset[] = {
 {"azimuth", (getter)Weather_get_azimuth,(setter)Weather_set_azimuth,
-	"Azimuth angle of surface/axis [], number.\n Required if: *.",
+	"Azimuth angle of surface/axis, number.\n Required.",
  	NULL},
 {"file_name", (getter)Weather_get_file_name,(setter)Weather_set_file_name,
-	"local weather file path [], string.\n Constraints: LOCAL_FILE; Required if: *.",
+	"local weather file path, string.\n Constraints: LOCAL_FILE; Required.",
  	NULL},
 {"tilt", (getter)Weather_get_tilt,(setter)Weather_set_tilt,
-	"Tilt angle of surface/axis [], number.\n Required if: *.",
+	"Tilt angle of surface/axis, number.\n Required.",
  	NULL},
 {"track_mode", (getter)Weather_get_track_mode,(setter)Weather_set_track_mode,
-	"Tracking mode [], number.\n Required if: *.",
+	"Tracking mode, number.\n Required.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -246,7 +246,7 @@ Trough_set_system_capacity(TroughObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef Trough_getset[] = {
 {"system_capacity", (getter)Trough_get_system_capacity,(setter)Trough_set_system_capacity,
-	"Nameplate capacity [kW], number.\n Required if: *.",
+	"Nameplate capacity [kW], number.\n Required.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -381,10 +381,10 @@ TouTranslator_set_weekend_schedule(TouTranslatorObject *self, PyObject *value, v
 
 static PyGetSetDef TouTranslator_getset[] = {
 {"weekday_schedule", (getter)TouTranslator_get_weekday_schedule,(setter)TouTranslator_set_weekday_schedule,
-	"12x24 Time of Use Values for week days [], matrix.\n Required if: *.",
+	"12x24 Time of Use Values for week days, matrix.\n Required.",
  	NULL},
 {"weekend_schedule", (getter)TouTranslator_get_weekend_schedule,(setter)TouTranslator_set_weekend_schedule,
-	"12x24 Time of Use Values for week end days [], matrix.\n Required if: *.",
+	"12x24 Time of Use Values for week end days, matrix.\n Required.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -711,58 +711,58 @@ Solarfield_set_i_SfTi(SolarfieldObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef Solarfield_getset[] = {
 {"DepAngle", (getter)Solarfield_get_DepAngle,(setter)Solarfield_set_DepAngle,
-	"Deployment Angle [deg], number.\n Required if: *.",
+	"Deployment Angle [deg], number.\n Required.",
  	NULL},
 {"Distance_SCA", (getter)Solarfield_get_Distance_SCA,(setter)Solarfield_set_Distance_SCA,
-	"Distance between SCAs in Row [m], number.\n Required if: *.",
+	"Distance between SCAs in Row [m], number.\n Required.",
  	NULL},
 {"HTFFluid", (getter)Solarfield_get_HTFFluid,(setter)Solarfield_set_HTFFluid,
-	"Type of Heat Transfer Fluid used [], number.\n Constraints: INTEGER; Required if: *.",
+	"Type of Heat Transfer Fluid used, number.\n Constraints: INTEGER; Required.",
  	NULL},
 {"HtfGalArea", (getter)Solarfield_get_HtfGalArea,(setter)Solarfield_set_HtfGalArea,
-	"HTF Fluids in Gallons per Field Area [gal/m2], number.\n Required if: *.",
+	"HTF Fluids in Gallons per Field Area [gal/m2], number.\n Required.",
  	NULL},
 {"MinHtfTemp", (getter)Solarfield_get_MinHtfTemp,(setter)Solarfield_set_MinHtfTemp,
-	"Minimum Heat Transfer Fluid Temperature [C], number.\n Required if: *.",
+	"Minimum Heat Transfer Fluid Temperature [C], number.\n Required.",
  	NULL},
 {"NumScas", (getter)Solarfield_get_NumScas,(setter)Solarfield_set_NumScas,
-	"Number of SCAs per Row [], number.\n Required if: *.",
+	"Number of SCAs per Row, number.\n Required.",
  	NULL},
 {"Row_Distance", (getter)Solarfield_get_Row_Distance,(setter)Solarfield_set_Row_Distance,
-	"Distance between Rows of SCAs [m], number.\n Required if: *.",
+	"Distance between Rows of SCAs [m], number.\n Required.",
  	NULL},
 {"SFTempInit", (getter)Solarfield_get_SFTempInit,(setter)Solarfield_set_SFTempInit,
-	"Solar Field Initial Temperature [C], number.\n Required if: *.",
+	"Solar Field Initial Temperature [C], number.\n Required.",
  	NULL},
 {"SfInTempD", (getter)Solarfield_get_SfInTempD,(setter)Solarfield_set_SfInTempD,
-	"Solar Field Design Inlet Temperature [C], number.\n Required if: *.",
+	"Solar Field Design Inlet Temperature [C], number.\n Required.",
  	NULL},
 {"SfOutTempD", (getter)Solarfield_get_SfOutTempD,(setter)Solarfield_set_SfOutTempD,
-	"Solar Field Design Outlet Temperature [C], number.\n Required if: *.",
+	"Solar Field Design Outlet Temperature [C], number.\n Required.",
  	NULL},
 {"SfPipeHl1", (getter)Solarfield_get_SfPipeHl1,(setter)Solarfield_set_SfPipeHl1,
-	"Solar field piping heat loss at reduced temp. - linear term [C^(-1)], number.\n Required if: *.",
+	"Solar field piping heat loss at reduced temp. - linear term [C^(-1)], number.\n Required.",
  	NULL},
 {"SfPipeHl2", (getter)Solarfield_get_SfPipeHl2,(setter)Solarfield_set_SfPipeHl2,
-	"Solar field piping heat loss at reduced temp. - quadratic term [C^(-2)], number.\n Required if: *.",
+	"Solar field piping heat loss at reduced temp. - quadratic term [C^(-2)], number.\n Required.",
  	NULL},
 {"SfPipeHl3", (getter)Solarfield_get_SfPipeHl3,(setter)Solarfield_set_SfPipeHl3,
-	"Solar field piping heat loss at reduced temp. - cubic term [C^(-3)], number.\n Required if: *.",
+	"Solar field piping heat loss at reduced temp. - cubic term [C^(-3)], number.\n Required.",
  	NULL},
 {"SfPipeHl300", (getter)Solarfield_get_SfPipeHl300,(setter)Solarfield_set_SfPipeHl300,
-	"Solar field piping heat loss at design [W/m2], number.\n Required if: *.",
+	"Solar field piping heat loss at design [W/m2], number.\n Required.",
  	NULL},
 {"Solar_Field_Area", (getter)Solarfield_get_Solar_Field_Area,(setter)Solarfield_set_Solar_Field_Area,
-	"Solar Field Area [m2], number.\n Required if: *.",
+	"Solar Field Area [m2], number.\n Required.",
  	NULL},
 {"Solar_Field_Mult", (getter)Solarfield_get_Solar_Field_Mult,(setter)Solarfield_set_Solar_Field_Mult,
-	"Solar Field Multiple [], number.\n Required if: *.",
+	"Solar Field Multiple, number.\n Required.",
  	NULL},
 {"Stow_Angle", (getter)Solarfield_get_Stow_Angle,(setter)Solarfield_set_Stow_Angle,
-	"Night-Time Trough Stow Angle [deg], number.\n Required if: *.",
+	"Night-Time Trough Stow Angle [deg], number.\n Required.",
  	NULL},
 {"i_SfTi", (getter)Solarfield_get_i_SfTi,(setter)Solarfield_set_i_SfTi,
-	"Solar Field HTF inlet Temperature (if -999, calculated) [C], number.\n Required if: *.",
+	"Solar Field HTF inlet Temperature (if -999, calculated) [C], number.\n Required.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1017,40 +1017,40 @@ Sca_set_TrkTwstErr(ScaObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef Sca_getset[] = {
 {"Ave_Focal_Length", (getter)Sca_get_Ave_Focal_Length,(setter)Sca_set_Ave_Focal_Length,
-	"Label [], number.\n Required if: *.",
+	"Label, number.\n Required.",
  	NULL},
 {"ConcFac", (getter)Sca_get_ConcFac,(setter)Sca_set_ConcFac,
-	"Label [], number.\n Required if: *.",
+	"Label, number.\n Required.",
  	NULL},
 {"GeoAcc", (getter)Sca_get_GeoAcc,(setter)Sca_set_GeoAcc,
-	"Label [], number.\n Required if: *.",
+	"Label, number.\n Required.",
  	NULL},
 {"IamF0", (getter)Sca_get_IamF0,(setter)Sca_set_IamF0,
-	"Label [], number.\n Required if: *.",
+	"Label, number.\n Required.",
  	NULL},
 {"IamF1", (getter)Sca_get_IamF1,(setter)Sca_set_IamF1,
-	"Label [], number.\n Required if: *.",
+	"Label, number.\n Required.",
  	NULL},
 {"IamF2", (getter)Sca_get_IamF2,(setter)Sca_set_IamF2,
-	"Label [], number.\n Required if: *.",
+	"Label, number.\n Required.",
  	NULL},
 {"MirCln", (getter)Sca_get_MirCln,(setter)Sca_set_MirCln,
-	"Label [], number.\n Required if: *.",
+	"Label, number.\n Required.",
  	NULL},
 {"MirRef", (getter)Sca_get_MirRef,(setter)Sca_set_MirRef,
-	"Label [], number.\n Required if: *.",
+	"Label, number.\n Required.",
  	NULL},
 {"SCA_aper", (getter)Sca_get_SCA_aper,(setter)Sca_set_SCA_aper,
-	"Label [], number.\n Required if: *.",
+	"Label, number.\n Required.",
  	NULL},
 {"ScaLen", (getter)Sca_get_ScaLen,(setter)Sca_set_ScaLen,
-	"Label [], number.\n Required if: *.",
+	"Label, number.\n Required.",
  	NULL},
 {"SfAvail", (getter)Sca_get_SfAvail,(setter)Sca_set_SfAvail,
-	"Label [], number.\n Required if: *.",
+	"Label, number.\n Required.",
  	NULL},
 {"TrkTwstErr", (getter)Sca_get_TrkTwstErr,(setter)Sca_set_TrkTwstErr,
-	"Label [], number.\n Required if: *.",
+	"Label, number.\n Required.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1365,55 +1365,55 @@ Hce_set_RefMirrAper(HceObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef Hce_getset[] = {
 {"HCEBelShad", (getter)Hce_get_HCEBelShad,(setter)Hce_set_HCEBelShad,
-	"label [], array.\n Required if: *.",
+	"label, array.\n Required.",
  	NULL},
 {"HCEEnvTrans", (getter)Hce_get_HCEEnvTrans,(setter)Hce_set_HCEEnvTrans,
-	"label [], array.\n Required if: *.",
+	"label, array.\n Required.",
  	NULL},
 {"HCEFrac", (getter)Hce_get_HCEFrac,(setter)Hce_set_HCEFrac,
-	"Fraction of field that is this type of HCE [], array.\n Required if: *.",
+	"Fraction of field that is this type of HCE, array.\n Required.",
  	NULL},
 {"HCE_A0", (getter)Hce_get_HCE_A0,(setter)Hce_set_HCE_A0,
-	"label [], array.\n Required if: *.",
+	"label, array.\n Required.",
  	NULL},
 {"HCE_A1", (getter)Hce_get_HCE_A1,(setter)Hce_set_HCE_A1,
-	"label [], array.\n Required if: *.",
+	"label, array.\n Required.",
  	NULL},
 {"HCE_A2", (getter)Hce_get_HCE_A2,(setter)Hce_set_HCE_A2,
-	"label [], array.\n Required if: *.",
+	"label, array.\n Required.",
  	NULL},
 {"HCE_A3", (getter)Hce_get_HCE_A3,(setter)Hce_set_HCE_A3,
-	"label [], array.\n Required if: *.",
+	"label, array.\n Required.",
  	NULL},
 {"HCE_A4", (getter)Hce_get_HCE_A4,(setter)Hce_set_HCE_A4,
-	"label [], array.\n Required if: *.",
+	"label, array.\n Required.",
  	NULL},
 {"HCE_A5", (getter)Hce_get_HCE_A5,(setter)Hce_set_HCE_A5,
-	"label [], array.\n Required if: *.",
+	"label, array.\n Required.",
  	NULL},
 {"HCE_A6", (getter)Hce_get_HCE_A6,(setter)Hce_set_HCE_A6,
-	"label [], array.\n Required if: *.",
+	"label, array.\n Required.",
  	NULL},
 {"HCEabs", (getter)Hce_get_HCEabs,(setter)Hce_set_HCEabs,
-	"label [], array.\n Required if: *.",
+	"label, array.\n Required.",
  	NULL},
 {"HCEdust", (getter)Hce_get_HCEdust,(setter)Hce_set_HCEdust,
-	"label [], array.\n Required if: *.",
+	"label, array.\n Required.",
  	NULL},
 {"HCEmisc", (getter)Hce_get_HCEmisc,(setter)Hce_set_HCEmisc,
-	"label [], array.\n Required if: *.",
+	"label, array.\n Required.",
  	NULL},
 {"HCEtype", (getter)Hce_get_HCEtype,(setter)Hce_set_HCEtype,
-	"Number indicating the receiver type [], array.\n Required if: *.",
+	"Number indicating the receiver type, array.\n Required.",
  	NULL},
 {"NumHCETypes", (getter)Hce_get_NumHCETypes,(setter)Hce_set_NumHCETypes,
-	"Number of HCE types [], number.\n Constraints: INTEGER; Required if: *.",
+	"Number of HCE types, number.\n Constraints: INTEGER; Required.",
  	NULL},
 {"PerfFac", (getter)Hce_get_PerfFac,(setter)Hce_set_PerfFac,
-	"label [], array.\n Required if: *.",
+	"label, array.\n Required.",
  	NULL},
 {"RefMirrAper", (getter)Hce_get_RefMirrAper,(setter)Hce_set_RefMirrAper,
-	"label [], array.\n Required if: *.",
+	"label, array.\n Required.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1812,76 +1812,76 @@ Pwrb_set_TurbOutG(PwrbObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef Pwrb_getset[] = {
 {"E2TPLF0", (getter)Pwrb_get_E2TPLF0,(setter)Pwrb_set_E2TPLF0,
-	"Label [], number.\n Required if: *.",
+	"Label, number.\n Required.",
  	NULL},
 {"E2TPLF1", (getter)Pwrb_get_E2TPLF1,(setter)Pwrb_set_E2TPLF1,
-	"Label [], number.\n Required if: *.",
+	"Label, number.\n Required.",
  	NULL},
 {"E2TPLF2", (getter)Pwrb_get_E2TPLF2,(setter)Pwrb_set_E2TPLF2,
-	"Label [], number.\n Required if: *.",
+	"Label, number.\n Required.",
  	NULL},
 {"E2TPLF3", (getter)Pwrb_get_E2TPLF3,(setter)Pwrb_set_E2TPLF3,
-	"Label [], number.\n Required if: *.",
+	"Label, number.\n Required.",
  	NULL},
 {"E2TPLF4", (getter)Pwrb_get_E2TPLF4,(setter)Pwrb_set_E2TPLF4,
-	"Label [], number.\n Required if: *.",
+	"Label, number.\n Required.",
  	NULL},
 {"LHVBoilEff", (getter)Pwrb_get_LHVBoilEff,(setter)Pwrb_set_LHVBoilEff,
-	"Label [], number.\n Required if: *.",
+	"Label, number.\n Required.",
  	NULL},
 {"MaxGrOut", (getter)Pwrb_get_MaxGrOut,(setter)Pwrb_set_MaxGrOut,
-	"Label [], number.\n Required if: *.",
+	"Label, number.\n Required.",
  	NULL},
 {"MinGrOut", (getter)Pwrb_get_MinGrOut,(setter)Pwrb_set_MinGrOut,
-	"Label [], number.\n Required if: *.",
+	"Label, number.\n Required.",
  	NULL},
 {"PTTMAX", (getter)Pwrb_get_PTTMAX,(setter)Pwrb_set_PTTMAX,
-	"Label [], number.\n Required if: *.",
+	"Label, number.\n Required.",
  	NULL},
 {"PTTMIN", (getter)Pwrb_get_PTTMIN,(setter)Pwrb_set_PTTMIN,
-	"Label [], number.\n Required if: *.",
+	"Label, number.\n Required.",
  	NULL},
 {"T2EPLF0", (getter)Pwrb_get_T2EPLF0,(setter)Pwrb_set_T2EPLF0,
-	"Label [], number.\n Required if: *.",
+	"Label, number.\n Required.",
  	NULL},
 {"T2EPLF1", (getter)Pwrb_get_T2EPLF1,(setter)Pwrb_set_T2EPLF1,
-	"Label [], number.\n Required if: *.",
+	"Label, number.\n Required.",
  	NULL},
 {"T2EPLF2", (getter)Pwrb_get_T2EPLF2,(setter)Pwrb_set_T2EPLF2,
-	"Label [], number.\n Required if: *.",
+	"Label, number.\n Required.",
  	NULL},
 {"T2EPLF3", (getter)Pwrb_get_T2EPLF3,(setter)Pwrb_set_T2EPLF3,
-	"Label [], number.\n Required if: *.",
+	"Label, number.\n Required.",
  	NULL},
 {"T2EPLF4", (getter)Pwrb_get_T2EPLF4,(setter)Pwrb_set_T2EPLF4,
-	"Label [], number.\n Required if: *.",
+	"Label, number.\n Required.",
  	NULL},
 {"TempCorr0", (getter)Pwrb_get_TempCorr0,(setter)Pwrb_set_TempCorr0,
-	"Label [], number.\n Required if: *.",
+	"Label, number.\n Required.",
  	NULL},
 {"TempCorr1", (getter)Pwrb_get_TempCorr1,(setter)Pwrb_set_TempCorr1,
-	"Label [], number.\n Required if: *.",
+	"Label, number.\n Required.",
  	NULL},
 {"TempCorr2", (getter)Pwrb_get_TempCorr2,(setter)Pwrb_set_TempCorr2,
-	"Label [], number.\n Required if: *.",
+	"Label, number.\n Required.",
  	NULL},
 {"TempCorr3", (getter)Pwrb_get_TempCorr3,(setter)Pwrb_set_TempCorr3,
-	"Label [], number.\n Required if: *.",
+	"Label, number.\n Required.",
  	NULL},
 {"TempCorr4", (getter)Pwrb_get_TempCorr4,(setter)Pwrb_set_TempCorr4,
-	"Label [], number.\n Required if: *.",
+	"Label, number.\n Required.",
  	NULL},
 {"TempCorrF", (getter)Pwrb_get_TempCorrF,(setter)Pwrb_set_TempCorrF,
-	"Temp Correction Mode (0=wetbulb 1=drybulb basis) [], number.\n Constraints: INTEGER; Required if: *.",
+	"Temp Correction Mode (0=wetbulb 1=drybulb basis), number.\n Constraints: INTEGER; Required.",
  	NULL},
 {"TurSUE", (getter)Pwrb_get_TurSUE,(setter)Pwrb_set_TurSUE,
-	"Label [], number.\n Required if: *.",
+	"Label, number.\n Required.",
  	NULL},
 {"TurbEffG", (getter)Pwrb_get_TurbEffG,(setter)Pwrb_set_TurbEffG,
-	"Label [], number.\n Required if: *.",
+	"Label, number.\n Required.",
  	NULL},
 {"TurbOutG", (getter)Pwrb_get_TurbOutG,(setter)Pwrb_set_TurbOutG,
-	"Label [], number.\n Required if: *.",
+	"Label, number.\n Required.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -2112,34 +2112,34 @@ Tes_set_TurTesOutAdj(TesObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef Tes_getset[] = {
 {"E_tes_ini", (getter)Tes_get_E_tes_ini,(setter)Tes_set_E_tes_ini,
-	"Initial TES energy - fraction of max [], number.\n Required if: *.",
+	"Initial TES energy - fraction of max, number.\n Required.",
  	NULL},
 {"FossilFill", (getter)Tes_get_FossilFill,(setter)Tes_set_FossilFill,
-	"Label [], array.\n Required if: *.",
+	"Label, array.\n Required.",
  	NULL},
 {"NUMTOU", (getter)Tes_get_NUMTOU,(setter)Tes_set_NUMTOU,
-	"Label [], number.\n Required if: *.",
+	"Label, number.\n Required.",
  	NULL},
 {"PFSmax", (getter)Tes_get_PFSmax,(setter)Tes_set_PFSmax,
-	"Label [], number.\n Required if: *.",
+	"Label, number.\n Required.",
  	NULL},
 {"PTSmax", (getter)Tes_get_PTSmax,(setter)Tes_set_PTSmax,
-	"Label [], number.\n Required if: *.",
+	"Label, number.\n Required.",
  	NULL},
 {"TSHOURS", (getter)Tes_get_TSHOURS,(setter)Tes_set_TSHOURS,
-	"Label [], number.\n Required if: *.",
+	"Label, number.\n Required.",
  	NULL},
 {"TSLogic", (getter)Tes_get_TSLogic,(setter)Tes_set_TSLogic,
-	"Label [], matrix.\n Required if: *.",
+	"Label, matrix.\n Required.",
  	NULL},
 {"TnkHL", (getter)Tes_get_TnkHL,(setter)Tes_set_TnkHL,
-	"Label [], number.\n Required if: *.",
+	"Label, number.\n Required.",
  	NULL},
 {"TurTesEffAdj", (getter)Tes_get_TurTesEffAdj,(setter)Tes_set_TurTesEffAdj,
-	"Label [], number.\n Required if: *.",
+	"Label, number.\n Required.",
  	NULL},
 {"TurTesOutAdj", (getter)Tes_get_TurTesOutAdj,(setter)Tes_set_TurTesOutAdj,
-	"Label [], number.\n Required if: *.",
+	"Label, number.\n Required.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -2610,94 +2610,94 @@ Parasitic_set_SfParPF(ParasiticObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef Parasitic_getset[] = {
 {"AntiFrPar", (getter)Parasitic_get_AntiFrPar,(setter)Parasitic_set_AntiFrPar,
-	"Label [], number.\n Required if: *.",
+	"Label, number.\n Required.",
  	NULL},
 {"BOPPar", (getter)Parasitic_get_BOPPar,(setter)Parasitic_set_BOPPar,
-	"Label [], number.\n Required if: *.",
+	"Label, number.\n Required.",
  	NULL},
 {"BOPParF0", (getter)Parasitic_get_BOPParF0,(setter)Parasitic_set_BOPParF0,
-	"Label [], number.\n Required if: *.",
+	"Label, number.\n Required.",
  	NULL},
 {"BOPParF1", (getter)Parasitic_get_BOPParF1,(setter)Parasitic_set_BOPParF1,
-	"Label [], number.\n Required if: *.",
+	"Label, number.\n Required.",
  	NULL},
 {"BOPParF2", (getter)Parasitic_get_BOPParF2,(setter)Parasitic_set_BOPParF2,
-	"Label [], number.\n Required if: *.",
+	"Label, number.\n Required.",
  	NULL},
 {"BOPParPF", (getter)Parasitic_get_BOPParPF,(setter)Parasitic_set_BOPParPF,
-	"Label [], number.\n Required if: *.",
+	"Label, number.\n Required.",
  	NULL},
 {"CHTFParF0", (getter)Parasitic_get_CHTFParF0,(setter)Parasitic_set_CHTFParF0,
-	"Label [], number.\n Required if: *.",
+	"Label, number.\n Required.",
  	NULL},
 {"CHTFParF1", (getter)Parasitic_get_CHTFParF1,(setter)Parasitic_set_CHTFParF1,
-	"Label [], number.\n Required if: *.",
+	"Label, number.\n Required.",
  	NULL},
 {"CHTFParF2", (getter)Parasitic_get_CHTFParF2,(setter)Parasitic_set_CHTFParF2,
-	"Label [], number.\n Required if: *.",
+	"Label, number.\n Required.",
  	NULL},
 {"ChtfPar", (getter)Parasitic_get_ChtfPar,(setter)Parasitic_set_ChtfPar,
-	"Label [], number.\n Required if: *.",
+	"Label, number.\n Required.",
  	NULL},
 {"ChtfParPF", (getter)Parasitic_get_ChtfParPF,(setter)Parasitic_set_ChtfParPF,
-	"Label [], number.\n Required if: *.",
+	"Label, number.\n Required.",
  	NULL},
 {"CtOpF", (getter)Parasitic_get_CtOpF,(setter)Parasitic_set_CtOpF,
-	"Label [], number.\n Constraints: INTEGER; Required if: *.",
+	"Label, number.\n Constraints: INTEGER; Required.",
  	NULL},
 {"CtPar", (getter)Parasitic_get_CtPar,(setter)Parasitic_set_CtPar,
-	"Label [], number.\n Required if: *.",
+	"Label, number.\n Required.",
  	NULL},
 {"CtParF0", (getter)Parasitic_get_CtParF0,(setter)Parasitic_set_CtParF0,
-	"Label [], number.\n Required if: *.",
+	"Label, number.\n Required.",
  	NULL},
 {"CtParF1", (getter)Parasitic_get_CtParF1,(setter)Parasitic_set_CtParF1,
-	"Label [], number.\n Required if: *.",
+	"Label, number.\n Required.",
  	NULL},
 {"CtParF2", (getter)Parasitic_get_CtParF2,(setter)Parasitic_set_CtParF2,
-	"Label [], number.\n Required if: *.",
+	"Label, number.\n Required.",
  	NULL},
 {"CtParPF", (getter)Parasitic_get_CtParPF,(setter)Parasitic_set_CtParPF,
-	"Label [], number.\n Required if: *.",
+	"Label, number.\n Required.",
  	NULL},
 {"HhtfPar", (getter)Parasitic_get_HhtfPar,(setter)Parasitic_set_HhtfPar,
-	"Label [], number.\n Required if: *.",
+	"Label, number.\n Required.",
  	NULL},
 {"HhtfParF0", (getter)Parasitic_get_HhtfParF0,(setter)Parasitic_set_HhtfParF0,
-	"Label [], number.\n Required if: *.",
+	"Label, number.\n Required.",
  	NULL},
 {"HhtfParF1", (getter)Parasitic_get_HhtfParF1,(setter)Parasitic_set_HhtfParF1,
-	"Label [], number.\n Required if: *.",
+	"Label, number.\n Required.",
  	NULL},
 {"HhtfParF2", (getter)Parasitic_get_HhtfParF2,(setter)Parasitic_set_HhtfParF2,
-	"Label [], number.\n Required if: *.",
+	"Label, number.\n Required.",
  	NULL},
 {"HhtfParPF", (getter)Parasitic_get_HhtfParPF,(setter)Parasitic_set_HhtfParPF,
-	"Label [], number.\n Required if: *.",
+	"Label, number.\n Required.",
  	NULL},
 {"HtrPar", (getter)Parasitic_get_HtrPar,(setter)Parasitic_set_HtrPar,
-	"Label [], number.\n Required if: *.",
+	"Label, number.\n Required.",
  	NULL},
 {"HtrParF0", (getter)Parasitic_get_HtrParF0,(setter)Parasitic_set_HtrParF0,
-	"Label [], number.\n Required if: *.",
+	"Label, number.\n Required.",
  	NULL},
 {"HtrParF1", (getter)Parasitic_get_HtrParF1,(setter)Parasitic_set_HtrParF1,
-	"Label [], number.\n Required if: *.",
+	"Label, number.\n Required.",
  	NULL},
 {"HtrParF2", (getter)Parasitic_get_HtrParF2,(setter)Parasitic_set_HtrParF2,
-	"Label [], number.\n Required if: *.",
+	"Label, number.\n Required.",
  	NULL},
 {"HtrParPF", (getter)Parasitic_get_HtrParPF,(setter)Parasitic_set_HtrParPF,
-	"Label [], number.\n Required if: *.",
+	"Label, number.\n Required.",
  	NULL},
 {"PbFixPar", (getter)Parasitic_get_PbFixPar,(setter)Parasitic_set_PbFixPar,
-	"Label [], number.\n Required if: *.",
+	"Label, number.\n Required.",
  	NULL},
 {"SfPar", (getter)Parasitic_get_SfPar,(setter)Parasitic_set_SfPar,
-	"Label [], number.\n Required if: *.",
+	"Label, number.\n Required.",
  	NULL},
 {"SfParPF", (getter)Parasitic_get_SfParPF,(setter)Parasitic_set_SfParPF,
-	"Label [], number.\n Required if: *.",
+	"Label, number.\n Required.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -3219,10 +3219,10 @@ static PyGetSetDef Outputs_getset[] = {
 	"Field HTF temperature average [C], array.",
  	NULL},
 {"ColEff", (getter)Outputs_get_ColEff,(setter)0,
-	"Field collector thermal and optical efficiency [], array.",
+	"Field collector thermal and optical efficiency, array.",
  	NULL},
 {"CosTheta", (getter)Outputs_get_CosTheta,(setter)0,
-	"Field collector cosine efficiency [], array.",
+	"Field collector cosine efficiency, array.",
  	NULL},
 {"Egr", (getter)Outputs_get_Egr,(setter)0,
 	"Cycle electrical power output (gross) [MWe], array.",
@@ -3234,7 +3234,7 @@ static PyGetSetDef Outputs_getset[] = {
 	"Cycle electrical power output (gross, solar share) [MWe], array.",
  	NULL},
 {"EndLoss", (getter)Outputs_get_EndLoss,(setter)0,
-	"Field collector optical end loss [], array.",
+	"Field collector optical end loss, array.",
  	NULL},
 {"Enet", (getter)Outputs_get_Enet,(setter)0,
 	"Cycle electrical power output (net) [MWe], array.",
@@ -3276,10 +3276,10 @@ static PyGetSetDef Outputs_getset[] = {
 	"TES thermal energy available [MWht], array.",
  	NULL},
 {"Ftrack", (getter)Outputs_get_Ftrack,(setter)0,
-	"Field collector fraction of time period tracking [], array.",
+	"Field collector fraction of time period tracking, array.",
  	NULL},
 {"IAM", (getter)Outputs_get_IAM,(setter)0,
-	"Field collector incidence angle modifier [], array.",
+	"Field collector incidence angle modifier, array.",
  	NULL},
 {"QTsFull", (getter)Outputs_get_QTsFull,(setter)0,
 	"Cycle thermal energy dumped - TES is full [MWt], array.",
@@ -3345,7 +3345,7 @@ static PyGetSetDef Outputs_getset[] = {
 	"Field thermal power receiver heat loss [kJ/hr-m2], array.",
  	NULL},
 {"RowShadow", (getter)Outputs_get_RowShadow,(setter)0,
-	"Field collector row shadowing loss [], array.",
+	"Field collector row shadowing loss, array.",
  	NULL},
 {"SfMassFlow", (getter)Outputs_get_SfMassFlow,(setter)0,
 	"Field HTF mass flow rate total [kg/s], array.",
@@ -3381,13 +3381,13 @@ static PyGetSetDef Outputs_getset[] = {
 	"System power generated [kW], array.",
  	NULL},
 {"hour", (getter)Outputs_get_hour,(setter)0,
-	"Resource Hour of Day [], array.",
+	"Resource Hour of Day, array.",
  	NULL},
 {"kwh_per_kw", (getter)Outputs_get_kwh_per_kw,(setter)0,
 	"First year kWh/kW [kWh/kW], number.",
  	NULL},
 {"month", (getter)Outputs_get_month,(setter)0,
-	"Resource Month [], array.",
+	"Resource Month, array.",
  	NULL},
 {"o_SfTi", (getter)Outputs_get_o_SfTi,(setter)0,
 	"Field HTF temperature cold header inlet [C], array.",
@@ -3411,7 +3411,7 @@ static PyGetSetDef Outputs_getset[] = {
 	"Resource Dry bulb temperature [C], array.",
  	NULL},
 {"tou_value", (getter)Outputs_get_tou_value,(setter)0,
-	"Resource time-of-use value [], array.",
+	"Resource time-of-use value, array.",
  	NULL},
 {"twet", (getter)Outputs_get_twet,(setter)0,
 	"Resource Wet bulb temperature [C], array.",
@@ -3490,47 +3490,43 @@ newTcstroughEmpiricalObject(void* data_ptr)
 
 	PySAM_TECH_ATTR("TcstroughEmpirical", SAM_TcstroughEmpirical_construct)
 
-PyObject* Weather_obj = Weather_new(self->data_ptr);
+	PyObject* Weather_obj = Weather_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Weather", Weather_obj);
 	Py_DECREF(Weather_obj);
 
-PyObject* Trough_obj = Trough_new(self->data_ptr);
+	PyObject* Trough_obj = Trough_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Trough", Trough_obj);
 	Py_DECREF(Trough_obj);
 
-PyObject* TouTranslator_obj = TouTranslator_new(self->data_ptr);
+	PyObject* TouTranslator_obj = TouTranslator_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "TouTranslator", TouTranslator_obj);
 	Py_DECREF(TouTranslator_obj);
 
-PyObject* Solarfield_obj = Solarfield_new(self->data_ptr);
+	PyObject* Solarfield_obj = Solarfield_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Solarfield", Solarfield_obj);
 	Py_DECREF(Solarfield_obj);
 
-PyObject* Sca_obj = Sca_new(self->data_ptr);
+	PyObject* Sca_obj = Sca_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Sca", Sca_obj);
 	Py_DECREF(Sca_obj);
 
-PyObject* Hce_obj = Hce_new(self->data_ptr);
+	PyObject* Hce_obj = Hce_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Hce", Hce_obj);
 	Py_DECREF(Hce_obj);
 
-PyObject* Pwrb_obj = Pwrb_new(self->data_ptr);
+	PyObject* Pwrb_obj = Pwrb_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Pwrb", Pwrb_obj);
 	Py_DECREF(Pwrb_obj);
 
-PyObject* Tes_obj = Tes_new(self->data_ptr);
+	PyObject* Tes_obj = Tes_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Tes", Tes_obj);
 	Py_DECREF(Tes_obj);
 
-PyObject* Parasitic_obj = Parasitic_new(self->data_ptr);
+	PyObject* Parasitic_obj = Parasitic_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Parasitic", Parasitic_obj);
 	Py_DECREF(Parasitic_obj);
 
-PyObject* Outputs_obj = Outputs_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
-	Py_DECREF(Outputs_obj);
-
-PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
+	PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
 
 	PyObject* data_cap = PyCapsule_New(self->data_ptr, NULL, NULL);
 	PyObject* Adjust_obj = PyObject_CallMethod(AdjustmentFactorsModule, "new", "(O)", data_cap);
@@ -3544,6 +3540,11 @@ PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
 
 	PyDict_SetItemString(attr_dict, "AdjustmentFactors", Adjust_obj);
 	Py_DECREF(Adjust_obj);
+
+	PyObject* Outputs_obj = Outputs_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
+	Py_DECREF(Outputs_obj);
+
 
 	return self;
 }
@@ -3700,8 +3701,8 @@ static PyObject *
 TcstroughEmpirical_default(PyObject *self, PyObject *args)
 {
 	TcstroughEmpiricalObject *rv;
-	char* fin = 0;
-	if (!PyArg_ParseTuple(args, "s:default", &fin)){
+	char* def = 0;
+	if (!PyArg_ParseTuple(args, "s:default", &def)){
 		PyErr_BadArgument();
 		return NULL;
 	}
@@ -3709,7 +3710,7 @@ TcstroughEmpirical_default(PyObject *self, PyObject *args)
 	if (rv == NULL)
 		return NULL;
 
-	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "TcstroughEmpirical", fin);
+	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "TcstroughEmpirical", def);
 
 	return (PyObject *)rv;
 }
@@ -3724,14 +3725,14 @@ static PyMethodDef TcstroughEmpiricalModule_methods[] = {
 				PyDoc_STR("new() -> new TcstroughEmpirical object")},
 		{"default",             TcstroughEmpirical_default,         METH_VARARGS,
 				PyDoc_STR("default(financial) -> new TcstroughEmpirical object with financial model-specific default attributes\n"
-				"Options: LCOE Calculator, Independent Power Producer, Commercial, Commercial PPA, Leveraged Partnership Flip, Single Owner, None, All Equity Partnership Flip, Sale Leaseback, ")},
+				"Options: Lcoefcr, , Commercial, , Levpartflip, Singleowner, None, Equpartflip, Saleleaseback")},
 		{"wrap",             TcstroughEmpirical_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> new TcstroughEmpirical object around existing PySSC data")},
+				PyDoc_STR("wrap(ssc_data_t) -> new TcstroughEmpirical object around existing PySSC data, taking over memory ownership")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 PyDoc_STRVAR(module_doc,
-			 "Refer to http://www.github.com/nrel/PySAM for source code.");
+			 "CSP parabolic trough model based on empirically-derived coefficients and equations for power generation");
 
 
 static int
@@ -3739,6 +3740,9 @@ TcstroughEmpiricalModule_exec(PyObject *m)
 {
 	/* Finalize the type object including setting type of the new type
 	 * object; doing it here is required for portability, too. */
+
+	if (PySAM_load_lib(m) < 0) goto fail;
+	if (PySAM_init_error(m) < 0) goto fail;
 
 	TcstroughEmpirical_Type.tp_dict = PyDict_New();
 	if (!TcstroughEmpirical_Type.tp_dict) { goto fail; }
@@ -3837,9 +3841,6 @@ TcstroughEmpiricalModule_exec(PyObject *m)
 	PyModule_AddObject(m,
 				"TcstroughEmpirical",
 				(PyObject*)&TcstroughEmpirical_Type);
-
-	if (PySAM_load_lib(m) < 0) goto fail;
-	if (PySAM_init_error() < 0) goto fail;
 
 	return 0;
 	fail:

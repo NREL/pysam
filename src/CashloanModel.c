@@ -234,46 +234,46 @@ FinancialParameters_set_system_heat_rate(FinancialParametersObject *self, PyObje
 
 static PyGetSetDef FinancialParameters_getset[] = {
 {"analysis_period", (getter)FinancialParameters_get_analysis_period,(setter)FinancialParameters_set_analysis_period,
-	"Analyis period [years], number.\n Constraints: INTEGER,MIN=0,MAX=50; Required if: ?=30.",
+	"Analyis period [years], number.\n Constraints: INTEGER,MIN=0,MAX=50; Required if ?=30.",
  	NULL},
 {"debt_fraction", (getter)FinancialParameters_get_debt_fraction,(setter)FinancialParameters_set_debt_fraction,
-	"Debt percentage [%], number.\n Constraints: MIN=0,MAX=100; Required if: ?=0.",
+	"Debt percentage [%], number.\n Constraints: MIN=0,MAX=100; 0 if not set.",
  	NULL},
 {"federal_tax_rate", (getter)FinancialParameters_get_federal_tax_rate,(setter)FinancialParameters_set_federal_tax_rate,
-	"Federal income tax rate [%], array.\n Required if: *.",
+	"Federal income tax rate [%], array.\n Required.",
  	NULL},
 {"inflation_rate", (getter)FinancialParameters_get_inflation_rate,(setter)FinancialParameters_set_inflation_rate,
-	"Inflation rate [%], number.\n Constraints: MIN=-99; Required if: *.",
+	"Inflation rate [%], number.\n Constraints: MIN=-99; Required.",
  	NULL},
 {"insurance_rate", (getter)FinancialParameters_get_insurance_rate,(setter)FinancialParameters_set_insurance_rate,
-	"Insurance rate [%], number.\n Constraints: MIN=0,MAX=100; Required if: ?=0.0.",
+	"Insurance rate [%], number.\n Constraints: MIN=0,MAX=100; Required if ?=0.0.",
  	NULL},
 {"loan_rate", (getter)FinancialParameters_get_loan_rate,(setter)FinancialParameters_set_loan_rate,
-	"Loan rate [%], number.\n Constraints: MIN=0,MAX=100; Required if: ?=0.",
+	"Loan rate [%], number.\n Constraints: MIN=0,MAX=100; 0 if not set.",
  	NULL},
 {"loan_term", (getter)FinancialParameters_get_loan_term,(setter)FinancialParameters_set_loan_term,
-	"Loan term [years], number.\n Constraints: INTEGER,MIN=0,MAX=50; Required if: ?=0.",
+	"Loan term [years], number.\n Constraints: INTEGER,MIN=0,MAX=50; 0 if not set.",
  	NULL},
 {"prop_tax_assessed_decline", (getter)FinancialParameters_get_prop_tax_assessed_decline,(setter)FinancialParameters_set_prop_tax_assessed_decline,
-	"Assessed value annual decline [%], number.\n Constraints: MIN=0,MAX=100; Required if: ?=5.",
+	"Assessed value annual decline [%], number.\n Constraints: MIN=0,MAX=100; Required if ?=5.",
  	NULL},
 {"prop_tax_cost_assessed_percent", (getter)FinancialParameters_get_prop_tax_cost_assessed_percent,(setter)FinancialParameters_set_prop_tax_cost_assessed_percent,
-	"Percent of pre-financing costs assessed [%], number.\n Constraints: MIN=0,MAX=100; Required if: ?=95.",
+	"Percent of pre-financing costs assessed [%], number.\n Constraints: MIN=0,MAX=100; Required if ?=95.",
  	NULL},
 {"property_tax_rate", (getter)FinancialParameters_get_property_tax_rate,(setter)FinancialParameters_set_property_tax_rate,
-	"Property tax rate [%], number.\n Constraints: MIN=0,MAX=100; Required if: ?=0.0.",
+	"Property tax rate [%], number.\n Constraints: MIN=0,MAX=100; Required if ?=0.0.",
  	NULL},
 {"real_discount_rate", (getter)FinancialParameters_get_real_discount_rate,(setter)FinancialParameters_set_real_discount_rate,
-	"Real discount rate [%], number.\n Constraints: MIN=-99; Required if: *.",
+	"Real discount rate [%], number.\n Constraints: MIN=-99; Required.",
  	NULL},
 {"state_tax_rate", (getter)FinancialParameters_get_state_tax_rate,(setter)FinancialParameters_set_state_tax_rate,
-	"State income tax rate [%], array.\n Required if: *.",
+	"State income tax rate [%], array.\n Required.",
  	NULL},
 {"system_capacity", (getter)FinancialParameters_get_system_capacity,(setter)FinancialParameters_set_system_capacity,
-	"System nameplate capacity [kW], number.\n Constraints: POSITIVE; Required if: *.",
+	"System nameplate capacity [kW], number.\n Constraints: POSITIVE; Required.",
  	NULL},
 {"system_heat_rate", (getter)FinancialParameters_get_system_heat_rate,(setter)FinancialParameters_set_system_heat_rate,
-	"System heat rate [MMBTus/MWh], number.\n Constraints: MIN=0; Required if: ?=0.0.",
+	"System heat rate [MMBTus/MWh], number.\n Constraints: MIN=0; Required if ?=0.0.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -732,91 +732,91 @@ SystemCosts_set_om_replacement_cost_escal(SystemCostsObject *self, PyObject *val
 
 static PyGetSetDef SystemCosts_getset[] = {
 {"add_om_num_types", (getter)SystemCosts_get_add_om_num_types,(setter)SystemCosts_set_add_om_num_types,
-	"Number of O and M types [], number.\n Constraints: INTEGER,MIN=0,MAX=2; Required if: ?=0.",
+	"Number of O and M types, number.\n Constraints: INTEGER,MIN=0,MAX=2; 0 if not set.",
  	NULL},
 {"annual_fuel_usage", (getter)SystemCosts_get_annual_fuel_usage,(setter)SystemCosts_set_annual_fuel_usage,
-	"Fuel usage [kWht], number.\n Constraints: MIN=0; Required if: ?=0.",
+	"Fuel usage [kWht], number.\n Constraints: MIN=0; 0 if not set.",
  	NULL},
 {"om_capacity", (getter)SystemCosts_get_om_capacity,(setter)SystemCosts_set_om_capacity,
-	"Capacity-based System Costs amount [$/kWcap], array.\n Required if: ?=0.0.",
+	"Capacity-based System Costs amount [$/kWcap], array.\n Required if ?=0.0.",
  	NULL},
 {"om_capacity1", (getter)SystemCosts_get_om_capacity1,(setter)SystemCosts_set_om_capacity1,
-	"Battery capacity-based System Costs amount [$/kWcap], array.\n Required if: ?=0.0.",
+	"Battery capacity-based System Costs amount [$/kWcap], array.\n Required if ?=0.0.",
  	NULL},
 {"om_capacity1_nameplate", (getter)SystemCosts_get_om_capacity1_nameplate,(setter)SystemCosts_set_om_capacity1_nameplate,
-	"Battery capacity for System Costs values [kW], number.\n Required if: ?=0.",
+	"Battery capacity for System Costs values [kW], number.\n 0 if not set.",
  	NULL},
 {"om_capacity2", (getter)SystemCosts_get_om_capacity2,(setter)SystemCosts_set_om_capacity2,
-	"Fuel cell capacity-based System Costs amount [$/kWcap], array.\n Required if: ?=0.0.",
+	"Fuel cell capacity-based System Costs amount [$/kWcap], array.\n Required if ?=0.0.",
  	NULL},
 {"om_capacity2_nameplate", (getter)SystemCosts_get_om_capacity2_nameplate,(setter)SystemCosts_set_om_capacity2_nameplate,
-	"Fuel cell capacity for System Costs values [kW], number.\n Required if: ?=0.",
+	"Fuel cell capacity for System Costs values [kW], number.\n 0 if not set.",
  	NULL},
 {"om_capacity_escal", (getter)SystemCosts_get_om_capacity_escal,(setter)SystemCosts_set_om_capacity_escal,
-	"Capacity-based System Costs escalation [%/year], number.\n Required if: ?=0.0.",
+	"Capacity-based System Costs escalation [%/year], number.\n Required if ?=0.0.",
  	NULL},
 {"om_fixed", (getter)SystemCosts_get_om_fixed,(setter)SystemCosts_set_om_fixed,
-	"Fixed System Costs annual amount [$/year], array.\n Required if: ?=0.0.",
+	"Fixed System Costs annual amount [$/year], array.\n Required if ?=0.0.",
  	NULL},
 {"om_fixed1", (getter)SystemCosts_get_om_fixed1,(setter)SystemCosts_set_om_fixed1,
-	"Battery fixed System Costs annual amount [$/year], array.\n Required if: ?=0.0.",
+	"Battery fixed System Costs annual amount [$/year], array.\n Required if ?=0.0.",
  	NULL},
 {"om_fixed2", (getter)SystemCosts_get_om_fixed2,(setter)SystemCosts_set_om_fixed2,
-	"Fuel cell fixed System Costs annual amount [$/year], array.\n Required if: ?=0.0.",
+	"Fuel cell fixed System Costs annual amount [$/year], array.\n Required if ?=0.0.",
  	NULL},
 {"om_fixed_escal", (getter)SystemCosts_get_om_fixed_escal,(setter)SystemCosts_set_om_fixed_escal,
-	"Fixed System Costs escalation [%/year], number.\n Required if: ?=0.0.",
+	"Fixed System Costs escalation [%/year], number.\n Required if ?=0.0.",
  	NULL},
 {"om_fuel_cost", (getter)SystemCosts_get_om_fuel_cost,(setter)SystemCosts_set_om_fuel_cost,
-	"Fuel cost [$/MMBtu], array.\n Required if: ?=0.0.",
+	"Fuel cost [$/MMBtu], array.\n Required if ?=0.0.",
  	NULL},
 {"om_fuel_cost_escal", (getter)SystemCosts_get_om_fuel_cost_escal,(setter)SystemCosts_set_om_fuel_cost_escal,
-	"Fuel cost escalation [%/year], number.\n Required if: ?=0.0.",
+	"Fuel cost escalation [%/year], number.\n Required if ?=0.0.",
  	NULL},
 {"om_opt_fuel_1_cost", (getter)SystemCosts_get_om_opt_fuel_1_cost,(setter)SystemCosts_set_om_opt_fuel_1_cost,
-	"Biomass feedstock cost [$/unit], array.\n Required if: ?=0.0.",
+	"Biomass feedstock cost [$/unit], array.\n Required if ?=0.0.",
  	NULL},
 {"om_opt_fuel_1_cost_escal", (getter)SystemCosts_get_om_opt_fuel_1_cost_escal,(setter)SystemCosts_set_om_opt_fuel_1_cost_escal,
-	"Biomass feedstock cost escalation [%/year], number.\n Required if: ?=0.0.",
+	"Biomass feedstock cost escalation [%/year], number.\n Required if ?=0.0.",
  	NULL},
 {"om_opt_fuel_1_usage", (getter)SystemCosts_get_om_opt_fuel_1_usage,(setter)SystemCosts_set_om_opt_fuel_1_usage,
-	"Biomass feedstock usage [unit], number.\n Required if: ?=0.0.",
+	"Biomass feedstock usage [unit], number.\n Required if ?=0.0.",
  	NULL},
 {"om_opt_fuel_2_cost", (getter)SystemCosts_get_om_opt_fuel_2_cost,(setter)SystemCosts_set_om_opt_fuel_2_cost,
-	"Coal feedstock cost [$/unit], array.\n Required if: ?=0.0.",
+	"Coal feedstock cost [$/unit], array.\n Required if ?=0.0.",
  	NULL},
 {"om_opt_fuel_2_cost_escal", (getter)SystemCosts_get_om_opt_fuel_2_cost_escal,(setter)SystemCosts_set_om_opt_fuel_2_cost_escal,
-	"Coal feedstock cost escalation [%/year], number.\n Required if: ?=0.0.",
+	"Coal feedstock cost escalation [%/year], number.\n Required if ?=0.0.",
  	NULL},
 {"om_opt_fuel_2_usage", (getter)SystemCosts_get_om_opt_fuel_2_usage,(setter)SystemCosts_set_om_opt_fuel_2_usage,
-	"Coal feedstock usage [unit], number.\n Required if: ?=0.0.",
+	"Coal feedstock usage [unit], number.\n Required if ?=0.0.",
  	NULL},
 {"om_production", (getter)SystemCosts_get_om_production,(setter)SystemCosts_set_om_production,
-	"Production-based System Costs amount [$/MWh], array.\n Required if: ?=0.0.",
+	"Production-based System Costs amount [$/MWh], array.\n Required if ?=0.0.",
  	NULL},
 {"om_production1", (getter)SystemCosts_get_om_production1,(setter)SystemCosts_set_om_production1,
-	"Battery production-based System Costs amount [$/MWh], array.\n Required if: ?=0.0.",
+	"Battery production-based System Costs amount [$/MWh], array.\n Required if ?=0.0.",
  	NULL},
 {"om_production1_values", (getter)SystemCosts_get_om_production1_values,(setter)SystemCosts_set_om_production1_values,
-	"Battery production for System Costs values [kWh], array.\n Required if: ?=0.",
+	"Battery production for System Costs values [kWh], array.\n 0 if not set.",
  	NULL},
 {"om_production2", (getter)SystemCosts_get_om_production2,(setter)SystemCosts_set_om_production2,
-	"Fuel cell production-based System Costs amount [$/MWh], array.\n Required if: ?=0.0.",
+	"Fuel cell production-based System Costs amount [$/MWh], array.\n Required if ?=0.0.",
  	NULL},
 {"om_production2_values", (getter)SystemCosts_get_om_production2_values,(setter)SystemCosts_set_om_production2_values,
-	"Fuel cell production for System Costs values [kWh], array.\n Required if: ?=0.",
+	"Fuel cell production for System Costs values [kWh], array.\n 0 if not set.",
  	NULL},
 {"om_production_escal", (getter)SystemCosts_get_om_production_escal,(setter)SystemCosts_set_om_production_escal,
-	"Production-based System Costs escalation [%/year], number.\n Required if: ?=0.0.",
+	"Production-based System Costs escalation [%/year], number.\n Required if ?=0.0.",
  	NULL},
 {"om_replacement_cost1", (getter)SystemCosts_get_om_replacement_cost1,(setter)SystemCosts_set_om_replacement_cost1,
-	"Repacement cost 1 [$/kWh], array.\n Required if: ?=0.0.",
+	"Repacement cost 1 [$/kWh], array.\n Required if ?=0.0.",
  	NULL},
 {"om_replacement_cost2", (getter)SystemCosts_get_om_replacement_cost2,(setter)SystemCosts_set_om_replacement_cost2,
-	"Repacement cost 2 [$/kW], array.\n Required if: ?=0.0.",
+	"Repacement cost 2 [$/kW], array.\n Required if ?=0.0.",
  	NULL},
 {"om_replacement_cost_escal", (getter)SystemCosts_get_om_replacement_cost_escal,(setter)SystemCosts_set_om_replacement_cost_escal,
-	"Replacement cost escalation [%/year], number.\n Required if: ?=0.0.",
+	"Replacement cost escalation [%/year], number.\n Required if ?=0.0.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -999,22 +999,22 @@ Depreciation_set_depr_sta_type(DepreciationObject *self, PyObject *value, void *
 
 static PyGetSetDef Depreciation_getset[] = {
 {"depr_fed_custom", (getter)Depreciation_get_depr_fed_custom,(setter)Depreciation_set_depr_fed_custom,
-	"Federal custom depreciation [%/year], array.\n Required if: depr_fed_type=3.",
+	"Federal custom depreciation [%/year], array.\n Required if depr_fed_type=3.",
  	NULL},
 {"depr_fed_sl_years", (getter)Depreciation_get_depr_fed_sl_years,(setter)Depreciation_set_depr_fed_sl_years,
-	"Federal depreciation straight-line Years [years], number.\n Constraints: INTEGER,POSITIVE; Required if: depr_fed_type=2.",
+	"Federal depreciation straight-line Years [years], number.\n Constraints: INTEGER,POSITIVE; Required if depr_fed_type=2.",
  	NULL},
 {"depr_fed_type", (getter)Depreciation_get_depr_fed_type,(setter)Depreciation_set_depr_fed_type,
-	"Federal depreciation type [], number.\n 0=none,1=macrs_half_year,2=sl,3=custom; Constraints: INTEGER,MIN=0,MAX=3; Required if: ?=0.",
+	"Federal depreciation type, number.\n 0=none,1=macrs_half_year,2=sl,3=custom; Constraints: INTEGER,MIN=0,MAX=3; 0 if not set.",
  	NULL},
 {"depr_sta_custom", (getter)Depreciation_get_depr_sta_custom,(setter)Depreciation_set_depr_sta_custom,
-	"State custom depreciation [%/year], array.\n Required if: depr_sta_type=3.",
+	"State custom depreciation [%/year], array.\n Required if depr_sta_type=3.",
  	NULL},
 {"depr_sta_sl_years", (getter)Depreciation_get_depr_sta_sl_years,(setter)Depreciation_set_depr_sta_sl_years,
-	"State depreciation straight-line years [years], number.\n Constraints: INTEGER,POSITIVE; Required if: depr_sta_type=2.",
+	"State depreciation straight-line years [years], number.\n Constraints: INTEGER,POSITIVE; Required if depr_sta_type=2.",
  	NULL},
 {"depr_sta_type", (getter)Depreciation_get_depr_sta_type,(setter)Depreciation_set_depr_sta_type,
-	"State depreciation type [], number.\n 0=none,1=macrs_half_year,2=sl,3=custom; Constraints: INTEGER,MIN=0,MAX=3; Required if: ?=0.",
+	"State depreciation type, number.\n 0=none,1=macrs_half_year,2=sl,3=custom; Constraints: INTEGER,MIN=0,MAX=3; 0 if not set.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1365,64 +1365,64 @@ TaxCreditIncentives_set_ptc_sta_term(TaxCreditIncentivesObject *self, PyObject *
 
 static PyGetSetDef TaxCreditIncentives_getset[] = {
 {"itc_fed_amount", (getter)TaxCreditIncentives_get_itc_fed_amount,(setter)TaxCreditIncentives_set_itc_fed_amount,
-	"Federal amount-based ITC amount [$], number.\n Required if: ?=0.",
+	"Federal amount-based ITC amount [$], number.\n 0 if not set.",
  	NULL},
 {"itc_fed_amount_deprbas_fed", (getter)TaxCreditIncentives_get_itc_fed_amount_deprbas_fed,(setter)TaxCreditIncentives_set_itc_fed_amount_deprbas_fed,
-	"Federal amount-based ITC reduces federal depreciation basis [0/1], number.\n Constraints: BOOLEAN; Required if: ?=1.",
+	"Federal amount-based ITC reduces federal depreciation basis [0/1], number.\n Constraints: BOOLEAN; Required if ?=1.",
  	NULL},
 {"itc_fed_amount_deprbas_sta", (getter)TaxCreditIncentives_get_itc_fed_amount_deprbas_sta,(setter)TaxCreditIncentives_set_itc_fed_amount_deprbas_sta,
-	"Federal amount-based ITC reduces state depreciation basis [0/1], number.\n Constraints: BOOLEAN; Required if: ?=1.",
+	"Federal amount-based ITC reduces state depreciation basis [0/1], number.\n Constraints: BOOLEAN; Required if ?=1.",
  	NULL},
 {"itc_fed_percent", (getter)TaxCreditIncentives_get_itc_fed_percent,(setter)TaxCreditIncentives_set_itc_fed_percent,
-	"Federal percentage-based ITC percent [%], number.\n Required if: ?=0.",
+	"Federal percentage-based ITC percent [%], number.\n 0 if not set.",
  	NULL},
 {"itc_fed_percent_deprbas_fed", (getter)TaxCreditIncentives_get_itc_fed_percent_deprbas_fed,(setter)TaxCreditIncentives_set_itc_fed_percent_deprbas_fed,
-	"Federal percentage-based ITC reduces federal depreciation basis [0/1], number.\n Constraints: BOOLEAN; Required if: ?=1.",
+	"Federal percentage-based ITC reduces federal depreciation basis [0/1], number.\n Constraints: BOOLEAN; Required if ?=1.",
  	NULL},
 {"itc_fed_percent_deprbas_sta", (getter)TaxCreditIncentives_get_itc_fed_percent_deprbas_sta,(setter)TaxCreditIncentives_set_itc_fed_percent_deprbas_sta,
-	"Federal percentage-based ITC reduces state depreciation basis [0/1], number.\n Constraints: BOOLEAN; Required if: ?=1.",
+	"Federal percentage-based ITC reduces state depreciation basis [0/1], number.\n Constraints: BOOLEAN; Required if ?=1.",
  	NULL},
 {"itc_fed_percent_maxvalue", (getter)TaxCreditIncentives_get_itc_fed_percent_maxvalue,(setter)TaxCreditIncentives_set_itc_fed_percent_maxvalue,
-	"Federal percentage-based ITC maximum value [$], number.\n Required if: ?=1e99.",
+	"Federal percentage-based ITC maximum value [$], number.\n Required if ?=1e99.",
  	NULL},
 {"itc_sta_amount", (getter)TaxCreditIncentives_get_itc_sta_amount,(setter)TaxCreditIncentives_set_itc_sta_amount,
-	"State amount-based ITC amount [$], number.\n Required if: ?=0.",
+	"State amount-based ITC amount [$], number.\n 0 if not set.",
  	NULL},
 {"itc_sta_amount_deprbas_fed", (getter)TaxCreditIncentives_get_itc_sta_amount_deprbas_fed,(setter)TaxCreditIncentives_set_itc_sta_amount_deprbas_fed,
-	"State amount-based ITC reduces federal depreciation basis [0/1], number.\n Constraints: BOOLEAN; Required if: ?=0.",
+	"State amount-based ITC reduces federal depreciation basis [0/1], number.\n Constraints: BOOLEAN; 0 if not set.",
  	NULL},
 {"itc_sta_amount_deprbas_sta", (getter)TaxCreditIncentives_get_itc_sta_amount_deprbas_sta,(setter)TaxCreditIncentives_set_itc_sta_amount_deprbas_sta,
-	"State amount-based ITC reduces state depreciation basis [0/1], number.\n Constraints: BOOLEAN; Required if: ?=0.",
+	"State amount-based ITC reduces state depreciation basis [0/1], number.\n Constraints: BOOLEAN; 0 if not set.",
  	NULL},
 {"itc_sta_percent", (getter)TaxCreditIncentives_get_itc_sta_percent,(setter)TaxCreditIncentives_set_itc_sta_percent,
-	"State percentage-based ITC percent [%], number.\n Required if: ?=0.",
+	"State percentage-based ITC percent [%], number.\n 0 if not set.",
  	NULL},
 {"itc_sta_percent_deprbas_fed", (getter)TaxCreditIncentives_get_itc_sta_percent_deprbas_fed,(setter)TaxCreditIncentives_set_itc_sta_percent_deprbas_fed,
-	"State percentage-based ITC reduces federal depreciation basis [0/1], number.\n Constraints: BOOLEAN; Required if: ?=0.",
+	"State percentage-based ITC reduces federal depreciation basis [0/1], number.\n Constraints: BOOLEAN; 0 if not set.",
  	NULL},
 {"itc_sta_percent_deprbas_sta", (getter)TaxCreditIncentives_get_itc_sta_percent_deprbas_sta,(setter)TaxCreditIncentives_set_itc_sta_percent_deprbas_sta,
-	"State percentage-based ITC reduces state depreciation basis [0/1], number.\n Constraints: BOOLEAN; Required if: ?=0.",
+	"State percentage-based ITC reduces state depreciation basis [0/1], number.\n Constraints: BOOLEAN; 0 if not set.",
  	NULL},
 {"itc_sta_percent_maxvalue", (getter)TaxCreditIncentives_get_itc_sta_percent_maxvalue,(setter)TaxCreditIncentives_set_itc_sta_percent_maxvalue,
-	"State percentage-based ITC maximum Value [$], number.\n Required if: ?=1e99.",
+	"State percentage-based ITC maximum Value [$], number.\n Required if ?=1e99.",
  	NULL},
 {"ptc_fed_amount", (getter)TaxCreditIncentives_get_ptc_fed_amount,(setter)TaxCreditIncentives_set_ptc_fed_amount,
-	"Federal PTC amount [$/kWh], array.\n Required if: ?=0.",
+	"Federal PTC amount [$/kWh], array.\n 0 if not set.",
  	NULL},
 {"ptc_fed_escal", (getter)TaxCreditIncentives_get_ptc_fed_escal,(setter)TaxCreditIncentives_set_ptc_fed_escal,
-	"Federal PTC escalation [%/year], number.\n Required if: ?=0.",
+	"Federal PTC escalation [%/year], number.\n 0 if not set.",
  	NULL},
 {"ptc_fed_term", (getter)TaxCreditIncentives_get_ptc_fed_term,(setter)TaxCreditIncentives_set_ptc_fed_term,
-	"Federal PTC term [years], number.\n Required if: ?=10.",
+	"Federal PTC term [years], number.\n Required if ?=10.",
  	NULL},
 {"ptc_sta_amount", (getter)TaxCreditIncentives_get_ptc_sta_amount,(setter)TaxCreditIncentives_set_ptc_sta_amount,
-	"State PTC amount [$/kWh], array.\n Required if: ?=0.",
+	"State PTC amount [$/kWh], array.\n 0 if not set.",
  	NULL},
 {"ptc_sta_escal", (getter)TaxCreditIncentives_get_ptc_sta_escal,(setter)TaxCreditIncentives_set_ptc_sta_escal,
-	"State PTC escalation [%/year], number.\n Required if: ?=0.",
+	"State PTC escalation [%/year], number.\n 0 if not set.",
  	NULL},
 {"ptc_sta_term", (getter)TaxCreditIncentives_get_ptc_sta_term,(setter)TaxCreditIncentives_set_ptc_sta_term,
-	"State PTC term [years], number.\n Required if: ?=10.",
+	"State PTC term [years], number.\n Required if ?=10.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -2589,268 +2589,268 @@ PaymentIncentives_set_pbi_uti_term(PaymentIncentivesObject *self, PyObject *valu
 
 static PyGetSetDef PaymentIncentives_getset[] = {
 {"cbi_fed_amount", (getter)PaymentIncentives_get_cbi_fed_amount,(setter)PaymentIncentives_set_cbi_fed_amount,
-	"Federal CBI amount [$/Watt], number.\n Required if: ?=0.0.",
+	"Federal CBI amount [$/Watt], number.\n Required if ?=0.0.",
  	NULL},
 {"cbi_fed_deprbas_fed", (getter)PaymentIncentives_get_cbi_fed_deprbas_fed,(setter)PaymentIncentives_set_cbi_fed_deprbas_fed,
-	"Federal CBI reduces federal depreciation basis [0/1], number.\n Constraints: BOOLEAN; Required if: ?=0.",
+	"Federal CBI reduces federal depreciation basis [0/1], number.\n Constraints: BOOLEAN; 0 if not set.",
  	NULL},
 {"cbi_fed_deprbas_sta", (getter)PaymentIncentives_get_cbi_fed_deprbas_sta,(setter)PaymentIncentives_set_cbi_fed_deprbas_sta,
-	"Federal CBI reduces state depreciation basis [0/1], number.\n Constraints: BOOLEAN; Required if: ?=0.",
+	"Federal CBI reduces state depreciation basis [0/1], number.\n Constraints: BOOLEAN; 0 if not set.",
  	NULL},
 {"cbi_fed_maxvalue", (getter)PaymentIncentives_get_cbi_fed_maxvalue,(setter)PaymentIncentives_set_cbi_fed_maxvalue,
-	"Federal CBI maximum [$], number.\n Required if: ?=1e99.",
+	"Federal CBI maximum [$], number.\n Required if ?=1e99.",
  	NULL},
 {"cbi_fed_tax_fed", (getter)PaymentIncentives_get_cbi_fed_tax_fed,(setter)PaymentIncentives_set_cbi_fed_tax_fed,
-	"Federal CBI federal taxable [0/1], number.\n Constraints: BOOLEAN; Required if: ?=1.",
+	"Federal CBI federal taxable [0/1], number.\n Constraints: BOOLEAN; Required if ?=1.",
  	NULL},
 {"cbi_fed_tax_sta", (getter)PaymentIncentives_get_cbi_fed_tax_sta,(setter)PaymentIncentives_set_cbi_fed_tax_sta,
-	"Federal CBI state taxable [0/1], number.\n Constraints: BOOLEAN; Required if: ?=1.",
+	"Federal CBI state taxable [0/1], number.\n Constraints: BOOLEAN; Required if ?=1.",
  	NULL},
 {"cbi_oth_amount", (getter)PaymentIncentives_get_cbi_oth_amount,(setter)PaymentIncentives_set_cbi_oth_amount,
-	"Other CBI amount [$/Watt], number.\n Required if: ?=0.0.",
+	"Other CBI amount [$/Watt], number.\n Required if ?=0.0.",
  	NULL},
 {"cbi_oth_deprbas_fed", (getter)PaymentIncentives_get_cbi_oth_deprbas_fed,(setter)PaymentIncentives_set_cbi_oth_deprbas_fed,
-	"Other CBI reduces federal depreciation basis [0/1], number.\n Constraints: BOOLEAN; Required if: ?=0.",
+	"Other CBI reduces federal depreciation basis [0/1], number.\n Constraints: BOOLEAN; 0 if not set.",
  	NULL},
 {"cbi_oth_deprbas_sta", (getter)PaymentIncentives_get_cbi_oth_deprbas_sta,(setter)PaymentIncentives_set_cbi_oth_deprbas_sta,
-	"Other CBI reduces state depreciation basis [0/1], number.\n Constraints: BOOLEAN; Required if: ?=0.",
+	"Other CBI reduces state depreciation basis [0/1], number.\n Constraints: BOOLEAN; 0 if not set.",
  	NULL},
 {"cbi_oth_maxvalue", (getter)PaymentIncentives_get_cbi_oth_maxvalue,(setter)PaymentIncentives_set_cbi_oth_maxvalue,
-	"Other CBI maximum [$], number.\n Required if: ?=1e99.",
+	"Other CBI maximum [$], number.\n Required if ?=1e99.",
  	NULL},
 {"cbi_oth_tax_fed", (getter)PaymentIncentives_get_cbi_oth_tax_fed,(setter)PaymentIncentives_set_cbi_oth_tax_fed,
-	"Other CBI federal taxable [0/1], number.\n Constraints: BOOLEAN; Required if: ?=1.",
+	"Other CBI federal taxable [0/1], number.\n Constraints: BOOLEAN; Required if ?=1.",
  	NULL},
 {"cbi_oth_tax_sta", (getter)PaymentIncentives_get_cbi_oth_tax_sta,(setter)PaymentIncentives_set_cbi_oth_tax_sta,
-	"Other CBI state taxable [0/1], number.\n Constraints: BOOLEAN; Required if: ?=1.",
+	"Other CBI state taxable [0/1], number.\n Constraints: BOOLEAN; Required if ?=1.",
  	NULL},
 {"cbi_sta_amount", (getter)PaymentIncentives_get_cbi_sta_amount,(setter)PaymentIncentives_set_cbi_sta_amount,
-	"State CBI amount [$/Watt], number.\n Required if: ?=0.0.",
+	"State CBI amount [$/Watt], number.\n Required if ?=0.0.",
  	NULL},
 {"cbi_sta_deprbas_fed", (getter)PaymentIncentives_get_cbi_sta_deprbas_fed,(setter)PaymentIncentives_set_cbi_sta_deprbas_fed,
-	"State CBI reduces federal depreciation basis [0/1], number.\n Constraints: BOOLEAN; Required if: ?=0.",
+	"State CBI reduces federal depreciation basis [0/1], number.\n Constraints: BOOLEAN; 0 if not set.",
  	NULL},
 {"cbi_sta_deprbas_sta", (getter)PaymentIncentives_get_cbi_sta_deprbas_sta,(setter)PaymentIncentives_set_cbi_sta_deprbas_sta,
-	"State CBI reduces state depreciation basis [0/1], number.\n Constraints: BOOLEAN; Required if: ?=0.",
+	"State CBI reduces state depreciation basis [0/1], number.\n Constraints: BOOLEAN; 0 if not set.",
  	NULL},
 {"cbi_sta_maxvalue", (getter)PaymentIncentives_get_cbi_sta_maxvalue,(setter)PaymentIncentives_set_cbi_sta_maxvalue,
-	"State CBI maximum [$], number.\n Required if: ?=1e99.",
+	"State CBI maximum [$], number.\n Required if ?=1e99.",
  	NULL},
 {"cbi_sta_tax_fed", (getter)PaymentIncentives_get_cbi_sta_tax_fed,(setter)PaymentIncentives_set_cbi_sta_tax_fed,
-	"State CBI federal taxable [0/1], number.\n Constraints: BOOLEAN; Required if: ?=1.",
+	"State CBI federal taxable [0/1], number.\n Constraints: BOOLEAN; Required if ?=1.",
  	NULL},
 {"cbi_sta_tax_sta", (getter)PaymentIncentives_get_cbi_sta_tax_sta,(setter)PaymentIncentives_set_cbi_sta_tax_sta,
-	"State CBI state taxable [0/1], number.\n Constraints: BOOLEAN; Required if: ?=1.",
+	"State CBI state taxable [0/1], number.\n Constraints: BOOLEAN; Required if ?=1.",
  	NULL},
 {"cbi_uti_amount", (getter)PaymentIncentives_get_cbi_uti_amount,(setter)PaymentIncentives_set_cbi_uti_amount,
-	"Utility CBI amount [$/Watt], number.\n Required if: ?=0.0.",
+	"Utility CBI amount [$/Watt], number.\n Required if ?=0.0.",
  	NULL},
 {"cbi_uti_deprbas_fed", (getter)PaymentIncentives_get_cbi_uti_deprbas_fed,(setter)PaymentIncentives_set_cbi_uti_deprbas_fed,
-	"Utility CBI reduces federal depreciation basis [0/1], number.\n Constraints: BOOLEAN; Required if: ?=0.",
+	"Utility CBI reduces federal depreciation basis [0/1], number.\n Constraints: BOOLEAN; 0 if not set.",
  	NULL},
 {"cbi_uti_deprbas_sta", (getter)PaymentIncentives_get_cbi_uti_deprbas_sta,(setter)PaymentIncentives_set_cbi_uti_deprbas_sta,
-	"Utility CBI reduces state depreciation basis [0/1], number.\n Constraints: BOOLEAN; Required if: ?=0.",
+	"Utility CBI reduces state depreciation basis [0/1], number.\n Constraints: BOOLEAN; 0 if not set.",
  	NULL},
 {"cbi_uti_maxvalue", (getter)PaymentIncentives_get_cbi_uti_maxvalue,(setter)PaymentIncentives_set_cbi_uti_maxvalue,
-	"Utility CBI maximum [$], number.\n Required if: ?=1e99.",
+	"Utility CBI maximum [$], number.\n Required if ?=1e99.",
  	NULL},
 {"cbi_uti_tax_fed", (getter)PaymentIncentives_get_cbi_uti_tax_fed,(setter)PaymentIncentives_set_cbi_uti_tax_fed,
-	"Utility CBI federal taxable [0/1], number.\n Constraints: BOOLEAN; Required if: ?=1.",
+	"Utility CBI federal taxable [0/1], number.\n Constraints: BOOLEAN; Required if ?=1.",
  	NULL},
 {"cbi_uti_tax_sta", (getter)PaymentIncentives_get_cbi_uti_tax_sta,(setter)PaymentIncentives_set_cbi_uti_tax_sta,
-	"Utility CBI state taxable [0/1], number.\n Constraints: BOOLEAN; Required if: ?=1.",
+	"Utility CBI state taxable [0/1], number.\n Constraints: BOOLEAN; Required if ?=1.",
  	NULL},
 {"ibi_fed_amount", (getter)PaymentIncentives_get_ibi_fed_amount,(setter)PaymentIncentives_set_ibi_fed_amount,
-	"Federal amount-based IBI amount [$], number.\n Required if: ?=0.",
+	"Federal amount-based IBI amount [$], number.\n 0 if not set.",
  	NULL},
 {"ibi_fed_amount_deprbas_fed", (getter)PaymentIncentives_get_ibi_fed_amount_deprbas_fed,(setter)PaymentIncentives_set_ibi_fed_amount_deprbas_fed,
-	"Federal amount-based IBI reduces federal depreciation basis [0/1], number.\n Constraints: BOOLEAN; Required if: ?=0.",
+	"Federal amount-based IBI reduces federal depreciation basis [0/1], number.\n Constraints: BOOLEAN; 0 if not set.",
  	NULL},
 {"ibi_fed_amount_deprbas_sta", (getter)PaymentIncentives_get_ibi_fed_amount_deprbas_sta,(setter)PaymentIncentives_set_ibi_fed_amount_deprbas_sta,
-	"Federal amount-based IBI reduces state depreciation basis [0/1], number.\n Constraints: BOOLEAN; Required if: ?=0.",
+	"Federal amount-based IBI reduces state depreciation basis [0/1], number.\n Constraints: BOOLEAN; 0 if not set.",
  	NULL},
 {"ibi_fed_amount_tax_fed", (getter)PaymentIncentives_get_ibi_fed_amount_tax_fed,(setter)PaymentIncentives_set_ibi_fed_amount_tax_fed,
-	"Federal amount-based IBI federal taxable [0/1], number.\n Constraints: BOOLEAN; Required if: ?=1.",
+	"Federal amount-based IBI federal taxable [0/1], number.\n Constraints: BOOLEAN; Required if ?=1.",
  	NULL},
 {"ibi_fed_amount_tax_sta", (getter)PaymentIncentives_get_ibi_fed_amount_tax_sta,(setter)PaymentIncentives_set_ibi_fed_amount_tax_sta,
-	"Federal amount-based IBI state taxable [0/1], number.\n Constraints: BOOLEAN; Required if: ?=1.",
+	"Federal amount-based IBI state taxable [0/1], number.\n Constraints: BOOLEAN; Required if ?=1.",
  	NULL},
 {"ibi_fed_percent", (getter)PaymentIncentives_get_ibi_fed_percent,(setter)PaymentIncentives_set_ibi_fed_percent,
-	"Federal percentage-based IBI percent [%], number.\n Required if: ?=0.0.",
+	"Federal percentage-based IBI percent [%], number.\n Required if ?=0.0.",
  	NULL},
 {"ibi_fed_percent_deprbas_fed", (getter)PaymentIncentives_get_ibi_fed_percent_deprbas_fed,(setter)PaymentIncentives_set_ibi_fed_percent_deprbas_fed,
-	"Federal percentage-based IBI reduces federal depreciation basis [0/1], number.\n Constraints: BOOLEAN; Required if: ?=0.",
+	"Federal percentage-based IBI reduces federal depreciation basis [0/1], number.\n Constraints: BOOLEAN; 0 if not set.",
  	NULL},
 {"ibi_fed_percent_deprbas_sta", (getter)PaymentIncentives_get_ibi_fed_percent_deprbas_sta,(setter)PaymentIncentives_set_ibi_fed_percent_deprbas_sta,
-	"Federal percentage-based IBI reduces state depreciation basis [0/1], number.\n Constraints: BOOLEAN; Required if: ?=0.",
+	"Federal percentage-based IBI reduces state depreciation basis [0/1], number.\n Constraints: BOOLEAN; 0 if not set.",
  	NULL},
 {"ibi_fed_percent_maxvalue", (getter)PaymentIncentives_get_ibi_fed_percent_maxvalue,(setter)PaymentIncentives_set_ibi_fed_percent_maxvalue,
-	"Federal percentage-based IBI maximum value [$], number.\n Required if: ?=1e99.",
+	"Federal percentage-based IBI maximum value [$], number.\n Required if ?=1e99.",
  	NULL},
 {"ibi_fed_percent_tax_fed", (getter)PaymentIncentives_get_ibi_fed_percent_tax_fed,(setter)PaymentIncentives_set_ibi_fed_percent_tax_fed,
-	"Federal percentage-based IBI federal taxable [0/1], number.\n Constraints: BOOLEAN; Required if: ?=1.",
+	"Federal percentage-based IBI federal taxable [0/1], number.\n Constraints: BOOLEAN; Required if ?=1.",
  	NULL},
 {"ibi_fed_percent_tax_sta", (getter)PaymentIncentives_get_ibi_fed_percent_tax_sta,(setter)PaymentIncentives_set_ibi_fed_percent_tax_sta,
-	"Federal percentage-based IBI state taxable [0/1], number.\n Constraints: BOOLEAN; Required if: ?=1.",
+	"Federal percentage-based IBI state taxable [0/1], number.\n Constraints: BOOLEAN; Required if ?=1.",
  	NULL},
 {"ibi_oth_amount", (getter)PaymentIncentives_get_ibi_oth_amount,(setter)PaymentIncentives_set_ibi_oth_amount,
-	"Other amount-based IBI amount [$], number.\n Required if: ?=0.",
+	"Other amount-based IBI amount [$], number.\n 0 if not set.",
  	NULL},
 {"ibi_oth_amount_deprbas_fed", (getter)PaymentIncentives_get_ibi_oth_amount_deprbas_fed,(setter)PaymentIncentives_set_ibi_oth_amount_deprbas_fed,
-	"Other amount-based IBI reduces federal depreciation basis [0/1], number.\n Constraints: BOOLEAN; Required if: ?=0.",
+	"Other amount-based IBI reduces federal depreciation basis [0/1], number.\n Constraints: BOOLEAN; 0 if not set.",
  	NULL},
 {"ibi_oth_amount_deprbas_sta", (getter)PaymentIncentives_get_ibi_oth_amount_deprbas_sta,(setter)PaymentIncentives_set_ibi_oth_amount_deprbas_sta,
-	"Other amount-based IBI reduces state depreciation basis [0/1], number.\n Constraints: BOOLEAN; Required if: ?=0.",
+	"Other amount-based IBI reduces state depreciation basis [0/1], number.\n Constraints: BOOLEAN; 0 if not set.",
  	NULL},
 {"ibi_oth_amount_tax_fed", (getter)PaymentIncentives_get_ibi_oth_amount_tax_fed,(setter)PaymentIncentives_set_ibi_oth_amount_tax_fed,
-	"Other amount-based IBI federal taxable [0/1], number.\n Constraints: BOOLEAN; Required if: ?=1.",
+	"Other amount-based IBI federal taxable [0/1], number.\n Constraints: BOOLEAN; Required if ?=1.",
  	NULL},
 {"ibi_oth_amount_tax_sta", (getter)PaymentIncentives_get_ibi_oth_amount_tax_sta,(setter)PaymentIncentives_set_ibi_oth_amount_tax_sta,
-	"Other amount-based IBI state taxable [0/1], number.\n Constraints: BOOLEAN; Required if: ?=1.",
+	"Other amount-based IBI state taxable [0/1], number.\n Constraints: BOOLEAN; Required if ?=1.",
  	NULL},
 {"ibi_oth_percent", (getter)PaymentIncentives_get_ibi_oth_percent,(setter)PaymentIncentives_set_ibi_oth_percent,
-	"Other percentage-based IBI percent [%], number.\n Required if: ?=0.0.",
+	"Other percentage-based IBI percent [%], number.\n Required if ?=0.0.",
  	NULL},
 {"ibi_oth_percent_deprbas_fed", (getter)PaymentIncentives_get_ibi_oth_percent_deprbas_fed,(setter)PaymentIncentives_set_ibi_oth_percent_deprbas_fed,
-	"Other percentage-based IBI reduces federal depreciation basis [0/1], number.\n Constraints: BOOLEAN; Required if: ?=0.",
+	"Other percentage-based IBI reduces federal depreciation basis [0/1], number.\n Constraints: BOOLEAN; 0 if not set.",
  	NULL},
 {"ibi_oth_percent_deprbas_sta", (getter)PaymentIncentives_get_ibi_oth_percent_deprbas_sta,(setter)PaymentIncentives_set_ibi_oth_percent_deprbas_sta,
-	"Other percentage-based IBI reduces state depreciation basis [0/1], number.\n Constraints: BOOLEAN; Required if: ?=0.",
+	"Other percentage-based IBI reduces state depreciation basis [0/1], number.\n Constraints: BOOLEAN; 0 if not set.",
  	NULL},
 {"ibi_oth_percent_maxvalue", (getter)PaymentIncentives_get_ibi_oth_percent_maxvalue,(setter)PaymentIncentives_set_ibi_oth_percent_maxvalue,
-	"Other percentage-based IBI maximum value [$], number.\n Required if: ?=1e99.",
+	"Other percentage-based IBI maximum value [$], number.\n Required if ?=1e99.",
  	NULL},
 {"ibi_oth_percent_tax_fed", (getter)PaymentIncentives_get_ibi_oth_percent_tax_fed,(setter)PaymentIncentives_set_ibi_oth_percent_tax_fed,
-	"Other percentage-based IBI federal taxable [0/1], number.\n Constraints: BOOLEAN; Required if: ?=1.",
+	"Other percentage-based IBI federal taxable [0/1], number.\n Constraints: BOOLEAN; Required if ?=1.",
  	NULL},
 {"ibi_oth_percent_tax_sta", (getter)PaymentIncentives_get_ibi_oth_percent_tax_sta,(setter)PaymentIncentives_set_ibi_oth_percent_tax_sta,
-	"Other percentage-based IBI state taxable [0/1], number.\n Constraints: BOOLEAN; Required if: ?=1.",
+	"Other percentage-based IBI state taxable [0/1], number.\n Constraints: BOOLEAN; Required if ?=1.",
  	NULL},
 {"ibi_sta_amount", (getter)PaymentIncentives_get_ibi_sta_amount,(setter)PaymentIncentives_set_ibi_sta_amount,
-	"State amount-based IBI amount [$], number.\n Required if: ?=0.",
+	"State amount-based IBI amount [$], number.\n 0 if not set.",
  	NULL},
 {"ibi_sta_amount_deprbas_fed", (getter)PaymentIncentives_get_ibi_sta_amount_deprbas_fed,(setter)PaymentIncentives_set_ibi_sta_amount_deprbas_fed,
-	"State amount-based IBI reduces federal depreciation basis [0/1], number.\n Constraints: BOOLEAN; Required if: ?=0.",
+	"State amount-based IBI reduces federal depreciation basis [0/1], number.\n Constraints: BOOLEAN; 0 if not set.",
  	NULL},
 {"ibi_sta_amount_deprbas_sta", (getter)PaymentIncentives_get_ibi_sta_amount_deprbas_sta,(setter)PaymentIncentives_set_ibi_sta_amount_deprbas_sta,
-	"State amount-based IBI reduces state depreciation basis [0/1], number.\n Constraints: BOOLEAN; Required if: ?=0.",
+	"State amount-based IBI reduces state depreciation basis [0/1], number.\n Constraints: BOOLEAN; 0 if not set.",
  	NULL},
 {"ibi_sta_amount_tax_fed", (getter)PaymentIncentives_get_ibi_sta_amount_tax_fed,(setter)PaymentIncentives_set_ibi_sta_amount_tax_fed,
-	"State amount-based IBI federal taxable [0/1], number.\n Constraints: BOOLEAN; Required if: ?=1.",
+	"State amount-based IBI federal taxable [0/1], number.\n Constraints: BOOLEAN; Required if ?=1.",
  	NULL},
 {"ibi_sta_amount_tax_sta", (getter)PaymentIncentives_get_ibi_sta_amount_tax_sta,(setter)PaymentIncentives_set_ibi_sta_amount_tax_sta,
-	"State amount-based IBI state taxable [0/1], number.\n Constraints: BOOLEAN; Required if: ?=1.",
+	"State amount-based IBI state taxable [0/1], number.\n Constraints: BOOLEAN; Required if ?=1.",
  	NULL},
 {"ibi_sta_percent", (getter)PaymentIncentives_get_ibi_sta_percent,(setter)PaymentIncentives_set_ibi_sta_percent,
-	"State percentage-based IBI percent [%], number.\n Required if: ?=0.0.",
+	"State percentage-based IBI percent [%], number.\n Required if ?=0.0.",
  	NULL},
 {"ibi_sta_percent_deprbas_fed", (getter)PaymentIncentives_get_ibi_sta_percent_deprbas_fed,(setter)PaymentIncentives_set_ibi_sta_percent_deprbas_fed,
-	"State percentage-based IBI reduces federal depreciation basis [0/1], number.\n Constraints: BOOLEAN; Required if: ?=0.",
+	"State percentage-based IBI reduces federal depreciation basis [0/1], number.\n Constraints: BOOLEAN; 0 if not set.",
  	NULL},
 {"ibi_sta_percent_deprbas_sta", (getter)PaymentIncentives_get_ibi_sta_percent_deprbas_sta,(setter)PaymentIncentives_set_ibi_sta_percent_deprbas_sta,
-	"State percentage-based IBI reduces state depreciation basis [0/1], number.\n Constraints: BOOLEAN; Required if: ?=0.",
+	"State percentage-based IBI reduces state depreciation basis [0/1], number.\n Constraints: BOOLEAN; 0 if not set.",
  	NULL},
 {"ibi_sta_percent_maxvalue", (getter)PaymentIncentives_get_ibi_sta_percent_maxvalue,(setter)PaymentIncentives_set_ibi_sta_percent_maxvalue,
-	"State percentage-based IBI maximum value [$], number.\n Required if: ?=1e99.",
+	"State percentage-based IBI maximum value [$], number.\n Required if ?=1e99.",
  	NULL},
 {"ibi_sta_percent_tax_fed", (getter)PaymentIncentives_get_ibi_sta_percent_tax_fed,(setter)PaymentIncentives_set_ibi_sta_percent_tax_fed,
-	"State percentage-based IBI federal taxable [0/1], number.\n Constraints: BOOLEAN; Required if: ?=1.",
+	"State percentage-based IBI federal taxable [0/1], number.\n Constraints: BOOLEAN; Required if ?=1.",
  	NULL},
 {"ibi_sta_percent_tax_sta", (getter)PaymentIncentives_get_ibi_sta_percent_tax_sta,(setter)PaymentIncentives_set_ibi_sta_percent_tax_sta,
-	"State percentage-based IBI state taxable [0/1], number.\n Constraints: BOOLEAN; Required if: ?=1.",
+	"State percentage-based IBI state taxable [0/1], number.\n Constraints: BOOLEAN; Required if ?=1.",
  	NULL},
 {"ibi_uti_amount", (getter)PaymentIncentives_get_ibi_uti_amount,(setter)PaymentIncentives_set_ibi_uti_amount,
-	"Utility amount-based IBI amount [$], number.\n Required if: ?=0.",
+	"Utility amount-based IBI amount [$], number.\n 0 if not set.",
  	NULL},
 {"ibi_uti_amount_deprbas_fed", (getter)PaymentIncentives_get_ibi_uti_amount_deprbas_fed,(setter)PaymentIncentives_set_ibi_uti_amount_deprbas_fed,
-	"Utility amount-based IBI reduces federal depreciation basis [0/1], number.\n Constraints: BOOLEAN; Required if: ?=0.",
+	"Utility amount-based IBI reduces federal depreciation basis [0/1], number.\n Constraints: BOOLEAN; 0 if not set.",
  	NULL},
 {"ibi_uti_amount_deprbas_sta", (getter)PaymentIncentives_get_ibi_uti_amount_deprbas_sta,(setter)PaymentIncentives_set_ibi_uti_amount_deprbas_sta,
-	"Utility amount-based IBI reduces state depreciation basis [0/1], number.\n Constraints: BOOLEAN; Required if: ?=0.",
+	"Utility amount-based IBI reduces state depreciation basis [0/1], number.\n Constraints: BOOLEAN; 0 if not set.",
  	NULL},
 {"ibi_uti_amount_tax_fed", (getter)PaymentIncentives_get_ibi_uti_amount_tax_fed,(setter)PaymentIncentives_set_ibi_uti_amount_tax_fed,
-	"Utility amount-based IBI federal taxable [0/1], number.\n Constraints: BOOLEAN; Required if: ?=1.",
+	"Utility amount-based IBI federal taxable [0/1], number.\n Constraints: BOOLEAN; Required if ?=1.",
  	NULL},
 {"ibi_uti_amount_tax_sta", (getter)PaymentIncentives_get_ibi_uti_amount_tax_sta,(setter)PaymentIncentives_set_ibi_uti_amount_tax_sta,
-	"Utility amount-based IBI state taxable [0/1], number.\n Constraints: BOOLEAN; Required if: ?=1.",
+	"Utility amount-based IBI state taxable [0/1], number.\n Constraints: BOOLEAN; Required if ?=1.",
  	NULL},
 {"ibi_uti_percent", (getter)PaymentIncentives_get_ibi_uti_percent,(setter)PaymentIncentives_set_ibi_uti_percent,
-	"Utility percentage-based IBI percent [%], number.\n Required if: ?=0.0.",
+	"Utility percentage-based IBI percent [%], number.\n Required if ?=0.0.",
  	NULL},
 {"ibi_uti_percent_deprbas_fed", (getter)PaymentIncentives_get_ibi_uti_percent_deprbas_fed,(setter)PaymentIncentives_set_ibi_uti_percent_deprbas_fed,
-	"Utility percentage-based IBI reduces federal depreciation basis [0/1], number.\n Constraints: BOOLEAN; Required if: ?=0.",
+	"Utility percentage-based IBI reduces federal depreciation basis [0/1], number.\n Constraints: BOOLEAN; 0 if not set.",
  	NULL},
 {"ibi_uti_percent_deprbas_sta", (getter)PaymentIncentives_get_ibi_uti_percent_deprbas_sta,(setter)PaymentIncentives_set_ibi_uti_percent_deprbas_sta,
-	"Utility percentage-based IBI reduces state depreciation basis [0/1], number.\n Constraints: BOOLEAN; Required if: ?=0.",
+	"Utility percentage-based IBI reduces state depreciation basis [0/1], number.\n Constraints: BOOLEAN; 0 if not set.",
  	NULL},
 {"ibi_uti_percent_maxvalue", (getter)PaymentIncentives_get_ibi_uti_percent_maxvalue,(setter)PaymentIncentives_set_ibi_uti_percent_maxvalue,
-	"Utility percentage-based IBI maximum value [$], number.\n Required if: ?=1e99.",
+	"Utility percentage-based IBI maximum value [$], number.\n Required if ?=1e99.",
  	NULL},
 {"ibi_uti_percent_tax_fed", (getter)PaymentIncentives_get_ibi_uti_percent_tax_fed,(setter)PaymentIncentives_set_ibi_uti_percent_tax_fed,
-	"Utility percentage-based IBI federal taxable [0/1], number.\n Constraints: BOOLEAN; Required if: ?=1.",
+	"Utility percentage-based IBI federal taxable [0/1], number.\n Constraints: BOOLEAN; Required if ?=1.",
  	NULL},
 {"ibi_uti_percent_tax_sta", (getter)PaymentIncentives_get_ibi_uti_percent_tax_sta,(setter)PaymentIncentives_set_ibi_uti_percent_tax_sta,
-	"Utility percentage-based IBI state taxable [0/1], number.\n Constraints: BOOLEAN; Required if: ?=1.",
+	"Utility percentage-based IBI state taxable [0/1], number.\n Constraints: BOOLEAN; Required if ?=1.",
  	NULL},
 {"pbi_fed_amount", (getter)PaymentIncentives_get_pbi_fed_amount,(setter)PaymentIncentives_set_pbi_fed_amount,
-	"Federal PBI amount [$/kWh], array.\n Required if: ?=0.",
+	"Federal PBI amount [$/kWh], array.\n 0 if not set.",
  	NULL},
 {"pbi_fed_escal", (getter)PaymentIncentives_get_pbi_fed_escal,(setter)PaymentIncentives_set_pbi_fed_escal,
-	"Federal PBI escalation [%], number.\n Required if: ?=0.",
+	"Federal PBI escalation [%], number.\n 0 if not set.",
  	NULL},
 {"pbi_fed_tax_fed", (getter)PaymentIncentives_get_pbi_fed_tax_fed,(setter)PaymentIncentives_set_pbi_fed_tax_fed,
-	"Federal PBI federal taxable [0/1], number.\n Constraints: BOOLEAN; Required if: ?=1.",
+	"Federal PBI federal taxable [0/1], number.\n Constraints: BOOLEAN; Required if ?=1.",
  	NULL},
 {"pbi_fed_tax_sta", (getter)PaymentIncentives_get_pbi_fed_tax_sta,(setter)PaymentIncentives_set_pbi_fed_tax_sta,
-	"Federal PBI state taxable [0/1], number.\n Constraints: BOOLEAN; Required if: ?=1.",
+	"Federal PBI state taxable [0/1], number.\n Constraints: BOOLEAN; Required if ?=1.",
  	NULL},
 {"pbi_fed_term", (getter)PaymentIncentives_get_pbi_fed_term,(setter)PaymentIncentives_set_pbi_fed_term,
-	"Federal PBI term [years], number.\n Required if: ?=0.",
+	"Federal PBI term [years], number.\n 0 if not set.",
  	NULL},
 {"pbi_oth_amount", (getter)PaymentIncentives_get_pbi_oth_amount,(setter)PaymentIncentives_set_pbi_oth_amount,
-	"Other PBI amount [$/kWh], array.\n Required if: ?=0.",
+	"Other PBI amount [$/kWh], array.\n 0 if not set.",
  	NULL},
 {"pbi_oth_escal", (getter)PaymentIncentives_get_pbi_oth_escal,(setter)PaymentIncentives_set_pbi_oth_escal,
-	"Other PBI escalation [%], number.\n Required if: ?=0.",
+	"Other PBI escalation [%], number.\n 0 if not set.",
  	NULL},
 {"pbi_oth_tax_fed", (getter)PaymentIncentives_get_pbi_oth_tax_fed,(setter)PaymentIncentives_set_pbi_oth_tax_fed,
-	"Other PBI federal taxable [0/1], number.\n Constraints: BOOLEAN; Required if: ?=1.",
+	"Other PBI federal taxable [0/1], number.\n Constraints: BOOLEAN; Required if ?=1.",
  	NULL},
 {"pbi_oth_tax_sta", (getter)PaymentIncentives_get_pbi_oth_tax_sta,(setter)PaymentIncentives_set_pbi_oth_tax_sta,
-	"Other PBI state taxable [0/1], number.\n Constraints: BOOLEAN; Required if: ?=1.",
+	"Other PBI state taxable [0/1], number.\n Constraints: BOOLEAN; Required if ?=1.",
  	NULL},
 {"pbi_oth_term", (getter)PaymentIncentives_get_pbi_oth_term,(setter)PaymentIncentives_set_pbi_oth_term,
-	"Other PBI term [years], number.\n Required if: ?=0.",
+	"Other PBI term [years], number.\n 0 if not set.",
  	NULL},
 {"pbi_sta_amount", (getter)PaymentIncentives_get_pbi_sta_amount,(setter)PaymentIncentives_set_pbi_sta_amount,
-	"State PBI amount [$/kWh], array.\n Required if: ?=0.",
+	"State PBI amount [$/kWh], array.\n 0 if not set.",
  	NULL},
 {"pbi_sta_escal", (getter)PaymentIncentives_get_pbi_sta_escal,(setter)PaymentIncentives_set_pbi_sta_escal,
-	"State PBI escalation [%], number.\n Required if: ?=0.",
+	"State PBI escalation [%], number.\n 0 if not set.",
  	NULL},
 {"pbi_sta_tax_fed", (getter)PaymentIncentives_get_pbi_sta_tax_fed,(setter)PaymentIncentives_set_pbi_sta_tax_fed,
-	"State PBI federal taxable [0/1], number.\n Constraints: BOOLEAN; Required if: ?=1.",
+	"State PBI federal taxable [0/1], number.\n Constraints: BOOLEAN; Required if ?=1.",
  	NULL},
 {"pbi_sta_tax_sta", (getter)PaymentIncentives_get_pbi_sta_tax_sta,(setter)PaymentIncentives_set_pbi_sta_tax_sta,
-	"State PBI state taxable [0/1], number.\n Constraints: BOOLEAN; Required if: ?=1.",
+	"State PBI state taxable [0/1], number.\n Constraints: BOOLEAN; Required if ?=1.",
  	NULL},
 {"pbi_sta_term", (getter)PaymentIncentives_get_pbi_sta_term,(setter)PaymentIncentives_set_pbi_sta_term,
-	"State PBI term [years], number.\n Required if: ?=0.",
+	"State PBI term [years], number.\n 0 if not set.",
  	NULL},
 {"pbi_uti_amount", (getter)PaymentIncentives_get_pbi_uti_amount,(setter)PaymentIncentives_set_pbi_uti_amount,
-	"Utility PBI amount [$/kWh], array.\n Required if: ?=0.",
+	"Utility PBI amount [$/kWh], array.\n 0 if not set.",
  	NULL},
 {"pbi_uti_escal", (getter)PaymentIncentives_get_pbi_uti_escal,(setter)PaymentIncentives_set_pbi_uti_escal,
-	"Utility PBI escalation [%], number.\n Required if: ?=0.",
+	"Utility PBI escalation [%], number.\n 0 if not set.",
  	NULL},
 {"pbi_uti_tax_fed", (getter)PaymentIncentives_get_pbi_uti_tax_fed,(setter)PaymentIncentives_set_pbi_uti_tax_fed,
-	"Utility PBI federal taxable [0/1], number.\n Constraints: BOOLEAN; Required if: ?=1.",
+	"Utility PBI federal taxable [0/1], number.\n Constraints: BOOLEAN; Required if ?=1.",
  	NULL},
 {"pbi_uti_tax_sta", (getter)PaymentIncentives_get_pbi_uti_tax_sta,(setter)PaymentIncentives_set_pbi_uti_tax_sta,
-	"Utility PBI state taxable [0/1], number.\n Constraints: BOOLEAN; Required if: ?=1.",
+	"Utility PBI state taxable [0/1], number.\n Constraints: BOOLEAN; Required if ?=1.",
  	NULL},
 {"pbi_uti_term", (getter)PaymentIncentives_get_pbi_uti_term,(setter)PaymentIncentives_set_pbi_uti_term,
-	"Utility PBI term [years], number.\n Required if: ?=0.",
+	"Utility PBI term [years], number.\n 0 if not set.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -3036,19 +3036,19 @@ static PyGetSetDef Battery_getset[] = {
 	"Battery bank replacements per year [number/year], array.\n ",
  	NULL},
 {"batt_computed_bank_capacity", (getter)Battery_get_batt_computed_bank_capacity,(setter)Battery_set_batt_computed_bank_capacity,
-	"Battery bank capacity [kWh], number.\n Required if: ?=0.0.",
+	"Battery bank capacity [kWh], number.\n Required if ?=0.0.",
  	NULL},
 {"batt_replacement_option", (getter)Battery_get_batt_replacement_option,(setter)Battery_set_batt_replacement_option,
-	"Enable battery replacement? [0=none,1=capacity based,2=user schedule], number.\n Constraints: INTEGER,MIN=0,MAX=2; Required if: ?=0.",
+	"Enable battery replacement? [0=none,1=capacity based,2=user schedule], number.\n Constraints: INTEGER,MIN=0,MAX=2; 0 if not set.",
  	NULL},
 {"batt_replacement_schedule", (getter)Battery_get_batt_replacement_schedule,(setter)Battery_set_batt_replacement_schedule,
 	"Battery bank replacements per year (user specified) [number/year], array.\n ",
  	NULL},
 {"battery_per_kWh", (getter)Battery_get_battery_per_kWh,(setter)Battery_set_battery_per_kWh,
-	"Battery cost [$/kWh], number.\n Required if: ?=0.0.",
+	"Battery cost [$/kWh], number.\n Required if ?=0.0.",
  	NULL},
 {"en_batt", (getter)Battery_get_en_batt,(setter)Battery_set_en_batt,
-	"Enable battery storage model [0/1], number.\n Required if: ?=0.",
+	"Enable battery storage model [0/1], number.\n 0 if not set.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -3231,19 +3231,19 @@ FuelCell_set_fuelcell_replacement_schedule(FuelCellObject *self, PyObject *value
 
 static PyGetSetDef FuelCell_getset[] = {
 {"en_fuelcell", (getter)FuelCell_get_en_fuelcell,(setter)FuelCell_set_en_fuelcell,
-	"Enable fuel cell storage model [0/1], number.\n Required if: ?=0.",
+	"Enable fuel cell storage model [0/1], number.\n 0 if not set.",
  	NULL},
 {"fuelcell_computed_bank_capacity", (getter)FuelCell_get_fuelcell_computed_bank_capacity,(setter)FuelCell_set_fuelcell_computed_bank_capacity,
-	"Fuel cell capacity [kWh], number.\n Required if: ?=0.0.",
+	"Fuel cell capacity [kWh], number.\n Required if ?=0.0.",
  	NULL},
 {"fuelcell_per_kWh", (getter)FuelCell_get_fuelcell_per_kWh,(setter)FuelCell_set_fuelcell_per_kWh,
-	"Fuel cell cost [$/kWh], number.\n Required if: ?=0.0.",
+	"Fuel cell cost [$/kWh], number.\n Required if ?=0.0.",
  	NULL},
 {"fuelcell_replacement", (getter)FuelCell_get_fuelcell_replacement,(setter)FuelCell_set_fuelcell_replacement,
 	"Fuel cell replacements per year [number/year], array.\n ",
  	NULL},
 {"fuelcell_replacement_option", (getter)FuelCell_get_fuelcell_replacement_option,(setter)FuelCell_set_fuelcell_replacement_option,
-	"Enable fuel cell replacement? [0=none,1=capacity based,2=user schedule], number.\n Constraints: INTEGER,MIN=0,MAX=2; Required if: ?=0.",
+	"Enable fuel cell replacement? [0=none,1=capacity based,2=user schedule], number.\n Constraints: INTEGER,MIN=0,MAX=2; 0 if not set.",
  	NULL},
 {"fuelcell_replacement_schedule", (getter)FuelCell_get_fuelcell_replacement_schedule,(setter)FuelCell_set_fuelcell_replacement_schedule,
 	"Fuel cell replacements per year (user specified) [number/year], array.\n ",
@@ -3429,22 +3429,22 @@ Cashloan_set_total_installed_cost(CashloanObject *self, PyObject *value, void *c
 
 static PyGetSetDef Cashloan_getset[] = {
 {"annual_energy_value", (getter)Cashloan_get_annual_energy_value,(setter)Cashloan_set_annual_energy_value,
-	"Energy value [$], array.\n Required if: *.",
+	"Energy value [$], array.\n Required.",
  	NULL},
 {"annual_themal_value", (getter)Cashloan_get_annual_themal_value,(setter)Cashloan_set_annual_themal_value,
 	"Energy value [$], array.\n ",
  	NULL},
 {"market", (getter)Cashloan_get_market,(setter)Cashloan_set_market,
-	"Residential or Commercial Market [0/1], number.\n 0=residential,1=comm.; Constraints: INTEGER,MIN=0,MAX=1; Required if: ?=1.",
+	"Residential or Commercial Market [0/1], number.\n 0=residential,1=comm.; Constraints: INTEGER,MIN=0,MAX=1; Required if ?=1.",
  	NULL},
 {"mortgage", (getter)Cashloan_get_mortgage,(setter)Cashloan_set_mortgage,
-	"Use mortgage style loan (res. only) [0/1], number.\n 0=standard loan,1=mortgage; Constraints: INTEGER,MIN=0,MAX=1; Required if: ?=0.",
+	"Use mortgage style loan (res. only) [0/1], number.\n 0=standard loan,1=mortgage; Constraints: INTEGER,MIN=0,MAX=1; 0 if not set.",
  	NULL},
 {"salvage_percentage", (getter)Cashloan_get_salvage_percentage,(setter)Cashloan_set_salvage_percentage,
-	"Salvage value percentage [%], number.\n Constraints: MIN=0,MAX=100; Required if: ?=0.0.",
+	"Salvage value percentage [%], number.\n Constraints: MIN=0,MAX=100; Required if ?=0.0.",
  	NULL},
 {"total_installed_cost", (getter)Cashloan_get_total_installed_cost,(setter)Cashloan_set_total_installed_cost,
-	"Total installed cost [$], number.\n Constraints: MIN=0; Required if: *.",
+	"Total installed cost [$], number.\n Constraints: MIN=0; Required.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -3497,39 +3497,39 @@ static PyTypeObject Cashloan_Type = {
 
 
 	/*
-	 * Common Group
+	 * SystemOutput Group
 	 */ 
 
 typedef struct {
 	PyObject_HEAD
 	SAM_Cashloan   data_ptr;
-} CommonObject;
+} SystemOutputObject;
 
-static PyTypeObject Common_Type;
+static PyTypeObject SystemOutput_Type;
 
 static PyObject *
-Common_new(SAM_Cashloan data_ptr)
+SystemOutput_new(SAM_Cashloan data_ptr)
 {
-	PyObject* new_obj = Common_Type.tp_alloc(&Common_Type,0);
+	PyObject* new_obj = SystemOutput_Type.tp_alloc(&SystemOutput_Type,0);
 
-	CommonObject* Common_obj = (CommonObject*)new_obj;
+	SystemOutputObject* SystemOutput_obj = (SystemOutputObject*)new_obj;
 
-	Common_obj->data_ptr = data_ptr;
+	SystemOutput_obj->data_ptr = data_ptr;
 
 	return new_obj;
 }
 
-/* Common methods */
+/* SystemOutput methods */
 
 static PyObject *
-Common_assign(CommonObject *self, PyObject *args)
+SystemOutput_assign(SystemOutputObject *self, PyObject *args)
 {
 	PyObject* dict;
 	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Cashloan", "Common")){
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Cashloan", "SystemOutput")){
 		return NULL;
 	}
 
@@ -3538,46 +3538,61 @@ Common_assign(CommonObject *self, PyObject *args)
 }
 
 static PyObject *
-Common_export(CommonObject *self, PyObject *args)
+SystemOutput_export(SystemOutputObject *self, PyObject *args)
 {
-	PyTypeObject* tp = &Common_Type;
+	PyTypeObject* tp = &SystemOutput_Type;
 	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
 	return dict;
 }
 
-static PyMethodDef Common_methods[] = {
-		{"assign",            (PyCFunction)Common_assign,  METH_VARARGS,
+static PyMethodDef SystemOutput_methods[] = {
+		{"assign",            (PyCFunction)SystemOutput_assign,  METH_VARARGS,
 			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
-		{"export",            (PyCFunction)Common_export,  METH_VARARGS,
+		{"export",            (PyCFunction)SystemOutput_export,  METH_VARARGS,
 			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 static PyObject *
-Common_get_gen(CommonObject *self, void *closure)
+SystemOutput_get_degradation(SystemOutputObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Cashloan_Common_gen_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Cashloan_SystemOutput_degradation_aget, self->data_ptr);
 }
 
 static int
-Common_set_gen(CommonObject *self, PyObject *value, void *closure)
+SystemOutput_set_degradation(SystemOutputObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Cashloan_Common_gen_aset, self->data_ptr);
+		return PySAM_array_setter(value, SAM_Cashloan_SystemOutput_degradation_aset, self->data_ptr);
 }
 
-static PyGetSetDef Common_getset[] = {
-{"gen", (getter)Common_get_gen,(setter)Common_set_gen,
-	"Power generated by renewable resource [kW], array.\n Required if: *.",
+static PyObject *
+SystemOutput_get_gen(SystemOutputObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Cashloan_SystemOutput_gen_aget, self->data_ptr);
+}
+
+static int
+SystemOutput_set_gen(SystemOutputObject *self, PyObject *value, void *closure)
+{
+		return PySAM_array_setter(value, SAM_Cashloan_SystemOutput_gen_aset, self->data_ptr);
+}
+
+static PyGetSetDef SystemOutput_getset[] = {
+{"degradation", (getter)SystemOutput_get_degradation,(setter)SystemOutput_set_degradation,
+	"Annual degradation [%], array.\n Required.",
+ 	NULL},
+{"gen", (getter)SystemOutput_get_gen,(setter)SystemOutput_set_gen,
+	"Power generated by renewable resource [kW], array.\n Required.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
 
-static PyTypeObject Common_Type = {
+static PyTypeObject SystemOutput_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"CashloanModel.Common",             /*tp_name*/
-		sizeof(CommonObject),          /*tp_basicsize*/
+		"CashloanModel.SystemOutput",             /*tp_name*/
+		sizeof(SystemOutputObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
 		0,    /*tp_dealloc*/
@@ -3603,9 +3618,9 @@ static PyTypeObject Common_Type = {
 		0,                          /*tp_weaklistoffset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
-		Common_methods,         /*tp_methods*/
+		SystemOutput_methods,         /*tp_methods*/
 		0,                          /*tp_members*/
-		Common_getset,          /*tp_getset*/
+		SystemOutput_getset,          /*tp_getset*/
 		0,                          /*tp_base*/
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
@@ -3620,39 +3635,39 @@ static PyTypeObject Common_Type = {
 
 
 	/*
-	 * AnnualOutput Group
+	 * Lifetime Group
 	 */ 
 
 typedef struct {
 	PyObject_HEAD
 	SAM_Cashloan   data_ptr;
-} AnnualOutputObject;
+} LifetimeObject;
 
-static PyTypeObject AnnualOutput_Type;
+static PyTypeObject Lifetime_Type;
 
 static PyObject *
-AnnualOutput_new(SAM_Cashloan data_ptr)
+Lifetime_new(SAM_Cashloan data_ptr)
 {
-	PyObject* new_obj = AnnualOutput_Type.tp_alloc(&AnnualOutput_Type,0);
+	PyObject* new_obj = Lifetime_Type.tp_alloc(&Lifetime_Type,0);
 
-	AnnualOutputObject* AnnualOutput_obj = (AnnualOutputObject*)new_obj;
+	LifetimeObject* Lifetime_obj = (LifetimeObject*)new_obj;
 
-	AnnualOutput_obj->data_ptr = data_ptr;
+	Lifetime_obj->data_ptr = data_ptr;
 
 	return new_obj;
 }
 
-/* AnnualOutput methods */
+/* Lifetime methods */
 
 static PyObject *
-AnnualOutput_assign(AnnualOutputObject *self, PyObject *args)
+Lifetime_assign(LifetimeObject *self, PyObject *args)
 {
 	PyObject* dict;
 	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Cashloan", "AnnualOutput")){
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Cashloan", "Lifetime")){
 		return NULL;
 	}
 
@@ -3661,61 +3676,46 @@ AnnualOutput_assign(AnnualOutputObject *self, PyObject *args)
 }
 
 static PyObject *
-AnnualOutput_export(AnnualOutputObject *self, PyObject *args)
+Lifetime_export(LifetimeObject *self, PyObject *args)
 {
-	PyTypeObject* tp = &AnnualOutput_Type;
+	PyTypeObject* tp = &Lifetime_Type;
 	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
 	return dict;
 }
 
-static PyMethodDef AnnualOutput_methods[] = {
-		{"assign",            (PyCFunction)AnnualOutput_assign,  METH_VARARGS,
+static PyMethodDef Lifetime_methods[] = {
+		{"assign",            (PyCFunction)Lifetime_assign,  METH_VARARGS,
 			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
-		{"export",            (PyCFunction)AnnualOutput_export,  METH_VARARGS,
+		{"export",            (PyCFunction)Lifetime_export,  METH_VARARGS,
 			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 static PyObject *
-AnnualOutput_get_degradation(AnnualOutputObject *self, void *closure)
+Lifetime_get_system_use_lifetime_output(LifetimeObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Cashloan_AnnualOutput_degradation_aget, self->data_ptr);
+	return PySAM_float_getter(SAM_Cashloan_Lifetime_system_use_lifetime_output_fget, self->data_ptr);
 }
 
 static int
-AnnualOutput_set_degradation(AnnualOutputObject *self, PyObject *value, void *closure)
+Lifetime_set_system_use_lifetime_output(LifetimeObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Cashloan_AnnualOutput_degradation_aset, self->data_ptr);
+	return PySAM_float_setter(value, SAM_Cashloan_Lifetime_system_use_lifetime_output_fset, self->data_ptr);
 }
 
-static PyObject *
-AnnualOutput_get_system_use_lifetime_output(AnnualOutputObject *self, void *closure)
-{
-	return PySAM_float_getter(SAM_Cashloan_AnnualOutput_system_use_lifetime_output_fget, self->data_ptr);
-}
-
-static int
-AnnualOutput_set_system_use_lifetime_output(AnnualOutputObject *self, PyObject *value, void *closure)
-{
-	return PySAM_float_setter(value, SAM_Cashloan_AnnualOutput_system_use_lifetime_output_fset, self->data_ptr);
-}
-
-static PyGetSetDef AnnualOutput_getset[] = {
-{"degradation", (getter)AnnualOutput_get_degradation,(setter)AnnualOutput_set_degradation,
-	"Annual degradation [%], array.\n Required if: *.",
- 	NULL},
-{"system_use_lifetime_output", (getter)AnnualOutput_get_system_use_lifetime_output,(setter)AnnualOutput_set_system_use_lifetime_output,
-	"Lifetime hourly system outputs [0/1], number.\n 0=hourly first year,1=hourly lifetime; Constraints: INTEGER,MIN=0; Required if: *.",
+static PyGetSetDef Lifetime_getset[] = {
+{"system_use_lifetime_output", (getter)Lifetime_get_system_use_lifetime_output,(setter)Lifetime_set_system_use_lifetime_output,
+	"Lifetime hourly system outputs [0/1], number.\n 0=hourly first year,1=hourly lifetime; Constraints: INTEGER,MIN=0; Required.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
 
-static PyTypeObject AnnualOutput_Type = {
+static PyTypeObject Lifetime_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"CashloanModel.AnnualOutput",             /*tp_name*/
-		sizeof(AnnualOutputObject),          /*tp_basicsize*/
+		"CashloanModel.Lifetime",             /*tp_name*/
+		sizeof(LifetimeObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
 		0,    /*tp_dealloc*/
@@ -3741,9 +3741,9 @@ static PyTypeObject AnnualOutput_Type = {
 		0,                          /*tp_weaklistoffset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
-		AnnualOutput_methods,         /*tp_methods*/
+		Lifetime_methods,         /*tp_methods*/
 		0,                          /*tp_members*/
-		AnnualOutput_getset,          /*tp_getset*/
+		Lifetime_getset,          /*tp_getset*/
 		0,                          /*tp_base*/
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
@@ -3758,39 +3758,39 @@ static PyTypeObject AnnualOutput_Type = {
 
 
 	/*
-	 * Thirdpartyownership Group
+	 * ThirdPartyOwnership Group
 	 */ 
 
 typedef struct {
 	PyObject_HEAD
 	SAM_Cashloan   data_ptr;
-} ThirdpartyownershipObject;
+} ThirdPartyOwnershipObject;
 
-static PyTypeObject Thirdpartyownership_Type;
+static PyTypeObject ThirdPartyOwnership_Type;
 
 static PyObject *
-Thirdpartyownership_new(SAM_Cashloan data_ptr)
+ThirdPartyOwnership_new(SAM_Cashloan data_ptr)
 {
-	PyObject* new_obj = Thirdpartyownership_Type.tp_alloc(&Thirdpartyownership_Type,0);
+	PyObject* new_obj = ThirdPartyOwnership_Type.tp_alloc(&ThirdPartyOwnership_Type,0);
 
-	ThirdpartyownershipObject* Thirdpartyownership_obj = (ThirdpartyownershipObject*)new_obj;
+	ThirdPartyOwnershipObject* ThirdPartyOwnership_obj = (ThirdPartyOwnershipObject*)new_obj;
 
-	Thirdpartyownership_obj->data_ptr = data_ptr;
+	ThirdPartyOwnership_obj->data_ptr = data_ptr;
 
 	return new_obj;
 }
 
-/* Thirdpartyownership methods */
+/* ThirdPartyOwnership methods */
 
 static PyObject *
-Thirdpartyownership_assign(ThirdpartyownershipObject *self, PyObject *args)
+ThirdPartyOwnership_assign(ThirdPartyOwnershipObject *self, PyObject *args)
 {
 	PyObject* dict;
 	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Cashloan", "Thirdpartyownership")){
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Cashloan", "ThirdPartyOwnership")){
 		return NULL;
 	}
 
@@ -3799,61 +3799,61 @@ Thirdpartyownership_assign(ThirdpartyownershipObject *self, PyObject *args)
 }
 
 static PyObject *
-Thirdpartyownership_export(ThirdpartyownershipObject *self, PyObject *args)
+ThirdPartyOwnership_export(ThirdPartyOwnershipObject *self, PyObject *args)
 {
-	PyTypeObject* tp = &Thirdpartyownership_Type;
+	PyTypeObject* tp = &ThirdPartyOwnership_Type;
 	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
 	return dict;
 }
 
-static PyMethodDef Thirdpartyownership_methods[] = {
-		{"assign",            (PyCFunction)Thirdpartyownership_assign,  METH_VARARGS,
+static PyMethodDef ThirdPartyOwnership_methods[] = {
+		{"assign",            (PyCFunction)ThirdPartyOwnership_assign,  METH_VARARGS,
 			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
-		{"export",            (PyCFunction)Thirdpartyownership_export,  METH_VARARGS,
+		{"export",            (PyCFunction)ThirdPartyOwnership_export,  METH_VARARGS,
 			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 static PyObject *
-Thirdpartyownership_get_elec_cost_with_system(ThirdpartyownershipObject *self, void *closure)
+ThirdPartyOwnership_get_elec_cost_with_system(ThirdPartyOwnershipObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Cashloan_Thirdpartyownership_elec_cost_with_system_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Cashloan_ThirdPartyOwnership_elec_cost_with_system_aget, self->data_ptr);
 }
 
 static int
-Thirdpartyownership_set_elec_cost_with_system(ThirdpartyownershipObject *self, PyObject *value, void *closure)
+ThirdPartyOwnership_set_elec_cost_with_system(ThirdPartyOwnershipObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Cashloan_Thirdpartyownership_elec_cost_with_system_aset, self->data_ptr);
+		return PySAM_array_setter(value, SAM_Cashloan_ThirdPartyOwnership_elec_cost_with_system_aset, self->data_ptr);
 }
 
 static PyObject *
-Thirdpartyownership_get_elec_cost_without_system(ThirdpartyownershipObject *self, void *closure)
+ThirdPartyOwnership_get_elec_cost_without_system(ThirdPartyOwnershipObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Cashloan_Thirdpartyownership_elec_cost_without_system_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Cashloan_ThirdPartyOwnership_elec_cost_without_system_aget, self->data_ptr);
 }
 
 static int
-Thirdpartyownership_set_elec_cost_without_system(ThirdpartyownershipObject *self, PyObject *value, void *closure)
+ThirdPartyOwnership_set_elec_cost_without_system(ThirdPartyOwnershipObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Cashloan_Thirdpartyownership_elec_cost_without_system_aset, self->data_ptr);
+		return PySAM_array_setter(value, SAM_Cashloan_ThirdPartyOwnership_elec_cost_without_system_aset, self->data_ptr);
 }
 
-static PyGetSetDef Thirdpartyownership_getset[] = {
-{"elec_cost_with_system", (getter)Thirdpartyownership_get_elec_cost_with_system,(setter)Thirdpartyownership_set_elec_cost_with_system,
-	"Energy value [$], array.\n Required if: *.",
+static PyGetSetDef ThirdPartyOwnership_getset[] = {
+{"elec_cost_with_system", (getter)ThirdPartyOwnership_get_elec_cost_with_system,(setter)ThirdPartyOwnership_set_elec_cost_with_system,
+	"Energy value [$], array.\n Required.",
  	NULL},
-{"elec_cost_without_system", (getter)Thirdpartyownership_get_elec_cost_without_system,(setter)Thirdpartyownership_set_elec_cost_without_system,
-	"Energy value [$], array.\n Required if: *.",
+{"elec_cost_without_system", (getter)ThirdPartyOwnership_get_elec_cost_without_system,(setter)ThirdPartyOwnership_set_elec_cost_without_system,
+	"Energy value [$], array.\n Required.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
 
-static PyTypeObject Thirdpartyownership_Type = {
+static PyTypeObject ThirdPartyOwnership_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"CashloanModel.Thirdpartyownership",             /*tp_name*/
-		sizeof(ThirdpartyownershipObject),          /*tp_basicsize*/
+		"CashloanModel.ThirdPartyOwnership",             /*tp_name*/
+		sizeof(ThirdPartyOwnershipObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
 		0,    /*tp_dealloc*/
@@ -3879,9 +3879,9 @@ static PyTypeObject Thirdpartyownership_Type = {
 		0,                          /*tp_weaklistoffset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
-		Thirdpartyownership_methods,         /*tp_methods*/
+		ThirdPartyOwnership_methods,         /*tp_methods*/
 		0,                          /*tp_members*/
-		Thirdpartyownership_getset,          /*tp_getset*/
+		ThirdPartyOwnership_getset,          /*tp_getset*/
 		0,                          /*tp_base*/
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
@@ -4647,7 +4647,7 @@ static PyGetSetDef Outputs_getset[] = {
 	"Insurance expense [$], array.",
  	NULL},
 {"cf_length", (getter)Outputs_get_cf_length,(setter)0,
-	"Number of periods in cash flow [], number.",
+	"Number of periods in cash flow, number.",
  	NULL},
 {"cf_net_salvage_value", (getter)Outputs_get_cf_net_salvage_value,(setter)0,
 	"Net salvage value [$], array.",
@@ -4839,7 +4839,7 @@ static PyGetSetDef Outputs_getset[] = {
 	"Total installed cost [$], number.",
  	NULL},
 {"wacc", (getter)Outputs_get_wacc,(setter)0,
-	"Weighted average cost of capital (WACC) [], number.",
+	"Weighted average cost of capital (WACC), number.",
  	NULL},
 {"year1_nte", (getter)Outputs_get_year1_nte,(setter)0,
 	"Year 1 NTE [cents/kWh], number.",
@@ -4915,68 +4915,54 @@ newCashloanModelObject(void* data_ptr)
 
 	PySAM_TECH_ATTR("CashloanModel", SAM_Cashloan_construct)
 
-PyObject* FinancialParameters_obj = FinancialParameters_new(self->data_ptr);
+	PyObject* FinancialParameters_obj = FinancialParameters_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "FinancialParameters", FinancialParameters_obj);
 	Py_DECREF(FinancialParameters_obj);
 
-PyObject* SystemCosts_obj = SystemCosts_new(self->data_ptr);
+	PyObject* SystemCosts_obj = SystemCosts_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "SystemCosts", SystemCosts_obj);
 	Py_DECREF(SystemCosts_obj);
 
-PyObject* Depreciation_obj = Depreciation_new(self->data_ptr);
+	PyObject* Depreciation_obj = Depreciation_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Depreciation", Depreciation_obj);
 	Py_DECREF(Depreciation_obj);
 
-PyObject* TaxCreditIncentives_obj = TaxCreditIncentives_new(self->data_ptr);
+	PyObject* TaxCreditIncentives_obj = TaxCreditIncentives_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "TaxCreditIncentives", TaxCreditIncentives_obj);
 	Py_DECREF(TaxCreditIncentives_obj);
 
-PyObject* PaymentIncentives_obj = PaymentIncentives_new(self->data_ptr);
+	PyObject* PaymentIncentives_obj = PaymentIncentives_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "PaymentIncentives", PaymentIncentives_obj);
 	Py_DECREF(PaymentIncentives_obj);
 
-PyObject* Battery_obj = Battery_new(self->data_ptr);
+	PyObject* Battery_obj = Battery_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Battery", Battery_obj);
 	Py_DECREF(Battery_obj);
 
-PyObject* FuelCell_obj = FuelCell_new(self->data_ptr);
+	PyObject* FuelCell_obj = FuelCell_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "FuelCell", FuelCell_obj);
 	Py_DECREF(FuelCell_obj);
 
-PyObject* Cashloan_obj = Cashloan_new(self->data_ptr);
+	PyObject* Cashloan_obj = Cashloan_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Cashloan", Cashloan_obj);
 	Py_DECREF(Cashloan_obj);
 
-PyObject* Common_obj = Common_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "Common", Common_obj);
-	Py_DECREF(Common_obj);
+	PyObject* SystemOutput_obj = SystemOutput_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "SystemOutput", SystemOutput_obj);
+	Py_DECREF(SystemOutput_obj);
 
-PyObject* AnnualOutput_obj = AnnualOutput_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "AnnualOutput", AnnualOutput_obj);
-	Py_DECREF(AnnualOutput_obj);
+	PyObject* Lifetime_obj = Lifetime_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "Lifetime", Lifetime_obj);
+	Py_DECREF(Lifetime_obj);
 
-PyObject* Thirdpartyownership_obj = Thirdpartyownership_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "Thirdpartyownership", Thirdpartyownership_obj);
-	Py_DECREF(Thirdpartyownership_obj);
+	PyObject* ThirdPartyOwnership_obj = ThirdPartyOwnership_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "ThirdPartyOwnership", ThirdPartyOwnership_obj);
+	Py_DECREF(ThirdPartyOwnership_obj);
 
-PyObject* Outputs_obj = Outputs_new(self->data_ptr);
+	PyObject* Outputs_obj = Outputs_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
 	Py_DECREF(Outputs_obj);
 
-PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
-
-	PyObject* data_cap = PyCapsule_New(self->data_ptr, NULL, NULL);
-	PyObject* Adjust_obj = PyObject_CallMethod(AdjustmentFactorsModule, "new", "(O)", data_cap);
-	Py_XDECREF(data_cap);
-	Py_XDECREF(AdjustmentFactorsModule);
-
-	if (!Adjust_obj){
-		PyErr_SetString(PySAM_ErrorObject, "Couldn't create AdjustmentFactorsObject\n");
-		return NULL;
-	}
-
-	PyDict_SetItemString(attr_dict, "AdjustmentFactors", Adjust_obj);
-	Py_DECREF(Adjust_obj);
 
 	return self;
 }
@@ -5133,8 +5119,8 @@ static PyObject *
 CashloanModel_default(PyObject *self, PyObject *args)
 {
 	CashloanModelObject *rv;
-	char* fin = 0;
-	if (!PyArg_ParseTuple(args, "s:default", &fin)){
+	char* def = 0;
+	if (!PyArg_ParseTuple(args, "s:default", &def)){
 		PyErr_BadArgument();
 		return NULL;
 	}
@@ -5142,7 +5128,7 @@ CashloanModel_default(PyObject *self, PyObject *args)
 	if (rv == NULL)
 		return NULL;
 
-	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Cashloan", fin);
+	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Cashloan", def);
 
 	return (PyObject *)rv;
 }
@@ -5157,14 +5143,14 @@ static PyMethodDef CashloanModelModule_methods[] = {
 				PyDoc_STR("new() -> new CashloanModel object")},
 		{"default",             CashloanModel_default,         METH_VARARGS,
 				PyDoc_STR("default(financial) -> new CashloanModel object with financial model-specific default attributes\n"
-				"Options: Single Owner, Sale Leaseback, Leveraged Partnership Flip, Commercial, LCOE Calculator, All Equity Partnership Flip, None, ")},
+				"Options: TcsMSLF, TcslinearFresnel, Swh, Tcsdish, GenericSystem, Pvsamv1, Fuelcell, TcsgenericSolar, TcstroughPhysical, Pvwattsv5, TcstroughEmpirical, Biomass, Windpower")},
 		{"wrap",             CashloanModel_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> new CashloanModel object around existing PySSC data")},
+				PyDoc_STR("wrap(ssc_data_t) -> new CashloanModel object around existing PySSC data, taking over memory ownership")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 PyDoc_STRVAR(module_doc,
-			 "Refer to http://www.github.com/nrel/PySAM for source code.");
+			 "Financial model for residential and commercial behind-the-meter projects");
 
 
 static int
@@ -5173,27 +5159,11 @@ CashloanModelModule_exec(PyObject *m)
 	/* Finalize the type object including setting type of the new type
 	 * object; doing it here is required for portability, too. */
 
+	if (PySAM_load_lib(m) < 0) goto fail;
+	if (PySAM_init_error(m) < 0) goto fail;
+
 	CashloanModel_Type.tp_dict = PyDict_New();
 	if (!CashloanModel_Type.tp_dict) { goto fail; }
-
-	/// Add the AdjustmentFactors type object to CashloanModel_Type
-	PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
-	if (!AdjustmentFactorsModule){
-		PyErr_SetImportError(PyUnicode_FromString("Could not import AdjustmentFactors module."), NULL, NULL);
-	}
-
-	PyTypeObject* AdjustmentFactors_Type = (PyTypeObject*)PyObject_GetAttrString(AdjustmentFactorsModule, "AdjustmentFactors");
-	if (!AdjustmentFactors_Type){
-		PyErr_SetImportError(PyUnicode_FromString("Could not import AdjustmentFactors type."), NULL, NULL);
-	}
-	Py_XDECREF(AdjustmentFactorsModule);
-
-	if (PyType_Ready(AdjustmentFactors_Type) < 0) { goto fail; }
-	PyDict_SetItemString(CashloanModel_Type.tp_dict,
-						 "AdjustmentFactors",
-						 (PyObject*)AdjustmentFactors_Type);
-	Py_DECREF(&AdjustmentFactors_Type);
-	Py_XDECREF(AdjustmentFactors_Type);
 
 	/// Add the FinancialParameters type object to CashloanModel_Type
 	if (PyType_Ready(&FinancialParameters_Type) < 0) { goto fail; }
@@ -5251,26 +5221,26 @@ CashloanModelModule_exec(PyObject *m)
 				(PyObject*)&Cashloan_Type);
 	Py_DECREF(&Cashloan_Type);
 
-	/// Add the Common type object to CashloanModel_Type
-	if (PyType_Ready(&Common_Type) < 0) { goto fail; }
+	/// Add the SystemOutput type object to CashloanModel_Type
+	if (PyType_Ready(&SystemOutput_Type) < 0) { goto fail; }
 	PyDict_SetItemString(CashloanModel_Type.tp_dict,
-				"Common",
-				(PyObject*)&Common_Type);
-	Py_DECREF(&Common_Type);
+				"SystemOutput",
+				(PyObject*)&SystemOutput_Type);
+	Py_DECREF(&SystemOutput_Type);
 
-	/// Add the AnnualOutput type object to CashloanModel_Type
-	if (PyType_Ready(&AnnualOutput_Type) < 0) { goto fail; }
+	/// Add the Lifetime type object to CashloanModel_Type
+	if (PyType_Ready(&Lifetime_Type) < 0) { goto fail; }
 	PyDict_SetItemString(CashloanModel_Type.tp_dict,
-				"AnnualOutput",
-				(PyObject*)&AnnualOutput_Type);
-	Py_DECREF(&AnnualOutput_Type);
+				"Lifetime",
+				(PyObject*)&Lifetime_Type);
+	Py_DECREF(&Lifetime_Type);
 
-	/// Add the Thirdpartyownership type object to CashloanModel_Type
-	if (PyType_Ready(&Thirdpartyownership_Type) < 0) { goto fail; }
+	/// Add the ThirdPartyOwnership type object to CashloanModel_Type
+	if (PyType_Ready(&ThirdPartyOwnership_Type) < 0) { goto fail; }
 	PyDict_SetItemString(CashloanModel_Type.tp_dict,
-				"Thirdpartyownership",
-				(PyObject*)&Thirdpartyownership_Type);
-	Py_DECREF(&Thirdpartyownership_Type);
+				"ThirdPartyOwnership",
+				(PyObject*)&ThirdPartyOwnership_Type);
+	Py_DECREF(&ThirdPartyOwnership_Type);
 
 	/// Add the Outputs type object to CashloanModel_Type
 	if (PyType_Ready(&Outputs_Type) < 0) { goto fail; }
@@ -5284,9 +5254,6 @@ CashloanModelModule_exec(PyObject *m)
 	PyModule_AddObject(m,
 				"CashloanModel",
 				(PyObject*)&CashloanModel_Type);
-
-	if (PySAM_load_lib(m) < 0) goto fail;
-	if (PySAM_init_error() < 0) goto fail;
 
 	return 0;
 	fail:

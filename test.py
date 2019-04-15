@@ -5,10 +5,10 @@
 # sandbox.run_setup('setup.py', ['install'])
 
 
-import GenericSystem
+import PySAM.GenericSystem as GenericSystem
 from pympler.tracker import SummaryTracker
 import gc
-from sscapi import PySSC
+from PySAM.PySSC import PySSC
 
 ssc = PySSC()
 
@@ -260,7 +260,6 @@ while round < 50:
     # Test loading from serialized dict
     a = GenericSystem.default("None")
     print(a.export())
-    gc.collect()
 
     if round == 3:
         tracker.print_diff()

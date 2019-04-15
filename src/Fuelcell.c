@@ -114,10 +114,10 @@ Common_set_percent_complete(CommonObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef Common_getset[] = {
 {"annual_energy", (getter)Common_get_annual_energy,(setter)Common_set_annual_energy,
-	"Annual Energy [kWh], number.\n Required if: ?=0.",
+	"Annual Energy [kWh], number.\n 0 if not set.",
  	NULL},
 {"capacity_factor", (getter)Common_get_capacity_factor,(setter)Common_set_capacity_factor,
-	"Capacity factor [%], number.\n Required if: ?=0.",
+	"Capacity factor [%], number.\n 0 if not set.",
  	NULL},
 {"gen", (getter)Common_get_gen,(setter)Common_set_gen,
 	"System power generated [kW], array.\n Lifetime system generation; ",
@@ -258,10 +258,10 @@ Lifetime_set_system_use_lifetime_output(LifetimeObject *self, PyObject *value, v
 
 static PyGetSetDef Lifetime_getset[] = {
 {"analysis_period", (getter)Lifetime_get_analysis_period,(setter)Lifetime_set_analysis_period,
-	"Lifetime analysis period [years], number.\n The number of years in the simulation; Required if: system_use_lifetime_output=1.",
+	"Lifetime analysis period [years], number.\n The number of years in the simulation; Required if system_use_lifetime_output=1.",
  	NULL},
 {"system_use_lifetime_output", (getter)Lifetime_get_system_use_lifetime_output,(setter)Lifetime_set_system_use_lifetime_output,
-	"Lifetime simulation [0/1], number.\n 0=SingleYearRepeated,1=RunEveryYear; Constraints: BOOLEAN; Required if: ?=0.",
+	"Lifetime simulation [0/1], number.\n 0=SingleYearRepeated,1=RunEveryYear; Constraints: BOOLEAN; 0 if not set.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -879,22 +879,22 @@ FuelCell_set_fuelcell_unit_min_power(FuelCellObject *self, PyObject *value, void
 
 static PyGetSetDef FuelCell_getset[] = {
 {"dispatch_manual_fuelcellcharge", (getter)FuelCell_get_dispatch_manual_fuelcellcharge,(setter)FuelCell_set_dispatch_manual_fuelcellcharge,
-	"Periods 1-6 charging allowed? [], array.\n ",
+	"Periods 1-6 charging allowed?, array.\n ",
  	NULL},
 {"dispatch_manual_fuelcelldischarge", (getter)FuelCell_get_dispatch_manual_fuelcelldischarge,(setter)FuelCell_set_dispatch_manual_fuelcelldischarge,
-	"Periods 1-6 discharging allowed? [], array.\n ",
+	"Periods 1-6 discharging allowed?, array.\n ",
  	NULL},
 {"dispatch_manual_percent_fc_discharge", (getter)FuelCell_get_dispatch_manual_percent_fc_discharge,(setter)FuelCell_set_dispatch_manual_percent_fc_discharge,
-	"Periods 1-6 percent of max fuelcell output [], array.\n ",
+	"Periods 1-6 percent of max fuelcell output, array.\n ",
  	NULL},
 {"dispatch_manual_sched", (getter)FuelCell_get_dispatch_manual_sched,(setter)FuelCell_set_dispatch_manual_sched,
-	"Dispatch schedule for weekday [], matrix.\n ",
+	"Dispatch schedule for weekday, matrix.\n ",
  	NULL},
 {"dispatch_manual_sched_weekend", (getter)FuelCell_get_dispatch_manual_sched_weekend,(setter)FuelCell_set_dispatch_manual_sched_weekend,
-	"Dispatch schedule for weekend [], matrix.\n ",
+	"Dispatch schedule for weekend, matrix.\n ",
  	NULL},
 {"dispatch_manual_units_fc_discharge", (getter)FuelCell_get_dispatch_manual_units_fc_discharge,(setter)FuelCell_set_dispatch_manual_units_fc_discharge,
-	"Periods 1-6 number of fuel cell units? [], array.\n ",
+	"Periods 1-6 number of fuel cell units?, array.\n ",
  	NULL},
 {"fuelcell_availability_schedule", (getter)FuelCell_get_fuelcell_availability_schedule,(setter)FuelCell_set_fuelcell_availability_schedule,
 	"Fuel cell availability schedule  [Column 1: Hour of year start shutdown/Column 2: Hours duration of shutdown ], matrix.\n ",
@@ -909,7 +909,7 @@ static PyGetSetDef FuelCell_getset[] = {
 	"Fuel cell enable scheduled restarts [0/1], number.\n ",
  	NULL},
 {"fuelcell_degradation_restarts_per_year", (getter)FuelCell_get_fuelcell_degradation_restarts_per_year,(setter)FuelCell_set_fuelcell_degradation_restarts_per_year,
-	"Fuel cell scheduled restarts per year [], number.\n ",
+	"Fuel cell scheduled restarts per year, number.\n ",
  	NULL},
 {"fuelcell_dispatch", (getter)FuelCell_get_fuelcell_dispatch,(setter)FuelCell_set_fuelcell_dispatch,
 	"Fuel cell dispatch input per unit [kW], array.\n ",
@@ -924,7 +924,7 @@ static PyGetSetDef FuelCell_getset[] = {
 	"Fuel cell ramp rate limit up [kW/h], number.\n ",
  	NULL},
 {"fuelcell_efficiency", (getter)FuelCell_get_fuelcell_efficiency,(setter)FuelCell_set_fuelcell_efficiency,
-	"Fuel cell efficiency table  [], matrix.\n ",
+	"Fuel cell efficiency table , matrix.\n ",
  	NULL},
 {"fuelcell_efficiency_choice", (getter)FuelCell_get_fuelcell_efficiency_choice,(setter)FuelCell_set_fuelcell_efficiency_choice,
 	"Fuel cell efficiency definition choice  [0/1], number.\n 0=OriginalNameplate,1=DegradedNameplate; ",
@@ -945,7 +945,7 @@ static PyGetSetDef FuelCell_getset[] = {
 	"Fuel cell lower heating value [Btu/ft3], number.\n ",
  	NULL},
 {"fuelcell_number_of_units", (getter)FuelCell_get_fuelcell_number_of_units,(setter)FuelCell_set_fuelcell_number_of_units,
-	"Fuel cell number of units [], number.\n ",
+	"Fuel cell number of units, number.\n ",
  	NULL},
 {"fuelcell_operation_options", (getter)FuelCell_get_fuelcell_operation_options,(setter)FuelCell_set_fuelcell_operation_options,
 	"Fuel cell turn off options [0/1], number.\n ",
@@ -954,10 +954,10 @@ static PyGetSetDef FuelCell_getset[] = {
 	"Fuel cell replacement option [0/1/2], number.\n ",
  	NULL},
 {"fuelcell_replacement_percent", (getter)FuelCell_get_fuelcell_replacement_percent,(setter)FuelCell_set_fuelcell_replacement_percent,
-	"Fuel cell replace at percentage [], number.\n ",
+	"Fuel cell replace at percentage, number.\n ",
  	NULL},
 {"fuelcell_replacement_schedule", (getter)FuelCell_get_fuelcell_replacement_schedule,(setter)FuelCell_set_fuelcell_replacement_schedule,
-	"Fuel cell replace on schedule [], array.\n ",
+	"Fuel cell replace on schedule, array.\n ",
  	NULL},
 {"fuelcell_shutdown_time", (getter)FuelCell_get_fuelcell_shutdown_time,(setter)FuelCell_set_fuelcell_shutdown_time,
 	"Fuel cell shutdown hours [hours], number.\n ",
@@ -1261,40 +1261,26 @@ newFuelcellObject(void* data_ptr)
 
 	PySAM_TECH_ATTR("Fuelcell", SAM_Fuelcell_construct)
 
-PyObject* Common_obj = Common_new(self->data_ptr);
+	PyObject* Common_obj = Common_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Common", Common_obj);
 	Py_DECREF(Common_obj);
 
-PyObject* Lifetime_obj = Lifetime_new(self->data_ptr);
+	PyObject* Lifetime_obj = Lifetime_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Lifetime", Lifetime_obj);
 	Py_DECREF(Lifetime_obj);
 
-PyObject* Load_obj = Load_new(self->data_ptr);
+	PyObject* Load_obj = Load_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Load", Load_obj);
 	Py_DECREF(Load_obj);
 
-PyObject* FuelCell_obj = FuelCell_new(self->data_ptr);
+	PyObject* FuelCell_obj = FuelCell_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "FuelCell", FuelCell_obj);
 	Py_DECREF(FuelCell_obj);
 
-PyObject* Outputs_obj = Outputs_new(self->data_ptr);
+	PyObject* Outputs_obj = Outputs_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
 	Py_DECREF(Outputs_obj);
 
-PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
-
-	PyObject* data_cap = PyCapsule_New(self->data_ptr, NULL, NULL);
-	PyObject* Adjust_obj = PyObject_CallMethod(AdjustmentFactorsModule, "new", "(O)", data_cap);
-	Py_XDECREF(data_cap);
-	Py_XDECREF(AdjustmentFactorsModule);
-
-	if (!Adjust_obj){
-		PyErr_SetString(PySAM_ErrorObject, "Couldn't create AdjustmentFactorsObject\n");
-		return NULL;
-	}
-
-	PyDict_SetItemString(attr_dict, "AdjustmentFactors", Adjust_obj);
-	Py_DECREF(Adjust_obj);
 
 	return self;
 }
@@ -1451,8 +1437,8 @@ static PyObject *
 Fuelcell_default(PyObject *self, PyObject *args)
 {
 	FuelcellObject *rv;
-	char* fin = 0;
-	if (!PyArg_ParseTuple(args, "s:default", &fin)){
+	char* def = 0;
+	if (!PyArg_ParseTuple(args, "s:default", &def)){
 		PyErr_BadArgument();
 		return NULL;
 	}
@@ -1460,7 +1446,7 @@ Fuelcell_default(PyObject *self, PyObject *args)
 	if (rv == NULL)
 		return NULL;
 
-	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Fuelcell", fin);
+	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Fuelcell", def);
 
 	return (PyObject *)rv;
 }
@@ -1475,14 +1461,14 @@ static PyMethodDef FuelcellModule_methods[] = {
 				PyDoc_STR("new() -> new Fuelcell object")},
 		{"default",             Fuelcell_default,         METH_VARARGS,
 				PyDoc_STR("default(financial) -> new Fuelcell object with financial model-specific default attributes\n"
-				"Options: Single Owner, Commercial, ")},
+				"Options: Singleowner, Commercial")},
 		{"wrap",             Fuelcell_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> new Fuelcell object around existing PySSC data")},
+				PyDoc_STR("wrap(ssc_data_t) -> new Fuelcell object around existing PySSC data, taking over memory ownership")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 PyDoc_STRVAR(module_doc,
-			 "Refer to http://www.github.com/nrel/PySAM for source code.");
+			 "Fuel cell model");
 
 
 static int
@@ -1491,27 +1477,11 @@ FuelcellModule_exec(PyObject *m)
 	/* Finalize the type object including setting type of the new type
 	 * object; doing it here is required for portability, too. */
 
+	if (PySAM_load_lib(m) < 0) goto fail;
+	if (PySAM_init_error(m) < 0) goto fail;
+
 	Fuelcell_Type.tp_dict = PyDict_New();
 	if (!Fuelcell_Type.tp_dict) { goto fail; }
-
-	/// Add the AdjustmentFactors type object to Fuelcell_Type
-	PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
-	if (!AdjustmentFactorsModule){
-		PyErr_SetImportError(PyUnicode_FromString("Could not import AdjustmentFactors module."), NULL, NULL);
-	}
-
-	PyTypeObject* AdjustmentFactors_Type = (PyTypeObject*)PyObject_GetAttrString(AdjustmentFactorsModule, "AdjustmentFactors");
-	if (!AdjustmentFactors_Type){
-		PyErr_SetImportError(PyUnicode_FromString("Could not import AdjustmentFactors type."), NULL, NULL);
-	}
-	Py_XDECREF(AdjustmentFactorsModule);
-
-	if (PyType_Ready(AdjustmentFactors_Type) < 0) { goto fail; }
-	PyDict_SetItemString(Fuelcell_Type.tp_dict,
-						 "AdjustmentFactors",
-						 (PyObject*)AdjustmentFactors_Type);
-	Py_DECREF(&AdjustmentFactors_Type);
-	Py_XDECREF(AdjustmentFactors_Type);
 
 	/// Add the Common type object to Fuelcell_Type
 	if (PyType_Ready(&Common_Type) < 0) { goto fail; }
@@ -1553,9 +1523,6 @@ FuelcellModule_exec(PyObject *m)
 	PyModule_AddObject(m,
 				"Fuelcell",
 				(PyObject*)&Fuelcell_Type);
-
-	if (PySAM_load_lib(m) < 0) goto fail;
-	if (PySAM_init_error() < 0) goto fail;
 
 	return 0;
 	fail:

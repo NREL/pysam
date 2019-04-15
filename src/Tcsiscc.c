@@ -78,7 +78,7 @@ Weather_set_solar_resource_file(WeatherObject *self, PyObject *value, void *clos
 
 static PyGetSetDef Weather_getset[] = {
 {"solar_resource_file", (getter)Weather_get_solar_resource_file,(setter)Weather_set_solar_resource_file,
-	"local weather file path [], string.\n Constraints: LOCAL_FILE; Required if: *.",
+	"local weather file path, string.\n Constraints: LOCAL_FILE; Required.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -201,7 +201,7 @@ MoltenSaltTower_set_system_capacity(MoltenSaltTowerObject *self, PyObject *value
 
 static PyGetSetDef MoltenSaltTower_getset[] = {
 {"system_capacity", (getter)MoltenSaltTower_get_system_capacity,(setter)MoltenSaltTower_set_system_capacity,
-	"Nameplate capacity [kW], number.\n Required if: *.",
+	"Nameplate capacity [kW], number.\n Required.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1260,241 +1260,241 @@ Heliostat_set_v_wind_max(HeliostatObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef Heliostat_getset[] = {
 {"N_hel", (getter)Heliostat_get_N_hel,(setter)Heliostat_set_N_hel,
-	"Number of heliostats [-], number.\n Required if: ?.",
+	"Number of heliostats [-], number.\n Required if ?.",
  	NULL},
 {"bop_spec_cost", (getter)Heliostat_get_bop_spec_cost,(setter)Heliostat_set_bop_spec_cost,
-	"BOS specific cost [$/kWe], number.\n Required if: *.",
+	"BOS specific cost [$/kWe], number.\n Required.",
  	NULL},
 {"c_atm_0", (getter)Heliostat_get_c_atm_0,(setter)Heliostat_set_c_atm_0,
-	"Attenuation coefficient 0 [], number.\n Required if: ?=0.006789.",
+	"Attenuation coefficient 0, number.\n Required if ?=0.006789.",
  	NULL},
 {"c_atm_1", (getter)Heliostat_get_c_atm_1,(setter)Heliostat_set_c_atm_1,
-	"Attenuation coefficient 1 [], number.\n Required if: ?=0.1046.",
+	"Attenuation coefficient 1, number.\n Required if ?=0.1046.",
  	NULL},
 {"c_atm_2", (getter)Heliostat_get_c_atm_2,(setter)Heliostat_set_c_atm_2,
-	"Attenuation coefficient 2 [], number.\n Required if: ?=-0.0107.",
+	"Attenuation coefficient 2, number.\n Required if ?=-0.0107.",
  	NULL},
 {"c_atm_3", (getter)Heliostat_get_c_atm_3,(setter)Heliostat_set_c_atm_3,
-	"Attenuation coefficient 3 [], number.\n Required if: ?=0.002845.",
+	"Attenuation coefficient 3, number.\n Required if ?=0.002845.",
  	NULL},
 {"calc_fluxmaps", (getter)Heliostat_get_calc_fluxmaps,(setter)Heliostat_set_calc_fluxmaps,
-	"Include fluxmap calculations [], number.\n Required if: ?=0.",
+	"Include fluxmap calculations, number.\n 0 if not set.",
  	NULL},
 {"cant_type", (getter)Heliostat_get_cant_type,(setter)Heliostat_set_cant_type,
-	"Heliostat cant method [], number.\n Required if: *.",
+	"Heliostat cant method, number.\n Required.",
  	NULL},
 {"check_max_flux", (getter)Heliostat_get_check_max_flux,(setter)Heliostat_set_check_max_flux,
-	"Check max flux at design point [], number.\n Required if: ?=0.",
+	"Check max flux at design point, number.\n 0 if not set.",
  	NULL},
 {"contingency_rate", (getter)Heliostat_get_contingency_rate,(setter)Heliostat_set_contingency_rate,
-	"Contingency for cost overrun [%], number.\n Required if: *.",
+	"Contingency for cost overrun [%], number.\n Required.",
  	NULL},
 {"cost_sf_fixed", (getter)Heliostat_get_cost_sf_fixed,(setter)Heliostat_set_cost_sf_fixed,
-	"Solar field fixed cost [$], number.\n Required if: *.",
+	"Solar field fixed cost [$], number.\n Required.",
  	NULL},
 {"csp_pt_cost_epc_fixed", (getter)Heliostat_get_csp_pt_cost_epc_fixed,(setter)Heliostat_set_csp_pt_cost_epc_fixed,
-	"EPC fixed [$], number.\n Required if: *.",
+	"EPC fixed [$], number.\n Required.",
  	NULL},
 {"csp_pt_cost_epc_per_acre", (getter)Heliostat_get_csp_pt_cost_epc_per_acre,(setter)Heliostat_set_csp_pt_cost_epc_per_acre,
-	"EPC cost per acre [$/acre], number.\n Required if: *.",
+	"EPC cost per acre [$/acre], number.\n Required.",
  	NULL},
 {"csp_pt_cost_epc_per_watt", (getter)Heliostat_get_csp_pt_cost_epc_per_watt,(setter)Heliostat_set_csp_pt_cost_epc_per_watt,
-	"EPC cost per watt [$/W], number.\n Required if: *.",
+	"EPC cost per watt [$/W], number.\n Required.",
  	NULL},
 {"csp_pt_cost_epc_percent", (getter)Heliostat_get_csp_pt_cost_epc_percent,(setter)Heliostat_set_csp_pt_cost_epc_percent,
-	"EPC cost percent of direct [], number.\n Required if: *.",
+	"EPC cost percent of direct, number.\n Required.",
  	NULL},
 {"csp_pt_cost_plm_fixed", (getter)Heliostat_get_csp_pt_cost_plm_fixed,(setter)Heliostat_set_csp_pt_cost_plm_fixed,
-	"PLM fixed [$], number.\n Required if: *.",
+	"PLM fixed [$], number.\n Required.",
  	NULL},
 {"csp_pt_cost_plm_per_acre", (getter)Heliostat_get_csp_pt_cost_plm_per_acre,(setter)Heliostat_set_csp_pt_cost_plm_per_acre,
-	"PLM cost per acre [$/acre], number.\n Required if: *.",
+	"PLM cost per acre [$/acre], number.\n Required.",
  	NULL},
 {"csp_pt_cost_plm_per_watt", (getter)Heliostat_get_csp_pt_cost_plm_per_watt,(setter)Heliostat_set_csp_pt_cost_plm_per_watt,
-	"PLM cost per watt [$/W], number.\n Required if: *.",
+	"PLM cost per watt [$/W], number.\n Required.",
  	NULL},
 {"csp_pt_cost_plm_percent", (getter)Heliostat_get_csp_pt_cost_plm_percent,(setter)Heliostat_set_csp_pt_cost_plm_percent,
-	"PLM cost percent of direct [], number.\n Required if: *.",
+	"PLM cost percent of direct, number.\n Required.",
  	NULL},
 {"csp_pt_sf_fixed_land_area", (getter)Heliostat_get_csp_pt_sf_fixed_land_area,(setter)Heliostat_set_csp_pt_sf_fixed_land_area,
-	"Fixed land area [acre], number.\n Required if: *.",
+	"Fixed land area [acre], number.\n Required.",
  	NULL},
 {"csp_pt_sf_land_overhead_factor", (getter)Heliostat_get_csp_pt_sf_land_overhead_factor,(setter)Heliostat_set_csp_pt_sf_land_overhead_factor,
-	"Land overhead factor [], number.\n Required if: *.",
+	"Land overhead factor, number.\n Required.",
  	NULL},
 {"delta_flux_hrs", (getter)Heliostat_get_delta_flux_hrs,(setter)Heliostat_set_delta_flux_hrs,
-	"Hourly frequency in flux map lookup [], number.\n Required if: ?=1.",
+	"Hourly frequency in flux map lookup, number.\n Required if ?=1.",
  	NULL},
 {"dens_mirror", (getter)Heliostat_get_dens_mirror,(setter)Heliostat_set_dens_mirror,
-	"Ratio of Reflective Area to Profile [-], number.\n Required if: *.",
+	"Ratio of Reflective Area to Profile [-], number.\n Required.",
  	NULL},
 {"dni_des", (getter)Heliostat_get_dni_des,(setter)Heliostat_set_dni_des,
-	"Design-point DNI [W/m2], number.\n Required if: *.",
+	"Design-point DNI [W/m2], number.\n Required.",
  	NULL},
 {"eta_map", (getter)Heliostat_get_eta_map,(setter)Heliostat_set_eta_map,
-	"Field efficiency array [-], matrix.\n Required if: ?.",
+	"Field efficiency array [-], matrix.\n Required if ?.",
  	NULL},
 {"flux_maps", (getter)Heliostat_get_flux_maps,(setter)Heliostat_set_flux_maps,
-	"Flux map intensities [-], matrix.\n Required if: ?.",
+	"Flux map intensities [-], matrix.\n Required if ?.",
  	NULL},
 {"flux_max", (getter)Heliostat_get_flux_max,(setter)Heliostat_set_flux_max,
-	"Maximum allowable flux [], number.\n Required if: ?=1000.",
+	"Maximum allowable flux, number.\n Required if ?=1000.",
  	NULL},
 {"flux_positions", (getter)Heliostat_get_flux_positions,(setter)Heliostat_set_flux_positions,
-	"Flux map sun positions [deg], matrix.\n Required if: ?.",
+	"Flux map sun positions [deg], matrix.\n Required if ?.",
  	NULL},
 {"focus_type", (getter)Heliostat_get_focus_type,(setter)Heliostat_set_focus_type,
-	"Heliostat focus method [], number.\n Required if: *.",
+	"Heliostat focus method, number.\n Required.",
  	NULL},
 {"fossil_spec_cost", (getter)Heliostat_get_fossil_spec_cost,(setter)Heliostat_set_fossil_spec_cost,
-	"Fossil system specific cost [$/kWe], number.\n Required if: *.",
+	"Fossil system specific cost [$/kWe], number.\n Required.",
  	NULL},
 {"h_tower", (getter)Heliostat_get_h_tower,(setter)Heliostat_set_h_tower,
-	"Tower height [m], number.\n Required if: *.",
+	"Tower height [m], number.\n Required.",
  	NULL},
 {"hel_stow_deploy", (getter)Heliostat_get_hel_stow_deploy,(setter)Heliostat_set_hel_stow_deploy,
-	"Stow/deploy elevation [deg], number.\n Required if: *.",
+	"Stow/deploy elevation [deg], number.\n Required.",
  	NULL},
 {"helio_active_fraction", (getter)Heliostat_get_helio_active_fraction,(setter)Heliostat_set_helio_active_fraction,
-	"Heliostat active frac. [-], number.\n Required if: *.",
+	"Heliostat active frac. [-], number.\n Required.",
  	NULL},
 {"helio_aim_points", (getter)Heliostat_get_helio_aim_points,(setter)Heliostat_set_helio_aim_points,
-	"Heliostat aim point table [m], matrix.\n Required if: ?.",
+	"Heliostat aim point table [m], matrix.\n Required if ?.",
  	NULL},
 {"helio_height", (getter)Heliostat_get_helio_height,(setter)Heliostat_set_helio_height,
-	"Heliostat height [m], number.\n Required if: *.",
+	"Heliostat height [m], number.\n Required.",
  	NULL},
 {"helio_optical_error", (getter)Heliostat_get_helio_optical_error,(setter)Heliostat_set_helio_optical_error,
-	"Heliostat optical error [rad], number.\n Required if: *.",
+	"Heliostat optical error [rad], number.\n Required.",
  	NULL},
 {"helio_positions", (getter)Heliostat_get_helio_positions,(setter)Heliostat_set_helio_positions,
-	"Heliostat position table [m], matrix.\n Required if: run_type=1.",
+	"Heliostat position table [m], matrix.\n Required if run_type=1.",
  	NULL},
 {"helio_reflectance", (getter)Heliostat_get_helio_reflectance,(setter)Heliostat_set_helio_reflectance,
-	"Heliostat reflectance [-], number.\n Required if: *.",
+	"Heliostat reflectance [-], number.\n Required.",
  	NULL},
 {"helio_width", (getter)Heliostat_get_helio_width,(setter)Heliostat_set_helio_width,
-	"Heliostat width [m], number.\n Required if: *.",
+	"Heliostat width [m], number.\n Required.",
  	NULL},
 {"heliostat_spec_cost", (getter)Heliostat_get_heliostat_spec_cost,(setter)Heliostat_set_heliostat_spec_cost,
-	"Heliostat field cost [$/m2], number.\n Required if: *.",
+	"Heliostat field cost [$/m2], number.\n Required.",
  	NULL},
 {"interp_beta", (getter)Heliostat_get_interp_beta,(setter)Heliostat_set_interp_beta,
-	"Interpolation beta coef. [-], number.\n Required if: ?=1.99.",
+	"Interpolation beta coef. [-], number.\n Required if ?=1.99.",
  	NULL},
 {"interp_nug", (getter)Heliostat_get_interp_nug,(setter)Heliostat_set_interp_nug,
-	"Interpolation nugget [-], number.\n Required if: ?=0.",
+	"Interpolation nugget [-], number.\n 0 if not set.",
  	NULL},
 {"is_optimize", (getter)Heliostat_get_is_optimize,(setter)Heliostat_set_is_optimize,
-	"Do SolarPILOT optimization [], number.\n Required if: ?=0.",
+	"Do SolarPILOT optimization, number.\n 0 if not set.",
  	NULL},
 {"land_bound_list", (getter)Heliostat_get_land_bound_list,(setter)Heliostat_set_land_bound_list,
-	"Boundary table listing [-], array.\n Required if: ?.",
+	"Boundary table listing [-], array.\n Required if ?.",
  	NULL},
 {"land_bound_table", (getter)Heliostat_get_land_bound_table,(setter)Heliostat_set_land_bound_table,
-	"Land boundary table [m], matrix.\n Required if: ?.",
+	"Land boundary table [m], matrix.\n Required if ?.",
  	NULL},
 {"land_bound_type", (getter)Heliostat_get_land_bound_type,(setter)Heliostat_set_land_bound_type,
-	"Land boundary type [-], number.\n Required if: ?=0.",
+	"Land boundary type [-], number.\n 0 if not set.",
  	NULL},
 {"land_max", (getter)Heliostat_get_land_max,(setter)Heliostat_set_land_max,
-	"Land max boundary [-ORm], number.\n Required if: ?=7.5.",
+	"Land max boundary [-ORm], number.\n Required if ?=7.5.",
  	NULL},
 {"land_min", (getter)Heliostat_get_land_min,(setter)Heliostat_set_land_min,
-	"Land min boundary [-ORm], number.\n Required if: ?=0.75.",
+	"Land min boundary [-ORm], number.\n Required if ?=0.75.",
  	NULL},
 {"land_spec_cost", (getter)Heliostat_get_land_spec_cost,(setter)Heliostat_set_land_spec_cost,
-	"Total land area cost [$/acre], number.\n Required if: *.",
+	"Total land area cost [$/acre], number.\n Required.",
  	NULL},
 {"n_facet_x", (getter)Heliostat_get_n_facet_x,(setter)Heliostat_set_n_facet_x,
-	"Number of heliostat facets - X [], number.\n Required if: *.",
+	"Number of heliostat facets - X, number.\n Required.",
  	NULL},
 {"n_facet_y", (getter)Heliostat_get_n_facet_y,(setter)Heliostat_set_n_facet_y,
-	"Number of heliostat facets - Y [], number.\n Required if: *.",
+	"Number of heliostat facets - Y, number.\n Required.",
  	NULL},
 {"n_flux_days", (getter)Heliostat_get_n_flux_days,(setter)Heliostat_set_n_flux_days,
-	"No. days in flux map lookup [], number.\n Required if: ?=8.",
+	"No. days in flux map lookup, number.\n Required if ?=8.",
  	NULL},
 {"n_flux_x", (getter)Heliostat_get_n_flux_x,(setter)Heliostat_set_n_flux_x,
-	"Flux map X resolution [-], number.\n Required if: ?=12.",
+	"Flux map X resolution [-], number.\n Required if ?=12.",
  	NULL},
 {"n_flux_y", (getter)Heliostat_get_n_flux_y,(setter)Heliostat_set_n_flux_y,
-	"Flux map Y resolution [-], number.\n Required if: ?=1.",
+	"Flux map Y resolution [-], number.\n Required if ?=1.",
  	NULL},
 {"opt_algorithm", (getter)Heliostat_get_opt_algorithm,(setter)Heliostat_set_opt_algorithm,
-	"Optimization algorithm [], number.\n Required if: ?=0.",
+	"Optimization algorithm, number.\n 0 if not set.",
  	NULL},
 {"opt_conv_tol", (getter)Heliostat_get_opt_conv_tol,(setter)Heliostat_set_opt_conv_tol,
-	"Optimization convergence tol [], number.\n Required if: ?=0.001.",
+	"Optimization convergence tol, number.\n Required if ?=0.001.",
  	NULL},
 {"opt_flux_penalty", (getter)Heliostat_get_opt_flux_penalty,(setter)Heliostat_set_opt_flux_penalty,
-	"Optimization flux overage penalty [], number.\n Required if: *.",
+	"Optimization flux overage penalty, number.\n Required.",
  	NULL},
 {"opt_init_step", (getter)Heliostat_get_opt_init_step,(setter)Heliostat_set_opt_init_step,
-	"Optimization initial step size [], number.\n Required if: ?=0.05.",
+	"Optimization initial step size, number.\n Required if ?=0.05.",
  	NULL},
 {"opt_max_iter", (getter)Heliostat_get_opt_max_iter,(setter)Heliostat_set_opt_max_iter,
-	"Max. number iteration steps [], number.\n Required if: ?=200.",
+	"Max. number iteration steps, number.\n Required if ?=200.",
  	NULL},
 {"p_start", (getter)Heliostat_get_p_start,(setter)Heliostat_set_p_start,
-	"Heliostat startup energy [kWe-hr], number.\n Required if: *.",
+	"Heliostat startup energy [kWe-hr], number.\n Required.",
  	NULL},
 {"p_track", (getter)Heliostat_get_p_track,(setter)Heliostat_set_p_track,
-	"Heliostat tracking energy [kWe], number.\n Required if: *.",
+	"Heliostat tracking energy [kWe], number.\n Required.",
  	NULL},
 {"plant_spec_cost", (getter)Heliostat_get_plant_spec_cost,(setter)Heliostat_set_plant_spec_cost,
-	"Power cycle specific cost [$/kWe], number.\n Required if: *.",
+	"Power cycle specific cost [$/kWe], number.\n Required.",
  	NULL},
 {"q_design", (getter)Heliostat_get_q_design,(setter)Heliostat_set_q_design,
-	"Receiver thermal design power [MW], number.\n Required if: *.",
+	"Receiver thermal design power [MW], number.\n Required.",
  	NULL},
 {"rec_absorptance", (getter)Heliostat_get_rec_absorptance,(setter)Heliostat_set_rec_absorptance,
-	"Receiver absorptance [-], number.\n Required if: *.",
+	"Receiver absorptance [-], number.\n Required.",
  	NULL},
 {"rec_aspect", (getter)Heliostat_get_rec_aspect,(setter)Heliostat_set_rec_aspect,
-	"Receiver aspect ratio [-], number.\n Required if: *.",
+	"Receiver aspect ratio [-], number.\n Required.",
  	NULL},
 {"rec_cost_exp", (getter)Heliostat_get_rec_cost_exp,(setter)Heliostat_set_rec_cost_exp,
-	"Receiver cost scaling exponent [], number.\n Required if: *.",
+	"Receiver cost scaling exponent, number.\n Required.",
  	NULL},
 {"rec_height", (getter)Heliostat_get_rec_height,(setter)Heliostat_set_rec_height,
-	"Receiver height [m], number.\n Required if: *.",
+	"Receiver height [m], number.\n Required.",
  	NULL},
 {"rec_hl_perm2", (getter)Heliostat_get_rec_hl_perm2,(setter)Heliostat_set_rec_hl_perm2,
-	"Receiver design heatloss [kW/m2], number.\n Required if: *.",
+	"Receiver design heatloss [kW/m2], number.\n Required.",
  	NULL},
 {"rec_ref_area", (getter)Heliostat_get_rec_ref_area,(setter)Heliostat_set_rec_ref_area,
-	"Receiver reference area for cost scale [], number.\n Required if: *.",
+	"Receiver reference area for cost scale, number.\n Required.",
  	NULL},
 {"rec_ref_cost", (getter)Heliostat_get_rec_ref_cost,(setter)Heliostat_set_rec_ref_cost,
-	"Receiver reference cost [$], number.\n Required if: *.",
+	"Receiver reference cost [$], number.\n Required.",
  	NULL},
 {"run_type", (getter)Heliostat_get_run_type,(setter)Heliostat_set_run_type,
-	"Run type [-], number.\n Required if: *.",
+	"Run type [-], number.\n Required.",
  	NULL},
 {"sales_tax_frac", (getter)Heliostat_get_sales_tax_frac,(setter)Heliostat_set_sales_tax_frac,
-	"Percent of cost to which sales tax applies [%], number.\n Required if: *.",
+	"Percent of cost to which sales tax applies [%], number.\n Required.",
  	NULL},
 {"sales_tax_rate", (getter)Heliostat_get_sales_tax_rate,(setter)Heliostat_set_sales_tax_rate,
-	"Sales tax rate [%], number.\n Required if: *.",
+	"Sales tax rate [%], number.\n Required.",
  	NULL},
 {"site_spec_cost", (getter)Heliostat_get_site_spec_cost,(setter)Heliostat_set_site_spec_cost,
-	"Site improvement cost [$/m2], number.\n Required if: *.",
+	"Site improvement cost [$/m2], number.\n Required.",
  	NULL},
 {"tes_spec_cost", (getter)Heliostat_get_tes_spec_cost,(setter)Heliostat_set_tes_spec_cost,
-	"Thermal energy storage cost [$/kWht], number.\n Required if: *.",
+	"Thermal energy storage cost [$/kWht], number.\n Required.",
  	NULL},
 {"total_installed_cost", (getter)Heliostat_get_total_installed_cost,(setter)Heliostat_set_total_installed_cost,
-	"Total installed cost [$], number.\n Required if: *.",
+	"Total installed cost [$], number.\n Required.",
  	NULL},
 {"tower_exp", (getter)Heliostat_get_tower_exp,(setter)Heliostat_set_tower_exp,
-	"Tower cost scaling exponent [], number.\n Required if: *.",
+	"Tower cost scaling exponent, number.\n Required.",
  	NULL},
 {"tower_fixed_cost", (getter)Heliostat_get_tower_fixed_cost,(setter)Heliostat_set_tower_fixed_cost,
-	"Tower fixed cost [$], number.\n Required if: *.",
+	"Tower fixed cost [$], number.\n Required.",
  	NULL},
 {"v_wind_max", (getter)Heliostat_get_v_wind_max,(setter)Heliostat_set_v_wind_max,
-	"Max. wind velocity [m/s], number.\n Required if: *.",
+	"Max. wind velocity [m/s], number.\n Required.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1881,73 +1881,73 @@ Receiver_set_th_tube(ReceiverObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef Receiver_getset[] = {
 {"A_sf", (getter)Receiver_get_A_sf,(setter)Receiver_set_A_sf,
-	"Solar Field Area [m^2], number.\n Required if: *.",
+	"Solar Field Area [m^2], number.\n Required.",
  	NULL},
 {"D_rec", (getter)Receiver_get_D_rec,(setter)Receiver_set_D_rec,
-	"The overall outer diameter of the receiver [m], number.\n Required if: *.",
+	"The overall outer diameter of the receiver [m], number.\n Required.",
  	NULL},
 {"Flow_type", (getter)Receiver_get_Flow_type,(setter)Receiver_set_Flow_type,
-	"A flag indicating which flow pattern is used [], number.\n Required if: *.",
+	"A flag indicating which flow pattern is used, number.\n Required.",
  	NULL},
 {"H_rec", (getter)Receiver_get_H_rec,(setter)Receiver_set_H_rec,
-	"The height of the receiver [m], number.\n Required if: *.",
+	"The height of the receiver [m], number.\n Required.",
  	NULL},
 {"N_panels", (getter)Receiver_get_N_panels,(setter)Receiver_set_N_panels,
-	"Number of individual panels on the receiver [], number.\n Constraints: INTEGER; Required if: *.",
+	"Number of individual panels on the receiver, number.\n Constraints: INTEGER; Required.",
  	NULL},
 {"Q_rec_des", (getter)Receiver_get_Q_rec_des,(setter)Receiver_set_Q_rec_des,
-	"Design-point receiver thermal power output [MWt], number.\n Required if: *.",
+	"Design-point receiver thermal power output [MWt], number.\n Required.",
  	NULL},
 {"THT", (getter)Receiver_get_THT,(setter)Receiver_set_THT,
-	"The height of the tower (hel. pivot to rec equator) [m], number.\n Required if: *.",
+	"The height of the tower (hel. pivot to rec equator) [m], number.\n Required.",
  	NULL},
 {"T_htf_cold_des", (getter)Receiver_get_T_htf_cold_des,(setter)Receiver_set_T_htf_cold_des,
-	"Cold HTF inlet temperature at design conditions [C], number.\n Required if: *.",
+	"Cold HTF inlet temperature at design conditions [C], number.\n Required.",
  	NULL},
 {"T_htf_hot_des", (getter)Receiver_get_T_htf_hot_des,(setter)Receiver_set_T_htf_hot_des,
-	"Hot HTF outlet temperature at design conditions [C], number.\n Required if: *.",
+	"Hot HTF outlet temperature at design conditions [C], number.\n Required.",
  	NULL},
 {"crossover_shift", (getter)Receiver_get_crossover_shift,(setter)Receiver_set_crossover_shift,
-	"No. panels shift in receiver crossover position [], number.\n Required if: ?=0.",
+	"No. panels shift in receiver crossover position, number.\n 0 if not set.",
  	NULL},
 {"d_tube_out", (getter)Receiver_get_d_tube_out,(setter)Receiver_set_d_tube_out,
-	"The outer diameter of an individual receiver tube [mm], number.\n Required if: *.",
+	"The outer diameter of an individual receiver tube [mm], number.\n Required.",
  	NULL},
 {"epsilon", (getter)Receiver_get_epsilon,(setter)Receiver_set_epsilon,
-	"The emissivity of the receiver surface coating [], number.\n Required if: *.",
+	"The emissivity of the receiver surface coating, number.\n Required.",
  	NULL},
 {"eta_pump", (getter)Receiver_get_eta_pump,(setter)Receiver_set_eta_pump,
-	"Receiver HTF pump efficiency [], number.\n Required if: *.",
+	"Receiver HTF pump efficiency, number.\n Required.",
  	NULL},
 {"f_rec_min", (getter)Receiver_get_f_rec_min,(setter)Receiver_set_f_rec_min,
-	"Minimum receiver mass flow rate turn down fraction [], number.\n Required if: *.",
+	"Minimum receiver mass flow rate turn down fraction, number.\n Required.",
  	NULL},
 {"field_fl_props", (getter)Receiver_get_field_fl_props,(setter)Receiver_set_field_fl_props,
-	"User defined field fluid property data [-], matrix.\n Required if: *.",
+	"User defined field fluid property data [-], matrix.\n Required.",
  	NULL},
 {"hl_ffact", (getter)Receiver_get_hl_ffact,(setter)Receiver_set_hl_ffact,
-	"The heat loss factor (thermal loss fudge factor) [], number.\n Required if: *.",
+	"The heat loss factor (thermal loss fudge factor), number.\n Required.",
  	NULL},
 {"m_dot_htf_max", (getter)Receiver_get_m_dot_htf_max,(setter)Receiver_set_m_dot_htf_max,
-	"Maximum receiver mass flow rate [kg/hr], number.\n Required if: *.",
+	"Maximum receiver mass flow rate [kg/hr], number.\n Required.",
  	NULL},
 {"mat_tube", (getter)Receiver_get_mat_tube,(setter)Receiver_set_mat_tube,
-	"The material name of the receiver tubes [], number.\n Required if: *.",
+	"The material name of the receiver tubes, number.\n Required.",
  	NULL},
 {"rec_htf", (getter)Receiver_get_rec_htf,(setter)Receiver_set_rec_htf,
-	"The name of the HTF used in the receiver [], number.\n Required if: *.",
+	"The name of the HTF used in the receiver, number.\n Required.",
  	NULL},
 {"rec_qf_delay", (getter)Receiver_get_rec_qf_delay,(setter)Receiver_set_rec_qf_delay,
-	"Energy-based rcvr startup delay (fraction of rated thermal power) [], number.\n Required if: *.",
+	"Energy-based rcvr startup delay (fraction of rated thermal power), number.\n Required.",
  	NULL},
 {"rec_su_delay", (getter)Receiver_get_rec_su_delay,(setter)Receiver_set_rec_su_delay,
-	"Fixed startup delay time for the receiver [hr], number.\n Required if: *.",
+	"Fixed startup delay time for the receiver [hr], number.\n Required.",
  	NULL},
 {"receiver_type", (getter)Receiver_get_receiver_type,(setter)Receiver_set_receiver_type,
-	"External=0, Cavity=1 [], number.\n Constraints: INTEGER; Required if: *.",
+	"External=0, Cavity=1, number.\n Constraints: INTEGER; Required.",
  	NULL},
 {"th_tube", (getter)Receiver_get_th_tube,(setter)Receiver_set_th_tube,
-	"The wall thickness of a single receiver tube [mm], number.\n Required if: *.",
+	"The wall thickness of a single receiver tube [mm], number.\n Required.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -2118,19 +2118,19 @@ Powerblock_set_q_pb_design(PowerblockObject *self, PyObject *value, void *closur
 
 static PyGetSetDef Powerblock_getset[] = {
 {"elev", (getter)Powerblock_get_elev,(setter)Powerblock_set_elev,
-	"Plant elevation [m], number.\n Required if: *.",
+	"Plant elevation [m], number.\n Required.",
  	NULL},
 {"ngcc_model", (getter)Powerblock_get_ngcc_model,(setter)Powerblock_set_ngcc_model,
-	"1: NREL, 2: GE [], number.\n Required if: *.",
+	"1: NREL, 2: GE, number.\n Required.",
  	NULL},
 {"pinch_point_coldside", (getter)Powerblock_get_pinch_point_coldside,(setter)Powerblock_set_pinch_point_coldside,
-	"Cold side HX pinch point [C], number.\n Required if: *.",
+	"Cold side HX pinch point [C], number.\n Required.",
  	NULL},
 {"pinch_point_hotside", (getter)Powerblock_get_pinch_point_hotside,(setter)Powerblock_set_pinch_point_hotside,
-	"Hot side temperature HX temperature difference [C], number.\n Required if: *.",
+	"Hot side temperature HX temperature difference [C], number.\n Required.",
  	NULL},
 {"q_pb_design", (getter)Powerblock_get_q_pb_design,(setter)Powerblock_set_q_pb_design,
-	"Design point power block thermal power [MWt], number.\n Required if: *.",
+	"Design point power block thermal power [MWt], number.\n Required.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -2409,46 +2409,46 @@ Parasitics_set_piping_loss(ParasiticsObject *self, PyObject *value, void *closur
 
 static PyGetSetDef Parasitics_getset[] = {
 {"Q_rec_des", (getter)Parasitics_get_Q_rec_des,(setter)Parasitics_set_Q_rec_des,
-	"Design point solar field thermal output [MW], number.\n Required if: *.",
+	"Design point solar field thermal output [MW], number.\n Required.",
  	NULL},
 {"W_dot_solar_des", (getter)Parasitics_get_W_dot_solar_des,(setter)Parasitics_set_W_dot_solar_des,
-	"Solar contribution to cycle output at design [MWe], number.\n Required if: *.",
+	"Solar contribution to cycle output at design [MWe], number.\n Required.",
  	NULL},
 {"bop_par", (getter)Parasitics_get_bop_par,(setter)Parasitics_set_bop_par,
-	"Balance of plant parasitic power fraction [MWe/MWcap], number.\n Required if: *.",
+	"Balance of plant parasitic power fraction [MWe/MWcap], number.\n Required.",
  	NULL},
 {"bop_par_0", (getter)Parasitics_get_bop_par_0,(setter)Parasitics_set_bop_par_0,
-	"Balance of plant parasitic power fraction - const coeff [none], number.\n Required if: *.",
+	"Balance of plant parasitic power fraction - const coeff [none], number.\n Required.",
  	NULL},
 {"bop_par_1", (getter)Parasitics_get_bop_par_1,(setter)Parasitics_set_bop_par_1,
-	"Balance of plant parasitic power fraction - linear coeff [none], number.\n Required if: *.",
+	"Balance of plant parasitic power fraction - linear coeff [none], number.\n Required.",
  	NULL},
 {"bop_par_2", (getter)Parasitics_get_bop_par_2,(setter)Parasitics_set_bop_par_2,
-	"Balance of plant parasitic power fraction - quadratic coeff [none], number.\n Required if: *.",
+	"Balance of plant parasitic power fraction - quadratic coeff [none], number.\n Required.",
  	NULL},
 {"bop_par_f", (getter)Parasitics_get_bop_par_f,(setter)Parasitics_set_bop_par_f,
-	"Balance of plant parasitic power fraction - mult frac [none], number.\n Required if: *.",
+	"Balance of plant parasitic power fraction - mult frac [none], number.\n Required.",
  	NULL},
 {"fossil_output", (getter)Parasitics_get_fossil_output,(setter)Parasitics_set_fossil_output,
-	"Fossil-only cycle output at design [MWe], number.\n Required if: *.",
+	"Fossil-only cycle output at design [MWe], number.\n Required.",
  	NULL},
 {"pb_fixed_par", (getter)Parasitics_get_pb_fixed_par,(setter)Parasitics_set_pb_fixed_par,
-	"Fixed parasitic load - runs at all times [MWe/MWcap], number.\n Required if: *.",
+	"Fixed parasitic load - runs at all times [MWe/MWcap], number.\n Required.",
  	NULL},
 {"pb_pump_coef", (getter)Parasitics_get_pb_pump_coef,(setter)Parasitics_set_pb_pump_coef,
-	"Required pumping power for HTF through power block [kJ/kg], number.\n Required if: *.",
+	"Required pumping power for HTF through power block [kJ/kg], number.\n Required.",
  	NULL},
 {"piping_length", (getter)Parasitics_get_piping_length,(setter)Parasitics_set_piping_length,
-	"Total length of exposed piping [m], number.\n Required if: *.",
+	"Total length of exposed piping [m], number.\n Required.",
  	NULL},
 {"piping_length_const", (getter)Parasitics_get_piping_length_const,(setter)Parasitics_set_piping_length_const,
-	"Piping constant length [m], number.\n Required if: *.",
+	"Piping constant length [m], number.\n Required.",
  	NULL},
 {"piping_length_mult", (getter)Parasitics_get_piping_length_mult,(setter)Parasitics_set_piping_length_mult,
-	"Piping length multiplier [], number.\n Required if: *.",
+	"Piping length multiplier, number.\n Required.",
  	NULL},
 {"piping_loss", (getter)Parasitics_get_piping_loss,(setter)Parasitics_set_piping_loss,
-	"Thermal loss per meter of piping [Wt/m], number.\n Required if: *.",
+	"Thermal loss per meter of piping [Wt/m], number.\n Required.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -2886,7 +2886,7 @@ static PyGetSetDef Outputs_getset[] = {
 	"Capacity factor [%], number.",
  	NULL},
 {"eta_field", (getter)Outputs_get_eta_field,(setter)0,
-	"Field optical efficiency [], array.",
+	"Field optical efficiency, array.",
  	NULL},
 {"eta_fuel", (getter)Outputs_get_eta_fuel,(setter)0,
 	"Plant efficiency of fossil only operation (LHV basis) [%], array.",
@@ -2895,13 +2895,13 @@ static PyGetSetDef Outputs_getset[] = {
 	"Plant solar use efficiency considering parasitics [-], array.",
  	NULL},
 {"eta_therm", (getter)Outputs_get_eta_therm,(setter)0,
-	"Receiver thermal efficiency [], array.",
+	"Receiver thermal efficiency, array.",
  	NULL},
 {"f_timestep", (getter)Outputs_get_f_timestep,(setter)0,
-	"Receiver operating fraction after startup [], array.",
+	"Receiver operating fraction after startup, array.",
  	NULL},
 {"field_eff_adj", (getter)Outputs_get_field_eff_adj,(setter)0,
-	"Solar field efficiency w/ defocusing [], array.",
+	"Solar field efficiency w/ defocusing, array.",
  	NULL},
 {"fuel_use", (getter)Outputs_get_fuel_use,(setter)0,
 	"Cycle natural gas used during timestep [MMBTU], array.",
@@ -2910,7 +2910,7 @@ static PyGetSetDef Outputs_getset[] = {
 	"System power generated [kW], array.",
  	NULL},
 {"hour", (getter)Outputs_get_hour,(setter)0,
-	"Resource Hour of Day [], array.",
+	"Resource Hour of Day, array.",
  	NULL},
 {"kwh_per_kw", (getter)Outputs_get_kwh_per_kw,(setter)0,
 	"First year kWh/kW [kWh/kW], number.",
@@ -2925,7 +2925,7 @@ static PyGetSetDef Outputs_getset[] = {
 	"Cycle solar steam mass flow rate [kg/hr], array.",
  	NULL},
 {"month", (getter)Outputs_get_month,(setter)0,
-	"Resource Month [], array.",
+	"Resource Month, array.",
  	NULL},
 {"pparasi", (getter)Outputs_get_pparasi,(setter)0,
 	"Parasitic power heliostat drives [MWe], array.",
@@ -3034,35 +3034,31 @@ newTcsisccObject(void* data_ptr)
 
 	PySAM_TECH_ATTR("Tcsiscc", SAM_Tcsiscc_construct)
 
-PyObject* Weather_obj = Weather_new(self->data_ptr);
+	PyObject* Weather_obj = Weather_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Weather", Weather_obj);
 	Py_DECREF(Weather_obj);
 
-PyObject* MoltenSaltTower_obj = MoltenSaltTower_new(self->data_ptr);
+	PyObject* MoltenSaltTower_obj = MoltenSaltTower_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "MoltenSaltTower", MoltenSaltTower_obj);
 	Py_DECREF(MoltenSaltTower_obj);
 
-PyObject* Heliostat_obj = Heliostat_new(self->data_ptr);
+	PyObject* Heliostat_obj = Heliostat_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Heliostat", Heliostat_obj);
 	Py_DECREF(Heliostat_obj);
 
-PyObject* Receiver_obj = Receiver_new(self->data_ptr);
+	PyObject* Receiver_obj = Receiver_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Receiver", Receiver_obj);
 	Py_DECREF(Receiver_obj);
 
-PyObject* Powerblock_obj = Powerblock_new(self->data_ptr);
+	PyObject* Powerblock_obj = Powerblock_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Powerblock", Powerblock_obj);
 	Py_DECREF(Powerblock_obj);
 
-PyObject* Parasitics_obj = Parasitics_new(self->data_ptr);
+	PyObject* Parasitics_obj = Parasitics_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Parasitics", Parasitics_obj);
 	Py_DECREF(Parasitics_obj);
 
-PyObject* Outputs_obj = Outputs_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
-	Py_DECREF(Outputs_obj);
-
-PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
+	PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
 
 	PyObject* data_cap = PyCapsule_New(self->data_ptr, NULL, NULL);
 	PyObject* Adjust_obj = PyObject_CallMethod(AdjustmentFactorsModule, "new", "(O)", data_cap);
@@ -3076,6 +3072,11 @@ PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
 
 	PyDict_SetItemString(attr_dict, "AdjustmentFactors", Adjust_obj);
 	Py_DECREF(Adjust_obj);
+
+	PyObject* Outputs_obj = Outputs_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
+	Py_DECREF(Outputs_obj);
+
 
 	return self;
 }
@@ -3232,8 +3233,8 @@ static PyObject *
 Tcsiscc_default(PyObject *self, PyObject *args)
 {
 	TcsisccObject *rv;
-	char* fin = 0;
-	if (!PyArg_ParseTuple(args, "s:default", &fin)){
+	char* def = 0;
+	if (!PyArg_ParseTuple(args, "s:default", &def)){
 		PyErr_BadArgument();
 		return NULL;
 	}
@@ -3241,7 +3242,7 @@ Tcsiscc_default(PyObject *self, PyObject *args)
 	if (rv == NULL)
 		return NULL;
 
-	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Tcsiscc", fin);
+	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Tcsiscc", def);
 
 	return (PyObject *)rv;
 }
@@ -3256,14 +3257,14 @@ static PyMethodDef TcsisccModule_methods[] = {
 				PyDoc_STR("new() -> new Tcsiscc object")},
 		{"default",             Tcsiscc_default,         METH_VARARGS,
 				PyDoc_STR("default(financial) -> new Tcsiscc object with financial model-specific default attributes\n"
-				"Options: Single Owner, ")},
+				"Options: Singleowner")},
 		{"wrap",             Tcsiscc_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> new Tcsiscc object around existing PySSC data")},
+				PyDoc_STR("wrap(ssc_data_t) -> new Tcsiscc object around existing PySSC data, taking over memory ownership")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 PyDoc_STRVAR(module_doc,
-			 "Refer to http://www.github.com/nrel/PySAM for source code.");
+			 "CSP molten salt power tower system with a natural gas combined cycle power plant");
 
 
 static int
@@ -3271,6 +3272,9 @@ TcsisccModule_exec(PyObject *m)
 {
 	/* Finalize the type object including setting type of the new type
 	 * object; doing it here is required for portability, too. */
+
+	if (PySAM_load_lib(m) < 0) goto fail;
+	if (PySAM_init_error(m) < 0) goto fail;
 
 	Tcsiscc_Type.tp_dict = PyDict_New();
 	if (!Tcsiscc_Type.tp_dict) { goto fail; }
@@ -3348,9 +3352,6 @@ TcsisccModule_exec(PyObject *m)
 	PyModule_AddObject(m,
 				"Tcsiscc",
 				(PyObject*)&Tcsiscc_Type);
-
-	if (PySAM_load_lib(m) < 0) goto fail;
-	if (PySAM_init_error() < 0) goto fail;
 
 	return 0;
 	fail:

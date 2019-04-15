@@ -90,10 +90,10 @@ IPHLCOH_set_electricity_rate(IPHLCOHObject *self, PyObject *value, void *closure
 
 static PyGetSetDef IPHLCOH_getset[] = {
 {"annual_electricity_consumption", (getter)IPHLCOH_get_annual_electricity_consumption,(setter)IPHLCOH_set_annual_electricity_consumption,
-	"Annual electricity consumptoin w/ avail derate [kWe-hr], number.\n Required if: *.",
+	"Annual electricity consumptoin w/ avail derate [kWe-hr], number.\n Required.",
  	NULL},
 {"electricity_rate", (getter)IPHLCOH_get_electricity_rate,(setter)IPHLCOH_set_electricity_rate,
-	"Cost of electricity used to operate pumps/trackers [$/kWe], number.\n Required if: *.",
+	"Cost of electricity used to operate pumps/trackers [$/kWe], number.\n Required.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -216,7 +216,7 @@ SimpleLCOE_set_fixed_operating_cost(SimpleLCOEObject *self, PyObject *value, voi
 
 static PyGetSetDef SimpleLCOE_getset[] = {
 {"fixed_operating_cost", (getter)SimpleLCOE_get_fixed_operating_cost,(setter)SimpleLCOE_set_fixed_operating_cost,
-	"Annual fixed operating cost [$/kW], number.\n Required if: *.",
+	"Annual fixed operating cost [$/kW], number.\n Required.",
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -397,32 +397,18 @@ newIphToLcoefcrObject(void* data_ptr)
 
 	PySAM_TECH_ATTR("IphToLcoefcr", SAM_IphToLcoefcr_construct)
 
-PyObject* IPHLCOH_obj = IPHLCOH_new(self->data_ptr);
+	PyObject* IPHLCOH_obj = IPHLCOH_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "IPHLCOH", IPHLCOH_obj);
 	Py_DECREF(IPHLCOH_obj);
 
-PyObject* SimpleLCOE_obj = SimpleLCOE_new(self->data_ptr);
+	PyObject* SimpleLCOE_obj = SimpleLCOE_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "SimpleLCOE", SimpleLCOE_obj);
 	Py_DECREF(SimpleLCOE_obj);
 
-PyObject* Outputs_obj = Outputs_new(self->data_ptr);
+	PyObject* Outputs_obj = Outputs_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
 	Py_DECREF(Outputs_obj);
 
-PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
-
-	PyObject* data_cap = PyCapsule_New(self->data_ptr, NULL, NULL);
-	PyObject* Adjust_obj = PyObject_CallMethod(AdjustmentFactorsModule, "new", "(O)", data_cap);
-	Py_XDECREF(data_cap);
-	Py_XDECREF(AdjustmentFactorsModule);
-
-	if (!Adjust_obj){
-		PyErr_SetString(PySAM_ErrorObject, "Couldn't create AdjustmentFactorsObject\n");
-		return NULL;
-	}
-
-	PyDict_SetItemString(attr_dict, "AdjustmentFactors", Adjust_obj);
-	Py_DECREF(Adjust_obj);
 
 	return self;
 }
@@ -579,8 +565,8 @@ static PyObject *
 IphToLcoefcr_default(PyObject *self, PyObject *args)
 {
 	IphToLcoefcrObject *rv;
-	char* fin = 0;
-	if (!PyArg_ParseTuple(args, "s:default", &fin)){
+	char* def = 0;
+	if (!PyArg_ParseTuple(args, "s:default", &def)){
 		PyErr_BadArgument();
 		return NULL;
 	}
@@ -588,7 +574,7 @@ IphToLcoefcr_default(PyObject *self, PyObject *args)
 	if (rv == NULL)
 		return NULL;
 
-	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "IphToLcoefcr", fin);
+	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "IphToLcoefcr", def);
 
 	return (PyObject *)rv;
 }
@@ -603,14 +589,14 @@ static PyMethodDef IphToLcoefcrModule_methods[] = {
 				PyDoc_STR("new() -> new IphToLcoefcr object")},
 		{"default",             IphToLcoefcr_default,         METH_VARARGS,
 				PyDoc_STR("default(financial) -> new IphToLcoefcr object with financial model-specific default attributes\n"
-				"Options: LCOH Calculator, None, ")},
+				"Options: TroughPhysicalProcessHeat, LinearFresnelDsgIph")},
 		{"wrap",             IphToLcoefcr_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> new IphToLcoefcr object around existing PySSC data")},
+				PyDoc_STR("wrap(ssc_data_t) -> new IphToLcoefcr object around existing PySSC data, taking over memory ownership")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 PyDoc_STRVAR(module_doc,
-			 "Refer to http://www.github.com/nrel/PySAM for source code.");
+			 "Calculate levelized cost of heat using fixed charge rate method for industrial process heat models");
 
 
 static int
@@ -619,27 +605,11 @@ IphToLcoefcrModule_exec(PyObject *m)
 	/* Finalize the type object including setting type of the new type
 	 * object; doing it here is required for portability, too. */
 
+	if (PySAM_load_lib(m) < 0) goto fail;
+	if (PySAM_init_error(m) < 0) goto fail;
+
 	IphToLcoefcr_Type.tp_dict = PyDict_New();
 	if (!IphToLcoefcr_Type.tp_dict) { goto fail; }
-
-	/// Add the AdjustmentFactors type object to IphToLcoefcr_Type
-	PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
-	if (!AdjustmentFactorsModule){
-		PyErr_SetImportError(PyUnicode_FromString("Could not import AdjustmentFactors module."), NULL, NULL);
-	}
-
-	PyTypeObject* AdjustmentFactors_Type = (PyTypeObject*)PyObject_GetAttrString(AdjustmentFactorsModule, "AdjustmentFactors");
-	if (!AdjustmentFactors_Type){
-		PyErr_SetImportError(PyUnicode_FromString("Could not import AdjustmentFactors type."), NULL, NULL);
-	}
-	Py_XDECREF(AdjustmentFactorsModule);
-
-	if (PyType_Ready(AdjustmentFactors_Type) < 0) { goto fail; }
-	PyDict_SetItemString(IphToLcoefcr_Type.tp_dict,
-						 "AdjustmentFactors",
-						 (PyObject*)AdjustmentFactors_Type);
-	Py_DECREF(&AdjustmentFactors_Type);
-	Py_XDECREF(AdjustmentFactors_Type);
 
 	/// Add the IPHLCOH type object to IphToLcoefcr_Type
 	if (PyType_Ready(&IPHLCOH_Type) < 0) { goto fail; }
@@ -667,9 +637,6 @@ IphToLcoefcrModule_exec(PyObject *m)
 	PyModule_AddObject(m,
 				"IphToLcoefcr",
 				(PyObject*)&IphToLcoefcr_Type);
-
-	if (PySAM_load_lib(m) < 0) goto fail;
-	if (PySAM_init_error() < 0) goto fail;
 
 	return 0;
 	fail:
