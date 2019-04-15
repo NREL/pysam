@@ -75,7 +75,7 @@ with open(path.join(this_directory, 'RELEASE.md'), encoding='utf-8') as f:
 
 setup(
     name='NREL-PySAM',
-    version='1.0.3',
+    version='1.0.2',
     url='http://www.github.com/nrel/pysam',
     description="National Renewable Energy Laboratory's System Advisor Model Python Wrapper",
     long_description=long_description,
