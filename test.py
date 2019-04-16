@@ -190,7 +190,7 @@ while round < 5:
 
 
     # Test strings and tables with error cases
-    import Pvwattsv5
+    import PySAM.Pvwattsv5 as Pvwattsv5
     a = Pvwattsv5.new()
     a.LocationAndResource.solar_resource_file = "file"
     assert(a.LocationAndResource.solar_resource_file == "file")
