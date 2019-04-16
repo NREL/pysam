@@ -34,8 +34,6 @@ from setuptools import setup, Extension
 
 
 import sys
-if sys.platform != 'win32':
-    os.system("rm -r build")
 
 libs = []
 libpath = os.path.dirname(os.path.abspath(__file__))+"/data"
