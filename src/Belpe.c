@@ -777,7 +777,7 @@ static PyMethodDef BelpeModule_methods[] = {
 				PyDoc_STR("new() -> new Belpe object")},
 		{"default",             Belpe_default,         METH_VARARGS,
 				PyDoc_STR("default(financial) -> new Belpe object with financial model-specific default attributes\n"
-				"Options: GenericSystem, Windpower, Pvwattsv5, Swh, Pvsamv1")},
+				"Options: FlatPlatePVResidential\nFlatPlatePVThirdParty\nPVWattsResidential\nPVWattsThirdParty\nSolarWaterHeatingResidential")},
 		{"wrap",             Belpe_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> new Belpe object around existing PySSC data, taking over memory ownership")},
 		{NULL,              NULL}           /* sentinel */

@@ -3257,7 +3257,7 @@ static PyMethodDef TcsisccModule_methods[] = {
 				PyDoc_STR("new() -> new Tcsiscc object")},
 		{"default",             Tcsiscc_default,         METH_VARARGS,
 				PyDoc_STR("default(financial) -> new Tcsiscc object with financial model-specific default attributes\n"
-				"Options: Singleowner")},
+				"Options: ISCCSingleOwner")},
 		{"wrap",             Tcsiscc_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> new Tcsiscc object around existing PySSC data, taking over memory ownership")},
 		{NULL,              NULL}           /* sentinel */

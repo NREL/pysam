@@ -2065,7 +2065,7 @@ static PyMethodDef GeothermalModule_methods[] = {
 				PyDoc_STR("new() -> new Geothermal object")},
 		{"default",             Geothermal_default,         METH_VARARGS,
 				PyDoc_STR("default(financial) -> new Geothermal object with financial model-specific default attributes\n"
-				"Options: Levpartflip, Singleowner, None, Saleleaseback, Equpartflip, , Lcoefcr")},
+				"Options: GeothermalPowerAllEquityPartnershipFlip\nGeothermalPowerIndependentPowerProducer\nGeothermalPowerLCOECalculator\nGeothermalPowerLeveragedPartnershipFlip\nGeothermalPowerNone\nGeothermalPowerSaleLeaseback\nGeothermalPowerSingleOwner")},
 		{"wrap",             Geothermal_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> new Geothermal object around existing PySSC data, taking over memory ownership")},
 		{NULL,              NULL}           /* sentinel */

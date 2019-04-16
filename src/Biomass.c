@@ -2628,7 +2628,7 @@ static PyMethodDef BiomassModule_methods[] = {
 				PyDoc_STR("new() -> new Biomass object")},
 		{"default",             Biomass_default,         METH_VARARGS,
 				PyDoc_STR("default(financial) -> new Biomass object with financial model-specific default attributes\n"
-				"Options: None, Lcoefcr, Singleowner, Saleleaseback, Equpartflip, , , Levpartflip, Commercial")},
+				"Options: BiopowerAllEquityPartnershipFlip\nBiopowerCommercial\nBiopowerCommercialPPA\nBiopowerIndependentPowerProducer\nBiopowerLCOECalculator\nBiopowerLeveragedPartnershipFlip\nBiopowerNone\nBiopowerSaleLeaseback\nBiopowerSingleOwner")},
 		{"wrap",             Biomass_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> new Biomass object around existing PySSC data, taking over memory ownership")},
 		{NULL,              NULL}           /* sentinel */

@@ -2893,7 +2893,7 @@ static PyMethodDef Utilityrate5Module_methods[] = {
 				PyDoc_STR("new() -> new Utilityrate5 object")},
 		{"default",             Utilityrate5_default,         METH_VARARGS,
 				PyDoc_STR("default(financial) -> new Utilityrate5 object with financial model-specific default attributes\n"
-				"Options: TcsMSLF, TcslinearFresnel, Swh, Tcsdish, GenericSystem, Pvsamv1, Fuelcell, TcsgenericSolar, TcstroughPhysical, Pvwattsv5, TcstroughEmpirical, Biomass, Windpower")},
+				"Options: BiopowerCommercial\nDSLFCommercial\nDishStirlingCommercial\nEmpiricalTroughCommercial\nFlatPlatePVCommercial\nFlatPlatePVHostDeveloper\nFlatPlatePVResidential\nFlatPlatePVSingleOwner\nFlatPlatePVThirdParty\nFuelCellCommercial\nFuelCellSingleOwner\nGenericCSPSystemCommercial\nGenericSystemCommercial\nGenericSystemHostDeveloper\nGenericSystemResidential\nGenericSystemThirdParty\nMSLFCommercial\nPVWattsCommercial\nPVWattsHostDeveloper\nPVWattsResidential\nPVWattsThirdParty\nPhysicalTroughCommercial\nSolarWaterHeatingCommercial\nSolarWaterHeatingResidential\nWindPowerCommercial\nWindPowerResidential")},
 		{"wrap",             Utilityrate5_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> new Utilityrate5 object around existing PySSC data, taking over memory ownership")},
 		{NULL,              NULL}           /* sentinel */

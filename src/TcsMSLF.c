@@ -4762,7 +4762,7 @@ static PyMethodDef TcsMSLFModule_methods[] = {
 				PyDoc_STR("new() -> new TcsMSLF object")},
 		{"default",             TcsMSLF_default,         METH_VARARGS,
 				PyDoc_STR("default(financial) -> new TcsMSLF object with financial model-specific default attributes\n"
-				"Options: Singleowner, Saleleaseback, Levpartflip, Commercial, Lcoefcr, Equpartflip, None")},
+				"Options: MSLFAllEquityPartnershipFlip\nMSLFCommercial\nMSLFLCOECalculator\nMSLFLeveragedPartnershipFlip\nMSLFNone\nMSLFSaleLeaseback\nMSLFSingleOwner")},
 		{"wrap",             TcsMSLF_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> new TcsMSLF object around existing PySSC data, taking over memory ownership")},
 		{NULL,              NULL}           /* sentinel */

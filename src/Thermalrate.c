@@ -823,7 +823,7 @@ static PyMethodDef ThermalrateModule_methods[] = {
 				PyDoc_STR("new() -> new Thermalrate object")},
 		{"default",             Thermalrate_default,         METH_VARARGS,
 				PyDoc_STR("default(financial) -> new Thermalrate object with financial model-specific default attributes\n"
-				"Options: TcsMSLF, TcslinearFresnel, TcsmoltenSalt, Biomass, Tcsdish, Fuelcell, TcsgenericSolar, TcstroughPhysical, Geothermal, GenericSystem, Tcsiscc, TcsdirectSteam, Windpower, Pvwattsv5, Pvsamv1, Hcpv, TcstroughEmpirical")},
+				"Options: FuelCellCommercial\nFuelCellSingleOwner")},
 		{"wrap",             Thermalrate_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> new Thermalrate object around existing PySSC data, taking over memory ownership")},
 		{NULL,              NULL}           /* sentinel */

@@ -3725,7 +3725,7 @@ static PyMethodDef TcstroughEmpiricalModule_methods[] = {
 				PyDoc_STR("new() -> new TcstroughEmpirical object")},
 		{"default",             TcstroughEmpirical_default,         METH_VARARGS,
 				PyDoc_STR("default(financial) -> new TcstroughEmpirical object with financial model-specific default attributes\n"
-				"Options: Lcoefcr, , Commercial, , Levpartflip, Singleowner, None, Equpartflip, Saleleaseback")},
+				"Options: EmpiricalTroughAllEquityPartnershipFlip\nEmpiricalTroughCommercial\nEmpiricalTroughCommercialPPA\nEmpiricalTroughIndependentPowerProducer\nEmpiricalTroughLCOECalculator\nEmpiricalTroughLeveragedPartnershipFlip\nEmpiricalTroughNone\nEmpiricalTroughSaleLeaseback\nEmpiricalTroughSingleOwner")},
 		{"wrap",             TcstroughEmpirical_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> new TcstroughEmpirical object around existing PySSC data, taking over memory ownership")},
 		{NULL,              NULL}           /* sentinel */

@@ -2328,7 +2328,7 @@ static PyMethodDef TcsgenericSolarModule_methods[] = {
 				PyDoc_STR("new() -> new TcsgenericSolar object")},
 		{"default",             TcsgenericSolar_default,         METH_VARARGS,
 				PyDoc_STR("default(financial) -> new TcsgenericSolar object with financial model-specific default attributes\n"
-				"Options: Lcoefcr, Levpartflip, Singleowner, , None, Equpartflip, Saleleaseback, , Commercial")},
+				"Options: GenericCSPSystemAllEquityPartnershipFlip\nGenericCSPSystemCommercial\nGenericCSPSystemCommercialPPA\nGenericCSPSystemIndependentPowerProducer\nGenericCSPSystemLCOECalculator\nGenericCSPSystemLeveragedPartnershipFlip\nGenericCSPSystemNone\nGenericCSPSystemSaleLeaseback\nGenericCSPSystemSingleOwner")},
 		{"wrap",             TcsgenericSolar_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> new TcsgenericSolar object around existing PySSC data, taking over memory ownership")},
 		{NULL,              NULL}           /* sentinel */

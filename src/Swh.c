@@ -1444,7 +1444,7 @@ static PyMethodDef SwhModule_methods[] = {
 				PyDoc_STR("new() -> new Swh object")},
 		{"default",             Swh_default,         METH_VARARGS,
 				PyDoc_STR("default(financial) -> new Swh object with financial model-specific default attributes\n"
-				"Options: Commercial, None, Residential, Lcoefcr")},
+				"Options: SolarWaterHeatingCommercial\nSolarWaterHeatingLCOECalculator\nSolarWaterHeatingNone\nSolarWaterHeatingResidential")},
 		{"wrap",             Swh_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> new Swh object around existing PySSC data, taking over memory ownership")},
 		{NULL,              NULL}           /* sentinel */

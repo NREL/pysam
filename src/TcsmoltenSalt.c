@@ -6777,7 +6777,7 @@ static PyMethodDef TcsmoltenSaltModule_methods[] = {
 				PyDoc_STR("new() -> new TcsmoltenSalt object")},
 		{"default",             TcsmoltenSalt_default,         METH_VARARGS,
 				PyDoc_STR("default(financial) -> new TcsmoltenSalt object with financial model-specific default attributes\n"
-				"Options: Singleowner, Equpartflip, Levpartflip, Saleleaseback")},
+				"Options: MSPTAllEquityPartnershipFlip\nMSPTLeveragedPartnershipFlip\nMSPTSaleLeaseback\nMSPTSingleOwner")},
 		{"wrap",             TcsmoltenSalt_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> new TcsmoltenSalt object around existing PySSC data, taking over memory ownership")},
 		{NULL,              NULL}           /* sentinel */

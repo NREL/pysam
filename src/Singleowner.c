@@ -11580,7 +11580,7 @@ static PyMethodDef SingleownerModule_methods[] = {
 				PyDoc_STR("new() -> new Singleowner object")},
 		{"default",             Singleowner_default,         METH_VARARGS,
 				PyDoc_STR("default(financial) -> new Singleowner object with financial model-specific default attributes\n"
-				"Options: TcsMSLF, TcslinearFresnel, TcsmoltenSalt, Biomass, Tcsdish, Fuelcell, TcsgenericSolar, TcstroughPhysical, Geothermal, GenericSystem, Tcsiscc, TcsdirectSteam, Windpower, Pvwattsv5, Pvsamv1, Hcpv, TcstroughEmpirical")},
+				"Options: BiopowerSingleOwner\nDSLFSingleOwner\nDSPTSingleOwner\nDishStirlingSingleOwner\nEmpiricalTroughSingleOwner\nFlatPlatePVSingleOwner\nFuelCellSingleOwner\nGenericCSPSystemSingleOwner\nGenericSystemSingleOwner\nGeothermalPowerSingleOwner\nHighXConcentratingPVSingleOwner\nISCCSingleOwner\nMSLFSingleOwner\nMSPTSingleOwner\nPVWattsSingleOwner\nPhysicalTroughSingleOwner\nWindPowerSingleOwner")},
 		{"wrap",             Singleowner_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> new Singleowner object around existing PySSC data, taking over memory ownership")},
 		{NULL,              NULL}           /* sentinel */

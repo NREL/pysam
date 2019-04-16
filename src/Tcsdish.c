@@ -2723,7 +2723,7 @@ static PyMethodDef TcsdishModule_methods[] = {
 				PyDoc_STR("new() -> new Tcsdish object")},
 		{"default",             Tcsdish_default,         METH_VARARGS,
 				PyDoc_STR("default(financial) -> new Tcsdish object with financial model-specific default attributes\n"
-				"Options: None, Lcoefcr, Singleowner, Saleleaseback, , Commercial, Levpartflip, Equpartflip, ")},
+				"Options: DishStirlingAllEquityPartnershipFlip\nDishStirlingCommercial\nDishStirlingCommercialPPA\nDishStirlingIndependentPowerProducer\nDishStirlingLCOECalculator\nDishStirlingLeveragedPartnershipFlip\nDishStirlingNone\nDishStirlingSaleLeaseback\nDishStirlingSingleOwner")},
 		{"wrap",             Tcsdish_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> new Tcsdish object around existing PySSC data, taking over memory ownership")},
 		{NULL,              NULL}           /* sentinel */

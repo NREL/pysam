@@ -781,7 +781,7 @@ static PyMethodDef GenericSystemModule_methods[] = {
 				PyDoc_STR("new() -> new GenericSystem object")},
 		{"default",             GenericSystem_default,         METH_VARARGS,
 				PyDoc_STR("default(financial) -> new GenericSystem object with financial model-specific default attributes\n"
-				"Options: Equpartflip, None, Lcoefcr, , Commercial, Thirdpartyownership, Residential, Levpartflip, Singleowner, Saleleaseback, , HostDeveloper")},
+				"Options: GenericSystemAllEquityPartnershipFlip\nGenericSystemCommercial\nGenericSystemCommercialPPA\nGenericSystemHostDeveloper\nGenericSystemIndependentPowerProducer\nGenericSystemLCOECalculator\nGenericSystemLeveragedPartnershipFlip\nGenericSystemNone\nGenericSystemResidential\nGenericSystemSaleLeaseback\nGenericSystemSingleOwner\nGenericSystemThirdParty")},
 		{"wrap",             GenericSystem_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> new GenericSystem object around existing PySSC data, taking over memory ownership")},
 		{NULL,              NULL}           /* sentinel */

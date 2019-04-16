@@ -1289,7 +1289,7 @@ static PyMethodDef BattwattsModule_methods[] = {
 				PyDoc_STR("new() -> new Battwatts object")},
 		{"default",             Battwatts_default,         METH_VARARGS,
 				PyDoc_STR("default(financial) -> new Battwatts object with financial model-specific default attributes\n"
-				"Options: TcsMSLF, TcslinearFresnel, Swh, Tcsdish, GenericSystem, Pvsamv1, Fuelcell, TcsgenericSolar, TcstroughPhysical, Pvwattsv5, TcstroughEmpirical, Biomass, Windpower")},
+				"Options: PVWattsCommercial\nPVWattsResidential\nPVWattsThirdParty")},
 		{"wrap",             Battwatts_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> new Battwatts object around existing PySSC data, taking over memory ownership")},
 		{NULL,              NULL}           /* sentinel */

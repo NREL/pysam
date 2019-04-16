@@ -3540,7 +3540,7 @@ static PyMethodDef TroughPhysicalProcessHeatModule_methods[] = {
 				PyDoc_STR("new() -> new TroughPhysicalProcessHeat object")},
 		{"default",             TroughPhysicalProcessHeat_default,         METH_VARARGS,
 				PyDoc_STR("default(financial) -> new TroughPhysicalProcessHeat object with financial model-specific default attributes\n"
-				"Options: IphToLcoefcr, None")},
+				"Options: PhysicalTroughIPHLCOHCalculator\nPhysicalTroughIPHNone")},
 		{"wrap",             TroughPhysicalProcessHeat_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> new TroughPhysicalProcessHeat object around existing PySSC data, taking over memory ownership")},
 		{NULL,              NULL}           /* sentinel */

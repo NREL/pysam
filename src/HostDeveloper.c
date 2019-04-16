@@ -11505,7 +11505,7 @@ static PyMethodDef HostDeveloperModule_methods[] = {
 				PyDoc_STR("new() -> new HostDeveloper object")},
 		{"default",             HostDeveloper_default,         METH_VARARGS,
 				PyDoc_STR("default(financial) -> new HostDeveloper object with financial model-specific default attributes\n"
-				"Options: Pvwattsv5, Pvsamv1, GenericSystem")},
+				"Options: FlatPlatePVHostDeveloper\nGenericSystemHostDeveloper\nPVWattsHostDeveloper")},
 		{"wrap",             HostDeveloper_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> new HostDeveloper object around existing PySSC data, taking over memory ownership")},
 		{NULL,              NULL}           /* sentinel */
