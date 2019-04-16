@@ -4522,7 +4522,7 @@ static PyMethodDef TcsdirectSteamModule_methods[] = {
 				PyDoc_STR("new() -> new TcsdirectSteam object")},
 		{"default",             TcsdirectSteam_default,         METH_VARARGS,
 				PyDoc_STR("default(financial) -> new TcsdirectSteam object with financial model-specific default attributes\n"
-				"Options: Saleleaseback, Equpartflip, Levpartflip, Singleowner")},
+				"Options: DSPTAllEquityPartnershipFlip\nDSPTLeveragedPartnershipFlip\nDSPTSaleLeaseback\nDSPTSingleOwner")},
 		{"wrap",             TcsdirectSteam_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> new TcsdirectSteam object around existing PySSC data, taking over memory ownership")},
 		{NULL,              NULL}           /* sentinel */

@@ -1933,7 +1933,7 @@ static PyMethodDef HcpvModule_methods[] = {
 				PyDoc_STR("new() -> new Hcpv object")},
 		{"default",             Hcpv_default,         METH_VARARGS,
 				PyDoc_STR("default(financial) -> new Hcpv object with financial model-specific default attributes\n"
-				"Options: None, Lcoefcr, Saleleaseback, Equpartflip, , Levpartflip, Singleowner")},
+				"Options: HighXConcentratingPVAllEquityPartnershipFlip\nHighXConcentratingPVIndependentPowerProducer\nHighXConcentratingPVLCOECalculator\nHighXConcentratingPVLeveragedPartnershipFlip\nHighXConcentratingPVNone\nHighXConcentratingPVSaleLeaseback\nHighXConcentratingPVSingleOwner")},
 		{"wrap",             Hcpv_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> new Hcpv object around existing PySSC data, taking over memory ownership")},
 		{NULL,              NULL}           /* sentinel */

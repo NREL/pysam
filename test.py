@@ -16,7 +16,7 @@ check_error_cases = True
 
 n_tests_passed = 0
 round = 0
-while round < 50:
+while round < 5:
 
     if round == 0:
         tracker = SummaryTracker()
@@ -258,7 +258,7 @@ while round < 50:
     n_tests_passed += 1
 
     # Test loading from serialized dict
-    a = GenericSystem.default("None")
+    a = GenericSystem.default("GenericSystemNone")
     print(a.export())
 
     if round == 3:
@@ -276,11 +276,8 @@ sf = "../sam/deploy/solar_resource/tucson_az_32.116521_-110.933042_psmv3_60_tmy.
 sf2 = "../sam/deploy/solar_resource/phoenix_az_33.450495_-111.983688_psmv3_60_tmy.csv"
 sf3 = '../sam/deploy/solar_resource/fargo_nd_46.9_-96.8_mts1_60_tmy.csv'
 wf = "../sam/deploy/wind_resource/OH Northern-Lake.srw"
-def assign_file(mod, i):
-    if mod == "TcsmoltenSalt" or mod == "Pvwattsv5Lifetime" or mod == "TcsdirectSteam":
-        m = i.default("SingleOwner")
-    else:
-        m = i.default("None")
+def assign_file(mod, default, i):
+    m = i.default(default)
     if mod == "Pvsamv1":
         m.SolarResource.solar_resource_file = sf
     elif mod == "Biomass":
@@ -302,18 +299,15 @@ def assign_file(mod, i):
             pass
 
     try:
-        m.Common.gen = [1 for i in range(8760)]
-    except:
-        pass
-
-    try:
+        m.SystemOutput.gen = [1 for i in range(8760)]
+        m.SystemOutput.system_capacity = 10000
         m.TimeSeries.gen = [1 for i in range(8760)]
     except:
         pass
 
     return m
 
-def test_importing_all():
+def test_importing_all(exec):
     import os
     outputs = {}
 
@@ -326,36 +320,31 @@ def test_importing_all():
             mod = 'CashloanModel'
         # if mod == "GenericSystem":
         #     continue
-        fin = names[1]
+        config = names[1]
 
-
+        mod_name = "PySAM." + mod
         import importlib
-        try:
-            i = importlib.import_module(mod)
-        except:
-            print("error importing", mod, fin, "\n")
-            continue
 
         try:
-            i = importlib.import_module(mod)
-            m = i.default(fin)
+            i = importlib.import_module(mod_name)
+            m = i.default(config)
         except:
-            print("error defaults", mod, fin, "\n")
+            print(mod, config)
+
+        if not exec:
             continue
 
+        i = importlib.import_module(mod_name)
+        m = assign_file(mod, config, i)
         try:
-            i = importlib.import_module(mod)
-            m = assign_file(mod, i)
             m.execute(0)
-            try:
-                outputs[mod] = (m.Outputs.export()['annual_energy'], m.Outputs.export()['capacity_factor'])
-            except:
-                try:
-                    outputs[mod] = m.Outputs.export()['annual_energy']
-                except:
-                    outputs[mod] = m.Outputs.export()
+            outputs[config] = (m.Outputs.export()['annual_energy'], m.Outputs.export()['capacity_factor'])
         except:
-            print("error executing", mod, fin, "\n")
+            try:
+                outputs[config] = m.Outputs.export()['annual_energy']
+            except:
+                outputs[config] = m.Outputs.export()
+                print("error executing", mod, config, "\n")
 
     print(outputs)
 
@@ -370,7 +359,10 @@ tech = ["Geothermal", "Pvsamv1", "TcsMSLF", "TcslinearFresnel", "TcstroughPhysic
 fin = ["IphToLcoefcr", "Thermalrate", "Belpe", "Lcoefcr", "Thirdpartyownership", "Levpartflip", "Saleleaseback",
        "Cashloan", "Singleowner", "Utilityrate5", "Equpartflip", "HostDeveloper", ]
 
-test_importing_all()
+test_importing_all(False)
+
+test_importing_all(True)
+
 
 
 #

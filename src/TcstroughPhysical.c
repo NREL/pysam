@@ -5362,7 +5362,7 @@ static PyMethodDef TcstroughPhysicalModule_methods[] = {
 				PyDoc_STR("new() -> new TcstroughPhysical object")},
 		{"default",             TcstroughPhysical_default,         METH_VARARGS,
 				PyDoc_STR("default(financial) -> new TcstroughPhysical object with financial model-specific default attributes\n"
-				"Options: Singleowner, Commercial, Saleleaseback, None, Lcoefcr, Equpartflip, , Levpartflip")},
+				"Options: PhysicalTroughAllEquityPartnershipFlip\nPhysicalTroughCommercial\nPhysicalTroughIndependentPowerProducer\nPhysicalTroughLCOECalculator\nPhysicalTroughLeveragedPartnershipFlip\nPhysicalTroughNone\nPhysicalTroughSaleLeaseback\nPhysicalTroughSingleOwner")},
 		{"wrap",             TcstroughPhysical_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> new TcstroughPhysical object around existing PySSC data, taking over memory ownership")},
 		{NULL,              NULL}           /* sentinel */

@@ -3563,7 +3563,7 @@ static PyMethodDef TcslinearFresnelModule_methods[] = {
 				PyDoc_STR("new() -> new TcslinearFresnel object")},
 		{"default",             TcslinearFresnel_default,         METH_VARARGS,
 				PyDoc_STR("default(financial) -> new TcslinearFresnel object with financial model-specific default attributes\n"
-				"Options: Singleowner, Saleleaseback, Commercial, Levpartflip, Equpartflip, Lcoefcr, None")},
+				"Options: DSLFAllEquityPartnershipFlip\nDSLFCommercial\nDSLFLCOECalculator\nDSLFLeveragedPartnershipFlip\nDSLFNone\nDSLFSaleLeaseback\nDSLFSingleOwner")},
 		{"wrap",             TcslinearFresnel_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> new TcslinearFresnel object around existing PySSC data, taking over memory ownership")},
 		{NULL,              NULL}           /* sentinel */

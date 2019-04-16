@@ -1105,7 +1105,7 @@ static PyMethodDef Pvwattsv5Module_methods[] = {
 				PyDoc_STR("new() -> new Pvwattsv5 object")},
 		{"default",             Pvwattsv5_default,         METH_VARARGS,
 				PyDoc_STR("default(financial) -> new Pvwattsv5 object with financial model-specific default attributes\n"
-				"Options: Singleowner, None, Saleleaseback, Commercial, Residential, Thirdpartyownership, , HostDeveloper, Levpartflip, , Equpartflip, Lcoefcr")},
+				"Options: PVWattsAllEquityPartnershipFlip\nPVWattsCommercial\nPVWattsCommercialPPA\nPVWattsHostDeveloper\nPVWattsIndependentPowerProducer\nPVWattsLCOECalculator\nPVWattsLeveragedPartnershipFlip\nPVWattsNone\nPVWattsResidential\nPVWattsSaleLeaseback\nPVWattsSingleOwner\nPVWattsThirdParty")},
 		{"wrap",             Pvwattsv5_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> new Pvwattsv5 object around existing PySSC data, taking over memory ownership")},
 		{NULL,              NULL}           /* sentinel */

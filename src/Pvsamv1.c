@@ -13759,7 +13759,7 @@ static PyMethodDef Pvsamv1Module_methods[] = {
 				PyDoc_STR("new() -> new Pvsamv1 object")},
 		{"default",             Pvsamv1_default,         METH_VARARGS,
 				PyDoc_STR("default(financial) -> new Pvsamv1 object with financial model-specific default attributes\n"
-				"Options: None, Commercial, Equpartflip, HostDeveloper, Levpartflip, Singleowner, , Saleleaseback, , Thirdpartyownership, Residential, Lcoefcr")},
+				"Options: FlatPlatePVAllEquityPartnershipFlip\nFlatPlatePVCommercial\nFlatPlatePVCommercialPPA\nFlatPlatePVHostDeveloper\nFlatPlatePVIndependentPowerProducer\nFlatPlatePVLCOECalculator\nFlatPlatePVLeveragedPartnershipFlip\nFlatPlatePVNone\nFlatPlatePVResidential\nFlatPlatePVSaleLeaseback\nFlatPlatePVSingleOwner\nFlatPlatePVThirdParty")},
 		{"wrap",             Pvsamv1_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> new Pvsamv1 object around existing PySSC data, taking over memory ownership")},
 		{NULL,              NULL}           /* sentinel */

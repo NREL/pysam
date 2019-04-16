@@ -589,7 +589,7 @@ static PyMethodDef IphToLcoefcrModule_methods[] = {
 				PyDoc_STR("new() -> new IphToLcoefcr object")},
 		{"default",             IphToLcoefcr_default,         METH_VARARGS,
 				PyDoc_STR("default(financial) -> new IphToLcoefcr object with financial model-specific default attributes\n"
-				"Options: TroughPhysicalProcessHeat, LinearFresnelDsgIph")},
+				"Options: DSGLIPHLCOHCalculator\nPhysicalTroughIPHLCOHCalculator")},
 		{"wrap",             IphToLcoefcr_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> new IphToLcoefcr object around existing PySSC data, taking over memory ownership")},
 		{NULL,              NULL}           /* sentinel */

@@ -1461,7 +1461,7 @@ static PyMethodDef FuelcellModule_methods[] = {
 				PyDoc_STR("new() -> new Fuelcell object")},
 		{"default",             Fuelcell_default,         METH_VARARGS,
 				PyDoc_STR("default(financial) -> new Fuelcell object with financial model-specific default attributes\n"
-				"Options: Singleowner, Commercial")},
+				"Options: FuelCellCommercial\nFuelCellSingleOwner")},
 		{"wrap",             Fuelcell_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> new Fuelcell object around existing PySSC data, taking over memory ownership")},
 		{NULL,              NULL}           /* sentinel */

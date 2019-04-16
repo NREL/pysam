@@ -1512,7 +1512,7 @@ static PyMethodDef ThirdpartyownershipModule_methods[] = {
 				PyDoc_STR("new() -> new Thirdpartyownership object")},
 		{"default",             Thirdpartyownership_default,         METH_VARARGS,
 				PyDoc_STR("default(financial) -> new Thirdpartyownership object with financial model-specific default attributes\n"
-				"Options: GenericSystem, Pvwattsv5, Pvsamv1")},
+				"Options: FlatPlatePVThirdParty\nGenericSystemThirdParty\nPVWattsThirdParty")},
 		{"wrap",             Thirdpartyownership_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> new Thirdpartyownership object around existing PySSC data, taking over memory ownership")},
 		{NULL,              NULL}           /* sentinel */

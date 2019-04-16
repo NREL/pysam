@@ -1339,7 +1339,7 @@ static PyMethodDef WindpowerModule_methods[] = {
 				PyDoc_STR("new() -> new Windpower object")},
 		{"default",             Windpower_default,         METH_VARARGS,
 				PyDoc_STR("default(financial) -> new Windpower object with financial model-specific default attributes\n"
-				"Options: Saleleaseback, Levpartflip, Singleowner, Lcoefcr, Equpartflip, Residential, , , Commercial, None")},
+				"Options: WindPowerAllEquityPartnershipFlip\nWindPowerCommercial\nWindPowerCommercialPPA\nWindPowerIndependentPowerProducer\nWindPowerLCOECalculator\nWindPowerLeveragedPartnershipFlip\nWindPowerNone\nWindPowerResidential\nWindPowerSaleLeaseback\nWindPowerSingleOwner")},
 		{"wrap",             Windpower_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> new Windpower object around existing PySSC data, taking over memory ownership")},
 		{NULL,              NULL}           /* sentinel */

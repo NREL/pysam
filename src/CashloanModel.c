@@ -5003,7 +5003,7 @@ CashloanModel_assign(CashloanModelObject *self, PyObject *args)
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_nested_dict((PyObject*)self, self->x_attr, self->data_ptr, dict, "CashloanModel"))
+	if (!PySAM_assign_from_nested_dict((PyObject*)self, self->x_attr, self->data_ptr, dict, "Cashloan"))
 		return NULL;
 
 	Py_INCREF(Py_None);
@@ -5143,7 +5143,7 @@ static PyMethodDef CashloanModelModule_methods[] = {
 				PyDoc_STR("new() -> new CashloanModel object")},
 		{"default",             CashloanModel_default,         METH_VARARGS,
 				PyDoc_STR("default(financial) -> new CashloanModel object with financial model-specific default attributes\n"
-				"Options: TcsMSLF, TcslinearFresnel, Swh, Tcsdish, GenericSystem, Pvsamv1, Fuelcell, TcsgenericSolar, TcstroughPhysical, Pvwattsv5, TcstroughEmpirical, Biomass, Windpower")},
+				"Options: BiopowerCommercial\nDSLFCommercial\nDishStirlingCommercial\nEmpiricalTroughCommercial\nFlatPlatePVCommercial\nFlatPlatePVResidential\nFuelCellCommercial\nGenericCSPSystemCommercial\nGenericSystemCommercial\nGenericSystemResidential\nMSLFCommercial\nPVWattsCommercial\nPVWattsResidential\nPhysicalTroughCommercial\nSolarWaterHeatingCommercial\nSolarWaterHeatingResidential\nWindPowerCommercial\nWindPowerResidential")},
 		{"wrap",             CashloanModel_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> new CashloanModel object around existing PySSC data, taking over memory ownership")},
 		{NULL,              NULL}           /* sentinel */

@@ -3409,7 +3409,7 @@ StandAloneBattery_assign(StandAloneBatteryObject *self, PyObject *args)
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_nested_dict((PyObject*)self, self->x_attr, self->data_ptr, dict, "StandAloneBattery"))
+	if (!PySAM_assign_from_nested_dict((PyObject*)self, self->x_attr, self->data_ptr, dict, "Battery"))
 		return NULL;
 
 	Py_INCREF(Py_None);
@@ -3549,7 +3549,7 @@ static PyMethodDef StandAloneBatteryModule_methods[] = {
 				PyDoc_STR("new() -> new StandAloneBattery object")},
 		{"default",             StandAloneBattery_default,         METH_VARARGS,
 				PyDoc_STR("default(financial) -> new StandAloneBattery object with financial model-specific default attributes\n"
-				"Options: LinearFresnelDsgIph, Biomass, Tcsdish, Hcpv, TcsgenericSolar, GenericSystem, Pvsamv1, Geothermal, Swh, TcsMSLF, StandAloneBattery, Pvwattsv5, TcstroughPhysical, TroughPhysicalProcessHeat, TcslinearFresnel, Windpower, TcstroughEmpirical")},
+				"Options: BatteryNone\nFuelCellCommercial\nFuelCellSingleOwner\nGenericSystemAllEquityPartnershipFlip\nGenericSystemCommercial\nGenericSystemCommercialPPA\nGenericSystemHostDeveloper\nGenericSystemIndependentPowerProducer\nGenericSystemLeveragedPartnershipFlip\nGenericSystemResidential\nGenericSystemSaleLeaseback\nGenericSystemSingleOwner\nGenericSystemThirdParty")},
 		{"wrap",             StandAloneBattery_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> new StandAloneBattery object around existing PySSC data, taking over memory ownership")},
 		{NULL,              NULL}           /* sentinel */

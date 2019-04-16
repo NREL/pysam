@@ -516,7 +516,7 @@ static PyMethodDef LcoefcrModule_methods[] = {
 				PyDoc_STR("new() -> new Lcoefcr object")},
 		{"default",             Lcoefcr_default,         METH_VARARGS,
 				PyDoc_STR("default(financial) -> new Lcoefcr object with financial model-specific default attributes\n"
-				"Options: TcsMSLF, Biomass, Tcsdish, Hcpv, TcsgenericSolar, GenericSystem, Windpower, TcstroughEmpirical, TcstroughPhysical, Geothermal, Pvsamv1, TcslinearFresnel, Swh, Pvwattsv5")},
+				"Options: BiopowerLCOECalculator\nDSGLIPHLCOHCalculator\nDSLFLCOECalculator\nDishStirlingLCOECalculator\nEmpiricalTroughLCOECalculator\nFlatPlatePVLCOECalculator\nGenericCSPSystemLCOECalculator\nGenericSystemLCOECalculator\nGeothermalPowerLCOECalculator\nHighXConcentratingPVLCOECalculator\nMSLFLCOECalculator\nPVWattsLCOECalculator\nPhysicalTroughIPHLCOHCalculator\nPhysicalTroughLCOECalculator\nSolarWaterHeatingLCOECalculator\nWindPowerLCOECalculator")},
 		{"wrap",             Lcoefcr_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> new Lcoefcr object around existing PySSC data, taking over memory ownership")},
 		{NULL,              NULL}           /* sentinel */

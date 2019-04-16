@@ -2305,7 +2305,7 @@ static PyMethodDef LinearFresnelDsgIphModule_methods[] = {
 				PyDoc_STR("new() -> new LinearFresnelDsgIph object")},
 		{"default",             LinearFresnelDsgIph_default,         METH_VARARGS,
 				PyDoc_STR("default(financial) -> new LinearFresnelDsgIph object with financial model-specific default attributes\n"
-				"Options: None, IphToLcoefcr")},
+				"Options: DSGLIPHLCOHCalculator\nDSGLIPHNone")},
 		{"wrap",             LinearFresnelDsgIph_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> new LinearFresnelDsgIph object around existing PySSC data, taking over memory ownership")},
 		{NULL,              NULL}           /* sentinel */
