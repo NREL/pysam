@@ -1,5 +1,3 @@
-# NREL-PySAM
-
 * Provides a wrapper around the SAM library that groups together the C API functions by technology or financial model into modules.
 * Includes error-checking, explicit input and output definition, and conversion between Python data types.
 * PySAM modules are compatible with PySSC, which is included as a subpackage. PySSC is the original wrapper used by SAM's code generator.
@@ -7,7 +5,7 @@
 * Built-in documentation of models and parameters.
 * Minimum Python 3.5 for Windows 7 64-bit, MacOSX 10.6, or CentOS 5.
 
-# Set up
+## Set up
 
 Install:
 `pip install NREL-PySAM`
@@ -22,7 +20,7 @@ Create a new empty model:
 `PySAM.<PySAM Module>.new()`
 
 Create a new model with values assigned from defaults:
-`PySAM.<PySAM Module>.default(string option)`
+`PySAM.<PySAM Module>.default(string configuration)`
 
 View parameter groups per class and available default values:
 `help(model)`
@@ -72,7 +70,7 @@ Utilityrate5 | | Retail electricity bill calculator
 Windpower | Wind | Wind power system with one or more wind turbines
 
 
-# To run a case from the SAM GUI:
+## To run a case from the SAM GUI:
 
 1. On the drop-down menu for the case, click __Generate code__ then __JSON for inputs__, and export the case inputs to a JSON file.
 
@@ -256,10 +254,10 @@ Wind Power-Residential | windpower, utilityrate5, cashloan
 Wind Power-Sale Leaseback | windpower, saleleaseback
 Wind Power-Single Owner | windpower, singleowner
 
-# Version 1.0.2, April 15, 2019 ~ SAM 2018.11.11.3, SSC Version 207
+## Version 1.1, April 15, 2019 ~ SAM 2018.11.11.3, SSC Version 208
 * Group all modules under PySAM namespace
-* Provide financial defaults per technology
+* Defaults for technology and financial models according to SAM GUI configurations
 * Include PySSC with dictionary functions as subpackage
 * Remove AdjustmentFactors group from non-technology modules
-* Fixes custom exception for use with multiprocessing package
+* Fix custom exception for use with multiprocessing package
 * Documentation updates

@@ -30,12 +30,17 @@ def copy_defaults():
             dic = data[list(data.keys())[0]]
             with open('data/defaults/'+os.path.splitext(filename)[0]+'.df', "wb") as out:
                 marshal.dump(dic, out)
-from setuptools import setup, Extension
 
+
+from setuptools import setup, Extension
+import distutils.command.bdist_conda
 
 import sys
-if sys.platform != 'win32':
-    os.system("rm -r build")
+
+# determine if making PyPi or Conda distribution
+distclass = distutils.core.Distribution
+if sys.argv[1] == "bdist_conda":
+    distclass = distutils.command.bdist_conda.CondaDistribution
 
 libs = []
 libpath = os.path.dirname(os.path.abspath(__file__))+"/data"
@@ -76,6 +81,7 @@ with open(path.join(this_directory, 'RELEASE.md'), encoding='utf-8') as f:
 setup(
     name='NREL-PySAM',
     version='1.1',
+    distclass=distclass,
     url='http://www.github.com/nrel/pysam',
     description="National Renewable Energy Laboratory's System Advisor Model Python Wrapper",
     long_description=long_description,

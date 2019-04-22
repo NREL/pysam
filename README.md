@@ -110,7 +110,9 @@
 2. manylinux
 	- docker pull quay.io/pypa/manylinux1_x86_64
 	- docker run -it -v $(pwd):/io quay.io/pypa/manylinux1_x86_64
-	- docker: build libSAM_api.so and libssc.so, which makes copies into docker:${PYSAMDIR}/lib
+	- docker: build libSAM_api.so and libssc.so, copy into ${PYSAMDIR}/data.
+		-- in ssc build directory: `cmake28 /path/to/ssc -DCMAKE_BUILD_TYPE=Release -Dsystem_advisor_model_EXPORT=1`
+		-- repeat for sam build directory
 	- docker:	`for PYBIN in /opt/python/*/bin; do
     				"${PYBIN}/pip" wheel /io/PySAM -w wheelhouse/
 	  			done`

@@ -20,3 +20,4 @@ dist/
 manylinux/
 *.egg-info
 \.vs/
+data/defaults
