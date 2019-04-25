@@ -73,7 +73,7 @@ LoadProfileEstimator_get_Monthly_util(LoadProfileEstimatorObject *self, void *cl
 static int
 LoadProfileEstimator_set_Monthly_util(LoadProfileEstimatorObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Belpe_LoadProfileEstimator_Monthly_util_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Belpe_LoadProfileEstimator_Monthly_util_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -85,91 +85,91 @@ LoadProfileEstimator_get_Occ_Schedule(LoadProfileEstimatorObject *self, void *cl
 static int
 LoadProfileEstimator_set_Occ_Schedule(LoadProfileEstimatorObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Belpe_LoadProfileEstimator_Occ_Schedule_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Belpe_LoadProfileEstimator_Occ_Schedule_aset, self->data_ptr);
 }
 
 static PyObject *
 LoadProfileEstimator_get_Occupants(LoadProfileEstimatorObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Belpe_LoadProfileEstimator_Occupants_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Belpe_LoadProfileEstimator_Occupants_nget, self->data_ptr);
 }
 
 static int
 LoadProfileEstimator_set_Occupants(LoadProfileEstimatorObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Belpe_LoadProfileEstimator_Occupants_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Belpe_LoadProfileEstimator_Occupants_nset, self->data_ptr);
 }
 
 static PyObject *
 LoadProfileEstimator_get_Retrofits(LoadProfileEstimatorObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Belpe_LoadProfileEstimator_Retrofits_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Belpe_LoadProfileEstimator_Retrofits_nget, self->data_ptr);
 }
 
 static int
 LoadProfileEstimator_set_Retrofits(LoadProfileEstimatorObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Belpe_LoadProfileEstimator_Retrofits_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Belpe_LoadProfileEstimator_Retrofits_nset, self->data_ptr);
 }
 
 static PyObject *
 LoadProfileEstimator_get_Stories(LoadProfileEstimatorObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Belpe_LoadProfileEstimator_Stories_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Belpe_LoadProfileEstimator_Stories_nget, self->data_ptr);
 }
 
 static int
 LoadProfileEstimator_set_Stories(LoadProfileEstimatorObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Belpe_LoadProfileEstimator_Stories_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Belpe_LoadProfileEstimator_Stories_nset, self->data_ptr);
 }
 
 static PyObject *
 LoadProfileEstimator_get_TCool(LoadProfileEstimatorObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Belpe_LoadProfileEstimator_TCool_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Belpe_LoadProfileEstimator_TCool_nget, self->data_ptr);
 }
 
 static int
 LoadProfileEstimator_set_TCool(LoadProfileEstimatorObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Belpe_LoadProfileEstimator_TCool_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Belpe_LoadProfileEstimator_TCool_nset, self->data_ptr);
 }
 
 static PyObject *
 LoadProfileEstimator_get_TCoolSB(LoadProfileEstimatorObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Belpe_LoadProfileEstimator_TCoolSB_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Belpe_LoadProfileEstimator_TCoolSB_nget, self->data_ptr);
 }
 
 static int
 LoadProfileEstimator_set_TCoolSB(LoadProfileEstimatorObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Belpe_LoadProfileEstimator_TCoolSB_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Belpe_LoadProfileEstimator_TCoolSB_nset, self->data_ptr);
 }
 
 static PyObject *
 LoadProfileEstimator_get_THeat(LoadProfileEstimatorObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Belpe_LoadProfileEstimator_THeat_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Belpe_LoadProfileEstimator_THeat_nget, self->data_ptr);
 }
 
 static int
 LoadProfileEstimator_set_THeat(LoadProfileEstimatorObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Belpe_LoadProfileEstimator_THeat_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Belpe_LoadProfileEstimator_THeat_nset, self->data_ptr);
 }
 
 static PyObject *
 LoadProfileEstimator_get_THeatSB(LoadProfileEstimatorObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Belpe_LoadProfileEstimator_THeatSB_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Belpe_LoadProfileEstimator_THeatSB_nget, self->data_ptr);
 }
 
 static int
 LoadProfileEstimator_set_THeatSB(LoadProfileEstimatorObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Belpe_LoadProfileEstimator_THeatSB_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Belpe_LoadProfileEstimator_THeatSB_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -181,139 +181,139 @@ LoadProfileEstimator_get_T_Sched(LoadProfileEstimatorObject *self, void *closure
 static int
 LoadProfileEstimator_set_T_Sched(LoadProfileEstimatorObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Belpe_LoadProfileEstimator_T_Sched_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Belpe_LoadProfileEstimator_T_Sched_aset, self->data_ptr);
 }
 
 static PyObject *
 LoadProfileEstimator_get_YrBuilt(LoadProfileEstimatorObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Belpe_LoadProfileEstimator_YrBuilt_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Belpe_LoadProfileEstimator_YrBuilt_nget, self->data_ptr);
 }
 
 static int
 LoadProfileEstimator_set_YrBuilt(LoadProfileEstimatorObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Belpe_LoadProfileEstimator_YrBuilt_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Belpe_LoadProfileEstimator_YrBuilt_nset, self->data_ptr);
 }
 
 static PyObject *
 LoadProfileEstimator_get_en_belpe(LoadProfileEstimatorObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Belpe_LoadProfileEstimator_en_belpe_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Belpe_LoadProfileEstimator_en_belpe_nget, self->data_ptr);
 }
 
 static int
 LoadProfileEstimator_set_en_belpe(LoadProfileEstimatorObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Belpe_LoadProfileEstimator_en_belpe_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Belpe_LoadProfileEstimator_en_belpe_nset, self->data_ptr);
 }
 
 static PyObject *
 LoadProfileEstimator_get_en_cool(LoadProfileEstimatorObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Belpe_LoadProfileEstimator_en_cool_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Belpe_LoadProfileEstimator_en_cool_nget, self->data_ptr);
 }
 
 static int
 LoadProfileEstimator_set_en_cool(LoadProfileEstimatorObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Belpe_LoadProfileEstimator_en_cool_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Belpe_LoadProfileEstimator_en_cool_nset, self->data_ptr);
 }
 
 static PyObject *
 LoadProfileEstimator_get_en_dish(LoadProfileEstimatorObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Belpe_LoadProfileEstimator_en_dish_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Belpe_LoadProfileEstimator_en_dish_nget, self->data_ptr);
 }
 
 static int
 LoadProfileEstimator_set_en_dish(LoadProfileEstimatorObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Belpe_LoadProfileEstimator_en_dish_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Belpe_LoadProfileEstimator_en_dish_nset, self->data_ptr);
 }
 
 static PyObject *
 LoadProfileEstimator_get_en_dry(LoadProfileEstimatorObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Belpe_LoadProfileEstimator_en_dry_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Belpe_LoadProfileEstimator_en_dry_nget, self->data_ptr);
 }
 
 static int
 LoadProfileEstimator_set_en_dry(LoadProfileEstimatorObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Belpe_LoadProfileEstimator_en_dry_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Belpe_LoadProfileEstimator_en_dry_nset, self->data_ptr);
 }
 
 static PyObject *
 LoadProfileEstimator_get_en_fridge(LoadProfileEstimatorObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Belpe_LoadProfileEstimator_en_fridge_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Belpe_LoadProfileEstimator_en_fridge_nget, self->data_ptr);
 }
 
 static int
 LoadProfileEstimator_set_en_fridge(LoadProfileEstimatorObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Belpe_LoadProfileEstimator_en_fridge_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Belpe_LoadProfileEstimator_en_fridge_nset, self->data_ptr);
 }
 
 static PyObject *
 LoadProfileEstimator_get_en_heat(LoadProfileEstimatorObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Belpe_LoadProfileEstimator_en_heat_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Belpe_LoadProfileEstimator_en_heat_nget, self->data_ptr);
 }
 
 static int
 LoadProfileEstimator_set_en_heat(LoadProfileEstimatorObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Belpe_LoadProfileEstimator_en_heat_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Belpe_LoadProfileEstimator_en_heat_nset, self->data_ptr);
 }
 
 static PyObject *
 LoadProfileEstimator_get_en_mels(LoadProfileEstimatorObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Belpe_LoadProfileEstimator_en_mels_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Belpe_LoadProfileEstimator_en_mels_nget, self->data_ptr);
 }
 
 static int
 LoadProfileEstimator_set_en_mels(LoadProfileEstimatorObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Belpe_LoadProfileEstimator_en_mels_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Belpe_LoadProfileEstimator_en_mels_nset, self->data_ptr);
 }
 
 static PyObject *
 LoadProfileEstimator_get_en_range(LoadProfileEstimatorObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Belpe_LoadProfileEstimator_en_range_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Belpe_LoadProfileEstimator_en_range_nget, self->data_ptr);
 }
 
 static int
 LoadProfileEstimator_set_en_range(LoadProfileEstimatorObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Belpe_LoadProfileEstimator_en_range_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Belpe_LoadProfileEstimator_en_range_nset, self->data_ptr);
 }
 
 static PyObject *
 LoadProfileEstimator_get_en_wash(LoadProfileEstimatorObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Belpe_LoadProfileEstimator_en_wash_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Belpe_LoadProfileEstimator_en_wash_nget, self->data_ptr);
 }
 
 static int
 LoadProfileEstimator_set_en_wash(LoadProfileEstimatorObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Belpe_LoadProfileEstimator_en_wash_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Belpe_LoadProfileEstimator_en_wash_nset, self->data_ptr);
 }
 
 static PyObject *
 LoadProfileEstimator_get_floor_area(LoadProfileEstimatorObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Belpe_LoadProfileEstimator_floor_area_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Belpe_LoadProfileEstimator_floor_area_nget, self->data_ptr);
 }
 
 static int
 LoadProfileEstimator_set_floor_area(LoadProfileEstimatorObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Belpe_LoadProfileEstimator_floor_area_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Belpe_LoadProfileEstimator_floor_area_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -325,7 +325,7 @@ LoadProfileEstimator_get_load(LoadProfileEstimatorObject *self, void *closure)
 static int
 LoadProfileEstimator_set_load(LoadProfileEstimatorObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Belpe_LoadProfileEstimator_load_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Belpe_LoadProfileEstimator_load_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -342,73 +342,73 @@ LoadProfileEstimator_set_solar_resource_file(LoadProfileEstimatorObject *self, P
 
 static PyGetSetDef LoadProfileEstimator_getset[] = {
 {"Monthly_util", (getter)LoadProfileEstimator_get_Monthly_util,(setter)LoadProfileEstimator_set_Monthly_util,
-	"Monthly consumption from utility bill [kWh], array.\n Constraints: LENGTH=12; Required if en_belpe=1.",
+	PyDoc_STR("type: Sequence\n\nMonthly consumption from utility bill [kWh]\n\n*Constraints*: LENGTH=12\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"Occ_Schedule", (getter)LoadProfileEstimator_get_Occ_Schedule,(setter)LoadProfileEstimator_set_Occ_Schedule,
-	"Hourly occupant schedule [frac/hr], array.\n Constraints: LENGTH=24; Required if en_belpe=1.",
+	PyDoc_STR("type: Sequence\n\nHourly occupant schedule [frac/hr]\n\n*Constraints*: LENGTH=24\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"Occupants", (getter)LoadProfileEstimator_get_Occupants,(setter)LoadProfileEstimator_set_Occupants,
-	"Occupants [#], number.\n Required if en_belpe=1.",
+	PyDoc_STR("type: Float\n\nOccupants [#]\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"Retrofits", (getter)LoadProfileEstimator_get_Retrofits,(setter)LoadProfileEstimator_set_Retrofits,
-	"Energy retrofitted [0/1], number.\n 0=No, 1=Yes; Required if en_belpe=1.",
+	PyDoc_STR("type: Float\n\nEnergy retrofitted [0/1]\n\n*Options*: 0=No, 1=Yes\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"Stories", (getter)LoadProfileEstimator_get_Stories,(setter)LoadProfileEstimator_set_Stories,
-	"Number of stories [#], number.\n Required if en_belpe=1.",
+	PyDoc_STR("type: Float\n\nNumber of stories [#]\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"TCool", (getter)LoadProfileEstimator_get_TCool,(setter)LoadProfileEstimator_set_TCool,
-	"Cooling setpoint [degF], number.\n Required if en_belpe=1.",
+	PyDoc_STR("type: Float\n\nCooling setpoint [degF]\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"TCoolSB", (getter)LoadProfileEstimator_get_TCoolSB,(setter)LoadProfileEstimator_set_TCoolSB,
-	"Cooling setpoint setback [degF], number.\n Required if en_belpe=1.",
+	PyDoc_STR("type: Float\n\nCooling setpoint setback [degF]\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"THeat", (getter)LoadProfileEstimator_get_THeat,(setter)LoadProfileEstimator_set_THeat,
-	"Heating setpoint [degF], number.\n Required if en_belpe=1.",
+	PyDoc_STR("type: Float\n\nHeating setpoint [degF]\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"THeatSB", (getter)LoadProfileEstimator_get_THeatSB,(setter)LoadProfileEstimator_set_THeatSB,
-	"Heating setpoint setback [degf], number.\n Required if en_belpe=1.",
+	PyDoc_STR("type: Float\n\nHeating setpoint setback [degf]\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"T_Sched", (getter)LoadProfileEstimator_get_T_Sched,(setter)LoadProfileEstimator_set_T_Sched,
-	"Temperature schedule [0/1], array.\n Constraints: LENGTH=24; Required if en_belpe=1.",
+	PyDoc_STR("type: Sequence\n\nTemperature schedule [0/1]\n\n*Constraints*: LENGTH=24\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"YrBuilt", (getter)LoadProfileEstimator_get_YrBuilt,(setter)LoadProfileEstimator_set_YrBuilt,
-	"Year built [yr], number.\n Required if en_belpe=1.",
+	PyDoc_STR("type: Float\n\nYear built [yr]\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"en_belpe", (getter)LoadProfileEstimator_get_en_belpe,(setter)LoadProfileEstimator_set_en_belpe,
-	"Enable building load calculator [0/1], number.\n Constraints: BOOLEAN; Required.",
+	PyDoc_STR("type: Float\n\nEnable building load calculator [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: True"),
  	NULL},
 {"en_cool", (getter)LoadProfileEstimator_get_en_cool,(setter)LoadProfileEstimator_set_en_cool,
-	"Enable electric cool [0/1], number.\n Constraints: BOOLEAN; Required if en_belpe=1.",
+	PyDoc_STR("type: Float\n\nEnable electric cool [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"en_dish", (getter)LoadProfileEstimator_get_en_dish,(setter)LoadProfileEstimator_set_en_dish,
-	"Enable electric dishwasher [0/1], number.\n Constraints: BOOLEAN; Required if en_belpe=1.",
+	PyDoc_STR("type: Float\n\nEnable electric dishwasher [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"en_dry", (getter)LoadProfileEstimator_get_en_dry,(setter)LoadProfileEstimator_set_en_dry,
-	"Enable electric dryer [0/1], number.\n Constraints: BOOLEAN; Required if en_belpe=1.",
+	PyDoc_STR("type: Float\n\nEnable electric dryer [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"en_fridge", (getter)LoadProfileEstimator_get_en_fridge,(setter)LoadProfileEstimator_set_en_fridge,
-	"Enable electric fridge [0/1], number.\n Constraints: BOOLEAN; Required if en_belpe=1.",
+	PyDoc_STR("type: Float\n\nEnable electric fridge [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"en_heat", (getter)LoadProfileEstimator_get_en_heat,(setter)LoadProfileEstimator_set_en_heat,
-	"Enable electric heat [0/1], number.\n Constraints: BOOLEAN; Required if en_belpe=1.",
+	PyDoc_STR("type: Float\n\nEnable electric heat [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"en_mels", (getter)LoadProfileEstimator_get_en_mels,(setter)LoadProfileEstimator_set_en_mels,
-	"Enable misc electric loads [0/1], number.\n Constraints: BOOLEAN; Required if en_belpe=1.",
+	PyDoc_STR("type: Float\n\nEnable misc electric loads [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"en_range", (getter)LoadProfileEstimator_get_en_range,(setter)LoadProfileEstimator_set_en_range,
-	"Enable electric range [0/1], number.\n Constraints: BOOLEAN; Required if en_belpe=1.",
+	PyDoc_STR("type: Float\n\nEnable electric range [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"en_wash", (getter)LoadProfileEstimator_get_en_wash,(setter)LoadProfileEstimator_set_en_wash,
-	"Enable electric washer [0/1], number.\n Constraints: BOOLEAN; Required if en_belpe=1.",
+	PyDoc_STR("type: Float\n\nEnable electric washer [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"floor_area", (getter)LoadProfileEstimator_get_floor_area,(setter)LoadProfileEstimator_set_floor_area,
-	"Building floor area [m2], number.\n Required if en_belpe=1.",
+	PyDoc_STR("type: Float\n\nBuilding floor area [m2]\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"load", (getter)LoadProfileEstimator_get_load,(setter)LoadProfileEstimator_set_load,
-	"Electricity load (year 1) [kW], array.\n Required if en_belpe=0.",
+	PyDoc_STR("type: Sequence\n\nElectricity load (year 1) [kW]\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"solar_resource_file", (getter)LoadProfileEstimator_get_solar_resource_file,(setter)LoadProfileEstimator_set_solar_resource_file,
-	"Weather Data file [n/a], string.\n Constraints: LOCAL_FILE; Required if en_belpe=1.",
+	PyDoc_STR("type: Str\n\nWeather Data file [n/a]\n\n*Constraints*: LOCAL_FILE\n\n*Required*: set to 1 if not provided."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -441,7 +441,7 @@ static PyTypeObject LoadProfileEstimator_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		LoadProfileEstimator_methods,         /*tp_methods*/
@@ -451,7 +451,7 @@ static PyTypeObject LoadProfileEstimator_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -549,7 +549,7 @@ static PyTypeObject Outputs_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		Outputs_methods,         /*tp_methods*/
@@ -559,7 +559,7 @@ static PyTypeObject Outputs_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -657,7 +657,7 @@ static PyMethodDef Belpe_methods[] = {
 		{"assign",            (PyCFunction)Belpe_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs")},
 		{"export",            (PyCFunction)Belpe_export,  METH_VARARGS,
-				PyDoc_STR("assign() -> None\n Export attributes into dictionary")},
+				PyDoc_STR("export() -> None\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -697,11 +697,11 @@ static PyTypeObject Belpe_Type = {
 		0,                          /*tp_setattro*/
 		0,                          /*tp_as_buffer*/
 		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
-		"see html for help",        /*tp_doc*/
+		"Wrapper for `cmod_belpe.cpp <https://github.com/NREL/ssc/blob/develop/ssc/cmod_belpe.cpp>`_",        /*tp_doc*/
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		Belpe_methods,      /*tp_methods*/
@@ -711,7 +711,7 @@ static PyTypeObject Belpe_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,                          /*tp_new*/
@@ -776,10 +776,10 @@ static PyMethodDef BelpeModule_methods[] = {
 		{"new",             Belpe_new,         METH_VARARGS,
 				PyDoc_STR("new() -> new Belpe object")},
 		{"default",             Belpe_default,         METH_VARARGS,
-				PyDoc_STR("default(financial) -> new Belpe object with financial model-specific default attributes\n"
-				"Options: FlatPlatePVResidential\nFlatPlatePVThirdParty\nPVWattsResidential\nPVWattsThirdParty\nSolarWaterHeatingResidential")},
+				PyDoc_STR("default(config) -> new Belpe object with financial model-specific default attributes\n"
+				"config options:\n\n- \"FlatPlatePVResidential\"\n- \"FlatPlatePVThirdParty\"\n- \"PVWattsResidential\"\n- \"PVWattsThirdParty\"\n- \"SolarWaterHeatingResidential\"")},
 		{"wrap",             Belpe_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> new Belpe object around existing PySSC data, taking over memory ownership")},
+				PyDoc_STR("wrap(ssc_data_t) -> new Belpe object around existing PySSC data, taking over memory ownership\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to `wrap`")},
 		{NULL,              NULL}           /* sentinel */
 };
 

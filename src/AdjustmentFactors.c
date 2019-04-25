@@ -63,13 +63,13 @@ static PyMethodDef AdjustmentFactors_methods[] = {
 static PyObject *
 AdjustmentFactors_get_constant(AdjustmentFactorsObject *self, void *closure)
 {
-    return PySAM_float_getter(SAM_AdjustmentFactors_adjust_constant_fget, self->data_ptr);
+    return PySAM_float_getter(SAM_AdjustmentFactors_adjust_constant_nget, self->data_ptr);
 }
 
 static int
 AdjustmentFactors_set_constant(AdjustmentFactorsObject *self, PyObject *value, void *closure)
 {
-    return PySAM_float_setter(value, SAM_AdjustmentFactors_adjust_constant_fset, self->data_ptr);
+    return PySAM_float_setter(value, SAM_AdjustmentFactors_adjust_constant_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -99,13 +99,13 @@ AdjustmentFactors_set_periods(AdjustmentFactorsObject *self, PyObject *value, vo
 static PyObject *
 AdjustmentFactors_get_dc_constant(AdjustmentFactorsObject *self, void *closure)
 {
-    return PySAM_float_getter(SAM_AdjustmentFactors_dc_adjust_constant_fget, self->data_ptr);
+    return PySAM_float_getter(SAM_AdjustmentFactors_dc_adjust_constant_nget, self->data_ptr);
 }
 
 static int
 AdjustmentFactors_set_dc_constant(AdjustmentFactorsObject *self, PyObject *value, void *closure)
 {
-    return PySAM_float_setter(value, SAM_AdjustmentFactors_dc_adjust_constant_fset, self->data_ptr);
+    return PySAM_float_setter(value, SAM_AdjustmentFactors_dc_adjust_constant_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -134,13 +134,13 @@ AdjustmentFactors_set_dc_periods(AdjustmentFactorsObject *self, PyObject *value,
 static PyObject *
 AdjustmentFactors_get_sf_constant(AdjustmentFactorsObject *self, void *closure)
 {
-    return PySAM_float_getter(SAM_AdjustmentFactors_sf_adjust_constant_fget, self->data_ptr);
+    return PySAM_float_getter(SAM_AdjustmentFactors_sf_adjust_constant_nget, self->data_ptr);
 }
 
 static int
 AdjustmentFactors_set_sf_constant(AdjustmentFactorsObject *self, PyObject *value, void *closure)
 {
-    return PySAM_float_setter(value, SAM_AdjustmentFactors_sf_adjust_constant_fset, self->data_ptr);
+    return PySAM_float_setter(value, SAM_AdjustmentFactors_sf_adjust_constant_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -217,7 +217,7 @@ static PyTypeObject AdjustmentFactors_Type = {
         0,                          /*tp_traverse*/
         0,                          /*tp_clear*/
         0,                          /*tp_richcompare*/
-        0,                          /*tp_weaklistoffset*/
+        0,                          /*tp_weaklistofnset*/
         0,                          /*tp_iter*/
         0,                          /*tp_iternext*/
         AdjustmentFactors_methods,         /*tp_methods*/
@@ -227,7 +227,7 @@ static PyTypeObject AdjustmentFactors_Type = {
         0,                          /*tp_dict*/
         0,                          /*tp_descr_get*/
         0,                          /*tp_descr_set*/
-        0,                          /*tp_dictoffset*/
+        0,                          /*tp_dictofnset*/
         0,                          /*tp_init*/
         0,                          /*tp_alloc*/
         0,             /*tp_new*/

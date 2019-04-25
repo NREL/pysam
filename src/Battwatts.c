@@ -67,93 +67,93 @@ static PyMethodDef BatteryModelSimple_methods[] = {
 static PyObject *
 BatteryModelSimple_get_batt_simple_chemistry(BatteryModelSimpleObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Battwatts_BatteryModelSimple_batt_simple_chemistry_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Battwatts_BatteryModelSimple_batt_simple_chemistry_nget, self->data_ptr);
 }
 
 static int
 BatteryModelSimple_set_batt_simple_chemistry(BatteryModelSimpleObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Battwatts_BatteryModelSimple_batt_simple_chemistry_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Battwatts_BatteryModelSimple_batt_simple_chemistry_nset, self->data_ptr);
 }
 
 static PyObject *
 BatteryModelSimple_get_batt_simple_dispatch(BatteryModelSimpleObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Battwatts_BatteryModelSimple_batt_simple_dispatch_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Battwatts_BatteryModelSimple_batt_simple_dispatch_nget, self->data_ptr);
 }
 
 static int
 BatteryModelSimple_set_batt_simple_dispatch(BatteryModelSimpleObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Battwatts_BatteryModelSimple_batt_simple_dispatch_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Battwatts_BatteryModelSimple_batt_simple_dispatch_nset, self->data_ptr);
 }
 
 static PyObject *
 BatteryModelSimple_get_batt_simple_enable(BatteryModelSimpleObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Battwatts_BatteryModelSimple_batt_simple_enable_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Battwatts_BatteryModelSimple_batt_simple_enable_nget, self->data_ptr);
 }
 
 static int
 BatteryModelSimple_set_batt_simple_enable(BatteryModelSimpleObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Battwatts_BatteryModelSimple_batt_simple_enable_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Battwatts_BatteryModelSimple_batt_simple_enable_nset, self->data_ptr);
 }
 
 static PyObject *
 BatteryModelSimple_get_batt_simple_kw(BatteryModelSimpleObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Battwatts_BatteryModelSimple_batt_simple_kw_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Battwatts_BatteryModelSimple_batt_simple_kw_nget, self->data_ptr);
 }
 
 static int
 BatteryModelSimple_set_batt_simple_kw(BatteryModelSimpleObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Battwatts_BatteryModelSimple_batt_simple_kw_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Battwatts_BatteryModelSimple_batt_simple_kw_nset, self->data_ptr);
 }
 
 static PyObject *
 BatteryModelSimple_get_batt_simple_kwh(BatteryModelSimpleObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Battwatts_BatteryModelSimple_batt_simple_kwh_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Battwatts_BatteryModelSimple_batt_simple_kwh_nget, self->data_ptr);
 }
 
 static int
 BatteryModelSimple_set_batt_simple_kwh(BatteryModelSimpleObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Battwatts_BatteryModelSimple_batt_simple_kwh_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Battwatts_BatteryModelSimple_batt_simple_kwh_nset, self->data_ptr);
 }
 
 static PyObject *
 BatteryModelSimple_get_batt_simple_meter_position(BatteryModelSimpleObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Battwatts_BatteryModelSimple_batt_simple_meter_position_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Battwatts_BatteryModelSimple_batt_simple_meter_position_nget, self->data_ptr);
 }
 
 static int
 BatteryModelSimple_set_batt_simple_meter_position(BatteryModelSimpleObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Battwatts_BatteryModelSimple_batt_simple_meter_position_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Battwatts_BatteryModelSimple_batt_simple_meter_position_nset, self->data_ptr);
 }
 
 static PyGetSetDef BatteryModelSimple_getset[] = {
 {"batt_simple_chemistry", (getter)BatteryModelSimple_get_batt_simple_chemistry,(setter)BatteryModelSimple_set_batt_simple_chemistry,
-	"Battery Chemistry [0=lead acid/1=Li-ion/2], number.\n 0 if not set.",
+	PyDoc_STR("type: Float\n\nBattery Chemistry [0=lead acid/1=Li-ion/2]\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"batt_simple_dispatch", (getter)BatteryModelSimple_get_batt_simple_dispatch,(setter)BatteryModelSimple_set_batt_simple_dispatch,
-	"Battery Dispatch [0=peak shaving look ahead/1=peak shaving look behind], number.\n 0 if not set.",
+	PyDoc_STR("type: Float\n\nBattery Dispatch [0=peak shaving look ahead/1=peak shaving look behind]\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"batt_simple_enable", (getter)BatteryModelSimple_get_batt_simple_enable,(setter)BatteryModelSimple_set_batt_simple_enable,
-	"Enable Battery [0/1], number.\n Constraints: BOOLEAN; 0 if not set.",
+	PyDoc_STR("type: Float\n\nEnable Battery [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"batt_simple_kw", (getter)BatteryModelSimple_get_batt_simple_kw,(setter)BatteryModelSimple_set_batt_simple_kw,
-	"Battery Power [kW], number.\n 0 if not set.",
+	PyDoc_STR("type: Float\n\nBattery Power [kW]\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"batt_simple_kwh", (getter)BatteryModelSimple_get_batt_simple_kwh,(setter)BatteryModelSimple_set_batt_simple_kwh,
-	"Battery Capacity [kWh], number.\n 0 if not set.",
+	PyDoc_STR("type: Float\n\nBattery Capacity [kWh]\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"batt_simple_meter_position", (getter)BatteryModelSimple_get_batt_simple_meter_position,(setter)BatteryModelSimple_set_batt_simple_meter_position,
-	"Battery Meter Position [0=behind meter/1=front of meter], number.\n 0 if not set.",
+	PyDoc_STR("type: Float\n\nBattery Meter Position [0=behind meter/1=front of meter]\n\n*Required*: set to 0 if not provided."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -186,7 +186,7 @@ static PyTypeObject BatteryModelSimple_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		BatteryModelSimple_methods,         /*tp_methods*/
@@ -196,7 +196,7 @@ static PyTypeObject BatteryModelSimple_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -271,7 +271,7 @@ Common_get_ac(CommonObject *self, void *closure)
 static int
 Common_set_ac(CommonObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Battwatts_Common_ac_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Battwatts_Common_ac_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -283,45 +283,45 @@ Common_get_dc(CommonObject *self, void *closure)
 static int
 Common_set_dc(CommonObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Battwatts_Common_dc_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Battwatts_Common_dc_aset, self->data_ptr);
 }
 
 static PyObject *
 Common_get_inverter_efficiency(CommonObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Battwatts_Common_inverter_efficiency_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Battwatts_Common_inverter_efficiency_nget, self->data_ptr);
 }
 
 static int
 Common_set_inverter_efficiency(CommonObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Battwatts_Common_inverter_efficiency_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Battwatts_Common_inverter_efficiency_nset, self->data_ptr);
 }
 
 static PyObject *
 Common_get_inverter_model(CommonObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Battwatts_Common_inverter_model_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Battwatts_Common_inverter_model_nget, self->data_ptr);
 }
 
 static int
 Common_set_inverter_model(CommonObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Battwatts_Common_inverter_model_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Battwatts_Common_inverter_model_nset, self->data_ptr);
 }
 
 static PyGetSetDef Common_getset[] = {
 {"ac", (getter)Common_get_ac,(setter)Common_set_ac,
-	"AC inverter power [W], array.\n ",
+	PyDoc_STR("type: Sequence\n\nAC inverter power [W]"),
  	NULL},
 {"dc", (getter)Common_get_dc,(setter)Common_set_dc,
-	"DC array power [W], array.\n ",
+	PyDoc_STR("type: Sequence\n\nDC array power [W]"),
  	NULL},
 {"inverter_efficiency", (getter)Common_get_inverter_efficiency,(setter)Common_set_inverter_efficiency,
-	"Inverter Efficiency [%], number.\n ",
+	PyDoc_STR("type: Float\n\nInverter Efficiency [%]"),
  	NULL},
 {"inverter_model", (getter)Common_get_inverter_model,(setter)Common_set_inverter_model,
-	"Inverter model specifier, number.\n 0=cec,1=datasheet,2=partload,3=coefficientgenerator,4=generic; Constraints: INTEGER,MIN=0,MAX=4; ",
+	PyDoc_STR("type: Float\n\nInverter model specifier\n\n*Options*: 0=cec,1=datasheet,2=partload,3=coefficientgenerator,4=generic\n\n*Constraints*: INTEGER,MIN=0,MAX=4"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -354,7 +354,7 @@ static PyTypeObject Common_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		Common_methods,         /*tp_methods*/
@@ -364,7 +364,7 @@ static PyTypeObject Common_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -439,12 +439,12 @@ ElectricLoadOther_get_load(ElectricLoadOtherObject *self, void *closure)
 static int
 ElectricLoadOther_set_load(ElectricLoadOtherObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Battwatts_ElectricLoadOther_load_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Battwatts_ElectricLoadOther_load_aset, self->data_ptr);
 }
 
 static PyGetSetDef ElectricLoadOther_getset[] = {
 {"load", (getter)ElectricLoadOther_get_load,(setter)ElectricLoadOther_set_load,
-	"Electricity load (year 1) [kW], array.\n ",
+	PyDoc_STR("type: Sequence\n\nElectricity load (year 1) [kW]"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -477,7 +477,7 @@ static PyTypeObject ElectricLoadOther_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		ElectricLoadOther_methods,         /*tp_methods*/
@@ -487,7 +487,7 @@ static PyTypeObject ElectricLoadOther_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -568,13 +568,13 @@ Outputs_get_annual_import_to_grid_energy(OutputsObject *self, void *closure)
 static PyObject *
 Outputs_get_average_battery_conversion_efficiency(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Battwatts_Outputs_average_battery_conversion_efficiency_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Battwatts_Outputs_average_battery_conversion_efficiency_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_average_battery_roundtrip_efficiency(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Battwatts_Outputs_average_battery_roundtrip_efficiency_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Battwatts_Outputs_average_battery_roundtrip_efficiency_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -634,7 +634,7 @@ Outputs_get_batt_annual_energy_system_loss(OutputsObject *self, void *closure)
 static PyObject *
 Outputs_get_batt_bank_installed_capacity(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Battwatts_Outputs_batt_bank_installed_capacity_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Battwatts_Outputs_batt_bank_installed_capacity_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -694,7 +694,7 @@ Outputs_get_batt_power_target(OutputsObject *self, void *closure)
 static PyObject *
 Outputs_get_batt_pv_charge_percent(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Battwatts_Outputs_batt_pv_charge_percent_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Battwatts_Outputs_batt_pv_charge_percent_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -867,160 +867,160 @@ Outputs_get_pv_to_load(OutputsObject *self, void *closure)
 
 static PyGetSetDef Outputs_getset[] = {
 {"annual_export_to_grid_energy", (getter)Outputs_get_annual_export_to_grid_energy,(setter)0,
-	"Annual energy exported to grid [kWh], array.",
+	PyDoc_STR("type: Sequence\n\nAnnual energy exported to grid [kWh]"),
  	NULL},
 {"annual_import_to_grid_energy", (getter)Outputs_get_annual_import_to_grid_energy,(setter)0,
-	"Annual energy imported from grid [kWh], array.",
+	PyDoc_STR("type: Sequence\n\nAnnual energy imported from grid [kWh]"),
  	NULL},
 {"average_battery_conversion_efficiency", (getter)Outputs_get_average_battery_conversion_efficiency,(setter)0,
-	"Battery average cycle conversion efficiency [%], number.",
+	PyDoc_STR("type: Float\n\nBattery average cycle conversion efficiency [%]"),
  	NULL},
 {"average_battery_roundtrip_efficiency", (getter)Outputs_get_average_battery_roundtrip_efficiency,(setter)0,
-	"Battery average roundtrip efficiency [%], number.",
+	PyDoc_STR("type: Float\n\nBattery average roundtrip efficiency [%]"),
  	NULL},
 {"batt_DOD", (getter)Outputs_get_batt_DOD,(setter)0,
-	"Battery cycle depth of discharge [%], array.",
+	PyDoc_STR("type: Sequence\n\nBattery cycle depth of discharge [%]"),
  	NULL},
 {"batt_I", (getter)Outputs_get_batt_I,(setter)0,
-	"Battery current [A], array.",
+	PyDoc_STR("type: Sequence\n\nBattery current [A]"),
  	NULL},
 {"batt_SOC", (getter)Outputs_get_batt_SOC,(setter)0,
-	"Battery state of charge [%], array.",
+	PyDoc_STR("type: Sequence\n\nBattery state of charge [%]"),
  	NULL},
 {"batt_annual_charge_energy", (getter)Outputs_get_batt_annual_charge_energy,(setter)0,
-	"Battery annual energy charged [kWh], array.",
+	PyDoc_STR("type: Sequence\n\nBattery annual energy charged [kWh]"),
  	NULL},
 {"batt_annual_charge_from_grid", (getter)Outputs_get_batt_annual_charge_from_grid,(setter)0,
-	"Battery annual energy charged from grid [kWh], array.",
+	PyDoc_STR("type: Sequence\n\nBattery annual energy charged from grid [kWh]"),
  	NULL},
 {"batt_annual_charge_from_pv", (getter)Outputs_get_batt_annual_charge_from_pv,(setter)0,
-	"Battery annual energy charged from PV [kWh], array.",
+	PyDoc_STR("type: Sequence\n\nBattery annual energy charged from PV [kWh]"),
  	NULL},
 {"batt_annual_discharge_energy", (getter)Outputs_get_batt_annual_discharge_energy,(setter)0,
-	"Battery annual energy discharged [kWh], array.",
+	PyDoc_STR("type: Sequence\n\nBattery annual energy discharged [kWh]"),
  	NULL},
 {"batt_annual_energy_loss", (getter)Outputs_get_batt_annual_energy_loss,(setter)0,
-	"Battery annual energy loss [kWh], array.",
+	PyDoc_STR("type: Sequence\n\nBattery annual energy loss [kWh]"),
  	NULL},
 {"batt_annual_energy_system_loss", (getter)Outputs_get_batt_annual_energy_system_loss,(setter)0,
-	"Battery annual system energy loss [kWh], array.",
+	PyDoc_STR("type: Sequence\n\nBattery annual system energy loss [kWh]"),
  	NULL},
 {"batt_bank_installed_capacity", (getter)Outputs_get_batt_bank_installed_capacity,(setter)0,
-	"Battery bank installed capacity [kWh], number.",
+	PyDoc_STR("type: Float\n\nBattery bank installed capacity [kWh]"),
  	NULL},
 {"batt_bank_replacement", (getter)Outputs_get_batt_bank_replacement,(setter)0,
-	"Battery bank replacements per year [number/year], array.",
+	PyDoc_STR("type: Sequence\n\nBattery bank replacements per year [number/year]"),
  	NULL},
 {"batt_capacity_percent", (getter)Outputs_get_batt_capacity_percent,(setter)0,
-	"Battery capacity percent for lifetime [%], array.",
+	PyDoc_STR("type: Sequence\n\nBattery capacity percent for lifetime [%]"),
  	NULL},
 {"batt_capacity_thermal_percent", (getter)Outputs_get_batt_capacity_thermal_percent,(setter)0,
-	"Battery capacity percent for temperature [%], array.",
+	PyDoc_STR("type: Sequence\n\nBattery capacity percent for temperature [%]"),
  	NULL},
 {"batt_conversion_loss", (getter)Outputs_get_batt_conversion_loss,(setter)0,
-	"Electricity loss in battery power electronics [kW], array.",
+	PyDoc_STR("type: Sequence\n\nElectricity loss in battery power electronics [kW]"),
  	NULL},
 {"batt_cost_to_cycle", (getter)Outputs_get_batt_cost_to_cycle,(setter)0,
-	"Computed cost to cycle [$/cycle], array.",
+	PyDoc_STR("type: Sequence\n\nComputed cost to cycle [$/cycle]"),
  	NULL},
 {"batt_cycles", (getter)Outputs_get_batt_cycles,(setter)0,
-	"Battery number of cycles, array.",
+	PyDoc_STR("type: Sequence\n\nBattery number of cycles"),
  	NULL},
 {"batt_dispatch_sched", (getter)Outputs_get_batt_dispatch_sched,(setter)0,
-	"Battery dispatch schedule, matrix.",
+	PyDoc_STR("type: Sequence[Sequence]\n\nBattery dispatch schedule"),
  	NULL},
 {"batt_power", (getter)Outputs_get_batt_power,(setter)0,
-	"Electricity to/from battery [kW], array.",
+	PyDoc_STR("type: Sequence\n\nElectricity to/from battery [kW]"),
  	NULL},
 {"batt_power_target", (getter)Outputs_get_batt_power_target,(setter)0,
-	"Electricity battery power target for automated dispatch [kW], array.",
+	PyDoc_STR("type: Sequence\n\nElectricity battery power target for automated dispatch [kW]"),
  	NULL},
 {"batt_pv_charge_percent", (getter)Outputs_get_batt_pv_charge_percent,(setter)0,
-	"Battery percent energy charged from PV [%], number.",
+	PyDoc_STR("type: Float\n\nBattery percent energy charged from PV [%]"),
  	NULL},
 {"batt_q0", (getter)Outputs_get_batt_q0,(setter)0,
-	"Battery total charge [Ah], array.",
+	PyDoc_STR("type: Sequence\n\nBattery total charge [Ah]"),
  	NULL},
 {"batt_q1", (getter)Outputs_get_batt_q1,(setter)0,
-	"Battery available charge [Ah], array.",
+	PyDoc_STR("type: Sequence\n\nBattery available charge [Ah]"),
  	NULL},
 {"batt_q2", (getter)Outputs_get_batt_q2,(setter)0,
-	"Battery bound charge [Ah], array.",
+	PyDoc_STR("type: Sequence\n\nBattery bound charge [Ah]"),
  	NULL},
 {"batt_qmax", (getter)Outputs_get_batt_qmax,(setter)0,
-	"Battery maximum charge with degradation [Ah], array.",
+	PyDoc_STR("type: Sequence\n\nBattery maximum charge with degradation [Ah]"),
  	NULL},
 {"batt_qmaxI", (getter)Outputs_get_batt_qmaxI,(setter)0,
-	"Battery maximum capacity at current [Ah], array.",
+	PyDoc_STR("type: Sequence\n\nBattery maximum capacity at current [Ah]"),
  	NULL},
 {"batt_qmax_thermal", (getter)Outputs_get_batt_qmax_thermal,(setter)0,
-	"Battery maximum charge at temperature [Ah], array.",
+	PyDoc_STR("type: Sequence\n\nBattery maximum charge at temperature [Ah]"),
  	NULL},
 {"batt_system_loss", (getter)Outputs_get_batt_system_loss,(setter)0,
-	"Electricity loss from battery ancillary equipment [kW], array.",
+	PyDoc_STR("type: Sequence\n\nElectricity loss from battery ancillary equipment [kW]"),
  	NULL},
 {"batt_temperature", (getter)Outputs_get_batt_temperature,(setter)0,
-	"Battery temperature [C], array.",
+	PyDoc_STR("type: Sequence\n\nBattery temperature [C]"),
  	NULL},
 {"batt_to_grid", (getter)Outputs_get_batt_to_grid,(setter)0,
-	"Electricity to grid from battery [kW], array.",
+	PyDoc_STR("type: Sequence\n\nElectricity to grid from battery [kW]"),
  	NULL},
 {"batt_to_load", (getter)Outputs_get_batt_to_load,(setter)0,
-	"Electricity to load from battery [kW], array.",
+	PyDoc_STR("type: Sequence\n\nElectricity to load from battery [kW]"),
  	NULL},
 {"batt_voltage", (getter)Outputs_get_batt_voltage,(setter)0,
-	"Battery voltage [V], array.",
+	PyDoc_STR("type: Sequence\n\nBattery voltage [V]"),
  	NULL},
 {"batt_voltage_cell", (getter)Outputs_get_batt_voltage_cell,(setter)0,
-	"Battery cell voltage [V], array.",
+	PyDoc_STR("type: Sequence\n\nBattery cell voltage [V]"),
  	NULL},
 {"fuelcell_to_batt", (getter)Outputs_get_fuelcell_to_batt,(setter)0,
-	"Electricity to battery from fuel cell [kW], array.",
+	PyDoc_STR("type: Sequence\n\nElectricity to battery from fuel cell [kW]"),
  	NULL},
 {"gen", (getter)Outputs_get_gen,(setter)0,
-	"System power generated [kW], array.",
+	PyDoc_STR("type: Sequence\n\nSystem power generated [kW]"),
  	NULL},
 {"grid_power", (getter)Outputs_get_grid_power,(setter)0,
-	"Electricity to/from grid [kW], array.",
+	PyDoc_STR("type: Sequence\n\nElectricity to/from grid [kW]"),
  	NULL},
 {"grid_power_target", (getter)Outputs_get_grid_power_target,(setter)0,
-	"Electricity grid power target for automated dispatch [kW], array.",
+	PyDoc_STR("type: Sequence\n\nElectricity grid power target for automated dispatch [kW]"),
  	NULL},
 {"grid_to_batt", (getter)Outputs_get_grid_to_batt,(setter)0,
-	"Electricity to battery from grid [kW], array.",
+	PyDoc_STR("type: Sequence\n\nElectricity to battery from grid [kW]"),
  	NULL},
 {"grid_to_load", (getter)Outputs_get_grid_to_load,(setter)0,
-	"Electricity to load from grid [kW], array.",
+	PyDoc_STR("type: Sequence\n\nElectricity to load from grid [kW]"),
  	NULL},
 {"monthly_batt_to_grid", (getter)Outputs_get_monthly_batt_to_grid,(setter)0,
-	"Energy to grid from battery [kWh], array.",
+	PyDoc_STR("type: Sequence\n\nEnergy to grid from battery [kWh]"),
  	NULL},
 {"monthly_batt_to_load", (getter)Outputs_get_monthly_batt_to_load,(setter)0,
-	"Energy to load from battery [kWh], array.",
+	PyDoc_STR("type: Sequence\n\nEnergy to load from battery [kWh]"),
  	NULL},
 {"monthly_grid_to_batt", (getter)Outputs_get_monthly_grid_to_batt,(setter)0,
-	"Energy to battery from grid [kWh], array.",
+	PyDoc_STR("type: Sequence\n\nEnergy to battery from grid [kWh]"),
  	NULL},
 {"monthly_grid_to_load", (getter)Outputs_get_monthly_grid_to_load,(setter)0,
-	"Energy to load from grid [kWh], array.",
+	PyDoc_STR("type: Sequence\n\nEnergy to load from grid [kWh]"),
  	NULL},
 {"monthly_pv_to_batt", (getter)Outputs_get_monthly_pv_to_batt,(setter)0,
-	"Energy to battery from PV [kWh], array.",
+	PyDoc_STR("type: Sequence\n\nEnergy to battery from PV [kWh]"),
  	NULL},
 {"monthly_pv_to_grid", (getter)Outputs_get_monthly_pv_to_grid,(setter)0,
-	"Energy to grid from PV [kWh], array.",
+	PyDoc_STR("type: Sequence\n\nEnergy to grid from PV [kWh]"),
  	NULL},
 {"monthly_pv_to_load", (getter)Outputs_get_monthly_pv_to_load,(setter)0,
-	"Energy to load from PV [kWh], array.",
+	PyDoc_STR("type: Sequence\n\nEnergy to load from PV [kWh]"),
  	NULL},
 {"pv_to_batt", (getter)Outputs_get_pv_to_batt,(setter)0,
-	"Electricity to battery from PV [kW], array.",
+	PyDoc_STR("type: Sequence\n\nElectricity to battery from PV [kW]"),
  	NULL},
 {"pv_to_grid", (getter)Outputs_get_pv_to_grid,(setter)0,
-	"Electricity to grid from PV [kW], array.",
+	PyDoc_STR("type: Sequence\n\nElectricity to grid from PV [kW]"),
  	NULL},
 {"pv_to_load", (getter)Outputs_get_pv_to_load,(setter)0,
-	"Electricity to load from PV [kW], array.",
+	PyDoc_STR("type: Sequence\n\nElectricity to load from PV [kW]"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1053,7 +1053,7 @@ static PyTypeObject Outputs_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		Outputs_methods,         /*tp_methods*/
@@ -1063,7 +1063,7 @@ static PyTypeObject Outputs_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -1169,7 +1169,7 @@ static PyMethodDef Battwatts_methods[] = {
 		{"assign",            (PyCFunction)Battwatts_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs")},
 		{"export",            (PyCFunction)Battwatts_export,  METH_VARARGS,
-				PyDoc_STR("assign() -> None\n Export attributes into dictionary")},
+				PyDoc_STR("export() -> None\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -1209,11 +1209,11 @@ static PyTypeObject Battwatts_Type = {
 		0,                          /*tp_setattro*/
 		0,                          /*tp_as_buffer*/
 		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
-		"see html for help",        /*tp_doc*/
+		"Wrapper for `cmod_battwatts.cpp <https://github.com/NREL/ssc/blob/develop/ssc/cmod_battwatts.cpp>`_",        /*tp_doc*/
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		Battwatts_methods,      /*tp_methods*/
@@ -1223,7 +1223,7 @@ static PyTypeObject Battwatts_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,                          /*tp_new*/
@@ -1288,10 +1288,10 @@ static PyMethodDef BattwattsModule_methods[] = {
 		{"new",             Battwatts_new,         METH_VARARGS,
 				PyDoc_STR("new() -> new Battwatts object")},
 		{"default",             Battwatts_default,         METH_VARARGS,
-				PyDoc_STR("default(financial) -> new Battwatts object with financial model-specific default attributes\n"
-				"Options: PVWattsCommercial\nPVWattsResidential\nPVWattsThirdParty")},
+				PyDoc_STR("default(config) -> new Battwatts object with financial model-specific default attributes\n"
+				"config options:\n\n- \"PVWattsCommercial\"\n- \"PVWattsResidential\"\n- \"PVWattsThirdParty\"")},
 		{"wrap",             Battwatts_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> new Battwatts object around existing PySSC data, taking over memory ownership")},
+				PyDoc_STR("wrap(ssc_data_t) -> new Battwatts object around existing PySSC data, taking over memory ownership\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to `wrap`")},
 		{NULL,              NULL}           /* sentinel */
 };
 

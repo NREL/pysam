@@ -67,25 +67,25 @@ static PyMethodDef Plant_methods[] = {
 static PyObject *
 Plant_get_conv_eff(PlantObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_GenericSystem_Plant_conv_eff_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_GenericSystem_Plant_conv_eff_nget, self->data_ptr);
 }
 
 static int
 Plant_set_conv_eff(PlantObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_GenericSystem_Plant_conv_eff_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_GenericSystem_Plant_conv_eff_nset, self->data_ptr);
 }
 
 static PyObject *
 Plant_get_derate(PlantObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_GenericSystem_Plant_derate_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_GenericSystem_Plant_derate_nget, self->data_ptr);
 }
 
 static int
 Plant_set_derate(PlantObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_GenericSystem_Plant_derate_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_GenericSystem_Plant_derate_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -97,78 +97,78 @@ Plant_get_energy_output_array(PlantObject *self, void *closure)
 static int
 Plant_set_energy_output_array(PlantObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_GenericSystem_Plant_energy_output_array_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_GenericSystem_Plant_energy_output_array_aset, self->data_ptr);
 }
 
 static PyObject *
 Plant_get_heat_rate(PlantObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_GenericSystem_Plant_heat_rate_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_GenericSystem_Plant_heat_rate_nget, self->data_ptr);
 }
 
 static int
 Plant_set_heat_rate(PlantObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_GenericSystem_Plant_heat_rate_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_GenericSystem_Plant_heat_rate_nset, self->data_ptr);
 }
 
 static PyObject *
 Plant_get_spec_mode(PlantObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_GenericSystem_Plant_spec_mode_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_GenericSystem_Plant_spec_mode_nget, self->data_ptr);
 }
 
 static int
 Plant_set_spec_mode(PlantObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_GenericSystem_Plant_spec_mode_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_GenericSystem_Plant_spec_mode_nset, self->data_ptr);
 }
 
 static PyObject *
 Plant_get_system_capacity(PlantObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_GenericSystem_Plant_system_capacity_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_GenericSystem_Plant_system_capacity_nget, self->data_ptr);
 }
 
 static int
 Plant_set_system_capacity(PlantObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_GenericSystem_Plant_system_capacity_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_GenericSystem_Plant_system_capacity_nset, self->data_ptr);
 }
 
 static PyObject *
 Plant_get_user_capacity_factor(PlantObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_GenericSystem_Plant_user_capacity_factor_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_GenericSystem_Plant_user_capacity_factor_nget, self->data_ptr);
 }
 
 static int
 Plant_set_user_capacity_factor(PlantObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_GenericSystem_Plant_user_capacity_factor_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_GenericSystem_Plant_user_capacity_factor_nset, self->data_ptr);
 }
 
 static PyGetSetDef Plant_getset[] = {
 {"conv_eff", (getter)Plant_get_conv_eff,(setter)Plant_set_conv_eff,
-	"Conversion Efficiency [%], number.\n Required.",
+	PyDoc_STR("type: Float\n\nConversion Efficiency [%]\n\n*Required*: True"),
  	NULL},
 {"derate", (getter)Plant_get_derate,(setter)Plant_set_derate,
-	"Derate [%], number.\n Required.",
+	PyDoc_STR("type: Float\n\nDerate [%]\n\n*Required*: True"),
  	NULL},
 {"energy_output_array", (getter)Plant_get_energy_output_array,(setter)Plant_set_energy_output_array,
-	"Array of Energy Output Profile [kW], array.\n Required if spec_mode=1.",
+	PyDoc_STR("type: Sequence\n\nArray of Energy Output Profile [kW]\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"heat_rate", (getter)Plant_get_heat_rate,(setter)Plant_set_heat_rate,
-	"Heat Rate [MMBTUs/MWhe], number.\n Required.",
+	PyDoc_STR("type: Float\n\nHeat Rate [MMBTUs/MWhe]\n\n*Required*: True"),
  	NULL},
 {"spec_mode", (getter)Plant_get_spec_mode,(setter)Plant_set_spec_mode,
-	"Spec mode: 0=constant CF,1=profile, number.\n Required.",
+	PyDoc_STR("type: Float\n\nSpec mode: 0=constant CF,1=profile\n\n*Required*: True"),
  	NULL},
 {"system_capacity", (getter)Plant_get_system_capacity,(setter)Plant_set_system_capacity,
-	"Nameplace Capcity [kW], number.\n Required.",
+	PyDoc_STR("type: Float\n\nNameplace Capcity [kW]\n\n*Required*: True"),
  	NULL},
 {"user_capacity_factor", (getter)Plant_get_user_capacity_factor,(setter)Plant_set_user_capacity_factor,
-	"Capacity Factor [%], number.\n Required.",
+	PyDoc_STR("type: Float\n\nCapacity Factor [%]\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -201,7 +201,7 @@ static PyTypeObject Plant_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		Plant_methods,         /*tp_methods*/
@@ -211,7 +211,7 @@ static PyTypeObject Plant_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -280,13 +280,13 @@ static PyMethodDef Lifetime_methods[] = {
 static PyObject *
 Lifetime_get_analysis_period(LifetimeObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_GenericSystem_Lifetime_analysis_period_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_GenericSystem_Lifetime_analysis_period_nget, self->data_ptr);
 }
 
 static int
 Lifetime_set_analysis_period(LifetimeObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_GenericSystem_Lifetime_analysis_period_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_GenericSystem_Lifetime_analysis_period_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -298,30 +298,30 @@ Lifetime_get_generic_degradation(LifetimeObject *self, void *closure)
 static int
 Lifetime_set_generic_degradation(LifetimeObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_GenericSystem_Lifetime_generic_degradation_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_GenericSystem_Lifetime_generic_degradation_aset, self->data_ptr);
 }
 
 static PyObject *
 Lifetime_get_system_use_lifetime_output(LifetimeObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_GenericSystem_Lifetime_system_use_lifetime_output_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_GenericSystem_Lifetime_system_use_lifetime_output_nget, self->data_ptr);
 }
 
 static int
 Lifetime_set_system_use_lifetime_output(LifetimeObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_GenericSystem_Lifetime_system_use_lifetime_output_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_GenericSystem_Lifetime_system_use_lifetime_output_nset, self->data_ptr);
 }
 
 static PyGetSetDef Lifetime_getset[] = {
 {"analysis_period", (getter)Lifetime_get_analysis_period,(setter)Lifetime_set_analysis_period,
-	"Lifetime analysis period [years], number.\n Required if system_use_lifetime_output=1.",
+	PyDoc_STR("type: Float\n\nLifetime analysis period [years]\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"generic_degradation", (getter)Lifetime_get_generic_degradation,(setter)Lifetime_set_generic_degradation,
-	"Annual module degradation [%/year], array.\n Required if system_use_lifetime_output=1.",
+	PyDoc_STR("type: Sequence\n\nAnnual module degradation [%/year]\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"system_use_lifetime_output", (getter)Lifetime_get_system_use_lifetime_output,(setter)Lifetime_set_system_use_lifetime_output,
-	"Generic lifetime simulation [0/1], number.\n Constraints: INTEGER,MIN=0,MAX=1; 0 if not set.",
+	PyDoc_STR("type: Float\n\nGeneric lifetime simulation [0/1]\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: set to 0 if not provided."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -354,7 +354,7 @@ static PyTypeObject Lifetime_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		Lifetime_methods,         /*tp_methods*/
@@ -364,7 +364,7 @@ static PyTypeObject Lifetime_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -433,19 +433,19 @@ static PyMethodDef Outputs_methods[] = {
 static PyObject *
 Outputs_get_annual_energy(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_GenericSystem_Outputs_annual_energy_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_GenericSystem_Outputs_annual_energy_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_annual_fuel_usage(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_GenericSystem_Outputs_annual_fuel_usage_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_GenericSystem_Outputs_annual_fuel_usage_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_capacity_factor(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_GenericSystem_Outputs_capacity_factor_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_GenericSystem_Outputs_capacity_factor_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -457,7 +457,7 @@ Outputs_get_gen(OutputsObject *self, void *closure)
 static PyObject *
 Outputs_get_kwh_per_kw(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_GenericSystem_Outputs_kwh_per_kw_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_GenericSystem_Outputs_kwh_per_kw_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -469,39 +469,39 @@ Outputs_get_monthly_energy(OutputsObject *self, void *closure)
 static PyObject *
 Outputs_get_system_heat_rate(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_GenericSystem_Outputs_system_heat_rate_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_GenericSystem_Outputs_system_heat_rate_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_water_usage(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_GenericSystem_Outputs_water_usage_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_GenericSystem_Outputs_water_usage_nget, self->data_ptr);
 }
 
 static PyGetSetDef Outputs_getset[] = {
 {"annual_energy", (getter)Outputs_get_annual_energy,(setter)0,
-	"Annual Energy [kWh], number.",
+	PyDoc_STR("type: Float\n\nAnnual Energy [kWh]"),
  	NULL},
 {"annual_fuel_usage", (getter)Outputs_get_annual_fuel_usage,(setter)0,
-	"Annual Fuel Usage [kWht], number.",
+	PyDoc_STR("type: Float\n\nAnnual Fuel Usage [kWht]"),
  	NULL},
 {"capacity_factor", (getter)Outputs_get_capacity_factor,(setter)0,
-	"Capacity factor [%], number.",
+	PyDoc_STR("type: Float\n\nCapacity factor [%]"),
  	NULL},
 {"gen", (getter)Outputs_get_gen,(setter)0,
-	"System power generated [kW], array.",
+	PyDoc_STR("type: Sequence\n\nSystem power generated [kW]"),
  	NULL},
 {"kwh_per_kw", (getter)Outputs_get_kwh_per_kw,(setter)0,
-	"First year kWh/kW [kWh/kW], number.",
+	PyDoc_STR("type: Float\n\nFirst year kWh/kW [kWh/kW]"),
  	NULL},
 {"monthly_energy", (getter)Outputs_get_monthly_energy,(setter)0,
-	"Monthly Energy [kWh], array.",
+	PyDoc_STR("type: Sequence\n\nMonthly Energy [kWh]"),
  	NULL},
 {"system_heat_rate", (getter)Outputs_get_system_heat_rate,(setter)0,
-	"Heat Rate Conversion Factor [MMBTUs/MWhe], number.",
+	PyDoc_STR("type: Float\n\nHeat Rate Conversion Factor [MMBTUs/MWhe]"),
  	NULL},
 {"water_usage", (getter)Outputs_get_water_usage,(setter)0,
-	"Annual Water Usage, number.",
+	PyDoc_STR("type: Float\n\nAnnual Water Usage"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -534,7 +534,7 @@ static PyTypeObject Outputs_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		Outputs_methods,         /*tp_methods*/
@@ -544,7 +544,7 @@ static PyTypeObject Outputs_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -661,7 +661,7 @@ static PyMethodDef GenericSystem_methods[] = {
 		{"assign",            (PyCFunction)GenericSystem_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs")},
 		{"export",            (PyCFunction)GenericSystem_export,  METH_VARARGS,
-				PyDoc_STR("assign() -> None\n Export attributes into dictionary")},
+				PyDoc_STR("export() -> None\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -701,11 +701,11 @@ static PyTypeObject GenericSystem_Type = {
 		0,                          /*tp_setattro*/
 		0,                          /*tp_as_buffer*/
 		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
-		"see html for help",        /*tp_doc*/
+		"Wrapper for `cmod_generic_system.cpp <https://github.com/NREL/ssc/blob/develop/ssc/cmod_generic_system.cpp>`_",        /*tp_doc*/
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		GenericSystem_methods,      /*tp_methods*/
@@ -715,7 +715,7 @@ static PyTypeObject GenericSystem_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,                          /*tp_new*/
@@ -780,10 +780,10 @@ static PyMethodDef GenericSystemModule_methods[] = {
 		{"new",             GenericSystem_new,         METH_VARARGS,
 				PyDoc_STR("new() -> new GenericSystem object")},
 		{"default",             GenericSystem_default,         METH_VARARGS,
-				PyDoc_STR("default(financial) -> new GenericSystem object with financial model-specific default attributes\n"
-				"Options: GenericSystemAllEquityPartnershipFlip\nGenericSystemCommercial\nGenericSystemCommercialPPA\nGenericSystemHostDeveloper\nGenericSystemIndependentPowerProducer\nGenericSystemLCOECalculator\nGenericSystemLeveragedPartnershipFlip\nGenericSystemNone\nGenericSystemResidential\nGenericSystemSaleLeaseback\nGenericSystemSingleOwner\nGenericSystemThirdParty")},
+				PyDoc_STR("default(config) -> new GenericSystem object with financial model-specific default attributes\n"
+				"config options:\n\n- \"GenericSystemAllEquityPartnershipFlip\"\n- \"GenericSystemCommercial\"\n- \"GenericSystemCommercialPPA\"\n- \"GenericSystemHostDeveloper\"\n- \"GenericSystemIndependentPowerProducer\"\n- \"GenericSystemLCOECalculator\"\n- \"GenericSystemLeveragedPartnershipFlip\"\n- \"GenericSystemNone\"\n- \"GenericSystemResidential\"\n- \"GenericSystemSaleLeaseback\"\n- \"GenericSystemSingleOwner\"\n- \"GenericSystemThirdParty\"")},
 		{"wrap",             GenericSystem_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> new GenericSystem object around existing PySSC data, taking over memory ownership")},
+				PyDoc_STR("wrap(ssc_data_t) -> new GenericSystem object around existing PySSC data, taking over memory ownership\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to `wrap`")},
 		{NULL,              NULL}           /* sentinel */
 };
 

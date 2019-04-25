@@ -33,13 +33,13 @@ def copy_defaults():
 
 
 from setuptools import setup, Extension
-import distutils.command.bdist_conda
-
+import distutils
 import sys
 
 # determine if making PyPi or Conda distribution
 distclass = distutils.core.Distribution
 if sys.argv[1] == "bdist_conda":
+    import distutils.command.bdist_conda
     distclass = distutils.command.bdist_conda.CondaDistribution
 
 libs = []

@@ -78,7 +78,7 @@ Weather_set_solar_resource_file(WeatherObject *self, PyObject *value, void *clos
 
 static PyGetSetDef Weather_getset[] = {
 {"solar_resource_file", (getter)Weather_get_solar_resource_file,(setter)Weather_set_solar_resource_file,
-	"local weather file path, string.\n Constraints: LOCAL_FILE; Required.",
+	PyDoc_STR("type: Str\n\nlocal weather file path\n\n*Constraints*: LOCAL_FILE\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -111,7 +111,7 @@ static PyTypeObject Weather_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		Weather_methods,         /*tp_methods*/
@@ -121,7 +121,7 @@ static PyTypeObject Weather_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -190,121 +190,121 @@ static PyMethodDef SWH_methods[] = {
 static PyObject *
 SWH_get_FRUL(SWHObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Swh_SWH_FRUL_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Swh_SWH_FRUL_nget, self->data_ptr);
 }
 
 static int
 SWH_set_FRUL(SWHObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Swh_SWH_FRUL_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Swh_SWH_FRUL_nset, self->data_ptr);
 }
 
 static PyObject *
 SWH_get_FRta(SWHObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Swh_SWH_FRta_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Swh_SWH_FRta_nget, self->data_ptr);
 }
 
 static int
 SWH_set_FRta(SWHObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Swh_SWH_FRta_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Swh_SWH_FRta_nset, self->data_ptr);
 }
 
 static PyObject *
 SWH_get_T_room(SWHObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Swh_SWH_T_room_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Swh_SWH_T_room_nget, self->data_ptr);
 }
 
 static int
 SWH_set_T_room(SWHObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Swh_SWH_T_room_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Swh_SWH_T_room_nset, self->data_ptr);
 }
 
 static PyObject *
 SWH_get_T_set(SWHObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Swh_SWH_T_set_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Swh_SWH_T_set_nget, self->data_ptr);
 }
 
 static int
 SWH_set_T_set(SWHObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Swh_SWH_T_set_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Swh_SWH_T_set_nset, self->data_ptr);
 }
 
 static PyObject *
 SWH_get_T_tank_max(SWHObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Swh_SWH_T_tank_max_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Swh_SWH_T_tank_max_nget, self->data_ptr);
 }
 
 static int
 SWH_set_T_tank_max(SWHObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Swh_SWH_T_tank_max_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Swh_SWH_T_tank_max_nset, self->data_ptr);
 }
 
 static PyObject *
 SWH_get_U_tank(SWHObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Swh_SWH_U_tank_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Swh_SWH_U_tank_nget, self->data_ptr);
 }
 
 static int
 SWH_set_U_tank(SWHObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Swh_SWH_U_tank_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Swh_SWH_U_tank_nset, self->data_ptr);
 }
 
 static PyObject *
 SWH_get_V_tank(SWHObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Swh_SWH_V_tank_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Swh_SWH_V_tank_nget, self->data_ptr);
 }
 
 static int
 SWH_set_V_tank(SWHObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Swh_SWH_V_tank_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Swh_SWH_V_tank_nset, self->data_ptr);
 }
 
 static PyObject *
 SWH_get_albedo(SWHObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Swh_SWH_albedo_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Swh_SWH_albedo_nget, self->data_ptr);
 }
 
 static int
 SWH_set_albedo(SWHObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Swh_SWH_albedo_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Swh_SWH_albedo_nset, self->data_ptr);
 }
 
 static PyObject *
 SWH_get_area_coll(SWHObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Swh_SWH_area_coll_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Swh_SWH_area_coll_nget, self->data_ptr);
 }
 
 static int
 SWH_set_area_coll(SWHObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Swh_SWH_area_coll_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Swh_SWH_area_coll_nset, self->data_ptr);
 }
 
 static PyObject *
 SWH_get_azimuth(SWHObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Swh_SWH_azimuth_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Swh_SWH_azimuth_nget, self->data_ptr);
 }
 
 static int
 SWH_set_azimuth(SWHObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Swh_SWH_azimuth_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Swh_SWH_azimuth_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -316,7 +316,7 @@ SWH_get_custom_mains(SWHObject *self, void *closure)
 static int
 SWH_set_custom_mains(SWHObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Swh_SWH_custom_mains_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Swh_SWH_custom_mains_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -328,151 +328,151 @@ SWH_get_custom_set(SWHObject *self, void *closure)
 static int
 SWH_set_custom_set(SWHObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Swh_SWH_custom_set_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Swh_SWH_custom_set_aset, self->data_ptr);
 }
 
 static PyObject *
 SWH_get_fluid(SWHObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Swh_SWH_fluid_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Swh_SWH_fluid_nget, self->data_ptr);
 }
 
 static int
 SWH_set_fluid(SWHObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Swh_SWH_fluid_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Swh_SWH_fluid_nset, self->data_ptr);
 }
 
 static PyObject *
 SWH_get_hx_eff(SWHObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Swh_SWH_hx_eff_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Swh_SWH_hx_eff_nget, self->data_ptr);
 }
 
 static int
 SWH_set_hx_eff(SWHObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Swh_SWH_hx_eff_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Swh_SWH_hx_eff_nset, self->data_ptr);
 }
 
 static PyObject *
 SWH_get_iam(SWHObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Swh_SWH_iam_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Swh_SWH_iam_nget, self->data_ptr);
 }
 
 static int
 SWH_set_iam(SWHObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Swh_SWH_iam_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Swh_SWH_iam_nset, self->data_ptr);
 }
 
 static PyObject *
 SWH_get_irrad_mode(SWHObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Swh_SWH_irrad_mode_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Swh_SWH_irrad_mode_nget, self->data_ptr);
 }
 
 static int
 SWH_set_irrad_mode(SWHObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Swh_SWH_irrad_mode_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Swh_SWH_irrad_mode_nset, self->data_ptr);
 }
 
 static PyObject *
 SWH_get_mdot(SWHObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Swh_SWH_mdot_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Swh_SWH_mdot_nget, self->data_ptr);
 }
 
 static int
 SWH_set_mdot(SWHObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Swh_SWH_mdot_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Swh_SWH_mdot_nset, self->data_ptr);
 }
 
 static PyObject *
 SWH_get_ncoll(SWHObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Swh_SWH_ncoll_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Swh_SWH_ncoll_nget, self->data_ptr);
 }
 
 static int
 SWH_set_ncoll(SWHObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Swh_SWH_ncoll_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Swh_SWH_ncoll_nset, self->data_ptr);
 }
 
 static PyObject *
 SWH_get_pipe_diam(SWHObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Swh_SWH_pipe_diam_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Swh_SWH_pipe_diam_nget, self->data_ptr);
 }
 
 static int
 SWH_set_pipe_diam(SWHObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Swh_SWH_pipe_diam_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Swh_SWH_pipe_diam_nset, self->data_ptr);
 }
 
 static PyObject *
 SWH_get_pipe_insul(SWHObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Swh_SWH_pipe_insul_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Swh_SWH_pipe_insul_nget, self->data_ptr);
 }
 
 static int
 SWH_set_pipe_insul(SWHObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Swh_SWH_pipe_insul_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Swh_SWH_pipe_insul_nset, self->data_ptr);
 }
 
 static PyObject *
 SWH_get_pipe_k(SWHObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Swh_SWH_pipe_k_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Swh_SWH_pipe_k_nget, self->data_ptr);
 }
 
 static int
 SWH_set_pipe_k(SWHObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Swh_SWH_pipe_k_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Swh_SWH_pipe_k_nset, self->data_ptr);
 }
 
 static PyObject *
 SWH_get_pipe_length(SWHObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Swh_SWH_pipe_length_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Swh_SWH_pipe_length_nget, self->data_ptr);
 }
 
 static int
 SWH_set_pipe_length(SWHObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Swh_SWH_pipe_length_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Swh_SWH_pipe_length_nset, self->data_ptr);
 }
 
 static PyObject *
 SWH_get_pump_eff(SWHObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Swh_SWH_pump_eff_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Swh_SWH_pump_eff_nget, self->data_ptr);
 }
 
 static int
 SWH_set_pump_eff(SWHObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Swh_SWH_pump_eff_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Swh_SWH_pump_eff_nset, self->data_ptr);
 }
 
 static PyObject *
 SWH_get_pump_power(SWHObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Swh_SWH_pump_power_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Swh_SWH_pump_power_nget, self->data_ptr);
 }
 
 static int
 SWH_set_pump_power(SWHObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Swh_SWH_pump_power_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Swh_SWH_pump_power_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -484,7 +484,7 @@ SWH_get_scaled_draw(SWHObject *self, void *closure)
 static int
 SWH_set_scaled_draw(SWHObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Swh_SWH_scaled_draw_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Swh_SWH_scaled_draw_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -502,13 +502,13 @@ SWH_set_shading_azal(SWHObject *self, PyObject *value, void *closure)
 static PyObject *
 SWH_get_shading_diff(SWHObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Swh_SWH_shading_diff_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Swh_SWH_shading_diff_nget, self->data_ptr);
 }
 
 static int
 SWH_set_shading_diff(SWHObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Swh_SWH_shading_diff_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Swh_SWH_shading_diff_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -538,210 +538,210 @@ SWH_set_shading_timestep(SWHObject *self, PyObject *value, void *closure)
 static PyObject *
 SWH_get_sky_model(SWHObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Swh_SWH_sky_model_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Swh_SWH_sky_model_nget, self->data_ptr);
 }
 
 static int
 SWH_set_sky_model(SWHObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Swh_SWH_sky_model_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Swh_SWH_sky_model_nset, self->data_ptr);
 }
 
 static PyObject *
 SWH_get_system_capacity(SWHObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Swh_SWH_system_capacity_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Swh_SWH_system_capacity_nget, self->data_ptr);
 }
 
 static int
 SWH_set_system_capacity(SWHObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Swh_SWH_system_capacity_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Swh_SWH_system_capacity_nset, self->data_ptr);
 }
 
 static PyObject *
 SWH_get_tank_h2d_ratio(SWHObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Swh_SWH_tank_h2d_ratio_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Swh_SWH_tank_h2d_ratio_nget, self->data_ptr);
 }
 
 static int
 SWH_set_tank_h2d_ratio(SWHObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Swh_SWH_tank_h2d_ratio_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Swh_SWH_tank_h2d_ratio_nset, self->data_ptr);
 }
 
 static PyObject *
 SWH_get_test_flow(SWHObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Swh_SWH_test_flow_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Swh_SWH_test_flow_nget, self->data_ptr);
 }
 
 static int
 SWH_set_test_flow(SWHObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Swh_SWH_test_flow_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Swh_SWH_test_flow_nset, self->data_ptr);
 }
 
 static PyObject *
 SWH_get_test_fluid(SWHObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Swh_SWH_test_fluid_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Swh_SWH_test_fluid_nget, self->data_ptr);
 }
 
 static int
 SWH_set_test_fluid(SWHObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Swh_SWH_test_fluid_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Swh_SWH_test_fluid_nset, self->data_ptr);
 }
 
 static PyObject *
 SWH_get_tilt(SWHObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Swh_SWH_tilt_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Swh_SWH_tilt_nget, self->data_ptr);
 }
 
 static int
 SWH_set_tilt(SWHObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Swh_SWH_tilt_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Swh_SWH_tilt_nset, self->data_ptr);
 }
 
 static PyObject *
 SWH_get_use_custom_mains(SWHObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Swh_SWH_use_custom_mains_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Swh_SWH_use_custom_mains_nget, self->data_ptr);
 }
 
 static int
 SWH_set_use_custom_mains(SWHObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Swh_SWH_use_custom_mains_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Swh_SWH_use_custom_mains_nset, self->data_ptr);
 }
 
 static PyObject *
 SWH_get_use_custom_set(SWHObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Swh_SWH_use_custom_set_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Swh_SWH_use_custom_set_nget, self->data_ptr);
 }
 
 static int
 SWH_set_use_custom_set(SWHObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Swh_SWH_use_custom_set_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Swh_SWH_use_custom_set_nset, self->data_ptr);
 }
 
 static PyGetSetDef SWH_getset[] = {
 {"FRUL", (getter)SWH_get_FRUL,(setter)SWH_set_FRUL,
-	"FRUL, number.\n Required.",
+	PyDoc_STR("type: Float\n\nFRUL\n\n*Required*: True"),
  	NULL},
 {"FRta", (getter)SWH_get_FRta,(setter)SWH_set_FRta,
-	"FRta, number.\n Required.",
+	PyDoc_STR("type: Float\n\nFRta\n\n*Required*: True"),
  	NULL},
 {"T_room", (getter)SWH_get_T_room,(setter)SWH_set_T_room,
-	"Temperature around solar tank [C], number.\n Constraints: POSITIVE; Required.",
+	PyDoc_STR("type: Float\n\nTemperature around solar tank [C]\n\n*Constraints*: POSITIVE\n\n*Required*: True"),
  	NULL},
 {"T_set", (getter)SWH_get_T_set,(setter)SWH_set_T_set,
-	"Set temperature [C], number.\n Constraints: POSITIVE; Required.",
+	PyDoc_STR("type: Float\n\nSet temperature [C]\n\n*Constraints*: POSITIVE\n\n*Required*: True"),
  	NULL},
 {"T_tank_max", (getter)SWH_get_T_tank_max,(setter)SWH_set_T_tank_max,
-	"Max temperature in solar tank [C], number.\n Constraints: POSITIVE; Required.",
+	PyDoc_STR("type: Float\n\nMax temperature in solar tank [C]\n\n*Constraints*: POSITIVE\n\n*Required*: True"),
  	NULL},
 {"U_tank", (getter)SWH_get_U_tank,(setter)SWH_set_U_tank,
-	"Solar tank heat loss coefficient [W/m2K], number.\n Constraints: POSITIVE; Required.",
+	PyDoc_STR("type: Float\n\nSolar tank heat loss coefficient [W/m2K]\n\n*Constraints*: POSITIVE\n\n*Required*: True"),
  	NULL},
 {"V_tank", (getter)SWH_get_V_tank,(setter)SWH_set_V_tank,
-	"Solar tank volume [m3], number.\n Constraints: POSITIVE; Required.",
+	PyDoc_STR("type: Float\n\nSolar tank volume [m3]\n\n*Constraints*: POSITIVE\n\n*Required*: True"),
  	NULL},
 {"albedo", (getter)SWH_get_albedo,(setter)SWH_set_albedo,
-	"Ground reflectance factor [0..1], number.\n Constraints: FACTOR; Required.",
+	PyDoc_STR("type: Float\n\nGround reflectance factor [0..1]\n\n*Constraints*: FACTOR\n\n*Required*: True"),
  	NULL},
 {"area_coll", (getter)SWH_get_area_coll,(setter)SWH_set_area_coll,
-	"Single collector area [m2], number.\n Constraints: POSITIVE; Required.",
+	PyDoc_STR("type: Float\n\nSingle collector area [m2]\n\n*Constraints*: POSITIVE\n\n*Required*: True"),
  	NULL},
 {"azimuth", (getter)SWH_get_azimuth,(setter)SWH_set_azimuth,
-	"Collector azimuth [deg], number.\n 90=E,180=S; Constraints: MIN=0,MAX=360; Required.",
+	PyDoc_STR("type: Float\n\nCollector azimuth [deg]\n\n*Options*: 90=E,180=S\n\n*Constraints*: MIN=0,MAX=360\n\n*Required*: True"),
  	NULL},
 {"custom_mains", (getter)SWH_get_custom_mains,(setter)SWH_set_custom_mains,
-	"Custom mains [C], array.\n Constraints: LENGTH=8760; Required.",
+	PyDoc_STR("type: Sequence\n\nCustom mains [C]\n\n*Constraints*: LENGTH=8760\n\n*Required*: True"),
  	NULL},
 {"custom_set", (getter)SWH_get_custom_set,(setter)SWH_set_custom_set,
-	"Custom set points [C], array.\n Constraints: LENGTH=8760; Required.",
+	PyDoc_STR("type: Sequence\n\nCustom set points [C]\n\n*Constraints*: LENGTH=8760\n\n*Required*: True"),
  	NULL},
 {"fluid", (getter)SWH_get_fluid,(setter)SWH_set_fluid,
-	"Working fluid in system, number.\n Water,Glycol; Constraints: INTEGER,MIN=0,MAX=1; Required.",
+	PyDoc_STR("type: Float\n\nWorking fluid in system\n\n*Info*: Water,Glycol\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: True"),
  	NULL},
 {"hx_eff", (getter)SWH_get_hx_eff,(setter)SWH_set_hx_eff,
-	"Heat exchanger effectiveness [0..1], number.\n Constraints: POSITIVE; Required.",
+	PyDoc_STR("type: Float\n\nHeat exchanger effectiveness [0..1]\n\n*Constraints*: POSITIVE\n\n*Required*: True"),
  	NULL},
 {"iam", (getter)SWH_get_iam,(setter)SWH_set_iam,
-	"Incidence angle modifier, number.\n Required.",
+	PyDoc_STR("type: Float\n\nIncidence angle modifier\n\n*Required*: True"),
  	NULL},
 {"irrad_mode", (getter)SWH_get_irrad_mode,(setter)SWH_set_irrad_mode,
-	"Irradiance input mode [0/1/2], number.\n Beam+Diff,Global+Beam,Global+Diff; Constraints: INTEGER,MIN=0,MAX=2; 0 if not set.",
+	PyDoc_STR("type: Float\n\nIrradiance input mode [0/1/2]\n\n*Info*: Beam+Diff,Global+Beam,Global+Diff\n\n*Constraints*: INTEGER,MIN=0,MAX=2\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"mdot", (getter)SWH_get_mdot,(setter)SWH_set_mdot,
-	"Total system mass flow rate [kg/s], number.\n Constraints: POSITIVE; Required.",
+	PyDoc_STR("type: Float\n\nTotal system mass flow rate [kg/s]\n\n*Constraints*: POSITIVE\n\n*Required*: True"),
  	NULL},
 {"ncoll", (getter)SWH_get_ncoll,(setter)SWH_set_ncoll,
-	"Number of collectors, number.\n Constraints: POSITIVE,INTEGER; Required.",
+	PyDoc_STR("type: Float\n\nNumber of collectors\n\n*Constraints*: POSITIVE,INTEGER\n\n*Required*: True"),
  	NULL},
 {"pipe_diam", (getter)SWH_get_pipe_diam,(setter)SWH_set_pipe_diam,
-	"Pipe diameter [m], number.\n Constraints: POSITIVE; Required.",
+	PyDoc_STR("type: Float\n\nPipe diameter [m]\n\n*Constraints*: POSITIVE\n\n*Required*: True"),
  	NULL},
 {"pipe_insul", (getter)SWH_get_pipe_insul,(setter)SWH_set_pipe_insul,
-	"Pipe insulation thickness [m], number.\n Constraints: POSITIVE; Required.",
+	PyDoc_STR("type: Float\n\nPipe insulation thickness [m]\n\n*Constraints*: POSITIVE\n\n*Required*: True"),
  	NULL},
 {"pipe_k", (getter)SWH_get_pipe_k,(setter)SWH_set_pipe_k,
-	"Pipe insulation conductivity [W/m2.C], number.\n Constraints: POSITIVE; Required.",
+	PyDoc_STR("type: Float\n\nPipe insulation conductivity [W/m2.C]\n\n*Constraints*: POSITIVE\n\n*Required*: True"),
  	NULL},
 {"pipe_length", (getter)SWH_get_pipe_length,(setter)SWH_set_pipe_length,
-	"Length of piping in system [m], number.\n Constraints: POSITIVE; Required.",
+	PyDoc_STR("type: Float\n\nLength of piping in system [m]\n\n*Constraints*: POSITIVE\n\n*Required*: True"),
  	NULL},
 {"pump_eff", (getter)SWH_get_pump_eff,(setter)SWH_set_pump_eff,
-	"Pumping efficiency [%], number.\n Constraints: PERCENT; Required.",
+	PyDoc_STR("type: Float\n\nPumping efficiency [%]\n\n*Constraints*: PERCENT\n\n*Required*: True"),
  	NULL},
 {"pump_power", (getter)SWH_get_pump_power,(setter)SWH_set_pump_power,
-	"Pump power [W], number.\n Constraints: POSITIVE; Required.",
+	PyDoc_STR("type: Float\n\nPump power [W]\n\n*Constraints*: POSITIVE\n\n*Required*: True"),
  	NULL},
 {"scaled_draw", (getter)SWH_get_scaled_draw,(setter)SWH_set_scaled_draw,
-	"Hot water draw [kg/hr], array.\n Constraints: LENGTH=8760; Required.",
+	PyDoc_STR("type: Sequence\n\nHot water draw [kg/hr]\n\n*Constraints*: LENGTH=8760\n\n*Required*: True"),
  	NULL},
 {"shading_azal", (getter)SWH_get_shading_azal,(setter)SWH_set_shading_azal,
-	"Azimuth x altitude beam shading loss [%], matrix.\n Required if ?.",
+	PyDoc_STR("type: Sequence[Sequence]\n\nAzimuth x altitude beam shading loss [%]\n\n*Required*: False"),
  	NULL},
 {"shading_diff", (getter)SWH_get_shading_diff,(setter)SWH_set_shading_diff,
-	"Diffuse shading loss [%], number.\n Required if ?.",
+	PyDoc_STR("type: Float\n\nDiffuse shading loss [%]\n\n*Required*: False"),
  	NULL},
 {"shading_mxh", (getter)SWH_get_shading_mxh,(setter)SWH_set_shading_mxh,
-	"Month x Hour beam shading loss [%], matrix.\n Required if ?.",
+	PyDoc_STR("type: Sequence[Sequence]\n\nMonth x Hour beam shading loss [%]\n\n*Required*: False"),
  	NULL},
 {"shading_timestep", (getter)SWH_get_shading_timestep,(setter)SWH_set_shading_timestep,
-	"Time step beam shading loss [%], matrix.\n Required if ?.",
+	PyDoc_STR("type: Sequence[Sequence]\n\nTime step beam shading loss [%]\n\n*Required*: False"),
  	NULL},
 {"sky_model", (getter)SWH_get_sky_model,(setter)SWH_set_sky_model,
-	"Tilted surface irradiance model [0/1/2], number.\n Isotropic,HDKR,Perez; Constraints: INTEGER,MIN=0,MAX=2; Required if ?=1.",
+	PyDoc_STR("type: Float\n\nTilted surface irradiance model [0/1/2]\n\n*Info*: Isotropic,HDKR,Perez\n\n*Constraints*: INTEGER,MIN=0,MAX=2\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"system_capacity", (getter)SWH_get_system_capacity,(setter)SWH_set_system_capacity,
-	"Nameplate capacity [kW], number.\n Required.",
+	PyDoc_STR("type: Float\n\nNameplate capacity [kW]\n\n*Required*: True"),
  	NULL},
 {"tank_h2d_ratio", (getter)SWH_get_tank_h2d_ratio,(setter)SWH_set_tank_h2d_ratio,
-	"Solar tank height to diameter ratio, number.\n Constraints: POSITIVE; Required.",
+	PyDoc_STR("type: Float\n\nSolar tank height to diameter ratio\n\n*Constraints*: POSITIVE\n\n*Required*: True"),
  	NULL},
 {"test_flow", (getter)SWH_get_test_flow,(setter)SWH_set_test_flow,
-	"Flow rate used in collector test [kg/s], number.\n Constraints: POSITIVE; Required.",
+	PyDoc_STR("type: Float\n\nFlow rate used in collector test [kg/s]\n\n*Constraints*: POSITIVE\n\n*Required*: True"),
  	NULL},
 {"test_fluid", (getter)SWH_get_test_fluid,(setter)SWH_set_test_fluid,
-	"Fluid used in collector test, number.\n Water,Glycol; Constraints: INTEGER,MIN=0,MAX=1; Required.",
+	PyDoc_STR("type: Float\n\nFluid used in collector test\n\n*Info*: Water,Glycol\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: True"),
  	NULL},
 {"tilt", (getter)SWH_get_tilt,(setter)SWH_set_tilt,
-	"Collector tilt [deg], number.\n Constraints: MIN=0,MAX=90; Required.",
+	PyDoc_STR("type: Float\n\nCollector tilt [deg]\n\n*Constraints*: MIN=0,MAX=90\n\n*Required*: True"),
  	NULL},
 {"use_custom_mains", (getter)SWH_get_use_custom_mains,(setter)SWH_set_use_custom_mains,
-	"Use custom mains [%], number.\n Constraints: INTEGER,MIN=0,MAX=1; Required.",
+	PyDoc_STR("type: Float\n\nUse custom mains [%]\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: True"),
  	NULL},
 {"use_custom_set", (getter)SWH_get_use_custom_set,(setter)SWH_set_use_custom_set,
-	"Use custom set points [%], number.\n Constraints: INTEGER,MIN=0,MAX=1; Required.",
+	PyDoc_STR("type: Float\n\nUse custom set points [%]\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -774,7 +774,7 @@ static PyTypeObject SWH_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		SWH_methods,         /*tp_methods*/
@@ -784,7 +784,7 @@ static PyTypeObject SWH_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -955,25 +955,25 @@ Outputs_get_V_hot(OutputsObject *self, void *closure)
 static PyObject *
 Outputs_get_annual_Q_aux(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Swh_Outputs_annual_Q_aux_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Swh_Outputs_annual_Q_aux_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_annual_Q_auxonly(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Swh_Outputs_annual_Q_auxonly_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Swh_Outputs_annual_Q_auxonly_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_annual_Q_deliv(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Swh_Outputs_annual_Q_deliv_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Swh_Outputs_annual_Q_deliv_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_annual_energy(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Swh_Outputs_annual_energy_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Swh_Outputs_annual_energy_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -985,7 +985,7 @@ Outputs_get_beam(OutputsObject *self, void *closure)
 static PyObject *
 Outputs_get_capacity_factor(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Swh_Outputs_capacity_factor_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Swh_Outputs_capacity_factor_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -1009,7 +1009,7 @@ Outputs_get_gen(OutputsObject *self, void *closure)
 static PyObject *
 Outputs_get_kwh_per_kw(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Swh_Outputs_kwh_per_kw_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Swh_Outputs_kwh_per_kw_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -1051,120 +1051,120 @@ Outputs_get_shading_loss(OutputsObject *self, void *closure)
 static PyObject *
 Outputs_get_solar_fraction(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Swh_Outputs_solar_fraction_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Swh_Outputs_solar_fraction_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_ts_shift_hours(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Swh_Outputs_ts_shift_hours_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Swh_Outputs_ts_shift_hours_nget, self->data_ptr);
 }
 
 static PyGetSetDef Outputs_getset[] = {
 {"I_incident", (getter)Outputs_get_I_incident,(setter)0,
-	"Irradiance - Incident [W/m2], array.",
+	PyDoc_STR("type: Sequence\n\nIrradiance - Incident [W/m2]"),
  	NULL},
 {"I_transmitted", (getter)Outputs_get_I_transmitted,(setter)0,
-	"Irradiance - Transmitted [W/m2], array.",
+	PyDoc_STR("type: Sequence\n\nIrradiance - Transmitted [W/m2]"),
  	NULL},
 {"P_pump", (getter)Outputs_get_P_pump,(setter)0,
-	"P pump [kW], array.",
+	PyDoc_STR("type: Sequence\n\nP pump [kW]"),
  	NULL},
 {"Q_aux", (getter)Outputs_get_Q_aux,(setter)0,
-	"Q auxiliary [kW], array.",
+	PyDoc_STR("type: Sequence\n\nQ auxiliary [kW]"),
  	NULL},
 {"Q_auxonly", (getter)Outputs_get_Q_auxonly,(setter)0,
-	"Q auxiliary only [kW], array.",
+	PyDoc_STR("type: Sequence\n\nQ auxiliary only [kW]"),
  	NULL},
 {"Q_deliv", (getter)Outputs_get_Q_deliv,(setter)0,
-	"Q delivered [kW], array.",
+	PyDoc_STR("type: Sequence\n\nQ delivered [kW]"),
  	NULL},
 {"Q_loss", (getter)Outputs_get_Q_loss,(setter)0,
-	"Q loss [kW], array.",
+	PyDoc_STR("type: Sequence\n\nQ loss [kW]"),
  	NULL},
 {"Q_transmitted", (getter)Outputs_get_Q_transmitted,(setter)0,
-	"Q transmitted [kW], array.",
+	PyDoc_STR("type: Sequence\n\nQ transmitted [kW]"),
  	NULL},
 {"Q_useful", (getter)Outputs_get_Q_useful,(setter)0,
-	"Q useful [kW], array.",
+	PyDoc_STR("type: Sequence\n\nQ useful [kW]"),
  	NULL},
 {"T_amb", (getter)Outputs_get_T_amb,(setter)0,
-	"T ambient [C], array.",
+	PyDoc_STR("type: Sequence\n\nT ambient [C]"),
  	NULL},
 {"T_cold", (getter)Outputs_get_T_cold,(setter)0,
-	"T cold [C], array.",
+	PyDoc_STR("type: Sequence\n\nT cold [C]"),
  	NULL},
 {"T_deliv", (getter)Outputs_get_T_deliv,(setter)0,
-	"T delivered [C], array.",
+	PyDoc_STR("type: Sequence\n\nT delivered [C]"),
  	NULL},
 {"T_hot", (getter)Outputs_get_T_hot,(setter)0,
-	"T hot [C], array.",
+	PyDoc_STR("type: Sequence\n\nT hot [C]"),
  	NULL},
 {"T_mains", (getter)Outputs_get_T_mains,(setter)0,
-	"T mains [C], array.",
+	PyDoc_STR("type: Sequence\n\nT mains [C]"),
  	NULL},
 {"T_tank", (getter)Outputs_get_T_tank,(setter)0,
-	"T tank [C], array.",
+	PyDoc_STR("type: Sequence\n\nT tank [C]"),
  	NULL},
 {"V_cold", (getter)Outputs_get_V_cold,(setter)0,
-	"V cold [m3], array.",
+	PyDoc_STR("type: Sequence\n\nV cold [m3]"),
  	NULL},
 {"V_hot", (getter)Outputs_get_V_hot,(setter)0,
-	"V hot [m3], array.",
+	PyDoc_STR("type: Sequence\n\nV hot [m3]"),
  	NULL},
 {"annual_Q_aux", (getter)Outputs_get_annual_Q_aux,(setter)0,
-	"Q auxiliary [kWh], number.",
+	PyDoc_STR("type: Float\n\nQ auxiliary [kWh]"),
  	NULL},
 {"annual_Q_auxonly", (getter)Outputs_get_annual_Q_auxonly,(setter)0,
-	"Q auxiliary only [kWh], number.",
+	PyDoc_STR("type: Float\n\nQ auxiliary only [kWh]"),
  	NULL},
 {"annual_Q_deliv", (getter)Outputs_get_annual_Q_deliv,(setter)0,
-	"Q delivered [kWh], number.",
+	PyDoc_STR("type: Float\n\nQ delivered [kWh]"),
  	NULL},
 {"annual_energy", (getter)Outputs_get_annual_energy,(setter)0,
-	"System energy [kWh], number.",
+	PyDoc_STR("type: Float\n\nSystem energy [kWh]"),
  	NULL},
 {"beam", (getter)Outputs_get_beam,(setter)0,
-	"Irradiance - Beam [W/m2], array.",
+	PyDoc_STR("type: Sequence\n\nIrradiance - Beam [W/m2]"),
  	NULL},
 {"capacity_factor", (getter)Outputs_get_capacity_factor,(setter)0,
-	"Capacity factor [%], number.",
+	PyDoc_STR("type: Float\n\nCapacity factor [%]"),
  	NULL},
 {"diffuse", (getter)Outputs_get_diffuse,(setter)0,
-	"Irradiance - Diffuse [W/m2], array.",
+	PyDoc_STR("type: Sequence\n\nIrradiance - Diffuse [W/m2]"),
  	NULL},
 {"draw", (getter)Outputs_get_draw,(setter)0,
-	"Hot water draw [kg/hr], array.",
+	PyDoc_STR("type: Sequence\n\nHot water draw [kg/hr]"),
  	NULL},
 {"gen", (getter)Outputs_get_gen,(setter)0,
-	"System power generated [kW], array.",
+	PyDoc_STR("type: Sequence\n\nSystem power generated [kW]"),
  	NULL},
 {"kwh_per_kw", (getter)Outputs_get_kwh_per_kw,(setter)0,
-	"First year kWh/kW [kWh/kW], number.",
+	PyDoc_STR("type: Float\n\nFirst year kWh/kW [kWh/kW]"),
  	NULL},
 {"mode", (getter)Outputs_get_mode,(setter)0,
-	"Operation mode, array.",
+	PyDoc_STR("type: Sequence\n\nOperation mode"),
  	NULL},
 {"monthly_Q_aux", (getter)Outputs_get_monthly_Q_aux,(setter)0,
-	"Q auxiliary [kWh], array.",
+	PyDoc_STR("type: Sequence\n\nQ auxiliary [kWh]"),
  	NULL},
 {"monthly_Q_auxonly", (getter)Outputs_get_monthly_Q_auxonly,(setter)0,
-	"Q auxiliary only [kWh], array.",
+	PyDoc_STR("type: Sequence\n\nQ auxiliary only [kWh]"),
  	NULL},
 {"monthly_Q_deliv", (getter)Outputs_get_monthly_Q_deliv,(setter)0,
-	"Q delivered [kWh], array.",
+	PyDoc_STR("type: Sequence\n\nQ delivered [kWh]"),
  	NULL},
 {"monthly_energy", (getter)Outputs_get_monthly_energy,(setter)0,
-	"System energy [kWh], array.",
+	PyDoc_STR("type: Sequence\n\nSystem energy [kWh]"),
  	NULL},
 {"shading_loss", (getter)Outputs_get_shading_loss,(setter)0,
-	"Shading losses [%], array.",
+	PyDoc_STR("type: Sequence\n\nShading losses [%]"),
  	NULL},
 {"solar_fraction", (getter)Outputs_get_solar_fraction,(setter)0,
-	"Solar fraction, number.",
+	PyDoc_STR("type: Float\n\nSolar fraction"),
  	NULL},
 {"ts_shift_hours", (getter)Outputs_get_ts_shift_hours,(setter)0,
-	"Time offset for interpreting time series outputs [hours], number.",
+	PyDoc_STR("type: Float\n\nTime offset for interpreting time series outputs [hours]"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1197,7 +1197,7 @@ static PyTypeObject Outputs_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		Outputs_methods,         /*tp_methods*/
@@ -1207,7 +1207,7 @@ static PyTypeObject Outputs_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -1324,7 +1324,7 @@ static PyMethodDef Swh_methods[] = {
 		{"assign",            (PyCFunction)Swh_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs")},
 		{"export",            (PyCFunction)Swh_export,  METH_VARARGS,
-				PyDoc_STR("assign() -> None\n Export attributes into dictionary")},
+				PyDoc_STR("export() -> None\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -1364,11 +1364,11 @@ static PyTypeObject Swh_Type = {
 		0,                          /*tp_setattro*/
 		0,                          /*tp_as_buffer*/
 		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
-		"see html for help",        /*tp_doc*/
+		"Wrapper for `cmod_swh.cpp <https://github.com/NREL/ssc/blob/develop/ssc/cmod_swh.cpp>`_",        /*tp_doc*/
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		Swh_methods,      /*tp_methods*/
@@ -1378,7 +1378,7 @@ static PyTypeObject Swh_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,                          /*tp_new*/
@@ -1443,10 +1443,10 @@ static PyMethodDef SwhModule_methods[] = {
 		{"new",             Swh_new,         METH_VARARGS,
 				PyDoc_STR("new() -> new Swh object")},
 		{"default",             Swh_default,         METH_VARARGS,
-				PyDoc_STR("default(financial) -> new Swh object with financial model-specific default attributes\n"
-				"Options: SolarWaterHeatingCommercial\nSolarWaterHeatingLCOECalculator\nSolarWaterHeatingNone\nSolarWaterHeatingResidential")},
+				PyDoc_STR("default(config) -> new Swh object with financial model-specific default attributes\n"
+				"config options:\n\n- \"SolarWaterHeatingCommercial\"\n- \"SolarWaterHeatingLCOECalculator\"\n- \"SolarWaterHeatingNone\"\n- \"SolarWaterHeatingResidential\"")},
 		{"wrap",             Swh_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> new Swh object around existing PySSC data, taking over memory ownership")},
+				PyDoc_STR("wrap(ssc_data_t) -> new Swh object around existing PySSC data, taking over memory ownership\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to `wrap`")},
 		{NULL,              NULL}           /* sentinel */
 };
 

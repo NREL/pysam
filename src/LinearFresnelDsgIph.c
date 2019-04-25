@@ -78,7 +78,7 @@ Weather_set_file_name(WeatherObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef Weather_getset[] = {
 {"file_name", (getter)Weather_get_file_name,(setter)Weather_set_file_name,
-	"local weather file path, string.\n Constraints: LOCAL_FILE; Required.",
+	PyDoc_STR("type: Str\n\nlocal weather file path\n\n*Constraints*: LOCAL_FILE\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -111,7 +111,7 @@ static PyTypeObject Weather_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		Weather_methods,         /*tp_methods*/
@@ -121,7 +121,7 @@ static PyTypeObject Weather_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -226,13 +226,13 @@ Solarfield_set_AnnulusGas(SolarfieldObject *self, PyObject *value, void *closure
 static PyObject *
 Solarfield_get_ColAz(SolarfieldObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_LinearFresnelDsgIph_Solarfield_ColAz_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_LinearFresnelDsgIph_Solarfield_ColAz_nget, self->data_ptr);
 }
 
 static int
 Solarfield_set_ColAz(SolarfieldObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_LinearFresnelDsgIph_Solarfield_ColAz_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_LinearFresnelDsgIph_Solarfield_ColAz_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -442,13 +442,13 @@ Solarfield_set_IAM_T(SolarfieldObject *self, PyObject *value, void *closure)
 static PyObject *
 Solarfield_get_I_bn_des(SolarfieldObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_LinearFresnelDsgIph_Solarfield_I_bn_des_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_LinearFresnelDsgIph_Solarfield_I_bn_des_nget, self->data_ptr);
 }
 
 static int
 Solarfield_set_I_bn_des(SolarfieldObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_LinearFresnelDsgIph_Solarfield_I_bn_des_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_LinearFresnelDsgIph_Solarfield_I_bn_des_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -490,25 +490,25 @@ Solarfield_set_P_a(SolarfieldObject *self, PyObject *value, void *closure)
 static PyObject *
 Solarfield_get_P_turb_des(SolarfieldObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_LinearFresnelDsgIph_Solarfield_P_turb_des_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_LinearFresnelDsgIph_Solarfield_P_turb_des_nget, self->data_ptr);
 }
 
 static int
 Solarfield_set_P_turb_des(SolarfieldObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_LinearFresnelDsgIph_Solarfield_P_turb_des_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_LinearFresnelDsgIph_Solarfield_P_turb_des_nset, self->data_ptr);
 }
 
 static PyObject *
 Solarfield_get_Pipe_hl_coef(SolarfieldObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_LinearFresnelDsgIph_Solarfield_Pipe_hl_coef_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_LinearFresnelDsgIph_Solarfield_Pipe_hl_coef_nget, self->data_ptr);
 }
 
 static int
 Solarfield_set_Pipe_hl_coef(SolarfieldObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_LinearFresnelDsgIph_Solarfield_Pipe_hl_coef_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_LinearFresnelDsgIph_Solarfield_Pipe_hl_coef_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -526,13 +526,13 @@ Solarfield_set_Rough(SolarfieldObject *self, PyObject *value, void *closure)
 static PyObject *
 Solarfield_get_SCA_drives_elec(SolarfieldObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_LinearFresnelDsgIph_Solarfield_SCA_drives_elec_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_LinearFresnelDsgIph_Solarfield_SCA_drives_elec_nget, self->data_ptr);
 }
 
 static int
 Solarfield_set_SCA_drives_elec(SolarfieldObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_LinearFresnelDsgIph_Solarfield_SCA_drives_elec_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_LinearFresnelDsgIph_Solarfield_SCA_drives_elec_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -550,25 +550,25 @@ Solarfield_set_Shadowing(SolarfieldObject *self, PyObject *value, void *closure)
 static PyObject *
 Solarfield_get_T_amb_des_sf(SolarfieldObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_LinearFresnelDsgIph_Solarfield_T_amb_des_sf_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_LinearFresnelDsgIph_Solarfield_T_amb_des_sf_nget, self->data_ptr);
 }
 
 static int
 Solarfield_set_T_amb_des_sf(SolarfieldObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_LinearFresnelDsgIph_Solarfield_T_amb_des_sf_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_LinearFresnelDsgIph_Solarfield_T_amb_des_sf_nset, self->data_ptr);
 }
 
 static PyObject *
 Solarfield_get_T_fp(SolarfieldObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_LinearFresnelDsgIph_Solarfield_T_fp_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_LinearFresnelDsgIph_Solarfield_T_fp_nget, self->data_ptr);
 }
 
 static int
 Solarfield_set_T_fp(SolarfieldObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_LinearFresnelDsgIph_Solarfield_T_fp_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_LinearFresnelDsgIph_Solarfield_T_fp_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -598,13 +598,13 @@ Solarfield_set_TrackingError(SolarfieldObject *self, PyObject *value, void *clos
 static PyObject *
 Solarfield_get_V_wind_max(SolarfieldObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_LinearFresnelDsgIph_Solarfield_V_wind_max_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_LinearFresnelDsgIph_Solarfield_V_wind_max_nget, self->data_ptr);
 }
 
 static int
 Solarfield_set_V_wind_max(SolarfieldObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_LinearFresnelDsgIph_Solarfield_V_wind_max_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_LinearFresnelDsgIph_Solarfield_V_wind_max_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -706,13 +706,13 @@ Solarfield_set_dirt_mirror(SolarfieldObject *self, PyObject *value, void *closur
 static PyObject *
 Solarfield_get_e_startup(SolarfieldObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_LinearFresnelDsgIph_Solarfield_e_startup_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_LinearFresnelDsgIph_Solarfield_e_startup_nget, self->data_ptr);
 }
 
 static int
 Solarfield_set_e_startup(SolarfieldObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_LinearFresnelDsgIph_Solarfield_e_startup_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_LinearFresnelDsgIph_Solarfield_e_startup_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -730,85 +730,85 @@ Solarfield_set_error(SolarfieldObject *self, PyObject *value, void *closure)
 static PyObject *
 Solarfield_get_eta_pump(SolarfieldObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_LinearFresnelDsgIph_Solarfield_eta_pump_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_LinearFresnelDsgIph_Solarfield_eta_pump_nget, self->data_ptr);
 }
 
 static int
 Solarfield_set_eta_pump(SolarfieldObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_LinearFresnelDsgIph_Solarfield_eta_pump_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_LinearFresnelDsgIph_Solarfield_eta_pump_nset, self->data_ptr);
 }
 
 static PyObject *
 Solarfield_get_fP_hdr_c(SolarfieldObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_LinearFresnelDsgIph_Solarfield_fP_hdr_c_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_LinearFresnelDsgIph_Solarfield_fP_hdr_c_nget, self->data_ptr);
 }
 
 static int
 Solarfield_set_fP_hdr_c(SolarfieldObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_LinearFresnelDsgIph_Solarfield_fP_hdr_c_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_LinearFresnelDsgIph_Solarfield_fP_hdr_c_nset, self->data_ptr);
 }
 
 static PyObject *
 Solarfield_get_fP_hdr_h(SolarfieldObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_LinearFresnelDsgIph_Solarfield_fP_hdr_h_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_LinearFresnelDsgIph_Solarfield_fP_hdr_h_nget, self->data_ptr);
 }
 
 static int
 Solarfield_set_fP_hdr_h(SolarfieldObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_LinearFresnelDsgIph_Solarfield_fP_hdr_h_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_LinearFresnelDsgIph_Solarfield_fP_hdr_h_nset, self->data_ptr);
 }
 
 static PyObject *
 Solarfield_get_fP_sf_boil(SolarfieldObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_LinearFresnelDsgIph_Solarfield_fP_sf_boil_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_LinearFresnelDsgIph_Solarfield_fP_sf_boil_nget, self->data_ptr);
 }
 
 static int
 Solarfield_set_fP_sf_boil(SolarfieldObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_LinearFresnelDsgIph_Solarfield_fP_sf_boil_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_LinearFresnelDsgIph_Solarfield_fP_sf_boil_nset, self->data_ptr);
 }
 
 static PyObject *
 Solarfield_get_nLoops(SolarfieldObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_LinearFresnelDsgIph_Solarfield_nLoops_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_LinearFresnelDsgIph_Solarfield_nLoops_nget, self->data_ptr);
 }
 
 static int
 Solarfield_set_nLoops(SolarfieldObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_LinearFresnelDsgIph_Solarfield_nLoops_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_LinearFresnelDsgIph_Solarfield_nLoops_nset, self->data_ptr);
 }
 
 static PyObject *
 Solarfield_get_nModBoil(SolarfieldObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_LinearFresnelDsgIph_Solarfield_nModBoil_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_LinearFresnelDsgIph_Solarfield_nModBoil_nget, self->data_ptr);
 }
 
 static int
 Solarfield_set_nModBoil(SolarfieldObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_LinearFresnelDsgIph_Solarfield_nModBoil_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_LinearFresnelDsgIph_Solarfield_nModBoil_nset, self->data_ptr);
 }
 
 static PyObject *
 Solarfield_get_q_pb_des(SolarfieldObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_LinearFresnelDsgIph_Solarfield_q_pb_des_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_LinearFresnelDsgIph_Solarfield_q_pb_des_nget, self->data_ptr);
 }
 
 static int
 Solarfield_set_q_pb_des(SolarfieldObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_LinearFresnelDsgIph_Solarfield_q_pb_des_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_LinearFresnelDsgIph_Solarfield_q_pb_des_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -886,222 +886,222 @@ Solarfield_set_sh_eps_HCE4(SolarfieldObject *self, PyObject *value, void *closur
 static PyObject *
 Solarfield_get_theta_dep(SolarfieldObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_LinearFresnelDsgIph_Solarfield_theta_dep_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_LinearFresnelDsgIph_Solarfield_theta_dep_nget, self->data_ptr);
 }
 
 static int
 Solarfield_set_theta_dep(SolarfieldObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_LinearFresnelDsgIph_Solarfield_theta_dep_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_LinearFresnelDsgIph_Solarfield_theta_dep_nset, self->data_ptr);
 }
 
 static PyObject *
 Solarfield_get_theta_stow(SolarfieldObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_LinearFresnelDsgIph_Solarfield_theta_stow_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_LinearFresnelDsgIph_Solarfield_theta_stow_nget, self->data_ptr);
 }
 
 static int
 Solarfield_set_theta_stow(SolarfieldObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_LinearFresnelDsgIph_Solarfield_theta_stow_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_LinearFresnelDsgIph_Solarfield_theta_stow_nset, self->data_ptr);
 }
 
 static PyObject *
 Solarfield_get_x_b_des(SolarfieldObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_LinearFresnelDsgIph_Solarfield_x_b_des_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_LinearFresnelDsgIph_Solarfield_x_b_des_nget, self->data_ptr);
 }
 
 static int
 Solarfield_set_x_b_des(SolarfieldObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_LinearFresnelDsgIph_Solarfield_x_b_des_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_LinearFresnelDsgIph_Solarfield_x_b_des_nset, self->data_ptr);
 }
 
 static PyGetSetDef Solarfield_getset[] = {
 {"A_aperture", (getter)Solarfield_get_A_aperture,(setter)Solarfield_set_A_aperture,
-	"(boiler, SH) Reflective aperture area of the collector module [m^2], matrix.\n Required.",
+	PyDoc_STR("type: Sequence[Sequence]\n\n(boiler, SH) Reflective aperture area of the collector module [m^2]\n\n*Required*: True"),
  	NULL},
 {"AbsorberMaterial", (getter)Solarfield_get_AbsorberMaterial,(setter)Solarfield_set_AbsorberMaterial,
-	"(boiler, SH) Absorber material type [none], matrix.\n Required.",
+	PyDoc_STR("type: Sequence[Sequence]\n\n(boiler, SH) Absorber material type [none]\n\n*Required*: True"),
  	NULL},
 {"AnnulusGas", (getter)Solarfield_get_AnnulusGas,(setter)Solarfield_set_AnnulusGas,
-	"(boiler, SH) Annulus gas type {1=air; 26=Ar; 27=H2} (4: # field fracs) [none], matrix.\n Required.",
+	PyDoc_STR("type: Sequence[Sequence]\n\n(boiler, SH) Annulus gas type {1=air; 26=Ar; 27=H2} (4: # field fracs) [none]\n\n*Required*: True"),
  	NULL},
 {"ColAz", (getter)Solarfield_get_ColAz,(setter)Solarfield_set_ColAz,
-	"Collector azimuth angle [deg], number.\n Required.",
+	PyDoc_STR("type: Float\n\nCollector azimuth angle [deg]\n\n*Required*: True"),
  	NULL},
 {"D_2", (getter)Solarfield_get_D_2,(setter)Solarfield_set_D_2,
-	"(boiler, SH) The inner absorber tube diameter [m], matrix.\n Required.",
+	PyDoc_STR("type: Sequence[Sequence]\n\n(boiler, SH) The inner absorber tube diameter [m]\n\n*Required*: True"),
  	NULL},
 {"D_3", (getter)Solarfield_get_D_3,(setter)Solarfield_set_D_3,
-	"(boiler, SH) The outer absorber tube diameter [m], matrix.\n Required.",
+	PyDoc_STR("type: Sequence[Sequence]\n\n(boiler, SH) The outer absorber tube diameter [m]\n\n*Required*: True"),
  	NULL},
 {"D_4", (getter)Solarfield_get_D_4,(setter)Solarfield_set_D_4,
-	"(boiler, SH) The inner glass envelope diameter [m], matrix.\n Required.",
+	PyDoc_STR("type: Sequence[Sequence]\n\n(boiler, SH) The inner glass envelope diameter [m]\n\n*Required*: True"),
  	NULL},
 {"D_5", (getter)Solarfield_get_D_5,(setter)Solarfield_set_D_5,
-	"(boiler, SH) The outer glass envelope diameter [m], matrix.\n Required.",
+	PyDoc_STR("type: Sequence[Sequence]\n\n(boiler, SH) The outer glass envelope diameter [m]\n\n*Required*: True"),
  	NULL},
 {"D_p", (getter)Solarfield_get_D_p,(setter)Solarfield_set_D_p,
-	"(boiler, SH) The diameter of the absorber flow plug (optional) [m], matrix.\n Required.",
+	PyDoc_STR("type: Sequence[Sequence]\n\n(boiler, SH) The diameter of the absorber flow plug (optional) [m]\n\n*Required*: True"),
  	NULL},
 {"Design_loss", (getter)Solarfield_get_Design_loss,(setter)Solarfield_set_Design_loss,
-	"(boiler, SH) Receiver heat loss at design (4: # field fracs) [W/m], matrix.\n Required.",
+	PyDoc_STR("type: Sequence[Sequence]\n\n(boiler, SH) Receiver heat loss at design (4: # field fracs) [W/m]\n\n*Required*: True"),
  	NULL},
 {"Dirt_HCE", (getter)Solarfield_get_Dirt_HCE,(setter)Solarfield_set_Dirt_HCE,
-	"(boiler, SH) Loss due to dirt on the receiver envelope (4: # field fracs) [none], matrix.\n Required.",
+	PyDoc_STR("type: Sequence[Sequence]\n\n(boiler, SH) Loss due to dirt on the receiver envelope (4: # field fracs) [none]\n\n*Required*: True"),
  	NULL},
 {"EPSILON_4", (getter)Solarfield_get_EPSILON_4,(setter)Solarfield_set_EPSILON_4,
-	"(boiler, SH) Inner glass envelope emissivities (Pyrex) (4: # field fracs) [none], matrix.\n Required.",
+	PyDoc_STR("type: Sequence[Sequence]\n\n(boiler, SH) Inner glass envelope emissivities (Pyrex) (4: # field fracs) [none]\n\n*Required*: True"),
  	NULL},
 {"Flow_type", (getter)Solarfield_get_Flow_type,(setter)Solarfield_set_Flow_type,
-	"(boiler, SH) The flow type through the absorber [none], matrix.\n Required.",
+	PyDoc_STR("type: Sequence[Sequence]\n\n(boiler, SH) The flow type through the absorber [none]\n\n*Required*: True"),
  	NULL},
 {"GeomEffects", (getter)Solarfield_get_GeomEffects,(setter)Solarfield_set_GeomEffects,
-	"(boiler, SH) User-defined geometry effects derate [none], matrix.\n Required.",
+	PyDoc_STR("type: Sequence[Sequence]\n\n(boiler, SH) User-defined geometry effects derate [none]\n\n*Required*: True"),
  	NULL},
 {"GlazingIntactIn", (getter)Solarfield_get_GlazingIntactIn,(setter)Solarfield_set_GlazingIntactIn,
-	"(boiler, SH) The glazing intact flag {true=0; false=1} (4: # field fracs) [none], matrix.\n Required.",
+	PyDoc_STR("type: Sequence[Sequence]\n\n(boiler, SH) The glazing intact flag {true=0; false=1} (4: # field fracs) [none]\n\n*Required*: True"),
  	NULL},
 {"HCE_FieldFrac", (getter)Solarfield_get_HCE_FieldFrac,(setter)Solarfield_set_HCE_FieldFrac,
-	"(boiler, SH) The fraction of the field occupied by this HCE type (4: # field fracs) [none], matrix.\n Required.",
+	PyDoc_STR("type: Sequence[Sequence]\n\n(boiler, SH) The fraction of the field occupied by this HCE type (4: # field fracs) [none]\n\n*Required*: True"),
  	NULL},
 {"HLCharType", (getter)Solarfield_get_HLCharType,(setter)Solarfield_set_HLCharType,
-	"(boiler, SH) Flag indicating the heat loss model type {1=poly.; 2=Forristall} [none], matrix.\n Required.",
+	PyDoc_STR("type: Sequence[Sequence]\n\n(boiler, SH) Flag indicating the heat loss model type {1=poly.; 2=Forristall} [none]\n\n*Required*: True"),
  	NULL},
 {"HL_W", (getter)Solarfield_get_HL_W,(setter)Solarfield_set_HL_W,
-	"(boiler, SH) Heat loss coef adj wind velocity (0,1,2,3,4 order terms) [1/(m/s)^order], matrix.\n Required.",
+	PyDoc_STR("type: Sequence[Sequence]\n\n(boiler, SH) Heat loss coef adj wind velocity (0,1,2,3,4 order terms) [1/(m/s)^order]\n\n*Required*: True"),
  	NULL},
 {"HL_dT", (getter)Solarfield_get_HL_dT,(setter)Solarfield_set_HL_dT,
-	"(boiler, SH) Heat loss coefficient - HTF temperature (0,1,2,3,4 order terms) [W/m-K^order], matrix.\n Required.",
+	PyDoc_STR("type: Sequence[Sequence]\n\n(boiler, SH) Heat loss coefficient - HTF temperature (0,1,2,3,4 order terms) [W/m-K^order]\n\n*Required*: True"),
  	NULL},
 {"IAM_L", (getter)Solarfield_get_IAM_L,(setter)Solarfield_set_IAM_L,
-	"(boiler, SH) Longitudinal Incident angle modifiers (0,1,2,3,4 order terms) [none], matrix.\n Required.",
+	PyDoc_STR("type: Sequence[Sequence]\n\n(boiler, SH) Longitudinal Incident angle modifiers (0,1,2,3,4 order terms) [none]\n\n*Required*: True"),
  	NULL},
 {"IAM_T", (getter)Solarfield_get_IAM_T,(setter)Solarfield_set_IAM_T,
-	"(boiler, SH) Transverse Incident angle modifiers (0,1,2,3,4 order terms) [none], matrix.\n Required.",
+	PyDoc_STR("type: Sequence[Sequence]\n\n(boiler, SH) Transverse Incident angle modifiers (0,1,2,3,4 order terms) [none]\n\n*Required*: True"),
  	NULL},
 {"I_bn_des", (getter)Solarfield_get_I_bn_des,(setter)Solarfield_set_I_bn_des,
-	"Design point irradiation value [W/m2], number.\n Required.",
+	PyDoc_STR("type: Float\n\nDesign point irradiation value [W/m2]\n\n*Required*: True"),
  	NULL},
 {"L_col", (getter)Solarfield_get_L_col,(setter)Solarfield_set_L_col,
-	"(boiler, SH) Active length of the superheater section collector module [m], matrix.\n Required.",
+	PyDoc_STR("type: Sequence[Sequence]\n\n(boiler, SH) Active length of the superheater section collector module [m]\n\n*Required*: True"),
  	NULL},
 {"OptCharType", (getter)Solarfield_get_OptCharType,(setter)Solarfield_set_OptCharType,
-	"(boiler, SH) The optical characterization method [none], matrix.\n Required.",
+	PyDoc_STR("type: Sequence[Sequence]\n\n(boiler, SH) The optical characterization method [none]\n\n*Required*: True"),
  	NULL},
 {"P_a", (getter)Solarfield_get_P_a,(setter)Solarfield_set_P_a,
-	"(boiler, SH) Annulus gas pressure (4: # field fracs) [torr], matrix.\n Required.",
+	PyDoc_STR("type: Sequence[Sequence]\n\n(boiler, SH) Annulus gas pressure (4: # field fracs) [torr]\n\n*Required*: True"),
  	NULL},
 {"P_turb_des", (getter)Solarfield_get_P_turb_des,(setter)Solarfield_set_P_turb_des,
-	"Design-point turbine inlet pressure [bar], number.\n Required.",
+	PyDoc_STR("type: Float\n\nDesign-point turbine inlet pressure [bar]\n\n*Required*: True"),
  	NULL},
 {"Pipe_hl_coef", (getter)Solarfield_get_Pipe_hl_coef,(setter)Solarfield_set_Pipe_hl_coef,
-	"Loss coefficient from the header.. runner pipe.. and non-HCE pipin [W/m2-K], number.\n Required.",
+	PyDoc_STR("type: Float\n\nLoss coefficient from the header.. runner pipe.. and non-HCE pipin [W/m2-K]\n\n*Required*: True"),
  	NULL},
 {"Rough", (getter)Solarfield_get_Rough,(setter)Solarfield_set_Rough,
-	"(boiler, SH) Roughness of the internal surface [m], matrix.\n Required.",
+	PyDoc_STR("type: Sequence[Sequence]\n\n(boiler, SH) Roughness of the internal surface [m]\n\n*Required*: True"),
  	NULL},
 {"SCA_drives_elec", (getter)Solarfield_get_SCA_drives_elec,(setter)Solarfield_set_SCA_drives_elec,
-	"Tracking power.. in Watts per m2 [W/m2], number.\n Required.",
+	PyDoc_STR("type: Float\n\nTracking power.. in Watts per m2 [W/m2]\n\n*Required*: True"),
  	NULL},
 {"Shadowing", (getter)Solarfield_get_Shadowing,(setter)Solarfield_set_Shadowing,
-	"(boiler, SH) Receiver bellows shadowing loss factor (4: # field fracs) [none], matrix.\n Required.",
+	PyDoc_STR("type: Sequence[Sequence]\n\n(boiler, SH) Receiver bellows shadowing loss factor (4: # field fracs) [none]\n\n*Required*: True"),
  	NULL},
 {"T_amb_des_sf", (getter)Solarfield_get_T_amb_des_sf,(setter)Solarfield_set_T_amb_des_sf,
-	"Design-point ambient temperature [C], number.\n Required.",
+	PyDoc_STR("type: Float\n\nDesign-point ambient temperature [C]\n\n*Required*: True"),
  	NULL},
 {"T_fp", (getter)Solarfield_get_T_fp,(setter)Solarfield_set_T_fp,
-	"Freeze protection temperature (heat trace activation temperature) [C], number.\n Required.",
+	PyDoc_STR("type: Float\n\nFreeze protection temperature (heat trace activation temperature) [C]\n\n*Required*: True"),
  	NULL},
 {"Tau_envelope", (getter)Solarfield_get_Tau_envelope,(setter)Solarfield_set_Tau_envelope,
-	"(boiler, SH) Envelope transmittance (4: # field fracs) [none], matrix.\n Required.",
+	PyDoc_STR("type: Sequence[Sequence]\n\n(boiler, SH) Envelope transmittance (4: # field fracs) [none]\n\n*Required*: True"),
  	NULL},
 {"TrackingError", (getter)Solarfield_get_TrackingError,(setter)Solarfield_set_TrackingError,
-	"(boiler, SH) User-defined tracking error derate [none], matrix.\n Required.",
+	PyDoc_STR("type: Sequence[Sequence]\n\n(boiler, SH) User-defined tracking error derate [none]\n\n*Required*: True"),
  	NULL},
 {"V_wind_max", (getter)Solarfield_get_V_wind_max,(setter)Solarfield_set_V_wind_max,
-	"Maximum allowable wind velocity before safety stow [m/s], number.\n Required.",
+	PyDoc_STR("type: Float\n\nMaximum allowable wind velocity before safety stow [m/s]\n\n*Required*: True"),
  	NULL},
 {"alpha_abs", (getter)Solarfield_get_alpha_abs,(setter)Solarfield_set_alpha_abs,
-	"(boiler, SH) Absorber absorptance (4: # field fracs) [none], matrix.\n Required.",
+	PyDoc_STR("type: Sequence[Sequence]\n\n(boiler, SH) Absorber absorptance (4: # field fracs) [none]\n\n*Required*: True"),
  	NULL},
 {"alpha_env", (getter)Solarfield_get_alpha_env,(setter)Solarfield_set_alpha_env,
-	"(boiler, SH) Envelope absorptance (4: # field fracs) [none], matrix.\n Required.",
+	PyDoc_STR("type: Sequence[Sequence]\n\n(boiler, SH) Envelope absorptance (4: # field fracs) [none]\n\n*Required*: True"),
  	NULL},
 {"b_OpticalTable", (getter)Solarfield_get_b_OpticalTable,(setter)Solarfield_set_b_OpticalTable,
-	"Values of the optical efficiency table [none], matrix.\n Required.",
+	PyDoc_STR("type: Sequence[Sequence]\n\nValues of the optical efficiency table [none]\n\n*Required*: True"),
  	NULL},
 {"b_eps_HCE1", (getter)Solarfield_get_b_eps_HCE1,(setter)Solarfield_set_b_eps_HCE1,
-	"(temperature) Absorber emittance (eps) [none], matrix.\n Required.",
+	PyDoc_STR("type: Sequence[Sequence]\n\n(temperature) Absorber emittance (eps) [none]\n\n*Required*: True"),
  	NULL},
 {"b_eps_HCE2", (getter)Solarfield_get_b_eps_HCE2,(setter)Solarfield_set_b_eps_HCE2,
-	"(temperature) Absorber emittance (eps) [none], matrix.\n Required.",
+	PyDoc_STR("type: Sequence[Sequence]\n\n(temperature) Absorber emittance (eps) [none]\n\n*Required*: True"),
  	NULL},
 {"b_eps_HCE3", (getter)Solarfield_get_b_eps_HCE3,(setter)Solarfield_set_b_eps_HCE3,
-	"(temperature) Absorber emittance (eps) [none], matrix.\n Required.",
+	PyDoc_STR("type: Sequence[Sequence]\n\n(temperature) Absorber emittance (eps) [none]\n\n*Required*: True"),
  	NULL},
 {"b_eps_HCE4", (getter)Solarfield_get_b_eps_HCE4,(setter)Solarfield_set_b_eps_HCE4,
-	"(temperature) Absorber emittance (eps) [none], matrix.\n Required.",
+	PyDoc_STR("type: Sequence[Sequence]\n\n(temperature) Absorber emittance (eps) [none]\n\n*Required*: True"),
  	NULL},
 {"dirt_mirror", (getter)Solarfield_get_dirt_mirror,(setter)Solarfield_set_dirt_mirror,
-	"(boiler, SH) User-defined dirt on mirror derate [none], matrix.\n Required.",
+	PyDoc_STR("type: Sequence[Sequence]\n\n(boiler, SH) User-defined dirt on mirror derate [none]\n\n*Required*: True"),
  	NULL},
 {"e_startup", (getter)Solarfield_get_e_startup,(setter)Solarfield_set_e_startup,
-	"Thermal inertia contribution per sq meter of solar field [kJ/K-m2], number.\n Required.",
+	PyDoc_STR("type: Float\n\nThermal inertia contribution per sq meter of solar field [kJ/K-m2]\n\n*Required*: True"),
  	NULL},
 {"error", (getter)Solarfield_get_error,(setter)Solarfield_set_error,
-	"(boiler, SH) User-defined general optical error derate [none], matrix.\n Required.",
+	PyDoc_STR("type: Sequence[Sequence]\n\n(boiler, SH) User-defined general optical error derate [none]\n\n*Required*: True"),
  	NULL},
 {"eta_pump", (getter)Solarfield_get_eta_pump,(setter)Solarfield_set_eta_pump,
-	"Feedwater pump efficiency [none], number.\n Required.",
+	PyDoc_STR("type: Float\n\nFeedwater pump efficiency [none]\n\n*Required*: True"),
  	NULL},
 {"fP_hdr_c", (getter)Solarfield_get_fP_hdr_c,(setter)Solarfield_set_fP_hdr_c,
-	"Average design-point cold header pressure drop fraction [none], number.\n Required.",
+	PyDoc_STR("type: Float\n\nAverage design-point cold header pressure drop fraction [none]\n\n*Required*: True"),
  	NULL},
 {"fP_hdr_h", (getter)Solarfield_get_fP_hdr_h,(setter)Solarfield_set_fP_hdr_h,
-	"Average design-point hot header pressure drop fraction [none], number.\n Required.",
+	PyDoc_STR("type: Float\n\nAverage design-point hot header pressure drop fraction [none]\n\n*Required*: True"),
  	NULL},
 {"fP_sf_boil", (getter)Solarfield_get_fP_sf_boil,(setter)Solarfield_set_fP_sf_boil,
-	"Design-point pressure drop across the solar field boiler fraction [none], number.\n Required.",
+	PyDoc_STR("type: Float\n\nDesign-point pressure drop across the solar field boiler fraction [none]\n\n*Required*: True"),
  	NULL},
 {"nLoops", (getter)Solarfield_get_nLoops,(setter)Solarfield_set_nLoops,
-	"Number of loops [none], number.\n Required.",
+	PyDoc_STR("type: Float\n\nNumber of loops [none]\n\n*Required*: True"),
  	NULL},
 {"nModBoil", (getter)Solarfield_get_nModBoil,(setter)Solarfield_set_nModBoil,
-	"Number of modules in the boiler section [none], number.\n Constraints: INTEGER; Required.",
+	PyDoc_STR("type: Float\n\nNumber of modules in the boiler section [none]\n\n*Constraints*: INTEGER\n\n*Required*: True"),
  	NULL},
 {"q_pb_des", (getter)Solarfield_get_q_pb_des,(setter)Solarfield_set_q_pb_des,
-	"Design heat input to the power block [MW], number.\n Required.",
+	PyDoc_STR("type: Float\n\nDesign heat input to the power block [MW]\n\n*Required*: True"),
  	NULL},
 {"rho_mirror_clean", (getter)Solarfield_get_rho_mirror_clean,(setter)Solarfield_set_rho_mirror_clean,
-	"(boiler, SH) User-defined clean mirror reflectivity [none], matrix.\n Required.",
+	PyDoc_STR("type: Sequence[Sequence]\n\n(boiler, SH) User-defined clean mirror reflectivity [none]\n\n*Required*: True"),
  	NULL},
 {"sh_OpticalTable", (getter)Solarfield_get_sh_OpticalTable,(setter)Solarfield_set_sh_OpticalTable,
-	"Values of the optical efficiency table [none], matrix.\n Required.",
+	PyDoc_STR("type: Sequence[Sequence]\n\nValues of the optical efficiency table [none]\n\n*Required*: True"),
  	NULL},
 {"sh_eps_HCE1", (getter)Solarfield_get_sh_eps_HCE1,(setter)Solarfield_set_sh_eps_HCE1,
-	"(temperature) Absorber emittance (eps) [none], matrix.\n Required.",
+	PyDoc_STR("type: Sequence[Sequence]\n\n(temperature) Absorber emittance (eps) [none]\n\n*Required*: True"),
  	NULL},
 {"sh_eps_HCE2", (getter)Solarfield_get_sh_eps_HCE2,(setter)Solarfield_set_sh_eps_HCE2,
-	"(temperature) Absorber emittance (eps) [none], matrix.\n Required.",
+	PyDoc_STR("type: Sequence[Sequence]\n\n(temperature) Absorber emittance (eps) [none]\n\n*Required*: True"),
  	NULL},
 {"sh_eps_HCE3", (getter)Solarfield_get_sh_eps_HCE3,(setter)Solarfield_set_sh_eps_HCE3,
-	"(temperature) Absorber emittance (eps) [none], matrix.\n Required.",
+	PyDoc_STR("type: Sequence[Sequence]\n\n(temperature) Absorber emittance (eps) [none]\n\n*Required*: True"),
  	NULL},
 {"sh_eps_HCE4", (getter)Solarfield_get_sh_eps_HCE4,(setter)Solarfield_set_sh_eps_HCE4,
-	"(temperature) Absorber emittance (eps) [none], matrix.\n Required.",
+	PyDoc_STR("type: Sequence[Sequence]\n\n(temperature) Absorber emittance (eps) [none]\n\n*Required*: True"),
  	NULL},
 {"theta_dep", (getter)Solarfield_get_theta_dep,(setter)Solarfield_set_theta_dep,
-	"deploy angle [deg], number.\n Required.",
+	PyDoc_STR("type: Float\n\ndeploy angle [deg]\n\n*Required*: True"),
  	NULL},
 {"theta_stow", (getter)Solarfield_get_theta_stow,(setter)Solarfield_set_theta_stow,
-	"stow angle [deg], number.\n Required.",
+	PyDoc_STR("type: Float\n\nstow angle [deg]\n\n*Required*: True"),
  	NULL},
 {"x_b_des", (getter)Solarfield_get_x_b_des,(setter)Solarfield_set_x_b_des,
-	"Design point boiler outlet steam quality [none], number.\n Required.",
+	PyDoc_STR("type: Float\n\nDesign point boiler outlet steam quality [none]\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1134,7 +1134,7 @@ static PyTypeObject Solarfield_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		Solarfield_methods,         /*tp_methods*/
@@ -1144,7 +1144,7 @@ static PyTypeObject Solarfield_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -1213,33 +1213,33 @@ static PyMethodDef Powerblock_methods[] = {
 static PyObject *
 Powerblock_get_T_cold_ref(PowerblockObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_LinearFresnelDsgIph_Powerblock_T_cold_ref_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_LinearFresnelDsgIph_Powerblock_T_cold_ref_nget, self->data_ptr);
 }
 
 static int
 Powerblock_set_T_cold_ref(PowerblockObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_LinearFresnelDsgIph_Powerblock_T_cold_ref_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_LinearFresnelDsgIph_Powerblock_T_cold_ref_nset, self->data_ptr);
 }
 
 static PyObject *
 Powerblock_get_T_hot(PowerblockObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_LinearFresnelDsgIph_Powerblock_T_hot_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_LinearFresnelDsgIph_Powerblock_T_hot_nget, self->data_ptr);
 }
 
 static int
 Powerblock_set_T_hot(PowerblockObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_LinearFresnelDsgIph_Powerblock_T_hot_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_LinearFresnelDsgIph_Powerblock_T_hot_nset, self->data_ptr);
 }
 
 static PyGetSetDef Powerblock_getset[] = {
 {"T_cold_ref", (getter)Powerblock_get_T_cold_ref,(setter)Powerblock_set_T_cold_ref,
-	"Reference HTF outlet temperature at design [C], number.\n Required.",
+	PyDoc_STR("type: Float\n\nReference HTF outlet temperature at design [C]\n\n*Required*: True"),
  	NULL},
 {"T_hot", (getter)Powerblock_get_T_hot,(setter)Powerblock_set_T_hot,
-	"Hot HTF inlet temperature, from storage tank [C], number.\n Required.",
+	PyDoc_STR("type: Float\n\nHot HTF inlet temperature, from storage tank [C]\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1272,7 +1272,7 @@ static PyTypeObject Powerblock_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		Powerblock_methods,         /*tp_methods*/
@@ -1282,7 +1282,7 @@ static PyTypeObject Powerblock_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -1351,33 +1351,33 @@ static PyMethodDef Heliostat_methods[] = {
 static PyObject *
 Heliostat_get_csp_lf_sf_washes_per_year(HeliostatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_LinearFresnelDsgIph_Heliostat_csp_lf_sf_washes_per_year_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_LinearFresnelDsgIph_Heliostat_csp_lf_sf_washes_per_year_nget, self->data_ptr);
 }
 
 static int
 Heliostat_set_csp_lf_sf_washes_per_year(HeliostatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_LinearFresnelDsgIph_Heliostat_csp_lf_sf_washes_per_year_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_LinearFresnelDsgIph_Heliostat_csp_lf_sf_washes_per_year_nset, self->data_ptr);
 }
 
 static PyObject *
 Heliostat_get_csp_lf_sf_water_per_wash(HeliostatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_LinearFresnelDsgIph_Heliostat_csp_lf_sf_water_per_wash_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_LinearFresnelDsgIph_Heliostat_csp_lf_sf_water_per_wash_nget, self->data_ptr);
 }
 
 static int
 Heliostat_set_csp_lf_sf_water_per_wash(HeliostatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_LinearFresnelDsgIph_Heliostat_csp_lf_sf_water_per_wash_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_LinearFresnelDsgIph_Heliostat_csp_lf_sf_water_per_wash_nset, self->data_ptr);
 }
 
 static PyGetSetDef Heliostat_getset[] = {
 {"csp_lf_sf_washes_per_year", (getter)Heliostat_get_csp_lf_sf_washes_per_year,(setter)Heliostat_set_csp_lf_sf_washes_per_year,
-	"Mirror washing frequency [-/year], number.\n Required.",
+	PyDoc_STR("type: Float\n\nMirror washing frequency [-/year]\n\n*Required*: True"),
  	NULL},
 {"csp_lf_sf_water_per_wash", (getter)Heliostat_get_csp_lf_sf_water_per_wash,(setter)Heliostat_set_csp_lf_sf_water_per_wash,
-	"Water usage per wash [L/m2_aper], number.\n Required.",
+	PyDoc_STR("type: Float\n\nWater usage per wash [L/m2_aper]\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1410,7 +1410,7 @@ static PyTypeObject Heliostat_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		Heliostat_methods,         /*tp_methods*/
@@ -1420,7 +1420,7 @@ static PyTypeObject Heliostat_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -1489,18 +1489,18 @@ static PyMethodDef HeatSink_methods[] = {
 static PyObject *
 HeatSink_get_heat_sink_dP_frac(HeatSinkObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_LinearFresnelDsgIph_HeatSink_heat_sink_dP_frac_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_LinearFresnelDsgIph_HeatSink_heat_sink_dP_frac_nget, self->data_ptr);
 }
 
 static int
 HeatSink_set_heat_sink_dP_frac(HeatSinkObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_LinearFresnelDsgIph_HeatSink_heat_sink_dP_frac_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_LinearFresnelDsgIph_HeatSink_heat_sink_dP_frac_nset, self->data_ptr);
 }
 
 static PyGetSetDef HeatSink_getset[] = {
 {"heat_sink_dP_frac", (getter)HeatSink_get_heat_sink_dP_frac,(setter)HeatSink_set_heat_sink_dP_frac,
-	"Fractional pressure drop through heat sink, number.\n Required.",
+	PyDoc_STR("type: Float\n\nFractional pressure drop through heat sink\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1533,7 +1533,7 @@ static PyTypeObject HeatSink_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		HeatSink_methods,         /*tp_methods*/
@@ -1543,7 +1543,7 @@ static PyTypeObject HeatSink_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -1660,31 +1660,31 @@ Outputs_get_W_dot_sca_track(OutputsObject *self, void *closure)
 static PyObject *
 Outputs_get_annual_electricity_consumption(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_LinearFresnelDsgIph_Outputs_annual_electricity_consumption_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_LinearFresnelDsgIph_Outputs_annual_electricity_consumption_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_annual_energy(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_LinearFresnelDsgIph_Outputs_annual_energy_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_LinearFresnelDsgIph_Outputs_annual_energy_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_annual_field_energy(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_LinearFresnelDsgIph_Outputs_annual_field_energy_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_LinearFresnelDsgIph_Outputs_annual_field_energy_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_annual_thermal_consumption(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_LinearFresnelDsgIph_Outputs_annual_thermal_consumption_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_LinearFresnelDsgIph_Outputs_annual_thermal_consumption_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_annual_total_water_use(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_LinearFresnelDsgIph_Outputs_annual_total_water_use_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_LinearFresnelDsgIph_Outputs_annual_total_water_use_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -1881,139 +1881,139 @@ Outputs_get_x_rec_hot_out(OutputsObject *self, void *closure)
 
 static PyGetSetDef Outputs_getset[] = {
 {"T_field_cold_in", (getter)Outputs_get_T_field_cold_in,(setter)0,
-	"Field timestep-averaged inlet temperature [C], array.",
+	PyDoc_STR("type: Sequence\n\nField timestep-averaged inlet temperature [C]"),
  	NULL},
 {"T_field_hot_out", (getter)Outputs_get_T_field_hot_out,(setter)0,
-	"Field timestep-averaged outlet temperature [C], array.",
+	PyDoc_STR("type: Sequence\n\nField timestep-averaged outlet temperature [C]"),
  	NULL},
 {"T_rec_cold_in", (getter)Outputs_get_T_rec_cold_in,(setter)0,
-	"Loop timestep-averaged inlet temperature [C], array.",
+	PyDoc_STR("type: Sequence\n\nLoop timestep-averaged inlet temperature [C]"),
  	NULL},
 {"T_rec_hot_out", (getter)Outputs_get_T_rec_hot_out,(setter)0,
-	"Loop timestep-averaged outlet temperature [C], array.",
+	PyDoc_STR("type: Sequence\n\nLoop timestep-averaged outlet temperature [C]"),
  	NULL},
 {"W_dot_field_pump", (getter)Outputs_get_W_dot_field_pump,(setter)0,
-	"Field htf pumping power [MWe], array.",
+	PyDoc_STR("type: Sequence\n\nField htf pumping power [MWe]"),
  	NULL},
 {"W_dot_heat_sink_pump", (getter)Outputs_get_W_dot_heat_sink_pump,(setter)0,
-	"Heat sink pumping power [MWe], array.",
+	PyDoc_STR("type: Sequence\n\nHeat sink pumping power [MWe]"),
  	NULL},
 {"W_dot_parasitic_tot", (getter)Outputs_get_W_dot_parasitic_tot,(setter)0,
-	"System total electrical parasitic [MWe], array.",
+	PyDoc_STR("type: Sequence\n\nSystem total electrical parasitic [MWe]"),
  	NULL},
 {"W_dot_sca_track", (getter)Outputs_get_W_dot_sca_track,(setter)0,
-	"Field collector tracking power [MWe], array.",
+	PyDoc_STR("type: Sequence\n\nField collector tracking power [MWe]"),
  	NULL},
 {"annual_electricity_consumption", (getter)Outputs_get_annual_electricity_consumption,(setter)0,
-	"Annual electricity consumptoin w/ avail derate [kWe-hr], number.",
+	PyDoc_STR("type: Float\n\nAnnual electricity consumptoin w/ avail derate [kWe-hr]"),
  	NULL},
 {"annual_energy", (getter)Outputs_get_annual_energy,(setter)0,
-	"Annual Net Thermal Energy Production w/ avail derate [kWt-hr], number.",
+	PyDoc_STR("type: Float\n\nAnnual Net Thermal Energy Production w/ avail derate [kWt-hr]"),
  	NULL},
 {"annual_field_energy", (getter)Outputs_get_annual_field_energy,(setter)0,
-	"Annual Gross Thermal Energy Production w/ avail derate [kWt-hr], number.",
+	PyDoc_STR("type: Float\n\nAnnual Gross Thermal Energy Production w/ avail derate [kWt-hr]"),
  	NULL},
 {"annual_thermal_consumption", (getter)Outputs_get_annual_thermal_consumption,(setter)0,
-	"Annual thermal freeze protection required [kWt-hr], number.",
+	PyDoc_STR("type: Float\n\nAnnual thermal freeze protection required [kWt-hr]"),
  	NULL},
 {"annual_total_water_use", (getter)Outputs_get_annual_total_water_use,(setter)0,
-	"Total Annual Water Usage [m^3], number.",
+	PyDoc_STR("type: Float\n\nTotal Annual Water Usage [m^3]"),
  	NULL},
 {"beam", (getter)Outputs_get_beam,(setter)0,
-	"Resource Beam normal irradiance [W/m2], array.",
+	PyDoc_STR("type: Sequence\n\nResource Beam normal irradiance [W/m2]"),
  	NULL},
 {"defocus", (getter)Outputs_get_defocus,(setter)0,
-	"Field collector focus fraction, array.",
+	PyDoc_STR("type: Sequence\n\nField collector focus fraction"),
  	NULL},
 {"deltaP_field", (getter)Outputs_get_deltaP_field,(setter)0,
-	"Field pressure drop [bar], array.",
+	PyDoc_STR("type: Sequence\n\nField pressure drop [bar]"),
  	NULL},
 {"e_dot_field_int_energy", (getter)Outputs_get_e_dot_field_int_energy,(setter)0,
-	"Field change in material/htf internal energy [MWt], array.",
+	PyDoc_STR("type: Sequence\n\nField change in material/htf internal energy [MWt]"),
  	NULL},
 {"eta_opt_ave", (getter)Outputs_get_eta_opt_ave,(setter)0,
-	"Field optical efficiency before defocus [deg], array.",
+	PyDoc_STR("type: Sequence\n\nField optical efficiency before defocus [deg]"),
  	NULL},
 {"gen", (getter)Outputs_get_gen,(setter)0,
-	"System power generated [kW], array.",
+	PyDoc_STR("type: Sequence\n\nSystem power generated [kW]"),
  	NULL},
 {"hour_day", (getter)Outputs_get_hour_day,(setter)0,
-	"Resource Hour of Day, array.",
+	PyDoc_STR("type: Sequence\n\nResource Hour of Day"),
  	NULL},
 {"m_dot_field", (getter)Outputs_get_m_dot_field,(setter)0,
-	"Field total mass flow rate [kg/s], array.",
+	PyDoc_STR("type: Sequence\n\nField total mass flow rate [kg/s]"),
  	NULL},
 {"m_dot_loop", (getter)Outputs_get_m_dot_loop,(setter)0,
-	"Receiver mass flow rate [kg/s], array.",
+	PyDoc_STR("type: Sequence\n\nReceiver mass flow rate [kg/s]"),
  	NULL},
 {"month", (getter)Outputs_get_month,(setter)0,
-	"Resource Month, array.",
+	PyDoc_STR("type: Sequence\n\nResource Month"),
  	NULL},
 {"op_mode_1", (getter)Outputs_get_op_mode_1,(setter)0,
-	"1st operating mode, array.",
+	PyDoc_STR("type: Sequence\n\n1st operating mode"),
  	NULL},
 {"op_mode_2", (getter)Outputs_get_op_mode_2,(setter)0,
-	"2nd op. mode, if applicable, array.",
+	PyDoc_STR("type: Sequence\n\n2nd op. mode, if applicable"),
  	NULL},
 {"op_mode_3", (getter)Outputs_get_op_mode_3,(setter)0,
-	"3rd op. mode, if applicable, array.",
+	PyDoc_STR("type: Sequence\n\n3rd op. mode, if applicable"),
  	NULL},
 {"pres", (getter)Outputs_get_pres,(setter)0,
-	"Resource Pressure [mbar], array.",
+	PyDoc_STR("type: Sequence\n\nResource Pressure [mbar]"),
  	NULL},
 {"q_dot_freeze_prot", (getter)Outputs_get_q_dot_freeze_prot,(setter)0,
-	"Field freeze protection required [MWt], array.",
+	PyDoc_STR("type: Sequence\n\nField freeze protection required [MWt]"),
  	NULL},
 {"q_dot_piping_loss", (getter)Outputs_get_q_dot_piping_loss,(setter)0,
-	"Field piping thermal losses [MWt], array.",
+	PyDoc_STR("type: Sequence\n\nField piping thermal losses [MWt]"),
  	NULL},
 {"q_dot_rec_abs", (getter)Outputs_get_q_dot_rec_abs,(setter)0,
-	"Receiver thermal power absorbed [MWt], array.",
+	PyDoc_STR("type: Sequence\n\nReceiver thermal power absorbed [MWt]"),
  	NULL},
 {"q_dot_rec_inc", (getter)Outputs_get_q_dot_rec_inc,(setter)0,
-	"Receiver thermal power incident [MWt], array.",
+	PyDoc_STR("type: Sequence\n\nReceiver thermal power incident [MWt]"),
  	NULL},
 {"q_dot_rec_thermal_loss", (getter)Outputs_get_q_dot_rec_thermal_loss,(setter)0,
-	"Receiver thermal losses [MWt], array.",
+	PyDoc_STR("type: Sequence\n\nReceiver thermal losses [MWt]"),
  	NULL},
 {"q_dot_sf_out", (getter)Outputs_get_q_dot_sf_out,(setter)0,
-	"Field thermal power leaving in steam [MWt], array.",
+	PyDoc_STR("type: Sequence\n\nField thermal power leaving in steam [MWt]"),
  	NULL},
 {"q_dot_to_heat_sink", (getter)Outputs_get_q_dot_to_heat_sink,(setter)0,
-	"Heat sink thermal power [MWt], array.",
+	PyDoc_STR("type: Sequence\n\nHeat sink thermal power [MWt]"),
  	NULL},
 {"q_inc_sf_tot", (getter)Outputs_get_q_inc_sf_tot,(setter)0,
-	"Field thermal power incident [MWt], array.",
+	PyDoc_STR("type: Sequence\n\nField thermal power incident [MWt]"),
  	NULL},
 {"solazi", (getter)Outputs_get_solazi,(setter)0,
-	"Resource Solar Azimuth [deg], array.",
+	PyDoc_STR("type: Sequence\n\nResource Solar Azimuth [deg]"),
  	NULL},
 {"solzen", (getter)Outputs_get_solzen,(setter)0,
-	"Resource Solar Zenith [deg], array.",
+	PyDoc_STR("type: Sequence\n\nResource Solar Zenith [deg]"),
  	NULL},
 {"tdry", (getter)Outputs_get_tdry,(setter)0,
-	"Resource Dry bulb temperature [C], array.",
+	PyDoc_STR("type: Sequence\n\nResource Dry bulb temperature [C]"),
  	NULL},
 {"theta_longitudinal", (getter)Outputs_get_theta_longitudinal,(setter)0,
-	"Field traverse incidence angle [deg], array.",
+	PyDoc_STR("type: Sequence\n\nField traverse incidence angle [deg]"),
  	NULL},
 {"theta_traverse", (getter)Outputs_get_theta_traverse,(setter)0,
-	"Field traverse incidence angle [deg], array.",
+	PyDoc_STR("type: Sequence\n\nField traverse incidence angle [deg]"),
  	NULL},
 {"time_hr", (getter)Outputs_get_time_hr,(setter)0,
-	"Time at end of timestep [hr], array.",
+	PyDoc_STR("type: Sequence\n\nTime at end of timestep [hr]"),
  	NULL},
 {"twet", (getter)Outputs_get_twet,(setter)0,
-	"Resource Wet bulb temperature [C], array.",
+	PyDoc_STR("type: Sequence\n\nResource Wet bulb temperature [C]"),
  	NULL},
 {"wspd", (getter)Outputs_get_wspd,(setter)0,
-	"Resource Wind Speed [m/s], array.",
+	PyDoc_STR("type: Sequence\n\nResource Wind Speed [m/s]"),
  	NULL},
 {"x_field_hot_out", (getter)Outputs_get_x_field_hot_out,(setter)0,
-	"Field timestep-averaged outlet quality, array.",
+	PyDoc_STR("type: Sequence\n\nField timestep-averaged outlet quality"),
  	NULL},
 {"x_rec_hot_out", (getter)Outputs_get_x_rec_hot_out,(setter)0,
-	"Loop timestep-averaged outlet quality, array.",
+	PyDoc_STR("type: Sequence\n\nLoop timestep-averaged outlet quality"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -2046,7 +2046,7 @@ static PyTypeObject Outputs_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		Outputs_methods,         /*tp_methods*/
@@ -2056,7 +2056,7 @@ static PyTypeObject Outputs_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -2185,7 +2185,7 @@ static PyMethodDef LinearFresnelDsgIph_methods[] = {
 		{"assign",            (PyCFunction)LinearFresnelDsgIph_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs")},
 		{"export",            (PyCFunction)LinearFresnelDsgIph_export,  METH_VARARGS,
-				PyDoc_STR("assign() -> None\n Export attributes into dictionary")},
+				PyDoc_STR("export() -> None\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -2225,11 +2225,11 @@ static PyTypeObject LinearFresnelDsgIph_Type = {
 		0,                          /*tp_setattro*/
 		0,                          /*tp_as_buffer*/
 		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
-		"see html for help",        /*tp_doc*/
+		"Wrapper for `cmod_linear_fresnel_dsg_iph.cpp <https://github.com/NREL/ssc/blob/develop/ssc/cmod_linear_fresnel_dsg_iph.cpp>`_",        /*tp_doc*/
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		LinearFresnelDsgIph_methods,      /*tp_methods*/
@@ -2239,7 +2239,7 @@ static PyTypeObject LinearFresnelDsgIph_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,                          /*tp_new*/
@@ -2304,10 +2304,10 @@ static PyMethodDef LinearFresnelDsgIphModule_methods[] = {
 		{"new",             LinearFresnelDsgIph_new,         METH_VARARGS,
 				PyDoc_STR("new() -> new LinearFresnelDsgIph object")},
 		{"default",             LinearFresnelDsgIph_default,         METH_VARARGS,
-				PyDoc_STR("default(financial) -> new LinearFresnelDsgIph object with financial model-specific default attributes\n"
-				"Options: DSGLIPHLCOHCalculator\nDSGLIPHNone")},
+				PyDoc_STR("default(config) -> new LinearFresnelDsgIph object with financial model-specific default attributes\n"
+				"config options:\n\n- \"DSGLIPHLCOHCalculator\"\n- \"DSGLIPHNone\"")},
 		{"wrap",             LinearFresnelDsgIph_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> new LinearFresnelDsgIph object around existing PySSC data, taking over memory ownership")},
+				PyDoc_STR("wrap(ssc_data_t) -> new LinearFresnelDsgIph object around existing PySSC data, taking over memory ownership\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to `wrap`")},
 		{NULL,              NULL}           /* sentinel */
 };
 

@@ -67,78 +67,78 @@ static PyMethodDef SimpleLCOE_methods[] = {
 static PyObject *
 SimpleLCOE_get_annual_energy(SimpleLCOEObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Lcoefcr_SimpleLCOE_annual_energy_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Lcoefcr_SimpleLCOE_annual_energy_nget, self->data_ptr);
 }
 
 static int
 SimpleLCOE_set_annual_energy(SimpleLCOEObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Lcoefcr_SimpleLCOE_annual_energy_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Lcoefcr_SimpleLCOE_annual_energy_nset, self->data_ptr);
 }
 
 static PyObject *
 SimpleLCOE_get_capital_cost(SimpleLCOEObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Lcoefcr_SimpleLCOE_capital_cost_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Lcoefcr_SimpleLCOE_capital_cost_nget, self->data_ptr);
 }
 
 static int
 SimpleLCOE_set_capital_cost(SimpleLCOEObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Lcoefcr_SimpleLCOE_capital_cost_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Lcoefcr_SimpleLCOE_capital_cost_nset, self->data_ptr);
 }
 
 static PyObject *
 SimpleLCOE_get_fixed_charge_rate(SimpleLCOEObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Lcoefcr_SimpleLCOE_fixed_charge_rate_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Lcoefcr_SimpleLCOE_fixed_charge_rate_nget, self->data_ptr);
 }
 
 static int
 SimpleLCOE_set_fixed_charge_rate(SimpleLCOEObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Lcoefcr_SimpleLCOE_fixed_charge_rate_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Lcoefcr_SimpleLCOE_fixed_charge_rate_nset, self->data_ptr);
 }
 
 static PyObject *
 SimpleLCOE_get_fixed_operating_cost(SimpleLCOEObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Lcoefcr_SimpleLCOE_fixed_operating_cost_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Lcoefcr_SimpleLCOE_fixed_operating_cost_nget, self->data_ptr);
 }
 
 static int
 SimpleLCOE_set_fixed_operating_cost(SimpleLCOEObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Lcoefcr_SimpleLCOE_fixed_operating_cost_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Lcoefcr_SimpleLCOE_fixed_operating_cost_nset, self->data_ptr);
 }
 
 static PyObject *
 SimpleLCOE_get_variable_operating_cost(SimpleLCOEObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Lcoefcr_SimpleLCOE_variable_operating_cost_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Lcoefcr_SimpleLCOE_variable_operating_cost_nget, self->data_ptr);
 }
 
 static int
 SimpleLCOE_set_variable_operating_cost(SimpleLCOEObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Lcoefcr_SimpleLCOE_variable_operating_cost_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Lcoefcr_SimpleLCOE_variable_operating_cost_nset, self->data_ptr);
 }
 
 static PyGetSetDef SimpleLCOE_getset[] = {
 {"annual_energy", (getter)SimpleLCOE_get_annual_energy,(setter)SimpleLCOE_set_annual_energy,
-	"Annual energy production [kWh], number.\n Required.",
+	PyDoc_STR("type: Float\n\nAnnual energy production [kWh]\n\n*Required*: True"),
  	NULL},
 {"capital_cost", (getter)SimpleLCOE_get_capital_cost,(setter)SimpleLCOE_set_capital_cost,
-	"Capital cost [$], number.\n Required.",
+	PyDoc_STR("type: Float\n\nCapital cost [$]\n\n*Required*: True"),
  	NULL},
 {"fixed_charge_rate", (getter)SimpleLCOE_get_fixed_charge_rate,(setter)SimpleLCOE_set_fixed_charge_rate,
-	"Fixed charge rate, number.\n Required.",
+	PyDoc_STR("type: Float\n\nFixed charge rate\n\n*Required*: True"),
  	NULL},
 {"fixed_operating_cost", (getter)SimpleLCOE_get_fixed_operating_cost,(setter)SimpleLCOE_set_fixed_operating_cost,
-	"Annual fixed operating cost [$], number.\n Required.",
+	PyDoc_STR("type: Float\n\nAnnual fixed operating cost [$]\n\n*Required*: True"),
  	NULL},
 {"variable_operating_cost", (getter)SimpleLCOE_get_variable_operating_cost,(setter)SimpleLCOE_set_variable_operating_cost,
-	"Annual variable operating cost [$/kWh], number.\n Required.",
+	PyDoc_STR("type: Float\n\nAnnual variable operating cost [$/kWh]\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -171,7 +171,7 @@ static PyTypeObject SimpleLCOE_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		SimpleLCOE_methods,         /*tp_methods*/
@@ -181,7 +181,7 @@ static PyTypeObject SimpleLCOE_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -250,12 +250,12 @@ static PyMethodDef Outputs_methods[] = {
 static PyObject *
 Outputs_get_lcoe_fcr(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Lcoefcr_Outputs_lcoe_fcr_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Lcoefcr_Outputs_lcoe_fcr_nget, self->data_ptr);
 }
 
 static PyGetSetDef Outputs_getset[] = {
 {"lcoe_fcr", (getter)Outputs_get_lcoe_fcr,(setter)0,
-	"Levelized cost of energy [$/kWh], number.",
+	PyDoc_STR("type: Float\n\nLevelized cost of energy [$/kWh]"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -288,7 +288,7 @@ static PyTypeObject Outputs_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		Outputs_methods,         /*tp_methods*/
@@ -298,7 +298,7 @@ static PyTypeObject Outputs_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -396,7 +396,7 @@ static PyMethodDef Lcoefcr_methods[] = {
 		{"assign",            (PyCFunction)Lcoefcr_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs")},
 		{"export",            (PyCFunction)Lcoefcr_export,  METH_VARARGS,
-				PyDoc_STR("assign() -> None\n Export attributes into dictionary")},
+				PyDoc_STR("export() -> None\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -436,11 +436,11 @@ static PyTypeObject Lcoefcr_Type = {
 		0,                          /*tp_setattro*/
 		0,                          /*tp_as_buffer*/
 		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
-		"see html for help",        /*tp_doc*/
+		"Wrapper for `cmod_lcoefcr.cpp <https://github.com/NREL/ssc/blob/develop/ssc/cmod_lcoefcr.cpp>`_",        /*tp_doc*/
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		Lcoefcr_methods,      /*tp_methods*/
@@ -450,7 +450,7 @@ static PyTypeObject Lcoefcr_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,                          /*tp_new*/
@@ -515,10 +515,10 @@ static PyMethodDef LcoefcrModule_methods[] = {
 		{"new",             Lcoefcr_new,         METH_VARARGS,
 				PyDoc_STR("new() -> new Lcoefcr object")},
 		{"default",             Lcoefcr_default,         METH_VARARGS,
-				PyDoc_STR("default(financial) -> new Lcoefcr object with financial model-specific default attributes\n"
-				"Options: BiopowerLCOECalculator\nDSGLIPHLCOHCalculator\nDSLFLCOECalculator\nDishStirlingLCOECalculator\nEmpiricalTroughLCOECalculator\nFlatPlatePVLCOECalculator\nGenericCSPSystemLCOECalculator\nGenericSystemLCOECalculator\nGeothermalPowerLCOECalculator\nHighXConcentratingPVLCOECalculator\nMSLFLCOECalculator\nPVWattsLCOECalculator\nPhysicalTroughIPHLCOHCalculator\nPhysicalTroughLCOECalculator\nSolarWaterHeatingLCOECalculator\nWindPowerLCOECalculator")},
+				PyDoc_STR("default(config) -> new Lcoefcr object with financial model-specific default attributes\n"
+				"config options:\n\n- \"BiopowerLCOECalculator\"\n- \"DSGLIPHLCOHCalculator\"\n- \"DSLFLCOECalculator\"\n- \"DishStirlingLCOECalculator\"\n- \"EmpiricalTroughLCOECalculator\"\n- \"FlatPlatePVLCOECalculator\"\n- \"GenericCSPSystemLCOECalculator\"\n- \"GenericSystemLCOECalculator\"\n- \"GeothermalPowerLCOECalculator\"\n- \"HighXConcentratingPVLCOECalculator\"\n- \"MSLFLCOECalculator\"\n- \"PVWattsLCOECalculator\"\n- \"PhysicalTroughIPHLCOHCalculator\"\n- \"PhysicalTroughLCOECalculator\"\n- \"SolarWaterHeatingLCOECalculator\"\n- \"WindPowerLCOECalculator\"")},
 		{"wrap",             Lcoefcr_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> new Lcoefcr object around existing PySSC data, taking over memory ownership")},
+				PyDoc_STR("wrap(ssc_data_t) -> new Lcoefcr object around existing PySSC data, taking over memory ownership\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to `wrap`")},
 		{NULL,              NULL}           /* sentinel */
 };
 

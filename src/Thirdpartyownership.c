@@ -73,31 +73,31 @@ Depreciation_get_depr_fed_custom(DepreciationObject *self, void *closure)
 static int
 Depreciation_set_depr_fed_custom(DepreciationObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Thirdpartyownership_Depreciation_depr_fed_custom_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Thirdpartyownership_Depreciation_depr_fed_custom_aset, self->data_ptr);
 }
 
 static PyObject *
 Depreciation_get_depr_fed_sl_years(DepreciationObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Thirdpartyownership_Depreciation_depr_fed_sl_years_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Thirdpartyownership_Depreciation_depr_fed_sl_years_nget, self->data_ptr);
 }
 
 static int
 Depreciation_set_depr_fed_sl_years(DepreciationObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Thirdpartyownership_Depreciation_depr_fed_sl_years_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Thirdpartyownership_Depreciation_depr_fed_sl_years_nset, self->data_ptr);
 }
 
 static PyObject *
 Depreciation_get_depr_fed_type(DepreciationObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Thirdpartyownership_Depreciation_depr_fed_type_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Thirdpartyownership_Depreciation_depr_fed_type_nget, self->data_ptr);
 }
 
 static int
 Depreciation_set_depr_fed_type(DepreciationObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Thirdpartyownership_Depreciation_depr_fed_type_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Thirdpartyownership_Depreciation_depr_fed_type_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -109,51 +109,51 @@ Depreciation_get_depr_sta_custom(DepreciationObject *self, void *closure)
 static int
 Depreciation_set_depr_sta_custom(DepreciationObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Thirdpartyownership_Depreciation_depr_sta_custom_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Thirdpartyownership_Depreciation_depr_sta_custom_aset, self->data_ptr);
 }
 
 static PyObject *
 Depreciation_get_depr_sta_sl_years(DepreciationObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Thirdpartyownership_Depreciation_depr_sta_sl_years_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Thirdpartyownership_Depreciation_depr_sta_sl_years_nget, self->data_ptr);
 }
 
 static int
 Depreciation_set_depr_sta_sl_years(DepreciationObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Thirdpartyownership_Depreciation_depr_sta_sl_years_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Thirdpartyownership_Depreciation_depr_sta_sl_years_nset, self->data_ptr);
 }
 
 static PyObject *
 Depreciation_get_depr_sta_type(DepreciationObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Thirdpartyownership_Depreciation_depr_sta_type_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Thirdpartyownership_Depreciation_depr_sta_type_nget, self->data_ptr);
 }
 
 static int
 Depreciation_set_depr_sta_type(DepreciationObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Thirdpartyownership_Depreciation_depr_sta_type_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Thirdpartyownership_Depreciation_depr_sta_type_nset, self->data_ptr);
 }
 
 static PyGetSetDef Depreciation_getset[] = {
 {"depr_fed_custom", (getter)Depreciation_get_depr_fed_custom,(setter)Depreciation_set_depr_fed_custom,
-	"Federal custom depreciation [%/year], array.\n Required if depr_fed_type=3.",
+	PyDoc_STR("type: Sequence\n\nFederal custom depreciation [%/year]\n\n*Required*: set to 3 if not provided."),
  	NULL},
 {"depr_fed_sl_years", (getter)Depreciation_get_depr_fed_sl_years,(setter)Depreciation_set_depr_fed_sl_years,
-	"Federal depreciation straight-line Years [years], number.\n Constraints: INTEGER,POSITIVE; Required if depr_fed_type=2.",
+	PyDoc_STR("type: Float\n\nFederal depreciation straight-line Years [years]\n\n*Constraints*: INTEGER,POSITIVE\n\n*Required*: set to 2 if not provided."),
  	NULL},
 {"depr_fed_type", (getter)Depreciation_get_depr_fed_type,(setter)Depreciation_set_depr_fed_type,
-	"Federal depreciation type, number.\n 0=none,1=macrs_half_year,2=sl,3=custom; Constraints: INTEGER,MIN=0,MAX=3; 0 if not set.",
+	PyDoc_STR("type: Float\n\nFederal depreciation type\n\n*Options*: 0=none,1=macrs_half_year,2=sl,3=custom\n\n*Constraints*: INTEGER,MIN=0,MAX=3\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"depr_sta_custom", (getter)Depreciation_get_depr_sta_custom,(setter)Depreciation_set_depr_sta_custom,
-	"State custom depreciation [%/year], array.\n Required if depr_sta_type=3.",
+	PyDoc_STR("type: Sequence\n\nState custom depreciation [%/year]\n\n*Required*: set to 3 if not provided."),
  	NULL},
 {"depr_sta_sl_years", (getter)Depreciation_get_depr_sta_sl_years,(setter)Depreciation_set_depr_sta_sl_years,
-	"State depreciation straight-line years [years], number.\n Constraints: INTEGER,POSITIVE; Required if depr_sta_type=2.",
+	PyDoc_STR("type: Float\n\nState depreciation straight-line years [years]\n\n*Constraints*: INTEGER,POSITIVE\n\n*Required*: set to 2 if not provided."),
  	NULL},
 {"depr_sta_type", (getter)Depreciation_get_depr_sta_type,(setter)Depreciation_set_depr_sta_type,
-	"State depreciation type, number.\n 0=none,1=macrs_half_year,2=sl,3=custom; Constraints: INTEGER,MIN=0,MAX=3; 0 if not set.",
+	PyDoc_STR("type: Float\n\nState depreciation type\n\n*Options*: 0=none,1=macrs_half_year,2=sl,3=custom\n\n*Constraints*: INTEGER,MIN=0,MAX=3\n\n*Required*: set to 0 if not provided."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -186,7 +186,7 @@ static PyTypeObject Depreciation_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		Depreciation_methods,         /*tp_methods*/
@@ -196,7 +196,7 @@ static PyTypeObject Depreciation_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -265,48 +265,48 @@ static PyMethodDef Financials_methods[] = {
 static PyObject *
 Financials_get_analysis_period(FinancialsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Thirdpartyownership_Financials_analysis_period_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Thirdpartyownership_Financials_analysis_period_nget, self->data_ptr);
 }
 
 static int
 Financials_set_analysis_period(FinancialsObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Thirdpartyownership_Financials_analysis_period_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Thirdpartyownership_Financials_analysis_period_nset, self->data_ptr);
 }
 
 static PyObject *
 Financials_get_inflation_rate(FinancialsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Thirdpartyownership_Financials_inflation_rate_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Thirdpartyownership_Financials_inflation_rate_nget, self->data_ptr);
 }
 
 static int
 Financials_set_inflation_rate(FinancialsObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Thirdpartyownership_Financials_inflation_rate_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Thirdpartyownership_Financials_inflation_rate_nset, self->data_ptr);
 }
 
 static PyObject *
 Financials_get_real_discount_rate(FinancialsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Thirdpartyownership_Financials_real_discount_rate_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Thirdpartyownership_Financials_real_discount_rate_nget, self->data_ptr);
 }
 
 static int
 Financials_set_real_discount_rate(FinancialsObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Thirdpartyownership_Financials_real_discount_rate_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Thirdpartyownership_Financials_real_discount_rate_nset, self->data_ptr);
 }
 
 static PyGetSetDef Financials_getset[] = {
 {"analysis_period", (getter)Financials_get_analysis_period,(setter)Financials_set_analysis_period,
-	"Analyis period [years], number.\n Constraints: INTEGER,MIN=0,MAX=50; Required if ?=30.",
+	PyDoc_STR("type: Float\n\nAnalyis period [years]\n\n*Constraints*: INTEGER,MIN=0,MAX=50\n\n*Required*: set to 30 if not provided."),
  	NULL},
 {"inflation_rate", (getter)Financials_get_inflation_rate,(setter)Financials_set_inflation_rate,
-	"Inflation rate [%], number.\n Constraints: MIN=-99; Required.",
+	PyDoc_STR("type: Float\n\nInflation rate [%]\n\n*Constraints*: MIN=-99\n\n*Required*: True"),
  	NULL},
 {"real_discount_rate", (getter)Financials_get_real_discount_rate,(setter)Financials_set_real_discount_rate,
-	"Real discount rate [%], number.\n Constraints: MIN=-99; Required.",
+	PyDoc_STR("type: Float\n\nReal discount rate [%]\n\n*Constraints*: MIN=-99\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -339,7 +339,7 @@ static PyTypeObject Financials_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		Financials_methods,         /*tp_methods*/
@@ -349,7 +349,7 @@ static PyTypeObject Financials_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -418,18 +418,18 @@ static PyMethodDef FinancialThirdPartyOwnership_methods[] = {
 static PyObject *
 FinancialThirdPartyOwnership_get_lease_or_ppa(FinancialThirdPartyOwnershipObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Thirdpartyownership_FinancialThirdPartyOwnership_lease_or_ppa_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Thirdpartyownership_FinancialThirdPartyOwnership_lease_or_ppa_nget, self->data_ptr);
 }
 
 static int
 FinancialThirdPartyOwnership_set_lease_or_ppa(FinancialThirdPartyOwnershipObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Thirdpartyownership_FinancialThirdPartyOwnership_lease_or_ppa_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Thirdpartyownership_FinancialThirdPartyOwnership_lease_or_ppa_nset, self->data_ptr);
 }
 
 static PyGetSetDef FinancialThirdPartyOwnership_getset[] = {
 {"lease_or_ppa", (getter)FinancialThirdPartyOwnership_get_lease_or_ppa,(setter)FinancialThirdPartyOwnership_set_lease_or_ppa,
-	"Lease or PPA agreement [0/1], number.\n 0=lease,1=ppa; Constraints: INTEGER,MIN=0,MAX=1; 0 if not set.",
+	PyDoc_STR("type: Float\n\nLease or PPA agreement [0/1]\n\n*Options*: 0=lease,1=ppa\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: set to 0 if not provided."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -462,7 +462,7 @@ static PyTypeObject FinancialThirdPartyOwnership_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		FinancialThirdPartyOwnership_methods,         /*tp_methods*/
@@ -472,7 +472,7 @@ static PyTypeObject FinancialThirdPartyOwnership_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -547,7 +547,7 @@ Common_get_annual_energy_value(CommonObject *self, void *closure)
 static int
 Common_set_annual_energy_value(CommonObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Thirdpartyownership_Common_annual_energy_value_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Thirdpartyownership_Common_annual_energy_value_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -559,15 +559,15 @@ Common_get_gen(CommonObject *self, void *closure)
 static int
 Common_set_gen(CommonObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Thirdpartyownership_Common_gen_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Thirdpartyownership_Common_gen_aset, self->data_ptr);
 }
 
 static PyGetSetDef Common_getset[] = {
 {"annual_energy_value", (getter)Common_get_annual_energy_value,(setter)Common_set_annual_energy_value,
-	"Energy value [$], array.\n Required.",
+	PyDoc_STR("type: Sequence\n\nEnergy value [$]\n\n*Required*: True"),
  	NULL},
 {"gen", (getter)Common_get_gen,(setter)Common_set_gen,
-	"Power generated by renewable resource [kW], array.\n Required.",
+	PyDoc_STR("type: Sequence\n\nPower generated by renewable resource [kW]\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -600,7 +600,7 @@ static PyTypeObject Common_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		Common_methods,         /*tp_methods*/
@@ -610,7 +610,7 @@ static PyTypeObject Common_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -685,27 +685,27 @@ AnnualOutput_get_degradation(AnnualOutputObject *self, void *closure)
 static int
 AnnualOutput_set_degradation(AnnualOutputObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Thirdpartyownership_AnnualOutput_degradation_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Thirdpartyownership_AnnualOutput_degradation_aset, self->data_ptr);
 }
 
 static PyObject *
 AnnualOutput_get_system_use_lifetime_output(AnnualOutputObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Thirdpartyownership_AnnualOutput_system_use_lifetime_output_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Thirdpartyownership_AnnualOutput_system_use_lifetime_output_nget, self->data_ptr);
 }
 
 static int
 AnnualOutput_set_system_use_lifetime_output(AnnualOutputObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Thirdpartyownership_AnnualOutput_system_use_lifetime_output_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Thirdpartyownership_AnnualOutput_system_use_lifetime_output_nset, self->data_ptr);
 }
 
 static PyGetSetDef AnnualOutput_getset[] = {
 {"degradation", (getter)AnnualOutput_get_degradation,(setter)AnnualOutput_set_degradation,
-	"Annual degradation [%], array.\n Required.",
+	PyDoc_STR("type: Sequence\n\nAnnual degradation [%]\n\n*Required*: True"),
  	NULL},
 {"system_use_lifetime_output", (getter)AnnualOutput_get_system_use_lifetime_output,(setter)AnnualOutput_set_system_use_lifetime_output,
-	"Lifetime hourly system outputs [0/1], number.\n 0=hourly first year,1=hourly lifetime; Constraints: INTEGER,MIN=0; Required.",
+	PyDoc_STR("type: Float\n\nLifetime hourly system outputs [0/1]\n\n*Options*: 0=hourly first year,1=hourly lifetime\n\n*Constraints*: INTEGER,MIN=0\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -738,7 +738,7 @@ static PyTypeObject AnnualOutput_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		AnnualOutput_methods,         /*tp_methods*/
@@ -748,7 +748,7 @@ static PyTypeObject AnnualOutput_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -817,63 +817,63 @@ static PyMethodDef CashFlow_methods[] = {
 static PyObject *
 CashFlow_get_lease_escalation(CashFlowObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Thirdpartyownership_CashFlow_lease_escalation_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Thirdpartyownership_CashFlow_lease_escalation_nget, self->data_ptr);
 }
 
 static int
 CashFlow_set_lease_escalation(CashFlowObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Thirdpartyownership_CashFlow_lease_escalation_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Thirdpartyownership_CashFlow_lease_escalation_nset, self->data_ptr);
 }
 
 static PyObject *
 CashFlow_get_lease_price(CashFlowObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Thirdpartyownership_CashFlow_lease_price_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Thirdpartyownership_CashFlow_lease_price_nget, self->data_ptr);
 }
 
 static int
 CashFlow_set_lease_price(CashFlowObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Thirdpartyownership_CashFlow_lease_price_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Thirdpartyownership_CashFlow_lease_price_nset, self->data_ptr);
 }
 
 static PyObject *
 CashFlow_get_ppa_escalation(CashFlowObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Thirdpartyownership_CashFlow_ppa_escalation_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Thirdpartyownership_CashFlow_ppa_escalation_nget, self->data_ptr);
 }
 
 static int
 CashFlow_set_ppa_escalation(CashFlowObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Thirdpartyownership_CashFlow_ppa_escalation_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Thirdpartyownership_CashFlow_ppa_escalation_nset, self->data_ptr);
 }
 
 static PyObject *
 CashFlow_get_ppa_price(CashFlowObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Thirdpartyownership_CashFlow_ppa_price_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Thirdpartyownership_CashFlow_ppa_price_nget, self->data_ptr);
 }
 
 static int
 CashFlow_set_ppa_price(CashFlowObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Thirdpartyownership_CashFlow_ppa_price_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Thirdpartyownership_CashFlow_ppa_price_nset, self->data_ptr);
 }
 
 static PyGetSetDef CashFlow_getset[] = {
 {"lease_escalation", (getter)CashFlow_get_lease_escalation,(setter)CashFlow_set_lease_escalation,
-	"Monthly lease escalation [%/year], number.\n Required if lease_or_ppa=0.",
+	PyDoc_STR("type: Float\n\nMonthly lease escalation [%/year]\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"lease_price", (getter)CashFlow_get_lease_price,(setter)CashFlow_set_lease_price,
-	"Monthly lease price [$/month], number.\n Required if lease_or_ppa=0.",
+	PyDoc_STR("type: Float\n\nMonthly lease price [$/month]\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"ppa_escalation", (getter)CashFlow_get_ppa_escalation,(setter)CashFlow_set_ppa_escalation,
-	"Monthly lease escalation [%/year], number.\n Required if lease_or_ppa=1.",
+	PyDoc_STR("type: Float\n\nMonthly lease escalation [%/year]\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"ppa_price", (getter)CashFlow_get_ppa_price,(setter)CashFlow_set_ppa_price,
-	"Monthly lease price [$/month], number.\n Required if lease_or_ppa=1.",
+	PyDoc_STR("type: Float\n\nMonthly lease price [$/month]\n\n*Required*: set to 1 if not provided."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -906,7 +906,7 @@ static PyTypeObject CashFlow_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		CashFlow_methods,         /*tp_methods*/
@@ -916,7 +916,7 @@ static PyTypeObject CashFlow_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -991,7 +991,7 @@ ElectricityCost_get_elec_cost_with_system(ElectricityCostObject *self, void *clo
 static int
 ElectricityCost_set_elec_cost_with_system(ElectricityCostObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Thirdpartyownership_ElectricityCost_elec_cost_with_system_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Thirdpartyownership_ElectricityCost_elec_cost_with_system_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -1003,15 +1003,15 @@ ElectricityCost_get_elec_cost_without_system(ElectricityCostObject *self, void *
 static int
 ElectricityCost_set_elec_cost_without_system(ElectricityCostObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Thirdpartyownership_ElectricityCost_elec_cost_without_system_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Thirdpartyownership_ElectricityCost_elec_cost_without_system_aset, self->data_ptr);
 }
 
 static PyGetSetDef ElectricityCost_getset[] = {
 {"elec_cost_with_system", (getter)ElectricityCost_get_elec_cost_with_system,(setter)ElectricityCost_set_elec_cost_with_system,
-	"Energy value [$], array.\n Required.",
+	PyDoc_STR("type: Sequence\n\nEnergy value [$]\n\n*Required*: True"),
  	NULL},
 {"elec_cost_without_system", (getter)ElectricityCost_get_elec_cost_without_system,(setter)ElectricityCost_set_elec_cost_without_system,
-	"Energy value [$], array.\n Required.",
+	PyDoc_STR("type: Sequence\n\nEnergy value [$]\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1044,7 +1044,7 @@ static PyTypeObject ElectricityCost_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		ElectricityCost_methods,         /*tp_methods*/
@@ -1054,7 +1054,7 @@ static PyTypeObject ElectricityCost_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -1153,7 +1153,7 @@ Outputs_get_cf_energy_net(OutputsObject *self, void *closure)
 static PyObject *
 Outputs_get_cf_length(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Thirdpartyownership_Outputs_cf_length_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Thirdpartyownership_Outputs_cf_length_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -1171,63 +1171,63 @@ Outputs_get_cf_payback_with_expenses(OutputsObject *self, void *closure)
 static PyObject *
 Outputs_get_lnte_nom(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Thirdpartyownership_Outputs_lnte_nom_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Thirdpartyownership_Outputs_lnte_nom_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_lnte_real(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Thirdpartyownership_Outputs_lnte_real_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Thirdpartyownership_Outputs_lnte_real_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_npv(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Thirdpartyownership_Outputs_npv_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Thirdpartyownership_Outputs_npv_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_year1_nte(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Thirdpartyownership_Outputs_year1_nte_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Thirdpartyownership_Outputs_year1_nte_nget, self->data_ptr);
 }
 
 static PyGetSetDef Outputs_getset[] = {
 {"cf_after_tax_cash_flow", (getter)Outputs_get_cf_after_tax_cash_flow,(setter)0,
-	"After-tax cash flow [$], array.",
+	PyDoc_STR("type: Sequence\n\nAfter-tax cash flow [$]"),
  	NULL},
 {"cf_after_tax_net_equity_cost_flow", (getter)Outputs_get_cf_after_tax_net_equity_cost_flow,(setter)0,
-	"After-tax annual costs [$], array.",
+	PyDoc_STR("type: Sequence\n\nAfter-tax annual costs [$]"),
  	NULL},
 {"cf_agreement_cost", (getter)Outputs_get_cf_agreement_cost,(setter)0,
-	"Agreement cost [$], array.",
+	PyDoc_STR("type: Sequence\n\nAgreement cost [$]"),
  	NULL},
 {"cf_cumulative_payback_with_expenses", (getter)Outputs_get_cf_cumulative_payback_with_expenses,(setter)0,
-	"Cumulative simple payback with expenses [$], array.",
+	PyDoc_STR("type: Sequence\n\nCumulative simple payback with expenses [$]"),
  	NULL},
 {"cf_energy_net", (getter)Outputs_get_cf_energy_net,(setter)0,
-	"Energy [kWh], array.",
+	PyDoc_STR("type: Sequence\n\nEnergy [kWh]"),
  	NULL},
 {"cf_length", (getter)Outputs_get_cf_length,(setter)0,
-	"Agreement period, number.",
+	PyDoc_STR("type: Float\n\nAgreement period"),
  	NULL},
 {"cf_nte", (getter)Outputs_get_cf_nte,(setter)0,
-	"Host indifference point by year [cents/kWh], array.",
+	PyDoc_STR("type: Sequence\n\nHost indifference point by year [cents/kWh]"),
  	NULL},
 {"cf_payback_with_expenses", (getter)Outputs_get_cf_payback_with_expenses,(setter)0,
-	"Simple payback with expenses [$], array.",
+	PyDoc_STR("type: Sequence\n\nSimple payback with expenses [$]"),
  	NULL},
 {"lnte_nom", (getter)Outputs_get_lnte_nom,(setter)0,
-	"Host indifference point real levelized value [cents/kWh], number.",
+	PyDoc_STR("type: Float\n\nHost indifference point real levelized value [cents/kWh]"),
  	NULL},
 {"lnte_real", (getter)Outputs_get_lnte_real,(setter)0,
-	"Host indifference point nominal levelized value [cents/kWh], number.",
+	PyDoc_STR("type: Float\n\nHost indifference point nominal levelized value [cents/kWh]"),
  	NULL},
 {"npv", (getter)Outputs_get_npv,(setter)0,
-	"Net present value [$], number.",
+	PyDoc_STR("type: Float\n\nNet present value [$]"),
  	NULL},
 {"year1_nte", (getter)Outputs_get_year1_nte,(setter)0,
-	"Host indifference point in Year 1 [cents/kWh], number.",
+	PyDoc_STR("type: Float\n\nHost indifference point in Year 1 [cents/kWh]"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1260,7 +1260,7 @@ static PyTypeObject Outputs_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		Outputs_methods,         /*tp_methods*/
@@ -1270,7 +1270,7 @@ static PyTypeObject Outputs_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -1392,7 +1392,7 @@ static PyMethodDef Thirdpartyownership_methods[] = {
 		{"assign",            (PyCFunction)Thirdpartyownership_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs")},
 		{"export",            (PyCFunction)Thirdpartyownership_export,  METH_VARARGS,
-				PyDoc_STR("assign() -> None\n Export attributes into dictionary")},
+				PyDoc_STR("export() -> None\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -1432,11 +1432,11 @@ static PyTypeObject Thirdpartyownership_Type = {
 		0,                          /*tp_setattro*/
 		0,                          /*tp_as_buffer*/
 		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
-		"see html for help",        /*tp_doc*/
+		"Wrapper for `cmod_thirdpartyownership.cpp <https://github.com/NREL/ssc/blob/develop/ssc/cmod_thirdpartyownership.cpp>`_",        /*tp_doc*/
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		Thirdpartyownership_methods,      /*tp_methods*/
@@ -1446,7 +1446,7 @@ static PyTypeObject Thirdpartyownership_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,                          /*tp_new*/
@@ -1511,10 +1511,10 @@ static PyMethodDef ThirdpartyownershipModule_methods[] = {
 		{"new",             Thirdpartyownership_new,         METH_VARARGS,
 				PyDoc_STR("new() -> new Thirdpartyownership object")},
 		{"default",             Thirdpartyownership_default,         METH_VARARGS,
-				PyDoc_STR("default(financial) -> new Thirdpartyownership object with financial model-specific default attributes\n"
-				"Options: FlatPlatePVThirdParty\nGenericSystemThirdParty\nPVWattsThirdParty")},
+				PyDoc_STR("default(config) -> new Thirdpartyownership object with financial model-specific default attributes\n"
+				"config options:\n\n- \"FlatPlatePVThirdParty\"\n- \"GenericSystemThirdParty\"\n- \"PVWattsThirdParty\"")},
 		{"wrap",             Thirdpartyownership_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> new Thirdpartyownership object around existing PySSC data, taking over memory ownership")},
+				PyDoc_STR("wrap(ssc_data_t) -> new Thirdpartyownership object around existing PySSC data, taking over memory ownership\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to `wrap`")},
 		{NULL,              NULL}           /* sentinel */
 };
 

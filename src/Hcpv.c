@@ -78,7 +78,7 @@ SolarResourceData_set_file_name(SolarResourceDataObject *self, PyObject *value, 
 
 static PyGetSetDef SolarResourceData_getset[] = {
 {"file_name", (getter)SolarResourceData_get_file_name,(setter)SolarResourceData_set_file_name,
-	"Weather file in TMY2, TMY3, EPW, or SMW., string.\n Constraints: LOCAL_FILE; Required.",
+	PyDoc_STR("type: Str\n\nWeather file in TMY2, TMY3, EPW, or SMW.\n\n*Constraints*: LOCAL_FILE\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -111,7 +111,7 @@ static PyTypeObject SolarResourceData_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		SolarResourceData_methods,         /*tp_methods*/
@@ -121,7 +121,7 @@ static PyTypeObject SolarResourceData_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -190,18 +190,18 @@ static PyMethodDef PVWatts_methods[] = {
 static PyObject *
 PVWatts_get_system_capacity(PVWattsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Hcpv_PVWatts_system_capacity_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Hcpv_PVWatts_system_capacity_nget, self->data_ptr);
 }
 
 static int
 PVWatts_set_system_capacity(PVWattsObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Hcpv_PVWatts_system_capacity_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Hcpv_PVWatts_system_capacity_nset, self->data_ptr);
 }
 
 static PyGetSetDef PVWatts_getset[] = {
 {"system_capacity", (getter)PVWatts_get_system_capacity,(setter)PVWatts_set_system_capacity,
-	"Nameplate capacity [kW], number.\n Required.",
+	PyDoc_STR("type: Float\n\nNameplate capacity [kW]\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -234,7 +234,7 @@ static PyTypeObject PVWatts_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		PVWatts_methods,         /*tp_methods*/
@@ -244,7 +244,7 @@ static PyTypeObject PVWatts_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -313,145 +313,145 @@ static PyMethodDef HCPVModule_methods[] = {
 static PyObject *
 HCPVModule_get_module_a(HCPVModuleObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Hcpv_HCPVModule_module_a_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Hcpv_HCPVModule_module_a_nget, self->data_ptr);
 }
 
 static int
 HCPVModule_set_module_a(HCPVModuleObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Hcpv_HCPVModule_module_a_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Hcpv_HCPVModule_module_a_nset, self->data_ptr);
 }
 
 static PyObject *
 HCPVModule_get_module_a0(HCPVModuleObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Hcpv_HCPVModule_module_a0_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Hcpv_HCPVModule_module_a0_nget, self->data_ptr);
 }
 
 static int
 HCPVModule_set_module_a0(HCPVModuleObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Hcpv_HCPVModule_module_a0_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Hcpv_HCPVModule_module_a0_nset, self->data_ptr);
 }
 
 static PyObject *
 HCPVModule_get_module_a1(HCPVModuleObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Hcpv_HCPVModule_module_a1_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Hcpv_HCPVModule_module_a1_nget, self->data_ptr);
 }
 
 static int
 HCPVModule_set_module_a1(HCPVModuleObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Hcpv_HCPVModule_module_a1_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Hcpv_HCPVModule_module_a1_nset, self->data_ptr);
 }
 
 static PyObject *
 HCPVModule_get_module_a2(HCPVModuleObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Hcpv_HCPVModule_module_a2_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Hcpv_HCPVModule_module_a2_nget, self->data_ptr);
 }
 
 static int
 HCPVModule_set_module_a2(HCPVModuleObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Hcpv_HCPVModule_module_a2_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Hcpv_HCPVModule_module_a2_nset, self->data_ptr);
 }
 
 static PyObject *
 HCPVModule_get_module_a3(HCPVModuleObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Hcpv_HCPVModule_module_a3_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Hcpv_HCPVModule_module_a3_nget, self->data_ptr);
 }
 
 static int
 HCPVModule_set_module_a3(HCPVModuleObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Hcpv_HCPVModule_module_a3_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Hcpv_HCPVModule_module_a3_nset, self->data_ptr);
 }
 
 static PyObject *
 HCPVModule_get_module_a4(HCPVModuleObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Hcpv_HCPVModule_module_a4_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Hcpv_HCPVModule_module_a4_nget, self->data_ptr);
 }
 
 static int
 HCPVModule_set_module_a4(HCPVModuleObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Hcpv_HCPVModule_module_a4_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Hcpv_HCPVModule_module_a4_nset, self->data_ptr);
 }
 
 static PyObject *
 HCPVModule_get_module_alignment_error(HCPVModuleObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Hcpv_HCPVModule_module_alignment_error_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Hcpv_HCPVModule_module_alignment_error_nget, self->data_ptr);
 }
 
 static int
 HCPVModule_set_module_alignment_error(HCPVModuleObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Hcpv_HCPVModule_module_alignment_error_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Hcpv_HCPVModule_module_alignment_error_nset, self->data_ptr);
 }
 
 static PyObject *
 HCPVModule_get_module_b(HCPVModuleObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Hcpv_HCPVModule_module_b_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Hcpv_HCPVModule_module_b_nget, self->data_ptr);
 }
 
 static int
 HCPVModule_set_module_b(HCPVModuleObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Hcpv_HCPVModule_module_b_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Hcpv_HCPVModule_module_b_nset, self->data_ptr);
 }
 
 static PyObject *
 HCPVModule_get_module_cell_area(HCPVModuleObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Hcpv_HCPVModule_module_cell_area_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Hcpv_HCPVModule_module_cell_area_nget, self->data_ptr);
 }
 
 static int
 HCPVModule_set_module_cell_area(HCPVModuleObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Hcpv_HCPVModule_module_cell_area_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Hcpv_HCPVModule_module_cell_area_nset, self->data_ptr);
 }
 
 static PyObject *
 HCPVModule_get_module_concentration(HCPVModuleObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Hcpv_HCPVModule_module_concentration_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Hcpv_HCPVModule_module_concentration_nget, self->data_ptr);
 }
 
 static int
 HCPVModule_set_module_concentration(HCPVModuleObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Hcpv_HCPVModule_module_concentration_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Hcpv_HCPVModule_module_concentration_nset, self->data_ptr);
 }
 
 static PyObject *
 HCPVModule_get_module_dT(HCPVModuleObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Hcpv_HCPVModule_module_dT_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Hcpv_HCPVModule_module_dT_nget, self->data_ptr);
 }
 
 static int
 HCPVModule_set_module_dT(HCPVModuleObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Hcpv_HCPVModule_module_dT_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Hcpv_HCPVModule_module_dT_nset, self->data_ptr);
 }
 
 static PyObject *
 HCPVModule_get_module_flutter_loss_coeff(HCPVModuleObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Hcpv_HCPVModule_module_flutter_loss_coeff_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Hcpv_HCPVModule_module_flutter_loss_coeff_nget, self->data_ptr);
 }
 
 static int
 HCPVModule_set_module_flutter_loss_coeff(HCPVModuleObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Hcpv_HCPVModule_module_flutter_loss_coeff_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Hcpv_HCPVModule_module_flutter_loss_coeff_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -463,31 +463,31 @@ HCPVModule_get_module_mjeff(HCPVModuleObject *self, void *closure)
 static int
 HCPVModule_set_module_mjeff(HCPVModuleObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Hcpv_HCPVModule_module_mjeff_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Hcpv_HCPVModule_module_mjeff_aset, self->data_ptr);
 }
 
 static PyObject *
 HCPVModule_get_module_ncells(HCPVModuleObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Hcpv_HCPVModule_module_ncells_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Hcpv_HCPVModule_module_ncells_nget, self->data_ptr);
 }
 
 static int
 HCPVModule_set_module_ncells(HCPVModuleObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Hcpv_HCPVModule_module_ncells_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Hcpv_HCPVModule_module_ncells_nset, self->data_ptr);
 }
 
 static PyObject *
 HCPVModule_get_module_optical_error(HCPVModuleObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Hcpv_HCPVModule_module_optical_error_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Hcpv_HCPVModule_module_optical_error_nget, self->data_ptr);
 }
 
 static int
 HCPVModule_set_module_optical_error(HCPVModuleObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Hcpv_HCPVModule_module_optical_error_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Hcpv_HCPVModule_module_optical_error_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -499,87 +499,87 @@ HCPVModule_get_module_rad(HCPVModuleObject *self, void *closure)
 static int
 HCPVModule_set_module_rad(HCPVModuleObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Hcpv_HCPVModule_module_rad_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Hcpv_HCPVModule_module_rad_aset, self->data_ptr);
 }
 
 static PyObject *
 HCPVModule_get_module_reference(HCPVModuleObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Hcpv_HCPVModule_module_reference_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Hcpv_HCPVModule_module_reference_nget, self->data_ptr);
 }
 
 static int
 HCPVModule_set_module_reference(HCPVModuleObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Hcpv_HCPVModule_module_reference_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Hcpv_HCPVModule_module_reference_nset, self->data_ptr);
 }
 
 static PyObject *
 HCPVModule_get_module_temp_coeff(HCPVModuleObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Hcpv_HCPVModule_module_temp_coeff_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Hcpv_HCPVModule_module_temp_coeff_nget, self->data_ptr);
 }
 
 static int
 HCPVModule_set_module_temp_coeff(HCPVModuleObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Hcpv_HCPVModule_module_temp_coeff_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Hcpv_HCPVModule_module_temp_coeff_nset, self->data_ptr);
 }
 
 static PyGetSetDef HCPVModule_getset[] = {
 {"module_a", (getter)HCPVModule_get_module_a,(setter)HCPVModule_set_module_a,
-	"Equation variable (a), at high irradiance & low wind speed [none], number.\n Required.",
+	PyDoc_STR("type: Float\n\nEquation variable (a), at high irradiance & low wind speed [none]\n\n*Required*: True"),
  	NULL},
 {"module_a0", (getter)HCPVModule_get_module_a0,(setter)HCPVModule_set_module_a0,
-	"Air mass modifier coefficient 0 [none], number.\n Required.",
+	PyDoc_STR("type: Float\n\nAir mass modifier coefficient 0 [none]\n\n*Required*: True"),
  	NULL},
 {"module_a1", (getter)HCPVModule_get_module_a1,(setter)HCPVModule_set_module_a1,
-	"Air mass modifier coefficient 1 [none], number.\n Required.",
+	PyDoc_STR("type: Float\n\nAir mass modifier coefficient 1 [none]\n\n*Required*: True"),
  	NULL},
 {"module_a2", (getter)HCPVModule_get_module_a2,(setter)HCPVModule_set_module_a2,
-	"Air mass modifier coefficient 2 [none], number.\n Required.",
+	PyDoc_STR("type: Float\n\nAir mass modifier coefficient 2 [none]\n\n*Required*: True"),
  	NULL},
 {"module_a3", (getter)HCPVModule_get_module_a3,(setter)HCPVModule_set_module_a3,
-	"Air mass modifier coefficient 3 [none], number.\n Required.",
+	PyDoc_STR("type: Float\n\nAir mass modifier coefficient 3 [none]\n\n*Required*: True"),
  	NULL},
 {"module_a4", (getter)HCPVModule_get_module_a4,(setter)HCPVModule_set_module_a4,
-	"Air mass modifier coefficient 4 [none], number.\n Required.",
+	PyDoc_STR("type: Float\n\nAir mass modifier coefficient 4 [none]\n\n*Required*: True"),
  	NULL},
 {"module_alignment_error", (getter)HCPVModule_get_module_alignment_error,(setter)HCPVModule_set_module_alignment_error,
-	"Alignment loss factor [0..1], number.\n Required.",
+	PyDoc_STR("type: Float\n\nAlignment loss factor [0..1]\n\n*Required*: True"),
  	NULL},
 {"module_b", (getter)HCPVModule_get_module_b,(setter)HCPVModule_set_module_b,
-	"Equation variable (b), rate at which module temp drops [none], number.\n Required.",
+	PyDoc_STR("type: Float\n\nEquation variable (b), rate at which module temp drops [none]\n\n*Required*: True"),
  	NULL},
 {"module_cell_area", (getter)HCPVModule_get_module_cell_area,(setter)HCPVModule_set_module_cell_area,
-	"Single cell area [cm^2], number.\n Required.",
+	PyDoc_STR("type: Float\n\nSingle cell area [cm^2]\n\n*Required*: True"),
  	NULL},
 {"module_concentration", (getter)HCPVModule_get_module_concentration,(setter)HCPVModule_set_module_concentration,
-	"Concentration ratio [none], number.\n Required.",
+	PyDoc_STR("type: Float\n\nConcentration ratio [none]\n\n*Required*: True"),
  	NULL},
 {"module_dT", (getter)HCPVModule_get_module_dT,(setter)HCPVModule_set_module_dT,
-	"Equation variable (dT), temp diff between heat sink & cell [C], number.\n Required.",
+	PyDoc_STR("type: Float\n\nEquation variable (dT), temp diff between heat sink & cell [C]\n\n*Required*: True"),
  	NULL},
 {"module_flutter_loss_coeff", (getter)HCPVModule_get_module_flutter_loss_coeff,(setter)HCPVModule_set_module_flutter_loss_coeff,
-	"Wind flutter loss factor [0..1 per m/s], number.\n Required.",
+	PyDoc_STR("type: Float\n\nWind flutter loss factor [0..1 per m/s]\n\n*Required*: True"),
  	NULL},
 {"module_mjeff", (getter)HCPVModule_get_module_mjeff,(setter)HCPVModule_set_module_mjeff,
-	"Module junction efficiency array [percent], array.\n Required.",
+	PyDoc_STR("type: Sequence\n\nModule junction efficiency array [percent]\n\n*Required*: True"),
  	NULL},
 {"module_ncells", (getter)HCPVModule_get_module_ncells,(setter)HCPVModule_set_module_ncells,
-	"Number of cells [none], number.\n Constraints: INTEGER; Required.",
+	PyDoc_STR("type: Float\n\nNumber of cells [none]\n\n*Constraints*: INTEGER\n\n*Required*: True"),
  	NULL},
 {"module_optical_error", (getter)HCPVModule_get_module_optical_error,(setter)HCPVModule_set_module_optical_error,
-	"Optical error factor [0..1], number.\n Required.",
+	PyDoc_STR("type: Float\n\nOptical error factor [0..1]\n\n*Required*: True"),
  	NULL},
 {"module_rad", (getter)HCPVModule_get_module_rad,(setter)HCPVModule_set_module_rad,
-	"POA irradiance array [W/m^2], array.\n Required.",
+	PyDoc_STR("type: Sequence\n\nPOA irradiance array [W/m^2]\n\n*Required*: True"),
  	NULL},
 {"module_reference", (getter)HCPVModule_get_module_reference,(setter)HCPVModule_set_module_reference,
-	"Index in arrays of the reference condition [none], number.\n Constraints: INTEGER; Required.",
+	PyDoc_STR("type: Float\n\nIndex in arrays of the reference condition [none]\n\n*Constraints*: INTEGER\n\n*Required*: True"),
  	NULL},
 {"module_temp_coeff", (getter)HCPVModule_get_module_temp_coeff,(setter)HCPVModule_set_module_temp_coeff,
-	"Temperature coefficient [%/C], number.\n Required.",
+	PyDoc_STR("type: Float\n\nTemperature coefficient [%/C]\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -612,7 +612,7 @@ static PyTypeObject HCPVModule_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		HCPVModule_methods,         /*tp_methods*/
@@ -622,7 +622,7 @@ static PyTypeObject HCPVModule_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -691,153 +691,153 @@ static PyMethodDef InverterCECDatabase_methods[] = {
 static PyObject *
 InverterCECDatabase_get_inv_snl_c0(InverterCECDatabaseObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Hcpv_InverterCECDatabase_inv_snl_c0_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Hcpv_InverterCECDatabase_inv_snl_c0_nget, self->data_ptr);
 }
 
 static int
 InverterCECDatabase_set_inv_snl_c0(InverterCECDatabaseObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Hcpv_InverterCECDatabase_inv_snl_c0_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Hcpv_InverterCECDatabase_inv_snl_c0_nset, self->data_ptr);
 }
 
 static PyObject *
 InverterCECDatabase_get_inv_snl_c1(InverterCECDatabaseObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Hcpv_InverterCECDatabase_inv_snl_c1_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Hcpv_InverterCECDatabase_inv_snl_c1_nget, self->data_ptr);
 }
 
 static int
 InverterCECDatabase_set_inv_snl_c1(InverterCECDatabaseObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Hcpv_InverterCECDatabase_inv_snl_c1_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Hcpv_InverterCECDatabase_inv_snl_c1_nset, self->data_ptr);
 }
 
 static PyObject *
 InverterCECDatabase_get_inv_snl_c2(InverterCECDatabaseObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Hcpv_InverterCECDatabase_inv_snl_c2_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Hcpv_InverterCECDatabase_inv_snl_c2_nget, self->data_ptr);
 }
 
 static int
 InverterCECDatabase_set_inv_snl_c2(InverterCECDatabaseObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Hcpv_InverterCECDatabase_inv_snl_c2_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Hcpv_InverterCECDatabase_inv_snl_c2_nset, self->data_ptr);
 }
 
 static PyObject *
 InverterCECDatabase_get_inv_snl_c3(InverterCECDatabaseObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Hcpv_InverterCECDatabase_inv_snl_c3_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Hcpv_InverterCECDatabase_inv_snl_c3_nget, self->data_ptr);
 }
 
 static int
 InverterCECDatabase_set_inv_snl_c3(InverterCECDatabaseObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Hcpv_InverterCECDatabase_inv_snl_c3_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Hcpv_InverterCECDatabase_inv_snl_c3_nset, self->data_ptr);
 }
 
 static PyObject *
 InverterCECDatabase_get_inv_snl_paco(InverterCECDatabaseObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Hcpv_InverterCECDatabase_inv_snl_paco_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Hcpv_InverterCECDatabase_inv_snl_paco_nget, self->data_ptr);
 }
 
 static int
 InverterCECDatabase_set_inv_snl_paco(InverterCECDatabaseObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Hcpv_InverterCECDatabase_inv_snl_paco_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Hcpv_InverterCECDatabase_inv_snl_paco_nset, self->data_ptr);
 }
 
 static PyObject *
 InverterCECDatabase_get_inv_snl_pdco(InverterCECDatabaseObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Hcpv_InverterCECDatabase_inv_snl_pdco_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Hcpv_InverterCECDatabase_inv_snl_pdco_nget, self->data_ptr);
 }
 
 static int
 InverterCECDatabase_set_inv_snl_pdco(InverterCECDatabaseObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Hcpv_InverterCECDatabase_inv_snl_pdco_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Hcpv_InverterCECDatabase_inv_snl_pdco_nset, self->data_ptr);
 }
 
 static PyObject *
 InverterCECDatabase_get_inv_snl_pnt(InverterCECDatabaseObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Hcpv_InverterCECDatabase_inv_snl_pnt_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Hcpv_InverterCECDatabase_inv_snl_pnt_nget, self->data_ptr);
 }
 
 static int
 InverterCECDatabase_set_inv_snl_pnt(InverterCECDatabaseObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Hcpv_InverterCECDatabase_inv_snl_pnt_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Hcpv_InverterCECDatabase_inv_snl_pnt_nset, self->data_ptr);
 }
 
 static PyObject *
 InverterCECDatabase_get_inv_snl_pso(InverterCECDatabaseObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Hcpv_InverterCECDatabase_inv_snl_pso_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Hcpv_InverterCECDatabase_inv_snl_pso_nget, self->data_ptr);
 }
 
 static int
 InverterCECDatabase_set_inv_snl_pso(InverterCECDatabaseObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Hcpv_InverterCECDatabase_inv_snl_pso_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Hcpv_InverterCECDatabase_inv_snl_pso_nset, self->data_ptr);
 }
 
 static PyObject *
 InverterCECDatabase_get_inv_snl_vdcmax(InverterCECDatabaseObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Hcpv_InverterCECDatabase_inv_snl_vdcmax_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Hcpv_InverterCECDatabase_inv_snl_vdcmax_nget, self->data_ptr);
 }
 
 static int
 InverterCECDatabase_set_inv_snl_vdcmax(InverterCECDatabaseObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Hcpv_InverterCECDatabase_inv_snl_vdcmax_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Hcpv_InverterCECDatabase_inv_snl_vdcmax_nset, self->data_ptr);
 }
 
 static PyObject *
 InverterCECDatabase_get_inv_snl_vdco(InverterCECDatabaseObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Hcpv_InverterCECDatabase_inv_snl_vdco_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Hcpv_InverterCECDatabase_inv_snl_vdco_nget, self->data_ptr);
 }
 
 static int
 InverterCECDatabase_set_inv_snl_vdco(InverterCECDatabaseObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Hcpv_InverterCECDatabase_inv_snl_vdco_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Hcpv_InverterCECDatabase_inv_snl_vdco_nset, self->data_ptr);
 }
 
 static PyGetSetDef InverterCECDatabase_getset[] = {
 {"inv_snl_c0", (getter)InverterCECDatabase_get_inv_snl_c0,(setter)InverterCECDatabase_set_inv_snl_c0,
-	"Parameter defining the curvature (parabolic) of the relationship between ac-power and dc-power at the reference operating condition, default value of zero gives a linear relationship, (1/W) [xxx], number.\n Required.",
+	PyDoc_STR("type: Float\n\nParameter defining the curvature (parabolic) of the relationship between ac-power and dc-power at the reference operating condition, default value of zero gives a linear relationship, (1/W) [xxx]\n\n*Required*: True"),
  	NULL},
 {"inv_snl_c1", (getter)InverterCECDatabase_get_inv_snl_c1,(setter)InverterCECDatabase_set_inv_snl_c1,
-	"Empirical coefficient allowing Pdco to vary linearly with dc-voltage input, default value is zero, (1/V) [xxx], number.\n Required.",
+	PyDoc_STR("type: Float\n\nEmpirical coefficient allowing Pdco to vary linearly with dc-voltage input, default value is zero, (1/V) [xxx]\n\n*Required*: True"),
  	NULL},
 {"inv_snl_c2", (getter)InverterCECDatabase_get_inv_snl_c2,(setter)InverterCECDatabase_set_inv_snl_c2,
-	"Empirical coefficient allowing Pso to vary linearly with dc-voltage input, default value is zero, (1/V) [xxx], number.\n Required.",
+	PyDoc_STR("type: Float\n\nEmpirical coefficient allowing Pso to vary linearly with dc-voltage input, default value is zero, (1/V) [xxx]\n\n*Required*: True"),
  	NULL},
 {"inv_snl_c3", (getter)InverterCECDatabase_get_inv_snl_c3,(setter)InverterCECDatabase_set_inv_snl_c3,
-	"Empirical coefficient allowing Co to vary linearly with dc-voltage input, default value is zero, (1/V) [xxx], number.\n Required.",
+	PyDoc_STR("type: Float\n\nEmpirical coefficient allowing Co to vary linearly with dc-voltage input, default value is zero, (1/V) [xxx]\n\n*Required*: True"),
  	NULL},
 {"inv_snl_paco", (getter)InverterCECDatabase_get_inv_snl_paco,(setter)InverterCECDatabase_set_inv_snl_paco,
-	"W maximum ac-power rating for inverter at reference or nominal operating condition, assumed to be an upper limit value, (W) [xxx], number.\n Required.",
+	PyDoc_STR("type: Float\n\nW maximum ac-power rating for inverter at reference or nominal operating condition, assumed to be an upper limit value, (W) [xxx]\n\n*Required*: True"),
  	NULL},
 {"inv_snl_pdco", (getter)InverterCECDatabase_get_inv_snl_pdco,(setter)InverterCECDatabase_set_inv_snl_pdco,
-	"W dc-power level at which the ac-power rating is achieved at the reference operating condition, (W) [xxx], number.\n Required.",
+	PyDoc_STR("type: Float\n\nW dc-power level at which the ac-power rating is achieved at the reference operating condition, (W) [xxx]\n\n*Required*: True"),
  	NULL},
 {"inv_snl_pnt", (getter)InverterCECDatabase_get_inv_snl_pnt,(setter)InverterCECDatabase_set_inv_snl_pnt,
-	"W ac-power consumed by inverter at night (night tare) to maintain circuitry required to sense PV array voltage, (W) [xxx], number.\n Required.",
+	PyDoc_STR("type: Float\n\nW ac-power consumed by inverter at night (night tare) to maintain circuitry required to sense PV array voltage, (W) [xxx]\n\n*Required*: True"),
  	NULL},
 {"inv_snl_pso", (getter)InverterCECDatabase_get_inv_snl_pso,(setter)InverterCECDatabase_set_inv_snl_pso,
-	"W dc-power required to start the inversion process, or self-consumption by inverter, strongly influences inverter efficiency at low power levels, (W) [xxx], number.\n Required.",
+	PyDoc_STR("type: Float\n\nW dc-power required to start the inversion process, or self-consumption by inverter, strongly influences inverter efficiency at low power levels, (W) [xxx]\n\n*Required*: True"),
  	NULL},
 {"inv_snl_vdcmax", (getter)InverterCECDatabase_get_inv_snl_vdcmax,(setter)InverterCECDatabase_set_inv_snl_vdcmax,
-	"V (Vdcmax) dc-voltage maximum operating voltage, (V) [xxx], number.\n Required.",
+	PyDoc_STR("type: Float\n\nV (Vdcmax) dc-voltage maximum operating voltage, (V) [xxx]\n\n*Required*: True"),
  	NULL},
 {"inv_snl_vdco", (getter)InverterCECDatabase_get_inv_snl_vdco,(setter)InverterCECDatabase_set_inv_snl_vdco,
-	"V (Vnom) dc-voltage level at which the ac-power rating is achieved at the reference operating condition, (V) [xxx], number.\n Required.",
+	PyDoc_STR("type: Float\n\nV (Vnom) dc-voltage level at which the ac-power rating is achieved at the reference operating condition, (V) [xxx]\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -870,7 +870,7 @@ static PyTypeObject InverterCECDatabase_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		InverterCECDatabase_methods,         /*tp_methods*/
@@ -880,7 +880,7 @@ static PyTypeObject InverterCECDatabase_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -949,73 +949,73 @@ static PyMethodDef HCPVArray_methods[] = {
 static PyObject *
 HCPVArray_get_array_ac_wiring_loss(HCPVArrayObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Hcpv_HCPVArray_array_ac_wiring_loss_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Hcpv_HCPVArray_array_ac_wiring_loss_nget, self->data_ptr);
 }
 
 static int
 HCPVArray_set_array_ac_wiring_loss(HCPVArrayObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Hcpv_HCPVArray_array_ac_wiring_loss_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Hcpv_HCPVArray_array_ac_wiring_loss_nset, self->data_ptr);
 }
 
 static PyObject *
 HCPVArray_get_array_dc_mismatch_loss(HCPVArrayObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Hcpv_HCPVArray_array_dc_mismatch_loss_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Hcpv_HCPVArray_array_dc_mismatch_loss_nget, self->data_ptr);
 }
 
 static int
 HCPVArray_set_array_dc_mismatch_loss(HCPVArrayObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Hcpv_HCPVArray_array_dc_mismatch_loss_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Hcpv_HCPVArray_array_dc_mismatch_loss_nset, self->data_ptr);
 }
 
 static PyObject *
 HCPVArray_get_array_dc_wiring_loss(HCPVArrayObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Hcpv_HCPVArray_array_dc_wiring_loss_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Hcpv_HCPVArray_array_dc_wiring_loss_nget, self->data_ptr);
 }
 
 static int
 HCPVArray_set_array_dc_wiring_loss(HCPVArrayObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Hcpv_HCPVArray_array_dc_wiring_loss_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Hcpv_HCPVArray_array_dc_wiring_loss_nset, self->data_ptr);
 }
 
 static PyObject *
 HCPVArray_get_array_diode_conn_loss(HCPVArrayObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Hcpv_HCPVArray_array_diode_conn_loss_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Hcpv_HCPVArray_array_diode_conn_loss_nget, self->data_ptr);
 }
 
 static int
 HCPVArray_set_array_diode_conn_loss(HCPVArrayObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Hcpv_HCPVArray_array_diode_conn_loss_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Hcpv_HCPVArray_array_diode_conn_loss_nset, self->data_ptr);
 }
 
 static PyObject *
 HCPVArray_get_array_enable_azalt_sf(HCPVArrayObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Hcpv_HCPVArray_array_enable_azalt_sf_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Hcpv_HCPVArray_array_enable_azalt_sf_nget, self->data_ptr);
 }
 
 static int
 HCPVArray_set_array_enable_azalt_sf(HCPVArrayObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Hcpv_HCPVArray_array_enable_azalt_sf_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Hcpv_HCPVArray_array_enable_azalt_sf_nset, self->data_ptr);
 }
 
 static PyObject *
 HCPVArray_get_array_modules_per_tracker(HCPVArrayObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Hcpv_HCPVArray_array_modules_per_tracker_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Hcpv_HCPVArray_array_modules_per_tracker_nget, self->data_ptr);
 }
 
 static int
 HCPVArray_set_array_modules_per_tracker(HCPVArrayObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Hcpv_HCPVArray_array_modules_per_tracker_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Hcpv_HCPVArray_array_modules_per_tracker_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -1027,115 +1027,115 @@ HCPVArray_get_array_monthly_soiling(HCPVArrayObject *self, void *closure)
 static int
 HCPVArray_set_array_monthly_soiling(HCPVArrayObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Hcpv_HCPVArray_array_monthly_soiling_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Hcpv_HCPVArray_array_monthly_soiling_aset, self->data_ptr);
 }
 
 static PyObject *
 HCPVArray_get_array_num_inverters(HCPVArrayObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Hcpv_HCPVArray_array_num_inverters_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Hcpv_HCPVArray_array_num_inverters_nget, self->data_ptr);
 }
 
 static int
 HCPVArray_set_array_num_inverters(HCPVArrayObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Hcpv_HCPVArray_array_num_inverters_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Hcpv_HCPVArray_array_num_inverters_nset, self->data_ptr);
 }
 
 static PyObject *
 HCPVArray_get_array_num_trackers(HCPVArrayObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Hcpv_HCPVArray_array_num_trackers_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Hcpv_HCPVArray_array_num_trackers_nget, self->data_ptr);
 }
 
 static int
 HCPVArray_set_array_num_trackers(HCPVArrayObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Hcpv_HCPVArray_array_num_trackers_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Hcpv_HCPVArray_array_num_trackers_nset, self->data_ptr);
 }
 
 static PyObject *
 HCPVArray_get_array_rlim_az_max(HCPVArrayObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Hcpv_HCPVArray_array_rlim_az_max_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Hcpv_HCPVArray_array_rlim_az_max_nget, self->data_ptr);
 }
 
 static int
 HCPVArray_set_array_rlim_az_max(HCPVArrayObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Hcpv_HCPVArray_array_rlim_az_max_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Hcpv_HCPVArray_array_rlim_az_max_nset, self->data_ptr);
 }
 
 static PyObject *
 HCPVArray_get_array_rlim_az_min(HCPVArrayObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Hcpv_HCPVArray_array_rlim_az_min_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Hcpv_HCPVArray_array_rlim_az_min_nget, self->data_ptr);
 }
 
 static int
 HCPVArray_set_array_rlim_az_min(HCPVArrayObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Hcpv_HCPVArray_array_rlim_az_min_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Hcpv_HCPVArray_array_rlim_az_min_nset, self->data_ptr);
 }
 
 static PyObject *
 HCPVArray_get_array_rlim_el_max(HCPVArrayObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Hcpv_HCPVArray_array_rlim_el_max_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Hcpv_HCPVArray_array_rlim_el_max_nget, self->data_ptr);
 }
 
 static int
 HCPVArray_set_array_rlim_el_max(HCPVArrayObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Hcpv_HCPVArray_array_rlim_el_max_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Hcpv_HCPVArray_array_rlim_el_max_nset, self->data_ptr);
 }
 
 static PyObject *
 HCPVArray_get_array_rlim_el_min(HCPVArrayObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Hcpv_HCPVArray_array_rlim_el_min_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Hcpv_HCPVArray_array_rlim_el_min_nget, self->data_ptr);
 }
 
 static int
 HCPVArray_set_array_rlim_el_min(HCPVArrayObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Hcpv_HCPVArray_array_rlim_el_min_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Hcpv_HCPVArray_array_rlim_el_min_nset, self->data_ptr);
 }
 
 static PyObject *
 HCPVArray_get_array_tracker_power_fraction(HCPVArrayObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Hcpv_HCPVArray_array_tracker_power_fraction_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Hcpv_HCPVArray_array_tracker_power_fraction_nget, self->data_ptr);
 }
 
 static int
 HCPVArray_set_array_tracker_power_fraction(HCPVArrayObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Hcpv_HCPVArray_array_tracker_power_fraction_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Hcpv_HCPVArray_array_tracker_power_fraction_nset, self->data_ptr);
 }
 
 static PyObject *
 HCPVArray_get_array_tracking_error(HCPVArrayObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Hcpv_HCPVArray_array_tracking_error_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Hcpv_HCPVArray_array_tracking_error_nget, self->data_ptr);
 }
 
 static int
 HCPVArray_set_array_tracking_error(HCPVArrayObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Hcpv_HCPVArray_array_tracking_error_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Hcpv_HCPVArray_array_tracking_error_nset, self->data_ptr);
 }
 
 static PyObject *
 HCPVArray_get_array_wind_stow_speed(HCPVArrayObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Hcpv_HCPVArray_array_wind_stow_speed_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Hcpv_HCPVArray_array_wind_stow_speed_nget, self->data_ptr);
 }
 
 static int
 HCPVArray_set_array_wind_stow_speed(HCPVArrayObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Hcpv_HCPVArray_array_wind_stow_speed_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Hcpv_HCPVArray_array_wind_stow_speed_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -1152,55 +1152,55 @@ HCPVArray_set_azaltsf(HCPVArrayObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef HCPVArray_getset[] = {
 {"array_ac_wiring_loss", (getter)HCPVArray_get_array_ac_wiring_loss,(setter)HCPVArray_set_array_ac_wiring_loss,
-	"AC wiring loss factor [0..1], number.\n Required.",
+	PyDoc_STR("type: Float\n\nAC wiring loss factor [0..1]\n\n*Required*: True"),
  	NULL},
 {"array_dc_mismatch_loss", (getter)HCPVArray_get_array_dc_mismatch_loss,(setter)HCPVArray_set_array_dc_mismatch_loss,
-	"DC module mismatch loss factor [0..1], number.\n Required.",
+	PyDoc_STR("type: Float\n\nDC module mismatch loss factor [0..1]\n\n*Required*: True"),
  	NULL},
 {"array_dc_wiring_loss", (getter)HCPVArray_get_array_dc_wiring_loss,(setter)HCPVArray_set_array_dc_wiring_loss,
-	"DC Wiring loss factor [0..1], number.\n Required.",
+	PyDoc_STR("type: Float\n\nDC Wiring loss factor [0..1]\n\n*Required*: True"),
  	NULL},
 {"array_diode_conn_loss", (getter)HCPVArray_get_array_diode_conn_loss,(setter)HCPVArray_set_array_diode_conn_loss,
-	"Diodes and connections loss factor [0..1], number.\n Required.",
+	PyDoc_STR("type: Float\n\nDiodes and connections loss factor [0..1]\n\n*Required*: True"),
  	NULL},
 {"array_enable_azalt_sf", (getter)HCPVArray_get_array_enable_azalt_sf,(setter)HCPVArray_set_array_enable_azalt_sf,
-	"Boolean for irradiance derate [0-1], number.\n Constraints: INTEGER; Required.",
+	PyDoc_STR("type: Float\n\nBoolean for irradiance derate [0-1]\n\n*Constraints*: INTEGER\n\n*Required*: True"),
  	NULL},
 {"array_modules_per_tracker", (getter)HCPVArray_get_array_modules_per_tracker,(setter)HCPVArray_set_array_modules_per_tracker,
-	"Modules on each tracker [none], number.\n Constraints: INTEGER; Required.",
+	PyDoc_STR("type: Float\n\nModules on each tracker [none]\n\n*Constraints*: INTEGER\n\n*Required*: True"),
  	NULL},
 {"array_monthly_soiling", (getter)HCPVArray_get_array_monthly_soiling,(setter)HCPVArray_set_array_monthly_soiling,
-	"Monthly soiling factors array [0..1], array.\n Required.",
+	PyDoc_STR("type: Sequence\n\nMonthly soiling factors array [0..1]\n\n*Required*: True"),
  	NULL},
 {"array_num_inverters", (getter)HCPVArray_get_array_num_inverters,(setter)HCPVArray_set_array_num_inverters,
-	"Number of inverters [none], number.\n Required.",
+	PyDoc_STR("type: Float\n\nNumber of inverters [none]\n\n*Required*: True"),
  	NULL},
 {"array_num_trackers", (getter)HCPVArray_get_array_num_trackers,(setter)HCPVArray_set_array_num_trackers,
-	"Number of trackers [none], number.\n Constraints: INTEGER; Required.",
+	PyDoc_STR("type: Float\n\nNumber of trackers [none]\n\n*Constraints*: INTEGER\n\n*Required*: True"),
  	NULL},
 {"array_rlim_az_max", (getter)HCPVArray_get_array_rlim_az_max,(setter)HCPVArray_set_array_rlim_az_max,
-	"Tracker maximum azimuth angle [deg], number.\n Required.",
+	PyDoc_STR("type: Float\n\nTracker maximum azimuth angle [deg]\n\n*Required*: True"),
  	NULL},
 {"array_rlim_az_min", (getter)HCPVArray_get_array_rlim_az_min,(setter)HCPVArray_set_array_rlim_az_min,
-	"Tracker minimum azimuth angle [deg], number.\n Required.",
+	PyDoc_STR("type: Float\n\nTracker minimum azimuth angle [deg]\n\n*Required*: True"),
  	NULL},
 {"array_rlim_el_max", (getter)HCPVArray_get_array_rlim_el_max,(setter)HCPVArray_set_array_rlim_el_max,
-	"Tracker maximum elevation angle [deg], number.\n Required.",
+	PyDoc_STR("type: Float\n\nTracker maximum elevation angle [deg]\n\n*Required*: True"),
  	NULL},
 {"array_rlim_el_min", (getter)HCPVArray_get_array_rlim_el_min,(setter)HCPVArray_set_array_rlim_el_min,
-	"Tracker minimum elevation angle [deg], number.\n Required.",
+	PyDoc_STR("type: Float\n\nTracker minimum elevation angle [deg]\n\n*Required*: True"),
  	NULL},
 {"array_tracker_power_fraction", (getter)HCPVArray_get_array_tracker_power_fraction,(setter)HCPVArray_set_array_tracker_power_fraction,
-	"Single tracker power fraction [0..1], number.\n Required.",
+	PyDoc_STR("type: Float\n\nSingle tracker power fraction [0..1]\n\n*Required*: True"),
  	NULL},
 {"array_tracking_error", (getter)HCPVArray_get_array_tracking_error,(setter)HCPVArray_set_array_tracking_error,
-	"General racking error [0..1], number.\n Required.",
+	PyDoc_STR("type: Float\n\nGeneral racking error [0..1]\n\n*Required*: True"),
  	NULL},
 {"array_wind_stow_speed", (getter)HCPVArray_get_array_wind_stow_speed,(setter)HCPVArray_set_array_wind_stow_speed,
-	"Allowed wind speed before stowing [m/s], number.\n Required.",
+	PyDoc_STR("type: Float\n\nAllowed wind speed before stowing [m/s]\n\n*Required*: True"),
  	NULL},
 {"azaltsf", (getter)HCPVArray_get_azaltsf,(setter)HCPVArray_set_azaltsf,
-	"Azimuth-Altitude Shading Table, matrix.\n Required.",
+	PyDoc_STR("type: Sequence[Sequence]\n\nAzimuth-Altitude Shading Table\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1233,7 +1233,7 @@ static PyTypeObject HCPVArray_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		HCPVArray_methods,         /*tp_methods*/
@@ -1243,7 +1243,7 @@ static PyTypeObject HCPVArray_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -1312,61 +1312,61 @@ static PyMethodDef Outputs_methods[] = {
 static PyObject *
 Outputs_get_ac_loss_tracker_kwh(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Hcpv_Outputs_ac_loss_tracker_kwh_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Hcpv_Outputs_ac_loss_tracker_kwh_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_annual_ac(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Hcpv_Outputs_annual_ac_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Hcpv_Outputs_annual_ac_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_annual_beam(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Hcpv_Outputs_annual_beam_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Hcpv_Outputs_annual_beam_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_annual_dc(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Hcpv_Outputs_annual_dc_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Hcpv_Outputs_annual_dc_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_annual_dc_net(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Hcpv_Outputs_annual_dc_net_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Hcpv_Outputs_annual_dc_net_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_annual_energy(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Hcpv_Outputs_annual_energy_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Hcpv_Outputs_annual_energy_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_annual_input_radiation(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Hcpv_Outputs_annual_input_radiation_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Hcpv_Outputs_annual_input_radiation_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_capacity_factor(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Hcpv_Outputs_capacity_factor_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Hcpv_Outputs_capacity_factor_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_dc_loss_stowing_kwh(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Hcpv_Outputs_dc_loss_stowing_kwh_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Hcpv_Outputs_dc_loss_stowing_kwh_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_dc_nominal(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Hcpv_Outputs_dc_nominal_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Hcpv_Outputs_dc_nominal_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -1492,13 +1492,13 @@ Outputs_get_hourly_windspd(OutputsObject *self, void *closure)
 static PyObject *
 Outputs_get_kwh_per_kw(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Hcpv_Outputs_kwh_per_kw_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Hcpv_Outputs_kwh_per_kw_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_modeff_ref(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Hcpv_Outputs_modeff_ref_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Hcpv_Outputs_modeff_ref_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -1528,120 +1528,120 @@ Outputs_get_monthly_input_radiation(OutputsObject *self, void *closure)
 static PyObject *
 Outputs_get_tracker_nameplate_watts(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Hcpv_Outputs_tracker_nameplate_watts_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Hcpv_Outputs_tracker_nameplate_watts_nget, self->data_ptr);
 }
 
 static PyGetSetDef Outputs_getset[] = {
 {"ac_loss_tracker_kwh", (getter)Outputs_get_ac_loss_tracker_kwh,(setter)0,
-	"Annual tracker power loss [kWh], number.",
+	PyDoc_STR("type: Float\n\nAnnual tracker power loss [kWh]"),
  	NULL},
 {"annual_ac", (getter)Outputs_get_annual_ac,(setter)0,
-	"AC gross [kWh], number.",
+	PyDoc_STR("type: Float\n\nAC gross [kWh]"),
  	NULL},
 {"annual_beam", (getter)Outputs_get_annual_beam,(setter)0,
-	"Beam irradiance [kW/m2], number.",
+	PyDoc_STR("type: Float\n\nBeam irradiance [kW/m2]"),
  	NULL},
 {"annual_dc", (getter)Outputs_get_annual_dc,(setter)0,
-	"DC gross [kWh], number.",
+	PyDoc_STR("type: Float\n\nDC gross [kWh]"),
  	NULL},
 {"annual_dc_net", (getter)Outputs_get_annual_dc_net,(setter)0,
-	"DC net [kWh], number.",
+	PyDoc_STR("type: Float\n\nDC net [kWh]"),
  	NULL},
 {"annual_energy", (getter)Outputs_get_annual_energy,(setter)0,
-	"Annual Energy [kWh], number.",
+	PyDoc_STR("type: Float\n\nAnnual Energy [kWh]"),
  	NULL},
 {"annual_input_radiation", (getter)Outputs_get_annual_input_radiation,(setter)0,
-	"Input radiation [kWh], number.",
+	PyDoc_STR("type: Float\n\nInput radiation [kWh]"),
  	NULL},
 {"capacity_factor", (getter)Outputs_get_capacity_factor,(setter)0,
-	"Capacity factor [%], number.",
+	PyDoc_STR("type: Float\n\nCapacity factor [%]"),
  	NULL},
 {"dc_loss_stowing_kwh", (getter)Outputs_get_dc_loss_stowing_kwh,(setter)0,
-	"Annual stowing power loss [kWh], number.",
+	PyDoc_STR("type: Float\n\nAnnual stowing power loss [kWh]"),
  	NULL},
 {"dc_nominal", (getter)Outputs_get_dc_nominal,(setter)0,
-	"Annual DC nominal [kWh], number.",
+	PyDoc_STR("type: Float\n\nAnnual DC nominal [kWh]"),
  	NULL},
 {"gen", (getter)Outputs_get_gen,(setter)0,
-	"System power generated [kW], array.",
+	PyDoc_STR("type: Sequence\n\nSystem power generated [kW]"),
  	NULL},
 {"hourly_ac", (getter)Outputs_get_hourly_ac,(setter)0,
-	"AC gross [kWh], array.",
+	PyDoc_STR("type: Sequence\n\nAC gross [kWh]"),
  	NULL},
 {"hourly_airmass", (getter)Outputs_get_hourly_airmass,(setter)0,
-	"Relative air mass [none], array.",
+	PyDoc_STR("type: Sequence\n\nRelative air mass [none]"),
  	NULL},
 {"hourly_beam", (getter)Outputs_get_hourly_beam,(setter)0,
-	"Beam irradiance [kW/m2], array.",
+	PyDoc_STR("type: Sequence\n\nBeam irradiance [kW/m2]"),
  	NULL},
 {"hourly_celleff", (getter)Outputs_get_hourly_celleff,(setter)0,
-	"Cell efficiency [%], array.",
+	PyDoc_STR("type: Sequence\n\nCell efficiency [%]"),
  	NULL},
 {"hourly_dc", (getter)Outputs_get_hourly_dc,(setter)0,
-	"DC gross [kWh], array.",
+	PyDoc_STR("type: Sequence\n\nDC gross [kWh]"),
  	NULL},
 {"hourly_dc_net", (getter)Outputs_get_hourly_dc_net,(setter)0,
-	"DC net [kWh], array.",
+	PyDoc_STR("type: Sequence\n\nDC net [kWh]"),
  	NULL},
 {"hourly_input_radiation", (getter)Outputs_get_hourly_input_radiation,(setter)0,
-	"Input radiation [kWh], array.",
+	PyDoc_STR("type: Sequence\n\nInput radiation [kWh]"),
  	NULL},
 {"hourly_modeff", (getter)Outputs_get_hourly_modeff,(setter)0,
-	"Module efficiency [%], array.",
+	PyDoc_STR("type: Sequence\n\nModule efficiency [%]"),
  	NULL},
 {"hourly_poa", (getter)Outputs_get_hourly_poa,(setter)0,
-	"POA on cell [W/m2], array.",
+	PyDoc_STR("type: Sequence\n\nPOA on cell [W/m2]"),
  	NULL},
 {"hourly_sazi", (getter)Outputs_get_hourly_sazi,(setter)0,
-	"Tracker azimuth [deg], array.",
+	PyDoc_STR("type: Sequence\n\nTracker azimuth [deg]"),
  	NULL},
 {"hourly_shading_derate", (getter)Outputs_get_hourly_shading_derate,(setter)0,
-	"Shading derate [none], array.",
+	PyDoc_STR("type: Sequence\n\nShading derate [none]"),
  	NULL},
 {"hourly_solazi", (getter)Outputs_get_hourly_solazi,(setter)0,
-	"Hourly solar azimuth [deg], array.",
+	PyDoc_STR("type: Sequence\n\nHourly solar azimuth [deg]"),
  	NULL},
 {"hourly_solzen", (getter)Outputs_get_hourly_solzen,(setter)0,
-	"Hourly solar zenith [deg], array.",
+	PyDoc_STR("type: Sequence\n\nHourly solar zenith [deg]"),
  	NULL},
 {"hourly_stilt", (getter)Outputs_get_hourly_stilt,(setter)0,
-	"Tracker tilt [deg], array.",
+	PyDoc_STR("type: Sequence\n\nTracker tilt [deg]"),
  	NULL},
 {"hourly_sunup", (getter)Outputs_get_hourly_sunup,(setter)0,
-	"Sun up? (0/1) [0 or 1], array.",
+	PyDoc_STR("type: Sequence\n\nSun up? (0/1) [0 or 1]"),
  	NULL},
 {"hourly_tcell", (getter)Outputs_get_hourly_tcell,(setter)0,
-	"Cell temperature [C], array.",
+	PyDoc_STR("type: Sequence\n\nCell temperature [C]"),
  	NULL},
 {"hourly_tdry", (getter)Outputs_get_hourly_tdry,(setter)0,
-	"Ambient dry bulb temperature [C], array.",
+	PyDoc_STR("type: Sequence\n\nAmbient dry bulb temperature [C]"),
  	NULL},
 {"hourly_tmod", (getter)Outputs_get_hourly_tmod,(setter)0,
-	"Module backplate temp [C], array.",
+	PyDoc_STR("type: Sequence\n\nModule backplate temp [C]"),
  	NULL},
 {"hourly_windspd", (getter)Outputs_get_hourly_windspd,(setter)0,
-	"Wind speed [m/s], array.",
+	PyDoc_STR("type: Sequence\n\nWind speed [m/s]"),
  	NULL},
 {"kwh_per_kw", (getter)Outputs_get_kwh_per_kw,(setter)0,
-	"First year kWh/kW [kWh/kW], number.",
+	PyDoc_STR("type: Float\n\nFirst year kWh/kW [kWh/kW]"),
  	NULL},
 {"modeff_ref", (getter)Outputs_get_modeff_ref,(setter)0,
-	"Module efficiency [-], number.",
+	PyDoc_STR("type: Float\n\nModule efficiency [-]"),
  	NULL},
 {"monthly_beam", (getter)Outputs_get_monthly_beam,(setter)0,
-	"Beam irradiance [kW/m2], array.",
+	PyDoc_STR("type: Sequence\n\nBeam irradiance [kW/m2]"),
  	NULL},
 {"monthly_dc_net", (getter)Outputs_get_monthly_dc_net,(setter)0,
-	"DC net [kWh], array.",
+	PyDoc_STR("type: Sequence\n\nDC net [kWh]"),
  	NULL},
 {"monthly_energy", (getter)Outputs_get_monthly_energy,(setter)0,
-	"Monthly Energy [kWh], array.",
+	PyDoc_STR("type: Sequence\n\nMonthly Energy [kWh]"),
  	NULL},
 {"monthly_input_radiation", (getter)Outputs_get_monthly_input_radiation,(setter)0,
-	"Input radiation [kWh], array.",
+	PyDoc_STR("type: Sequence\n\nInput radiation [kWh]"),
  	NULL},
 {"tracker_nameplate_watts", (getter)Outputs_get_tracker_nameplate_watts,(setter)0,
-	"Tracker nameplate [watts], number.",
+	PyDoc_STR("type: Float\n\nTracker nameplate [watts]"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1674,7 +1674,7 @@ static PyTypeObject Outputs_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		Outputs_methods,         /*tp_methods*/
@@ -1684,7 +1684,7 @@ static PyTypeObject Outputs_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -1813,7 +1813,7 @@ static PyMethodDef Hcpv_methods[] = {
 		{"assign",            (PyCFunction)Hcpv_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs")},
 		{"export",            (PyCFunction)Hcpv_export,  METH_VARARGS,
-				PyDoc_STR("assign() -> None\n Export attributes into dictionary")},
+				PyDoc_STR("export() -> None\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -1853,11 +1853,11 @@ static PyTypeObject Hcpv_Type = {
 		0,                          /*tp_setattro*/
 		0,                          /*tp_as_buffer*/
 		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
-		"see html for help",        /*tp_doc*/
+		"Wrapper for `cmod_hcpv.cpp <https://github.com/NREL/ssc/blob/develop/ssc/cmod_hcpv.cpp>`_",        /*tp_doc*/
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		Hcpv_methods,      /*tp_methods*/
@@ -1867,7 +1867,7 @@ static PyTypeObject Hcpv_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,                          /*tp_new*/
@@ -1932,10 +1932,10 @@ static PyMethodDef HcpvModule_methods[] = {
 		{"new",             Hcpv_new,         METH_VARARGS,
 				PyDoc_STR("new() -> new Hcpv object")},
 		{"default",             Hcpv_default,         METH_VARARGS,
-				PyDoc_STR("default(financial) -> new Hcpv object with financial model-specific default attributes\n"
-				"Options: HighXConcentratingPVAllEquityPartnershipFlip\nHighXConcentratingPVIndependentPowerProducer\nHighXConcentratingPVLCOECalculator\nHighXConcentratingPVLeveragedPartnershipFlip\nHighXConcentratingPVNone\nHighXConcentratingPVSaleLeaseback\nHighXConcentratingPVSingleOwner")},
+				PyDoc_STR("default(config) -> new Hcpv object with financial model-specific default attributes\n"
+				"config options:\n\n- \"HighXConcentratingPVAllEquityPartnershipFlip\"\n- \"HighXConcentratingPVIndependentPowerProducer\"\n- \"HighXConcentratingPVLCOECalculator\"\n- \"HighXConcentratingPVLeveragedPartnershipFlip\"\n- \"HighXConcentratingPVNone\"\n- \"HighXConcentratingPVSaleLeaseback\"\n- \"HighXConcentratingPVSingleOwner\"")},
 		{"wrap",             Hcpv_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> new Hcpv object around existing PySSC data, taking over memory ownership")},
+				PyDoc_STR("wrap(ssc_data_t) -> new Hcpv object around existing PySSC data, taking over memory ownership\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to `wrap`")},
 		{NULL,              NULL}           /* sentinel */
 };
 

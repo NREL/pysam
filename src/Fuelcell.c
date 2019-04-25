@@ -67,25 +67,25 @@ static PyMethodDef Common_methods[] = {
 static PyObject *
 Common_get_annual_energy(CommonObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Fuelcell_Common_annual_energy_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Fuelcell_Common_annual_energy_nget, self->data_ptr);
 }
 
 static int
 Common_set_annual_energy(CommonObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Fuelcell_Common_annual_energy_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Fuelcell_Common_annual_energy_nset, self->data_ptr);
 }
 
 static PyObject *
 Common_get_capacity_factor(CommonObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Fuelcell_Common_capacity_factor_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Fuelcell_Common_capacity_factor_nget, self->data_ptr);
 }
 
 static int
 Common_set_capacity_factor(CommonObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Fuelcell_Common_capacity_factor_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Fuelcell_Common_capacity_factor_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -97,33 +97,33 @@ Common_get_gen(CommonObject *self, void *closure)
 static int
 Common_set_gen(CommonObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Fuelcell_Common_gen_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Fuelcell_Common_gen_aset, self->data_ptr);
 }
 
 static PyObject *
 Common_get_percent_complete(CommonObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Fuelcell_Common_percent_complete_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Fuelcell_Common_percent_complete_nget, self->data_ptr);
 }
 
 static int
 Common_set_percent_complete(CommonObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Fuelcell_Common_percent_complete_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Fuelcell_Common_percent_complete_nset, self->data_ptr);
 }
 
 static PyGetSetDef Common_getset[] = {
 {"annual_energy", (getter)Common_get_annual_energy,(setter)Common_set_annual_energy,
-	"Annual Energy [kWh], number.\n 0 if not set.",
+	PyDoc_STR("type: Float\n\nAnnual Energy [kWh]\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"capacity_factor", (getter)Common_get_capacity_factor,(setter)Common_set_capacity_factor,
-	"Capacity factor [%], number.\n 0 if not set.",
+	PyDoc_STR("type: Float\n\nCapacity factor [%]\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"gen", (getter)Common_get_gen,(setter)Common_set_gen,
-	"System power generated [kW], array.\n Lifetime system generation; ",
+	PyDoc_STR("type: Sequence\n\nSystem power generated [kW]\n\n*Info*: Lifetime system generation"),
  	NULL},
 {"percent_complete", (getter)Common_get_percent_complete,(setter)Common_set_percent_complete,
-	"Estimated simulation status [%], number.\n ",
+	PyDoc_STR("type: Float\n\nEstimated simulation status [%]"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -156,7 +156,7 @@ static PyTypeObject Common_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		Common_methods,         /*tp_methods*/
@@ -166,7 +166,7 @@ static PyTypeObject Common_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -235,33 +235,33 @@ static PyMethodDef Lifetime_methods[] = {
 static PyObject *
 Lifetime_get_analysis_period(LifetimeObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Fuelcell_Lifetime_analysis_period_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Fuelcell_Lifetime_analysis_period_nget, self->data_ptr);
 }
 
 static int
 Lifetime_set_analysis_period(LifetimeObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Fuelcell_Lifetime_analysis_period_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Fuelcell_Lifetime_analysis_period_nset, self->data_ptr);
 }
 
 static PyObject *
 Lifetime_get_system_use_lifetime_output(LifetimeObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Fuelcell_Lifetime_system_use_lifetime_output_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Fuelcell_Lifetime_system_use_lifetime_output_nget, self->data_ptr);
 }
 
 static int
 Lifetime_set_system_use_lifetime_output(LifetimeObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Fuelcell_Lifetime_system_use_lifetime_output_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Fuelcell_Lifetime_system_use_lifetime_output_nset, self->data_ptr);
 }
 
 static PyGetSetDef Lifetime_getset[] = {
 {"analysis_period", (getter)Lifetime_get_analysis_period,(setter)Lifetime_set_analysis_period,
-	"Lifetime analysis period [years], number.\n The number of years in the simulation; Required if system_use_lifetime_output=1.",
+	PyDoc_STR("type: Float\n\nLifetime analysis period [years]\n\n*Info*: The number of years in the simulation\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"system_use_lifetime_output", (getter)Lifetime_get_system_use_lifetime_output,(setter)Lifetime_set_system_use_lifetime_output,
-	"Lifetime simulation [0/1], number.\n 0=SingleYearRepeated,1=RunEveryYear; Constraints: BOOLEAN; 0 if not set.",
+	PyDoc_STR("type: Float\n\nLifetime simulation [0/1]\n\n*Options*: 0=SingleYearRepeated,1=RunEveryYear\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -294,7 +294,7 @@ static PyTypeObject Lifetime_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		Lifetime_methods,         /*tp_methods*/
@@ -304,7 +304,7 @@ static PyTypeObject Lifetime_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -379,12 +379,12 @@ Load_get_load(LoadObject *self, void *closure)
 static int
 Load_set_load(LoadObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Fuelcell_Load_load_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Fuelcell_Load_load_aset, self->data_ptr);
 }
 
 static PyGetSetDef Load_getset[] = {
 {"load", (getter)Load_get_load,(setter)Load_set_load,
-	"Electricity load (year 1) [kW], array.\n ",
+	PyDoc_STR("type: Sequence\n\nElectricity load (year 1) [kW]"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -417,7 +417,7 @@ static PyTypeObject Load_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		Load_methods,         /*tp_methods*/
@@ -427,7 +427,7 @@ static PyTypeObject Load_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -502,7 +502,7 @@ FuelCell_get_dispatch_manual_fuelcellcharge(FuelCellObject *self, void *closure)
 static int
 FuelCell_set_dispatch_manual_fuelcellcharge(FuelCellObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Fuelcell_FuelCell_dispatch_manual_fuelcellcharge_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Fuelcell_FuelCell_dispatch_manual_fuelcellcharge_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -514,7 +514,7 @@ FuelCell_get_dispatch_manual_fuelcelldischarge(FuelCellObject *self, void *closu
 static int
 FuelCell_set_dispatch_manual_fuelcelldischarge(FuelCellObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Fuelcell_FuelCell_dispatch_manual_fuelcelldischarge_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Fuelcell_FuelCell_dispatch_manual_fuelcelldischarge_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -526,7 +526,7 @@ FuelCell_get_dispatch_manual_percent_fc_discharge(FuelCellObject *self, void *cl
 static int
 FuelCell_set_dispatch_manual_percent_fc_discharge(FuelCellObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Fuelcell_FuelCell_dispatch_manual_percent_fc_discharge_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Fuelcell_FuelCell_dispatch_manual_percent_fc_discharge_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -562,7 +562,7 @@ FuelCell_get_dispatch_manual_units_fc_discharge(FuelCellObject *self, void *clos
 static int
 FuelCell_set_dispatch_manual_units_fc_discharge(FuelCellObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Fuelcell_FuelCell_dispatch_manual_units_fc_discharge_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Fuelcell_FuelCell_dispatch_manual_units_fc_discharge_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -580,49 +580,49 @@ FuelCell_set_fuelcell_availability_schedule(FuelCellObject *self, PyObject *valu
 static PyObject *
 FuelCell_get_fuelcell_degradation(FuelCellObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Fuelcell_FuelCell_fuelcell_degradation_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Fuelcell_FuelCell_fuelcell_degradation_nget, self->data_ptr);
 }
 
 static int
 FuelCell_set_fuelcell_degradation(FuelCellObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Fuelcell_FuelCell_fuelcell_degradation_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Fuelcell_FuelCell_fuelcell_degradation_nset, self->data_ptr);
 }
 
 static PyObject *
 FuelCell_get_fuelcell_degradation_restart(FuelCellObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Fuelcell_FuelCell_fuelcell_degradation_restart_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Fuelcell_FuelCell_fuelcell_degradation_restart_nget, self->data_ptr);
 }
 
 static int
 FuelCell_set_fuelcell_degradation_restart(FuelCellObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Fuelcell_FuelCell_fuelcell_degradation_restart_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Fuelcell_FuelCell_fuelcell_degradation_restart_nset, self->data_ptr);
 }
 
 static PyObject *
 FuelCell_get_fuelcell_degradation_restart_schedule(FuelCellObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Fuelcell_FuelCell_fuelcell_degradation_restart_schedule_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Fuelcell_FuelCell_fuelcell_degradation_restart_schedule_nget, self->data_ptr);
 }
 
 static int
 FuelCell_set_fuelcell_degradation_restart_schedule(FuelCellObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Fuelcell_FuelCell_fuelcell_degradation_restart_schedule_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Fuelcell_FuelCell_fuelcell_degradation_restart_schedule_nset, self->data_ptr);
 }
 
 static PyObject *
 FuelCell_get_fuelcell_degradation_restarts_per_year(FuelCellObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Fuelcell_FuelCell_fuelcell_degradation_restarts_per_year_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Fuelcell_FuelCell_fuelcell_degradation_restarts_per_year_nget, self->data_ptr);
 }
 
 static int
 FuelCell_set_fuelcell_degradation_restarts_per_year(FuelCellObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Fuelcell_FuelCell_fuelcell_degradation_restarts_per_year_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Fuelcell_FuelCell_fuelcell_degradation_restarts_per_year_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -634,43 +634,43 @@ FuelCell_get_fuelcell_dispatch(FuelCellObject *self, void *closure)
 static int
 FuelCell_set_fuelcell_dispatch(FuelCellObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Fuelcell_FuelCell_fuelcell_dispatch_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Fuelcell_FuelCell_fuelcell_dispatch_aset, self->data_ptr);
 }
 
 static PyObject *
 FuelCell_get_fuelcell_dispatch_choice(FuelCellObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Fuelcell_FuelCell_fuelcell_dispatch_choice_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Fuelcell_FuelCell_fuelcell_dispatch_choice_nget, self->data_ptr);
 }
 
 static int
 FuelCell_set_fuelcell_dispatch_choice(FuelCellObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Fuelcell_FuelCell_fuelcell_dispatch_choice_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Fuelcell_FuelCell_fuelcell_dispatch_choice_nset, self->data_ptr);
 }
 
 static PyObject *
 FuelCell_get_fuelcell_dynamic_response_down(FuelCellObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Fuelcell_FuelCell_fuelcell_dynamic_response_down_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Fuelcell_FuelCell_fuelcell_dynamic_response_down_nget, self->data_ptr);
 }
 
 static int
 FuelCell_set_fuelcell_dynamic_response_down(FuelCellObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Fuelcell_FuelCell_fuelcell_dynamic_response_down_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Fuelcell_FuelCell_fuelcell_dynamic_response_down_nset, self->data_ptr);
 }
 
 static PyObject *
 FuelCell_get_fuelcell_dynamic_response_up(FuelCellObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Fuelcell_FuelCell_fuelcell_dynamic_response_up_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Fuelcell_FuelCell_fuelcell_dynamic_response_up_nget, self->data_ptr);
 }
 
 static int
 FuelCell_set_fuelcell_dynamic_response_up(FuelCellObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Fuelcell_FuelCell_fuelcell_dynamic_response_up_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Fuelcell_FuelCell_fuelcell_dynamic_response_up_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -688,121 +688,121 @@ FuelCell_set_fuelcell_efficiency(FuelCellObject *self, PyObject *value, void *cl
 static PyObject *
 FuelCell_get_fuelcell_efficiency_choice(FuelCellObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Fuelcell_FuelCell_fuelcell_efficiency_choice_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Fuelcell_FuelCell_fuelcell_efficiency_choice_nget, self->data_ptr);
 }
 
 static int
 FuelCell_set_fuelcell_efficiency_choice(FuelCellObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Fuelcell_FuelCell_fuelcell_efficiency_choice_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Fuelcell_FuelCell_fuelcell_efficiency_choice_nset, self->data_ptr);
 }
 
 static PyObject *
 FuelCell_get_fuelcell_fixed_pct(FuelCellObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Fuelcell_FuelCell_fuelcell_fixed_pct_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Fuelcell_FuelCell_fuelcell_fixed_pct_nget, self->data_ptr);
 }
 
 static int
 FuelCell_set_fuelcell_fixed_pct(FuelCellObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Fuelcell_FuelCell_fuelcell_fixed_pct_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Fuelcell_FuelCell_fuelcell_fixed_pct_nset, self->data_ptr);
 }
 
 static PyObject *
 FuelCell_get_fuelcell_fuel_available(FuelCellObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Fuelcell_FuelCell_fuelcell_fuel_available_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Fuelcell_FuelCell_fuelcell_fuel_available_nget, self->data_ptr);
 }
 
 static int
 FuelCell_set_fuelcell_fuel_available(FuelCellObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Fuelcell_FuelCell_fuelcell_fuel_available_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Fuelcell_FuelCell_fuelcell_fuel_available_nset, self->data_ptr);
 }
 
 static PyObject *
 FuelCell_get_fuelcell_fuel_price(FuelCellObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Fuelcell_FuelCell_fuelcell_fuel_price_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Fuelcell_FuelCell_fuelcell_fuel_price_nget, self->data_ptr);
 }
 
 static int
 FuelCell_set_fuelcell_fuel_price(FuelCellObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Fuelcell_FuelCell_fuelcell_fuel_price_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Fuelcell_FuelCell_fuelcell_fuel_price_nset, self->data_ptr);
 }
 
 static PyObject *
 FuelCell_get_fuelcell_fuel_type(FuelCellObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Fuelcell_FuelCell_fuelcell_fuel_type_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Fuelcell_FuelCell_fuelcell_fuel_type_nget, self->data_ptr);
 }
 
 static int
 FuelCell_set_fuelcell_fuel_type(FuelCellObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Fuelcell_FuelCell_fuelcell_fuel_type_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Fuelcell_FuelCell_fuelcell_fuel_type_nset, self->data_ptr);
 }
 
 static PyObject *
 FuelCell_get_fuelcell_lhv(FuelCellObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Fuelcell_FuelCell_fuelcell_lhv_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Fuelcell_FuelCell_fuelcell_lhv_nget, self->data_ptr);
 }
 
 static int
 FuelCell_set_fuelcell_lhv(FuelCellObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Fuelcell_FuelCell_fuelcell_lhv_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Fuelcell_FuelCell_fuelcell_lhv_nset, self->data_ptr);
 }
 
 static PyObject *
 FuelCell_get_fuelcell_number_of_units(FuelCellObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Fuelcell_FuelCell_fuelcell_number_of_units_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Fuelcell_FuelCell_fuelcell_number_of_units_nget, self->data_ptr);
 }
 
 static int
 FuelCell_set_fuelcell_number_of_units(FuelCellObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Fuelcell_FuelCell_fuelcell_number_of_units_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Fuelcell_FuelCell_fuelcell_number_of_units_nset, self->data_ptr);
 }
 
 static PyObject *
 FuelCell_get_fuelcell_operation_options(FuelCellObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Fuelcell_FuelCell_fuelcell_operation_options_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Fuelcell_FuelCell_fuelcell_operation_options_nget, self->data_ptr);
 }
 
 static int
 FuelCell_set_fuelcell_operation_options(FuelCellObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Fuelcell_FuelCell_fuelcell_operation_options_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Fuelcell_FuelCell_fuelcell_operation_options_nset, self->data_ptr);
 }
 
 static PyObject *
 FuelCell_get_fuelcell_replacement_option(FuelCellObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Fuelcell_FuelCell_fuelcell_replacement_option_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Fuelcell_FuelCell_fuelcell_replacement_option_nget, self->data_ptr);
 }
 
 static int
 FuelCell_set_fuelcell_replacement_option(FuelCellObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Fuelcell_FuelCell_fuelcell_replacement_option_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Fuelcell_FuelCell_fuelcell_replacement_option_nset, self->data_ptr);
 }
 
 static PyObject *
 FuelCell_get_fuelcell_replacement_percent(FuelCellObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Fuelcell_FuelCell_fuelcell_replacement_percent_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Fuelcell_FuelCell_fuelcell_replacement_percent_nget, self->data_ptr);
 }
 
 static int
 FuelCell_set_fuelcell_replacement_percent(FuelCellObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Fuelcell_FuelCell_fuelcell_replacement_percent_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Fuelcell_FuelCell_fuelcell_replacement_percent_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -814,165 +814,165 @@ FuelCell_get_fuelcell_replacement_schedule(FuelCellObject *self, void *closure)
 static int
 FuelCell_set_fuelcell_replacement_schedule(FuelCellObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Fuelcell_FuelCell_fuelcell_replacement_schedule_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Fuelcell_FuelCell_fuelcell_replacement_schedule_aset, self->data_ptr);
 }
 
 static PyObject *
 FuelCell_get_fuelcell_shutdown_time(FuelCellObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Fuelcell_FuelCell_fuelcell_shutdown_time_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Fuelcell_FuelCell_fuelcell_shutdown_time_nget, self->data_ptr);
 }
 
 static int
 FuelCell_set_fuelcell_shutdown_time(FuelCellObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Fuelcell_FuelCell_fuelcell_shutdown_time_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Fuelcell_FuelCell_fuelcell_shutdown_time_nset, self->data_ptr);
 }
 
 static PyObject *
 FuelCell_get_fuelcell_startup_time(FuelCellObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Fuelcell_FuelCell_fuelcell_startup_time_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Fuelcell_FuelCell_fuelcell_startup_time_nget, self->data_ptr);
 }
 
 static int
 FuelCell_set_fuelcell_startup_time(FuelCellObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Fuelcell_FuelCell_fuelcell_startup_time_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Fuelcell_FuelCell_fuelcell_startup_time_nset, self->data_ptr);
 }
 
 static PyObject *
 FuelCell_get_fuelcell_type(FuelCellObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Fuelcell_FuelCell_fuelcell_type_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Fuelcell_FuelCell_fuelcell_type_nget, self->data_ptr);
 }
 
 static int
 FuelCell_set_fuelcell_type(FuelCellObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Fuelcell_FuelCell_fuelcell_type_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Fuelcell_FuelCell_fuelcell_type_nset, self->data_ptr);
 }
 
 static PyObject *
 FuelCell_get_fuelcell_unit_max_power(FuelCellObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Fuelcell_FuelCell_fuelcell_unit_max_power_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Fuelcell_FuelCell_fuelcell_unit_max_power_nget, self->data_ptr);
 }
 
 static int
 FuelCell_set_fuelcell_unit_max_power(FuelCellObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Fuelcell_FuelCell_fuelcell_unit_max_power_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Fuelcell_FuelCell_fuelcell_unit_max_power_nset, self->data_ptr);
 }
 
 static PyObject *
 FuelCell_get_fuelcell_unit_min_power(FuelCellObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Fuelcell_FuelCell_fuelcell_unit_min_power_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Fuelcell_FuelCell_fuelcell_unit_min_power_nget, self->data_ptr);
 }
 
 static int
 FuelCell_set_fuelcell_unit_min_power(FuelCellObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Fuelcell_FuelCell_fuelcell_unit_min_power_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Fuelcell_FuelCell_fuelcell_unit_min_power_nset, self->data_ptr);
 }
 
 static PyGetSetDef FuelCell_getset[] = {
 {"dispatch_manual_fuelcellcharge", (getter)FuelCell_get_dispatch_manual_fuelcellcharge,(setter)FuelCell_set_dispatch_manual_fuelcellcharge,
-	"Periods 1-6 charging allowed?, array.\n ",
+	PyDoc_STR("type: Sequence\n\nPeriods 1-6 charging allowed?"),
  	NULL},
 {"dispatch_manual_fuelcelldischarge", (getter)FuelCell_get_dispatch_manual_fuelcelldischarge,(setter)FuelCell_set_dispatch_manual_fuelcelldischarge,
-	"Periods 1-6 discharging allowed?, array.\n ",
+	PyDoc_STR("type: Sequence\n\nPeriods 1-6 discharging allowed?"),
  	NULL},
 {"dispatch_manual_percent_fc_discharge", (getter)FuelCell_get_dispatch_manual_percent_fc_discharge,(setter)FuelCell_set_dispatch_manual_percent_fc_discharge,
-	"Periods 1-6 percent of max fuelcell output, array.\n ",
+	PyDoc_STR("type: Sequence\n\nPeriods 1-6 percent of max fuelcell output"),
  	NULL},
 {"dispatch_manual_sched", (getter)FuelCell_get_dispatch_manual_sched,(setter)FuelCell_set_dispatch_manual_sched,
-	"Dispatch schedule for weekday, matrix.\n ",
+	PyDoc_STR("type: Sequence[Sequence]\n\nDispatch schedule for weekday"),
  	NULL},
 {"dispatch_manual_sched_weekend", (getter)FuelCell_get_dispatch_manual_sched_weekend,(setter)FuelCell_set_dispatch_manual_sched_weekend,
-	"Dispatch schedule for weekend, matrix.\n ",
+	PyDoc_STR("type: Sequence[Sequence]\n\nDispatch schedule for weekend"),
  	NULL},
 {"dispatch_manual_units_fc_discharge", (getter)FuelCell_get_dispatch_manual_units_fc_discharge,(setter)FuelCell_set_dispatch_manual_units_fc_discharge,
-	"Periods 1-6 number of fuel cell units?, array.\n ",
+	PyDoc_STR("type: Sequence\n\nPeriods 1-6 number of fuel cell units?"),
  	NULL},
 {"fuelcell_availability_schedule", (getter)FuelCell_get_fuelcell_availability_schedule,(setter)FuelCell_set_fuelcell_availability_schedule,
-	"Fuel cell availability schedule  [Column 1: Hour of year start shutdown/Column 2: Hours duration of shutdown ], matrix.\n ",
+	PyDoc_STR("type: Sequence[Sequence]\n\nFuel cell availability schedule  [Column 1: Hour of year start shutdown/Column 2: Hours duration of shutdown ]"),
  	NULL},
 {"fuelcell_degradation", (getter)FuelCell_get_fuelcell_degradation,(setter)FuelCell_set_fuelcell_degradation,
-	"Fuel cell degradation per hour [kW/h], number.\n ",
+	PyDoc_STR("type: Float\n\nFuel cell degradation per hour [kW/h]"),
  	NULL},
 {"fuelcell_degradation_restart", (getter)FuelCell_get_fuelcell_degradation_restart,(setter)FuelCell_set_fuelcell_degradation_restart,
-	"Fuel cell degradation at restart [kW], number.\n ",
+	PyDoc_STR("type: Float\n\nFuel cell degradation at restart [kW]"),
  	NULL},
 {"fuelcell_degradation_restart_schedule", (getter)FuelCell_get_fuelcell_degradation_restart_schedule,(setter)FuelCell_set_fuelcell_degradation_restart_schedule,
-	"Fuel cell enable scheduled restarts [0/1], number.\n ",
+	PyDoc_STR("type: Float\n\nFuel cell enable scheduled restarts [0/1]"),
  	NULL},
 {"fuelcell_degradation_restarts_per_year", (getter)FuelCell_get_fuelcell_degradation_restarts_per_year,(setter)FuelCell_set_fuelcell_degradation_restarts_per_year,
-	"Fuel cell scheduled restarts per year, number.\n ",
+	PyDoc_STR("type: Float\n\nFuel cell scheduled restarts per year"),
  	NULL},
 {"fuelcell_dispatch", (getter)FuelCell_get_fuelcell_dispatch,(setter)FuelCell_set_fuelcell_dispatch,
-	"Fuel cell dispatch input per unit [kW], array.\n ",
+	PyDoc_STR("type: Sequence\n\nFuel cell dispatch input per unit [kW]"),
  	NULL},
 {"fuelcell_dispatch_choice", (getter)FuelCell_get_fuelcell_dispatch_choice,(setter)FuelCell_set_fuelcell_dispatch_choice,
-	"Fuel cell dispatch choice [0/1/2], number.\n ",
+	PyDoc_STR("type: Float\n\nFuel cell dispatch choice [0/1/2]"),
  	NULL},
 {"fuelcell_dynamic_response_down", (getter)FuelCell_get_fuelcell_dynamic_response_down,(setter)FuelCell_set_fuelcell_dynamic_response_down,
-	"Fuel cell ramp rate limit down [kW/h], number.\n ",
+	PyDoc_STR("type: Float\n\nFuel cell ramp rate limit down [kW/h]"),
  	NULL},
 {"fuelcell_dynamic_response_up", (getter)FuelCell_get_fuelcell_dynamic_response_up,(setter)FuelCell_set_fuelcell_dynamic_response_up,
-	"Fuel cell ramp rate limit up [kW/h], number.\n ",
+	PyDoc_STR("type: Float\n\nFuel cell ramp rate limit up [kW/h]"),
  	NULL},
 {"fuelcell_efficiency", (getter)FuelCell_get_fuelcell_efficiency,(setter)FuelCell_set_fuelcell_efficiency,
-	"Fuel cell efficiency table , matrix.\n ",
+	PyDoc_STR("type: Sequence[Sequence]\n\nFuel cell efficiency table "),
  	NULL},
 {"fuelcell_efficiency_choice", (getter)FuelCell_get_fuelcell_efficiency_choice,(setter)FuelCell_set_fuelcell_efficiency_choice,
-	"Fuel cell efficiency definition choice  [0/1], number.\n 0=OriginalNameplate,1=DegradedNameplate; ",
+	PyDoc_STR("type: Float\n\nFuel cell efficiency definition choice  [0/1]\n\n*Options*: 0=OriginalNameplate,1=DegradedNameplate"),
  	NULL},
 {"fuelcell_fixed_pct", (getter)FuelCell_get_fuelcell_fixed_pct,(setter)FuelCell_set_fuelcell_fixed_pct,
-	"Fuel cell fixed operation percent [%], number.\n ",
+	PyDoc_STR("type: Float\n\nFuel cell fixed operation percent [%]"),
  	NULL},
 {"fuelcell_fuel_available", (getter)FuelCell_get_fuelcell_fuel_available,(setter)FuelCell_set_fuelcell_fuel_available,
-	"Fuel cell available fuel quantity [MCf], number.\n ",
+	PyDoc_STR("type: Float\n\nFuel cell available fuel quantity [MCf]"),
  	NULL},
 {"fuelcell_fuel_price", (getter)FuelCell_get_fuelcell_fuel_price,(setter)FuelCell_set_fuelcell_fuel_price,
-	"Fuel cell price [$/MCf], number.\n ",
+	PyDoc_STR("type: Float\n\nFuel cell price [$/MCf]"),
  	NULL},
 {"fuelcell_fuel_type", (getter)FuelCell_get_fuelcell_fuel_type,(setter)FuelCell_set_fuelcell_fuel_type,
-	"Fuel cell type [0/1], number.\n ",
+	PyDoc_STR("type: Float\n\nFuel cell type [0/1]"),
  	NULL},
 {"fuelcell_lhv", (getter)FuelCell_get_fuelcell_lhv,(setter)FuelCell_set_fuelcell_lhv,
-	"Fuel cell lower heating value [Btu/ft3], number.\n ",
+	PyDoc_STR("type: Float\n\nFuel cell lower heating value [Btu/ft3]"),
  	NULL},
 {"fuelcell_number_of_units", (getter)FuelCell_get_fuelcell_number_of_units,(setter)FuelCell_set_fuelcell_number_of_units,
-	"Fuel cell number of units, number.\n ",
+	PyDoc_STR("type: Float\n\nFuel cell number of units"),
  	NULL},
 {"fuelcell_operation_options", (getter)FuelCell_get_fuelcell_operation_options,(setter)FuelCell_set_fuelcell_operation_options,
-	"Fuel cell turn off options [0/1], number.\n ",
+	PyDoc_STR("type: Float\n\nFuel cell turn off options [0/1]"),
  	NULL},
 {"fuelcell_replacement_option", (getter)FuelCell_get_fuelcell_replacement_option,(setter)FuelCell_set_fuelcell_replacement_option,
-	"Fuel cell replacement option [0/1/2], number.\n ",
+	PyDoc_STR("type: Float\n\nFuel cell replacement option [0/1/2]"),
  	NULL},
 {"fuelcell_replacement_percent", (getter)FuelCell_get_fuelcell_replacement_percent,(setter)FuelCell_set_fuelcell_replacement_percent,
-	"Fuel cell replace at percentage, number.\n ",
+	PyDoc_STR("type: Float\n\nFuel cell replace at percentage"),
  	NULL},
 {"fuelcell_replacement_schedule", (getter)FuelCell_get_fuelcell_replacement_schedule,(setter)FuelCell_set_fuelcell_replacement_schedule,
-	"Fuel cell replace on schedule, array.\n ",
+	PyDoc_STR("type: Sequence\n\nFuel cell replace on schedule"),
  	NULL},
 {"fuelcell_shutdown_time", (getter)FuelCell_get_fuelcell_shutdown_time,(setter)FuelCell_set_fuelcell_shutdown_time,
-	"Fuel cell shutdown hours [hours], number.\n ",
+	PyDoc_STR("type: Float\n\nFuel cell shutdown hours [hours]"),
  	NULL},
 {"fuelcell_startup_time", (getter)FuelCell_get_fuelcell_startup_time,(setter)FuelCell_set_fuelcell_startup_time,
-	"Fuel cell startup hours [hours], number.\n ",
+	PyDoc_STR("type: Float\n\nFuel cell startup hours [hours]"),
  	NULL},
 {"fuelcell_type", (getter)FuelCell_get_fuelcell_type,(setter)FuelCell_set_fuelcell_type,
-	"Fuel cell type [0/1/2], number.\n ",
+	PyDoc_STR("type: Float\n\nFuel cell type [0/1/2]"),
  	NULL},
 {"fuelcell_unit_max_power", (getter)FuelCell_get_fuelcell_unit_max_power,(setter)FuelCell_set_fuelcell_unit_max_power,
-	"Fuel cell max power per unit [kW], number.\n ",
+	PyDoc_STR("type: Float\n\nFuel cell max power per unit [kW]"),
  	NULL},
 {"fuelcell_unit_min_power", (getter)FuelCell_get_fuelcell_unit_min_power,(setter)FuelCell_set_fuelcell_unit_min_power,
-	"Fuel cell min power per unit [kW], number.\n ",
+	PyDoc_STR("type: Float\n\nFuel cell min power per unit [kW]"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1005,7 +1005,7 @@ static PyTypeObject FuelCell_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		FuelCell_methods,         /*tp_methods*/
@@ -1015,7 +1015,7 @@ static PyTypeObject FuelCell_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -1084,7 +1084,7 @@ static PyMethodDef Outputs_methods[] = {
 static PyObject *
 Outputs_get_annual_fuel_usage(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Fuelcell_Outputs_annual_fuel_usage_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Fuelcell_Outputs_annual_fuel_usage_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -1150,45 +1150,45 @@ Outputs_get_gen(OutputsObject *self, void *closure)
 static PyObject *
 Outputs_get_system_heat_rate(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Fuelcell_Outputs_system_heat_rate_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Fuelcell_Outputs_system_heat_rate_nget, self->data_ptr);
 }
 
 static PyGetSetDef Outputs_getset[] = {
 {"annual_fuel_usage", (getter)Outputs_get_annual_fuel_usage,(setter)0,
-	"Annual Fuel Usage [kWht], number.",
+	PyDoc_STR("type: Float\n\nAnnual Fuel Usage [kWht]"),
  	NULL},
 {"fuelcell_electrical_efficiency", (getter)Outputs_get_fuelcell_electrical_efficiency,(setter)0,
-	"Fuel cell electrical efficiency [%], array.",
+	PyDoc_STR("type: Sequence\n\nFuel cell electrical efficiency [%]"),
  	NULL},
 {"fuelcell_fuel_consumption_mcf", (getter)Outputs_get_fuelcell_fuel_consumption_mcf,(setter)0,
-	"Fuel consumption of fuel cell [MCf], array.",
+	PyDoc_STR("type: Sequence\n\nFuel consumption of fuel cell [MCf]"),
  	NULL},
 {"fuelcell_percent_load", (getter)Outputs_get_fuelcell_percent_load,(setter)0,
-	"Fuel cell percent load [%], array.",
+	PyDoc_STR("type: Sequence\n\nFuel cell percent load [%]"),
  	NULL},
 {"fuelcell_power", (getter)Outputs_get_fuelcell_power,(setter)0,
-	"Electricity from fuel cell [kW], array.",
+	PyDoc_STR("type: Sequence\n\nElectricity from fuel cell [kW]"),
  	NULL},
 {"fuelcell_power_max_percent", (getter)Outputs_get_fuelcell_power_max_percent,(setter)0,
-	"Fuel cell max power percent available [%], array.",
+	PyDoc_STR("type: Sequence\n\nFuel cell max power percent available [%]"),
  	NULL},
 {"fuelcell_power_thermal", (getter)Outputs_get_fuelcell_power_thermal,(setter)0,
-	"Heat from fuel cell [kWt], array.",
+	PyDoc_STR("type: Sequence\n\nHeat from fuel cell [kWt]"),
  	NULL},
 {"fuelcell_replacement", (getter)Outputs_get_fuelcell_replacement,(setter)0,
-	"Fuel cell replacements per year [number/year], array.",
+	PyDoc_STR("type: Sequence\n\nFuel cell replacements per year [number/year]"),
  	NULL},
 {"fuelcell_to_grid", (getter)Outputs_get_fuelcell_to_grid,(setter)0,
-	"Electricity to grid from fuel cell [kW], array.",
+	PyDoc_STR("type: Sequence\n\nElectricity to grid from fuel cell [kW]"),
  	NULL},
 {"fuelcell_to_load", (getter)Outputs_get_fuelcell_to_load,(setter)0,
-	"Electricity to load from fuel cell [kW], array.",
+	PyDoc_STR("type: Sequence\n\nElectricity to load from fuel cell [kW]"),
  	NULL},
 {"gen", (getter)Outputs_get_gen,(setter)0,
-	"System power generated [kW], array.",
+	PyDoc_STR("type: Sequence\n\nSystem power generated [kW]"),
  	NULL},
 {"system_heat_rate", (getter)Outputs_get_system_heat_rate,(setter)0,
-	"Heat rate conversion factor (MMBTUs/MWhe) [MMBTUs/MWhe], number.",
+	PyDoc_STR("type: Float\n\nHeat rate conversion factor (MMBTUs/MWhe) [MMBTUs/MWhe]"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1221,7 +1221,7 @@ static PyTypeObject Outputs_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		Outputs_methods,         /*tp_methods*/
@@ -1231,7 +1231,7 @@ static PyTypeObject Outputs_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -1341,7 +1341,7 @@ static PyMethodDef Fuelcell_methods[] = {
 		{"assign",            (PyCFunction)Fuelcell_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs")},
 		{"export",            (PyCFunction)Fuelcell_export,  METH_VARARGS,
-				PyDoc_STR("assign() -> None\n Export attributes into dictionary")},
+				PyDoc_STR("export() -> None\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -1381,11 +1381,11 @@ static PyTypeObject Fuelcell_Type = {
 		0,                          /*tp_setattro*/
 		0,                          /*tp_as_buffer*/
 		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
-		"see html for help",        /*tp_doc*/
+		"Wrapper for `cmod_fuelcell.cpp <https://github.com/NREL/ssc/blob/develop/ssc/cmod_fuelcell.cpp>`_",        /*tp_doc*/
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		Fuelcell_methods,      /*tp_methods*/
@@ -1395,7 +1395,7 @@ static PyTypeObject Fuelcell_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,                          /*tp_new*/
@@ -1460,10 +1460,10 @@ static PyMethodDef FuelcellModule_methods[] = {
 		{"new",             Fuelcell_new,         METH_VARARGS,
 				PyDoc_STR("new() -> new Fuelcell object")},
 		{"default",             Fuelcell_default,         METH_VARARGS,
-				PyDoc_STR("default(financial) -> new Fuelcell object with financial model-specific default attributes\n"
-				"Options: FuelCellCommercial\nFuelCellSingleOwner")},
+				PyDoc_STR("default(config) -> new Fuelcell object with financial model-specific default attributes\n"
+				"config options:\n\n- \"FuelCellCommercial\"\n- \"FuelCellSingleOwner\"")},
 		{"wrap",             Fuelcell_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> new Fuelcell object around existing PySSC data, taking over memory ownership")},
+				PyDoc_STR("wrap(ssc_data_t) -> new Fuelcell object around existing PySSC data, taking over memory ownership\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to `wrap`")},
 		{NULL,              NULL}           /* sentinel */
 };
 

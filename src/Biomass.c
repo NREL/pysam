@@ -67,889 +67,889 @@ static PyMethodDef Biopower_methods[] = {
 static PyObject *
 Biopower_get_biopwr_emissions_avoided_cred(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_emissions_avoided_cred_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_emissions_avoided_cred_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_emissions_avoided_cred(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_emissions_avoided_cred_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_emissions_avoided_cred_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_emissions_collection_fuel(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_emissions_collection_fuel_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_emissions_collection_fuel_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_emissions_collection_fuel(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_emissions_collection_fuel_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_emissions_collection_fuel_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_emissions_grid_intensity(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_emissions_grid_intensity_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_emissions_grid_intensity_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_emissions_grid_intensity(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_emissions_grid_intensity_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_emissions_grid_intensity_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_emissions_pre_chipopt(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_emissions_pre_chipopt_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_emissions_pre_chipopt_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_emissions_pre_chipopt(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_emissions_pre_chipopt_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_emissions_pre_chipopt_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_emissions_pre_grindopt(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_emissions_pre_grindopt_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_emissions_pre_grindopt_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_emissions_pre_grindopt(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_emissions_pre_grindopt_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_emissions_pre_grindopt_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_emissions_pre_pelletopt(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_emissions_pre_pelletopt_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_emissions_pre_pelletopt_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_emissions_pre_pelletopt(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_emissions_pre_pelletopt_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_emissions_pre_pelletopt_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_emissions_transport_fuel(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_emissions_transport_fuel_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_emissions_transport_fuel_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_emissions_transport_fuel(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_emissions_transport_fuel_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_emissions_transport_fuel_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_emissions_transport_legs(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_emissions_transport_legs_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_emissions_transport_legs_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_emissions_transport_legs(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_emissions_transport_legs_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_emissions_transport_legs_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_emissions_transport_long(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_emissions_transport_long_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_emissions_transport_long_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_emissions_transport_long(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_emissions_transport_long_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_emissions_transport_long_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_emissions_transport_longmiles(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_emissions_transport_longmiles_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_emissions_transport_longmiles_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_emissions_transport_longmiles(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_emissions_transport_longmiles_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_emissions_transport_longmiles_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_emissions_transport_longopt(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_emissions_transport_longopt_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_emissions_transport_longopt_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_emissions_transport_longopt(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_emissions_transport_longopt_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_emissions_transport_longopt_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_emissions_transport_predist(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_emissions_transport_predist_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_emissions_transport_predist_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_emissions_transport_predist(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_emissions_transport_predist_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_emissions_transport_predist_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_feedstock_additional_opt(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_feedstock_additional_opt_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_feedstock_additional_opt_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_feedstock_additional_opt(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_additional_opt_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_additional_opt_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_feedstock_bagasse_frac(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_feedstock_bagasse_frac_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_feedstock_bagasse_frac_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_feedstock_bagasse_frac(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_bagasse_frac_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_bagasse_frac_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_feedstock_bagasse_moisture(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_feedstock_bagasse_moisture_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_feedstock_bagasse_moisture_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_feedstock_bagasse_moisture(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_bagasse_moisture_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_bagasse_moisture_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_feedstock_barley_frac(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_feedstock_barley_frac_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_feedstock_barley_frac_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_feedstock_barley_frac(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_barley_frac_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_barley_frac_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_feedstock_barley_moisture(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_feedstock_barley_moisture_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_feedstock_barley_moisture_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_feedstock_barley_moisture(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_barley_moisture_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_barley_moisture_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_feedstock_bit_frac(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_feedstock_bit_frac_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_feedstock_bit_frac_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_feedstock_bit_frac(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_bit_frac_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_bit_frac_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_feedstock_bit_moisture(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_feedstock_bit_moisture_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_feedstock_bit_moisture_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_feedstock_bit_moisture(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_bit_moisture_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_bit_moisture_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_feedstock_collection_radius(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_feedstock_collection_radius_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_feedstock_collection_radius_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_feedstock_collection_radius(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_collection_radius_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_collection_radius_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_feedstock_feedstock1_c(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_feedstock_feedstock1_c_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_feedstock_feedstock1_c_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_feedstock_feedstock1_c(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_feedstock1_c_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_feedstock1_c_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_feedstock_feedstock1_frac(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_feedstock_feedstock1_frac_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_feedstock_feedstock1_frac_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_feedstock_feedstock1_frac(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_feedstock1_frac_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_feedstock1_frac_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_feedstock_feedstock1_h(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_feedstock_feedstock1_h_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_feedstock_feedstock1_h_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_feedstock_feedstock1_h(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_feedstock1_h_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_feedstock1_h_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_feedstock_feedstock1_hhv(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_feedstock_feedstock1_hhv_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_feedstock_feedstock1_hhv_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_feedstock_feedstock1_hhv(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_feedstock1_hhv_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_feedstock1_hhv_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_feedstock_feedstock1_moisture(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_feedstock_feedstock1_moisture_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_feedstock_feedstock1_moisture_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_feedstock_feedstock1_moisture(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_feedstock1_moisture_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_feedstock1_moisture_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_feedstock_feedstock1_resource(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_feedstock_feedstock1_resource_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_feedstock_feedstock1_resource_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_feedstock_feedstock1_resource(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_feedstock1_resource_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_feedstock1_resource_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_feedstock_feedstock2_c(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_feedstock_feedstock2_c_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_feedstock_feedstock2_c_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_feedstock_feedstock2_c(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_feedstock2_c_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_feedstock2_c_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_feedstock_feedstock2_frac(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_feedstock_feedstock2_frac_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_feedstock_feedstock2_frac_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_feedstock_feedstock2_frac(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_feedstock2_frac_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_feedstock2_frac_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_feedstock_feedstock2_h(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_feedstock_feedstock2_h_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_feedstock_feedstock2_h_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_feedstock_feedstock2_h(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_feedstock2_h_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_feedstock2_h_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_feedstock_feedstock2_hhv(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_feedstock_feedstock2_hhv_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_feedstock_feedstock2_hhv_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_feedstock_feedstock2_hhv(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_feedstock2_hhv_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_feedstock2_hhv_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_feedstock_feedstock2_moisture(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_feedstock_feedstock2_moisture_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_feedstock_feedstock2_moisture_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_feedstock_feedstock2_moisture(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_feedstock2_moisture_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_feedstock2_moisture_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_feedstock_feedstock2_resource(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_feedstock_feedstock2_resource_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_feedstock_feedstock2_resource_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_feedstock_feedstock2_resource(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_feedstock2_resource_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_feedstock2_resource_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_feedstock_forest_frac(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_feedstock_forest_frac_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_feedstock_forest_frac_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_feedstock_forest_frac(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_forest_frac_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_forest_frac_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_feedstock_forest_moisture(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_feedstock_forest_moisture_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_feedstock_forest_moisture_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_feedstock_forest_moisture(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_forest_moisture_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_forest_moisture_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_feedstock_herb_c(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_feedstock_herb_c_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_feedstock_herb_c_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_feedstock_herb_c(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_herb_c_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_herb_c_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_feedstock_herb_frac(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_feedstock_herb_frac_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_feedstock_herb_frac_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_feedstock_herb_frac(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_herb_frac_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_herb_frac_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_feedstock_herb_moisture(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_feedstock_herb_moisture_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_feedstock_herb_moisture_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_feedstock_herb_moisture(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_herb_moisture_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_herb_moisture_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_feedstock_lig_frac(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_feedstock_lig_frac_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_feedstock_lig_frac_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_feedstock_lig_frac(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_lig_frac_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_lig_frac_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_feedstock_lig_moisture(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_feedstock_lig_moisture_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_feedstock_lig_moisture_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_feedstock_lig_moisture(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_lig_moisture_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_lig_moisture_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_feedstock_mill_c(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_feedstock_mill_c_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_feedstock_mill_c_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_feedstock_mill_c(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_mill_c_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_mill_c_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_feedstock_mill_frac(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_feedstock_mill_frac_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_feedstock_mill_frac_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_feedstock_mill_frac(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_mill_frac_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_mill_frac_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_feedstock_mill_moisture(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_feedstock_mill_moisture_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_feedstock_mill_moisture_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_feedstock_mill_moisture(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_mill_moisture_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_mill_moisture_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_feedstock_rice_frac(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_feedstock_rice_frac_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_feedstock_rice_frac_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_feedstock_rice_frac(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_rice_frac_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_rice_frac_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_feedstock_rice_moisture(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_feedstock_rice_moisture_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_feedstock_rice_moisture_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_feedstock_rice_moisture(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_rice_moisture_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_rice_moisture_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_feedstock_stover_frac(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_feedstock_stover_frac_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_feedstock_stover_frac_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_feedstock_stover_frac(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_stover_frac_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_stover_frac_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_feedstock_stover_moisture(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_feedstock_stover_moisture_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_feedstock_stover_moisture_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_feedstock_stover_moisture(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_stover_moisture_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_stover_moisture_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_feedstock_subbit_frac(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_feedstock_subbit_frac_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_feedstock_subbit_frac_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_feedstock_subbit_frac(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_subbit_frac_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_subbit_frac_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_feedstock_subbit_moisture(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_feedstock_subbit_moisture_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_feedstock_subbit_moisture_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_feedstock_subbit_moisture(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_subbit_moisture_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_subbit_moisture_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_feedstock_total(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_feedstock_total_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_feedstock_total_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_feedstock_total(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_total_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_total_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_feedstock_total_biomass(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_feedstock_total_biomass_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_feedstock_total_biomass_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_feedstock_total_biomass(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_total_biomass_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_total_biomass_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_feedstock_total_biomass_c(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_feedstock_total_biomass_c_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_feedstock_total_biomass_c_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_feedstock_total_biomass_c(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_total_biomass_c_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_total_biomass_c_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_feedstock_total_c(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_feedstock_total_c_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_feedstock_total_c_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_feedstock_total_c(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_total_c_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_total_c_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_feedstock_total_coal(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_feedstock_total_coal_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_feedstock_total_coal_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_feedstock_total_coal(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_total_coal_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_total_coal_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_feedstock_total_h(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_feedstock_total_h_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_feedstock_total_h_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_feedstock_total_h(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_total_h_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_total_h_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_feedstock_total_hhv(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_feedstock_total_hhv_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_feedstock_total_hhv_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_feedstock_total_hhv(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_total_hhv_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_total_hhv_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_feedstock_total_lhv(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_feedstock_total_lhv_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_feedstock_total_lhv_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_feedstock_total_lhv(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_total_lhv_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_total_lhv_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_feedstock_total_moisture(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_feedstock_total_moisture_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_feedstock_total_moisture_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_feedstock_total_moisture(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_total_moisture_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_total_moisture_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_feedstock_urban_c(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_feedstock_urban_c_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_feedstock_urban_c_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_feedstock_urban_c(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_urban_c_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_urban_c_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_feedstock_urban_frac(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_feedstock_urban_frac_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_feedstock_urban_frac_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_feedstock_urban_frac(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_urban_frac_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_urban_frac_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_feedstock_urban_moisture(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_feedstock_urban_moisture_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_feedstock_urban_moisture_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_feedstock_urban_moisture(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_urban_moisture_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_urban_moisture_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_feedstock_wheat_frac(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_feedstock_wheat_frac_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_feedstock_wheat_frac_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_feedstock_wheat_frac(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_wheat_frac_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_wheat_frac_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_feedstock_wheat_moisture(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_feedstock_wheat_moisture_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_feedstock_wheat_moisture_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_feedstock_wheat_moisture(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_wheat_moisture_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_wheat_moisture_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_feedstock_woody_c(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_feedstock_woody_c_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_feedstock_woody_c_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_feedstock_woody_c(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_woody_c_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_woody_c_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_feedstock_woody_frac(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_feedstock_woody_frac_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_feedstock_woody_frac_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_feedstock_woody_frac(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_woody_frac_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_woody_frac_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_feedstock_woody_moisture(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_feedstock_woody_moisture_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_feedstock_woody_moisture_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_feedstock_woody_moisture(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_woody_moisture_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_feedstock_woody_moisture_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_plant_boiler_air_feed(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_plant_boiler_air_feed_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_plant_boiler_air_feed_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_plant_boiler_air_feed(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_plant_boiler_air_feed_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_plant_boiler_air_feed_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_plant_boiler_cap_per_boiler(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_plant_boiler_cap_per_boiler_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_plant_boiler_cap_per_boiler_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_plant_boiler_cap_per_boiler(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_plant_boiler_cap_per_boiler_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_plant_boiler_cap_per_boiler_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_plant_boiler_flue_temp(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_plant_boiler_flue_temp_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_plant_boiler_flue_temp_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_plant_boiler_flue_temp(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_plant_boiler_flue_temp_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_plant_boiler_flue_temp_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_plant_boiler_num(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_plant_boiler_num_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_plant_boiler_num_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_plant_boiler_num(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_plant_boiler_num_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_plant_boiler_num_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_plant_boiler_over_design(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_plant_boiler_over_design_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_plant_boiler_over_design_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_plant_boiler_over_design(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_plant_boiler_over_design_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_plant_boiler_over_design_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_plant_boiler_steam_enthalpy(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_plant_boiler_steam_enthalpy_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_plant_boiler_steam_enthalpy_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_plant_boiler_steam_enthalpy(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_plant_boiler_steam_enthalpy_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_plant_boiler_steam_enthalpy_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_plant_boiler_steam_pressure(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_plant_boiler_steam_pressure_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_plant_boiler_steam_pressure_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_plant_boiler_steam_pressure(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_plant_boiler_steam_pressure_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_plant_boiler_steam_pressure_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_plant_combustor_type(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_plant_combustor_type_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_plant_combustor_type_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_plant_combustor_type(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_plant_combustor_type_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_plant_combustor_type_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_plant_cycle_design_temp(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_plant_cycle_design_temp_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_plant_cycle_design_temp_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_plant_cycle_design_temp(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_plant_cycle_design_temp_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_plant_cycle_design_temp_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -961,235 +961,235 @@ Biopower_get_biopwr_plant_disp_power(BiopowerObject *self, void *closure)
 static int
 Biopower_set_biopwr_plant_disp_power(BiopowerObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Biomass_Biopower_biopwr_plant_disp_power_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Biomass_Biopower_biopwr_plant_disp_power_aset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_plant_drying_method(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_plant_drying_method_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_plant_drying_method_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_plant_drying_method(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_plant_drying_method_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_plant_drying_method_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_plant_drying_spec(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_plant_drying_spec_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_plant_drying_spec_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_plant_drying_spec(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_plant_drying_spec_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_plant_drying_spec_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_plant_max_over_design(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_plant_max_over_design_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_plant_max_over_design_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_plant_max_over_design(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_plant_max_over_design_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_plant_max_over_design_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_plant_min_load(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_plant_min_load_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_plant_min_load_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_plant_min_load(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_plant_min_load_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_plant_min_load_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_plant_nameplate(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_plant_nameplate_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_plant_nameplate_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_plant_nameplate(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_plant_nameplate_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_plant_nameplate_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_plant_par_percent(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_plant_par_percent_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_plant_par_percent_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_plant_par_percent(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_plant_par_percent_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_plant_par_percent_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_plant_pl_eff_f0(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_plant_pl_eff_f0_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_plant_pl_eff_f0_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_plant_pl_eff_f0(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_plant_pl_eff_f0_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_plant_pl_eff_f0_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_plant_pl_eff_f1(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_plant_pl_eff_f1_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_plant_pl_eff_f1_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_plant_pl_eff_f1(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_plant_pl_eff_f1_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_plant_pl_eff_f1_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_plant_pl_eff_f2(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_plant_pl_eff_f2_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_plant_pl_eff_f2_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_plant_pl_eff_f2(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_plant_pl_eff_f2_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_plant_pl_eff_f2_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_plant_pl_eff_f3(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_plant_pl_eff_f3_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_plant_pl_eff_f3_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_plant_pl_eff_f3(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_plant_pl_eff_f3_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_plant_pl_eff_f3_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_plant_pl_eff_f4(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_plant_pl_eff_f4_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_plant_pl_eff_f4_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_plant_pl_eff_f4(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_plant_pl_eff_f4_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_plant_pl_eff_f4_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_plant_ramp_rate(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_plant_ramp_rate_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_plant_ramp_rate_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_plant_ramp_rate(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_plant_ramp_rate_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_plant_ramp_rate_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_plant_rated_eff(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_plant_rated_eff_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_plant_rated_eff_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_plant_rated_eff(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_plant_rated_eff_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_plant_rated_eff_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_plant_temp_corr_mode(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_plant_temp_corr_mode_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_plant_temp_corr_mode_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_plant_temp_corr_mode(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_plant_temp_corr_mode_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_plant_temp_corr_mode_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_plant_temp_eff_f0(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_plant_temp_eff_f0_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_plant_temp_eff_f0_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_plant_temp_eff_f0(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_plant_temp_eff_f0_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_plant_temp_eff_f0_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_plant_temp_eff_f1(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_plant_temp_eff_f1_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_plant_temp_eff_f1_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_plant_temp_eff_f1(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_plant_temp_eff_f1_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_plant_temp_eff_f1_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_plant_temp_eff_f2(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_plant_temp_eff_f2_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_plant_temp_eff_f2_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_plant_temp_eff_f2(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_plant_temp_eff_f2_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_plant_temp_eff_f2_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_plant_temp_eff_f3(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_plant_temp_eff_f3_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_plant_temp_eff_f3_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_plant_temp_eff_f3(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_plant_temp_eff_f3_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_plant_temp_eff_f3_nset, self->data_ptr);
 }
 
 static PyObject *
 Biopower_get_biopwr_plant_temp_eff_f4(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_plant_temp_eff_f4_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_plant_temp_eff_f4_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_plant_temp_eff_f4(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_plant_temp_eff_f4_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_plant_temp_eff_f4_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -1207,13 +1207,13 @@ Biopower_set_biopwr_plant_tou_grid(BiopowerObject *self, PyObject *value, void *
 static PyObject *
 Biopower_get_biopwr_plant_tou_option(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_biopwr_plant_tou_option_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_biopwr_plant_tou_option_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_biopwr_plant_tou_option(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_biopwr_plant_tou_option_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_biopwr_plant_tou_option_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -1231,309 +1231,309 @@ Biopower_set_file_name(BiopowerObject *self, PyObject *value, void *closure)
 static PyObject *
 Biopower_get_system_capacity(BiopowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Biopower_system_capacity_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Biopower_system_capacity_nget, self->data_ptr);
 }
 
 static int
 Biopower_set_system_capacity(BiopowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Biomass_Biopower_system_capacity_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Biomass_Biopower_system_capacity_nset, self->data_ptr);
 }
 
 static PyGetSetDef Biopower_getset[] = {
 {"biopwr_emissions_avoided_cred", (getter)Biopower_get_biopwr_emissions_avoided_cred,(setter)Biopower_set_biopwr_emissions_avoided_cred,
-	", number.\n Constraints: INTEGER; Required.",
+	PyDoc_STR("type: Float\n\n\n\n*Constraints*: INTEGER\n\n*Required*: True"),
  	NULL},
 {"biopwr_emissions_collection_fuel", (getter)Biopower_get_biopwr_emissions_collection_fuel,(setter)Biopower_set_biopwr_emissions_collection_fuel,
-	", number.\n Constraints: INTEGER; Required.",
+	PyDoc_STR("type: Float\n\n\n\n*Constraints*: INTEGER\n\n*Required*: True"),
  	NULL},
 {"biopwr_emissions_grid_intensity", (getter)Biopower_get_biopwr_emissions_grid_intensity,(setter)Biopower_set_biopwr_emissions_grid_intensity,
-	", number.\n Required.",
+	PyDoc_STR("type: Float\n\n\n\n*Required*: True"),
  	NULL},
 {"biopwr_emissions_pre_chipopt", (getter)Biopower_get_biopwr_emissions_pre_chipopt,(setter)Biopower_set_biopwr_emissions_pre_chipopt,
-	", number.\n Constraints: INTEGER; Required.",
+	PyDoc_STR("type: Float\n\n\n\n*Constraints*: INTEGER\n\n*Required*: True"),
  	NULL},
 {"biopwr_emissions_pre_grindopt", (getter)Biopower_get_biopwr_emissions_pre_grindopt,(setter)Biopower_set_biopwr_emissions_pre_grindopt,
-	", number.\n Constraints: INTEGER; Required.",
+	PyDoc_STR("type: Float\n\n\n\n*Constraints*: INTEGER\n\n*Required*: True"),
  	NULL},
 {"biopwr_emissions_pre_pelletopt", (getter)Biopower_get_biopwr_emissions_pre_pelletopt,(setter)Biopower_set_biopwr_emissions_pre_pelletopt,
-	", number.\n Constraints: INTEGER; Required.",
+	PyDoc_STR("type: Float\n\n\n\n*Constraints*: INTEGER\n\n*Required*: True"),
  	NULL},
 {"biopwr_emissions_transport_fuel", (getter)Biopower_get_biopwr_emissions_transport_fuel,(setter)Biopower_set_biopwr_emissions_transport_fuel,
-	", number.\n Constraints: INTEGER; Required.",
+	PyDoc_STR("type: Float\n\n\n\n*Constraints*: INTEGER\n\n*Required*: True"),
  	NULL},
 {"biopwr_emissions_transport_legs", (getter)Biopower_get_biopwr_emissions_transport_legs,(setter)Biopower_set_biopwr_emissions_transport_legs,
-	", number.\n Constraints: INTEGER; Required.",
+	PyDoc_STR("type: Float\n\n\n\n*Constraints*: INTEGER\n\n*Required*: True"),
  	NULL},
 {"biopwr_emissions_transport_long", (getter)Biopower_get_biopwr_emissions_transport_long,(setter)Biopower_set_biopwr_emissions_transport_long,
-	", number.\n Constraints: INTEGER; Required.",
+	PyDoc_STR("type: Float\n\n\n\n*Constraints*: INTEGER\n\n*Required*: True"),
  	NULL},
 {"biopwr_emissions_transport_longmiles", (getter)Biopower_get_biopwr_emissions_transport_longmiles,(setter)Biopower_set_biopwr_emissions_transport_longmiles,
-	", number.\n Required.",
+	PyDoc_STR("type: Float\n\n\n\n*Required*: True"),
  	NULL},
 {"biopwr_emissions_transport_longopt", (getter)Biopower_get_biopwr_emissions_transport_longopt,(setter)Biopower_set_biopwr_emissions_transport_longopt,
-	", number.\n Constraints: INTEGER; Required.",
+	PyDoc_STR("type: Float\n\n\n\n*Constraints*: INTEGER\n\n*Required*: True"),
  	NULL},
 {"biopwr_emissions_transport_predist", (getter)Biopower_get_biopwr_emissions_transport_predist,(setter)Biopower_set_biopwr_emissions_transport_predist,
-	", number.\n Required.",
+	PyDoc_STR("type: Float\n\n\n\n*Required*: True"),
  	NULL},
 {"biopwr_feedstock_additional_opt", (getter)Biopower_get_biopwr_feedstock_additional_opt,(setter)Biopower_set_biopwr_feedstock_additional_opt,
-	", number.\n Constraints: INTEGER; Required.",
+	PyDoc_STR("type: Float\n\n\n\n*Constraints*: INTEGER\n\n*Required*: True"),
  	NULL},
 {"biopwr_feedstock_bagasse_frac", (getter)Biopower_get_biopwr_feedstock_bagasse_frac,(setter)Biopower_set_biopwr_feedstock_bagasse_frac,
-	"Bagasse feedstock fraction, number.\n Required.",
+	PyDoc_STR("type: Float\n\nBagasse feedstock fraction\n\n*Required*: True"),
  	NULL},
 {"biopwr_feedstock_bagasse_moisture", (getter)Biopower_get_biopwr_feedstock_bagasse_moisture,(setter)Biopower_set_biopwr_feedstock_bagasse_moisture,
-	", number.\n Required.",
+	PyDoc_STR("type: Float\n\n\n\n*Required*: True"),
  	NULL},
 {"biopwr_feedstock_barley_frac", (getter)Biopower_get_biopwr_feedstock_barley_frac,(setter)Biopower_set_biopwr_feedstock_barley_frac,
-	"Barley feedstock fraction, number.\n Required.",
+	PyDoc_STR("type: Float\n\nBarley feedstock fraction\n\n*Required*: True"),
  	NULL},
 {"biopwr_feedstock_barley_moisture", (getter)Biopower_get_biopwr_feedstock_barley_moisture,(setter)Biopower_set_biopwr_feedstock_barley_moisture,
-	", number.\n Required.",
+	PyDoc_STR("type: Float\n\n\n\n*Required*: True"),
  	NULL},
 {"biopwr_feedstock_bit_frac", (getter)Biopower_get_biopwr_feedstock_bit_frac,(setter)Biopower_set_biopwr_feedstock_bit_frac,
-	"Bituminos coal feedstock fraction, number.\n Required.",
+	PyDoc_STR("type: Float\n\nBituminos coal feedstock fraction\n\n*Required*: True"),
  	NULL},
 {"biopwr_feedstock_bit_moisture", (getter)Biopower_get_biopwr_feedstock_bit_moisture,(setter)Biopower_set_biopwr_feedstock_bit_moisture,
-	", number.\n Required.",
+	PyDoc_STR("type: Float\n\n\n\n*Required*: True"),
  	NULL},
 {"biopwr_feedstock_collection_radius", (getter)Biopower_get_biopwr_feedstock_collection_radius,(setter)Biopower_set_biopwr_feedstock_collection_radius,
-	", number.\n Required.",
+	PyDoc_STR("type: Float\n\n\n\n*Required*: True"),
  	NULL},
 {"biopwr_feedstock_feedstock1_c", (getter)Biopower_get_biopwr_feedstock_feedstock1_c,(setter)Biopower_set_biopwr_feedstock_feedstock1_c,
-	", number.\n Required.",
+	PyDoc_STR("type: Float\n\n\n\n*Required*: True"),
  	NULL},
 {"biopwr_feedstock_feedstock1_frac", (getter)Biopower_get_biopwr_feedstock_feedstock1_frac,(setter)Biopower_set_biopwr_feedstock_feedstock1_frac,
-	", number.\n Required.",
+	PyDoc_STR("type: Float\n\n\n\n*Required*: True"),
  	NULL},
 {"biopwr_feedstock_feedstock1_h", (getter)Biopower_get_biopwr_feedstock_feedstock1_h,(setter)Biopower_set_biopwr_feedstock_feedstock1_h,
-	", number.\n Required.",
+	PyDoc_STR("type: Float\n\n\n\n*Required*: True"),
  	NULL},
 {"biopwr_feedstock_feedstock1_hhv", (getter)Biopower_get_biopwr_feedstock_feedstock1_hhv,(setter)Biopower_set_biopwr_feedstock_feedstock1_hhv,
-	", number.\n Required.",
+	PyDoc_STR("type: Float\n\n\n\n*Required*: True"),
  	NULL},
 {"biopwr_feedstock_feedstock1_moisture", (getter)Biopower_get_biopwr_feedstock_feedstock1_moisture,(setter)Biopower_set_biopwr_feedstock_feedstock1_moisture,
-	", number.\n Required.",
+	PyDoc_STR("type: Float\n\n\n\n*Required*: True"),
  	NULL},
 {"biopwr_feedstock_feedstock1_resource", (getter)Biopower_get_biopwr_feedstock_feedstock1_resource,(setter)Biopower_set_biopwr_feedstock_feedstock1_resource,
-	"Opt feedstock 1 (dt/yr), number.\n Required.",
+	PyDoc_STR("type: Float\n\nOpt feedstock 1 (dt/yr)\n\n*Required*: True"),
  	NULL},
 {"biopwr_feedstock_feedstock2_c", (getter)Biopower_get_biopwr_feedstock_feedstock2_c,(setter)Biopower_set_biopwr_feedstock_feedstock2_c,
-	", number.\n Required.",
+	PyDoc_STR("type: Float\n\n\n\n*Required*: True"),
  	NULL},
 {"biopwr_feedstock_feedstock2_frac", (getter)Biopower_get_biopwr_feedstock_feedstock2_frac,(setter)Biopower_set_biopwr_feedstock_feedstock2_frac,
-	", number.\n Required.",
+	PyDoc_STR("type: Float\n\n\n\n*Required*: True"),
  	NULL},
 {"biopwr_feedstock_feedstock2_h", (getter)Biopower_get_biopwr_feedstock_feedstock2_h,(setter)Biopower_set_biopwr_feedstock_feedstock2_h,
-	", number.\n Required.",
+	PyDoc_STR("type: Float\n\n\n\n*Required*: True"),
  	NULL},
 {"biopwr_feedstock_feedstock2_hhv", (getter)Biopower_get_biopwr_feedstock_feedstock2_hhv,(setter)Biopower_set_biopwr_feedstock_feedstock2_hhv,
-	", number.\n Required.",
+	PyDoc_STR("type: Float\n\n\n\n*Required*: True"),
  	NULL},
 {"biopwr_feedstock_feedstock2_moisture", (getter)Biopower_get_biopwr_feedstock_feedstock2_moisture,(setter)Biopower_set_biopwr_feedstock_feedstock2_moisture,
-	", number.\n Required.",
+	PyDoc_STR("type: Float\n\n\n\n*Required*: True"),
  	NULL},
 {"biopwr_feedstock_feedstock2_resource", (getter)Biopower_get_biopwr_feedstock_feedstock2_resource,(setter)Biopower_set_biopwr_feedstock_feedstock2_resource,
-	"Opt feedstock 2 (dt/yr), number.\n Required.",
+	PyDoc_STR("type: Float\n\nOpt feedstock 2 (dt/yr)\n\n*Required*: True"),
  	NULL},
 {"biopwr_feedstock_forest_frac", (getter)Biopower_get_biopwr_feedstock_forest_frac,(setter)Biopower_set_biopwr_feedstock_forest_frac,
-	"Forest residue feedstock fraction, number.\n Required.",
+	PyDoc_STR("type: Float\n\nForest residue feedstock fraction\n\n*Required*: True"),
  	NULL},
 {"biopwr_feedstock_forest_moisture", (getter)Biopower_get_biopwr_feedstock_forest_moisture,(setter)Biopower_set_biopwr_feedstock_forest_moisture,
-	", number.\n Required.",
+	PyDoc_STR("type: Float\n\n\n\n*Required*: True"),
  	NULL},
 {"biopwr_feedstock_herb_c", (getter)Biopower_get_biopwr_feedstock_herb_c,(setter)Biopower_set_biopwr_feedstock_herb_c,
-	"Carbon fraction in herbaceous energy crop, number.\n Required.",
+	PyDoc_STR("type: Float\n\nCarbon fraction in herbaceous energy crop\n\n*Required*: True"),
  	NULL},
 {"biopwr_feedstock_herb_frac", (getter)Biopower_get_biopwr_feedstock_herb_frac,(setter)Biopower_set_biopwr_feedstock_herb_frac,
-	"Herbaceous energy crop feedstock fraction, number.\n Required.",
+	PyDoc_STR("type: Float\n\nHerbaceous energy crop feedstock fraction\n\n*Required*: True"),
  	NULL},
 {"biopwr_feedstock_herb_moisture", (getter)Biopower_get_biopwr_feedstock_herb_moisture,(setter)Biopower_set_biopwr_feedstock_herb_moisture,
-	", number.\n Required.",
+	PyDoc_STR("type: Float\n\n\n\n*Required*: True"),
  	NULL},
 {"biopwr_feedstock_lig_frac", (getter)Biopower_get_biopwr_feedstock_lig_frac,(setter)Biopower_set_biopwr_feedstock_lig_frac,
-	"Lignite coal feedstock fraction, number.\n Required.",
+	PyDoc_STR("type: Float\n\nLignite coal feedstock fraction\n\n*Required*: True"),
  	NULL},
 {"biopwr_feedstock_lig_moisture", (getter)Biopower_get_biopwr_feedstock_lig_moisture,(setter)Biopower_set_biopwr_feedstock_lig_moisture,
-	", number.\n Required.",
+	PyDoc_STR("type: Float\n\n\n\n*Required*: True"),
  	NULL},
 {"biopwr_feedstock_mill_c", (getter)Biopower_get_biopwr_feedstock_mill_c,(setter)Biopower_set_biopwr_feedstock_mill_c,
-	"Carbon fraction in mill residue, number.\n Required.",
+	PyDoc_STR("type: Float\n\nCarbon fraction in mill residue\n\n*Required*: True"),
  	NULL},
 {"biopwr_feedstock_mill_frac", (getter)Biopower_get_biopwr_feedstock_mill_frac,(setter)Biopower_set_biopwr_feedstock_mill_frac,
-	"Mill residue feedstock fraction, number.\n Required.",
+	PyDoc_STR("type: Float\n\nMill residue feedstock fraction\n\n*Required*: True"),
  	NULL},
 {"biopwr_feedstock_mill_moisture", (getter)Biopower_get_biopwr_feedstock_mill_moisture,(setter)Biopower_set_biopwr_feedstock_mill_moisture,
-	", number.\n Required.",
+	PyDoc_STR("type: Float\n\n\n\n*Required*: True"),
  	NULL},
 {"biopwr_feedstock_rice_frac", (getter)Biopower_get_biopwr_feedstock_rice_frac,(setter)Biopower_set_biopwr_feedstock_rice_frac,
-	"Rice straw feedstock fraction, number.\n Required.",
+	PyDoc_STR("type: Float\n\nRice straw feedstock fraction\n\n*Required*: True"),
  	NULL},
 {"biopwr_feedstock_rice_moisture", (getter)Biopower_get_biopwr_feedstock_rice_moisture,(setter)Biopower_set_biopwr_feedstock_rice_moisture,
-	", number.\n Required.",
+	PyDoc_STR("type: Float\n\n\n\n*Required*: True"),
  	NULL},
 {"biopwr_feedstock_stover_frac", (getter)Biopower_get_biopwr_feedstock_stover_frac,(setter)Biopower_set_biopwr_feedstock_stover_frac,
-	"Stover feedstock fraction, number.\n Required.",
+	PyDoc_STR("type: Float\n\nStover feedstock fraction\n\n*Required*: True"),
  	NULL},
 {"biopwr_feedstock_stover_moisture", (getter)Biopower_get_biopwr_feedstock_stover_moisture,(setter)Biopower_set_biopwr_feedstock_stover_moisture,
-	", number.\n Required.",
+	PyDoc_STR("type: Float\n\n\n\n*Required*: True"),
  	NULL},
 {"biopwr_feedstock_subbit_frac", (getter)Biopower_get_biopwr_feedstock_subbit_frac,(setter)Biopower_set_biopwr_feedstock_subbit_frac,
-	"Sub-bituminous coal feedstock fraction, number.\n Required.",
+	PyDoc_STR("type: Float\n\nSub-bituminous coal feedstock fraction\n\n*Required*: True"),
  	NULL},
 {"biopwr_feedstock_subbit_moisture", (getter)Biopower_get_biopwr_feedstock_subbit_moisture,(setter)Biopower_set_biopwr_feedstock_subbit_moisture,
-	", number.\n Required.",
+	PyDoc_STR("type: Float\n\n\n\n*Required*: True"),
  	NULL},
 {"biopwr_feedstock_total", (getter)Biopower_get_biopwr_feedstock_total,(setter)Biopower_set_biopwr_feedstock_total,
-	"Total fuel resource (dt/yr), number.\n Required.",
+	PyDoc_STR("type: Float\n\nTotal fuel resource (dt/yr)\n\n*Required*: True"),
  	NULL},
 {"biopwr_feedstock_total_biomass", (getter)Biopower_get_biopwr_feedstock_total_biomass,(setter)Biopower_set_biopwr_feedstock_total_biomass,
-	"Total biomass resource (dt/yr), number.\n Required.",
+	PyDoc_STR("type: Float\n\nTotal biomass resource (dt/yr)\n\n*Required*: True"),
  	NULL},
 {"biopwr_feedstock_total_biomass_c", (getter)Biopower_get_biopwr_feedstock_total_biomass_c,(setter)Biopower_set_biopwr_feedstock_total_biomass_c,
-	"Biomass fraction carbon, number.\n Required.",
+	PyDoc_STR("type: Float\n\nBiomass fraction carbon\n\n*Required*: True"),
  	NULL},
 {"biopwr_feedstock_total_c", (getter)Biopower_get_biopwr_feedstock_total_c,(setter)Biopower_set_biopwr_feedstock_total_c,
-	"Mass fraction carbon, number.\n Required.",
+	PyDoc_STR("type: Float\n\nMass fraction carbon\n\n*Required*: True"),
  	NULL},
 {"biopwr_feedstock_total_coal", (getter)Biopower_get_biopwr_feedstock_total_coal,(setter)Biopower_set_biopwr_feedstock_total_coal,
-	"Total coal resource (dt/yr), number.\n Required.",
+	PyDoc_STR("type: Float\n\nTotal coal resource (dt/yr)\n\n*Required*: True"),
  	NULL},
 {"biopwr_feedstock_total_h", (getter)Biopower_get_biopwr_feedstock_total_h,(setter)Biopower_set_biopwr_feedstock_total_h,
-	"Mass fraction hydrogen, number.\n Required.",
+	PyDoc_STR("type: Float\n\nMass fraction hydrogen\n\n*Required*: True"),
  	NULL},
 {"biopwr_feedstock_total_hhv", (getter)Biopower_get_biopwr_feedstock_total_hhv,(setter)Biopower_set_biopwr_feedstock_total_hhv,
-	"Dry feedstock HHV (Btu/lb), number.\n Required.",
+	PyDoc_STR("type: Float\n\nDry feedstock HHV (Btu/lb)\n\n*Required*: True"),
  	NULL},
 {"biopwr_feedstock_total_lhv", (getter)Biopower_get_biopwr_feedstock_total_lhv,(setter)Biopower_set_biopwr_feedstock_total_lhv,
-	"Dry feedstock LHV (Btu/lb), number.\n Required.",
+	PyDoc_STR("type: Float\n\nDry feedstock LHV (Btu/lb)\n\n*Required*: True"),
  	NULL},
 {"biopwr_feedstock_total_moisture", (getter)Biopower_get_biopwr_feedstock_total_moisture,(setter)Biopower_set_biopwr_feedstock_total_moisture,
-	"Overall Moisture Content (dry %), number.\n Required.",
+	PyDoc_STR("type: Float\n\nOverall Moisture Content (dry %)\n\n*Required*: True"),
  	NULL},
 {"biopwr_feedstock_urban_c", (getter)Biopower_get_biopwr_feedstock_urban_c,(setter)Biopower_set_biopwr_feedstock_urban_c,
-	"Carbon fraction in urban residue, number.\n Required.",
+	PyDoc_STR("type: Float\n\nCarbon fraction in urban residue\n\n*Required*: True"),
  	NULL},
 {"biopwr_feedstock_urban_frac", (getter)Biopower_get_biopwr_feedstock_urban_frac,(setter)Biopower_set_biopwr_feedstock_urban_frac,
-	"Urban wood residue feedstock fraction, number.\n Required.",
+	PyDoc_STR("type: Float\n\nUrban wood residue feedstock fraction\n\n*Required*: True"),
  	NULL},
 {"biopwr_feedstock_urban_moisture", (getter)Biopower_get_biopwr_feedstock_urban_moisture,(setter)Biopower_set_biopwr_feedstock_urban_moisture,
-	", number.\n Required.",
+	PyDoc_STR("type: Float\n\n\n\n*Required*: True"),
  	NULL},
 {"biopwr_feedstock_wheat_frac", (getter)Biopower_get_biopwr_feedstock_wheat_frac,(setter)Biopower_set_biopwr_feedstock_wheat_frac,
-	"Wheat straw feedstock fraction, number.\n Required.",
+	PyDoc_STR("type: Float\n\nWheat straw feedstock fraction\n\n*Required*: True"),
  	NULL},
 {"biopwr_feedstock_wheat_moisture", (getter)Biopower_get_biopwr_feedstock_wheat_moisture,(setter)Biopower_set_biopwr_feedstock_wheat_moisture,
-	", number.\n Required.",
+	PyDoc_STR("type: Float\n\n\n\n*Required*: True"),
  	NULL},
 {"biopwr_feedstock_woody_c", (getter)Biopower_get_biopwr_feedstock_woody_c,(setter)Biopower_set_biopwr_feedstock_woody_c,
-	"Carbon fraction in woody energy crop, number.\n Required.",
+	PyDoc_STR("type: Float\n\nCarbon fraction in woody energy crop\n\n*Required*: True"),
  	NULL},
 {"biopwr_feedstock_woody_frac", (getter)Biopower_get_biopwr_feedstock_woody_frac,(setter)Biopower_set_biopwr_feedstock_woody_frac,
-	"Woody energy crop feedstock fraction, number.\n Required.",
+	PyDoc_STR("type: Float\n\nWoody energy crop feedstock fraction\n\n*Required*: True"),
  	NULL},
 {"biopwr_feedstock_woody_moisture", (getter)Biopower_get_biopwr_feedstock_woody_moisture,(setter)Biopower_set_biopwr_feedstock_woody_moisture,
-	", number.\n Required.",
+	PyDoc_STR("type: Float\n\n\n\n*Required*: True"),
  	NULL},
 {"biopwr_plant_boiler_air_feed", (getter)Biopower_get_biopwr_plant_boiler_air_feed,(setter)Biopower_set_biopwr_plant_boiler_air_feed,
-	", number.\n Required.",
+	PyDoc_STR("type: Float\n\n\n\n*Required*: True"),
  	NULL},
 {"biopwr_plant_boiler_cap_per_boiler", (getter)Biopower_get_biopwr_plant_boiler_cap_per_boiler,(setter)Biopower_set_biopwr_plant_boiler_cap_per_boiler,
-	", number.\n Required.",
+	PyDoc_STR("type: Float\n\n\n\n*Required*: True"),
  	NULL},
 {"biopwr_plant_boiler_flue_temp", (getter)Biopower_get_biopwr_plant_boiler_flue_temp,(setter)Biopower_set_biopwr_plant_boiler_flue_temp,
-	", number.\n Required.",
+	PyDoc_STR("type: Float\n\n\n\n*Required*: True"),
  	NULL},
 {"biopwr_plant_boiler_num", (getter)Biopower_get_biopwr_plant_boiler_num,(setter)Biopower_set_biopwr_plant_boiler_num,
-	", number.\n Required.",
+	PyDoc_STR("type: Float\n\n\n\n*Required*: True"),
  	NULL},
 {"biopwr_plant_boiler_over_design", (getter)Biopower_get_biopwr_plant_boiler_over_design,(setter)Biopower_set_biopwr_plant_boiler_over_design,
-	", number.\n Required.",
+	PyDoc_STR("type: Float\n\n\n\n*Required*: True"),
  	NULL},
 {"biopwr_plant_boiler_steam_enthalpy", (getter)Biopower_get_biopwr_plant_boiler_steam_enthalpy,(setter)Biopower_set_biopwr_plant_boiler_steam_enthalpy,
-	", number.\n Required.",
+	PyDoc_STR("type: Float\n\n\n\n*Required*: True"),
  	NULL},
 {"biopwr_plant_boiler_steam_pressure", (getter)Biopower_get_biopwr_plant_boiler_steam_pressure,(setter)Biopower_set_biopwr_plant_boiler_steam_pressure,
-	", number.\n Required.",
+	PyDoc_STR("type: Float\n\n\n\n*Required*: True"),
  	NULL},
 {"biopwr_plant_combustor_type", (getter)Biopower_get_biopwr_plant_combustor_type,(setter)Biopower_set_biopwr_plant_combustor_type,
-	", number.\n Constraints: INTEGER; Required.",
+	PyDoc_STR("type: Float\n\n\n\n*Constraints*: INTEGER\n\n*Required*: True"),
  	NULL},
 {"biopwr_plant_cycle_design_temp", (getter)Biopower_get_biopwr_plant_cycle_design_temp,(setter)Biopower_set_biopwr_plant_cycle_design_temp,
-	", number.\n Required.",
+	PyDoc_STR("type: Float\n\n\n\n*Required*: True"),
  	NULL},
 {"biopwr_plant_disp_power", (getter)Biopower_get_biopwr_plant_disp_power,(setter)Biopower_set_biopwr_plant_disp_power,
-	", array.\n Constraints: LENGTH=9; Required.",
+	PyDoc_STR("type: Sequence\n\n\n\n*Constraints*: LENGTH=9\n\n*Required*: True"),
  	NULL},
 {"biopwr_plant_drying_method", (getter)Biopower_get_biopwr_plant_drying_method,(setter)Biopower_set_biopwr_plant_drying_method,
-	", number.\n Constraints: INTEGER; Required.",
+	PyDoc_STR("type: Float\n\n\n\n*Constraints*: INTEGER\n\n*Required*: True"),
  	NULL},
 {"biopwr_plant_drying_spec", (getter)Biopower_get_biopwr_plant_drying_spec,(setter)Biopower_set_biopwr_plant_drying_spec,
-	", number.\n Required.",
+	PyDoc_STR("type: Float\n\n\n\n*Required*: True"),
  	NULL},
 {"biopwr_plant_max_over_design", (getter)Biopower_get_biopwr_plant_max_over_design,(setter)Biopower_set_biopwr_plant_max_over_design,
-	", number.\n Required.",
+	PyDoc_STR("type: Float\n\n\n\n*Required*: True"),
  	NULL},
 {"biopwr_plant_min_load", (getter)Biopower_get_biopwr_plant_min_load,(setter)Biopower_set_biopwr_plant_min_load,
-	", number.\n Required.",
+	PyDoc_STR("type: Float\n\n\n\n*Required*: True"),
  	NULL},
 {"biopwr_plant_nameplate", (getter)Biopower_get_biopwr_plant_nameplate,(setter)Biopower_set_biopwr_plant_nameplate,
-	", number.\n Required.",
+	PyDoc_STR("type: Float\n\n\n\n*Required*: True"),
  	NULL},
 {"biopwr_plant_par_percent", (getter)Biopower_get_biopwr_plant_par_percent,(setter)Biopower_set_biopwr_plant_par_percent,
-	", number.\n Required.",
+	PyDoc_STR("type: Float\n\n\n\n*Required*: True"),
  	NULL},
 {"biopwr_plant_pl_eff_f0", (getter)Biopower_get_biopwr_plant_pl_eff_f0,(setter)Biopower_set_biopwr_plant_pl_eff_f0,
-	", number.\n Required.",
+	PyDoc_STR("type: Float\n\n\n\n*Required*: True"),
  	NULL},
 {"biopwr_plant_pl_eff_f1", (getter)Biopower_get_biopwr_plant_pl_eff_f1,(setter)Biopower_set_biopwr_plant_pl_eff_f1,
-	", number.\n Required.",
+	PyDoc_STR("type: Float\n\n\n\n*Required*: True"),
  	NULL},
 {"biopwr_plant_pl_eff_f2", (getter)Biopower_get_biopwr_plant_pl_eff_f2,(setter)Biopower_set_biopwr_plant_pl_eff_f2,
-	", number.\n Required.",
+	PyDoc_STR("type: Float\n\n\n\n*Required*: True"),
  	NULL},
 {"biopwr_plant_pl_eff_f3", (getter)Biopower_get_biopwr_plant_pl_eff_f3,(setter)Biopower_set_biopwr_plant_pl_eff_f3,
-	", number.\n Required.",
+	PyDoc_STR("type: Float\n\n\n\n*Required*: True"),
  	NULL},
 {"biopwr_plant_pl_eff_f4", (getter)Biopower_get_biopwr_plant_pl_eff_f4,(setter)Biopower_set_biopwr_plant_pl_eff_f4,
-	", number.\n Required.",
+	PyDoc_STR("type: Float\n\n\n\n*Required*: True"),
  	NULL},
 {"biopwr_plant_ramp_rate", (getter)Biopower_get_biopwr_plant_ramp_rate,(setter)Biopower_set_biopwr_plant_ramp_rate,
-	", number.\n Required.",
+	PyDoc_STR("type: Float\n\n\n\n*Required*: True"),
  	NULL},
 {"biopwr_plant_rated_eff", (getter)Biopower_get_biopwr_plant_rated_eff,(setter)Biopower_set_biopwr_plant_rated_eff,
-	", number.\n Required.",
+	PyDoc_STR("type: Float\n\n\n\n*Required*: True"),
  	NULL},
 {"biopwr_plant_temp_corr_mode", (getter)Biopower_get_biopwr_plant_temp_corr_mode,(setter)Biopower_set_biopwr_plant_temp_corr_mode,
-	", number.\n Constraints: INTEGER; Required.",
+	PyDoc_STR("type: Float\n\n\n\n*Constraints*: INTEGER\n\n*Required*: True"),
  	NULL},
 {"biopwr_plant_temp_eff_f0", (getter)Biopower_get_biopwr_plant_temp_eff_f0,(setter)Biopower_set_biopwr_plant_temp_eff_f0,
-	", number.\n Required.",
+	PyDoc_STR("type: Float\n\n\n\n*Required*: True"),
  	NULL},
 {"biopwr_plant_temp_eff_f1", (getter)Biopower_get_biopwr_plant_temp_eff_f1,(setter)Biopower_set_biopwr_plant_temp_eff_f1,
-	", number.\n Required.",
+	PyDoc_STR("type: Float\n\n\n\n*Required*: True"),
  	NULL},
 {"biopwr_plant_temp_eff_f2", (getter)Biopower_get_biopwr_plant_temp_eff_f2,(setter)Biopower_set_biopwr_plant_temp_eff_f2,
-	", number.\n Required.",
+	PyDoc_STR("type: Float\n\n\n\n*Required*: True"),
  	NULL},
 {"biopwr_plant_temp_eff_f3", (getter)Biopower_get_biopwr_plant_temp_eff_f3,(setter)Biopower_set_biopwr_plant_temp_eff_f3,
-	", number.\n Required.",
+	PyDoc_STR("type: Float\n\n\n\n*Required*: True"),
  	NULL},
 {"biopwr_plant_temp_eff_f4", (getter)Biopower_get_biopwr_plant_temp_eff_f4,(setter)Biopower_set_biopwr_plant_temp_eff_f4,
-	", number.\n Required.",
+	PyDoc_STR("type: Float\n\n\n\n*Required*: True"),
  	NULL},
 {"biopwr_plant_tou_grid", (getter)Biopower_get_biopwr_plant_tou_grid,(setter)Biopower_set_biopwr_plant_tou_grid,
-	", string.\n Required.",
+	PyDoc_STR("type: Str\n\n\n\n*Required*: True"),
  	NULL},
 {"biopwr_plant_tou_option", (getter)Biopower_get_biopwr_plant_tou_option,(setter)Biopower_set_biopwr_plant_tou_option,
-	", number.\n Constraints: INTEGER; Required.",
+	PyDoc_STR("type: Float\n\n\n\n*Constraints*: INTEGER\n\n*Required*: True"),
  	NULL},
 {"file_name", (getter)Biopower_get_file_name,(setter)Biopower_set_file_name,
-	"Local weather file path, string.\n Constraints: LOCAL_FILE; Required.",
+	PyDoc_STR("type: Str\n\nLocal weather file path\n\n*Constraints*: LOCAL_FILE\n\n*Required*: True"),
  	NULL},
 {"system_capacity", (getter)Biopower_get_system_capacity,(setter)Biopower_set_system_capacity,
-	"Nameplate capacity [kW], number.\n Required.",
+	PyDoc_STR("type: Float\n\nNameplate capacity [kW]\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1566,7 +1566,7 @@ static PyTypeObject Biopower_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		Biopower_methods,         /*tp_methods*/
@@ -1576,7 +1576,7 @@ static PyTypeObject Biopower_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -1645,25 +1645,25 @@ static PyMethodDef Outputs_methods[] = {
 static PyObject *
 Outputs_get_annual_energy(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Outputs_annual_energy_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Outputs_annual_energy_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_annual_fuel_usage(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Outputs_annual_fuel_usage_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Outputs_annual_fuel_usage_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_annual_watter_usage(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Outputs_annual_watter_usage_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Outputs_annual_watter_usage_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_capacity_factor(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Outputs_capacity_factor_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Outputs_capacity_factor_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -1693,7 +1693,7 @@ Outputs_get_hourly_q_to_pb(OutputsObject *self, void *closure)
 static PyObject *
 Outputs_get_kwh_per_kw(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Outputs_kwh_per_kw_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Outputs_kwh_per_kw_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -1813,546 +1813,546 @@ Outputs_get_monthly_woody_emc(OutputsObject *self, void *closure)
 static PyObject *
 Outputs_get_system_annual_ash(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Outputs_system_annual_ash_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Outputs_system_annual_ash_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_system_annual_biomass(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Outputs_system_annual_biomass_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Outputs_system_annual_biomass_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_system_annual_boiler_loss_dry(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Outputs_system_annual_boiler_loss_dry_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Outputs_system_annual_boiler_loss_dry_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_system_annual_boiler_loss_dry_kwh(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Outputs_system_annual_boiler_loss_dry_kwh_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Outputs_system_annual_boiler_loss_dry_kwh_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_system_annual_boiler_loss_fuel(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Outputs_system_annual_boiler_loss_fuel_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Outputs_system_annual_boiler_loss_fuel_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_system_annual_boiler_loss_fuel_kwh(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Outputs_system_annual_boiler_loss_fuel_kwh_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Outputs_system_annual_boiler_loss_fuel_kwh_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_system_annual_boiler_loss_manu(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Outputs_system_annual_boiler_loss_manu_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Outputs_system_annual_boiler_loss_manu_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_system_annual_boiler_loss_manu_kwh(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Outputs_system_annual_boiler_loss_manu_kwh_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Outputs_system_annual_boiler_loss_manu_kwh_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_system_annual_boiler_loss_rad(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Outputs_system_annual_boiler_loss_rad_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Outputs_system_annual_boiler_loss_rad_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_system_annual_boiler_loss_rad_kwh(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Outputs_system_annual_boiler_loss_rad_kwh_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Outputs_system_annual_boiler_loss_rad_kwh_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_system_annual_boiler_loss_total(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Outputs_system_annual_boiler_loss_total_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Outputs_system_annual_boiler_loss_total_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_system_annual_boiler_loss_total_kwh(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Outputs_system_annual_boiler_loss_total_kwh_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Outputs_system_annual_boiler_loss_total_kwh_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_system_annual_boiler_loss_unburn(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Outputs_system_annual_boiler_loss_unburn_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Outputs_system_annual_boiler_loss_unburn_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_system_annual_boiler_loss_unburn_kwh(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Outputs_system_annual_boiler_loss_unburn_kwh_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Outputs_system_annual_boiler_loss_unburn_kwh_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_system_annual_boiler_loss_wet(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Outputs_system_annual_boiler_loss_wet_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Outputs_system_annual_boiler_loss_wet_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_system_annual_boiler_loss_wet_kwh(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Outputs_system_annual_boiler_loss_wet_kwh_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Outputs_system_annual_boiler_loss_wet_kwh_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_system_annual_boiler_output(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Outputs_system_annual_boiler_output_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Outputs_system_annual_boiler_output_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_system_annual_coal(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Outputs_system_annual_coal_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Outputs_system_annual_coal_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_system_annual_e_net(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Outputs_system_annual_e_net_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Outputs_system_annual_e_net_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_system_annual_par_loss(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Outputs_system_annual_par_loss_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Outputs_system_annual_par_loss_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_system_annual_par_loss_kwh(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Outputs_system_annual_par_loss_kwh_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Outputs_system_annual_par_loss_kwh_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_system_annual_pb_eta(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Outputs_system_annual_pb_eta_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Outputs_system_annual_pb_eta_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_system_annual_pb_eta_kwh(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Outputs_system_annual_pb_eta_kwh_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Outputs_system_annual_pb_eta_kwh_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_system_annual_qtoboil_tot(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Outputs_system_annual_qtoboil_tot_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Outputs_system_annual_qtoboil_tot_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_system_annual_qtopb_tot(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Outputs_system_annual_qtopb_tot_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Outputs_system_annual_qtopb_tot_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_system_annual_turbine_output(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Outputs_system_annual_turbine_output_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Outputs_system_annual_turbine_output_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_system_capfactor(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Outputs_system_capfactor_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Outputs_system_capfactor_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_system_emissions_avoided(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Outputs_system_emissions_avoided_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Outputs_system_emissions_avoided_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_system_emissions_biodiesel(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Outputs_system_emissions_biodiesel_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Outputs_system_emissions_biodiesel_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_system_emissions_bunker(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Outputs_system_emissions_bunker_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Outputs_system_emissions_bunker_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_system_emissions_combustion(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Outputs_system_emissions_combustion_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Outputs_system_emissions_combustion_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_system_emissions_diesel(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Outputs_system_emissions_diesel_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Outputs_system_emissions_diesel_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_system_emissions_drying(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Outputs_system_emissions_drying_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Outputs_system_emissions_drying_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_system_emissions_ems_per_lb(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Outputs_system_emissions_ems_per_lb_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Outputs_system_emissions_ems_per_lb_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_system_emissions_growth(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Outputs_system_emissions_growth_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Outputs_system_emissions_growth_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_system_emissions_lime(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Outputs_system_emissions_lime_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Outputs_system_emissions_lime_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_system_emissions_naturalgas(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Outputs_system_emissions_naturalgas_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Outputs_system_emissions_naturalgas_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_system_emissions_nitrogen(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Outputs_system_emissions_nitrogen_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Outputs_system_emissions_nitrogen_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_system_emissions_oil(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Outputs_system_emissions_oil_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Outputs_system_emissions_oil_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_system_emissions_phosphorus(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Outputs_system_emissions_phosphorus_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Outputs_system_emissions_phosphorus_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_system_emissions_potassium(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Outputs_system_emissions_potassium_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Outputs_system_emissions_potassium_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_system_emissions_preprocessing(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Outputs_system_emissions_preprocessing_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Outputs_system_emissions_preprocessing_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_system_emissions_total_sum(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Outputs_system_emissions_total_sum_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Outputs_system_emissions_total_sum_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_system_emissions_transport(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Outputs_system_emissions_transport_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Outputs_system_emissions_transport_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_system_emissions_uptake(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Outputs_system_emissions_uptake_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Outputs_system_emissions_uptake_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_system_heat_rate(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Outputs_system_heat_rate_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Outputs_system_heat_rate_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_system_hhv_heatrate(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Outputs_system_hhv_heatrate_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Outputs_system_hhv_heatrate_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_system_hhv_thermeff(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Outputs_system_hhv_thermeff_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Outputs_system_hhv_thermeff_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_system_lhv_heatrate(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Outputs_system_lhv_heatrate_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Outputs_system_lhv_heatrate_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_system_lhv_thermeff(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Outputs_system_lhv_thermeff_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Outputs_system_lhv_thermeff_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_system_total_moisture(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Biomass_Outputs_system_total_moisture_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Biomass_Outputs_system_total_moisture_nget, self->data_ptr);
 }
 
 static PyGetSetDef Outputs_getset[] = {
 {"annual_energy", (getter)Outputs_get_annual_energy,(setter)0,
-	"Annual Energy [kWh], number.",
+	PyDoc_STR("type: Float\n\nAnnual Energy [kWh]"),
  	NULL},
 {"annual_fuel_usage", (getter)Outputs_get_annual_fuel_usage,(setter)0,
-	"Annual Fuel Usage [kWht], number.",
+	PyDoc_STR("type: Float\n\nAnnual Fuel Usage [kWht]"),
  	NULL},
 {"annual_watter_usage", (getter)Outputs_get_annual_watter_usage,(setter)0,
-	"Annual Water Usage [m3], number.",
+	PyDoc_STR("type: Float\n\nAnnual Water Usage [m3]"),
  	NULL},
 {"capacity_factor", (getter)Outputs_get_capacity_factor,(setter)0,
-	"Capacity factor [%], number.",
+	PyDoc_STR("type: Float\n\nCapacity factor [%]"),
  	NULL},
 {"gen", (getter)Outputs_get_gen,(setter)0,
-	"System power generated [kW], array.",
+	PyDoc_STR("type: Sequence\n\nSystem power generated [kW]"),
  	NULL},
 {"hourly_boiler_eff", (getter)Outputs_get_hourly_boiler_eff,(setter)0,
-	"Boiler Efficiency, array.",
+	PyDoc_STR("type: Sequence\n\nBoiler Efficiency"),
  	NULL},
 {"hourly_pbeta", (getter)Outputs_get_hourly_pbeta,(setter)0,
-	"Power Block Efficiency, array.",
+	PyDoc_STR("type: Sequence\n\nPower Block Efficiency"),
  	NULL},
 {"hourly_q_to_pb", (getter)Outputs_get_hourly_q_to_pb,(setter)0,
-	"Q To Power Block [kW], array.",
+	PyDoc_STR("type: Sequence\n\nQ To Power Block [kW]"),
  	NULL},
 {"kwh_per_kw", (getter)Outputs_get_kwh_per_kw,(setter)0,
-	"First year kWh/kW [kWh/kW], number.",
+	PyDoc_STR("type: Float\n\nFirst year kWh/kW [kWh/kW]"),
  	NULL},
 {"monthly_bagasse_emc", (getter)Outputs_get_monthly_bagasse_emc,(setter)0,
-	"Monthly bagasse EMC (dry), array.",
+	PyDoc_STR("type: Sequence\n\nMonthly bagasse EMC (dry)"),
  	NULL},
 {"monthly_barley_emc", (getter)Outputs_get_monthly_barley_emc,(setter)0,
-	"Monthly barley EMC (dry), array.",
+	PyDoc_STR("type: Sequence\n\nMonthly barley EMC (dry)"),
  	NULL},
 {"monthly_boiler_eff", (getter)Outputs_get_monthly_boiler_eff,(setter)0,
-	"Total Boiler Efficiency - HHV (%) [%], array.",
+	PyDoc_STR("type: Sequence\n\nTotal Boiler Efficiency - HHV (%) [%]"),
  	NULL},
 {"monthly_energy", (getter)Outputs_get_monthly_energy,(setter)0,
-	"Monthly Energy [kWh], array.",
+	PyDoc_STR("type: Sequence\n\nMonthly Energy [kWh]"),
  	NULL},
 {"monthly_forest_emc", (getter)Outputs_get_monthly_forest_emc,(setter)0,
-	"Monthly forest EMC (dry), array.",
+	PyDoc_STR("type: Sequence\n\nMonthly forest EMC (dry)"),
  	NULL},
 {"monthly_herb_emc", (getter)Outputs_get_monthly_herb_emc,(setter)0,
-	"Monthly herbaceous crop EMC (dry), array.",
+	PyDoc_STR("type: Sequence\n\nMonthly herbaceous crop EMC (dry)"),
  	NULL},
 {"monthly_hhv_heatrate", (getter)Outputs_get_monthly_hhv_heatrate,(setter)0,
-	"Gross Monthly Heat Rate (MMBtu/MWh) [MMBtu/MWh], array.",
+	PyDoc_STR("type: Sequence\n\nGross Monthly Heat Rate (MMBtu/MWh) [MMBtu/MWh]"),
  	NULL},
 {"monthly_lhv_heatrate", (getter)Outputs_get_monthly_lhv_heatrate,(setter)0,
-	"Net Monthly Heat Rate (MMBtu/MWh) [MMBtu/MWh], array.",
+	PyDoc_STR("type: Sequence\n\nNet Monthly Heat Rate (MMBtu/MWh) [MMBtu/MWh]"),
  	NULL},
 {"monthly_mill_emc", (getter)Outputs_get_monthly_mill_emc,(setter)0,
-	"Monthly mill waste EMC (dry), array.",
+	PyDoc_STR("type: Sequence\n\nMonthly mill waste EMC (dry)"),
  	NULL},
 {"monthly_moist", (getter)Outputs_get_monthly_moist,(setter)0,
-	"Monthly biomass moisture fraction (dry), array.",
+	PyDoc_STR("type: Sequence\n\nMonthly biomass moisture fraction (dry)"),
  	NULL},
 {"monthly_pb_eta", (getter)Outputs_get_monthly_pb_eta,(setter)0,
-	"Power Block Effiency [%], array.",
+	PyDoc_STR("type: Sequence\n\nPower Block Effiency [%]"),
  	NULL},
 {"monthly_q_to_pb", (getter)Outputs_get_monthly_q_to_pb,(setter)0,
-	"Q To Power Block [kWh], array.",
+	PyDoc_STR("type: Sequence\n\nQ To Power Block [kWh]"),
  	NULL},
 {"monthly_rh", (getter)Outputs_get_monthly_rh,(setter)0,
-	"Relative humidity, array.",
+	PyDoc_STR("type: Sequence\n\nRelative humidity"),
  	NULL},
 {"monthly_rice_emc", (getter)Outputs_get_monthly_rice_emc,(setter)0,
-	"Monthly rice straw EMC (dry), array.",
+	PyDoc_STR("type: Sequence\n\nMonthly rice straw EMC (dry)"),
  	NULL},
 {"monthly_stover_emc", (getter)Outputs_get_monthly_stover_emc,(setter)0,
-	"Monthly stover EMC (dry), array.",
+	PyDoc_STR("type: Sequence\n\nMonthly stover EMC (dry)"),
  	NULL},
 {"monthly_temp_c", (getter)Outputs_get_monthly_temp_c,(setter)0,
-	"Temperature, array.",
+	PyDoc_STR("type: Sequence\n\nTemperature"),
  	NULL},
 {"monthly_urban_emc", (getter)Outputs_get_monthly_urban_emc,(setter)0,
-	"Monthly urban wood waste EMC (dry), array.",
+	PyDoc_STR("type: Sequence\n\nMonthly urban wood waste EMC (dry)"),
  	NULL},
 {"monthly_wheat_emc", (getter)Outputs_get_monthly_wheat_emc,(setter)0,
-	"Monthly wheat straw EMC (dry), array.",
+	PyDoc_STR("type: Sequence\n\nMonthly wheat straw EMC (dry)"),
  	NULL},
 {"monthly_woody_emc", (getter)Outputs_get_monthly_woody_emc,(setter)0,
-	"Monthly woody crop EMC (dry), array.",
+	PyDoc_STR("type: Sequence\n\nMonthly woody crop EMC (dry)"),
  	NULL},
 {"system_annual_ash", (getter)Outputs_get_system_annual_ash,(setter)0,
-	"Ash produced [tons/yr], number.",
+	PyDoc_STR("type: Float\n\nAsh produced [tons/yr]"),
  	NULL},
 {"system_annual_biomass", (getter)Outputs_get_system_annual_biomass,(setter)0,
-	"Annual biomass usage [dry tons/yr], number.",
+	PyDoc_STR("type: Float\n\nAnnual biomass usage [dry tons/yr]"),
  	NULL},
 {"system_annual_boiler_loss_dry", (getter)Outputs_get_system_annual_boiler_loss_dry,(setter)0,
-	"Energy lost in hot flue gas [%], number.",
+	PyDoc_STR("type: Float\n\nEnergy lost in hot flue gas [%]"),
  	NULL},
 {"system_annual_boiler_loss_dry_kwh", (getter)Outputs_get_system_annual_boiler_loss_dry_kwh,(setter)0,
-	"Energy lost in hot flue gas [kWh], number.",
+	PyDoc_STR("type: Float\n\nEnergy lost in hot flue gas [kWh]"),
  	NULL},
 {"system_annual_boiler_loss_fuel", (getter)Outputs_get_system_annual_boiler_loss_fuel,(setter)0,
-	"Energy lost in fuel out of boiler [%], number.",
+	PyDoc_STR("type: Float\n\nEnergy lost in fuel out of boiler [%]"),
  	NULL},
 {"system_annual_boiler_loss_fuel_kwh", (getter)Outputs_get_system_annual_boiler_loss_fuel_kwh,(setter)0,
-	"Energy lost in fuel out of boiler [kWh], number.",
+	PyDoc_STR("type: Float\n\nEnergy lost in fuel out of boiler [kWh]"),
  	NULL},
 {"system_annual_boiler_loss_manu", (getter)Outputs_get_system_annual_boiler_loss_manu,(setter)0,
-	"Energy loss included in manufacturer's margin [%], number.",
+	PyDoc_STR("type: Float\n\nEnergy loss included in manufacturer's margin [%]"),
  	NULL},
 {"system_annual_boiler_loss_manu_kwh", (getter)Outputs_get_system_annual_boiler_loss_manu_kwh,(setter)0,
-	"Energy loss included in manufacturer's margin [kWh], number.",
+	PyDoc_STR("type: Float\n\nEnergy loss included in manufacturer's margin [kWh]"),
  	NULL},
 {"system_annual_boiler_loss_rad", (getter)Outputs_get_system_annual_boiler_loss_rad,(setter)0,
-	"Energy loss due to boiler radiation [%], number.",
+	PyDoc_STR("type: Float\n\nEnergy loss due to boiler radiation [%]"),
  	NULL},
 {"system_annual_boiler_loss_rad_kwh", (getter)Outputs_get_system_annual_boiler_loss_rad_kwh,(setter)0,
-	"Energy loss due to boiler radiation [kWh], number.",
+	PyDoc_STR("type: Float\n\nEnergy loss due to boiler radiation [kWh]"),
  	NULL},
 {"system_annual_boiler_loss_total", (getter)Outputs_get_system_annual_boiler_loss_total,(setter)0,
-	"Energy lost in boiler - total [%], number.",
+	PyDoc_STR("type: Float\n\nEnergy lost in boiler - total [%]"),
  	NULL},
 {"system_annual_boiler_loss_total_kwh", (getter)Outputs_get_system_annual_boiler_loss_total_kwh,(setter)0,
-	"Energy lost in boiler - total [kWh], number.",
+	PyDoc_STR("type: Float\n\nEnergy lost in boiler - total [kWh]"),
  	NULL},
 {"system_annual_boiler_loss_unburn", (getter)Outputs_get_system_annual_boiler_loss_unburn,(setter)0,
-	"Energy lost in unburned fuel [%], number.",
+	PyDoc_STR("type: Float\n\nEnergy lost in unburned fuel [%]"),
  	NULL},
 {"system_annual_boiler_loss_unburn_kwh", (getter)Outputs_get_system_annual_boiler_loss_unburn_kwh,(setter)0,
-	"Energy lost in unburned fuel [kWh], number.",
+	PyDoc_STR("type: Float\n\nEnergy lost in unburned fuel [kWh]"),
  	NULL},
 {"system_annual_boiler_loss_wet", (getter)Outputs_get_system_annual_boiler_loss_wet,(setter)0,
-	"Energy lost to moisture in air [%], number.",
+	PyDoc_STR("type: Float\n\nEnergy lost to moisture in air [%]"),
  	NULL},
 {"system_annual_boiler_loss_wet_kwh", (getter)Outputs_get_system_annual_boiler_loss_wet_kwh,(setter)0,
-	"Energy lost to moisture in air [kWh], number.",
+	PyDoc_STR("type: Float\n\nEnergy lost to moisture in air [kWh]"),
  	NULL},
 {"system_annual_boiler_output", (getter)Outputs_get_system_annual_boiler_output,(setter)0,
-	"Boiler output [kWh], number.",
+	PyDoc_STR("type: Float\n\nBoiler output [kWh]"),
  	NULL},
 {"system_annual_coal", (getter)Outputs_get_system_annual_coal,(setter)0,
-	"Annual coal usage [dry tons/yr], number.",
+	PyDoc_STR("type: Float\n\nAnnual coal usage [dry tons/yr]"),
  	NULL},
 {"system_annual_e_net", (getter)Outputs_get_system_annual_e_net,(setter)0,
-	"Gross Annual Energy [kWh], number.",
+	PyDoc_STR("type: Float\n\nGross Annual Energy [kWh]"),
  	NULL},
 {"system_annual_par_loss", (getter)Outputs_get_system_annual_par_loss,(setter)0,
-	"Energy consumed within plant - parasitic load [%], number.",
+	PyDoc_STR("type: Float\n\nEnergy consumed within plant - parasitic load [%]"),
  	NULL},
 {"system_annual_par_loss_kwh", (getter)Outputs_get_system_annual_par_loss_kwh,(setter)0,
-	"Energy consumed within plant - parasitic load [kWh], number.",
+	PyDoc_STR("type: Float\n\nEnergy consumed within plant - parasitic load [kWh]"),
  	NULL},
 {"system_annual_pb_eta", (getter)Outputs_get_system_annual_pb_eta,(setter)0,
-	"Energy lost in steam turbine and generator [%], number.",
+	PyDoc_STR("type: Float\n\nEnergy lost in steam turbine and generator [%]"),
  	NULL},
 {"system_annual_pb_eta_kwh", (getter)Outputs_get_system_annual_pb_eta_kwh,(setter)0,
-	"Energy lost in steam turbine and generator [kWh], number.",
+	PyDoc_STR("type: Float\n\nEnergy lost in steam turbine and generator [kWh]"),
  	NULL},
 {"system_annual_qtoboil_tot", (getter)Outputs_get_system_annual_qtoboil_tot,(setter)0,
-	"Q to Boiler [kWh], number.",
+	PyDoc_STR("type: Float\n\nQ to Boiler [kWh]"),
  	NULL},
 {"system_annual_qtopb_tot", (getter)Outputs_get_system_annual_qtopb_tot,(setter)0,
-	"Q to Power Block [kWh], number.",
+	PyDoc_STR("type: Float\n\nQ to Power Block [kWh]"),
  	NULL},
 {"system_annual_turbine_output", (getter)Outputs_get_system_annual_turbine_output,(setter)0,
-	"Turbine output [kWh], number.",
+	PyDoc_STR("type: Float\n\nTurbine output [kWh]"),
  	NULL},
 {"system_capfactor", (getter)Outputs_get_system_capfactor,(setter)0,
-	"Annual Capacity Factor (%) [%], number.",
+	PyDoc_STR("type: Float\n\nAnnual Capacity Factor (%) [%]"),
  	NULL},
 {"system_emissions_avoided", (getter)Outputs_get_system_emissions_avoided,(setter)0,
-	"Biomass Avoided Use [kWh], number.",
+	PyDoc_STR("type: Float\n\nBiomass Avoided Use [kWh]"),
  	NULL},
 {"system_emissions_biodiesel", (getter)Outputs_get_system_emissions_biodiesel,(setter)0,
-	"Life Cycle Biodiesel use [Btu/kWh], number.",
+	PyDoc_STR("type: Float\n\nLife Cycle Biodiesel use [Btu/kWh]"),
  	NULL},
 {"system_emissions_bunker", (getter)Outputs_get_system_emissions_bunker,(setter)0,
-	"Life Cycle Bunker fuel use [Btu/kWh], number.",
+	PyDoc_STR("type: Float\n\nLife Cycle Bunker fuel use [Btu/kWh]"),
  	NULL},
 {"system_emissions_combustion", (getter)Outputs_get_system_emissions_combustion,(setter)0,
-	"Combustion [kWh], number.",
+	PyDoc_STR("type: Float\n\nCombustion [kWh]"),
  	NULL},
 {"system_emissions_diesel", (getter)Outputs_get_system_emissions_diesel,(setter)0,
-	"Life Cycle Diesel use [Btu/kWh], number.",
+	PyDoc_STR("type: Float\n\nLife Cycle Diesel use [Btu/kWh]"),
  	NULL},
 {"system_emissions_drying", (getter)Outputs_get_system_emissions_drying,(setter)0,
-	"Biomass Drying [kWh], number.",
+	PyDoc_STR("type: Float\n\nBiomass Drying [kWh]"),
  	NULL},
 {"system_emissions_ems_per_lb", (getter)Outputs_get_system_emissions_ems_per_lb,(setter)0,
-	"Life Cycle g CO2eq released/lb dry biomass, number.",
+	PyDoc_STR("type: Float\n\nLife Cycle g CO2eq released/lb dry biomass"),
  	NULL},
 {"system_emissions_growth", (getter)Outputs_get_system_emissions_growth,(setter)0,
-	"Biomass Collection [kWh], number.",
+	PyDoc_STR("type: Float\n\nBiomass Collection [kWh]"),
  	NULL},
 {"system_emissions_lime", (getter)Outputs_get_system_emissions_lime,(setter)0,
-	"Life Cycle Lime fertilizer use [lb Lime/kWh], number.",
+	PyDoc_STR("type: Float\n\nLife Cycle Lime fertilizer use [lb Lime/kWh]"),
  	NULL},
 {"system_emissions_naturalgas", (getter)Outputs_get_system_emissions_naturalgas,(setter)0,
-	"Life Cycle Natural gas use [Btu/kWh], number.",
+	PyDoc_STR("type: Float\n\nLife Cycle Natural gas use [Btu/kWh]"),
  	NULL},
 {"system_emissions_nitrogen", (getter)Outputs_get_system_emissions_nitrogen,(setter)0,
-	"Life Cycle Nitrogen fertilizer use [lb N/kWh], number.",
+	PyDoc_STR("type: Float\n\nLife Cycle Nitrogen fertilizer use [lb N/kWh]"),
  	NULL},
 {"system_emissions_oil", (getter)Outputs_get_system_emissions_oil,(setter)0,
-	"Life Cycle Oil use [Btu/kWh], number.",
+	PyDoc_STR("type: Float\n\nLife Cycle Oil use [Btu/kWh]"),
  	NULL},
 {"system_emissions_phosphorus", (getter)Outputs_get_system_emissions_phosphorus,(setter)0,
-	"Life Cycle Phosphorus fertilizer use [lb K2O/kWh], number.",
+	PyDoc_STR("type: Float\n\nLife Cycle Phosphorus fertilizer use [lb K2O/kWh]"),
  	NULL},
 {"system_emissions_potassium", (getter)Outputs_get_system_emissions_potassium,(setter)0,
-	"Life Cycle Potassium fertilizer use [lb P2O5/kWh], number.",
+	PyDoc_STR("type: Float\n\nLife Cycle Potassium fertilizer use [lb P2O5/kWh]"),
  	NULL},
 {"system_emissions_preprocessing", (getter)Outputs_get_system_emissions_preprocessing,(setter)0,
-	"Biomass Preprocessing [kWh], number.",
+	PyDoc_STR("type: Float\n\nBiomass Preprocessing [kWh]"),
  	NULL},
 {"system_emissions_total_sum", (getter)Outputs_get_system_emissions_total_sum,(setter)0,
-	"Biomass Life Cycle CO2 [kWh], number.",
+	PyDoc_STR("type: Float\n\nBiomass Life Cycle CO2 [kWh]"),
  	NULL},
 {"system_emissions_transport", (getter)Outputs_get_system_emissions_transport,(setter)0,
-	"Biomass Transport [kWh], number.",
+	PyDoc_STR("type: Float\n\nBiomass Transport [kWh]"),
  	NULL},
 {"system_emissions_uptake", (getter)Outputs_get_system_emissions_uptake,(setter)0,
-	"Biomass CO2 Uptake [kWh], number.",
+	PyDoc_STR("type: Float\n\nBiomass CO2 Uptake [kWh]"),
  	NULL},
 {"system_heat_rate", (getter)Outputs_get_system_heat_rate,(setter)0,
-	"Heat Rate Conversion Factor (MMBTUs/MWhe) [MMBTUs/MWhe], number.",
+	PyDoc_STR("type: Float\n\nHeat Rate Conversion Factor (MMBTUs/MWhe) [MMBTUs/MWhe]"),
  	NULL},
 {"system_hhv_heatrate", (getter)Outputs_get_system_hhv_heatrate,(setter)0,
-	"Gross Heat Rate (MMBtu/MWh) [MMBtu/MWh], number.",
+	PyDoc_STR("type: Float\n\nGross Heat Rate (MMBtu/MWh) [MMBtu/MWh]"),
  	NULL},
 {"system_hhv_thermeff", (getter)Outputs_get_system_hhv_thermeff,(setter)0,
-	"Thermal efficiency, HHV (%) [%], number.",
+	PyDoc_STR("type: Float\n\nThermal efficiency, HHV (%) [%]"),
  	NULL},
 {"system_lhv_heatrate", (getter)Outputs_get_system_lhv_heatrate,(setter)0,
-	"Net Heat Rate (MMBtu/MWh) [MMBtu/MWh], number.",
+	PyDoc_STR("type: Float\n\nNet Heat Rate (MMBtu/MWh) [MMBtu/MWh]"),
  	NULL},
 {"system_lhv_thermeff", (getter)Outputs_get_system_lhv_thermeff,(setter)0,
-	"Thermal efficiency, LHV (%) [%], number.",
+	PyDoc_STR("type: Float\n\nThermal efficiency, LHV (%) [%]"),
  	NULL},
 {"system_total_moisture", (getter)Outputs_get_system_total_moisture,(setter)0,
-	"Overall Moisture Content (dry %) [%], number.",
+	PyDoc_STR("type: Float\n\nOverall Moisture Content (dry %) [%]"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -2385,7 +2385,7 @@ static PyTypeObject Outputs_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		Outputs_methods,         /*tp_methods*/
@@ -2395,7 +2395,7 @@ static PyTypeObject Outputs_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -2508,7 +2508,7 @@ static PyMethodDef Biomass_methods[] = {
 		{"assign",            (PyCFunction)Biomass_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs")},
 		{"export",            (PyCFunction)Biomass_export,  METH_VARARGS,
-				PyDoc_STR("assign() -> None\n Export attributes into dictionary")},
+				PyDoc_STR("export() -> None\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -2548,11 +2548,11 @@ static PyTypeObject Biomass_Type = {
 		0,                          /*tp_setattro*/
 		0,                          /*tp_as_buffer*/
 		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
-		"see html for help",        /*tp_doc*/
+		"Wrapper for `cmod_biomass.cpp <https://github.com/NREL/ssc/blob/develop/ssc/cmod_biomass.cpp>`_",        /*tp_doc*/
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		Biomass_methods,      /*tp_methods*/
@@ -2562,7 +2562,7 @@ static PyTypeObject Biomass_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,                          /*tp_new*/
@@ -2627,10 +2627,10 @@ static PyMethodDef BiomassModule_methods[] = {
 		{"new",             Biomass_new,         METH_VARARGS,
 				PyDoc_STR("new() -> new Biomass object")},
 		{"default",             Biomass_default,         METH_VARARGS,
-				PyDoc_STR("default(financial) -> new Biomass object with financial model-specific default attributes\n"
-				"Options: BiopowerAllEquityPartnershipFlip\nBiopowerCommercial\nBiopowerCommercialPPA\nBiopowerIndependentPowerProducer\nBiopowerLCOECalculator\nBiopowerLeveragedPartnershipFlip\nBiopowerNone\nBiopowerSaleLeaseback\nBiopowerSingleOwner")},
+				PyDoc_STR("default(config) -> new Biomass object with financial model-specific default attributes\n"
+				"config options:\n\n- \"BiopowerAllEquityPartnershipFlip\"\n- \"BiopowerCommercial\"\n- \"BiopowerCommercialPPA\"\n- \"BiopowerIndependentPowerProducer\"\n- \"BiopowerLCOECalculator\"\n- \"BiopowerLeveragedPartnershipFlip\"\n- \"BiopowerNone\"\n- \"BiopowerSaleLeaseback\"\n- \"BiopowerSingleOwner\"")},
 		{"wrap",             Biomass_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> new Biomass object around existing PySSC data, taking over memory ownership")},
+				PyDoc_STR("wrap(ssc_data_t) -> new Biomass object around existing PySSC data, taking over memory ownership\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to `wrap`")},
 		{NULL,              NULL}           /* sentinel */
 };
 

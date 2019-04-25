@@ -67,13 +67,13 @@ static PyMethodDef Weather_methods[] = {
 static PyObject *
 Weather_get_azimuth(WeatherObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcsgenericSolar_Weather_azimuth_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcsgenericSolar_Weather_azimuth_nget, self->data_ptr);
 }
 
 static int
 Weather_set_azimuth(WeatherObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcsgenericSolar_Weather_azimuth_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcsgenericSolar_Weather_azimuth_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -91,39 +91,39 @@ Weather_set_file_name(WeatherObject *self, PyObject *value, void *closure)
 static PyObject *
 Weather_get_tilt(WeatherObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcsgenericSolar_Weather_tilt_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcsgenericSolar_Weather_tilt_nget, self->data_ptr);
 }
 
 static int
 Weather_set_tilt(WeatherObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcsgenericSolar_Weather_tilt_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcsgenericSolar_Weather_tilt_nset, self->data_ptr);
 }
 
 static PyObject *
 Weather_get_track_mode(WeatherObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcsgenericSolar_Weather_track_mode_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcsgenericSolar_Weather_track_mode_nget, self->data_ptr);
 }
 
 static int
 Weather_set_track_mode(WeatherObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcsgenericSolar_Weather_track_mode_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcsgenericSolar_Weather_track_mode_nset, self->data_ptr);
 }
 
 static PyGetSetDef Weather_getset[] = {
 {"azimuth", (getter)Weather_get_azimuth,(setter)Weather_set_azimuth,
-	"Azimuth angle of surface/axis, number.\n Required.",
+	PyDoc_STR("type: Float\n\nAzimuth angle of surface/axis\n\n*Required*: True"),
  	NULL},
 {"file_name", (getter)Weather_get_file_name,(setter)Weather_set_file_name,
-	"local weather file path, string.\n Constraints: LOCAL_FILE; Required.",
+	PyDoc_STR("type: Str\n\nlocal weather file path\n\n*Constraints*: LOCAL_FILE\n\n*Required*: True"),
  	NULL},
 {"tilt", (getter)Weather_get_tilt,(setter)Weather_set_tilt,
-	"Tilt angle of surface/axis, number.\n Required.",
+	PyDoc_STR("type: Float\n\nTilt angle of surface/axis\n\n*Required*: True"),
  	NULL},
 {"track_mode", (getter)Weather_get_track_mode,(setter)Weather_set_track_mode,
-	"Tracking mode, number.\n Required.",
+	PyDoc_STR("type: Float\n\nTracking mode\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -156,7 +156,7 @@ static PyTypeObject Weather_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		Weather_methods,         /*tp_methods*/
@@ -166,7 +166,7 @@ static PyTypeObject Weather_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -235,18 +235,18 @@ static PyMethodDef GenericSolar_methods[] = {
 static PyObject *
 GenericSolar_get_system_capacity(GenericSolarObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcsgenericSolar_GenericSolar_system_capacity_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcsgenericSolar_GenericSolar_system_capacity_nget, self->data_ptr);
 }
 
 static int
 GenericSolar_set_system_capacity(GenericSolarObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcsgenericSolar_GenericSolar_system_capacity_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcsgenericSolar_GenericSolar_system_capacity_nset, self->data_ptr);
 }
 
 static PyGetSetDef GenericSolar_getset[] = {
 {"system_capacity", (getter)GenericSolar_get_system_capacity,(setter)GenericSolar_set_system_capacity,
-	"Nameplate capacity [kW], number.\n Required.",
+	PyDoc_STR("type: Float\n\nNameplate capacity [kW]\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -279,7 +279,7 @@ static PyTypeObject GenericSolar_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		GenericSolar_methods,         /*tp_methods*/
@@ -289,7 +289,7 @@ static PyTypeObject GenericSolar_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -381,10 +381,10 @@ TouTranslator_set_weekend_schedule(TouTranslatorObject *self, PyObject *value, v
 
 static PyGetSetDef TouTranslator_getset[] = {
 {"weekday_schedule", (getter)TouTranslator_get_weekday_schedule,(setter)TouTranslator_set_weekday_schedule,
-	"12x24 Time of Use Values for week days, matrix.\n Required.",
+	PyDoc_STR("type: Sequence[Sequence]\n\n12x24 Time of Use Values for week days\n\n*Required*: True"),
  	NULL},
 {"weekend_schedule", (getter)TouTranslator_get_weekend_schedule,(setter)TouTranslator_set_weekend_schedule,
-	"12x24 Time of Use Values for week end days, matrix.\n Required.",
+	PyDoc_STR("type: Sequence[Sequence]\n\n12x24 Time of Use Values for week end days\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -417,7 +417,7 @@ static PyTypeObject TouTranslator_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		TouTranslator_methods,         /*tp_methods*/
@@ -427,7 +427,7 @@ static PyTypeObject TouTranslator_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -508,37 +508,37 @@ Type260_set_OpticalTable(Type260Object *self, PyObject *value, void *closure)
 static PyObject *
 Type260_get_PC_T_corr(Type260Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcsgenericSolar_Type260_PC_T_corr_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcsgenericSolar_Type260_PC_T_corr_nget, self->data_ptr);
 }
 
 static int
 Type260_set_PC_T_corr(Type260Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcsgenericSolar_Type260_PC_T_corr_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcsgenericSolar_Type260_PC_T_corr_nset, self->data_ptr);
 }
 
 static PyObject *
 Type260_get_T_pcdes(Type260Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcsgenericSolar_Type260_T_pcdes_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcsgenericSolar_Type260_T_pcdes_nget, self->data_ptr);
 }
 
 static int
 Type260_set_T_pcdes(Type260Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcsgenericSolar_Type260_T_pcdes_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcsgenericSolar_Type260_T_pcdes_nset, self->data_ptr);
 }
 
 static PyObject *
 Type260_get_T_sfdes(Type260Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcsgenericSolar_Type260_T_sfdes_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcsgenericSolar_Type260_T_sfdes_nget, self->data_ptr);
 }
 
 static int
 Type260_set_T_sfdes(Type260Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcsgenericSolar_Type260_T_sfdes_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcsgenericSolar_Type260_T_sfdes_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -550,7 +550,7 @@ Type260_get_Wpar_prodD_coefs(Type260Object *self, void *closure)
 static int
 Type260_set_Wpar_prodD_coefs(Type260Object *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_TcsgenericSolar_Type260_Wpar_prodD_coefs_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_TcsgenericSolar_Type260_Wpar_prodD_coefs_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -562,7 +562,7 @@ Type260_get_Wpar_prodQ_coefs(Type260Object *self, void *closure)
 static int
 Type260_set_Wpar_prodQ_coefs(Type260Object *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_TcsgenericSolar_Type260_Wpar_prodQ_coefs_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_TcsgenericSolar_Type260_Wpar_prodQ_coefs_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -574,7 +574,7 @@ Type260_get_Wpar_prodT_coefs(Type260Object *self, void *closure)
 static int
 Type260_set_Wpar_prodT_coefs(Type260Object *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_TcsgenericSolar_Type260_Wpar_prodT_coefs_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_TcsgenericSolar_Type260_Wpar_prodT_coefs_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -586,7 +586,7 @@ Type260_get_diswos(Type260Object *self, void *closure)
 static int
 Type260_set_diswos(Type260Object *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_TcsgenericSolar_Type260_diswos_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_TcsgenericSolar_Type260_diswos_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -598,7 +598,7 @@ Type260_get_disws(Type260Object *self, void *closure)
 static int
 Type260_set_disws(Type260Object *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_TcsgenericSolar_Type260_disws_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_TcsgenericSolar_Type260_disws_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -610,7 +610,7 @@ Type260_get_etaQ_coefs(Type260Object *self, void *closure)
 static int
 Type260_set_etaQ_coefs(Type260Object *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_TcsgenericSolar_Type260_etaQ_coefs_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_TcsgenericSolar_Type260_etaQ_coefs_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -622,55 +622,55 @@ Type260_get_etaT_coefs(Type260Object *self, void *closure)
 static int
 Type260_set_etaT_coefs(Type260Object *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_TcsgenericSolar_Type260_etaT_coefs_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_TcsgenericSolar_Type260_etaT_coefs_aset, self->data_ptr);
 }
 
 static PyObject *
 Type260_get_eta_des(Type260Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcsgenericSolar_Type260_eta_des_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcsgenericSolar_Type260_eta_des_nget, self->data_ptr);
 }
 
 static int
 Type260_set_eta_des(Type260Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcsgenericSolar_Type260_eta_des_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcsgenericSolar_Type260_eta_des_nset, self->data_ptr);
 }
 
 static PyObject *
 Type260_get_eta_lhv(Type260Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcsgenericSolar_Type260_eta_lhv_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcsgenericSolar_Type260_eta_lhv_nget, self->data_ptr);
 }
 
 static int
 Type260_set_eta_lhv(Type260Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcsgenericSolar_Type260_eta_lhv_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcsgenericSolar_Type260_eta_lhv_nset, self->data_ptr);
 }
 
 static PyObject *
 Type260_get_eta_opt_gen(Type260Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcsgenericSolar_Type260_eta_opt_gen_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcsgenericSolar_Type260_eta_opt_gen_nget, self->data_ptr);
 }
 
 static int
 Type260_set_eta_opt_gen(Type260Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcsgenericSolar_Type260_eta_opt_gen_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcsgenericSolar_Type260_eta_opt_gen_nset, self->data_ptr);
 }
 
 static PyObject *
 Type260_get_eta_opt_soil(Type260Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcsgenericSolar_Type260_eta_opt_soil_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcsgenericSolar_Type260_eta_opt_soil_nget, self->data_ptr);
 }
 
 static int
 Type260_set_eta_opt_soil(Type260Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcsgenericSolar_Type260_eta_opt_soil_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcsgenericSolar_Type260_eta_opt_soil_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -688,121 +688,121 @@ Type260_set_exergy_table(Type260Object *self, PyObject *value, void *closure)
 static PyObject *
 Type260_get_f_Wpar_fixed(Type260Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcsgenericSolar_Type260_f_Wpar_fixed_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcsgenericSolar_Type260_f_Wpar_fixed_nget, self->data_ptr);
 }
 
 static int
 Type260_set_f_Wpar_fixed(Type260Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcsgenericSolar_Type260_f_Wpar_fixed_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcsgenericSolar_Type260_f_Wpar_fixed_nset, self->data_ptr);
 }
 
 static PyObject *
 Type260_get_f_Wpar_prod(Type260Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcsgenericSolar_Type260_f_Wpar_prod_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcsgenericSolar_Type260_f_Wpar_prod_nget, self->data_ptr);
 }
 
 static int
 Type260_set_f_Wpar_prod(Type260Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcsgenericSolar_Type260_f_Wpar_prod_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcsgenericSolar_Type260_f_Wpar_prod_nset, self->data_ptr);
 }
 
 static PyObject *
 Type260_get_f_charge(Type260Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcsgenericSolar_Type260_f_charge_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcsgenericSolar_Type260_f_charge_nget, self->data_ptr);
 }
 
 static int
 Type260_set_f_charge(Type260Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcsgenericSolar_Type260_f_charge_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcsgenericSolar_Type260_f_charge_nset, self->data_ptr);
 }
 
 static PyObject *
 Type260_get_f_disch(Type260Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcsgenericSolar_Type260_f_disch_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcsgenericSolar_Type260_f_disch_nget, self->data_ptr);
 }
 
 static int
 Type260_set_f_disch(Type260Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcsgenericSolar_Type260_f_disch_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcsgenericSolar_Type260_f_disch_nset, self->data_ptr);
 }
 
 static PyObject *
 Type260_get_f_etes_0(Type260Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcsgenericSolar_Type260_f_etes_0_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcsgenericSolar_Type260_f_etes_0_nget, self->data_ptr);
 }
 
 static int
 Type260_set_f_etes_0(Type260Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcsgenericSolar_Type260_f_etes_0_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcsgenericSolar_Type260_f_etes_0_nset, self->data_ptr);
 }
 
 static PyObject *
 Type260_get_f_sfhl_ref(Type260Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcsgenericSolar_Type260_f_sfhl_ref_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcsgenericSolar_Type260_f_sfhl_ref_nget, self->data_ptr);
 }
 
 static int
 Type260_set_f_sfhl_ref(Type260Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcsgenericSolar_Type260_f_sfhl_ref_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcsgenericSolar_Type260_f_sfhl_ref_nset, self->data_ptr);
 }
 
 static PyObject *
 Type260_get_f_startup(Type260Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcsgenericSolar_Type260_f_startup_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcsgenericSolar_Type260_f_startup_nget, self->data_ptr);
 }
 
 static int
 Type260_set_f_startup(Type260Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcsgenericSolar_Type260_f_startup_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcsgenericSolar_Type260_f_startup_nset, self->data_ptr);
 }
 
 static PyObject *
 Type260_get_f_teshl_ref(Type260Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcsgenericSolar_Type260_f_teshl_ref_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcsgenericSolar_Type260_f_teshl_ref_nget, self->data_ptr);
 }
 
 static int
 Type260_set_f_teshl_ref(Type260Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcsgenericSolar_Type260_f_teshl_ref_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcsgenericSolar_Type260_f_teshl_ref_nset, self->data_ptr);
 }
 
 static PyObject *
 Type260_get_f_wmax(Type260Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcsgenericSolar_Type260_f_wmax_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcsgenericSolar_Type260_f_wmax_nget, self->data_ptr);
 }
 
 static int
 Type260_set_f_wmax(Type260Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcsgenericSolar_Type260_f_wmax_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcsgenericSolar_Type260_f_wmax_nset, self->data_ptr);
 }
 
 static PyObject *
 Type260_get_f_wmin(Type260Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcsgenericSolar_Type260_f_wmin_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcsgenericSolar_Type260_f_wmin_nget, self->data_ptr);
 }
 
 static int
 Type260_set_f_wmin(Type260Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcsgenericSolar_Type260_f_wmin_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcsgenericSolar_Type260_f_wmin_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -814,127 +814,127 @@ Type260_get_fdisp(Type260Object *self, void *closure)
 static int
 Type260_set_fdisp(Type260Object *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_TcsgenericSolar_Type260_fdisp_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_TcsgenericSolar_Type260_fdisp_aset, self->data_ptr);
 }
 
 static PyObject *
 Type260_get_hrs_tes(Type260Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcsgenericSolar_Type260_hrs_tes_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcsgenericSolar_Type260_hrs_tes_nget, self->data_ptr);
 }
 
 static int
 Type260_set_hrs_tes(Type260Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcsgenericSolar_Type260_hrs_tes_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcsgenericSolar_Type260_hrs_tes_nset, self->data_ptr);
 }
 
 static PyObject *
 Type260_get_ibh(Type260Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcsgenericSolar_Type260_ibh_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcsgenericSolar_Type260_ibh_nget, self->data_ptr);
 }
 
 static int
 Type260_set_ibh(Type260Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcsgenericSolar_Type260_ibh_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcsgenericSolar_Type260_ibh_nset, self->data_ptr);
 }
 
 static PyObject *
 Type260_get_ibn(Type260Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcsgenericSolar_Type260_ibn_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcsgenericSolar_Type260_ibn_nget, self->data_ptr);
 }
 
 static int
 Type260_set_ibn(Type260Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcsgenericSolar_Type260_ibn_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcsgenericSolar_Type260_ibn_nset, self->data_ptr);
 }
 
 static PyObject *
 Type260_get_interp_arr(Type260Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcsgenericSolar_Type260_interp_arr_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcsgenericSolar_Type260_interp_arr_nget, self->data_ptr);
 }
 
 static int
 Type260_set_interp_arr(Type260Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcsgenericSolar_Type260_interp_arr_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcsgenericSolar_Type260_interp_arr_nset, self->data_ptr);
 }
 
 static PyObject *
 Type260_get_irr_des(Type260Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcsgenericSolar_Type260_irr_des_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcsgenericSolar_Type260_irr_des_nget, self->data_ptr);
 }
 
 static int
 Type260_set_irr_des(Type260Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcsgenericSolar_Type260_irr_des_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcsgenericSolar_Type260_irr_des_nset, self->data_ptr);
 }
 
 static PyObject *
 Type260_get_istableunsorted(Type260Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcsgenericSolar_Type260_istableunsorted_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcsgenericSolar_Type260_istableunsorted_nget, self->data_ptr);
 }
 
 static int
 Type260_set_istableunsorted(Type260Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcsgenericSolar_Type260_istableunsorted_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcsgenericSolar_Type260_istableunsorted_nset, self->data_ptr);
 }
 
 static PyObject *
 Type260_get_itoth(Type260Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcsgenericSolar_Type260_itoth_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcsgenericSolar_Type260_itoth_nget, self->data_ptr);
 }
 
 static int
 Type260_set_itoth(Type260Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcsgenericSolar_Type260_itoth_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcsgenericSolar_Type260_itoth_nset, self->data_ptr);
 }
 
 static PyObject *
 Type260_get_latitude(Type260Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcsgenericSolar_Type260_latitude_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcsgenericSolar_Type260_latitude_nget, self->data_ptr);
 }
 
 static int
 Type260_set_latitude(Type260Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcsgenericSolar_Type260_latitude_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcsgenericSolar_Type260_latitude_nset, self->data_ptr);
 }
 
 static PyObject *
 Type260_get_longitude(Type260Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcsgenericSolar_Type260_longitude_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcsgenericSolar_Type260_longitude_nget, self->data_ptr);
 }
 
 static int
 Type260_set_longitude(Type260Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcsgenericSolar_Type260_longitude_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcsgenericSolar_Type260_longitude_nset, self->data_ptr);
 }
 
 static PyObject *
 Type260_get_ntod(Type260Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcsgenericSolar_Type260_ntod_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcsgenericSolar_Type260_ntod_nget, self->data_ptr);
 }
 
 static int
 Type260_set_ntod(Type260Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcsgenericSolar_Type260_ntod_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcsgenericSolar_Type260_ntod_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -946,31 +946,31 @@ Type260_get_qdisp(Type260Object *self, void *closure)
 static int
 Type260_set_qdisp(Type260Object *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_TcsgenericSolar_Type260_qdisp_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_TcsgenericSolar_Type260_qdisp_aset, self->data_ptr);
 }
 
 static PyObject *
 Type260_get_qsf_des(Type260Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcsgenericSolar_Type260_qsf_des_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcsgenericSolar_Type260_qsf_des_nget, self->data_ptr);
 }
 
 static int
 Type260_set_qsf_des(Type260Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcsgenericSolar_Type260_qsf_des_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcsgenericSolar_Type260_qsf_des_nset, self->data_ptr);
 }
 
 static PyObject *
 Type260_get_rad_type(Type260Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcsgenericSolar_Type260_rad_type_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcsgenericSolar_Type260_rad_type_nget, self->data_ptr);
 }
 
 static int
 Type260_set_rad_type(Type260Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcsgenericSolar_Type260_rad_type_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcsgenericSolar_Type260_rad_type_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -982,7 +982,7 @@ Type260_get_sfhlQ_coefs(Type260Object *self, void *closure)
 static int
 Type260_set_sfhlQ_coefs(Type260Object *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_TcsgenericSolar_Type260_sfhlQ_coefs_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_TcsgenericSolar_Type260_sfhlQ_coefs_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -994,7 +994,7 @@ Type260_get_sfhlT_coefs(Type260Object *self, void *closure)
 static int
 Type260_set_sfhlT_coefs(Type260Object *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_TcsgenericSolar_Type260_sfhlT_coefs_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_TcsgenericSolar_Type260_sfhlT_coefs_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -1006,43 +1006,43 @@ Type260_get_sfhlV_coefs(Type260Object *self, void *closure)
 static int
 Type260_set_sfhlV_coefs(Type260Object *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_TcsgenericSolar_Type260_sfhlV_coefs_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_TcsgenericSolar_Type260_sfhlV_coefs_aset, self->data_ptr);
 }
 
 static PyObject *
 Type260_get_solarm(Type260Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcsgenericSolar_Type260_solarm_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcsgenericSolar_Type260_solarm_nget, self->data_ptr);
 }
 
 static int
 Type260_set_solarm(Type260Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcsgenericSolar_Type260_solarm_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcsgenericSolar_Type260_solarm_nset, self->data_ptr);
 }
 
 static PyObject *
 Type260_get_storage_config(Type260Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcsgenericSolar_Type260_storage_config_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcsgenericSolar_Type260_storage_config_nget, self->data_ptr);
 }
 
 static int
 Type260_set_storage_config(Type260Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcsgenericSolar_Type260_storage_config_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcsgenericSolar_Type260_storage_config_nset, self->data_ptr);
 }
 
 static PyObject *
 Type260_get_tdb(Type260Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcsgenericSolar_Type260_tdb_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcsgenericSolar_Type260_tdb_nget, self->data_ptr);
 }
 
 static int
 Type260_set_tdb(Type260Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcsgenericSolar_Type260_tdb_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcsgenericSolar_Type260_tdb_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -1054,7 +1054,7 @@ Type260_get_teshlT_coefs(Type260Object *self, void *closure)
 static int
 Type260_set_teshlT_coefs(Type260Object *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_TcsgenericSolar_Type260_teshlT_coefs_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_TcsgenericSolar_Type260_teshlT_coefs_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -1066,243 +1066,243 @@ Type260_get_teshlX_coefs(Type260Object *self, void *closure)
 static int
 Type260_set_teshlX_coefs(Type260Object *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_TcsgenericSolar_Type260_teshlX_coefs_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_TcsgenericSolar_Type260_teshlX_coefs_aset, self->data_ptr);
 }
 
 static PyObject *
 Type260_get_theta_dep(Type260Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcsgenericSolar_Type260_theta_dep_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcsgenericSolar_Type260_theta_dep_nget, self->data_ptr);
 }
 
 static int
 Type260_set_theta_dep(Type260Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcsgenericSolar_Type260_theta_dep_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcsgenericSolar_Type260_theta_dep_nset, self->data_ptr);
 }
 
 static PyObject *
 Type260_get_theta_stow(Type260Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcsgenericSolar_Type260_theta_stow_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcsgenericSolar_Type260_theta_stow_nget, self->data_ptr);
 }
 
 static int
 Type260_set_theta_stow(Type260Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcsgenericSolar_Type260_theta_stow_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcsgenericSolar_Type260_theta_stow_nset, self->data_ptr);
 }
 
 static PyObject *
 Type260_get_timezone(Type260Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcsgenericSolar_Type260_timezone_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcsgenericSolar_Type260_timezone_nget, self->data_ptr);
 }
 
 static int
 Type260_set_timezone(Type260Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcsgenericSolar_Type260_timezone_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcsgenericSolar_Type260_timezone_nset, self->data_ptr);
 }
 
 static PyObject *
 Type260_get_twb(Type260Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcsgenericSolar_Type260_twb_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcsgenericSolar_Type260_twb_nget, self->data_ptr);
 }
 
 static int
 Type260_set_twb(Type260Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcsgenericSolar_Type260_twb_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcsgenericSolar_Type260_twb_nset, self->data_ptr);
 }
 
 static PyObject *
 Type260_get_vwind(Type260Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcsgenericSolar_Type260_vwind_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcsgenericSolar_Type260_vwind_nget, self->data_ptr);
 }
 
 static int
 Type260_set_vwind(Type260Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcsgenericSolar_Type260_vwind_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcsgenericSolar_Type260_vwind_nset, self->data_ptr);
 }
 
 static PyObject *
 Type260_get_w_des(Type260Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcsgenericSolar_Type260_w_des_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcsgenericSolar_Type260_w_des_nget, self->data_ptr);
 }
 
 static int
 Type260_set_w_des(Type260Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcsgenericSolar_Type260_w_des_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcsgenericSolar_Type260_w_des_nset, self->data_ptr);
 }
 
 static PyGetSetDef Type260_getset[] = {
 {"OpticalTable", (getter)Type260_get_OpticalTable,(setter)Type260_set_OpticalTable,
-	"Optical table [none], matrix.\n Required.",
+	PyDoc_STR("type: Sequence[Sequence]\n\nOptical table [none]\n\n*Required*: True"),
  	NULL},
 {"PC_T_corr", (getter)Type260_get_PC_T_corr,(setter)Type260_set_PC_T_corr,
-	"Power conversion temperature correction mode (1=wetb, 2=dryb) [none], number.\n Constraints: INTEGER; Required.",
+	PyDoc_STR("type: Float\n\nPower conversion temperature correction mode (1=wetb, 2=dryb) [none]\n\n*Constraints*: INTEGER\n\n*Required*: True"),
  	NULL},
 {"T_pcdes", (getter)Type260_get_T_pcdes,(setter)Type260_set_T_pcdes,
-	"Power conversion reference temperature [C], number.\n Required.",
+	PyDoc_STR("type: Float\n\nPower conversion reference temperature [C]\n\n*Required*: True"),
  	NULL},
 {"T_sfdes", (getter)Type260_get_T_sfdes,(setter)Type260_set_T_sfdes,
-	"Solar field design point temperature (dry bulb) [C], number.\n Required.",
+	PyDoc_STR("type: Float\n\nSolar field design point temperature (dry bulb) [C]\n\n*Required*: True"),
  	NULL},
 {"Wpar_prodD_coefs", (getter)Type260_get_Wpar_prodD_coefs,(setter)Type260_set_Wpar_prodD_coefs,
-	"DNI-based production parasitic adjustment coefs. [m2/W], array.\n Required.",
+	PyDoc_STR("type: Sequence\n\nDNI-based production parasitic adjustment coefs. [m2/W]\n\n*Required*: True"),
  	NULL},
 {"Wpar_prodQ_coefs", (getter)Type260_get_Wpar_prodQ_coefs,(setter)Type260_set_Wpar_prodQ_coefs,
-	"Part-load production parasitic adjustment coefs. [1/MWe], array.\n Required.",
+	PyDoc_STR("type: Sequence\n\nPart-load production parasitic adjustment coefs. [1/MWe]\n\n*Required*: True"),
  	NULL},
 {"Wpar_prodT_coefs", (getter)Type260_get_Wpar_prodT_coefs,(setter)Type260_set_Wpar_prodT_coefs,
-	"Temp.-based production parasitic adjustment coefs. [1/C], array.\n Required.",
+	PyDoc_STR("type: Sequence\n\nTemp.-based production parasitic adjustment coefs. [1/C]\n\n*Required*: True"),
  	NULL},
 {"diswos", (getter)Type260_get_diswos,(setter)Type260_set_diswos,
-	"Time-of-dispatch control for without-solar conditions [none], array.\n Required.",
+	PyDoc_STR("type: Sequence\n\nTime-of-dispatch control for without-solar conditions [none]\n\n*Required*: True"),
  	NULL},
 {"disws", (getter)Type260_get_disws,(setter)Type260_set_disws,
-	"Time-of-dispatch control for with-solar conditions [none], array.\n Required.",
+	PyDoc_STR("type: Sequence\n\nTime-of-dispatch control for with-solar conditions [none]\n\n*Required*: True"),
  	NULL},
 {"etaQ_coefs", (getter)Type260_get_etaQ_coefs,(setter)Type260_set_etaQ_coefs,
-	"Part-load power conversion efficiency adjustment coefficients [1/MWt], array.\n Required.",
+	PyDoc_STR("type: Sequence\n\nPart-load power conversion efficiency adjustment coefficients [1/MWt]\n\n*Required*: True"),
  	NULL},
 {"etaT_coefs", (getter)Type260_get_etaT_coefs,(setter)Type260_set_etaT_coefs,
-	"Temp.-based power conversion efficiency adjustment coefs. [1/C], array.\n Required.",
+	PyDoc_STR("type: Sequence\n\nTemp.-based power conversion efficiency adjustment coefs. [1/C]\n\n*Required*: True"),
  	NULL},
 {"eta_des", (getter)Type260_get_eta_des,(setter)Type260_set_eta_des,
-	"Design power cycle gross efficiency [none], number.\n Required.",
+	PyDoc_STR("type: Float\n\nDesign power cycle gross efficiency [none]\n\n*Required*: True"),
  	NULL},
 {"eta_lhv", (getter)Type260_get_eta_lhv,(setter)Type260_set_eta_lhv,
-	"Fossil backup lower heating value efficiency [none], number.\n Required.",
+	PyDoc_STR("type: Float\n\nFossil backup lower heating value efficiency [none]\n\n*Required*: True"),
  	NULL},
 {"eta_opt_gen", (getter)Type260_get_eta_opt_gen,(setter)Type260_set_eta_opt_gen,
-	"General/other optical derate [none], number.\n Required.",
+	PyDoc_STR("type: Float\n\nGeneral/other optical derate [none]\n\n*Required*: True"),
  	NULL},
 {"eta_opt_soil", (getter)Type260_get_eta_opt_soil,(setter)Type260_set_eta_opt_soil,
-	"Soiling optical derate factor [none], number.\n Required.",
+	PyDoc_STR("type: Float\n\nSoiling optical derate factor [none]\n\n*Required*: True"),
  	NULL},
 {"exergy_table", (getter)Type260_get_exergy_table,(setter)Type260_set_exergy_table,
-	"Exergy table [none], matrix.\n Required.",
+	PyDoc_STR("type: Sequence[Sequence]\n\nExergy table [none]\n\n*Required*: True"),
  	NULL},
 {"f_Wpar_fixed", (getter)Type260_get_f_Wpar_fixed,(setter)Type260_set_f_Wpar_fixed,
-	"Fixed capacity-based parasitic loss fraction [MWe/MWcap], number.\n Required.",
+	PyDoc_STR("type: Float\n\nFixed capacity-based parasitic loss fraction [MWe/MWcap]\n\n*Required*: True"),
  	NULL},
 {"f_Wpar_prod", (getter)Type260_get_f_Wpar_prod,(setter)Type260_set_f_Wpar_prod,
-	"Production-based parasitic loss fraction [MWe/MWe], number.\n Required.",
+	PyDoc_STR("type: Float\n\nProduction-based parasitic loss fraction [MWe/MWe]\n\n*Required*: True"),
  	NULL},
 {"f_charge", (getter)Type260_get_f_charge,(setter)Type260_set_f_charge,
-	"Storage charging energy derate [none], number.\n Required.",
+	PyDoc_STR("type: Float\n\nStorage charging energy derate [none]\n\n*Required*: True"),
  	NULL},
 {"f_disch", (getter)Type260_get_f_disch,(setter)Type260_set_f_disch,
-	"Storage discharging energy derate [none], number.\n Required.",
+	PyDoc_STR("type: Float\n\nStorage discharging energy derate [none]\n\n*Required*: True"),
  	NULL},
 {"f_etes_0", (getter)Type260_get_f_etes_0,(setter)Type260_set_f_etes_0,
-	"Initial fractional charge level of thermal storage (0..1) [none], number.\n Required.",
+	PyDoc_STR("type: Float\n\nInitial fractional charge level of thermal storage (0..1) [none]\n\n*Required*: True"),
  	NULL},
 {"f_sfhl_ref", (getter)Type260_get_f_sfhl_ref,(setter)Type260_set_f_sfhl_ref,
-	"Reference solar field thermal loss fraction [MW/MWcap], number.\n Required.",
+	PyDoc_STR("type: Float\n\nReference solar field thermal loss fraction [MW/MWcap]\n\n*Required*: True"),
  	NULL},
 {"f_startup", (getter)Type260_get_f_startup,(setter)Type260_set_f_startup,
-	"Equivalent full-load hours required for power system startup [hours], number.\n Required.",
+	PyDoc_STR("type: Float\n\nEquivalent full-load hours required for power system startup [hours]\n\n*Required*: True"),
  	NULL},
 {"f_teshl_ref", (getter)Type260_get_f_teshl_ref,(setter)Type260_set_f_teshl_ref,
-	"Reference heat loss from storage per max stored capacity [kWt/MWhr-stored], number.\n Required.",
+	PyDoc_STR("type: Float\n\nReference heat loss from storage per max stored capacity [kWt/MWhr-stored]\n\n*Required*: True"),
  	NULL},
 {"f_wmax", (getter)Type260_get_f_wmax,(setter)Type260_set_f_wmax,
-	"Maximum over-design power cycle operation fraction [none], number.\n Required.",
+	PyDoc_STR("type: Float\n\nMaximum over-design power cycle operation fraction [none]\n\n*Required*: True"),
  	NULL},
 {"f_wmin", (getter)Type260_get_f_wmin,(setter)Type260_set_f_wmin,
-	"Minimum part-load power cycle operation fraction [none], number.\n Required.",
+	PyDoc_STR("type: Float\n\nMinimum part-load power cycle operation fraction [none]\n\n*Required*: True"),
  	NULL},
 {"fdisp", (getter)Type260_get_fdisp,(setter)Type260_set_fdisp,
-	"Fossil backup output control factors [none], array.\n Required.",
+	PyDoc_STR("type: Sequence\n\nFossil backup output control factors [none]\n\n*Required*: True"),
  	NULL},
 {"hrs_tes", (getter)Type260_get_hrs_tes,(setter)Type260_set_hrs_tes,
-	"Equivalent full-load hours of storage [hours], number.\n Required.",
+	PyDoc_STR("type: Float\n\nEquivalent full-load hours of storage [hours]\n\n*Required*: True"),
  	NULL},
 {"ibh", (getter)Type260_get_ibh,(setter)Type260_set_ibh,
-	"Beam-horizontal irradiation [kJ/hr-m^2], number.\n Required.",
+	PyDoc_STR("type: Float\n\nBeam-horizontal irradiation [kJ/hr-m^2]\n\n*Required*: True"),
  	NULL},
 {"ibn", (getter)Type260_get_ibn,(setter)Type260_set_ibn,
-	"Beam-normal (DNI) irradiation [kJ/hr-m^2], number.\n Required.",
+	PyDoc_STR("type: Float\n\nBeam-normal (DNI) irradiation [kJ/hr-m^2]\n\n*Required*: True"),
  	NULL},
 {"interp_arr", (getter)Type260_get_interp_arr,(setter)Type260_set_interp_arr,
-	"Interpolate the array or find nearest neighbor? (1=interp,2=no) [none], number.\n Constraints: INTEGER; Required.",
+	PyDoc_STR("type: Float\n\nInterpolate the array or find nearest neighbor? (1=interp,2=no) [none]\n\n*Constraints*: INTEGER\n\n*Required*: True"),
  	NULL},
 {"irr_des", (getter)Type260_get_irr_des,(setter)Type260_set_irr_des,
-	"Irradiation design point [W/m2], number.\n Required.",
+	PyDoc_STR("type: Float\n\nIrradiation design point [W/m2]\n\n*Required*: True"),
  	NULL},
 {"istableunsorted", (getter)Type260_get_istableunsorted,(setter)Type260_set_istableunsorted,
-	"Is optical table unsorted format? [none], number.\n Required.",
+	PyDoc_STR("type: Float\n\nIs optical table unsorted format? [none]\n\n*Required*: True"),
  	NULL},
 {"itoth", (getter)Type260_get_itoth,(setter)Type260_set_itoth,
-	"Total horizontal irradiation [kJ/hr-m^2], number.\n Required.",
+	PyDoc_STR("type: Float\n\nTotal horizontal irradiation [kJ/hr-m^2]\n\n*Required*: True"),
  	NULL},
 {"latitude", (getter)Type260_get_latitude,(setter)Type260_set_latitude,
-	"Site latitude, number.\n Required.",
+	PyDoc_STR("type: Float\n\nSite latitude\n\n*Required*: True"),
  	NULL},
 {"longitude", (getter)Type260_get_longitude,(setter)Type260_set_longitude,
-	"Site longitude, number.\n Required.",
+	PyDoc_STR("type: Float\n\nSite longitude\n\n*Required*: True"),
  	NULL},
 {"ntod", (getter)Type260_get_ntod,(setter)Type260_set_ntod,
-	"Number of time-of-dispatch periods in the dispatch schedule [none], number.\n Required.",
+	PyDoc_STR("type: Float\n\nNumber of time-of-dispatch periods in the dispatch schedule [none]\n\n*Required*: True"),
  	NULL},
 {"qdisp", (getter)Type260_get_qdisp,(setter)Type260_set_qdisp,
-	"TOD power output control factors [none], array.\n Required.",
+	PyDoc_STR("type: Sequence\n\nTOD power output control factors [none]\n\n*Required*: True"),
  	NULL},
 {"qsf_des", (getter)Type260_get_qsf_des,(setter)Type260_set_qsf_des,
-	"Solar field thermal production at design [MWt], number.\n Required.",
+	PyDoc_STR("type: Float\n\nSolar field thermal production at design [MWt]\n\n*Required*: True"),
  	NULL},
 {"rad_type", (getter)Type260_get_rad_type,(setter)Type260_set_rad_type,
-	"Solar resource radiation type (1=DNI,2=horiz.beam,3=tot.horiz) [none], number.\n Constraints: INTEGER; Required.",
+	PyDoc_STR("type: Float\n\nSolar resource radiation type (1=DNI,2=horiz.beam,3=tot.horiz) [none]\n\n*Constraints*: INTEGER\n\n*Required*: True"),
  	NULL},
 {"sfhlQ_coefs", (getter)Type260_get_sfhlQ_coefs,(setter)Type260_set_sfhlQ_coefs,
-	"Irr-based solar field thermal loss adjustment coefficients [1/MWt], array.\n Required.",
+	PyDoc_STR("type: Sequence\n\nIrr-based solar field thermal loss adjustment coefficients [1/MWt]\n\n*Required*: True"),
  	NULL},
 {"sfhlT_coefs", (getter)Type260_get_sfhlT_coefs,(setter)Type260_set_sfhlT_coefs,
-	"Temp.-based solar field thermal loss adjustment coefficients [1/C], array.\n Required.",
+	PyDoc_STR("type: Sequence\n\nTemp.-based solar field thermal loss adjustment coefficients [1/C]\n\n*Required*: True"),
  	NULL},
 {"sfhlV_coefs", (getter)Type260_get_sfhlV_coefs,(setter)Type260_set_sfhlV_coefs,
-	"Wind-based solar field thermal loss adjustment coefficients [1/(m/s)], array.\n Required.",
+	PyDoc_STR("type: Sequence\n\nWind-based solar field thermal loss adjustment coefficients [1/(m/s)]\n\n*Required*: True"),
  	NULL},
 {"solarm", (getter)Type260_get_solarm,(setter)Type260_set_solarm,
-	"Solar multiple [none], number.\n Required.",
+	PyDoc_STR("type: Float\n\nSolar multiple [none]\n\n*Required*: True"),
  	NULL},
 {"storage_config", (getter)Type260_get_storage_config,(setter)Type260_set_storage_config,
-	"Thermal storage configuration [none], number.\n Required.",
+	PyDoc_STR("type: Float\n\nThermal storage configuration [none]\n\n*Required*: True"),
  	NULL},
 {"tdb", (getter)Type260_get_tdb,(setter)Type260_set_tdb,
-	"Ambient dry-bulb temperature [C], number.\n Required.",
+	PyDoc_STR("type: Float\n\nAmbient dry-bulb temperature [C]\n\n*Required*: True"),
  	NULL},
 {"teshlT_coefs", (getter)Type260_get_teshlT_coefs,(setter)Type260_set_teshlT_coefs,
-	"Temp.-based thermal loss adjustment - constant coef. [1/C], array.\n Required.",
+	PyDoc_STR("type: Sequence\n\nTemp.-based thermal loss adjustment - constant coef. [1/C]\n\n*Required*: True"),
  	NULL},
 {"teshlX_coefs", (getter)Type260_get_teshlX_coefs,(setter)Type260_set_teshlX_coefs,
-	"Charge-based thermal loss adjustment - constant coef. [1/MWhr-stored], array.\n Required.",
+	PyDoc_STR("type: Sequence\n\nCharge-based thermal loss adjustment - constant coef. [1/MWhr-stored]\n\n*Required*: True"),
  	NULL},
 {"theta_dep", (getter)Type260_get_theta_dep,(setter)Type260_set_theta_dep,
-	"Solar elevation angle at which the solar field begins operating [deg], number.\n Required.",
+	PyDoc_STR("type: Float\n\nSolar elevation angle at which the solar field begins operating [deg]\n\n*Required*: True"),
  	NULL},
 {"theta_stow", (getter)Type260_get_theta_stow,(setter)Type260_set_theta_stow,
-	"Solar elevation angle at which the solar field stops operating [deg], number.\n Required.",
+	PyDoc_STR("type: Float\n\nSolar elevation angle at which the solar field stops operating [deg]\n\n*Required*: True"),
  	NULL},
 {"timezone", (getter)Type260_get_timezone,(setter)Type260_set_timezone,
-	"Site timezone [hr], number.\n Required.",
+	PyDoc_STR("type: Float\n\nSite timezone [hr]\n\n*Required*: True"),
  	NULL},
 {"twb", (getter)Type260_get_twb,(setter)Type260_set_twb,
-	"Ambient wet-bulb temperature [C], number.\n Required.",
+	PyDoc_STR("type: Float\n\nAmbient wet-bulb temperature [C]\n\n*Required*: True"),
  	NULL},
 {"vwind", (getter)Type260_get_vwind,(setter)Type260_set_vwind,
-	"Wind velocity [m/s], number.\n Required.",
+	PyDoc_STR("type: Float\n\nWind velocity [m/s]\n\n*Required*: True"),
  	NULL},
 {"w_des", (getter)Type260_get_w_des,(setter)Type260_set_w_des,
-	"Design power cycle gross output [MWe], number.\n Required.",
+	PyDoc_STR("type: Float\n\nDesign power cycle gross output [MWe]\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1335,7 +1335,7 @@ static PyTypeObject Type260_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		Type260_methods,         /*tp_methods*/
@@ -1345,7 +1345,7 @@ static PyTypeObject Type260_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -1414,73 +1414,73 @@ static PyMethodDef Outputs_methods[] = {
 static PyObject *
 Outputs_get_annual_energy(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcsgenericSolar_Outputs_annual_energy_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcsgenericSolar_Outputs_annual_energy_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_annual_fuel_usage(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcsgenericSolar_Outputs_annual_fuel_usage_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcsgenericSolar_Outputs_annual_fuel_usage_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_annual_q_dump_tot(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcsgenericSolar_Outputs_annual_q_dump_tot_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcsgenericSolar_Outputs_annual_q_dump_tot_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_annual_q_fossil(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcsgenericSolar_Outputs_annual_q_fossil_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcsgenericSolar_Outputs_annual_q_fossil_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_annual_q_from_tes(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcsgenericSolar_Outputs_annual_q_from_tes_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcsgenericSolar_Outputs_annual_q_from_tes_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_annual_q_hl_sf(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcsgenericSolar_Outputs_annual_q_hl_sf_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcsgenericSolar_Outputs_annual_q_hl_sf_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_annual_q_hl_tes(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcsgenericSolar_Outputs_annual_q_hl_tes_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcsgenericSolar_Outputs_annual_q_hl_tes_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_annual_q_sf(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcsgenericSolar_Outputs_annual_q_sf_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcsgenericSolar_Outputs_annual_q_sf_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_annual_q_startup(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcsgenericSolar_Outputs_annual_q_startup_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcsgenericSolar_Outputs_annual_q_startup_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_annual_q_to_pb(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcsgenericSolar_Outputs_annual_q_to_pb_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcsgenericSolar_Outputs_annual_q_to_pb_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_annual_q_to_tes(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcsgenericSolar_Outputs_annual_q_to_tes_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcsgenericSolar_Outputs_annual_q_to_tes_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_annual_w_gr(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcsgenericSolar_Outputs_annual_w_gr_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcsgenericSolar_Outputs_annual_w_gr_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -1492,13 +1492,13 @@ Outputs_get_beam(OutputsObject *self, void *closure)
 static PyObject *
 Outputs_get_capacity_factor(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcsgenericSolar_Outputs_capacity_factor_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcsgenericSolar_Outputs_capacity_factor_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_conversion_factor(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcsgenericSolar_Outputs_conversion_factor_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcsgenericSolar_Outputs_conversion_factor_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -1582,7 +1582,7 @@ Outputs_get_hour(OutputsObject *self, void *closure)
 static PyObject *
 Outputs_get_kwh_per_kw(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcsgenericSolar_Outputs_kwh_per_kw_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcsgenericSolar_Outputs_kwh_per_kw_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -1762,7 +1762,7 @@ Outputs_get_solzen(OutputsObject *self, void *closure)
 static PyObject *
 Outputs_get_system_heat_rate(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcsgenericSolar_Outputs_system_heat_rate_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcsgenericSolar_Outputs_system_heat_rate_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -1833,214 +1833,214 @@ Outputs_get_wspd(OutputsObject *self, void *closure)
 
 static PyGetSetDef Outputs_getset[] = {
 {"annual_energy", (getter)Outputs_get_annual_energy,(setter)0,
-	"Annual Energy [kWh], number.",
+	PyDoc_STR("type: Float\n\nAnnual Energy [kWh]"),
  	NULL},
 {"annual_fuel_usage", (getter)Outputs_get_annual_fuel_usage,(setter)0,
-	"Annual fuel usage [kWh], number.",
+	PyDoc_STR("type: Float\n\nAnnual fuel usage [kWh]"),
  	NULL},
 {"annual_q_dump_tot", (getter)Outputs_get_annual_q_dump_tot,(setter)0,
-	"Total dumped energy [MWht], number.",
+	PyDoc_STR("type: Float\n\nTotal dumped energy [MWht]"),
  	NULL},
 {"annual_q_fossil", (getter)Outputs_get_annual_q_fossil,(setter)0,
-	"Thermal energy supplied from aux firing [MWht], number.",
+	PyDoc_STR("type: Float\n\nThermal energy supplied from aux firing [MWht]"),
  	NULL},
 {"annual_q_from_tes", (getter)Outputs_get_annual_q_from_tes,(setter)0,
-	"Thermal energy from storage [MWht], number.",
+	PyDoc_STR("type: Float\n\nThermal energy from storage [MWht]"),
  	NULL},
 {"annual_q_hl_sf", (getter)Outputs_get_annual_q_hl_sf,(setter)0,
-	"Solar field thermal losses [MWht], number.",
+	PyDoc_STR("type: Float\n\nSolar field thermal losses [MWht]"),
  	NULL},
 {"annual_q_hl_tes", (getter)Outputs_get_annual_q_hl_tes,(setter)0,
-	"Thermal losses from storage [MWht], number.",
+	PyDoc_STR("type: Float\n\nThermal losses from storage [MWht]"),
  	NULL},
 {"annual_q_sf", (getter)Outputs_get_annual_q_sf,(setter)0,
-	"Solar field delivered thermal power [MWht], number.",
+	PyDoc_STR("type: Float\n\nSolar field delivered thermal power [MWht]"),
  	NULL},
 {"annual_q_startup", (getter)Outputs_get_annual_q_startup,(setter)0,
-	"Power conversion startup energy [MWht], number.",
+	PyDoc_STR("type: Float\n\nPower conversion startup energy [MWht]"),
  	NULL},
 {"annual_q_to_pb", (getter)Outputs_get_annual_q_to_pb,(setter)0,
-	"Thermal energy to the power conversion system [MWht], number.",
+	PyDoc_STR("type: Float\n\nThermal energy to the power conversion system [MWht]"),
  	NULL},
 {"annual_q_to_tes", (getter)Outputs_get_annual_q_to_tes,(setter)0,
-	"Thermal energy into storage [MWht], number.",
+	PyDoc_STR("type: Float\n\nThermal energy into storage [MWht]"),
  	NULL},
 {"annual_w_gr", (getter)Outputs_get_annual_w_gr,(setter)0,
-	"Total gross power production [kWh], number.",
+	PyDoc_STR("type: Float\n\nTotal gross power production [kWh]"),
  	NULL},
 {"beam", (getter)Outputs_get_beam,(setter)0,
-	"Resource Beam normal irradiance [W/m2], array.",
+	PyDoc_STR("type: Sequence\n\nResource Beam normal irradiance [W/m2]"),
  	NULL},
 {"capacity_factor", (getter)Outputs_get_capacity_factor,(setter)0,
-	"Capacity factor [%], number.",
+	PyDoc_STR("type: Float\n\nCapacity factor [%]"),
  	NULL},
 {"conversion_factor", (getter)Outputs_get_conversion_factor,(setter)0,
-	"Gross to Net Conversion Factor [%], number.",
+	PyDoc_STR("type: Float\n\nGross to Net Conversion Factor [%]"),
  	NULL},
 {"diff", (getter)Outputs_get_diff,(setter)0,
-	"Resource Diffuse horizontal irradiance [W/m2], array.",
+	PyDoc_STR("type: Sequence\n\nResource Diffuse horizontal irradiance [W/m2]"),
  	NULL},
 {"e_in_tes", (getter)Outputs_get_e_in_tes,(setter)0,
-	"TES thermal energy available [MWht], array.",
+	PyDoc_STR("type: Sequence\n\nTES thermal energy available [MWht]"),
  	NULL},
 {"enet", (getter)Outputs_get_enet,(setter)0,
-	"Cycle electrical power output (net) [MWe], array.",
+	PyDoc_STR("type: Sequence\n\nCycle electrical power output (net) [MWe]"),
  	NULL},
 {"eta_cycle", (getter)Outputs_get_eta_cycle,(setter)0,
-	"Cycle efficiency (gross), array.",
+	PyDoc_STR("type: Sequence\n\nCycle efficiency (gross)"),
  	NULL},
 {"eta_opt_sf", (getter)Outputs_get_eta_opt_sf,(setter)0,
-	"Field collector optical efficiency [none], array.",
+	PyDoc_STR("type: Sequence\n\nField collector optical efficiency [none]"),
  	NULL},
 {"f_effpc_qtpb", (getter)Outputs_get_f_effpc_qtpb,(setter)0,
-	"Cycle efficiency load-based correction, array.",
+	PyDoc_STR("type: Sequence\n\nCycle efficiency load-based correction"),
  	NULL},
 {"f_effpc_tamb", (getter)Outputs_get_f_effpc_tamb,(setter)0,
-	"Cycle efficiency temperature-based correction, array.",
+	PyDoc_STR("type: Sequence\n\nCycle efficiency temperature-based correction"),
  	NULL},
 {"f_sfhl_qdni", (getter)Outputs_get_f_sfhl_qdni,(setter)0,
-	"Field thermal power load-based loss correction [none], array.",
+	PyDoc_STR("type: Sequence\n\nField thermal power load-based loss correction [none]"),
  	NULL},
 {"f_sfhl_tamb", (getter)Outputs_get_f_sfhl_tamb,(setter)0,
-	"Field thermal power temp.-based loss correction [none], array.",
+	PyDoc_STR("type: Sequence\n\nField thermal power temp.-based loss correction [none]"),
  	NULL},
 {"f_sfhl_vwind", (getter)Outputs_get_f_sfhl_vwind,(setter)0,
-	"Field thermal power wind-based loss correction [none], array.",
+	PyDoc_STR("type: Sequence\n\nField thermal power wind-based loss correction [none]"),
  	NULL},
 {"gen", (getter)Outputs_get_gen,(setter)0,
-	"System power generated [kW], array.",
+	PyDoc_STR("type: Sequence\n\nSystem power generated [kW]"),
  	NULL},
 {"global", (getter)Outputs_get_global,(setter)0,
-	"Resource Global horizontal irradiance [W/m2], array.",
+	PyDoc_STR("type: Sequence\n\nResource Global horizontal irradiance [W/m2]"),
  	NULL},
 {"hour", (getter)Outputs_get_hour,(setter)0,
-	"Resource Hour of Day, array.",
+	PyDoc_STR("type: Sequence\n\nResource Hour of Day"),
  	NULL},
 {"kwh_per_kw", (getter)Outputs_get_kwh_per_kw,(setter)0,
-	"First year kWh/kW [kWh/kW], number.",
+	PyDoc_STR("type: Float\n\nFirst year kWh/kW [kWh/kW]"),
  	NULL},
 {"month", (getter)Outputs_get_month,(setter)0,
-	"Resource Month, array.",
+	PyDoc_STR("type: Sequence\n\nResource Month"),
  	NULL},
 {"monthly_energy", (getter)Outputs_get_monthly_energy,(setter)0,
-	"Monthly Energy [kWh], array.",
+	PyDoc_STR("type: Sequence\n\nMonthly Energy [kWh]"),
  	NULL},
 {"monthly_q_dump_tot", (getter)Outputs_get_monthly_q_dump_tot,(setter)0,
-	"Total dumped energy [MWt], array.",
+	PyDoc_STR("type: Sequence\n\nTotal dumped energy [MWt]"),
  	NULL},
 {"monthly_q_fossil", (getter)Outputs_get_monthly_q_fossil,(setter)0,
-	"Thermal energy supplied from aux firing [MWt], array.",
+	PyDoc_STR("type: Sequence\n\nThermal energy supplied from aux firing [MWt]"),
  	NULL},
 {"monthly_q_from_tes", (getter)Outputs_get_monthly_q_from_tes,(setter)0,
-	"Thermal energy from storage [MWt], array.",
+	PyDoc_STR("type: Sequence\n\nThermal energy from storage [MWt]"),
  	NULL},
 {"monthly_q_hl_sf", (getter)Outputs_get_monthly_q_hl_sf,(setter)0,
-	"Solar field thermal losses [MWt], array.",
+	PyDoc_STR("type: Sequence\n\nSolar field thermal losses [MWt]"),
  	NULL},
 {"monthly_q_hl_tes", (getter)Outputs_get_monthly_q_hl_tes,(setter)0,
-	"Thermal losses from storage [MWt], array.",
+	PyDoc_STR("type: Sequence\n\nThermal losses from storage [MWt]"),
  	NULL},
 {"monthly_q_sf", (getter)Outputs_get_monthly_q_sf,(setter)0,
-	"Solar field delivered thermal power [MWt], array.",
+	PyDoc_STR("type: Sequence\n\nSolar field delivered thermal power [MWt]"),
  	NULL},
 {"monthly_q_startup", (getter)Outputs_get_monthly_q_startup,(setter)0,
-	"Power conversion startup energy [MWt], array.",
+	PyDoc_STR("type: Sequence\n\nPower conversion startup energy [MWt]"),
  	NULL},
 {"monthly_q_to_pb", (getter)Outputs_get_monthly_q_to_pb,(setter)0,
-	"Thermal energy to the power conversion system [MWt], array.",
+	PyDoc_STR("type: Sequence\n\nThermal energy to the power conversion system [MWt]"),
  	NULL},
 {"monthly_q_to_tes", (getter)Outputs_get_monthly_q_to_tes,(setter)0,
-	"Thermal energy into storage [MWt], array.",
+	PyDoc_STR("type: Sequence\n\nThermal energy into storage [MWt]"),
  	NULL},
 {"monthly_w_gr", (getter)Outputs_get_monthly_w_gr,(setter)0,
-	"Total gross power production [kWh], array.",
+	PyDoc_STR("type: Sequence\n\nTotal gross power production [kWh]"),
  	NULL},
 {"pres", (getter)Outputs_get_pres,(setter)0,
-	"Resource Pressure [mbar], array.",
+	PyDoc_STR("type: Sequence\n\nResource Pressure [mbar]"),
  	NULL},
 {"q_dump_teschg", (getter)Outputs_get_q_dump_teschg,(setter)0,
-	"Cycle thermal energy dumped - solar field [MWt], array.",
+	PyDoc_STR("type: Sequence\n\nCycle thermal energy dumped - solar field [MWt]"),
  	NULL},
 {"q_dump_tesfull", (getter)Outputs_get_q_dump_tesfull,(setter)0,
-	"Cycle thermal energy dumped - TES is full [MWt], array.",
+	PyDoc_STR("type: Sequence\n\nCycle thermal energy dumped - TES is full [MWt]"),
  	NULL},
 {"q_dump_tot", (getter)Outputs_get_q_dump_tot,(setter)0,
-	"Cycle thermal energy dumped total [MWt], array.",
+	PyDoc_STR("type: Sequence\n\nCycle thermal energy dumped total [MWt]"),
  	NULL},
 {"q_dump_umin", (getter)Outputs_get_q_dump_umin,(setter)0,
-	"Cycle thermal energy dumped - min. load requirement [MWt], array.",
+	PyDoc_STR("type: Sequence\n\nCycle thermal energy dumped - min. load requirement [MWt]"),
  	NULL},
 {"q_fossil", (getter)Outputs_get_q_fossil,(setter)0,
-	"Fossil thermal power produced [MWt], array.",
+	PyDoc_STR("type: Sequence\n\nFossil thermal power produced [MWt]"),
  	NULL},
 {"q_from_tes", (getter)Outputs_get_q_from_tes,(setter)0,
-	"TES thermal energy from storage [MWt], array.",
+	PyDoc_STR("type: Sequence\n\nTES thermal energy from storage [MWt]"),
  	NULL},
 {"q_gas", (getter)Outputs_get_q_gas,(setter)0,
-	"Fossil fuel used [MWt], array.",
+	PyDoc_STR("type: Sequence\n\nFossil fuel used [MWt]"),
  	NULL},
 {"q_hl_sf", (getter)Outputs_get_q_hl_sf,(setter)0,
-	"Field thermal power loss total [MWt], array.",
+	PyDoc_STR("type: Sequence\n\nField thermal power loss total [MWt]"),
  	NULL},
 {"q_hl_tes", (getter)Outputs_get_q_hl_tes,(setter)0,
-	"TES thermal losses from tank(s) [MWt], array.",
+	PyDoc_STR("type: Sequence\n\nTES thermal losses from tank(s) [MWt]"),
  	NULL},
 {"q_inc", (getter)Outputs_get_q_inc,(setter)0,
-	"Field thermal power incident [MWt], array.",
+	PyDoc_STR("type: Sequence\n\nField thermal power incident [MWt]"),
  	NULL},
 {"q_sf", (getter)Outputs_get_q_sf,(setter)0,
-	"Field thermal power total produced [MWt], array.",
+	PyDoc_STR("type: Sequence\n\nField thermal power total produced [MWt]"),
  	NULL},
 {"q_startup", (getter)Outputs_get_q_startup,(setter)0,
-	"Cycle thermal startup energy [MWt], array.",
+	PyDoc_STR("type: Sequence\n\nCycle thermal startup energy [MWt]"),
  	NULL},
 {"q_to_pb", (getter)Outputs_get_q_to_pb,(setter)0,
-	"Cycle thermal power input [MWt], array.",
+	PyDoc_STR("type: Sequence\n\nCycle thermal power input [MWt]"),
  	NULL},
 {"q_to_tes", (getter)Outputs_get_q_to_tes,(setter)0,
-	"TES thermal energy into storage [MWt], array.",
+	PyDoc_STR("type: Sequence\n\nTES thermal energy into storage [MWt]"),
  	NULL},
 {"solazi", (getter)Outputs_get_solazi,(setter)0,
-	"Resource Solar Azimuth [deg], array.",
+	PyDoc_STR("type: Sequence\n\nResource Solar Azimuth [deg]"),
  	NULL},
 {"solzen", (getter)Outputs_get_solzen,(setter)0,
-	"Resource Solar Zenith [deg], array.",
+	PyDoc_STR("type: Sequence\n\nResource Solar Zenith [deg]"),
  	NULL},
 {"system_heat_rate", (getter)Outputs_get_system_heat_rate,(setter)0,
-	"System heat rate [MMBtu/MWh], number.",
+	PyDoc_STR("type: Float\n\nSystem heat rate [MMBtu/MWh]"),
  	NULL},
 {"tdry", (getter)Outputs_get_tdry,(setter)0,
-	"Resource Dry bulb temperature [C], array.",
+	PyDoc_STR("type: Sequence\n\nResource Dry bulb temperature [C]"),
  	NULL},
 {"twet", (getter)Outputs_get_twet,(setter)0,
-	"Resource Wet bulb temperature [C], array.",
+	PyDoc_STR("type: Sequence\n\nResource Wet bulb temperature [C]"),
  	NULL},
 {"w_gr", (getter)Outputs_get_w_gr,(setter)0,
-	"Cycle electrical power output (gross) [MWe], array.",
+	PyDoc_STR("type: Sequence\n\nCycle electrical power output (gross) [MWe]"),
  	NULL},
 {"w_gr_fossil", (getter)Outputs_get_w_gr_fossil,(setter)0,
-	"Cycle electrical power output (gross, fossil share) [MWe], array.",
+	PyDoc_STR("type: Sequence\n\nCycle electrical power output (gross, fossil share) [MWe]"),
  	NULL},
 {"w_gr_solar", (getter)Outputs_get_w_gr_solar,(setter)0,
-	"Cycle electrical power output (gross, solar share) [MWe], array.",
+	PyDoc_STR("type: Sequence\n\nCycle electrical power output (gross, solar share) [MWe]"),
  	NULL},
 {"w_par_fixed", (getter)Outputs_get_w_par_fixed,(setter)0,
-	"Fixed parasitic losses [MWh], array.",
+	PyDoc_STR("type: Sequence\n\nFixed parasitic losses [MWh]"),
  	NULL},
 {"w_par_offline", (getter)Outputs_get_w_par_offline,(setter)0,
-	"Offline parasitics [MWh], array.",
+	PyDoc_STR("type: Sequence\n\nOffline parasitics [MWh]"),
  	NULL},
 {"w_par_online", (getter)Outputs_get_w_par_online,(setter)0,
-	"Online parasitics [MWh], array.",
+	PyDoc_STR("type: Sequence\n\nOnline parasitics [MWh]"),
  	NULL},
 {"w_par_prod", (getter)Outputs_get_w_par_prod,(setter)0,
-	"Production-based parasitic losses [MWh], array.",
+	PyDoc_STR("type: Sequence\n\nProduction-based parasitic losses [MWh]"),
  	NULL},
 {"w_par_tot", (getter)Outputs_get_w_par_tot,(setter)0,
-	"Total parasitic losses [MWh], array.",
+	PyDoc_STR("type: Sequence\n\nTotal parasitic losses [MWh]"),
  	NULL},
 {"wspd", (getter)Outputs_get_wspd,(setter)0,
-	"Resource Wind Speed [m/s], array.",
+	PyDoc_STR("type: Sequence\n\nResource Wind Speed [m/s]"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -2073,7 +2073,7 @@ static PyTypeObject Outputs_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		Outputs_methods,         /*tp_methods*/
@@ -2083,7 +2083,7 @@ static PyTypeObject Outputs_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -2208,7 +2208,7 @@ static PyMethodDef TcsgenericSolar_methods[] = {
 		{"assign",            (PyCFunction)TcsgenericSolar_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs")},
 		{"export",            (PyCFunction)TcsgenericSolar_export,  METH_VARARGS,
-				PyDoc_STR("assign() -> None\n Export attributes into dictionary")},
+				PyDoc_STR("export() -> None\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -2248,11 +2248,11 @@ static PyTypeObject TcsgenericSolar_Type = {
 		0,                          /*tp_setattro*/
 		0,                          /*tp_as_buffer*/
 		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
-		"see html for help",        /*tp_doc*/
+		"Wrapper for `cmod_tcsgeneric_solar.cpp <https://github.com/NREL/ssc/blob/develop/ssc/cmod_tcsgeneric_solar.cpp>`_",        /*tp_doc*/
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		TcsgenericSolar_methods,      /*tp_methods*/
@@ -2262,7 +2262,7 @@ static PyTypeObject TcsgenericSolar_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,                          /*tp_new*/
@@ -2327,10 +2327,10 @@ static PyMethodDef TcsgenericSolarModule_methods[] = {
 		{"new",             TcsgenericSolar_new,         METH_VARARGS,
 				PyDoc_STR("new() -> new TcsgenericSolar object")},
 		{"default",             TcsgenericSolar_default,         METH_VARARGS,
-				PyDoc_STR("default(financial) -> new TcsgenericSolar object with financial model-specific default attributes\n"
-				"Options: GenericCSPSystemAllEquityPartnershipFlip\nGenericCSPSystemCommercial\nGenericCSPSystemCommercialPPA\nGenericCSPSystemIndependentPowerProducer\nGenericCSPSystemLCOECalculator\nGenericCSPSystemLeveragedPartnershipFlip\nGenericCSPSystemNone\nGenericCSPSystemSaleLeaseback\nGenericCSPSystemSingleOwner")},
+				PyDoc_STR("default(config) -> new TcsgenericSolar object with financial model-specific default attributes\n"
+				"config options:\n\n- \"GenericCSPSystemAllEquityPartnershipFlip\"\n- \"GenericCSPSystemCommercial\"\n- \"GenericCSPSystemCommercialPPA\"\n- \"GenericCSPSystemIndependentPowerProducer\"\n- \"GenericCSPSystemLCOECalculator\"\n- \"GenericCSPSystemLeveragedPartnershipFlip\"\n- \"GenericCSPSystemNone\"\n- \"GenericCSPSystemSaleLeaseback\"\n- \"GenericCSPSystemSingleOwner\"")},
 		{"wrap",             TcsgenericSolar_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> new TcsgenericSolar object around existing PySSC data, taking over memory ownership")},
+				PyDoc_STR("wrap(ssc_data_t) -> new TcsgenericSolar object around existing PySSC data, taking over memory ownership\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to `wrap`")},
 		{NULL,              NULL}           /* sentinel */
 };
 

@@ -78,7 +78,7 @@ Weather_set_file_name(WeatherObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef Weather_getset[] = {
 {"file_name", (getter)Weather_get_file_name,(setter)Weather_set_file_name,
-	"local weather file path, string.\n Constraints: LOCAL_FILE; Required.",
+	PyDoc_STR("type: Str\n\nlocal weather file path\n\n*Constraints*: LOCAL_FILE\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -111,7 +111,7 @@ static PyTypeObject Weather_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		Weather_methods,         /*tp_methods*/
@@ -121,7 +121,7 @@ static PyTypeObject Weather_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -190,18 +190,18 @@ static PyMethodDef Dish_methods[] = {
 static PyObject *
 Dish_get_system_capacity(DishObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Dish_system_capacity_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Dish_system_capacity_nget, self->data_ptr);
 }
 
 static int
 Dish_set_system_capacity(DishObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Dish_system_capacity_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Dish_system_capacity_nset, self->data_ptr);
 }
 
 static PyGetSetDef Dish_getset[] = {
 {"system_capacity", (getter)Dish_get_system_capacity,(setter)Dish_set_system_capacity,
-	"Nameplate capacity [kW], number.\n Required.",
+	PyDoc_STR("type: Float\n\nNameplate capacity [kW]\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -234,7 +234,7 @@ static PyTypeObject Dish_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		Dish_methods,         /*tp_methods*/
@@ -244,7 +244,7 @@ static PyTypeObject Dish_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -313,258 +313,258 @@ static PyMethodDef Type295_methods[] = {
 static PyObject *
 Type295_get_A_proj(Type295Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type295_A_proj_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type295_A_proj_nget, self->data_ptr);
 }
 
 static int
 Type295_set_A_proj(Type295Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type295_A_proj_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type295_A_proj_nset, self->data_ptr);
 }
 
 static PyObject *
 Type295_get_A_total(Type295Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type295_A_total_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type295_A_total_nget, self->data_ptr);
 }
 
 static int
 Type295_set_A_total(Type295Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type295_A_total_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type295_A_total_nset, self->data_ptr);
 }
 
 static PyObject *
 Type295_get_I_cut_in(Type295Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type295_I_cut_in_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type295_I_cut_in_nget, self->data_ptr);
 }
 
 static int
 Type295_set_I_cut_in(Type295Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type295_I_cut_in_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type295_I_cut_in_nset, self->data_ptr);
 }
 
 static PyObject *
 Type295_get_d_ap(Type295Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type295_d_ap_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type295_d_ap_nget, self->data_ptr);
 }
 
 static int
 Type295_set_d_ap(Type295Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type295_d_ap_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type295_d_ap_nset, self->data_ptr);
 }
 
 static PyObject *
 Type295_get_d_ap_test(Type295Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type295_d_ap_test_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type295_d_ap_test_nget, self->data_ptr);
 }
 
 static int
 Type295_set_d_ap_test(Type295Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type295_d_ap_test_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type295_d_ap_test_nset, self->data_ptr);
 }
 
 static PyObject *
 Type295_get_ew_dish_sep(Type295Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type295_ew_dish_sep_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type295_ew_dish_sep_nget, self->data_ptr);
 }
 
 static int
 Type295_set_ew_dish_sep(Type295Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type295_ew_dish_sep_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type295_ew_dish_sep_nset, self->data_ptr);
 }
 
 static PyObject *
 Type295_get_h_slot_gap(Type295Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type295_h_slot_gap_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type295_h_slot_gap_nget, self->data_ptr);
 }
 
 static int
 Type295_set_h_slot_gap(Type295Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type295_h_slot_gap_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type295_h_slot_gap_nset, self->data_ptr);
 }
 
 static PyObject *
 Type295_get_n_ew(Type295Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type295_n_ew_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type295_n_ew_nget, self->data_ptr);
 }
 
 static int
 Type295_set_n_ew(Type295Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type295_n_ew_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type295_n_ew_nset, self->data_ptr);
 }
 
 static PyObject *
 Type295_get_n_ns(Type295Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type295_n_ns_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type295_n_ns_nget, self->data_ptr);
 }
 
 static int
 Type295_set_n_ns(Type295Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type295_n_ns_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type295_n_ns_nset, self->data_ptr);
 }
 
 static PyObject *
 Type295_get_ns_dish_sep(Type295Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type295_ns_dish_sep_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type295_ns_dish_sep_nget, self->data_ptr);
 }
 
 static int
 Type295_set_ns_dish_sep(Type295Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type295_ns_dish_sep_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type295_ns_dish_sep_nset, self->data_ptr);
 }
 
 static PyObject *
 Type295_get_rho(Type295Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type295_rho_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type295_rho_nget, self->data_ptr);
 }
 
 static int
 Type295_set_rho(Type295Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type295_rho_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type295_rho_nset, self->data_ptr);
 }
 
 static PyObject *
 Type295_get_slope_ew(Type295Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type295_slope_ew_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type295_slope_ew_nget, self->data_ptr);
 }
 
 static int
 Type295_set_slope_ew(Type295Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type295_slope_ew_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type295_slope_ew_nset, self->data_ptr);
 }
 
 static PyObject *
 Type295_get_slope_ns(Type295Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type295_slope_ns_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type295_slope_ns_nget, self->data_ptr);
 }
 
 static int
 Type295_set_slope_ns(Type295Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type295_slope_ns_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type295_slope_ns_nset, self->data_ptr);
 }
 
 static PyObject *
 Type295_get_test_L_focal(Type295Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type295_test_L_focal_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type295_test_L_focal_nget, self->data_ptr);
 }
 
 static int
 Type295_set_test_L_focal(Type295Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type295_test_L_focal_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type295_test_L_focal_nset, self->data_ptr);
 }
 
 static PyObject *
 Type295_get_test_if(Type295Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type295_test_if_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type295_test_if_nget, self->data_ptr);
 }
 
 static int
 Type295_set_test_if(Type295Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type295_test_if_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type295_test_if_nset, self->data_ptr);
 }
 
 static PyObject *
 Type295_get_w_slot_gap(Type295Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type295_w_slot_gap_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type295_w_slot_gap_nget, self->data_ptr);
 }
 
 static int
 Type295_set_w_slot_gap(Type295Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type295_w_slot_gap_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type295_w_slot_gap_nset, self->data_ptr);
 }
 
 static PyObject *
 Type295_get_wind_stow_speed(Type295Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type295_wind_stow_speed_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type295_wind_stow_speed_nget, self->data_ptr);
 }
 
 static int
 Type295_set_wind_stow_speed(Type295Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type295_wind_stow_speed_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type295_wind_stow_speed_nset, self->data_ptr);
 }
 
 static PyGetSetDef Type295_getset[] = {
 {"A_proj", (getter)Type295_get_A_proj,(setter)Type295_set_A_proj,
-	"Projected mirror area [m^2], number.\n Required.",
+	PyDoc_STR("type: Float\n\nProjected mirror area [m^2]\n\n*Required*: True"),
  	NULL},
 {"A_total", (getter)Type295_get_A_total,(setter)Type295_set_A_total,
-	"Total Area [m^2], number.\n Required.",
+	PyDoc_STR("type: Float\n\nTotal Area [m^2]\n\n*Required*: True"),
  	NULL},
 {"I_cut_in", (getter)Type295_get_I_cut_in,(setter)Type295_set_I_cut_in,
-	"Insolation cut in value [W/m^2], number.\n Required.",
+	PyDoc_STR("type: Float\n\nInsolation cut in value [W/m^2]\n\n*Required*: True"),
  	NULL},
 {"d_ap", (getter)Type295_get_d_ap,(setter)Type295_set_d_ap,
-	"Dish aperture diameter [m], number.\n Required.",
+	PyDoc_STR("type: Float\n\nDish aperture diameter [m]\n\n*Required*: True"),
  	NULL},
 {"d_ap_test", (getter)Type295_get_d_ap_test,(setter)Type295_set_d_ap_test,
-	"Receiver aperture diameter during test [m], number.\n Required.",
+	PyDoc_STR("type: Float\n\nReceiver aperture diameter during test [m]\n\n*Required*: True"),
  	NULL},
 {"ew_dish_sep", (getter)Type295_get_ew_dish_sep,(setter)Type295_set_ew_dish_sep,
-	"Collector separation East-West [m], number.\n Required.",
+	PyDoc_STR("type: Float\n\nCollector separation East-West [m]\n\n*Required*: True"),
  	NULL},
 {"h_slot_gap", (getter)Type295_get_h_slot_gap,(setter)Type295_set_h_slot_gap,
-	"Slot gap height [m], number.\n Required.",
+	PyDoc_STR("type: Float\n\nSlot gap height [m]\n\n*Required*: True"),
  	NULL},
 {"n_ew", (getter)Type295_get_n_ew,(setter)Type295_set_n_ew,
-	"Number of collectors East-West [-], number.\n Constraints: INTEGER; Required.",
+	PyDoc_STR("type: Float\n\nNumber of collectors East-West [-]\n\n*Constraints*: INTEGER\n\n*Required*: True"),
  	NULL},
 {"n_ns", (getter)Type295_get_n_ns,(setter)Type295_set_n_ns,
-	"Number of collectors North-South [-], number.\n Constraints: INTEGER; Required.",
+	PyDoc_STR("type: Float\n\nNumber of collectors North-South [-]\n\n*Constraints*: INTEGER\n\n*Required*: True"),
  	NULL},
 {"ns_dish_sep", (getter)Type295_get_ns_dish_sep,(setter)Type295_set_ns_dish_sep,
-	"Collector separation North-South [m], number.\n Required.",
+	PyDoc_STR("type: Float\n\nCollector separation North-South [m]\n\n*Required*: True"),
  	NULL},
 {"rho", (getter)Type295_get_rho,(setter)Type295_set_rho,
-	"Mirror surface reflectivity [-], number.\n Required.",
+	PyDoc_STR("type: Float\n\nMirror surface reflectivity [-]\n\n*Required*: True"),
  	NULL},
 {"slope_ew", (getter)Type295_get_slope_ew,(setter)Type295_set_slope_ew,
-	"East-West ground slope [%], number.\n Required.",
+	PyDoc_STR("type: Float\n\nEast-West ground slope [%]\n\n*Required*: True"),
  	NULL},
 {"slope_ns", (getter)Type295_get_slope_ns,(setter)Type295_set_slope_ns,
-	"North-South ground slope [%], number.\n Required.",
+	PyDoc_STR("type: Float\n\nNorth-South ground slope [%]\n\n*Required*: True"),
  	NULL},
 {"test_L_focal", (getter)Type295_get_test_L_focal,(setter)Type295_set_test_L_focal,
-	"Focal length of mirror system [m], number.\n Required.",
+	PyDoc_STR("type: Float\n\nFocal length of mirror system [m]\n\n*Required*: True"),
  	NULL},
 {"test_if", (getter)Type295_get_test_if,(setter)Type295_set_test_if,
-	"Test intercept factor [-], number.\n Required.",
+	PyDoc_STR("type: Float\n\nTest intercept factor [-]\n\n*Required*: True"),
  	NULL},
 {"w_slot_gap", (getter)Type295_get_w_slot_gap,(setter)Type295_set_w_slot_gap,
-	"Slot gap width [m], number.\n Required.",
+	PyDoc_STR("type: Float\n\nSlot gap width [m]\n\n*Required*: True"),
  	NULL},
 {"wind_stow_speed", (getter)Type295_get_wind_stow_speed,(setter)Type295_set_wind_stow_speed,
-	"Wind stow speed [m/s], number.\n Required.",
+	PyDoc_STR("type: Float\n\nWind stow speed [m/s]\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -597,7 +597,7 @@ static PyTypeObject Type295_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		Type295_methods,         /*tp_methods*/
@@ -607,7 +607,7 @@ static PyTypeObject Type295_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -676,228 +676,228 @@ static PyMethodDef Type296_methods[] = {
 static PyObject *
 Type296_get_A_absorber(Type296Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type296_A_absorber_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type296_A_absorber_nget, self->data_ptr);
 }
 
 static int
 Type296_set_A_absorber(Type296Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type296_A_absorber_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type296_A_absorber_nset, self->data_ptr);
 }
 
 static PyObject *
 Type296_get_A_wall(Type296Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type296_A_wall_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type296_A_wall_nget, self->data_ptr);
 }
 
 static int
 Type296_set_A_wall(Type296Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type296_A_wall_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type296_A_wall_nset, self->data_ptr);
 }
 
 static PyObject *
 Type296_get_DELTA_T_DIR(Type296Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type296_DELTA_T_DIR_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type296_DELTA_T_DIR_nget, self->data_ptr);
 }
 
 static int
 Type296_set_DELTA_T_DIR(Type296Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type296_DELTA_T_DIR_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type296_DELTA_T_DIR_nset, self->data_ptr);
 }
 
 static PyObject *
 Type296_get_DELTA_T_REFLUX(Type296Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type296_DELTA_T_REFLUX_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type296_DELTA_T_REFLUX_nget, self->data_ptr);
 }
 
 static int
 Type296_set_DELTA_T_REFLUX(Type296Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type296_DELTA_T_REFLUX_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type296_DELTA_T_REFLUX_nset, self->data_ptr);
 }
 
 static PyObject *
 Type296_get_L_cav(Type296Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type296_L_cav_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type296_L_cav_nget, self->data_ptr);
 }
 
 static int
 Type296_set_L_cav(Type296Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type296_L_cav_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type296_L_cav_nset, self->data_ptr);
 }
 
 static PyObject *
 Type296_get_L_insulation(Type296Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type296_L_insulation_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type296_L_insulation_nget, self->data_ptr);
 }
 
 static int
 Type296_set_L_insulation(Type296Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type296_L_insulation_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type296_L_insulation_nset, self->data_ptr);
 }
 
 static PyObject *
 Type296_get_P_cav(Type296Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type296_P_cav_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type296_P_cav_nget, self->data_ptr);
 }
 
 static int
 Type296_set_P_cav(Type296Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type296_P_cav_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type296_P_cav_nset, self->data_ptr);
 }
 
 static PyObject *
 Type296_get_T_heater_head_high(Type296Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type296_T_heater_head_high_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type296_T_heater_head_high_nget, self->data_ptr);
 }
 
 static int
 Type296_set_T_heater_head_high(Type296Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type296_T_heater_head_high_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type296_T_heater_head_high_nset, self->data_ptr);
 }
 
 static PyObject *
 Type296_get_T_heater_head_low(Type296Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type296_T_heater_head_low_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type296_T_heater_head_low_nget, self->data_ptr);
 }
 
 static int
 Type296_set_T_heater_head_low(Type296Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type296_T_heater_head_low_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type296_T_heater_head_low_nset, self->data_ptr);
 }
 
 static PyObject *
 Type296_get_alpha_absorber(Type296Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type296_alpha_absorber_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type296_alpha_absorber_nget, self->data_ptr);
 }
 
 static int
 Type296_set_alpha_absorber(Type296Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type296_alpha_absorber_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type296_alpha_absorber_nset, self->data_ptr);
 }
 
 static PyObject *
 Type296_get_alpha_wall(Type296Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type296_alpha_wall_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type296_alpha_wall_nget, self->data_ptr);
 }
 
 static int
 Type296_set_alpha_wall(Type296Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type296_alpha_wall_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type296_alpha_wall_nset, self->data_ptr);
 }
 
 static PyObject *
 Type296_get_d_cav(Type296Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type296_d_cav_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type296_d_cav_nget, self->data_ptr);
 }
 
 static int
 Type296_set_d_cav(Type296Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type296_d_cav_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type296_d_cav_nset, self->data_ptr);
 }
 
 static PyObject *
 Type296_get_k_insulation(Type296Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type296_k_insulation_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type296_k_insulation_nget, self->data_ptr);
 }
 
 static int
 Type296_set_k_insulation(Type296Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type296_k_insulation_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type296_k_insulation_nset, self->data_ptr);
 }
 
 static PyObject *
 Type296_get_rec_type(Type296Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type296_rec_type_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type296_rec_type_nget, self->data_ptr);
 }
 
 static int
 Type296_set_rec_type(Type296Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type296_rec_type_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type296_rec_type_nset, self->data_ptr);
 }
 
 static PyObject *
 Type296_get_transmittance_cover(Type296Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type296_transmittance_cover_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type296_transmittance_cover_nget, self->data_ptr);
 }
 
 static int
 Type296_set_transmittance_cover(Type296Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type296_transmittance_cover_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type296_transmittance_cover_nset, self->data_ptr);
 }
 
 static PyGetSetDef Type296_getset[] = {
 {"A_absorber", (getter)Type296_get_A_absorber,(setter)Type296_set_A_absorber,
-	"Absorber surface area [m^2], number.\n Required.",
+	PyDoc_STR("type: Float\n\nAbsorber surface area [m^2]\n\n*Required*: True"),
  	NULL},
 {"A_wall", (getter)Type296_get_A_wall,(setter)Type296_set_A_wall,
-	"Cavity surface area [m^2], number.\n Required.",
+	PyDoc_STR("type: Float\n\nCavity surface area [m^2]\n\n*Required*: True"),
  	NULL},
 {"DELTA_T_DIR", (getter)Type296_get_DELTA_T_DIR,(setter)Type296_set_DELTA_T_DIR,
-	"Delta temperature for DIR receiver [K], number.\n Required.",
+	PyDoc_STR("type: Float\n\nDelta temperature for DIR receiver [K]\n\n*Required*: True"),
  	NULL},
 {"DELTA_T_REFLUX", (getter)Type296_get_DELTA_T_REFLUX,(setter)Type296_set_DELTA_T_REFLUX,
-	"Delta temp for REFLUX receiver (always = 40) [K], number.\n Required.",
+	PyDoc_STR("type: Float\n\nDelta temp for REFLUX receiver (always = 40) [K]\n\n*Required*: True"),
  	NULL},
 {"L_cav", (getter)Type296_get_L_cav,(setter)Type296_set_L_cav,
-	"Internal depth of cavity perp to aperture [m], number.\n Required.",
+	PyDoc_STR("type: Float\n\nInternal depth of cavity perp to aperture [m]\n\n*Required*: True"),
  	NULL},
 {"L_insulation", (getter)Type296_get_L_insulation,(setter)Type296_set_L_insulation,
-	"Insulation thickness [m], number.\n Required.",
+	PyDoc_STR("type: Float\n\nInsulation thickness [m]\n\n*Required*: True"),
  	NULL},
 {"P_cav", (getter)Type296_get_P_cav,(setter)Type296_set_P_cav,
-	"Internal cavity pressure with aperture covered [kPa], number.\n Required.",
+	PyDoc_STR("type: Float\n\nInternal cavity pressure with aperture covered [kPa]\n\n*Required*: True"),
  	NULL},
 {"T_heater_head_high", (getter)Type296_get_T_heater_head_high,(setter)Type296_set_T_heater_head_high,
-	"Heater Head Set Temperature [K], number.\n Required.",
+	PyDoc_STR("type: Float\n\nHeater Head Set Temperature [K]\n\n*Required*: True"),
  	NULL},
 {"T_heater_head_low", (getter)Type296_get_T_heater_head_low,(setter)Type296_set_T_heater_head_low,
-	"Header Head Lowest Temperature [K], number.\n Required.",
+	PyDoc_STR("type: Float\n\nHeader Head Lowest Temperature [K]\n\n*Required*: True"),
  	NULL},
 {"alpha_absorber", (getter)Type296_get_alpha_absorber,(setter)Type296_set_alpha_absorber,
-	"Absorber absorptance [-], number.\n Required.",
+	PyDoc_STR("type: Float\n\nAbsorber absorptance [-]\n\n*Required*: True"),
  	NULL},
 {"alpha_wall", (getter)Type296_get_alpha_wall,(setter)Type296_set_alpha_wall,
-	"Cavity absorptance [-], number.\n Required.",
+	PyDoc_STR("type: Float\n\nCavity absorptance [-]\n\n*Required*: True"),
  	NULL},
 {"d_cav", (getter)Type296_get_d_cav,(setter)Type296_set_d_cav,
-	"Internal diameter of cavity perp to aperture [m], number.\n Required.",
+	PyDoc_STR("type: Float\n\nInternal diameter of cavity perp to aperture [m]\n\n*Required*: True"),
  	NULL},
 {"k_insulation", (getter)Type296_get_k_insulation,(setter)Type296_set_k_insulation,
-	"Insulation thermal conductivity [W/m-K], number.\n Required.",
+	PyDoc_STR("type: Float\n\nInsulation thermal conductivity [W/m-K]\n\n*Required*: True"),
  	NULL},
 {"rec_type", (getter)Type296_get_rec_type,(setter)Type296_set_rec_type,
-	"Receiver type (always = 1) [-], number.\n Required.",
+	PyDoc_STR("type: Float\n\nReceiver type (always = 1) [-]\n\n*Required*: True"),
  	NULL},
 {"transmittance_cover", (getter)Type296_get_transmittance_cover,(setter)Type296_set_transmittance_cover,
-	"Transmittance cover (always = 1) [-], number.\n Required.",
+	PyDoc_STR("type: Float\n\nTransmittance cover (always = 1) [-]\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -930,7 +930,7 @@ static PyTypeObject Type296_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		Type296_methods,         /*tp_methods*/
@@ -940,7 +940,7 @@ static PyTypeObject Type296_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -1009,153 +1009,153 @@ static PyMethodDef Type297_methods[] = {
 static PyObject *
 Type297_get_Beale_const_coef(Type297Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type297_Beale_const_coef_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type297_Beale_const_coef_nget, self->data_ptr);
 }
 
 static int
 Type297_set_Beale_const_coef(Type297Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type297_Beale_const_coef_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type297_Beale_const_coef_nset, self->data_ptr);
 }
 
 static PyObject *
 Type297_get_Beale_first_coef(Type297Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type297_Beale_first_coef_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type297_Beale_first_coef_nget, self->data_ptr);
 }
 
 static int
 Type297_set_Beale_first_coef(Type297Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type297_Beale_first_coef_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type297_Beale_first_coef_nset, self->data_ptr);
 }
 
 static PyObject *
 Type297_get_Beale_fourth_coef(Type297Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type297_Beale_fourth_coef_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type297_Beale_fourth_coef_nget, self->data_ptr);
 }
 
 static int
 Type297_set_Beale_fourth_coef(Type297Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type297_Beale_fourth_coef_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type297_Beale_fourth_coef_nset, self->data_ptr);
 }
 
 static PyObject *
 Type297_get_Beale_square_coef(Type297Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type297_Beale_square_coef_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type297_Beale_square_coef_nget, self->data_ptr);
 }
 
 static int
 Type297_set_Beale_square_coef(Type297Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type297_Beale_square_coef_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type297_Beale_square_coef_nset, self->data_ptr);
 }
 
 static PyObject *
 Type297_get_Beale_third_coef(Type297Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type297_Beale_third_coef_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type297_Beale_third_coef_nget, self->data_ptr);
 }
 
 static int
 Type297_set_Beale_third_coef(Type297Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type297_Beale_third_coef_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type297_Beale_third_coef_nset, self->data_ptr);
 }
 
 static PyObject *
 Type297_get_Pressure_coef(Type297Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type297_Pressure_coef_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type297_Pressure_coef_nget, self->data_ptr);
 }
 
 static int
 Type297_set_Pressure_coef(Type297Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type297_Pressure_coef_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type297_Pressure_coef_nset, self->data_ptr);
 }
 
 static PyObject *
 Type297_get_Pressure_first(Type297Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type297_Pressure_first_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type297_Pressure_first_nget, self->data_ptr);
 }
 
 static int
 Type297_set_Pressure_first(Type297Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type297_Pressure_first_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type297_Pressure_first_nset, self->data_ptr);
 }
 
 static PyObject *
 Type297_get_T_compression_in(Type297Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type297_T_compression_in_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type297_T_compression_in_nget, self->data_ptr);
 }
 
 static int
 Type297_set_T_compression_in(Type297Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type297_T_compression_in_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type297_T_compression_in_nset, self->data_ptr);
 }
 
 static PyObject *
 Type297_get_V_displaced(Type297Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type297_V_displaced_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type297_V_displaced_nget, self->data_ptr);
 }
 
 static int
 Type297_set_V_displaced(Type297Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type297_V_displaced_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type297_V_displaced_nset, self->data_ptr);
 }
 
 static PyObject *
 Type297_get_engine_speed(Type297Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type297_engine_speed_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type297_engine_speed_nget, self->data_ptr);
 }
 
 static int
 Type297_set_engine_speed(Type297Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type297_engine_speed_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type297_engine_speed_nset, self->data_ptr);
 }
 
 static PyGetSetDef Type297_getset[] = {
 {"Beale_const_coef", (getter)Type297_get_Beale_const_coef,(setter)Type297_set_Beale_const_coef,
-	"Beale Constant Coefficient [-], number.\n Required.",
+	PyDoc_STR("type: Float\n\nBeale Constant Coefficient [-]\n\n*Required*: True"),
  	NULL},
 {"Beale_first_coef", (getter)Type297_get_Beale_first_coef,(setter)Type297_set_Beale_first_coef,
-	"Beale first-order coefficient [1/W], number.\n Required.",
+	PyDoc_STR("type: Float\n\nBeale first-order coefficient [1/W]\n\n*Required*: True"),
  	NULL},
 {"Beale_fourth_coef", (getter)Type297_get_Beale_fourth_coef,(setter)Type297_set_Beale_fourth_coef,
-	"Beale fourth-order coefficient [1/W^4], number.\n Required.",
+	PyDoc_STR("type: Float\n\nBeale fourth-order coefficient [1/W^4]\n\n*Required*: True"),
  	NULL},
 {"Beale_square_coef", (getter)Type297_get_Beale_square_coef,(setter)Type297_set_Beale_square_coef,
-	"Beale second-order coefficient [1/W^2], number.\n Required.",
+	PyDoc_STR("type: Float\n\nBeale second-order coefficient [1/W^2]\n\n*Required*: True"),
  	NULL},
 {"Beale_third_coef", (getter)Type297_get_Beale_third_coef,(setter)Type297_set_Beale_third_coef,
-	"Beale third-order coefficient [1/W^3], number.\n Required.",
+	PyDoc_STR("type: Float\n\nBeale third-order coefficient [1/W^3]\n\n*Required*: True"),
  	NULL},
 {"Pressure_coef", (getter)Type297_get_Pressure_coef,(setter)Type297_set_Pressure_coef,
-	"Pressure constant coefficient [MPa], number.\n Required.",
+	PyDoc_STR("type: Float\n\nPressure constant coefficient [MPa]\n\n*Required*: True"),
  	NULL},
 {"Pressure_first", (getter)Type297_get_Pressure_first,(setter)Type297_set_Pressure_first,
-	"Pressure first-order coefficient [MPa/W], number.\n Required.",
+	PyDoc_STR("type: Float\n\nPressure first-order coefficient [MPa/W]\n\n*Required*: True"),
  	NULL},
 {"T_compression_in", (getter)Type297_get_T_compression_in,(setter)Type297_set_T_compression_in,
-	"Receiver efficiency [C], number.\n Required.",
+	PyDoc_STR("type: Float\n\nReceiver efficiency [C]\n\n*Required*: True"),
  	NULL},
 {"V_displaced", (getter)Type297_get_V_displaced,(setter)Type297_set_V_displaced,
-	"Displaced engine volume [m3], number.\n Required.",
+	PyDoc_STR("type: Float\n\nDisplaced engine volume [m3]\n\n*Required*: True"),
  	NULL},
 {"engine_speed", (getter)Type297_get_engine_speed,(setter)Type297_set_engine_speed,
-	"Engine operating speed [rpm], number.\n Required.",
+	PyDoc_STR("type: Float\n\nEngine operating speed [rpm]\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1188,7 +1188,7 @@ static PyTypeObject Type297_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		Type297_methods,         /*tp_methods*/
@@ -1198,7 +1198,7 @@ static PyTypeObject Type297_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -1267,528 +1267,528 @@ static PyMethodDef Type298_methods[] = {
 static PyObject *
 Type298_get_P_controls(Type298Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type298_P_controls_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type298_P_controls_nget, self->data_ptr);
 }
 
 static int
 Type298_set_P_controls(Type298Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type298_P_controls_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type298_P_controls_nset, self->data_ptr);
 }
 
 static PyObject *
 Type298_get_P_tower_fan(Type298Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type298_P_tower_fan_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type298_P_tower_fan_nget, self->data_ptr);
 }
 
 static int
 Type298_set_P_tower_fan(Type298Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type298_P_tower_fan_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type298_P_tower_fan_nset, self->data_ptr);
 }
 
 static PyObject *
 Type298_get_T_cool_speed2(Type298Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type298_T_cool_speed2_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type298_T_cool_speed2_nget, self->data_ptr);
 }
 
 static int
 Type298_set_T_cool_speed2(Type298Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type298_T_cool_speed2_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type298_T_cool_speed2_nset, self->data_ptr);
 }
 
 static PyObject *
 Type298_get_T_cool_speed3(Type298Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type298_T_cool_speed3_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type298_T_cool_speed3_nget, self->data_ptr);
 }
 
 static int
 Type298_set_T_cool_speed3(Type298Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type298_T_cool_speed3_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type298_T_cool_speed3_nset, self->data_ptr);
 }
 
 static PyObject *
 Type298_get_Tower_water_outlet_temp(Type298Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type298_Tower_water_outlet_temp_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type298_Tower_water_outlet_temp_nget, self->data_ptr);
 }
 
 static int
 Type298_set_Tower_water_outlet_temp(Type298Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type298_Tower_water_outlet_temp_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type298_Tower_water_outlet_temp_nset, self->data_ptr);
 }
 
 static PyObject *
 Type298_get_b_cooler(Type298Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type298_b_cooler_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type298_b_cooler_nget, self->data_ptr);
 }
 
 static int
 Type298_set_b_cooler(Type298Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type298_b_cooler_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type298_b_cooler_nset, self->data_ptr);
 }
 
 static PyObject *
 Type298_get_b_radiator(Type298Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type298_b_radiator_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type298_b_radiator_nget, self->data_ptr);
 }
 
 static int
 Type298_set_b_radiator(Type298Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type298_b_radiator_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type298_b_radiator_nset, self->data_ptr);
 }
 
 static PyObject *
 Type298_get_cooling_fluid(Type298Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type298_cooling_fluid_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type298_cooling_fluid_nget, self->data_ptr);
 }
 
 static int
 Type298_set_cooling_fluid(Type298Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type298_cooling_fluid_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type298_cooling_fluid_nset, self->data_ptr);
 }
 
 static PyObject *
 Type298_get_cooling_tower_on(Type298Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type298_cooling_tower_on_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type298_cooling_tower_on_nget, self->data_ptr);
 }
 
 static int
 Type298_set_cooling_tower_on(Type298Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type298_cooling_tower_on_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type298_cooling_tower_on_nset, self->data_ptr);
 }
 
 static PyObject *
 Type298_get_d_pipe_tower(Type298Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type298_d_pipe_tower_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type298_d_pipe_tower_nget, self->data_ptr);
 }
 
 static int
 Type298_set_d_pipe_tower(Type298Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type298_d_pipe_tower_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type298_d_pipe_tower_nset, self->data_ptr);
 }
 
 static PyObject *
 Type298_get_epsilon_cooler_test(Type298Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type298_epsilon_cooler_test_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type298_epsilon_cooler_test_nget, self->data_ptr);
 }
 
 static int
 Type298_set_epsilon_cooler_test(Type298Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type298_epsilon_cooler_test_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type298_epsilon_cooler_test_nset, self->data_ptr);
 }
 
 static PyObject *
 Type298_get_epsilon_power_test(Type298Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type298_epsilon_power_test_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type298_epsilon_power_test_nget, self->data_ptr);
 }
 
 static int
 Type298_set_epsilon_power_test(Type298Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type298_epsilon_power_test_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type298_epsilon_power_test_nset, self->data_ptr);
 }
 
 static PyObject *
 Type298_get_epsilon_radiator_test(Type298Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type298_epsilon_radiator_test_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type298_epsilon_radiator_test_nget, self->data_ptr);
 }
 
 static int
 Type298_set_epsilon_radiator_test(Type298Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type298_epsilon_radiator_test_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type298_epsilon_radiator_test_nset, self->data_ptr);
 }
 
 static PyObject *
 Type298_get_eta_tower_pump(Type298Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type298_eta_tower_pump_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type298_eta_tower_pump_nget, self->data_ptr);
 }
 
 static int
 Type298_set_eta_tower_pump(Type298Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type298_eta_tower_pump_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type298_eta_tower_pump_nset, self->data_ptr);
 }
 
 static PyObject *
 Type298_get_ew_dish_separation(Type298Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type298_ew_dish_separation_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type298_ew_dish_separation_nget, self->data_ptr);
 }
 
 static int
 Type298_set_ew_dish_separation(Type298Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type298_ew_dish_separation_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type298_ew_dish_separation_nset, self->data_ptr);
 }
 
 static PyObject *
 Type298_get_fan_control_signal(Type298Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type298_fan_control_signal_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type298_fan_control_signal_nget, self->data_ptr);
 }
 
 static int
 Type298_set_fan_control_signal(Type298Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type298_fan_control_signal_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type298_fan_control_signal_nset, self->data_ptr);
 }
 
 static PyObject *
 Type298_get_fan_speed1(Type298Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type298_fan_speed1_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type298_fan_speed1_nget, self->data_ptr);
 }
 
 static int
 Type298_set_fan_speed1(Type298Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type298_fan_speed1_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type298_fan_speed1_nset, self->data_ptr);
 }
 
 static PyObject *
 Type298_get_fan_speed2(Type298Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type298_fan_speed2_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type298_fan_speed2_nget, self->data_ptr);
 }
 
 static int
 Type298_set_fan_speed2(Type298Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type298_fan_speed2_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type298_fan_speed2_nset, self->data_ptr);
 }
 
 static PyObject *
 Type298_get_fan_speed3(Type298Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type298_fan_speed3_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type298_fan_speed3_nget, self->data_ptr);
 }
 
 static int
 Type298_set_fan_speed3(Type298Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type298_fan_speed3_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type298_fan_speed3_nset, self->data_ptr);
 }
 
 static PyObject *
 Type298_get_ns_dish_separation(Type298Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type298_ns_dish_separation_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type298_ns_dish_separation_nget, self->data_ptr);
 }
 
 static int
 Type298_set_ns_dish_separation(Type298Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type298_ns_dish_separation_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type298_ns_dish_separation_nset, self->data_ptr);
 }
 
 static PyObject *
 Type298_get_pump_speed(Type298Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type298_pump_speed_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type298_pump_speed_nget, self->data_ptr);
 }
 
 static int
 Type298_set_pump_speed(Type298Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type298_pump_speed_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type298_pump_speed_nset, self->data_ptr);
 }
 
 static PyObject *
 Type298_get_system_availability(Type298Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type298_system_availability_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type298_system_availability_nget, self->data_ptr);
 }
 
 static int
 Type298_set_system_availability(Type298Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type298_system_availability_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type298_system_availability_nset, self->data_ptr);
 }
 
 static PyObject *
 Type298_get_test_P_fan(Type298Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type298_test_P_fan_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type298_test_P_fan_nget, self->data_ptr);
 }
 
 static int
 Type298_set_test_P_fan(Type298Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type298_test_P_fan_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type298_test_P_fan_nset, self->data_ptr);
 }
 
 static PyObject *
 Type298_get_test_P_pump(Type298Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type298_test_P_pump_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type298_test_P_pump_nget, self->data_ptr);
 }
 
 static int
 Type298_set_test_P_pump(Type298Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type298_test_P_pump_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type298_test_P_pump_nset, self->data_ptr);
 }
 
 static PyObject *
 Type298_get_test_T_fluid(Type298Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type298_test_T_fluid_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type298_test_T_fluid_nget, self->data_ptr);
 }
 
 static int
 Type298_set_test_T_fluid(Type298Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type298_test_T_fluid_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type298_test_T_fluid_nset, self->data_ptr);
 }
 
 static PyObject *
 Type298_get_test_V_dot_fluid(Type298Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type298_test_V_dot_fluid_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type298_test_V_dot_fluid_nget, self->data_ptr);
 }
 
 static int
 Type298_set_test_V_dot_fluid(Type298Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type298_test_V_dot_fluid_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type298_test_V_dot_fluid_nset, self->data_ptr);
 }
 
 static PyObject *
 Type298_get_test_cooling_fluid(Type298Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type298_test_cooling_fluid_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type298_test_cooling_fluid_nget, self->data_ptr);
 }
 
 static int
 Type298_set_test_cooling_fluid(Type298Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type298_test_cooling_fluid_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type298_test_cooling_fluid_nset, self->data_ptr);
 }
 
 static PyObject *
 Type298_get_test_fan_cfm(Type298Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type298_test_fan_cfm_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type298_test_fan_cfm_nget, self->data_ptr);
 }
 
 static int
 Type298_set_test_fan_cfm(Type298Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type298_test_fan_cfm_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type298_test_fan_cfm_nset, self->data_ptr);
 }
 
 static PyObject *
 Type298_get_test_fan_rho_air(Type298Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type298_test_fan_rho_air_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type298_test_fan_rho_air_nget, self->data_ptr);
 }
 
 static int
 Type298_set_test_fan_rho_air(Type298Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type298_test_fan_rho_air_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type298_test_fan_rho_air_nset, self->data_ptr);
 }
 
 static PyObject *
 Type298_get_test_fan_speed(Type298Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type298_test_fan_speed_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type298_test_fan_speed_nget, self->data_ptr);
 }
 
 static int
 Type298_set_test_fan_speed(Type298Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type298_test_fan_speed_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type298_test_fan_speed_nset, self->data_ptr);
 }
 
 static PyObject *
 Type298_get_test_pump_speed(Type298Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type298_test_pump_speed_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type298_test_pump_speed_nget, self->data_ptr);
 }
 
 static int
 Type298_set_test_pump_speed(Type298Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type298_test_pump_speed_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type298_test_pump_speed_nset, self->data_ptr);
 }
 
 static PyObject *
 Type298_get_tower_m_dot_water(Type298Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type298_tower_m_dot_water_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type298_tower_m_dot_water_nget, self->data_ptr);
 }
 
 static int
 Type298_set_tower_m_dot_water(Type298Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type298_tower_m_dot_water_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type298_tower_m_dot_water_nset, self->data_ptr);
 }
 
 static PyObject *
 Type298_get_tower_m_dot_water_test(Type298Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type298_tower_m_dot_water_test_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type298_tower_m_dot_water_test_nget, self->data_ptr);
 }
 
 static int
 Type298_set_tower_m_dot_water_test(Type298Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type298_tower_m_dot_water_test_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type298_tower_m_dot_water_test_nset, self->data_ptr);
 }
 
 static PyObject *
 Type298_get_tower_mode(Type298Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type298_tower_mode_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type298_tower_mode_nget, self->data_ptr);
 }
 
 static int
 Type298_set_tower_mode(Type298Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type298_tower_mode_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type298_tower_mode_nset, self->data_ptr);
 }
 
 static PyObject *
 Type298_get_tower_pipe_material(Type298Object *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Type298_tower_pipe_material_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Type298_tower_pipe_material_nget, self->data_ptr);
 }
 
 static int
 Type298_set_tower_pipe_material(Type298Object *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsdish_Type298_tower_pipe_material_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsdish_Type298_tower_pipe_material_nset, self->data_ptr);
 }
 
 static PyGetSetDef Type298_getset[] = {
 {"P_controls", (getter)Type298_get_P_controls,(setter)Type298_set_P_controls,
-	"Control System Parasitic Power, Avg. [W], number.\n Required.",
+	PyDoc_STR("type: Float\n\nControl System Parasitic Power, Avg. [W]\n\n*Required*: True"),
  	NULL},
 {"P_tower_fan", (getter)Type298_get_P_tower_fan,(setter)Type298_set_P_tower_fan,
-	"Tower fan power (set to 0) [kJ/hr], number.\n Required.",
+	PyDoc_STR("type: Float\n\nTower fan power (set to 0) [kJ/hr]\n\n*Required*: True"),
  	NULL},
 {"T_cool_speed2", (getter)Type298_get_T_cool_speed2,(setter)Type298_set_T_cool_speed2,
-	"Cooling Fluid Temp. For Fan Speed 2 Cut-In [C], number.\n Required.",
+	PyDoc_STR("type: Float\n\nCooling Fluid Temp. For Fan Speed 2 Cut-In [C]\n\n*Required*: True"),
  	NULL},
 {"T_cool_speed3", (getter)Type298_get_T_cool_speed3,(setter)Type298_set_T_cool_speed3,
-	"Cooling Fluid Temp. For Fan Speed 3 Cut-In [C], number.\n Required.",
+	PyDoc_STR("type: Float\n\nCooling Fluid Temp. For Fan Speed 3 Cut-In [C]\n\n*Required*: True"),
  	NULL},
 {"Tower_water_outlet_temp", (getter)Type298_get_Tower_water_outlet_temp,(setter)Type298_set_Tower_water_outlet_temp,
-	"Tower water outlet temperature (set to 20) [C], number.\n Required.",
+	PyDoc_STR("type: Float\n\nTower water outlet temperature (set to 20) [C]\n\n*Required*: True"),
  	NULL},
 {"b_cooler", (getter)Type298_get_b_cooler,(setter)Type298_set_b_cooler,
-	"b_cooler parameter [-], number.\n Required.",
+	PyDoc_STR("type: Float\n\nb_cooler parameter [-]\n\n*Required*: True"),
  	NULL},
 {"b_radiator", (getter)Type298_get_b_radiator,(setter)Type298_set_b_radiator,
-	"b_radiator parameter [-], number.\n Required.",
+	PyDoc_STR("type: Float\n\nb_radiator parameter [-]\n\n*Required*: True"),
  	NULL},
 {"cooling_fluid", (getter)Type298_get_cooling_fluid,(setter)Type298_set_cooling_fluid,
-	"Reference Condition Cooling Fluid: 1=Water,2=V50%EG,3=V25%EG,4=V40%PG,5=V25%PG [-], number.\n Constraints: INTEGER; Required.",
+	PyDoc_STR("type: Float\n\nReference Condition Cooling Fluid: 1=Water,2=V50%EG,3=V25%EG,4=V40%PG,5=V25%PG [-]\n\n*Constraints*: INTEGER\n\n*Required*: True"),
  	NULL},
 {"cooling_tower_on", (getter)Type298_get_cooling_tower_on,(setter)Type298_set_cooling_tower_on,
-	"Option to use a cooling tower (set to 0=off) [-], number.\n Required.",
+	PyDoc_STR("type: Float\n\nOption to use a cooling tower (set to 0=off) [-]\n\n*Required*: True"),
  	NULL},
 {"d_pipe_tower", (getter)Type298_get_d_pipe_tower,(setter)Type298_set_d_pipe_tower,
-	"Runner pipe diameter to the cooling tower (set to 0.4m) [m], number.\n Required.",
+	PyDoc_STR("type: Float\n\nRunner pipe diameter to the cooling tower (set to 0.4m) [m]\n\n*Required*: True"),
  	NULL},
 {"epsilon_cooler_test", (getter)Type298_get_epsilon_cooler_test,(setter)Type298_set_epsilon_cooler_test,
-	"Cooler effectiveness [-], number.\n Required.",
+	PyDoc_STR("type: Float\n\nCooler effectiveness [-]\n\n*Required*: True"),
  	NULL},
 {"epsilon_power_test", (getter)Type298_get_epsilon_power_test,(setter)Type298_set_epsilon_power_test,
-	"Test value for cooling tower effectiveness (set to 0.7) [-], number.\n Required.",
+	PyDoc_STR("type: Float\n\nTest value for cooling tower effectiveness (set to 0.7) [-]\n\n*Required*: True"),
  	NULL},
 {"epsilon_radiator_test", (getter)Type298_get_epsilon_radiator_test,(setter)Type298_set_epsilon_radiator_test,
-	"Radiator effectiveness [-], number.\n Required.",
+	PyDoc_STR("type: Float\n\nRadiator effectiveness [-]\n\n*Required*: True"),
  	NULL},
 {"eta_tower_pump", (getter)Type298_get_eta_tower_pump,(setter)Type298_set_eta_tower_pump,
-	"Tower pump efficiency (set to 0.6) [-], number.\n Required.",
+	PyDoc_STR("type: Float\n\nTower pump efficiency (set to 0.6) [-]\n\n*Required*: True"),
  	NULL},
 {"ew_dish_separation", (getter)Type298_get_ew_dish_separation,(setter)Type298_set_ew_dish_separation,
-	"East-West dish separation used in the simulation [m], number.\n Required.",
+	PyDoc_STR("type: Float\n\nEast-West dish separation used in the simulation [m]\n\n*Required*: True"),
  	NULL},
 {"fan_control_signal", (getter)Type298_get_fan_control_signal,(setter)Type298_set_fan_control_signal,
-	"Fan control signal (set to 1, not used in this model) [-], number.\n Required.",
+	PyDoc_STR("type: Float\n\nFan control signal (set to 1, not used in this model) [-]\n\n*Required*: True"),
  	NULL},
 {"fan_speed1", (getter)Type298_get_fan_speed1,(setter)Type298_set_fan_speed1,
-	"Cooling system fan speed 1 [rpm], number.\n Required.",
+	PyDoc_STR("type: Float\n\nCooling system fan speed 1 [rpm]\n\n*Required*: True"),
  	NULL},
 {"fan_speed2", (getter)Type298_get_fan_speed2,(setter)Type298_set_fan_speed2,
-	"Cooling system fan speed 2 [rpm], number.\n Required.",
+	PyDoc_STR("type: Float\n\nCooling system fan speed 2 [rpm]\n\n*Required*: True"),
  	NULL},
 {"fan_speed3", (getter)Type298_get_fan_speed3,(setter)Type298_set_fan_speed3,
-	"Cooling system fan speed 3 [rpm], number.\n Required.",
+	PyDoc_STR("type: Float\n\nCooling system fan speed 3 [rpm]\n\n*Required*: True"),
  	NULL},
 {"ns_dish_separation", (getter)Type298_get_ns_dish_separation,(setter)Type298_set_ns_dish_separation,
-	"North-South dish separation used in the simulation [m], number.\n Required.",
+	PyDoc_STR("type: Float\n\nNorth-South dish separation used in the simulation [m]\n\n*Required*: True"),
  	NULL},
 {"pump_speed", (getter)Type298_get_pump_speed,(setter)Type298_set_pump_speed,
-	"Reference Condition Pump Speed [rpm], number.\n Required.",
+	PyDoc_STR("type: Float\n\nReference Condition Pump Speed [rpm]\n\n*Required*: True"),
  	NULL},
 {"system_availability", (getter)Type298_get_system_availability,(setter)Type298_set_system_availability,
-	"System availability (set to 1.0) [-], number.\n Required.",
+	PyDoc_STR("type: Float\n\nSystem availability (set to 1.0) [-]\n\n*Required*: True"),
  	NULL},
 {"test_P_fan", (getter)Type298_get_test_P_fan,(setter)Type298_set_test_P_fan,
-	"Reference Condition Cooling System Fan Power [W], number.\n Required.",
+	PyDoc_STR("type: Float\n\nReference Condition Cooling System Fan Power [W]\n\n*Required*: True"),
  	NULL},
 {"test_P_pump", (getter)Type298_get_test_P_pump,(setter)Type298_set_test_P_pump,
-	"Reference Condition Pump Parasitic Power [W], number.\n Required.",
+	PyDoc_STR("type: Float\n\nReference Condition Pump Parasitic Power [W]\n\n*Required*: True"),
  	NULL},
 {"test_T_fluid", (getter)Type298_get_test_T_fluid,(setter)Type298_set_test_T_fluid,
-	"Reference Condition Cooling Fluid Temperature [K], number.\n Required.",
+	PyDoc_STR("type: Float\n\nReference Condition Cooling Fluid Temperature [K]\n\n*Required*: True"),
  	NULL},
 {"test_V_dot_fluid", (getter)Type298_get_test_V_dot_fluid,(setter)Type298_set_test_V_dot_fluid,
-	"Reference Condition Cooling Fluid Volumetric Flow Rate [gpm], number.\n Required.",
+	PyDoc_STR("type: Float\n\nReference Condition Cooling Fluid Volumetric Flow Rate [gpm]\n\n*Required*: True"),
  	NULL},
 {"test_cooling_fluid", (getter)Type298_get_test_cooling_fluid,(setter)Type298_set_test_cooling_fluid,
-	"Reference Condition Cooling Fluid [-], number.\n Constraints: INTEGER; Required.",
+	PyDoc_STR("type: Float\n\nReference Condition Cooling Fluid [-]\n\n*Constraints*: INTEGER\n\n*Required*: True"),
  	NULL},
 {"test_fan_cfm", (getter)Type298_get_test_fan_cfm,(setter)Type298_set_test_fan_cfm,
-	"Reference condition van volumentric flow rate [cfm], number.\n Required.",
+	PyDoc_STR("type: Float\n\nReference condition van volumentric flow rate [cfm]\n\n*Required*: True"),
  	NULL},
 {"test_fan_rho_air", (getter)Type298_get_test_fan_rho_air,(setter)Type298_set_test_fan_rho_air,
-	"Reference condition fan air density [kg/m^3], number.\n Required.",
+	PyDoc_STR("type: Float\n\nReference condition fan air density [kg/m^3]\n\n*Required*: True"),
  	NULL},
 {"test_fan_speed", (getter)Type298_get_test_fan_speed,(setter)Type298_set_test_fan_speed,
-	"Reference Condition Cooling System Fan Speed [rpm], number.\n Required.",
+	PyDoc_STR("type: Float\n\nReference Condition Cooling System Fan Speed [rpm]\n\n*Required*: True"),
  	NULL},
 {"test_pump_speed", (getter)Type298_get_test_pump_speed,(setter)Type298_set_test_pump_speed,
-	"Reference Condition Pump Speed [rpm], number.\n Required.",
+	PyDoc_STR("type: Float\n\nReference Condition Pump Speed [rpm]\n\n*Required*: True"),
  	NULL},
 {"tower_m_dot_water", (getter)Type298_get_tower_m_dot_water,(setter)Type298_set_tower_m_dot_water,
-	"Tower cooling water flow rate (set to 134,000 kg/hr) [kg/s], number.\n Required.",
+	PyDoc_STR("type: Float\n\nTower cooling water flow rate (set to 134,000 kg/hr) [kg/s]\n\n*Required*: True"),
  	NULL},
 {"tower_m_dot_water_test", (getter)Type298_get_tower_m_dot_water_test,(setter)Type298_set_tower_m_dot_water_test,
-	"Test value for the cooling water flow rate (set to 134,000 kg/hr) [kg/s], number.\n Required.",
+	PyDoc_STR("type: Float\n\nTest value for the cooling water flow rate (set to 134,000 kg/hr) [kg/s]\n\n*Required*: True"),
  	NULL},
 {"tower_mode", (getter)Type298_get_tower_mode,(setter)Type298_set_tower_mode,
-	"Cooling tower type (natural or forced draft) [-], number.\n Required.",
+	PyDoc_STR("type: Float\n\nCooling tower type (natural or forced draft) [-]\n\n*Required*: True"),
  	NULL},
 {"tower_pipe_material", (getter)Type298_get_tower_pipe_material,(setter)Type298_set_tower_pipe_material,
-	"Tower pipe material (1=plastic, 2=new cast iron, 3=riveted steel) [-], number.\n Required.",
+	PyDoc_STR("type: Float\n\nTower pipe material (1=plastic, 2=new cast iron, 3=riveted steel) [-]\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1821,7 +1821,7 @@ static PyTypeObject Type298_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		Type298_methods,         /*tp_methods*/
@@ -1831,7 +1831,7 @@ static PyTypeObject Type298_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -1984,55 +1984,55 @@ Outputs_get_T_tower_out(OutputsObject *self, void *closure)
 static PyObject *
 Outputs_get_annual_Collector_Losses(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Outputs_annual_Collector_Losses_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Outputs_annual_Collector_Losses_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_annual_P_out_SE(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Outputs_annual_P_out_SE_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Outputs_annual_P_out_SE_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_annual_P_out_rec(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Outputs_annual_P_out_rec_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Outputs_annual_P_out_rec_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_annual_P_parasitic(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Outputs_annual_P_parasitic_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Outputs_annual_P_parasitic_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_annual_Power_in_collector(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Outputs_annual_Power_in_collector_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Outputs_annual_Power_in_collector_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_annual_Power_in_rec(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Outputs_annual_Power_in_rec_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Outputs_annual_Power_in_rec_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_annual_Power_out_col(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Outputs_annual_Power_out_col_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Outputs_annual_Power_out_col_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_annual_Q_rec_losses(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Outputs_annual_Q_rec_losses_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Outputs_annual_Q_rec_losses_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_annual_energy(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Outputs_annual_energy_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Outputs_annual_energy_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -2044,13 +2044,13 @@ Outputs_get_beam(OutputsObject *self, void *closure)
 static PyObject *
 Outputs_get_capacity_factor(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Outputs_capacity_factor_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Outputs_capacity_factor_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_conversion_factor(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Outputs_conversion_factor_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Outputs_conversion_factor_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -2146,7 +2146,7 @@ Outputs_get_hourly_Q_rec_losses(OutputsObject *self, void *closure)
 static PyObject *
 Outputs_get_kwh_per_kw(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsdish_Outputs_kwh_per_kw_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsdish_Outputs_kwh_per_kw_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -2253,181 +2253,181 @@ Outputs_get_wspd(OutputsObject *self, void *closure)
 
 static PyGetSetDef Outputs_getset[] = {
 {"Collector_Losses", (getter)Outputs_get_Collector_Losses,(setter)0,
-	"Collector loss total [kWt], array.",
+	PyDoc_STR("type: Sequence\n\nCollector loss total [kWt]"),
  	NULL},
 {"P_SE_losses", (getter)Outputs_get_P_SE_losses,(setter)0,
-	"Engine power loss [kWt], array.",
+	PyDoc_STR("type: Sequence\n\nEngine power loss [kWt]"),
  	NULL},
 {"P_out_SE", (getter)Outputs_get_P_out_SE,(setter)0,
-	"Engine power output (gross) [kWe], array.",
+	PyDoc_STR("type: Sequence\n\nEngine power output (gross) [kWe]"),
  	NULL},
 {"P_out_rec", (getter)Outputs_get_P_out_rec,(setter)0,
-	"Receiver thermal power output [kWt], array.",
+	PyDoc_STR("type: Sequence\n\nReceiver thermal power output [kWt]"),
  	NULL},
 {"P_parasitic", (getter)Outputs_get_P_parasitic,(setter)0,
-	"Parasitic power [We], array.",
+	PyDoc_STR("type: Sequence\n\nParasitic power [We]"),
  	NULL},
 {"Phi_shade", (getter)Outputs_get_Phi_shade,(setter)0,
-	"Collector shading efficiency, array.",
+	PyDoc_STR("type: Sequence\n\nCollector shading efficiency"),
  	NULL},
 {"Power_in_collector", (getter)Outputs_get_Power_in_collector,(setter)0,
-	"Collector thermal power incident [kWt], array.",
+	PyDoc_STR("type: Sequence\n\nCollector thermal power incident [kWt]"),
  	NULL},
 {"Power_in_rec", (getter)Outputs_get_Power_in_rec,(setter)0,
-	"Receiver thermal power input [kWt], array.",
+	PyDoc_STR("type: Sequence\n\nReceiver thermal power input [kWt]"),
  	NULL},
 {"Power_out_col", (getter)Outputs_get_Power_out_col,(setter)0,
-	"Collector thermal power produced [kWt], array.",
+	PyDoc_STR("type: Sequence\n\nCollector thermal power produced [kWt]"),
  	NULL},
 {"Q_rec_losses", (getter)Outputs_get_Q_rec_losses,(setter)0,
-	"Receiver thermal power loss [kWt], array.",
+	PyDoc_STR("type: Sequence\n\nReceiver thermal power loss [kWt]"),
  	NULL},
 {"T_compression", (getter)Outputs_get_T_compression,(setter)0,
-	"Engine compression temperature [K], array.",
+	PyDoc_STR("type: Sequence\n\nEngine compression temperature [K]"),
  	NULL},
 {"T_heater_head_operate", (getter)Outputs_get_T_heater_head_operate,(setter)0,
-	"Receiver temperature - head operating [K], array.",
+	PyDoc_STR("type: Sequence\n\nReceiver temperature - head operating [K]"),
  	NULL},
 {"T_tower_in", (getter)Outputs_get_T_tower_in,(setter)0,
-	"Cooling fluid temperature - cooler out/tower in [C], array.",
+	PyDoc_STR("type: Sequence\n\nCooling fluid temperature - cooler out/tower in [C]"),
  	NULL},
 {"T_tower_out", (getter)Outputs_get_T_tower_out,(setter)0,
-	"Cooling fluid temperature - cooler in/tower out [C], array.",
+	PyDoc_STR("type: Sequence\n\nCooling fluid temperature - cooler in/tower out [C]"),
  	NULL},
 {"annual_Collector_Losses", (getter)Outputs_get_annual_Collector_Losses,(setter)0,
-	"Total collector losses (Incident - P_out) [MWh], number.",
+	PyDoc_STR("type: Float\n\nTotal collector losses (Incident - P_out) [MWh]"),
  	NULL},
 {"annual_P_out_SE", (getter)Outputs_get_annual_P_out_SE,(setter)0,
-	"Stirling engine gross output [MWh], number.",
+	PyDoc_STR("type: Float\n\nStirling engine gross output [MWh]"),
  	NULL},
 {"annual_P_out_rec", (getter)Outputs_get_annual_P_out_rec,(setter)0,
-	"Receiver output power [MWh], number.",
+	PyDoc_STR("type: Float\n\nReceiver output power [MWh]"),
  	NULL},
 {"annual_P_parasitic", (getter)Outputs_get_annual_P_parasitic,(setter)0,
-	"Total parasitic power load [MWh], number.",
+	PyDoc_STR("type: Float\n\nTotal parasitic power load [MWh]"),
  	NULL},
 {"annual_Power_in_collector", (getter)Outputs_get_annual_Power_in_collector,(setter)0,
-	"Power incident on the collector [MWh], number.",
+	PyDoc_STR("type: Float\n\nPower incident on the collector [MWh]"),
  	NULL},
 {"annual_Power_in_rec", (getter)Outputs_get_annual_Power_in_rec,(setter)0,
-	"Power entering the receiver from the collector [MWh], number.",
+	PyDoc_STR("type: Float\n\nPower entering the receiver from the collector [MWh]"),
  	NULL},
 {"annual_Power_out_col", (getter)Outputs_get_annual_Power_out_col,(setter)0,
-	"Total power from the collector dish [MWh], number.",
+	PyDoc_STR("type: Float\n\nTotal power from the collector dish [MWh]"),
  	NULL},
 {"annual_Q_rec_losses", (getter)Outputs_get_annual_Q_rec_losses,(setter)0,
-	"Receiver thermal losses [MWh], number.",
+	PyDoc_STR("type: Float\n\nReceiver thermal losses [MWh]"),
  	NULL},
 {"annual_energy", (getter)Outputs_get_annual_energy,(setter)0,
-	"Annual Energy [kWh], number.",
+	PyDoc_STR("type: Float\n\nAnnual Energy [kWh]"),
  	NULL},
 {"beam", (getter)Outputs_get_beam,(setter)0,
-	"Resource Beam normal irradiance [W/m2], array.",
+	PyDoc_STR("type: Sequence\n\nResource Beam normal irradiance [W/m2]"),
  	NULL},
 {"capacity_factor", (getter)Outputs_get_capacity_factor,(setter)0,
-	"Capacity factor [%], number.",
+	PyDoc_STR("type: Float\n\nCapacity factor [%]"),
  	NULL},
 {"conversion_factor", (getter)Outputs_get_conversion_factor,(setter)0,
-	"Gross to Net Conversion Factor [%], number.",
+	PyDoc_STR("type: Float\n\nGross to Net Conversion Factor [%]"),
  	NULL},
 {"engine_pressure", (getter)Outputs_get_engine_pressure,(setter)0,
-	"Engine pressure [Pa], array.",
+	PyDoc_STR("type: Sequence\n\nEngine pressure [Pa]"),
  	NULL},
 {"eta_SE", (getter)Outputs_get_eta_SE,(setter)0,
-	"Engine efficiency, array.",
+	PyDoc_STR("type: Sequence\n\nEngine efficiency"),
  	NULL},
 {"eta_collector", (getter)Outputs_get_eta_collector,(setter)0,
-	"Collector efficiency, array.",
+	PyDoc_STR("type: Sequence\n\nCollector efficiency"),
  	NULL},
 {"eta_net", (getter)Outputs_get_eta_net,(setter)0,
-	"System total: Net efficiency, array.",
+	PyDoc_STR("type: Sequence\n\nSystem total: Net efficiency"),
  	NULL},
 {"eta_rec", (getter)Outputs_get_eta_rec,(setter)0,
-	"Receiver efficiency, array.",
+	PyDoc_STR("type: Sequence\n\nReceiver efficiency"),
  	NULL},
 {"gen", (getter)Outputs_get_gen,(setter)0,
-	"System power generated [kW], array.",
+	PyDoc_STR("type: Sequence\n\nSystem power generated [kW]"),
  	NULL},
 {"hour", (getter)Outputs_get_hour,(setter)0,
-	"Resource Hour of Day, array.",
+	PyDoc_STR("type: Sequence\n\nResource Hour of Day"),
  	NULL},
 {"hourly_Collector_Losses", (getter)Outputs_get_hourly_Collector_Losses,(setter)0,
-	"System total: Collector loss total [MWt], array.",
+	PyDoc_STR("type: Sequence\n\nSystem total: Collector loss total [MWt]"),
  	NULL},
 {"hourly_P_out_SE", (getter)Outputs_get_hourly_P_out_SE,(setter)0,
-	"System total: Engine power output (gross) [MWe], array.",
+	PyDoc_STR("type: Sequence\n\nSystem total: Engine power output (gross) [MWe]"),
  	NULL},
 {"hourly_P_out_rec", (getter)Outputs_get_hourly_P_out_rec,(setter)0,
-	"System total: Receiver thermal power output [MWt], array.",
+	PyDoc_STR("type: Sequence\n\nSystem total: Receiver thermal power output [MWt]"),
  	NULL},
 {"hourly_P_parasitic", (getter)Outputs_get_hourly_P_parasitic,(setter)0,
-	"System total: Parasitic power [MWe], array.",
+	PyDoc_STR("type: Sequence\n\nSystem total: Parasitic power [MWe]"),
  	NULL},
 {"hourly_Power_in_collector", (getter)Outputs_get_hourly_Power_in_collector,(setter)0,
-	"System total: Collector thermal power incident [MWt], array.",
+	PyDoc_STR("type: Sequence\n\nSystem total: Collector thermal power incident [MWt]"),
  	NULL},
 {"hourly_Power_in_rec", (getter)Outputs_get_hourly_Power_in_rec,(setter)0,
-	"System total: Receiver thermal power input [MWt], array.",
+	PyDoc_STR("type: Sequence\n\nSystem total: Receiver thermal power input [MWt]"),
  	NULL},
 {"hourly_Power_out_col", (getter)Outputs_get_hourly_Power_out_col,(setter)0,
-	"System total: Collector thermal power produced [MWt], array.",
+	PyDoc_STR("type: Sequence\n\nSystem total: Collector thermal power produced [MWt]"),
  	NULL},
 {"hourly_Q_rec_losses", (getter)Outputs_get_hourly_Q_rec_losses,(setter)0,
-	"System total: Receiver thermal loss [MWt], array.",
+	PyDoc_STR("type: Sequence\n\nSystem total: Receiver thermal loss [MWt]"),
  	NULL},
 {"kwh_per_kw", (getter)Outputs_get_kwh_per_kw,(setter)0,
-	"First year kWh/kW [kWh/kW], number.",
+	PyDoc_STR("type: Float\n\nFirst year kWh/kW [kWh/kW]"),
  	NULL},
 {"month", (getter)Outputs_get_month,(setter)0,
-	"Resource Month, array.",
+	PyDoc_STR("type: Sequence\n\nResource Month"),
  	NULL},
 {"monthly_Collector_Losses", (getter)Outputs_get_monthly_Collector_Losses,(setter)0,
-	"Total collector losses (Incident - P_out) [MWh], array.",
+	PyDoc_STR("type: Sequence\n\nTotal collector losses (Incident - P_out) [MWh]"),
  	NULL},
 {"monthly_P_out_SE", (getter)Outputs_get_monthly_P_out_SE,(setter)0,
-	"Stirling engine gross output [MWh], array.",
+	PyDoc_STR("type: Sequence\n\nStirling engine gross output [MWh]"),
  	NULL},
 {"monthly_P_out_rec", (getter)Outputs_get_monthly_P_out_rec,(setter)0,
-	"Receiver output power [MWh], array.",
+	PyDoc_STR("type: Sequence\n\nReceiver output power [MWh]"),
  	NULL},
 {"monthly_P_parasitic", (getter)Outputs_get_monthly_P_parasitic,(setter)0,
-	"Total parasitic power load [MWh], array.",
+	PyDoc_STR("type: Sequence\n\nTotal parasitic power load [MWh]"),
  	NULL},
 {"monthly_Power_in_collector", (getter)Outputs_get_monthly_Power_in_collector,(setter)0,
-	"Power incident on the collector [MWh], array.",
+	PyDoc_STR("type: Sequence\n\nPower incident on the collector [MWh]"),
  	NULL},
 {"monthly_Power_in_rec", (getter)Outputs_get_monthly_Power_in_rec,(setter)0,
-	"Power entering the receiver from the collector [MWh], array.",
+	PyDoc_STR("type: Sequence\n\nPower entering the receiver from the collector [MWh]"),
  	NULL},
 {"monthly_Power_out_col", (getter)Outputs_get_monthly_Power_out_col,(setter)0,
-	"Total power from the collector dish [MWh], array.",
+	PyDoc_STR("type: Sequence\n\nTotal power from the collector dish [MWh]"),
  	NULL},
 {"monthly_Q_rec_losses", (getter)Outputs_get_monthly_Q_rec_losses,(setter)0,
-	"Receiver thermal losses [MWh], array.",
+	PyDoc_STR("type: Sequence\n\nReceiver thermal losses [MWh]"),
  	NULL},
 {"monthly_energy", (getter)Outputs_get_monthly_energy,(setter)0,
-	"Monthly Energy [kWh], array.",
+	PyDoc_STR("type: Sequence\n\nMonthly Energy [kWh]"),
  	NULL},
 {"net_power", (getter)Outputs_get_net_power,(setter)0,
-	"Engine power output (net) [kWe], array.",
+	PyDoc_STR("type: Sequence\n\nEngine power output (net) [kWe]"),
  	NULL},
 {"pres", (getter)Outputs_get_pres,(setter)0,
-	"Resource Pressure [mbar], array.",
+	PyDoc_STR("type: Sequence\n\nResource Pressure [mbar]"),
  	NULL},
 {"solazi", (getter)Outputs_get_solazi,(setter)0,
-	"Resource Solar Azimuth [deg], array.",
+	PyDoc_STR("type: Sequence\n\nResource Solar Azimuth [deg]"),
  	NULL},
 {"solzen", (getter)Outputs_get_solzen,(setter)0,
-	"Resource Solar Zenith [deg], array.",
+	PyDoc_STR("type: Sequence\n\nResource Solar Zenith [deg]"),
  	NULL},
 {"tdry", (getter)Outputs_get_tdry,(setter)0,
-	"Resource Dry bulb temperature [C], array.",
+	PyDoc_STR("type: Sequence\n\nResource Dry bulb temperature [C]"),
  	NULL},
 {"twet", (getter)Outputs_get_twet,(setter)0,
-	"Resource Wet bulb temperature [C], array.",
+	PyDoc_STR("type: Sequence\n\nResource Wet bulb temperature [C]"),
  	NULL},
 {"wspd", (getter)Outputs_get_wspd,(setter)0,
-	"Resource Wind Speed [m/s], array.",
+	PyDoc_STR("type: Sequence\n\nResource Wind Speed [m/s]"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -2460,7 +2460,7 @@ static PyTypeObject Outputs_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		Outputs_methods,         /*tp_methods*/
@@ -2470,7 +2470,7 @@ static PyTypeObject Outputs_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -2603,7 +2603,7 @@ static PyMethodDef Tcsdish_methods[] = {
 		{"assign",            (PyCFunction)Tcsdish_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs")},
 		{"export",            (PyCFunction)Tcsdish_export,  METH_VARARGS,
-				PyDoc_STR("assign() -> None\n Export attributes into dictionary")},
+				PyDoc_STR("export() -> None\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -2643,11 +2643,11 @@ static PyTypeObject Tcsdish_Type = {
 		0,                          /*tp_setattro*/
 		0,                          /*tp_as_buffer*/
 		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
-		"see html for help",        /*tp_doc*/
+		"Wrapper for `cmod_tcsdish.cpp <https://github.com/NREL/ssc/blob/develop/ssc/cmod_tcsdish.cpp>`_",        /*tp_doc*/
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		Tcsdish_methods,      /*tp_methods*/
@@ -2657,7 +2657,7 @@ static PyTypeObject Tcsdish_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,                          /*tp_new*/
@@ -2722,10 +2722,10 @@ static PyMethodDef TcsdishModule_methods[] = {
 		{"new",             Tcsdish_new,         METH_VARARGS,
 				PyDoc_STR("new() -> new Tcsdish object")},
 		{"default",             Tcsdish_default,         METH_VARARGS,
-				PyDoc_STR("default(financial) -> new Tcsdish object with financial model-specific default attributes\n"
-				"Options: DishStirlingAllEquityPartnershipFlip\nDishStirlingCommercial\nDishStirlingCommercialPPA\nDishStirlingIndependentPowerProducer\nDishStirlingLCOECalculator\nDishStirlingLeveragedPartnershipFlip\nDishStirlingNone\nDishStirlingSaleLeaseback\nDishStirlingSingleOwner")},
+				PyDoc_STR("default(config) -> new Tcsdish object with financial model-specific default attributes\n"
+				"config options:\n\n- \"DishStirlingAllEquityPartnershipFlip\"\n- \"DishStirlingCommercial\"\n- \"DishStirlingCommercialPPA\"\n- \"DishStirlingIndependentPowerProducer\"\n- \"DishStirlingLCOECalculator\"\n- \"DishStirlingLeveragedPartnershipFlip\"\n- \"DishStirlingNone\"\n- \"DishStirlingSaleLeaseback\"\n- \"DishStirlingSingleOwner\"")},
 		{"wrap",             Tcsdish_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> new Tcsdish object around existing PySSC data, taking over memory ownership")},
+				PyDoc_STR("wrap(ssc_data_t) -> new Tcsdish object around existing PySSC data, taking over memory ownership\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to `wrap`")},
 		{NULL,              NULL}           /* sentinel */
 };
 
