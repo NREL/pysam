@@ -39,6 +39,11 @@ import time
 import multiprocessing
 from itertools import product
 
+x = np.arange(1, 11)
+y = np.arange(1, 11)
+
+X,Y = np.meshgrid(x, y)
+
 multi1 = time.process_time()
 
 if __name__ == '__main__':
