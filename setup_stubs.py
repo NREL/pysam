@@ -24,7 +24,7 @@ setup(
     version='1.2',
     distclass=distclass,
     url='http://www.github.com/nrel/pysam',
-    description="National Renewable Energy Laboratory's System Advisor Model Python Wrapper",
+    description="National Renewable Energy Laboratory's System Advisor Model Python Wrapper, stub files",
     long_description=long_description,
     long_description_content_type='text/markdown',
     license='BSD 3-Clause',
