@@ -58,57 +58,57 @@ Common_export(CommonObject *self, PyObject *args)
 
 static PyMethodDef Common_methods[] = {
 		{"assign",            (PyCFunction)Common_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Common_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Common_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 static PyObject *
 Common_get_TOU_demand_single_peak(CommonObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Utilityrate5_Common_TOU_demand_single_peak_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Utilityrate5_Common_TOU_demand_single_peak_nget, self->data_ptr);
 }
 
 static int
 Common_set_TOU_demand_single_peak(CommonObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Utilityrate5_Common_TOU_demand_single_peak_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Utilityrate5_Common_TOU_demand_single_peak_nset, self->data_ptr);
 }
 
 static PyObject *
 Common_get_en_electricity_rates(CommonObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Utilityrate5_Common_en_electricity_rates_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Utilityrate5_Common_en_electricity_rates_nget, self->data_ptr);
 }
 
 static int
 Common_set_en_electricity_rates(CommonObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Utilityrate5_Common_en_electricity_rates_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Utilityrate5_Common_en_electricity_rates_nset, self->data_ptr);
 }
 
 static PyObject *
 Common_get_ur_sell_eq_buy(CommonObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Utilityrate5_Common_ur_sell_eq_buy_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Utilityrate5_Common_ur_sell_eq_buy_nget, self->data_ptr);
 }
 
 static int
 Common_set_ur_sell_eq_buy(CommonObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Utilityrate5_Common_ur_sell_eq_buy_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Utilityrate5_Common_ur_sell_eq_buy_nset, self->data_ptr);
 }
 
 static PyGetSetDef Common_getset[] = {
 {"TOU_demand_single_peak", (getter)Common_get_TOU_demand_single_peak,(setter)Common_set_TOU_demand_single_peak,
-	"Use single monthly peak for TOU demand charge [0/1], number.\n 0=use TOU peak,1=use flat peak; Constraints: INTEGER,MIN=0,MAX=1; 0 if not set.",
+	PyDoc_STR("*float*: Use single monthly peak for TOU demand charge [0/1]\n\n*Options*: 0=use TOU peak,1=use flat peak\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"en_electricity_rates", (getter)Common_get_en_electricity_rates,(setter)Common_set_en_electricity_rates,
-	"Optionally enable/disable electricity_rate [years], number.\n Constraints: INTEGER,MIN=0,MAX=1; ",
+	PyDoc_STR("*float*: Optionally enable/disable electricity_rate [years]\n\n*Constraints*: INTEGER,MIN=0,MAX=1"),
  	NULL},
 {"ur_sell_eq_buy", (getter)Common_get_ur_sell_eq_buy,(setter)Common_set_ur_sell_eq_buy,
-	"Set sell rate equal to buy rate [0/1], number.\n Optional override; Constraints: BOOLEAN; 0 if not set.",
+	PyDoc_STR("*float*: Set sell rate equal to buy rate [0/1]\n\n*Info*: Optional override\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -141,7 +141,7 @@ static PyTypeObject Common_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		Common_methods,         /*tp_methods*/
@@ -151,7 +151,7 @@ static PyTypeObject Common_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -211,57 +211,57 @@ Lifetime_export(LifetimeObject *self, PyObject *args)
 
 static PyMethodDef Lifetime_methods[] = {
 		{"assign",            (PyCFunction)Lifetime_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Lifetime_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Lifetime_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 static PyObject *
 Lifetime_get_analysis_period(LifetimeObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Utilityrate5_Lifetime_analysis_period_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Utilityrate5_Lifetime_analysis_period_nget, self->data_ptr);
 }
 
 static int
 Lifetime_set_analysis_period(LifetimeObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Utilityrate5_Lifetime_analysis_period_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Utilityrate5_Lifetime_analysis_period_nset, self->data_ptr);
 }
 
 static PyObject *
 Lifetime_get_inflation_rate(LifetimeObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Utilityrate5_Lifetime_inflation_rate_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Utilityrate5_Lifetime_inflation_rate_nget, self->data_ptr);
 }
 
 static int
 Lifetime_set_inflation_rate(LifetimeObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Utilityrate5_Lifetime_inflation_rate_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Utilityrate5_Lifetime_inflation_rate_nset, self->data_ptr);
 }
 
 static PyObject *
 Lifetime_get_system_use_lifetime_output(LifetimeObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Utilityrate5_Lifetime_system_use_lifetime_output_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Utilityrate5_Lifetime_system_use_lifetime_output_nget, self->data_ptr);
 }
 
 static int
 Lifetime_set_system_use_lifetime_output(LifetimeObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Utilityrate5_Lifetime_system_use_lifetime_output_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Utilityrate5_Lifetime_system_use_lifetime_output_nset, self->data_ptr);
 }
 
 static PyGetSetDef Lifetime_getset[] = {
 {"analysis_period", (getter)Lifetime_get_analysis_period,(setter)Lifetime_set_analysis_period,
-	"Number of years in analysis [years], number.\n Constraints: INTEGER,POSITIVE; Required.",
+	PyDoc_STR("*float*: Number of years in analysis [years]\n\n*Constraints*: INTEGER,POSITIVE\n\n*Required*: True"),
  	NULL},
 {"inflation_rate", (getter)Lifetime_get_inflation_rate,(setter)Lifetime_set_inflation_rate,
-	"Inflation rate [%], number.\n Constraints: MIN=-99; Required.",
+	PyDoc_STR("*float*: Inflation rate [%]\n\n*Constraints*: MIN=-99\n\n*Required*: True"),
  	NULL},
 {"system_use_lifetime_output", (getter)Lifetime_get_system_use_lifetime_output,(setter)Lifetime_set_system_use_lifetime_output,
-	"Lifetime hourly system outputs [0/1], number.\n 0=hourly first year,1=hourly lifetime; Constraints: INTEGER,MIN=0,MAX=1; Required.",
+	PyDoc_STR("*float*: Lifetime hourly system outputs [0/1]\n\n*Options*: 0=hourly first year,1=hourly lifetime\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -294,7 +294,7 @@ static PyTypeObject Lifetime_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		Lifetime_methods,         /*tp_methods*/
@@ -304,7 +304,7 @@ static PyTypeObject Lifetime_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -364,9 +364,9 @@ SystemOutput_export(SystemOutputObject *self, PyObject *args)
 
 static PyMethodDef SystemOutput_methods[] = {
 		{"assign",            (PyCFunction)SystemOutput_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``SystemOutput_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)SystemOutput_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -379,7 +379,7 @@ SystemOutput_get_degradation(SystemOutputObject *self, void *closure)
 static int
 SystemOutput_set_degradation(SystemOutputObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Utilityrate5_SystemOutput_degradation_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Utilityrate5_SystemOutput_degradation_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -391,15 +391,15 @@ SystemOutput_get_gen(SystemOutputObject *self, void *closure)
 static int
 SystemOutput_set_gen(SystemOutputObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Utilityrate5_SystemOutput_gen_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Utilityrate5_SystemOutput_gen_aset, self->data_ptr);
 }
 
 static PyGetSetDef SystemOutput_getset[] = {
 {"degradation", (getter)SystemOutput_get_degradation,(setter)SystemOutput_set_degradation,
-	"Annual energy degradation [%], array.\n Required.",
+	PyDoc_STR("*sequence*: Annual energy degradation [%]\n\n*Required*: True"),
  	NULL},
 {"gen", (getter)SystemOutput_get_gen,(setter)SystemOutput_set_gen,
-	"System power generated [kW], array.\n Required.",
+	PyDoc_STR("*sequence*: System power generated [kW]\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -432,7 +432,7 @@ static PyTypeObject SystemOutput_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		SystemOutput_methods,         /*tp_methods*/
@@ -442,7 +442,7 @@ static PyTypeObject SystemOutput_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -502,9 +502,9 @@ TimeSeries_export(TimeSeriesObject *self, PyObject *args)
 
 static PyMethodDef TimeSeries_methods[] = {
 		{"assign",            (PyCFunction)TimeSeries_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``TimeSeries_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)TimeSeries_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -517,12 +517,12 @@ TimeSeries_get_load(TimeSeriesObject *self, void *closure)
 static int
 TimeSeries_set_load(TimeSeriesObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Utilityrate5_TimeSeries_load_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Utilityrate5_TimeSeries_load_aset, self->data_ptr);
 }
 
 static PyGetSetDef TimeSeries_getset[] = {
 {"load", (getter)TimeSeries_get_load,(setter)TimeSeries_set_load,
-	"Electricity load (year 1) [kW], array.\n ",
+	PyDoc_STR("*sequence*: Electricity load (year 1) [kW]"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -555,7 +555,7 @@ static PyTypeObject TimeSeries_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		TimeSeries_methods,         /*tp_methods*/
@@ -565,7 +565,7 @@ static PyTypeObject TimeSeries_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -625,9 +625,9 @@ ElectricLoad_export(ElectricLoadObject *self, PyObject *args)
 
 static PyMethodDef ElectricLoad_methods[] = {
 		{"assign",            (PyCFunction)ElectricLoad_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``ElectricLoad_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)ElectricLoad_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -640,12 +640,12 @@ ElectricLoad_get_load_escalation(ElectricLoadObject *self, void *closure)
 static int
 ElectricLoad_set_load_escalation(ElectricLoadObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Utilityrate5_ElectricLoad_load_escalation_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Utilityrate5_ElectricLoad_load_escalation_aset, self->data_ptr);
 }
 
 static PyGetSetDef ElectricLoad_getset[] = {
 {"load_escalation", (getter)ElectricLoad_get_load_escalation,(setter)ElectricLoad_set_load_escalation,
-	"Annual load escalation [%/year], array.\n 0 if not set.",
+	PyDoc_STR("*sequence*: Annual load escalation [%/year]\n\n*Required*: set to 0 if not provided."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -678,7 +678,7 @@ static PyTypeObject ElectricLoad_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		ElectricLoad_methods,         /*tp_methods*/
@@ -688,7 +688,7 @@ static PyTypeObject ElectricLoad_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -748,9 +748,9 @@ UtilityRateFlat_export(UtilityRateFlatObject *self, PyObject *args)
 
 static PyMethodDef UtilityRateFlat_methods[] = {
 		{"assign",            (PyCFunction)UtilityRateFlat_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``UtilityRateFlat_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)UtilityRateFlat_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -763,79 +763,79 @@ UtilityRateFlat_get_rate_escalation(UtilityRateFlatObject *self, void *closure)
 static int
 UtilityRateFlat_set_rate_escalation(UtilityRateFlatObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Utilityrate5_UtilityRateFlat_rate_escalation_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Utilityrate5_UtilityRateFlat_rate_escalation_aset, self->data_ptr);
 }
 
 static PyObject *
 UtilityRateFlat_get_ur_annual_min_charge(UtilityRateFlatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Utilityrate5_UtilityRateFlat_ur_annual_min_charge_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Utilityrate5_UtilityRateFlat_ur_annual_min_charge_nget, self->data_ptr);
 }
 
 static int
 UtilityRateFlat_set_ur_annual_min_charge(UtilityRateFlatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Utilityrate5_UtilityRateFlat_ur_annual_min_charge_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Utilityrate5_UtilityRateFlat_ur_annual_min_charge_nset, self->data_ptr);
 }
 
 static PyObject *
 UtilityRateFlat_get_ur_en_ts_sell_rate(UtilityRateFlatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Utilityrate5_UtilityRateFlat_ur_en_ts_sell_rate_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Utilityrate5_UtilityRateFlat_ur_en_ts_sell_rate_nget, self->data_ptr);
 }
 
 static int
 UtilityRateFlat_set_ur_en_ts_sell_rate(UtilityRateFlatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Utilityrate5_UtilityRateFlat_ur_en_ts_sell_rate_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Utilityrate5_UtilityRateFlat_ur_en_ts_sell_rate_nset, self->data_ptr);
 }
 
 static PyObject *
 UtilityRateFlat_get_ur_metering_option(UtilityRateFlatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Utilityrate5_UtilityRateFlat_ur_metering_option_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Utilityrate5_UtilityRateFlat_ur_metering_option_nget, self->data_ptr);
 }
 
 static int
 UtilityRateFlat_set_ur_metering_option(UtilityRateFlatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Utilityrate5_UtilityRateFlat_ur_metering_option_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Utilityrate5_UtilityRateFlat_ur_metering_option_nset, self->data_ptr);
 }
 
 static PyObject *
 UtilityRateFlat_get_ur_monthly_fixed_charge(UtilityRateFlatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Utilityrate5_UtilityRateFlat_ur_monthly_fixed_charge_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Utilityrate5_UtilityRateFlat_ur_monthly_fixed_charge_nget, self->data_ptr);
 }
 
 static int
 UtilityRateFlat_set_ur_monthly_fixed_charge(UtilityRateFlatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Utilityrate5_UtilityRateFlat_ur_monthly_fixed_charge_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Utilityrate5_UtilityRateFlat_ur_monthly_fixed_charge_nset, self->data_ptr);
 }
 
 static PyObject *
 UtilityRateFlat_get_ur_monthly_min_charge(UtilityRateFlatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Utilityrate5_UtilityRateFlat_ur_monthly_min_charge_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Utilityrate5_UtilityRateFlat_ur_monthly_min_charge_nget, self->data_ptr);
 }
 
 static int
 UtilityRateFlat_set_ur_monthly_min_charge(UtilityRateFlatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Utilityrate5_UtilityRateFlat_ur_monthly_min_charge_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Utilityrate5_UtilityRateFlat_ur_monthly_min_charge_nset, self->data_ptr);
 }
 
 static PyObject *
 UtilityRateFlat_get_ur_nm_yearend_sell_rate(UtilityRateFlatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Utilityrate5_UtilityRateFlat_ur_nm_yearend_sell_rate_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Utilityrate5_UtilityRateFlat_ur_nm_yearend_sell_rate_nget, self->data_ptr);
 }
 
 static int
 UtilityRateFlat_set_ur_nm_yearend_sell_rate(UtilityRateFlatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Utilityrate5_UtilityRateFlat_ur_nm_yearend_sell_rate_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Utilityrate5_UtilityRateFlat_ur_nm_yearend_sell_rate_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -847,33 +847,33 @@ UtilityRateFlat_get_ur_ts_sell_rate(UtilityRateFlatObject *self, void *closure)
 static int
 UtilityRateFlat_set_ur_ts_sell_rate(UtilityRateFlatObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Utilityrate5_UtilityRateFlat_ur_ts_sell_rate_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Utilityrate5_UtilityRateFlat_ur_ts_sell_rate_aset, self->data_ptr);
 }
 
 static PyGetSetDef UtilityRateFlat_getset[] = {
 {"rate_escalation", (getter)UtilityRateFlat_get_rate_escalation,(setter)UtilityRateFlat_set_rate_escalation,
-	"Annual electricity rate escalation [%/year], array.\n 0 if not set.",
+	PyDoc_STR("*sequence*: Annual electricity rate escalation [%/year]\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"ur_annual_min_charge", (getter)UtilityRateFlat_get_ur_annual_min_charge,(setter)UtilityRateFlat_set_ur_annual_min_charge,
-	"Annual minimum charge [$], number.\n Required if ?=0.0.",
+	PyDoc_STR("*float*: Annual minimum charge [$]\n\n*Required*: set to 0.0 if not provided."),
  	NULL},
 {"ur_en_ts_sell_rate", (getter)UtilityRateFlat_get_ur_en_ts_sell_rate,(setter)UtilityRateFlat_set_ur_en_ts_sell_rate,
-	"Enable time step sell rates [0/1], number.\n Constraints: BOOLEAN; 0 if not set.",
+	PyDoc_STR("*float*: Enable time step sell rates [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"ur_metering_option", (getter)UtilityRateFlat_get_ur_metering_option,(setter)UtilityRateFlat_set_ur_metering_option,
-	"Metering options [0=Single meter with monthly rollover credits in kWh,1=Single meter with monthly rollover credits in $,2=Single meter with no monthly rollover credits (Net Billing),3=Single meter with monthly rollover credits in $ (Net Billing $),4=Two meters with all generation sold and all load purchased], number.\n Net metering monthly excess; Constraints: INTEGER,MIN=0,MAX=4; 0 if not set.",
+	PyDoc_STR("*float*: Metering options [0=Single meter with monthly rollover credits in kWh,1=Single meter with monthly rollover credits in $,2=Single meter with no monthly rollover credits (Net Billing),3=Single meter with monthly rollover credits in $ (Net Billing $),4=Two meters with all generation sold and all load purchased]\n\n*Info*: Net metering monthly excess\n\n*Constraints*: INTEGER,MIN=0,MAX=4\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"ur_monthly_fixed_charge", (getter)UtilityRateFlat_get_ur_monthly_fixed_charge,(setter)UtilityRateFlat_set_ur_monthly_fixed_charge,
-	"Monthly fixed charge [$], number.\n Required if ?=0.0.",
+	PyDoc_STR("*float*: Monthly fixed charge [$]\n\n*Required*: set to 0.0 if not provided."),
  	NULL},
 {"ur_monthly_min_charge", (getter)UtilityRateFlat_get_ur_monthly_min_charge,(setter)UtilityRateFlat_set_ur_monthly_min_charge,
-	"Monthly minimum charge [$], number.\n Required if ?=0.0.",
+	PyDoc_STR("*float*: Monthly minimum charge [$]\n\n*Required*: set to 0.0 if not provided."),
  	NULL},
 {"ur_nm_yearend_sell_rate", (getter)UtilityRateFlat_get_ur_nm_yearend_sell_rate,(setter)UtilityRateFlat_set_ur_nm_yearend_sell_rate,
-	"Year end sell rate [$/kWh], number.\n Required if ?=0.0.",
+	PyDoc_STR("*float*: Year end sell rate [$/kWh]\n\n*Required*: set to 0.0 if not provided."),
  	NULL},
 {"ur_ts_sell_rate", (getter)UtilityRateFlat_get_ur_ts_sell_rate,(setter)UtilityRateFlat_set_ur_ts_sell_rate,
-	"Time step sell rates [0/1], array.\n ",
+	PyDoc_STR("*sequence*: Time step sell rates [0/1]"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -906,7 +906,7 @@ static PyTypeObject UtilityRateFlat_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		UtilityRateFlat_methods,         /*tp_methods*/
@@ -916,7 +916,7 @@ static PyTypeObject UtilityRateFlat_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -976,9 +976,9 @@ UtilityRateEnergyCharge_export(UtilityRateEnergyChargeObject *self, PyObject *ar
 
 static PyMethodDef UtilityRateEnergyCharge_methods[] = {
 		{"assign",            (PyCFunction)UtilityRateEnergyCharge_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``UtilityRateEnergyCharge_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)UtilityRateEnergyCharge_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -1020,13 +1020,13 @@ UtilityRateEnergyCharge_set_ur_ec_tou_mat(UtilityRateEnergyChargeObject *self, P
 
 static PyGetSetDef UtilityRateEnergyCharge_getset[] = {
 {"ur_ec_sched_weekday", (getter)UtilityRateEnergyCharge_get_ur_ec_sched_weekday,(setter)UtilityRateEnergyCharge_set_ur_ec_sched_weekday,
-	"Energy charge weekday schedule, matrix.\n 12x24; Required.",
+	PyDoc_STR("*sequence[sequence]*: Energy charge weekday schedule\n\n*Info*: 12x24\n\n*Required*: True"),
  	NULL},
 {"ur_ec_sched_weekend", (getter)UtilityRateEnergyCharge_get_ur_ec_sched_weekend,(setter)UtilityRateEnergyCharge_set_ur_ec_sched_weekend,
-	"Energy charge weekend schedule, matrix.\n 12x24; Required.",
+	PyDoc_STR("*sequence[sequence]*: Energy charge weekend schedule\n\n*Info*: 12x24\n\n*Required*: True"),
  	NULL},
 {"ur_ec_tou_mat", (getter)UtilityRateEnergyCharge_get_ur_ec_tou_mat,(setter)UtilityRateEnergyCharge_set_ur_ec_tou_mat,
-	"Energy rates table, matrix.\n Required.",
+	PyDoc_STR("*sequence[sequence]*: Energy rates table\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1059,7 +1059,7 @@ static PyTypeObject UtilityRateEnergyCharge_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		UtilityRateEnergyCharge_methods,         /*tp_methods*/
@@ -1069,7 +1069,7 @@ static PyTypeObject UtilityRateEnergyCharge_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -1129,22 +1129,22 @@ UtilityRateDemandCharge_export(UtilityRateDemandChargeObject *self, PyObject *ar
 
 static PyMethodDef UtilityRateDemandCharge_methods[] = {
 		{"assign",            (PyCFunction)UtilityRateDemandCharge_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``UtilityRateDemandCharge_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)UtilityRateDemandCharge_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 static PyObject *
 UtilityRateDemandCharge_get_ur_dc_enable(UtilityRateDemandChargeObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Utilityrate5_UtilityRateDemandCharge_ur_dc_enable_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Utilityrate5_UtilityRateDemandCharge_ur_dc_enable_nget, self->data_ptr);
 }
 
 static int
 UtilityRateDemandCharge_set_ur_dc_enable(UtilityRateDemandChargeObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Utilityrate5_UtilityRateDemandCharge_ur_dc_enable_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Utilityrate5_UtilityRateDemandCharge_ur_dc_enable_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -1197,19 +1197,19 @@ UtilityRateDemandCharge_set_ur_dc_tou_mat(UtilityRateDemandChargeObject *self, P
 
 static PyGetSetDef UtilityRateDemandCharge_getset[] = {
 {"ur_dc_enable", (getter)UtilityRateDemandCharge_get_ur_dc_enable,(setter)UtilityRateDemandCharge_set_ur_dc_enable,
-	"Enable demand charge [0/1], number.\n Constraints: BOOLEAN; 0 if not set.",
+	PyDoc_STR("*float*: Enable demand charge [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"ur_dc_flat_mat", (getter)UtilityRateDemandCharge_get_ur_dc_flat_mat,(setter)UtilityRateDemandCharge_set_ur_dc_flat_mat,
-	"Demand rates (flat) table, matrix.\n Required if ur_dc_enable=1.",
+	PyDoc_STR("*sequence[sequence]*: Demand rates (flat) table\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"ur_dc_sched_weekday", (getter)UtilityRateDemandCharge_get_ur_dc_sched_weekday,(setter)UtilityRateDemandCharge_set_ur_dc_sched_weekday,
-	"Demand charge weekday schedule, matrix.\n 12x24; ",
+	PyDoc_STR("*sequence[sequence]*: Demand charge weekday schedule\n\n*Info*: 12x24"),
  	NULL},
 {"ur_dc_sched_weekend", (getter)UtilityRateDemandCharge_get_ur_dc_sched_weekend,(setter)UtilityRateDemandCharge_set_ur_dc_sched_weekend,
-	"Demand charge weekend schedule, matrix.\n 12x24; ",
+	PyDoc_STR("*sequence[sequence]*: Demand charge weekend schedule\n\n*Info*: 12x24"),
  	NULL},
 {"ur_dc_tou_mat", (getter)UtilityRateDemandCharge_get_ur_dc_tou_mat,(setter)UtilityRateDemandCharge_set_ur_dc_tou_mat,
-	"Demand rates (TOU) table, matrix.\n Required if ur_dc_enable=1.",
+	PyDoc_STR("*sequence[sequence]*: Demand rates (TOU) table\n\n*Required*: set to 1 if not provided."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1242,7 +1242,7 @@ static PyTypeObject UtilityRateDemandCharge_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		UtilityRateDemandCharge_methods,         /*tp_methods*/
@@ -1252,7 +1252,7 @@ static PyTypeObject UtilityRateDemandCharge_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -1312,9 +1312,9 @@ Outputs_export(OutputsObject *self, PyObject *args)
 
 static PyMethodDef Outputs_methods[] = {
 		{"assign",            (PyCFunction)Outputs_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Outputs_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Outputs_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -1615,7 +1615,7 @@ Outputs_get_elec_cost_with_system(OutputsObject *self, void *closure)
 static PyObject *
 Outputs_get_elec_cost_with_system_year1(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Utilityrate5_Outputs_elec_cost_with_system_year1_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Utilityrate5_Outputs_elec_cost_with_system_year1_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -1627,7 +1627,7 @@ Outputs_get_elec_cost_without_system(OutputsObject *self, void *closure)
 static PyObject *
 Outputs_get_elec_cost_without_system_year1(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Utilityrate5_Outputs_elec_cost_without_system_year1_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Utilityrate5_Outputs_elec_cost_without_system_year1_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -1831,7 +1831,7 @@ Outputs_get_monthly_tou_demand_peak_wo_sys(OutputsObject *self, void *closure)
 static PyObject *
 Outputs_get_savings_year1(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Utilityrate5_Outputs_savings_year1_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Utilityrate5_Outputs_savings_year1_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -1933,7 +1933,7 @@ Outputs_get_utility_bill_wo_sys_ym(OutputsObject *self, void *closure)
 static PyObject *
 Outputs_get_year1_electric_load(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Utilityrate5_Outputs_year1_electric_load_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Utilityrate5_Outputs_year1_electric_load_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -2178,433 +2178,433 @@ Outputs_get_year1_monthly_utility_bill_wo_sys(OutputsObject *self, void *closure
 
 static PyGetSetDef Outputs_getset[] = {
 {"annual_electric_load", (getter)Outputs_get_annual_electric_load,(setter)0,
-	"Electricity load total in each year [kWh], array.",
+	PyDoc_STR("*sequence*: Electricity load total in each year [kWh]"),
  	NULL},
 {"annual_energy_value", (getter)Outputs_get_annual_energy_value,(setter)0,
-	"Energy value in each year [$], array.",
+	PyDoc_STR("*sequence*: Energy value in each year [$]"),
  	NULL},
 {"bill_load", (getter)Outputs_get_bill_load,(setter)0,
-	"Bill load (year 1) [kWh], array.",
+	PyDoc_STR("*sequence*: Bill load (year 1) [kWh]"),
  	NULL},
 {"charge_w_sys_dc_fixed", (getter)Outputs_get_charge_w_sys_dc_fixed,(setter)0,
-	"Demand charge with system (flat) [$], array.",
+	PyDoc_STR("*sequence*: Demand charge with system (flat) [$]"),
  	NULL},
 {"charge_w_sys_dc_fixed_ym", (getter)Outputs_get_charge_w_sys_dc_fixed_ym,(setter)0,
-	"Demand charge with system (flat) [$], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Demand charge with system (flat) [$]"),
  	NULL},
 {"charge_w_sys_dc_tou", (getter)Outputs_get_charge_w_sys_dc_tou,(setter)0,
-	"Demand charge with system (TOU) [$], array.",
+	PyDoc_STR("*sequence*: Demand charge with system (TOU) [$]"),
  	NULL},
 {"charge_w_sys_dc_tou_ym", (getter)Outputs_get_charge_w_sys_dc_tou_ym,(setter)0,
-	"Demand charge with system (TOU) [$], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Demand charge with system (TOU) [$]"),
  	NULL},
 {"charge_w_sys_ec", (getter)Outputs_get_charge_w_sys_ec,(setter)0,
-	"Energy charge with system [$], array.",
+	PyDoc_STR("*sequence*: Energy charge with system [$]"),
  	NULL},
 {"charge_w_sys_ec_apr_tp", (getter)Outputs_get_charge_w_sys_ec_apr_tp,(setter)0,
-	"Energy charge with system Apr [$], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Energy charge with system Apr [$]"),
  	NULL},
 {"charge_w_sys_ec_aug_tp", (getter)Outputs_get_charge_w_sys_ec_aug_tp,(setter)0,
-	"Energy charge with system Aug [$], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Energy charge with system Aug [$]"),
  	NULL},
 {"charge_w_sys_ec_dec_tp", (getter)Outputs_get_charge_w_sys_ec_dec_tp,(setter)0,
-	"Energy charge with system Dec [$], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Energy charge with system Dec [$]"),
  	NULL},
 {"charge_w_sys_ec_feb_tp", (getter)Outputs_get_charge_w_sys_ec_feb_tp,(setter)0,
-	"Energy charge with system Feb [$], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Energy charge with system Feb [$]"),
  	NULL},
 {"charge_w_sys_ec_gross_ym", (getter)Outputs_get_charge_w_sys_ec_gross_ym,(setter)0,
-	"Energy charge with system before credits [$], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Energy charge with system before credits [$]"),
  	NULL},
 {"charge_w_sys_ec_jan_tp", (getter)Outputs_get_charge_w_sys_ec_jan_tp,(setter)0,
-	"Energy charge with system Jan [$], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Energy charge with system Jan [$]"),
  	NULL},
 {"charge_w_sys_ec_jul_tp", (getter)Outputs_get_charge_w_sys_ec_jul_tp,(setter)0,
-	"Energy charge with system Jul [$], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Energy charge with system Jul [$]"),
  	NULL},
 {"charge_w_sys_ec_jun_tp", (getter)Outputs_get_charge_w_sys_ec_jun_tp,(setter)0,
-	"Energy charge with system Jun [$], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Energy charge with system Jun [$]"),
  	NULL},
 {"charge_w_sys_ec_mar_tp", (getter)Outputs_get_charge_w_sys_ec_mar_tp,(setter)0,
-	"Energy charge with system Mar [$], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Energy charge with system Mar [$]"),
  	NULL},
 {"charge_w_sys_ec_may_tp", (getter)Outputs_get_charge_w_sys_ec_may_tp,(setter)0,
-	"Energy charge with system May [$], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Energy charge with system May [$]"),
  	NULL},
 {"charge_w_sys_ec_nov_tp", (getter)Outputs_get_charge_w_sys_ec_nov_tp,(setter)0,
-	"Energy charge with system Nov [$], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Energy charge with system Nov [$]"),
  	NULL},
 {"charge_w_sys_ec_oct_tp", (getter)Outputs_get_charge_w_sys_ec_oct_tp,(setter)0,
-	"Energy charge with system Oct [$], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Energy charge with system Oct [$]"),
  	NULL},
 {"charge_w_sys_ec_sep_tp", (getter)Outputs_get_charge_w_sys_ec_sep_tp,(setter)0,
-	"Energy charge with system Sep [$], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Energy charge with system Sep [$]"),
  	NULL},
 {"charge_w_sys_ec_ym", (getter)Outputs_get_charge_w_sys_ec_ym,(setter)0,
-	"Energy charge with system [$], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Energy charge with system [$]"),
  	NULL},
 {"charge_w_sys_fixed", (getter)Outputs_get_charge_w_sys_fixed,(setter)0,
-	"Fixed monthly charge with system [$], array.",
+	PyDoc_STR("*sequence*: Fixed monthly charge with system [$]"),
  	NULL},
 {"charge_w_sys_fixed_ym", (getter)Outputs_get_charge_w_sys_fixed_ym,(setter)0,
-	"Fixed monthly charge with system [$], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Fixed monthly charge with system [$]"),
  	NULL},
 {"charge_w_sys_minimum", (getter)Outputs_get_charge_w_sys_minimum,(setter)0,
-	"Minimum charge with system [$], array.",
+	PyDoc_STR("*sequence*: Minimum charge with system [$]"),
  	NULL},
 {"charge_w_sys_minimum_ym", (getter)Outputs_get_charge_w_sys_minimum_ym,(setter)0,
-	"Minimum charge with system [$], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Minimum charge with system [$]"),
  	NULL},
 {"charge_wo_sys_dc_fixed", (getter)Outputs_get_charge_wo_sys_dc_fixed,(setter)0,
-	"Demand charge without system (flat) [$], array.",
+	PyDoc_STR("*sequence*: Demand charge without system (flat) [$]"),
  	NULL},
 {"charge_wo_sys_dc_fixed_ym", (getter)Outputs_get_charge_wo_sys_dc_fixed_ym,(setter)0,
-	"Demand charge without system (flat) [$], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Demand charge without system (flat) [$]"),
  	NULL},
 {"charge_wo_sys_dc_tou", (getter)Outputs_get_charge_wo_sys_dc_tou,(setter)0,
-	"Demand charge without system (TOU) [$], array.",
+	PyDoc_STR("*sequence*: Demand charge without system (TOU) [$]"),
  	NULL},
 {"charge_wo_sys_dc_tou_ym", (getter)Outputs_get_charge_wo_sys_dc_tou_ym,(setter)0,
-	"Demand charge without system (TOU) [$], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Demand charge without system (TOU) [$]"),
  	NULL},
 {"charge_wo_sys_ec", (getter)Outputs_get_charge_wo_sys_ec,(setter)0,
-	"Energy charge without system [$], array.",
+	PyDoc_STR("*sequence*: Energy charge without system [$]"),
  	NULL},
 {"charge_wo_sys_ec_apr_tp", (getter)Outputs_get_charge_wo_sys_ec_apr_tp,(setter)0,
-	"Energy charge without system Apr [$], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Energy charge without system Apr [$]"),
  	NULL},
 {"charge_wo_sys_ec_aug_tp", (getter)Outputs_get_charge_wo_sys_ec_aug_tp,(setter)0,
-	"Energy charge without system Aug [$], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Energy charge without system Aug [$]"),
  	NULL},
 {"charge_wo_sys_ec_dec_tp", (getter)Outputs_get_charge_wo_sys_ec_dec_tp,(setter)0,
-	"Energy charge without system Dec [$], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Energy charge without system Dec [$]"),
  	NULL},
 {"charge_wo_sys_ec_feb_tp", (getter)Outputs_get_charge_wo_sys_ec_feb_tp,(setter)0,
-	"Energy charge without system Feb [$], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Energy charge without system Feb [$]"),
  	NULL},
 {"charge_wo_sys_ec_jan_tp", (getter)Outputs_get_charge_wo_sys_ec_jan_tp,(setter)0,
-	"Energy charge without system Jan [$], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Energy charge without system Jan [$]"),
  	NULL},
 {"charge_wo_sys_ec_jul_tp", (getter)Outputs_get_charge_wo_sys_ec_jul_tp,(setter)0,
-	"Energy charge without system Jul [$], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Energy charge without system Jul [$]"),
  	NULL},
 {"charge_wo_sys_ec_jun_tp", (getter)Outputs_get_charge_wo_sys_ec_jun_tp,(setter)0,
-	"Energy charge without system Jun [$], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Energy charge without system Jun [$]"),
  	NULL},
 {"charge_wo_sys_ec_mar_tp", (getter)Outputs_get_charge_wo_sys_ec_mar_tp,(setter)0,
-	"Energy charge without system Mar [$], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Energy charge without system Mar [$]"),
  	NULL},
 {"charge_wo_sys_ec_may_tp", (getter)Outputs_get_charge_wo_sys_ec_may_tp,(setter)0,
-	"Energy charge without system May [$], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Energy charge without system May [$]"),
  	NULL},
 {"charge_wo_sys_ec_nov_tp", (getter)Outputs_get_charge_wo_sys_ec_nov_tp,(setter)0,
-	"Energy charge without system Nov [$], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Energy charge without system Nov [$]"),
  	NULL},
 {"charge_wo_sys_ec_oct_tp", (getter)Outputs_get_charge_wo_sys_ec_oct_tp,(setter)0,
-	"Energy charge without system Oct [$], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Energy charge without system Oct [$]"),
  	NULL},
 {"charge_wo_sys_ec_sep_tp", (getter)Outputs_get_charge_wo_sys_ec_sep_tp,(setter)0,
-	"Energy charge without system Sep [$], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Energy charge without system Sep [$]"),
  	NULL},
 {"charge_wo_sys_ec_ym", (getter)Outputs_get_charge_wo_sys_ec_ym,(setter)0,
-	"Energy charge without system [$], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Energy charge without system [$]"),
  	NULL},
 {"charge_wo_sys_fixed", (getter)Outputs_get_charge_wo_sys_fixed,(setter)0,
-	"Fixed monthly charge without system [$], array.",
+	PyDoc_STR("*sequence*: Fixed monthly charge without system [$]"),
  	NULL},
 {"charge_wo_sys_fixed_ym", (getter)Outputs_get_charge_wo_sys_fixed_ym,(setter)0,
-	"Fixed monthly charge without system [$], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Fixed monthly charge without system [$]"),
  	NULL},
 {"charge_wo_sys_minimum", (getter)Outputs_get_charge_wo_sys_minimum,(setter)0,
-	"Minimum charge without system [$], array.",
+	PyDoc_STR("*sequence*: Minimum charge without system [$]"),
  	NULL},
 {"charge_wo_sys_minimum_ym", (getter)Outputs_get_charge_wo_sys_minimum_ym,(setter)0,
-	"Minimum charge without system [$], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Minimum charge without system [$]"),
  	NULL},
 {"elec_cost_with_system", (getter)Outputs_get_elec_cost_with_system,(setter)0,
-	"Electricity bill with system [$/yr], array.",
+	PyDoc_STR("*sequence*: Electricity bill with system [$/yr]"),
  	NULL},
 {"elec_cost_with_system_year1", (getter)Outputs_get_elec_cost_with_system_year1,(setter)0,
-	"Electricity bill with system (year 1) [$/yr], number.",
+	PyDoc_STR("*float*: Electricity bill with system (year 1) [$/yr]"),
  	NULL},
 {"elec_cost_without_system", (getter)Outputs_get_elec_cost_without_system,(setter)0,
-	"Electricity bill without system [$/yr], array.",
+	PyDoc_STR("*sequence*: Electricity bill without system [$/yr]"),
  	NULL},
 {"elec_cost_without_system_year1", (getter)Outputs_get_elec_cost_without_system_year1,(setter)0,
-	"Electricity bill without system (year 1) [$/yr], number.",
+	PyDoc_STR("*float*: Electricity bill without system (year 1) [$/yr]"),
  	NULL},
 {"energy_w_sys_ec_apr_tp", (getter)Outputs_get_energy_w_sys_ec_apr_tp,(setter)0,
-	"Electricity usage with system Apr [kWh], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Electricity usage with system Apr [kWh]"),
  	NULL},
 {"energy_w_sys_ec_aug_tp", (getter)Outputs_get_energy_w_sys_ec_aug_tp,(setter)0,
-	"Electricity usage with system Aug [kWh], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Electricity usage with system Aug [kWh]"),
  	NULL},
 {"energy_w_sys_ec_dec_tp", (getter)Outputs_get_energy_w_sys_ec_dec_tp,(setter)0,
-	"Electricity usage with system Dec [kWh], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Electricity usage with system Dec [kWh]"),
  	NULL},
 {"energy_w_sys_ec_feb_tp", (getter)Outputs_get_energy_w_sys_ec_feb_tp,(setter)0,
-	"Electricity usage with system Feb [kWh], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Electricity usage with system Feb [kWh]"),
  	NULL},
 {"energy_w_sys_ec_jan_tp", (getter)Outputs_get_energy_w_sys_ec_jan_tp,(setter)0,
-	"Electricity usage with system Jan [kWh], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Electricity usage with system Jan [kWh]"),
  	NULL},
 {"energy_w_sys_ec_jul_tp", (getter)Outputs_get_energy_w_sys_ec_jul_tp,(setter)0,
-	"Electricity usage with system Jul [kWh], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Electricity usage with system Jul [kWh]"),
  	NULL},
 {"energy_w_sys_ec_jun_tp", (getter)Outputs_get_energy_w_sys_ec_jun_tp,(setter)0,
-	"Electricity usage with system Jun [kWh], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Electricity usage with system Jun [kWh]"),
  	NULL},
 {"energy_w_sys_ec_mar_tp", (getter)Outputs_get_energy_w_sys_ec_mar_tp,(setter)0,
-	"Electricity usage with system Mar [kWh], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Electricity usage with system Mar [kWh]"),
  	NULL},
 {"energy_w_sys_ec_may_tp", (getter)Outputs_get_energy_w_sys_ec_may_tp,(setter)0,
-	"Electricity usage with system May [kWh], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Electricity usage with system May [kWh]"),
  	NULL},
 {"energy_w_sys_ec_nov_tp", (getter)Outputs_get_energy_w_sys_ec_nov_tp,(setter)0,
-	"Electricity usage with system Nov [kWh], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Electricity usage with system Nov [kWh]"),
  	NULL},
 {"energy_w_sys_ec_oct_tp", (getter)Outputs_get_energy_w_sys_ec_oct_tp,(setter)0,
-	"Electricity usage with system Oct [kWh], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Electricity usage with system Oct [kWh]"),
  	NULL},
 {"energy_w_sys_ec_sep_tp", (getter)Outputs_get_energy_w_sys_ec_sep_tp,(setter)0,
-	"Electricity usage with system Sep [kWh], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Electricity usage with system Sep [kWh]"),
  	NULL},
 {"energy_wo_sys_ec_apr_tp", (getter)Outputs_get_energy_wo_sys_ec_apr_tp,(setter)0,
-	"Electricity usage without system Apr [kWh], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Electricity usage without system Apr [kWh]"),
  	NULL},
 {"energy_wo_sys_ec_aug_tp", (getter)Outputs_get_energy_wo_sys_ec_aug_tp,(setter)0,
-	"Electricity usage without system Aug [kWh], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Electricity usage without system Aug [kWh]"),
  	NULL},
 {"energy_wo_sys_ec_dec_tp", (getter)Outputs_get_energy_wo_sys_ec_dec_tp,(setter)0,
-	"Electricity usage without system Dec [kWh], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Electricity usage without system Dec [kWh]"),
  	NULL},
 {"energy_wo_sys_ec_feb_tp", (getter)Outputs_get_energy_wo_sys_ec_feb_tp,(setter)0,
-	"Electricity usage without system Feb [kWh], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Electricity usage without system Feb [kWh]"),
  	NULL},
 {"energy_wo_sys_ec_jan_tp", (getter)Outputs_get_energy_wo_sys_ec_jan_tp,(setter)0,
-	"Electricity usage without system Jan [kWh], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Electricity usage without system Jan [kWh]"),
  	NULL},
 {"energy_wo_sys_ec_jul_tp", (getter)Outputs_get_energy_wo_sys_ec_jul_tp,(setter)0,
-	"Electricity usage without system Jul [kWh], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Electricity usage without system Jul [kWh]"),
  	NULL},
 {"energy_wo_sys_ec_jun_tp", (getter)Outputs_get_energy_wo_sys_ec_jun_tp,(setter)0,
-	"Electricity usage without system Jun [kWh], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Electricity usage without system Jun [kWh]"),
  	NULL},
 {"energy_wo_sys_ec_mar_tp", (getter)Outputs_get_energy_wo_sys_ec_mar_tp,(setter)0,
-	"Electricity usage without system Mar [kWh], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Electricity usage without system Mar [kWh]"),
  	NULL},
 {"energy_wo_sys_ec_may_tp", (getter)Outputs_get_energy_wo_sys_ec_may_tp,(setter)0,
-	"Electricity usage without system May [kWh], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Electricity usage without system May [kWh]"),
  	NULL},
 {"energy_wo_sys_ec_nov_tp", (getter)Outputs_get_energy_wo_sys_ec_nov_tp,(setter)0,
-	"Electricity usage without system Nov [kWh], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Electricity usage without system Nov [kWh]"),
  	NULL},
 {"energy_wo_sys_ec_oct_tp", (getter)Outputs_get_energy_wo_sys_ec_oct_tp,(setter)0,
-	"Electricity usage without system Oct [kWh], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Electricity usage without system Oct [kWh]"),
  	NULL},
 {"energy_wo_sys_ec_sep_tp", (getter)Outputs_get_energy_wo_sys_ec_sep_tp,(setter)0,
-	"Electricity usage without system Sep [kWh], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Electricity usage without system Sep [kWh]"),
  	NULL},
 {"excess_dollars_applied_ym", (getter)Outputs_get_excess_dollars_applied_ym,(setter)0,
-	"Excess generation $ credit applied [$], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Excess generation $ credit applied [$]"),
  	NULL},
 {"excess_dollars_earned_ym", (getter)Outputs_get_excess_dollars_earned_ym,(setter)0,
-	"Excess generation $ credit earned [$], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Excess generation $ credit earned [$]"),
  	NULL},
 {"excess_kwhs_applied_ym", (getter)Outputs_get_excess_kwhs_applied_ym,(setter)0,
-	"Excess generation kWh credit applied [kWh], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Excess generation kWh credit applied [kWh]"),
  	NULL},
 {"excess_kwhs_earned_ym", (getter)Outputs_get_excess_kwhs_earned_ym,(setter)0,
-	"Excess generation kWh credit earned [kWh], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Excess generation kWh credit earned [kWh]"),
  	NULL},
 {"lifetime_load", (getter)Outputs_get_lifetime_load,(setter)0,
-	"Lifetime electricity load [kW], array.",
+	PyDoc_STR("*sequence*: Lifetime electricity load [kW]"),
  	NULL},
 {"monthly_tou_demand_charge_w_sys", (getter)Outputs_get_monthly_tou_demand_charge_w_sys,(setter)0,
-	"Demand peak charge with system [$], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Demand peak charge with system [$]"),
  	NULL},
 {"monthly_tou_demand_charge_wo_sys", (getter)Outputs_get_monthly_tou_demand_charge_wo_sys,(setter)0,
-	"Demand peak charge without system [$], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Demand peak charge without system [$]"),
  	NULL},
 {"monthly_tou_demand_peak_w_sys", (getter)Outputs_get_monthly_tou_demand_peak_w_sys,(setter)0,
-	"Demand peak with system [kW], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Demand peak with system [kW]"),
  	NULL},
 {"monthly_tou_demand_peak_wo_sys", (getter)Outputs_get_monthly_tou_demand_peak_wo_sys,(setter)0,
-	"Demand peak without system [kW], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Demand peak without system [kW]"),
  	NULL},
 {"savings_year1", (getter)Outputs_get_savings_year1,(setter)0,
-	"Electricity bill savings with system (year 1) [$/yr], number.",
+	PyDoc_STR("*float*: Electricity bill savings with system (year 1) [$/yr]"),
  	NULL},
 {"surplus_w_sys_ec_apr_tp", (getter)Outputs_get_surplus_w_sys_ec_apr_tp,(setter)0,
-	"Electricity exports with system Apr [kWh], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Electricity exports with system Apr [kWh]"),
  	NULL},
 {"surplus_w_sys_ec_aug_tp", (getter)Outputs_get_surplus_w_sys_ec_aug_tp,(setter)0,
-	"Electricity exports with system Aug [kWh], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Electricity exports with system Aug [kWh]"),
  	NULL},
 {"surplus_w_sys_ec_dec_tp", (getter)Outputs_get_surplus_w_sys_ec_dec_tp,(setter)0,
-	"Electricity exports with system Dec [kWh], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Electricity exports with system Dec [kWh]"),
  	NULL},
 {"surplus_w_sys_ec_feb_tp", (getter)Outputs_get_surplus_w_sys_ec_feb_tp,(setter)0,
-	"Electricity exports with system Feb [kWh], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Electricity exports with system Feb [kWh]"),
  	NULL},
 {"surplus_w_sys_ec_jan_tp", (getter)Outputs_get_surplus_w_sys_ec_jan_tp,(setter)0,
-	"Electricity exports with system Jan [kWh], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Electricity exports with system Jan [kWh]"),
  	NULL},
 {"surplus_w_sys_ec_jul_tp", (getter)Outputs_get_surplus_w_sys_ec_jul_tp,(setter)0,
-	"Electricity exports with system Jul [kWh], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Electricity exports with system Jul [kWh]"),
  	NULL},
 {"surplus_w_sys_ec_jun_tp", (getter)Outputs_get_surplus_w_sys_ec_jun_tp,(setter)0,
-	"Electricity exports with system Jun [kWh], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Electricity exports with system Jun [kWh]"),
  	NULL},
 {"surplus_w_sys_ec_mar_tp", (getter)Outputs_get_surplus_w_sys_ec_mar_tp,(setter)0,
-	"Electricity exports with system Mar [kWh], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Electricity exports with system Mar [kWh]"),
  	NULL},
 {"surplus_w_sys_ec_may_tp", (getter)Outputs_get_surplus_w_sys_ec_may_tp,(setter)0,
-	"Electricity exports with system May [kWh], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Electricity exports with system May [kWh]"),
  	NULL},
 {"surplus_w_sys_ec_nov_tp", (getter)Outputs_get_surplus_w_sys_ec_nov_tp,(setter)0,
-	"Electricity exports with system Nov [kWh], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Electricity exports with system Nov [kWh]"),
  	NULL},
 {"surplus_w_sys_ec_oct_tp", (getter)Outputs_get_surplus_w_sys_ec_oct_tp,(setter)0,
-	"Electricity exports with system Oct [kWh], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Electricity exports with system Oct [kWh]"),
  	NULL},
 {"surplus_w_sys_ec_sep_tp", (getter)Outputs_get_surplus_w_sys_ec_sep_tp,(setter)0,
-	"Electricity exports with system Sep [kWh], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Electricity exports with system Sep [kWh]"),
  	NULL},
 {"utility_bill_w_sys", (getter)Outputs_get_utility_bill_w_sys,(setter)0,
-	"Electricity bill with system [$], array.",
+	PyDoc_STR("*sequence*: Electricity bill with system [$]"),
  	NULL},
 {"utility_bill_w_sys_ym", (getter)Outputs_get_utility_bill_w_sys_ym,(setter)0,
-	"Electricity bill with system [$], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Electricity bill with system [$]"),
  	NULL},
 {"utility_bill_wo_sys", (getter)Outputs_get_utility_bill_wo_sys,(setter)0,
-	"Electricity bill without system [$], array.",
+	PyDoc_STR("*sequence*: Electricity bill without system [$]"),
  	NULL},
 {"utility_bill_wo_sys_ym", (getter)Outputs_get_utility_bill_wo_sys_ym,(setter)0,
-	"Electricity bill without system [$], matrix.",
+	PyDoc_STR("*sequence[sequence]*: Electricity bill without system [$]"),
  	NULL},
 {"year1_electric_load", (getter)Outputs_get_year1_electric_load,(setter)0,
-	"Electricity load total (year 1) [kWh/yr], number.",
+	PyDoc_STR("*float*: Electricity load total (year 1) [kWh/yr]"),
  	NULL},
 {"year1_excess_dollars_applied", (getter)Outputs_get_year1_excess_dollars_applied,(setter)0,
-	"Excess generation $ credit applied [$/mo], array.",
+	PyDoc_STR("*sequence*: Excess generation $ credit applied [$/mo]"),
  	NULL},
 {"year1_excess_dollars_earned", (getter)Outputs_get_year1_excess_dollars_earned,(setter)0,
-	"Excess generation $ credit earned [$/mo], array.",
+	PyDoc_STR("*sequence*: Excess generation $ credit earned [$/mo]"),
  	NULL},
 {"year1_excess_kwhs_applied", (getter)Outputs_get_year1_excess_kwhs_applied,(setter)0,
-	"Excess generation kWh credit applied [kWh/mo], array.",
+	PyDoc_STR("*sequence*: Excess generation kWh credit applied [kWh/mo]"),
  	NULL},
 {"year1_excess_kwhs_earned", (getter)Outputs_get_year1_excess_kwhs_earned,(setter)0,
-	"Excess generation kWh credit earned [kWh/mo], array.",
+	PyDoc_STR("*sequence*: Excess generation kWh credit earned [kWh/mo]"),
  	NULL},
 {"year1_hourly_dc_peak_per_period", (getter)Outputs_get_year1_hourly_dc_peak_per_period,(setter)0,
-	"Electricity peak from grid per TOU period (year 1 hourly) [kW], array.",
+	PyDoc_STR("*sequence*: Electricity peak from grid per TOU period (year 1 hourly) [kW]"),
  	NULL},
 {"year1_hourly_dc_tou_schedule", (getter)Outputs_get_year1_hourly_dc_tou_schedule,(setter)0,
-	"TOU period for demand charges (year 1 hourly), array.",
+	PyDoc_STR("*sequence*: TOU period for demand charges (year 1 hourly)"),
  	NULL},
 {"year1_hourly_dc_with_system", (getter)Outputs_get_year1_hourly_dc_with_system,(setter)0,
-	"Demand charge with system (year 1 hourly) [$], array.",
+	PyDoc_STR("*sequence*: Demand charge with system (year 1 hourly) [$]"),
  	NULL},
 {"year1_hourly_dc_without_system", (getter)Outputs_get_year1_hourly_dc_without_system,(setter)0,
-	"Demand charge without system (year 1 hourly) [$], array.",
+	PyDoc_STR("*sequence*: Demand charge without system (year 1 hourly) [$]"),
  	NULL},
 {"year1_hourly_e_fromgrid", (getter)Outputs_get_year1_hourly_e_fromgrid,(setter)0,
-	"Electricity from grid (year 1 hourly) [kWh], array.",
+	PyDoc_STR("*sequence*: Electricity from grid (year 1 hourly) [kWh]"),
  	NULL},
 {"year1_hourly_e_tofromgrid", (getter)Outputs_get_year1_hourly_e_tofromgrid,(setter)0,
-	"Electricity to/from grid (year 1 hourly) [kWh], array.",
+	PyDoc_STR("*sequence*: Electricity to/from grid (year 1 hourly) [kWh]"),
  	NULL},
 {"year1_hourly_e_togrid", (getter)Outputs_get_year1_hourly_e_togrid,(setter)0,
-	"Electricity to grid (year 1 hourly) [kWh], array.",
+	PyDoc_STR("*sequence*: Electricity to grid (year 1 hourly) [kWh]"),
  	NULL},
 {"year1_hourly_ec_tou_schedule", (getter)Outputs_get_year1_hourly_ec_tou_schedule,(setter)0,
-	"TOU period for energy charges (year 1 hourly), array.",
+	PyDoc_STR("*sequence*: TOU period for energy charges (year 1 hourly)"),
  	NULL},
 {"year1_hourly_ec_with_system", (getter)Outputs_get_year1_hourly_ec_with_system,(setter)0,
-	"Energy charge with system (year 1 hourly) [$], array.",
+	PyDoc_STR("*sequence*: Energy charge with system (year 1 hourly) [$]"),
  	NULL},
 {"year1_hourly_ec_without_system", (getter)Outputs_get_year1_hourly_ec_without_system,(setter)0,
-	"Energy charge without system (year 1 hourly) [$], array.",
+	PyDoc_STR("*sequence*: Energy charge without system (year 1 hourly) [$]"),
  	NULL},
 {"year1_hourly_p_system_to_load", (getter)Outputs_get_year1_hourly_p_system_to_load,(setter)0,
-	"Electricity peak from system to load (year 1 hourly) [kW], array.",
+	PyDoc_STR("*sequence*: Electricity peak from system to load (year 1 hourly) [kW]"),
  	NULL},
 {"year1_hourly_p_tofromgrid", (getter)Outputs_get_year1_hourly_p_tofromgrid,(setter)0,
-	"Electricity to/from grid peak (year 1 hourly) [kW], array.",
+	PyDoc_STR("*sequence*: Electricity to/from grid peak (year 1 hourly) [kW]"),
  	NULL},
 {"year1_hourly_salespurchases_with_system", (getter)Outputs_get_year1_hourly_salespurchases_with_system,(setter)0,
-	"Electricity sales/purchases with system (year 1 hourly) [$], array.",
+	PyDoc_STR("*sequence*: Electricity sales/purchases with system (year 1 hourly) [$]"),
  	NULL},
 {"year1_hourly_salespurchases_without_system", (getter)Outputs_get_year1_hourly_salespurchases_without_system,(setter)0,
-	"Electricity sales/purchases without system (year 1 hourly) [$], array.",
+	PyDoc_STR("*sequence*: Electricity sales/purchases without system (year 1 hourly) [$]"),
  	NULL},
 {"year1_hourly_system_to_load", (getter)Outputs_get_year1_hourly_system_to_load,(setter)0,
-	"Electricity from system to load (year 1 hourly) [kWh], array.",
+	PyDoc_STR("*sequence*: Electricity from system to load (year 1 hourly) [kWh]"),
  	NULL},
 {"year1_monthly_cumulative_excess_dollars", (getter)Outputs_get_year1_monthly_cumulative_excess_dollars,(setter)0,
-	"Excess generation cumulative $ credit earned [$/mo], array.",
+	PyDoc_STR("*sequence*: Excess generation cumulative $ credit earned [$/mo]"),
  	NULL},
 {"year1_monthly_cumulative_excess_generation", (getter)Outputs_get_year1_monthly_cumulative_excess_generation,(setter)0,
-	"Excess generation cumulative kWh credit earned [kWh/mo], array.",
+	PyDoc_STR("*sequence*: Excess generation cumulative kWh credit earned [kWh/mo]"),
  	NULL},
 {"year1_monthly_dc_fixed_with_system", (getter)Outputs_get_year1_monthly_dc_fixed_with_system,(setter)0,
-	"Demand charge (flat) with system [$/mo], array.",
+	PyDoc_STR("*sequence*: Demand charge (flat) with system [$/mo]"),
  	NULL},
 {"year1_monthly_dc_fixed_without_system", (getter)Outputs_get_year1_monthly_dc_fixed_without_system,(setter)0,
-	"Demand charge (flat) without system [$/mo], array.",
+	PyDoc_STR("*sequence*: Demand charge (flat) without system [$/mo]"),
  	NULL},
 {"year1_monthly_dc_tou_with_system", (getter)Outputs_get_year1_monthly_dc_tou_with_system,(setter)0,
-	"Demand charge (TOU) with system [$/mo], array.",
+	PyDoc_STR("*sequence*: Demand charge (TOU) with system [$/mo]"),
  	NULL},
 {"year1_monthly_dc_tou_without_system", (getter)Outputs_get_year1_monthly_dc_tou_without_system,(setter)0,
-	"Demand charge (TOU) without system [$/mo], array.",
+	PyDoc_STR("*sequence*: Demand charge (TOU) without system [$/mo]"),
  	NULL},
 {"year1_monthly_ec_charge_gross_with_system", (getter)Outputs_get_year1_monthly_ec_charge_gross_with_system,(setter)0,
-	"Energy charge with system before credits [$/mo], array.",
+	PyDoc_STR("*sequence*: Energy charge with system before credits [$/mo]"),
  	NULL},
 {"year1_monthly_ec_charge_with_system", (getter)Outputs_get_year1_monthly_ec_charge_with_system,(setter)0,
-	"Energy charge with system [$/mo], array.",
+	PyDoc_STR("*sequence*: Energy charge with system [$/mo]"),
  	NULL},
 {"year1_monthly_ec_charge_without_system", (getter)Outputs_get_year1_monthly_ec_charge_without_system,(setter)0,
-	"Energy charge without system [$/mo], array.",
+	PyDoc_STR("*sequence*: Energy charge without system [$/mo]"),
  	NULL},
 {"year1_monthly_electricity_to_grid", (getter)Outputs_get_year1_monthly_electricity_to_grid,(setter)0,
-	"Electricity to/from grid [kWh/mo], array.",
+	PyDoc_STR("*sequence*: Electricity to/from grid [kWh/mo]"),
  	NULL},
 {"year1_monthly_fixed_with_system", (getter)Outputs_get_year1_monthly_fixed_with_system,(setter)0,
-	"Fixed monthly charge with system [$/mo], array.",
+	PyDoc_STR("*sequence*: Fixed monthly charge with system [$/mo]"),
  	NULL},
 {"year1_monthly_fixed_without_system", (getter)Outputs_get_year1_monthly_fixed_without_system,(setter)0,
-	"Fixed monthly charge without system [$/mo], array.",
+	PyDoc_STR("*sequence*: Fixed monthly charge without system [$/mo]"),
  	NULL},
 {"year1_monthly_load", (getter)Outputs_get_year1_monthly_load,(setter)0,
-	"Electricity load [kWh/mo], array.",
+	PyDoc_STR("*sequence*: Electricity load [kWh/mo]"),
  	NULL},
 {"year1_monthly_minimum_with_system", (getter)Outputs_get_year1_monthly_minimum_with_system,(setter)0,
-	"Minimum charge with system [$/mo], array.",
+	PyDoc_STR("*sequence*: Minimum charge with system [$/mo]"),
  	NULL},
 {"year1_monthly_minimum_without_system", (getter)Outputs_get_year1_monthly_minimum_without_system,(setter)0,
-	"Minimum charge without system [$/mo], array.",
+	PyDoc_STR("*sequence*: Minimum charge without system [$/mo]"),
  	NULL},
 {"year1_monthly_peak_w_system", (getter)Outputs_get_year1_monthly_peak_w_system,(setter)0,
-	"Demand peak with system [kW/mo], array.",
+	PyDoc_STR("*sequence*: Demand peak with system [kW/mo]"),
  	NULL},
 {"year1_monthly_peak_wo_system", (getter)Outputs_get_year1_monthly_peak_wo_system,(setter)0,
-	"Demand peak without system [kW/mo], array.",
+	PyDoc_STR("*sequence*: Demand peak without system [kW/mo]"),
  	NULL},
 {"year1_monthly_use_w_system", (getter)Outputs_get_year1_monthly_use_w_system,(setter)0,
-	"Electricity use with system [kWh/mo], array.",
+	PyDoc_STR("*sequence*: Electricity use with system [kWh/mo]"),
  	NULL},
 {"year1_monthly_use_wo_system", (getter)Outputs_get_year1_monthly_use_wo_system,(setter)0,
-	"Electricity use without system [kWh/mo], array.",
+	PyDoc_STR("*sequence*: Electricity use without system [kWh/mo]"),
  	NULL},
 {"year1_monthly_utility_bill_w_sys", (getter)Outputs_get_year1_monthly_utility_bill_w_sys,(setter)0,
-	"Electricity bill with system [$/mo], array.",
+	PyDoc_STR("*sequence*: Electricity bill with system [$/mo]"),
  	NULL},
 {"year1_monthly_utility_bill_wo_sys", (getter)Outputs_get_year1_monthly_utility_bill_wo_sys,(setter)0,
-	"Electricity bill without system [$/mo], array.",
+	PyDoc_STR("*sequence*: Electricity bill without system [$/mo]"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -2637,7 +2637,7 @@ static PyTypeObject Outputs_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		Outputs_methods,         /*tp_methods*/
@@ -2647,7 +2647,7 @@ static PyTypeObject Outputs_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -2771,9 +2771,9 @@ static PyMethodDef Utilityrate5_methods[] = {
 		{"execute",            (PyCFunction)Utilityrate5_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
 		{"assign",            (PyCFunction)Utilityrate5_assign,  METH_VARARGS,
-				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs")},
+				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Common': { var: val, ...}, ...}``")},
 		{"export",            (PyCFunction)Utilityrate5_export,  METH_VARARGS,
-				PyDoc_STR("assign() -> None\n Export attributes into dictionary")},
+				PyDoc_STR("export() -> dict\n Export attributes into nested dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -2813,11 +2813,11 @@ static PyTypeObject Utilityrate5_Type = {
 		0,                          /*tp_setattro*/
 		0,                          /*tp_as_buffer*/
 		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
-		"see html for help",        /*tp_doc*/
+		"This class contains all the variable information for running a simulation. Variables are grouped together in the subclasses as properties. If property assignments are the wrong type, an error is thrown.",        /*tp_doc*/
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		Utilityrate5_methods,      /*tp_methods*/
@@ -2827,7 +2827,7 @@ static PyTypeObject Utilityrate5_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,                          /*tp_new*/
@@ -2890,12 +2890,12 @@ Utilityrate5_default(PyObject *self, PyObject *args)
 
 static PyMethodDef Utilityrate5Module_methods[] = {
 		{"new",             Utilityrate5_new,         METH_VARARGS,
-				PyDoc_STR("new() -> new Utilityrate5 object")},
+				PyDoc_STR("new() -> Utilityrate5")},
 		{"default",             Utilityrate5_default,         METH_VARARGS,
-				PyDoc_STR("default(financial) -> new Utilityrate5 object with financial model-specific default attributes\n"
-				"Options: BiopowerCommercial\nDSLFCommercial\nDishStirlingCommercial\nEmpiricalTroughCommercial\nFlatPlatePVCommercial\nFlatPlatePVHostDeveloper\nFlatPlatePVResidential\nFlatPlatePVSingleOwner\nFlatPlatePVThirdParty\nFuelCellCommercial\nFuelCellSingleOwner\nGenericCSPSystemCommercial\nGenericSystemCommercial\nGenericSystemHostDeveloper\nGenericSystemResidential\nGenericSystemThirdParty\nMSLFCommercial\nPVWattsCommercial\nPVWattsHostDeveloper\nPVWattsResidential\nPVWattsThirdParty\nPhysicalTroughCommercial\nSolarWaterHeatingCommercial\nSolarWaterHeatingResidential\nWindPowerCommercial\nWindPowerResidential")},
+				PyDoc_STR("default(config) -> Utilityrate5\n\nUse financial model-specific default attributes\n"
+				"config options:\n\n- \"BiopowerCommercial\"\n- \"DSLFCommercial\"\n- \"DishStirlingCommercial\"\n- \"EmpiricalTroughCommercial\"\n- \"FlatPlatePVCommercial\"\n- \"FlatPlatePVHostDeveloper\"\n- \"FlatPlatePVResidential\"\n- \"FlatPlatePVSingleOwner\"\n- \"FlatPlatePVThirdParty\"\n- \"FuelCellCommercial\"\n- \"FuelCellSingleOwner\"\n- \"GenericCSPSystemCommercial\"\n- \"GenericSystemCommercial\"\n- \"GenericSystemHostDeveloper\"\n- \"GenericSystemResidential\"\n- \"GenericSystemThirdParty\"\n- \"MSLFCommercial\"\n- \"PVWattsCommercial\"\n- \"PVWattsHostDeveloper\"\n- \"PVWattsResidential\"\n- \"PVWattsThirdParty\"\n- \"PhysicalTroughCommercial\"\n- \"SolarWaterHeatingCommercial\"\n- \"SolarWaterHeatingResidential\"\n- \"WindPowerCommercial\"\n- \"WindPowerResidential\"")},
 		{"wrap",             Utilityrate5_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> new Utilityrate5 object around existing PySSC data, taking over memory ownership")},
+				PyDoc_STR("wrap(ssc_data_t) -> Utilityrate5\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{NULL,              NULL}           /* sentinel */
 };
 

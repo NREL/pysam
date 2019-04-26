@@ -150,7 +150,7 @@ static int PySAM_set_attr(PyObject *self, PyObject* x_attr, const char *name, Py
 // Functions for converting between Python and C types
 //
 
-static int PySAM_seq_to_array(PyObject *value, float **arr, int *seqlen){
+static int PySAM_seq_to_array(PyObject *value, double **arr, int *seqlen){
     PyObject* seq;
     int i;
 
@@ -159,7 +159,7 @@ static int PySAM_seq_to_array(PyObject *value, float **arr, int *seqlen){
         return -1;
 
     *seqlen = (int)PySequence_Fast_GET_SIZE(seq);
-    *arr = malloc(*seqlen*sizeof(float));
+    *arr = malloc(*seqlen*sizeof(double));
     if(!*arr) {
         Py_DECREF(seq);
         PyErr_NoMemory(  );
@@ -184,14 +184,14 @@ static int PySAM_seq_to_array(PyObject *value, float **arr, int *seqlen){
         }
         fitem = PyNumber_Float(item);
 
-        (*arr)[i] = (float)PyFloat_AS_DOUBLE(fitem);
+        (*arr)[i] = PyFloat_AS_DOUBLE(fitem);
         Py_DECREF(fitem);
     }
     Py_DECREF(seq);
     return 0;
 }
 
-static int PySAM_seq_to_matrix(PyObject *value, float **mat, int *nrows, int *ncols){
+static int PySAM_seq_to_matrix(PyObject *value, double **mat, int *nrows, int *ncols){
     PyObject* seq, *row;
     int i;
 
@@ -204,8 +204,8 @@ static int PySAM_seq_to_matrix(PyObject *value, float **mat, int *nrows, int *nc
     *nrows = (int)PySequence_Fast_GET_SIZE(seq);
     *ncols = (int)PySequence_Fast_GET_SIZE(row);
 
-    *mat = malloc((*nrows)*(*ncols)*sizeof(float));
-    float *arr = NULL;
+    *mat = malloc((*nrows)*(*ncols)*sizeof(double));
+    double *arr = NULL;
     int seqlen;
 
     if(!*mat) {
@@ -230,8 +230,8 @@ static int PySAM_seq_to_matrix(PyObject *value, float **mat, int *nrows, int *nc
             PyErr_SetString(PyExc_TypeError, str);
             return res;
         }
-        float* mat_pos = &((*mat)[*ncols * i]);
-        memcpy(mat_pos, arr, (*ncols)*sizeof(float));
+        double* mat_pos = &((*mat)[*ncols * i]);
+        memcpy(mat_pos, arr, (*ncols)*sizeof(double));
 
         free(arr);
     }
@@ -243,8 +243,8 @@ static PyObject* PySAM_table_to_dict(SAM_table table){
     int size, s = 0, i = 0, j=0;
 
     const char* str;
-    float num;
-    const float* arr;
+    double num;
+    const double* arr;
     int n, m;
 
     SAM_error error = new_error();
@@ -333,8 +333,8 @@ static SAM_table PySAM_dict_to_table(PyObject* dict){
     Py_INCREF(dict);
     PyObject* ascii_mystring, *first = NULL;
 
-    float *mat = NULL;
-    float *arr = NULL;
+    double *mat = NULL;
+    double *arr = NULL;
     SAM_table data_tab = NULL;
     while (PyDict_Next(dict, &pos, &key, &value)){
         ascii_mystring = PyUnicode_AsASCIIString(key);
@@ -342,7 +342,7 @@ static SAM_table PySAM_dict_to_table(PyObject* dict){
 
         // numeric
         if (PyNumber_Check(value)){
-            float val = (float)PyFloat_AsDouble(value);
+            double val = PyFloat_AsDouble(value);
 
             SAM_error error = new_error();
             SAM_table_set_num(table, name, val, &error);
@@ -425,7 +425,7 @@ static SAM_table PySAM_dict_to_table(PyObject* dict){
 // Functions for defining SAM attributes getters and setters
 //
 
-static PyObject* PySAM_float_getter(SAM_get_float_t func, void *data_ptr){
+static PyObject* PySAM_double_getter(SAM_get_double_t func, void *data_ptr){
     double val;
     SAM_error error = new_error();
     val = (func)(data_ptr, &error);
@@ -435,7 +435,7 @@ static PyObject* PySAM_float_getter(SAM_get_float_t func, void *data_ptr){
     return result;
 }
 
-static int PySAM_float_setter(PyObject *value, SAM_set_float_t func, void *data_ptr) {
+static int PySAM_double_setter(PyObject *value, SAM_set_double_t func, void *data_ptr) {
     if (value == NULL) {
         PyErr_SetString(PyExc_TypeError, "No value provided");
         return -1;
@@ -445,7 +445,7 @@ static int PySAM_float_setter(PyObject *value, SAM_set_float_t func, void *data_
         return -1;
     }
 
-    float val = (float)PyFloat_AsDouble(value);
+    double val = PyFloat_AsDouble(value);
 
     SAM_error error = new_error();
     (*func)(data_ptr, val, &error);
@@ -485,7 +485,7 @@ static int PySAM_string_setter(PyObject *value, SAM_set_string_t func, void *dat
 }
 
 static PyObject* PySAM_array_getter(SAM_get_array_t func,void *data_ptr){
-    float* arr;
+    double* arr;
     int seqlen;
     int i = 0;
 
@@ -502,7 +502,7 @@ static PyObject* PySAM_array_getter(SAM_get_array_t func,void *data_ptr){
 
 
 static int PySAM_array_setter(PyObject *value, SAM_set_array_t func, void *data_ptr) {
-    float* arr = NULL;
+    double* arr = NULL;
     int seqlen;
     int res = PySAM_seq_to_array(value, &arr, &seqlen);
 
@@ -520,7 +520,7 @@ static int PySAM_array_setter(PyObject *value, SAM_set_array_t func, void *data_
 }
 
 static PyObject* PySAM_matrix_getter(SAM_get_matrix_t func,void *data_ptr){
-    float* mat;
+    double* mat;
     int rows, cols;
     int i = 0, j = 0;
 
@@ -543,7 +543,7 @@ static PyObject* PySAM_matrix_getter(SAM_get_matrix_t func,void *data_ptr){
 static int PySAM_matrix_setter(PyObject *value, SAM_set_matrix_t func, void *data_ptr){
 
     int rows, cols;
-    float* mat = NULL;
+    double* mat = NULL;
     int res = PySAM_seq_to_matrix(value, &mat, &rows, &cols);
     if (res < 0){
         return -1;
@@ -616,10 +616,10 @@ static int PySAM_assign_from_dict(void *data_ptr, PyObject *dict, const char *te
         // numeric
         if (PyNumber_Check(value)){
             SAM_error error = new_error();
-            SAM_set_float_t func = SAM_set_float_func(SAM_lib_handle, tech, group, name, &error);
+            SAM_set_double_t func = SAM_set_double_func(SAM_lib_handle, tech, group, name, &error);
             if (PySAM_has_error_msg(error, "Either parameter does not exist or is not numeric type.")) goto fail;
 
-            float val = (float)PyFloat_AsDouble(value);
+            double val = PyFloat_AsDouble(value);
 
             error = new_error();
             func(data_ptr, val, &error);

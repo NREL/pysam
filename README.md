@@ -82,7 +82,9 @@
 	- Packaging extension modules [8]
 
 ## Anaconda
-1. Use conda tools [7]
+1. Install conda-build to an env: 
+`conda install -n root conda-build`
+
 
 ## References
 [1] https://docs.python.org/3/extending/extending.html
@@ -104,7 +106,7 @@
 ## Testing distribution
 
 ### Packaging
-1. Mac
+1. Mac & Windows
 	- python3 setup.py bdist_wheel
 
 2. manylinux
@@ -123,10 +125,15 @@
 		-- `auditwheel repair (wheel_name).whl`
 	- https://github.com/pypa/python-manylinux-demo/blob/master/travis/build-wheels.sh
 
-3. Windows
+3. Anaconda
+	- requires `anaconda-navigator`, `conda-build` packages with `conda install <pkg>`
+	- `python setup.py bdist_conda`
+	- `anaconda upload -u nrel <file>`
 
 ### Uploading
-python3 -m twine upload --repository-url https://test.pypi.org/legacy/ dist/PowerPlant-1.0-cp37-cp37m-macosx_10_14_x86_64.whl
+1. Pip: python3 -m twine upload --repository-url https://test.pypi.org/legacy/ dist/PowerPlant-1.0-cp37-cp37m-macosx_10_14_x86_64.whl
+
+2. Anaconda:
 
 ### Installing
 1. If creating a virtual environment:

@@ -58,34 +58,34 @@ FinancialParameters_export(FinancialParametersObject *self, PyObject *args)
 
 static PyMethodDef FinancialParameters_methods[] = {
 		{"assign",            (PyCFunction)FinancialParameters_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``FinancialParameters_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)FinancialParameters_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 static PyObject *
 FinancialParameters_get_analysis_period(FinancialParametersObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_FinancialParameters_analysis_period_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_FinancialParameters_analysis_period_nget, self->data_ptr);
 }
 
 static int
 FinancialParameters_set_analysis_period(FinancialParametersObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_FinancialParameters_analysis_period_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_FinancialParameters_analysis_period_nset, self->data_ptr);
 }
 
 static PyObject *
 FinancialParameters_get_debt_fraction(FinancialParametersObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_FinancialParameters_debt_fraction_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_FinancialParameters_debt_fraction_nget, self->data_ptr);
 }
 
 static int
 FinancialParameters_set_debt_fraction(FinancialParametersObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_FinancialParameters_debt_fraction_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_FinancialParameters_debt_fraction_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -97,103 +97,103 @@ FinancialParameters_get_federal_tax_rate(FinancialParametersObject *self, void *
 static int
 FinancialParameters_set_federal_tax_rate(FinancialParametersObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Cashloan_FinancialParameters_federal_tax_rate_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Cashloan_FinancialParameters_federal_tax_rate_aset, self->data_ptr);
 }
 
 static PyObject *
 FinancialParameters_get_inflation_rate(FinancialParametersObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_FinancialParameters_inflation_rate_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_FinancialParameters_inflation_rate_nget, self->data_ptr);
 }
 
 static int
 FinancialParameters_set_inflation_rate(FinancialParametersObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_FinancialParameters_inflation_rate_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_FinancialParameters_inflation_rate_nset, self->data_ptr);
 }
 
 static PyObject *
 FinancialParameters_get_insurance_rate(FinancialParametersObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_FinancialParameters_insurance_rate_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_FinancialParameters_insurance_rate_nget, self->data_ptr);
 }
 
 static int
 FinancialParameters_set_insurance_rate(FinancialParametersObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_FinancialParameters_insurance_rate_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_FinancialParameters_insurance_rate_nset, self->data_ptr);
 }
 
 static PyObject *
 FinancialParameters_get_loan_rate(FinancialParametersObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_FinancialParameters_loan_rate_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_FinancialParameters_loan_rate_nget, self->data_ptr);
 }
 
 static int
 FinancialParameters_set_loan_rate(FinancialParametersObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_FinancialParameters_loan_rate_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_FinancialParameters_loan_rate_nset, self->data_ptr);
 }
 
 static PyObject *
 FinancialParameters_get_loan_term(FinancialParametersObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_FinancialParameters_loan_term_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_FinancialParameters_loan_term_nget, self->data_ptr);
 }
 
 static int
 FinancialParameters_set_loan_term(FinancialParametersObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_FinancialParameters_loan_term_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_FinancialParameters_loan_term_nset, self->data_ptr);
 }
 
 static PyObject *
 FinancialParameters_get_prop_tax_assessed_decline(FinancialParametersObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_FinancialParameters_prop_tax_assessed_decline_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_FinancialParameters_prop_tax_assessed_decline_nget, self->data_ptr);
 }
 
 static int
 FinancialParameters_set_prop_tax_assessed_decline(FinancialParametersObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_FinancialParameters_prop_tax_assessed_decline_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_FinancialParameters_prop_tax_assessed_decline_nset, self->data_ptr);
 }
 
 static PyObject *
 FinancialParameters_get_prop_tax_cost_assessed_percent(FinancialParametersObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_FinancialParameters_prop_tax_cost_assessed_percent_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_FinancialParameters_prop_tax_cost_assessed_percent_nget, self->data_ptr);
 }
 
 static int
 FinancialParameters_set_prop_tax_cost_assessed_percent(FinancialParametersObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_FinancialParameters_prop_tax_cost_assessed_percent_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_FinancialParameters_prop_tax_cost_assessed_percent_nset, self->data_ptr);
 }
 
 static PyObject *
 FinancialParameters_get_property_tax_rate(FinancialParametersObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_FinancialParameters_property_tax_rate_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_FinancialParameters_property_tax_rate_nget, self->data_ptr);
 }
 
 static int
 FinancialParameters_set_property_tax_rate(FinancialParametersObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_FinancialParameters_property_tax_rate_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_FinancialParameters_property_tax_rate_nset, self->data_ptr);
 }
 
 static PyObject *
 FinancialParameters_get_real_discount_rate(FinancialParametersObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_FinancialParameters_real_discount_rate_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_FinancialParameters_real_discount_rate_nget, self->data_ptr);
 }
 
 static int
 FinancialParameters_set_real_discount_rate(FinancialParametersObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_FinancialParameters_real_discount_rate_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_FinancialParameters_real_discount_rate_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -205,75 +205,75 @@ FinancialParameters_get_state_tax_rate(FinancialParametersObject *self, void *cl
 static int
 FinancialParameters_set_state_tax_rate(FinancialParametersObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Cashloan_FinancialParameters_state_tax_rate_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Cashloan_FinancialParameters_state_tax_rate_aset, self->data_ptr);
 }
 
 static PyObject *
 FinancialParameters_get_system_capacity(FinancialParametersObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_FinancialParameters_system_capacity_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_FinancialParameters_system_capacity_nget, self->data_ptr);
 }
 
 static int
 FinancialParameters_set_system_capacity(FinancialParametersObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_FinancialParameters_system_capacity_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_FinancialParameters_system_capacity_nset, self->data_ptr);
 }
 
 static PyObject *
 FinancialParameters_get_system_heat_rate(FinancialParametersObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_FinancialParameters_system_heat_rate_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_FinancialParameters_system_heat_rate_nget, self->data_ptr);
 }
 
 static int
 FinancialParameters_set_system_heat_rate(FinancialParametersObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_FinancialParameters_system_heat_rate_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_FinancialParameters_system_heat_rate_nset, self->data_ptr);
 }
 
 static PyGetSetDef FinancialParameters_getset[] = {
 {"analysis_period", (getter)FinancialParameters_get_analysis_period,(setter)FinancialParameters_set_analysis_period,
-	"Analyis period [years], number.\n Constraints: INTEGER,MIN=0,MAX=50; Required if ?=30.",
+	PyDoc_STR("*float*: Analyis period [years]\n\n*Constraints*: INTEGER,MIN=0,MAX=50\n\n*Required*: set to 30 if not provided."),
  	NULL},
 {"debt_fraction", (getter)FinancialParameters_get_debt_fraction,(setter)FinancialParameters_set_debt_fraction,
-	"Debt percentage [%], number.\n Constraints: MIN=0,MAX=100; 0 if not set.",
+	PyDoc_STR("*float*: Debt percentage [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"federal_tax_rate", (getter)FinancialParameters_get_federal_tax_rate,(setter)FinancialParameters_set_federal_tax_rate,
-	"Federal income tax rate [%], array.\n Required.",
+	PyDoc_STR("*sequence*: Federal income tax rate [%]\n\n*Required*: True"),
  	NULL},
 {"inflation_rate", (getter)FinancialParameters_get_inflation_rate,(setter)FinancialParameters_set_inflation_rate,
-	"Inflation rate [%], number.\n Constraints: MIN=-99; Required.",
+	PyDoc_STR("*float*: Inflation rate [%]\n\n*Constraints*: MIN=-99\n\n*Required*: True"),
  	NULL},
 {"insurance_rate", (getter)FinancialParameters_get_insurance_rate,(setter)FinancialParameters_set_insurance_rate,
-	"Insurance rate [%], number.\n Constraints: MIN=0,MAX=100; Required if ?=0.0.",
+	PyDoc_STR("*float*: Insurance rate [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: set to 0.0 if not provided."),
  	NULL},
 {"loan_rate", (getter)FinancialParameters_get_loan_rate,(setter)FinancialParameters_set_loan_rate,
-	"Loan rate [%], number.\n Constraints: MIN=0,MAX=100; 0 if not set.",
+	PyDoc_STR("*float*: Loan rate [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"loan_term", (getter)FinancialParameters_get_loan_term,(setter)FinancialParameters_set_loan_term,
-	"Loan term [years], number.\n Constraints: INTEGER,MIN=0,MAX=50; 0 if not set.",
+	PyDoc_STR("*float*: Loan term [years]\n\n*Constraints*: INTEGER,MIN=0,MAX=50\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"prop_tax_assessed_decline", (getter)FinancialParameters_get_prop_tax_assessed_decline,(setter)FinancialParameters_set_prop_tax_assessed_decline,
-	"Assessed value annual decline [%], number.\n Constraints: MIN=0,MAX=100; Required if ?=5.",
+	PyDoc_STR("*float*: Assessed value annual decline [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: set to 5 if not provided."),
  	NULL},
 {"prop_tax_cost_assessed_percent", (getter)FinancialParameters_get_prop_tax_cost_assessed_percent,(setter)FinancialParameters_set_prop_tax_cost_assessed_percent,
-	"Percent of pre-financing costs assessed [%], number.\n Constraints: MIN=0,MAX=100; Required if ?=95.",
+	PyDoc_STR("*float*: Percent of pre-financing costs assessed [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: set to 95 if not provided."),
  	NULL},
 {"property_tax_rate", (getter)FinancialParameters_get_property_tax_rate,(setter)FinancialParameters_set_property_tax_rate,
-	"Property tax rate [%], number.\n Constraints: MIN=0,MAX=100; Required if ?=0.0.",
+	PyDoc_STR("*float*: Property tax rate [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: set to 0.0 if not provided."),
  	NULL},
 {"real_discount_rate", (getter)FinancialParameters_get_real_discount_rate,(setter)FinancialParameters_set_real_discount_rate,
-	"Real discount rate [%], number.\n Constraints: MIN=-99; Required.",
+	PyDoc_STR("*float*: Real discount rate [%]\n\n*Constraints*: MIN=-99\n\n*Required*: True"),
  	NULL},
 {"state_tax_rate", (getter)FinancialParameters_get_state_tax_rate,(setter)FinancialParameters_set_state_tax_rate,
-	"State income tax rate [%], array.\n Required.",
+	PyDoc_STR("*sequence*: State income tax rate [%]\n\n*Required*: True"),
  	NULL},
 {"system_capacity", (getter)FinancialParameters_get_system_capacity,(setter)FinancialParameters_set_system_capacity,
-	"System nameplate capacity [kW], number.\n Constraints: POSITIVE; Required.",
+	PyDoc_STR("*float*: System nameplate capacity [kW]\n\n*Constraints*: POSITIVE\n\n*Required*: True"),
  	NULL},
 {"system_heat_rate", (getter)FinancialParameters_get_system_heat_rate,(setter)FinancialParameters_set_system_heat_rate,
-	"System heat rate [MMBTus/MWh], number.\n Constraints: MIN=0; Required if ?=0.0.",
+	PyDoc_STR("*float*: System heat rate [MMBTus/MWh]\n\n*Constraints*: MIN=0\n\n*Required*: set to 0.0 if not provided."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -306,7 +306,7 @@ static PyTypeObject FinancialParameters_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		FinancialParameters_methods,         /*tp_methods*/
@@ -316,7 +316,7 @@ static PyTypeObject FinancialParameters_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -376,34 +376,34 @@ SystemCosts_export(SystemCostsObject *self, PyObject *args)
 
 static PyMethodDef SystemCosts_methods[] = {
 		{"assign",            (PyCFunction)SystemCosts_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``SystemCosts_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)SystemCosts_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 static PyObject *
 SystemCosts_get_add_om_num_types(SystemCostsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_SystemCosts_add_om_num_types_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_SystemCosts_add_om_num_types_nget, self->data_ptr);
 }
 
 static int
 SystemCosts_set_add_om_num_types(SystemCostsObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_SystemCosts_add_om_num_types_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_SystemCosts_add_om_num_types_nset, self->data_ptr);
 }
 
 static PyObject *
 SystemCosts_get_annual_fuel_usage(SystemCostsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_SystemCosts_annual_fuel_usage_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_SystemCosts_annual_fuel_usage_nget, self->data_ptr);
 }
 
 static int
 SystemCosts_set_annual_fuel_usage(SystemCostsObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_SystemCosts_annual_fuel_usage_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_SystemCosts_annual_fuel_usage_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -415,7 +415,7 @@ SystemCosts_get_om_capacity(SystemCostsObject *self, void *closure)
 static int
 SystemCosts_set_om_capacity(SystemCostsObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Cashloan_SystemCosts_om_capacity_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Cashloan_SystemCosts_om_capacity_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -427,19 +427,19 @@ SystemCosts_get_om_capacity1(SystemCostsObject *self, void *closure)
 static int
 SystemCosts_set_om_capacity1(SystemCostsObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Cashloan_SystemCosts_om_capacity1_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Cashloan_SystemCosts_om_capacity1_aset, self->data_ptr);
 }
 
 static PyObject *
 SystemCosts_get_om_capacity1_nameplate(SystemCostsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_SystemCosts_om_capacity1_nameplate_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_SystemCosts_om_capacity1_nameplate_nget, self->data_ptr);
 }
 
 static int
 SystemCosts_set_om_capacity1_nameplate(SystemCostsObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_SystemCosts_om_capacity1_nameplate_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_SystemCosts_om_capacity1_nameplate_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -451,31 +451,31 @@ SystemCosts_get_om_capacity2(SystemCostsObject *self, void *closure)
 static int
 SystemCosts_set_om_capacity2(SystemCostsObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Cashloan_SystemCosts_om_capacity2_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Cashloan_SystemCosts_om_capacity2_aset, self->data_ptr);
 }
 
 static PyObject *
 SystemCosts_get_om_capacity2_nameplate(SystemCostsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_SystemCosts_om_capacity2_nameplate_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_SystemCosts_om_capacity2_nameplate_nget, self->data_ptr);
 }
 
 static int
 SystemCosts_set_om_capacity2_nameplate(SystemCostsObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_SystemCosts_om_capacity2_nameplate_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_SystemCosts_om_capacity2_nameplate_nset, self->data_ptr);
 }
 
 static PyObject *
 SystemCosts_get_om_capacity_escal(SystemCostsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_SystemCosts_om_capacity_escal_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_SystemCosts_om_capacity_escal_nget, self->data_ptr);
 }
 
 static int
 SystemCosts_set_om_capacity_escal(SystemCostsObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_SystemCosts_om_capacity_escal_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_SystemCosts_om_capacity_escal_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -487,7 +487,7 @@ SystemCosts_get_om_fixed(SystemCostsObject *self, void *closure)
 static int
 SystemCosts_set_om_fixed(SystemCostsObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Cashloan_SystemCosts_om_fixed_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Cashloan_SystemCosts_om_fixed_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -499,7 +499,7 @@ SystemCosts_get_om_fixed1(SystemCostsObject *self, void *closure)
 static int
 SystemCosts_set_om_fixed1(SystemCostsObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Cashloan_SystemCosts_om_fixed1_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Cashloan_SystemCosts_om_fixed1_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -511,19 +511,19 @@ SystemCosts_get_om_fixed2(SystemCostsObject *self, void *closure)
 static int
 SystemCosts_set_om_fixed2(SystemCostsObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Cashloan_SystemCosts_om_fixed2_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Cashloan_SystemCosts_om_fixed2_aset, self->data_ptr);
 }
 
 static PyObject *
 SystemCosts_get_om_fixed_escal(SystemCostsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_SystemCosts_om_fixed_escal_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_SystemCosts_om_fixed_escal_nget, self->data_ptr);
 }
 
 static int
 SystemCosts_set_om_fixed_escal(SystemCostsObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_SystemCosts_om_fixed_escal_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_SystemCosts_om_fixed_escal_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -535,19 +535,19 @@ SystemCosts_get_om_fuel_cost(SystemCostsObject *self, void *closure)
 static int
 SystemCosts_set_om_fuel_cost(SystemCostsObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Cashloan_SystemCosts_om_fuel_cost_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Cashloan_SystemCosts_om_fuel_cost_aset, self->data_ptr);
 }
 
 static PyObject *
 SystemCosts_get_om_fuel_cost_escal(SystemCostsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_SystemCosts_om_fuel_cost_escal_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_SystemCosts_om_fuel_cost_escal_nget, self->data_ptr);
 }
 
 static int
 SystemCosts_set_om_fuel_cost_escal(SystemCostsObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_SystemCosts_om_fuel_cost_escal_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_SystemCosts_om_fuel_cost_escal_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -559,31 +559,31 @@ SystemCosts_get_om_opt_fuel_1_cost(SystemCostsObject *self, void *closure)
 static int
 SystemCosts_set_om_opt_fuel_1_cost(SystemCostsObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Cashloan_SystemCosts_om_opt_fuel_1_cost_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Cashloan_SystemCosts_om_opt_fuel_1_cost_aset, self->data_ptr);
 }
 
 static PyObject *
 SystemCosts_get_om_opt_fuel_1_cost_escal(SystemCostsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_SystemCosts_om_opt_fuel_1_cost_escal_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_SystemCosts_om_opt_fuel_1_cost_escal_nget, self->data_ptr);
 }
 
 static int
 SystemCosts_set_om_opt_fuel_1_cost_escal(SystemCostsObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_SystemCosts_om_opt_fuel_1_cost_escal_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_SystemCosts_om_opt_fuel_1_cost_escal_nset, self->data_ptr);
 }
 
 static PyObject *
 SystemCosts_get_om_opt_fuel_1_usage(SystemCostsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_SystemCosts_om_opt_fuel_1_usage_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_SystemCosts_om_opt_fuel_1_usage_nget, self->data_ptr);
 }
 
 static int
 SystemCosts_set_om_opt_fuel_1_usage(SystemCostsObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_SystemCosts_om_opt_fuel_1_usage_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_SystemCosts_om_opt_fuel_1_usage_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -595,31 +595,31 @@ SystemCosts_get_om_opt_fuel_2_cost(SystemCostsObject *self, void *closure)
 static int
 SystemCosts_set_om_opt_fuel_2_cost(SystemCostsObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Cashloan_SystemCosts_om_opt_fuel_2_cost_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Cashloan_SystemCosts_om_opt_fuel_2_cost_aset, self->data_ptr);
 }
 
 static PyObject *
 SystemCosts_get_om_opt_fuel_2_cost_escal(SystemCostsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_SystemCosts_om_opt_fuel_2_cost_escal_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_SystemCosts_om_opt_fuel_2_cost_escal_nget, self->data_ptr);
 }
 
 static int
 SystemCosts_set_om_opt_fuel_2_cost_escal(SystemCostsObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_SystemCosts_om_opt_fuel_2_cost_escal_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_SystemCosts_om_opt_fuel_2_cost_escal_nset, self->data_ptr);
 }
 
 static PyObject *
 SystemCosts_get_om_opt_fuel_2_usage(SystemCostsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_SystemCosts_om_opt_fuel_2_usage_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_SystemCosts_om_opt_fuel_2_usage_nget, self->data_ptr);
 }
 
 static int
 SystemCosts_set_om_opt_fuel_2_usage(SystemCostsObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_SystemCosts_om_opt_fuel_2_usage_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_SystemCosts_om_opt_fuel_2_usage_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -631,7 +631,7 @@ SystemCosts_get_om_production(SystemCostsObject *self, void *closure)
 static int
 SystemCosts_set_om_production(SystemCostsObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Cashloan_SystemCosts_om_production_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Cashloan_SystemCosts_om_production_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -643,7 +643,7 @@ SystemCosts_get_om_production1(SystemCostsObject *self, void *closure)
 static int
 SystemCosts_set_om_production1(SystemCostsObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Cashloan_SystemCosts_om_production1_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Cashloan_SystemCosts_om_production1_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -655,7 +655,7 @@ SystemCosts_get_om_production1_values(SystemCostsObject *self, void *closure)
 static int
 SystemCosts_set_om_production1_values(SystemCostsObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Cashloan_SystemCosts_om_production1_values_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Cashloan_SystemCosts_om_production1_values_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -667,7 +667,7 @@ SystemCosts_get_om_production2(SystemCostsObject *self, void *closure)
 static int
 SystemCosts_set_om_production2(SystemCostsObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Cashloan_SystemCosts_om_production2_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Cashloan_SystemCosts_om_production2_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -679,19 +679,19 @@ SystemCosts_get_om_production2_values(SystemCostsObject *self, void *closure)
 static int
 SystemCosts_set_om_production2_values(SystemCostsObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Cashloan_SystemCosts_om_production2_values_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Cashloan_SystemCosts_om_production2_values_aset, self->data_ptr);
 }
 
 static PyObject *
 SystemCosts_get_om_production_escal(SystemCostsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_SystemCosts_om_production_escal_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_SystemCosts_om_production_escal_nget, self->data_ptr);
 }
 
 static int
 SystemCosts_set_om_production_escal(SystemCostsObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_SystemCosts_om_production_escal_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_SystemCosts_om_production_escal_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -703,7 +703,7 @@ SystemCosts_get_om_replacement_cost1(SystemCostsObject *self, void *closure)
 static int
 SystemCosts_set_om_replacement_cost1(SystemCostsObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Cashloan_SystemCosts_om_replacement_cost1_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Cashloan_SystemCosts_om_replacement_cost1_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -715,108 +715,108 @@ SystemCosts_get_om_replacement_cost2(SystemCostsObject *self, void *closure)
 static int
 SystemCosts_set_om_replacement_cost2(SystemCostsObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Cashloan_SystemCosts_om_replacement_cost2_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Cashloan_SystemCosts_om_replacement_cost2_aset, self->data_ptr);
 }
 
 static PyObject *
 SystemCosts_get_om_replacement_cost_escal(SystemCostsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_SystemCosts_om_replacement_cost_escal_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_SystemCosts_om_replacement_cost_escal_nget, self->data_ptr);
 }
 
 static int
 SystemCosts_set_om_replacement_cost_escal(SystemCostsObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_SystemCosts_om_replacement_cost_escal_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_SystemCosts_om_replacement_cost_escal_nset, self->data_ptr);
 }
 
 static PyGetSetDef SystemCosts_getset[] = {
 {"add_om_num_types", (getter)SystemCosts_get_add_om_num_types,(setter)SystemCosts_set_add_om_num_types,
-	"Number of O and M types, number.\n Constraints: INTEGER,MIN=0,MAX=2; 0 if not set.",
+	PyDoc_STR("*float*: Number of O and M types\n\n*Constraints*: INTEGER,MIN=0,MAX=2\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"annual_fuel_usage", (getter)SystemCosts_get_annual_fuel_usage,(setter)SystemCosts_set_annual_fuel_usage,
-	"Fuel usage [kWht], number.\n Constraints: MIN=0; 0 if not set.",
+	PyDoc_STR("*float*: Fuel usage [kWht]\n\n*Constraints*: MIN=0\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"om_capacity", (getter)SystemCosts_get_om_capacity,(setter)SystemCosts_set_om_capacity,
-	"Capacity-based System Costs amount [$/kWcap], array.\n Required if ?=0.0.",
+	PyDoc_STR("*sequence*: Capacity-based System Costs amount [$/kWcap]\n\n*Required*: set to 0.0 if not provided."),
  	NULL},
 {"om_capacity1", (getter)SystemCosts_get_om_capacity1,(setter)SystemCosts_set_om_capacity1,
-	"Battery capacity-based System Costs amount [$/kWcap], array.\n Required if ?=0.0.",
+	PyDoc_STR("*sequence*: Battery capacity-based System Costs amount [$/kWcap]\n\n*Required*: set to 0.0 if not provided."),
  	NULL},
 {"om_capacity1_nameplate", (getter)SystemCosts_get_om_capacity1_nameplate,(setter)SystemCosts_set_om_capacity1_nameplate,
-	"Battery capacity for System Costs values [kW], number.\n 0 if not set.",
+	PyDoc_STR("*float*: Battery capacity for System Costs values [kW]\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"om_capacity2", (getter)SystemCosts_get_om_capacity2,(setter)SystemCosts_set_om_capacity2,
-	"Fuel cell capacity-based System Costs amount [$/kWcap], array.\n Required if ?=0.0.",
+	PyDoc_STR("*sequence*: Fuel cell capacity-based System Costs amount [$/kWcap]\n\n*Required*: set to 0.0 if not provided."),
  	NULL},
 {"om_capacity2_nameplate", (getter)SystemCosts_get_om_capacity2_nameplate,(setter)SystemCosts_set_om_capacity2_nameplate,
-	"Fuel cell capacity for System Costs values [kW], number.\n 0 if not set.",
+	PyDoc_STR("*float*: Fuel cell capacity for System Costs values [kW]\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"om_capacity_escal", (getter)SystemCosts_get_om_capacity_escal,(setter)SystemCosts_set_om_capacity_escal,
-	"Capacity-based System Costs escalation [%/year], number.\n Required if ?=0.0.",
+	PyDoc_STR("*float*: Capacity-based System Costs escalation [%/year]\n\n*Required*: set to 0.0 if not provided."),
  	NULL},
 {"om_fixed", (getter)SystemCosts_get_om_fixed,(setter)SystemCosts_set_om_fixed,
-	"Fixed System Costs annual amount [$/year], array.\n Required if ?=0.0.",
+	PyDoc_STR("*sequence*: Fixed System Costs annual amount [$/year]\n\n*Required*: set to 0.0 if not provided."),
  	NULL},
 {"om_fixed1", (getter)SystemCosts_get_om_fixed1,(setter)SystemCosts_set_om_fixed1,
-	"Battery fixed System Costs annual amount [$/year], array.\n Required if ?=0.0.",
+	PyDoc_STR("*sequence*: Battery fixed System Costs annual amount [$/year]\n\n*Required*: set to 0.0 if not provided."),
  	NULL},
 {"om_fixed2", (getter)SystemCosts_get_om_fixed2,(setter)SystemCosts_set_om_fixed2,
-	"Fuel cell fixed System Costs annual amount [$/year], array.\n Required if ?=0.0.",
+	PyDoc_STR("*sequence*: Fuel cell fixed System Costs annual amount [$/year]\n\n*Required*: set to 0.0 if not provided."),
  	NULL},
 {"om_fixed_escal", (getter)SystemCosts_get_om_fixed_escal,(setter)SystemCosts_set_om_fixed_escal,
-	"Fixed System Costs escalation [%/year], number.\n Required if ?=0.0.",
+	PyDoc_STR("*float*: Fixed System Costs escalation [%/year]\n\n*Required*: set to 0.0 if not provided."),
  	NULL},
 {"om_fuel_cost", (getter)SystemCosts_get_om_fuel_cost,(setter)SystemCosts_set_om_fuel_cost,
-	"Fuel cost [$/MMBtu], array.\n Required if ?=0.0.",
+	PyDoc_STR("*sequence*: Fuel cost [$/MMBtu]\n\n*Required*: set to 0.0 if not provided."),
  	NULL},
 {"om_fuel_cost_escal", (getter)SystemCosts_get_om_fuel_cost_escal,(setter)SystemCosts_set_om_fuel_cost_escal,
-	"Fuel cost escalation [%/year], number.\n Required if ?=0.0.",
+	PyDoc_STR("*float*: Fuel cost escalation [%/year]\n\n*Required*: set to 0.0 if not provided."),
  	NULL},
 {"om_opt_fuel_1_cost", (getter)SystemCosts_get_om_opt_fuel_1_cost,(setter)SystemCosts_set_om_opt_fuel_1_cost,
-	"Biomass feedstock cost [$/unit], array.\n Required if ?=0.0.",
+	PyDoc_STR("*sequence*: Biomass feedstock cost [$/unit]\n\n*Required*: set to 0.0 if not provided."),
  	NULL},
 {"om_opt_fuel_1_cost_escal", (getter)SystemCosts_get_om_opt_fuel_1_cost_escal,(setter)SystemCosts_set_om_opt_fuel_1_cost_escal,
-	"Biomass feedstock cost escalation [%/year], number.\n Required if ?=0.0.",
+	PyDoc_STR("*float*: Biomass feedstock cost escalation [%/year]\n\n*Required*: set to 0.0 if not provided."),
  	NULL},
 {"om_opt_fuel_1_usage", (getter)SystemCosts_get_om_opt_fuel_1_usage,(setter)SystemCosts_set_om_opt_fuel_1_usage,
-	"Biomass feedstock usage [unit], number.\n Required if ?=0.0.",
+	PyDoc_STR("*float*: Biomass feedstock usage [unit]\n\n*Required*: set to 0.0 if not provided."),
  	NULL},
 {"om_opt_fuel_2_cost", (getter)SystemCosts_get_om_opt_fuel_2_cost,(setter)SystemCosts_set_om_opt_fuel_2_cost,
-	"Coal feedstock cost [$/unit], array.\n Required if ?=0.0.",
+	PyDoc_STR("*sequence*: Coal feedstock cost [$/unit]\n\n*Required*: set to 0.0 if not provided."),
  	NULL},
 {"om_opt_fuel_2_cost_escal", (getter)SystemCosts_get_om_opt_fuel_2_cost_escal,(setter)SystemCosts_set_om_opt_fuel_2_cost_escal,
-	"Coal feedstock cost escalation [%/year], number.\n Required if ?=0.0.",
+	PyDoc_STR("*float*: Coal feedstock cost escalation [%/year]\n\n*Required*: set to 0.0 if not provided."),
  	NULL},
 {"om_opt_fuel_2_usage", (getter)SystemCosts_get_om_opt_fuel_2_usage,(setter)SystemCosts_set_om_opt_fuel_2_usage,
-	"Coal feedstock usage [unit], number.\n Required if ?=0.0.",
+	PyDoc_STR("*float*: Coal feedstock usage [unit]\n\n*Required*: set to 0.0 if not provided."),
  	NULL},
 {"om_production", (getter)SystemCosts_get_om_production,(setter)SystemCosts_set_om_production,
-	"Production-based System Costs amount [$/MWh], array.\n Required if ?=0.0.",
+	PyDoc_STR("*sequence*: Production-based System Costs amount [$/MWh]\n\n*Required*: set to 0.0 if not provided."),
  	NULL},
 {"om_production1", (getter)SystemCosts_get_om_production1,(setter)SystemCosts_set_om_production1,
-	"Battery production-based System Costs amount [$/MWh], array.\n Required if ?=0.0.",
+	PyDoc_STR("*sequence*: Battery production-based System Costs amount [$/MWh]\n\n*Required*: set to 0.0 if not provided."),
  	NULL},
 {"om_production1_values", (getter)SystemCosts_get_om_production1_values,(setter)SystemCosts_set_om_production1_values,
-	"Battery production for System Costs values [kWh], array.\n 0 if not set.",
+	PyDoc_STR("*sequence*: Battery production for System Costs values [kWh]\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"om_production2", (getter)SystemCosts_get_om_production2,(setter)SystemCosts_set_om_production2,
-	"Fuel cell production-based System Costs amount [$/MWh], array.\n Required if ?=0.0.",
+	PyDoc_STR("*sequence*: Fuel cell production-based System Costs amount [$/MWh]\n\n*Required*: set to 0.0 if not provided."),
  	NULL},
 {"om_production2_values", (getter)SystemCosts_get_om_production2_values,(setter)SystemCosts_set_om_production2_values,
-	"Fuel cell production for System Costs values [kWh], array.\n 0 if not set.",
+	PyDoc_STR("*sequence*: Fuel cell production for System Costs values [kWh]\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"om_production_escal", (getter)SystemCosts_get_om_production_escal,(setter)SystemCosts_set_om_production_escal,
-	"Production-based System Costs escalation [%/year], number.\n Required if ?=0.0.",
+	PyDoc_STR("*float*: Production-based System Costs escalation [%/year]\n\n*Required*: set to 0.0 if not provided."),
  	NULL},
 {"om_replacement_cost1", (getter)SystemCosts_get_om_replacement_cost1,(setter)SystemCosts_set_om_replacement_cost1,
-	"Repacement cost 1 [$/kWh], array.\n Required if ?=0.0.",
+	PyDoc_STR("*sequence*: Repacement cost 1 [$/kWh]\n\n*Required*: set to 0.0 if not provided."),
  	NULL},
 {"om_replacement_cost2", (getter)SystemCosts_get_om_replacement_cost2,(setter)SystemCosts_set_om_replacement_cost2,
-	"Repacement cost 2 [$/kW], array.\n Required if ?=0.0.",
+	PyDoc_STR("*sequence*: Repacement cost 2 [$/kW]\n\n*Required*: set to 0.0 if not provided."),
  	NULL},
 {"om_replacement_cost_escal", (getter)SystemCosts_get_om_replacement_cost_escal,(setter)SystemCosts_set_om_replacement_cost_escal,
-	"Replacement cost escalation [%/year], number.\n Required if ?=0.0.",
+	PyDoc_STR("*float*: Replacement cost escalation [%/year]\n\n*Required*: set to 0.0 if not provided."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -849,7 +849,7 @@ static PyTypeObject SystemCosts_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		SystemCosts_methods,         /*tp_methods*/
@@ -859,7 +859,7 @@ static PyTypeObject SystemCosts_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -919,9 +919,9 @@ Depreciation_export(DepreciationObject *self, PyObject *args)
 
 static PyMethodDef Depreciation_methods[] = {
 		{"assign",            (PyCFunction)Depreciation_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Depreciation_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Depreciation_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -934,31 +934,31 @@ Depreciation_get_depr_fed_custom(DepreciationObject *self, void *closure)
 static int
 Depreciation_set_depr_fed_custom(DepreciationObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Cashloan_Depreciation_depr_fed_custom_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Cashloan_Depreciation_depr_fed_custom_aset, self->data_ptr);
 }
 
 static PyObject *
 Depreciation_get_depr_fed_sl_years(DepreciationObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_Depreciation_depr_fed_sl_years_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_Depreciation_depr_fed_sl_years_nget, self->data_ptr);
 }
 
 static int
 Depreciation_set_depr_fed_sl_years(DepreciationObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_Depreciation_depr_fed_sl_years_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_Depreciation_depr_fed_sl_years_nset, self->data_ptr);
 }
 
 static PyObject *
 Depreciation_get_depr_fed_type(DepreciationObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_Depreciation_depr_fed_type_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_Depreciation_depr_fed_type_nget, self->data_ptr);
 }
 
 static int
 Depreciation_set_depr_fed_type(DepreciationObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_Depreciation_depr_fed_type_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_Depreciation_depr_fed_type_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -970,51 +970,51 @@ Depreciation_get_depr_sta_custom(DepreciationObject *self, void *closure)
 static int
 Depreciation_set_depr_sta_custom(DepreciationObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Cashloan_Depreciation_depr_sta_custom_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Cashloan_Depreciation_depr_sta_custom_aset, self->data_ptr);
 }
 
 static PyObject *
 Depreciation_get_depr_sta_sl_years(DepreciationObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_Depreciation_depr_sta_sl_years_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_Depreciation_depr_sta_sl_years_nget, self->data_ptr);
 }
 
 static int
 Depreciation_set_depr_sta_sl_years(DepreciationObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_Depreciation_depr_sta_sl_years_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_Depreciation_depr_sta_sl_years_nset, self->data_ptr);
 }
 
 static PyObject *
 Depreciation_get_depr_sta_type(DepreciationObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_Depreciation_depr_sta_type_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_Depreciation_depr_sta_type_nget, self->data_ptr);
 }
 
 static int
 Depreciation_set_depr_sta_type(DepreciationObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_Depreciation_depr_sta_type_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_Depreciation_depr_sta_type_nset, self->data_ptr);
 }
 
 static PyGetSetDef Depreciation_getset[] = {
 {"depr_fed_custom", (getter)Depreciation_get_depr_fed_custom,(setter)Depreciation_set_depr_fed_custom,
-	"Federal custom depreciation [%/year], array.\n Required if depr_fed_type=3.",
+	PyDoc_STR("*sequence*: Federal custom depreciation [%/year]\n\n*Required*: set to 3 if not provided."),
  	NULL},
 {"depr_fed_sl_years", (getter)Depreciation_get_depr_fed_sl_years,(setter)Depreciation_set_depr_fed_sl_years,
-	"Federal depreciation straight-line Years [years], number.\n Constraints: INTEGER,POSITIVE; Required if depr_fed_type=2.",
+	PyDoc_STR("*float*: Federal depreciation straight-line Years [years]\n\n*Constraints*: INTEGER,POSITIVE\n\n*Required*: set to 2 if not provided."),
  	NULL},
 {"depr_fed_type", (getter)Depreciation_get_depr_fed_type,(setter)Depreciation_set_depr_fed_type,
-	"Federal depreciation type, number.\n 0=none,1=macrs_half_year,2=sl,3=custom; Constraints: INTEGER,MIN=0,MAX=3; 0 if not set.",
+	PyDoc_STR("*float*: Federal depreciation type\n\n*Options*: 0=none,1=macrs_half_year,2=sl,3=custom\n\n*Constraints*: INTEGER,MIN=0,MAX=3\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"depr_sta_custom", (getter)Depreciation_get_depr_sta_custom,(setter)Depreciation_set_depr_sta_custom,
-	"State custom depreciation [%/year], array.\n Required if depr_sta_type=3.",
+	PyDoc_STR("*sequence*: State custom depreciation [%/year]\n\n*Required*: set to 3 if not provided."),
  	NULL},
 {"depr_sta_sl_years", (getter)Depreciation_get_depr_sta_sl_years,(setter)Depreciation_set_depr_sta_sl_years,
-	"State depreciation straight-line years [years], number.\n Constraints: INTEGER,POSITIVE; Required if depr_sta_type=2.",
+	PyDoc_STR("*float*: State depreciation straight-line years [years]\n\n*Constraints*: INTEGER,POSITIVE\n\n*Required*: set to 2 if not provided."),
  	NULL},
 {"depr_sta_type", (getter)Depreciation_get_depr_sta_type,(setter)Depreciation_set_depr_sta_type,
-	"State depreciation type, number.\n 0=none,1=macrs_half_year,2=sl,3=custom; Constraints: INTEGER,MIN=0,MAX=3; 0 if not set.",
+	PyDoc_STR("*float*: State depreciation type\n\n*Options*: 0=none,1=macrs_half_year,2=sl,3=custom\n\n*Constraints*: INTEGER,MIN=0,MAX=3\n\n*Required*: set to 0 if not provided."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1047,7 +1047,7 @@ static PyTypeObject Depreciation_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		Depreciation_methods,         /*tp_methods*/
@@ -1057,7 +1057,7 @@ static PyTypeObject Depreciation_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -1117,178 +1117,178 @@ TaxCreditIncentives_export(TaxCreditIncentivesObject *self, PyObject *args)
 
 static PyMethodDef TaxCreditIncentives_methods[] = {
 		{"assign",            (PyCFunction)TaxCreditIncentives_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``TaxCreditIncentives_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)TaxCreditIncentives_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 static PyObject *
 TaxCreditIncentives_get_itc_fed_amount(TaxCreditIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_TaxCreditIncentives_itc_fed_amount_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_TaxCreditIncentives_itc_fed_amount_nget, self->data_ptr);
 }
 
 static int
 TaxCreditIncentives_set_itc_fed_amount(TaxCreditIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_TaxCreditIncentives_itc_fed_amount_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_TaxCreditIncentives_itc_fed_amount_nset, self->data_ptr);
 }
 
 static PyObject *
 TaxCreditIncentives_get_itc_fed_amount_deprbas_fed(TaxCreditIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_TaxCreditIncentives_itc_fed_amount_deprbas_fed_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_TaxCreditIncentives_itc_fed_amount_deprbas_fed_nget, self->data_ptr);
 }
 
 static int
 TaxCreditIncentives_set_itc_fed_amount_deprbas_fed(TaxCreditIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_TaxCreditIncentives_itc_fed_amount_deprbas_fed_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_TaxCreditIncentives_itc_fed_amount_deprbas_fed_nset, self->data_ptr);
 }
 
 static PyObject *
 TaxCreditIncentives_get_itc_fed_amount_deprbas_sta(TaxCreditIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_TaxCreditIncentives_itc_fed_amount_deprbas_sta_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_TaxCreditIncentives_itc_fed_amount_deprbas_sta_nget, self->data_ptr);
 }
 
 static int
 TaxCreditIncentives_set_itc_fed_amount_deprbas_sta(TaxCreditIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_TaxCreditIncentives_itc_fed_amount_deprbas_sta_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_TaxCreditIncentives_itc_fed_amount_deprbas_sta_nset, self->data_ptr);
 }
 
 static PyObject *
 TaxCreditIncentives_get_itc_fed_percent(TaxCreditIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_TaxCreditIncentives_itc_fed_percent_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_TaxCreditIncentives_itc_fed_percent_nget, self->data_ptr);
 }
 
 static int
 TaxCreditIncentives_set_itc_fed_percent(TaxCreditIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_TaxCreditIncentives_itc_fed_percent_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_TaxCreditIncentives_itc_fed_percent_nset, self->data_ptr);
 }
 
 static PyObject *
 TaxCreditIncentives_get_itc_fed_percent_deprbas_fed(TaxCreditIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_TaxCreditIncentives_itc_fed_percent_deprbas_fed_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_TaxCreditIncentives_itc_fed_percent_deprbas_fed_nget, self->data_ptr);
 }
 
 static int
 TaxCreditIncentives_set_itc_fed_percent_deprbas_fed(TaxCreditIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_TaxCreditIncentives_itc_fed_percent_deprbas_fed_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_TaxCreditIncentives_itc_fed_percent_deprbas_fed_nset, self->data_ptr);
 }
 
 static PyObject *
 TaxCreditIncentives_get_itc_fed_percent_deprbas_sta(TaxCreditIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_TaxCreditIncentives_itc_fed_percent_deprbas_sta_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_TaxCreditIncentives_itc_fed_percent_deprbas_sta_nget, self->data_ptr);
 }
 
 static int
 TaxCreditIncentives_set_itc_fed_percent_deprbas_sta(TaxCreditIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_TaxCreditIncentives_itc_fed_percent_deprbas_sta_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_TaxCreditIncentives_itc_fed_percent_deprbas_sta_nset, self->data_ptr);
 }
 
 static PyObject *
 TaxCreditIncentives_get_itc_fed_percent_maxvalue(TaxCreditIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_TaxCreditIncentives_itc_fed_percent_maxvalue_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_TaxCreditIncentives_itc_fed_percent_maxvalue_nget, self->data_ptr);
 }
 
 static int
 TaxCreditIncentives_set_itc_fed_percent_maxvalue(TaxCreditIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_TaxCreditIncentives_itc_fed_percent_maxvalue_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_TaxCreditIncentives_itc_fed_percent_maxvalue_nset, self->data_ptr);
 }
 
 static PyObject *
 TaxCreditIncentives_get_itc_sta_amount(TaxCreditIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_TaxCreditIncentives_itc_sta_amount_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_TaxCreditIncentives_itc_sta_amount_nget, self->data_ptr);
 }
 
 static int
 TaxCreditIncentives_set_itc_sta_amount(TaxCreditIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_TaxCreditIncentives_itc_sta_amount_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_TaxCreditIncentives_itc_sta_amount_nset, self->data_ptr);
 }
 
 static PyObject *
 TaxCreditIncentives_get_itc_sta_amount_deprbas_fed(TaxCreditIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_TaxCreditIncentives_itc_sta_amount_deprbas_fed_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_TaxCreditIncentives_itc_sta_amount_deprbas_fed_nget, self->data_ptr);
 }
 
 static int
 TaxCreditIncentives_set_itc_sta_amount_deprbas_fed(TaxCreditIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_TaxCreditIncentives_itc_sta_amount_deprbas_fed_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_TaxCreditIncentives_itc_sta_amount_deprbas_fed_nset, self->data_ptr);
 }
 
 static PyObject *
 TaxCreditIncentives_get_itc_sta_amount_deprbas_sta(TaxCreditIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_TaxCreditIncentives_itc_sta_amount_deprbas_sta_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_TaxCreditIncentives_itc_sta_amount_deprbas_sta_nget, self->data_ptr);
 }
 
 static int
 TaxCreditIncentives_set_itc_sta_amount_deprbas_sta(TaxCreditIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_TaxCreditIncentives_itc_sta_amount_deprbas_sta_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_TaxCreditIncentives_itc_sta_amount_deprbas_sta_nset, self->data_ptr);
 }
 
 static PyObject *
 TaxCreditIncentives_get_itc_sta_percent(TaxCreditIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_TaxCreditIncentives_itc_sta_percent_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_TaxCreditIncentives_itc_sta_percent_nget, self->data_ptr);
 }
 
 static int
 TaxCreditIncentives_set_itc_sta_percent(TaxCreditIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_TaxCreditIncentives_itc_sta_percent_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_TaxCreditIncentives_itc_sta_percent_nset, self->data_ptr);
 }
 
 static PyObject *
 TaxCreditIncentives_get_itc_sta_percent_deprbas_fed(TaxCreditIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_TaxCreditIncentives_itc_sta_percent_deprbas_fed_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_TaxCreditIncentives_itc_sta_percent_deprbas_fed_nget, self->data_ptr);
 }
 
 static int
 TaxCreditIncentives_set_itc_sta_percent_deprbas_fed(TaxCreditIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_TaxCreditIncentives_itc_sta_percent_deprbas_fed_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_TaxCreditIncentives_itc_sta_percent_deprbas_fed_nset, self->data_ptr);
 }
 
 static PyObject *
 TaxCreditIncentives_get_itc_sta_percent_deprbas_sta(TaxCreditIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_TaxCreditIncentives_itc_sta_percent_deprbas_sta_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_TaxCreditIncentives_itc_sta_percent_deprbas_sta_nget, self->data_ptr);
 }
 
 static int
 TaxCreditIncentives_set_itc_sta_percent_deprbas_sta(TaxCreditIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_TaxCreditIncentives_itc_sta_percent_deprbas_sta_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_TaxCreditIncentives_itc_sta_percent_deprbas_sta_nset, self->data_ptr);
 }
 
 static PyObject *
 TaxCreditIncentives_get_itc_sta_percent_maxvalue(TaxCreditIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_TaxCreditIncentives_itc_sta_percent_maxvalue_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_TaxCreditIncentives_itc_sta_percent_maxvalue_nget, self->data_ptr);
 }
 
 static int
 TaxCreditIncentives_set_itc_sta_percent_maxvalue(TaxCreditIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_TaxCreditIncentives_itc_sta_percent_maxvalue_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_TaxCreditIncentives_itc_sta_percent_maxvalue_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -1300,31 +1300,31 @@ TaxCreditIncentives_get_ptc_fed_amount(TaxCreditIncentivesObject *self, void *cl
 static int
 TaxCreditIncentives_set_ptc_fed_amount(TaxCreditIncentivesObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Cashloan_TaxCreditIncentives_ptc_fed_amount_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Cashloan_TaxCreditIncentives_ptc_fed_amount_aset, self->data_ptr);
 }
 
 static PyObject *
 TaxCreditIncentives_get_ptc_fed_escal(TaxCreditIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_TaxCreditIncentives_ptc_fed_escal_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_TaxCreditIncentives_ptc_fed_escal_nget, self->data_ptr);
 }
 
 static int
 TaxCreditIncentives_set_ptc_fed_escal(TaxCreditIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_TaxCreditIncentives_ptc_fed_escal_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_TaxCreditIncentives_ptc_fed_escal_nset, self->data_ptr);
 }
 
 static PyObject *
 TaxCreditIncentives_get_ptc_fed_term(TaxCreditIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_TaxCreditIncentives_ptc_fed_term_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_TaxCreditIncentives_ptc_fed_term_nget, self->data_ptr);
 }
 
 static int
 TaxCreditIncentives_set_ptc_fed_term(TaxCreditIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_TaxCreditIncentives_ptc_fed_term_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_TaxCreditIncentives_ptc_fed_term_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -1336,93 +1336,93 @@ TaxCreditIncentives_get_ptc_sta_amount(TaxCreditIncentivesObject *self, void *cl
 static int
 TaxCreditIncentives_set_ptc_sta_amount(TaxCreditIncentivesObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Cashloan_TaxCreditIncentives_ptc_sta_amount_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Cashloan_TaxCreditIncentives_ptc_sta_amount_aset, self->data_ptr);
 }
 
 static PyObject *
 TaxCreditIncentives_get_ptc_sta_escal(TaxCreditIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_TaxCreditIncentives_ptc_sta_escal_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_TaxCreditIncentives_ptc_sta_escal_nget, self->data_ptr);
 }
 
 static int
 TaxCreditIncentives_set_ptc_sta_escal(TaxCreditIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_TaxCreditIncentives_ptc_sta_escal_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_TaxCreditIncentives_ptc_sta_escal_nset, self->data_ptr);
 }
 
 static PyObject *
 TaxCreditIncentives_get_ptc_sta_term(TaxCreditIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_TaxCreditIncentives_ptc_sta_term_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_TaxCreditIncentives_ptc_sta_term_nget, self->data_ptr);
 }
 
 static int
 TaxCreditIncentives_set_ptc_sta_term(TaxCreditIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_TaxCreditIncentives_ptc_sta_term_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_TaxCreditIncentives_ptc_sta_term_nset, self->data_ptr);
 }
 
 static PyGetSetDef TaxCreditIncentives_getset[] = {
 {"itc_fed_amount", (getter)TaxCreditIncentives_get_itc_fed_amount,(setter)TaxCreditIncentives_set_itc_fed_amount,
-	"Federal amount-based ITC amount [$], number.\n 0 if not set.",
+	PyDoc_STR("*float*: Federal amount-based ITC amount [$]\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"itc_fed_amount_deprbas_fed", (getter)TaxCreditIncentives_get_itc_fed_amount_deprbas_fed,(setter)TaxCreditIncentives_set_itc_fed_amount_deprbas_fed,
-	"Federal amount-based ITC reduces federal depreciation basis [0/1], number.\n Constraints: BOOLEAN; Required if ?=1.",
+	PyDoc_STR("*float*: Federal amount-based ITC reduces federal depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"itc_fed_amount_deprbas_sta", (getter)TaxCreditIncentives_get_itc_fed_amount_deprbas_sta,(setter)TaxCreditIncentives_set_itc_fed_amount_deprbas_sta,
-	"Federal amount-based ITC reduces state depreciation basis [0/1], number.\n Constraints: BOOLEAN; Required if ?=1.",
+	PyDoc_STR("*float*: Federal amount-based ITC reduces state depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"itc_fed_percent", (getter)TaxCreditIncentives_get_itc_fed_percent,(setter)TaxCreditIncentives_set_itc_fed_percent,
-	"Federal percentage-based ITC percent [%], number.\n 0 if not set.",
+	PyDoc_STR("*float*: Federal percentage-based ITC percent [%]\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"itc_fed_percent_deprbas_fed", (getter)TaxCreditIncentives_get_itc_fed_percent_deprbas_fed,(setter)TaxCreditIncentives_set_itc_fed_percent_deprbas_fed,
-	"Federal percentage-based ITC reduces federal depreciation basis [0/1], number.\n Constraints: BOOLEAN; Required if ?=1.",
+	PyDoc_STR("*float*: Federal percentage-based ITC reduces federal depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"itc_fed_percent_deprbas_sta", (getter)TaxCreditIncentives_get_itc_fed_percent_deprbas_sta,(setter)TaxCreditIncentives_set_itc_fed_percent_deprbas_sta,
-	"Federal percentage-based ITC reduces state depreciation basis [0/1], number.\n Constraints: BOOLEAN; Required if ?=1.",
+	PyDoc_STR("*float*: Federal percentage-based ITC reduces state depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"itc_fed_percent_maxvalue", (getter)TaxCreditIncentives_get_itc_fed_percent_maxvalue,(setter)TaxCreditIncentives_set_itc_fed_percent_maxvalue,
-	"Federal percentage-based ITC maximum value [$], number.\n Required if ?=1e99.",
+	PyDoc_STR("*float*: Federal percentage-based ITC maximum value [$]\n\n*Required*: set to 1e99 if not provided."),
  	NULL},
 {"itc_sta_amount", (getter)TaxCreditIncentives_get_itc_sta_amount,(setter)TaxCreditIncentives_set_itc_sta_amount,
-	"State amount-based ITC amount [$], number.\n 0 if not set.",
+	PyDoc_STR("*float*: State amount-based ITC amount [$]\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"itc_sta_amount_deprbas_fed", (getter)TaxCreditIncentives_get_itc_sta_amount_deprbas_fed,(setter)TaxCreditIncentives_set_itc_sta_amount_deprbas_fed,
-	"State amount-based ITC reduces federal depreciation basis [0/1], number.\n Constraints: BOOLEAN; 0 if not set.",
+	PyDoc_STR("*float*: State amount-based ITC reduces federal depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"itc_sta_amount_deprbas_sta", (getter)TaxCreditIncentives_get_itc_sta_amount_deprbas_sta,(setter)TaxCreditIncentives_set_itc_sta_amount_deprbas_sta,
-	"State amount-based ITC reduces state depreciation basis [0/1], number.\n Constraints: BOOLEAN; 0 if not set.",
+	PyDoc_STR("*float*: State amount-based ITC reduces state depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"itc_sta_percent", (getter)TaxCreditIncentives_get_itc_sta_percent,(setter)TaxCreditIncentives_set_itc_sta_percent,
-	"State percentage-based ITC percent [%], number.\n 0 if not set.",
+	PyDoc_STR("*float*: State percentage-based ITC percent [%]\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"itc_sta_percent_deprbas_fed", (getter)TaxCreditIncentives_get_itc_sta_percent_deprbas_fed,(setter)TaxCreditIncentives_set_itc_sta_percent_deprbas_fed,
-	"State percentage-based ITC reduces federal depreciation basis [0/1], number.\n Constraints: BOOLEAN; 0 if not set.",
+	PyDoc_STR("*float*: State percentage-based ITC reduces federal depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"itc_sta_percent_deprbas_sta", (getter)TaxCreditIncentives_get_itc_sta_percent_deprbas_sta,(setter)TaxCreditIncentives_set_itc_sta_percent_deprbas_sta,
-	"State percentage-based ITC reduces state depreciation basis [0/1], number.\n Constraints: BOOLEAN; 0 if not set.",
+	PyDoc_STR("*float*: State percentage-based ITC reduces state depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"itc_sta_percent_maxvalue", (getter)TaxCreditIncentives_get_itc_sta_percent_maxvalue,(setter)TaxCreditIncentives_set_itc_sta_percent_maxvalue,
-	"State percentage-based ITC maximum Value [$], number.\n Required if ?=1e99.",
+	PyDoc_STR("*float*: State percentage-based ITC maximum Value [$]\n\n*Required*: set to 1e99 if not provided."),
  	NULL},
 {"ptc_fed_amount", (getter)TaxCreditIncentives_get_ptc_fed_amount,(setter)TaxCreditIncentives_set_ptc_fed_amount,
-	"Federal PTC amount [$/kWh], array.\n 0 if not set.",
+	PyDoc_STR("*sequence*: Federal PTC amount [$/kWh]\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"ptc_fed_escal", (getter)TaxCreditIncentives_get_ptc_fed_escal,(setter)TaxCreditIncentives_set_ptc_fed_escal,
-	"Federal PTC escalation [%/year], number.\n 0 if not set.",
+	PyDoc_STR("*float*: Federal PTC escalation [%/year]\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"ptc_fed_term", (getter)TaxCreditIncentives_get_ptc_fed_term,(setter)TaxCreditIncentives_set_ptc_fed_term,
-	"Federal PTC term [years], number.\n Required if ?=10.",
+	PyDoc_STR("*float*: Federal PTC term [years]\n\n*Required*: set to 10 if not provided."),
  	NULL},
 {"ptc_sta_amount", (getter)TaxCreditIncentives_get_ptc_sta_amount,(setter)TaxCreditIncentives_set_ptc_sta_amount,
-	"State PTC amount [$/kWh], array.\n 0 if not set.",
+	PyDoc_STR("*sequence*: State PTC amount [$/kWh]\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"ptc_sta_escal", (getter)TaxCreditIncentives_get_ptc_sta_escal,(setter)TaxCreditIncentives_set_ptc_sta_escal,
-	"State PTC escalation [%/year], number.\n 0 if not set.",
+	PyDoc_STR("*float*: State PTC escalation [%/year]\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"ptc_sta_term", (getter)TaxCreditIncentives_get_ptc_sta_term,(setter)TaxCreditIncentives_set_ptc_sta_term,
-	"State PTC term [years], number.\n Required if ?=10.",
+	PyDoc_STR("*float*: State PTC term [years]\n\n*Required*: set to 10 if not provided."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1455,7 +1455,7 @@ static PyTypeObject TaxCreditIncentives_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		TaxCreditIncentives_methods,         /*tp_methods*/
@@ -1465,7 +1465,7 @@ static PyTypeObject TaxCreditIncentives_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -1525,826 +1525,826 @@ PaymentIncentives_export(PaymentIncentivesObject *self, PyObject *args)
 
 static PyMethodDef PaymentIncentives_methods[] = {
 		{"assign",            (PyCFunction)PaymentIncentives_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``PaymentIncentives_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)PaymentIncentives_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 static PyObject *
 PaymentIncentives_get_cbi_fed_amount(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_cbi_fed_amount_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_cbi_fed_amount_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_cbi_fed_amount(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_cbi_fed_amount_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_cbi_fed_amount_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_cbi_fed_deprbas_fed(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_cbi_fed_deprbas_fed_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_cbi_fed_deprbas_fed_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_cbi_fed_deprbas_fed(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_cbi_fed_deprbas_fed_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_cbi_fed_deprbas_fed_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_cbi_fed_deprbas_sta(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_cbi_fed_deprbas_sta_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_cbi_fed_deprbas_sta_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_cbi_fed_deprbas_sta(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_cbi_fed_deprbas_sta_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_cbi_fed_deprbas_sta_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_cbi_fed_maxvalue(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_cbi_fed_maxvalue_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_cbi_fed_maxvalue_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_cbi_fed_maxvalue(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_cbi_fed_maxvalue_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_cbi_fed_maxvalue_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_cbi_fed_tax_fed(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_cbi_fed_tax_fed_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_cbi_fed_tax_fed_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_cbi_fed_tax_fed(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_cbi_fed_tax_fed_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_cbi_fed_tax_fed_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_cbi_fed_tax_sta(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_cbi_fed_tax_sta_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_cbi_fed_tax_sta_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_cbi_fed_tax_sta(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_cbi_fed_tax_sta_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_cbi_fed_tax_sta_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_cbi_oth_amount(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_cbi_oth_amount_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_cbi_oth_amount_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_cbi_oth_amount(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_cbi_oth_amount_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_cbi_oth_amount_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_cbi_oth_deprbas_fed(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_cbi_oth_deprbas_fed_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_cbi_oth_deprbas_fed_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_cbi_oth_deprbas_fed(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_cbi_oth_deprbas_fed_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_cbi_oth_deprbas_fed_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_cbi_oth_deprbas_sta(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_cbi_oth_deprbas_sta_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_cbi_oth_deprbas_sta_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_cbi_oth_deprbas_sta(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_cbi_oth_deprbas_sta_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_cbi_oth_deprbas_sta_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_cbi_oth_maxvalue(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_cbi_oth_maxvalue_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_cbi_oth_maxvalue_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_cbi_oth_maxvalue(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_cbi_oth_maxvalue_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_cbi_oth_maxvalue_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_cbi_oth_tax_fed(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_cbi_oth_tax_fed_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_cbi_oth_tax_fed_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_cbi_oth_tax_fed(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_cbi_oth_tax_fed_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_cbi_oth_tax_fed_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_cbi_oth_tax_sta(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_cbi_oth_tax_sta_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_cbi_oth_tax_sta_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_cbi_oth_tax_sta(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_cbi_oth_tax_sta_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_cbi_oth_tax_sta_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_cbi_sta_amount(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_cbi_sta_amount_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_cbi_sta_amount_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_cbi_sta_amount(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_cbi_sta_amount_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_cbi_sta_amount_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_cbi_sta_deprbas_fed(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_cbi_sta_deprbas_fed_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_cbi_sta_deprbas_fed_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_cbi_sta_deprbas_fed(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_cbi_sta_deprbas_fed_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_cbi_sta_deprbas_fed_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_cbi_sta_deprbas_sta(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_cbi_sta_deprbas_sta_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_cbi_sta_deprbas_sta_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_cbi_sta_deprbas_sta(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_cbi_sta_deprbas_sta_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_cbi_sta_deprbas_sta_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_cbi_sta_maxvalue(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_cbi_sta_maxvalue_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_cbi_sta_maxvalue_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_cbi_sta_maxvalue(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_cbi_sta_maxvalue_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_cbi_sta_maxvalue_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_cbi_sta_tax_fed(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_cbi_sta_tax_fed_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_cbi_sta_tax_fed_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_cbi_sta_tax_fed(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_cbi_sta_tax_fed_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_cbi_sta_tax_fed_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_cbi_sta_tax_sta(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_cbi_sta_tax_sta_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_cbi_sta_tax_sta_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_cbi_sta_tax_sta(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_cbi_sta_tax_sta_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_cbi_sta_tax_sta_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_cbi_uti_amount(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_cbi_uti_amount_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_cbi_uti_amount_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_cbi_uti_amount(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_cbi_uti_amount_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_cbi_uti_amount_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_cbi_uti_deprbas_fed(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_cbi_uti_deprbas_fed_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_cbi_uti_deprbas_fed_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_cbi_uti_deprbas_fed(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_cbi_uti_deprbas_fed_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_cbi_uti_deprbas_fed_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_cbi_uti_deprbas_sta(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_cbi_uti_deprbas_sta_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_cbi_uti_deprbas_sta_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_cbi_uti_deprbas_sta(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_cbi_uti_deprbas_sta_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_cbi_uti_deprbas_sta_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_cbi_uti_maxvalue(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_cbi_uti_maxvalue_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_cbi_uti_maxvalue_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_cbi_uti_maxvalue(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_cbi_uti_maxvalue_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_cbi_uti_maxvalue_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_cbi_uti_tax_fed(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_cbi_uti_tax_fed_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_cbi_uti_tax_fed_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_cbi_uti_tax_fed(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_cbi_uti_tax_fed_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_cbi_uti_tax_fed_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_cbi_uti_tax_sta(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_cbi_uti_tax_sta_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_cbi_uti_tax_sta_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_cbi_uti_tax_sta(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_cbi_uti_tax_sta_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_cbi_uti_tax_sta_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_fed_amount(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_ibi_fed_amount_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_ibi_fed_amount_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_fed_amount(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_ibi_fed_amount_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_ibi_fed_amount_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_fed_amount_deprbas_fed(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_ibi_fed_amount_deprbas_fed_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_ibi_fed_amount_deprbas_fed_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_fed_amount_deprbas_fed(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_ibi_fed_amount_deprbas_fed_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_ibi_fed_amount_deprbas_fed_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_fed_amount_deprbas_sta(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_ibi_fed_amount_deprbas_sta_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_ibi_fed_amount_deprbas_sta_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_fed_amount_deprbas_sta(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_ibi_fed_amount_deprbas_sta_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_ibi_fed_amount_deprbas_sta_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_fed_amount_tax_fed(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_ibi_fed_amount_tax_fed_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_ibi_fed_amount_tax_fed_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_fed_amount_tax_fed(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_ibi_fed_amount_tax_fed_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_ibi_fed_amount_tax_fed_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_fed_amount_tax_sta(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_ibi_fed_amount_tax_sta_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_ibi_fed_amount_tax_sta_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_fed_amount_tax_sta(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_ibi_fed_amount_tax_sta_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_ibi_fed_amount_tax_sta_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_fed_percent(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_ibi_fed_percent_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_ibi_fed_percent_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_fed_percent(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_ibi_fed_percent_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_ibi_fed_percent_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_fed_percent_deprbas_fed(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_ibi_fed_percent_deprbas_fed_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_ibi_fed_percent_deprbas_fed_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_fed_percent_deprbas_fed(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_ibi_fed_percent_deprbas_fed_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_ibi_fed_percent_deprbas_fed_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_fed_percent_deprbas_sta(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_ibi_fed_percent_deprbas_sta_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_ibi_fed_percent_deprbas_sta_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_fed_percent_deprbas_sta(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_ibi_fed_percent_deprbas_sta_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_ibi_fed_percent_deprbas_sta_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_fed_percent_maxvalue(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_ibi_fed_percent_maxvalue_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_ibi_fed_percent_maxvalue_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_fed_percent_maxvalue(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_ibi_fed_percent_maxvalue_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_ibi_fed_percent_maxvalue_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_fed_percent_tax_fed(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_ibi_fed_percent_tax_fed_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_ibi_fed_percent_tax_fed_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_fed_percent_tax_fed(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_ibi_fed_percent_tax_fed_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_ibi_fed_percent_tax_fed_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_fed_percent_tax_sta(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_ibi_fed_percent_tax_sta_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_ibi_fed_percent_tax_sta_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_fed_percent_tax_sta(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_ibi_fed_percent_tax_sta_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_ibi_fed_percent_tax_sta_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_oth_amount(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_ibi_oth_amount_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_ibi_oth_amount_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_oth_amount(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_ibi_oth_amount_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_ibi_oth_amount_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_oth_amount_deprbas_fed(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_ibi_oth_amount_deprbas_fed_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_ibi_oth_amount_deprbas_fed_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_oth_amount_deprbas_fed(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_ibi_oth_amount_deprbas_fed_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_ibi_oth_amount_deprbas_fed_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_oth_amount_deprbas_sta(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_ibi_oth_amount_deprbas_sta_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_ibi_oth_amount_deprbas_sta_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_oth_amount_deprbas_sta(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_ibi_oth_amount_deprbas_sta_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_ibi_oth_amount_deprbas_sta_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_oth_amount_tax_fed(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_ibi_oth_amount_tax_fed_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_ibi_oth_amount_tax_fed_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_oth_amount_tax_fed(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_ibi_oth_amount_tax_fed_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_ibi_oth_amount_tax_fed_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_oth_amount_tax_sta(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_ibi_oth_amount_tax_sta_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_ibi_oth_amount_tax_sta_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_oth_amount_tax_sta(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_ibi_oth_amount_tax_sta_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_ibi_oth_amount_tax_sta_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_oth_percent(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_ibi_oth_percent_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_ibi_oth_percent_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_oth_percent(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_ibi_oth_percent_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_ibi_oth_percent_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_oth_percent_deprbas_fed(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_ibi_oth_percent_deprbas_fed_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_ibi_oth_percent_deprbas_fed_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_oth_percent_deprbas_fed(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_ibi_oth_percent_deprbas_fed_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_ibi_oth_percent_deprbas_fed_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_oth_percent_deprbas_sta(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_ibi_oth_percent_deprbas_sta_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_ibi_oth_percent_deprbas_sta_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_oth_percent_deprbas_sta(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_ibi_oth_percent_deprbas_sta_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_ibi_oth_percent_deprbas_sta_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_oth_percent_maxvalue(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_ibi_oth_percent_maxvalue_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_ibi_oth_percent_maxvalue_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_oth_percent_maxvalue(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_ibi_oth_percent_maxvalue_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_ibi_oth_percent_maxvalue_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_oth_percent_tax_fed(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_ibi_oth_percent_tax_fed_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_ibi_oth_percent_tax_fed_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_oth_percent_tax_fed(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_ibi_oth_percent_tax_fed_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_ibi_oth_percent_tax_fed_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_oth_percent_tax_sta(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_ibi_oth_percent_tax_sta_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_ibi_oth_percent_tax_sta_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_oth_percent_tax_sta(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_ibi_oth_percent_tax_sta_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_ibi_oth_percent_tax_sta_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_sta_amount(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_ibi_sta_amount_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_ibi_sta_amount_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_sta_amount(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_ibi_sta_amount_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_ibi_sta_amount_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_sta_amount_deprbas_fed(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_ibi_sta_amount_deprbas_fed_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_ibi_sta_amount_deprbas_fed_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_sta_amount_deprbas_fed(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_ibi_sta_amount_deprbas_fed_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_ibi_sta_amount_deprbas_fed_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_sta_amount_deprbas_sta(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_ibi_sta_amount_deprbas_sta_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_ibi_sta_amount_deprbas_sta_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_sta_amount_deprbas_sta(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_ibi_sta_amount_deprbas_sta_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_ibi_sta_amount_deprbas_sta_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_sta_amount_tax_fed(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_ibi_sta_amount_tax_fed_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_ibi_sta_amount_tax_fed_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_sta_amount_tax_fed(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_ibi_sta_amount_tax_fed_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_ibi_sta_amount_tax_fed_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_sta_amount_tax_sta(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_ibi_sta_amount_tax_sta_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_ibi_sta_amount_tax_sta_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_sta_amount_tax_sta(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_ibi_sta_amount_tax_sta_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_ibi_sta_amount_tax_sta_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_sta_percent(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_ibi_sta_percent_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_ibi_sta_percent_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_sta_percent(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_ibi_sta_percent_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_ibi_sta_percent_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_sta_percent_deprbas_fed(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_ibi_sta_percent_deprbas_fed_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_ibi_sta_percent_deprbas_fed_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_sta_percent_deprbas_fed(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_ibi_sta_percent_deprbas_fed_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_ibi_sta_percent_deprbas_fed_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_sta_percent_deprbas_sta(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_ibi_sta_percent_deprbas_sta_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_ibi_sta_percent_deprbas_sta_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_sta_percent_deprbas_sta(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_ibi_sta_percent_deprbas_sta_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_ibi_sta_percent_deprbas_sta_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_sta_percent_maxvalue(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_ibi_sta_percent_maxvalue_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_ibi_sta_percent_maxvalue_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_sta_percent_maxvalue(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_ibi_sta_percent_maxvalue_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_ibi_sta_percent_maxvalue_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_sta_percent_tax_fed(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_ibi_sta_percent_tax_fed_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_ibi_sta_percent_tax_fed_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_sta_percent_tax_fed(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_ibi_sta_percent_tax_fed_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_ibi_sta_percent_tax_fed_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_sta_percent_tax_sta(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_ibi_sta_percent_tax_sta_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_ibi_sta_percent_tax_sta_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_sta_percent_tax_sta(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_ibi_sta_percent_tax_sta_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_ibi_sta_percent_tax_sta_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_uti_amount(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_ibi_uti_amount_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_ibi_uti_amount_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_uti_amount(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_ibi_uti_amount_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_ibi_uti_amount_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_uti_amount_deprbas_fed(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_ibi_uti_amount_deprbas_fed_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_ibi_uti_amount_deprbas_fed_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_uti_amount_deprbas_fed(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_ibi_uti_amount_deprbas_fed_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_ibi_uti_amount_deprbas_fed_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_uti_amount_deprbas_sta(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_ibi_uti_amount_deprbas_sta_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_ibi_uti_amount_deprbas_sta_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_uti_amount_deprbas_sta(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_ibi_uti_amount_deprbas_sta_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_ibi_uti_amount_deprbas_sta_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_uti_amount_tax_fed(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_ibi_uti_amount_tax_fed_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_ibi_uti_amount_tax_fed_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_uti_amount_tax_fed(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_ibi_uti_amount_tax_fed_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_ibi_uti_amount_tax_fed_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_uti_amount_tax_sta(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_ibi_uti_amount_tax_sta_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_ibi_uti_amount_tax_sta_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_uti_amount_tax_sta(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_ibi_uti_amount_tax_sta_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_ibi_uti_amount_tax_sta_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_uti_percent(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_ibi_uti_percent_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_ibi_uti_percent_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_uti_percent(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_ibi_uti_percent_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_ibi_uti_percent_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_uti_percent_deprbas_fed(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_ibi_uti_percent_deprbas_fed_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_ibi_uti_percent_deprbas_fed_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_uti_percent_deprbas_fed(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_ibi_uti_percent_deprbas_fed_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_ibi_uti_percent_deprbas_fed_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_uti_percent_deprbas_sta(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_ibi_uti_percent_deprbas_sta_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_ibi_uti_percent_deprbas_sta_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_uti_percent_deprbas_sta(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_ibi_uti_percent_deprbas_sta_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_ibi_uti_percent_deprbas_sta_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_uti_percent_maxvalue(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_ibi_uti_percent_maxvalue_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_ibi_uti_percent_maxvalue_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_uti_percent_maxvalue(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_ibi_uti_percent_maxvalue_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_ibi_uti_percent_maxvalue_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_uti_percent_tax_fed(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_ibi_uti_percent_tax_fed_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_ibi_uti_percent_tax_fed_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_uti_percent_tax_fed(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_ibi_uti_percent_tax_fed_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_ibi_uti_percent_tax_fed_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_uti_percent_tax_sta(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_ibi_uti_percent_tax_sta_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_ibi_uti_percent_tax_sta_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_uti_percent_tax_sta(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_ibi_uti_percent_tax_sta_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_ibi_uti_percent_tax_sta_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -2356,55 +2356,55 @@ PaymentIncentives_get_pbi_fed_amount(PaymentIncentivesObject *self, void *closur
 static int
 PaymentIncentives_set_pbi_fed_amount(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Cashloan_PaymentIncentives_pbi_fed_amount_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Cashloan_PaymentIncentives_pbi_fed_amount_aset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_pbi_fed_escal(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_pbi_fed_escal_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_pbi_fed_escal_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_pbi_fed_escal(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_pbi_fed_escal_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_pbi_fed_escal_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_pbi_fed_tax_fed(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_pbi_fed_tax_fed_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_pbi_fed_tax_fed_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_pbi_fed_tax_fed(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_pbi_fed_tax_fed_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_pbi_fed_tax_fed_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_pbi_fed_tax_sta(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_pbi_fed_tax_sta_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_pbi_fed_tax_sta_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_pbi_fed_tax_sta(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_pbi_fed_tax_sta_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_pbi_fed_tax_sta_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_pbi_fed_term(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_pbi_fed_term_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_pbi_fed_term_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_pbi_fed_term(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_pbi_fed_term_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_pbi_fed_term_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -2416,55 +2416,55 @@ PaymentIncentives_get_pbi_oth_amount(PaymentIncentivesObject *self, void *closur
 static int
 PaymentIncentives_set_pbi_oth_amount(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Cashloan_PaymentIncentives_pbi_oth_amount_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Cashloan_PaymentIncentives_pbi_oth_amount_aset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_pbi_oth_escal(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_pbi_oth_escal_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_pbi_oth_escal_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_pbi_oth_escal(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_pbi_oth_escal_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_pbi_oth_escal_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_pbi_oth_tax_fed(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_pbi_oth_tax_fed_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_pbi_oth_tax_fed_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_pbi_oth_tax_fed(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_pbi_oth_tax_fed_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_pbi_oth_tax_fed_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_pbi_oth_tax_sta(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_pbi_oth_tax_sta_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_pbi_oth_tax_sta_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_pbi_oth_tax_sta(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_pbi_oth_tax_sta_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_pbi_oth_tax_sta_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_pbi_oth_term(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_pbi_oth_term_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_pbi_oth_term_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_pbi_oth_term(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_pbi_oth_term_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_pbi_oth_term_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -2476,55 +2476,55 @@ PaymentIncentives_get_pbi_sta_amount(PaymentIncentivesObject *self, void *closur
 static int
 PaymentIncentives_set_pbi_sta_amount(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Cashloan_PaymentIncentives_pbi_sta_amount_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Cashloan_PaymentIncentives_pbi_sta_amount_aset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_pbi_sta_escal(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_pbi_sta_escal_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_pbi_sta_escal_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_pbi_sta_escal(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_pbi_sta_escal_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_pbi_sta_escal_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_pbi_sta_tax_fed(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_pbi_sta_tax_fed_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_pbi_sta_tax_fed_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_pbi_sta_tax_fed(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_pbi_sta_tax_fed_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_pbi_sta_tax_fed_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_pbi_sta_tax_sta(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_pbi_sta_tax_sta_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_pbi_sta_tax_sta_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_pbi_sta_tax_sta(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_pbi_sta_tax_sta_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_pbi_sta_tax_sta_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_pbi_sta_term(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_pbi_sta_term_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_pbi_sta_term_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_pbi_sta_term(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_pbi_sta_term_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_pbi_sta_term_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -2536,321 +2536,321 @@ PaymentIncentives_get_pbi_uti_amount(PaymentIncentivesObject *self, void *closur
 static int
 PaymentIncentives_set_pbi_uti_amount(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Cashloan_PaymentIncentives_pbi_uti_amount_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Cashloan_PaymentIncentives_pbi_uti_amount_aset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_pbi_uti_escal(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_pbi_uti_escal_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_pbi_uti_escal_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_pbi_uti_escal(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_pbi_uti_escal_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_pbi_uti_escal_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_pbi_uti_tax_fed(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_pbi_uti_tax_fed_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_pbi_uti_tax_fed_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_pbi_uti_tax_fed(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_pbi_uti_tax_fed_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_pbi_uti_tax_fed_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_pbi_uti_tax_sta(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_pbi_uti_tax_sta_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_pbi_uti_tax_sta_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_pbi_uti_tax_sta(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_pbi_uti_tax_sta_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_pbi_uti_tax_sta_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_pbi_uti_term(PaymentIncentivesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_PaymentIncentives_pbi_uti_term_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_PaymentIncentives_pbi_uti_term_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_pbi_uti_term(PaymentIncentivesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_PaymentIncentives_pbi_uti_term_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_PaymentIncentives_pbi_uti_term_nset, self->data_ptr);
 }
 
 static PyGetSetDef PaymentIncentives_getset[] = {
 {"cbi_fed_amount", (getter)PaymentIncentives_get_cbi_fed_amount,(setter)PaymentIncentives_set_cbi_fed_amount,
-	"Federal CBI amount [$/Watt], number.\n Required if ?=0.0.",
+	PyDoc_STR("*float*: Federal CBI amount [$/Watt]\n\n*Required*: set to 0.0 if not provided."),
  	NULL},
 {"cbi_fed_deprbas_fed", (getter)PaymentIncentives_get_cbi_fed_deprbas_fed,(setter)PaymentIncentives_set_cbi_fed_deprbas_fed,
-	"Federal CBI reduces federal depreciation basis [0/1], number.\n Constraints: BOOLEAN; 0 if not set.",
+	PyDoc_STR("*float*: Federal CBI reduces federal depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"cbi_fed_deprbas_sta", (getter)PaymentIncentives_get_cbi_fed_deprbas_sta,(setter)PaymentIncentives_set_cbi_fed_deprbas_sta,
-	"Federal CBI reduces state depreciation basis [0/1], number.\n Constraints: BOOLEAN; 0 if not set.",
+	PyDoc_STR("*float*: Federal CBI reduces state depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"cbi_fed_maxvalue", (getter)PaymentIncentives_get_cbi_fed_maxvalue,(setter)PaymentIncentives_set_cbi_fed_maxvalue,
-	"Federal CBI maximum [$], number.\n Required if ?=1e99.",
+	PyDoc_STR("*float*: Federal CBI maximum [$]\n\n*Required*: set to 1e99 if not provided."),
  	NULL},
 {"cbi_fed_tax_fed", (getter)PaymentIncentives_get_cbi_fed_tax_fed,(setter)PaymentIncentives_set_cbi_fed_tax_fed,
-	"Federal CBI federal taxable [0/1], number.\n Constraints: BOOLEAN; Required if ?=1.",
+	PyDoc_STR("*float*: Federal CBI federal taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"cbi_fed_tax_sta", (getter)PaymentIncentives_get_cbi_fed_tax_sta,(setter)PaymentIncentives_set_cbi_fed_tax_sta,
-	"Federal CBI state taxable [0/1], number.\n Constraints: BOOLEAN; Required if ?=1.",
+	PyDoc_STR("*float*: Federal CBI state taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"cbi_oth_amount", (getter)PaymentIncentives_get_cbi_oth_amount,(setter)PaymentIncentives_set_cbi_oth_amount,
-	"Other CBI amount [$/Watt], number.\n Required if ?=0.0.",
+	PyDoc_STR("*float*: Other CBI amount [$/Watt]\n\n*Required*: set to 0.0 if not provided."),
  	NULL},
 {"cbi_oth_deprbas_fed", (getter)PaymentIncentives_get_cbi_oth_deprbas_fed,(setter)PaymentIncentives_set_cbi_oth_deprbas_fed,
-	"Other CBI reduces federal depreciation basis [0/1], number.\n Constraints: BOOLEAN; 0 if not set.",
+	PyDoc_STR("*float*: Other CBI reduces federal depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"cbi_oth_deprbas_sta", (getter)PaymentIncentives_get_cbi_oth_deprbas_sta,(setter)PaymentIncentives_set_cbi_oth_deprbas_sta,
-	"Other CBI reduces state depreciation basis [0/1], number.\n Constraints: BOOLEAN; 0 if not set.",
+	PyDoc_STR("*float*: Other CBI reduces state depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"cbi_oth_maxvalue", (getter)PaymentIncentives_get_cbi_oth_maxvalue,(setter)PaymentIncentives_set_cbi_oth_maxvalue,
-	"Other CBI maximum [$], number.\n Required if ?=1e99.",
+	PyDoc_STR("*float*: Other CBI maximum [$]\n\n*Required*: set to 1e99 if not provided."),
  	NULL},
 {"cbi_oth_tax_fed", (getter)PaymentIncentives_get_cbi_oth_tax_fed,(setter)PaymentIncentives_set_cbi_oth_tax_fed,
-	"Other CBI federal taxable [0/1], number.\n Constraints: BOOLEAN; Required if ?=1.",
+	PyDoc_STR("*float*: Other CBI federal taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"cbi_oth_tax_sta", (getter)PaymentIncentives_get_cbi_oth_tax_sta,(setter)PaymentIncentives_set_cbi_oth_tax_sta,
-	"Other CBI state taxable [0/1], number.\n Constraints: BOOLEAN; Required if ?=1.",
+	PyDoc_STR("*float*: Other CBI state taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"cbi_sta_amount", (getter)PaymentIncentives_get_cbi_sta_amount,(setter)PaymentIncentives_set_cbi_sta_amount,
-	"State CBI amount [$/Watt], number.\n Required if ?=0.0.",
+	PyDoc_STR("*float*: State CBI amount [$/Watt]\n\n*Required*: set to 0.0 if not provided."),
  	NULL},
 {"cbi_sta_deprbas_fed", (getter)PaymentIncentives_get_cbi_sta_deprbas_fed,(setter)PaymentIncentives_set_cbi_sta_deprbas_fed,
-	"State CBI reduces federal depreciation basis [0/1], number.\n Constraints: BOOLEAN; 0 if not set.",
+	PyDoc_STR("*float*: State CBI reduces federal depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"cbi_sta_deprbas_sta", (getter)PaymentIncentives_get_cbi_sta_deprbas_sta,(setter)PaymentIncentives_set_cbi_sta_deprbas_sta,
-	"State CBI reduces state depreciation basis [0/1], number.\n Constraints: BOOLEAN; 0 if not set.",
+	PyDoc_STR("*float*: State CBI reduces state depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"cbi_sta_maxvalue", (getter)PaymentIncentives_get_cbi_sta_maxvalue,(setter)PaymentIncentives_set_cbi_sta_maxvalue,
-	"State CBI maximum [$], number.\n Required if ?=1e99.",
+	PyDoc_STR("*float*: State CBI maximum [$]\n\n*Required*: set to 1e99 if not provided."),
  	NULL},
 {"cbi_sta_tax_fed", (getter)PaymentIncentives_get_cbi_sta_tax_fed,(setter)PaymentIncentives_set_cbi_sta_tax_fed,
-	"State CBI federal taxable [0/1], number.\n Constraints: BOOLEAN; Required if ?=1.",
+	PyDoc_STR("*float*: State CBI federal taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"cbi_sta_tax_sta", (getter)PaymentIncentives_get_cbi_sta_tax_sta,(setter)PaymentIncentives_set_cbi_sta_tax_sta,
-	"State CBI state taxable [0/1], number.\n Constraints: BOOLEAN; Required if ?=1.",
+	PyDoc_STR("*float*: State CBI state taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"cbi_uti_amount", (getter)PaymentIncentives_get_cbi_uti_amount,(setter)PaymentIncentives_set_cbi_uti_amount,
-	"Utility CBI amount [$/Watt], number.\n Required if ?=0.0.",
+	PyDoc_STR("*float*: Utility CBI amount [$/Watt]\n\n*Required*: set to 0.0 if not provided."),
  	NULL},
 {"cbi_uti_deprbas_fed", (getter)PaymentIncentives_get_cbi_uti_deprbas_fed,(setter)PaymentIncentives_set_cbi_uti_deprbas_fed,
-	"Utility CBI reduces federal depreciation basis [0/1], number.\n Constraints: BOOLEAN; 0 if not set.",
+	PyDoc_STR("*float*: Utility CBI reduces federal depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"cbi_uti_deprbas_sta", (getter)PaymentIncentives_get_cbi_uti_deprbas_sta,(setter)PaymentIncentives_set_cbi_uti_deprbas_sta,
-	"Utility CBI reduces state depreciation basis [0/1], number.\n Constraints: BOOLEAN; 0 if not set.",
+	PyDoc_STR("*float*: Utility CBI reduces state depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"cbi_uti_maxvalue", (getter)PaymentIncentives_get_cbi_uti_maxvalue,(setter)PaymentIncentives_set_cbi_uti_maxvalue,
-	"Utility CBI maximum [$], number.\n Required if ?=1e99.",
+	PyDoc_STR("*float*: Utility CBI maximum [$]\n\n*Required*: set to 1e99 if not provided."),
  	NULL},
 {"cbi_uti_tax_fed", (getter)PaymentIncentives_get_cbi_uti_tax_fed,(setter)PaymentIncentives_set_cbi_uti_tax_fed,
-	"Utility CBI federal taxable [0/1], number.\n Constraints: BOOLEAN; Required if ?=1.",
+	PyDoc_STR("*float*: Utility CBI federal taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"cbi_uti_tax_sta", (getter)PaymentIncentives_get_cbi_uti_tax_sta,(setter)PaymentIncentives_set_cbi_uti_tax_sta,
-	"Utility CBI state taxable [0/1], number.\n Constraints: BOOLEAN; Required if ?=1.",
+	PyDoc_STR("*float*: Utility CBI state taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"ibi_fed_amount", (getter)PaymentIncentives_get_ibi_fed_amount,(setter)PaymentIncentives_set_ibi_fed_amount,
-	"Federal amount-based IBI amount [$], number.\n 0 if not set.",
+	PyDoc_STR("*float*: Federal amount-based IBI amount [$]\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"ibi_fed_amount_deprbas_fed", (getter)PaymentIncentives_get_ibi_fed_amount_deprbas_fed,(setter)PaymentIncentives_set_ibi_fed_amount_deprbas_fed,
-	"Federal amount-based IBI reduces federal depreciation basis [0/1], number.\n Constraints: BOOLEAN; 0 if not set.",
+	PyDoc_STR("*float*: Federal amount-based IBI reduces federal depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"ibi_fed_amount_deprbas_sta", (getter)PaymentIncentives_get_ibi_fed_amount_deprbas_sta,(setter)PaymentIncentives_set_ibi_fed_amount_deprbas_sta,
-	"Federal amount-based IBI reduces state depreciation basis [0/1], number.\n Constraints: BOOLEAN; 0 if not set.",
+	PyDoc_STR("*float*: Federal amount-based IBI reduces state depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"ibi_fed_amount_tax_fed", (getter)PaymentIncentives_get_ibi_fed_amount_tax_fed,(setter)PaymentIncentives_set_ibi_fed_amount_tax_fed,
-	"Federal amount-based IBI federal taxable [0/1], number.\n Constraints: BOOLEAN; Required if ?=1.",
+	PyDoc_STR("*float*: Federal amount-based IBI federal taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"ibi_fed_amount_tax_sta", (getter)PaymentIncentives_get_ibi_fed_amount_tax_sta,(setter)PaymentIncentives_set_ibi_fed_amount_tax_sta,
-	"Federal amount-based IBI state taxable [0/1], number.\n Constraints: BOOLEAN; Required if ?=1.",
+	PyDoc_STR("*float*: Federal amount-based IBI state taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"ibi_fed_percent", (getter)PaymentIncentives_get_ibi_fed_percent,(setter)PaymentIncentives_set_ibi_fed_percent,
-	"Federal percentage-based IBI percent [%], number.\n Required if ?=0.0.",
+	PyDoc_STR("*float*: Federal percentage-based IBI percent [%]\n\n*Required*: set to 0.0 if not provided."),
  	NULL},
 {"ibi_fed_percent_deprbas_fed", (getter)PaymentIncentives_get_ibi_fed_percent_deprbas_fed,(setter)PaymentIncentives_set_ibi_fed_percent_deprbas_fed,
-	"Federal percentage-based IBI reduces federal depreciation basis [0/1], number.\n Constraints: BOOLEAN; 0 if not set.",
+	PyDoc_STR("*float*: Federal percentage-based IBI reduces federal depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"ibi_fed_percent_deprbas_sta", (getter)PaymentIncentives_get_ibi_fed_percent_deprbas_sta,(setter)PaymentIncentives_set_ibi_fed_percent_deprbas_sta,
-	"Federal percentage-based IBI reduces state depreciation basis [0/1], number.\n Constraints: BOOLEAN; 0 if not set.",
+	PyDoc_STR("*float*: Federal percentage-based IBI reduces state depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"ibi_fed_percent_maxvalue", (getter)PaymentIncentives_get_ibi_fed_percent_maxvalue,(setter)PaymentIncentives_set_ibi_fed_percent_maxvalue,
-	"Federal percentage-based IBI maximum value [$], number.\n Required if ?=1e99.",
+	PyDoc_STR("*float*: Federal percentage-based IBI maximum value [$]\n\n*Required*: set to 1e99 if not provided."),
  	NULL},
 {"ibi_fed_percent_tax_fed", (getter)PaymentIncentives_get_ibi_fed_percent_tax_fed,(setter)PaymentIncentives_set_ibi_fed_percent_tax_fed,
-	"Federal percentage-based IBI federal taxable [0/1], number.\n Constraints: BOOLEAN; Required if ?=1.",
+	PyDoc_STR("*float*: Federal percentage-based IBI federal taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"ibi_fed_percent_tax_sta", (getter)PaymentIncentives_get_ibi_fed_percent_tax_sta,(setter)PaymentIncentives_set_ibi_fed_percent_tax_sta,
-	"Federal percentage-based IBI state taxable [0/1], number.\n Constraints: BOOLEAN; Required if ?=1.",
+	PyDoc_STR("*float*: Federal percentage-based IBI state taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"ibi_oth_amount", (getter)PaymentIncentives_get_ibi_oth_amount,(setter)PaymentIncentives_set_ibi_oth_amount,
-	"Other amount-based IBI amount [$], number.\n 0 if not set.",
+	PyDoc_STR("*float*: Other amount-based IBI amount [$]\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"ibi_oth_amount_deprbas_fed", (getter)PaymentIncentives_get_ibi_oth_amount_deprbas_fed,(setter)PaymentIncentives_set_ibi_oth_amount_deprbas_fed,
-	"Other amount-based IBI reduces federal depreciation basis [0/1], number.\n Constraints: BOOLEAN; 0 if not set.",
+	PyDoc_STR("*float*: Other amount-based IBI reduces federal depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"ibi_oth_amount_deprbas_sta", (getter)PaymentIncentives_get_ibi_oth_amount_deprbas_sta,(setter)PaymentIncentives_set_ibi_oth_amount_deprbas_sta,
-	"Other amount-based IBI reduces state depreciation basis [0/1], number.\n Constraints: BOOLEAN; 0 if not set.",
+	PyDoc_STR("*float*: Other amount-based IBI reduces state depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"ibi_oth_amount_tax_fed", (getter)PaymentIncentives_get_ibi_oth_amount_tax_fed,(setter)PaymentIncentives_set_ibi_oth_amount_tax_fed,
-	"Other amount-based IBI federal taxable [0/1], number.\n Constraints: BOOLEAN; Required if ?=1.",
+	PyDoc_STR("*float*: Other amount-based IBI federal taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"ibi_oth_amount_tax_sta", (getter)PaymentIncentives_get_ibi_oth_amount_tax_sta,(setter)PaymentIncentives_set_ibi_oth_amount_tax_sta,
-	"Other amount-based IBI state taxable [0/1], number.\n Constraints: BOOLEAN; Required if ?=1.",
+	PyDoc_STR("*float*: Other amount-based IBI state taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"ibi_oth_percent", (getter)PaymentIncentives_get_ibi_oth_percent,(setter)PaymentIncentives_set_ibi_oth_percent,
-	"Other percentage-based IBI percent [%], number.\n Required if ?=0.0.",
+	PyDoc_STR("*float*: Other percentage-based IBI percent [%]\n\n*Required*: set to 0.0 if not provided."),
  	NULL},
 {"ibi_oth_percent_deprbas_fed", (getter)PaymentIncentives_get_ibi_oth_percent_deprbas_fed,(setter)PaymentIncentives_set_ibi_oth_percent_deprbas_fed,
-	"Other percentage-based IBI reduces federal depreciation basis [0/1], number.\n Constraints: BOOLEAN; 0 if not set.",
+	PyDoc_STR("*float*: Other percentage-based IBI reduces federal depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"ibi_oth_percent_deprbas_sta", (getter)PaymentIncentives_get_ibi_oth_percent_deprbas_sta,(setter)PaymentIncentives_set_ibi_oth_percent_deprbas_sta,
-	"Other percentage-based IBI reduces state depreciation basis [0/1], number.\n Constraints: BOOLEAN; 0 if not set.",
+	PyDoc_STR("*float*: Other percentage-based IBI reduces state depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"ibi_oth_percent_maxvalue", (getter)PaymentIncentives_get_ibi_oth_percent_maxvalue,(setter)PaymentIncentives_set_ibi_oth_percent_maxvalue,
-	"Other percentage-based IBI maximum value [$], number.\n Required if ?=1e99.",
+	PyDoc_STR("*float*: Other percentage-based IBI maximum value [$]\n\n*Required*: set to 1e99 if not provided."),
  	NULL},
 {"ibi_oth_percent_tax_fed", (getter)PaymentIncentives_get_ibi_oth_percent_tax_fed,(setter)PaymentIncentives_set_ibi_oth_percent_tax_fed,
-	"Other percentage-based IBI federal taxable [0/1], number.\n Constraints: BOOLEAN; Required if ?=1.",
+	PyDoc_STR("*float*: Other percentage-based IBI federal taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"ibi_oth_percent_tax_sta", (getter)PaymentIncentives_get_ibi_oth_percent_tax_sta,(setter)PaymentIncentives_set_ibi_oth_percent_tax_sta,
-	"Other percentage-based IBI state taxable [0/1], number.\n Constraints: BOOLEAN; Required if ?=1.",
+	PyDoc_STR("*float*: Other percentage-based IBI state taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"ibi_sta_amount", (getter)PaymentIncentives_get_ibi_sta_amount,(setter)PaymentIncentives_set_ibi_sta_amount,
-	"State amount-based IBI amount [$], number.\n 0 if not set.",
+	PyDoc_STR("*float*: State amount-based IBI amount [$]\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"ibi_sta_amount_deprbas_fed", (getter)PaymentIncentives_get_ibi_sta_amount_deprbas_fed,(setter)PaymentIncentives_set_ibi_sta_amount_deprbas_fed,
-	"State amount-based IBI reduces federal depreciation basis [0/1], number.\n Constraints: BOOLEAN; 0 if not set.",
+	PyDoc_STR("*float*: State amount-based IBI reduces federal depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"ibi_sta_amount_deprbas_sta", (getter)PaymentIncentives_get_ibi_sta_amount_deprbas_sta,(setter)PaymentIncentives_set_ibi_sta_amount_deprbas_sta,
-	"State amount-based IBI reduces state depreciation basis [0/1], number.\n Constraints: BOOLEAN; 0 if not set.",
+	PyDoc_STR("*float*: State amount-based IBI reduces state depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"ibi_sta_amount_tax_fed", (getter)PaymentIncentives_get_ibi_sta_amount_tax_fed,(setter)PaymentIncentives_set_ibi_sta_amount_tax_fed,
-	"State amount-based IBI federal taxable [0/1], number.\n Constraints: BOOLEAN; Required if ?=1.",
+	PyDoc_STR("*float*: State amount-based IBI federal taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"ibi_sta_amount_tax_sta", (getter)PaymentIncentives_get_ibi_sta_amount_tax_sta,(setter)PaymentIncentives_set_ibi_sta_amount_tax_sta,
-	"State amount-based IBI state taxable [0/1], number.\n Constraints: BOOLEAN; Required if ?=1.",
+	PyDoc_STR("*float*: State amount-based IBI state taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"ibi_sta_percent", (getter)PaymentIncentives_get_ibi_sta_percent,(setter)PaymentIncentives_set_ibi_sta_percent,
-	"State percentage-based IBI percent [%], number.\n Required if ?=0.0.",
+	PyDoc_STR("*float*: State percentage-based IBI percent [%]\n\n*Required*: set to 0.0 if not provided."),
  	NULL},
 {"ibi_sta_percent_deprbas_fed", (getter)PaymentIncentives_get_ibi_sta_percent_deprbas_fed,(setter)PaymentIncentives_set_ibi_sta_percent_deprbas_fed,
-	"State percentage-based IBI reduces federal depreciation basis [0/1], number.\n Constraints: BOOLEAN; 0 if not set.",
+	PyDoc_STR("*float*: State percentage-based IBI reduces federal depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"ibi_sta_percent_deprbas_sta", (getter)PaymentIncentives_get_ibi_sta_percent_deprbas_sta,(setter)PaymentIncentives_set_ibi_sta_percent_deprbas_sta,
-	"State percentage-based IBI reduces state depreciation basis [0/1], number.\n Constraints: BOOLEAN; 0 if not set.",
+	PyDoc_STR("*float*: State percentage-based IBI reduces state depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"ibi_sta_percent_maxvalue", (getter)PaymentIncentives_get_ibi_sta_percent_maxvalue,(setter)PaymentIncentives_set_ibi_sta_percent_maxvalue,
-	"State percentage-based IBI maximum value [$], number.\n Required if ?=1e99.",
+	PyDoc_STR("*float*: State percentage-based IBI maximum value [$]\n\n*Required*: set to 1e99 if not provided."),
  	NULL},
 {"ibi_sta_percent_tax_fed", (getter)PaymentIncentives_get_ibi_sta_percent_tax_fed,(setter)PaymentIncentives_set_ibi_sta_percent_tax_fed,
-	"State percentage-based IBI federal taxable [0/1], number.\n Constraints: BOOLEAN; Required if ?=1.",
+	PyDoc_STR("*float*: State percentage-based IBI federal taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"ibi_sta_percent_tax_sta", (getter)PaymentIncentives_get_ibi_sta_percent_tax_sta,(setter)PaymentIncentives_set_ibi_sta_percent_tax_sta,
-	"State percentage-based IBI state taxable [0/1], number.\n Constraints: BOOLEAN; Required if ?=1.",
+	PyDoc_STR("*float*: State percentage-based IBI state taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"ibi_uti_amount", (getter)PaymentIncentives_get_ibi_uti_amount,(setter)PaymentIncentives_set_ibi_uti_amount,
-	"Utility amount-based IBI amount [$], number.\n 0 if not set.",
+	PyDoc_STR("*float*: Utility amount-based IBI amount [$]\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"ibi_uti_amount_deprbas_fed", (getter)PaymentIncentives_get_ibi_uti_amount_deprbas_fed,(setter)PaymentIncentives_set_ibi_uti_amount_deprbas_fed,
-	"Utility amount-based IBI reduces federal depreciation basis [0/1], number.\n Constraints: BOOLEAN; 0 if not set.",
+	PyDoc_STR("*float*: Utility amount-based IBI reduces federal depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"ibi_uti_amount_deprbas_sta", (getter)PaymentIncentives_get_ibi_uti_amount_deprbas_sta,(setter)PaymentIncentives_set_ibi_uti_amount_deprbas_sta,
-	"Utility amount-based IBI reduces state depreciation basis [0/1], number.\n Constraints: BOOLEAN; 0 if not set.",
+	PyDoc_STR("*float*: Utility amount-based IBI reduces state depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"ibi_uti_amount_tax_fed", (getter)PaymentIncentives_get_ibi_uti_amount_tax_fed,(setter)PaymentIncentives_set_ibi_uti_amount_tax_fed,
-	"Utility amount-based IBI federal taxable [0/1], number.\n Constraints: BOOLEAN; Required if ?=1.",
+	PyDoc_STR("*float*: Utility amount-based IBI federal taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"ibi_uti_amount_tax_sta", (getter)PaymentIncentives_get_ibi_uti_amount_tax_sta,(setter)PaymentIncentives_set_ibi_uti_amount_tax_sta,
-	"Utility amount-based IBI state taxable [0/1], number.\n Constraints: BOOLEAN; Required if ?=1.",
+	PyDoc_STR("*float*: Utility amount-based IBI state taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"ibi_uti_percent", (getter)PaymentIncentives_get_ibi_uti_percent,(setter)PaymentIncentives_set_ibi_uti_percent,
-	"Utility percentage-based IBI percent [%], number.\n Required if ?=0.0.",
+	PyDoc_STR("*float*: Utility percentage-based IBI percent [%]\n\n*Required*: set to 0.0 if not provided."),
  	NULL},
 {"ibi_uti_percent_deprbas_fed", (getter)PaymentIncentives_get_ibi_uti_percent_deprbas_fed,(setter)PaymentIncentives_set_ibi_uti_percent_deprbas_fed,
-	"Utility percentage-based IBI reduces federal depreciation basis [0/1], number.\n Constraints: BOOLEAN; 0 if not set.",
+	PyDoc_STR("*float*: Utility percentage-based IBI reduces federal depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"ibi_uti_percent_deprbas_sta", (getter)PaymentIncentives_get_ibi_uti_percent_deprbas_sta,(setter)PaymentIncentives_set_ibi_uti_percent_deprbas_sta,
-	"Utility percentage-based IBI reduces state depreciation basis [0/1], number.\n Constraints: BOOLEAN; 0 if not set.",
+	PyDoc_STR("*float*: Utility percentage-based IBI reduces state depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"ibi_uti_percent_maxvalue", (getter)PaymentIncentives_get_ibi_uti_percent_maxvalue,(setter)PaymentIncentives_set_ibi_uti_percent_maxvalue,
-	"Utility percentage-based IBI maximum value [$], number.\n Required if ?=1e99.",
+	PyDoc_STR("*float*: Utility percentage-based IBI maximum value [$]\n\n*Required*: set to 1e99 if not provided."),
  	NULL},
 {"ibi_uti_percent_tax_fed", (getter)PaymentIncentives_get_ibi_uti_percent_tax_fed,(setter)PaymentIncentives_set_ibi_uti_percent_tax_fed,
-	"Utility percentage-based IBI federal taxable [0/1], number.\n Constraints: BOOLEAN; Required if ?=1.",
+	PyDoc_STR("*float*: Utility percentage-based IBI federal taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"ibi_uti_percent_tax_sta", (getter)PaymentIncentives_get_ibi_uti_percent_tax_sta,(setter)PaymentIncentives_set_ibi_uti_percent_tax_sta,
-	"Utility percentage-based IBI state taxable [0/1], number.\n Constraints: BOOLEAN; Required if ?=1.",
+	PyDoc_STR("*float*: Utility percentage-based IBI state taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"pbi_fed_amount", (getter)PaymentIncentives_get_pbi_fed_amount,(setter)PaymentIncentives_set_pbi_fed_amount,
-	"Federal PBI amount [$/kWh], array.\n 0 if not set.",
+	PyDoc_STR("*sequence*: Federal PBI amount [$/kWh]\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"pbi_fed_escal", (getter)PaymentIncentives_get_pbi_fed_escal,(setter)PaymentIncentives_set_pbi_fed_escal,
-	"Federal PBI escalation [%], number.\n 0 if not set.",
+	PyDoc_STR("*float*: Federal PBI escalation [%]\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"pbi_fed_tax_fed", (getter)PaymentIncentives_get_pbi_fed_tax_fed,(setter)PaymentIncentives_set_pbi_fed_tax_fed,
-	"Federal PBI federal taxable [0/1], number.\n Constraints: BOOLEAN; Required if ?=1.",
+	PyDoc_STR("*float*: Federal PBI federal taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"pbi_fed_tax_sta", (getter)PaymentIncentives_get_pbi_fed_tax_sta,(setter)PaymentIncentives_set_pbi_fed_tax_sta,
-	"Federal PBI state taxable [0/1], number.\n Constraints: BOOLEAN; Required if ?=1.",
+	PyDoc_STR("*float*: Federal PBI state taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"pbi_fed_term", (getter)PaymentIncentives_get_pbi_fed_term,(setter)PaymentIncentives_set_pbi_fed_term,
-	"Federal PBI term [years], number.\n 0 if not set.",
+	PyDoc_STR("*float*: Federal PBI term [years]\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"pbi_oth_amount", (getter)PaymentIncentives_get_pbi_oth_amount,(setter)PaymentIncentives_set_pbi_oth_amount,
-	"Other PBI amount [$/kWh], array.\n 0 if not set.",
+	PyDoc_STR("*sequence*: Other PBI amount [$/kWh]\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"pbi_oth_escal", (getter)PaymentIncentives_get_pbi_oth_escal,(setter)PaymentIncentives_set_pbi_oth_escal,
-	"Other PBI escalation [%], number.\n 0 if not set.",
+	PyDoc_STR("*float*: Other PBI escalation [%]\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"pbi_oth_tax_fed", (getter)PaymentIncentives_get_pbi_oth_tax_fed,(setter)PaymentIncentives_set_pbi_oth_tax_fed,
-	"Other PBI federal taxable [0/1], number.\n Constraints: BOOLEAN; Required if ?=1.",
+	PyDoc_STR("*float*: Other PBI federal taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"pbi_oth_tax_sta", (getter)PaymentIncentives_get_pbi_oth_tax_sta,(setter)PaymentIncentives_set_pbi_oth_tax_sta,
-	"Other PBI state taxable [0/1], number.\n Constraints: BOOLEAN; Required if ?=1.",
+	PyDoc_STR("*float*: Other PBI state taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"pbi_oth_term", (getter)PaymentIncentives_get_pbi_oth_term,(setter)PaymentIncentives_set_pbi_oth_term,
-	"Other PBI term [years], number.\n 0 if not set.",
+	PyDoc_STR("*float*: Other PBI term [years]\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"pbi_sta_amount", (getter)PaymentIncentives_get_pbi_sta_amount,(setter)PaymentIncentives_set_pbi_sta_amount,
-	"State PBI amount [$/kWh], array.\n 0 if not set.",
+	PyDoc_STR("*sequence*: State PBI amount [$/kWh]\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"pbi_sta_escal", (getter)PaymentIncentives_get_pbi_sta_escal,(setter)PaymentIncentives_set_pbi_sta_escal,
-	"State PBI escalation [%], number.\n 0 if not set.",
+	PyDoc_STR("*float*: State PBI escalation [%]\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"pbi_sta_tax_fed", (getter)PaymentIncentives_get_pbi_sta_tax_fed,(setter)PaymentIncentives_set_pbi_sta_tax_fed,
-	"State PBI federal taxable [0/1], number.\n Constraints: BOOLEAN; Required if ?=1.",
+	PyDoc_STR("*float*: State PBI federal taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"pbi_sta_tax_sta", (getter)PaymentIncentives_get_pbi_sta_tax_sta,(setter)PaymentIncentives_set_pbi_sta_tax_sta,
-	"State PBI state taxable [0/1], number.\n Constraints: BOOLEAN; Required if ?=1.",
+	PyDoc_STR("*float*: State PBI state taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"pbi_sta_term", (getter)PaymentIncentives_get_pbi_sta_term,(setter)PaymentIncentives_set_pbi_sta_term,
-	"State PBI term [years], number.\n 0 if not set.",
+	PyDoc_STR("*float*: State PBI term [years]\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"pbi_uti_amount", (getter)PaymentIncentives_get_pbi_uti_amount,(setter)PaymentIncentives_set_pbi_uti_amount,
-	"Utility PBI amount [$/kWh], array.\n 0 if not set.",
+	PyDoc_STR("*sequence*: Utility PBI amount [$/kWh]\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"pbi_uti_escal", (getter)PaymentIncentives_get_pbi_uti_escal,(setter)PaymentIncentives_set_pbi_uti_escal,
-	"Utility PBI escalation [%], number.\n 0 if not set.",
+	PyDoc_STR("*float*: Utility PBI escalation [%]\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"pbi_uti_tax_fed", (getter)PaymentIncentives_get_pbi_uti_tax_fed,(setter)PaymentIncentives_set_pbi_uti_tax_fed,
-	"Utility PBI federal taxable [0/1], number.\n Constraints: BOOLEAN; Required if ?=1.",
+	PyDoc_STR("*float*: Utility PBI federal taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"pbi_uti_tax_sta", (getter)PaymentIncentives_get_pbi_uti_tax_sta,(setter)PaymentIncentives_set_pbi_uti_tax_sta,
-	"Utility PBI state taxable [0/1], number.\n Constraints: BOOLEAN; Required if ?=1.",
+	PyDoc_STR("*float*: Utility PBI state taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"pbi_uti_term", (getter)PaymentIncentives_get_pbi_uti_term,(setter)PaymentIncentives_set_pbi_uti_term,
-	"Utility PBI term [years], number.\n 0 if not set.",
+	PyDoc_STR("*float*: Utility PBI term [years]\n\n*Required*: set to 0 if not provided."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -2883,7 +2883,7 @@ static PyTypeObject PaymentIncentives_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		PaymentIncentives_methods,         /*tp_methods*/
@@ -2893,7 +2893,7 @@ static PyTypeObject PaymentIncentives_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -2953,9 +2953,9 @@ Battery_export(BatteryObject *self, PyObject *args)
 
 static PyMethodDef Battery_methods[] = {
 		{"assign",            (PyCFunction)Battery_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Battery_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Battery_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -2968,31 +2968,31 @@ Battery_get_batt_bank_replacement(BatteryObject *self, void *closure)
 static int
 Battery_set_batt_bank_replacement(BatteryObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Cashloan_Battery_batt_bank_replacement_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Cashloan_Battery_batt_bank_replacement_aset, self->data_ptr);
 }
 
 static PyObject *
 Battery_get_batt_computed_bank_capacity(BatteryObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_Battery_batt_computed_bank_capacity_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_Battery_batt_computed_bank_capacity_nget, self->data_ptr);
 }
 
 static int
 Battery_set_batt_computed_bank_capacity(BatteryObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_Battery_batt_computed_bank_capacity_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_Battery_batt_computed_bank_capacity_nset, self->data_ptr);
 }
 
 static PyObject *
 Battery_get_batt_replacement_option(BatteryObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_Battery_batt_replacement_option_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_Battery_batt_replacement_option_nget, self->data_ptr);
 }
 
 static int
 Battery_set_batt_replacement_option(BatteryObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_Battery_batt_replacement_option_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_Battery_batt_replacement_option_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -3004,51 +3004,51 @@ Battery_get_batt_replacement_schedule(BatteryObject *self, void *closure)
 static int
 Battery_set_batt_replacement_schedule(BatteryObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Cashloan_Battery_batt_replacement_schedule_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Cashloan_Battery_batt_replacement_schedule_aset, self->data_ptr);
 }
 
 static PyObject *
 Battery_get_battery_per_kWh(BatteryObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_Battery_battery_per_kWh_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_Battery_battery_per_kWh_nget, self->data_ptr);
 }
 
 static int
 Battery_set_battery_per_kWh(BatteryObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_Battery_battery_per_kWh_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_Battery_battery_per_kWh_nset, self->data_ptr);
 }
 
 static PyObject *
 Battery_get_en_batt(BatteryObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_Battery_en_batt_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_Battery_en_batt_nget, self->data_ptr);
 }
 
 static int
 Battery_set_en_batt(BatteryObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_Battery_en_batt_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_Battery_en_batt_nset, self->data_ptr);
 }
 
 static PyGetSetDef Battery_getset[] = {
 {"batt_bank_replacement", (getter)Battery_get_batt_bank_replacement,(setter)Battery_set_batt_bank_replacement,
-	"Battery bank replacements per year [number/year], array.\n ",
+	PyDoc_STR("*sequence*: Battery bank replacements per year [number/year]"),
  	NULL},
 {"batt_computed_bank_capacity", (getter)Battery_get_batt_computed_bank_capacity,(setter)Battery_set_batt_computed_bank_capacity,
-	"Battery bank capacity [kWh], number.\n Required if ?=0.0.",
+	PyDoc_STR("*float*: Battery bank capacity [kWh]\n\n*Required*: set to 0.0 if not provided."),
  	NULL},
 {"batt_replacement_option", (getter)Battery_get_batt_replacement_option,(setter)Battery_set_batt_replacement_option,
-	"Enable battery replacement? [0=none,1=capacity based,2=user schedule], number.\n Constraints: INTEGER,MIN=0,MAX=2; 0 if not set.",
+	PyDoc_STR("*float*: Enable battery replacement? [0=none,1=capacity based,2=user schedule]\n\n*Constraints*: INTEGER,MIN=0,MAX=2\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"batt_replacement_schedule", (getter)Battery_get_batt_replacement_schedule,(setter)Battery_set_batt_replacement_schedule,
-	"Battery bank replacements per year (user specified) [number/year], array.\n ",
+	PyDoc_STR("*sequence*: Battery bank replacements per year (user specified) [number/year]"),
  	NULL},
 {"battery_per_kWh", (getter)Battery_get_battery_per_kWh,(setter)Battery_set_battery_per_kWh,
-	"Battery cost [$/kWh], number.\n Required if ?=0.0.",
+	PyDoc_STR("*float*: Battery cost [$/kWh]\n\n*Required*: set to 0.0 if not provided."),
  	NULL},
 {"en_batt", (getter)Battery_get_en_batt,(setter)Battery_set_en_batt,
-	"Enable battery storage model [0/1], number.\n 0 if not set.",
+	PyDoc_STR("*float*: Enable battery storage model [0/1]\n\n*Required*: set to 0 if not provided."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -3081,7 +3081,7 @@ static PyTypeObject Battery_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		Battery_methods,         /*tp_methods*/
@@ -3091,7 +3091,7 @@ static PyTypeObject Battery_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -3151,46 +3151,46 @@ FuelCell_export(FuelCellObject *self, PyObject *args)
 
 static PyMethodDef FuelCell_methods[] = {
 		{"assign",            (PyCFunction)FuelCell_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``FuelCell_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)FuelCell_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 static PyObject *
 FuelCell_get_en_fuelcell(FuelCellObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_FuelCell_en_fuelcell_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_FuelCell_en_fuelcell_nget, self->data_ptr);
 }
 
 static int
 FuelCell_set_en_fuelcell(FuelCellObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_FuelCell_en_fuelcell_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_FuelCell_en_fuelcell_nset, self->data_ptr);
 }
 
 static PyObject *
 FuelCell_get_fuelcell_computed_bank_capacity(FuelCellObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_FuelCell_fuelcell_computed_bank_capacity_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_FuelCell_fuelcell_computed_bank_capacity_nget, self->data_ptr);
 }
 
 static int
 FuelCell_set_fuelcell_computed_bank_capacity(FuelCellObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_FuelCell_fuelcell_computed_bank_capacity_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_FuelCell_fuelcell_computed_bank_capacity_nset, self->data_ptr);
 }
 
 static PyObject *
 FuelCell_get_fuelcell_per_kWh(FuelCellObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_FuelCell_fuelcell_per_kWh_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_FuelCell_fuelcell_per_kWh_nget, self->data_ptr);
 }
 
 static int
 FuelCell_set_fuelcell_per_kWh(FuelCellObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_FuelCell_fuelcell_per_kWh_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_FuelCell_fuelcell_per_kWh_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -3202,19 +3202,19 @@ FuelCell_get_fuelcell_replacement(FuelCellObject *self, void *closure)
 static int
 FuelCell_set_fuelcell_replacement(FuelCellObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Cashloan_FuelCell_fuelcell_replacement_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Cashloan_FuelCell_fuelcell_replacement_aset, self->data_ptr);
 }
 
 static PyObject *
 FuelCell_get_fuelcell_replacement_option(FuelCellObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_FuelCell_fuelcell_replacement_option_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_FuelCell_fuelcell_replacement_option_nget, self->data_ptr);
 }
 
 static int
 FuelCell_set_fuelcell_replacement_option(FuelCellObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_FuelCell_fuelcell_replacement_option_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_FuelCell_fuelcell_replacement_option_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -3226,27 +3226,27 @@ FuelCell_get_fuelcell_replacement_schedule(FuelCellObject *self, void *closure)
 static int
 FuelCell_set_fuelcell_replacement_schedule(FuelCellObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Cashloan_FuelCell_fuelcell_replacement_schedule_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Cashloan_FuelCell_fuelcell_replacement_schedule_aset, self->data_ptr);
 }
 
 static PyGetSetDef FuelCell_getset[] = {
 {"en_fuelcell", (getter)FuelCell_get_en_fuelcell,(setter)FuelCell_set_en_fuelcell,
-	"Enable fuel cell storage model [0/1], number.\n 0 if not set.",
+	PyDoc_STR("*float*: Enable fuel cell storage model [0/1]\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"fuelcell_computed_bank_capacity", (getter)FuelCell_get_fuelcell_computed_bank_capacity,(setter)FuelCell_set_fuelcell_computed_bank_capacity,
-	"Fuel cell capacity [kWh], number.\n Required if ?=0.0.",
+	PyDoc_STR("*float*: Fuel cell capacity [kWh]\n\n*Required*: set to 0.0 if not provided."),
  	NULL},
 {"fuelcell_per_kWh", (getter)FuelCell_get_fuelcell_per_kWh,(setter)FuelCell_set_fuelcell_per_kWh,
-	"Fuel cell cost [$/kWh], number.\n Required if ?=0.0.",
+	PyDoc_STR("*float*: Fuel cell cost [$/kWh]\n\n*Required*: set to 0.0 if not provided."),
  	NULL},
 {"fuelcell_replacement", (getter)FuelCell_get_fuelcell_replacement,(setter)FuelCell_set_fuelcell_replacement,
-	"Fuel cell replacements per year [number/year], array.\n ",
+	PyDoc_STR("*sequence*: Fuel cell replacements per year [number/year]"),
  	NULL},
 {"fuelcell_replacement_option", (getter)FuelCell_get_fuelcell_replacement_option,(setter)FuelCell_set_fuelcell_replacement_option,
-	"Enable fuel cell replacement? [0=none,1=capacity based,2=user schedule], number.\n Constraints: INTEGER,MIN=0,MAX=2; 0 if not set.",
+	PyDoc_STR("*float*: Enable fuel cell replacement? [0=none,1=capacity based,2=user schedule]\n\n*Constraints*: INTEGER,MIN=0,MAX=2\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"fuelcell_replacement_schedule", (getter)FuelCell_get_fuelcell_replacement_schedule,(setter)FuelCell_set_fuelcell_replacement_schedule,
-	"Fuel cell replacements per year (user specified) [number/year], array.\n ",
+	PyDoc_STR("*sequence*: Fuel cell replacements per year (user specified) [number/year]"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -3279,7 +3279,7 @@ static PyTypeObject FuelCell_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		FuelCell_methods,         /*tp_methods*/
@@ -3289,7 +3289,7 @@ static PyTypeObject FuelCell_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -3349,9 +3349,9 @@ Cashloan_export(CashloanObject *self, PyObject *args)
 
 static PyMethodDef Cashloan_methods[] = {
 		{"assign",            (PyCFunction)Cashloan_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Cashloan_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Cashloan_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -3364,7 +3364,7 @@ Cashloan_get_annual_energy_value(CashloanObject *self, void *closure)
 static int
 Cashloan_set_annual_energy_value(CashloanObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Cashloan_Cashloan_annual_energy_value_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Cashloan_Cashloan_annual_energy_value_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -3376,75 +3376,75 @@ Cashloan_get_annual_themal_value(CashloanObject *self, void *closure)
 static int
 Cashloan_set_annual_themal_value(CashloanObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Cashloan_Cashloan_annual_themal_value_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Cashloan_Cashloan_annual_themal_value_aset, self->data_ptr);
 }
 
 static PyObject *
 Cashloan_get_market(CashloanObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_Cashloan_market_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_Cashloan_market_nget, self->data_ptr);
 }
 
 static int
 Cashloan_set_market(CashloanObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_Cashloan_market_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_Cashloan_market_nset, self->data_ptr);
 }
 
 static PyObject *
 Cashloan_get_mortgage(CashloanObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_Cashloan_mortgage_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_Cashloan_mortgage_nget, self->data_ptr);
 }
 
 static int
 Cashloan_set_mortgage(CashloanObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_Cashloan_mortgage_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_Cashloan_mortgage_nset, self->data_ptr);
 }
 
 static PyObject *
 Cashloan_get_salvage_percentage(CashloanObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_Cashloan_salvage_percentage_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_Cashloan_salvage_percentage_nget, self->data_ptr);
 }
 
 static int
 Cashloan_set_salvage_percentage(CashloanObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_Cashloan_salvage_percentage_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_Cashloan_salvage_percentage_nset, self->data_ptr);
 }
 
 static PyObject *
 Cashloan_get_total_installed_cost(CashloanObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_Cashloan_total_installed_cost_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_Cashloan_total_installed_cost_nget, self->data_ptr);
 }
 
 static int
 Cashloan_set_total_installed_cost(CashloanObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_Cashloan_total_installed_cost_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_Cashloan_total_installed_cost_nset, self->data_ptr);
 }
 
 static PyGetSetDef Cashloan_getset[] = {
 {"annual_energy_value", (getter)Cashloan_get_annual_energy_value,(setter)Cashloan_set_annual_energy_value,
-	"Energy value [$], array.\n Required.",
+	PyDoc_STR("*sequence*: Energy value [$]\n\n*Required*: True"),
  	NULL},
 {"annual_themal_value", (getter)Cashloan_get_annual_themal_value,(setter)Cashloan_set_annual_themal_value,
-	"Energy value [$], array.\n ",
+	PyDoc_STR("*sequence*: Energy value [$]"),
  	NULL},
 {"market", (getter)Cashloan_get_market,(setter)Cashloan_set_market,
-	"Residential or Commercial Market [0/1], number.\n 0=residential,1=comm.; Constraints: INTEGER,MIN=0,MAX=1; Required if ?=1.",
+	PyDoc_STR("*float*: Residential or Commercial Market [0/1]\n\n*Options*: 0=residential,1=comm.\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"mortgage", (getter)Cashloan_get_mortgage,(setter)Cashloan_set_mortgage,
-	"Use mortgage style loan (res. only) [0/1], number.\n 0=standard loan,1=mortgage; Constraints: INTEGER,MIN=0,MAX=1; 0 if not set.",
+	PyDoc_STR("*float*: Use mortgage style loan (res. only) [0/1]\n\n*Options*: 0=standard loan,1=mortgage\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"salvage_percentage", (getter)Cashloan_get_salvage_percentage,(setter)Cashloan_set_salvage_percentage,
-	"Salvage value percentage [%], number.\n Constraints: MIN=0,MAX=100; Required if ?=0.0.",
+	PyDoc_STR("*float*: Salvage value percentage [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: set to 0.0 if not provided."),
  	NULL},
 {"total_installed_cost", (getter)Cashloan_get_total_installed_cost,(setter)Cashloan_set_total_installed_cost,
-	"Total installed cost [$], number.\n Constraints: MIN=0; Required.",
+	PyDoc_STR("*float*: Total installed cost [$]\n\n*Constraints*: MIN=0\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -3477,7 +3477,7 @@ static PyTypeObject Cashloan_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		Cashloan_methods,         /*tp_methods*/
@@ -3487,7 +3487,7 @@ static PyTypeObject Cashloan_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -3547,9 +3547,9 @@ SystemOutput_export(SystemOutputObject *self, PyObject *args)
 
 static PyMethodDef SystemOutput_methods[] = {
 		{"assign",            (PyCFunction)SystemOutput_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``SystemOutput_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)SystemOutput_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -3562,7 +3562,7 @@ SystemOutput_get_degradation(SystemOutputObject *self, void *closure)
 static int
 SystemOutput_set_degradation(SystemOutputObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Cashloan_SystemOutput_degradation_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Cashloan_SystemOutput_degradation_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -3574,15 +3574,15 @@ SystemOutput_get_gen(SystemOutputObject *self, void *closure)
 static int
 SystemOutput_set_gen(SystemOutputObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Cashloan_SystemOutput_gen_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Cashloan_SystemOutput_gen_aset, self->data_ptr);
 }
 
 static PyGetSetDef SystemOutput_getset[] = {
 {"degradation", (getter)SystemOutput_get_degradation,(setter)SystemOutput_set_degradation,
-	"Annual degradation [%], array.\n Required.",
+	PyDoc_STR("*sequence*: Annual degradation [%]\n\n*Required*: True"),
  	NULL},
 {"gen", (getter)SystemOutput_get_gen,(setter)SystemOutput_set_gen,
-	"Power generated by renewable resource [kW], array.\n Required.",
+	PyDoc_STR("*sequence*: Power generated by renewable resource [kW]\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -3615,7 +3615,7 @@ static PyTypeObject SystemOutput_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		SystemOutput_methods,         /*tp_methods*/
@@ -3625,7 +3625,7 @@ static PyTypeObject SystemOutput_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -3685,27 +3685,27 @@ Lifetime_export(LifetimeObject *self, PyObject *args)
 
 static PyMethodDef Lifetime_methods[] = {
 		{"assign",            (PyCFunction)Lifetime_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Lifetime_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Lifetime_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 static PyObject *
 Lifetime_get_system_use_lifetime_output(LifetimeObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_Lifetime_system_use_lifetime_output_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_Lifetime_system_use_lifetime_output_nget, self->data_ptr);
 }
 
 static int
 Lifetime_set_system_use_lifetime_output(LifetimeObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Cashloan_Lifetime_system_use_lifetime_output_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Cashloan_Lifetime_system_use_lifetime_output_nset, self->data_ptr);
 }
 
 static PyGetSetDef Lifetime_getset[] = {
 {"system_use_lifetime_output", (getter)Lifetime_get_system_use_lifetime_output,(setter)Lifetime_set_system_use_lifetime_output,
-	"Lifetime hourly system outputs [0/1], number.\n 0=hourly first year,1=hourly lifetime; Constraints: INTEGER,MIN=0; Required.",
+	PyDoc_STR("*float*: Lifetime hourly system outputs [0/1]\n\n*Options*: 0=hourly first year,1=hourly lifetime\n\n*Constraints*: INTEGER,MIN=0\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -3738,7 +3738,7 @@ static PyTypeObject Lifetime_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		Lifetime_methods,         /*tp_methods*/
@@ -3748,7 +3748,7 @@ static PyTypeObject Lifetime_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -3808,9 +3808,9 @@ ThirdPartyOwnership_export(ThirdPartyOwnershipObject *self, PyObject *args)
 
 static PyMethodDef ThirdPartyOwnership_methods[] = {
 		{"assign",            (PyCFunction)ThirdPartyOwnership_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``ThirdPartyOwnership_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)ThirdPartyOwnership_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -3823,7 +3823,7 @@ ThirdPartyOwnership_get_elec_cost_with_system(ThirdPartyOwnershipObject *self, v
 static int
 ThirdPartyOwnership_set_elec_cost_with_system(ThirdPartyOwnershipObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Cashloan_ThirdPartyOwnership_elec_cost_with_system_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Cashloan_ThirdPartyOwnership_elec_cost_with_system_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -3835,15 +3835,15 @@ ThirdPartyOwnership_get_elec_cost_without_system(ThirdPartyOwnershipObject *self
 static int
 ThirdPartyOwnership_set_elec_cost_without_system(ThirdPartyOwnershipObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Cashloan_ThirdPartyOwnership_elec_cost_without_system_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Cashloan_ThirdPartyOwnership_elec_cost_without_system_aset, self->data_ptr);
 }
 
 static PyGetSetDef ThirdPartyOwnership_getset[] = {
 {"elec_cost_with_system", (getter)ThirdPartyOwnership_get_elec_cost_with_system,(setter)ThirdPartyOwnership_set_elec_cost_with_system,
-	"Energy value [$], array.\n Required.",
+	PyDoc_STR("*sequence*: Energy value [$]\n\n*Required*: True"),
  	NULL},
 {"elec_cost_without_system", (getter)ThirdPartyOwnership_get_elec_cost_without_system,(setter)ThirdPartyOwnership_set_elec_cost_without_system,
-	"Energy value [$], array.\n Required.",
+	PyDoc_STR("*sequence*: Energy value [$]\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -3876,7 +3876,7 @@ static PyTypeObject ThirdPartyOwnership_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		ThirdPartyOwnership_methods,         /*tp_methods*/
@@ -3886,7 +3886,7 @@ static PyTypeObject ThirdPartyOwnership_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -3946,46 +3946,46 @@ Outputs_export(OutputsObject *self, PyObject *args)
 
 static PyMethodDef Outputs_methods[] = {
 		{"assign",            (PyCFunction)Outputs_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Outputs_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Outputs_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 static PyObject *
 Outputs_get_adjusted_installed_cost(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_Outputs_adjusted_installed_cost_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_Outputs_adjusted_installed_cost_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cbi_total(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_Outputs_cbi_total_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_Outputs_cbi_total_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cbi_total_fed(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_Outputs_cbi_total_fed_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_Outputs_cbi_total_fed_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cbi_total_oth(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_Outputs_cbi_total_oth_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_Outputs_cbi_total_oth_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cbi_total_sta(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_Outputs_cbi_total_sta_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_Outputs_cbi_total_sta_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cbi_total_uti(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_Outputs_cbi_total_uti_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_Outputs_cbi_total_uti_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -4153,7 +4153,7 @@ Outputs_get_cf_insurance_expense(OutputsObject *self, void *closure)
 static PyObject *
 Outputs_get_cf_length(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_Outputs_cf_length_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_Outputs_cf_length_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -4375,474 +4375,474 @@ Outputs_get_cf_value_added(OutputsObject *self, void *closure)
 static PyObject *
 Outputs_get_discounted_payback(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_Outputs_discounted_payback_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_Outputs_discounted_payback_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_effective_tax_rate(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_Outputs_effective_tax_rate_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_Outputs_effective_tax_rate_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_first_cost(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_Outputs_first_cost_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_Outputs_first_cost_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_ibi_total(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_Outputs_ibi_total_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_Outputs_ibi_total_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_ibi_total_fed(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_Outputs_ibi_total_fed_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_Outputs_ibi_total_fed_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_ibi_total_oth(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_Outputs_ibi_total_oth_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_Outputs_ibi_total_oth_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_ibi_total_sta(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_Outputs_ibi_total_sta_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_Outputs_ibi_total_sta_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_ibi_total_uti(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_Outputs_ibi_total_uti_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_Outputs_ibi_total_uti_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_itc_total(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_Outputs_itc_total_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_Outputs_itc_total_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_itc_total_fed(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_Outputs_itc_total_fed_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_Outputs_itc_total_fed_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_itc_total_sta(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_Outputs_itc_total_sta_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_Outputs_itc_total_sta_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_lcoe_nom(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_Outputs_lcoe_nom_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_Outputs_lcoe_nom_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_lcoe_real(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_Outputs_lcoe_real_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_Outputs_lcoe_real_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_lcoptc_fed_nom(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_Outputs_lcoptc_fed_nom_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_Outputs_lcoptc_fed_nom_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_lcoptc_fed_real(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_Outputs_lcoptc_fed_real_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_Outputs_lcoptc_fed_real_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_lcoptc_sta_nom(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_Outputs_lcoptc_sta_nom_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_Outputs_lcoptc_sta_nom_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_lcoptc_sta_real(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_Outputs_lcoptc_sta_real_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_Outputs_lcoptc_sta_real_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_lnte_nom(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_Outputs_lnte_nom_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_Outputs_lnte_nom_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_lnte_real(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_Outputs_lnte_real_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_Outputs_lnte_real_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_loan_amount(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_Outputs_loan_amount_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_Outputs_loan_amount_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_npv(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_Outputs_npv_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_Outputs_npv_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_payback(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_Outputs_payback_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_Outputs_payback_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_present_value_fuel(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_Outputs_present_value_fuel_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_Outputs_present_value_fuel_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_present_value_insandproptax(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_Outputs_present_value_insandproptax_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_Outputs_present_value_insandproptax_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_present_value_oandm(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_Outputs_present_value_oandm_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_Outputs_present_value_oandm_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_present_value_oandm_nonfuel(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_Outputs_present_value_oandm_nonfuel_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_Outputs_present_value_oandm_nonfuel_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_total_cost(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_Outputs_total_cost_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_Outputs_total_cost_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_wacc(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_Outputs_wacc_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_Outputs_wacc_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_year1_nte(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Cashloan_Outputs_year1_nte_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Cashloan_Outputs_year1_nte_nget, self->data_ptr);
 }
 
 static PyGetSetDef Outputs_getset[] = {
 {"adjusted_installed_cost", (getter)Outputs_get_adjusted_installed_cost,(setter)0,
-	"Net capital cost [$], number.",
+	PyDoc_STR("*float*: Net capital cost [$]"),
  	NULL},
 {"cbi_total", (getter)Outputs_get_cbi_total,(setter)0,
-	"Total CBI income [$], number.",
+	PyDoc_STR("*float*: Total CBI income [$]"),
  	NULL},
 {"cbi_total_fed", (getter)Outputs_get_cbi_total_fed,(setter)0,
-	"Federal CBI income [$], number.",
+	PyDoc_STR("*float*: Federal CBI income [$]"),
  	NULL},
 {"cbi_total_oth", (getter)Outputs_get_cbi_total_oth,(setter)0,
-	"Other CBI income [$], number.",
+	PyDoc_STR("*float*: Other CBI income [$]"),
  	NULL},
 {"cbi_total_sta", (getter)Outputs_get_cbi_total_sta,(setter)0,
-	"State CBI income [$], number.",
+	PyDoc_STR("*float*: State CBI income [$]"),
  	NULL},
 {"cbi_total_uti", (getter)Outputs_get_cbi_total_uti,(setter)0,
-	"Utility CBI income [$], number.",
+	PyDoc_STR("*float*: Utility CBI income [$]"),
  	NULL},
 {"cf_after_tax_cash_flow", (getter)Outputs_get_cf_after_tax_cash_flow,(setter)0,
-	"After-tax cash flow [$], array.",
+	PyDoc_STR("*sequence*: After-tax cash flow [$]"),
  	NULL},
 {"cf_after_tax_net_equity_cost_flow", (getter)Outputs_get_cf_after_tax_net_equity_cost_flow,(setter)0,
-	"After-tax annual costs [$], array.",
+	PyDoc_STR("*sequence*: After-tax annual costs [$]"),
  	NULL},
 {"cf_battery_replacement_cost", (getter)Outputs_get_cf_battery_replacement_cost,(setter)0,
-	"Battery replacement cost [$], array.",
+	PyDoc_STR("*sequence*: Battery replacement cost [$]"),
  	NULL},
 {"cf_battery_replacement_cost_schedule", (getter)Outputs_get_cf_battery_replacement_cost_schedule,(setter)0,
-	"Battery replacement cost schedule [$/kWh], array.",
+	PyDoc_STR("*sequence*: Battery replacement cost schedule [$/kWh]"),
  	NULL},
 {"cf_cumulative_payback_with_expenses", (getter)Outputs_get_cf_cumulative_payback_with_expenses,(setter)0,
-	"Cumulative simple payback with expenses [$], array.",
+	PyDoc_STR("*sequence*: Cumulative simple payback with expenses [$]"),
  	NULL},
 {"cf_cumulative_payback_without_expenses", (getter)Outputs_get_cf_cumulative_payback_without_expenses,(setter)0,
-	"Cumulative simple payback without expenses [$], array.",
+	PyDoc_STR("*sequence*: Cumulative simple payback without expenses [$]"),
  	NULL},
 {"cf_debt_balance", (getter)Outputs_get_cf_debt_balance,(setter)0,
-	"Debt balance [$], array.",
+	PyDoc_STR("*sequence*: Debt balance [$]"),
  	NULL},
 {"cf_debt_payment_interest", (getter)Outputs_get_cf_debt_payment_interest,(setter)0,
-	"Interest payment [$], array.",
+	PyDoc_STR("*sequence*: Interest payment [$]"),
  	NULL},
 {"cf_debt_payment_principal", (getter)Outputs_get_cf_debt_payment_principal,(setter)0,
-	"Principal payment [$], array.",
+	PyDoc_STR("*sequence*: Principal payment [$]"),
  	NULL},
 {"cf_debt_payment_total", (getter)Outputs_get_cf_debt_payment_total,(setter)0,
-	"Total P&I debt payment [$], array.",
+	PyDoc_STR("*sequence*: Total P&I debt payment [$]"),
  	NULL},
 {"cf_deductible_expenses", (getter)Outputs_get_cf_deductible_expenses,(setter)0,
-	"Deductible expenses [$], array.",
+	PyDoc_STR("*sequence*: Deductible expenses [$]"),
  	NULL},
 {"cf_discounted_costs", (getter)Outputs_get_cf_discounted_costs,(setter)0,
-	"Discounted costs [$], array.",
+	PyDoc_STR("*sequence*: Discounted costs [$]"),
  	NULL},
 {"cf_discounted_cumulative_payback", (getter)Outputs_get_cf_discounted_cumulative_payback,(setter)0,
-	"Cumulative discounted payback [$], array.",
+	PyDoc_STR("*sequence*: Cumulative discounted payback [$]"),
  	NULL},
 {"cf_discounted_payback", (getter)Outputs_get_cf_discounted_payback,(setter)0,
-	"Discounted payback [$], array.",
+	PyDoc_STR("*sequence*: Discounted payback [$]"),
  	NULL},
 {"cf_discounted_savings", (getter)Outputs_get_cf_discounted_savings,(setter)0,
-	"Discounted savings [$], array.",
+	PyDoc_STR("*sequence*: Discounted savings [$]"),
  	NULL},
 {"cf_effective_tax_frac", (getter)Outputs_get_cf_effective_tax_frac,(setter)0,
-	"Effective income tax rate [frac], array.",
+	PyDoc_STR("*sequence*: Effective income tax rate [frac]"),
  	NULL},
 {"cf_energy_net", (getter)Outputs_get_cf_energy_net,(setter)0,
-	"Energy [kWh], array.",
+	PyDoc_STR("*sequence*: Energy [kWh]"),
  	NULL},
 {"cf_energy_value", (getter)Outputs_get_cf_energy_value,(setter)0,
-	"Value of electricity savings [$], array.",
+	PyDoc_STR("*sequence*: Value of electricity savings [$]"),
  	NULL},
 {"cf_fed_depr_sched", (getter)Outputs_get_cf_fed_depr_sched,(setter)0,
-	"Federal depreciation schedule [%], array.",
+	PyDoc_STR("*sequence*: Federal depreciation schedule [%]"),
  	NULL},
 {"cf_fed_depreciation", (getter)Outputs_get_cf_fed_depreciation,(setter)0,
-	"Federal depreciation [$], array.",
+	PyDoc_STR("*sequence*: Federal depreciation [$]"),
  	NULL},
 {"cf_fed_incentive_income_less_deductions", (getter)Outputs_get_cf_fed_incentive_income_less_deductions,(setter)0,
-	"Federal incentive income less deductions [$], array.",
+	PyDoc_STR("*sequence*: Federal incentive income less deductions [$]"),
  	NULL},
 {"cf_fed_tax_savings", (getter)Outputs_get_cf_fed_tax_savings,(setter)0,
-	"Federal tax savings [$], array.",
+	PyDoc_STR("*sequence*: Federal tax savings [$]"),
  	NULL},
 {"cf_fed_taxable_income_less_deductions", (getter)Outputs_get_cf_fed_taxable_income_less_deductions,(setter)0,
-	"Federal taxable income less deductions [$], array.",
+	PyDoc_STR("*sequence*: Federal taxable income less deductions [$]"),
  	NULL},
 {"cf_federal_tax_frac", (getter)Outputs_get_cf_federal_tax_frac,(setter)0,
-	"Federal income tax rate [frac], array.",
+	PyDoc_STR("*sequence*: Federal income tax rate [frac]"),
  	NULL},
 {"cf_fuelcell_replacement_cost", (getter)Outputs_get_cf_fuelcell_replacement_cost,(setter)0,
-	"Fuel cell replacement cost [$], array.",
+	PyDoc_STR("*sequence*: Fuel cell replacement cost [$]"),
  	NULL},
 {"cf_fuelcell_replacement_cost_schedule", (getter)Outputs_get_cf_fuelcell_replacement_cost_schedule,(setter)0,
-	"Fuel cell replacement cost schedule [$/kW], array.",
+	PyDoc_STR("*sequence*: Fuel cell replacement cost schedule [$/kW]"),
  	NULL},
 {"cf_insurance_expense", (getter)Outputs_get_cf_insurance_expense,(setter)0,
-	"Insurance expense [$], array.",
+	PyDoc_STR("*sequence*: Insurance expense [$]"),
  	NULL},
 {"cf_length", (getter)Outputs_get_cf_length,(setter)0,
-	"Number of periods in cash flow, number.",
+	PyDoc_STR("*float*: Number of periods in cash flow"),
  	NULL},
 {"cf_net_salvage_value", (getter)Outputs_get_cf_net_salvage_value,(setter)0,
-	"Net salvage value [$], array.",
+	PyDoc_STR("*sequence*: Net salvage value [$]"),
  	NULL},
 {"cf_nte", (getter)Outputs_get_cf_nte,(setter)0,
-	"Not to exceed (NTE) [cents/kWh], array.",
+	PyDoc_STR("*sequence*: Not to exceed (NTE) [cents/kWh]"),
  	NULL},
 {"cf_om_capacity1_expense", (getter)Outputs_get_cf_om_capacity1_expense,(setter)0,
-	"Battery capacity-based expense [$], array.",
+	PyDoc_STR("*sequence*: Battery capacity-based expense [$]"),
  	NULL},
 {"cf_om_capacity2_expense", (getter)Outputs_get_cf_om_capacity2_expense,(setter)0,
-	"Fuel cell capacity-based expense [$], array.",
+	PyDoc_STR("*sequence*: Fuel cell capacity-based expense [$]"),
  	NULL},
 {"cf_om_capacity_expense", (getter)Outputs_get_cf_om_capacity_expense,(setter)0,
-	"O&M capacity-based expense [$], array.",
+	PyDoc_STR("*sequence*: O&M capacity-based expense [$]"),
  	NULL},
 {"cf_om_fixed1_expense", (getter)Outputs_get_cf_om_fixed1_expense,(setter)0,
-	"Battery fixed expense [$], array.",
+	PyDoc_STR("*sequence*: Battery fixed expense [$]"),
  	NULL},
 {"cf_om_fixed2_expense", (getter)Outputs_get_cf_om_fixed2_expense,(setter)0,
-	"Fuel cell fixed expense [$], array.",
+	PyDoc_STR("*sequence*: Fuel cell fixed expense [$]"),
  	NULL},
 {"cf_om_fixed_expense", (getter)Outputs_get_cf_om_fixed_expense,(setter)0,
-	"O&M fixed expense [$], array.",
+	PyDoc_STR("*sequence*: O&M fixed expense [$]"),
  	NULL},
 {"cf_om_fuel_expense", (getter)Outputs_get_cf_om_fuel_expense,(setter)0,
-	"O&M fuel expense [$], array.",
+	PyDoc_STR("*sequence*: O&M fuel expense [$]"),
  	NULL},
 {"cf_om_opt_fuel_1_expense", (getter)Outputs_get_cf_om_opt_fuel_1_expense,(setter)0,
-	"O&M biomass feedstock expense [$], array.",
+	PyDoc_STR("*sequence*: O&M biomass feedstock expense [$]"),
  	NULL},
 {"cf_om_opt_fuel_2_expense", (getter)Outputs_get_cf_om_opt_fuel_2_expense,(setter)0,
-	"O&M coal feedstock expense [$], array.",
+	PyDoc_STR("*sequence*: O&M coal feedstock expense [$]"),
  	NULL},
 {"cf_om_production1_expense", (getter)Outputs_get_cf_om_production1_expense,(setter)0,
-	"Battery production-based expense [$], array.",
+	PyDoc_STR("*sequence*: Battery production-based expense [$]"),
  	NULL},
 {"cf_om_production2_expense", (getter)Outputs_get_cf_om_production2_expense,(setter)0,
-	"Fuel cell production-based expense [$], array.",
+	PyDoc_STR("*sequence*: Fuel cell production-based expense [$]"),
  	NULL},
 {"cf_om_production_expense", (getter)Outputs_get_cf_om_production_expense,(setter)0,
-	"O&M production-based expense [$], array.",
+	PyDoc_STR("*sequence*: O&M production-based expense [$]"),
  	NULL},
 {"cf_operating_expenses", (getter)Outputs_get_cf_operating_expenses,(setter)0,
-	"Total operating expense [$], array.",
+	PyDoc_STR("*sequence*: Total operating expense [$]"),
  	NULL},
 {"cf_payback_with_expenses", (getter)Outputs_get_cf_payback_with_expenses,(setter)0,
-	"Simple payback with expenses [$], array.",
+	PyDoc_STR("*sequence*: Simple payback with expenses [$]"),
  	NULL},
 {"cf_payback_without_expenses", (getter)Outputs_get_cf_payback_without_expenses,(setter)0,
-	"Simple payback without expenses [$], array.",
+	PyDoc_STR("*sequence*: Simple payback without expenses [$]"),
  	NULL},
 {"cf_pbi_total", (getter)Outputs_get_cf_pbi_total,(setter)0,
-	"Total PBI income [$], array.",
+	PyDoc_STR("*sequence*: Total PBI income [$]"),
  	NULL},
 {"cf_pbi_total_fed", (getter)Outputs_get_cf_pbi_total_fed,(setter)0,
-	"Federal PBI income [$], array.",
+	PyDoc_STR("*sequence*: Federal PBI income [$]"),
  	NULL},
 {"cf_pbi_total_oth", (getter)Outputs_get_cf_pbi_total_oth,(setter)0,
-	"Other PBI income [$], array.",
+	PyDoc_STR("*sequence*: Other PBI income [$]"),
  	NULL},
 {"cf_pbi_total_sta", (getter)Outputs_get_cf_pbi_total_sta,(setter)0,
-	"State PBI income [$], array.",
+	PyDoc_STR("*sequence*: State PBI income [$]"),
  	NULL},
 {"cf_pbi_total_uti", (getter)Outputs_get_cf_pbi_total_uti,(setter)0,
-	"Utility PBI income [$], array.",
+	PyDoc_STR("*sequence*: Utility PBI income [$]"),
  	NULL},
 {"cf_property_tax_assessed_value", (getter)Outputs_get_cf_property_tax_assessed_value,(setter)0,
-	"Property tax net assessed value [$], array.",
+	PyDoc_STR("*sequence*: Property tax net assessed value [$]"),
  	NULL},
 {"cf_property_tax_expense", (getter)Outputs_get_cf_property_tax_expense,(setter)0,
-	"Property tax expense [$], array.",
+	PyDoc_STR("*sequence*: Property tax expense [$]"),
  	NULL},
 {"cf_ptc_fed", (getter)Outputs_get_cf_ptc_fed,(setter)0,
-	"Federal PTC [$], array.",
+	PyDoc_STR("*sequence*: Federal PTC [$]"),
  	NULL},
 {"cf_ptc_sta", (getter)Outputs_get_cf_ptc_sta,(setter)0,
-	"State PTC [$], array.",
+	PyDoc_STR("*sequence*: State PTC [$]"),
  	NULL},
 {"cf_ptc_total", (getter)Outputs_get_cf_ptc_total,(setter)0,
-	"Total PTC [$], array.",
+	PyDoc_STR("*sequence*: Total PTC [$]"),
  	NULL},
 {"cf_sta_and_fed_tax_savings", (getter)Outputs_get_cf_sta_and_fed_tax_savings,(setter)0,
-	"Total tax savings (federal and state) [$], array.",
+	PyDoc_STR("*sequence*: Total tax savings (federal and state) [$]"),
  	NULL},
 {"cf_sta_depr_sched", (getter)Outputs_get_cf_sta_depr_sched,(setter)0,
-	"State depreciation schedule [%], array.",
+	PyDoc_STR("*sequence*: State depreciation schedule [%]"),
  	NULL},
 {"cf_sta_depreciation", (getter)Outputs_get_cf_sta_depreciation,(setter)0,
-	"State depreciation [$], array.",
+	PyDoc_STR("*sequence*: State depreciation [$]"),
  	NULL},
 {"cf_sta_incentive_income_less_deductions", (getter)Outputs_get_cf_sta_incentive_income_less_deductions,(setter)0,
-	"State incentive income less deductions [$], array.",
+	PyDoc_STR("*sequence*: State incentive income less deductions [$]"),
  	NULL},
 {"cf_sta_tax_savings", (getter)Outputs_get_cf_sta_tax_savings,(setter)0,
-	"State tax savings [$], array.",
+	PyDoc_STR("*sequence*: State tax savings [$]"),
  	NULL},
 {"cf_sta_taxable_income_less_deductions", (getter)Outputs_get_cf_sta_taxable_income_less_deductions,(setter)0,
-	"State taxable income less deductions [$], array.",
+	PyDoc_STR("*sequence*: State taxable income less deductions [$]"),
  	NULL},
 {"cf_state_tax_frac", (getter)Outputs_get_cf_state_tax_frac,(setter)0,
-	"State income tax rate [frac], array.",
+	PyDoc_STR("*sequence*: State income tax rate [frac]"),
  	NULL},
 {"cf_thermal_value", (getter)Outputs_get_cf_thermal_value,(setter)0,
-	"Value of thermal savings [$], array.",
+	PyDoc_STR("*sequence*: Value of thermal savings [$]"),
  	NULL},
 {"cf_value_added", (getter)Outputs_get_cf_value_added,(setter)0,
-	"Real estate value added [$], array.",
+	PyDoc_STR("*sequence*: Real estate value added [$]"),
  	NULL},
 {"discounted_payback", (getter)Outputs_get_discounted_payback,(setter)0,
-	"Discounted payback period [years], number.",
+	PyDoc_STR("*float*: Discounted payback period [years]"),
  	NULL},
 {"effective_tax_rate", (getter)Outputs_get_effective_tax_rate,(setter)0,
-	"Effective tax rate [%], number.",
+	PyDoc_STR("*float*: Effective tax rate [%]"),
  	NULL},
 {"first_cost", (getter)Outputs_get_first_cost,(setter)0,
-	"Equity [$], number.",
+	PyDoc_STR("*float*: Equity [$]"),
  	NULL},
 {"ibi_total", (getter)Outputs_get_ibi_total,(setter)0,
-	"Total IBI income [$], number.",
+	PyDoc_STR("*float*: Total IBI income [$]"),
  	NULL},
 {"ibi_total_fed", (getter)Outputs_get_ibi_total_fed,(setter)0,
-	"Federal IBI income [$], number.",
+	PyDoc_STR("*float*: Federal IBI income [$]"),
  	NULL},
 {"ibi_total_oth", (getter)Outputs_get_ibi_total_oth,(setter)0,
-	"Other IBI income [$], number.",
+	PyDoc_STR("*float*: Other IBI income [$]"),
  	NULL},
 {"ibi_total_sta", (getter)Outputs_get_ibi_total_sta,(setter)0,
-	"State IBI income [$], number.",
+	PyDoc_STR("*float*: State IBI income [$]"),
  	NULL},
 {"ibi_total_uti", (getter)Outputs_get_ibi_total_uti,(setter)0,
-	"Utility IBI income [$], number.",
+	PyDoc_STR("*float*: Utility IBI income [$]"),
  	NULL},
 {"itc_total", (getter)Outputs_get_itc_total,(setter)0,
-	"Total ITC [$], number.",
+	PyDoc_STR("*float*: Total ITC [$]"),
  	NULL},
 {"itc_total_fed", (getter)Outputs_get_itc_total_fed,(setter)0,
-	"Federal ITC [$], number.",
+	PyDoc_STR("*float*: Federal ITC [$]"),
  	NULL},
 {"itc_total_sta", (getter)Outputs_get_itc_total_sta,(setter)0,
-	"State ITC [$], number.",
+	PyDoc_STR("*float*: State ITC [$]"),
  	NULL},
 {"lcoe_nom", (getter)Outputs_get_lcoe_nom,(setter)0,
-	"Nominal LCOE [cents/kWh], number.",
+	PyDoc_STR("*float*: Nominal LCOE [cents/kWh]"),
  	NULL},
 {"lcoe_real", (getter)Outputs_get_lcoe_real,(setter)0,
-	"Real LCOE [cents/kWh], number.",
+	PyDoc_STR("*float*: Real LCOE [cents/kWh]"),
  	NULL},
 {"lcoptc_fed_nom", (getter)Outputs_get_lcoptc_fed_nom,(setter)0,
-	"Levelized federal PTC (nominal) [cents/kWh], number.",
+	PyDoc_STR("*float*: Levelized federal PTC (nominal) [cents/kWh]"),
  	NULL},
 {"lcoptc_fed_real", (getter)Outputs_get_lcoptc_fed_real,(setter)0,
-	"Levelized federal PTC (real) [cents/kWh], number.",
+	PyDoc_STR("*float*: Levelized federal PTC (real) [cents/kWh]"),
  	NULL},
 {"lcoptc_sta_nom", (getter)Outputs_get_lcoptc_sta_nom,(setter)0,
-	"Levelized state PTC (nominal) [cents/kWh], number.",
+	PyDoc_STR("*float*: Levelized state PTC (nominal) [cents/kWh]"),
  	NULL},
 {"lcoptc_sta_real", (getter)Outputs_get_lcoptc_sta_real,(setter)0,
-	"Levelized state PTC (real) [cents/kWh], number.",
+	PyDoc_STR("*float*: Levelized state PTC (real) [cents/kWh]"),
  	NULL},
 {"lnte_nom", (getter)Outputs_get_lnte_nom,(setter)0,
-	"Nominal LNTE [cents/kWh], number.",
+	PyDoc_STR("*float*: Nominal LNTE [cents/kWh]"),
  	NULL},
 {"lnte_real", (getter)Outputs_get_lnte_real,(setter)0,
-	"Real LNTE [cents/kWh], number.",
+	PyDoc_STR("*float*: Real LNTE [cents/kWh]"),
  	NULL},
 {"loan_amount", (getter)Outputs_get_loan_amount,(setter)0,
-	"Debt [$], number.",
+	PyDoc_STR("*float*: Debt [$]"),
  	NULL},
 {"npv", (getter)Outputs_get_npv,(setter)0,
-	"Net present value [$], number.",
+	PyDoc_STR("*float*: Net present value [$]"),
  	NULL},
 {"payback", (getter)Outputs_get_payback,(setter)0,
-	"Payback period [years], number.",
+	PyDoc_STR("*float*: Payback period [years]"),
  	NULL},
 {"present_value_fuel", (getter)Outputs_get_present_value_fuel,(setter)0,
-	"Present value of fuel expenses [$], number.",
+	PyDoc_STR("*float*: Present value of fuel expenses [$]"),
  	NULL},
 {"present_value_insandproptax", (getter)Outputs_get_present_value_insandproptax,(setter)0,
-	"Present value of insurance and property tax [$], number.",
+	PyDoc_STR("*float*: Present value of insurance and property tax [$]"),
  	NULL},
 {"present_value_oandm", (getter)Outputs_get_present_value_oandm,(setter)0,
-	"Present value of O&M expenses [$], number.",
+	PyDoc_STR("*float*: Present value of O&M expenses [$]"),
  	NULL},
 {"present_value_oandm_nonfuel", (getter)Outputs_get_present_value_oandm_nonfuel,(setter)0,
-	"Present value of non-fuel O&M expenses [$], number.",
+	PyDoc_STR("*float*: Present value of non-fuel O&M expenses [$]"),
  	NULL},
 {"total_cost", (getter)Outputs_get_total_cost,(setter)0,
-	"Total installed cost [$], number.",
+	PyDoc_STR("*float*: Total installed cost [$]"),
  	NULL},
 {"wacc", (getter)Outputs_get_wacc,(setter)0,
-	"Weighted average cost of capital (WACC), number.",
+	PyDoc_STR("*float*: Weighted average cost of capital (WACC)"),
  	NULL},
 {"year1_nte", (getter)Outputs_get_year1_nte,(setter)0,
-	"Year 1 NTE [cents/kWh], number.",
+	PyDoc_STR("*float*: Year 1 NTE [cents/kWh]"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -4875,7 +4875,7 @@ static PyTypeObject Outputs_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		Outputs_methods,         /*tp_methods*/
@@ -4885,7 +4885,7 @@ static PyTypeObject Outputs_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -5021,9 +5021,9 @@ static PyMethodDef CashloanModel_methods[] = {
 		{"execute",            (PyCFunction)CashloanModel_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
 		{"assign",            (PyCFunction)CashloanModel_assign,  METH_VARARGS,
-				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs")},
+				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Financial Parameters': { var: val, ...}, ...}``")},
 		{"export",            (PyCFunction)CashloanModel_export,  METH_VARARGS,
-				PyDoc_STR("assign() -> None\n Export attributes into dictionary")},
+				PyDoc_STR("export() -> dict\n Export attributes into nested dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -5063,11 +5063,11 @@ static PyTypeObject CashloanModel_Type = {
 		0,                          /*tp_setattro*/
 		0,                          /*tp_as_buffer*/
 		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
-		"see html for help",        /*tp_doc*/
+		"This class contains all the variable information for running a simulation. Variables are grouped together in the subclasses as properties. If property assignments are the wrong type, an error is thrown.",        /*tp_doc*/
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		CashloanModel_methods,      /*tp_methods*/
@@ -5077,7 +5077,7 @@ static PyTypeObject CashloanModel_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,                          /*tp_new*/
@@ -5140,12 +5140,12 @@ CashloanModel_default(PyObject *self, PyObject *args)
 
 static PyMethodDef CashloanModelModule_methods[] = {
 		{"new",             CashloanModel_new,         METH_VARARGS,
-				PyDoc_STR("new() -> new CashloanModel object")},
+				PyDoc_STR("new() -> CashloanModel")},
 		{"default",             CashloanModel_default,         METH_VARARGS,
-				PyDoc_STR("default(financial) -> new CashloanModel object with financial model-specific default attributes\n"
-				"Options: BiopowerCommercial\nDSLFCommercial\nDishStirlingCommercial\nEmpiricalTroughCommercial\nFlatPlatePVCommercial\nFlatPlatePVResidential\nFuelCellCommercial\nGenericCSPSystemCommercial\nGenericSystemCommercial\nGenericSystemResidential\nMSLFCommercial\nPVWattsCommercial\nPVWattsResidential\nPhysicalTroughCommercial\nSolarWaterHeatingCommercial\nSolarWaterHeatingResidential\nWindPowerCommercial\nWindPowerResidential")},
+				PyDoc_STR("default(config) -> CashloanModel\n\nUse financial model-specific default attributes\n"
+				"config options:\n\n- \"BiopowerCommercial\"\n- \"DSLFCommercial\"\n- \"DishStirlingCommercial\"\n- \"EmpiricalTroughCommercial\"\n- \"FlatPlatePVCommercial\"\n- \"FlatPlatePVResidential\"\n- \"FuelCellCommercial\"\n- \"GenericCSPSystemCommercial\"\n- \"GenericSystemCommercial\"\n- \"GenericSystemResidential\"\n- \"MSLFCommercial\"\n- \"PVWattsCommercial\"\n- \"PVWattsResidential\"\n- \"PhysicalTroughCommercial\"\n- \"SolarWaterHeatingCommercial\"\n- \"SolarWaterHeatingResidential\"\n- \"WindPowerCommercial\"\n- \"WindPowerResidential\"")},
 		{"wrap",             CashloanModel_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> new CashloanModel object around existing PySSC data, taking over memory ownership")},
+				PyDoc_STR("wrap(ssc_data_t) -> CashloanModel\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{NULL,              NULL}           /* sentinel */
 };
 

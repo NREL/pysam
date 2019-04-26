@@ -58,9 +58,9 @@ Weather_export(WeatherObject *self, PyObject *args)
 
 static PyMethodDef Weather_methods[] = {
 		{"assign",            (PyCFunction)Weather_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Weather_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Weather_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -78,7 +78,7 @@ Weather_set_solar_resource_file(WeatherObject *self, PyObject *value, void *clos
 
 static PyGetSetDef Weather_getset[] = {
 {"solar_resource_file", (getter)Weather_get_solar_resource_file,(setter)Weather_set_solar_resource_file,
-	"local weather file path, string.\n Constraints: LOCAL_FILE; Required.",
+	PyDoc_STR("*str*: local weather file path\n\n*Constraints*: LOCAL_FILE\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -111,7 +111,7 @@ static PyTypeObject Weather_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		Weather_methods,         /*tp_methods*/
@@ -121,7 +121,7 @@ static PyTypeObject Weather_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -181,27 +181,27 @@ MoltenSaltTower_export(MoltenSaltTowerObject *self, PyObject *args)
 
 static PyMethodDef MoltenSaltTower_methods[] = {
 		{"assign",            (PyCFunction)MoltenSaltTower_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``MoltenSaltTower_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)MoltenSaltTower_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 static PyObject *
 MoltenSaltTower_get_system_capacity(MoltenSaltTowerObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_MoltenSaltTower_system_capacity_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_MoltenSaltTower_system_capacity_nget, self->data_ptr);
 }
 
 static int
 MoltenSaltTower_set_system_capacity(MoltenSaltTowerObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_MoltenSaltTower_system_capacity_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_MoltenSaltTower_system_capacity_nset, self->data_ptr);
 }
 
 static PyGetSetDef MoltenSaltTower_getset[] = {
 {"system_capacity", (getter)MoltenSaltTower_get_system_capacity,(setter)MoltenSaltTower_set_system_capacity,
-	"Nameplate capacity [kW], number.\n Required.",
+	PyDoc_STR("*float*: Nameplate capacity [kW]\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -234,7 +234,7 @@ static PyTypeObject MoltenSaltTower_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		MoltenSaltTower_methods,         /*tp_methods*/
@@ -244,7 +244,7 @@ static PyTypeObject MoltenSaltTower_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -304,298 +304,298 @@ Heliostat_export(HeliostatObject *self, PyObject *args)
 
 static PyMethodDef Heliostat_methods[] = {
 		{"assign",            (PyCFunction)Heliostat_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Heliostat_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Heliostat_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 static PyObject *
 Heliostat_get_N_hel(HeliostatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Heliostat_N_hel_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Heliostat_N_hel_nget, self->data_ptr);
 }
 
 static int
 Heliostat_set_N_hel(HeliostatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Heliostat_N_hel_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Heliostat_N_hel_nset, self->data_ptr);
 }
 
 static PyObject *
 Heliostat_get_bop_spec_cost(HeliostatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Heliostat_bop_spec_cost_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Heliostat_bop_spec_cost_nget, self->data_ptr);
 }
 
 static int
 Heliostat_set_bop_spec_cost(HeliostatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Heliostat_bop_spec_cost_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Heliostat_bop_spec_cost_nset, self->data_ptr);
 }
 
 static PyObject *
 Heliostat_get_c_atm_0(HeliostatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Heliostat_c_atm_0_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Heliostat_c_atm_0_nget, self->data_ptr);
 }
 
 static int
 Heliostat_set_c_atm_0(HeliostatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Heliostat_c_atm_0_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Heliostat_c_atm_0_nset, self->data_ptr);
 }
 
 static PyObject *
 Heliostat_get_c_atm_1(HeliostatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Heliostat_c_atm_1_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Heliostat_c_atm_1_nget, self->data_ptr);
 }
 
 static int
 Heliostat_set_c_atm_1(HeliostatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Heliostat_c_atm_1_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Heliostat_c_atm_1_nset, self->data_ptr);
 }
 
 static PyObject *
 Heliostat_get_c_atm_2(HeliostatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Heliostat_c_atm_2_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Heliostat_c_atm_2_nget, self->data_ptr);
 }
 
 static int
 Heliostat_set_c_atm_2(HeliostatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Heliostat_c_atm_2_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Heliostat_c_atm_2_nset, self->data_ptr);
 }
 
 static PyObject *
 Heliostat_get_c_atm_3(HeliostatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Heliostat_c_atm_3_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Heliostat_c_atm_3_nget, self->data_ptr);
 }
 
 static int
 Heliostat_set_c_atm_3(HeliostatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Heliostat_c_atm_3_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Heliostat_c_atm_3_nset, self->data_ptr);
 }
 
 static PyObject *
 Heliostat_get_calc_fluxmaps(HeliostatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Heliostat_calc_fluxmaps_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Heliostat_calc_fluxmaps_nget, self->data_ptr);
 }
 
 static int
 Heliostat_set_calc_fluxmaps(HeliostatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Heliostat_calc_fluxmaps_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Heliostat_calc_fluxmaps_nset, self->data_ptr);
 }
 
 static PyObject *
 Heliostat_get_cant_type(HeliostatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Heliostat_cant_type_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Heliostat_cant_type_nget, self->data_ptr);
 }
 
 static int
 Heliostat_set_cant_type(HeliostatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Heliostat_cant_type_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Heliostat_cant_type_nset, self->data_ptr);
 }
 
 static PyObject *
 Heliostat_get_check_max_flux(HeliostatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Heliostat_check_max_flux_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Heliostat_check_max_flux_nget, self->data_ptr);
 }
 
 static int
 Heliostat_set_check_max_flux(HeliostatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Heliostat_check_max_flux_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Heliostat_check_max_flux_nset, self->data_ptr);
 }
 
 static PyObject *
 Heliostat_get_contingency_rate(HeliostatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Heliostat_contingency_rate_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Heliostat_contingency_rate_nget, self->data_ptr);
 }
 
 static int
 Heliostat_set_contingency_rate(HeliostatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Heliostat_contingency_rate_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Heliostat_contingency_rate_nset, self->data_ptr);
 }
 
 static PyObject *
 Heliostat_get_cost_sf_fixed(HeliostatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Heliostat_cost_sf_fixed_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Heliostat_cost_sf_fixed_nget, self->data_ptr);
 }
 
 static int
 Heliostat_set_cost_sf_fixed(HeliostatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Heliostat_cost_sf_fixed_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Heliostat_cost_sf_fixed_nset, self->data_ptr);
 }
 
 static PyObject *
 Heliostat_get_csp_pt_cost_epc_fixed(HeliostatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Heliostat_csp_pt_cost_epc_fixed_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Heliostat_csp_pt_cost_epc_fixed_nget, self->data_ptr);
 }
 
 static int
 Heliostat_set_csp_pt_cost_epc_fixed(HeliostatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Heliostat_csp_pt_cost_epc_fixed_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Heliostat_csp_pt_cost_epc_fixed_nset, self->data_ptr);
 }
 
 static PyObject *
 Heliostat_get_csp_pt_cost_epc_per_acre(HeliostatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Heliostat_csp_pt_cost_epc_per_acre_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Heliostat_csp_pt_cost_epc_per_acre_nget, self->data_ptr);
 }
 
 static int
 Heliostat_set_csp_pt_cost_epc_per_acre(HeliostatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Heliostat_csp_pt_cost_epc_per_acre_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Heliostat_csp_pt_cost_epc_per_acre_nset, self->data_ptr);
 }
 
 static PyObject *
 Heliostat_get_csp_pt_cost_epc_per_watt(HeliostatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Heliostat_csp_pt_cost_epc_per_watt_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Heliostat_csp_pt_cost_epc_per_watt_nget, self->data_ptr);
 }
 
 static int
 Heliostat_set_csp_pt_cost_epc_per_watt(HeliostatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Heliostat_csp_pt_cost_epc_per_watt_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Heliostat_csp_pt_cost_epc_per_watt_nset, self->data_ptr);
 }
 
 static PyObject *
 Heliostat_get_csp_pt_cost_epc_percent(HeliostatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Heliostat_csp_pt_cost_epc_percent_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Heliostat_csp_pt_cost_epc_percent_nget, self->data_ptr);
 }
 
 static int
 Heliostat_set_csp_pt_cost_epc_percent(HeliostatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Heliostat_csp_pt_cost_epc_percent_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Heliostat_csp_pt_cost_epc_percent_nset, self->data_ptr);
 }
 
 static PyObject *
 Heliostat_get_csp_pt_cost_plm_fixed(HeliostatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Heliostat_csp_pt_cost_plm_fixed_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Heliostat_csp_pt_cost_plm_fixed_nget, self->data_ptr);
 }
 
 static int
 Heliostat_set_csp_pt_cost_plm_fixed(HeliostatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Heliostat_csp_pt_cost_plm_fixed_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Heliostat_csp_pt_cost_plm_fixed_nset, self->data_ptr);
 }
 
 static PyObject *
 Heliostat_get_csp_pt_cost_plm_per_acre(HeliostatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Heliostat_csp_pt_cost_plm_per_acre_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Heliostat_csp_pt_cost_plm_per_acre_nget, self->data_ptr);
 }
 
 static int
 Heliostat_set_csp_pt_cost_plm_per_acre(HeliostatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Heliostat_csp_pt_cost_plm_per_acre_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Heliostat_csp_pt_cost_plm_per_acre_nset, self->data_ptr);
 }
 
 static PyObject *
 Heliostat_get_csp_pt_cost_plm_per_watt(HeliostatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Heliostat_csp_pt_cost_plm_per_watt_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Heliostat_csp_pt_cost_plm_per_watt_nget, self->data_ptr);
 }
 
 static int
 Heliostat_set_csp_pt_cost_plm_per_watt(HeliostatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Heliostat_csp_pt_cost_plm_per_watt_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Heliostat_csp_pt_cost_plm_per_watt_nset, self->data_ptr);
 }
 
 static PyObject *
 Heliostat_get_csp_pt_cost_plm_percent(HeliostatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Heliostat_csp_pt_cost_plm_percent_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Heliostat_csp_pt_cost_plm_percent_nget, self->data_ptr);
 }
 
 static int
 Heliostat_set_csp_pt_cost_plm_percent(HeliostatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Heliostat_csp_pt_cost_plm_percent_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Heliostat_csp_pt_cost_plm_percent_nset, self->data_ptr);
 }
 
 static PyObject *
 Heliostat_get_csp_pt_sf_fixed_land_area(HeliostatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Heliostat_csp_pt_sf_fixed_land_area_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Heliostat_csp_pt_sf_fixed_land_area_nget, self->data_ptr);
 }
 
 static int
 Heliostat_set_csp_pt_sf_fixed_land_area(HeliostatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Heliostat_csp_pt_sf_fixed_land_area_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Heliostat_csp_pt_sf_fixed_land_area_nset, self->data_ptr);
 }
 
 static PyObject *
 Heliostat_get_csp_pt_sf_land_overhead_factor(HeliostatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Heliostat_csp_pt_sf_land_overhead_factor_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Heliostat_csp_pt_sf_land_overhead_factor_nget, self->data_ptr);
 }
 
 static int
 Heliostat_set_csp_pt_sf_land_overhead_factor(HeliostatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Heliostat_csp_pt_sf_land_overhead_factor_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Heliostat_csp_pt_sf_land_overhead_factor_nset, self->data_ptr);
 }
 
 static PyObject *
 Heliostat_get_delta_flux_hrs(HeliostatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Heliostat_delta_flux_hrs_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Heliostat_delta_flux_hrs_nget, self->data_ptr);
 }
 
 static int
 Heliostat_set_delta_flux_hrs(HeliostatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Heliostat_delta_flux_hrs_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Heliostat_delta_flux_hrs_nset, self->data_ptr);
 }
 
 static PyObject *
 Heliostat_get_dens_mirror(HeliostatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Heliostat_dens_mirror_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Heliostat_dens_mirror_nget, self->data_ptr);
 }
 
 static int
 Heliostat_set_dens_mirror(HeliostatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Heliostat_dens_mirror_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Heliostat_dens_mirror_nset, self->data_ptr);
 }
 
 static PyObject *
 Heliostat_get_dni_des(HeliostatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Heliostat_dni_des_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Heliostat_dni_des_nget, self->data_ptr);
 }
 
 static int
 Heliostat_set_dni_des(HeliostatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Heliostat_dni_des_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Heliostat_dni_des_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -625,13 +625,13 @@ Heliostat_set_flux_maps(HeliostatObject *self, PyObject *value, void *closure)
 static PyObject *
 Heliostat_get_flux_max(HeliostatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Heliostat_flux_max_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Heliostat_flux_max_nget, self->data_ptr);
 }
 
 static int
 Heliostat_set_flux_max(HeliostatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Heliostat_flux_max_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Heliostat_flux_max_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -649,61 +649,61 @@ Heliostat_set_flux_positions(HeliostatObject *self, PyObject *value, void *closu
 static PyObject *
 Heliostat_get_focus_type(HeliostatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Heliostat_focus_type_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Heliostat_focus_type_nget, self->data_ptr);
 }
 
 static int
 Heliostat_set_focus_type(HeliostatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Heliostat_focus_type_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Heliostat_focus_type_nset, self->data_ptr);
 }
 
 static PyObject *
 Heliostat_get_fossil_spec_cost(HeliostatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Heliostat_fossil_spec_cost_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Heliostat_fossil_spec_cost_nget, self->data_ptr);
 }
 
 static int
 Heliostat_set_fossil_spec_cost(HeliostatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Heliostat_fossil_spec_cost_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Heliostat_fossil_spec_cost_nset, self->data_ptr);
 }
 
 static PyObject *
 Heliostat_get_h_tower(HeliostatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Heliostat_h_tower_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Heliostat_h_tower_nget, self->data_ptr);
 }
 
 static int
 Heliostat_set_h_tower(HeliostatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Heliostat_h_tower_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Heliostat_h_tower_nset, self->data_ptr);
 }
 
 static PyObject *
 Heliostat_get_hel_stow_deploy(HeliostatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Heliostat_hel_stow_deploy_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Heliostat_hel_stow_deploy_nget, self->data_ptr);
 }
 
 static int
 Heliostat_set_hel_stow_deploy(HeliostatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Heliostat_hel_stow_deploy_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Heliostat_hel_stow_deploy_nset, self->data_ptr);
 }
 
 static PyObject *
 Heliostat_get_helio_active_fraction(HeliostatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Heliostat_helio_active_fraction_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Heliostat_helio_active_fraction_nget, self->data_ptr);
 }
 
 static int
 Heliostat_set_helio_active_fraction(HeliostatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Heliostat_helio_active_fraction_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Heliostat_helio_active_fraction_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -721,25 +721,25 @@ Heliostat_set_helio_aim_points(HeliostatObject *self, PyObject *value, void *clo
 static PyObject *
 Heliostat_get_helio_height(HeliostatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Heliostat_helio_height_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Heliostat_helio_height_nget, self->data_ptr);
 }
 
 static int
 Heliostat_set_helio_height(HeliostatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Heliostat_helio_height_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Heliostat_helio_height_nset, self->data_ptr);
 }
 
 static PyObject *
 Heliostat_get_helio_optical_error(HeliostatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Heliostat_helio_optical_error_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Heliostat_helio_optical_error_nget, self->data_ptr);
 }
 
 static int
 Heliostat_set_helio_optical_error(HeliostatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Heliostat_helio_optical_error_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Heliostat_helio_optical_error_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -757,73 +757,73 @@ Heliostat_set_helio_positions(HeliostatObject *self, PyObject *value, void *clos
 static PyObject *
 Heliostat_get_helio_reflectance(HeliostatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Heliostat_helio_reflectance_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Heliostat_helio_reflectance_nget, self->data_ptr);
 }
 
 static int
 Heliostat_set_helio_reflectance(HeliostatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Heliostat_helio_reflectance_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Heliostat_helio_reflectance_nset, self->data_ptr);
 }
 
 static PyObject *
 Heliostat_get_helio_width(HeliostatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Heliostat_helio_width_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Heliostat_helio_width_nget, self->data_ptr);
 }
 
 static int
 Heliostat_set_helio_width(HeliostatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Heliostat_helio_width_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Heliostat_helio_width_nset, self->data_ptr);
 }
 
 static PyObject *
 Heliostat_get_heliostat_spec_cost(HeliostatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Heliostat_heliostat_spec_cost_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Heliostat_heliostat_spec_cost_nget, self->data_ptr);
 }
 
 static int
 Heliostat_set_heliostat_spec_cost(HeliostatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Heliostat_heliostat_spec_cost_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Heliostat_heliostat_spec_cost_nset, self->data_ptr);
 }
 
 static PyObject *
 Heliostat_get_interp_beta(HeliostatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Heliostat_interp_beta_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Heliostat_interp_beta_nget, self->data_ptr);
 }
 
 static int
 Heliostat_set_interp_beta(HeliostatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Heliostat_interp_beta_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Heliostat_interp_beta_nset, self->data_ptr);
 }
 
 static PyObject *
 Heliostat_get_interp_nug(HeliostatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Heliostat_interp_nug_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Heliostat_interp_nug_nget, self->data_ptr);
 }
 
 static int
 Heliostat_set_interp_nug(HeliostatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Heliostat_interp_nug_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Heliostat_interp_nug_nset, self->data_ptr);
 }
 
 static PyObject *
 Heliostat_get_is_optimize(HeliostatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Heliostat_is_optimize_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Heliostat_is_optimize_nget, self->data_ptr);
 }
 
 static int
 Heliostat_set_is_optimize(HeliostatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Heliostat_is_optimize_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Heliostat_is_optimize_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -835,7 +835,7 @@ Heliostat_get_land_bound_list(HeliostatObject *self, void *closure)
 static int
 Heliostat_set_land_bound_list(HeliostatObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_Tcsiscc_Heliostat_land_bound_list_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Tcsiscc_Heliostat_land_bound_list_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -853,648 +853,648 @@ Heliostat_set_land_bound_table(HeliostatObject *self, PyObject *value, void *clo
 static PyObject *
 Heliostat_get_land_bound_type(HeliostatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Heliostat_land_bound_type_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Heliostat_land_bound_type_nget, self->data_ptr);
 }
 
 static int
 Heliostat_set_land_bound_type(HeliostatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Heliostat_land_bound_type_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Heliostat_land_bound_type_nset, self->data_ptr);
 }
 
 static PyObject *
 Heliostat_get_land_max(HeliostatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Heliostat_land_max_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Heliostat_land_max_nget, self->data_ptr);
 }
 
 static int
 Heliostat_set_land_max(HeliostatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Heliostat_land_max_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Heliostat_land_max_nset, self->data_ptr);
 }
 
 static PyObject *
 Heliostat_get_land_min(HeliostatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Heliostat_land_min_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Heliostat_land_min_nget, self->data_ptr);
 }
 
 static int
 Heliostat_set_land_min(HeliostatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Heliostat_land_min_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Heliostat_land_min_nset, self->data_ptr);
 }
 
 static PyObject *
 Heliostat_get_land_spec_cost(HeliostatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Heliostat_land_spec_cost_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Heliostat_land_spec_cost_nget, self->data_ptr);
 }
 
 static int
 Heliostat_set_land_spec_cost(HeliostatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Heliostat_land_spec_cost_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Heliostat_land_spec_cost_nset, self->data_ptr);
 }
 
 static PyObject *
 Heliostat_get_n_facet_x(HeliostatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Heliostat_n_facet_x_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Heliostat_n_facet_x_nget, self->data_ptr);
 }
 
 static int
 Heliostat_set_n_facet_x(HeliostatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Heliostat_n_facet_x_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Heliostat_n_facet_x_nset, self->data_ptr);
 }
 
 static PyObject *
 Heliostat_get_n_facet_y(HeliostatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Heliostat_n_facet_y_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Heliostat_n_facet_y_nget, self->data_ptr);
 }
 
 static int
 Heliostat_set_n_facet_y(HeliostatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Heliostat_n_facet_y_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Heliostat_n_facet_y_nset, self->data_ptr);
 }
 
 static PyObject *
 Heliostat_get_n_flux_days(HeliostatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Heliostat_n_flux_days_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Heliostat_n_flux_days_nget, self->data_ptr);
 }
 
 static int
 Heliostat_set_n_flux_days(HeliostatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Heliostat_n_flux_days_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Heliostat_n_flux_days_nset, self->data_ptr);
 }
 
 static PyObject *
 Heliostat_get_n_flux_x(HeliostatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Heliostat_n_flux_x_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Heliostat_n_flux_x_nget, self->data_ptr);
 }
 
 static int
 Heliostat_set_n_flux_x(HeliostatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Heliostat_n_flux_x_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Heliostat_n_flux_x_nset, self->data_ptr);
 }
 
 static PyObject *
 Heliostat_get_n_flux_y(HeliostatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Heliostat_n_flux_y_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Heliostat_n_flux_y_nget, self->data_ptr);
 }
 
 static int
 Heliostat_set_n_flux_y(HeliostatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Heliostat_n_flux_y_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Heliostat_n_flux_y_nset, self->data_ptr);
 }
 
 static PyObject *
 Heliostat_get_opt_algorithm(HeliostatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Heliostat_opt_algorithm_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Heliostat_opt_algorithm_nget, self->data_ptr);
 }
 
 static int
 Heliostat_set_opt_algorithm(HeliostatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Heliostat_opt_algorithm_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Heliostat_opt_algorithm_nset, self->data_ptr);
 }
 
 static PyObject *
 Heliostat_get_opt_conv_tol(HeliostatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Heliostat_opt_conv_tol_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Heliostat_opt_conv_tol_nget, self->data_ptr);
 }
 
 static int
 Heliostat_set_opt_conv_tol(HeliostatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Heliostat_opt_conv_tol_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Heliostat_opt_conv_tol_nset, self->data_ptr);
 }
 
 static PyObject *
 Heliostat_get_opt_flux_penalty(HeliostatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Heliostat_opt_flux_penalty_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Heliostat_opt_flux_penalty_nget, self->data_ptr);
 }
 
 static int
 Heliostat_set_opt_flux_penalty(HeliostatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Heliostat_opt_flux_penalty_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Heliostat_opt_flux_penalty_nset, self->data_ptr);
 }
 
 static PyObject *
 Heliostat_get_opt_init_step(HeliostatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Heliostat_opt_init_step_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Heliostat_opt_init_step_nget, self->data_ptr);
 }
 
 static int
 Heliostat_set_opt_init_step(HeliostatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Heliostat_opt_init_step_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Heliostat_opt_init_step_nset, self->data_ptr);
 }
 
 static PyObject *
 Heliostat_get_opt_max_iter(HeliostatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Heliostat_opt_max_iter_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Heliostat_opt_max_iter_nget, self->data_ptr);
 }
 
 static int
 Heliostat_set_opt_max_iter(HeliostatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Heliostat_opt_max_iter_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Heliostat_opt_max_iter_nset, self->data_ptr);
 }
 
 static PyObject *
 Heliostat_get_p_start(HeliostatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Heliostat_p_start_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Heliostat_p_start_nget, self->data_ptr);
 }
 
 static int
 Heliostat_set_p_start(HeliostatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Heliostat_p_start_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Heliostat_p_start_nset, self->data_ptr);
 }
 
 static PyObject *
 Heliostat_get_p_track(HeliostatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Heliostat_p_track_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Heliostat_p_track_nget, self->data_ptr);
 }
 
 static int
 Heliostat_set_p_track(HeliostatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Heliostat_p_track_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Heliostat_p_track_nset, self->data_ptr);
 }
 
 static PyObject *
 Heliostat_get_plant_spec_cost(HeliostatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Heliostat_plant_spec_cost_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Heliostat_plant_spec_cost_nget, self->data_ptr);
 }
 
 static int
 Heliostat_set_plant_spec_cost(HeliostatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Heliostat_plant_spec_cost_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Heliostat_plant_spec_cost_nset, self->data_ptr);
 }
 
 static PyObject *
 Heliostat_get_q_design(HeliostatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Heliostat_q_design_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Heliostat_q_design_nget, self->data_ptr);
 }
 
 static int
 Heliostat_set_q_design(HeliostatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Heliostat_q_design_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Heliostat_q_design_nset, self->data_ptr);
 }
 
 static PyObject *
 Heliostat_get_rec_absorptance(HeliostatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Heliostat_rec_absorptance_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Heliostat_rec_absorptance_nget, self->data_ptr);
 }
 
 static int
 Heliostat_set_rec_absorptance(HeliostatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Heliostat_rec_absorptance_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Heliostat_rec_absorptance_nset, self->data_ptr);
 }
 
 static PyObject *
 Heliostat_get_rec_aspect(HeliostatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Heliostat_rec_aspect_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Heliostat_rec_aspect_nget, self->data_ptr);
 }
 
 static int
 Heliostat_set_rec_aspect(HeliostatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Heliostat_rec_aspect_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Heliostat_rec_aspect_nset, self->data_ptr);
 }
 
 static PyObject *
 Heliostat_get_rec_cost_exp(HeliostatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Heliostat_rec_cost_exp_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Heliostat_rec_cost_exp_nget, self->data_ptr);
 }
 
 static int
 Heliostat_set_rec_cost_exp(HeliostatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Heliostat_rec_cost_exp_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Heliostat_rec_cost_exp_nset, self->data_ptr);
 }
 
 static PyObject *
 Heliostat_get_rec_height(HeliostatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Heliostat_rec_height_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Heliostat_rec_height_nget, self->data_ptr);
 }
 
 static int
 Heliostat_set_rec_height(HeliostatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Heliostat_rec_height_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Heliostat_rec_height_nset, self->data_ptr);
 }
 
 static PyObject *
 Heliostat_get_rec_hl_perm2(HeliostatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Heliostat_rec_hl_perm2_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Heliostat_rec_hl_perm2_nget, self->data_ptr);
 }
 
 static int
 Heliostat_set_rec_hl_perm2(HeliostatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Heliostat_rec_hl_perm2_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Heliostat_rec_hl_perm2_nset, self->data_ptr);
 }
 
 static PyObject *
 Heliostat_get_rec_ref_area(HeliostatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Heliostat_rec_ref_area_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Heliostat_rec_ref_area_nget, self->data_ptr);
 }
 
 static int
 Heliostat_set_rec_ref_area(HeliostatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Heliostat_rec_ref_area_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Heliostat_rec_ref_area_nset, self->data_ptr);
 }
 
 static PyObject *
 Heliostat_get_rec_ref_cost(HeliostatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Heliostat_rec_ref_cost_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Heliostat_rec_ref_cost_nget, self->data_ptr);
 }
 
 static int
 Heliostat_set_rec_ref_cost(HeliostatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Heliostat_rec_ref_cost_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Heliostat_rec_ref_cost_nset, self->data_ptr);
 }
 
 static PyObject *
 Heliostat_get_run_type(HeliostatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Heliostat_run_type_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Heliostat_run_type_nget, self->data_ptr);
 }
 
 static int
 Heliostat_set_run_type(HeliostatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Heliostat_run_type_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Heliostat_run_type_nset, self->data_ptr);
 }
 
 static PyObject *
 Heliostat_get_sales_tax_frac(HeliostatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Heliostat_sales_tax_frac_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Heliostat_sales_tax_frac_nget, self->data_ptr);
 }
 
 static int
 Heliostat_set_sales_tax_frac(HeliostatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Heliostat_sales_tax_frac_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Heliostat_sales_tax_frac_nset, self->data_ptr);
 }
 
 static PyObject *
 Heliostat_get_sales_tax_rate(HeliostatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Heliostat_sales_tax_rate_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Heliostat_sales_tax_rate_nget, self->data_ptr);
 }
 
 static int
 Heliostat_set_sales_tax_rate(HeliostatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Heliostat_sales_tax_rate_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Heliostat_sales_tax_rate_nset, self->data_ptr);
 }
 
 static PyObject *
 Heliostat_get_site_spec_cost(HeliostatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Heliostat_site_spec_cost_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Heliostat_site_spec_cost_nget, self->data_ptr);
 }
 
 static int
 Heliostat_set_site_spec_cost(HeliostatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Heliostat_site_spec_cost_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Heliostat_site_spec_cost_nset, self->data_ptr);
 }
 
 static PyObject *
 Heliostat_get_tes_spec_cost(HeliostatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Heliostat_tes_spec_cost_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Heliostat_tes_spec_cost_nget, self->data_ptr);
 }
 
 static int
 Heliostat_set_tes_spec_cost(HeliostatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Heliostat_tes_spec_cost_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Heliostat_tes_spec_cost_nset, self->data_ptr);
 }
 
 static PyObject *
 Heliostat_get_total_installed_cost(HeliostatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Heliostat_total_installed_cost_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Heliostat_total_installed_cost_nget, self->data_ptr);
 }
 
 static int
 Heliostat_set_total_installed_cost(HeliostatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Heliostat_total_installed_cost_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Heliostat_total_installed_cost_nset, self->data_ptr);
 }
 
 static PyObject *
 Heliostat_get_tower_exp(HeliostatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Heliostat_tower_exp_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Heliostat_tower_exp_nget, self->data_ptr);
 }
 
 static int
 Heliostat_set_tower_exp(HeliostatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Heliostat_tower_exp_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Heliostat_tower_exp_nset, self->data_ptr);
 }
 
 static PyObject *
 Heliostat_get_tower_fixed_cost(HeliostatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Heliostat_tower_fixed_cost_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Heliostat_tower_fixed_cost_nget, self->data_ptr);
 }
 
 static int
 Heliostat_set_tower_fixed_cost(HeliostatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Heliostat_tower_fixed_cost_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Heliostat_tower_fixed_cost_nset, self->data_ptr);
 }
 
 static PyObject *
 Heliostat_get_v_wind_max(HeliostatObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Heliostat_v_wind_max_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Heliostat_v_wind_max_nget, self->data_ptr);
 }
 
 static int
 Heliostat_set_v_wind_max(HeliostatObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Heliostat_v_wind_max_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Heliostat_v_wind_max_nset, self->data_ptr);
 }
 
 static PyGetSetDef Heliostat_getset[] = {
 {"N_hel", (getter)Heliostat_get_N_hel,(setter)Heliostat_set_N_hel,
-	"Number of heliostats [-], number.\n Required if ?.",
+	PyDoc_STR("*float*: Number of heliostats [-]\n\n*Required*: False"),
  	NULL},
 {"bop_spec_cost", (getter)Heliostat_get_bop_spec_cost,(setter)Heliostat_set_bop_spec_cost,
-	"BOS specific cost [$/kWe], number.\n Required.",
+	PyDoc_STR("*float*: BOS specific cost [$/kWe]\n\n*Required*: True"),
  	NULL},
 {"c_atm_0", (getter)Heliostat_get_c_atm_0,(setter)Heliostat_set_c_atm_0,
-	"Attenuation coefficient 0, number.\n Required if ?=0.006789.",
+	PyDoc_STR("*float*: Attenuation coefficient 0\n\n*Required*: set to 0.006789 if not provided."),
  	NULL},
 {"c_atm_1", (getter)Heliostat_get_c_atm_1,(setter)Heliostat_set_c_atm_1,
-	"Attenuation coefficient 1, number.\n Required if ?=0.1046.",
+	PyDoc_STR("*float*: Attenuation coefficient 1\n\n*Required*: set to 0.1046 if not provided."),
  	NULL},
 {"c_atm_2", (getter)Heliostat_get_c_atm_2,(setter)Heliostat_set_c_atm_2,
-	"Attenuation coefficient 2, number.\n Required if ?=-0.0107.",
+	PyDoc_STR("*float*: Attenuation coefficient 2\n\n*Required*: set to -0.0107 if not provided."),
  	NULL},
 {"c_atm_3", (getter)Heliostat_get_c_atm_3,(setter)Heliostat_set_c_atm_3,
-	"Attenuation coefficient 3, number.\n Required if ?=0.002845.",
+	PyDoc_STR("*float*: Attenuation coefficient 3\n\n*Required*: set to 0.002845 if not provided."),
  	NULL},
 {"calc_fluxmaps", (getter)Heliostat_get_calc_fluxmaps,(setter)Heliostat_set_calc_fluxmaps,
-	"Include fluxmap calculations, number.\n 0 if not set.",
+	PyDoc_STR("*float*: Include fluxmap calculations\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"cant_type", (getter)Heliostat_get_cant_type,(setter)Heliostat_set_cant_type,
-	"Heliostat cant method, number.\n Required.",
+	PyDoc_STR("*float*: Heliostat cant method\n\n*Required*: True"),
  	NULL},
 {"check_max_flux", (getter)Heliostat_get_check_max_flux,(setter)Heliostat_set_check_max_flux,
-	"Check max flux at design point, number.\n 0 if not set.",
+	PyDoc_STR("*float*: Check max flux at design point\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"contingency_rate", (getter)Heliostat_get_contingency_rate,(setter)Heliostat_set_contingency_rate,
-	"Contingency for cost overrun [%], number.\n Required.",
+	PyDoc_STR("*float*: Contingency for cost overrun [%]\n\n*Required*: True"),
  	NULL},
 {"cost_sf_fixed", (getter)Heliostat_get_cost_sf_fixed,(setter)Heliostat_set_cost_sf_fixed,
-	"Solar field fixed cost [$], number.\n Required.",
+	PyDoc_STR("*float*: Solar field fixed cost [$]\n\n*Required*: True"),
  	NULL},
 {"csp_pt_cost_epc_fixed", (getter)Heliostat_get_csp_pt_cost_epc_fixed,(setter)Heliostat_set_csp_pt_cost_epc_fixed,
-	"EPC fixed [$], number.\n Required.",
+	PyDoc_STR("*float*: EPC fixed [$]\n\n*Required*: True"),
  	NULL},
 {"csp_pt_cost_epc_per_acre", (getter)Heliostat_get_csp_pt_cost_epc_per_acre,(setter)Heliostat_set_csp_pt_cost_epc_per_acre,
-	"EPC cost per acre [$/acre], number.\n Required.",
+	PyDoc_STR("*float*: EPC cost per acre [$/acre]\n\n*Required*: True"),
  	NULL},
 {"csp_pt_cost_epc_per_watt", (getter)Heliostat_get_csp_pt_cost_epc_per_watt,(setter)Heliostat_set_csp_pt_cost_epc_per_watt,
-	"EPC cost per watt [$/W], number.\n Required.",
+	PyDoc_STR("*float*: EPC cost per watt [$/W]\n\n*Required*: True"),
  	NULL},
 {"csp_pt_cost_epc_percent", (getter)Heliostat_get_csp_pt_cost_epc_percent,(setter)Heliostat_set_csp_pt_cost_epc_percent,
-	"EPC cost percent of direct, number.\n Required.",
+	PyDoc_STR("*float*: EPC cost percent of direct\n\n*Required*: True"),
  	NULL},
 {"csp_pt_cost_plm_fixed", (getter)Heliostat_get_csp_pt_cost_plm_fixed,(setter)Heliostat_set_csp_pt_cost_plm_fixed,
-	"PLM fixed [$], number.\n Required.",
+	PyDoc_STR("*float*: PLM fixed [$]\n\n*Required*: True"),
  	NULL},
 {"csp_pt_cost_plm_per_acre", (getter)Heliostat_get_csp_pt_cost_plm_per_acre,(setter)Heliostat_set_csp_pt_cost_plm_per_acre,
-	"PLM cost per acre [$/acre], number.\n Required.",
+	PyDoc_STR("*float*: PLM cost per acre [$/acre]\n\n*Required*: True"),
  	NULL},
 {"csp_pt_cost_plm_per_watt", (getter)Heliostat_get_csp_pt_cost_plm_per_watt,(setter)Heliostat_set_csp_pt_cost_plm_per_watt,
-	"PLM cost per watt [$/W], number.\n Required.",
+	PyDoc_STR("*float*: PLM cost per watt [$/W]\n\n*Required*: True"),
  	NULL},
 {"csp_pt_cost_plm_percent", (getter)Heliostat_get_csp_pt_cost_plm_percent,(setter)Heliostat_set_csp_pt_cost_plm_percent,
-	"PLM cost percent of direct, number.\n Required.",
+	PyDoc_STR("*float*: PLM cost percent of direct\n\n*Required*: True"),
  	NULL},
 {"csp_pt_sf_fixed_land_area", (getter)Heliostat_get_csp_pt_sf_fixed_land_area,(setter)Heliostat_set_csp_pt_sf_fixed_land_area,
-	"Fixed land area [acre], number.\n Required.",
+	PyDoc_STR("*float*: Fixed land area [acre]\n\n*Required*: True"),
  	NULL},
 {"csp_pt_sf_land_overhead_factor", (getter)Heliostat_get_csp_pt_sf_land_overhead_factor,(setter)Heliostat_set_csp_pt_sf_land_overhead_factor,
-	"Land overhead factor, number.\n Required.",
+	PyDoc_STR("*float*: Land overhead factor\n\n*Required*: True"),
  	NULL},
 {"delta_flux_hrs", (getter)Heliostat_get_delta_flux_hrs,(setter)Heliostat_set_delta_flux_hrs,
-	"Hourly frequency in flux map lookup, number.\n Required if ?=1.",
+	PyDoc_STR("*float*: Hourly frequency in flux map lookup\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"dens_mirror", (getter)Heliostat_get_dens_mirror,(setter)Heliostat_set_dens_mirror,
-	"Ratio of Reflective Area to Profile [-], number.\n Required.",
+	PyDoc_STR("*float*: Ratio of Reflective Area to Profile [-]\n\n*Required*: True"),
  	NULL},
 {"dni_des", (getter)Heliostat_get_dni_des,(setter)Heliostat_set_dni_des,
-	"Design-point DNI [W/m2], number.\n Required.",
+	PyDoc_STR("*float*: Design-point DNI [W/m2]\n\n*Required*: True"),
  	NULL},
 {"eta_map", (getter)Heliostat_get_eta_map,(setter)Heliostat_set_eta_map,
-	"Field efficiency array [-], matrix.\n Required if ?.",
+	PyDoc_STR("*sequence[sequence]*: Field efficiency array [-]\n\n*Required*: False"),
  	NULL},
 {"flux_maps", (getter)Heliostat_get_flux_maps,(setter)Heliostat_set_flux_maps,
-	"Flux map intensities [-], matrix.\n Required if ?.",
+	PyDoc_STR("*sequence[sequence]*: Flux map intensities [-]\n\n*Required*: False"),
  	NULL},
 {"flux_max", (getter)Heliostat_get_flux_max,(setter)Heliostat_set_flux_max,
-	"Maximum allowable flux, number.\n Required if ?=1000.",
+	PyDoc_STR("*float*: Maximum allowable flux\n\n*Required*: set to 1000 if not provided."),
  	NULL},
 {"flux_positions", (getter)Heliostat_get_flux_positions,(setter)Heliostat_set_flux_positions,
-	"Flux map sun positions [deg], matrix.\n Required if ?.",
+	PyDoc_STR("*sequence[sequence]*: Flux map sun positions [deg]\n\n*Required*: False"),
  	NULL},
 {"focus_type", (getter)Heliostat_get_focus_type,(setter)Heliostat_set_focus_type,
-	"Heliostat focus method, number.\n Required.",
+	PyDoc_STR("*float*: Heliostat focus method\n\n*Required*: True"),
  	NULL},
 {"fossil_spec_cost", (getter)Heliostat_get_fossil_spec_cost,(setter)Heliostat_set_fossil_spec_cost,
-	"Fossil system specific cost [$/kWe], number.\n Required.",
+	PyDoc_STR("*float*: Fossil system specific cost [$/kWe]\n\n*Required*: True"),
  	NULL},
 {"h_tower", (getter)Heliostat_get_h_tower,(setter)Heliostat_set_h_tower,
-	"Tower height [m], number.\n Required.",
+	PyDoc_STR("*float*: Tower height [m]\n\n*Required*: True"),
  	NULL},
 {"hel_stow_deploy", (getter)Heliostat_get_hel_stow_deploy,(setter)Heliostat_set_hel_stow_deploy,
-	"Stow/deploy elevation [deg], number.\n Required.",
+	PyDoc_STR("*float*: Stow/deploy elevation [deg]\n\n*Required*: True"),
  	NULL},
 {"helio_active_fraction", (getter)Heliostat_get_helio_active_fraction,(setter)Heliostat_set_helio_active_fraction,
-	"Heliostat active frac. [-], number.\n Required.",
+	PyDoc_STR("*float*: Heliostat active frac. [-]\n\n*Required*: True"),
  	NULL},
 {"helio_aim_points", (getter)Heliostat_get_helio_aim_points,(setter)Heliostat_set_helio_aim_points,
-	"Heliostat aim point table [m], matrix.\n Required if ?.",
+	PyDoc_STR("*sequence[sequence]*: Heliostat aim point table [m]\n\n*Required*: False"),
  	NULL},
 {"helio_height", (getter)Heliostat_get_helio_height,(setter)Heliostat_set_helio_height,
-	"Heliostat height [m], number.\n Required.",
+	PyDoc_STR("*float*: Heliostat height [m]\n\n*Required*: True"),
  	NULL},
 {"helio_optical_error", (getter)Heliostat_get_helio_optical_error,(setter)Heliostat_set_helio_optical_error,
-	"Heliostat optical error [rad], number.\n Required.",
+	PyDoc_STR("*float*: Heliostat optical error [rad]\n\n*Required*: True"),
  	NULL},
 {"helio_positions", (getter)Heliostat_get_helio_positions,(setter)Heliostat_set_helio_positions,
-	"Heliostat position table [m], matrix.\n Required if run_type=1.",
+	PyDoc_STR("*sequence[sequence]*: Heliostat position table [m]\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"helio_reflectance", (getter)Heliostat_get_helio_reflectance,(setter)Heliostat_set_helio_reflectance,
-	"Heliostat reflectance [-], number.\n Required.",
+	PyDoc_STR("*float*: Heliostat reflectance [-]\n\n*Required*: True"),
  	NULL},
 {"helio_width", (getter)Heliostat_get_helio_width,(setter)Heliostat_set_helio_width,
-	"Heliostat width [m], number.\n Required.",
+	PyDoc_STR("*float*: Heliostat width [m]\n\n*Required*: True"),
  	NULL},
 {"heliostat_spec_cost", (getter)Heliostat_get_heliostat_spec_cost,(setter)Heliostat_set_heliostat_spec_cost,
-	"Heliostat field cost [$/m2], number.\n Required.",
+	PyDoc_STR("*float*: Heliostat field cost [$/m2]\n\n*Required*: True"),
  	NULL},
 {"interp_beta", (getter)Heliostat_get_interp_beta,(setter)Heliostat_set_interp_beta,
-	"Interpolation beta coef. [-], number.\n Required if ?=1.99.",
+	PyDoc_STR("*float*: Interpolation beta coef. [-]\n\n*Required*: set to 1.99 if not provided."),
  	NULL},
 {"interp_nug", (getter)Heliostat_get_interp_nug,(setter)Heliostat_set_interp_nug,
-	"Interpolation nugget [-], number.\n 0 if not set.",
+	PyDoc_STR("*float*: Interpolation nugget [-]\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"is_optimize", (getter)Heliostat_get_is_optimize,(setter)Heliostat_set_is_optimize,
-	"Do SolarPILOT optimization, number.\n 0 if not set.",
+	PyDoc_STR("*float*: Do SolarPILOT optimization\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"land_bound_list", (getter)Heliostat_get_land_bound_list,(setter)Heliostat_set_land_bound_list,
-	"Boundary table listing [-], array.\n Required if ?.",
+	PyDoc_STR("*sequence*: Boundary table listing [-]\n\n*Required*: False"),
  	NULL},
 {"land_bound_table", (getter)Heliostat_get_land_bound_table,(setter)Heliostat_set_land_bound_table,
-	"Land boundary table [m], matrix.\n Required if ?.",
+	PyDoc_STR("*sequence[sequence]*: Land boundary table [m]\n\n*Required*: False"),
  	NULL},
 {"land_bound_type", (getter)Heliostat_get_land_bound_type,(setter)Heliostat_set_land_bound_type,
-	"Land boundary type [-], number.\n 0 if not set.",
+	PyDoc_STR("*float*: Land boundary type [-]\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"land_max", (getter)Heliostat_get_land_max,(setter)Heliostat_set_land_max,
-	"Land max boundary [-ORm], number.\n Required if ?=7.5.",
+	PyDoc_STR("*float*: Land max boundary [-ORm]\n\n*Required*: set to 7.5 if not provided."),
  	NULL},
 {"land_min", (getter)Heliostat_get_land_min,(setter)Heliostat_set_land_min,
-	"Land min boundary [-ORm], number.\n Required if ?=0.75.",
+	PyDoc_STR("*float*: Land min boundary [-ORm]\n\n*Required*: set to 0.75 if not provided."),
  	NULL},
 {"land_spec_cost", (getter)Heliostat_get_land_spec_cost,(setter)Heliostat_set_land_spec_cost,
-	"Total land area cost [$/acre], number.\n Required.",
+	PyDoc_STR("*float*: Total land area cost [$/acre]\n\n*Required*: True"),
  	NULL},
 {"n_facet_x", (getter)Heliostat_get_n_facet_x,(setter)Heliostat_set_n_facet_x,
-	"Number of heliostat facets - X, number.\n Required.",
+	PyDoc_STR("*float*: Number of heliostat facets - X\n\n*Required*: True"),
  	NULL},
 {"n_facet_y", (getter)Heliostat_get_n_facet_y,(setter)Heliostat_set_n_facet_y,
-	"Number of heliostat facets - Y, number.\n Required.",
+	PyDoc_STR("*float*: Number of heliostat facets - Y\n\n*Required*: True"),
  	NULL},
 {"n_flux_days", (getter)Heliostat_get_n_flux_days,(setter)Heliostat_set_n_flux_days,
-	"No. days in flux map lookup, number.\n Required if ?=8.",
+	PyDoc_STR("*float*: No. days in flux map lookup\n\n*Required*: set to 8 if not provided."),
  	NULL},
 {"n_flux_x", (getter)Heliostat_get_n_flux_x,(setter)Heliostat_set_n_flux_x,
-	"Flux map X resolution [-], number.\n Required if ?=12.",
+	PyDoc_STR("*float*: Flux map X resolution [-]\n\n*Required*: set to 12 if not provided."),
  	NULL},
 {"n_flux_y", (getter)Heliostat_get_n_flux_y,(setter)Heliostat_set_n_flux_y,
-	"Flux map Y resolution [-], number.\n Required if ?=1.",
+	PyDoc_STR("*float*: Flux map Y resolution [-]\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"opt_algorithm", (getter)Heliostat_get_opt_algorithm,(setter)Heliostat_set_opt_algorithm,
-	"Optimization algorithm, number.\n 0 if not set.",
+	PyDoc_STR("*float*: Optimization algorithm\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"opt_conv_tol", (getter)Heliostat_get_opt_conv_tol,(setter)Heliostat_set_opt_conv_tol,
-	"Optimization convergence tol, number.\n Required if ?=0.001.",
+	PyDoc_STR("*float*: Optimization convergence tol\n\n*Required*: set to 0.001 if not provided."),
  	NULL},
 {"opt_flux_penalty", (getter)Heliostat_get_opt_flux_penalty,(setter)Heliostat_set_opt_flux_penalty,
-	"Optimization flux overage penalty, number.\n Required.",
+	PyDoc_STR("*float*: Optimization flux overage penalty\n\n*Required*: True"),
  	NULL},
 {"opt_init_step", (getter)Heliostat_get_opt_init_step,(setter)Heliostat_set_opt_init_step,
-	"Optimization initial step size, number.\n Required if ?=0.05.",
+	PyDoc_STR("*float*: Optimization initial step size\n\n*Required*: set to 0.05 if not provided."),
  	NULL},
 {"opt_max_iter", (getter)Heliostat_get_opt_max_iter,(setter)Heliostat_set_opt_max_iter,
-	"Max. number iteration steps, number.\n Required if ?=200.",
+	PyDoc_STR("*float*: Max. number iteration steps\n\n*Required*: set to 200 if not provided."),
  	NULL},
 {"p_start", (getter)Heliostat_get_p_start,(setter)Heliostat_set_p_start,
-	"Heliostat startup energy [kWe-hr], number.\n Required.",
+	PyDoc_STR("*float*: Heliostat startup energy [kWe-hr]\n\n*Required*: True"),
  	NULL},
 {"p_track", (getter)Heliostat_get_p_track,(setter)Heliostat_set_p_track,
-	"Heliostat tracking energy [kWe], number.\n Required.",
+	PyDoc_STR("*float*: Heliostat tracking energy [kWe]\n\n*Required*: True"),
  	NULL},
 {"plant_spec_cost", (getter)Heliostat_get_plant_spec_cost,(setter)Heliostat_set_plant_spec_cost,
-	"Power cycle specific cost [$/kWe], number.\n Required.",
+	PyDoc_STR("*float*: Power cycle specific cost [$/kWe]\n\n*Required*: True"),
  	NULL},
 {"q_design", (getter)Heliostat_get_q_design,(setter)Heliostat_set_q_design,
-	"Receiver thermal design power [MW], number.\n Required.",
+	PyDoc_STR("*float*: Receiver thermal design power [MW]\n\n*Required*: True"),
  	NULL},
 {"rec_absorptance", (getter)Heliostat_get_rec_absorptance,(setter)Heliostat_set_rec_absorptance,
-	"Receiver absorptance [-], number.\n Required.",
+	PyDoc_STR("*float*: Receiver absorptance [-]\n\n*Required*: True"),
  	NULL},
 {"rec_aspect", (getter)Heliostat_get_rec_aspect,(setter)Heliostat_set_rec_aspect,
-	"Receiver aspect ratio [-], number.\n Required.",
+	PyDoc_STR("*float*: Receiver aspect ratio [-]\n\n*Required*: True"),
  	NULL},
 {"rec_cost_exp", (getter)Heliostat_get_rec_cost_exp,(setter)Heliostat_set_rec_cost_exp,
-	"Receiver cost scaling exponent, number.\n Required.",
+	PyDoc_STR("*float*: Receiver cost scaling exponent\n\n*Required*: True"),
  	NULL},
 {"rec_height", (getter)Heliostat_get_rec_height,(setter)Heliostat_set_rec_height,
-	"Receiver height [m], number.\n Required.",
+	PyDoc_STR("*float*: Receiver height [m]\n\n*Required*: True"),
  	NULL},
 {"rec_hl_perm2", (getter)Heliostat_get_rec_hl_perm2,(setter)Heliostat_set_rec_hl_perm2,
-	"Receiver design heatloss [kW/m2], number.\n Required.",
+	PyDoc_STR("*float*: Receiver design heatloss [kW/m2]\n\n*Required*: True"),
  	NULL},
 {"rec_ref_area", (getter)Heliostat_get_rec_ref_area,(setter)Heliostat_set_rec_ref_area,
-	"Receiver reference area for cost scale, number.\n Required.",
+	PyDoc_STR("*float*: Receiver reference area for cost scale\n\n*Required*: True"),
  	NULL},
 {"rec_ref_cost", (getter)Heliostat_get_rec_ref_cost,(setter)Heliostat_set_rec_ref_cost,
-	"Receiver reference cost [$], number.\n Required.",
+	PyDoc_STR("*float*: Receiver reference cost [$]\n\n*Required*: True"),
  	NULL},
 {"run_type", (getter)Heliostat_get_run_type,(setter)Heliostat_set_run_type,
-	"Run type [-], number.\n Required.",
+	PyDoc_STR("*float*: Run type [-]\n\n*Required*: True"),
  	NULL},
 {"sales_tax_frac", (getter)Heliostat_get_sales_tax_frac,(setter)Heliostat_set_sales_tax_frac,
-	"Percent of cost to which sales tax applies [%], number.\n Required.",
+	PyDoc_STR("*float*: Percent of cost to which sales tax applies [%]\n\n*Required*: True"),
  	NULL},
 {"sales_tax_rate", (getter)Heliostat_get_sales_tax_rate,(setter)Heliostat_set_sales_tax_rate,
-	"Sales tax rate [%], number.\n Required.",
+	PyDoc_STR("*float*: Sales tax rate [%]\n\n*Required*: True"),
  	NULL},
 {"site_spec_cost", (getter)Heliostat_get_site_spec_cost,(setter)Heliostat_set_site_spec_cost,
-	"Site improvement cost [$/m2], number.\n Required.",
+	PyDoc_STR("*float*: Site improvement cost [$/m2]\n\n*Required*: True"),
  	NULL},
 {"tes_spec_cost", (getter)Heliostat_get_tes_spec_cost,(setter)Heliostat_set_tes_spec_cost,
-	"Thermal energy storage cost [$/kWht], number.\n Required.",
+	PyDoc_STR("*float*: Thermal energy storage cost [$/kWht]\n\n*Required*: True"),
  	NULL},
 {"total_installed_cost", (getter)Heliostat_get_total_installed_cost,(setter)Heliostat_set_total_installed_cost,
-	"Total installed cost [$], number.\n Required.",
+	PyDoc_STR("*float*: Total installed cost [$]\n\n*Required*: True"),
  	NULL},
 {"tower_exp", (getter)Heliostat_get_tower_exp,(setter)Heliostat_set_tower_exp,
-	"Tower cost scaling exponent, number.\n Required.",
+	PyDoc_STR("*float*: Tower cost scaling exponent\n\n*Required*: True"),
  	NULL},
 {"tower_fixed_cost", (getter)Heliostat_get_tower_fixed_cost,(setter)Heliostat_set_tower_fixed_cost,
-	"Tower fixed cost [$], number.\n Required.",
+	PyDoc_STR("*float*: Tower fixed cost [$]\n\n*Required*: True"),
  	NULL},
 {"v_wind_max", (getter)Heliostat_get_v_wind_max,(setter)Heliostat_set_v_wind_max,
-	"Max. wind velocity [m/s], number.\n Required.",
+	PyDoc_STR("*float*: Max. wind velocity [m/s]\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1527,7 +1527,7 @@ static PyTypeObject Heliostat_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		Heliostat_methods,         /*tp_methods*/
@@ -1537,7 +1537,7 @@ static PyTypeObject Heliostat_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -1597,178 +1597,178 @@ Receiver_export(ReceiverObject *self, PyObject *args)
 
 static PyMethodDef Receiver_methods[] = {
 		{"assign",            (PyCFunction)Receiver_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Receiver_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Receiver_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 static PyObject *
 Receiver_get_A_sf(ReceiverObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Receiver_A_sf_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Receiver_A_sf_nget, self->data_ptr);
 }
 
 static int
 Receiver_set_A_sf(ReceiverObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Receiver_A_sf_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Receiver_A_sf_nset, self->data_ptr);
 }
 
 static PyObject *
 Receiver_get_D_rec(ReceiverObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Receiver_D_rec_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Receiver_D_rec_nget, self->data_ptr);
 }
 
 static int
 Receiver_set_D_rec(ReceiverObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Receiver_D_rec_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Receiver_D_rec_nset, self->data_ptr);
 }
 
 static PyObject *
 Receiver_get_Flow_type(ReceiverObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Receiver_Flow_type_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Receiver_Flow_type_nget, self->data_ptr);
 }
 
 static int
 Receiver_set_Flow_type(ReceiverObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Receiver_Flow_type_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Receiver_Flow_type_nset, self->data_ptr);
 }
 
 static PyObject *
 Receiver_get_H_rec(ReceiverObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Receiver_H_rec_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Receiver_H_rec_nget, self->data_ptr);
 }
 
 static int
 Receiver_set_H_rec(ReceiverObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Receiver_H_rec_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Receiver_H_rec_nset, self->data_ptr);
 }
 
 static PyObject *
 Receiver_get_N_panels(ReceiverObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Receiver_N_panels_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Receiver_N_panels_nget, self->data_ptr);
 }
 
 static int
 Receiver_set_N_panels(ReceiverObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Receiver_N_panels_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Receiver_N_panels_nset, self->data_ptr);
 }
 
 static PyObject *
 Receiver_get_Q_rec_des(ReceiverObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Receiver_Q_rec_des_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Receiver_Q_rec_des_nget, self->data_ptr);
 }
 
 static int
 Receiver_set_Q_rec_des(ReceiverObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Receiver_Q_rec_des_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Receiver_Q_rec_des_nset, self->data_ptr);
 }
 
 static PyObject *
 Receiver_get_THT(ReceiverObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Receiver_THT_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Receiver_THT_nget, self->data_ptr);
 }
 
 static int
 Receiver_set_THT(ReceiverObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Receiver_THT_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Receiver_THT_nset, self->data_ptr);
 }
 
 static PyObject *
 Receiver_get_T_htf_cold_des(ReceiverObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Receiver_T_htf_cold_des_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Receiver_T_htf_cold_des_nget, self->data_ptr);
 }
 
 static int
 Receiver_set_T_htf_cold_des(ReceiverObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Receiver_T_htf_cold_des_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Receiver_T_htf_cold_des_nset, self->data_ptr);
 }
 
 static PyObject *
 Receiver_get_T_htf_hot_des(ReceiverObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Receiver_T_htf_hot_des_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Receiver_T_htf_hot_des_nget, self->data_ptr);
 }
 
 static int
 Receiver_set_T_htf_hot_des(ReceiverObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Receiver_T_htf_hot_des_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Receiver_T_htf_hot_des_nset, self->data_ptr);
 }
 
 static PyObject *
 Receiver_get_crossover_shift(ReceiverObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Receiver_crossover_shift_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Receiver_crossover_shift_nget, self->data_ptr);
 }
 
 static int
 Receiver_set_crossover_shift(ReceiverObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Receiver_crossover_shift_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Receiver_crossover_shift_nset, self->data_ptr);
 }
 
 static PyObject *
 Receiver_get_d_tube_out(ReceiverObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Receiver_d_tube_out_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Receiver_d_tube_out_nget, self->data_ptr);
 }
 
 static int
 Receiver_set_d_tube_out(ReceiverObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Receiver_d_tube_out_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Receiver_d_tube_out_nset, self->data_ptr);
 }
 
 static PyObject *
 Receiver_get_epsilon(ReceiverObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Receiver_epsilon_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Receiver_epsilon_nget, self->data_ptr);
 }
 
 static int
 Receiver_set_epsilon(ReceiverObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Receiver_epsilon_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Receiver_epsilon_nset, self->data_ptr);
 }
 
 static PyObject *
 Receiver_get_eta_pump(ReceiverObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Receiver_eta_pump_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Receiver_eta_pump_nget, self->data_ptr);
 }
 
 static int
 Receiver_set_eta_pump(ReceiverObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Receiver_eta_pump_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Receiver_eta_pump_nset, self->data_ptr);
 }
 
 static PyObject *
 Receiver_get_f_rec_min(ReceiverObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Receiver_f_rec_min_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Receiver_f_rec_min_nget, self->data_ptr);
 }
 
 static int
 Receiver_set_f_rec_min(ReceiverObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Receiver_f_rec_min_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Receiver_f_rec_min_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -1786,168 +1786,168 @@ Receiver_set_field_fl_props(ReceiverObject *self, PyObject *value, void *closure
 static PyObject *
 Receiver_get_hl_ffact(ReceiverObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Receiver_hl_ffact_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Receiver_hl_ffact_nget, self->data_ptr);
 }
 
 static int
 Receiver_set_hl_ffact(ReceiverObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Receiver_hl_ffact_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Receiver_hl_ffact_nset, self->data_ptr);
 }
 
 static PyObject *
 Receiver_get_m_dot_htf_max(ReceiverObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Receiver_m_dot_htf_max_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Receiver_m_dot_htf_max_nget, self->data_ptr);
 }
 
 static int
 Receiver_set_m_dot_htf_max(ReceiverObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Receiver_m_dot_htf_max_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Receiver_m_dot_htf_max_nset, self->data_ptr);
 }
 
 static PyObject *
 Receiver_get_mat_tube(ReceiverObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Receiver_mat_tube_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Receiver_mat_tube_nget, self->data_ptr);
 }
 
 static int
 Receiver_set_mat_tube(ReceiverObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Receiver_mat_tube_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Receiver_mat_tube_nset, self->data_ptr);
 }
 
 static PyObject *
 Receiver_get_rec_htf(ReceiverObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Receiver_rec_htf_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Receiver_rec_htf_nget, self->data_ptr);
 }
 
 static int
 Receiver_set_rec_htf(ReceiverObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Receiver_rec_htf_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Receiver_rec_htf_nset, self->data_ptr);
 }
 
 static PyObject *
 Receiver_get_rec_qf_delay(ReceiverObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Receiver_rec_qf_delay_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Receiver_rec_qf_delay_nget, self->data_ptr);
 }
 
 static int
 Receiver_set_rec_qf_delay(ReceiverObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Receiver_rec_qf_delay_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Receiver_rec_qf_delay_nset, self->data_ptr);
 }
 
 static PyObject *
 Receiver_get_rec_su_delay(ReceiverObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Receiver_rec_su_delay_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Receiver_rec_su_delay_nget, self->data_ptr);
 }
 
 static int
 Receiver_set_rec_su_delay(ReceiverObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Receiver_rec_su_delay_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Receiver_rec_su_delay_nset, self->data_ptr);
 }
 
 static PyObject *
 Receiver_get_receiver_type(ReceiverObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Receiver_receiver_type_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Receiver_receiver_type_nget, self->data_ptr);
 }
 
 static int
 Receiver_set_receiver_type(ReceiverObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Receiver_receiver_type_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Receiver_receiver_type_nset, self->data_ptr);
 }
 
 static PyObject *
 Receiver_get_th_tube(ReceiverObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Receiver_th_tube_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Receiver_th_tube_nget, self->data_ptr);
 }
 
 static int
 Receiver_set_th_tube(ReceiverObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Receiver_th_tube_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Receiver_th_tube_nset, self->data_ptr);
 }
 
 static PyGetSetDef Receiver_getset[] = {
 {"A_sf", (getter)Receiver_get_A_sf,(setter)Receiver_set_A_sf,
-	"Solar Field Area [m^2], number.\n Required.",
+	PyDoc_STR("*float*: Solar Field Area [m^2]\n\n*Required*: True"),
  	NULL},
 {"D_rec", (getter)Receiver_get_D_rec,(setter)Receiver_set_D_rec,
-	"The overall outer diameter of the receiver [m], number.\n Required.",
+	PyDoc_STR("*float*: The overall outer diameter of the receiver [m]\n\n*Required*: True"),
  	NULL},
 {"Flow_type", (getter)Receiver_get_Flow_type,(setter)Receiver_set_Flow_type,
-	"A flag indicating which flow pattern is used, number.\n Required.",
+	PyDoc_STR("*float*: A flag indicating which flow pattern is used\n\n*Required*: True"),
  	NULL},
 {"H_rec", (getter)Receiver_get_H_rec,(setter)Receiver_set_H_rec,
-	"The height of the receiver [m], number.\n Required.",
+	PyDoc_STR("*float*: The height of the receiver [m]\n\n*Required*: True"),
  	NULL},
 {"N_panels", (getter)Receiver_get_N_panels,(setter)Receiver_set_N_panels,
-	"Number of individual panels on the receiver, number.\n Constraints: INTEGER; Required.",
+	PyDoc_STR("*float*: Number of individual panels on the receiver\n\n*Constraints*: INTEGER\n\n*Required*: True"),
  	NULL},
 {"Q_rec_des", (getter)Receiver_get_Q_rec_des,(setter)Receiver_set_Q_rec_des,
-	"Design-point receiver thermal power output [MWt], number.\n Required.",
+	PyDoc_STR("*float*: Design-point receiver thermal power output [MWt]\n\n*Required*: True"),
  	NULL},
 {"THT", (getter)Receiver_get_THT,(setter)Receiver_set_THT,
-	"The height of the tower (hel. pivot to rec equator) [m], number.\n Required.",
+	PyDoc_STR("*float*: The height of the tower (hel. pivot to rec equator) [m]\n\n*Required*: True"),
  	NULL},
 {"T_htf_cold_des", (getter)Receiver_get_T_htf_cold_des,(setter)Receiver_set_T_htf_cold_des,
-	"Cold HTF inlet temperature at design conditions [C], number.\n Required.",
+	PyDoc_STR("*float*: Cold HTF inlet temperature at design conditions [C]\n\n*Required*: True"),
  	NULL},
 {"T_htf_hot_des", (getter)Receiver_get_T_htf_hot_des,(setter)Receiver_set_T_htf_hot_des,
-	"Hot HTF outlet temperature at design conditions [C], number.\n Required.",
+	PyDoc_STR("*float*: Hot HTF outlet temperature at design conditions [C]\n\n*Required*: True"),
  	NULL},
 {"crossover_shift", (getter)Receiver_get_crossover_shift,(setter)Receiver_set_crossover_shift,
-	"No. panels shift in receiver crossover position, number.\n 0 if not set.",
+	PyDoc_STR("*float*: No. panels shift in receiver crossover position\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"d_tube_out", (getter)Receiver_get_d_tube_out,(setter)Receiver_set_d_tube_out,
-	"The outer diameter of an individual receiver tube [mm], number.\n Required.",
+	PyDoc_STR("*float*: The outer diameter of an individual receiver tube [mm]\n\n*Required*: True"),
  	NULL},
 {"epsilon", (getter)Receiver_get_epsilon,(setter)Receiver_set_epsilon,
-	"The emissivity of the receiver surface coating, number.\n Required.",
+	PyDoc_STR("*float*: The emissivity of the receiver surface coating\n\n*Required*: True"),
  	NULL},
 {"eta_pump", (getter)Receiver_get_eta_pump,(setter)Receiver_set_eta_pump,
-	"Receiver HTF pump efficiency, number.\n Required.",
+	PyDoc_STR("*float*: Receiver HTF pump efficiency\n\n*Required*: True"),
  	NULL},
 {"f_rec_min", (getter)Receiver_get_f_rec_min,(setter)Receiver_set_f_rec_min,
-	"Minimum receiver mass flow rate turn down fraction, number.\n Required.",
+	PyDoc_STR("*float*: Minimum receiver mass flow rate turn down fraction\n\n*Required*: True"),
  	NULL},
 {"field_fl_props", (getter)Receiver_get_field_fl_props,(setter)Receiver_set_field_fl_props,
-	"User defined field fluid property data [-], matrix.\n Required.",
+	PyDoc_STR("*sequence[sequence]*: User defined field fluid property data [-]\n\n*Required*: True"),
  	NULL},
 {"hl_ffact", (getter)Receiver_get_hl_ffact,(setter)Receiver_set_hl_ffact,
-	"The heat loss factor (thermal loss fudge factor), number.\n Required.",
+	PyDoc_STR("*float*: The heat loss factor (thermal loss fudge factor)\n\n*Required*: True"),
  	NULL},
 {"m_dot_htf_max", (getter)Receiver_get_m_dot_htf_max,(setter)Receiver_set_m_dot_htf_max,
-	"Maximum receiver mass flow rate [kg/hr], number.\n Required.",
+	PyDoc_STR("*float*: Maximum receiver mass flow rate [kg/hr]\n\n*Required*: True"),
  	NULL},
 {"mat_tube", (getter)Receiver_get_mat_tube,(setter)Receiver_set_mat_tube,
-	"The material name of the receiver tubes, number.\n Required.",
+	PyDoc_STR("*float*: The material name of the receiver tubes\n\n*Required*: True"),
  	NULL},
 {"rec_htf", (getter)Receiver_get_rec_htf,(setter)Receiver_set_rec_htf,
-	"The name of the HTF used in the receiver, number.\n Required.",
+	PyDoc_STR("*float*: The name of the HTF used in the receiver\n\n*Required*: True"),
  	NULL},
 {"rec_qf_delay", (getter)Receiver_get_rec_qf_delay,(setter)Receiver_set_rec_qf_delay,
-	"Energy-based rcvr startup delay (fraction of rated thermal power), number.\n Required.",
+	PyDoc_STR("*float*: Energy-based rcvr startup delay (fraction of rated thermal power)\n\n*Required*: True"),
  	NULL},
 {"rec_su_delay", (getter)Receiver_get_rec_su_delay,(setter)Receiver_set_rec_su_delay,
-	"Fixed startup delay time for the receiver [hr], number.\n Required.",
+	PyDoc_STR("*float*: Fixed startup delay time for the receiver [hr]\n\n*Required*: True"),
  	NULL},
 {"receiver_type", (getter)Receiver_get_receiver_type,(setter)Receiver_set_receiver_type,
-	"External=0, Cavity=1, number.\n Constraints: INTEGER; Required.",
+	PyDoc_STR("*float*: External=0, Cavity=1\n\n*Constraints*: INTEGER\n\n*Required*: True"),
  	NULL},
 {"th_tube", (getter)Receiver_get_th_tube,(setter)Receiver_set_th_tube,
-	"The wall thickness of a single receiver tube [mm], number.\n Required.",
+	PyDoc_STR("*float*: The wall thickness of a single receiver tube [mm]\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1980,7 +1980,7 @@ static PyTypeObject Receiver_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		Receiver_methods,         /*tp_methods*/
@@ -1990,7 +1990,7 @@ static PyTypeObject Receiver_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -2050,87 +2050,87 @@ Powerblock_export(PowerblockObject *self, PyObject *args)
 
 static PyMethodDef Powerblock_methods[] = {
 		{"assign",            (PyCFunction)Powerblock_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Powerblock_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Powerblock_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 static PyObject *
 Powerblock_get_elev(PowerblockObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Powerblock_elev_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Powerblock_elev_nget, self->data_ptr);
 }
 
 static int
 Powerblock_set_elev(PowerblockObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Powerblock_elev_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Powerblock_elev_nset, self->data_ptr);
 }
 
 static PyObject *
 Powerblock_get_ngcc_model(PowerblockObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Powerblock_ngcc_model_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Powerblock_ngcc_model_nget, self->data_ptr);
 }
 
 static int
 Powerblock_set_ngcc_model(PowerblockObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Powerblock_ngcc_model_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Powerblock_ngcc_model_nset, self->data_ptr);
 }
 
 static PyObject *
 Powerblock_get_pinch_point_coldside(PowerblockObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Powerblock_pinch_point_coldside_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Powerblock_pinch_point_coldside_nget, self->data_ptr);
 }
 
 static int
 Powerblock_set_pinch_point_coldside(PowerblockObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Powerblock_pinch_point_coldside_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Powerblock_pinch_point_coldside_nset, self->data_ptr);
 }
 
 static PyObject *
 Powerblock_get_pinch_point_hotside(PowerblockObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Powerblock_pinch_point_hotside_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Powerblock_pinch_point_hotside_nget, self->data_ptr);
 }
 
 static int
 Powerblock_set_pinch_point_hotside(PowerblockObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Powerblock_pinch_point_hotside_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Powerblock_pinch_point_hotside_nset, self->data_ptr);
 }
 
 static PyObject *
 Powerblock_get_q_pb_design(PowerblockObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Powerblock_q_pb_design_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Powerblock_q_pb_design_nget, self->data_ptr);
 }
 
 static int
 Powerblock_set_q_pb_design(PowerblockObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Powerblock_q_pb_design_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Powerblock_q_pb_design_nset, self->data_ptr);
 }
 
 static PyGetSetDef Powerblock_getset[] = {
 {"elev", (getter)Powerblock_get_elev,(setter)Powerblock_set_elev,
-	"Plant elevation [m], number.\n Required.",
+	PyDoc_STR("*float*: Plant elevation [m]\n\n*Required*: True"),
  	NULL},
 {"ngcc_model", (getter)Powerblock_get_ngcc_model,(setter)Powerblock_set_ngcc_model,
-	"1: NREL, 2: GE, number.\n Required.",
+	PyDoc_STR("*float*: 1: NREL, 2: GE\n\n*Required*: True"),
  	NULL},
 {"pinch_point_coldside", (getter)Powerblock_get_pinch_point_coldside,(setter)Powerblock_set_pinch_point_coldside,
-	"Cold side HX pinch point [C], number.\n Required.",
+	PyDoc_STR("*float*: Cold side HX pinch point [C]\n\n*Required*: True"),
  	NULL},
 {"pinch_point_hotside", (getter)Powerblock_get_pinch_point_hotside,(setter)Powerblock_set_pinch_point_hotside,
-	"Hot side temperature HX temperature difference [C], number.\n Required.",
+	PyDoc_STR("*float*: Hot side temperature HX temperature difference [C]\n\n*Required*: True"),
  	NULL},
 {"q_pb_design", (getter)Powerblock_get_q_pb_design,(setter)Powerblock_set_q_pb_design,
-	"Design point power block thermal power [MWt], number.\n Required.",
+	PyDoc_STR("*float*: Design point power block thermal power [MWt]\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -2163,7 +2163,7 @@ static PyTypeObject Powerblock_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		Powerblock_methods,         /*tp_methods*/
@@ -2173,7 +2173,7 @@ static PyTypeObject Powerblock_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -2233,222 +2233,222 @@ Parasitics_export(ParasiticsObject *self, PyObject *args)
 
 static PyMethodDef Parasitics_methods[] = {
 		{"assign",            (PyCFunction)Parasitics_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Parasitics_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Parasitics_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 static PyObject *
 Parasitics_get_Q_rec_des(ParasiticsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Parasitics_Q_rec_des_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Parasitics_Q_rec_des_nget, self->data_ptr);
 }
 
 static int
 Parasitics_set_Q_rec_des(ParasiticsObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Parasitics_Q_rec_des_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Parasitics_Q_rec_des_nset, self->data_ptr);
 }
 
 static PyObject *
 Parasitics_get_W_dot_solar_des(ParasiticsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Parasitics_W_dot_solar_des_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Parasitics_W_dot_solar_des_nget, self->data_ptr);
 }
 
 static int
 Parasitics_set_W_dot_solar_des(ParasiticsObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Parasitics_W_dot_solar_des_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Parasitics_W_dot_solar_des_nset, self->data_ptr);
 }
 
 static PyObject *
 Parasitics_get_bop_par(ParasiticsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Parasitics_bop_par_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Parasitics_bop_par_nget, self->data_ptr);
 }
 
 static int
 Parasitics_set_bop_par(ParasiticsObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Parasitics_bop_par_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Parasitics_bop_par_nset, self->data_ptr);
 }
 
 static PyObject *
 Parasitics_get_bop_par_0(ParasiticsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Parasitics_bop_par_0_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Parasitics_bop_par_0_nget, self->data_ptr);
 }
 
 static int
 Parasitics_set_bop_par_0(ParasiticsObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Parasitics_bop_par_0_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Parasitics_bop_par_0_nset, self->data_ptr);
 }
 
 static PyObject *
 Parasitics_get_bop_par_1(ParasiticsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Parasitics_bop_par_1_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Parasitics_bop_par_1_nget, self->data_ptr);
 }
 
 static int
 Parasitics_set_bop_par_1(ParasiticsObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Parasitics_bop_par_1_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Parasitics_bop_par_1_nset, self->data_ptr);
 }
 
 static PyObject *
 Parasitics_get_bop_par_2(ParasiticsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Parasitics_bop_par_2_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Parasitics_bop_par_2_nget, self->data_ptr);
 }
 
 static int
 Parasitics_set_bop_par_2(ParasiticsObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Parasitics_bop_par_2_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Parasitics_bop_par_2_nset, self->data_ptr);
 }
 
 static PyObject *
 Parasitics_get_bop_par_f(ParasiticsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Parasitics_bop_par_f_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Parasitics_bop_par_f_nget, self->data_ptr);
 }
 
 static int
 Parasitics_set_bop_par_f(ParasiticsObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Parasitics_bop_par_f_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Parasitics_bop_par_f_nset, self->data_ptr);
 }
 
 static PyObject *
 Parasitics_get_fossil_output(ParasiticsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Parasitics_fossil_output_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Parasitics_fossil_output_nget, self->data_ptr);
 }
 
 static int
 Parasitics_set_fossil_output(ParasiticsObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Parasitics_fossil_output_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Parasitics_fossil_output_nset, self->data_ptr);
 }
 
 static PyObject *
 Parasitics_get_pb_fixed_par(ParasiticsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Parasitics_pb_fixed_par_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Parasitics_pb_fixed_par_nget, self->data_ptr);
 }
 
 static int
 Parasitics_set_pb_fixed_par(ParasiticsObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Parasitics_pb_fixed_par_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Parasitics_pb_fixed_par_nset, self->data_ptr);
 }
 
 static PyObject *
 Parasitics_get_pb_pump_coef(ParasiticsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Parasitics_pb_pump_coef_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Parasitics_pb_pump_coef_nget, self->data_ptr);
 }
 
 static int
 Parasitics_set_pb_pump_coef(ParasiticsObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Parasitics_pb_pump_coef_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Parasitics_pb_pump_coef_nset, self->data_ptr);
 }
 
 static PyObject *
 Parasitics_get_piping_length(ParasiticsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Parasitics_piping_length_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Parasitics_piping_length_nget, self->data_ptr);
 }
 
 static int
 Parasitics_set_piping_length(ParasiticsObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Parasitics_piping_length_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Parasitics_piping_length_nset, self->data_ptr);
 }
 
 static PyObject *
 Parasitics_get_piping_length_const(ParasiticsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Parasitics_piping_length_const_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Parasitics_piping_length_const_nget, self->data_ptr);
 }
 
 static int
 Parasitics_set_piping_length_const(ParasiticsObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Parasitics_piping_length_const_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Parasitics_piping_length_const_nset, self->data_ptr);
 }
 
 static PyObject *
 Parasitics_get_piping_length_mult(ParasiticsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Parasitics_piping_length_mult_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Parasitics_piping_length_mult_nget, self->data_ptr);
 }
 
 static int
 Parasitics_set_piping_length_mult(ParasiticsObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Parasitics_piping_length_mult_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Parasitics_piping_length_mult_nset, self->data_ptr);
 }
 
 static PyObject *
 Parasitics_get_piping_loss(ParasiticsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Parasitics_piping_loss_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Parasitics_piping_loss_nget, self->data_ptr);
 }
 
 static int
 Parasitics_set_piping_loss(ParasiticsObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Tcsiscc_Parasitics_piping_loss_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsiscc_Parasitics_piping_loss_nset, self->data_ptr);
 }
 
 static PyGetSetDef Parasitics_getset[] = {
 {"Q_rec_des", (getter)Parasitics_get_Q_rec_des,(setter)Parasitics_set_Q_rec_des,
-	"Design point solar field thermal output [MW], number.\n Required.",
+	PyDoc_STR("*float*: Design point solar field thermal output [MW]\n\n*Required*: True"),
  	NULL},
 {"W_dot_solar_des", (getter)Parasitics_get_W_dot_solar_des,(setter)Parasitics_set_W_dot_solar_des,
-	"Solar contribution to cycle output at design [MWe], number.\n Required.",
+	PyDoc_STR("*float*: Solar contribution to cycle output at design [MWe]\n\n*Required*: True"),
  	NULL},
 {"bop_par", (getter)Parasitics_get_bop_par,(setter)Parasitics_set_bop_par,
-	"Balance of plant parasitic power fraction [MWe/MWcap], number.\n Required.",
+	PyDoc_STR("*float*: Balance of plant parasitic power fraction [MWe/MWcap]\n\n*Required*: True"),
  	NULL},
 {"bop_par_0", (getter)Parasitics_get_bop_par_0,(setter)Parasitics_set_bop_par_0,
-	"Balance of plant parasitic power fraction - const coeff [none], number.\n Required.",
+	PyDoc_STR("*float*: Balance of plant parasitic power fraction - const coeff [none]\n\n*Required*: True"),
  	NULL},
 {"bop_par_1", (getter)Parasitics_get_bop_par_1,(setter)Parasitics_set_bop_par_1,
-	"Balance of plant parasitic power fraction - linear coeff [none], number.\n Required.",
+	PyDoc_STR("*float*: Balance of plant parasitic power fraction - linear coeff [none]\n\n*Required*: True"),
  	NULL},
 {"bop_par_2", (getter)Parasitics_get_bop_par_2,(setter)Parasitics_set_bop_par_2,
-	"Balance of plant parasitic power fraction - quadratic coeff [none], number.\n Required.",
+	PyDoc_STR("*float*: Balance of plant parasitic power fraction - quadratic coeff [none]\n\n*Required*: True"),
  	NULL},
 {"bop_par_f", (getter)Parasitics_get_bop_par_f,(setter)Parasitics_set_bop_par_f,
-	"Balance of plant parasitic power fraction - mult frac [none], number.\n Required.",
+	PyDoc_STR("*float*: Balance of plant parasitic power fraction - mult frac [none]\n\n*Required*: True"),
  	NULL},
 {"fossil_output", (getter)Parasitics_get_fossil_output,(setter)Parasitics_set_fossil_output,
-	"Fossil-only cycle output at design [MWe], number.\n Required.",
+	PyDoc_STR("*float*: Fossil-only cycle output at design [MWe]\n\n*Required*: True"),
  	NULL},
 {"pb_fixed_par", (getter)Parasitics_get_pb_fixed_par,(setter)Parasitics_set_pb_fixed_par,
-	"Fixed parasitic load - runs at all times [MWe/MWcap], number.\n Required.",
+	PyDoc_STR("*float*: Fixed parasitic load - runs at all times [MWe/MWcap]\n\n*Required*: True"),
  	NULL},
 {"pb_pump_coef", (getter)Parasitics_get_pb_pump_coef,(setter)Parasitics_set_pb_pump_coef,
-	"Required pumping power for HTF through power block [kJ/kg], number.\n Required.",
+	PyDoc_STR("*float*: Required pumping power for HTF through power block [kJ/kg]\n\n*Required*: True"),
  	NULL},
 {"piping_length", (getter)Parasitics_get_piping_length,(setter)Parasitics_set_piping_length,
-	"Total length of exposed piping [m], number.\n Required.",
+	PyDoc_STR("*float*: Total length of exposed piping [m]\n\n*Required*: True"),
  	NULL},
 {"piping_length_const", (getter)Parasitics_get_piping_length_const,(setter)Parasitics_set_piping_length_const,
-	"Piping constant length [m], number.\n Required.",
+	PyDoc_STR("*float*: Piping constant length [m]\n\n*Required*: True"),
  	NULL},
 {"piping_length_mult", (getter)Parasitics_get_piping_length_mult,(setter)Parasitics_set_piping_length_mult,
-	"Piping length multiplier, number.\n Required.",
+	PyDoc_STR("*float*: Piping length multiplier\n\n*Required*: True"),
  	NULL},
 {"piping_loss", (getter)Parasitics_get_piping_loss,(setter)Parasitics_set_piping_loss,
-	"Thermal loss per meter of piping [Wt/m], number.\n Required.",
+	PyDoc_STR("*float*: Thermal loss per meter of piping [Wt/m]\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -2481,7 +2481,7 @@ static PyTypeObject Parasitics_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		Parasitics_methods,         /*tp_methods*/
@@ -2491,7 +2491,7 @@ static PyTypeObject Parasitics_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -2551,9 +2551,9 @@ Outputs_export(OutputsObject *self, PyObject *args)
 
 static PyMethodDef Outputs_methods[] = {
 		{"assign",            (PyCFunction)Outputs_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Outputs_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Outputs_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -2650,13 +2650,13 @@ Outputs_get_W_dot_pump(OutputsObject *self, void *closure)
 static PyObject *
 Outputs_get_annual_energy(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Outputs_annual_energy_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Outputs_annual_energy_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_annual_fuel_usage(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Outputs_annual_fuel_usage_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Outputs_annual_fuel_usage_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -2668,7 +2668,7 @@ Outputs_get_beam(OutputsObject *self, void *closure)
 static PyObject *
 Outputs_get_capacity_factor(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Outputs_capacity_factor_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Outputs_capacity_factor_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -2728,7 +2728,7 @@ Outputs_get_hour(OutputsObject *self, void *closure)
 static PyObject *
 Outputs_get_kwh_per_kw(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Outputs_kwh_per_kw_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Outputs_kwh_per_kw_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -2806,7 +2806,7 @@ Outputs_get_solzen(OutputsObject *self, void *closure)
 static PyObject *
 Outputs_get_system_heat_rate(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Tcsiscc_Outputs_system_heat_rate_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsiscc_Outputs_system_heat_rate_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -2829,139 +2829,139 @@ Outputs_get_wspd(OutputsObject *self, void *closure)
 
 static PyGetSetDef Outputs_getset[] = {
 {"P_fixed", (getter)Outputs_get_P_fixed,(setter)0,
-	"Parasitic power fixed load [MWe], array.",
+	PyDoc_STR("*sequence*: Parasitic power fixed load [MWe]"),
  	NULL},
 {"P_plant_balance_tot", (getter)Outputs_get_P_plant_balance_tot,(setter)0,
-	"Parasitic power generation-dependent load [MWe], array.",
+	PyDoc_STR("*sequence*: Parasitic power generation-dependent load [MWe]"),
  	NULL},
 {"Q_dot_max", (getter)Outputs_get_Q_dot_max,(setter)0,
-	"Cycle max allowable thermal power to NGCC [MWt], array.",
+	PyDoc_STR("*sequence*: Cycle max allowable thermal power to NGCC [MWt]"),
  	NULL},
 {"Q_solar_total", (getter)Outputs_get_Q_solar_total,(setter)0,
-	"Receiver thermal power absorbed [MWt], array.",
+	PyDoc_STR("*sequence*: Receiver thermal power absorbed [MWt]"),
  	NULL},
 {"Q_thermal", (getter)Outputs_get_Q_thermal,(setter)0,
-	"Receiver thermal power to HTF [MWt], array.",
+	PyDoc_STR("*sequence*: Receiver thermal power to HTF [MWt]"),
  	NULL},
 {"T_htf_cold", (getter)Outputs_get_T_htf_cold,(setter)0,
-	"Receiver HTF temperature in [C], array.",
+	PyDoc_STR("*sequence*: Receiver HTF temperature in [C]"),
  	NULL},
 {"T_salt_hot", (getter)Outputs_get_T_salt_hot,(setter)0,
-	"Receiver HTF temperature out [C], array.",
+	PyDoc_STR("*sequence*: Receiver HTF temperature out [C]"),
  	NULL},
 {"T_st_cold", (getter)Outputs_get_T_st_cold,(setter)0,
-	"Cycle steam temp from NGCC to HX [C], array.",
+	PyDoc_STR("*sequence*: Cycle steam temp from NGCC to HX [C]"),
  	NULL},
 {"T_st_hot", (getter)Outputs_get_T_st_hot,(setter)0,
-	"Cycle steam temp from HX back to NGCC [C], array.",
+	PyDoc_STR("*sequence*: Cycle steam temp from HX back to NGCC [C]"),
  	NULL},
 {"W_dot_pc_fossil", (getter)Outputs_get_W_dot_pc_fossil,(setter)0,
-	"Cycle net output only considering fossil power [MWe], array.",
+	PyDoc_STR("*sequence*: Cycle net output only considering fossil power [MWe]"),
  	NULL},
 {"W_dot_pc_hybrid", (getter)Outputs_get_W_dot_pc_hybrid,(setter)0,
-	"Cycle net output including solar power [MWe], array.",
+	PyDoc_STR("*sequence*: Cycle net output including solar power [MWe]"),
  	NULL},
 {"W_dot_plant_fossil", (getter)Outputs_get_W_dot_plant_fossil,(setter)0,
-	"Plant net output only considering fossil power & parasitics [MWe], array.",
+	PyDoc_STR("*sequence*: Plant net output only considering fossil power & parasitics [MWe]"),
  	NULL},
 {"W_dot_plant_hybrid", (getter)Outputs_get_W_dot_plant_hybrid,(setter)0,
-	"Plant net output including solar power & parasitics [MWe], array.",
+	PyDoc_STR("*sequence*: Plant net output including solar power & parasitics [MWe]"),
  	NULL},
 {"W_dot_plant_solar", (getter)Outputs_get_W_dot_plant_solar,(setter)0,
-	"Plant net output attributable to solar [MWe], array.",
+	PyDoc_STR("*sequence*: Plant net output attributable to solar [MWe]"),
  	NULL},
 {"W_dot_pump", (getter)Outputs_get_W_dot_pump,(setter)0,
-	"Parasitic power receiver HTF pump [MWe], array.",
+	PyDoc_STR("*sequence*: Parasitic power receiver HTF pump [MWe]"),
  	NULL},
 {"annual_energy", (getter)Outputs_get_annual_energy,(setter)0,
-	"Annual Energy [kW], number.",
+	PyDoc_STR("*float*: Annual Energy [kW]"),
  	NULL},
 {"annual_fuel_usage", (getter)Outputs_get_annual_fuel_usage,(setter)0,
-	"Annual fuel usage [kWh], number.",
+	PyDoc_STR("*float*: Annual fuel usage [kWh]"),
  	NULL},
 {"beam", (getter)Outputs_get_beam,(setter)0,
-	"Resource Beam normal irradiance [W/m2], array.",
+	PyDoc_STR("*sequence*: Resource Beam normal irradiance [W/m2]"),
  	NULL},
 {"capacity_factor", (getter)Outputs_get_capacity_factor,(setter)0,
-	"Capacity factor [%], number.",
+	PyDoc_STR("*float*: Capacity factor [%]"),
  	NULL},
 {"eta_field", (getter)Outputs_get_eta_field,(setter)0,
-	"Field optical efficiency, array.",
+	PyDoc_STR("*sequence*: Field optical efficiency"),
  	NULL},
 {"eta_fuel", (getter)Outputs_get_eta_fuel,(setter)0,
-	"Plant efficiency of fossil only operation (LHV basis) [%], array.",
+	PyDoc_STR("*sequence*: Plant efficiency of fossil only operation (LHV basis) [%]"),
  	NULL},
 {"eta_solar_use", (getter)Outputs_get_eta_solar_use,(setter)0,
-	"Plant solar use efficiency considering parasitics [-], array.",
+	PyDoc_STR("*sequence*: Plant solar use efficiency considering parasitics [-]"),
  	NULL},
 {"eta_therm", (getter)Outputs_get_eta_therm,(setter)0,
-	"Receiver thermal efficiency, array.",
+	PyDoc_STR("*sequence*: Receiver thermal efficiency"),
  	NULL},
 {"f_timestep", (getter)Outputs_get_f_timestep,(setter)0,
-	"Receiver operating fraction after startup, array.",
+	PyDoc_STR("*sequence*: Receiver operating fraction after startup"),
  	NULL},
 {"field_eff_adj", (getter)Outputs_get_field_eff_adj,(setter)0,
-	"Solar field efficiency w/ defocusing, array.",
+	PyDoc_STR("*sequence*: Solar field efficiency w/ defocusing"),
  	NULL},
 {"fuel_use", (getter)Outputs_get_fuel_use,(setter)0,
-	"Cycle natural gas used during timestep [MMBTU], array.",
+	PyDoc_STR("*sequence*: Cycle natural gas used during timestep [MMBTU]"),
  	NULL},
 {"gen", (getter)Outputs_get_gen,(setter)0,
-	"System power generated [kW], array.",
+	PyDoc_STR("*sequence*: System power generated [kW]"),
  	NULL},
 {"hour", (getter)Outputs_get_hour,(setter)0,
-	"Resource Hour of Day, array.",
+	PyDoc_STR("*sequence*: Resource Hour of Day"),
  	NULL},
 {"kwh_per_kw", (getter)Outputs_get_kwh_per_kw,(setter)0,
-	"First year kWh/kW [kWh/kW], number.",
+	PyDoc_STR("*float*: First year kWh/kW [kWh/kW]"),
  	NULL},
 {"m_dot_salt_tot", (getter)Outputs_get_m_dot_salt_tot,(setter)0,
-	"Receiver mass flow rate, derated for startup [kg/s], array.",
+	PyDoc_STR("*sequence*: Receiver mass flow rate, derated for startup [kg/s]"),
  	NULL},
 {"m_dot_ss", (getter)Outputs_get_m_dot_ss,(setter)0,
-	"Receiver mass flow rate, steady state [kg/s], array.",
+	PyDoc_STR("*sequence*: Receiver mass flow rate, steady state [kg/s]"),
  	NULL},
 {"m_dot_steam", (getter)Outputs_get_m_dot_steam,(setter)0,
-	"Cycle solar steam mass flow rate [kg/hr], array.",
+	PyDoc_STR("*sequence*: Cycle solar steam mass flow rate [kg/hr]"),
  	NULL},
 {"month", (getter)Outputs_get_month,(setter)0,
-	"Resource Month, array.",
+	PyDoc_STR("*sequence*: Resource Month"),
  	NULL},
 {"pparasi", (getter)Outputs_get_pparasi,(setter)0,
-	"Parasitic power heliostat drives [MWe], array.",
+	PyDoc_STR("*sequence*: Parasitic power heliostat drives [MWe]"),
  	NULL},
 {"pres", (getter)Outputs_get_pres,(setter)0,
-	"Resource Pressure [mbar], array.",
+	PyDoc_STR("*sequence*: Resource Pressure [mbar]"),
  	NULL},
 {"q_conv_sum", (getter)Outputs_get_q_conv_sum,(setter)0,
-	"Receiver thermal power loss to convection [MWt], array.",
+	PyDoc_STR("*sequence*: Receiver thermal power loss to convection [MWt]"),
  	NULL},
 {"q_rad_sum", (getter)Outputs_get_q_rad_sum,(setter)0,
-	"Receiver thermal power loss to radiation [MWt], array.",
+	PyDoc_STR("*sequence*: Receiver thermal power loss to radiation [MWt]"),
  	NULL},
 {"q_startup", (getter)Outputs_get_q_startup,(setter)0,
-	"Receiver startup power [MWt], array.",
+	PyDoc_STR("*sequence*: Receiver startup power [MWt]"),
  	NULL},
 {"solar_fraction", (getter)Outputs_get_solar_fraction,(setter)0,
-	"Plant solar fraction [-], array.",
+	PyDoc_STR("*sequence*: Plant solar fraction [-]"),
  	NULL},
 {"solazi", (getter)Outputs_get_solazi,(setter)0,
-	"Resource Solar Azimuth [deg], array.",
+	PyDoc_STR("*sequence*: Resource Solar Azimuth [deg]"),
  	NULL},
 {"solzen", (getter)Outputs_get_solzen,(setter)0,
-	"Resource Solar Zenith [deg], array.",
+	PyDoc_STR("*sequence*: Resource Solar Zenith [deg]"),
  	NULL},
 {"system_heat_rate", (getter)Outputs_get_system_heat_rate,(setter)0,
-	"System heat rate [MMBtu/MWh], number.",
+	PyDoc_STR("*float*: System heat rate [MMBtu/MWh]"),
  	NULL},
 {"tdry", (getter)Outputs_get_tdry,(setter)0,
-	"Resource Dry bulb temperature [C], array.",
+	PyDoc_STR("*sequence*: Resource Dry bulb temperature [C]"),
  	NULL},
 {"twet", (getter)Outputs_get_twet,(setter)0,
-	"Resource Wet bulb temperature [C], array.",
+	PyDoc_STR("*sequence*: Resource Wet bulb temperature [C]"),
  	NULL},
 {"wspd", (getter)Outputs_get_wspd,(setter)0,
-	"Resource Wind Speed [m/s], array.",
+	PyDoc_STR("*sequence*: Resource Wind Speed [m/s]"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -2994,7 +2994,7 @@ static PyTypeObject Outputs_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		Outputs_methods,         /*tp_methods*/
@@ -3004,7 +3004,7 @@ static PyTypeObject Outputs_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -3135,9 +3135,9 @@ static PyMethodDef Tcsiscc_methods[] = {
 		{"execute",            (PyCFunction)Tcsiscc_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
 		{"assign",            (PyCFunction)Tcsiscc_assign,  METH_VARARGS,
-				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs")},
+				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Weather': { var: val, ...}, ...}``")},
 		{"export",            (PyCFunction)Tcsiscc_export,  METH_VARARGS,
-				PyDoc_STR("assign() -> None\n Export attributes into dictionary")},
+				PyDoc_STR("export() -> dict\n Export attributes into nested dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -3177,11 +3177,11 @@ static PyTypeObject Tcsiscc_Type = {
 		0,                          /*tp_setattro*/
 		0,                          /*tp_as_buffer*/
 		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
-		"see html for help",        /*tp_doc*/
+		"This class contains all the variable information for running a simulation. Variables are grouped together in the subclasses as properties. If property assignments are the wrong type, an error is thrown.",        /*tp_doc*/
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		Tcsiscc_methods,      /*tp_methods*/
@@ -3191,7 +3191,7 @@ static PyTypeObject Tcsiscc_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,                          /*tp_new*/
@@ -3254,12 +3254,12 @@ Tcsiscc_default(PyObject *self, PyObject *args)
 
 static PyMethodDef TcsisccModule_methods[] = {
 		{"new",             Tcsiscc_new,         METH_VARARGS,
-				PyDoc_STR("new() -> new Tcsiscc object")},
+				PyDoc_STR("new() -> Tcsiscc")},
 		{"default",             Tcsiscc_default,         METH_VARARGS,
-				PyDoc_STR("default(financial) -> new Tcsiscc object with financial model-specific default attributes\n"
-				"Options: ISCCSingleOwner")},
+				PyDoc_STR("default(config) -> Tcsiscc\n\nUse financial model-specific default attributes\n"
+				"config options:\n\n- \"ISCCSingleOwner\"")},
 		{"wrap",             Tcsiscc_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> new Tcsiscc object around existing PySSC data, taking over memory ownership")},
+				PyDoc_STR("wrap(ssc_data_t) -> Tcsiscc\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{NULL,              NULL}           /* sentinel */
 };
 

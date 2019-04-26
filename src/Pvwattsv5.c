@@ -58,9 +58,9 @@ LocationAndResource_export(LocationAndResourceObject *self, PyObject *args)
 
 static PyMethodDef LocationAndResource_methods[] = {
 		{"assign",            (PyCFunction)LocationAndResource_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``LocationAndResource_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)LocationAndResource_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -90,10 +90,10 @@ LocationAndResource_set_solar_resource_file(LocationAndResourceObject *self, PyO
 
 static PyGetSetDef LocationAndResource_getset[] = {
 {"solar_resource_data", (getter)LocationAndResource_get_solar_resource_data,(setter)LocationAndResource_set_solar_resource_data,
-	"Weather data, table.\n dn,df,tdry,wspd,lat,lon,tz; Required if ?.",
+	PyDoc_STR("*dict*: Weather data\n\n*Info*: dn,df,tdry,wspd,lat,lon,tz\n\n*Required*: False"),
  	NULL},
 {"solar_resource_file", (getter)LocationAndResource_get_solar_resource_file,(setter)LocationAndResource_set_solar_resource_file,
-	"Weather file path, string.\n Required if ?.",
+	PyDoc_STR("*str*: Weather file path\n\n*Required*: False"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -126,7 +126,7 @@ static PyTypeObject LocationAndResource_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		LocationAndResource_methods,         /*tp_methods*/
@@ -136,7 +136,7 @@ static PyTypeObject LocationAndResource_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -196,106 +196,106 @@ SystemDesign_export(SystemDesignObject *self, PyObject *args)
 
 static PyMethodDef SystemDesign_methods[] = {
 		{"assign",            (PyCFunction)SystemDesign_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``SystemDesign_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)SystemDesign_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 static PyObject *
 SystemDesign_get_array_type(SystemDesignObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Pvwattsv5_SystemDesign_array_type_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Pvwattsv5_SystemDesign_array_type_nget, self->data_ptr);
 }
 
 static int
 SystemDesign_set_array_type(SystemDesignObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Pvwattsv5_SystemDesign_array_type_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Pvwattsv5_SystemDesign_array_type_nset, self->data_ptr);
 }
 
 static PyObject *
 SystemDesign_get_azimuth(SystemDesignObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Pvwattsv5_SystemDesign_azimuth_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Pvwattsv5_SystemDesign_azimuth_nget, self->data_ptr);
 }
 
 static int
 SystemDesign_set_azimuth(SystemDesignObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Pvwattsv5_SystemDesign_azimuth_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Pvwattsv5_SystemDesign_azimuth_nset, self->data_ptr);
 }
 
 static PyObject *
 SystemDesign_get_batt_simple_enable(SystemDesignObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Pvwattsv5_SystemDesign_batt_simple_enable_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Pvwattsv5_SystemDesign_batt_simple_enable_nget, self->data_ptr);
 }
 
 static int
 SystemDesign_set_batt_simple_enable(SystemDesignObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Pvwattsv5_SystemDesign_batt_simple_enable_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Pvwattsv5_SystemDesign_batt_simple_enable_nset, self->data_ptr);
 }
 
 static PyObject *
 SystemDesign_get_dc_ac_ratio(SystemDesignObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Pvwattsv5_SystemDesign_dc_ac_ratio_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Pvwattsv5_SystemDesign_dc_ac_ratio_nget, self->data_ptr);
 }
 
 static int
 SystemDesign_set_dc_ac_ratio(SystemDesignObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Pvwattsv5_SystemDesign_dc_ac_ratio_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Pvwattsv5_SystemDesign_dc_ac_ratio_nset, self->data_ptr);
 }
 
 static PyObject *
 SystemDesign_get_gcr(SystemDesignObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Pvwattsv5_SystemDesign_gcr_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Pvwattsv5_SystemDesign_gcr_nget, self->data_ptr);
 }
 
 static int
 SystemDesign_set_gcr(SystemDesignObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Pvwattsv5_SystemDesign_gcr_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Pvwattsv5_SystemDesign_gcr_nset, self->data_ptr);
 }
 
 static PyObject *
 SystemDesign_get_inv_eff(SystemDesignObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Pvwattsv5_SystemDesign_inv_eff_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Pvwattsv5_SystemDesign_inv_eff_nget, self->data_ptr);
 }
 
 static int
 SystemDesign_set_inv_eff(SystemDesignObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Pvwattsv5_SystemDesign_inv_eff_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Pvwattsv5_SystemDesign_inv_eff_nset, self->data_ptr);
 }
 
 static PyObject *
 SystemDesign_get_losses(SystemDesignObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Pvwattsv5_SystemDesign_losses_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Pvwattsv5_SystemDesign_losses_nget, self->data_ptr);
 }
 
 static int
 SystemDesign_set_losses(SystemDesignObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Pvwattsv5_SystemDesign_losses_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Pvwattsv5_SystemDesign_losses_nset, self->data_ptr);
 }
 
 static PyObject *
 SystemDesign_get_module_type(SystemDesignObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Pvwattsv5_SystemDesign_module_type_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Pvwattsv5_SystemDesign_module_type_nget, self->data_ptr);
 }
 
 static int
 SystemDesign_set_module_type(SystemDesignObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Pvwattsv5_SystemDesign_module_type_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Pvwattsv5_SystemDesign_module_type_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -313,13 +313,13 @@ SystemDesign_set_shading_azal(SystemDesignObject *self, PyObject *value, void *c
 static PyObject *
 SystemDesign_get_shading_diff(SystemDesignObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Pvwattsv5_SystemDesign_shading_diff_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Pvwattsv5_SystemDesign_shading_diff_nget, self->data_ptr);
 }
 
 static int
 SystemDesign_set_shading_diff(SystemDesignObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Pvwattsv5_SystemDesign_shading_diff_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Pvwattsv5_SystemDesign_shading_diff_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -349,69 +349,69 @@ SystemDesign_set_shading_timestep(SystemDesignObject *self, PyObject *value, voi
 static PyObject *
 SystemDesign_get_system_capacity(SystemDesignObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Pvwattsv5_SystemDesign_system_capacity_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Pvwattsv5_SystemDesign_system_capacity_nget, self->data_ptr);
 }
 
 static int
 SystemDesign_set_system_capacity(SystemDesignObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Pvwattsv5_SystemDesign_system_capacity_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Pvwattsv5_SystemDesign_system_capacity_nset, self->data_ptr);
 }
 
 static PyObject *
 SystemDesign_get_tilt(SystemDesignObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Pvwattsv5_SystemDesign_tilt_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Pvwattsv5_SystemDesign_tilt_nget, self->data_ptr);
 }
 
 static int
 SystemDesign_set_tilt(SystemDesignObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_Pvwattsv5_SystemDesign_tilt_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Pvwattsv5_SystemDesign_tilt_nset, self->data_ptr);
 }
 
 static PyGetSetDef SystemDesign_getset[] = {
 {"array_type", (getter)SystemDesign_get_array_type,(setter)SystemDesign_set_array_type,
-	"Array type [0/1/2/3/4], number.\n Fixed OR,Fixed Roof,1Axis,Backtracked,2Axis; Constraints: MIN=0,MAX=4,INTEGER; Required.",
+	PyDoc_STR("*float*: Array type [0/1/2/3/4]\n\n*Info*: Fixed OR,Fixed Roof,1Axis,Backtracked,2Axis\n\n*Constraints*: MIN=0,MAX=4,INTEGER\n\n*Required*: True"),
  	NULL},
 {"azimuth", (getter)SystemDesign_get_azimuth,(setter)SystemDesign_set_azimuth,
-	"Azimuth angle [deg], number.\n E=90,S=180,W=270; Constraints: MIN=0,MAX=360; Required if array_type<4.",
+	PyDoc_STR("*float*: Azimuth angle [deg]\n\n*Options*: E=90,S=180,W=270\n\n*Constraints*: MIN=0,MAX=360\n\n*Required*: array_type<4"),
  	NULL},
 {"batt_simple_enable", (getter)SystemDesign_get_batt_simple_enable,(setter)SystemDesign_set_batt_simple_enable,
-	"Enable Battery [0/1], number.\n Constraints: BOOLEAN; 0 if not set.",
+	PyDoc_STR("*float*: Enable Battery [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"dc_ac_ratio", (getter)SystemDesign_get_dc_ac_ratio,(setter)SystemDesign_set_dc_ac_ratio,
-	"DC to AC ratio [ratio], number.\n Constraints: POSITIVE; Required if ?=1.1.",
+	PyDoc_STR("*float*: DC to AC ratio [ratio]\n\n*Constraints*: POSITIVE\n\n*Required*: set to 1.1 if not provided."),
  	NULL},
 {"gcr", (getter)SystemDesign_get_gcr,(setter)SystemDesign_set_gcr,
-	"Ground coverage ratio [0..1], number.\n Constraints: MIN=0,MAX=3; Required if ?=0.4.",
+	PyDoc_STR("*float*: Ground coverage ratio [0..1]\n\n*Constraints*: MIN=0,MAX=3\n\n*Required*: set to 0.4 if not provided."),
  	NULL},
 {"inv_eff", (getter)SystemDesign_get_inv_eff,(setter)SystemDesign_set_inv_eff,
-	"Inverter efficiency at rated power [%], number.\n Constraints: MIN=90,MAX=99.5; Required if ?=96.",
+	PyDoc_STR("*float*: Inverter efficiency at rated power [%]\n\n*Constraints*: MIN=90,MAX=99.5\n\n*Required*: set to 96 if not provided."),
  	NULL},
 {"losses", (getter)SystemDesign_get_losses,(setter)SystemDesign_set_losses,
-	"System losses [%], number.\n Total system losses; Constraints: MIN=-5,MAX=99; Required.",
+	PyDoc_STR("*float*: System losses [%]\n\n*Info*: Total system losses\n\n*Constraints*: MIN=-5,MAX=99\n\n*Required*: True"),
  	NULL},
 {"module_type", (getter)SystemDesign_get_module_type,(setter)SystemDesign_set_module_type,
-	"Module type [0/1/2], number.\n Standard,Premium,Thin film; Constraints: MIN=0,MAX=2,INTEGER; 0 if not set.",
+	PyDoc_STR("*float*: Module type [0/1/2]\n\n*Info*: Standard,Premium,Thin film\n\n*Constraints*: MIN=0,MAX=2,INTEGER\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"shading_azal", (getter)SystemDesign_get_shading_azal,(setter)SystemDesign_set_shading_azal,
-	"Azimuth x altitude beam shading loss [%], matrix.\n Required if ?.",
+	PyDoc_STR("*sequence[sequence]*: Azimuth x altitude beam shading loss [%]\n\n*Required*: False"),
  	NULL},
 {"shading_diff", (getter)SystemDesign_get_shading_diff,(setter)SystemDesign_set_shading_diff,
-	"Diffuse shading loss [%], number.\n Required if ?.",
+	PyDoc_STR("*float*: Diffuse shading loss [%]\n\n*Required*: False"),
  	NULL},
 {"shading_mxh", (getter)SystemDesign_get_shading_mxh,(setter)SystemDesign_set_shading_mxh,
-	"Month x Hour beam shading loss [%], matrix.\n Required if ?.",
+	PyDoc_STR("*sequence[sequence]*: Month x Hour beam shading loss [%]\n\n*Required*: False"),
  	NULL},
 {"shading_timestep", (getter)SystemDesign_get_shading_timestep,(setter)SystemDesign_set_shading_timestep,
-	"Time step beam shading loss [%], matrix.\n Required if ?.",
+	PyDoc_STR("*sequence[sequence]*: Time step beam shading loss [%]\n\n*Required*: False"),
  	NULL},
 {"system_capacity", (getter)SystemDesign_get_system_capacity,(setter)SystemDesign_set_system_capacity,
-	"System size (DC nameplate) [kW], number.\n Required.",
+	PyDoc_STR("*float*: System size (DC nameplate) [kW]\n\n*Required*: True"),
  	NULL},
 {"tilt", (getter)SystemDesign_get_tilt,(setter)SystemDesign_set_tilt,
-	"Tilt angle [deg], number.\n H=0,V=90; Constraints: MIN=0,MAX=90; Required if array_type<4.",
+	PyDoc_STR("*float*: Tilt angle [deg]\n\n*Options*: H=0,V=90\n\n*Constraints*: MIN=0,MAX=90\n\n*Required*: array_type<4"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -444,7 +444,7 @@ static PyTypeObject SystemDesign_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		SystemDesign_methods,         /*tp_methods*/
@@ -454,7 +454,7 @@ static PyTypeObject SystemDesign_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -514,9 +514,9 @@ Outputs_export(OutputsObject *self, PyObject *args)
 
 static PyMethodDef Outputs_methods[] = {
 		{"assign",            (PyCFunction)Outputs_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Outputs_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Outputs_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -529,7 +529,7 @@ Outputs_get_ac(OutputsObject *self, void *closure)
 static PyObject *
 Outputs_get_ac_annual(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Pvwattsv5_Outputs_ac_annual_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Pvwattsv5_Outputs_ac_annual_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -541,7 +541,7 @@ Outputs_get_ac_monthly(OutputsObject *self, void *closure)
 static PyObject *
 Outputs_get_annual_energy(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Pvwattsv5_Outputs_annual_energy_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Pvwattsv5_Outputs_annual_energy_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -553,7 +553,7 @@ Outputs_get_aoi(OutputsObject *self, void *closure)
 static PyObject *
 Outputs_get_capacity_factor(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Pvwattsv5_Outputs_capacity_factor_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Pvwattsv5_Outputs_capacity_factor_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -589,7 +589,7 @@ Outputs_get_dn(OutputsObject *self, void *closure)
 static PyObject *
 Outputs_get_elev(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Pvwattsv5_Outputs_elev_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Pvwattsv5_Outputs_elev_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -601,25 +601,25 @@ Outputs_get_gh(OutputsObject *self, void *closure)
 static PyObject *
 Outputs_get_inverter_efficiency(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Pvwattsv5_Outputs_inverter_efficiency_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Pvwattsv5_Outputs_inverter_efficiency_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_inverter_model(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Pvwattsv5_Outputs_inverter_model_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Pvwattsv5_Outputs_inverter_model_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_kwh_per_kw(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Pvwattsv5_Outputs_kwh_per_kw_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Pvwattsv5_Outputs_kwh_per_kw_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_lat(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Pvwattsv5_Outputs_lat_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Pvwattsv5_Outputs_lat_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -631,7 +631,7 @@ Outputs_get_location(OutputsObject *self, void *closure)
 static PyObject *
 Outputs_get_lon(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Pvwattsv5_Outputs_lon_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Pvwattsv5_Outputs_lon_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -661,7 +661,7 @@ Outputs_get_shad_beam_factor(OutputsObject *self, void *closure)
 static PyObject *
 Outputs_get_solrad_annual(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Pvwattsv5_Outputs_solrad_annual_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Pvwattsv5_Outputs_solrad_annual_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -685,7 +685,7 @@ Outputs_get_sunup(OutputsObject *self, void *closure)
 static PyObject *
 Outputs_get_system_use_lifetime_output(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Pvwattsv5_Outputs_system_use_lifetime_output_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Pvwattsv5_Outputs_system_use_lifetime_output_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -709,13 +709,13 @@ Outputs_get_tpoa(OutputsObject *self, void *closure)
 static PyObject *
 Outputs_get_ts_shift_hours(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Pvwattsv5_Outputs_ts_shift_hours_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Pvwattsv5_Outputs_ts_shift_hours_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_tz(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_Pvwattsv5_Outputs_tz_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_Pvwattsv5_Outputs_tz_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -726,106 +726,106 @@ Outputs_get_wspd(OutputsObject *self, void *closure)
 
 static PyGetSetDef Outputs_getset[] = {
 {"ac", (getter)Outputs_get_ac,(setter)0,
-	"AC inverter power [W], array.",
+	PyDoc_STR("*sequence*: AC inverter power [W]"),
  	NULL},
 {"ac_annual", (getter)Outputs_get_ac_annual,(setter)0,
-	"Annual AC system output [kWh], number.",
+	PyDoc_STR("*float*: Annual AC system output [kWh]"),
  	NULL},
 {"ac_monthly", (getter)Outputs_get_ac_monthly,(setter)0,
-	"AC system output [kWh], array.",
+	PyDoc_STR("*sequence*: AC system output [kWh]"),
  	NULL},
 {"annual_energy", (getter)Outputs_get_annual_energy,(setter)0,
-	"Annual energy [kWh], number.",
+	PyDoc_STR("*float*: Annual energy [kWh]"),
  	NULL},
 {"aoi", (getter)Outputs_get_aoi,(setter)0,
-	"Angle of incidence [deg], array.",
+	PyDoc_STR("*sequence*: Angle of incidence [deg]"),
  	NULL},
 {"capacity_factor", (getter)Outputs_get_capacity_factor,(setter)0,
-	"Capacity factor [%], number.",
+	PyDoc_STR("*float*: Capacity factor [%]"),
  	NULL},
 {"city", (getter)Outputs_get_city,(setter)0,
-	"City, string.",
+	PyDoc_STR("*str*: City"),
  	NULL},
 {"dc", (getter)Outputs_get_dc,(setter)0,
-	"DC array power [W], array.",
+	PyDoc_STR("*sequence*: DC array power [W]"),
  	NULL},
 {"dc_monthly", (getter)Outputs_get_dc_monthly,(setter)0,
-	"DC array output [kWh], array.",
+	PyDoc_STR("*sequence*: DC array output [kWh]"),
  	NULL},
 {"df", (getter)Outputs_get_df,(setter)0,
-	"Diffuse irradiance [W/m2], array.",
+	PyDoc_STR("*sequence*: Diffuse irradiance [W/m2]"),
  	NULL},
 {"dn", (getter)Outputs_get_dn,(setter)0,
-	"Beam irradiance [W/m2], array.",
+	PyDoc_STR("*sequence*: Beam irradiance [W/m2]"),
  	NULL},
 {"elev", (getter)Outputs_get_elev,(setter)0,
-	"Site elevation [m], number.",
+	PyDoc_STR("*float*: Site elevation [m]"),
  	NULL},
 {"gh", (getter)Outputs_get_gh,(setter)0,
-	"Global horizontal irradiance [W/m2], array.",
+	PyDoc_STR("*sequence*: Global horizontal irradiance [W/m2]"),
  	NULL},
 {"inverter_efficiency", (getter)Outputs_get_inverter_efficiency,(setter)0,
-	"Inverter efficiency at rated power [%], number.",
+	PyDoc_STR("*float*: Inverter efficiency at rated power [%]"),
  	NULL},
 {"inverter_model", (getter)Outputs_get_inverter_model,(setter)0,
-	"Inverter model specifier, number.",
+	PyDoc_STR("*float*: Inverter model specifier"),
  	NULL},
 {"kwh_per_kw", (getter)Outputs_get_kwh_per_kw,(setter)0,
-	"First year kWh/kW, number.",
+	PyDoc_STR("*float*: First year kWh/kW"),
  	NULL},
 {"lat", (getter)Outputs_get_lat,(setter)0,
-	"Latitude [deg], number.",
+	PyDoc_STR("*float*: Latitude [deg]"),
  	NULL},
 {"location", (getter)Outputs_get_location,(setter)0,
-	"Location ID, string.",
+	PyDoc_STR("*str*: Location ID"),
  	NULL},
 {"lon", (getter)Outputs_get_lon,(setter)0,
-	"Longitude [deg], number.",
+	PyDoc_STR("*float*: Longitude [deg]"),
  	NULL},
 {"monthly_energy", (getter)Outputs_get_monthly_energy,(setter)0,
-	"Monthly energy [kWh], array.",
+	PyDoc_STR("*sequence*: Monthly energy [kWh]"),
  	NULL},
 {"poa", (getter)Outputs_get_poa,(setter)0,
-	"Plane of array irradiance [W/m2], array.",
+	PyDoc_STR("*sequence*: Plane of array irradiance [W/m2]"),
  	NULL},
 {"poa_monthly", (getter)Outputs_get_poa_monthly,(setter)0,
-	"Plane of array irradiance [kWh/m2], array.",
+	PyDoc_STR("*sequence*: Plane of array irradiance [kWh/m2]"),
  	NULL},
 {"shad_beam_factor", (getter)Outputs_get_shad_beam_factor,(setter)0,
-	"Shading factor for beam radiation, array.",
+	PyDoc_STR("*sequence*: Shading factor for beam radiation"),
  	NULL},
 {"solrad_annual", (getter)Outputs_get_solrad_annual,(setter)0,
-	"Daily average solar irradiance [kWh/m2/day], number.",
+	PyDoc_STR("*float*: Daily average solar irradiance [kWh/m2/day]"),
  	NULL},
 {"solrad_monthly", (getter)Outputs_get_solrad_monthly,(setter)0,
-	"Daily average solar irradiance [kWh/m2/day], array.",
+	PyDoc_STR("*sequence*: Daily average solar irradiance [kWh/m2/day]"),
  	NULL},
 {"state", (getter)Outputs_get_state,(setter)0,
-	"State, string.",
+	PyDoc_STR("*str*: State"),
  	NULL},
 {"sunup", (getter)Outputs_get_sunup,(setter)0,
-	"Sun up over horizon [0/1], array.",
+	PyDoc_STR("*sequence*: Sun up over horizon [0/1]"),
  	NULL},
 {"system_use_lifetime_output", (getter)Outputs_get_system_use_lifetime_output,(setter)0,
-	"Use lifetime output [0/1], number.",
+	PyDoc_STR("*float*: Use lifetime output [0/1]"),
  	NULL},
 {"tamb", (getter)Outputs_get_tamb,(setter)0,
-	"Ambient temperature [C], array.",
+	PyDoc_STR("*sequence*: Ambient temperature [C]"),
  	NULL},
 {"tcell", (getter)Outputs_get_tcell,(setter)0,
-	"Module temperature [C], array.",
+	PyDoc_STR("*sequence*: Module temperature [C]"),
  	NULL},
 {"tpoa", (getter)Outputs_get_tpoa,(setter)0,
-	"Transmitted plane of array irradiance [W/m2], array.",
+	PyDoc_STR("*sequence*: Transmitted plane of array irradiance [W/m2]"),
  	NULL},
 {"ts_shift_hours", (getter)Outputs_get_ts_shift_hours,(setter)0,
-	"Time offset for interpreting time series outputs [hours], number.",
+	PyDoc_STR("*float*: Time offset for interpreting time series outputs [hours]"),
  	NULL},
 {"tz", (getter)Outputs_get_tz,(setter)0,
-	"Time zone [hr], number.",
+	PyDoc_STR("*float*: Time zone [hr]"),
  	NULL},
 {"wspd", (getter)Outputs_get_wspd,(setter)0,
-	"Wind speed [m/s], array.",
+	PyDoc_STR("*sequence*: Wind speed [m/s]"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -858,7 +858,7 @@ static PyTypeObject Outputs_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		Outputs_methods,         /*tp_methods*/
@@ -868,7 +868,7 @@ static PyTypeObject Outputs_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -983,9 +983,9 @@ static PyMethodDef Pvwattsv5_methods[] = {
 		{"execute",            (PyCFunction)Pvwattsv5_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
 		{"assign",            (PyCFunction)Pvwattsv5_assign,  METH_VARARGS,
-				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs")},
+				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Location and Resource': { var: val, ...}, ...}``")},
 		{"export",            (PyCFunction)Pvwattsv5_export,  METH_VARARGS,
-				PyDoc_STR("assign() -> None\n Export attributes into dictionary")},
+				PyDoc_STR("export() -> dict\n Export attributes into nested dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -1025,11 +1025,11 @@ static PyTypeObject Pvwattsv5_Type = {
 		0,                          /*tp_setattro*/
 		0,                          /*tp_as_buffer*/
 		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
-		"see html for help",        /*tp_doc*/
+		"This class contains all the variable information for running a simulation. Variables are grouped together in the subclasses as properties. If property assignments are the wrong type, an error is thrown.",        /*tp_doc*/
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		Pvwattsv5_methods,      /*tp_methods*/
@@ -1039,7 +1039,7 @@ static PyTypeObject Pvwattsv5_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,                          /*tp_new*/
@@ -1102,12 +1102,12 @@ Pvwattsv5_default(PyObject *self, PyObject *args)
 
 static PyMethodDef Pvwattsv5Module_methods[] = {
 		{"new",             Pvwattsv5_new,         METH_VARARGS,
-				PyDoc_STR("new() -> new Pvwattsv5 object")},
+				PyDoc_STR("new() -> Pvwattsv5")},
 		{"default",             Pvwattsv5_default,         METH_VARARGS,
-				PyDoc_STR("default(financial) -> new Pvwattsv5 object with financial model-specific default attributes\n"
-				"Options: PVWattsAllEquityPartnershipFlip\nPVWattsCommercial\nPVWattsCommercialPPA\nPVWattsHostDeveloper\nPVWattsIndependentPowerProducer\nPVWattsLCOECalculator\nPVWattsLeveragedPartnershipFlip\nPVWattsNone\nPVWattsResidential\nPVWattsSaleLeaseback\nPVWattsSingleOwner\nPVWattsThirdParty")},
+				PyDoc_STR("default(config) -> Pvwattsv5\n\nUse financial model-specific default attributes\n"
+				"config options:\n\n- \"PVWattsAllEquityPartnershipFlip\"\n- \"PVWattsCommercial\"\n- \"PVWattsCommercialPPA\"\n- \"PVWattsHostDeveloper\"\n- \"PVWattsIndependentPowerProducer\"\n- \"PVWattsLCOECalculator\"\n- \"PVWattsLeveragedPartnershipFlip\"\n- \"PVWattsNone\"\n- \"PVWattsResidential\"\n- \"PVWattsSaleLeaseback\"\n- \"PVWattsSingleOwner\"\n- \"PVWattsThirdParty\"")},
 		{"wrap",             Pvwattsv5_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> new Pvwattsv5 object around existing PySSC data, taking over memory ownership")},
+				PyDoc_STR("wrap(ssc_data_t) -> Pvwattsv5\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{NULL,              NULL}           /* sentinel */
 };
 

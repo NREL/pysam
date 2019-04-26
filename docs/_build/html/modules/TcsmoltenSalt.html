@@ -1,0 +1,167 @@
+
+
+<!doctype html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>TcsmoltenSalt Module &#8212; PySAM 1.2 documentation</title>
+    <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="nav-item nav-item-0"><a href="../index.html">PySAM 1.2 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">TcsmoltenSalt Module</a><ul>
+<li><a class="reference internal" href="#creating-an-instance">Creating an Instance</a></li>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+<li><a class="reference internal" href="#locationandresource-group">LocationAndResource Group</a></li>
+<li><a class="reference internal" href="#timeofdeliveryfactors-group">TimeOfDeliveryFactors Group</a></li>
+<li><a class="reference internal" href="#heliostatfield-group">HeliostatField Group</a></li>
+<li><a class="reference internal" href="#systemdesign-group">SystemDesign Group</a></li>
+<li><a class="reference internal" href="#towerandreceiver-group">TowerAndReceiver Group</a></li>
+<li><a class="reference internal" href="#systemcosts-group">SystemCosts Group</a></li>
+<li><a class="reference internal" href="#financialparameters-group">FinancialParameters Group</a></li>
+<li><a class="reference internal" href="#thermalstorage-group">ThermalStorage Group</a></li>
+<li><a class="reference internal" href="#radcool-group">RADCOOL Group</a></li>
+<li><a class="reference internal" href="#powercycle-group">PowerCycle Group</a></li>
+<li><a class="reference internal" href="#rankinecycle-group">RankineCycle Group</a></li>
+<li><a class="reference internal" href="#systemcontrol-group">SystemControl Group</a></li>
+<li><a class="reference internal" href="#userdefinedpowercycle-group">UserDefinedPowerCycle Group</a></li>
+<li><a class="reference internal" href="#sco2cycle-group">SCO2Cycle Group</a></li>
+<li><a class="reference internal" href="#adjustmentfactors-group">AdjustmentFactors Group</a></li>
+<li><a class="reference internal" href="#outputs-group">Outputs Group</a></li>
+</ul>
+</li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/modules/TcsmoltenSalt.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="tcsmoltensalt-module">
+<span id="tcsmoltensalt"></span><h1>TcsmoltenSalt Module<a class="headerlink" href="#tcsmoltensalt-module" title="Permalink to this headline">¶</a></h1>
+<p>Wrapper for SAM Simulation Core model: <a class="reference external" href="https://github.com/NREL/ssc/blob/develop/ssc/cmod_tcsmolten_salt.cpp">cmod_tcsmolten_salt.cpp</a></p>
+<div class="section" id="creating-an-instance">
+<h2>Creating an Instance<a class="headerlink" href="#creating-an-instance" title="Permalink to this headline">¶</a></h2>
+<p>There are three methods to create a new instance of a PySAM module. Using <code class="docutils literal notranslate"><span class="pre">default</span></code> populates the newclass’ attributes with default values specific to a <code class="docutils literal notranslate"><span class="pre">config</span></code>. Each technology-financialconfiguration corresponds to a SAM GUI configuration. Using <code class="docutils literal notranslate"><span class="pre">new</span></code> creates an instance with empty attributes. The <code class="docutils literal notranslate"><span class="pre">wrap</span></code> function allows compatibility with PySSC, for details, refer to <span class="xref std std-doc">PySSC</span>.</p>
+<p><strong>TcsmoltenSalt model description</strong></p>
+</div>
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="locationandresource-group">
+<h2>LocationAndResource Group<a class="headerlink" href="#locationandresource-group" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="timeofdeliveryfactors-group">
+<h2>TimeOfDeliveryFactors Group<a class="headerlink" href="#timeofdeliveryfactors-group" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="heliostatfield-group">
+<h2>HeliostatField Group<a class="headerlink" href="#heliostatfield-group" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="systemdesign-group">
+<h2>SystemDesign Group<a class="headerlink" href="#systemdesign-group" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="towerandreceiver-group">
+<h2>TowerAndReceiver Group<a class="headerlink" href="#towerandreceiver-group" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="systemcosts-group">
+<h2>SystemCosts Group<a class="headerlink" href="#systemcosts-group" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="financialparameters-group">
+<h2>FinancialParameters Group<a class="headerlink" href="#financialparameters-group" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="thermalstorage-group">
+<h2>ThermalStorage Group<a class="headerlink" href="#thermalstorage-group" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="radcool-group">
+<h2>RADCOOL Group<a class="headerlink" href="#radcool-group" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="powercycle-group">
+<h2>PowerCycle Group<a class="headerlink" href="#powercycle-group" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="rankinecycle-group">
+<h2>RankineCycle Group<a class="headerlink" href="#rankinecycle-group" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="systemcontrol-group">
+<h2>SystemControl Group<a class="headerlink" href="#systemcontrol-group" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="userdefinedpowercycle-group">
+<h2>UserDefinedPowerCycle Group<a class="headerlink" href="#userdefinedpowercycle-group" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="sco2cycle-group">
+<h2>SCO2Cycle Group<a class="headerlink" href="#sco2cycle-group" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="adjustmentfactors-group">
+<h2>AdjustmentFactors Group<a class="headerlink" href="#adjustmentfactors-group" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="outputs-group">
+<h2>Outputs Group<a class="headerlink" href="#outputs-group" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="nav-item nav-item-0"><a href="../index.html">PySAM 1.2 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, NREL.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
+    </div>
+  </body>
+</html>

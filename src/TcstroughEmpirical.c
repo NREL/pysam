@@ -58,22 +58,22 @@ Weather_export(WeatherObject *self, PyObject *args)
 
 static PyMethodDef Weather_methods[] = {
 		{"assign",            (PyCFunction)Weather_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Weather_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Weather_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 static PyObject *
 Weather_get_azimuth(WeatherObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Weather_azimuth_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Weather_azimuth_nget, self->data_ptr);
 }
 
 static int
 Weather_set_azimuth(WeatherObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Weather_azimuth_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Weather_azimuth_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -91,39 +91,39 @@ Weather_set_file_name(WeatherObject *self, PyObject *value, void *closure)
 static PyObject *
 Weather_get_tilt(WeatherObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Weather_tilt_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Weather_tilt_nget, self->data_ptr);
 }
 
 static int
 Weather_set_tilt(WeatherObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Weather_tilt_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Weather_tilt_nset, self->data_ptr);
 }
 
 static PyObject *
 Weather_get_track_mode(WeatherObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Weather_track_mode_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Weather_track_mode_nget, self->data_ptr);
 }
 
 static int
 Weather_set_track_mode(WeatherObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Weather_track_mode_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Weather_track_mode_nset, self->data_ptr);
 }
 
 static PyGetSetDef Weather_getset[] = {
 {"azimuth", (getter)Weather_get_azimuth,(setter)Weather_set_azimuth,
-	"Azimuth angle of surface/axis, number.\n Required.",
+	PyDoc_STR("*float*: Azimuth angle of surface/axis\n\n*Required*: True"),
  	NULL},
 {"file_name", (getter)Weather_get_file_name,(setter)Weather_set_file_name,
-	"local weather file path, string.\n Constraints: LOCAL_FILE; Required.",
+	PyDoc_STR("*str*: local weather file path\n\n*Constraints*: LOCAL_FILE\n\n*Required*: True"),
  	NULL},
 {"tilt", (getter)Weather_get_tilt,(setter)Weather_set_tilt,
-	"Tilt angle of surface/axis, number.\n Required.",
+	PyDoc_STR("*float*: Tilt angle of surface/axis\n\n*Required*: True"),
  	NULL},
 {"track_mode", (getter)Weather_get_track_mode,(setter)Weather_set_track_mode,
-	"Tracking mode, number.\n Required.",
+	PyDoc_STR("*float*: Tracking mode\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -156,7 +156,7 @@ static PyTypeObject Weather_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		Weather_methods,         /*tp_methods*/
@@ -166,7 +166,7 @@ static PyTypeObject Weather_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -226,27 +226,27 @@ Trough_export(TroughObject *self, PyObject *args)
 
 static PyMethodDef Trough_methods[] = {
 		{"assign",            (PyCFunction)Trough_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Trough_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Trough_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 static PyObject *
 Trough_get_system_capacity(TroughObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Trough_system_capacity_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Trough_system_capacity_nget, self->data_ptr);
 }
 
 static int
 Trough_set_system_capacity(TroughObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Trough_system_capacity_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Trough_system_capacity_nset, self->data_ptr);
 }
 
 static PyGetSetDef Trough_getset[] = {
 {"system_capacity", (getter)Trough_get_system_capacity,(setter)Trough_set_system_capacity,
-	"Nameplate capacity [kW], number.\n Required.",
+	PyDoc_STR("*float*: Nameplate capacity [kW]\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -279,7 +279,7 @@ static PyTypeObject Trough_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		Trough_methods,         /*tp_methods*/
@@ -289,7 +289,7 @@ static PyTypeObject Trough_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -349,9 +349,9 @@ TouTranslator_export(TouTranslatorObject *self, PyObject *args)
 
 static PyMethodDef TouTranslator_methods[] = {
 		{"assign",            (PyCFunction)TouTranslator_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``TouTranslator_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)TouTranslator_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -381,10 +381,10 @@ TouTranslator_set_weekend_schedule(TouTranslatorObject *self, PyObject *value, v
 
 static PyGetSetDef TouTranslator_getset[] = {
 {"weekday_schedule", (getter)TouTranslator_get_weekday_schedule,(setter)TouTranslator_set_weekday_schedule,
-	"12x24 Time of Use Values for week days, matrix.\n Required.",
+	PyDoc_STR("*sequence[sequence]*: 12x24 Time of Use Values for week days\n\n*Required*: True"),
  	NULL},
 {"weekend_schedule", (getter)TouTranslator_get_weekend_schedule,(setter)TouTranslator_set_weekend_schedule,
-	"12x24 Time of Use Values for week end days, matrix.\n Required.",
+	PyDoc_STR("*sequence[sequence]*: 12x24 Time of Use Values for week end days\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -417,7 +417,7 @@ static PyTypeObject TouTranslator_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		TouTranslator_methods,         /*tp_methods*/
@@ -427,7 +427,7 @@ static PyTypeObject TouTranslator_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -487,282 +487,282 @@ Solarfield_export(SolarfieldObject *self, PyObject *args)
 
 static PyMethodDef Solarfield_methods[] = {
 		{"assign",            (PyCFunction)Solarfield_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Solarfield_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Solarfield_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 static PyObject *
 Solarfield_get_DepAngle(SolarfieldObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Solarfield_DepAngle_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Solarfield_DepAngle_nget, self->data_ptr);
 }
 
 static int
 Solarfield_set_DepAngle(SolarfieldObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Solarfield_DepAngle_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Solarfield_DepAngle_nset, self->data_ptr);
 }
 
 static PyObject *
 Solarfield_get_Distance_SCA(SolarfieldObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Solarfield_Distance_SCA_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Solarfield_Distance_SCA_nget, self->data_ptr);
 }
 
 static int
 Solarfield_set_Distance_SCA(SolarfieldObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Solarfield_Distance_SCA_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Solarfield_Distance_SCA_nset, self->data_ptr);
 }
 
 static PyObject *
 Solarfield_get_HTFFluid(SolarfieldObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Solarfield_HTFFluid_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Solarfield_HTFFluid_nget, self->data_ptr);
 }
 
 static int
 Solarfield_set_HTFFluid(SolarfieldObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Solarfield_HTFFluid_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Solarfield_HTFFluid_nset, self->data_ptr);
 }
 
 static PyObject *
 Solarfield_get_HtfGalArea(SolarfieldObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Solarfield_HtfGalArea_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Solarfield_HtfGalArea_nget, self->data_ptr);
 }
 
 static int
 Solarfield_set_HtfGalArea(SolarfieldObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Solarfield_HtfGalArea_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Solarfield_HtfGalArea_nset, self->data_ptr);
 }
 
 static PyObject *
 Solarfield_get_MinHtfTemp(SolarfieldObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Solarfield_MinHtfTemp_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Solarfield_MinHtfTemp_nget, self->data_ptr);
 }
 
 static int
 Solarfield_set_MinHtfTemp(SolarfieldObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Solarfield_MinHtfTemp_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Solarfield_MinHtfTemp_nset, self->data_ptr);
 }
 
 static PyObject *
 Solarfield_get_NumScas(SolarfieldObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Solarfield_NumScas_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Solarfield_NumScas_nget, self->data_ptr);
 }
 
 static int
 Solarfield_set_NumScas(SolarfieldObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Solarfield_NumScas_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Solarfield_NumScas_nset, self->data_ptr);
 }
 
 static PyObject *
 Solarfield_get_Row_Distance(SolarfieldObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Solarfield_Row_Distance_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Solarfield_Row_Distance_nget, self->data_ptr);
 }
 
 static int
 Solarfield_set_Row_Distance(SolarfieldObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Solarfield_Row_Distance_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Solarfield_Row_Distance_nset, self->data_ptr);
 }
 
 static PyObject *
 Solarfield_get_SFTempInit(SolarfieldObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Solarfield_SFTempInit_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Solarfield_SFTempInit_nget, self->data_ptr);
 }
 
 static int
 Solarfield_set_SFTempInit(SolarfieldObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Solarfield_SFTempInit_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Solarfield_SFTempInit_nset, self->data_ptr);
 }
 
 static PyObject *
 Solarfield_get_SfInTempD(SolarfieldObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Solarfield_SfInTempD_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Solarfield_SfInTempD_nget, self->data_ptr);
 }
 
 static int
 Solarfield_set_SfInTempD(SolarfieldObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Solarfield_SfInTempD_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Solarfield_SfInTempD_nset, self->data_ptr);
 }
 
 static PyObject *
 Solarfield_get_SfOutTempD(SolarfieldObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Solarfield_SfOutTempD_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Solarfield_SfOutTempD_nget, self->data_ptr);
 }
 
 static int
 Solarfield_set_SfOutTempD(SolarfieldObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Solarfield_SfOutTempD_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Solarfield_SfOutTempD_nset, self->data_ptr);
 }
 
 static PyObject *
 Solarfield_get_SfPipeHl1(SolarfieldObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Solarfield_SfPipeHl1_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Solarfield_SfPipeHl1_nget, self->data_ptr);
 }
 
 static int
 Solarfield_set_SfPipeHl1(SolarfieldObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Solarfield_SfPipeHl1_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Solarfield_SfPipeHl1_nset, self->data_ptr);
 }
 
 static PyObject *
 Solarfield_get_SfPipeHl2(SolarfieldObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Solarfield_SfPipeHl2_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Solarfield_SfPipeHl2_nget, self->data_ptr);
 }
 
 static int
 Solarfield_set_SfPipeHl2(SolarfieldObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Solarfield_SfPipeHl2_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Solarfield_SfPipeHl2_nset, self->data_ptr);
 }
 
 static PyObject *
 Solarfield_get_SfPipeHl3(SolarfieldObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Solarfield_SfPipeHl3_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Solarfield_SfPipeHl3_nget, self->data_ptr);
 }
 
 static int
 Solarfield_set_SfPipeHl3(SolarfieldObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Solarfield_SfPipeHl3_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Solarfield_SfPipeHl3_nset, self->data_ptr);
 }
 
 static PyObject *
 Solarfield_get_SfPipeHl300(SolarfieldObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Solarfield_SfPipeHl300_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Solarfield_SfPipeHl300_nget, self->data_ptr);
 }
 
 static int
 Solarfield_set_SfPipeHl300(SolarfieldObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Solarfield_SfPipeHl300_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Solarfield_SfPipeHl300_nset, self->data_ptr);
 }
 
 static PyObject *
 Solarfield_get_Solar_Field_Area(SolarfieldObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Solarfield_Solar_Field_Area_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Solarfield_Solar_Field_Area_nget, self->data_ptr);
 }
 
 static int
 Solarfield_set_Solar_Field_Area(SolarfieldObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Solarfield_Solar_Field_Area_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Solarfield_Solar_Field_Area_nset, self->data_ptr);
 }
 
 static PyObject *
 Solarfield_get_Solar_Field_Mult(SolarfieldObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Solarfield_Solar_Field_Mult_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Solarfield_Solar_Field_Mult_nget, self->data_ptr);
 }
 
 static int
 Solarfield_set_Solar_Field_Mult(SolarfieldObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Solarfield_Solar_Field_Mult_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Solarfield_Solar_Field_Mult_nset, self->data_ptr);
 }
 
 static PyObject *
 Solarfield_get_Stow_Angle(SolarfieldObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Solarfield_Stow_Angle_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Solarfield_Stow_Angle_nget, self->data_ptr);
 }
 
 static int
 Solarfield_set_Stow_Angle(SolarfieldObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Solarfield_Stow_Angle_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Solarfield_Stow_Angle_nset, self->data_ptr);
 }
 
 static PyObject *
 Solarfield_get_i_SfTi(SolarfieldObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Solarfield_i_SfTi_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Solarfield_i_SfTi_nget, self->data_ptr);
 }
 
 static int
 Solarfield_set_i_SfTi(SolarfieldObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Solarfield_i_SfTi_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Solarfield_i_SfTi_nset, self->data_ptr);
 }
 
 static PyGetSetDef Solarfield_getset[] = {
 {"DepAngle", (getter)Solarfield_get_DepAngle,(setter)Solarfield_set_DepAngle,
-	"Deployment Angle [deg], number.\n Required.",
+	PyDoc_STR("*float*: Deployment Angle [deg]\n\n*Required*: True"),
  	NULL},
 {"Distance_SCA", (getter)Solarfield_get_Distance_SCA,(setter)Solarfield_set_Distance_SCA,
-	"Distance between SCAs in Row [m], number.\n Required.",
+	PyDoc_STR("*float*: Distance between SCAs in Row [m]\n\n*Required*: True"),
  	NULL},
 {"HTFFluid", (getter)Solarfield_get_HTFFluid,(setter)Solarfield_set_HTFFluid,
-	"Type of Heat Transfer Fluid used, number.\n Constraints: INTEGER; Required.",
+	PyDoc_STR("*float*: Type of Heat Transfer Fluid used\n\n*Constraints*: INTEGER\n\n*Required*: True"),
  	NULL},
 {"HtfGalArea", (getter)Solarfield_get_HtfGalArea,(setter)Solarfield_set_HtfGalArea,
-	"HTF Fluids in Gallons per Field Area [gal/m2], number.\n Required.",
+	PyDoc_STR("*float*: HTF Fluids in Gallons per Field Area [gal/m2]\n\n*Required*: True"),
  	NULL},
 {"MinHtfTemp", (getter)Solarfield_get_MinHtfTemp,(setter)Solarfield_set_MinHtfTemp,
-	"Minimum Heat Transfer Fluid Temperature [C], number.\n Required.",
+	PyDoc_STR("*float*: Minimum Heat Transfer Fluid Temperature [C]\n\n*Required*: True"),
  	NULL},
 {"NumScas", (getter)Solarfield_get_NumScas,(setter)Solarfield_set_NumScas,
-	"Number of SCAs per Row, number.\n Required.",
+	PyDoc_STR("*float*: Number of SCAs per Row\n\n*Required*: True"),
  	NULL},
 {"Row_Distance", (getter)Solarfield_get_Row_Distance,(setter)Solarfield_set_Row_Distance,
-	"Distance between Rows of SCAs [m], number.\n Required.",
+	PyDoc_STR("*float*: Distance between Rows of SCAs [m]\n\n*Required*: True"),
  	NULL},
 {"SFTempInit", (getter)Solarfield_get_SFTempInit,(setter)Solarfield_set_SFTempInit,
-	"Solar Field Initial Temperature [C], number.\n Required.",
+	PyDoc_STR("*float*: Solar Field Initial Temperature [C]\n\n*Required*: True"),
  	NULL},
 {"SfInTempD", (getter)Solarfield_get_SfInTempD,(setter)Solarfield_set_SfInTempD,
-	"Solar Field Design Inlet Temperature [C], number.\n Required.",
+	PyDoc_STR("*float*: Solar Field Design Inlet Temperature [C]\n\n*Required*: True"),
  	NULL},
 {"SfOutTempD", (getter)Solarfield_get_SfOutTempD,(setter)Solarfield_set_SfOutTempD,
-	"Solar Field Design Outlet Temperature [C], number.\n Required.",
+	PyDoc_STR("*float*: Solar Field Design Outlet Temperature [C]\n\n*Required*: True"),
  	NULL},
 {"SfPipeHl1", (getter)Solarfield_get_SfPipeHl1,(setter)Solarfield_set_SfPipeHl1,
-	"Solar field piping heat loss at reduced temp. - linear term [C^(-1)], number.\n Required.",
+	PyDoc_STR("*float*: Solar field piping heat loss at reduced temp. - linear term [C^(-1)]\n\n*Required*: True"),
  	NULL},
 {"SfPipeHl2", (getter)Solarfield_get_SfPipeHl2,(setter)Solarfield_set_SfPipeHl2,
-	"Solar field piping heat loss at reduced temp. - quadratic term [C^(-2)], number.\n Required.",
+	PyDoc_STR("*float*: Solar field piping heat loss at reduced temp. - quadratic term [C^(-2)]\n\n*Required*: True"),
  	NULL},
 {"SfPipeHl3", (getter)Solarfield_get_SfPipeHl3,(setter)Solarfield_set_SfPipeHl3,
-	"Solar field piping heat loss at reduced temp. - cubic term [C^(-3)], number.\n Required.",
+	PyDoc_STR("*float*: Solar field piping heat loss at reduced temp. - cubic term [C^(-3)]\n\n*Required*: True"),
  	NULL},
 {"SfPipeHl300", (getter)Solarfield_get_SfPipeHl300,(setter)Solarfield_set_SfPipeHl300,
-	"Solar field piping heat loss at design [W/m2], number.\n Required.",
+	PyDoc_STR("*float*: Solar field piping heat loss at design [W/m2]\n\n*Required*: True"),
  	NULL},
 {"Solar_Field_Area", (getter)Solarfield_get_Solar_Field_Area,(setter)Solarfield_set_Solar_Field_Area,
-	"Solar Field Area [m2], number.\n Required.",
+	PyDoc_STR("*float*: Solar Field Area [m2]\n\n*Required*: True"),
  	NULL},
 {"Solar_Field_Mult", (getter)Solarfield_get_Solar_Field_Mult,(setter)Solarfield_set_Solar_Field_Mult,
-	"Solar Field Multiple, number.\n Required.",
+	PyDoc_STR("*float*: Solar Field Multiple\n\n*Required*: True"),
  	NULL},
 {"Stow_Angle", (getter)Solarfield_get_Stow_Angle,(setter)Solarfield_set_Stow_Angle,
-	"Night-Time Trough Stow Angle [deg], number.\n Required.",
+	PyDoc_STR("*float*: Night-Time Trough Stow Angle [deg]\n\n*Required*: True"),
  	NULL},
 {"i_SfTi", (getter)Solarfield_get_i_SfTi,(setter)Solarfield_set_i_SfTi,
-	"Solar Field HTF inlet Temperature (if -999, calculated) [C], number.\n Required.",
+	PyDoc_STR("*float*: Solar Field HTF inlet Temperature (if -999, calculated) [C]\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -795,7 +795,7 @@ static PyTypeObject Solarfield_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		Solarfield_methods,         /*tp_methods*/
@@ -805,7 +805,7 @@ static PyTypeObject Solarfield_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -865,192 +865,192 @@ Sca_export(ScaObject *self, PyObject *args)
 
 static PyMethodDef Sca_methods[] = {
 		{"assign",            (PyCFunction)Sca_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Sca_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Sca_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 static PyObject *
 Sca_get_Ave_Focal_Length(ScaObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Sca_Ave_Focal_Length_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Sca_Ave_Focal_Length_nget, self->data_ptr);
 }
 
 static int
 Sca_set_Ave_Focal_Length(ScaObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Sca_Ave_Focal_Length_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Sca_Ave_Focal_Length_nset, self->data_ptr);
 }
 
 static PyObject *
 Sca_get_ConcFac(ScaObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Sca_ConcFac_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Sca_ConcFac_nget, self->data_ptr);
 }
 
 static int
 Sca_set_ConcFac(ScaObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Sca_ConcFac_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Sca_ConcFac_nset, self->data_ptr);
 }
 
 static PyObject *
 Sca_get_GeoAcc(ScaObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Sca_GeoAcc_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Sca_GeoAcc_nget, self->data_ptr);
 }
 
 static int
 Sca_set_GeoAcc(ScaObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Sca_GeoAcc_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Sca_GeoAcc_nset, self->data_ptr);
 }
 
 static PyObject *
 Sca_get_IamF0(ScaObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Sca_IamF0_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Sca_IamF0_nget, self->data_ptr);
 }
 
 static int
 Sca_set_IamF0(ScaObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Sca_IamF0_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Sca_IamF0_nset, self->data_ptr);
 }
 
 static PyObject *
 Sca_get_IamF1(ScaObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Sca_IamF1_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Sca_IamF1_nget, self->data_ptr);
 }
 
 static int
 Sca_set_IamF1(ScaObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Sca_IamF1_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Sca_IamF1_nset, self->data_ptr);
 }
 
 static PyObject *
 Sca_get_IamF2(ScaObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Sca_IamF2_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Sca_IamF2_nget, self->data_ptr);
 }
 
 static int
 Sca_set_IamF2(ScaObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Sca_IamF2_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Sca_IamF2_nset, self->data_ptr);
 }
 
 static PyObject *
 Sca_get_MirCln(ScaObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Sca_MirCln_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Sca_MirCln_nget, self->data_ptr);
 }
 
 static int
 Sca_set_MirCln(ScaObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Sca_MirCln_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Sca_MirCln_nset, self->data_ptr);
 }
 
 static PyObject *
 Sca_get_MirRef(ScaObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Sca_MirRef_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Sca_MirRef_nget, self->data_ptr);
 }
 
 static int
 Sca_set_MirRef(ScaObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Sca_MirRef_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Sca_MirRef_nset, self->data_ptr);
 }
 
 static PyObject *
 Sca_get_SCA_aper(ScaObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Sca_SCA_aper_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Sca_SCA_aper_nget, self->data_ptr);
 }
 
 static int
 Sca_set_SCA_aper(ScaObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Sca_SCA_aper_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Sca_SCA_aper_nset, self->data_ptr);
 }
 
 static PyObject *
 Sca_get_ScaLen(ScaObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Sca_ScaLen_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Sca_ScaLen_nget, self->data_ptr);
 }
 
 static int
 Sca_set_ScaLen(ScaObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Sca_ScaLen_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Sca_ScaLen_nset, self->data_ptr);
 }
 
 static PyObject *
 Sca_get_SfAvail(ScaObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Sca_SfAvail_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Sca_SfAvail_nget, self->data_ptr);
 }
 
 static int
 Sca_set_SfAvail(ScaObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Sca_SfAvail_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Sca_SfAvail_nset, self->data_ptr);
 }
 
 static PyObject *
 Sca_get_TrkTwstErr(ScaObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Sca_TrkTwstErr_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Sca_TrkTwstErr_nget, self->data_ptr);
 }
 
 static int
 Sca_set_TrkTwstErr(ScaObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Sca_TrkTwstErr_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Sca_TrkTwstErr_nset, self->data_ptr);
 }
 
 static PyGetSetDef Sca_getset[] = {
 {"Ave_Focal_Length", (getter)Sca_get_Ave_Focal_Length,(setter)Sca_set_Ave_Focal_Length,
-	"Label, number.\n Required.",
+	PyDoc_STR("*float*: Label\n\n*Required*: True"),
  	NULL},
 {"ConcFac", (getter)Sca_get_ConcFac,(setter)Sca_set_ConcFac,
-	"Label, number.\n Required.",
+	PyDoc_STR("*float*: Label\n\n*Required*: True"),
  	NULL},
 {"GeoAcc", (getter)Sca_get_GeoAcc,(setter)Sca_set_GeoAcc,
-	"Label, number.\n Required.",
+	PyDoc_STR("*float*: Label\n\n*Required*: True"),
  	NULL},
 {"IamF0", (getter)Sca_get_IamF0,(setter)Sca_set_IamF0,
-	"Label, number.\n Required.",
+	PyDoc_STR("*float*: Label\n\n*Required*: True"),
  	NULL},
 {"IamF1", (getter)Sca_get_IamF1,(setter)Sca_set_IamF1,
-	"Label, number.\n Required.",
+	PyDoc_STR("*float*: Label\n\n*Required*: True"),
  	NULL},
 {"IamF2", (getter)Sca_get_IamF2,(setter)Sca_set_IamF2,
-	"Label, number.\n Required.",
+	PyDoc_STR("*float*: Label\n\n*Required*: True"),
  	NULL},
 {"MirCln", (getter)Sca_get_MirCln,(setter)Sca_set_MirCln,
-	"Label, number.\n Required.",
+	PyDoc_STR("*float*: Label\n\n*Required*: True"),
  	NULL},
 {"MirRef", (getter)Sca_get_MirRef,(setter)Sca_set_MirRef,
-	"Label, number.\n Required.",
+	PyDoc_STR("*float*: Label\n\n*Required*: True"),
  	NULL},
 {"SCA_aper", (getter)Sca_get_SCA_aper,(setter)Sca_set_SCA_aper,
-	"Label, number.\n Required.",
+	PyDoc_STR("*float*: Label\n\n*Required*: True"),
  	NULL},
 {"ScaLen", (getter)Sca_get_ScaLen,(setter)Sca_set_ScaLen,
-	"Label, number.\n Required.",
+	PyDoc_STR("*float*: Label\n\n*Required*: True"),
  	NULL},
 {"SfAvail", (getter)Sca_get_SfAvail,(setter)Sca_set_SfAvail,
-	"Label, number.\n Required.",
+	PyDoc_STR("*float*: Label\n\n*Required*: True"),
  	NULL},
 {"TrkTwstErr", (getter)Sca_get_TrkTwstErr,(setter)Sca_set_TrkTwstErr,
-	"Label, number.\n Required.",
+	PyDoc_STR("*float*: Label\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1083,7 +1083,7 @@ static PyTypeObject Sca_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		Sca_methods,         /*tp_methods*/
@@ -1093,7 +1093,7 @@ static PyTypeObject Sca_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -1153,9 +1153,9 @@ Hce_export(HceObject *self, PyObject *args)
 
 static PyMethodDef Hce_methods[] = {
 		{"assign",            (PyCFunction)Hce_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Hce_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Hce_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -1168,7 +1168,7 @@ Hce_get_HCEBelShad(HceObject *self, void *closure)
 static int
 Hce_set_HCEBelShad(HceObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_TcstroughEmpirical_Hce_HCEBelShad_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_TcstroughEmpirical_Hce_HCEBelShad_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -1180,7 +1180,7 @@ Hce_get_HCEEnvTrans(HceObject *self, void *closure)
 static int
 Hce_set_HCEEnvTrans(HceObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_TcstroughEmpirical_Hce_HCEEnvTrans_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_TcstroughEmpirical_Hce_HCEEnvTrans_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -1192,7 +1192,7 @@ Hce_get_HCEFrac(HceObject *self, void *closure)
 static int
 Hce_set_HCEFrac(HceObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_TcstroughEmpirical_Hce_HCEFrac_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_TcstroughEmpirical_Hce_HCEFrac_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -1204,7 +1204,7 @@ Hce_get_HCE_A0(HceObject *self, void *closure)
 static int
 Hce_set_HCE_A0(HceObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_TcstroughEmpirical_Hce_HCE_A0_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_TcstroughEmpirical_Hce_HCE_A0_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -1216,7 +1216,7 @@ Hce_get_HCE_A1(HceObject *self, void *closure)
 static int
 Hce_set_HCE_A1(HceObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_TcstroughEmpirical_Hce_HCE_A1_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_TcstroughEmpirical_Hce_HCE_A1_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -1228,7 +1228,7 @@ Hce_get_HCE_A2(HceObject *self, void *closure)
 static int
 Hce_set_HCE_A2(HceObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_TcstroughEmpirical_Hce_HCE_A2_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_TcstroughEmpirical_Hce_HCE_A2_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -1240,7 +1240,7 @@ Hce_get_HCE_A3(HceObject *self, void *closure)
 static int
 Hce_set_HCE_A3(HceObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_TcstroughEmpirical_Hce_HCE_A3_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_TcstroughEmpirical_Hce_HCE_A3_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -1252,7 +1252,7 @@ Hce_get_HCE_A4(HceObject *self, void *closure)
 static int
 Hce_set_HCE_A4(HceObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_TcstroughEmpirical_Hce_HCE_A4_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_TcstroughEmpirical_Hce_HCE_A4_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -1264,7 +1264,7 @@ Hce_get_HCE_A5(HceObject *self, void *closure)
 static int
 Hce_set_HCE_A5(HceObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_TcstroughEmpirical_Hce_HCE_A5_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_TcstroughEmpirical_Hce_HCE_A5_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -1276,7 +1276,7 @@ Hce_get_HCE_A6(HceObject *self, void *closure)
 static int
 Hce_set_HCE_A6(HceObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_TcstroughEmpirical_Hce_HCE_A6_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_TcstroughEmpirical_Hce_HCE_A6_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -1288,7 +1288,7 @@ Hce_get_HCEabs(HceObject *self, void *closure)
 static int
 Hce_set_HCEabs(HceObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_TcstroughEmpirical_Hce_HCEabs_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_TcstroughEmpirical_Hce_HCEabs_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -1300,7 +1300,7 @@ Hce_get_HCEdust(HceObject *self, void *closure)
 static int
 Hce_set_HCEdust(HceObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_TcstroughEmpirical_Hce_HCEdust_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_TcstroughEmpirical_Hce_HCEdust_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -1312,7 +1312,7 @@ Hce_get_HCEmisc(HceObject *self, void *closure)
 static int
 Hce_set_HCEmisc(HceObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_TcstroughEmpirical_Hce_HCEmisc_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_TcstroughEmpirical_Hce_HCEmisc_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -1324,19 +1324,19 @@ Hce_get_HCEtype(HceObject *self, void *closure)
 static int
 Hce_set_HCEtype(HceObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_TcstroughEmpirical_Hce_HCEtype_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_TcstroughEmpirical_Hce_HCEtype_aset, self->data_ptr);
 }
 
 static PyObject *
 Hce_get_NumHCETypes(HceObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Hce_NumHCETypes_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Hce_NumHCETypes_nget, self->data_ptr);
 }
 
 static int
 Hce_set_NumHCETypes(HceObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Hce_NumHCETypes_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Hce_NumHCETypes_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -1348,7 +1348,7 @@ Hce_get_PerfFac(HceObject *self, void *closure)
 static int
 Hce_set_PerfFac(HceObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_TcstroughEmpirical_Hce_PerfFac_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_TcstroughEmpirical_Hce_PerfFac_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -1360,60 +1360,60 @@ Hce_get_RefMirrAper(HceObject *self, void *closure)
 static int
 Hce_set_RefMirrAper(HceObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_TcstroughEmpirical_Hce_RefMirrAper_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_TcstroughEmpirical_Hce_RefMirrAper_aset, self->data_ptr);
 }
 
 static PyGetSetDef Hce_getset[] = {
 {"HCEBelShad", (getter)Hce_get_HCEBelShad,(setter)Hce_set_HCEBelShad,
-	"label, array.\n Required.",
+	PyDoc_STR("*sequence*: label\n\n*Required*: True"),
  	NULL},
 {"HCEEnvTrans", (getter)Hce_get_HCEEnvTrans,(setter)Hce_set_HCEEnvTrans,
-	"label, array.\n Required.",
+	PyDoc_STR("*sequence*: label\n\n*Required*: True"),
  	NULL},
 {"HCEFrac", (getter)Hce_get_HCEFrac,(setter)Hce_set_HCEFrac,
-	"Fraction of field that is this type of HCE, array.\n Required.",
+	PyDoc_STR("*sequence*: Fraction of field that is this type of HCE\n\n*Required*: True"),
  	NULL},
 {"HCE_A0", (getter)Hce_get_HCE_A0,(setter)Hce_set_HCE_A0,
-	"label, array.\n Required.",
+	PyDoc_STR("*sequence*: label\n\n*Required*: True"),
  	NULL},
 {"HCE_A1", (getter)Hce_get_HCE_A1,(setter)Hce_set_HCE_A1,
-	"label, array.\n Required.",
+	PyDoc_STR("*sequence*: label\n\n*Required*: True"),
  	NULL},
 {"HCE_A2", (getter)Hce_get_HCE_A2,(setter)Hce_set_HCE_A2,
-	"label, array.\n Required.",
+	PyDoc_STR("*sequence*: label\n\n*Required*: True"),
  	NULL},
 {"HCE_A3", (getter)Hce_get_HCE_A3,(setter)Hce_set_HCE_A3,
-	"label, array.\n Required.",
+	PyDoc_STR("*sequence*: label\n\n*Required*: True"),
  	NULL},
 {"HCE_A4", (getter)Hce_get_HCE_A4,(setter)Hce_set_HCE_A4,
-	"label, array.\n Required.",
+	PyDoc_STR("*sequence*: label\n\n*Required*: True"),
  	NULL},
 {"HCE_A5", (getter)Hce_get_HCE_A5,(setter)Hce_set_HCE_A5,
-	"label, array.\n Required.",
+	PyDoc_STR("*sequence*: label\n\n*Required*: True"),
  	NULL},
 {"HCE_A6", (getter)Hce_get_HCE_A6,(setter)Hce_set_HCE_A6,
-	"label, array.\n Required.",
+	PyDoc_STR("*sequence*: label\n\n*Required*: True"),
  	NULL},
 {"HCEabs", (getter)Hce_get_HCEabs,(setter)Hce_set_HCEabs,
-	"label, array.\n Required.",
+	PyDoc_STR("*sequence*: label\n\n*Required*: True"),
  	NULL},
 {"HCEdust", (getter)Hce_get_HCEdust,(setter)Hce_set_HCEdust,
-	"label, array.\n Required.",
+	PyDoc_STR("*sequence*: label\n\n*Required*: True"),
  	NULL},
 {"HCEmisc", (getter)Hce_get_HCEmisc,(setter)Hce_set_HCEmisc,
-	"label, array.\n Required.",
+	PyDoc_STR("*sequence*: label\n\n*Required*: True"),
  	NULL},
 {"HCEtype", (getter)Hce_get_HCEtype,(setter)Hce_set_HCEtype,
-	"Number indicating the receiver type, array.\n Required.",
+	PyDoc_STR("*sequence*: Number indicating the receiver type\n\n*Required*: True"),
  	NULL},
 {"NumHCETypes", (getter)Hce_get_NumHCETypes,(setter)Hce_set_NumHCETypes,
-	"Number of HCE types, number.\n Constraints: INTEGER; Required.",
+	PyDoc_STR("*float*: Number of HCE types\n\n*Constraints*: INTEGER\n\n*Required*: True"),
  	NULL},
 {"PerfFac", (getter)Hce_get_PerfFac,(setter)Hce_set_PerfFac,
-	"label, array.\n Required.",
+	PyDoc_STR("*sequence*: label\n\n*Required*: True"),
  	NULL},
 {"RefMirrAper", (getter)Hce_get_RefMirrAper,(setter)Hce_set_RefMirrAper,
-	"label, array.\n Required.",
+	PyDoc_STR("*sequence*: label\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1446,7 +1446,7 @@ static PyTypeObject Hce_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		Hce_methods,         /*tp_methods*/
@@ -1456,7 +1456,7 @@ static PyTypeObject Hce_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -1516,372 +1516,372 @@ Pwrb_export(PwrbObject *self, PyObject *args)
 
 static PyMethodDef Pwrb_methods[] = {
 		{"assign",            (PyCFunction)Pwrb_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Pwrb_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Pwrb_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 static PyObject *
 Pwrb_get_E2TPLF0(PwrbObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Pwrb_E2TPLF0_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Pwrb_E2TPLF0_nget, self->data_ptr);
 }
 
 static int
 Pwrb_set_E2TPLF0(PwrbObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Pwrb_E2TPLF0_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Pwrb_E2TPLF0_nset, self->data_ptr);
 }
 
 static PyObject *
 Pwrb_get_E2TPLF1(PwrbObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Pwrb_E2TPLF1_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Pwrb_E2TPLF1_nget, self->data_ptr);
 }
 
 static int
 Pwrb_set_E2TPLF1(PwrbObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Pwrb_E2TPLF1_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Pwrb_E2TPLF1_nset, self->data_ptr);
 }
 
 static PyObject *
 Pwrb_get_E2TPLF2(PwrbObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Pwrb_E2TPLF2_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Pwrb_E2TPLF2_nget, self->data_ptr);
 }
 
 static int
 Pwrb_set_E2TPLF2(PwrbObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Pwrb_E2TPLF2_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Pwrb_E2TPLF2_nset, self->data_ptr);
 }
 
 static PyObject *
 Pwrb_get_E2TPLF3(PwrbObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Pwrb_E2TPLF3_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Pwrb_E2TPLF3_nget, self->data_ptr);
 }
 
 static int
 Pwrb_set_E2TPLF3(PwrbObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Pwrb_E2TPLF3_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Pwrb_E2TPLF3_nset, self->data_ptr);
 }
 
 static PyObject *
 Pwrb_get_E2TPLF4(PwrbObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Pwrb_E2TPLF4_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Pwrb_E2TPLF4_nget, self->data_ptr);
 }
 
 static int
 Pwrb_set_E2TPLF4(PwrbObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Pwrb_E2TPLF4_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Pwrb_E2TPLF4_nset, self->data_ptr);
 }
 
 static PyObject *
 Pwrb_get_LHVBoilEff(PwrbObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Pwrb_LHVBoilEff_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Pwrb_LHVBoilEff_nget, self->data_ptr);
 }
 
 static int
 Pwrb_set_LHVBoilEff(PwrbObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Pwrb_LHVBoilEff_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Pwrb_LHVBoilEff_nset, self->data_ptr);
 }
 
 static PyObject *
 Pwrb_get_MaxGrOut(PwrbObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Pwrb_MaxGrOut_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Pwrb_MaxGrOut_nget, self->data_ptr);
 }
 
 static int
 Pwrb_set_MaxGrOut(PwrbObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Pwrb_MaxGrOut_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Pwrb_MaxGrOut_nset, self->data_ptr);
 }
 
 static PyObject *
 Pwrb_get_MinGrOut(PwrbObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Pwrb_MinGrOut_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Pwrb_MinGrOut_nget, self->data_ptr);
 }
 
 static int
 Pwrb_set_MinGrOut(PwrbObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Pwrb_MinGrOut_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Pwrb_MinGrOut_nset, self->data_ptr);
 }
 
 static PyObject *
 Pwrb_get_PTTMAX(PwrbObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Pwrb_PTTMAX_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Pwrb_PTTMAX_nget, self->data_ptr);
 }
 
 static int
 Pwrb_set_PTTMAX(PwrbObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Pwrb_PTTMAX_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Pwrb_PTTMAX_nset, self->data_ptr);
 }
 
 static PyObject *
 Pwrb_get_PTTMIN(PwrbObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Pwrb_PTTMIN_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Pwrb_PTTMIN_nget, self->data_ptr);
 }
 
 static int
 Pwrb_set_PTTMIN(PwrbObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Pwrb_PTTMIN_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Pwrb_PTTMIN_nset, self->data_ptr);
 }
 
 static PyObject *
 Pwrb_get_T2EPLF0(PwrbObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Pwrb_T2EPLF0_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Pwrb_T2EPLF0_nget, self->data_ptr);
 }
 
 static int
 Pwrb_set_T2EPLF0(PwrbObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Pwrb_T2EPLF0_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Pwrb_T2EPLF0_nset, self->data_ptr);
 }
 
 static PyObject *
 Pwrb_get_T2EPLF1(PwrbObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Pwrb_T2EPLF1_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Pwrb_T2EPLF1_nget, self->data_ptr);
 }
 
 static int
 Pwrb_set_T2EPLF1(PwrbObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Pwrb_T2EPLF1_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Pwrb_T2EPLF1_nset, self->data_ptr);
 }
 
 static PyObject *
 Pwrb_get_T2EPLF2(PwrbObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Pwrb_T2EPLF2_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Pwrb_T2EPLF2_nget, self->data_ptr);
 }
 
 static int
 Pwrb_set_T2EPLF2(PwrbObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Pwrb_T2EPLF2_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Pwrb_T2EPLF2_nset, self->data_ptr);
 }
 
 static PyObject *
 Pwrb_get_T2EPLF3(PwrbObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Pwrb_T2EPLF3_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Pwrb_T2EPLF3_nget, self->data_ptr);
 }
 
 static int
 Pwrb_set_T2EPLF3(PwrbObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Pwrb_T2EPLF3_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Pwrb_T2EPLF3_nset, self->data_ptr);
 }
 
 static PyObject *
 Pwrb_get_T2EPLF4(PwrbObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Pwrb_T2EPLF4_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Pwrb_T2EPLF4_nget, self->data_ptr);
 }
 
 static int
 Pwrb_set_T2EPLF4(PwrbObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Pwrb_T2EPLF4_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Pwrb_T2EPLF4_nset, self->data_ptr);
 }
 
 static PyObject *
 Pwrb_get_TempCorr0(PwrbObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Pwrb_TempCorr0_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Pwrb_TempCorr0_nget, self->data_ptr);
 }
 
 static int
 Pwrb_set_TempCorr0(PwrbObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Pwrb_TempCorr0_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Pwrb_TempCorr0_nset, self->data_ptr);
 }
 
 static PyObject *
 Pwrb_get_TempCorr1(PwrbObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Pwrb_TempCorr1_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Pwrb_TempCorr1_nget, self->data_ptr);
 }
 
 static int
 Pwrb_set_TempCorr1(PwrbObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Pwrb_TempCorr1_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Pwrb_TempCorr1_nset, self->data_ptr);
 }
 
 static PyObject *
 Pwrb_get_TempCorr2(PwrbObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Pwrb_TempCorr2_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Pwrb_TempCorr2_nget, self->data_ptr);
 }
 
 static int
 Pwrb_set_TempCorr2(PwrbObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Pwrb_TempCorr2_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Pwrb_TempCorr2_nset, self->data_ptr);
 }
 
 static PyObject *
 Pwrb_get_TempCorr3(PwrbObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Pwrb_TempCorr3_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Pwrb_TempCorr3_nget, self->data_ptr);
 }
 
 static int
 Pwrb_set_TempCorr3(PwrbObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Pwrb_TempCorr3_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Pwrb_TempCorr3_nset, self->data_ptr);
 }
 
 static PyObject *
 Pwrb_get_TempCorr4(PwrbObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Pwrb_TempCorr4_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Pwrb_TempCorr4_nget, self->data_ptr);
 }
 
 static int
 Pwrb_set_TempCorr4(PwrbObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Pwrb_TempCorr4_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Pwrb_TempCorr4_nset, self->data_ptr);
 }
 
 static PyObject *
 Pwrb_get_TempCorrF(PwrbObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Pwrb_TempCorrF_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Pwrb_TempCorrF_nget, self->data_ptr);
 }
 
 static int
 Pwrb_set_TempCorrF(PwrbObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Pwrb_TempCorrF_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Pwrb_TempCorrF_nset, self->data_ptr);
 }
 
 static PyObject *
 Pwrb_get_TurSUE(PwrbObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Pwrb_TurSUE_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Pwrb_TurSUE_nget, self->data_ptr);
 }
 
 static int
 Pwrb_set_TurSUE(PwrbObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Pwrb_TurSUE_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Pwrb_TurSUE_nset, self->data_ptr);
 }
 
 static PyObject *
 Pwrb_get_TurbEffG(PwrbObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Pwrb_TurbEffG_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Pwrb_TurbEffG_nget, self->data_ptr);
 }
 
 static int
 Pwrb_set_TurbEffG(PwrbObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Pwrb_TurbEffG_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Pwrb_TurbEffG_nset, self->data_ptr);
 }
 
 static PyObject *
 Pwrb_get_TurbOutG(PwrbObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Pwrb_TurbOutG_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Pwrb_TurbOutG_nget, self->data_ptr);
 }
 
 static int
 Pwrb_set_TurbOutG(PwrbObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Pwrb_TurbOutG_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Pwrb_TurbOutG_nset, self->data_ptr);
 }
 
 static PyGetSetDef Pwrb_getset[] = {
 {"E2TPLF0", (getter)Pwrb_get_E2TPLF0,(setter)Pwrb_set_E2TPLF0,
-	"Label, number.\n Required.",
+	PyDoc_STR("*float*: Label\n\n*Required*: True"),
  	NULL},
 {"E2TPLF1", (getter)Pwrb_get_E2TPLF1,(setter)Pwrb_set_E2TPLF1,
-	"Label, number.\n Required.",
+	PyDoc_STR("*float*: Label\n\n*Required*: True"),
  	NULL},
 {"E2TPLF2", (getter)Pwrb_get_E2TPLF2,(setter)Pwrb_set_E2TPLF2,
-	"Label, number.\n Required.",
+	PyDoc_STR("*float*: Label\n\n*Required*: True"),
  	NULL},
 {"E2TPLF3", (getter)Pwrb_get_E2TPLF3,(setter)Pwrb_set_E2TPLF3,
-	"Label, number.\n Required.",
+	PyDoc_STR("*float*: Label\n\n*Required*: True"),
  	NULL},
 {"E2TPLF4", (getter)Pwrb_get_E2TPLF4,(setter)Pwrb_set_E2TPLF4,
-	"Label, number.\n Required.",
+	PyDoc_STR("*float*: Label\n\n*Required*: True"),
  	NULL},
 {"LHVBoilEff", (getter)Pwrb_get_LHVBoilEff,(setter)Pwrb_set_LHVBoilEff,
-	"Label, number.\n Required.",
+	PyDoc_STR("*float*: Label\n\n*Required*: True"),
  	NULL},
 {"MaxGrOut", (getter)Pwrb_get_MaxGrOut,(setter)Pwrb_set_MaxGrOut,
-	"Label, number.\n Required.",
+	PyDoc_STR("*float*: Label\n\n*Required*: True"),
  	NULL},
 {"MinGrOut", (getter)Pwrb_get_MinGrOut,(setter)Pwrb_set_MinGrOut,
-	"Label, number.\n Required.",
+	PyDoc_STR("*float*: Label\n\n*Required*: True"),
  	NULL},
 {"PTTMAX", (getter)Pwrb_get_PTTMAX,(setter)Pwrb_set_PTTMAX,
-	"Label, number.\n Required.",
+	PyDoc_STR("*float*: Label\n\n*Required*: True"),
  	NULL},
 {"PTTMIN", (getter)Pwrb_get_PTTMIN,(setter)Pwrb_set_PTTMIN,
-	"Label, number.\n Required.",
+	PyDoc_STR("*float*: Label\n\n*Required*: True"),
  	NULL},
 {"T2EPLF0", (getter)Pwrb_get_T2EPLF0,(setter)Pwrb_set_T2EPLF0,
-	"Label, number.\n Required.",
+	PyDoc_STR("*float*: Label\n\n*Required*: True"),
  	NULL},
 {"T2EPLF1", (getter)Pwrb_get_T2EPLF1,(setter)Pwrb_set_T2EPLF1,
-	"Label, number.\n Required.",
+	PyDoc_STR("*float*: Label\n\n*Required*: True"),
  	NULL},
 {"T2EPLF2", (getter)Pwrb_get_T2EPLF2,(setter)Pwrb_set_T2EPLF2,
-	"Label, number.\n Required.",
+	PyDoc_STR("*float*: Label\n\n*Required*: True"),
  	NULL},
 {"T2EPLF3", (getter)Pwrb_get_T2EPLF3,(setter)Pwrb_set_T2EPLF3,
-	"Label, number.\n Required.",
+	PyDoc_STR("*float*: Label\n\n*Required*: True"),
  	NULL},
 {"T2EPLF4", (getter)Pwrb_get_T2EPLF4,(setter)Pwrb_set_T2EPLF4,
-	"Label, number.\n Required.",
+	PyDoc_STR("*float*: Label\n\n*Required*: True"),
  	NULL},
 {"TempCorr0", (getter)Pwrb_get_TempCorr0,(setter)Pwrb_set_TempCorr0,
-	"Label, number.\n Required.",
+	PyDoc_STR("*float*: Label\n\n*Required*: True"),
  	NULL},
 {"TempCorr1", (getter)Pwrb_get_TempCorr1,(setter)Pwrb_set_TempCorr1,
-	"Label, number.\n Required.",
+	PyDoc_STR("*float*: Label\n\n*Required*: True"),
  	NULL},
 {"TempCorr2", (getter)Pwrb_get_TempCorr2,(setter)Pwrb_set_TempCorr2,
-	"Label, number.\n Required.",
+	PyDoc_STR("*float*: Label\n\n*Required*: True"),
  	NULL},
 {"TempCorr3", (getter)Pwrb_get_TempCorr3,(setter)Pwrb_set_TempCorr3,
-	"Label, number.\n Required.",
+	PyDoc_STR("*float*: Label\n\n*Required*: True"),
  	NULL},
 {"TempCorr4", (getter)Pwrb_get_TempCorr4,(setter)Pwrb_set_TempCorr4,
-	"Label, number.\n Required.",
+	PyDoc_STR("*float*: Label\n\n*Required*: True"),
  	NULL},
 {"TempCorrF", (getter)Pwrb_get_TempCorrF,(setter)Pwrb_set_TempCorrF,
-	"Temp Correction Mode (0=wetbulb 1=drybulb basis), number.\n Constraints: INTEGER; Required.",
+	PyDoc_STR("*float*: Temp Correction Mode (0=wetbulb 1=drybulb basis)\n\n*Constraints*: INTEGER\n\n*Required*: True"),
  	NULL},
 {"TurSUE", (getter)Pwrb_get_TurSUE,(setter)Pwrb_set_TurSUE,
-	"Label, number.\n Required.",
+	PyDoc_STR("*float*: Label\n\n*Required*: True"),
  	NULL},
 {"TurbEffG", (getter)Pwrb_get_TurbEffG,(setter)Pwrb_set_TurbEffG,
-	"Label, number.\n Required.",
+	PyDoc_STR("*float*: Label\n\n*Required*: True"),
  	NULL},
 {"TurbOutG", (getter)Pwrb_get_TurbOutG,(setter)Pwrb_set_TurbOutG,
-	"Label, number.\n Required.",
+	PyDoc_STR("*float*: Label\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1914,7 +1914,7 @@ static PyTypeObject Pwrb_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		Pwrb_methods,         /*tp_methods*/
@@ -1924,7 +1924,7 @@ static PyTypeObject Pwrb_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -1984,22 +1984,22 @@ Tes_export(TesObject *self, PyObject *args)
 
 static PyMethodDef Tes_methods[] = {
 		{"assign",            (PyCFunction)Tes_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Tes_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Tes_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 static PyObject *
 Tes_get_E_tes_ini(TesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Tes_E_tes_ini_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Tes_E_tes_ini_nget, self->data_ptr);
 }
 
 static int
 Tes_set_E_tes_ini(TesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Tes_E_tes_ini_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Tes_E_tes_ini_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -2011,55 +2011,55 @@ Tes_get_FossilFill(TesObject *self, void *closure)
 static int
 Tes_set_FossilFill(TesObject *self, PyObject *value, void *closure)
 {
-		return PySAM_array_setter(value, SAM_TcstroughEmpirical_Tes_FossilFill_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_TcstroughEmpirical_Tes_FossilFill_aset, self->data_ptr);
 }
 
 static PyObject *
 Tes_get_NUMTOU(TesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Tes_NUMTOU_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Tes_NUMTOU_nget, self->data_ptr);
 }
 
 static int
 Tes_set_NUMTOU(TesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Tes_NUMTOU_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Tes_NUMTOU_nset, self->data_ptr);
 }
 
 static PyObject *
 Tes_get_PFSmax(TesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Tes_PFSmax_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Tes_PFSmax_nget, self->data_ptr);
 }
 
 static int
 Tes_set_PFSmax(TesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Tes_PFSmax_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Tes_PFSmax_nset, self->data_ptr);
 }
 
 static PyObject *
 Tes_get_PTSmax(TesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Tes_PTSmax_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Tes_PTSmax_nget, self->data_ptr);
 }
 
 static int
 Tes_set_PTSmax(TesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Tes_PTSmax_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Tes_PTSmax_nset, self->data_ptr);
 }
 
 static PyObject *
 Tes_get_TSHOURS(TesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Tes_TSHOURS_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Tes_TSHOURS_nget, self->data_ptr);
 }
 
 static int
 Tes_set_TSHOURS(TesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Tes_TSHOURS_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Tes_TSHOURS_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -2077,69 +2077,69 @@ Tes_set_TSLogic(TesObject *self, PyObject *value, void *closure)
 static PyObject *
 Tes_get_TnkHL(TesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Tes_TnkHL_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Tes_TnkHL_nget, self->data_ptr);
 }
 
 static int
 Tes_set_TnkHL(TesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Tes_TnkHL_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Tes_TnkHL_nset, self->data_ptr);
 }
 
 static PyObject *
 Tes_get_TurTesEffAdj(TesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Tes_TurTesEffAdj_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Tes_TurTesEffAdj_nget, self->data_ptr);
 }
 
 static int
 Tes_set_TurTesEffAdj(TesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Tes_TurTesEffAdj_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Tes_TurTesEffAdj_nset, self->data_ptr);
 }
 
 static PyObject *
 Tes_get_TurTesOutAdj(TesObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Tes_TurTesOutAdj_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Tes_TurTesOutAdj_nget, self->data_ptr);
 }
 
 static int
 Tes_set_TurTesOutAdj(TesObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Tes_TurTesOutAdj_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Tes_TurTesOutAdj_nset, self->data_ptr);
 }
 
 static PyGetSetDef Tes_getset[] = {
 {"E_tes_ini", (getter)Tes_get_E_tes_ini,(setter)Tes_set_E_tes_ini,
-	"Initial TES energy - fraction of max, number.\n Required.",
+	PyDoc_STR("*float*: Initial TES energy - fraction of max\n\n*Required*: True"),
  	NULL},
 {"FossilFill", (getter)Tes_get_FossilFill,(setter)Tes_set_FossilFill,
-	"Label, array.\n Required.",
+	PyDoc_STR("*sequence*: Label\n\n*Required*: True"),
  	NULL},
 {"NUMTOU", (getter)Tes_get_NUMTOU,(setter)Tes_set_NUMTOU,
-	"Label, number.\n Required.",
+	PyDoc_STR("*float*: Label\n\n*Required*: True"),
  	NULL},
 {"PFSmax", (getter)Tes_get_PFSmax,(setter)Tes_set_PFSmax,
-	"Label, number.\n Required.",
+	PyDoc_STR("*float*: Label\n\n*Required*: True"),
  	NULL},
 {"PTSmax", (getter)Tes_get_PTSmax,(setter)Tes_set_PTSmax,
-	"Label, number.\n Required.",
+	PyDoc_STR("*float*: Label\n\n*Required*: True"),
  	NULL},
 {"TSHOURS", (getter)Tes_get_TSHOURS,(setter)Tes_set_TSHOURS,
-	"Label, number.\n Required.",
+	PyDoc_STR("*float*: Label\n\n*Required*: True"),
  	NULL},
 {"TSLogic", (getter)Tes_get_TSLogic,(setter)Tes_set_TSLogic,
-	"Label, matrix.\n Required.",
+	PyDoc_STR("*sequence[sequence]*: Label\n\n*Required*: True"),
  	NULL},
 {"TnkHL", (getter)Tes_get_TnkHL,(setter)Tes_set_TnkHL,
-	"Label, number.\n Required.",
+	PyDoc_STR("*float*: Label\n\n*Required*: True"),
  	NULL},
 {"TurTesEffAdj", (getter)Tes_get_TurTesEffAdj,(setter)Tes_set_TurTesEffAdj,
-	"Label, number.\n Required.",
+	PyDoc_STR("*float*: Label\n\n*Required*: True"),
  	NULL},
 {"TurTesOutAdj", (getter)Tes_get_TurTesOutAdj,(setter)Tes_set_TurTesOutAdj,
-	"Label, number.\n Required.",
+	PyDoc_STR("*float*: Label\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -2172,7 +2172,7 @@ static PyTypeObject Tes_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		Tes_methods,         /*tp_methods*/
@@ -2182,7 +2182,7 @@ static PyTypeObject Tes_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -2242,462 +2242,462 @@ Parasitic_export(ParasiticObject *self, PyObject *args)
 
 static PyMethodDef Parasitic_methods[] = {
 		{"assign",            (PyCFunction)Parasitic_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Parasitic_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Parasitic_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 static PyObject *
 Parasitic_get_AntiFrPar(ParasiticObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Parasitic_AntiFrPar_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Parasitic_AntiFrPar_nget, self->data_ptr);
 }
 
 static int
 Parasitic_set_AntiFrPar(ParasiticObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Parasitic_AntiFrPar_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Parasitic_AntiFrPar_nset, self->data_ptr);
 }
 
 static PyObject *
 Parasitic_get_BOPPar(ParasiticObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Parasitic_BOPPar_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Parasitic_BOPPar_nget, self->data_ptr);
 }
 
 static int
 Parasitic_set_BOPPar(ParasiticObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Parasitic_BOPPar_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Parasitic_BOPPar_nset, self->data_ptr);
 }
 
 static PyObject *
 Parasitic_get_BOPParF0(ParasiticObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Parasitic_BOPParF0_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Parasitic_BOPParF0_nget, self->data_ptr);
 }
 
 static int
 Parasitic_set_BOPParF0(ParasiticObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Parasitic_BOPParF0_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Parasitic_BOPParF0_nset, self->data_ptr);
 }
 
 static PyObject *
 Parasitic_get_BOPParF1(ParasiticObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Parasitic_BOPParF1_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Parasitic_BOPParF1_nget, self->data_ptr);
 }
 
 static int
 Parasitic_set_BOPParF1(ParasiticObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Parasitic_BOPParF1_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Parasitic_BOPParF1_nset, self->data_ptr);
 }
 
 static PyObject *
 Parasitic_get_BOPParF2(ParasiticObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Parasitic_BOPParF2_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Parasitic_BOPParF2_nget, self->data_ptr);
 }
 
 static int
 Parasitic_set_BOPParF2(ParasiticObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Parasitic_BOPParF2_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Parasitic_BOPParF2_nset, self->data_ptr);
 }
 
 static PyObject *
 Parasitic_get_BOPParPF(ParasiticObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Parasitic_BOPParPF_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Parasitic_BOPParPF_nget, self->data_ptr);
 }
 
 static int
 Parasitic_set_BOPParPF(ParasiticObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Parasitic_BOPParPF_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Parasitic_BOPParPF_nset, self->data_ptr);
 }
 
 static PyObject *
 Parasitic_get_CHTFParF0(ParasiticObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Parasitic_CHTFParF0_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Parasitic_CHTFParF0_nget, self->data_ptr);
 }
 
 static int
 Parasitic_set_CHTFParF0(ParasiticObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Parasitic_CHTFParF0_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Parasitic_CHTFParF0_nset, self->data_ptr);
 }
 
 static PyObject *
 Parasitic_get_CHTFParF1(ParasiticObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Parasitic_CHTFParF1_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Parasitic_CHTFParF1_nget, self->data_ptr);
 }
 
 static int
 Parasitic_set_CHTFParF1(ParasiticObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Parasitic_CHTFParF1_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Parasitic_CHTFParF1_nset, self->data_ptr);
 }
 
 static PyObject *
 Parasitic_get_CHTFParF2(ParasiticObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Parasitic_CHTFParF2_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Parasitic_CHTFParF2_nget, self->data_ptr);
 }
 
 static int
 Parasitic_set_CHTFParF2(ParasiticObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Parasitic_CHTFParF2_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Parasitic_CHTFParF2_nset, self->data_ptr);
 }
 
 static PyObject *
 Parasitic_get_ChtfPar(ParasiticObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Parasitic_ChtfPar_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Parasitic_ChtfPar_nget, self->data_ptr);
 }
 
 static int
 Parasitic_set_ChtfPar(ParasiticObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Parasitic_ChtfPar_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Parasitic_ChtfPar_nset, self->data_ptr);
 }
 
 static PyObject *
 Parasitic_get_ChtfParPF(ParasiticObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Parasitic_ChtfParPF_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Parasitic_ChtfParPF_nget, self->data_ptr);
 }
 
 static int
 Parasitic_set_ChtfParPF(ParasiticObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Parasitic_ChtfParPF_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Parasitic_ChtfParPF_nset, self->data_ptr);
 }
 
 static PyObject *
 Parasitic_get_CtOpF(ParasiticObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Parasitic_CtOpF_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Parasitic_CtOpF_nget, self->data_ptr);
 }
 
 static int
 Parasitic_set_CtOpF(ParasiticObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Parasitic_CtOpF_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Parasitic_CtOpF_nset, self->data_ptr);
 }
 
 static PyObject *
 Parasitic_get_CtPar(ParasiticObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Parasitic_CtPar_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Parasitic_CtPar_nget, self->data_ptr);
 }
 
 static int
 Parasitic_set_CtPar(ParasiticObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Parasitic_CtPar_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Parasitic_CtPar_nset, self->data_ptr);
 }
 
 static PyObject *
 Parasitic_get_CtParF0(ParasiticObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Parasitic_CtParF0_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Parasitic_CtParF0_nget, self->data_ptr);
 }
 
 static int
 Parasitic_set_CtParF0(ParasiticObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Parasitic_CtParF0_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Parasitic_CtParF0_nset, self->data_ptr);
 }
 
 static PyObject *
 Parasitic_get_CtParF1(ParasiticObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Parasitic_CtParF1_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Parasitic_CtParF1_nget, self->data_ptr);
 }
 
 static int
 Parasitic_set_CtParF1(ParasiticObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Parasitic_CtParF1_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Parasitic_CtParF1_nset, self->data_ptr);
 }
 
 static PyObject *
 Parasitic_get_CtParF2(ParasiticObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Parasitic_CtParF2_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Parasitic_CtParF2_nget, self->data_ptr);
 }
 
 static int
 Parasitic_set_CtParF2(ParasiticObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Parasitic_CtParF2_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Parasitic_CtParF2_nset, self->data_ptr);
 }
 
 static PyObject *
 Parasitic_get_CtParPF(ParasiticObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Parasitic_CtParPF_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Parasitic_CtParPF_nget, self->data_ptr);
 }
 
 static int
 Parasitic_set_CtParPF(ParasiticObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Parasitic_CtParPF_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Parasitic_CtParPF_nset, self->data_ptr);
 }
 
 static PyObject *
 Parasitic_get_HhtfPar(ParasiticObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Parasitic_HhtfPar_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Parasitic_HhtfPar_nget, self->data_ptr);
 }
 
 static int
 Parasitic_set_HhtfPar(ParasiticObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Parasitic_HhtfPar_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Parasitic_HhtfPar_nset, self->data_ptr);
 }
 
 static PyObject *
 Parasitic_get_HhtfParF0(ParasiticObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Parasitic_HhtfParF0_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Parasitic_HhtfParF0_nget, self->data_ptr);
 }
 
 static int
 Parasitic_set_HhtfParF0(ParasiticObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Parasitic_HhtfParF0_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Parasitic_HhtfParF0_nset, self->data_ptr);
 }
 
 static PyObject *
 Parasitic_get_HhtfParF1(ParasiticObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Parasitic_HhtfParF1_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Parasitic_HhtfParF1_nget, self->data_ptr);
 }
 
 static int
 Parasitic_set_HhtfParF1(ParasiticObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Parasitic_HhtfParF1_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Parasitic_HhtfParF1_nset, self->data_ptr);
 }
 
 static PyObject *
 Parasitic_get_HhtfParF2(ParasiticObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Parasitic_HhtfParF2_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Parasitic_HhtfParF2_nget, self->data_ptr);
 }
 
 static int
 Parasitic_set_HhtfParF2(ParasiticObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Parasitic_HhtfParF2_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Parasitic_HhtfParF2_nset, self->data_ptr);
 }
 
 static PyObject *
 Parasitic_get_HhtfParPF(ParasiticObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Parasitic_HhtfParPF_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Parasitic_HhtfParPF_nget, self->data_ptr);
 }
 
 static int
 Parasitic_set_HhtfParPF(ParasiticObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Parasitic_HhtfParPF_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Parasitic_HhtfParPF_nset, self->data_ptr);
 }
 
 static PyObject *
 Parasitic_get_HtrPar(ParasiticObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Parasitic_HtrPar_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Parasitic_HtrPar_nget, self->data_ptr);
 }
 
 static int
 Parasitic_set_HtrPar(ParasiticObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Parasitic_HtrPar_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Parasitic_HtrPar_nset, self->data_ptr);
 }
 
 static PyObject *
 Parasitic_get_HtrParF0(ParasiticObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Parasitic_HtrParF0_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Parasitic_HtrParF0_nget, self->data_ptr);
 }
 
 static int
 Parasitic_set_HtrParF0(ParasiticObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Parasitic_HtrParF0_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Parasitic_HtrParF0_nset, self->data_ptr);
 }
 
 static PyObject *
 Parasitic_get_HtrParF1(ParasiticObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Parasitic_HtrParF1_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Parasitic_HtrParF1_nget, self->data_ptr);
 }
 
 static int
 Parasitic_set_HtrParF1(ParasiticObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Parasitic_HtrParF1_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Parasitic_HtrParF1_nset, self->data_ptr);
 }
 
 static PyObject *
 Parasitic_get_HtrParF2(ParasiticObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Parasitic_HtrParF2_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Parasitic_HtrParF2_nget, self->data_ptr);
 }
 
 static int
 Parasitic_set_HtrParF2(ParasiticObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Parasitic_HtrParF2_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Parasitic_HtrParF2_nset, self->data_ptr);
 }
 
 static PyObject *
 Parasitic_get_HtrParPF(ParasiticObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Parasitic_HtrParPF_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Parasitic_HtrParPF_nget, self->data_ptr);
 }
 
 static int
 Parasitic_set_HtrParPF(ParasiticObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Parasitic_HtrParPF_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Parasitic_HtrParPF_nset, self->data_ptr);
 }
 
 static PyObject *
 Parasitic_get_PbFixPar(ParasiticObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Parasitic_PbFixPar_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Parasitic_PbFixPar_nget, self->data_ptr);
 }
 
 static int
 Parasitic_set_PbFixPar(ParasiticObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Parasitic_PbFixPar_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Parasitic_PbFixPar_nset, self->data_ptr);
 }
 
 static PyObject *
 Parasitic_get_SfPar(ParasiticObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Parasitic_SfPar_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Parasitic_SfPar_nget, self->data_ptr);
 }
 
 static int
 Parasitic_set_SfPar(ParasiticObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Parasitic_SfPar_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Parasitic_SfPar_nset, self->data_ptr);
 }
 
 static PyObject *
 Parasitic_get_SfParPF(ParasiticObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Parasitic_SfParPF_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Parasitic_SfParPF_nget, self->data_ptr);
 }
 
 static int
 Parasitic_set_SfParPF(ParasiticObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_TcstroughEmpirical_Parasitic_SfParPF_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcstroughEmpirical_Parasitic_SfParPF_nset, self->data_ptr);
 }
 
 static PyGetSetDef Parasitic_getset[] = {
 {"AntiFrPar", (getter)Parasitic_get_AntiFrPar,(setter)Parasitic_set_AntiFrPar,
-	"Label, number.\n Required.",
+	PyDoc_STR("*float*: Label\n\n*Required*: True"),
  	NULL},
 {"BOPPar", (getter)Parasitic_get_BOPPar,(setter)Parasitic_set_BOPPar,
-	"Label, number.\n Required.",
+	PyDoc_STR("*float*: Label\n\n*Required*: True"),
  	NULL},
 {"BOPParF0", (getter)Parasitic_get_BOPParF0,(setter)Parasitic_set_BOPParF0,
-	"Label, number.\n Required.",
+	PyDoc_STR("*float*: Label\n\n*Required*: True"),
  	NULL},
 {"BOPParF1", (getter)Parasitic_get_BOPParF1,(setter)Parasitic_set_BOPParF1,
-	"Label, number.\n Required.",
+	PyDoc_STR("*float*: Label\n\n*Required*: True"),
  	NULL},
 {"BOPParF2", (getter)Parasitic_get_BOPParF2,(setter)Parasitic_set_BOPParF2,
-	"Label, number.\n Required.",
+	PyDoc_STR("*float*: Label\n\n*Required*: True"),
  	NULL},
 {"BOPParPF", (getter)Parasitic_get_BOPParPF,(setter)Parasitic_set_BOPParPF,
-	"Label, number.\n Required.",
+	PyDoc_STR("*float*: Label\n\n*Required*: True"),
  	NULL},
 {"CHTFParF0", (getter)Parasitic_get_CHTFParF0,(setter)Parasitic_set_CHTFParF0,
-	"Label, number.\n Required.",
+	PyDoc_STR("*float*: Label\n\n*Required*: True"),
  	NULL},
 {"CHTFParF1", (getter)Parasitic_get_CHTFParF1,(setter)Parasitic_set_CHTFParF1,
-	"Label, number.\n Required.",
+	PyDoc_STR("*float*: Label\n\n*Required*: True"),
  	NULL},
 {"CHTFParF2", (getter)Parasitic_get_CHTFParF2,(setter)Parasitic_set_CHTFParF2,
-	"Label, number.\n Required.",
+	PyDoc_STR("*float*: Label\n\n*Required*: True"),
  	NULL},
 {"ChtfPar", (getter)Parasitic_get_ChtfPar,(setter)Parasitic_set_ChtfPar,
-	"Label, number.\n Required.",
+	PyDoc_STR("*float*: Label\n\n*Required*: True"),
  	NULL},
 {"ChtfParPF", (getter)Parasitic_get_ChtfParPF,(setter)Parasitic_set_ChtfParPF,
-	"Label, number.\n Required.",
+	PyDoc_STR("*float*: Label\n\n*Required*: True"),
  	NULL},
 {"CtOpF", (getter)Parasitic_get_CtOpF,(setter)Parasitic_set_CtOpF,
-	"Label, number.\n Constraints: INTEGER; Required.",
+	PyDoc_STR("*float*: Label\n\n*Constraints*: INTEGER\n\n*Required*: True"),
  	NULL},
 {"CtPar", (getter)Parasitic_get_CtPar,(setter)Parasitic_set_CtPar,
-	"Label, number.\n Required.",
+	PyDoc_STR("*float*: Label\n\n*Required*: True"),
  	NULL},
 {"CtParF0", (getter)Parasitic_get_CtParF0,(setter)Parasitic_set_CtParF0,
-	"Label, number.\n Required.",
+	PyDoc_STR("*float*: Label\n\n*Required*: True"),
  	NULL},
 {"CtParF1", (getter)Parasitic_get_CtParF1,(setter)Parasitic_set_CtParF1,
-	"Label, number.\n Required.",
+	PyDoc_STR("*float*: Label\n\n*Required*: True"),
  	NULL},
 {"CtParF2", (getter)Parasitic_get_CtParF2,(setter)Parasitic_set_CtParF2,
-	"Label, number.\n Required.",
+	PyDoc_STR("*float*: Label\n\n*Required*: True"),
  	NULL},
 {"CtParPF", (getter)Parasitic_get_CtParPF,(setter)Parasitic_set_CtParPF,
-	"Label, number.\n Required.",
+	PyDoc_STR("*float*: Label\n\n*Required*: True"),
  	NULL},
 {"HhtfPar", (getter)Parasitic_get_HhtfPar,(setter)Parasitic_set_HhtfPar,
-	"Label, number.\n Required.",
+	PyDoc_STR("*float*: Label\n\n*Required*: True"),
  	NULL},
 {"HhtfParF0", (getter)Parasitic_get_HhtfParF0,(setter)Parasitic_set_HhtfParF0,
-	"Label, number.\n Required.",
+	PyDoc_STR("*float*: Label\n\n*Required*: True"),
  	NULL},
 {"HhtfParF1", (getter)Parasitic_get_HhtfParF1,(setter)Parasitic_set_HhtfParF1,
-	"Label, number.\n Required.",
+	PyDoc_STR("*float*: Label\n\n*Required*: True"),
  	NULL},
 {"HhtfParF2", (getter)Parasitic_get_HhtfParF2,(setter)Parasitic_set_HhtfParF2,
-	"Label, number.\n Required.",
+	PyDoc_STR("*float*: Label\n\n*Required*: True"),
  	NULL},
 {"HhtfParPF", (getter)Parasitic_get_HhtfParPF,(setter)Parasitic_set_HhtfParPF,
-	"Label, number.\n Required.",
+	PyDoc_STR("*float*: Label\n\n*Required*: True"),
  	NULL},
 {"HtrPar", (getter)Parasitic_get_HtrPar,(setter)Parasitic_set_HtrPar,
-	"Label, number.\n Required.",
+	PyDoc_STR("*float*: Label\n\n*Required*: True"),
  	NULL},
 {"HtrParF0", (getter)Parasitic_get_HtrParF0,(setter)Parasitic_set_HtrParF0,
-	"Label, number.\n Required.",
+	PyDoc_STR("*float*: Label\n\n*Required*: True"),
  	NULL},
 {"HtrParF1", (getter)Parasitic_get_HtrParF1,(setter)Parasitic_set_HtrParF1,
-	"Label, number.\n Required.",
+	PyDoc_STR("*float*: Label\n\n*Required*: True"),
  	NULL},
 {"HtrParF2", (getter)Parasitic_get_HtrParF2,(setter)Parasitic_set_HtrParF2,
-	"Label, number.\n Required.",
+	PyDoc_STR("*float*: Label\n\n*Required*: True"),
  	NULL},
 {"HtrParPF", (getter)Parasitic_get_HtrParPF,(setter)Parasitic_set_HtrParPF,
-	"Label, number.\n Required.",
+	PyDoc_STR("*float*: Label\n\n*Required*: True"),
  	NULL},
 {"PbFixPar", (getter)Parasitic_get_PbFixPar,(setter)Parasitic_set_PbFixPar,
-	"Label, number.\n Required.",
+	PyDoc_STR("*float*: Label\n\n*Required*: True"),
  	NULL},
 {"SfPar", (getter)Parasitic_get_SfPar,(setter)Parasitic_set_SfPar,
-	"Label, number.\n Required.",
+	PyDoc_STR("*float*: Label\n\n*Required*: True"),
  	NULL},
 {"SfParPF", (getter)Parasitic_get_SfParPF,(setter)Parasitic_set_SfParPF,
-	"Label, number.\n Required.",
+	PyDoc_STR("*float*: Label\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -2730,7 +2730,7 @@ static PyTypeObject Parasitic_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		Parasitic_methods,         /*tp_methods*/
@@ -2740,7 +2740,7 @@ static PyTypeObject Parasitic_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -2800,9 +2800,9 @@ Outputs_export(OutputsObject *self, PyObject *args)
 
 static PyMethodDef Outputs_methods[] = {
 		{"assign",            (PyCFunction)Outputs_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Outputs_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Outputs_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -3097,19 +3097,19 @@ Outputs_get_TrackAngle(OutputsObject *self, void *closure)
 static PyObject *
 Outputs_get_annual_W_cycle_gross(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Outputs_annual_W_cycle_gross_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Outputs_annual_W_cycle_gross_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_annual_energy(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Outputs_annual_energy_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Outputs_annual_energy_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_annual_fuel_usage(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Outputs_annual_fuel_usage_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Outputs_annual_fuel_usage_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -3121,13 +3121,13 @@ Outputs_get_beam(OutputsObject *self, void *closure)
 static PyObject *
 Outputs_get_capacity_factor(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Outputs_capacity_factor_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Outputs_capacity_factor_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_conversion_factor(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Outputs_conversion_factor_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Outputs_conversion_factor_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -3145,7 +3145,7 @@ Outputs_get_hour(OutputsObject *self, void *closure)
 static PyObject *
 Outputs_get_kwh_per_kw(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Outputs_kwh_per_kw_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Outputs_kwh_per_kw_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -3181,13 +3181,13 @@ Outputs_get_solzen(OutputsObject *self, void *closure)
 static PyObject *
 Outputs_get_system_heat_rate(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Outputs_system_heat_rate_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Outputs_system_heat_rate_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_system_use_lifetime_output(OutputsObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_TcstroughEmpirical_Outputs_system_use_lifetime_output_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcstroughEmpirical_Outputs_system_use_lifetime_output_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -3216,208 +3216,208 @@ Outputs_get_wspd(OutputsObject *self, void *closure)
 
 static PyGetSetDef Outputs_getset[] = {
 {"AveSfTemp", (getter)Outputs_get_AveSfTemp,(setter)0,
-	"Field HTF temperature average [C], array.",
+	PyDoc_STR("*sequence*: Field HTF temperature average [C]"),
  	NULL},
 {"ColEff", (getter)Outputs_get_ColEff,(setter)0,
-	"Field collector thermal and optical efficiency, array.",
+	PyDoc_STR("*sequence*: Field collector thermal and optical efficiency"),
  	NULL},
 {"CosTheta", (getter)Outputs_get_CosTheta,(setter)0,
-	"Field collector cosine efficiency, array.",
+	PyDoc_STR("*sequence*: Field collector cosine efficiency"),
  	NULL},
 {"Egr", (getter)Outputs_get_Egr,(setter)0,
-	"Cycle electrical power output (gross) [MWe], array.",
+	PyDoc_STR("*sequence*: Cycle electrical power output (gross) [MWe]"),
  	NULL},
 {"EgrFos", (getter)Outputs_get_EgrFos,(setter)0,
-	"Cycle electrical power output (gross, fossil share) [MWe], array.",
+	PyDoc_STR("*sequence*: Cycle electrical power output (gross, fossil share) [MWe]"),
  	NULL},
 {"EgrSol", (getter)Outputs_get_EgrSol,(setter)0,
-	"Cycle electrical power output (gross, solar share) [MWe], array.",
+	PyDoc_STR("*sequence*: Cycle electrical power output (gross, solar share) [MWe]"),
  	NULL},
 {"EndLoss", (getter)Outputs_get_EndLoss,(setter)0,
-	"Field collector optical end loss, array.",
+	PyDoc_STR("*sequence*: Field collector optical end loss"),
  	NULL},
 {"Enet", (getter)Outputs_get_Enet,(setter)0,
-	"Cycle electrical power output (net) [MWe], array.",
+	PyDoc_STR("*sequence*: Cycle electrical power output (net) [MWe]"),
  	NULL},
 {"Epar", (getter)Outputs_get_Epar,(setter)0,
-	"Parasitic power total consumption [MWe], array.",
+	PyDoc_STR("*sequence*: Parasitic power total consumption [MWe]"),
  	NULL},
 {"EparAnti", (getter)Outputs_get_EparAnti,(setter)0,
-	"Parasitic power freeze protection pump [MWe], array.",
+	PyDoc_STR("*sequence*: Parasitic power freeze protection pump [MWe]"),
  	NULL},
 {"EparBOP", (getter)Outputs_get_EparBOP,(setter)0,
-	"Parasitic power generation-dependent load [MWe], array.",
+	PyDoc_STR("*sequence*: Parasitic power generation-dependent load [MWe]"),
  	NULL},
 {"EparCHTF", (getter)Outputs_get_EparCHTF,(setter)0,
-	"Parasitic power solar field HTF pump [MWe], array.",
+	PyDoc_STR("*sequence*: Parasitic power solar field HTF pump [MWe]"),
  	NULL},
 {"EparCT", (getter)Outputs_get_EparCT,(setter)0,
-	"Parasitic power condenser operation [MWe], array.",
+	PyDoc_STR("*sequence*: Parasitic power condenser operation [MWe]"),
  	NULL},
 {"EparHhtf", (getter)Outputs_get_EparHhtf,(setter)0,
-	"Parasitic power TES and Cycle HTF pump [MWe], array.",
+	PyDoc_STR("*sequence*: Parasitic power TES and Cycle HTF pump [MWe]"),
  	NULL},
 {"EparHtr", (getter)Outputs_get_EparHtr,(setter)0,
-	"Parasitic power auxiliary heater operation [MWe], array.",
+	PyDoc_STR("*sequence*: Parasitic power auxiliary heater operation [MWe]"),
  	NULL},
 {"EparOffLine", (getter)Outputs_get_EparOffLine,(setter)0,
-	"Parasitic power - offline total [MWe], array.",
+	PyDoc_STR("*sequence*: Parasitic power - offline total [MWe]"),
  	NULL},
 {"EparOnLine", (getter)Outputs_get_EparOnLine,(setter)0,
-	"Parasitic power - online total [MWe], array.",
+	PyDoc_STR("*sequence*: Parasitic power - online total [MWe]"),
  	NULL},
 {"EparPB", (getter)Outputs_get_EparPB,(setter)0,
-	"Parasitic power fixed load [MWe], array.",
+	PyDoc_STR("*sequence*: Parasitic power fixed load [MWe]"),
  	NULL},
 {"EparSf", (getter)Outputs_get_EparSf,(setter)0,
-	"Parasitic power field collector drives [MWe], array.",
+	PyDoc_STR("*sequence*: Parasitic power field collector drives [MWe]"),
  	NULL},
 {"Ets", (getter)Outputs_get_Ets,(setter)0,
-	"TES thermal energy available [MWht], array.",
+	PyDoc_STR("*sequence*: TES thermal energy available [MWht]"),
  	NULL},
 {"Ftrack", (getter)Outputs_get_Ftrack,(setter)0,
-	"Field collector fraction of time period tracking, array.",
+	PyDoc_STR("*sequence*: Field collector fraction of time period tracking"),
  	NULL},
 {"IAM", (getter)Outputs_get_IAM,(setter)0,
-	"Field collector incidence angle modifier, array.",
+	PyDoc_STR("*sequence*: Field collector incidence angle modifier"),
  	NULL},
 {"QTsFull", (getter)Outputs_get_QTsFull,(setter)0,
-	"Cycle thermal energy dumped - TES is full [MWt], array.",
+	PyDoc_STR("*sequence*: Cycle thermal energy dumped - TES is full [MWt]"),
  	NULL},
 {"QTsHl", (getter)Outputs_get_QTsHl,(setter)0,
-	"TES thermal losses from tank(s) [MWt], array.",
+	PyDoc_STR("*sequence*: TES thermal losses from tank(s) [MWt]"),
  	NULL},
 {"QTurSu", (getter)Outputs_get_QTurSu,(setter)0,
-	"Cycle thermal startup energy [MWt], array.",
+	PyDoc_STR("*sequence*: Cycle thermal startup energy [MWt]"),
  	NULL},
 {"Qdni", (getter)Outputs_get_Qdni,(setter)0,
-	"Field thermal power total incident [MWt], array.",
+	PyDoc_STR("*sequence*: Field thermal power total incident [MWt]"),
  	NULL},
 {"Qdump", (getter)Outputs_get_Qdump,(setter)0,
-	"Cycle thermal energy dumped - solar field [MWt], array.",
+	PyDoc_STR("*sequence*: Cycle thermal energy dumped - solar field [MWt]"),
  	NULL},
 {"Qfts", (getter)Outputs_get_Qfts,(setter)0,
-	"TES thermal energy from storage [MWt], array.",
+	PyDoc_STR("*sequence*: TES thermal energy from storage [MWt]"),
  	NULL},
 {"Qgas", (getter)Outputs_get_Qgas,(setter)0,
-	"Fossil thermal power produced [MWt], array.",
+	PyDoc_STR("*sequence*: Fossil thermal power produced [MWt]"),
  	NULL},
 {"QhtfFpHtr", (getter)Outputs_get_QhtfFpHtr,(setter)0,
-	"Fossil freeze protection provided [MWt], array.",
+	PyDoc_STR("*sequence*: Fossil freeze protection provided [MWt]"),
  	NULL},
 {"QhtfFpTES", (getter)Outputs_get_QhtfFpTES,(setter)0,
-	"Parasitic thermal TES freeze protection [MWt], array.",
+	PyDoc_STR("*sequence*: Parasitic thermal TES freeze protection [MWt]"),
  	NULL},
 {"QhtfFreezeProt", (getter)Outputs_get_QhtfFreezeProt,(setter)0,
-	"Parasitic thermal field freeze protection [MWt], array.",
+	PyDoc_STR("*sequence*: Parasitic thermal field freeze protection [MWt]"),
  	NULL},
 {"Qmin", (getter)Outputs_get_Qmin,(setter)0,
-	"Cycle thermal energy dumped - min. load requirement [MWt], array.",
+	PyDoc_STR("*sequence*: Cycle thermal energy dumped - min. load requirement [MWt]"),
  	NULL},
 {"QnipCosTh", (getter)Outputs_get_QnipCosTh,(setter)0,
-	"Field collector DNI-cosine product [W/m2], array.",
+	PyDoc_STR("*sequence*: Field collector DNI-cosine product [W/m2]"),
  	NULL},
 {"Qsf", (getter)Outputs_get_Qsf,(setter)0,
-	"Field thermal power total produced [MWt], array.",
+	PyDoc_STR("*sequence*: Field thermal power total produced [MWt]"),
  	NULL},
 {"QsfAbs", (getter)Outputs_get_QsfAbs,(setter)0,
-	"Field thermal power absorbed [MWt], array.",
+	PyDoc_STR("*sequence*: Field thermal power absorbed [MWt]"),
  	NULL},
 {"QsfHceHL", (getter)Outputs_get_QsfHceHL,(setter)0,
-	"Field thermal power receiver total loss [MWt], array.",
+	PyDoc_STR("*sequence*: Field thermal power receiver total loss [MWt]"),
  	NULL},
 {"QsfPipeHL", (getter)Outputs_get_QsfPipeHL,(setter)0,
-	"Field thermal power pipe losses [MWt], array.",
+	PyDoc_STR("*sequence*: Field thermal power pipe losses [MWt]"),
  	NULL},
 {"QsfWarmup", (getter)Outputs_get_QsfWarmup,(setter)0,
-	"Field HTF energy inertial (consumed) [MWht], array.",
+	PyDoc_STR("*sequence*: Field HTF energy inertial (consumed) [MWht]"),
  	NULL},
 {"Qsfnipcosth", (getter)Outputs_get_Qsfnipcosth,(setter)0,
-	"Field thermal power incident after cosine [MWt], array.",
+	PyDoc_STR("*sequence*: Field thermal power incident after cosine [MWt]"),
  	NULL},
 {"Qtpb", (getter)Outputs_get_Qtpb,(setter)0,
-	"Cycle thermal power input [MWt], array.",
+	PyDoc_STR("*sequence*: Cycle thermal power input [MWt]"),
  	NULL},
 {"Qtts", (getter)Outputs_get_Qtts,(setter)0,
-	"TES thermal energy into storage [MWt], array.",
+	PyDoc_STR("*sequence*: TES thermal energy into storage [MWt]"),
  	NULL},
 {"RecHl", (getter)Outputs_get_RecHl,(setter)0,
-	"Field thermal power receiver heat loss [kJ/hr-m2], array.",
+	PyDoc_STR("*sequence*: Field thermal power receiver heat loss [kJ/hr-m2]"),
  	NULL},
 {"RowShadow", (getter)Outputs_get_RowShadow,(setter)0,
-	"Field collector row shadowing loss, array.",
+	PyDoc_STR("*sequence*: Field collector row shadowing loss"),
  	NULL},
 {"SfMassFlow", (getter)Outputs_get_SfMassFlow,(setter)0,
-	"Field HTF mass flow rate total [kg/s], array.",
+	PyDoc_STR("*sequence*: Field HTF mass flow rate total [kg/s]"),
  	NULL},
 {"SfTo", (getter)Outputs_get_SfTo,(setter)0,
-	"Field HTF temperature hot header outlet [C], array.",
+	PyDoc_STR("*sequence*: Field HTF temperature hot header outlet [C]"),
  	NULL},
 {"Theta", (getter)Outputs_get_Theta,(setter)0,
-	"Field collector solar incidence angle [deg], array.",
+	PyDoc_STR("*sequence*: Field collector solar incidence angle [deg]"),
  	NULL},
 {"TrackAngle", (getter)Outputs_get_TrackAngle,(setter)0,
-	"Field collector tracking angle [deg], array.",
+	PyDoc_STR("*sequence*: Field collector tracking angle [deg]"),
  	NULL},
 {"annual_W_cycle_gross", (getter)Outputs_get_annual_W_cycle_gross,(setter)0,
-	"Electrical source - Power cycle gross output [kWh], number.",
+	PyDoc_STR("*float*: Electrical source - Power cycle gross output [kWh]"),
  	NULL},
 {"annual_energy", (getter)Outputs_get_annual_energy,(setter)0,
-	"Annual energy [kWh], number.",
+	PyDoc_STR("*float*: Annual energy [kWh]"),
  	NULL},
 {"annual_fuel_usage", (getter)Outputs_get_annual_fuel_usage,(setter)0,
-	"Annual fuel usage [kWh], number.",
+	PyDoc_STR("*float*: Annual fuel usage [kWh]"),
  	NULL},
 {"beam", (getter)Outputs_get_beam,(setter)0,
-	"Resource Beam normal irradiance [W/m2], array.",
+	PyDoc_STR("*sequence*: Resource Beam normal irradiance [W/m2]"),
  	NULL},
 {"capacity_factor", (getter)Outputs_get_capacity_factor,(setter)0,
-	"Capacity factor [%], number.",
+	PyDoc_STR("*float*: Capacity factor [%]"),
  	NULL},
 {"conversion_factor", (getter)Outputs_get_conversion_factor,(setter)0,
-	"Gross to Net Conversion Factor [%], number.",
+	PyDoc_STR("*float*: Gross to Net Conversion Factor [%]"),
  	NULL},
 {"gen", (getter)Outputs_get_gen,(setter)0,
-	"System power generated [kW], array.",
+	PyDoc_STR("*sequence*: System power generated [kW]"),
  	NULL},
 {"hour", (getter)Outputs_get_hour,(setter)0,
-	"Resource Hour of Day, array.",
+	PyDoc_STR("*sequence*: Resource Hour of Day"),
  	NULL},
 {"kwh_per_kw", (getter)Outputs_get_kwh_per_kw,(setter)0,
-	"First year kWh/kW [kWh/kW], number.",
+	PyDoc_STR("*float*: First year kWh/kW [kWh/kW]"),
  	NULL},
 {"month", (getter)Outputs_get_month,(setter)0,
-	"Resource Month, array.",
+	PyDoc_STR("*sequence*: Resource Month"),
  	NULL},
 {"o_SfTi", (getter)Outputs_get_o_SfTi,(setter)0,
-	"Field HTF temperature cold header inlet [C], array.",
+	PyDoc_STR("*sequence*: Field HTF temperature cold header inlet [C]"),
  	NULL},
 {"pres", (getter)Outputs_get_pres,(setter)0,
-	"Resource Pressure [mbar], array.",
+	PyDoc_STR("*sequence*: Resource Pressure [mbar]"),
  	NULL},
 {"solazi", (getter)Outputs_get_solazi,(setter)0,
-	"Resource Solar Azimuth [deg], array.",
+	PyDoc_STR("*sequence*: Resource Solar Azimuth [deg]"),
  	NULL},
 {"solzen", (getter)Outputs_get_solzen,(setter)0,
-	"Resource Solar Zenith [deg], array.",
+	PyDoc_STR("*sequence*: Resource Solar Zenith [deg]"),
  	NULL},
 {"system_heat_rate", (getter)Outputs_get_system_heat_rate,(setter)0,
-	"System heat rate [MMBtu/MWh], number.",
+	PyDoc_STR("*float*: System heat rate [MMBtu/MWh]"),
  	NULL},
 {"system_use_lifetime_output", (getter)Outputs_get_system_use_lifetime_output,(setter)0,
-	"Use lifetime output [0/1], number.",
+	PyDoc_STR("*float*: Use lifetime output [0/1]"),
  	NULL},
 {"tdry", (getter)Outputs_get_tdry,(setter)0,
-	"Resource Dry bulb temperature [C], array.",
+	PyDoc_STR("*sequence*: Resource Dry bulb temperature [C]"),
  	NULL},
 {"tou_value", (getter)Outputs_get_tou_value,(setter)0,
-	"Resource time-of-use value, array.",
+	PyDoc_STR("*sequence*: Resource time-of-use value"),
  	NULL},
 {"twet", (getter)Outputs_get_twet,(setter)0,
-	"Resource Wet bulb temperature [C], array.",
+	PyDoc_STR("*sequence*: Resource Wet bulb temperature [C]"),
  	NULL},
 {"wspd", (getter)Outputs_get_wspd,(setter)0,
-	"Resource Wind Speed [m/s], array.",
+	PyDoc_STR("*sequence*: Resource Wind Speed [m/s]"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -3450,7 +3450,7 @@ static PyTypeObject Outputs_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		Outputs_methods,         /*tp_methods*/
@@ -3460,7 +3460,7 @@ static PyTypeObject Outputs_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -3603,9 +3603,9 @@ static PyMethodDef TcstroughEmpirical_methods[] = {
 		{"execute",            (PyCFunction)TcstroughEmpirical_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
 		{"assign",            (PyCFunction)TcstroughEmpirical_assign,  METH_VARARGS,
-				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs")},
+				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Weather': { var: val, ...}, ...}``")},
 		{"export",            (PyCFunction)TcstroughEmpirical_export,  METH_VARARGS,
-				PyDoc_STR("assign() -> None\n Export attributes into dictionary")},
+				PyDoc_STR("export() -> dict\n Export attributes into nested dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -3645,11 +3645,11 @@ static PyTypeObject TcstroughEmpirical_Type = {
 		0,                          /*tp_setattro*/
 		0,                          /*tp_as_buffer*/
 		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
-		"see html for help",        /*tp_doc*/
+		"This class contains all the variable information for running a simulation. Variables are grouped together in the subclasses as properties. If property assignments are the wrong type, an error is thrown.",        /*tp_doc*/
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		TcstroughEmpirical_methods,      /*tp_methods*/
@@ -3659,7 +3659,7 @@ static PyTypeObject TcstroughEmpirical_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,                          /*tp_new*/
@@ -3722,12 +3722,12 @@ TcstroughEmpirical_default(PyObject *self, PyObject *args)
 
 static PyMethodDef TcstroughEmpiricalModule_methods[] = {
 		{"new",             TcstroughEmpirical_new,         METH_VARARGS,
-				PyDoc_STR("new() -> new TcstroughEmpirical object")},
+				PyDoc_STR("new() -> TcstroughEmpirical")},
 		{"default",             TcstroughEmpirical_default,         METH_VARARGS,
-				PyDoc_STR("default(financial) -> new TcstroughEmpirical object with financial model-specific default attributes\n"
-				"Options: EmpiricalTroughAllEquityPartnershipFlip\nEmpiricalTroughCommercial\nEmpiricalTroughCommercialPPA\nEmpiricalTroughIndependentPowerProducer\nEmpiricalTroughLCOECalculator\nEmpiricalTroughLeveragedPartnershipFlip\nEmpiricalTroughNone\nEmpiricalTroughSaleLeaseback\nEmpiricalTroughSingleOwner")},
+				PyDoc_STR("default(config) -> TcstroughEmpirical\n\nUse financial model-specific default attributes\n"
+				"config options:\n\n- \"EmpiricalTroughAllEquityPartnershipFlip\"\n- \"EmpiricalTroughCommercial\"\n- \"EmpiricalTroughCommercialPPA\"\n- \"EmpiricalTroughIndependentPowerProducer\"\n- \"EmpiricalTroughLCOECalculator\"\n- \"EmpiricalTroughLeveragedPartnershipFlip\"\n- \"EmpiricalTroughNone\"\n- \"EmpiricalTroughSaleLeaseback\"\n- \"EmpiricalTroughSingleOwner\"")},
 		{"wrap",             TcstroughEmpirical_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> new TcstroughEmpirical object around existing PySSC data, taking over memory ownership")},
+				PyDoc_STR("wrap(ssc_data_t) -> TcstroughEmpirical\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{NULL,              NULL}           /* sentinel */
 };
 

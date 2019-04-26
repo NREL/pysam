@@ -58,42 +58,42 @@ IPHLCOH_export(IPHLCOHObject *self, PyObject *args)
 
 static PyMethodDef IPHLCOH_methods[] = {
 		{"assign",            (PyCFunction)IPHLCOH_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``IPHLCOH_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)IPHLCOH_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 static PyObject *
 IPHLCOH_get_annual_electricity_consumption(IPHLCOHObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_IphToLcoefcr_IPHLCOH_annual_electricity_consumption_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_IphToLcoefcr_IPHLCOH_annual_electricity_consumption_nget, self->data_ptr);
 }
 
 static int
 IPHLCOH_set_annual_electricity_consumption(IPHLCOHObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_IphToLcoefcr_IPHLCOH_annual_electricity_consumption_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_IphToLcoefcr_IPHLCOH_annual_electricity_consumption_nset, self->data_ptr);
 }
 
 static PyObject *
 IPHLCOH_get_electricity_rate(IPHLCOHObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_IphToLcoefcr_IPHLCOH_electricity_rate_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_IphToLcoefcr_IPHLCOH_electricity_rate_nget, self->data_ptr);
 }
 
 static int
 IPHLCOH_set_electricity_rate(IPHLCOHObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_IphToLcoefcr_IPHLCOH_electricity_rate_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_IphToLcoefcr_IPHLCOH_electricity_rate_nset, self->data_ptr);
 }
 
 static PyGetSetDef IPHLCOH_getset[] = {
 {"annual_electricity_consumption", (getter)IPHLCOH_get_annual_electricity_consumption,(setter)IPHLCOH_set_annual_electricity_consumption,
-	"Annual electricity consumptoin w/ avail derate [kWe-hr], number.\n Required.",
+	PyDoc_STR("*float*: Annual electricity consumptoin w/ avail derate [kWe-hr]\n\n*Required*: True"),
  	NULL},
 {"electricity_rate", (getter)IPHLCOH_get_electricity_rate,(setter)IPHLCOH_set_electricity_rate,
-	"Cost of electricity used to operate pumps/trackers [$/kWe], number.\n Required.",
+	PyDoc_STR("*float*: Cost of electricity used to operate pumps/trackers [$/kWe]\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -126,7 +126,7 @@ static PyTypeObject IPHLCOH_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		IPHLCOH_methods,         /*tp_methods*/
@@ -136,7 +136,7 @@ static PyTypeObject IPHLCOH_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -196,27 +196,27 @@ SimpleLCOE_export(SimpleLCOEObject *self, PyObject *args)
 
 static PyMethodDef SimpleLCOE_methods[] = {
 		{"assign",            (PyCFunction)SimpleLCOE_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``SimpleLCOE_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)SimpleLCOE_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 static PyObject *
 SimpleLCOE_get_fixed_operating_cost(SimpleLCOEObject *self, void *closure)
 {
-	return PySAM_float_getter(SAM_IphToLcoefcr_SimpleLCOE_fixed_operating_cost_fget, self->data_ptr);
+	return PySAM_double_getter(SAM_IphToLcoefcr_SimpleLCOE_fixed_operating_cost_nget, self->data_ptr);
 }
 
 static int
 SimpleLCOE_set_fixed_operating_cost(SimpleLCOEObject *self, PyObject *value, void *closure)
 {
-	return PySAM_float_setter(value, SAM_IphToLcoefcr_SimpleLCOE_fixed_operating_cost_fset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_IphToLcoefcr_SimpleLCOE_fixed_operating_cost_nset, self->data_ptr);
 }
 
 static PyGetSetDef SimpleLCOE_getset[] = {
 {"fixed_operating_cost", (getter)SimpleLCOE_get_fixed_operating_cost,(setter)SimpleLCOE_set_fixed_operating_cost,
-	"Annual fixed operating cost [$/kW], number.\n Required.",
+	PyDoc_STR("*float*: Annual fixed operating cost [$/kW]\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -249,7 +249,7 @@ static PyTypeObject SimpleLCOE_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		SimpleLCOE_methods,         /*tp_methods*/
@@ -259,7 +259,7 @@ static PyTypeObject SimpleLCOE_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -319,9 +319,9 @@ Outputs_export(OutputsObject *self, PyObject *args)
 
 static PyMethodDef Outputs_methods[] = {
 		{"assign",            (PyCFunction)Outputs_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Outputs_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Outputs_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -357,7 +357,7 @@ static PyTypeObject Outputs_Type = {
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		Outputs_methods,         /*tp_methods*/
@@ -367,7 +367,7 @@ static PyTypeObject Outputs_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,             /*tp_new*/
@@ -467,9 +467,9 @@ static PyMethodDef IphToLcoefcr_methods[] = {
 		{"execute",            (PyCFunction)IphToLcoefcr_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
 		{"assign",            (PyCFunction)IphToLcoefcr_assign,  METH_VARARGS,
-				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs")},
+				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'IPH LCOH': { var: val, ...}, ...}``")},
 		{"export",            (PyCFunction)IphToLcoefcr_export,  METH_VARARGS,
-				PyDoc_STR("assign() -> None\n Export attributes into dictionary")},
+				PyDoc_STR("export() -> dict\n Export attributes into nested dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -509,11 +509,11 @@ static PyTypeObject IphToLcoefcr_Type = {
 		0,                          /*tp_setattro*/
 		0,                          /*tp_as_buffer*/
 		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
-		"see html for help",        /*tp_doc*/
+		"This class contains all the variable information for running a simulation. Variables are grouped together in the subclasses as properties. If property assignments are the wrong type, an error is thrown.",        /*tp_doc*/
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistoffset*/
+		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
 		IphToLcoefcr_methods,      /*tp_methods*/
@@ -523,7 +523,7 @@ static PyTypeObject IphToLcoefcr_Type = {
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
 		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictoffset*/
+		0,                          /*tp_dictofnset*/
 		0,                          /*tp_init*/
 		0,                          /*tp_alloc*/
 		0,                          /*tp_new*/
@@ -586,12 +586,12 @@ IphToLcoefcr_default(PyObject *self, PyObject *args)
 
 static PyMethodDef IphToLcoefcrModule_methods[] = {
 		{"new",             IphToLcoefcr_new,         METH_VARARGS,
-				PyDoc_STR("new() -> new IphToLcoefcr object")},
+				PyDoc_STR("new() -> IphToLcoefcr")},
 		{"default",             IphToLcoefcr_default,         METH_VARARGS,
-				PyDoc_STR("default(financial) -> new IphToLcoefcr object with financial model-specific default attributes\n"
-				"Options: DSGLIPHLCOHCalculator\nPhysicalTroughIPHLCOHCalculator")},
+				PyDoc_STR("default(config) -> IphToLcoefcr\n\nUse financial model-specific default attributes\n"
+				"config options:\n\n- \"DSGLIPHLCOHCalculator\"\n- \"PhysicalTroughIPHLCOHCalculator\"")},
 		{"wrap",             IphToLcoefcr_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> new IphToLcoefcr object around existing PySSC data, taking over memory ownership")},
+				PyDoc_STR("wrap(ssc_data_t) -> IphToLcoefcr\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{NULL,              NULL}           /* sentinel */
 };
 

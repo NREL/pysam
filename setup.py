@@ -33,13 +33,13 @@ def copy_defaults():
 
 
 from setuptools import setup, Extension
-import distutils.command.bdist_conda
-
+import distutils
 import sys
 
 # determine if making PyPi or Conda distribution
 distclass = distutils.core.Distribution
 if sys.argv[1] == "bdist_conda":
+    import distutils.command.bdist_conda
     distclass = distutils.command.bdist_conda.CondaDistribution
 
 libs = []
@@ -80,7 +80,7 @@ with open(path.join(this_directory, 'RELEASE.md'), encoding='utf-8') as f:
 
 setup(
     name='NREL-PySAM',
-    version='1.1',
+    version='1.2',
     distclass=distclass,
     url='http://www.github.com/nrel/pysam',
     description="National Renewable Energy Laboratory's System Advisor Model Python Wrapper",
@@ -94,6 +94,7 @@ setup(
     package_dir={'PySAM': 'data'},
     package_data={
         '': libfiles},
+    install_requires=[ 'NREL-PySAM-stubs' ],
     ext_modules=[
         Extension('PySAM.AdjustmentFactors',
                   ['src/AdjustmentFactors.c'],
