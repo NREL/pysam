@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Thermalrate Module &#8212; PySAM 1.1 documentation</title>
+    <title>Thermalrate Module &#8212; PySAM 1.2 documentation</title>
     <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     
@@ -28,10 +28,7 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">PySAM 1.1 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">PySAM 1.2 documentation</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -80,272 +77,18 @@
 <h2>Creating an Instance<a class="headerlink" href="#creating-an-instance" title="Permalink to this headline">¶</a></h2>
 <p>There are three methods to create a new instance of a PySAM module. Using <code class="docutils literal notranslate"><span class="pre">default</span></code> populates the newclass’ attributes with default values specific to a <code class="docutils literal notranslate"><span class="pre">config</span></code>. Each technology-financialconfiguration corresponds to a SAM GUI configuration. Using <code class="docutils literal notranslate"><span class="pre">new</span></code> creates an instance with empty attributes. The <code class="docutils literal notranslate"><span class="pre">wrap</span></code> function allows compatibility with PySSC, for details, refer to <span class="xref std std-doc">PySSC</span>.</p>
 <p><strong>Thermalrate model description</strong></p>
-<span class="target" id="module-PySAM.Thermalrate"></span><p>Thermal flat rate structure net revenue calculator</p>
-<dl class="function">
-<dt id="PySAM.Thermalrate.default">
-<code class="descclassname">PySAM.Thermalrate.</code><code class="descname">default</code><span class="sig-paren">(</span><em>config</em><span class="sig-paren">)</span> &#x2192; Thermalrate<a class="headerlink" href="#PySAM.Thermalrate.default" title="Permalink to this definition">¶</a></dt>
-<dd><p>Use financial model-specific default attributes
-config options:</p>
-<ul class="simple">
-<li><p>“FuelCellCommercial”</p></li>
-<li><p>“FuelCellSingleOwner”</p></li>
-</ul>
-</dd></dl>
-
-<dl class="function">
-<dt id="PySAM.Thermalrate.new">
-<code class="descclassname">PySAM.Thermalrate.</code><code class="descname">new</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Thermalrate<a class="headerlink" href="#PySAM.Thermalrate.new" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="PySAM.Thermalrate.wrap">
-<code class="descclassname">PySAM.Thermalrate.</code><code class="descname">wrap</code><span class="sig-paren">(</span><em>ssc_data_t</em><span class="sig-paren">)</span> &#x2192; Thermalrate<a class="headerlink" href="#PySAM.Thermalrate.wrap" title="Permalink to this definition">¶</a></dt>
-<dd><p>Use existing PySSC data</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Do not call PySSC.data_free on the ssc_data_t provided to <code class="docutils literal notranslate"><span class="pre">wrap</span></code></p>
-</div>
-</dd></dl>
-
 </div>
 <div class="section" id="functions">
 <h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="PySAM.Thermalrate.Thermalrate">
-<em class="property">class </em><code class="descclassname">PySAM.Thermalrate.</code><code class="descname">Thermalrate</code><a class="headerlink" href="#PySAM.Thermalrate.Thermalrate" title="Permalink to this definition">¶</a></dt>
-<dd><p>This class contains all the variable information for running a simulation. Variables are grouped together in the subclasses as properties. If property assignments are the wrong type, an error is thrown.</p>
-<dl class="method">
-<dt id="PySAM.Thermalrate.Thermalrate.assign">
-<code class="descname">assign</code><span class="sig-paren">(</span><em>dict</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Thermalrate.Thermalrate.assign" title="Permalink to this definition">¶</a></dt>
-<dd><p>Assign attributes from nested dictionary, except for Outputs</p>
-<p><code class="docutils literal notranslate"><span class="pre">nested_dict</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">'Thermal</span> <span class="pre">Rate':</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...},</span> <span class="pre">...}</span></code></p>
-</dd></dl>
-
-<dl class="method">
-<dt id="PySAM.Thermalrate.Thermalrate.execute">
-<code class="descname">execute</code><span class="sig-paren">(</span><em>int verbosity</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Thermalrate.Thermalrate.execute" title="Permalink to this definition">¶</a></dt>
-<dd><p>Execute simulation with verbosity level 0 (default) or 1</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="PySAM.Thermalrate.Thermalrate.export">
-<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.Thermalrate.Thermalrate.export" title="Permalink to this definition">¶</a></dt>
-<dd><p>Export attributes into nested dictionary</p>
-</dd></dl>
-
-</dd></dl>
-
 </div>
 <div class="section" id="thermalrate-group">
 <h2>ThermalRate Group<a class="headerlink" href="#thermalrate-group" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="PySAM.Thermalrate.Thermalrate.ThermalRate">
-<em class="property">class </em><code class="descclassname">PySAM.Thermalrate.Thermalrate.</code><code class="descname">ThermalRate</code><a class="headerlink" href="#PySAM.Thermalrate.Thermalrate.ThermalRate" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="method">
-<dt id="PySAM.Thermalrate.Thermalrate.ThermalRate.assign">
-<code class="descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Thermalrate.Thermalrate.ThermalRate.assign" title="Permalink to this definition">¶</a></dt>
-<dd><p>Assign attributes from dictionary</p>
-<p><code class="docutils literal notranslate"><span class="pre">ThermalRate_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
-</dd></dl>
-
-<dl class="method">
-<dt id="PySAM.Thermalrate.Thermalrate.ThermalRate.export">
-<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.Thermalrate.Thermalrate.ThermalRate.export" title="Permalink to this definition">¶</a></dt>
-<dd><p>Export attributes into dictionary</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Thermalrate.Thermalrate.ThermalRate.en_thermal_rates">
-<code class="descname">en_thermal_rates</code><a class="headerlink" href="#PySAM.Thermalrate.Thermalrate.ThermalRate.en_thermal_rates" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em>: Optionally enable/disable thermal_rate [years]</p>
-<p><em>Constraints</em>: INTEGER,MIN=0,MAX=1</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Thermalrate.Thermalrate.ThermalRate.fuelcell_power_thermal">
-<code class="descname">fuelcell_power_thermal</code><a class="headerlink" href="#PySAM.Thermalrate.Thermalrate.ThermalRate.fuelcell_power_thermal" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>sequence</em>: Fuel cell power generated [kW-t]</p>
-<p><em>Required</em>: True</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Thermalrate.Thermalrate.ThermalRate.thermal_buy_rate">
-<code class="descname">thermal_buy_rate</code><a class="headerlink" href="#PySAM.Thermalrate.Thermalrate.ThermalRate.thermal_buy_rate" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>sequence</em>: Thermal buy rate [$/kW-t]</p>
-<p><em>Required</em>: set to 0 if not provided.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Thermalrate.Thermalrate.ThermalRate.thermal_buy_rate_flat">
-<code class="descname">thermal_buy_rate_flat</code><a class="headerlink" href="#PySAM.Thermalrate.Thermalrate.ThermalRate.thermal_buy_rate_flat" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em>: Thermal buy rate flat [$/kW-t]</p>
-<p><em>Required</em>: set to 0 if not provided.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Thermalrate.Thermalrate.ThermalRate.thermal_buy_rate_option">
-<code class="descname">thermal_buy_rate_option</code><a class="headerlink" href="#PySAM.Thermalrate.Thermalrate.ThermalRate.thermal_buy_rate_option" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em>: Thermal buy rate option [0/1]</p>
-<p><em>Options</em>: 0=flat,1=timestep</p>
-<p><em>Constraints</em>: INTEGER,MIN=0,MAX=1</p>
-<p><em>Required</em>: set to 0 if not provided.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Thermalrate.Thermalrate.ThermalRate.thermal_degradation">
-<code class="descname">thermal_degradation</code><a class="headerlink" href="#PySAM.Thermalrate.Thermalrate.ThermalRate.thermal_degradation" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>sequence</em>: Annual energy degradation [%]</p>
-<p><em>Required</em>: set to 0 if not provided.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Thermalrate.Thermalrate.ThermalRate.thermal_load">
-<code class="descname">thermal_load</code><a class="headerlink" href="#PySAM.Thermalrate.Thermalrate.ThermalRate.thermal_load" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>sequence</em>: Thermal load (year 1) [kW-t]</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Thermalrate.Thermalrate.ThermalRate.thermal_load_escalation">
-<code class="descname">thermal_load_escalation</code><a class="headerlink" href="#PySAM.Thermalrate.Thermalrate.ThermalRate.thermal_load_escalation" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>sequence</em>: Annual load escalation [%/year]</p>
-<p><em>Required</em>: set to 0 if not provided.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Thermalrate.Thermalrate.ThermalRate.thermal_rate_escalation">
-<code class="descname">thermal_rate_escalation</code><a class="headerlink" href="#PySAM.Thermalrate.Thermalrate.ThermalRate.thermal_rate_escalation" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>sequence</em>: Annual thermal rate escalation [%/year]</p>
-<p><em>Required</em>: set to 0 if not provided.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Thermalrate.Thermalrate.ThermalRate.thermal_sell_rate">
-<code class="descname">thermal_sell_rate</code><a class="headerlink" href="#PySAM.Thermalrate.Thermalrate.ThermalRate.thermal_sell_rate" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>sequence</em>: Thermal sell rate [$/kW-t]</p>
-<p><em>Required</em>: set to 0 if not provided.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Thermalrate.Thermalrate.ThermalRate.thermal_sell_rate_flat">
-<code class="descname">thermal_sell_rate_flat</code><a class="headerlink" href="#PySAM.Thermalrate.Thermalrate.ThermalRate.thermal_sell_rate_flat" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em>: Thermal sell rate flat [$/kW-t]</p>
-<p><em>Required</em>: set to 0 if not provided.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Thermalrate.Thermalrate.ThermalRate.thermal_sell_rate_option">
-<code class="descname">thermal_sell_rate_option</code><a class="headerlink" href="#PySAM.Thermalrate.Thermalrate.ThermalRate.thermal_sell_rate_option" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em>: Thermal sell rate option [0/1]</p>
-<p><em>Options</em>: 0=flat,1=timestep</p>
-<p><em>Constraints</em>: INTEGER,MIN=0,MAX=1</p>
-<p><em>Required</em>: set to 0 if not provided.</p>
-</dd></dl>
-
-</dd></dl>
-
 </div>
 <div class="section" id="lifetime-group">
 <h2>Lifetime Group<a class="headerlink" href="#lifetime-group" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="PySAM.Thermalrate.Thermalrate.Lifetime">
-<em class="property">class </em><code class="descclassname">PySAM.Thermalrate.Thermalrate.</code><code class="descname">Lifetime</code><a class="headerlink" href="#PySAM.Thermalrate.Thermalrate.Lifetime" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="method">
-<dt id="PySAM.Thermalrate.Thermalrate.Lifetime.assign">
-<code class="descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Thermalrate.Thermalrate.Lifetime.assign" title="Permalink to this definition">¶</a></dt>
-<dd><p>Assign attributes from dictionary</p>
-<p><code class="docutils literal notranslate"><span class="pre">Lifetime_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
-</dd></dl>
-
-<dl class="method">
-<dt id="PySAM.Thermalrate.Thermalrate.Lifetime.export">
-<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.Thermalrate.Thermalrate.Lifetime.export" title="Permalink to this definition">¶</a></dt>
-<dd><p>Export attributes into dictionary</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Thermalrate.Thermalrate.Lifetime.analysis_period">
-<code class="descname">analysis_period</code><a class="headerlink" href="#PySAM.Thermalrate.Thermalrate.Lifetime.analysis_period" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em>: Number of years in analysis [years]</p>
-<p><em>Constraints</em>: INTEGER,POSITIVE</p>
-<p><em>Required</em>: True</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Thermalrate.Thermalrate.Lifetime.inflation_rate">
-<code class="descname">inflation_rate</code><a class="headerlink" href="#PySAM.Thermalrate.Thermalrate.Lifetime.inflation_rate" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em>: Inflation rate [%]</p>
-<p><em>Constraints</em>: MIN=-99</p>
-<p><em>Required</em>: True</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Thermalrate.Thermalrate.Lifetime.system_use_lifetime_output">
-<code class="descname">system_use_lifetime_output</code><a class="headerlink" href="#PySAM.Thermalrate.Thermalrate.Lifetime.system_use_lifetime_output" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em>: Lifetime hourly system outputs [0/1]</p>
-<p><em>Options</em>: 0=hourly first year,1=hourly lifetime</p>
-<p><em>Constraints</em>: INTEGER,MIN=0,MAX=1</p>
-<p><em>Required</em>: True</p>
-</dd></dl>
-
-</dd></dl>
-
 </div>
 <div class="section" id="outputs-group">
 <h2>Outputs Group<a class="headerlink" href="#outputs-group" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="PySAM.Thermalrate.Thermalrate.Outputs">
-<em class="property">class </em><code class="descclassname">PySAM.Thermalrate.Thermalrate.</code><code class="descname">Outputs</code><a class="headerlink" href="#PySAM.Thermalrate.Thermalrate.Outputs" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="method">
-<dt id="PySAM.Thermalrate.Thermalrate.Outputs.assign">
-<code class="descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Thermalrate.Thermalrate.Outputs.assign" title="Permalink to this definition">¶</a></dt>
-<dd><p>Assign attributes from dictionary</p>
-<p><code class="docutils literal notranslate"><span class="pre">Outputs_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
-</dd></dl>
-
-<dl class="method">
-<dt id="PySAM.Thermalrate.Thermalrate.Outputs.export">
-<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.Thermalrate.Thermalrate.Outputs.export" title="Permalink to this definition">¶</a></dt>
-<dd><p>Export attributes into dictionary</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Thermalrate.Thermalrate.Outputs.thermal_cost_with_system_year1">
-<code class="descname">thermal_cost_with_system_year1</code><a class="headerlink" href="#PySAM.Thermalrate.Thermalrate.Outputs.thermal_cost_with_system_year1" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em>: Thermal cost with sytem (year 1) [$]</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Thermalrate.Thermalrate.Outputs.thermal_cost_without_system_year1">
-<code class="descname">thermal_cost_without_system_year1</code><a class="headerlink" href="#PySAM.Thermalrate.Thermalrate.Outputs.thermal_cost_without_system_year1" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em>: Thermal cost without system (year 1) [$]</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Thermalrate.Thermalrate.Outputs.thermal_load_year1">
-<code class="descname">thermal_load_year1</code><a class="headerlink" href="#PySAM.Thermalrate.Thermalrate.Outputs.thermal_load_year1" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em>: Thermal load (year 1) [$]</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Thermalrate.Thermalrate.Outputs.thermal_revenue_with_system">
-<code class="descname">thermal_revenue_with_system</code><a class="headerlink" href="#PySAM.Thermalrate.Thermalrate.Outputs.thermal_revenue_with_system" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>sequence</em>: Thermal revenue with system [$]</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Thermalrate.Thermalrate.Outputs.thermal_revenue_without_system">
-<code class="descname">thermal_revenue_without_system</code><a class="headerlink" href="#PySAM.Thermalrate.Thermalrate.Outputs.thermal_revenue_without_system" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>sequence</em>: Thermal revenue without system [$]</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Thermalrate.Thermalrate.Outputs.thermal_savings_year1">
-<code class="descname">thermal_savings_year1</code><a class="headerlink" href="#PySAM.Thermalrate.Thermalrate.Outputs.thermal_savings_year1" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em>: Thermal savings (year 1) [$]</p>
-</dd></dl>
-
-</dd></dl>
-
 </div>
 </div>
 
@@ -361,10 +104,7 @@ config options:</p>
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">PySAM 1.1 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">PySAM 1.2 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

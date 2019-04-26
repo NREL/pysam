@@ -12,7 +12,7 @@
 
 import os
 import sys
-# sys.path.insert(0, '../build/lib.macosx-10.14-x86_64-3.7/PySAM')
+sys.path.insert(0, 'PySAM')
 
 
 # -- Project information -----------------------------------------------------
@@ -22,7 +22,7 @@ copyright = '2019, NREL'
 author = 'dguittet'
 
 # The full version, including alpha/beta/rc tags
-release = '1.1'
+release = '1.2'
 
 
 # -- General configuration ---------------------------------------------------

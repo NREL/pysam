@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Thirdpartyownership Module &#8212; PySAM 1.1 documentation</title>
+    <title>Thirdpartyownership Module &#8212; PySAM 1.2 documentation</title>
     <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     
@@ -28,10 +28,7 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">PySAM 1.1 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">PySAM 1.2 documentation</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -85,455 +82,33 @@
 <h2>Creating an Instance<a class="headerlink" href="#creating-an-instance" title="Permalink to this headline">¶</a></h2>
 <p>There are three methods to create a new instance of a PySAM module. Using <code class="docutils literal notranslate"><span class="pre">default</span></code> populates the newclass’ attributes with default values specific to a <code class="docutils literal notranslate"><span class="pre">config</span></code>. Each technology-financialconfiguration corresponds to a SAM GUI configuration. Using <code class="docutils literal notranslate"><span class="pre">new</span></code> creates an instance with empty attributes. The <code class="docutils literal notranslate"><span class="pre">wrap</span></code> function allows compatibility with PySSC, for details, refer to <span class="xref std std-doc">PySSC</span>.</p>
 <p><strong>Thirdpartyownership model description</strong></p>
-<span class="target" id="module-PySAM.Thirdpartyownership"></span><p>Third party ownership with PPA or lease agreement financial model from host perspective</p>
-<dl class="function">
-<dt id="PySAM.Thirdpartyownership.default">
-<code class="descclassname">PySAM.Thirdpartyownership.</code><code class="descname">default</code><span class="sig-paren">(</span><em>config</em><span class="sig-paren">)</span> &#x2192; Thirdpartyownership<a class="headerlink" href="#PySAM.Thirdpartyownership.default" title="Permalink to this definition">¶</a></dt>
-<dd><p>Use financial model-specific default attributes
-config options:</p>
-<ul class="simple">
-<li><p>“FlatPlatePVThirdParty”</p></li>
-<li><p>“GenericSystemThirdParty”</p></li>
-<li><p>“PVWattsThirdParty”</p></li>
-</ul>
-</dd></dl>
-
-<dl class="function">
-<dt id="PySAM.Thirdpartyownership.new">
-<code class="descclassname">PySAM.Thirdpartyownership.</code><code class="descname">new</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Thirdpartyownership<a class="headerlink" href="#PySAM.Thirdpartyownership.new" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="PySAM.Thirdpartyownership.wrap">
-<code class="descclassname">PySAM.Thirdpartyownership.</code><code class="descname">wrap</code><span class="sig-paren">(</span><em>ssc_data_t</em><span class="sig-paren">)</span> &#x2192; Thirdpartyownership<a class="headerlink" href="#PySAM.Thirdpartyownership.wrap" title="Permalink to this definition">¶</a></dt>
-<dd><p>Use existing PySSC data</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Do not call PySSC.data_free on the ssc_data_t provided to <code class="docutils literal notranslate"><span class="pre">wrap</span></code></p>
-</div>
-</dd></dl>
-
 </div>
 <div class="section" id="functions">
 <h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="PySAM.Thirdpartyownership.Thirdpartyownership">
-<em class="property">class </em><code class="descclassname">PySAM.Thirdpartyownership.</code><code class="descname">Thirdpartyownership</code><a class="headerlink" href="#PySAM.Thirdpartyownership.Thirdpartyownership" title="Permalink to this definition">¶</a></dt>
-<dd><p>This class contains all the variable information for running a simulation. Variables are grouped together in the subclasses as properties. If property assignments are the wrong type, an error is thrown.</p>
-<dl class="method">
-<dt id="PySAM.Thirdpartyownership.Thirdpartyownership.assign">
-<code class="descname">assign</code><span class="sig-paren">(</span><em>dict</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Thirdpartyownership.Thirdpartyownership.assign" title="Permalink to this definition">¶</a></dt>
-<dd><p>Assign attributes from nested dictionary, except for Outputs</p>
-<p><code class="docutils literal notranslate"><span class="pre">nested_dict</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">'Depreciation':</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...},</span> <span class="pre">...}</span></code></p>
-</dd></dl>
-
-<dl class="method">
-<dt id="PySAM.Thirdpartyownership.Thirdpartyownership.execute">
-<code class="descname">execute</code><span class="sig-paren">(</span><em>int verbosity</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Thirdpartyownership.Thirdpartyownership.execute" title="Permalink to this definition">¶</a></dt>
-<dd><p>Execute simulation with verbosity level 0 (default) or 1</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="PySAM.Thirdpartyownership.Thirdpartyownership.export">
-<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.Thirdpartyownership.Thirdpartyownership.export" title="Permalink to this definition">¶</a></dt>
-<dd><p>Export attributes into nested dictionary</p>
-</dd></dl>
-
-</dd></dl>
-
 </div>
 <div class="section" id="depreciation-group">
 <h2>Depreciation Group<a class="headerlink" href="#depreciation-group" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="PySAM.Thirdpartyownership.Thirdpartyownership.Depreciation">
-<em class="property">class </em><code class="descclassname">PySAM.Thirdpartyownership.Thirdpartyownership.</code><code class="descname">Depreciation</code><a class="headerlink" href="#PySAM.Thirdpartyownership.Thirdpartyownership.Depreciation" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="method">
-<dt id="PySAM.Thirdpartyownership.Thirdpartyownership.Depreciation.assign">
-<code class="descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Thirdpartyownership.Thirdpartyownership.Depreciation.assign" title="Permalink to this definition">¶</a></dt>
-<dd><p>Assign attributes from dictionary</p>
-<p><code class="docutils literal notranslate"><span class="pre">Depreciation_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
-</dd></dl>
-
-<dl class="method">
-<dt id="PySAM.Thirdpartyownership.Thirdpartyownership.Depreciation.export">
-<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.Thirdpartyownership.Thirdpartyownership.Depreciation.export" title="Permalink to this definition">¶</a></dt>
-<dd><p>Export attributes into dictionary</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Thirdpartyownership.Thirdpartyownership.Depreciation.depr_fed_custom">
-<code class="descname">depr_fed_custom</code><a class="headerlink" href="#PySAM.Thirdpartyownership.Thirdpartyownership.Depreciation.depr_fed_custom" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>sequence</em>: Federal custom depreciation [%/year]</p>
-<p><em>Required</em>: set to 3 if not provided.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Thirdpartyownership.Thirdpartyownership.Depreciation.depr_fed_sl_years">
-<code class="descname">depr_fed_sl_years</code><a class="headerlink" href="#PySAM.Thirdpartyownership.Thirdpartyownership.Depreciation.depr_fed_sl_years" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em>: Federal depreciation straight-line Years [years]</p>
-<p><em>Constraints</em>: INTEGER,POSITIVE</p>
-<p><em>Required</em>: set to 2 if not provided.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Thirdpartyownership.Thirdpartyownership.Depreciation.depr_fed_type">
-<code class="descname">depr_fed_type</code><a class="headerlink" href="#PySAM.Thirdpartyownership.Thirdpartyownership.Depreciation.depr_fed_type" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em>: Federal depreciation type</p>
-<p><em>Options</em>: 0=none,1=macrs_half_year,2=sl,3=custom</p>
-<p><em>Constraints</em>: INTEGER,MIN=0,MAX=3</p>
-<p><em>Required</em>: set to 0 if not provided.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Thirdpartyownership.Thirdpartyownership.Depreciation.depr_sta_custom">
-<code class="descname">depr_sta_custom</code><a class="headerlink" href="#PySAM.Thirdpartyownership.Thirdpartyownership.Depreciation.depr_sta_custom" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>sequence</em>: State custom depreciation [%/year]</p>
-<p><em>Required</em>: set to 3 if not provided.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Thirdpartyownership.Thirdpartyownership.Depreciation.depr_sta_sl_years">
-<code class="descname">depr_sta_sl_years</code><a class="headerlink" href="#PySAM.Thirdpartyownership.Thirdpartyownership.Depreciation.depr_sta_sl_years" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em>: State depreciation straight-line years [years]</p>
-<p><em>Constraints</em>: INTEGER,POSITIVE</p>
-<p><em>Required</em>: set to 2 if not provided.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Thirdpartyownership.Thirdpartyownership.Depreciation.depr_sta_type">
-<code class="descname">depr_sta_type</code><a class="headerlink" href="#PySAM.Thirdpartyownership.Thirdpartyownership.Depreciation.depr_sta_type" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em>: State depreciation type</p>
-<p><em>Options</em>: 0=none,1=macrs_half_year,2=sl,3=custom</p>
-<p><em>Constraints</em>: INTEGER,MIN=0,MAX=3</p>
-<p><em>Required</em>: set to 0 if not provided.</p>
-</dd></dl>
-
-</dd></dl>
-
 </div>
 <div class="section" id="financials-group">
 <h2>Financials Group<a class="headerlink" href="#financials-group" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="PySAM.Thirdpartyownership.Thirdpartyownership.Financials">
-<em class="property">class </em><code class="descclassname">PySAM.Thirdpartyownership.Thirdpartyownership.</code><code class="descname">Financials</code><a class="headerlink" href="#PySAM.Thirdpartyownership.Thirdpartyownership.Financials" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="method">
-<dt id="PySAM.Thirdpartyownership.Thirdpartyownership.Financials.assign">
-<code class="descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Thirdpartyownership.Thirdpartyownership.Financials.assign" title="Permalink to this definition">¶</a></dt>
-<dd><p>Assign attributes from dictionary</p>
-<p><code class="docutils literal notranslate"><span class="pre">Financials_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
-</dd></dl>
-
-<dl class="method">
-<dt id="PySAM.Thirdpartyownership.Thirdpartyownership.Financials.export">
-<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.Thirdpartyownership.Thirdpartyownership.Financials.export" title="Permalink to this definition">¶</a></dt>
-<dd><p>Export attributes into dictionary</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Thirdpartyownership.Thirdpartyownership.Financials.analysis_period">
-<code class="descname">analysis_period</code><a class="headerlink" href="#PySAM.Thirdpartyownership.Thirdpartyownership.Financials.analysis_period" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em>: Analyis period [years]</p>
-<p><em>Constraints</em>: INTEGER,MIN=0,MAX=50</p>
-<p><em>Required</em>: set to 30 if not provided.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Thirdpartyownership.Thirdpartyownership.Financials.inflation_rate">
-<code class="descname">inflation_rate</code><a class="headerlink" href="#PySAM.Thirdpartyownership.Thirdpartyownership.Financials.inflation_rate" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em>: Inflation rate [%]</p>
-<p><em>Constraints</em>: MIN=-99</p>
-<p><em>Required</em>: True</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Thirdpartyownership.Thirdpartyownership.Financials.real_discount_rate">
-<code class="descname">real_discount_rate</code><a class="headerlink" href="#PySAM.Thirdpartyownership.Thirdpartyownership.Financials.real_discount_rate" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em>: Real discount rate [%]</p>
-<p><em>Constraints</em>: MIN=-99</p>
-<p><em>Required</em>: True</p>
-</dd></dl>
-
-</dd></dl>
-
 </div>
 <div class="section" id="financialthirdpartyownership-group">
 <h2>FinancialThirdPartyOwnership Group<a class="headerlink" href="#financialthirdpartyownership-group" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="PySAM.Thirdpartyownership.Thirdpartyownership.FinancialThirdPartyOwnership">
-<em class="property">class </em><code class="descclassname">PySAM.Thirdpartyownership.Thirdpartyownership.</code><code class="descname">FinancialThirdPartyOwnership</code><a class="headerlink" href="#PySAM.Thirdpartyownership.Thirdpartyownership.FinancialThirdPartyOwnership" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="method">
-<dt id="PySAM.Thirdpartyownership.Thirdpartyownership.FinancialThirdPartyOwnership.assign">
-<code class="descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Thirdpartyownership.Thirdpartyownership.FinancialThirdPartyOwnership.assign" title="Permalink to this definition">¶</a></dt>
-<dd><p>Assign attributes from dictionary</p>
-<p><code class="docutils literal notranslate"><span class="pre">FinancialThirdPartyOwnership_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
-</dd></dl>
-
-<dl class="method">
-<dt id="PySAM.Thirdpartyownership.Thirdpartyownership.FinancialThirdPartyOwnership.export">
-<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.Thirdpartyownership.Thirdpartyownership.FinancialThirdPartyOwnership.export" title="Permalink to this definition">¶</a></dt>
-<dd><p>Export attributes into dictionary</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Thirdpartyownership.Thirdpartyownership.FinancialThirdPartyOwnership.lease_or_ppa">
-<code class="descname">lease_or_ppa</code><a class="headerlink" href="#PySAM.Thirdpartyownership.Thirdpartyownership.FinancialThirdPartyOwnership.lease_or_ppa" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em>: Lease or PPA agreement [0/1]</p>
-<p><em>Options</em>: 0=lease,1=ppa</p>
-<p><em>Constraints</em>: INTEGER,MIN=0,MAX=1</p>
-<p><em>Required</em>: set to 0 if not provided.</p>
-</dd></dl>
-
-</dd></dl>
-
 </div>
 <div class="section" id="common-group">
 <h2>Common Group<a class="headerlink" href="#common-group" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="PySAM.Thirdpartyownership.Thirdpartyownership.Common">
-<em class="property">class </em><code class="descclassname">PySAM.Thirdpartyownership.Thirdpartyownership.</code><code class="descname">Common</code><a class="headerlink" href="#PySAM.Thirdpartyownership.Thirdpartyownership.Common" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="method">
-<dt id="PySAM.Thirdpartyownership.Thirdpartyownership.Common.assign">
-<code class="descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Thirdpartyownership.Thirdpartyownership.Common.assign" title="Permalink to this definition">¶</a></dt>
-<dd><p>Assign attributes from dictionary</p>
-<p><code class="docutils literal notranslate"><span class="pre">Common_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
-</dd></dl>
-
-<dl class="method">
-<dt id="PySAM.Thirdpartyownership.Thirdpartyownership.Common.export">
-<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.Thirdpartyownership.Thirdpartyownership.Common.export" title="Permalink to this definition">¶</a></dt>
-<dd><p>Export attributes into dictionary</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Thirdpartyownership.Thirdpartyownership.Common.annual_energy_value">
-<code class="descname">annual_energy_value</code><a class="headerlink" href="#PySAM.Thirdpartyownership.Thirdpartyownership.Common.annual_energy_value" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>sequence</em>: Energy value [$]</p>
-<p><em>Required</em>: True</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Thirdpartyownership.Thirdpartyownership.Common.gen">
-<code class="descname">gen</code><a class="headerlink" href="#PySAM.Thirdpartyownership.Thirdpartyownership.Common.gen" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>sequence</em>: Power generated by renewable resource [kW]</p>
-<p><em>Required</em>: True</p>
-</dd></dl>
-
-</dd></dl>
-
 </div>
 <div class="section" id="annualoutput-group">
 <h2>AnnualOutput Group<a class="headerlink" href="#annualoutput-group" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="PySAM.Thirdpartyownership.Thirdpartyownership.AnnualOutput">
-<em class="property">class </em><code class="descclassname">PySAM.Thirdpartyownership.Thirdpartyownership.</code><code class="descname">AnnualOutput</code><a class="headerlink" href="#PySAM.Thirdpartyownership.Thirdpartyownership.AnnualOutput" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="method">
-<dt id="PySAM.Thirdpartyownership.Thirdpartyownership.AnnualOutput.assign">
-<code class="descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Thirdpartyownership.Thirdpartyownership.AnnualOutput.assign" title="Permalink to this definition">¶</a></dt>
-<dd><p>Assign attributes from dictionary</p>
-<p><code class="docutils literal notranslate"><span class="pre">AnnualOutput_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
-</dd></dl>
-
-<dl class="method">
-<dt id="PySAM.Thirdpartyownership.Thirdpartyownership.AnnualOutput.export">
-<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.Thirdpartyownership.Thirdpartyownership.AnnualOutput.export" title="Permalink to this definition">¶</a></dt>
-<dd><p>Export attributes into dictionary</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Thirdpartyownership.Thirdpartyownership.AnnualOutput.degradation">
-<code class="descname">degradation</code><a class="headerlink" href="#PySAM.Thirdpartyownership.Thirdpartyownership.AnnualOutput.degradation" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>sequence</em>: Annual degradation [%]</p>
-<p><em>Required</em>: True</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Thirdpartyownership.Thirdpartyownership.AnnualOutput.system_use_lifetime_output">
-<code class="descname">system_use_lifetime_output</code><a class="headerlink" href="#PySAM.Thirdpartyownership.Thirdpartyownership.AnnualOutput.system_use_lifetime_output" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em>: Lifetime hourly system outputs [0/1]</p>
-<p><em>Options</em>: 0=hourly first year,1=hourly lifetime</p>
-<p><em>Constraints</em>: INTEGER,MIN=0</p>
-<p><em>Required</em>: True</p>
-</dd></dl>
-
-</dd></dl>
-
 </div>
 <div class="section" id="cashflow-group">
 <h2>CashFlow Group<a class="headerlink" href="#cashflow-group" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="PySAM.Thirdpartyownership.Thirdpartyownership.CashFlow">
-<em class="property">class </em><code class="descclassname">PySAM.Thirdpartyownership.Thirdpartyownership.</code><code class="descname">CashFlow</code><a class="headerlink" href="#PySAM.Thirdpartyownership.Thirdpartyownership.CashFlow" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="method">
-<dt id="PySAM.Thirdpartyownership.Thirdpartyownership.CashFlow.assign">
-<code class="descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Thirdpartyownership.Thirdpartyownership.CashFlow.assign" title="Permalink to this definition">¶</a></dt>
-<dd><p>Assign attributes from dictionary</p>
-<p><code class="docutils literal notranslate"><span class="pre">CashFlow_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
-</dd></dl>
-
-<dl class="method">
-<dt id="PySAM.Thirdpartyownership.Thirdpartyownership.CashFlow.export">
-<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.Thirdpartyownership.Thirdpartyownership.CashFlow.export" title="Permalink to this definition">¶</a></dt>
-<dd><p>Export attributes into dictionary</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Thirdpartyownership.Thirdpartyownership.CashFlow.lease_escalation">
-<code class="descname">lease_escalation</code><a class="headerlink" href="#PySAM.Thirdpartyownership.Thirdpartyownership.CashFlow.lease_escalation" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em>: Monthly lease escalation [%/year]</p>
-<p><em>Required</em>: set to 0 if not provided.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Thirdpartyownership.Thirdpartyownership.CashFlow.lease_price">
-<code class="descname">lease_price</code><a class="headerlink" href="#PySAM.Thirdpartyownership.Thirdpartyownership.CashFlow.lease_price" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em>: Monthly lease price [$/month]</p>
-<p><em>Required</em>: set to 0 if not provided.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Thirdpartyownership.Thirdpartyownership.CashFlow.ppa_escalation">
-<code class="descname">ppa_escalation</code><a class="headerlink" href="#PySAM.Thirdpartyownership.Thirdpartyownership.CashFlow.ppa_escalation" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em>: Monthly lease escalation [%/year]</p>
-<p><em>Required</em>: set to 1 if not provided.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Thirdpartyownership.Thirdpartyownership.CashFlow.ppa_price">
-<code class="descname">ppa_price</code><a class="headerlink" href="#PySAM.Thirdpartyownership.Thirdpartyownership.CashFlow.ppa_price" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em>: Monthly lease price [$/month]</p>
-<p><em>Required</em>: set to 1 if not provided.</p>
-</dd></dl>
-
-</dd></dl>
-
 </div>
 <div class="section" id="electricitycost-group">
 <h2>ElectricityCost Group<a class="headerlink" href="#electricitycost-group" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="PySAM.Thirdpartyownership.Thirdpartyownership.ElectricityCost">
-<em class="property">class </em><code class="descclassname">PySAM.Thirdpartyownership.Thirdpartyownership.</code><code class="descname">ElectricityCost</code><a class="headerlink" href="#PySAM.Thirdpartyownership.Thirdpartyownership.ElectricityCost" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="method">
-<dt id="PySAM.Thirdpartyownership.Thirdpartyownership.ElectricityCost.assign">
-<code class="descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Thirdpartyownership.Thirdpartyownership.ElectricityCost.assign" title="Permalink to this definition">¶</a></dt>
-<dd><p>Assign attributes from dictionary</p>
-<p><code class="docutils literal notranslate"><span class="pre">ElectricityCost_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
-</dd></dl>
-
-<dl class="method">
-<dt id="PySAM.Thirdpartyownership.Thirdpartyownership.ElectricityCost.export">
-<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.Thirdpartyownership.Thirdpartyownership.ElectricityCost.export" title="Permalink to this definition">¶</a></dt>
-<dd><p>Export attributes into dictionary</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Thirdpartyownership.Thirdpartyownership.ElectricityCost.elec_cost_with_system">
-<code class="descname">elec_cost_with_system</code><a class="headerlink" href="#PySAM.Thirdpartyownership.Thirdpartyownership.ElectricityCost.elec_cost_with_system" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>sequence</em>: Energy value [$]</p>
-<p><em>Required</em>: True</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Thirdpartyownership.Thirdpartyownership.ElectricityCost.elec_cost_without_system">
-<code class="descname">elec_cost_without_system</code><a class="headerlink" href="#PySAM.Thirdpartyownership.Thirdpartyownership.ElectricityCost.elec_cost_without_system" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>sequence</em>: Energy value [$]</p>
-<p><em>Required</em>: True</p>
-</dd></dl>
-
-</dd></dl>
-
 </div>
 <div class="section" id="outputs-group">
 <h2>Outputs Group<a class="headerlink" href="#outputs-group" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="PySAM.Thirdpartyownership.Thirdpartyownership.Outputs">
-<em class="property">class </em><code class="descclassname">PySAM.Thirdpartyownership.Thirdpartyownership.</code><code class="descname">Outputs</code><a class="headerlink" href="#PySAM.Thirdpartyownership.Thirdpartyownership.Outputs" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="method">
-<dt id="PySAM.Thirdpartyownership.Thirdpartyownership.Outputs.assign">
-<code class="descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Thirdpartyownership.Thirdpartyownership.Outputs.assign" title="Permalink to this definition">¶</a></dt>
-<dd><p>Assign attributes from dictionary</p>
-<p><code class="docutils literal notranslate"><span class="pre">Outputs_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
-</dd></dl>
-
-<dl class="method">
-<dt id="PySAM.Thirdpartyownership.Thirdpartyownership.Outputs.export">
-<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.Thirdpartyownership.Thirdpartyownership.Outputs.export" title="Permalink to this definition">¶</a></dt>
-<dd><p>Export attributes into dictionary</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Thirdpartyownership.Thirdpartyownership.Outputs.cf_after_tax_cash_flow">
-<code class="descname">cf_after_tax_cash_flow</code><a class="headerlink" href="#PySAM.Thirdpartyownership.Thirdpartyownership.Outputs.cf_after_tax_cash_flow" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>sequence</em>: After-tax cash flow [$]</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Thirdpartyownership.Thirdpartyownership.Outputs.cf_after_tax_net_equity_cost_flow">
-<code class="descname">cf_after_tax_net_equity_cost_flow</code><a class="headerlink" href="#PySAM.Thirdpartyownership.Thirdpartyownership.Outputs.cf_after_tax_net_equity_cost_flow" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>sequence</em>: After-tax annual costs [$]</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Thirdpartyownership.Thirdpartyownership.Outputs.cf_agreement_cost">
-<code class="descname">cf_agreement_cost</code><a class="headerlink" href="#PySAM.Thirdpartyownership.Thirdpartyownership.Outputs.cf_agreement_cost" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>sequence</em>: Agreement cost [$]</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Thirdpartyownership.Thirdpartyownership.Outputs.cf_cumulative_payback_with_expenses">
-<code class="descname">cf_cumulative_payback_with_expenses</code><a class="headerlink" href="#PySAM.Thirdpartyownership.Thirdpartyownership.Outputs.cf_cumulative_payback_with_expenses" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>sequence</em>: Cumulative simple payback with expenses [$]</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Thirdpartyownership.Thirdpartyownership.Outputs.cf_energy_net">
-<code class="descname">cf_energy_net</code><a class="headerlink" href="#PySAM.Thirdpartyownership.Thirdpartyownership.Outputs.cf_energy_net" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>sequence</em>: Energy [kWh]</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Thirdpartyownership.Thirdpartyownership.Outputs.cf_length">
-<code class="descname">cf_length</code><a class="headerlink" href="#PySAM.Thirdpartyownership.Thirdpartyownership.Outputs.cf_length" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em>: Agreement period</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Thirdpartyownership.Thirdpartyownership.Outputs.cf_nte">
-<code class="descname">cf_nte</code><a class="headerlink" href="#PySAM.Thirdpartyownership.Thirdpartyownership.Outputs.cf_nte" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>sequence</em>: Host indifference point by year [cents/kWh]</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Thirdpartyownership.Thirdpartyownership.Outputs.cf_payback_with_expenses">
-<code class="descname">cf_payback_with_expenses</code><a class="headerlink" href="#PySAM.Thirdpartyownership.Thirdpartyownership.Outputs.cf_payback_with_expenses" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>sequence</em>: Simple payback with expenses [$]</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Thirdpartyownership.Thirdpartyownership.Outputs.lnte_nom">
-<code class="descname">lnte_nom</code><a class="headerlink" href="#PySAM.Thirdpartyownership.Thirdpartyownership.Outputs.lnte_nom" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em>: Host indifference point real levelized value [cents/kWh]</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Thirdpartyownership.Thirdpartyownership.Outputs.lnte_real">
-<code class="descname">lnte_real</code><a class="headerlink" href="#PySAM.Thirdpartyownership.Thirdpartyownership.Outputs.lnte_real" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em>: Host indifference point nominal levelized value [cents/kWh]</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Thirdpartyownership.Thirdpartyownership.Outputs.npv">
-<code class="descname">npv</code><a class="headerlink" href="#PySAM.Thirdpartyownership.Thirdpartyownership.Outputs.npv" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em>: Net present value [$]</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Thirdpartyownership.Thirdpartyownership.Outputs.year1_nte">
-<code class="descname">year1_nte</code><a class="headerlink" href="#PySAM.Thirdpartyownership.Thirdpartyownership.Outputs.year1_nte" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em>: Host indifference point in Year 1 [cents/kWh]</p>
-</dd></dl>
-
-</dd></dl>
-
 </div>
 </div>
 
@@ -549,10 +124,7 @@ config options:</p>
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">PySAM 1.1 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">PySAM 1.2 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

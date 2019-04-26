@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>IphToLcoefcr Module &#8212; PySAM 1.1 documentation</title>
+    <title>IphToLcoefcr Module &#8212; PySAM 1.2 documentation</title>
     <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     
@@ -28,10 +28,7 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">PySAM 1.1 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">PySAM 1.2 documentation</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -80,145 +77,18 @@
 <h2>Creating an Instance<a class="headerlink" href="#creating-an-instance" title="Permalink to this headline">¶</a></h2>
 <p>There are three methods to create a new instance of a PySAM module. Using <code class="docutils literal notranslate"><span class="pre">default</span></code> populates the newclass’ attributes with default values specific to a <code class="docutils literal notranslate"><span class="pre">config</span></code>. Each technology-financialconfiguration corresponds to a SAM GUI configuration. Using <code class="docutils literal notranslate"><span class="pre">new</span></code> creates an instance with empty attributes. The <code class="docutils literal notranslate"><span class="pre">wrap</span></code> function allows compatibility with PySSC, for details, refer to <span class="xref std std-doc">PySSC</span>.</p>
 <p><strong>IphToLcoefcr model description</strong></p>
-<span class="target" id="module-PySAM.IphToLcoefcr"></span><p>Calculate levelized cost of heat using fixed charge rate method for industrial process heat models</p>
-<dl class="function">
-<dt id="PySAM.IphToLcoefcr.default">
-<code class="descclassname">PySAM.IphToLcoefcr.</code><code class="descname">default</code><span class="sig-paren">(</span><em>config</em><span class="sig-paren">)</span> &#x2192; IphToLcoefcr<a class="headerlink" href="#PySAM.IphToLcoefcr.default" title="Permalink to this definition">¶</a></dt>
-<dd><p>Use financial model-specific default attributes
-config options:</p>
-<ul class="simple">
-<li><p>“DSGLIPHLCOHCalculator”</p></li>
-<li><p>“PhysicalTroughIPHLCOHCalculator”</p></li>
-</ul>
-</dd></dl>
-
-<dl class="function">
-<dt id="PySAM.IphToLcoefcr.new">
-<code class="descclassname">PySAM.IphToLcoefcr.</code><code class="descname">new</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; IphToLcoefcr<a class="headerlink" href="#PySAM.IphToLcoefcr.new" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="PySAM.IphToLcoefcr.wrap">
-<code class="descclassname">PySAM.IphToLcoefcr.</code><code class="descname">wrap</code><span class="sig-paren">(</span><em>ssc_data_t</em><span class="sig-paren">)</span> &#x2192; IphToLcoefcr<a class="headerlink" href="#PySAM.IphToLcoefcr.wrap" title="Permalink to this definition">¶</a></dt>
-<dd><p>Use existing PySSC data</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Do not call PySSC.data_free on the ssc_data_t provided to <code class="docutils literal notranslate"><span class="pre">wrap</span></code></p>
-</div>
-</dd></dl>
-
 </div>
 <div class="section" id="functions">
 <h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="PySAM.IphToLcoefcr.IphToLcoefcr">
-<em class="property">class </em><code class="descclassname">PySAM.IphToLcoefcr.</code><code class="descname">IphToLcoefcr</code><a class="headerlink" href="#PySAM.IphToLcoefcr.IphToLcoefcr" title="Permalink to this definition">¶</a></dt>
-<dd><p>This class contains all the variable information for running a simulation. Variables are grouped together in the subclasses as properties. If property assignments are the wrong type, an error is thrown.</p>
-<dl class="method">
-<dt id="PySAM.IphToLcoefcr.IphToLcoefcr.assign">
-<code class="descname">assign</code><span class="sig-paren">(</span><em>dict</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.IphToLcoefcr.IphToLcoefcr.assign" title="Permalink to this definition">¶</a></dt>
-<dd><p>Assign attributes from nested dictionary, except for Outputs</p>
-<p><code class="docutils literal notranslate"><span class="pre">nested_dict</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">'IPH</span> <span class="pre">LCOH':</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...},</span> <span class="pre">...}</span></code></p>
-</dd></dl>
-
-<dl class="method">
-<dt id="PySAM.IphToLcoefcr.IphToLcoefcr.execute">
-<code class="descname">execute</code><span class="sig-paren">(</span><em>int verbosity</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.IphToLcoefcr.IphToLcoefcr.execute" title="Permalink to this definition">¶</a></dt>
-<dd><p>Execute simulation with verbosity level 0 (default) or 1</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="PySAM.IphToLcoefcr.IphToLcoefcr.export">
-<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.IphToLcoefcr.IphToLcoefcr.export" title="Permalink to this definition">¶</a></dt>
-<dd><p>Export attributes into nested dictionary</p>
-</dd></dl>
-
-</dd></dl>
-
 </div>
 <div class="section" id="iphlcoh-group">
 <h2>IPHLCOH Group<a class="headerlink" href="#iphlcoh-group" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="PySAM.IphToLcoefcr.IphToLcoefcr.IPHLCOH">
-<em class="property">class </em><code class="descclassname">PySAM.IphToLcoefcr.IphToLcoefcr.</code><code class="descname">IPHLCOH</code><a class="headerlink" href="#PySAM.IphToLcoefcr.IphToLcoefcr.IPHLCOH" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="method">
-<dt id="PySAM.IphToLcoefcr.IphToLcoefcr.IPHLCOH.assign">
-<code class="descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.IphToLcoefcr.IphToLcoefcr.IPHLCOH.assign" title="Permalink to this definition">¶</a></dt>
-<dd><p>Assign attributes from dictionary</p>
-<p><code class="docutils literal notranslate"><span class="pre">IPHLCOH_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
-</dd></dl>
-
-<dl class="method">
-<dt id="PySAM.IphToLcoefcr.IphToLcoefcr.IPHLCOH.export">
-<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.IphToLcoefcr.IphToLcoefcr.IPHLCOH.export" title="Permalink to this definition">¶</a></dt>
-<dd><p>Export attributes into dictionary</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.IphToLcoefcr.IphToLcoefcr.IPHLCOH.annual_electricity_consumption">
-<code class="descname">annual_electricity_consumption</code><a class="headerlink" href="#PySAM.IphToLcoefcr.IphToLcoefcr.IPHLCOH.annual_electricity_consumption" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em>: Annual electricity consumptoin w/ avail derate [kWe-hr]</p>
-<p><em>Required</em>: True</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.IphToLcoefcr.IphToLcoefcr.IPHLCOH.electricity_rate">
-<code class="descname">electricity_rate</code><a class="headerlink" href="#PySAM.IphToLcoefcr.IphToLcoefcr.IPHLCOH.electricity_rate" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em>: Cost of electricity used to operate pumps/trackers [$/kWe]</p>
-<p><em>Required</em>: True</p>
-</dd></dl>
-
-</dd></dl>
-
 </div>
 <div class="section" id="simplelcoe-group">
 <h2>SimpleLCOE Group<a class="headerlink" href="#simplelcoe-group" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="PySAM.IphToLcoefcr.IphToLcoefcr.SimpleLCOE">
-<em class="property">class </em><code class="descclassname">PySAM.IphToLcoefcr.IphToLcoefcr.</code><code class="descname">SimpleLCOE</code><a class="headerlink" href="#PySAM.IphToLcoefcr.IphToLcoefcr.SimpleLCOE" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="method">
-<dt id="PySAM.IphToLcoefcr.IphToLcoefcr.SimpleLCOE.assign">
-<code class="descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.IphToLcoefcr.IphToLcoefcr.SimpleLCOE.assign" title="Permalink to this definition">¶</a></dt>
-<dd><p>Assign attributes from dictionary</p>
-<p><code class="docutils literal notranslate"><span class="pre">SimpleLCOE_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
-</dd></dl>
-
-<dl class="method">
-<dt id="PySAM.IphToLcoefcr.IphToLcoefcr.SimpleLCOE.export">
-<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.IphToLcoefcr.IphToLcoefcr.SimpleLCOE.export" title="Permalink to this definition">¶</a></dt>
-<dd><p>Export attributes into dictionary</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.IphToLcoefcr.IphToLcoefcr.SimpleLCOE.fixed_operating_cost">
-<code class="descname">fixed_operating_cost</code><a class="headerlink" href="#PySAM.IphToLcoefcr.IphToLcoefcr.SimpleLCOE.fixed_operating_cost" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em>: Annual fixed operating cost [$/kW]</p>
-<p><em>Required</em>: True</p>
-</dd></dl>
-
-</dd></dl>
-
 </div>
 <div class="section" id="outputs-group">
 <h2>Outputs Group<a class="headerlink" href="#outputs-group" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="PySAM.IphToLcoefcr.IphToLcoefcr.Outputs">
-<em class="property">class </em><code class="descclassname">PySAM.IphToLcoefcr.IphToLcoefcr.</code><code class="descname">Outputs</code><a class="headerlink" href="#PySAM.IphToLcoefcr.IphToLcoefcr.Outputs" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="method">
-<dt id="PySAM.IphToLcoefcr.IphToLcoefcr.Outputs.assign">
-<code class="descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.IphToLcoefcr.IphToLcoefcr.Outputs.assign" title="Permalink to this definition">¶</a></dt>
-<dd><p>Assign attributes from dictionary</p>
-<p><code class="docutils literal notranslate"><span class="pre">Outputs_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
-</dd></dl>
-
-<dl class="method">
-<dt id="PySAM.IphToLcoefcr.IphToLcoefcr.Outputs.export">
-<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.IphToLcoefcr.IphToLcoefcr.Outputs.export" title="Permalink to this definition">¶</a></dt>
-<dd><p>Export attributes into dictionary</p>
-</dd></dl>
-
-</dd></dl>
-
 </div>
 </div>
 
@@ -234,10 +104,7 @@ config options:</p>
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">PySAM 1.1 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">PySAM 1.2 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

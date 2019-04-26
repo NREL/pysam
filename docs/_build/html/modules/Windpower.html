@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Windpower Module &#8212; PySAM 1.1 documentation</title>
+    <title>Windpower Module &#8212; PySAM 1.2 documentation</title>
     <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     
@@ -28,10 +28,7 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">PySAM 1.1 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">PySAM 1.2 documentation</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -84,512 +81,30 @@
 <h2>Creating an Instance<a class="headerlink" href="#creating-an-instance" title="Permalink to this headline">¶</a></h2>
 <p>There are three methods to create a new instance of a PySAM module. Using <code class="docutils literal notranslate"><span class="pre">default</span></code> populates the newclass’ attributes with default values specific to a <code class="docutils literal notranslate"><span class="pre">config</span></code>. Each technology-financialconfiguration corresponds to a SAM GUI configuration. Using <code class="docutils literal notranslate"><span class="pre">new</span></code> creates an instance with empty attributes. The <code class="docutils literal notranslate"><span class="pre">wrap</span></code> function allows compatibility with PySSC, for details, refer to <span class="xref std std-doc">PySSC</span>.</p>
 <p><strong>Windpower model description</strong></p>
-<span class="target" id="module-PySAM.Windpower"></span><p>Wind power system with one or more wind turbines</p>
-<dl class="function">
-<dt id="PySAM.Windpower.default">
-<code class="descclassname">PySAM.Windpower.</code><code class="descname">default</code><span class="sig-paren">(</span><em>config</em><span class="sig-paren">)</span> &#x2192; Windpower<a class="headerlink" href="#PySAM.Windpower.default" title="Permalink to this definition">¶</a></dt>
-<dd><p>Use financial model-specific default attributes
-config options:</p>
-<ul class="simple">
-<li><p>“WindPowerAllEquityPartnershipFlip”</p></li>
-<li><p>“WindPowerCommercial”</p></li>
-<li><p>“WindPowerCommercialPPA”</p></li>
-<li><p>“WindPowerIndependentPowerProducer”</p></li>
-<li><p>“WindPowerLCOECalculator”</p></li>
-<li><p>“WindPowerLeveragedPartnershipFlip”</p></li>
-<li><p>“WindPowerNone”</p></li>
-<li><p>“WindPowerResidential”</p></li>
-<li><p>“WindPowerSaleLeaseback”</p></li>
-<li><p>“WindPowerSingleOwner”</p></li>
-</ul>
-</dd></dl>
-
-<dl class="function">
-<dt id="PySAM.Windpower.new">
-<code class="descclassname">PySAM.Windpower.</code><code class="descname">new</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Windpower<a class="headerlink" href="#PySAM.Windpower.new" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="PySAM.Windpower.wrap">
-<code class="descclassname">PySAM.Windpower.</code><code class="descname">wrap</code><span class="sig-paren">(</span><em>ssc_data_t</em><span class="sig-paren">)</span> &#x2192; Windpower<a class="headerlink" href="#PySAM.Windpower.wrap" title="Permalink to this definition">¶</a></dt>
-<dd><p>Use existing PySSC data</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Do not call PySSC.data_free on the ssc_data_t provided to <code class="docutils literal notranslate"><span class="pre">wrap</span></code></p>
-</div>
-</dd></dl>
-
 </div>
 <div class="section" id="functions">
 <h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="PySAM.Windpower.Windpower">
-<em class="property">class </em><code class="descclassname">PySAM.Windpower.</code><code class="descname">Windpower</code><a class="headerlink" href="#PySAM.Windpower.Windpower" title="Permalink to this definition">¶</a></dt>
-<dd><p>This class contains all the variable information for running a simulation. Variables are grouped together in the subclasses as properties. If property assignments are the wrong type, an error is thrown.</p>
-<dl class="method">
-<dt id="PySAM.Windpower.Windpower.assign">
-<code class="descname">assign</code><span class="sig-paren">(</span><em>dict</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Windpower.Windpower.assign" title="Permalink to this definition">¶</a></dt>
-<dd><p>Assign attributes from nested dictionary, except for Outputs</p>
-<p><code class="docutils literal notranslate"><span class="pre">nested_dict</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">'Wind</span> <span class="pre">Resource</span> <span class="pre">File':</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...},</span> <span class="pre">...}</span></code></p>
-</dd></dl>
-
-<dl class="method">
-<dt id="PySAM.Windpower.Windpower.execute">
-<code class="descname">execute</code><span class="sig-paren">(</span><em>int verbosity</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Windpower.Windpower.execute" title="Permalink to this definition">¶</a></dt>
-<dd><p>Execute simulation with verbosity level 0 (default) or 1</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="PySAM.Windpower.Windpower.export">
-<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.Windpower.Windpower.export" title="Permalink to this definition">¶</a></dt>
-<dd><p>Export attributes into nested dictionary</p>
-</dd></dl>
-
-</dd></dl>
-
 </div>
 <div class="section" id="windresourcefile-group">
 <h2>WindResourceFile Group<a class="headerlink" href="#windresourcefile-group" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="PySAM.Windpower.Windpower.WindResourceFile">
-<em class="property">class </em><code class="descclassname">PySAM.Windpower.Windpower.</code><code class="descname">WindResourceFile</code><a class="headerlink" href="#PySAM.Windpower.Windpower.WindResourceFile" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="method">
-<dt id="PySAM.Windpower.Windpower.WindResourceFile.assign">
-<code class="descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Windpower.Windpower.WindResourceFile.assign" title="Permalink to this definition">¶</a></dt>
-<dd><p>Assign attributes from dictionary</p>
-<p><code class="docutils literal notranslate"><span class="pre">WindResourceFile_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
-</dd></dl>
-
-<dl class="method">
-<dt id="PySAM.Windpower.Windpower.WindResourceFile.export">
-<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.Windpower.Windpower.WindResourceFile.export" title="Permalink to this definition">¶</a></dt>
-<dd><p>Export attributes into dictionary</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Windpower.Windpower.WindResourceFile.wind_resource_data">
-<code class="descname">wind_resource_data</code><a class="headerlink" href="#PySAM.Windpower.Windpower.WindResourceFile.wind_resource_data" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>dict</em>: wind resouce data in memory</p>
-<p><em>Required</em>: False</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Windpower.Windpower.WindResourceFile.wind_resource_filename">
-<code class="descname">wind_resource_filename</code><a class="headerlink" href="#PySAM.Windpower.Windpower.WindResourceFile.wind_resource_filename" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>str</em>: local wind data file path</p>
-<p><em>Constraints</em>: LOCAL_FILE</p>
-<p><em>Required</em>: False</p>
-</dd></dl>
-
-</dd></dl>
-
 </div>
 <div class="section" id="windturbine-group">
 <h2>WindTurbine Group<a class="headerlink" href="#windturbine-group" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="PySAM.Windpower.Windpower.WindTurbine">
-<em class="property">class </em><code class="descclassname">PySAM.Windpower.Windpower.</code><code class="descname">WindTurbine</code><a class="headerlink" href="#PySAM.Windpower.Windpower.WindTurbine" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="method">
-<dt id="PySAM.Windpower.Windpower.WindTurbine.assign">
-<code class="descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Windpower.Windpower.WindTurbine.assign" title="Permalink to this definition">¶</a></dt>
-<dd><p>Assign attributes from dictionary</p>
-<p><code class="docutils literal notranslate"><span class="pre">WindTurbine_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
-</dd></dl>
-
-<dl class="method">
-<dt id="PySAM.Windpower.Windpower.WindTurbine.export">
-<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.Windpower.Windpower.WindTurbine.export" title="Permalink to this definition">¶</a></dt>
-<dd><p>Export attributes into dictionary</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Windpower.Windpower.WindTurbine.wind_resource_shear">
-<code class="descname">wind_resource_shear</code><a class="headerlink" href="#PySAM.Windpower.Windpower.WindTurbine.wind_resource_shear" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em>: Shear exponent</p>
-<p><em>Constraints</em>: MIN=0</p>
-<p><em>Required</em>: True</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Windpower.Windpower.WindTurbine.wind_turbine_hub_ht">
-<code class="descname">wind_turbine_hub_ht</code><a class="headerlink" href="#PySAM.Windpower.Windpower.WindTurbine.wind_turbine_hub_ht" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em>: Hub height [m]</p>
-<p><em>Constraints</em>: POSITIVE</p>
-<p><em>Required</em>: True</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Windpower.Windpower.WindTurbine.wind_turbine_max_cp">
-<code class="descname">wind_turbine_max_cp</code><a class="headerlink" href="#PySAM.Windpower.Windpower.WindTurbine.wind_turbine_max_cp" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em>: Max cp</p>
-<p><em>Constraints</em>: MIN=0</p>
-<p><em>Required</em>: set to 1 if not provided.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Windpower.Windpower.WindTurbine.wind_turbine_powercurve_powerout">
-<code class="descname">wind_turbine_powercurve_powerout</code><a class="headerlink" href="#PySAM.Windpower.Windpower.WindTurbine.wind_turbine_powercurve_powerout" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>sequence</em>: Power curve turbine output array [kW]</p>
-<p><em>Constraints</em>: LENGTH_EQUAL=wind_turbine_powercurve_windspeeds</p>
-<p><em>Required</em>: True</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Windpower.Windpower.WindTurbine.wind_turbine_powercurve_windspeeds">
-<code class="descname">wind_turbine_powercurve_windspeeds</code><a class="headerlink" href="#PySAM.Windpower.Windpower.WindTurbine.wind_turbine_powercurve_windspeeds" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>sequence</em>: Power curve wind speed array [m/s]</p>
-<p><em>Required</em>: True</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Windpower.Windpower.WindTurbine.wind_turbine_rotor_diameter">
-<code class="descname">wind_turbine_rotor_diameter</code><a class="headerlink" href="#PySAM.Windpower.Windpower.WindTurbine.wind_turbine_rotor_diameter" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em>: Rotor diameter [m]</p>
-<p><em>Constraints</em>: POSITIVE</p>
-<p><em>Required</em>: True</p>
-</dd></dl>
-
-</dd></dl>
-
 </div>
 <div class="section" id="windfarm-group">
 <h2>WindFarm Group<a class="headerlink" href="#windfarm-group" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="PySAM.Windpower.Windpower.WindFarm">
-<em class="property">class </em><code class="descclassname">PySAM.Windpower.Windpower.</code><code class="descname">WindFarm</code><a class="headerlink" href="#PySAM.Windpower.Windpower.WindFarm" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="method">
-<dt id="PySAM.Windpower.Windpower.WindFarm.assign">
-<code class="descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Windpower.Windpower.WindFarm.assign" title="Permalink to this definition">¶</a></dt>
-<dd><p>Assign attributes from dictionary</p>
-<p><code class="docutils literal notranslate"><span class="pre">WindFarm_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
-</dd></dl>
-
-<dl class="method">
-<dt id="PySAM.Windpower.Windpower.WindFarm.export">
-<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.Windpower.Windpower.WindFarm.export" title="Permalink to this definition">¶</a></dt>
-<dd><p>Export attributes into dictionary</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Windpower.Windpower.WindFarm.system_capacity">
-<code class="descname">system_capacity</code><a class="headerlink" href="#PySAM.Windpower.Windpower.WindFarm.system_capacity" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em>: Nameplate capacity [kW]</p>
-<p><em>Constraints</em>: MIN=0</p>
-<p><em>Required</em>: True</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Windpower.Windpower.WindFarm.wind_farm_losses_percent">
-<code class="descname">wind_farm_losses_percent</code><a class="headerlink" href="#PySAM.Windpower.Windpower.WindFarm.wind_farm_losses_percent" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em>: Percentage losses [%]</p>
-<p><em>Required</em>: True</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Windpower.Windpower.WindFarm.wind_farm_wake_model">
-<code class="descname">wind_farm_wake_model</code><a class="headerlink" href="#PySAM.Windpower.Windpower.WindFarm.wind_farm_wake_model" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em>: Wake Model [0/1/2]</p>
-<p><em>Constraints</em>: INTEGER</p>
-<p><em>Required</em>: True</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Windpower.Windpower.WindFarm.wind_farm_xCoordinates">
-<code class="descname">wind_farm_xCoordinates</code><a class="headerlink" href="#PySAM.Windpower.Windpower.WindFarm.wind_farm_xCoordinates" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>sequence</em>: Turbine X coordinates [m]</p>
-<p><em>Required</em>: True</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Windpower.Windpower.WindFarm.wind_farm_yCoordinates">
-<code class="descname">wind_farm_yCoordinates</code><a class="headerlink" href="#PySAM.Windpower.Windpower.WindFarm.wind_farm_yCoordinates" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>sequence</em>: Turbine Y coordinates [m]</p>
-<p><em>Constraints</em>: LENGTH_EQUAL=wind_farm_xCoordinates</p>
-<p><em>Required</em>: True</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Windpower.Windpower.WindFarm.wind_resource_turbulence_coeff">
-<code class="descname">wind_resource_turbulence_coeff</code><a class="headerlink" href="#PySAM.Windpower.Windpower.WindFarm.wind_resource_turbulence_coeff" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em>: Turbulence coefficient [%]</p>
-<p><em>Constraints</em>: MIN=0</p>
-<p><em>Required</em>: True</p>
-</dd></dl>
-
-</dd></dl>
-
 </div>
 <div class="section" id="windpower-group">
 <h2>WindPower Group<a class="headerlink" href="#windpower-group" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="PySAM.Windpower.Windpower.WindPower">
-<em class="property">class </em><code class="descclassname">PySAM.Windpower.Windpower.</code><code class="descname">WindPower</code><a class="headerlink" href="#PySAM.Windpower.Windpower.WindPower" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="method">
-<dt id="PySAM.Windpower.Windpower.WindPower.assign">
-<code class="descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Windpower.Windpower.WindPower.assign" title="Permalink to this definition">¶</a></dt>
-<dd><p>Assign attributes from dictionary</p>
-<p><code class="docutils literal notranslate"><span class="pre">WindPower_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
-</dd></dl>
-
-<dl class="method">
-<dt id="PySAM.Windpower.Windpower.WindPower.export">
-<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.Windpower.Windpower.WindPower.export" title="Permalink to this definition">¶</a></dt>
-<dd><p>Export attributes into dictionary</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Windpower.Windpower.WindPower.en_icing_cutoff">
-<code class="descname">en_icing_cutoff</code><a class="headerlink" href="#PySAM.Windpower.Windpower.WindPower.en_icing_cutoff" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em>: Enable Icing Cutoff [0/1]</p>
-<p><em>Constraints</em>: INTEGER</p>
-<p><em>Required</em>: set to 0 if not provided.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Windpower.Windpower.WindPower.en_low_temp_cutoff">
-<code class="descname">en_low_temp_cutoff</code><a class="headerlink" href="#PySAM.Windpower.Windpower.WindPower.en_low_temp_cutoff" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em>: Enable Low Temperature Cutoff [0/1]</p>
-<p><em>Constraints</em>: INTEGER</p>
-<p><em>Required</em>: set to 0 if not provided.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Windpower.Windpower.WindPower.icing_cutoff_rh">
-<code class="descname">icing_cutoff_rh</code><a class="headerlink" href="#PySAM.Windpower.Windpower.WindPower.icing_cutoff_rh" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em>: Icing Cutoff Relative Humidity [%]</p>
-<p><em>Constraints</em>: MIN=0</p>
-<p><em>Required</em>: set to 1 if not provided.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Windpower.Windpower.WindPower.icing_cutoff_temp">
-<code class="descname">icing_cutoff_temp</code><a class="headerlink" href="#PySAM.Windpower.Windpower.WindPower.icing_cutoff_temp" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em>: Icing Cutoff Temperature [C]</p>
-<p><em>Required</em>: set to 1 if not provided.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Windpower.Windpower.WindPower.low_temp_cutoff">
-<code class="descname">low_temp_cutoff</code><a class="headerlink" href="#PySAM.Windpower.Windpower.WindPower.low_temp_cutoff" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em>: Low Temperature Cutoff [C]</p>
-<p><em>Required</em>: set to 1 if not provided.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Windpower.Windpower.WindPower.wind_resource_model_choice">
-<code class="descname">wind_resource_model_choice</code><a class="headerlink" href="#PySAM.Windpower.Windpower.WindPower.wind_resource_model_choice" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em>: Hourly or Weibull model [0/1]</p>
-<p><em>Constraints</em>: INTEGER</p>
-<p><em>Required</em>: True</p>
-</dd></dl>
-
-</dd></dl>
-
 </div>
 <div class="section" id="windspeedweibulldistribution-group">
 <h2>WindSpeedWeibullDistribution Group<a class="headerlink" href="#windspeedweibulldistribution-group" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="PySAM.Windpower.Windpower.WindSpeedWeibullDistribution">
-<em class="property">class </em><code class="descclassname">PySAM.Windpower.Windpower.</code><code class="descname">WindSpeedWeibullDistribution</code><a class="headerlink" href="#PySAM.Windpower.Windpower.WindSpeedWeibullDistribution" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="method">
-<dt id="PySAM.Windpower.Windpower.WindSpeedWeibullDistribution.assign">
-<code class="descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Windpower.Windpower.WindSpeedWeibullDistribution.assign" title="Permalink to this definition">¶</a></dt>
-<dd><p>Assign attributes from dictionary</p>
-<p><code class="docutils literal notranslate"><span class="pre">WindSpeedWeibullDistribution_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
-</dd></dl>
-
-<dl class="method">
-<dt id="PySAM.Windpower.Windpower.WindSpeedWeibullDistribution.export">
-<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.Windpower.Windpower.WindSpeedWeibullDistribution.export" title="Permalink to this definition">¶</a></dt>
-<dd><p>Export attributes into dictionary</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Windpower.Windpower.WindSpeedWeibullDistribution.weibull_k_factor">
-<code class="descname">weibull_k_factor</code><a class="headerlink" href="#PySAM.Windpower.Windpower.WindSpeedWeibullDistribution.weibull_k_factor" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em>: Weibull K factor for wind resource</p>
-<p><em>Required</em>: set to 1 if not provided.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Windpower.Windpower.WindSpeedWeibullDistribution.weibull_reference_height">
-<code class="descname">weibull_reference_height</code><a class="headerlink" href="#PySAM.Windpower.Windpower.WindSpeedWeibullDistribution.weibull_reference_height" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em>: Reference height for Weibull wind speed [m]</p>
-<p><em>Constraints</em>: MIN=0</p>
-<p><em>Required</em>: set to 50 if not provided.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Windpower.Windpower.WindSpeedWeibullDistribution.weibull_wind_speed">
-<code class="descname">weibull_wind_speed</code><a class="headerlink" href="#PySAM.Windpower.Windpower.WindSpeedWeibullDistribution.weibull_wind_speed" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em>: Average wind speed for Weibull model</p>
-<p><em>Constraints</em>: MIN=0</p>
-<p><em>Required</em>: set to 1 if not provided.</p>
-</dd></dl>
-
-</dd></dl>
-
 </div>
 <div class="section" id="adjustmentfactors-group">
 <h2>AdjustmentFactors Group<a class="headerlink" href="#adjustmentfactors-group" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="PySAM.Windpower.Windpower.AdjustmentFactors">
-<em class="property">class </em><code class="descclassname">PySAM.Windpower.Windpower.</code><code class="descname">AdjustmentFactors</code><a class="headerlink" href="#PySAM.Windpower.Windpower.AdjustmentFactors" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="method">
-<dt id="PySAM.Windpower.Windpower.AdjustmentFactors.assign">
-<code class="descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Windpower.Windpower.AdjustmentFactors.assign" title="Permalink to this definition">¶</a></dt>
-<dd><p>Assign attributes from dictionary</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="PySAM.Windpower.Windpower.AdjustmentFactors.export">
-<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Dict<a class="headerlink" href="#PySAM.Windpower.Windpower.AdjustmentFactors.export" title="Permalink to this definition">¶</a></dt>
-<dd><p>Export attributes into dictionary</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Windpower.Windpower.AdjustmentFactors.constant">
-<code class="descname">constant</code><a class="headerlink" href="#PySAM.Windpower.Windpower.AdjustmentFactors.constant" title="Permalink to this definition">¶</a></dt>
-<dd><p>type: float</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Windpower.Windpower.AdjustmentFactors.dc_constant">
-<code class="descname">dc_constant</code><a class="headerlink" href="#PySAM.Windpower.Windpower.AdjustmentFactors.dc_constant" title="Permalink to this definition">¶</a></dt>
-<dd><p>DC Constant loss adjustment [%]</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Windpower.Windpower.AdjustmentFactors.dc_hourly">
-<code class="descname">dc_hourly</code><a class="headerlink" href="#PySAM.Windpower.Windpower.AdjustmentFactors.dc_hourly" title="Permalink to this definition">¶</a></dt>
-<dd><p>DC Hourly Adjustment Factors [%]</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Windpower.Windpower.AdjustmentFactors.dc_periods">
-<code class="descname">dc_periods</code><a class="headerlink" href="#PySAM.Windpower.Windpower.AdjustmentFactors.dc_periods" title="Permalink to this definition">¶</a></dt>
-<dd><p>DC Period-based Adjustment Factors [%]</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Windpower.Windpower.AdjustmentFactors.hourly">
-<code class="descname">hourly</code><a class="headerlink" href="#PySAM.Windpower.Windpower.AdjustmentFactors.hourly" title="Permalink to this definition">¶</a></dt>
-<dd><p>AC Hourly Adjustment Factors [%]</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Windpower.Windpower.AdjustmentFactors.periods">
-<code class="descname">periods</code><a class="headerlink" href="#PySAM.Windpower.Windpower.AdjustmentFactors.periods" title="Permalink to this definition">¶</a></dt>
-<dd><p>AC Period-based Adjustment Factors [%]</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Windpower.Windpower.AdjustmentFactors.sf_constant">
-<code class="descname">sf_constant</code><a class="headerlink" href="#PySAM.Windpower.Windpower.AdjustmentFactors.sf_constant" title="Permalink to this definition">¶</a></dt>
-<dd><p>DC Constant loss adjustment [%]</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Windpower.Windpower.AdjustmentFactors.sf_hourly">
-<code class="descname">sf_hourly</code><a class="headerlink" href="#PySAM.Windpower.Windpower.AdjustmentFactors.sf_hourly" title="Permalink to this definition">¶</a></dt>
-<dd><p>DC Hourly Adjustment Factors [%]</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Windpower.Windpower.AdjustmentFactors.sf_periods">
-<code class="descname">sf_periods</code><a class="headerlink" href="#PySAM.Windpower.Windpower.AdjustmentFactors.sf_periods" title="Permalink to this definition">¶</a></dt>
-<dd><p>DC Period-based Adjustment Factors [%]</p>
-</dd></dl>
-
-</dd></dl>
-
 </div>
 <div class="section" id="outputs-group">
 <h2>Outputs Group<a class="headerlink" href="#outputs-group" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="PySAM.Windpower.Windpower.Outputs">
-<em class="property">class </em><code class="descclassname">PySAM.Windpower.Windpower.</code><code class="descname">Outputs</code><a class="headerlink" href="#PySAM.Windpower.Windpower.Outputs" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="method">
-<dt id="PySAM.Windpower.Windpower.Outputs.assign">
-<code class="descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Windpower.Windpower.Outputs.assign" title="Permalink to this definition">¶</a></dt>
-<dd><p>Assign attributes from dictionary</p>
-<p><code class="docutils literal notranslate"><span class="pre">Outputs_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
-</dd></dl>
-
-<dl class="method">
-<dt id="PySAM.Windpower.Windpower.Outputs.export">
-<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.Windpower.Windpower.Outputs.export" title="Permalink to this definition">¶</a></dt>
-<dd><p>Export attributes into dictionary</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Windpower.Windpower.Outputs.annual_energy">
-<code class="descname">annual_energy</code><a class="headerlink" href="#PySAM.Windpower.Windpower.Outputs.annual_energy" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em>: Annual Energy [kWh]</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Windpower.Windpower.Outputs.capacity_factor">
-<code class="descname">capacity_factor</code><a class="headerlink" href="#PySAM.Windpower.Windpower.Outputs.capacity_factor" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em>: Capacity factor [%]</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Windpower.Windpower.Outputs.cutoff_losses">
-<code class="descname">cutoff_losses</code><a class="headerlink" href="#PySAM.Windpower.Windpower.Outputs.cutoff_losses" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em>: Cutoff losses [%]</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Windpower.Windpower.Outputs.gen">
-<code class="descname">gen</code><a class="headerlink" href="#PySAM.Windpower.Windpower.Outputs.gen" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>sequence</em>: Total electric power to grid [kWh]</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Windpower.Windpower.Outputs.kwh_per_kw">
-<code class="descname">kwh_per_kw</code><a class="headerlink" href="#PySAM.Windpower.Windpower.Outputs.kwh_per_kw" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em>: First year kWh/kW [kWh/kW]</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Windpower.Windpower.Outputs.monthly_energy">
-<code class="descname">monthly_energy</code><a class="headerlink" href="#PySAM.Windpower.Windpower.Outputs.monthly_energy" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>sequence</em>: Monthly Energy [kWh]</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Windpower.Windpower.Outputs.pressure">
-<code class="descname">pressure</code><a class="headerlink" href="#PySAM.Windpower.Windpower.Outputs.pressure" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>sequence</em>: Pressure [atm]</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Windpower.Windpower.Outputs.temp">
-<code class="descname">temp</code><a class="headerlink" href="#PySAM.Windpower.Windpower.Outputs.temp" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>sequence</em>: Air temperature [‘C]</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Windpower.Windpower.Outputs.turbine_output_by_windspeed_bin">
-<code class="descname">turbine_output_by_windspeed_bin</code><a class="headerlink" href="#PySAM.Windpower.Windpower.Outputs.turbine_output_by_windspeed_bin" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>sequence</em>: Turbine output by wind speed bin [kW]</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Windpower.Windpower.Outputs.wind_direction">
-<code class="descname">wind_direction</code><a class="headerlink" href="#PySAM.Windpower.Windpower.Outputs.wind_direction" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>sequence</em>: Wind direction [deg]</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Windpower.Windpower.Outputs.wind_speed">
-<code class="descname">wind_speed</code><a class="headerlink" href="#PySAM.Windpower.Windpower.Outputs.wind_speed" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>sequence</em>: Wind speed [m/s]</p>
-</dd></dl>
-
-</dd></dl>
-
 </div>
 </div>
 
@@ -605,10 +120,7 @@ config options:</p>
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">PySAM 1.1 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">PySAM 1.2 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

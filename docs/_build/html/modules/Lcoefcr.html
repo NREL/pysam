@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Lcoefcr Module &#8212; PySAM 1.1 documentation</title>
+    <title>Lcoefcr Module &#8212; PySAM 1.2 documentation</title>
     <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     
@@ -28,10 +28,7 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">PySAM 1.1 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">PySAM 1.2 documentation</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -79,158 +76,15 @@
 <h2>Creating an Instance<a class="headerlink" href="#creating-an-instance" title="Permalink to this headline">¶</a></h2>
 <p>There are three methods to create a new instance of a PySAM module. Using <code class="docutils literal notranslate"><span class="pre">default</span></code> populates the newclass’ attributes with default values specific to a <code class="docutils literal notranslate"><span class="pre">config</span></code>. Each technology-financialconfiguration corresponds to a SAM GUI configuration. Using <code class="docutils literal notranslate"><span class="pre">new</span></code> creates an instance with empty attributes. The <code class="docutils literal notranslate"><span class="pre">wrap</span></code> function allows compatibility with PySSC, for details, refer to <span class="xref std std-doc">PySSC</span>.</p>
 <p><strong>Lcoefcr model description</strong></p>
-<span class="target" id="module-PySAM.Lcoefcr"></span><p>Calculate levelized cost of electricity using fixed charge rate method instead of cash flow</p>
-<dl class="function">
-<dt id="PySAM.Lcoefcr.default">
-<code class="descclassname">PySAM.Lcoefcr.</code><code class="descname">default</code><span class="sig-paren">(</span><em>config</em><span class="sig-paren">)</span> &#x2192; Lcoefcr<a class="headerlink" href="#PySAM.Lcoefcr.default" title="Permalink to this definition">¶</a></dt>
-<dd><p>Use financial model-specific default attributes
-config options:</p>
-<ul class="simple">
-<li><p>“BiopowerLCOECalculator”</p></li>
-<li><p>“DSGLIPHLCOHCalculator”</p></li>
-<li><p>“DSLFLCOECalculator”</p></li>
-<li><p>“DishStirlingLCOECalculator”</p></li>
-<li><p>“EmpiricalTroughLCOECalculator”</p></li>
-<li><p>“FlatPlatePVLCOECalculator”</p></li>
-<li><p>“GenericCSPSystemLCOECalculator”</p></li>
-<li><p>“GenericSystemLCOECalculator”</p></li>
-<li><p>“GeothermalPowerLCOECalculator”</p></li>
-<li><p>“HighXConcentratingPVLCOECalculator”</p></li>
-<li><p>“MSLFLCOECalculator”</p></li>
-<li><p>“PVWattsLCOECalculator”</p></li>
-<li><p>“PhysicalTroughIPHLCOHCalculator”</p></li>
-<li><p>“PhysicalTroughLCOECalculator”</p></li>
-<li><p>“SolarWaterHeatingLCOECalculator”</p></li>
-<li><p>“WindPowerLCOECalculator”</p></li>
-</ul>
-</dd></dl>
-
-<dl class="function">
-<dt id="PySAM.Lcoefcr.new">
-<code class="descclassname">PySAM.Lcoefcr.</code><code class="descname">new</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Lcoefcr<a class="headerlink" href="#PySAM.Lcoefcr.new" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="PySAM.Lcoefcr.wrap">
-<code class="descclassname">PySAM.Lcoefcr.</code><code class="descname">wrap</code><span class="sig-paren">(</span><em>ssc_data_t</em><span class="sig-paren">)</span> &#x2192; Lcoefcr<a class="headerlink" href="#PySAM.Lcoefcr.wrap" title="Permalink to this definition">¶</a></dt>
-<dd><p>Use existing PySSC data</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Do not call PySSC.data_free on the ssc_data_t provided to <code class="docutils literal notranslate"><span class="pre">wrap</span></code></p>
-</div>
-</dd></dl>
-
 </div>
 <div class="section" id="functions">
 <h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="PySAM.Lcoefcr.Lcoefcr">
-<em class="property">class </em><code class="descclassname">PySAM.Lcoefcr.</code><code class="descname">Lcoefcr</code><a class="headerlink" href="#PySAM.Lcoefcr.Lcoefcr" title="Permalink to this definition">¶</a></dt>
-<dd><p>This class contains all the variable information for running a simulation. Variables are grouped together in the subclasses as properties. If property assignments are the wrong type, an error is thrown.</p>
-<dl class="method">
-<dt id="PySAM.Lcoefcr.Lcoefcr.assign">
-<code class="descname">assign</code><span class="sig-paren">(</span><em>dict</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Lcoefcr.Lcoefcr.assign" title="Permalink to this definition">¶</a></dt>
-<dd><p>Assign attributes from nested dictionary, except for Outputs</p>
-<p><code class="docutils literal notranslate"><span class="pre">nested_dict</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">'Simple</span> <span class="pre">LCOE':</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...},</span> <span class="pre">...}</span></code></p>
-</dd></dl>
-
-<dl class="method">
-<dt id="PySAM.Lcoefcr.Lcoefcr.execute">
-<code class="descname">execute</code><span class="sig-paren">(</span><em>int verbosity</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Lcoefcr.Lcoefcr.execute" title="Permalink to this definition">¶</a></dt>
-<dd><p>Execute simulation with verbosity level 0 (default) or 1</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="PySAM.Lcoefcr.Lcoefcr.export">
-<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.Lcoefcr.Lcoefcr.export" title="Permalink to this definition">¶</a></dt>
-<dd><p>Export attributes into nested dictionary</p>
-</dd></dl>
-
-</dd></dl>
-
 </div>
 <div class="section" id="simplelcoe-group">
 <h2>SimpleLCOE Group<a class="headerlink" href="#simplelcoe-group" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="PySAM.Lcoefcr.Lcoefcr.SimpleLCOE">
-<em class="property">class </em><code class="descclassname">PySAM.Lcoefcr.Lcoefcr.</code><code class="descname">SimpleLCOE</code><a class="headerlink" href="#PySAM.Lcoefcr.Lcoefcr.SimpleLCOE" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="method">
-<dt id="PySAM.Lcoefcr.Lcoefcr.SimpleLCOE.assign">
-<code class="descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Lcoefcr.Lcoefcr.SimpleLCOE.assign" title="Permalink to this definition">¶</a></dt>
-<dd><p>Assign attributes from dictionary</p>
-<p><code class="docutils literal notranslate"><span class="pre">SimpleLCOE_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
-</dd></dl>
-
-<dl class="method">
-<dt id="PySAM.Lcoefcr.Lcoefcr.SimpleLCOE.export">
-<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.Lcoefcr.Lcoefcr.SimpleLCOE.export" title="Permalink to this definition">¶</a></dt>
-<dd><p>Export attributes into dictionary</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Lcoefcr.Lcoefcr.SimpleLCOE.annual_energy">
-<code class="descname">annual_energy</code><a class="headerlink" href="#PySAM.Lcoefcr.Lcoefcr.SimpleLCOE.annual_energy" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em>: Annual energy production [kWh]</p>
-<p><em>Required</em>: True</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Lcoefcr.Lcoefcr.SimpleLCOE.capital_cost">
-<code class="descname">capital_cost</code><a class="headerlink" href="#PySAM.Lcoefcr.Lcoefcr.SimpleLCOE.capital_cost" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em>: Capital cost [$]</p>
-<p><em>Required</em>: True</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Lcoefcr.Lcoefcr.SimpleLCOE.fixed_charge_rate">
-<code class="descname">fixed_charge_rate</code><a class="headerlink" href="#PySAM.Lcoefcr.Lcoefcr.SimpleLCOE.fixed_charge_rate" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em>: Fixed charge rate</p>
-<p><em>Required</em>: True</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Lcoefcr.Lcoefcr.SimpleLCOE.fixed_operating_cost">
-<code class="descname">fixed_operating_cost</code><a class="headerlink" href="#PySAM.Lcoefcr.Lcoefcr.SimpleLCOE.fixed_operating_cost" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em>: Annual fixed operating cost [$]</p>
-<p><em>Required</em>: True</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Lcoefcr.Lcoefcr.SimpleLCOE.variable_operating_cost">
-<code class="descname">variable_operating_cost</code><a class="headerlink" href="#PySAM.Lcoefcr.Lcoefcr.SimpleLCOE.variable_operating_cost" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em>: Annual variable operating cost [$/kWh]</p>
-<p><em>Required</em>: True</p>
-</dd></dl>
-
-</dd></dl>
-
 </div>
 <div class="section" id="outputs-group">
 <h2>Outputs Group<a class="headerlink" href="#outputs-group" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="PySAM.Lcoefcr.Lcoefcr.Outputs">
-<em class="property">class </em><code class="descclassname">PySAM.Lcoefcr.Lcoefcr.</code><code class="descname">Outputs</code><a class="headerlink" href="#PySAM.Lcoefcr.Lcoefcr.Outputs" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="method">
-<dt id="PySAM.Lcoefcr.Lcoefcr.Outputs.assign">
-<code class="descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Lcoefcr.Lcoefcr.Outputs.assign" title="Permalink to this definition">¶</a></dt>
-<dd><p>Assign attributes from dictionary</p>
-<p><code class="docutils literal notranslate"><span class="pre">Outputs_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
-</dd></dl>
-
-<dl class="method">
-<dt id="PySAM.Lcoefcr.Lcoefcr.Outputs.export">
-<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.Lcoefcr.Lcoefcr.Outputs.export" title="Permalink to this definition">¶</a></dt>
-<dd><p>Export attributes into dictionary</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.Lcoefcr.Lcoefcr.Outputs.lcoe_fcr">
-<code class="descname">lcoe_fcr</code><a class="headerlink" href="#PySAM.Lcoefcr.Lcoefcr.Outputs.lcoe_fcr" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em>: Levelized cost of energy [$/kWh]</p>
-</dd></dl>
-
-</dd></dl>
-
 </div>
 </div>
 
@@ -246,10 +100,7 @@ config options:</p>
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">PySAM 1.1 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">PySAM 1.2 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

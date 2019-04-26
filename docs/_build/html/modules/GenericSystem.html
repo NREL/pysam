@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>GenericSystem Module &#8212; PySAM 1.1 documentation</title>
+    <title>GenericSystem Module &#8212; PySAM 1.2 documentation</title>
     <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     
@@ -28,10 +28,7 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">PySAM 1.1 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">PySAM 1.2 documentation</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -81,327 +78,21 @@
 <h2>Creating an Instance<a class="headerlink" href="#creating-an-instance" title="Permalink to this headline">¶</a></h2>
 <p>There are three methods to create a new instance of a PySAM module. Using <code class="docutils literal notranslate"><span class="pre">default</span></code> populates the newclass’ attributes with default values specific to a <code class="docutils literal notranslate"><span class="pre">config</span></code>. Each technology-financialconfiguration corresponds to a SAM GUI configuration. Using <code class="docutils literal notranslate"><span class="pre">new</span></code> creates an instance with empty attributes. The <code class="docutils literal notranslate"><span class="pre">wrap</span></code> function allows compatibility with PySSC, for details, refer to <span class="xref std std-doc">PySSC</span>.</p>
 <p><strong>GenericSystem model description</strong></p>
-<span class="target" id="module-PySAM.GenericSystem"></span><p>Basic power system model using either capacity, capacity factor, and heat rate, or an hourly power generation profile as input</p>
-<dl class="function">
-<dt id="PySAM.GenericSystem.default">
-<code class="descclassname">PySAM.GenericSystem.</code><code class="descname">default</code><span class="sig-paren">(</span><em>config</em><span class="sig-paren">)</span> &#x2192; GenericSystem<a class="headerlink" href="#PySAM.GenericSystem.default" title="Permalink to this definition">¶</a></dt>
-<dd><p>Use financial model-specific default attributes
-config options:</p>
-<ul class="simple">
-<li><p>“GenericSystemAllEquityPartnershipFlip”</p></li>
-<li><p>“GenericSystemCommercial”</p></li>
-<li><p>“GenericSystemCommercialPPA”</p></li>
-<li><p>“GenericSystemHostDeveloper”</p></li>
-<li><p>“GenericSystemIndependentPowerProducer”</p></li>
-<li><p>“GenericSystemLCOECalculator”</p></li>
-<li><p>“GenericSystemLeveragedPartnershipFlip”</p></li>
-<li><p>“GenericSystemNone”</p></li>
-<li><p>“GenericSystemResidential”</p></li>
-<li><p>“GenericSystemSaleLeaseback”</p></li>
-<li><p>“GenericSystemSingleOwner”</p></li>
-<li><p>“GenericSystemThirdParty”</p></li>
-</ul>
-</dd></dl>
-
-<dl class="function">
-<dt id="PySAM.GenericSystem.new">
-<code class="descclassname">PySAM.GenericSystem.</code><code class="descname">new</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; GenericSystem<a class="headerlink" href="#PySAM.GenericSystem.new" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="PySAM.GenericSystem.wrap">
-<code class="descclassname">PySAM.GenericSystem.</code><code class="descname">wrap</code><span class="sig-paren">(</span><em>ssc_data_t</em><span class="sig-paren">)</span> &#x2192; GenericSystem<a class="headerlink" href="#PySAM.GenericSystem.wrap" title="Permalink to this definition">¶</a></dt>
-<dd><p>Use existing PySSC data</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Do not call PySSC.data_free on the ssc_data_t provided to <code class="docutils literal notranslate"><span class="pre">wrap</span></code></p>
-</div>
-</dd></dl>
-
 </div>
 <div class="section" id="functions">
 <h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="PySAM.GenericSystem.GenericSystem">
-<em class="property">class </em><code class="descclassname">PySAM.GenericSystem.</code><code class="descname">GenericSystem</code><a class="headerlink" href="#PySAM.GenericSystem.GenericSystem" title="Permalink to this definition">¶</a></dt>
-<dd><p>This class contains all the variable information for running a simulation. Variables are grouped together in the subclasses as properties. If property assignments are the wrong type, an error is thrown.</p>
-<dl class="method">
-<dt id="PySAM.GenericSystem.GenericSystem.assign">
-<code class="descname">assign</code><span class="sig-paren">(</span><em>dict</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.GenericSystem.GenericSystem.assign" title="Permalink to this definition">¶</a></dt>
-<dd><p>Assign attributes from nested dictionary, except for Outputs</p>
-<p><code class="docutils literal notranslate"><span class="pre">nested_dict</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">'Plant':</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...},</span> <span class="pre">...}</span></code></p>
-</dd></dl>
-
-<dl class="method">
-<dt id="PySAM.GenericSystem.GenericSystem.execute">
-<code class="descname">execute</code><span class="sig-paren">(</span><em>int verbosity</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.GenericSystem.GenericSystem.execute" title="Permalink to this definition">¶</a></dt>
-<dd><p>Execute simulation with verbosity level 0 (default) or 1</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="PySAM.GenericSystem.GenericSystem.export">
-<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.GenericSystem.GenericSystem.export" title="Permalink to this definition">¶</a></dt>
-<dd><p>Export attributes into nested dictionary</p>
-</dd></dl>
-
-</dd></dl>
-
 </div>
 <div class="section" id="plant-group">
 <h2>Plant Group<a class="headerlink" href="#plant-group" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="PySAM.GenericSystem.GenericSystem.Plant">
-<em class="property">class </em><code class="descclassname">PySAM.GenericSystem.GenericSystem.</code><code class="descname">Plant</code><a class="headerlink" href="#PySAM.GenericSystem.GenericSystem.Plant" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="method">
-<dt id="PySAM.GenericSystem.GenericSystem.Plant.assign">
-<code class="descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.GenericSystem.GenericSystem.Plant.assign" title="Permalink to this definition">¶</a></dt>
-<dd><p>Assign attributes from dictionary</p>
-<p><code class="docutils literal notranslate"><span class="pre">Plant_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
-</dd></dl>
-
-<dl class="method">
-<dt id="PySAM.GenericSystem.GenericSystem.Plant.export">
-<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.GenericSystem.GenericSystem.Plant.export" title="Permalink to this definition">¶</a></dt>
-<dd><p>Export attributes into dictionary</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.GenericSystem.GenericSystem.Plant.conv_eff">
-<code class="descname">conv_eff</code><a class="headerlink" href="#PySAM.GenericSystem.GenericSystem.Plant.conv_eff" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em>: Conversion Efficiency [%]</p>
-<p><em>Required</em>: True</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.GenericSystem.GenericSystem.Plant.derate">
-<code class="descname">derate</code><a class="headerlink" href="#PySAM.GenericSystem.GenericSystem.Plant.derate" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em>: Derate [%]</p>
-<p><em>Required</em>: True</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.GenericSystem.GenericSystem.Plant.energy_output_array">
-<code class="descname">energy_output_array</code><a class="headerlink" href="#PySAM.GenericSystem.GenericSystem.Plant.energy_output_array" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>sequence</em>: Array of Energy Output Profile [kW]</p>
-<p><em>Required</em>: set to 1 if not provided.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.GenericSystem.GenericSystem.Plant.heat_rate">
-<code class="descname">heat_rate</code><a class="headerlink" href="#PySAM.GenericSystem.GenericSystem.Plant.heat_rate" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em>: Heat Rate [MMBTUs/MWhe]</p>
-<p><em>Required</em>: True</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.GenericSystem.GenericSystem.Plant.spec_mode">
-<code class="descname">spec_mode</code><a class="headerlink" href="#PySAM.GenericSystem.GenericSystem.Plant.spec_mode" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em>: Spec mode: 0=constant CF,1=profile</p>
-<p><em>Required</em>: True</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.GenericSystem.GenericSystem.Plant.system_capacity">
-<code class="descname">system_capacity</code><a class="headerlink" href="#PySAM.GenericSystem.GenericSystem.Plant.system_capacity" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em>: Nameplace Capcity [kW]</p>
-<p><em>Required</em>: True</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.GenericSystem.GenericSystem.Plant.user_capacity_factor">
-<code class="descname">user_capacity_factor</code><a class="headerlink" href="#PySAM.GenericSystem.GenericSystem.Plant.user_capacity_factor" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em>: Capacity Factor [%]</p>
-<p><em>Required</em>: True</p>
-</dd></dl>
-
-</dd></dl>
-
 </div>
 <div class="section" id="lifetime-group">
 <h2>Lifetime Group<a class="headerlink" href="#lifetime-group" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="PySAM.GenericSystem.GenericSystem.Lifetime">
-<em class="property">class </em><code class="descclassname">PySAM.GenericSystem.GenericSystem.</code><code class="descname">Lifetime</code><a class="headerlink" href="#PySAM.GenericSystem.GenericSystem.Lifetime" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="method">
-<dt id="PySAM.GenericSystem.GenericSystem.Lifetime.assign">
-<code class="descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.GenericSystem.GenericSystem.Lifetime.assign" title="Permalink to this definition">¶</a></dt>
-<dd><p>Assign attributes from dictionary</p>
-<p><code class="docutils literal notranslate"><span class="pre">Lifetime_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
-</dd></dl>
-
-<dl class="method">
-<dt id="PySAM.GenericSystem.GenericSystem.Lifetime.export">
-<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.GenericSystem.GenericSystem.Lifetime.export" title="Permalink to this definition">¶</a></dt>
-<dd><p>Export attributes into dictionary</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.GenericSystem.GenericSystem.Lifetime.analysis_period">
-<code class="descname">analysis_period</code><a class="headerlink" href="#PySAM.GenericSystem.GenericSystem.Lifetime.analysis_period" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em>: Lifetime analysis period [years]</p>
-<p><em>Required</em>: set to 1 if not provided.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.GenericSystem.GenericSystem.Lifetime.generic_degradation">
-<code class="descname">generic_degradation</code><a class="headerlink" href="#PySAM.GenericSystem.GenericSystem.Lifetime.generic_degradation" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>sequence</em>: Annual module degradation [%/year]</p>
-<p><em>Required</em>: set to 1 if not provided.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.GenericSystem.GenericSystem.Lifetime.system_use_lifetime_output">
-<code class="descname">system_use_lifetime_output</code><a class="headerlink" href="#PySAM.GenericSystem.GenericSystem.Lifetime.system_use_lifetime_output" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em>: Generic lifetime simulation [0/1]</p>
-<p><em>Constraints</em>: INTEGER,MIN=0,MAX=1</p>
-<p><em>Required</em>: set to 0 if not provided.</p>
-</dd></dl>
-
-</dd></dl>
-
 </div>
 <div class="section" id="adjustmentfactors-group">
 <h2>AdjustmentFactors Group<a class="headerlink" href="#adjustmentfactors-group" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="PySAM.GenericSystem.GenericSystem.AdjustmentFactors">
-<em class="property">class </em><code class="descclassname">PySAM.GenericSystem.GenericSystem.</code><code class="descname">AdjustmentFactors</code><a class="headerlink" href="#PySAM.GenericSystem.GenericSystem.AdjustmentFactors" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="method">
-<dt id="PySAM.GenericSystem.GenericSystem.AdjustmentFactors.assign">
-<code class="descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.GenericSystem.GenericSystem.AdjustmentFactors.assign" title="Permalink to this definition">¶</a></dt>
-<dd><p>Assign attributes from dictionary</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="PySAM.GenericSystem.GenericSystem.AdjustmentFactors.export">
-<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Dict<a class="headerlink" href="#PySAM.GenericSystem.GenericSystem.AdjustmentFactors.export" title="Permalink to this definition">¶</a></dt>
-<dd><p>Export attributes into dictionary</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.GenericSystem.GenericSystem.AdjustmentFactors.constant">
-<code class="descname">constant</code><a class="headerlink" href="#PySAM.GenericSystem.GenericSystem.AdjustmentFactors.constant" title="Permalink to this definition">¶</a></dt>
-<dd><p>type: float</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.GenericSystem.GenericSystem.AdjustmentFactors.dc_constant">
-<code class="descname">dc_constant</code><a class="headerlink" href="#PySAM.GenericSystem.GenericSystem.AdjustmentFactors.dc_constant" title="Permalink to this definition">¶</a></dt>
-<dd><p>DC Constant loss adjustment [%]</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.GenericSystem.GenericSystem.AdjustmentFactors.dc_hourly">
-<code class="descname">dc_hourly</code><a class="headerlink" href="#PySAM.GenericSystem.GenericSystem.AdjustmentFactors.dc_hourly" title="Permalink to this definition">¶</a></dt>
-<dd><p>DC Hourly Adjustment Factors [%]</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.GenericSystem.GenericSystem.AdjustmentFactors.dc_periods">
-<code class="descname">dc_periods</code><a class="headerlink" href="#PySAM.GenericSystem.GenericSystem.AdjustmentFactors.dc_periods" title="Permalink to this definition">¶</a></dt>
-<dd><p>DC Period-based Adjustment Factors [%]</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.GenericSystem.GenericSystem.AdjustmentFactors.hourly">
-<code class="descname">hourly</code><a class="headerlink" href="#PySAM.GenericSystem.GenericSystem.AdjustmentFactors.hourly" title="Permalink to this definition">¶</a></dt>
-<dd><p>AC Hourly Adjustment Factors [%]</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.GenericSystem.GenericSystem.AdjustmentFactors.periods">
-<code class="descname">periods</code><a class="headerlink" href="#PySAM.GenericSystem.GenericSystem.AdjustmentFactors.periods" title="Permalink to this definition">¶</a></dt>
-<dd><p>AC Period-based Adjustment Factors [%]</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.GenericSystem.GenericSystem.AdjustmentFactors.sf_constant">
-<code class="descname">sf_constant</code><a class="headerlink" href="#PySAM.GenericSystem.GenericSystem.AdjustmentFactors.sf_constant" title="Permalink to this definition">¶</a></dt>
-<dd><p>DC Constant loss adjustment [%]</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.GenericSystem.GenericSystem.AdjustmentFactors.sf_hourly">
-<code class="descname">sf_hourly</code><a class="headerlink" href="#PySAM.GenericSystem.GenericSystem.AdjustmentFactors.sf_hourly" title="Permalink to this definition">¶</a></dt>
-<dd><p>DC Hourly Adjustment Factors [%]</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.GenericSystem.GenericSystem.AdjustmentFactors.sf_periods">
-<code class="descname">sf_periods</code><a class="headerlink" href="#PySAM.GenericSystem.GenericSystem.AdjustmentFactors.sf_periods" title="Permalink to this definition">¶</a></dt>
-<dd><p>DC Period-based Adjustment Factors [%]</p>
-</dd></dl>
-
-</dd></dl>
-
 </div>
 <div class="section" id="outputs-group">
 <h2>Outputs Group<a class="headerlink" href="#outputs-group" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="PySAM.GenericSystem.GenericSystem.Outputs">
-<em class="property">class </em><code class="descclassname">PySAM.GenericSystem.GenericSystem.</code><code class="descname">Outputs</code><a class="headerlink" href="#PySAM.GenericSystem.GenericSystem.Outputs" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="method">
-<dt id="PySAM.GenericSystem.GenericSystem.Outputs.assign">
-<code class="descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.GenericSystem.GenericSystem.Outputs.assign" title="Permalink to this definition">¶</a></dt>
-<dd><p>Assign attributes from dictionary</p>
-<p><code class="docutils literal notranslate"><span class="pre">Outputs_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
-</dd></dl>
-
-<dl class="method">
-<dt id="PySAM.GenericSystem.GenericSystem.Outputs.export">
-<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.GenericSystem.GenericSystem.Outputs.export" title="Permalink to this definition">¶</a></dt>
-<dd><p>Export attributes into dictionary</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.GenericSystem.GenericSystem.Outputs.annual_energy">
-<code class="descname">annual_energy</code><a class="headerlink" href="#PySAM.GenericSystem.GenericSystem.Outputs.annual_energy" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em>: Annual Energy [kWh]</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.GenericSystem.GenericSystem.Outputs.annual_fuel_usage">
-<code class="descname">annual_fuel_usage</code><a class="headerlink" href="#PySAM.GenericSystem.GenericSystem.Outputs.annual_fuel_usage" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em>: Annual Fuel Usage [kWht]</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.GenericSystem.GenericSystem.Outputs.capacity_factor">
-<code class="descname">capacity_factor</code><a class="headerlink" href="#PySAM.GenericSystem.GenericSystem.Outputs.capacity_factor" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em>: Capacity factor [%]</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.GenericSystem.GenericSystem.Outputs.gen">
-<code class="descname">gen</code><a class="headerlink" href="#PySAM.GenericSystem.GenericSystem.Outputs.gen" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>sequence</em>: System power generated [kW]</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.GenericSystem.GenericSystem.Outputs.kwh_per_kw">
-<code class="descname">kwh_per_kw</code><a class="headerlink" href="#PySAM.GenericSystem.GenericSystem.Outputs.kwh_per_kw" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em>: First year kWh/kW [kWh/kW]</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.GenericSystem.GenericSystem.Outputs.monthly_energy">
-<code class="descname">monthly_energy</code><a class="headerlink" href="#PySAM.GenericSystem.GenericSystem.Outputs.monthly_energy" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>sequence</em>: Monthly Energy [kWh]</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.GenericSystem.GenericSystem.Outputs.system_heat_rate">
-<code class="descname">system_heat_rate</code><a class="headerlink" href="#PySAM.GenericSystem.GenericSystem.Outputs.system_heat_rate" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em>: Heat Rate Conversion Factor [MMBTUs/MWhe]</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="PySAM.GenericSystem.GenericSystem.Outputs.water_usage">
-<code class="descname">water_usage</code><a class="headerlink" href="#PySAM.GenericSystem.GenericSystem.Outputs.water_usage" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>float</em>: Annual Water Usage</p>
-</dd></dl>
-
-</dd></dl>
-
 </div>
 </div>
 
@@ -417,10 +108,7 @@ config options:</p>
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
-        <li class="right" >
-          <a href="../py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">PySAM 1.1 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">PySAM 1.2 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
