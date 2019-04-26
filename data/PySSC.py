@@ -2,7 +2,7 @@
 
 import string, sys, struct, os
 from ctypes import *
-c_number = c_float # must be c_double or c_float depending on how defined in sscapi.h
+c_number = c_double # must be c_double or c_float depending on how defined in sscapi.h
 class PySSC:
 	def __init__(self):
 		this_directory = os.path.abspath(os.path.dirname(__file__))

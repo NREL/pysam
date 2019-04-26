@@ -94,6 +94,7 @@ setup(
     package_dir={'PySAM': 'data'},
     package_data={
         '': libfiles},
+    install_requires=[ 'NREL-PySAM-stubs' ],
     ext_modules=[
         Extension('PySAM.AdjustmentFactors',
                   ['src/AdjustmentFactors.c'],
