@@ -58,9 +58,9 @@ Plant_export(PlantObject *self, PyObject *args)
 
 static PyMethodDef Plant_methods[] = {
 		{"assign",            (PyCFunction)Plant_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Plant_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Plant_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -150,25 +150,25 @@ Plant_set_user_capacity_factor(PlantObject *self, PyObject *value, void *closure
 
 static PyGetSetDef Plant_getset[] = {
 {"conv_eff", (getter)Plant_get_conv_eff,(setter)Plant_set_conv_eff,
-	PyDoc_STR("type: Float\n\nConversion Efficiency [%]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Conversion Efficiency [%]\n\n*Required*: True"),
  	NULL},
 {"derate", (getter)Plant_get_derate,(setter)Plant_set_derate,
-	PyDoc_STR("type: Float\n\nDerate [%]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Derate [%]\n\n*Required*: True"),
  	NULL},
 {"energy_output_array", (getter)Plant_get_energy_output_array,(setter)Plant_set_energy_output_array,
-	PyDoc_STR("type: Sequence\n\nArray of Energy Output Profile [kW]\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*sequence*: Array of Energy Output Profile [kW]\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"heat_rate", (getter)Plant_get_heat_rate,(setter)Plant_set_heat_rate,
-	PyDoc_STR("type: Float\n\nHeat Rate [MMBTUs/MWhe]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Heat Rate [MMBTUs/MWhe]\n\n*Required*: True"),
  	NULL},
 {"spec_mode", (getter)Plant_get_spec_mode,(setter)Plant_set_spec_mode,
-	PyDoc_STR("type: Float\n\nSpec mode: 0=constant CF,1=profile\n\n*Required*: True"),
+	PyDoc_STR("*float*: Spec mode: 0=constant CF,1=profile\n\n*Required*: True"),
  	NULL},
 {"system_capacity", (getter)Plant_get_system_capacity,(setter)Plant_set_system_capacity,
-	PyDoc_STR("type: Float\n\nNameplace Capcity [kW]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Nameplace Capcity [kW]\n\n*Required*: True"),
  	NULL},
 {"user_capacity_factor", (getter)Plant_get_user_capacity_factor,(setter)Plant_set_user_capacity_factor,
-	PyDoc_STR("type: Float\n\nCapacity Factor [%]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Capacity Factor [%]\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -271,9 +271,9 @@ Lifetime_export(LifetimeObject *self, PyObject *args)
 
 static PyMethodDef Lifetime_methods[] = {
 		{"assign",            (PyCFunction)Lifetime_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Lifetime_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Lifetime_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -315,13 +315,13 @@ Lifetime_set_system_use_lifetime_output(LifetimeObject *self, PyObject *value, v
 
 static PyGetSetDef Lifetime_getset[] = {
 {"analysis_period", (getter)Lifetime_get_analysis_period,(setter)Lifetime_set_analysis_period,
-	PyDoc_STR("type: Float\n\nLifetime analysis period [years]\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*float*: Lifetime analysis period [years]\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"generic_degradation", (getter)Lifetime_get_generic_degradation,(setter)Lifetime_set_generic_degradation,
-	PyDoc_STR("type: Sequence\n\nAnnual module degradation [%/year]\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*sequence*: Annual module degradation [%/year]\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"system_use_lifetime_output", (getter)Lifetime_get_system_use_lifetime_output,(setter)Lifetime_set_system_use_lifetime_output,
-	PyDoc_STR("type: Float\n\nGeneric lifetime simulation [0/1]\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Generic lifetime simulation [0/1]\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: set to 0 if not provided."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -424,9 +424,9 @@ Outputs_export(OutputsObject *self, PyObject *args)
 
 static PyMethodDef Outputs_methods[] = {
 		{"assign",            (PyCFunction)Outputs_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Outputs_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Outputs_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -480,28 +480,28 @@ Outputs_get_water_usage(OutputsObject *self, void *closure)
 
 static PyGetSetDef Outputs_getset[] = {
 {"annual_energy", (getter)Outputs_get_annual_energy,(setter)0,
-	PyDoc_STR("type: Float\n\nAnnual Energy [kWh]"),
+	PyDoc_STR("*float*: Annual Energy [kWh]"),
  	NULL},
 {"annual_fuel_usage", (getter)Outputs_get_annual_fuel_usage,(setter)0,
-	PyDoc_STR("type: Float\n\nAnnual Fuel Usage [kWht]"),
+	PyDoc_STR("*float*: Annual Fuel Usage [kWht]"),
  	NULL},
 {"capacity_factor", (getter)Outputs_get_capacity_factor,(setter)0,
-	PyDoc_STR("type: Float\n\nCapacity factor [%]"),
+	PyDoc_STR("*float*: Capacity factor [%]"),
  	NULL},
 {"gen", (getter)Outputs_get_gen,(setter)0,
-	PyDoc_STR("type: Sequence\n\nSystem power generated [kW]"),
+	PyDoc_STR("*sequence*: System power generated [kW]"),
  	NULL},
 {"kwh_per_kw", (getter)Outputs_get_kwh_per_kw,(setter)0,
-	PyDoc_STR("type: Float\n\nFirst year kWh/kW [kWh/kW]"),
+	PyDoc_STR("*float*: First year kWh/kW [kWh/kW]"),
  	NULL},
 {"monthly_energy", (getter)Outputs_get_monthly_energy,(setter)0,
-	PyDoc_STR("type: Sequence\n\nMonthly Energy [kWh]"),
+	PyDoc_STR("*sequence*: Monthly Energy [kWh]"),
  	NULL},
 {"system_heat_rate", (getter)Outputs_get_system_heat_rate,(setter)0,
-	PyDoc_STR("type: Float\n\nHeat Rate Conversion Factor [MMBTUs/MWhe]"),
+	PyDoc_STR("*float*: Heat Rate Conversion Factor [MMBTUs/MWhe]"),
  	NULL},
 {"water_usage", (getter)Outputs_get_water_usage,(setter)0,
-	PyDoc_STR("type: Float\n\nAnnual Water Usage"),
+	PyDoc_STR("*float*: Annual Water Usage"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -659,9 +659,9 @@ static PyMethodDef GenericSystem_methods[] = {
 		{"execute",            (PyCFunction)GenericSystem_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
 		{"assign",            (PyCFunction)GenericSystem_assign,  METH_VARARGS,
-				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs")},
+				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Plant': { var: val, ...}, ...}``")},
 		{"export",            (PyCFunction)GenericSystem_export,  METH_VARARGS,
-				PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+				PyDoc_STR("export() -> dict\n Export attributes into nested dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -701,7 +701,7 @@ static PyTypeObject GenericSystem_Type = {
 		0,                          /*tp_setattro*/
 		0,                          /*tp_as_buffer*/
 		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
-		"Wrapper for `cmod_generic_system.cpp <https://github.com/NREL/ssc/blob/develop/ssc/cmod_generic_system.cpp>`_",        /*tp_doc*/
+		"This class contains all the variable information for running a simulation. Variables are grouped together in the subclasses as properties. If property assignments are the wrong type, an error is thrown.",        /*tp_doc*/
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
@@ -778,12 +778,12 @@ GenericSystem_default(PyObject *self, PyObject *args)
 
 static PyMethodDef GenericSystemModule_methods[] = {
 		{"new",             GenericSystem_new,         METH_VARARGS,
-				PyDoc_STR("new() -> new GenericSystem object")},
+				PyDoc_STR("new() -> GenericSystem")},
 		{"default",             GenericSystem_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> new GenericSystem object with financial model-specific default attributes\n"
+				PyDoc_STR("default(config) -> GenericSystem\n\nUse financial model-specific default attributes\n"
 				"config options:\n\n- \"GenericSystemAllEquityPartnershipFlip\"\n- \"GenericSystemCommercial\"\n- \"GenericSystemCommercialPPA\"\n- \"GenericSystemHostDeveloper\"\n- \"GenericSystemIndependentPowerProducer\"\n- \"GenericSystemLCOECalculator\"\n- \"GenericSystemLeveragedPartnershipFlip\"\n- \"GenericSystemNone\"\n- \"GenericSystemResidential\"\n- \"GenericSystemSaleLeaseback\"\n- \"GenericSystemSingleOwner\"\n- \"GenericSystemThirdParty\"")},
 		{"wrap",             GenericSystem_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> new GenericSystem object around existing PySSC data, taking over memory ownership\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to `wrap`")},
+				PyDoc_STR("wrap(ssc_data_t) -> GenericSystem\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{NULL,              NULL}           /* sentinel */
 };
 

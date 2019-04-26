@@ -58,9 +58,9 @@ Depreciation_export(DepreciationObject *self, PyObject *args)
 
 static PyMethodDef Depreciation_methods[] = {
 		{"assign",            (PyCFunction)Depreciation_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Depreciation_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Depreciation_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -138,22 +138,22 @@ Depreciation_set_depr_sta_type(DepreciationObject *self, PyObject *value, void *
 
 static PyGetSetDef Depreciation_getset[] = {
 {"depr_fed_custom", (getter)Depreciation_get_depr_fed_custom,(setter)Depreciation_set_depr_fed_custom,
-	PyDoc_STR("type: Sequence\n\nFederal custom depreciation [%/year]\n\n*Required*: set to 3 if not provided."),
+	PyDoc_STR("*sequence*: Federal custom depreciation [%/year]\n\n*Required*: set to 3 if not provided."),
  	NULL},
 {"depr_fed_sl_years", (getter)Depreciation_get_depr_fed_sl_years,(setter)Depreciation_set_depr_fed_sl_years,
-	PyDoc_STR("type: Float\n\nFederal depreciation straight-line Years [years]\n\n*Constraints*: INTEGER,POSITIVE\n\n*Required*: set to 2 if not provided."),
+	PyDoc_STR("*float*: Federal depreciation straight-line Years [years]\n\n*Constraints*: INTEGER,POSITIVE\n\n*Required*: set to 2 if not provided."),
  	NULL},
 {"depr_fed_type", (getter)Depreciation_get_depr_fed_type,(setter)Depreciation_set_depr_fed_type,
-	PyDoc_STR("type: Float\n\nFederal depreciation type\n\n*Options*: 0=none,1=macrs_half_year,2=sl,3=custom\n\n*Constraints*: INTEGER,MIN=0,MAX=3\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Federal depreciation type\n\n*Options*: 0=none,1=macrs_half_year,2=sl,3=custom\n\n*Constraints*: INTEGER,MIN=0,MAX=3\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"depr_sta_custom", (getter)Depreciation_get_depr_sta_custom,(setter)Depreciation_set_depr_sta_custom,
-	PyDoc_STR("type: Sequence\n\nState custom depreciation [%/year]\n\n*Required*: set to 3 if not provided."),
+	PyDoc_STR("*sequence*: State custom depreciation [%/year]\n\n*Required*: set to 3 if not provided."),
  	NULL},
 {"depr_sta_sl_years", (getter)Depreciation_get_depr_sta_sl_years,(setter)Depreciation_set_depr_sta_sl_years,
-	PyDoc_STR("type: Float\n\nState depreciation straight-line years [years]\n\n*Constraints*: INTEGER,POSITIVE\n\n*Required*: set to 2 if not provided."),
+	PyDoc_STR("*float*: State depreciation straight-line years [years]\n\n*Constraints*: INTEGER,POSITIVE\n\n*Required*: set to 2 if not provided."),
  	NULL},
 {"depr_sta_type", (getter)Depreciation_get_depr_sta_type,(setter)Depreciation_set_depr_sta_type,
-	PyDoc_STR("type: Float\n\nState depreciation type\n\n*Options*: 0=none,1=macrs_half_year,2=sl,3=custom\n\n*Constraints*: INTEGER,MIN=0,MAX=3\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: State depreciation type\n\n*Options*: 0=none,1=macrs_half_year,2=sl,3=custom\n\n*Constraints*: INTEGER,MIN=0,MAX=3\n\n*Required*: set to 0 if not provided."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -256,9 +256,9 @@ Financials_export(FinancialsObject *self, PyObject *args)
 
 static PyMethodDef Financials_methods[] = {
 		{"assign",            (PyCFunction)Financials_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Financials_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Financials_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -300,13 +300,13 @@ Financials_set_real_discount_rate(FinancialsObject *self, PyObject *value, void 
 
 static PyGetSetDef Financials_getset[] = {
 {"analysis_period", (getter)Financials_get_analysis_period,(setter)Financials_set_analysis_period,
-	PyDoc_STR("type: Float\n\nAnalyis period [years]\n\n*Constraints*: INTEGER,MIN=0,MAX=50\n\n*Required*: set to 30 if not provided."),
+	PyDoc_STR("*float*: Analyis period [years]\n\n*Constraints*: INTEGER,MIN=0,MAX=50\n\n*Required*: set to 30 if not provided."),
  	NULL},
 {"inflation_rate", (getter)Financials_get_inflation_rate,(setter)Financials_set_inflation_rate,
-	PyDoc_STR("type: Float\n\nInflation rate [%]\n\n*Constraints*: MIN=-99\n\n*Required*: True"),
+	PyDoc_STR("*float*: Inflation rate [%]\n\n*Constraints*: MIN=-99\n\n*Required*: True"),
  	NULL},
 {"real_discount_rate", (getter)Financials_get_real_discount_rate,(setter)Financials_set_real_discount_rate,
-	PyDoc_STR("type: Float\n\nReal discount rate [%]\n\n*Constraints*: MIN=-99\n\n*Required*: True"),
+	PyDoc_STR("*float*: Real discount rate [%]\n\n*Constraints*: MIN=-99\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -409,9 +409,9 @@ FinancialThirdPartyOwnership_export(FinancialThirdPartyOwnershipObject *self, Py
 
 static PyMethodDef FinancialThirdPartyOwnership_methods[] = {
 		{"assign",            (PyCFunction)FinancialThirdPartyOwnership_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``FinancialThirdPartyOwnership_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)FinancialThirdPartyOwnership_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -429,7 +429,7 @@ FinancialThirdPartyOwnership_set_lease_or_ppa(FinancialThirdPartyOwnershipObject
 
 static PyGetSetDef FinancialThirdPartyOwnership_getset[] = {
 {"lease_or_ppa", (getter)FinancialThirdPartyOwnership_get_lease_or_ppa,(setter)FinancialThirdPartyOwnership_set_lease_or_ppa,
-	PyDoc_STR("type: Float\n\nLease or PPA agreement [0/1]\n\n*Options*: 0=lease,1=ppa\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Lease or PPA agreement [0/1]\n\n*Options*: 0=lease,1=ppa\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: set to 0 if not provided."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -532,9 +532,9 @@ Common_export(CommonObject *self, PyObject *args)
 
 static PyMethodDef Common_methods[] = {
 		{"assign",            (PyCFunction)Common_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Common_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Common_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -564,10 +564,10 @@ Common_set_gen(CommonObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef Common_getset[] = {
 {"annual_energy_value", (getter)Common_get_annual_energy_value,(setter)Common_set_annual_energy_value,
-	PyDoc_STR("type: Sequence\n\nEnergy value [$]\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: Energy value [$]\n\n*Required*: True"),
  	NULL},
 {"gen", (getter)Common_get_gen,(setter)Common_set_gen,
-	PyDoc_STR("type: Sequence\n\nPower generated by renewable resource [kW]\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: Power generated by renewable resource [kW]\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -670,9 +670,9 @@ AnnualOutput_export(AnnualOutputObject *self, PyObject *args)
 
 static PyMethodDef AnnualOutput_methods[] = {
 		{"assign",            (PyCFunction)AnnualOutput_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``AnnualOutput_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)AnnualOutput_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -702,10 +702,10 @@ AnnualOutput_set_system_use_lifetime_output(AnnualOutputObject *self, PyObject *
 
 static PyGetSetDef AnnualOutput_getset[] = {
 {"degradation", (getter)AnnualOutput_get_degradation,(setter)AnnualOutput_set_degradation,
-	PyDoc_STR("type: Sequence\n\nAnnual degradation [%]\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: Annual degradation [%]\n\n*Required*: True"),
  	NULL},
 {"system_use_lifetime_output", (getter)AnnualOutput_get_system_use_lifetime_output,(setter)AnnualOutput_set_system_use_lifetime_output,
-	PyDoc_STR("type: Float\n\nLifetime hourly system outputs [0/1]\n\n*Options*: 0=hourly first year,1=hourly lifetime\n\n*Constraints*: INTEGER,MIN=0\n\n*Required*: True"),
+	PyDoc_STR("*float*: Lifetime hourly system outputs [0/1]\n\n*Options*: 0=hourly first year,1=hourly lifetime\n\n*Constraints*: INTEGER,MIN=0\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -808,9 +808,9 @@ CashFlow_export(CashFlowObject *self, PyObject *args)
 
 static PyMethodDef CashFlow_methods[] = {
 		{"assign",            (PyCFunction)CashFlow_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``CashFlow_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)CashFlow_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -864,16 +864,16 @@ CashFlow_set_ppa_price(CashFlowObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef CashFlow_getset[] = {
 {"lease_escalation", (getter)CashFlow_get_lease_escalation,(setter)CashFlow_set_lease_escalation,
-	PyDoc_STR("type: Float\n\nMonthly lease escalation [%/year]\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Monthly lease escalation [%/year]\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"lease_price", (getter)CashFlow_get_lease_price,(setter)CashFlow_set_lease_price,
-	PyDoc_STR("type: Float\n\nMonthly lease price [$/month]\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Monthly lease price [$/month]\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"ppa_escalation", (getter)CashFlow_get_ppa_escalation,(setter)CashFlow_set_ppa_escalation,
-	PyDoc_STR("type: Float\n\nMonthly lease escalation [%/year]\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*float*: Monthly lease escalation [%/year]\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"ppa_price", (getter)CashFlow_get_ppa_price,(setter)CashFlow_set_ppa_price,
-	PyDoc_STR("type: Float\n\nMonthly lease price [$/month]\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*float*: Monthly lease price [$/month]\n\n*Required*: set to 1 if not provided."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -976,9 +976,9 @@ ElectricityCost_export(ElectricityCostObject *self, PyObject *args)
 
 static PyMethodDef ElectricityCost_methods[] = {
 		{"assign",            (PyCFunction)ElectricityCost_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``ElectricityCost_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)ElectricityCost_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -1008,10 +1008,10 @@ ElectricityCost_set_elec_cost_without_system(ElectricityCostObject *self, PyObje
 
 static PyGetSetDef ElectricityCost_getset[] = {
 {"elec_cost_with_system", (getter)ElectricityCost_get_elec_cost_with_system,(setter)ElectricityCost_set_elec_cost_with_system,
-	PyDoc_STR("type: Sequence\n\nEnergy value [$]\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: Energy value [$]\n\n*Required*: True"),
  	NULL},
 {"elec_cost_without_system", (getter)ElectricityCost_get_elec_cost_without_system,(setter)ElectricityCost_set_elec_cost_without_system,
-	PyDoc_STR("type: Sequence\n\nEnergy value [$]\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: Energy value [$]\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1114,9 +1114,9 @@ Outputs_export(OutputsObject *self, PyObject *args)
 
 static PyMethodDef Outputs_methods[] = {
 		{"assign",            (PyCFunction)Outputs_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Outputs_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Outputs_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -1194,40 +1194,40 @@ Outputs_get_year1_nte(OutputsObject *self, void *closure)
 
 static PyGetSetDef Outputs_getset[] = {
 {"cf_after_tax_cash_flow", (getter)Outputs_get_cf_after_tax_cash_flow,(setter)0,
-	PyDoc_STR("type: Sequence\n\nAfter-tax cash flow [$]"),
+	PyDoc_STR("*sequence*: After-tax cash flow [$]"),
  	NULL},
 {"cf_after_tax_net_equity_cost_flow", (getter)Outputs_get_cf_after_tax_net_equity_cost_flow,(setter)0,
-	PyDoc_STR("type: Sequence\n\nAfter-tax annual costs [$]"),
+	PyDoc_STR("*sequence*: After-tax annual costs [$]"),
  	NULL},
 {"cf_agreement_cost", (getter)Outputs_get_cf_agreement_cost,(setter)0,
-	PyDoc_STR("type: Sequence\n\nAgreement cost [$]"),
+	PyDoc_STR("*sequence*: Agreement cost [$]"),
  	NULL},
 {"cf_cumulative_payback_with_expenses", (getter)Outputs_get_cf_cumulative_payback_with_expenses,(setter)0,
-	PyDoc_STR("type: Sequence\n\nCumulative simple payback with expenses [$]"),
+	PyDoc_STR("*sequence*: Cumulative simple payback with expenses [$]"),
  	NULL},
 {"cf_energy_net", (getter)Outputs_get_cf_energy_net,(setter)0,
-	PyDoc_STR("type: Sequence\n\nEnergy [kWh]"),
+	PyDoc_STR("*sequence*: Energy [kWh]"),
  	NULL},
 {"cf_length", (getter)Outputs_get_cf_length,(setter)0,
-	PyDoc_STR("type: Float\n\nAgreement period"),
+	PyDoc_STR("*float*: Agreement period"),
  	NULL},
 {"cf_nte", (getter)Outputs_get_cf_nte,(setter)0,
-	PyDoc_STR("type: Sequence\n\nHost indifference point by year [cents/kWh]"),
+	PyDoc_STR("*sequence*: Host indifference point by year [cents/kWh]"),
  	NULL},
 {"cf_payback_with_expenses", (getter)Outputs_get_cf_payback_with_expenses,(setter)0,
-	PyDoc_STR("type: Sequence\n\nSimple payback with expenses [$]"),
+	PyDoc_STR("*sequence*: Simple payback with expenses [$]"),
  	NULL},
 {"lnte_nom", (getter)Outputs_get_lnte_nom,(setter)0,
-	PyDoc_STR("type: Float\n\nHost indifference point real levelized value [cents/kWh]"),
+	PyDoc_STR("*float*: Host indifference point real levelized value [cents/kWh]"),
  	NULL},
 {"lnte_real", (getter)Outputs_get_lnte_real,(setter)0,
-	PyDoc_STR("type: Float\n\nHost indifference point nominal levelized value [cents/kWh]"),
+	PyDoc_STR("*float*: Host indifference point nominal levelized value [cents/kWh]"),
  	NULL},
 {"npv", (getter)Outputs_get_npv,(setter)0,
-	PyDoc_STR("type: Float\n\nNet present value [$]"),
+	PyDoc_STR("*float*: Net present value [$]"),
  	NULL},
 {"year1_nte", (getter)Outputs_get_year1_nte,(setter)0,
-	PyDoc_STR("type: Float\n\nHost indifference point in Year 1 [cents/kWh]"),
+	PyDoc_STR("*float*: Host indifference point in Year 1 [cents/kWh]"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1390,9 +1390,9 @@ static PyMethodDef Thirdpartyownership_methods[] = {
 		{"execute",            (PyCFunction)Thirdpartyownership_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
 		{"assign",            (PyCFunction)Thirdpartyownership_assign,  METH_VARARGS,
-				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs")},
+				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Depreciation': { var: val, ...}, ...}``")},
 		{"export",            (PyCFunction)Thirdpartyownership_export,  METH_VARARGS,
-				PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+				PyDoc_STR("export() -> dict\n Export attributes into nested dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -1432,7 +1432,7 @@ static PyTypeObject Thirdpartyownership_Type = {
 		0,                          /*tp_setattro*/
 		0,                          /*tp_as_buffer*/
 		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
-		"Wrapper for `cmod_thirdpartyownership.cpp <https://github.com/NREL/ssc/blob/develop/ssc/cmod_thirdpartyownership.cpp>`_",        /*tp_doc*/
+		"This class contains all the variable information for running a simulation. Variables are grouped together in the subclasses as properties. If property assignments are the wrong type, an error is thrown.",        /*tp_doc*/
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
@@ -1509,12 +1509,12 @@ Thirdpartyownership_default(PyObject *self, PyObject *args)
 
 static PyMethodDef ThirdpartyownershipModule_methods[] = {
 		{"new",             Thirdpartyownership_new,         METH_VARARGS,
-				PyDoc_STR("new() -> new Thirdpartyownership object")},
+				PyDoc_STR("new() -> Thirdpartyownership")},
 		{"default",             Thirdpartyownership_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> new Thirdpartyownership object with financial model-specific default attributes\n"
+				PyDoc_STR("default(config) -> Thirdpartyownership\n\nUse financial model-specific default attributes\n"
 				"config options:\n\n- \"FlatPlatePVThirdParty\"\n- \"GenericSystemThirdParty\"\n- \"PVWattsThirdParty\"")},
 		{"wrap",             Thirdpartyownership_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> new Thirdpartyownership object around existing PySSC data, taking over memory ownership\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to `wrap`")},
+				PyDoc_STR("wrap(ssc_data_t) -> Thirdpartyownership\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{NULL,              NULL}           /* sentinel */
 };
 

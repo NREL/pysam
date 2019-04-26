@@ -1,0 +1,815 @@
+
+
+<!doctype html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Swh Module &#8212; PySAM 1.1 documentation</title>
+    <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">PySAM 1.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Swh Module</a><ul>
+<li><a class="reference internal" href="#creating-an-instance">Creating an Instance</a></li>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+<li><a class="reference internal" href="#weather-group">Weather Group</a></li>
+<li><a class="reference internal" href="#swh-group">SWH Group</a></li>
+<li><a class="reference internal" href="#adjustmentfactors-group">AdjustmentFactors Group</a></li>
+<li><a class="reference internal" href="#outputs-group">Outputs Group</a></li>
+</ul>
+</li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/modules/Swh.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="swh-module">
+<span id="swh"></span><h1>Swh Module<a class="headerlink" href="#swh-module" title="Permalink to this headline">¶</a></h1>
+<p>Wrapper for SAM Simulation Core model: <a class="reference external" href="https://github.com/NREL/ssc/blob/develop/ssc/cmod_swh.cpp">cmod_swh.cpp</a></p>
+<div class="section" id="creating-an-instance">
+<h2>Creating an Instance<a class="headerlink" href="#creating-an-instance" title="Permalink to this headline">¶</a></h2>
+<p>There are three methods to create a new instance of a PySAM module. Using <code class="docutils literal notranslate"><span class="pre">default</span></code> populates the newclass’ attributes with default values specific to a <code class="docutils literal notranslate"><span class="pre">config</span></code>. Each technology-financialconfiguration corresponds to a SAM GUI configuration. Using <code class="docutils literal notranslate"><span class="pre">new</span></code> creates an instance with empty attributes. The <code class="docutils literal notranslate"><span class="pre">wrap</span></code> function allows compatibility with PySSC, for details, refer to <span class="xref std std-doc">PySSC</span>.</p>
+<p><strong>Swh model description</strong></p>
+<span class="target" id="module-PySAM.Swh"></span><p>Solar water heating model for residential and commercial building applications</p>
+<dl class="function">
+<dt id="PySAM.Swh.default">
+<code class="descclassname">PySAM.Swh.</code><code class="descname">default</code><span class="sig-paren">(</span><em>config</em><span class="sig-paren">)</span> &#x2192; Swh<a class="headerlink" href="#PySAM.Swh.default" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use financial model-specific default attributes
+config options:</p>
+<ul class="simple">
+<li><p>“SolarWaterHeatingCommercial”</p></li>
+<li><p>“SolarWaterHeatingLCOECalculator”</p></li>
+<li><p>“SolarWaterHeatingNone”</p></li>
+<li><p>“SolarWaterHeatingResidential”</p></li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="PySAM.Swh.new">
+<code class="descclassname">PySAM.Swh.</code><code class="descname">new</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Swh<a class="headerlink" href="#PySAM.Swh.new" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="PySAM.Swh.wrap">
+<code class="descclassname">PySAM.Swh.</code><code class="descname">wrap</code><span class="sig-paren">(</span><em>ssc_data_t</em><span class="sig-paren">)</span> &#x2192; Swh<a class="headerlink" href="#PySAM.Swh.wrap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use existing PySSC data</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Do not call PySSC.data_free on the ssc_data_t provided to <code class="docutils literal notranslate"><span class="pre">wrap</span></code></p>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.Swh.Swh">
+<em class="property">class </em><code class="descclassname">PySAM.Swh.</code><code class="descname">Swh</code><a class="headerlink" href="#PySAM.Swh.Swh" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class contains all the variable information for running a simulation. Variables are grouped together in the subclasses as properties. If property assignments are the wrong type, an error is thrown.</p>
+<dl class="method">
+<dt id="PySAM.Swh.Swh.assign">
+<code class="descname">assign</code><span class="sig-paren">(</span><em>dict</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Swh.Swh.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from nested dictionary, except for Outputs</p>
+<p><code class="docutils literal notranslate"><span class="pre">nested_dict</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">'Weather':</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...},</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.Swh.Swh.execute">
+<code class="descname">execute</code><span class="sig-paren">(</span><em>int verbosity</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Swh.Swh.execute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute simulation with verbosity level 0 (default) or 1</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.Swh.Swh.export">
+<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.Swh.Swh.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into nested dictionary</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="weather-group">
+<h2>Weather Group<a class="headerlink" href="#weather-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.Swh.Swh.Weather">
+<em class="property">class </em><code class="descclassname">PySAM.Swh.Swh.</code><code class="descname">Weather</code><a class="headerlink" href="#PySAM.Swh.Swh.Weather" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.Swh.Swh.Weather.assign">
+<code class="descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Swh.Swh.Weather.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">Weather_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.Swh.Swh.Weather.export">
+<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.Swh.Swh.Weather.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.Weather.solar_resource_file">
+<code class="descname">solar_resource_file</code><a class="headerlink" href="#PySAM.Swh.Swh.Weather.solar_resource_file" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em>: local weather file path</p>
+<p><em>Constraints</em>: LOCAL_FILE</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="swh-group">
+<h2>SWH Group<a class="headerlink" href="#swh-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.Swh.Swh.SWH">
+<em class="property">class </em><code class="descclassname">PySAM.Swh.Swh.</code><code class="descname">SWH</code><a class="headerlink" href="#PySAM.Swh.Swh.SWH" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.Swh.Swh.SWH.assign">
+<code class="descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Swh.Swh.SWH.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">SWH_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.Swh.Swh.SWH.export">
+<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.Swh.Swh.SWH.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.SWH.FRUL">
+<code class="descname">FRUL</code><a class="headerlink" href="#PySAM.Swh.Swh.SWH.FRUL" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: FRUL</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.SWH.FRta">
+<code class="descname">FRta</code><a class="headerlink" href="#PySAM.Swh.Swh.SWH.FRta" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: FRta</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.SWH.T_room">
+<code class="descname">T_room</code><a class="headerlink" href="#PySAM.Swh.Swh.SWH.T_room" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Temperature around solar tank [C]</p>
+<p><em>Constraints</em>: POSITIVE</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.SWH.T_set">
+<code class="descname">T_set</code><a class="headerlink" href="#PySAM.Swh.Swh.SWH.T_set" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Set temperature [C]</p>
+<p><em>Constraints</em>: POSITIVE</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.SWH.T_tank_max">
+<code class="descname">T_tank_max</code><a class="headerlink" href="#PySAM.Swh.Swh.SWH.T_tank_max" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Max temperature in solar tank [C]</p>
+<p><em>Constraints</em>: POSITIVE</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.SWH.U_tank">
+<code class="descname">U_tank</code><a class="headerlink" href="#PySAM.Swh.Swh.SWH.U_tank" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Solar tank heat loss coefficient [W/m2K]</p>
+<p><em>Constraints</em>: POSITIVE</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.SWH.V_tank">
+<code class="descname">V_tank</code><a class="headerlink" href="#PySAM.Swh.Swh.SWH.V_tank" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Solar tank volume [m3]</p>
+<p><em>Constraints</em>: POSITIVE</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.SWH.albedo">
+<code class="descname">albedo</code><a class="headerlink" href="#PySAM.Swh.Swh.SWH.albedo" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Ground reflectance factor [0..1]</p>
+<p><em>Constraints</em>: FACTOR</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.SWH.area_coll">
+<code class="descname">area_coll</code><a class="headerlink" href="#PySAM.Swh.Swh.SWH.area_coll" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Single collector area [m2]</p>
+<p><em>Constraints</em>: POSITIVE</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.SWH.azimuth">
+<code class="descname">azimuth</code><a class="headerlink" href="#PySAM.Swh.Swh.SWH.azimuth" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Collector azimuth [deg]</p>
+<p><em>Options</em>: 90=E,180=S</p>
+<p><em>Constraints</em>: MIN=0,MAX=360</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.SWH.custom_mains">
+<code class="descname">custom_mains</code><a class="headerlink" href="#PySAM.Swh.Swh.SWH.custom_mains" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Custom mains [C]</p>
+<p><em>Constraints</em>: LENGTH=8760</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.SWH.custom_set">
+<code class="descname">custom_set</code><a class="headerlink" href="#PySAM.Swh.Swh.SWH.custom_set" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Custom set points [C]</p>
+<p><em>Constraints</em>: LENGTH=8760</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.SWH.fluid">
+<code class="descname">fluid</code><a class="headerlink" href="#PySAM.Swh.Swh.SWH.fluid" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Working fluid in system</p>
+<p><em>Info</em>: Water,Glycol</p>
+<p><em>Constraints</em>: INTEGER,MIN=0,MAX=1</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.SWH.hx_eff">
+<code class="descname">hx_eff</code><a class="headerlink" href="#PySAM.Swh.Swh.SWH.hx_eff" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Heat exchanger effectiveness [0..1]</p>
+<p><em>Constraints</em>: POSITIVE</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.SWH.iam">
+<code class="descname">iam</code><a class="headerlink" href="#PySAM.Swh.Swh.SWH.iam" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Incidence angle modifier</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.SWH.irrad_mode">
+<code class="descname">irrad_mode</code><a class="headerlink" href="#PySAM.Swh.Swh.SWH.irrad_mode" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Irradiance input mode [0/1/2]</p>
+<p><em>Info</em>: Beam+Diff,Global+Beam,Global+Diff</p>
+<p><em>Constraints</em>: INTEGER,MIN=0,MAX=2</p>
+<p><em>Required</em>: set to 0 if not provided.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.SWH.mdot">
+<code class="descname">mdot</code><a class="headerlink" href="#PySAM.Swh.Swh.SWH.mdot" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Total system mass flow rate [kg/s]</p>
+<p><em>Constraints</em>: POSITIVE</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.SWH.ncoll">
+<code class="descname">ncoll</code><a class="headerlink" href="#PySAM.Swh.Swh.SWH.ncoll" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Number of collectors</p>
+<p><em>Constraints</em>: POSITIVE,INTEGER</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.SWH.pipe_diam">
+<code class="descname">pipe_diam</code><a class="headerlink" href="#PySAM.Swh.Swh.SWH.pipe_diam" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Pipe diameter [m]</p>
+<p><em>Constraints</em>: POSITIVE</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.SWH.pipe_insul">
+<code class="descname">pipe_insul</code><a class="headerlink" href="#PySAM.Swh.Swh.SWH.pipe_insul" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Pipe insulation thickness [m]</p>
+<p><em>Constraints</em>: POSITIVE</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.SWH.pipe_k">
+<code class="descname">pipe_k</code><a class="headerlink" href="#PySAM.Swh.Swh.SWH.pipe_k" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Pipe insulation conductivity [W/m2.C]</p>
+<p><em>Constraints</em>: POSITIVE</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.SWH.pipe_length">
+<code class="descname">pipe_length</code><a class="headerlink" href="#PySAM.Swh.Swh.SWH.pipe_length" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Length of piping in system [m]</p>
+<p><em>Constraints</em>: POSITIVE</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.SWH.pump_eff">
+<code class="descname">pump_eff</code><a class="headerlink" href="#PySAM.Swh.Swh.SWH.pump_eff" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Pumping efficiency [%]</p>
+<p><em>Constraints</em>: PERCENT</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.SWH.pump_power">
+<code class="descname">pump_power</code><a class="headerlink" href="#PySAM.Swh.Swh.SWH.pump_power" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Pump power [W]</p>
+<p><em>Constraints</em>: POSITIVE</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.SWH.scaled_draw">
+<code class="descname">scaled_draw</code><a class="headerlink" href="#PySAM.Swh.Swh.SWH.scaled_draw" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Hot water draw [kg/hr]</p>
+<p><em>Constraints</em>: LENGTH=8760</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.SWH.shading_azal">
+<code class="descname">shading_azal</code><a class="headerlink" href="#PySAM.Swh.Swh.SWH.shading_azal" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Azimuth x altitude beam shading loss [%]</p>
+<p><em>Required</em>: False</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.SWH.shading_diff">
+<code class="descname">shading_diff</code><a class="headerlink" href="#PySAM.Swh.Swh.SWH.shading_diff" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Diffuse shading loss [%]</p>
+<p><em>Required</em>: False</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.SWH.shading_mxh">
+<code class="descname">shading_mxh</code><a class="headerlink" href="#PySAM.Swh.Swh.SWH.shading_mxh" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Month x Hour beam shading loss [%]</p>
+<p><em>Required</em>: False</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.SWH.shading_timestep">
+<code class="descname">shading_timestep</code><a class="headerlink" href="#PySAM.Swh.Swh.SWH.shading_timestep" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Time step beam shading loss [%]</p>
+<p><em>Required</em>: False</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.SWH.sky_model">
+<code class="descname">sky_model</code><a class="headerlink" href="#PySAM.Swh.Swh.SWH.sky_model" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Tilted surface irradiance model [0/1/2]</p>
+<p><em>Info</em>: Isotropic,HDKR,Perez</p>
+<p><em>Constraints</em>: INTEGER,MIN=0,MAX=2</p>
+<p><em>Required</em>: set to 1 if not provided.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.SWH.system_capacity">
+<code class="descname">system_capacity</code><a class="headerlink" href="#PySAM.Swh.Swh.SWH.system_capacity" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Nameplate capacity [kW]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.SWH.tank_h2d_ratio">
+<code class="descname">tank_h2d_ratio</code><a class="headerlink" href="#PySAM.Swh.Swh.SWH.tank_h2d_ratio" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Solar tank height to diameter ratio</p>
+<p><em>Constraints</em>: POSITIVE</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.SWH.test_flow">
+<code class="descname">test_flow</code><a class="headerlink" href="#PySAM.Swh.Swh.SWH.test_flow" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Flow rate used in collector test [kg/s]</p>
+<p><em>Constraints</em>: POSITIVE</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.SWH.test_fluid">
+<code class="descname">test_fluid</code><a class="headerlink" href="#PySAM.Swh.Swh.SWH.test_fluid" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Fluid used in collector test</p>
+<p><em>Info</em>: Water,Glycol</p>
+<p><em>Constraints</em>: INTEGER,MIN=0,MAX=1</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.SWH.tilt">
+<code class="descname">tilt</code><a class="headerlink" href="#PySAM.Swh.Swh.SWH.tilt" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Collector tilt [deg]</p>
+<p><em>Constraints</em>: MIN=0,MAX=90</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.SWH.use_custom_mains">
+<code class="descname">use_custom_mains</code><a class="headerlink" href="#PySAM.Swh.Swh.SWH.use_custom_mains" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Use custom mains [%]</p>
+<p><em>Constraints</em>: INTEGER,MIN=0,MAX=1</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.SWH.use_custom_set">
+<code class="descname">use_custom_set</code><a class="headerlink" href="#PySAM.Swh.Swh.SWH.use_custom_set" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Use custom set points [%]</p>
+<p><em>Constraints</em>: INTEGER,MIN=0,MAX=1</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="adjustmentfactors-group">
+<h2>AdjustmentFactors Group<a class="headerlink" href="#adjustmentfactors-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.Swh.Swh.AdjustmentFactors">
+<em class="property">class </em><code class="descclassname">PySAM.Swh.Swh.</code><code class="descname">AdjustmentFactors</code><a class="headerlink" href="#PySAM.Swh.Swh.AdjustmentFactors" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.Swh.Swh.AdjustmentFactors.assign">
+<code class="descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Swh.Swh.AdjustmentFactors.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.Swh.Swh.AdjustmentFactors.export">
+<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Dict<a class="headerlink" href="#PySAM.Swh.Swh.AdjustmentFactors.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.AdjustmentFactors.constant">
+<code class="descname">constant</code><a class="headerlink" href="#PySAM.Swh.Swh.AdjustmentFactors.constant" title="Permalink to this definition">¶</a></dt>
+<dd><p>type: float</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.AdjustmentFactors.dc_constant">
+<code class="descname">dc_constant</code><a class="headerlink" href="#PySAM.Swh.Swh.AdjustmentFactors.dc_constant" title="Permalink to this definition">¶</a></dt>
+<dd><p>DC Constant loss adjustment [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.AdjustmentFactors.dc_hourly">
+<code class="descname">dc_hourly</code><a class="headerlink" href="#PySAM.Swh.Swh.AdjustmentFactors.dc_hourly" title="Permalink to this definition">¶</a></dt>
+<dd><p>DC Hourly Adjustment Factors [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.AdjustmentFactors.dc_periods">
+<code class="descname">dc_periods</code><a class="headerlink" href="#PySAM.Swh.Swh.AdjustmentFactors.dc_periods" title="Permalink to this definition">¶</a></dt>
+<dd><p>DC Period-based Adjustment Factors [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.AdjustmentFactors.hourly">
+<code class="descname">hourly</code><a class="headerlink" href="#PySAM.Swh.Swh.AdjustmentFactors.hourly" title="Permalink to this definition">¶</a></dt>
+<dd><p>AC Hourly Adjustment Factors [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.AdjustmentFactors.periods">
+<code class="descname">periods</code><a class="headerlink" href="#PySAM.Swh.Swh.AdjustmentFactors.periods" title="Permalink to this definition">¶</a></dt>
+<dd><p>AC Period-based Adjustment Factors [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.AdjustmentFactors.sf_constant">
+<code class="descname">sf_constant</code><a class="headerlink" href="#PySAM.Swh.Swh.AdjustmentFactors.sf_constant" title="Permalink to this definition">¶</a></dt>
+<dd><p>DC Constant loss adjustment [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.AdjustmentFactors.sf_hourly">
+<code class="descname">sf_hourly</code><a class="headerlink" href="#PySAM.Swh.Swh.AdjustmentFactors.sf_hourly" title="Permalink to this definition">¶</a></dt>
+<dd><p>DC Hourly Adjustment Factors [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.AdjustmentFactors.sf_periods">
+<code class="descname">sf_periods</code><a class="headerlink" href="#PySAM.Swh.Swh.AdjustmentFactors.sf_periods" title="Permalink to this definition">¶</a></dt>
+<dd><p>DC Period-based Adjustment Factors [%]</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="outputs-group">
+<h2>Outputs Group<a class="headerlink" href="#outputs-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.Swh.Swh.Outputs">
+<em class="property">class </em><code class="descclassname">PySAM.Swh.Swh.</code><code class="descname">Outputs</code><a class="headerlink" href="#PySAM.Swh.Swh.Outputs" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.Swh.Swh.Outputs.assign">
+<code class="descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Swh.Swh.Outputs.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">Outputs_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.Swh.Swh.Outputs.export">
+<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.Swh.Swh.Outputs.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.Outputs.I_incident">
+<code class="descname">I_incident</code><a class="headerlink" href="#PySAM.Swh.Swh.Outputs.I_incident" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Irradiance - Incident [W/m2]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.Outputs.I_transmitted">
+<code class="descname">I_transmitted</code><a class="headerlink" href="#PySAM.Swh.Swh.Outputs.I_transmitted" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Irradiance - Transmitted [W/m2]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.Outputs.P_pump">
+<code class="descname">P_pump</code><a class="headerlink" href="#PySAM.Swh.Swh.Outputs.P_pump" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: P pump [kW]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.Outputs.Q_aux">
+<code class="descname">Q_aux</code><a class="headerlink" href="#PySAM.Swh.Swh.Outputs.Q_aux" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Q auxiliary [kW]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.Outputs.Q_auxonly">
+<code class="descname">Q_auxonly</code><a class="headerlink" href="#PySAM.Swh.Swh.Outputs.Q_auxonly" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Q auxiliary only [kW]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.Outputs.Q_deliv">
+<code class="descname">Q_deliv</code><a class="headerlink" href="#PySAM.Swh.Swh.Outputs.Q_deliv" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Q delivered [kW]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.Outputs.Q_loss">
+<code class="descname">Q_loss</code><a class="headerlink" href="#PySAM.Swh.Swh.Outputs.Q_loss" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Q loss [kW]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.Outputs.Q_transmitted">
+<code class="descname">Q_transmitted</code><a class="headerlink" href="#PySAM.Swh.Swh.Outputs.Q_transmitted" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Q transmitted [kW]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.Outputs.Q_useful">
+<code class="descname">Q_useful</code><a class="headerlink" href="#PySAM.Swh.Swh.Outputs.Q_useful" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Q useful [kW]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.Outputs.T_amb">
+<code class="descname">T_amb</code><a class="headerlink" href="#PySAM.Swh.Swh.Outputs.T_amb" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: T ambient [C]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.Outputs.T_cold">
+<code class="descname">T_cold</code><a class="headerlink" href="#PySAM.Swh.Swh.Outputs.T_cold" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: T cold [C]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.Outputs.T_deliv">
+<code class="descname">T_deliv</code><a class="headerlink" href="#PySAM.Swh.Swh.Outputs.T_deliv" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: T delivered [C]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.Outputs.T_hot">
+<code class="descname">T_hot</code><a class="headerlink" href="#PySAM.Swh.Swh.Outputs.T_hot" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: T hot [C]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.Outputs.T_mains">
+<code class="descname">T_mains</code><a class="headerlink" href="#PySAM.Swh.Swh.Outputs.T_mains" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: T mains [C]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.Outputs.T_tank">
+<code class="descname">T_tank</code><a class="headerlink" href="#PySAM.Swh.Swh.Outputs.T_tank" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: T tank [C]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.Outputs.V_cold">
+<code class="descname">V_cold</code><a class="headerlink" href="#PySAM.Swh.Swh.Outputs.V_cold" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: V cold [m3]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.Outputs.V_hot">
+<code class="descname">V_hot</code><a class="headerlink" href="#PySAM.Swh.Swh.Outputs.V_hot" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: V hot [m3]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.Outputs.annual_Q_aux">
+<code class="descname">annual_Q_aux</code><a class="headerlink" href="#PySAM.Swh.Swh.Outputs.annual_Q_aux" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Q auxiliary [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.Outputs.annual_Q_auxonly">
+<code class="descname">annual_Q_auxonly</code><a class="headerlink" href="#PySAM.Swh.Swh.Outputs.annual_Q_auxonly" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Q auxiliary only [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.Outputs.annual_Q_deliv">
+<code class="descname">annual_Q_deliv</code><a class="headerlink" href="#PySAM.Swh.Swh.Outputs.annual_Q_deliv" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Q delivered [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.Outputs.annual_energy">
+<code class="descname">annual_energy</code><a class="headerlink" href="#PySAM.Swh.Swh.Outputs.annual_energy" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: System energy [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.Outputs.beam">
+<code class="descname">beam</code><a class="headerlink" href="#PySAM.Swh.Swh.Outputs.beam" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Irradiance - Beam [W/m2]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.Outputs.capacity_factor">
+<code class="descname">capacity_factor</code><a class="headerlink" href="#PySAM.Swh.Swh.Outputs.capacity_factor" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Capacity factor [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.Outputs.diffuse">
+<code class="descname">diffuse</code><a class="headerlink" href="#PySAM.Swh.Swh.Outputs.diffuse" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Irradiance - Diffuse [W/m2]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.Outputs.draw">
+<code class="descname">draw</code><a class="headerlink" href="#PySAM.Swh.Swh.Outputs.draw" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Hot water draw [kg/hr]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.Outputs.gen">
+<code class="descname">gen</code><a class="headerlink" href="#PySAM.Swh.Swh.Outputs.gen" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: System power generated [kW]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.Outputs.kwh_per_kw">
+<code class="descname">kwh_per_kw</code><a class="headerlink" href="#PySAM.Swh.Swh.Outputs.kwh_per_kw" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: First year kWh/kW [kWh/kW]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.Outputs.mode">
+<code class="descname">mode</code><a class="headerlink" href="#PySAM.Swh.Swh.Outputs.mode" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Operation mode</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.Outputs.monthly_Q_aux">
+<code class="descname">monthly_Q_aux</code><a class="headerlink" href="#PySAM.Swh.Swh.Outputs.monthly_Q_aux" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Q auxiliary [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.Outputs.monthly_Q_auxonly">
+<code class="descname">monthly_Q_auxonly</code><a class="headerlink" href="#PySAM.Swh.Swh.Outputs.monthly_Q_auxonly" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Q auxiliary only [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.Outputs.monthly_Q_deliv">
+<code class="descname">monthly_Q_deliv</code><a class="headerlink" href="#PySAM.Swh.Swh.Outputs.monthly_Q_deliv" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Q delivered [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.Outputs.monthly_energy">
+<code class="descname">monthly_energy</code><a class="headerlink" href="#PySAM.Swh.Swh.Outputs.monthly_energy" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: System energy [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.Outputs.shading_loss">
+<code class="descname">shading_loss</code><a class="headerlink" href="#PySAM.Swh.Swh.Outputs.shading_loss" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Shading losses [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.Outputs.solar_fraction">
+<code class="descname">solar_fraction</code><a class="headerlink" href="#PySAM.Swh.Swh.Outputs.solar_fraction" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Solar fraction</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Swh.Swh.Outputs.ts_shift_hours">
+<code class="descname">ts_shift_hours</code><a class="headerlink" href="#PySAM.Swh.Swh.Outputs.ts_shift_hours" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Time offset for interpreting time series outputs [hours]</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">PySAM 1.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, NREL.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
+    </div>
+  </body>
+</html>

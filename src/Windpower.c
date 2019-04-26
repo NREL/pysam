@@ -58,9 +58,9 @@ WindResourceFile_export(WindResourceFileObject *self, PyObject *args)
 
 static PyMethodDef WindResourceFile_methods[] = {
 		{"assign",            (PyCFunction)WindResourceFile_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``WindResourceFile_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)WindResourceFile_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -90,10 +90,10 @@ WindResourceFile_set_wind_resource_filename(WindResourceFileObject *self, PyObje
 
 static PyGetSetDef WindResourceFile_getset[] = {
 {"wind_resource_data", (getter)WindResourceFile_get_wind_resource_data,(setter)WindResourceFile_set_wind_resource_data,
-	PyDoc_STR("type: Dict\n\nwind resouce data in memory\n\n*Required*: False"),
+	PyDoc_STR("*dict*: wind resouce data in memory\n\n*Required*: False"),
  	NULL},
 {"wind_resource_filename", (getter)WindResourceFile_get_wind_resource_filename,(setter)WindResourceFile_set_wind_resource_filename,
-	PyDoc_STR("type: Str\n\nlocal wind data file path\n\n*Constraints*: LOCAL_FILE\n\n*Required*: False"),
+	PyDoc_STR("*str*: local wind data file path\n\n*Constraints*: LOCAL_FILE\n\n*Required*: False"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -196,9 +196,9 @@ WindTurbine_export(WindTurbineObject *self, PyObject *args)
 
 static PyMethodDef WindTurbine_methods[] = {
 		{"assign",            (PyCFunction)WindTurbine_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``WindTurbine_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)WindTurbine_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -276,22 +276,22 @@ WindTurbine_set_wind_turbine_rotor_diameter(WindTurbineObject *self, PyObject *v
 
 static PyGetSetDef WindTurbine_getset[] = {
 {"wind_resource_shear", (getter)WindTurbine_get_wind_resource_shear,(setter)WindTurbine_set_wind_resource_shear,
-	PyDoc_STR("type: Float\n\nShear exponent\n\n*Constraints*: MIN=0\n\n*Required*: True"),
+	PyDoc_STR("*float*: Shear exponent\n\n*Constraints*: MIN=0\n\n*Required*: True"),
  	NULL},
 {"wind_turbine_hub_ht", (getter)WindTurbine_get_wind_turbine_hub_ht,(setter)WindTurbine_set_wind_turbine_hub_ht,
-	PyDoc_STR("type: Float\n\nHub height [m]\n\n*Constraints*: POSITIVE\n\n*Required*: True"),
+	PyDoc_STR("*float*: Hub height [m]\n\n*Constraints*: POSITIVE\n\n*Required*: True"),
  	NULL},
 {"wind_turbine_max_cp", (getter)WindTurbine_get_wind_turbine_max_cp,(setter)WindTurbine_set_wind_turbine_max_cp,
-	PyDoc_STR("type: Float\n\nMax cp\n\n*Constraints*: MIN=0\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*float*: Max cp\n\n*Constraints*: MIN=0\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"wind_turbine_powercurve_powerout", (getter)WindTurbine_get_wind_turbine_powercurve_powerout,(setter)WindTurbine_set_wind_turbine_powercurve_powerout,
-	PyDoc_STR("type: Sequence\n\nPower curve turbine output array [kW]\n\n*Constraints*: LENGTH_EQUAL=wind_turbine_powercurve_windspeeds\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: Power curve turbine output array [kW]\n\n*Constraints*: LENGTH_EQUAL=wind_turbine_powercurve_windspeeds\n\n*Required*: True"),
  	NULL},
 {"wind_turbine_powercurve_windspeeds", (getter)WindTurbine_get_wind_turbine_powercurve_windspeeds,(setter)WindTurbine_set_wind_turbine_powercurve_windspeeds,
-	PyDoc_STR("type: Sequence\n\nPower curve wind speed array [m/s]\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: Power curve wind speed array [m/s]\n\n*Required*: True"),
  	NULL},
 {"wind_turbine_rotor_diameter", (getter)WindTurbine_get_wind_turbine_rotor_diameter,(setter)WindTurbine_set_wind_turbine_rotor_diameter,
-	PyDoc_STR("type: Float\n\nRotor diameter [m]\n\n*Constraints*: POSITIVE\n\n*Required*: True"),
+	PyDoc_STR("*float*: Rotor diameter [m]\n\n*Constraints*: POSITIVE\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -394,9 +394,9 @@ WindFarm_export(WindFarmObject *self, PyObject *args)
 
 static PyMethodDef WindFarm_methods[] = {
 		{"assign",            (PyCFunction)WindFarm_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``WindFarm_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)WindFarm_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -474,22 +474,22 @@ WindFarm_set_wind_resource_turbulence_coeff(WindFarmObject *self, PyObject *valu
 
 static PyGetSetDef WindFarm_getset[] = {
 {"system_capacity", (getter)WindFarm_get_system_capacity,(setter)WindFarm_set_system_capacity,
-	PyDoc_STR("type: Float\n\nNameplate capacity [kW]\n\n*Constraints*: MIN=0\n\n*Required*: True"),
+	PyDoc_STR("*float*: Nameplate capacity [kW]\n\n*Constraints*: MIN=0\n\n*Required*: True"),
  	NULL},
 {"wind_farm_losses_percent", (getter)WindFarm_get_wind_farm_losses_percent,(setter)WindFarm_set_wind_farm_losses_percent,
-	PyDoc_STR("type: Float\n\nPercentage losses [%]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Percentage losses [%]\n\n*Required*: True"),
  	NULL},
 {"wind_farm_wake_model", (getter)WindFarm_get_wind_farm_wake_model,(setter)WindFarm_set_wind_farm_wake_model,
-	PyDoc_STR("type: Float\n\nWake Model [0/1/2]\n\n*Constraints*: INTEGER\n\n*Required*: True"),
+	PyDoc_STR("*float*: Wake Model [0/1/2]\n\n*Constraints*: INTEGER\n\n*Required*: True"),
  	NULL},
 {"wind_farm_xCoordinates", (getter)WindFarm_get_wind_farm_xCoordinates,(setter)WindFarm_set_wind_farm_xCoordinates,
-	PyDoc_STR("type: Sequence\n\nTurbine X coordinates [m]\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: Turbine X coordinates [m]\n\n*Required*: True"),
  	NULL},
 {"wind_farm_yCoordinates", (getter)WindFarm_get_wind_farm_yCoordinates,(setter)WindFarm_set_wind_farm_yCoordinates,
-	PyDoc_STR("type: Sequence\n\nTurbine Y coordinates [m]\n\n*Constraints*: LENGTH_EQUAL=wind_farm_xCoordinates\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: Turbine Y coordinates [m]\n\n*Constraints*: LENGTH_EQUAL=wind_farm_xCoordinates\n\n*Required*: True"),
  	NULL},
 {"wind_resource_turbulence_coeff", (getter)WindFarm_get_wind_resource_turbulence_coeff,(setter)WindFarm_set_wind_resource_turbulence_coeff,
-	PyDoc_STR("type: Float\n\nTurbulence coefficient [%]\n\n*Constraints*: MIN=0\n\n*Required*: True"),
+	PyDoc_STR("*float*: Turbulence coefficient [%]\n\n*Constraints*: MIN=0\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -592,9 +592,9 @@ WindPower_export(WindPowerObject *self, PyObject *args)
 
 static PyMethodDef WindPower_methods[] = {
 		{"assign",            (PyCFunction)WindPower_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``WindPower_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)WindPower_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -672,22 +672,22 @@ WindPower_set_wind_resource_model_choice(WindPowerObject *self, PyObject *value,
 
 static PyGetSetDef WindPower_getset[] = {
 {"en_icing_cutoff", (getter)WindPower_get_en_icing_cutoff,(setter)WindPower_set_en_icing_cutoff,
-	PyDoc_STR("type: Float\n\nEnable Icing Cutoff [0/1]\n\n*Constraints*: INTEGER\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Enable Icing Cutoff [0/1]\n\n*Constraints*: INTEGER\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"en_low_temp_cutoff", (getter)WindPower_get_en_low_temp_cutoff,(setter)WindPower_set_en_low_temp_cutoff,
-	PyDoc_STR("type: Float\n\nEnable Low Temperature Cutoff [0/1]\n\n*Constraints*: INTEGER\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Enable Low Temperature Cutoff [0/1]\n\n*Constraints*: INTEGER\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"icing_cutoff_rh", (getter)WindPower_get_icing_cutoff_rh,(setter)WindPower_set_icing_cutoff_rh,
-	PyDoc_STR("type: Float\n\nIcing Cutoff Relative Humidity [%]\n\n*Constraints*: MIN=0\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*float*: Icing Cutoff Relative Humidity [%]\n\n*Constraints*: MIN=0\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"icing_cutoff_temp", (getter)WindPower_get_icing_cutoff_temp,(setter)WindPower_set_icing_cutoff_temp,
-	PyDoc_STR("type: Float\n\nIcing Cutoff Temperature [C]\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*float*: Icing Cutoff Temperature [C]\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"low_temp_cutoff", (getter)WindPower_get_low_temp_cutoff,(setter)WindPower_set_low_temp_cutoff,
-	PyDoc_STR("type: Float\n\nLow Temperature Cutoff [C]\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*float*: Low Temperature Cutoff [C]\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"wind_resource_model_choice", (getter)WindPower_get_wind_resource_model_choice,(setter)WindPower_set_wind_resource_model_choice,
-	PyDoc_STR("type: Float\n\nHourly or Weibull model [0/1]\n\n*Constraints*: INTEGER\n\n*Required*: True"),
+	PyDoc_STR("*float*: Hourly or Weibull model [0/1]\n\n*Constraints*: INTEGER\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -790,9 +790,9 @@ WindSpeedWeibullDistribution_export(WindSpeedWeibullDistributionObject *self, Py
 
 static PyMethodDef WindSpeedWeibullDistribution_methods[] = {
 		{"assign",            (PyCFunction)WindSpeedWeibullDistribution_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``WindSpeedWeibullDistribution_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)WindSpeedWeibullDistribution_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -834,13 +834,13 @@ WindSpeedWeibullDistribution_set_weibull_wind_speed(WindSpeedWeibullDistribution
 
 static PyGetSetDef WindSpeedWeibullDistribution_getset[] = {
 {"weibull_k_factor", (getter)WindSpeedWeibullDistribution_get_weibull_k_factor,(setter)WindSpeedWeibullDistribution_set_weibull_k_factor,
-	PyDoc_STR("type: Float\n\nWeibull K factor for wind resource\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*float*: Weibull K factor for wind resource\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"weibull_reference_height", (getter)WindSpeedWeibullDistribution_get_weibull_reference_height,(setter)WindSpeedWeibullDistribution_set_weibull_reference_height,
-	PyDoc_STR("type: Float\n\nReference height for Weibull wind speed [m]\n\n*Constraints*: MIN=0\n\n*Required*: set to 50 if not provided."),
+	PyDoc_STR("*float*: Reference height for Weibull wind speed [m]\n\n*Constraints*: MIN=0\n\n*Required*: set to 50 if not provided."),
  	NULL},
 {"weibull_wind_speed", (getter)WindSpeedWeibullDistribution_get_weibull_wind_speed,(setter)WindSpeedWeibullDistribution_set_weibull_wind_speed,
-	PyDoc_STR("type: Float\n\nAverage wind speed for Weibull model\n\n*Constraints*: MIN=0\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*float*: Average wind speed for Weibull model\n\n*Constraints*: MIN=0\n\n*Required*: set to 1 if not provided."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -943,9 +943,9 @@ Outputs_export(OutputsObject *self, PyObject *args)
 
 static PyMethodDef Outputs_methods[] = {
 		{"assign",            (PyCFunction)Outputs_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Outputs_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Outputs_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -1017,37 +1017,37 @@ Outputs_get_wind_speed(OutputsObject *self, void *closure)
 
 static PyGetSetDef Outputs_getset[] = {
 {"annual_energy", (getter)Outputs_get_annual_energy,(setter)0,
-	PyDoc_STR("type: Float\n\nAnnual Energy [kWh]"),
+	PyDoc_STR("*float*: Annual Energy [kWh]"),
  	NULL},
 {"capacity_factor", (getter)Outputs_get_capacity_factor,(setter)0,
-	PyDoc_STR("type: Float\n\nCapacity factor [%]"),
+	PyDoc_STR("*float*: Capacity factor [%]"),
  	NULL},
 {"cutoff_losses", (getter)Outputs_get_cutoff_losses,(setter)0,
-	PyDoc_STR("type: Float\n\nCutoff losses [%]"),
+	PyDoc_STR("*float*: Cutoff losses [%]"),
  	NULL},
 {"gen", (getter)Outputs_get_gen,(setter)0,
-	PyDoc_STR("type: Sequence\n\nTotal electric power to grid [kWh]"),
+	PyDoc_STR("*sequence*: Total electric power to grid [kWh]"),
  	NULL},
 {"kwh_per_kw", (getter)Outputs_get_kwh_per_kw,(setter)0,
-	PyDoc_STR("type: Float\n\nFirst year kWh/kW [kWh/kW]"),
+	PyDoc_STR("*float*: First year kWh/kW [kWh/kW]"),
  	NULL},
 {"monthly_energy", (getter)Outputs_get_monthly_energy,(setter)0,
-	PyDoc_STR("type: Sequence\n\nMonthly Energy [kWh]"),
+	PyDoc_STR("*sequence*: Monthly Energy [kWh]"),
  	NULL},
 {"pressure", (getter)Outputs_get_pressure,(setter)0,
-	PyDoc_STR("type: Sequence\n\nPressure [atm]"),
+	PyDoc_STR("*sequence*: Pressure [atm]"),
  	NULL},
 {"temp", (getter)Outputs_get_temp,(setter)0,
-	PyDoc_STR("type: Sequence\n\nAir temperature ['C]"),
+	PyDoc_STR("*sequence*: Air temperature ['C]"),
  	NULL},
 {"turbine_output_by_windspeed_bin", (getter)Outputs_get_turbine_output_by_windspeed_bin,(setter)0,
-	PyDoc_STR("type: Sequence\n\nTurbine output by wind speed bin [kW]"),
+	PyDoc_STR("*sequence*: Turbine output by wind speed bin [kW]"),
  	NULL},
 {"wind_direction", (getter)Outputs_get_wind_direction,(setter)0,
-	PyDoc_STR("type: Sequence\n\nWind direction [deg]"),
+	PyDoc_STR("*sequence*: Wind direction [deg]"),
  	NULL},
 {"wind_speed", (getter)Outputs_get_wind_speed,(setter)0,
-	PyDoc_STR("type: Sequence\n\nWind speed [m/s]"),
+	PyDoc_STR("*sequence*: Wind speed [m/s]"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1217,9 +1217,9 @@ static PyMethodDef Windpower_methods[] = {
 		{"execute",            (PyCFunction)Windpower_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
 		{"assign",            (PyCFunction)Windpower_assign,  METH_VARARGS,
-				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs")},
+				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Wind Resource File': { var: val, ...}, ...}``")},
 		{"export",            (PyCFunction)Windpower_export,  METH_VARARGS,
-				PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+				PyDoc_STR("export() -> dict\n Export attributes into nested dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -1259,7 +1259,7 @@ static PyTypeObject Windpower_Type = {
 		0,                          /*tp_setattro*/
 		0,                          /*tp_as_buffer*/
 		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
-		"Wrapper for `cmod_windpower.cpp <https://github.com/NREL/ssc/blob/develop/ssc/cmod_windpower.cpp>`_",        /*tp_doc*/
+		"This class contains all the variable information for running a simulation. Variables are grouped together in the subclasses as properties. If property assignments are the wrong type, an error is thrown.",        /*tp_doc*/
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
@@ -1336,12 +1336,12 @@ Windpower_default(PyObject *self, PyObject *args)
 
 static PyMethodDef WindpowerModule_methods[] = {
 		{"new",             Windpower_new,         METH_VARARGS,
-				PyDoc_STR("new() -> new Windpower object")},
+				PyDoc_STR("new() -> Windpower")},
 		{"default",             Windpower_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> new Windpower object with financial model-specific default attributes\n"
+				PyDoc_STR("default(config) -> Windpower\n\nUse financial model-specific default attributes\n"
 				"config options:\n\n- \"WindPowerAllEquityPartnershipFlip\"\n- \"WindPowerCommercial\"\n- \"WindPowerCommercialPPA\"\n- \"WindPowerIndependentPowerProducer\"\n- \"WindPowerLCOECalculator\"\n- \"WindPowerLeveragedPartnershipFlip\"\n- \"WindPowerNone\"\n- \"WindPowerResidential\"\n- \"WindPowerSaleLeaseback\"\n- \"WindPowerSingleOwner\"")},
 		{"wrap",             Windpower_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> new Windpower object around existing PySSC data, taking over memory ownership\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to `wrap`")},
+				PyDoc_STR("wrap(ssc_data_t) -> Windpower\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{NULL,              NULL}           /* sentinel */
 };
 

@@ -58,9 +58,9 @@ ThermalRate_export(ThermalRateObject *self, PyObject *args)
 
 static PyMethodDef ThermalRate_methods[] = {
 		{"assign",            (PyCFunction)ThermalRate_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``ThermalRate_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)ThermalRate_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -210,40 +210,40 @@ ThermalRate_set_thermal_sell_rate_option(ThermalRateObject *self, PyObject *valu
 
 static PyGetSetDef ThermalRate_getset[] = {
 {"en_thermal_rates", (getter)ThermalRate_get_en_thermal_rates,(setter)ThermalRate_set_en_thermal_rates,
-	PyDoc_STR("type: Float\n\nOptionally enable/disable thermal_rate [years]\n\n*Constraints*: INTEGER,MIN=0,MAX=1"),
+	PyDoc_STR("*float*: Optionally enable/disable thermal_rate [years]\n\n*Constraints*: INTEGER,MIN=0,MAX=1"),
  	NULL},
 {"fuelcell_power_thermal", (getter)ThermalRate_get_fuelcell_power_thermal,(setter)ThermalRate_set_fuelcell_power_thermal,
-	PyDoc_STR("type: Sequence\n\nFuel cell power generated [kW-t]\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: Fuel cell power generated [kW-t]\n\n*Required*: True"),
  	NULL},
 {"thermal_buy_rate", (getter)ThermalRate_get_thermal_buy_rate,(setter)ThermalRate_set_thermal_buy_rate,
-	PyDoc_STR("type: Sequence\n\nThermal buy rate [$/kW-t]\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*sequence*: Thermal buy rate [$/kW-t]\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"thermal_buy_rate_flat", (getter)ThermalRate_get_thermal_buy_rate_flat,(setter)ThermalRate_set_thermal_buy_rate_flat,
-	PyDoc_STR("type: Float\n\nThermal buy rate flat [$/kW-t]\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Thermal buy rate flat [$/kW-t]\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"thermal_buy_rate_option", (getter)ThermalRate_get_thermal_buy_rate_option,(setter)ThermalRate_set_thermal_buy_rate_option,
-	PyDoc_STR("type: Float\n\nThermal buy rate option [0/1]\n\n*Options*: 0=flat,1=timestep\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Thermal buy rate option [0/1]\n\n*Options*: 0=flat,1=timestep\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"thermal_degradation", (getter)ThermalRate_get_thermal_degradation,(setter)ThermalRate_set_thermal_degradation,
-	PyDoc_STR("type: Sequence\n\nAnnual energy degradation [%]\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*sequence*: Annual energy degradation [%]\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"thermal_load", (getter)ThermalRate_get_thermal_load,(setter)ThermalRate_set_thermal_load,
-	PyDoc_STR("type: Sequence\n\nThermal load (year 1) [kW-t]"),
+	PyDoc_STR("*sequence*: Thermal load (year 1) [kW-t]"),
  	NULL},
 {"thermal_load_escalation", (getter)ThermalRate_get_thermal_load_escalation,(setter)ThermalRate_set_thermal_load_escalation,
-	PyDoc_STR("type: Sequence\n\nAnnual load escalation [%/year]\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*sequence*: Annual load escalation [%/year]\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"thermal_rate_escalation", (getter)ThermalRate_get_thermal_rate_escalation,(setter)ThermalRate_set_thermal_rate_escalation,
-	PyDoc_STR("type: Sequence\n\nAnnual thermal rate escalation [%/year]\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*sequence*: Annual thermal rate escalation [%/year]\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"thermal_sell_rate", (getter)ThermalRate_get_thermal_sell_rate,(setter)ThermalRate_set_thermal_sell_rate,
-	PyDoc_STR("type: Sequence\n\nThermal sell rate [$/kW-t]\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*sequence*: Thermal sell rate [$/kW-t]\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"thermal_sell_rate_flat", (getter)ThermalRate_get_thermal_sell_rate_flat,(setter)ThermalRate_set_thermal_sell_rate_flat,
-	PyDoc_STR("type: Float\n\nThermal sell rate flat [$/kW-t]\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Thermal sell rate flat [$/kW-t]\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"thermal_sell_rate_option", (getter)ThermalRate_get_thermal_sell_rate_option,(setter)ThermalRate_set_thermal_sell_rate_option,
-	PyDoc_STR("type: Float\n\nThermal sell rate option [0/1]\n\n*Options*: 0=flat,1=timestep\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Thermal sell rate option [0/1]\n\n*Options*: 0=flat,1=timestep\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: set to 0 if not provided."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -346,9 +346,9 @@ Lifetime_export(LifetimeObject *self, PyObject *args)
 
 static PyMethodDef Lifetime_methods[] = {
 		{"assign",            (PyCFunction)Lifetime_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Lifetime_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Lifetime_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -390,13 +390,13 @@ Lifetime_set_system_use_lifetime_output(LifetimeObject *self, PyObject *value, v
 
 static PyGetSetDef Lifetime_getset[] = {
 {"analysis_period", (getter)Lifetime_get_analysis_period,(setter)Lifetime_set_analysis_period,
-	PyDoc_STR("type: Float\n\nNumber of years in analysis [years]\n\n*Constraints*: INTEGER,POSITIVE\n\n*Required*: True"),
+	PyDoc_STR("*float*: Number of years in analysis [years]\n\n*Constraints*: INTEGER,POSITIVE\n\n*Required*: True"),
  	NULL},
 {"inflation_rate", (getter)Lifetime_get_inflation_rate,(setter)Lifetime_set_inflation_rate,
-	PyDoc_STR("type: Float\n\nInflation rate [%]\n\n*Constraints*: MIN=-99\n\n*Required*: True"),
+	PyDoc_STR("*float*: Inflation rate [%]\n\n*Constraints*: MIN=-99\n\n*Required*: True"),
  	NULL},
 {"system_use_lifetime_output", (getter)Lifetime_get_system_use_lifetime_output,(setter)Lifetime_set_system_use_lifetime_output,
-	PyDoc_STR("type: Float\n\nLifetime hourly system outputs [0/1]\n\n*Options*: 0=hourly first year,1=hourly lifetime\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: True"),
+	PyDoc_STR("*float*: Lifetime hourly system outputs [0/1]\n\n*Options*: 0=hourly first year,1=hourly lifetime\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -499,9 +499,9 @@ Outputs_export(OutputsObject *self, PyObject *args)
 
 static PyMethodDef Outputs_methods[] = {
 		{"assign",            (PyCFunction)Outputs_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Outputs_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Outputs_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -543,22 +543,22 @@ Outputs_get_thermal_savings_year1(OutputsObject *self, void *closure)
 
 static PyGetSetDef Outputs_getset[] = {
 {"thermal_cost_with_system_year1", (getter)Outputs_get_thermal_cost_with_system_year1,(setter)0,
-	PyDoc_STR("type: Float\n\nThermal cost with sytem (year 1) [$]"),
+	PyDoc_STR("*float*: Thermal cost with sytem (year 1) [$]"),
  	NULL},
 {"thermal_cost_without_system_year1", (getter)Outputs_get_thermal_cost_without_system_year1,(setter)0,
-	PyDoc_STR("type: Float\n\nThermal cost without system (year 1) [$]"),
+	PyDoc_STR("*float*: Thermal cost without system (year 1) [$]"),
  	NULL},
 {"thermal_load_year1", (getter)Outputs_get_thermal_load_year1,(setter)0,
-	PyDoc_STR("type: Float\n\nThermal load (year 1) [$]"),
+	PyDoc_STR("*float*: Thermal load (year 1) [$]"),
  	NULL},
 {"thermal_revenue_with_system", (getter)Outputs_get_thermal_revenue_with_system,(setter)0,
-	PyDoc_STR("type: Sequence\n\nThermal revenue with system [$]"),
+	PyDoc_STR("*sequence*: Thermal revenue with system [$]"),
  	NULL},
 {"thermal_revenue_without_system", (getter)Outputs_get_thermal_revenue_without_system,(setter)0,
-	PyDoc_STR("type: Sequence\n\nThermal revenue without system [$]"),
+	PyDoc_STR("*sequence*: Thermal revenue without system [$]"),
  	NULL},
 {"thermal_savings_year1", (getter)Outputs_get_thermal_savings_year1,(setter)0,
-	PyDoc_STR("type: Float\n\nThermal savings (year 1) [$]"),
+	PyDoc_STR("*float*: Thermal savings (year 1) [$]"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -701,9 +701,9 @@ static PyMethodDef Thermalrate_methods[] = {
 		{"execute",            (PyCFunction)Thermalrate_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
 		{"assign",            (PyCFunction)Thermalrate_assign,  METH_VARARGS,
-				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs")},
+				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Thermal Rate': { var: val, ...}, ...}``")},
 		{"export",            (PyCFunction)Thermalrate_export,  METH_VARARGS,
-				PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+				PyDoc_STR("export() -> dict\n Export attributes into nested dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -743,7 +743,7 @@ static PyTypeObject Thermalrate_Type = {
 		0,                          /*tp_setattro*/
 		0,                          /*tp_as_buffer*/
 		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
-		"Wrapper for `cmod_thermalrate.cpp <https://github.com/NREL/ssc/blob/develop/ssc/cmod_thermalrate.cpp>`_",        /*tp_doc*/
+		"This class contains all the variable information for running a simulation. Variables are grouped together in the subclasses as properties. If property assignments are the wrong type, an error is thrown.",        /*tp_doc*/
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
@@ -820,12 +820,12 @@ Thermalrate_default(PyObject *self, PyObject *args)
 
 static PyMethodDef ThermalrateModule_methods[] = {
 		{"new",             Thermalrate_new,         METH_VARARGS,
-				PyDoc_STR("new() -> new Thermalrate object")},
+				PyDoc_STR("new() -> Thermalrate")},
 		{"default",             Thermalrate_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> new Thermalrate object with financial model-specific default attributes\n"
+				PyDoc_STR("default(config) -> Thermalrate\n\nUse financial model-specific default attributes\n"
 				"config options:\n\n- \"FuelCellCommercial\"\n- \"FuelCellSingleOwner\"")},
 		{"wrap",             Thermalrate_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> new Thermalrate object around existing PySSC data, taking over memory ownership\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to `wrap`")},
+				PyDoc_STR("wrap(ssc_data_t) -> Thermalrate\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{NULL,              NULL}           /* sentinel */
 };
 

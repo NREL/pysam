@@ -1,0 +1,1309 @@
+
+
+<!doctype html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Tcsdish Module &#8212; PySAM 1.1 documentation</title>
+    <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">PySAM 1.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Tcsdish Module</a><ul>
+<li><a class="reference internal" href="#creating-an-instance">Creating an Instance</a></li>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+<li><a class="reference internal" href="#weather-group">Weather Group</a></li>
+<li><a class="reference internal" href="#dish-group">Dish Group</a></li>
+<li><a class="reference internal" href="#type295-group">Type295 Group</a></li>
+<li><a class="reference internal" href="#type296-group">Type296 Group</a></li>
+<li><a class="reference internal" href="#type297-group">Type297 Group</a></li>
+<li><a class="reference internal" href="#type298-group">Type298 Group</a></li>
+<li><a class="reference internal" href="#adjustmentfactors-group">AdjustmentFactors Group</a></li>
+<li><a class="reference internal" href="#outputs-group">Outputs Group</a></li>
+</ul>
+</li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/modules/Tcsdish.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="tcsdish-module">
+<span id="tcsdish"></span><h1>Tcsdish Module<a class="headerlink" href="#tcsdish-module" title="Permalink to this headline">¶</a></h1>
+<p>Wrapper for SAM Simulation Core model: <a class="reference external" href="https://github.com/NREL/ssc/blob/develop/ssc/cmod_tcsdish.cpp">cmod_tcsdish.cpp</a></p>
+<div class="section" id="creating-an-instance">
+<h2>Creating an Instance<a class="headerlink" href="#creating-an-instance" title="Permalink to this headline">¶</a></h2>
+<p>There are three methods to create a new instance of a PySAM module. Using <code class="docutils literal notranslate"><span class="pre">default</span></code> populates the newclass’ attributes with default values specific to a <code class="docutils literal notranslate"><span class="pre">config</span></code>. Each technology-financialconfiguration corresponds to a SAM GUI configuration. Using <code class="docutils literal notranslate"><span class="pre">new</span></code> creates an instance with empty attributes. The <code class="docutils literal notranslate"><span class="pre">wrap</span></code> function allows compatibility with PySSC, for details, refer to <span class="xref std std-doc">PySSC</span>.</p>
+<p><strong>Tcsdish model description</strong></p>
+<span class="target" id="module-PySAM.Tcsdish"></span><p>CSP dish-Stirling model with parameters for SES and WGA-ADDS systems for power generation</p>
+<dl class="function">
+<dt id="PySAM.Tcsdish.default">
+<code class="descclassname">PySAM.Tcsdish.</code><code class="descname">default</code><span class="sig-paren">(</span><em>config</em><span class="sig-paren">)</span> &#x2192; Tcsdish<a class="headerlink" href="#PySAM.Tcsdish.default" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use financial model-specific default attributes
+config options:</p>
+<ul class="simple">
+<li><p>“DishStirlingAllEquityPartnershipFlip”</p></li>
+<li><p>“DishStirlingCommercial”</p></li>
+<li><p>“DishStirlingCommercialPPA”</p></li>
+<li><p>“DishStirlingIndependentPowerProducer”</p></li>
+<li><p>“DishStirlingLCOECalculator”</p></li>
+<li><p>“DishStirlingLeveragedPartnershipFlip”</p></li>
+<li><p>“DishStirlingNone”</p></li>
+<li><p>“DishStirlingSaleLeaseback”</p></li>
+<li><p>“DishStirlingSingleOwner”</p></li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="PySAM.Tcsdish.new">
+<code class="descclassname">PySAM.Tcsdish.</code><code class="descname">new</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Tcsdish<a class="headerlink" href="#PySAM.Tcsdish.new" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="PySAM.Tcsdish.wrap">
+<code class="descclassname">PySAM.Tcsdish.</code><code class="descname">wrap</code><span class="sig-paren">(</span><em>ssc_data_t</em><span class="sig-paren">)</span> &#x2192; Tcsdish<a class="headerlink" href="#PySAM.Tcsdish.wrap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use existing PySSC data</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Do not call PySSC.data_free on the ssc_data_t provided to <code class="docutils literal notranslate"><span class="pre">wrap</span></code></p>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.Tcsdish.Tcsdish">
+<em class="property">class </em><code class="descclassname">PySAM.Tcsdish.</code><code class="descname">Tcsdish</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class contains all the variable information for running a simulation. Variables are grouped together in the subclasses as properties. If property assignments are the wrong type, an error is thrown.</p>
+<dl class="method">
+<dt id="PySAM.Tcsdish.Tcsdish.assign">
+<code class="descname">assign</code><span class="sig-paren">(</span><em>dict</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from nested dictionary, except for Outputs</p>
+<p><code class="docutils literal notranslate"><span class="pre">nested_dict</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">'Weather':</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...},</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.Tcsdish.Tcsdish.execute">
+<code class="descname">execute</code><span class="sig-paren">(</span><em>int verbosity</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.execute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute simulation with verbosity level 0 (default) or 1</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.Tcsdish.Tcsdish.export">
+<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into nested dictionary</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="weather-group">
+<h2>Weather Group<a class="headerlink" href="#weather-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.Tcsdish.Tcsdish.Weather">
+<em class="property">class </em><code class="descclassname">PySAM.Tcsdish.Tcsdish.</code><code class="descname">Weather</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Weather" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.Tcsdish.Tcsdish.Weather.assign">
+<code class="descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Weather.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">Weather_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.Tcsdish.Tcsdish.Weather.export">
+<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Weather.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Weather.file_name">
+<code class="descname">file_name</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Weather.file_name" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em>: local weather file path</p>
+<p><em>Constraints</em>: LOCAL_FILE</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="dish-group">
+<h2>Dish Group<a class="headerlink" href="#dish-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.Tcsdish.Tcsdish.Dish">
+<em class="property">class </em><code class="descclassname">PySAM.Tcsdish.Tcsdish.</code><code class="descname">Dish</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Dish" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.Tcsdish.Tcsdish.Dish.assign">
+<code class="descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Dish.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">Dish_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.Tcsdish.Tcsdish.Dish.export">
+<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Dish.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Dish.system_capacity">
+<code class="descname">system_capacity</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Dish.system_capacity" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Nameplate capacity [kW]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="type295-group">
+<h2>Type295 Group<a class="headerlink" href="#type295-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.Tcsdish.Tcsdish.Type295">
+<em class="property">class </em><code class="descclassname">PySAM.Tcsdish.Tcsdish.</code><code class="descname">Type295</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type295" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.Tcsdish.Tcsdish.Type295.assign">
+<code class="descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type295.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">Type295_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.Tcsdish.Tcsdish.Type295.export">
+<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type295.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type295.A_proj">
+<code class="descname">A_proj</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type295.A_proj" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Projected mirror area [m^2]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type295.A_total">
+<code class="descname">A_total</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type295.A_total" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Total Area [m^2]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type295.I_cut_in">
+<code class="descname">I_cut_in</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type295.I_cut_in" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Insolation cut in value [W/m^2]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type295.d_ap">
+<code class="descname">d_ap</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type295.d_ap" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Dish aperture diameter [m]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type295.d_ap_test">
+<code class="descname">d_ap_test</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type295.d_ap_test" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Receiver aperture diameter during test [m]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type295.ew_dish_sep">
+<code class="descname">ew_dish_sep</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type295.ew_dish_sep" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Collector separation East-West [m]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type295.h_slot_gap">
+<code class="descname">h_slot_gap</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type295.h_slot_gap" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Slot gap height [m]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type295.n_ew">
+<code class="descname">n_ew</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type295.n_ew" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Number of collectors East-West [-]</p>
+<p><em>Constraints</em>: INTEGER</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type295.n_ns">
+<code class="descname">n_ns</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type295.n_ns" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Number of collectors North-South [-]</p>
+<p><em>Constraints</em>: INTEGER</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type295.ns_dish_sep">
+<code class="descname">ns_dish_sep</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type295.ns_dish_sep" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Collector separation North-South [m]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type295.rho">
+<code class="descname">rho</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type295.rho" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Mirror surface reflectivity [-]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type295.slope_ew">
+<code class="descname">slope_ew</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type295.slope_ew" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: East-West ground slope [%]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type295.slope_ns">
+<code class="descname">slope_ns</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type295.slope_ns" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: North-South ground slope [%]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type295.test_L_focal">
+<code class="descname">test_L_focal</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type295.test_L_focal" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Focal length of mirror system [m]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type295.test_if">
+<code class="descname">test_if</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type295.test_if" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Test intercept factor [-]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type295.w_slot_gap">
+<code class="descname">w_slot_gap</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type295.w_slot_gap" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Slot gap width [m]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type295.wind_stow_speed">
+<code class="descname">wind_stow_speed</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type295.wind_stow_speed" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Wind stow speed [m/s]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="type296-group">
+<h2>Type296 Group<a class="headerlink" href="#type296-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.Tcsdish.Tcsdish.Type296">
+<em class="property">class </em><code class="descclassname">PySAM.Tcsdish.Tcsdish.</code><code class="descname">Type296</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type296" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.Tcsdish.Tcsdish.Type296.assign">
+<code class="descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type296.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">Type296_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.Tcsdish.Tcsdish.Type296.export">
+<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type296.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type296.A_absorber">
+<code class="descname">A_absorber</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type296.A_absorber" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Absorber surface area [m^2]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type296.A_wall">
+<code class="descname">A_wall</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type296.A_wall" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Cavity surface area [m^2]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type296.DELTA_T_DIR">
+<code class="descname">DELTA_T_DIR</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type296.DELTA_T_DIR" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Delta temperature for DIR receiver [K]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type296.DELTA_T_REFLUX">
+<code class="descname">DELTA_T_REFLUX</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type296.DELTA_T_REFLUX" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Delta temp for REFLUX receiver (always = 40) [K]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type296.L_cav">
+<code class="descname">L_cav</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type296.L_cav" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Internal depth of cavity perp to aperture [m]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type296.L_insulation">
+<code class="descname">L_insulation</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type296.L_insulation" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Insulation thickness [m]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type296.P_cav">
+<code class="descname">P_cav</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type296.P_cav" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Internal cavity pressure with aperture covered [kPa]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type296.T_heater_head_high">
+<code class="descname">T_heater_head_high</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type296.T_heater_head_high" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Heater Head Set Temperature [K]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type296.T_heater_head_low">
+<code class="descname">T_heater_head_low</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type296.T_heater_head_low" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Header Head Lowest Temperature [K]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type296.alpha_absorber">
+<code class="descname">alpha_absorber</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type296.alpha_absorber" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Absorber absorptance [-]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type296.alpha_wall">
+<code class="descname">alpha_wall</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type296.alpha_wall" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Cavity absorptance [-]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type296.d_cav">
+<code class="descname">d_cav</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type296.d_cav" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Internal diameter of cavity perp to aperture [m]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type296.k_insulation">
+<code class="descname">k_insulation</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type296.k_insulation" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Insulation thermal conductivity [W/m-K]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type296.rec_type">
+<code class="descname">rec_type</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type296.rec_type" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Receiver type (always = 1) [-]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type296.transmittance_cover">
+<code class="descname">transmittance_cover</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type296.transmittance_cover" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Transmittance cover (always = 1) [-]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="type297-group">
+<h2>Type297 Group<a class="headerlink" href="#type297-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.Tcsdish.Tcsdish.Type297">
+<em class="property">class </em><code class="descclassname">PySAM.Tcsdish.Tcsdish.</code><code class="descname">Type297</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type297" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.Tcsdish.Tcsdish.Type297.assign">
+<code class="descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type297.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">Type297_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.Tcsdish.Tcsdish.Type297.export">
+<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type297.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type297.Beale_const_coef">
+<code class="descname">Beale_const_coef</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type297.Beale_const_coef" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Beale Constant Coefficient [-]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type297.Beale_first_coef">
+<code class="descname">Beale_first_coef</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type297.Beale_first_coef" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Beale first-order coefficient [1/W]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type297.Beale_fourth_coef">
+<code class="descname">Beale_fourth_coef</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type297.Beale_fourth_coef" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Beale fourth-order coefficient [1/W^4]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type297.Beale_square_coef">
+<code class="descname">Beale_square_coef</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type297.Beale_square_coef" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Beale second-order coefficient [1/W^2]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type297.Beale_third_coef">
+<code class="descname">Beale_third_coef</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type297.Beale_third_coef" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Beale third-order coefficient [1/W^3]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type297.Pressure_coef">
+<code class="descname">Pressure_coef</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type297.Pressure_coef" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Pressure constant coefficient [MPa]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type297.Pressure_first">
+<code class="descname">Pressure_first</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type297.Pressure_first" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Pressure first-order coefficient [MPa/W]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type297.T_compression_in">
+<code class="descname">T_compression_in</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type297.T_compression_in" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Receiver efficiency [C]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type297.V_displaced">
+<code class="descname">V_displaced</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type297.V_displaced" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Displaced engine volume [m3]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type297.engine_speed">
+<code class="descname">engine_speed</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type297.engine_speed" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Engine operating speed [rpm]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="type298-group">
+<h2>Type298 Group<a class="headerlink" href="#type298-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.Tcsdish.Tcsdish.Type298">
+<em class="property">class </em><code class="descclassname">PySAM.Tcsdish.Tcsdish.</code><code class="descname">Type298</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type298" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.Tcsdish.Tcsdish.Type298.assign">
+<code class="descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type298.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">Type298_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.Tcsdish.Tcsdish.Type298.export">
+<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type298.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type298.P_controls">
+<code class="descname">P_controls</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type298.P_controls" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Control System Parasitic Power, Avg. [W]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type298.P_tower_fan">
+<code class="descname">P_tower_fan</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type298.P_tower_fan" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Tower fan power (set to 0) [kJ/hr]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type298.T_cool_speed2">
+<code class="descname">T_cool_speed2</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type298.T_cool_speed2" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Cooling Fluid Temp. For Fan Speed 2 Cut-In [C]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type298.T_cool_speed3">
+<code class="descname">T_cool_speed3</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type298.T_cool_speed3" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Cooling Fluid Temp. For Fan Speed 3 Cut-In [C]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type298.Tower_water_outlet_temp">
+<code class="descname">Tower_water_outlet_temp</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type298.Tower_water_outlet_temp" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Tower water outlet temperature (set to 20) [C]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type298.b_cooler">
+<code class="descname">b_cooler</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type298.b_cooler" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: b_cooler parameter [-]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type298.b_radiator">
+<code class="descname">b_radiator</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type298.b_radiator" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: b_radiator parameter [-]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type298.cooling_fluid">
+<code class="descname">cooling_fluid</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type298.cooling_fluid" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Reference Condition Cooling Fluid: 1=Water,2=V50%EG,3=V25%EG,4=V40%PG,5=V25%PG [-]</p>
+<p><em>Constraints</em>: INTEGER</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type298.cooling_tower_on">
+<code class="descname">cooling_tower_on</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type298.cooling_tower_on" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Option to use a cooling tower (set to 0=off) [-]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type298.d_pipe_tower">
+<code class="descname">d_pipe_tower</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type298.d_pipe_tower" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Runner pipe diameter to the cooling tower (set to 0.4m) [m]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type298.epsilon_cooler_test">
+<code class="descname">epsilon_cooler_test</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type298.epsilon_cooler_test" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Cooler effectiveness [-]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type298.epsilon_power_test">
+<code class="descname">epsilon_power_test</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type298.epsilon_power_test" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Test value for cooling tower effectiveness (set to 0.7) [-]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type298.epsilon_radiator_test">
+<code class="descname">epsilon_radiator_test</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type298.epsilon_radiator_test" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Radiator effectiveness [-]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type298.eta_tower_pump">
+<code class="descname">eta_tower_pump</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type298.eta_tower_pump" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Tower pump efficiency (set to 0.6) [-]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type298.ew_dish_separation">
+<code class="descname">ew_dish_separation</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type298.ew_dish_separation" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: East-West dish separation used in the simulation [m]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type298.fan_control_signal">
+<code class="descname">fan_control_signal</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type298.fan_control_signal" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Fan control signal (set to 1, not used in this model) [-]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type298.fan_speed1">
+<code class="descname">fan_speed1</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type298.fan_speed1" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Cooling system fan speed 1 [rpm]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type298.fan_speed2">
+<code class="descname">fan_speed2</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type298.fan_speed2" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Cooling system fan speed 2 [rpm]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type298.fan_speed3">
+<code class="descname">fan_speed3</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type298.fan_speed3" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Cooling system fan speed 3 [rpm]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type298.ns_dish_separation">
+<code class="descname">ns_dish_separation</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type298.ns_dish_separation" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: North-South dish separation used in the simulation [m]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type298.pump_speed">
+<code class="descname">pump_speed</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type298.pump_speed" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Reference Condition Pump Speed [rpm]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type298.system_availability">
+<code class="descname">system_availability</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type298.system_availability" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: System availability (set to 1.0) [-]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type298.test_P_fan">
+<code class="descname">test_P_fan</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type298.test_P_fan" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Reference Condition Cooling System Fan Power [W]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type298.test_P_pump">
+<code class="descname">test_P_pump</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type298.test_P_pump" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Reference Condition Pump Parasitic Power [W]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type298.test_T_fluid">
+<code class="descname">test_T_fluid</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type298.test_T_fluid" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Reference Condition Cooling Fluid Temperature [K]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type298.test_V_dot_fluid">
+<code class="descname">test_V_dot_fluid</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type298.test_V_dot_fluid" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Reference Condition Cooling Fluid Volumetric Flow Rate [gpm]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type298.test_cooling_fluid">
+<code class="descname">test_cooling_fluid</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type298.test_cooling_fluid" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Reference Condition Cooling Fluid [-]</p>
+<p><em>Constraints</em>: INTEGER</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type298.test_fan_cfm">
+<code class="descname">test_fan_cfm</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type298.test_fan_cfm" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Reference condition van volumentric flow rate [cfm]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type298.test_fan_rho_air">
+<code class="descname">test_fan_rho_air</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type298.test_fan_rho_air" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Reference condition fan air density [kg/m^3]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type298.test_fan_speed">
+<code class="descname">test_fan_speed</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type298.test_fan_speed" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Reference Condition Cooling System Fan Speed [rpm]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type298.test_pump_speed">
+<code class="descname">test_pump_speed</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type298.test_pump_speed" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Reference Condition Pump Speed [rpm]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type298.tower_m_dot_water">
+<code class="descname">tower_m_dot_water</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type298.tower_m_dot_water" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Tower cooling water flow rate (set to 134,000 kg/hr) [kg/s]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type298.tower_m_dot_water_test">
+<code class="descname">tower_m_dot_water_test</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type298.tower_m_dot_water_test" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Test value for the cooling water flow rate (set to 134,000 kg/hr) [kg/s]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type298.tower_mode">
+<code class="descname">tower_mode</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type298.tower_mode" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Cooling tower type (natural or forced draft) [-]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Type298.tower_pipe_material">
+<code class="descname">tower_pipe_material</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Type298.tower_pipe_material" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Tower pipe material (1=plastic, 2=new cast iron, 3=riveted steel) [-]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="adjustmentfactors-group">
+<h2>AdjustmentFactors Group<a class="headerlink" href="#adjustmentfactors-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.Tcsdish.Tcsdish.AdjustmentFactors">
+<em class="property">class </em><code class="descclassname">PySAM.Tcsdish.Tcsdish.</code><code class="descname">AdjustmentFactors</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.AdjustmentFactors" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.Tcsdish.Tcsdish.AdjustmentFactors.assign">
+<code class="descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.AdjustmentFactors.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.Tcsdish.Tcsdish.AdjustmentFactors.export">
+<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Dict<a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.AdjustmentFactors.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.AdjustmentFactors.constant">
+<code class="descname">constant</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.AdjustmentFactors.constant" title="Permalink to this definition">¶</a></dt>
+<dd><p>type: float</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.AdjustmentFactors.dc_constant">
+<code class="descname">dc_constant</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.AdjustmentFactors.dc_constant" title="Permalink to this definition">¶</a></dt>
+<dd><p>DC Constant loss adjustment [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.AdjustmentFactors.dc_hourly">
+<code class="descname">dc_hourly</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.AdjustmentFactors.dc_hourly" title="Permalink to this definition">¶</a></dt>
+<dd><p>DC Hourly Adjustment Factors [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.AdjustmentFactors.dc_periods">
+<code class="descname">dc_periods</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.AdjustmentFactors.dc_periods" title="Permalink to this definition">¶</a></dt>
+<dd><p>DC Period-based Adjustment Factors [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.AdjustmentFactors.hourly">
+<code class="descname">hourly</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.AdjustmentFactors.hourly" title="Permalink to this definition">¶</a></dt>
+<dd><p>AC Hourly Adjustment Factors [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.AdjustmentFactors.periods">
+<code class="descname">periods</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.AdjustmentFactors.periods" title="Permalink to this definition">¶</a></dt>
+<dd><p>AC Period-based Adjustment Factors [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.AdjustmentFactors.sf_constant">
+<code class="descname">sf_constant</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.AdjustmentFactors.sf_constant" title="Permalink to this definition">¶</a></dt>
+<dd><p>DC Constant loss adjustment [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.AdjustmentFactors.sf_hourly">
+<code class="descname">sf_hourly</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.AdjustmentFactors.sf_hourly" title="Permalink to this definition">¶</a></dt>
+<dd><p>DC Hourly Adjustment Factors [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.AdjustmentFactors.sf_periods">
+<code class="descname">sf_periods</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.AdjustmentFactors.sf_periods" title="Permalink to this definition">¶</a></dt>
+<dd><p>DC Period-based Adjustment Factors [%]</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="outputs-group">
+<h2>Outputs Group<a class="headerlink" href="#outputs-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.Tcsdish.Tcsdish.Outputs">
+<em class="property">class </em><code class="descclassname">PySAM.Tcsdish.Tcsdish.</code><code class="descname">Outputs</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Outputs" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.Tcsdish.Tcsdish.Outputs.assign">
+<code class="descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Outputs.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">Outputs_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.Tcsdish.Tcsdish.Outputs.export">
+<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Outputs.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Outputs.Collector_Losses">
+<code class="descname">Collector_Losses</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Outputs.Collector_Losses" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Collector loss total [kWt]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Outputs.P_SE_losses">
+<code class="descname">P_SE_losses</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Outputs.P_SE_losses" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Engine power loss [kWt]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Outputs.P_out_SE">
+<code class="descname">P_out_SE</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Outputs.P_out_SE" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Engine power output (gross) [kWe]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Outputs.P_out_rec">
+<code class="descname">P_out_rec</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Outputs.P_out_rec" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Receiver thermal power output [kWt]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Outputs.P_parasitic">
+<code class="descname">P_parasitic</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Outputs.P_parasitic" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Parasitic power [We]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Outputs.Phi_shade">
+<code class="descname">Phi_shade</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Outputs.Phi_shade" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Collector shading efficiency</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Outputs.Power_in_collector">
+<code class="descname">Power_in_collector</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Outputs.Power_in_collector" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Collector thermal power incident [kWt]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Outputs.Power_in_rec">
+<code class="descname">Power_in_rec</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Outputs.Power_in_rec" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Receiver thermal power input [kWt]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Outputs.Power_out_col">
+<code class="descname">Power_out_col</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Outputs.Power_out_col" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Collector thermal power produced [kWt]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Outputs.Q_rec_losses">
+<code class="descname">Q_rec_losses</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Outputs.Q_rec_losses" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Receiver thermal power loss [kWt]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Outputs.T_compression">
+<code class="descname">T_compression</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Outputs.T_compression" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Engine compression temperature [K]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Outputs.T_heater_head_operate">
+<code class="descname">T_heater_head_operate</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Outputs.T_heater_head_operate" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Receiver temperature - head operating [K]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Outputs.T_tower_in">
+<code class="descname">T_tower_in</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Outputs.T_tower_in" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Cooling fluid temperature - cooler out/tower in [C]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Outputs.T_tower_out">
+<code class="descname">T_tower_out</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Outputs.T_tower_out" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Cooling fluid temperature - cooler in/tower out [C]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Outputs.annual_Collector_Losses">
+<code class="descname">annual_Collector_Losses</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Outputs.annual_Collector_Losses" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Total collector losses (Incident - P_out) [MWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Outputs.annual_P_out_SE">
+<code class="descname">annual_P_out_SE</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Outputs.annual_P_out_SE" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Stirling engine gross output [MWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Outputs.annual_P_out_rec">
+<code class="descname">annual_P_out_rec</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Outputs.annual_P_out_rec" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Receiver output power [MWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Outputs.annual_P_parasitic">
+<code class="descname">annual_P_parasitic</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Outputs.annual_P_parasitic" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Total parasitic power load [MWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Outputs.annual_Power_in_collector">
+<code class="descname">annual_Power_in_collector</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Outputs.annual_Power_in_collector" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Power incident on the collector [MWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Outputs.annual_Power_in_rec">
+<code class="descname">annual_Power_in_rec</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Outputs.annual_Power_in_rec" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Power entering the receiver from the collector [MWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Outputs.annual_Power_out_col">
+<code class="descname">annual_Power_out_col</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Outputs.annual_Power_out_col" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Total power from the collector dish [MWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Outputs.annual_Q_rec_losses">
+<code class="descname">annual_Q_rec_losses</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Outputs.annual_Q_rec_losses" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Receiver thermal losses [MWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Outputs.annual_energy">
+<code class="descname">annual_energy</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Outputs.annual_energy" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Annual Energy [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Outputs.beam">
+<code class="descname">beam</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Outputs.beam" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Resource Beam normal irradiance [W/m2]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Outputs.capacity_factor">
+<code class="descname">capacity_factor</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Outputs.capacity_factor" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Capacity factor [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Outputs.conversion_factor">
+<code class="descname">conversion_factor</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Outputs.conversion_factor" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Gross to Net Conversion Factor [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Outputs.engine_pressure">
+<code class="descname">engine_pressure</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Outputs.engine_pressure" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Engine pressure [Pa]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Outputs.eta_SE">
+<code class="descname">eta_SE</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Outputs.eta_SE" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Engine efficiency</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Outputs.eta_collector">
+<code class="descname">eta_collector</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Outputs.eta_collector" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Collector efficiency</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Outputs.eta_net">
+<code class="descname">eta_net</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Outputs.eta_net" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: System total: Net efficiency</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Outputs.eta_rec">
+<code class="descname">eta_rec</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Outputs.eta_rec" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Receiver efficiency</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Outputs.gen">
+<code class="descname">gen</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Outputs.gen" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: System power generated [kW]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Outputs.hour">
+<code class="descname">hour</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Outputs.hour" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Resource Hour of Day</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Outputs.hourly_Collector_Losses">
+<code class="descname">hourly_Collector_Losses</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Outputs.hourly_Collector_Losses" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: System total: Collector loss total [MWt]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Outputs.hourly_P_out_SE">
+<code class="descname">hourly_P_out_SE</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Outputs.hourly_P_out_SE" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: System total: Engine power output (gross) [MWe]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Outputs.hourly_P_out_rec">
+<code class="descname">hourly_P_out_rec</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Outputs.hourly_P_out_rec" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: System total: Receiver thermal power output [MWt]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Outputs.hourly_P_parasitic">
+<code class="descname">hourly_P_parasitic</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Outputs.hourly_P_parasitic" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: System total: Parasitic power [MWe]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Outputs.hourly_Power_in_collector">
+<code class="descname">hourly_Power_in_collector</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Outputs.hourly_Power_in_collector" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: System total: Collector thermal power incident [MWt]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Outputs.hourly_Power_in_rec">
+<code class="descname">hourly_Power_in_rec</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Outputs.hourly_Power_in_rec" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: System total: Receiver thermal power input [MWt]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Outputs.hourly_Power_out_col">
+<code class="descname">hourly_Power_out_col</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Outputs.hourly_Power_out_col" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: System total: Collector thermal power produced [MWt]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Outputs.hourly_Q_rec_losses">
+<code class="descname">hourly_Q_rec_losses</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Outputs.hourly_Q_rec_losses" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: System total: Receiver thermal loss [MWt]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Outputs.kwh_per_kw">
+<code class="descname">kwh_per_kw</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Outputs.kwh_per_kw" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: First year kWh/kW [kWh/kW]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Outputs.month">
+<code class="descname">month</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Outputs.month" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Resource Month</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Outputs.monthly_Collector_Losses">
+<code class="descname">monthly_Collector_Losses</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Outputs.monthly_Collector_Losses" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Total collector losses (Incident - P_out) [MWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Outputs.monthly_P_out_SE">
+<code class="descname">monthly_P_out_SE</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Outputs.monthly_P_out_SE" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Stirling engine gross output [MWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Outputs.monthly_P_out_rec">
+<code class="descname">monthly_P_out_rec</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Outputs.monthly_P_out_rec" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Receiver output power [MWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Outputs.monthly_P_parasitic">
+<code class="descname">monthly_P_parasitic</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Outputs.monthly_P_parasitic" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Total parasitic power load [MWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Outputs.monthly_Power_in_collector">
+<code class="descname">monthly_Power_in_collector</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Outputs.monthly_Power_in_collector" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Power incident on the collector [MWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Outputs.monthly_Power_in_rec">
+<code class="descname">monthly_Power_in_rec</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Outputs.monthly_Power_in_rec" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Power entering the receiver from the collector [MWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Outputs.monthly_Power_out_col">
+<code class="descname">monthly_Power_out_col</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Outputs.monthly_Power_out_col" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Total power from the collector dish [MWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Outputs.monthly_Q_rec_losses">
+<code class="descname">monthly_Q_rec_losses</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Outputs.monthly_Q_rec_losses" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Receiver thermal losses [MWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Outputs.monthly_energy">
+<code class="descname">monthly_energy</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Outputs.monthly_energy" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Monthly Energy [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Outputs.net_power">
+<code class="descname">net_power</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Outputs.net_power" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Engine power output (net) [kWe]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Outputs.pres">
+<code class="descname">pres</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Outputs.pres" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Resource Pressure [mbar]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Outputs.solazi">
+<code class="descname">solazi</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Outputs.solazi" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Resource Solar Azimuth [deg]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Outputs.solzen">
+<code class="descname">solzen</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Outputs.solzen" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Resource Solar Zenith [deg]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Outputs.tdry">
+<code class="descname">tdry</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Outputs.tdry" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Resource Dry bulb temperature [C]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Outputs.twet">
+<code class="descname">twet</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Outputs.twet" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Resource Wet bulb temperature [C]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsdish.Tcsdish.Outputs.wspd">
+<code class="descname">wspd</code><a class="headerlink" href="#PySAM.Tcsdish.Tcsdish.Outputs.wspd" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Resource Wind Speed [m/s]</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">PySAM 1.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, NREL.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
+    </div>
+  </body>
+</html>

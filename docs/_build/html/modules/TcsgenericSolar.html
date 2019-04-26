@@ -1,0 +1,1204 @@
+
+
+<!doctype html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>TcsgenericSolar Module &#8212; PySAM 1.1 documentation</title>
+    <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">PySAM 1.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">TcsgenericSolar Module</a><ul>
+<li><a class="reference internal" href="#creating-an-instance">Creating an Instance</a></li>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+<li><a class="reference internal" href="#weather-group">Weather Group</a></li>
+<li><a class="reference internal" href="#genericsolar-group">GenericSolar Group</a></li>
+<li><a class="reference internal" href="#toutranslator-group">TouTranslator Group</a></li>
+<li><a class="reference internal" href="#type260-group">Type260 Group</a></li>
+<li><a class="reference internal" href="#adjustmentfactors-group">AdjustmentFactors Group</a></li>
+<li><a class="reference internal" href="#outputs-group">Outputs Group</a></li>
+</ul>
+</li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/modules/TcsgenericSolar.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="tcsgenericsolar-module">
+<span id="tcsgenericsolar"></span><h1>TcsgenericSolar Module<a class="headerlink" href="#tcsgenericsolar-module" title="Permalink to this headline">¶</a></h1>
+<p>Wrapper for SAM Simulation Core model: <a class="reference external" href="https://github.com/NREL/ssc/blob/develop/ssc/cmod_tcsgeneric_solar.cpp">cmod_tcsgeneric_solar.cpp</a></p>
+<div class="section" id="creating-an-instance">
+<h2>Creating an Instance<a class="headerlink" href="#creating-an-instance" title="Permalink to this headline">¶</a></h2>
+<p>There are three methods to create a new instance of a PySAM module. Using <code class="docutils literal notranslate"><span class="pre">default</span></code> populates the newclass’ attributes with default values specific to a <code class="docutils literal notranslate"><span class="pre">config</span></code>. Each technology-financialconfiguration corresponds to a SAM GUI configuration. Using <code class="docutils literal notranslate"><span class="pre">new</span></code> creates an instance with empty attributes. The <code class="docutils literal notranslate"><span class="pre">wrap</span></code> function allows compatibility with PySSC, for details, refer to <span class="xref std std-doc">PySSC</span>.</p>
+<p><strong>TcsgenericSolar model description</strong></p>
+<span class="target" id="module-PySAM.TcsgenericSolar"></span><p>CSP power system model with solar field characterized using a table of optical efficiency values</p>
+<dl class="function">
+<dt id="PySAM.TcsgenericSolar.default">
+<code class="descclassname">PySAM.TcsgenericSolar.</code><code class="descname">default</code><span class="sig-paren">(</span><em>config</em><span class="sig-paren">)</span> &#x2192; TcsgenericSolar<a class="headerlink" href="#PySAM.TcsgenericSolar.default" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use financial model-specific default attributes
+config options:</p>
+<ul class="simple">
+<li><p>“GenericCSPSystemAllEquityPartnershipFlip”</p></li>
+<li><p>“GenericCSPSystemCommercial”</p></li>
+<li><p>“GenericCSPSystemCommercialPPA”</p></li>
+<li><p>“GenericCSPSystemIndependentPowerProducer”</p></li>
+<li><p>“GenericCSPSystemLCOECalculator”</p></li>
+<li><p>“GenericCSPSystemLeveragedPartnershipFlip”</p></li>
+<li><p>“GenericCSPSystemNone”</p></li>
+<li><p>“GenericCSPSystemSaleLeaseback”</p></li>
+<li><p>“GenericCSPSystemSingleOwner”</p></li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="PySAM.TcsgenericSolar.new">
+<code class="descclassname">PySAM.TcsgenericSolar.</code><code class="descname">new</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; TcsgenericSolar<a class="headerlink" href="#PySAM.TcsgenericSolar.new" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="PySAM.TcsgenericSolar.wrap">
+<code class="descclassname">PySAM.TcsgenericSolar.</code><code class="descname">wrap</code><span class="sig-paren">(</span><em>ssc_data_t</em><span class="sig-paren">)</span> &#x2192; TcsgenericSolar<a class="headerlink" href="#PySAM.TcsgenericSolar.wrap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use existing PySSC data</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Do not call PySSC.data_free on the ssc_data_t provided to <code class="docutils literal notranslate"><span class="pre">wrap</span></code></p>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar">
+<em class="property">class </em><code class="descclassname">PySAM.TcsgenericSolar.</code><code class="descname">TcsgenericSolar</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class contains all the variable information for running a simulation. Variables are grouped together in the subclasses as properties. If property assignments are the wrong type, an error is thrown.</p>
+<dl class="method">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.assign">
+<code class="descname">assign</code><span class="sig-paren">(</span><em>dict</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from nested dictionary, except for Outputs</p>
+<p><code class="docutils literal notranslate"><span class="pre">nested_dict</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">'Weather':</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...},</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.execute">
+<code class="descname">execute</code><span class="sig-paren">(</span><em>int verbosity</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.execute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute simulation with verbosity level 0 (default) or 1</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.export">
+<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into nested dictionary</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="weather-group">
+<h2>Weather Group<a class="headerlink" href="#weather-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Weather">
+<em class="property">class </em><code class="descclassname">PySAM.TcsgenericSolar.TcsgenericSolar.</code><code class="descname">Weather</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Weather" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Weather.assign">
+<code class="descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Weather.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">Weather_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Weather.export">
+<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Weather.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Weather.azimuth">
+<code class="descname">azimuth</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Weather.azimuth" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Azimuth angle of surface/axis</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Weather.file_name">
+<code class="descname">file_name</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Weather.file_name" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em>: local weather file path</p>
+<p><em>Constraints</em>: LOCAL_FILE</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Weather.tilt">
+<code class="descname">tilt</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Weather.tilt" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Tilt angle of surface/axis</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Weather.track_mode">
+<code class="descname">track_mode</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Weather.track_mode" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Tracking mode</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="genericsolar-group">
+<h2>GenericSolar Group<a class="headerlink" href="#genericsolar-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.GenericSolar">
+<em class="property">class </em><code class="descclassname">PySAM.TcsgenericSolar.TcsgenericSolar.</code><code class="descname">GenericSolar</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.GenericSolar" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.GenericSolar.assign">
+<code class="descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.GenericSolar.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">GenericSolar_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.GenericSolar.export">
+<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.GenericSolar.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.GenericSolar.system_capacity">
+<code class="descname">system_capacity</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.GenericSolar.system_capacity" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Nameplate capacity [kW]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="toutranslator-group">
+<h2>TouTranslator Group<a class="headerlink" href="#toutranslator-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.TouTranslator">
+<em class="property">class </em><code class="descclassname">PySAM.TcsgenericSolar.TcsgenericSolar.</code><code class="descname">TouTranslator</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.TouTranslator" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.TouTranslator.assign">
+<code class="descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.TouTranslator.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">TouTranslator_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.TouTranslator.export">
+<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.TouTranslator.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.TouTranslator.weekday_schedule">
+<code class="descname">weekday_schedule</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.TouTranslator.weekday_schedule" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: 12x24 Time of Use Values for week days</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.TouTranslator.weekend_schedule">
+<code class="descname">weekend_schedule</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.TouTranslator.weekend_schedule" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: 12x24 Time of Use Values for week end days</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="type260-group">
+<h2>Type260 Group<a class="headerlink" href="#type260-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Type260">
+<em class="property">class </em><code class="descclassname">PySAM.TcsgenericSolar.TcsgenericSolar.</code><code class="descname">Type260</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Type260" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Type260.assign">
+<code class="descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Type260.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">Type260_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Type260.export">
+<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Type260.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Type260.OpticalTable">
+<code class="descname">OpticalTable</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Type260.OpticalTable" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Optical table [none]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Type260.PC_T_corr">
+<code class="descname">PC_T_corr</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Type260.PC_T_corr" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Power conversion temperature correction mode (1=wetb, 2=dryb) [none]</p>
+<p><em>Constraints</em>: INTEGER</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Type260.T_pcdes">
+<code class="descname">T_pcdes</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Type260.T_pcdes" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Power conversion reference temperature [C]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Type260.T_sfdes">
+<code class="descname">T_sfdes</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Type260.T_sfdes" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Solar field design point temperature (dry bulb) [C]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Type260.Wpar_prodD_coefs">
+<code class="descname">Wpar_prodD_coefs</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Type260.Wpar_prodD_coefs" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: DNI-based production parasitic adjustment coefs. [m2/W]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Type260.Wpar_prodQ_coefs">
+<code class="descname">Wpar_prodQ_coefs</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Type260.Wpar_prodQ_coefs" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Part-load production parasitic adjustment coefs. [1/MWe]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Type260.Wpar_prodT_coefs">
+<code class="descname">Wpar_prodT_coefs</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Type260.Wpar_prodT_coefs" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Temp.-based production parasitic adjustment coefs. [1/C]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Type260.diswos">
+<code class="descname">diswos</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Type260.diswos" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Time-of-dispatch control for without-solar conditions [none]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Type260.disws">
+<code class="descname">disws</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Type260.disws" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Time-of-dispatch control for with-solar conditions [none]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Type260.etaQ_coefs">
+<code class="descname">etaQ_coefs</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Type260.etaQ_coefs" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Part-load power conversion efficiency adjustment coefficients [1/MWt]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Type260.etaT_coefs">
+<code class="descname">etaT_coefs</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Type260.etaT_coefs" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Temp.-based power conversion efficiency adjustment coefs. [1/C]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Type260.eta_des">
+<code class="descname">eta_des</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Type260.eta_des" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Design power cycle gross efficiency [none]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Type260.eta_lhv">
+<code class="descname">eta_lhv</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Type260.eta_lhv" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Fossil backup lower heating value efficiency [none]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Type260.eta_opt_gen">
+<code class="descname">eta_opt_gen</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Type260.eta_opt_gen" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: General/other optical derate [none]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Type260.eta_opt_soil">
+<code class="descname">eta_opt_soil</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Type260.eta_opt_soil" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Soiling optical derate factor [none]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Type260.exergy_table">
+<code class="descname">exergy_table</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Type260.exergy_table" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Exergy table [none]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Type260.f_Wpar_fixed">
+<code class="descname">f_Wpar_fixed</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Type260.f_Wpar_fixed" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Fixed capacity-based parasitic loss fraction [MWe/MWcap]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Type260.f_Wpar_prod">
+<code class="descname">f_Wpar_prod</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Type260.f_Wpar_prod" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Production-based parasitic loss fraction [MWe/MWe]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Type260.f_charge">
+<code class="descname">f_charge</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Type260.f_charge" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Storage charging energy derate [none]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Type260.f_disch">
+<code class="descname">f_disch</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Type260.f_disch" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Storage discharging energy derate [none]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Type260.f_etes_0">
+<code class="descname">f_etes_0</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Type260.f_etes_0" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Initial fractional charge level of thermal storage (0..1) [none]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Type260.f_sfhl_ref">
+<code class="descname">f_sfhl_ref</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Type260.f_sfhl_ref" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Reference solar field thermal loss fraction [MW/MWcap]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Type260.f_startup">
+<code class="descname">f_startup</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Type260.f_startup" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Equivalent full-load hours required for power system startup [hours]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Type260.f_teshl_ref">
+<code class="descname">f_teshl_ref</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Type260.f_teshl_ref" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Reference heat loss from storage per max stored capacity [kWt/MWhr-stored]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Type260.f_wmax">
+<code class="descname">f_wmax</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Type260.f_wmax" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Maximum over-design power cycle operation fraction [none]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Type260.f_wmin">
+<code class="descname">f_wmin</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Type260.f_wmin" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Minimum part-load power cycle operation fraction [none]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Type260.fdisp">
+<code class="descname">fdisp</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Type260.fdisp" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Fossil backup output control factors [none]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Type260.hrs_tes">
+<code class="descname">hrs_tes</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Type260.hrs_tes" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Equivalent full-load hours of storage [hours]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Type260.ibh">
+<code class="descname">ibh</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Type260.ibh" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Beam-horizontal irradiation [kJ/hr-m^2]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Type260.ibn">
+<code class="descname">ibn</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Type260.ibn" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Beam-normal (DNI) irradiation [kJ/hr-m^2]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Type260.interp_arr">
+<code class="descname">interp_arr</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Type260.interp_arr" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Interpolate the array or find nearest neighbor? (1=interp,2=no) [none]</p>
+<p><em>Constraints</em>: INTEGER</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Type260.irr_des">
+<code class="descname">irr_des</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Type260.irr_des" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Irradiation design point [W/m2]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Type260.istableunsorted">
+<code class="descname">istableunsorted</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Type260.istableunsorted" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Is optical table unsorted format? [none]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Type260.itoth">
+<code class="descname">itoth</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Type260.itoth" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Total horizontal irradiation [kJ/hr-m^2]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Type260.latitude">
+<code class="descname">latitude</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Type260.latitude" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Site latitude</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Type260.longitude">
+<code class="descname">longitude</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Type260.longitude" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Site longitude</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Type260.ntod">
+<code class="descname">ntod</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Type260.ntod" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Number of time-of-dispatch periods in the dispatch schedule [none]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Type260.qdisp">
+<code class="descname">qdisp</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Type260.qdisp" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: TOD power output control factors [none]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Type260.qsf_des">
+<code class="descname">qsf_des</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Type260.qsf_des" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Solar field thermal production at design [MWt]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Type260.rad_type">
+<code class="descname">rad_type</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Type260.rad_type" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Solar resource radiation type (1=DNI,2=horiz.beam,3=tot.horiz) [none]</p>
+<p><em>Constraints</em>: INTEGER</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Type260.sfhlQ_coefs">
+<code class="descname">sfhlQ_coefs</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Type260.sfhlQ_coefs" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Irr-based solar field thermal loss adjustment coefficients [1/MWt]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Type260.sfhlT_coefs">
+<code class="descname">sfhlT_coefs</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Type260.sfhlT_coefs" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Temp.-based solar field thermal loss adjustment coefficients [1/C]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Type260.sfhlV_coefs">
+<code class="descname">sfhlV_coefs</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Type260.sfhlV_coefs" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Wind-based solar field thermal loss adjustment coefficients [1/(m/s)]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Type260.solarm">
+<code class="descname">solarm</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Type260.solarm" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Solar multiple [none]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Type260.storage_config">
+<code class="descname">storage_config</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Type260.storage_config" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Thermal storage configuration [none]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Type260.tdb">
+<code class="descname">tdb</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Type260.tdb" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Ambient dry-bulb temperature [C]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Type260.teshlT_coefs">
+<code class="descname">teshlT_coefs</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Type260.teshlT_coefs" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Temp.-based thermal loss adjustment - constant coef. [1/C]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Type260.teshlX_coefs">
+<code class="descname">teshlX_coefs</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Type260.teshlX_coefs" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Charge-based thermal loss adjustment - constant coef. [1/MWhr-stored]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Type260.theta_dep">
+<code class="descname">theta_dep</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Type260.theta_dep" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Solar elevation angle at which the solar field begins operating [deg]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Type260.theta_stow">
+<code class="descname">theta_stow</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Type260.theta_stow" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Solar elevation angle at which the solar field stops operating [deg]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Type260.timezone">
+<code class="descname">timezone</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Type260.timezone" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Site timezone [hr]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Type260.twb">
+<code class="descname">twb</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Type260.twb" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Ambient wet-bulb temperature [C]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Type260.vwind">
+<code class="descname">vwind</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Type260.vwind" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Wind velocity [m/s]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Type260.w_des">
+<code class="descname">w_des</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Type260.w_des" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Design power cycle gross output [MWe]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="adjustmentfactors-group">
+<h2>AdjustmentFactors Group<a class="headerlink" href="#adjustmentfactors-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.AdjustmentFactors">
+<em class="property">class </em><code class="descclassname">PySAM.TcsgenericSolar.TcsgenericSolar.</code><code class="descname">AdjustmentFactors</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.AdjustmentFactors" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.AdjustmentFactors.assign">
+<code class="descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.AdjustmentFactors.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.AdjustmentFactors.export">
+<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Dict<a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.AdjustmentFactors.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.AdjustmentFactors.constant">
+<code class="descname">constant</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.AdjustmentFactors.constant" title="Permalink to this definition">¶</a></dt>
+<dd><p>type: float</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.AdjustmentFactors.dc_constant">
+<code class="descname">dc_constant</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.AdjustmentFactors.dc_constant" title="Permalink to this definition">¶</a></dt>
+<dd><p>DC Constant loss adjustment [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.AdjustmentFactors.dc_hourly">
+<code class="descname">dc_hourly</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.AdjustmentFactors.dc_hourly" title="Permalink to this definition">¶</a></dt>
+<dd><p>DC Hourly Adjustment Factors [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.AdjustmentFactors.dc_periods">
+<code class="descname">dc_periods</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.AdjustmentFactors.dc_periods" title="Permalink to this definition">¶</a></dt>
+<dd><p>DC Period-based Adjustment Factors [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.AdjustmentFactors.hourly">
+<code class="descname">hourly</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.AdjustmentFactors.hourly" title="Permalink to this definition">¶</a></dt>
+<dd><p>AC Hourly Adjustment Factors [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.AdjustmentFactors.periods">
+<code class="descname">periods</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.AdjustmentFactors.periods" title="Permalink to this definition">¶</a></dt>
+<dd><p>AC Period-based Adjustment Factors [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.AdjustmentFactors.sf_constant">
+<code class="descname">sf_constant</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.AdjustmentFactors.sf_constant" title="Permalink to this definition">¶</a></dt>
+<dd><p>DC Constant loss adjustment [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.AdjustmentFactors.sf_hourly">
+<code class="descname">sf_hourly</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.AdjustmentFactors.sf_hourly" title="Permalink to this definition">¶</a></dt>
+<dd><p>DC Hourly Adjustment Factors [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.AdjustmentFactors.sf_periods">
+<code class="descname">sf_periods</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.AdjustmentFactors.sf_periods" title="Permalink to this definition">¶</a></dt>
+<dd><p>DC Period-based Adjustment Factors [%]</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="outputs-group">
+<h2>Outputs Group<a class="headerlink" href="#outputs-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Outputs">
+<em class="property">class </em><code class="descclassname">PySAM.TcsgenericSolar.TcsgenericSolar.</code><code class="descname">Outputs</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Outputs" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.assign">
+<code class="descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">Outputs_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.export">
+<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.annual_energy">
+<code class="descname">annual_energy</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.annual_energy" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Annual Energy [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.annual_fuel_usage">
+<code class="descname">annual_fuel_usage</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.annual_fuel_usage" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Annual fuel usage [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.annual_q_dump_tot">
+<code class="descname">annual_q_dump_tot</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.annual_q_dump_tot" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Total dumped energy [MWht]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.annual_q_fossil">
+<code class="descname">annual_q_fossil</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.annual_q_fossil" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Thermal energy supplied from aux firing [MWht]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.annual_q_from_tes">
+<code class="descname">annual_q_from_tes</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.annual_q_from_tes" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Thermal energy from storage [MWht]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.annual_q_hl_sf">
+<code class="descname">annual_q_hl_sf</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.annual_q_hl_sf" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Solar field thermal losses [MWht]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.annual_q_hl_tes">
+<code class="descname">annual_q_hl_tes</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.annual_q_hl_tes" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Thermal losses from storage [MWht]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.annual_q_sf">
+<code class="descname">annual_q_sf</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.annual_q_sf" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Solar field delivered thermal power [MWht]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.annual_q_startup">
+<code class="descname">annual_q_startup</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.annual_q_startup" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Power conversion startup energy [MWht]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.annual_q_to_pb">
+<code class="descname">annual_q_to_pb</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.annual_q_to_pb" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Thermal energy to the power conversion system [MWht]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.annual_q_to_tes">
+<code class="descname">annual_q_to_tes</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.annual_q_to_tes" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Thermal energy into storage [MWht]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.annual_w_gr">
+<code class="descname">annual_w_gr</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.annual_w_gr" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Total gross power production [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.beam">
+<code class="descname">beam</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.beam" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Resource Beam normal irradiance [W/m2]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.capacity_factor">
+<code class="descname">capacity_factor</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.capacity_factor" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Capacity factor [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.conversion_factor">
+<code class="descname">conversion_factor</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.conversion_factor" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Gross to Net Conversion Factor [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.diff">
+<code class="descname">diff</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.diff" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Resource Diffuse horizontal irradiance [W/m2]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.e_in_tes">
+<code class="descname">e_in_tes</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.e_in_tes" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: TES thermal energy available [MWht]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.enet">
+<code class="descname">enet</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.enet" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Cycle electrical power output (net) [MWe]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.eta_cycle">
+<code class="descname">eta_cycle</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.eta_cycle" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Cycle efficiency (gross)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.eta_opt_sf">
+<code class="descname">eta_opt_sf</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.eta_opt_sf" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Field collector optical efficiency [none]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.f_effpc_qtpb">
+<code class="descname">f_effpc_qtpb</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.f_effpc_qtpb" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Cycle efficiency load-based correction</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.f_effpc_tamb">
+<code class="descname">f_effpc_tamb</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.f_effpc_tamb" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Cycle efficiency temperature-based correction</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.f_sfhl_qdni">
+<code class="descname">f_sfhl_qdni</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.f_sfhl_qdni" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Field thermal power load-based loss correction [none]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.f_sfhl_tamb">
+<code class="descname">f_sfhl_tamb</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.f_sfhl_tamb" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Field thermal power temp.-based loss correction [none]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.f_sfhl_vwind">
+<code class="descname">f_sfhl_vwind</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.f_sfhl_vwind" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Field thermal power wind-based loss correction [none]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.gen">
+<code class="descname">gen</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.gen" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: System power generated [kW]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.global">
+<code class="descname">global</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.global" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Resource Global horizontal irradiance [W/m2]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.hour">
+<code class="descname">hour</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.hour" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Resource Hour of Day</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.kwh_per_kw">
+<code class="descname">kwh_per_kw</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.kwh_per_kw" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: First year kWh/kW [kWh/kW]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.month">
+<code class="descname">month</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.month" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Resource Month</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.monthly_energy">
+<code class="descname">monthly_energy</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.monthly_energy" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Monthly Energy [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.monthly_q_dump_tot">
+<code class="descname">monthly_q_dump_tot</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.monthly_q_dump_tot" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Total dumped energy [MWt]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.monthly_q_fossil">
+<code class="descname">monthly_q_fossil</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.monthly_q_fossil" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Thermal energy supplied from aux firing [MWt]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.monthly_q_from_tes">
+<code class="descname">monthly_q_from_tes</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.monthly_q_from_tes" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Thermal energy from storage [MWt]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.monthly_q_hl_sf">
+<code class="descname">monthly_q_hl_sf</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.monthly_q_hl_sf" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Solar field thermal losses [MWt]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.monthly_q_hl_tes">
+<code class="descname">monthly_q_hl_tes</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.monthly_q_hl_tes" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Thermal losses from storage [MWt]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.monthly_q_sf">
+<code class="descname">monthly_q_sf</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.monthly_q_sf" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Solar field delivered thermal power [MWt]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.monthly_q_startup">
+<code class="descname">monthly_q_startup</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.monthly_q_startup" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Power conversion startup energy [MWt]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.monthly_q_to_pb">
+<code class="descname">monthly_q_to_pb</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.monthly_q_to_pb" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Thermal energy to the power conversion system [MWt]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.monthly_q_to_tes">
+<code class="descname">monthly_q_to_tes</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.monthly_q_to_tes" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Thermal energy into storage [MWt]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.monthly_w_gr">
+<code class="descname">monthly_w_gr</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.monthly_w_gr" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Total gross power production [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.pres">
+<code class="descname">pres</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.pres" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Resource Pressure [mbar]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.q_dump_teschg">
+<code class="descname">q_dump_teschg</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.q_dump_teschg" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Cycle thermal energy dumped - solar field [MWt]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.q_dump_tesfull">
+<code class="descname">q_dump_tesfull</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.q_dump_tesfull" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Cycle thermal energy dumped - TES is full [MWt]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.q_dump_tot">
+<code class="descname">q_dump_tot</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.q_dump_tot" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Cycle thermal energy dumped total [MWt]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.q_dump_umin">
+<code class="descname">q_dump_umin</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.q_dump_umin" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Cycle thermal energy dumped - min. load requirement [MWt]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.q_fossil">
+<code class="descname">q_fossil</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.q_fossil" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Fossil thermal power produced [MWt]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.q_from_tes">
+<code class="descname">q_from_tes</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.q_from_tes" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: TES thermal energy from storage [MWt]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.q_gas">
+<code class="descname">q_gas</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.q_gas" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Fossil fuel used [MWt]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.q_hl_sf">
+<code class="descname">q_hl_sf</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.q_hl_sf" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Field thermal power loss total [MWt]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.q_hl_tes">
+<code class="descname">q_hl_tes</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.q_hl_tes" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: TES thermal losses from tank(s) [MWt]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.q_inc">
+<code class="descname">q_inc</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.q_inc" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Field thermal power incident [MWt]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.q_sf">
+<code class="descname">q_sf</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.q_sf" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Field thermal power total produced [MWt]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.q_startup">
+<code class="descname">q_startup</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.q_startup" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Cycle thermal startup energy [MWt]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.q_to_pb">
+<code class="descname">q_to_pb</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.q_to_pb" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Cycle thermal power input [MWt]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.q_to_tes">
+<code class="descname">q_to_tes</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.q_to_tes" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: TES thermal energy into storage [MWt]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.solazi">
+<code class="descname">solazi</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.solazi" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Resource Solar Azimuth [deg]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.solzen">
+<code class="descname">solzen</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.solzen" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Resource Solar Zenith [deg]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.system_heat_rate">
+<code class="descname">system_heat_rate</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.system_heat_rate" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: System heat rate [MMBtu/MWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.tdry">
+<code class="descname">tdry</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.tdry" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Resource Dry bulb temperature [C]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.twet">
+<code class="descname">twet</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.twet" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Resource Wet bulb temperature [C]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.w_gr">
+<code class="descname">w_gr</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.w_gr" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Cycle electrical power output (gross) [MWe]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.w_gr_fossil">
+<code class="descname">w_gr_fossil</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.w_gr_fossil" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Cycle electrical power output (gross, fossil share) [MWe]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.w_gr_solar">
+<code class="descname">w_gr_solar</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.w_gr_solar" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Cycle electrical power output (gross, solar share) [MWe]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.w_par_fixed">
+<code class="descname">w_par_fixed</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.w_par_fixed" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Fixed parasitic losses [MWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.w_par_offline">
+<code class="descname">w_par_offline</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.w_par_offline" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Offline parasitics [MWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.w_par_online">
+<code class="descname">w_par_online</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.w_par_online" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Online parasitics [MWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.w_par_prod">
+<code class="descname">w_par_prod</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.w_par_prod" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Production-based parasitic losses [MWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.w_par_tot">
+<code class="descname">w_par_tot</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.w_par_tot" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Total parasitic losses [MWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.wspd">
+<code class="descname">wspd</code><a class="headerlink" href="#PySAM.TcsgenericSolar.TcsgenericSolar.Outputs.wspd" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Resource Wind Speed [m/s]</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">PySAM 1.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, NREL.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
+    </div>
+  </body>
+</html>

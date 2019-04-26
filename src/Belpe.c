@@ -58,9 +58,9 @@ LoadProfileEstimator_export(LoadProfileEstimatorObject *self, PyObject *args)
 
 static PyMethodDef LoadProfileEstimator_methods[] = {
 		{"assign",            (PyCFunction)LoadProfileEstimator_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``LoadProfileEstimator_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)LoadProfileEstimator_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -342,73 +342,73 @@ LoadProfileEstimator_set_solar_resource_file(LoadProfileEstimatorObject *self, P
 
 static PyGetSetDef LoadProfileEstimator_getset[] = {
 {"Monthly_util", (getter)LoadProfileEstimator_get_Monthly_util,(setter)LoadProfileEstimator_set_Monthly_util,
-	PyDoc_STR("type: Sequence\n\nMonthly consumption from utility bill [kWh]\n\n*Constraints*: LENGTH=12\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*sequence*: Monthly consumption from utility bill [kWh]\n\n*Constraints*: LENGTH=12\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"Occ_Schedule", (getter)LoadProfileEstimator_get_Occ_Schedule,(setter)LoadProfileEstimator_set_Occ_Schedule,
-	PyDoc_STR("type: Sequence\n\nHourly occupant schedule [frac/hr]\n\n*Constraints*: LENGTH=24\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*sequence*: Hourly occupant schedule [frac/hr]\n\n*Constraints*: LENGTH=24\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"Occupants", (getter)LoadProfileEstimator_get_Occupants,(setter)LoadProfileEstimator_set_Occupants,
-	PyDoc_STR("type: Float\n\nOccupants [#]\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*float*: Occupants [#]\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"Retrofits", (getter)LoadProfileEstimator_get_Retrofits,(setter)LoadProfileEstimator_set_Retrofits,
-	PyDoc_STR("type: Float\n\nEnergy retrofitted [0/1]\n\n*Options*: 0=No, 1=Yes\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*float*: Energy retrofitted [0/1]\n\n*Options*: 0=No, 1=Yes\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"Stories", (getter)LoadProfileEstimator_get_Stories,(setter)LoadProfileEstimator_set_Stories,
-	PyDoc_STR("type: Float\n\nNumber of stories [#]\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*float*: Number of stories [#]\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"TCool", (getter)LoadProfileEstimator_get_TCool,(setter)LoadProfileEstimator_set_TCool,
-	PyDoc_STR("type: Float\n\nCooling setpoint [degF]\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*float*: Cooling setpoint [degF]\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"TCoolSB", (getter)LoadProfileEstimator_get_TCoolSB,(setter)LoadProfileEstimator_set_TCoolSB,
-	PyDoc_STR("type: Float\n\nCooling setpoint setback [degF]\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*float*: Cooling setpoint setback [degF]\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"THeat", (getter)LoadProfileEstimator_get_THeat,(setter)LoadProfileEstimator_set_THeat,
-	PyDoc_STR("type: Float\n\nHeating setpoint [degF]\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*float*: Heating setpoint [degF]\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"THeatSB", (getter)LoadProfileEstimator_get_THeatSB,(setter)LoadProfileEstimator_set_THeatSB,
-	PyDoc_STR("type: Float\n\nHeating setpoint setback [degf]\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*float*: Heating setpoint setback [degf]\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"T_Sched", (getter)LoadProfileEstimator_get_T_Sched,(setter)LoadProfileEstimator_set_T_Sched,
-	PyDoc_STR("type: Sequence\n\nTemperature schedule [0/1]\n\n*Constraints*: LENGTH=24\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*sequence*: Temperature schedule [0/1]\n\n*Constraints*: LENGTH=24\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"YrBuilt", (getter)LoadProfileEstimator_get_YrBuilt,(setter)LoadProfileEstimator_set_YrBuilt,
-	PyDoc_STR("type: Float\n\nYear built [yr]\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*float*: Year built [yr]\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"en_belpe", (getter)LoadProfileEstimator_get_en_belpe,(setter)LoadProfileEstimator_set_en_belpe,
-	PyDoc_STR("type: Float\n\nEnable building load calculator [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: True"),
+	PyDoc_STR("*float*: Enable building load calculator [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: True"),
  	NULL},
 {"en_cool", (getter)LoadProfileEstimator_get_en_cool,(setter)LoadProfileEstimator_set_en_cool,
-	PyDoc_STR("type: Float\n\nEnable electric cool [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*float*: Enable electric cool [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"en_dish", (getter)LoadProfileEstimator_get_en_dish,(setter)LoadProfileEstimator_set_en_dish,
-	PyDoc_STR("type: Float\n\nEnable electric dishwasher [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*float*: Enable electric dishwasher [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"en_dry", (getter)LoadProfileEstimator_get_en_dry,(setter)LoadProfileEstimator_set_en_dry,
-	PyDoc_STR("type: Float\n\nEnable electric dryer [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*float*: Enable electric dryer [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"en_fridge", (getter)LoadProfileEstimator_get_en_fridge,(setter)LoadProfileEstimator_set_en_fridge,
-	PyDoc_STR("type: Float\n\nEnable electric fridge [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*float*: Enable electric fridge [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"en_heat", (getter)LoadProfileEstimator_get_en_heat,(setter)LoadProfileEstimator_set_en_heat,
-	PyDoc_STR("type: Float\n\nEnable electric heat [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*float*: Enable electric heat [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"en_mels", (getter)LoadProfileEstimator_get_en_mels,(setter)LoadProfileEstimator_set_en_mels,
-	PyDoc_STR("type: Float\n\nEnable misc electric loads [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*float*: Enable misc electric loads [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"en_range", (getter)LoadProfileEstimator_get_en_range,(setter)LoadProfileEstimator_set_en_range,
-	PyDoc_STR("type: Float\n\nEnable electric range [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*float*: Enable electric range [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"en_wash", (getter)LoadProfileEstimator_get_en_wash,(setter)LoadProfileEstimator_set_en_wash,
-	PyDoc_STR("type: Float\n\nEnable electric washer [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*float*: Enable electric washer [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"floor_area", (getter)LoadProfileEstimator_get_floor_area,(setter)LoadProfileEstimator_set_floor_area,
-	PyDoc_STR("type: Float\n\nBuilding floor area [m2]\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*float*: Building floor area [m2]\n\n*Required*: set to 1 if not provided."),
  	NULL},
 {"load", (getter)LoadProfileEstimator_get_load,(setter)LoadProfileEstimator_set_load,
-	PyDoc_STR("type: Sequence\n\nElectricity load (year 1) [kW]\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*sequence*: Electricity load (year 1) [kW]\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"solar_resource_file", (getter)LoadProfileEstimator_get_solar_resource_file,(setter)LoadProfileEstimator_set_solar_resource_file,
-	PyDoc_STR("type: Str\n\nWeather Data file [n/a]\n\n*Constraints*: LOCAL_FILE\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*str*: Weather Data file [n/a]\n\n*Constraints*: LOCAL_FILE\n\n*Required*: set to 1 if not provided."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -511,9 +511,9 @@ Outputs_export(OutputsObject *self, PyObject *args)
 
 static PyMethodDef Outputs_methods[] = {
 		{"assign",            (PyCFunction)Outputs_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Outputs_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Outputs_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -655,9 +655,9 @@ static PyMethodDef Belpe_methods[] = {
 		{"execute",            (PyCFunction)Belpe_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
 		{"assign",            (PyCFunction)Belpe_assign,  METH_VARARGS,
-				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs")},
+				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Load Profile Estimator': { var: val, ...}, ...}``")},
 		{"export",            (PyCFunction)Belpe_export,  METH_VARARGS,
-				PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+				PyDoc_STR("export() -> dict\n Export attributes into nested dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -697,7 +697,7 @@ static PyTypeObject Belpe_Type = {
 		0,                          /*tp_setattro*/
 		0,                          /*tp_as_buffer*/
 		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
-		"Wrapper for `cmod_belpe.cpp <https://github.com/NREL/ssc/blob/develop/ssc/cmod_belpe.cpp>`_",        /*tp_doc*/
+		"This class contains all the variable information for running a simulation. Variables are grouped together in the subclasses as properties. If property assignments are the wrong type, an error is thrown.",        /*tp_doc*/
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
@@ -774,12 +774,12 @@ Belpe_default(PyObject *self, PyObject *args)
 
 static PyMethodDef BelpeModule_methods[] = {
 		{"new",             Belpe_new,         METH_VARARGS,
-				PyDoc_STR("new() -> new Belpe object")},
+				PyDoc_STR("new() -> Belpe")},
 		{"default",             Belpe_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> new Belpe object with financial model-specific default attributes\n"
+				PyDoc_STR("default(config) -> Belpe\n\nUse financial model-specific default attributes\n"
 				"config options:\n\n- \"FlatPlatePVResidential\"\n- \"FlatPlatePVThirdParty\"\n- \"PVWattsResidential\"\n- \"PVWattsThirdParty\"\n- \"SolarWaterHeatingResidential\"")},
 		{"wrap",             Belpe_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> new Belpe object around existing PySSC data, taking over memory ownership\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to `wrap`")},
+				PyDoc_STR("wrap(ssc_data_t) -> Belpe\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{NULL,              NULL}           /* sentinel */
 };
 

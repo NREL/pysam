@@ -1,0 +1,383 @@
+
+
+<!doctype html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Belpe Module &#8212; PySAM 1.1 documentation</title>
+    <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">PySAM 1.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Belpe Module</a><ul>
+<li><a class="reference internal" href="#creating-an-instance">Creating an Instance</a></li>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+<li><a class="reference internal" href="#loadprofileestimator-group">LoadProfileEstimator Group</a></li>
+<li><a class="reference internal" href="#outputs-group">Outputs Group</a></li>
+</ul>
+</li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/modules/Belpe.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="belpe-module">
+<span id="belpe"></span><h1>Belpe Module<a class="headerlink" href="#belpe-module" title="Permalink to this headline">¶</a></h1>
+<p>Wrapper for SAM Simulation Core model: <a class="reference external" href="https://github.com/NREL/ssc/blob/develop/ssc/cmod_belpe.cpp">cmod_belpe.cpp</a></p>
+<div class="section" id="creating-an-instance">
+<h2>Creating an Instance<a class="headerlink" href="#creating-an-instance" title="Permalink to this headline">¶</a></h2>
+<p>There are three methods to create a new instance of a PySAM module. Using <code class="docutils literal notranslate"><span class="pre">default</span></code> populates the newclass’ attributes with default values specific to a <code class="docutils literal notranslate"><span class="pre">config</span></code>. Each technology-financialconfiguration corresponds to a SAM GUI configuration. Using <code class="docutils literal notranslate"><span class="pre">new</span></code> creates an instance with empty attributes. The <code class="docutils literal notranslate"><span class="pre">wrap</span></code> function allows compatibility with PySSC, for details, refer to <span class="xref std std-doc">PySSC</span>.</p>
+<p><strong>Belpe model description</strong></p>
+<span class="target" id="module-PySAM.Belpe"></span><p>Electric load calculator for residential buildings</p>
+<dl class="function">
+<dt id="PySAM.Belpe.default">
+<code class="descclassname">PySAM.Belpe.</code><code class="descname">default</code><span class="sig-paren">(</span><em>config</em><span class="sig-paren">)</span> &#x2192; Belpe<a class="headerlink" href="#PySAM.Belpe.default" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use financial model-specific default attributes
+config options:</p>
+<ul class="simple">
+<li><p>“FlatPlatePVResidential”</p></li>
+<li><p>“FlatPlatePVThirdParty”</p></li>
+<li><p>“PVWattsResidential”</p></li>
+<li><p>“PVWattsThirdParty”</p></li>
+<li><p>“SolarWaterHeatingResidential”</p></li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="PySAM.Belpe.new">
+<code class="descclassname">PySAM.Belpe.</code><code class="descname">new</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Belpe<a class="headerlink" href="#PySAM.Belpe.new" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="PySAM.Belpe.wrap">
+<code class="descclassname">PySAM.Belpe.</code><code class="descname">wrap</code><span class="sig-paren">(</span><em>ssc_data_t</em><span class="sig-paren">)</span> &#x2192; Belpe<a class="headerlink" href="#PySAM.Belpe.wrap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use existing PySSC data</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Do not call PySSC.data_free on the ssc_data_t provided to <code class="docutils literal notranslate"><span class="pre">wrap</span></code></p>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.Belpe.Belpe">
+<em class="property">class </em><code class="descclassname">PySAM.Belpe.</code><code class="descname">Belpe</code><a class="headerlink" href="#PySAM.Belpe.Belpe" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class contains all the variable information for running a simulation. Variables are grouped together in the subclasses as properties. If property assignments are the wrong type, an error is thrown.</p>
+<dl class="method">
+<dt id="PySAM.Belpe.Belpe.assign">
+<code class="descname">assign</code><span class="sig-paren">(</span><em>dict</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Belpe.Belpe.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from nested dictionary, except for Outputs</p>
+<p><code class="docutils literal notranslate"><span class="pre">nested_dict</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">'Load</span> <span class="pre">Profile</span> <span class="pre">Estimator':</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...},</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.Belpe.Belpe.execute">
+<code class="descname">execute</code><span class="sig-paren">(</span><em>int verbosity</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Belpe.Belpe.execute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute simulation with verbosity level 0 (default) or 1</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.Belpe.Belpe.export">
+<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.Belpe.Belpe.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into nested dictionary</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="loadprofileestimator-group">
+<h2>LoadProfileEstimator Group<a class="headerlink" href="#loadprofileestimator-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.Belpe.Belpe.LoadProfileEstimator">
+<em class="property">class </em><code class="descclassname">PySAM.Belpe.Belpe.</code><code class="descname">LoadProfileEstimator</code><a class="headerlink" href="#PySAM.Belpe.Belpe.LoadProfileEstimator" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.Belpe.Belpe.LoadProfileEstimator.assign">
+<code class="descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Belpe.Belpe.LoadProfileEstimator.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">LoadProfileEstimator_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.Belpe.Belpe.LoadProfileEstimator.export">
+<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.Belpe.Belpe.LoadProfileEstimator.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Belpe.Belpe.LoadProfileEstimator.Monthly_util">
+<code class="descname">Monthly_util</code><a class="headerlink" href="#PySAM.Belpe.Belpe.LoadProfileEstimator.Monthly_util" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Monthly consumption from utility bill [kWh]</p>
+<p><em>Constraints</em>: LENGTH=12</p>
+<p><em>Required</em>: set to 1 if not provided.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Belpe.Belpe.LoadProfileEstimator.Occ_Schedule">
+<code class="descname">Occ_Schedule</code><a class="headerlink" href="#PySAM.Belpe.Belpe.LoadProfileEstimator.Occ_Schedule" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Hourly occupant schedule [frac/hr]</p>
+<p><em>Constraints</em>: LENGTH=24</p>
+<p><em>Required</em>: set to 1 if not provided.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Belpe.Belpe.LoadProfileEstimator.Occupants">
+<code class="descname">Occupants</code><a class="headerlink" href="#PySAM.Belpe.Belpe.LoadProfileEstimator.Occupants" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Occupants [#]</p>
+<p><em>Required</em>: set to 1 if not provided.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Belpe.Belpe.LoadProfileEstimator.Retrofits">
+<code class="descname">Retrofits</code><a class="headerlink" href="#PySAM.Belpe.Belpe.LoadProfileEstimator.Retrofits" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Energy retrofitted [0/1]</p>
+<p><em>Options</em>: 0=No, 1=Yes</p>
+<p><em>Required</em>: set to 1 if not provided.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Belpe.Belpe.LoadProfileEstimator.Stories">
+<code class="descname">Stories</code><a class="headerlink" href="#PySAM.Belpe.Belpe.LoadProfileEstimator.Stories" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Number of stories [#]</p>
+<p><em>Required</em>: set to 1 if not provided.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Belpe.Belpe.LoadProfileEstimator.TCool">
+<code class="descname">TCool</code><a class="headerlink" href="#PySAM.Belpe.Belpe.LoadProfileEstimator.TCool" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Cooling setpoint [degF]</p>
+<p><em>Required</em>: set to 1 if not provided.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Belpe.Belpe.LoadProfileEstimator.TCoolSB">
+<code class="descname">TCoolSB</code><a class="headerlink" href="#PySAM.Belpe.Belpe.LoadProfileEstimator.TCoolSB" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Cooling setpoint setback [degF]</p>
+<p><em>Required</em>: set to 1 if not provided.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Belpe.Belpe.LoadProfileEstimator.THeat">
+<code class="descname">THeat</code><a class="headerlink" href="#PySAM.Belpe.Belpe.LoadProfileEstimator.THeat" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Heating setpoint [degF]</p>
+<p><em>Required</em>: set to 1 if not provided.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Belpe.Belpe.LoadProfileEstimator.THeatSB">
+<code class="descname">THeatSB</code><a class="headerlink" href="#PySAM.Belpe.Belpe.LoadProfileEstimator.THeatSB" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Heating setpoint setback [degf]</p>
+<p><em>Required</em>: set to 1 if not provided.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Belpe.Belpe.LoadProfileEstimator.T_Sched">
+<code class="descname">T_Sched</code><a class="headerlink" href="#PySAM.Belpe.Belpe.LoadProfileEstimator.T_Sched" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Temperature schedule [0/1]</p>
+<p><em>Constraints</em>: LENGTH=24</p>
+<p><em>Required</em>: set to 1 if not provided.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Belpe.Belpe.LoadProfileEstimator.YrBuilt">
+<code class="descname">YrBuilt</code><a class="headerlink" href="#PySAM.Belpe.Belpe.LoadProfileEstimator.YrBuilt" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Year built [yr]</p>
+<p><em>Required</em>: set to 1 if not provided.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Belpe.Belpe.LoadProfileEstimator.en_belpe">
+<code class="descname">en_belpe</code><a class="headerlink" href="#PySAM.Belpe.Belpe.LoadProfileEstimator.en_belpe" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Enable building load calculator [0/1]</p>
+<p><em>Constraints</em>: BOOLEAN</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Belpe.Belpe.LoadProfileEstimator.en_cool">
+<code class="descname">en_cool</code><a class="headerlink" href="#PySAM.Belpe.Belpe.LoadProfileEstimator.en_cool" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Enable electric cool [0/1]</p>
+<p><em>Constraints</em>: BOOLEAN</p>
+<p><em>Required</em>: set to 1 if not provided.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Belpe.Belpe.LoadProfileEstimator.en_dish">
+<code class="descname">en_dish</code><a class="headerlink" href="#PySAM.Belpe.Belpe.LoadProfileEstimator.en_dish" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Enable electric dishwasher [0/1]</p>
+<p><em>Constraints</em>: BOOLEAN</p>
+<p><em>Required</em>: set to 1 if not provided.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Belpe.Belpe.LoadProfileEstimator.en_dry">
+<code class="descname">en_dry</code><a class="headerlink" href="#PySAM.Belpe.Belpe.LoadProfileEstimator.en_dry" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Enable electric dryer [0/1]</p>
+<p><em>Constraints</em>: BOOLEAN</p>
+<p><em>Required</em>: set to 1 if not provided.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Belpe.Belpe.LoadProfileEstimator.en_fridge">
+<code class="descname">en_fridge</code><a class="headerlink" href="#PySAM.Belpe.Belpe.LoadProfileEstimator.en_fridge" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Enable electric fridge [0/1]</p>
+<p><em>Constraints</em>: BOOLEAN</p>
+<p><em>Required</em>: set to 1 if not provided.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Belpe.Belpe.LoadProfileEstimator.en_heat">
+<code class="descname">en_heat</code><a class="headerlink" href="#PySAM.Belpe.Belpe.LoadProfileEstimator.en_heat" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Enable electric heat [0/1]</p>
+<p><em>Constraints</em>: BOOLEAN</p>
+<p><em>Required</em>: set to 1 if not provided.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Belpe.Belpe.LoadProfileEstimator.en_mels">
+<code class="descname">en_mels</code><a class="headerlink" href="#PySAM.Belpe.Belpe.LoadProfileEstimator.en_mels" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Enable misc electric loads [0/1]</p>
+<p><em>Constraints</em>: BOOLEAN</p>
+<p><em>Required</em>: set to 1 if not provided.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Belpe.Belpe.LoadProfileEstimator.en_range">
+<code class="descname">en_range</code><a class="headerlink" href="#PySAM.Belpe.Belpe.LoadProfileEstimator.en_range" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Enable electric range [0/1]</p>
+<p><em>Constraints</em>: BOOLEAN</p>
+<p><em>Required</em>: set to 1 if not provided.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Belpe.Belpe.LoadProfileEstimator.en_wash">
+<code class="descname">en_wash</code><a class="headerlink" href="#PySAM.Belpe.Belpe.LoadProfileEstimator.en_wash" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Enable electric washer [0/1]</p>
+<p><em>Constraints</em>: BOOLEAN</p>
+<p><em>Required</em>: set to 1 if not provided.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Belpe.Belpe.LoadProfileEstimator.floor_area">
+<code class="descname">floor_area</code><a class="headerlink" href="#PySAM.Belpe.Belpe.LoadProfileEstimator.floor_area" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Building floor area [m2]</p>
+<p><em>Required</em>: set to 1 if not provided.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Belpe.Belpe.LoadProfileEstimator.load">
+<code class="descname">load</code><a class="headerlink" href="#PySAM.Belpe.Belpe.LoadProfileEstimator.load" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Electricity load (year 1) [kW]</p>
+<p><em>Required</em>: set to 0 if not provided.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Belpe.Belpe.LoadProfileEstimator.solar_resource_file">
+<code class="descname">solar_resource_file</code><a class="headerlink" href="#PySAM.Belpe.Belpe.LoadProfileEstimator.solar_resource_file" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em>: Weather Data file [n/a]</p>
+<p><em>Constraints</em>: LOCAL_FILE</p>
+<p><em>Required</em>: set to 1 if not provided.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="outputs-group">
+<h2>Outputs Group<a class="headerlink" href="#outputs-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.Belpe.Belpe.Outputs">
+<em class="property">class </em><code class="descclassname">PySAM.Belpe.Belpe.</code><code class="descname">Outputs</code><a class="headerlink" href="#PySAM.Belpe.Belpe.Outputs" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.Belpe.Belpe.Outputs.assign">
+<code class="descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Belpe.Belpe.Outputs.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">Outputs_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.Belpe.Belpe.Outputs.export">
+<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.Belpe.Belpe.Outputs.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">PySAM 1.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, NREL.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
+    </div>
+  </body>
+</html>

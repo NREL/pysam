@@ -1,0 +1,643 @@
+
+
+<!doctype html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Pvwattsv5 Module &#8212; PySAM 1.1 documentation</title>
+    <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">PySAM 1.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Pvwattsv5 Module</a><ul>
+<li><a class="reference internal" href="#creating-an-instance">Creating an Instance</a></li>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+<li><a class="reference internal" href="#locationandresource-group">LocationAndResource Group</a></li>
+<li><a class="reference internal" href="#systemdesign-group">SystemDesign Group</a></li>
+<li><a class="reference internal" href="#adjustmentfactors-group">AdjustmentFactors Group</a></li>
+<li><a class="reference internal" href="#outputs-group">Outputs Group</a></li>
+</ul>
+</li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/modules/Pvwattsv5.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="pvwattsv5-module">
+<span id="pvwattsv5"></span><h1>Pvwattsv5 Module<a class="headerlink" href="#pvwattsv5-module" title="Permalink to this headline">¶</a></h1>
+<p>Wrapper for SAM Simulation Core model: <a class="reference external" href="https://github.com/NREL/ssc/blob/develop/ssc/cmod_pvwattsv5.cpp">cmod_pvwattsv5.cpp</a></p>
+<div class="section" id="creating-an-instance">
+<h2>Creating an Instance<a class="headerlink" href="#creating-an-instance" title="Permalink to this headline">¶</a></h2>
+<p>There are three methods to create a new instance of a PySAM module. Using <code class="docutils literal notranslate"><span class="pre">default</span></code> populates the newclass’ attributes with default values specific to a <code class="docutils literal notranslate"><span class="pre">config</span></code>. Each technology-financialconfiguration corresponds to a SAM GUI configuration. Using <code class="docutils literal notranslate"><span class="pre">new</span></code> creates an instance with empty attributes. The <code class="docutils literal notranslate"><span class="pre">wrap</span></code> function allows compatibility with PySSC, for details, refer to <span class="xref std std-doc">PySSC</span>.</p>
+<p><strong>Pvwattsv5 model description</strong></p>
+<span class="target" id="module-PySAM.Pvwattsv5"></span><p>PVWatts photovoltaic system model with simple inputs</p>
+<dl class="function">
+<dt id="PySAM.Pvwattsv5.default">
+<code class="descclassname">PySAM.Pvwattsv5.</code><code class="descname">default</code><span class="sig-paren">(</span><em>config</em><span class="sig-paren">)</span> &#x2192; Pvwattsv5<a class="headerlink" href="#PySAM.Pvwattsv5.default" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use financial model-specific default attributes
+config options:</p>
+<ul class="simple">
+<li><p>“PVWattsAllEquityPartnershipFlip”</p></li>
+<li><p>“PVWattsCommercial”</p></li>
+<li><p>“PVWattsCommercialPPA”</p></li>
+<li><p>“PVWattsHostDeveloper”</p></li>
+<li><p>“PVWattsIndependentPowerProducer”</p></li>
+<li><p>“PVWattsLCOECalculator”</p></li>
+<li><p>“PVWattsLeveragedPartnershipFlip”</p></li>
+<li><p>“PVWattsNone”</p></li>
+<li><p>“PVWattsResidential”</p></li>
+<li><p>“PVWattsSaleLeaseback”</p></li>
+<li><p>“PVWattsSingleOwner”</p></li>
+<li><p>“PVWattsThirdParty”</p></li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="PySAM.Pvwattsv5.new">
+<code class="descclassname">PySAM.Pvwattsv5.</code><code class="descname">new</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Pvwattsv5<a class="headerlink" href="#PySAM.Pvwattsv5.new" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="PySAM.Pvwattsv5.wrap">
+<code class="descclassname">PySAM.Pvwattsv5.</code><code class="descname">wrap</code><span class="sig-paren">(</span><em>ssc_data_t</em><span class="sig-paren">)</span> &#x2192; Pvwattsv5<a class="headerlink" href="#PySAM.Pvwattsv5.wrap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use existing PySSC data</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Do not call PySSC.data_free on the ssc_data_t provided to <code class="docutils literal notranslate"><span class="pre">wrap</span></code></p>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5">
+<em class="property">class </em><code class="descclassname">PySAM.Pvwattsv5.</code><code class="descname">Pvwattsv5</code><a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class contains all the variable information for running a simulation. Variables are grouped together in the subclasses as properties. If property assignments are the wrong type, an error is thrown.</p>
+<dl class="method">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5.assign">
+<code class="descname">assign</code><span class="sig-paren">(</span><em>dict</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from nested dictionary, except for Outputs</p>
+<p><code class="docutils literal notranslate"><span class="pre">nested_dict</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">'Location</span> <span class="pre">and</span> <span class="pre">Resource':</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...},</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5.execute">
+<code class="descname">execute</code><span class="sig-paren">(</span><em>int verbosity</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5.execute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute simulation with verbosity level 0 (default) or 1</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5.export">
+<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into nested dictionary</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="locationandresource-group">
+<h2>LocationAndResource Group<a class="headerlink" href="#locationandresource-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5.LocationAndResource">
+<em class="property">class </em><code class="descclassname">PySAM.Pvwattsv5.Pvwattsv5.</code><code class="descname">LocationAndResource</code><a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5.LocationAndResource" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5.LocationAndResource.assign">
+<code class="descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5.LocationAndResource.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">LocationAndResource_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5.LocationAndResource.export">
+<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5.LocationAndResource.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5.LocationAndResource.solar_resource_data">
+<code class="descname">solar_resource_data</code><a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5.LocationAndResource.solar_resource_data" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>dict</em>: Weather data</p>
+<p><em>Info</em>: dn,df,tdry,wspd,lat,lon,tz</p>
+<p><em>Required</em>: False</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5.LocationAndResource.solar_resource_file">
+<code class="descname">solar_resource_file</code><a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5.LocationAndResource.solar_resource_file" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em>: Weather file path</p>
+<p><em>Required</em>: False</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="systemdesign-group">
+<h2>SystemDesign Group<a class="headerlink" href="#systemdesign-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5.SystemDesign">
+<em class="property">class </em><code class="descclassname">PySAM.Pvwattsv5.Pvwattsv5.</code><code class="descname">SystemDesign</code><a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5.SystemDesign" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5.SystemDesign.assign">
+<code class="descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5.SystemDesign.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">SystemDesign_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5.SystemDesign.export">
+<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5.SystemDesign.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5.SystemDesign.array_type">
+<code class="descname">array_type</code><a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5.SystemDesign.array_type" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Array type [0/1/2/3/4]</p>
+<p><em>Info</em>: Fixed OR,Fixed Roof,1Axis,Backtracked,2Axis</p>
+<p><em>Constraints</em>: MIN=0,MAX=4,INTEGER</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5.SystemDesign.azimuth">
+<code class="descname">azimuth</code><a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5.SystemDesign.azimuth" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Azimuth angle [deg]</p>
+<p><em>Options</em>: E=90,S=180,W=270</p>
+<p><em>Constraints</em>: MIN=0,MAX=360</p>
+<p><em>Required</em>: array_type&lt;4</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5.SystemDesign.batt_simple_enable">
+<code class="descname">batt_simple_enable</code><a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5.SystemDesign.batt_simple_enable" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Enable Battery [0/1]</p>
+<p><em>Constraints</em>: BOOLEAN</p>
+<p><em>Required</em>: set to 0 if not provided.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5.SystemDesign.dc_ac_ratio">
+<code class="descname">dc_ac_ratio</code><a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5.SystemDesign.dc_ac_ratio" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: DC to AC ratio [ratio]</p>
+<p><em>Constraints</em>: POSITIVE</p>
+<p><em>Required</em>: set to 1.1 if not provided.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5.SystemDesign.gcr">
+<code class="descname">gcr</code><a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5.SystemDesign.gcr" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Ground coverage ratio [0..1]</p>
+<p><em>Constraints</em>: MIN=0,MAX=3</p>
+<p><em>Required</em>: set to 0.4 if not provided.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5.SystemDesign.inv_eff">
+<code class="descname">inv_eff</code><a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5.SystemDesign.inv_eff" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Inverter efficiency at rated power [%]</p>
+<p><em>Constraints</em>: MIN=90,MAX=99.5</p>
+<p><em>Required</em>: set to 96 if not provided.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5.SystemDesign.losses">
+<code class="descname">losses</code><a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5.SystemDesign.losses" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: System losses [%]</p>
+<p><em>Info</em>: Total system losses</p>
+<p><em>Constraints</em>: MIN=-5,MAX=99</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5.SystemDesign.module_type">
+<code class="descname">module_type</code><a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5.SystemDesign.module_type" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Module type [0/1/2]</p>
+<p><em>Info</em>: Standard,Premium,Thin film</p>
+<p><em>Constraints</em>: MIN=0,MAX=2,INTEGER</p>
+<p><em>Required</em>: set to 0 if not provided.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5.SystemDesign.shading_azal">
+<code class="descname">shading_azal</code><a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5.SystemDesign.shading_azal" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Azimuth x altitude beam shading loss [%]</p>
+<p><em>Required</em>: False</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5.SystemDesign.shading_diff">
+<code class="descname">shading_diff</code><a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5.SystemDesign.shading_diff" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Diffuse shading loss [%]</p>
+<p><em>Required</em>: False</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5.SystemDesign.shading_mxh">
+<code class="descname">shading_mxh</code><a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5.SystemDesign.shading_mxh" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Month x Hour beam shading loss [%]</p>
+<p><em>Required</em>: False</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5.SystemDesign.shading_timestep">
+<code class="descname">shading_timestep</code><a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5.SystemDesign.shading_timestep" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Time step beam shading loss [%]</p>
+<p><em>Required</em>: False</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5.SystemDesign.system_capacity">
+<code class="descname">system_capacity</code><a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5.SystemDesign.system_capacity" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: System size (DC nameplate) [kW]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5.SystemDesign.tilt">
+<code class="descname">tilt</code><a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5.SystemDesign.tilt" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Tilt angle [deg]</p>
+<p><em>Options</em>: H=0,V=90</p>
+<p><em>Constraints</em>: MIN=0,MAX=90</p>
+<p><em>Required</em>: array_type&lt;4</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="adjustmentfactors-group">
+<h2>AdjustmentFactors Group<a class="headerlink" href="#adjustmentfactors-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5.AdjustmentFactors">
+<em class="property">class </em><code class="descclassname">PySAM.Pvwattsv5.Pvwattsv5.</code><code class="descname">AdjustmentFactors</code><a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5.AdjustmentFactors" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5.AdjustmentFactors.assign">
+<code class="descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5.AdjustmentFactors.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5.AdjustmentFactors.export">
+<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Dict<a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5.AdjustmentFactors.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5.AdjustmentFactors.constant">
+<code class="descname">constant</code><a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5.AdjustmentFactors.constant" title="Permalink to this definition">¶</a></dt>
+<dd><p>type: float</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5.AdjustmentFactors.dc_constant">
+<code class="descname">dc_constant</code><a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5.AdjustmentFactors.dc_constant" title="Permalink to this definition">¶</a></dt>
+<dd><p>DC Constant loss adjustment [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5.AdjustmentFactors.dc_hourly">
+<code class="descname">dc_hourly</code><a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5.AdjustmentFactors.dc_hourly" title="Permalink to this definition">¶</a></dt>
+<dd><p>DC Hourly Adjustment Factors [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5.AdjustmentFactors.dc_periods">
+<code class="descname">dc_periods</code><a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5.AdjustmentFactors.dc_periods" title="Permalink to this definition">¶</a></dt>
+<dd><p>DC Period-based Adjustment Factors [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5.AdjustmentFactors.hourly">
+<code class="descname">hourly</code><a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5.AdjustmentFactors.hourly" title="Permalink to this definition">¶</a></dt>
+<dd><p>AC Hourly Adjustment Factors [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5.AdjustmentFactors.periods">
+<code class="descname">periods</code><a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5.AdjustmentFactors.periods" title="Permalink to this definition">¶</a></dt>
+<dd><p>AC Period-based Adjustment Factors [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5.AdjustmentFactors.sf_constant">
+<code class="descname">sf_constant</code><a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5.AdjustmentFactors.sf_constant" title="Permalink to this definition">¶</a></dt>
+<dd><p>DC Constant loss adjustment [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5.AdjustmentFactors.sf_hourly">
+<code class="descname">sf_hourly</code><a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5.AdjustmentFactors.sf_hourly" title="Permalink to this definition">¶</a></dt>
+<dd><p>DC Hourly Adjustment Factors [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5.AdjustmentFactors.sf_periods">
+<code class="descname">sf_periods</code><a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5.AdjustmentFactors.sf_periods" title="Permalink to this definition">¶</a></dt>
+<dd><p>DC Period-based Adjustment Factors [%]</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="outputs-group">
+<h2>Outputs Group<a class="headerlink" href="#outputs-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5.Outputs">
+<em class="property">class </em><code class="descclassname">PySAM.Pvwattsv5.Pvwattsv5.</code><code class="descname">Outputs</code><a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5.Outputs" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5.Outputs.assign">
+<code class="descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5.Outputs.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">Outputs_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5.Outputs.export">
+<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5.Outputs.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5.Outputs.ac">
+<code class="descname">ac</code><a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5.Outputs.ac" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: AC inverter power [W]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5.Outputs.ac_annual">
+<code class="descname">ac_annual</code><a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5.Outputs.ac_annual" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Annual AC system output [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5.Outputs.ac_monthly">
+<code class="descname">ac_monthly</code><a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5.Outputs.ac_monthly" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: AC system output [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5.Outputs.annual_energy">
+<code class="descname">annual_energy</code><a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5.Outputs.annual_energy" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Annual energy [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5.Outputs.aoi">
+<code class="descname">aoi</code><a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5.Outputs.aoi" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Angle of incidence [deg]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5.Outputs.capacity_factor">
+<code class="descname">capacity_factor</code><a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5.Outputs.capacity_factor" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Capacity factor [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5.Outputs.city">
+<code class="descname">city</code><a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5.Outputs.city" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em>: City</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5.Outputs.dc">
+<code class="descname">dc</code><a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5.Outputs.dc" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: DC array power [W]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5.Outputs.dc_monthly">
+<code class="descname">dc_monthly</code><a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5.Outputs.dc_monthly" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: DC array output [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5.Outputs.df">
+<code class="descname">df</code><a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5.Outputs.df" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Diffuse irradiance [W/m2]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5.Outputs.dn">
+<code class="descname">dn</code><a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5.Outputs.dn" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Beam irradiance [W/m2]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5.Outputs.elev">
+<code class="descname">elev</code><a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5.Outputs.elev" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Site elevation [m]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5.Outputs.gh">
+<code class="descname">gh</code><a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5.Outputs.gh" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Global horizontal irradiance [W/m2]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5.Outputs.inverter_efficiency">
+<code class="descname">inverter_efficiency</code><a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5.Outputs.inverter_efficiency" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Inverter efficiency at rated power [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5.Outputs.inverter_model">
+<code class="descname">inverter_model</code><a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5.Outputs.inverter_model" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Inverter model specifier</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5.Outputs.kwh_per_kw">
+<code class="descname">kwh_per_kw</code><a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5.Outputs.kwh_per_kw" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: First year kWh/kW</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5.Outputs.lat">
+<code class="descname">lat</code><a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5.Outputs.lat" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Latitude [deg]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5.Outputs.location">
+<code class="descname">location</code><a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5.Outputs.location" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em>: Location ID</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5.Outputs.lon">
+<code class="descname">lon</code><a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5.Outputs.lon" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Longitude [deg]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5.Outputs.monthly_energy">
+<code class="descname">monthly_energy</code><a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5.Outputs.monthly_energy" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Monthly energy [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5.Outputs.poa">
+<code class="descname">poa</code><a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5.Outputs.poa" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Plane of array irradiance [W/m2]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5.Outputs.poa_monthly">
+<code class="descname">poa_monthly</code><a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5.Outputs.poa_monthly" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Plane of array irradiance [kWh/m2]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5.Outputs.shad_beam_factor">
+<code class="descname">shad_beam_factor</code><a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5.Outputs.shad_beam_factor" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Shading factor for beam radiation</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5.Outputs.solrad_annual">
+<code class="descname">solrad_annual</code><a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5.Outputs.solrad_annual" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Daily average solar irradiance [kWh/m2/day]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5.Outputs.solrad_monthly">
+<code class="descname">solrad_monthly</code><a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5.Outputs.solrad_monthly" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Daily average solar irradiance [kWh/m2/day]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5.Outputs.state">
+<code class="descname">state</code><a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5.Outputs.state" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>str</em>: State</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5.Outputs.sunup">
+<code class="descname">sunup</code><a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5.Outputs.sunup" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Sun up over horizon [0/1]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5.Outputs.system_use_lifetime_output">
+<code class="descname">system_use_lifetime_output</code><a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5.Outputs.system_use_lifetime_output" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Use lifetime output [0/1]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5.Outputs.tamb">
+<code class="descname">tamb</code><a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5.Outputs.tamb" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Ambient temperature [C]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5.Outputs.tcell">
+<code class="descname">tcell</code><a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5.Outputs.tcell" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Module temperature [C]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5.Outputs.tpoa">
+<code class="descname">tpoa</code><a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5.Outputs.tpoa" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Transmitted plane of array irradiance [W/m2]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5.Outputs.ts_shift_hours">
+<code class="descname">ts_shift_hours</code><a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5.Outputs.ts_shift_hours" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Time offset for interpreting time series outputs [hours]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5.Outputs.tz">
+<code class="descname">tz</code><a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5.Outputs.tz" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Time zone [hr]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Pvwattsv5.Pvwattsv5.Outputs.wspd">
+<code class="descname">wspd</code><a class="headerlink" href="#PySAM.Pvwattsv5.Pvwattsv5.Outputs.wspd" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Wind speed [m/s]</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">PySAM 1.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, NREL.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
+    </div>
+  </body>
+</html>

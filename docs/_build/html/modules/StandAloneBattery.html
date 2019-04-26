@@ -1,0 +1,1434 @@
+
+
+<!doctype html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Battery Module &#8212; PySAM 1.1 documentation</title>
+    <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">PySAM 1.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Battery Module</a><ul>
+<li><a class="reference internal" href="#creating-an-instance">Creating an Instance</a></li>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+<li><a class="reference internal" href="#simulation-group">Simulation Group</a></li>
+<li><a class="reference internal" href="#battery-group">Battery Group</a></li>
+<li><a class="reference internal" href="#system-group">System Group</a></li>
+<li><a class="reference internal" href="#electricload-group">ElectricLoad Group</a></li>
+<li><a class="reference internal" href="#common-group">Common Group</a></li>
+<li><a class="reference internal" href="#inverter-group">Inverter Group</a></li>
+<li><a class="reference internal" href="#pv-group">PV Group</a></li>
+<li><a class="reference internal" href="#fuelcell-group">FuelCell Group</a></li>
+<li><a class="reference internal" href="#electricityrate-group">ElectricityRate Group</a></li>
+<li><a class="reference internal" href="#energymarket-group">EnergyMarket Group</a></li>
+<li><a class="reference internal" href="#outputs-group">Outputs Group</a></li>
+</ul>
+</li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/modules/StandAloneBattery.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="battery-module">
+<span id="standalonebattery"></span><h1>Battery Module<a class="headerlink" href="#battery-module" title="Permalink to this headline">¶</a></h1>
+<p>Wrapper for SAM Simulation Core model: <a class="reference external" href="https://github.com/NREL/ssc/blob/develop/ssc/cmod_battery.cpp">cmod_battery.cpp</a></p>
+<div class="section" id="creating-an-instance">
+<h2>Creating an Instance<a class="headerlink" href="#creating-an-instance" title="Permalink to this headline">¶</a></h2>
+<p>There are three methods to create a new instance of a PySAM module. Using <code class="docutils literal notranslate"><span class="pre">default</span></code> populates the newclass’ attributes with default values specific to a <code class="docutils literal notranslate"><span class="pre">config</span></code>. Each technology-financialconfiguration corresponds to a SAM GUI configuration. Using <code class="docutils literal notranslate"><span class="pre">new</span></code> creates an instance with empty attributes. The <code class="docutils literal notranslate"><span class="pre">wrap</span></code> function allows compatibility with PySSC, for details, refer to <span class="xref std std-doc">PySSC</span>.</p>
+<p><strong>StandAloneBattery model description</strong></p>
+<span class="target" id="module-PySAM.StandAloneBattery"></span><p>Detailed battery storage model</p>
+<dl class="function">
+<dt id="PySAM.StandAloneBattery.default">
+<code class="descclassname">PySAM.StandAloneBattery.</code><code class="descname">default</code><span class="sig-paren">(</span><em>config</em><span class="sig-paren">)</span> &#x2192; StandAloneBattery<a class="headerlink" href="#PySAM.StandAloneBattery.default" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use financial model-specific default attributes
+config options:</p>
+<ul class="simple">
+<li><p>“BatteryNone”</p></li>
+<li><p>“FuelCellCommercial”</p></li>
+<li><p>“FuelCellSingleOwner”</p></li>
+<li><p>“GenericSystemAllEquityPartnershipFlip”</p></li>
+<li><p>“GenericSystemCommercial”</p></li>
+<li><p>“GenericSystemCommercialPPA”</p></li>
+<li><p>“GenericSystemHostDeveloper”</p></li>
+<li><p>“GenericSystemIndependentPowerProducer”</p></li>
+<li><p>“GenericSystemLeveragedPartnershipFlip”</p></li>
+<li><p>“GenericSystemResidential”</p></li>
+<li><p>“GenericSystemSaleLeaseback”</p></li>
+<li><p>“GenericSystemSingleOwner”</p></li>
+<li><p>“GenericSystemThirdParty”</p></li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="PySAM.StandAloneBattery.new">
+<code class="descclassname">PySAM.StandAloneBattery.</code><code class="descname">new</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; StandAloneBattery<a class="headerlink" href="#PySAM.StandAloneBattery.new" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="PySAM.StandAloneBattery.wrap">
+<code class="descclassname">PySAM.StandAloneBattery.</code><code class="descname">wrap</code><span class="sig-paren">(</span><em>ssc_data_t</em><span class="sig-paren">)</span> &#x2192; StandAloneBattery<a class="headerlink" href="#PySAM.StandAloneBattery.wrap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use existing PySSC data</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Do not call PySSC.data_free on the ssc_data_t provided to <code class="docutils literal notranslate"><span class="pre">wrap</span></code></p>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery">
+<em class="property">class </em><code class="descclassname">PySAM.StandAloneBattery.</code><code class="descname">StandAloneBattery</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class contains all the variable information for running a simulation. Variables are grouped together in the subclasses as properties. If property assignments are the wrong type, an error is thrown.</p>
+<dl class="method">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.assign">
+<code class="descname">assign</code><span class="sig-paren">(</span><em>dict</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from nested dictionary, except for Outputs</p>
+<p><code class="docutils literal notranslate"><span class="pre">nested_dict</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">'Simulation':</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...},</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.execute">
+<code class="descname">execute</code><span class="sig-paren">(</span><em>int verbosity</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.execute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute simulation with verbosity level 0 (default) or 1</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.export">
+<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into nested dictionary</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="simulation-group">
+<h2>Simulation Group<a class="headerlink" href="#simulation-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Simulation">
+<em class="property">class </em><code class="descclassname">PySAM.StandAloneBattery.StandAloneBattery.</code><code class="descname">Simulation</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Simulation" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Simulation.assign">
+<code class="descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Simulation.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">Simulation_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Simulation.export">
+<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Simulation.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Simulation.analysis_period">
+<code class="descname">analysis_period</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Simulation.analysis_period" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Lifetime analysis period [years]</p>
+<p><em>Info</em>: The number of years in the simulation</p>
+<p><em>Required</em>: set to 1 if not provided.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Simulation.percent_complete">
+<code class="descname">percent_complete</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Simulation.percent_complete" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Estimated simulation status [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Simulation.system_use_lifetime_output">
+<code class="descname">system_use_lifetime_output</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Simulation.system_use_lifetime_output" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Lifetime simulation [0/1]</p>
+<p><em>Options</em>: 0=SingleYearRepeated,1=RunEveryYear</p>
+<p><em>Constraints</em>: BOOLEAN</p>
+<p><em>Required</em>: set to 0 if not provided.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="battery-group">
+<h2>Battery Group<a class="headerlink" href="#battery-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery">
+<em class="property">class </em><code class="descclassname">PySAM.StandAloneBattery.StandAloneBattery.</code><code class="descname">Battery</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.assign">
+<code class="descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">Battery_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.export">
+<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.LeadAcid_q10_computed">
+<code class="descname">LeadAcid_q10_computed</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.LeadAcid_q10_computed" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Capacity at 10-hour discharge rate [Ah]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.LeadAcid_q20_computed">
+<code class="descname">LeadAcid_q20_computed</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.LeadAcid_q20_computed" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Capacity at 20-hour discharge rate [Ah]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.LeadAcid_qn_computed">
+<code class="descname">LeadAcid_qn_computed</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.LeadAcid_qn_computed" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Capacity at discharge rate for n-hour rate [Ah]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.LeadAcid_tn">
+<code class="descname">LeadAcid_tn</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.LeadAcid_tn" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Time to discharge [h]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.annual_energy">
+<code class="descname">annual_energy</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.annual_energy" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Annual Energy [kWh]</p>
+<p><em>Required</em>: set to 0 if not provided.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_C_rate">
+<code class="descname">batt_C_rate</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_C_rate" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Rate at which voltage vs. capacity curve input</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_Cp">
+<code class="descname">batt_Cp</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_Cp" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Battery specific heat capacity [J/KgK]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_Qexp">
+<code class="descname">batt_Qexp</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_Qexp" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Cell capacity at end of exponential zone [Ah]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_Qfull">
+<code class="descname">batt_Qfull</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_Qfull" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Fully charged cell capacity [Ah]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_Qfull_flow">
+<code class="descname">batt_Qfull_flow</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_Qfull_flow" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Fully charged flow battery capacity [Ah]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_Qnom">
+<code class="descname">batt_Qnom</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_Qnom" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Cell capacity at end of nominal zone [Ah]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_Vexp">
+<code class="descname">batt_Vexp</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_Vexp" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Cell voltage at end of exponential zone [V]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_Vfull">
+<code class="descname">batt_Vfull</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_Vfull" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Fully charged cell voltage [V]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_Vnom">
+<code class="descname">batt_Vnom</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_Vnom" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Cell voltage at end of nominal zone [V]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_Vnom_default">
+<code class="descname">batt_Vnom_default</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_Vnom_default" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Default nominal cell voltage [V]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_ac_dc_efficiency">
+<code class="descname">batt_ac_dc_efficiency</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_ac_dc_efficiency" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Inverter AC to battery DC efficiency</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_ac_or_dc">
+<code class="descname">batt_ac_or_dc</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_ac_or_dc" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Battery interconnection (AC or DC)</p>
+<p><em>Options</em>: 0=DC_Connected,1=AC_Connected</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_auto_gridcharge_max_daily">
+<code class="descname">batt_auto_gridcharge_max_daily</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_auto_gridcharge_max_daily" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Allowed grid charging percent per day for automated dispatch [kW]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_calendar_a">
+<code class="descname">batt_calendar_a</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_calendar_a" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Calendar life model coefficient [1/sqrt(day)]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_calendar_b">
+<code class="descname">batt_calendar_b</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_calendar_b" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Calendar life model coefficient [K]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_calendar_c">
+<code class="descname">batt_calendar_c</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_calendar_c" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Calendar life model coefficient [K]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_calendar_choice">
+<code class="descname">batt_calendar_choice</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_calendar_choice" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Calendar life degradation input option [0/1/2]</p>
+<p><em>Options</em>: 0=NoCalendarDegradation,1=LithiomIonModel,2=InputLossTable</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_calendar_lifetime_matrix">
+<code class="descname">batt_calendar_lifetime_matrix</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_calendar_lifetime_matrix" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Days vs capacity</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_calendar_q0">
+<code class="descname">batt_calendar_q0</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_calendar_q0" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Calendar life model initial capacity cofficient</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_chem">
+<code class="descname">batt_chem</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_chem" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Battery chemistry</p>
+<p><em>Options</em>: 0=LeadAcid,1=LiIon</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_computed_bank_capacity">
+<code class="descname">batt_computed_bank_capacity</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_computed_bank_capacity" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Computed bank capacity [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_computed_series">
+<code class="descname">batt_computed_series</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_computed_series" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Number of cells in series</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_computed_strings">
+<code class="descname">batt_computed_strings</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_computed_strings" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Number of strings of cells</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_current_charge_max">
+<code class="descname">batt_current_charge_max</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_current_charge_max" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Maximum charge current [A]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_current_choice">
+<code class="descname">batt_current_choice</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_current_choice" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Limit cells by current or power</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_current_discharge_max">
+<code class="descname">batt_current_discharge_max</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_current_discharge_max" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Maximum discharge current [A]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_custom_dispatch">
+<code class="descname">batt_custom_dispatch</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_custom_dispatch" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Custom battery power for every time step [kW]</p>
+<p><em>Required</em>: set to 1&amp;batt_dispatch_choice=3 if not provided.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_cycle_cost">
+<code class="descname">batt_cycle_cost</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_cycle_cost" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Input battery cycle costs [$/cycle-kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_cycle_cost_choice">
+<code class="descname">batt_cycle_cost_choice</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_cycle_cost_choice" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Use SAM model for cycle costs or input custom [0/1]</p>
+<p><em>Options</em>: 0=UseCostModel,1=InputCost</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_dc_ac_efficiency">
+<code class="descname">batt_dc_ac_efficiency</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_dc_ac_efficiency" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Battery DC to AC efficiency</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_dc_dc_efficiency">
+<code class="descname">batt_dc_dc_efficiency</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_dc_dc_efficiency" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: PV DC to battery DC efficiency</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_dispatch_auto_can_charge">
+<code class="descname">batt_dispatch_auto_can_charge</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_dispatch_auto_can_charge" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: PV charging allowed for automated dispatch? [kW]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_dispatch_auto_can_clipcharge">
+<code class="descname">batt_dispatch_auto_can_clipcharge</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_dispatch_auto_can_clipcharge" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Battery can charge from clipped PV for automated dispatch? [kW]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_dispatch_auto_can_fuelcellcharge">
+<code class="descname">batt_dispatch_auto_can_fuelcellcharge</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_dispatch_auto_can_fuelcellcharge" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Charging from fuel cell allowed for automated dispatch? [kW]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_dispatch_auto_can_gridcharge">
+<code class="descname">batt_dispatch_auto_can_gridcharge</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_dispatch_auto_can_gridcharge" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Grid charging allowed for automated dispatch? [kW]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_dispatch_choice">
+<code class="descname">batt_dispatch_choice</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_dispatch_choice" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Battery dispatch algorithm [0/1/2/3/4]</p>
+<p><em>Options</em>: If behind the meter: 0=PeakShavingLookAhead,1=PeakShavingLookBehind,2=InputGridTarget,3=InputBatteryPower,4=ManualDispatch, if front of meter: 0=AutomatedLookAhead,1=AutomatedLookBehind,2=AutomatedInputForecast,3=InputBatteryPower,4=ManualDispatch</p>
+<p><em>Required</em>: set to 1 if not provided.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_dispatch_update_frequency_hours">
+<code class="descname">batt_dispatch_update_frequency_hours</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_dispatch_update_frequency_hours" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Frequency to update the look-ahead dispatch [hours]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_h_to_ambient">
+<code class="descname">batt_h_to_ambient</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_h_to_ambient" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Heat transfer between battery and environment [W/m2K]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_height">
+<code class="descname">batt_height</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_height" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Battery height [m]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_initial_SOC">
+<code class="descname">batt_initial_SOC</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_initial_SOC" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Initial state-of-charge [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_length">
+<code class="descname">batt_length</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_length" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Battery length [m]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_lifetime_matrix">
+<code class="descname">batt_lifetime_matrix</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_lifetime_matrix" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Cycles vs capacity at different depths-of-discharge</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_look_ahead_hours">
+<code class="descname">batt_look_ahead_hours</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_look_ahead_hours" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Hours to look ahead in automated dispatch [hours]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_loss_choice">
+<code class="descname">batt_loss_choice</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_loss_choice" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Loss power input option [0/1]</p>
+<p><em>Options</em>: 0=Monthly,1=TimeSeries</p>
+<p><em>Required</em>: set to 0 if not provided.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_losses">
+<code class="descname">batt_losses</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_losses" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Battery system losses at each timestep [kW]</p>
+<p><em>Required</em>: set to 0 if not provided.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_losses_charging">
+<code class="descname">batt_losses_charging</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_losses_charging" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Battery system losses when charging [kW]</p>
+<p><em>Required</em>: set to 0 if not provided.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_losses_discharging">
+<code class="descname">batt_losses_discharging</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_losses_discharging" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Battery system losses when discharging [kW]</p>
+<p><em>Required</em>: set to 0 if not provided.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_losses_idle">
+<code class="descname">batt_losses_idle</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_losses_idle" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Battery system losses when idle [kW]</p>
+<p><em>Required</em>: set to 0 if not provided.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_mass">
+<code class="descname">batt_mass</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_mass" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Battery mass [kg]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_maximum_SOC">
+<code class="descname">batt_maximum_SOC</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_maximum_SOC" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Maximum allowed state-of-charge [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_meter_position">
+<code class="descname">batt_meter_position</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_meter_position" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Position of battery relative to electric meter</p>
+<p><em>Options</em>: 0=BehindTheMeter,1=FrontOfMeter</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_minimum_SOC">
+<code class="descname">batt_minimum_SOC</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_minimum_SOC" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Minimum allowed state-of-charge [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_minimum_modetime">
+<code class="descname">batt_minimum_modetime</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_minimum_modetime" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Minimum time at charge state [min]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_power_charge_max">
+<code class="descname">batt_power_charge_max</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_power_charge_max" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Maximum charge power [kW]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_power_discharge_max">
+<code class="descname">batt_power_discharge_max</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_power_discharge_max" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Maximum discharge power [kW]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_pv_clipping_forecast">
+<code class="descname">batt_pv_clipping_forecast</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_pv_clipping_forecast" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: PV clipping forecast [kW]</p>
+<p><em>Required</em>: set to 1&amp;batt_meter_position=1&amp;batt_dispatch_choice=2 if not provided.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_pv_dc_forecast">
+<code class="descname">batt_pv_dc_forecast</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_pv_dc_forecast" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: PV dc power forecast [kW]</p>
+<p><em>Required</em>: set to 1&amp;batt_meter_position=1&amp;batt_dispatch_choice=2 if not provided.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_replacement_capacity">
+<code class="descname">batt_replacement_capacity</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_replacement_capacity" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Capacity degradation at which to replace battery [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_replacement_option">
+<code class="descname">batt_replacement_option</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_replacement_option" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Enable battery replacement? [0=none,1=capacity based,2=user schedule]</p>
+<p><em>Constraints</em>: INTEGER,MIN=0,MAX=2</p>
+<p><em>Required</em>: set to 0 if not provided.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_replacement_schedule">
+<code class="descname">batt_replacement_schedule</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_replacement_schedule" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Battery bank replacements per year (user specified) [number/year]</p>
+<p><em>Required</em>: set to 2 if not provided.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_resistance">
+<code class="descname">batt_resistance</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_resistance" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Internal resistance [Ohm]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_room_temperature_celsius">
+<code class="descname">batt_room_temperature_celsius</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_room_temperature_celsius" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Temperature of storage room [C]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_target_choice">
+<code class="descname">batt_target_choice</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_target_choice" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Target power input option [0/1]</p>
+<p><em>Options</em>: 0=InputMonthlyTarget,1=InputFullTimeSeries</p>
+<p><em>Required</em>: set to 1&amp;batt_meter_position=0&amp;batt_dispatch_choice=2 if not provided.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_target_power">
+<code class="descname">batt_target_power</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_target_power" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Grid target power for every time step [kW]</p>
+<p><em>Required</em>: set to 1&amp;batt_meter_position=0&amp;batt_dispatch_choice=2 if not provided.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_target_power_monthly">
+<code class="descname">batt_target_power_monthly</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_target_power_monthly" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Grid target power on monthly basis [kW]</p>
+<p><em>Required</em>: set to 1&amp;batt_meter_position=0&amp;batt_dispatch_choice=2 if not provided.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_voltage_choice">
+<code class="descname">batt_voltage_choice</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_voltage_choice" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Battery voltage input option [0/1]</p>
+<p><em>Options</em>: 0=UseVoltageModel,1=InputVoltageTable</p>
+<p><em>Required</em>: set to 0 if not provided.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_voltage_matrix">
+<code class="descname">batt_voltage_matrix</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_voltage_matrix" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Battery voltage vs. depth-of-discharge</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_width">
+<code class="descname">batt_width</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.batt_width" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Battery width [m]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.cap_vs_temp">
+<code class="descname">cap_vs_temp</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.cap_vs_temp" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Effective capacity as function of temperature [C,%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.dispatch_manual_charge">
+<code class="descname">dispatch_manual_charge</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.dispatch_manual_charge" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Periods 1-6 charging from system allowed?</p>
+<p><em>Required</em>: set to 1&amp;batt_dispatch_choice=4 if not provided.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.dispatch_manual_discharge">
+<code class="descname">dispatch_manual_discharge</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.dispatch_manual_discharge" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Periods 1-6 discharging allowed?</p>
+<p><em>Required</em>: set to 1&amp;batt_dispatch_choice=4 if not provided.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.dispatch_manual_gridcharge">
+<code class="descname">dispatch_manual_gridcharge</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.dispatch_manual_gridcharge" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Periods 1-6 grid charging allowed?</p>
+<p><em>Required</em>: set to 1&amp;batt_dispatch_choice=4 if not provided.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.dispatch_manual_percent_discharge">
+<code class="descname">dispatch_manual_percent_discharge</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.dispatch_manual_percent_discharge" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Periods 1-6 discharge percent [%]</p>
+<p><em>Required</em>: set to 1&amp;batt_dispatch_choice=4 if not provided.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.dispatch_manual_percent_gridcharge">
+<code class="descname">dispatch_manual_percent_gridcharge</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.dispatch_manual_percent_gridcharge" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Periods 1-6 gridcharge percent [%]</p>
+<p><em>Required</em>: set to 1&amp;batt_dispatch_choice=4 if not provided.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.dispatch_manual_sched">
+<code class="descname">dispatch_manual_sched</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.dispatch_manual_sched" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Battery dispatch schedule for weekday</p>
+<p><em>Required</em>: set to 1&amp;batt_dispatch_choice=4 if not provided.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.dispatch_manual_sched_weekend">
+<code class="descname">dispatch_manual_sched_weekend</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.dispatch_manual_sched_weekend" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Battery dispatch schedule for weekend</p>
+<p><em>Required</em>: set to 1&amp;batt_dispatch_choice=4 if not provided.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.en_batt">
+<code class="descname">en_batt</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.en_batt" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Enable battery storage model [0/1]</p>
+<p><em>Required</em>: set to 0 if not provided.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Battery.om_replacement_cost1">
+<code class="descname">om_replacement_cost1</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Battery.om_replacement_cost1" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Cost to replace battery per kWh [$/kWh]</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="system-group">
+<h2>System Group<a class="headerlink" href="#system-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.System">
+<em class="property">class </em><code class="descclassname">PySAM.StandAloneBattery.StandAloneBattery.</code><code class="descname">System</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.System" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.System.assign">
+<code class="descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.System.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">System_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.System.export">
+<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.System.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.System.capacity_factor">
+<code class="descname">capacity_factor</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.System.capacity_factor" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Capacity factor [%]</p>
+<p><em>Required</em>: set to 0 if not provided.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.System.gen">
+<code class="descname">gen</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.System.gen" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: System power generated [kW]</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="electricload-group">
+<h2>ElectricLoad Group<a class="headerlink" href="#electricload-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.ElectricLoad">
+<em class="property">class </em><code class="descclassname">PySAM.StandAloneBattery.StandAloneBattery.</code><code class="descname">ElectricLoad</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.ElectricLoad" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.ElectricLoad.assign">
+<code class="descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.ElectricLoad.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">ElectricLoad_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.ElectricLoad.export">
+<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.ElectricLoad.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.ElectricLoad.load">
+<code class="descname">load</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.ElectricLoad.load" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Electricity load (year 1) [kW]</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="common-group">
+<h2>Common Group<a class="headerlink" href="#common-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Common">
+<em class="property">class </em><code class="descclassname">PySAM.StandAloneBattery.StandAloneBattery.</code><code class="descname">Common</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Common" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Common.assign">
+<code class="descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Common.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">Common_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Common.export">
+<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Common.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Common.inverter_model">
+<code class="descname">inverter_model</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Common.inverter_model" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Inverter model specifier</p>
+<p><em>Options</em>: 0=cec,1=datasheet,2=partload,3=coefficientgenerator,4=generic</p>
+<p><em>Constraints</em>: INTEGER,MIN=0,MAX=4</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="inverter-group">
+<h2>Inverter Group<a class="headerlink" href="#inverter-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Inverter">
+<em class="property">class </em><code class="descclassname">PySAM.StandAloneBattery.StandAloneBattery.</code><code class="descname">Inverter</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Inverter" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Inverter.assign">
+<code class="descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Inverter.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">Inverter_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Inverter.export">
+<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Inverter.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Inverter.inv_cec_cg_eff_cec">
+<code class="descname">inv_cec_cg_eff_cec</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Inverter.inv_cec_cg_eff_cec" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Inverter Coefficient Generator CEC Efficiency [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Inverter.inv_cec_cg_paco">
+<code class="descname">inv_cec_cg_paco</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Inverter.inv_cec_cg_paco" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Inverter Coefficient Generator Max AC Power [Wac]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Inverter.inv_ds_eff">
+<code class="descname">inv_ds_eff</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Inverter.inv_ds_eff" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Inverter Datasheet Efficiency [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Inverter.inv_ds_paco">
+<code class="descname">inv_ds_paco</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Inverter.inv_ds_paco" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Inverter Datasheet Maximum AC Power [Wac]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Inverter.inv_pd_eff">
+<code class="descname">inv_pd_eff</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Inverter.inv_pd_eff" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Inverter Partload Efficiency [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Inverter.inv_pd_paco">
+<code class="descname">inv_pd_paco</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Inverter.inv_pd_paco" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Inverter Partload Maximum AC Power [Wac]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Inverter.inv_snl_eff_cec">
+<code class="descname">inv_snl_eff_cec</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Inverter.inv_snl_eff_cec" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Inverter Sandia CEC Efficiency [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Inverter.inv_snl_paco">
+<code class="descname">inv_snl_paco</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Inverter.inv_snl_paco" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Inverter Sandia Maximum AC Power [Wac]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Inverter.inverter_count">
+<code class="descname">inverter_count</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Inverter.inverter_count" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Number of inverters</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="pv-group">
+<h2>PV Group<a class="headerlink" href="#pv-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.PV">
+<em class="property">class </em><code class="descclassname">PySAM.StandAloneBattery.StandAloneBattery.</code><code class="descname">PV</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.PV" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.PV.assign">
+<code class="descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.PV.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">PV_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.PV.export">
+<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.PV.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.PV.dcoptimizer_loss">
+<code class="descname">dcoptimizer_loss</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.PV.dcoptimizer_loss" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: PV loss in DC/DC w/MPPT conversion</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="fuelcell-group">
+<h2>FuelCell Group<a class="headerlink" href="#fuelcell-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.FuelCell">
+<em class="property">class </em><code class="descclassname">PySAM.StandAloneBattery.StandAloneBattery.</code><code class="descname">FuelCell</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.FuelCell" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.FuelCell.assign">
+<code class="descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.FuelCell.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">FuelCell_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.FuelCell.export">
+<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.FuelCell.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.FuelCell.dispatch_manual_fuelcellcharge">
+<code class="descname">dispatch_manual_fuelcellcharge</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.FuelCell.dispatch_manual_fuelcellcharge" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Periods 1-6 charging from fuel cell allowed?</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.FuelCell.fuelcell_power">
+<code class="descname">fuelcell_power</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.FuelCell.fuelcell_power" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Electricity from fuel cell [kW]</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="electricityrate-group">
+<h2>ElectricityRate Group<a class="headerlink" href="#electricityrate-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.ElectricityRate">
+<em class="property">class </em><code class="descclassname">PySAM.StandAloneBattery.StandAloneBattery.</code><code class="descname">ElectricityRate</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.ElectricityRate" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.ElectricityRate.assign">
+<code class="descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.ElectricityRate.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">ElectricityRate_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.ElectricityRate.export">
+<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.ElectricityRate.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.ElectricityRate.en_electricity_rates">
+<code class="descname">en_electricity_rates</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.ElectricityRate.en_electricity_rates" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Enable Electricity Rates [0/1]</p>
+<p><em>Options</em>: 0=EnableElectricityRates,1=NoRates</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.ElectricityRate.ur_ec_sched_weekday">
+<code class="descname">ur_ec_sched_weekday</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.ElectricityRate.ur_ec_sched_weekday" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Energy charge weekday schedule</p>
+<p><em>Info</em>: 12 x 24 matrix</p>
+<p><em>Required</em>: set to 1&amp;batt_meter_position=1&amp;batt_dispatch_choice=2 if not provided.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.ElectricityRate.ur_ec_sched_weekend">
+<code class="descname">ur_ec_sched_weekend</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.ElectricityRate.ur_ec_sched_weekend" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Energy charge weekend schedule</p>
+<p><em>Info</em>: 12 x 24 matrix</p>
+<p><em>Required</em>: set to 1&amp;batt_meter_position=1&amp;batt_dispatch_choice=2 if not provided.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.ElectricityRate.ur_ec_tou_mat">
+<code class="descname">ur_ec_tou_mat</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.ElectricityRate.ur_ec_tou_mat" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Energy rates table</p>
+<p><em>Required</em>: set to 1&amp;batt_meter_position=1&amp;batt_dispatch_choice=2 if not provided.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="energymarket-group">
+<h2>EnergyMarket Group<a class="headerlink" href="#energymarket-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.EnergyMarket">
+<em class="property">class </em><code class="descclassname">PySAM.StandAloneBattery.StandAloneBattery.</code><code class="descname">EnergyMarket</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.EnergyMarket" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.EnergyMarket.assign">
+<code class="descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.EnergyMarket.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">EnergyMarket_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.EnergyMarket.export">
+<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.EnergyMarket.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.EnergyMarket.dispatch_sched_weekday">
+<code class="descname">dispatch_sched_weekday</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.EnergyMarket.dispatch_sched_weekday" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Diurnal weekday TOD periods [1..9]</p>
+<p><em>Info</em>: 12 x 24 matrix</p>
+<p><em>Required</em>: set to 1&amp;batt_meter_position=1&amp;batt_dispatch_choice=2 if not provided.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.EnergyMarket.dispatch_sched_weekend">
+<code class="descname">dispatch_sched_weekend</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.EnergyMarket.dispatch_sched_weekend" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Diurnal weekend TOD periods [1..9]</p>
+<p><em>Info</em>: 12 x 24 matrix</p>
+<p><em>Required</em>: set to 1&amp;batt_meter_position=1&amp;batt_dispatch_choice=2 if not provided.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.EnergyMarket.dispatch_tod_factors">
+<code class="descname">dispatch_tod_factors</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.EnergyMarket.dispatch_tod_factors" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: TOD factors for periods 1-9</p>
+<p><em>Required</em>: set to 1&amp;batt_meter_position=1&amp;batt_dispatch_choice=2 if not provided.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.EnergyMarket.ppa_price_input">
+<code class="descname">ppa_price_input</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.EnergyMarket.ppa_price_input" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: PPA Price Input</p>
+<p><em>Required</em>: set to 1&amp;batt_meter_position=1&amp;batt_dispatch_choice=2 if not provided.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="outputs-group">
+<h2>Outputs Group<a class="headerlink" href="#outputs-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Outputs">
+<em class="property">class </em><code class="descclassname">PySAM.StandAloneBattery.StandAloneBattery.</code><code class="descname">Outputs</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Outputs" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Outputs.assign">
+<code class="descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Outputs.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">Outputs_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Outputs.export">
+<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Outputs.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Outputs.annual_export_to_grid_energy">
+<code class="descname">annual_export_to_grid_energy</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Outputs.annual_export_to_grid_energy" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Annual energy exported to grid [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Outputs.annual_import_to_grid_energy">
+<code class="descname">annual_import_to_grid_energy</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Outputs.annual_import_to_grid_energy" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Annual energy imported from grid [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Outputs.average_battery_conversion_efficiency">
+<code class="descname">average_battery_conversion_efficiency</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Outputs.average_battery_conversion_efficiency" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Battery average cycle conversion efficiency [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Outputs.average_battery_roundtrip_efficiency">
+<code class="descname">average_battery_roundtrip_efficiency</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Outputs.average_battery_roundtrip_efficiency" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Battery average roundtrip efficiency [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Outputs.batt_DOD">
+<code class="descname">batt_DOD</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Outputs.batt_DOD" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Battery cycle depth of discharge [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Outputs.batt_I">
+<code class="descname">batt_I</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Outputs.batt_I" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Battery current [A]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Outputs.batt_SOC">
+<code class="descname">batt_SOC</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Outputs.batt_SOC" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Battery state of charge [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Outputs.batt_annual_charge_energy">
+<code class="descname">batt_annual_charge_energy</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Outputs.batt_annual_charge_energy" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Battery annual energy charged [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Outputs.batt_annual_charge_from_grid">
+<code class="descname">batt_annual_charge_from_grid</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Outputs.batt_annual_charge_from_grid" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Battery annual energy charged from grid [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Outputs.batt_annual_charge_from_pv">
+<code class="descname">batt_annual_charge_from_pv</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Outputs.batt_annual_charge_from_pv" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Battery annual energy charged from PV [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Outputs.batt_annual_discharge_energy">
+<code class="descname">batt_annual_discharge_energy</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Outputs.batt_annual_discharge_energy" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Battery annual energy discharged [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Outputs.batt_annual_energy_loss">
+<code class="descname">batt_annual_energy_loss</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Outputs.batt_annual_energy_loss" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Battery annual energy loss [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Outputs.batt_annual_energy_system_loss">
+<code class="descname">batt_annual_energy_system_loss</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Outputs.batt_annual_energy_system_loss" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Battery annual system energy loss [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Outputs.batt_bank_installed_capacity">
+<code class="descname">batt_bank_installed_capacity</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Outputs.batt_bank_installed_capacity" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Battery bank installed capacity [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Outputs.batt_bank_replacement">
+<code class="descname">batt_bank_replacement</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Outputs.batt_bank_replacement" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Battery bank replacements per year [number/year]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Outputs.batt_capacity_percent">
+<code class="descname">batt_capacity_percent</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Outputs.batt_capacity_percent" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Battery capacity percent for lifetime [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Outputs.batt_capacity_thermal_percent">
+<code class="descname">batt_capacity_thermal_percent</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Outputs.batt_capacity_thermal_percent" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Battery capacity percent for temperature [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Outputs.batt_conversion_loss">
+<code class="descname">batt_conversion_loss</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Outputs.batt_conversion_loss" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Electricity loss in battery power electronics [kW]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Outputs.batt_cost_to_cycle">
+<code class="descname">batt_cost_to_cycle</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Outputs.batt_cost_to_cycle" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Computed cost to cycle [$/cycle]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Outputs.batt_cycles">
+<code class="descname">batt_cycles</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Outputs.batt_cycles" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Battery number of cycles</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Outputs.batt_dispatch_sched">
+<code class="descname">batt_dispatch_sched</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Outputs.batt_dispatch_sched" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Battery dispatch schedule</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Outputs.batt_power">
+<code class="descname">batt_power</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Outputs.batt_power" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Electricity to/from battery [kW]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Outputs.batt_power_target">
+<code class="descname">batt_power_target</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Outputs.batt_power_target" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Electricity battery power target for automated dispatch [kW]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Outputs.batt_pv_charge_percent">
+<code class="descname">batt_pv_charge_percent</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Outputs.batt_pv_charge_percent" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Battery percent energy charged from PV [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Outputs.batt_q0">
+<code class="descname">batt_q0</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Outputs.batt_q0" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Battery total charge [Ah]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Outputs.batt_q1">
+<code class="descname">batt_q1</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Outputs.batt_q1" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Battery available charge [Ah]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Outputs.batt_q2">
+<code class="descname">batt_q2</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Outputs.batt_q2" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Battery bound charge [Ah]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Outputs.batt_qmax">
+<code class="descname">batt_qmax</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Outputs.batt_qmax" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Battery maximum charge with degradation [Ah]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Outputs.batt_qmaxI">
+<code class="descname">batt_qmaxI</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Outputs.batt_qmaxI" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Battery maximum capacity at current [Ah]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Outputs.batt_qmax_thermal">
+<code class="descname">batt_qmax_thermal</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Outputs.batt_qmax_thermal" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Battery maximum charge at temperature [Ah]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Outputs.batt_system_loss">
+<code class="descname">batt_system_loss</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Outputs.batt_system_loss" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Electricity loss from battery ancillary equipment [kW]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Outputs.batt_temperature">
+<code class="descname">batt_temperature</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Outputs.batt_temperature" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Battery temperature [C]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Outputs.batt_to_grid">
+<code class="descname">batt_to_grid</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Outputs.batt_to_grid" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Electricity to grid from battery [kW]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Outputs.batt_to_load">
+<code class="descname">batt_to_load</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Outputs.batt_to_load" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Electricity to load from battery [kW]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Outputs.batt_voltage">
+<code class="descname">batt_voltage</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Outputs.batt_voltage" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Battery voltage [V]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Outputs.batt_voltage_cell">
+<code class="descname">batt_voltage_cell</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Outputs.batt_voltage_cell" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Battery cell voltage [V]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Outputs.fuelcell_to_batt">
+<code class="descname">fuelcell_to_batt</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Outputs.fuelcell_to_batt" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Electricity to battery from fuel cell [kW]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Outputs.grid_power">
+<code class="descname">grid_power</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Outputs.grid_power" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Electricity to/from grid [kW]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Outputs.grid_power_target">
+<code class="descname">grid_power_target</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Outputs.grid_power_target" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Electricity grid power target for automated dispatch [kW]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Outputs.grid_to_batt">
+<code class="descname">grid_to_batt</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Outputs.grid_to_batt" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Electricity to battery from grid [kW]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Outputs.grid_to_load">
+<code class="descname">grid_to_load</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Outputs.grid_to_load" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Electricity to load from grid [kW]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Outputs.monthly_batt_to_grid">
+<code class="descname">monthly_batt_to_grid</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Outputs.monthly_batt_to_grid" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Energy to grid from battery [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Outputs.monthly_batt_to_load">
+<code class="descname">monthly_batt_to_load</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Outputs.monthly_batt_to_load" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Energy to load from battery [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Outputs.monthly_grid_to_batt">
+<code class="descname">monthly_grid_to_batt</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Outputs.monthly_grid_to_batt" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Energy to battery from grid [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Outputs.monthly_grid_to_load">
+<code class="descname">monthly_grid_to_load</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Outputs.monthly_grid_to_load" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Energy to load from grid [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Outputs.monthly_pv_to_batt">
+<code class="descname">monthly_pv_to_batt</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Outputs.monthly_pv_to_batt" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Energy to battery from PV [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Outputs.monthly_pv_to_grid">
+<code class="descname">monthly_pv_to_grid</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Outputs.monthly_pv_to_grid" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Energy to grid from PV [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Outputs.monthly_pv_to_load">
+<code class="descname">monthly_pv_to_load</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Outputs.monthly_pv_to_load" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Energy to load from PV [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Outputs.pv_to_batt">
+<code class="descname">pv_to_batt</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Outputs.pv_to_batt" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Electricity to battery from PV [kW]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Outputs.pv_to_grid">
+<code class="descname">pv_to_grid</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Outputs.pv_to_grid" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Electricity to grid from PV [kW]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.StandAloneBattery.StandAloneBattery.Outputs.pv_to_load">
+<code class="descname">pv_to_load</code><a class="headerlink" href="#PySAM.StandAloneBattery.StandAloneBattery.Outputs.pv_to_load" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Electricity to load from PV [kW]</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">PySAM 1.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, NREL.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
+    </div>
+  </body>
+</html>

@@ -58,9 +58,9 @@ Common_export(CommonObject *self, PyObject *args)
 
 static PyMethodDef Common_methods[] = {
 		{"assign",            (PyCFunction)Common_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Common_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Common_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -78,7 +78,7 @@ Common_set_system_use_lifetime_output(CommonObject *self, PyObject *value, void 
 
 static PyGetSetDef Common_getset[] = {
 {"system_use_lifetime_output", (getter)Common_get_system_use_lifetime_output,(setter)Common_set_system_use_lifetime_output,
-	PyDoc_STR("type: Float\n\nRun lifetime simulation [0/1]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Run lifetime simulation [0/1]\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -181,9 +181,9 @@ FinancialAnalysisParameters_export(FinancialAnalysisParametersObject *self, PyOb
 
 static PyMethodDef FinancialAnalysisParameters_methods[] = {
 		{"assign",            (PyCFunction)FinancialAnalysisParameters_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``FinancialAnalysisParameters_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)FinancialAnalysisParameters_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -201,7 +201,7 @@ FinancialAnalysisParameters_set_analysis_period(FinancialAnalysisParametersObjec
 
 static PyGetSetDef FinancialAnalysisParameters_getset[] = {
 {"analysis_period", (getter)FinancialAnalysisParameters_get_analysis_period,(setter)FinancialAnalysisParameters_set_analysis_period,
-	PyDoc_STR("type: Float\n\nAnalysis period [years]\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*float*: Analysis period [years]\n\n*Required*: set to 1 if not provided."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -304,9 +304,9 @@ LifetimePV_export(LifetimePVObject *self, PyObject *args)
 
 static PyMethodDef LifetimePV_methods[] = {
 		{"assign",            (PyCFunction)LifetimePV_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``LifetimePV_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)LifetimePV_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -324,7 +324,7 @@ LifetimePV_set_dc_degradation(LifetimePVObject *self, PyObject *value, void *clo
 
 static PyGetSetDef LifetimePV_getset[] = {
 {"dc_degradation", (getter)LifetimePV_get_dc_degradation,(setter)LifetimePV_set_dc_degradation,
-	PyDoc_STR("type: Sequence\n\nAnnual AC degradation [%/year]\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*sequence*: Annual AC degradation [%/year]\n\n*Required*: set to 1 if not provided."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -427,9 +427,9 @@ Weather_export(WeatherObject *self, PyObject *args)
 
 static PyMethodDef Weather_methods[] = {
 		{"assign",            (PyCFunction)Weather_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Weather_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Weather_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -459,10 +459,10 @@ Weather_set_solar_resource_file(WeatherObject *self, PyObject *value, void *clos
 
 static PyGetSetDef Weather_getset[] = {
 {"solar_resource_data", (getter)Weather_get_solar_resource_data,(setter)Weather_set_solar_resource_data,
-	PyDoc_STR("type: Dict\n\nWeather data\n\n*Info*: dn,df,tdry,wspd,lat,lon,tz\n\n*Required*: False"),
+	PyDoc_STR("*dict*: Weather data\n\n*Info*: dn,df,tdry,wspd,lat,lon,tz\n\n*Required*: False"),
  	NULL},
 {"solar_resource_file", (getter)Weather_get_solar_resource_file,(setter)Weather_set_solar_resource_file,
-	PyDoc_STR("type: Str\n\nWeather file path\n\n*Required*: False"),
+	PyDoc_STR("*str*: Weather file path\n\n*Required*: False"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -565,9 +565,9 @@ PVWatts_export(PVWattsObject *self, PyObject *args)
 
 static PyMethodDef PVWatts_methods[] = {
 		{"assign",            (PyCFunction)PVWatts_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``PVWatts_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)PVWatts_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -729,43 +729,43 @@ PVWatts_set_tilt(PVWattsObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef PVWatts_getset[] = {
 {"array_type", (getter)PVWatts_get_array_type,(setter)PVWatts_set_array_type,
-	PyDoc_STR("type: Float\n\nArray type [0/1/2/3/4]\n\n*Info*: Fixed OR,Fixed Roof,1Axis,Backtracked,2Axis\n\n*Constraints*: MIN=0,MAX=4,INTEGER\n\n*Required*: True"),
+	PyDoc_STR("*float*: Array type [0/1/2/3/4]\n\n*Info*: Fixed OR,Fixed Roof,1Axis,Backtracked,2Axis\n\n*Constraints*: MIN=0,MAX=4,INTEGER\n\n*Required*: True"),
  	NULL},
 {"azimuth", (getter)PVWatts_get_azimuth,(setter)PVWatts_set_azimuth,
-	PyDoc_STR("type: Float\n\nAzimuth angle [deg]\n\n*Options*: E=90,S=180,W=270\n\n*Constraints*: MIN=0,MAX=360\n\n*Required*: array_type<4"),
+	PyDoc_STR("*float*: Azimuth angle [deg]\n\n*Options*: E=90,S=180,W=270\n\n*Constraints*: MIN=0,MAX=360\n\n*Required*: array_type<4"),
  	NULL},
 {"dc_ac_ratio", (getter)PVWatts_get_dc_ac_ratio,(setter)PVWatts_set_dc_ac_ratio,
-	PyDoc_STR("type: Float\n\nDC to AC ratio [ratio]\n\n*Constraints*: POSITIVE\n\n*Required*: set to 1.1 if not provided."),
+	PyDoc_STR("*float*: DC to AC ratio [ratio]\n\n*Constraints*: POSITIVE\n\n*Required*: set to 1.1 if not provided."),
  	NULL},
 {"gcr", (getter)PVWatts_get_gcr,(setter)PVWatts_set_gcr,
-	PyDoc_STR("type: Float\n\nGround coverage ratio [0..1]\n\n*Constraints*: MIN=0,MAX=3\n\n*Required*: set to 0.4 if not provided."),
+	PyDoc_STR("*float*: Ground coverage ratio [0..1]\n\n*Constraints*: MIN=0,MAX=3\n\n*Required*: set to 0.4 if not provided."),
  	NULL},
 {"inv_eff", (getter)PVWatts_get_inv_eff,(setter)PVWatts_set_inv_eff,
-	PyDoc_STR("type: Float\n\nInverter efficiency at rated power [%]\n\n*Constraints*: MIN=90,MAX=99.5\n\n*Required*: set to 96 if not provided."),
+	PyDoc_STR("*float*: Inverter efficiency at rated power [%]\n\n*Constraints*: MIN=90,MAX=99.5\n\n*Required*: set to 96 if not provided."),
  	NULL},
 {"losses", (getter)PVWatts_get_losses,(setter)PVWatts_set_losses,
-	PyDoc_STR("type: Float\n\nSystem losses [%]\n\n*Info*: Total system losses\n\n*Constraints*: MIN=-5,MAX=99\n\n*Required*: True"),
+	PyDoc_STR("*float*: System losses [%]\n\n*Info*: Total system losses\n\n*Constraints*: MIN=-5,MAX=99\n\n*Required*: True"),
  	NULL},
 {"module_type", (getter)PVWatts_get_module_type,(setter)PVWatts_set_module_type,
-	PyDoc_STR("type: Float\n\nModule type [0/1/2]\n\n*Info*: Standard,Premium,Thin film\n\n*Constraints*: MIN=0,MAX=2,INTEGER\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Module type [0/1/2]\n\n*Info*: Standard,Premium,Thin film\n\n*Constraints*: MIN=0,MAX=2,INTEGER\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"shading_azal", (getter)PVWatts_get_shading_azal,(setter)PVWatts_set_shading_azal,
-	PyDoc_STR("type: Sequence[Sequence]\n\nAzimuth x altitude beam shading loss [%]\n\n*Required*: False"),
+	PyDoc_STR("*sequence[sequence]*: Azimuth x altitude beam shading loss [%]\n\n*Required*: False"),
  	NULL},
 {"shading_diff", (getter)PVWatts_get_shading_diff,(setter)PVWatts_set_shading_diff,
-	PyDoc_STR("type: Float\n\nDiffuse shading loss [%]\n\n*Required*: False"),
+	PyDoc_STR("*float*: Diffuse shading loss [%]\n\n*Required*: False"),
  	NULL},
 {"shading_mxh", (getter)PVWatts_get_shading_mxh,(setter)PVWatts_set_shading_mxh,
-	PyDoc_STR("type: Sequence[Sequence]\n\nMonth x Hour beam shading loss [%]\n\n*Required*: False"),
+	PyDoc_STR("*sequence[sequence]*: Month x Hour beam shading loss [%]\n\n*Required*: False"),
  	NULL},
 {"shading_timestep", (getter)PVWatts_get_shading_timestep,(setter)PVWatts_set_shading_timestep,
-	PyDoc_STR("type: Sequence[Sequence]\n\nTime step beam shading loss [%]\n\n*Required*: False"),
+	PyDoc_STR("*sequence[sequence]*: Time step beam shading loss [%]\n\n*Required*: False"),
  	NULL},
 {"system_capacity", (getter)PVWatts_get_system_capacity,(setter)PVWatts_set_system_capacity,
-	PyDoc_STR("type: Float\n\nSystem size (DC nameplate) [kW]\n\n*Required*: True"),
+	PyDoc_STR("*float*: System size (DC nameplate) [kW]\n\n*Required*: True"),
  	NULL},
 {"tilt", (getter)PVWatts_get_tilt,(setter)PVWatts_set_tilt,
-	PyDoc_STR("type: Float\n\nTilt angle [deg]\n\n*Options*: H=0,V=90\n\n*Constraints*: MIN=0,MAX=90\n\n*Required*: array_type<4"),
+	PyDoc_STR("*float*: Tilt angle [deg]\n\n*Options*: H=0,V=90\n\n*Constraints*: MIN=0,MAX=90\n\n*Required*: array_type<4"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -868,9 +868,9 @@ Battwatts_export(BattwattsObject *self, PyObject *args)
 
 static PyMethodDef Battwatts_methods[] = {
 		{"assign",            (PyCFunction)Battwatts_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Battwatts_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Battwatts_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -888,7 +888,7 @@ Battwatts_set_batt_simple_enable(BattwattsObject *self, PyObject *value, void *c
 
 static PyGetSetDef Battwatts_getset[] = {
 {"batt_simple_enable", (getter)Battwatts_get_batt_simple_enable,(setter)Battwatts_set_batt_simple_enable,
-	PyDoc_STR("type: Float\n\nEnable Battery [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Enable Battery [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -991,9 +991,9 @@ Outputs_export(OutputsObject *self, PyObject *args)
 
 static PyMethodDef Outputs_methods[] = {
 		{"assign",            (PyCFunction)Outputs_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Outputs_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Outputs_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -1203,106 +1203,106 @@ Outputs_get_wspd(OutputsObject *self, void *closure)
 
 static PyGetSetDef Outputs_getset[] = {
 {"ac", (getter)Outputs_get_ac,(setter)0,
-	PyDoc_STR("type: Sequence\n\nAC inverter power [W]"),
+	PyDoc_STR("*sequence*: AC inverter power [W]"),
  	NULL},
 {"ac_annual", (getter)Outputs_get_ac_annual,(setter)0,
-	PyDoc_STR("type: Float\n\nAnnual AC system output [kWh]"),
+	PyDoc_STR("*float*: Annual AC system output [kWh]"),
  	NULL},
 {"ac_monthly", (getter)Outputs_get_ac_monthly,(setter)0,
-	PyDoc_STR("type: Sequence\n\nAC system output [kWh]"),
+	PyDoc_STR("*sequence*: AC system output [kWh]"),
  	NULL},
 {"annual_energy", (getter)Outputs_get_annual_energy,(setter)0,
-	PyDoc_STR("type: Float\n\nAnnual energy [kWh]"),
+	PyDoc_STR("*float*: Annual energy [kWh]"),
  	NULL},
 {"aoi", (getter)Outputs_get_aoi,(setter)0,
-	PyDoc_STR("type: Sequence\n\nAngle of incidence [deg]"),
+	PyDoc_STR("*sequence*: Angle of incidence [deg]"),
  	NULL},
 {"capacity_factor", (getter)Outputs_get_capacity_factor,(setter)0,
-	PyDoc_STR("type: Float\n\nCapacity factor [%]"),
+	PyDoc_STR("*float*: Capacity factor [%]"),
  	NULL},
 {"city", (getter)Outputs_get_city,(setter)0,
-	PyDoc_STR("type: Str\n\nCity"),
+	PyDoc_STR("*str*: City"),
  	NULL},
 {"dc", (getter)Outputs_get_dc,(setter)0,
-	PyDoc_STR("type: Sequence\n\nDC array power [W]"),
+	PyDoc_STR("*sequence*: DC array power [W]"),
  	NULL},
 {"dc_monthly", (getter)Outputs_get_dc_monthly,(setter)0,
-	PyDoc_STR("type: Sequence\n\nDC array output [kWh]"),
+	PyDoc_STR("*sequence*: DC array output [kWh]"),
  	NULL},
 {"df", (getter)Outputs_get_df,(setter)0,
-	PyDoc_STR("type: Sequence\n\nDiffuse irradiance [W/m2]"),
+	PyDoc_STR("*sequence*: Diffuse irradiance [W/m2]"),
  	NULL},
 {"dn", (getter)Outputs_get_dn,(setter)0,
-	PyDoc_STR("type: Sequence\n\nBeam irradiance [W/m2]"),
+	PyDoc_STR("*sequence*: Beam irradiance [W/m2]"),
  	NULL},
 {"elev", (getter)Outputs_get_elev,(setter)0,
-	PyDoc_STR("type: Float\n\nSite elevation [m]"),
+	PyDoc_STR("*float*: Site elevation [m]"),
  	NULL},
 {"gh", (getter)Outputs_get_gh,(setter)0,
-	PyDoc_STR("type: Sequence\n\nGlobal horizontal irradiance [W/m2]"),
+	PyDoc_STR("*sequence*: Global horizontal irradiance [W/m2]"),
  	NULL},
 {"inverter_efficiency", (getter)Outputs_get_inverter_efficiency,(setter)0,
-	PyDoc_STR("type: Float\n\nInverter efficiency at rated power [%]"),
+	PyDoc_STR("*float*: Inverter efficiency at rated power [%]"),
  	NULL},
 {"inverter_model", (getter)Outputs_get_inverter_model,(setter)0,
-	PyDoc_STR("type: Float\n\nInverter model specifier"),
+	PyDoc_STR("*float*: Inverter model specifier"),
  	NULL},
 {"kwh_per_kw", (getter)Outputs_get_kwh_per_kw,(setter)0,
-	PyDoc_STR("type: Float\n\nFirst year kWh/kW"),
+	PyDoc_STR("*float*: First year kWh/kW"),
  	NULL},
 {"lat", (getter)Outputs_get_lat,(setter)0,
-	PyDoc_STR("type: Float\n\nLatitude [deg]"),
+	PyDoc_STR("*float*: Latitude [deg]"),
  	NULL},
 {"location", (getter)Outputs_get_location,(setter)0,
-	PyDoc_STR("type: Str\n\nLocation ID"),
+	PyDoc_STR("*str*: Location ID"),
  	NULL},
 {"lon", (getter)Outputs_get_lon,(setter)0,
-	PyDoc_STR("type: Float\n\nLongitude [deg]"),
+	PyDoc_STR("*float*: Longitude [deg]"),
  	NULL},
 {"monthly_energy", (getter)Outputs_get_monthly_energy,(setter)0,
-	PyDoc_STR("type: Sequence\n\nMonthly energy [kWh]"),
+	PyDoc_STR("*sequence*: Monthly energy [kWh]"),
  	NULL},
 {"percent_complete", (getter)Outputs_get_percent_complete,(setter)0,
-	PyDoc_STR("type: Float\n\nEstimated percent of total comleted simulation [%]"),
+	PyDoc_STR("*float*: Estimated percent of total comleted simulation [%]"),
  	NULL},
 {"poa", (getter)Outputs_get_poa,(setter)0,
-	PyDoc_STR("type: Sequence\n\nPlane of array irradiance [W/m2]"),
+	PyDoc_STR("*sequence*: Plane of array irradiance [W/m2]"),
  	NULL},
 {"poa_monthly", (getter)Outputs_get_poa_monthly,(setter)0,
-	PyDoc_STR("type: Sequence\n\nPlane of array irradiance [kWh/m2]"),
+	PyDoc_STR("*sequence*: Plane of array irradiance [kWh/m2]"),
  	NULL},
 {"shad_beam_factor", (getter)Outputs_get_shad_beam_factor,(setter)0,
-	PyDoc_STR("type: Sequence\n\nShading factor for beam radiation"),
+	PyDoc_STR("*sequence*: Shading factor for beam radiation"),
  	NULL},
 {"solrad_annual", (getter)Outputs_get_solrad_annual,(setter)0,
-	PyDoc_STR("type: Float\n\nDaily average solar irradiance [kWh/m2/day]"),
+	PyDoc_STR("*float*: Daily average solar irradiance [kWh/m2/day]"),
  	NULL},
 {"solrad_monthly", (getter)Outputs_get_solrad_monthly,(setter)0,
-	PyDoc_STR("type: Sequence\n\nDaily average solar irradiance [kWh/m2/day]"),
+	PyDoc_STR("*sequence*: Daily average solar irradiance [kWh/m2/day]"),
  	NULL},
 {"state", (getter)Outputs_get_state,(setter)0,
-	PyDoc_STR("type: Str\n\nState"),
+	PyDoc_STR("*str*: State"),
  	NULL},
 {"sunup", (getter)Outputs_get_sunup,(setter)0,
-	PyDoc_STR("type: Sequence\n\nSun up over horizon [0/1]"),
+	PyDoc_STR("*sequence*: Sun up over horizon [0/1]"),
  	NULL},
 {"tamb", (getter)Outputs_get_tamb,(setter)0,
-	PyDoc_STR("type: Sequence\n\nAmbient temperature [C]"),
+	PyDoc_STR("*sequence*: Ambient temperature [C]"),
  	NULL},
 {"tcell", (getter)Outputs_get_tcell,(setter)0,
-	PyDoc_STR("type: Sequence\n\nModule temperature [C]"),
+	PyDoc_STR("*sequence*: Module temperature [C]"),
  	NULL},
 {"tpoa", (getter)Outputs_get_tpoa,(setter)0,
-	PyDoc_STR("type: Sequence\n\nTransmitted plane of array irradiance [W/m2]"),
+	PyDoc_STR("*sequence*: Transmitted plane of array irradiance [W/m2]"),
  	NULL},
 {"ts_shift_hours", (getter)Outputs_get_ts_shift_hours,(setter)0,
-	PyDoc_STR("type: Float\n\nTime offset for interpreting time series outputs [hours]"),
+	PyDoc_STR("*float*: Time offset for interpreting time series outputs [hours]"),
  	NULL},
 {"tz", (getter)Outputs_get_tz,(setter)0,
-	PyDoc_STR("type: Float\n\nTime zone [hr]"),
+	PyDoc_STR("*float*: Time zone [hr]"),
  	NULL},
 {"wspd", (getter)Outputs_get_wspd,(setter)0,
-	PyDoc_STR("type: Sequence\n\nWind speed [m/s]"),
+	PyDoc_STR("*sequence*: Wind speed [m/s]"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1476,9 +1476,9 @@ static PyMethodDef Pvwattsv5Lifetime_methods[] = {
 		{"execute",            (PyCFunction)Pvwattsv5Lifetime_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
 		{"assign",            (PyCFunction)Pvwattsv5Lifetime_assign,  METH_VARARGS,
-				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs")},
+				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Common': { var: val, ...}, ...}``")},
 		{"export",            (PyCFunction)Pvwattsv5Lifetime_export,  METH_VARARGS,
-				PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+				PyDoc_STR("export() -> dict\n Export attributes into nested dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -1518,7 +1518,7 @@ static PyTypeObject Pvwattsv5Lifetime_Type = {
 		0,                          /*tp_setattro*/
 		0,                          /*tp_as_buffer*/
 		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
-		"Wrapper for `cmod_pvwattsv5_lifetime.cpp <https://github.com/NREL/ssc/blob/develop/ssc/cmod_pvwattsv5_lifetime.cpp>`_",        /*tp_doc*/
+		"This class contains all the variable information for running a simulation. Variables are grouped together in the subclasses as properties. If property assignments are the wrong type, an error is thrown.",        /*tp_doc*/
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
@@ -1595,12 +1595,12 @@ Pvwattsv5Lifetime_default(PyObject *self, PyObject *args)
 
 static PyMethodDef Pvwattsv5LifetimeModule_methods[] = {
 		{"new",             Pvwattsv5Lifetime_new,         METH_VARARGS,
-				PyDoc_STR("new() -> new Pvwattsv5Lifetime object")},
+				PyDoc_STR("new() -> Pvwattsv5Lifetime")},
 		{"default",             Pvwattsv5Lifetime_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> new Pvwattsv5Lifetime object with financial model-specific default attributes\n"
+				PyDoc_STR("default(config) -> Pvwattsv5Lifetime\n\nUse financial model-specific default attributes\n"
 				"config options:\n\n- \"FuelCellCommercial\"\n- \"FuelCellSingleOwner\"")},
 		{"wrap",             Pvwattsv5Lifetime_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> new Pvwattsv5Lifetime object around existing PySSC data, taking over memory ownership\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to `wrap`")},
+				PyDoc_STR("wrap(ssc_data_t) -> Pvwattsv5Lifetime\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{NULL,              NULL}           /* sentinel */
 };
 

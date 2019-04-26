@@ -58,9 +58,9 @@ SimpleLCOE_export(SimpleLCOEObject *self, PyObject *args)
 
 static PyMethodDef SimpleLCOE_methods[] = {
 		{"assign",            (PyCFunction)SimpleLCOE_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``SimpleLCOE_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)SimpleLCOE_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -126,19 +126,19 @@ SimpleLCOE_set_variable_operating_cost(SimpleLCOEObject *self, PyObject *value, 
 
 static PyGetSetDef SimpleLCOE_getset[] = {
 {"annual_energy", (getter)SimpleLCOE_get_annual_energy,(setter)SimpleLCOE_set_annual_energy,
-	PyDoc_STR("type: Float\n\nAnnual energy production [kWh]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Annual energy production [kWh]\n\n*Required*: True"),
  	NULL},
 {"capital_cost", (getter)SimpleLCOE_get_capital_cost,(setter)SimpleLCOE_set_capital_cost,
-	PyDoc_STR("type: Float\n\nCapital cost [$]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Capital cost [$]\n\n*Required*: True"),
  	NULL},
 {"fixed_charge_rate", (getter)SimpleLCOE_get_fixed_charge_rate,(setter)SimpleLCOE_set_fixed_charge_rate,
-	PyDoc_STR("type: Float\n\nFixed charge rate\n\n*Required*: True"),
+	PyDoc_STR("*float*: Fixed charge rate\n\n*Required*: True"),
  	NULL},
 {"fixed_operating_cost", (getter)SimpleLCOE_get_fixed_operating_cost,(setter)SimpleLCOE_set_fixed_operating_cost,
-	PyDoc_STR("type: Float\n\nAnnual fixed operating cost [$]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Annual fixed operating cost [$]\n\n*Required*: True"),
  	NULL},
 {"variable_operating_cost", (getter)SimpleLCOE_get_variable_operating_cost,(setter)SimpleLCOE_set_variable_operating_cost,
-	PyDoc_STR("type: Float\n\nAnnual variable operating cost [$/kWh]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Annual variable operating cost [$/kWh]\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -241,9 +241,9 @@ Outputs_export(OutputsObject *self, PyObject *args)
 
 static PyMethodDef Outputs_methods[] = {
 		{"assign",            (PyCFunction)Outputs_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary")},
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Outputs_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Outputs_export,  METH_VARARGS,
-			PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -255,7 +255,7 @@ Outputs_get_lcoe_fcr(OutputsObject *self, void *closure)
 
 static PyGetSetDef Outputs_getset[] = {
 {"lcoe_fcr", (getter)Outputs_get_lcoe_fcr,(setter)0,
-	PyDoc_STR("type: Float\n\nLevelized cost of energy [$/kWh]"),
+	PyDoc_STR("*float*: Levelized cost of energy [$/kWh]"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -394,9 +394,9 @@ static PyMethodDef Lcoefcr_methods[] = {
 		{"execute",            (PyCFunction)Lcoefcr_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
 		{"assign",            (PyCFunction)Lcoefcr_assign,  METH_VARARGS,
-				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs")},
+				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Simple LCOE': { var: val, ...}, ...}``")},
 		{"export",            (PyCFunction)Lcoefcr_export,  METH_VARARGS,
-				PyDoc_STR("export() -> None\n Export attributes into dictionary")},
+				PyDoc_STR("export() -> dict\n Export attributes into nested dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -436,7 +436,7 @@ static PyTypeObject Lcoefcr_Type = {
 		0,                          /*tp_setattro*/
 		0,                          /*tp_as_buffer*/
 		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
-		"Wrapper for `cmod_lcoefcr.cpp <https://github.com/NREL/ssc/blob/develop/ssc/cmod_lcoefcr.cpp>`_",        /*tp_doc*/
+		"This class contains all the variable information for running a simulation. Variables are grouped together in the subclasses as properties. If property assignments are the wrong type, an error is thrown.",        /*tp_doc*/
 		0,                          /*tp_traverse*/
 		0,                          /*tp_clear*/
 		0,                          /*tp_richcompare*/
@@ -513,12 +513,12 @@ Lcoefcr_default(PyObject *self, PyObject *args)
 
 static PyMethodDef LcoefcrModule_methods[] = {
 		{"new",             Lcoefcr_new,         METH_VARARGS,
-				PyDoc_STR("new() -> new Lcoefcr object")},
+				PyDoc_STR("new() -> Lcoefcr")},
 		{"default",             Lcoefcr_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> new Lcoefcr object with financial model-specific default attributes\n"
+				PyDoc_STR("default(config) -> Lcoefcr\n\nUse financial model-specific default attributes\n"
 				"config options:\n\n- \"BiopowerLCOECalculator\"\n- \"DSGLIPHLCOHCalculator\"\n- \"DSLFLCOECalculator\"\n- \"DishStirlingLCOECalculator\"\n- \"EmpiricalTroughLCOECalculator\"\n- \"FlatPlatePVLCOECalculator\"\n- \"GenericCSPSystemLCOECalculator\"\n- \"GenericSystemLCOECalculator\"\n- \"GeothermalPowerLCOECalculator\"\n- \"HighXConcentratingPVLCOECalculator\"\n- \"MSLFLCOECalculator\"\n- \"PVWattsLCOECalculator\"\n- \"PhysicalTroughIPHLCOHCalculator\"\n- \"PhysicalTroughLCOECalculator\"\n- \"SolarWaterHeatingLCOECalculator\"\n- \"WindPowerLCOECalculator\"")},
 		{"wrap",             Lcoefcr_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> new Lcoefcr object around existing PySSC data, taking over memory ownership\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to `wrap`")},
+				PyDoc_STR("wrap(ssc_data_t) -> Lcoefcr\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{NULL,              NULL}           /* sentinel */
 };
 

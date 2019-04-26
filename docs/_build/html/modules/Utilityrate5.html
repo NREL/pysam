@@ -1,0 +1,1435 @@
+
+
+<!doctype html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Utilityrate5 Module &#8212; PySAM 1.1 documentation</title>
+    <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">PySAM 1.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Utilityrate5 Module</a><ul>
+<li><a class="reference internal" href="#creating-an-instance">Creating an Instance</a></li>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+<li><a class="reference internal" href="#common-group">Common Group</a></li>
+<li><a class="reference internal" href="#lifetime-group">Lifetime Group</a></li>
+<li><a class="reference internal" href="#systemoutput-group">SystemOutput Group</a></li>
+<li><a class="reference internal" href="#timeseries-group">TimeSeries Group</a></li>
+<li><a class="reference internal" href="#electricload-group">ElectricLoad Group</a></li>
+<li><a class="reference internal" href="#utilityrateflat-group">UtilityRateFlat Group</a></li>
+<li><a class="reference internal" href="#utilityrateenergycharge-group">UtilityRateEnergyCharge Group</a></li>
+<li><a class="reference internal" href="#utilityratedemandcharge-group">UtilityRateDemandCharge Group</a></li>
+<li><a class="reference internal" href="#outputs-group">Outputs Group</a></li>
+</ul>
+</li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/modules/Utilityrate5.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="utilityrate5-module">
+<span id="utilityrate5"></span><h1>Utilityrate5 Module<a class="headerlink" href="#utilityrate5-module" title="Permalink to this headline">¶</a></h1>
+<p>Wrapper for SAM Simulation Core model: <a class="reference external" href="https://github.com/NREL/ssc/blob/develop/ssc/cmod_utilityrate5.cpp">cmod_utilityrate5.cpp</a></p>
+<div class="section" id="creating-an-instance">
+<h2>Creating an Instance<a class="headerlink" href="#creating-an-instance" title="Permalink to this headline">¶</a></h2>
+<p>There are three methods to create a new instance of a PySAM module. Using <code class="docutils literal notranslate"><span class="pre">default</span></code> populates the newclass’ attributes with default values specific to a <code class="docutils literal notranslate"><span class="pre">config</span></code>. Each technology-financialconfiguration corresponds to a SAM GUI configuration. Using <code class="docutils literal notranslate"><span class="pre">new</span></code> creates an instance with empty attributes. The <code class="docutils literal notranslate"><span class="pre">wrap</span></code> function allows compatibility with PySSC, for details, refer to <span class="xref std std-doc">PySSC</span>.</p>
+<p><strong>Utilityrate5 model description</strong></p>
+<span class="target" id="module-PySAM.Utilityrate5"></span><p>Retail electricity bill calculator</p>
+<dl class="function">
+<dt id="PySAM.Utilityrate5.default">
+<code class="descclassname">PySAM.Utilityrate5.</code><code class="descname">default</code><span class="sig-paren">(</span><em>config</em><span class="sig-paren">)</span> &#x2192; Utilityrate5<a class="headerlink" href="#PySAM.Utilityrate5.default" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use financial model-specific default attributes
+config options:</p>
+<ul class="simple">
+<li><p>“BiopowerCommercial”</p></li>
+<li><p>“DSLFCommercial”</p></li>
+<li><p>“DishStirlingCommercial”</p></li>
+<li><p>“EmpiricalTroughCommercial”</p></li>
+<li><p>“FlatPlatePVCommercial”</p></li>
+<li><p>“FlatPlatePVHostDeveloper”</p></li>
+<li><p>“FlatPlatePVResidential”</p></li>
+<li><p>“FlatPlatePVSingleOwner”</p></li>
+<li><p>“FlatPlatePVThirdParty”</p></li>
+<li><p>“FuelCellCommercial”</p></li>
+<li><p>“FuelCellSingleOwner”</p></li>
+<li><p>“GenericCSPSystemCommercial”</p></li>
+<li><p>“GenericSystemCommercial”</p></li>
+<li><p>“GenericSystemHostDeveloper”</p></li>
+<li><p>“GenericSystemResidential”</p></li>
+<li><p>“GenericSystemThirdParty”</p></li>
+<li><p>“MSLFCommercial”</p></li>
+<li><p>“PVWattsCommercial”</p></li>
+<li><p>“PVWattsHostDeveloper”</p></li>
+<li><p>“PVWattsResidential”</p></li>
+<li><p>“PVWattsThirdParty”</p></li>
+<li><p>“PhysicalTroughCommercial”</p></li>
+<li><p>“SolarWaterHeatingCommercial”</p></li>
+<li><p>“SolarWaterHeatingResidential”</p></li>
+<li><p>“WindPowerCommercial”</p></li>
+<li><p>“WindPowerResidential”</p></li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="PySAM.Utilityrate5.new">
+<code class="descclassname">PySAM.Utilityrate5.</code><code class="descname">new</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Utilityrate5<a class="headerlink" href="#PySAM.Utilityrate5.new" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="PySAM.Utilityrate5.wrap">
+<code class="descclassname">PySAM.Utilityrate5.</code><code class="descname">wrap</code><span class="sig-paren">(</span><em>ssc_data_t</em><span class="sig-paren">)</span> &#x2192; Utilityrate5<a class="headerlink" href="#PySAM.Utilityrate5.wrap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use existing PySSC data</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Do not call PySSC.data_free on the ssc_data_t provided to <code class="docutils literal notranslate"><span class="pre">wrap</span></code></p>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.Utilityrate5.Utilityrate5">
+<em class="property">class </em><code class="descclassname">PySAM.Utilityrate5.</code><code class="descname">Utilityrate5</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class contains all the variable information for running a simulation. Variables are grouped together in the subclasses as properties. If property assignments are the wrong type, an error is thrown.</p>
+<dl class="method">
+<dt id="PySAM.Utilityrate5.Utilityrate5.assign">
+<code class="descname">assign</code><span class="sig-paren">(</span><em>dict</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from nested dictionary, except for Outputs</p>
+<p><code class="docutils literal notranslate"><span class="pre">nested_dict</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">'Common':</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...},</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.Utilityrate5.Utilityrate5.execute">
+<code class="descname">execute</code><span class="sig-paren">(</span><em>int verbosity</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.execute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute simulation with verbosity level 0 (default) or 1</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.Utilityrate5.Utilityrate5.export">
+<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into nested dictionary</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="common-group">
+<h2>Common Group<a class="headerlink" href="#common-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Common">
+<em class="property">class </em><code class="descclassname">PySAM.Utilityrate5.Utilityrate5.</code><code class="descname">Common</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Common" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Common.assign">
+<code class="descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Common.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">Common_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Common.export">
+<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Common.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Common.TOU_demand_single_peak">
+<code class="descname">TOU_demand_single_peak</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Common.TOU_demand_single_peak" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Use single monthly peak for TOU demand charge [0/1]</p>
+<p><em>Options</em>: 0=use TOU peak,1=use flat peak</p>
+<p><em>Constraints</em>: INTEGER,MIN=0,MAX=1</p>
+<p><em>Required</em>: set to 0 if not provided.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Common.en_electricity_rates">
+<code class="descname">en_electricity_rates</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Common.en_electricity_rates" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Optionally enable/disable electricity_rate [years]</p>
+<p><em>Constraints</em>: INTEGER,MIN=0,MAX=1</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Common.ur_sell_eq_buy">
+<code class="descname">ur_sell_eq_buy</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Common.ur_sell_eq_buy" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Set sell rate equal to buy rate [0/1]</p>
+<p><em>Info</em>: Optional override</p>
+<p><em>Constraints</em>: BOOLEAN</p>
+<p><em>Required</em>: set to 0 if not provided.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="lifetime-group">
+<h2>Lifetime Group<a class="headerlink" href="#lifetime-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Lifetime">
+<em class="property">class </em><code class="descclassname">PySAM.Utilityrate5.Utilityrate5.</code><code class="descname">Lifetime</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Lifetime" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Lifetime.assign">
+<code class="descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Lifetime.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">Lifetime_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Lifetime.export">
+<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Lifetime.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Lifetime.analysis_period">
+<code class="descname">analysis_period</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Lifetime.analysis_period" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Number of years in analysis [years]</p>
+<p><em>Constraints</em>: INTEGER,POSITIVE</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Lifetime.inflation_rate">
+<code class="descname">inflation_rate</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Lifetime.inflation_rate" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Inflation rate [%]</p>
+<p><em>Constraints</em>: MIN=-99</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Lifetime.system_use_lifetime_output">
+<code class="descname">system_use_lifetime_output</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Lifetime.system_use_lifetime_output" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Lifetime hourly system outputs [0/1]</p>
+<p><em>Options</em>: 0=hourly first year,1=hourly lifetime</p>
+<p><em>Constraints</em>: INTEGER,MIN=0,MAX=1</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="systemoutput-group">
+<h2>SystemOutput Group<a class="headerlink" href="#systemoutput-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.Utilityrate5.Utilityrate5.SystemOutput">
+<em class="property">class </em><code class="descclassname">PySAM.Utilityrate5.Utilityrate5.</code><code class="descname">SystemOutput</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.SystemOutput" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.Utilityrate5.Utilityrate5.SystemOutput.assign">
+<code class="descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.SystemOutput.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">SystemOutput_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.Utilityrate5.Utilityrate5.SystemOutput.export">
+<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.SystemOutput.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.SystemOutput.degradation">
+<code class="descname">degradation</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.SystemOutput.degradation" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Annual energy degradation [%]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.SystemOutput.gen">
+<code class="descname">gen</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.SystemOutput.gen" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: System power generated [kW]</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="timeseries-group">
+<h2>TimeSeries Group<a class="headerlink" href="#timeseries-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.Utilityrate5.Utilityrate5.TimeSeries">
+<em class="property">class </em><code class="descclassname">PySAM.Utilityrate5.Utilityrate5.</code><code class="descname">TimeSeries</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.TimeSeries" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.Utilityrate5.Utilityrate5.TimeSeries.assign">
+<code class="descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.TimeSeries.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">TimeSeries_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.Utilityrate5.Utilityrate5.TimeSeries.export">
+<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.TimeSeries.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.TimeSeries.load">
+<code class="descname">load</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.TimeSeries.load" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Electricity load (year 1) [kW]</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="electricload-group">
+<h2>ElectricLoad Group<a class="headerlink" href="#electricload-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.Utilityrate5.Utilityrate5.ElectricLoad">
+<em class="property">class </em><code class="descclassname">PySAM.Utilityrate5.Utilityrate5.</code><code class="descname">ElectricLoad</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.ElectricLoad" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.Utilityrate5.Utilityrate5.ElectricLoad.assign">
+<code class="descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.ElectricLoad.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">ElectricLoad_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.Utilityrate5.Utilityrate5.ElectricLoad.export">
+<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.ElectricLoad.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.ElectricLoad.load_escalation">
+<code class="descname">load_escalation</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.ElectricLoad.load_escalation" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Annual load escalation [%/year]</p>
+<p><em>Required</em>: set to 0 if not provided.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="utilityrateflat-group">
+<h2>UtilityRateFlat Group<a class="headerlink" href="#utilityrateflat-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.Utilityrate5.Utilityrate5.UtilityRateFlat">
+<em class="property">class </em><code class="descclassname">PySAM.Utilityrate5.Utilityrate5.</code><code class="descname">UtilityRateFlat</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.UtilityRateFlat" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.Utilityrate5.Utilityrate5.UtilityRateFlat.assign">
+<code class="descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.UtilityRateFlat.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">UtilityRateFlat_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.Utilityrate5.Utilityrate5.UtilityRateFlat.export">
+<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.UtilityRateFlat.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.UtilityRateFlat.rate_escalation">
+<code class="descname">rate_escalation</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.UtilityRateFlat.rate_escalation" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Annual electricity rate escalation [%/year]</p>
+<p><em>Required</em>: set to 0 if not provided.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.UtilityRateFlat.ur_annual_min_charge">
+<code class="descname">ur_annual_min_charge</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.UtilityRateFlat.ur_annual_min_charge" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Annual minimum charge [$]</p>
+<p><em>Required</em>: set to 0.0 if not provided.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.UtilityRateFlat.ur_en_ts_sell_rate">
+<code class="descname">ur_en_ts_sell_rate</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.UtilityRateFlat.ur_en_ts_sell_rate" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Enable time step sell rates [0/1]</p>
+<p><em>Constraints</em>: BOOLEAN</p>
+<p><em>Required</em>: set to 0 if not provided.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.UtilityRateFlat.ur_metering_option">
+<code class="descname">ur_metering_option</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.UtilityRateFlat.ur_metering_option" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Metering options [0=Single meter with monthly rollover credits in kWh,1=Single meter with monthly rollover credits in $,2=Single meter with no monthly rollover credits (Net Billing),3=Single meter with monthly rollover credits in $ (Net Billing $),4=Two meters with all generation sold and all load purchased]</p>
+<p><em>Info</em>: Net metering monthly excess</p>
+<p><em>Constraints</em>: INTEGER,MIN=0,MAX=4</p>
+<p><em>Required</em>: set to 0 if not provided.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.UtilityRateFlat.ur_monthly_fixed_charge">
+<code class="descname">ur_monthly_fixed_charge</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.UtilityRateFlat.ur_monthly_fixed_charge" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Monthly fixed charge [$]</p>
+<p><em>Required</em>: set to 0.0 if not provided.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.UtilityRateFlat.ur_monthly_min_charge">
+<code class="descname">ur_monthly_min_charge</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.UtilityRateFlat.ur_monthly_min_charge" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Monthly minimum charge [$]</p>
+<p><em>Required</em>: set to 0.0 if not provided.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.UtilityRateFlat.ur_nm_yearend_sell_rate">
+<code class="descname">ur_nm_yearend_sell_rate</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.UtilityRateFlat.ur_nm_yearend_sell_rate" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Year end sell rate [$/kWh]</p>
+<p><em>Required</em>: set to 0.0 if not provided.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.UtilityRateFlat.ur_ts_sell_rate">
+<code class="descname">ur_ts_sell_rate</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.UtilityRateFlat.ur_ts_sell_rate" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Time step sell rates [0/1]</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="utilityrateenergycharge-group">
+<h2>UtilityRateEnergyCharge Group<a class="headerlink" href="#utilityrateenergycharge-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.Utilityrate5.Utilityrate5.UtilityRateEnergyCharge">
+<em class="property">class </em><code class="descclassname">PySAM.Utilityrate5.Utilityrate5.</code><code class="descname">UtilityRateEnergyCharge</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.UtilityRateEnergyCharge" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.Utilityrate5.Utilityrate5.UtilityRateEnergyCharge.assign">
+<code class="descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.UtilityRateEnergyCharge.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">UtilityRateEnergyCharge_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.Utilityrate5.Utilityrate5.UtilityRateEnergyCharge.export">
+<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.UtilityRateEnergyCharge.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.UtilityRateEnergyCharge.ur_ec_sched_weekday">
+<code class="descname">ur_ec_sched_weekday</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.UtilityRateEnergyCharge.ur_ec_sched_weekday" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Energy charge weekday schedule</p>
+<p><em>Info</em>: 12x24</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.UtilityRateEnergyCharge.ur_ec_sched_weekend">
+<code class="descname">ur_ec_sched_weekend</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.UtilityRateEnergyCharge.ur_ec_sched_weekend" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Energy charge weekend schedule</p>
+<p><em>Info</em>: 12x24</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.UtilityRateEnergyCharge.ur_ec_tou_mat">
+<code class="descname">ur_ec_tou_mat</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.UtilityRateEnergyCharge.ur_ec_tou_mat" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Energy rates table</p>
+<p><em>Required</em>: True</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="utilityratedemandcharge-group">
+<h2>UtilityRateDemandCharge Group<a class="headerlink" href="#utilityratedemandcharge-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.Utilityrate5.Utilityrate5.UtilityRateDemandCharge">
+<em class="property">class </em><code class="descclassname">PySAM.Utilityrate5.Utilityrate5.</code><code class="descname">UtilityRateDemandCharge</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.UtilityRateDemandCharge" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.Utilityrate5.Utilityrate5.UtilityRateDemandCharge.assign">
+<code class="descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.UtilityRateDemandCharge.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">UtilityRateDemandCharge_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.Utilityrate5.Utilityrate5.UtilityRateDemandCharge.export">
+<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.UtilityRateDemandCharge.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.UtilityRateDemandCharge.ur_dc_enable">
+<code class="descname">ur_dc_enable</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.UtilityRateDemandCharge.ur_dc_enable" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Enable demand charge [0/1]</p>
+<p><em>Constraints</em>: BOOLEAN</p>
+<p><em>Required</em>: set to 0 if not provided.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.UtilityRateDemandCharge.ur_dc_flat_mat">
+<code class="descname">ur_dc_flat_mat</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.UtilityRateDemandCharge.ur_dc_flat_mat" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Demand rates (flat) table</p>
+<p><em>Required</em>: set to 1 if not provided.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.UtilityRateDemandCharge.ur_dc_sched_weekday">
+<code class="descname">ur_dc_sched_weekday</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.UtilityRateDemandCharge.ur_dc_sched_weekday" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Demand charge weekday schedule</p>
+<p><em>Info</em>: 12x24</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.UtilityRateDemandCharge.ur_dc_sched_weekend">
+<code class="descname">ur_dc_sched_weekend</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.UtilityRateDemandCharge.ur_dc_sched_weekend" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Demand charge weekend schedule</p>
+<p><em>Info</em>: 12x24</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.UtilityRateDemandCharge.ur_dc_tou_mat">
+<code class="descname">ur_dc_tou_mat</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.UtilityRateDemandCharge.ur_dc_tou_mat" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Demand rates (TOU) table</p>
+<p><em>Required</em>: set to 1 if not provided.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="outputs-group">
+<h2>Outputs Group<a class="headerlink" href="#outputs-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs">
+<em class="property">class </em><code class="descclassname">PySAM.Utilityrate5.Utilityrate5.</code><code class="descname">Outputs</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.assign">
+<code class="descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">Outputs_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.export">
+<code class="descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.annual_electric_load">
+<code class="descname">annual_electric_load</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.annual_electric_load" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Electricity load total in each year [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.annual_energy_value">
+<code class="descname">annual_energy_value</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.annual_energy_value" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Energy value in each year [$]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.bill_load">
+<code class="descname">bill_load</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.bill_load" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Bill load (year 1) [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.charge_w_sys_dc_fixed">
+<code class="descname">charge_w_sys_dc_fixed</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.charge_w_sys_dc_fixed" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Demand charge with system (flat) [$]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.charge_w_sys_dc_fixed_ym">
+<code class="descname">charge_w_sys_dc_fixed_ym</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.charge_w_sys_dc_fixed_ym" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Demand charge with system (flat) [$]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.charge_w_sys_dc_tou">
+<code class="descname">charge_w_sys_dc_tou</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.charge_w_sys_dc_tou" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Demand charge with system (TOU) [$]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.charge_w_sys_dc_tou_ym">
+<code class="descname">charge_w_sys_dc_tou_ym</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.charge_w_sys_dc_tou_ym" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Demand charge with system (TOU) [$]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.charge_w_sys_ec">
+<code class="descname">charge_w_sys_ec</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.charge_w_sys_ec" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Energy charge with system [$]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.charge_w_sys_ec_apr_tp">
+<code class="descname">charge_w_sys_ec_apr_tp</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.charge_w_sys_ec_apr_tp" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Energy charge with system Apr [$]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.charge_w_sys_ec_aug_tp">
+<code class="descname">charge_w_sys_ec_aug_tp</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.charge_w_sys_ec_aug_tp" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Energy charge with system Aug [$]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.charge_w_sys_ec_dec_tp">
+<code class="descname">charge_w_sys_ec_dec_tp</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.charge_w_sys_ec_dec_tp" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Energy charge with system Dec [$]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.charge_w_sys_ec_feb_tp">
+<code class="descname">charge_w_sys_ec_feb_tp</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.charge_w_sys_ec_feb_tp" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Energy charge with system Feb [$]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.charge_w_sys_ec_gross_ym">
+<code class="descname">charge_w_sys_ec_gross_ym</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.charge_w_sys_ec_gross_ym" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Energy charge with system before credits [$]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.charge_w_sys_ec_jan_tp">
+<code class="descname">charge_w_sys_ec_jan_tp</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.charge_w_sys_ec_jan_tp" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Energy charge with system Jan [$]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.charge_w_sys_ec_jul_tp">
+<code class="descname">charge_w_sys_ec_jul_tp</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.charge_w_sys_ec_jul_tp" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Energy charge with system Jul [$]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.charge_w_sys_ec_jun_tp">
+<code class="descname">charge_w_sys_ec_jun_tp</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.charge_w_sys_ec_jun_tp" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Energy charge with system Jun [$]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.charge_w_sys_ec_mar_tp">
+<code class="descname">charge_w_sys_ec_mar_tp</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.charge_w_sys_ec_mar_tp" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Energy charge with system Mar [$]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.charge_w_sys_ec_may_tp">
+<code class="descname">charge_w_sys_ec_may_tp</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.charge_w_sys_ec_may_tp" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Energy charge with system May [$]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.charge_w_sys_ec_nov_tp">
+<code class="descname">charge_w_sys_ec_nov_tp</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.charge_w_sys_ec_nov_tp" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Energy charge with system Nov [$]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.charge_w_sys_ec_oct_tp">
+<code class="descname">charge_w_sys_ec_oct_tp</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.charge_w_sys_ec_oct_tp" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Energy charge with system Oct [$]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.charge_w_sys_ec_sep_tp">
+<code class="descname">charge_w_sys_ec_sep_tp</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.charge_w_sys_ec_sep_tp" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Energy charge with system Sep [$]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.charge_w_sys_ec_ym">
+<code class="descname">charge_w_sys_ec_ym</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.charge_w_sys_ec_ym" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Energy charge with system [$]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.charge_w_sys_fixed">
+<code class="descname">charge_w_sys_fixed</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.charge_w_sys_fixed" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Fixed monthly charge with system [$]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.charge_w_sys_fixed_ym">
+<code class="descname">charge_w_sys_fixed_ym</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.charge_w_sys_fixed_ym" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Fixed monthly charge with system [$]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.charge_w_sys_minimum">
+<code class="descname">charge_w_sys_minimum</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.charge_w_sys_minimum" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Minimum charge with system [$]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.charge_w_sys_minimum_ym">
+<code class="descname">charge_w_sys_minimum_ym</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.charge_w_sys_minimum_ym" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Minimum charge with system [$]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.charge_wo_sys_dc_fixed">
+<code class="descname">charge_wo_sys_dc_fixed</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.charge_wo_sys_dc_fixed" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Demand charge without system (flat) [$]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.charge_wo_sys_dc_fixed_ym">
+<code class="descname">charge_wo_sys_dc_fixed_ym</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.charge_wo_sys_dc_fixed_ym" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Demand charge without system (flat) [$]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.charge_wo_sys_dc_tou">
+<code class="descname">charge_wo_sys_dc_tou</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.charge_wo_sys_dc_tou" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Demand charge without system (TOU) [$]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.charge_wo_sys_dc_tou_ym">
+<code class="descname">charge_wo_sys_dc_tou_ym</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.charge_wo_sys_dc_tou_ym" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Demand charge without system (TOU) [$]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.charge_wo_sys_ec">
+<code class="descname">charge_wo_sys_ec</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.charge_wo_sys_ec" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Energy charge without system [$]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.charge_wo_sys_ec_apr_tp">
+<code class="descname">charge_wo_sys_ec_apr_tp</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.charge_wo_sys_ec_apr_tp" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Energy charge without system Apr [$]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.charge_wo_sys_ec_aug_tp">
+<code class="descname">charge_wo_sys_ec_aug_tp</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.charge_wo_sys_ec_aug_tp" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Energy charge without system Aug [$]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.charge_wo_sys_ec_dec_tp">
+<code class="descname">charge_wo_sys_ec_dec_tp</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.charge_wo_sys_ec_dec_tp" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Energy charge without system Dec [$]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.charge_wo_sys_ec_feb_tp">
+<code class="descname">charge_wo_sys_ec_feb_tp</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.charge_wo_sys_ec_feb_tp" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Energy charge without system Feb [$]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.charge_wo_sys_ec_jan_tp">
+<code class="descname">charge_wo_sys_ec_jan_tp</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.charge_wo_sys_ec_jan_tp" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Energy charge without system Jan [$]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.charge_wo_sys_ec_jul_tp">
+<code class="descname">charge_wo_sys_ec_jul_tp</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.charge_wo_sys_ec_jul_tp" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Energy charge without system Jul [$]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.charge_wo_sys_ec_jun_tp">
+<code class="descname">charge_wo_sys_ec_jun_tp</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.charge_wo_sys_ec_jun_tp" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Energy charge without system Jun [$]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.charge_wo_sys_ec_mar_tp">
+<code class="descname">charge_wo_sys_ec_mar_tp</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.charge_wo_sys_ec_mar_tp" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Energy charge without system Mar [$]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.charge_wo_sys_ec_may_tp">
+<code class="descname">charge_wo_sys_ec_may_tp</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.charge_wo_sys_ec_may_tp" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Energy charge without system May [$]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.charge_wo_sys_ec_nov_tp">
+<code class="descname">charge_wo_sys_ec_nov_tp</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.charge_wo_sys_ec_nov_tp" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Energy charge without system Nov [$]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.charge_wo_sys_ec_oct_tp">
+<code class="descname">charge_wo_sys_ec_oct_tp</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.charge_wo_sys_ec_oct_tp" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Energy charge without system Oct [$]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.charge_wo_sys_ec_sep_tp">
+<code class="descname">charge_wo_sys_ec_sep_tp</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.charge_wo_sys_ec_sep_tp" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Energy charge without system Sep [$]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.charge_wo_sys_ec_ym">
+<code class="descname">charge_wo_sys_ec_ym</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.charge_wo_sys_ec_ym" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Energy charge without system [$]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.charge_wo_sys_fixed">
+<code class="descname">charge_wo_sys_fixed</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.charge_wo_sys_fixed" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Fixed monthly charge without system [$]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.charge_wo_sys_fixed_ym">
+<code class="descname">charge_wo_sys_fixed_ym</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.charge_wo_sys_fixed_ym" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Fixed monthly charge without system [$]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.charge_wo_sys_minimum">
+<code class="descname">charge_wo_sys_minimum</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.charge_wo_sys_minimum" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Minimum charge without system [$]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.charge_wo_sys_minimum_ym">
+<code class="descname">charge_wo_sys_minimum_ym</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.charge_wo_sys_minimum_ym" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Minimum charge without system [$]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.elec_cost_with_system">
+<code class="descname">elec_cost_with_system</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.elec_cost_with_system" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Electricity bill with system [$/yr]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.elec_cost_with_system_year1">
+<code class="descname">elec_cost_with_system_year1</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.elec_cost_with_system_year1" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Electricity bill with system (year 1) [$/yr]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.elec_cost_without_system">
+<code class="descname">elec_cost_without_system</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.elec_cost_without_system" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Electricity bill without system [$/yr]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.elec_cost_without_system_year1">
+<code class="descname">elec_cost_without_system_year1</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.elec_cost_without_system_year1" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Electricity bill without system (year 1) [$/yr]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.energy_w_sys_ec_apr_tp">
+<code class="descname">energy_w_sys_ec_apr_tp</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.energy_w_sys_ec_apr_tp" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Electricity usage with system Apr [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.energy_w_sys_ec_aug_tp">
+<code class="descname">energy_w_sys_ec_aug_tp</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.energy_w_sys_ec_aug_tp" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Electricity usage with system Aug [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.energy_w_sys_ec_dec_tp">
+<code class="descname">energy_w_sys_ec_dec_tp</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.energy_w_sys_ec_dec_tp" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Electricity usage with system Dec [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.energy_w_sys_ec_feb_tp">
+<code class="descname">energy_w_sys_ec_feb_tp</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.energy_w_sys_ec_feb_tp" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Electricity usage with system Feb [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.energy_w_sys_ec_jan_tp">
+<code class="descname">energy_w_sys_ec_jan_tp</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.energy_w_sys_ec_jan_tp" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Electricity usage with system Jan [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.energy_w_sys_ec_jul_tp">
+<code class="descname">energy_w_sys_ec_jul_tp</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.energy_w_sys_ec_jul_tp" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Electricity usage with system Jul [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.energy_w_sys_ec_jun_tp">
+<code class="descname">energy_w_sys_ec_jun_tp</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.energy_w_sys_ec_jun_tp" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Electricity usage with system Jun [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.energy_w_sys_ec_mar_tp">
+<code class="descname">energy_w_sys_ec_mar_tp</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.energy_w_sys_ec_mar_tp" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Electricity usage with system Mar [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.energy_w_sys_ec_may_tp">
+<code class="descname">energy_w_sys_ec_may_tp</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.energy_w_sys_ec_may_tp" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Electricity usage with system May [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.energy_w_sys_ec_nov_tp">
+<code class="descname">energy_w_sys_ec_nov_tp</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.energy_w_sys_ec_nov_tp" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Electricity usage with system Nov [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.energy_w_sys_ec_oct_tp">
+<code class="descname">energy_w_sys_ec_oct_tp</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.energy_w_sys_ec_oct_tp" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Electricity usage with system Oct [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.energy_w_sys_ec_sep_tp">
+<code class="descname">energy_w_sys_ec_sep_tp</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.energy_w_sys_ec_sep_tp" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Electricity usage with system Sep [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.energy_wo_sys_ec_apr_tp">
+<code class="descname">energy_wo_sys_ec_apr_tp</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.energy_wo_sys_ec_apr_tp" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Electricity usage without system Apr [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.energy_wo_sys_ec_aug_tp">
+<code class="descname">energy_wo_sys_ec_aug_tp</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.energy_wo_sys_ec_aug_tp" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Electricity usage without system Aug [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.energy_wo_sys_ec_dec_tp">
+<code class="descname">energy_wo_sys_ec_dec_tp</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.energy_wo_sys_ec_dec_tp" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Electricity usage without system Dec [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.energy_wo_sys_ec_feb_tp">
+<code class="descname">energy_wo_sys_ec_feb_tp</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.energy_wo_sys_ec_feb_tp" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Electricity usage without system Feb [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.energy_wo_sys_ec_jan_tp">
+<code class="descname">energy_wo_sys_ec_jan_tp</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.energy_wo_sys_ec_jan_tp" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Electricity usage without system Jan [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.energy_wo_sys_ec_jul_tp">
+<code class="descname">energy_wo_sys_ec_jul_tp</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.energy_wo_sys_ec_jul_tp" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Electricity usage without system Jul [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.energy_wo_sys_ec_jun_tp">
+<code class="descname">energy_wo_sys_ec_jun_tp</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.energy_wo_sys_ec_jun_tp" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Electricity usage without system Jun [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.energy_wo_sys_ec_mar_tp">
+<code class="descname">energy_wo_sys_ec_mar_tp</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.energy_wo_sys_ec_mar_tp" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Electricity usage without system Mar [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.energy_wo_sys_ec_may_tp">
+<code class="descname">energy_wo_sys_ec_may_tp</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.energy_wo_sys_ec_may_tp" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Electricity usage without system May [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.energy_wo_sys_ec_nov_tp">
+<code class="descname">energy_wo_sys_ec_nov_tp</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.energy_wo_sys_ec_nov_tp" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Electricity usage without system Nov [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.energy_wo_sys_ec_oct_tp">
+<code class="descname">energy_wo_sys_ec_oct_tp</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.energy_wo_sys_ec_oct_tp" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Electricity usage without system Oct [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.energy_wo_sys_ec_sep_tp">
+<code class="descname">energy_wo_sys_ec_sep_tp</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.energy_wo_sys_ec_sep_tp" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Electricity usage without system Sep [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.excess_dollars_applied_ym">
+<code class="descname">excess_dollars_applied_ym</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.excess_dollars_applied_ym" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Excess generation $ credit applied [$]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.excess_dollars_earned_ym">
+<code class="descname">excess_dollars_earned_ym</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.excess_dollars_earned_ym" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Excess generation $ credit earned [$]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.excess_kwhs_applied_ym">
+<code class="descname">excess_kwhs_applied_ym</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.excess_kwhs_applied_ym" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Excess generation kWh credit applied [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.excess_kwhs_earned_ym">
+<code class="descname">excess_kwhs_earned_ym</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.excess_kwhs_earned_ym" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Excess generation kWh credit earned [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.lifetime_load">
+<code class="descname">lifetime_load</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.lifetime_load" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Lifetime electricity load [kW]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.monthly_tou_demand_charge_w_sys">
+<code class="descname">monthly_tou_demand_charge_w_sys</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.monthly_tou_demand_charge_w_sys" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Demand peak charge with system [$]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.monthly_tou_demand_charge_wo_sys">
+<code class="descname">monthly_tou_demand_charge_wo_sys</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.monthly_tou_demand_charge_wo_sys" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Demand peak charge without system [$]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.monthly_tou_demand_peak_w_sys">
+<code class="descname">monthly_tou_demand_peak_w_sys</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.monthly_tou_demand_peak_w_sys" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Demand peak with system [kW]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.monthly_tou_demand_peak_wo_sys">
+<code class="descname">monthly_tou_demand_peak_wo_sys</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.monthly_tou_demand_peak_wo_sys" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Demand peak without system [kW]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.savings_year1">
+<code class="descname">savings_year1</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.savings_year1" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Electricity bill savings with system (year 1) [$/yr]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.surplus_w_sys_ec_apr_tp">
+<code class="descname">surplus_w_sys_ec_apr_tp</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.surplus_w_sys_ec_apr_tp" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Electricity exports with system Apr [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.surplus_w_sys_ec_aug_tp">
+<code class="descname">surplus_w_sys_ec_aug_tp</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.surplus_w_sys_ec_aug_tp" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Electricity exports with system Aug [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.surplus_w_sys_ec_dec_tp">
+<code class="descname">surplus_w_sys_ec_dec_tp</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.surplus_w_sys_ec_dec_tp" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Electricity exports with system Dec [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.surplus_w_sys_ec_feb_tp">
+<code class="descname">surplus_w_sys_ec_feb_tp</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.surplus_w_sys_ec_feb_tp" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Electricity exports with system Feb [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.surplus_w_sys_ec_jan_tp">
+<code class="descname">surplus_w_sys_ec_jan_tp</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.surplus_w_sys_ec_jan_tp" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Electricity exports with system Jan [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.surplus_w_sys_ec_jul_tp">
+<code class="descname">surplus_w_sys_ec_jul_tp</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.surplus_w_sys_ec_jul_tp" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Electricity exports with system Jul [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.surplus_w_sys_ec_jun_tp">
+<code class="descname">surplus_w_sys_ec_jun_tp</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.surplus_w_sys_ec_jun_tp" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Electricity exports with system Jun [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.surplus_w_sys_ec_mar_tp">
+<code class="descname">surplus_w_sys_ec_mar_tp</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.surplus_w_sys_ec_mar_tp" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Electricity exports with system Mar [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.surplus_w_sys_ec_may_tp">
+<code class="descname">surplus_w_sys_ec_may_tp</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.surplus_w_sys_ec_may_tp" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Electricity exports with system May [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.surplus_w_sys_ec_nov_tp">
+<code class="descname">surplus_w_sys_ec_nov_tp</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.surplus_w_sys_ec_nov_tp" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Electricity exports with system Nov [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.surplus_w_sys_ec_oct_tp">
+<code class="descname">surplus_w_sys_ec_oct_tp</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.surplus_w_sys_ec_oct_tp" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Electricity exports with system Oct [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.surplus_w_sys_ec_sep_tp">
+<code class="descname">surplus_w_sys_ec_sep_tp</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.surplus_w_sys_ec_sep_tp" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Electricity exports with system Sep [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.utility_bill_w_sys">
+<code class="descname">utility_bill_w_sys</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.utility_bill_w_sys" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Electricity bill with system [$]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.utility_bill_w_sys_ym">
+<code class="descname">utility_bill_w_sys_ym</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.utility_bill_w_sys_ym" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Electricity bill with system [$]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.utility_bill_wo_sys">
+<code class="descname">utility_bill_wo_sys</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.utility_bill_wo_sys" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Electricity bill without system [$]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.utility_bill_wo_sys_ym">
+<code class="descname">utility_bill_wo_sys_ym</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.utility_bill_wo_sys_ym" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence[sequence]</em>: Electricity bill without system [$]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.year1_electric_load">
+<code class="descname">year1_electric_load</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.year1_electric_load" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>float</em>: Electricity load total (year 1) [kWh/yr]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.year1_excess_dollars_applied">
+<code class="descname">year1_excess_dollars_applied</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.year1_excess_dollars_applied" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Excess generation $ credit applied [$/mo]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.year1_excess_dollars_earned">
+<code class="descname">year1_excess_dollars_earned</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.year1_excess_dollars_earned" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Excess generation $ credit earned [$/mo]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.year1_excess_kwhs_applied">
+<code class="descname">year1_excess_kwhs_applied</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.year1_excess_kwhs_applied" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Excess generation kWh credit applied [kWh/mo]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.year1_excess_kwhs_earned">
+<code class="descname">year1_excess_kwhs_earned</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.year1_excess_kwhs_earned" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Excess generation kWh credit earned [kWh/mo]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.year1_hourly_dc_peak_per_period">
+<code class="descname">year1_hourly_dc_peak_per_period</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.year1_hourly_dc_peak_per_period" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Electricity peak from grid per TOU period (year 1 hourly) [kW]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.year1_hourly_dc_tou_schedule">
+<code class="descname">year1_hourly_dc_tou_schedule</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.year1_hourly_dc_tou_schedule" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: TOU period for demand charges (year 1 hourly)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.year1_hourly_dc_with_system">
+<code class="descname">year1_hourly_dc_with_system</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.year1_hourly_dc_with_system" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Demand charge with system (year 1 hourly) [$]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.year1_hourly_dc_without_system">
+<code class="descname">year1_hourly_dc_without_system</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.year1_hourly_dc_without_system" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Demand charge without system (year 1 hourly) [$]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.year1_hourly_e_fromgrid">
+<code class="descname">year1_hourly_e_fromgrid</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.year1_hourly_e_fromgrid" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Electricity from grid (year 1 hourly) [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.year1_hourly_e_tofromgrid">
+<code class="descname">year1_hourly_e_tofromgrid</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.year1_hourly_e_tofromgrid" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Electricity to/from grid (year 1 hourly) [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.year1_hourly_e_togrid">
+<code class="descname">year1_hourly_e_togrid</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.year1_hourly_e_togrid" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Electricity to grid (year 1 hourly) [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.year1_hourly_ec_tou_schedule">
+<code class="descname">year1_hourly_ec_tou_schedule</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.year1_hourly_ec_tou_schedule" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: TOU period for energy charges (year 1 hourly)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.year1_hourly_ec_with_system">
+<code class="descname">year1_hourly_ec_with_system</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.year1_hourly_ec_with_system" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Energy charge with system (year 1 hourly) [$]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.year1_hourly_ec_without_system">
+<code class="descname">year1_hourly_ec_without_system</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.year1_hourly_ec_without_system" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Energy charge without system (year 1 hourly) [$]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.year1_hourly_p_system_to_load">
+<code class="descname">year1_hourly_p_system_to_load</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.year1_hourly_p_system_to_load" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Electricity peak from system to load (year 1 hourly) [kW]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.year1_hourly_p_tofromgrid">
+<code class="descname">year1_hourly_p_tofromgrid</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.year1_hourly_p_tofromgrid" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Electricity to/from grid peak (year 1 hourly) [kW]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.year1_hourly_salespurchases_with_system">
+<code class="descname">year1_hourly_salespurchases_with_system</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.year1_hourly_salespurchases_with_system" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Electricity sales/purchases with system (year 1 hourly) [$]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.year1_hourly_salespurchases_without_system">
+<code class="descname">year1_hourly_salespurchases_without_system</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.year1_hourly_salespurchases_without_system" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Electricity sales/purchases without system (year 1 hourly) [$]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.year1_hourly_system_to_load">
+<code class="descname">year1_hourly_system_to_load</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.year1_hourly_system_to_load" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Electricity from system to load (year 1 hourly) [kWh]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.year1_monthly_cumulative_excess_dollars">
+<code class="descname">year1_monthly_cumulative_excess_dollars</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.year1_monthly_cumulative_excess_dollars" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Excess generation cumulative $ credit earned [$/mo]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.year1_monthly_cumulative_excess_generation">
+<code class="descname">year1_monthly_cumulative_excess_generation</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.year1_monthly_cumulative_excess_generation" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Excess generation cumulative kWh credit earned [kWh/mo]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.year1_monthly_dc_fixed_with_system">
+<code class="descname">year1_monthly_dc_fixed_with_system</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.year1_monthly_dc_fixed_with_system" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Demand charge (flat) with system [$/mo]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.year1_monthly_dc_fixed_without_system">
+<code class="descname">year1_monthly_dc_fixed_without_system</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.year1_monthly_dc_fixed_without_system" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Demand charge (flat) without system [$/mo]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.year1_monthly_dc_tou_with_system">
+<code class="descname">year1_monthly_dc_tou_with_system</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.year1_monthly_dc_tou_with_system" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Demand charge (TOU) with system [$/mo]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.year1_monthly_dc_tou_without_system">
+<code class="descname">year1_monthly_dc_tou_without_system</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.year1_monthly_dc_tou_without_system" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Demand charge (TOU) without system [$/mo]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.year1_monthly_ec_charge_gross_with_system">
+<code class="descname">year1_monthly_ec_charge_gross_with_system</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.year1_monthly_ec_charge_gross_with_system" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Energy charge with system before credits [$/mo]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.year1_monthly_ec_charge_with_system">
+<code class="descname">year1_monthly_ec_charge_with_system</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.year1_monthly_ec_charge_with_system" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Energy charge with system [$/mo]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.year1_monthly_ec_charge_without_system">
+<code class="descname">year1_monthly_ec_charge_without_system</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.year1_monthly_ec_charge_without_system" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Energy charge without system [$/mo]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.year1_monthly_electricity_to_grid">
+<code class="descname">year1_monthly_electricity_to_grid</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.year1_monthly_electricity_to_grid" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Electricity to/from grid [kWh/mo]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.year1_monthly_fixed_with_system">
+<code class="descname">year1_monthly_fixed_with_system</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.year1_monthly_fixed_with_system" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Fixed monthly charge with system [$/mo]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.year1_monthly_fixed_without_system">
+<code class="descname">year1_monthly_fixed_without_system</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.year1_monthly_fixed_without_system" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Fixed monthly charge without system [$/mo]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.year1_monthly_load">
+<code class="descname">year1_monthly_load</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.year1_monthly_load" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Electricity load [kWh/mo]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.year1_monthly_minimum_with_system">
+<code class="descname">year1_monthly_minimum_with_system</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.year1_monthly_minimum_with_system" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Minimum charge with system [$/mo]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.year1_monthly_minimum_without_system">
+<code class="descname">year1_monthly_minimum_without_system</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.year1_monthly_minimum_without_system" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Minimum charge without system [$/mo]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.year1_monthly_peak_w_system">
+<code class="descname">year1_monthly_peak_w_system</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.year1_monthly_peak_w_system" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Demand peak with system [kW/mo]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.year1_monthly_peak_wo_system">
+<code class="descname">year1_monthly_peak_wo_system</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.year1_monthly_peak_wo_system" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Demand peak without system [kW/mo]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.year1_monthly_use_w_system">
+<code class="descname">year1_monthly_use_w_system</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.year1_monthly_use_w_system" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Electricity use with system [kWh/mo]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.year1_monthly_use_wo_system">
+<code class="descname">year1_monthly_use_wo_system</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.year1_monthly_use_wo_system" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Electricity use without system [kWh/mo]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.year1_monthly_utility_bill_w_sys">
+<code class="descname">year1_monthly_utility_bill_w_sys</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.year1_monthly_utility_bill_w_sys" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Electricity bill with system [$/mo]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Utilityrate5.Utilityrate5.Outputs.year1_monthly_utility_bill_wo_sys">
+<code class="descname">year1_monthly_utility_bill_wo_sys</code><a class="headerlink" href="#PySAM.Utilityrate5.Utilityrate5.Outputs.year1_monthly_utility_bill_wo_sys" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>sequence</em>: Electricity bill without system [$/mo]</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">PySAM 1.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, NREL.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
+    </div>
+  </body>
+</html>

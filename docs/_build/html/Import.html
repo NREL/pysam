@@ -1,0 +1,170 @@
+
+
+<!doctype html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>To import a case from the SAM GUI &#8212; PySAM 1.1 documentation</title>
+    <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script type="text/javascript" src="_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Configuration Names and SSC Models" href="Configs.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="Configs.html" title="Configuration Names and SSC Models"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">PySAM 1.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">To import a case from the SAM GUI</a><ul>
+<li><a class="reference internal" href="#export-from-sam-gui">1: Export from SAM GUI</a></li>
+<li><a class="reference internal" href="#create-each-model-by-wrapping-the-data">2: Create each model by wrapping the data</a></li>
+<li><a class="reference internal" href="#make-a-sequence-of-models">3: Make a sequence of models</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="Configs.html"
+                        title="previous chapter">Configuration Names and SSC Models</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/Import.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="to-import-a-case-from-the-sam-gui">
+<h1>To import a case from the SAM GUI<a class="headerlink" href="#to-import-a-case-from-the-sam-gui" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="export-from-sam-gui">
+<h2>1: Export from SAM GUI<a class="headerlink" href="#export-from-sam-gui" title="Permalink to this headline">¶</a></h2>
+<p>On the drop-down menu for the case, click <strong>Generate code</strong> then <strong>JSON for inputs</strong>, and export the case inputs to a JSON file.</p>
+</div>
+<div class="section" id="create-each-model-by-wrapping-the-data">
+<h2>2: Create each model by wrapping the data<a class="headerlink" href="#create-each-model-by-wrapping-the-data" title="Permalink to this headline">¶</a></h2>
+<p>For each SSC compute module required for the simulation (see [Configurations and SSC Compute Modules](#configurations-and-ssc-compute-modules) below), create a new PySSC data table and wrap it with the equivalent PySAM class, releasing memory ownership to the newly created instance. Do not call <code class="docutils literal notranslate"><span class="pre">PySSC.data_free</span></code> on the data passed to the wrap function!</p>
+<p>For example, the following code imports the parameters from a JSON file named _genericsystem_case.json_ that was exported from a Generic System-Single Owner case in SAM, creates a PySSC table for the Generic System and Single Owner SSC compute modules, and then wraps each table in the appropriate PySAM class:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">PySAM.GenericSystem</span> <span class="k">as</span> <span class="nn">GenericSystem</span>
+<span class="kn">import</span> <span class="nn">PySAM.Singleowner</span> <span class="k">as</span> <span class="nn">Singleowner</span>
+<span class="kn">from</span> <span class="nn">PySAM.PySSC</span> <span class="k">import</span> <span class="o">*</span>
+
+<span class="n">ssc</span> <span class="o">=</span> <span class="n">PySSC</span><span class="p">()</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;genericsystem_case.json&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">dic</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="n">gs_dat</span> <span class="o">=</span> <span class="n">dict_to_ssc_table</span><span class="p">(</span><span class="n">dic</span><span class="p">,</span> <span class="s2">&quot;generic_system&quot;</span><span class="p">)</span>
+        <span class="n">so_dat</span> <span class="o">=</span> <span class="n">dict_to_ssc_table</span><span class="p">(</span><span class="n">dic</span><span class="p">,</span> <span class="s2">&quot;singleowner&quot;</span><span class="p">)</span>
+        <span class="n">gs</span> <span class="o">=</span> <span class="n">GenericSystem</span><span class="o">.</span><span class="n">wrap</span><span class="p">(</span><span class="n">gs_dat</span><span class="p">)</span>
+        <span class="n">so</span> <span class="o">=</span> <span class="n">Singleowner</span><span class="o">.</span><span class="n">wrap</span><span class="p">(</span><span class="n">so_dat</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>For each PySAM class, you can export the parameters to separate dictionaries. This allows the data to be loaded later using <code class="docutils literal notranslate"><span class="pre">assign</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">help</span><span class="p">(</span><span class="n">gs</span><span class="o">.</span><span class="n">Plant</span><span class="p">)</span> <span class="c1"># descriptions</span>
+<span class="n">gs_params</span> <span class="o">=</span> <span class="n">gs</span><span class="o">.</span><span class="n">export</span><span class="p">()</span>
+<span class="n">so_params</span> <span class="o">=</span> <span class="n">so</span><span class="o">.</span><span class="n">export</span><span class="p">()</span>
+<span class="o">...</span>
+<span class="n">another_gs</span> <span class="o">=</span> <span class="n">GenericSystem</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+<span class="n">another_gs</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">gs_params</span><span class="p">)</span>
+<span class="n">another_so</span> <span class="o">=</span> <span class="n">Singleowner</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+<span class="n">another_so</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">so_params</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="make-a-sequence-of-models">
+<h2>3: Make a sequence of models<a class="headerlink" href="#make-a-sequence-of-models" title="Permalink to this headline">¶</a></h2>
+<p>Downsteam models require upstream model outputs as inputs. To execute a model, use <code class="docutils literal notranslate"><span class="pre">execute(verbosity)</span></code> where 0 indicates minimal messages and 1 produces log messages. All outputs are available in the Outputs group of a PySAM class.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gs</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+<span class="n">so</span><span class="o">.</span><span class="n">SystemOutput</span><span class="o">.</span><span class="n">gen</span> <span class="o">=</span> <span class="n">gs</span><span class="o">.</span><span class="n">gen</span>
+<span class="o">...</span> <span class="c1"># transfer other variables</span>
+<span class="n">so</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+<span class="n">so</span><span class="o">.</span><span class="n">Outputs</span><span class="o">.</span><span class="n">export</span><span class="p">()</span> <span class="c1"># as dictionary</span>
+</pre></div>
+</div>
+<p>For some compute module input parameters, the SAM graphical user interface (GUI) uses equations to calculate the value of the parameter from special GUI inputs that are not passed to the compute module. Other compute module input parameters are used by more than one compute module in the simulation. In some cases, you may need to write additional code to ensure values for these parameters are correctly assigned. We hope to eliminate the need for this additional code in the future. Until then, you can find the SAM GUI equations in the [runtime/ui folder](<a class="reference external" href="https://github.com/NREL/SAM/tree/develop/deploy/runtime/ui">https://github.com/NREL/SAM/tree/develop/deploy/runtime/ui</a>), and determine compute module inputs from the [SSC source code](<a class="reference external" href="https://github.com/nrel/ssc">https://github.com/nrel/ssc</a>) or using the SDKtool, available as part of the SAM installation as described on the [SAM SDK web page](<a class="reference external" href="https://sam.nrel.gov/sdk">https://sam.nrel.gov/sdk</a>).</p>
+<p>For example, for the Flat Plate PV-Single Owner configuration, the ground coverage ratio (GCR) is used in two ways: It is an input to the Flat Plate PV compute module for self-shading calculations, and also may be used in GUI equations to calculate the land cost component of the total installed cost input to the Single Owner compute module. If your Python code changes the value of <code class="docutils literal notranslate"><span class="pre">Pvsamv1.SystemDesign.gcr</span></code> to <code class="docutils literal notranslate"><span class="pre">x</span></code>, and you are including land cost <code class="docutils literal notranslate"><span class="pre">y</span></code> in $/acre in your analysis, you need code like the following adapted from the GUI equations in _runtime/ui/PV System <a href="#id1"><span class="problematic" id="id2">Design.txt_</span></a> to ensure the change is accounted for in <code class="docutils literal notranslate"><span class="pre">Singleowner.SystemCosts.total_installed_cost</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pv</span><span class="o">.</span><span class="n">SystemDesign</span><span class="o">.</span><span class="n">subarray1_gcr</span> <span class="o">=</span> <span class="n">x</span>
+<span class="n">land_area</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">CECPerformanceModelWithModuleDatabase</span><span class="o">.</span><span class="n">cec_area</span>
+        <span class="o">*</span> <span class="p">(</span><span class="n">pv</span><span class="o">.</span><span class="n">SystemDesign</span><span class="o">.</span><span class="n">subarray1_nstrings</span>
+        <span class="o">*</span> <span class="n">pv</span><span class="o">.</span><span class="n">SystemDesign</span><span class="o">.</span><span class="n">subarray1_modules_per_string</span><span class="p">)</span> <span class="o">/</span> <span class="n">x</span> <span class="o">*</span> <span class="mf">0.0002471</span>  <span class="c1"># m^2 to acres</span>
+
+<span class="c1"># total_installed_cost = total_direct_cost + permitting_total + engr_total +</span>
+<span class="c1">#                       grid_total + landprep_total + sales_tax_total + land_total</span>
+<span class="c1"># y = land cost in $/acre</span>
+<span class="n">so</span><span class="o">.</span><span class="n">SystemCosts</span><span class="o">.</span><span class="n">total_installed_cost</span> <span class="o">=</span> <span class="n">cost_without_land</span> <span class="o">+</span> <span class="n">y</span> <span class="o">*</span> <span class="n">land_area</span>
+</pre></div>
+</div>
+<p>For the same Flat Plate PV-Single Owner configuration, an example of an input that is used by both compute modules is <code class="docutils literal notranslate"><span class="pre">analysis_period</span></code>. It is used by the Single Owner module as the number of years for the cash flow, and by the Flat Plate PV model for battery lifecycle calculations.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="Configs.html" title="Configuration Names and SSC Models"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">PySAM 1.1 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, NREL.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
+    </div>
+  </body>
+</html>
