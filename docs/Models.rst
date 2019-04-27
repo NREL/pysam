@@ -100,7 +100,7 @@ Module Names and Descriptions
 	* - :doc:`modules/TcstroughPhysical`
 	  -  CSP parabolic trough (physical) 
 	  -  CSP parabolic trough model based on heat transfer and thermodynamic principles for power generation
-	* - :doc:`modules/Thermalrates`
+	* - :doc:`modules/Thermalrate`
 	  -  
 	  -  Thermal flat rate structure net revenue calculator
 	* - :doc:`modules/Thirdpartyownership`
@@ -112,6 +112,6 @@ Module Names and Descriptions
 	* - :doc:`modules/Utilityrate5`
 	  -  
 	  -  Retail electricity bill calculator
-	* - :doc:`modules/Windpower 
+	* - :doc:`modules/Windpower`
 	  -  Wind 
 	  -  Wind power system with one or more wind turbines
