@@ -112,9 +112,9 @@
 2. manylinux
 	- docker pull quay.io/pypa/manylinux1_x86_64
 	- docker run -it -v $(pwd):/io quay.io/pypa/manylinux1_x86_64
-	- docker: build libSAM_api.so and libssc.so, copy into ${PYSAMDIR}/data.
-		-- in ssc build directory: `cmake28 /path/to/ssc -DCMAKE_BUILD_TYPE=Release -Dsystem_advisor_model_EXPORT=1`
-		-- repeat for sam build directory
+	- docker: build libSAM_api.so and libssc.so, setting env vars, copy into ${PYSAMDIR}/data.
+		-- in ssc build directory: `cmake28 /io/ssc -DCMAKE_BUILD_TYPE=Release -Dsystem_advisor_model_EXPORT=1`
+		-- repeat for sam build directory: `cmake28 /io/sam/api -DCMAKE_BUILD_TYPE=Release -Dsystem_advisor_model_EXPORT=1`
 	- docker:	`for PYBIN in /opt/python/*/bin; do
     				"${PYBIN}/pip" wheel /io/PySAM -w wheelhouse/
 	  			done`
@@ -146,6 +146,11 @@
 	- .\env\Scripts\activate
 
 2. pip3 install --index-url https://test.pypi.org/simple/ --no-deps PowerPlant
+
+3. Anaconda:
+	- conda config --append channels NREL
+	- conda install -c nrel nrel-pysam
+
 
 ### Using
 1. python3 import PowerPlant

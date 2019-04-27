@@ -12,8 +12,9 @@
 
 import os
 import sys
-sys.path.insert(0, 'PySAM')
+# sys.path.insert(0, 'PySAM')
 
+master_doc = 'index'
 
 # -- Project information -----------------------------------------------------
 

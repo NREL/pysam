@@ -26,7 +26,6 @@ PySAM is available on PyPi and Anaconda (Windows and MacOSX only) as NREL-PySAM.
 To install from PyPi::
 
 	pip install NREL-PySAM
-	pip install NREL-PySAM-stubs
 
 To install from Anaconda, the NREL channel needs to be appended::
 
