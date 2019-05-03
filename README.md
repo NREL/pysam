@@ -1,5 +1,14 @@
 # PySAM Package
 
+https://pysam-docs.readthedocs.io/en/latest/
+
+* Provides a wrapper around the SAM library that groups together the C API functions by technology or financial model into modules.
+* Includes error-checking, explicit input and output definition, and conversion between Python data types.
+* PySAM modules are compatible with PySSC, which is included as a subpackage. PySSC is the original wrapper used by SAM's code generator.
+* Automatically assign default values to input parameters from SAM's default value database.
+* Built-in documentation of models and parameters.
+
+
 ## Requirements
 1. Python 3.5, 64 bit
 2. Operating system:
@@ -7,6 +16,19 @@
 	- Most Linux
 	- Windows 7, x64
 3. CMake 2.8
+
+
+## Installing
+1. PyPi:
+	```
+	pip install NREL-PySAM
+	```
+
+3. Anaconda:
+	```
+	conda config --append channels NREL-PySAM
+	conda install -c nrel nrel-pysam
+	```
 
 
 ## Structure
@@ -30,64 +52,7 @@
 1. Most detailed error message is created by C API layer functions, inside `TranslateError()`, which throws exceptions upon failure of the C function. The error indication should be propagated up the callers, but without changing the message.
 
 
-# Packaging
+## Packaging
 
-## Preparation
+For instructions on packaging PySAM, see the Wiki.
 
-1. Versioning, updating README.md, generating stubs, testing
-
-
-## Binary Distributions
-1. PyPi Wheels
-	- Mac & Windows
-		```
-		python setup.py bdist_wheel
-		```
-
-	- manylinux
-		```
-		docker pull quay.io/pypa/manylinux1_x86_64
-		docker run -it -v $(pwd):/io quay.io/pypa/manylinux1_x86_64
-		```
-		- set SSCDIR, PYSAMDIR env vars
-		- build libSAM_api.so and libssc.so and copy into ${PYSAMDIR}/data.
-		- in ssc build directory
-			```
-			cmake28 /io/ssc -DCMAKE_BUILD_TYPE=Release -Dsystem_advisor_model_EXPORT=1
-			```
-		- repeat for sam build directory
-			```
-			cmake28 /io/sam/api -DCMAKE_BUILD_TYPE=Release -Dsystem_advisor_model_EXPORT=1
-			```
-		- build:
-			```
-			for PYBIN in /opt/python/*/bin; do
-				"${PYBIN}/pip" wheel /io/PySAM -w wheelhouse/
-  			done
-		  	```
-		- note: auditwheels does not work for this package since copies libSAM_api and libssc for each module... so manually rename wheels to `manylinux1`
-
-	- Uploading
-		```
-		twine upload <file>
-		```
-
-2. Anaconda
-	- requires `anaconda-navigator`, `conda-build` packages with `conda install <pkg>`
-		```
-		python setup.py bdist_conda
-		anaconda upload -u nrel <file>
-		```
-
-
-### Installing
-1. PyPi:
-	```
-	pip install NREL-PySAM
-	```
-
-3. Anaconda:
-	```
-	conda config --append channels NREL-PySAM
-	conda install -c nrel nrel-pysam
-	```

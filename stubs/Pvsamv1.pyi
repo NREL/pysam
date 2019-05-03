@@ -1047,6 +1047,7 @@ class Outputs(object):
 	subarray1_axisrot = tuple
 	subarray1_beam_shading_factor = tuple
 	subarray1_celltemp = tuple
+	subarray1_dc_gross = tuple
 	subarray1_dc_voltage = tuple
 	subarray1_dcloss = float
 	subarray1_idealrot = tuple
@@ -1075,6 +1076,7 @@ class Outputs(object):
 	subarray2_axisrot = tuple
 	subarray2_beam_shading_factor = tuple
 	subarray2_celltemp = tuple
+	subarray2_dc_gross = tuple
 	subarray2_dc_voltage = tuple
 	subarray2_dcloss = float
 	subarray2_idealrot = tuple
@@ -1103,6 +1105,7 @@ class Outputs(object):
 	subarray3_axisrot = tuple
 	subarray3_beam_shading_factor = tuple
 	subarray3_celltemp = tuple
+	subarray3_dc_gross = tuple
 	subarray3_dc_voltage = tuple
 	subarray3_dcloss = float
 	subarray3_idealrot = tuple
@@ -1131,6 +1134,7 @@ class Outputs(object):
 	subarray4_axisrot = tuple
 	subarray4_beam_shading_factor = tuple
 	subarray4_celltemp = tuple
+	subarray4_dc_gross = tuple
 	subarray4_dc_voltage = tuple
 	subarray4_dcloss = float
 	subarray4_idealrot = tuple
