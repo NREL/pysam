@@ -1,4 +1,4 @@
-Documentation here: http://nrel-pysam.readthedocs.io
+Documentation here: https://pysam-docs.readthedocs.io/en/latest/
 
 * Provides a wrapper around the SAM library that groups together the C API functions by technology or financial model into modules.
 * Includes error-checking, explicit input and output definition, and conversion between Python data types.
@@ -9,7 +9,7 @@ Documentation here: http://nrel-pysam.readthedocs.io
 
 
 
-## Version 1.2, April 26, 2019 ~ SAM 2018.11.11.3, SSC Version 209
+## Version 1.2.1, April 26, 2019 ~ SAM 2018.11.11.3, SSC Version 209
 * SSC using doubles
 * Tcs_moltensalt RADCOOL group
 * Stub files and .rst files for readthedocs
