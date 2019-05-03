@@ -329,7 +329,7 @@ def test_importing_all(exec):
             i = importlib.import_module(mod_name)
             m = i.default(config)
         except:
-            print(mod, config)
+            print("import error", mod, config)
 
         if not exec:
             continue

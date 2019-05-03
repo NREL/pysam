@@ -9,7 +9,7 @@ random.seed(1)
 def test1(n):
 
     def old_with_import():
-        from sscapi import PySSC
+        from PySAM.PySSC import PySSC
         ssc = PySSC()
         # ssc.module_exec_set_print(0)
         data = ssc.data_create()
@@ -25,7 +25,7 @@ def test1(n):
         ssc.data_free(data);
 
     def new_with_import():
-        import GenericSystem
+        import PySAM.GenericSystem as GenericSystem
         gs = GenericSystem.new()
         a = gs.Plant
         a.spec_mode = 0
@@ -63,9 +63,9 @@ def test1(n):
 #
 
 def test2(n):
-    from sscapi import PySSC
+    from PySAM.PySSC import PySSC
     ssc = PySSC()
-    import GenericSystem
+    import PySAM.GenericSystem as GenericSystem
 
     def old_no_import():
         # ssc.module_exec_set_print(0)
@@ -117,8 +117,8 @@ def test2(n):
 # Testing with random values
 #
 def test3(n):
-    from sscapi import PySSC
-    import GenericSystem
+    from PySAM.PySSC import PySSC
+    import PySAM.GenericSystem as GenericSystem
 
 
     ssc = PySSC()
@@ -174,8 +174,8 @@ def test3(n):
 #
 
 def test4(n):
-    import GenericSystem
-    from sscapi import PySSC
+    import PySAM.GenericSystem as GenericSystem
+    from PySAM.PySSC import PySSC
 
     dict_old = {
         'conv_eff': 34.11800003051758,
@@ -274,7 +274,6 @@ for n in (100, 1000):
 
     test1(n)
     test2(n)
-    test3(n)
     test4(n)
 
     print()
