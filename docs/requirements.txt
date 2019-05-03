@@ -1,1 +1,1 @@
-NREL-PySAM==1.2.1
+NREL-PySAM==1.2.1.1
