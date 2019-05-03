@@ -25,10 +25,13 @@ def copy_defaults():
 
     for filename in os.listdir(defaults_dir):
         with open(defaults_dir+'/'+filename) as f:
+            name = os.path.splitext(filename)
+            if name[1] != 'json':
+                continue
             data = json.load(f)
 
             dic = data[list(data.keys())[0]]
-            with open('data/defaults/'+os.path.splitext(filename)[0]+'.df', "wb") as out:
+            with open('data/defaults/'+ name[0] +'.df', "wb") as out:
                 marshal.dump(dic, out)
 
 
@@ -67,7 +70,7 @@ if sys.platform == 'win32':
     defines = [('__WINDOWS__', '1')]
 
 # generate defaults and copy them into installation
-defaults_dir = os.environ['SAMNTDIR']+"/api_autogen/library/defaults/"
+defaults_dir = os.environ['SAMNTDIR']+"/api/api_autogen/library/defaults/"
 copy_defaults()
 for filename in os.listdir(defaults_dir):
     libfiles.append('defaults/' + os.path.splitext(filename)[0] + '.df')
@@ -94,7 +97,7 @@ setup(
     package_dir={'PySAM': 'data'},
     package_data={
         '': libfiles},
-    install_requires=[ 'NREL-PySAM-stubs' ],
+    install_requires=['NREL-PySAM-stubs'],
     ext_modules=[
         Extension('PySAM.AdjustmentFactors',
                   ['src/AdjustmentFactors.c'],

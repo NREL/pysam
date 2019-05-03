@@ -11717,6 +11717,12 @@ Outputs_get_subarray1_celltemp(OutputsObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_subarray1_dc_gross(OutputsObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvsamv1_Outputs_subarray1_dc_gross_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_subarray1_dc_voltage(OutputsObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Pvsamv1_Outputs_subarray1_dc_voltage_aget, self->data_ptr);
@@ -11882,6 +11888,12 @@ static PyObject *
 Outputs_get_subarray2_celltemp(OutputsObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Pvsamv1_Outputs_subarray2_celltemp_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_subarray2_dc_gross(OutputsObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvsamv1_Outputs_subarray2_dc_gross_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -12053,6 +12065,12 @@ Outputs_get_subarray3_celltemp(OutputsObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_subarray3_dc_gross(OutputsObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvsamv1_Outputs_subarray3_dc_gross_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_subarray3_dc_voltage(OutputsObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Pvsamv1_Outputs_subarray3_dc_voltage_aget, self->data_ptr);
@@ -12218,6 +12236,12 @@ static PyObject *
 Outputs_get_subarray4_celltemp(OutputsObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Pvsamv1_Outputs_subarray4_celltemp_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_subarray4_dc_gross(OutputsObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvsamv1_Outputs_subarray4_dc_gross_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -13028,6 +13052,9 @@ static PyGetSetDef Outputs_getset[] = {
 {"subarray1_celltemp", (getter)Outputs_get_subarray1_celltemp,(setter)0,
 	PyDoc_STR("*sequence*: Subarray 1 Cell temperature [C]"),
  	NULL},
+{"subarray1_dc_gross", (getter)Outputs_get_subarray1_dc_gross,(setter)0,
+	PyDoc_STR("*sequence*: Subarray 1 DC power gross [kW]"),
+ 	NULL},
 {"subarray1_dc_voltage", (getter)Outputs_get_subarray1_dc_voltage,(setter)0,
 	PyDoc_STR("*sequence*: Subarray 1 Operating DC voltage [V]"),
  	NULL},
@@ -13111,6 +13138,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"subarray2_celltemp", (getter)Outputs_get_subarray2_celltemp,(setter)0,
 	PyDoc_STR("*sequence*: Subarray 2 Cell temperature [C]"),
+ 	NULL},
+{"subarray2_dc_gross", (getter)Outputs_get_subarray2_dc_gross,(setter)0,
+	PyDoc_STR("*sequence*: Subarray 2 DC power gross [kW]"),
  	NULL},
 {"subarray2_dc_voltage", (getter)Outputs_get_subarray2_dc_voltage,(setter)0,
 	PyDoc_STR("*sequence*: Subarray 2 Operating DC voltage [V]"),
@@ -13196,6 +13226,9 @@ static PyGetSetDef Outputs_getset[] = {
 {"subarray3_celltemp", (getter)Outputs_get_subarray3_celltemp,(setter)0,
 	PyDoc_STR("*sequence*: Subarray 3 Cell temperature [C]"),
  	NULL},
+{"subarray3_dc_gross", (getter)Outputs_get_subarray3_dc_gross,(setter)0,
+	PyDoc_STR("*sequence*: Subarray 3 DC power gross [kW]"),
+ 	NULL},
 {"subarray3_dc_voltage", (getter)Outputs_get_subarray3_dc_voltage,(setter)0,
 	PyDoc_STR("*sequence*: Subarray 3 Operating DC voltage [V]"),
  	NULL},
@@ -13279,6 +13312,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"subarray4_celltemp", (getter)Outputs_get_subarray4_celltemp,(setter)0,
 	PyDoc_STR("*sequence*: Subarray 4 Cell temperature [C]"),
+ 	NULL},
+{"subarray4_dc_gross", (getter)Outputs_get_subarray4_dc_gross,(setter)0,
+	PyDoc_STR("*sequence*: Subarray 4 DC power gross [kW]"),
  	NULL},
 {"subarray4_dc_voltage", (getter)Outputs_get_subarray4_dc_voltage,(setter)0,
 	PyDoc_STR("*sequence*: Subarray 4 Operating DC voltage [V]"),
