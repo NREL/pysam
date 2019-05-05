@@ -34,7 +34,7 @@ https://pysam-docs.readthedocs.io/en/latest/
 ## Usage Examples
 - [Demo](https://github.com/NREL/pysam/blob/master/demo.py)
 - [Importing a SAM case](https://nrel-pysam.readthedocs.io/en/latest/Import.html)
-- [Basic functionality](https://github.com/NREL/pysam/blob/master/test.py)
+- [Basic functionality](https://github.com/NREL/pysam/blob/master/tests/test_pysam_all.py)
 
 
 ## Structure
