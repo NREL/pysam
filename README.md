@@ -31,6 +31,12 @@ https://pysam-docs.readthedocs.io/en/latest/
 	```
 
 
+## Usage Examples
+- [Demo](https://github.com/NREL/pysam/blob/master/demo.py)
+- [Importing a SAM case](https://nrel-pysam.readthedocs.io/en/latest/Import.html)
+- [Basic functionality](https://github.com/NREL/pysam/blob/master/tests/test_pysam_all.py)
+
+
 ## Structure
 
 1. Python User Script (Python)
@@ -52,7 +58,6 @@ https://pysam-docs.readthedocs.io/en/latest/
 1. Most detailed error message is created by C API layer functions, inside `TranslateError()`, which throws exceptions upon failure of the C function. The error indication should be propagated up the callers, but without changing the message.
 
 
-## Packaging
+## Building, Packaging & Distribution
 
-For instructions on packaging PySAM, see the Wiki.
-
+[Instructions on Wiki](https://github.com/NREL/pysam/wiki/Building,-Packaging-and-Distributing)
