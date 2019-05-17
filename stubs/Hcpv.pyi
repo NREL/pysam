@@ -105,21 +105,6 @@ class HCPVArray(object):
 	azaltsf = tuple
 
 
-class AdjustmentFactors(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> Dict[Dict]
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-	constant = float
-	hourly = tuple
-	periods = tuple
-
-
 class Outputs(object):
 	def assign(self): 
 		pass
@@ -190,7 +175,6 @@ class Hcpv(object):
 	HCPVModule = HCPVModule
 	InverterCECDatabase = InverterCECDatabase
 	HCPVArray = HCPVArray
-	AdjustmentFactors = AdjustmentFactors
 	Outputs = Outputs
 
 

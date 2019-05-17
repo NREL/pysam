@@ -1,4 +1,4 @@
-class Location and Resource(object):
+class LocationAndResource(object):
 	def assign(self): 
 		pass
 
@@ -12,7 +12,7 @@ class Location and Resource(object):
 	solar_resource_file = str
 
 
-class Time of Delivery Factors(object):
+class TimeOfDeliveryFactors(object):
 	def assign(self): 
 		pass
 
@@ -37,7 +37,7 @@ class Time of Delivery Factors(object):
 	ppa_multiplier_model = float
 
 
-class Heliostat Field(object):
+class HeliostatField(object):
 	def assign(self): 
 		pass
 
@@ -93,7 +93,7 @@ class Heliostat Field(object):
 	water_usage_per_wash = float
 
 
-class System Design(object):
+class SystemDesign(object):
 	def assign(self): 
 		pass
 
@@ -114,7 +114,7 @@ class System Design(object):
 	tshours = float
 
 
-class Tower and Receiver(object):
+class TowerAndReceiver(object):
 	def assign(self): 
 		pass
 
@@ -152,7 +152,7 @@ class Tower and Receiver(object):
 	th_tube = float
 
 
-class System Costs(object):
+class SystemCosts(object):
 	def assign(self): 
 		pass
 
@@ -186,7 +186,7 @@ class System Costs(object):
 	tower_fixed_cost = float
 
 
-class Financial Parameters(object):
+class FinancialParameters(object):
 	def assign(self): 
 		pass
 
@@ -219,7 +219,7 @@ class Financial Parameters(object):
 	sales_tax_rate = float
 
 
-class Thermal Storage(object):
+class ThermalStorage(object):
 	def assign(self): 
 		pass
 
@@ -284,7 +284,7 @@ class RADCOOL(object):
 	u_ctes_tank = float
 
 
-class Power Cycle(object):
+class PowerCycle(object):
 	def assign(self): 
 		pass
 
@@ -303,7 +303,7 @@ class Power Cycle(object):
 	startup_time = float
 
 
-class Rankine Cycle(object):
+class RankineCycle(object):
 	def assign(self): 
 		pass
 
@@ -326,7 +326,7 @@ class Rankine Cycle(object):
 	tech_type = float
 
 
-class System Control(object):
+class SystemControl(object):
 	def assign(self): 
 		pass
 
@@ -382,7 +382,7 @@ class System Control(object):
 	wlim_series = tuple
 
 
-class User Defined Power Cycle(object):
+class UserDefinedPowerCycle(object):
 	def assign(self): 
 		pass
 
@@ -407,7 +407,7 @@ class User Defined Power Cycle(object):
 	ud_m_dot_water_cool_des = float
 
 
-class SCO2 Cycle(object):
+class SCO2Cycle(object):
 	def assign(self): 
 		pass
 
@@ -447,24 +447,6 @@ class SCO2 Cycle(object):
 	sco2ud_m_dot_htf_high = float
 	sco2ud_m_dot_htf_ind_od = tuple
 	sco2ud_m_dot_htf_low = float
-
-
-class AdjustmentFactors(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> Dict[Dict]
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-	constant = float
-	hourly = tuple
-	periods = tuple
-	sf_constant = float
-	sf_hourly = tuple
-	sf_periods = tuple
 
 
 class Outputs(object):
@@ -647,21 +629,20 @@ class TcsmoltenSalt(object):
 	def __init__(self, *args, **kwargs):
 		pass
 
-	Location and Resource = Location and Resource
-	Time of Delivery Factors = Time of Delivery Factors
-	Heliostat Field = Heliostat Field
-	System Design = System Design
-	Tower and Receiver = Tower and Receiver
-	System Costs = System Costs
-	Financial Parameters = Financial Parameters
-	Thermal Storage = Thermal Storage
+	LocationAndResource = LocationAndResource
+	TimeOfDeliveryFactors = TimeOfDeliveryFactors
+	HeliostatField = HeliostatField
+	SystemDesign = SystemDesign
+	TowerAndReceiver = TowerAndReceiver
+	SystemCosts = SystemCosts
+	FinancialParameters = FinancialParameters
+	ThermalStorage = ThermalStorage
 	RADCOOL = RADCOOL
-	Power Cycle = Power Cycle
-	Rankine Cycle = Rankine Cycle
-	System Control = System Control
-	User Defined Power Cycle = User Defined Power Cycle
-	SCO2 Cycle = SCO2 Cycle
-	AdjustmentFactors = AdjustmentFactors
+	PowerCycle = PowerCycle
+	RankineCycle = RankineCycle
+	SystemControl = SystemControl
+	UserDefinedPowerCycle = UserDefinedPowerCycle
+	SCO2Cycle = SCO2Cycle
 	Outputs = Outputs
 
 

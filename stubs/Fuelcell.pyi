@@ -41,7 +41,7 @@ class Load(object):
 	load = tuple
 
 
-class Fuel Cell(object):
+class FuelCell(object):
 	def assign(self): 
 		pass
 
@@ -128,7 +128,7 @@ class Fuelcell(object):
 	Common = Common
 	Lifetime = Lifetime
 	Load = Load
-	Fuel Cell = Fuel Cell
+	FuelCell = FuelCell
 	Outputs = Outputs
 
 

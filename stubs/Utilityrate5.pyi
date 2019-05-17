@@ -28,7 +28,7 @@ class Lifetime(object):
 	system_use_lifetime_output = float
 
 
-class System Output(object):
+class SystemOutput(object):
 	def assign(self): 
 		pass
 
@@ -42,7 +42,7 @@ class System Output(object):
 	gen = tuple
 
 
-class Time Series(object):
+class TimeSeries(object):
 	def assign(self): 
 		pass
 
@@ -68,7 +68,7 @@ class ElectricLoad(object):
 	load_escalation = tuple
 
 
-class UtilityRate-Flat(object):
+class UtilityRateFlat(object):
 	def assign(self): 
 		pass
 
@@ -88,7 +88,7 @@ class UtilityRate-Flat(object):
 	ur_ts_sell_rate = tuple
 
 
-class UtilityRate-EnergyCharge(object):
+class UtilityRateEnergyCharge(object):
 	def assign(self): 
 		pass
 
@@ -103,7 +103,7 @@ class UtilityRate-EnergyCharge(object):
 	ur_ec_tou_mat = tuple
 
 
-class UtilityRate-DemandCharge(object):
+class UtilityRateDemandCharge(object):
 	def assign(self): 
 		pass
 
@@ -293,12 +293,12 @@ class Utilityrate5(object):
 
 	Common = Common
 	Lifetime = Lifetime
-	System Output = System Output
-	Time Series = Time Series
+	SystemOutput = SystemOutput
+	TimeSeries = TimeSeries
 	ElectricLoad = ElectricLoad
-	UtilityRate-Flat = UtilityRate-Flat
-	UtilityRate-EnergyCharge = UtilityRate-EnergyCharge
-	UtilityRate-DemandCharge = UtilityRate-DemandCharge
+	UtilityRateFlat = UtilityRateFlat
+	UtilityRateEnergyCharge = UtilityRateEnergyCharge
+	UtilityRateDemandCharge = UtilityRateDemandCharge
 	Outputs = Outputs
 
 

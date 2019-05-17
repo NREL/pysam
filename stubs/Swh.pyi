@@ -60,21 +60,6 @@ class SWH(object):
 	use_custom_set = float
 
 
-class AdjustmentFactors(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> Dict[Dict]
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-	constant = float
-	hourly = tuple
-	periods = tuple
-
-
 class Outputs(object):
 	def assign(self): 
 		pass
@@ -140,7 +125,6 @@ class Swh(object):
 
 	Weather = Weather
 	SWH = SWH
-	AdjustmentFactors = AdjustmentFactors
 	Outputs = Outputs
 
 

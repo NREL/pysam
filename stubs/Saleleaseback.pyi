@@ -1,4 +1,4 @@
-class Financial Parameters(object):
+class FinancialParameters(object):
 	def assign(self): 
 		pass
 
@@ -21,7 +21,7 @@ class Financial Parameters(object):
 	system_heat_rate = float
 
 
-class System Costs(object):
+class SystemCosts(object):
 	def assign(self): 
 		pass
 
@@ -62,7 +62,7 @@ class System Costs(object):
 	om_replacement_cost_escal = float
 
 
-class Tax Credit Incentives(object):
+class TaxCreditIncentives(object):
 	def assign(self): 
 		pass
 
@@ -94,7 +94,7 @@ class Tax Credit Incentives(object):
 	ptc_sta_term = float
 
 
-class Payment Incentives(object):
+class PaymentIncentives(object):
 	def assign(self): 
 		pass
 
@@ -194,7 +194,7 @@ class Payment Incentives(object):
 	pbi_uti_term = float
 
 
-class System Output(object):
+class SystemOutput(object):
 	def assign(self): 
 		pass
 
@@ -287,7 +287,7 @@ class DHF(object):
 	total_installed_cost = float
 
 
-class Time of Delivery(object):
+class TimeOfDelivery(object):
 	def assign(self): 
 		pass
 
@@ -312,7 +312,7 @@ class Time of Delivery(object):
 	ppa_multiplier_model = float
 
 
-class Reserve Accounts(object):
+class ReserveAccounts(object):
 	def assign(self): 
 		pass
 
@@ -330,7 +330,7 @@ class Reserve Accounts(object):
 	equip3_reserve_freq = float
 
 
-class Other Capital Costs(object):
+class OtherCapitalCosts(object):
 	def assign(self): 
 		pass
 
@@ -932,15 +932,15 @@ class Saleleaseback(object):
 	def __init__(self, *args, **kwargs):
 		pass
 
-	Financial Parameters = Financial Parameters
-	System Costs = System Costs
-	Tax Credit Incentives = Tax Credit Incentives
-	Payment Incentives = Payment Incentives
-	System Output = System Output
+	FinancialParameters = FinancialParameters
+	SystemCosts = SystemCosts
+	TaxCreditIncentives = TaxCreditIncentives
+	PaymentIncentives = PaymentIncentives
+	SystemOutput = SystemOutput
 	DHF = DHF
-	Time of Delivery = Time of Delivery
-	Reserve Accounts = Reserve Accounts
-	Other Capital Costs = Other Capital Costs
+	TimeOfDelivery = TimeOfDelivery
+	ReserveAccounts = ReserveAccounts
+	OtherCapitalCosts = OtherCapitalCosts
 	Battery = Battery
 	Outputs = Outputs
 

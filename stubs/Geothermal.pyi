@@ -93,21 +93,6 @@ class Weather(object):
 	file_name = str
 
 
-class AdjustmentFactors(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> Dict[Dict]
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-	constant = float
-	hourly = tuple
-	periods = tuple
-
-
 class Outputs(object):
 	def assign(self): 
 		pass
@@ -187,7 +172,6 @@ class Geothermal(object):
 
 	GeoHourly = GeoHourly
 	Weather = Weather
-	AdjustmentFactors = AdjustmentFactors
 	Outputs = Outputs
 
 

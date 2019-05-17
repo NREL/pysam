@@ -14,7 +14,7 @@ class Weather(object):
 	track_mode = float
 
 
-class linear fresnelr(object):
+class LinearFresnelr(object):
 	def assign(self): 
 		pass
 
@@ -27,7 +27,7 @@ class linear fresnelr(object):
 	system_capacity = float
 
 
-class tou_translator(object):
+class TouTranslator(object):
 	def assign(self): 
 		pass
 
@@ -41,7 +41,7 @@ class tou_translator(object):
 	weekend_schedule = tuple
 
 
-class solarfield(object):
+class Solarfield(object):
 	def assign(self): 
 		pass
 
@@ -148,7 +148,7 @@ class solarfield(object):
 	x_b_des = float
 
 
-class heliostat(object):
+class Heliostat(object):
 	def assign(self): 
 		pass
 
@@ -162,7 +162,7 @@ class heliostat(object):
 	csp_lf_sf_water_per_wash = float
 
 
-class powerblock(object):
+class Powerblock(object):
 	def assign(self): 
 		pass
 
@@ -203,21 +203,6 @@ class powerblock(object):
 	standby_control = float
 	startup_frac = float
 	startup_time = float
-
-
-class AdjustmentFactors(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> Dict[Dict]
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-	constant = float
-	hourly = tuple
-	periods = tuple
 
 
 class Outputs(object):
@@ -308,12 +293,11 @@ class TcslinearFresnel(object):
 		pass
 
 	Weather = Weather
-	linear fresnelr = linear fresnelr
-	tou_translator = tou_translator
-	solarfield = solarfield
-	heliostat = heliostat
-	powerblock = powerblock
-	AdjustmentFactors = AdjustmentFactors
+	LinearFresnelr = LinearFresnelr
+	TouTranslator = TouTranslator
+	Solarfield = Solarfield
+	Heliostat = Heliostat
+	Powerblock = Powerblock
 	Outputs = Outputs
 
 

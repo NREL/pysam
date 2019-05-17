@@ -72,7 +72,7 @@ class AnnualOutput(object):
 	system_use_lifetime_output = float
 
 
-class Cash Flow(object):
+class CashFlow(object):
 	def assign(self): 
 		pass
 
@@ -88,7 +88,7 @@ class Cash Flow(object):
 	ppa_price = float
 
 
-class Electricity Cost(object):
+class ElectricityCost(object):
 	def assign(self): 
 		pass
 
@@ -147,8 +147,8 @@ class Thirdpartyownership(object):
 	FinancialThirdPartyOwnership = FinancialThirdPartyOwnership
 	Common = Common
 	AnnualOutput = AnnualOutput
-	Cash Flow = Cash Flow
-	Electricity Cost = Electricity Cost
+	CashFlow = CashFlow
+	ElectricityCost = ElectricityCost
 	Outputs = Outputs
 
 

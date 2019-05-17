@@ -14,7 +14,7 @@ class Weather(object):
 	track_mode = float
 
 
-class trough(object):
+class Trough(object):
 	def assign(self): 
 		pass
 
@@ -27,7 +27,7 @@ class trough(object):
 	system_capacity = float
 
 
-class solar_field(object):
+class SolarField(object):
 	def assign(self): 
 		pass
 
@@ -148,7 +148,7 @@ class solar_field(object):
 	water_usage_per_wash = float
 
 
-class controller(object):
+class Controller(object):
 	def assign(self): 
 		pass
 
@@ -216,7 +216,7 @@ class controller(object):
 	vol_tank = float
 
 
-class tou_translator(object):
+class TouTranslator(object):
 	def assign(self): 
 		pass
 
@@ -230,7 +230,7 @@ class tou_translator(object):
 	weekend_schedule = tuple
 
 
-class powerblock(object):
+class Powerblock(object):
 	def assign(self): 
 		pass
 
@@ -259,7 +259,7 @@ class powerblock(object):
 	tech_type = float
 
 
-class user_defined_PC(object):
+class UserDefinedPC(object):
 	def assign(self): 
 		pass
 
@@ -284,7 +284,7 @@ class user_defined_PC(object):
 	ud_m_dot_water_cool_des = float
 
 
-class enet(object):
+class Enet(object):
 	def assign(self): 
 		pass
 
@@ -296,21 +296,6 @@ class enet(object):
 
 	eta_lhv = float
 	eta_tes_htr = float
-
-
-class AdjustmentFactors(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> Dict[Dict]
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-	constant = float
-	hourly = tuple
-	periods = tuple
 
 
 class Outputs(object):
@@ -461,14 +446,13 @@ class TcstroughPhysical(object):
 		pass
 
 	Weather = Weather
-	trough = trough
-	solar_field = solar_field
-	controller = controller
-	tou_translator = tou_translator
-	powerblock = powerblock
-	user_defined_PC = user_defined_PC
-	enet = enet
-	AdjustmentFactors = AdjustmentFactors
+	Trough = Trough
+	SolarField = SolarField
+	Controller = Controller
+	TouTranslator = TouTranslator
+	Powerblock = Powerblock
+	UserDefinedPC = UserDefinedPC
+	Enet = Enet
 	Outputs = Outputs
 
 

@@ -32,24 +32,6 @@ class Lifetime(object):
 	system_use_lifetime_output = float
 
 
-class AdjustmentFactors(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> Dict[Dict]
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-	constant = float
-	dc_constant = float
-	dc_hourly = tuple
-	dc_periods = tuple
-	hourly = tuple
-	periods = tuple
-
-
 class Outputs(object):
 	def assign(self): 
 		pass
@@ -88,7 +70,6 @@ class GenericSystem(object):
 
 	Plant = Plant
 	Lifetime = Lifetime
-	AdjustmentFactors = AdjustmentFactors
 	Outputs = Outputs
 
 

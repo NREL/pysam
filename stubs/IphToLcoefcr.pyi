@@ -1,4 +1,4 @@
-class IPH LCOH(object):
+class IPHLCOH(object):
 	def assign(self): 
 		pass
 
@@ -12,7 +12,7 @@ class IPH LCOH(object):
 	electricity_rate = float
 
 
-class Simple LCOE(object):
+class SimpleLCOE(object):
 	def assign(self): 
 		pass
 
@@ -53,8 +53,8 @@ class IphToLcoefcr(object):
 	def __init__(self, *args, **kwargs):
 		pass
 
-	IPH LCOH = IPH LCOH
-	Simple LCOE = Simple LCOE
+	IPHLCOH = IPHLCOH
+	SimpleLCOE = SimpleLCOE
 	Outputs = Outputs
 
 

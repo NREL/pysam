@@ -14,7 +14,7 @@ class Weather(object):
 	track_mode = float
 
 
-class solar_field(object):
+class SolarField(object):
 	def assign(self): 
 		pass
 
@@ -131,7 +131,7 @@ class solar_field(object):
 	wind_stow_speed = float
 
 
-class controller(object):
+class Controller(object):
 	def assign(self): 
 		pass
 
@@ -146,7 +146,7 @@ class controller(object):
 	q_pb_design = float
 
 
-class system_design(object):
+class SystemDesign(object):
 	def assign(self): 
 		pass
 
@@ -177,7 +177,7 @@ class TES(object):
 	u_tank = float
 
 
-class TES_2tank(object):
+class TES2tank(object):
 	def assign(self): 
 		pass
 
@@ -192,7 +192,7 @@ class TES_2tank(object):
 	hot_tank_max_heat = float
 
 
-class powerblock(object):
+class Powerblock(object):
 	def assign(self): 
 		pass
 
@@ -203,21 +203,6 @@ class powerblock(object):
 		pass
 
 	L_rnr_pb = float
-
-
-class AdjustmentFactors(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> Dict[Dict]
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-	constant = float
-	hourly = tuple
-	periods = tuple
 
 
 class Outputs(object):
@@ -313,13 +298,12 @@ class TroughPhysicalProcessHeat(object):
 		pass
 
 	Weather = Weather
-	solar_field = solar_field
-	controller = controller
-	system_design = system_design
+	SolarField = SolarField
+	Controller = Controller
+	SystemDesign = SystemDesign
 	TES = TES
-	TES_2tank = TES_2tank
-	powerblock = powerblock
-	AdjustmentFactors = AdjustmentFactors
+	TES2tank = TES2tank
+	Powerblock = Powerblock
 	Outputs = Outputs
 
 

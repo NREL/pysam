@@ -11,7 +11,7 @@ class Weather(object):
 	file_name = str
 
 
-class dish(object):
+class Dish(object):
 	def assign(self): 
 		pass
 
@@ -24,7 +24,7 @@ class dish(object):
 	system_capacity = float
 
 
-class type295(object):
+class Type295(object):
 	def assign(self): 
 		pass
 
@@ -53,7 +53,7 @@ class type295(object):
 	wind_stow_speed = float
 
 
-class type296(object):
+class Type296(object):
 	def assign(self): 
 		pass
 
@@ -80,7 +80,7 @@ class type296(object):
 	transmittance_cover = float
 
 
-class type297(object):
+class Type297(object):
 	def assign(self): 
 		pass
 
@@ -102,7 +102,7 @@ class type297(object):
 	engine_speed = float
 
 
-class type298(object):
+class Type298(object):
 	def assign(self): 
 		pass
 
@@ -147,21 +147,6 @@ class type298(object):
 	tower_m_dot_water_test = float
 	tower_mode = float
 	tower_pipe_material = float
-
-
-class AdjustmentFactors(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> Dict[Dict]
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-	constant = float
-	hourly = tuple
-	periods = tuple
 
 
 class Outputs(object):
@@ -252,12 +237,11 @@ class Tcsdish(object):
 		pass
 
 	Weather = Weather
-	dish = dish
-	type295 = type295
-	type296 = type296
-	type297 = type297
-	type298 = type298
-	AdjustmentFactors = AdjustmentFactors
+	Dish = Dish
+	Type295 = Type295
+	Type296 = Type296
+	Type297 = Type297
+	Type298 = Type298
 	Outputs = Outputs
 
 

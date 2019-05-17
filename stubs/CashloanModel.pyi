@@ -1,4 +1,4 @@
-class Financial Parameters(object):
+class FinancialParameters(object):
 	def assign(self): 
 		pass
 
@@ -24,7 +24,7 @@ class Financial Parameters(object):
 	system_heat_rate = float
 
 
-class System Costs(object):
+class SystemCosts(object):
 	def assign(self): 
 		pass
 
@@ -83,7 +83,7 @@ class Depreciation(object):
 	depr_sta_type = float
 
 
-class Tax Credit Incentives(object):
+class TaxCreditIncentives(object):
 	def assign(self): 
 		pass
 
@@ -115,7 +115,7 @@ class Tax Credit Incentives(object):
 	ptc_sta_term = float
 
 
-class Payment Incentives(object):
+class PaymentIncentives(object):
 	def assign(self): 
 		pass
 
@@ -233,7 +233,7 @@ class Battery(object):
 	en_batt = float
 
 
-class Fuel Cell(object):
+class FuelCell(object):
 	def assign(self): 
 		pass
 
@@ -269,7 +269,7 @@ class Cashloan(object):
 	total_installed_cost = float
 
 
-class System Output(object):
+class SystemOutput(object):
 	def assign(self): 
 		pass
 
@@ -437,15 +437,15 @@ class CashloanModel(object):
 	def __init__(self, *args, **kwargs):
 		pass
 
-	Financial Parameters = Financial Parameters
-	System Costs = System Costs
+	FinancialParameters = FinancialParameters
+	SystemCosts = SystemCosts
 	Depreciation = Depreciation
-	Tax Credit Incentives = Tax Credit Incentives
-	Payment Incentives = Payment Incentives
+	TaxCreditIncentives = TaxCreditIncentives
+	PaymentIncentives = PaymentIncentives
 	Battery = Battery
-	Fuel Cell = Fuel Cell
+	FuelCell = FuelCell
 	Cashloan = Cashloan
-	System Output = System Output
+	SystemOutput = SystemOutput
 	Lifetime = Lifetime
 	ThirdPartyOwnership = ThirdPartyOwnership
 	Outputs = Outputs

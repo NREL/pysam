@@ -1,4 +1,4 @@
-class Simple LCOE(object):
+class SimpleLCOE(object):
 	def assign(self): 
 		pass
 
@@ -44,7 +44,7 @@ class Lcoefcr(object):
 	def __init__(self, *args, **kwargs):
 		pass
 
-	Simple LCOE = Simple LCOE
+	SimpleLCOE = SimpleLCOE
 	Outputs = Outputs
 
 

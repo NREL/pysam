@@ -14,7 +14,7 @@ class Weather(object):
 	track_mode = float
 
 
-class trough(object):
+class Trough(object):
 	def assign(self): 
 		pass
 
@@ -27,7 +27,7 @@ class trough(object):
 	system_capacity = float
 
 
-class tou_translator(object):
+class TouTranslator(object):
 	def assign(self): 
 		pass
 
@@ -41,7 +41,7 @@ class tou_translator(object):
 	weekend_schedule = tuple
 
 
-class solarfield(object):
+class Solarfield(object):
 	def assign(self): 
 		pass
 
@@ -71,7 +71,7 @@ class solarfield(object):
 	i_SfTi = float
 
 
-class sca(object):
+class Sca(object):
 	def assign(self): 
 		pass
 
@@ -95,7 +95,7 @@ class sca(object):
 	TrkTwstErr = float
 
 
-class hce(object):
+class Hce(object):
 	def assign(self): 
 		pass
 
@@ -124,7 +124,7 @@ class hce(object):
 	RefMirrAper = tuple
 
 
-class pwrb(object):
+class Pwrb(object):
 	def assign(self): 
 		pass
 
@@ -160,7 +160,7 @@ class pwrb(object):
 	TurbOutG = float
 
 
-class tes(object):
+class Tes(object):
 	def assign(self): 
 		pass
 
@@ -182,7 +182,7 @@ class tes(object):
 	TurTesOutAdj = float
 
 
-class parasitic(object):
+class Parasitic(object):
 	def assign(self): 
 		pass
 
@@ -222,21 +222,6 @@ class parasitic(object):
 	PbFixPar = float
 	SfPar = float
 	SfParPF = float
-
-
-class AdjustmentFactors(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> Dict[Dict]
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-	constant = float
-	hourly = tuple
-	periods = tuple
 
 
 class Outputs(object):
@@ -336,15 +321,14 @@ class TcstroughEmpirical(object):
 		pass
 
 	Weather = Weather
-	trough = trough
-	tou_translator = tou_translator
-	solarfield = solarfield
-	sca = sca
-	hce = hce
-	pwrb = pwrb
-	tes = tes
-	parasitic = parasitic
-	AdjustmentFactors = AdjustmentFactors
+	Trough = Trough
+	TouTranslator = TouTranslator
+	Solarfield = Solarfield
+	Sca = Sca
+	Hce = Hce
+	Pwrb = Pwrb
+	Tes = Tes
+	Parasitic = Parasitic
 	Outputs = Outputs
 
 

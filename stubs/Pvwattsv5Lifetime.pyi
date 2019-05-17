@@ -76,7 +76,7 @@ class PVWatts(object):
 	tilt = float
 
 
-class battwatts(object):
+class Battwatts(object):
 	def assign(self): 
 		pass
 
@@ -87,21 +87,6 @@ class battwatts(object):
 		pass
 
 	batt_simple_enable = float
-
-
-class AdjustmentFactors(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> Dict[Dict]
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-	constant = float
-	hourly = tuple
-	periods = tuple
 
 
 class Outputs(object):
@@ -171,8 +156,7 @@ class Pvwattsv5Lifetime(object):
 	LifetimePV = LifetimePV
 	Weather = Weather
 	PVWatts = PVWatts
-	battwatts = battwatts
-	AdjustmentFactors = AdjustmentFactors
+	Battwatts = Battwatts
 	Outputs = Outputs
 
 

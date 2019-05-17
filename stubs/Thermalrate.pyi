@@ -1,4 +1,4 @@
-class Thermal Rate(object):
+class ThermalRate(object):
 	def assign(self): 
 		pass
 
@@ -71,7 +71,7 @@ class Thermalrate(object):
 	def __init__(self, *args, **kwargs):
 		pass
 
-	Thermal Rate = Thermal Rate
+	ThermalRate = ThermalRate
 	Lifetime = Lifetime
 	Outputs = Outputs
 

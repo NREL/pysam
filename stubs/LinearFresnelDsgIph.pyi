@@ -11,7 +11,7 @@ class Weather(object):
 	file_name = str
 
 
-class solarfield(object):
+class Solarfield(object):
 	def assign(self): 
 		pass
 
@@ -84,7 +84,7 @@ class solarfield(object):
 	x_b_des = float
 
 
-class powerblock(object):
+class Powerblock(object):
 	def assign(self): 
 		pass
 
@@ -98,7 +98,7 @@ class powerblock(object):
 	T_hot = float
 
 
-class heliostat(object):
+class Heliostat(object):
 	def assign(self): 
 		pass
 
@@ -112,7 +112,7 @@ class heliostat(object):
 	csp_lf_sf_water_per_wash = float
 
 
-class heat_sink(object):
+class HeatSink(object):
 	def assign(self): 
 		pass
 
@@ -123,21 +123,6 @@ class heat_sink(object):
 		pass
 
 	heat_sink_dP_frac = float
-
-
-class AdjustmentFactors(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> Dict[Dict]
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-	constant = float
-	hourly = tuple
-	periods = tuple
 
 
 class Outputs(object):
@@ -214,11 +199,10 @@ class LinearFresnelDsgIph(object):
 		pass
 
 	Weather = Weather
-	solarfield = solarfield
-	powerblock = powerblock
-	heliostat = heliostat
-	heat_sink = heat_sink
-	AdjustmentFactors = AdjustmentFactors
+	Solarfield = Solarfield
+	Powerblock = Powerblock
+	Heliostat = Heliostat
+	HeatSink = HeatSink
 	Outputs = Outputs
 
 

@@ -11,7 +11,7 @@ class Weather(object):
 	solar_resource_file = str
 
 
-class molten salt tower(object):
+class MoltenSaltTower(object):
 	def assign(self): 
 		pass
 
@@ -24,7 +24,7 @@ class molten salt tower(object):
 	system_capacity = float
 
 
-class heliostat(object):
+class Heliostat(object):
 	def assign(self): 
 		pass
 
@@ -115,7 +115,7 @@ class heliostat(object):
 	v_wind_max = float
 
 
-class receiver(object):
+class Receiver(object):
 	def assign(self): 
 		pass
 
@@ -150,7 +150,7 @@ class receiver(object):
 	th_tube = float
 
 
-class powerblock(object):
+class Powerblock(object):
 	def assign(self): 
 		pass
 
@@ -167,7 +167,7 @@ class powerblock(object):
 	q_pb_design = float
 
 
-class parasitics(object):
+class Parasitics(object):
 	def assign(self): 
 		pass
 
@@ -191,24 +191,6 @@ class parasitics(object):
 	piping_length_const = float
 	piping_length_mult = float
 	piping_loss = float
-
-
-class AdjustmentFactors(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> Dict[Dict]
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-	constant = float
-	hourly = tuple
-	periods = tuple
-	sf_constant = float
-	sf_hourly = tuple
-	sf_periods = tuple
 
 
 class Outputs(object):
@@ -285,12 +267,11 @@ class Tcsiscc(object):
 		pass
 
 	Weather = Weather
-	molten salt tower = molten salt tower
-	heliostat = heliostat
-	receiver = receiver
-	powerblock = powerblock
-	parasitics = parasitics
-	AdjustmentFactors = AdjustmentFactors
+	MoltenSaltTower = MoltenSaltTower
+	Heliostat = Heliostat
+	Receiver = Receiver
+	Powerblock = Powerblock
+	Parasitics = Parasitics
 	Outputs = Outputs
 
 

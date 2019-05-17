@@ -1,4 +1,4 @@
-class Solar Resource(object):
+class SolarResource(object):
 	def assign(self): 
 		pass
 
@@ -81,7 +81,7 @@ class Lifetime(object):
 	system_use_lifetime_output = float
 
 
-class System Design(object):
+class SystemDesign(object):
 	def assign(self): 
 		pass
 
@@ -217,7 +217,7 @@ class Module(object):
 	module_model = float
 
 
-class Simple Efficiency Module Model(object):
+class SimpleEfficiencyModuleModel(object):
 	def assign(self): 
 		pass
 
@@ -253,7 +253,7 @@ class Simple Efficiency Module Model(object):
 	spe_voc = float
 
 
-class CEC Performance Model with Module Database(object):
+class CECPerformanceModelWithModuleDatabase(object):
 	def assign(self): 
 		pass
 
@@ -297,7 +297,7 @@ class CEC Performance Model with Module Database(object):
 	cec_v_oc_ref = float
 
 
-class CEC Performance Model with User Entered Specifications(object):
+class CECPerformanceModelWithUserEnteredSpecifications(object):
 	def assign(self): 
 		pass
 
@@ -326,7 +326,7 @@ class CEC Performance Model with User Entered Specifications(object):
 	6par_voc = float
 
 
-class Sandia PV Array Performance Model with Module Database(object):
+class SandiaPVArrayPerformanceModelWithModuleDatabase(object):
 	def assign(self): 
 		pass
 
@@ -380,7 +380,7 @@ class Sandia PV Array Performance Model with Module Database(object):
 	snl_voco = float
 
 
-class IEC61853 Single Diode Model(object):
+class IEC61853SingleDiodeModel(object):
 	def assign(self): 
 		pass
 
@@ -418,7 +418,7 @@ class IEC61853 Single Diode Model(object):
 	sd11par_tnoct = float
 
 
-class Mermoud Lejeune Single Diode Model(object):
+class MermoudLejeuneSingleDiodeModel(object):
 	def assign(self): 
 		pass
 
@@ -506,7 +506,7 @@ class Inverter(object):
 	mppt_low_inverter = float
 
 
-class Inverter CEC Database(object):
+class InverterCECDatabase(object):
 	def assign(self): 
 		pass
 
@@ -529,7 +529,7 @@ class Inverter CEC Database(object):
 	inv_tdc_cec_db = tuple
 
 
-class Inverter CEC Coefficient Generator(object):
+class InverterCECCoefficientGenerator(object):
 	def assign(self): 
 		pass
 
@@ -552,7 +552,7 @@ class Inverter CEC Coefficient Generator(object):
 	inv_tdc_cec_cg = tuple
 
 
-class Inverter Datasheet(object):
+class InverterDatasheet(object):
 	def assign(self): 
 		pass
 
@@ -571,7 +571,7 @@ class Inverter Datasheet(object):
 	inv_tdc_ds = tuple
 
 
-class Inverter Part Load Curve(object):
+class InverterPartLoadCurve(object):
 	def assign(self): 
 		pass
 
@@ -591,7 +591,7 @@ class Inverter Part Load Curve(object):
 	inv_tdc_plc = tuple
 
 
-class Inverter Mermoud Lejeune Model(object):
+class InverterMermoudLejeuneModel(object):
 	def assign(self): 
 		pass
 
@@ -818,24 +818,6 @@ class EnergyMarket(object):
 	dispatch_sched_weekend = tuple
 	dispatch_tod_factors = tuple
 	ppa_price_input = float
-
-
-class AdjustmentFactors(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> Dict[Dict]
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-	constant = float
-	dc_constant = float
-	dc_hourly = tuple
-	dc_periods = tuple
-	hourly = tuple
-	periods = tuple
 
 
 class Outputs(object):
@@ -1188,25 +1170,25 @@ class Pvsamv1(object):
 	def __init__(self, *args, **kwargs):
 		pass
 
-	Solar Resource = Solar Resource
+	SolarResource = SolarResource
 	Losses = Losses
 	Lifetime = Lifetime
-	System Design = System Design
+	SystemDesign = SystemDesign
 	Shading = Shading
 	Layout = Layout
 	Module = Module
-	Simple Efficiency Module Model = Simple Efficiency Module Model
-	CEC Performance Model with Module Database = CEC Performance Model with Module Database
-	CEC Performance Model with User Entered Specifications = CEC Performance Model with User Entered Specifications
-	Sandia PV Array Performance Model with Module Database = Sandia PV Array Performance Model with Module Database
-	IEC61853 Single Diode Model = IEC61853 Single Diode Model
-	Mermoud Lejeune Single Diode Model = Mermoud Lejeune Single Diode Model
+	SimpleEfficiencyModuleModel = SimpleEfficiencyModuleModel
+	CECPerformanceModelWithModuleDatabase = CECPerformanceModelWithModuleDatabase
+	CECPerformanceModelWithUserEnteredSpecifications = CECPerformanceModelWithUserEnteredSpecifications
+	SandiaPVArrayPerformanceModelWithModuleDatabase = SandiaPVArrayPerformanceModelWithModuleDatabase
+	IEC61853SingleDiodeModel = IEC61853SingleDiodeModel
+	MermoudLejeuneSingleDiodeModel = MermoudLejeuneSingleDiodeModel
 	Inverter = Inverter
-	Inverter CEC Database = Inverter CEC Database
-	Inverter CEC Coefficient Generator = Inverter CEC Coefficient Generator
-	Inverter Datasheet = Inverter Datasheet
-	Inverter Part Load Curve = Inverter Part Load Curve
-	Inverter Mermoud Lejeune Model = Inverter Mermoud Lejeune Model
+	InverterCECDatabase = InverterCECDatabase
+	InverterCECCoefficientGenerator = InverterCECCoefficientGenerator
+	InverterDatasheet = InverterDatasheet
+	InverterPartLoadCurve = InverterPartLoadCurve
+	InverterMermoudLejeuneModel = InverterMermoudLejeuneModel
 	Battery = Battery
 	Simulation = Simulation
 	Common = Common
@@ -1214,7 +1196,6 @@ class Pvsamv1(object):
 	FuelCell = FuelCell
 	ElectricityRate = ElectricityRate
 	EnergyMarket = EnergyMarket
-	AdjustmentFactors = AdjustmentFactors
 	Outputs = Outputs
 
 

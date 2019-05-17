@@ -14,7 +14,7 @@ class Weather(object):
 	track_mode = float
 
 
-class generic solar(object):
+class GenericSolar(object):
 	def assign(self): 
 		pass
 
@@ -27,7 +27,7 @@ class generic solar(object):
 	system_capacity = float
 
 
-class tou_translator(object):
+class TouTranslator(object):
 	def assign(self): 
 		pass
 
@@ -41,7 +41,7 @@ class tou_translator(object):
 	weekend_schedule = tuple
 
 
-class type_260(object):
+class Type260(object):
 	def assign(self): 
 		pass
 
@@ -105,24 +105,6 @@ class type_260(object):
 	twb = float
 	vwind = float
 	w_des = float
-
-
-class AdjustmentFactors(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> Dict[Dict]
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-	constant = float
-	hourly = tuple
-	periods = tuple
-	sf_constant = float
-	sf_hourly = tuple
-	sf_periods = tuple
 
 
 class Outputs(object):
@@ -224,10 +206,9 @@ class TcsgenericSolar(object):
 		pass
 
 	Weather = Weather
-	generic solar = generic solar
-	tou_translator = tou_translator
-	type_260 = type_260
-	AdjustmentFactors = AdjustmentFactors
+	GenericSolar = GenericSolar
+	TouTranslator = TouTranslator
+	Type260 = Type260
 	Outputs = Outputs
 
 

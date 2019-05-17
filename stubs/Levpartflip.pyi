@@ -1,4 +1,4 @@
-class Financial Parameters(object):
+class FinancialParameters(object):
 	def assign(self): 
 		pass
 
@@ -21,7 +21,7 @@ class Financial Parameters(object):
 	system_heat_rate = float
 
 
-class System Costs(object):
+class SystemCosts(object):
 	def assign(self): 
 		pass
 
@@ -63,7 +63,7 @@ class System Costs(object):
 	total_installed_cost = float
 
 
-class Tax Credit Incentives(object):
+class TaxCreditIncentives(object):
 	def assign(self): 
 		pass
 
@@ -95,7 +95,7 @@ class Tax Credit Incentives(object):
 	ptc_sta_term = float
 
 
-class Payment Incentives(object):
+class PaymentIncentives(object):
 	def assign(self): 
 		pass
 
@@ -195,7 +195,7 @@ class Payment Incentives(object):
 	pbi_uti_term = float
 
 
-class System Output(object):
+class SystemOutput(object):
 	def assign(self): 
 		pass
 
@@ -239,7 +239,7 @@ class Recapitalization(object):
 	system_use_recapitalization = float
 
 
-class Time of Delivery(object):
+class TimeOfDelivery(object):
 	def assign(self): 
 		pass
 
@@ -265,7 +265,7 @@ class Time of Delivery(object):
 	system_use_lifetime_output = float
 
 
-class Reserve Accounts(object):
+class ReserveAccounts(object):
 	def assign(self): 
 		pass
 
@@ -338,7 +338,7 @@ class Depreciation(object):
 	equip_reserve_depr_sta = float
 
 
-class Salvage Value(object):
+class SalvageValue(object):
 	def assign(self): 
 		pass
 
@@ -351,7 +351,7 @@ class Salvage Value(object):
 	salvage_percentage = float
 
 
-class Solution Mode(object):
+class SolutionMode(object):
 	def assign(self): 
 		pass
 
@@ -370,7 +370,7 @@ class Solution Mode(object):
 	ppa_soln_tolerance = float
 
 
-class Construction Financing(object):
+class ConstructionFinancing(object):
 	def assign(self): 
 		pass
 
@@ -383,7 +383,7 @@ class Construction Financing(object):
 	construction_financing_cost = float
 
 
-class Project Term Debt(object):
+class ProjectTermDebt(object):
 	def assign(self): 
 		pass
 
@@ -402,7 +402,7 @@ class Project Term Debt(object):
 	term_tenor = float
 
 
-class Other Capital Costs(object):
+class OtherCapitalCosts(object):
 	def assign(self): 
 		pass
 
@@ -421,7 +421,7 @@ class Other Capital Costs(object):
 	months_working_reserve = float
 
 
-class IRR Targets(object):
+class IRRTargets(object):
 	def assign(self): 
 		pass
 
@@ -440,7 +440,7 @@ class IRR Targets(object):
 	tax_investor_preflip_tax_percent = float
 
 
-class Cash Incentives(object):
+class CashIncentives(object):
 	def assign(self): 
 		pass
 
@@ -1051,23 +1051,23 @@ class Levpartflip(object):
 	def __init__(self, *args, **kwargs):
 		pass
 
-	Financial Parameters = Financial Parameters
-	System Costs = System Costs
-	Tax Credit Incentives = Tax Credit Incentives
-	Payment Incentives = Payment Incentives
-	System Output = System Output
+	FinancialParameters = FinancialParameters
+	SystemCosts = SystemCosts
+	TaxCreditIncentives = TaxCreditIncentives
+	PaymentIncentives = PaymentIncentives
+	SystemOutput = SystemOutput
 	Moratorium = Moratorium
 	Recapitalization = Recapitalization
-	Time of Delivery = Time of Delivery
-	Reserve Accounts = Reserve Accounts
+	TimeOfDelivery = TimeOfDelivery
+	ReserveAccounts = ReserveAccounts
 	Depreciation = Depreciation
-	Salvage Value = Salvage Value
-	Solution Mode = Solution Mode
-	Construction Financing = Construction Financing
-	Project Term Debt = Project Term Debt
-	Other Capital Costs = Other Capital Costs
-	IRR Targets = IRR Targets
-	Cash Incentives = Cash Incentives
+	SalvageValue = SalvageValue
+	SolutionMode = SolutionMode
+	ConstructionFinancing = ConstructionFinancing
+	ProjectTermDebt = ProjectTermDebt
+	OtherCapitalCosts = OtherCapitalCosts
+	IRRTargets = IRRTargets
+	CashIncentives = CashIncentives
 	Battery = Battery
 	Outputs = Outputs
 

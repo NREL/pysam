@@ -1,4 +1,4 @@
-class Wind Resource File(object):
+class WindResourceFile(object):
 	def assign(self): 
 		pass
 
@@ -12,7 +12,7 @@ class Wind Resource File(object):
 	wind_resource_filename = str
 
 
-class Wind Turbine(object):
+class WindTurbine(object):
 	def assign(self): 
 		pass
 
@@ -30,7 +30,7 @@ class Wind Turbine(object):
 	wind_turbine_rotor_diameter = float
 
 
-class Wind Farm(object):
+class WindFarm(object):
 	def assign(self): 
 		pass
 
@@ -66,7 +66,7 @@ class WindPower(object):
 	wind_resource_model_choice = float
 
 
-class Wind Speed Weibull Distribution(object):
+class WindSpeedWeibullDistribution(object):
 	def assign(self): 
 		pass
 
@@ -79,21 +79,6 @@ class Wind Speed Weibull Distribution(object):
 	weibull_k_factor = float
 	weibull_reference_height = float
 	weibull_wind_speed = float
-
-
-class AdjustmentFactors(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> Dict[Dict]
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-	constant = float
-	hourly = tuple
-	periods = tuple
 
 
 class Outputs(object):
@@ -135,12 +120,11 @@ class Windpower(object):
 	def __init__(self, *args, **kwargs):
 		pass
 
-	Wind Resource File = Wind Resource File
-	Wind Turbine = Wind Turbine
-	Wind Farm = Wind Farm
+	WindResourceFile = WindResourceFile
+	WindTurbine = WindTurbine
+	WindFarm = WindFarm
 	WindPower = WindPower
-	Wind Speed Weibull Distribution = Wind Speed Weibull Distribution
-	AdjustmentFactors = AdjustmentFactors
+	WindSpeedWeibullDistribution = WindSpeedWeibullDistribution
 	Outputs = Outputs
 
 

@@ -1,4 +1,4 @@
-class Load Profile Estimator(object):
+class LoadProfileEstimator(object):
 	def assign(self): 
 		pass
 
@@ -61,7 +61,7 @@ class Belpe(object):
 	def __init__(self, *args, **kwargs):
 		pass
 
-	Load Profile Estimator = Load Profile Estimator
+	LoadProfileEstimator = LoadProfileEstimator
 	Outputs = Outputs
 
 

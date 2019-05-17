@@ -1,4 +1,4 @@
-class Location and Resource(object):
+class LocationAndResource(object):
 	def assign(self): 
 		pass
 
@@ -12,7 +12,7 @@ class Location and Resource(object):
 	solar_resource_file = str
 
 
-class System Design(object):
+class SystemDesign(object):
 	def assign(self): 
 		pass
 
@@ -36,21 +36,6 @@ class System Design(object):
 	shading_timestep = tuple
 	system_capacity = float
 	tilt = float
-
-
-class AdjustmentFactors(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> Dict[Dict]
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-	constant = float
-	hourly = tuple
-	periods = tuple
 
 
 class Outputs(object):
@@ -115,9 +100,8 @@ class Pvwattsv5(object):
 	def __init__(self, *args, **kwargs):
 		pass
 
-	Location and Resource = Location and Resource
-	System Design = System Design
-	AdjustmentFactors = AdjustmentFactors
+	LocationAndResource = LocationAndResource
+	SystemDesign = SystemDesign
 	Outputs = Outputs
 
 

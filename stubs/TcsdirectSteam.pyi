@@ -11,7 +11,7 @@ class Weather(object):
 	solar_resource_file = str
 
 
-class direct steam tower(object):
+class DirectSteamTower(object):
 	def assign(self): 
 		pass
 
@@ -24,7 +24,7 @@ class direct steam tower(object):
 	system_capacity = float
 
 
-class tou_translator(object):
+class TouTranslator(object):
 	def assign(self): 
 		pass
 
@@ -38,7 +38,7 @@ class tou_translator(object):
 	weekend_schedule = tuple
 
 
-class heliostat(object):
+class Heliostat(object):
 	def assign(self): 
 		pass
 
@@ -130,7 +130,7 @@ class heliostat(object):
 	water_usage_per_wash = float
 
 
-class receiver(object):
+class Receiver(object):
 	def assign(self): 
 		pass
 
@@ -144,7 +144,7 @@ class receiver(object):
 	THT = float
 
 
-class dsg_controller(object):
+class DsgController(object):
 	def assign(self): 
 		pass
 
@@ -209,7 +209,7 @@ class dsg_controller(object):
 	x_b_target = float
 
 
-class powerblock(object):
+class Powerblock(object):
 	def assign(self): 
 		pass
 
@@ -240,7 +240,7 @@ class powerblock(object):
 	startup_time = float
 
 
-class parasitics(object):
+class Parasitics(object):
 	def assign(self): 
 		pass
 
@@ -267,24 +267,6 @@ class parasitics(object):
 	pb_fixed_par = float
 	piping_length_add = float
 	piping_length_mult = float
-
-
-class AdjustmentFactors(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> Dict[Dict]
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-	constant = float
-	hourly = tuple
-	periods = tuple
-	sf_constant = float
-	sf_hourly = tuple
-	sf_periods = tuple
 
 
 class Outputs(object):
@@ -390,14 +372,13 @@ class TcsdirectSteam(object):
 		pass
 
 	Weather = Weather
-	direct steam tower = direct steam tower
-	tou_translator = tou_translator
-	heliostat = heliostat
-	receiver = receiver
-	dsg_controller = dsg_controller
-	powerblock = powerblock
-	parasitics = parasitics
-	AdjustmentFactors = AdjustmentFactors
+	DirectSteamTower = DirectSteamTower
+	TouTranslator = TouTranslator
+	Heliostat = Heliostat
+	Receiver = Receiver
+	DsgController = DsgController
+	Powerblock = Powerblock
+	Parasitics = Parasitics
 	Outputs = Outputs
 
 

@@ -1,4 +1,4 @@
-class biopower(object):
+class Biopower(object):
 	def assign(self): 
 		pass
 
@@ -108,21 +108,6 @@ class biopower(object):
 	system_capacity = float
 
 
-class AdjustmentFactors(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> Dict[Dict]
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-	constant = float
-	hourly = tuple
-	periods = tuple
-
-
 class Outputs(object):
 	def assign(self): 
 		pass
@@ -230,8 +215,7 @@ class Biomass(object):
 	def __init__(self, *args, **kwargs):
 		pass
 
-	biopower = biopower
-	AdjustmentFactors = AdjustmentFactors
+	Biopower = Biopower
 	Outputs = Outputs
 
 
