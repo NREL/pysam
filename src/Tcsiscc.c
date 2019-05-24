@@ -6,10 +6,9 @@
 #include "PySAM_utils.h"
 
 
-
-	/*
-	 * Weather Group
-	 */ 
+/*
+ * Weather Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -130,9 +129,9 @@ static PyTypeObject Weather_Type = {
 };
 
 
-	/*
-	 * MoltenSaltTower Group
-	 */ 
+/*
+ * MoltenSaltTower Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -253,9 +252,9 @@ static PyTypeObject MoltenSaltTower_Type = {
 };
 
 
-	/*
-	 * Heliostat Group
-	 */ 
+/*
+ * Heliostat Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -1546,9 +1545,9 @@ static PyTypeObject Heliostat_Type = {
 };
 
 
-	/*
-	 * Receiver Group
-	 */ 
+/*
+ * Receiver Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -1999,9 +1998,9 @@ static PyTypeObject Receiver_Type = {
 };
 
 
-	/*
-	 * Powerblock Group
-	 */ 
+/*
+ * Powerblock Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -2182,9 +2181,9 @@ static PyTypeObject Powerblock_Type = {
 };
 
 
-	/*
-	 * Parasitics Group
-	 */ 
+/*
+ * Parasitics Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -2500,9 +2499,9 @@ static PyTypeObject Parasitics_Type = {
 };
 
 
-	/*
-	 * Outputs Group
-	 */ 
+/*
+ * Outputs Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -3023,8 +3022,6 @@ typedef struct {
 } TcsisccObject;
 
 static PyTypeObject Tcsiscc_Type;
-
-#define TcsisccObject_Check(v)      (Py_TYPE(v) == &Tcsiscc_Type)
 
 static TcsisccObject *
 newTcsisccObject(void* data_ptr)

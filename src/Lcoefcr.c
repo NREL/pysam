@@ -6,10 +6,9 @@
 #include "PySAM_utils.h"
 
 
-
-	/*
-	 * SimpleLCOE Group
-	 */ 
+/*
+ * SimpleLCOE Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -190,9 +189,9 @@ static PyTypeObject SimpleLCOE_Type = {
 };
 
 
-	/*
-	 * Outputs Group
-	 */ 
+/*
+ * Outputs Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -317,8 +316,6 @@ typedef struct {
 } LcoefcrObject;
 
 static PyTypeObject Lcoefcr_Type;
-
-#define LcoefcrObject_Check(v)      (Py_TYPE(v) == &Lcoefcr_Type)
 
 static LcoefcrObject *
 newLcoefcrObject(void* data_ptr)

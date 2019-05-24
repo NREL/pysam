@@ -6,10 +6,9 @@
 #include "PySAM_utils.h"
 
 
-
-	/*
-	 * Weather Group
-	 */ 
+/*
+ * Weather Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -175,9 +174,9 @@ static PyTypeObject Weather_Type = {
 };
 
 
-	/*
-	 * LinearFresnelr Group
-	 */ 
+/*
+ * LinearFresnelr Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -298,9 +297,9 @@ static PyTypeObject LinearFresnelr_Type = {
 };
 
 
-	/*
-	 * TouTranslator Group
-	 */ 
+/*
+ * TouTranslator Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -436,9 +435,9 @@ static PyTypeObject TouTranslator_Type = {
 };
 
 
-	/*
-	 * Solarfield Group
-	 */ 
+/*
+ * Solarfield Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -1969,9 +1968,9 @@ static PyTypeObject Solarfield_Type = {
 };
 
 
-	/*
-	 * Heliostat Group
-	 */ 
+/*
+ * Heliostat Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -2107,9 +2106,9 @@ static PyTypeObject Heliostat_Type = {
 };
 
 
-	/*
-	 * Powerblock Group
-	 */ 
+/*
+ * Powerblock Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -2680,9 +2679,9 @@ static PyTypeObject Powerblock_Type = {
 };
 
 
-	/*
-	 * Outputs Group
-	 */ 
+/*
+ * Outputs Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -3329,8 +3328,6 @@ typedef struct {
 } TcslinearFresnelObject;
 
 static PyTypeObject TcslinearFresnel_Type;
-
-#define TcslinearFresnelObject_Check(v)      (Py_TYPE(v) == &TcslinearFresnel_Type)
 
 static TcslinearFresnelObject *
 newTcslinearFresnelObject(void* data_ptr)

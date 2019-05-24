@@ -8,6 +8,7 @@ class LocationAndResource(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	solar_resource_data = dict
 	solar_resource_file = str
 
@@ -21,6 +22,7 @@ class TimeOfDeliveryFactors(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	dispatch_factor1 = float
 	dispatch_factor2 = float
@@ -46,6 +48,7 @@ class HeliostatField(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	A_sf_in = float
 	N_hel = float
@@ -103,6 +106,7 @@ class SystemDesign(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	P_ref = float
 	T_htf_cold_des = float
 	T_htf_hot_des = float
@@ -123,6 +127,7 @@ class TowerAndReceiver(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	D_rec = float
 	Flow_type = float
@@ -162,6 +167,7 @@ class SystemCosts(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	bop_spec_cost = float
 	contingency_rate = float
 	cost_sf_fixed = float
@@ -196,6 +202,7 @@ class FinancialParameters(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	const_per_interest_rate1 = float
 	const_per_interest_rate2 = float
 	const_per_interest_rate3 = float
@@ -229,6 +236,7 @@ class ThermalStorage(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	cold_tank_Thtr = float
 	cold_tank_max_heat = float
 	csp_pt_tes_init_hot_htf_percent = float
@@ -249,6 +257,7 @@ class RADCOOL(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	D_rad_tubes = float
 	L_rad = float
@@ -294,6 +303,7 @@ class PowerCycle(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	cycle_cutoff_frac = float
 	cycle_max_frac = float
 	pb_pump_coef = float
@@ -312,6 +322,7 @@ class RankineCycle(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	CT = float
 	P_boil = float
@@ -335,6 +346,7 @@ class SystemControl(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	F_wc = tuple
 	ampl_data_dir = str
@@ -392,6 +404,7 @@ class UserDefinedPowerCycle(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	ud_T_amb_des = float
 	ud_T_amb_high = float
 	ud_T_amb_ind_od = tuple
@@ -416,6 +429,7 @@ class SCO2Cycle(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	P_high_limit = float
 	_sco2_P_high_limit = float
@@ -458,6 +472,7 @@ class Outputs(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	A_radfield = float
 	A_sf = float

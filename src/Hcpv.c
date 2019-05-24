@@ -6,10 +6,9 @@
 #include "PySAM_utils.h"
 
 
-
-	/*
-	 * SolarResourceData Group
-	 */ 
+/*
+ * SolarResourceData Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -130,9 +129,9 @@ static PyTypeObject SolarResourceData_Type = {
 };
 
 
-	/*
-	 * PVWatts Group
-	 */ 
+/*
+ * PVWatts Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -253,9 +252,9 @@ static PyTypeObject PVWatts_Type = {
 };
 
 
-	/*
-	 * HCPVModule Group
-	 */ 
+/*
+ * HCPVModule Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -631,9 +630,9 @@ static PyTypeObject HCPVModule_Type = {
 };
 
 
-	/*
-	 * InverterCECDatabase Group
-	 */ 
+/*
+ * InverterCECDatabase Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -889,9 +888,9 @@ static PyTypeObject InverterCECDatabase_Type = {
 };
 
 
-	/*
-	 * HCPVArray Group
-	 */ 
+/*
+ * HCPVArray Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -1252,9 +1251,9 @@ static PyTypeObject HCPVArray_Type = {
 };
 
 
-	/*
-	 * Outputs Group
-	 */ 
+/*
+ * Outputs Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -1703,8 +1702,6 @@ typedef struct {
 } HcpvObject;
 
 static PyTypeObject Hcpv_Type;
-
-#define HcpvObject_Check(v)      (Py_TYPE(v) == &Hcpv_Type)
 
 static HcpvObject *
 newHcpvObject(void* data_ptr)

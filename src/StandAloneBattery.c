@@ -6,10 +6,9 @@
 #include "PySAM_utils.h"
 
 
-
-	/*
-	 * Simulation Group
-	 */ 
+/*
+ * Simulation Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -160,9 +159,9 @@ static PyTypeObject Simulation_Type = {
 };
 
 
-	/*
-	 * Battery Group
-	 */ 
+/*
+ * Battery Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -1513,9 +1512,9 @@ static PyTypeObject Battery_Type = {
 };
 
 
-	/*
-	 * System Group
-	 */ 
+/*
+ * System Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -1651,9 +1650,9 @@ static PyTypeObject System_Type = {
 };
 
 
-	/*
-	 * ElectricLoad Group
-	 */ 
+/*
+ * ElectricLoad Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -1774,9 +1773,9 @@ static PyTypeObject ElectricLoad_Type = {
 };
 
 
-	/*
-	 * Common Group
-	 */ 
+/*
+ * Common Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -1897,9 +1896,9 @@ static PyTypeObject Common_Type = {
 };
 
 
-	/*
-	 * Inverter Group
-	 */ 
+/*
+ * Inverter Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -2140,9 +2139,9 @@ static PyTypeObject Inverter_Type = {
 };
 
 
-	/*
-	 * PV Group
-	 */ 
+/*
+ * PV Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -2263,9 +2262,9 @@ static PyTypeObject PV_Type = {
 };
 
 
-	/*
-	 * FuelCell Group
-	 */ 
+/*
+ * FuelCell Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -2401,9 +2400,9 @@ static PyTypeObject FuelCell_Type = {
 };
 
 
-	/*
-	 * ElectricityRate Group
-	 */ 
+/*
+ * ElectricityRate Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -2569,9 +2568,9 @@ static PyTypeObject ElectricityRate_Type = {
 };
 
 
-	/*
-	 * EnergyMarket Group
-	 */ 
+/*
+ * EnergyMarket Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -2737,9 +2736,9 @@ static PyTypeObject EnergyMarket_Type = {
 };
 
 
-	/*
-	 * Outputs Group
-	 */ 
+/*
+ * Outputs Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -3314,8 +3313,6 @@ typedef struct {
 } StandAloneBatteryObject;
 
 static PyTypeObject StandAloneBattery_Type;
-
-#define StandAloneBatteryObject_Check(v)      (Py_TYPE(v) == &StandAloneBattery_Type)
 
 static StandAloneBatteryObject *
 newStandAloneBatteryObject(void* data_ptr)

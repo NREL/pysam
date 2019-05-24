@@ -8,6 +8,7 @@ class Weather(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	file_name = str
 
 
@@ -20,6 +21,7 @@ class Solarfield(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	A_aperture = tuple
 	AbsorberMaterial = tuple
@@ -94,6 +96,7 @@ class Powerblock(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	T_cold_ref = float
 	T_hot = float
 
@@ -107,6 +110,7 @@ class Heliostat(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	csp_lf_sf_washes_per_year = float
 	csp_lf_sf_water_per_wash = float
@@ -122,6 +126,7 @@ class HeatSink(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	heat_sink_dP_frac = float
 
 
@@ -134,6 +139,7 @@ class Outputs(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	T_field_cold_in = tuple
 	T_field_hot_out = tuple

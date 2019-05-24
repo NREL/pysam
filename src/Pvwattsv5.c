@@ -6,10 +6,9 @@
 #include "PySAM_utils.h"
 
 
-
-	/*
-	 * LocationAndResource Group
-	 */ 
+/*
+ * LocationAndResource Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -145,9 +144,9 @@ static PyTypeObject LocationAndResource_Type = {
 };
 
 
-	/*
-	 * SystemDesign Group
-	 */ 
+/*
+ * SystemDesign Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -463,9 +462,9 @@ static PyTypeObject SystemDesign_Type = {
 };
 
 
-	/*
-	 * Outputs Group
-	 */ 
+/*
+ * Outputs Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -887,8 +886,6 @@ typedef struct {
 } Pvwattsv5Object;
 
 static PyTypeObject Pvwattsv5_Type;
-
-#define Pvwattsv5Object_Check(v)      (Py_TYPE(v) == &Pvwattsv5_Type)
 
 static Pvwattsv5Object *
 newPvwattsv5Object(void* data_ptr)

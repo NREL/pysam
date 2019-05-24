@@ -6,10 +6,9 @@
 #include "PySAM_utils.h"
 
 
-
-	/*
-	 * Weather Group
-	 */ 
+/*
+ * Weather Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -130,9 +129,9 @@ static PyTypeObject Weather_Type = {
 };
 
 
-	/*
-	 * Dish Group
-	 */ 
+/*
+ * Dish Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -253,9 +252,9 @@ static PyTypeObject Dish_Type = {
 };
 
 
-	/*
-	 * Type295 Group
-	 */ 
+/*
+ * Type295 Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -616,9 +615,9 @@ static PyTypeObject Type295_Type = {
 };
 
 
-	/*
-	 * Type296 Group
-	 */ 
+/*
+ * Type296 Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -949,9 +948,9 @@ static PyTypeObject Type296_Type = {
 };
 
 
-	/*
-	 * Type297 Group
-	 */ 
+/*
+ * Type297 Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -1207,9 +1206,9 @@ static PyTypeObject Type297_Type = {
 };
 
 
-	/*
-	 * Type298 Group
-	 */ 
+/*
+ * Type298 Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -1840,9 +1839,9 @@ static PyTypeObject Type298_Type = {
 };
 
 
-	/*
-	 * Outputs Group
-	 */ 
+/*
+ * Outputs Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -2489,8 +2488,6 @@ typedef struct {
 } TcsdishObject;
 
 static PyTypeObject Tcsdish_Type;
-
-#define TcsdishObject_Check(v)      (Py_TYPE(v) == &Tcsdish_Type)
 
 static TcsdishObject *
 newTcsdishObject(void* data_ptr)

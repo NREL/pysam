@@ -6,10 +6,9 @@
 #include "PySAM_utils.h"
 
 
-
-	/*
-	 * ThermalRate Group
-	 */ 
+/*
+ * ThermalRate Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -295,9 +294,9 @@ static PyTypeObject ThermalRate_Type = {
 };
 
 
-	/*
-	 * Lifetime Group
-	 */ 
+/*
+ * Lifetime Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -448,9 +447,9 @@ static PyTypeObject Lifetime_Type = {
 };
 
 
-	/*
-	 * Outputs Group
-	 */ 
+/*
+ * Outputs Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -620,8 +619,6 @@ typedef struct {
 } ThermalrateObject;
 
 static PyTypeObject Thermalrate_Type;
-
-#define ThermalrateObject_Check(v)      (Py_TYPE(v) == &Thermalrate_Type)
 
 static ThermalrateObject *
 newThermalrateObject(void* data_ptr)

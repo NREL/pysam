@@ -6,10 +6,9 @@
 #include "PySAM_utils.h"
 
 
-
-	/*
-	 * FinancialParameters Group
-	 */ 
+/*
+ * FinancialParameters Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -280,9 +279,9 @@ static PyTypeObject FinancialParameters_Type = {
 };
 
 
-	/*
-	 * SystemCosts Group
-	 */ 
+/*
+ * SystemCosts Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -838,9 +837,9 @@ static PyTypeObject SystemCosts_Type = {
 };
 
 
-	/*
-	 * TaxCreditIncentives Group
-	 */ 
+/*
+ * TaxCreditIncentives Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -1246,9 +1245,9 @@ static PyTypeObject TaxCreditIncentives_Type = {
 };
 
 
-	/*
-	 * PaymentIncentives Group
-	 */ 
+/*
+ * PaymentIncentives Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -2674,9 +2673,9 @@ static PyTypeObject PaymentIncentives_Type = {
 };
 
 
-	/*
-	 * Host Group
-	 */ 
+/*
+ * Host Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -2842,9 +2841,9 @@ static PyTypeObject Host_Type = {
 };
 
 
-	/*
-	 * Common Group
-	 */ 
+/*
+ * Common Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -2965,9 +2964,9 @@ static PyTypeObject Common_Type = {
 };
 
 
-	/*
-	 * SystemOutput Group
-	 */ 
+/*
+ * SystemOutput Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -3103,9 +3102,9 @@ static PyTypeObject SystemOutput_Type = {
 };
 
 
-	/*
-	 * ReturnOnEquity Group
-	 */ 
+/*
+ * ReturnOnEquity Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -3226,9 +3225,9 @@ static PyTypeObject ReturnOnEquity_Type = {
 };
 
 
-	/*
-	 * Moratorium Group
-	 */ 
+/*
+ * Moratorium Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -3349,9 +3348,9 @@ static PyTypeObject Moratorium_Type = {
 };
 
 
-	/*
-	 * Recapitalization Group
-	 */ 
+/*
+ * Recapitalization Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -3517,9 +3516,9 @@ static PyTypeObject Recapitalization_Type = {
 };
 
 
-	/*
-	 * TimeOfDelivery Group
-	 */ 
+/*
+ * TimeOfDelivery Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -3835,9 +3834,9 @@ static PyTypeObject TimeOfDelivery_Type = {
 };
 
 
-	/*
-	 * ReserveAccounts Group
-	 */ 
+/*
+ * ReserveAccounts Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -4048,9 +4047,9 @@ static PyTypeObject ReserveAccounts_Type = {
 };
 
 
-	/*
-	 * Depreciation Group
-	 */ 
+/*
+ * Depreciation Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -4786,9 +4785,9 @@ static PyTypeObject Depreciation_Type = {
 };
 
 
-	/*
-	 * SalvageValue Group
-	 */ 
+/*
+ * SalvageValue Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -4909,9 +4908,9 @@ static PyTypeObject SalvageValue_Type = {
 };
 
 
-	/*
-	 * SolutionMode Group
-	 */ 
+/*
+ * SolutionMode Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -5092,9 +5091,9 @@ static PyTypeObject SolutionMode_Type = {
 };
 
 
-	/*
-	 * PPAPrice Group
-	 */ 
+/*
+ * PPAPrice Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -5230,9 +5229,9 @@ static PyTypeObject PPAPrice_Type = {
 };
 
 
-	/*
-	 * ConstructionFinancing Group
-	 */ 
+/*
+ * ConstructionFinancing Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -5353,9 +5352,9 @@ static PyTypeObject ConstructionFinancing_Type = {
 };
 
 
-	/*
-	 * ProjectTermDebt Group
-	 */ 
+/*
+ * ProjectTermDebt Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -5566,9 +5565,9 @@ static PyTypeObject ProjectTermDebt_Type = {
 };
 
 
-	/*
-	 * OtherCapitalCosts Group
-	 */ 
+/*
+ * OtherCapitalCosts Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -5749,9 +5748,9 @@ static PyTypeObject OtherCapitalCosts_Type = {
 };
 
 
-	/*
-	 * IRRTargets Group
-	 */ 
+/*
+ * IRRTargets Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -5887,9 +5886,9 @@ static PyTypeObject IRRTargets_Type = {
 };
 
 
-	/*
-	 * CashIncentives Group
-	 */ 
+/*
+ * CashIncentives Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -6055,9 +6054,9 @@ static PyTypeObject CashIncentives_Type = {
 };
 
 
-	/*
-	 * Battery Group
-	 */ 
+/*
+ * Battery Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -6253,9 +6252,9 @@ static PyTypeObject Battery_Type = {
 };
 
 
-	/*
-	 * Outputs Group
-	 */ 
+/*
+ * Outputs Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -11222,8 +11221,6 @@ typedef struct {
 } HostDeveloperObject;
 
 static PyTypeObject HostDeveloper_Type;
-
-#define HostDeveloperObject_Check(v)      (Py_TYPE(v) == &HostDeveloper_Type)
 
 static HostDeveloperObject *
 newHostDeveloperObject(void* data_ptr)

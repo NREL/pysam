@@ -8,6 +8,7 @@ class ThermalRate(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	en_thermal_rates = float
 	fuelcell_power_thermal = tuple
 	thermal_buy_rate = tuple
@@ -32,6 +33,7 @@ class Lifetime(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	analysis_period = float
 	inflation_rate = float
 	system_use_lifetime_output = float
@@ -46,6 +48,7 @@ class Outputs(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	thermal_cost_with_system_year1 = float
 	thermal_cost_without_system_year1 = float

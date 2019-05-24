@@ -8,6 +8,7 @@ class Weather(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	azimuth = float
 	file_name = str
 	tilt = float
@@ -24,6 +25,7 @@ class GenericSolar(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	system_capacity = float
 
 
@@ -36,6 +38,7 @@ class TouTranslator(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	weekday_schedule = tuple
 	weekend_schedule = tuple
@@ -50,6 +53,7 @@ class Type260(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	OpticalTable = tuple
 	PC_T_corr = float
@@ -116,6 +120,7 @@ class Outputs(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	annual_energy = float
 	annual_fuel_usage = float

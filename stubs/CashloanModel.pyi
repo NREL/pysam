@@ -8,6 +8,7 @@ class FinancialParameters(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	analysis_period = float
 	debt_fraction = float
 	federal_tax_rate = tuple
@@ -33,6 +34,7 @@ class SystemCosts(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	add_om_num_types = float
 	annual_fuel_usage = float
@@ -75,6 +77,7 @@ class Depreciation(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	depr_fed_custom = tuple
 	depr_fed_sl_years = float
 	depr_fed_type = float
@@ -92,6 +95,7 @@ class TaxCreditIncentives(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	itc_fed_amount = float
 	itc_fed_amount_deprbas_fed = float
@@ -124,6 +128,7 @@ class PaymentIncentives(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	cbi_fed_amount = float
 	cbi_fed_deprbas_fed = float
@@ -225,6 +230,7 @@ class Battery(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	batt_bank_replacement = tuple
 	batt_computed_bank_capacity = float
 	batt_replacement_option = float
@@ -242,6 +248,7 @@ class FuelCell(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	en_fuelcell = float
 	fuelcell_computed_bank_capacity = float
@@ -261,6 +268,7 @@ class Cashloan(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	annual_energy_value = tuple
 	annual_themal_value = tuple
 	market = float
@@ -279,6 +287,7 @@ class SystemOutput(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	degradation = tuple
 	gen = tuple
 
@@ -293,6 +302,7 @@ class Lifetime(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	system_use_lifetime_output = float
 
 
@@ -305,6 +315,7 @@ class ThirdPartyOwnership(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	elec_cost_with_system = tuple
 	elec_cost_without_system = tuple
@@ -319,6 +330,7 @@ class Outputs(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	adjusted_installed_cost = float
 	cbi_total = float

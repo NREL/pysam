@@ -8,6 +8,7 @@ class Depreciation(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	depr_fed_custom = tuple
 	depr_fed_sl_years = float
 	depr_fed_type = float
@@ -26,6 +27,7 @@ class Financials(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	analysis_period = float
 	inflation_rate = float
 	real_discount_rate = float
@@ -41,6 +43,7 @@ class FinancialThirdPartyOwnership(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	lease_or_ppa = float
 
 
@@ -53,6 +56,7 @@ class Common(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	annual_energy_value = tuple
 	gen = tuple
@@ -68,6 +72,7 @@ class AnnualOutput(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	degradation = tuple
 	system_use_lifetime_output = float
 
@@ -81,6 +86,7 @@ class CashFlow(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	lease_escalation = float
 	lease_price = float
@@ -98,6 +104,7 @@ class ElectricityCost(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	elec_cost_with_system = tuple
 	elec_cost_without_system = tuple
 
@@ -111,6 +118,7 @@ class Outputs(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	cf_after_tax_cash_flow = tuple
 	cf_after_tax_net_equity_cost_flow = tuple

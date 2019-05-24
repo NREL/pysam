@@ -8,6 +8,7 @@ class Weather(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	file_name = str
 
 
@@ -21,6 +22,7 @@ class Dish(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	system_capacity = float
 
 
@@ -33,6 +35,7 @@ class Type295(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	A_proj = float
 	A_total = float
@@ -63,6 +66,7 @@ class Type296(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	A_absorber = float
 	A_wall = float
 	DELTA_T_DIR = float
@@ -90,6 +94,7 @@ class Type297(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	Beale_const_coef = float
 	Beale_first_coef = float
 	Beale_fourth_coef = float
@@ -111,6 +116,7 @@ class Type298(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	P_controls = float
 	P_tower_fan = float
@@ -158,6 +164,7 @@ class Outputs(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	Collector_Losses = tuple
 	P_SE_losses = tuple

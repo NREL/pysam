@@ -6,10 +6,9 @@
 #include "PySAM_utils.h"
 
 
-
-	/*
-	 * Weather Group
-	 */ 
+/*
+ * Weather Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -130,9 +129,9 @@ static PyTypeObject Weather_Type = {
 };
 
 
-	/*
-	 * Solarfield Group
-	 */ 
+/*
+ * Solarfield Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -1153,9 +1152,9 @@ static PyTypeObject Solarfield_Type = {
 };
 
 
-	/*
-	 * Powerblock Group
-	 */ 
+/*
+ * Powerblock Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -1291,9 +1290,9 @@ static PyTypeObject Powerblock_Type = {
 };
 
 
-	/*
-	 * Heliostat Group
-	 */ 
+/*
+ * Heliostat Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -1429,9 +1428,9 @@ static PyTypeObject Heliostat_Type = {
 };
 
 
-	/*
-	 * HeatSink Group
-	 */ 
+/*
+ * HeatSink Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -1552,9 +1551,9 @@ static PyTypeObject HeatSink_Type = {
 };
 
 
-	/*
-	 * Outputs Group
-	 */ 
+/*
+ * Outputs Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -2075,8 +2074,6 @@ typedef struct {
 } LinearFresnelDsgIphObject;
 
 static PyTypeObject LinearFresnelDsgIph_Type;
-
-#define LinearFresnelDsgIphObject_Check(v)      (Py_TYPE(v) == &LinearFresnelDsgIph_Type)
 
 static LinearFresnelDsgIphObject *
 newLinearFresnelDsgIphObject(void* data_ptr)

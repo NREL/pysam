@@ -8,6 +8,7 @@ class WindResourceFile(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	wind_resource_data = dict
 	wind_resource_filename = str
 
@@ -20,6 +21,9 @@ class WindTurbine(object):
 		pass
 
 	def __init__(self, *args, **kwargs): 
+		pass
+
+	def calculate_powercurve(self, turbine_size=double, rotor_diameter=double, elevation=double, max_cp=double, max_tip_speed=double, max_tip_sp_ratio=double, cut_in=double, cut_out=double, drive_train=int):
 		pass
 
 	wind_resource_shear = float
@@ -40,6 +44,7 @@ class WindFarm(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	system_capacity = float
 	wind_farm_losses_percent = float
 	wind_farm_wake_model = float
@@ -57,6 +62,7 @@ class WindPower(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	en_icing_cutoff = float
 	en_low_temp_cutoff = float
@@ -76,6 +82,7 @@ class WindSpeedWeibullDistribution(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	weibull_k_factor = float
 	weibull_reference_height = float
 	weibull_wind_speed = float
@@ -90,6 +97,7 @@ class Outputs(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	annual_energy = float
 	capacity_factor = float

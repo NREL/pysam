@@ -8,6 +8,7 @@ class Common(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	TOU_demand_single_peak = float
 	en_electricity_rates = float
 	ur_sell_eq_buy = float
@@ -22,6 +23,7 @@ class Lifetime(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	analysis_period = float
 	inflation_rate = float
@@ -38,6 +40,7 @@ class SystemOutput(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	degradation = tuple
 	gen = tuple
 
@@ -52,6 +55,7 @@ class TimeSeries(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	load = tuple
 
 
@@ -65,6 +69,7 @@ class ElectricLoad(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	load_escalation = tuple
 
 
@@ -77,6 +82,7 @@ class UtilityRateFlat(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	rate_escalation = tuple
 	ur_annual_min_charge = float
@@ -98,6 +104,7 @@ class UtilityRateEnergyCharge(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	ur_ec_sched_weekday = tuple
 	ur_ec_sched_weekend = tuple
 	ur_ec_tou_mat = tuple
@@ -112,6 +119,7 @@ class UtilityRateDemandCharge(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	ur_dc_enable = float
 	ur_dc_flat_mat = tuple
@@ -129,6 +137,7 @@ class Outputs(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	annual_electric_load = tuple
 	annual_energy_value = tuple

@@ -8,6 +8,7 @@ class LoadProfileEstimator(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	Monthly_util = tuple
 	Occ_Schedule = tuple
 	Occupants = float
@@ -42,6 +43,7 @@ class Outputs(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 
 

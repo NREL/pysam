@@ -8,6 +8,7 @@ class Weather(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	azimuth = float
 	file_name = str
 	tilt = float
@@ -24,6 +25,7 @@ class Trough(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	system_capacity = float
 
 
@@ -36,6 +38,7 @@ class TouTranslator(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	weekday_schedule = tuple
 	weekend_schedule = tuple
@@ -50,6 +53,7 @@ class Solarfield(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	DepAngle = float
 	Distance_SCA = float
@@ -81,6 +85,7 @@ class Sca(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	Ave_Focal_Length = float
 	ConcFac = float
 	GeoAcc = float
@@ -104,6 +109,7 @@ class Hce(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	HCEBelShad = tuple
 	HCEEnvTrans = tuple
@@ -133,6 +139,7 @@ class Pwrb(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	E2TPLF0 = float
 	E2TPLF1 = float
@@ -170,6 +177,7 @@ class Tes(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	E_tes_ini = float
 	FossilFill = tuple
 	NUMTOU = float
@@ -191,6 +199,7 @@ class Parasitic(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	AntiFrPar = float
 	BOPPar = float
@@ -233,6 +242,7 @@ class Outputs(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	AveSfTemp = tuple
 	ColEff = tuple

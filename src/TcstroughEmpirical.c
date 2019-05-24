@@ -6,10 +6,9 @@
 #include "PySAM_utils.h"
 
 
-
-	/*
-	 * Weather Group
-	 */ 
+/*
+ * Weather Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -175,9 +174,9 @@ static PyTypeObject Weather_Type = {
 };
 
 
-	/*
-	 * Trough Group
-	 */ 
+/*
+ * Trough Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -298,9 +297,9 @@ static PyTypeObject Trough_Type = {
 };
 
 
-	/*
-	 * TouTranslator Group
-	 */ 
+/*
+ * TouTranslator Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -436,9 +435,9 @@ static PyTypeObject TouTranslator_Type = {
 };
 
 
-	/*
-	 * Solarfield Group
-	 */ 
+/*
+ * Solarfield Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -814,9 +813,9 @@ static PyTypeObject Solarfield_Type = {
 };
 
 
-	/*
-	 * Sca Group
-	 */ 
+/*
+ * Sca Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -1102,9 +1101,9 @@ static PyTypeObject Sca_Type = {
 };
 
 
-	/*
-	 * Hce Group
-	 */ 
+/*
+ * Hce Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -1465,9 +1464,9 @@ static PyTypeObject Hce_Type = {
 };
 
 
-	/*
-	 * Pwrb Group
-	 */ 
+/*
+ * Pwrb Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -1933,9 +1932,9 @@ static PyTypeObject Pwrb_Type = {
 };
 
 
-	/*
-	 * Tes Group
-	 */ 
+/*
+ * Tes Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -2191,9 +2190,9 @@ static PyTypeObject Tes_Type = {
 };
 
 
-	/*
-	 * Parasitic Group
-	 */ 
+/*
+ * Parasitic Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -2749,9 +2748,9 @@ static PyTypeObject Parasitic_Type = {
 };
 
 
-	/*
-	 * Outputs Group
-	 */ 
+/*
+ * Outputs Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -3479,8 +3478,6 @@ typedef struct {
 } TcstroughEmpiricalObject;
 
 static PyTypeObject TcstroughEmpirical_Type;
-
-#define TcstroughEmpiricalObject_Check(v)      (Py_TYPE(v) == &TcstroughEmpirical_Type)
 
 static TcstroughEmpiricalObject *
 newTcstroughEmpiricalObject(void* data_ptr)

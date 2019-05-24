@@ -6,10 +6,9 @@
 #include "PySAM_utils.h"
 
 
-
-	/*
-	 * Plant Group
-	 */ 
+/*
+ * Plant Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -220,9 +219,9 @@ static PyTypeObject Plant_Type = {
 };
 
 
-	/*
-	 * Lifetime Group
-	 */ 
+/*
+ * Lifetime Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -373,9 +372,9 @@ static PyTypeObject Lifetime_Type = {
 };
 
 
-	/*
-	 * Outputs Group
-	 */ 
+/*
+ * Outputs Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -563,8 +562,6 @@ typedef struct {
 } GenericSystemObject;
 
 static PyTypeObject GenericSystem_Type;
-
-#define GenericSystemObject_Check(v)      (Py_TYPE(v) == &GenericSystem_Type)
 
 static GenericSystemObject *
 newGenericSystemObject(void* data_ptr)

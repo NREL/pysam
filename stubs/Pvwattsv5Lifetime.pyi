@@ -8,6 +8,7 @@ class Common(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	system_use_lifetime_output = float
 
 
@@ -20,6 +21,7 @@ class FinancialAnalysisParameters(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	analysis_period = float
 
@@ -34,6 +36,7 @@ class LifetimePV(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	dc_degradation = tuple
 
 
@@ -46,6 +49,7 @@ class Weather(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	solar_resource_data = dict
 	solar_resource_file = str
@@ -60,6 +64,7 @@ class PVWatts(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	array_type = float
 	azimuth = float
@@ -86,6 +91,7 @@ class Battwatts(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	batt_simple_enable = float
 
 
@@ -98,6 +104,7 @@ class Outputs(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	ac = tuple
 	ac_annual = float

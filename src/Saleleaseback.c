@@ -6,10 +6,9 @@
 #include "PySAM_utils.h"
 
 
-
-	/*
-	 * FinancialParameters Group
-	 */ 
+/*
+ * FinancialParameters Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -280,9 +279,9 @@ static PyTypeObject FinancialParameters_Type = {
 };
 
 
-	/*
-	 * SystemCosts Group
-	 */ 
+/*
+ * SystemCosts Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -823,9 +822,9 @@ static PyTypeObject SystemCosts_Type = {
 };
 
 
-	/*
-	 * TaxCreditIncentives Group
-	 */ 
+/*
+ * TaxCreditIncentives Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -1231,9 +1230,9 @@ static PyTypeObject TaxCreditIncentives_Type = {
 };
 
 
-	/*
-	 * PaymentIncentives Group
-	 */ 
+/*
+ * PaymentIncentives Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -2659,9 +2658,9 @@ static PyTypeObject PaymentIncentives_Type = {
 };
 
 
-	/*
-	 * SystemOutput Group
-	 */ 
+/*
+ * SystemOutput Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -2812,9 +2811,9 @@ static PyTypeObject SystemOutput_Type = {
 };
 
 
-	/*
-	 * DHF Group
-	 */ 
+/*
+ * DHF Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -3910,9 +3909,9 @@ static PyTypeObject DHF_Type = {
 };
 
 
-	/*
-	 * TimeOfDelivery Group
-	 */ 
+/*
+ * TimeOfDelivery Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -4213,9 +4212,9 @@ static PyTypeObject TimeOfDelivery_Type = {
 };
 
 
-	/*
-	 * ReserveAccounts Group
-	 */ 
+/*
+ * ReserveAccounts Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -4411,9 +4410,9 @@ static PyTypeObject ReserveAccounts_Type = {
 };
 
 
-	/*
-	 * OtherCapitalCosts Group
-	 */ 
+/*
+ * OtherCapitalCosts Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -4549,9 +4548,9 @@ static PyTypeObject OtherCapitalCosts_Type = {
 };
 
 
-	/*
-	 * Battery Group
-	 */ 
+/*
+ * Battery Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -4747,9 +4746,9 @@ static PyTypeObject Battery_Type = {
 };
 
 
-	/*
-	 * Outputs Group
-	 */ 
+/*
+ * Outputs Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -9743,8 +9742,6 @@ typedef struct {
 } SaleleasebackObject;
 
 static PyTypeObject Saleleaseback_Type;
-
-#define SaleleasebackObject_Check(v)      (Py_TYPE(v) == &Saleleaseback_Type)
 
 static SaleleasebackObject *
 newSaleleasebackObject(void* data_ptr)

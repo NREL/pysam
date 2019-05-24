@@ -8,6 +8,7 @@ class LocationAndResource(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	solar_resource_data = dict
 	solar_resource_file = str
 
@@ -21,6 +22,7 @@ class SystemDesign(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	array_type = float
 	azimuth = float
@@ -47,6 +49,7 @@ class Outputs(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	ac = tuple
 	ac_annual = float

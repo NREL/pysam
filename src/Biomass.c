@@ -6,10 +6,9 @@
 #include "PySAM_utils.h"
 
 
-
-	/*
-	 * Biopower Group
-	 */ 
+/*
+ * Biopower Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -1585,9 +1584,9 @@ static PyTypeObject Biopower_Type = {
 };
 
 
-	/*
-	 * Outputs Group
-	 */ 
+/*
+ * Outputs Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -2414,8 +2413,6 @@ typedef struct {
 } BiomassObject;
 
 static PyTypeObject Biomass_Type;
-
-#define BiomassObject_Check(v)      (Py_TYPE(v) == &Biomass_Type)
 
 static BiomassObject *
 newBiomassObject(void* data_ptr)

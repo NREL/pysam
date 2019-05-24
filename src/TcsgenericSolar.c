@@ -6,10 +6,9 @@
 #include "PySAM_utils.h"
 
 
-
-	/*
-	 * Weather Group
-	 */ 
+/*
+ * Weather Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -175,9 +174,9 @@ static PyTypeObject Weather_Type = {
 };
 
 
-	/*
-	 * GenericSolar Group
-	 */ 
+/*
+ * GenericSolar Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -298,9 +297,9 @@ static PyTypeObject GenericSolar_Type = {
 };
 
 
-	/*
-	 * TouTranslator Group
-	 */ 
+/*
+ * TouTranslator Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -436,9 +435,9 @@ static PyTypeObject TouTranslator_Type = {
 };
 
 
-	/*
-	 * Type260 Group
-	 */ 
+/*
+ * Type260 Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -1354,9 +1353,9 @@ static PyTypeObject Type260_Type = {
 };
 
 
-	/*
-	 * Outputs Group
-	 */ 
+/*
+ * Outputs Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -2102,8 +2101,6 @@ typedef struct {
 } TcsgenericSolarObject;
 
 static PyTypeObject TcsgenericSolar_Type;
-
-#define TcsgenericSolarObject_Check(v)      (Py_TYPE(v) == &TcsgenericSolar_Type)
 
 static TcsgenericSolarObject *
 newTcsgenericSolarObject(void* data_ptr)

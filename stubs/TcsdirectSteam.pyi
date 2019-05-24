@@ -8,6 +8,7 @@ class Weather(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	solar_resource_file = str
 
 
@@ -20,6 +21,7 @@ class DirectSteamTower(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	system_capacity = float
 
@@ -34,6 +36,7 @@ class TouTranslator(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	weekday_schedule = tuple
 	weekend_schedule = tuple
 
@@ -47,6 +50,7 @@ class Heliostat(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	N_hel = float
 	bop_spec_cost = float
@@ -140,6 +144,7 @@ class Receiver(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	H_rec = float
 	THT = float
 
@@ -153,6 +158,7 @@ class DsgController(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	A_sf = float
 	P_b_in_init = float
@@ -219,6 +225,7 @@ class Powerblock(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	F_wc = tuple
 	P_boil_des = float
 	P_cond_min = float
@@ -250,6 +257,7 @@ class Parasitics(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	Design_power = float
 	Piping_length = float
 	Piping_loss = float
@@ -278,6 +286,7 @@ class Outputs(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	P_b_in = tuple
 	P_b_out = tuple

@@ -6,10 +6,9 @@
 #include "PySAM_utils.h"
 
 
-
-	/*
-	 * Weather Group
-	 */ 
+/*
+ * Weather Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -175,9 +174,9 @@ static PyTypeObject Weather_Type = {
 };
 
 
-	/*
-	 * SolarField Group
-	 */ 
+/*
+ * SolarField Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -1858,9 +1857,9 @@ static PyTypeObject SolarField_Type = {
 };
 
 
-	/*
-	 * Controller Group
-	 */ 
+/*
+ * Controller Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -2011,9 +2010,9 @@ static PyTypeObject Controller_Type = {
 };
 
 
-	/*
-	 * SystemDesign Group
-	 */ 
+/*
+ * SystemDesign Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -2134,9 +2133,9 @@ static PyTypeObject SystemDesign_Type = {
 };
 
 
-	/*
-	 * TES Group
-	 */ 
+/*
+ * TES Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -2332,9 +2331,9 @@ static PyTypeObject TES_Type = {
 };
 
 
-	/*
-	 * TES2tank Group
-	 */ 
+/*
+ * TES2tank Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -2485,9 +2484,9 @@ static PyTypeObject TES2tank_Type = {
 };
 
 
-	/*
-	 * Powerblock Group
-	 */ 
+/*
+ * Powerblock Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -2608,9 +2607,9 @@ static PyTypeObject Powerblock_Type = {
 };
 
 
-	/*
-	 * Outputs Group
-	 */ 
+/*
+ * Outputs Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -3302,8 +3301,6 @@ typedef struct {
 } TroughPhysicalProcessHeatObject;
 
 static PyTypeObject TroughPhysicalProcessHeat_Type;
-
-#define TroughPhysicalProcessHeatObject_Check(v)      (Py_TYPE(v) == &TroughPhysicalProcessHeat_Type)
 
 static TroughPhysicalProcessHeatObject *
 newTroughPhysicalProcessHeatObject(void* data_ptr)

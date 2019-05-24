@@ -8,6 +8,7 @@ class IPHLCOH(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	annual_electricity_consumption = float
 	electricity_rate = float
 
@@ -22,6 +23,7 @@ class SimpleLCOE(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	fixed_operating_cost = float
 
 
@@ -34,6 +36,7 @@ class Outputs(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 
 

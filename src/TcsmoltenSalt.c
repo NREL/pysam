@@ -6,10 +6,9 @@
 #include "PySAM_utils.h"
 
 
-
-	/*
-	 * LocationAndResource Group
-	 */ 
+/*
+ * LocationAndResource Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -145,9 +144,9 @@ static PyTypeObject LocationAndResource_Type = {
 };
 
 
-	/*
-	 * TimeOfDeliveryFactors Group
-	 */ 
+/*
+ * TimeOfDeliveryFactors Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -448,9 +447,9 @@ static PyTypeObject TimeOfDeliveryFactors_Type = {
 };
 
 
-	/*
-	 * HeliostatField Group
-	 */ 
+/*
+ * HeliostatField Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -1216,9 +1215,9 @@ static PyTypeObject HeliostatField_Type = {
 };
 
 
-	/*
-	 * SystemDesign Group
-	 */ 
+/*
+ * SystemDesign Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -1459,9 +1458,9 @@ static PyTypeObject SystemDesign_Type = {
 };
 
 
-	/*
-	 * TowerAndReceiver Group
-	 */ 
+/*
+ * TowerAndReceiver Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -1957,9 +1956,9 @@ static PyTypeObject TowerAndReceiver_Type = {
 };
 
 
-	/*
-	 * SystemCosts Group
-	 */ 
+/*
+ * SystemCosts Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -2395,9 +2394,9 @@ static PyTypeObject SystemCosts_Type = {
 };
 
 
-	/*
-	 * FinancialParameters Group
-	 */ 
+/*
+ * FinancialParameters Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -2818,9 +2817,9 @@ static PyTypeObject FinancialParameters_Type = {
 };
 
 
-	/*
-	 * ThermalStorage Group
-	 */ 
+/*
+ * ThermalStorage Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -3061,9 +3060,9 @@ static PyTypeObject ThermalStorage_Type = {
 };
 
 
-	/*
-	 * RADCOOL Group
-	 */ 
+/*
+ * RADCOOL Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -3649,9 +3648,9 @@ static PyTypeObject RADCOOL_Type = {
 };
 
 
-	/*
-	 * PowerCycle Group
-	 */ 
+/*
+ * PowerCycle Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -3862,9 +3861,9 @@ static PyTypeObject PowerCycle_Type = {
 };
 
 
-	/*
-	 * RankineCycle Group
-	 */ 
+/*
+ * RankineCycle Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -4135,9 +4134,9 @@ static PyTypeObject RankineCycle_Type = {
 };
 
 
-	/*
-	 * SystemControl Group
-	 */ 
+/*
+ * SystemControl Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -4903,9 +4902,9 @@ static PyTypeObject SystemControl_Type = {
 };
 
 
-	/*
-	 * UserDefinedPowerCycle Group
-	 */ 
+/*
+ * UserDefinedPowerCycle Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -5206,9 +5205,9 @@ static PyTypeObject UserDefinedPowerCycle_Type = {
 };
 
 
-	/*
-	 * SCO2Cycle Group
-	 */ 
+/*
+ * SCO2Cycle Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -5764,9 +5763,9 @@ static PyTypeObject SCO2Cycle_Type = {
 };
 
 
-	/*
-	 * Outputs Group
-	 */ 
+/*
+ * Outputs Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -7250,8 +7249,6 @@ typedef struct {
 } TcsmoltenSaltObject;
 
 static PyTypeObject TcsmoltenSalt_Type;
-
-#define TcsmoltenSaltObject_Check(v)      (Py_TYPE(v) == &TcsmoltenSalt_Type)
 
 static TcsmoltenSaltObject *
 newTcsmoltenSaltObject(void* data_ptr)

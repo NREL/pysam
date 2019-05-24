@@ -5,11 +5,12 @@
 
 #include "PySAM_utils.h"
 
+#include "Windpower_eqns.c"
 
 
-	/*
-	 * WindResourceFile Group
-	 */ 
+/*
+ * WindResourceFile Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -145,9 +146,9 @@ static PyTypeObject WindResourceFile_Type = {
 };
 
 
-	/*
-	 * WindTurbine Group
-	 */ 
+/*
+ * WindTurbine Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -199,6 +200,8 @@ static PyMethodDef WindTurbine_methods[] = {
 			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``WindTurbine_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)WindTurbine_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+		{"calculate_powercurve", (PyCFunction)WindTurbine_calculate_powercurve, METH_VARARGS | METH_KEYWORDS,
+			PyDoc_STR("Calculates the power produced by a wind turbine at windspeeds incremented by 0.25 m/s\nInput: var_table with key-value pairs\n     'turbine_size' - double [kW]\n     'rotor_diameter' - double [m]\n     'elevation' - double [m], required if using Weibull resource model, otherwise 0\n     'max_cp' - double max Cp [-],\n     'max_tip_speed' - double [m/s]\n     'max_tip_sp_ratio' - double max tip speed ratio [-]\n     'cut_in' - double cut in speed [m/s]\n     'cut_out' - double cut out speed [m/s]\n     'drive_train' - int 0: 3 Stage Planetary, 1: Single Stage - Low Speed Generator, 2: Multi-Generator, 3: Direct Drive\nOutput: key-value pairs added to var_table\n     'wind_turbine_powercurve_windspeeds' - array [m/s]\n     'wind_turbine_powercurve_powerout' - array [m/s]\n     'rated_wind_speed' - double [m/s[\n     'hub_efficiency' - array [m/s]")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -343,9 +346,9 @@ static PyTypeObject WindTurbine_Type = {
 };
 
 
-	/*
-	 * WindFarm Group
-	 */ 
+/*
+ * WindFarm Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -541,9 +544,9 @@ static PyTypeObject WindFarm_Type = {
 };
 
 
-	/*
-	 * WindPower Group
-	 */ 
+/*
+ * WindPower Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -739,9 +742,9 @@ static PyTypeObject WindPower_Type = {
 };
 
 
-	/*
-	 * WindSpeedWeibullDistribution Group
-	 */ 
+/*
+ * WindSpeedWeibullDistribution Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -892,9 +895,9 @@ static PyTypeObject WindSpeedWeibullDistribution_Type = {
 };
 
 
-	/*
-	 * Outputs Group
-	 */ 
+/*
+ * Outputs Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -1109,8 +1112,6 @@ typedef struct {
 } WindpowerObject;
 
 static PyTypeObject Windpower_Type;
-
-#define WindpowerObject_Check(v)      (Py_TYPE(v) == &Windpower_Type)
 
 static WindpowerObject *
 newWindpowerObject(void* data_ptr)

@@ -6,10 +6,9 @@
 #include "PySAM_utils.h"
 
 
-
-	/*
-	 * Weather Group
-	 */ 
+/*
+ * Weather Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -130,9 +129,9 @@ static PyTypeObject Weather_Type = {
 };
 
 
-	/*
-	 * SWH Group
-	 */ 
+/*
+ * SWH Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -793,9 +792,9 @@ static PyTypeObject SWH_Type = {
 };
 
 
-	/*
-	 * Outputs Group
-	 */ 
+/*
+ * Outputs Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -1226,8 +1225,6 @@ typedef struct {
 } SwhObject;
 
 static PyTypeObject Swh_Type;
-
-#define SwhObject_Check(v)      (Py_TYPE(v) == &Swh_Type)
 
 static SwhObject *
 newSwhObject(void* data_ptr)

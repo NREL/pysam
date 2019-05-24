@@ -8,6 +8,7 @@ class Weather(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	azimuth = float
 	file_name = str
 	tilt = float
@@ -23,6 +24,7 @@ class SolarField(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	A_aperture = tuple
 	AbsorberMaterial = tuple
@@ -141,6 +143,7 @@ class Controller(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	field_fl_props = tuple
 	pb_pump_coef = float
 	q_pb_design = float
@@ -156,6 +159,7 @@ class SystemDesign(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	tshours = float
 
 
@@ -168,6 +172,7 @@ class TES(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	cold_tank_Thtr = float
 	cold_tank_max_heat = float
@@ -187,6 +192,7 @@ class TES2tank(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	h_tank_min = float
 	hot_tank_Thtr = float
 	hot_tank_max_heat = float
@@ -202,6 +208,7 @@ class Powerblock(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	L_rnr_pb = float
 
 
@@ -214,6 +221,7 @@ class Outputs(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	CosTh_ave = tuple
 	EndLoss_ave = tuple

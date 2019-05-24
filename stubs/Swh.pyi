@@ -8,6 +8,7 @@ class Weather(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	solar_resource_file = str
 
 
@@ -20,6 +21,7 @@ class SWH(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	FRUL = float
 	FRta = float
@@ -69,6 +71,7 @@ class Outputs(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	I_incident = tuple
 	I_transmitted = tuple

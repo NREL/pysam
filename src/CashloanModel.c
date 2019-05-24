@@ -6,10 +6,9 @@
 #include "PySAM_utils.h"
 
 
-
-	/*
-	 * FinancialParameters Group
-	 */ 
+/*
+ * FinancialParameters Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -325,9 +324,9 @@ static PyTypeObject FinancialParameters_Type = {
 };
 
 
-	/*
-	 * SystemCosts Group
-	 */ 
+/*
+ * SystemCosts Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -868,9 +867,9 @@ static PyTypeObject SystemCosts_Type = {
 };
 
 
-	/*
-	 * Depreciation Group
-	 */ 
+/*
+ * Depreciation Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -1066,9 +1065,9 @@ static PyTypeObject Depreciation_Type = {
 };
 
 
-	/*
-	 * TaxCreditIncentives Group
-	 */ 
+/*
+ * TaxCreditIncentives Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -1474,9 +1473,9 @@ static PyTypeObject TaxCreditIncentives_Type = {
 };
 
 
-	/*
-	 * PaymentIncentives Group
-	 */ 
+/*
+ * PaymentIncentives Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -2902,9 +2901,9 @@ static PyTypeObject PaymentIncentives_Type = {
 };
 
 
-	/*
-	 * Battery Group
-	 */ 
+/*
+ * Battery Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -3100,9 +3099,9 @@ static PyTypeObject Battery_Type = {
 };
 
 
-	/*
-	 * FuelCell Group
-	 */ 
+/*
+ * FuelCell Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -3298,9 +3297,9 @@ static PyTypeObject FuelCell_Type = {
 };
 
 
-	/*
-	 * Cashloan Group
-	 */ 
+/*
+ * Cashloan Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -3496,9 +3495,9 @@ static PyTypeObject Cashloan_Type = {
 };
 
 
-	/*
-	 * SystemOutput Group
-	 */ 
+/*
+ * SystemOutput Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -3634,9 +3633,9 @@ static PyTypeObject SystemOutput_Type = {
 };
 
 
-	/*
-	 * Lifetime Group
-	 */ 
+/*
+ * Lifetime Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -3757,9 +3756,9 @@ static PyTypeObject Lifetime_Type = {
 };
 
 
-	/*
-	 * ThirdPartyOwnership Group
-	 */ 
+/*
+ * ThirdPartyOwnership Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -3895,9 +3894,9 @@ static PyTypeObject ThirdPartyOwnership_Type = {
 };
 
 
-	/*
-	 * Outputs Group
-	 */ 
+/*
+ * Outputs Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -4904,8 +4903,6 @@ typedef struct {
 } CashloanModelObject;
 
 static PyTypeObject CashloanModel_Type;
-
-#define CashloanModelObject_Check(v)      (Py_TYPE(v) == &CashloanModel_Type)
 
 static CashloanModelObject *
 newCashloanModelObject(void* data_ptr)

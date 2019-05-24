@@ -8,6 +8,7 @@ class FinancialParameters(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	analysis_period = float
 	federal_tax_rate = tuple
 	inflation_rate = float
@@ -30,6 +31,7 @@ class SystemCosts(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	add_om_num_types = float
 	annual_fuel_usage = float
@@ -73,6 +75,7 @@ class TaxCreditIncentives(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	itc_fed_amount = float
 	itc_fed_amount_deprbas_fed = float
 	itc_fed_amount_deprbas_sta = float
@@ -104,6 +107,7 @@ class PaymentIncentives(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	cbi_fed_amount = float
 	cbi_fed_deprbas_fed = float
@@ -205,6 +209,7 @@ class SystemOutput(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	degradation = tuple
 	gen = tuple
 	system_capacity = float
@@ -220,6 +225,7 @@ class Moratorium(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	loan_moratorium = float
 
 
@@ -232,6 +238,7 @@ class Recapitalization(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	system_lifetime_recapitalize = tuple
 	system_recapitalization_cost = float
@@ -248,6 +255,7 @@ class TimeOfDelivery(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	dispatch_factor1 = float
 	dispatch_factor2 = float
@@ -275,6 +283,7 @@ class ReserveAccounts(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	equip1_reserve_cost = float
 	equip1_reserve_freq = float
 	equip2_reserve_cost = float
@@ -293,6 +302,7 @@ class Depreciation(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	depr_alloc_custom_percent = float
 	depr_alloc_macrs_15_percent = float
@@ -348,6 +358,7 @@ class SalvageValue(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	salvage_percentage = float
 
 
@@ -360,6 +371,7 @@ class SolutionMode(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	ppa_escalation = float
 	ppa_price_input = float
@@ -380,6 +392,7 @@ class ConstructionFinancing(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	construction_financing_cost = float
 
 
@@ -392,6 +405,7 @@ class ProjectTermDebt(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	debt_option = float
 	debt_percent = float
@@ -412,6 +426,7 @@ class OtherCapitalCosts(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	cost_debt_closing = float
 	cost_debt_fee = float
 	cost_dev_fee_percent = float
@@ -430,6 +445,7 @@ class IRRTargets(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	flip_target_percent = float
 	flip_target_year = float
@@ -450,6 +466,7 @@ class CashIncentives(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	pbi_fed_for_ds = float
 	pbi_oth_for_ds = float
 	pbi_sta_for_ds = float
@@ -465,6 +482,7 @@ class Battery(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	batt_bank_replacement = tuple
 	batt_computed_bank_capacity = float
@@ -483,6 +501,7 @@ class Outputs(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	adjusted_installed_cost = float
 	analysis_period_irr = float

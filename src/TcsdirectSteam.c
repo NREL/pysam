@@ -6,10 +6,9 @@
 #include "PySAM_utils.h"
 
 
-
-	/*
-	 * Weather Group
-	 */ 
+/*
+ * Weather Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -130,9 +129,9 @@ static PyTypeObject Weather_Type = {
 };
 
 
-	/*
-	 * DirectSteamTower Group
-	 */ 
+/*
+ * DirectSteamTower Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -253,9 +252,9 @@ static PyTypeObject DirectSteamTower_Type = {
 };
 
 
-	/*
-	 * TouTranslator Group
-	 */ 
+/*
+ * TouTranslator Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -391,9 +390,9 @@ static PyTypeObject TouTranslator_Type = {
 };
 
 
-	/*
-	 * Heliostat Group
-	 */ 
+/*
+ * Heliostat Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -1699,9 +1698,9 @@ static PyTypeObject Heliostat_Type = {
 };
 
 
-	/*
-	 * Receiver Group
-	 */ 
+/*
+ * Receiver Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -1837,9 +1836,9 @@ static PyTypeObject Receiver_Type = {
 };
 
 
-	/*
-	 * DsgController Group
-	 */ 
+/*
+ * DsgController Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -2740,9 +2739,9 @@ static PyTypeObject DsgController_Type = {
 };
 
 
-	/*
-	 * Powerblock Group
-	 */ 
+/*
+ * Powerblock Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -3133,9 +3132,9 @@ static PyTypeObject Powerblock_Type = {
 };
 
 
-	/*
-	 * Parasitics Group
-	 */ 
+/*
+ * Parasitics Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -3496,9 +3495,9 @@ static PyTypeObject Parasitics_Type = {
 };
 
 
-	/*
-	 * Outputs Group
-	 */ 
+/*
+ * Outputs Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -4280,8 +4279,6 @@ typedef struct {
 } TcsdirectSteamObject;
 
 static PyTypeObject TcsdirectSteam_Type;
-
-#define TcsdirectSteamObject_Check(v)      (Py_TYPE(v) == &TcsdirectSteam_Type)
 
 static TcsdirectSteamObject *
 newTcsdirectSteamObject(void* data_ptr)

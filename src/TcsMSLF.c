@@ -6,10 +6,9 @@
 #include "PySAM_utils.h"
 
 
-
-	/*
-	 * Weather Group
-	 */ 
+/*
+ * Weather Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -175,9 +174,9 @@ static PyTypeObject Weather_Type = {
 };
 
 
-	/*
-	 * Mslf Group
-	 */ 
+/*
+ * Mslf Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -298,9 +297,9 @@ static PyTypeObject Mslf_Type = {
 };
 
 
-	/*
-	 * TouTranslator Group
-	 */ 
+/*
+ * TouTranslator Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -436,9 +435,9 @@ static PyTypeObject TouTranslator_Type = {
 };
 
 
-	/*
-	 * Controller Group
-	 */ 
+/*
+ * Controller Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -2689,9 +2688,9 @@ static PyTypeObject Controller_Type = {
 };
 
 
-	/*
-	 * SolarField Group
-	 */ 
+/*
+ * SolarField Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -2827,9 +2826,9 @@ static PyTypeObject SolarField_Type = {
 };
 
 
-	/*
-	 * Powerblock Group
-	 */ 
+/*
+ * Powerblock Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -3235,9 +3234,9 @@ static PyTypeObject Powerblock_Type = {
 };
 
 
-	/*
-	 * UserDefinedPC Group
-	 */ 
+/*
+ * UserDefinedPC Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -3538,9 +3537,9 @@ static PyTypeObject UserDefinedPC_Type = {
 };
 
 
-	/*
-	 * Enet Group
-	 */ 
+/*
+ * Enet Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -3691,9 +3690,9 @@ static PyTypeObject Enet_Type = {
 };
 
 
-	/*
-	 * Outputs Group
-	 */ 
+/*
+ * Outputs Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -4520,8 +4519,6 @@ typedef struct {
 } TcsMSLFObject;
 
 static PyTypeObject TcsMSLF_Type;
-
-#define TcsMSLFObject_Check(v)      (Py_TYPE(v) == &TcsMSLF_Type)
 
 static TcsMSLFObject *
 newTcsMSLFObject(void* data_ptr)

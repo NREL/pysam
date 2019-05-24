@@ -8,6 +8,7 @@ class BatteryModelSimple(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	batt_simple_chemistry = float
 	batt_simple_dispatch = float
 	batt_simple_enable = float
@@ -26,6 +27,7 @@ class Common(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	ac = tuple
 	dc = tuple
 	inverter_efficiency = float
@@ -42,6 +44,7 @@ class ElectricLoadOther(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	load = tuple
 
 
@@ -54,6 +57,7 @@ class Outputs(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	annual_export_to_grid_energy = tuple
 	annual_import_to_grid_energy = tuple

@@ -8,6 +8,7 @@ class SimpleLCOE(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	annual_energy = float
 	capital_cost = float
 	fixed_charge_rate = float
@@ -24,6 +25,7 @@ class Outputs(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	lcoe_fcr = float
 

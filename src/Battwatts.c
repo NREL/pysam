@@ -6,10 +6,9 @@
 #include "PySAM_utils.h"
 
 
-
-	/*
-	 * BatteryModelSimple Group
-	 */ 
+/*
+ * BatteryModelSimple Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -205,9 +204,9 @@ static PyTypeObject BatteryModelSimple_Type = {
 };
 
 
-	/*
-	 * Common Group
-	 */ 
+/*
+ * Common Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -373,9 +372,9 @@ static PyTypeObject Common_Type = {
 };
 
 
-	/*
-	 * ElectricLoadOther Group
-	 */ 
+/*
+ * ElectricLoadOther Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -496,9 +495,9 @@ static PyTypeObject ElectricLoadOther_Type = {
 };
 
 
-	/*
-	 * Outputs Group
-	 */ 
+/*
+ * Outputs Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -1082,8 +1081,6 @@ typedef struct {
 } BattwattsObject;
 
 static PyTypeObject Battwatts_Type;
-
-#define BattwattsObject_Check(v)      (Py_TYPE(v) == &Battwatts_Type)
 
 static BattwattsObject *
 newBattwattsObject(void* data_ptr)

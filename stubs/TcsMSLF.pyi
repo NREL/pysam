@@ -8,6 +8,7 @@ class Weather(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	azimuth = float
 	file_name = str
 	tilt = float
@@ -24,6 +25,7 @@ class Mslf(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	system_capacity = float
 
 
@@ -36,6 +38,7 @@ class TouTranslator(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	weekday_schedule = tuple
 	weekend_schedule = tuple
@@ -50,6 +53,7 @@ class Controller(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	A_aperture = float
 	AbsorberMaterial = tuple
@@ -206,6 +210,7 @@ class SolarField(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	washes_per_year = float
 	water_per_wash = float
 
@@ -219,6 +224,7 @@ class Powerblock(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	CT = float
 	F_wc = tuple
@@ -252,6 +258,7 @@ class UserDefinedPC(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	ud_T_amb_des = float
 	ud_T_amb_high = float
 	ud_T_amb_ind_od = tuple
@@ -277,6 +284,7 @@ class Enet(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	eta_lhv = float
 	eta_tes_htr = float
 	fp_mode = float
@@ -291,6 +299,7 @@ class Outputs(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	DP_tot = tuple
 	E_bal_startup = tuple

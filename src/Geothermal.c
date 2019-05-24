@@ -6,10 +6,9 @@
 #include "PySAM_utils.h"
 
 
-
-	/*
-	 * GeoHourly Group
-	 */ 
+/*
+ * GeoHourly Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -1165,9 +1164,9 @@ static PyTypeObject GeoHourly_Type = {
 };
 
 
-	/*
-	 * Weather Group
-	 */ 
+/*
+ * Weather Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -1288,9 +1287,9 @@ static PyTypeObject Weather_Type = {
 };
 
 
-	/*
-	 * Outputs Group
-	 */ 
+/*
+ * Outputs Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -1847,8 +1846,6 @@ typedef struct {
 } GeothermalObject;
 
 static PyTypeObject Geothermal_Type;
-
-#define GeothermalObject_Check(v)      (Py_TYPE(v) == &Geothermal_Type)
 
 static GeothermalObject *
 newGeothermalObject(void* data_ptr)

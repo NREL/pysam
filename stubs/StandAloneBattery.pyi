@@ -8,6 +8,7 @@ class Simulation(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	analysis_period = float
 	percent_complete = float
 	system_use_lifetime_output = float
@@ -22,6 +23,7 @@ class Battery(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	LeadAcid_q10_computed = float
 	LeadAcid_q20_computed = float
@@ -118,6 +120,7 @@ class System(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	capacity_factor = float
 	gen = tuple
 
@@ -132,6 +135,7 @@ class ElectricLoad(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	load = tuple
 
 
@@ -145,6 +149,7 @@ class Common(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	inverter_model = float
 
 
@@ -157,6 +162,7 @@ class Inverter(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	inv_cec_cg_eff_cec = float
 	inv_cec_cg_paco = float
@@ -179,6 +185,7 @@ class PV(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	dcoptimizer_loss = float
 
 
@@ -191,6 +198,7 @@ class FuelCell(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	dispatch_manual_fuelcellcharge = tuple
 	fuelcell_power = tuple
@@ -205,6 +213,7 @@ class ElectricityRate(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	en_electricity_rates = float
 	ur_ec_sched_weekday = tuple
@@ -222,6 +231,7 @@ class EnergyMarket(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	dispatch_sched_weekday = tuple
 	dispatch_sched_weekend = tuple
 	dispatch_tod_factors = tuple
@@ -237,6 +247,7 @@ class Outputs(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	annual_export_to_grid_energy = tuple
 	annual_import_to_grid_energy = tuple

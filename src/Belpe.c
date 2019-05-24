@@ -6,10 +6,9 @@
 #include "PySAM_utils.h"
 
 
-
-	/*
-	 * LoadProfileEstimator Group
-	 */ 
+/*
+ * LoadProfileEstimator Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -460,9 +459,9 @@ static PyTypeObject LoadProfileEstimator_Type = {
 };
 
 
-	/*
-	 * Outputs Group
-	 */ 
+/*
+ * Outputs Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -578,8 +577,6 @@ typedef struct {
 } BelpeObject;
 
 static PyTypeObject Belpe_Type;
-
-#define BelpeObject_Check(v)      (Py_TYPE(v) == &Belpe_Type)
 
 static BelpeObject *
 newBelpeObject(void* data_ptr)

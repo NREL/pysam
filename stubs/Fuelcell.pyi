@@ -8,6 +8,7 @@ class Common(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	annual_energy = float
 	capacity_factor = float
 	gen = tuple
@@ -24,6 +25,7 @@ class Lifetime(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	analysis_period = float
 	system_use_lifetime_output = float
 
@@ -38,6 +40,7 @@ class Load(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	load = tuple
 
 
@@ -50,6 +53,7 @@ class FuelCell(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	dispatch_manual_fuelcellcharge = tuple
 	dispatch_manual_fuelcelldischarge = tuple
@@ -94,6 +98,7 @@ class Outputs(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	annual_fuel_usage = float
 	fuelcell_electrical_efficiency = tuple

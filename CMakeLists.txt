@@ -11,14 +11,16 @@ Project(PYSAM)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}")
 
 
-include_directories(. src $ENV{PY3DIR} $ENV{SAMNTDIR}/api/include)
+include_directories(include $ENV{PY3DIR} $ENV{SAMNTDIR}/api/include)
 
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
+file(GLOB PYSAM_SRC src/*.c)
+
 add_library(pysam SHARED
-        TestSystem.c
-		src/PySAM_utils.h src/AdjustmentFactors.c
-		src/GenericSystem.c)
+		${PYSAM_SRC}
+		src/PySAM_utils.h
+		)
 
 
 set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG}")
@@ -31,10 +33,10 @@ unset(SSC_LIB CACHE)
 unset(SAM_API_LIB CACHE)
 find_library( SSC_LIB
         NAMES libssc.so ssc.lib
-        PATHS data )
+        PATHS files )
 find_library( SAM_API_LIB
         NAMES libSAM_api.so SAM_api.lib
-        PATHS data)
+        PATHS files)
 target_link_libraries(pysam ${SSC_LIB} ${SAM_API_LIB})
 
 

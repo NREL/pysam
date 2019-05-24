@@ -6,10 +6,9 @@
 #include "PySAM_utils.h"
 
 
-
-	/*
-	 * SolarResource Group
-	 */ 
+/*
+ * SolarResource Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -205,9 +204,9 @@ static PyTypeObject SolarResource_Type = {
 };
 
 
-	/*
-	 * Losses Group
-	 */ 
+/*
+ * Losses Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -823,9 +822,9 @@ static PyTypeObject Losses_Type = {
 };
 
 
-	/*
-	 * Lifetime Group
-	 */ 
+/*
+ * Lifetime Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -1036,9 +1035,9 @@ static PyTypeObject Lifetime_Type = {
 };
 
 
-	/*
-	 * SystemDesign Group
-	 */ 
+/*
+ * SystemDesign Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -1894,9 +1893,9 @@ static PyTypeObject SystemDesign_Type = {
 };
 
 
-	/*
-	 * Shading Group
-	 */ 
+/*
+ * Shading Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -2362,9 +2361,9 @@ static PyTypeObject Shading_Type = {
 };
 
 
-	/*
-	 * Layout Group
-	 */ 
+/*
+ * Layout Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -2665,9 +2664,9 @@ static PyTypeObject Layout_Type = {
 };
 
 
-	/*
-	 * Module Group
-	 */ 
+/*
+ * Module Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -2788,9 +2787,9 @@ static PyTypeObject Module_Type = {
 };
 
 
-	/*
-	 * SimpleEfficiencyModuleModel Group
-	 */ 
+/*
+ * SimpleEfficiencyModuleModel Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -3256,9 +3255,9 @@ static PyTypeObject SimpleEfficiencyModuleModel_Type = {
 };
 
 
-	/*
-	 * CECPerformanceModelWithModuleDatabase Group
-	 */ 
+/*
+ * CECPerformanceModelWithModuleDatabase Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -3844,9 +3843,9 @@ static PyTypeObject CECPerformanceModelWithModuleDatabase_Type = {
 };
 
 
-	/*
-	 * CECPerformanceModelWithUserEnteredSpecifications Group
-	 */ 
+/*
+ * CECPerformanceModelWithUserEnteredSpecifications Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -4207,9 +4206,9 @@ static PyTypeObject CECPerformanceModelWithUserEnteredSpecifications_Type = {
 };
 
 
-	/*
-	 * SandiaPVArrayPerformanceModelWithModuleDatabase Group
-	 */ 
+/*
+ * SandiaPVArrayPerformanceModelWithModuleDatabase Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -4945,9 +4944,9 @@ static PyTypeObject SandiaPVArrayPerformanceModelWithModuleDatabase_Type = {
 };
 
 
-	/*
-	 * IEC61853SingleDiodeModel Group
-	 */ 
+/*
+ * IEC61853SingleDiodeModel Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -5443,9 +5442,9 @@ static PyTypeObject IEC61853SingleDiodeModel_Type = {
 };
 
 
-	/*
-	 * MermoudLejeuneSingleDiodeModel Group
-	 */ 
+/*
+ * MermoudLejeuneSingleDiodeModel Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -6316,9 +6315,9 @@ static PyTypeObject MermoudLejeuneSingleDiodeModel_Type = {
 };
 
 
-	/*
-	 * Inverter Group
-	 */ 
+/*
+ * Inverter Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -6619,9 +6618,9 @@ static PyTypeObject Inverter_Type = {
 };
 
 
-	/*
-	 * InverterCECDatabase Group
-	 */ 
+/*
+ * InverterCECDatabase Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -6892,9 +6891,9 @@ static PyTypeObject InverterCECDatabase_Type = {
 };
 
 
-	/*
-	 * InverterCECCoefficientGenerator Group
-	 */ 
+/*
+ * InverterCECCoefficientGenerator Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -7165,9 +7164,9 @@ static PyTypeObject InverterCECCoefficientGenerator_Type = {
 };
 
 
-	/*
-	 * InverterDatasheet Group
-	 */ 
+/*
+ * InverterDatasheet Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -7378,9 +7377,9 @@ static PyTypeObject InverterDatasheet_Type = {
 };
 
 
-	/*
-	 * InverterPartLoadCurve Group
-	 */ 
+/*
+ * InverterPartLoadCurve Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -7606,9 +7605,9 @@ static PyTypeObject InverterPartLoadCurve_Type = {
 };
 
 
-	/*
-	 * InverterMermoudLejeuneModel Group
-	 */ 
+/*
+ * InverterMermoudLejeuneModel Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -8254,9 +8253,9 @@ static PyTypeObject InverterMermoudLejeuneModel_Type = {
 };
 
 
-	/*
-	 * Battery Group
-	 */ 
+/*
+ * Battery Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -9607,9 +9606,9 @@ static PyTypeObject Battery_Type = {
 };
 
 
-	/*
-	 * Simulation Group
-	 */ 
+/*
+ * Simulation Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -9745,9 +9744,9 @@ static PyTypeObject Simulation_Type = {
 };
 
 
-	/*
-	 * Common Group
-	 */ 
+/*
+ * Common Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -9868,9 +9867,9 @@ static PyTypeObject Common_Type = {
 };
 
 
-	/*
-	 * PV Group
-	 */ 
+/*
+ * PV Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -9991,9 +9990,9 @@ static PyTypeObject PV_Type = {
 };
 
 
-	/*
-	 * FuelCell Group
-	 */ 
+/*
+ * FuelCell Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -10129,9 +10128,9 @@ static PyTypeObject FuelCell_Type = {
 };
 
 
-	/*
-	 * ElectricityRate Group
-	 */ 
+/*
+ * ElectricityRate Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -10297,9 +10296,9 @@ static PyTypeObject ElectricityRate_Type = {
 };
 
 
-	/*
-	 * EnergyMarket Group
-	 */ 
+/*
+ * EnergyMarket Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -10465,9 +10464,9 @@ static PyTypeObject EnergyMarket_Type = {
 };
 
 
-	/*
-	 * Outputs Group
-	 */ 
+/*
+ * Outputs Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -13481,8 +13480,6 @@ typedef struct {
 } Pvsamv1Object;
 
 static PyTypeObject Pvsamv1_Type;
-
-#define Pvsamv1Object_Check(v)      (Py_TYPE(v) == &Pvsamv1_Type)
 
 static Pvsamv1Object *
 newPvsamv1Object(void* data_ptr)

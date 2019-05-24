@@ -8,6 +8,7 @@ class Plant(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	conv_eff = float
 	derate = float
 	energy_output_array = tuple
@@ -27,6 +28,7 @@ class Lifetime(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	analysis_period = float
 	generic_degradation = tuple
 	system_use_lifetime_output = float
@@ -41,6 +43,7 @@ class Outputs(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	annual_energy = float
 	annual_fuel_usage = float

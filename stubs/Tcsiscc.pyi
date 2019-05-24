@@ -8,6 +8,7 @@ class Weather(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	solar_resource_file = str
 
 
@@ -21,6 +22,7 @@ class MoltenSaltTower(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	system_capacity = float
 
 
@@ -33,6 +35,7 @@ class Heliostat(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	N_hel = float
 	bop_spec_cost = float
@@ -125,6 +128,7 @@ class Receiver(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	A_sf = float
 	D_rec = float
 	Flow_type = float
@@ -160,6 +164,7 @@ class Powerblock(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	elev = float
 	ngcc_model = float
 	pinch_point_coldside = float
@@ -176,6 +181,7 @@ class Parasitics(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	Q_rec_des = float
 	W_dot_solar_des = float
@@ -202,6 +208,7 @@ class Outputs(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	P_fixed = tuple
 	P_plant_balance_tot = tuple

@@ -6,10 +6,9 @@
 #include "PySAM_utils.h"
 
 
-
-	/*
-	 * Depreciation Group
-	 */ 
+/*
+ * Depreciation Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -205,9 +204,9 @@ static PyTypeObject Depreciation_Type = {
 };
 
 
-	/*
-	 * Financials Group
-	 */ 
+/*
+ * Financials Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -358,9 +357,9 @@ static PyTypeObject Financials_Type = {
 };
 
 
-	/*
-	 * FinancialThirdPartyOwnership Group
-	 */ 
+/*
+ * FinancialThirdPartyOwnership Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -481,9 +480,9 @@ static PyTypeObject FinancialThirdPartyOwnership_Type = {
 };
 
 
-	/*
-	 * Common Group
-	 */ 
+/*
+ * Common Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -619,9 +618,9 @@ static PyTypeObject Common_Type = {
 };
 
 
-	/*
-	 * AnnualOutput Group
-	 */ 
+/*
+ * AnnualOutput Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -757,9 +756,9 @@ static PyTypeObject AnnualOutput_Type = {
 };
 
 
-	/*
-	 * CashFlow Group
-	 */ 
+/*
+ * CashFlow Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -925,9 +924,9 @@ static PyTypeObject CashFlow_Type = {
 };
 
 
-	/*
-	 * ElectricityCost Group
-	 */ 
+/*
+ * ElectricityCost Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -1063,9 +1062,9 @@ static PyTypeObject ElectricityCost_Type = {
 };
 
 
-	/*
-	 * Outputs Group
-	 */ 
+/*
+ * Outputs Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -1289,8 +1288,6 @@ typedef struct {
 } ThirdpartyownershipObject;
 
 static PyTypeObject Thirdpartyownership_Type;
-
-#define ThirdpartyownershipObject_Check(v)      (Py_TYPE(v) == &Thirdpartyownership_Type)
 
 static ThirdpartyownershipObject *
 newThirdpartyownershipObject(void* data_ptr)

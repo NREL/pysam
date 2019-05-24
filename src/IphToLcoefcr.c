@@ -6,10 +6,9 @@
 #include "PySAM_utils.h"
 
 
-
-	/*
-	 * IPHLCOH Group
-	 */ 
+/*
+ * IPHLCOH Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -145,9 +144,9 @@ static PyTypeObject IPHLCOH_Type = {
 };
 
 
-	/*
-	 * SimpleLCOE Group
-	 */ 
+/*
+ * SimpleLCOE Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -268,9 +267,9 @@ static PyTypeObject SimpleLCOE_Type = {
 };
 
 
-	/*
-	 * Outputs Group
-	 */ 
+/*
+ * Outputs Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -386,8 +385,6 @@ typedef struct {
 } IphToLcoefcrObject;
 
 static PyTypeObject IphToLcoefcr_Type;
-
-#define IphToLcoefcrObject_Check(v)      (Py_TYPE(v) == &IphToLcoefcr_Type)
 
 static IphToLcoefcrObject *
 newIphToLcoefcrObject(void* data_ptr)

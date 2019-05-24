@@ -8,6 +8,7 @@ class GeoHourly(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	CT = float
 	HTF = float
 	P_boil = float
@@ -90,6 +91,7 @@ class Weather(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	file_name = str
 
 
@@ -102,6 +104,7 @@ class Outputs(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	GF_flowrate = float
 	annual_energy = float

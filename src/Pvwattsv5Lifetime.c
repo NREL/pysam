@@ -6,10 +6,9 @@
 #include "PySAM_utils.h"
 
 
-
-	/*
-	 * Common Group
-	 */ 
+/*
+ * Common Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -130,9 +129,9 @@ static PyTypeObject Common_Type = {
 };
 
 
-	/*
-	 * FinancialAnalysisParameters Group
-	 */ 
+/*
+ * FinancialAnalysisParameters Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -253,9 +252,9 @@ static PyTypeObject FinancialAnalysisParameters_Type = {
 };
 
 
-	/*
-	 * LifetimePV Group
-	 */ 
+/*
+ * LifetimePV Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -376,9 +375,9 @@ static PyTypeObject LifetimePV_Type = {
 };
 
 
-	/*
-	 * Weather Group
-	 */ 
+/*
+ * Weather Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -514,9 +513,9 @@ static PyTypeObject Weather_Type = {
 };
 
 
-	/*
-	 * PVWatts Group
-	 */ 
+/*
+ * PVWatts Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -817,9 +816,9 @@ static PyTypeObject PVWatts_Type = {
 };
 
 
-	/*
-	 * Battwatts Group
-	 */ 
+/*
+ * Battwatts Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -940,9 +939,9 @@ static PyTypeObject Battwatts_Type = {
 };
 
 
-	/*
-	 * Outputs Group
-	 */ 
+/*
+ * Outputs Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -1364,8 +1363,6 @@ typedef struct {
 } Pvwattsv5LifetimeObject;
 
 static PyTypeObject Pvwattsv5Lifetime_Type;
-
-#define Pvwattsv5LifetimeObject_Check(v)      (Py_TYPE(v) == &Pvwattsv5Lifetime_Type)
 
 static Pvwattsv5LifetimeObject *
 newPvwattsv5LifetimeObject(void* data_ptr)

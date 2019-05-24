@@ -6,10 +6,9 @@
 #include "PySAM_utils.h"
 
 
-
-	/*
-	 * Common Group
-	 */ 
+/*
+ * Common Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -160,9 +159,9 @@ static PyTypeObject Common_Type = {
 };
 
 
-	/*
-	 * Lifetime Group
-	 */ 
+/*
+ * Lifetime Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -313,9 +312,9 @@ static PyTypeObject Lifetime_Type = {
 };
 
 
-	/*
-	 * SystemOutput Group
-	 */ 
+/*
+ * SystemOutput Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -451,9 +450,9 @@ static PyTypeObject SystemOutput_Type = {
 };
 
 
-	/*
-	 * TimeSeries Group
-	 */ 
+/*
+ * TimeSeries Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -574,9 +573,9 @@ static PyTypeObject TimeSeries_Type = {
 };
 
 
-	/*
-	 * ElectricLoad Group
-	 */ 
+/*
+ * ElectricLoad Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -697,9 +696,9 @@ static PyTypeObject ElectricLoad_Type = {
 };
 
 
-	/*
-	 * UtilityRateFlat Group
-	 */ 
+/*
+ * UtilityRateFlat Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -925,9 +924,9 @@ static PyTypeObject UtilityRateFlat_Type = {
 };
 
 
-	/*
-	 * UtilityRateEnergyCharge Group
-	 */ 
+/*
+ * UtilityRateEnergyCharge Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -1078,9 +1077,9 @@ static PyTypeObject UtilityRateEnergyCharge_Type = {
 };
 
 
-	/*
-	 * UtilityRateDemandCharge Group
-	 */ 
+/*
+ * UtilityRateDemandCharge Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -1261,9 +1260,9 @@ static PyTypeObject UtilityRateDemandCharge_Type = {
 };
 
 
-	/*
-	 * Outputs Group
-	 */ 
+/*
+ * Outputs Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -2666,8 +2665,6 @@ typedef struct {
 } Utilityrate5Object;
 
 static PyTypeObject Utilityrate5_Type;
-
-#define Utilityrate5Object_Check(v)      (Py_TYPE(v) == &Utilityrate5_Type)
 
 static Utilityrate5Object *
 newUtilityrate5Object(void* data_ptr)

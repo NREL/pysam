@@ -8,6 +8,7 @@ class Biopower(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	biopwr_emissions_avoided_cred = float
 	biopwr_emissions_collection_fuel = float
 	biopwr_emissions_grid_intensity = float
@@ -117,6 +118,7 @@ class Outputs(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	annual_energy = float
 	annual_fuel_usage = float

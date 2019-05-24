@@ -8,6 +8,7 @@ class SolarResourceData(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	file_name = str
 
 
@@ -21,6 +22,7 @@ class PVWatts(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	system_capacity = float
 
 
@@ -33,6 +35,7 @@ class HCPVModule(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	module_a = float
 	module_a0 = float
@@ -64,6 +67,7 @@ class InverterCECDatabase(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	inv_snl_c0 = float
 	inv_snl_c1 = float
 	inv_snl_c2 = float
@@ -85,6 +89,7 @@ class HCPVArray(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	array_ac_wiring_loss = float
 	array_dc_mismatch_loss = float
@@ -114,6 +119,7 @@ class Outputs(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	ac_loss_tracker_kwh = float
 	annual_ac = float

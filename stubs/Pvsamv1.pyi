@@ -8,6 +8,7 @@ class SolarResource(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	albedo = tuple
 	irrad_mode = float
 	sky_model = float
@@ -25,6 +26,7 @@ class Losses(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	acwiring_loss = float
 	dcoptimizer_loss = float
@@ -72,6 +74,7 @@ class Lifetime(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	ac_lifetime_losses = tuple
 	analysis_period = float
 	dc_degradation = tuple
@@ -90,6 +93,7 @@ class SystemDesign(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	enable_mismatch_vmax_calc = float
 	inverter_count = float
@@ -153,6 +157,7 @@ class Shading(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	subarray1_shade_mode = float
 	subarray1_shading_azal = tuple
 	subarray1_shading_diff = float
@@ -189,6 +194,7 @@ class Layout(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	module_aspect_ratio = float
 	subarray1_mod_orient = float
 	subarray1_nmodx = float
@@ -214,6 +220,7 @@ class Module(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	module_model = float
 
 
@@ -226,6 +233,7 @@ class SimpleEfficiencyModuleModel(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	spe_a = float
 	spe_area = float
@@ -262,6 +270,7 @@ class CECPerformanceModelWithModuleDatabase(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	cec_a_ref = float
 	cec_adjust = float
@@ -307,6 +316,7 @@ class CECPerformanceModelWithUserEnteredSpecifications(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	6par_aisc = float
 	6par_area = float
 	6par_bifacial_ground_clearance_height = float
@@ -335,6 +345,7 @@ class SandiaPVArrayPerformanceModelWithModuleDatabase(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	snl_a = float
 	snl_a0 = float
@@ -390,6 +401,7 @@ class IEC61853SingleDiodeModel(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	sd11par_AMa0 = float
 	sd11par_AMa1 = float
 	sd11par_AMa2 = float
@@ -427,6 +439,7 @@ class MermoudLejeuneSingleDiodeModel(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	mlm_AM_c_lp0 = float
 	mlm_AM_c_lp1 = float
@@ -491,6 +504,7 @@ class Inverter(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	inv_cec_cg_eff_cec = float
 	inv_cec_cg_paco = float
 	inv_ds_eff = float
@@ -516,6 +530,7 @@ class InverterCECDatabase(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	inv_snl_c0 = float
 	inv_snl_c1 = float
 	inv_snl_c2 = float
@@ -538,6 +553,7 @@ class InverterCECCoefficientGenerator(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	inv_cec_cg_c0 = float
 	inv_cec_cg_c1 = float
@@ -562,6 +578,7 @@ class InverterDatasheet(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	inv_ds_eff = float
 	inv_ds_paco = float
 	inv_ds_pnt = float
@@ -580,6 +597,7 @@ class InverterPartLoadCurve(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	inv_pd_efficiency = tuple
 	inv_pd_paco = float
@@ -600,6 +618,7 @@ class InverterMermoudLejeuneModel(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	ond_Aux_Loss = float
 	ond_CompPMax = str
@@ -648,6 +667,7 @@ class Battery(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	LeadAcid_q10_computed = float
 	LeadAcid_q20_computed = float
@@ -744,6 +764,7 @@ class Simulation(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	analysis_period = float
 	system_use_lifetime_output = float
 
@@ -758,6 +779,7 @@ class Common(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	inverter_model = float
 
 
@@ -770,6 +792,7 @@ class PV(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	dcoptimizer_loss = float
 
@@ -784,6 +807,7 @@ class FuelCell(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	dispatch_manual_fuelcellcharge = tuple
 	fuelcell_power = tuple
 
@@ -797,6 +821,7 @@ class ElectricityRate(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	en_electricity_rates = float
 	ur_ec_sched_weekday = tuple
@@ -814,6 +839,7 @@ class EnergyMarket(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
+
 	dispatch_sched_weekday = tuple
 	dispatch_sched_weekend = tuple
 	dispatch_tod_factors = tuple
@@ -829,6 +855,7 @@ class Outputs(object):
 
 	def __init__(self, *args, **kwargs): 
 		pass
+
 
 	6par_Adj = float
 	6par_Il = float

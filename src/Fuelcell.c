@@ -6,10 +6,9 @@
 #include "PySAM_utils.h"
 
 
-
-	/*
-	 * Common Group
-	 */ 
+/*
+ * Common Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -175,9 +174,9 @@ static PyTypeObject Common_Type = {
 };
 
 
-	/*
-	 * Lifetime Group
-	 */ 
+/*
+ * Lifetime Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -313,9 +312,9 @@ static PyTypeObject Lifetime_Type = {
 };
 
 
-	/*
-	 * Load Group
-	 */ 
+/*
+ * Load Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -436,9 +435,9 @@ static PyTypeObject Load_Type = {
 };
 
 
-	/*
-	 * FuelCell Group
-	 */ 
+/*
+ * FuelCell Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -1024,9 +1023,9 @@ static PyTypeObject FuelCell_Type = {
 };
 
 
-	/*
-	 * Outputs Group
-	 */ 
+/*
+ * Outputs Group
+ */ 
 
 typedef struct {
 	PyObject_HEAD
@@ -1250,8 +1249,6 @@ typedef struct {
 } FuelcellObject;
 
 static PyTypeObject Fuelcell_Type;
-
-#define FuelcellObject_Check(v)      (Py_TYPE(v) == &Fuelcell_Type)
 
 static FuelcellObject *
 newFuelcellObject(void* data_ptr)
