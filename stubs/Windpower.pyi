@@ -1,4 +1,4 @@
-class WindResourceFile(object):
+class Resource(object):
 	def assign(self): 
 		pass
 
@@ -9,11 +9,16 @@ class WindResourceFile(object):
 		pass
 
 
+	weibull_k_factor = float
+	weibull_reference_height = float
+	weibull_wind_speed = float
 	wind_resource_data = dict
+	wind_resource_distribution = tuple
 	wind_resource_filename = str
+	wind_resource_model_choice = float
 
 
-class WindTurbine(object):
+class Turbine(object):
 	def assign(self): 
 		pass
 
@@ -34,7 +39,7 @@ class WindTurbine(object):
 	wind_turbine_rotor_diameter = float
 
 
-class WindFarm(object):
+class Farm(object):
 	def assign(self): 
 		pass
 
@@ -46,14 +51,13 @@ class WindFarm(object):
 
 
 	system_capacity = float
-	wind_farm_losses_percent = float
 	wind_farm_wake_model = float
 	wind_farm_xCoordinates = tuple
 	wind_farm_yCoordinates = tuple
 	wind_resource_turbulence_coeff = float
 
 
-class WindPower(object):
+class Losses(object):
 	def assign(self): 
 		pass
 
@@ -64,28 +68,28 @@ class WindPower(object):
 		pass
 
 
+	avail_bop_loss = float
+	avail_grid_loss = float
+	avail_turb_loss = float
+	elec_eff_loss = float
 	en_icing_cutoff = float
 	en_low_temp_cutoff = float
+	env_degrad_loss = float
+	env_exposure_loss = float
+	env_ext_loss = float
+	env_icing_loss = float
 	icing_cutoff_rh = float
 	icing_cutoff_temp = float
 	low_temp_cutoff = float
-	wind_resource_model_choice = float
-
-
-class WindSpeedWeibullDistribution(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> Dict[Dict]
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	weibull_k_factor = float
-	weibull_reference_height = float
-	weibull_wind_speed = float
+	ops_env_loss = float
+	ops_grid_loss = float
+	ops_load_loss = float
+	ops_strategies_loss = float
+	turb_generic_loss = float
+	turb_hysteresis_loss = float
+	turb_perf_loss = float
+	turb_specific_loss = float
+	wake_loss = float
 
 
 class Outputs(object):
@@ -128,11 +132,10 @@ class Windpower(object):
 	def __init__(self, *args, **kwargs):
 		pass
 
-	WindResourceFile = WindResourceFile
-	WindTurbine = WindTurbine
-	WindFarm = WindFarm
-	WindPower = WindPower
-	WindSpeedWeibullDistribution = WindSpeedWeibullDistribution
+	Resource = Resource
+	Turbine = Turbine
+	Farm = Farm
+	Losses = Losses
 	Outputs = Outputs
 
 

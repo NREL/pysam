@@ -10,7 +10,7 @@ import distutils.dir_util
 #
 ###################################################################################################
 
-latest_version = '1.2.post1'
+latest_version = '1.2.dev1'
 
 # determine if making PyPi or Conda distribution
 distclass = distutils.core.Distribution
@@ -112,8 +112,10 @@ def _decode(o):
 for filename in os.listdir(defaults_dir):
     with open(defaults_dir + '/' + filename) as f:
         name = os.path.splitext(filename)
-        if name[1] != 'json':
+        if name[1] != '.json':
             continue
+        if name[0] == "Windpower_WindPowerCommercial":
+            x = 1
         data = json.load(f)
 
         dic = data[list(data.keys())[0]]
@@ -432,6 +434,14 @@ setup(
                   ),
         Extension('PySAM.HostDeveloper',
                   ['src/HostDeveloper.c'],
+                  define_macros=defines,
+                  include_dirs=[includepath],
+                  library_dirs=[libpath],
+                  libraries=libs,
+                  extra_link_args=extra_link_args
+                  ),
+        Extension('PySAM.Grid',
+                  ['src/Grid.c'],
                   define_macros=defines,
                   include_dirs=[includepath],
                   library_dirs=[libpath],

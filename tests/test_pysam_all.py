@@ -337,10 +337,10 @@ def test_run_all():
         config = names[1]
         mod_name = "PySAM." + mod
 
-        i = importlib.import_module(mod_name)
-        m = assign_file(mod, config, i)
 
         try:
+            i = importlib.import_module(mod_name)
+            m = assign_file(mod, config, i)
             m.execute(0)
         except:
             print("error executing", mod, config, "\n")

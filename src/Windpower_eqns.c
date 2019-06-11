@@ -3,7 +3,7 @@ typedef struct {
     SAM_Windpower   data_ptr;
 } WindGroupObject;
 
-static PyObject* WindTurbine_calculate_powercurve(PyObject *self, PyObject *args, PyObject *keywds)
+static PyObject* Turbine_calculate_powercurve(PyObject *self, PyObject *args, PyObject *keywds)
 {
     double turbine_size;
     double elev;
@@ -29,31 +29,31 @@ static PyObject* WindTurbine_calculate_powercurve(PyObject *self, PyObject *args
 
     // elevation depends on model choice
     SAM_error error = new_error();
-    model_choice = (int)SAM_Windpower_WindPower_wind_resource_model_choice_nget(self_obj->data_ptr, &error);
+    model_choice = (int)SAM_Windpower_Resource_wind_resource_model_choice_nget(self_obj->data_ptr, &error);
     if (PySAM_has_error(error)){
-        printf("Warning: WindPower.wind_resource_model_choice not set. Elevation should be 0 if not using Weibull wind characteristics.");
+        printf("Warning: Resource.wind_resource_model_choice not set. Elevation should be 0 if not using Weibull wind characteristics.\n");
     }
-    if (model_choice != 0 && model_choice != 1){
-        PyErr_SetString(PySAM_ErrorObject, "WindPower.wind_resource_model_choice must be 0 or 1");
+    if (model_choice != 0 && model_choice != 1 && model_choice != 2){
+        PyErr_SetString(PySAM_ErrorObject, "Resource.wind_resource_model_choice must be 0 or 1");
         return NULL;
     }
     if (model_choice == 0 && elev != 0.){
-        printf("elevation set to 0. Equations only correct for elevation if using Weibull wind characteristics.");
+        printf("elevation set to 0. Equations only correct for elevation if using Weibull wind characteristics.\n");
         elev = 0;
     }
 
     // rotor diameter and max_cp should be set already
     error = new_error();
-    rotor_diam = SAM_Windpower_WindTurbine_wind_turbine_rotor_diameter_nget(self_obj->data_ptr, &error);
+    rotor_diam = SAM_Windpower_Turbine_wind_turbine_rotor_diameter_nget(self_obj->data_ptr, &error);
     if (PySAM_has_error(error)){
-        printf("Error: WindPower.wind_turbine_rotor_diameter not set.");
+        PyErr_SetString(PySAM_ErrorObject, "Error: Turbine.wind_turbine_rotor_diameter not set.");
         return NULL;
     }
 
     error = new_error();
-    max_cp = SAM_Windpower_WindTurbine_wind_turbine_max_cp_nget(self_obj->data_ptr, &error);
+    max_cp = SAM_Windpower_Turbine_wind_turbine_max_cp_nget(self_obj->data_ptr, &error);
     if (PySAM_has_error(error)){
-        printf("Error: WindPower.wind_turbine_max_cp not set.");
+        PyErr_SetString(PySAM_ErrorObject, "Error: Turbine.wind_turbine_max_cp not set.");
         return NULL;
     }
 
@@ -80,11 +80,11 @@ static PyObject* WindTurbine_calculate_powercurve(PyObject *self, PyObject *args
 
     double* arr = SAM_table_get_array(data, "wind_turbine_powercurve_powerout", &length, &error);
 
-    SAM_Windpower_WindTurbine_wind_turbine_powercurve_powerout_aset(self_obj->data_ptr, arr, length, &error);
+    SAM_Windpower_Turbine_wind_turbine_powercurve_powerout_aset(self_obj->data_ptr, arr, length, &error);
 
     arr = SAM_table_get_array(data, "wind_turbine_powercurve_windspeeds", &length, &error);
 
-    SAM_Windpower_WindTurbine_wind_turbine_powercurve_windspeeds_aset(self_obj->data_ptr, arr, length, &error);
+    SAM_Windpower_Turbine_wind_turbine_powercurve_windspeeds_aset(self_obj->data_ptr, arr, length, &error);
 
     double rated_windspeed = *SAM_table_get_num(data, "rated_wind_speed", &error);
 

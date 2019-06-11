@@ -9,39 +9,39 @@
 
 
 /*
- * WindResourceFile Group
+ * Resource Group
  */ 
 
 typedef struct {
 	PyObject_HEAD
 	SAM_Windpower   data_ptr;
-} WindResourceFileObject;
+} ResourceObject;
 
-static PyTypeObject WindResourceFile_Type;
+static PyTypeObject Resource_Type;
 
 static PyObject *
-WindResourceFile_new(SAM_Windpower data_ptr)
+Resource_new(SAM_Windpower data_ptr)
 {
-	PyObject* new_obj = WindResourceFile_Type.tp_alloc(&WindResourceFile_Type,0);
+	PyObject* new_obj = Resource_Type.tp_alloc(&Resource_Type,0);
 
-	WindResourceFileObject* WindResourceFile_obj = (WindResourceFileObject*)new_obj;
+	ResourceObject* Resource_obj = (ResourceObject*)new_obj;
 
-	WindResourceFile_obj->data_ptr = data_ptr;
+	Resource_obj->data_ptr = data_ptr;
 
 	return new_obj;
 }
 
-/* WindResourceFile methods */
+/* Resource methods */
 
 static PyObject *
-WindResourceFile_assign(WindResourceFileObject *self, PyObject *args)
+Resource_assign(ResourceObject *self, PyObject *args)
 {
 	PyObject* dict;
 	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Windpower", "WindResourceFile")){
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Windpower", "Resource")){
 		return NULL;
 	}
 
@@ -50,657 +50,136 @@ WindResourceFile_assign(WindResourceFileObject *self, PyObject *args)
 }
 
 static PyObject *
-WindResourceFile_export(WindResourceFileObject *self, PyObject *args)
+Resource_export(ResourceObject *self, PyObject *args)
 {
-	PyTypeObject* tp = &WindResourceFile_Type;
+	PyTypeObject* tp = &Resource_Type;
 	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
 	return dict;
 }
 
-static PyMethodDef WindResourceFile_methods[] = {
-		{"assign",            (PyCFunction)WindResourceFile_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``WindResourceFile_vals = { var: val, ...}``")},
-		{"export",            (PyCFunction)WindResourceFile_export,  METH_VARARGS,
+static PyMethodDef Resource_methods[] = {
+		{"assign",            (PyCFunction)Resource_assign,  METH_VARARGS,
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Resource_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)Resource_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 static PyObject *
-WindResourceFile_get_wind_resource_data(WindResourceFileObject *self, void *closure)
+Resource_get_weibull_k_factor(ResourceObject *self, void *closure)
 {
-	return PySAM_table_getter(SAM_Windpower_WindResourceFile_wind_resource_data_tget, self->data_ptr);
+	return PySAM_double_getter(SAM_Windpower_Resource_weibull_k_factor_nget, self->data_ptr);
 }
 
 static int
-WindResourceFile_set_wind_resource_data(WindResourceFileObject *self, PyObject *value, void *closure)
+Resource_set_weibull_k_factor(ResourceObject *self, PyObject *value, void *closure)
 {
-	return PySAM_table_setter(value, SAM_Windpower_WindResourceFile_wind_resource_data_tset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Windpower_Resource_weibull_k_factor_nset, self->data_ptr);
 }
 
 static PyObject *
-WindResourceFile_get_wind_resource_filename(WindResourceFileObject *self, void *closure)
+Resource_get_weibull_reference_height(ResourceObject *self, void *closure)
 {
-	return PySAM_string_getter(SAM_Windpower_WindResourceFile_wind_resource_filename_sget, self->data_ptr);
+	return PySAM_double_getter(SAM_Windpower_Resource_weibull_reference_height_nget, self->data_ptr);
 }
 
 static int
-WindResourceFile_set_wind_resource_filename(WindResourceFileObject *self, PyObject *value, void *closure)
+Resource_set_weibull_reference_height(ResourceObject *self, PyObject *value, void *closure)
 {
-	return PySAM_string_setter(value, SAM_Windpower_WindResourceFile_wind_resource_filename_sset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Windpower_Resource_weibull_reference_height_nset, self->data_ptr);
 }
 
-static PyGetSetDef WindResourceFile_getset[] = {
-{"wind_resource_data", (getter)WindResourceFile_get_wind_resource_data,(setter)WindResourceFile_set_wind_resource_data,
-	PyDoc_STR("*dict*: wind resouce data in memory\n\n*Required*: False"),
+static PyObject *
+Resource_get_weibull_wind_speed(ResourceObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Windpower_Resource_weibull_wind_speed_nget, self->data_ptr);
+}
+
+static int
+Resource_set_weibull_wind_speed(ResourceObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Windpower_Resource_weibull_wind_speed_nset, self->data_ptr);
+}
+
+static PyObject *
+Resource_get_wind_resource_data(ResourceObject *self, void *closure)
+{
+	return PySAM_table_getter(SAM_Windpower_Resource_wind_resource_data_tget, self->data_ptr);
+}
+
+static int
+Resource_set_wind_resource_data(ResourceObject *self, PyObject *value, void *closure)
+{
+	return PySAM_table_setter(value, SAM_Windpower_Resource_wind_resource_data_tset, self->data_ptr);
+}
+
+static PyObject *
+Resource_get_wind_resource_distribution(ResourceObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Windpower_Resource_wind_resource_distribution_mget, self->data_ptr);
+}
+
+static int
+Resource_set_wind_resource_distribution(ResourceObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Windpower_Resource_wind_resource_distribution_mset, self->data_ptr);
+}
+
+static PyObject *
+Resource_get_wind_resource_filename(ResourceObject *self, void *closure)
+{
+	return PySAM_string_getter(SAM_Windpower_Resource_wind_resource_filename_sget, self->data_ptr);
+}
+
+static int
+Resource_set_wind_resource_filename(ResourceObject *self, PyObject *value, void *closure)
+{
+	return PySAM_string_setter(value, SAM_Windpower_Resource_wind_resource_filename_sset, self->data_ptr);
+}
+
+static PyObject *
+Resource_get_wind_resource_model_choice(ResourceObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Windpower_Resource_wind_resource_model_choice_nget, self->data_ptr);
+}
+
+static int
+Resource_set_wind_resource_model_choice(ResourceObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Windpower_Resource_wind_resource_model_choice_nset, self->data_ptr);
+}
+
+static PyGetSetDef Resource_getset[] = {
+{"weibull_k_factor", (getter)Resource_get_weibull_k_factor,(setter)Resource_set_weibull_k_factor,
+	PyDoc_STR("*float*: Weibull K factor for wind resource\n\n*Required*: set to 1 if not provided."),
  	NULL},
-{"wind_resource_filename", (getter)WindResourceFile_get_wind_resource_filename,(setter)WindResourceFile_set_wind_resource_filename,
-	PyDoc_STR("*str*: local wind data file path\n\n*Constraints*: LOCAL_FILE\n\n*Required*: False"),
+{"weibull_reference_height", (getter)Resource_get_weibull_reference_height,(setter)Resource_set_weibull_reference_height,
+	PyDoc_STR("*float*: Reference height for Weibull wind speed [m]\n\n*Constraints*: MIN=0\n\n*Required*: set to 50 if not provided."),
  	NULL},
-	{NULL}  /* Sentinel */
-};
-
-static PyTypeObject WindResourceFile_Type = {
-		/* The ob_type field must be initialized in the module init function
-		 * to be portable to Windows without using C++. */
-		PyVarObject_HEAD_INIT(NULL, 0)
-		"Windpower.WindResourceFile",             /*tp_name*/
-		sizeof(WindResourceFileObject),          /*tp_basicsize*/
-		0,                          /*tp_itemsize*/
-		/* methods */
-		0,    /*tp_dealloc*/
-		0,                          /*tp_print*/
-		(getattrfunc)0,             /*tp_getattr*/
-		0,                          /*tp_setattr*/
-		0,                          /*tp_reserved*/
-		0,                          /*tp_repr*/
-		0,                          /*tp_as_number*/
-		0,                          /*tp_as_sequence*/
-		0,                          /*tp_as_mapping*/
-		0,                          /*tp_hash*/
-		0,                          /*tp_call*/
-		0,                          /*tp_str*/
-		0,                          /*tp_getattro*/
-		0,                          /*tp_setattro*/
-		0,                          /*tp_as_buffer*/
-		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
-		0,                          /*tp_doc*/
-		0,                          /*tp_traverse*/
-		0,                          /*tp_clear*/
-		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistofnset*/
-		0,                          /*tp_iter*/
-		0,                          /*tp_iternext*/
-		WindResourceFile_methods,         /*tp_methods*/
-		0,                          /*tp_members*/
-		WindResourceFile_getset,          /*tp_getset*/
-		0,                          /*tp_base*/
-		0,                          /*tp_dict*/
-		0,                          /*tp_descr_get*/
-		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictofnset*/
-		0,                          /*tp_init*/
-		0,                          /*tp_alloc*/
-		0,             /*tp_new*/
-		0,                          /*tp_free*/
-		0,                          /*tp_is_gc*/
-};
-
-
-/*
- * WindTurbine Group
- */ 
-
-typedef struct {
-	PyObject_HEAD
-	SAM_Windpower   data_ptr;
-} WindTurbineObject;
-
-static PyTypeObject WindTurbine_Type;
-
-static PyObject *
-WindTurbine_new(SAM_Windpower data_ptr)
-{
-	PyObject* new_obj = WindTurbine_Type.tp_alloc(&WindTurbine_Type,0);
-
-	WindTurbineObject* WindTurbine_obj = (WindTurbineObject*)new_obj;
-
-	WindTurbine_obj->data_ptr = data_ptr;
-
-	return new_obj;
-}
-
-/* WindTurbine methods */
-
-static PyObject *
-WindTurbine_assign(WindTurbineObject *self, PyObject *args)
-{
-	PyObject* dict;
-	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
-		return NULL;
-	}
-
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Windpower", "WindTurbine")){
-		return NULL;
-	}
-
-	Py_INCREF(Py_None);
-	return Py_None;
-}
-
-static PyObject *
-WindTurbine_export(WindTurbineObject *self, PyObject *args)
-{
-	PyTypeObject* tp = &WindTurbine_Type;
-	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
-	return dict;
-}
-
-static PyMethodDef WindTurbine_methods[] = {
-		{"assign",            (PyCFunction)WindTurbine_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``WindTurbine_vals = { var: val, ...}``")},
-		{"export",            (PyCFunction)WindTurbine_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
-		{"calculate_powercurve", (PyCFunction)WindTurbine_calculate_powercurve, METH_VARARGS | METH_KEYWORDS,
-			PyDoc_STR("Calculates the power produced by a wind turbine at windspeeds incremented by 0.25 m/s\nInput: var_table with key-value pairs\n     'turbine_size' - double [kW]\n     'rotor_diameter' - double [m]\n     'elevation' - double [m], required if using Weibull resource model, otherwise 0\n     'max_cp' - double max Cp [-],\n     'max_tip_speed' - double [m/s]\n     'max_tip_sp_ratio' - double max tip speed ratio [-]\n     'cut_in' - double cut in speed [m/s]\n     'cut_out' - double cut out speed [m/s]\n     'drive_train' - int 0: 3 Stage Planetary, 1: Single Stage - Low Speed Generator, 2: Multi-Generator, 3: Direct Drive\nOutput: key-value pairs added to var_table\n     'wind_turbine_powercurve_windspeeds' - array [m/s]\n     'wind_turbine_powercurve_powerout' - array [m/s]\n     'rated_wind_speed' - double [m/s[\n     'hub_efficiency' - array [m/s]")},
-		{NULL,              NULL}           /* sentinel */
-};
-
-static PyObject *
-WindTurbine_get_wind_resource_shear(WindTurbineObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Windpower_WindTurbine_wind_resource_shear_nget, self->data_ptr);
-}
-
-static int
-WindTurbine_set_wind_resource_shear(WindTurbineObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Windpower_WindTurbine_wind_resource_shear_nset, self->data_ptr);
-}
-
-static PyObject *
-WindTurbine_get_wind_turbine_hub_ht(WindTurbineObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Windpower_WindTurbine_wind_turbine_hub_ht_nget, self->data_ptr);
-}
-
-static int
-WindTurbine_set_wind_turbine_hub_ht(WindTurbineObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Windpower_WindTurbine_wind_turbine_hub_ht_nset, self->data_ptr);
-}
-
-static PyObject *
-WindTurbine_get_wind_turbine_max_cp(WindTurbineObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Windpower_WindTurbine_wind_turbine_max_cp_nget, self->data_ptr);
-}
-
-static int
-WindTurbine_set_wind_turbine_max_cp(WindTurbineObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Windpower_WindTurbine_wind_turbine_max_cp_nset, self->data_ptr);
-}
-
-static PyObject *
-WindTurbine_get_wind_turbine_powercurve_powerout(WindTurbineObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Windpower_WindTurbine_wind_turbine_powercurve_powerout_aget, self->data_ptr);
-}
-
-static int
-WindTurbine_set_wind_turbine_powercurve_powerout(WindTurbineObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_Windpower_WindTurbine_wind_turbine_powercurve_powerout_aset, self->data_ptr);
-}
-
-static PyObject *
-WindTurbine_get_wind_turbine_powercurve_windspeeds(WindTurbineObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Windpower_WindTurbine_wind_turbine_powercurve_windspeeds_aget, self->data_ptr);
-}
-
-static int
-WindTurbine_set_wind_turbine_powercurve_windspeeds(WindTurbineObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_Windpower_WindTurbine_wind_turbine_powercurve_windspeeds_aset, self->data_ptr);
-}
-
-static PyObject *
-WindTurbine_get_wind_turbine_rotor_diameter(WindTurbineObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Windpower_WindTurbine_wind_turbine_rotor_diameter_nget, self->data_ptr);
-}
-
-static int
-WindTurbine_set_wind_turbine_rotor_diameter(WindTurbineObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Windpower_WindTurbine_wind_turbine_rotor_diameter_nset, self->data_ptr);
-}
-
-static PyGetSetDef WindTurbine_getset[] = {
-{"wind_resource_shear", (getter)WindTurbine_get_wind_resource_shear,(setter)WindTurbine_set_wind_resource_shear,
-	PyDoc_STR("*float*: Shear exponent\n\n*Constraints*: MIN=0\n\n*Required*: True"),
+{"weibull_wind_speed", (getter)Resource_get_weibull_wind_speed,(setter)Resource_set_weibull_wind_speed,
+	PyDoc_STR("*float*: Average wind speed for Weibull model\n\n*Constraints*: MIN=0\n\n*Required*: set to 1 if not provided."),
  	NULL},
-{"wind_turbine_hub_ht", (getter)WindTurbine_get_wind_turbine_hub_ht,(setter)WindTurbine_set_wind_turbine_hub_ht,
-	PyDoc_STR("*float*: Hub height [m]\n\n*Constraints*: POSITIVE\n\n*Required*: True"),
+{"wind_resource_data", (getter)Resource_get_wind_resource_data,(setter)Resource_set_wind_resource_data,
+	PyDoc_STR("*dict*: Wind resouce data in memory\n\n*Required*: False"),
  	NULL},
-{"wind_turbine_max_cp", (getter)WindTurbine_get_wind_turbine_max_cp,(setter)WindTurbine_set_wind_turbine_max_cp,
-	PyDoc_STR("*float*: Max cp\n\n*Constraints*: MIN=0\n\n*Required*: set to 1 if not provided."),
+{"wind_resource_distribution", (getter)Resource_get_wind_resource_distribution,(setter)Resource_set_wind_resource_distribution,
+	PyDoc_STR("*sequence[sequence]*: Wind Speed x Dir Distribution as 2-D PDF [m/s,deg]\n\n*Required*: set to 2 if not provided."),
  	NULL},
-{"wind_turbine_powercurve_powerout", (getter)WindTurbine_get_wind_turbine_powercurve_powerout,(setter)WindTurbine_set_wind_turbine_powercurve_powerout,
-	PyDoc_STR("*sequence*: Power curve turbine output array [kW]\n\n*Constraints*: LENGTH_EQUAL=wind_turbine_powercurve_windspeeds\n\n*Required*: True"),
+{"wind_resource_filename", (getter)Resource_get_wind_resource_filename,(setter)Resource_set_wind_resource_filename,
+	PyDoc_STR("*str*: Local wind data file path\n\n*Constraints*: LOCAL_FILE\n\n*Required*: False"),
  	NULL},
-{"wind_turbine_powercurve_windspeeds", (getter)WindTurbine_get_wind_turbine_powercurve_windspeeds,(setter)WindTurbine_set_wind_turbine_powercurve_windspeeds,
-	PyDoc_STR("*sequence*: Power curve wind speed array [m/s]\n\n*Required*: True"),
- 	NULL},
-{"wind_turbine_rotor_diameter", (getter)WindTurbine_get_wind_turbine_rotor_diameter,(setter)WindTurbine_set_wind_turbine_rotor_diameter,
-	PyDoc_STR("*float*: Rotor diameter [m]\n\n*Constraints*: POSITIVE\n\n*Required*: True"),
- 	NULL},
-	{NULL}  /* Sentinel */
-};
-
-static PyTypeObject WindTurbine_Type = {
-		/* The ob_type field must be initialized in the module init function
-		 * to be portable to Windows without using C++. */
-		PyVarObject_HEAD_INIT(NULL, 0)
-		"Windpower.WindTurbine",             /*tp_name*/
-		sizeof(WindTurbineObject),          /*tp_basicsize*/
-		0,                          /*tp_itemsize*/
-		/* methods */
-		0,    /*tp_dealloc*/
-		0,                          /*tp_print*/
-		(getattrfunc)0,             /*tp_getattr*/
-		0,                          /*tp_setattr*/
-		0,                          /*tp_reserved*/
-		0,                          /*tp_repr*/
-		0,                          /*tp_as_number*/
-		0,                          /*tp_as_sequence*/
-		0,                          /*tp_as_mapping*/
-		0,                          /*tp_hash*/
-		0,                          /*tp_call*/
-		0,                          /*tp_str*/
-		0,                          /*tp_getattro*/
-		0,                          /*tp_setattro*/
-		0,                          /*tp_as_buffer*/
-		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
-		0,                          /*tp_doc*/
-		0,                          /*tp_traverse*/
-		0,                          /*tp_clear*/
-		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistofnset*/
-		0,                          /*tp_iter*/
-		0,                          /*tp_iternext*/
-		WindTurbine_methods,         /*tp_methods*/
-		0,                          /*tp_members*/
-		WindTurbine_getset,          /*tp_getset*/
-		0,                          /*tp_base*/
-		0,                          /*tp_dict*/
-		0,                          /*tp_descr_get*/
-		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictofnset*/
-		0,                          /*tp_init*/
-		0,                          /*tp_alloc*/
-		0,             /*tp_new*/
-		0,                          /*tp_free*/
-		0,                          /*tp_is_gc*/
-};
-
-
-/*
- * WindFarm Group
- */ 
-
-typedef struct {
-	PyObject_HEAD
-	SAM_Windpower   data_ptr;
-} WindFarmObject;
-
-static PyTypeObject WindFarm_Type;
-
-static PyObject *
-WindFarm_new(SAM_Windpower data_ptr)
-{
-	PyObject* new_obj = WindFarm_Type.tp_alloc(&WindFarm_Type,0);
-
-	WindFarmObject* WindFarm_obj = (WindFarmObject*)new_obj;
-
-	WindFarm_obj->data_ptr = data_ptr;
-
-	return new_obj;
-}
-
-/* WindFarm methods */
-
-static PyObject *
-WindFarm_assign(WindFarmObject *self, PyObject *args)
-{
-	PyObject* dict;
-	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
-		return NULL;
-	}
-
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Windpower", "WindFarm")){
-		return NULL;
-	}
-
-	Py_INCREF(Py_None);
-	return Py_None;
-}
-
-static PyObject *
-WindFarm_export(WindFarmObject *self, PyObject *args)
-{
-	PyTypeObject* tp = &WindFarm_Type;
-	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
-	return dict;
-}
-
-static PyMethodDef WindFarm_methods[] = {
-		{"assign",            (PyCFunction)WindFarm_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``WindFarm_vals = { var: val, ...}``")},
-		{"export",            (PyCFunction)WindFarm_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
-		{NULL,              NULL}           /* sentinel */
-};
-
-static PyObject *
-WindFarm_get_system_capacity(WindFarmObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Windpower_WindFarm_system_capacity_nget, self->data_ptr);
-}
-
-static int
-WindFarm_set_system_capacity(WindFarmObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Windpower_WindFarm_system_capacity_nset, self->data_ptr);
-}
-
-static PyObject *
-WindFarm_get_wind_farm_losses_percent(WindFarmObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Windpower_WindFarm_wind_farm_losses_percent_nget, self->data_ptr);
-}
-
-static int
-WindFarm_set_wind_farm_losses_percent(WindFarmObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Windpower_WindFarm_wind_farm_losses_percent_nset, self->data_ptr);
-}
-
-static PyObject *
-WindFarm_get_wind_farm_wake_model(WindFarmObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Windpower_WindFarm_wind_farm_wake_model_nget, self->data_ptr);
-}
-
-static int
-WindFarm_set_wind_farm_wake_model(WindFarmObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Windpower_WindFarm_wind_farm_wake_model_nset, self->data_ptr);
-}
-
-static PyObject *
-WindFarm_get_wind_farm_xCoordinates(WindFarmObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Windpower_WindFarm_wind_farm_xCoordinates_aget, self->data_ptr);
-}
-
-static int
-WindFarm_set_wind_farm_xCoordinates(WindFarmObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_Windpower_WindFarm_wind_farm_xCoordinates_aset, self->data_ptr);
-}
-
-static PyObject *
-WindFarm_get_wind_farm_yCoordinates(WindFarmObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Windpower_WindFarm_wind_farm_yCoordinates_aget, self->data_ptr);
-}
-
-static int
-WindFarm_set_wind_farm_yCoordinates(WindFarmObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_Windpower_WindFarm_wind_farm_yCoordinates_aset, self->data_ptr);
-}
-
-static PyObject *
-WindFarm_get_wind_resource_turbulence_coeff(WindFarmObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Windpower_WindFarm_wind_resource_turbulence_coeff_nget, self->data_ptr);
-}
-
-static int
-WindFarm_set_wind_resource_turbulence_coeff(WindFarmObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Windpower_WindFarm_wind_resource_turbulence_coeff_nset, self->data_ptr);
-}
-
-static PyGetSetDef WindFarm_getset[] = {
-{"system_capacity", (getter)WindFarm_get_system_capacity,(setter)WindFarm_set_system_capacity,
-	PyDoc_STR("*float*: Nameplate capacity [kW]\n\n*Constraints*: MIN=0\n\n*Required*: True"),
- 	NULL},
-{"wind_farm_losses_percent", (getter)WindFarm_get_wind_farm_losses_percent,(setter)WindFarm_set_wind_farm_losses_percent,
-	PyDoc_STR("*float*: Percentage losses [%]\n\n*Required*: True"),
- 	NULL},
-{"wind_farm_wake_model", (getter)WindFarm_get_wind_farm_wake_model,(setter)WindFarm_set_wind_farm_wake_model,
-	PyDoc_STR("*float*: Wake Model [0/1/2]\n\n*Constraints*: INTEGER\n\n*Required*: True"),
- 	NULL},
-{"wind_farm_xCoordinates", (getter)WindFarm_get_wind_farm_xCoordinates,(setter)WindFarm_set_wind_farm_xCoordinates,
-	PyDoc_STR("*sequence*: Turbine X coordinates [m]\n\n*Required*: True"),
- 	NULL},
-{"wind_farm_yCoordinates", (getter)WindFarm_get_wind_farm_yCoordinates,(setter)WindFarm_set_wind_farm_yCoordinates,
-	PyDoc_STR("*sequence*: Turbine Y coordinates [m]\n\n*Constraints*: LENGTH_EQUAL=wind_farm_xCoordinates\n\n*Required*: True"),
- 	NULL},
-{"wind_resource_turbulence_coeff", (getter)WindFarm_get_wind_resource_turbulence_coeff,(setter)WindFarm_set_wind_resource_turbulence_coeff,
-	PyDoc_STR("*float*: Turbulence coefficient [%]\n\n*Constraints*: MIN=0\n\n*Required*: True"),
- 	NULL},
-	{NULL}  /* Sentinel */
-};
-
-static PyTypeObject WindFarm_Type = {
-		/* The ob_type field must be initialized in the module init function
-		 * to be portable to Windows without using C++. */
-		PyVarObject_HEAD_INIT(NULL, 0)
-		"Windpower.WindFarm",             /*tp_name*/
-		sizeof(WindFarmObject),          /*tp_basicsize*/
-		0,                          /*tp_itemsize*/
-		/* methods */
-		0,    /*tp_dealloc*/
-		0,                          /*tp_print*/
-		(getattrfunc)0,             /*tp_getattr*/
-		0,                          /*tp_setattr*/
-		0,                          /*tp_reserved*/
-		0,                          /*tp_repr*/
-		0,                          /*tp_as_number*/
-		0,                          /*tp_as_sequence*/
-		0,                          /*tp_as_mapping*/
-		0,                          /*tp_hash*/
-		0,                          /*tp_call*/
-		0,                          /*tp_str*/
-		0,                          /*tp_getattro*/
-		0,                          /*tp_setattro*/
-		0,                          /*tp_as_buffer*/
-		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
-		0,                          /*tp_doc*/
-		0,                          /*tp_traverse*/
-		0,                          /*tp_clear*/
-		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistofnset*/
-		0,                          /*tp_iter*/
-		0,                          /*tp_iternext*/
-		WindFarm_methods,         /*tp_methods*/
-		0,                          /*tp_members*/
-		WindFarm_getset,          /*tp_getset*/
-		0,                          /*tp_base*/
-		0,                          /*tp_dict*/
-		0,                          /*tp_descr_get*/
-		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictofnset*/
-		0,                          /*tp_init*/
-		0,                          /*tp_alloc*/
-		0,             /*tp_new*/
-		0,                          /*tp_free*/
-		0,                          /*tp_is_gc*/
-};
-
-
-/*
- * WindPower Group
- */ 
-
-typedef struct {
-	PyObject_HEAD
-	SAM_Windpower   data_ptr;
-} WindPowerObject;
-
-static PyTypeObject WindPower_Type;
-
-static PyObject *
-WindPower_new(SAM_Windpower data_ptr)
-{
-	PyObject* new_obj = WindPower_Type.tp_alloc(&WindPower_Type,0);
-
-	WindPowerObject* WindPower_obj = (WindPowerObject*)new_obj;
-
-	WindPower_obj->data_ptr = data_ptr;
-
-	return new_obj;
-}
-
-/* WindPower methods */
-
-static PyObject *
-WindPower_assign(WindPowerObject *self, PyObject *args)
-{
-	PyObject* dict;
-	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
-		return NULL;
-	}
-
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Windpower", "WindPower")){
-		return NULL;
-	}
-
-	Py_INCREF(Py_None);
-	return Py_None;
-}
-
-static PyObject *
-WindPower_export(WindPowerObject *self, PyObject *args)
-{
-	PyTypeObject* tp = &WindPower_Type;
-	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
-	return dict;
-}
-
-static PyMethodDef WindPower_methods[] = {
-		{"assign",            (PyCFunction)WindPower_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``WindPower_vals = { var: val, ...}``")},
-		{"export",            (PyCFunction)WindPower_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
-		{NULL,              NULL}           /* sentinel */
-};
-
-static PyObject *
-WindPower_get_en_icing_cutoff(WindPowerObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Windpower_WindPower_en_icing_cutoff_nget, self->data_ptr);
-}
-
-static int
-WindPower_set_en_icing_cutoff(WindPowerObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Windpower_WindPower_en_icing_cutoff_nset, self->data_ptr);
-}
-
-static PyObject *
-WindPower_get_en_low_temp_cutoff(WindPowerObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Windpower_WindPower_en_low_temp_cutoff_nget, self->data_ptr);
-}
-
-static int
-WindPower_set_en_low_temp_cutoff(WindPowerObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Windpower_WindPower_en_low_temp_cutoff_nset, self->data_ptr);
-}
-
-static PyObject *
-WindPower_get_icing_cutoff_rh(WindPowerObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Windpower_WindPower_icing_cutoff_rh_nget, self->data_ptr);
-}
-
-static int
-WindPower_set_icing_cutoff_rh(WindPowerObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Windpower_WindPower_icing_cutoff_rh_nset, self->data_ptr);
-}
-
-static PyObject *
-WindPower_get_icing_cutoff_temp(WindPowerObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Windpower_WindPower_icing_cutoff_temp_nget, self->data_ptr);
-}
-
-static int
-WindPower_set_icing_cutoff_temp(WindPowerObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Windpower_WindPower_icing_cutoff_temp_nset, self->data_ptr);
-}
-
-static PyObject *
-WindPower_get_low_temp_cutoff(WindPowerObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Windpower_WindPower_low_temp_cutoff_nget, self->data_ptr);
-}
-
-static int
-WindPower_set_low_temp_cutoff(WindPowerObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Windpower_WindPower_low_temp_cutoff_nset, self->data_ptr);
-}
-
-static PyObject *
-WindPower_get_wind_resource_model_choice(WindPowerObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Windpower_WindPower_wind_resource_model_choice_nget, self->data_ptr);
-}
-
-static int
-WindPower_set_wind_resource_model_choice(WindPowerObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Windpower_WindPower_wind_resource_model_choice_nset, self->data_ptr);
-}
-
-static PyGetSetDef WindPower_getset[] = {
-{"en_icing_cutoff", (getter)WindPower_get_en_icing_cutoff,(setter)WindPower_set_en_icing_cutoff,
-	PyDoc_STR("*float*: Enable Icing Cutoff [0/1]\n\n*Constraints*: INTEGER\n\n*Required*: set to 0 if not provided."),
- 	NULL},
-{"en_low_temp_cutoff", (getter)WindPower_get_en_low_temp_cutoff,(setter)WindPower_set_en_low_temp_cutoff,
-	PyDoc_STR("*float*: Enable Low Temperature Cutoff [0/1]\n\n*Constraints*: INTEGER\n\n*Required*: set to 0 if not provided."),
- 	NULL},
-{"icing_cutoff_rh", (getter)WindPower_get_icing_cutoff_rh,(setter)WindPower_set_icing_cutoff_rh,
-	PyDoc_STR("*float*: Icing Cutoff Relative Humidity [%]\n\n*Constraints*: MIN=0\n\n*Required*: set to 1 if not provided."),
- 	NULL},
-{"icing_cutoff_temp", (getter)WindPower_get_icing_cutoff_temp,(setter)WindPower_set_icing_cutoff_temp,
-	PyDoc_STR("*float*: Icing Cutoff Temperature [C]\n\n*Required*: set to 1 if not provided."),
- 	NULL},
-{"low_temp_cutoff", (getter)WindPower_get_low_temp_cutoff,(setter)WindPower_set_low_temp_cutoff,
-	PyDoc_STR("*float*: Low Temperature Cutoff [C]\n\n*Required*: set to 1 if not provided."),
- 	NULL},
-{"wind_resource_model_choice", (getter)WindPower_get_wind_resource_model_choice,(setter)WindPower_set_wind_resource_model_choice,
+{"wind_resource_model_choice", (getter)Resource_get_wind_resource_model_choice,(setter)Resource_set_wind_resource_model_choice,
 	PyDoc_STR("*float*: Hourly or Weibull model [0/1]\n\n*Constraints*: INTEGER\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
 
-static PyTypeObject WindPower_Type = {
+static PyTypeObject Resource_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"Windpower.WindPower",             /*tp_name*/
-		sizeof(WindPowerObject),          /*tp_basicsize*/
+		"Windpower.Resource",             /*tp_name*/
+		sizeof(ResourceObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
 		0,    /*tp_dealloc*/
@@ -726,9 +205,9 @@ static PyTypeObject WindPower_Type = {
 		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
-		WindPower_methods,         /*tp_methods*/
+		Resource_methods,         /*tp_methods*/
 		0,                          /*tp_members*/
-		WindPower_getset,          /*tp_getset*/
+		Resource_getset,          /*tp_getset*/
 		0,                          /*tp_base*/
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
@@ -743,39 +222,39 @@ static PyTypeObject WindPower_Type = {
 
 
 /*
- * WindSpeedWeibullDistribution Group
+ * Turbine Group
  */ 
 
 typedef struct {
 	PyObject_HEAD
 	SAM_Windpower   data_ptr;
-} WindSpeedWeibullDistributionObject;
+} TurbineObject;
 
-static PyTypeObject WindSpeedWeibullDistribution_Type;
+static PyTypeObject Turbine_Type;
 
 static PyObject *
-WindSpeedWeibullDistribution_new(SAM_Windpower data_ptr)
+Turbine_new(SAM_Windpower data_ptr)
 {
-	PyObject* new_obj = WindSpeedWeibullDistribution_Type.tp_alloc(&WindSpeedWeibullDistribution_Type,0);
+	PyObject* new_obj = Turbine_Type.tp_alloc(&Turbine_Type,0);
 
-	WindSpeedWeibullDistributionObject* WindSpeedWeibullDistribution_obj = (WindSpeedWeibullDistributionObject*)new_obj;
+	TurbineObject* Turbine_obj = (TurbineObject*)new_obj;
 
-	WindSpeedWeibullDistribution_obj->data_ptr = data_ptr;
+	Turbine_obj->data_ptr = data_ptr;
 
 	return new_obj;
 }
 
-/* WindSpeedWeibullDistribution methods */
+/* Turbine methods */
 
 static PyObject *
-WindSpeedWeibullDistribution_assign(WindSpeedWeibullDistributionObject *self, PyObject *args)
+Turbine_assign(TurbineObject *self, PyObject *args)
 {
 	PyObject* dict;
 	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Windpower", "WindSpeedWeibullDistribution")){
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Windpower", "Turbine")){
 		return NULL;
 	}
 
@@ -784,76 +263,123 @@ WindSpeedWeibullDistribution_assign(WindSpeedWeibullDistributionObject *self, Py
 }
 
 static PyObject *
-WindSpeedWeibullDistribution_export(WindSpeedWeibullDistributionObject *self, PyObject *args)
+Turbine_export(TurbineObject *self, PyObject *args)
 {
-	PyTypeObject* tp = &WindSpeedWeibullDistribution_Type;
+	PyTypeObject* tp = &Turbine_Type;
 	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
 	return dict;
 }
 
-static PyMethodDef WindSpeedWeibullDistribution_methods[] = {
-		{"assign",            (PyCFunction)WindSpeedWeibullDistribution_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``WindSpeedWeibullDistribution_vals = { var: val, ...}``")},
-		{"export",            (PyCFunction)WindSpeedWeibullDistribution_export,  METH_VARARGS,
+static PyMethodDef Turbine_methods[] = {
+		{"assign",            (PyCFunction)Turbine_assign,  METH_VARARGS,
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Turbine_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)Turbine_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+		{"calculate_powercurve", (PyCFunction)Turbine_calculate_powercurve, METH_VARARGS | METH_KEYWORDS,
+			PyDoc_STR("Calculates the power produced by a wind turbine at windspeeds incremented by 0.25 m/s\nInput: var_table with key-value pairs\n     'turbine_size' - double [kW]\n     'rotor_diameter' - double [m]\n     'elevation' - double [m], required if using Weibull resource model, otherwise 0\n     'max_cp' - double max Cp [-],\n     'max_tip_speed' - double [m/s]\n     'max_tip_sp_ratio' - double max tip speed ratio [-]\n     'cut_in' - double cut in speed [m/s]\n     'cut_out' - double cut out speed [m/s]\n     'drive_train' - int 0: 3 Stage Planetary, 1: Single Stage - Low Speed Generator, 2: Multi-Generator, 3: Direct Drive\nOutput: key-value pairs added to var_table\n     'wind_turbine_powercurve_windspeeds' - array [m/s]\n     'wind_turbine_powercurve_powerout' - array [m/s]\n     'rated_wind_speed' - double [m/s[\n     'hub_efficiency' - array [m/s]")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 static PyObject *
-WindSpeedWeibullDistribution_get_weibull_k_factor(WindSpeedWeibullDistributionObject *self, void *closure)
+Turbine_get_wind_resource_shear(TurbineObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Windpower_WindSpeedWeibullDistribution_weibull_k_factor_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Windpower_Turbine_wind_resource_shear_nget, self->data_ptr);
 }
 
 static int
-WindSpeedWeibullDistribution_set_weibull_k_factor(WindSpeedWeibullDistributionObject *self, PyObject *value, void *closure)
+Turbine_set_wind_resource_shear(TurbineObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Windpower_WindSpeedWeibullDistribution_weibull_k_factor_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Windpower_Turbine_wind_resource_shear_nset, self->data_ptr);
 }
 
 static PyObject *
-WindSpeedWeibullDistribution_get_weibull_reference_height(WindSpeedWeibullDistributionObject *self, void *closure)
+Turbine_get_wind_turbine_hub_ht(TurbineObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Windpower_WindSpeedWeibullDistribution_weibull_reference_height_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Windpower_Turbine_wind_turbine_hub_ht_nget, self->data_ptr);
 }
 
 static int
-WindSpeedWeibullDistribution_set_weibull_reference_height(WindSpeedWeibullDistributionObject *self, PyObject *value, void *closure)
+Turbine_set_wind_turbine_hub_ht(TurbineObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Windpower_WindSpeedWeibullDistribution_weibull_reference_height_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Windpower_Turbine_wind_turbine_hub_ht_nset, self->data_ptr);
 }
 
 static PyObject *
-WindSpeedWeibullDistribution_get_weibull_wind_speed(WindSpeedWeibullDistributionObject *self, void *closure)
+Turbine_get_wind_turbine_max_cp(TurbineObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Windpower_WindSpeedWeibullDistribution_weibull_wind_speed_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Windpower_Turbine_wind_turbine_max_cp_nget, self->data_ptr);
 }
 
 static int
-WindSpeedWeibullDistribution_set_weibull_wind_speed(WindSpeedWeibullDistributionObject *self, PyObject *value, void *closure)
+Turbine_set_wind_turbine_max_cp(TurbineObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Windpower_WindSpeedWeibullDistribution_weibull_wind_speed_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Windpower_Turbine_wind_turbine_max_cp_nset, self->data_ptr);
 }
 
-static PyGetSetDef WindSpeedWeibullDistribution_getset[] = {
-{"weibull_k_factor", (getter)WindSpeedWeibullDistribution_get_weibull_k_factor,(setter)WindSpeedWeibullDistribution_set_weibull_k_factor,
-	PyDoc_STR("*float*: Weibull K factor for wind resource\n\n*Required*: set to 1 if not provided."),
+static PyObject *
+Turbine_get_wind_turbine_powercurve_powerout(TurbineObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Windpower_Turbine_wind_turbine_powercurve_powerout_aget, self->data_ptr);
+}
+
+static int
+Turbine_set_wind_turbine_powercurve_powerout(TurbineObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Windpower_Turbine_wind_turbine_powercurve_powerout_aset, self->data_ptr);
+}
+
+static PyObject *
+Turbine_get_wind_turbine_powercurve_windspeeds(TurbineObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Windpower_Turbine_wind_turbine_powercurve_windspeeds_aget, self->data_ptr);
+}
+
+static int
+Turbine_set_wind_turbine_powercurve_windspeeds(TurbineObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Windpower_Turbine_wind_turbine_powercurve_windspeeds_aset, self->data_ptr);
+}
+
+static PyObject *
+Turbine_get_wind_turbine_rotor_diameter(TurbineObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Windpower_Turbine_wind_turbine_rotor_diameter_nget, self->data_ptr);
+}
+
+static int
+Turbine_set_wind_turbine_rotor_diameter(TurbineObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Windpower_Turbine_wind_turbine_rotor_diameter_nset, self->data_ptr);
+}
+
+static PyGetSetDef Turbine_getset[] = {
+{"wind_resource_shear", (getter)Turbine_get_wind_resource_shear,(setter)Turbine_set_wind_resource_shear,
+	PyDoc_STR("*float*: Shear exponent\n\n*Constraints*: MIN=0\n\n*Required*: True"),
  	NULL},
-{"weibull_reference_height", (getter)WindSpeedWeibullDistribution_get_weibull_reference_height,(setter)WindSpeedWeibullDistribution_set_weibull_reference_height,
-	PyDoc_STR("*float*: Reference height for Weibull wind speed [m]\n\n*Constraints*: MIN=0\n\n*Required*: set to 50 if not provided."),
+{"wind_turbine_hub_ht", (getter)Turbine_get_wind_turbine_hub_ht,(setter)Turbine_set_wind_turbine_hub_ht,
+	PyDoc_STR("*float*: Hub height [m]\n\n*Constraints*: POSITIVE\n\n*Required*: True"),
  	NULL},
-{"weibull_wind_speed", (getter)WindSpeedWeibullDistribution_get_weibull_wind_speed,(setter)WindSpeedWeibullDistribution_set_weibull_wind_speed,
-	PyDoc_STR("*float*: Average wind speed for Weibull model\n\n*Constraints*: MIN=0\n\n*Required*: set to 1 if not provided."),
+{"wind_turbine_max_cp", (getter)Turbine_get_wind_turbine_max_cp,(setter)Turbine_set_wind_turbine_max_cp,
+	PyDoc_STR("*float*: Max cp\n\n*Constraints*: MIN=0\n\n*Required*: set to 1 if not provided."),
+ 	NULL},
+{"wind_turbine_powercurve_powerout", (getter)Turbine_get_wind_turbine_powercurve_powerout,(setter)Turbine_set_wind_turbine_powercurve_powerout,
+	PyDoc_STR("*sequence*: Power curve turbine output array [kW]\n\n*Constraints*: LENGTH_EQUAL=wind_turbine_powercurve_windspeeds\n\n*Required*: True"),
+ 	NULL},
+{"wind_turbine_powercurve_windspeeds", (getter)Turbine_get_wind_turbine_powercurve_windspeeds,(setter)Turbine_set_wind_turbine_powercurve_windspeeds,
+	PyDoc_STR("*sequence*: Power curve wind speed array [m/s]\n\n*Required*: True"),
+ 	NULL},
+{"wind_turbine_rotor_diameter", (getter)Turbine_get_wind_turbine_rotor_diameter,(setter)Turbine_set_wind_turbine_rotor_diameter,
+	PyDoc_STR("*float*: Rotor diameter [m]\n\n*Constraints*: POSITIVE\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
 
-static PyTypeObject WindSpeedWeibullDistribution_Type = {
+static PyTypeObject Turbine_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"Windpower.WindSpeedWeibullDistribution",             /*tp_name*/
-		sizeof(WindSpeedWeibullDistributionObject),          /*tp_basicsize*/
+		"Windpower.Turbine",             /*tp_name*/
+		sizeof(TurbineObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
 		0,    /*tp_dealloc*/
@@ -879,9 +405,630 @@ static PyTypeObject WindSpeedWeibullDistribution_Type = {
 		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
-		WindSpeedWeibullDistribution_methods,         /*tp_methods*/
+		Turbine_methods,         /*tp_methods*/
 		0,                          /*tp_members*/
-		WindSpeedWeibullDistribution_getset,          /*tp_getset*/
+		Turbine_getset,          /*tp_getset*/
+		0,                          /*tp_base*/
+		0,                          /*tp_dict*/
+		0,                          /*tp_descr_get*/
+		0,                          /*tp_descr_set*/
+		0,                          /*tp_dictofnset*/
+		0,                          /*tp_init*/
+		0,                          /*tp_alloc*/
+		0,             /*tp_new*/
+		0,                          /*tp_free*/
+		0,                          /*tp_is_gc*/
+};
+
+
+/*
+ * Farm Group
+ */ 
+
+typedef struct {
+	PyObject_HEAD
+	SAM_Windpower   data_ptr;
+} FarmObject;
+
+static PyTypeObject Farm_Type;
+
+static PyObject *
+Farm_new(SAM_Windpower data_ptr)
+{
+	PyObject* new_obj = Farm_Type.tp_alloc(&Farm_Type,0);
+
+	FarmObject* Farm_obj = (FarmObject*)new_obj;
+
+	Farm_obj->data_ptr = data_ptr;
+
+	return new_obj;
+}
+
+/* Farm methods */
+
+static PyObject *
+Farm_assign(FarmObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Windpower", "Farm")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+Farm_export(FarmObject *self, PyObject *args)
+{
+	PyTypeObject* tp = &Farm_Type;
+	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
+	return dict;
+}
+
+static PyMethodDef Farm_methods[] = {
+		{"assign",            (PyCFunction)Farm_assign,  METH_VARARGS,
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Farm_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)Farm_export,  METH_VARARGS,
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+		{NULL,              NULL}           /* sentinel */
+};
+
+static PyObject *
+Farm_get_system_capacity(FarmObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Windpower_Farm_system_capacity_nget, self->data_ptr);
+}
+
+static int
+Farm_set_system_capacity(FarmObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Windpower_Farm_system_capacity_nset, self->data_ptr);
+}
+
+static PyObject *
+Farm_get_wind_farm_wake_model(FarmObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Windpower_Farm_wind_farm_wake_model_nget, self->data_ptr);
+}
+
+static int
+Farm_set_wind_farm_wake_model(FarmObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Windpower_Farm_wind_farm_wake_model_nset, self->data_ptr);
+}
+
+static PyObject *
+Farm_get_wind_farm_xCoordinates(FarmObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Windpower_Farm_wind_farm_xCoordinates_aget, self->data_ptr);
+}
+
+static int
+Farm_set_wind_farm_xCoordinates(FarmObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Windpower_Farm_wind_farm_xCoordinates_aset, self->data_ptr);
+}
+
+static PyObject *
+Farm_get_wind_farm_yCoordinates(FarmObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Windpower_Farm_wind_farm_yCoordinates_aget, self->data_ptr);
+}
+
+static int
+Farm_set_wind_farm_yCoordinates(FarmObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Windpower_Farm_wind_farm_yCoordinates_aset, self->data_ptr);
+}
+
+static PyObject *
+Farm_get_wind_resource_turbulence_coeff(FarmObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Windpower_Farm_wind_resource_turbulence_coeff_nget, self->data_ptr);
+}
+
+static int
+Farm_set_wind_resource_turbulence_coeff(FarmObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Windpower_Farm_wind_resource_turbulence_coeff_nset, self->data_ptr);
+}
+
+static PyGetSetDef Farm_getset[] = {
+{"system_capacity", (getter)Farm_get_system_capacity,(setter)Farm_set_system_capacity,
+	PyDoc_STR("*float*: Nameplate capacity [kW]\n\n*Constraints*: MIN=0\n\n*Required*: True"),
+ 	NULL},
+{"wind_farm_wake_model", (getter)Farm_get_wind_farm_wake_model,(setter)Farm_set_wind_farm_wake_model,
+	PyDoc_STR("*float*: Wake Model [0/1/2/3]\n\n*Constraints*: INTEGER\n\n*Required*: True"),
+ 	NULL},
+{"wind_farm_xCoordinates", (getter)Farm_get_wind_farm_xCoordinates,(setter)Farm_set_wind_farm_xCoordinates,
+	PyDoc_STR("*sequence*: Turbine X coordinates [m]\n\n*Required*: True"),
+ 	NULL},
+{"wind_farm_yCoordinates", (getter)Farm_get_wind_farm_yCoordinates,(setter)Farm_set_wind_farm_yCoordinates,
+	PyDoc_STR("*sequence*: Turbine Y coordinates [m]\n\n*Constraints*: LENGTH_EQUAL=wind_farm_xCoordinates\n\n*Required*: True"),
+ 	NULL},
+{"wind_resource_turbulence_coeff", (getter)Farm_get_wind_resource_turbulence_coeff,(setter)Farm_set_wind_resource_turbulence_coeff,
+	PyDoc_STR("*float*: Turbulence coefficient [%]\n\n*Constraints*: MIN=0\n\n*Required*: True"),
+ 	NULL},
+	{NULL}  /* Sentinel */
+};
+
+static PyTypeObject Farm_Type = {
+		/* The ob_type field must be initialized in the module init function
+		 * to be portable to Windows without using C++. */
+		PyVarObject_HEAD_INIT(NULL, 0)
+		"Windpower.Farm",             /*tp_name*/
+		sizeof(FarmObject),          /*tp_basicsize*/
+		0,                          /*tp_itemsize*/
+		/* methods */
+		0,    /*tp_dealloc*/
+		0,                          /*tp_print*/
+		(getattrfunc)0,             /*tp_getattr*/
+		0,                          /*tp_setattr*/
+		0,                          /*tp_reserved*/
+		0,                          /*tp_repr*/
+		0,                          /*tp_as_number*/
+		0,                          /*tp_as_sequence*/
+		0,                          /*tp_as_mapping*/
+		0,                          /*tp_hash*/
+		0,                          /*tp_call*/
+		0,                          /*tp_str*/
+		0,                          /*tp_getattro*/
+		0,                          /*tp_setattro*/
+		0,                          /*tp_as_buffer*/
+		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
+		0,                          /*tp_doc*/
+		0,                          /*tp_traverse*/
+		0,                          /*tp_clear*/
+		0,                          /*tp_richcompare*/
+		0,                          /*tp_weaklistofnset*/
+		0,                          /*tp_iter*/
+		0,                          /*tp_iternext*/
+		Farm_methods,         /*tp_methods*/
+		0,                          /*tp_members*/
+		Farm_getset,          /*tp_getset*/
+		0,                          /*tp_base*/
+		0,                          /*tp_dict*/
+		0,                          /*tp_descr_get*/
+		0,                          /*tp_descr_set*/
+		0,                          /*tp_dictofnset*/
+		0,                          /*tp_init*/
+		0,                          /*tp_alloc*/
+		0,             /*tp_new*/
+		0,                          /*tp_free*/
+		0,                          /*tp_is_gc*/
+};
+
+
+/*
+ * Losses Group
+ */ 
+
+typedef struct {
+	PyObject_HEAD
+	SAM_Windpower   data_ptr;
+} LossesObject;
+
+static PyTypeObject Losses_Type;
+
+static PyObject *
+Losses_new(SAM_Windpower data_ptr)
+{
+	PyObject* new_obj = Losses_Type.tp_alloc(&Losses_Type,0);
+
+	LossesObject* Losses_obj = (LossesObject*)new_obj;
+
+	Losses_obj->data_ptr = data_ptr;
+
+	return new_obj;
+}
+
+/* Losses methods */
+
+static PyObject *
+Losses_assign(LossesObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Windpower", "Losses")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+Losses_export(LossesObject *self, PyObject *args)
+{
+	PyTypeObject* tp = &Losses_Type;
+	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
+	return dict;
+}
+
+static PyMethodDef Losses_methods[] = {
+		{"assign",            (PyCFunction)Losses_assign,  METH_VARARGS,
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Losses_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)Losses_export,  METH_VARARGS,
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+		{NULL,              NULL}           /* sentinel */
+};
+
+static PyObject *
+Losses_get_avail_bop_loss(LossesObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Windpower_Losses_avail_bop_loss_nget, self->data_ptr);
+}
+
+static int
+Losses_set_avail_bop_loss(LossesObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Windpower_Losses_avail_bop_loss_nset, self->data_ptr);
+}
+
+static PyObject *
+Losses_get_avail_grid_loss(LossesObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Windpower_Losses_avail_grid_loss_nget, self->data_ptr);
+}
+
+static int
+Losses_set_avail_grid_loss(LossesObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Windpower_Losses_avail_grid_loss_nset, self->data_ptr);
+}
+
+static PyObject *
+Losses_get_avail_turb_loss(LossesObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Windpower_Losses_avail_turb_loss_nget, self->data_ptr);
+}
+
+static int
+Losses_set_avail_turb_loss(LossesObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Windpower_Losses_avail_turb_loss_nset, self->data_ptr);
+}
+
+static PyObject *
+Losses_get_elec_eff_loss(LossesObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Windpower_Losses_elec_eff_loss_nget, self->data_ptr);
+}
+
+static int
+Losses_set_elec_eff_loss(LossesObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Windpower_Losses_elec_eff_loss_nset, self->data_ptr);
+}
+
+static PyObject *
+Losses_get_en_icing_cutoff(LossesObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Windpower_Losses_en_icing_cutoff_nget, self->data_ptr);
+}
+
+static int
+Losses_set_en_icing_cutoff(LossesObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Windpower_Losses_en_icing_cutoff_nset, self->data_ptr);
+}
+
+static PyObject *
+Losses_get_en_low_temp_cutoff(LossesObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Windpower_Losses_en_low_temp_cutoff_nget, self->data_ptr);
+}
+
+static int
+Losses_set_en_low_temp_cutoff(LossesObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Windpower_Losses_en_low_temp_cutoff_nset, self->data_ptr);
+}
+
+static PyObject *
+Losses_get_env_degrad_loss(LossesObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Windpower_Losses_env_degrad_loss_nget, self->data_ptr);
+}
+
+static int
+Losses_set_env_degrad_loss(LossesObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Windpower_Losses_env_degrad_loss_nset, self->data_ptr);
+}
+
+static PyObject *
+Losses_get_env_exposure_loss(LossesObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Windpower_Losses_env_exposure_loss_nget, self->data_ptr);
+}
+
+static int
+Losses_set_env_exposure_loss(LossesObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Windpower_Losses_env_exposure_loss_nset, self->data_ptr);
+}
+
+static PyObject *
+Losses_get_env_ext_loss(LossesObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Windpower_Losses_env_ext_loss_nget, self->data_ptr);
+}
+
+static int
+Losses_set_env_ext_loss(LossesObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Windpower_Losses_env_ext_loss_nset, self->data_ptr);
+}
+
+static PyObject *
+Losses_get_env_icing_loss(LossesObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Windpower_Losses_env_icing_loss_nget, self->data_ptr);
+}
+
+static int
+Losses_set_env_icing_loss(LossesObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Windpower_Losses_env_icing_loss_nset, self->data_ptr);
+}
+
+static PyObject *
+Losses_get_icing_cutoff_rh(LossesObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Windpower_Losses_icing_cutoff_rh_nget, self->data_ptr);
+}
+
+static int
+Losses_set_icing_cutoff_rh(LossesObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Windpower_Losses_icing_cutoff_rh_nset, self->data_ptr);
+}
+
+static PyObject *
+Losses_get_icing_cutoff_temp(LossesObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Windpower_Losses_icing_cutoff_temp_nget, self->data_ptr);
+}
+
+static int
+Losses_set_icing_cutoff_temp(LossesObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Windpower_Losses_icing_cutoff_temp_nset, self->data_ptr);
+}
+
+static PyObject *
+Losses_get_low_temp_cutoff(LossesObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Windpower_Losses_low_temp_cutoff_nget, self->data_ptr);
+}
+
+static int
+Losses_set_low_temp_cutoff(LossesObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Windpower_Losses_low_temp_cutoff_nset, self->data_ptr);
+}
+
+static PyObject *
+Losses_get_ops_env_loss(LossesObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Windpower_Losses_ops_env_loss_nget, self->data_ptr);
+}
+
+static int
+Losses_set_ops_env_loss(LossesObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Windpower_Losses_ops_env_loss_nset, self->data_ptr);
+}
+
+static PyObject *
+Losses_get_ops_grid_loss(LossesObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Windpower_Losses_ops_grid_loss_nget, self->data_ptr);
+}
+
+static int
+Losses_set_ops_grid_loss(LossesObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Windpower_Losses_ops_grid_loss_nset, self->data_ptr);
+}
+
+static PyObject *
+Losses_get_ops_load_loss(LossesObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Windpower_Losses_ops_load_loss_nget, self->data_ptr);
+}
+
+static int
+Losses_set_ops_load_loss(LossesObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Windpower_Losses_ops_load_loss_nset, self->data_ptr);
+}
+
+static PyObject *
+Losses_get_ops_strategies_loss(LossesObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Windpower_Losses_ops_strategies_loss_nget, self->data_ptr);
+}
+
+static int
+Losses_set_ops_strategies_loss(LossesObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Windpower_Losses_ops_strategies_loss_nset, self->data_ptr);
+}
+
+static PyObject *
+Losses_get_turb_generic_loss(LossesObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Windpower_Losses_turb_generic_loss_nget, self->data_ptr);
+}
+
+static int
+Losses_set_turb_generic_loss(LossesObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Windpower_Losses_turb_generic_loss_nset, self->data_ptr);
+}
+
+static PyObject *
+Losses_get_turb_hysteresis_loss(LossesObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Windpower_Losses_turb_hysteresis_loss_nget, self->data_ptr);
+}
+
+static int
+Losses_set_turb_hysteresis_loss(LossesObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Windpower_Losses_turb_hysteresis_loss_nset, self->data_ptr);
+}
+
+static PyObject *
+Losses_get_turb_perf_loss(LossesObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Windpower_Losses_turb_perf_loss_nget, self->data_ptr);
+}
+
+static int
+Losses_set_turb_perf_loss(LossesObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Windpower_Losses_turb_perf_loss_nset, self->data_ptr);
+}
+
+static PyObject *
+Losses_get_turb_specific_loss(LossesObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Windpower_Losses_turb_specific_loss_nget, self->data_ptr);
+}
+
+static int
+Losses_set_turb_specific_loss(LossesObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Windpower_Losses_turb_specific_loss_nset, self->data_ptr);
+}
+
+static PyObject *
+Losses_get_wake_loss(LossesObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Windpower_Losses_wake_loss_nget, self->data_ptr);
+}
+
+static int
+Losses_set_wake_loss(LossesObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Windpower_Losses_wake_loss_nset, self->data_ptr);
+}
+
+static PyGetSetDef Losses_getset[] = {
+{"avail_bop_loss", (getter)Losses_get_avail_bop_loss,(setter)Losses_set_avail_bop_loss,
+	PyDoc_STR("*float*: Balance-of-plant availability loss [%]\n\n*Required*: set to 0 if not provided."),
+ 	NULL},
+{"avail_grid_loss", (getter)Losses_get_avail_grid_loss,(setter)Losses_set_avail_grid_loss,
+	PyDoc_STR("*float*: Grid availability loss [%]\n\n*Required*: set to 0 if not provided."),
+ 	NULL},
+{"avail_turb_loss", (getter)Losses_get_avail_turb_loss,(setter)Losses_set_avail_turb_loss,
+	PyDoc_STR("*float*: Turbine availabaility loss [%]\n\n*Required*: set to 0 if not provided."),
+ 	NULL},
+{"elec_eff_loss", (getter)Losses_get_elec_eff_loss,(setter)Losses_set_elec_eff_loss,
+	PyDoc_STR("*float*: Electrical efficiency loss [%]\n\n*Required*: set to 0 if not provided."),
+ 	NULL},
+{"en_icing_cutoff", (getter)Losses_get_en_icing_cutoff,(setter)Losses_set_en_icing_cutoff,
+	PyDoc_STR("*float*: Enable Icing Cutoff [0/1]\n\n*Constraints*: INTEGER\n\n*Required*: set to 0 if not provided."),
+ 	NULL},
+{"en_low_temp_cutoff", (getter)Losses_get_en_low_temp_cutoff,(setter)Losses_set_en_low_temp_cutoff,
+	PyDoc_STR("*float*: Enable Low Temperature Cutoff [0/1]\n\n*Constraints*: INTEGER\n\n*Required*: set to 0 if not provided."),
+ 	NULL},
+{"env_degrad_loss", (getter)Losses_get_env_degrad_loss,(setter)Losses_set_env_degrad_loss,
+	PyDoc_STR("*float*: Environmental Degradation loss [%]\n\n*Required*: set to 0 if not provided."),
+ 	NULL},
+{"env_exposure_loss", (getter)Losses_get_env_exposure_loss,(setter)Losses_set_env_exposure_loss,
+	PyDoc_STR("*float*: Environmental Exposure loss [%]\n\n*Required*: set to 0 if not provided."),
+ 	NULL},
+{"env_ext_loss", (getter)Losses_get_env_ext_loss,(setter)Losses_set_env_ext_loss,
+	PyDoc_STR("*float*: Environmental External Conditions loss [%]\n\n*Required*: set to 0 if not provided."),
+ 	NULL},
+{"env_icing_loss", (getter)Losses_get_env_icing_loss,(setter)Losses_set_env_icing_loss,
+	PyDoc_STR("*float*: Environmental Icing loss [%]\n\n*Required*: set to 0 if not provided."),
+ 	NULL},
+{"icing_cutoff_rh", (getter)Losses_get_icing_cutoff_rh,(setter)Losses_set_icing_cutoff_rh,
+	PyDoc_STR("*float*: Icing Cutoff Relative Humidity [%]\n\n*Constraints*: MIN=0\n\n*Required*: set to 1 if not provided."),
+ 	NULL},
+{"icing_cutoff_temp", (getter)Losses_get_icing_cutoff_temp,(setter)Losses_set_icing_cutoff_temp,
+	PyDoc_STR("*float*: Icing Cutoff Temperature [C]\n\n*Required*: set to 1 if not provided."),
+ 	NULL},
+{"low_temp_cutoff", (getter)Losses_get_low_temp_cutoff,(setter)Losses_set_low_temp_cutoff,
+	PyDoc_STR("*float*: Low Temperature Cutoff [C]\n\n*Required*: set to 1 if not provided."),
+ 	NULL},
+{"ops_env_loss", (getter)Losses_get_ops_env_loss,(setter)Losses_set_ops_env_loss,
+	PyDoc_STR("*float*: Environmental/Permit Curtailment loss [%]\n\n*Required*: set to 0 if not provided."),
+ 	NULL},
+{"ops_grid_loss", (getter)Losses_get_ops_grid_loss,(setter)Losses_set_ops_grid_loss,
+	PyDoc_STR("*float*: Grid curtailment loss [%]\n\n*Required*: set to 0 if not provided."),
+ 	NULL},
+{"ops_load_loss", (getter)Losses_get_ops_load_loss,(setter)Losses_set_ops_load_loss,
+	PyDoc_STR("*float*: Load curtailment loss [%]\n\n*Required*: set to 0 if not provided."),
+ 	NULL},
+{"ops_strategies_loss", (getter)Losses_get_ops_strategies_loss,(setter)Losses_set_ops_strategies_loss,
+	PyDoc_STR("*float*: Operational strategies loss [%]\n\n*Required*: set to 0 if not provided."),
+ 	NULL},
+{"turb_generic_loss", (getter)Losses_get_turb_generic_loss,(setter)Losses_set_turb_generic_loss,
+	PyDoc_STR("*float*: Turbine Generic Powercurve loss [%]\n\n*Required*: set to 0 if not provided."),
+ 	NULL},
+{"turb_hysteresis_loss", (getter)Losses_get_turb_hysteresis_loss,(setter)Losses_set_turb_hysteresis_loss,
+	PyDoc_STR("*float*: Turbine High Wind Hysteresis loss [%]\n\n*Required*: set to 0 if not provided."),
+ 	NULL},
+{"turb_perf_loss", (getter)Losses_get_turb_perf_loss,(setter)Losses_set_turb_perf_loss,
+	PyDoc_STR("*float*: Turbine Sub-optimal performance loss [%]\n\n*Required*: set to 0 if not provided."),
+ 	NULL},
+{"turb_specific_loss", (getter)Losses_get_turb_specific_loss,(setter)Losses_set_turb_specific_loss,
+	PyDoc_STR("*float*: Turbine Site-specific Powercurve loss [%]\n\n*Required*: set to 0 if not provided."),
+ 	NULL},
+{"wake_loss", (getter)Losses_get_wake_loss,(setter)Losses_set_wake_loss,
+	PyDoc_STR("*float*: Wake effects loss percent [%]\n\n*Required*: set to 3 if not provided."),
+ 	NULL},
+	{NULL}  /* Sentinel */
+};
+
+static PyTypeObject Losses_Type = {
+		/* The ob_type field must be initialized in the module init function
+		 * to be portable to Windows without using C++. */
+		PyVarObject_HEAD_INIT(NULL, 0)
+		"Windpower.Losses",             /*tp_name*/
+		sizeof(LossesObject),          /*tp_basicsize*/
+		0,                          /*tp_itemsize*/
+		/* methods */
+		0,    /*tp_dealloc*/
+		0,                          /*tp_print*/
+		(getattrfunc)0,             /*tp_getattr*/
+		0,                          /*tp_setattr*/
+		0,                          /*tp_reserved*/
+		0,                          /*tp_repr*/
+		0,                          /*tp_as_number*/
+		0,                          /*tp_as_sequence*/
+		0,                          /*tp_as_mapping*/
+		0,                          /*tp_hash*/
+		0,                          /*tp_call*/
+		0,                          /*tp_str*/
+		0,                          /*tp_getattro*/
+		0,                          /*tp_setattro*/
+		0,                          /*tp_as_buffer*/
+		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
+		0,                          /*tp_doc*/
+		0,                          /*tp_traverse*/
+		0,                          /*tp_clear*/
+		0,                          /*tp_richcompare*/
+		0,                          /*tp_weaklistofnset*/
+		0,                          /*tp_iter*/
+		0,                          /*tp_iternext*/
+		Losses_methods,         /*tp_methods*/
+		0,                          /*tp_members*/
+		Losses_getset,          /*tp_getset*/
 		0,                          /*tp_base*/
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
@@ -1121,25 +1268,21 @@ newWindpowerObject(void* data_ptr)
 
 	PySAM_TECH_ATTR("Windpower", SAM_Windpower_construct)
 
-	PyObject* WindResourceFile_obj = WindResourceFile_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "WindResourceFile", WindResourceFile_obj);
-	Py_DECREF(WindResourceFile_obj);
+	PyObject* Resource_obj = Resource_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "Resource", Resource_obj);
+	Py_DECREF(Resource_obj);
 
-	PyObject* WindTurbine_obj = WindTurbine_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "WindTurbine", WindTurbine_obj);
-	Py_DECREF(WindTurbine_obj);
+	PyObject* Turbine_obj = Turbine_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "Turbine", Turbine_obj);
+	Py_DECREF(Turbine_obj);
 
-	PyObject* WindFarm_obj = WindFarm_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "WindFarm", WindFarm_obj);
-	Py_DECREF(WindFarm_obj);
+	PyObject* Farm_obj = Farm_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "Farm", Farm_obj);
+	Py_DECREF(Farm_obj);
 
-	PyObject* WindPower_obj = WindPower_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "WindPower", WindPower_obj);
-	Py_DECREF(WindPower_obj);
-
-	PyObject* WindSpeedWeibullDistribution_obj = WindSpeedWeibullDistribution_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "WindSpeedWeibullDistribution", WindSpeedWeibullDistribution_obj);
-	Py_DECREF(WindSpeedWeibullDistribution_obj);
+	PyObject* Losses_obj = Losses_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "Losses", Losses_obj);
+	Py_DECREF(Losses_obj);
 
 	PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
 
@@ -1218,7 +1361,7 @@ static PyMethodDef Windpower_methods[] = {
 		{"execute",            (PyCFunction)Windpower_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
 		{"assign",            (PyCFunction)Windpower_assign,  METH_VARARGS,
-				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Wind Resource File': { var: val, ...}, ...}``")},
+				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Resource': { var: val, ...}, ...}``")},
 		{"export",            (PyCFunction)Windpower_export,  METH_VARARGS,
 				PyDoc_STR("export() -> dict\n Export attributes into nested dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -1381,40 +1524,33 @@ WindpowerModule_exec(PyObject *m)
 	Py_DECREF(&AdjustmentFactors_Type);
 	Py_XDECREF(AdjustmentFactors_Type);
 
-	/// Add the WindResourceFile type object to Windpower_Type
-	if (PyType_Ready(&WindResourceFile_Type) < 0) { goto fail; }
+	/// Add the Resource type object to Windpower_Type
+	if (PyType_Ready(&Resource_Type) < 0) { goto fail; }
 	PyDict_SetItemString(Windpower_Type.tp_dict,
-				"WindResourceFile",
-				(PyObject*)&WindResourceFile_Type);
-	Py_DECREF(&WindResourceFile_Type);
+				"Resource",
+				(PyObject*)&Resource_Type);
+	Py_DECREF(&Resource_Type);
 
-	/// Add the WindTurbine type object to Windpower_Type
-	if (PyType_Ready(&WindTurbine_Type) < 0) { goto fail; }
+	/// Add the Turbine type object to Windpower_Type
+	if (PyType_Ready(&Turbine_Type) < 0) { goto fail; }
 	PyDict_SetItemString(Windpower_Type.tp_dict,
-				"WindTurbine",
-				(PyObject*)&WindTurbine_Type);
-	Py_DECREF(&WindTurbine_Type);
+				"Turbine",
+				(PyObject*)&Turbine_Type);
+	Py_DECREF(&Turbine_Type);
 
-	/// Add the WindFarm type object to Windpower_Type
-	if (PyType_Ready(&WindFarm_Type) < 0) { goto fail; }
+	/// Add the Farm type object to Windpower_Type
+	if (PyType_Ready(&Farm_Type) < 0) { goto fail; }
 	PyDict_SetItemString(Windpower_Type.tp_dict,
-				"WindFarm",
-				(PyObject*)&WindFarm_Type);
-	Py_DECREF(&WindFarm_Type);
+				"Farm",
+				(PyObject*)&Farm_Type);
+	Py_DECREF(&Farm_Type);
 
-	/// Add the WindPower type object to Windpower_Type
-	if (PyType_Ready(&WindPower_Type) < 0) { goto fail; }
+	/// Add the Losses type object to Windpower_Type
+	if (PyType_Ready(&Losses_Type) < 0) { goto fail; }
 	PyDict_SetItemString(Windpower_Type.tp_dict,
-				"WindPower",
-				(PyObject*)&WindPower_Type);
-	Py_DECREF(&WindPower_Type);
-
-	/// Add the WindSpeedWeibullDistribution type object to Windpower_Type
-	if (PyType_Ready(&WindSpeedWeibullDistribution_Type) < 0) { goto fail; }
-	PyDict_SetItemString(Windpower_Type.tp_dict,
-				"WindSpeedWeibullDistribution",
-				(PyObject*)&WindSpeedWeibullDistribution_Type);
-	Py_DECREF(&WindSpeedWeibullDistribution_Type);
+				"Losses",
+				(PyObject*)&Losses_Type);
+	Py_DECREF(&Losses_Type);
 
 	/// Add the Outputs type object to Windpower_Type
 	if (PyType_Ready(&Outputs_Type) < 0) { goto fail; }

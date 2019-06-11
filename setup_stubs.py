@@ -21,7 +21,7 @@ for filename in listdir('stubs'):
 
 setup(
     name='NREL-PySAM-stubs',
-    version='1.2.1',
+    version='1.2.dev1',
     distclass=distclass,
     url='http://www.github.com/nrel/pysam',
     description="National Renewable Energy Laboratory's System Advisor Model Python Wrapper, stub files",
@@ -35,5 +35,6 @@ setup(
     package_dir={'PySAM-stubs': 'stubs'},
     package_data={
         '': libfiles},
+    zip_safe=False
 )
 

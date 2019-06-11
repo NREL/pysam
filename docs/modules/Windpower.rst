@@ -21,34 +21,28 @@ Functions
 .. autoclass:: PySAM.Windpower.Windpower
 	:members:
 
-WindResourceFile Group
+Resource Group
 ==============
 
-.. autoclass:: PySAM.Windpower.Windpower.WindResourceFile
+.. autoclass:: PySAM.Windpower.Windpower.Resource
 	:members:
 
-WindTurbine Group
+Turbine Group
 ==============
 
-.. autoclass:: PySAM.Windpower.Windpower.WindTurbine
+.. autoclass:: PySAM.Windpower.Windpower.Turbine
 	:members:
 
-WindFarm Group
+Farm Group
 ==============
 
-.. autoclass:: PySAM.Windpower.Windpower.WindFarm
+.. autoclass:: PySAM.Windpower.Windpower.Farm
 	:members:
 
-WindPower Group
+Losses Group
 ==============
 
-.. autoclass:: PySAM.Windpower.Windpower.WindPower
-	:members:
-
-WindSpeedWeibullDistribution Group
-==============
-
-.. autoclass:: PySAM.Windpower.Windpower.WindSpeedWeibullDistribution
+.. autoclass:: PySAM.Windpower.Windpower.Losses
 	:members:
 
 AdjustmentFactors Group
