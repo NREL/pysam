@@ -10,7 +10,7 @@ import distutils.dir_util
 #
 ###################################################################################################
 
-latest_version = '1.2.dev1'
+latest_version = '1.2.dev2'
 
 # determine if making PyPi or Conda distribution
 distclass = distutils.core.Distribution
@@ -64,14 +64,14 @@ if sys.platform == 'win32':
 ###################################################################################################
 
 for file in libfiles:
-    if file.find("SAM") > 0:
+    if file.find("SAM") > -1:
         distutils.file_util.copy_file(
             os.environ['SAMNTDIR']+"/api/"+file,
             libpath,
             update=1,
             verbose=1
         )
-    if file.find("ssc") > 0:
+    if file.find("ssc") > -1:
         distutils.file_util.copy_file(
             os.environ['SSCDIR'] + "/ssc/" + file,
             libpath,
