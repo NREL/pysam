@@ -21,6 +21,18 @@ Functions
 .. autoclass:: PySAM.Grid.Grid
 	:members:
 
+Lifetime Group
+==============
+
+.. autoclass:: PySAM.Grid.Grid.Lifetime
+	:members:
+
+Common Group
+==============
+
+.. autoclass:: PySAM.Grid.Grid.Common
+	:members:
+
 Outputs Group
 ==============
 

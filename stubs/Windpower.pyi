@@ -104,6 +104,7 @@ class Outputs(object):
 
 
 	annual_energy = float
+	annual_gross_energy = float
 	capacity_factor = float
 	cutoff_losses = float
 	gen = tuple

@@ -1,3 +1,35 @@
+class Lifetime(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> Dict[Dict]
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
+	analysis_period = float
+	system_use_lifetime_output = float
+
+
+class Common(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> Dict[Dict]
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
+	enable_interconnection_limit = float
+	gen = tuple
+	grid_interconnection_limit_kwac = float
+	load = tuple
+
+
 class Outputs(object):
 	def assign(self): 
 		pass
@@ -9,6 +41,13 @@ class Outputs(object):
 		pass
 
 
+	annual_ac_interconnect_loss_kwh = float
+	annual_ac_interconnect_loss_percent = float
+	annual_energy = float
+	annual_energy_pre_interconnect_ac = float
+	capacity_factor_interconnect_ac = float
+	gen = tuple
+	system_pre_interconnect_kwac = tuple
 
 
 class Grid(object):
@@ -27,6 +66,8 @@ class Grid(object):
 	def __init__(self, *args, **kwargs):
 		pass
 
+	Lifetime = Lifetime
+	Common = Common
 	Outputs = Outputs
 
 

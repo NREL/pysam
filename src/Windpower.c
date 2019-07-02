@@ -1106,6 +1106,12 @@ Outputs_get_annual_energy(OutputsObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_annual_gross_energy(OutputsObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Windpower_Outputs_annual_gross_energy_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_capacity_factor(OutputsObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Windpower_Outputs_capacity_factor_nget, self->data_ptr);
@@ -1168,6 +1174,9 @@ Outputs_get_wind_speed(OutputsObject *self, void *closure)
 static PyGetSetDef Outputs_getset[] = {
 {"annual_energy", (getter)Outputs_get_annual_energy,(setter)0,
 	PyDoc_STR("*float*: Annual Energy [kWh]"),
+ 	NULL},
+{"annual_gross_energy", (getter)Outputs_get_annual_gross_energy,(setter)0,
+	PyDoc_STR("*float*: Annual Gross Energy [kWh]"),
  	NULL},
 {"capacity_factor", (getter)Outputs_get_capacity_factor,(setter)0,
 	PyDoc_STR("*float*: Capacity factor [%]"),

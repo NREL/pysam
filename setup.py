@@ -3,6 +3,7 @@ from setuptools import setup, Extension
 import distutils
 import sys
 import distutils.dir_util
+from distutils.core import Command
 
 ###################################################################################################
 #
@@ -10,7 +11,7 @@ import distutils.dir_util
 #
 ###################################################################################################
 
-latest_version = '1.2.dev2'
+latest_version = '1.2.dev3'
 
 # determine if making PyPi or Conda distribution
 distclass = distutils.core.Distribution
@@ -126,7 +127,22 @@ for filename in os.listdir(defaults_dir):
     libfiles.append('defaults/' + os.path.splitext(filename)[0] + '.df')
 
 
-###################################################################################################
+# function to rename macosx distribution for Python 3.7 to be minimum version of 10.12 instead of 10.14
+
+class PostProcess(Command):
+    description = "rename macosx distribution for Python 3.7 to be minimum version of 10.12 instead of 10.14"
+    user_options = []
+    def initialize_options(self):
+        self.cwd = None
+    def finalize_options(self):
+        self.cwd = os.getcwd()
+    def run(self):
+        assert os.getcwd() == self.cwd, 'Must be in package root: %s' % self.cwd
+        name = "NREL_PySAM-" + latest_version + "-" + "cp37-cp37m-macosx_10_14_x86_64.whl"
+        newname = "NREL_PySAM-" + latest_version + "-" + "cp37-cp37m-macosx_10_12_x86_64.whl"
+        os.system('mv ./dist/' + name + ' ./dist/' + newname)
+
+    ###################################################################################################
 #
 # setup script
 #
@@ -151,6 +167,9 @@ setup(
     install_requires=['NREL-PySAM-stubs'],
     setup_requires=["pytest-runner"],
     tests_require=["pytest"],
+    cmdclass={
+        'post': PostProcess
+    },
     ext_modules=[
         Extension('PySAM.AdjustmentFactors',
                   ['src/AdjustmentFactors.c'],

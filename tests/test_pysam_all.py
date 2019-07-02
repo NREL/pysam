@@ -284,7 +284,7 @@ def assign_file(mod, default, i):
     elif mod == "Swh" or mod == "Pvwattsv5Lifetime" or mod == "TcsdirectSteam" or mod == "Tcsiscc":
         m.Weather.solar_resource_file = sf2
     elif mod == "Windpower":
-        m.WindResourceFile.wind_resource_filename = wf
+        m.Resource.wind_resource_filename = wf
     elif mod == "GenericSystem":
         pass
     else:
