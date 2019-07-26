@@ -26,7 +26,7 @@ https://pysam-docs.readthedocs.io/en/latest/
 
 2. Anaconda:
 	```
-	conda config --append channels NREL-PySAM
+	conda config --append channels nrel
 	conda install -c nrel nrel-pysam
 	```
 	(package via `conda-forge` channel upcoming)
