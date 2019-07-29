@@ -1087,6 +1087,12 @@ Outputs_get_annual_fuel_usage(OutputsObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_annual_fuel_usage_lifetime(OutputsObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Fuelcell_Outputs_annual_fuel_usage_lifetime_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_fuelcell_electrical_efficiency(OutputsObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Fuelcell_Outputs_fuelcell_electrical_efficiency_aget, self->data_ptr);
@@ -1155,6 +1161,9 @@ Outputs_get_system_heat_rate(OutputsObject *self, void *closure)
 static PyGetSetDef Outputs_getset[] = {
 {"annual_fuel_usage", (getter)Outputs_get_annual_fuel_usage,(setter)0,
 	PyDoc_STR("*float*: Annual Fuel Usage [kWht]"),
+ 	NULL},
+{"annual_fuel_usage_lifetime", (getter)Outputs_get_annual_fuel_usage_lifetime,(setter)0,
+	PyDoc_STR("*sequence*: Annual Fuel Usage (lifetime) [kWht]"),
  	NULL},
 {"fuelcell_electrical_efficiency", (getter)Outputs_get_fuelcell_electrical_efficiency,(setter)0,
 	PyDoc_STR("*sequence*: Fuel cell electrical efficiency [%]"),

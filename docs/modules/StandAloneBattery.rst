@@ -75,10 +75,10 @@ ElectricityRate Group
 .. autoclass:: PySAM.StandAloneBattery.StandAloneBattery.ElectricityRate
 	:members:
 
-EnergyMarket Group
+TimeOfDelivery Group
 ==============
 
-.. autoclass:: PySAM.StandAloneBattery.StandAloneBattery.EnergyMarket
+.. autoclass:: PySAM.StandAloneBattery.StandAloneBattery.TimeOfDelivery
 	:members:
 
 Outputs Group

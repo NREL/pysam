@@ -30,6 +30,7 @@ class GeoHourly(object):
 	design_temp = float
 	eta_ref = float
 	excess_pressure_pump = float
+	file_name = str
 	fracture_angle = float
 	fracture_aperature = float
 	fracture_width = float
@@ -81,20 +82,6 @@ class GeoHourly(object):
 	wet_bulb_temp = float
 
 
-class Weather(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> Dict[Dict]
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	file_name = str
-
-
 class Outputs(object):
 	def assign(self): 
 		pass
@@ -117,6 +104,7 @@ class Outputs(object):
 	eff_secondlaw = float
 	first_year_output = float
 	flash_count = float
+	gen = tuple
 	gross_output = float
 	hp_flash_pressure = float
 	kwh_per_kw = float
@@ -174,7 +162,6 @@ class Geothermal(object):
 		pass
 
 	GeoHourly = GeoHourly
-	Weather = Weather
 	Outputs = Outputs
 
 

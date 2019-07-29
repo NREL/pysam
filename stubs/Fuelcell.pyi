@@ -101,6 +101,7 @@ class Outputs(object):
 
 
 	annual_fuel_usage = float
+	annual_fuel_usage_lifetime = tuple
 	fuelcell_electrical_efficiency = tuple
 	fuelcell_fuel_consumption_mcf = tuple
 	fuelcell_percent_load = tuple

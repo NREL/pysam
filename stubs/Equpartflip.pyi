@@ -35,6 +35,7 @@ class SystemCosts(object):
 
 	add_om_num_types = float
 	annual_fuel_usage = float
+	annual_fuel_usage_lifetime = tuple
 	om_capacity = tuple
 	om_capacity1 = tuple
 	om_capacity1_nameplate = float

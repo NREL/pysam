@@ -1,3 +1,31 @@
+class PVWatts(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> Dict[Dict]
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
+	system_use_lifetime_output = float
+
+
+class FinancialAnalysisParameters(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> Dict[Dict]
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
+	analysis_period = float
+
+
 class BatteryModelSimple(object):
 	def assign(self): 
 		pass
@@ -64,6 +92,7 @@ class Outputs(object):
 	average_battery_conversion_efficiency = float
 	average_battery_roundtrip_efficiency = float
 	batt_DOD = tuple
+	batt_DOD_cycle_average = tuple
 	batt_I = tuple
 	batt_SOC = tuple
 	batt_annual_charge_energy = tuple
@@ -75,6 +104,8 @@ class Outputs(object):
 	batt_bank_installed_capacity = float
 	batt_bank_replacement = tuple
 	batt_capacity_percent = tuple
+	batt_capacity_percent_calendar = tuple
+	batt_capacity_percent_cycle = tuple
 	batt_capacity_thermal_percent = tuple
 	batt_conversion_loss = tuple
 	batt_cost_to_cycle = tuple
@@ -101,6 +132,7 @@ class Outputs(object):
 	grid_power_target = tuple
 	grid_to_batt = tuple
 	grid_to_load = tuple
+	market_sell_rate_series_yr1 = tuple
 	monthly_batt_to_grid = tuple
 	monthly_batt_to_load = tuple
 	monthly_grid_to_batt = tuple
@@ -129,6 +161,8 @@ class Battwatts(object):
 	def __init__(self, *args, **kwargs):
 		pass
 
+	PVWatts = PVWatts
+	FinancialAnalysisParameters = FinancialAnalysisParameters
 	BatteryModelSimple = BatteryModelSimple
 	Common = Common
 	ElectricLoadOther = ElectricLoadOther

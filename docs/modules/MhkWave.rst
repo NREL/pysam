@@ -1,41 +1,35 @@
-.. _Geothermal:
+.. _MhkWave:
 
-Geothermal
+MhkWave
 **************************
 
-Wrapper for SAM Simulation Core model: `cmod_geothermal.cpp <https://github.com/NREL/ssc/blob/develop/ssc/cmod_geothermal.cpp>`_
+Wrapper for SAM Simulation Core model: `cmod_mhk_wave.cpp <https://github.com/NREL/ssc/blob/develop/ssc/cmod_mhk_wave.cpp>`_
 
 Creating an Instance
 =========================
 
 There are three methods to create a new instance of a PySAM module. Using ``default`` populates the newclass' attributes with default values specific to a ``config``. Each technology-financialconfiguration corresponds to a SAM GUI configuration. Using ``new`` creates an instance with empty attributes. The ``wrap`` function allows compatibility with PySSC, for details, refer to :doc:`../PySSC`.
 
-**Geothermal model description**
+**MhkWave model description**
 
-.. automodule:: PySAM.Geothermal
+.. automodule:: PySAM.MhkWave
 	:members:
 
 Functions
 =========================
 
-.. autoclass:: PySAM.Geothermal.Geothermal
+.. autoclass:: PySAM.MhkWave.MhkWave
 	:members:
 
-GeoHourly Group
+MHKWave Group
 ==============
 
-.. autoclass:: PySAM.Geothermal.Geothermal.GeoHourly
-	:members:
-
-AdjustmentFactors Group
-==============
-
-.. autoclass:: PySAM.Geothermal.Geothermal.AdjustmentFactors
+.. autoclass:: PySAM.MhkWave.MhkWave.MHKWave
 	:members:
 
 Outputs Group
 ==============
 
-.. autoclass:: PySAM.Geothermal.Geothermal.Outputs
+.. autoclass:: PySAM.MhkWave.MhkWave.Outputs
 	:members:
 

@@ -7,6 +7,159 @@
 
 
 /*
+ * Lifetime Group
+ */ 
+
+typedef struct {
+	PyObject_HEAD
+	SAM_Pvwattsv5   data_ptr;
+} LifetimeObject;
+
+static PyTypeObject Lifetime_Type;
+
+static PyObject *
+Lifetime_new(SAM_Pvwattsv5 data_ptr)
+{
+	PyObject* new_obj = Lifetime_Type.tp_alloc(&Lifetime_Type,0);
+
+	LifetimeObject* Lifetime_obj = (LifetimeObject*)new_obj;
+
+	Lifetime_obj->data_ptr = data_ptr;
+
+	return new_obj;
+}
+
+/* Lifetime methods */
+
+static PyObject *
+Lifetime_assign(LifetimeObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Pvwattsv5", "Lifetime")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+Lifetime_export(LifetimeObject *self, PyObject *args)
+{
+	PyTypeObject* tp = &Lifetime_Type;
+	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
+	return dict;
+}
+
+static PyMethodDef Lifetime_methods[] = {
+		{"assign",            (PyCFunction)Lifetime_assign,  METH_VARARGS,
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Lifetime_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)Lifetime_export,  METH_VARARGS,
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+		{NULL,              NULL}           /* sentinel */
+};
+
+static PyObject *
+Lifetime_get_analysis_period(LifetimeObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvwattsv5_Lifetime_analysis_period_nget, self->data_ptr);
+}
+
+static int
+Lifetime_set_analysis_period(LifetimeObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvwattsv5_Lifetime_analysis_period_nset, self->data_ptr);
+}
+
+static PyObject *
+Lifetime_get_dc_degradation(LifetimeObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvwattsv5_Lifetime_dc_degradation_aget, self->data_ptr);
+}
+
+static int
+Lifetime_set_dc_degradation(LifetimeObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Pvwattsv5_Lifetime_dc_degradation_aset, self->data_ptr);
+}
+
+static PyObject *
+Lifetime_get_system_use_lifetime_output(LifetimeObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvwattsv5_Lifetime_system_use_lifetime_output_nget, self->data_ptr);
+}
+
+static int
+Lifetime_set_system_use_lifetime_output(LifetimeObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvwattsv5_Lifetime_system_use_lifetime_output_nset, self->data_ptr);
+}
+
+static PyGetSetDef Lifetime_getset[] = {
+{"analysis_period", (getter)Lifetime_get_analysis_period,(setter)Lifetime_set_analysis_period,
+	PyDoc_STR("*float*: Analysis period [years]\n\n*Required*: set to 1 if not provided."),
+ 	NULL},
+{"dc_degradation", (getter)Lifetime_get_dc_degradation,(setter)Lifetime_set_dc_degradation,
+	PyDoc_STR("*sequence*: Annual AC degradation [%/year]\n\n*Required*: set to 1 if not provided."),
+ 	NULL},
+{"system_use_lifetime_output", (getter)Lifetime_get_system_use_lifetime_output,(setter)Lifetime_set_system_use_lifetime_output,
+	PyDoc_STR("*float*: Run lifetime simulation [0/1]\n\n*Required*: True"),
+ 	NULL},
+	{NULL}  /* Sentinel */
+};
+
+static PyTypeObject Lifetime_Type = {
+		/* The ob_type field must be initialized in the module init function
+		 * to be portable to Windows without using C++. */
+		PyVarObject_HEAD_INIT(NULL, 0)
+		"Pvwattsv5.Lifetime",             /*tp_name*/
+		sizeof(LifetimeObject),          /*tp_basicsize*/
+		0,                          /*tp_itemsize*/
+		/* methods */
+		0,    /*tp_dealloc*/
+		0,                          /*tp_print*/
+		(getattrfunc)0,             /*tp_getattr*/
+		0,                          /*tp_setattr*/
+		0,                          /*tp_reserved*/
+		0,                          /*tp_repr*/
+		0,                          /*tp_as_number*/
+		0,                          /*tp_as_sequence*/
+		0,                          /*tp_as_mapping*/
+		0,                          /*tp_hash*/
+		0,                          /*tp_call*/
+		0,                          /*tp_str*/
+		0,                          /*tp_getattro*/
+		0,                          /*tp_setattro*/
+		0,                          /*tp_as_buffer*/
+		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
+		0,                          /*tp_doc*/
+		0,                          /*tp_traverse*/
+		0,                          /*tp_clear*/
+		0,                          /*tp_richcompare*/
+		0,                          /*tp_weaklistofnset*/
+		0,                          /*tp_iter*/
+		0,                          /*tp_iternext*/
+		Lifetime_methods,         /*tp_methods*/
+		0,                          /*tp_members*/
+		Lifetime_getset,          /*tp_getset*/
+		0,                          /*tp_base*/
+		0,                          /*tp_dict*/
+		0,                          /*tp_descr_get*/
+		0,                          /*tp_descr_set*/
+		0,                          /*tp_dictofnset*/
+		0,                          /*tp_init*/
+		0,                          /*tp_alloc*/
+		0,             /*tp_new*/
+		0,                          /*tp_free*/
+		0,                          /*tp_is_gc*/
+};
+
+
+/*
  * LocationAndResource Group
  */ 
 
@@ -640,6 +793,12 @@ Outputs_get_monthly_energy(OutputsObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_percent_complete(OutputsObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvwattsv5_Outputs_percent_complete_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_poa(OutputsObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Pvwattsv5_Outputs_poa_aget, self->data_ptr);
@@ -679,12 +838,6 @@ static PyObject *
 Outputs_get_sunup(OutputsObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Pvwattsv5_Outputs_sunup_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_system_use_lifetime_output(OutputsObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Pvwattsv5_Outputs_system_use_lifetime_output_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -784,6 +937,9 @@ static PyGetSetDef Outputs_getset[] = {
 {"monthly_energy", (getter)Outputs_get_monthly_energy,(setter)0,
 	PyDoc_STR("*sequence*: Monthly energy [kWh]"),
  	NULL},
+{"percent_complete", (getter)Outputs_get_percent_complete,(setter)0,
+	PyDoc_STR("*float*: Estimated percent of total comleted simulation [%]"),
+ 	NULL},
 {"poa", (getter)Outputs_get_poa,(setter)0,
 	PyDoc_STR("*sequence*: Plane of array irradiance [W/m2]"),
  	NULL},
@@ -804,9 +960,6 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"sunup", (getter)Outputs_get_sunup,(setter)0,
 	PyDoc_STR("*sequence*: Sun up over horizon [0/1]"),
- 	NULL},
-{"system_use_lifetime_output", (getter)Outputs_get_system_use_lifetime_output,(setter)0,
-	PyDoc_STR("*float*: Use lifetime output [0/1]"),
  	NULL},
 {"tamb", (getter)Outputs_get_tamb,(setter)0,
 	PyDoc_STR("*sequence*: Ambient temperature [C]"),
@@ -895,6 +1048,10 @@ newPvwattsv5Object(void* data_ptr)
 
 	PySAM_TECH_ATTR("Pvwattsv5", SAM_Pvwattsv5_construct)
 
+	PyObject* Lifetime_obj = Lifetime_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "Lifetime", Lifetime_obj);
+	Py_DECREF(Lifetime_obj);
+
 	PyObject* LocationAndResource_obj = LocationAndResource_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "LocationAndResource", LocationAndResource_obj);
 	Py_DECREF(LocationAndResource_obj);
@@ -980,7 +1137,7 @@ static PyMethodDef Pvwattsv5_methods[] = {
 		{"execute",            (PyCFunction)Pvwattsv5_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
 		{"assign",            (PyCFunction)Pvwattsv5_assign,  METH_VARARGS,
-				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Location and Resource': { var: val, ...}, ...}``")},
+				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Lifetime': { var: val, ...}, ...}``")},
 		{"export",            (PyCFunction)Pvwattsv5_export,  METH_VARARGS,
 				PyDoc_STR("export() -> dict\n Export attributes into nested dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -1102,7 +1259,7 @@ static PyMethodDef Pvwattsv5Module_methods[] = {
 				PyDoc_STR("new() -> Pvwattsv5")},
 		{"default",             Pvwattsv5_default,         METH_VARARGS,
 				PyDoc_STR("default(config) -> Pvwattsv5\n\nUse financial model-specific default attributes\n"
-				"config options:\n\n- \"PVWattsAllEquityPartnershipFlip\"\n- \"PVWattsCommercial\"\n- \"PVWattsCommercialPPA\"\n- \"PVWattsHostDeveloper\"\n- \"PVWattsIndependentPowerProducer\"\n- \"PVWattsLCOECalculator\"\n- \"PVWattsLeveragedPartnershipFlip\"\n- \"PVWattsNone\"\n- \"PVWattsResidential\"\n- \"PVWattsSaleLeaseback\"\n- \"PVWattsSingleOwner\"\n- \"PVWattsThirdParty\"")},
+				"config options:\n\n- \"FuelCellCommercial\"\n- \"FuelCellSingleOwner\"\n- \"PVWattsAllEquityPartnershipFlip\"\n- \"PVWattsCommercial\"\n- \"PVWattsCommercialPPA\"\n- \"PVWattsHostDeveloper\"\n- \"PVWattsIndependentPowerProducer\"\n- \"PVWattsLCOECalculator\"\n- \"PVWattsLeveragedPartnershipFlip\"\n- \"PVWattsNone\"\n- \"PVWattsResidential\"\n- \"PVWattsSaleLeaseback\"\n- \"PVWattsSingleOwner\"\n- \"PVWattsThirdParty\"")},
 		{"wrap",             Pvwattsv5_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Pvwattsv5\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{NULL,              NULL}           /* sentinel */
@@ -1142,6 +1299,13 @@ Pvwattsv5Module_exec(PyObject *m)
 						 (PyObject*)AdjustmentFactors_Type);
 	Py_DECREF(&AdjustmentFactors_Type);
 	Py_XDECREF(AdjustmentFactors_Type);
+
+	/// Add the Lifetime type object to Pvwattsv5_Type
+	if (PyType_Ready(&Lifetime_Type) < 0) { goto fail; }
+	PyDict_SetItemString(Pvwattsv5_Type.tp_dict,
+				"Lifetime",
+				(PyObject*)&Lifetime_Type);
+	Py_DECREF(&Lifetime_Type);
 
 	/// Add the LocationAndResource type object to Pvwattsv5_Type
 	if (PyType_Ready(&LocationAndResource_Type) < 0) { goto fail; }

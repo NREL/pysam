@@ -171,10 +171,10 @@ ElectricityRate Group
 .. autoclass:: PySAM.Pvsamv1.Pvsamv1.ElectricityRate
 	:members:
 
-EnergyMarket Group
+TimeOfDelivery Group
 ==============
 
-.. autoclass:: PySAM.Pvsamv1.Pvsamv1.EnergyMarket
+.. autoclass:: PySAM.Pvsamv1.Pvsamv1.TimeOfDelivery
 	:members:
 
 AdjustmentFactors Group

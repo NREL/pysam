@@ -1,3 +1,19 @@
+class Lifetime(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> Dict[Dict]
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
+	analysis_period = float
+	dc_degradation = tuple
+	system_use_lifetime_output = float
+
+
 class LocationAndResource(object):
 	def assign(self): 
 		pass
@@ -71,6 +87,7 @@ class Outputs(object):
 	location = str
 	lon = float
 	monthly_energy = tuple
+	percent_complete = float
 	poa = tuple
 	poa_monthly = tuple
 	shad_beam_factor = tuple
@@ -78,7 +95,6 @@ class Outputs(object):
 	solrad_monthly = tuple
 	state = str
 	sunup = tuple
-	system_use_lifetime_output = float
 	tamb = tuple
 	tcell = tuple
 	tpoa = tuple
@@ -103,6 +119,7 @@ class Pvwattsv5(object):
 	def __init__(self, *args, **kwargs):
 		pass
 
+	Lifetime = Lifetime
 	LocationAndResource = LocationAndResource
 	SystemDesign = SystemDesign
 	Outputs = Outputs

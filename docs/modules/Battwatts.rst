@@ -21,6 +21,18 @@ Functions
 .. autoclass:: PySAM.Battwatts.Battwatts
 	:members:
 
+PVWatts Group
+==============
+
+.. autoclass:: PySAM.Battwatts.Battwatts.PVWatts
+	:members:
+
+FinancialAnalysisParameters Group
+==============
+
+.. autoclass:: PySAM.Battwatts.Battwatts.FinancialAnalysisParameters
+	:members:
+
 BatteryModelSimple Group
 ==============
 

@@ -10297,39 +10297,39 @@ static PyTypeObject ElectricityRate_Type = {
 
 
 /*
- * EnergyMarket Group
+ * TimeOfDelivery Group
  */ 
 
 typedef struct {
 	PyObject_HEAD
 	SAM_Pvsamv1   data_ptr;
-} EnergyMarketObject;
+} TimeOfDeliveryObject;
 
-static PyTypeObject EnergyMarket_Type;
+static PyTypeObject TimeOfDelivery_Type;
 
 static PyObject *
-EnergyMarket_new(SAM_Pvsamv1 data_ptr)
+TimeOfDelivery_new(SAM_Pvsamv1 data_ptr)
 {
-	PyObject* new_obj = EnergyMarket_Type.tp_alloc(&EnergyMarket_Type,0);
+	PyObject* new_obj = TimeOfDelivery_Type.tp_alloc(&TimeOfDelivery_Type,0);
 
-	EnergyMarketObject* EnergyMarket_obj = (EnergyMarketObject*)new_obj;
+	TimeOfDeliveryObject* TimeOfDelivery_obj = (TimeOfDeliveryObject*)new_obj;
 
-	EnergyMarket_obj->data_ptr = data_ptr;
+	TimeOfDelivery_obj->data_ptr = data_ptr;
 
 	return new_obj;
 }
 
-/* EnergyMarket methods */
+/* TimeOfDelivery methods */
 
 static PyObject *
-EnergyMarket_assign(EnergyMarketObject *self, PyObject *args)
+TimeOfDelivery_assign(TimeOfDeliveryObject *self, PyObject *args)
 {
 	PyObject* dict;
 	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Pvsamv1", "EnergyMarket")){
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Pvsamv1", "TimeOfDelivery")){
 		return NULL;
 	}
 
@@ -10338,91 +10338,121 @@ EnergyMarket_assign(EnergyMarketObject *self, PyObject *args)
 }
 
 static PyObject *
-EnergyMarket_export(EnergyMarketObject *self, PyObject *args)
+TimeOfDelivery_export(TimeOfDeliveryObject *self, PyObject *args)
 {
-	PyTypeObject* tp = &EnergyMarket_Type;
+	PyTypeObject* tp = &TimeOfDelivery_Type;
 	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
 	return dict;
 }
 
-static PyMethodDef EnergyMarket_methods[] = {
-		{"assign",            (PyCFunction)EnergyMarket_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``EnergyMarket_vals = { var: val, ...}``")},
-		{"export",            (PyCFunction)EnergyMarket_export,  METH_VARARGS,
+static PyMethodDef TimeOfDelivery_methods[] = {
+		{"assign",            (PyCFunction)TimeOfDelivery_assign,  METH_VARARGS,
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``TimeOfDelivery_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)TimeOfDelivery_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 static PyObject *
-EnergyMarket_get_dispatch_sched_weekday(EnergyMarketObject *self, void *closure)
+TimeOfDelivery_get_dispatch_factors_ts(TimeOfDeliveryObject *self, void *closure)
 {
-	return PySAM_matrix_getter(SAM_Pvsamv1_EnergyMarket_dispatch_sched_weekday_mget, self->data_ptr);
+	return PySAM_array_getter(SAM_Pvsamv1_TimeOfDelivery_dispatch_factors_ts_aget, self->data_ptr);
 }
 
 static int
-EnergyMarket_set_dispatch_sched_weekday(EnergyMarketObject *self, PyObject *value, void *closure)
+TimeOfDelivery_set_dispatch_factors_ts(TimeOfDeliveryObject *self, PyObject *value, void *closure)
 {
-		return PySAM_matrix_setter(value, SAM_Pvsamv1_EnergyMarket_dispatch_sched_weekday_mset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Pvsamv1_TimeOfDelivery_dispatch_factors_ts_aset, self->data_ptr);
 }
 
 static PyObject *
-EnergyMarket_get_dispatch_sched_weekend(EnergyMarketObject *self, void *closure)
+TimeOfDelivery_get_dispatch_sched_weekday(TimeOfDeliveryObject *self, void *closure)
 {
-	return PySAM_matrix_getter(SAM_Pvsamv1_EnergyMarket_dispatch_sched_weekend_mget, self->data_ptr);
+	return PySAM_matrix_getter(SAM_Pvsamv1_TimeOfDelivery_dispatch_sched_weekday_mget, self->data_ptr);
 }
 
 static int
-EnergyMarket_set_dispatch_sched_weekend(EnergyMarketObject *self, PyObject *value, void *closure)
+TimeOfDelivery_set_dispatch_sched_weekday(TimeOfDeliveryObject *self, PyObject *value, void *closure)
 {
-		return PySAM_matrix_setter(value, SAM_Pvsamv1_EnergyMarket_dispatch_sched_weekend_mset, self->data_ptr);
+		return PySAM_matrix_setter(value, SAM_Pvsamv1_TimeOfDelivery_dispatch_sched_weekday_mset, self->data_ptr);
 }
 
 static PyObject *
-EnergyMarket_get_dispatch_tod_factors(EnergyMarketObject *self, void *closure)
+TimeOfDelivery_get_dispatch_sched_weekend(TimeOfDeliveryObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Pvsamv1_EnergyMarket_dispatch_tod_factors_aget, self->data_ptr);
+	return PySAM_matrix_getter(SAM_Pvsamv1_TimeOfDelivery_dispatch_sched_weekend_mget, self->data_ptr);
 }
 
 static int
-EnergyMarket_set_dispatch_tod_factors(EnergyMarketObject *self, PyObject *value, void *closure)
+TimeOfDelivery_set_dispatch_sched_weekend(TimeOfDeliveryObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_Pvsamv1_EnergyMarket_dispatch_tod_factors_aset, self->data_ptr);
+		return PySAM_matrix_setter(value, SAM_Pvsamv1_TimeOfDelivery_dispatch_sched_weekend_mset, self->data_ptr);
 }
 
 static PyObject *
-EnergyMarket_get_ppa_price_input(EnergyMarketObject *self, void *closure)
+TimeOfDelivery_get_dispatch_tod_factors(TimeOfDeliveryObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Pvsamv1_EnergyMarket_ppa_price_input_nget, self->data_ptr);
+	return PySAM_array_getter(SAM_Pvsamv1_TimeOfDelivery_dispatch_tod_factors_aget, self->data_ptr);
 }
 
 static int
-EnergyMarket_set_ppa_price_input(EnergyMarketObject *self, PyObject *value, void *closure)
+TimeOfDelivery_set_dispatch_tod_factors(TimeOfDeliveryObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Pvsamv1_EnergyMarket_ppa_price_input_nset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Pvsamv1_TimeOfDelivery_dispatch_tod_factors_aset, self->data_ptr);
 }
 
-static PyGetSetDef EnergyMarket_getset[] = {
-{"dispatch_sched_weekday", (getter)EnergyMarket_get_dispatch_sched_weekday,(setter)EnergyMarket_set_dispatch_sched_weekday,
-	PyDoc_STR("*sequence[sequence]*: Diurnal weekday TOD periods [1..9]\n\n*Info*: 12 x 24 matrix\n\n*Required*: set to 1&batt_meter_position=1&batt_dispatch_choice=2 if not provided."),
+static PyObject *
+TimeOfDelivery_get_ppa_multiplier_model(TimeOfDeliveryObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_TimeOfDelivery_ppa_multiplier_model_nget, self->data_ptr);
+}
+
+static int
+TimeOfDelivery_set_ppa_multiplier_model(TimeOfDeliveryObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_TimeOfDelivery_ppa_multiplier_model_nset, self->data_ptr);
+}
+
+static PyObject *
+TimeOfDelivery_get_ppa_price_input(TimeOfDeliveryObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_TimeOfDelivery_ppa_price_input_nget, self->data_ptr);
+}
+
+static int
+TimeOfDelivery_set_ppa_price_input(TimeOfDeliveryObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_TimeOfDelivery_ppa_price_input_nset, self->data_ptr);
+}
+
+static PyGetSetDef TimeOfDelivery_getset[] = {
+{"dispatch_factors_ts", (getter)TimeOfDelivery_get_dispatch_factors_ts,(setter)TimeOfDelivery_set_dispatch_factors_ts,
+	PyDoc_STR("*sequence*: Dispatch payment factor time step\n\n*Required*: set to 1&batt_meter_position=1&batt_dispatch_choice=2&ppa_multiplier_model=1 if not provided."),
  	NULL},
-{"dispatch_sched_weekend", (getter)EnergyMarket_get_dispatch_sched_weekend,(setter)EnergyMarket_set_dispatch_sched_weekend,
-	PyDoc_STR("*sequence[sequence]*: Diurnal weekend TOD periods [1..9]\n\n*Info*: 12 x 24 matrix\n\n*Required*: set to 1&batt_meter_position=1&batt_dispatch_choice=2 if not provided."),
+{"dispatch_sched_weekday", (getter)TimeOfDelivery_get_dispatch_sched_weekday,(setter)TimeOfDelivery_set_dispatch_sched_weekday,
+	PyDoc_STR("*sequence[sequence]*: Diurnal weekday TOD periods [1..9]\n\n*Info*: 12 x 24 matrix\n\n*Required*: set to 1&batt_meter_position=1&batt_dispatch_choice=2&ppa_multiplier_model=0 if not provided."),
  	NULL},
-{"dispatch_tod_factors", (getter)EnergyMarket_get_dispatch_tod_factors,(setter)EnergyMarket_set_dispatch_tod_factors,
-	PyDoc_STR("*sequence*: TOD factors for periods 1-9\n\n*Required*: set to 1&batt_meter_position=1&batt_dispatch_choice=2 if not provided."),
+{"dispatch_sched_weekend", (getter)TimeOfDelivery_get_dispatch_sched_weekend,(setter)TimeOfDelivery_set_dispatch_sched_weekend,
+	PyDoc_STR("*sequence[sequence]*: Diurnal weekend TOD periods [1..9]\n\n*Info*: 12 x 24 matrix\n\n*Required*: set to 1&batt_meter_position=1&batt_dispatch_choice=2&ppa_multiplier_model=0 if not provided."),
  	NULL},
-{"ppa_price_input", (getter)EnergyMarket_get_ppa_price_input,(setter)EnergyMarket_set_ppa_price_input,
+{"dispatch_tod_factors", (getter)TimeOfDelivery_get_dispatch_tod_factors,(setter)TimeOfDelivery_set_dispatch_tod_factors,
+	PyDoc_STR("*sequence*: TOD factors for periods 1-9\n\n*Required*: set to 1&batt_meter_position=1&batt_dispatch_choice=2&ppa_multiplier_model=0 if not provided."),
+ 	NULL},
+{"ppa_multiplier_model", (getter)TimeOfDelivery_get_ppa_multiplier_model,(setter)TimeOfDelivery_set_ppa_multiplier_model,
+	PyDoc_STR("*float*: PPA multiplier model [0/1]\n\n*Options*: 0=diurnal,1=timestep\n\n*Constraints*: INTEGER,MIN=0\n\n*Required*: set to 0 if not provided."),
+ 	NULL},
+{"ppa_price_input", (getter)TimeOfDelivery_get_ppa_price_input,(setter)TimeOfDelivery_set_ppa_price_input,
 	PyDoc_STR("*float*: PPA Price Input\n\n*Required*: set to 1&batt_meter_position=1&batt_dispatch_choice=2 if not provided."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
 
-static PyTypeObject EnergyMarket_Type = {
+static PyTypeObject TimeOfDelivery_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"Pvsamv1.EnergyMarket",             /*tp_name*/
-		sizeof(EnergyMarketObject),          /*tp_basicsize*/
+		"Pvsamv1.TimeOfDelivery",             /*tp_name*/
+		sizeof(TimeOfDeliveryObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
 		0,    /*tp_dealloc*/
@@ -10448,9 +10478,9 @@ static PyTypeObject EnergyMarket_Type = {
 		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
-		EnergyMarket_methods,         /*tp_methods*/
+		TimeOfDelivery_methods,         /*tp_methods*/
 		0,                          /*tp_members*/
-		EnergyMarket_getset,          /*tp_getset*/
+		TimeOfDelivery_getset,          /*tp_getset*/
 		0,                          /*tp_base*/
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
@@ -11104,6 +11134,12 @@ Outputs_get_batt_DOD(OutputsObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_batt_DOD_cycle_average(OutputsObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvsamv1_Outputs_batt_DOD_cycle_average_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_batt_I(OutputsObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Pvsamv1_Outputs_batt_I_aget, self->data_ptr);
@@ -11167,6 +11203,18 @@ static PyObject *
 Outputs_get_batt_capacity_percent(OutputsObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Pvsamv1_Outputs_batt_capacity_percent_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_batt_capacity_percent_calendar(OutputsObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvsamv1_Outputs_batt_capacity_percent_calendar_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_batt_capacity_percent_cycle(OutputsObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvsamv1_Outputs_batt_capacity_percent_cycle_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -11461,6 +11509,12 @@ static PyObject *
 Outputs_get_kwh_per_kw(OutputsObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Pvsamv1_Outputs_kwh_per_kw_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_market_sell_rate_series_yr1(OutputsObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvsamv1_Outputs_market_sell_rate_series_yr1_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -12745,6 +12799,9 @@ static PyGetSetDef Outputs_getset[] = {
 {"batt_DOD", (getter)Outputs_get_batt_DOD,(setter)0,
 	PyDoc_STR("*sequence*: Battery cycle depth of discharge [%]"),
  	NULL},
+{"batt_DOD_cycle_average", (getter)Outputs_get_batt_DOD_cycle_average,(setter)0,
+	PyDoc_STR("*sequence*: Battery average cycle DOD"),
+ 	NULL},
 {"batt_I", (getter)Outputs_get_batt_I,(setter)0,
 	PyDoc_STR("*sequence*: Battery current [A]"),
  	NULL},
@@ -12776,7 +12833,13 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Battery bank replacements per year [number/year]"),
  	NULL},
 {"batt_capacity_percent", (getter)Outputs_get_batt_capacity_percent,(setter)0,
-	PyDoc_STR("*sequence*: Battery capacity percent for lifetime [%]"),
+	PyDoc_STR("*sequence*: Battery relative capacity to nameplate [%]"),
+ 	NULL},
+{"batt_capacity_percent_calendar", (getter)Outputs_get_batt_capacity_percent_calendar,(setter)0,
+	PyDoc_STR("*sequence*: Battery relative capacity to nameplate (calendar) [%]"),
+ 	NULL},
+{"batt_capacity_percent_cycle", (getter)Outputs_get_batt_capacity_percent_cycle,(setter)0,
+	PyDoc_STR("*sequence*: Battery relative capacity to nameplate (cycling) [%]"),
  	NULL},
 {"batt_capacity_thermal_percent", (getter)Outputs_get_batt_capacity_thermal_percent,(setter)0,
 	PyDoc_STR("*sequence*: Battery capacity percent for temperature [%]"),
@@ -12785,7 +12848,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Electricity loss in battery power electronics [kW]"),
  	NULL},
 {"batt_cost_to_cycle", (getter)Outputs_get_batt_cost_to_cycle,(setter)0,
-	PyDoc_STR("*sequence*: Computed cost to cycle [$/cycle]"),
+	PyDoc_STR("*sequence*: Battery computed cost to cycle [$/cycle]"),
  	NULL},
 {"batt_cycles", (getter)Outputs_get_batt_cycles,(setter)0,
 	PyDoc_STR("*sequence*: Battery number of cycles"),
@@ -12924,6 +12987,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"kwh_per_kw", (getter)Outputs_get_kwh_per_kw,(setter)0,
 	PyDoc_STR("*float*: First year kWh(AC)/kW(DC) [kWh/kW]"),
+ 	NULL},
+{"market_sell_rate_series_yr1", (getter)Outputs_get_market_sell_rate_series_yr1,(setter)0,
+	PyDoc_STR("*sequence*: Market sell rate (Year 1) [$/MWh]"),
  	NULL},
 {"monthly_batt_to_grid", (getter)Outputs_get_monthly_batt_to_grid,(setter)0,
 	PyDoc_STR("*sequence*: Energy to grid from battery [kWh]"),
@@ -13589,9 +13655,9 @@ newPvsamv1Object(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "ElectricityRate", ElectricityRate_obj);
 	Py_DECREF(ElectricityRate_obj);
 
-	PyObject* EnergyMarket_obj = EnergyMarket_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "EnergyMarket", EnergyMarket_obj);
-	Py_DECREF(EnergyMarket_obj);
+	PyObject* TimeOfDelivery_obj = TimeOfDelivery_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "TimeOfDelivery", TimeOfDelivery_obj);
+	Py_DECREF(TimeOfDelivery_obj);
 
 	PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
 
@@ -14008,12 +14074,12 @@ Pvsamv1Module_exec(PyObject *m)
 				(PyObject*)&ElectricityRate_Type);
 	Py_DECREF(&ElectricityRate_Type);
 
-	/// Add the EnergyMarket type object to Pvsamv1_Type
-	if (PyType_Ready(&EnergyMarket_Type) < 0) { goto fail; }
+	/// Add the TimeOfDelivery type object to Pvsamv1_Type
+	if (PyType_Ready(&TimeOfDelivery_Type) < 0) { goto fail; }
 	PyDict_SetItemString(Pvsamv1_Type.tp_dict,
-				"EnergyMarket",
-				(PyObject*)&EnergyMarket_Type);
-	Py_DECREF(&EnergyMarket_Type);
+				"TimeOfDelivery",
+				(PyObject*)&TimeOfDelivery_Type);
+	Py_DECREF(&TimeOfDelivery_Type);
 
 	/// Add the Outputs type object to Pvsamv1_Type
 	if (PyType_Ready(&Outputs_Type) < 0) { goto fail; }

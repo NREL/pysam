@@ -379,6 +379,18 @@ SWH_set_irrad_mode(SWHObject *self, PyObject *value, void *closure)
 }
 
 static PyObject *
+SWH_get_load(SWHObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Swh_SWH_load_aget, self->data_ptr);
+}
+
+static int
+SWH_set_load(SWHObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Swh_SWH_load_aset, self->data_ptr);
+}
+
+static PyObject *
 SWH_get_mdot(SWHObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Swh_SWH_mdot_nget, self->data_ptr);
@@ -678,6 +690,9 @@ static PyGetSetDef SWH_getset[] = {
  	NULL},
 {"irrad_mode", (getter)SWH_get_irrad_mode,(setter)SWH_set_irrad_mode,
 	PyDoc_STR("*float*: Irradiance input mode [0/1/2]\n\n*Info*: Beam+Diff,Global+Beam,Global+Diff\n\n*Constraints*: INTEGER,MIN=0,MAX=2\n\n*Required*: set to 0 if not provided."),
+ 	NULL},
+{"load", (getter)SWH_get_load,(setter)SWH_set_load,
+	PyDoc_STR("*sequence*: Electricity load (year 1) [kW]"),
  	NULL},
 {"mdot", (getter)SWH_get_mdot,(setter)SWH_set_mdot,
 	PyDoc_STR("*float*: Total system mass flow rate [kg/s]\n\n*Constraints*: POSITIVE\n\n*Required*: True"),

@@ -39,6 +39,7 @@ class SWH(object):
 	hx_eff = float
 	iam = float
 	irrad_mode = float
+	load = tuple
 	mdot = float
 	ncoll = float
 	pipe_diam = float

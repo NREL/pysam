@@ -1,45 +1,45 @@
 #include <Python.h>
 
-#include <SAM_Lcoefcr.h>
+#include <SAM_MhkWave.h>
 #include <SAM_api.h>
 
 #include "PySAM_utils.h"
 
 
 /*
- * SimpleLCOE Group
+ * MHKWave Group
  */ 
 
 typedef struct {
 	PyObject_HEAD
-	SAM_Lcoefcr   data_ptr;
-} SimpleLCOEObject;
+	SAM_MhkWave   data_ptr;
+} MHKWaveObject;
 
-static PyTypeObject SimpleLCOE_Type;
+static PyTypeObject MHKWave_Type;
 
 static PyObject *
-SimpleLCOE_new(SAM_Lcoefcr data_ptr)
+MHKWave_new(SAM_MhkWave data_ptr)
 {
-	PyObject* new_obj = SimpleLCOE_Type.tp_alloc(&SimpleLCOE_Type,0);
+	PyObject* new_obj = MHKWave_Type.tp_alloc(&MHKWave_Type,0);
 
-	SimpleLCOEObject* SimpleLCOE_obj = (SimpleLCOEObject*)new_obj;
+	MHKWaveObject* MHKWave_obj = (MHKWaveObject*)new_obj;
 
-	SimpleLCOE_obj->data_ptr = data_ptr;
+	MHKWave_obj->data_ptr = data_ptr;
 
 	return new_obj;
 }
 
-/* SimpleLCOE methods */
+/* MHKWave methods */
 
 static PyObject *
-SimpleLCOE_assign(SimpleLCOEObject *self, PyObject *args)
+MHKWave_assign(MHKWaveObject *self, PyObject *args)
 {
 	PyObject* dict;
 	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Lcoefcr", "SimpleLCOE")){
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "MhkWave", "MHKWave")){
 		return NULL;
 	}
 
@@ -48,106 +48,106 @@ SimpleLCOE_assign(SimpleLCOEObject *self, PyObject *args)
 }
 
 static PyObject *
-SimpleLCOE_export(SimpleLCOEObject *self, PyObject *args)
+MHKWave_export(MHKWaveObject *self, PyObject *args)
 {
-	PyTypeObject* tp = &SimpleLCOE_Type;
+	PyTypeObject* tp = &MHKWave_Type;
 	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
 	return dict;
 }
 
-static PyMethodDef SimpleLCOE_methods[] = {
-		{"assign",            (PyCFunction)SimpleLCOE_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``SimpleLCOE_vals = { var: val, ...}``")},
-		{"export",            (PyCFunction)SimpleLCOE_export,  METH_VARARGS,
+static PyMethodDef MHKWave_methods[] = {
+		{"assign",            (PyCFunction)MHKWave_assign,  METH_VARARGS,
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``MHKWave_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)MHKWave_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 static PyObject *
-SimpleLCOE_get_annual_energy(SimpleLCOEObject *self, void *closure)
+MHKWave_get_annual_energy_loss(MHKWaveObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Lcoefcr_SimpleLCOE_annual_energy_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_MhkWave_MHKWave_annual_energy_loss_nget, self->data_ptr);
 }
 
 static int
-SimpleLCOE_set_annual_energy(SimpleLCOEObject *self, PyObject *value, void *closure)
+MHKWave_set_annual_energy_loss(MHKWaveObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Lcoefcr_SimpleLCOE_annual_energy_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_MhkWave_MHKWave_annual_energy_loss_nset, self->data_ptr);
 }
 
 static PyObject *
-SimpleLCOE_get_capital_cost(SimpleLCOEObject *self, void *closure)
+MHKWave_get_calculate_capacity(MHKWaveObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Lcoefcr_SimpleLCOE_capital_cost_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_MhkWave_MHKWave_calculate_capacity_nget, self->data_ptr);
 }
 
 static int
-SimpleLCOE_set_capital_cost(SimpleLCOEObject *self, PyObject *value, void *closure)
+MHKWave_set_calculate_capacity(MHKWaveObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Lcoefcr_SimpleLCOE_capital_cost_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_MhkWave_MHKWave_calculate_capacity_nset, self->data_ptr);
 }
 
 static PyObject *
-SimpleLCOE_get_fixed_charge_rate(SimpleLCOEObject *self, void *closure)
+MHKWave_get_rated_capacity(MHKWaveObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Lcoefcr_SimpleLCOE_fixed_charge_rate_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_MhkWave_MHKWave_rated_capacity_nget, self->data_ptr);
 }
 
 static int
-SimpleLCOE_set_fixed_charge_rate(SimpleLCOEObject *self, PyObject *value, void *closure)
+MHKWave_set_rated_capacity(MHKWaveObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Lcoefcr_SimpleLCOE_fixed_charge_rate_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_MhkWave_MHKWave_rated_capacity_nset, self->data_ptr);
 }
 
 static PyObject *
-SimpleLCOE_get_fixed_operating_cost(SimpleLCOEObject *self, void *closure)
+MHKWave_get_wave_power_curve(MHKWaveObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Lcoefcr_SimpleLCOE_fixed_operating_cost_nget, self->data_ptr);
+	return PySAM_matrix_getter(SAM_MhkWave_MHKWave_wave_power_curve_mget, self->data_ptr);
 }
 
 static int
-SimpleLCOE_set_fixed_operating_cost(SimpleLCOEObject *self, PyObject *value, void *closure)
+MHKWave_set_wave_power_curve(MHKWaveObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Lcoefcr_SimpleLCOE_fixed_operating_cost_nset, self->data_ptr);
+		return PySAM_matrix_setter(value, SAM_MhkWave_MHKWave_wave_power_curve_mset, self->data_ptr);
 }
 
 static PyObject *
-SimpleLCOE_get_variable_operating_cost(SimpleLCOEObject *self, void *closure)
+MHKWave_get_wave_resource_definition(MHKWaveObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Lcoefcr_SimpleLCOE_variable_operating_cost_nget, self->data_ptr);
+	return PySAM_matrix_getter(SAM_MhkWave_MHKWave_wave_resource_definition_mget, self->data_ptr);
 }
 
 static int
-SimpleLCOE_set_variable_operating_cost(SimpleLCOEObject *self, PyObject *value, void *closure)
+MHKWave_set_wave_resource_definition(MHKWaveObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Lcoefcr_SimpleLCOE_variable_operating_cost_nset, self->data_ptr);
+		return PySAM_matrix_setter(value, SAM_MhkWave_MHKWave_wave_resource_definition_mset, self->data_ptr);
 }
 
-static PyGetSetDef SimpleLCOE_getset[] = {
-{"annual_energy", (getter)SimpleLCOE_get_annual_energy,(setter)SimpleLCOE_set_annual_energy,
-	PyDoc_STR("*float*: Annual energy production [kWh]\n\n*Required*: True"),
+static PyGetSetDef MHKWave_getset[] = {
+{"annual_energy_loss", (getter)MHKWave_get_annual_energy_loss,(setter)MHKWave_set_annual_energy_loss,
+	PyDoc_STR("*float*: Total energy losses [%]\n\n*Required*: set to 0 if not provided."),
  	NULL},
-{"capital_cost", (getter)SimpleLCOE_get_capital_cost,(setter)SimpleLCOE_set_capital_cost,
-	PyDoc_STR("*float*: Capital cost [$]\n\n*Required*: True"),
+{"calculate_capacity", (getter)MHKWave_get_calculate_capacity,(setter)MHKWave_set_calculate_capacity,
+	PyDoc_STR("*float*: Calculate capacity outside UI? [0/1]\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: set to 1 if not provided."),
  	NULL},
-{"fixed_charge_rate", (getter)SimpleLCOE_get_fixed_charge_rate,(setter)SimpleLCOE_set_fixed_charge_rate,
-	PyDoc_STR("*float*: Fixed charge rate\n\n*Required*: True"),
+{"rated_capacity", (getter)MHKWave_get_rated_capacity,(setter)MHKWave_set_rated_capacity,
+	PyDoc_STR("*float*: Rated Capacity of System [kW]\n\n*Required*: set to 0 if not provided."),
  	NULL},
-{"fixed_operating_cost", (getter)SimpleLCOE_get_fixed_operating_cost,(setter)SimpleLCOE_set_fixed_operating_cost,
-	PyDoc_STR("*float*: Annual fixed operating cost [$]\n\n*Required*: True"),
+{"wave_power_curve", (getter)MHKWave_get_wave_power_curve,(setter)MHKWave_set_wave_power_curve,
+	PyDoc_STR("*sequence[sequence]*: Wave Power Matrix\n\n*Required*: True"),
  	NULL},
-{"variable_operating_cost", (getter)SimpleLCOE_get_variable_operating_cost,(setter)SimpleLCOE_set_variable_operating_cost,
-	PyDoc_STR("*float*: Annual variable operating cost [$/kWh]\n\n*Required*: True"),
+{"wave_resource_definition", (getter)MHKWave_get_wave_resource_definition,(setter)MHKWave_set_wave_resource_definition,
+	PyDoc_STR("*sequence[sequence]*: Frequency distribution of resource as a function of Hs and Te\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
 
-static PyTypeObject SimpleLCOE_Type = {
+static PyTypeObject MHKWave_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"Lcoefcr.SimpleLCOE",             /*tp_name*/
-		sizeof(SimpleLCOEObject),          /*tp_basicsize*/
+		"MhkWave.MHKWave",             /*tp_name*/
+		sizeof(MHKWaveObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
 		0,    /*tp_dealloc*/
@@ -173,9 +173,9 @@ static PyTypeObject SimpleLCOE_Type = {
 		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
-		SimpleLCOE_methods,         /*tp_methods*/
+		MHKWave_methods,         /*tp_methods*/
 		0,                          /*tp_members*/
-		SimpleLCOE_getset,          /*tp_getset*/
+		MHKWave_getset,          /*tp_getset*/
 		0,                          /*tp_base*/
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
@@ -195,13 +195,13 @@ static PyTypeObject SimpleLCOE_Type = {
 
 typedef struct {
 	PyObject_HEAD
-	SAM_Lcoefcr   data_ptr;
+	SAM_MhkWave   data_ptr;
 } OutputsObject;
 
 static PyTypeObject Outputs_Type;
 
 static PyObject *
-Outputs_new(SAM_Lcoefcr data_ptr)
+Outputs_new(SAM_MhkWave data_ptr)
 {
 	PyObject* new_obj = Outputs_Type.tp_alloc(&Outputs_Type,0);
 
@@ -222,7 +222,7 @@ Outputs_assign(OutputsObject *self, PyObject *args)
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Lcoefcr", "Outputs")){
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "MhkWave", "Outputs")){
 		return NULL;
 	}
 
@@ -247,14 +247,41 @@ static PyMethodDef Outputs_methods[] = {
 };
 
 static PyObject *
-Outputs_get_lcoe_fcr(OutputsObject *self, void *closure)
+Outputs_get_annual_energy(OutputsObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Lcoefcr_Outputs_lcoe_fcr_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_MhkWave_Outputs_annual_energy_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_annual_energy_distribution(OutputsObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_MhkWave_Outputs_annual_energy_distribution_mget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_average_power(OutputsObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MhkWave_Outputs_average_power_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_capacity_factor(OutputsObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MhkWave_Outputs_capacity_factor_nget, self->data_ptr);
 }
 
 static PyGetSetDef Outputs_getset[] = {
-{"lcoe_fcr", (getter)Outputs_get_lcoe_fcr,(setter)0,
-	PyDoc_STR("*float*: Levelized cost of energy [$/kWh]"),
+{"annual_energy", (getter)Outputs_get_annual_energy,(setter)0,
+	PyDoc_STR("*float*: Annual energy production [kWh]"),
+ 	NULL},
+{"annual_energy_distribution", (getter)Outputs_get_annual_energy_distribution,(setter)0,
+	PyDoc_STR("*sequence[sequence]*: Annual energy production as function of Hs and Te"),
+ 	NULL},
+{"average_power", (getter)Outputs_get_average_power,(setter)0,
+	PyDoc_STR("*float*: Average power production [kW]"),
+ 	NULL},
+{"capacity_factor", (getter)Outputs_get_capacity_factor,(setter)0,
+	PyDoc_STR("*float*: Capacity Factor [%]"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -263,7 +290,7 @@ static PyTypeObject Outputs_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"Lcoefcr.Outputs",             /*tp_name*/
+		"MhkWave.Outputs",             /*tp_name*/
 		sizeof(OutputsObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -306,28 +333,28 @@ static PyTypeObject Outputs_Type = {
 };
 
 /*
- * Lcoefcr
+ * MhkWave
  */
 
 typedef struct {
 	PyObject_HEAD
 	PyObject            *x_attr;        /* Attributes dictionary */
-	SAM_Lcoefcr   data_ptr;
-} LcoefcrObject;
+	SAM_MhkWave   data_ptr;
+} MhkWaveObject;
 
-static PyTypeObject Lcoefcr_Type;
+static PyTypeObject MhkWave_Type;
 
-static LcoefcrObject *
-newLcoefcrObject(void* data_ptr)
+static MhkWaveObject *
+newMhkWaveObject(void* data_ptr)
 {
-	LcoefcrObject *self;
-	self = PyObject_New(LcoefcrObject, &Lcoefcr_Type);
+	MhkWaveObject *self;
+	self = PyObject_New(MhkWaveObject, &MhkWave_Type);
 
-	PySAM_TECH_ATTR("Lcoefcr", SAM_Lcoefcr_construct)
+	PySAM_TECH_ATTR("MhkWave", SAM_MhkWave_construct)
 
-	PyObject* SimpleLCOE_obj = SimpleLCOE_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "SimpleLCOE", SimpleLCOE_obj);
-	Py_DECREF(SimpleLCOE_obj);
+	PyObject* MHKWave_obj = MHKWave_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "MHKWave", MHKWave_obj);
+	Py_DECREF(MHKWave_obj);
 
 	PyObject* Outputs_obj = Outputs_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
@@ -337,19 +364,19 @@ newLcoefcrObject(void* data_ptr)
 	return self;
 }
 
-/* Lcoefcr methods */
+/* MhkWave methods */
 
 static void
-Lcoefcr_dealloc(LcoefcrObject *self)
+MhkWave_dealloc(MhkWaveObject *self)
 {
 	Py_XDECREF(self->x_attr);
-	SAM_Lcoefcr_destruct(self->data_ptr);
+	SAM_MhkWave_destruct(self->data_ptr);
 	PyObject_Del(self);
 }
 
 
 static PyObject *
-Lcoefcr_execute(LcoefcrObject *self, PyObject *args)
+MhkWave_execute(MhkWaveObject *self, PyObject *args)
 {
 	int verbosity = 0;
 
@@ -357,7 +384,7 @@ Lcoefcr_execute(LcoefcrObject *self, PyObject *args)
 		return NULL;
 
 	SAM_error error = new_error();
-	SAM_Lcoefcr_execute(self->data_ptr, verbosity, &error);
+	SAM_MhkWave_execute(self->data_ptr, verbosity, &error);
 	if (PySAM_has_error(error )) return NULL;
 
 	Py_INCREF(Py_None);
@@ -366,14 +393,14 @@ Lcoefcr_execute(LcoefcrObject *self, PyObject *args)
 
 
 static PyObject *
-Lcoefcr_assign(LcoefcrObject *self, PyObject *args)
+MhkWave_assign(MhkWaveObject *self, PyObject *args)
 {
 	PyObject* dict;
 	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_nested_dict((PyObject*)self, self->x_attr, self->data_ptr, dict, "Lcoefcr"))
+	if (!PySAM_assign_from_nested_dict((PyObject*)self, self->x_attr, self->data_ptr, dict, "MhkWave"))
 		return NULL;
 
 	Py_INCREF(Py_None);
@@ -382,45 +409,45 @@ Lcoefcr_assign(LcoefcrObject *self, PyObject *args)
 
 
 static PyObject *
-Lcoefcr_export(LcoefcrObject *self, PyObject *args)
+MhkWave_export(MhkWaveObject *self, PyObject *args)
 {
 	return PySAM_export_to_nested_dict((PyObject *) self, self->x_attr);
 }
 
-static PyMethodDef Lcoefcr_methods[] = {
-		{"execute",            (PyCFunction)Lcoefcr_execute,  METH_VARARGS,
+static PyMethodDef MhkWave_methods[] = {
+		{"execute",            (PyCFunction)MhkWave_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
-		{"assign",            (PyCFunction)Lcoefcr_assign,  METH_VARARGS,
-				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Simple LCOE': { var: val, ...}, ...}``")},
-		{"export",            (PyCFunction)Lcoefcr_export,  METH_VARARGS,
+		{"assign",            (PyCFunction)MhkWave_assign,  METH_VARARGS,
+				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'MHKWave': { var: val, ...}, ...}``")},
+		{"export",            (PyCFunction)MhkWave_export,  METH_VARARGS,
 				PyDoc_STR("export() -> dict\n Export attributes into nested dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 static PyObject *
-Lcoefcr_getattro(LcoefcrObject *self, PyObject *name)
+MhkWave_getattro(MhkWaveObject *self, PyObject *name)
 {
 	return PySAM_get_attr((PyObject*) self, (PyObject*) self->x_attr, name);
 }
 
 static int
-Lcoefcr_setattr(LcoefcrObject *self, const char *name, PyObject *v)
+MhkWave_setattr(MhkWaveObject *self, const char *name, PyObject *v)
 {
 	return PySAM_set_attr((PyObject*)self, (PyObject*)self->x_attr, name, v);
 }
 
-static PyTypeObject Lcoefcr_Type = {
+static PyTypeObject MhkWave_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"Lcoefcr",            /*tp_name*/
-		sizeof(LcoefcrObject),/*tp_basicsize*/
+		"MhkWave",            /*tp_name*/
+		sizeof(MhkWaveObject),/*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
-		(destructor)Lcoefcr_dealloc,    /*tp_dealloc*/
+		(destructor)MhkWave_dealloc,    /*tp_dealloc*/
 		0,                          /*tp_print*/
 		(getattrfunc)0,             /*tp_getattr*/
-		(setattrfunc)Lcoefcr_setattr,   /*tp_setattr*/
+		(setattrfunc)MhkWave_setattr,   /*tp_setattr*/
 		0,                          /*tp_reserved*/
 		0,                          /*tp_repr*/
 		0,                          /*tp_as_number*/
@@ -429,7 +456,7 @@ static PyTypeObject Lcoefcr_Type = {
 		0,                          /*tp_hash*/
 		0,                          /*tp_call*/
 		0,                          /*tp_str*/
-		(getattrofunc)Lcoefcr_getattro, /*tp_getattro*/
+		(getattrofunc)MhkWave_getattro, /*tp_getattro*/
 		0,                          /*tp_setattro*/
 		0,                          /*tp_as_buffer*/
 		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
@@ -440,7 +467,7 @@ static PyTypeObject Lcoefcr_Type = {
 		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
-		Lcoefcr_methods,      /*tp_methods*/
+		MhkWave_methods,      /*tp_methods*/
 		0,                          /*tp_members*/
 		0,       /*tp_getset*/
 		0,                          /*tp_base*/
@@ -458,47 +485,47 @@ static PyTypeObject Lcoefcr_Type = {
 /* --------------------------------------------------------------------- */
 
 
-/* Function of no arguments returning new Lcoefcr object */
+/* Function of no arguments returning new MhkWave object */
 
 static PyObject *
-Lcoefcr_new(PyObject *self, PyObject *args)
+MhkWave_new(PyObject *self, PyObject *args)
 {
-	LcoefcrObject *rv;
-	rv = newLcoefcrObject(0);
+	MhkWaveObject *rv;
+	rv = newMhkWaveObject(0);
 	if (rv == NULL)
 		return NULL;
 	return (PyObject *)rv;
 }
 
 static PyObject *
-Lcoefcr_wrap(PyObject *self, PyObject *args)
+MhkWave_wrap(PyObject *self, PyObject *args)
 {
-	LcoefcrObject *rv;
+	MhkWaveObject *rv;
 	long long int ptr = 0;  // 64 bit arch
 	if (!PyArg_ParseTuple(args, "L:wrap", &ptr)){
 		PyErr_BadArgument();
 		return NULL;
 	}
-	rv = newLcoefcrObject((void*)ptr);
+	rv = newMhkWaveObject((void*)ptr);
 	if (rv == NULL)
 		return NULL;
 	return (PyObject *)rv;
 }
 
 static PyObject *
-Lcoefcr_default(PyObject *self, PyObject *args)
+MhkWave_default(PyObject *self, PyObject *args)
 {
-	LcoefcrObject *rv;
+	MhkWaveObject *rv;
 	char* def = 0;
 	if (!PyArg_ParseTuple(args, "s:default", &def)){
 		PyErr_BadArgument();
 		return NULL;
 	}
-	rv = newLcoefcrObject(0);
+	rv = newMhkWaveObject(0);
 	if (rv == NULL)
 		return NULL;
 
-	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Lcoefcr", def);
+	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "MhkWave", def);
 
 	return (PyObject *)rv;
 }
@@ -508,23 +535,23 @@ Lcoefcr_default(PyObject *self, PyObject *args)
 
 /* List of functions defined in the module */
 
-static PyMethodDef LcoefcrModule_methods[] = {
-		{"new",             Lcoefcr_new,         METH_VARARGS,
-				PyDoc_STR("new() -> Lcoefcr")},
-		{"default",             Lcoefcr_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Lcoefcr\n\nUse financial model-specific default attributes\n"
-				"config options:\n\n- \"BiopowerLCOECalculator\"\n- \"DSGLIPHLCOHCalculator\"\n- \"DSLFLCOECalculator\"\n- \"DishStirlingLCOECalculator\"\n- \"EmpiricalTroughLCOECalculator\"\n- \"FlatPlatePVLCOECalculator\"\n- \"GenericCSPSystemLCOECalculator\"\n- \"GenericSystemLCOECalculator\"\n- \"GeothermalPowerLCOECalculator\"\n- \"HighXConcentratingPVLCOECalculator\"\n- \"MHKtidalLCOECalculator\"\n- \"MHKwaveLCOECalculator\"\n- \"MSLFLCOECalculator\"\n- \"PVWattsLCOECalculator\"\n- \"PhysicalTroughIPHLCOHCalculator\"\n- \"PhysicalTroughLCOECalculator\"\n- \"SolarWaterHeatingLCOECalculator\"\n- \"WindPowerLCOECalculator\"")},
-		{"wrap",             Lcoefcr_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> Lcoefcr\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
+static PyMethodDef MhkWaveModule_methods[] = {
+		{"new",             MhkWave_new,         METH_VARARGS,
+				PyDoc_STR("new() -> MhkWave")},
+		{"default",             MhkWave_default,         METH_VARARGS,
+				PyDoc_STR("default(config) -> MhkWave\n\nUse financial model-specific default attributes\n"
+				"config options:\n\n- \"MHKwaveLCOECalculator\"")},
+		{"wrap",             MhkWave_wrap,         METH_VARARGS,
+				PyDoc_STR("wrap(ssc_data_t) -> MhkWave\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 PyDoc_STRVAR(module_doc,
-			 "Calculate levelized cost of electricity using fixed charge rate method instead of cash flow");
+			 "Wave marine hydrokinetic system");
 
 
 static int
-LcoefcrModule_exec(PyObject *m)
+MhkWaveModule_exec(PyObject *m)
 {
 	/* Finalize the type object including setting type of the new type
 	 * object; doing it here is required for portability, too. */
@@ -532,28 +559,28 @@ LcoefcrModule_exec(PyObject *m)
 	if (PySAM_load_lib(m) < 0) goto fail;
 	if (PySAM_init_error(m) < 0) goto fail;
 
-	Lcoefcr_Type.tp_dict = PyDict_New();
-	if (!Lcoefcr_Type.tp_dict) { goto fail; }
+	MhkWave_Type.tp_dict = PyDict_New();
+	if (!MhkWave_Type.tp_dict) { goto fail; }
 
-	/// Add the SimpleLCOE type object to Lcoefcr_Type
-	if (PyType_Ready(&SimpleLCOE_Type) < 0) { goto fail; }
-	PyDict_SetItemString(Lcoefcr_Type.tp_dict,
-				"SimpleLCOE",
-				(PyObject*)&SimpleLCOE_Type);
-	Py_DECREF(&SimpleLCOE_Type);
+	/// Add the MHKWave type object to MhkWave_Type
+	if (PyType_Ready(&MHKWave_Type) < 0) { goto fail; }
+	PyDict_SetItemString(MhkWave_Type.tp_dict,
+				"MHKWave",
+				(PyObject*)&MHKWave_Type);
+	Py_DECREF(&MHKWave_Type);
 
-	/// Add the Outputs type object to Lcoefcr_Type
+	/// Add the Outputs type object to MhkWave_Type
 	if (PyType_Ready(&Outputs_Type) < 0) { goto fail; }
-	PyDict_SetItemString(Lcoefcr_Type.tp_dict,
+	PyDict_SetItemString(MhkWave_Type.tp_dict,
 				"Outputs",
 				(PyObject*)&Outputs_Type);
 	Py_DECREF(&Outputs_Type);
 
-	/// Add the Lcoefcr type object to the module
-	if (PyType_Ready(&Lcoefcr_Type) < 0) { goto fail; }
+	/// Add the MhkWave type object to the module
+	if (PyType_Ready(&MhkWave_Type) < 0) { goto fail; }
 	PyModule_AddObject(m,
-				"Lcoefcr",
-				(PyObject*)&Lcoefcr_Type);
+				"MhkWave",
+				(PyObject*)&MhkWave_Type);
 
 	return 0;
 	fail:
@@ -561,18 +588,18 @@ LcoefcrModule_exec(PyObject *m)
 	return -1;
 }
 
-static struct PyModuleDef_Slot LcoefcrModule_slots[] = {
-		{Py_mod_exec, LcoefcrModule_exec},
+static struct PyModuleDef_Slot MhkWaveModule_slots[] = {
+		{Py_mod_exec, MhkWaveModule_exec},
 		{0, NULL},
 };
 
-static struct PyModuleDef LcoefcrModule = {
+static struct PyModuleDef MhkWaveModule = {
 		PyModuleDef_HEAD_INIT,
-		"Lcoefcr",
+		"MhkWave",
 		module_doc,
 		0,
-		LcoefcrModule_methods,
-		LcoefcrModule_slots,
+		MhkWaveModule_methods,
+		MhkWaveModule_slots,
 		NULL,
 		NULL,
 		NULL
@@ -581,7 +608,7 @@ static struct PyModuleDef LcoefcrModule = {
 /* Export function for the module */
 
 PyMODINIT_FUNC
-PyInit_Lcoefcr(void)
+PyInit_MhkWave(void)
 {
-	return PyModuleDef_Init(&LcoefcrModule);
+	return PyModuleDef_Init(&MhkWaveModule);
 }

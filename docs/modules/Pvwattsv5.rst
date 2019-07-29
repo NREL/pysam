@@ -21,6 +21,12 @@ Functions
 .. autoclass:: PySAM.Pvwattsv5.Pvwattsv5
 	:members:
 
+Lifetime Group
+==============
+
+.. autoclass:: PySAM.Pvwattsv5.Pvwattsv5.Lifetime
+	:members:
+
 LocationAndResource Group
 ==============
 

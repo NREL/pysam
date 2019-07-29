@@ -829,7 +829,7 @@ class ElectricityRate(object):
 	ur_ec_tou_mat = tuple
 
 
-class EnergyMarket(object):
+class TimeOfDelivery(object):
 	def assign(self): 
 		pass
 
@@ -840,9 +840,11 @@ class EnergyMarket(object):
 		pass
 
 
+	dispatch_factors_ts = tuple
 	dispatch_sched_weekday = tuple
 	dispatch_sched_weekend = tuple
 	dispatch_tod_factors = tuple
+	ppa_multiplier_model = float
 	ppa_price_input = float
 
 
@@ -954,6 +956,7 @@ class Outputs(object):
 	average_battery_conversion_efficiency = float
 	average_battery_roundtrip_efficiency = float
 	batt_DOD = tuple
+	batt_DOD_cycle_average = tuple
 	batt_I = tuple
 	batt_SOC = tuple
 	batt_annual_charge_energy = tuple
@@ -965,6 +968,8 @@ class Outputs(object):
 	batt_bank_installed_capacity = float
 	batt_bank_replacement = tuple
 	batt_capacity_percent = tuple
+	batt_capacity_percent_calendar = tuple
+	batt_capacity_percent_cycle = tuple
 	batt_capacity_thermal_percent = tuple
 	batt_conversion_loss = tuple
 	batt_cost_to_cycle = tuple
@@ -1014,6 +1019,7 @@ class Outputs(object):
 	inverterMPPT3_DCVoltage = tuple
 	inverterMPPT4_DCVoltage = tuple
 	kwh_per_kw = float
+	market_sell_rate_series_yr1 = tuple
 	monthly_batt_to_grid = tuple
 	monthly_batt_to_load = tuple
 	monthly_dc = tuple
@@ -1222,7 +1228,7 @@ class Pvsamv1(object):
 	PV = PV
 	FuelCell = FuelCell
 	ElectricityRate = ElectricityRate
-	EnergyMarket = EnergyMarket
+	TimeOfDelivery = TimeOfDelivery
 	Outputs = Outputs
 
 

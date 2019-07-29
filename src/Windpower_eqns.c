@@ -3,6 +3,22 @@ typedef struct {
     SAM_Windpower   data_ptr;
 } WindGroupObject;
 
+static const char* Turbine_calculate_powercurve_doc =
+        "Calculates the power produced by a wind turbine at windspeeds incremented by 0.25 m/s\\n"
+        "Input: var_table with key-value pairs\\n"
+        "     'turbine_size' - double [kW]\\n"
+        "     'elevation' - double [m], required if using Weibull resource model, otherwise 0\\n"
+        "     'max_tip_speed' - double [m/s]\\n"
+        "     'max_tip_sp_ratio' - double max tip speed ratio [-]\\n"
+        "     'cut_in' - double cut in speed [m/s]\\n"
+        "     'cut_out' - double cut out speed [m/s]\\n"
+        "     'drive_train' - int 0: 3 Stage Planetary, 1: Single Stage - Low Speed Generator, 2: Multi-Generator, 3: Direct Drive\\n"
+        "Output: key-value pairs added to var_table\\n"
+        "     'wind_turbine_powercurve_windspeeds' - array [m/s]\\n"
+        "     'wind_turbine_powercurve_powerout' - array [m/s]\\n"
+        "     'rated_wind_speed' - double [m/s[\\n"
+        "     'hub_efficiency' - array [m/s]";
+
 static PyObject* Turbine_calculate_powercurve(PyObject *self, PyObject *args, PyObject *keywds)
 {
     double turbine_size;

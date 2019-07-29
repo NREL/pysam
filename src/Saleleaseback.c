@@ -361,6 +361,18 @@ SystemCosts_set_annual_fuel_usage(SystemCostsObject *self, PyObject *value, void
 }
 
 static PyObject *
+SystemCosts_get_annual_fuel_usage_lifetime(SystemCostsObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Saleleaseback_SystemCosts_annual_fuel_usage_lifetime_aget, self->data_ptr);
+}
+
+static int
+SystemCosts_set_annual_fuel_usage_lifetime(SystemCostsObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Saleleaseback_SystemCosts_annual_fuel_usage_lifetime_aset, self->data_ptr);
+}
+
+static PyObject *
 SystemCosts_get_om_capacity(SystemCostsObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Saleleaseback_SystemCosts_om_capacity_aget, self->data_ptr);
@@ -689,10 +701,13 @@ static PyGetSetDef SystemCosts_getset[] = {
 	PyDoc_STR("*float*: Number of O and M types\n\n*Constraints*: INTEGER,MIN=0,MAX=2\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"annual_fuel_usage", (getter)SystemCosts_get_annual_fuel_usage,(setter)SystemCosts_set_annual_fuel_usage,
-	PyDoc_STR("*float*: Fuel usage [kWht]\n\n*Constraints*: MIN=0\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Fuel usage (yr 1) [kWht]\n\n*Constraints*: MIN=0\n\n*Required*: set to 0 if not provided."),
+ 	NULL},
+{"annual_fuel_usage_lifetime", (getter)SystemCosts_get_annual_fuel_usage_lifetime,(setter)SystemCosts_set_annual_fuel_usage_lifetime,
+	PyDoc_STR("*sequence*: Fuel usage (lifetime) [kWht]"),
  	NULL},
 {"om_capacity", (getter)SystemCosts_get_om_capacity,(setter)SystemCosts_set_om_capacity,
-	PyDoc_STR("*sequence*: Capacity-based System Costs amount [$/kWcap]\n\n*Required*: set to 0.0 if not provided."),
+	PyDoc_STR("*sequence*: Capacity-based O&M amount [$/kWcap]\n\n*Required*: set to 0.0 if not provided."),
  	NULL},
 {"om_capacity1", (getter)SystemCosts_get_om_capacity1,(setter)SystemCosts_set_om_capacity1,
 	PyDoc_STR("*sequence*: Battery capacity-based System Costs amount [$/kWcap]\n\n*Required*: set to 0.0 if not provided."),
@@ -707,10 +722,10 @@ static PyGetSetDef SystemCosts_getset[] = {
 	PyDoc_STR("*float*: Fuel cell capacity for System Costs values [kW]\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"om_capacity_escal", (getter)SystemCosts_get_om_capacity_escal,(setter)SystemCosts_set_om_capacity_escal,
-	PyDoc_STR("*float*: Capacity-based System Costs escalation [%/year]\n\n*Required*: set to 0.0 if not provided."),
+	PyDoc_STR("*float*: Capacity-based O&M escalation [%/year]\n\n*Required*: set to 0.0 if not provided."),
  	NULL},
 {"om_fixed", (getter)SystemCosts_get_om_fixed,(setter)SystemCosts_set_om_fixed,
-	PyDoc_STR("*sequence*: Fixed System Costs annual amount [$/year]\n\n*Required*: set to 0.0 if not provided."),
+	PyDoc_STR("*sequence*: Fixed O&M annual amount [$/year]\n\n*Required*: set to 0.0 if not provided."),
  	NULL},
 {"om_fixed1", (getter)SystemCosts_get_om_fixed1,(setter)SystemCosts_set_om_fixed1,
 	PyDoc_STR("*sequence*: Battery fixed System Costs annual amount [$/year]\n\n*Required*: set to 0.0 if not provided."),
@@ -719,7 +734,7 @@ static PyGetSetDef SystemCosts_getset[] = {
 	PyDoc_STR("*sequence*: Fuel cell fixed System Costs annual amount [$/year]\n\n*Required*: set to 0.0 if not provided."),
  	NULL},
 {"om_fixed_escal", (getter)SystemCosts_get_om_fixed_escal,(setter)SystemCosts_set_om_fixed_escal,
-	PyDoc_STR("*float*: Fixed System Costs escalation [%/year]\n\n*Required*: set to 0.0 if not provided."),
+	PyDoc_STR("*float*: Fixed O&M escalation [%/year]\n\n*Required*: set to 0.0 if not provided."),
  	NULL},
 {"om_fuel_cost", (getter)SystemCosts_get_om_fuel_cost,(setter)SystemCosts_set_om_fuel_cost,
 	PyDoc_STR("*sequence*: Fuel cost [$/MMBtu]\n\n*Required*: set to 0.0 if not provided."),
@@ -746,7 +761,7 @@ static PyGetSetDef SystemCosts_getset[] = {
 	PyDoc_STR("*float*: Coal feedstock usage [unit]\n\n*Required*: set to 0.0 if not provided."),
  	NULL},
 {"om_production", (getter)SystemCosts_get_om_production,(setter)SystemCosts_set_om_production,
-	PyDoc_STR("*sequence*: Production-based System Costs amount [$/MWh]\n\n*Required*: set to 0.0 if not provided."),
+	PyDoc_STR("*sequence*: Production-based O&M amount [$/MWh]\n\n*Required*: set to 0.0 if not provided."),
  	NULL},
 {"om_production1", (getter)SystemCosts_get_om_production1,(setter)SystemCosts_set_om_production1,
 	PyDoc_STR("*sequence*: Battery production-based System Costs amount [$/MWh]\n\n*Required*: set to 0.0 if not provided."),
@@ -761,7 +776,7 @@ static PyGetSetDef SystemCosts_getset[] = {
 	PyDoc_STR("*sequence*: Fuel cell production for System Costs values [kWh]\n\n*Required*: set to 0 if not provided."),
  	NULL},
 {"om_production_escal", (getter)SystemCosts_get_om_production_escal,(setter)SystemCosts_set_om_production_escal,
-	PyDoc_STR("*float*: Production-based System Costs escalation [%/year]\n\n*Required*: set to 0.0 if not provided."),
+	PyDoc_STR("*float*: Production-based O&M escalation [%/year]\n\n*Required*: set to 0.0 if not provided."),
  	NULL},
 {"om_replacement_cost1", (getter)SystemCosts_get_om_replacement_cost1,(setter)SystemCosts_set_om_replacement_cost1,
 	PyDoc_STR("*sequence*: Repacement cost 1 [$/kWh]\n\n*Required*: set to 0.0 if not provided."),

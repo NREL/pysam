@@ -7,6 +7,252 @@
 
 
 /*
+ * PVWatts Group
+ */ 
+
+typedef struct {
+	PyObject_HEAD
+	SAM_Battwatts   data_ptr;
+} PVWattsObject;
+
+static PyTypeObject PVWatts_Type;
+
+static PyObject *
+PVWatts_new(SAM_Battwatts data_ptr)
+{
+	PyObject* new_obj = PVWatts_Type.tp_alloc(&PVWatts_Type,0);
+
+	PVWattsObject* PVWatts_obj = (PVWattsObject*)new_obj;
+
+	PVWatts_obj->data_ptr = data_ptr;
+
+	return new_obj;
+}
+
+/* PVWatts methods */
+
+static PyObject *
+PVWatts_assign(PVWattsObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Battwatts", "PVWatts")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+PVWatts_export(PVWattsObject *self, PyObject *args)
+{
+	PyTypeObject* tp = &PVWatts_Type;
+	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
+	return dict;
+}
+
+static PyMethodDef PVWatts_methods[] = {
+		{"assign",            (PyCFunction)PVWatts_assign,  METH_VARARGS,
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``PVWatts_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)PVWatts_export,  METH_VARARGS,
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+		{NULL,              NULL}           /* sentinel */
+};
+
+static PyObject *
+PVWatts_get_system_use_lifetime_output(PVWattsObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Battwatts_PVWatts_system_use_lifetime_output_nget, self->data_ptr);
+}
+
+static int
+PVWatts_set_system_use_lifetime_output(PVWattsObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Battwatts_PVWatts_system_use_lifetime_output_nset, self->data_ptr);
+}
+
+static PyGetSetDef PVWatts_getset[] = {
+{"system_use_lifetime_output", (getter)PVWatts_get_system_use_lifetime_output,(setter)PVWatts_set_system_use_lifetime_output,
+	PyDoc_STR("*float*: PV lifetime simulation [0/1]\n\n*Options*: 0=SingleYearRepeated,1=RunEveryYear\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
+ 	NULL},
+	{NULL}  /* Sentinel */
+};
+
+static PyTypeObject PVWatts_Type = {
+		/* The ob_type field must be initialized in the module init function
+		 * to be portable to Windows without using C++. */
+		PyVarObject_HEAD_INIT(NULL, 0)
+		"Battwatts.PVWatts",             /*tp_name*/
+		sizeof(PVWattsObject),          /*tp_basicsize*/
+		0,                          /*tp_itemsize*/
+		/* methods */
+		0,    /*tp_dealloc*/
+		0,                          /*tp_print*/
+		(getattrfunc)0,             /*tp_getattr*/
+		0,                          /*tp_setattr*/
+		0,                          /*tp_reserved*/
+		0,                          /*tp_repr*/
+		0,                          /*tp_as_number*/
+		0,                          /*tp_as_sequence*/
+		0,                          /*tp_as_mapping*/
+		0,                          /*tp_hash*/
+		0,                          /*tp_call*/
+		0,                          /*tp_str*/
+		0,                          /*tp_getattro*/
+		0,                          /*tp_setattro*/
+		0,                          /*tp_as_buffer*/
+		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
+		0,                          /*tp_doc*/
+		0,                          /*tp_traverse*/
+		0,                          /*tp_clear*/
+		0,                          /*tp_richcompare*/
+		0,                          /*tp_weaklistofnset*/
+		0,                          /*tp_iter*/
+		0,                          /*tp_iternext*/
+		PVWatts_methods,         /*tp_methods*/
+		0,                          /*tp_members*/
+		PVWatts_getset,          /*tp_getset*/
+		0,                          /*tp_base*/
+		0,                          /*tp_dict*/
+		0,                          /*tp_descr_get*/
+		0,                          /*tp_descr_set*/
+		0,                          /*tp_dictofnset*/
+		0,                          /*tp_init*/
+		0,                          /*tp_alloc*/
+		0,             /*tp_new*/
+		0,                          /*tp_free*/
+		0,                          /*tp_is_gc*/
+};
+
+
+/*
+ * FinancialAnalysisParameters Group
+ */ 
+
+typedef struct {
+	PyObject_HEAD
+	SAM_Battwatts   data_ptr;
+} FinancialAnalysisParametersObject;
+
+static PyTypeObject FinancialAnalysisParameters_Type;
+
+static PyObject *
+FinancialAnalysisParameters_new(SAM_Battwatts data_ptr)
+{
+	PyObject* new_obj = FinancialAnalysisParameters_Type.tp_alloc(&FinancialAnalysisParameters_Type,0);
+
+	FinancialAnalysisParametersObject* FinancialAnalysisParameters_obj = (FinancialAnalysisParametersObject*)new_obj;
+
+	FinancialAnalysisParameters_obj->data_ptr = data_ptr;
+
+	return new_obj;
+}
+
+/* FinancialAnalysisParameters methods */
+
+static PyObject *
+FinancialAnalysisParameters_assign(FinancialAnalysisParametersObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Battwatts", "FinancialAnalysisParameters")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+FinancialAnalysisParameters_export(FinancialAnalysisParametersObject *self, PyObject *args)
+{
+	PyTypeObject* tp = &FinancialAnalysisParameters_Type;
+	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
+	return dict;
+}
+
+static PyMethodDef FinancialAnalysisParameters_methods[] = {
+		{"assign",            (PyCFunction)FinancialAnalysisParameters_assign,  METH_VARARGS,
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``FinancialAnalysisParameters_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)FinancialAnalysisParameters_export,  METH_VARARGS,
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+		{NULL,              NULL}           /* sentinel */
+};
+
+static PyObject *
+FinancialAnalysisParameters_get_analysis_period(FinancialAnalysisParametersObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Battwatts_FinancialAnalysisParameters_analysis_period_nget, self->data_ptr);
+}
+
+static int
+FinancialAnalysisParameters_set_analysis_period(FinancialAnalysisParametersObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Battwatts_FinancialAnalysisParameters_analysis_period_nset, self->data_ptr);
+}
+
+static PyGetSetDef FinancialAnalysisParameters_getset[] = {
+{"analysis_period", (getter)FinancialAnalysisParameters_get_analysis_period,(setter)FinancialAnalysisParameters_set_analysis_period,
+	PyDoc_STR("*float*: Lifetime analysis period [years]\n\n*Info*: The number of years in the simulation\n\n*Required*: set to 1 if not provided."),
+ 	NULL},
+	{NULL}  /* Sentinel */
+};
+
+static PyTypeObject FinancialAnalysisParameters_Type = {
+		/* The ob_type field must be initialized in the module init function
+		 * to be portable to Windows without using C++. */
+		PyVarObject_HEAD_INIT(NULL, 0)
+		"Battwatts.FinancialAnalysisParameters",             /*tp_name*/
+		sizeof(FinancialAnalysisParametersObject),          /*tp_basicsize*/
+		0,                          /*tp_itemsize*/
+		/* methods */
+		0,    /*tp_dealloc*/
+		0,                          /*tp_print*/
+		(getattrfunc)0,             /*tp_getattr*/
+		0,                          /*tp_setattr*/
+		0,                          /*tp_reserved*/
+		0,                          /*tp_repr*/
+		0,                          /*tp_as_number*/
+		0,                          /*tp_as_sequence*/
+		0,                          /*tp_as_mapping*/
+		0,                          /*tp_hash*/
+		0,                          /*tp_call*/
+		0,                          /*tp_str*/
+		0,                          /*tp_getattro*/
+		0,                          /*tp_setattro*/
+		0,                          /*tp_as_buffer*/
+		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
+		0,                          /*tp_doc*/
+		0,                          /*tp_traverse*/
+		0,                          /*tp_clear*/
+		0,                          /*tp_richcompare*/
+		0,                          /*tp_weaklistofnset*/
+		0,                          /*tp_iter*/
+		0,                          /*tp_iternext*/
+		FinancialAnalysisParameters_methods,         /*tp_methods*/
+		0,                          /*tp_members*/
+		FinancialAnalysisParameters_getset,          /*tp_getset*/
+		0,                          /*tp_base*/
+		0,                          /*tp_dict*/
+		0,                          /*tp_descr_get*/
+		0,                          /*tp_descr_set*/
+		0,                          /*tp_dictofnset*/
+		0,                          /*tp_init*/
+		0,                          /*tp_alloc*/
+		0,             /*tp_new*/
+		0,                          /*tp_free*/
+		0,                          /*tp_is_gc*/
+};
+
+
+/*
  * BatteryModelSimple Group
  */ 
 
@@ -583,6 +829,12 @@ Outputs_get_batt_DOD(OutputsObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_batt_DOD_cycle_average(OutputsObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Battwatts_Outputs_batt_DOD_cycle_average_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_batt_I(OutputsObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Battwatts_Outputs_batt_I_aget, self->data_ptr);
@@ -646,6 +898,18 @@ static PyObject *
 Outputs_get_batt_capacity_percent(OutputsObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Battwatts_Outputs_batt_capacity_percent_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_batt_capacity_percent_calendar(OutputsObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Battwatts_Outputs_batt_capacity_percent_calendar_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_batt_capacity_percent_cycle(OutputsObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Battwatts_Outputs_batt_capacity_percent_cycle_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -805,6 +1069,12 @@ Outputs_get_grid_to_load(OutputsObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_market_sell_rate_series_yr1(OutputsObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Battwatts_Outputs_market_sell_rate_series_yr1_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_monthly_batt_to_grid(OutputsObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Battwatts_Outputs_monthly_batt_to_grid_aget, self->data_ptr);
@@ -880,6 +1150,9 @@ static PyGetSetDef Outputs_getset[] = {
 {"batt_DOD", (getter)Outputs_get_batt_DOD,(setter)0,
 	PyDoc_STR("*sequence*: Battery cycle depth of discharge [%]"),
  	NULL},
+{"batt_DOD_cycle_average", (getter)Outputs_get_batt_DOD_cycle_average,(setter)0,
+	PyDoc_STR("*sequence*: Battery average cycle DOD"),
+ 	NULL},
 {"batt_I", (getter)Outputs_get_batt_I,(setter)0,
 	PyDoc_STR("*sequence*: Battery current [A]"),
  	NULL},
@@ -911,7 +1184,13 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Battery bank replacements per year [number/year]"),
  	NULL},
 {"batt_capacity_percent", (getter)Outputs_get_batt_capacity_percent,(setter)0,
-	PyDoc_STR("*sequence*: Battery capacity percent for lifetime [%]"),
+	PyDoc_STR("*sequence*: Battery relative capacity to nameplate [%]"),
+ 	NULL},
+{"batt_capacity_percent_calendar", (getter)Outputs_get_batt_capacity_percent_calendar,(setter)0,
+	PyDoc_STR("*sequence*: Battery relative capacity to nameplate (calendar) [%]"),
+ 	NULL},
+{"batt_capacity_percent_cycle", (getter)Outputs_get_batt_capacity_percent_cycle,(setter)0,
+	PyDoc_STR("*sequence*: Battery relative capacity to nameplate (cycling) [%]"),
  	NULL},
 {"batt_capacity_thermal_percent", (getter)Outputs_get_batt_capacity_thermal_percent,(setter)0,
 	PyDoc_STR("*sequence*: Battery capacity percent for temperature [%]"),
@@ -920,7 +1199,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Electricity loss in battery power electronics [kW]"),
  	NULL},
 {"batt_cost_to_cycle", (getter)Outputs_get_batt_cost_to_cycle,(setter)0,
-	PyDoc_STR("*sequence*: Computed cost to cycle [$/cycle]"),
+	PyDoc_STR("*sequence*: Battery computed cost to cycle [$/cycle]"),
  	NULL},
 {"batt_cycles", (getter)Outputs_get_batt_cycles,(setter)0,
 	PyDoc_STR("*sequence*: Battery number of cycles"),
@@ -990,6 +1269,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"grid_to_load", (getter)Outputs_get_grid_to_load,(setter)0,
 	PyDoc_STR("*sequence*: Electricity to load from grid [kW]"),
+ 	NULL},
+{"market_sell_rate_series_yr1", (getter)Outputs_get_market_sell_rate_series_yr1,(setter)0,
+	PyDoc_STR("*sequence*: Market sell rate (Year 1) [$/MWh]"),
  	NULL},
 {"monthly_batt_to_grid", (getter)Outputs_get_monthly_batt_to_grid,(setter)0,
 	PyDoc_STR("*sequence*: Energy to grid from battery [kWh]"),
@@ -1090,6 +1372,14 @@ newBattwattsObject(void* data_ptr)
 
 	PySAM_TECH_ATTR("Battwatts", SAM_Battwatts_construct)
 
+	PyObject* PVWatts_obj = PVWatts_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "PVWatts", PVWatts_obj);
+	Py_DECREF(PVWatts_obj);
+
+	PyObject* FinancialAnalysisParameters_obj = FinancialAnalysisParameters_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "FinancialAnalysisParameters", FinancialAnalysisParameters_obj);
+	Py_DECREF(FinancialAnalysisParameters_obj);
+
 	PyObject* BatteryModelSimple_obj = BatteryModelSimple_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "BatteryModelSimple", BatteryModelSimple_obj);
 	Py_DECREF(BatteryModelSimple_obj);
@@ -1164,7 +1454,7 @@ static PyMethodDef Battwatts_methods[] = {
 		{"execute",            (PyCFunction)Battwatts_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
 		{"assign",            (PyCFunction)Battwatts_assign,  METH_VARARGS,
-				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'BatteryModelSimple': { var: val, ...}, ...}``")},
+				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'PVWatts': { var: val, ...}, ...}``")},
 		{"export",            (PyCFunction)Battwatts_export,  METH_VARARGS,
 				PyDoc_STR("export() -> dict\n Export attributes into nested dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -1307,6 +1597,20 @@ BattwattsModule_exec(PyObject *m)
 
 	Battwatts_Type.tp_dict = PyDict_New();
 	if (!Battwatts_Type.tp_dict) { goto fail; }
+
+	/// Add the PVWatts type object to Battwatts_Type
+	if (PyType_Ready(&PVWatts_Type) < 0) { goto fail; }
+	PyDict_SetItemString(Battwatts_Type.tp_dict,
+				"PVWatts",
+				(PyObject*)&PVWatts_Type);
+	Py_DECREF(&PVWatts_Type);
+
+	/// Add the FinancialAnalysisParameters type object to Battwatts_Type
+	if (PyType_Ready(&FinancialAnalysisParameters_Type) < 0) { goto fail; }
+	PyDict_SetItemString(Battwatts_Type.tp_dict,
+				"FinancialAnalysisParameters",
+				(PyObject*)&FinancialAnalysisParameters_Type);
+	Py_DECREF(&FinancialAnalysisParameters_Type);
 
 	/// Add the BatteryModelSimple type object to Battwatts_Type
 	if (PyType_Ready(&BatteryModelSimple_Type) < 0) { goto fail; }

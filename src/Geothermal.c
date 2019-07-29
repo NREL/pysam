@@ -316,6 +316,18 @@ GeoHourly_set_excess_pressure_pump(GeoHourlyObject *self, PyObject *value, void 
 }
 
 static PyObject *
+GeoHourly_get_file_name(GeoHourlyObject *self, void *closure)
+{
+	return PySAM_string_getter(SAM_Geothermal_GeoHourly_file_name_sget, self->data_ptr);
+}
+
+static int
+GeoHourly_set_file_name(GeoHourlyObject *self, PyObject *value, void *closure)
+{
+	return PySAM_string_setter(value, SAM_Geothermal_GeoHourly_file_name_sset, self->data_ptr);
+}
+
+static PyObject *
 GeoHourly_get_fracture_angle(GeoHourlyObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Geothermal_GeoHourly_fracture_angle_nget, self->data_ptr);
@@ -967,6 +979,9 @@ static PyGetSetDef GeoHourly_getset[] = {
 {"excess_pressure_pump", (getter)GeoHourly_get_excess_pressure_pump,(setter)GeoHourly_set_excess_pressure_pump,
 	PyDoc_STR("*float*: Excess pressure @ pump suction [psi]\n\n*Required*: True"),
  	NULL},
+{"file_name", (getter)GeoHourly_get_file_name,(setter)GeoHourly_set_file_name,
+	PyDoc_STR("*str*: local weather file path\n\n*Constraints*: LOCAL_FILE\n\n*Required*: set to 0 if not provided."),
+ 	NULL},
 {"fracture_angle", (getter)GeoHourly_get_fracture_angle,(setter)GeoHourly_set_fracture_angle,
 	PyDoc_STR("*float*: Fracture angle [deg]\n\n*Required*: True"),
  	NULL},
@@ -1165,129 +1180,6 @@ static PyTypeObject GeoHourly_Type = {
 
 
 /*
- * Weather Group
- */ 
-
-typedef struct {
-	PyObject_HEAD
-	SAM_Geothermal   data_ptr;
-} WeatherObject;
-
-static PyTypeObject Weather_Type;
-
-static PyObject *
-Weather_new(SAM_Geothermal data_ptr)
-{
-	PyObject* new_obj = Weather_Type.tp_alloc(&Weather_Type,0);
-
-	WeatherObject* Weather_obj = (WeatherObject*)new_obj;
-
-	Weather_obj->data_ptr = data_ptr;
-
-	return new_obj;
-}
-
-/* Weather methods */
-
-static PyObject *
-Weather_assign(WeatherObject *self, PyObject *args)
-{
-	PyObject* dict;
-	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
-		return NULL;
-	}
-
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Geothermal", "Weather")){
-		return NULL;
-	}
-
-	Py_INCREF(Py_None);
-	return Py_None;
-}
-
-static PyObject *
-Weather_export(WeatherObject *self, PyObject *args)
-{
-	PyTypeObject* tp = &Weather_Type;
-	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
-	return dict;
-}
-
-static PyMethodDef Weather_methods[] = {
-		{"assign",            (PyCFunction)Weather_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Weather_vals = { var: val, ...}``")},
-		{"export",            (PyCFunction)Weather_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
-		{NULL,              NULL}           /* sentinel */
-};
-
-static PyObject *
-Weather_get_file_name(WeatherObject *self, void *closure)
-{
-	return PySAM_string_getter(SAM_Geothermal_Weather_file_name_sget, self->data_ptr);
-}
-
-static int
-Weather_set_file_name(WeatherObject *self, PyObject *value, void *closure)
-{
-	return PySAM_string_setter(value, SAM_Geothermal_Weather_file_name_sset, self->data_ptr);
-}
-
-static PyGetSetDef Weather_getset[] = {
-{"file_name", (getter)Weather_get_file_name,(setter)Weather_set_file_name,
-	PyDoc_STR("*str*: local weather file path\n\n*Constraints*: LOCAL_FILE\n\n*Required*: set to 0 if not provided."),
- 	NULL},
-	{NULL}  /* Sentinel */
-};
-
-static PyTypeObject Weather_Type = {
-		/* The ob_type field must be initialized in the module init function
-		 * to be portable to Windows without using C++. */
-		PyVarObject_HEAD_INIT(NULL, 0)
-		"Geothermal.Weather",             /*tp_name*/
-		sizeof(WeatherObject),          /*tp_basicsize*/
-		0,                          /*tp_itemsize*/
-		/* methods */
-		0,    /*tp_dealloc*/
-		0,                          /*tp_print*/
-		(getattrfunc)0,             /*tp_getattr*/
-		0,                          /*tp_setattr*/
-		0,                          /*tp_reserved*/
-		0,                          /*tp_repr*/
-		0,                          /*tp_as_number*/
-		0,                          /*tp_as_sequence*/
-		0,                          /*tp_as_mapping*/
-		0,                          /*tp_hash*/
-		0,                          /*tp_call*/
-		0,                          /*tp_str*/
-		0,                          /*tp_getattro*/
-		0,                          /*tp_setattro*/
-		0,                          /*tp_as_buffer*/
-		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
-		0,                          /*tp_doc*/
-		0,                          /*tp_traverse*/
-		0,                          /*tp_clear*/
-		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistofnset*/
-		0,                          /*tp_iter*/
-		0,                          /*tp_iternext*/
-		Weather_methods,         /*tp_methods*/
-		0,                          /*tp_members*/
-		Weather_getset,          /*tp_getset*/
-		0,                          /*tp_base*/
-		0,                          /*tp_dict*/
-		0,                          /*tp_descr_get*/
-		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictofnset*/
-		0,                          /*tp_init*/
-		0,                          /*tp_alloc*/
-		0,             /*tp_new*/
-		0,                          /*tp_free*/
-		0,                          /*tp_is_gc*/
-};
-
-
-/*
  * Outputs Group
  */ 
 
@@ -1408,6 +1300,12 @@ static PyObject *
 Outputs_get_flash_count(OutputsObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Geothermal_Outputs_flash_count_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_gen(OutputsObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Geothermal_Outputs_gen_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -1672,6 +1570,9 @@ static PyGetSetDef Outputs_getset[] = {
 {"flash_count", (getter)Outputs_get_flash_count,(setter)0,
 	PyDoc_STR("*float*: Flash Count [(1 -2)]"),
  	NULL},
+{"gen", (getter)Outputs_get_gen,(setter)0,
+	PyDoc_STR("*sequence*: System power generated [kW]"),
+ 	NULL},
 {"gross_output", (getter)Outputs_get_gross_output,(setter)0,
 	PyDoc_STR("*float*: Gross output from GETEM"),
  	NULL},
@@ -1858,10 +1759,6 @@ newGeothermalObject(void* data_ptr)
 	PyObject* GeoHourly_obj = GeoHourly_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "GeoHourly", GeoHourly_obj);
 	Py_DECREF(GeoHourly_obj);
-
-	PyObject* Weather_obj = Weather_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "Weather", Weather_obj);
-	Py_DECREF(Weather_obj);
 
 	PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
 
@@ -2109,13 +2006,6 @@ GeothermalModule_exec(PyObject *m)
 				"GeoHourly",
 				(PyObject*)&GeoHourly_Type);
 	Py_DECREF(&GeoHourly_Type);
-
-	/// Add the Weather type object to Geothermal_Type
-	if (PyType_Ready(&Weather_Type) < 0) { goto fail; }
-	PyDict_SetItemString(Geothermal_Type.tp_dict,
-				"Weather",
-				(PyObject*)&Weather_Type);
-	Py_DECREF(&Weather_Type);
 
 	/// Add the Outputs type object to Geothermal_Type
 	if (PyType_Ready(&Outputs_Type) < 0) { goto fail; }
