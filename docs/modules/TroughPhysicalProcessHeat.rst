@@ -57,6 +57,18 @@ TES2tank Group
 .. autoclass:: PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.TES2tank
 	:members:
 
+Tou Group
+==============
+
+.. autoclass:: PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou
+	:members:
+
+System Group
+==============
+
+.. autoclass:: PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.System
+	:members:
+
 Powerblock Group
 ==============
 

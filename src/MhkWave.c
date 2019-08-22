@@ -125,13 +125,13 @@ MHKWave_set_wave_resource_definition(MHKWaveObject *self, PyObject *value, void 
 
 static PyGetSetDef MHKWave_getset[] = {
 {"annual_energy_loss", (getter)MHKWave_get_annual_energy_loss,(setter)MHKWave_set_annual_energy_loss,
-	PyDoc_STR("*float*: Total energy losses [%]\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Total energy losses [%]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"calculate_capacity", (getter)MHKWave_get_calculate_capacity,(setter)MHKWave_set_calculate_capacity,
-	PyDoc_STR("*float*: Calculate capacity outside UI? [0/1]\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*float*: Calculate capacity outside UI? [0/1]\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: If not provided, assumed to be 1"),
  	NULL},
 {"rated_capacity", (getter)MHKWave_get_rated_capacity,(setter)MHKWave_set_rated_capacity,
-	PyDoc_STR("*float*: Rated Capacity of System [kW]\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Rated Capacity of System [kW]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"wave_power_curve", (getter)MHKWave_get_wave_power_curve,(setter)MHKWave_set_wave_power_curve,
 	PyDoc_STR("*sequence[sequence]*: Wave Power Matrix\n\n*Required*: True"),

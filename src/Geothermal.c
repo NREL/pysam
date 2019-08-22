@@ -844,6 +844,18 @@ GeoHourly_set_subsurface_water_loss(GeoHourlyObject *self, PyObject *value, void
 }
 
 static PyObject *
+GeoHourly_get_system_use_lifetime_output(GeoHourlyObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Geothermal_GeoHourly_system_use_lifetime_output_nget, self->data_ptr);
+}
+
+static int
+GeoHourly_set_system_use_lifetime_output(GeoHourlyObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Geothermal_GeoHourly_system_use_lifetime_output_nset, self->data_ptr);
+}
+
+static PyObject *
 GeoHourly_get_temp_decline_max(GeoHourlyObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Geothermal_GeoHourly_temp_decline_max_nget, self->data_ptr);
@@ -917,34 +929,34 @@ GeoHourly_set_wet_bulb_temp(GeoHourlyObject *self, PyObject *value, void *closur
 
 static PyGetSetDef GeoHourly_getset[] = {
 {"CT", (getter)GeoHourly_get_CT,(setter)GeoHourly_set_CT,
-	PyDoc_STR("*float*: Condenser type (Wet, Dry,Hybrid) [(1-3)]\n\n*Constraints*: INTEGER\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Condenser type (Wet, Dry,Hybrid) [(1-3)]\n\n*Constraints*: INTEGER\n\n*Required*: True if ui_calculations_only=0"),
  	NULL},
 {"HTF", (getter)GeoHourly_get_HTF,(setter)GeoHourly_set_HTF,
-	PyDoc_STR("*float*: Heat trans fluid type ID [(1-27)]\n\n*Constraints*: INTEGER\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Heat trans fluid type ID [(1-27)]\n\n*Constraints*: INTEGER\n\n*Required*: True if ui_calculations_only=0"),
  	NULL},
 {"P_boil", (getter)GeoHourly_get_P_boil,(setter)GeoHourly_set_P_boil,
-	PyDoc_STR("*float*: Design Boiler Pressure [bar]\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Design Boiler Pressure [bar]\n\n*Required*: True if ui_calculations_only=0"),
  	NULL},
 {"P_cond_min", (getter)GeoHourly_get_P_cond_min,(setter)GeoHourly_set_P_cond_min,
-	PyDoc_STR("*float*: Minimum condenser pressure [in Hg]\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Minimum condenser pressure [in Hg]\n\n*Required*: True if ui_calculations_only=0"),
  	NULL},
 {"P_cond_ratio", (getter)GeoHourly_get_P_cond_ratio,(setter)GeoHourly_set_P_cond_ratio,
-	PyDoc_STR("*float*: Condenser pressure ratio\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Condenser pressure ratio\n\n*Required*: True if ui_calculations_only=0"),
  	NULL},
 {"T_ITD_des", (getter)GeoHourly_get_T_ITD_des,(setter)GeoHourly_set_T_ITD_des,
-	PyDoc_STR("*float*: Design ITD for dry system [C]\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Design ITD for dry system [C]\n\n*Required*: True if ui_calculations_only=0"),
  	NULL},
 {"T_amb_des", (getter)GeoHourly_get_T_amb_des,(setter)GeoHourly_set_T_amb_des,
-	PyDoc_STR("*float*: Design ambient temperature [C]\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Design ambient temperature [C]\n\n*Required*: True if ui_calculations_only=0"),
  	NULL},
 {"T_approach", (getter)GeoHourly_get_T_approach,(setter)GeoHourly_set_T_approach,
-	PyDoc_STR("*float*: Approach Temperature [C]\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Approach Temperature [C]\n\n*Required*: True if ui_calculations_only=0"),
  	NULL},
 {"T_htf_cold_ref", (getter)GeoHourly_get_T_htf_cold_ref,(setter)GeoHourly_set_T_htf_cold_ref,
-	PyDoc_STR("*float*: Outlet design temp [C]\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Outlet design temp [C]\n\n*Required*: True if ui_calculations_only=0"),
  	NULL},
 {"T_htf_hot_ref", (getter)GeoHourly_get_T_htf_hot_ref,(setter)GeoHourly_set_T_htf_hot_ref,
-	PyDoc_STR("*float*: Inlet design temp [C]\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Inlet design temp [C]\n\n*Required*: True if ui_calculations_only=0"),
  	NULL},
 {"ambient_pressure", (getter)GeoHourly_get_ambient_pressure,(setter)GeoHourly_set_ambient_pressure,
 	PyDoc_STR("*float*: Ambient pressure [psi]\n\n*Required*: True"),
@@ -962,7 +974,7 @@ static PyGetSetDef GeoHourly_getset[] = {
 	PyDoc_STR("*float*: Conversion Type\n\n*Constraints*: INTEGER\n\n*Required*: True"),
  	NULL},
 {"dT_cw_ref", (getter)GeoHourly_get_dT_cw_ref,(setter)GeoHourly_set_dT_cw_ref,
-	PyDoc_STR("*float*: Design condenser cooling water inlet/outlet T diff [C]\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Design condenser cooling water inlet/outlet T diff [C]\n\n*Required*: True if ui_calculations_only=0"),
  	NULL},
 {"decline_type", (getter)GeoHourly_get_decline_type,(setter)GeoHourly_set_decline_type,
 	PyDoc_STR("*float*: Temp decline Type\n\n*Constraints*: INTEGER\n\n*Required*: True"),
@@ -974,13 +986,13 @@ static PyGetSetDef GeoHourly_getset[] = {
 	PyDoc_STR("*float*: Power block design temperature [C]\n\n*Required*: True"),
  	NULL},
 {"eta_ref", (getter)GeoHourly_get_eta_ref,(setter)GeoHourly_set_eta_ref,
-	PyDoc_STR("*float*: Desgin conversion efficiency [%]\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Desgin conversion efficiency [%]\n\n*Required*: True if ui_calculations_only=0"),
  	NULL},
 {"excess_pressure_pump", (getter)GeoHourly_get_excess_pressure_pump,(setter)GeoHourly_set_excess_pressure_pump,
 	PyDoc_STR("*float*: Excess pressure @ pump suction [psi]\n\n*Required*: True"),
  	NULL},
 {"file_name", (getter)GeoHourly_get_file_name,(setter)GeoHourly_set_file_name,
-	PyDoc_STR("*str*: local weather file path\n\n*Constraints*: LOCAL_FILE\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*str*: local weather file path\n\n*Constraints*: LOCAL_FILE\n\n*Required*: True if ui_calculations_only=0"),
  	NULL},
 {"fracture_angle", (getter)GeoHourly_get_fracture_angle,(setter)GeoHourly_set_fracture_angle,
 	PyDoc_STR("*float*: Fracture angle [deg]\n\n*Required*: True"),
@@ -995,37 +1007,37 @@ static PyGetSetDef GeoHourly_getset[] = {
 	PyDoc_STR("*float*: Analysis Lifetime [years]\n\n*Constraints*: INTEGER\n\n*Required*: True"),
  	NULL},
 {"hc_ctl1", (getter)GeoHourly_get_hc_ctl1,(setter)GeoHourly_set_hc_ctl1,
-	PyDoc_STR("*float*: HC Control 1\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: HC Control 1\n\n*Required*: True if ui_calculations_only=0"),
  	NULL},
 {"hc_ctl2", (getter)GeoHourly_get_hc_ctl2,(setter)GeoHourly_set_hc_ctl2,
-	PyDoc_STR("*float*: HC Control 2\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: HC Control 2\n\n*Required*: True if ui_calculations_only=0"),
  	NULL},
 {"hc_ctl3", (getter)GeoHourly_get_hc_ctl3,(setter)GeoHourly_set_hc_ctl3,
-	PyDoc_STR("*float*: HC Control 3\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: HC Control 3\n\n*Required*: True if ui_calculations_only=0"),
  	NULL},
 {"hc_ctl4", (getter)GeoHourly_get_hc_ctl4,(setter)GeoHourly_set_hc_ctl4,
-	PyDoc_STR("*float*: HC Control 4\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: HC Control 4\n\n*Required*: True if ui_calculations_only=0"),
  	NULL},
 {"hc_ctl5", (getter)GeoHourly_get_hc_ctl5,(setter)GeoHourly_set_hc_ctl5,
-	PyDoc_STR("*float*: HC Control 5\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: HC Control 5\n\n*Required*: True if ui_calculations_only=0"),
  	NULL},
 {"hc_ctl6", (getter)GeoHourly_get_hc_ctl6,(setter)GeoHourly_set_hc_ctl6,
-	PyDoc_STR("*float*: HC Control 6\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: HC Control 6\n\n*Required*: True if ui_calculations_only=0"),
  	NULL},
 {"hc_ctl7", (getter)GeoHourly_get_hc_ctl7,(setter)GeoHourly_set_hc_ctl7,
-	PyDoc_STR("*float*: HC Control 7\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: HC Control 7\n\n*Required*: True if ui_calculations_only=0"),
  	NULL},
 {"hc_ctl8", (getter)GeoHourly_get_hc_ctl8,(setter)GeoHourly_set_hc_ctl8,
-	PyDoc_STR("*float*: HC Control 8\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: HC Control 8\n\n*Required*: True if ui_calculations_only=0"),
  	NULL},
 {"hc_ctl9", (getter)GeoHourly_get_hc_ctl9,(setter)GeoHourly_set_hc_ctl9,
-	PyDoc_STR("*float*: HC Control 9\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: HC Control 9\n\n*Required*: True if ui_calculations_only=0"),
  	NULL},
 {"hr_pl_nlev", (getter)GeoHourly_get_hr_pl_nlev,(setter)GeoHourly_set_hr_pl_nlev,
-	PyDoc_STR("*float*: # part-load increments [(0-9)]\n\n*Constraints*: INTEGER\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: # part-load increments [(0-9)]\n\n*Constraints*: INTEGER\n\n*Required*: True if ui_calculations_only=0"),
  	NULL},
 {"hybrid_dispatch_schedule", (getter)GeoHourly_get_hybrid_dispatch_schedule,(setter)GeoHourly_set_hybrid_dispatch_schedule,
-	PyDoc_STR("*str*: Daily dispatch schedule\n\n*Constraints*: TOUSCHED\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*str*: Daily dispatch schedule\n\n*Constraints*: TOUSCHED\n\n*Required*: True if ui_calculations_only=0"),
  	NULL},
 {"inj_prod_well_distance", (getter)GeoHourly_get_inj_prod_well_distance,(setter)GeoHourly_set_inj_prod_well_distance,
 	PyDoc_STR("*float*: Distance from injection to production wells [m]\n\n*Required*: True"),
@@ -1046,10 +1058,10 @@ static PyGetSetDef GeoHourly_getset[] = {
 	PyDoc_STR("*float*: Number of Wells\n\n*Required*: True"),
  	NULL},
 {"num_wells_getem", (getter)GeoHourly_get_num_wells_getem,(setter)GeoHourly_set_num_wells_getem,
-	PyDoc_STR("*float*: Number of Wells GETEM calc'd\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Number of Wells GETEM calc'd\n\n*Required*: True if ui_calculations_only=0"),
  	NULL},
 {"pb_bd_frac", (getter)GeoHourly_get_pb_bd_frac,(setter)GeoHourly_set_pb_bd_frac,
-	PyDoc_STR("*float*: Blowdown steam fraction [%]\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Blowdown steam fraction [%]\n\n*Required*: True if ui_calculations_only=0"),
  	NULL},
 {"plant_efficiency_input", (getter)GeoHourly_get_plant_efficiency_input,(setter)GeoHourly_set_plant_efficiency_input,
 	PyDoc_STR("*float*: Plant efficiency\n\n*Required*: True"),
@@ -1058,7 +1070,7 @@ static PyGetSetDef GeoHourly_getset[] = {
 	PyDoc_STR("*float*: Pump efficiency [%]\n\n*Required*: True"),
  	NULL},
 {"q_sby_frac", (getter)GeoHourly_get_q_sby_frac,(setter)GeoHourly_set_q_sby_frac,
-	PyDoc_STR("*float*: % thermal power for standby mode [%]\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: % thermal power for standby mode [%]\n\n*Required*: True if ui_calculations_only=0"),
  	NULL},
 {"reservoir_height", (getter)GeoHourly_get_reservoir_height,(setter)GeoHourly_set_reservoir_height,
 	PyDoc_STR("*float*: Reservoir height [m]\n\n*Required*: True"),
@@ -1079,7 +1091,7 @@ static PyGetSetDef GeoHourly_getset[] = {
 	PyDoc_STR("*float*: Resource Depth [m]\n\n*Required*: True"),
  	NULL},
 {"resource_potential", (getter)GeoHourly_get_resource_potential,(setter)GeoHourly_set_resource_potential,
-	PyDoc_STR("*float*: Resource Potential [MW]\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Resource Potential [MW]\n\n*Required*: True if ui_calculations_only=0"),
  	NULL},
 {"resource_temp", (getter)GeoHourly_get_resource_temp,(setter)GeoHourly_set_resource_temp,
 	PyDoc_STR("*float*: Resource Temperature [C]\n\n*Required*: True"),
@@ -1103,13 +1115,16 @@ static PyGetSetDef GeoHourly_getset[] = {
 	PyDoc_STR("*float*: Did user specify pump work? [0 or 1]\n\n*Constraints*: INTEGER\n\n*Required*: True"),
  	NULL},
 {"startup_frac", (getter)GeoHourly_get_startup_frac,(setter)GeoHourly_set_startup_frac,
-	PyDoc_STR("*float*: % thermal power for startup [%]\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: % thermal power for startup [%]\n\n*Required*: True if ui_calculations_only=0"),
  	NULL},
 {"startup_time", (getter)GeoHourly_get_startup_time,(setter)GeoHourly_set_startup_time,
-	PyDoc_STR("*float*: Hours to start power block [hours]\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Hours to start power block [hours]\n\n*Required*: True if ui_calculations_only=0"),
  	NULL},
 {"subsurface_water_loss", (getter)GeoHourly_get_subsurface_water_loss,(setter)GeoHourly_set_subsurface_water_loss,
 	PyDoc_STR("*float*: Subsurface water loss [%]\n\n*Required*: True"),
+ 	NULL},
+{"system_use_lifetime_output", (getter)GeoHourly_get_system_use_lifetime_output,(setter)GeoHourly_set_system_use_lifetime_output,
+	PyDoc_STR("*float*: Geothermal lifetime simulation [0/1]\n\n*Options*: 0=SingleYearRepeated,1=RunEveryYear\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"temp_decline_max", (getter)GeoHourly_get_temp_decline_max,(setter)GeoHourly_set_temp_decline_max,
 	PyDoc_STR("*float*: Maximum temperature decline [C]\n\n*Required*: True"),
@@ -1477,12 +1492,6 @@ Outputs_get_timestep_dry_bulb(OutputsObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_timestep_power(OutputsObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Geothermal_Outputs_timestep_power_aget, self->data_ptr);
-}
-
-static PyObject *
 Outputs_get_timestep_pressure(OutputsObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Geothermal_Outputs_timestep_pressure_aget, self->data_ptr);
@@ -1656,9 +1665,6 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"timestep_dry_bulb", (getter)Outputs_get_timestep_dry_bulb,(setter)0,
 	PyDoc_STR("*sequence*: Dry bulb temperature in each time step [C]"),
- 	NULL},
-{"timestep_power", (getter)Outputs_get_timestep_power,(setter)0,
-	PyDoc_STR("*sequence*: Power in each time step [kW]"),
  	NULL},
 {"timestep_pressure", (getter)Outputs_get_timestep_pressure,(setter)0,
 	PyDoc_STR("*sequence*: Atmospheric pressure in each time step [atm]"),

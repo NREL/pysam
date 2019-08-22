@@ -64,21 +64,22 @@ if sys.platform == 'win32':
 #
 ###################################################################################################
 
-for file in libfiles:
-    if file.find("SAM") > -1:
-        distutils.file_util.copy_file(
-            os.environ['SAMNTDIR']+"/api/"+file,
-            libpath,
-            update=1,
-            verbose=1
-        )
-    if file.find("ssc") > -1:
-        distutils.file_util.copy_file(
-            os.environ['SSCDIR'] + "/ssc/" + file,
-            libpath,
-            update=1,
-            verbose=1
-        )
+# files should be exported to pysam/files by post-build step of each library
+# for file in libfiles:
+#     if file.find("SAM") > -1:
+#         distutils.file_util.copy_file(
+#             os.environ['SAMNTDIR']+"/api/"+file,
+#             libpath,
+#             update=1,
+#             verbose=1
+#         )
+#     if file.find("ssc") > -1:
+#         distutils.file_util.copy_file(
+#             os.environ['SSCDIR'] + "/ssc/" + file,
+#             libpath,
+#             update=1,
+#             verbose=1
+#         )
 
 distutils.dir_util.copy_tree(
     includepath,
@@ -115,8 +116,6 @@ for filename in os.listdir(defaults_dir):
         name = os.path.splitext(filename)
         if name[1] != '.json':
             continue
-        if name[0] == "Windpower_WindPowerCommercial":
-            x = 1
         data = json.load(f)
 
         dic = data[list(data.keys())[0]]
@@ -461,6 +460,78 @@ setup(
                   ),
         Extension('PySAM.Grid',
                   ['src/Grid.c'],
+                  define_macros=defines,
+                  include_dirs=[includepath],
+                  library_dirs=[libpath],
+                  libraries=libs,
+                  extra_link_args=extra_link_args
+                  ),
+        Extension('PySAM.TroughPhysical',
+                  ['src/TroughPhysical.c'],
+                  define_macros=defines,
+                  include_dirs=[includepath],
+                  library_dirs=[libpath],
+                  libraries=libs,
+                  extra_link_args=extra_link_args
+                  ),
+        Extension('PySAM.MhkTidal',
+                  ['src/MhkTidal.c'],
+                  define_macros=defines,
+                  include_dirs=[includepath],
+                  library_dirs=[libpath],
+                  libraries=libs,
+                  extra_link_args=extra_link_args
+                  ),
+        Extension('PySAM.MhkWave',
+                  ['src/MhkWave.c'],
+                  define_macros=defines,
+                  include_dirs=[includepath],
+                  library_dirs=[libpath],
+                  libraries=libs,
+                  extra_link_args=extra_link_args
+                  ),
+        Extension('PySAM.Sco2AirCooler',
+                  ['src/Sco2AirCooler.c'],
+                  define_macros=defines,
+                  include_dirs=[includepath],
+                  library_dirs=[libpath],
+                  libraries=libs,
+                  extra_link_args=extra_link_args
+                  ),
+        Extension('PySAM.Sco2CspSystem',
+                  ['src/Sco2CspSystem.c'],
+                  define_macros=defines,
+                  include_dirs=[includepath],
+                  library_dirs=[libpath],
+                  libraries=libs,
+                  extra_link_args=extra_link_args
+                  ),
+        Extension('PySAM.Sco2CspUdPcTables',
+                  ['src/Sco2CspUdPcTables.c'],
+                  define_macros=defines,
+                  include_dirs=[includepath],
+                  library_dirs=[libpath],
+                  libraries=libs,
+                  extra_link_args=extra_link_args
+                  ),
+        Extension('PySAM.Sco2DesignCycle',
+                  ['src/Sco2DesignCycle.c'],
+                  define_macros=defines,
+                  include_dirs=[includepath],
+                  library_dirs=[libpath],
+                  libraries=libs,
+                  extra_link_args=extra_link_args
+                  ),
+        Extension('PySAM.Sco2DesignPoint',
+                  ['src/Sco2DesignPoint.c'],
+                  define_macros=defines,
+                  include_dirs=[includepath],
+                  library_dirs=[libpath],
+                  libraries=libs,
+                  extra_link_args=extra_link_args
+                  ),
+        Extension('PySAM.Sco2Offdesign',
+                  ['src/Sco2Offdesign.c'],
                   define_macros=defines,
                   include_dirs=[includepath],
                   library_dirs=[libpath],

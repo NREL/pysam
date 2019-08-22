@@ -868,27 +868,51 @@ SolarField_set_Type_cpnt(SolarFieldObject *self, PyObject *value, void *closure)
 }
 
 static PyObject *
-SolarField_get_V_hdr_max(SolarFieldObject *self, void *closure)
+SolarField_get_V_hdr_cold_max(SolarFieldObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_SolarField_V_hdr_max_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_SolarField_V_hdr_cold_max_nget, self->data_ptr);
 }
 
 static int
-SolarField_set_V_hdr_max(SolarFieldObject *self, PyObject *value, void *closure)
+SolarField_set_V_hdr_cold_max(SolarFieldObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_SolarField_V_hdr_max_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_SolarField_V_hdr_cold_max_nset, self->data_ptr);
 }
 
 static PyObject *
-SolarField_get_V_hdr_min(SolarFieldObject *self, void *closure)
+SolarField_get_V_hdr_cold_min(SolarFieldObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_SolarField_V_hdr_min_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_SolarField_V_hdr_cold_min_nget, self->data_ptr);
 }
 
 static int
-SolarField_set_V_hdr_min(SolarFieldObject *self, PyObject *value, void *closure)
+SolarField_set_V_hdr_cold_min(SolarFieldObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_SolarField_V_hdr_min_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_SolarField_V_hdr_cold_min_nset, self->data_ptr);
+}
+
+static PyObject *
+SolarField_get_V_hdr_hot_max(SolarFieldObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_SolarField_V_hdr_hot_max_nget, self->data_ptr);
+}
+
+static int
+SolarField_set_V_hdr_hot_max(SolarFieldObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_SolarField_V_hdr_hot_max_nset, self->data_ptr);
+}
+
+static PyObject *
+SolarField_get_V_hdr_hot_min(SolarFieldObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_SolarField_V_hdr_hot_min_nget, self->data_ptr);
+}
+
+static int
+SolarField_set_V_hdr_hot_min(SolarFieldObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_SolarField_V_hdr_hot_min_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -1651,11 +1675,17 @@ static PyGetSetDef SolarField_getset[] = {
 {"Type_cpnt", (getter)SolarField_get_Type_cpnt,(setter)SolarField_set_Type_cpnt,
 	PyDoc_STR("*sequence[sequence]*: Interconnect component type, row=intc, col=cpnt [none]\n\n*Required*: True"),
  	NULL},
-{"V_hdr_max", (getter)SolarField_get_V_hdr_max,(setter)SolarField_set_V_hdr_max,
-	PyDoc_STR("*float*: Maximum HTF velocity in the header at design [W/m2]\n\n*Required*: True"),
+{"V_hdr_cold_max", (getter)SolarField_get_V_hdr_cold_max,(setter)SolarField_set_V_hdr_cold_max,
+	PyDoc_STR("*float*: Maximum HTF velocity in the cold headers at design [m/s]\n\n*Required*: True"),
  	NULL},
-{"V_hdr_min", (getter)SolarField_get_V_hdr_min,(setter)SolarField_set_V_hdr_min,
-	PyDoc_STR("*float*: Minimum HTF velocity in the header at design [m/s]\n\n*Required*: True"),
+{"V_hdr_cold_min", (getter)SolarField_get_V_hdr_cold_min,(setter)SolarField_set_V_hdr_cold_min,
+	PyDoc_STR("*float*: Minimum HTF velocity in the cold headers at design [m/s]\n\n*Required*: True"),
+ 	NULL},
+{"V_hdr_hot_max", (getter)SolarField_get_V_hdr_hot_max,(setter)SolarField_set_V_hdr_hot_max,
+	PyDoc_STR("*float*: Maximum HTF velocity in the hot headers at design [m/s]\n\n*Required*: True"),
+ 	NULL},
+{"V_hdr_hot_min", (getter)SolarField_get_V_hdr_hot_min,(setter)SolarField_set_V_hdr_hot_min,
+	PyDoc_STR("*float*: Minimum HTF velocity in the hot headers at design [m/s]\n\n*Required*: True"),
  	NULL},
 {"W_aperture", (getter)SolarField_get_W_aperture,(setter)SolarField_set_W_aperture,
 	PyDoc_STR("*sequence*: The collector aperture width (Total structural area used for shadowing) [m]\n\n*Required*: True"),
@@ -1805,7 +1835,7 @@ static PyGetSetDef SolarField_getset[] = {
 	PyDoc_STR("*float*: Water usage per wash [L/m2_aper]\n\n*Required*: True"),
  	NULL},
 {"wind_stow_speed", (getter)SolarField_get_wind_stow_speed,(setter)SolarField_set_wind_stow_speed,
-	PyDoc_STR("*float*: Trough wind stow speed [m/s]\n\n*Required*: set to 50 if not provided."),
+	PyDoc_STR("*float*: Trough wind stow speed [m/s]\n\n*Required*: If not provided, assumed to be 50"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -2471,6 +2501,882 @@ static PyTypeObject TES2tank_Type = {
 		TES2tank_methods,         /*tp_methods*/
 		0,                          /*tp_members*/
 		TES2tank_getset,          /*tp_getset*/
+		0,                          /*tp_base*/
+		0,                          /*tp_dict*/
+		0,                          /*tp_descr_get*/
+		0,                          /*tp_descr_set*/
+		0,                          /*tp_dictofnset*/
+		0,                          /*tp_init*/
+		0,                          /*tp_alloc*/
+		0,             /*tp_new*/
+		0,                          /*tp_free*/
+		0,                          /*tp_is_gc*/
+};
+
+
+/*
+ * Tou Group
+ */ 
+
+typedef struct {
+	PyObject_HEAD
+	SAM_TroughPhysicalProcessHeat   data_ptr;
+} TouObject;
+
+static PyTypeObject Tou_Type;
+
+static PyObject *
+Tou_new(SAM_TroughPhysicalProcessHeat data_ptr)
+{
+	PyObject* new_obj = Tou_Type.tp_alloc(&Tou_Type,0);
+
+	TouObject* Tou_obj = (TouObject*)new_obj;
+
+	Tou_obj->data_ptr = data_ptr;
+
+	return new_obj;
+}
+
+/* Tou methods */
+
+static PyObject *
+Tou_assign(TouObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "TroughPhysicalProcessHeat", "Tou")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+Tou_export(TouObject *self, PyObject *args)
+{
+	PyTypeObject* tp = &Tou_Type;
+	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
+	return dict;
+}
+
+static PyMethodDef Tou_methods[] = {
+		{"assign",            (PyCFunction)Tou_assign,  METH_VARARGS,
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Tou_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)Tou_export,  METH_VARARGS,
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+		{NULL,              NULL}           /* sentinel */
+};
+
+static PyObject *
+Tou_get_ampl_data_dir(TouObject *self, void *closure)
+{
+	return PySAM_string_getter(SAM_TroughPhysicalProcessHeat_Tou_ampl_data_dir_sget, self->data_ptr);
+}
+
+static int
+Tou_set_ampl_data_dir(TouObject *self, PyObject *value, void *closure)
+{
+	return PySAM_string_setter(value, SAM_TroughPhysicalProcessHeat_Tou_ampl_data_dir_sset, self->data_ptr);
+}
+
+static PyObject *
+Tou_get_ampl_exec_call(TouObject *self, void *closure)
+{
+	return PySAM_string_getter(SAM_TroughPhysicalProcessHeat_Tou_ampl_exec_call_sget, self->data_ptr);
+}
+
+static int
+Tou_set_ampl_exec_call(TouObject *self, PyObject *value, void *closure)
+{
+	return PySAM_string_setter(value, SAM_TroughPhysicalProcessHeat_Tou_ampl_exec_call_sset, self->data_ptr);
+}
+
+static PyObject *
+Tou_get_disp_csu_cost(TouObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_Tou_disp_csu_cost_nget, self->data_ptr);
+}
+
+static int
+Tou_set_disp_csu_cost(TouObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_Tou_disp_csu_cost_nset, self->data_ptr);
+}
+
+static PyObject *
+Tou_get_disp_frequency(TouObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_Tou_disp_frequency_nget, self->data_ptr);
+}
+
+static int
+Tou_set_disp_frequency(TouObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_Tou_disp_frequency_nset, self->data_ptr);
+}
+
+static PyObject *
+Tou_get_disp_horizon(TouObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_Tou_disp_horizon_nget, self->data_ptr);
+}
+
+static int
+Tou_set_disp_horizon(TouObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_Tou_disp_horizon_nset, self->data_ptr);
+}
+
+static PyObject *
+Tou_get_disp_max_iter(TouObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_Tou_disp_max_iter_nget, self->data_ptr);
+}
+
+static int
+Tou_set_disp_max_iter(TouObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_Tou_disp_max_iter_nset, self->data_ptr);
+}
+
+static PyObject *
+Tou_get_disp_mip_gap(TouObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_Tou_disp_mip_gap_nget, self->data_ptr);
+}
+
+static int
+Tou_set_disp_mip_gap(TouObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_Tou_disp_mip_gap_nset, self->data_ptr);
+}
+
+static PyObject *
+Tou_get_disp_pen_delta_w(TouObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_Tou_disp_pen_delta_w_nget, self->data_ptr);
+}
+
+static int
+Tou_set_disp_pen_delta_w(TouObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_Tou_disp_pen_delta_w_nset, self->data_ptr);
+}
+
+static PyObject *
+Tou_get_disp_reporting(TouObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_Tou_disp_reporting_nget, self->data_ptr);
+}
+
+static int
+Tou_set_disp_reporting(TouObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_Tou_disp_reporting_nset, self->data_ptr);
+}
+
+static PyObject *
+Tou_get_disp_rsu_cost(TouObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_Tou_disp_rsu_cost_nget, self->data_ptr);
+}
+
+static int
+Tou_set_disp_rsu_cost(TouObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_Tou_disp_rsu_cost_nset, self->data_ptr);
+}
+
+static PyObject *
+Tou_get_disp_spec_bb(TouObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_Tou_disp_spec_bb_nget, self->data_ptr);
+}
+
+static int
+Tou_set_disp_spec_bb(TouObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_Tou_disp_spec_bb_nset, self->data_ptr);
+}
+
+static PyObject *
+Tou_get_disp_spec_presolve(TouObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_Tou_disp_spec_presolve_nget, self->data_ptr);
+}
+
+static int
+Tou_set_disp_spec_presolve(TouObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_Tou_disp_spec_presolve_nset, self->data_ptr);
+}
+
+static PyObject *
+Tou_get_disp_spec_scaling(TouObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_Tou_disp_spec_scaling_nget, self->data_ptr);
+}
+
+static int
+Tou_set_disp_spec_scaling(TouObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_Tou_disp_spec_scaling_nset, self->data_ptr);
+}
+
+static PyObject *
+Tou_get_disp_steps_per_hour(TouObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_Tou_disp_steps_per_hour_nget, self->data_ptr);
+}
+
+static int
+Tou_set_disp_steps_per_hour(TouObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_Tou_disp_steps_per_hour_nset, self->data_ptr);
+}
+
+static PyObject *
+Tou_get_disp_time_weighting(TouObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_Tou_disp_time_weighting_nget, self->data_ptr);
+}
+
+static int
+Tou_set_disp_time_weighting(TouObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_Tou_disp_time_weighting_nset, self->data_ptr);
+}
+
+static PyObject *
+Tou_get_disp_timeout(TouObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_Tou_disp_timeout_nget, self->data_ptr);
+}
+
+static int
+Tou_set_disp_timeout(TouObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_Tou_disp_timeout_nset, self->data_ptr);
+}
+
+static PyObject *
+Tou_get_dispatch_factor1(TouObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_Tou_dispatch_factor1_nget, self->data_ptr);
+}
+
+static int
+Tou_set_dispatch_factor1(TouObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_Tou_dispatch_factor1_nset, self->data_ptr);
+}
+
+static PyObject *
+Tou_get_dispatch_factor2(TouObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_Tou_dispatch_factor2_nget, self->data_ptr);
+}
+
+static int
+Tou_set_dispatch_factor2(TouObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_Tou_dispatch_factor2_nset, self->data_ptr);
+}
+
+static PyObject *
+Tou_get_dispatch_factor3(TouObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_Tou_dispatch_factor3_nget, self->data_ptr);
+}
+
+static int
+Tou_set_dispatch_factor3(TouObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_Tou_dispatch_factor3_nset, self->data_ptr);
+}
+
+static PyObject *
+Tou_get_dispatch_factor4(TouObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_Tou_dispatch_factor4_nget, self->data_ptr);
+}
+
+static int
+Tou_set_dispatch_factor4(TouObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_Tou_dispatch_factor4_nset, self->data_ptr);
+}
+
+static PyObject *
+Tou_get_dispatch_factor5(TouObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_Tou_dispatch_factor5_nget, self->data_ptr);
+}
+
+static int
+Tou_set_dispatch_factor5(TouObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_Tou_dispatch_factor5_nset, self->data_ptr);
+}
+
+static PyObject *
+Tou_get_dispatch_factor6(TouObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_Tou_dispatch_factor6_nget, self->data_ptr);
+}
+
+static int
+Tou_set_dispatch_factor6(TouObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_Tou_dispatch_factor6_nset, self->data_ptr);
+}
+
+static PyObject *
+Tou_get_dispatch_factor7(TouObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_Tou_dispatch_factor7_nget, self->data_ptr);
+}
+
+static int
+Tou_set_dispatch_factor7(TouObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_Tou_dispatch_factor7_nset, self->data_ptr);
+}
+
+static PyObject *
+Tou_get_dispatch_factor8(TouObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_Tou_dispatch_factor8_nget, self->data_ptr);
+}
+
+static int
+Tou_set_dispatch_factor8(TouObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_Tou_dispatch_factor8_nset, self->data_ptr);
+}
+
+static PyObject *
+Tou_get_dispatch_factor9(TouObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_Tou_dispatch_factor9_nget, self->data_ptr);
+}
+
+static int
+Tou_set_dispatch_factor9(TouObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_Tou_dispatch_factor9_nset, self->data_ptr);
+}
+
+static PyObject *
+Tou_get_dispatch_factors_ts(TouObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_TroughPhysicalProcessHeat_Tou_dispatch_factors_ts_aget, self->data_ptr);
+}
+
+static int
+Tou_set_dispatch_factors_ts(TouObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_TroughPhysicalProcessHeat_Tou_dispatch_factors_ts_aset, self->data_ptr);
+}
+
+static PyObject *
+Tou_get_dispatch_sched_weekday(TouObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_TroughPhysicalProcessHeat_Tou_dispatch_sched_weekday_mget, self->data_ptr);
+}
+
+static int
+Tou_set_dispatch_sched_weekday(TouObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_TroughPhysicalProcessHeat_Tou_dispatch_sched_weekday_mset, self->data_ptr);
+}
+
+static PyObject *
+Tou_get_dispatch_sched_weekend(TouObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_TroughPhysicalProcessHeat_Tou_dispatch_sched_weekend_mget, self->data_ptr);
+}
+
+static int
+Tou_set_dispatch_sched_weekend(TouObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_TroughPhysicalProcessHeat_Tou_dispatch_sched_weekend_mset, self->data_ptr);
+}
+
+static PyObject *
+Tou_get_dispatch_series(TouObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_TroughPhysicalProcessHeat_Tou_dispatch_series_aget, self->data_ptr);
+}
+
+static int
+Tou_set_dispatch_series(TouObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_TroughPhysicalProcessHeat_Tou_dispatch_series_aset, self->data_ptr);
+}
+
+static PyObject *
+Tou_get_f_turb_tou_periods(TouObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_TroughPhysicalProcessHeat_Tou_f_turb_tou_periods_aget, self->data_ptr);
+}
+
+static int
+Tou_set_f_turb_tou_periods(TouObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_TroughPhysicalProcessHeat_Tou_f_turb_tou_periods_aset, self->data_ptr);
+}
+
+static PyObject *
+Tou_get_is_ampl_engine(TouObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_Tou_is_ampl_engine_nget, self->data_ptr);
+}
+
+static int
+Tou_set_is_ampl_engine(TouObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_Tou_is_ampl_engine_nset, self->data_ptr);
+}
+
+static PyObject *
+Tou_get_is_dispatch(TouObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_Tou_is_dispatch_nget, self->data_ptr);
+}
+
+static int
+Tou_set_is_dispatch(TouObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_Tou_is_dispatch_nset, self->data_ptr);
+}
+
+static PyObject *
+Tou_get_is_dispatch_series(TouObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_Tou_is_dispatch_series_nget, self->data_ptr);
+}
+
+static int
+Tou_set_is_dispatch_series(TouObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_Tou_is_dispatch_series_nset, self->data_ptr);
+}
+
+static PyObject *
+Tou_get_is_wlim_series(TouObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_Tou_is_wlim_series_nget, self->data_ptr);
+}
+
+static int
+Tou_set_is_wlim_series(TouObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_Tou_is_wlim_series_nset, self->data_ptr);
+}
+
+static PyObject *
+Tou_get_is_write_ampl_dat(TouObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_Tou_is_write_ampl_dat_nget, self->data_ptr);
+}
+
+static int
+Tou_set_is_write_ampl_dat(TouObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_Tou_is_write_ampl_dat_nset, self->data_ptr);
+}
+
+static PyObject *
+Tou_get_ppa_multiplier_model(TouObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_Tou_ppa_multiplier_model_nget, self->data_ptr);
+}
+
+static int
+Tou_set_ppa_multiplier_model(TouObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_Tou_ppa_multiplier_model_nset, self->data_ptr);
+}
+
+static PyObject *
+Tou_get_q_rec_heattrace(TouObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_Tou_q_rec_heattrace_nget, self->data_ptr);
+}
+
+static int
+Tou_set_q_rec_heattrace(TouObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_Tou_q_rec_heattrace_nset, self->data_ptr);
+}
+
+static PyObject *
+Tou_get_q_rec_standby(TouObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_Tou_q_rec_standby_nget, self->data_ptr);
+}
+
+static int
+Tou_set_q_rec_standby(TouObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_Tou_q_rec_standby_nset, self->data_ptr);
+}
+
+static PyObject *
+Tou_get_weekday_schedule(TouObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_TroughPhysicalProcessHeat_Tou_weekday_schedule_mget, self->data_ptr);
+}
+
+static int
+Tou_set_weekday_schedule(TouObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_TroughPhysicalProcessHeat_Tou_weekday_schedule_mset, self->data_ptr);
+}
+
+static PyObject *
+Tou_get_weekend_schedule(TouObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_TroughPhysicalProcessHeat_Tou_weekend_schedule_mget, self->data_ptr);
+}
+
+static int
+Tou_set_weekend_schedule(TouObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_TroughPhysicalProcessHeat_Tou_weekend_schedule_mset, self->data_ptr);
+}
+
+static PyObject *
+Tou_get_wlim_series(TouObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_TroughPhysicalProcessHeat_Tou_wlim_series_aget, self->data_ptr);
+}
+
+static int
+Tou_set_wlim_series(TouObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_TroughPhysicalProcessHeat_Tou_wlim_series_aset, self->data_ptr);
+}
+
+static PyGetSetDef Tou_getset[] = {
+{"ampl_data_dir", (getter)Tou_get_ampl_data_dir,(setter)Tou_set_ampl_data_dir,
+	PyDoc_STR("*str*: AMPL data file directory [-]\n\n*Required*: If not provided, assumed to be ''"),
+ 	NULL},
+{"ampl_exec_call", (getter)Tou_get_ampl_exec_call,(setter)Tou_set_ampl_exec_call,
+	PyDoc_STR("*str*: System command to run AMPL code [-]\n\n*Required*: If not provided, assumed to be 'ampl sdk_solution.run'"),
+ 	NULL},
+{"disp_csu_cost", (getter)Tou_get_disp_csu_cost,(setter)Tou_set_disp_csu_cost,
+	PyDoc_STR("*float*: Heat sink startup cost [$]\n\n*Required*: True if is_dispatch=1"),
+ 	NULL},
+{"disp_frequency", (getter)Tou_get_disp_frequency,(setter)Tou_set_disp_frequency,
+	PyDoc_STR("*float*: Frequency for dispatch optimization calculations [hour]\n\n*Required*: True if is_dispatch=1"),
+ 	NULL},
+{"disp_horizon", (getter)Tou_get_disp_horizon,(setter)Tou_set_disp_horizon,
+	PyDoc_STR("*float*: Time horizon for dispatch optimization [hour]\n\n*Required*: True if is_dispatch=1"),
+ 	NULL},
+{"disp_max_iter", (getter)Tou_get_disp_max_iter,(setter)Tou_set_disp_max_iter,
+	PyDoc_STR("*float*: Max. no. dispatch optimization iterations [-]\n\n*Required*: True if is_dispatch=1"),
+ 	NULL},
+{"disp_mip_gap", (getter)Tou_get_disp_mip_gap,(setter)Tou_set_disp_mip_gap,
+	PyDoc_STR("*float*: Dispatch optimization solution tolerance [-]\n\n*Required*: True if is_dispatch=1"),
+ 	NULL},
+{"disp_pen_delta_w", (getter)Tou_get_disp_pen_delta_w,(setter)Tou_set_disp_pen_delta_w,
+	PyDoc_STR("*float*: Dispatch heat production change penalty [$/kWt-change]\n\n*Required*: True if is_dispatch=1"),
+ 	NULL},
+{"disp_reporting", (getter)Tou_get_disp_reporting,(setter)Tou_set_disp_reporting,
+	PyDoc_STR("*float*: Dispatch optimization reporting level [-]\n\n*Required*: If not provided, assumed to be -1"),
+ 	NULL},
+{"disp_rsu_cost", (getter)Tou_get_disp_rsu_cost,(setter)Tou_set_disp_rsu_cost,
+	PyDoc_STR("*float*: Receiver startup cost [$]\n\n*Required*: True if is_dispatch=1"),
+ 	NULL},
+{"disp_spec_bb", (getter)Tou_get_disp_spec_bb,(setter)Tou_set_disp_spec_bb,
+	PyDoc_STR("*float*: Dispatch optimization B&B heuristic [-]\n\n*Required*: If not provided, assumed to be -1"),
+ 	NULL},
+{"disp_spec_presolve", (getter)Tou_get_disp_spec_presolve,(setter)Tou_set_disp_spec_presolve,
+	PyDoc_STR("*float*: Dispatch optimization presolve heuristic [-]\n\n*Required*: If not provided, assumed to be -1"),
+ 	NULL},
+{"disp_spec_scaling", (getter)Tou_get_disp_spec_scaling,(setter)Tou_set_disp_spec_scaling,
+	PyDoc_STR("*float*: Dispatch optimization scaling heuristic [-]\n\n*Required*: If not provided, assumed to be -1"),
+ 	NULL},
+{"disp_steps_per_hour", (getter)Tou_get_disp_steps_per_hour,(setter)Tou_set_disp_steps_per_hour,
+	PyDoc_STR("*float*: Time steps per hour for dispatch optimization calculations [-]\n\n*Required*: If not provided, assumed to be 1"),
+ 	NULL},
+{"disp_time_weighting", (getter)Tou_get_disp_time_weighting,(setter)Tou_set_disp_time_weighting,
+	PyDoc_STR("*float*: Dispatch optimization future time discounting factor [-]\n\n*Required*: If not provided, assumed to be 0.99"),
+ 	NULL},
+{"disp_timeout", (getter)Tou_get_disp_timeout,(setter)Tou_set_disp_timeout,
+	PyDoc_STR("*float*: Max. dispatch optimization solve duration [s]\n\n*Required*: True if is_dispatch=1"),
+ 	NULL},
+{"dispatch_factor1", (getter)Tou_get_dispatch_factor1,(setter)Tou_set_dispatch_factor1,
+	PyDoc_STR("*float*: Dispatch payment factor 1\n\n*Required*: If not provided, assumed to be 1"),
+ 	NULL},
+{"dispatch_factor2", (getter)Tou_get_dispatch_factor2,(setter)Tou_set_dispatch_factor2,
+	PyDoc_STR("*float*: Dispatch payment factor 2\n\n*Required*: If not provided, assumed to be 1"),
+ 	NULL},
+{"dispatch_factor3", (getter)Tou_get_dispatch_factor3,(setter)Tou_set_dispatch_factor3,
+	PyDoc_STR("*float*: Dispatch payment factor 3\n\n*Required*: If not provided, assumed to be 1"),
+ 	NULL},
+{"dispatch_factor4", (getter)Tou_get_dispatch_factor4,(setter)Tou_set_dispatch_factor4,
+	PyDoc_STR("*float*: Dispatch payment factor 4\n\n*Required*: If not provided, assumed to be 1"),
+ 	NULL},
+{"dispatch_factor5", (getter)Tou_get_dispatch_factor5,(setter)Tou_set_dispatch_factor5,
+	PyDoc_STR("*float*: Dispatch payment factor 5\n\n*Required*: If not provided, assumed to be 1"),
+ 	NULL},
+{"dispatch_factor6", (getter)Tou_get_dispatch_factor6,(setter)Tou_set_dispatch_factor6,
+	PyDoc_STR("*float*: Dispatch payment factor 6\n\n*Required*: If not provided, assumed to be 1"),
+ 	NULL},
+{"dispatch_factor7", (getter)Tou_get_dispatch_factor7,(setter)Tou_set_dispatch_factor7,
+	PyDoc_STR("*float*: Dispatch payment factor 7\n\n*Required*: If not provided, assumed to be 1"),
+ 	NULL},
+{"dispatch_factor8", (getter)Tou_get_dispatch_factor8,(setter)Tou_set_dispatch_factor8,
+	PyDoc_STR("*float*: Dispatch payment factor 8\n\n*Required*: If not provided, assumed to be 1"),
+ 	NULL},
+{"dispatch_factor9", (getter)Tou_get_dispatch_factor9,(setter)Tou_set_dispatch_factor9,
+	PyDoc_STR("*float*: Dispatch payment factor 9\n\n*Required*: If not provided, assumed to be 1"),
+ 	NULL},
+{"dispatch_factors_ts", (getter)Tou_get_dispatch_factors_ts,(setter)Tou_set_dispatch_factors_ts,
+	PyDoc_STR("*sequence*: Dispatch payment factor array\n\n*Required*: True if ppa_multiplier_model=1"),
+ 	NULL},
+{"dispatch_sched_weekday", (getter)Tou_get_dispatch_sched_weekday,(setter)Tou_set_dispatch_sched_weekday,
+	PyDoc_STR("*sequence[sequence]*: 12x24 PPA pricing Weekday schedule\n\n*Required*: If not provided, assumed to be 1"),
+ 	NULL},
+{"dispatch_sched_weekend", (getter)Tou_get_dispatch_sched_weekend,(setter)Tou_set_dispatch_sched_weekend,
+	PyDoc_STR("*sequence[sequence]*: 12x24 PPA pricing Weekend schedule\n\n*Required*: If not provided, assumed to be 1"),
+ 	NULL},
+{"dispatch_series", (getter)Tou_get_dispatch_series,(setter)Tou_set_dispatch_series,
+	PyDoc_STR("*sequence*: Time series dispatch factors"),
+ 	NULL},
+{"f_turb_tou_periods", (getter)Tou_get_f_turb_tou_periods,(setter)Tou_set_f_turb_tou_periods,
+	PyDoc_STR("*sequence*: Dispatch logic for heat sink load fraction [-]\n\n*Required*: True"),
+ 	NULL},
+{"is_ampl_engine", (getter)Tou_get_is_ampl_engine,(setter)Tou_set_is_ampl_engine,
+	PyDoc_STR("*float*: Run dispatch optimization with external AMPL engine [-]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"is_dispatch", (getter)Tou_get_is_dispatch,(setter)Tou_set_is_dispatch,
+	PyDoc_STR("*float*: Allow dispatch optimization? [-]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"is_dispatch_series", (getter)Tou_get_is_dispatch_series,(setter)Tou_set_is_dispatch_series,
+	PyDoc_STR("*float*: Use time-series dispatch factors\n\n*Required*: If not provided, assumed to be 1"),
+ 	NULL},
+{"is_wlim_series", (getter)Tou_get_is_wlim_series,(setter)Tou_set_is_wlim_series,
+	PyDoc_STR("*float*: Use time-series net heat generation limits\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"is_write_ampl_dat", (getter)Tou_get_is_write_ampl_dat,(setter)Tou_set_is_write_ampl_dat,
+	PyDoc_STR("*float*: Write AMPL data files for dispatch run [-]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"ppa_multiplier_model", (getter)Tou_get_ppa_multiplier_model,(setter)Tou_set_ppa_multiplier_model,
+	PyDoc_STR("*float*: PPA multiplier model [0/1]\n\n*Options*: 0=diurnal,1=timestep\n\n*Constraints*: INTEGER,MIN=0\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"q_rec_heattrace", (getter)Tou_get_q_rec_heattrace,(setter)Tou_set_q_rec_heattrace,
+	PyDoc_STR("*float*: Receiver heat trace energy consumption during startup [kWe-hr]\n\n*Required*: If not provided, assumed to be 0.0"),
+ 	NULL},
+{"q_rec_standby", (getter)Tou_get_q_rec_standby,(setter)Tou_set_q_rec_standby,
+	PyDoc_STR("*float*: Receiver standby energy consumption [kWt]\n\n*Required*: If not provided, assumed to be 9e99"),
+ 	NULL},
+{"weekday_schedule", (getter)Tou_get_weekday_schedule,(setter)Tou_set_weekday_schedule,
+	PyDoc_STR("*sequence[sequence]*: 12x24 CSP operation Time-of-Use Weekday schedule [-]\n\n*Required*: True"),
+ 	NULL},
+{"weekend_schedule", (getter)Tou_get_weekend_schedule,(setter)Tou_set_weekend_schedule,
+	PyDoc_STR("*sequence[sequence]*: 12x24 CSP operation Time-of-Use Weekend schedule [-]\n\n*Required*: True"),
+ 	NULL},
+{"wlim_series", (getter)Tou_get_wlim_series,(setter)Tou_set_wlim_series,
+	PyDoc_STR("*sequence*: Time series net heat generation limits [kWt]\n\n*Required*: True if is_wlim_series=1"),
+ 	NULL},
+	{NULL}  /* Sentinel */
+};
+
+static PyTypeObject Tou_Type = {
+		/* The ob_type field must be initialized in the module init function
+		 * to be portable to Windows without using C++. */
+		PyVarObject_HEAD_INIT(NULL, 0)
+		"TroughPhysicalProcessHeat.Tou",             /*tp_name*/
+		sizeof(TouObject),          /*tp_basicsize*/
+		0,                          /*tp_itemsize*/
+		/* methods */
+		0,    /*tp_dealloc*/
+		0,                          /*tp_print*/
+		(getattrfunc)0,             /*tp_getattr*/
+		0,                          /*tp_setattr*/
+		0,                          /*tp_reserved*/
+		0,                          /*tp_repr*/
+		0,                          /*tp_as_number*/
+		0,                          /*tp_as_sequence*/
+		0,                          /*tp_as_mapping*/
+		0,                          /*tp_hash*/
+		0,                          /*tp_call*/
+		0,                          /*tp_str*/
+		0,                          /*tp_getattro*/
+		0,                          /*tp_setattro*/
+		0,                          /*tp_as_buffer*/
+		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
+		0,                          /*tp_doc*/
+		0,                          /*tp_traverse*/
+		0,                          /*tp_clear*/
+		0,                          /*tp_richcompare*/
+		0,                          /*tp_weaklistofnset*/
+		0,                          /*tp_iter*/
+		0,                          /*tp_iternext*/
+		Tou_methods,         /*tp_methods*/
+		0,                          /*tp_members*/
+		Tou_getset,          /*tp_getset*/
+		0,                          /*tp_base*/
+		0,                          /*tp_dict*/
+		0,                          /*tp_descr_get*/
+		0,                          /*tp_descr_set*/
+		0,                          /*tp_dictofnset*/
+		0,                          /*tp_init*/
+		0,                          /*tp_alloc*/
+		0,             /*tp_new*/
+		0,                          /*tp_free*/
+		0,                          /*tp_is_gc*/
+};
+
+
+/*
+ * System Group
+ */ 
+
+typedef struct {
+	PyObject_HEAD
+	SAM_TroughPhysicalProcessHeat   data_ptr;
+} SystemObject;
+
+static PyTypeObject System_Type;
+
+static PyObject *
+System_new(SAM_TroughPhysicalProcessHeat data_ptr)
+{
+	PyObject* new_obj = System_Type.tp_alloc(&System_Type,0);
+
+	SystemObject* System_obj = (SystemObject*)new_obj;
+
+	System_obj->data_ptr = data_ptr;
+
+	return new_obj;
+}
+
+/* System methods */
+
+static PyObject *
+System_assign(SystemObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "TroughPhysicalProcessHeat", "System")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+System_export(SystemObject *self, PyObject *args)
+{
+	PyTypeObject* tp = &System_Type;
+	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
+	return dict;
+}
+
+static PyMethodDef System_methods[] = {
+		{"assign",            (PyCFunction)System_assign,  METH_VARARGS,
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``System_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)System_export,  METH_VARARGS,
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+		{NULL,              NULL}           /* sentinel */
+};
+
+static PyObject *
+System_get_aux_array(SystemObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_TroughPhysicalProcessHeat_System_aux_array_aget, self->data_ptr);
+}
+
+static int
+System_set_aux_array(SystemObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_TroughPhysicalProcessHeat_System_aux_array_aset, self->data_ptr);
+}
+
+static PyObject *
+System_get_bop_array(SystemObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_TroughPhysicalProcessHeat_System_bop_array_aget, self->data_ptr);
+}
+
+static int
+System_set_bop_array(SystemObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_TroughPhysicalProcessHeat_System_bop_array_aset, self->data_ptr);
+}
+
+static PyObject *
+System_get_pb_fixed_par(SystemObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_System_pb_fixed_par_nget, self->data_ptr);
+}
+
+static int
+System_set_pb_fixed_par(SystemObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_System_pb_fixed_par_nset, self->data_ptr);
+}
+
+static PyGetSetDef System_getset[] = {
+{"aux_array", (getter)System_get_aux_array,(setter)System_set_aux_array,
+	PyDoc_STR("*sequence*: Auxiliary heater, mult frac and const, linear and quad coeff\n\n*Required*: True"),
+ 	NULL},
+{"bop_array", (getter)System_get_bop_array,(setter)System_set_bop_array,
+	PyDoc_STR("*sequence*: Balance of plant parasitic power fraction, mult frac and const, linear and quad coeff\n\n*Required*: True"),
+ 	NULL},
+{"pb_fixed_par", (getter)System_get_pb_fixed_par,(setter)System_set_pb_fixed_par,
+	PyDoc_STR("*float*: Fraction of rated gross power constantly consumed [MWe/MWcap]\n\n*Required*: True"),
+ 	NULL},
+	{NULL}  /* Sentinel */
+};
+
+static PyTypeObject System_Type = {
+		/* The ob_type field must be initialized in the module init function
+		 * to be portable to Windows without using C++. */
+		PyVarObject_HEAD_INIT(NULL, 0)
+		"TroughPhysicalProcessHeat.System",             /*tp_name*/
+		sizeof(SystemObject),          /*tp_basicsize*/
+		0,                          /*tp_itemsize*/
+		/* methods */
+		0,    /*tp_dealloc*/
+		0,                          /*tp_print*/
+		(getattrfunc)0,             /*tp_getattr*/
+		0,                          /*tp_setattr*/
+		0,                          /*tp_reserved*/
+		0,                          /*tp_repr*/
+		0,                          /*tp_as_number*/
+		0,                          /*tp_as_sequence*/
+		0,                          /*tp_as_mapping*/
+		0,                          /*tp_hash*/
+		0,                          /*tp_call*/
+		0,                          /*tp_str*/
+		0,                          /*tp_getattro*/
+		0,                          /*tp_setattro*/
+		0,                          /*tp_as_buffer*/
+		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
+		0,                          /*tp_doc*/
+		0,                          /*tp_traverse*/
+		0,                          /*tp_clear*/
+		0,                          /*tp_richcompare*/
+		0,                          /*tp_weaklistofnset*/
+		0,                          /*tp_iter*/
+		0,                          /*tp_iternext*/
+		System_methods,         /*tp_methods*/
+		0,                          /*tp_members*/
+		System_getset,          /*tp_getset*/
 		0,                          /*tp_base*/
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
@@ -3334,6 +4240,14 @@ newTroughPhysicalProcessHeatObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "TES2tank", TES2tank_obj);
 	Py_DECREF(TES2tank_obj);
 
+	PyObject* Tou_obj = Tou_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "Tou", Tou_obj);
+	Py_DECREF(Tou_obj);
+
+	PyObject* System_obj = System_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "System", System_obj);
+	Py_DECREF(System_obj);
+
 	PyObject* Powerblock_obj = Powerblock_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Powerblock", Powerblock_obj);
 	Py_DECREF(Powerblock_obj);
@@ -3619,6 +4533,20 @@ TroughPhysicalProcessHeatModule_exec(PyObject *m)
 				"TES2tank",
 				(PyObject*)&TES2tank_Type);
 	Py_DECREF(&TES2tank_Type);
+
+	/// Add the Tou type object to TroughPhysicalProcessHeat_Type
+	if (PyType_Ready(&Tou_Type) < 0) { goto fail; }
+	PyDict_SetItemString(TroughPhysicalProcessHeat_Type.tp_dict,
+				"Tou",
+				(PyObject*)&Tou_Type);
+	Py_DECREF(&Tou_Type);
+
+	/// Add the System type object to TroughPhysicalProcessHeat_Type
+	if (PyType_Ready(&System_Type) < 0) { goto fail; }
+	PyDict_SetItemString(TroughPhysicalProcessHeat_Type.tp_dict,
+				"System",
+				(PyObject*)&System_Type);
+	Py_DECREF(&System_Type);
 
 	/// Add the Powerblock type object to TroughPhysicalProcessHeat_Type
 	if (PyType_Ready(&Powerblock_Type) < 0) { goto fail; }

@@ -478,6 +478,26 @@ class SCO2Cycle(object):
 	sco2ud_m_dot_htf_low = float
 
 
+class AdjustmentFactors(object):
+	def assign(self): 
+		pass
+
+	def export(self): 
+		return {}
+
+	def __init__(self, *args, **kwargs): # real signature unknown
+		pass
+
+	constant = float
+	dc_constant = float
+	dc_hourly = tuple
+	dc_periods = tuple
+	hourly = tuple
+	periods = tuple
+	sf_constant = float
+	sf_hourly = tuple
+	sf_periods = tuple
+
 class Outputs(object):
 	def assign(self): 
 		pass
@@ -681,6 +701,7 @@ class TcsmoltenSalt(object):
 	SystemControl = SystemControl
 	UserDefinedPowerCycle = UserDefinedPowerCycle
 	SCO2Cycle = SCO2Cycle
+	AdjustmentFactors = AdjustmentFactors
 	Outputs = Outputs
 
 

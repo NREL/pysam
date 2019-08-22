@@ -215,7 +215,7 @@ class SystemOutput(object):
 	system_capacity = float
 
 
-class DHF(object):
+class SaleLeaseback(object):
 	def assign(self): 
 		pass
 
@@ -591,6 +591,7 @@ class Outputs(object):
 	cost_financing = float
 	cost_installed = float
 	cost_installedperwatt = float
+	cost_prefinancing = float
 	debt_fraction = float
 	depr_alloc_custom = float
 	depr_alloc_macrs_15 = float
@@ -919,6 +920,7 @@ class Outputs(object):
 	sponsor_aftertax_irr = float
 	sponsor_aftertax_npv = float
 	sponsor_equity_in_lessee_llc = float
+	sponsor_pretax_development = float
 	sponsor_pretax_irr = float
 	sponsor_pretax_npv = float
 	tax_investor_aftertax_irr = float
@@ -949,7 +951,7 @@ class Saleleaseback(object):
 	TaxCreditIncentives = TaxCreditIncentives
 	PaymentIncentives = PaymentIncentives
 	SystemOutput = SystemOutput
-	DHF = DHF
+	SaleLeaseback = SaleLeaseback
 	TimeOfDelivery = TimeOfDelivery
 	ReserveAccounts = ReserveAccounts
 	OtherCapitalCosts = OtherCapitalCosts

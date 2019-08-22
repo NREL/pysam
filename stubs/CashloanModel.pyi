@@ -361,6 +361,7 @@ class Outputs(object):
 	cf_fed_depreciation = tuple
 	cf_fed_incentive_income_less_deductions = tuple
 	cf_fed_tax_savings = tuple
+	cf_fed_taxable_incentive_income = tuple
 	cf_fed_taxable_income_less_deductions = tuple
 	cf_federal_tax_frac = tuple
 	cf_fuelcell_replacement_cost = tuple
@@ -399,6 +400,7 @@ class Outputs(object):
 	cf_sta_depreciation = tuple
 	cf_sta_incentive_income_less_deductions = tuple
 	cf_sta_tax_savings = tuple
+	cf_sta_taxable_incentive_income = tuple
 	cf_sta_taxable_income_less_deductions = tuple
 	cf_state_tax_frac = tuple
 	cf_thermal_value = tuple

@@ -79,8 +79,10 @@ class SolarField(object):
 	Tau_envelope = tuple
 	TrackingError = tuple
 	Type_cpnt = tuple
-	V_hdr_max = float
-	V_hdr_min = float
+	V_hdr_cold_max = float
+	V_hdr_cold_min = float
+	V_hdr_hot_max = float
+	V_hdr_hot_min = float
 	W_aperture = tuple
 	accept_init = float
 	accept_loc = float
@@ -198,6 +200,76 @@ class TES2tank(object):
 	hot_tank_max_heat = float
 
 
+class Tou(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> Dict[Dict]
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
+	ampl_data_dir = str
+	ampl_exec_call = str
+	disp_csu_cost = float
+	disp_frequency = float
+	disp_horizon = float
+	disp_max_iter = float
+	disp_mip_gap = float
+	disp_pen_delta_w = float
+	disp_reporting = float
+	disp_rsu_cost = float
+	disp_spec_bb = float
+	disp_spec_presolve = float
+	disp_spec_scaling = float
+	disp_steps_per_hour = float
+	disp_time_weighting = float
+	disp_timeout = float
+	dispatch_factor1 = float
+	dispatch_factor2 = float
+	dispatch_factor3 = float
+	dispatch_factor4 = float
+	dispatch_factor5 = float
+	dispatch_factor6 = float
+	dispatch_factor7 = float
+	dispatch_factor8 = float
+	dispatch_factor9 = float
+	dispatch_factors_ts = tuple
+	dispatch_sched_weekday = tuple
+	dispatch_sched_weekend = tuple
+	dispatch_series = tuple
+	f_turb_tou_periods = tuple
+	is_ampl_engine = float
+	is_dispatch = float
+	is_dispatch_series = float
+	is_wlim_series = float
+	is_write_ampl_dat = float
+	ppa_multiplier_model = float
+	q_rec_heattrace = float
+	q_rec_standby = float
+	weekday_schedule = tuple
+	weekend_schedule = tuple
+	wlim_series = tuple
+
+
+class System(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> Dict[Dict]
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
+	aux_array = tuple
+	bop_array = tuple
+	pb_fixed_par = float
+
+
 class Powerblock(object):
 	def assign(self): 
 		pass
@@ -211,6 +283,26 @@ class Powerblock(object):
 
 	L_rnr_pb = float
 
+
+class AdjustmentFactors(object):
+	def assign(self): 
+		pass
+
+	def export(self): 
+		return {}
+
+	def __init__(self, *args, **kwargs): # real signature unknown
+		pass
+
+	constant = float
+	dc_constant = float
+	dc_hourly = tuple
+	dc_periods = tuple
+	hourly = tuple
+	periods = tuple
+	sf_constant = float
+	sf_hourly = tuple
+	sf_periods = tuple
 
 class Outputs(object):
 	def assign(self): 
@@ -311,7 +403,10 @@ class TroughPhysicalProcessHeat(object):
 	SystemDesign = SystemDesign
 	TES = TES
 	TES2tank = TES2tank
+	Tou = Tou
+	System = System
 	Powerblock = Powerblock
+	AdjustmentFactors = AdjustmentFactors
 	Outputs = Outputs
 
 

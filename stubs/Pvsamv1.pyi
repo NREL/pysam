@@ -848,6 +848,26 @@ class TimeOfDelivery(object):
 	ppa_price_input = float
 
 
+class AdjustmentFactors(object):
+	def assign(self): 
+		pass
+
+	def export(self): 
+		return {}
+
+	def __init__(self, *args, **kwargs): # real signature unknown
+		pass
+
+	constant = float
+	dc_constant = float
+	dc_hourly = tuple
+	dc_periods = tuple
+	hourly = tuple
+	periods = tuple
+	sf_constant = float
+	sf_hourly = tuple
+	sf_periods = tuple
+
 class Outputs(object):
 	def assign(self): 
 		pass
@@ -1229,6 +1249,7 @@ class Pvsamv1(object):
 	FuelCell = FuelCell
 	ElectricityRate = ElectricityRate
 	TimeOfDelivery = TimeOfDelivery
+	AdjustmentFactors = AdjustmentFactors
 	Outputs = Outputs
 
 

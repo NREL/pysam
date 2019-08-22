@@ -277,6 +277,26 @@ class Parasitics(object):
 	piping_length_mult = float
 
 
+class AdjustmentFactors(object):
+	def assign(self): 
+		pass
+
+	def export(self): 
+		return {}
+
+	def __init__(self, *args, **kwargs): # real signature unknown
+		pass
+
+	constant = float
+	dc_constant = float
+	dc_hourly = tuple
+	dc_periods = tuple
+	hourly = tuple
+	periods = tuple
+	sf_constant = float
+	sf_hourly = tuple
+	sf_periods = tuple
+
 class Outputs(object):
 	def assign(self): 
 		pass
@@ -388,6 +408,7 @@ class TcsdirectSteam(object):
 	DsgController = DsgController
 	Powerblock = Powerblock
 	Parasitics = Parasitics
+	AdjustmentFactors = AdjustmentFactors
 	Outputs = Outputs
 
 

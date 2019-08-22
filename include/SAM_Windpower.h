@@ -69,7 +69,7 @@ extern "C"
 
 	/**
 	 * Set wind_resource_distribution: Wind Speed x Dir Distribution as 2-D PDF [m/s,deg]
-	 * options: None
+	 * options: [(speed, direction, prob)]
 	 * constraints: None
 	 * required if: wind_resource_model_choice=2
 	 */
@@ -113,7 +113,7 @@ extern "C"
 	SAM_EXPORT void SAM_Windpower_Turbine_wind_turbine_hub_ht_nset(SAM_Windpower ptr, double number, SAM_error *err);
 
 	/**
-	 * Set wind_turbine_max_cp: Max cp
+	 * Set wind_turbine_max_cp: Max Coefficient of Power
 	 * options: None
 	 * constraints: MIN=0
 	 * required if: wind_resource_model_choice=1
@@ -158,7 +158,7 @@ extern "C"
 	SAM_EXPORT void SAM_Windpower_Farm_system_capacity_nset(SAM_Windpower ptr, double number, SAM_error *err);
 
 	/**
-	 * Set wind_farm_wake_model: Wake Model [0/1/2/3]
+	 * Set wind_farm_wake_model: Wake Model [Simple, Park, EV, Constant] [0/1/2/3]
 	 * options: None
 	 * constraints: INTEGER
 	 * required if: *
@@ -276,7 +276,7 @@ extern "C"
 
 	/**
 	 * Set icing_cutoff_rh: Icing Cutoff Relative Humidity [%]
-	 * options: None
+	 * options: 'rh' required in wind_resource_data
 	 * constraints: MIN=0
 	 * required if: en_icing_cutoff=1
 	 */

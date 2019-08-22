@@ -137,22 +137,22 @@ Depreciation_set_depr_sta_type(DepreciationObject *self, PyObject *value, void *
 
 static PyGetSetDef Depreciation_getset[] = {
 {"depr_fed_custom", (getter)Depreciation_get_depr_fed_custom,(setter)Depreciation_set_depr_fed_custom,
-	PyDoc_STR("*sequence*: Federal custom depreciation [%/year]\n\n*Required*: set to 3 if not provided."),
+	PyDoc_STR("*sequence*: Federal custom depreciation [%/year]\n\n*Required*: True if depr_fed_type=3"),
  	NULL},
 {"depr_fed_sl_years", (getter)Depreciation_get_depr_fed_sl_years,(setter)Depreciation_set_depr_fed_sl_years,
-	PyDoc_STR("*float*: Federal depreciation straight-line Years [years]\n\n*Constraints*: INTEGER,POSITIVE\n\n*Required*: set to 2 if not provided."),
+	PyDoc_STR("*float*: Federal depreciation straight-line Years [years]\n\n*Constraints*: INTEGER,POSITIVE\n\n*Required*: True if depr_fed_type=2"),
  	NULL},
 {"depr_fed_type", (getter)Depreciation_get_depr_fed_type,(setter)Depreciation_set_depr_fed_type,
-	PyDoc_STR("*float*: Federal depreciation type\n\n*Options*: 0=none,1=macrs_half_year,2=sl,3=custom\n\n*Constraints*: INTEGER,MIN=0,MAX=3\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Federal depreciation type\n\n*Options*: 0=none,1=macrs_half_year,2=sl,3=custom\n\n*Constraints*: INTEGER,MIN=0,MAX=3\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"depr_sta_custom", (getter)Depreciation_get_depr_sta_custom,(setter)Depreciation_set_depr_sta_custom,
-	PyDoc_STR("*sequence*: State custom depreciation [%/year]\n\n*Required*: set to 3 if not provided."),
+	PyDoc_STR("*sequence*: State custom depreciation [%/year]\n\n*Required*: True if depr_sta_type=3"),
  	NULL},
 {"depr_sta_sl_years", (getter)Depreciation_get_depr_sta_sl_years,(setter)Depreciation_set_depr_sta_sl_years,
-	PyDoc_STR("*float*: State depreciation straight-line years [years]\n\n*Constraints*: INTEGER,POSITIVE\n\n*Required*: set to 2 if not provided."),
+	PyDoc_STR("*float*: State depreciation straight-line years [years]\n\n*Constraints*: INTEGER,POSITIVE\n\n*Required*: True if depr_sta_type=2"),
  	NULL},
 {"depr_sta_type", (getter)Depreciation_get_depr_sta_type,(setter)Depreciation_set_depr_sta_type,
-	PyDoc_STR("*float*: State depreciation type\n\n*Options*: 0=none,1=macrs_half_year,2=sl,3=custom\n\n*Constraints*: INTEGER,MIN=0,MAX=3\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: State depreciation type\n\n*Options*: 0=none,1=macrs_half_year,2=sl,3=custom\n\n*Constraints*: INTEGER,MIN=0,MAX=3\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -299,7 +299,7 @@ Financials_set_real_discount_rate(FinancialsObject *self, PyObject *value, void 
 
 static PyGetSetDef Financials_getset[] = {
 {"analysis_period", (getter)Financials_get_analysis_period,(setter)Financials_set_analysis_period,
-	PyDoc_STR("*float*: Analyis period [years]\n\n*Constraints*: INTEGER,MIN=0,MAX=50\n\n*Required*: set to 30 if not provided."),
+	PyDoc_STR("*float*: Analyis period [years]\n\n*Constraints*: INTEGER,MIN=0,MAX=50\n\n*Required*: If not provided, assumed to be 30"),
  	NULL},
 {"inflation_rate", (getter)Financials_get_inflation_rate,(setter)Financials_set_inflation_rate,
 	PyDoc_STR("*float*: Inflation rate [%]\n\n*Constraints*: MIN=-99\n\n*Required*: True"),
@@ -428,7 +428,7 @@ FinancialThirdPartyOwnership_set_lease_or_ppa(FinancialThirdPartyOwnershipObject
 
 static PyGetSetDef FinancialThirdPartyOwnership_getset[] = {
 {"lease_or_ppa", (getter)FinancialThirdPartyOwnership_get_lease_or_ppa,(setter)FinancialThirdPartyOwnership_set_lease_or_ppa,
-	PyDoc_STR("*float*: Lease or PPA agreement [0/1]\n\n*Options*: 0=lease,1=ppa\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Lease or PPA agreement [0/1]\n\n*Options*: 0=lease,1=ppa\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -863,16 +863,16 @@ CashFlow_set_ppa_price(CashFlowObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef CashFlow_getset[] = {
 {"lease_escalation", (getter)CashFlow_get_lease_escalation,(setter)CashFlow_set_lease_escalation,
-	PyDoc_STR("*float*: Monthly lease escalation [%/year]\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Monthly lease escalation [%/year]\n\n*Required*: True if lease_or_ppa=0"),
  	NULL},
 {"lease_price", (getter)CashFlow_get_lease_price,(setter)CashFlow_set_lease_price,
-	PyDoc_STR("*float*: Monthly lease price [$/month]\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Monthly lease price [$/month]\n\n*Required*: True if lease_or_ppa=0"),
  	NULL},
 {"ppa_escalation", (getter)CashFlow_get_ppa_escalation,(setter)CashFlow_set_ppa_escalation,
-	PyDoc_STR("*float*: Monthly lease escalation [%/year]\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*float*: Monthly lease escalation [%/year]\n\n*Required*: True if lease_or_ppa=1"),
  	NULL},
 {"ppa_price", (getter)CashFlow_get_ppa_price,(setter)CashFlow_set_ppa_price,
-	PyDoc_STR("*float*: Monthly lease price [$/month]\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*float*: Monthly lease price [$/month]\n\n*Required*: True if lease_or_ppa=1"),
  	NULL},
 	{NULL}  /* Sentinel */
 };

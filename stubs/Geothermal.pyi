@@ -74,6 +74,7 @@ class GeoHourly(object):
 	startup_frac = float
 	startup_time = float
 	subsurface_water_loss = float
+	system_use_lifetime_output = float
 	temp_decline_max = float
 	temp_decline_rate = float
 	ui_calculations_only = float
@@ -81,6 +82,26 @@ class GeoHourly(object):
 	well_flow_rate = float
 	wet_bulb_temp = float
 
+
+class AdjustmentFactors(object):
+	def assign(self): 
+		pass
+
+	def export(self): 
+		return {}
+
+	def __init__(self, *args, **kwargs): # real signature unknown
+		pass
+
+	constant = float
+	dc_constant = float
+	dc_hourly = tuple
+	dc_periods = tuple
+	hourly = tuple
+	periods = tuple
+	sf_constant = float
+	sf_hourly = tuple
+	sf_periods = tuple
 
 class Outputs(object):
 	def assign(self): 
@@ -133,7 +154,6 @@ class Outputs(object):
 	spec_vol_lp = float
 	system_lifetime_recapitalize = tuple
 	timestep_dry_bulb = tuple
-	timestep_power = tuple
 	timestep_pressure = tuple
 	timestep_resource_temperature = tuple
 	timestep_test_values = tuple
@@ -162,6 +182,7 @@ class Geothermal(object):
 		pass
 
 	GeoHourly = GeoHourly
+	AdjustmentFactors = AdjustmentFactors
 	Outputs = Outputs
 
 

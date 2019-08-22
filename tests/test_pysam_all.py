@@ -271,7 +271,7 @@ sf2 = "../sam/deploy/solar_resource/phoenix_az_33.450495_-111.983688_psmv3_60_tm
 sf3 = '../sam/deploy/solar_resource/fargo_nd_46.9_-96.8_mts1_60_tmy.csv'
 wf = "../sam/deploy/wind_resource/OH Northern-Lake.srw"
 
-def assign_file(mod, default, i):
+def assign_values(mod, default, i):
     m = i.default(default)
     if mod == "Pvsamv1":
         m.SolarResource.solar_resource_file = sf
@@ -287,6 +287,8 @@ def assign_file(mod, default, i):
         m.Resource.wind_resource_filename = wf
     elif mod == "GenericSystem":
         pass
+    elif mod == "Grid":
+        m.Common.gen = [0] * 8760
     else:
         try:
             m.Weather.file_name = sf2
@@ -339,8 +341,9 @@ def test_run_all():
 
 
         try:
+            print("try executing", mod, config, "\n")
             i = importlib.import_module(mod_name)
-            m = assign_file(mod, config, i)
+            m = assign_values(mod, config, i)
             m.execute(0)
         except:
             print("error executing", mod, config, "\n")

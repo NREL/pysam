@@ -113,10 +113,10 @@ Common_set_percent_complete(CommonObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef Common_getset[] = {
 {"annual_energy", (getter)Common_get_annual_energy,(setter)Common_set_annual_energy,
-	PyDoc_STR("*float*: Annual Energy [kWh]\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Annual Energy [kWh]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"capacity_factor", (getter)Common_get_capacity_factor,(setter)Common_set_capacity_factor,
-	PyDoc_STR("*float*: Capacity factor [%]\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Capacity factor [%]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"gen", (getter)Common_get_gen,(setter)Common_set_gen,
 	PyDoc_STR("*sequence*: System power generated [kW]\n\n*Info*: Lifetime system generation"),
@@ -257,10 +257,10 @@ Lifetime_set_system_use_lifetime_output(LifetimeObject *self, PyObject *value, v
 
 static PyGetSetDef Lifetime_getset[] = {
 {"analysis_period", (getter)Lifetime_get_analysis_period,(setter)Lifetime_set_analysis_period,
-	PyDoc_STR("*float*: Lifetime analysis period [years]\n\n*Info*: The number of years in the simulation\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*float*: Lifetime analysis period [years]\n\n*Info*: The number of years in the simulation\n\n*Required*: True if system_use_lifetime_output=1"),
  	NULL},
 {"system_use_lifetime_output", (getter)Lifetime_get_system_use_lifetime_output,(setter)Lifetime_set_system_use_lifetime_output,
-	PyDoc_STR("*float*: Lifetime simulation [0/1]\n\n*Options*: 0=SingleYearRepeated,1=RunEveryYear\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Lifetime simulation [0/1]\n\n*Options*: 0=SingleYearRepeated,1=RunEveryYear\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 	{NULL}  /* Sentinel */
 };

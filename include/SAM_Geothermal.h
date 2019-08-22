@@ -204,6 +204,14 @@ extern "C"
 	SAM_EXPORT void SAM_Geothermal_GeoHourly_excess_pressure_pump_nset(SAM_Geothermal ptr, double number, SAM_error *err);
 
 	/**
+	 * Set file_name: local weather file path
+	 * options: None
+	 * constraints: LOCAL_FILE
+	 * required if: ui_calculations_only=0
+	 */
+	SAM_EXPORT void SAM_Geothermal_GeoHourly_file_name_sset(SAM_Geothermal ptr, const char* str, SAM_error *err);
+
+	/**
 	 * Set fracture_angle: Fracture angle [deg]
 	 * options: None
 	 * constraints: None
@@ -548,6 +556,14 @@ extern "C"
 	SAM_EXPORT void SAM_Geothermal_GeoHourly_subsurface_water_loss_nset(SAM_Geothermal ptr, double number, SAM_error *err);
 
 	/**
+	 * Set system_use_lifetime_output: Geothermal lifetime simulation [0/1]
+	 * options: 0=SingleYearRepeated,1=RunEveryYear
+	 * constraints: BOOLEAN
+	 * required if: ?=0
+	 */
+	SAM_EXPORT void SAM_Geothermal_GeoHourly_system_use_lifetime_output_nset(SAM_Geothermal ptr, double number, SAM_error *err);
+
+	/**
 	 * Set temp_decline_max: Maximum temperature decline [C]
 	 * options: None
 	 * constraints: None
@@ -596,19 +612,6 @@ extern "C"
 	SAM_EXPORT void SAM_Geothermal_GeoHourly_wet_bulb_temp_nset(SAM_Geothermal ptr, double number, SAM_error *err);
 
 
-	//
-	// Weather parameters
-	//
-
-	/**
-	 * Set file_name: local weather file path
-	 * options: None
-	 * constraints: LOCAL_FILE
-	 * required if: ui_calculations_only=0
-	 */
-	SAM_EXPORT void SAM_Geothermal_Weather_file_name_sset(SAM_Geothermal ptr, const char* str, SAM_error *err);
-
-
 	/**
 	 * GeoHourly Getters
 	 */
@@ -654,6 +657,8 @@ extern "C"
 	SAM_EXPORT double SAM_Geothermal_GeoHourly_eta_ref_nget(SAM_Geothermal ptr, SAM_error *err);
 
 	SAM_EXPORT double SAM_Geothermal_GeoHourly_excess_pressure_pump_nget(SAM_Geothermal ptr, SAM_error *err);
+
+	SAM_EXPORT const char* SAM_Geothermal_GeoHourly_file_name_sget(SAM_Geothermal ptr, SAM_error *err);
 
 	SAM_EXPORT double SAM_Geothermal_GeoHourly_fracture_angle_nget(SAM_Geothermal ptr, SAM_error *err);
 
@@ -741,6 +746,8 @@ extern "C"
 
 	SAM_EXPORT double SAM_Geothermal_GeoHourly_subsurface_water_loss_nget(SAM_Geothermal ptr, SAM_error *err);
 
+	SAM_EXPORT double SAM_Geothermal_GeoHourly_system_use_lifetime_output_nget(SAM_Geothermal ptr, SAM_error *err);
+
 	SAM_EXPORT double SAM_Geothermal_GeoHourly_temp_decline_max_nget(SAM_Geothermal ptr, SAM_error *err);
 
 	SAM_EXPORT double SAM_Geothermal_GeoHourly_temp_decline_rate_nget(SAM_Geothermal ptr, SAM_error *err);
@@ -752,13 +759,6 @@ extern "C"
 	SAM_EXPORT double SAM_Geothermal_GeoHourly_well_flow_rate_nget(SAM_Geothermal ptr, SAM_error *err);
 
 	SAM_EXPORT double SAM_Geothermal_GeoHourly_wet_bulb_temp_nget(SAM_Geothermal ptr, SAM_error *err);
-
-
-	/**
-	 * Weather Getters
-	 */
-
-	SAM_EXPORT const char* SAM_Geothermal_Weather_file_name_sget(SAM_Geothermal ptr, SAM_error *err);
 
 
 	/**
@@ -786,6 +786,8 @@ extern "C"
 	SAM_EXPORT double SAM_Geothermal_Outputs_first_year_output_nget(SAM_Geothermal ptr, SAM_error *err);
 
 	SAM_EXPORT double SAM_Geothermal_Outputs_flash_count_nget(SAM_Geothermal ptr, SAM_error *err);
+
+	SAM_EXPORT double* SAM_Geothermal_Outputs_gen_aget(SAM_Geothermal ptr, int* length, SAM_error *err);
 
 	SAM_EXPORT double SAM_Geothermal_Outputs_gross_output_nget(SAM_Geothermal ptr, SAM_error *err);
 
@@ -842,8 +844,6 @@ extern "C"
 	SAM_EXPORT double* SAM_Geothermal_Outputs_system_lifetime_recapitalize_aget(SAM_Geothermal ptr, int* length, SAM_error *err);
 
 	SAM_EXPORT double* SAM_Geothermal_Outputs_timestep_dry_bulb_aget(SAM_Geothermal ptr, int* length, SAM_error *err);
-
-	SAM_EXPORT double* SAM_Geothermal_Outputs_timestep_power_aget(SAM_Geothermal ptr, int* length, SAM_error *err);
 
 	SAM_EXPORT double* SAM_Geothermal_Outputs_timestep_pressure_aget(SAM_Geothermal ptr, int* length, SAM_error *err);
 

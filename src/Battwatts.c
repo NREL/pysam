@@ -77,7 +77,7 @@ PVWatts_set_system_use_lifetime_output(PVWattsObject *self, PyObject *value, voi
 
 static PyGetSetDef PVWatts_getset[] = {
 {"system_use_lifetime_output", (getter)PVWatts_get_system_use_lifetime_output,(setter)PVWatts_set_system_use_lifetime_output,
-	PyDoc_STR("*float*: PV lifetime simulation [0/1]\n\n*Options*: 0=SingleYearRepeated,1=RunEveryYear\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: PV lifetime simulation [0/1]\n\n*Options*: 0=SingleYearRepeated,1=RunEveryYear\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -200,7 +200,7 @@ FinancialAnalysisParameters_set_analysis_period(FinancialAnalysisParametersObjec
 
 static PyGetSetDef FinancialAnalysisParameters_getset[] = {
 {"analysis_period", (getter)FinancialAnalysisParameters_get_analysis_period,(setter)FinancialAnalysisParameters_set_analysis_period,
-	PyDoc_STR("*float*: Lifetime analysis period [years]\n\n*Info*: The number of years in the simulation\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*float*: Lifetime analysis period [years]\n\n*Info*: The number of years in the simulation\n\n*Required*: True if system_use_lifetime_output=1"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -383,22 +383,22 @@ BatteryModelSimple_set_batt_simple_meter_position(BatteryModelSimpleObject *self
 
 static PyGetSetDef BatteryModelSimple_getset[] = {
 {"batt_simple_chemistry", (getter)BatteryModelSimple_get_batt_simple_chemistry,(setter)BatteryModelSimple_set_batt_simple_chemistry,
-	PyDoc_STR("*float*: Battery Chemistry [0=lead acid/1=Li-ion/2]\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Battery Chemistry [0=lead acid/1=Li-ion/2]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"batt_simple_dispatch", (getter)BatteryModelSimple_get_batt_simple_dispatch,(setter)BatteryModelSimple_set_batt_simple_dispatch,
-	PyDoc_STR("*float*: Battery Dispatch [0=peak shaving look ahead/1=peak shaving look behind]\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Battery Dispatch [0=peak shaving look ahead/1=peak shaving look behind]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"batt_simple_enable", (getter)BatteryModelSimple_get_batt_simple_enable,(setter)BatteryModelSimple_set_batt_simple_enable,
-	PyDoc_STR("*float*: Enable Battery [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Enable Battery [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"batt_simple_kw", (getter)BatteryModelSimple_get_batt_simple_kw,(setter)BatteryModelSimple_set_batt_simple_kw,
-	PyDoc_STR("*float*: Battery Power [kW]\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Battery Power [kW]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"batt_simple_kwh", (getter)BatteryModelSimple_get_batt_simple_kwh,(setter)BatteryModelSimple_set_batt_simple_kwh,
-	PyDoc_STR("*float*: Battery Capacity [kWh]\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Battery Capacity [kWh]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"batt_simple_meter_position", (getter)BatteryModelSimple_get_batt_simple_meter_position,(setter)BatteryModelSimple_set_batt_simple_meter_position,
-	PyDoc_STR("*float*: Battery Meter Position [0=behind meter/1=front of meter]\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Battery Meter Position [0=behind meter/1=front of meter]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 	{NULL}  /* Sentinel */
 };

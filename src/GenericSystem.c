@@ -155,7 +155,7 @@ static PyGetSetDef Plant_getset[] = {
 	PyDoc_STR("*float*: Derate [%]\n\n*Required*: True"),
  	NULL},
 {"energy_output_array", (getter)Plant_get_energy_output_array,(setter)Plant_set_energy_output_array,
-	PyDoc_STR("*sequence*: Array of Energy Output Profile [kW]\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*sequence*: Array of Energy Output Profile [kW]\n\n*Required*: True if spec_mode=1"),
  	NULL},
 {"heat_rate", (getter)Plant_get_heat_rate,(setter)Plant_set_heat_rate,
 	PyDoc_STR("*float*: Heat Rate [MMBTUs/MWhe]\n\n*Required*: True"),
@@ -314,13 +314,13 @@ Lifetime_set_system_use_lifetime_output(LifetimeObject *self, PyObject *value, v
 
 static PyGetSetDef Lifetime_getset[] = {
 {"analysis_period", (getter)Lifetime_get_analysis_period,(setter)Lifetime_set_analysis_period,
-	PyDoc_STR("*float*: Lifetime analysis period [years]\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*float*: Lifetime analysis period [years]\n\n*Required*: True if system_use_lifetime_output=1"),
  	NULL},
 {"generic_degradation", (getter)Lifetime_get_generic_degradation,(setter)Lifetime_set_generic_degradation,
-	PyDoc_STR("*sequence*: Annual module degradation [%/year]\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*sequence*: Annual module degradation [%/year]\n\n*Required*: True if system_use_lifetime_output=1"),
  	NULL},
 {"system_use_lifetime_output", (getter)Lifetime_get_system_use_lifetime_output,(setter)Lifetime_set_system_use_lifetime_output,
-	PyDoc_STR("*float*: Generic lifetime simulation [0/1]\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Generic lifetime simulation [0/1]\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 	{NULL}  /* Sentinel */
 };

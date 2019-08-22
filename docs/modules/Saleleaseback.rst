@@ -51,10 +51,10 @@ SystemOutput Group
 .. autoclass:: PySAM.Saleleaseback.Saleleaseback.SystemOutput
 	:members:
 
-DHF Group
+SaleLeaseback Group
 ==============
 
-.. autoclass:: PySAM.Saleleaseback.Saleleaseback.DHF
+.. autoclass:: PySAM.Saleleaseback.Saleleaseback.SaleLeaseback
 	:members:
 
 TimeOfDelivery Group

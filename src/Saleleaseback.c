@@ -197,7 +197,7 @@ FinancialParameters_set_system_heat_rate(FinancialParametersObject *self, PyObje
 
 static PyGetSetDef FinancialParameters_getset[] = {
 {"analysis_period", (getter)FinancialParameters_get_analysis_period,(setter)FinancialParameters_set_analysis_period,
-	PyDoc_STR("*float*: Analyis period [years]\n\n*Constraints*: INTEGER,MIN=0,MAX=50\n\n*Required*: set to 30 if not provided."),
+	PyDoc_STR("*float*: Analyis period [years]\n\n*Constraints*: INTEGER,MIN=0,MAX=50\n\n*Required*: If not provided, assumed to be 30"),
  	NULL},
 {"federal_tax_rate", (getter)FinancialParameters_get_federal_tax_rate,(setter)FinancialParameters_set_federal_tax_rate,
 	PyDoc_STR("*sequence*: Federal income tax rate [%]\n\n*Required*: True"),
@@ -206,16 +206,16 @@ static PyGetSetDef FinancialParameters_getset[] = {
 	PyDoc_STR("*float*: Inflation rate [%]\n\n*Constraints*: MIN=-99\n\n*Required*: True"),
  	NULL},
 {"insurance_rate", (getter)FinancialParameters_get_insurance_rate,(setter)FinancialParameters_set_insurance_rate,
-	PyDoc_STR("*float*: Insurance rate [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: set to 0.0 if not provided."),
+	PyDoc_STR("*float*: Insurance rate [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
 {"prop_tax_assessed_decline", (getter)FinancialParameters_get_prop_tax_assessed_decline,(setter)FinancialParameters_set_prop_tax_assessed_decline,
-	PyDoc_STR("*float*: Assessed value annual decline [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: set to 5 if not provided."),
+	PyDoc_STR("*float*: Assessed value annual decline [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 5"),
  	NULL},
 {"prop_tax_cost_assessed_percent", (getter)FinancialParameters_get_prop_tax_cost_assessed_percent,(setter)FinancialParameters_set_prop_tax_cost_assessed_percent,
-	PyDoc_STR("*float*: Percent of pre-financing costs assessed [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: set to 95 if not provided."),
+	PyDoc_STR("*float*: Percent of pre-financing costs assessed [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 95"),
  	NULL},
 {"property_tax_rate", (getter)FinancialParameters_get_property_tax_rate,(setter)FinancialParameters_set_property_tax_rate,
-	PyDoc_STR("*float*: Property tax rate [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: set to 0.0 if not provided."),
+	PyDoc_STR("*float*: Property tax rate [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
 {"real_discount_rate", (getter)FinancialParameters_get_real_discount_rate,(setter)FinancialParameters_set_real_discount_rate,
 	PyDoc_STR("*float*: Real discount rate [%]\n\n*Constraints*: MIN=-99\n\n*Required*: True"),
@@ -227,7 +227,7 @@ static PyGetSetDef FinancialParameters_getset[] = {
 	PyDoc_STR("*float*: System nameplate capacity [kW]\n\n*Constraints*: POSITIVE\n\n*Required*: True"),
  	NULL},
 {"system_heat_rate", (getter)FinancialParameters_get_system_heat_rate,(setter)FinancialParameters_set_system_heat_rate,
-	PyDoc_STR("*float*: System heat rate [MMBTus/MWh]\n\n*Constraints*: MIN=0\n\n*Required*: set to 0.0 if not provided."),
+	PyDoc_STR("*float*: System heat rate [MMBTus/MWh]\n\n*Constraints*: MIN=0\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -698,94 +698,94 @@ SystemCosts_set_om_replacement_cost_escal(SystemCostsObject *self, PyObject *val
 
 static PyGetSetDef SystemCosts_getset[] = {
 {"add_om_num_types", (getter)SystemCosts_get_add_om_num_types,(setter)SystemCosts_set_add_om_num_types,
-	PyDoc_STR("*float*: Number of O and M types\n\n*Constraints*: INTEGER,MIN=0,MAX=2\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Number of O and M types\n\n*Constraints*: INTEGER,MIN=0,MAX=2\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"annual_fuel_usage", (getter)SystemCosts_get_annual_fuel_usage,(setter)SystemCosts_set_annual_fuel_usage,
-	PyDoc_STR("*float*: Fuel usage (yr 1) [kWht]\n\n*Constraints*: MIN=0\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Fuel usage (yr 1) [kWht]\n\n*Constraints*: MIN=0\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"annual_fuel_usage_lifetime", (getter)SystemCosts_get_annual_fuel_usage_lifetime,(setter)SystemCosts_set_annual_fuel_usage_lifetime,
 	PyDoc_STR("*sequence*: Fuel usage (lifetime) [kWht]"),
  	NULL},
 {"om_capacity", (getter)SystemCosts_get_om_capacity,(setter)SystemCosts_set_om_capacity,
-	PyDoc_STR("*sequence*: Capacity-based O&M amount [$/kWcap]\n\n*Required*: set to 0.0 if not provided."),
+	PyDoc_STR("*sequence*: Capacity-based O&M amount [$/kWcap]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
 {"om_capacity1", (getter)SystemCosts_get_om_capacity1,(setter)SystemCosts_set_om_capacity1,
-	PyDoc_STR("*sequence*: Battery capacity-based System Costs amount [$/kWcap]\n\n*Required*: set to 0.0 if not provided."),
+	PyDoc_STR("*sequence*: Battery capacity-based System Costs amount [$/kWcap]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
 {"om_capacity1_nameplate", (getter)SystemCosts_get_om_capacity1_nameplate,(setter)SystemCosts_set_om_capacity1_nameplate,
-	PyDoc_STR("*float*: Battery capacity for System Costs values [kW]\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Battery capacity for System Costs values [kW]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"om_capacity2", (getter)SystemCosts_get_om_capacity2,(setter)SystemCosts_set_om_capacity2,
-	PyDoc_STR("*sequence*: Fuel cell capacity-based System Costs amount [$/kWcap]\n\n*Required*: set to 0.0 if not provided."),
+	PyDoc_STR("*sequence*: Fuel cell capacity-based System Costs amount [$/kWcap]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
 {"om_capacity2_nameplate", (getter)SystemCosts_get_om_capacity2_nameplate,(setter)SystemCosts_set_om_capacity2_nameplate,
-	PyDoc_STR("*float*: Fuel cell capacity for System Costs values [kW]\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Fuel cell capacity for System Costs values [kW]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"om_capacity_escal", (getter)SystemCosts_get_om_capacity_escal,(setter)SystemCosts_set_om_capacity_escal,
-	PyDoc_STR("*float*: Capacity-based O&M escalation [%/year]\n\n*Required*: set to 0.0 if not provided."),
+	PyDoc_STR("*float*: Capacity-based O&M escalation [%/year]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
 {"om_fixed", (getter)SystemCosts_get_om_fixed,(setter)SystemCosts_set_om_fixed,
-	PyDoc_STR("*sequence*: Fixed O&M annual amount [$/year]\n\n*Required*: set to 0.0 if not provided."),
+	PyDoc_STR("*sequence*: Fixed O&M annual amount [$/year]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
 {"om_fixed1", (getter)SystemCosts_get_om_fixed1,(setter)SystemCosts_set_om_fixed1,
-	PyDoc_STR("*sequence*: Battery fixed System Costs annual amount [$/year]\n\n*Required*: set to 0.0 if not provided."),
+	PyDoc_STR("*sequence*: Battery fixed System Costs annual amount [$/year]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
 {"om_fixed2", (getter)SystemCosts_get_om_fixed2,(setter)SystemCosts_set_om_fixed2,
-	PyDoc_STR("*sequence*: Fuel cell fixed System Costs annual amount [$/year]\n\n*Required*: set to 0.0 if not provided."),
+	PyDoc_STR("*sequence*: Fuel cell fixed System Costs annual amount [$/year]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
 {"om_fixed_escal", (getter)SystemCosts_get_om_fixed_escal,(setter)SystemCosts_set_om_fixed_escal,
-	PyDoc_STR("*float*: Fixed O&M escalation [%/year]\n\n*Required*: set to 0.0 if not provided."),
+	PyDoc_STR("*float*: Fixed O&M escalation [%/year]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
 {"om_fuel_cost", (getter)SystemCosts_get_om_fuel_cost,(setter)SystemCosts_set_om_fuel_cost,
-	PyDoc_STR("*sequence*: Fuel cost [$/MMBtu]\n\n*Required*: set to 0.0 if not provided."),
+	PyDoc_STR("*sequence*: Fuel cost [$/MMBtu]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
 {"om_fuel_cost_escal", (getter)SystemCosts_get_om_fuel_cost_escal,(setter)SystemCosts_set_om_fuel_cost_escal,
-	PyDoc_STR("*float*: Fuel cost escalation [%/year]\n\n*Required*: set to 0.0 if not provided."),
+	PyDoc_STR("*float*: Fuel cost escalation [%/year]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
 {"om_opt_fuel_1_cost", (getter)SystemCosts_get_om_opt_fuel_1_cost,(setter)SystemCosts_set_om_opt_fuel_1_cost,
-	PyDoc_STR("*sequence*: Biomass feedstock cost [$/unit]\n\n*Required*: set to 0.0 if not provided."),
+	PyDoc_STR("*sequence*: Biomass feedstock cost [$/unit]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
 {"om_opt_fuel_1_cost_escal", (getter)SystemCosts_get_om_opt_fuel_1_cost_escal,(setter)SystemCosts_set_om_opt_fuel_1_cost_escal,
-	PyDoc_STR("*float*: Biomass feedstock cost escalation [%/year]\n\n*Required*: set to 0.0 if not provided."),
+	PyDoc_STR("*float*: Biomass feedstock cost escalation [%/year]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
 {"om_opt_fuel_1_usage", (getter)SystemCosts_get_om_opt_fuel_1_usage,(setter)SystemCosts_set_om_opt_fuel_1_usage,
-	PyDoc_STR("*float*: Biomass feedstock usage [unit]\n\n*Required*: set to 0.0 if not provided."),
+	PyDoc_STR("*float*: Biomass feedstock usage [unit]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
 {"om_opt_fuel_2_cost", (getter)SystemCosts_get_om_opt_fuel_2_cost,(setter)SystemCosts_set_om_opt_fuel_2_cost,
-	PyDoc_STR("*sequence*: Coal feedstock cost [$/unit]\n\n*Required*: set to 0.0 if not provided."),
+	PyDoc_STR("*sequence*: Coal feedstock cost [$/unit]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
 {"om_opt_fuel_2_cost_escal", (getter)SystemCosts_get_om_opt_fuel_2_cost_escal,(setter)SystemCosts_set_om_opt_fuel_2_cost_escal,
-	PyDoc_STR("*float*: Coal feedstock cost escalation [%/year]\n\n*Required*: set to 0.0 if not provided."),
+	PyDoc_STR("*float*: Coal feedstock cost escalation [%/year]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
 {"om_opt_fuel_2_usage", (getter)SystemCosts_get_om_opt_fuel_2_usage,(setter)SystemCosts_set_om_opt_fuel_2_usage,
-	PyDoc_STR("*float*: Coal feedstock usage [unit]\n\n*Required*: set to 0.0 if not provided."),
+	PyDoc_STR("*float*: Coal feedstock usage [unit]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
 {"om_production", (getter)SystemCosts_get_om_production,(setter)SystemCosts_set_om_production,
-	PyDoc_STR("*sequence*: Production-based O&M amount [$/MWh]\n\n*Required*: set to 0.0 if not provided."),
+	PyDoc_STR("*sequence*: Production-based O&M amount [$/MWh]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
 {"om_production1", (getter)SystemCosts_get_om_production1,(setter)SystemCosts_set_om_production1,
-	PyDoc_STR("*sequence*: Battery production-based System Costs amount [$/MWh]\n\n*Required*: set to 0.0 if not provided."),
+	PyDoc_STR("*sequence*: Battery production-based System Costs amount [$/MWh]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
 {"om_production1_values", (getter)SystemCosts_get_om_production1_values,(setter)SystemCosts_set_om_production1_values,
-	PyDoc_STR("*sequence*: Battery production for System Costs values [kWh]\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*sequence*: Battery production for System Costs values [kWh]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"om_production2", (getter)SystemCosts_get_om_production2,(setter)SystemCosts_set_om_production2,
-	PyDoc_STR("*sequence*: Fuel cell production-based System Costs amount [$/MWh]\n\n*Required*: set to 0.0 if not provided."),
+	PyDoc_STR("*sequence*: Fuel cell production-based System Costs amount [$/MWh]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
 {"om_production2_values", (getter)SystemCosts_get_om_production2_values,(setter)SystemCosts_set_om_production2_values,
-	PyDoc_STR("*sequence*: Fuel cell production for System Costs values [kWh]\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*sequence*: Fuel cell production for System Costs values [kWh]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"om_production_escal", (getter)SystemCosts_get_om_production_escal,(setter)SystemCosts_set_om_production_escal,
-	PyDoc_STR("*float*: Production-based O&M escalation [%/year]\n\n*Required*: set to 0.0 if not provided."),
+	PyDoc_STR("*float*: Production-based O&M escalation [%/year]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
 {"om_replacement_cost1", (getter)SystemCosts_get_om_replacement_cost1,(setter)SystemCosts_set_om_replacement_cost1,
-	PyDoc_STR("*sequence*: Repacement cost 1 [$/kWh]\n\n*Required*: set to 0.0 if not provided."),
+	PyDoc_STR("*sequence*: Repacement cost 1 [$/kWh]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
 {"om_replacement_cost2", (getter)SystemCosts_get_om_replacement_cost2,(setter)SystemCosts_set_om_replacement_cost2,
-	PyDoc_STR("*sequence*: Repacement cost 2 [$/kW]\n\n*Required*: set to 0.0 if not provided."),
+	PyDoc_STR("*sequence*: Repacement cost 2 [$/kW]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
 {"om_replacement_cost_escal", (getter)SystemCosts_get_om_replacement_cost_escal,(setter)SystemCosts_set_om_replacement_cost_escal,
-	PyDoc_STR("*float*: Replacement cost escalation [%/year]\n\n*Required*: set to 0.0 if not provided."),
+	PyDoc_STR("*float*: Replacement cost escalation [%/year]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1136,64 +1136,64 @@ TaxCreditIncentives_set_ptc_sta_term(TaxCreditIncentivesObject *self, PyObject *
 
 static PyGetSetDef TaxCreditIncentives_getset[] = {
 {"itc_fed_amount", (getter)TaxCreditIncentives_get_itc_fed_amount,(setter)TaxCreditIncentives_set_itc_fed_amount,
-	PyDoc_STR("*float*: Federal amount-based ITC amount [$]\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Federal amount-based ITC amount [$]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"itc_fed_amount_deprbas_fed", (getter)TaxCreditIncentives_get_itc_fed_amount_deprbas_fed,(setter)TaxCreditIncentives_set_itc_fed_amount_deprbas_fed,
-	PyDoc_STR("*float*: Federal amount-based ITC reduces federal depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*float*: Federal amount-based ITC reduces federal depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
  	NULL},
 {"itc_fed_amount_deprbas_sta", (getter)TaxCreditIncentives_get_itc_fed_amount_deprbas_sta,(setter)TaxCreditIncentives_set_itc_fed_amount_deprbas_sta,
-	PyDoc_STR("*float*: Federal amount-based ITC reduces state depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*float*: Federal amount-based ITC reduces state depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
  	NULL},
 {"itc_fed_percent", (getter)TaxCreditIncentives_get_itc_fed_percent,(setter)TaxCreditIncentives_set_itc_fed_percent,
-	PyDoc_STR("*float*: Federal percentage-based ITC percent [%]\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Federal percentage-based ITC percent [%]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"itc_fed_percent_deprbas_fed", (getter)TaxCreditIncentives_get_itc_fed_percent_deprbas_fed,(setter)TaxCreditIncentives_set_itc_fed_percent_deprbas_fed,
-	PyDoc_STR("*float*: Federal percentage-based ITC reduces federal depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*float*: Federal percentage-based ITC reduces federal depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
  	NULL},
 {"itc_fed_percent_deprbas_sta", (getter)TaxCreditIncentives_get_itc_fed_percent_deprbas_sta,(setter)TaxCreditIncentives_set_itc_fed_percent_deprbas_sta,
-	PyDoc_STR("*float*: Federal percentage-based ITC reduces state depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*float*: Federal percentage-based ITC reduces state depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
  	NULL},
 {"itc_fed_percent_maxvalue", (getter)TaxCreditIncentives_get_itc_fed_percent_maxvalue,(setter)TaxCreditIncentives_set_itc_fed_percent_maxvalue,
-	PyDoc_STR("*float*: Federal percentage-based ITC maximum value [$]\n\n*Required*: set to 1e99 if not provided."),
+	PyDoc_STR("*float*: Federal percentage-based ITC maximum value [$]\n\n*Required*: If not provided, assumed to be 1e99"),
  	NULL},
 {"itc_sta_amount", (getter)TaxCreditIncentives_get_itc_sta_amount,(setter)TaxCreditIncentives_set_itc_sta_amount,
-	PyDoc_STR("*float*: State amount-based ITC amount [$]\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: State amount-based ITC amount [$]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"itc_sta_amount_deprbas_fed", (getter)TaxCreditIncentives_get_itc_sta_amount_deprbas_fed,(setter)TaxCreditIncentives_set_itc_sta_amount_deprbas_fed,
-	PyDoc_STR("*float*: State amount-based ITC reduces federal depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: State amount-based ITC reduces federal depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"itc_sta_amount_deprbas_sta", (getter)TaxCreditIncentives_get_itc_sta_amount_deprbas_sta,(setter)TaxCreditIncentives_set_itc_sta_amount_deprbas_sta,
-	PyDoc_STR("*float*: State amount-based ITC reduces state depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: State amount-based ITC reduces state depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"itc_sta_percent", (getter)TaxCreditIncentives_get_itc_sta_percent,(setter)TaxCreditIncentives_set_itc_sta_percent,
-	PyDoc_STR("*float*: State percentage-based ITC percent [%]\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: State percentage-based ITC percent [%]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"itc_sta_percent_deprbas_fed", (getter)TaxCreditIncentives_get_itc_sta_percent_deprbas_fed,(setter)TaxCreditIncentives_set_itc_sta_percent_deprbas_fed,
-	PyDoc_STR("*float*: State percentage-based ITC reduces federal depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: State percentage-based ITC reduces federal depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"itc_sta_percent_deprbas_sta", (getter)TaxCreditIncentives_get_itc_sta_percent_deprbas_sta,(setter)TaxCreditIncentives_set_itc_sta_percent_deprbas_sta,
-	PyDoc_STR("*float*: State percentage-based ITC reduces state depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: State percentage-based ITC reduces state depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"itc_sta_percent_maxvalue", (getter)TaxCreditIncentives_get_itc_sta_percent_maxvalue,(setter)TaxCreditIncentives_set_itc_sta_percent_maxvalue,
-	PyDoc_STR("*float*: State percentage-based ITC maximum Value [$]\n\n*Required*: set to 1e99 if not provided."),
+	PyDoc_STR("*float*: State percentage-based ITC maximum Value [$]\n\n*Required*: If not provided, assumed to be 1e99"),
  	NULL},
 {"ptc_fed_amount", (getter)TaxCreditIncentives_get_ptc_fed_amount,(setter)TaxCreditIncentives_set_ptc_fed_amount,
-	PyDoc_STR("*sequence*: Federal PTC amount [$/kWh]\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*sequence*: Federal PTC amount [$/kWh]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"ptc_fed_escal", (getter)TaxCreditIncentives_get_ptc_fed_escal,(setter)TaxCreditIncentives_set_ptc_fed_escal,
-	PyDoc_STR("*float*: Federal PTC escalation [%/year]\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Federal PTC escalation [%/year]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"ptc_fed_term", (getter)TaxCreditIncentives_get_ptc_fed_term,(setter)TaxCreditIncentives_set_ptc_fed_term,
-	PyDoc_STR("*float*: Federal PTC term [years]\n\n*Required*: set to 10 if not provided."),
+	PyDoc_STR("*float*: Federal PTC term [years]\n\n*Required*: If not provided, assumed to be 10"),
  	NULL},
 {"ptc_sta_amount", (getter)TaxCreditIncentives_get_ptc_sta_amount,(setter)TaxCreditIncentives_set_ptc_sta_amount,
-	PyDoc_STR("*sequence*: State PTC amount [$/kWh]\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*sequence*: State PTC amount [$/kWh]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"ptc_sta_escal", (getter)TaxCreditIncentives_get_ptc_sta_escal,(setter)TaxCreditIncentives_set_ptc_sta_escal,
-	PyDoc_STR("*float*: State PTC escalation [%/year]\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: State PTC escalation [%/year]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"ptc_sta_term", (getter)TaxCreditIncentives_get_ptc_sta_term,(setter)TaxCreditIncentives_set_ptc_sta_term,
-	PyDoc_STR("*float*: State PTC term [years]\n\n*Required*: set to 10 if not provided."),
+	PyDoc_STR("*float*: State PTC term [years]\n\n*Required*: If not provided, assumed to be 10"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -2360,268 +2360,268 @@ PaymentIncentives_set_pbi_uti_term(PaymentIncentivesObject *self, PyObject *valu
 
 static PyGetSetDef PaymentIncentives_getset[] = {
 {"cbi_fed_amount", (getter)PaymentIncentives_get_cbi_fed_amount,(setter)PaymentIncentives_set_cbi_fed_amount,
-	PyDoc_STR("*float*: Federal CBI amount [$/Watt]\n\n*Required*: set to 0.0 if not provided."),
+	PyDoc_STR("*float*: Federal CBI amount [$/Watt]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
 {"cbi_fed_deprbas_fed", (getter)PaymentIncentives_get_cbi_fed_deprbas_fed,(setter)PaymentIncentives_set_cbi_fed_deprbas_fed,
-	PyDoc_STR("*float*: Federal CBI reduces federal depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Federal CBI reduces federal depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"cbi_fed_deprbas_sta", (getter)PaymentIncentives_get_cbi_fed_deprbas_sta,(setter)PaymentIncentives_set_cbi_fed_deprbas_sta,
-	PyDoc_STR("*float*: Federal CBI reduces state depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Federal CBI reduces state depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"cbi_fed_maxvalue", (getter)PaymentIncentives_get_cbi_fed_maxvalue,(setter)PaymentIncentives_set_cbi_fed_maxvalue,
-	PyDoc_STR("*float*: Federal CBI maximum [$]\n\n*Required*: set to 1e99 if not provided."),
+	PyDoc_STR("*float*: Federal CBI maximum [$]\n\n*Required*: If not provided, assumed to be 1e99"),
  	NULL},
 {"cbi_fed_tax_fed", (getter)PaymentIncentives_get_cbi_fed_tax_fed,(setter)PaymentIncentives_set_cbi_fed_tax_fed,
-	PyDoc_STR("*float*: Federal CBI federal taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*float*: Federal CBI federal taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
  	NULL},
 {"cbi_fed_tax_sta", (getter)PaymentIncentives_get_cbi_fed_tax_sta,(setter)PaymentIncentives_set_cbi_fed_tax_sta,
-	PyDoc_STR("*float*: Federal CBI state taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*float*: Federal CBI state taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
  	NULL},
 {"cbi_oth_amount", (getter)PaymentIncentives_get_cbi_oth_amount,(setter)PaymentIncentives_set_cbi_oth_amount,
-	PyDoc_STR("*float*: Other CBI amount [$/Watt]\n\n*Required*: set to 0.0 if not provided."),
+	PyDoc_STR("*float*: Other CBI amount [$/Watt]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
 {"cbi_oth_deprbas_fed", (getter)PaymentIncentives_get_cbi_oth_deprbas_fed,(setter)PaymentIncentives_set_cbi_oth_deprbas_fed,
-	PyDoc_STR("*float*: Other CBI reduces federal depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Other CBI reduces federal depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"cbi_oth_deprbas_sta", (getter)PaymentIncentives_get_cbi_oth_deprbas_sta,(setter)PaymentIncentives_set_cbi_oth_deprbas_sta,
-	PyDoc_STR("*float*: Other CBI reduces state depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Other CBI reduces state depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"cbi_oth_maxvalue", (getter)PaymentIncentives_get_cbi_oth_maxvalue,(setter)PaymentIncentives_set_cbi_oth_maxvalue,
-	PyDoc_STR("*float*: Other CBI maximum [$]\n\n*Required*: set to 1e99 if not provided."),
+	PyDoc_STR("*float*: Other CBI maximum [$]\n\n*Required*: If not provided, assumed to be 1e99"),
  	NULL},
 {"cbi_oth_tax_fed", (getter)PaymentIncentives_get_cbi_oth_tax_fed,(setter)PaymentIncentives_set_cbi_oth_tax_fed,
-	PyDoc_STR("*float*: Other CBI federal taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*float*: Other CBI federal taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
  	NULL},
 {"cbi_oth_tax_sta", (getter)PaymentIncentives_get_cbi_oth_tax_sta,(setter)PaymentIncentives_set_cbi_oth_tax_sta,
-	PyDoc_STR("*float*: Other CBI state taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*float*: Other CBI state taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
  	NULL},
 {"cbi_sta_amount", (getter)PaymentIncentives_get_cbi_sta_amount,(setter)PaymentIncentives_set_cbi_sta_amount,
-	PyDoc_STR("*float*: State CBI amount [$/Watt]\n\n*Required*: set to 0.0 if not provided."),
+	PyDoc_STR("*float*: State CBI amount [$/Watt]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
 {"cbi_sta_deprbas_fed", (getter)PaymentIncentives_get_cbi_sta_deprbas_fed,(setter)PaymentIncentives_set_cbi_sta_deprbas_fed,
-	PyDoc_STR("*float*: State CBI reduces federal depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: State CBI reduces federal depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"cbi_sta_deprbas_sta", (getter)PaymentIncentives_get_cbi_sta_deprbas_sta,(setter)PaymentIncentives_set_cbi_sta_deprbas_sta,
-	PyDoc_STR("*float*: State CBI reduces state depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: State CBI reduces state depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"cbi_sta_maxvalue", (getter)PaymentIncentives_get_cbi_sta_maxvalue,(setter)PaymentIncentives_set_cbi_sta_maxvalue,
-	PyDoc_STR("*float*: State CBI maximum [$]\n\n*Required*: set to 1e99 if not provided."),
+	PyDoc_STR("*float*: State CBI maximum [$]\n\n*Required*: If not provided, assumed to be 1e99"),
  	NULL},
 {"cbi_sta_tax_fed", (getter)PaymentIncentives_get_cbi_sta_tax_fed,(setter)PaymentIncentives_set_cbi_sta_tax_fed,
-	PyDoc_STR("*float*: State CBI federal taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*float*: State CBI federal taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
  	NULL},
 {"cbi_sta_tax_sta", (getter)PaymentIncentives_get_cbi_sta_tax_sta,(setter)PaymentIncentives_set_cbi_sta_tax_sta,
-	PyDoc_STR("*float*: State CBI state taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*float*: State CBI state taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
  	NULL},
 {"cbi_uti_amount", (getter)PaymentIncentives_get_cbi_uti_amount,(setter)PaymentIncentives_set_cbi_uti_amount,
-	PyDoc_STR("*float*: Utility CBI amount [$/Watt]\n\n*Required*: set to 0.0 if not provided."),
+	PyDoc_STR("*float*: Utility CBI amount [$/Watt]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
 {"cbi_uti_deprbas_fed", (getter)PaymentIncentives_get_cbi_uti_deprbas_fed,(setter)PaymentIncentives_set_cbi_uti_deprbas_fed,
-	PyDoc_STR("*float*: Utility CBI reduces federal depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Utility CBI reduces federal depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"cbi_uti_deprbas_sta", (getter)PaymentIncentives_get_cbi_uti_deprbas_sta,(setter)PaymentIncentives_set_cbi_uti_deprbas_sta,
-	PyDoc_STR("*float*: Utility CBI reduces state depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Utility CBI reduces state depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"cbi_uti_maxvalue", (getter)PaymentIncentives_get_cbi_uti_maxvalue,(setter)PaymentIncentives_set_cbi_uti_maxvalue,
-	PyDoc_STR("*float*: Utility CBI maximum [$]\n\n*Required*: set to 1e99 if not provided."),
+	PyDoc_STR("*float*: Utility CBI maximum [$]\n\n*Required*: If not provided, assumed to be 1e99"),
  	NULL},
 {"cbi_uti_tax_fed", (getter)PaymentIncentives_get_cbi_uti_tax_fed,(setter)PaymentIncentives_set_cbi_uti_tax_fed,
-	PyDoc_STR("*float*: Utility CBI federal taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*float*: Utility CBI federal taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
  	NULL},
 {"cbi_uti_tax_sta", (getter)PaymentIncentives_get_cbi_uti_tax_sta,(setter)PaymentIncentives_set_cbi_uti_tax_sta,
-	PyDoc_STR("*float*: Utility CBI state taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*float*: Utility CBI state taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
  	NULL},
 {"ibi_fed_amount", (getter)PaymentIncentives_get_ibi_fed_amount,(setter)PaymentIncentives_set_ibi_fed_amount,
-	PyDoc_STR("*float*: Federal amount-based IBI amount [$]\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Federal amount-based IBI amount [$]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"ibi_fed_amount_deprbas_fed", (getter)PaymentIncentives_get_ibi_fed_amount_deprbas_fed,(setter)PaymentIncentives_set_ibi_fed_amount_deprbas_fed,
-	PyDoc_STR("*float*: Federal amount-based IBI reduces federal depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Federal amount-based IBI reduces federal depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"ibi_fed_amount_deprbas_sta", (getter)PaymentIncentives_get_ibi_fed_amount_deprbas_sta,(setter)PaymentIncentives_set_ibi_fed_amount_deprbas_sta,
-	PyDoc_STR("*float*: Federal amount-based IBI reduces state depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Federal amount-based IBI reduces state depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"ibi_fed_amount_tax_fed", (getter)PaymentIncentives_get_ibi_fed_amount_tax_fed,(setter)PaymentIncentives_set_ibi_fed_amount_tax_fed,
-	PyDoc_STR("*float*: Federal amount-based IBI federal taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*float*: Federal amount-based IBI federal taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
  	NULL},
 {"ibi_fed_amount_tax_sta", (getter)PaymentIncentives_get_ibi_fed_amount_tax_sta,(setter)PaymentIncentives_set_ibi_fed_amount_tax_sta,
-	PyDoc_STR("*float*: Federal amount-based IBI state taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*float*: Federal amount-based IBI state taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
  	NULL},
 {"ibi_fed_percent", (getter)PaymentIncentives_get_ibi_fed_percent,(setter)PaymentIncentives_set_ibi_fed_percent,
-	PyDoc_STR("*float*: Federal percentage-based IBI percent [%]\n\n*Required*: set to 0.0 if not provided."),
+	PyDoc_STR("*float*: Federal percentage-based IBI percent [%]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
 {"ibi_fed_percent_deprbas_fed", (getter)PaymentIncentives_get_ibi_fed_percent_deprbas_fed,(setter)PaymentIncentives_set_ibi_fed_percent_deprbas_fed,
-	PyDoc_STR("*float*: Federal percentage-based IBI reduces federal depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Federal percentage-based IBI reduces federal depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"ibi_fed_percent_deprbas_sta", (getter)PaymentIncentives_get_ibi_fed_percent_deprbas_sta,(setter)PaymentIncentives_set_ibi_fed_percent_deprbas_sta,
-	PyDoc_STR("*float*: Federal percentage-based IBI reduces state depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Federal percentage-based IBI reduces state depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"ibi_fed_percent_maxvalue", (getter)PaymentIncentives_get_ibi_fed_percent_maxvalue,(setter)PaymentIncentives_set_ibi_fed_percent_maxvalue,
-	PyDoc_STR("*float*: Federal percentage-based IBI maximum value [$]\n\n*Required*: set to 1e99 if not provided."),
+	PyDoc_STR("*float*: Federal percentage-based IBI maximum value [$]\n\n*Required*: If not provided, assumed to be 1e99"),
  	NULL},
 {"ibi_fed_percent_tax_fed", (getter)PaymentIncentives_get_ibi_fed_percent_tax_fed,(setter)PaymentIncentives_set_ibi_fed_percent_tax_fed,
-	PyDoc_STR("*float*: Federal percentage-based IBI federal taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*float*: Federal percentage-based IBI federal taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
  	NULL},
 {"ibi_fed_percent_tax_sta", (getter)PaymentIncentives_get_ibi_fed_percent_tax_sta,(setter)PaymentIncentives_set_ibi_fed_percent_tax_sta,
-	PyDoc_STR("*float*: Federal percentage-based IBI state taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*float*: Federal percentage-based IBI state taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
  	NULL},
 {"ibi_oth_amount", (getter)PaymentIncentives_get_ibi_oth_amount,(setter)PaymentIncentives_set_ibi_oth_amount,
-	PyDoc_STR("*float*: Other amount-based IBI amount [$]\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Other amount-based IBI amount [$]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"ibi_oth_amount_deprbas_fed", (getter)PaymentIncentives_get_ibi_oth_amount_deprbas_fed,(setter)PaymentIncentives_set_ibi_oth_amount_deprbas_fed,
-	PyDoc_STR("*float*: Other amount-based IBI reduces federal depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Other amount-based IBI reduces federal depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"ibi_oth_amount_deprbas_sta", (getter)PaymentIncentives_get_ibi_oth_amount_deprbas_sta,(setter)PaymentIncentives_set_ibi_oth_amount_deprbas_sta,
-	PyDoc_STR("*float*: Other amount-based IBI reduces state depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Other amount-based IBI reduces state depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"ibi_oth_amount_tax_fed", (getter)PaymentIncentives_get_ibi_oth_amount_tax_fed,(setter)PaymentIncentives_set_ibi_oth_amount_tax_fed,
-	PyDoc_STR("*float*: Other amount-based IBI federal taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*float*: Other amount-based IBI federal taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
  	NULL},
 {"ibi_oth_amount_tax_sta", (getter)PaymentIncentives_get_ibi_oth_amount_tax_sta,(setter)PaymentIncentives_set_ibi_oth_amount_tax_sta,
-	PyDoc_STR("*float*: Other amount-based IBI state taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*float*: Other amount-based IBI state taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
  	NULL},
 {"ibi_oth_percent", (getter)PaymentIncentives_get_ibi_oth_percent,(setter)PaymentIncentives_set_ibi_oth_percent,
-	PyDoc_STR("*float*: Other percentage-based IBI percent [%]\n\n*Required*: set to 0.0 if not provided."),
+	PyDoc_STR("*float*: Other percentage-based IBI percent [%]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
 {"ibi_oth_percent_deprbas_fed", (getter)PaymentIncentives_get_ibi_oth_percent_deprbas_fed,(setter)PaymentIncentives_set_ibi_oth_percent_deprbas_fed,
-	PyDoc_STR("*float*: Other percentage-based IBI reduces federal depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Other percentage-based IBI reduces federal depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"ibi_oth_percent_deprbas_sta", (getter)PaymentIncentives_get_ibi_oth_percent_deprbas_sta,(setter)PaymentIncentives_set_ibi_oth_percent_deprbas_sta,
-	PyDoc_STR("*float*: Other percentage-based IBI reduces state depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Other percentage-based IBI reduces state depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"ibi_oth_percent_maxvalue", (getter)PaymentIncentives_get_ibi_oth_percent_maxvalue,(setter)PaymentIncentives_set_ibi_oth_percent_maxvalue,
-	PyDoc_STR("*float*: Other percentage-based IBI maximum value [$]\n\n*Required*: set to 1e99 if not provided."),
+	PyDoc_STR("*float*: Other percentage-based IBI maximum value [$]\n\n*Required*: If not provided, assumed to be 1e99"),
  	NULL},
 {"ibi_oth_percent_tax_fed", (getter)PaymentIncentives_get_ibi_oth_percent_tax_fed,(setter)PaymentIncentives_set_ibi_oth_percent_tax_fed,
-	PyDoc_STR("*float*: Other percentage-based IBI federal taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*float*: Other percentage-based IBI federal taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
  	NULL},
 {"ibi_oth_percent_tax_sta", (getter)PaymentIncentives_get_ibi_oth_percent_tax_sta,(setter)PaymentIncentives_set_ibi_oth_percent_tax_sta,
-	PyDoc_STR("*float*: Other percentage-based IBI state taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*float*: Other percentage-based IBI state taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
  	NULL},
 {"ibi_sta_amount", (getter)PaymentIncentives_get_ibi_sta_amount,(setter)PaymentIncentives_set_ibi_sta_amount,
-	PyDoc_STR("*float*: State amount-based IBI amount [$]\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: State amount-based IBI amount [$]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"ibi_sta_amount_deprbas_fed", (getter)PaymentIncentives_get_ibi_sta_amount_deprbas_fed,(setter)PaymentIncentives_set_ibi_sta_amount_deprbas_fed,
-	PyDoc_STR("*float*: State amount-based IBI reduces federal depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: State amount-based IBI reduces federal depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"ibi_sta_amount_deprbas_sta", (getter)PaymentIncentives_get_ibi_sta_amount_deprbas_sta,(setter)PaymentIncentives_set_ibi_sta_amount_deprbas_sta,
-	PyDoc_STR("*float*: State amount-based IBI reduces state depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: State amount-based IBI reduces state depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"ibi_sta_amount_tax_fed", (getter)PaymentIncentives_get_ibi_sta_amount_tax_fed,(setter)PaymentIncentives_set_ibi_sta_amount_tax_fed,
-	PyDoc_STR("*float*: State amount-based IBI federal taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*float*: State amount-based IBI federal taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
  	NULL},
 {"ibi_sta_amount_tax_sta", (getter)PaymentIncentives_get_ibi_sta_amount_tax_sta,(setter)PaymentIncentives_set_ibi_sta_amount_tax_sta,
-	PyDoc_STR("*float*: State amount-based IBI state taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*float*: State amount-based IBI state taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
  	NULL},
 {"ibi_sta_percent", (getter)PaymentIncentives_get_ibi_sta_percent,(setter)PaymentIncentives_set_ibi_sta_percent,
-	PyDoc_STR("*float*: State percentage-based IBI percent [%]\n\n*Required*: set to 0.0 if not provided."),
+	PyDoc_STR("*float*: State percentage-based IBI percent [%]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
 {"ibi_sta_percent_deprbas_fed", (getter)PaymentIncentives_get_ibi_sta_percent_deprbas_fed,(setter)PaymentIncentives_set_ibi_sta_percent_deprbas_fed,
-	PyDoc_STR("*float*: State percentage-based IBI reduces federal depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: State percentage-based IBI reduces federal depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"ibi_sta_percent_deprbas_sta", (getter)PaymentIncentives_get_ibi_sta_percent_deprbas_sta,(setter)PaymentIncentives_set_ibi_sta_percent_deprbas_sta,
-	PyDoc_STR("*float*: State percentage-based IBI reduces state depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: State percentage-based IBI reduces state depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"ibi_sta_percent_maxvalue", (getter)PaymentIncentives_get_ibi_sta_percent_maxvalue,(setter)PaymentIncentives_set_ibi_sta_percent_maxvalue,
-	PyDoc_STR("*float*: State percentage-based IBI maximum value [$]\n\n*Required*: set to 1e99 if not provided."),
+	PyDoc_STR("*float*: State percentage-based IBI maximum value [$]\n\n*Required*: If not provided, assumed to be 1e99"),
  	NULL},
 {"ibi_sta_percent_tax_fed", (getter)PaymentIncentives_get_ibi_sta_percent_tax_fed,(setter)PaymentIncentives_set_ibi_sta_percent_tax_fed,
-	PyDoc_STR("*float*: State percentage-based IBI federal taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*float*: State percentage-based IBI federal taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
  	NULL},
 {"ibi_sta_percent_tax_sta", (getter)PaymentIncentives_get_ibi_sta_percent_tax_sta,(setter)PaymentIncentives_set_ibi_sta_percent_tax_sta,
-	PyDoc_STR("*float*: State percentage-based IBI state taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*float*: State percentage-based IBI state taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
  	NULL},
 {"ibi_uti_amount", (getter)PaymentIncentives_get_ibi_uti_amount,(setter)PaymentIncentives_set_ibi_uti_amount,
-	PyDoc_STR("*float*: Utility amount-based IBI amount [$]\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Utility amount-based IBI amount [$]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"ibi_uti_amount_deprbas_fed", (getter)PaymentIncentives_get_ibi_uti_amount_deprbas_fed,(setter)PaymentIncentives_set_ibi_uti_amount_deprbas_fed,
-	PyDoc_STR("*float*: Utility amount-based IBI reduces federal depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Utility amount-based IBI reduces federal depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"ibi_uti_amount_deprbas_sta", (getter)PaymentIncentives_get_ibi_uti_amount_deprbas_sta,(setter)PaymentIncentives_set_ibi_uti_amount_deprbas_sta,
-	PyDoc_STR("*float*: Utility amount-based IBI reduces state depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Utility amount-based IBI reduces state depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"ibi_uti_amount_tax_fed", (getter)PaymentIncentives_get_ibi_uti_amount_tax_fed,(setter)PaymentIncentives_set_ibi_uti_amount_tax_fed,
-	PyDoc_STR("*float*: Utility amount-based IBI federal taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*float*: Utility amount-based IBI federal taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
  	NULL},
 {"ibi_uti_amount_tax_sta", (getter)PaymentIncentives_get_ibi_uti_amount_tax_sta,(setter)PaymentIncentives_set_ibi_uti_amount_tax_sta,
-	PyDoc_STR("*float*: Utility amount-based IBI state taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*float*: Utility amount-based IBI state taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
  	NULL},
 {"ibi_uti_percent", (getter)PaymentIncentives_get_ibi_uti_percent,(setter)PaymentIncentives_set_ibi_uti_percent,
-	PyDoc_STR("*float*: Utility percentage-based IBI percent [%]\n\n*Required*: set to 0.0 if not provided."),
+	PyDoc_STR("*float*: Utility percentage-based IBI percent [%]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
 {"ibi_uti_percent_deprbas_fed", (getter)PaymentIncentives_get_ibi_uti_percent_deprbas_fed,(setter)PaymentIncentives_set_ibi_uti_percent_deprbas_fed,
-	PyDoc_STR("*float*: Utility percentage-based IBI reduces federal depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Utility percentage-based IBI reduces federal depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"ibi_uti_percent_deprbas_sta", (getter)PaymentIncentives_get_ibi_uti_percent_deprbas_sta,(setter)PaymentIncentives_set_ibi_uti_percent_deprbas_sta,
-	PyDoc_STR("*float*: Utility percentage-based IBI reduces state depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Utility percentage-based IBI reduces state depreciation basis [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"ibi_uti_percent_maxvalue", (getter)PaymentIncentives_get_ibi_uti_percent_maxvalue,(setter)PaymentIncentives_set_ibi_uti_percent_maxvalue,
-	PyDoc_STR("*float*: Utility percentage-based IBI maximum value [$]\n\n*Required*: set to 1e99 if not provided."),
+	PyDoc_STR("*float*: Utility percentage-based IBI maximum value [$]\n\n*Required*: If not provided, assumed to be 1e99"),
  	NULL},
 {"ibi_uti_percent_tax_fed", (getter)PaymentIncentives_get_ibi_uti_percent_tax_fed,(setter)PaymentIncentives_set_ibi_uti_percent_tax_fed,
-	PyDoc_STR("*float*: Utility percentage-based IBI federal taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*float*: Utility percentage-based IBI federal taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
  	NULL},
 {"ibi_uti_percent_tax_sta", (getter)PaymentIncentives_get_ibi_uti_percent_tax_sta,(setter)PaymentIncentives_set_ibi_uti_percent_tax_sta,
-	PyDoc_STR("*float*: Utility percentage-based IBI state taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*float*: Utility percentage-based IBI state taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
  	NULL},
 {"pbi_fed_amount", (getter)PaymentIncentives_get_pbi_fed_amount,(setter)PaymentIncentives_set_pbi_fed_amount,
-	PyDoc_STR("*sequence*: Federal PBI amount [$/kWh]\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*sequence*: Federal PBI amount [$/kWh]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"pbi_fed_escal", (getter)PaymentIncentives_get_pbi_fed_escal,(setter)PaymentIncentives_set_pbi_fed_escal,
-	PyDoc_STR("*float*: Federal PBI escalation [%]\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Federal PBI escalation [%]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"pbi_fed_tax_fed", (getter)PaymentIncentives_get_pbi_fed_tax_fed,(setter)PaymentIncentives_set_pbi_fed_tax_fed,
-	PyDoc_STR("*float*: Federal PBI federal taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*float*: Federal PBI federal taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
  	NULL},
 {"pbi_fed_tax_sta", (getter)PaymentIncentives_get_pbi_fed_tax_sta,(setter)PaymentIncentives_set_pbi_fed_tax_sta,
-	PyDoc_STR("*float*: Federal PBI state taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*float*: Federal PBI state taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
  	NULL},
 {"pbi_fed_term", (getter)PaymentIncentives_get_pbi_fed_term,(setter)PaymentIncentives_set_pbi_fed_term,
-	PyDoc_STR("*float*: Federal PBI term [years]\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Federal PBI term [years]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"pbi_oth_amount", (getter)PaymentIncentives_get_pbi_oth_amount,(setter)PaymentIncentives_set_pbi_oth_amount,
-	PyDoc_STR("*sequence*: Other PBI amount [$/kWh]\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*sequence*: Other PBI amount [$/kWh]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"pbi_oth_escal", (getter)PaymentIncentives_get_pbi_oth_escal,(setter)PaymentIncentives_set_pbi_oth_escal,
-	PyDoc_STR("*float*: Other PBI escalation [%]\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Other PBI escalation [%]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"pbi_oth_tax_fed", (getter)PaymentIncentives_get_pbi_oth_tax_fed,(setter)PaymentIncentives_set_pbi_oth_tax_fed,
-	PyDoc_STR("*float*: Other PBI federal taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*float*: Other PBI federal taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
  	NULL},
 {"pbi_oth_tax_sta", (getter)PaymentIncentives_get_pbi_oth_tax_sta,(setter)PaymentIncentives_set_pbi_oth_tax_sta,
-	PyDoc_STR("*float*: Other PBI state taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*float*: Other PBI state taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
  	NULL},
 {"pbi_oth_term", (getter)PaymentIncentives_get_pbi_oth_term,(setter)PaymentIncentives_set_pbi_oth_term,
-	PyDoc_STR("*float*: Other PBI term [years]\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Other PBI term [years]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"pbi_sta_amount", (getter)PaymentIncentives_get_pbi_sta_amount,(setter)PaymentIncentives_set_pbi_sta_amount,
-	PyDoc_STR("*sequence*: State PBI amount [$/kWh]\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*sequence*: State PBI amount [$/kWh]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"pbi_sta_escal", (getter)PaymentIncentives_get_pbi_sta_escal,(setter)PaymentIncentives_set_pbi_sta_escal,
-	PyDoc_STR("*float*: State PBI escalation [%]\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: State PBI escalation [%]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"pbi_sta_tax_fed", (getter)PaymentIncentives_get_pbi_sta_tax_fed,(setter)PaymentIncentives_set_pbi_sta_tax_fed,
-	PyDoc_STR("*float*: State PBI federal taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*float*: State PBI federal taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
  	NULL},
 {"pbi_sta_tax_sta", (getter)PaymentIncentives_get_pbi_sta_tax_sta,(setter)PaymentIncentives_set_pbi_sta_tax_sta,
-	PyDoc_STR("*float*: State PBI state taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*float*: State PBI state taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
  	NULL},
 {"pbi_sta_term", (getter)PaymentIncentives_get_pbi_sta_term,(setter)PaymentIncentives_set_pbi_sta_term,
-	PyDoc_STR("*float*: State PBI term [years]\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: State PBI term [years]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"pbi_uti_amount", (getter)PaymentIncentives_get_pbi_uti_amount,(setter)PaymentIncentives_set_pbi_uti_amount,
-	PyDoc_STR("*sequence*: Utility PBI amount [$/kWh]\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*sequence*: Utility PBI amount [$/kWh]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"pbi_uti_escal", (getter)PaymentIncentives_get_pbi_uti_escal,(setter)PaymentIncentives_set_pbi_uti_escal,
-	PyDoc_STR("*float*: Utility PBI escalation [%]\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Utility PBI escalation [%]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"pbi_uti_tax_fed", (getter)PaymentIncentives_get_pbi_uti_tax_fed,(setter)PaymentIncentives_set_pbi_uti_tax_fed,
-	PyDoc_STR("*float*: Utility PBI federal taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*float*: Utility PBI federal taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
  	NULL},
 {"pbi_uti_tax_sta", (getter)PaymentIncentives_get_pbi_uti_tax_sta,(setter)PaymentIncentives_set_pbi_uti_tax_sta,
-	PyDoc_STR("*float*: Utility PBI state taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*float*: Utility PBI state taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
  	NULL},
 {"pbi_uti_term", (getter)PaymentIncentives_get_pbi_uti_term,(setter)PaymentIncentives_set_pbi_uti_term,
-	PyDoc_STR("*float*: Utility PBI term [years]\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Utility PBI term [years]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -2827,39 +2827,39 @@ static PyTypeObject SystemOutput_Type = {
 
 
 /*
- * DHF Group
+ * SaleLeaseback Group
  */ 
 
 typedef struct {
 	PyObject_HEAD
 	SAM_Saleleaseback   data_ptr;
-} DHFObject;
+} SaleLeasebackObject;
 
-static PyTypeObject DHF_Type;
+static PyTypeObject SaleLeaseback_Type;
 
 static PyObject *
-DHF_new(SAM_Saleleaseback data_ptr)
+SaleLeaseback_new(SAM_Saleleaseback data_ptr)
 {
-	PyObject* new_obj = DHF_Type.tp_alloc(&DHF_Type,0);
+	PyObject* new_obj = SaleLeaseback_Type.tp_alloc(&SaleLeaseback_Type,0);
 
-	DHFObject* DHF_obj = (DHFObject*)new_obj;
+	SaleLeasebackObject* SaleLeaseback_obj = (SaleLeasebackObject*)new_obj;
 
-	DHF_obj->data_ptr = data_ptr;
+	SaleLeaseback_obj->data_ptr = data_ptr;
 
 	return new_obj;
 }
 
-/* DHF methods */
+/* SaleLeaseback methods */
 
 static PyObject *
-DHF_assign(DHFObject *self, PyObject *args)
+SaleLeaseback_assign(SaleLeasebackObject *self, PyObject *args)
 {
 	PyObject* dict;
 	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Saleleaseback", "DHF")){
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Saleleaseback", "SaleLeaseback")){
 		return NULL;
 	}
 
@@ -2868,1021 +2868,1021 @@ DHF_assign(DHFObject *self, PyObject *args)
 }
 
 static PyObject *
-DHF_export(DHFObject *self, PyObject *args)
+SaleLeaseback_export(SaleLeasebackObject *self, PyObject *args)
 {
-	PyTypeObject* tp = &DHF_Type;
+	PyTypeObject* tp = &SaleLeaseback_Type;
 	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
 	return dict;
 }
 
-static PyMethodDef DHF_methods[] = {
-		{"assign",            (PyCFunction)DHF_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``DHF_vals = { var: val, ...}``")},
-		{"export",            (PyCFunction)DHF_export,  METH_VARARGS,
+static PyMethodDef SaleLeaseback_methods[] = {
+		{"assign",            (PyCFunction)SaleLeaseback_assign,  METH_VARARGS,
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``SaleLeaseback_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)SaleLeaseback_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 static PyObject *
-DHF_get_construction_financing_cost(DHFObject *self, void *closure)
+SaleLeaseback_get_construction_financing_cost(SaleLeasebackObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Saleleaseback_DHF_construction_financing_cost_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Saleleaseback_SaleLeaseback_construction_financing_cost_nget, self->data_ptr);
 }
 
 static int
-DHF_set_construction_financing_cost(DHFObject *self, PyObject *value, void *closure)
+SaleLeaseback_set_construction_financing_cost(SaleLeasebackObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Saleleaseback_DHF_construction_financing_cost_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Saleleaseback_SaleLeaseback_construction_financing_cost_nset, self->data_ptr);
 }
 
 static PyObject *
-DHF_get_cost_dev_fee_percent(DHFObject *self, void *closure)
+SaleLeaseback_get_cost_dev_fee_percent(SaleLeasebackObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Saleleaseback_DHF_cost_dev_fee_percent_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Saleleaseback_SaleLeaseback_cost_dev_fee_percent_nget, self->data_ptr);
 }
 
 static int
-DHF_set_cost_dev_fee_percent(DHFObject *self, PyObject *value, void *closure)
+SaleLeaseback_set_cost_dev_fee_percent(SaleLeasebackObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Saleleaseback_DHF_cost_dev_fee_percent_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Saleleaseback_SaleLeaseback_cost_dev_fee_percent_nset, self->data_ptr);
 }
 
 static PyObject *
-DHF_get_cost_equity_closing(DHFObject *self, void *closure)
+SaleLeaseback_get_cost_equity_closing(SaleLeasebackObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Saleleaseback_DHF_cost_equity_closing_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Saleleaseback_SaleLeaseback_cost_equity_closing_nget, self->data_ptr);
 }
 
 static int
-DHF_set_cost_equity_closing(DHFObject *self, PyObject *value, void *closure)
+SaleLeaseback_set_cost_equity_closing(SaleLeasebackObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Saleleaseback_DHF_cost_equity_closing_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Saleleaseback_SaleLeaseback_cost_equity_closing_nset, self->data_ptr);
 }
 
 static PyObject *
-DHF_get_cost_other_financing(DHFObject *self, void *closure)
+SaleLeaseback_get_cost_other_financing(SaleLeasebackObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Saleleaseback_DHF_cost_other_financing_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Saleleaseback_SaleLeaseback_cost_other_financing_nget, self->data_ptr);
 }
 
 static int
-DHF_set_cost_other_financing(DHFObject *self, PyObject *value, void *closure)
+SaleLeaseback_set_cost_other_financing(SaleLeasebackObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Saleleaseback_DHF_cost_other_financing_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Saleleaseback_SaleLeaseback_cost_other_financing_nset, self->data_ptr);
 }
 
 static PyObject *
-DHF_get_depr_alloc_custom_percent(DHFObject *self, void *closure)
+SaleLeaseback_get_depr_alloc_custom_percent(SaleLeasebackObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Saleleaseback_DHF_depr_alloc_custom_percent_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Saleleaseback_SaleLeaseback_depr_alloc_custom_percent_nget, self->data_ptr);
 }
 
 static int
-DHF_set_depr_alloc_custom_percent(DHFObject *self, PyObject *value, void *closure)
+SaleLeaseback_set_depr_alloc_custom_percent(SaleLeasebackObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Saleleaseback_DHF_depr_alloc_custom_percent_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Saleleaseback_SaleLeaseback_depr_alloc_custom_percent_nset, self->data_ptr);
 }
 
 static PyObject *
-DHF_get_depr_alloc_macrs_15_percent(DHFObject *self, void *closure)
+SaleLeaseback_get_depr_alloc_macrs_15_percent(SaleLeasebackObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Saleleaseback_DHF_depr_alloc_macrs_15_percent_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Saleleaseback_SaleLeaseback_depr_alloc_macrs_15_percent_nget, self->data_ptr);
 }
 
 static int
-DHF_set_depr_alloc_macrs_15_percent(DHFObject *self, PyObject *value, void *closure)
+SaleLeaseback_set_depr_alloc_macrs_15_percent(SaleLeasebackObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Saleleaseback_DHF_depr_alloc_macrs_15_percent_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Saleleaseback_SaleLeaseback_depr_alloc_macrs_15_percent_nset, self->data_ptr);
 }
 
 static PyObject *
-DHF_get_depr_alloc_macrs_5_percent(DHFObject *self, void *closure)
+SaleLeaseback_get_depr_alloc_macrs_5_percent(SaleLeasebackObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Saleleaseback_DHF_depr_alloc_macrs_5_percent_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Saleleaseback_SaleLeaseback_depr_alloc_macrs_5_percent_nget, self->data_ptr);
 }
 
 static int
-DHF_set_depr_alloc_macrs_5_percent(DHFObject *self, PyObject *value, void *closure)
+SaleLeaseback_set_depr_alloc_macrs_5_percent(SaleLeasebackObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Saleleaseback_DHF_depr_alloc_macrs_5_percent_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Saleleaseback_SaleLeaseback_depr_alloc_macrs_5_percent_nset, self->data_ptr);
 }
 
 static PyObject *
-DHF_get_depr_alloc_sl_15_percent(DHFObject *self, void *closure)
+SaleLeaseback_get_depr_alloc_sl_15_percent(SaleLeasebackObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Saleleaseback_DHF_depr_alloc_sl_15_percent_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Saleleaseback_SaleLeaseback_depr_alloc_sl_15_percent_nget, self->data_ptr);
 }
 
 static int
-DHF_set_depr_alloc_sl_15_percent(DHFObject *self, PyObject *value, void *closure)
+SaleLeaseback_set_depr_alloc_sl_15_percent(SaleLeasebackObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Saleleaseback_DHF_depr_alloc_sl_15_percent_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Saleleaseback_SaleLeaseback_depr_alloc_sl_15_percent_nset, self->data_ptr);
 }
 
 static PyObject *
-DHF_get_depr_alloc_sl_20_percent(DHFObject *self, void *closure)
+SaleLeaseback_get_depr_alloc_sl_20_percent(SaleLeasebackObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Saleleaseback_DHF_depr_alloc_sl_20_percent_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Saleleaseback_SaleLeaseback_depr_alloc_sl_20_percent_nget, self->data_ptr);
 }
 
 static int
-DHF_set_depr_alloc_sl_20_percent(DHFObject *self, PyObject *value, void *closure)
+SaleLeaseback_set_depr_alloc_sl_20_percent(SaleLeasebackObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Saleleaseback_DHF_depr_alloc_sl_20_percent_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Saleleaseback_SaleLeaseback_depr_alloc_sl_20_percent_nset, self->data_ptr);
 }
 
 static PyObject *
-DHF_get_depr_alloc_sl_39_percent(DHFObject *self, void *closure)
+SaleLeaseback_get_depr_alloc_sl_39_percent(SaleLeasebackObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Saleleaseback_DHF_depr_alloc_sl_39_percent_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Saleleaseback_SaleLeaseback_depr_alloc_sl_39_percent_nget, self->data_ptr);
 }
 
 static int
-DHF_set_depr_alloc_sl_39_percent(DHFObject *self, PyObject *value, void *closure)
+SaleLeaseback_set_depr_alloc_sl_39_percent(SaleLeasebackObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Saleleaseback_DHF_depr_alloc_sl_39_percent_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Saleleaseback_SaleLeaseback_depr_alloc_sl_39_percent_nset, self->data_ptr);
 }
 
 static PyObject *
-DHF_get_depr_alloc_sl_5_percent(DHFObject *self, void *closure)
+SaleLeaseback_get_depr_alloc_sl_5_percent(SaleLeasebackObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Saleleaseback_DHF_depr_alloc_sl_5_percent_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Saleleaseback_SaleLeaseback_depr_alloc_sl_5_percent_nget, self->data_ptr);
 }
 
 static int
-DHF_set_depr_alloc_sl_5_percent(DHFObject *self, PyObject *value, void *closure)
+SaleLeaseback_set_depr_alloc_sl_5_percent(SaleLeasebackObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Saleleaseback_DHF_depr_alloc_sl_5_percent_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Saleleaseback_SaleLeaseback_depr_alloc_sl_5_percent_nset, self->data_ptr);
 }
 
 static PyObject *
-DHF_get_depr_bonus_fed(DHFObject *self, void *closure)
+SaleLeaseback_get_depr_bonus_fed(SaleLeasebackObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Saleleaseback_DHF_depr_bonus_fed_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Saleleaseback_SaleLeaseback_depr_bonus_fed_nget, self->data_ptr);
 }
 
 static int
-DHF_set_depr_bonus_fed(DHFObject *self, PyObject *value, void *closure)
+SaleLeaseback_set_depr_bonus_fed(SaleLeasebackObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Saleleaseback_DHF_depr_bonus_fed_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Saleleaseback_SaleLeaseback_depr_bonus_fed_nset, self->data_ptr);
 }
 
 static PyObject *
-DHF_get_depr_bonus_fed_custom(DHFObject *self, void *closure)
+SaleLeaseback_get_depr_bonus_fed_custom(SaleLeasebackObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Saleleaseback_DHF_depr_bonus_fed_custom_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Saleleaseback_SaleLeaseback_depr_bonus_fed_custom_nget, self->data_ptr);
 }
 
 static int
-DHF_set_depr_bonus_fed_custom(DHFObject *self, PyObject *value, void *closure)
+SaleLeaseback_set_depr_bonus_fed_custom(SaleLeasebackObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Saleleaseback_DHF_depr_bonus_fed_custom_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Saleleaseback_SaleLeaseback_depr_bonus_fed_custom_nset, self->data_ptr);
 }
 
 static PyObject *
-DHF_get_depr_bonus_fed_macrs_15(DHFObject *self, void *closure)
+SaleLeaseback_get_depr_bonus_fed_macrs_15(SaleLeasebackObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Saleleaseback_DHF_depr_bonus_fed_macrs_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Saleleaseback_SaleLeaseback_depr_bonus_fed_macrs_15_nget, self->data_ptr);
 }
 
 static int
-DHF_set_depr_bonus_fed_macrs_15(DHFObject *self, PyObject *value, void *closure)
+SaleLeaseback_set_depr_bonus_fed_macrs_15(SaleLeasebackObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Saleleaseback_DHF_depr_bonus_fed_macrs_15_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Saleleaseback_SaleLeaseback_depr_bonus_fed_macrs_15_nset, self->data_ptr);
 }
 
 static PyObject *
-DHF_get_depr_bonus_fed_macrs_5(DHFObject *self, void *closure)
+SaleLeaseback_get_depr_bonus_fed_macrs_5(SaleLeasebackObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Saleleaseback_DHF_depr_bonus_fed_macrs_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Saleleaseback_SaleLeaseback_depr_bonus_fed_macrs_5_nget, self->data_ptr);
 }
 
 static int
-DHF_set_depr_bonus_fed_macrs_5(DHFObject *self, PyObject *value, void *closure)
+SaleLeaseback_set_depr_bonus_fed_macrs_5(SaleLeasebackObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Saleleaseback_DHF_depr_bonus_fed_macrs_5_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Saleleaseback_SaleLeaseback_depr_bonus_fed_macrs_5_nset, self->data_ptr);
 }
 
 static PyObject *
-DHF_get_depr_bonus_fed_sl_15(DHFObject *self, void *closure)
+SaleLeaseback_get_depr_bonus_fed_sl_15(SaleLeasebackObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Saleleaseback_DHF_depr_bonus_fed_sl_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Saleleaseback_SaleLeaseback_depr_bonus_fed_sl_15_nget, self->data_ptr);
 }
 
 static int
-DHF_set_depr_bonus_fed_sl_15(DHFObject *self, PyObject *value, void *closure)
+SaleLeaseback_set_depr_bonus_fed_sl_15(SaleLeasebackObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Saleleaseback_DHF_depr_bonus_fed_sl_15_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Saleleaseback_SaleLeaseback_depr_bonus_fed_sl_15_nset, self->data_ptr);
 }
 
 static PyObject *
-DHF_get_depr_bonus_fed_sl_20(DHFObject *self, void *closure)
+SaleLeaseback_get_depr_bonus_fed_sl_20(SaleLeasebackObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Saleleaseback_DHF_depr_bonus_fed_sl_20_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Saleleaseback_SaleLeaseback_depr_bonus_fed_sl_20_nget, self->data_ptr);
 }
 
 static int
-DHF_set_depr_bonus_fed_sl_20(DHFObject *self, PyObject *value, void *closure)
+SaleLeaseback_set_depr_bonus_fed_sl_20(SaleLeasebackObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Saleleaseback_DHF_depr_bonus_fed_sl_20_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Saleleaseback_SaleLeaseback_depr_bonus_fed_sl_20_nset, self->data_ptr);
 }
 
 static PyObject *
-DHF_get_depr_bonus_fed_sl_39(DHFObject *self, void *closure)
+SaleLeaseback_get_depr_bonus_fed_sl_39(SaleLeasebackObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Saleleaseback_DHF_depr_bonus_fed_sl_39_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Saleleaseback_SaleLeaseback_depr_bonus_fed_sl_39_nget, self->data_ptr);
 }
 
 static int
-DHF_set_depr_bonus_fed_sl_39(DHFObject *self, PyObject *value, void *closure)
+SaleLeaseback_set_depr_bonus_fed_sl_39(SaleLeasebackObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Saleleaseback_DHF_depr_bonus_fed_sl_39_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Saleleaseback_SaleLeaseback_depr_bonus_fed_sl_39_nset, self->data_ptr);
 }
 
 static PyObject *
-DHF_get_depr_bonus_fed_sl_5(DHFObject *self, void *closure)
+SaleLeaseback_get_depr_bonus_fed_sl_5(SaleLeasebackObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Saleleaseback_DHF_depr_bonus_fed_sl_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Saleleaseback_SaleLeaseback_depr_bonus_fed_sl_5_nget, self->data_ptr);
 }
 
 static int
-DHF_set_depr_bonus_fed_sl_5(DHFObject *self, PyObject *value, void *closure)
+SaleLeaseback_set_depr_bonus_fed_sl_5(SaleLeasebackObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Saleleaseback_DHF_depr_bonus_fed_sl_5_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Saleleaseback_SaleLeaseback_depr_bonus_fed_sl_5_nset, self->data_ptr);
 }
 
 static PyObject *
-DHF_get_depr_bonus_sta(DHFObject *self, void *closure)
+SaleLeaseback_get_depr_bonus_sta(SaleLeasebackObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Saleleaseback_DHF_depr_bonus_sta_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Saleleaseback_SaleLeaseback_depr_bonus_sta_nget, self->data_ptr);
 }
 
 static int
-DHF_set_depr_bonus_sta(DHFObject *self, PyObject *value, void *closure)
+SaleLeaseback_set_depr_bonus_sta(SaleLeasebackObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Saleleaseback_DHF_depr_bonus_sta_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Saleleaseback_SaleLeaseback_depr_bonus_sta_nset, self->data_ptr);
 }
 
 static PyObject *
-DHF_get_depr_bonus_sta_custom(DHFObject *self, void *closure)
+SaleLeaseback_get_depr_bonus_sta_custom(SaleLeasebackObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Saleleaseback_DHF_depr_bonus_sta_custom_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Saleleaseback_SaleLeaseback_depr_bonus_sta_custom_nget, self->data_ptr);
 }
 
 static int
-DHF_set_depr_bonus_sta_custom(DHFObject *self, PyObject *value, void *closure)
+SaleLeaseback_set_depr_bonus_sta_custom(SaleLeasebackObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Saleleaseback_DHF_depr_bonus_sta_custom_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Saleleaseback_SaleLeaseback_depr_bonus_sta_custom_nset, self->data_ptr);
 }
 
 static PyObject *
-DHF_get_depr_bonus_sta_macrs_15(DHFObject *self, void *closure)
+SaleLeaseback_get_depr_bonus_sta_macrs_15(SaleLeasebackObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Saleleaseback_DHF_depr_bonus_sta_macrs_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Saleleaseback_SaleLeaseback_depr_bonus_sta_macrs_15_nget, self->data_ptr);
 }
 
 static int
-DHF_set_depr_bonus_sta_macrs_15(DHFObject *self, PyObject *value, void *closure)
+SaleLeaseback_set_depr_bonus_sta_macrs_15(SaleLeasebackObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Saleleaseback_DHF_depr_bonus_sta_macrs_15_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Saleleaseback_SaleLeaseback_depr_bonus_sta_macrs_15_nset, self->data_ptr);
 }
 
 static PyObject *
-DHF_get_depr_bonus_sta_macrs_5(DHFObject *self, void *closure)
+SaleLeaseback_get_depr_bonus_sta_macrs_5(SaleLeasebackObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Saleleaseback_DHF_depr_bonus_sta_macrs_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Saleleaseback_SaleLeaseback_depr_bonus_sta_macrs_5_nget, self->data_ptr);
 }
 
 static int
-DHF_set_depr_bonus_sta_macrs_5(DHFObject *self, PyObject *value, void *closure)
+SaleLeaseback_set_depr_bonus_sta_macrs_5(SaleLeasebackObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Saleleaseback_DHF_depr_bonus_sta_macrs_5_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Saleleaseback_SaleLeaseback_depr_bonus_sta_macrs_5_nset, self->data_ptr);
 }
 
 static PyObject *
-DHF_get_depr_bonus_sta_sl_15(DHFObject *self, void *closure)
+SaleLeaseback_get_depr_bonus_sta_sl_15(SaleLeasebackObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Saleleaseback_DHF_depr_bonus_sta_sl_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Saleleaseback_SaleLeaseback_depr_bonus_sta_sl_15_nget, self->data_ptr);
 }
 
 static int
-DHF_set_depr_bonus_sta_sl_15(DHFObject *self, PyObject *value, void *closure)
+SaleLeaseback_set_depr_bonus_sta_sl_15(SaleLeasebackObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Saleleaseback_DHF_depr_bonus_sta_sl_15_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Saleleaseback_SaleLeaseback_depr_bonus_sta_sl_15_nset, self->data_ptr);
 }
 
 static PyObject *
-DHF_get_depr_bonus_sta_sl_20(DHFObject *self, void *closure)
+SaleLeaseback_get_depr_bonus_sta_sl_20(SaleLeasebackObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Saleleaseback_DHF_depr_bonus_sta_sl_20_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Saleleaseback_SaleLeaseback_depr_bonus_sta_sl_20_nget, self->data_ptr);
 }
 
 static int
-DHF_set_depr_bonus_sta_sl_20(DHFObject *self, PyObject *value, void *closure)
+SaleLeaseback_set_depr_bonus_sta_sl_20(SaleLeasebackObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Saleleaseback_DHF_depr_bonus_sta_sl_20_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Saleleaseback_SaleLeaseback_depr_bonus_sta_sl_20_nset, self->data_ptr);
 }
 
 static PyObject *
-DHF_get_depr_bonus_sta_sl_39(DHFObject *self, void *closure)
+SaleLeaseback_get_depr_bonus_sta_sl_39(SaleLeasebackObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Saleleaseback_DHF_depr_bonus_sta_sl_39_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Saleleaseback_SaleLeaseback_depr_bonus_sta_sl_39_nget, self->data_ptr);
 }
 
 static int
-DHF_set_depr_bonus_sta_sl_39(DHFObject *self, PyObject *value, void *closure)
+SaleLeaseback_set_depr_bonus_sta_sl_39(SaleLeasebackObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Saleleaseback_DHF_depr_bonus_sta_sl_39_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Saleleaseback_SaleLeaseback_depr_bonus_sta_sl_39_nset, self->data_ptr);
 }
 
 static PyObject *
-DHF_get_depr_bonus_sta_sl_5(DHFObject *self, void *closure)
+SaleLeaseback_get_depr_bonus_sta_sl_5(SaleLeasebackObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Saleleaseback_DHF_depr_bonus_sta_sl_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Saleleaseback_SaleLeaseback_depr_bonus_sta_sl_5_nget, self->data_ptr);
 }
 
 static int
-DHF_set_depr_bonus_sta_sl_5(DHFObject *self, PyObject *value, void *closure)
+SaleLeaseback_set_depr_bonus_sta_sl_5(SaleLeasebackObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Saleleaseback_DHF_depr_bonus_sta_sl_5_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Saleleaseback_SaleLeaseback_depr_bonus_sta_sl_5_nset, self->data_ptr);
 }
 
 static PyObject *
-DHF_get_depr_custom_schedule(DHFObject *self, void *closure)
+SaleLeaseback_get_depr_custom_schedule(SaleLeasebackObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Saleleaseback_DHF_depr_custom_schedule_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Saleleaseback_SaleLeaseback_depr_custom_schedule_aget, self->data_ptr);
 }
 
 static int
-DHF_set_depr_custom_schedule(DHFObject *self, PyObject *value, void *closure)
+SaleLeaseback_set_depr_custom_schedule(SaleLeasebackObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_Saleleaseback_DHF_depr_custom_schedule_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Saleleaseback_SaleLeaseback_depr_custom_schedule_aset, self->data_ptr);
 }
 
 static PyObject *
-DHF_get_depr_fedbas_method(DHFObject *self, void *closure)
+SaleLeaseback_get_depr_fedbas_method(SaleLeasebackObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Saleleaseback_DHF_depr_fedbas_method_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Saleleaseback_SaleLeaseback_depr_fedbas_method_nget, self->data_ptr);
 }
 
 static int
-DHF_set_depr_fedbas_method(DHFObject *self, PyObject *value, void *closure)
+SaleLeaseback_set_depr_fedbas_method(SaleLeasebackObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Saleleaseback_DHF_depr_fedbas_method_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Saleleaseback_SaleLeaseback_depr_fedbas_method_nset, self->data_ptr);
 }
 
 static PyObject *
-DHF_get_depr_itc_fed_custom(DHFObject *self, void *closure)
+SaleLeaseback_get_depr_itc_fed_custom(SaleLeasebackObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Saleleaseback_DHF_depr_itc_fed_custom_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Saleleaseback_SaleLeaseback_depr_itc_fed_custom_nget, self->data_ptr);
 }
 
 static int
-DHF_set_depr_itc_fed_custom(DHFObject *self, PyObject *value, void *closure)
+SaleLeaseback_set_depr_itc_fed_custom(SaleLeasebackObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Saleleaseback_DHF_depr_itc_fed_custom_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Saleleaseback_SaleLeaseback_depr_itc_fed_custom_nset, self->data_ptr);
 }
 
 static PyObject *
-DHF_get_depr_itc_fed_macrs_15(DHFObject *self, void *closure)
+SaleLeaseback_get_depr_itc_fed_macrs_15(SaleLeasebackObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Saleleaseback_DHF_depr_itc_fed_macrs_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Saleleaseback_SaleLeaseback_depr_itc_fed_macrs_15_nget, self->data_ptr);
 }
 
 static int
-DHF_set_depr_itc_fed_macrs_15(DHFObject *self, PyObject *value, void *closure)
+SaleLeaseback_set_depr_itc_fed_macrs_15(SaleLeasebackObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Saleleaseback_DHF_depr_itc_fed_macrs_15_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Saleleaseback_SaleLeaseback_depr_itc_fed_macrs_15_nset, self->data_ptr);
 }
 
 static PyObject *
-DHF_get_depr_itc_fed_macrs_5(DHFObject *self, void *closure)
+SaleLeaseback_get_depr_itc_fed_macrs_5(SaleLeasebackObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Saleleaseback_DHF_depr_itc_fed_macrs_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Saleleaseback_SaleLeaseback_depr_itc_fed_macrs_5_nget, self->data_ptr);
 }
 
 static int
-DHF_set_depr_itc_fed_macrs_5(DHFObject *self, PyObject *value, void *closure)
+SaleLeaseback_set_depr_itc_fed_macrs_5(SaleLeasebackObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Saleleaseback_DHF_depr_itc_fed_macrs_5_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Saleleaseback_SaleLeaseback_depr_itc_fed_macrs_5_nset, self->data_ptr);
 }
 
 static PyObject *
-DHF_get_depr_itc_fed_sl_15(DHFObject *self, void *closure)
+SaleLeaseback_get_depr_itc_fed_sl_15(SaleLeasebackObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Saleleaseback_DHF_depr_itc_fed_sl_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Saleleaseback_SaleLeaseback_depr_itc_fed_sl_15_nget, self->data_ptr);
 }
 
 static int
-DHF_set_depr_itc_fed_sl_15(DHFObject *self, PyObject *value, void *closure)
+SaleLeaseback_set_depr_itc_fed_sl_15(SaleLeasebackObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Saleleaseback_DHF_depr_itc_fed_sl_15_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Saleleaseback_SaleLeaseback_depr_itc_fed_sl_15_nset, self->data_ptr);
 }
 
 static PyObject *
-DHF_get_depr_itc_fed_sl_20(DHFObject *self, void *closure)
+SaleLeaseback_get_depr_itc_fed_sl_20(SaleLeasebackObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Saleleaseback_DHF_depr_itc_fed_sl_20_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Saleleaseback_SaleLeaseback_depr_itc_fed_sl_20_nget, self->data_ptr);
 }
 
 static int
-DHF_set_depr_itc_fed_sl_20(DHFObject *self, PyObject *value, void *closure)
+SaleLeaseback_set_depr_itc_fed_sl_20(SaleLeasebackObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Saleleaseback_DHF_depr_itc_fed_sl_20_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Saleleaseback_SaleLeaseback_depr_itc_fed_sl_20_nset, self->data_ptr);
 }
 
 static PyObject *
-DHF_get_depr_itc_fed_sl_39(DHFObject *self, void *closure)
+SaleLeaseback_get_depr_itc_fed_sl_39(SaleLeasebackObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Saleleaseback_DHF_depr_itc_fed_sl_39_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Saleleaseback_SaleLeaseback_depr_itc_fed_sl_39_nget, self->data_ptr);
 }
 
 static int
-DHF_set_depr_itc_fed_sl_39(DHFObject *self, PyObject *value, void *closure)
+SaleLeaseback_set_depr_itc_fed_sl_39(SaleLeasebackObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Saleleaseback_DHF_depr_itc_fed_sl_39_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Saleleaseback_SaleLeaseback_depr_itc_fed_sl_39_nset, self->data_ptr);
 }
 
 static PyObject *
-DHF_get_depr_itc_fed_sl_5(DHFObject *self, void *closure)
+SaleLeaseback_get_depr_itc_fed_sl_5(SaleLeasebackObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Saleleaseback_DHF_depr_itc_fed_sl_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Saleleaseback_SaleLeaseback_depr_itc_fed_sl_5_nget, self->data_ptr);
 }
 
 static int
-DHF_set_depr_itc_fed_sl_5(DHFObject *self, PyObject *value, void *closure)
+SaleLeaseback_set_depr_itc_fed_sl_5(SaleLeasebackObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Saleleaseback_DHF_depr_itc_fed_sl_5_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Saleleaseback_SaleLeaseback_depr_itc_fed_sl_5_nset, self->data_ptr);
 }
 
 static PyObject *
-DHF_get_depr_itc_sta_custom(DHFObject *self, void *closure)
+SaleLeaseback_get_depr_itc_sta_custom(SaleLeasebackObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Saleleaseback_DHF_depr_itc_sta_custom_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Saleleaseback_SaleLeaseback_depr_itc_sta_custom_nget, self->data_ptr);
 }
 
 static int
-DHF_set_depr_itc_sta_custom(DHFObject *self, PyObject *value, void *closure)
+SaleLeaseback_set_depr_itc_sta_custom(SaleLeasebackObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Saleleaseback_DHF_depr_itc_sta_custom_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Saleleaseback_SaleLeaseback_depr_itc_sta_custom_nset, self->data_ptr);
 }
 
 static PyObject *
-DHF_get_depr_itc_sta_macrs_15(DHFObject *self, void *closure)
+SaleLeaseback_get_depr_itc_sta_macrs_15(SaleLeasebackObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Saleleaseback_DHF_depr_itc_sta_macrs_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Saleleaseback_SaleLeaseback_depr_itc_sta_macrs_15_nget, self->data_ptr);
 }
 
 static int
-DHF_set_depr_itc_sta_macrs_15(DHFObject *self, PyObject *value, void *closure)
+SaleLeaseback_set_depr_itc_sta_macrs_15(SaleLeasebackObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Saleleaseback_DHF_depr_itc_sta_macrs_15_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Saleleaseback_SaleLeaseback_depr_itc_sta_macrs_15_nset, self->data_ptr);
 }
 
 static PyObject *
-DHF_get_depr_itc_sta_macrs_5(DHFObject *self, void *closure)
+SaleLeaseback_get_depr_itc_sta_macrs_5(SaleLeasebackObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Saleleaseback_DHF_depr_itc_sta_macrs_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Saleleaseback_SaleLeaseback_depr_itc_sta_macrs_5_nget, self->data_ptr);
 }
 
 static int
-DHF_set_depr_itc_sta_macrs_5(DHFObject *self, PyObject *value, void *closure)
+SaleLeaseback_set_depr_itc_sta_macrs_5(SaleLeasebackObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Saleleaseback_DHF_depr_itc_sta_macrs_5_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Saleleaseback_SaleLeaseback_depr_itc_sta_macrs_5_nset, self->data_ptr);
 }
 
 static PyObject *
-DHF_get_depr_itc_sta_sl_15(DHFObject *self, void *closure)
+SaleLeaseback_get_depr_itc_sta_sl_15(SaleLeasebackObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Saleleaseback_DHF_depr_itc_sta_sl_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Saleleaseback_SaleLeaseback_depr_itc_sta_sl_15_nget, self->data_ptr);
 }
 
 static int
-DHF_set_depr_itc_sta_sl_15(DHFObject *self, PyObject *value, void *closure)
+SaleLeaseback_set_depr_itc_sta_sl_15(SaleLeasebackObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Saleleaseback_DHF_depr_itc_sta_sl_15_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Saleleaseback_SaleLeaseback_depr_itc_sta_sl_15_nset, self->data_ptr);
 }
 
 static PyObject *
-DHF_get_depr_itc_sta_sl_20(DHFObject *self, void *closure)
+SaleLeaseback_get_depr_itc_sta_sl_20(SaleLeasebackObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Saleleaseback_DHF_depr_itc_sta_sl_20_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Saleleaseback_SaleLeaseback_depr_itc_sta_sl_20_nget, self->data_ptr);
 }
 
 static int
-DHF_set_depr_itc_sta_sl_20(DHFObject *self, PyObject *value, void *closure)
+SaleLeaseback_set_depr_itc_sta_sl_20(SaleLeasebackObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Saleleaseback_DHF_depr_itc_sta_sl_20_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Saleleaseback_SaleLeaseback_depr_itc_sta_sl_20_nset, self->data_ptr);
 }
 
 static PyObject *
-DHF_get_depr_itc_sta_sl_39(DHFObject *self, void *closure)
+SaleLeaseback_get_depr_itc_sta_sl_39(SaleLeasebackObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Saleleaseback_DHF_depr_itc_sta_sl_39_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Saleleaseback_SaleLeaseback_depr_itc_sta_sl_39_nget, self->data_ptr);
 }
 
 static int
-DHF_set_depr_itc_sta_sl_39(DHFObject *self, PyObject *value, void *closure)
+SaleLeaseback_set_depr_itc_sta_sl_39(SaleLeasebackObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Saleleaseback_DHF_depr_itc_sta_sl_39_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Saleleaseback_SaleLeaseback_depr_itc_sta_sl_39_nset, self->data_ptr);
 }
 
 static PyObject *
-DHF_get_depr_itc_sta_sl_5(DHFObject *self, void *closure)
+SaleLeaseback_get_depr_itc_sta_sl_5(SaleLeasebackObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Saleleaseback_DHF_depr_itc_sta_sl_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Saleleaseback_SaleLeaseback_depr_itc_sta_sl_5_nget, self->data_ptr);
 }
 
 static int
-DHF_set_depr_itc_sta_sl_5(DHFObject *self, PyObject *value, void *closure)
+SaleLeaseback_set_depr_itc_sta_sl_5(SaleLeasebackObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Saleleaseback_DHF_depr_itc_sta_sl_5_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Saleleaseback_SaleLeaseback_depr_itc_sta_sl_5_nset, self->data_ptr);
 }
 
 static PyObject *
-DHF_get_depr_stabas_method(DHFObject *self, void *closure)
+SaleLeaseback_get_depr_stabas_method(SaleLeasebackObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Saleleaseback_DHF_depr_stabas_method_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Saleleaseback_SaleLeaseback_depr_stabas_method_nget, self->data_ptr);
 }
 
 static int
-DHF_set_depr_stabas_method(DHFObject *self, PyObject *value, void *closure)
+SaleLeaseback_set_depr_stabas_method(SaleLeasebackObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Saleleaseback_DHF_depr_stabas_method_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Saleleaseback_SaleLeaseback_depr_stabas_method_nset, self->data_ptr);
 }
 
 static PyObject *
-DHF_get_equip_reserve_depr_fed(DHFObject *self, void *closure)
+SaleLeaseback_get_equip_reserve_depr_fed(SaleLeasebackObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Saleleaseback_DHF_equip_reserve_depr_fed_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Saleleaseback_SaleLeaseback_equip_reserve_depr_fed_nget, self->data_ptr);
 }
 
 static int
-DHF_set_equip_reserve_depr_fed(DHFObject *self, PyObject *value, void *closure)
+SaleLeaseback_set_equip_reserve_depr_fed(SaleLeasebackObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Saleleaseback_DHF_equip_reserve_depr_fed_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Saleleaseback_SaleLeaseback_equip_reserve_depr_fed_nset, self->data_ptr);
 }
 
 static PyObject *
-DHF_get_equip_reserve_depr_sta(DHFObject *self, void *closure)
+SaleLeaseback_get_equip_reserve_depr_sta(SaleLeasebackObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Saleleaseback_DHF_equip_reserve_depr_sta_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Saleleaseback_SaleLeaseback_equip_reserve_depr_sta_nget, self->data_ptr);
 }
 
 static int
-DHF_set_equip_reserve_depr_sta(DHFObject *self, PyObject *value, void *closure)
+SaleLeaseback_set_equip_reserve_depr_sta(SaleLeasebackObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Saleleaseback_DHF_equip_reserve_depr_sta_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Saleleaseback_SaleLeaseback_equip_reserve_depr_sta_nset, self->data_ptr);
 }
 
 static PyObject *
-DHF_get_flip_target_percent(DHFObject *self, void *closure)
+SaleLeaseback_get_flip_target_percent(SaleLeasebackObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Saleleaseback_DHF_flip_target_percent_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Saleleaseback_SaleLeaseback_flip_target_percent_nget, self->data_ptr);
 }
 
 static int
-DHF_set_flip_target_percent(DHFObject *self, PyObject *value, void *closure)
+SaleLeaseback_set_flip_target_percent(SaleLeasebackObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Saleleaseback_DHF_flip_target_percent_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Saleleaseback_SaleLeaseback_flip_target_percent_nset, self->data_ptr);
 }
 
 static PyObject *
-DHF_get_flip_target_year(DHFObject *self, void *closure)
+SaleLeaseback_get_flip_target_year(SaleLeasebackObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Saleleaseback_DHF_flip_target_year_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Saleleaseback_SaleLeaseback_flip_target_year_nget, self->data_ptr);
 }
 
 static int
-DHF_set_flip_target_year(DHFObject *self, PyObject *value, void *closure)
+SaleLeaseback_set_flip_target_year(SaleLeasebackObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Saleleaseback_DHF_flip_target_year_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Saleleaseback_SaleLeaseback_flip_target_year_nset, self->data_ptr);
 }
 
 static PyObject *
-DHF_get_ppa_escalation(DHFObject *self, void *closure)
+SaleLeaseback_get_ppa_escalation(SaleLeasebackObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Saleleaseback_DHF_ppa_escalation_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Saleleaseback_SaleLeaseback_ppa_escalation_nget, self->data_ptr);
 }
 
 static int
-DHF_set_ppa_escalation(DHFObject *self, PyObject *value, void *closure)
+SaleLeaseback_set_ppa_escalation(SaleLeasebackObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Saleleaseback_DHF_ppa_escalation_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Saleleaseback_SaleLeaseback_ppa_escalation_nset, self->data_ptr);
 }
 
 static PyObject *
-DHF_get_ppa_price_input(DHFObject *self, void *closure)
+SaleLeaseback_get_ppa_price_input(SaleLeasebackObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Saleleaseback_DHF_ppa_price_input_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Saleleaseback_SaleLeaseback_ppa_price_input_nget, self->data_ptr);
 }
 
 static int
-DHF_set_ppa_price_input(DHFObject *self, PyObject *value, void *closure)
+SaleLeaseback_set_ppa_price_input(SaleLeasebackObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Saleleaseback_DHF_ppa_price_input_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Saleleaseback_SaleLeaseback_ppa_price_input_nset, self->data_ptr);
 }
 
 static PyObject *
-DHF_get_ppa_soln_max(DHFObject *self, void *closure)
+SaleLeaseback_get_ppa_soln_max(SaleLeasebackObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Saleleaseback_DHF_ppa_soln_max_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Saleleaseback_SaleLeaseback_ppa_soln_max_nget, self->data_ptr);
 }
 
 static int
-DHF_set_ppa_soln_max(DHFObject *self, PyObject *value, void *closure)
+SaleLeaseback_set_ppa_soln_max(SaleLeasebackObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Saleleaseback_DHF_ppa_soln_max_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Saleleaseback_SaleLeaseback_ppa_soln_max_nset, self->data_ptr);
 }
 
 static PyObject *
-DHF_get_ppa_soln_max_iterations(DHFObject *self, void *closure)
+SaleLeaseback_get_ppa_soln_max_iterations(SaleLeasebackObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Saleleaseback_DHF_ppa_soln_max_iterations_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Saleleaseback_SaleLeaseback_ppa_soln_max_iterations_nget, self->data_ptr);
 }
 
 static int
-DHF_set_ppa_soln_max_iterations(DHFObject *self, PyObject *value, void *closure)
+SaleLeaseback_set_ppa_soln_max_iterations(SaleLeasebackObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Saleleaseback_DHF_ppa_soln_max_iterations_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Saleleaseback_SaleLeaseback_ppa_soln_max_iterations_nset, self->data_ptr);
 }
 
 static PyObject *
-DHF_get_ppa_soln_min(DHFObject *self, void *closure)
+SaleLeaseback_get_ppa_soln_min(SaleLeasebackObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Saleleaseback_DHF_ppa_soln_min_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Saleleaseback_SaleLeaseback_ppa_soln_min_nget, self->data_ptr);
 }
 
 static int
-DHF_set_ppa_soln_min(DHFObject *self, PyObject *value, void *closure)
+SaleLeaseback_set_ppa_soln_min(SaleLeasebackObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Saleleaseback_DHF_ppa_soln_min_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Saleleaseback_SaleLeaseback_ppa_soln_min_nset, self->data_ptr);
 }
 
 static PyObject *
-DHF_get_ppa_soln_mode(DHFObject *self, void *closure)
+SaleLeaseback_get_ppa_soln_mode(SaleLeasebackObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Saleleaseback_DHF_ppa_soln_mode_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Saleleaseback_SaleLeaseback_ppa_soln_mode_nget, self->data_ptr);
 }
 
 static int
-DHF_set_ppa_soln_mode(DHFObject *self, PyObject *value, void *closure)
+SaleLeaseback_set_ppa_soln_mode(SaleLeasebackObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Saleleaseback_DHF_ppa_soln_mode_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Saleleaseback_SaleLeaseback_ppa_soln_mode_nset, self->data_ptr);
 }
 
 static PyObject *
-DHF_get_ppa_soln_tolerance(DHFObject *self, void *closure)
+SaleLeaseback_get_ppa_soln_tolerance(SaleLeasebackObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Saleleaseback_DHF_ppa_soln_tolerance_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Saleleaseback_SaleLeaseback_ppa_soln_tolerance_nget, self->data_ptr);
 }
 
 static int
-DHF_set_ppa_soln_tolerance(DHFObject *self, PyObject *value, void *closure)
+SaleLeaseback_set_ppa_soln_tolerance(SaleLeasebackObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Saleleaseback_DHF_ppa_soln_tolerance_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Saleleaseback_SaleLeaseback_ppa_soln_tolerance_nset, self->data_ptr);
 }
 
 static PyObject *
-DHF_get_reserves_interest(DHFObject *self, void *closure)
+SaleLeaseback_get_reserves_interest(SaleLeasebackObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Saleleaseback_DHF_reserves_interest_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Saleleaseback_SaleLeaseback_reserves_interest_nget, self->data_ptr);
 }
 
 static int
-DHF_set_reserves_interest(DHFObject *self, PyObject *value, void *closure)
+SaleLeaseback_set_reserves_interest(SaleLeasebackObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Saleleaseback_DHF_reserves_interest_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Saleleaseback_SaleLeaseback_reserves_interest_nset, self->data_ptr);
 }
 
 static PyObject *
-DHF_get_salvage_percentage(DHFObject *self, void *closure)
+SaleLeaseback_get_salvage_percentage(SaleLeasebackObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Saleleaseback_DHF_salvage_percentage_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Saleleaseback_SaleLeaseback_salvage_percentage_nget, self->data_ptr);
 }
 
 static int
-DHF_set_salvage_percentage(DHFObject *self, PyObject *value, void *closure)
+SaleLeaseback_set_salvage_percentage(SaleLeasebackObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Saleleaseback_DHF_salvage_percentage_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Saleleaseback_SaleLeaseback_salvage_percentage_nset, self->data_ptr);
 }
 
 static PyObject *
-DHF_get_sponsor_operating_margin(DHFObject *self, void *closure)
+SaleLeaseback_get_sponsor_operating_margin(SaleLeasebackObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Saleleaseback_DHF_sponsor_operating_margin_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Saleleaseback_SaleLeaseback_sponsor_operating_margin_nget, self->data_ptr);
 }
 
 static int
-DHF_set_sponsor_operating_margin(DHFObject *self, PyObject *value, void *closure)
+SaleLeaseback_set_sponsor_operating_margin(SaleLeasebackObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Saleleaseback_DHF_sponsor_operating_margin_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Saleleaseback_SaleLeaseback_sponsor_operating_margin_nset, self->data_ptr);
 }
 
 static PyObject *
-DHF_get_sponsor_operating_margin_escalation(DHFObject *self, void *closure)
+SaleLeaseback_get_sponsor_operating_margin_escalation(SaleLeasebackObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Saleleaseback_DHF_sponsor_operating_margin_escalation_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Saleleaseback_SaleLeaseback_sponsor_operating_margin_escalation_nget, self->data_ptr);
 }
 
 static int
-DHF_set_sponsor_operating_margin_escalation(DHFObject *self, PyObject *value, void *closure)
+SaleLeaseback_set_sponsor_operating_margin_escalation(SaleLeasebackObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Saleleaseback_DHF_sponsor_operating_margin_escalation_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Saleleaseback_SaleLeaseback_sponsor_operating_margin_escalation_nset, self->data_ptr);
 }
 
 static PyObject *
-DHF_get_system_lifetime_recapitalize(DHFObject *self, void *closure)
+SaleLeaseback_get_system_lifetime_recapitalize(SaleLeasebackObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Saleleaseback_DHF_system_lifetime_recapitalize_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Saleleaseback_SaleLeaseback_system_lifetime_recapitalize_aget, self->data_ptr);
 }
 
 static int
-DHF_set_system_lifetime_recapitalize(DHFObject *self, PyObject *value, void *closure)
+SaleLeaseback_set_system_lifetime_recapitalize(SaleLeasebackObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_Saleleaseback_DHF_system_lifetime_recapitalize_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Saleleaseback_SaleLeaseback_system_lifetime_recapitalize_aset, self->data_ptr);
 }
 
 static PyObject *
-DHF_get_system_recapitalization_cost(DHFObject *self, void *closure)
+SaleLeaseback_get_system_recapitalization_cost(SaleLeasebackObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Saleleaseback_DHF_system_recapitalization_cost_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Saleleaseback_SaleLeaseback_system_recapitalization_cost_nget, self->data_ptr);
 }
 
 static int
-DHF_set_system_recapitalization_cost(DHFObject *self, PyObject *value, void *closure)
+SaleLeaseback_set_system_recapitalization_cost(SaleLeasebackObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Saleleaseback_DHF_system_recapitalization_cost_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Saleleaseback_SaleLeaseback_system_recapitalization_cost_nset, self->data_ptr);
 }
 
 static PyObject *
-DHF_get_system_recapitalization_escalation(DHFObject *self, void *closure)
+SaleLeaseback_get_system_recapitalization_escalation(SaleLeasebackObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Saleleaseback_DHF_system_recapitalization_escalation_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Saleleaseback_SaleLeaseback_system_recapitalization_escalation_nget, self->data_ptr);
 }
 
 static int
-DHF_set_system_recapitalization_escalation(DHFObject *self, PyObject *value, void *closure)
+SaleLeaseback_set_system_recapitalization_escalation(SaleLeasebackObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Saleleaseback_DHF_system_recapitalization_escalation_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Saleleaseback_SaleLeaseback_system_recapitalization_escalation_nset, self->data_ptr);
 }
 
 static PyObject *
-DHF_get_system_use_lifetime_output(DHFObject *self, void *closure)
+SaleLeaseback_get_system_use_lifetime_output(SaleLeasebackObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Saleleaseback_DHF_system_use_lifetime_output_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Saleleaseback_SaleLeaseback_system_use_lifetime_output_nget, self->data_ptr);
 }
 
 static int
-DHF_set_system_use_lifetime_output(DHFObject *self, PyObject *value, void *closure)
+SaleLeaseback_set_system_use_lifetime_output(SaleLeasebackObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Saleleaseback_DHF_system_use_lifetime_output_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Saleleaseback_SaleLeaseback_system_use_lifetime_output_nset, self->data_ptr);
 }
 
 static PyObject *
-DHF_get_system_use_recapitalization(DHFObject *self, void *closure)
+SaleLeaseback_get_system_use_recapitalization(SaleLeasebackObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Saleleaseback_DHF_system_use_recapitalization_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Saleleaseback_SaleLeaseback_system_use_recapitalization_nget, self->data_ptr);
 }
 
 static int
-DHF_set_system_use_recapitalization(DHFObject *self, PyObject *value, void *closure)
+SaleLeaseback_set_system_use_recapitalization(SaleLeasebackObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Saleleaseback_DHF_system_use_recapitalization_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Saleleaseback_SaleLeaseback_system_use_recapitalization_nset, self->data_ptr);
 }
 
 static PyObject *
-DHF_get_tax_investor_required_lease_reserve(DHFObject *self, void *closure)
+SaleLeaseback_get_tax_investor_required_lease_reserve(SaleLeasebackObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Saleleaseback_DHF_tax_investor_required_lease_reserve_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Saleleaseback_SaleLeaseback_tax_investor_required_lease_reserve_nget, self->data_ptr);
 }
 
 static int
-DHF_set_tax_investor_required_lease_reserve(DHFObject *self, PyObject *value, void *closure)
+SaleLeaseback_set_tax_investor_required_lease_reserve(SaleLeasebackObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Saleleaseback_DHF_tax_investor_required_lease_reserve_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Saleleaseback_SaleLeaseback_tax_investor_required_lease_reserve_nset, self->data_ptr);
 }
 
 static PyObject *
-DHF_get_total_installed_cost(DHFObject *self, void *closure)
+SaleLeaseback_get_total_installed_cost(SaleLeasebackObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Saleleaseback_DHF_total_installed_cost_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Saleleaseback_SaleLeaseback_total_installed_cost_nget, self->data_ptr);
 }
 
 static int
-DHF_set_total_installed_cost(DHFObject *self, PyObject *value, void *closure)
+SaleLeaseback_set_total_installed_cost(SaleLeasebackObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Saleleaseback_DHF_total_installed_cost_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Saleleaseback_SaleLeaseback_total_installed_cost_nset, self->data_ptr);
 }
 
-static PyGetSetDef DHF_getset[] = {
-{"construction_financing_cost", (getter)DHF_get_construction_financing_cost,(setter)DHF_set_construction_financing_cost,
+static PyGetSetDef SaleLeaseback_getset[] = {
+{"construction_financing_cost", (getter)SaleLeaseback_get_construction_financing_cost,(setter)SaleLeaseback_set_construction_financing_cost,
 	PyDoc_STR("*float*: Construction financing total [$]\n\n*Required*: True"),
  	NULL},
-{"cost_dev_fee_percent", (getter)DHF_get_cost_dev_fee_percent,(setter)DHF_set_cost_dev_fee_percent,
-	PyDoc_STR("*float*: Development fee (% pre-financing cost) [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: set to 3 if not provided."),
+{"cost_dev_fee_percent", (getter)SaleLeaseback_get_cost_dev_fee_percent,(setter)SaleLeaseback_set_cost_dev_fee_percent,
+	PyDoc_STR("*float*: Development fee (% pre-financing cost) [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 3"),
  	NULL},
-{"cost_equity_closing", (getter)DHF_get_cost_equity_closing,(setter)DHF_set_cost_equity_closing,
-	PyDoc_STR("*float*: Equity closing cost [$]\n\n*Constraints*: MIN=0\n\n*Required*: set to 100000 if not provided."),
+{"cost_equity_closing", (getter)SaleLeaseback_get_cost_equity_closing,(setter)SaleLeaseback_set_cost_equity_closing,
+	PyDoc_STR("*float*: Equity closing cost [$]\n\n*Constraints*: MIN=0\n\n*Required*: If not provided, assumed to be 100000"),
  	NULL},
-{"cost_other_financing", (getter)DHF_get_cost_other_financing,(setter)DHF_set_cost_other_financing,
-	PyDoc_STR("*float*:  [$]\n\n*Info*: Other Financing Cost\n\n*Constraints*: MIN=0\n\n*Required*: set to 150000 if not provided."),
+{"cost_other_financing", (getter)SaleLeaseback_get_cost_other_financing,(setter)SaleLeaseback_set_cost_other_financing,
+	PyDoc_STR("*float*:  [$]\n\n*Info*: Other Financing Cost\n\n*Constraints*: MIN=0\n\n*Required*: If not provided, assumed to be 150000"),
  	NULL},
-{"depr_alloc_custom_percent", (getter)DHF_get_depr_alloc_custom_percent,(setter)DHF_set_depr_alloc_custom_percent,
-	PyDoc_STR("*float*: Custom depreciation federal and state allocation [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: set to 0 if not provided."),
+{"depr_alloc_custom_percent", (getter)SaleLeaseback_get_depr_alloc_custom_percent,(setter)SaleLeaseback_set_depr_alloc_custom_percent,
+	PyDoc_STR("*float*: Custom depreciation federal and state allocation [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
-{"depr_alloc_macrs_15_percent", (getter)DHF_get_depr_alloc_macrs_15_percent,(setter)DHF_set_depr_alloc_macrs_15_percent,
-	PyDoc_STR("*float*: 15-yr MACRS depreciation federal and state allocation [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: set to 1.5 if not provided."),
+{"depr_alloc_macrs_15_percent", (getter)SaleLeaseback_get_depr_alloc_macrs_15_percent,(setter)SaleLeaseback_set_depr_alloc_macrs_15_percent,
+	PyDoc_STR("*float*: 15-yr MACRS depreciation federal and state allocation [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 1.5"),
  	NULL},
-{"depr_alloc_macrs_5_percent", (getter)DHF_get_depr_alloc_macrs_5_percent,(setter)DHF_set_depr_alloc_macrs_5_percent,
-	PyDoc_STR("*float*: 5-yr MACRS depreciation federal and state allocation [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: set to 89 if not provided."),
+{"depr_alloc_macrs_5_percent", (getter)SaleLeaseback_get_depr_alloc_macrs_5_percent,(setter)SaleLeaseback_set_depr_alloc_macrs_5_percent,
+	PyDoc_STR("*float*: 5-yr MACRS depreciation federal and state allocation [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 89"),
  	NULL},
-{"depr_alloc_sl_15_percent", (getter)DHF_get_depr_alloc_sl_15_percent,(setter)DHF_set_depr_alloc_sl_15_percent,
-	PyDoc_STR("*float*: 15-yr straight line depreciation federal and state allocation [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: set to 3 if not provided."),
+{"depr_alloc_sl_15_percent", (getter)SaleLeaseback_get_depr_alloc_sl_15_percent,(setter)SaleLeaseback_set_depr_alloc_sl_15_percent,
+	PyDoc_STR("*float*: 15-yr straight line depreciation federal and state allocation [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 3"),
  	NULL},
-{"depr_alloc_sl_20_percent", (getter)DHF_get_depr_alloc_sl_20_percent,(setter)DHF_set_depr_alloc_sl_20_percent,
-	PyDoc_STR("*float*: 20-yr straight line depreciation federal and state allocation [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: set to 3 if not provided."),
+{"depr_alloc_sl_20_percent", (getter)SaleLeaseback_get_depr_alloc_sl_20_percent,(setter)SaleLeaseback_set_depr_alloc_sl_20_percent,
+	PyDoc_STR("*float*: 20-yr straight line depreciation federal and state allocation [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 3"),
  	NULL},
-{"depr_alloc_sl_39_percent", (getter)DHF_get_depr_alloc_sl_39_percent,(setter)DHF_set_depr_alloc_sl_39_percent,
-	PyDoc_STR("*float*: 39-yr straight line depreciation federal and state allocation [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: set to 0.5 if not provided."),
+{"depr_alloc_sl_39_percent", (getter)SaleLeaseback_get_depr_alloc_sl_39_percent,(setter)SaleLeaseback_set_depr_alloc_sl_39_percent,
+	PyDoc_STR("*float*: 39-yr straight line depreciation federal and state allocation [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 0.5"),
  	NULL},
-{"depr_alloc_sl_5_percent", (getter)DHF_get_depr_alloc_sl_5_percent,(setter)DHF_set_depr_alloc_sl_5_percent,
-	PyDoc_STR("*float*: 5-yr straight line depreciation federal and state allocation [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: set to 0 if not provided."),
+{"depr_alloc_sl_5_percent", (getter)SaleLeaseback_get_depr_alloc_sl_5_percent,(setter)SaleLeaseback_set_depr_alloc_sl_5_percent,
+	PyDoc_STR("*float*: 5-yr straight line depreciation federal and state allocation [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
-{"depr_bonus_fed", (getter)DHF_get_depr_bonus_fed,(setter)DHF_set_depr_bonus_fed,
-	PyDoc_STR("*float*: Federal bonus depreciation [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: set to 0 if not provided."),
+{"depr_bonus_fed", (getter)SaleLeaseback_get_depr_bonus_fed,(setter)SaleLeaseback_set_depr_bonus_fed,
+	PyDoc_STR("*float*: Federal bonus depreciation [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
-{"depr_bonus_fed_custom", (getter)DHF_get_depr_bonus_fed_custom,(setter)DHF_set_depr_bonus_fed_custom,
-	PyDoc_STR("*float*: Federal bonus depreciation custom [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
+{"depr_bonus_fed_custom", (getter)SaleLeaseback_get_depr_bonus_fed_custom,(setter)SaleLeaseback_set_depr_bonus_fed_custom,
+	PyDoc_STR("*float*: Federal bonus depreciation custom [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
-{"depr_bonus_fed_macrs_15", (getter)DHF_get_depr_bonus_fed_macrs_15,(setter)DHF_set_depr_bonus_fed_macrs_15,
-	PyDoc_STR("*float*: Federal bonus depreciation 15-yr MACRS [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
+{"depr_bonus_fed_macrs_15", (getter)SaleLeaseback_get_depr_bonus_fed_macrs_15,(setter)SaleLeaseback_set_depr_bonus_fed_macrs_15,
+	PyDoc_STR("*float*: Federal bonus depreciation 15-yr MACRS [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
-{"depr_bonus_fed_macrs_5", (getter)DHF_get_depr_bonus_fed_macrs_5,(setter)DHF_set_depr_bonus_fed_macrs_5,
-	PyDoc_STR("*float*: Federal bonus depreciation 5-yr MACRS [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
+{"depr_bonus_fed_macrs_5", (getter)SaleLeaseback_get_depr_bonus_fed_macrs_5,(setter)SaleLeaseback_set_depr_bonus_fed_macrs_5,
+	PyDoc_STR("*float*: Federal bonus depreciation 5-yr MACRS [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
  	NULL},
-{"depr_bonus_fed_sl_15", (getter)DHF_get_depr_bonus_fed_sl_15,(setter)DHF_set_depr_bonus_fed_sl_15,
-	PyDoc_STR("*float*: Federal bonus depreciation 15-yr straight line [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
+{"depr_bonus_fed_sl_15", (getter)SaleLeaseback_get_depr_bonus_fed_sl_15,(setter)SaleLeaseback_set_depr_bonus_fed_sl_15,
+	PyDoc_STR("*float*: Federal bonus depreciation 15-yr straight line [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
-{"depr_bonus_fed_sl_20", (getter)DHF_get_depr_bonus_fed_sl_20,(setter)DHF_set_depr_bonus_fed_sl_20,
-	PyDoc_STR("*float*: Federal bonus depreciation 20-yr straight line [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
+{"depr_bonus_fed_sl_20", (getter)SaleLeaseback_get_depr_bonus_fed_sl_20,(setter)SaleLeaseback_set_depr_bonus_fed_sl_20,
+	PyDoc_STR("*float*: Federal bonus depreciation 20-yr straight line [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
-{"depr_bonus_fed_sl_39", (getter)DHF_get_depr_bonus_fed_sl_39,(setter)DHF_set_depr_bonus_fed_sl_39,
-	PyDoc_STR("*float*: Federal bonus depreciation 39-yr straight line [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
+{"depr_bonus_fed_sl_39", (getter)SaleLeaseback_get_depr_bonus_fed_sl_39,(setter)SaleLeaseback_set_depr_bonus_fed_sl_39,
+	PyDoc_STR("*float*: Federal bonus depreciation 39-yr straight line [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
-{"depr_bonus_fed_sl_5", (getter)DHF_get_depr_bonus_fed_sl_5,(setter)DHF_set_depr_bonus_fed_sl_5,
-	PyDoc_STR("*float*: Federal bonus depreciation 5-yr straight line [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
+{"depr_bonus_fed_sl_5", (getter)SaleLeaseback_get_depr_bonus_fed_sl_5,(setter)SaleLeaseback_set_depr_bonus_fed_sl_5,
+	PyDoc_STR("*float*: Federal bonus depreciation 5-yr straight line [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
-{"depr_bonus_sta", (getter)DHF_get_depr_bonus_sta,(setter)DHF_set_depr_bonus_sta,
-	PyDoc_STR("*float*: State bonus depreciation [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: set to 0 if not provided."),
+{"depr_bonus_sta", (getter)SaleLeaseback_get_depr_bonus_sta,(setter)SaleLeaseback_set_depr_bonus_sta,
+	PyDoc_STR("*float*: State bonus depreciation [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
-{"depr_bonus_sta_custom", (getter)DHF_get_depr_bonus_sta_custom,(setter)DHF_set_depr_bonus_sta_custom,
-	PyDoc_STR("*float*: State bonus depreciation custom [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
+{"depr_bonus_sta_custom", (getter)SaleLeaseback_get_depr_bonus_sta_custom,(setter)SaleLeaseback_set_depr_bonus_sta_custom,
+	PyDoc_STR("*float*: State bonus depreciation custom [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
-{"depr_bonus_sta_macrs_15", (getter)DHF_get_depr_bonus_sta_macrs_15,(setter)DHF_set_depr_bonus_sta_macrs_15,
-	PyDoc_STR("*float*: State bonus depreciation 15-yr MACRS [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
+{"depr_bonus_sta_macrs_15", (getter)SaleLeaseback_get_depr_bonus_sta_macrs_15,(setter)SaleLeaseback_set_depr_bonus_sta_macrs_15,
+	PyDoc_STR("*float*: State bonus depreciation 15-yr MACRS [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
-{"depr_bonus_sta_macrs_5", (getter)DHF_get_depr_bonus_sta_macrs_5,(setter)DHF_set_depr_bonus_sta_macrs_5,
-	PyDoc_STR("*float*: State bonus depreciation 5-yr MACRS [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
+{"depr_bonus_sta_macrs_5", (getter)SaleLeaseback_get_depr_bonus_sta_macrs_5,(setter)SaleLeaseback_set_depr_bonus_sta_macrs_5,
+	PyDoc_STR("*float*: State bonus depreciation 5-yr MACRS [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
  	NULL},
-{"depr_bonus_sta_sl_15", (getter)DHF_get_depr_bonus_sta_sl_15,(setter)DHF_set_depr_bonus_sta_sl_15,
-	PyDoc_STR("*float*: State bonus depreciation 15-yr straight line [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
+{"depr_bonus_sta_sl_15", (getter)SaleLeaseback_get_depr_bonus_sta_sl_15,(setter)SaleLeaseback_set_depr_bonus_sta_sl_15,
+	PyDoc_STR("*float*: State bonus depreciation 15-yr straight line [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
-{"depr_bonus_sta_sl_20", (getter)DHF_get_depr_bonus_sta_sl_20,(setter)DHF_set_depr_bonus_sta_sl_20,
-	PyDoc_STR("*float*: State bonus depreciation 20-yr straight line [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
+{"depr_bonus_sta_sl_20", (getter)SaleLeaseback_get_depr_bonus_sta_sl_20,(setter)SaleLeaseback_set_depr_bonus_sta_sl_20,
+	PyDoc_STR("*float*: State bonus depreciation 20-yr straight line [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
-{"depr_bonus_sta_sl_39", (getter)DHF_get_depr_bonus_sta_sl_39,(setter)DHF_set_depr_bonus_sta_sl_39,
-	PyDoc_STR("*float*: State bonus depreciation 39-yr straight line [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
+{"depr_bonus_sta_sl_39", (getter)SaleLeaseback_get_depr_bonus_sta_sl_39,(setter)SaleLeaseback_set_depr_bonus_sta_sl_39,
+	PyDoc_STR("*float*: State bonus depreciation 39-yr straight line [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
-{"depr_bonus_sta_sl_5", (getter)DHF_get_depr_bonus_sta_sl_5,(setter)DHF_set_depr_bonus_sta_sl_5,
-	PyDoc_STR("*float*: State bonus depreciation 5-yr straight line [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
+{"depr_bonus_sta_sl_5", (getter)SaleLeaseback_get_depr_bonus_sta_sl_5,(setter)SaleLeaseback_set_depr_bonus_sta_sl_5,
+	PyDoc_STR("*float*: State bonus depreciation 5-yr straight line [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
-{"depr_custom_schedule", (getter)DHF_get_depr_custom_schedule,(setter)DHF_set_depr_custom_schedule,
+{"depr_custom_schedule", (getter)SaleLeaseback_get_depr_custom_schedule,(setter)SaleLeaseback_set_depr_custom_schedule,
 	PyDoc_STR("*sequence*: Custom depreciation schedule [%]\n\n*Required*: True"),
  	NULL},
-{"depr_fedbas_method", (getter)DHF_get_depr_fedbas_method,(setter)DHF_set_depr_fedbas_method,
-	PyDoc_STR("*float*: Method of federal depreciation reduction\n\n*Options*: 0=5yr MACRS,1=Proportional\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: set to 0 if not provided."),
+{"depr_fedbas_method", (getter)SaleLeaseback_get_depr_fedbas_method,(setter)SaleLeaseback_set_depr_fedbas_method,
+	PyDoc_STR("*float*: Method of federal depreciation reduction\n\n*Options*: 0=5yr MACRS,1=Proportional\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
-{"depr_itc_fed_custom", (getter)DHF_get_depr_itc_fed_custom,(setter)DHF_set_depr_itc_fed_custom,
-	PyDoc_STR("*float*: Federal itc depreciation custom [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
+{"depr_itc_fed_custom", (getter)SaleLeaseback_get_depr_itc_fed_custom,(setter)SaleLeaseback_set_depr_itc_fed_custom,
+	PyDoc_STR("*float*: Federal itc depreciation custom [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
-{"depr_itc_fed_macrs_15", (getter)DHF_get_depr_itc_fed_macrs_15,(setter)DHF_set_depr_itc_fed_macrs_15,
-	PyDoc_STR("*float*: Federal itc depreciation 15-yr MACRS [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
+{"depr_itc_fed_macrs_15", (getter)SaleLeaseback_get_depr_itc_fed_macrs_15,(setter)SaleLeaseback_set_depr_itc_fed_macrs_15,
+	PyDoc_STR("*float*: Federal itc depreciation 15-yr MACRS [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
-{"depr_itc_fed_macrs_5", (getter)DHF_get_depr_itc_fed_macrs_5,(setter)DHF_set_depr_itc_fed_macrs_5,
-	PyDoc_STR("*float*: Federal itc depreciation 5-yr MACRS [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
+{"depr_itc_fed_macrs_5", (getter)SaleLeaseback_get_depr_itc_fed_macrs_5,(setter)SaleLeaseback_set_depr_itc_fed_macrs_5,
+	PyDoc_STR("*float*: Federal itc depreciation 5-yr MACRS [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
  	NULL},
-{"depr_itc_fed_sl_15", (getter)DHF_get_depr_itc_fed_sl_15,(setter)DHF_set_depr_itc_fed_sl_15,
-	PyDoc_STR("*float*: Federal itc depreciation 15-yr straight line [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
+{"depr_itc_fed_sl_15", (getter)SaleLeaseback_get_depr_itc_fed_sl_15,(setter)SaleLeaseback_set_depr_itc_fed_sl_15,
+	PyDoc_STR("*float*: Federal itc depreciation 15-yr straight line [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
-{"depr_itc_fed_sl_20", (getter)DHF_get_depr_itc_fed_sl_20,(setter)DHF_set_depr_itc_fed_sl_20,
-	PyDoc_STR("*float*: Federal itc depreciation 20-yr straight line [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
+{"depr_itc_fed_sl_20", (getter)SaleLeaseback_get_depr_itc_fed_sl_20,(setter)SaleLeaseback_set_depr_itc_fed_sl_20,
+	PyDoc_STR("*float*: Federal itc depreciation 20-yr straight line [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
-{"depr_itc_fed_sl_39", (getter)DHF_get_depr_itc_fed_sl_39,(setter)DHF_set_depr_itc_fed_sl_39,
-	PyDoc_STR("*float*: Federal itc depreciation 39-yr straight line [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
+{"depr_itc_fed_sl_39", (getter)SaleLeaseback_get_depr_itc_fed_sl_39,(setter)SaleLeaseback_set_depr_itc_fed_sl_39,
+	PyDoc_STR("*float*: Federal itc depreciation 39-yr straight line [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
-{"depr_itc_fed_sl_5", (getter)DHF_get_depr_itc_fed_sl_5,(setter)DHF_set_depr_itc_fed_sl_5,
-	PyDoc_STR("*float*: Federal itc depreciation 5-yr straight line [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
+{"depr_itc_fed_sl_5", (getter)SaleLeaseback_get_depr_itc_fed_sl_5,(setter)SaleLeaseback_set_depr_itc_fed_sl_5,
+	PyDoc_STR("*float*: Federal itc depreciation 5-yr straight line [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
-{"depr_itc_sta_custom", (getter)DHF_get_depr_itc_sta_custom,(setter)DHF_set_depr_itc_sta_custom,
-	PyDoc_STR("*float*: State itc depreciation custom [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
+{"depr_itc_sta_custom", (getter)SaleLeaseback_get_depr_itc_sta_custom,(setter)SaleLeaseback_set_depr_itc_sta_custom,
+	PyDoc_STR("*float*: State itc depreciation custom [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
-{"depr_itc_sta_macrs_15", (getter)DHF_get_depr_itc_sta_macrs_15,(setter)DHF_set_depr_itc_sta_macrs_15,
-	PyDoc_STR("*float*: State itc depreciation 15-yr MACRS [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
+{"depr_itc_sta_macrs_15", (getter)SaleLeaseback_get_depr_itc_sta_macrs_15,(setter)SaleLeaseback_set_depr_itc_sta_macrs_15,
+	PyDoc_STR("*float*: State itc depreciation 15-yr MACRS [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
-{"depr_itc_sta_macrs_5", (getter)DHF_get_depr_itc_sta_macrs_5,(setter)DHF_set_depr_itc_sta_macrs_5,
-	PyDoc_STR("*float*: State itc depreciation 5-yr MACRS [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 1 if not provided."),
+{"depr_itc_sta_macrs_5", (getter)SaleLeaseback_get_depr_itc_sta_macrs_5,(setter)SaleLeaseback_set_depr_itc_sta_macrs_5,
+	PyDoc_STR("*float*: State itc depreciation 5-yr MACRS [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
  	NULL},
-{"depr_itc_sta_sl_15", (getter)DHF_get_depr_itc_sta_sl_15,(setter)DHF_set_depr_itc_sta_sl_15,
-	PyDoc_STR("*float*: State itc depreciation 15-yr straight line [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
+{"depr_itc_sta_sl_15", (getter)SaleLeaseback_get_depr_itc_sta_sl_15,(setter)SaleLeaseback_set_depr_itc_sta_sl_15,
+	PyDoc_STR("*float*: State itc depreciation 15-yr straight line [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
-{"depr_itc_sta_sl_20", (getter)DHF_get_depr_itc_sta_sl_20,(setter)DHF_set_depr_itc_sta_sl_20,
-	PyDoc_STR("*float*: State itc depreciation 20-yr straight line [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
+{"depr_itc_sta_sl_20", (getter)SaleLeaseback_get_depr_itc_sta_sl_20,(setter)SaleLeaseback_set_depr_itc_sta_sl_20,
+	PyDoc_STR("*float*: State itc depreciation 20-yr straight line [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
-{"depr_itc_sta_sl_39", (getter)DHF_get_depr_itc_sta_sl_39,(setter)DHF_set_depr_itc_sta_sl_39,
-	PyDoc_STR("*float*: State itc depreciation 39-yr straight line [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
+{"depr_itc_sta_sl_39", (getter)SaleLeaseback_get_depr_itc_sta_sl_39,(setter)SaleLeaseback_set_depr_itc_sta_sl_39,
+	PyDoc_STR("*float*: State itc depreciation 39-yr straight line [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
-{"depr_itc_sta_sl_5", (getter)DHF_get_depr_itc_sta_sl_5,(setter)DHF_set_depr_itc_sta_sl_5,
-	PyDoc_STR("*float*: State itc depreciation 5-yr straight line [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
+{"depr_itc_sta_sl_5", (getter)SaleLeaseback_get_depr_itc_sta_sl_5,(setter)SaleLeaseback_set_depr_itc_sta_sl_5,
+	PyDoc_STR("*float*: State itc depreciation 5-yr straight line [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
-{"depr_stabas_method", (getter)DHF_get_depr_stabas_method,(setter)DHF_set_depr_stabas_method,
-	PyDoc_STR("*float*: Method of state depreciation reduction\n\n*Options*: 0=5yr MACRS,1=Proportional\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: set to 0 if not provided."),
+{"depr_stabas_method", (getter)SaleLeaseback_get_depr_stabas_method,(setter)SaleLeaseback_set_depr_stabas_method,
+	PyDoc_STR("*float*: Method of state depreciation reduction\n\n*Options*: 0=5yr MACRS,1=Proportional\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
-{"equip_reserve_depr_fed", (getter)DHF_get_equip_reserve_depr_fed,(setter)DHF_set_equip_reserve_depr_fed,
-	PyDoc_STR("*float*: Major equipment reserve federal depreciation\n\n*Options*: 0=5yr MACRS,1=15yr MACRS,2=5yr SL,3=15yr SL, 4=20yr SL,5=39yr SL,6=Custom\n\n*Constraints*: INTEGER,MIN=0,MAX=6\n\n*Required*: set to 0 if not provided."),
+{"equip_reserve_depr_fed", (getter)SaleLeaseback_get_equip_reserve_depr_fed,(setter)SaleLeaseback_set_equip_reserve_depr_fed,
+	PyDoc_STR("*float*: Major equipment reserve federal depreciation\n\n*Options*: 0=5yr MACRS,1=15yr MACRS,2=5yr SL,3=15yr SL, 4=20yr SL,5=39yr SL,6=Custom\n\n*Constraints*: INTEGER,MIN=0,MAX=6\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
-{"equip_reserve_depr_sta", (getter)DHF_get_equip_reserve_depr_sta,(setter)DHF_set_equip_reserve_depr_sta,
-	PyDoc_STR("*float*: Major equipment reserve state depreciation\n\n*Options*: 0=5yr MACRS,1=15yr MACRS,2=5yr SL,3=15yr SL, 4=20yr SL,5=39yr SL,6=Custom\n\n*Constraints*: INTEGER,MIN=0,MAX=6\n\n*Required*: set to 0 if not provided."),
+{"equip_reserve_depr_sta", (getter)SaleLeaseback_get_equip_reserve_depr_sta,(setter)SaleLeaseback_set_equip_reserve_depr_sta,
+	PyDoc_STR("*float*: Major equipment reserve state depreciation\n\n*Options*: 0=5yr MACRS,1=15yr MACRS,2=5yr SL,3=15yr SL, 4=20yr SL,5=39yr SL,6=Custom\n\n*Constraints*: INTEGER,MIN=0,MAX=6\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
-{"flip_target_percent", (getter)DHF_get_flip_target_percent,(setter)DHF_set_flip_target_percent,
-	PyDoc_STR("*float*: After-tax flip/return target [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: set to 11 if not provided."),
+{"flip_target_percent", (getter)SaleLeaseback_get_flip_target_percent,(setter)SaleLeaseback_set_flip_target_percent,
+	PyDoc_STR("*float*: After-tax flip/return target [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 11"),
  	NULL},
-{"flip_target_year", (getter)DHF_get_flip_target_year,(setter)DHF_set_flip_target_year,
-	PyDoc_STR("*float*: Return target year\n\n*Constraints*: MIN=1\n\n*Required*: set to 11 if not provided."),
+{"flip_target_year", (getter)SaleLeaseback_get_flip_target_year,(setter)SaleLeaseback_set_flip_target_year,
+	PyDoc_STR("*float*: Return target year\n\n*Constraints*: MIN=1\n\n*Required*: If not provided, assumed to be 11"),
  	NULL},
-{"ppa_escalation", (getter)DHF_get_ppa_escalation,(setter)DHF_set_ppa_escalation,
-	PyDoc_STR("*float*: PPA escalation [%]\n\n*Required*: set to 0 if not provided."),
+{"ppa_escalation", (getter)SaleLeaseback_get_ppa_escalation,(setter)SaleLeaseback_set_ppa_escalation,
+	PyDoc_STR("*float*: PPA escalation [%]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
-{"ppa_price_input", (getter)DHF_get_ppa_price_input,(setter)DHF_set_ppa_price_input,
-	PyDoc_STR("*float*: Initial year PPA price [$/kWh]\n\n*Required*: set to 10 if not provided."),
+{"ppa_price_input", (getter)SaleLeaseback_get_ppa_price_input,(setter)SaleLeaseback_set_ppa_price_input,
+	PyDoc_STR("*float*: Initial year PPA price [$/kWh]\n\n*Required*: If not provided, assumed to be 10"),
  	NULL},
-{"ppa_soln_max", (getter)DHF_get_ppa_soln_max,(setter)DHF_set_ppa_soln_max,
-	PyDoc_STR("*float*: PPA solution maximum ppa [cents/kWh]\n\n*Required*: set to 100 if not provided."),
+{"ppa_soln_max", (getter)SaleLeaseback_get_ppa_soln_max,(setter)SaleLeaseback_set_ppa_soln_max,
+	PyDoc_STR("*float*: PPA solution maximum ppa [cents/kWh]\n\n*Required*: If not provided, assumed to be 100"),
  	NULL},
-{"ppa_soln_max_iterations", (getter)DHF_get_ppa_soln_max_iterations,(setter)DHF_set_ppa_soln_max_iterations,
-	PyDoc_STR("*float*: PPA solution maximum number of iterations\n\n*Constraints*: INTEGER,MIN=1\n\n*Required*: set to 100 if not provided."),
+{"ppa_soln_max_iterations", (getter)SaleLeaseback_get_ppa_soln_max_iterations,(setter)SaleLeaseback_set_ppa_soln_max_iterations,
+	PyDoc_STR("*float*: PPA solution maximum number of iterations\n\n*Constraints*: INTEGER,MIN=1\n\n*Required*: If not provided, assumed to be 100"),
  	NULL},
-{"ppa_soln_min", (getter)DHF_get_ppa_soln_min,(setter)DHF_set_ppa_soln_min,
-	PyDoc_STR("*float*: PPA solution minimum ppa [cents/kWh]\n\n*Required*: set to 0 if not provided."),
+{"ppa_soln_min", (getter)SaleLeaseback_get_ppa_soln_min,(setter)SaleLeaseback_set_ppa_soln_min,
+	PyDoc_STR("*float*: PPA solution minimum ppa [cents/kWh]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
-{"ppa_soln_mode", (getter)DHF_get_ppa_soln_mode,(setter)DHF_set_ppa_soln_mode,
-	PyDoc_STR("*float*: PPA solution mode [0/1]\n\n*Options*: 0=solve ppa,1=specify ppa\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: set to 0 if not provided."),
+{"ppa_soln_mode", (getter)SaleLeaseback_get_ppa_soln_mode,(setter)SaleLeaseback_set_ppa_soln_mode,
+	PyDoc_STR("*float*: PPA solution mode [0/1]\n\n*Options*: 0=solve ppa,1=specify ppa\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
-{"ppa_soln_tolerance", (getter)DHF_get_ppa_soln_tolerance,(setter)DHF_set_ppa_soln_tolerance,
-	PyDoc_STR("*float*: PPA solution tolerance\n\n*Required*: set to 1e-3 if not provided."),
+{"ppa_soln_tolerance", (getter)SaleLeaseback_get_ppa_soln_tolerance,(setter)SaleLeaseback_set_ppa_soln_tolerance,
+	PyDoc_STR("*float*: PPA solution tolerance\n\n*Required*: If not provided, assumed to be 1e-3"),
  	NULL},
-{"reserves_interest", (getter)DHF_get_reserves_interest,(setter)DHF_set_reserves_interest,
-	PyDoc_STR("*float*: Interest on reserves [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: set to 1.75 if not provided."),
+{"reserves_interest", (getter)SaleLeaseback_get_reserves_interest,(setter)SaleLeaseback_set_reserves_interest,
+	PyDoc_STR("*float*: Interest on reserves [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 1.75"),
  	NULL},
-{"salvage_percentage", (getter)DHF_get_salvage_percentage,(setter)DHF_set_salvage_percentage,
-	PyDoc_STR("*float*: Net pre-tax cash salvage value [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: set to 10 if not provided."),
+{"salvage_percentage", (getter)SaleLeaseback_get_salvage_percentage,(setter)SaleLeaseback_set_salvage_percentage,
+	PyDoc_STR("*float*: Net pre-tax cash salvage value [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 10"),
  	NULL},
-{"sponsor_operating_margin", (getter)DHF_get_sponsor_operating_margin,(setter)DHF_set_sponsor_operating_margin,
-	PyDoc_STR("*float*: Annual Developer (Lessee) Operating Margin [$/kW]\n\n*Required*: set to 40 if not provided."),
+{"sponsor_operating_margin", (getter)SaleLeaseback_get_sponsor_operating_margin,(setter)SaleLeaseback_set_sponsor_operating_margin,
+	PyDoc_STR("*float*: Annual Developer (Lessee) Operating Margin [$/kW]\n\n*Required*: If not provided, assumed to be 40"),
  	NULL},
-{"sponsor_operating_margin_escalation", (getter)DHF_get_sponsor_operating_margin_escalation,(setter)DHF_set_sponsor_operating_margin_escalation,
-	PyDoc_STR("*float*: Annual Developer (Lessee) Operating Margin Escalation [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: set to 2 if not provided."),
+{"sponsor_operating_margin_escalation", (getter)SaleLeaseback_get_sponsor_operating_margin_escalation,(setter)SaleLeaseback_set_sponsor_operating_margin_escalation,
+	PyDoc_STR("*float*: Annual Developer (Lessee) Operating Margin Escalation [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 2"),
  	NULL},
-{"system_lifetime_recapitalize", (getter)DHF_get_system_lifetime_recapitalize,(setter)DHF_set_system_lifetime_recapitalize,
-	PyDoc_STR("*sequence*: Recapitalization boolean\n\n*Required*: set to 0 if not provided."),
+{"system_lifetime_recapitalize", (getter)SaleLeaseback_get_system_lifetime_recapitalize,(setter)SaleLeaseback_set_system_lifetime_recapitalize,
+	PyDoc_STR("*sequence*: Recapitalization boolean\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
-{"system_recapitalization_cost", (getter)DHF_get_system_recapitalization_cost,(setter)DHF_set_system_recapitalization_cost,
-	PyDoc_STR("*float*: Recapitalization cost [$]\n\n*Required*: set to 0 if not provided."),
+{"system_recapitalization_cost", (getter)SaleLeaseback_get_system_recapitalization_cost,(setter)SaleLeaseback_set_system_recapitalization_cost,
+	PyDoc_STR("*float*: Recapitalization cost [$]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
-{"system_recapitalization_escalation", (getter)DHF_get_system_recapitalization_escalation,(setter)DHF_set_system_recapitalization_escalation,
-	PyDoc_STR("*float*: Recapitalization escalation (above inflation) [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: set to 0 if not provided."),
+{"system_recapitalization_escalation", (getter)SaleLeaseback_get_system_recapitalization_escalation,(setter)SaleLeaseback_set_system_recapitalization_escalation,
+	PyDoc_STR("*float*: Recapitalization escalation (above inflation) [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
-{"system_use_lifetime_output", (getter)DHF_get_system_use_lifetime_output,(setter)DHF_set_system_use_lifetime_output,
+{"system_use_lifetime_output", (getter)SaleLeaseback_get_system_use_lifetime_output,(setter)SaleLeaseback_set_system_use_lifetime_output,
 	PyDoc_STR("*float*: Lifetime hourly system outputs [0/1]\n\n*Options*: 0=hourly first year,1=hourly lifetime\n\n*Constraints*: INTEGER,MIN=0\n\n*Required*: True"),
  	NULL},
-{"system_use_recapitalization", (getter)DHF_get_system_use_recapitalization,(setter)DHF_set_system_use_recapitalization,
-	PyDoc_STR("*float*: Recapitalization expenses [0/1]\n\n*Options*: 0=None,1=Recapitalize\n\n*Constraints*: INTEGER,MIN=0\n\n*Required*: set to 0 if not provided."),
+{"system_use_recapitalization", (getter)SaleLeaseback_get_system_use_recapitalization,(setter)SaleLeaseback_set_system_use_recapitalization,
+	PyDoc_STR("*float*: Recapitalization expenses [0/1]\n\n*Options*: 0=None,1=Recapitalize\n\n*Constraints*: INTEGER,MIN=0\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
-{"tax_investor_required_lease_reserve", (getter)DHF_get_tax_investor_required_lease_reserve,(setter)DHF_set_tax_investor_required_lease_reserve,
-	PyDoc_STR("*float*: Lessor Required Lease Payment Reserve [months]\n\n*Constraints*: INTEGER\n\n*Required*: set to 6 if not provided."),
+{"tax_investor_required_lease_reserve", (getter)SaleLeaseback_get_tax_investor_required_lease_reserve,(setter)SaleLeaseback_set_tax_investor_required_lease_reserve,
+	PyDoc_STR("*float*: Lessor Required Lease Payment Reserve [months]\n\n*Constraints*: INTEGER\n\n*Required*: If not provided, assumed to be 6"),
  	NULL},
-{"total_installed_cost", (getter)DHF_get_total_installed_cost,(setter)DHF_set_total_installed_cost,
+{"total_installed_cost", (getter)SaleLeaseback_get_total_installed_cost,(setter)SaleLeaseback_set_total_installed_cost,
 	PyDoc_STR("*float*: Installed cost [$]\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
 
-static PyTypeObject DHF_Type = {
+static PyTypeObject SaleLeaseback_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"Saleleaseback.DHF",             /*tp_name*/
-		sizeof(DHFObject),          /*tp_basicsize*/
+		"Saleleaseback.SaleLeaseback",             /*tp_name*/
+		sizeof(SaleLeasebackObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
 		0,    /*tp_dealloc*/
@@ -3908,9 +3908,9 @@ static PyTypeObject DHF_Type = {
 		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
-		DHF_methods,         /*tp_methods*/
+		SaleLeaseback_methods,         /*tp_methods*/
 		0,                          /*tp_members*/
-		DHF_getset,          /*tp_getset*/
+		SaleLeaseback_getset,          /*tp_getset*/
 		0,                          /*tp_base*/
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
@@ -4139,43 +4139,43 @@ TimeOfDelivery_set_ppa_multiplier_model(TimeOfDeliveryObject *self, PyObject *va
 
 static PyGetSetDef TimeOfDelivery_getset[] = {
 {"dispatch_factor1", (getter)TimeOfDelivery_get_dispatch_factor1,(setter)TimeOfDelivery_set_dispatch_factor1,
-	PyDoc_STR("*float*: TOD factor for period 1\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: TOD factor for period 1\n\n*Required*: True if ppa_multiplier_model=0"),
  	NULL},
 {"dispatch_factor2", (getter)TimeOfDelivery_get_dispatch_factor2,(setter)TimeOfDelivery_set_dispatch_factor2,
-	PyDoc_STR("*float*: TOD factor for period 2\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: TOD factor for period 2\n\n*Required*: True if ppa_multiplier_model=0"),
  	NULL},
 {"dispatch_factor3", (getter)TimeOfDelivery_get_dispatch_factor3,(setter)TimeOfDelivery_set_dispatch_factor3,
-	PyDoc_STR("*float*: TOD factor for period 3\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: TOD factor for period 3\n\n*Required*: True if ppa_multiplier_model=0"),
  	NULL},
 {"dispatch_factor4", (getter)TimeOfDelivery_get_dispatch_factor4,(setter)TimeOfDelivery_set_dispatch_factor4,
-	PyDoc_STR("*float*: TOD factor for period 4\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: TOD factor for period 4\n\n*Required*: True if ppa_multiplier_model=0"),
  	NULL},
 {"dispatch_factor5", (getter)TimeOfDelivery_get_dispatch_factor5,(setter)TimeOfDelivery_set_dispatch_factor5,
-	PyDoc_STR("*float*: TOD factor for period 5\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: TOD factor for period 5\n\n*Required*: True if ppa_multiplier_model=0"),
  	NULL},
 {"dispatch_factor6", (getter)TimeOfDelivery_get_dispatch_factor6,(setter)TimeOfDelivery_set_dispatch_factor6,
-	PyDoc_STR("*float*: TOD factor for period 6\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: TOD factor for period 6\n\n*Required*: True if ppa_multiplier_model=0"),
  	NULL},
 {"dispatch_factor7", (getter)TimeOfDelivery_get_dispatch_factor7,(setter)TimeOfDelivery_set_dispatch_factor7,
-	PyDoc_STR("*float*: TOD factor for period 7\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: TOD factor for period 7\n\n*Required*: True if ppa_multiplier_model=0"),
  	NULL},
 {"dispatch_factor8", (getter)TimeOfDelivery_get_dispatch_factor8,(setter)TimeOfDelivery_set_dispatch_factor8,
-	PyDoc_STR("*float*: TOD factor for period 8\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: TOD factor for period 8\n\n*Required*: True if ppa_multiplier_model=0"),
  	NULL},
 {"dispatch_factor9", (getter)TimeOfDelivery_get_dispatch_factor9,(setter)TimeOfDelivery_set_dispatch_factor9,
-	PyDoc_STR("*float*: TOD factor for period 9\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: TOD factor for period 9\n\n*Required*: True if ppa_multiplier_model=0"),
  	NULL},
 {"dispatch_factors_ts", (getter)TimeOfDelivery_get_dispatch_factors_ts,(setter)TimeOfDelivery_set_dispatch_factors_ts,
-	PyDoc_STR("*sequence*: Dispatch payment factor array\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*sequence*: Dispatch payment factor array\n\n*Required*: True if ppa_multiplier_model=1"),
  	NULL},
 {"dispatch_sched_weekday", (getter)TimeOfDelivery_get_dispatch_sched_weekday,(setter)TimeOfDelivery_set_dispatch_sched_weekday,
-	PyDoc_STR("*sequence[sequence]*: Diurnal weekday TOD periods [1..9]\n\n*Info*: 12 x 24 matrix\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*sequence[sequence]*: Diurnal weekday TOD periods [1..9]\n\n*Info*: 12 x 24 matrix\n\n*Required*: True if ppa_multiplier_model=0"),
  	NULL},
 {"dispatch_sched_weekend", (getter)TimeOfDelivery_get_dispatch_sched_weekend,(setter)TimeOfDelivery_set_dispatch_sched_weekend,
-	PyDoc_STR("*sequence[sequence]*: Diurnal weekend TOD periods [1..9]\n\n*Info*: 12 x 24 matrix\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*sequence[sequence]*: Diurnal weekend TOD periods [1..9]\n\n*Info*: 12 x 24 matrix\n\n*Required*: True if ppa_multiplier_model=0"),
  	NULL},
 {"ppa_multiplier_model", (getter)TimeOfDelivery_get_ppa_multiplier_model,(setter)TimeOfDelivery_set_ppa_multiplier_model,
-	PyDoc_STR("*float*: PPA multiplier model [0/1]\n\n*Options*: 0=diurnal,1=timestep\n\n*Constraints*: INTEGER,MIN=0\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: PPA multiplier model [0/1]\n\n*Options*: 0=diurnal,1=timestep\n\n*Constraints*: INTEGER,MIN=0\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -4358,22 +4358,22 @@ ReserveAccounts_set_equip3_reserve_freq(ReserveAccountsObject *self, PyObject *v
 
 static PyGetSetDef ReserveAccounts_getset[] = {
 {"equip1_reserve_cost", (getter)ReserveAccounts_get_equip1_reserve_cost,(setter)ReserveAccounts_set_equip1_reserve_cost,
-	PyDoc_STR("*float*: Major equipment reserve 1 cost [$/W]\n\n*Constraints*: MIN=0\n\n*Required*: set to 0.25 if not provided."),
+	PyDoc_STR("*float*: Major equipment reserve 1 cost [$/W]\n\n*Constraints*: MIN=0\n\n*Required*: If not provided, assumed to be 0.25"),
  	NULL},
 {"equip1_reserve_freq", (getter)ReserveAccounts_get_equip1_reserve_freq,(setter)ReserveAccounts_set_equip1_reserve_freq,
-	PyDoc_STR("*float*: Major equipment reserve 1 frequency [years]\n\n*Constraints*: INTEGER,MIN=0\n\n*Required*: set to 12 if not provided."),
+	PyDoc_STR("*float*: Major equipment reserve 1 frequency [years]\n\n*Constraints*: INTEGER,MIN=0\n\n*Required*: If not provided, assumed to be 12"),
  	NULL},
 {"equip2_reserve_cost", (getter)ReserveAccounts_get_equip2_reserve_cost,(setter)ReserveAccounts_set_equip2_reserve_cost,
-	PyDoc_STR("*float*: Major equipment reserve 2 cost [$/W]\n\n*Constraints*: MIN=0\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Major equipment reserve 2 cost [$/W]\n\n*Constraints*: MIN=0\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"equip2_reserve_freq", (getter)ReserveAccounts_get_equip2_reserve_freq,(setter)ReserveAccounts_set_equip2_reserve_freq,
-	PyDoc_STR("*float*: Major equipment reserve 2 frequency [years]\n\n*Constraints*: INTEGER,MIN=0\n\n*Required*: set to 15 if not provided."),
+	PyDoc_STR("*float*: Major equipment reserve 2 frequency [years]\n\n*Constraints*: INTEGER,MIN=0\n\n*Required*: If not provided, assumed to be 15"),
  	NULL},
 {"equip3_reserve_cost", (getter)ReserveAccounts_get_equip3_reserve_cost,(setter)ReserveAccounts_set_equip3_reserve_cost,
-	PyDoc_STR("*float*: Major equipment reserve 3 cost [$/W]\n\n*Constraints*: MIN=0\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Major equipment reserve 3 cost [$/W]\n\n*Constraints*: MIN=0\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"equip3_reserve_freq", (getter)ReserveAccounts_get_equip3_reserve_freq,(setter)ReserveAccounts_set_equip3_reserve_freq,
-	PyDoc_STR("*float*: Major equipment reserve 3 frequency [years]\n\n*Constraints*: INTEGER,MIN=0\n\n*Required*: set to 20 if not provided."),
+	PyDoc_STR("*float*: Major equipment reserve 3 frequency [years]\n\n*Constraints*: INTEGER,MIN=0\n\n*Required*: If not provided, assumed to be 20"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -4508,10 +4508,10 @@ OtherCapitalCosts_set_months_working_reserve(OtherCapitalCostsObject *self, PyOb
 
 static PyGetSetDef OtherCapitalCosts_getset[] = {
 {"months_receivables_reserve", (getter)OtherCapitalCosts_get_months_receivables_reserve,(setter)OtherCapitalCosts_set_months_receivables_reserve,
-	PyDoc_STR("*float*: Receivables reserve months of PPA revenue [months]\n\n*Constraints*: MIN=0\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Receivables reserve months of PPA revenue [months]\n\n*Constraints*: MIN=0\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"months_working_reserve", (getter)OtherCapitalCosts_get_months_working_reserve,(setter)OtherCapitalCosts_set_months_working_reserve,
-	PyDoc_STR("*float*: Working capital reserve months of operating costs [months]\n\n*Constraints*: MIN=0\n\n*Required*: set to 6 if not provided."),
+	PyDoc_STR("*float*: Working capital reserve months of operating costs [months]\n\n*Constraints*: MIN=0\n\n*Required*: If not provided, assumed to be 6"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -4697,19 +4697,19 @@ static PyGetSetDef Battery_getset[] = {
 	PyDoc_STR("*sequence*: Battery bank replacements per year [number/year]"),
  	NULL},
 {"batt_computed_bank_capacity", (getter)Battery_get_batt_computed_bank_capacity,(setter)Battery_set_batt_computed_bank_capacity,
-	PyDoc_STR("*float*: Battery bank capacity [kWh]\n\n*Required*: set to 0.0 if not provided."),
+	PyDoc_STR("*float*: Battery bank capacity [kWh]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
 {"batt_replacement_option", (getter)Battery_get_batt_replacement_option,(setter)Battery_set_batt_replacement_option,
-	PyDoc_STR("*float*: Enable battery replacement? [0=none,1=capacity based,2=user schedule]\n\n*Constraints*: INTEGER,MIN=0,MAX=2\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Enable battery replacement? [0=none,1=capacity based,2=user schedule]\n\n*Constraints*: INTEGER,MIN=0,MAX=2\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"batt_replacement_schedule", (getter)Battery_get_batt_replacement_schedule,(setter)Battery_set_batt_replacement_schedule,
 	PyDoc_STR("*sequence*: Battery bank replacements per year (user specified) [number/year]"),
  	NULL},
 {"battery_per_kWh", (getter)Battery_get_battery_per_kWh,(setter)Battery_set_battery_per_kWh,
-	PyDoc_STR("*float*: Battery cost [$/kWh]\n\n*Required*: set to 0.0 if not provided."),
+	PyDoc_STR("*float*: Battery cost [$/kWh]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
 {"en_batt", (getter)Battery_get_en_batt,(setter)Battery_set_en_batt,
-	PyDoc_STR("*float*: Enable battery storage model [0/1]\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Enable battery storage model [0/1]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -6058,6 +6058,12 @@ static PyObject *
 Outputs_get_cost_installedperwatt(OutputsObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Saleleaseback_Outputs_cost_installedperwatt_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cost_prefinancing(OutputsObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Saleleaseback_Outputs_cost_prefinancing_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -8029,6 +8035,12 @@ Outputs_get_sponsor_equity_in_lessee_llc(OutputsObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_sponsor_pretax_development(OutputsObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Saleleaseback_Outputs_sponsor_pretax_development_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_sponsor_pretax_irr(OutputsObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Saleleaseback_Outputs_sponsor_pretax_irr_nget, self->data_ptr);
@@ -8078,25 +8090,25 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*float*: Analysis Period IRR [%]"),
  	NULL},
 {"cbi_fedtax_total", (getter)Outputs_get_cbi_fedtax_total,(setter)0,
-	PyDoc_STR("*float*: Total federal taxable CBI incentive income [$]"),
+	PyDoc_STR("*float*: Total federal taxable CBI incentive [$]"),
  	NULL},
 {"cbi_statax_total", (getter)Outputs_get_cbi_statax_total,(setter)0,
-	PyDoc_STR("*float*: Total state taxable CBI incentive income [$]"),
+	PyDoc_STR("*float*: Total state taxable CBI incentive [$]"),
  	NULL},
 {"cbi_total", (getter)Outputs_get_cbi_total,(setter)0,
-	PyDoc_STR("*float*: Total CBI incentive income [$]"),
+	PyDoc_STR("*float*: Total CBI incentive [$]"),
  	NULL},
 {"cbi_total_fed", (getter)Outputs_get_cbi_total_fed,(setter)0,
-	PyDoc_STR("*float*: Total federal CBI incentive income [$]"),
+	PyDoc_STR("*float*: Total federal CBI incentive [$]"),
  	NULL},
 {"cbi_total_oth", (getter)Outputs_get_cbi_total_oth,(setter)0,
-	PyDoc_STR("*float*: Total other CBI incentive income [$]"),
+	PyDoc_STR("*float*: Total other CBI incentive [$]"),
  	NULL},
 {"cbi_total_sta", (getter)Outputs_get_cbi_total_sta,(setter)0,
-	PyDoc_STR("*float*: Total state CBI incentive income [$]"),
+	PyDoc_STR("*float*: Total state CBI incentive [$]"),
  	NULL},
 {"cbi_total_uti", (getter)Outputs_get_cbi_total_uti,(setter)0,
-	PyDoc_STR("*float*: Total utility CBI incentive income [$]"),
+	PyDoc_STR("*float*: Total utility CBI incentive [$]"),
  	NULL},
 {"cf_annual_costs", (getter)Outputs_get_cf_annual_costs,(setter)0,
 	PyDoc_STR("*sequence*: Annual costs [$]"),
@@ -8312,25 +8324,25 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Total operating expense [$]"),
  	NULL},
 {"cf_pbi_fedtax_total", (getter)Outputs_get_cf_pbi_fedtax_total,(setter)0,
-	PyDoc_STR("*sequence*: Total federal taxable PBI incentive income [$]"),
+	PyDoc_STR("*sequence*: Total federal taxable PBI incentive [$]"),
  	NULL},
 {"cf_pbi_statax_total", (getter)Outputs_get_cf_pbi_statax_total,(setter)0,
-	PyDoc_STR("*sequence*: Total state taxable PBI incentive income [$]"),
+	PyDoc_STR("*sequence*: Total state taxable PBI incentive [$]"),
  	NULL},
 {"cf_pbi_total", (getter)Outputs_get_cf_pbi_total,(setter)0,
-	PyDoc_STR("*sequence*: Total PBI incentive income [$]"),
+	PyDoc_STR("*sequence*: Total PBI incentive [$]"),
  	NULL},
 {"cf_pbi_total_fed", (getter)Outputs_get_cf_pbi_total_fed,(setter)0,
-	PyDoc_STR("*sequence*: Total federal PBI incentive income [$]"),
+	PyDoc_STR("*sequence*: Total federal PBI incentive [$]"),
  	NULL},
 {"cf_pbi_total_oth", (getter)Outputs_get_cf_pbi_total_oth,(setter)0,
-	PyDoc_STR("*sequence*: Total other PBI incentive income [$]"),
+	PyDoc_STR("*sequence*: Total other PBI incentive [$]"),
  	NULL},
 {"cf_pbi_total_sta", (getter)Outputs_get_cf_pbi_total_sta,(setter)0,
-	PyDoc_STR("*sequence*: Total state PBI incentive income [$]"),
+	PyDoc_STR("*sequence*: Total state PBI incentive [$]"),
  	NULL},
 {"cf_pbi_total_uti", (getter)Outputs_get_cf_pbi_total_uti,(setter)0,
-	PyDoc_STR("*sequence*: Total utility PBI incentive income [$]"),
+	PyDoc_STR("*sequence*: Total utility PBI incentive [$]"),
  	NULL},
 {"cf_ppa_price", (getter)Outputs_get_cf_ppa_price,(setter)0,
 	PyDoc_STR("*sequence*: PPA price [cents/kWh]"),
@@ -8339,7 +8351,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Pre-tax cash flow [$]"),
  	NULL},
 {"cf_pretax_operating_cashflow", (getter)Outputs_get_cf_pretax_operating_cashflow,(setter)0,
-	PyDoc_STR("*sequence*: Pre-tax operating cash flow [$]"),
+	PyDoc_STR("*sequence*: Pre-tax operating cash flow (effective lease payment) [$]"),
  	NULL},
 {"cf_property_tax_assessed_value", (getter)Outputs_get_cf_property_tax_assessed_value,(setter)0,
 	PyDoc_STR("*sequence*: Property tax net assessed value [$]"),
@@ -8474,49 +8486,49 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Revenue from the system in September [$]"),
  	NULL},
 {"cf_sponsor_adj_reserve_release", (getter)Outputs_get_cf_sponsor_adj_reserve_release,(setter)0,
-	PyDoc_STR("*sequence*: Adjustment for release of reserves [$]"),
+	PyDoc_STR("*sequence*: Developer (lessee) adjustment for release of reserves [$]"),
  	NULL},
 {"cf_sponsor_aftertax", (getter)Outputs_get_cf_sponsor_aftertax,(setter)0,
-	PyDoc_STR("*sequence*: After-tax developer returns [$]"),
+	PyDoc_STR("*sequence*: Developer (lessee) after-tax returns [$]"),
  	NULL},
 {"cf_sponsor_aftertax_cash", (getter)Outputs_get_cf_sponsor_aftertax_cash,(setter)0,
-	PyDoc_STR("*sequence*: After-tax developer returns cash total [$]"),
+	PyDoc_STR("*sequence*: Developer (lessee) after-tax cash returns [$]"),
  	NULL},
 {"cf_sponsor_aftertax_devfee", (getter)Outputs_get_cf_sponsor_aftertax_devfee,(setter)0,
-	PyDoc_STR("*sequence*: After-tax sponsor developer fee tax liability [$]"),
+	PyDoc_STR("*sequence*: Developer (lessee) after-tax developer fee tax liability [$]"),
  	NULL},
 {"cf_sponsor_aftertax_irr", (getter)Outputs_get_cf_sponsor_aftertax_irr,(setter)0,
-	PyDoc_STR("*sequence*: After-tax developer cumulative IRR [%]"),
+	PyDoc_STR("*sequence*: Developer (lessee) after-tax cumulative IRR [%]"),
  	NULL},
 {"cf_sponsor_aftertax_npv", (getter)Outputs_get_cf_sponsor_aftertax_npv,(setter)0,
-	PyDoc_STR("*sequence*: After-tax developer cumulative NPV [$]"),
+	PyDoc_STR("*sequence*: Developer (lessee) after-tax cumulative NPV [$]"),
  	NULL},
 {"cf_sponsor_aftertax_tax", (getter)Outputs_get_cf_sponsor_aftertax_tax,(setter)0,
-	PyDoc_STR("*sequence*: After-tax sponsor tax returns [$]"),
+	PyDoc_STR("*sequence*: Developer (lessee) after-tax tax returns [$]"),
  	NULL},
 {"cf_sponsor_fedtax", (getter)Outputs_get_cf_sponsor_fedtax,(setter)0,
-	PyDoc_STR("*sequence*: Developer federal tax benefit/(liability) [$]"),
+	PyDoc_STR("*sequence*: Developer (lessee) federal tax benefit (liability) [$]"),
  	NULL},
 {"cf_sponsor_fedtax_income_prior_incentives", (getter)Outputs_get_cf_sponsor_fedtax_income_prior_incentives,(setter)0,
-	PyDoc_STR("*sequence*: Developer federal taxable income prior incentives [$]"),
+	PyDoc_STR("*sequence*: Developer (lessee) federal taxable income prior to incentives [$]"),
  	NULL},
 {"cf_sponsor_fedtax_income_with_incentives", (getter)Outputs_get_cf_sponsor_fedtax_income_with_incentives,(setter)0,
-	PyDoc_STR("*sequence*: Developer federal tax income with incentives [$]"),
+	PyDoc_STR("*sequence*: Developer (lessee) federal tax income with incentives [$]"),
  	NULL},
 {"cf_sponsor_fedtax_taxable_incentives", (getter)Outputs_get_cf_sponsor_fedtax_taxable_incentives,(setter)0,
-	PyDoc_STR("*sequence*: Developer federal taxable incentives [$]"),
+	PyDoc_STR("*sequence*: Developer (lessee) federal taxable incentives [$]"),
  	NULL},
 {"cf_sponsor_financing_activities", (getter)Outputs_get_cf_sponsor_financing_activities,(setter)0,
-	PyDoc_STR("*sequence*: Cash flow from financing activities [$]"),
+	PyDoc_STR("*sequence*: Developer (lessee) cash flow from financing activities [$]"),
  	NULL},
 {"cf_sponsor_investing_activities", (getter)Outputs_get_cf_sponsor_investing_activities,(setter)0,
-	PyDoc_STR("*sequence*: After-tax annual costs [$]"),
+	PyDoc_STR("*sequence*: Developer (lessee) cash flow from investing activities [$]"),
  	NULL},
 {"cf_sponsor_lpra", (getter)Outputs_get_cf_sponsor_lpra,(setter)0,
 	PyDoc_STR("*sequence*: Reserve (increase)/decrease lease payment [$]"),
  	NULL},
 {"cf_sponsor_margin", (getter)Outputs_get_cf_sponsor_margin,(setter)0,
-	PyDoc_STR("*sequence*: Annual developer (lessee) margin [$]"),
+	PyDoc_STR("*sequence*: Developer (lessee) operating margin [$]"),
  	NULL},
 {"cf_sponsor_me1cs", (getter)Outputs_get_cf_sponsor_me1cs,(setter)0,
 	PyDoc_STR("*sequence*: Reserve capital spending major equipment 1 [$]"),
@@ -8540,19 +8552,19 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Reserve capital spending major equipment total [$]"),
  	NULL},
 {"cf_sponsor_operating_activities", (getter)Outputs_get_cf_sponsor_operating_activities,(setter)0,
-	PyDoc_STR("*sequence*: Cash flow from operating activities [$]"),
+	PyDoc_STR("*sequence*: Developer (lessee) cash flow from operating activities [$]"),
  	NULL},
 {"cf_sponsor_operating_margin", (getter)Outputs_get_cf_sponsor_operating_margin,(setter)0,
 	PyDoc_STR("*sequence*: Operating margin not including lease payment [$]"),
  	NULL},
 {"cf_sponsor_pretax", (getter)Outputs_get_cf_sponsor_pretax,(setter)0,
-	PyDoc_STR("*sequence*: Pre-tax developer returns [$]"),
+	PyDoc_STR("*sequence*: Developer (lessee) pre-tax returns [$]"),
  	NULL},
 {"cf_sponsor_pretax_irr", (getter)Outputs_get_cf_sponsor_pretax_irr,(setter)0,
-	PyDoc_STR("*sequence*: Pre-tax developer cumulative IRR [%]"),
+	PyDoc_STR("*sequence*: Developer (lessee) pre-tax cumulative IRR [%]"),
  	NULL},
 {"cf_sponsor_pretax_npv", (getter)Outputs_get_cf_sponsor_pretax_npv,(setter)0,
-	PyDoc_STR("*sequence*: Pre-tax developer cumulative NPV [$]"),
+	PyDoc_STR("*sequence*: Developer (lessee) pre-tax cumulative NPV [$]"),
  	NULL},
 {"cf_sponsor_ra", (getter)Outputs_get_cf_sponsor_ra,(setter)0,
 	PyDoc_STR("*sequence*: Reserve (increase)/decrease total [$]"),
@@ -8561,16 +8573,16 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Reserve (increase)/decrease receivables [$]"),
  	NULL},
 {"cf_sponsor_statax", (getter)Outputs_get_cf_sponsor_statax,(setter)0,
-	PyDoc_STR("*sequence*: Developer state tax benefit/(liability) [$]"),
+	PyDoc_STR("*sequence*: Developer (lessee) state tax benefit (liability) [$]"),
  	NULL},
 {"cf_sponsor_statax_income_prior_incentives", (getter)Outputs_get_cf_sponsor_statax_income_prior_incentives,(setter)0,
-	PyDoc_STR("*sequence*: Developer state taxable income prior incentives [$]"),
+	PyDoc_STR("*sequence*: Developer (lessee) state taxable income prior to incentives [$]"),
  	NULL},
 {"cf_sponsor_statax_income_with_incentives", (getter)Outputs_get_cf_sponsor_statax_income_with_incentives,(setter)0,
-	PyDoc_STR("*sequence*: Developer state taxable income with incentives [$]"),
+	PyDoc_STR("*sequence*: Developer (lessee) state taxable income with incentives [$]"),
  	NULL},
 {"cf_sponsor_statax_taxable_incentives", (getter)Outputs_get_cf_sponsor_statax_taxable_incentives,(setter)0,
-	PyDoc_STR("*sequence*: Developer state taxable incentives [$]"),
+	PyDoc_STR("*sequence*: Developer (lessee) state taxable incentives [$]"),
  	NULL},
 {"cf_sponsor_wcra", (getter)Outputs_get_cf_sponsor_wcra,(setter)0,
 	PyDoc_STR("*sequence*: Reserve (increase)/decrease working capital [$]"),
@@ -8612,73 +8624,73 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: State income tax rate [frac]"),
  	NULL},
 {"cf_tax_investor_aftertax", (getter)Outputs_get_cf_tax_investor_aftertax,(setter)0,
-	PyDoc_STR("*sequence*: After-tax tax investor returns [$]"),
+	PyDoc_STR("*sequence*: Investor (lessor) after-tax returns [$]"),
  	NULL},
 {"cf_tax_investor_aftertax_cash", (getter)Outputs_get_cf_tax_investor_aftertax_cash,(setter)0,
-	PyDoc_STR("*sequence*: After-tax tax investor cash returns [$]"),
+	PyDoc_STR("*sequence*: Investor (lessor) cash returns [$]"),
  	NULL},
 {"cf_tax_investor_aftertax_irr", (getter)Outputs_get_cf_tax_investor_aftertax_irr,(setter)0,
-	PyDoc_STR("*sequence*: After-tax tax investor cumulative IRR [%]"),
+	PyDoc_STR("*sequence*: Investor (lessor) after-tax cumulative IRR [%]"),
  	NULL},
 {"cf_tax_investor_aftertax_itc", (getter)Outputs_get_cf_tax_investor_aftertax_itc,(setter)0,
-	PyDoc_STR("*sequence*: After-tax tax investor itc returns [$]"),
+	PyDoc_STR("*sequence*: Investor (lessor) ITC [$]"),
  	NULL},
 {"cf_tax_investor_aftertax_max_irr", (getter)Outputs_get_cf_tax_investor_aftertax_max_irr,(setter)0,
-	PyDoc_STR("*sequence*: After-tax tax investor maximum IRR [%]"),
+	PyDoc_STR("*sequence*: Investor (lessor) after-tax maximum IRR [%]"),
  	NULL},
 {"cf_tax_investor_aftertax_npv", (getter)Outputs_get_cf_tax_investor_aftertax_npv,(setter)0,
-	PyDoc_STR("*sequence*: After-tax tax investor cumulative NPV [$]"),
+	PyDoc_STR("*sequence*: Investor (lessor) after-tax cumulative NPV [$]"),
  	NULL},
 {"cf_tax_investor_aftertax_ptc", (getter)Outputs_get_cf_tax_investor_aftertax_ptc,(setter)0,
-	PyDoc_STR("*sequence*: After-tax tax investor ptc returns [$]"),
+	PyDoc_STR("*sequence*: Investor (lessor) PTC [$]"),
  	NULL},
 {"cf_tax_investor_aftertax_tax", (getter)Outputs_get_cf_tax_investor_aftertax_tax,(setter)0,
-	PyDoc_STR("*sequence*: After-tax tax investor tax returns [$]"),
+	PyDoc_STR("*sequence*: Investor (lessor) tax benefit (liability) [$]"),
  	NULL},
 {"cf_tax_investor_fedtax", (getter)Outputs_get_cf_tax_investor_fedtax,(setter)0,
-	PyDoc_STR("*sequence*: Tax investor federal tax [$]"),
+	PyDoc_STR("*sequence*: Investor (lessor)  federal tax [$]"),
  	NULL},
 {"cf_tax_investor_fedtax_income_prior_incentives", (getter)Outputs_get_cf_tax_investor_fedtax_income_prior_incentives,(setter)0,
-	PyDoc_STR("*sequence*: Tax investor federal taxable income prior to incentives [$]"),
+	PyDoc_STR("*sequence*: Investor (lessor)  federal taxable income prior to incentives [$]"),
  	NULL},
 {"cf_tax_investor_fedtax_income_with_incentives", (getter)Outputs_get_cf_tax_investor_fedtax_income_with_incentives,(setter)0,
-	PyDoc_STR("*sequence*: Tax investor federal taxable income with incentives [$]"),
+	PyDoc_STR("*sequence*: Investor (lessor)  federal taxable income with incentives [$]"),
  	NULL},
 {"cf_tax_investor_fedtax_taxable_incentives", (getter)Outputs_get_cf_tax_investor_fedtax_taxable_incentives,(setter)0,
-	PyDoc_STR("*sequence*: Tax investor federal taxable incentives [$]"),
+	PyDoc_STR("*sequence*: Investor (lessor)  federal taxable incentives [$]"),
  	NULL},
 {"cf_tax_investor_financing_activities", (getter)Outputs_get_cf_tax_investor_financing_activities,(setter)0,
-	PyDoc_STR("*sequence*: Cash flow from financing activities [$]"),
+	PyDoc_STR("*sequence*: Investor (lessor) cash flow from financing activities [$]"),
  	NULL},
 {"cf_tax_investor_investing_activities", (getter)Outputs_get_cf_tax_investor_investing_activities,(setter)0,
-	PyDoc_STR("*sequence*: Cash flow from investing activities [$]"),
+	PyDoc_STR("*sequence*: Investor (lessor) cash flow from investing activities [$]"),
  	NULL},
 {"cf_tax_investor_operating_activities", (getter)Outputs_get_cf_tax_investor_operating_activities,(setter)0,
-	PyDoc_STR("*sequence*: Cash flow from operating activities [$]"),
+	PyDoc_STR("*sequence*: Investor (lessor) cash flow from operating activities [$]"),
  	NULL},
 {"cf_tax_investor_pretax", (getter)Outputs_get_cf_tax_investor_pretax,(setter)0,
-	PyDoc_STR("*sequence*: Pre-tax tax investor returns [$]"),
+	PyDoc_STR("*sequence*: Investor (lessor) pre-tax returns [$]"),
  	NULL},
 {"cf_tax_investor_pretax_cashflow", (getter)Outputs_get_cf_tax_investor_pretax_cashflow,(setter)0,
-	PyDoc_STR("*sequence*: Pre-tax cash flow [$]"),
+	PyDoc_STR("*sequence*: Investor (lessor) pre-tax cash flow [$]"),
  	NULL},
 {"cf_tax_investor_pretax_irr", (getter)Outputs_get_cf_tax_investor_pretax_irr,(setter)0,
-	PyDoc_STR("*sequence*: Pre-tax tax investor cumulative IRR [%]"),
+	PyDoc_STR("*sequence*: Investor (lessor) pre-tax cumulative IRR [%]"),
  	NULL},
 {"cf_tax_investor_pretax_npv", (getter)Outputs_get_cf_tax_investor_pretax_npv,(setter)0,
-	PyDoc_STR("*sequence*: Pre-tax tax investor cumulative NPV [$]"),
+	PyDoc_STR("*sequence*: Investor (lessor) pre-tax cumulative NPV [$]"),
  	NULL},
 {"cf_tax_investor_statax", (getter)Outputs_get_cf_tax_investor_statax,(setter)0,
-	PyDoc_STR("*sequence*: Tax investor state tax [$]"),
+	PyDoc_STR("*sequence*: Investor (lessor)  state tax [$]"),
  	NULL},
 {"cf_tax_investor_statax_income_prior_incentives", (getter)Outputs_get_cf_tax_investor_statax_income_prior_incentives,(setter)0,
-	PyDoc_STR("*sequence*: Tax investor state taxable income prior to incentives [$]"),
+	PyDoc_STR("*sequence*: Investor (lessor)  state taxable income prior to incentives [$]"),
  	NULL},
 {"cf_tax_investor_statax_income_with_incentives", (getter)Outputs_get_cf_tax_investor_statax_income_with_incentives,(setter)0,
-	PyDoc_STR("*sequence*: Tax investor state taxable income with incentives [$]"),
+	PyDoc_STR("*sequence*: Investor (lessor)  state taxable income with incentives [$]"),
  	NULL},
 {"cf_tax_investor_statax_taxable_incentives", (getter)Outputs_get_cf_tax_investor_statax_taxable_incentives,(setter)0,
-	PyDoc_STR("*sequence*: Tax investor state taxable incentives [$]"),
+	PyDoc_STR("*sequence*: Investor (lessor)  state taxable incentives [$]"),
  	NULL},
 {"cf_total_revenue", (getter)Outputs_get_cf_total_revenue,(setter)0,
 	PyDoc_STR("*sequence*: Total revenue [$]"),
@@ -8687,10 +8699,13 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*float*: Financing Cost [$]"),
  	NULL},
 {"cost_installed", (getter)Outputs_get_cost_installed,(setter)0,
-	PyDoc_STR("*float*: Initial cost"),
+	PyDoc_STR("*float*: Initial cost [$]"),
  	NULL},
 {"cost_installedperwatt", (getter)Outputs_get_cost_installedperwatt,(setter)0,
 	PyDoc_STR("*float*: Installed cost per watt [$/W]"),
+ 	NULL},
+{"cost_prefinancing", (getter)Outputs_get_cost_prefinancing,(setter)0,
+	PyDoc_STR("*float*: Total installed cost [$]"),
  	NULL},
 {"debt_fraction", (getter)Outputs_get_debt_fraction,(setter)0,
 	PyDoc_STR("*float*: Debt percent [%]"),
@@ -9401,25 +9416,25 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*float*: IRR target year"),
  	NULL},
 {"ibi_fedtax_total", (getter)Outputs_get_ibi_fedtax_total,(setter)0,
-	PyDoc_STR("*float*: Total federal taxable IBI incentive income [$]"),
+	PyDoc_STR("*float*: Total federal taxable IBI incentive [$]"),
  	NULL},
 {"ibi_statax_total", (getter)Outputs_get_ibi_statax_total,(setter)0,
-	PyDoc_STR("*float*: Total state taxable IBI incentive income [$]"),
+	PyDoc_STR("*float*: Total state taxable IBI incentive [$]"),
  	NULL},
 {"ibi_total", (getter)Outputs_get_ibi_total,(setter)0,
-	PyDoc_STR("*float*: Total IBI incentive income [$]"),
+	PyDoc_STR("*float*: Total IBI incentive [$]"),
  	NULL},
 {"ibi_total_fed", (getter)Outputs_get_ibi_total_fed,(setter)0,
-	PyDoc_STR("*float*: Total federal IBI incentive income [$]"),
+	PyDoc_STR("*float*: Total federal IBI incentive [$]"),
  	NULL},
 {"ibi_total_oth", (getter)Outputs_get_ibi_total_oth,(setter)0,
-	PyDoc_STR("*float*: Total other IBI incentive income [$]"),
+	PyDoc_STR("*float*: Total other IBI incentive [$]"),
  	NULL},
 {"ibi_total_sta", (getter)Outputs_get_ibi_total_sta,(setter)0,
-	PyDoc_STR("*float*: Total state IBI incentive income [$]"),
+	PyDoc_STR("*float*: Total state IBI incentive [$]"),
  	NULL},
 {"ibi_total_uti", (getter)Outputs_get_ibi_total_uti,(setter)0,
-	PyDoc_STR("*float*: Total utility IBI incentive income [$]"),
+	PyDoc_STR("*float*: Total utility IBI incentive [$]"),
  	NULL},
 {"issuance_of_equity", (getter)Outputs_get_issuance_of_equity,(setter)0,
 	PyDoc_STR("*float*: Issuance of equity [$]"),
@@ -9665,34 +9680,37 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*float*: Net pre-tax cash salvage value [$]"),
  	NULL},
 {"size_of_equity", (getter)Outputs_get_size_of_equity,(setter)0,
-	PyDoc_STR("*float*: Total equity"),
+	PyDoc_STR("*float*: Total equity [$]"),
  	NULL},
 {"sponsor_aftertax_irr", (getter)Outputs_get_sponsor_aftertax_irr,(setter)0,
-	PyDoc_STR("*float*: After-tax developer IRR [%]"),
+	PyDoc_STR("*float*: Developer (lessee) after-tax IRR [%]"),
  	NULL},
 {"sponsor_aftertax_npv", (getter)Outputs_get_sponsor_aftertax_npv,(setter)0,
-	PyDoc_STR("*float*: After-tax developer NPV [$]"),
+	PyDoc_STR("*float*: Developer (lessee) after-tax NPV [$]"),
  	NULL},
 {"sponsor_equity_in_lessee_llc", (getter)Outputs_get_sponsor_equity_in_lessee_llc,(setter)0,
-	PyDoc_STR("*float*: Developer equity in lessee LLC (funding of reserve accounts) [$]"),
+	PyDoc_STR("*float*: Developer (lessee) equity in lessee LLC (funding of reserve accounts) [$]"),
+ 	NULL},
+{"sponsor_pretax_development", (getter)Outputs_get_sponsor_pretax_development,(setter)0,
+	PyDoc_STR("*float*: Sponsor pre-tax development fee [$]"),
  	NULL},
 {"sponsor_pretax_irr", (getter)Outputs_get_sponsor_pretax_irr,(setter)0,
-	PyDoc_STR("*float*: Pre-tax developer IRR [%]"),
+	PyDoc_STR("*float*: Developer (lessee) pre-tax IRR [%]"),
  	NULL},
 {"sponsor_pretax_npv", (getter)Outputs_get_sponsor_pretax_npv,(setter)0,
-	PyDoc_STR("*float*: Pre-tax developer NPV [$]"),
+	PyDoc_STR("*float*: Developer (lessee) pre-tax NPV [$]"),
  	NULL},
 {"tax_investor_aftertax_irr", (getter)Outputs_get_tax_investor_aftertax_irr,(setter)0,
-	PyDoc_STR("*float*: After-tax tax investor IRR"),
+	PyDoc_STR("*float*: Investor (lessor) after-tax IRR"),
  	NULL},
 {"tax_investor_aftertax_npv", (getter)Outputs_get_tax_investor_aftertax_npv,(setter)0,
-	PyDoc_STR("*float*: After-tax tax investor NPV"),
+	PyDoc_STR("*float*: Investor (lessor) after-tax NPV"),
  	NULL},
 {"tax_investor_pretax_irr", (getter)Outputs_get_tax_investor_pretax_irr,(setter)0,
-	PyDoc_STR("*float*: Pre-tax tax investor IRR [%]"),
+	PyDoc_STR("*float*: Investor (lessor) pre-tax IRR [%]"),
  	NULL},
 {"tax_investor_pretax_npv", (getter)Outputs_get_tax_investor_pretax_npv,(setter)0,
-	PyDoc_STR("*float*: Pre-tax tax investor NPV [$]"),
+	PyDoc_STR("*float*: Investor (lessor) pre-tax NPV [$]"),
  	NULL},
 {"wacc", (getter)Outputs_get_wacc,(setter)0,
 	PyDoc_STR("*float*: Weighted Average Cost of Capital (WACC)"),
@@ -9786,9 +9804,9 @@ newSaleleasebackObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "SystemOutput", SystemOutput_obj);
 	Py_DECREF(SystemOutput_obj);
 
-	PyObject* DHF_obj = DHF_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "DHF", DHF_obj);
-	Py_DECREF(DHF_obj);
+	PyObject* SaleLeaseback_obj = SaleLeaseback_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "SaleLeaseback", SaleLeaseback_obj);
+	Py_DECREF(SaleLeaseback_obj);
 
 	PyObject* TimeOfDelivery_obj = TimeOfDelivery_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "TimeOfDelivery", TimeOfDelivery_obj);
@@ -10047,12 +10065,12 @@ SaleleasebackModule_exec(PyObject *m)
 				(PyObject*)&SystemOutput_Type);
 	Py_DECREF(&SystemOutput_Type);
 
-	/// Add the DHF type object to Saleleaseback_Type
-	if (PyType_Ready(&DHF_Type) < 0) { goto fail; }
+	/// Add the SaleLeaseback type object to Saleleaseback_Type
+	if (PyType_Ready(&SaleLeaseback_Type) < 0) { goto fail; }
 	PyDict_SetItemString(Saleleaseback_Type.tp_dict,
-				"DHF",
-				(PyObject*)&DHF_Type);
-	Py_DECREF(&DHF_Type);
+				"SaleLeaseback",
+				(PyObject*)&SaleLeaseback_Type);
+	Py_DECREF(&SaleLeaseback_Type);
 
 	/// Add the TimeOfDelivery type object to Saleleaseback_Type
 	if (PyType_Ready(&TimeOfDelivery_Type) < 0) { goto fail; }

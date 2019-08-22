@@ -101,13 +101,13 @@ Common_set_ur_sell_eq_buy(CommonObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef Common_getset[] = {
 {"TOU_demand_single_peak", (getter)Common_get_TOU_demand_single_peak,(setter)Common_set_TOU_demand_single_peak,
-	PyDoc_STR("*float*: Use single monthly peak for TOU demand charge [0/1]\n\n*Options*: 0=use TOU peak,1=use flat peak\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Use single monthly peak for TOU demand charge [0/1]\n\n*Options*: 0=use TOU peak,1=use flat peak\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"en_electricity_rates", (getter)Common_get_en_electricity_rates,(setter)Common_set_en_electricity_rates,
 	PyDoc_STR("*float*: Optionally enable/disable electricity_rate [years]\n\n*Constraints*: INTEGER,MIN=0,MAX=1"),
  	NULL},
 {"ur_sell_eq_buy", (getter)Common_get_ur_sell_eq_buy,(setter)Common_set_ur_sell_eq_buy,
-	PyDoc_STR("*float*: Set sell rate equal to buy rate [0/1]\n\n*Info*: Optional override\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Set sell rate equal to buy rate [0/1]\n\n*Info*: Optional override\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -644,7 +644,7 @@ ElectricLoad_set_load_escalation(ElectricLoadObject *self, PyObject *value, void
 
 static PyGetSetDef ElectricLoad_getset[] = {
 {"load_escalation", (getter)ElectricLoad_get_load_escalation,(setter)ElectricLoad_set_load_escalation,
-	PyDoc_STR("*sequence*: Annual load escalation [%/year]\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*sequence*: Annual load escalation [%/year]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -851,25 +851,25 @@ UtilityRateFlat_set_ur_ts_sell_rate(UtilityRateFlatObject *self, PyObject *value
 
 static PyGetSetDef UtilityRateFlat_getset[] = {
 {"rate_escalation", (getter)UtilityRateFlat_get_rate_escalation,(setter)UtilityRateFlat_set_rate_escalation,
-	PyDoc_STR("*sequence*: Annual electricity rate escalation [%/year]\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*sequence*: Annual electricity rate escalation [%/year]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"ur_annual_min_charge", (getter)UtilityRateFlat_get_ur_annual_min_charge,(setter)UtilityRateFlat_set_ur_annual_min_charge,
-	PyDoc_STR("*float*: Annual minimum charge [$]\n\n*Required*: set to 0.0 if not provided."),
+	PyDoc_STR("*float*: Annual minimum charge [$]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
 {"ur_en_ts_sell_rate", (getter)UtilityRateFlat_get_ur_en_ts_sell_rate,(setter)UtilityRateFlat_set_ur_en_ts_sell_rate,
-	PyDoc_STR("*float*: Enable time step sell rates [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Enable time step sell rates [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"ur_metering_option", (getter)UtilityRateFlat_get_ur_metering_option,(setter)UtilityRateFlat_set_ur_metering_option,
-	PyDoc_STR("*float*: Metering options [0=Single meter with monthly rollover credits in kWh,1=Single meter with monthly rollover credits in $,2=Single meter with no monthly rollover credits (Net Billing),3=Single meter with monthly rollover credits in $ (Net Billing $),4=Two meters with all generation sold and all load purchased]\n\n*Info*: Net metering monthly excess\n\n*Constraints*: INTEGER,MIN=0,MAX=4\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Metering options [0=Single meter with monthly rollover credits in kWh,1=Single meter with monthly rollover credits in $,2=Single meter with no monthly rollover credits (Net Billing),3=Single meter with monthly rollover credits in $ (Net Billing $),4=Two meters with all generation sold and all load purchased]\n\n*Info*: Net metering monthly excess\n\n*Constraints*: INTEGER,MIN=0,MAX=4\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"ur_monthly_fixed_charge", (getter)UtilityRateFlat_get_ur_monthly_fixed_charge,(setter)UtilityRateFlat_set_ur_monthly_fixed_charge,
-	PyDoc_STR("*float*: Monthly fixed charge [$]\n\n*Required*: set to 0.0 if not provided."),
+	PyDoc_STR("*float*: Monthly fixed charge [$]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
 {"ur_monthly_min_charge", (getter)UtilityRateFlat_get_ur_monthly_min_charge,(setter)UtilityRateFlat_set_ur_monthly_min_charge,
-	PyDoc_STR("*float*: Monthly minimum charge [$]\n\n*Required*: set to 0.0 if not provided."),
+	PyDoc_STR("*float*: Monthly minimum charge [$]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
 {"ur_nm_yearend_sell_rate", (getter)UtilityRateFlat_get_ur_nm_yearend_sell_rate,(setter)UtilityRateFlat_set_ur_nm_yearend_sell_rate,
-	PyDoc_STR("*float*: Year end sell rate [$/kWh]\n\n*Required*: set to 0.0 if not provided."),
+	PyDoc_STR("*float*: Year end sell rate [$/kWh]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
 {"ur_ts_sell_rate", (getter)UtilityRateFlat_get_ur_ts_sell_rate,(setter)UtilityRateFlat_set_ur_ts_sell_rate,
 	PyDoc_STR("*sequence*: Time step sell rates [0/1]"),
@@ -1196,10 +1196,10 @@ UtilityRateDemandCharge_set_ur_dc_tou_mat(UtilityRateDemandChargeObject *self, P
 
 static PyGetSetDef UtilityRateDemandCharge_getset[] = {
 {"ur_dc_enable", (getter)UtilityRateDemandCharge_get_ur_dc_enable,(setter)UtilityRateDemandCharge_set_ur_dc_enable,
-	PyDoc_STR("*float*: Enable demand charge [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: set to 0 if not provided."),
+	PyDoc_STR("*float*: Enable demand charge [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"ur_dc_flat_mat", (getter)UtilityRateDemandCharge_get_ur_dc_flat_mat,(setter)UtilityRateDemandCharge_set_ur_dc_flat_mat,
-	PyDoc_STR("*sequence[sequence]*: Demand rates (flat) table\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*sequence[sequence]*: Demand rates (flat) table\n\n*Required*: True if ur_dc_enable=1"),
  	NULL},
 {"ur_dc_sched_weekday", (getter)UtilityRateDemandCharge_get_ur_dc_sched_weekday,(setter)UtilityRateDemandCharge_set_ur_dc_sched_weekday,
 	PyDoc_STR("*sequence[sequence]*: Demand charge weekday schedule\n\n*Info*: 12x24"),
@@ -1208,7 +1208,7 @@ static PyGetSetDef UtilityRateDemandCharge_getset[] = {
 	PyDoc_STR("*sequence[sequence]*: Demand charge weekend schedule\n\n*Info*: 12x24"),
  	NULL},
 {"ur_dc_tou_mat", (getter)UtilityRateDemandCharge_get_ur_dc_tou_mat,(setter)UtilityRateDemandCharge_set_ur_dc_tou_mat,
-	PyDoc_STR("*sequence[sequence]*: Demand rates (TOU) table\n\n*Required*: set to 1 if not provided."),
+	PyDoc_STR("*sequence[sequence]*: Demand rates (TOU) table\n\n*Required*: True if ur_dc_enable=1"),
  	NULL},
 	{NULL}  /* Sentinel */
 };

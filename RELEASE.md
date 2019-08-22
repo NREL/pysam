@@ -7,7 +7,16 @@ Documentation here: https://pysam-docs.readthedocs.io/en/latest/
 * Built-in documentation of models and parameters.
 * Minimum Python 3.5 for Windows 7 64-bit, MacOSX 10.6, or CentOS 5.
 
-
+## Version 1.2.dev3, August 21, 2019 ~ SAM 2018.11.11.3, SSC Version 211
+* Wind PRUF framework
+* Wind resource distribution
+* Physical Trough reorganization
+* Grid compute module
+* Marine hydrokinetic compute module
+* Supercritical CO2 compute modules
+* Geothermal output names
+* Documentation: Variable requirement
+* Stubs: Added AdjustmentmentFactors
 
 ## Version 1.2.1, April 26, 2019 ~ SAM 2018.11.11.3, SSC Version 209
 * SSC using doubles

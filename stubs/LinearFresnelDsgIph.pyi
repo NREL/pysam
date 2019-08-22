@@ -130,6 +130,26 @@ class HeatSink(object):
 	heat_sink_dP_frac = float
 
 
+class AdjustmentFactors(object):
+	def assign(self): 
+		pass
+
+	def export(self): 
+		return {}
+
+	def __init__(self, *args, **kwargs): # real signature unknown
+		pass
+
+	constant = float
+	dc_constant = float
+	dc_hourly = tuple
+	dc_periods = tuple
+	hourly = tuple
+	periods = tuple
+	sf_constant = float
+	sf_hourly = tuple
+	sf_periods = tuple
+
 class Outputs(object):
 	def assign(self): 
 		pass
@@ -209,6 +229,7 @@ class LinearFresnelDsgIph(object):
 	Powerblock = Powerblock
 	Heliostat = Heliostat
 	HeatSink = HeatSink
+	AdjustmentFactors = AdjustmentFactors
 	Outputs = Outputs
 
 
