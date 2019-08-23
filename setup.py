@@ -1,4 +1,4 @@
-import json, marshal, os, ntpath
+import json, marshal, os, ntpath, shutil
 from setuptools import setup, Extension
 import distutils
 import sys
@@ -109,7 +109,8 @@ def _decode(o):
     else:
         return o
 
-
+shutil.rmtree('files/defaults')
+os.mkdir('files/defaults')
 # generate defaults and copy them into installation
 for filename in os.listdir(defaults_dir):
     with open(defaults_dir + '/' + filename) as f:
