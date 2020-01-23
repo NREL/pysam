@@ -1461,7 +1461,7 @@ extern "C"
 	 * Set ud_T_amb_ind_od: Off design table of user-defined power cycle performance formed from parametric on T_amb [C]
 	 * options: None
 	 * constraints: None
-	 * required if: pc_config=1
+	 * required if: ?=[[0]]
 	 */
 	SAM_EXPORT void SAM_TcsMSLF_UserDefinedPC_ud_T_amb_ind_od_mset(SAM_TcsMSLF ptr, double* mat, int nrows, int ncols, SAM_error *err);
 
@@ -1485,7 +1485,7 @@ extern "C"
 	 * Set ud_T_htf_ind_od: Off design table of user-defined power cycle performance formed from parametric on T_htf_hot [C]
 	 * options: None
 	 * constraints: None
-	 * required if: pc_config=1
+	 * required if: ?=[[0]]
 	 */
 	SAM_EXPORT void SAM_TcsMSLF_UserDefinedPC_ud_T_htf_ind_od_mset(SAM_TcsMSLF ptr, double* mat, int nrows, int ncols, SAM_error *err);
 
@@ -1509,7 +1509,7 @@ extern "C"
 	 * Set ud_ind_od: Off design user-defined power cycle performance as function of T_htf, m_dot_htf [ND], and T_amb
 	 * options: None
 	 * constraints: None
-	 * required if: pc_config=1
+	 * required if: ?=[[0]]
 	 */
 	SAM_EXPORT void SAM_TcsMSLF_UserDefinedPC_ud_ind_od_mset(SAM_TcsMSLF ptr, double* mat, int nrows, int ncols, SAM_error *err);
 
@@ -1525,7 +1525,7 @@ extern "C"
 	 * Set ud_m_dot_htf_ind_od: Off design table of user-defined power cycle performance formed from parametric on m_dot_htf [ND]
 	 * options: None
 	 * constraints: None
-	 * required if: pc_config=1
+	 * required if: ?=[[0]]
 	 */
 	SAM_EXPORT void SAM_TcsMSLF_UserDefinedPC_ud_m_dot_htf_ind_od_mset(SAM_TcsMSLF ptr, double* mat, int nrows, int ncols, SAM_error *err);
 

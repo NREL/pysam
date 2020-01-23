@@ -124,6 +124,14 @@ extern "C"
 	SAM_EXPORT void SAM_Cashloan_FinancialParameters_real_discount_rate_nset(SAM_Cashloan ptr, double number, SAM_error *err);
 
 	/**
+	 * Set salvage_percentage: Salvage value percentage [%]
+	 * options: None
+	 * constraints: MIN=0,MAX=100
+	 * required if: ?=0.0
+	 */
+	SAM_EXPORT void SAM_Cashloan_FinancialParameters_salvage_percentage_nset(SAM_Cashloan ptr, double number, SAM_error *err);
+
+	/**
 	 * Set state_tax_rate: State income tax rate [%]
 	 * options: None
 	 * constraints: None
@@ -369,7 +377,7 @@ extern "C"
 	SAM_EXPORT void SAM_Cashloan_SystemCosts_om_production_escal_nset(SAM_Cashloan ptr, double number, SAM_error *err);
 
 	/**
-	 * Set om_replacement_cost1: Repacement cost 1 [$/kWh]
+	 * Set om_replacement_cost1: Replacement cost 1 [$/kWh]
 	 * options: None
 	 * constraints: None
 	 * required if: ?=0.0
@@ -377,7 +385,7 @@ extern "C"
 	SAM_EXPORT void SAM_Cashloan_SystemCosts_om_replacement_cost1_aset(SAM_Cashloan ptr, double* arr, int length, SAM_error *err);
 
 	/**
-	 * Set om_replacement_cost2: Repacement cost 2 [$/kW]
+	 * Set om_replacement_cost2: Replacement cost 2 [$/kW]
 	 * options: None
 	 * constraints: None
 	 * required if: ?=0.0
@@ -391,6 +399,14 @@ extern "C"
 	 * required if: ?=0.0
 	 */
 	SAM_EXPORT void SAM_Cashloan_SystemCosts_om_replacement_cost_escal_nset(SAM_Cashloan ptr, double number, SAM_error *err);
+
+	/**
+	 * Set total_installed_cost: Total installed cost [$]
+	 * options: None
+	 * constraints: MIN=0
+	 * required if: *
+	 */
+	SAM_EXPORT void SAM_Cashloan_SystemCosts_total_installed_cost_nset(SAM_Cashloan ptr, double number, SAM_error *err);
 
 
 	//
@@ -1431,22 +1447,6 @@ extern "C"
 	//
 
 	/**
-	 * Set annual_energy_value: Energy value [$]
-	 * options: None
-	 * constraints: None
-	 * required if: *
-	 */
-	SAM_EXPORT void SAM_Cashloan_Cashloan_annual_energy_value_aset(SAM_Cashloan ptr, double* arr, int length, SAM_error *err);
-
-	/**
-	 * Set annual_themal_value: Energy value [$]
-	 * options: None
-	 * constraints: None
-	 * required if: None
-	 */
-	SAM_EXPORT void SAM_Cashloan_Cashloan_annual_themal_value_aset(SAM_Cashloan ptr, double* arr, int length, SAM_error *err);
-
-	/**
 	 * Set market: Residential or Commercial Market [0/1]
 	 * options: 0=residential,1=comm.
 	 * constraints: INTEGER,MIN=0,MAX=1
@@ -1462,26 +1462,26 @@ extern "C"
 	 */
 	SAM_EXPORT void SAM_Cashloan_Cashloan_mortgage_nset(SAM_Cashloan ptr, double number, SAM_error *err);
 
-	/**
-	 * Set salvage_percentage: Salvage value percentage [%]
-	 * options: None
-	 * constraints: MIN=0,MAX=100
-	 * required if: ?=0.0
-	 */
-	SAM_EXPORT void SAM_Cashloan_Cashloan_salvage_percentage_nset(SAM_Cashloan ptr, double number, SAM_error *err);
-
-	/**
-	 * Set total_installed_cost: Total installed cost [$]
-	 * options: None
-	 * constraints: MIN=0
-	 * required if: *
-	 */
-	SAM_EXPORT void SAM_Cashloan_Cashloan_total_installed_cost_nset(SAM_Cashloan ptr, double number, SAM_error *err);
-
 
 	//
 	// SystemOutput parameters
 	//
+
+	/**
+	 * Set annual_energy_value: Energy value [$]
+	 * options: None
+	 * constraints: None
+	 * required if: *
+	 */
+	SAM_EXPORT void SAM_Cashloan_SystemOutput_annual_energy_value_aset(SAM_Cashloan ptr, double* arr, int length, SAM_error *err);
+
+	/**
+	 * Set annual_themal_value: Energy value [$]
+	 * options: None
+	 * constraints: None
+	 * required if: None
+	 */
+	SAM_EXPORT void SAM_Cashloan_SystemOutput_annual_themal_value_aset(SAM_Cashloan ptr, double* arr, int length, SAM_error *err);
 
 	/**
 	 * Set degradation: Annual degradation [%]
@@ -1560,6 +1560,8 @@ extern "C"
 
 	SAM_EXPORT double SAM_Cashloan_FinancialParameters_real_discount_rate_nget(SAM_Cashloan ptr, SAM_error *err);
 
+	SAM_EXPORT double SAM_Cashloan_FinancialParameters_salvage_percentage_nget(SAM_Cashloan ptr, SAM_error *err);
+
 	SAM_EXPORT double* SAM_Cashloan_FinancialParameters_state_tax_rate_aget(SAM_Cashloan ptr, int* length, SAM_error *err);
 
 	SAM_EXPORT double SAM_Cashloan_FinancialParameters_system_capacity_nget(SAM_Cashloan ptr, SAM_error *err);
@@ -1630,6 +1632,8 @@ extern "C"
 	SAM_EXPORT double* SAM_Cashloan_SystemCosts_om_replacement_cost2_aget(SAM_Cashloan ptr, int* length, SAM_error *err);
 
 	SAM_EXPORT double SAM_Cashloan_SystemCosts_om_replacement_cost_escal_nget(SAM_Cashloan ptr, SAM_error *err);
+
+	SAM_EXPORT double SAM_Cashloan_SystemCosts_total_installed_cost_nget(SAM_Cashloan ptr, SAM_error *err);
 
 
 	/**
@@ -1913,22 +1917,18 @@ extern "C"
 	 * Cashloan Getters
 	 */
 
-	SAM_EXPORT double* SAM_Cashloan_Cashloan_annual_energy_value_aget(SAM_Cashloan ptr, int* length, SAM_error *err);
-
-	SAM_EXPORT double* SAM_Cashloan_Cashloan_annual_themal_value_aget(SAM_Cashloan ptr, int* length, SAM_error *err);
-
 	SAM_EXPORT double SAM_Cashloan_Cashloan_market_nget(SAM_Cashloan ptr, SAM_error *err);
 
 	SAM_EXPORT double SAM_Cashloan_Cashloan_mortgage_nget(SAM_Cashloan ptr, SAM_error *err);
-
-	SAM_EXPORT double SAM_Cashloan_Cashloan_salvage_percentage_nget(SAM_Cashloan ptr, SAM_error *err);
-
-	SAM_EXPORT double SAM_Cashloan_Cashloan_total_installed_cost_nget(SAM_Cashloan ptr, SAM_error *err);
 
 
 	/**
 	 * SystemOutput Getters
 	 */
+
+	SAM_EXPORT double* SAM_Cashloan_SystemOutput_annual_energy_value_aget(SAM_Cashloan ptr, int* length, SAM_error *err);
+
+	SAM_EXPORT double* SAM_Cashloan_SystemOutput_annual_themal_value_aget(SAM_Cashloan ptr, int* length, SAM_error *err);
 
 	SAM_EXPORT double* SAM_Cashloan_SystemOutput_degradation_aget(SAM_Cashloan ptr, int* length, SAM_error *err);
 
@@ -1956,6 +1956,10 @@ extern "C"
 	 */
 
 	SAM_EXPORT double SAM_Cashloan_Outputs_adjusted_installed_cost_nget(SAM_Cashloan ptr, SAM_error *err);
+
+	SAM_EXPORT double SAM_Cashloan_Outputs_cbi_fedtax_total_nget(SAM_Cashloan ptr, SAM_error *err);
+
+	SAM_EXPORT double SAM_Cashloan_Outputs_cbi_statax_total_nget(SAM_Cashloan ptr, SAM_error *err);
 
 	SAM_EXPORT double SAM_Cashloan_Outputs_cbi_total_nget(SAM_Cashloan ptr, SAM_error *err);
 
@@ -2059,6 +2063,10 @@ extern "C"
 
 	SAM_EXPORT double* SAM_Cashloan_Outputs_cf_payback_without_expenses_aget(SAM_Cashloan ptr, int* length, SAM_error *err);
 
+	SAM_EXPORT double* SAM_Cashloan_Outputs_cf_pbi_fedtax_total_aget(SAM_Cashloan ptr, int* length, SAM_error *err);
+
+	SAM_EXPORT double* SAM_Cashloan_Outputs_cf_pbi_statax_total_aget(SAM_Cashloan ptr, int* length, SAM_error *err);
+
 	SAM_EXPORT double* SAM_Cashloan_Outputs_cf_pbi_total_aget(SAM_Cashloan ptr, int* length, SAM_error *err);
 
 	SAM_EXPORT double* SAM_Cashloan_Outputs_cf_pbi_total_fed_aget(SAM_Cashloan ptr, int* length, SAM_error *err);
@@ -2104,6 +2112,10 @@ extern "C"
 	SAM_EXPORT double SAM_Cashloan_Outputs_effective_tax_rate_nget(SAM_Cashloan ptr, SAM_error *err);
 
 	SAM_EXPORT double SAM_Cashloan_Outputs_first_cost_nget(SAM_Cashloan ptr, SAM_error *err);
+
+	SAM_EXPORT double SAM_Cashloan_Outputs_ibi_fedtax_total_nget(SAM_Cashloan ptr, SAM_error *err);
+
+	SAM_EXPORT double SAM_Cashloan_Outputs_ibi_statax_total_nget(SAM_Cashloan ptr, SAM_error *err);
 
 	SAM_EXPORT double SAM_Cashloan_Outputs_ibi_total_nget(SAM_Cashloan ptr, SAM_error *err);
 

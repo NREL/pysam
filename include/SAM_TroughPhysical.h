@@ -377,7 +377,7 @@ extern "C"
 	SAM_EXPORT void SAM_TroughPhysical_SolarField_Rho_mirror_clean_aset(SAM_TroughPhysical ptr, double* arr, int length, SAM_error *err);
 
 	/**
-	 * Set Rough: Roughness of the internal surface  [m]
+	 * Set Rough: Relative roughness of the internal HCE surface  [-]
 	 * options: None
 	 * constraints: None
 	 * required if: *
@@ -1137,7 +1137,7 @@ extern "C"
 	 * Set ud_T_amb_ind_od: Off design table of user-defined power cycle performance formed from parametric on T_amb [C]
 	 * options: None
 	 * constraints: None
-	 * required if: pc_config=1
+	 * required if: ?=[[0]]
 	 */
 	SAM_EXPORT void SAM_TroughPhysical_Powerblock_ud_T_amb_ind_od_mset(SAM_TroughPhysical ptr, double* mat, int nrows, int ncols, SAM_error *err);
 
@@ -1161,7 +1161,7 @@ extern "C"
 	 * Set ud_T_htf_ind_od: Off design table of user-defined power cycle performance formed from parametric on T_htf_hot [C]
 	 * options: None
 	 * constraints: None
-	 * required if: pc_config=1
+	 * required if: ?=[[0]]
 	 */
 	SAM_EXPORT void SAM_TroughPhysical_Powerblock_ud_T_htf_ind_od_mset(SAM_TroughPhysical ptr, double* mat, int nrows, int ncols, SAM_error *err);
 
@@ -1185,7 +1185,7 @@ extern "C"
 	 * Set ud_ind_od: Off design user-defined power cycle performance as function of T_htf, m_dot_htf [ND], and T_amb
 	 * options: None
 	 * constraints: None
-	 * required if: pc_config=1
+	 * required if: ?=[[0]]
 	 */
 	SAM_EXPORT void SAM_TroughPhysical_Powerblock_ud_ind_od_mset(SAM_TroughPhysical ptr, double* mat, int nrows, int ncols, SAM_error *err);
 
@@ -1201,7 +1201,7 @@ extern "C"
 	 * Set ud_m_dot_htf_ind_od: Off design table of user-defined power cycle performance formed from parametric on m_dot_htf [ND]
 	 * options: None
 	 * constraints: None
-	 * required if: pc_config=1
+	 * required if: ?=[[0]]
 	 */
 	SAM_EXPORT void SAM_TroughPhysical_Powerblock_ud_m_dot_htf_ind_od_mset(SAM_TroughPhysical ptr, double* mat, int nrows, int ncols, SAM_error *err);
 
@@ -2355,8 +2355,6 @@ extern "C"
 
 	SAM_EXPORT double SAM_TroughPhysical_Outputs_annual_field_freeze_protection_nget(SAM_TroughPhysical ptr, SAM_error *err);
 
-	SAM_EXPORT double SAM_TroughPhysical_Outputs_annual_gross_energy_nget(SAM_TroughPhysical ptr, SAM_error *err);
-
 	SAM_EXPORT double SAM_TroughPhysical_Outputs_annual_tes_freeze_protection_nget(SAM_TroughPhysical ptr, SAM_error *err);
 
 	SAM_EXPORT double SAM_TroughPhysical_Outputs_annual_thermal_consumption_nget(SAM_TroughPhysical ptr, SAM_error *err);
@@ -2444,6 +2442,8 @@ extern "C"
 	SAM_EXPORT double* SAM_TroughPhysical_Outputs_m_dot_water_pc_aget(SAM_TroughPhysical ptr, int* length, SAM_error *err);
 
 	SAM_EXPORT double* SAM_TroughPhysical_Outputs_month_aget(SAM_TroughPhysical ptr, int* length, SAM_error *err);
+
+	SAM_EXPORT double* SAM_TroughPhysical_Outputs_monthly_energy_aget(SAM_TroughPhysical ptr, int* length, SAM_error *err);
 
 	SAM_EXPORT double* SAM_TroughPhysical_Outputs_n_op_modes_aget(SAM_TroughPhysical ptr, int* length, SAM_error *err);
 

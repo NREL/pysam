@@ -144,6 +144,7 @@ static PyObject * PySAM_get_attr(PyObject *self, PyObject* x_attr, PyObject *nam
         }
         return PyObject_GenericGetAttr((PyObject *)self, name);
     }
+    return NULL;
 }
 
 static int PySAM_set_attr(PyObject *self, PyObject* x_attr, const char *name, PyObject *v){

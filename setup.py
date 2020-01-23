@@ -119,6 +119,7 @@ extension_modules = [Extension('PySAM.AdjustmentFactors',
                     include_dirs=["include", "src"],
                     library_dirs=[libpath],
                     libraries=libs,
+                    extra_compile_args=["-Wno-unused-function", "-Wno-ignored-attributes", "-Wno-strict-prototypes"],
                     extra_link_args=extra_link_args
                     )]
 
@@ -129,6 +130,7 @@ for filename in os.listdir(this_directory+"/modules"):
                             include_dirs=["include", "src"],
                             library_dirs=[libpath],
                             libraries=libs,
+                            extra_compile_args=["-Wno-unused-function", "-Wno-ignored-attributes", "-Wno-strict-prototypes"],
                             extra_link_args=extra_link_args
                             ))
 
