@@ -3,26 +3,12 @@ typedef struct {
     SAM_Windpower   data_ptr;
 } WindGroupObject;
 
-static const char* Turbine_calculate_powercurve_doc =
-        "Calculates the power produced by a wind turbine at windspeeds incremented by 0.25 m/s\\n"
-        "Input: var_table with key-value pairs\\n"
-        "     'turbine_size' - double [kW]\\n"
-        "     'elevation' - double [m], required if using Weibull resource model, otherwise 0\\n"
-        "     'max_tip_speed' - double [m/s]\\n"
-        "     'max_tip_sp_ratio' - double max tip speed ratio [-]\\n"
-        "     'cut_in' - double cut in speed [m/s]\\n"
-        "     'cut_out' - double cut out speed [m/s]\\n"
-        "     'drive_train' - int 0: 3 Stage Planetary, 1: Single Stage - Low Speed Generator, 2: Multi-Generator, 3: Direct Drive\\n"
-        "Output: key-value pairs added to var_table\\n"
-        "     'wind_turbine_powercurve_windspeeds' - array [m/s]\\n"
-        "     'wind_turbine_powercurve_powerout' - array [m/s]\\n"
-        "     'rated_wind_speed' - double [m/s[\\n"
-        "     'hub_efficiency' - array [m/s]";
-
 static PyObject* Turbine_calculate_powercurve(PyObject *self, PyObject *args, PyObject *keywds)
 {
     double turbine_size;
+    int rotor_diam;
     double elev;
+    double max_cp;
     double max_tip_speed;
     double max_tip_sp_ratio;
     double cut_in;
@@ -30,13 +16,12 @@ static PyObject* Turbine_calculate_powercurve(PyObject *self, PyObject *args, Py
     int drive_train;
 
     int model_choice;
-    double rotor_diam, max_cp;
 
-    static char *kwlist[] = {"turbine_size", "elevation", "max_tip_speed", "max_tip_sp_ratio",
+    static char *kwlist[] = {"turbine_size", "rotor_diameter", "elevation", "max_cp", "max_tip_speed", "max_tip_sp_ratio",
                              "cut_in", "cut_out", "drive_train", NULL};
 
-    if (!PyArg_ParseTupleAndKeywords(args, keywds, "ddddddi", kwlist,
-                                     &turbine_size, &elev, &max_tip_speed, &max_tip_sp_ratio,
+    if (!PyArg_ParseTupleAndKeywords(args, keywds, "diddddddi", kwlist,
+                                     &turbine_size, &rotor_diam, &elev, &max_cp, &max_tip_speed, &max_tip_sp_ratio,
                                      &cut_in, &cut_out, &drive_train))
         return NULL;
 
@@ -58,21 +43,6 @@ static PyObject* Turbine_calculate_powercurve(PyObject *self, PyObject *args, Py
         elev = 0;
     }
 
-    // rotor diameter and max_cp should be set already
-    error = new_error();
-    rotor_diam = SAM_Windpower_Turbine_wind_turbine_rotor_diameter_nget(self_obj->data_ptr, &error);
-    if (PySAM_has_error(error)){
-        PyErr_SetString(PySAM_ErrorObject, "Error: Turbine.wind_turbine_rotor_diameter not set.");
-        return NULL;
-    }
-
-    error = new_error();
-    max_cp = SAM_Windpower_Turbine_wind_turbine_max_cp_nget(self_obj->data_ptr, &error);
-    if (PySAM_has_error(error)){
-        PyErr_SetString(PySAM_ErrorObject, "Error: Turbine.wind_turbine_max_cp not set.");
-        return NULL;
-    }
-
     SAM_table data = SAM_table_construct(NULL);
     SAM_table_set_num(data, "turbine_size", turbine_size, NULL);
     SAM_table_set_num(data, "wind_turbine_rotor_diameter", rotor_diam, NULL);
@@ -91,6 +61,20 @@ static PyObject* Turbine_calculate_powercurve(PyObject *self, PyObject *args, Py
         return NULL;
     }
 
+    // set rotor diameter and max_cp
+    error = new_error();
+    SAM_Windpower_Turbine_wind_turbine_rotor_diameter_nset(self_obj->data_ptr, rotor_diam, &error);
+    if (PySAM_has_error(error)){
+        return NULL;
+    }
+
+    error = new_error();
+    SAM_Windpower_Turbine_wind_turbine_max_cp_nset(self_obj->data_ptr, max_cp, &error);
+    if (PySAM_has_error(error)){
+        return NULL;
+    }
+
+    // set power curve arrays
     int length;
     error = new_error();
 
@@ -102,7 +86,7 @@ static PyObject* Turbine_calculate_powercurve(PyObject *self, PyObject *args, Py
 
     SAM_Windpower_Turbine_wind_turbine_powercurve_windspeeds_aset(self_obj->data_ptr, arr, length, &error);
 
-    double rated_windspeed = *SAM_table_get_num(data, "rated_wind_speed", &error);
+    double rated_windspeed = SAM_table_get_num(data, "rated_wind_speed", &error);
 
     if (PySAM_has_error(error)){
         return NULL;

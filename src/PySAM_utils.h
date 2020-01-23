@@ -10,9 +10,26 @@
 #endif
 
 //
+// Structures for PySAM Classes (compute modules) and subclasses (variable groups)
+//
+
+typedef struct {
+	PyObject_HEAD
+	SAM_table   data_ptr;
+} VarGroupObject;
+
+typedef struct {
+	PyObject_HEAD
+	PyObject *x_attr;        /* Attributes dictionary */
+	SAM_table data_ptr;
+    PyObject *data_owner_ptr;     // NULL if owns data_ptr, otherwise pts to another PySAM object
+} CmodObject;
+
+
+//
 // Runtime linking to SAM shared library
 //
-static char* SAM_lib_dir = NULL;	// dir ends with '/' 
+static char* SAM_lib_dir = NULL;	// dir ends with '/'
 static char* SAM_lib_path = NULL;
 #if defined(__WINDOWS__) || defined(__CYGWIN__)
 static const char SAM_sep = '\\';
@@ -268,7 +285,7 @@ static PyObject* PySAM_table_to_dict(SAM_table table){
                 Py_DECREF(str_obj);
                 break;
             case SAM_NUMBER:
-                num = *SAM_table_get_num(table, key, &error);
+                num = SAM_table_get_num(table, key, &error);
                 if (PySAM_has_error(error)) goto fail;
                 PyObject* long_obj = PyLong_FromDouble((double)num);
                 PyDict_SetItemString(table_dict, key, long_obj);
@@ -883,6 +900,8 @@ static int PySAM_load_defaults(PyObject* self, PyObject* x_attr, void* data_ptr,
     }
 
     PyObject* dict = PyMarshal_ReadObjectFromFile(f);
+    fclose(f);
+
     if (!dict){
         PyErr_SetString(PySAM_ErrorObject, "Could not load defaults dict.");
         return -1;
