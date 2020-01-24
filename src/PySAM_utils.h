@@ -20,64 +20,17 @@ typedef struct {
 
 typedef struct {
 	PyObject_HEAD
-	PyObject *x_attr;        /* Attributes dictionary */
 	SAM_table data_ptr;
+	PyObject *x_attr;        /* Attributes dictionary */
     PyObject *data_owner_ptr;     // NULL if owns data_ptr, otherwise pts to another PySAM object
 } CmodObject;
 
 
 //
-// Runtime linking to SAM shared library
-//
-static char* SAM_lib_dir = NULL;	// dir ends with '/'
-static char* SAM_lib_path = NULL;
-#if defined(__WINDOWS__) || defined(__CYGWIN__)
-static const char SAM_sep = '\\';
-static char* SAM_lib = "SAM_api.dll";
-#else
-static const char SAM_sep = '/';
-static char* SAM_lib = "libSAM_api.so";
-#endif
-
-static void* SAM_lib_handle = NULL;
-
-static PyObject *PySAM_ErrorObject;
-
-static int PySAM_load_lib(PyObject* m){
-    if (!SAM_lib_path){
-        PyObject* file = PyModule_GetFilenameObject(m);
-
-        if (!file){
-            PyErr_SetString(PySAM_ErrorObject, "Could not get module filepath");
-            Py_XDECREF(file);
-            return -1;
-        }
-        PyObject* ascii_mystring = PyUnicode_AsASCIIString(file);
-        char* filename = PyBytes_AsString(ascii_mystring);
-
-        char* lastSlash = strrchr(filename, SAM_sep);
-
-		SAM_lib_dir = malloc(strlen(filename) - strlen(lastSlash) + 2);
-		memcpy(SAM_lib_dir, filename, strlen(filename) - strlen(lastSlash) + 1);
-		SAM_lib_dir[strlen(filename) - strlen(lastSlash) + 1] = '\0';
-
-        SAM_lib_path = malloc(strlen(SAM_lib_dir) + strlen(SAM_lib) + 1);
-
-		memcpy(SAM_lib_path, SAM_lib_dir, strlen(SAM_lib_dir) + 1);
-        strcat(SAM_lib_path, SAM_lib);
-
-        PyObject *sys_path = PySys_GetObject("path");
-        PyList_Append(sys_path, PyUnicode_FromString(SAM_lib_dir));
-
-        Py_XDECREF(file);
-        Py_XDECREF(ascii_mystring);
-    }
-    return 0;
-}
-
-//
 // Error Handling
 //
+
+static PyObject *PySAM_ErrorObject;
 
 static int PySAM_init_error(PyObject* m){
     if (PySAM_ErrorObject == NULL) {
@@ -119,6 +72,62 @@ static int PySAM_has_error_msg(SAM_error error, const char *msg){
 static void PySAM_concat_msg(char *dest, const char *first, char *second) {
     memcpy(dest, first, strlen(first));
     strncat(dest, second, strlen(second));
+}
+
+//
+// Runtime linking to SAM shared library
+//
+static char* SAM_lib_dir = NULL;	// dir ends with '/'
+static char* SAM_lib_path = NULL;
+#if defined(__WINDOWS__) || defined(__CYGWIN__)
+static const char SAM_sep = '\\';
+static char* SAM_lib = "SAM_api.dll";
+#else
+static const char SAM_sep = '/';
+static char* SAM_lib = "libSAM_api.so";
+#endif
+
+static void* SAM_lib_handle = NULL;
+
+static int PySAM_load_lib(PyObject* m){
+    if (!SAM_lib_path){
+        PyObject* file = PyModule_GetFilenameObject(m);
+
+        if (!file){
+            PyErr_SetString(PySAM_ErrorObject, "Could not get module filepath");
+            Py_XDECREF(file);
+            return -1;
+        }
+        PyObject* ascii_mystring = PyUnicode_AsASCIIString(file);
+        char* filename = PyBytes_AsString(ascii_mystring);
+
+        char* lastSlash = strrchr(filename, SAM_sep);
+
+		SAM_lib_dir = malloc(strlen(filename) - strlen(lastSlash) + 2);
+		memcpy(SAM_lib_dir, filename, strlen(filename) - strlen(lastSlash) + 1);
+		SAM_lib_dir[strlen(filename) - strlen(lastSlash) + 1] = '\0';
+
+        SAM_lib_path = malloc(strlen(SAM_lib_dir) + strlen(SAM_lib) + 1);
+
+		memcpy(SAM_lib_path, SAM_lib_dir, strlen(SAM_lib_dir) + 1);
+        strcat(SAM_lib_path, SAM_lib);
+
+        PyObject *sys_path = PySys_GetObject("path");
+        PyList_Append(sys_path, PyUnicode_FromString(SAM_lib_dir));
+
+        Py_XDECREF(file);
+        Py_XDECREF(ascii_mystring);
+    }
+    return 0;
+}
+
+static int PySAM_check_lib_loaded(){
+    if (SAM_lib_handle == NULL){
+        SAM_error error = new_error();
+        SAM_lib_handle = SAM_load_library(SAM_lib_path, &error);
+        if (PySAM_has_error(error)) return 0;
+    }
+    return 1;
 }
 
 //
@@ -614,11 +623,8 @@ static int PySAM_table_setter(PyObject *value, SAM_set_table_t func, void *data_
 //
 
 static int PySAM_assign_from_dict(void *data_ptr, PyObject *dict, const char *tech, const char *group){
-    if (SAM_lib_handle == NULL){
-        SAM_error error = new_error();
-        SAM_lib_handle = SAM_load_library(SAM_lib_path, &error);
-        if (PySAM_has_error(error)) return 0;
-    }
+    if (!PySAM_check_lib_loaded()) return 0;
+
     Py_INCREF(dict);
 
     PyObject* key;
@@ -763,11 +769,7 @@ PySAM_assign_from_attr(PyTypeObject *tp, PyObject *self, PyObject *args){
         return NULL;
     }
 
-    if (SAM_lib_handle == NULL){
-        SAM_error error = new_error();
-        SAM_lib_handle = SAM_load_library(SAM_lib_path, &error);
-        if (PySAM_has_error(error)) return 0;
-    }
+    if (!PySAM_check_lib_loaded()) return NULL;
 
     PyGetSetDef* getset = tp->tp_getset;
     while(getset->name){
@@ -823,11 +825,7 @@ static int PySAM_assign_from_nested_dict(PyObject* self, PyObject* x_attr, void 
 static PyObject *
 PySAM_export_to_dict(PyObject *self, PyTypeObject *tp) {
 
-    if (SAM_lib_handle == NULL){
-        SAM_error error = new_error();
-        SAM_lib_handle = SAM_load_library(SAM_lib_path, &error);
-        if (PySAM_has_error(error)) return 0;
-    }
+    if (!PySAM_check_lib_loaded()) return NULL;
 
     PyObject* export = PyDict_New();
     if (!export){
@@ -912,6 +910,61 @@ static int PySAM_load_defaults(PyObject* self, PyObject* x_attr, void* data_ptr,
         return -1;
     Py_DECREF(dict);
     return 0;
+}
+
+// assigning value by name
+
+static PyGetSetDef* CmodType_find_getset(CmodObject * self, const char* name, char* VarGroup_name){
+    if (!PySAM_check_lib_loaded()) return NULL;
+
+    CmodObject* cmod_obj = (CmodObject*)self;
+    PyObject* key;
+    PyObject* value;
+    Py_ssize_t pos = 0;
+    while (PyDict_Next(cmod_obj->x_attr, &pos, &key, &value)) {
+        PyTypeObject* var_type = value->ob_type;
+        PyGetSetDef* getset = var_type->tp_getset;
+        if (!getset)
+            continue;
+
+        while(getset->name){
+            if (strcmp(getset->name, name) == 0){
+                if (VarGroup_name){
+                    strcpy(VarGroup_name, getset->name);
+                }
+                return getset;
+            }
+            getset++;
+        }
+    }
+    return NULL;
+}
+
+static PyObject * CmodObject_value(CmodObject *self, PyObject *args)
+{
+    char* name = 0;
+    PyObject* value = NULL;
+    if (!PyArg_ParseTuple(args, "s|O", &name, &value))
+		return NULL;
+
+    PyGetSetDef* getset = CmodType_find_getset(self, name, NULL);
+    if (!getset){
+        char str[256];
+        PySAM_concat_msg(str, "'value' error, could not find attribute: ", name);
+        PyErr_SetString(PySAM_ErrorObject, str);
+        return NULL;
+    }
+
+    if (!value){
+        return (*getset->get)((PyObject*)self, NULL);
+    }
+    else{
+        if ((*getset->set)((PyObject*)self, value, NULL) == 0){
+            Py_INCREF(Py_None);
+            return Py_None;
+        }
+        return NULL;
+    }
 }
 
 #endif //PYSAM_SAM_UTILS_H
