@@ -3257,90 +3257,6 @@ static PyMethodDef UserDefinedPC_methods[] = {
 };
 
 static PyObject *
-UserDefinedPC_get_ud_T_amb_des(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsMSLF_UserDefinedPC_ud_T_amb_des_nget, self->data_ptr);
-}
-
-static int
-UserDefinedPC_set_ud_T_amb_des(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsMSLF_UserDefinedPC_ud_T_amb_des_nset, self->data_ptr);
-}
-
-static PyObject *
-UserDefinedPC_get_ud_T_amb_high(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsMSLF_UserDefinedPC_ud_T_amb_high_nget, self->data_ptr);
-}
-
-static int
-UserDefinedPC_set_ud_T_amb_high(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsMSLF_UserDefinedPC_ud_T_amb_high_nset, self->data_ptr);
-}
-
-static PyObject *
-UserDefinedPC_get_ud_T_amb_ind_od(VarGroupObject *self, void *closure)
-{
-	return PySAM_matrix_getter(SAM_TcsMSLF_UserDefinedPC_ud_T_amb_ind_od_mget, self->data_ptr);
-}
-
-static int
-UserDefinedPC_set_ud_T_amb_ind_od(VarGroupObject *self, PyObject *value, void *closure)
-{
-		return PySAM_matrix_setter(value, SAM_TcsMSLF_UserDefinedPC_ud_T_amb_ind_od_mset, self->data_ptr);
-}
-
-static PyObject *
-UserDefinedPC_get_ud_T_amb_low(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsMSLF_UserDefinedPC_ud_T_amb_low_nget, self->data_ptr);
-}
-
-static int
-UserDefinedPC_set_ud_T_amb_low(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsMSLF_UserDefinedPC_ud_T_amb_low_nset, self->data_ptr);
-}
-
-static PyObject *
-UserDefinedPC_get_ud_T_htf_high(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsMSLF_UserDefinedPC_ud_T_htf_high_nget, self->data_ptr);
-}
-
-static int
-UserDefinedPC_set_ud_T_htf_high(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsMSLF_UserDefinedPC_ud_T_htf_high_nset, self->data_ptr);
-}
-
-static PyObject *
-UserDefinedPC_get_ud_T_htf_ind_od(VarGroupObject *self, void *closure)
-{
-	return PySAM_matrix_getter(SAM_TcsMSLF_UserDefinedPC_ud_T_htf_ind_od_mget, self->data_ptr);
-}
-
-static int
-UserDefinedPC_set_ud_T_htf_ind_od(VarGroupObject *self, PyObject *value, void *closure)
-{
-		return PySAM_matrix_setter(value, SAM_TcsMSLF_UserDefinedPC_ud_T_htf_ind_od_mset, self->data_ptr);
-}
-
-static PyObject *
-UserDefinedPC_get_ud_T_htf_low(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsMSLF_UserDefinedPC_ud_T_htf_low_nget, self->data_ptr);
-}
-
-static int
-UserDefinedPC_set_ud_T_htf_low(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsMSLF_UserDefinedPC_ud_T_htf_low_nset, self->data_ptr);
-}
-
-static PyObject *
 UserDefinedPC_get_ud_f_W_dot_cool_des(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_TcsMSLF_UserDefinedPC_ud_f_W_dot_cool_des_nget, self->data_ptr);
@@ -3365,42 +3281,6 @@ UserDefinedPC_set_ud_ind_od(VarGroupObject *self, PyObject *value, void *closure
 }
 
 static PyObject *
-UserDefinedPC_get_ud_m_dot_htf_high(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsMSLF_UserDefinedPC_ud_m_dot_htf_high_nget, self->data_ptr);
-}
-
-static int
-UserDefinedPC_set_ud_m_dot_htf_high(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsMSLF_UserDefinedPC_ud_m_dot_htf_high_nset, self->data_ptr);
-}
-
-static PyObject *
-UserDefinedPC_get_ud_m_dot_htf_ind_od(VarGroupObject *self, void *closure)
-{
-	return PySAM_matrix_getter(SAM_TcsMSLF_UserDefinedPC_ud_m_dot_htf_ind_od_mget, self->data_ptr);
-}
-
-static int
-UserDefinedPC_set_ud_m_dot_htf_ind_od(VarGroupObject *self, PyObject *value, void *closure)
-{
-		return PySAM_matrix_setter(value, SAM_TcsMSLF_UserDefinedPC_ud_m_dot_htf_ind_od_mset, self->data_ptr);
-}
-
-static PyObject *
-UserDefinedPC_get_ud_m_dot_htf_low(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsMSLF_UserDefinedPC_ud_m_dot_htf_low_nget, self->data_ptr);
-}
-
-static int
-UserDefinedPC_set_ud_m_dot_htf_low(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsMSLF_UserDefinedPC_ud_m_dot_htf_low_nset, self->data_ptr);
-}
-
-static PyObject *
 UserDefinedPC_get_ud_m_dot_water_cool_des(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_TcsMSLF_UserDefinedPC_ud_m_dot_water_cool_des_nget, self->data_ptr);
@@ -3413,41 +3293,11 @@ UserDefinedPC_set_ud_m_dot_water_cool_des(VarGroupObject *self, PyObject *value,
 }
 
 static PyGetSetDef UserDefinedPC_getset[] = {
-{"ud_T_amb_des", (getter)UserDefinedPC_get_ud_T_amb_des,(setter)UserDefinedPC_set_ud_T_amb_des,
-	PyDoc_STR("*float*: Ambient temperature at user-defined power cycle design point [C]\n\n*Required*: True if pc_config=1"),
- 	NULL},
-{"ud_T_amb_high", (getter)UserDefinedPC_get_ud_T_amb_high,(setter)UserDefinedPC_set_ud_T_amb_high,
-	PyDoc_STR("*float*: High level ambient temperature for HTF mass flow rate parametric [C]\n\n*Required*: True if pc_config=1"),
- 	NULL},
-{"ud_T_amb_ind_od", (getter)UserDefinedPC_get_ud_T_amb_ind_od,(setter)UserDefinedPC_set_ud_T_amb_ind_od,
-	PyDoc_STR("*sequence[sequence]*: Off design table of user-defined power cycle performance formed from parametric on T_amb [C]\n\n*Required*: If not provided, assumed to be [[0]]"),
- 	NULL},
-{"ud_T_amb_low", (getter)UserDefinedPC_get_ud_T_amb_low,(setter)UserDefinedPC_set_ud_T_amb_low,
-	PyDoc_STR("*float*: Low level ambient temperature for HTF mass flow rate parametric [C]\n\n*Required*: True if pc_config=1"),
- 	NULL},
-{"ud_T_htf_high", (getter)UserDefinedPC_get_ud_T_htf_high,(setter)UserDefinedPC_set_ud_T_htf_high,
-	PyDoc_STR("*float*: High level HTF inlet temperature for T_amb parametric [C]\n\n*Required*: True if pc_config=1"),
- 	NULL},
-{"ud_T_htf_ind_od", (getter)UserDefinedPC_get_ud_T_htf_ind_od,(setter)UserDefinedPC_set_ud_T_htf_ind_od,
-	PyDoc_STR("*sequence[sequence]*: Off design table of user-defined power cycle performance formed from parametric on T_htf_hot [C]\n\n*Required*: If not provided, assumed to be [[0]]"),
- 	NULL},
-{"ud_T_htf_low", (getter)UserDefinedPC_get_ud_T_htf_low,(setter)UserDefinedPC_set_ud_T_htf_low,
-	PyDoc_STR("*float*: Low level HTF inlet temperature for T_amb parametric [C]\n\n*Required*: True if pc_config=1"),
- 	NULL},
 {"ud_f_W_dot_cool_des", (getter)UserDefinedPC_get_ud_f_W_dot_cool_des,(setter)UserDefinedPC_set_ud_f_W_dot_cool_des,
 	PyDoc_STR("*float*: Percent of user-defined power cycle design gross output consumed by cooling [%]\n\n*Required*: True if pc_config=1"),
  	NULL},
 {"ud_ind_od", (getter)UserDefinedPC_get_ud_ind_od,(setter)UserDefinedPC_set_ud_ind_od,
-	PyDoc_STR("*sequence[sequence]*: Off design user-defined power cycle performance as function of T_htf, m_dot_htf [ND], and T_amb\n\n*Required*: If not provided, assumed to be [[0]]"),
- 	NULL},
-{"ud_m_dot_htf_high", (getter)UserDefinedPC_get_ud_m_dot_htf_high,(setter)UserDefinedPC_set_ud_m_dot_htf_high,
-	PyDoc_STR("*float*: High level normalized HTF mass flow rate for T_HTF parametric [-]\n\n*Required*: True if pc_config=1"),
- 	NULL},
-{"ud_m_dot_htf_ind_od", (getter)UserDefinedPC_get_ud_m_dot_htf_ind_od,(setter)UserDefinedPC_set_ud_m_dot_htf_ind_od,
-	PyDoc_STR("*sequence[sequence]*: Off design table of user-defined power cycle performance formed from parametric on m_dot_htf [ND]\n\n*Required*: If not provided, assumed to be [[0]]"),
- 	NULL},
-{"ud_m_dot_htf_low", (getter)UserDefinedPC_get_ud_m_dot_htf_low,(setter)UserDefinedPC_set_ud_m_dot_htf_low,
-	PyDoc_STR("*float*: Low level normalized HTF mass flow rate for T_HTF parametric [-]\n\n*Required*: True if pc_config=1"),
+	PyDoc_STR("*sequence[sequence]*: Off design user-defined power cycle performance as function of T_htf, m_dot_htf [ND], and T_amb\n\n*Required*: True if pc_config=1"),
  	NULL},
 {"ud_m_dot_water_cool_des", (getter)UserDefinedPC_get_ud_m_dot_water_cool_des,(setter)UserDefinedPC_set_ud_m_dot_water_cool_des,
 	PyDoc_STR("*float*: Mass flow rate of water required at user-defined power cycle design point [kg/s]\n\n*Required*: True if pc_config=1"),
@@ -4583,6 +4433,12 @@ TcsMSLF_export(CmodObject *self, PyObject *args)
 	return PySAM_export_to_nested_dict((PyObject *) self, self->x_attr);
 }
 
+static PyObject *
+TcsMSLF_value(CmodObject *self, PyObject *args)
+{
+	return CmodObject_value(self, args);
+}
+
 static PyMethodDef TcsMSLF_methods[] = {
 		{"execute",            (PyCFunction)TcsMSLF_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
@@ -4590,6 +4446,8 @@ static PyMethodDef TcsMSLF_methods[] = {
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Weather': { var: val, ...}, ...}``")},
 		{"export",            (PyCFunction)TcsMSLF_export,  METH_VARARGS,
 				PyDoc_STR("export() -> dict\n Export attributes into nested dictionary")},
+		{"value",             (PyCFunction)TcsMSLF_value, METH_VARARGS,
+				PyDoc_STR("value(name, optional value) -> Union[None, float, dict, sequence, str]\n Get or set by name a value in any of the variable groups.")},
 		{NULL,              NULL}           /* sentinel */
 };
 

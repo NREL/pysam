@@ -55,13 +55,29 @@ extern "C"
 	 * Outputs Getters
 	 */
 
+	SAM_EXPORT double SAM_UiUdpcChecks_Outputs_T_amb_des_nget(SAM_UiUdpcChecks ptr, SAM_error *err);
+
+	SAM_EXPORT double SAM_UiUdpcChecks_Outputs_T_amb_high_nget(SAM_UiUdpcChecks ptr, SAM_error *err);
+
+	SAM_EXPORT double SAM_UiUdpcChecks_Outputs_T_amb_low_nget(SAM_UiUdpcChecks ptr, SAM_error *err);
+
 	SAM_EXPORT double SAM_UiUdpcChecks_Outputs_T_htf_des_nget(SAM_UiUdpcChecks ptr, SAM_error *err);
 
 	SAM_EXPORT double SAM_UiUdpcChecks_Outputs_T_htf_high_nget(SAM_UiUdpcChecks ptr, SAM_error *err);
 
 	SAM_EXPORT double SAM_UiUdpcChecks_Outputs_T_htf_low_nget(SAM_UiUdpcChecks ptr, SAM_error *err);
 
+	SAM_EXPORT double SAM_UiUdpcChecks_Outputs_m_dot_des_nget(SAM_UiUdpcChecks ptr, SAM_error *err);
+
+	SAM_EXPORT double SAM_UiUdpcChecks_Outputs_m_dot_high_nget(SAM_UiUdpcChecks ptr, SAM_error *err);
+
+	SAM_EXPORT double SAM_UiUdpcChecks_Outputs_m_dot_low_nget(SAM_UiUdpcChecks ptr, SAM_error *err);
+
+	SAM_EXPORT double SAM_UiUdpcChecks_Outputs_n_T_amb_pars_nget(SAM_UiUdpcChecks ptr, SAM_error *err);
+
 	SAM_EXPORT double SAM_UiUdpcChecks_Outputs_n_T_htf_pars_nget(SAM_UiUdpcChecks ptr, SAM_error *err);
+
+	SAM_EXPORT double SAM_UiUdpcChecks_Outputs_n_m_dot_pars_nget(SAM_UiUdpcChecks ptr, SAM_error *err);
 
 #ifdef __cplusplus
 } /* end of extern "C" { */

@@ -51,10 +51,10 @@ AirCoolerDesign Group
 .. autoclass:: PySAM.Sco2CspSystem.Sco2CspSystem.AirCoolerDesign
 	:members:
 
-OffDesignInputs Group
+Common Group
 ==============
 
-.. autoclass:: PySAM.Sco2CspSystem.Sco2CspSystem.OffDesignInputs
+.. autoclass:: PySAM.Sco2CspSystem.Sco2CspSystem.Common
 	:members:
 
 Outputs Group

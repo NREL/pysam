@@ -21,6 +21,12 @@ Functions
 .. autoclass:: PySAM.HostDeveloper.HostDeveloper
 	:members:
 
+Revenue Group
+==============
+
+.. autoclass:: PySAM.HostDeveloper.HostDeveloper.Revenue
+	:members:
+
 FinancialParameters Group
 ==============
 
@@ -39,6 +45,12 @@ TaxCreditIncentives Group
 .. autoclass:: PySAM.HostDeveloper.HostDeveloper.TaxCreditIncentives
 	:members:
 
+Depreciation Group
+==============
+
+.. autoclass:: PySAM.HostDeveloper.HostDeveloper.Depreciation
+	:members:
+
 PaymentIncentives Group
 ==============
 
@@ -49,12 +61,6 @@ Host Group
 ==============
 
 .. autoclass:: PySAM.HostDeveloper.HostDeveloper.Host
-	:members:
-
-Common Group
-==============
-
-.. autoclass:: PySAM.HostDeveloper.HostDeveloper.Common
 	:members:
 
 SystemOutput Group
@@ -87,70 +93,16 @@ TimeOfDelivery Group
 .. autoclass:: PySAM.HostDeveloper.HostDeveloper.TimeOfDelivery
 	:members:
 
-ReserveAccounts Group
-==============
-
-.. autoclass:: PySAM.HostDeveloper.HostDeveloper.ReserveAccounts
-	:members:
-
-Depreciation Group
-==============
-
-.. autoclass:: PySAM.HostDeveloper.HostDeveloper.Depreciation
-	:members:
-
-SalvageValue Group
-==============
-
-.. autoclass:: PySAM.HostDeveloper.HostDeveloper.SalvageValue
-	:members:
-
-SolutionMode Group
-==============
-
-.. autoclass:: PySAM.HostDeveloper.HostDeveloper.SolutionMode
-	:members:
-
-PPAPrice Group
-==============
-
-.. autoclass:: PySAM.HostDeveloper.HostDeveloper.PPAPrice
-	:members:
-
 ConstructionFinancing Group
 ==============
 
 .. autoclass:: PySAM.HostDeveloper.HostDeveloper.ConstructionFinancing
 	:members:
 
-ProjectTermDebt Group
+BatterySystem Group
 ==============
 
-.. autoclass:: PySAM.HostDeveloper.HostDeveloper.ProjectTermDebt
-	:members:
-
-OtherCapitalCosts Group
-==============
-
-.. autoclass:: PySAM.HostDeveloper.HostDeveloper.OtherCapitalCosts
-	:members:
-
-IRRTargets Group
-==============
-
-.. autoclass:: PySAM.HostDeveloper.HostDeveloper.IRRTargets
-	:members:
-
-CashIncentives Group
-==============
-
-.. autoclass:: PySAM.HostDeveloper.HostDeveloper.CashIncentives
-	:members:
-
-Battery Group
-==============
-
-.. autoclass:: PySAM.HostDeveloper.HostDeveloper.Battery
+.. autoclass:: PySAM.HostDeveloper.HostDeveloper.BatterySystem
 	:members:
 
 Outputs Group

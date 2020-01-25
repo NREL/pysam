@@ -9,11 +9,16 @@ class MHKWave(object):
 		pass
 
 
-	annual_energy_loss = float
-	calculate_capacity = float
-	rated_capacity = float
-	wave_power_curve = tuple
-	wave_resource_definition = tuple
+	device_rated_power = float
+	loss_additional = float
+	loss_array_spacing = float
+	loss_downtime = float
+	loss_resource_overprediction = float
+	loss_transmission = float
+	number_devices = float
+	system_capacity = float
+	wave_power_matrix = tuple
+	wave_resource_matrix = tuple
 
 
 class Outputs(object):
@@ -29,8 +34,8 @@ class Outputs(object):
 
 	annual_energy = float
 	annual_energy_distribution = tuple
-	average_power = float
 	capacity_factor = float
+	device_average_power = float
 
 
 class MhkWave(object):

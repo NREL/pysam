@@ -237,6 +237,7 @@ static int PySAM_seq_to_matrix(PyObject *value, double **mat, int *nrows, int *n
 
     if(!*mat) {
         Py_DECREF(seq);
+        Py_DECREF(row);
         PyErr_NoMemory(  );
         return -2;
     }
@@ -245,6 +246,7 @@ static int PySAM_seq_to_matrix(PyObject *value, double **mat, int *nrows, int *n
         if (PySequence_Fast_GET_SIZE(row) != *ncols){
             free(*mat);
             Py_DECREF(seq);
+            Py_DECREF(row);
             PyErr_SetString(PyExc_TypeError, "Matrix must be rectangular.");
             return -6;
         }
@@ -252,6 +254,7 @@ static int PySAM_seq_to_matrix(PyObject *value, double **mat, int *nrows, int *n
         if ( res < 0){
             free(*mat);
             Py_DECREF(seq);
+            Py_DECREF(row);
             char str[256];
             sprintf(str, "Error converting nested tuple %d into row in matrix.", i);
             PyErr_SetString(PyExc_TypeError, str);
@@ -259,11 +262,98 @@ static int PySAM_seq_to_matrix(PyObject *value, double **mat, int *nrows, int *n
         }
         double* mat_pos = &((*mat)[*ncols * i]);
         memcpy(mat_pos, arr, (*ncols)*sizeof(double));
+        Py_DECREF(row);
 
         free(arr);
     }
     Py_DECREF(seq);
     return 0;
+}
+
+static PyObject* PySAM_table_to_dict(SAM_table table);
+
+static PyObject* SAM_var_to_PyObject(SAM_var var){
+    PyObject* result = NULL;
+    SAM_error error = new_error();
+
+    double num;
+    const char* str;
+    SAM_var v;
+    const double* arr;
+    SAM_table tab;
+    int i, j, n, m;
+    PyObject* seqq = NULL;
+    int type = SAM_var_query(var, &error);
+
+    if (PySAM_has_error(error)) return NULL;
+
+    error = new_error();
+    switch (type){
+        case SAM_STRING:
+            str = SAM_var_get_string(var, &error);
+            if (PySAM_has_error(error)) return NULL;
+            return PyUnicode_FromString(str);
+            break;
+        case SAM_NUMBER:
+            num = SAM_var_get_number(var, &error);
+            if (PySAM_has_error(error)) return NULL;
+            return PyLong_FromDouble(num);
+        case SAM_ARRAY:
+            arr = SAM_var_get_arr(var, &n, &error);
+            if (PySAM_has_error(error)) return NULL;
+            result = PyTuple_New(n);
+            for(i=0; i < n; i++) {
+                PyTuple_SET_ITEM(result, i, PyFloat_FromDouble(arr[i]));
+            }
+            return result;
+        case SAM_MATRIX:
+            arr = SAM_var_get_mat(var, &n, &m, &error);
+            if (PySAM_has_error(error)) return NULL;
+            result = PyTuple_New(n);
+            for(i=0; i < n; i++) {
+                seqq = PyTuple_New(m);
+                for(j=0; j < m; j++) {
+                    PyTuple_SET_ITEM(seqq, j, PyFloat_FromDouble(arr[i * m + j]));
+                }
+                PyTuple_SET_ITEM(result, i, seqq);
+            }
+            return result;
+        case SAM_TABLE:
+            tab = SAM_var_get_table(var, &error);
+            return PySAM_table_to_dict(tab);
+        case SAM_DATARR:
+            SAM_var_size(var, &n, NULL, &error);
+            if (PySAM_has_error(error)) return NULL;
+            result = PyTuple_New(n);
+            for(i=0; i < n; i++) {
+                error = new_error();
+                v = SAM_var_get_datarr(var, i, &error);
+                if (PySAM_has_error(error)) goto fail;
+                PyTuple_SET_ITEM(result, i, SAM_var_to_PyObject(v));
+            }
+            return result;
+        case SAM_DATMAT:
+            SAM_var_size(var, &n, &m, &error);
+            if (PySAM_has_error(error)) return NULL;
+            result = PyTuple_New(n);
+            for(i=0; i < n; i++) {
+                seqq = PyTuple_New(m);
+                for(j=0; j < m; j++) {
+                    error = new_error();
+                    v = SAM_var_get_datmat(var, i, j, &error);
+                    if (PySAM_has_error(error)) goto fail;
+                    PyTuple_SET_ITEM(seqq, j, SAM_var_to_PyObject(v));
+                }
+                PyTuple_SET_ITEM(result, i, seqq);
+            }
+            return result;
+        default:
+            return NULL;
+    }
+    fail:
+    Py_XDECREF(result);
+    Py_XDECREF(seqq);
+    return NULL;
 }
 
 static PyObject* PySAM_table_to_dict(SAM_table table){
@@ -279,11 +369,14 @@ static PyObject* PySAM_table_to_dict(SAM_table table){
     if (PySAM_has_error(error)) return NULL;
 
     PyObject* table_dict = PyDict_New();
-    PyObject* seq, *seqq;
+    PyObject* seq, *seqq, *obj;
     SAM_table data = NULL;
+    SAM_var var = NULL;
     for(s=0; s < size; s++) {
         int type;
-        const char* key = SAM_table_key(table, s, &type, NULL);
+        error = new_error();
+        const char* key = SAM_table_key(table, s, &type, &error);
+        if (PySAM_has_error(error)) goto fail;
         error = new_error();
 
         switch(type){
@@ -297,7 +390,7 @@ static PyObject* PySAM_table_to_dict(SAM_table table){
             case SAM_NUMBER:
                 num = SAM_table_get_num(table, key, &error);
                 if (PySAM_has_error(error)) goto fail;
-                PyObject* long_obj = PyLong_FromDouble((double)num);
+                PyObject* long_obj = PyFloat_FromDouble((double)num);
                 PyDict_SetItemString(table_dict, key, long_obj);
                 Py_DECREF(long_obj);
                 break;
@@ -313,12 +406,13 @@ static PyObject* PySAM_table_to_dict(SAM_table table){
                 break;
             case SAM_MATRIX:
                 arr = SAM_table_get_matrix(table, key, &n, &m, &error);
+
                 if (PySAM_has_error(error)) goto fail;
                 seq = PyTuple_New(n);
                 for(i=0; i < n; i++) {
                     seqq = PyTuple_New(m);
                     for(j=0; j < m; j++) {
-                        PyTuple_SET_ITEM(seqq, j, PyFloat_FromDouble(arr[i * m + j]));
+                        PyTuple_SET_ITEM(seqq, j, PyFloat_FromDouble(arr[i * n + j]));
                     }
                     PyTuple_SET_ITEM(seq, i, seqq);
                 }
@@ -332,6 +426,24 @@ static PyObject* PySAM_table_to_dict(SAM_table table){
                 PyDict_SetItemString(table_dict, key, seq);
                 Py_DECREF(seq);
                 break;
+            case SAM_DATARR:
+                var = SAM_table_get_datarr(table, key, &n, &error);
+
+                if (PySAM_has_error(error)) goto fail;
+                obj = SAM_var_to_PyObject(var);
+
+                if (!obj) goto fail;
+                PyDict_SetItemString(table_dict, key, obj);
+                Py_DECREF(obj);
+                break;
+            case SAM_DATMAT:
+                var = SAM_table_get_datmat(table, key, &n, &m, &error);
+                if (PySAM_has_error(error)) goto fail;
+                obj = SAM_var_to_PyObject(var);
+                if (!obj) goto fail;
+                PyDict_SetItemString(table_dict, key, obj);
+                Py_DECREF(obj);
+                break;
             case SAM_INVALID:
             default:
                 PyErr_SetString(PySAM_ErrorObject, "Table contains entry with invalid type. Types must be number, string"
@@ -342,7 +454,6 @@ static PyObject* PySAM_table_to_dict(SAM_table table){
     return table_dict;
     fail:
     Py_XDECREF(table_dict);
-    error_destruct(error);
     return NULL;
 }
 

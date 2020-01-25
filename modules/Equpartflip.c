@@ -4991,34 +4991,34 @@ static PyTypeObject DeveloperCapitalRecovery_Type = {
 
 
 /*
- * Battery Group
+ * BatterySystem Group
  */ 
 
-static PyTypeObject Battery_Type;
+static PyTypeObject BatterySystem_Type;
 
 static PyObject *
-Battery_new(SAM_Equpartflip data_ptr)
+BatterySystem_new(SAM_Equpartflip data_ptr)
 {
-	PyObject* new_obj = Battery_Type.tp_alloc(&Battery_Type,0);
+	PyObject* new_obj = BatterySystem_Type.tp_alloc(&BatterySystem_Type,0);
 
-	VarGroupObject* Battery_obj = (VarGroupObject*)new_obj;
+	VarGroupObject* BatterySystem_obj = (VarGroupObject*)new_obj;
 
-	Battery_obj->data_ptr = (SAM_table)data_ptr;
+	BatterySystem_obj->data_ptr = (SAM_table)data_ptr;
 
 	return new_obj;
 }
 
-/* Battery methods */
+/* BatterySystem methods */
 
 static PyObject *
-Battery_assign(VarGroupObject *self, PyObject *args)
+BatterySystem_assign(VarGroupObject *self, PyObject *args)
 {
 	PyObject* dict;
 	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Equpartflip", "Battery")){
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Equpartflip", "BatterySystem")){
 		return NULL;
 	}
 
@@ -5027,120 +5027,120 @@ Battery_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
-Battery_export(VarGroupObject *self, PyObject *args)
+BatterySystem_export(VarGroupObject *self, PyObject *args)
 {
-	PyTypeObject* tp = &Battery_Type;
+	PyTypeObject* tp = &BatterySystem_Type;
 	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
 	return dict;
 }
 
-static PyMethodDef Battery_methods[] = {
-		{"assign",            (PyCFunction)Battery_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Battery_vals = { var: val, ...}``")},
-		{"export",            (PyCFunction)Battery_export,  METH_VARARGS,
+static PyMethodDef BatterySystem_methods[] = {
+		{"assign",            (PyCFunction)BatterySystem_assign,  METH_VARARGS,
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``BatterySystem_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)BatterySystem_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 static PyObject *
-Battery_get_batt_bank_replacement(VarGroupObject *self, void *closure)
+BatterySystem_get_batt_bank_replacement(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Equpartflip_Battery_batt_bank_replacement_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Equpartflip_BatterySystem_batt_bank_replacement_aget, self->data_ptr);
 }
 
 static int
-Battery_set_batt_bank_replacement(VarGroupObject *self, PyObject *value, void *closure)
+BatterySystem_set_batt_bank_replacement(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_Equpartflip_Battery_batt_bank_replacement_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Equpartflip_BatterySystem_batt_bank_replacement_aset, self->data_ptr);
 }
 
 static PyObject *
-Battery_get_batt_computed_bank_capacity(VarGroupObject *self, void *closure)
+BatterySystem_get_batt_computed_bank_capacity(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Equpartflip_Battery_batt_computed_bank_capacity_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Equpartflip_BatterySystem_batt_computed_bank_capacity_nget, self->data_ptr);
 }
 
 static int
-Battery_set_batt_computed_bank_capacity(VarGroupObject *self, PyObject *value, void *closure)
+BatterySystem_set_batt_computed_bank_capacity(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Equpartflip_Battery_batt_computed_bank_capacity_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Equpartflip_BatterySystem_batt_computed_bank_capacity_nset, self->data_ptr);
 }
 
 static PyObject *
-Battery_get_batt_replacement_option(VarGroupObject *self, void *closure)
+BatterySystem_get_batt_replacement_option(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Equpartflip_Battery_batt_replacement_option_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Equpartflip_BatterySystem_batt_replacement_option_nget, self->data_ptr);
 }
 
 static int
-Battery_set_batt_replacement_option(VarGroupObject *self, PyObject *value, void *closure)
+BatterySystem_set_batt_replacement_option(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Equpartflip_Battery_batt_replacement_option_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Equpartflip_BatterySystem_batt_replacement_option_nset, self->data_ptr);
 }
 
 static PyObject *
-Battery_get_batt_replacement_schedule(VarGroupObject *self, void *closure)
+BatterySystem_get_batt_replacement_schedule(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Equpartflip_Battery_batt_replacement_schedule_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Equpartflip_BatterySystem_batt_replacement_schedule_aget, self->data_ptr);
 }
 
 static int
-Battery_set_batt_replacement_schedule(VarGroupObject *self, PyObject *value, void *closure)
+BatterySystem_set_batt_replacement_schedule(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_Equpartflip_Battery_batt_replacement_schedule_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Equpartflip_BatterySystem_batt_replacement_schedule_aset, self->data_ptr);
 }
 
 static PyObject *
-Battery_get_battery_per_kWh(VarGroupObject *self, void *closure)
+BatterySystem_get_battery_per_kWh(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Equpartflip_Battery_battery_per_kWh_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Equpartflip_BatterySystem_battery_per_kWh_nget, self->data_ptr);
 }
 
 static int
-Battery_set_battery_per_kWh(VarGroupObject *self, PyObject *value, void *closure)
+BatterySystem_set_battery_per_kWh(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Equpartflip_Battery_battery_per_kWh_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Equpartflip_BatterySystem_battery_per_kWh_nset, self->data_ptr);
 }
 
 static PyObject *
-Battery_get_en_batt(VarGroupObject *self, void *closure)
+BatterySystem_get_en_batt(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Equpartflip_Battery_en_batt_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Equpartflip_BatterySystem_en_batt_nget, self->data_ptr);
 }
 
 static int
-Battery_set_en_batt(VarGroupObject *self, PyObject *value, void *closure)
+BatterySystem_set_en_batt(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Equpartflip_Battery_en_batt_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Equpartflip_BatterySystem_en_batt_nset, self->data_ptr);
 }
 
-static PyGetSetDef Battery_getset[] = {
-{"batt_bank_replacement", (getter)Battery_get_batt_bank_replacement,(setter)Battery_set_batt_bank_replacement,
+static PyGetSetDef BatterySystem_getset[] = {
+{"batt_bank_replacement", (getter)BatterySystem_get_batt_bank_replacement,(setter)BatterySystem_set_batt_bank_replacement,
 	PyDoc_STR("*sequence*: Battery bank replacements per year [number/year]"),
  	NULL},
-{"batt_computed_bank_capacity", (getter)Battery_get_batt_computed_bank_capacity,(setter)Battery_set_batt_computed_bank_capacity,
+{"batt_computed_bank_capacity", (getter)BatterySystem_get_batt_computed_bank_capacity,(setter)BatterySystem_set_batt_computed_bank_capacity,
 	PyDoc_STR("*float*: Battery bank capacity [kWh]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
-{"batt_replacement_option", (getter)Battery_get_batt_replacement_option,(setter)Battery_set_batt_replacement_option,
+{"batt_replacement_option", (getter)BatterySystem_get_batt_replacement_option,(setter)BatterySystem_set_batt_replacement_option,
 	PyDoc_STR("*float*: Enable battery replacement? [0=none,1=capacity based,2=user schedule]\n\n*Constraints*: INTEGER,MIN=0,MAX=2\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
-{"batt_replacement_schedule", (getter)Battery_get_batt_replacement_schedule,(setter)Battery_set_batt_replacement_schedule,
+{"batt_replacement_schedule", (getter)BatterySystem_get_batt_replacement_schedule,(setter)BatterySystem_set_batt_replacement_schedule,
 	PyDoc_STR("*sequence*: Battery bank replacements per year (user specified) [number/year]"),
  	NULL},
-{"battery_per_kWh", (getter)Battery_get_battery_per_kWh,(setter)Battery_set_battery_per_kWh,
+{"battery_per_kWh", (getter)BatterySystem_get_battery_per_kWh,(setter)BatterySystem_set_battery_per_kWh,
 	PyDoc_STR("*float*: Battery cost [$/kWh]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
-{"en_batt", (getter)Battery_get_en_batt,(setter)Battery_set_en_batt,
+{"en_batt", (getter)BatterySystem_get_en_batt,(setter)BatterySystem_set_en_batt,
 	PyDoc_STR("*float*: Enable battery storage model [0/1]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
 
-static PyTypeObject Battery_Type = {
+static PyTypeObject BatterySystem_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"Equpartflip.Battery",             /*tp_name*/
+		"Equpartflip.BatterySystem",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -5167,9 +5167,9 @@ static PyTypeObject Battery_Type = {
 		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
-		Battery_methods,         /*tp_methods*/
+		BatterySystem_methods,         /*tp_methods*/
 		0,                          /*tp_members*/
-		Battery_getset,          /*tp_getset*/
+		BatterySystem_getset,          /*tp_getset*/
 		0,                          /*tp_base*/
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
@@ -10166,9 +10166,9 @@ newEqupartflipObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "DeveloperCapitalRecovery", DeveloperCapitalRecovery_obj);
 	Py_DECREF(DeveloperCapitalRecovery_obj);
 
-	PyObject* Battery_obj = Battery_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "Battery", Battery_obj);
-	Py_DECREF(Battery_obj);
+	PyObject* BatterySystem_obj = BatterySystem_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "BatterySystem", BatterySystem_obj);
+	Py_DECREF(BatterySystem_obj);
 
 	PyObject* Outputs_obj = Outputs_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
@@ -10229,6 +10229,12 @@ Equpartflip_export(CmodObject *self, PyObject *args)
 	return PySAM_export_to_nested_dict((PyObject *) self, self->x_attr);
 }
 
+static PyObject *
+Equpartflip_value(CmodObject *self, PyObject *args)
+{
+	return CmodObject_value(self, args);
+}
+
 static PyMethodDef Equpartflip_methods[] = {
 		{"execute",            (PyCFunction)Equpartflip_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
@@ -10236,6 +10242,8 @@ static PyMethodDef Equpartflip_methods[] = {
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Revenue': { var: val, ...}, ...}``")},
 		{"export",            (PyCFunction)Equpartflip_export,  METH_VARARGS,
 				PyDoc_STR("export() -> dict\n Export attributes into nested dictionary")},
+		{"value",             (PyCFunction)Equpartflip_value, METH_VARARGS,
+				PyDoc_STR("value(name, optional value) -> Union[None, float, dict, sequence, str]\n Get or set by name a value in any of the variable groups.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -10508,12 +10516,12 @@ EqupartflipModule_exec(PyObject *m)
 				(PyObject*)&DeveloperCapitalRecovery_Type);
 	Py_DECREF(&DeveloperCapitalRecovery_Type);
 
-	/// Add the Battery type object to Equpartflip_Type
-	if (PyType_Ready(&Battery_Type) < 0) { goto fail; }
+	/// Add the BatterySystem type object to Equpartflip_Type
+	if (PyType_Ready(&BatterySystem_Type) < 0) { goto fail; }
 	PyDict_SetItemString(Equpartflip_Type.tp_dict,
-				"Battery",
-				(PyObject*)&Battery_Type);
-	Py_DECREF(&Battery_Type);
+				"BatterySystem",
+				(PyObject*)&BatterySystem_Type);
+	Py_DECREF(&BatterySystem_Type);
 
 	/// Add the Outputs type object to Equpartflip_Type
 	if (PyType_Ready(&Outputs_Type) < 0) { goto fail; }

@@ -24,10 +24,25 @@ class Common(object):
 		pass
 
 
+	annual_energy = float
 	enable_interconnection_limit = float
 	gen = tuple
 	grid_interconnection_limit_kwac = float
 	load = tuple
+
+
+class LossAdjustments(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> Dict[Dict]
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
+	grid_curtailment = tuple
 
 
 class Outputs(object):
@@ -41,12 +56,16 @@ class Outputs(object):
 		pass
 
 
+	annual_ac_curtailment_loss_kwh = float
+	annual_ac_curtailment_loss_percent = float
 	annual_ac_interconnect_loss_kwh = float
 	annual_ac_interconnect_loss_percent = float
-	annual_energy = float
+	annual_energy_pre_curtailment_ac = float
 	annual_energy_pre_interconnect_ac = float
+	capacity_factor_curtailment_ac = float
 	capacity_factor_interconnect_ac = float
 	gen = tuple
+	system_pre_curtailment_kwac = tuple
 	system_pre_interconnect_kwac = tuple
 
 
@@ -68,6 +87,7 @@ class Grid(object):
 
 	Lifetime = Lifetime
 	Common = Common
+	LossAdjustments = LossAdjustments
 	Outputs = Outputs
 
 

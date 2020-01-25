@@ -3431,8 +3431,128 @@ extern "C"
 
 
 	//
-	// Battery parameters
+	// BatterySystem parameters
 	//
+
+	/**
+	 * Set batt_ac_dc_efficiency: Inverter AC to battery DC efficiency
+	 * options: None
+	 * constraints: None
+	 * required if: None
+	 */
+	SAM_EXPORT void SAM_Pvsamv1_BatterySystem_batt_ac_dc_efficiency_nset(SAM_Pvsamv1 ptr, double number, SAM_error *err);
+
+	/**
+	 * Set batt_ac_or_dc: Battery interconnection (AC or DC)
+	 * options: 0=DC_Connected,1=AC_Connected
+	 * constraints: None
+	 * required if: None
+	 */
+	SAM_EXPORT void SAM_Pvsamv1_BatterySystem_batt_ac_or_dc_nset(SAM_Pvsamv1 ptr, double number, SAM_error *err);
+
+	/**
+	 * Set batt_computed_bank_capacity: Computed bank capacity [kWh]
+	 * options: None
+	 * constraints: None
+	 * required if: None
+	 */
+	SAM_EXPORT void SAM_Pvsamv1_BatterySystem_batt_computed_bank_capacity_nset(SAM_Pvsamv1 ptr, double number, SAM_error *err);
+
+	/**
+	 * Set batt_computed_series: Number of cells in series
+	 * options: None
+	 * constraints: None
+	 * required if: None
+	 */
+	SAM_EXPORT void SAM_Pvsamv1_BatterySystem_batt_computed_series_nset(SAM_Pvsamv1 ptr, double number, SAM_error *err);
+
+	/**
+	 * Set batt_computed_strings: Number of strings of cells
+	 * options: None
+	 * constraints: None
+	 * required if: None
+	 */
+	SAM_EXPORT void SAM_Pvsamv1_BatterySystem_batt_computed_strings_nset(SAM_Pvsamv1 ptr, double number, SAM_error *err);
+
+	/**
+	 * Set batt_current_charge_max: Maximum charge current [A]
+	 * options: None
+	 * constraints: None
+	 * required if: None
+	 */
+	SAM_EXPORT void SAM_Pvsamv1_BatterySystem_batt_current_charge_max_nset(SAM_Pvsamv1 ptr, double number, SAM_error *err);
+
+	/**
+	 * Set batt_current_choice: Limit cells by current or power
+	 * options: None
+	 * constraints: None
+	 * required if: None
+	 */
+	SAM_EXPORT void SAM_Pvsamv1_BatterySystem_batt_current_choice_nset(SAM_Pvsamv1 ptr, double number, SAM_error *err);
+
+	/**
+	 * Set batt_current_discharge_max: Maximum discharge current [A]
+	 * options: None
+	 * constraints: None
+	 * required if: None
+	 */
+	SAM_EXPORT void SAM_Pvsamv1_BatterySystem_batt_current_discharge_max_nset(SAM_Pvsamv1 ptr, double number, SAM_error *err);
+
+	/**
+	 * Set batt_cycle_cost: Input battery cycle costs [$/cycle-kWh]
+	 * options: None
+	 * constraints: None
+	 * required if: None
+	 */
+	SAM_EXPORT void SAM_Pvsamv1_BatterySystem_batt_cycle_cost_nset(SAM_Pvsamv1 ptr, double number, SAM_error *err);
+
+	/**
+	 * Set batt_cycle_cost_choice: Use SAM model for cycle costs or input custom [0/1]
+	 * options: 0=UseCostModel,1=InputCost
+	 * constraints: None
+	 * required if: None
+	 */
+	SAM_EXPORT void SAM_Pvsamv1_BatterySystem_batt_cycle_cost_choice_nset(SAM_Pvsamv1 ptr, double number, SAM_error *err);
+
+	/**
+	 * Set batt_dc_ac_efficiency: Battery DC to AC efficiency
+	 * options: None
+	 * constraints: None
+	 * required if: None
+	 */
+	SAM_EXPORT void SAM_Pvsamv1_BatterySystem_batt_dc_ac_efficiency_nset(SAM_Pvsamv1 ptr, double number, SAM_error *err);
+
+	/**
+	 * Set batt_dc_dc_efficiency: PV DC to battery DC efficiency
+	 * options: None
+	 * constraints: None
+	 * required if: None
+	 */
+	SAM_EXPORT void SAM_Pvsamv1_BatterySystem_batt_dc_dc_efficiency_nset(SAM_Pvsamv1 ptr, double number, SAM_error *err);
+
+	/**
+	 * Set batt_height: Battery height [m]
+	 * options: None
+	 * constraints: None
+	 * required if: None
+	 */
+	SAM_EXPORT void SAM_Pvsamv1_BatterySystem_batt_height_nset(SAM_Pvsamv1 ptr, double number, SAM_error *err);
+
+	/**
+	 * Set batt_inverter_efficiency_cutoff: Inverter efficiency at which to cut battery charge or discharge off [%]
+	 * options: None
+	 * constraints: None
+	 * required if: None
+	 */
+	SAM_EXPORT void SAM_Pvsamv1_BatterySystem_batt_inverter_efficiency_cutoff_nset(SAM_Pvsamv1 ptr, double number, SAM_error *err);
+
+	/**
+	 * Set batt_length: Battery length [m]
+	 * options: None
+	 * constraints: None
+	 * required if: None
+	 */
+	SAM_EXPORT void SAM_Pvsamv1_BatterySystem_batt_length_nset(SAM_Pvsamv1 ptr, double number, SAM_error *err);
 
 	/**
 	 * Set batt_loss_choice: Loss power input option [0/1]
@@ -3440,15 +3560,127 @@ extern "C"
 	 * constraints: None
 	 * required if: ?=0
 	 */
-	SAM_EXPORT void SAM_Pvsamv1_Battery_batt_loss_choice_nset(SAM_Pvsamv1 ptr, double number, SAM_error *err);
+	SAM_EXPORT void SAM_Pvsamv1_BatterySystem_batt_loss_choice_nset(SAM_Pvsamv1 ptr, double number, SAM_error *err);
 
 	/**
-	 * Set crit_load: Critical Electricity load (year 1) [kW]
+	 * Set batt_losses: Battery system losses at each timestep [kW]
+	 * options: None
+	 * constraints: None
+	 * required if: ?=0
+	 */
+	SAM_EXPORT void SAM_Pvsamv1_BatterySystem_batt_losses_aset(SAM_Pvsamv1 ptr, double* arr, int length, SAM_error *err);
+
+	/**
+	 * Set batt_losses_charging: Battery system losses when charging [kW]
+	 * options: None
+	 * constraints: None
+	 * required if: ?=0
+	 */
+	SAM_EXPORT void SAM_Pvsamv1_BatterySystem_batt_losses_charging_aset(SAM_Pvsamv1 ptr, double* arr, int length, SAM_error *err);
+
+	/**
+	 * Set batt_losses_discharging: Battery system losses when discharging [kW]
+	 * options: None
+	 * constraints: None
+	 * required if: ?=0
+	 */
+	SAM_EXPORT void SAM_Pvsamv1_BatterySystem_batt_losses_discharging_aset(SAM_Pvsamv1 ptr, double* arr, int length, SAM_error *err);
+
+	/**
+	 * Set batt_losses_idle: Battery system losses when idle [kW]
+	 * options: None
+	 * constraints: None
+	 * required if: ?=0
+	 */
+	SAM_EXPORT void SAM_Pvsamv1_BatterySystem_batt_losses_idle_aset(SAM_Pvsamv1 ptr, double* arr, int length, SAM_error *err);
+
+	/**
+	 * Set batt_mass: Battery mass [kg]
 	 * options: None
 	 * constraints: None
 	 * required if: None
 	 */
-	SAM_EXPORT void SAM_Pvsamv1_Battery_crit_load_aset(SAM_Pvsamv1 ptr, double* arr, int length, SAM_error *err);
+	SAM_EXPORT void SAM_Pvsamv1_BatterySystem_batt_mass_nset(SAM_Pvsamv1 ptr, double number, SAM_error *err);
+
+	/**
+	 * Set batt_meter_position: Position of battery relative to electric meter
+	 * options: 0=BehindTheMeter,1=FrontOfMeter
+	 * constraints: None
+	 * required if: None
+	 */
+	SAM_EXPORT void SAM_Pvsamv1_BatterySystem_batt_meter_position_nset(SAM_Pvsamv1 ptr, double number, SAM_error *err);
+
+	/**
+	 * Set batt_power_charge_max_kwac: Maximum charge power (AC) [kWac]
+	 * options: None
+	 * constraints: None
+	 * required if: None
+	 */
+	SAM_EXPORT void SAM_Pvsamv1_BatterySystem_batt_power_charge_max_kwac_nset(SAM_Pvsamv1 ptr, double number, SAM_error *err);
+
+	/**
+	 * Set batt_power_charge_max_kwdc: Maximum charge power (DC) [kWdc]
+	 * options: None
+	 * constraints: None
+	 * required if: None
+	 */
+	SAM_EXPORT void SAM_Pvsamv1_BatterySystem_batt_power_charge_max_kwdc_nset(SAM_Pvsamv1 ptr, double number, SAM_error *err);
+
+	/**
+	 * Set batt_power_discharge_max_kwac: Maximum discharge power (AC) [kWac]
+	 * options: None
+	 * constraints: None
+	 * required if: None
+	 */
+	SAM_EXPORT void SAM_Pvsamv1_BatterySystem_batt_power_discharge_max_kwac_nset(SAM_Pvsamv1 ptr, double number, SAM_error *err);
+
+	/**
+	 * Set batt_power_discharge_max_kwdc: Maximum discharge power (DC) [kWdc]
+	 * options: None
+	 * constraints: None
+	 * required if: None
+	 */
+	SAM_EXPORT void SAM_Pvsamv1_BatterySystem_batt_power_discharge_max_kwdc_nset(SAM_Pvsamv1 ptr, double number, SAM_error *err);
+
+	/**
+	 * Set batt_replacement_capacity: Capacity degradation at which to replace battery [%]
+	 * options: None
+	 * constraints: None
+	 * required if: None
+	 */
+	SAM_EXPORT void SAM_Pvsamv1_BatterySystem_batt_replacement_capacity_nset(SAM_Pvsamv1 ptr, double number, SAM_error *err);
+
+	/**
+	 * Set batt_replacement_option: Enable battery replacement? [0=none,1=capacity based,2=user schedule]
+	 * options: None
+	 * constraints: INTEGER,MIN=0,MAX=2
+	 * required if: ?=0
+	 */
+	SAM_EXPORT void SAM_Pvsamv1_BatterySystem_batt_replacement_option_nset(SAM_Pvsamv1 ptr, double number, SAM_error *err);
+
+	/**
+	 * Set batt_replacement_schedule: Battery bank replacements per year (user specified) [number/year]
+	 * options: None
+	 * constraints: None
+	 * required if: batt_replacement_option=2
+	 */
+	SAM_EXPORT void SAM_Pvsamv1_BatterySystem_batt_replacement_schedule_aset(SAM_Pvsamv1 ptr, double* arr, int length, SAM_error *err);
+
+	/**
+	 * Set batt_replacement_schedule_percent: Percentage of battery capacity to replace in year [%]
+	 * options: None
+	 * constraints: None
+	 * required if: batt_replacement_option=2
+	 */
+	SAM_EXPORT void SAM_Pvsamv1_BatterySystem_batt_replacement_schedule_percent_aset(SAM_Pvsamv1 ptr, double* arr, int length, SAM_error *err);
+
+	/**
+	 * Set batt_width: Battery width [m]
+	 * options: None
+	 * constraints: None
+	 * required if: None
+	 */
+	SAM_EXPORT void SAM_Pvsamv1_BatterySystem_batt_width_nset(SAM_Pvsamv1 ptr, double number, SAM_error *err);
 
 	/**
 	 * Set en_batt: Enable battery storage model [0/1]
@@ -3456,7 +3688,28 @@ extern "C"
 	 * constraints: None
 	 * required if: ?=0
 	 */
-	SAM_EXPORT void SAM_Pvsamv1_Battery_en_batt_nset(SAM_Pvsamv1 ptr, double number, SAM_error *err);
+	SAM_EXPORT void SAM_Pvsamv1_BatterySystem_en_batt_nset(SAM_Pvsamv1 ptr, double number, SAM_error *err);
+
+	/**
+	 * Set om_replacement_cost1: Cost to replace battery per kWh [$/kWh]
+	 * options: None
+	 * constraints: None
+	 * required if: None
+	 */
+	SAM_EXPORT void SAM_Pvsamv1_BatterySystem_om_replacement_cost1_aset(SAM_Pvsamv1 ptr, double* arr, int length, SAM_error *err);
+
+
+	//
+	// Load parameters
+	//
+
+	/**
+	 * Set crit_load: Critical Electricity load (year 1) [kW]
+	 * options: None
+	 * constraints: None
+	 * required if: None
+	 */
+	SAM_EXPORT void SAM_Pvsamv1_Load_crit_load_aset(SAM_Pvsamv1 ptr, double* arr, int length, SAM_error *err);
 
 	/**
 	 * Set load: Electricity load (year 1) [kW]
@@ -3464,7 +3717,7 @@ extern "C"
 	 * constraints: None
 	 * required if: ?
 	 */
-	SAM_EXPORT void SAM_Pvsamv1_Battery_load_aset(SAM_Pvsamv1 ptr, double* arr, int length, SAM_error *err);
+	SAM_EXPORT void SAM_Pvsamv1_Load_load_aset(SAM_Pvsamv1 ptr, double* arr, int length, SAM_error *err);
 
 
 	//
@@ -3729,272 +3982,6 @@ extern "C"
 
 
 	//
-	// Common parameters
-	//
-
-	/**
-	 * Set inverter_model: Inverter model specifier
-	 * options: 0=cec,1=datasheet,2=partload,3=coefficientgenerator,4=generic
-	 * constraints: INTEGER,MIN=0,MAX=4
-	 * required if: ?=4
-	 */
-	SAM_EXPORT void SAM_Pvsamv1_Common_inverter_model_nset(SAM_Pvsamv1 ptr, double number, SAM_error *err);
-
-
-	//
-	// BatterySystem parameters
-	//
-
-	/**
-	 * Set batt_ac_dc_efficiency: Inverter AC to battery DC efficiency
-	 * options: None
-	 * constraints: None
-	 * required if: None
-	 */
-	SAM_EXPORT void SAM_Pvsamv1_BatterySystem_batt_ac_dc_efficiency_nset(SAM_Pvsamv1 ptr, double number, SAM_error *err);
-
-	/**
-	 * Set batt_ac_or_dc: Battery interconnection (AC or DC)
-	 * options: 0=DC_Connected,1=AC_Connected
-	 * constraints: None
-	 * required if: None
-	 */
-	SAM_EXPORT void SAM_Pvsamv1_BatterySystem_batt_ac_or_dc_nset(SAM_Pvsamv1 ptr, double number, SAM_error *err);
-
-	/**
-	 * Set batt_computed_bank_capacity: Computed bank capacity [kWh]
-	 * options: None
-	 * constraints: None
-	 * required if: None
-	 */
-	SAM_EXPORT void SAM_Pvsamv1_BatterySystem_batt_computed_bank_capacity_nset(SAM_Pvsamv1 ptr, double number, SAM_error *err);
-
-	/**
-	 * Set batt_computed_series: Number of cells in series
-	 * options: None
-	 * constraints: None
-	 * required if: None
-	 */
-	SAM_EXPORT void SAM_Pvsamv1_BatterySystem_batt_computed_series_nset(SAM_Pvsamv1 ptr, double number, SAM_error *err);
-
-	/**
-	 * Set batt_computed_strings: Number of strings of cells
-	 * options: None
-	 * constraints: None
-	 * required if: None
-	 */
-	SAM_EXPORT void SAM_Pvsamv1_BatterySystem_batt_computed_strings_nset(SAM_Pvsamv1 ptr, double number, SAM_error *err);
-
-	/**
-	 * Set batt_current_charge_max: Maximum charge current [A]
-	 * options: None
-	 * constraints: None
-	 * required if: None
-	 */
-	SAM_EXPORT void SAM_Pvsamv1_BatterySystem_batt_current_charge_max_nset(SAM_Pvsamv1 ptr, double number, SAM_error *err);
-
-	/**
-	 * Set batt_current_choice: Limit cells by current or power
-	 * options: None
-	 * constraints: None
-	 * required if: None
-	 */
-	SAM_EXPORT void SAM_Pvsamv1_BatterySystem_batt_current_choice_nset(SAM_Pvsamv1 ptr, double number, SAM_error *err);
-
-	/**
-	 * Set batt_current_discharge_max: Maximum discharge current [A]
-	 * options: None
-	 * constraints: None
-	 * required if: None
-	 */
-	SAM_EXPORT void SAM_Pvsamv1_BatterySystem_batt_current_discharge_max_nset(SAM_Pvsamv1 ptr, double number, SAM_error *err);
-
-	/**
-	 * Set batt_cycle_cost: Input battery cycle costs [$/cycle-kWh]
-	 * options: None
-	 * constraints: None
-	 * required if: None
-	 */
-	SAM_EXPORT void SAM_Pvsamv1_BatterySystem_batt_cycle_cost_nset(SAM_Pvsamv1 ptr, double number, SAM_error *err);
-
-	/**
-	 * Set batt_cycle_cost_choice: Use SAM model for cycle costs or input custom [0/1]
-	 * options: 0=UseCostModel,1=InputCost
-	 * constraints: None
-	 * required if: None
-	 */
-	SAM_EXPORT void SAM_Pvsamv1_BatterySystem_batt_cycle_cost_choice_nset(SAM_Pvsamv1 ptr, double number, SAM_error *err);
-
-	/**
-	 * Set batt_dc_ac_efficiency: Battery DC to AC efficiency
-	 * options: None
-	 * constraints: None
-	 * required if: None
-	 */
-	SAM_EXPORT void SAM_Pvsamv1_BatterySystem_batt_dc_ac_efficiency_nset(SAM_Pvsamv1 ptr, double number, SAM_error *err);
-
-	/**
-	 * Set batt_dc_dc_efficiency: PV DC to battery DC efficiency
-	 * options: None
-	 * constraints: None
-	 * required if: None
-	 */
-	SAM_EXPORT void SAM_Pvsamv1_BatterySystem_batt_dc_dc_efficiency_nset(SAM_Pvsamv1 ptr, double number, SAM_error *err);
-
-	/**
-	 * Set batt_height: Battery height [m]
-	 * options: None
-	 * constraints: None
-	 * required if: None
-	 */
-	SAM_EXPORT void SAM_Pvsamv1_BatterySystem_batt_height_nset(SAM_Pvsamv1 ptr, double number, SAM_error *err);
-
-	/**
-	 * Set batt_inverter_efficiency_cutoff: Inverter efficiency at which to cut battery charge or discharge off [%]
-	 * options: None
-	 * constraints: None
-	 * required if: None
-	 */
-	SAM_EXPORT void SAM_Pvsamv1_BatterySystem_batt_inverter_efficiency_cutoff_nset(SAM_Pvsamv1 ptr, double number, SAM_error *err);
-
-	/**
-	 * Set batt_length: Battery length [m]
-	 * options: None
-	 * constraints: None
-	 * required if: None
-	 */
-	SAM_EXPORT void SAM_Pvsamv1_BatterySystem_batt_length_nset(SAM_Pvsamv1 ptr, double number, SAM_error *err);
-
-	/**
-	 * Set batt_losses: Battery system losses at each timestep [kW]
-	 * options: None
-	 * constraints: None
-	 * required if: ?=0
-	 */
-	SAM_EXPORT void SAM_Pvsamv1_BatterySystem_batt_losses_aset(SAM_Pvsamv1 ptr, double* arr, int length, SAM_error *err);
-
-	/**
-	 * Set batt_losses_charging: Battery system losses when charging [kW]
-	 * options: None
-	 * constraints: None
-	 * required if: ?=0
-	 */
-	SAM_EXPORT void SAM_Pvsamv1_BatterySystem_batt_losses_charging_aset(SAM_Pvsamv1 ptr, double* arr, int length, SAM_error *err);
-
-	/**
-	 * Set batt_losses_discharging: Battery system losses when discharging [kW]
-	 * options: None
-	 * constraints: None
-	 * required if: ?=0
-	 */
-	SAM_EXPORT void SAM_Pvsamv1_BatterySystem_batt_losses_discharging_aset(SAM_Pvsamv1 ptr, double* arr, int length, SAM_error *err);
-
-	/**
-	 * Set batt_losses_idle: Battery system losses when idle [kW]
-	 * options: None
-	 * constraints: None
-	 * required if: ?=0
-	 */
-	SAM_EXPORT void SAM_Pvsamv1_BatterySystem_batt_losses_idle_aset(SAM_Pvsamv1 ptr, double* arr, int length, SAM_error *err);
-
-	/**
-	 * Set batt_mass: Battery mass [kg]
-	 * options: None
-	 * constraints: None
-	 * required if: None
-	 */
-	SAM_EXPORT void SAM_Pvsamv1_BatterySystem_batt_mass_nset(SAM_Pvsamv1 ptr, double number, SAM_error *err);
-
-	/**
-	 * Set batt_meter_position: Position of battery relative to electric meter
-	 * options: 0=BehindTheMeter,1=FrontOfMeter
-	 * constraints: None
-	 * required if: None
-	 */
-	SAM_EXPORT void SAM_Pvsamv1_BatterySystem_batt_meter_position_nset(SAM_Pvsamv1 ptr, double number, SAM_error *err);
-
-	/**
-	 * Set batt_power_charge_max_kwac: Maximum charge power (AC) [kWac]
-	 * options: None
-	 * constraints: None
-	 * required if: None
-	 */
-	SAM_EXPORT void SAM_Pvsamv1_BatterySystem_batt_power_charge_max_kwac_nset(SAM_Pvsamv1 ptr, double number, SAM_error *err);
-
-	/**
-	 * Set batt_power_charge_max_kwdc: Maximum charge power (DC) [kWdc]
-	 * options: None
-	 * constraints: None
-	 * required if: None
-	 */
-	SAM_EXPORT void SAM_Pvsamv1_BatterySystem_batt_power_charge_max_kwdc_nset(SAM_Pvsamv1 ptr, double number, SAM_error *err);
-
-	/**
-	 * Set batt_power_discharge_max_kwac: Maximum discharge power (AC) [kWac]
-	 * options: None
-	 * constraints: None
-	 * required if: None
-	 */
-	SAM_EXPORT void SAM_Pvsamv1_BatterySystem_batt_power_discharge_max_kwac_nset(SAM_Pvsamv1 ptr, double number, SAM_error *err);
-
-	/**
-	 * Set batt_power_discharge_max_kwdc: Maximum discharge power (DC) [kWdc]
-	 * options: None
-	 * constraints: None
-	 * required if: None
-	 */
-	SAM_EXPORT void SAM_Pvsamv1_BatterySystem_batt_power_discharge_max_kwdc_nset(SAM_Pvsamv1 ptr, double number, SAM_error *err);
-
-	/**
-	 * Set batt_replacement_capacity: Capacity degradation at which to replace battery [%]
-	 * options: None
-	 * constraints: None
-	 * required if: None
-	 */
-	SAM_EXPORT void SAM_Pvsamv1_BatterySystem_batt_replacement_capacity_nset(SAM_Pvsamv1 ptr, double number, SAM_error *err);
-
-	/**
-	 * Set batt_replacement_option: Enable battery replacement? [0=none,1=capacity based,2=user schedule]
-	 * options: None
-	 * constraints: INTEGER,MIN=0,MAX=2
-	 * required if: ?=0
-	 */
-	SAM_EXPORT void SAM_Pvsamv1_BatterySystem_batt_replacement_option_nset(SAM_Pvsamv1 ptr, double number, SAM_error *err);
-
-	/**
-	 * Set batt_replacement_schedule: Battery bank replacements per year (user specified) [number/year]
-	 * options: None
-	 * constraints: None
-	 * required if: batt_replacement_option=2
-	 */
-	SAM_EXPORT void SAM_Pvsamv1_BatterySystem_batt_replacement_schedule_aset(SAM_Pvsamv1 ptr, double* arr, int length, SAM_error *err);
-
-	/**
-	 * Set batt_replacement_schedule_percent: Percentage of battery capacity to replace in year [%]
-	 * options: None
-	 * constraints: None
-	 * required if: batt_replacement_option=2
-	 */
-	SAM_EXPORT void SAM_Pvsamv1_BatterySystem_batt_replacement_schedule_percent_aset(SAM_Pvsamv1 ptr, double* arr, int length, SAM_error *err);
-
-	/**
-	 * Set batt_width: Battery width [m]
-	 * options: None
-	 * constraints: None
-	 * required if: None
-	 */
-	SAM_EXPORT void SAM_Pvsamv1_BatterySystem_batt_width_nset(SAM_Pvsamv1 ptr, double number, SAM_error *err);
-
-	/**
-	 * Set om_replacement_cost1: Cost to replace battery per kWh [$/kWh]
-	 * options: None
-	 * constraints: None
-	 * required if: None
-	 */
-	SAM_EXPORT void SAM_Pvsamv1_BatterySystem_om_replacement_cost1_aset(SAM_Pvsamv1 ptr, double* arr, int length, SAM_error *err);
-
-
-	//
 	// BatteryDispatch parameters
 	//
 
@@ -4127,6 +4114,14 @@ extern "C"
 	SAM_EXPORT void SAM_Pvsamv1_BatteryDispatch_dispatch_manual_discharge_aset(SAM_Pvsamv1 ptr, double* arr, int length, SAM_error *err);
 
 	/**
+	 * Set dispatch_manual_fuelcellcharge: Periods 1-6 charging from fuel cell allowed?
+	 * options: None
+	 * constraints: None
+	 * required if: None
+	 */
+	SAM_EXPORT void SAM_Pvsamv1_BatteryDispatch_dispatch_manual_fuelcellcharge_aset(SAM_Pvsamv1 ptr, double* arr, int length, SAM_error *err);
+
+	/**
 	 * Set dispatch_manual_gridcharge: Periods 1-6 grid charging allowed?
 	 * options: None
 	 * constraints: None
@@ -4165,27 +4160,6 @@ extern "C"
 	 * required if: en_batt=1&batt_dispatch_choice=4
 	 */
 	SAM_EXPORT void SAM_Pvsamv1_BatteryDispatch_dispatch_manual_sched_weekend_mset(SAM_Pvsamv1 ptr, double* mat, int nrows, int ncols, SAM_error *err);
-
-
-	//
-	// FuelCell parameters
-	//
-
-	/**
-	 * Set dispatch_manual_fuelcellcharge: Periods 1-6 charging from fuel cell allowed?
-	 * options: None
-	 * constraints: None
-	 * required if: None
-	 */
-	SAM_EXPORT void SAM_Pvsamv1_FuelCell_dispatch_manual_fuelcellcharge_aset(SAM_Pvsamv1 ptr, double* arr, int length, SAM_error *err);
-
-	/**
-	 * Set fuelcell_power: Electricity from fuel cell [kW]
-	 * options: None
-	 * constraints: None
-	 * required if: None
-	 */
-	SAM_EXPORT void SAM_Pvsamv1_FuelCell_fuelcell_power_aset(SAM_Pvsamv1 ptr, double* arr, int length, SAM_error *err);
 
 
 	//
@@ -4239,6 +4213,19 @@ extern "C"
 	 * required if: en_batt=1&batt_meter_position=1&batt_dispatch_choice=2
 	 */
 	SAM_EXPORT void SAM_Pvsamv1_ElectricityRates_ur_ts_buy_rate_aset(SAM_Pvsamv1 ptr, double* arr, int length, SAM_error *err);
+
+
+	//
+	// FuelCell parameters
+	//
+
+	/**
+	 * Set fuelcell_power: Electricity from fuel cell [kW]
+	 * options: None
+	 * constraints: None
+	 * required if: None
+	 */
+	SAM_EXPORT void SAM_Pvsamv1_FuelCell_fuelcell_power_aset(SAM_Pvsamv1 ptr, double* arr, int length, SAM_error *err);
 
 
 	//
@@ -5304,16 +5291,83 @@ extern "C"
 
 
 	/**
-	 * Battery Getters
+	 * BatterySystem Getters
 	 */
 
-	SAM_EXPORT double SAM_Pvsamv1_Battery_batt_loss_choice_nget(SAM_Pvsamv1 ptr, SAM_error *err);
+	SAM_EXPORT double SAM_Pvsamv1_BatterySystem_batt_ac_dc_efficiency_nget(SAM_Pvsamv1 ptr, SAM_error *err);
 
-	SAM_EXPORT double* SAM_Pvsamv1_Battery_crit_load_aget(SAM_Pvsamv1 ptr, int* length, SAM_error *err);
+	SAM_EXPORT double SAM_Pvsamv1_BatterySystem_batt_ac_or_dc_nget(SAM_Pvsamv1 ptr, SAM_error *err);
 
-	SAM_EXPORT double SAM_Pvsamv1_Battery_en_batt_nget(SAM_Pvsamv1 ptr, SAM_error *err);
+	SAM_EXPORT double SAM_Pvsamv1_BatterySystem_batt_computed_bank_capacity_nget(SAM_Pvsamv1 ptr, SAM_error *err);
 
-	SAM_EXPORT double* SAM_Pvsamv1_Battery_load_aget(SAM_Pvsamv1 ptr, int* length, SAM_error *err);
+	SAM_EXPORT double SAM_Pvsamv1_BatterySystem_batt_computed_series_nget(SAM_Pvsamv1 ptr, SAM_error *err);
+
+	SAM_EXPORT double SAM_Pvsamv1_BatterySystem_batt_computed_strings_nget(SAM_Pvsamv1 ptr, SAM_error *err);
+
+	SAM_EXPORT double SAM_Pvsamv1_BatterySystem_batt_current_charge_max_nget(SAM_Pvsamv1 ptr, SAM_error *err);
+
+	SAM_EXPORT double SAM_Pvsamv1_BatterySystem_batt_current_choice_nget(SAM_Pvsamv1 ptr, SAM_error *err);
+
+	SAM_EXPORT double SAM_Pvsamv1_BatterySystem_batt_current_discharge_max_nget(SAM_Pvsamv1 ptr, SAM_error *err);
+
+	SAM_EXPORT double SAM_Pvsamv1_BatterySystem_batt_cycle_cost_nget(SAM_Pvsamv1 ptr, SAM_error *err);
+
+	SAM_EXPORT double SAM_Pvsamv1_BatterySystem_batt_cycle_cost_choice_nget(SAM_Pvsamv1 ptr, SAM_error *err);
+
+	SAM_EXPORT double SAM_Pvsamv1_BatterySystem_batt_dc_ac_efficiency_nget(SAM_Pvsamv1 ptr, SAM_error *err);
+
+	SAM_EXPORT double SAM_Pvsamv1_BatterySystem_batt_dc_dc_efficiency_nget(SAM_Pvsamv1 ptr, SAM_error *err);
+
+	SAM_EXPORT double SAM_Pvsamv1_BatterySystem_batt_height_nget(SAM_Pvsamv1 ptr, SAM_error *err);
+
+	SAM_EXPORT double SAM_Pvsamv1_BatterySystem_batt_inverter_efficiency_cutoff_nget(SAM_Pvsamv1 ptr, SAM_error *err);
+
+	SAM_EXPORT double SAM_Pvsamv1_BatterySystem_batt_length_nget(SAM_Pvsamv1 ptr, SAM_error *err);
+
+	SAM_EXPORT double SAM_Pvsamv1_BatterySystem_batt_loss_choice_nget(SAM_Pvsamv1 ptr, SAM_error *err);
+
+	SAM_EXPORT double* SAM_Pvsamv1_BatterySystem_batt_losses_aget(SAM_Pvsamv1 ptr, int* length, SAM_error *err);
+
+	SAM_EXPORT double* SAM_Pvsamv1_BatterySystem_batt_losses_charging_aget(SAM_Pvsamv1 ptr, int* length, SAM_error *err);
+
+	SAM_EXPORT double* SAM_Pvsamv1_BatterySystem_batt_losses_discharging_aget(SAM_Pvsamv1 ptr, int* length, SAM_error *err);
+
+	SAM_EXPORT double* SAM_Pvsamv1_BatterySystem_batt_losses_idle_aget(SAM_Pvsamv1 ptr, int* length, SAM_error *err);
+
+	SAM_EXPORT double SAM_Pvsamv1_BatterySystem_batt_mass_nget(SAM_Pvsamv1 ptr, SAM_error *err);
+
+	SAM_EXPORT double SAM_Pvsamv1_BatterySystem_batt_meter_position_nget(SAM_Pvsamv1 ptr, SAM_error *err);
+
+	SAM_EXPORT double SAM_Pvsamv1_BatterySystem_batt_power_charge_max_kwac_nget(SAM_Pvsamv1 ptr, SAM_error *err);
+
+	SAM_EXPORT double SAM_Pvsamv1_BatterySystem_batt_power_charge_max_kwdc_nget(SAM_Pvsamv1 ptr, SAM_error *err);
+
+	SAM_EXPORT double SAM_Pvsamv1_BatterySystem_batt_power_discharge_max_kwac_nget(SAM_Pvsamv1 ptr, SAM_error *err);
+
+	SAM_EXPORT double SAM_Pvsamv1_BatterySystem_batt_power_discharge_max_kwdc_nget(SAM_Pvsamv1 ptr, SAM_error *err);
+
+	SAM_EXPORT double SAM_Pvsamv1_BatterySystem_batt_replacement_capacity_nget(SAM_Pvsamv1 ptr, SAM_error *err);
+
+	SAM_EXPORT double SAM_Pvsamv1_BatterySystem_batt_replacement_option_nget(SAM_Pvsamv1 ptr, SAM_error *err);
+
+	SAM_EXPORT double* SAM_Pvsamv1_BatterySystem_batt_replacement_schedule_aget(SAM_Pvsamv1 ptr, int* length, SAM_error *err);
+
+	SAM_EXPORT double* SAM_Pvsamv1_BatterySystem_batt_replacement_schedule_percent_aget(SAM_Pvsamv1 ptr, int* length, SAM_error *err);
+
+	SAM_EXPORT double SAM_Pvsamv1_BatterySystem_batt_width_nget(SAM_Pvsamv1 ptr, SAM_error *err);
+
+	SAM_EXPORT double SAM_Pvsamv1_BatterySystem_en_batt_nget(SAM_Pvsamv1 ptr, SAM_error *err);
+
+	SAM_EXPORT double* SAM_Pvsamv1_BatterySystem_om_replacement_cost1_aget(SAM_Pvsamv1 ptr, int* length, SAM_error *err);
+
+
+	/**
+	 * Load Getters
+	 */
+
+	SAM_EXPORT double* SAM_Pvsamv1_Load_crit_load_aget(SAM_Pvsamv1 ptr, int* length, SAM_error *err);
+
+	SAM_EXPORT double* SAM_Pvsamv1_Load_load_aget(SAM_Pvsamv1 ptr, int* length, SAM_error *err);
 
 
 	/**
@@ -5386,80 +5440,6 @@ extern "C"
 
 
 	/**
-	 * Common Getters
-	 */
-
-	SAM_EXPORT double SAM_Pvsamv1_Common_inverter_model_nget(SAM_Pvsamv1 ptr, SAM_error *err);
-
-
-	/**
-	 * BatterySystem Getters
-	 */
-
-	SAM_EXPORT double SAM_Pvsamv1_BatterySystem_batt_ac_dc_efficiency_nget(SAM_Pvsamv1 ptr, SAM_error *err);
-
-	SAM_EXPORT double SAM_Pvsamv1_BatterySystem_batt_ac_or_dc_nget(SAM_Pvsamv1 ptr, SAM_error *err);
-
-	SAM_EXPORT double SAM_Pvsamv1_BatterySystem_batt_computed_bank_capacity_nget(SAM_Pvsamv1 ptr, SAM_error *err);
-
-	SAM_EXPORT double SAM_Pvsamv1_BatterySystem_batt_computed_series_nget(SAM_Pvsamv1 ptr, SAM_error *err);
-
-	SAM_EXPORT double SAM_Pvsamv1_BatterySystem_batt_computed_strings_nget(SAM_Pvsamv1 ptr, SAM_error *err);
-
-	SAM_EXPORT double SAM_Pvsamv1_BatterySystem_batt_current_charge_max_nget(SAM_Pvsamv1 ptr, SAM_error *err);
-
-	SAM_EXPORT double SAM_Pvsamv1_BatterySystem_batt_current_choice_nget(SAM_Pvsamv1 ptr, SAM_error *err);
-
-	SAM_EXPORT double SAM_Pvsamv1_BatterySystem_batt_current_discharge_max_nget(SAM_Pvsamv1 ptr, SAM_error *err);
-
-	SAM_EXPORT double SAM_Pvsamv1_BatterySystem_batt_cycle_cost_nget(SAM_Pvsamv1 ptr, SAM_error *err);
-
-	SAM_EXPORT double SAM_Pvsamv1_BatterySystem_batt_cycle_cost_choice_nget(SAM_Pvsamv1 ptr, SAM_error *err);
-
-	SAM_EXPORT double SAM_Pvsamv1_BatterySystem_batt_dc_ac_efficiency_nget(SAM_Pvsamv1 ptr, SAM_error *err);
-
-	SAM_EXPORT double SAM_Pvsamv1_BatterySystem_batt_dc_dc_efficiency_nget(SAM_Pvsamv1 ptr, SAM_error *err);
-
-	SAM_EXPORT double SAM_Pvsamv1_BatterySystem_batt_height_nget(SAM_Pvsamv1 ptr, SAM_error *err);
-
-	SAM_EXPORT double SAM_Pvsamv1_BatterySystem_batt_inverter_efficiency_cutoff_nget(SAM_Pvsamv1 ptr, SAM_error *err);
-
-	SAM_EXPORT double SAM_Pvsamv1_BatterySystem_batt_length_nget(SAM_Pvsamv1 ptr, SAM_error *err);
-
-	SAM_EXPORT double* SAM_Pvsamv1_BatterySystem_batt_losses_aget(SAM_Pvsamv1 ptr, int* length, SAM_error *err);
-
-	SAM_EXPORT double* SAM_Pvsamv1_BatterySystem_batt_losses_charging_aget(SAM_Pvsamv1 ptr, int* length, SAM_error *err);
-
-	SAM_EXPORT double* SAM_Pvsamv1_BatterySystem_batt_losses_discharging_aget(SAM_Pvsamv1 ptr, int* length, SAM_error *err);
-
-	SAM_EXPORT double* SAM_Pvsamv1_BatterySystem_batt_losses_idle_aget(SAM_Pvsamv1 ptr, int* length, SAM_error *err);
-
-	SAM_EXPORT double SAM_Pvsamv1_BatterySystem_batt_mass_nget(SAM_Pvsamv1 ptr, SAM_error *err);
-
-	SAM_EXPORT double SAM_Pvsamv1_BatterySystem_batt_meter_position_nget(SAM_Pvsamv1 ptr, SAM_error *err);
-
-	SAM_EXPORT double SAM_Pvsamv1_BatterySystem_batt_power_charge_max_kwac_nget(SAM_Pvsamv1 ptr, SAM_error *err);
-
-	SAM_EXPORT double SAM_Pvsamv1_BatterySystem_batt_power_charge_max_kwdc_nget(SAM_Pvsamv1 ptr, SAM_error *err);
-
-	SAM_EXPORT double SAM_Pvsamv1_BatterySystem_batt_power_discharge_max_kwac_nget(SAM_Pvsamv1 ptr, SAM_error *err);
-
-	SAM_EXPORT double SAM_Pvsamv1_BatterySystem_batt_power_discharge_max_kwdc_nget(SAM_Pvsamv1 ptr, SAM_error *err);
-
-	SAM_EXPORT double SAM_Pvsamv1_BatterySystem_batt_replacement_capacity_nget(SAM_Pvsamv1 ptr, SAM_error *err);
-
-	SAM_EXPORT double SAM_Pvsamv1_BatterySystem_batt_replacement_option_nget(SAM_Pvsamv1 ptr, SAM_error *err);
-
-	SAM_EXPORT double* SAM_Pvsamv1_BatterySystem_batt_replacement_schedule_aget(SAM_Pvsamv1 ptr, int* length, SAM_error *err);
-
-	SAM_EXPORT double* SAM_Pvsamv1_BatterySystem_batt_replacement_schedule_percent_aget(SAM_Pvsamv1 ptr, int* length, SAM_error *err);
-
-	SAM_EXPORT double SAM_Pvsamv1_BatterySystem_batt_width_nget(SAM_Pvsamv1 ptr, SAM_error *err);
-
-	SAM_EXPORT double* SAM_Pvsamv1_BatterySystem_om_replacement_cost1_aget(SAM_Pvsamv1 ptr, int* length, SAM_error *err);
-
-
-	/**
 	 * BatteryDispatch Getters
 	 */
 
@@ -5495,6 +5475,8 @@ extern "C"
 
 	SAM_EXPORT double* SAM_Pvsamv1_BatteryDispatch_dispatch_manual_discharge_aget(SAM_Pvsamv1 ptr, int* length, SAM_error *err);
 
+	SAM_EXPORT double* SAM_Pvsamv1_BatteryDispatch_dispatch_manual_fuelcellcharge_aget(SAM_Pvsamv1 ptr, int* length, SAM_error *err);
+
 	SAM_EXPORT double* SAM_Pvsamv1_BatteryDispatch_dispatch_manual_gridcharge_aget(SAM_Pvsamv1 ptr, int* length, SAM_error *err);
 
 	SAM_EXPORT double* SAM_Pvsamv1_BatteryDispatch_dispatch_manual_percent_discharge_aget(SAM_Pvsamv1 ptr, int* length, SAM_error *err);
@@ -5504,15 +5486,6 @@ extern "C"
 	SAM_EXPORT double* SAM_Pvsamv1_BatteryDispatch_dispatch_manual_sched_mget(SAM_Pvsamv1 ptr, int* nrows, int* ncols, SAM_error *err);
 
 	SAM_EXPORT double* SAM_Pvsamv1_BatteryDispatch_dispatch_manual_sched_weekend_mget(SAM_Pvsamv1 ptr, int* nrows, int* ncols, SAM_error *err);
-
-
-	/**
-	 * FuelCell Getters
-	 */
-
-	SAM_EXPORT double* SAM_Pvsamv1_FuelCell_dispatch_manual_fuelcellcharge_aget(SAM_Pvsamv1 ptr, int* length, SAM_error *err);
-
-	SAM_EXPORT double* SAM_Pvsamv1_FuelCell_fuelcell_power_aget(SAM_Pvsamv1 ptr, int* length, SAM_error *err);
 
 
 	/**
@@ -5530,6 +5503,13 @@ extern "C"
 	SAM_EXPORT double SAM_Pvsamv1_ElectricityRates_ur_en_ts_sell_rate_nget(SAM_Pvsamv1 ptr, SAM_error *err);
 
 	SAM_EXPORT double* SAM_Pvsamv1_ElectricityRates_ur_ts_buy_rate_aget(SAM_Pvsamv1 ptr, int* length, SAM_error *err);
+
+
+	/**
+	 * FuelCell Getters
+	 */
+
+	SAM_EXPORT double* SAM_Pvsamv1_FuelCell_fuelcell_power_aget(SAM_Pvsamv1 ptr, int* length, SAM_error *err);
 
 
 	/**

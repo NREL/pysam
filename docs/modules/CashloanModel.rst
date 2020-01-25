@@ -51,10 +51,10 @@ PaymentIncentives Group
 .. autoclass:: PySAM.CashloanModel.CashloanModel.PaymentIncentives
 	:members:
 
-Battery Group
+BatterySystem Group
 ==============
 
-.. autoclass:: PySAM.CashloanModel.CashloanModel.Battery
+.. autoclass:: PySAM.CashloanModel.CashloanModel.BatterySystem
 	:members:
 
 FuelCell Group

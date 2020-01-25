@@ -379,6 +379,7 @@ class SystemControl(object):
 	disp_csu_cost = float
 	disp_frequency = float
 	disp_horizon = float
+	disp_inventory_incentive = float
 	disp_max_iter = float
 	disp_mip_gap = float
 	disp_pen_delta_w = float
@@ -420,18 +421,8 @@ class UserDefinedPowerCycle(object):
 		pass
 
 
-	ud_T_amb_des = float
-	ud_T_amb_high = float
-	ud_T_amb_ind_od = tuple
-	ud_T_amb_low = float
-	ud_T_htf_high = float
-	ud_T_htf_ind_od = tuple
-	ud_T_htf_low = float
 	ud_f_W_dot_cool_des = float
 	ud_ind_od = tuple
-	ud_m_dot_htf_high = float
-	ud_m_dot_htf_ind_od = tuple
-	ud_m_dot_htf_low = float
 	ud_m_dot_water_cool_des = float
 
 
@@ -540,6 +531,10 @@ class Outputs(object):
 	annual_W_cooling_tower = float
 	annual_W_cycle_gross = float
 	annual_energy = float
+	annual_eta_rec_th = float
+	annual_eta_rec_th_incl_refl = float
+	annual_q_rec_inc = float
+	annual_q_rec_loss = float
 	annual_total_water_use = float
 	beam = tuple
 	capacity_factor = float
@@ -607,6 +602,7 @@ class Outputs(object):
 	eta_field = tuple
 	eta_map_out = tuple
 	eta_therm = tuple
+	flux_maps_for_import = tuple
 	flux_maps_out = tuple
 	gen = tuple
 	htf_pump_power = tuple

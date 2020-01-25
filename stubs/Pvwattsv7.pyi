@@ -1,4 +1,4 @@
-class Common(object):
+class SolarResource(object):
 	def assign(self): 
 		pass
 
@@ -9,10 +9,12 @@ class Common(object):
 		pass
 
 
-	system_use_lifetime_output = float
+	albedo = tuple
+	solar_resource_data = dict
+	solar_resource_file = str
 
 
-class FinancialAnalysisParameters(object):
+class Lifetime(object):
 	def assign(self): 
 		pass
 
@@ -24,23 +26,11 @@ class FinancialAnalysisParameters(object):
 
 
 	analysis_period = float
-
-
-class LifetimePV(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> Dict[Dict]
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
 	dc_degradation = tuple
+	system_use_lifetime_output = float
 
 
-class Weather(object):
+class SystemDesign(object):
 	def assign(self): 
 		pass
 
@@ -51,49 +41,52 @@ class Weather(object):
 		pass
 
 
-	solar_resource_data = dict
-	solar_resource_file = str
-
-
-class PVWatts(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> Dict[Dict]
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
+	ac_plant_max_f = float
 	array_type = float
 	azimuth = float
+	batt_simple_enable = float
+	bifaciality = float
 	dc_ac_ratio = float
+	en_snowloss = float
+	enable_wind_stow = float
 	gcr = float
+	gust_factor = float
 	inv_eff = float
 	losses = float
 	module_type = float
+	rotlim = float
 	shading_azal = tuple
 	shading_diff = float
 	shading_mxh = tuple
 	shading_timestep = tuple
+	soiling = tuple
+	stow_wspd = float
 	system_capacity = float
 	tilt = float
+	wind_stow_angle = float
+	xfmr_ll = float
+	xfmr_nll = float
 
 
-class Battwatts(object):
+class AdjustmentFactors(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self): 
+		return {}
+
+	def __init__(self, *args, **kwargs): # real signature unknown
 		pass
 
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	batt_simple_enable = float
-
+	constant = float
+	dc_constant = float
+	dc_hourly = tuple
+	dc_periods = tuple
+	hourly = tuple
+	periods = tuple
+	sf_constant = float
+	sf_hourly = tuple
+	sf_periods = tuple
 
 class Outputs(object):
 	def assign(self): 
@@ -115,12 +108,13 @@ class Outputs(object):
 	city = str
 	dc = tuple
 	dc_monthly = tuple
+	dcsnowderate = tuple
 	df = tuple
 	dn = tuple
 	elev = float
+	estimated_rows = float
 	gh = tuple
 	inverter_efficiency = float
-	inverter_model = float
 	kwh_per_kw = float
 	lat = float
 	location = str
@@ -130,6 +124,7 @@ class Outputs(object):
 	poa = tuple
 	poa_monthly = tuple
 	shad_beam_factor = tuple
+	snow = tuple
 	solrad_annual = float
 	solrad_monthly = tuple
 	state = str
@@ -142,7 +137,7 @@ class Outputs(object):
 	wspd = tuple
 
 
-class Pvwattsv5Lifetime(object):
+class Pvwattsv7(object):
 	def assign(self, dict):
 		pass
 
@@ -158,22 +153,22 @@ class Pvwattsv5Lifetime(object):
 	def __init__(self, *args, **kwargs):
 		pass
 
-	Common = Common
-	FinancialAnalysisParameters = FinancialAnalysisParameters
-	LifetimePV = LifetimePV
-	Weather = Weather
-	PVWatts = PVWatts
-	Battwatts = Battwatts
+	def Reopt_size_battery_post(self, args):
+		pass
+	SolarResource = SolarResource
+	Lifetime = Lifetime
+	SystemDesign = SystemDesign
+	AdjustmentFactors = AdjustmentFactors
 	Outputs = Outputs
 
 
-def default(config) -> Pvwattsv5Lifetime
+def default(config) -> Pvwattsv7
 	pass
 
-def new() -> Pvwattsv5Lifetime
+def new() -> Pvwattsv7
 	pass
 
-def wrap(ssc_data_t) -> Pvwattsv5Lifetime
+def wrap(ssc_data_t) -> Pvwattsv7
 	pass
 
 __loader__ = None 

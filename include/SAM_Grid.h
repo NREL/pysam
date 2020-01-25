@@ -53,6 +53,53 @@ extern "C"
 
 
 	//
+	// Grid parameters
+	//
+
+	/**
+	 * Set enable_interconnection_limit: Enable grid interconnection limit [0/1]
+	 * options: Enable a grid interconnection limit
+	 * constraints: None
+	 * required if: None
+	 */
+	SAM_EXPORT void SAM_Grid_Grid_enable_interconnection_limit_nset(SAM_Grid ptr, double number, SAM_error *err);
+
+	/**
+	 * Set grid_interconnection_limit_kwac: Grid interconnection limit [kWac]
+	 * options: None
+	 * constraints: None
+	 * required if: None
+	 */
+	SAM_EXPORT void SAM_Grid_Grid_grid_interconnection_limit_kwac_nset(SAM_Grid ptr, double number, SAM_error *err);
+
+
+	//
+	// SystemOutput parameters
+	//
+
+	/**
+	 * Set gen: System power generated [kW]
+	 * options: Lifetime system generation
+	 * constraints: None
+	 * required if: None
+	 */
+	SAM_EXPORT void SAM_Grid_SystemOutput_gen_aset(SAM_Grid ptr, double* arr, int length, SAM_error *err);
+
+
+	//
+	// Load parameters
+	//
+
+	/**
+	 * Set load: Electricity load (year 1) [kW]
+	 * options: None
+	 * constraints: None
+	 * required if: None
+	 */
+	SAM_EXPORT void SAM_Grid_Load_load_aset(SAM_Grid ptr, double* arr, int length, SAM_error *err);
+
+
+	//
 	// Common parameters
 	//
 
@@ -63,38 +110,6 @@ extern "C"
 	 * required if: None
 	 */
 	SAM_EXPORT void SAM_Grid_Common_annual_energy_nset(SAM_Grid ptr, double number, SAM_error *err);
-
-	/**
-	 * Set enable_interconnection_limit: Enable grid interconnection limit [0/1]
-	 * options: Enable a grid interconnection limit
-	 * constraints: None
-	 * required if: None
-	 */
-	SAM_EXPORT void SAM_Grid_Common_enable_interconnection_limit_nset(SAM_Grid ptr, double number, SAM_error *err);
-
-	/**
-	 * Set gen: System power generated [kW]
-	 * options: Lifetime system generation
-	 * constraints: None
-	 * required if: None
-	 */
-	SAM_EXPORT void SAM_Grid_Common_gen_aset(SAM_Grid ptr, double* arr, int length, SAM_error *err);
-
-	/**
-	 * Set grid_interconnection_limit_kwac: Grid interconnection limit [kWac]
-	 * options: None
-	 * constraints: None
-	 * required if: None
-	 */
-	SAM_EXPORT void SAM_Grid_Common_grid_interconnection_limit_kwac_nset(SAM_Grid ptr, double number, SAM_error *err);
-
-	/**
-	 * Set load: Electricity load (year 1) [kW]
-	 * options: None
-	 * constraints: None
-	 * required if: None
-	 */
-	SAM_EXPORT void SAM_Grid_Common_load_aset(SAM_Grid ptr, double* arr, int length, SAM_error *err);
 
 
 	//
@@ -120,18 +135,33 @@ extern "C"
 
 
 	/**
+	 * Grid Getters
+	 */
+
+	SAM_EXPORT double SAM_Grid_Grid_enable_interconnection_limit_nget(SAM_Grid ptr, SAM_error *err);
+
+	SAM_EXPORT double SAM_Grid_Grid_grid_interconnection_limit_kwac_nget(SAM_Grid ptr, SAM_error *err);
+
+
+	/**
+	 * SystemOutput Getters
+	 */
+
+	SAM_EXPORT double* SAM_Grid_SystemOutput_gen_aget(SAM_Grid ptr, int* length, SAM_error *err);
+
+
+	/**
+	 * Load Getters
+	 */
+
+	SAM_EXPORT double* SAM_Grid_Load_load_aget(SAM_Grid ptr, int* length, SAM_error *err);
+
+
+	/**
 	 * Common Getters
 	 */
 
 	SAM_EXPORT double SAM_Grid_Common_annual_energy_nget(SAM_Grid ptr, SAM_error *err);
-
-	SAM_EXPORT double SAM_Grid_Common_enable_interconnection_limit_nget(SAM_Grid ptr, SAM_error *err);
-
-	SAM_EXPORT double* SAM_Grid_Common_gen_aget(SAM_Grid ptr, int* length, SAM_error *err);
-
-	SAM_EXPORT double SAM_Grid_Common_grid_interconnection_limit_kwac_nget(SAM_Grid ptr, SAM_error *err);
-
-	SAM_EXPORT double* SAM_Grid_Common_load_aget(SAM_Grid ptr, int* length, SAM_error *err);
 
 
 	/**

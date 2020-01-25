@@ -4,6 +4,7 @@ from collections import defaultdict
 
 import numpy as np
 
+
 def TMY_CSV_to_solar_data(filename):
     """
     Format a TMY csv file as 'solar_resource_data' dictionary for use in PySAM.

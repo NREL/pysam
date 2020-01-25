@@ -1994,7 +1994,7 @@ extern "C"
 
 
 	//
-	// Battery parameters
+	// BatterySystem parameters
 	//
 
 	/**
@@ -2003,7 +2003,7 @@ extern "C"
 	 * constraints: None
 	 * required if: None
 	 */
-	SAM_EXPORT void SAM_Saleleaseback_Battery_batt_bank_replacement_aset(SAM_Saleleaseback ptr, double* arr, int length, SAM_error *err);
+	SAM_EXPORT void SAM_Saleleaseback_BatterySystem_batt_bank_replacement_aset(SAM_Saleleaseback ptr, double* arr, int length, SAM_error *err);
 
 	/**
 	 * Set batt_computed_bank_capacity: Battery bank capacity [kWh]
@@ -2011,7 +2011,7 @@ extern "C"
 	 * constraints: None
 	 * required if: ?=0.0
 	 */
-	SAM_EXPORT void SAM_Saleleaseback_Battery_batt_computed_bank_capacity_nset(SAM_Saleleaseback ptr, double number, SAM_error *err);
+	SAM_EXPORT void SAM_Saleleaseback_BatterySystem_batt_computed_bank_capacity_nset(SAM_Saleleaseback ptr, double number, SAM_error *err);
 
 	/**
 	 * Set batt_replacement_option: Enable battery replacement? [0=none,1=capacity based,2=user schedule]
@@ -2019,7 +2019,7 @@ extern "C"
 	 * constraints: INTEGER,MIN=0,MAX=2
 	 * required if: ?=0
 	 */
-	SAM_EXPORT void SAM_Saleleaseback_Battery_batt_replacement_option_nset(SAM_Saleleaseback ptr, double number, SAM_error *err);
+	SAM_EXPORT void SAM_Saleleaseback_BatterySystem_batt_replacement_option_nset(SAM_Saleleaseback ptr, double number, SAM_error *err);
 
 	/**
 	 * Set batt_replacement_schedule: Battery bank replacements per year (user specified) [number/year]
@@ -2027,7 +2027,7 @@ extern "C"
 	 * constraints: None
 	 * required if: None
 	 */
-	SAM_EXPORT void SAM_Saleleaseback_Battery_batt_replacement_schedule_aset(SAM_Saleleaseback ptr, double* arr, int length, SAM_error *err);
+	SAM_EXPORT void SAM_Saleleaseback_BatterySystem_batt_replacement_schedule_aset(SAM_Saleleaseback ptr, double* arr, int length, SAM_error *err);
 
 	/**
 	 * Set battery_per_kWh: Battery cost [$/kWh]
@@ -2035,7 +2035,7 @@ extern "C"
 	 * constraints: None
 	 * required if: ?=0.0
 	 */
-	SAM_EXPORT void SAM_Saleleaseback_Battery_battery_per_kWh_nset(SAM_Saleleaseback ptr, double number, SAM_error *err);
+	SAM_EXPORT void SAM_Saleleaseback_BatterySystem_battery_per_kWh_nset(SAM_Saleleaseback ptr, double number, SAM_error *err);
 
 	/**
 	 * Set en_batt: Enable battery storage model [0/1]
@@ -2043,7 +2043,7 @@ extern "C"
 	 * constraints: None
 	 * required if: ?=0
 	 */
-	SAM_EXPORT void SAM_Saleleaseback_Battery_en_batt_nset(SAM_Saleleaseback ptr, double number, SAM_error *err);
+	SAM_EXPORT void SAM_Saleleaseback_BatterySystem_en_batt_nset(SAM_Saleleaseback ptr, double number, SAM_error *err);
 
 
 	/**
@@ -2575,20 +2575,20 @@ extern "C"
 
 
 	/**
-	 * Battery Getters
+	 * BatterySystem Getters
 	 */
 
-	SAM_EXPORT double* SAM_Saleleaseback_Battery_batt_bank_replacement_aget(SAM_Saleleaseback ptr, int* length, SAM_error *err);
+	SAM_EXPORT double* SAM_Saleleaseback_BatterySystem_batt_bank_replacement_aget(SAM_Saleleaseback ptr, int* length, SAM_error *err);
 
-	SAM_EXPORT double SAM_Saleleaseback_Battery_batt_computed_bank_capacity_nget(SAM_Saleleaseback ptr, SAM_error *err);
+	SAM_EXPORT double SAM_Saleleaseback_BatterySystem_batt_computed_bank_capacity_nget(SAM_Saleleaseback ptr, SAM_error *err);
 
-	SAM_EXPORT double SAM_Saleleaseback_Battery_batt_replacement_option_nget(SAM_Saleleaseback ptr, SAM_error *err);
+	SAM_EXPORT double SAM_Saleleaseback_BatterySystem_batt_replacement_option_nget(SAM_Saleleaseback ptr, SAM_error *err);
 
-	SAM_EXPORT double* SAM_Saleleaseback_Battery_batt_replacement_schedule_aget(SAM_Saleleaseback ptr, int* length, SAM_error *err);
+	SAM_EXPORT double* SAM_Saleleaseback_BatterySystem_batt_replacement_schedule_aget(SAM_Saleleaseback ptr, int* length, SAM_error *err);
 
-	SAM_EXPORT double SAM_Saleleaseback_Battery_battery_per_kWh_nget(SAM_Saleleaseback ptr, SAM_error *err);
+	SAM_EXPORT double SAM_Saleleaseback_BatterySystem_battery_per_kWh_nget(SAM_Saleleaseback ptr, SAM_error *err);
 
-	SAM_EXPORT double SAM_Saleleaseback_Battery_en_batt_nget(SAM_Saleleaseback ptr, SAM_error *err);
+	SAM_EXPORT double SAM_Saleleaseback_BatterySystem_en_batt_nget(SAM_Saleleaseback ptr, SAM_error *err);
 
 
 	/**

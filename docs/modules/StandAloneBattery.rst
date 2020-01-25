@@ -27,28 +27,34 @@ Simulation Group
 .. autoclass:: PySAM.StandAloneBattery.StandAloneBattery.Simulation
 	:members:
 
-Battery Group
+Lifetime Group
 ==============
 
-.. autoclass:: PySAM.StandAloneBattery.StandAloneBattery.Battery
+.. autoclass:: PySAM.StandAloneBattery.StandAloneBattery.Lifetime
 	:members:
 
-System Group
+BatterySystem Group
 ==============
 
-.. autoclass:: PySAM.StandAloneBattery.StandAloneBattery.System
+.. autoclass:: PySAM.StandAloneBattery.StandAloneBattery.BatterySystem
 	:members:
 
-ElectricLoad Group
+SystemOutput Group
 ==============
 
-.. autoclass:: PySAM.StandAloneBattery.StandAloneBattery.ElectricLoad
+.. autoclass:: PySAM.StandAloneBattery.StandAloneBattery.SystemOutput
 	:members:
 
-Common Group
+Load Group
 ==============
 
-.. autoclass:: PySAM.StandAloneBattery.StandAloneBattery.Common
+.. autoclass:: PySAM.StandAloneBattery.StandAloneBattery.Load
+	:members:
+
+BatteryCell Group
+==============
+
+.. autoclass:: PySAM.StandAloneBattery.StandAloneBattery.BatteryCell
 	:members:
 
 Inverter Group
@@ -57,10 +63,22 @@ Inverter Group
 .. autoclass:: PySAM.StandAloneBattery.StandAloneBattery.Inverter
 	:members:
 
-PV Group
+Losses Group
 ==============
 
-.. autoclass:: PySAM.StandAloneBattery.StandAloneBattery.PV
+.. autoclass:: PySAM.StandAloneBattery.StandAloneBattery.Losses
+	:members:
+
+BatteryDispatch Group
+==============
+
+.. autoclass:: PySAM.StandAloneBattery.StandAloneBattery.BatteryDispatch
+	:members:
+
+ElectricityRates Group
+==============
+
+.. autoclass:: PySAM.StandAloneBattery.StandAloneBattery.ElectricityRates
 	:members:
 
 FuelCell Group
@@ -69,16 +87,10 @@ FuelCell Group
 .. autoclass:: PySAM.StandAloneBattery.StandAloneBattery.FuelCell
 	:members:
 
-ElectricityRate Group
+PriceSignal Group
 ==============
 
-.. autoclass:: PySAM.StandAloneBattery.StandAloneBattery.ElectricityRate
-	:members:
-
-TimeOfDelivery Group
-==============
-
-.. autoclass:: PySAM.StandAloneBattery.StandAloneBattery.TimeOfDelivery
+.. autoclass:: PySAM.StandAloneBattery.StandAloneBattery.PriceSignal
 	:members:
 
 Outputs Group

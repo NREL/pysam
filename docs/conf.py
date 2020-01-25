@@ -23,7 +23,7 @@ copyright = '2019, NREL'
 author = 'dguittet'
 
 # The full version, including alpha/beta/rc tags
-release = '1.2'
+release = '2.0'
 
 
 # -- General configuration ---------------------------------------------------
@@ -33,6 +33,7 @@ release = '1.2'
 # ones.
 extensions = [
 'sphinx.ext.autodoc',
+'sphinx.ext.napoleon'
 ]
 
 autodoc_member_order = 'groupwise'

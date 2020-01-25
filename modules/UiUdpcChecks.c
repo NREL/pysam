@@ -177,6 +177,24 @@ static PyMethodDef Outputs_methods[] = {
 };
 
 static PyObject *
+Outputs_get_T_amb_des(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_UiUdpcChecks_Outputs_T_amb_des_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_T_amb_high(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_UiUdpcChecks_Outputs_T_amb_high_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_T_amb_low(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_UiUdpcChecks_Outputs_T_amb_low_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_T_htf_des(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_UiUdpcChecks_Outputs_T_htf_des_nget, self->data_ptr);
@@ -195,23 +213,77 @@ Outputs_get_T_htf_low(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_m_dot_des(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_UiUdpcChecks_Outputs_m_dot_des_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_m_dot_high(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_UiUdpcChecks_Outputs_m_dot_high_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_m_dot_low(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_UiUdpcChecks_Outputs_m_dot_low_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_n_T_amb_pars(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_UiUdpcChecks_Outputs_n_T_amb_pars_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_n_T_htf_pars(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_UiUdpcChecks_Outputs_n_T_htf_pars_nget, self->data_ptr);
 }
 
+static PyObject *
+Outputs_get_n_m_dot_pars(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_UiUdpcChecks_Outputs_n_m_dot_pars_nget, self->data_ptr);
+}
+
 static PyGetSetDef Outputs_getset[] = {
+{"T_amb_des", (getter)Outputs_get_T_amb_des,(setter)0,
+	PyDoc_STR("*float*: Design ambient temperature [C]"),
+ 	NULL},
+{"T_amb_high", (getter)Outputs_get_T_amb_high,(setter)0,
+	PyDoc_STR("*float*: High ambient temperature [C]"),
+ 	NULL},
+{"T_amb_low", (getter)Outputs_get_T_amb_low,(setter)0,
+	PyDoc_STR("*float*: Low ambient temperature [C]"),
+ 	NULL},
 {"T_htf_des", (getter)Outputs_get_T_htf_des,(setter)0,
 	PyDoc_STR("*float*: HTF design temperature [C]"),
  	NULL},
 {"T_htf_high", (getter)Outputs_get_T_htf_high,(setter)0,
-	PyDoc_STR("*float*: HTF design temperature [C]"),
+	PyDoc_STR("*float*: HTF high temperature [C]"),
  	NULL},
 {"T_htf_low", (getter)Outputs_get_T_htf_low,(setter)0,
-	PyDoc_STR("*float*: HTF design temperature [C]"),
+	PyDoc_STR("*float*: HTF low temperature [C]"),
+ 	NULL},
+{"m_dot_des", (getter)Outputs_get_m_dot_des,(setter)0,
+	PyDoc_STR("*float*: Design ambient temperature [C]"),
+ 	NULL},
+{"m_dot_high", (getter)Outputs_get_m_dot_high,(setter)0,
+	PyDoc_STR("*float*: High ambient temperature [C]"),
+ 	NULL},
+{"m_dot_low", (getter)Outputs_get_m_dot_low,(setter)0,
+	PyDoc_STR("*float*: Low ambient temperature [C]"),
+ 	NULL},
+{"n_T_amb_pars", (getter)Outputs_get_n_T_amb_pars,(setter)0,
+	PyDoc_STR("*float*: Number of ambient temperature parametrics [-]"),
  	NULL},
 {"n_T_htf_pars", (getter)Outputs_get_n_T_htf_pars,(setter)0,
 	PyDoc_STR("*float*: Number of HTF parametrics [-]"),
+ 	NULL},
+{"n_m_dot_pars", (getter)Outputs_get_n_m_dot_pars,(setter)0,
+	PyDoc_STR("*float*: Number of HTF mass flow parametrics [-]"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -339,6 +411,12 @@ UiUdpcChecks_export(CmodObject *self, PyObject *args)
 	return PySAM_export_to_nested_dict((PyObject *) self, self->x_attr);
 }
 
+static PyObject *
+UiUdpcChecks_value(CmodObject *self, PyObject *args)
+{
+	return CmodObject_value(self, args);
+}
+
 static PyMethodDef UiUdpcChecks_methods[] = {
 		{"execute",            (PyCFunction)UiUdpcChecks_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
@@ -346,6 +424,8 @@ static PyMethodDef UiUdpcChecks_methods[] = {
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'User Defined Power Cycle': { var: val, ...}, ...}``")},
 		{"export",            (PyCFunction)UiUdpcChecks_export,  METH_VARARGS,
 				PyDoc_STR("export() -> dict\n Export attributes into nested dictionary")},
+		{"value",             (PyCFunction)UiUdpcChecks_value, METH_VARARGS,
+				PyDoc_STR("value(name, optional value) -> Union[None, float, dict, sequence, str]\n Get or set by name a value in any of the variable groups.")},
 		{NULL,              NULL}           /* sentinel */
 };
 

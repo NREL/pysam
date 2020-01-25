@@ -260,9 +260,6 @@ Turbine_export(VarGroupObject *self, PyObject *args)
 	return dict;
 }
 
-static const char* const Turbine_calculate_powercurve_doc = 
-"Calculates the power produced by a wind turbine at windspeeds incremented by 0.25 m/s\nInput: var_table with key-value pairs\n     'turbine_size' - double [kW]\n     'rotor_diameter' - int [m]\n     'elevation' - double [m], required if using Weibull resource model, otherwise 0\n     'max_cp' - double max Cp [-],\n     'max_tip_speed' - double [m/s]\n     'max_tip_sp_ratio' - double max tip speed ratio [-]\n     'cut_in' - double cut in speed [m/s]\n     'cut_out' - double cut out speed [m/s]\n     'drive_train' - int 0: 3 Stage Planetary, 1: Single Stage - Low Speed Generator, 2: Multi-Generator, 3: Direct Drive\nOutput: key-value pairs added to var_table\n     'wind_turbine_powercurve_windspeeds' - array [m/s]\n     'wind_turbine_powercurve_powerout' - array [m/s]\n     'rated_wind_speed' - double [m/s[\n     'hub_efficiency' - array [m/s]";
-
 static PyMethodDef Turbine_methods[] = {
 		{"assign",            (PyCFunction)Turbine_assign,  METH_VARARGS,
 			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Turbine_vals = { var: val, ...}``")},
@@ -1596,6 +1593,12 @@ Windpower_export(CmodObject *self, PyObject *args)
 	return PySAM_export_to_nested_dict((PyObject *) self, self->x_attr);
 }
 
+static PyObject *
+Windpower_value(CmodObject *self, PyObject *args)
+{
+	return CmodObject_value(self, args);
+}
+
 static PyMethodDef Windpower_methods[] = {
 		{"execute",            (PyCFunction)Windpower_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
@@ -1603,6 +1606,8 @@ static PyMethodDef Windpower_methods[] = {
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Resource': { var: val, ...}, ...}``")},
 		{"export",            (PyCFunction)Windpower_export,  METH_VARARGS,
 				PyDoc_STR("export() -> dict\n Export attributes into nested dictionary")},
+		{"value",             (PyCFunction)Windpower_value, METH_VARARGS,
+				PyDoc_STR("value(name, optional value) -> Union[None, float, dict, sequence, str]\n Get or set by name a value in any of the variable groups.")},
 		{NULL,              NULL}           /* sentinel */
 };
 

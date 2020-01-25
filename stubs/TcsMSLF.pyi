@@ -259,18 +259,8 @@ class UserDefinedPC(object):
 		pass
 
 
-	ud_T_amb_des = float
-	ud_T_amb_high = float
-	ud_T_amb_ind_od = tuple
-	ud_T_amb_low = float
-	ud_T_htf_high = float
-	ud_T_htf_ind_od = tuple
-	ud_T_htf_low = float
 	ud_f_W_dot_cool_des = float
 	ud_ind_od = tuple
-	ud_m_dot_htf_high = float
-	ud_m_dot_htf_ind_od = tuple
-	ud_m_dot_htf_low = float
 	ud_m_dot_water_cool_des = float
 
 

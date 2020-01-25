@@ -2,6 +2,7 @@ import json, marshal, os, ntpath, shutil
 from setuptools import setup, Extension
 import distutils
 import sys
+from shutil import copyfile
 import distutils.dir_util
 from distutils.core import Command
 
@@ -23,7 +24,7 @@ if sys.argv[1] == "bdist_conda":
 # defaults and include directories
 defaults_dir = os.environ['SAMNTDIR']+"/api/api_autogen/library/defaults/"
 includepath = os.environ['SAMNTDIR']+"/api/include"
-srcpath = os.environ['SAMNTDIR']+"api/src"
+srcpath = os.environ['SAMNTDIR']+"/api/src"
 
 this_directory = os.path.abspath(os.path.dirname(__file__))
 libpath = this_directory+"/files"
@@ -65,7 +66,7 @@ if sys.platform == 'win32':
 #
 ###################################################################################################
 
-# dynamic library files should be exported to pysam/files by post-build step of each library
+# dynamic library files should be exported to pysam/files by post-build step of each library but copy over headers
 
 distutils.dir_util.copy_tree(
     includepath,
@@ -74,6 +75,10 @@ distutils.dir_util.copy_tree(
     verbose=1,
 )
 
+for filename in os.listdir(srcpath):
+    name = os.path.splitext(filename)
+    if name[1] == ".h":
+        copyfile(os.path.join(srcpath, filename), os.path.join("src", filename))
 
 # serialize all defaults into dict
 def _decode(o):

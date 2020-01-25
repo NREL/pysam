@@ -1,18 +1,4 @@
-class PVWatts(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> Dict[Dict]
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	system_use_lifetime_output = float
-
-
-class FinancialAnalysisParameters(object):
+class Lifetime(object):
 	def assign(self): 
 		pass
 
@@ -24,28 +10,10 @@ class FinancialAnalysisParameters(object):
 
 
 	analysis_period = float
+	system_use_lifetime_output = float
 
 
-class BatteryModelSimple(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> Dict[Dict]
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	batt_simple_chemistry = float
-	batt_simple_dispatch = float
-	batt_simple_enable = float
-	batt_simple_kw = float
-	batt_simple_kwh = float
-	batt_simple_meter_position = float
-
-
-class Common(object):
+class Battery(object):
 	def assign(self): 
 		pass
 
@@ -57,22 +25,16 @@ class Common(object):
 
 
 	ac = tuple
+	batt_custom_dispatch = tuple
+	batt_simple_chemistry = float
+	batt_simple_dispatch = float
+	batt_simple_enable = float
+	batt_simple_kw = float
+	batt_simple_kwh = float
+	batt_simple_meter_position = float
+	crit_load = tuple
 	dc = tuple
 	inverter_efficiency = float
-	inverter_model = float
-
-
-class ElectricLoadOther(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> Dict[Dict]
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
 	load = tuple
 
 
@@ -91,6 +53,7 @@ class Outputs(object):
 	annual_import_to_grid_energy = tuple
 	average_battery_conversion_efficiency = float
 	average_battery_roundtrip_efficiency = float
+	avg_critical_load = float
 	batt_DOD = tuple
 	batt_DOD_cycle_average = tuple
 	batt_I = tuple
@@ -120,12 +83,17 @@ class Outputs(object):
 	batt_qmax = tuple
 	batt_qmaxI = tuple
 	batt_qmax_thermal = tuple
+	batt_revenue_charge = tuple
+	batt_revenue_clipcharge = tuple
+	batt_revenue_discharge = tuple
+	batt_revenue_gridcharge = tuple
 	batt_system_loss = tuple
 	batt_temperature = tuple
 	batt_to_grid = tuple
 	batt_to_load = tuple
 	batt_voltage = tuple
 	batt_voltage_cell = tuple
+	cdf_of_surviving = tuple
 	fuelcell_to_batt = tuple
 	gen = tuple
 	grid_power = tuple
@@ -140,9 +108,16 @@ class Outputs(object):
 	monthly_pv_to_batt = tuple
 	monthly_pv_to_grid = tuple
 	monthly_pv_to_load = tuple
+	outage_durations = tuple
+	pdf_of_surviving = tuple
 	pv_to_batt = tuple
 	pv_to_grid = tuple
 	pv_to_load = tuple
+	resilience_hrs = tuple
+	resilience_hrs_avg = float
+	resilience_hrs_max = float
+	resilience_hrs_min = float
+	survival_function = tuple
 
 
 class Battwatts(object):
@@ -161,11 +136,8 @@ class Battwatts(object):
 	def __init__(self, *args, **kwargs):
 		pass
 
-	PVWatts = PVWatts
-	FinancialAnalysisParameters = FinancialAnalysisParameters
-	BatteryModelSimple = BatteryModelSimple
-	Common = Common
-	ElectricLoadOther = ElectricLoadOther
+	Lifetime = Lifetime
+	Battery = Battery
 	Outputs = Outputs
 
 

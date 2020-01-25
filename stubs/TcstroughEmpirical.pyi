@@ -322,6 +322,7 @@ class Outputs(object):
 	hour = tuple
 	kwh_per_kw = float
 	month = tuple
+	monthly_energy = tuple
 	o_SfTi = tuple
 	pres = tuple
 	solazi = tuple

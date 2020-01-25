@@ -21,6 +21,12 @@ Functions
 .. autoclass:: PySAM.Equpartflip.Equpartflip
 	:members:
 
+Revenue Group
+==============
+
+.. autoclass:: PySAM.Equpartflip.Equpartflip.Revenue
+	:members:
+
 FinancialParameters Group
 ==============
 
@@ -37,6 +43,12 @@ TaxCreditIncentives Group
 ==============
 
 .. autoclass:: PySAM.Equpartflip.Equpartflip.TaxCreditIncentives
+	:members:
+
+Depreciation Group
+==============
+
+.. autoclass:: PySAM.Equpartflip.Equpartflip.Depreciation
 	:members:
 
 PaymentIncentives Group
@@ -63,30 +75,6 @@ TimeOfDelivery Group
 .. autoclass:: PySAM.Equpartflip.Equpartflip.TimeOfDelivery
 	:members:
 
-ReserveAccounts Group
-==============
-
-.. autoclass:: PySAM.Equpartflip.Equpartflip.ReserveAccounts
-	:members:
-
-Depreciation Group
-==============
-
-.. autoclass:: PySAM.Equpartflip.Equpartflip.Depreciation
-	:members:
-
-SalvageValue Group
-==============
-
-.. autoclass:: PySAM.Equpartflip.Equpartflip.SalvageValue
-	:members:
-
-SolutionMode Group
-==============
-
-.. autoclass:: PySAM.Equpartflip.Equpartflip.SolutionMode
-	:members:
-
 ConstructionFinancing Group
 ==============
 
@@ -111,10 +99,10 @@ DeveloperCapitalRecovery Group
 .. autoclass:: PySAM.Equpartflip.Equpartflip.DeveloperCapitalRecovery
 	:members:
 
-Battery Group
+BatterySystem Group
 ==============
 
-.. autoclass:: PySAM.Equpartflip.Equpartflip.Battery
+.. autoclass:: PySAM.Equpartflip.Equpartflip.BatterySystem
 	:members:
 
 Outputs Group

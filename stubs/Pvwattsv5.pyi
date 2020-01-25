@@ -100,8 +100,8 @@ class Outputs(object):
 	dn = tuple
 	elev = float
 	gh = tuple
+	inverter_count = float
 	inverter_efficiency = float
-	inverter_model = float
 	kwh_per_kw = float
 	lat = float
 	location = str

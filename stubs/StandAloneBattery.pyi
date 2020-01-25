@@ -9,12 +9,102 @@ class Simulation(object):
 		pass
 
 
-	analysis_period = float
 	percent_complete = float
+
+
+class Lifetime(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> Dict[Dict]
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
+	analysis_period = float
 	system_use_lifetime_output = float
 
 
-class Battery(object):
+class BatterySystem(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> Dict[Dict]
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
+	batt_ac_dc_efficiency = float
+	batt_ac_or_dc = float
+	batt_computed_bank_capacity = float
+	batt_computed_series = float
+	batt_computed_strings = float
+	batt_current_charge_max = float
+	batt_current_choice = float
+	batt_current_discharge_max = float
+	batt_cycle_cost = float
+	batt_cycle_cost_choice = float
+	batt_dc_ac_efficiency = float
+	batt_dc_dc_efficiency = float
+	batt_height = float
+	batt_inverter_efficiency_cutoff = float
+	batt_length = float
+	batt_loss_choice = float
+	batt_losses = tuple
+	batt_losses_charging = tuple
+	batt_losses_discharging = tuple
+	batt_losses_idle = tuple
+	batt_mass = float
+	batt_meter_position = float
+	batt_power_charge_max_kwac = float
+	batt_power_charge_max_kwdc = float
+	batt_power_discharge_max_kwac = float
+	batt_power_discharge_max_kwdc = float
+	batt_replacement_capacity = float
+	batt_replacement_option = float
+	batt_replacement_schedule = tuple
+	batt_replacement_schedule_percent = tuple
+	batt_width = float
+	en_batt = float
+	om_replacement_cost1 = tuple
+
+
+class SystemOutput(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> Dict[Dict]
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
+	annual_energy = float
+	capacity_factor = float
+	gen = tuple
+
+
+class Load(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> Dict[Dict]
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
+	crit_load = tuple
+	load = tuple
+
+
+class BatteryCell(object):
 	def assign(self): 
 		pass
 
@@ -29,7 +119,6 @@ class Battery(object):
 	LeadAcid_q20_computed = float
 	LeadAcid_qn_computed = float
 	LeadAcid_tn = float
-	annual_energy = float
 	batt_C_rate = float
 	batt_Cp = float
 	batt_Qexp = float
@@ -40,9 +129,6 @@ class Battery(object):
 	batt_Vfull = float
 	batt_Vnom = float
 	batt_Vnom_default = float
-	batt_ac_dc_efficiency = float
-	batt_ac_or_dc = float
-	batt_auto_gridcharge_max_daily = float
 	batt_calendar_a = float
 	batt_calendar_b = float
 	batt_calendar_c = float
@@ -50,107 +136,17 @@ class Battery(object):
 	batt_calendar_lifetime_matrix = tuple
 	batt_calendar_q0 = float
 	batt_chem = float
-	batt_computed_bank_capacity = float
-	batt_computed_series = float
-	batt_computed_strings = float
-	batt_current_charge_max = float
-	batt_current_choice = float
-	batt_current_discharge_max = float
-	batt_custom_dispatch = tuple
-	batt_cycle_cost = float
-	batt_cycle_cost_choice = float
-	batt_dc_ac_efficiency = float
-	batt_dc_dc_efficiency = float
-	batt_dispatch_auto_can_charge = float
-	batt_dispatch_auto_can_clipcharge = float
-	batt_dispatch_auto_can_fuelcellcharge = float
-	batt_dispatch_auto_can_gridcharge = float
-	batt_dispatch_choice = float
-	batt_dispatch_update_frequency_hours = float
 	batt_h_to_ambient = float
-	batt_height = float
 	batt_initial_SOC = float
-	batt_length = float
 	batt_lifetime_matrix = tuple
-	batt_look_ahead_hours = float
-	batt_loss_choice = float
-	batt_losses = tuple
-	batt_losses_charging = tuple
-	batt_losses_discharging = tuple
-	batt_losses_idle = tuple
-	batt_mass = float
 	batt_maximum_SOC = float
-	batt_meter_position = float
 	batt_minimum_SOC = float
 	batt_minimum_modetime = float
-	batt_power_charge_max = float
-	batt_power_discharge_max = float
-	batt_pv_clipping_forecast = tuple
-	batt_pv_dc_forecast = tuple
-	batt_replacement_capacity = float
-	batt_replacement_option = float
-	batt_replacement_schedule = tuple
 	batt_resistance = float
 	batt_room_temperature_celsius = tuple
-	batt_target_choice = float
-	batt_target_power = tuple
-	batt_target_power_monthly = tuple
 	batt_voltage_choice = float
 	batt_voltage_matrix = tuple
-	batt_width = float
 	cap_vs_temp = tuple
-	dispatch_manual_charge = tuple
-	dispatch_manual_discharge = tuple
-	dispatch_manual_gridcharge = tuple
-	dispatch_manual_percent_discharge = tuple
-	dispatch_manual_percent_gridcharge = tuple
-	dispatch_manual_sched = tuple
-	dispatch_manual_sched_weekend = tuple
-	en_batt = float
-	om_replacement_cost1 = tuple
-
-
-class System(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> Dict[Dict]
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	capacity_factor = float
-	gen = tuple
-
-
-class ElectricLoad(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> Dict[Dict]
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	load = tuple
-
-
-class Common(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> Dict[Dict]
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	inverter_model = float
 
 
 class Inverter(object):
@@ -173,9 +169,10 @@ class Inverter(object):
 	inv_snl_eff_cec = float
 	inv_snl_paco = float
 	inverter_count = float
+	inverter_model = float
 
 
-class PV(object):
+class Losses(object):
 	def assign(self): 
 		pass
 
@@ -189,7 +186,7 @@ class PV(object):
 	dcoptimizer_loss = float
 
 
-class FuelCell(object):
+class BatteryDispatch(object):
 	def assign(self): 
 		pass
 
@@ -200,11 +197,31 @@ class FuelCell(object):
 		pass
 
 
+	batt_auto_gridcharge_max_daily = float
+	batt_custom_dispatch = tuple
+	batt_dispatch_auto_can_charge = float
+	batt_dispatch_auto_can_clipcharge = float
+	batt_dispatch_auto_can_fuelcellcharge = float
+	batt_dispatch_auto_can_gridcharge = float
+	batt_dispatch_choice = float
+	batt_dispatch_update_frequency_hours = float
+	batt_look_ahead_hours = float
+	batt_pv_clipping_forecast = tuple
+	batt_pv_dc_forecast = tuple
+	batt_target_choice = float
+	batt_target_power = tuple
+	batt_target_power_monthly = tuple
+	dispatch_manual_charge = tuple
+	dispatch_manual_discharge = tuple
 	dispatch_manual_fuelcellcharge = tuple
-	fuelcell_power = tuple
+	dispatch_manual_gridcharge = tuple
+	dispatch_manual_percent_discharge = tuple
+	dispatch_manual_percent_gridcharge = tuple
+	dispatch_manual_sched = tuple
+	dispatch_manual_sched_weekend = tuple
 
 
-class ElectricityRate(object):
+class ElectricityRates(object):
 	def assign(self): 
 		pass
 
@@ -219,9 +236,25 @@ class ElectricityRate(object):
 	ur_ec_sched_weekday = tuple
 	ur_ec_sched_weekend = tuple
 	ur_ec_tou_mat = tuple
+	ur_en_ts_sell_rate = float
+	ur_ts_buy_rate = tuple
 
 
-class TimeOfDelivery(object):
+class FuelCell(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> Dict[Dict]
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
+	fuelcell_power = tuple
+
+
+class PriceSignal(object):
 	def assign(self): 
 		pass
 
@@ -236,8 +269,19 @@ class TimeOfDelivery(object):
 	dispatch_sched_weekday = tuple
 	dispatch_sched_weekend = tuple
 	dispatch_tod_factors = tuple
+	forecast_price_signal_model = float
+	mp_ancserv1_revenue = tuple
+	mp_ancserv2_revenue = tuple
+	mp_ancserv3_revenue = tuple
+	mp_ancserv4_revenue = tuple
+	mp_enable_ancserv1 = float
+	mp_enable_ancserv2 = float
+	mp_enable_ancserv3 = float
+	mp_enable_ancserv4 = float
+	mp_enable_energy_market_revenue = float
+	mp_energy_market_revenue = tuple
 	ppa_multiplier_model = float
-	ppa_price_input = float
+	ppa_price_input = tuple
 
 
 class Outputs(object):
@@ -255,6 +299,7 @@ class Outputs(object):
 	annual_import_to_grid_energy = tuple
 	average_battery_conversion_efficiency = float
 	average_battery_roundtrip_efficiency = float
+	avg_critical_load = float
 	batt_DOD = tuple
 	batt_DOD_cycle_average = tuple
 	batt_I = tuple
@@ -284,12 +329,17 @@ class Outputs(object):
 	batt_qmax = tuple
 	batt_qmaxI = tuple
 	batt_qmax_thermal = tuple
+	batt_revenue_charge = tuple
+	batt_revenue_clipcharge = tuple
+	batt_revenue_discharge = tuple
+	batt_revenue_gridcharge = tuple
 	batt_system_loss = tuple
 	batt_temperature = tuple
 	batt_to_grid = tuple
 	batt_to_load = tuple
 	batt_voltage = tuple
 	batt_voltage_cell = tuple
+	cdf_of_surviving = tuple
 	fuelcell_to_batt = tuple
 	grid_power = tuple
 	grid_power_target = tuple
@@ -303,9 +353,16 @@ class Outputs(object):
 	monthly_pv_to_batt = tuple
 	monthly_pv_to_grid = tuple
 	monthly_pv_to_load = tuple
+	outage_durations = tuple
+	pdf_of_surviving = tuple
 	pv_to_batt = tuple
 	pv_to_grid = tuple
 	pv_to_load = tuple
+	resilience_hrs = tuple
+	resilience_hrs_avg = float
+	resilience_hrs_max = float
+	resilience_hrs_min = float
+	survival_function = tuple
 
 
 class StandAloneBattery(object):
@@ -325,15 +382,17 @@ class StandAloneBattery(object):
 		pass
 
 	Simulation = Simulation
-	Battery = Battery
-	System = System
-	ElectricLoad = ElectricLoad
-	Common = Common
+	Lifetime = Lifetime
+	BatterySystem = BatterySystem
+	SystemOutput = SystemOutput
+	Load = Load
+	BatteryCell = BatteryCell
 	Inverter = Inverter
-	PV = PV
+	Losses = Losses
+	BatteryDispatch = BatteryDispatch
+	ElectricityRates = ElectricityRates
 	FuelCell = FuelCell
-	ElectricityRate = ElectricityRate
-	TimeOfDelivery = TimeOfDelivery
+	PriceSignal = PriceSignal
 	Outputs = Outputs
 
 

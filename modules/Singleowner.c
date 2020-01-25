@@ -8,7 +8,7 @@
 
 /*
  * Revenue Group
- */
+ */ 
 
 static PyTypeObject Revenue_Type;
 
@@ -441,7 +441,7 @@ static PyTypeObject Revenue_Type = {
 
 /*
  * FinancialParameters Group
- */
+ */ 
 
 static PyTypeObject FinancialParameters_Type;
 
@@ -1084,7 +1084,7 @@ static PyTypeObject FinancialParameters_Type = {
 
 /*
  * SystemCosts Group
- */
+ */ 
 
 static PyTypeObject SystemCosts_Type;
 
@@ -1712,7 +1712,7 @@ static PyTypeObject SystemCosts_Type = {
 
 /*
  * TaxCreditIncentives Group
- */
+ */ 
 
 static PyTypeObject TaxCreditIncentives_Type;
 
@@ -2115,7 +2115,7 @@ static PyTypeObject TaxCreditIncentives_Type = {
 
 /*
  * Depreciation Group
- */
+ */ 
 
 static PyTypeObject Depreciation_Type;
 
@@ -2818,7 +2818,7 @@ static PyTypeObject Depreciation_Type = {
 
 /*
  * PaymentIncentives Group
- */
+ */ 
 
 static PyTypeObject PaymentIncentives_Type;
 
@@ -3709,6 +3709,18 @@ PaymentIncentives_set_pbi_fed_escal(VarGroupObject *self, PyObject *value, void 
 }
 
 static PyObject *
+PaymentIncentives_get_pbi_fed_for_ds(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Singleowner_PaymentIncentives_pbi_fed_for_ds_nget, self->data_ptr);
+}
+
+static int
+PaymentIncentives_set_pbi_fed_for_ds(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Singleowner_PaymentIncentives_pbi_fed_for_ds_nset, self->data_ptr);
+}
+
+static PyObject *
 PaymentIncentives_get_pbi_fed_tax_fed(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Singleowner_PaymentIncentives_pbi_fed_tax_fed_nget, self->data_ptr);
@@ -3766,6 +3778,18 @@ static int
 PaymentIncentives_set_pbi_oth_escal(VarGroupObject *self, PyObject *value, void *closure)
 {
 	return PySAM_double_setter(value, SAM_Singleowner_PaymentIncentives_pbi_oth_escal_nset, self->data_ptr);
+}
+
+static PyObject *
+PaymentIncentives_get_pbi_oth_for_ds(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Singleowner_PaymentIncentives_pbi_oth_for_ds_nget, self->data_ptr);
+}
+
+static int
+PaymentIncentives_set_pbi_oth_for_ds(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Singleowner_PaymentIncentives_pbi_oth_for_ds_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -3829,6 +3853,18 @@ PaymentIncentives_set_pbi_sta_escal(VarGroupObject *self, PyObject *value, void 
 }
 
 static PyObject *
+PaymentIncentives_get_pbi_sta_for_ds(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Singleowner_PaymentIncentives_pbi_sta_for_ds_nget, self->data_ptr);
+}
+
+static int
+PaymentIncentives_set_pbi_sta_for_ds(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Singleowner_PaymentIncentives_pbi_sta_for_ds_nset, self->data_ptr);
+}
+
+static PyObject *
 PaymentIncentives_get_pbi_sta_tax_fed(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Singleowner_PaymentIncentives_pbi_sta_tax_fed_nget, self->data_ptr);
@@ -3886,6 +3922,18 @@ static int
 PaymentIncentives_set_pbi_uti_escal(VarGroupObject *self, PyObject *value, void *closure)
 {
 	return PySAM_double_setter(value, SAM_Singleowner_PaymentIncentives_pbi_uti_escal_nset, self->data_ptr);
+}
+
+static PyObject *
+PaymentIncentives_get_pbi_uti_for_ds(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Singleowner_PaymentIncentives_pbi_uti_for_ds_nget, self->data_ptr);
+}
+
+static int
+PaymentIncentives_set_pbi_uti_for_ds(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Singleowner_PaymentIncentives_pbi_uti_for_ds_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -4135,6 +4183,9 @@ static PyGetSetDef PaymentIncentives_getset[] = {
 {"pbi_fed_escal", (getter)PaymentIncentives_get_pbi_fed_escal,(setter)PaymentIncentives_set_pbi_fed_escal,
 	PyDoc_STR("*float*: Federal PBI escalation [%]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
+{"pbi_fed_for_ds", (getter)PaymentIncentives_get_pbi_fed_for_ds,(setter)PaymentIncentives_set_pbi_fed_for_ds,
+	PyDoc_STR("*float*: Federal PBI available for debt service [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
 {"pbi_fed_tax_fed", (getter)PaymentIncentives_get_pbi_fed_tax_fed,(setter)PaymentIncentives_set_pbi_fed_tax_fed,
 	PyDoc_STR("*float*: Federal PBI federal taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
  	NULL},
@@ -4149,6 +4200,9 @@ static PyGetSetDef PaymentIncentives_getset[] = {
  	NULL},
 {"pbi_oth_escal", (getter)PaymentIncentives_get_pbi_oth_escal,(setter)PaymentIncentives_set_pbi_oth_escal,
 	PyDoc_STR("*float*: Other PBI escalation [%]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"pbi_oth_for_ds", (getter)PaymentIncentives_get_pbi_oth_for_ds,(setter)PaymentIncentives_set_pbi_oth_for_ds,
+	PyDoc_STR("*float*: Other PBI available for debt service [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"pbi_oth_tax_fed", (getter)PaymentIncentives_get_pbi_oth_tax_fed,(setter)PaymentIncentives_set_pbi_oth_tax_fed,
 	PyDoc_STR("*float*: Other PBI federal taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
@@ -4165,6 +4219,9 @@ static PyGetSetDef PaymentIncentives_getset[] = {
 {"pbi_sta_escal", (getter)PaymentIncentives_get_pbi_sta_escal,(setter)PaymentIncentives_set_pbi_sta_escal,
 	PyDoc_STR("*float*: State PBI escalation [%]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
+{"pbi_sta_for_ds", (getter)PaymentIncentives_get_pbi_sta_for_ds,(setter)PaymentIncentives_set_pbi_sta_for_ds,
+	PyDoc_STR("*float*: State PBI available for debt service [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
 {"pbi_sta_tax_fed", (getter)PaymentIncentives_get_pbi_sta_tax_fed,(setter)PaymentIncentives_set_pbi_sta_tax_fed,
 	PyDoc_STR("*float*: State PBI federal taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
  	NULL},
@@ -4179,6 +4236,9 @@ static PyGetSetDef PaymentIncentives_getset[] = {
  	NULL},
 {"pbi_uti_escal", (getter)PaymentIncentives_get_pbi_uti_escal,(setter)PaymentIncentives_set_pbi_uti_escal,
 	PyDoc_STR("*float*: Utility PBI escalation [%]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"pbi_uti_for_ds", (getter)PaymentIncentives_get_pbi_uti_for_ds,(setter)PaymentIncentives_set_pbi_uti_for_ds,
+	PyDoc_STR("*float*: Utility PBI available for debt service [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"pbi_uti_tax_fed", (getter)PaymentIncentives_get_pbi_uti_tax_fed,(setter)PaymentIncentives_set_pbi_uti_tax_fed,
 	PyDoc_STR("*float*: Utility PBI federal taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
@@ -4240,34 +4300,34 @@ static PyTypeObject PaymentIncentives_Type = {
 
 
 /*
- * Incentives Group
- */
+ * BatterySystem Group
+ */ 
 
-static PyTypeObject Incentives_Type;
+static PyTypeObject BatterySystem_Type;
 
 static PyObject *
-Incentives_new(SAM_Singleowner data_ptr)
+BatterySystem_new(SAM_Singleowner data_ptr)
 {
-	PyObject* new_obj = Incentives_Type.tp_alloc(&Incentives_Type,0);
+	PyObject* new_obj = BatterySystem_Type.tp_alloc(&BatterySystem_Type,0);
 
-	VarGroupObject* Incentives_obj = (VarGroupObject*)new_obj;
+	VarGroupObject* BatterySystem_obj = (VarGroupObject*)new_obj;
 
-	Incentives_obj->data_ptr = (SAM_table)data_ptr;
+	BatterySystem_obj->data_ptr = (SAM_table)data_ptr;
 
 	return new_obj;
 }
 
-/* Incentives methods */
+/* BatterySystem methods */
 
 static PyObject *
-Incentives_assign(VarGroupObject *self, PyObject *args)
+BatterySystem_assign(VarGroupObject *self, PyObject *args)
 {
 	PyObject* dict;
 	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Singleowner", "Incentives")){
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Singleowner", "BatterySystem")){
 		return NULL;
 	}
 
@@ -4276,90 +4336,150 @@ Incentives_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
-Incentives_export(VarGroupObject *self, PyObject *args)
+BatterySystem_export(VarGroupObject *self, PyObject *args)
 {
-	PyTypeObject* tp = &Incentives_Type;
+	PyTypeObject* tp = &BatterySystem_Type;
 	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
 	return dict;
 }
 
-static PyMethodDef Incentives_methods[] = {
-		{"assign",            (PyCFunction)Incentives_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Incentives_vals = { var: val, ...}``")},
-		{"export",            (PyCFunction)Incentives_export,  METH_VARARGS,
+static PyMethodDef BatterySystem_methods[] = {
+		{"assign",            (PyCFunction)BatterySystem_assign,  METH_VARARGS,
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``BatterySystem_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)BatterySystem_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 static PyObject *
-Incentives_get_pbi_fed_for_ds(VarGroupObject *self, void *closure)
+BatterySystem_get_batt_bank_replacement(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Singleowner_Incentives_pbi_fed_for_ds_nget, self->data_ptr);
+	return PySAM_array_getter(SAM_Singleowner_BatterySystem_batt_bank_replacement_aget, self->data_ptr);
 }
 
 static int
-Incentives_set_pbi_fed_for_ds(VarGroupObject *self, PyObject *value, void *closure)
+BatterySystem_set_batt_bank_replacement(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Singleowner_Incentives_pbi_fed_for_ds_nset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Singleowner_BatterySystem_batt_bank_replacement_aset, self->data_ptr);
 }
 
 static PyObject *
-Incentives_get_pbi_oth_for_ds(VarGroupObject *self, void *closure)
+BatterySystem_get_batt_computed_bank_capacity(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Singleowner_Incentives_pbi_oth_for_ds_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Singleowner_BatterySystem_batt_computed_bank_capacity_nget, self->data_ptr);
 }
 
 static int
-Incentives_set_pbi_oth_for_ds(VarGroupObject *self, PyObject *value, void *closure)
+BatterySystem_set_batt_computed_bank_capacity(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Singleowner_Incentives_pbi_oth_for_ds_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Singleowner_BatterySystem_batt_computed_bank_capacity_nset, self->data_ptr);
 }
 
 static PyObject *
-Incentives_get_pbi_sta_for_ds(VarGroupObject *self, void *closure)
+BatterySystem_get_batt_meter_position(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Singleowner_Incentives_pbi_sta_for_ds_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Singleowner_BatterySystem_batt_meter_position_nget, self->data_ptr);
 }
 
 static int
-Incentives_set_pbi_sta_for_ds(VarGroupObject *self, PyObject *value, void *closure)
+BatterySystem_set_batt_meter_position(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Singleowner_Incentives_pbi_sta_for_ds_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Singleowner_BatterySystem_batt_meter_position_nset, self->data_ptr);
 }
 
 static PyObject *
-Incentives_get_pbi_uti_for_ds(VarGroupObject *self, void *closure)
+BatterySystem_get_batt_replacement_option(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Singleowner_Incentives_pbi_uti_for_ds_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Singleowner_BatterySystem_batt_replacement_option_nget, self->data_ptr);
 }
 
 static int
-Incentives_set_pbi_uti_for_ds(VarGroupObject *self, PyObject *value, void *closure)
+BatterySystem_set_batt_replacement_option(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Singleowner_Incentives_pbi_uti_for_ds_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Singleowner_BatterySystem_batt_replacement_option_nset, self->data_ptr);
 }
 
-static PyGetSetDef Incentives_getset[] = {
-{"pbi_fed_for_ds", (getter)Incentives_get_pbi_fed_for_ds,(setter)Incentives_set_pbi_fed_for_ds,
-	PyDoc_STR("*float*: Federal PBI available for debt service [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+static PyObject *
+BatterySystem_get_batt_replacement_schedule(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Singleowner_BatterySystem_batt_replacement_schedule_aget, self->data_ptr);
+}
+
+static int
+BatterySystem_set_batt_replacement_schedule(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Singleowner_BatterySystem_batt_replacement_schedule_aset, self->data_ptr);
+}
+
+static PyObject *
+BatterySystem_get_battery_per_kWh(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Singleowner_BatterySystem_battery_per_kWh_nget, self->data_ptr);
+}
+
+static int
+BatterySystem_set_battery_per_kWh(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Singleowner_BatterySystem_battery_per_kWh_nset, self->data_ptr);
+}
+
+static PyObject *
+BatterySystem_get_en_batt(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Singleowner_BatterySystem_en_batt_nget, self->data_ptr);
+}
+
+static int
+BatterySystem_set_en_batt(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Singleowner_BatterySystem_en_batt_nset, self->data_ptr);
+}
+
+static PyObject *
+BatterySystem_get_grid_to_batt(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Singleowner_BatterySystem_grid_to_batt_aget, self->data_ptr);
+}
+
+static int
+BatterySystem_set_grid_to_batt(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Singleowner_BatterySystem_grid_to_batt_aset, self->data_ptr);
+}
+
+static PyGetSetDef BatterySystem_getset[] = {
+{"batt_bank_replacement", (getter)BatterySystem_get_batt_bank_replacement,(setter)BatterySystem_set_batt_bank_replacement,
+	PyDoc_STR("*sequence*: Battery bank replacements per year [number/year]"),
  	NULL},
-{"pbi_oth_for_ds", (getter)Incentives_get_pbi_oth_for_ds,(setter)Incentives_set_pbi_oth_for_ds,
-	PyDoc_STR("*float*: Other PBI available for debt service [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+{"batt_computed_bank_capacity", (getter)BatterySystem_get_batt_computed_bank_capacity,(setter)BatterySystem_set_batt_computed_bank_capacity,
+	PyDoc_STR("*float*: Battery bank capacity [kWh]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
-{"pbi_sta_for_ds", (getter)Incentives_get_pbi_sta_for_ds,(setter)Incentives_set_pbi_sta_for_ds,
-	PyDoc_STR("*float*: State PBI available for debt service [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+{"batt_meter_position", (getter)BatterySystem_get_batt_meter_position,(setter)BatterySystem_set_batt_meter_position,
+	PyDoc_STR("*float*: Position of battery relative to electric meter"),
  	NULL},
-{"pbi_uti_for_ds", (getter)Incentives_get_pbi_uti_for_ds,(setter)Incentives_set_pbi_uti_for_ds,
-	PyDoc_STR("*float*: Utility PBI available for debt service [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+{"batt_replacement_option", (getter)BatterySystem_get_batt_replacement_option,(setter)BatterySystem_set_batt_replacement_option,
+	PyDoc_STR("*float*: Enable battery replacement? [0=none,1=capacity based,2=user schedule]\n\n*Constraints*: INTEGER,MIN=0,MAX=2\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"batt_replacement_schedule", (getter)BatterySystem_get_batt_replacement_schedule,(setter)BatterySystem_set_batt_replacement_schedule,
+	PyDoc_STR("*sequence*: Battery bank replacements per year (user specified) [number/year]"),
+ 	NULL},
+{"battery_per_kWh", (getter)BatterySystem_get_battery_per_kWh,(setter)BatterySystem_set_battery_per_kWh,
+	PyDoc_STR("*float*: Battery cost [$/kWh]\n\n*Required*: If not provided, assumed to be 0.0"),
+ 	NULL},
+{"en_batt", (getter)BatterySystem_get_en_batt,(setter)BatterySystem_set_en_batt,
+	PyDoc_STR("*float*: Enable battery storage model [0/1]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"grid_to_batt", (getter)BatterySystem_get_grid_to_batt,(setter)BatterySystem_set_grid_to_batt,
+	PyDoc_STR("*sequence*: Electricity to battery from grid [kW]"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
 
-static PyTypeObject Incentives_Type = {
+static PyTypeObject BatterySystem_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"Singleowner.Incentives",             /*tp_name*/
+		"Singleowner.BatterySystem",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -4386,9 +4506,9 @@ static PyTypeObject Incentives_Type = {
 		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
-		Incentives_methods,         /*tp_methods*/
+		BatterySystem_methods,         /*tp_methods*/
 		0,                          /*tp_members*/
-		Incentives_getset,          /*tp_getset*/
+		BatterySystem_getset,          /*tp_getset*/
 		0,                          /*tp_base*/
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
@@ -4403,34 +4523,34 @@ static PyTypeObject Incentives_Type = {
 
 
 /*
- * Battery Group
- */
+ * ElectricityRates Group
+ */ 
 
-static PyTypeObject Battery_Type;
+static PyTypeObject ElectricityRates_Type;
 
 static PyObject *
-Battery_new(SAM_Singleowner data_ptr)
+ElectricityRates_new(SAM_Singleowner data_ptr)
 {
-	PyObject* new_obj = Battery_Type.tp_alloc(&Battery_Type,0);
+	PyObject* new_obj = ElectricityRates_Type.tp_alloc(&ElectricityRates_Type,0);
 
-	VarGroupObject* Battery_obj = (VarGroupObject*)new_obj;
+	VarGroupObject* ElectricityRates_obj = (VarGroupObject*)new_obj;
 
-	Battery_obj->data_ptr = (SAM_table)data_ptr;
+	ElectricityRates_obj->data_ptr = (SAM_table)data_ptr;
 
 	return new_obj;
 }
 
-/* Battery methods */
+/* ElectricityRates methods */
 
 static PyObject *
-Battery_assign(VarGroupObject *self, PyObject *args)
+ElectricityRates_assign(VarGroupObject *self, PyObject *args)
 {
 	PyObject* dict;
 	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Singleowner", "Battery")){
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Singleowner", "ElectricityRates")){
 		return NULL;
 	}
 
@@ -4439,165 +4559,45 @@ Battery_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
-Battery_export(VarGroupObject *self, PyObject *args)
+ElectricityRates_export(VarGroupObject *self, PyObject *args)
 {
-	PyTypeObject* tp = &Battery_Type;
+	PyTypeObject* tp = &ElectricityRates_Type;
 	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
 	return dict;
 }
 
-static PyMethodDef Battery_methods[] = {
-		{"assign",            (PyCFunction)Battery_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Battery_vals = { var: val, ...}``")},
-		{"export",            (PyCFunction)Battery_export,  METH_VARARGS,
+static PyMethodDef ElectricityRates_methods[] = {
+		{"assign",            (PyCFunction)ElectricityRates_assign,  METH_VARARGS,
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``ElectricityRates_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)ElectricityRates_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 static PyObject *
-Battery_get_batt_bank_replacement(VarGroupObject *self, void *closure)
+ElectricityRates_get_en_electricity_rates(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Singleowner_Battery_batt_bank_replacement_aget, self->data_ptr);
+	return PySAM_double_getter(SAM_Singleowner_ElectricityRates_en_electricity_rates_nget, self->data_ptr);
 }
 
 static int
-Battery_set_batt_bank_replacement(VarGroupObject *self, PyObject *value, void *closure)
+ElectricityRates_set_en_electricity_rates(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_Singleowner_Battery_batt_bank_replacement_aset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Singleowner_ElectricityRates_en_electricity_rates_nset, self->data_ptr);
 }
 
-static PyObject *
-Battery_get_batt_computed_bank_capacity(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Singleowner_Battery_batt_computed_bank_capacity_nget, self->data_ptr);
-}
-
-static int
-Battery_set_batt_computed_bank_capacity(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Singleowner_Battery_batt_computed_bank_capacity_nset, self->data_ptr);
-}
-
-static PyObject *
-Battery_get_batt_meter_position(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Singleowner_Battery_batt_meter_position_nget, self->data_ptr);
-}
-
-static int
-Battery_set_batt_meter_position(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Singleowner_Battery_batt_meter_position_nset, self->data_ptr);
-}
-
-static PyObject *
-Battery_get_batt_replacement_option(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Singleowner_Battery_batt_replacement_option_nget, self->data_ptr);
-}
-
-static int
-Battery_set_batt_replacement_option(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Singleowner_Battery_batt_replacement_option_nset, self->data_ptr);
-}
-
-static PyObject *
-Battery_get_batt_replacement_schedule(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Singleowner_Battery_batt_replacement_schedule_aget, self->data_ptr);
-}
-
-static int
-Battery_set_batt_replacement_schedule(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_Singleowner_Battery_batt_replacement_schedule_aset, self->data_ptr);
-}
-
-static PyObject *
-Battery_get_battery_per_kWh(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Singleowner_Battery_battery_per_kWh_nget, self->data_ptr);
-}
-
-static int
-Battery_set_battery_per_kWh(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Singleowner_Battery_battery_per_kWh_nset, self->data_ptr);
-}
-
-static PyObject *
-Battery_get_en_batt(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Singleowner_Battery_en_batt_nget, self->data_ptr);
-}
-
-static int
-Battery_set_en_batt(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Singleowner_Battery_en_batt_nset, self->data_ptr);
-}
-
-static PyObject *
-Battery_get_en_electricity_rates(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Singleowner_Battery_en_electricity_rates_nget, self->data_ptr);
-}
-
-static int
-Battery_set_en_electricity_rates(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Singleowner_Battery_en_electricity_rates_nset, self->data_ptr);
-}
-
-static PyObject *
-Battery_get_grid_to_batt(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Singleowner_Battery_grid_to_batt_aget, self->data_ptr);
-}
-
-static int
-Battery_set_grid_to_batt(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_Singleowner_Battery_grid_to_batt_aset, self->data_ptr);
-}
-
-static PyGetSetDef Battery_getset[] = {
-{"batt_bank_replacement", (getter)Battery_get_batt_bank_replacement,(setter)Battery_set_batt_bank_replacement,
-	PyDoc_STR("*sequence*: Battery bank replacements per year [number/year]"),
- 	NULL},
-{"batt_computed_bank_capacity", (getter)Battery_get_batt_computed_bank_capacity,(setter)Battery_set_batt_computed_bank_capacity,
-	PyDoc_STR("*float*: Battery bank capacity [kWh]\n\n*Required*: If not provided, assumed to be 0.0"),
- 	NULL},
-{"batt_meter_position", (getter)Battery_get_batt_meter_position,(setter)Battery_set_batt_meter_position,
-	PyDoc_STR("*float*: Position of battery relative to electric meter"),
- 	NULL},
-{"batt_replacement_option", (getter)Battery_get_batt_replacement_option,(setter)Battery_set_batt_replacement_option,
-	PyDoc_STR("*float*: Enable battery replacement? [0=none,1=capacity based,2=user schedule]\n\n*Constraints*: INTEGER,MIN=0,MAX=2\n\n*Required*: If not provided, assumed to be 0"),
- 	NULL},
-{"batt_replacement_schedule", (getter)Battery_get_batt_replacement_schedule,(setter)Battery_set_batt_replacement_schedule,
-	PyDoc_STR("*sequence*: Battery bank replacements per year (user specified) [number/year]"),
- 	NULL},
-{"battery_per_kWh", (getter)Battery_get_battery_per_kWh,(setter)Battery_set_battery_per_kWh,
-	PyDoc_STR("*float*: Battery cost [$/kWh]\n\n*Required*: If not provided, assumed to be 0.0"),
- 	NULL},
-{"en_batt", (getter)Battery_get_en_batt,(setter)Battery_set_en_batt,
-	PyDoc_STR("*float*: Enable battery storage model [0/1]\n\n*Required*: If not provided, assumed to be 0"),
- 	NULL},
-{"en_electricity_rates", (getter)Battery_get_en_electricity_rates,(setter)Battery_set_en_electricity_rates,
+static PyGetSetDef ElectricityRates_getset[] = {
+{"en_electricity_rates", (getter)ElectricityRates_get_en_electricity_rates,(setter)ElectricityRates_set_en_electricity_rates,
 	PyDoc_STR("*float*: Enable electricity rates for grid purchase [0/1]\n\n*Required*: If not provided, assumed to be 0"),
- 	NULL},
-{"grid_to_batt", (getter)Battery_get_grid_to_batt,(setter)Battery_set_grid_to_batt,
-	PyDoc_STR("*sequence*: Electricity to battery from grid [kW]"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
 
-static PyTypeObject Battery_Type = {
+static PyTypeObject ElectricityRates_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"Singleowner.Battery",             /*tp_name*/
+		"Singleowner.ElectricityRates",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -4624,9 +4624,9 @@ static PyTypeObject Battery_Type = {
 		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
-		Battery_methods,         /*tp_methods*/
+		ElectricityRates_methods,         /*tp_methods*/
 		0,                          /*tp_members*/
-		Battery_getset,          /*tp_getset*/
+		ElectricityRates_getset,          /*tp_getset*/
 		0,                          /*tp_base*/
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
@@ -4642,7 +4642,7 @@ static PyTypeObject Battery_Type = {
 
 /*
  * SystemOutput Group
- */
+ */ 
 
 static PyTypeObject SystemOutput_Type;
 
@@ -4693,6 +4693,18 @@ static PyMethodDef SystemOutput_methods[] = {
 };
 
 static PyObject *
+SystemOutput_get_annual_energy_pre_curtailment_ac(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Singleowner_SystemOutput_annual_energy_pre_curtailment_ac_nget, self->data_ptr);
+}
+
+static int
+SystemOutput_set_annual_energy_pre_curtailment_ac(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Singleowner_SystemOutput_annual_energy_pre_curtailment_ac_nset, self->data_ptr);
+}
+
+static PyObject *
 SystemOutput_get_degradation(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Singleowner_SystemOutput_degradation_aget, self->data_ptr);
@@ -4741,6 +4753,9 @@ SystemOutput_set_system_pre_curtailment_kwac(VarGroupObject *self, PyObject *val
 }
 
 static PyGetSetDef SystemOutput_getset[] = {
+{"annual_energy_pre_curtailment_ac", (getter)SystemOutput_get_annual_energy_pre_curtailment_ac,(setter)SystemOutput_set_annual_energy_pre_curtailment_ac,
+	PyDoc_STR("*float*: Annual Energy AC pre-curtailment (year 1) [kWh]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
 {"degradation", (getter)SystemOutput_get_degradation,(setter)SystemOutput_set_degradation,
 	PyDoc_STR("*sequence*: Annual energy degradation\n\n*Required*: True"),
  	NULL},
@@ -4805,7 +4820,7 @@ static PyTypeObject SystemOutput_Type = {
 
 /*
  * UtilityBill Group
- */
+ */ 
 
 static PyTypeObject UtilityBill_Type;
 
@@ -4923,7 +4938,7 @@ static PyTypeObject UtilityBill_Type = {
 
 /*
  * Lifetime Group
- */
+ */ 
 
 static PyTypeObject Lifetime_Type;
 
@@ -5041,7 +5056,7 @@ static PyTypeObject Lifetime_Type = {
 
 /*
  * FuelCell Group
- */
+ */ 
 
 static PyTypeObject FuelCell_Type;
 
@@ -5234,7 +5249,7 @@ static PyTypeObject FuelCell_Type = {
 
 /*
  * CapacityPayments Group
- */
+ */ 
 
 static PyTypeObject CapacityPayments_Type;
 
@@ -5426,34 +5441,34 @@ static PyTypeObject CapacityPayments_Type = {
 
 
 /*
- * FinancialGrid Group
- */
+ * Grid Group
+ */ 
 
-static PyTypeObject FinancialGrid_Type;
+static PyTypeObject Grid_Type;
 
 static PyObject *
-FinancialGrid_new(SAM_Singleowner data_ptr)
+Grid_new(SAM_Singleowner data_ptr)
 {
-	PyObject* new_obj = FinancialGrid_Type.tp_alloc(&FinancialGrid_Type,0);
+	PyObject* new_obj = Grid_Type.tp_alloc(&Grid_Type,0);
 
-	VarGroupObject* FinancialGrid_obj = (VarGroupObject*)new_obj;
+	VarGroupObject* Grid_obj = (VarGroupObject*)new_obj;
 
-	FinancialGrid_obj->data_ptr = (SAM_table)data_ptr;
+	Grid_obj->data_ptr = (SAM_table)data_ptr;
 
 	return new_obj;
 }
 
-/* FinancialGrid methods */
+/* Grid methods */
 
 static PyObject *
-FinancialGrid_assign(VarGroupObject *self, PyObject *args)
+Grid_assign(VarGroupObject *self, PyObject *args)
 {
 	PyObject* dict;
 	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Singleowner", "FinancialGrid")){
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Singleowner", "Grid")){
 		return NULL;
 	}
 
@@ -5462,60 +5477,60 @@ FinancialGrid_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
-FinancialGrid_export(VarGroupObject *self, PyObject *args)
+Grid_export(VarGroupObject *self, PyObject *args)
 {
-	PyTypeObject* tp = &FinancialGrid_Type;
+	PyTypeObject* tp = &Grid_Type;
 	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
 	return dict;
 }
 
-static PyMethodDef FinancialGrid_methods[] = {
-		{"assign",            (PyCFunction)FinancialGrid_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``FinancialGrid_vals = { var: val, ...}``")},
-		{"export",            (PyCFunction)FinancialGrid_export,  METH_VARARGS,
+static PyMethodDef Grid_methods[] = {
+		{"assign",            (PyCFunction)Grid_assign,  METH_VARARGS,
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Grid_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)Grid_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 static PyObject *
-FinancialGrid_get_grid_curtailment_price(VarGroupObject *self, void *closure)
+Grid_get_grid_curtailment_price(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Singleowner_FinancialGrid_grid_curtailment_price_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Singleowner_Grid_grid_curtailment_price_aget, self->data_ptr);
 }
 
 static int
-FinancialGrid_set_grid_curtailment_price(VarGroupObject *self, PyObject *value, void *closure)
+Grid_set_grid_curtailment_price(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_Singleowner_FinancialGrid_grid_curtailment_price_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Singleowner_Grid_grid_curtailment_price_aset, self->data_ptr);
 }
 
 static PyObject *
-FinancialGrid_get_grid_curtailment_price_esc(VarGroupObject *self, void *closure)
+Grid_get_grid_curtailment_price_esc(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Singleowner_FinancialGrid_grid_curtailment_price_esc_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Singleowner_Grid_grid_curtailment_price_esc_nget, self->data_ptr);
 }
 
 static int
-FinancialGrid_set_grid_curtailment_price_esc(VarGroupObject *self, PyObject *value, void *closure)
+Grid_set_grid_curtailment_price_esc(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Singleowner_FinancialGrid_grid_curtailment_price_esc_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Singleowner_Grid_grid_curtailment_price_esc_nset, self->data_ptr);
 }
 
-static PyGetSetDef FinancialGrid_getset[] = {
-{"grid_curtailment_price", (getter)FinancialGrid_get_grid_curtailment_price,(setter)FinancialGrid_set_grid_curtailment_price,
+static PyGetSetDef Grid_getset[] = {
+{"grid_curtailment_price", (getter)Grid_get_grid_curtailment_price,(setter)Grid_set_grid_curtailment_price,
 	PyDoc_STR("*sequence*: Curtailment price [$/kWh]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
-{"grid_curtailment_price_esc", (getter)FinancialGrid_get_grid_curtailment_price_esc,(setter)FinancialGrid_set_grid_curtailment_price_esc,
+{"grid_curtailment_price_esc", (getter)Grid_get_grid_curtailment_price_esc,(setter)Grid_set_grid_curtailment_price_esc,
 	PyDoc_STR("*float*: Curtailment price escalation [%]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
 
-static PyTypeObject FinancialGrid_Type = {
+static PyTypeObject Grid_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"Singleowner.FinancialGrid",             /*tp_name*/
+		"Singleowner.Grid",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -5542,127 +5557,9 @@ static PyTypeObject FinancialGrid_Type = {
 		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
-		FinancialGrid_methods,         /*tp_methods*/
+		Grid_methods,         /*tp_methods*/
 		0,                          /*tp_members*/
-		FinancialGrid_getset,          /*tp_getset*/
-		0,                          /*tp_base*/
-		0,                          /*tp_dict*/
-		0,                          /*tp_descr_get*/
-		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictofnset*/
-		0,                          /*tp_init*/
-		0,                          /*tp_alloc*/
-		0,             /*tp_new*/
-		0,                          /*tp_free*/
-		0,                          /*tp_is_gc*/
-};
-
-
-/*
- * Common Group
- */
-
-static PyTypeObject Common_Type;
-
-static PyObject *
-Common_new(SAM_Singleowner data_ptr)
-{
-	PyObject* new_obj = Common_Type.tp_alloc(&Common_Type,0);
-
-	VarGroupObject* Common_obj = (VarGroupObject*)new_obj;
-
-	Common_obj->data_ptr = (SAM_table)data_ptr;
-
-	return new_obj;
-}
-
-/* Common methods */
-
-static PyObject *
-Common_assign(VarGroupObject *self, PyObject *args)
-{
-	PyObject* dict;
-	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
-		return NULL;
-	}
-
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Singleowner", "Common")){
-		return NULL;
-	}
-
-	Py_INCREF(Py_None);
-	return Py_None;
-}
-
-static PyObject *
-Common_export(VarGroupObject *self, PyObject *args)
-{
-	PyTypeObject* tp = &Common_Type;
-	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
-	return dict;
-}
-
-static PyMethodDef Common_methods[] = {
-		{"assign",            (PyCFunction)Common_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Common_vals = { var: val, ...}``")},
-		{"export",            (PyCFunction)Common_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
-		{NULL,              NULL}           /* sentinel */
-};
-
-static PyObject *
-Common_get_annual_energy_pre_curtailment_ac(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Singleowner_Common_annual_energy_pre_curtailment_ac_nget, self->data_ptr);
-}
-
-static int
-Common_set_annual_energy_pre_curtailment_ac(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Singleowner_Common_annual_energy_pre_curtailment_ac_nset, self->data_ptr);
-}
-
-static PyGetSetDef Common_getset[] = {
-{"annual_energy_pre_curtailment_ac", (getter)Common_get_annual_energy_pre_curtailment_ac,(setter)Common_set_annual_energy_pre_curtailment_ac,
-	PyDoc_STR("*float*: Annual Energy AC pre-curtailment (year 1) [kWh]\n\n*Required*: If not provided, assumed to be 0"),
- 	NULL},
-	{NULL}  /* Sentinel */
-};
-
-static PyTypeObject Common_Type = {
-		/* The ob_type field must be initialized in the module init function
-		 * to be portable to Windows without using C++. */
-		PyVarObject_HEAD_INIT(NULL, 0)
-		"Singleowner.Common",             /*tp_name*/
-		sizeof(VarGroupObject),          /*tp_basicsize*/
-		0,                          /*tp_itemsize*/
-		/* methods */
-		0,    /*tp_dealloc*/
-		0,                          /*tp_print*/
-		(getattrfunc)0,             /*tp_getattr*/
-		0,                          /*tp_setattr*/
-		0,                          /*tp_reserved*/
-		0,                          /*tp_repr*/
-		0,                          /*tp_as_number*/
-		0,                          /*tp_as_sequence*/
-		0,                          /*tp_as_mapping*/
-		0,                          /*tp_hash*/
-		0,                          /*tp_call*/
-		0,                          /*tp_str*/
-		0,                          /*tp_getattro*/
-		0,                          /*tp_setattro*/
-		0,                          /*tp_as_buffer*/
-		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
-		0,                          /*tp_doc*/
-		0,                          /*tp_traverse*/
-		0,                          /*tp_clear*/
-		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistofnset*/
-		0,                          /*tp_iter*/
-		0,                          /*tp_iternext*/
-		Common_methods,         /*tp_methods*/
-		0,                          /*tp_members*/
-		Common_getset,          /*tp_getset*/
+		Grid_getset,          /*tp_getset*/
 		0,                          /*tp_base*/
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
@@ -5678,7 +5575,7 @@ static PyTypeObject Common_Type = {
 
 /*
  * Outputs Group
- */
+ */ 
 
 static PyTypeObject Outputs_Type;
 
@@ -10784,13 +10681,13 @@ newSingleownerObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "PaymentIncentives", PaymentIncentives_obj);
 	Py_DECREF(PaymentIncentives_obj);
 
-	PyObject* Incentives_obj = Incentives_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "Incentives", Incentives_obj);
-	Py_DECREF(Incentives_obj);
+	PyObject* BatterySystem_obj = BatterySystem_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "BatterySystem", BatterySystem_obj);
+	Py_DECREF(BatterySystem_obj);
 
-	PyObject* Battery_obj = Battery_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "Battery", Battery_obj);
-	Py_DECREF(Battery_obj);
+	PyObject* ElectricityRates_obj = ElectricityRates_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "ElectricityRates", ElectricityRates_obj);
+	Py_DECREF(ElectricityRates_obj);
 
 	PyObject* SystemOutput_obj = SystemOutput_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "SystemOutput", SystemOutput_obj);
@@ -10812,13 +10709,9 @@ newSingleownerObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "CapacityPayments", CapacityPayments_obj);
 	Py_DECREF(CapacityPayments_obj);
 
-	PyObject* FinancialGrid_obj = FinancialGrid_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "FinancialGrid", FinancialGrid_obj);
-	Py_DECREF(FinancialGrid_obj);
-
-	PyObject* Common_obj = Common_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "Common", Common_obj);
-	Py_DECREF(Common_obj);
+	PyObject* Grid_obj = Grid_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "Grid", Grid_obj);
+	Py_DECREF(Grid_obj);
 
 	PyObject* Outputs_obj = Outputs_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
@@ -10856,10 +10749,6 @@ Singleowner_execute(CmodObject *self, PyObject *args)
 	return Py_None;
 }
 
-static PyObject *
-Singleowner_value(CmodObject *self, PyObject *args)
-{
-}
 
 static PyObject *
 Singleowner_assign(CmodObject *self, PyObject *args)
@@ -10883,6 +10772,12 @@ Singleowner_export(CmodObject *self, PyObject *args)
 	return PySAM_export_to_nested_dict((PyObject *) self, self->x_attr);
 }
 
+static PyObject *
+Singleowner_value(CmodObject *self, PyObject *args)
+{
+	return CmodObject_value(self, args);
+}
+
 static PyMethodDef Singleowner_methods[] = {
 		{"execute",            (PyCFunction)Singleowner_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
@@ -10890,6 +10785,8 @@ static PyMethodDef Singleowner_methods[] = {
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Revenue': { var: val, ...}, ...}``")},
 		{"export",            (PyCFunction)Singleowner_export,  METH_VARARGS,
 				PyDoc_STR("export() -> dict\n Export attributes into nested dictionary")},
+		{"value",             (PyCFunction)Singleowner_value, METH_VARARGS,
+				PyDoc_STR("value(name, optional value) -> Union[None, float, dict, sequence, str]\n Get or set by name a value in any of the variable groups.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -11113,19 +11010,19 @@ SingleownerModule_exec(PyObject *m)
 				(PyObject*)&PaymentIncentives_Type);
 	Py_DECREF(&PaymentIncentives_Type);
 
-	/// Add the Incentives type object to Singleowner_Type
-	if (PyType_Ready(&Incentives_Type) < 0) { goto fail; }
+	/// Add the BatterySystem type object to Singleowner_Type
+	if (PyType_Ready(&BatterySystem_Type) < 0) { goto fail; }
 	PyDict_SetItemString(Singleowner_Type.tp_dict,
-				"Incentives",
-				(PyObject*)&Incentives_Type);
-	Py_DECREF(&Incentives_Type);
+				"BatterySystem",
+				(PyObject*)&BatterySystem_Type);
+	Py_DECREF(&BatterySystem_Type);
 
-	/// Add the Battery type object to Singleowner_Type
-	if (PyType_Ready(&Battery_Type) < 0) { goto fail; }
+	/// Add the ElectricityRates type object to Singleowner_Type
+	if (PyType_Ready(&ElectricityRates_Type) < 0) { goto fail; }
 	PyDict_SetItemString(Singleowner_Type.tp_dict,
-				"Battery",
-				(PyObject*)&Battery_Type);
-	Py_DECREF(&Battery_Type);
+				"ElectricityRates",
+				(PyObject*)&ElectricityRates_Type);
+	Py_DECREF(&ElectricityRates_Type);
 
 	/// Add the SystemOutput type object to Singleowner_Type
 	if (PyType_Ready(&SystemOutput_Type) < 0) { goto fail; }
@@ -11162,19 +11059,12 @@ SingleownerModule_exec(PyObject *m)
 				(PyObject*)&CapacityPayments_Type);
 	Py_DECREF(&CapacityPayments_Type);
 
-	/// Add the FinancialGrid type object to Singleowner_Type
-	if (PyType_Ready(&FinancialGrid_Type) < 0) { goto fail; }
+	/// Add the Grid type object to Singleowner_Type
+	if (PyType_Ready(&Grid_Type) < 0) { goto fail; }
 	PyDict_SetItemString(Singleowner_Type.tp_dict,
-				"FinancialGrid",
-				(PyObject*)&FinancialGrid_Type);
-	Py_DECREF(&FinancialGrid_Type);
-
-	/// Add the Common type object to Singleowner_Type
-	if (PyType_Ready(&Common_Type) < 0) { goto fail; }
-	PyDict_SetItemString(Singleowner_Type.tp_dict,
-				"Common",
-				(PyObject*)&Common_Type);
-	Py_DECREF(&Common_Type);
+				"Grid",
+				(PyObject*)&Grid_Type);
+	Py_DECREF(&Grid_Type);
 
 	/// Add the Outputs type object to Singleowner_Type
 	if (PyType_Ready(&Outputs_Type) < 0) { goto fail; }

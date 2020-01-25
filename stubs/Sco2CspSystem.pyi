@@ -107,7 +107,7 @@ class AirCoolerDesign(object):
 	is_design_air_cooler = float
 
 
-class OffDesignInputs(object):
+class Common(object):
 	def assign(self): 
 		pass
 
@@ -122,6 +122,7 @@ class OffDesignInputs(object):
 	od_P_mc_in_sweep = tuple
 	od_T_t_in_mode = float
 	od_cases = tuple
+	od_generate_udpc = tuple
 	od_set_control = tuple
 
 
@@ -232,6 +233,10 @@ class Outputs(object):
 	cycle_spec_cost_thermal = float
 	deltaT_HTF_PHX = float
 	deltaT_HTF_PHX_od = tuple
+	diff_E_cycle = tuple
+	diff_Q_HTR = tuple
+	diff_Q_LTR = tuple
+	diff_m_dot_od = tuple
 	eff_HTR = float
 	eff_HTR_od = tuple
 	eff_LTR = float
@@ -373,6 +378,10 @@ class Outputs(object):
 	t_nu_od = tuple
 	t_tip_ratio_des = float
 	t_tip_ratio_od = tuple
+	udpc_n_T_amb = float
+	udpc_n_T_htf = float
+	udpc_n_m_dot_htf = float
+	udpc_table = tuple
 
 
 class Sco2CspSystem(object):
@@ -396,7 +405,7 @@ class Sco2CspSystem(object):
 	CycleDesign = CycleDesign
 	PHXDesign = PHXDesign
 	AirCoolerDesign = AirCoolerDesign
-	OffDesignInputs = OffDesignInputs
+	Common = Common
 	Outputs = Outputs
 
 

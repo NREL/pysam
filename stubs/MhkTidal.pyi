@@ -9,9 +9,11 @@ class MHKTidal(object):
 		pass
 
 
-	annual_energy_loss = float
-	calculate_capacity = float
-	device_rated_capacity = float
+	loss_additional = float
+	loss_array_spacing = float
+	loss_downtime = float
+	loss_resource_overprediction = float
+	loss_transmission = float
 	number_devices = float
 	tidal_power_curve = tuple
 	tidal_resource = tuple
@@ -31,8 +33,9 @@ class Outputs(object):
 	annual_cumulative_energy_distribution = tuple
 	annual_energy = float
 	annual_energy_distribution = tuple
-	average_power_device = float
 	capacity_factor = float
+	device_average_power = float
+	device_rated_capacity = float
 
 
 class MhkTidal(object):

@@ -1664,6 +1664,14 @@ extern "C"
 	SAM_EXPORT void SAM_Merchantplant_PaymentIncentives_pbi_fed_escal_nset(SAM_Merchantplant ptr, double number, SAM_error *err);
 
 	/**
+	 * Set pbi_fed_for_ds: Federal PBI available for debt service [0/1]
+	 * options: None
+	 * constraints: BOOLEAN
+	 * required if: ?=0
+	 */
+	SAM_EXPORT void SAM_Merchantplant_PaymentIncentives_pbi_fed_for_ds_nset(SAM_Merchantplant ptr, double number, SAM_error *err);
+
+	/**
 	 * Set pbi_fed_tax_fed: Federal PBI federal taxable [0/1]
 	 * options: None
 	 * constraints: BOOLEAN
@@ -1702,6 +1710,14 @@ extern "C"
 	 * required if: ?=0
 	 */
 	SAM_EXPORT void SAM_Merchantplant_PaymentIncentives_pbi_oth_escal_nset(SAM_Merchantplant ptr, double number, SAM_error *err);
+
+	/**
+	 * Set pbi_oth_for_ds: Other PBI available for debt service [0/1]
+	 * options: None
+	 * constraints: BOOLEAN
+	 * required if: ?=0
+	 */
+	SAM_EXPORT void SAM_Merchantplant_PaymentIncentives_pbi_oth_for_ds_nset(SAM_Merchantplant ptr, double number, SAM_error *err);
 
 	/**
 	 * Set pbi_oth_tax_fed: Other PBI federal taxable [0/1]
@@ -1744,6 +1760,14 @@ extern "C"
 	SAM_EXPORT void SAM_Merchantplant_PaymentIncentives_pbi_sta_escal_nset(SAM_Merchantplant ptr, double number, SAM_error *err);
 
 	/**
+	 * Set pbi_sta_for_ds: State PBI available for debt service [0/1]
+	 * options: None
+	 * constraints: BOOLEAN
+	 * required if: ?=0
+	 */
+	SAM_EXPORT void SAM_Merchantplant_PaymentIncentives_pbi_sta_for_ds_nset(SAM_Merchantplant ptr, double number, SAM_error *err);
+
+	/**
 	 * Set pbi_sta_tax_fed: State PBI federal taxable [0/1]
 	 * options: None
 	 * constraints: BOOLEAN
@@ -1782,6 +1806,14 @@ extern "C"
 	 * required if: ?=0
 	 */
 	SAM_EXPORT void SAM_Merchantplant_PaymentIncentives_pbi_uti_escal_nset(SAM_Merchantplant ptr, double number, SAM_error *err);
+
+	/**
+	 * Set pbi_uti_for_ds: Utility PBI available for debt service [0/1]
+	 * options: None
+	 * constraints: BOOLEAN
+	 * required if: ?=0
+	 */
+	SAM_EXPORT void SAM_Merchantplant_PaymentIncentives_pbi_uti_for_ds_nset(SAM_Merchantplant ptr, double number, SAM_error *err);
 
 	/**
 	 * Set pbi_uti_tax_fed: Utility PBI federal taxable [0/1]
@@ -1894,44 +1926,7 @@ extern "C"
 
 
 	//
-	// Incentives parameters
-	//
-
-	/**
-	 * Set pbi_fed_for_ds: Federal PBI available for debt service [0/1]
-	 * options: None
-	 * constraints: BOOLEAN
-	 * required if: ?=0
-	 */
-	SAM_EXPORT void SAM_Merchantplant_Incentives_pbi_fed_for_ds_nset(SAM_Merchantplant ptr, double number, SAM_error *err);
-
-	/**
-	 * Set pbi_oth_for_ds: Other PBI available for debt service [0/1]
-	 * options: None
-	 * constraints: BOOLEAN
-	 * required if: ?=0
-	 */
-	SAM_EXPORT void SAM_Merchantplant_Incentives_pbi_oth_for_ds_nset(SAM_Merchantplant ptr, double number, SAM_error *err);
-
-	/**
-	 * Set pbi_sta_for_ds: State PBI available for debt service [0/1]
-	 * options: None
-	 * constraints: BOOLEAN
-	 * required if: ?=0
-	 */
-	SAM_EXPORT void SAM_Merchantplant_Incentives_pbi_sta_for_ds_nset(SAM_Merchantplant ptr, double number, SAM_error *err);
-
-	/**
-	 * Set pbi_uti_for_ds: Utility PBI available for debt service [0/1]
-	 * options: None
-	 * constraints: BOOLEAN
-	 * required if: ?=0
-	 */
-	SAM_EXPORT void SAM_Merchantplant_Incentives_pbi_uti_for_ds_nset(SAM_Merchantplant ptr, double number, SAM_error *err);
-
-
-	//
-	// Battery parameters
+	// BatterySystem parameters
 	//
 
 	/**
@@ -1940,7 +1935,7 @@ extern "C"
 	 * constraints: None
 	 * required if: None
 	 */
-	SAM_EXPORT void SAM_Merchantplant_Battery_batt_bank_replacement_aset(SAM_Merchantplant ptr, double* arr, int length, SAM_error *err);
+	SAM_EXPORT void SAM_Merchantplant_BatterySystem_batt_bank_replacement_aset(SAM_Merchantplant ptr, double* arr, int length, SAM_error *err);
 
 	/**
 	 * Set batt_computed_bank_capacity: Battery bank capacity [kWh]
@@ -1948,7 +1943,7 @@ extern "C"
 	 * constraints: None
 	 * required if: ?=0.0
 	 */
-	SAM_EXPORT void SAM_Merchantplant_Battery_batt_computed_bank_capacity_nset(SAM_Merchantplant ptr, double number, SAM_error *err);
+	SAM_EXPORT void SAM_Merchantplant_BatterySystem_batt_computed_bank_capacity_nset(SAM_Merchantplant ptr, double number, SAM_error *err);
 
 	/**
 	 * Set batt_meter_position: Position of battery relative to electric meter
@@ -1956,7 +1951,7 @@ extern "C"
 	 * constraints: None
 	 * required if: None
 	 */
-	SAM_EXPORT void SAM_Merchantplant_Battery_batt_meter_position_nset(SAM_Merchantplant ptr, double number, SAM_error *err);
+	SAM_EXPORT void SAM_Merchantplant_BatterySystem_batt_meter_position_nset(SAM_Merchantplant ptr, double number, SAM_error *err);
 
 	/**
 	 * Set batt_replacement_option: Enable battery replacement? [0=none,1=capacity based,2=user schedule]
@@ -1964,7 +1959,7 @@ extern "C"
 	 * constraints: INTEGER,MIN=0,MAX=2
 	 * required if: ?=0
 	 */
-	SAM_EXPORT void SAM_Merchantplant_Battery_batt_replacement_option_nset(SAM_Merchantplant ptr, double number, SAM_error *err);
+	SAM_EXPORT void SAM_Merchantplant_BatterySystem_batt_replacement_option_nset(SAM_Merchantplant ptr, double number, SAM_error *err);
 
 	/**
 	 * Set batt_replacement_schedule: Battery bank replacements per year (user specified) [number/year]
@@ -1972,7 +1967,7 @@ extern "C"
 	 * constraints: None
 	 * required if: None
 	 */
-	SAM_EXPORT void SAM_Merchantplant_Battery_batt_replacement_schedule_aset(SAM_Merchantplant ptr, double* arr, int length, SAM_error *err);
+	SAM_EXPORT void SAM_Merchantplant_BatterySystem_batt_replacement_schedule_aset(SAM_Merchantplant ptr, double* arr, int length, SAM_error *err);
 
 	/**
 	 * Set battery_per_kWh: Battery cost [$/kWh]
@@ -1980,7 +1975,7 @@ extern "C"
 	 * constraints: None
 	 * required if: ?=0.0
 	 */
-	SAM_EXPORT void SAM_Merchantplant_Battery_battery_per_kWh_nset(SAM_Merchantplant ptr, double number, SAM_error *err);
+	SAM_EXPORT void SAM_Merchantplant_BatterySystem_battery_per_kWh_nset(SAM_Merchantplant ptr, double number, SAM_error *err);
 
 	/**
 	 * Set en_batt: Enable battery storage model [0/1]
@@ -1988,7 +1983,7 @@ extern "C"
 	 * constraints: None
 	 * required if: ?=0
 	 */
-	SAM_EXPORT void SAM_Merchantplant_Battery_en_batt_nset(SAM_Merchantplant ptr, double number, SAM_error *err);
+	SAM_EXPORT void SAM_Merchantplant_BatterySystem_en_batt_nset(SAM_Merchantplant ptr, double number, SAM_error *err);
 
 	/**
 	 * Set grid_to_batt: Electricity to battery from grid [kW]
@@ -1996,12 +1991,20 @@ extern "C"
 	 * constraints: None
 	 * required if: None
 	 */
-	SAM_EXPORT void SAM_Merchantplant_Battery_grid_to_batt_aset(SAM_Merchantplant ptr, double* arr, int length, SAM_error *err);
+	SAM_EXPORT void SAM_Merchantplant_BatterySystem_grid_to_batt_aset(SAM_Merchantplant ptr, double* arr, int length, SAM_error *err);
 
 
 	//
 	// SystemOutput parameters
 	//
+
+	/**
+	 * Set annual_energy_pre_curtailment_ac: Annual Energy AC pre-curtailment (year 1) [kWh]
+	 * options: None
+	 * constraints: None
+	 * required if: ?=0
+	 */
+	SAM_EXPORT void SAM_Merchantplant_SystemOutput_annual_energy_pre_curtailment_ac_nset(SAM_Merchantplant ptr, double number, SAM_error *err);
 
 	/**
 	 * Set degradation: Annual energy degradation
@@ -2190,7 +2193,7 @@ extern "C"
 
 
 	//
-	// FinancialGrid parameters
+	// Grid parameters
 	//
 
 	/**
@@ -2199,7 +2202,7 @@ extern "C"
 	 * constraints: None
 	 * required if: ?=0
 	 */
-	SAM_EXPORT void SAM_Merchantplant_FinancialGrid_grid_curtailment_price_aset(SAM_Merchantplant ptr, double* arr, int length, SAM_error *err);
+	SAM_EXPORT void SAM_Merchantplant_Grid_grid_curtailment_price_aset(SAM_Merchantplant ptr, double* arr, int length, SAM_error *err);
 
 	/**
 	 * Set grid_curtailment_price_esc: Curtailment price escalation [%]
@@ -2207,20 +2210,7 @@ extern "C"
 	 * constraints: None
 	 * required if: ?=0
 	 */
-	SAM_EXPORT void SAM_Merchantplant_FinancialGrid_grid_curtailment_price_esc_nset(SAM_Merchantplant ptr, double number, SAM_error *err);
-
-
-	//
-	// Common parameters
-	//
-
-	/**
-	 * Set annual_energy_pre_curtailment_ac: Annual Energy AC pre-curtailment (year 1) [kWh]
-	 * options: None
-	 * constraints: None
-	 * required if: ?=0
-	 */
-	SAM_EXPORT void SAM_Merchantplant_Common_annual_energy_pre_curtailment_ac_nset(SAM_Merchantplant ptr, double number, SAM_error *err);
+	SAM_EXPORT void SAM_Merchantplant_Grid_grid_curtailment_price_esc_nset(SAM_Merchantplant ptr, double number, SAM_error *err);
 
 
 	/**
@@ -2649,6 +2639,8 @@ extern "C"
 
 	SAM_EXPORT double SAM_Merchantplant_PaymentIncentives_pbi_fed_escal_nget(SAM_Merchantplant ptr, SAM_error *err);
 
+	SAM_EXPORT double SAM_Merchantplant_PaymentIncentives_pbi_fed_for_ds_nget(SAM_Merchantplant ptr, SAM_error *err);
+
 	SAM_EXPORT double SAM_Merchantplant_PaymentIncentives_pbi_fed_tax_fed_nget(SAM_Merchantplant ptr, SAM_error *err);
 
 	SAM_EXPORT double SAM_Merchantplant_PaymentIncentives_pbi_fed_tax_sta_nget(SAM_Merchantplant ptr, SAM_error *err);
@@ -2658,6 +2650,8 @@ extern "C"
 	SAM_EXPORT double* SAM_Merchantplant_PaymentIncentives_pbi_oth_amount_aget(SAM_Merchantplant ptr, int* length, SAM_error *err);
 
 	SAM_EXPORT double SAM_Merchantplant_PaymentIncentives_pbi_oth_escal_nget(SAM_Merchantplant ptr, SAM_error *err);
+
+	SAM_EXPORT double SAM_Merchantplant_PaymentIncentives_pbi_oth_for_ds_nget(SAM_Merchantplant ptr, SAM_error *err);
 
 	SAM_EXPORT double SAM_Merchantplant_PaymentIncentives_pbi_oth_tax_fed_nget(SAM_Merchantplant ptr, SAM_error *err);
 
@@ -2669,6 +2663,8 @@ extern "C"
 
 	SAM_EXPORT double SAM_Merchantplant_PaymentIncentives_pbi_sta_escal_nget(SAM_Merchantplant ptr, SAM_error *err);
 
+	SAM_EXPORT double SAM_Merchantplant_PaymentIncentives_pbi_sta_for_ds_nget(SAM_Merchantplant ptr, SAM_error *err);
+
 	SAM_EXPORT double SAM_Merchantplant_PaymentIncentives_pbi_sta_tax_fed_nget(SAM_Merchantplant ptr, SAM_error *err);
 
 	SAM_EXPORT double SAM_Merchantplant_PaymentIncentives_pbi_sta_tax_sta_nget(SAM_Merchantplant ptr, SAM_error *err);
@@ -2678,6 +2674,8 @@ extern "C"
 	SAM_EXPORT double* SAM_Merchantplant_PaymentIncentives_pbi_uti_amount_aget(SAM_Merchantplant ptr, int* length, SAM_error *err);
 
 	SAM_EXPORT double SAM_Merchantplant_PaymentIncentives_pbi_uti_escal_nget(SAM_Merchantplant ptr, SAM_error *err);
+
+	SAM_EXPORT double SAM_Merchantplant_PaymentIncentives_pbi_uti_for_ds_nget(SAM_Merchantplant ptr, SAM_error *err);
 
 	SAM_EXPORT double SAM_Merchantplant_PaymentIncentives_pbi_uti_tax_fed_nget(SAM_Merchantplant ptr, SAM_error *err);
 
@@ -2712,42 +2710,31 @@ extern "C"
 
 
 	/**
-	 * Incentives Getters
+	 * BatterySystem Getters
 	 */
 
-	SAM_EXPORT double SAM_Merchantplant_Incentives_pbi_fed_for_ds_nget(SAM_Merchantplant ptr, SAM_error *err);
+	SAM_EXPORT double* SAM_Merchantplant_BatterySystem_batt_bank_replacement_aget(SAM_Merchantplant ptr, int* length, SAM_error *err);
 
-	SAM_EXPORT double SAM_Merchantplant_Incentives_pbi_oth_for_ds_nget(SAM_Merchantplant ptr, SAM_error *err);
+	SAM_EXPORT double SAM_Merchantplant_BatterySystem_batt_computed_bank_capacity_nget(SAM_Merchantplant ptr, SAM_error *err);
 
-	SAM_EXPORT double SAM_Merchantplant_Incentives_pbi_sta_for_ds_nget(SAM_Merchantplant ptr, SAM_error *err);
+	SAM_EXPORT double SAM_Merchantplant_BatterySystem_batt_meter_position_nget(SAM_Merchantplant ptr, SAM_error *err);
 
-	SAM_EXPORT double SAM_Merchantplant_Incentives_pbi_uti_for_ds_nget(SAM_Merchantplant ptr, SAM_error *err);
+	SAM_EXPORT double SAM_Merchantplant_BatterySystem_batt_replacement_option_nget(SAM_Merchantplant ptr, SAM_error *err);
 
+	SAM_EXPORT double* SAM_Merchantplant_BatterySystem_batt_replacement_schedule_aget(SAM_Merchantplant ptr, int* length, SAM_error *err);
 
-	/**
-	 * Battery Getters
-	 */
+	SAM_EXPORT double SAM_Merchantplant_BatterySystem_battery_per_kWh_nget(SAM_Merchantplant ptr, SAM_error *err);
 
-	SAM_EXPORT double* SAM_Merchantplant_Battery_batt_bank_replacement_aget(SAM_Merchantplant ptr, int* length, SAM_error *err);
+	SAM_EXPORT double SAM_Merchantplant_BatterySystem_en_batt_nget(SAM_Merchantplant ptr, SAM_error *err);
 
-	SAM_EXPORT double SAM_Merchantplant_Battery_batt_computed_bank_capacity_nget(SAM_Merchantplant ptr, SAM_error *err);
-
-	SAM_EXPORT double SAM_Merchantplant_Battery_batt_meter_position_nget(SAM_Merchantplant ptr, SAM_error *err);
-
-	SAM_EXPORT double SAM_Merchantplant_Battery_batt_replacement_option_nget(SAM_Merchantplant ptr, SAM_error *err);
-
-	SAM_EXPORT double* SAM_Merchantplant_Battery_batt_replacement_schedule_aget(SAM_Merchantplant ptr, int* length, SAM_error *err);
-
-	SAM_EXPORT double SAM_Merchantplant_Battery_battery_per_kWh_nget(SAM_Merchantplant ptr, SAM_error *err);
-
-	SAM_EXPORT double SAM_Merchantplant_Battery_en_batt_nget(SAM_Merchantplant ptr, SAM_error *err);
-
-	SAM_EXPORT double* SAM_Merchantplant_Battery_grid_to_batt_aget(SAM_Merchantplant ptr, int* length, SAM_error *err);
+	SAM_EXPORT double* SAM_Merchantplant_BatterySystem_grid_to_batt_aget(SAM_Merchantplant ptr, int* length, SAM_error *err);
 
 
 	/**
 	 * SystemOutput Getters
 	 */
+
+	SAM_EXPORT double SAM_Merchantplant_SystemOutput_annual_energy_pre_curtailment_ac_nget(SAM_Merchantplant ptr, SAM_error *err);
 
 	SAM_EXPORT double* SAM_Merchantplant_SystemOutput_degradation_aget(SAM_Merchantplant ptr, int* length, SAM_error *err);
 
@@ -2816,19 +2803,12 @@ extern "C"
 
 
 	/**
-	 * FinancialGrid Getters
+	 * Grid Getters
 	 */
 
-	SAM_EXPORT double* SAM_Merchantplant_FinancialGrid_grid_curtailment_price_aget(SAM_Merchantplant ptr, int* length, SAM_error *err);
+	SAM_EXPORT double* SAM_Merchantplant_Grid_grid_curtailment_price_aget(SAM_Merchantplant ptr, int* length, SAM_error *err);
 
-	SAM_EXPORT double SAM_Merchantplant_FinancialGrid_grid_curtailment_price_esc_nget(SAM_Merchantplant ptr, SAM_error *err);
-
-
-	/**
-	 * Common Getters
-	 */
-
-	SAM_EXPORT double SAM_Merchantplant_Common_annual_energy_pre_curtailment_ac_nget(SAM_Merchantplant ptr, SAM_error *err);
+	SAM_EXPORT double SAM_Merchantplant_Grid_grid_curtailment_price_esc_nget(SAM_Merchantplant ptr, SAM_error *err);
 
 
 	/**

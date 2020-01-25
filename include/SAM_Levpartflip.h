@@ -1685,6 +1685,14 @@ extern "C"
 	SAM_EXPORT void SAM_Levpartflip_PaymentIncentives_pbi_fed_escal_nset(SAM_Levpartflip ptr, double number, SAM_error *err);
 
 	/**
+	 * Set pbi_fed_for_ds: Federal PBI available for debt service [0/1]
+	 * options: None
+	 * constraints: BOOLEAN
+	 * required if: ?=0
+	 */
+	SAM_EXPORT void SAM_Levpartflip_PaymentIncentives_pbi_fed_for_ds_nset(SAM_Levpartflip ptr, double number, SAM_error *err);
+
+	/**
 	 * Set pbi_fed_tax_fed: Federal PBI federal taxable [0/1]
 	 * options: None
 	 * constraints: BOOLEAN
@@ -1723,6 +1731,14 @@ extern "C"
 	 * required if: ?=0
 	 */
 	SAM_EXPORT void SAM_Levpartflip_PaymentIncentives_pbi_oth_escal_nset(SAM_Levpartflip ptr, double number, SAM_error *err);
+
+	/**
+	 * Set pbi_oth_for_ds: Other PBI available for debt service [0/1]
+	 * options: None
+	 * constraints: BOOLEAN
+	 * required if: ?=0
+	 */
+	SAM_EXPORT void SAM_Levpartflip_PaymentIncentives_pbi_oth_for_ds_nset(SAM_Levpartflip ptr, double number, SAM_error *err);
 
 	/**
 	 * Set pbi_oth_tax_fed: Other PBI federal taxable [0/1]
@@ -1765,6 +1781,14 @@ extern "C"
 	SAM_EXPORT void SAM_Levpartflip_PaymentIncentives_pbi_sta_escal_nset(SAM_Levpartflip ptr, double number, SAM_error *err);
 
 	/**
+	 * Set pbi_sta_for_ds: State PBI available for debt service [0/1]
+	 * options: None
+	 * constraints: BOOLEAN
+	 * required if: ?=0
+	 */
+	SAM_EXPORT void SAM_Levpartflip_PaymentIncentives_pbi_sta_for_ds_nset(SAM_Levpartflip ptr, double number, SAM_error *err);
+
+	/**
 	 * Set pbi_sta_tax_fed: State PBI federal taxable [0/1]
 	 * options: None
 	 * constraints: BOOLEAN
@@ -1805,6 +1829,14 @@ extern "C"
 	SAM_EXPORT void SAM_Levpartflip_PaymentIncentives_pbi_uti_escal_nset(SAM_Levpartflip ptr, double number, SAM_error *err);
 
 	/**
+	 * Set pbi_uti_for_ds: Utility PBI available for debt service [0/1]
+	 * options: None
+	 * constraints: BOOLEAN
+	 * required if: ?=0
+	 */
+	SAM_EXPORT void SAM_Levpartflip_PaymentIncentives_pbi_uti_for_ds_nset(SAM_Levpartflip ptr, double number, SAM_error *err);
+
+	/**
 	 * Set pbi_uti_tax_fed: Utility PBI federal taxable [0/1]
 	 * options: None
 	 * constraints: BOOLEAN
@@ -1827,43 +1859,6 @@ extern "C"
 	 * required if: ?=0
 	 */
 	SAM_EXPORT void SAM_Levpartflip_PaymentIncentives_pbi_uti_term_nset(SAM_Levpartflip ptr, double number, SAM_error *err);
-
-
-	//
-	// Incentives parameters
-	//
-
-	/**
-	 * Set pbi_fed_for_ds: Federal PBI available for debt service [0/1]
-	 * options: None
-	 * constraints: BOOLEAN
-	 * required if: ?=0
-	 */
-	SAM_EXPORT void SAM_Levpartflip_Incentives_pbi_fed_for_ds_nset(SAM_Levpartflip ptr, double number, SAM_error *err);
-
-	/**
-	 * Set pbi_oth_for_ds: Other PBI available for debt service [0/1]
-	 * options: None
-	 * constraints: BOOLEAN
-	 * required if: ?=0
-	 */
-	SAM_EXPORT void SAM_Levpartflip_Incentives_pbi_oth_for_ds_nset(SAM_Levpartflip ptr, double number, SAM_error *err);
-
-	/**
-	 * Set pbi_sta_for_ds: State PBI available for debt service [0/1]
-	 * options: None
-	 * constraints: BOOLEAN
-	 * required if: ?=0
-	 */
-	SAM_EXPORT void SAM_Levpartflip_Incentives_pbi_sta_for_ds_nset(SAM_Levpartflip ptr, double number, SAM_error *err);
-
-	/**
-	 * Set pbi_uti_for_ds: Utility PBI available for debt service [0/1]
-	 * options: None
-	 * constraints: BOOLEAN
-	 * required if: ?=0
-	 */
-	SAM_EXPORT void SAM_Levpartflip_Incentives_pbi_uti_for_ds_nset(SAM_Levpartflip ptr, double number, SAM_error *err);
 
 
 	//
@@ -2142,7 +2137,7 @@ extern "C"
 
 
 	//
-	// Battery parameters
+	// BatterySystem parameters
 	//
 
 	/**
@@ -2151,7 +2146,7 @@ extern "C"
 	 * constraints: None
 	 * required if: None
 	 */
-	SAM_EXPORT void SAM_Levpartflip_Battery_batt_bank_replacement_aset(SAM_Levpartflip ptr, double* arr, int length, SAM_error *err);
+	SAM_EXPORT void SAM_Levpartflip_BatterySystem_batt_bank_replacement_aset(SAM_Levpartflip ptr, double* arr, int length, SAM_error *err);
 
 	/**
 	 * Set batt_computed_bank_capacity: Battery bank capacity [kWh]
@@ -2159,7 +2154,7 @@ extern "C"
 	 * constraints: None
 	 * required if: ?=0.0
 	 */
-	SAM_EXPORT void SAM_Levpartflip_Battery_batt_computed_bank_capacity_nset(SAM_Levpartflip ptr, double number, SAM_error *err);
+	SAM_EXPORT void SAM_Levpartflip_BatterySystem_batt_computed_bank_capacity_nset(SAM_Levpartflip ptr, double number, SAM_error *err);
 
 	/**
 	 * Set batt_replacement_option: Enable battery replacement? [0=none,1=capacity based,2=user schedule]
@@ -2167,7 +2162,7 @@ extern "C"
 	 * constraints: INTEGER,MIN=0,MAX=2
 	 * required if: ?=0
 	 */
-	SAM_EXPORT void SAM_Levpartflip_Battery_batt_replacement_option_nset(SAM_Levpartflip ptr, double number, SAM_error *err);
+	SAM_EXPORT void SAM_Levpartflip_BatterySystem_batt_replacement_option_nset(SAM_Levpartflip ptr, double number, SAM_error *err);
 
 	/**
 	 * Set batt_replacement_schedule: Battery bank replacements per year (user specified) [number/year]
@@ -2175,7 +2170,7 @@ extern "C"
 	 * constraints: None
 	 * required if: None
 	 */
-	SAM_EXPORT void SAM_Levpartflip_Battery_batt_replacement_schedule_aset(SAM_Levpartflip ptr, double* arr, int length, SAM_error *err);
+	SAM_EXPORT void SAM_Levpartflip_BatterySystem_batt_replacement_schedule_aset(SAM_Levpartflip ptr, double* arr, int length, SAM_error *err);
 
 	/**
 	 * Set battery_per_kWh: Battery cost [$/kWh]
@@ -2183,7 +2178,7 @@ extern "C"
 	 * constraints: None
 	 * required if: ?=0.0
 	 */
-	SAM_EXPORT void SAM_Levpartflip_Battery_battery_per_kWh_nset(SAM_Levpartflip ptr, double number, SAM_error *err);
+	SAM_EXPORT void SAM_Levpartflip_BatterySystem_battery_per_kWh_nset(SAM_Levpartflip ptr, double number, SAM_error *err);
 
 	/**
 	 * Set en_batt: Enable battery storage model [0/1]
@@ -2191,7 +2186,7 @@ extern "C"
 	 * constraints: None
 	 * required if: ?=0
 	 */
-	SAM_EXPORT void SAM_Levpartflip_Battery_en_batt_nset(SAM_Levpartflip ptr, double number, SAM_error *err);
+	SAM_EXPORT void SAM_Levpartflip_BatterySystem_en_batt_nset(SAM_Levpartflip ptr, double number, SAM_error *err);
 
 
 	/**
@@ -2629,6 +2624,8 @@ extern "C"
 
 	SAM_EXPORT double SAM_Levpartflip_PaymentIncentives_pbi_fed_escal_nget(SAM_Levpartflip ptr, SAM_error *err);
 
+	SAM_EXPORT double SAM_Levpartflip_PaymentIncentives_pbi_fed_for_ds_nget(SAM_Levpartflip ptr, SAM_error *err);
+
 	SAM_EXPORT double SAM_Levpartflip_PaymentIncentives_pbi_fed_tax_fed_nget(SAM_Levpartflip ptr, SAM_error *err);
 
 	SAM_EXPORT double SAM_Levpartflip_PaymentIncentives_pbi_fed_tax_sta_nget(SAM_Levpartflip ptr, SAM_error *err);
@@ -2638,6 +2635,8 @@ extern "C"
 	SAM_EXPORT double* SAM_Levpartflip_PaymentIncentives_pbi_oth_amount_aget(SAM_Levpartflip ptr, int* length, SAM_error *err);
 
 	SAM_EXPORT double SAM_Levpartflip_PaymentIncentives_pbi_oth_escal_nget(SAM_Levpartflip ptr, SAM_error *err);
+
+	SAM_EXPORT double SAM_Levpartflip_PaymentIncentives_pbi_oth_for_ds_nget(SAM_Levpartflip ptr, SAM_error *err);
 
 	SAM_EXPORT double SAM_Levpartflip_PaymentIncentives_pbi_oth_tax_fed_nget(SAM_Levpartflip ptr, SAM_error *err);
 
@@ -2649,6 +2648,8 @@ extern "C"
 
 	SAM_EXPORT double SAM_Levpartflip_PaymentIncentives_pbi_sta_escal_nget(SAM_Levpartflip ptr, SAM_error *err);
 
+	SAM_EXPORT double SAM_Levpartflip_PaymentIncentives_pbi_sta_for_ds_nget(SAM_Levpartflip ptr, SAM_error *err);
+
 	SAM_EXPORT double SAM_Levpartflip_PaymentIncentives_pbi_sta_tax_fed_nget(SAM_Levpartflip ptr, SAM_error *err);
 
 	SAM_EXPORT double SAM_Levpartflip_PaymentIncentives_pbi_sta_tax_sta_nget(SAM_Levpartflip ptr, SAM_error *err);
@@ -2659,24 +2660,13 @@ extern "C"
 
 	SAM_EXPORT double SAM_Levpartflip_PaymentIncentives_pbi_uti_escal_nget(SAM_Levpartflip ptr, SAM_error *err);
 
+	SAM_EXPORT double SAM_Levpartflip_PaymentIncentives_pbi_uti_for_ds_nget(SAM_Levpartflip ptr, SAM_error *err);
+
 	SAM_EXPORT double SAM_Levpartflip_PaymentIncentives_pbi_uti_tax_fed_nget(SAM_Levpartflip ptr, SAM_error *err);
 
 	SAM_EXPORT double SAM_Levpartflip_PaymentIncentives_pbi_uti_tax_sta_nget(SAM_Levpartflip ptr, SAM_error *err);
 
 	SAM_EXPORT double SAM_Levpartflip_PaymentIncentives_pbi_uti_term_nget(SAM_Levpartflip ptr, SAM_error *err);
-
-
-	/**
-	 * Incentives Getters
-	 */
-
-	SAM_EXPORT double SAM_Levpartflip_Incentives_pbi_fed_for_ds_nget(SAM_Levpartflip ptr, SAM_error *err);
-
-	SAM_EXPORT double SAM_Levpartflip_Incentives_pbi_oth_for_ds_nget(SAM_Levpartflip ptr, SAM_error *err);
-
-	SAM_EXPORT double SAM_Levpartflip_Incentives_pbi_sta_for_ds_nget(SAM_Levpartflip ptr, SAM_error *err);
-
-	SAM_EXPORT double SAM_Levpartflip_Incentives_pbi_uti_for_ds_nget(SAM_Levpartflip ptr, SAM_error *err);
 
 
 	/**
@@ -2775,20 +2765,20 @@ extern "C"
 
 
 	/**
-	 * Battery Getters
+	 * BatterySystem Getters
 	 */
 
-	SAM_EXPORT double* SAM_Levpartflip_Battery_batt_bank_replacement_aget(SAM_Levpartflip ptr, int* length, SAM_error *err);
+	SAM_EXPORT double* SAM_Levpartflip_BatterySystem_batt_bank_replacement_aget(SAM_Levpartflip ptr, int* length, SAM_error *err);
 
-	SAM_EXPORT double SAM_Levpartflip_Battery_batt_computed_bank_capacity_nget(SAM_Levpartflip ptr, SAM_error *err);
+	SAM_EXPORT double SAM_Levpartflip_BatterySystem_batt_computed_bank_capacity_nget(SAM_Levpartflip ptr, SAM_error *err);
 
-	SAM_EXPORT double SAM_Levpartflip_Battery_batt_replacement_option_nget(SAM_Levpartflip ptr, SAM_error *err);
+	SAM_EXPORT double SAM_Levpartflip_BatterySystem_batt_replacement_option_nget(SAM_Levpartflip ptr, SAM_error *err);
 
-	SAM_EXPORT double* SAM_Levpartflip_Battery_batt_replacement_schedule_aget(SAM_Levpartflip ptr, int* length, SAM_error *err);
+	SAM_EXPORT double* SAM_Levpartflip_BatterySystem_batt_replacement_schedule_aget(SAM_Levpartflip ptr, int* length, SAM_error *err);
 
-	SAM_EXPORT double SAM_Levpartflip_Battery_battery_per_kWh_nget(SAM_Levpartflip ptr, SAM_error *err);
+	SAM_EXPORT double SAM_Levpartflip_BatterySystem_battery_per_kWh_nget(SAM_Levpartflip ptr, SAM_error *err);
 
-	SAM_EXPORT double SAM_Levpartflip_Battery_en_batt_nget(SAM_Levpartflip ptr, SAM_error *err);
+	SAM_EXPORT double SAM_Levpartflip_BatterySystem_en_batt_nget(SAM_Levpartflip ptr, SAM_error *err);
 
 
 	/**

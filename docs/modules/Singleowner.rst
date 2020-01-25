@@ -21,6 +21,12 @@ Functions
 .. autoclass:: PySAM.Singleowner.Singleowner
 	:members:
 
+Revenue Group
+==============
+
+.. autoclass:: PySAM.Singleowner.Singleowner.Revenue
+	:members:
+
 FinancialParameters Group
 ==============
 
@@ -39,16 +45,28 @@ TaxCreditIncentives Group
 .. autoclass:: PySAM.Singleowner.Singleowner.TaxCreditIncentives
 	:members:
 
+Depreciation Group
+==============
+
+.. autoclass:: PySAM.Singleowner.Singleowner.Depreciation
+	:members:
+
 PaymentIncentives Group
 ==============
 
 .. autoclass:: PySAM.Singleowner.Singleowner.PaymentIncentives
 	:members:
 
-Battery Group
+BatterySystem Group
 ==============
 
-.. autoclass:: PySAM.Singleowner.Singleowner.Battery
+.. autoclass:: PySAM.Singleowner.Singleowner.BatterySystem
+	:members:
+
+ElectricityRates Group
+==============
+
+.. autoclass:: PySAM.Singleowner.Singleowner.ElectricityRates
 	:members:
 
 SystemOutput Group
@@ -63,94 +81,28 @@ UtilityBill Group
 .. autoclass:: PySAM.Singleowner.Singleowner.UtilityBill
 	:members:
 
-ReturnOnEquity Group
+Lifetime Group
 ==============
 
-.. autoclass:: PySAM.Singleowner.Singleowner.ReturnOnEquity
-	:members:
-
-Moratorium Group
-==============
-
-.. autoclass:: PySAM.Singleowner.Singleowner.Moratorium
-	:members:
-
-Recapitalization Group
-==============
-
-.. autoclass:: PySAM.Singleowner.Singleowner.Recapitalization
-	:members:
-
-TimeOfDelivery Group
-==============
-
-.. autoclass:: PySAM.Singleowner.Singleowner.TimeOfDelivery
-	:members:
-
-ReserveAccounts Group
-==============
-
-.. autoclass:: PySAM.Singleowner.Singleowner.ReserveAccounts
-	:members:
-
-Depreciation Group
-==============
-
-.. autoclass:: PySAM.Singleowner.Singleowner.Depreciation
-	:members:
-
-SalvageValue Group
-==============
-
-.. autoclass:: PySAM.Singleowner.Singleowner.SalvageValue
-	:members:
-
-SolutionMode Group
-==============
-
-.. autoclass:: PySAM.Singleowner.Singleowner.SolutionMode
-	:members:
-
-PPAPrice Group
-==============
-
-.. autoclass:: PySAM.Singleowner.Singleowner.PPAPrice
-	:members:
-
-ConstructionFinancing Group
-==============
-
-.. autoclass:: PySAM.Singleowner.Singleowner.ConstructionFinancing
-	:members:
-
-ProjectTermDebt Group
-==============
-
-.. autoclass:: PySAM.Singleowner.Singleowner.ProjectTermDebt
-	:members:
-
-OtherCapitalCosts Group
-==============
-
-.. autoclass:: PySAM.Singleowner.Singleowner.OtherCapitalCosts
-	:members:
-
-IRRTargets Group
-==============
-
-.. autoclass:: PySAM.Singleowner.Singleowner.IRRTargets
-	:members:
-
-CashIncentives Group
-==============
-
-.. autoclass:: PySAM.Singleowner.Singleowner.CashIncentives
+.. autoclass:: PySAM.Singleowner.Singleowner.Lifetime
 	:members:
 
 FuelCell Group
 ==============
 
 .. autoclass:: PySAM.Singleowner.Singleowner.FuelCell
+	:members:
+
+CapacityPayments Group
+==============
+
+.. autoclass:: PySAM.Singleowner.Singleowner.CapacityPayments
+	:members:
+
+Grid Group
+==============
+
+.. autoclass:: PySAM.Singleowner.Singleowner.Grid
 	:members:
 
 Outputs Group

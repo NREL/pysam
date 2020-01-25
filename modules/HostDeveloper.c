@@ -3409,6 +3409,18 @@ PaymentIncentives_set_pbi_fed_escal(VarGroupObject *self, PyObject *value, void 
 }
 
 static PyObject *
+PaymentIncentives_get_pbi_fed_for_ds(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_HostDeveloper_PaymentIncentives_pbi_fed_for_ds_nget, self->data_ptr);
+}
+
+static int
+PaymentIncentives_set_pbi_fed_for_ds(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_HostDeveloper_PaymentIncentives_pbi_fed_for_ds_nset, self->data_ptr);
+}
+
+static PyObject *
 PaymentIncentives_get_pbi_fed_tax_fed(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_HostDeveloper_PaymentIncentives_pbi_fed_tax_fed_nget, self->data_ptr);
@@ -3466,6 +3478,18 @@ static int
 PaymentIncentives_set_pbi_oth_escal(VarGroupObject *self, PyObject *value, void *closure)
 {
 	return PySAM_double_setter(value, SAM_HostDeveloper_PaymentIncentives_pbi_oth_escal_nset, self->data_ptr);
+}
+
+static PyObject *
+PaymentIncentives_get_pbi_oth_for_ds(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_HostDeveloper_PaymentIncentives_pbi_oth_for_ds_nget, self->data_ptr);
+}
+
+static int
+PaymentIncentives_set_pbi_oth_for_ds(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_HostDeveloper_PaymentIncentives_pbi_oth_for_ds_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -3529,6 +3553,18 @@ PaymentIncentives_set_pbi_sta_escal(VarGroupObject *self, PyObject *value, void 
 }
 
 static PyObject *
+PaymentIncentives_get_pbi_sta_for_ds(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_HostDeveloper_PaymentIncentives_pbi_sta_for_ds_nget, self->data_ptr);
+}
+
+static int
+PaymentIncentives_set_pbi_sta_for_ds(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_HostDeveloper_PaymentIncentives_pbi_sta_for_ds_nset, self->data_ptr);
+}
+
+static PyObject *
 PaymentIncentives_get_pbi_sta_tax_fed(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_HostDeveloper_PaymentIncentives_pbi_sta_tax_fed_nget, self->data_ptr);
@@ -3586,6 +3622,18 @@ static int
 PaymentIncentives_set_pbi_uti_escal(VarGroupObject *self, PyObject *value, void *closure)
 {
 	return PySAM_double_setter(value, SAM_HostDeveloper_PaymentIncentives_pbi_uti_escal_nset, self->data_ptr);
+}
+
+static PyObject *
+PaymentIncentives_get_pbi_uti_for_ds(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_HostDeveloper_PaymentIncentives_pbi_uti_for_ds_nget, self->data_ptr);
+}
+
+static int
+PaymentIncentives_set_pbi_uti_for_ds(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_HostDeveloper_PaymentIncentives_pbi_uti_for_ds_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -3835,6 +3883,9 @@ static PyGetSetDef PaymentIncentives_getset[] = {
 {"pbi_fed_escal", (getter)PaymentIncentives_get_pbi_fed_escal,(setter)PaymentIncentives_set_pbi_fed_escal,
 	PyDoc_STR("*float*: Federal PBI escalation [%]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
+{"pbi_fed_for_ds", (getter)PaymentIncentives_get_pbi_fed_for_ds,(setter)PaymentIncentives_set_pbi_fed_for_ds,
+	PyDoc_STR("*float*: Federal PBI available for debt service [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
 {"pbi_fed_tax_fed", (getter)PaymentIncentives_get_pbi_fed_tax_fed,(setter)PaymentIncentives_set_pbi_fed_tax_fed,
 	PyDoc_STR("*float*: Federal PBI federal taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
  	NULL},
@@ -3849,6 +3900,9 @@ static PyGetSetDef PaymentIncentives_getset[] = {
  	NULL},
 {"pbi_oth_escal", (getter)PaymentIncentives_get_pbi_oth_escal,(setter)PaymentIncentives_set_pbi_oth_escal,
 	PyDoc_STR("*float*: Other PBI escalation [%]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"pbi_oth_for_ds", (getter)PaymentIncentives_get_pbi_oth_for_ds,(setter)PaymentIncentives_set_pbi_oth_for_ds,
+	PyDoc_STR("*float*: Other PBI available for debt service [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"pbi_oth_tax_fed", (getter)PaymentIncentives_get_pbi_oth_tax_fed,(setter)PaymentIncentives_set_pbi_oth_tax_fed,
 	PyDoc_STR("*float*: Other PBI federal taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
@@ -3865,6 +3919,9 @@ static PyGetSetDef PaymentIncentives_getset[] = {
 {"pbi_sta_escal", (getter)PaymentIncentives_get_pbi_sta_escal,(setter)PaymentIncentives_set_pbi_sta_escal,
 	PyDoc_STR("*float*: State PBI escalation [%]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
+{"pbi_sta_for_ds", (getter)PaymentIncentives_get_pbi_sta_for_ds,(setter)PaymentIncentives_set_pbi_sta_for_ds,
+	PyDoc_STR("*float*: State PBI available for debt service [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
 {"pbi_sta_tax_fed", (getter)PaymentIncentives_get_pbi_sta_tax_fed,(setter)PaymentIncentives_set_pbi_sta_tax_fed,
 	PyDoc_STR("*float*: State PBI federal taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
  	NULL},
@@ -3879,6 +3936,9 @@ static PyGetSetDef PaymentIncentives_getset[] = {
  	NULL},
 {"pbi_uti_escal", (getter)PaymentIncentives_get_pbi_uti_escal,(setter)PaymentIncentives_set_pbi_uti_escal,
 	PyDoc_STR("*float*: Utility PBI escalation [%]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"pbi_uti_for_ds", (getter)PaymentIncentives_get_pbi_uti_for_ds,(setter)PaymentIncentives_set_pbi_uti_for_ds,
+	PyDoc_STR("*float*: Utility PBI available for debt service [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"pbi_uti_tax_fed", (getter)PaymentIncentives_get_pbi_uti_tax_fed,(setter)PaymentIncentives_set_pbi_uti_tax_fed,
 	PyDoc_STR("*float*: Utility PBI federal taxable [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
@@ -3926,169 +3986,6 @@ static PyTypeObject PaymentIncentives_Type = {
 		PaymentIncentives_methods,         /*tp_methods*/
 		0,                          /*tp_members*/
 		PaymentIncentives_getset,          /*tp_getset*/
-		0,                          /*tp_base*/
-		0,                          /*tp_dict*/
-		0,                          /*tp_descr_get*/
-		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictofnset*/
-		0,                          /*tp_init*/
-		0,                          /*tp_alloc*/
-		0,             /*tp_new*/
-		0,                          /*tp_free*/
-		0,                          /*tp_is_gc*/
-};
-
-
-/*
- * Incentives Group
- */ 
-
-static PyTypeObject Incentives_Type;
-
-static PyObject *
-Incentives_new(SAM_HostDeveloper data_ptr)
-{
-	PyObject* new_obj = Incentives_Type.tp_alloc(&Incentives_Type,0);
-
-	VarGroupObject* Incentives_obj = (VarGroupObject*)new_obj;
-
-	Incentives_obj->data_ptr = (SAM_table)data_ptr;
-
-	return new_obj;
-}
-
-/* Incentives methods */
-
-static PyObject *
-Incentives_assign(VarGroupObject *self, PyObject *args)
-{
-	PyObject* dict;
-	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
-		return NULL;
-	}
-
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "HostDeveloper", "Incentives")){
-		return NULL;
-	}
-
-	Py_INCREF(Py_None);
-	return Py_None;
-}
-
-static PyObject *
-Incentives_export(VarGroupObject *self, PyObject *args)
-{
-	PyTypeObject* tp = &Incentives_Type;
-	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
-	return dict;
-}
-
-static PyMethodDef Incentives_methods[] = {
-		{"assign",            (PyCFunction)Incentives_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Incentives_vals = { var: val, ...}``")},
-		{"export",            (PyCFunction)Incentives_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
-		{NULL,              NULL}           /* sentinel */
-};
-
-static PyObject *
-Incentives_get_pbi_fed_for_ds(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_HostDeveloper_Incentives_pbi_fed_for_ds_nget, self->data_ptr);
-}
-
-static int
-Incentives_set_pbi_fed_for_ds(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_HostDeveloper_Incentives_pbi_fed_for_ds_nset, self->data_ptr);
-}
-
-static PyObject *
-Incentives_get_pbi_oth_for_ds(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_HostDeveloper_Incentives_pbi_oth_for_ds_nget, self->data_ptr);
-}
-
-static int
-Incentives_set_pbi_oth_for_ds(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_HostDeveloper_Incentives_pbi_oth_for_ds_nset, self->data_ptr);
-}
-
-static PyObject *
-Incentives_get_pbi_sta_for_ds(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_HostDeveloper_Incentives_pbi_sta_for_ds_nget, self->data_ptr);
-}
-
-static int
-Incentives_set_pbi_sta_for_ds(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_HostDeveloper_Incentives_pbi_sta_for_ds_nset, self->data_ptr);
-}
-
-static PyObject *
-Incentives_get_pbi_uti_for_ds(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_HostDeveloper_Incentives_pbi_uti_for_ds_nget, self->data_ptr);
-}
-
-static int
-Incentives_set_pbi_uti_for_ds(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_HostDeveloper_Incentives_pbi_uti_for_ds_nset, self->data_ptr);
-}
-
-static PyGetSetDef Incentives_getset[] = {
-{"pbi_fed_for_ds", (getter)Incentives_get_pbi_fed_for_ds,(setter)Incentives_set_pbi_fed_for_ds,
-	PyDoc_STR("*float*: Federal PBI available for debt service [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
- 	NULL},
-{"pbi_oth_for_ds", (getter)Incentives_get_pbi_oth_for_ds,(setter)Incentives_set_pbi_oth_for_ds,
-	PyDoc_STR("*float*: Other PBI available for debt service [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
- 	NULL},
-{"pbi_sta_for_ds", (getter)Incentives_get_pbi_sta_for_ds,(setter)Incentives_set_pbi_sta_for_ds,
-	PyDoc_STR("*float*: State PBI available for debt service [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
- 	NULL},
-{"pbi_uti_for_ds", (getter)Incentives_get_pbi_uti_for_ds,(setter)Incentives_set_pbi_uti_for_ds,
-	PyDoc_STR("*float*: Utility PBI available for debt service [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
- 	NULL},
-	{NULL}  /* Sentinel */
-};
-
-static PyTypeObject Incentives_Type = {
-		/* The ob_type field must be initialized in the module init function
-		 * to be portable to Windows without using C++. */
-		PyVarObject_HEAD_INIT(NULL, 0)
-		"HostDeveloper.Incentives",             /*tp_name*/
-		sizeof(VarGroupObject),          /*tp_basicsize*/
-		0,                          /*tp_itemsize*/
-		/* methods */
-		0,    /*tp_dealloc*/
-		0,                          /*tp_print*/
-		(getattrfunc)0,             /*tp_getattr*/
-		0,                          /*tp_setattr*/
-		0,                          /*tp_reserved*/
-		0,                          /*tp_repr*/
-		0,                          /*tp_as_number*/
-		0,                          /*tp_as_sequence*/
-		0,                          /*tp_as_mapping*/
-		0,                          /*tp_hash*/
-		0,                          /*tp_call*/
-		0,                          /*tp_str*/
-		0,                          /*tp_getattro*/
-		0,                          /*tp_setattro*/
-		0,                          /*tp_as_buffer*/
-		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
-		0,                          /*tp_doc*/
-		0,                          /*tp_traverse*/
-		0,                          /*tp_clear*/
-		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistofnset*/
-		0,                          /*tp_iter*/
-		0,                          /*tp_iternext*/
-		Incentives_methods,         /*tp_methods*/
-		0,                          /*tp_members*/
-		Incentives_getset,          /*tp_getset*/
 		0,                          /*tp_base*/
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
@@ -5244,34 +5141,34 @@ static PyTypeObject ConstructionFinancing_Type = {
 
 
 /*
- * Battery Group
+ * BatterySystem Group
  */ 
 
-static PyTypeObject Battery_Type;
+static PyTypeObject BatterySystem_Type;
 
 static PyObject *
-Battery_new(SAM_HostDeveloper data_ptr)
+BatterySystem_new(SAM_HostDeveloper data_ptr)
 {
-	PyObject* new_obj = Battery_Type.tp_alloc(&Battery_Type,0);
+	PyObject* new_obj = BatterySystem_Type.tp_alloc(&BatterySystem_Type,0);
 
-	VarGroupObject* Battery_obj = (VarGroupObject*)new_obj;
+	VarGroupObject* BatterySystem_obj = (VarGroupObject*)new_obj;
 
-	Battery_obj->data_ptr = (SAM_table)data_ptr;
+	BatterySystem_obj->data_ptr = (SAM_table)data_ptr;
 
 	return new_obj;
 }
 
-/* Battery methods */
+/* BatterySystem methods */
 
 static PyObject *
-Battery_assign(VarGroupObject *self, PyObject *args)
+BatterySystem_assign(VarGroupObject *self, PyObject *args)
 {
 	PyObject* dict;
 	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "HostDeveloper", "Battery")){
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "HostDeveloper", "BatterySystem")){
 		return NULL;
 	}
 
@@ -5280,120 +5177,120 @@ Battery_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
-Battery_export(VarGroupObject *self, PyObject *args)
+BatterySystem_export(VarGroupObject *self, PyObject *args)
 {
-	PyTypeObject* tp = &Battery_Type;
+	PyTypeObject* tp = &BatterySystem_Type;
 	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
 	return dict;
 }
 
-static PyMethodDef Battery_methods[] = {
-		{"assign",            (PyCFunction)Battery_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Battery_vals = { var: val, ...}``")},
-		{"export",            (PyCFunction)Battery_export,  METH_VARARGS,
+static PyMethodDef BatterySystem_methods[] = {
+		{"assign",            (PyCFunction)BatterySystem_assign,  METH_VARARGS,
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``BatterySystem_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)BatterySystem_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 static PyObject *
-Battery_get_batt_bank_replacement(VarGroupObject *self, void *closure)
+BatterySystem_get_batt_bank_replacement(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_HostDeveloper_Battery_batt_bank_replacement_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_HostDeveloper_BatterySystem_batt_bank_replacement_aget, self->data_ptr);
 }
 
 static int
-Battery_set_batt_bank_replacement(VarGroupObject *self, PyObject *value, void *closure)
+BatterySystem_set_batt_bank_replacement(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_HostDeveloper_Battery_batt_bank_replacement_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_HostDeveloper_BatterySystem_batt_bank_replacement_aset, self->data_ptr);
 }
 
 static PyObject *
-Battery_get_batt_computed_bank_capacity(VarGroupObject *self, void *closure)
+BatterySystem_get_batt_computed_bank_capacity(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_HostDeveloper_Battery_batt_computed_bank_capacity_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_HostDeveloper_BatterySystem_batt_computed_bank_capacity_nget, self->data_ptr);
 }
 
 static int
-Battery_set_batt_computed_bank_capacity(VarGroupObject *self, PyObject *value, void *closure)
+BatterySystem_set_batt_computed_bank_capacity(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_HostDeveloper_Battery_batt_computed_bank_capacity_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_HostDeveloper_BatterySystem_batt_computed_bank_capacity_nset, self->data_ptr);
 }
 
 static PyObject *
-Battery_get_batt_replacement_option(VarGroupObject *self, void *closure)
+BatterySystem_get_batt_replacement_option(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_HostDeveloper_Battery_batt_replacement_option_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_HostDeveloper_BatterySystem_batt_replacement_option_nget, self->data_ptr);
 }
 
 static int
-Battery_set_batt_replacement_option(VarGroupObject *self, PyObject *value, void *closure)
+BatterySystem_set_batt_replacement_option(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_HostDeveloper_Battery_batt_replacement_option_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_HostDeveloper_BatterySystem_batt_replacement_option_nset, self->data_ptr);
 }
 
 static PyObject *
-Battery_get_batt_replacement_schedule(VarGroupObject *self, void *closure)
+BatterySystem_get_batt_replacement_schedule(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_HostDeveloper_Battery_batt_replacement_schedule_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_HostDeveloper_BatterySystem_batt_replacement_schedule_aget, self->data_ptr);
 }
 
 static int
-Battery_set_batt_replacement_schedule(VarGroupObject *self, PyObject *value, void *closure)
+BatterySystem_set_batt_replacement_schedule(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_HostDeveloper_Battery_batt_replacement_schedule_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_HostDeveloper_BatterySystem_batt_replacement_schedule_aset, self->data_ptr);
 }
 
 static PyObject *
-Battery_get_battery_per_kWh(VarGroupObject *self, void *closure)
+BatterySystem_get_battery_per_kWh(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_HostDeveloper_Battery_battery_per_kWh_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_HostDeveloper_BatterySystem_battery_per_kWh_nget, self->data_ptr);
 }
 
 static int
-Battery_set_battery_per_kWh(VarGroupObject *self, PyObject *value, void *closure)
+BatterySystem_set_battery_per_kWh(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_HostDeveloper_Battery_battery_per_kWh_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_HostDeveloper_BatterySystem_battery_per_kWh_nset, self->data_ptr);
 }
 
 static PyObject *
-Battery_get_en_batt(VarGroupObject *self, void *closure)
+BatterySystem_get_en_batt(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_HostDeveloper_Battery_en_batt_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_HostDeveloper_BatterySystem_en_batt_nget, self->data_ptr);
 }
 
 static int
-Battery_set_en_batt(VarGroupObject *self, PyObject *value, void *closure)
+BatterySystem_set_en_batt(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_HostDeveloper_Battery_en_batt_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_HostDeveloper_BatterySystem_en_batt_nset, self->data_ptr);
 }
 
-static PyGetSetDef Battery_getset[] = {
-{"batt_bank_replacement", (getter)Battery_get_batt_bank_replacement,(setter)Battery_set_batt_bank_replacement,
+static PyGetSetDef BatterySystem_getset[] = {
+{"batt_bank_replacement", (getter)BatterySystem_get_batt_bank_replacement,(setter)BatterySystem_set_batt_bank_replacement,
 	PyDoc_STR("*sequence*: Battery bank replacements per year [number/year]"),
  	NULL},
-{"batt_computed_bank_capacity", (getter)Battery_get_batt_computed_bank_capacity,(setter)Battery_set_batt_computed_bank_capacity,
+{"batt_computed_bank_capacity", (getter)BatterySystem_get_batt_computed_bank_capacity,(setter)BatterySystem_set_batt_computed_bank_capacity,
 	PyDoc_STR("*float*: Battery bank capacity [kWh]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
-{"batt_replacement_option", (getter)Battery_get_batt_replacement_option,(setter)Battery_set_batt_replacement_option,
+{"batt_replacement_option", (getter)BatterySystem_get_batt_replacement_option,(setter)BatterySystem_set_batt_replacement_option,
 	PyDoc_STR("*float*: Enable battery replacement? [0=none,1=capacity based,2=user schedule]\n\n*Constraints*: INTEGER,MIN=0,MAX=2\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
-{"batt_replacement_schedule", (getter)Battery_get_batt_replacement_schedule,(setter)Battery_set_batt_replacement_schedule,
+{"batt_replacement_schedule", (getter)BatterySystem_get_batt_replacement_schedule,(setter)BatterySystem_set_batt_replacement_schedule,
 	PyDoc_STR("*sequence*: Battery bank replacements per year (user specified) [number/year]"),
  	NULL},
-{"battery_per_kWh", (getter)Battery_get_battery_per_kWh,(setter)Battery_set_battery_per_kWh,
+{"battery_per_kWh", (getter)BatterySystem_get_battery_per_kWh,(setter)BatterySystem_set_battery_per_kWh,
 	PyDoc_STR("*float*: Battery cost [$/kWh]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
-{"en_batt", (getter)Battery_get_en_batt,(setter)Battery_set_en_batt,
+{"en_batt", (getter)BatterySystem_get_en_batt,(setter)BatterySystem_set_en_batt,
 	PyDoc_STR("*float*: Enable battery storage model [0/1]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
 
-static PyTypeObject Battery_Type = {
+static PyTypeObject BatterySystem_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"HostDeveloper.Battery",             /*tp_name*/
+		"HostDeveloper.BatterySystem",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -5420,9 +5317,9 @@ static PyTypeObject Battery_Type = {
 		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
-		Battery_methods,         /*tp_methods*/
+		BatterySystem_methods,         /*tp_methods*/
 		0,                          /*tp_members*/
-		Battery_getset,          /*tp_getset*/
+		BatterySystem_getset,          /*tp_getset*/
 		0,                          /*tp_base*/
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
@@ -10445,10 +10342,6 @@ newHostDeveloperObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "PaymentIncentives", PaymentIncentives_obj);
 	Py_DECREF(PaymentIncentives_obj);
 
-	PyObject* Incentives_obj = Incentives_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "Incentives", Incentives_obj);
-	Py_DECREF(Incentives_obj);
-
 	PyObject* Host_obj = Host_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Host", Host_obj);
 	Py_DECREF(Host_obj);
@@ -10477,9 +10370,9 @@ newHostDeveloperObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "ConstructionFinancing", ConstructionFinancing_obj);
 	Py_DECREF(ConstructionFinancing_obj);
 
-	PyObject* Battery_obj = Battery_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "Battery", Battery_obj);
-	Py_DECREF(Battery_obj);
+	PyObject* BatterySystem_obj = BatterySystem_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "BatterySystem", BatterySystem_obj);
+	Py_DECREF(BatterySystem_obj);
 
 	PyObject* Outputs_obj = Outputs_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
@@ -10540,6 +10433,12 @@ HostDeveloper_export(CmodObject *self, PyObject *args)
 	return PySAM_export_to_nested_dict((PyObject *) self, self->x_attr);
 }
 
+static PyObject *
+HostDeveloper_value(CmodObject *self, PyObject *args)
+{
+	return CmodObject_value(self, args);
+}
+
 static PyMethodDef HostDeveloper_methods[] = {
 		{"execute",            (PyCFunction)HostDeveloper_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
@@ -10547,6 +10446,8 @@ static PyMethodDef HostDeveloper_methods[] = {
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Revenue': { var: val, ...}, ...}``")},
 		{"export",            (PyCFunction)HostDeveloper_export,  METH_VARARGS,
 				PyDoc_STR("export() -> dict\n Export attributes into nested dictionary")},
+		{"value",             (PyCFunction)HostDeveloper_value, METH_VARARGS,
+				PyDoc_STR("value(name, optional value) -> Union[None, float, dict, sequence, str]\n Get or set by name a value in any of the variable groups.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -10770,13 +10671,6 @@ HostDeveloperModule_exec(PyObject *m)
 				(PyObject*)&PaymentIncentives_Type);
 	Py_DECREF(&PaymentIncentives_Type);
 
-	/// Add the Incentives type object to HostDeveloper_Type
-	if (PyType_Ready(&Incentives_Type) < 0) { goto fail; }
-	PyDict_SetItemString(HostDeveloper_Type.tp_dict,
-				"Incentives",
-				(PyObject*)&Incentives_Type);
-	Py_DECREF(&Incentives_Type);
-
 	/// Add the Host type object to HostDeveloper_Type
 	if (PyType_Ready(&Host_Type) < 0) { goto fail; }
 	PyDict_SetItemString(HostDeveloper_Type.tp_dict,
@@ -10826,12 +10720,12 @@ HostDeveloperModule_exec(PyObject *m)
 				(PyObject*)&ConstructionFinancing_Type);
 	Py_DECREF(&ConstructionFinancing_Type);
 
-	/// Add the Battery type object to HostDeveloper_Type
-	if (PyType_Ready(&Battery_Type) < 0) { goto fail; }
+	/// Add the BatterySystem type object to HostDeveloper_Type
+	if (PyType_Ready(&BatterySystem_Type) < 0) { goto fail; }
 	PyDict_SetItemString(HostDeveloper_Type.tp_dict,
-				"Battery",
-				(PyObject*)&Battery_Type);
-	Py_DECREF(&Battery_Type);
+				"BatterySystem",
+				(PyObject*)&BatterySystem_Type);
+	Py_DECREF(&BatterySystem_Type);
 
 	/// Add the Outputs type object to HostDeveloper_Type
 	if (PyType_Ready(&Outputs_Type) < 0) { goto fail; }

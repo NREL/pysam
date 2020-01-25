@@ -1,29 +1,35 @@
-.. _Sco2Offdesign:
+.. _MhkCosts:
 
-Sco2Offdesign
+MhkCosts
 **************************
 
-Wrapper for SAM Simulation Core model: `cmod_sco2_offdesign.cpp <https://github.com/NREL/ssc/blob/develop/ssc/cmod_sco2_offdesign.cpp>`_
+Wrapper for SAM Simulation Core model: `cmod_mhk_costs.cpp <https://github.com/NREL/ssc/blob/develop/ssc/cmod_mhk_costs.cpp>`_
 
 Creating an Instance
 =========================
 
 There are three methods to create a new instance of a PySAM module. Using ``default`` populates the newclass' attributes with default values specific to a ``config``. Each technology-financialconfiguration corresponds to a SAM GUI configuration. Using ``new`` creates an instance with empty attributes. The ``wrap`` function allows compatibility with PySSC, for details, refer to :doc:`../PySSC`.
 
-**Sco2Offdesign model description**
+**MhkCosts model description**
 
-.. automodule:: PySAM.Sco2Offdesign
+.. automodule:: PySAM.MhkCosts
 	:members:
 
 Functions
 =========================
 
-.. autoclass:: PySAM.Sco2Offdesign.Sco2Offdesign
+.. autoclass:: PySAM.MhkCosts.MhkCosts
+	:members:
+
+MHKCosts Group
+==============
+
+.. autoclass:: PySAM.MhkCosts.MhkCosts.MHKCosts
 	:members:
 
 Outputs Group
 ==============
 
-.. autoclass:: PySAM.Sco2Offdesign.Sco2Offdesign.Outputs
+.. autoclass:: PySAM.MhkCosts.MhkCosts.Outputs
 	:members:
 

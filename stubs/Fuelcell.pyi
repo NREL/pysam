@@ -76,6 +76,7 @@ class FuelCell(object):
 	fuelcell_fuel_available = float
 	fuelcell_fuel_price = float
 	fuelcell_fuel_type = float
+	fuelcell_is_started = float
 	fuelcell_lhv = float
 	fuelcell_number_of_units = float
 	fuelcell_operation_options = float

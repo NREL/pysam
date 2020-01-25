@@ -20,6 +20,7 @@ class FinancialParameters(object):
 	prop_tax_cost_assessed_percent = float
 	property_tax_rate = float
 	real_discount_rate = float
+	salvage_percentage = float
 	state_tax_rate = tuple
 	system_capacity = float
 	system_heat_rate = float
@@ -66,6 +67,7 @@ class SystemCosts(object):
 	om_replacement_cost1 = tuple
 	om_replacement_cost2 = tuple
 	om_replacement_cost_escal = float
+	total_installed_cost = float
 
 
 class Depreciation(object):
@@ -221,7 +223,7 @@ class PaymentIncentives(object):
 	pbi_uti_term = float
 
 
-class Battery(object):
+class BatterySystem(object):
 	def assign(self): 
 		pass
 
@@ -270,12 +272,8 @@ class Cashloan(object):
 		pass
 
 
-	annual_energy_value = tuple
-	annual_themal_value = tuple
 	market = float
 	mortgage = float
-	salvage_percentage = float
-	total_installed_cost = float
 
 
 class SystemOutput(object):
@@ -289,6 +287,8 @@ class SystemOutput(object):
 		pass
 
 
+	annual_energy_value = tuple
+	annual_themal_value = tuple
 	degradation = tuple
 	gen = tuple
 
@@ -334,6 +334,8 @@ class Outputs(object):
 
 
 	adjusted_installed_cost = float
+	cbi_fedtax_total = float
+	cbi_statax_total = float
 	cbi_total = float
 	cbi_total_fed = float
 	cbi_total_oth = float
@@ -385,6 +387,8 @@ class Outputs(object):
 	cf_operating_expenses = tuple
 	cf_payback_with_expenses = tuple
 	cf_payback_without_expenses = tuple
+	cf_pbi_fedtax_total = tuple
+	cf_pbi_statax_total = tuple
 	cf_pbi_total = tuple
 	cf_pbi_total_fed = tuple
 	cf_pbi_total_oth = tuple
@@ -408,6 +412,8 @@ class Outputs(object):
 	discounted_payback = float
 	effective_tax_rate = float
 	first_cost = float
+	ibi_fedtax_total = float
+	ibi_statax_total = float
 	ibi_total = float
 	ibi_total_fed = float
 	ibi_total_oth = float
@@ -457,7 +463,7 @@ class CashloanModel(object):
 	Depreciation = Depreciation
 	TaxCreditIncentives = TaxCreditIncentives
 	PaymentIncentives = PaymentIncentives
-	Battery = Battery
+	BatterySystem = BatterySystem
 	FuelCell = FuelCell
 	Cashloan = Cashloan
 	SystemOutput = SystemOutput

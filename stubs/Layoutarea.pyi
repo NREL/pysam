@@ -1,3 +1,17 @@
+class Common(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> Dict[Dict]
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
+	positions = tuple
+
+
 class Outputs(object):
 	def assign(self): 
 		pass
@@ -9,9 +23,11 @@ class Outputs(object):
 		pass
 
 
+	area = float
+	convex_hull = tuple
 
 
-class Sco2Offdesign(object):
+class Layoutarea(object):
 	def assign(self, dict):
 		pass
 
@@ -27,16 +43,17 @@ class Sco2Offdesign(object):
 	def __init__(self, *args, **kwargs):
 		pass
 
+	Common = Common
 	Outputs = Outputs
 
 
-def default(config) -> Sco2Offdesign
+def default(config) -> Layoutarea
 	pass
 
-def new() -> Sco2Offdesign
+def new() -> Layoutarea
 	pass
 
-def wrap(ssc_data_t) -> Sco2Offdesign
+def wrap(ssc_data_t) -> Layoutarea
 	pass
 
 __loader__ = None 

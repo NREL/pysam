@@ -2209,90 +2209,6 @@ Powerblock_set_tech_type(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyObject *
-Powerblock_get_ud_T_amb_des(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TroughPhysical_Powerblock_ud_T_amb_des_nget, self->data_ptr);
-}
-
-static int
-Powerblock_set_ud_T_amb_des(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TroughPhysical_Powerblock_ud_T_amb_des_nset, self->data_ptr);
-}
-
-static PyObject *
-Powerblock_get_ud_T_amb_high(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TroughPhysical_Powerblock_ud_T_amb_high_nget, self->data_ptr);
-}
-
-static int
-Powerblock_set_ud_T_amb_high(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TroughPhysical_Powerblock_ud_T_amb_high_nset, self->data_ptr);
-}
-
-static PyObject *
-Powerblock_get_ud_T_amb_ind_od(VarGroupObject *self, void *closure)
-{
-	return PySAM_matrix_getter(SAM_TroughPhysical_Powerblock_ud_T_amb_ind_od_mget, self->data_ptr);
-}
-
-static int
-Powerblock_set_ud_T_amb_ind_od(VarGroupObject *self, PyObject *value, void *closure)
-{
-		return PySAM_matrix_setter(value, SAM_TroughPhysical_Powerblock_ud_T_amb_ind_od_mset, self->data_ptr);
-}
-
-static PyObject *
-Powerblock_get_ud_T_amb_low(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TroughPhysical_Powerblock_ud_T_amb_low_nget, self->data_ptr);
-}
-
-static int
-Powerblock_set_ud_T_amb_low(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TroughPhysical_Powerblock_ud_T_amb_low_nset, self->data_ptr);
-}
-
-static PyObject *
-Powerblock_get_ud_T_htf_high(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TroughPhysical_Powerblock_ud_T_htf_high_nget, self->data_ptr);
-}
-
-static int
-Powerblock_set_ud_T_htf_high(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TroughPhysical_Powerblock_ud_T_htf_high_nset, self->data_ptr);
-}
-
-static PyObject *
-Powerblock_get_ud_T_htf_ind_od(VarGroupObject *self, void *closure)
-{
-	return PySAM_matrix_getter(SAM_TroughPhysical_Powerblock_ud_T_htf_ind_od_mget, self->data_ptr);
-}
-
-static int
-Powerblock_set_ud_T_htf_ind_od(VarGroupObject *self, PyObject *value, void *closure)
-{
-		return PySAM_matrix_setter(value, SAM_TroughPhysical_Powerblock_ud_T_htf_ind_od_mset, self->data_ptr);
-}
-
-static PyObject *
-Powerblock_get_ud_T_htf_low(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TroughPhysical_Powerblock_ud_T_htf_low_nget, self->data_ptr);
-}
-
-static int
-Powerblock_set_ud_T_htf_low(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TroughPhysical_Powerblock_ud_T_htf_low_nset, self->data_ptr);
-}
-
-static PyObject *
 Powerblock_get_ud_f_W_dot_cool_des(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_TroughPhysical_Powerblock_ud_f_W_dot_cool_des_nget, self->data_ptr);
@@ -2314,42 +2230,6 @@ static int
 Powerblock_set_ud_ind_od(VarGroupObject *self, PyObject *value, void *closure)
 {
 		return PySAM_matrix_setter(value, SAM_TroughPhysical_Powerblock_ud_ind_od_mset, self->data_ptr);
-}
-
-static PyObject *
-Powerblock_get_ud_m_dot_htf_high(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TroughPhysical_Powerblock_ud_m_dot_htf_high_nget, self->data_ptr);
-}
-
-static int
-Powerblock_set_ud_m_dot_htf_high(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TroughPhysical_Powerblock_ud_m_dot_htf_high_nset, self->data_ptr);
-}
-
-static PyObject *
-Powerblock_get_ud_m_dot_htf_ind_od(VarGroupObject *self, void *closure)
-{
-	return PySAM_matrix_getter(SAM_TroughPhysical_Powerblock_ud_m_dot_htf_ind_od_mget, self->data_ptr);
-}
-
-static int
-Powerblock_set_ud_m_dot_htf_ind_od(VarGroupObject *self, PyObject *value, void *closure)
-{
-		return PySAM_matrix_setter(value, SAM_TroughPhysical_Powerblock_ud_m_dot_htf_ind_od_mset, self->data_ptr);
-}
-
-static PyObject *
-Powerblock_get_ud_m_dot_htf_low(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TroughPhysical_Powerblock_ud_m_dot_htf_low_nget, self->data_ptr);
-}
-
-static int
-Powerblock_set_ud_m_dot_htf_low(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TroughPhysical_Powerblock_ud_m_dot_htf_low_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -2431,41 +2311,11 @@ static PyGetSetDef Powerblock_getset[] = {
 {"tech_type", (getter)Powerblock_get_tech_type,(setter)Powerblock_set_tech_type,
 	PyDoc_STR("*float*: Turbine inlet pressure control flag (sliding=user, fixed=trough) [1/2/3]\n\n*Info*: tower/trough/user\n\n*Required*: True if pc_config=0"),
  	NULL},
-{"ud_T_amb_des", (getter)Powerblock_get_ud_T_amb_des,(setter)Powerblock_set_ud_T_amb_des,
-	PyDoc_STR("*float*: Ambient temperature at user-defined power cycle design point [C]\n\n*Required*: True if pc_config=1"),
- 	NULL},
-{"ud_T_amb_high", (getter)Powerblock_get_ud_T_amb_high,(setter)Powerblock_set_ud_T_amb_high,
-	PyDoc_STR("*float*: High level ambient temperature for HTF mass flow rate parametric [C]\n\n*Required*: True if pc_config=1"),
- 	NULL},
-{"ud_T_amb_ind_od", (getter)Powerblock_get_ud_T_amb_ind_od,(setter)Powerblock_set_ud_T_amb_ind_od,
-	PyDoc_STR("*sequence[sequence]*: Off design table of user-defined power cycle performance formed from parametric on T_amb [C]\n\n*Required*: If not provided, assumed to be [[0]]"),
- 	NULL},
-{"ud_T_amb_low", (getter)Powerblock_get_ud_T_amb_low,(setter)Powerblock_set_ud_T_amb_low,
-	PyDoc_STR("*float*: Low level ambient temperature for HTF mass flow rate parametric [C]\n\n*Required*: True if pc_config=1"),
- 	NULL},
-{"ud_T_htf_high", (getter)Powerblock_get_ud_T_htf_high,(setter)Powerblock_set_ud_T_htf_high,
-	PyDoc_STR("*float*: High level HTF inlet temperature for T_amb parametric [C]\n\n*Required*: True if pc_config=1"),
- 	NULL},
-{"ud_T_htf_ind_od", (getter)Powerblock_get_ud_T_htf_ind_od,(setter)Powerblock_set_ud_T_htf_ind_od,
-	PyDoc_STR("*sequence[sequence]*: Off design table of user-defined power cycle performance formed from parametric on T_htf_hot [C]\n\n*Required*: If not provided, assumed to be [[0]]"),
- 	NULL},
-{"ud_T_htf_low", (getter)Powerblock_get_ud_T_htf_low,(setter)Powerblock_set_ud_T_htf_low,
-	PyDoc_STR("*float*: Low level HTF inlet temperature for T_amb parametric [C]\n\n*Required*: True if pc_config=1"),
- 	NULL},
 {"ud_f_W_dot_cool_des", (getter)Powerblock_get_ud_f_W_dot_cool_des,(setter)Powerblock_set_ud_f_W_dot_cool_des,
 	PyDoc_STR("*float*: Percent of user-defined power cycle design gross output consumed by cooling [%]\n\n*Required*: True if pc_config=1"),
  	NULL},
 {"ud_ind_od", (getter)Powerblock_get_ud_ind_od,(setter)Powerblock_set_ud_ind_od,
-	PyDoc_STR("*sequence[sequence]*: Off design user-defined power cycle performance as function of T_htf, m_dot_htf [ND], and T_amb\n\n*Required*: If not provided, assumed to be [[0]]"),
- 	NULL},
-{"ud_m_dot_htf_high", (getter)Powerblock_get_ud_m_dot_htf_high,(setter)Powerblock_set_ud_m_dot_htf_high,
-	PyDoc_STR("*float*: High level normalized HTF mass flow rate for T_HTF parametric [-]\n\n*Required*: True if pc_config=1"),
- 	NULL},
-{"ud_m_dot_htf_ind_od", (getter)Powerblock_get_ud_m_dot_htf_ind_od,(setter)Powerblock_set_ud_m_dot_htf_ind_od,
-	PyDoc_STR("*sequence[sequence]*: Off design table of user-defined power cycle performance formed from parametric on m_dot_htf [ND]\n\n*Required*: If not provided, assumed to be [[0]]"),
- 	NULL},
-{"ud_m_dot_htf_low", (getter)Powerblock_get_ud_m_dot_htf_low,(setter)Powerblock_set_ud_m_dot_htf_low,
-	PyDoc_STR("*float*: Low level normalized HTF mass flow rate for T_HTF parametric [-]\n\n*Required*: True if pc_config=1"),
+	PyDoc_STR("*sequence[sequence]*: Off design user-defined power cycle performance as function of T_htf, m_dot_htf [ND], and T_amb\n\n*Required*: True if pc_config=1"),
  	NULL},
 {"ud_m_dot_water_cool_des", (getter)Powerblock_get_ud_m_dot_water_cool_des,(setter)Powerblock_set_ud_m_dot_water_cool_des,
 	PyDoc_STR("*float*: Mass flow rate of water required at user-defined power cycle design point [kg/s]\n\n*Required*: True if pc_config=1"),
@@ -5469,6 +5319,12 @@ TroughPhysical_export(CmodObject *self, PyObject *args)
 	return PySAM_export_to_nested_dict((PyObject *) self, self->x_attr);
 }
 
+static PyObject *
+TroughPhysical_value(CmodObject *self, PyObject *args)
+{
+	return CmodObject_value(self, args);
+}
+
 static PyMethodDef TroughPhysical_methods[] = {
 		{"execute",            (PyCFunction)TroughPhysical_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
@@ -5476,6 +5332,8 @@ static PyMethodDef TroughPhysical_methods[] = {
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'weather': { var: val, ...}, ...}``")},
 		{"export",            (PyCFunction)TroughPhysical_export,  METH_VARARGS,
 				PyDoc_STR("export() -> dict\n Export attributes into nested dictionary")},
+		{"value",             (PyCFunction)TroughPhysical_value, METH_VARARGS,
+				PyDoc_STR("value(name, optional value) -> Union[None, float, dict, sequence, str]\n Get or set by name a value in any of the variable groups.")},
 		{NULL,              NULL}           /* sentinel */
 };
 

@@ -1,3 +1,25 @@
+class Revenue(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> Dict[Dict]
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
+	flip_target_percent = float
+	flip_target_year = float
+	ppa_escalation = float
+	ppa_price_input = tuple
+	ppa_soln_max = float
+	ppa_soln_max_iterations = float
+	ppa_soln_min = float
+	ppa_soln_mode = float
+	ppa_soln_tolerance = float
+
+
 class FinancialParameters(object):
 	def assign(self): 
 		pass
@@ -10,16 +32,38 @@ class FinancialParameters(object):
 
 
 	analysis_period = float
+	cost_debt_closing = float
+	cost_debt_fee = float
+	cost_other_financing = float
+	debt_option = float
+	debt_percent = float
+	dscr = float
+	dscr_reserve_months = float
+	equip1_reserve_cost = float
+	equip1_reserve_freq = float
+	equip2_reserve_cost = float
+	equip2_reserve_freq = float
+	equip3_reserve_cost = float
+	equip3_reserve_freq = float
+	equip_reserve_depr_fed = float
+	equip_reserve_depr_sta = float
 	federal_tax_rate = tuple
 	inflation_rate = float
 	insurance_rate = float
+	months_receivables_reserve = float
+	months_working_reserve = float
+	payment_option = float
 	prop_tax_assessed_decline = float
 	prop_tax_cost_assessed_percent = float
 	property_tax_rate = float
 	real_discount_rate = float
+	reserves_interest = float
+	salvage_percentage = float
 	state_tax_rate = tuple
 	system_capacity = float
 	system_heat_rate = float
+	term_int_rate = float
+	term_tenor = float
 
 
 class SystemCosts(object):
@@ -97,6 +141,59 @@ class TaxCreditIncentives(object):
 	ptc_sta_amount = tuple
 	ptc_sta_escal = float
 	ptc_sta_term = float
+
+
+class Depreciation(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> Dict[Dict]
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
+	depr_alloc_custom_percent = float
+	depr_alloc_macrs_15_percent = float
+	depr_alloc_macrs_5_percent = float
+	depr_alloc_sl_15_percent = float
+	depr_alloc_sl_20_percent = float
+	depr_alloc_sl_39_percent = float
+	depr_alloc_sl_5_percent = float
+	depr_bonus_fed = float
+	depr_bonus_fed_custom = float
+	depr_bonus_fed_macrs_15 = float
+	depr_bonus_fed_macrs_5 = float
+	depr_bonus_fed_sl_15 = float
+	depr_bonus_fed_sl_20 = float
+	depr_bonus_fed_sl_39 = float
+	depr_bonus_fed_sl_5 = float
+	depr_bonus_sta = float
+	depr_bonus_sta_custom = float
+	depr_bonus_sta_macrs_15 = float
+	depr_bonus_sta_macrs_5 = float
+	depr_bonus_sta_sl_15 = float
+	depr_bonus_sta_sl_20 = float
+	depr_bonus_sta_sl_39 = float
+	depr_bonus_sta_sl_5 = float
+	depr_custom_schedule = tuple
+	depr_fedbas_method = float
+	depr_itc_fed_custom = float
+	depr_itc_fed_macrs_15 = float
+	depr_itc_fed_macrs_5 = float
+	depr_itc_fed_sl_15 = float
+	depr_itc_fed_sl_20 = float
+	depr_itc_fed_sl_39 = float
+	depr_itc_fed_sl_5 = float
+	depr_itc_sta_custom = float
+	depr_itc_sta_macrs_15 = float
+	depr_itc_sta_macrs_5 = float
+	depr_itc_sta_sl_15 = float
+	depr_itc_sta_sl_20 = float
+	depr_itc_sta_sl_39 = float
+	depr_itc_sta_sl_5 = float
+	depr_stabas_method = float
 
 
 class PaymentIncentives(object):
@@ -180,21 +277,25 @@ class PaymentIncentives(object):
 	ibi_uti_percent_tax_sta = float
 	pbi_fed_amount = tuple
 	pbi_fed_escal = float
+	pbi_fed_for_ds = float
 	pbi_fed_tax_fed = float
 	pbi_fed_tax_sta = float
 	pbi_fed_term = float
 	pbi_oth_amount = tuple
 	pbi_oth_escal = float
+	pbi_oth_for_ds = float
 	pbi_oth_tax_fed = float
 	pbi_oth_tax_sta = float
 	pbi_oth_term = float
 	pbi_sta_amount = tuple
 	pbi_sta_escal = float
+	pbi_sta_for_ds = float
 	pbi_sta_tax_fed = float
 	pbi_sta_tax_sta = float
 	pbi_sta_term = float
 	pbi_uti_amount = tuple
 	pbi_uti_escal = float
+	pbi_uti_for_ds = float
 	pbi_uti_tax_fed = float
 	pbi_uti_tax_sta = float
 	pbi_uti_term = float
@@ -217,20 +318,6 @@ class Host(object):
 	host_real_discount_rate = float
 
 
-class Common(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> Dict[Dict]
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	gen = tuple
-
-
 class SystemOutput(object):
 	def assign(self): 
 		pass
@@ -243,6 +330,7 @@ class SystemOutput(object):
 
 
 	degradation = tuple
+	gen = tuple
 	system_capacity = float
 
 
@@ -318,128 +406,6 @@ class TimeOfDelivery(object):
 	system_use_lifetime_output = float
 
 
-class ReserveAccounts(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> Dict[Dict]
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	equip1_reserve_cost = float
-	equip1_reserve_freq = float
-	equip2_reserve_cost = float
-	equip2_reserve_freq = float
-	equip3_reserve_cost = float
-	equip3_reserve_freq = float
-	reserves_interest = float
-
-
-class Depreciation(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> Dict[Dict]
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	depr_alloc_custom_percent = float
-	depr_alloc_macrs_15_percent = float
-	depr_alloc_macrs_5_percent = float
-	depr_alloc_sl_15_percent = float
-	depr_alloc_sl_20_percent = float
-	depr_alloc_sl_39_percent = float
-	depr_alloc_sl_5_percent = float
-	depr_bonus_fed = float
-	depr_bonus_fed_custom = float
-	depr_bonus_fed_macrs_15 = float
-	depr_bonus_fed_macrs_5 = float
-	depr_bonus_fed_sl_15 = float
-	depr_bonus_fed_sl_20 = float
-	depr_bonus_fed_sl_39 = float
-	depr_bonus_fed_sl_5 = float
-	depr_bonus_sta = float
-	depr_bonus_sta_custom = float
-	depr_bonus_sta_macrs_15 = float
-	depr_bonus_sta_macrs_5 = float
-	depr_bonus_sta_sl_15 = float
-	depr_bonus_sta_sl_20 = float
-	depr_bonus_sta_sl_39 = float
-	depr_bonus_sta_sl_5 = float
-	depr_custom_schedule = tuple
-	depr_fedbas_method = float
-	depr_itc_fed_custom = float
-	depr_itc_fed_macrs_15 = float
-	depr_itc_fed_macrs_5 = float
-	depr_itc_fed_sl_15 = float
-	depr_itc_fed_sl_20 = float
-	depr_itc_fed_sl_39 = float
-	depr_itc_fed_sl_5 = float
-	depr_itc_sta_custom = float
-	depr_itc_sta_macrs_15 = float
-	depr_itc_sta_macrs_5 = float
-	depr_itc_sta_sl_15 = float
-	depr_itc_sta_sl_20 = float
-	depr_itc_sta_sl_39 = float
-	depr_itc_sta_sl_5 = float
-	depr_stabas_method = float
-	equip_reserve_depr_fed = float
-	equip_reserve_depr_sta = float
-
-
-class SalvageValue(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> Dict[Dict]
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	salvage_percentage = float
-
-
-class SolutionMode(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> Dict[Dict]
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	ppa_soln_max = float
-	ppa_soln_max_iterations = float
-	ppa_soln_min = float
-	ppa_soln_mode = float
-	ppa_soln_tolerance = float
-
-
-class PPAPrice(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> Dict[Dict]
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	ppa_escalation = float
-	ppa_price_input = float
-
-
 class ConstructionFinancing(object):
 	def assign(self): 
 		pass
@@ -454,77 +420,7 @@ class ConstructionFinancing(object):
 	construction_financing_cost = float
 
 
-class ProjectTermDebt(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> Dict[Dict]
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	debt_option = float
-	debt_percent = float
-	dscr = float
-	dscr_reserve_months = float
-	payment_option = float
-	term_int_rate = float
-	term_tenor = float
-
-
-class OtherCapitalCosts(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> Dict[Dict]
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	cost_debt_closing = float
-	cost_debt_fee = float
-	cost_other_financing = float
-	months_receivables_reserve = float
-	months_working_reserve = float
-
-
-class IRRTargets(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> Dict[Dict]
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	flip_target_percent = float
-	flip_target_year = float
-
-
-class CashIncentives(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> Dict[Dict]
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	pbi_fed_for_ds = float
-	pbi_oth_for_ds = float
-	pbi_sta_for_ds = float
-	pbi_uti_for_ds = float
-
-
-class Battery(object):
+class BatterySystem(object):
 	def assign(self): 
 		pass
 
@@ -688,6 +584,7 @@ class Outputs(object):
 	cf_property_tax_expense = tuple
 	cf_ptc_fed = tuple
 	cf_ptc_sta = tuple
+	cf_ptc_total = tuple
 	cf_pv_cash_for_ds = tuple
 	cf_pv_interest_factor = tuple
 	cf_recapitalization = tuple
@@ -957,6 +854,7 @@ class Outputs(object):
 	depr_stabas_sl_39 = float
 	depr_stabas_sl_5 = float
 	depr_stabas_total = float
+	effective_tax_rate = float
 	firstyear_energy_dispatch1 = float
 	firstyear_energy_dispatch2 = float
 	firstyear_energy_dispatch3 = float
@@ -1111,28 +1009,20 @@ class HostDeveloper(object):
 	def __init__(self, *args, **kwargs):
 		pass
 
+	Revenue = Revenue
 	FinancialParameters = FinancialParameters
 	SystemCosts = SystemCosts
 	TaxCreditIncentives = TaxCreditIncentives
+	Depreciation = Depreciation
 	PaymentIncentives = PaymentIncentives
 	Host = Host
-	Common = Common
 	SystemOutput = SystemOutput
 	ReturnOnEquity = ReturnOnEquity
 	Moratorium = Moratorium
 	Recapitalization = Recapitalization
 	TimeOfDelivery = TimeOfDelivery
-	ReserveAccounts = ReserveAccounts
-	Depreciation = Depreciation
-	SalvageValue = SalvageValue
-	SolutionMode = SolutionMode
-	PPAPrice = PPAPrice
 	ConstructionFinancing = ConstructionFinancing
-	ProjectTermDebt = ProjectTermDebt
-	OtherCapitalCosts = OtherCapitalCosts
-	IRRTargets = IRRTargets
-	CashIncentives = CashIncentives
-	Battery = Battery
+	BatterySystem = BatterySystem
 	Outputs = Outputs
 
 

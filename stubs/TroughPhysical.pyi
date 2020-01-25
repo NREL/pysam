@@ -169,18 +169,8 @@ class Powerblock(object):
 	startup_frac = float
 	startup_time = float
 	tech_type = float
-	ud_T_amb_des = float
-	ud_T_amb_high = float
-	ud_T_amb_ind_od = tuple
-	ud_T_amb_low = float
-	ud_T_htf_high = float
-	ud_T_htf_ind_od = tuple
-	ud_T_htf_low = float
 	ud_f_W_dot_cool_des = float
 	ud_ind_od = tuple
-	ud_m_dot_htf_high = float
-	ud_m_dot_htf_ind_od = tuple
-	ud_m_dot_htf_low = float
 	ud_m_dot_water_cool_des = float
 
 
@@ -365,7 +355,6 @@ class Outputs(object):
 	annual_W_cycle_gross = float
 	annual_energy = float
 	annual_field_freeze_protection = float
-	annual_gross_energy = float
 	annual_tes_freeze_protection = float
 	annual_thermal_consumption = float
 	annual_total_water_use = float
@@ -410,6 +399,7 @@ class Outputs(object):
 	m_dot_tes_dc = tuple
 	m_dot_water_pc = tuple
 	month = tuple
+	monthly_energy = tuple
 	n_op_modes = tuple
 	op_mode_1 = tuple
 	op_mode_2 = tuple
