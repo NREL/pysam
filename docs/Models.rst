@@ -141,103 +141,103 @@ These modules provide helper functions or are older versions of above modules.
 
 	* - PySAM Module
 	  - Description
-    * - :doc:`modules/Singlediode`
+	* - :doc:`modules/Annualoutput`
+	  - Annual Output
+	* - :doc:`modules/CbConstructionFinancing`
+	  - Construction financing cost calculations
+	* - :doc:`modules/CbEmpiricalHceHeatLoss`
+	  - Empirical HCE Heat Loss
+	* - :doc:`modules/CbMsptSystemCosts`
+	  - CSP molten salt power tower system costs
+	* - :doc:`modules/DsgFluxPreprocess`
+	  - Calculate receiver max flux and absorber (boiler, etc.) fractions
+	* - :doc:`modules/GeothermalCosts`
+	  - Geothermal monthly and hourly models using general power block code from TRNSYS Type 224 code by M.Wagner, and some GETEM model code.
+	* - :doc:`modules/Iec61853interp`
+	  - Determine single diode model parameters from IEC 61853 solution matrix at a given temperature and irradiance.
+	* - :doc:`modules/Iec61853par`
+	  - Calculate 11-parameter single diode model parameters from IEC-61853 PV module test data.
+	* - :doc:`modules/InvCecCg`
+	  - CEC Inverter Coefficient Generator
+	* - :doc:`modules/Ippppa`
+	  - Utility IPP/Commerical PPA Finance model.
+	* - :doc:`modules/Irradproc`
+	  - Irradiance Processor
+	* - :doc:`modules/IsccDesignPoint`
+	  - Calculates design point inject, extraction, fossil output
+	* - :doc:`modules/Layoutarea`
+	  - Layout Area Calculation
+	* - :doc:`modules/MhkCosts`
+	  - Calculates various cost categories for Marine Energy arrays for different device types.
+	* - :doc:`modules/Poacalib`
+	  - Calibrates beam and diffuse to give POA input
+	* - :doc:`modules/Pv6parmod`
+	  - CEC 6 Parameter PV module model performance calculator.  Does not include weather file reading or irradiance processing, or inverter (DC to AC) modeling.
+	* - :doc:`modules/PvGetShadeLossMpp`
+	  - PV get shade loss fraction for strings
+	* - :doc:`modules/Pvsandiainv`
+	  - Sandia PV inverter performance calculator.
+	* - :doc:`modules/Pvwattsv11ts`
+	  - pvwattsv1_1ts- single timestep calculation of PV system performance.
+	* - :doc:`modules/Pvwattsv1`
+	  - PVWatts V.1 - integrated hourly weather reader and PV system simulator.
+	* - :doc:`modules/Pvwattsv1Poa`
+	  - PVWatts system performance calculator.  Does not include weather file reading or irradiance processing - user must supply arrays of precalculated POA irradiance data.
+	* - :doc:`modules/Pvwattsv51ts`
+	  - pvwattsv5_1ts- single timestep calculation of PV system performance.
+	* - :doc:`modules/Pvwattsv5`
+	  - PVWatts V5 - integrated hourly weather reader and PV system simulator.
+	* - :doc:`modules/Sco2AirCooler`
+	  - Returns air cooler dimensions given fluid and location design points
+	* - :doc:`modules/Sco2CspSystem`
+	  - ...
+	* - :doc:`modules/Sco2CspUdPcTables`
+	  - ...
+	* - :doc:`modules/Sco2DesignCycle`
+	  - Calls sCO2 auto-design cycle function
+	* - :doc:`modules/Sco2DesignPoint`
+	  - Returns optimized sco2 cycle parameters given inputs
+	* - :doc:`modules/Singlediode`
 	  - Single diode model function.
 	* - :doc:`modules/Singlediodeparams`
 	  - Single diode model parameter calculation.
-	* - :doc:`modules/Iec61853par`
-	  - Calculate 11-parameter single diode model parameters from IEC-61853 PV module test data.
-	* - :doc:`modules/Iec61853interp`
-	  - Determine single diode model parameters from IEC 61853 solution matrix at a given temperature and irradiance.
-	* - :doc:`modules/6parsolve`
+	* - :doc:`modules/SixParsolve`
 	  - Solver for CEC/6 parameter PV module coefficients
-	* - :doc:`modules/Pv6parmod`
-	  - CEC 6 Parameter PV module model performance calculator.  Does not include weather file reading or irradiance processing, or inverter (DC to AC) modeling.
-	* - :doc:`modules/Pvwattsv1`
-	  - PVWatts V.1 - integrated hourly weather reader and PV system simulator.
-	* - :doc:`modules/Pvwattsv11ts`
-	  - pvwattsv1_1ts- single timestep calculation of PV system performance.
-	* - :doc:`modules/Pvwattsv1Poa`
-	  - PVWatts system performance calculator.  Does not include weather file reading or irradiance processing - user must supply arrays of precalculated POA irradiance data.
-	* - :doc:`modules/Pvwattsv5`
-	  - PVWatts V5 - integrated hourly weather reader and PV system simulator.
-	* - :doc:`modules/Pvwattsv51ts`
-	  - pvwattsv5_1ts- single timestep calculation of PV system performance.
-	* - :doc:`modules/Pvsandiainv`
-	  - Sandia PV inverter performance calculator.
-	* - :doc:`modules/Wfreader`
-	  - Standard Weather File Format Reader (TMY2, TMY3, EPW, SMW, WFCSV)
-	* - :doc:`modules/Irradproc`
-	  - Irradiance Processor
-	* - :doc:`modules/Utilityrate`
-	  - Complex utility rate structure net revenue calculator
+	* - :doc:`modules/Snowmodel`
+	  - Estimates the Detrimental Effects due to Snow Fall
+	* - :doc:`modules/Solarpilot`
+	  - SolarPILOT - CSP tower solar field layout tool.
+	* - :doc:`modules/TcstroughPhysical`
+	  - CSP model using the emperical trough TCS types.
+	* - :doc:`modules/Timeseq`
+	  - Time sequence generator
+	* - :doc:`modules/TroughPhysicalCspSolver`
+	  - Physical trough using CSP Solver
+	* - :doc:`modules/UiTesCalcs`
+	  - Calculates values for all calculated values on UI TES page(s)
+	* - :doc:`modules/UiUdpcChecks`
+	  - Calculates the levels and number of paramteric runs for 3 udpc ind variables
+	* - :doc:`modules/UserHtfComparison`
+	  - Evaluates equivalence of two user-defined HTF tables
 	* - :doc:`modules/Utilityrate2`
 	  - Complex utility rate structure net revenue calculator OpenEI Version 2
 	* - :doc:`modules/Utilityrate3`
 	  - Complex utility rate structure net revenue calculator OpenEI Version 3
 	* - :doc:`modules/Utilityrate4`
 	  - Complex utility rate structure net revenue calculator OpenEI Version 4
-	* - :doc:`modules/Annualoutput`
-	  - Annual Output_
-	* - :doc:`modules/Ippppa`
-	  - Utility IPP/Commerical PPA Finance model.
-	* - :doc:`modules/Timeseq`
-	  - Time sequence generator
-	* - :doc:`modules/GeothermalCosts`
-	  - Geothermal monthly and hourly models using general power block code from TRNSYS Type 224 code by M.Wagner, and some GETEM model code.
-	* - :doc:`modules/Poacalib`
-	  - Calibrates beam and diffuse to give POA input
-	* - :doc:`modules/Snowmodel`
-	  - Estimates the Detrimental Effects due to Snow Fall
-	* - :doc:`modules/Wfcsvconv`
-	  - Converter for TMY2, TMY3, INTL, EPW, SMW weather files to standard CSV format
-	* - :doc:`modules/TcstroughPhysical`
-	  - CSP model using the emperical trough TCS types.
-	* - :doc:`modules/TroughPhysicalCspSolver`
-	  - Physical trough using CSP Solver
-	* - :doc:`modules/WindFileReader`
-	  - SAM Wind Resource File Reader (SRW)
+	* - :doc:`modules/Utilityrate`
+	  - Complex utility rate structure net revenue calculator
 	* - :doc:`modules/Wfcheck`
 	  - Weather file checker.
+	* - :doc:`modules/Wfcsvconv`
+	  - Converter for TMY2, TMY3, INTL, EPW, SMW weather files to standard CSV format
+	* - :doc:`modules/Wfreader`
+	  - Standard Weather File Format Reader (TMY2, TMY3, EPW, SMW, WFCSV)
 	* - :doc:`modules/Windbos`
 	  - Wind Balance of System cost model
-	* - :doc:`modules/WindObos`
-	  - Wind Offshore Balance of System cost model
 	* - :doc:`modules/Windcsm`
 	  - WISDEM turbine cost model
-	* - :doc:`modules/Solarpilot`
-	  - SolarPILOT - CSP tower solar field layout tool.
-	* - :doc:`modules/DsgFluxPreprocess`
-	  - Calculate receiver max flux and absorber (boiler, etc.) fractions
-	* - :doc:`modules/Layoutarea`
-	  - Layout Area Calculation
-	* - :doc:`modules/Sco2DesignPoint`
-	  - Returns optimized sco2 cycle parameters given inputs
-	* - :doc:`modules/Sco2DesignCycle`
-	  - Calls sCO2 auto-design cycle function
-	* - :doc:`modules/Sco2CspSystem`
-	  - ...
-	* - :doc:`modules/Sco2CspUdPcTables`
-	  - ...
-	* - :doc:`modules/Sco2AirCooler`
-	  - Returns air cooler dimensions given fluid and location design points
-	* - :doc:`modules/UserHtfComparison`
-	  - Evaluates equivalence of two user-defined HTF tables
-	* - :doc:`modules/UiTesCalcs`
-	  - Calculates values for all calculated values on UI TES page(s)
-	* - :doc:`modules/UiUdpcChecks`
-	  - Calculates the levels and number of paramteric runs for 3 udpc ind variables
-	* - :doc:`modules/CbMsptSystemCosts`
-	  - CSP molten salt power tower system costs
-	* - :doc:`modules/CbConstructionFinancing`
-	  - Construction financing cost calculations
-	* - :doc:`modules/CbEmpiricalHceHeatLoss`
-	  - Empirical HCE Heat Loss
-	* - :doc:`modules/IsccDesignPoint`
-	  - Calculates design point inject, extraction, fossil output
-	* - :doc:`modules/PvGetShadeLossMpp`
-	  - PV get shade loss fraction for strings
-	* - :doc:`modules/InvCecCg`
-	  - CEC Inverter Coefficient Generator
-	* - :doc:`modules/MhkCosts`
-	  - Calculates various cost categories for Marine Energy arrays for different device types.
+	* - :doc:`modules/WindFileReader`
+	  - SAM Wind Resource File Reader (SRW)
+	* - :doc:`modules/WindObos`
+	  - Wind Offshore Balance of System cost model

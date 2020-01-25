@@ -186,19 +186,19 @@ def test_functionality():
         # Test strings and tables with error cases
         import PySAM.Pvwattsv5 as Pvwattsv5
         a = Pvwattsv5.new()
-        a.LocationAndResource.solar_resource_file = "file"
-        assert(a.LocationAndResource.solar_resource_file == "file")
+        a.SolarResource.solar_resource_file = "file"
+        assert(a.SolarResource.solar_resource_file == "file")
         print("Passed test", 14)
         n_tests_passed += 1
 
-        assert(a.LocationAndResource.export()['solar_resource_file'] == 'file')
+        assert(a.SolarResource.export()['solar_resource_file'] == 'file')
         print("Passed test", 15)
         n_tests_passed += 1
 
         c = Pvwattsv5.new()
         datDict = {'num': 1, 'arr': (1, 2),  'str': 'str', 'mat': ((1, 2), (3, 4)), 'table': {'yo': 0}}
-        c.LocationAndResource.solar_resource_data = datDict
-        DataDict = c.LocationAndResource.solar_resource_data
+        c.SolarResource.solar_resource_data = datDict
+        DataDict = c.SolarResource.solar_resource_data
         assert(DataDict['num'] == 1 and DataDict['arr'] == (1, 2))
         assert(DataDict['mat'] == ((1.0, 2.0), (3.0, 4.0)))
         assert(DataDict['str'] == 'str')
@@ -208,7 +208,7 @@ def test_functionality():
 
         try:
             c = Pvwattsv5.new()
-            c.LocationAndResource.solar_resource_file = 100
+            c.SolarResource.solar_resource_file = 100
             print("FAIL 5: exception is expected")
         except:
             print("Error caught", 5)
@@ -216,7 +216,7 @@ def test_functionality():
 
         try:
             c = Pvwattsv5.new()
-            c.LocationAndResource.solar_resource_data = {'num': 1, 'arr': (1, "2"), 'mat': ((1, 2), (3, 4)), 'str': 'str', 'table': {'yo': 0}}
+            c.SolarResource.solar_resource_data = {'num': 1, 'arr': (1, "2"), 'mat': ((1, 2), (3, 4)), 'str': 'str', 'table': {'yo': 0}}
             print("FAIL 6: exception is expected")
         except:
             print("Error caught", 6)
@@ -224,14 +224,14 @@ def test_functionality():
 
         try:
             c = Pvwattsv5.new()
-            c.LocationAndResource.solar_resource_data = {'num': 1, 'arr': (1, 2), 'mat': (("1", 2), (3, 4)), 'str': 'str', 'table': {'yo': 0}}
+            c.SolarResource.solar_resource_data = {'num': 1, 'arr': (1, 2), 'mat': (("1", 2), (3, 4)), 'str': 'str', 'table': {'yo': 0}}
             print("FAIL 7: exception is expected")
         except:
             print("Error caught", 7)
             n_tests_passed += 1
 
-        a.LocationAndResource.solar_resource_data = {'num': 1, 'arr': (1, 2), 'mat': ((1, 2), (3, 4)), 'str': 'str', 'table': {}}
-        assert(a.LocationAndResource.solar_resource_data['table'] == {})
+        a.SolarResource.solar_resource_data = {'num': 1, 'arr': (1, 2), 'mat': ((1, 2), (3, 4)), 'str': 'str', 'table': {}}
+        assert(a.SolarResource.solar_resource_data['table'] == {})
         print("Passed test", 17)
         n_tests_passed += 1
 
@@ -240,12 +240,12 @@ def test_functionality():
         # Test conversion between technology attributes and nested dictionary
 
         genDict = a.export()
-        assert(genDict['LocationAndResource']['solar_resource_data']['str'] == 'str' )
+        assert(genDict['SolarResource']['solar_resource_data']['str'] == 'str' )
         print("Passed test", 18)
         n_tests_passed += 1
 
         a = Pvwattsv5.new()
-        assert(a.export()['LocationAndResource'] == {})
+        assert(a.export()['SolarResource'] == {})
         a.assign(genDict)
         assert(a.export() == genDict)
         print("Passed test", 19)
@@ -323,7 +323,7 @@ def test_import_all():
         if mod == 'Cashloan':
             mod = 'Cashloan'
         config = names[1]
-    try_import(mod, config)
+        try_import(mod, config)
 
 
 def test_run_all():
