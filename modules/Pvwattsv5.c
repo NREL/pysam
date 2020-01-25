@@ -155,34 +155,34 @@ static PyTypeObject Lifetime_Type = {
 
 
 /*
- * LocationAndResource Group
+ * SolarResource Group
  */ 
 
-static PyTypeObject LocationAndResource_Type;
+static PyTypeObject SolarResource_Type;
 
 static PyObject *
-LocationAndResource_new(SAM_Pvwattsv5 data_ptr)
+SolarResource_new(SAM_Pvwattsv5 data_ptr)
 {
-	PyObject* new_obj = LocationAndResource_Type.tp_alloc(&LocationAndResource_Type,0);
+	PyObject* new_obj = SolarResource_Type.tp_alloc(&SolarResource_Type,0);
 
-	VarGroupObject* LocationAndResource_obj = (VarGroupObject*)new_obj;
+	VarGroupObject* SolarResource_obj = (VarGroupObject*)new_obj;
 
-	LocationAndResource_obj->data_ptr = (SAM_table)data_ptr;
+	SolarResource_obj->data_ptr = (SAM_table)data_ptr;
 
 	return new_obj;
 }
 
-/* LocationAndResource methods */
+/* SolarResource methods */
 
 static PyObject *
-LocationAndResource_assign(VarGroupObject *self, PyObject *args)
+SolarResource_assign(VarGroupObject *self, PyObject *args)
 {
 	PyObject* dict;
 	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Pvwattsv5", "LocationAndResource")){
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Pvwattsv5", "SolarResource")){
 		return NULL;
 	}
 
@@ -191,60 +191,60 @@ LocationAndResource_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
-LocationAndResource_export(VarGroupObject *self, PyObject *args)
+SolarResource_export(VarGroupObject *self, PyObject *args)
 {
-	PyTypeObject* tp = &LocationAndResource_Type;
+	PyTypeObject* tp = &SolarResource_Type;
 	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
 	return dict;
 }
 
-static PyMethodDef LocationAndResource_methods[] = {
-		{"assign",            (PyCFunction)LocationAndResource_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``LocationAndResource_vals = { var: val, ...}``")},
-		{"export",            (PyCFunction)LocationAndResource_export,  METH_VARARGS,
+static PyMethodDef SolarResource_methods[] = {
+		{"assign",            (PyCFunction)SolarResource_assign,  METH_VARARGS,
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``SolarResource_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)SolarResource_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 static PyObject *
-LocationAndResource_get_solar_resource_data(VarGroupObject *self, void *closure)
+SolarResource_get_solar_resource_data(VarGroupObject *self, void *closure)
 {
-	return PySAM_table_getter(SAM_Pvwattsv5_LocationAndResource_solar_resource_data_tget, self->data_ptr);
+	return PySAM_table_getter(SAM_Pvwattsv5_SolarResource_solar_resource_data_tget, self->data_ptr);
 }
 
 static int
-LocationAndResource_set_solar_resource_data(VarGroupObject *self, PyObject *value, void *closure)
+SolarResource_set_solar_resource_data(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_table_setter(value, SAM_Pvwattsv5_LocationAndResource_solar_resource_data_tset, self->data_ptr);
+	return PySAM_table_setter(value, SAM_Pvwattsv5_SolarResource_solar_resource_data_tset, self->data_ptr);
 }
 
 static PyObject *
-LocationAndResource_get_solar_resource_file(VarGroupObject *self, void *closure)
+SolarResource_get_solar_resource_file(VarGroupObject *self, void *closure)
 {
-	return PySAM_string_getter(SAM_Pvwattsv5_LocationAndResource_solar_resource_file_sget, self->data_ptr);
+	return PySAM_string_getter(SAM_Pvwattsv5_SolarResource_solar_resource_file_sget, self->data_ptr);
 }
 
 static int
-LocationAndResource_set_solar_resource_file(VarGroupObject *self, PyObject *value, void *closure)
+SolarResource_set_solar_resource_file(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_string_setter(value, SAM_Pvwattsv5_LocationAndResource_solar_resource_file_sset, self->data_ptr);
+	return PySAM_string_setter(value, SAM_Pvwattsv5_SolarResource_solar_resource_file_sset, self->data_ptr);
 }
 
-static PyGetSetDef LocationAndResource_getset[] = {
-{"solar_resource_data", (getter)LocationAndResource_get_solar_resource_data,(setter)LocationAndResource_set_solar_resource_data,
+static PyGetSetDef SolarResource_getset[] = {
+{"solar_resource_data", (getter)SolarResource_get_solar_resource_data,(setter)SolarResource_set_solar_resource_data,
 	PyDoc_STR("*dict*: Weather data\n\n*Info*: dn,df,tdry,wspd,lat,lon,tz\n\n*Required*: False"),
  	NULL},
-{"solar_resource_file", (getter)LocationAndResource_get_solar_resource_file,(setter)LocationAndResource_set_solar_resource_file,
+{"solar_resource_file", (getter)SolarResource_get_solar_resource_file,(setter)SolarResource_set_solar_resource_file,
 	PyDoc_STR("*str*: Weather file path\n\n*Required*: False"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
 
-static PyTypeObject LocationAndResource_Type = {
+static PyTypeObject SolarResource_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"Pvwattsv5.LocationAndResource",             /*tp_name*/
+		"Pvwattsv5.SolarResource",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -271,9 +271,9 @@ static PyTypeObject LocationAndResource_Type = {
 		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
-		LocationAndResource_methods,         /*tp_methods*/
+		SolarResource_methods,         /*tp_methods*/
 		0,                          /*tp_members*/
-		LocationAndResource_getset,          /*tp_getset*/
+		SolarResource_getset,          /*tp_getset*/
 		0,                          /*tp_base*/
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
@@ -1026,9 +1026,9 @@ newPvwattsv5Object(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "Lifetime", Lifetime_obj);
 	Py_DECREF(Lifetime_obj);
 
-	PyObject* LocationAndResource_obj = LocationAndResource_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "LocationAndResource", LocationAndResource_obj);
-	Py_DECREF(LocationAndResource_obj);
+	PyObject* SolarResource_obj = SolarResource_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "SolarResource", SolarResource_obj);
+	Py_DECREF(SolarResource_obj);
 
 	PyObject* SystemDesign_obj = SystemDesign_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "SystemDesign", SystemDesign_obj);
@@ -1330,12 +1330,12 @@ Pvwattsv5Module_exec(PyObject *m)
 				(PyObject*)&Lifetime_Type);
 	Py_DECREF(&Lifetime_Type);
 
-	/// Add the LocationAndResource type object to Pvwattsv5_Type
-	if (PyType_Ready(&LocationAndResource_Type) < 0) { goto fail; }
+	/// Add the SolarResource type object to Pvwattsv5_Type
+	if (PyType_Ready(&SolarResource_Type) < 0) { goto fail; }
 	PyDict_SetItemString(Pvwattsv5_Type.tp_dict,
-				"LocationAndResource",
-				(PyObject*)&LocationAndResource_Type);
-	Py_DECREF(&LocationAndResource_Type);
+				"SolarResource",
+				(PyObject*)&SolarResource_Type);
+	Py_DECREF(&SolarResource_Type);
 
 	/// Add the SystemDesign type object to Pvwattsv5_Type
 	if (PyType_Ready(&SystemDesign_Type) < 0) { goto fail; }

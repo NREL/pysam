@@ -5441,34 +5441,34 @@ static PyTypeObject CapacityPayments_Type = {
 
 
 /*
- * Grid Group
+ * GridLimits Group
  */ 
 
-static PyTypeObject Grid_Type;
+static PyTypeObject GridLimits_Type;
 
 static PyObject *
-Grid_new(SAM_Singleowner data_ptr)
+GridLimits_new(SAM_Singleowner data_ptr)
 {
-	PyObject* new_obj = Grid_Type.tp_alloc(&Grid_Type,0);
+	PyObject* new_obj = GridLimits_Type.tp_alloc(&GridLimits_Type,0);
 
-	VarGroupObject* Grid_obj = (VarGroupObject*)new_obj;
+	VarGroupObject* GridLimits_obj = (VarGroupObject*)new_obj;
 
-	Grid_obj->data_ptr = (SAM_table)data_ptr;
+	GridLimits_obj->data_ptr = (SAM_table)data_ptr;
 
 	return new_obj;
 }
 
-/* Grid methods */
+/* GridLimits methods */
 
 static PyObject *
-Grid_assign(VarGroupObject *self, PyObject *args)
+GridLimits_assign(VarGroupObject *self, PyObject *args)
 {
 	PyObject* dict;
 	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Singleowner", "Grid")){
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Singleowner", "GridLimits")){
 		return NULL;
 	}
 
@@ -5477,60 +5477,60 @@ Grid_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
-Grid_export(VarGroupObject *self, PyObject *args)
+GridLimits_export(VarGroupObject *self, PyObject *args)
 {
-	PyTypeObject* tp = &Grid_Type;
+	PyTypeObject* tp = &GridLimits_Type;
 	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
 	return dict;
 }
 
-static PyMethodDef Grid_methods[] = {
-		{"assign",            (PyCFunction)Grid_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Grid_vals = { var: val, ...}``")},
-		{"export",            (PyCFunction)Grid_export,  METH_VARARGS,
+static PyMethodDef GridLimits_methods[] = {
+		{"assign",            (PyCFunction)GridLimits_assign,  METH_VARARGS,
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``GridLimits_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)GridLimits_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 static PyObject *
-Grid_get_grid_curtailment_price(VarGroupObject *self, void *closure)
+GridLimits_get_grid_curtailment_price(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Singleowner_Grid_grid_curtailment_price_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Singleowner_GridLimits_grid_curtailment_price_aget, self->data_ptr);
 }
 
 static int
-Grid_set_grid_curtailment_price(VarGroupObject *self, PyObject *value, void *closure)
+GridLimits_set_grid_curtailment_price(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_Singleowner_Grid_grid_curtailment_price_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Singleowner_GridLimits_grid_curtailment_price_aset, self->data_ptr);
 }
 
 static PyObject *
-Grid_get_grid_curtailment_price_esc(VarGroupObject *self, void *closure)
+GridLimits_get_grid_curtailment_price_esc(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Singleowner_Grid_grid_curtailment_price_esc_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Singleowner_GridLimits_grid_curtailment_price_esc_nget, self->data_ptr);
 }
 
 static int
-Grid_set_grid_curtailment_price_esc(VarGroupObject *self, PyObject *value, void *closure)
+GridLimits_set_grid_curtailment_price_esc(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Singleowner_Grid_grid_curtailment_price_esc_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Singleowner_GridLimits_grid_curtailment_price_esc_nset, self->data_ptr);
 }
 
-static PyGetSetDef Grid_getset[] = {
-{"grid_curtailment_price", (getter)Grid_get_grid_curtailment_price,(setter)Grid_set_grid_curtailment_price,
+static PyGetSetDef GridLimits_getset[] = {
+{"grid_curtailment_price", (getter)GridLimits_get_grid_curtailment_price,(setter)GridLimits_set_grid_curtailment_price,
 	PyDoc_STR("*sequence*: Curtailment price [$/kWh]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
-{"grid_curtailment_price_esc", (getter)Grid_get_grid_curtailment_price_esc,(setter)Grid_set_grid_curtailment_price_esc,
+{"grid_curtailment_price_esc", (getter)GridLimits_get_grid_curtailment_price_esc,(setter)GridLimits_set_grid_curtailment_price_esc,
 	PyDoc_STR("*float*: Curtailment price escalation [%]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
 
-static PyTypeObject Grid_Type = {
+static PyTypeObject GridLimits_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"Singleowner.Grid",             /*tp_name*/
+		"Singleowner.GridLimits",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -5557,9 +5557,9 @@ static PyTypeObject Grid_Type = {
 		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
-		Grid_methods,         /*tp_methods*/
+		GridLimits_methods,         /*tp_methods*/
 		0,                          /*tp_members*/
-		Grid_getset,          /*tp_getset*/
+		GridLimits_getset,          /*tp_getset*/
 		0,                          /*tp_base*/
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
@@ -10709,9 +10709,9 @@ newSingleownerObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "CapacityPayments", CapacityPayments_obj);
 	Py_DECREF(CapacityPayments_obj);
 
-	PyObject* Grid_obj = Grid_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "Grid", Grid_obj);
-	Py_DECREF(Grid_obj);
+	PyObject* GridLimits_obj = GridLimits_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "GridLimits", GridLimits_obj);
+	Py_DECREF(GridLimits_obj);
 
 	PyObject* Outputs_obj = Outputs_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
@@ -11059,12 +11059,12 @@ SingleownerModule_exec(PyObject *m)
 				(PyObject*)&CapacityPayments_Type);
 	Py_DECREF(&CapacityPayments_Type);
 
-	/// Add the Grid type object to Singleowner_Type
-	if (PyType_Ready(&Grid_Type) < 0) { goto fail; }
+	/// Add the GridLimits type object to Singleowner_Type
+	if (PyType_Ready(&GridLimits_Type) < 0) { goto fail; }
 	PyDict_SetItemString(Singleowner_Type.tp_dict,
-				"Grid",
-				(PyObject*)&Grid_Type);
-	Py_DECREF(&Grid_Type);
+				"GridLimits",
+				(PyObject*)&GridLimits_Type);
+	Py_DECREF(&GridLimits_Type);
 
 	/// Add the Outputs type object to Singleowner_Type
 	if (PyType_Ready(&Outputs_Type) < 0) { goto fail; }

@@ -388,6 +388,9 @@ class Sco2CspSystem(object):
 	def assign(self, dict):
 		pass
 
+	def value(self, name, value=None):
+		pass
+
 	def execute(self, int_verbosity):
 		pass
 
@@ -416,6 +419,9 @@ def new() -> Sco2CspSystem
 	pass
 
 def wrap(ssc_data_t) -> Sco2CspSystem
+	pass
+
+def from_existing(model, config="") -> Sco2CspSystem
 	pass
 
 __loader__ = None 

@@ -115,7 +115,7 @@ def size_li_ion_battery(input_dict):
 
     max_rate_discharge = desired_power / desired_capacity
     max_rate_charge = max_rate_discharge
-    num_series = int(desired_voltage / batt_Vnom_default)
+    num_series = math.ceil(desired_voltage / batt_Vnom_default)
     num_strings = round(desired_capacity * 1000 / (batt_Qfull * batt_Vnom_default * num_series))
 
     computed_voltage = batt_Vnom_default * num_series

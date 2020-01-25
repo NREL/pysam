@@ -624,6 +624,9 @@ class Utilityrate2(object):
 	def assign(self, dict):
 		pass
 
+	def value(self, name, value=None):
+		pass
+
 	def execute(self, int_verbosity):
 		pass
 
@@ -648,6 +651,9 @@ def new() -> Utilityrate2
 	pass
 
 def wrap(ssc_data_t) -> Utilityrate2
+	pass
+
+def from_existing(model, config="") -> Utilityrate2
 	pass
 
 __loader__ = None 

@@ -25,6 +25,7 @@ class Grid(object):
 
 
 	enable_interconnection_limit = float
+	grid_curtailment = tuple
 	grid_interconnection_limit_kwac = float
 
 
@@ -39,6 +40,7 @@ class SystemOutput(object):
 		pass
 
 
+	annual_energy = float
 	gen = tuple
 
 
@@ -54,34 +56,6 @@ class Load(object):
 
 
 	load = tuple
-
-
-class Common(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> Dict[Dict]
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	annual_energy = float
-
-
-class LossAdjustments(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> Dict[Dict]
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	grid_curtailment = tuple
 
 
 class Outputs(object):
@@ -128,8 +102,6 @@ class GridModel(object):
 	Grid = Grid
 	SystemOutput = SystemOutput
 	Load = Load
-	Common = Common
-	LossAdjustments = LossAdjustments
 	Outputs = Outputs
 
 

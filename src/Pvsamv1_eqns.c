@@ -9,7 +9,8 @@ const char* const Reopt_size_battery_post_doc =
         "Maps SAM compute module inputs to those of the ReOpt Lite API:\n"
         "Pvsamv1 model linked with StandAloneBattery, Utilityrate5, with Cashloan optional.\n\n"
         "For more information on which PySAM variables are used, see: https://github.com/NREL/ssc/blob/develop/ssc/cmod_pvsamv1_eqns.h\n\n"
-        "";
+        "For an example, see the 'Examples' readthedocs page.";
+
 
 
 static PyObject* Reopt_size_battery_post(PyObject *self, PyObject *args, PyObject *keywds)

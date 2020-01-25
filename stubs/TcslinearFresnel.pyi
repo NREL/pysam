@@ -307,6 +307,9 @@ class TcslinearFresnel(object):
 	def assign(self, dict):
 		pass
 
+	def value(self, name, value=None):
+		pass
+
 	def execute(self, int_verbosity):
 		pass
 
@@ -336,6 +339,9 @@ def new() -> TcslinearFresnel
 	pass
 
 def wrap(ssc_data_t) -> TcslinearFresnel
+	pass
+
+def from_existing(model, config="") -> TcslinearFresnel
 	pass
 
 __loader__ = None 

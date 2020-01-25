@@ -68,6 +68,9 @@ class Pvwattsv51ts(object):
 	def assign(self, dict):
 		pass
 
+	def value(self, name, value=None):
+		pass
+
 	def execute(self, int_verbosity):
 		pass
 
@@ -92,6 +95,9 @@ def new() -> Pvwattsv51ts
 	pass
 
 def wrap(ssc_data_t) -> Pvwattsv51ts
+	pass
+
+def from_existing(model, config="") -> Pvwattsv51ts
 	pass
 
 __loader__ = None 

@@ -47,6 +47,9 @@ class WindFileReader(object):
 	def assign(self, dict):
 		pass
 
+	def value(self, name, value=None):
+		pass
+
 	def execute(self, int_verbosity):
 		pass
 
@@ -70,6 +73,9 @@ def new() -> WindFileReader
 	pass
 
 def wrap(ssc_data_t) -> WindFileReader
+	pass
+
+def from_existing(model, config="") -> WindFileReader
 	pass
 
 __loader__ = None 

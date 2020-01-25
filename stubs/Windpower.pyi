@@ -168,6 +168,9 @@ class Windpower(object):
 	def assign(self, dict):
 		pass
 
+	def value(self, name, value=None):
+		pass
+
 	def execute(self, int_verbosity):
 		pass
 
@@ -196,6 +199,9 @@ def new() -> Windpower
 	pass
 
 def wrap(ssc_data_t) -> Windpower
+	pass
+
+def from_existing(model, config="") -> Windpower
 	pass
 
 __loader__ = None 

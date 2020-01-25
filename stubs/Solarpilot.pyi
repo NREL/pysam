@@ -94,6 +94,9 @@ class Solarpilot(object):
 	def assign(self, dict):
 		pass
 
+	def value(self, name, value=None):
+		pass
+
 	def execute(self, int_verbosity):
 		pass
 
@@ -117,6 +120,9 @@ def new() -> Solarpilot
 	pass
 
 def wrap(ssc_data_t) -> Solarpilot
+	pass
+
+def from_existing(model, config="") -> Solarpilot
 	pass
 
 __loader__ = None 

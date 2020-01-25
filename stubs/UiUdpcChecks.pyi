@@ -41,6 +41,9 @@ class UiUdpcChecks(object):
 	def assign(self, dict):
 		pass
 
+	def value(self, name, value=None):
+		pass
+
 	def execute(self, int_verbosity):
 		pass
 
@@ -64,6 +67,9 @@ def new() -> UiUdpcChecks
 	pass
 
 def wrap(ssc_data_t) -> UiUdpcChecks
+	pass
+
+def from_existing(model, config="") -> UiUdpcChecks
 	pass
 
 __loader__ = None 

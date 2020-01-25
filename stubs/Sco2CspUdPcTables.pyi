@@ -300,6 +300,9 @@ class Sco2CspUdPcTables(object):
 	def assign(self, dict):
 		pass
 
+	def value(self, name, value=None):
+		pass
+
 	def execute(self, int_verbosity):
 		pass
 
@@ -328,6 +331,9 @@ def new() -> Sco2CspUdPcTables
 	pass
 
 def wrap(ssc_data_t) -> Sco2CspUdPcTables
+	pass
+
+def from_existing(model, config="") -> Sco2CspUdPcTables
 	pass
 
 __loader__ = None 

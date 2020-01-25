@@ -77,6 +77,9 @@ class Windbos(object):
 	def assign(self, dict):
 		pass
 
+	def value(self, name, value=None):
+		pass
+
 	def execute(self, int_verbosity):
 		pass
 
@@ -100,6 +103,9 @@ def new() -> Windbos
 	pass
 
 def wrap(ssc_data_t) -> Windbos
+	pass
+
+def from_existing(model, config="") -> Windbos
 	pass
 
 __loader__ = None 

@@ -33,6 +33,9 @@ class UserHtfComparison(object):
 	def assign(self, dict):
 		pass
 
+	def value(self, name, value=None):
+		pass
+
 	def execute(self, int_verbosity):
 		pass
 
@@ -56,6 +59,9 @@ def new() -> UserHtfComparison
 	pass
 
 def wrap(ssc_data_t) -> UserHtfComparison
+	pass
+
+def from_existing(model, config="") -> UserHtfComparison
 	pass
 
 __loader__ = None 

@@ -38,6 +38,9 @@ class Singlediode(object):
 	def assign(self, dict):
 		pass
 
+	def value(self, name, value=None):
+		pass
+
 	def execute(self, int_verbosity):
 		pass
 
@@ -61,6 +64,9 @@ def new() -> Singlediode
 	pass
 
 def wrap(ssc_data_t) -> Singlediode
+	pass
+
+def from_existing(model, config="") -> Singlediode
 	pass
 
 __loader__ = None 

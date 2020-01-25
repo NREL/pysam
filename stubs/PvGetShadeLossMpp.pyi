@@ -41,6 +41,9 @@ class PvGetShadeLossMpp(object):
 	def assign(self, dict):
 		pass
 
+	def value(self, name, value=None):
+		pass
+
 	def execute(self, int_verbosity):
 		pass
 
@@ -64,6 +67,9 @@ def new() -> PvGetShadeLossMpp
 	pass
 
 def wrap(ssc_data_t) -> PvGetShadeLossMpp
+	pass
+
+def from_existing(model, config="") -> PvGetShadeLossMpp
 	pass
 
 __loader__ = None 

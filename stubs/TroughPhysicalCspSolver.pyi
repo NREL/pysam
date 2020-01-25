@@ -401,6 +401,9 @@ class TroughPhysicalCspSolver(object):
 	def assign(self, dict):
 		pass
 
+	def value(self, name, value=None):
+		pass
+
 	def execute(self, int_verbosity):
 		pass
 
@@ -433,6 +436,9 @@ def new() -> TroughPhysicalCspSolver
 	pass
 
 def wrap(ssc_data_t) -> TroughPhysicalCspSolver
+	pass
+
+def from_existing(model, config="") -> TroughPhysicalCspSolver
 	pass
 
 __loader__ = None 

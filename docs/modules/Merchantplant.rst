@@ -99,10 +99,10 @@ CapacityPayments Group
 .. autoclass:: PySAM.Merchantplant.Merchantplant.CapacityPayments
 	:members:
 
-Grid Group
+GridLimits Group
 ==============
 
-.. autoclass:: PySAM.Merchantplant.Merchantplant.Grid
+.. autoclass:: PySAM.Merchantplant.Merchantplant.GridLimits
 	:members:
 
 Outputs Group

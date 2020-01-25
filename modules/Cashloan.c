@@ -143,6 +143,30 @@ FinancialParameters_set_loan_term(VarGroupObject *self, PyObject *value, void *c
 }
 
 static PyObject *
+FinancialParameters_get_market(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Cashloan_FinancialParameters_market_nget, self->data_ptr);
+}
+
+static int
+FinancialParameters_set_market(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Cashloan_FinancialParameters_market_nset, self->data_ptr);
+}
+
+static PyObject *
+FinancialParameters_get_mortgage(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Cashloan_FinancialParameters_mortgage_nget, self->data_ptr);
+}
+
+static int
+FinancialParameters_set_mortgage(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Cashloan_FinancialParameters_mortgage_nset, self->data_ptr);
+}
+
+static PyObject *
 FinancialParameters_get_prop_tax_assessed_decline(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Cashloan_FinancialParameters_prop_tax_assessed_decline_nget, self->data_ptr);
@@ -260,6 +284,12 @@ static PyGetSetDef FinancialParameters_getset[] = {
 {"loan_term", (getter)FinancialParameters_get_loan_term,(setter)FinancialParameters_set_loan_term,
 	PyDoc_STR("*float*: Loan term [years]\n\n*Constraints*: INTEGER,MIN=0,MAX=50\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
+{"market", (getter)FinancialParameters_get_market,(setter)FinancialParameters_set_market,
+	PyDoc_STR("*float*: Residential or Commercial Market [0/1]\n\n*Options*: 0=residential,1=comm.\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: If not provided, assumed to be 1"),
+ 	NULL},
+{"mortgage", (getter)FinancialParameters_get_mortgage,(setter)FinancialParameters_set_mortgage,
+	PyDoc_STR("*float*: Use mortgage style loan (res. only) [0/1]\n\n*Options*: 0=standard loan,1=mortgage\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
 {"prop_tax_assessed_decline", (getter)FinancialParameters_get_prop_tax_assessed_decline,(setter)FinancialParameters_set_prop_tax_assessed_decline,
 	PyDoc_STR("*float*: Assessed value annual decline [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 5"),
  	NULL},
@@ -291,7 +321,7 @@ static PyTypeObject FinancialParameters_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"CashloanModel.FinancialParameters",             /*tp_name*/
+		"Cashloan.FinancialParameters",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -859,7 +889,7 @@ static PyTypeObject SystemCosts_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"CashloanModel.SystemCosts",             /*tp_name*/
+		"Cashloan.SystemCosts",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -1052,7 +1082,7 @@ static PyTypeObject Depreciation_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"CashloanModel.Depreciation",             /*tp_name*/
+		"Cashloan.Depreciation",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -1455,7 +1485,7 @@ static PyTypeObject TaxCreditIncentives_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"CashloanModel.TaxCreditIncentives",             /*tp_name*/
+		"Cashloan.TaxCreditIncentives",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -2878,7 +2908,7 @@ static PyTypeObject PaymentIncentives_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"CashloanModel.PaymentIncentives",             /*tp_name*/
+		"Cashloan.PaymentIncentives",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -3071,7 +3101,7 @@ static PyTypeObject BatterySystem_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"CashloanModel.BatterySystem",             /*tp_name*/
+		"Cashloan.BatterySystem",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -3264,7 +3294,7 @@ static PyTypeObject FuelCell_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"CashloanModel.FuelCell",             /*tp_name*/
+		"Cashloan.FuelCell",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -3294,139 +3324,6 @@ static PyTypeObject FuelCell_Type = {
 		FuelCell_methods,         /*tp_methods*/
 		0,                          /*tp_members*/
 		FuelCell_getset,          /*tp_getset*/
-		0,                          /*tp_base*/
-		0,                          /*tp_dict*/
-		0,                          /*tp_descr_get*/
-		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictofnset*/
-		0,                          /*tp_init*/
-		0,                          /*tp_alloc*/
-		0,             /*tp_new*/
-		0,                          /*tp_free*/
-		0,                          /*tp_is_gc*/
-};
-
-
-/*
- * Cashloan Group
- */ 
-
-static PyTypeObject Cashloan_Type;
-
-static PyObject *
-Cashloan_new(SAM_Cashloan data_ptr)
-{
-	PyObject* new_obj = Cashloan_Type.tp_alloc(&Cashloan_Type,0);
-
-	VarGroupObject* Cashloan_obj = (VarGroupObject*)new_obj;
-
-	Cashloan_obj->data_ptr = (SAM_table)data_ptr;
-
-	return new_obj;
-}
-
-/* Cashloan methods */
-
-static PyObject *
-Cashloan_assign(VarGroupObject *self, PyObject *args)
-{
-	PyObject* dict;
-	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
-		return NULL;
-	}
-
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Cashloan", "Cashloan")){
-		return NULL;
-	}
-
-	Py_INCREF(Py_None);
-	return Py_None;
-}
-
-static PyObject *
-Cashloan_export(VarGroupObject *self, PyObject *args)
-{
-	PyTypeObject* tp = &Cashloan_Type;
-	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
-	return dict;
-}
-
-static PyMethodDef Cashloan_methods[] = {
-		{"assign",            (PyCFunction)Cashloan_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Cashloan_vals = { var: val, ...}``")},
-		{"export",            (PyCFunction)Cashloan_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
-		{NULL,              NULL}           /* sentinel */
-};
-
-static PyObject *
-Cashloan_get_market(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Cashloan_Cashloan_market_nget, self->data_ptr);
-}
-
-static int
-Cashloan_set_market(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Cashloan_Cashloan_market_nset, self->data_ptr);
-}
-
-static PyObject *
-Cashloan_get_mortgage(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Cashloan_Cashloan_mortgage_nget, self->data_ptr);
-}
-
-static int
-Cashloan_set_mortgage(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Cashloan_Cashloan_mortgage_nset, self->data_ptr);
-}
-
-static PyGetSetDef Cashloan_getset[] = {
-{"market", (getter)Cashloan_get_market,(setter)Cashloan_set_market,
-	PyDoc_STR("*float*: Residential or Commercial Market [0/1]\n\n*Options*: 0=residential,1=comm.\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: If not provided, assumed to be 1"),
- 	NULL},
-{"mortgage", (getter)Cashloan_get_mortgage,(setter)Cashloan_set_mortgage,
-	PyDoc_STR("*float*: Use mortgage style loan (res. only) [0/1]\n\n*Options*: 0=standard loan,1=mortgage\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: If not provided, assumed to be 0"),
- 	NULL},
-	{NULL}  /* Sentinel */
-};
-
-static PyTypeObject Cashloan_Type = {
-		/* The ob_type field must be initialized in the module init function
-		 * to be portable to Windows without using C++. */
-		PyVarObject_HEAD_INIT(NULL, 0)
-		"CashloanModel.Cashloan",             /*tp_name*/
-		sizeof(VarGroupObject),          /*tp_basicsize*/
-		0,                          /*tp_itemsize*/
-		/* methods */
-		0,    /*tp_dealloc*/
-		0,                          /*tp_print*/
-		(getattrfunc)0,             /*tp_getattr*/
-		0,                          /*tp_setattr*/
-		0,                          /*tp_reserved*/
-		0,                          /*tp_repr*/
-		0,                          /*tp_as_number*/
-		0,                          /*tp_as_sequence*/
-		0,                          /*tp_as_mapping*/
-		0,                          /*tp_hash*/
-		0,                          /*tp_call*/
-		0,                          /*tp_str*/
-		0,                          /*tp_getattro*/
-		0,                          /*tp_setattro*/
-		0,                          /*tp_as_buffer*/
-		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
-		0,                          /*tp_doc*/
-		0,                          /*tp_traverse*/
-		0,                          /*tp_clear*/
-		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistofnset*/
-		0,                          /*tp_iter*/
-		0,                          /*tp_iternext*/
-		Cashloan_methods,         /*tp_methods*/
-		0,                          /*tp_members*/
-		Cashloan_getset,          /*tp_getset*/
 		0,                          /*tp_base*/
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
@@ -3560,7 +3457,7 @@ static PyTypeObject SystemOutput_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"CashloanModel.SystemOutput",             /*tp_name*/
+		"Cashloan.SystemOutput",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -3678,7 +3575,7 @@ static PyTypeObject Lifetime_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"CashloanModel.Lifetime",             /*tp_name*/
+		"Cashloan.Lifetime",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -3811,7 +3708,7 @@ static PyTypeObject ThirdPartyOwnership_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"CashloanModel.ThirdPartyOwnership",             /*tp_name*/
+		"Cashloan.ThirdPartyOwnership",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -4877,7 +4774,7 @@ static PyTypeObject Outputs_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"CashloanModel.Outputs",             /*tp_name*/
+		"Cashloan.Outputs",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -4920,18 +4817,18 @@ static PyTypeObject Outputs_Type = {
 };
 
 /*
- * CashloanModel
+ * Cashloan
  */
 
-static PyTypeObject CashloanModel_Type;
+static PyTypeObject Cashloan_Type;
 
 static CmodObject *
-newCashloanModelObject(void* data_ptr)
+newCashloanObject(void* data_ptr)
 {
 	CmodObject *self;
-	self = PyObject_New(CmodObject, &CashloanModel_Type);
+	self = PyObject_New(CmodObject, &Cashloan_Type);
 
-	PySAM_TECH_ATTR("CashloanModel", SAM_Cashloan_construct)
+	PySAM_TECH_ATTR("Cashloan", SAM_Cashloan_construct)
 
 	PyObject* FinancialParameters_obj = FinancialParameters_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "FinancialParameters", FinancialParameters_obj);
@@ -4961,10 +4858,6 @@ newCashloanModelObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "FuelCell", FuelCell_obj);
 	Py_DECREF(FuelCell_obj);
 
-	PyObject* Cashloan_obj = Cashloan_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "Cashloan", Cashloan_obj);
-	Py_DECREF(Cashloan_obj);
-
 	PyObject* SystemOutput_obj = SystemOutput_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "SystemOutput", SystemOutput_obj);
 	Py_DECREF(SystemOutput_obj);
@@ -4985,10 +4878,10 @@ newCashloanModelObject(void* data_ptr)
 	return self;
 }
 
-/* CashloanModel methods */
+/* Cashloan methods */
 
 static void
-CashloanModel_dealloc(CmodObject *self)
+Cashloan_dealloc(CmodObject *self)
 {
 	Py_XDECREF(self->x_attr);
 	if (!self->data_owner_ptr)
@@ -4998,7 +4891,7 @@ CashloanModel_dealloc(CmodObject *self)
 
 
 static PyObject *
-CashloanModel_execute(CmodObject *self, PyObject *args)
+Cashloan_execute(CmodObject *self, PyObject *args)
 {
 	int verbosity = 0;
 
@@ -5015,7 +4908,7 @@ CashloanModel_execute(CmodObject *self, PyObject *args)
 
 
 static PyObject *
-CashloanModel_assign(CmodObject *self, PyObject *args)
+Cashloan_assign(CmodObject *self, PyObject *args)
 {
 	PyObject* dict;
 	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
@@ -5031,53 +4924,53 @@ CashloanModel_assign(CmodObject *self, PyObject *args)
 
 
 static PyObject *
-CashloanModel_export(CmodObject *self, PyObject *args)
+Cashloan_export(CmodObject *self, PyObject *args)
 {
 	return PySAM_export_to_nested_dict((PyObject *) self, self->x_attr);
 }
 
 static PyObject *
-CashloanModel_value(CmodObject *self, PyObject *args)
+Cashloan_value(CmodObject *self, PyObject *args)
 {
 	return CmodObject_value(self, args);
 }
 
-static PyMethodDef CashloanModel_methods[] = {
-		{"execute",            (PyCFunction)CashloanModel_execute,  METH_VARARGS,
+static PyMethodDef Cashloan_methods[] = {
+		{"execute",            (PyCFunction)Cashloan_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
-		{"assign",            (PyCFunction)CashloanModel_assign,  METH_VARARGS,
+		{"assign",            (PyCFunction)Cashloan_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Financial Parameters': { var: val, ...}, ...}``")},
-		{"export",            (PyCFunction)CashloanModel_export,  METH_VARARGS,
+		{"export",            (PyCFunction)Cashloan_export,  METH_VARARGS,
 				PyDoc_STR("export() -> dict\n Export attributes into nested dictionary")},
-		{"value",             (PyCFunction)CashloanModel_value, METH_VARARGS,
+		{"value",             (PyCFunction)Cashloan_value, METH_VARARGS,
 				PyDoc_STR("value(name, optional value) -> Union[None, float, dict, sequence, str]\n Get or set by name a value in any of the variable groups.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 static PyObject *
-CashloanModel_getattro(CmodObject *self, PyObject *name)
+Cashloan_getattro(CmodObject *self, PyObject *name)
 {
 	return PySAM_get_attr((PyObject*) self, (PyObject*) self->x_attr, name);
 }
 
 static int
-CashloanModel_setattr(CmodObject *self, const char *name, PyObject *v)
+Cashloan_setattr(CmodObject *self, const char *name, PyObject *v)
 {
 	return PySAM_set_attr((PyObject*)self, (PyObject*)self->x_attr, name, v);
 }
 
-static PyTypeObject CashloanModel_Type = {
+static PyTypeObject Cashloan_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"CashloanModel",            /*tp_name*/
+		"Cashloan",            /*tp_name*/
 		sizeof(CmodObject),/*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
-		(destructor)CashloanModel_dealloc,    /*tp_dealloc*/
+		(destructor)Cashloan_dealloc,    /*tp_dealloc*/
 		0,                          /*tp_print*/
 		(getattrfunc)0,             /*tp_getattr*/
-		(setattrfunc)CashloanModel_setattr,   /*tp_setattr*/
+		(setattrfunc)Cashloan_setattr,   /*tp_setattr*/
 		0,                          /*tp_reserved*/
 		0,                          /*tp_repr*/
 		0,                          /*tp_as_number*/
@@ -5086,7 +4979,7 @@ static PyTypeObject CashloanModel_Type = {
 		0,                          /*tp_hash*/
 		0,                          /*tp_call*/
 		0,                          /*tp_str*/
-		(getattrofunc)CashloanModel_getattro, /*tp_getattro*/
+		(getattrofunc)Cashloan_getattro, /*tp_getattro*/
 		0,                          /*tp_setattro*/
 		0,                          /*tp_as_buffer*/
 		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
@@ -5097,7 +4990,7 @@ static PyTypeObject CashloanModel_Type = {
 		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
-		CashloanModel_methods,      /*tp_methods*/
+		Cashloan_methods,      /*tp_methods*/
 		0,                          /*tp_members*/
 		0,       /*tp_getset*/
 		0,                          /*tp_base*/
@@ -5115,13 +5008,13 @@ static PyTypeObject CashloanModel_Type = {
 /* --------------------------------------------------------------------- */
 
 
-/* Function of no arguments returning new CashloanModel object */
+/* Function of no arguments returning new Cashloan object */
 
 static PyObject *
-CashloanModel_new(PyObject *self, PyObject *args)
+Cashloan_new(PyObject *self, PyObject *args)
 {
 	CmodObject *rv;
-	rv = newCashloanModelObject(0);
+	rv = newCashloanObject(0);
 	if (rv == NULL)
 		return NULL;
 
@@ -5130,7 +5023,7 @@ CashloanModel_new(PyObject *self, PyObject *args)
 }
 
 static PyObject *
-CashloanModel_wrap(PyObject *self, PyObject *args)
+Cashloan_wrap(PyObject *self, PyObject *args)
 {
 	CmodObject *rv;
 	long long int ptr = 0;  // 64 bit arch
@@ -5138,7 +5031,7 @@ CashloanModel_wrap(PyObject *self, PyObject *args)
 		PyErr_BadArgument();
 		return NULL;
 	}
-	rv = newCashloanModelObject((void*)ptr);
+	rv = newCashloanObject((void*)ptr);
 	if (rv == NULL)
 		return NULL;
 
@@ -5147,7 +5040,7 @@ CashloanModel_wrap(PyObject *self, PyObject *args)
 }
 
 static PyObject *
-CashloanModel_default(PyObject *self, PyObject *args)
+Cashloan_default(PyObject *self, PyObject *args)
 {
 	CmodObject *rv;
 	char* def = 0;
@@ -5155,7 +5048,7 @@ CashloanModel_default(PyObject *self, PyObject *args)
 		PyErr_BadArgument();
 		return NULL;
 	}
-	rv = newCashloanModelObject(0);
+	rv = newCashloanObject(0);
 	if (rv == NULL)
 		return NULL;
 
@@ -5166,7 +5059,7 @@ CashloanModel_default(PyObject *self, PyObject *args)
 }
 
 static PyObject *
-CashloanModel_from_existing(PyObject *self, PyObject *args)
+Cashloan_from_existing(PyObject *self, PyObject *args)
 {
 	CmodObject *rv;
 	PyObject * module = 0;
@@ -5186,7 +5079,7 @@ CashloanModel_from_existing(PyObject *self, PyObject *args)
 	if (data_size < 0)
 		goto fail;
 
-	rv = newCashloanModelObject((void*)ptr);
+	rv = newCashloanObject((void*)ptr);
 	if (rv == NULL)
 		goto fail;
 	rv->data_owner_ptr = module;
@@ -5203,25 +5096,25 @@ CashloanModel_from_existing(PyObject *self, PyObject *args)
 
 /* List of functions defined in the module */
 
-static PyMethodDef CashloanModelModule_methods[] = {
-		{"new",             CashloanModel_new,         METH_VARARGS,
-				PyDoc_STR("new() -> CashloanModel")},
-		{"default",             CashloanModel_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> CashloanModel\n\nUse financial config-specific default attributes\n"
+static PyMethodDef CashloanModule_methods[] = {
+		{"new",             Cashloan_new,         METH_VARARGS,
+				PyDoc_STR("new() -> Cashloan")},
+		{"default",             Cashloan_default,         METH_VARARGS,
+				PyDoc_STR("default(config) -> Cashloan\n\nUse financial config-specific default attributes\n"
 				"config options:\n\n- \"BiopowerCommercial\"\n- \"DSLFCommercial\"\n- \"DishStirlingCommercial\"\n- \"EmpiricalTroughCommercial\"\n- \"FlatPlatePVCommercial\"\n- \"FlatPlatePVResidential\"\n- \"FuelCellCommercial\"\n- \"GenericCSPSystemCommercial\"\n- \"GenericSystemCommercial\"\n- \"GenericSystemResidential\"\n- \"MSLFCommercial\"\n- \"PVWattsCommercial\"\n- \"PVWattsResidential\"\n- \"PhysicalTroughCommercial\"\n- \"SolarWaterHeatingCommercial\"\n- \"SolarWaterHeatingResidential\"\n- \"WindPowerCommercial\"\n- \"WindPowerResidential\"")},
-		{"wrap",             CashloanModel_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> CashloanModel\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
-		{"from_existing",   CashloanModel_from_existing,        METH_VARARGS,
-				PyDoc_STR("from_existing(data, optional config) -> CashloanModel\n\nShare underlying data with an existing PySAM class. If config provided, default attributes are loaded otherwise.")},
+		{"wrap",             Cashloan_wrap,         METH_VARARGS,
+				PyDoc_STR("wrap(ssc_data_t) -> Cashloan\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
+		{"from_existing",   Cashloan_from_existing,        METH_VARARGS,
+				PyDoc_STR("from_existing(data, optional config) -> Cashloan\n\nShare underlying data with an existing PySAM class. If config provided, default attributes are loaded otherwise.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 PyDoc_STRVAR(module_doc,
-			 "Financial model for residential and commercial behind-the-meter projects");
+			 "Cashloan");
 
 
 static int
-CashloanModelModule_exec(PyObject *m)
+CashloanModule_exec(PyObject *m)
 {
 	/* Finalize the type object including setting type of the new type
 	 * object; doing it here is required for portability, too. */
@@ -5229,98 +5122,91 @@ CashloanModelModule_exec(PyObject *m)
 	if (PySAM_load_lib(m) < 0) goto fail;
 	if (PySAM_init_error(m) < 0) goto fail;
 
-	CashloanModel_Type.tp_dict = PyDict_New();
-	if (!CashloanModel_Type.tp_dict) { goto fail; }
+	Cashloan_Type.tp_dict = PyDict_New();
+	if (!Cashloan_Type.tp_dict) { goto fail; }
 
-	/// Add the FinancialParameters type object to CashloanModel_Type
+	/// Add the FinancialParameters type object to Cashloan_Type
 	if (PyType_Ready(&FinancialParameters_Type) < 0) { goto fail; }
-	PyDict_SetItemString(CashloanModel_Type.tp_dict,
+	PyDict_SetItemString(Cashloan_Type.tp_dict,
 				"FinancialParameters",
 				(PyObject*)&FinancialParameters_Type);
 	Py_DECREF(&FinancialParameters_Type);
 
-	/// Add the SystemCosts type object to CashloanModel_Type
+	/// Add the SystemCosts type object to Cashloan_Type
 	if (PyType_Ready(&SystemCosts_Type) < 0) { goto fail; }
-	PyDict_SetItemString(CashloanModel_Type.tp_dict,
+	PyDict_SetItemString(Cashloan_Type.tp_dict,
 				"SystemCosts",
 				(PyObject*)&SystemCosts_Type);
 	Py_DECREF(&SystemCosts_Type);
 
-	/// Add the Depreciation type object to CashloanModel_Type
+	/// Add the Depreciation type object to Cashloan_Type
 	if (PyType_Ready(&Depreciation_Type) < 0) { goto fail; }
-	PyDict_SetItemString(CashloanModel_Type.tp_dict,
+	PyDict_SetItemString(Cashloan_Type.tp_dict,
 				"Depreciation",
 				(PyObject*)&Depreciation_Type);
 	Py_DECREF(&Depreciation_Type);
 
-	/// Add the TaxCreditIncentives type object to CashloanModel_Type
+	/// Add the TaxCreditIncentives type object to Cashloan_Type
 	if (PyType_Ready(&TaxCreditIncentives_Type) < 0) { goto fail; }
-	PyDict_SetItemString(CashloanModel_Type.tp_dict,
+	PyDict_SetItemString(Cashloan_Type.tp_dict,
 				"TaxCreditIncentives",
 				(PyObject*)&TaxCreditIncentives_Type);
 	Py_DECREF(&TaxCreditIncentives_Type);
 
-	/// Add the PaymentIncentives type object to CashloanModel_Type
+	/// Add the PaymentIncentives type object to Cashloan_Type
 	if (PyType_Ready(&PaymentIncentives_Type) < 0) { goto fail; }
-	PyDict_SetItemString(CashloanModel_Type.tp_dict,
+	PyDict_SetItemString(Cashloan_Type.tp_dict,
 				"PaymentIncentives",
 				(PyObject*)&PaymentIncentives_Type);
 	Py_DECREF(&PaymentIncentives_Type);
 
-	/// Add the BatterySystem type object to CashloanModel_Type
+	/// Add the BatterySystem type object to Cashloan_Type
 	if (PyType_Ready(&BatterySystem_Type) < 0) { goto fail; }
-	PyDict_SetItemString(CashloanModel_Type.tp_dict,
+	PyDict_SetItemString(Cashloan_Type.tp_dict,
 				"BatterySystem",
 				(PyObject*)&BatterySystem_Type);
 	Py_DECREF(&BatterySystem_Type);
 
-	/// Add the FuelCell type object to CashloanModel_Type
+	/// Add the FuelCell type object to Cashloan_Type
 	if (PyType_Ready(&FuelCell_Type) < 0) { goto fail; }
-	PyDict_SetItemString(CashloanModel_Type.tp_dict,
+	PyDict_SetItemString(Cashloan_Type.tp_dict,
 				"FuelCell",
 				(PyObject*)&FuelCell_Type);
 	Py_DECREF(&FuelCell_Type);
 
-	/// Add the Cashloan type object to CashloanModel_Type
-	if (PyType_Ready(&Cashloan_Type) < 0) { goto fail; }
-	PyDict_SetItemString(CashloanModel_Type.tp_dict,
-				"Cashloan",
-				(PyObject*)&Cashloan_Type);
-	Py_DECREF(&Cashloan_Type);
-
-	/// Add the SystemOutput type object to CashloanModel_Type
+	/// Add the SystemOutput type object to Cashloan_Type
 	if (PyType_Ready(&SystemOutput_Type) < 0) { goto fail; }
-	PyDict_SetItemString(CashloanModel_Type.tp_dict,
+	PyDict_SetItemString(Cashloan_Type.tp_dict,
 				"SystemOutput",
 				(PyObject*)&SystemOutput_Type);
 	Py_DECREF(&SystemOutput_Type);
 
-	/// Add the Lifetime type object to CashloanModel_Type
+	/// Add the Lifetime type object to Cashloan_Type
 	if (PyType_Ready(&Lifetime_Type) < 0) { goto fail; }
-	PyDict_SetItemString(CashloanModel_Type.tp_dict,
+	PyDict_SetItemString(Cashloan_Type.tp_dict,
 				"Lifetime",
 				(PyObject*)&Lifetime_Type);
 	Py_DECREF(&Lifetime_Type);
 
-	/// Add the ThirdPartyOwnership type object to CashloanModel_Type
+	/// Add the ThirdPartyOwnership type object to Cashloan_Type
 	if (PyType_Ready(&ThirdPartyOwnership_Type) < 0) { goto fail; }
-	PyDict_SetItemString(CashloanModel_Type.tp_dict,
+	PyDict_SetItemString(Cashloan_Type.tp_dict,
 				"ThirdPartyOwnership",
 				(PyObject*)&ThirdPartyOwnership_Type);
 	Py_DECREF(&ThirdPartyOwnership_Type);
 
-	/// Add the Outputs type object to CashloanModel_Type
+	/// Add the Outputs type object to Cashloan_Type
 	if (PyType_Ready(&Outputs_Type) < 0) { goto fail; }
-	PyDict_SetItemString(CashloanModel_Type.tp_dict,
+	PyDict_SetItemString(Cashloan_Type.tp_dict,
 				"Outputs",
 				(PyObject*)&Outputs_Type);
 	Py_DECREF(&Outputs_Type);
 
-	/// Add the CashloanModel type object to the module
-	if (PyType_Ready(&CashloanModel_Type) < 0) { goto fail; }
+	/// Add the Cashloan type object to the module
+	if (PyType_Ready(&Cashloan_Type) < 0) { goto fail; }
 	PyModule_AddObject(m,
-				"CashloanModel",
-				(PyObject*)&CashloanModel_Type);
+				"Cashloan",
+				(PyObject*)&Cashloan_Type);
 
 	return 0;
 	fail:
@@ -5328,18 +5214,18 @@ CashloanModelModule_exec(PyObject *m)
 	return -1;
 }
 
-static struct PyModuleDef_Slot CashloanModelModule_slots[] = {
-		{Py_mod_exec, CashloanModelModule_exec},
+static struct PyModuleDef_Slot CashloanModule_slots[] = {
+		{Py_mod_exec, CashloanModule_exec},
 		{0, NULL},
 };
 
-static struct PyModuleDef CashloanModelModule = {
+static struct PyModuleDef CashloanModule = {
 		PyModuleDef_HEAD_INIT,
-		"CashloanModel",
+		"Cashloan",
 		module_doc,
 		0,
-		CashloanModelModule_methods,
-		CashloanModelModule_slots,
+		CashloanModule_methods,
+		CashloanModule_slots,
 		NULL,
 		NULL,
 		NULL
@@ -5348,7 +5234,7 @@ static struct PyModuleDef CashloanModelModule = {
 /* Export function for the module */
 
 PyMODINIT_FUNC
-PyInit_CashloanModel(void)
+PyInit_Cashloan(void)
 {
-	return PyModuleDef_Init(&CashloanModelModule);
+	return PyModuleDef_Init(&CashloanModule);
 }

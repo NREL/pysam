@@ -54,6 +54,9 @@ class Sco2DesignPoint(object):
 	def assign(self, dict):
 		pass
 
+	def value(self, name, value=None):
+		pass
+
 	def execute(self, int_verbosity):
 		pass
 
@@ -77,6 +80,9 @@ def new() -> Sco2DesignPoint
 	pass
 
 def wrap(ssc_data_t) -> Sco2DesignPoint
+	pass
+
+def from_existing(model, config="") -> Sco2DesignPoint
 	pass
 
 __loader__ = None 

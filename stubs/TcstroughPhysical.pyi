@@ -462,6 +462,9 @@ class TcstroughPhysical(object):
 	def assign(self, dict):
 		pass
 
+	def value(self, name, value=None):
+		pass
+
 	def execute(self, int_verbosity):
 		pass
 
@@ -493,6 +496,9 @@ def new() -> TcstroughPhysical
 	pass
 
 def wrap(ssc_data_t) -> TcstroughPhysical
+	pass
+
+def from_existing(model, config="") -> TcstroughPhysical
 	pass
 
 __loader__ = None 

@@ -27,10 +27,10 @@ Lifetime Group
 .. autoclass:: PySAM.Pvwattsv5.Pvwattsv5.Lifetime
 	:members:
 
-LocationAndResource Group
+SolarResource Group
 ==============
 
-.. autoclass:: PySAM.Pvwattsv5.Pvwattsv5.LocationAndResource
+.. autoclass:: PySAM.Pvwattsv5.Pvwattsv5.SolarResource
 	:members:
 
 SystemDesign Group

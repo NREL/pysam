@@ -429,7 +429,7 @@ class CapacityPayments(object):
 	cp_system_nameplate = float
 
 
-class Grid(object):
+class GridLimits(object):
 	def assign(self): 
 		pass
 
@@ -943,6 +943,9 @@ class Merchantplant(object):
 	def assign(self, dict):
 		pass
 
+	def value(self, name, value=None):
+		pass
+
 	def execute(self, int_verbosity):
 		pass
 
@@ -968,7 +971,7 @@ class Merchantplant(object):
 	Market = Market
 	FuelCell = FuelCell
 	CapacityPayments = CapacityPayments
-	Grid = Grid
+	GridLimits = GridLimits
 	Outputs = Outputs
 
 
@@ -979,6 +982,9 @@ def new() -> Merchantplant
 	pass
 
 def wrap(ssc_data_t) -> Merchantplant
+	pass
+
+def from_existing(model, config="") -> Merchantplant
 	pass
 
 __loader__ = None 

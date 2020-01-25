@@ -46,6 +46,9 @@ class Sco2AirCooler(object):
 	def assign(self, dict):
 		pass
 
+	def value(self, name, value=None):
+		pass
+
 	def execute(self, int_verbosity):
 		pass
 
@@ -69,6 +72,9 @@ def new() -> Sco2AirCooler
 	pass
 
 def wrap(ssc_data_t) -> Sco2AirCooler
+	pass
+
+def from_existing(model, config="") -> Sco2AirCooler
 	pass
 
 __loader__ = None 

@@ -169,6 +169,9 @@ class Geothermal(object):
 	def assign(self, dict):
 		pass
 
+	def value(self, name, value=None):
+		pass
+
 	def execute(self, int_verbosity):
 		pass
 
@@ -193,6 +196,9 @@ def new() -> Geothermal
 	pass
 
 def wrap(ssc_data_t) -> Geothermal
+	pass
+
+def from_existing(model, config="") -> Geothermal
 	pass
 
 __loader__ = None 

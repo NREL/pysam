@@ -1,4 +1,4 @@
-class LocationAndResource(object):
+class SolarResource(object):
 	def assign(self): 
 		pass
 
@@ -671,6 +671,9 @@ class TcsmoltenSalt(object):
 	def assign(self, dict):
 		pass
 
+	def value(self, name, value=None):
+		pass
+
 	def execute(self, int_verbosity):
 		pass
 
@@ -683,7 +686,7 @@ class TcsmoltenSalt(object):
 	def __init__(self, *args, **kwargs):
 		pass
 
-	LocationAndResource = LocationAndResource
+	SolarResource = SolarResource
 	TimeOfDeliveryFactors = TimeOfDeliveryFactors
 	HeliostatField = HeliostatField
 	SystemDesign = SystemDesign
@@ -708,6 +711,9 @@ def new() -> TcsmoltenSalt
 	pass
 
 def wrap(ssc_data_t) -> TcsmoltenSalt
+	pass
+
+def from_existing(model, config="") -> TcsmoltenSalt
 	pass
 
 __loader__ = None 

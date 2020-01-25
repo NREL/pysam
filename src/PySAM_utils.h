@@ -237,7 +237,6 @@ static int PySAM_seq_to_matrix(PyObject *value, double **mat, int *nrows, int *n
 
     if(!*mat) {
         Py_DECREF(seq);
-        Py_DECREF(row);
         PyErr_NoMemory(  );
         return -2;
     }
@@ -246,7 +245,6 @@ static int PySAM_seq_to_matrix(PyObject *value, double **mat, int *nrows, int *n
         if (PySequence_Fast_GET_SIZE(row) != *ncols){
             free(*mat);
             Py_DECREF(seq);
-            Py_DECREF(row);
             PyErr_SetString(PyExc_TypeError, "Matrix must be rectangular.");
             return -6;
         }
@@ -254,16 +252,13 @@ static int PySAM_seq_to_matrix(PyObject *value, double **mat, int *nrows, int *n
         if ( res < 0){
             free(*mat);
             Py_DECREF(seq);
-            Py_DECREF(row);
             char str[256];
-            sprintf(str, "Error converting nested tuple %d into row in matrix.", i);
+            sprintf(str, "Error (%d) converting nested tuple %d into row in matrix.", res, i);
             PyErr_SetString(PyExc_TypeError, str);
             return res;
         }
         double* mat_pos = &((*mat)[*ncols * i]);
         memcpy(mat_pos, arr, (*ncols)*sizeof(double));
-        Py_DECREF(row);
-
         free(arr);
     }
     Py_DECREF(seq);

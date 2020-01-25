@@ -14,7 +14,7 @@ class Lifetime(object):
 	system_use_lifetime_output = float
 
 
-class LocationAndResource(object):
+class SolarResource(object):
 	def assign(self): 
 		pass
 
@@ -127,6 +127,9 @@ class Pvwattsv5(object):
 	def assign(self, dict):
 		pass
 
+	def value(self, name, value=None):
+		pass
+
 	def execute(self, int_verbosity):
 		pass
 
@@ -140,7 +143,7 @@ class Pvwattsv5(object):
 		pass
 
 	Lifetime = Lifetime
-	LocationAndResource = LocationAndResource
+	SolarResource = SolarResource
 	SystemDesign = SystemDesign
 	AdjustmentFactors = AdjustmentFactors
 	Outputs = Outputs
@@ -153,6 +156,9 @@ def new() -> Pvwattsv5
 	pass
 
 def wrap(ssc_data_t) -> Pvwattsv5
+	pass
+
+def from_existing(model, config="") -> Pvwattsv5
 	pass
 
 __loader__ = None 

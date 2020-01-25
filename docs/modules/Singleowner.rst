@@ -99,10 +99,10 @@ CapacityPayments Group
 .. autoclass:: PySAM.Singleowner.Singleowner.CapacityPayments
 	:members:
 
-Grid Group
+GridLimits Group
 ==============
 
-.. autoclass:: PySAM.Singleowner.Singleowner.Grid
+.. autoclass:: PySAM.Singleowner.Singleowner.GridLimits
 	:members:
 
 Outputs Group

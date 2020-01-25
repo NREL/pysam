@@ -16,10 +16,13 @@ class FinancialParameters(object):
 	insurance_rate = float
 	loan_rate = float
 	loan_term = float
+	market = float
+	mortgage = float
 	prop_tax_assessed_decline = float
 	prop_tax_cost_assessed_percent = float
 	property_tax_rate = float
 	real_discount_rate = float
+	salvage_percentage = float
 	state_tax_rate = tuple
 	system_capacity = float
 	system_heat_rate = float
@@ -66,6 +69,7 @@ class SystemCosts(object):
 	om_replacement_cost1 = tuple
 	om_replacement_cost2 = tuple
 	om_replacement_cost_escal = float
+	total_installed_cost = float
 
 
 class Depreciation(object):
@@ -221,7 +225,7 @@ class PaymentIncentives(object):
 	pbi_uti_term = float
 
 
-class Common(object):
+class BatterySystem(object):
 	def assign(self): 
 		pass
 
@@ -232,43 +236,77 @@ class Common(object):
 		pass
 
 
-	bid_price = tuple
-	bid_price_esc = float
-	construction_financing_cost = float
+	batt_bank_replacement = tuple
+	batt_computed_bank_capacity = float
+	batt_replacement_option = float
+	batt_replacement_schedule = tuple
+	battery_per_kWh = float
+	en_batt = float
+
+
+class FuelCell(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> Dict[Dict]
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
+	en_fuelcell = float
+	fuelcell_computed_bank_capacity = float
+	fuelcell_per_kWh = float
+	fuelcell_replacement = tuple
+	fuelcell_replacement_option = float
+	fuelcell_replacement_schedule = tuple
+
+
+class SystemOutput(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> Dict[Dict]
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
+	annual_energy_value = tuple
+	annual_themal_value = tuple
 	degradation = tuple
-	dispatch_factor1 = float
-	dispatch_factor2 = float
-	dispatch_factor3 = float
-	dispatch_factor4 = float
-	dispatch_factor5 = float
-	dispatch_factor6 = float
-	dispatch_factor7 = float
-	dispatch_factor8 = float
-	dispatch_factor9 = float
-	dispatch_sched_weekday = tuple
-	dispatch_sched_weekend = tuple
 	gen = tuple
-	market = float
-	min_dscr_required = float
-	min_dscr_target = float
-	min_irr_target = float
-	optimize_lcoe_wrt_debt_fraction = float
-	optimize_lcoe_wrt_ppa_escalation = float
-	positive_cashflow_required = float
-	ppa_escalation = float
-	ppa_soln_max = float
-	ppa_soln_max_iterations = float
-	ppa_soln_min = float
-	ppa_soln_tolerance = float
-	salvage_percentage = float
-	soln_mode = float
-	system_capacity = float
-	system_recapitalization_boolean = tuple
-	system_recapitalization_cost = float
-	system_recapitalization_escalation = float
+
+
+class Lifetime(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> Dict[Dict]
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
 	system_use_lifetime_output = float
-	system_use_recapitalization = float
-	total_installed_cost = float
+
+
+class ThirdPartyOwnership(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> Dict[Dict]
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
+	elec_cost_with_system = tuple
+	elec_cost_without_system = tuple
 
 
 class Outputs(object):
@@ -282,8 +320,7 @@ class Outputs(object):
 		pass
 
 
-	actual_debt_frac = float
-	actual_ppa_escalation = float
+	adjusted_installed_cost = float
 	cbi_fedtax_total = float
 	cbi_statax_total = float
 	cbi_total = float
@@ -292,66 +329,51 @@ class Outputs(object):
 	cbi_total_sta = float
 	cbi_total_uti = float
 	cf_after_tax_cash_flow = tuple
-	cf_after_tax_net_equity_cash_flow = tuple
 	cf_after_tax_net_equity_cost_flow = tuple
+	cf_battery_replacement_cost = tuple
+	cf_battery_replacement_cost_schedule = tuple
+	cf_cumulative_payback_with_expenses = tuple
+	cf_cumulative_payback_without_expenses = tuple
 	cf_debt_balance = tuple
 	cf_debt_payment_interest = tuple
 	cf_debt_payment_principal = tuple
 	cf_debt_payment_total = tuple
 	cf_deductible_expenses = tuple
-	cf_degradation = tuple
+	cf_discounted_costs = tuple
+	cf_discounted_cumulative_payback = tuple
+	cf_discounted_payback = tuple
+	cf_discounted_savings = tuple
 	cf_effective_tax_frac = tuple
 	cf_energy_net = tuple
-	cf_energy_net_apr = tuple
-	cf_energy_net_aug = tuple
-	cf_energy_net_dec = tuple
-	cf_energy_net_dispatch1 = tuple
-	cf_energy_net_dispatch2 = tuple
-	cf_energy_net_dispatch3 = tuple
-	cf_energy_net_dispatch4 = tuple
-	cf_energy_net_dispatch5 = tuple
-	cf_energy_net_dispatch6 = tuple
-	cf_energy_net_dispatch7 = tuple
-	cf_energy_net_dispatch8 = tuple
-	cf_energy_net_dispatch9 = tuple
-	cf_energy_net_feb = tuple
-	cf_energy_net_jan = tuple
-	cf_energy_net_jul = tuple
-	cf_energy_net_jun = tuple
-	cf_energy_net_mar = tuple
-	cf_energy_net_may = tuple
-	cf_energy_net_monthly_firstyear_TOD1 = tuple
-	cf_energy_net_monthly_firstyear_TOD2 = tuple
-	cf_energy_net_monthly_firstyear_TOD3 = tuple
-	cf_energy_net_monthly_firstyear_TOD4 = tuple
-	cf_energy_net_monthly_firstyear_TOD5 = tuple
-	cf_energy_net_monthly_firstyear_TOD6 = tuple
-	cf_energy_net_monthly_firstyear_TOD7 = tuple
-	cf_energy_net_monthly_firstyear_TOD8 = tuple
-	cf_energy_net_monthly_firstyear_TOD9 = tuple
-	cf_energy_net_nov = tuple
-	cf_energy_net_oct = tuple
-	cf_energy_net_sep = tuple
-	cf_energy_price = tuple
 	cf_energy_value = tuple
 	cf_fed_depr_sched = tuple
 	cf_fed_depreciation = tuple
 	cf_fed_incentive_income_less_deductions = tuple
-	cf_fed_income_taxes = tuple
 	cf_fed_tax_savings = tuple
+	cf_fed_taxable_incentive_income = tuple
 	cf_fed_taxable_income_less_deductions = tuple
 	cf_federal_tax_frac = tuple
+	cf_fuelcell_replacement_cost = tuple
+	cf_fuelcell_replacement_cost_schedule = tuple
 	cf_insurance_expense = tuple
 	cf_length = float
 	cf_net_salvage_value = tuple
+	cf_nte = tuple
+	cf_om_capacity1_expense = tuple
+	cf_om_capacity2_expense = tuple
 	cf_om_capacity_expense = tuple
+	cf_om_fixed1_expense = tuple
+	cf_om_fixed2_expense = tuple
 	cf_om_fixed_expense = tuple
 	cf_om_fuel_expense = tuple
 	cf_om_opt_fuel_1_expense = tuple
 	cf_om_opt_fuel_2_expense = tuple
+	cf_om_production1_expense = tuple
+	cf_om_production2_expense = tuple
 	cf_om_production_expense = tuple
 	cf_operating_expenses = tuple
-	cf_operating_income = tuple
+	cf_payback_with_expenses = tuple
+	cf_payback_without_expenses = tuple
 	cf_pbi_fedtax_total = tuple
 	cf_pbi_statax_total = tuple
 	cf_pbi_total = tuple
@@ -359,81 +381,24 @@ class Outputs(object):
 	cf_pbi_total_oth = tuple
 	cf_pbi_total_sta = tuple
 	cf_pbi_total_uti = tuple
-	cf_ppa_price = tuple
-	cf_pretax_dscr = tuple
 	cf_property_tax_assessed_value = tuple
 	cf_property_tax_expense = tuple
 	cf_ptc_fed = tuple
 	cf_ptc_sta = tuple
 	cf_ptc_total = tuple
-	cf_recapitalization = tuple
-	cf_revenue_apr = tuple
-	cf_revenue_aug = tuple
-	cf_revenue_dec = tuple
-	cf_revenue_dispatch1 = tuple
-	cf_revenue_dispatch2 = tuple
-	cf_revenue_dispatch3 = tuple
-	cf_revenue_dispatch4 = tuple
-	cf_revenue_dispatch5 = tuple
-	cf_revenue_dispatch6 = tuple
-	cf_revenue_dispatch7 = tuple
-	cf_revenue_dispatch8 = tuple
-	cf_revenue_dispatch9 = tuple
-	cf_revenue_feb = tuple
-	cf_revenue_jan = tuple
-	cf_revenue_jul = tuple
-	cf_revenue_jun = tuple
-	cf_revenue_mar = tuple
-	cf_revenue_may = tuple
-	cf_revenue_monthly_firstyear_TOD1 = tuple
-	cf_revenue_monthly_firstyear_TOD2 = tuple
-	cf_revenue_monthly_firstyear_TOD3 = tuple
-	cf_revenue_monthly_firstyear_TOD4 = tuple
-	cf_revenue_monthly_firstyear_TOD5 = tuple
-	cf_revenue_monthly_firstyear_TOD6 = tuple
-	cf_revenue_monthly_firstyear_TOD7 = tuple
-	cf_revenue_monthly_firstyear_TOD8 = tuple
-	cf_revenue_monthly_firstyear_TOD9 = tuple
-	cf_revenue_nov = tuple
-	cf_revenue_oct = tuple
-	cf_revenue_sep = tuple
 	cf_sta_and_fed_tax_savings = tuple
 	cf_sta_depr_sched = tuple
 	cf_sta_depreciation = tuple
 	cf_sta_incentive_income_less_deductions = tuple
-	cf_sta_income_taxes = tuple
 	cf_sta_tax_savings = tuple
+	cf_sta_taxable_incentive_income = tuple
 	cf_sta_taxable_income_less_deductions = tuple
 	cf_state_tax_frac = tuple
-	debt_fraction = float
+	cf_thermal_value = tuple
+	cf_value_added = tuple
+	discounted_payback = float
 	effective_tax_rate = float
-	firstyear_energy_dispatch1 = float
-	firstyear_energy_dispatch2 = float
-	firstyear_energy_dispatch3 = float
-	firstyear_energy_dispatch4 = float
-	firstyear_energy_dispatch5 = float
-	firstyear_energy_dispatch6 = float
-	firstyear_energy_dispatch7 = float
-	firstyear_energy_dispatch8 = float
-	firstyear_energy_dispatch9 = float
-	firstyear_energy_price1 = float
-	firstyear_energy_price2 = float
-	firstyear_energy_price3 = float
-	firstyear_energy_price4 = float
-	firstyear_energy_price5 = float
-	firstyear_energy_price6 = float
-	firstyear_energy_price7 = float
-	firstyear_energy_price8 = float
-	firstyear_energy_price9 = float
-	firstyear_revenue_dispatch1 = float
-	firstyear_revenue_dispatch2 = float
-	firstyear_revenue_dispatch3 = float
-	firstyear_revenue_dispatch4 = float
-	firstyear_revenue_dispatch5 = float
-	firstyear_revenue_dispatch6 = float
-	firstyear_revenue_dispatch7 = float
-	firstyear_revenue_dispatch8 = float
-	firstyear_revenue_dispatch9 = float
+	first_cost = float
 	ibi_fedtax_total = float
 	ibi_statax_total = float
 	ibi_total = float
@@ -441,35 +406,30 @@ class Outputs(object):
 	ibi_total_oth = float
 	ibi_total_sta = float
 	ibi_total_uti = float
-	irr = float
-	itc_fed_total = float
-	itc_sta_total = float
 	itc_total = float
 	itc_total_fed = float
 	itc_total_sta = float
-	latcf_nom = float
-	latcf_real = float
 	lcoe_nom = float
 	lcoe_real = float
 	lcoptc_fed_nom = float
 	lcoptc_fed_real = float
 	lcoptc_sta_nom = float
 	lcoptc_sta_real = float
-	lppa_nom = float
-	lppa_real = float
-	min_cashflow = float
-	min_dscr = float
+	lnte_nom = float
+	lnte_real = float
+	loan_amount = float
 	npv = float
-	ppa = float
-	ppa_escalation = float
+	payback = float
 	present_value_fuel = float
 	present_value_insandproptax = float
 	present_value_oandm = float
 	present_value_oandm_nonfuel = float
+	total_cost = float
 	wacc = float
+	year1_nte = float
 
 
-class Ippppa(object):
+class Cashloan(object):
 	def assign(self, dict):
 		pass
 
@@ -493,20 +453,24 @@ class Ippppa(object):
 	Depreciation = Depreciation
 	TaxCreditIncentives = TaxCreditIncentives
 	PaymentIncentives = PaymentIncentives
-	Common = Common
+	BatterySystem = BatterySystem
+	FuelCell = FuelCell
+	SystemOutput = SystemOutput
+	Lifetime = Lifetime
+	ThirdPartyOwnership = ThirdPartyOwnership
 	Outputs = Outputs
 
 
-def default(config) -> Ippppa
+def default(config) -> Cashloan
 	pass
 
-def new() -> Ippppa
+def new() -> Cashloan
 	pass
 
-def wrap(ssc_data_t) -> Ippppa
+def wrap(ssc_data_t) -> Cashloan
 	pass
 
-def from_existing(model, config="") -> Ippppa
+def from_existing(model, config="") -> Cashloan
 	pass
 
 __loader__ = None 

@@ -273,14 +273,12 @@ wf = "../sam/deploy/wind_resource/OH Northern-Lake.srw"
 
 def assign_values(mod, default, i):
     m = i.default(default)
-    if mod == "Pvsamv1":
+    if mod == "Pvsamv1" or mod == "Pvwattsv7" or mod == "TcsmoltenSalt":
         m.SolarResource.solar_resource_file = sf
     elif mod == "Biomass":
         m.Biopower.file_name = sf3
     elif mod == "Hcpv":
         m.SolarResourceData.file_name = sf
-    elif mod == "Pvwattsv5" or mod == "TcsmoltenSalt":
-        m.LocationAndResource.solar_resource_file = sf2
     elif mod == "Swh" or mod == "Pvwattsv5Lifetime" or mod == "TcsdirectSteam" or mod == "Tcsiscc":
         m.Weather.solar_resource_file = sf2
     elif mod == "Windpower":
@@ -323,7 +321,7 @@ def test_import_all():
         if mod == 'Battery':
             mod = 'StandAloneBattery'
         if mod == 'Cashloan':
-            mod = 'CashloanModel'
+            mod = 'Cashloan'
         config = names[1]
     try_import(mod, config)
 
@@ -335,16 +333,16 @@ def test_run_all():
         if mod == 'Battery':
             mod = 'StandAloneBattery'
         if mod == 'Cashloan':
-            mod = 'CashloanModel'
+            mod = 'Cashloan'
         config = names[1]
         mod_name = "PySAM." + mod
 
 
         try:
-            print("try executing", mod, config, "\n")
             i = importlib.import_module(mod_name)
             m = assign_values(mod, config, i)
             m.execute(0)
+            print("success executing", mod, config, "\n")
         except:
             print("error executing", mod, config, "\n")
 

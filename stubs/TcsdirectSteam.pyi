@@ -388,6 +388,9 @@ class TcsdirectSteam(object):
 	def assign(self, dict):
 		pass
 
+	def value(self, name, value=None):
+		pass
+
 	def execute(self, int_verbosity):
 		pass
 
@@ -419,6 +422,9 @@ def new() -> TcsdirectSteam
 	pass
 
 def wrap(ssc_data_t) -> TcsdirectSteam
+	pass
+
+def from_existing(model, config="") -> TcsdirectSteam
 	pass
 
 __loader__ = None 

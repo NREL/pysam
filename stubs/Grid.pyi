@@ -13,7 +13,23 @@ class Lifetime(object):
 	system_use_lifetime_output = float
 
 
-class Common(object):
+class GridLimits(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> Dict[Dict]
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
+	enable_interconnection_limit = float
+	grid_curtailment = tuple
+	grid_interconnection_limit_kwac = float
+
+
+class SystemOutput(object):
 	def assign(self): 
 		pass
 
@@ -25,13 +41,10 @@ class Common(object):
 
 
 	annual_energy = float
-	enable_interconnection_limit = float
 	gen = tuple
-	grid_interconnection_limit_kwac = float
-	load = tuple
 
 
-class LossAdjustments(object):
+class Load(object):
 	def assign(self): 
 		pass
 
@@ -42,7 +55,7 @@ class LossAdjustments(object):
 		pass
 
 
-	grid_curtailment = tuple
+	load = tuple
 
 
 class Outputs(object):
@@ -73,6 +86,9 @@ class Grid(object):
 	def assign(self, dict):
 		pass
 
+	def value(self, name, value=None):
+		pass
+
 	def execute(self, int_verbosity):
 		pass
 
@@ -86,8 +102,9 @@ class Grid(object):
 		pass
 
 	Lifetime = Lifetime
-	Common = Common
-	LossAdjustments = LossAdjustments
+	GridLimits = GridLimits
+	SystemOutput = SystemOutput
+	Load = Load
 	Outputs = Outputs
 
 
@@ -98,6 +115,9 @@ def new() -> Grid
 	pass
 
 def wrap(ssc_data_t) -> Grid
+	pass
+
+def from_existing(model, config="") -> Grid
 	pass
 
 __loader__ = None 

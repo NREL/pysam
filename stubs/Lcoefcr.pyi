@@ -34,6 +34,9 @@ class Lcoefcr(object):
 	def assign(self, dict):
 		pass
 
+	def value(self, name, value=None):
+		pass
+
 	def execute(self, int_verbosity):
 		pass
 
@@ -57,6 +60,9 @@ def new() -> Lcoefcr
 	pass
 
 def wrap(ssc_data_t) -> Lcoefcr
+	pass
+
+def from_existing(model, config="") -> Lcoefcr
 	pass
 
 __loader__ = None 

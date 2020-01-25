@@ -1,4 +1,4 @@
-.. _GridModel:
+.. _Grid:
 
 Grid
 **************************
@@ -10,56 +10,44 @@ Creating an Instance
 
 There are three methods to create a new instance of a PySAM module. Using ``default`` populates the newclass' attributes with default values specific to a ``config``. Each technology-financialconfiguration corresponds to a SAM GUI configuration. Using ``new`` creates an instance with empty attributes. The ``wrap`` function allows compatibility with PySSC, for details, refer to :doc:`../PySSC`.
 
-**GridModel model description**
+**Grid model description**
 
-.. automodule:: PySAM.GridModel
+.. automodule:: PySAM.Grid
 	:members:
 
 Functions
 =========================
 
-.. autoclass:: PySAM.GridModel.GridModel
+.. autoclass:: PySAM.Grid.Grid
 	:members:
 
 Lifetime Group
 ==============
 
-.. autoclass:: PySAM.GridModel.GridModel.Lifetime
+.. autoclass:: PySAM.Grid.Grid.Lifetime
 	:members:
 
-Grid Group
+GridLimits Group
 ==============
 
-.. autoclass:: PySAM.GridModel.GridModel.Grid
+.. autoclass:: PySAM.Grid.Grid.GridLimits
 	:members:
 
 SystemOutput Group
 ==============
 
-.. autoclass:: PySAM.GridModel.GridModel.SystemOutput
+.. autoclass:: PySAM.Grid.Grid.SystemOutput
 	:members:
 
 Load Group
 ==============
 
-.. autoclass:: PySAM.GridModel.GridModel.Load
-	:members:
-
-Common Group
-==============
-
-.. autoclass:: PySAM.GridModel.GridModel.Common
-	:members:
-
-LossAdjustments Group
-==============
-
-.. autoclass:: PySAM.GridModel.GridModel.LossAdjustments
+.. autoclass:: PySAM.Grid.Grid.Load
 	:members:
 
 Outputs Group
 ==============
 
-.. autoclass:: PySAM.GridModel.GridModel.Outputs
+.. autoclass:: PySAM.Grid.Grid.Outputs
 	:members:
 

@@ -440,7 +440,7 @@ class CapacityPayments(object):
 	cp_system_nameplate = float
 
 
-class Grid(object):
+class GridLimits(object):
 	def assign(self): 
 		pass
 
@@ -1024,6 +1024,9 @@ class Singleowner(object):
 	def assign(self, dict):
 		pass
 
+	def value(self, name, value=None):
+		pass
+
 	def execute(self, int_verbosity):
 		pass
 
@@ -1049,7 +1052,7 @@ class Singleowner(object):
 	Lifetime = Lifetime
 	FuelCell = FuelCell
 	CapacityPayments = CapacityPayments
-	Grid = Grid
+	GridLimits = GridLimits
 	Outputs = Outputs
 
 
@@ -1060,6 +1063,9 @@ def new() -> Singleowner
 	pass
 
 def wrap(ssc_data_t) -> Singleowner
+	pass
+
+def from_existing(model, config="") -> Singleowner
 	pass
 
 __loader__ = None 

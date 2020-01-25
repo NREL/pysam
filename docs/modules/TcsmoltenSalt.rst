@@ -21,10 +21,10 @@ Functions
 .. autoclass:: PySAM.TcsmoltenSalt.TcsmoltenSalt
 	:members:
 
-LocationAndResource Group
+SolarResource Group
 ==============
 
-.. autoclass:: PySAM.TcsmoltenSalt.TcsmoltenSalt.LocationAndResource
+.. autoclass:: PySAM.TcsmoltenSalt.TcsmoltenSalt.SolarResource
 	:members:
 
 TimeOfDeliveryFactors Group

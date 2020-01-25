@@ -45,6 +45,9 @@ class Iec61853par(object):
 	def assign(self, dict):
 		pass
 
+	def value(self, name, value=None):
+		pass
+
 	def execute(self, int_verbosity):
 		pass
 
@@ -68,6 +71,9 @@ def new() -> Iec61853par
 	pass
 
 def wrap(ssc_data_t) -> Iec61853par
+	pass
+
+def from_existing(model, config="") -> Iec61853par
 	pass
 
 __loader__ = None 
