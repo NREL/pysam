@@ -144,7 +144,7 @@ Plant_set_user_capacity_factor(VarGroupObject *self, PyObject *value, void *clos
 
 static PyGetSetDef Plant_getset[] = {
 {"conv_eff", (getter)Plant_get_conv_eff,(setter)Plant_set_conv_eff,
-	PyDoc_STR("*float*: Conversion Efficiency [%]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Conversion Efficiency [%]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - heat_rate\n"),
  	NULL},
 {"derate", (getter)Plant_get_derate,(setter)Plant_set_derate,
 	PyDoc_STR("*float*: Derate [%]\n\n*Required*: True"),
@@ -153,7 +153,7 @@ static PyGetSetDef Plant_getset[] = {
 	PyDoc_STR("*sequence*: Array of Energy Output Profile [kW]\n\n*Required*: True if spec_mode=1"),
  	NULL},
 {"heat_rate", (getter)Plant_get_heat_rate,(setter)Plant_set_heat_rate,
-	PyDoc_STR("*float*: Heat Rate [MMBTUs/MWhe]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Heat Rate [MMBTUs/MWhe]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - conv_eff\n"),
  	NULL},
 {"spec_mode", (getter)Plant_get_spec_mode,(setter)Plant_set_spec_mode,
 	PyDoc_STR("*float*: Spec mode: 0=constant CF,1=profile\n\n*Required*: True"),

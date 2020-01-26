@@ -4087,7 +4087,7 @@ SaleLeaseback_set_total_installed_cost(VarGroupObject *self, PyObject *value, vo
 
 static PyGetSetDef SaleLeaseback_getset[] = {
 {"construction_financing_cost", (getter)SaleLeaseback_get_construction_financing_cost,(setter)SaleLeaseback_set_construction_financing_cost,
-	PyDoc_STR("*float*: Construction financing total [$]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Construction financing total [$]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - total_installed_cost\n"),
  	NULL},
 {"cost_dev_fee_percent", (getter)SaleLeaseback_get_cost_dev_fee_percent,(setter)SaleLeaseback_set_cost_dev_fee_percent,
 	PyDoc_STR("*float*: Development fee (% pre-financing cost) [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 3"),
@@ -4138,7 +4138,7 @@ static PyGetSetDef SaleLeaseback_getset[] = {
 	PyDoc_STR("*float*: Lessor Required Lease Payment Reserve [months]\n\n*Constraints*: INTEGER\n\n*Required*: If not provided, assumed to be 6"),
  	NULL},
 {"total_installed_cost", (getter)SaleLeaseback_get_total_installed_cost,(setter)SaleLeaseback_set_total_installed_cost,
-	PyDoc_STR("*float*: Installed cost [$]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Installed cost [$]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - construction_financing_cost\n"),
  	NULL},
 	{NULL}  /* Sentinel */
 };

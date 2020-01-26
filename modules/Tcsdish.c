@@ -190,7 +190,7 @@ Dish_set_system_capacity(VarGroupObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef Dish_getset[] = {
 {"system_capacity", (getter)Dish_get_system_capacity,(setter)Dish_set_system_capacity,
-	PyDoc_STR("*float*: Nameplate capacity [kW]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Nameplate capacity [kW]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - n_ew\n\t - n_ns\n"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -521,10 +521,10 @@ static PyGetSetDef Type295_getset[] = {
 	PyDoc_STR("*float*: Slot gap height [m]\n\n*Required*: True"),
  	NULL},
 {"n_ew", (getter)Type295_get_n_ew,(setter)Type295_set_n_ew,
-	PyDoc_STR("*float*: Number of collectors East-West [-]\n\n*Constraints*: INTEGER\n\n*Required*: True"),
+	PyDoc_STR("*float*: Number of collectors East-West [-]\n\n*Constraints*: INTEGER\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - system_capacity\n"),
  	NULL},
 {"n_ns", (getter)Type295_get_n_ns,(setter)Type295_set_n_ns,
-	PyDoc_STR("*float*: Number of collectors North-South [-]\n\n*Constraints*: INTEGER\n\n*Required*: True"),
+	PyDoc_STR("*float*: Number of collectors North-South [-]\n\n*Constraints*: INTEGER\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - system_capacity\n"),
  	NULL},
 {"ns_dish_sep", (getter)Type295_get_ns_dish_sep,(setter)Type295_set_ns_dish_sep,
 	PyDoc_STR("*float*: Collector separation North-South [m]\n\n*Required*: True"),
