@@ -3,7 +3,7 @@ typedef struct {
     SAM_Windpower   data_ptr;
 } WindGroupObject;
 
-static const char* const Turbine_calculate_powercurve_doc =
+char Turbine_calculate_powercurve_doc[] =
     "Calculates the power produced by a wind turbine at windspeeds incremented by 0.25 m/s\\n\\n"
     "Input: var_table with key-value pairs\\n"
     "     'turbine_size': double [kW]\\n"

@@ -38,6 +38,7 @@ with open(os.path.join(this_directory, 'RELEASE.md'), encoding='utf-8') as f:
 # prepare package
 libs = []
 libfiles = []
+extra_compile_args = ["-Wno-implicit-function-declaration", "-Wno-unused-function", "-Wno-strict-prototypes"]
 extra_link_args = []
 defines = []
 
@@ -48,11 +49,13 @@ if sys.platform == 'darwin':
     libs = ['SAM_api', 'ssc']
     libfiles = ['libSAM_api.so', 'libssc.so']
     extra_link_args = ["-Wl,-rpath,@loader_path/"]
+    extra_compile_args.append("-Wno-ignored-attributes")
 
 if sys.platform == 'linux':
     libs = ['SAM_api', 'ssc']
     libfiles = ['libSAM_api.so', 'libssc.so']
     extra_link_args = ["-Wl,-rpath,$ORIGIN/"]
+    extra_compile_args.append('-Wno-attributes')
 
 if sys.platform == 'win32':
     libs = ['SAM_api', 'ssc']
@@ -124,7 +127,7 @@ extension_modules = [Extension('PySAM.AdjustmentFactors',
                     include_dirs=["include", "src"],
                     library_dirs=[libpath],
                     libraries=libs,
-                    extra_compile_args=["-Wno-unused-function", "-Wno-ignored-attributes", "-Wno-strict-prototypes"],
+                    extra_compile_args=extra_compile_args,
                     extra_link_args=extra_link_args
                     )]
 
@@ -135,7 +138,7 @@ for filename in os.listdir(this_directory+"/modules"):
                             include_dirs=["include", "src"],
                             library_dirs=[libpath],
                             libraries=libs,
-                            extra_compile_args=["-Wno-unused-function", "-Wno-ignored-attributes", "-Wno-strict-prototypes"],
+                            extra_compile_args=extra_compile_args,
                             extra_link_args=extra_link_args
                             ))
 
