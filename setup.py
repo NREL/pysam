@@ -61,6 +61,7 @@ if sys.platform == 'win32':
     libs = ['SAM_api', 'ssc']
     libfiles = ['SAM_api.dll', 'ssc.dll', 'SAM_api.lib', 'ssc.lib']
     defines = [('__WINDOWS__', '1')]
+    extra_compile_args = []
 
 
 ###################################################################################################
