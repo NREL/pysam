@@ -1,0 +1,75 @@
+class POACalibrate(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> Dict[Dict]
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
+	albedo = float
+	array_az = float
+	array_tilt = float
+	beam = tuple
+	diffuse = tuple
+	latitude = float
+	longitude = float
+	poa = tuple
+	time_zone = float
+	year = float
+
+
+class Outputs(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> Dict[Dict]
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
+	pcalc = tuple
+
+
+class Poacalib(object):
+	def assign(self, dict):
+		pass
+
+	def value(self, name, value=None):
+		pass
+
+	def execute(self, int_verbosity):
+		pass
+
+	def export(self):
+		pass
+
+	def __getattribute__(self, *args, **kwargs):
+		pass
+
+	def __init__(self, *args, **kwargs):
+		pass
+
+	POACalibrate = POACalibrate
+	Outputs = Outputs
+
+
+def default(config) -> Poacalib
+	pass
+
+def new() -> Poacalib
+	pass
+
+def wrap(ssc_data_t) -> Poacalib
+	pass
+
+def from_existing(model, config="") -> Poacalib
+	pass
+
+__loader__ = None 
+
+__spec__ = None

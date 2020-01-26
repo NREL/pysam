@@ -44,6 +44,9 @@ class IphToLcoefcr(object):
 	def assign(self, dict):
 		pass
 
+	def value(self, name, value=None):
+		pass
+
 	def execute(self, int_verbosity):
 		pass
 
@@ -68,6 +71,9 @@ def new() -> IphToLcoefcr
 	pass
 
 def wrap(ssc_data_t) -> IphToLcoefcr
+	pass
+
+def from_existing(model, config="") -> IphToLcoefcr
 	pass
 
 __loader__ = None 

@@ -62,6 +62,9 @@ class Thermalrate(object):
 	def assign(self, dict):
 		pass
 
+	def value(self, name, value=None):
+		pass
+
 	def execute(self, int_verbosity):
 		pass
 
@@ -86,6 +89,9 @@ def new() -> Thermalrate
 	pass
 
 def wrap(ssc_data_t) -> Thermalrate
+	pass
+
+def from_existing(model, config="") -> Thermalrate
 	pass
 
 __loader__ = None 

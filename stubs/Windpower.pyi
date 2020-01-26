@@ -28,7 +28,7 @@ class Turbine(object):
 	def __init__(self, *args, **kwargs): 
 		pass
 
-	def calculate_powercurve(self, turbine_size=double, rotor_diameter=double, elevation=double, max_cp=double, max_tip_speed=double, max_tip_sp_ratio=double, cut_in=double, cut_out=double, drive_train=int):
+	def calculate_powercurve(self, args):
 		pass
 
 	wind_resource_shear = float
@@ -72,11 +72,12 @@ class Losses(object):
 	avail_grid_loss = float
 	avail_turb_loss = float
 	elec_eff_loss = float
+	elec_parasitic_loss = float
 	en_icing_cutoff = float
 	en_low_temp_cutoff = float
 	env_degrad_loss = float
+	env_env_loss = float
 	env_exposure_loss = float
-	env_ext_loss = float
 	env_icing_loss = float
 	icing_cutoff_rh = float
 	icing_cutoff_temp = float
@@ -89,8 +90,44 @@ class Losses(object):
 	turb_hysteresis_loss = float
 	turb_perf_loss = float
 	turb_specific_loss = float
-	wake_loss = float
+	wake_ext_loss = float
+	wake_future_loss = float
+	wake_int_loss = float
 
+
+class Uncertainty(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> Dict[Dict]
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
+	total_uncert = float
+
+
+class AdjustmentFactors(object):
+	def assign(self): 
+		pass
+
+	def export(self): 
+		return {}
+
+	def __init__(self, *args, **kwargs): # real signature unknown
+		pass
+
+	constant = float
+	dc_constant = float
+	dc_hourly = tuple
+	dc_periods = tuple
+	hourly = tuple
+	periods = tuple
+	sf_constant = float
+	sf_hourly = tuple
+	sf_periods = tuple
 
 class Outputs(object):
 	def assign(self): 
@@ -104,20 +141,34 @@ class Outputs(object):
 
 
 	annual_energy = float
+	annual_energy_p75 = float
+	annual_energy_p90 = float
+	annual_energy_p95 = float
+	annual_gross_energy = float
+	avail_losses = float
 	capacity_factor = float
 	cutoff_losses = float
+	elec_losses = float
+	env_losses = float
 	gen = tuple
 	kwh_per_kw = float
 	monthly_energy = tuple
+	ops_losses = float
 	pressure = tuple
 	temp = tuple
+	turb_losses = float
 	turbine_output_by_windspeed_bin = tuple
+	wake_losses = float
 	wind_direction = tuple
 	wind_speed = tuple
+	wind_speed_average = float
 
 
 class Windpower(object):
 	def assign(self, dict):
+		pass
+
+	def value(self, name, value=None):
 		pass
 
 	def execute(self, int_verbosity):
@@ -136,6 +187,8 @@ class Windpower(object):
 	Turbine = Turbine
 	Farm = Farm
 	Losses = Losses
+	Uncertainty = Uncertainty
+	AdjustmentFactors = AdjustmentFactors
 	Outputs = Outputs
 
 
@@ -146,6 +199,9 @@ def new() -> Windpower
 	pass
 
 def wrap(ssc_data_t) -> Windpower
+	pass
+
+def from_existing(model, config="") -> Windpower
 	pass
 
 __loader__ = None 

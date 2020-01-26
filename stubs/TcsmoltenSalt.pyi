@@ -1,4 +1,4 @@
-class LocationAndResource(object):
+class SolarResource(object):
 	def assign(self): 
 		pass
 
@@ -136,25 +136,40 @@ class TowerAndReceiver(object):
 	csp_pt_rec_max_oper_frac = float
 	d_tube_out = float
 	delta_flux_hrs = float
+	downc_tm_mult = float
 	epsilon = float
 	eta_pump = float
 	f_rec_min = float
 	field_fl_props = tuple
 	flux_max = float
 	h_tower = float
+	heat_trace_power = float
 	hl_ffact = float
+	is_rec_enforce_min_startup = float
+	is_rec_model_trans = float
+	is_rec_startup_from_T_soln = float
+	is_rec_startup_trans = float
 	mat_tube = float
 	n_flux_days = float
 	piping_length_const = float
 	piping_length_mult = float
 	piping_loss = float
+	piping_loss_coeff = float
+	preheat_flux = float
+	preheat_target_Tdiff = float
 	rec_absorptance = float
 	rec_height = float
 	rec_hl_perm2 = float
 	rec_htf = float
 	rec_qf_delay = float
 	rec_su_delay = float
+	rec_tm_mult = float
+	riser_tm_mult = float
+	startup_ramp_time = float
+	startup_target_Tdiff = float
+	th_riser = float
 	th_tube = float
+	u_riser = float
 
 
 class SystemCosts(object):
@@ -364,6 +379,7 @@ class SystemControl(object):
 	disp_csu_cost = float
 	disp_frequency = float
 	disp_horizon = float
+	disp_inventory_incentive = float
 	disp_max_iter = float
 	disp_mip_gap = float
 	disp_pen_delta_w = float
@@ -405,18 +421,8 @@ class UserDefinedPowerCycle(object):
 		pass
 
 
-	ud_T_amb_des = float
-	ud_T_amb_high = float
-	ud_T_amb_ind_od = tuple
-	ud_T_amb_low = float
-	ud_T_htf_high = float
-	ud_T_htf_ind_od = tuple
-	ud_T_htf_low = float
 	ud_f_W_dot_cool_des = float
 	ud_ind_od = tuple
-	ud_m_dot_htf_high = float
-	ud_m_dot_htf_ind_od = tuple
-	ud_m_dot_htf_low = float
 	ud_m_dot_water_cool_des = float
 
 
@@ -463,6 +469,26 @@ class SCO2Cycle(object):
 	sco2ud_m_dot_htf_low = float
 
 
+class AdjustmentFactors(object):
+	def assign(self): 
+		pass
+
+	def export(self): 
+		return {}
+
+	def __init__(self, *args, **kwargs): # real signature unknown
+		pass
+
+	constant = float
+	dc_constant = float
+	dc_hourly = tuple
+	dc_periods = tuple
+	hourly = tuple
+	periods = tuple
+	sf_constant = float
+	sf_hourly = tuple
+	sf_periods = tuple
+
 class Outputs(object):
 	def assign(self): 
 		pass
@@ -482,21 +508,33 @@ class Outputs(object):
 	P_fixed = tuple
 	P_out_net = tuple
 	P_plant_balance_tot = tuple
+	P_rec_heattrace = tuple
 	P_tower_pump = tuple
 	Q_thermal = tuple
 	T_cold = tuple
 	T_cond_out = tuple
+	T_panel_out_max = tuple
 	T_pc_in = tuple
 	T_pc_out = tuple
 	T_rad_out = tuple
 	T_rec_in = tuple
 	T_rec_out = tuple
+	T_rec_out_end = tuple
+	T_rec_out_max = tuple
 	T_tes_cold = tuple
 	T_tes_hot = tuple
+	T_wall_downcomer = tuple
+	T_wall_rec_inlet = tuple
+	T_wall_rec_outlet = tuple
+	T_wall_riser = tuple
 	T_warm = tuple
 	annual_W_cooling_tower = float
 	annual_W_cycle_gross = float
 	annual_energy = float
+	annual_eta_rec_th = float
+	annual_eta_rec_th_incl_refl = float
+	annual_q_rec_inc = float
+	annual_q_rec_loss = float
 	annual_total_water_use = float
 	beam = tuple
 	capacity_factor = float
@@ -564,6 +602,7 @@ class Outputs(object):
 	eta_field = tuple
 	eta_map_out = tuple
 	eta_therm = tuple
+	flux_maps_for_import = tuple
 	flux_maps_out = tuple
 	gen = tuple
 	htf_pump_power = tuple
@@ -632,6 +671,9 @@ class TcsmoltenSalt(object):
 	def assign(self, dict):
 		pass
 
+	def value(self, name, value=None):
+		pass
+
 	def execute(self, int_verbosity):
 		pass
 
@@ -644,7 +686,7 @@ class TcsmoltenSalt(object):
 	def __init__(self, *args, **kwargs):
 		pass
 
-	LocationAndResource = LocationAndResource
+	SolarResource = SolarResource
 	TimeOfDeliveryFactors = TimeOfDeliveryFactors
 	HeliostatField = HeliostatField
 	SystemDesign = SystemDesign
@@ -658,6 +700,7 @@ class TcsmoltenSalt(object):
 	SystemControl = SystemControl
 	UserDefinedPowerCycle = UserDefinedPowerCycle
 	SCO2Cycle = SCO2Cycle
+	AdjustmentFactors = AdjustmentFactors
 	Outputs = Outputs
 
 
@@ -668,6 +711,9 @@ def new() -> TcsmoltenSalt
 	pass
 
 def wrap(ssc_data_t) -> TcsmoltenSalt
+	pass
+
+def from_existing(model, config="") -> TcsmoltenSalt
 	pass
 
 __loader__ = None 

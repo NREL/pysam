@@ -27,12 +27,6 @@ GeoHourly Group
 .. autoclass:: PySAM.Geothermal.Geothermal.GeoHourly
 	:members:
 
-Weather Group
-==============
-
-.. autoclass:: PySAM.Geothermal.Geothermal.Weather
-	:members:
-
 AdjustmentFactors Group
 ==============
 

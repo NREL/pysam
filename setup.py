@@ -1,8 +1,10 @@
-import json, marshal, os, ntpath
+import json, marshal, os, ntpath, shutil
 from setuptools import setup, Extension
 import distutils
 import sys
+from shutil import copyfile
 import distutils.dir_util
+from distutils.core import Command
 
 ###################################################################################################
 #
@@ -10,7 +12,7 @@ import distutils.dir_util
 #
 ###################################################################################################
 
-latest_version = '1.2.dev2'
+latest_version = '2.0'
 
 # determine if making PyPi or Conda distribution
 distclass = distutils.core.Distribution
@@ -22,6 +24,7 @@ if sys.argv[1] == "bdist_conda":
 # defaults and include directories
 defaults_dir = os.environ['SAMNTDIR']+"/api/api_autogen/library/defaults/"
 includepath = os.environ['SAMNTDIR']+"/api/include"
+srcpath = os.environ['SAMNTDIR']+"/api/src"
 
 this_directory = os.path.abspath(os.path.dirname(__file__))
 libpath = this_directory+"/files"
@@ -35,6 +38,7 @@ with open(os.path.join(this_directory, 'RELEASE.md'), encoding='utf-8') as f:
 # prepare package
 libs = []
 libfiles = []
+extra_compile_args = ["-Wno-implicit-function-declaration", "-Wno-unused-function", "-Wno-strict-prototypes"]
 extra_link_args = []
 defines = []
 
@@ -45,16 +49,19 @@ if sys.platform == 'darwin':
     libs = ['SAM_api', 'ssc']
     libfiles = ['libSAM_api.so', 'libssc.so']
     extra_link_args = ["-Wl,-rpath,@loader_path/"]
+    extra_compile_args.append("-Wno-ignored-attributes")
 
 if sys.platform == 'linux':
     libs = ['SAM_api', 'ssc']
     libfiles = ['libSAM_api.so', 'libssc.so']
     extra_link_args = ["-Wl,-rpath,$ORIGIN/"]
+    extra_compile_args.append('-Wno-attributes')
 
 if sys.platform == 'win32':
     libs = ['SAM_api', 'ssc']
     libfiles = ['SAM_api.dll', 'ssc.dll', 'SAM_api.lib', 'ssc.lib']
     defines = [('__WINDOWS__', '1')]
+    extra_compile_args = []
 
 
 ###################################################################################################
@@ -63,21 +70,7 @@ if sys.platform == 'win32':
 #
 ###################################################################################################
 
-for file in libfiles:
-    if file.find("SAM") > -1:
-        distutils.file_util.copy_file(
-            os.environ['SAMNTDIR']+"/api/"+file,
-            libpath,
-            update=1,
-            verbose=1
-        )
-    if file.find("ssc") > -1:
-        distutils.file_util.copy_file(
-            os.environ['SSCDIR'] + "/ssc/" + file,
-            libpath,
-            update=1,
-            verbose=1
-        )
+# dynamic library files should be exported to pysam/files by post-build step of each library but copy over headers
 
 distutils.dir_util.copy_tree(
     includepath,
@@ -86,6 +79,10 @@ distutils.dir_util.copy_tree(
     verbose=1,
 )
 
+for filename in os.listdir(srcpath):
+    name = os.path.splitext(filename)
+    if name[1] == ".h":
+        copyfile(os.path.join(srcpath, filename), os.path.join("src", filename))
 
 # serialize all defaults into dict
 def _decode(o):
@@ -107,15 +104,14 @@ def _decode(o):
     else:
         return o
 
-
+shutil.rmtree('files/defaults')
+os.mkdir('files/defaults')
 # generate defaults and copy them into installation
 for filename in os.listdir(defaults_dir):
     with open(defaults_dir + '/' + filename) as f:
         name = os.path.splitext(filename)
         if name[1] != '.json':
             continue
-        if name[0] == "Windpower_WindPowerCommercial":
-            x = 1
         data = json.load(f)
 
         dic = data[list(data.keys())[0]]
@@ -125,8 +121,44 @@ for filename in os.listdir(defaults_dir):
 for filename in os.listdir(defaults_dir):
     libfiles.append('defaults/' + os.path.splitext(filename)[0] + '.df')
 
+# make list of all extension modules
+extension_modules = [Extension('PySAM.AdjustmentFactors',
+                     ['src/AdjustmentFactors.c'],
+                    define_macros=defines,
+                    include_dirs=["include", "src"],
+                    library_dirs=[libpath],
+                    libraries=libs,
+                    extra_compile_args=extra_compile_args,
+                    extra_link_args=extra_link_args
+                    )]
 
-###################################################################################################
+for filename in os.listdir(this_directory+"/modules"):
+    extension_modules.append(Extension('PySAM.' + os.path.splitext(filename)[0],
+                             ['modules/' + filename],
+                            define_macros=defines,
+                            include_dirs=["include", "src"],
+                            library_dirs=[libpath],
+                            libraries=libs,
+                            extra_compile_args=extra_compile_args,
+                            extra_link_args=extra_link_args
+                            ))
+
+# function to rename macosx distribution for Python 3.7 to be minimum version of 10.12 instead of 10.14
+
+class PostProcess(Command):
+    description = "rename macosx distribution for Python 3.7 to be minimum version of 10.12 instead of 10.14"
+    user_options = []
+    def initialize_options(self):
+        self.cwd = None
+    def finalize_options(self):
+        self.cwd = os.getcwd()
+    def run(self):
+        assert os.getcwd() == self.cwd, 'Must be in package root: %s' % self.cwd
+        name = "NREL_PySAM-" + latest_version + "-" + "cp37-cp37m-macosx_10_14_x86_64.whl"
+        newname = "NREL_PySAM-" + latest_version + "-" + "cp37-cp37m-macosx_10_12_x86_64.whl"
+        os.system('mv ./dist/' + name + ' ./dist/' + newname)
+
+    ###################################################################################################
 #
 # setup script
 #
@@ -151,303 +183,9 @@ setup(
     install_requires=['NREL-PySAM-stubs'],
     setup_requires=["pytest-runner"],
     tests_require=["pytest"],
-    ext_modules=[
-        Extension('PySAM.AdjustmentFactors',
-                  ['src/AdjustmentFactors.c'],
-                  define_macros=defines,
-                  include_dirs=[includepath],
-                  library_dirs=[libpath],
-                  libraries=libs,
-                  extra_link_args=extra_link_args
-                  ),
-        Extension('PySAM.TcsMSLF',
-                  ['src/TcsMSLF.c'],
-                  define_macros=defines,
-                  include_dirs=[includepath],
-                  library_dirs=[libpath],
-                  libraries=libs,
-                  extra_link_args=extra_link_args
-                  ),
-        Extension('PySAM.Singleowner',
-                  ['src/Singleowner.c'],
-                  define_macros=defines,
-                  include_dirs=[includepath],
-                  library_dirs=[libpath],
-                  libraries=libs,
-                  extra_link_args=extra_link_args
-                  ),
-        Extension('PySAM.Saleleaseback',
-                  ['src/Saleleaseback.c'],
-                  define_macros=defines,
-                  include_dirs=[includepath],
-                  library_dirs=[libpath],
-                  libraries=libs,
-                  extra_link_args=extra_link_args
-                  ),
-        Extension('PySAM.Levpartflip',
-                  ['src/Levpartflip.c'],
-                  define_macros=defines,
-                  include_dirs=[includepath],
-                  library_dirs=[libpath],
-                  libraries=libs,
-                  extra_link_args=extra_link_args
-                  ),
-        Extension('PySAM.Utilityrate5',
-                  ['src/Utilityrate5.c'],
-                  define_macros=defines,
-                  include_dirs=[includepath],
-                  library_dirs=[libpath],
-                  libraries=libs,
-                  extra_link_args=extra_link_args
-                  ),
-        Extension('PySAM.CashloanModel',
-                  ['src/CashloanModel.c'],
-                  define_macros=defines,
-                  include_dirs=[includepath],
-                  library_dirs=[libpath],
-                  libraries=libs,
-                  extra_link_args=extra_link_args
-                  ),
-        Extension('PySAM.Lcoefcr',
-                  ['src/Lcoefcr.c'],
-                  define_macros=defines,
-                  include_dirs=[includepath],
-                  library_dirs=[libpath],
-                  libraries=libs,
-                  extra_link_args=extra_link_args
-                  ),
-        Extension('PySAM.TcsdirectSteam',
-                  ['src/TcsdirectSteam.c'],
-                  define_macros=defines,
-                  include_dirs=[includepath],
-                  library_dirs=[libpath],
-                  libraries=libs,
-                  extra_link_args=extra_link_args
-                  ),
-        Extension('PySAM.Equpartflip',
-                  ['src/Equpartflip.c'],
-                  define_macros=defines,
-                  include_dirs=[includepath],
-                  library_dirs=[libpath],
-                  libraries=libs,
-                  extra_link_args=extra_link_args
-                  ),
-        Extension('PySAM.TcslinearFresnel',
-                  ['src/TcslinearFresnel.c'],
-                  define_macros=defines,
-                  include_dirs=[includepath],
-                  library_dirs=[libpath],
-                  libraries=libs,
-                  extra_link_args=extra_link_args
-                  ),
-        Extension('PySAM.LinearFresnelDsgIph',
-                  ['src/LinearFresnelDsgIph.c'],
-                  define_macros=defines,
-                  include_dirs=[includepath],
-                  library_dirs=[libpath],
-                  libraries=libs,
-                  extra_link_args=extra_link_args
-                  ),
-        Extension('PySAM.TcsmoltenSalt',
-                  ['src/TcsmoltenSalt.c'],
-                  define_macros=defines,
-                  include_dirs=[includepath],
-                  library_dirs=[libpath],
-                  libraries=libs,
-                  extra_link_args=extra_link_args
-                  ),
-        Extension('PySAM.Biomass',
-                  ['src/Biomass.c'],
-                  define_macros=defines,
-                  include_dirs=[includepath],
-                  library_dirs=[libpath],
-                  libraries=libs,
-                  extra_link_args=extra_link_args
-                  ),
-        Extension('PySAM.Tcsdish',
-                  ['src/Tcsdish.c'],
-                  define_macros=defines,
-                  include_dirs=[includepath],
-                  library_dirs=[libpath],
-                  libraries=libs,
-                  extra_link_args=extra_link_args
-                  ),
-        Extension('PySAM.Pvwattsv5Lifetime',
-                  ['src/Pvwattsv5Lifetime.c'],
-                  define_macros=defines,
-                  include_dirs=[includepath],
-                  library_dirs=[libpath],
-                  libraries=libs,
-                  extra_link_args=extra_link_args
-                  ),
-        Extension('PySAM.Fuelcell',
-                  ['src/Fuelcell.c'],
-                  define_macros=defines,
-                  include_dirs=[includepath],
-                  library_dirs=[libpath],
-                  libraries=libs,
-                  extra_link_args=extra_link_args
-                  ),
-        Extension('PySAM.StandAloneBattery',
-                  ['src/StandAloneBattery.c'],
-                  define_macros=defines,
-                  include_dirs=[includepath],
-                  library_dirs=[libpath],
-                  libraries=libs,
-                  extra_link_args=extra_link_args
-                  ),
-        Extension('PySAM.Thermalrate',
-                  ['src/Thermalrate.c'],
-                  define_macros=defines,
-                  include_dirs=[includepath],
-                  library_dirs=[libpath],
-                  libraries=libs,
-                  extra_link_args=extra_link_args
-                  ),
-        Extension('PySAM.Swh',
-                  ['src/Swh.c'],
-                  define_macros=defines,
-                  include_dirs=[includepath],
-                  library_dirs=[libpath],
-                  libraries=libs,
-                  extra_link_args=extra_link_args
-                  ),
-        Extension('PySAM.Geothermal',
-                  ['src/Geothermal.c'],
-                  define_macros=defines,
-                  include_dirs=[includepath],
-                  library_dirs=[libpath],
-                  libraries=libs,
-                  extra_link_args=extra_link_args
-                  ),
-        Extension('PySAM.GenericSystem',
-                  ['src/GenericSystem.c'],
-                  define_macros=defines,
-                  include_dirs=[includepath],
-                  library_dirs=[libpath],
-                  libraries=libs,
-                  extra_link_args=extra_link_args
-                  ),
-        Extension('PySAM.Hcpv',
-                  ['src/Hcpv.c'],
-                  define_macros=defines,
-                  include_dirs=[includepath],
-                  library_dirs=[libpath],
-                  libraries=libs,
-                  extra_link_args=extra_link_args
-                  ),
-        Extension('PySAM.TcsgenericSolar',
-                  ['src/TcsgenericSolar.c'],
-                  define_macros=defines,
-                  include_dirs=[includepath],
-                  library_dirs=[libpath],
-                  libraries=libs,
-                  extra_link_args=extra_link_args
-                  ),
-        Extension('PySAM.TroughPhysicalProcessHeat',
-                  ['src/TroughPhysicalProcessHeat.c'],
-                  define_macros=defines,
-                  include_dirs=[includepath],
-                  library_dirs=[libpath],
-                  libraries=libs,
-                  extra_link_args=extra_link_args
-                  ),
-        Extension('PySAM.IphToLcoefcr',
-                  ['src/IphToLcoefcr.c'],
-                  define_macros=defines,
-                  include_dirs=[includepath],
-                  library_dirs=[libpath],
-                  libraries=libs,
-                  extra_link_args=extra_link_args
-                  ),
-        Extension('PySAM.TcstroughPhysical',
-                  ['src/TcstroughPhysical.c'],
-                  define_macros=defines,
-                  include_dirs=[includepath],
-                  library_dirs=[libpath],
-                  libraries=libs,
-                  extra_link_args=extra_link_args
-                  ),
-        Extension('PySAM.Thirdpartyownership',
-                  ['src/Thirdpartyownership.c'],
-                  define_macros=defines,
-                  include_dirs=[includepath],
-                  library_dirs=[libpath],
-                  libraries=libs,
-                  extra_link_args=extra_link_args
-                  ),
-        Extension('PySAM.Pvsamv1',
-                  ['src/Pvsamv1.c'],
-                  define_macros=defines,
-                  include_dirs=[includepath],
-                  library_dirs=[libpath],
-                  libraries=libs,
-                  extra_link_args=extra_link_args
-                  ),
-        Extension('PySAM.Tcsiscc',
-                  ['src/Tcsiscc.c'],
-                  define_macros=defines,
-                  include_dirs=[includepath],
-                  library_dirs=[libpath],
-                  libraries=libs,
-                  extra_link_args=extra_link_args
-                  ),
-        Extension('PySAM.Windpower',
-                  ['src/Windpower.c'],
-                  define_macros=defines,
-                  include_dirs=[includepath],
-                  library_dirs=[libpath],
-                  libraries=libs,
-                  extra_link_args=extra_link_args
-                  ),
-        Extension('PySAM.Pvwattsv5',
-                  ['src/Pvwattsv5.c'],
-                  define_macros=defines,
-                  include_dirs=[includepath],
-                  library_dirs=[libpath],
-                  libraries=libs,
-                  extra_link_args=extra_link_args
-                  ),
-        Extension('PySAM.TcstroughEmpirical',
-                  ['src/TcstroughEmpirical.c'],
-                  define_macros=defines,
-                  include_dirs=[includepath],
-                  library_dirs=[libpath],
-                  libraries=libs,
-                  extra_link_args=extra_link_args
-                  ),
-        Extension('PySAM.Battwatts',
-                  ['src/Battwatts.c'],
-                  define_macros=defines,
-                  include_dirs=[includepath],
-                  library_dirs=[libpath],
-                  libraries=libs,
-                  extra_link_args=extra_link_args
-                  ),
-        Extension('PySAM.Belpe',
-                  ['src/Belpe.c'],
-                  define_macros=defines,
-                  include_dirs=[includepath],
-                  library_dirs=[libpath],
-                  libraries=libs,
-                  extra_link_args=extra_link_args
-                  ),
-        Extension('PySAM.HostDeveloper',
-                  ['src/HostDeveloper.c'],
-                  define_macros=defines,
-                  include_dirs=[includepath],
-                  library_dirs=[libpath],
-                  libraries=libs,
-                  extra_link_args=extra_link_args
-                  ),
-        Extension('PySAM.Grid',
-                  ['src/Grid.c'],
-                  define_macros=defines,
-                  include_dirs=[includepath],
-                  library_dirs=[libpath],
-                  libraries=libs,
-                  extra_link_args=extra_link_args
-                  )
-    ]
+    cmdclass={
+        'post': PostProcess
+    },
+    ext_modules=extension_modules
 )
 

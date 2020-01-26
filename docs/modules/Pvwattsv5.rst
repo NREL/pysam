@@ -21,10 +21,16 @@ Functions
 .. autoclass:: PySAM.Pvwattsv5.Pvwattsv5
 	:members:
 
-LocationAndResource Group
+Lifetime Group
 ==============
 
-.. autoclass:: PySAM.Pvwattsv5.Pvwattsv5.LocationAndResource
+.. autoclass:: PySAM.Pvwattsv5.Pvwattsv5.Lifetime
+	:members:
+
+SolarResource Group
+==============
+
+.. autoclass:: PySAM.Pvwattsv5.Pvwattsv5.SolarResource
 	:members:
 
 SystemDesign Group

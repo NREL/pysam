@@ -1,4 +1,20 @@
-class LocationAndResource(object):
+class Lifetime(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> Dict[Dict]
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
+	analysis_period = float
+	dc_degradation = tuple
+	system_use_lifetime_output = float
+
+
+class SolarResource(object):
 	def assign(self): 
 		pass
 
@@ -40,6 +56,26 @@ class SystemDesign(object):
 	tilt = float
 
 
+class AdjustmentFactors(object):
+	def assign(self): 
+		pass
+
+	def export(self): 
+		return {}
+
+	def __init__(self, *args, **kwargs): # real signature unknown
+		pass
+
+	constant = float
+	dc_constant = float
+	dc_hourly = tuple
+	dc_periods = tuple
+	hourly = tuple
+	periods = tuple
+	sf_constant = float
+	sf_hourly = tuple
+	sf_periods = tuple
+
 class Outputs(object):
 	def assign(self): 
 		pass
@@ -64,13 +100,14 @@ class Outputs(object):
 	dn = tuple
 	elev = float
 	gh = tuple
+	inverter_count = float
 	inverter_efficiency = float
-	inverter_model = float
 	kwh_per_kw = float
 	lat = float
 	location = str
 	lon = float
 	monthly_energy = tuple
+	percent_complete = float
 	poa = tuple
 	poa_monthly = tuple
 	shad_beam_factor = tuple
@@ -78,7 +115,6 @@ class Outputs(object):
 	solrad_monthly = tuple
 	state = str
 	sunup = tuple
-	system_use_lifetime_output = float
 	tamb = tuple
 	tcell = tuple
 	tpoa = tuple
@@ -89,6 +125,9 @@ class Outputs(object):
 
 class Pvwattsv5(object):
 	def assign(self, dict):
+		pass
+
+	def value(self, name, value=None):
 		pass
 
 	def execute(self, int_verbosity):
@@ -103,8 +142,10 @@ class Pvwattsv5(object):
 	def __init__(self, *args, **kwargs):
 		pass
 
-	LocationAndResource = LocationAndResource
+	Lifetime = Lifetime
+	SolarResource = SolarResource
 	SystemDesign = SystemDesign
+	AdjustmentFactors = AdjustmentFactors
 	Outputs = Outputs
 
 
@@ -115,6 +156,9 @@ def new() -> Pvwattsv5
 	pass
 
 def wrap(ssc_data_t) -> Pvwattsv5
+	pass
+
+def from_existing(model, config="") -> Pvwattsv5
 	pass
 
 __loader__ = None 

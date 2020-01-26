@@ -3,10 +3,10 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to PySAM's documentation!
+Welcome to NREL-PySAM's documentation!
 =================================
 
-PySAM is a wrapper for the National Renewable Energy Laboratory's `System Advisor Model <http://sam.nrel.gov>`_ (SAM).
+NREL-PySAM is a wrapper for the National Renewable Energy Laboratory's `System Advisor Model <http://sam.nrel.gov>`_ (SAM).
 
 SAM is a performance and financial model designed to facilitate decision making for people involved in the renewable energy industry:
 
@@ -15,13 +15,21 @@ SAM is a performance and financial model designed to facilitate decision making 
 - Technology developers
 - Researchers
 
-`SAM <http://www.github.com/nrel/sam>`_ is open-source. PySAM provides a native Python interface for the models found in SAM Simulation Core, `SSC <http://www.github.com/nrel/ssc>`_. 
+`SAM <http://www.github.com/nrel/sam>`_ is open-source. PySAM provides a native Python interface for the models found in SAM Simulation Core, `SSC <http://www.github.com/nrel/ssc>`_.
+
+
+Version 2.0 and Upgrading from Older Versions
+=============================================
+
+Between major version changes, in addition to new features, modules and bug fixes, the group to which a variable belongs may change.
+The groups should stabilize after the initial releases.
+Please see :doc:`Version` for more details.
 
 
 Getting Started
 ===============
 
-PySAM is available on PyPi and Anaconda (Windows and MacOSX only) as NREL-PySAM. NREL-PySAM-stubs is the stub file package providing autocompletion features.
+For Python 3.5 to 3.7, as NREL-PySAM is available on PyPi, and on Anaconda (MacOSX and Windows for Python 3.7 only). NREL-PySAM-stubs is the stub file package providing auto-completion features.
 
 To install from PyPi::
 
@@ -29,8 +37,8 @@ To install from PyPi::
 
 To install from Anaconda, the NREL channel needs to be appended::
 
-	conda config --append channels NREL
-	conda install -c nrel nrel-pysam
+    conda config --env --append channels nrel
+    conda install nrel-pysam
 
 Each technology and financial model is its own module, which can be imported by::
 
@@ -40,26 +48,7 @@ The original Python SDK, PySSC, is bundled, and can be imported by::
 
 	from PySAM.PySSC import PySSC
 
-There are three methods to create a new instance of a PySAM module. Using ``default`` populates the newclass' attributes with default values specific to a ``config``. Each technology-financialconfiguration corresponds to a SAM GUI configuration. Using ``new`` creates an instance with empty attributes. The ``wrap`` function allows compatibility with PySSC, for details, refer to :doc:`../PySSC`.
-
-Create a new empty model::
-
-	PySAM.<PySAM Module>.new()
-
-Create a new model with values assigned from defaults::
-
-	PySAM.<PySAM Module>.default(string configuration)
-
-Built-in documentation is also available with help.
-
-View parameter groups per class and available default values::
-
-	help(PySAM.<PySAM Module>)
-
-View descriptions of parameters in a group::
-
-	help(PySAM.<PySAM Module>.<group>)
-
+For examples of using PySAM modules, see :doc:`Examples`
 
 Available Models
 ===============================
@@ -73,20 +62,16 @@ SAM Configurations
 For a table of SAM configurations and the sequence of models required to run them, see :doc:`Configs`.
 
 
-Importing a SAM GUI Case
-========================
-
-For an example of how to import the modules and variables from a SAM GUI Case, see :doc:`Import`.
-
-
 PySAM Documentation Pages
 =========================
 .. toctree::
    :maxdepth: 2
 
-   PySSC
    Models
    Configs
+   Tools
+   PySSC
+   Examples
    Import
 
 

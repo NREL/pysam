@@ -21,10 +21,10 @@ Functions
 .. autoclass:: PySAM.Utilityrate5.Utilityrate5
 	:members:
 
-Common Group
+ElectricityRates Group
 ==============
 
-.. autoclass:: PySAM.Utilityrate5.Utilityrate5.Common
+.. autoclass:: PySAM.Utilityrate5.Utilityrate5.ElectricityRates
 	:members:
 
 Lifetime Group
@@ -39,34 +39,10 @@ SystemOutput Group
 .. autoclass:: PySAM.Utilityrate5.Utilityrate5.SystemOutput
 	:members:
 
-TimeSeries Group
+Load Group
 ==============
 
-.. autoclass:: PySAM.Utilityrate5.Utilityrate5.TimeSeries
-	:members:
-
-ElectricLoad Group
-==============
-
-.. autoclass:: PySAM.Utilityrate5.Utilityrate5.ElectricLoad
-	:members:
-
-UtilityRateFlat Group
-==============
-
-.. autoclass:: PySAM.Utilityrate5.Utilityrate5.UtilityRateFlat
-	:members:
-
-UtilityRateEnergyCharge Group
-==============
-
-.. autoclass:: PySAM.Utilityrate5.Utilityrate5.UtilityRateEnergyCharge
-	:members:
-
-UtilityRateDemandCharge Group
-==============
-
-.. autoclass:: PySAM.Utilityrate5.Utilityrate5.UtilityRateDemandCharge
+.. autoclass:: PySAM.Utilityrate5.Utilityrate5.Load
 	:members:
 
 Outputs Group

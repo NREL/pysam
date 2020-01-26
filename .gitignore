@@ -1,6 +1,7 @@
 # building
 lib/
 build/
+docs/_build/
 cmake-build-debug/
 cmake-build-release/
 *.pyproj
@@ -9,6 +10,7 @@ cmake-build-release/
 #os specific
 .idea/
 .DS_Store
+*.so
 
 #python virutal environments
 env/
@@ -19,5 +21,6 @@ __pycache__
 dist/
 manylinux/
 *.egg-info
+*.eggs
 \.vs/
-data/defaults
+files/defaults/

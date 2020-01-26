@@ -76,6 +76,7 @@ class FuelCell(object):
 	fuelcell_fuel_available = float
 	fuelcell_fuel_price = float
 	fuelcell_fuel_type = float
+	fuelcell_is_started = float
 	fuelcell_lhv = float
 	fuelcell_number_of_units = float
 	fuelcell_operation_options = float
@@ -101,6 +102,7 @@ class Outputs(object):
 
 
 	annual_fuel_usage = float
+	annual_fuel_usage_lifetime = tuple
 	fuelcell_electrical_efficiency = tuple
 	fuelcell_fuel_consumption_mcf = tuple
 	fuelcell_percent_load = tuple
@@ -116,6 +118,9 @@ class Outputs(object):
 
 class Fuelcell(object):
 	def assign(self, dict):
+		pass
+
+	def value(self, name, value=None):
 		pass
 
 	def execute(self, int_verbosity):
@@ -144,6 +149,9 @@ def new() -> Fuelcell
 	pass
 
 def wrap(ssc_data_t) -> Fuelcell
+	pass
+
+def from_existing(model, config="") -> Fuelcell
 	pass
 
 __loader__ = None 

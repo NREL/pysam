@@ -21,6 +21,12 @@ Functions
 .. autoclass:: PySAM.Saleleaseback.Saleleaseback
 	:members:
 
+Revenue Group
+==============
+
+.. autoclass:: PySAM.Saleleaseback.Saleleaseback.Revenue
+	:members:
+
 FinancialParameters Group
 ==============
 
@@ -39,6 +45,12 @@ TaxCreditIncentives Group
 .. autoclass:: PySAM.Saleleaseback.Saleleaseback.TaxCreditIncentives
 	:members:
 
+Depreciation Group
+==============
+
+.. autoclass:: PySAM.Saleleaseback.Saleleaseback.Depreciation
+	:members:
+
 PaymentIncentives Group
 ==============
 
@@ -51,10 +63,10 @@ SystemOutput Group
 .. autoclass:: PySAM.Saleleaseback.Saleleaseback.SystemOutput
 	:members:
 
-DHF Group
+SaleLeaseback Group
 ==============
 
-.. autoclass:: PySAM.Saleleaseback.Saleleaseback.DHF
+.. autoclass:: PySAM.Saleleaseback.Saleleaseback.SaleLeaseback
 	:members:
 
 TimeOfDelivery Group
@@ -63,22 +75,16 @@ TimeOfDelivery Group
 .. autoclass:: PySAM.Saleleaseback.Saleleaseback.TimeOfDelivery
 	:members:
 
-ReserveAccounts Group
-==============
-
-.. autoclass:: PySAM.Saleleaseback.Saleleaseback.ReserveAccounts
-	:members:
-
 OtherCapitalCosts Group
 ==============
 
 .. autoclass:: PySAM.Saleleaseback.Saleleaseback.OtherCapitalCosts
 	:members:
 
-Battery Group
+BatterySystem Group
 ==============
 
-.. autoclass:: PySAM.Saleleaseback.Saleleaseback.Battery
+.. autoclass:: PySAM.Saleleaseback.Saleleaseback.BatterySystem
 	:members:
 
 Outputs Group

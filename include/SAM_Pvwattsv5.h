@@ -32,7 +32,36 @@ extern "C"
 
 
 	//
-	// LocationAndResource parameters
+	// Lifetime parameters
+	//
+
+	/**
+	 * Set analysis_period: Analysis period [years]
+	 * options: None
+	 * constraints: None
+	 * required if: system_use_lifetime_output=1
+	 */
+	SAM_EXPORT void SAM_Pvwattsv5_Lifetime_analysis_period_nset(SAM_Pvwattsv5 ptr, double number, SAM_error *err);
+
+	/**
+	 * Set dc_degradation: Annual DC degradation for lifetime simulations [%/year]
+	 * options: None
+	 * constraints: None
+	 * required if: system_use_lifetime_output=1
+	 */
+	SAM_EXPORT void SAM_Pvwattsv5_Lifetime_dc_degradation_aset(SAM_Pvwattsv5 ptr, double* arr, int length, SAM_error *err);
+
+	/**
+	 * Set system_use_lifetime_output: Run lifetime simulation [0/1]
+	 * options: None
+	 * constraints: None
+	 * required if: ?=0
+	 */
+	SAM_EXPORT void SAM_Pvwattsv5_Lifetime_system_use_lifetime_output_nset(SAM_Pvwattsv5 ptr, double number, SAM_error *err);
+
+
+	//
+	// SolarResource parameters
 	//
 
 	/**
@@ -41,7 +70,7 @@ extern "C"
 	 * constraints: None
 	 * required if: ?
 	 */
-	SAM_EXPORT void SAM_Pvwattsv5_LocationAndResource_solar_resource_data_tset(SAM_Pvwattsv5 ptr, SAM_table tab, SAM_error *err);
+	SAM_EXPORT void SAM_Pvwattsv5_SolarResource_solar_resource_data_tset(SAM_Pvwattsv5 ptr, SAM_table tab, SAM_error *err);
 
 	/**
 	 * Set solar_resource_file: Weather file path
@@ -49,7 +78,7 @@ extern "C"
 	 * constraints: None
 	 * required if: ?
 	 */
-	SAM_EXPORT void SAM_Pvwattsv5_LocationAndResource_solar_resource_file_sset(SAM_Pvwattsv5 ptr, const char* str, SAM_error *err);
+	SAM_EXPORT void SAM_Pvwattsv5_SolarResource_solar_resource_file_sset(SAM_Pvwattsv5 ptr, const char* str, SAM_error *err);
 
 
 	//
@@ -91,7 +120,7 @@ extern "C"
 	/**
 	 * Set gcr: Ground coverage ratio [0..1]
 	 * options: None
-	 * constraints: MIN=0,MAX=3
+	 * constraints: MIN=0,MAX=1
 	 * required if: ?=0.4
 	 */
 	SAM_EXPORT void SAM_Pvwattsv5_SystemDesign_gcr_nset(SAM_Pvwattsv5 ptr, double number, SAM_error *err);
@@ -170,12 +199,23 @@ extern "C"
 
 
 	/**
-	 * LocationAndResource Getters
+	 * Lifetime Getters
 	 */
 
-	SAM_EXPORT SAM_table SAM_Pvwattsv5_LocationAndResource_solar_resource_data_tget(SAM_Pvwattsv5 ptr, SAM_error *err);
+	SAM_EXPORT double SAM_Pvwattsv5_Lifetime_analysis_period_nget(SAM_Pvwattsv5 ptr, SAM_error *err);
 
-	SAM_EXPORT const char* SAM_Pvwattsv5_LocationAndResource_solar_resource_file_sget(SAM_Pvwattsv5 ptr, SAM_error *err);
+	SAM_EXPORT double* SAM_Pvwattsv5_Lifetime_dc_degradation_aget(SAM_Pvwattsv5 ptr, int* length, SAM_error *err);
+
+	SAM_EXPORT double SAM_Pvwattsv5_Lifetime_system_use_lifetime_output_nget(SAM_Pvwattsv5 ptr, SAM_error *err);
+
+
+	/**
+	 * SolarResource Getters
+	 */
+
+	SAM_EXPORT SAM_table SAM_Pvwattsv5_SolarResource_solar_resource_data_tget(SAM_Pvwattsv5 ptr, SAM_error *err);
+
+	SAM_EXPORT const char* SAM_Pvwattsv5_SolarResource_solar_resource_file_sget(SAM_Pvwattsv5 ptr, SAM_error *err);
 
 
 	/**
@@ -241,9 +281,9 @@ extern "C"
 
 	SAM_EXPORT double* SAM_Pvwattsv5_Outputs_gh_aget(SAM_Pvwattsv5 ptr, int* length, SAM_error *err);
 
-	SAM_EXPORT double SAM_Pvwattsv5_Outputs_inverter_efficiency_nget(SAM_Pvwattsv5 ptr, SAM_error *err);
+	SAM_EXPORT double SAM_Pvwattsv5_Outputs_inverter_count_nget(SAM_Pvwattsv5 ptr, SAM_error *err);
 
-	SAM_EXPORT double SAM_Pvwattsv5_Outputs_inverter_model_nget(SAM_Pvwattsv5 ptr, SAM_error *err);
+	SAM_EXPORT double SAM_Pvwattsv5_Outputs_inverter_efficiency_nget(SAM_Pvwattsv5 ptr, SAM_error *err);
 
 	SAM_EXPORT double SAM_Pvwattsv5_Outputs_kwh_per_kw_nget(SAM_Pvwattsv5 ptr, SAM_error *err);
 
@@ -254,6 +294,8 @@ extern "C"
 	SAM_EXPORT double SAM_Pvwattsv5_Outputs_lon_nget(SAM_Pvwattsv5 ptr, SAM_error *err);
 
 	SAM_EXPORT double* SAM_Pvwattsv5_Outputs_monthly_energy_aget(SAM_Pvwattsv5 ptr, int* length, SAM_error *err);
+
+	SAM_EXPORT double SAM_Pvwattsv5_Outputs_percent_complete_nget(SAM_Pvwattsv5 ptr, SAM_error *err);
 
 	SAM_EXPORT double* SAM_Pvwattsv5_Outputs_poa_aget(SAM_Pvwattsv5 ptr, int* length, SAM_error *err);
 
@@ -268,8 +310,6 @@ extern "C"
 	SAM_EXPORT const char* SAM_Pvwattsv5_Outputs_state_sget(SAM_Pvwattsv5 ptr, SAM_error *err);
 
 	SAM_EXPORT double* SAM_Pvwattsv5_Outputs_sunup_aget(SAM_Pvwattsv5 ptr, int* length, SAM_error *err);
-
-	SAM_EXPORT double SAM_Pvwattsv5_Outputs_system_use_lifetime_output_nget(SAM_Pvwattsv5 ptr, SAM_error *err);
 
 	SAM_EXPORT double* SAM_Pvwattsv5_Outputs_tamb_aget(SAM_Pvwattsv5 ptr, int* length, SAM_error *err);
 

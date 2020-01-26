@@ -155,6 +155,26 @@ class Type298(object):
 	tower_pipe_material = float
 
 
+class AdjustmentFactors(object):
+	def assign(self): 
+		pass
+
+	def export(self): 
+		return {}
+
+	def __init__(self, *args, **kwargs): # real signature unknown
+		pass
+
+	constant = float
+	dc_constant = float
+	dc_hourly = tuple
+	dc_periods = tuple
+	hourly = tuple
+	periods = tuple
+	sf_constant = float
+	sf_hourly = tuple
+	sf_periods = tuple
+
 class Outputs(object):
 	def assign(self): 
 		pass
@@ -231,6 +251,9 @@ class Tcsdish(object):
 	def assign(self, dict):
 		pass
 
+	def value(self, name, value=None):
+		pass
+
 	def execute(self, int_verbosity):
 		pass
 
@@ -249,6 +272,7 @@ class Tcsdish(object):
 	Type296 = Type296
 	Type297 = Type297
 	Type298 = Type298
+	AdjustmentFactors = AdjustmentFactors
 	Outputs = Outputs
 
 
@@ -259,6 +283,9 @@ def new() -> Tcsdish
 	pass
 
 def wrap(ssc_data_t) -> Tcsdish
+	pass
+
+def from_existing(model, config="") -> Tcsdish
 	pass
 
 __loader__ = None 

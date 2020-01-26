@@ -30,6 +30,7 @@ class GeoHourly(object):
 	design_temp = float
 	eta_ref = float
 	excess_pressure_pump = float
+	file_name = str
 	fracture_angle = float
 	fracture_aperature = float
 	fracture_width = float
@@ -73,6 +74,7 @@ class GeoHourly(object):
 	startup_frac = float
 	startup_time = float
 	subsurface_water_loss = float
+	system_use_lifetime_output = float
 	temp_decline_max = float
 	temp_decline_rate = float
 	ui_calculations_only = float
@@ -81,19 +83,25 @@ class GeoHourly(object):
 	wet_bulb_temp = float
 
 
-class Weather(object):
+class AdjustmentFactors(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self): 
+		return {}
+
+	def __init__(self, *args, **kwargs): # real signature unknown
 		pass
 
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	file_name = str
-
+	constant = float
+	dc_constant = float
+	dc_hourly = tuple
+	dc_periods = tuple
+	hourly = tuple
+	periods = tuple
+	sf_constant = float
+	sf_hourly = tuple
+	sf_periods = tuple
 
 class Outputs(object):
 	def assign(self): 
@@ -117,6 +125,7 @@ class Outputs(object):
 	eff_secondlaw = float
 	first_year_output = float
 	flash_count = float
+	gen = tuple
 	gross_output = float
 	hp_flash_pressure = float
 	kwh_per_kw = float
@@ -145,7 +154,6 @@ class Outputs(object):
 	spec_vol_lp = float
 	system_lifetime_recapitalize = tuple
 	timestep_dry_bulb = tuple
-	timestep_power = tuple
 	timestep_pressure = tuple
 	timestep_resource_temperature = tuple
 	timestep_test_values = tuple
@@ -161,6 +169,9 @@ class Geothermal(object):
 	def assign(self, dict):
 		pass
 
+	def value(self, name, value=None):
+		pass
+
 	def execute(self, int_verbosity):
 		pass
 
@@ -174,7 +185,7 @@ class Geothermal(object):
 		pass
 
 	GeoHourly = GeoHourly
-	Weather = Weather
+	AdjustmentFactors = AdjustmentFactors
 	Outputs = Outputs
 
 
@@ -185,6 +196,9 @@ def new() -> Geothermal
 	pass
 
 def wrap(ssc_data_t) -> Geothermal
+	pass
+
+def from_existing(model, config="") -> Geothermal
 	pass
 
 __loader__ = None 

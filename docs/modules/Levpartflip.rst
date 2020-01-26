@@ -21,6 +21,12 @@ Functions
 .. autoclass:: PySAM.Levpartflip.Levpartflip
 	:members:
 
+Revenue Group
+==============
+
+.. autoclass:: PySAM.Levpartflip.Levpartflip.Revenue
+	:members:
+
 FinancialParameters Group
 ==============
 
@@ -37,6 +43,12 @@ TaxCreditIncentives Group
 ==============
 
 .. autoclass:: PySAM.Levpartflip.Levpartflip.TaxCreditIncentives
+	:members:
+
+Depreciation Group
+==============
+
+.. autoclass:: PySAM.Levpartflip.Levpartflip.Depreciation
 	:members:
 
 PaymentIncentives Group
@@ -69,40 +81,10 @@ TimeOfDelivery Group
 .. autoclass:: PySAM.Levpartflip.Levpartflip.TimeOfDelivery
 	:members:
 
-ReserveAccounts Group
-==============
-
-.. autoclass:: PySAM.Levpartflip.Levpartflip.ReserveAccounts
-	:members:
-
-Depreciation Group
-==============
-
-.. autoclass:: PySAM.Levpartflip.Levpartflip.Depreciation
-	:members:
-
-SalvageValue Group
-==============
-
-.. autoclass:: PySAM.Levpartflip.Levpartflip.SalvageValue
-	:members:
-
-SolutionMode Group
-==============
-
-.. autoclass:: PySAM.Levpartflip.Levpartflip.SolutionMode
-	:members:
-
 ConstructionFinancing Group
 ==============
 
 .. autoclass:: PySAM.Levpartflip.Levpartflip.ConstructionFinancing
-	:members:
-
-ProjectTermDebt Group
-==============
-
-.. autoclass:: PySAM.Levpartflip.Levpartflip.ProjectTermDebt
 	:members:
 
 OtherCapitalCosts Group
@@ -117,16 +99,10 @@ IRRTargets Group
 .. autoclass:: PySAM.Levpartflip.Levpartflip.IRRTargets
 	:members:
 
-CashIncentives Group
+BatterySystem Group
 ==============
 
-.. autoclass:: PySAM.Levpartflip.Levpartflip.CashIncentives
-	:members:
-
-Battery Group
-==============
-
-.. autoclass:: PySAM.Levpartflip.Levpartflip.Battery
+.. autoclass:: PySAM.Levpartflip.Levpartflip.BatterySystem
 	:members:
 
 Outputs Group

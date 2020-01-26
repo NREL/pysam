@@ -1,4 +1,4 @@
-class Common(object):
+class ElectricityRates(object):
 	def assign(self): 
 		pass
 
@@ -11,7 +11,24 @@ class Common(object):
 
 	TOU_demand_single_peak = float
 	en_electricity_rates = float
+	rate_escalation = tuple
+	ur_annual_min_charge = float
+	ur_dc_enable = float
+	ur_dc_flat_mat = tuple
+	ur_dc_sched_weekday = tuple
+	ur_dc_sched_weekend = tuple
+	ur_dc_tou_mat = tuple
+	ur_ec_sched_weekday = tuple
+	ur_ec_sched_weekend = tuple
+	ur_ec_tou_mat = tuple
+	ur_en_ts_sell_rate = float
+	ur_metering_option = float
+	ur_monthly_fixed_charge = float
+	ur_monthly_min_charge = float
+	ur_nm_yearend_sell_rate = float
 	ur_sell_eq_buy = float
+	ur_ts_buy_rate = tuple
+	ur_ts_sell_rate = tuple
 
 
 class Lifetime(object):
@@ -45,7 +62,7 @@ class SystemOutput(object):
 	gen = tuple
 
 
-class TimeSeries(object):
+class Load(object):
 	def assign(self): 
 		pass
 
@@ -57,75 +74,7 @@ class TimeSeries(object):
 
 
 	load = tuple
-
-
-class ElectricLoad(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> Dict[Dict]
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
 	load_escalation = tuple
-
-
-class UtilityRateFlat(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> Dict[Dict]
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	rate_escalation = tuple
-	ur_annual_min_charge = float
-	ur_en_ts_sell_rate = float
-	ur_metering_option = float
-	ur_monthly_fixed_charge = float
-	ur_monthly_min_charge = float
-	ur_nm_yearend_sell_rate = float
-	ur_ts_sell_rate = tuple
-
-
-class UtilityRateEnergyCharge(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> Dict[Dict]
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	ur_ec_sched_weekday = tuple
-	ur_ec_sched_weekend = tuple
-	ur_ec_tou_mat = tuple
-
-
-class UtilityRateDemandCharge(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> Dict[Dict]
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	ur_dc_enable = float
-	ur_dc_flat_mat = tuple
-	ur_dc_sched_weekday = tuple
-	ur_dc_sched_weekend = tuple
-	ur_dc_tou_mat = tuple
 
 
 class Outputs(object):
@@ -288,6 +237,9 @@ class Utilityrate5(object):
 	def assign(self, dict):
 		pass
 
+	def value(self, name, value=None):
+		pass
+
 	def execute(self, int_verbosity):
 		pass
 
@@ -300,14 +252,10 @@ class Utilityrate5(object):
 	def __init__(self, *args, **kwargs):
 		pass
 
-	Common = Common
+	ElectricityRates = ElectricityRates
 	Lifetime = Lifetime
 	SystemOutput = SystemOutput
-	TimeSeries = TimeSeries
-	ElectricLoad = ElectricLoad
-	UtilityRateFlat = UtilityRateFlat
-	UtilityRateEnergyCharge = UtilityRateEnergyCharge
-	UtilityRateDemandCharge = UtilityRateDemandCharge
+	Load = Load
 	Outputs = Outputs
 
 
@@ -318,6 +266,9 @@ def new() -> Utilityrate5
 	pass
 
 def wrap(ssc_data_t) -> Utilityrate5
+	pass
+
+def from_existing(model, config="") -> Utilityrate5
 	pass
 
 __loader__ = None 

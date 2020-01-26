@@ -135,28 +135,34 @@ InverterMermoudLejeuneModel Group
 .. autoclass:: PySAM.Pvsamv1.Pvsamv1.InverterMermoudLejeuneModel
 	:members:
 
-Battery Group
+BatterySystem Group
 ==============
 
-.. autoclass:: PySAM.Pvsamv1.Pvsamv1.Battery
+.. autoclass:: PySAM.Pvsamv1.Pvsamv1.BatterySystem
 	:members:
 
-Simulation Group
+Load Group
 ==============
 
-.. autoclass:: PySAM.Pvsamv1.Pvsamv1.Simulation
+.. autoclass:: PySAM.Pvsamv1.Pvsamv1.Load
 	:members:
 
-Common Group
+BatteryCell Group
 ==============
 
-.. autoclass:: PySAM.Pvsamv1.Pvsamv1.Common
+.. autoclass:: PySAM.Pvsamv1.Pvsamv1.BatteryCell
 	:members:
 
-PV Group
+BatteryDispatch Group
 ==============
 
-.. autoclass:: PySAM.Pvsamv1.Pvsamv1.PV
+.. autoclass:: PySAM.Pvsamv1.Pvsamv1.BatteryDispatch
+	:members:
+
+ElectricityRates Group
+==============
+
+.. autoclass:: PySAM.Pvsamv1.Pvsamv1.ElectricityRates
 	:members:
 
 FuelCell Group
@@ -165,16 +171,10 @@ FuelCell Group
 .. autoclass:: PySAM.Pvsamv1.Pvsamv1.FuelCell
 	:members:
 
-ElectricityRate Group
+PriceSignal Group
 ==============
 
-.. autoclass:: PySAM.Pvsamv1.Pvsamv1.ElectricityRate
-	:members:
-
-EnergyMarket Group
-==============
-
-.. autoclass:: PySAM.Pvsamv1.Pvsamv1.EnergyMarket
+.. autoclass:: PySAM.Pvsamv1.Pvsamv1.PriceSignal
 	:members:
 
 AdjustmentFactors Group

@@ -199,6 +199,26 @@ class Parasitics(object):
 	piping_loss = float
 
 
+class AdjustmentFactors(object):
+	def assign(self): 
+		pass
+
+	def export(self): 
+		return {}
+
+	def __init__(self, *args, **kwargs): # real signature unknown
+		pass
+
+	constant = float
+	dc_constant = float
+	dc_hourly = tuple
+	dc_periods = tuple
+	hourly = tuple
+	periods = tuple
+	sf_constant = float
+	sf_hourly = tuple
+	sf_periods = tuple
+
 class Outputs(object):
 	def assign(self): 
 		pass
@@ -261,6 +281,9 @@ class Tcsiscc(object):
 	def assign(self, dict):
 		pass
 
+	def value(self, name, value=None):
+		pass
+
 	def execute(self, int_verbosity):
 		pass
 
@@ -279,6 +302,7 @@ class Tcsiscc(object):
 	Receiver = Receiver
 	Powerblock = Powerblock
 	Parasitics = Parasitics
+	AdjustmentFactors = AdjustmentFactors
 	Outputs = Outputs
 
 
@@ -289,6 +313,9 @@ def new() -> Tcsiscc
 	pass
 
 def wrap(ssc_data_t) -> Tcsiscc
+	pass
+
+def from_existing(model, config="") -> Tcsiscc
 	pass
 
 __loader__ = None 

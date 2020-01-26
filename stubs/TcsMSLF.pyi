@@ -259,18 +259,8 @@ class UserDefinedPC(object):
 		pass
 
 
-	ud_T_amb_des = float
-	ud_T_amb_high = float
-	ud_T_amb_ind_od = tuple
-	ud_T_amb_low = float
-	ud_T_htf_high = float
-	ud_T_htf_ind_od = tuple
-	ud_T_htf_low = float
 	ud_f_W_dot_cool_des = float
 	ud_ind_od = tuple
-	ud_m_dot_htf_high = float
-	ud_m_dot_htf_ind_od = tuple
-	ud_m_dot_htf_low = float
 	ud_m_dot_water_cool_des = float
 
 
@@ -289,6 +279,26 @@ class Enet(object):
 	eta_tes_htr = float
 	fp_mode = float
 
+
+class AdjustmentFactors(object):
+	def assign(self): 
+		pass
+
+	def export(self): 
+		return {}
+
+	def __init__(self, *args, **kwargs): # real signature unknown
+		pass
+
+	constant = float
+	dc_constant = float
+	dc_hourly = tuple
+	dc_periods = tuple
+	hourly = tuple
+	periods = tuple
+	sf_constant = float
+	sf_hourly = tuple
+	sf_periods = tuple
 
 class Outputs(object):
 	def assign(self): 
@@ -386,6 +396,9 @@ class TcsMSLF(object):
 	def assign(self, dict):
 		pass
 
+	def value(self, name, value=None):
+		pass
+
 	def execute(self, int_verbosity):
 		pass
 
@@ -406,6 +419,7 @@ class TcsMSLF(object):
 	Powerblock = Powerblock
 	UserDefinedPC = UserDefinedPC
 	Enet = Enet
+	AdjustmentFactors = AdjustmentFactors
 	Outputs = Outputs
 
 
@@ -416,6 +430,9 @@ def new() -> TcsMSLF
 	pass
 
 def wrap(ssc_data_t) -> TcsMSLF
+	pass
+
+def from_existing(model, config="") -> TcsMSLF
 	pass
 
 __loader__ = None 
