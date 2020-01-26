@@ -13,13 +13,13 @@ Directly as <class><subclass><variable>, as for the LocationAndResource group in
     import PySAM.Pvwattsv7 as pv
 
     system_model = pv.new()
-    system_model.LocationAndResource.solar_resource_file
+    system_model.SolarResource.solar_resource_file
 
 
 Groups and variables can also be accessed using `__getattribute__`. Variables can be set with `__setattr__::
 
-    system_model.__getattribute__('LocationAndResource').__getattribute__('solar_resource_file')
-    system_model.__getattribute__('LocationAndResource').__setattr__('solar_resource_file') = filename
+    system_model.__getattribute__('SolarResource').__getattribute__('solar_resource_file')
+    system_model.__getattribute__('SolarResource').__setattr__('solar_resource_file') = filename
 
 
 If the group name isn't known, a variable can be accessed using `value`::
@@ -50,7 +50,7 @@ PVwattsv7 model. The execute function of each model is called sequentially.::
     system_model = pv.default('PVWattsSingleOwner')
     financial_model = so.from_existing(system_model, 'PVWattsSingleOwner')
 
-    system_model.LocationAndResource.solar_resource_file = 'phoenix_az_33.450495_-111.983688_psmv3_60_tmy.csv'
+    system_model.SolarResource.solar_resource_file = filename
 
     system_model.execute()
     financial_model.execute()
@@ -82,10 +82,8 @@ a properly-formatted dictionary of ReOpt inputs that can then be posted to the R
     battery_model = stbt.from_existing(system_model, "BatteryNone")
 
     # ReOpt requires lat/lon for downloading a weather file internally; custom weather files cannot be provided
-    # give lat lon
-    system_model.SolarResource.solar_resource_data = dict({'lat': 33, 'lon': -70})
-    # or read lat lon from a weather file
-    system_model.SolarResource.solar_resource_data = filename
+    # so instead lat lon can be read from a weather file
+    system_model.SolarResource.solar_resource_file = filename
 
     battery_model.Load.crit_load = [0] * 8760
     post = system_model.Reopt_size_battery_post()

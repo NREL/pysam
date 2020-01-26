@@ -84,10 +84,10 @@ WeatherReader_set_wave_resource_filename(VarGroupObject *self, PyObject *value, 
 
 static PyGetSetDef WeatherReader_getset[] = {
 {"use_specific_wf_wave", (getter)WeatherReader_get_use_specific_wf_wave,(setter)WeatherReader_set_use_specific_wf_wave,
-	PyDoc_STR("*float*: user specified file [0/1]\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: user specified file [0/1]\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: If not provided, assumed to be 0\n\n*Changes to this variable may require updating the values of the following*: \n\t - wave_resource_filename\n"),
  	NULL},
 {"wave_resource_filename", (getter)WeatherReader_get_wave_resource_filename,(setter)WeatherReader_set_wave_resource_filename,
-	PyDoc_STR("*str*: local weather file path\n\n*Constraints*: LOCAL_FILE\n\n*Required*: True"),
+	PyDoc_STR("*str*: local weather file path\n\n*Constraints*: LOCAL_FILE\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - use_specific_wf_wave\n"),
  	NULL},
 	{NULL}  /* Sentinel */
 };

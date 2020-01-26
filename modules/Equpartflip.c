@@ -1148,7 +1148,7 @@ static PyGetSetDef SystemCosts_getset[] = {
 	PyDoc_STR("*float*: Replacement cost escalation [%/year]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
 {"total_installed_cost", (getter)SystemCosts_get_total_installed_cost,(setter)SystemCosts_set_total_installed_cost,
-	PyDoc_STR("*float*: Installed cost [$]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Installed cost [$]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - construction_financing_cost\n"),
  	NULL},
 	{NULL}  /* Sentinel */
 };

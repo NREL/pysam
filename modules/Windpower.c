@@ -164,7 +164,7 @@ static PyGetSetDef Resource_getset[] = {
 	PyDoc_STR("*str*: Local wind data file path\n\n*Constraints*: LOCAL_FILE\n\n*Required*: False"),
  	NULL},
 {"wind_resource_model_choice", (getter)Resource_get_wind_resource_model_choice,(setter)Resource_set_wind_resource_model_choice,
-	PyDoc_STR("*float*: Hourly, Weibull or Distribution model [0/1/2]\n\n*Constraints*: INTEGER\n\n*Required*: True"),
+	PyDoc_STR("*float*: Hourly, Weibull or Distribution model [0/1/2]\n\n*Constraints*: INTEGER\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - wind_turbine_powercurve_powerout\n\t - wind_turbine_powercurve_windspeeds\n"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -347,19 +347,19 @@ static PyGetSetDef Turbine_getset[] = {
 	PyDoc_STR("*float*: Shear exponent\n\n*Constraints*: MIN=0\n\n*Required*: True"),
  	NULL},
 {"wind_turbine_hub_ht", (getter)Turbine_get_wind_turbine_hub_ht,(setter)Turbine_set_wind_turbine_hub_ht,
-	PyDoc_STR("*float*: Hub height [m]\n\n*Constraints*: POSITIVE\n\n*Required*: True"),
+	PyDoc_STR("*float*: Hub height [m]\n\n*Constraints*: POSITIVE\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - wind_turbine_powercurve_powerout\n\t - wind_turbine_powercurve_windspeeds\n"),
  	NULL},
 {"wind_turbine_max_cp", (getter)Turbine_get_wind_turbine_max_cp,(setter)Turbine_set_wind_turbine_max_cp,
-	PyDoc_STR("*float*: Max Coefficient of Power\n\n*Constraints*: MIN=0\n\n*Required*: True if wind_resource_model_choice=1"),
+	PyDoc_STR("*float*: Max Coefficient of Power\n\n*Constraints*: MIN=0\n\n*Required*: True if wind_resource_model_choice=1\n\n*Changes to this variable may require updating the values of the following*: \n\t - wind_turbine_powercurve_powerout\n\t - wind_turbine_powercurve_windspeeds\n"),
  	NULL},
 {"wind_turbine_powercurve_powerout", (getter)Turbine_get_wind_turbine_powercurve_powerout,(setter)Turbine_set_wind_turbine_powercurve_powerout,
-	PyDoc_STR("*sequence*: Power curve turbine output array [kW]\n\n*Constraints*: LENGTH_EQUAL=wind_turbine_powercurve_windspeeds\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: Power curve turbine output array [kW]\n\n*Constraints*: LENGTH_EQUAL=wind_turbine_powercurve_windspeeds\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - wind_resource_model_choice\n\t - wind_turbine_hub_ht\n\t - wind_turbine_max_cp\n"),
  	NULL},
 {"wind_turbine_powercurve_windspeeds", (getter)Turbine_get_wind_turbine_powercurve_windspeeds,(setter)Turbine_set_wind_turbine_powercurve_windspeeds,
-	PyDoc_STR("*sequence*: Power curve wind speed array [m/s]\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: Power curve wind speed array [m/s]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - wind_resource_model_choice\n\t - wind_turbine_hub_ht\n\t - wind_turbine_max_cp\n"),
  	NULL},
 {"wind_turbine_rotor_diameter", (getter)Turbine_get_wind_turbine_rotor_diameter,(setter)Turbine_set_wind_turbine_rotor_diameter,
-	PyDoc_STR("*float*: Rotor diameter [m]\n\n*Constraints*: POSITIVE\n\n*Required*: True"),
+	PyDoc_STR("*float*: Rotor diameter [m]\n\n*Constraints*: POSITIVE\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - system_capacity\n\t - wind_farm_xCoordinates\n\t - wind_farm_yCoordinates\n"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -525,16 +525,16 @@ Farm_set_wind_resource_turbulence_coeff(VarGroupObject *self, PyObject *value, v
 
 static PyGetSetDef Farm_getset[] = {
 {"system_capacity", (getter)Farm_get_system_capacity,(setter)Farm_set_system_capacity,
-	PyDoc_STR("*float*: Nameplate capacity [kW]\n\n*Constraints*: MIN=0\n\n*Required*: True"),
+	PyDoc_STR("*float*: Nameplate capacity [kW]\n\n*Constraints*: MIN=0\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - wind_turbine_rotor_diameter\n"),
  	NULL},
 {"wind_farm_wake_model", (getter)Farm_get_wind_farm_wake_model,(setter)Farm_set_wind_farm_wake_model,
-	PyDoc_STR("*float*: Wake Model [Simple, Park, EV, Constant] [0/1/2/3]\n\n*Constraints*: INTEGER\n\n*Required*: True"),
+	PyDoc_STR("*float*: Wake Model [Simple, Park, EV, Constant] [0/1/2/3]\n\n*Constraints*: INTEGER\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - wake_int_loss\n"),
  	NULL},
 {"wind_farm_xCoordinates", (getter)Farm_get_wind_farm_xCoordinates,(setter)Farm_set_wind_farm_xCoordinates,
-	PyDoc_STR("*sequence*: Turbine X coordinates [m]\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: Turbine X coordinates [m]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - wind_turbine_rotor_diameter\n"),
  	NULL},
 {"wind_farm_yCoordinates", (getter)Farm_get_wind_farm_yCoordinates,(setter)Farm_set_wind_farm_yCoordinates,
-	PyDoc_STR("*sequence*: Turbine Y coordinates [m]\n\n*Constraints*: LENGTH_EQUAL=wind_farm_xCoordinates\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: Turbine Y coordinates [m]\n\n*Constraints*: LENGTH_EQUAL=wind_farm_xCoordinates\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - wind_turbine_rotor_diameter\n"),
  	NULL},
 {"wind_resource_turbulence_coeff", (getter)Farm_get_wind_resource_turbulence_coeff,(setter)Farm_set_wind_resource_turbulence_coeff,
 	PyDoc_STR("*float*: Turbulence coefficient [%]\n\n*Constraints*: MIN=0\n\n*Required*: True"),
@@ -1015,7 +1015,7 @@ static PyGetSetDef Losses_getset[] = {
 	PyDoc_STR("*float*: Future Wake loss [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"wake_int_loss", (getter)Losses_get_wake_int_loss,(setter)Losses_set_wake_int_loss,
-	PyDoc_STR("*float*: Constant Wake Model, internal wake loss [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: True if wind_farm_wake_model=3"),
+	PyDoc_STR("*float*: Constant Wake Model, internal wake loss [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: True if wind_farm_wake_model=3\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - wind_farm_wake_model\n"),
  	NULL},
 	{NULL}  /* Sentinel */
 };

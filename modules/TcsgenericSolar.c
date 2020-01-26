@@ -235,7 +235,7 @@ GenericSolar_set_system_capacity(VarGroupObject *self, PyObject *value, void *cl
 
 static PyGetSetDef GenericSolar_getset[] = {
 {"system_capacity", (getter)GenericSolar_get_system_capacity,(setter)GenericSolar_set_system_capacity,
-	PyDoc_STR("*float*: Nameplate capacity [kW]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Nameplate capacity [kW]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - w_des\n"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1155,7 +1155,7 @@ static PyGetSetDef Type260_getset[] = {
 	PyDoc_STR("*sequence*: Temp.-based power conversion efficiency adjustment coefs. [1/C]\n\n*Required*: True"),
  	NULL},
 {"eta_des", (getter)Type260_get_eta_des,(setter)Type260_set_eta_des,
-	PyDoc_STR("*float*: Design power cycle gross efficiency [none]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Design power cycle gross efficiency [none]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - qsf_des\n"),
  	NULL},
 {"eta_lhv", (getter)Type260_get_eta_lhv,(setter)Type260_set_eta_lhv,
 	PyDoc_STR("*float*: Fossil backup lower heating value efficiency [none]\n\n*Required*: True"),
@@ -1236,7 +1236,7 @@ static PyGetSetDef Type260_getset[] = {
 	PyDoc_STR("*sequence*: TOD power output control factors [none]\n\n*Required*: True"),
  	NULL},
 {"qsf_des", (getter)Type260_get_qsf_des,(setter)Type260_set_qsf_des,
-	PyDoc_STR("*float*: Solar field thermal production at design [MWt]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Solar field thermal production at design [MWt]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - eta_des\n\t - solarm\n\t - w_des\n"),
  	NULL},
 {"rad_type", (getter)Type260_get_rad_type,(setter)Type260_set_rad_type,
 	PyDoc_STR("*float*: Solar resource radiation type (1=DNI,2=horiz.beam,3=tot.horiz) [none]\n\n*Constraints*: INTEGER\n\n*Required*: True"),
@@ -1251,7 +1251,7 @@ static PyGetSetDef Type260_getset[] = {
 	PyDoc_STR("*sequence*: Wind-based solar field thermal loss adjustment coefficients [1/(m/s)]\n\n*Required*: True"),
  	NULL},
 {"solarm", (getter)Type260_get_solarm,(setter)Type260_set_solarm,
-	PyDoc_STR("*float*: Solar multiple [none]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Solar multiple [none]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - qsf_des\n"),
  	NULL},
 {"storage_config", (getter)Type260_get_storage_config,(setter)Type260_set_storage_config,
 	PyDoc_STR("*float*: Thermal storage configuration [none]\n\n*Required*: True"),
@@ -1281,7 +1281,7 @@ static PyGetSetDef Type260_getset[] = {
 	PyDoc_STR("*float*: Wind velocity [m/s]\n\n*Required*: True"),
  	NULL},
 {"w_des", (getter)Type260_get_w_des,(setter)Type260_set_w_des,
-	PyDoc_STR("*float*: Design power cycle gross output [MWe]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Design power cycle gross output [MWe]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - qsf_des\n\t - system_capacity\n"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
