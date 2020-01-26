@@ -38,7 +38,7 @@ To install from PyPi::
 To install from Anaconda, the NREL channel needs to be appended::
 
     conda config --env --append channels nrel
-	conda install nrel-pysam
+    conda install nrel-pysam
 
 Each technology and financial model is its own module, which can be imported by::
 
