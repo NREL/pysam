@@ -3,10 +3,10 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to PySAM's documentation!
+Welcome to NREL-PySAM's documentation!
 =================================
 
-PySAM is a wrapper for the National Renewable Energy Laboratory's `System Advisor Model <http://sam.nrel.gov>`_ (SAM).
+NREL-PySAM is a wrapper for the National Renewable Energy Laboratory's `System Advisor Model <http://sam.nrel.gov>`_ (SAM).
 
 SAM is a performance and financial model designed to facilitate decision making for people involved in the renewable energy industry:
 
@@ -29,7 +29,7 @@ Please see :doc:`Version` for more details.
 Getting Started
 ===============
 
-PySAM is available on PyPi and Anaconda (Windows and MacOSX only) as NREL-PySAM. NREL-PySAM-stubs is the stub file package providing autocompletion features.
+For Python 3.5 to 3.7, as NREL-PySAM is available on PyPi, and on Anaconda (MacOSX and Windows for Python 3.7 only). NREL-PySAM-stubs is the stub file package providing auto-completion features.
 
 To install from PyPi::
 
@@ -37,8 +37,8 @@ To install from PyPi::
 
 To install from Anaconda, the NREL channel needs to be appended::
 
-	conda config --append channels NREL
-	conda install -c nrel nrel-pysam
+    conda config --env --append channels nrel
+	conda install nrel-pysam
 
 Each technology and financial model is its own module, which can be imported by::
 
