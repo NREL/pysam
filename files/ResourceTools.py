@@ -1,9 +1,6 @@
 import csv
 import os
-from collections import defaultdict
-
-import numpy as np
-
+from collections import defaultdict, OrderedDict
 
 def TMY_CSV_to_solar_data(filename):
     """
@@ -32,8 +29,8 @@ def TMY_CSV_to_solar_data(filename):
         weather = dict()
         weather['tz'] = float(tz)
         weather['elev'] = float(elev)
-        weather['lat'] = latitude
-        weather['lon'] = longitude
+        weather['lat'] = float(latitude)
+        weather['lon'] = float(longitude)
         weather['year'] = wfd.pop('Year')
         weather['month'] = wfd.pop('Month')
         weather['day'] = wfd.pop('Day')
@@ -54,48 +51,26 @@ def SRW_to_wind_data(filename):
     """
     if not os.path.isfile(filename):
         raise FileNotFoundError(filename + " does not exist.")
-    data_dict = defaultdict(defaultdict)
+    data_dict = dict()
+    field_names = ('Temperature', 'Pressure', 'Speed', 'Direction')
+    fields_id = (1, 2, 3, 4)
     with open(filename) as file_in:
         file_in.readline()
         file_in.readline()
-        reader = csv.DictReader(file_in)
-        line = 0
+        fields = str(file_in.readline().strip()).split(',')
+        file_in.readline()
+        heights = str(file_in.readline().strip()).split(',')
+        data_dict['heights'] = [float(i) for i in heights]
+        data_dict['fields'] = []
+
+        for field_name in fields:
+            if field_name not in field_names:
+                raise ValueError(field_name + " required for wind data")
+            data_dict['fields'].append(field_names.index(field_name) + 1)
+
+        data_dict['data'] = []
+        reader = csv.reader(file_in)
         for row in reader:
-            if line == 1:
-                heights = list(row.values())
-                heights_keys = [str(i) for i in heights]
-                for key in set(heights_keys):
-                    data_dict[key] = defaultdict(list)
-            if line > 1:
-                n = 0
-                for col, dat in row.items():
-                    height_dict = data_dict[heights_keys[n]]
-                    height_dict[col].append(float(dat))
-                    n += 1
-            line += 1
+            data_dict['data'].append([float(i) for i in row])
 
-    n_records = []
-    heights = data_dict.keys()
-    n_heights = len(heights)
-    field_names = ('Temperature', 'Pressure', 'Speed', 'Direction')
-    for height, meas in data_dict.items():
-        for key in field_names:
-            if key not in meas.keys():
-                raise ValueError(key + " required for wind data at hub height " + height)
-            n_records.append(len(meas[key]))
-
-    n_records = set(n_records)
-    if len(n_records) > 1:
-        raise ValueError("All arrays must be same length, corresponding to number of data records.")
-    n_records = n_records.pop()
-
-    wind_data_matrix = np.zeros((n_records, 4 * n_heights))
-    heights_id = []
-    fields_id = []
-    for height in heights:
-        heights_id += [int(height)] * 4
-        for col in range(4):
-            wind_data_matrix[:, col] = data_dict[height][field_names[col]]
-            fields_id.append(col + 1)
-
-    return dict({'heights': heights_id, 'fields': fields_id, 'data': wind_data_matrix.tolist()})
+        return data_dict
