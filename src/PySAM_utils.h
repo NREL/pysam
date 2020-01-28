@@ -407,7 +407,7 @@ static PyObject* PySAM_table_to_dict(SAM_table table){
                 for(i=0; i < n; i++) {
                     seqq = PyTuple_New(m);
                     for(j=0; j < m; j++) {
-                        PyTuple_SET_ITEM(seqq, j, PyFloat_FromDouble(arr[i * n + j]));
+                        PyTuple_SET_ITEM(seqq, j, PyFloat_FromDouble(arr[i * m + j]));
                     }
                     PyTuple_SET_ITEM(seq, i, seqq);
                 }

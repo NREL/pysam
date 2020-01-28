@@ -12,7 +12,7 @@ from distutils.core import Command
 #
 ###################################################################################################
 
-latest_version = '2.0.1'
+latest_version = '2.0.2'
 
 # determine if making PyPi or Conda distribution
 distclass = distutils.core.Distribution
