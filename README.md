@@ -10,7 +10,7 @@ https://pysam-docs.readthedocs.io/en/latest/
 
 
 ## Requirements
-1. Python 3.5, 64 bit
+1. Python 3.5+, 64 bit
 2. Operating system:
 	- MacOSX 10.7+
 	- Most Linux
@@ -51,7 +51,7 @@ https://pysam-docs.readthedocs.io/en/latest/
 ## PySAM Extension
 
 1. Uses Python's C API to create importable C extension. A PySAM Extension is a wrapper module that exposes the SAM C API in a more "Pythonic" API that makes use of Python language features.
-2. May not be compatible with different builds of the CPython reference interpreter, and not with alternative interpreters such as PyPy, IronPython or Jython 
+2. May not be compatible with different builds of the CPython reference interpreter, and not with alternative interpreters such as PyPy, IronPython or Jython
 
 
 ## Error Handling
