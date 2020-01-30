@@ -1,6 +1,6 @@
 # PySAM Package
 
-https://pysam-docs.readthedocs.io/en/latest/
+https://nrel-pysam.readthedocs.io
 
 * Provides a wrapper around the SAM library that groups together the C API functions by technology or financial model into modules.
 * Includes error-checking, explicit input and output definition, and conversion between Python data types.
