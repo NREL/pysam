@@ -61,7 +61,8 @@ For example, for the Flat Plate PV-Single Owner configuration, the ground covera
 It is an input to the Flat Plate PV compute module for self-shading calculations, and also may be used in GUI equations
 to calculate the land cost component of the total installed cost input to the Single Owner compute module.
 If your Python code changes the value of ``Pvsamv1.SystemDesign.gcr`` to ``x``, and you are including land cost ``y``
-in $/acre in your analysis, you need code like the following adapted from the GUI equations in _runtime/ui/PV System Design.txt_
+in $/acre in your analysis, you need code like the following adapted from the GUI equations in 
+`runtime/ui/PV System Design.txt <https://github.com/NREL/SAM/blob/develop/deploy/runtime/ui/PV%20System%20Design.txt>`_
 to ensure the change is accounted for in ``Singleowner.SystemCosts.total_installed_cost``::
 
 	pv.SystemDesign.subarray1_gcr = x
