@@ -117,8 +117,9 @@ def URDBv7_to_ElectricityRates(urdb_response):
                     sell = 0
                     if 'sell' in entry.keys():
                         sell = entry['sell']
+                    units = ['kwh', 'kw']
                     if 'unit' in entry.keys():
-                        if entry['unit'].lower() != "kWh".lower():
+                        if entry['unit'].lower() not in units:
                             raise RuntimeError("UtilityRateDatabase error: unrecognized unit in rate structure")
                     mat.append((i + 1, j + 1, tier_max, 0.0, rate, sell))
             data[data_name] = mat
