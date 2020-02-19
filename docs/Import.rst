@@ -13,7 +13,7 @@ On the drop-down menu for the case, click **Generate code** then **JSON for inpu
 
 For each SSC compute module required for the simulation (see :doc:`Configs`), create a new PySSC data table and wrap it with the equivalent PySAM class, releasing memory ownership to the newly created instance. Do not call ``PySSC.data_free`` on the data passed to the wrap function!
 
-For example, the following code imports the parameters from a JSON file named _genericsystem_case.json_ that was exported from a Generic System-Single Owner case in SAM, creates a PySSC table for the Generic System and Single Owner SSC compute modules, and then wraps each table in the appropriate PySAM class::
+For example, the following code imports the parameters from a JSON file named "genericsystem_case.json" that was exported from a **Generic System - PPA Single Owner** case in SAM, creates a PySSC table for the Generic System and Single Owner SSC compute modules, and then wraps each table in the appropriate PySAM class::
 
     import json
     import PySAM.GenericSystem as GenericSystem
