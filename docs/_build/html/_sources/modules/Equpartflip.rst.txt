@@ -1,6 +1,6 @@
 .. _Equpartflip:
 
-Equpartflip Module
+Equpartflip
 **************************
 
 Wrapper for SAM Simulation Core model: `cmod_equpartflip.cpp <https://github.com/NREL/ssc/blob/develop/ssc/cmod_equpartflip.cpp>`_
@@ -8,7 +8,7 @@ Wrapper for SAM Simulation Core model: `cmod_equpartflip.cpp <https://github.com
 Creating an Instance
 =========================
 
-There are three methods to create a new instance of a PySAM module. Using ``default`` populates the newclass' attributes with default values specific to a ``config``. Each technology-financialconfiguration corresponds to a SAM GUI configuration. Using ``new`` creates an instance with empty attributes. The ``wrap`` function allows compatibility with PySSC, for details, refer to :doc:`PySSC`.
+There are three methods to create a new instance of a PySAM module. Using ``default`` populates the newclass' attributes with default values specific to a ``config``. Each technology-financialconfiguration corresponds to a SAM GUI configuration. Using ``new`` creates an instance with empty attributes. The ``wrap`` function allows compatibility with PySSC, for details, refer to :doc:`../PySSC`.
 
 **Equpartflip model description**
 
@@ -19,6 +19,12 @@ Functions
 =========================
 
 .. autoclass:: PySAM.Equpartflip.Equpartflip
+	:members:
+
+Revenue Group
+==============
+
+.. autoclass:: PySAM.Equpartflip.Equpartflip.Revenue
 	:members:
 
 FinancialParameters Group
@@ -37,6 +43,12 @@ TaxCreditIncentives Group
 ==============
 
 .. autoclass:: PySAM.Equpartflip.Equpartflip.TaxCreditIncentives
+	:members:
+
+Depreciation Group
+==============
+
+.. autoclass:: PySAM.Equpartflip.Equpartflip.Depreciation
 	:members:
 
 PaymentIncentives Group
@@ -63,30 +75,6 @@ TimeOfDelivery Group
 .. autoclass:: PySAM.Equpartflip.Equpartflip.TimeOfDelivery
 	:members:
 
-ReserveAccounts Group
-==============
-
-.. autoclass:: PySAM.Equpartflip.Equpartflip.ReserveAccounts
-	:members:
-
-Depreciation Group
-==============
-
-.. autoclass:: PySAM.Equpartflip.Equpartflip.Depreciation
-	:members:
-
-SalvageValue Group
-==============
-
-.. autoclass:: PySAM.Equpartflip.Equpartflip.SalvageValue
-	:members:
-
-SolutionMode Group
-==============
-
-.. autoclass:: PySAM.Equpartflip.Equpartflip.SolutionMode
-	:members:
-
 ConstructionFinancing Group
 ==============
 
@@ -111,10 +99,10 @@ DeveloperCapitalRecovery Group
 .. autoclass:: PySAM.Equpartflip.Equpartflip.DeveloperCapitalRecovery
 	:members:
 
-Battery Group
+BatterySystem Group
 ==============
 
-.. autoclass:: PySAM.Equpartflip.Equpartflip.Battery
+.. autoclass:: PySAM.Equpartflip.Equpartflip.BatterySystem
 	:members:
 
 Outputs Group

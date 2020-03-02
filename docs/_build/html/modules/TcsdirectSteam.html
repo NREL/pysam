@@ -5,21 +5,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>TcsdirectSteam Module &#8212; PySAM 1.2 documentation</title>
+    <title>TcsdirectSteam &#8212; PySAM 2.0 documentation</title>
     <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/language_data.js"></script>
-    <script type="text/javascript" src="../_static/bizstyle.js"></script>
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/bizstyle.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <!--[if lt IE 9]>
-    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <script src="_static/css3-mediaqueries.js"></script>
     <![endif]-->
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
@@ -28,14 +28,17 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li class="nav-item nav-item-0"><a href="../index.html">PySAM 1.2 documentation</a> &#187;</li> 
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">PySAM 2.0 documentation</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h3><a href="../index.html">Table of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">TcsdirectSteam Module</a><ul>
+<li><a class="reference internal" href="#">TcsdirectSteam</a><ul>
 <li><a class="reference internal" href="#creating-an-instance">Creating an Instance</a></li>
 <li><a class="reference internal" href="#functions">Functions</a></li>
 <li><a class="reference internal" href="#weather-group">Weather Group</a></li>
@@ -60,15 +63,15 @@
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
 
@@ -77,46 +80,3617 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="tcsdirectsteam-module">
-<span id="tcsdirectsteam"></span><h1>TcsdirectSteam Module<a class="headerlink" href="#tcsdirectsteam-module" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="tcsdirectsteam">
+<span id="id1"></span><h1>TcsdirectSteam<a class="headerlink" href="#tcsdirectsteam" title="Permalink to this headline">¶</a></h1>
 <p>Wrapper for SAM Simulation Core model: <a class="reference external" href="https://github.com/NREL/ssc/blob/develop/ssc/cmod_tcsdirect_steam.cpp">cmod_tcsdirect_steam.cpp</a></p>
 <div class="section" id="creating-an-instance">
 <h2>Creating an Instance<a class="headerlink" href="#creating-an-instance" title="Permalink to this headline">¶</a></h2>
-<p>There are three methods to create a new instance of a PySAM module. Using <code class="docutils literal notranslate"><span class="pre">default</span></code> populates the newclass’ attributes with default values specific to a <code class="docutils literal notranslate"><span class="pre">config</span></code>. Each technology-financialconfiguration corresponds to a SAM GUI configuration. Using <code class="docutils literal notranslate"><span class="pre">new</span></code> creates an instance with empty attributes. The <code class="docutils literal notranslate"><span class="pre">wrap</span></code> function allows compatibility with PySSC, for details, refer to <span class="xref std std-doc">PySSC</span>.</p>
+<p>There are three methods to create a new instance of a PySAM module. Using <code class="docutils literal notranslate"><span class="pre">default</span></code> populates the newclass’ attributes with default values specific to a <code class="docutils literal notranslate"><span class="pre">config</span></code>. Each technology-financialconfiguration corresponds to a SAM GUI configuration. Using <code class="docutils literal notranslate"><span class="pre">new</span></code> creates an instance with empty attributes. The <code class="docutils literal notranslate"><span class="pre">wrap</span></code> function allows compatibility with PySSC, for details, refer to <a class="reference internal" href="../PySSC.html"><span class="doc">PySSC</span></a>.</p>
 <p><strong>TcsdirectSteam model description</strong></p>
+<span class="target" id="module-PySAM.TcsdirectSteam"></span><p>CSP direct steam power tower model for power generation</p>
+<dl class="function">
+<dt id="PySAM.TcsdirectSteam.default">
+<code class="sig-prename descclassname">PySAM.TcsdirectSteam.</code><code class="sig-name descname">default</code><span class="sig-paren">(</span><em class="sig-param">config</em><span class="sig-paren">)</span> &#x2192; TcsdirectSteam<a class="headerlink" href="#PySAM.TcsdirectSteam.default" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use financial config-specific default attributes
+config options:</p>
+<ul class="simple">
+<li><p>“DSPTAllEquityPartnershipFlip”</p></li>
+<li><p>“DSPTLeveragedPartnershipFlip”</p></li>
+<li><p>“DSPTMerchantPlant”</p></li>
+<li><p>“DSPTSaleLeaseback”</p></li>
+<li><p>“DSPTSingleOwner”</p></li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="PySAM.TcsdirectSteam.from_existing">
+<code class="sig-prename descclassname">PySAM.TcsdirectSteam.</code><code class="sig-name descname">from_existing</code><span class="sig-paren">(</span><em class="sig-param">data</em>, <em class="sig-param">optional config</em><span class="sig-paren">)</span> &#x2192; TcsdirectSteam<a class="headerlink" href="#PySAM.TcsdirectSteam.from_existing" title="Permalink to this definition">¶</a></dt>
+<dd><p>Share underlying data with an existing PySAM class. If config provided, default attributes are loaded otherwise.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="PySAM.TcsdirectSteam.new">
+<code class="sig-prename descclassname">PySAM.TcsdirectSteam.</code><code class="sig-name descname">new</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; TcsdirectSteam<a class="headerlink" href="#PySAM.TcsdirectSteam.new" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="PySAM.TcsdirectSteam.wrap">
+<code class="sig-prename descclassname">PySAM.TcsdirectSteam.</code><code class="sig-name descname">wrap</code><span class="sig-paren">(</span><em class="sig-param">ssc_data_t</em><span class="sig-paren">)</span> &#x2192; TcsdirectSteam<a class="headerlink" href="#PySAM.TcsdirectSteam.wrap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use existing PySSC data</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Do not call PySSC.data_free on the ssc_data_t provided to <code class="docutils literal notranslate"><span class="pre">wrap</span></code></p>
+</div>
+</dd></dl>
+
 </div>
 <div class="section" id="functions">
 <h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam">
+<em class="property">class </em><code class="sig-prename descclassname">PySAM.TcsdirectSteam.</code><code class="sig-name descname">TcsdirectSteam</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class contains all the variable information for running a simulation. Variables are grouped together in the subclasses as properties. If property assignments are the wrong type, an error is thrown.</p>
+<dl class="method">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.assign">
+<code class="sig-name descname">assign</code><span class="sig-paren">(</span><em class="sig-param">dict</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from nested dictionary, except for Outputs</p>
+<p><code class="docutils literal notranslate"><span class="pre">nested_dict</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">'Weather':</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...},</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.execute">
+<code class="sig-name descname">execute</code><span class="sig-paren">(</span><em class="sig-param">int verbosity</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.execute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute simulation with verbosity level 0 (default) or 1</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.export">
+<code class="sig-name descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into nested dictionary</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.value">
+<code class="sig-name descname">value</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">optional value</em><span class="sig-paren">)</span> &#x2192; Union[None, float, dict, sequence, str]<a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set by name a value in any of the variable groups.</p>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="weather-group">
 <h2>Weather Group<a class="headerlink" href="#weather-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Weather">
+<em class="property">class </em><code class="sig-prename descclassname">PySAM.TcsdirectSteam.TcsdirectSteam.</code><code class="sig-name descname">Weather</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Weather" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Weather.assign">
+<code class="sig-name descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Weather.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">Weather_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Weather.export">
+<code class="sig-name descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Weather.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Weather.solar_resource_file">
+<code class="sig-name descname">solar_resource_file</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Weather.solar_resource_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>local weather file path</p>
+<p><em>Constraints</em>: LOCAL_FILE</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>str</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="directsteamtower-group">
 <h2>DirectSteamTower Group<a class="headerlink" href="#directsteamtower-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.DirectSteamTower">
+<em class="property">class </em><code class="sig-prename descclassname">PySAM.TcsdirectSteam.TcsdirectSteam.</code><code class="sig-name descname">DirectSteamTower</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.DirectSteamTower" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.DirectSteamTower.assign">
+<code class="sig-name descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.DirectSteamTower.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">DirectSteamTower_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.DirectSteamTower.export">
+<code class="sig-name descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.DirectSteamTower.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.DirectSteamTower.system_capacity">
+<code class="sig-name descname">system_capacity</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.DirectSteamTower.system_capacity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Nameplate capacity [kW]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="toutranslator-group">
 <h2>TouTranslator Group<a class="headerlink" href="#toutranslator-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.TouTranslator">
+<em class="property">class </em><code class="sig-prename descclassname">PySAM.TcsdirectSteam.TcsdirectSteam.</code><code class="sig-name descname">TouTranslator</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.TouTranslator" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.TouTranslator.assign">
+<code class="sig-name descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.TouTranslator.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">TouTranslator_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.TouTranslator.export">
+<code class="sig-name descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.TouTranslator.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.TouTranslator.weekday_schedule">
+<code class="sig-name descname">weekday_schedule</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.TouTranslator.weekday_schedule" title="Permalink to this definition">¶</a></dt>
+<dd><p>12x24 Time of Use Values for week days</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.TouTranslator.weekend_schedule">
+<code class="sig-name descname">weekend_schedule</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.TouTranslator.weekend_schedule" title="Permalink to this definition">¶</a></dt>
+<dd><p>12x24 Time of Use Values for week end days</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="heliostat-group">
 <h2>Heliostat Group<a class="headerlink" href="#heliostat-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat">
+<em class="property">class </em><code class="sig-prename descclassname">PySAM.TcsdirectSteam.TcsdirectSteam.</code><code class="sig-name descname">Heliostat</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.assign">
+<code class="sig-name descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">Heliostat_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.export">
+<code class="sig-name descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.N_hel">
+<code class="sig-name descname">N_hel</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.N_hel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of heliostats</p>
+<p><em>Required</em>: False</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.bop_spec_cost">
+<code class="sig-name descname">bop_spec_cost</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.bop_spec_cost" title="Permalink to this definition">¶</a></dt>
+<dd><p>BOS specific cost [$/kWe]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.c_atm_0">
+<code class="sig-name descname">c_atm_0</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.c_atm_0" title="Permalink to this definition">¶</a></dt>
+<dd><p>Attenuation coefficient 0</p>
+<p><em>Required</em>: If not provided, assumed to be 0.006789</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.c_atm_1">
+<code class="sig-name descname">c_atm_1</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.c_atm_1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Attenuation coefficient 1</p>
+<p><em>Required</em>: If not provided, assumed to be 0.1046</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.c_atm_2">
+<code class="sig-name descname">c_atm_2</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.c_atm_2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Attenuation coefficient 2</p>
+<p><em>Required</em>: If not provided, assumed to be -0.0107</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.c_atm_3">
+<code class="sig-name descname">c_atm_3</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.c_atm_3" title="Permalink to this definition">¶</a></dt>
+<dd><p>Attenuation coefficient 3</p>
+<p><em>Required</em>: If not provided, assumed to be 0.002845</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.calc_fluxmaps">
+<code class="sig-name descname">calc_fluxmaps</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.calc_fluxmaps" title="Permalink to this definition">¶</a></dt>
+<dd><p>Include fluxmap calculations</p>
+<p><em>Required</em>: If not provided, assumed to be 0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.cant_type">
+<code class="sig-name descname">cant_type</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.cant_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Heliostat cant method</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.check_max_flux">
+<code class="sig-name descname">check_max_flux</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.check_max_flux" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check max flux at design point</p>
+<p><em>Required</em>: If not provided, assumed to be 0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.contingency_rate">
+<code class="sig-name descname">contingency_rate</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.contingency_rate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Contingency for cost overrun [%]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.cost_sf_fixed">
+<code class="sig-name descname">cost_sf_fixed</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.cost_sf_fixed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Solar field fixed cost [$]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.csp_pt_cost_epc_fixed">
+<code class="sig-name descname">csp_pt_cost_epc_fixed</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.csp_pt_cost_epc_fixed" title="Permalink to this definition">¶</a></dt>
+<dd><p>EPC fixed [$]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.csp_pt_cost_epc_per_acre">
+<code class="sig-name descname">csp_pt_cost_epc_per_acre</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.csp_pt_cost_epc_per_acre" title="Permalink to this definition">¶</a></dt>
+<dd><p>EPC cost per acre [$/acre]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.csp_pt_cost_epc_per_watt">
+<code class="sig-name descname">csp_pt_cost_epc_per_watt</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.csp_pt_cost_epc_per_watt" title="Permalink to this definition">¶</a></dt>
+<dd><p>EPC cost per watt [$/W]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.csp_pt_cost_epc_percent">
+<code class="sig-name descname">csp_pt_cost_epc_percent</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.csp_pt_cost_epc_percent" title="Permalink to this definition">¶</a></dt>
+<dd><p>EPC cost percent of direct</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.csp_pt_cost_plm_fixed">
+<code class="sig-name descname">csp_pt_cost_plm_fixed</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.csp_pt_cost_plm_fixed" title="Permalink to this definition">¶</a></dt>
+<dd><p>PLM fixed [$]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.csp_pt_cost_plm_per_acre">
+<code class="sig-name descname">csp_pt_cost_plm_per_acre</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.csp_pt_cost_plm_per_acre" title="Permalink to this definition">¶</a></dt>
+<dd><p>PLM cost per acre [$/acre]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.csp_pt_cost_plm_per_watt">
+<code class="sig-name descname">csp_pt_cost_plm_per_watt</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.csp_pt_cost_plm_per_watt" title="Permalink to this definition">¶</a></dt>
+<dd><p>PLM cost per watt [$/W]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.csp_pt_cost_plm_percent">
+<code class="sig-name descname">csp_pt_cost_plm_percent</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.csp_pt_cost_plm_percent" title="Permalink to this definition">¶</a></dt>
+<dd><p>PLM cost percent of direct</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.csp_pt_sf_fixed_land_area">
+<code class="sig-name descname">csp_pt_sf_fixed_land_area</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.csp_pt_sf_fixed_land_area" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fixed land area [acre]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.csp_pt_sf_land_overhead_factor">
+<code class="sig-name descname">csp_pt_sf_land_overhead_factor</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.csp_pt_sf_land_overhead_factor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Land overhead factor</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.delta_flux_hrs">
+<code class="sig-name descname">delta_flux_hrs</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.delta_flux_hrs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hourly frequency in flux map lookup</p>
+<p><em>Required</em>: If not provided, assumed to be 1</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.dens_mirror">
+<code class="sig-name descname">dens_mirror</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.dens_mirror" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ratio of reflective area to profile</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>A_sf</p></li>
+<li><p>total_installed_cost</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.dni_des">
+<code class="sig-name descname">dni_des</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.dni_des" title="Permalink to this definition">¶</a></dt>
+<dd><p>Design-point DNI [W/m2]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.eta_map">
+<code class="sig-name descname">eta_map</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.eta_map" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field efficiency array</p>
+<p><em>Required</em>: False</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.flux_maps">
+<code class="sig-name descname">flux_maps</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.flux_maps" title="Permalink to this definition">¶</a></dt>
+<dd><p>Flux map intensities</p>
+<p><em>Required</em>: False</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.flux_max">
+<code class="sig-name descname">flux_max</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.flux_max" title="Permalink to this definition">¶</a></dt>
+<dd><p>Maximum allowable flux</p>
+<p><em>Required</em>: If not provided, assumed to be 1000</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.flux_positions">
+<code class="sig-name descname">flux_positions</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.flux_positions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Flux map sun positions [deg]</p>
+<p><em>Required</em>: False</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.focus_type">
+<code class="sig-name descname">focus_type</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.focus_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Heliostat focus method</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.fossil_spec_cost">
+<code class="sig-name descname">fossil_spec_cost</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.fossil_spec_cost" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fossil system specific cost [$/kWe]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.hel_stow_deploy">
+<code class="sig-name descname">hel_stow_deploy</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.hel_stow_deploy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stow/deploy elevation [deg]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.helio_active_fraction">
+<code class="sig-name descname">helio_active_fraction</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.helio_active_fraction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Heliostat active frac.</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.helio_aim_points">
+<code class="sig-name descname">helio_aim_points</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.helio_aim_points" title="Permalink to this definition">¶</a></dt>
+<dd><p>Heliostat aim point table [m]</p>
+<p><em>Required</em>: False</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.helio_height">
+<code class="sig-name descname">helio_height</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.helio_height" title="Permalink to this definition">¶</a></dt>
+<dd><p>Heliostat height [m]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>A_sf</p></li>
+<li><p>total_installed_cost</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.helio_optical_error">
+<code class="sig-name descname">helio_optical_error</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.helio_optical_error" title="Permalink to this definition">¶</a></dt>
+<dd><p>Heliostat optical error [rad]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.helio_positions">
+<code class="sig-name descname">helio_positions</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.helio_positions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Heliostat position table [m]</p>
+<p><em>Required</em>: True if run_type=1</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>A_sf</p></li>
+<li><p>total_installed_cost</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.helio_reflectance">
+<code class="sig-name descname">helio_reflectance</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.helio_reflectance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Heliostat reflectance</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.helio_width">
+<code class="sig-name descname">helio_width</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.helio_width" title="Permalink to this definition">¶</a></dt>
+<dd><p>Heliostat width [m]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>A_sf</p></li>
+<li><p>total_installed_cost</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.heliostat_spec_cost">
+<code class="sig-name descname">heliostat_spec_cost</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.heliostat_spec_cost" title="Permalink to this definition">¶</a></dt>
+<dd><p>Heliostat field cost [$/m2]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.interp_beta">
+<code class="sig-name descname">interp_beta</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.interp_beta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interpolation beta coef.</p>
+<p><em>Required</em>: If not provided, assumed to be 1.99</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.interp_nug">
+<code class="sig-name descname">interp_nug</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.interp_nug" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interpolation nugget</p>
+<p><em>Required</em>: If not provided, assumed to be 0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.is_optimize">
+<code class="sig-name descname">is_optimize</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.is_optimize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Do SolarPILOT optimization</p>
+<p><em>Required</em>: If not provided, assumed to be 0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.land_bound_list">
+<code class="sig-name descname">land_bound_list</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.land_bound_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Boundary table listing</p>
+<p><em>Required</em>: False</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.land_bound_table">
+<code class="sig-name descname">land_bound_table</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.land_bound_table" title="Permalink to this definition">¶</a></dt>
+<dd><p>Land boundary table [m]</p>
+<p><em>Required</em>: False</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.land_bound_type">
+<code class="sig-name descname">land_bound_type</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.land_bound_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Land boundary type</p>
+<p><em>Required</em>: If not provided, assumed to be 0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.land_max">
+<code class="sig-name descname">land_max</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.land_max" title="Permalink to this definition">¶</a></dt>
+<dd><p>Land max boundary [-ORm]</p>
+<p><em>Required</em>: If not provided, assumed to be 7.5</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.land_min">
+<code class="sig-name descname">land_min</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.land_min" title="Permalink to this definition">¶</a></dt>
+<dd><p>Land min boundary [-ORm]</p>
+<p><em>Required</em>: If not provided, assumed to be 0.75</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.land_spec_cost">
+<code class="sig-name descname">land_spec_cost</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.land_spec_cost" title="Permalink to this definition">¶</a></dt>
+<dd><p>Total land area cost [$/acre]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.n_facet_x">
+<code class="sig-name descname">n_facet_x</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.n_facet_x" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of heliostat facets - X</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.n_facet_y">
+<code class="sig-name descname">n_facet_y</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.n_facet_y" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of heliostat facets - Y</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.n_flux_days">
+<code class="sig-name descname">n_flux_days</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.n_flux_days" title="Permalink to this definition">¶</a></dt>
+<dd><p>No. days in flux map lookup</p>
+<p><em>Required</em>: If not provided, assumed to be 8</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.n_flux_x">
+<code class="sig-name descname">n_flux_x</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.n_flux_x" title="Permalink to this definition">¶</a></dt>
+<dd><p>Flux map X resolution</p>
+<p><em>Required</em>: If not provided, assumed to be 12</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.n_flux_y">
+<code class="sig-name descname">n_flux_y</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.n_flux_y" title="Permalink to this definition">¶</a></dt>
+<dd><p>Flux map Y resolution</p>
+<p><em>Required</em>: If not provided, assumed to be 1</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.opt_algorithm">
+<code class="sig-name descname">opt_algorithm</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.opt_algorithm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Optimization algorithm</p>
+<p><em>Required</em>: If not provided, assumed to be 0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.opt_conv_tol">
+<code class="sig-name descname">opt_conv_tol</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.opt_conv_tol" title="Permalink to this definition">¶</a></dt>
+<dd><p>Optimization convergence tol</p>
+<p><em>Required</em>: If not provided, assumed to be 0.001</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.opt_flux_penalty">
+<code class="sig-name descname">opt_flux_penalty</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.opt_flux_penalty" title="Permalink to this definition">¶</a></dt>
+<dd><p>Optimization flux overage penalty</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.opt_init_step">
+<code class="sig-name descname">opt_init_step</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.opt_init_step" title="Permalink to this definition">¶</a></dt>
+<dd><p>Optimization initial step size</p>
+<p><em>Required</em>: If not provided, assumed to be 0.05</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.opt_max_iter">
+<code class="sig-name descname">opt_max_iter</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.opt_max_iter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Max. number iteration steps</p>
+<p><em>Required</em>: If not provided, assumed to be 200</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.p_start">
+<code class="sig-name descname">p_start</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.p_start" title="Permalink to this definition">¶</a></dt>
+<dd><p>Heliostat startup energy [kWe-hr]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.p_track">
+<code class="sig-name descname">p_track</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.p_track" title="Permalink to this definition">¶</a></dt>
+<dd><p>Heliostat tracking energy [kWe]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.plant_spec_cost">
+<code class="sig-name descname">plant_spec_cost</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.plant_spec_cost" title="Permalink to this definition">¶</a></dt>
+<dd><p>Power cycle specific cost [$/kWe]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.q_design">
+<code class="sig-name descname">q_design</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.q_design" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver thermal design power [MW]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>eta_ref</p></li>
+<li><p>q_rec_des</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.rec_absorptance">
+<code class="sig-name descname">rec_absorptance</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.rec_absorptance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver absorptance</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.rec_aspect">
+<code class="sig-name descname">rec_aspect</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.rec_aspect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver aspect ratio</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>H_rec</p></li>
+<li><p>d_rec</p></li>
+<li><p>h_boiler</p></li>
+<li><p>h_rh</p></li>
+<li><p>h_sh</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.rec_cost_exp">
+<code class="sig-name descname">rec_cost_exp</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.rec_cost_exp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver cost scaling exponent</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.rec_height">
+<code class="sig-name descname">rec_height</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.rec_height" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver height [m]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>H_rec</p></li>
+<li><p>h_boiler</p></li>
+<li><p>h_rh</p></li>
+<li><p>h_sh</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.rec_hl_perm2">
+<code class="sig-name descname">rec_hl_perm2</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.rec_hl_perm2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver design heatloss [kW/m2]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.rec_ref_area">
+<code class="sig-name descname">rec_ref_area</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.rec_ref_area" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver reference area for cost scale</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.rec_ref_cost">
+<code class="sig-name descname">rec_ref_cost</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.rec_ref_cost" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver reference cost [$]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.run_type">
+<code class="sig-name descname">run_type</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.run_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run type [-]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.sales_tax_frac">
+<code class="sig-name descname">sales_tax_frac</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.sales_tax_frac" title="Permalink to this definition">¶</a></dt>
+<dd><p>Percent of cost to which sales tax applies [%]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.sales_tax_rate">
+<code class="sig-name descname">sales_tax_rate</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.sales_tax_rate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sales tax rate [%]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>total_installed_cost</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.site_spec_cost">
+<code class="sig-name descname">site_spec_cost</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.site_spec_cost" title="Permalink to this definition">¶</a></dt>
+<dd><p>Site improvement cost [$/m2]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.tes_spec_cost">
+<code class="sig-name descname">tes_spec_cost</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.tes_spec_cost" title="Permalink to this definition">¶</a></dt>
+<dd><p>Thermal energy storage cost [$/kWht]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.total_installed_cost">
+<code class="sig-name descname">total_installed_cost</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.total_installed_cost" title="Permalink to this definition">¶</a></dt>
+<dd><p>Total installed cost [$]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>A_sf</p></li>
+<li><p>H_rec</p></li>
+<li><p>P_ref</p></li>
+<li><p>THT</p></li>
+<li><p>d_rec</p></li>
+<li><p>dens_mirror</p></li>
+<li><p>design_eff</p></li>
+<li><p>eta_ref</p></li>
+<li><p>h_boiler</p></li>
+<li><p>h_rh</p></li>
+<li><p>h_sh</p></li>
+<li><p>h_tower</p></li>
+<li><p>helio_height</p></li>
+<li><p>helio_positions</p></li>
+<li><p>helio_width</p></li>
+<li><p>sales_tax_rate</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.tower_exp">
+<code class="sig-name descname">tower_exp</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.tower_exp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tower cost scaling exponent</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.tower_fixed_cost">
+<code class="sig-name descname">tower_fixed_cost</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.tower_fixed_cost" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tower fixed cost [$]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.v_wind_max">
+<code class="sig-name descname">v_wind_max</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.v_wind_max" title="Permalink to this definition">¶</a></dt>
+<dd><p>Max. wind velocity [m/s]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.washing_frequency">
+<code class="sig-name descname">washing_frequency</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.washing_frequency" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mirror washing frequency</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.water_usage_per_wash">
+<code class="sig-name descname">water_usage_per_wash</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Heliostat.water_usage_per_wash" title="Permalink to this definition">¶</a></dt>
+<dd><p>Water usage per wash [L/m2_aper]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="receiver-group">
 <h2>Receiver Group<a class="headerlink" href="#receiver-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Receiver">
+<em class="property">class </em><code class="sig-prename descclassname">PySAM.TcsdirectSteam.TcsdirectSteam.</code><code class="sig-name descname">Receiver</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Receiver" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Receiver.assign">
+<code class="sig-name descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Receiver.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">Receiver_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Receiver.export">
+<code class="sig-name descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Receiver.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Receiver.H_rec">
+<code class="sig-name descname">H_rec</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Receiver.H_rec" title="Permalink to this definition">¶</a></dt>
+<dd><p>The height of the receiver [m]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>rec_aspect</p></li>
+<li><p>rec_height</p></li>
+<li><p>total_installed_cost</p></li>
+</ul>
+</dd>
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>h_boiler</p></li>
+<li><p>h_rh</p></li>
+<li><p>h_sh</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Receiver.THT">
+<code class="sig-name descname">THT</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Receiver.THT" title="Permalink to this definition">¶</a></dt>
+<dd><p>The height of the tower (hel. pivot to rec equator) [m]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>Piping_length</p></li>
+<li><p>total_installed_cost</p></li>
+</ul>
+</dd>
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>h_tower</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="dsgcontroller-group">
 <h2>DsgController Group<a class="headerlink" href="#dsgcontroller-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.DsgController">
+<em class="property">class </em><code class="sig-prename descclassname">PySAM.TcsdirectSteam.TcsdirectSteam.</code><code class="sig-name descname">DsgController</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.DsgController" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.assign">
+<code class="sig-name descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">DsgController_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.export">
+<code class="sig-name descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.A_sf">
+<code class="sig-name descname">A_sf</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.A_sf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Solar field area [m^2]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>total_installed_cost</p></li>
+</ul>
+</dd>
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>dens_mirror</p></li>
+<li><p>helio_height</p></li>
+<li><p>helio_positions</p></li>
+<li><p>helio_width</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.P_b_in_init">
+<code class="sig-name descname">P_b_in_init</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.P_b_in_init" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initial Boiler inlet pressure [bar]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>P_boil_des</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.P_cond_init">
+<code class="sig-name descname">P_cond_init</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.P_cond_init" title="Permalink to this definition">¶</a></dt>
+<dd><p>Condenser pressure [Pa]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>P_rh_ref</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.P_hp_in_des">
+<code class="sig-name descname">P_hp_in_des</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.P_hp_in_des" title="Permalink to this definition">¶</a></dt>
+<dd><p>Design HP Turbine Inlet Pressure [bar]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>P_boil_des</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.P_hp_out">
+<code class="sig-name descname">P_hp_out</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.P_hp_out" title="Permalink to this definition">¶</a></dt>
+<dd><p>HP turbine outlet pressure [bar]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>P_rh_ref</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.P_hp_out_des">
+<code class="sig-name descname">P_hp_out_des</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.P_hp_out_des" title="Permalink to this definition">¶</a></dt>
+<dd><p>Design HP Turbine Outlet Pressure [bar]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>P_rh_ref</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.T_ITD_des">
+<code class="sig-name descname">T_ITD_des</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.T_ITD_des" title="Permalink to this definition">¶</a></dt>
+<dd><p>Approach temperature for dry cooling [C]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.T_amb_des">
+<code class="sig-name descname">T_amb_des</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.T_amb_des" title="Permalink to this definition">¶</a></dt>
+<dd><p>Design ambient temperature (power cycle) [C]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.T_approach">
+<code class="sig-name descname">T_approach</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.T_approach" title="Permalink to this definition">¶</a></dt>
+<dd><p>Approach temperature for wet cooling [C]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.T_fw_init">
+<code class="sig-name descname">T_fw_init</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.T_fw_init" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initial Feedwater outlet temperature [C]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.T_hp_out">
+<code class="sig-name descname">T_hp_out</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.T_hp_out" title="Permalink to this definition">¶</a></dt>
+<dd><p>HP turbine outlet temperature [C]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.T_rh_out_des">
+<code class="sig-name descname">T_rh_out_des</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.T_rh_out_des" title="Permalink to this definition">¶</a></dt>
+<dd><p>Target reheater outlet temperature [C]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>T_rh_target</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.T_rh_target">
+<code class="sig-name descname">T_rh_target</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.T_rh_target" title="Permalink to this definition">¶</a></dt>
+<dd><p>Target reheater outlet temp. [C]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>T_rh_out_des</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.T_sh_out_des">
+<code class="sig-name descname">T_sh_out_des</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.T_sh_out_des" title="Permalink to this definition">¶</a></dt>
+<dd><p>Target superheater outlet temperature [C]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>T_hot</p></li>
+<li><p>T_hot_ref</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.ct">
+<code class="sig-name descname">ct</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.ct" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cooling Type [-]</p>
+<p><em>Constraints</em>: INTEGER</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.cycle_max_frac">
+<code class="sig-name descname">cycle_max_frac</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.cycle_max_frac" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cycle maximum overdesign fraction [-]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.dT_cw_ref">
+<code class="sig-name descname">dT_cw_ref</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.dT_cw_ref" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reference condenser water dT [C]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.d_rec">
+<code class="sig-name descname">d_rec</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.d_rec" title="Permalink to this definition">¶</a></dt>
+<dd><p>Diameter of Receiver [m]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>rec_aspect</p></li>
+<li><p>total_installed_cost</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.d_rh">
+<code class="sig-name descname">d_rh</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.d_rh" title="Permalink to this definition">¶</a></dt>
+<dd><p>O.D. of reheater tubes [m]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.d_sh">
+<code class="sig-name descname">d_sh</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.d_sh" title="Permalink to this definition">¶</a></dt>
+<dd><p>O.D. of superheater tubes [m]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.d_t_boiler">
+<code class="sig-name descname">d_t_boiler</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.d_t_boiler" title="Permalink to this definition">¶</a></dt>
+<dd><p>O.D. of boiler tubes [m]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.eta_rec_pump">
+<code class="sig-name descname">eta_rec_pump</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.eta_rec_pump" title="Permalink to this definition">¶</a></dt>
+<dd><p>Feedwater pump efficiency [-]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.f_mdot_rh_init">
+<code class="sig-name descname">f_mdot_rh_init</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.f_mdot_rh_init" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reheat mass flow rate fraction [-]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>rh_frac_ref</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.f_mdotrh_des">
+<code class="sig-name descname">f_mdotrh_des</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.f_mdotrh_des" title="Permalink to this definition">¶</a></dt>
+<dd><p>Design reheat mass flow rate fraction [-]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>rh_frac_ref</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.f_pb_cutoff">
+<code class="sig-name descname">f_pb_cutoff</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.f_pb_cutoff" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cycle cut-off fraction [-]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.f_pb_sb">
+<code class="sig-name descname">f_pb_sb</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.f_pb_sb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cycle minimum standby fraction [-]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>q_sby_frac</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.f_rec_min">
+<code class="sig-name descname">f_rec_min</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.f_rec_min" title="Permalink to this definition">¶</a></dt>
+<dd><p>Minimum receiver absorbed power fraction [-]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.ffrac">
+<code class="sig-name descname">ffrac</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.ffrac" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fossil dispatch logic [-]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.flowtype">
+<code class="sig-name descname">flowtype</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.flowtype" title="Permalink to this definition">¶</a></dt>
+<dd><p>Code for flow pattern through rec. [-]</p>
+<p><em>Constraints</em>: INTEGER</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.fossil_mode">
+<code class="sig-name descname">fossil_mode</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.fossil_mode" title="Permalink to this definition">¶</a></dt>
+<dd><p>1=Normal, 2=Supplemental [-]</p>
+<p><em>Constraints</em>: INTEGER</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+<dt class="field-even">Type</dt>
+<dd class="field-even"><p>Fossil model</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.h_boiler">
+<code class="sig-name descname">h_boiler</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.h_boiler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Height of boiler [m]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>H_rec</p></li>
+<li><p>rec_aspect</p></li>
+<li><p>rec_height</p></li>
+<li><p>total_installed_cost</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.h_rh">
+<code class="sig-name descname">h_rh</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.h_rh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Height of reheater [m]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>H_rec</p></li>
+<li><p>rec_aspect</p></li>
+<li><p>rec_height</p></li>
+<li><p>total_installed_cost</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.h_sh">
+<code class="sig-name descname">h_sh</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.h_sh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Height of superheater [m]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>H_rec</p></li>
+<li><p>rec_aspect</p></li>
+<li><p>rec_height</p></li>
+<li><p>total_installed_cost</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.h_tower">
+<code class="sig-name descname">h_tower</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.h_tower" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tower Height [m]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>Piping_length</p></li>
+<li><p>THT</p></li>
+<li><p>total_installed_cost</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.hl_ffact">
+<code class="sig-name descname">hl_ffact</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.hl_ffact" title="Permalink to this definition">¶</a></dt>
+<dd><p>Heat Loss Fudge FACTor [-]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.lhv_eff">
+<code class="sig-name descname">lhv_eff</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.lhv_eff" title="Permalink to this definition">¶</a></dt>
+<dd><p>Aux Heater lower heating value efficiency [-]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.mat_boiler">
+<code class="sig-name descname">mat_boiler</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.mat_boiler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Numerical code for tube material [-]</p>
+<p><em>Constraints</em>: INTEGER</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.mat_rh">
+<code class="sig-name descname">mat_rh</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.mat_rh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Numerical code for reheater material [-]</p>
+<p><em>Constraints</em>: INTEGER</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.mat_sh">
+<code class="sig-name descname">mat_sh</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.mat_sh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Numerical code for superheater material [-]</p>
+<p><em>Constraints</em>: INTEGER</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.n_panels">
+<code class="sig-name descname">n_panels</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.n_panels" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of panels [-]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.p_cycle_design">
+<code class="sig-name descname">p_cycle_design</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.p_cycle_design" title="Permalink to this definition">¶</a></dt>
+<dd><p>Design Cycle Power [MW]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.q_aux_max">
+<code class="sig-name descname">q_aux_max</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.q_aux_max" title="Permalink to this definition">¶</a></dt>
+<dd><p>Maximum heat rate of auxiliary heater [MW]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>eta_ref</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.q_pb_design">
+<code class="sig-name descname">q_pb_design</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.q_pb_design" title="Permalink to this definition">¶</a></dt>
+<dd><p>Heat rate into powerblock at design [MW]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>eta_ref</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.q_rec_des">
+<code class="sig-name descname">q_rec_des</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.q_rec_des" title="Permalink to this definition">¶</a></dt>
+<dd><p>Design-point thermal power [MW]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>q_design</p></li>
+</ul>
+</dd>
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>eta_ref</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.rec_absorptance">
+<code class="sig-name descname">rec_absorptance</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.rec_absorptance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Absorptance of receiver tubes [-]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.rec_emis">
+<code class="sig-name descname">rec_emis</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.rec_emis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Emissivity of receiver tubes [-]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.rec_qf_delay">
+<code class="sig-name descname">rec_qf_delay</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.rec_qf_delay" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver start-up delay fraction of thermal energy of receiver running at design for 1 hour [-]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.rec_su_delay">
+<code class="sig-name descname">rec_su_delay</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.rec_su_delay" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver start-up delay time [hr]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.t_standby_ini">
+<code class="sig-name descname">t_standby_ini</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.t_standby_ini" title="Permalink to this definition">¶</a></dt>
+<dd><p>Power block standby time [hr]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.th_rh">
+<code class="sig-name descname">th_rh</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.th_rh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Thickness of reheater tubes [m]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.th_sh">
+<code class="sig-name descname">th_sh</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.th_sh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Thickness of superheater tubes [m]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.th_t_boiler">
+<code class="sig-name descname">th_t_boiler</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.th_t_boiler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Thickness of boiler tubes [m]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.x_b_target">
+<code class="sig-name descname">x_b_target</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.DsgController.x_b_target" title="Permalink to this definition">¶</a></dt>
+<dd><p>Target boiler outlet quality [-]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="powerblock-group">
 <h2>Powerblock Group<a class="headerlink" href="#powerblock-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Powerblock">
+<em class="property">class </em><code class="sig-prename descclassname">PySAM.TcsdirectSteam.TcsdirectSteam.</code><code class="sig-name descname">Powerblock</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Powerblock" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Powerblock.assign">
+<code class="sig-name descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Powerblock.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">Powerblock_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Powerblock.export">
+<code class="sig-name descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Powerblock.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Powerblock.F_wc">
+<code class="sig-name descname">F_wc</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Powerblock.F_wc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fraction indicating wet cooling use for hybrid system [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Powerblock.P_boil_des">
+<code class="sig-name descname">P_boil_des</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Powerblock.P_boil_des" title="Permalink to this definition">¶</a></dt>
+<dd><p>Boiler operating pressure &#64; design [bar]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>P_b_in_init</p></li>
+<li><p>P_hp_in_des</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Powerblock.P_cond_min">
+<code class="sig-name descname">P_cond_min</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Powerblock.P_cond_min" title="Permalink to this definition">¶</a></dt>
+<dd><p>Minimum condenser pressure [inHg]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Powerblock.P_cond_ratio">
+<code class="sig-name descname">P_cond_ratio</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Powerblock.P_cond_ratio" title="Permalink to this definition">¶</a></dt>
+<dd><p>Condenser pressure ratio [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Powerblock.P_ref">
+<code class="sig-name descname">P_ref</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Powerblock.P_ref" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reference output electric power at design condition [MW]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>total_installed_cost</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Powerblock.P_rh_ref">
+<code class="sig-name descname">P_rh_ref</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Powerblock.P_rh_ref" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reheater operating pressure at design [bar]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>P_cond_init</p></li>
+<li><p>P_hp_out</p></li>
+<li><p>P_hp_out_des</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Powerblock.T_ITD_des">
+<code class="sig-name descname">T_ITD_des</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Powerblock.T_ITD_des" title="Permalink to this definition">¶</a></dt>
+<dd><p>ITD at design for dry system [C]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Powerblock.T_amb_des">
+<code class="sig-name descname">T_amb_des</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Powerblock.T_amb_des" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reference ambient temperature at design point [C]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Powerblock.T_cold_ref">
+<code class="sig-name descname">T_cold_ref</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Powerblock.T_cold_ref" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reference HTF outlet temperature at design [C]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Powerblock.T_hot">
+<code class="sig-name descname">T_hot</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Powerblock.T_hot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hot HTF inlet temperature, from storage tank [C]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>T_sh_out_des</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Powerblock.T_hot_ref">
+<code class="sig-name descname">T_hot_ref</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Powerblock.T_hot_ref" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reference HTF inlet temperature at design [C]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>T_sh_out_des</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Powerblock.dT_cw_ref">
+<code class="sig-name descname">dT_cw_ref</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Powerblock.dT_cw_ref" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reference condenser cooling water inlet/outlet T diff [C]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Powerblock.eta_ref">
+<code class="sig-name descname">eta_ref</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Powerblock.eta_ref" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reference conversion efficiency at design condition [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>design_eff</p></li>
+<li><p>q_aux_max</p></li>
+<li><p>q_design</p></li>
+<li><p>q_pb_design</p></li>
+<li><p>q_rec_des</p></li>
+<li><p>total_installed_cost</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Powerblock.n_pl_inc">
+<code class="sig-name descname">n_pl_inc</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Powerblock.n_pl_inc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of part-load increments for the heat rejection system [none]</p>
+<p><em>Constraints</em>: INTEGER</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Powerblock.pb_bd_frac">
+<code class="sig-name descname">pb_bd_frac</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Powerblock.pb_bd_frac" title="Permalink to this definition">¶</a></dt>
+<dd><p>Power block blowdown steam fraction  [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Powerblock.q_sby_frac">
+<code class="sig-name descname">q_sby_frac</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Powerblock.q_sby_frac" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fraction of thermal power required for standby mode [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>f_pb_sb</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Powerblock.rh_frac_ref">
+<code class="sig-name descname">rh_frac_ref</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Powerblock.rh_frac_ref" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reheater flow fraction at design [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>f_mdot_rh_init</p></li>
+<li><p>f_mdotrh_des</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Powerblock.startup_frac">
+<code class="sig-name descname">startup_frac</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Powerblock.startup_frac" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fraction of design thermal power needed for startup [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Powerblock.startup_time">
+<code class="sig-name descname">startup_time</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Powerblock.startup_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Time needed for power block startup [hr]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="parasitics-group">
 <h2>Parasitics Group<a class="headerlink" href="#parasitics-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Parasitics">
+<em class="property">class </em><code class="sig-prename descclassname">PySAM.TcsdirectSteam.TcsdirectSteam.</code><code class="sig-name descname">Parasitics</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Parasitics" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Parasitics.assign">
+<code class="sig-name descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Parasitics.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">Parasitics_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Parasitics.export">
+<code class="sig-name descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Parasitics.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Parasitics.Design_power">
+<code class="sig-name descname">Design_power</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Parasitics.Design_power" title="Permalink to this definition">¶</a></dt>
+<dd><p>Power production at design conditions [MWe]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Parasitics.Piping_length">
+<code class="sig-name descname">Piping_length</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Parasitics.Piping_length" title="Permalink to this definition">¶</a></dt>
+<dd><p>Total length of exposed piping [m]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>THT</p></li>
+<li><p>h_tower</p></li>
+<li><p>piping_length_add</p></li>
+<li><p>piping_length_mult</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Parasitics.Piping_loss">
+<code class="sig-name descname">Piping_loss</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Parasitics.Piping_loss" title="Permalink to this definition">¶</a></dt>
+<dd><p>Thermal loss per meter of piping [Wt/m]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Parasitics.aux_par">
+<code class="sig-name descname">aux_par</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Parasitics.aux_par" title="Permalink to this definition">¶</a></dt>
+<dd><p>Aux heater, boiler parasitic [MWe/MWcap]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Parasitics.aux_par_0">
+<code class="sig-name descname">aux_par_0</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Parasitics.aux_par_0" title="Permalink to this definition">¶</a></dt>
+<dd><p>Aux heater, boiler parasitic - constant coefficient [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Parasitics.aux_par_1">
+<code class="sig-name descname">aux_par_1</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Parasitics.aux_par_1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Aux heater, boiler parasitic - linear coefficient [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Parasitics.aux_par_2">
+<code class="sig-name descname">aux_par_2</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Parasitics.aux_par_2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Aux heater, boiler parasitic - quadratic coefficient [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Parasitics.aux_par_f">
+<code class="sig-name descname">aux_par_f</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Parasitics.aux_par_f" title="Permalink to this definition">¶</a></dt>
+<dd><p>Aux heater, boiler parasitic - multiplying fraction [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Parasitics.bop_par">
+<code class="sig-name descname">bop_par</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Parasitics.bop_par" title="Permalink to this definition">¶</a></dt>
+<dd><p>Balance of plant parasitic power fraction [MWe/MWcap]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Parasitics.bop_par_0">
+<code class="sig-name descname">bop_par_0</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Parasitics.bop_par_0" title="Permalink to this definition">¶</a></dt>
+<dd><p>Balance of plant parasitic power fraction - const coeff [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Parasitics.bop_par_1">
+<code class="sig-name descname">bop_par_1</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Parasitics.bop_par_1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Balance of plant parasitic power fraction - linear coeff [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Parasitics.bop_par_2">
+<code class="sig-name descname">bop_par_2</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Parasitics.bop_par_2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Balance of plant parasitic power fraction - quadratic coeff [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Parasitics.bop_par_f">
+<code class="sig-name descname">bop_par_f</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Parasitics.bop_par_f" title="Permalink to this definition">¶</a></dt>
+<dd><p>Balance of plant parasitic power fraction - mult frac [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Parasitics.design_eff">
+<code class="sig-name descname">design_eff</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Parasitics.design_eff" title="Permalink to this definition">¶</a></dt>
+<dd><p>Power cycle efficiency at design [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>total_installed_cost</p></li>
+</ul>
+</dd>
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>eta_ref</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Parasitics.pb_fixed_par">
+<code class="sig-name descname">pb_fixed_par</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Parasitics.pb_fixed_par" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fixed parasitic load - runs at all times [MWe/MWcap]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Parasitics.piping_length_add">
+<code class="sig-name descname">piping_length_add</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Parasitics.piping_length_add" title="Permalink to this definition">¶</a></dt>
+<dd><p>Piping constant length [m]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>Piping_length</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Parasitics.piping_length_mult">
+<code class="sig-name descname">piping_length_mult</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Parasitics.piping_length_mult" title="Permalink to this definition">¶</a></dt>
+<dd><p>Piping length multiplier</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>Piping_length</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="adjustmentfactors-group">
 <h2>AdjustmentFactors Group<a class="headerlink" href="#adjustmentfactors-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.AdjustmentFactors">
+<em class="property">class </em><code class="sig-prename descclassname">PySAM.TcsdirectSteam.TcsdirectSteam.</code><code class="sig-name descname">AdjustmentFactors</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.AdjustmentFactors" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.AdjustmentFactors.assign">
+<code class="sig-name descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.AdjustmentFactors.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.AdjustmentFactors.export">
+<code class="sig-name descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Dict<a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.AdjustmentFactors.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.AdjustmentFactors.constant">
+<code class="sig-name descname">constant</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.AdjustmentFactors.constant" title="Permalink to this definition">¶</a></dt>
+<dd><p>float</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>type</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.AdjustmentFactors.dc_constant">
+<code class="sig-name descname">dc_constant</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.AdjustmentFactors.dc_constant" title="Permalink to this definition">¶</a></dt>
+<dd><p>DC Constant loss adjustment [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.AdjustmentFactors.dc_hourly">
+<code class="sig-name descname">dc_hourly</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.AdjustmentFactors.dc_hourly" title="Permalink to this definition">¶</a></dt>
+<dd><p>DC Hourly Adjustment Factors [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.AdjustmentFactors.dc_periods">
+<code class="sig-name descname">dc_periods</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.AdjustmentFactors.dc_periods" title="Permalink to this definition">¶</a></dt>
+<dd><p>DC Period-based Adjustment Factors [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.AdjustmentFactors.hourly">
+<code class="sig-name descname">hourly</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.AdjustmentFactors.hourly" title="Permalink to this definition">¶</a></dt>
+<dd><p>AC Hourly Adjustment Factors [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.AdjustmentFactors.periods">
+<code class="sig-name descname">periods</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.AdjustmentFactors.periods" title="Permalink to this definition">¶</a></dt>
+<dd><p>AC Period-based Adjustment Factors [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.AdjustmentFactors.sf_constant">
+<code class="sig-name descname">sf_constant</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.AdjustmentFactors.sf_constant" title="Permalink to this definition">¶</a></dt>
+<dd><p>DC Constant loss adjustment [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.AdjustmentFactors.sf_hourly">
+<code class="sig-name descname">sf_hourly</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.AdjustmentFactors.sf_hourly" title="Permalink to this definition">¶</a></dt>
+<dd><p>DC Hourly Adjustment Factors [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.AdjustmentFactors.sf_periods">
+<code class="sig-name descname">sf_periods</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.AdjustmentFactors.sf_periods" title="Permalink to this definition">¶</a></dt>
+<dd><p>DC Period-based Adjustment Factors [%]</p>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="outputs-group">
 <h2>Outputs Group<a class="headerlink" href="#outputs-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs">
+<em class="property">class </em><code class="sig-prename descclassname">PySAM.TcsdirectSteam.TcsdirectSteam.</code><code class="sig-name descname">Outputs</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.assign">
+<code class="sig-name descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">Outputs_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.export">
+<code class="sig-name descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.P_b_in">
+<code class="sig-name descname">P_b_in</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.P_b_in" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver boiler pressure inlet [kPa]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.P_b_out">
+<code class="sig-name descname">P_b_out</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.P_b_out" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver boiler pressure outlet [kPa]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.P_cond">
+<code class="sig-name descname">P_cond</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.P_cond" title="Permalink to this definition">¶</a></dt>
+<dd><p>Condenser pressure [Pa]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.P_cooling_tower_tot">
+<code class="sig-name descname">P_cooling_tower_tot</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.P_cooling_tower_tot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parasitic power condenser operation [MWe]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.P_cycle">
+<code class="sig-name descname">P_cycle</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.P_cycle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cycle electrical power output (gross) [MWe]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.P_drop_b">
+<code class="sig-name descname">P_drop_b</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.P_drop_b" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver boiler pressure drop [Pa]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.P_fixed">
+<code class="sig-name descname">P_fixed</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.P_fixed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parasitic power fixed load [MWe]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.P_out_net">
+<code class="sig-name descname">P_out_net</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.P_out_net" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cycle electrical power output (net) [MWe]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.P_parasitics">
+<code class="sig-name descname">P_parasitics</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.P_parasitics" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parasitic power total consumption [MWe]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.P_piping_tot">
+<code class="sig-name descname">P_piping_tot</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.P_piping_tot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parasitic power equiv. header pipe losses [MWe]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.P_plant_balance_tot">
+<code class="sig-name descname">P_plant_balance_tot</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.P_plant_balance_tot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parasitic power generation-dependent load [MWe]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.P_rh_in">
+<code class="sig-name descname">P_rh_in</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.P_rh_in" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver reheater pressure inlet [kPa]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.P_rh_out">
+<code class="sig-name descname">P_rh_out</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.P_rh_out" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver reheater pressure outlet [kPa]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.P_sh_out">
+<code class="sig-name descname">P_sh_out</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.P_sh_out" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver superheater pressure outlet [kPa]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.T_b_in">
+<code class="sig-name descname">T_b_in</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.T_b_in" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver boiler temperature inlet [C]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.T_boiling">
+<code class="sig-name descname">T_boiling</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.T_boiling" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver boiler temperature drum [C]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.T_fw">
+<code class="sig-name descname">T_fw</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.T_fw" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cycle temperature feedwater outlet [C]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.T_max_b_surf">
+<code class="sig-name descname">T_max_b_surf</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.T_max_b_surf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver boiler temperature surface max [C]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.T_max_rh_surf">
+<code class="sig-name descname">T_max_rh_surf</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.T_max_rh_surf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver reheater temperature surface max [C]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.T_max_sh_surf">
+<code class="sig-name descname">T_max_sh_surf</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.T_max_sh_surf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver superheater temperature surface max [C]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.T_rh_in">
+<code class="sig-name descname">T_rh_in</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.T_rh_in" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver reheater temperature inlet [C]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.T_rh_out">
+<code class="sig-name descname">T_rh_out</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.T_rh_out" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver reheater temperature outlet [C]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.W_dot_boost">
+<code class="sig-name descname">W_dot_boost</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.W_dot_boost" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parasitic power receiver boost pump [MWe]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.annual_W_cycle_gross">
+<code class="sig-name descname">annual_W_cycle_gross</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.annual_W_cycle_gross" title="Permalink to this definition">¶</a></dt>
+<dd><p>Electrical source - Power cycle gross output [kWh]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.annual_energy">
+<code class="sig-name descname">annual_energy</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.annual_energy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Annual Energy [kWh]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.annual_fuel_usage">
+<code class="sig-name descname">annual_fuel_usage</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.annual_fuel_usage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Annual fuel usage [kWh]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.annual_total_water_use">
+<code class="sig-name descname">annual_total_water_use</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.annual_total_water_use" title="Permalink to this definition">¶</a></dt>
+<dd><p>cycle + mirror washing [m3]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+<dt class="field-even">Type</dt>
+<dd class="field-even"><p>Total Annual Water Usage</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.beam">
+<code class="sig-name descname">beam</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.beam" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resource Beam normal irradiance [W/m2]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.capacity_factor">
+<code class="sig-name descname">capacity_factor</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.capacity_factor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Capacity factor [%]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.conversion_factor">
+<code class="sig-name descname">conversion_factor</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.conversion_factor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gross to Net Conversion Factor [%]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.dP_rh">
+<code class="sig-name descname">dP_rh</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.dP_rh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver reheater pressure drop [Pa]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.dP_sh">
+<code class="sig-name descname">dP_sh</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.dP_sh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver superheater pressure drop [Pa]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.defocus">
+<code class="sig-name descname">defocus</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.defocus" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field optical focus fraction</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.eta_b">
+<code class="sig-name descname">eta_b</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.eta_b" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver boiler thermal efficiency</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.eta_field">
+<code class="sig-name descname">eta_field</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.eta_field" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field optical efficiency</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.eta_rec">
+<code class="sig-name descname">eta_rec</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.eta_rec" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver thermal efficiency</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.eta_rh">
+<code class="sig-name descname">eta_rh</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.eta_rh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver reheater thermal efficiency [-]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.eta_sh">
+<code class="sig-name descname">eta_sh</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.eta_sh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver superheater thermal efficiency</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.f_bays">
+<code class="sig-name descname">f_bays</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.f_bays" title="Permalink to this definition">¶</a></dt>
+<dd><p>Condenser fraction of operating bays</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.f_mdot_rh">
+<code class="sig-name descname">f_mdot_rh</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.f_mdot_rh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver reheater mass flow rate fraction [-]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.gen">
+<code class="sig-name descname">gen</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.gen" title="Permalink to this definition">¶</a></dt>
+<dd><p>System power generated [kW]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.hour">
+<code class="sig-name descname">hour</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.hour" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resource Hour of Day</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.kwh_per_kw">
+<code class="sig-name descname">kwh_per_kw</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.kwh_per_kw" title="Permalink to this definition">¶</a></dt>
+<dd><p>First year kWh/kW [kWh/kW]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.m_dot_aux">
+<code class="sig-name descname">m_dot_aux</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.m_dot_aux" title="Permalink to this definition">¶</a></dt>
+<dd><p>Auxiliary mass flow rate [kg/hr]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.m_dot_makeup">
+<code class="sig-name descname">m_dot_makeup</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.m_dot_makeup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cycle mass flow rate cooling water makeup [kg/hr]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.m_dot_sh">
+<code class="sig-name descname">m_dot_sh</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.m_dot_sh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver superheater mass flow rate [kg/hr]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.month">
+<code class="sig-name descname">month</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.month" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resource Month</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.pparasi">
+<code class="sig-name descname">pparasi</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.pparasi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parasitic power heliostat drives [MWe]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.pres">
+<code class="sig-name descname">pres</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.pres" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resource Pressure [mbar]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.q_abs_rec">
+<code class="sig-name descname">q_abs_rec</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.q_abs_rec" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver power absorbed total [MWt]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.q_aux">
+<code class="sig-name descname">q_aux</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.q_aux" title="Permalink to this definition">¶</a></dt>
+<dd><p>Auxiliary heat rate delivered to cycle [MW]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.q_aux_fuel">
+<code class="sig-name descname">q_aux_fuel</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.q_aux_fuel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fuel energy rate to aux heater [MMBTU]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.q_b_abs">
+<code class="sig-name descname">q_b_abs</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.q_b_abs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver boiler power absorbed [MWt]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.q_b_conv">
+<code class="sig-name descname">q_b_conv</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.q_b_conv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver boiler power loss to convection [MWt]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.q_b_rad">
+<code class="sig-name descname">q_b_rad</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.q_b_rad" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver boiler power loss to radiation [MWt]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.q_conv_rec">
+<code class="sig-name descname">q_conv_rec</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.q_conv_rec" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver power loss to convection total [MWt]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.q_inc_full">
+<code class="sig-name descname">q_inc_full</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.q_inc_full" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver power incident (excl. defocus) [MWt]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.q_rad_rec">
+<code class="sig-name descname">q_rad_rec</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.q_rad_rec" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver power loss to radiation total [MWt]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.q_rh_abs">
+<code class="sig-name descname">q_rh_abs</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.q_rh_abs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver reheater power absorbed [MWt]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.q_rh_conv">
+<code class="sig-name descname">q_rh_conv</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.q_rh_conv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver reheater power loss to convection [MWt]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.q_rh_rad">
+<code class="sig-name descname">q_rh_rad</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.q_rh_rad" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver reheater power loss to radiation [MWt]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.q_sh_abs">
+<code class="sig-name descname">q_sh_abs</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.q_sh_abs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver superheater power absorbed [MWt]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.q_sh_conv">
+<code class="sig-name descname">q_sh_conv</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.q_sh_conv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver superheater power loss to convection [MWt]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.q_sh_rad">
+<code class="sig-name descname">q_sh_rad</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.q_sh_rad" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver superheater power loss to radiation [MWt]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.q_therm_in_rec">
+<code class="sig-name descname">q_therm_in_rec</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.q_therm_in_rec" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver power to steam total [MWt]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.solazi">
+<code class="sig-name descname">solazi</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.solazi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resource Solar Azimuth [deg]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.solzen">
+<code class="sig-name descname">solzen</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.solzen" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resource Solar Zenith [deg]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.system_heat_rate">
+<code class="sig-name descname">system_heat_rate</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.system_heat_rate" title="Permalink to this definition">¶</a></dt>
+<dd><p>System heat rate [MMBtu/MWh]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.tdry">
+<code class="sig-name descname">tdry</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.tdry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resource Dry bulb temperature [C]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.tou_value">
+<code class="sig-name descname">tou_value</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.tou_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resource Time-of-use value</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.twet">
+<code class="sig-name descname">twet</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.twet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resource Wet bulb temperature [C]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.v_rh_max">
+<code class="sig-name descname">v_rh_max</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.v_rh_max" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver reheater velocity at outlet [m/s]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.v_sh_max">
+<code class="sig-name descname">v_sh_max</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.v_sh_max" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver superheater velocity at outlet [m/s]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.wspd">
+<code class="sig-name descname">wspd</code><a class="headerlink" href="#PySAM.TcsdirectSteam.TcsdirectSteam.Outputs.wspd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resource Wind Speed [m/s]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 </div>
 
@@ -132,12 +3706,15 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
-        <li class="nav-item nav-item-0"><a href="../index.html">PySAM 1.2 documentation</a> &#187;</li> 
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">PySAM 2.0 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2019, NREL.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.3.
     </div>
   </body>
 </html>

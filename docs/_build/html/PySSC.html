@@ -5,23 +5,23 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>PySSC &#8212; PySAM 1.2 documentation</title>
+    <title>PySSC &#8212; PySAM 2.0 documentation</title>
     <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
-    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/language_data.js"></script>
-    <script type="text/javascript" src="_static/bizstyle.js"></script>
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="_static/bizstyle.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Module Names and Descriptions" href="Models.html" />
-    <link rel="prev" title="Welcome to PySAM’s documentation!" href="index.html" />
+    <link rel="next" title="Examples" href="Examples.html" />
+    <link rel="prev" title="Battery Tools" href="Tools.html" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <!--[if lt IE 9]>
-    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <script src="_static/css3-mediaqueries.js"></script>
     <![endif]-->
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
@@ -31,22 +31,25 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="Models.html" title="Module Names and Descriptions"
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="Examples.html" title="Examples"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="index.html" title="Welcome to PySAM’s documentation!"
+          <a href="Tools.html" title="Battery Tools"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">PySAM 1.2 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">PySAM 2.0 documentation</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h4>Previous topic</h4>
-  <p class="topless"><a href="index.html"
-                        title="previous chapter">Welcome to PySAM’s documentation!</a></p>
+  <p class="topless"><a href="Tools.html"
+                        title="previous chapter">Battery Tools</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="Models.html"
-                        title="next chapter">Module Names and Descriptions</a></p>
+  <p class="topless"><a href="Examples.html"
+                        title="next chapter">Examples</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -55,15 +58,15 @@
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
 
@@ -74,6 +77,312 @@
             
   <div class="section" id="pyssc">
 <span id="id1"></span><h1>PySSC<a class="headerlink" href="#pyssc" title="Permalink to this headline">¶</a></h1>
+<p>Generic wrapper for SAM Simulation Core models using <a class="reference external" href="https://github.com/NREL/ssc/blob/develop/ssc/sscapi.h">sscapi.h</a></p>
+<p><strong>PySSC description</strong></p>
+<span class="target" id="module-PySAM.PySSC"></span><dl class="class">
+<dt id="PySAM.PySSC.PySSC">
+<em class="property">class </em><code class="sig-prename descclassname">PySAM.PySSC.</code><code class="sig-name descname">PySSC</code><a class="headerlink" href="#PySAM.PySSC.PySSC" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.PySSC.PySSC.data_clear">
+<code class="sig-name descname">data_clear</code><span class="sig-paren">(</span><em class="sig-param">p_data</em><span class="sig-paren">)</span><a class="headerlink" href="#PySAM.PySSC.PySSC.data_clear" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="PySAM.PySSC.PySSC.data_create">
+<code class="sig-name descname">data_create</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySAM.PySSC.PySSC.data_create" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="PySAM.PySSC.PySSC.data_first">
+<code class="sig-name descname">data_first</code><span class="sig-paren">(</span><em class="sig-param">p_data</em><span class="sig-paren">)</span><a class="headerlink" href="#PySAM.PySSC.PySSC.data_first" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="PySAM.PySSC.PySSC.data_free">
+<code class="sig-name descname">data_free</code><span class="sig-paren">(</span><em class="sig-param">p_data</em><span class="sig-paren">)</span><a class="headerlink" href="#PySAM.PySSC.PySSC.data_free" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="PySAM.PySSC.PySSC.data_get_array">
+<code class="sig-name descname">data_get_array</code><span class="sig-paren">(</span><em class="sig-param">p_data</em>, <em class="sig-param">name</em><span class="sig-paren">)</span><a class="headerlink" href="#PySAM.PySSC.PySSC.data_get_array" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="PySAM.PySSC.PySSC.data_get_matrix">
+<code class="sig-name descname">data_get_matrix</code><span class="sig-paren">(</span><em class="sig-param">p_data</em>, <em class="sig-param">name</em><span class="sig-paren">)</span><a class="headerlink" href="#PySAM.PySSC.PySSC.data_get_matrix" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="PySAM.PySSC.PySSC.data_get_number">
+<code class="sig-name descname">data_get_number</code><span class="sig-paren">(</span><em class="sig-param">p_data</em>, <em class="sig-param">name</em><span class="sig-paren">)</span><a class="headerlink" href="#PySAM.PySSC.PySSC.data_get_number" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="PySAM.PySSC.PySSC.data_get_string">
+<code class="sig-name descname">data_get_string</code><span class="sig-paren">(</span><em class="sig-param">p_data</em>, <em class="sig-param">name</em><span class="sig-paren">)</span><a class="headerlink" href="#PySAM.PySSC.PySSC.data_get_string" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="PySAM.PySSC.PySSC.data_get_table">
+<code class="sig-name descname">data_get_table</code><span class="sig-paren">(</span><em class="sig-param">p_data</em>, <em class="sig-param">name</em><span class="sig-paren">)</span><a class="headerlink" href="#PySAM.PySSC.PySSC.data_get_table" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="PySAM.PySSC.PySSC.data_next">
+<code class="sig-name descname">data_next</code><span class="sig-paren">(</span><em class="sig-param">p_data</em><span class="sig-paren">)</span><a class="headerlink" href="#PySAM.PySSC.PySSC.data_next" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="PySAM.PySSC.PySSC.data_query">
+<code class="sig-name descname">data_query</code><span class="sig-paren">(</span><em class="sig-param">p_data</em>, <em class="sig-param">name</em><span class="sig-paren">)</span><a class="headerlink" href="#PySAM.PySSC.PySSC.data_query" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="PySAM.PySSC.PySSC.data_set_array">
+<code class="sig-name descname">data_set_array</code><span class="sig-paren">(</span><em class="sig-param">p_data</em>, <em class="sig-param">name</em>, <em class="sig-param">parr</em><span class="sig-paren">)</span><a class="headerlink" href="#PySAM.PySSC.PySSC.data_set_array" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="PySAM.PySSC.PySSC.data_set_array_from_csv">
+<code class="sig-name descname">data_set_array_from_csv</code><span class="sig-paren">(</span><em class="sig-param">p_data</em>, <em class="sig-param">name</em>, <em class="sig-param">fn</em><span class="sig-paren">)</span><a class="headerlink" href="#PySAM.PySSC.PySSC.data_set_array_from_csv" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="PySAM.PySSC.PySSC.data_set_matrix">
+<code class="sig-name descname">data_set_matrix</code><span class="sig-paren">(</span><em class="sig-param">p_data</em>, <em class="sig-param">name</em>, <em class="sig-param">mat</em><span class="sig-paren">)</span><a class="headerlink" href="#PySAM.PySSC.PySSC.data_set_matrix" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="PySAM.PySSC.PySSC.data_set_matrix_from_csv">
+<code class="sig-name descname">data_set_matrix_from_csv</code><span class="sig-paren">(</span><em class="sig-param">p_data</em>, <em class="sig-param">name</em>, <em class="sig-param">fn</em><span class="sig-paren">)</span><a class="headerlink" href="#PySAM.PySSC.PySSC.data_set_matrix_from_csv" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="PySAM.PySSC.PySSC.data_set_number">
+<code class="sig-name descname">data_set_number</code><span class="sig-paren">(</span><em class="sig-param">p_data</em>, <em class="sig-param">name</em>, <em class="sig-param">value</em><span class="sig-paren">)</span><a class="headerlink" href="#PySAM.PySSC.PySSC.data_set_number" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="PySAM.PySSC.PySSC.data_set_string">
+<code class="sig-name descname">data_set_string</code><span class="sig-paren">(</span><em class="sig-param">p_data</em>, <em class="sig-param">name</em>, <em class="sig-param">value</em><span class="sig-paren">)</span><a class="headerlink" href="#PySAM.PySSC.PySSC.data_set_string" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="PySAM.PySSC.PySSC.data_set_table">
+<code class="sig-name descname">data_set_table</code><span class="sig-paren">(</span><em class="sig-param">p_data</em>, <em class="sig-param">name</em>, <em class="sig-param">tab</em><span class="sig-paren">)</span><a class="headerlink" href="#PySAM.PySSC.PySSC.data_set_table" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="PySAM.PySSC.PySSC.data_unassign">
+<code class="sig-name descname">data_unassign</code><span class="sig-paren">(</span><em class="sig-param">p_data</em>, <em class="sig-param">name</em><span class="sig-paren">)</span><a class="headerlink" href="#PySAM.PySSC.PySSC.data_unassign" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="PySAM.PySSC.PySSC.entry_description">
+<code class="sig-name descname">entry_description</code><span class="sig-paren">(</span><em class="sig-param">p_entry</em><span class="sig-paren">)</span><a class="headerlink" href="#PySAM.PySSC.PySSC.entry_description" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="PySAM.PySSC.PySSC.entry_name">
+<code class="sig-name descname">entry_name</code><span class="sig-paren">(</span><em class="sig-param">p_entry</em><span class="sig-paren">)</span><a class="headerlink" href="#PySAM.PySSC.PySSC.entry_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="PySAM.PySSC.PySSC.entry_version">
+<code class="sig-name descname">entry_version</code><span class="sig-paren">(</span><em class="sig-param">p_entry</em><span class="sig-paren">)</span><a class="headerlink" href="#PySAM.PySSC.PySSC.entry_version" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="PySAM.PySSC.PySSC.info_constraints">
+<code class="sig-name descname">info_constraints</code><span class="sig-paren">(</span><em class="sig-param">p_inf</em><span class="sig-paren">)</span><a class="headerlink" href="#PySAM.PySSC.PySSC.info_constraints" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="PySAM.PySSC.PySSC.info_data_type">
+<code class="sig-name descname">info_data_type</code><span class="sig-paren">(</span><em class="sig-param">p_inf</em><span class="sig-paren">)</span><a class="headerlink" href="#PySAM.PySSC.PySSC.info_data_type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="PySAM.PySSC.PySSC.info_group">
+<code class="sig-name descname">info_group</code><span class="sig-paren">(</span><em class="sig-param">p_inf</em><span class="sig-paren">)</span><a class="headerlink" href="#PySAM.PySSC.PySSC.info_group" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="PySAM.PySSC.PySSC.info_label">
+<code class="sig-name descname">info_label</code><span class="sig-paren">(</span><em class="sig-param">p_inf</em><span class="sig-paren">)</span><a class="headerlink" href="#PySAM.PySSC.PySSC.info_label" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="PySAM.PySSC.PySSC.info_meta">
+<code class="sig-name descname">info_meta</code><span class="sig-paren">(</span><em class="sig-param">p_inf</em><span class="sig-paren">)</span><a class="headerlink" href="#PySAM.PySSC.PySSC.info_meta" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="PySAM.PySSC.PySSC.info_name">
+<code class="sig-name descname">info_name</code><span class="sig-paren">(</span><em class="sig-param">p_inf</em><span class="sig-paren">)</span><a class="headerlink" href="#PySAM.PySSC.PySSC.info_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="PySAM.PySSC.PySSC.info_required">
+<code class="sig-name descname">info_required</code><span class="sig-paren">(</span><em class="sig-param">p_inf</em><span class="sig-paren">)</span><a class="headerlink" href="#PySAM.PySSC.PySSC.info_required" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="PySAM.PySSC.PySSC.info_uihint">
+<code class="sig-name descname">info_uihint</code><span class="sig-paren">(</span><em class="sig-param">p_inf</em><span class="sig-paren">)</span><a class="headerlink" href="#PySAM.PySSC.PySSC.info_uihint" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="PySAM.PySSC.PySSC.info_units">
+<code class="sig-name descname">info_units</code><span class="sig-paren">(</span><em class="sig-param">p_inf</em><span class="sig-paren">)</span><a class="headerlink" href="#PySAM.PySSC.PySSC.info_units" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="PySAM.PySSC.PySSC.info_var_type">
+<code class="sig-name descname">info_var_type</code><span class="sig-paren">(</span><em class="sig-param">p_inf</em><span class="sig-paren">)</span><a class="headerlink" href="#PySAM.PySSC.PySSC.info_var_type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="PySAM.PySSC.PySSC.module_create">
+<code class="sig-name descname">module_create</code><span class="sig-paren">(</span><em class="sig-param">name</em><span class="sig-paren">)</span><a class="headerlink" href="#PySAM.PySSC.PySSC.module_create" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="PySAM.PySSC.PySSC.module_entry">
+<code class="sig-name descname">module_entry</code><span class="sig-paren">(</span><em class="sig-param">index</em><span class="sig-paren">)</span><a class="headerlink" href="#PySAM.PySSC.PySSC.module_entry" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="PySAM.PySSC.PySSC.module_exec">
+<code class="sig-name descname">module_exec</code><span class="sig-paren">(</span><em class="sig-param">p_mod</em>, <em class="sig-param">p_data</em><span class="sig-paren">)</span><a class="headerlink" href="#PySAM.PySSC.PySSC.module_exec" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="PySAM.PySSC.PySSC.module_exec_set_print">
+<code class="sig-name descname">module_exec_set_print</code><span class="sig-paren">(</span><em class="sig-param">prn</em><span class="sig-paren">)</span><a class="headerlink" href="#PySAM.PySSC.PySSC.module_exec_set_print" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="PySAM.PySSC.PySSC.module_exec_simple_no_thread">
+<code class="sig-name descname">module_exec_simple_no_thread</code><span class="sig-paren">(</span><em class="sig-param">modname</em>, <em class="sig-param">data</em><span class="sig-paren">)</span><a class="headerlink" href="#PySAM.PySSC.PySSC.module_exec_simple_no_thread" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="PySAM.PySSC.PySSC.module_free">
+<code class="sig-name descname">module_free</code><span class="sig-paren">(</span><em class="sig-param">p_mod</em><span class="sig-paren">)</span><a class="headerlink" href="#PySAM.PySSC.PySSC.module_free" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="PySAM.PySSC.PySSC.module_log">
+<code class="sig-name descname">module_log</code><span class="sig-paren">(</span><em class="sig-param">p_mod</em>, <em class="sig-param">index</em><span class="sig-paren">)</span><a class="headerlink" href="#PySAM.PySSC.PySSC.module_log" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="PySAM.PySSC.PySSC.module_var_info">
+<code class="sig-name descname">module_var_info</code><span class="sig-paren">(</span><em class="sig-param">p_mod</em>, <em class="sig-param">index</em><span class="sig-paren">)</span><a class="headerlink" href="#PySAM.PySSC.PySSC.module_var_info" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="PySAM.PySSC.PySSC.version">
+<code class="sig-name descname">version</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#PySAM.PySSC.PySSC.version" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.PySSC.PySSC.ARRAY">
+<code class="sig-name descname">ARRAY</code><em class="property"> = 3</em><a class="headerlink" href="#PySAM.PySSC.PySSC.ARRAY" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.PySSC.PySSC.INOUT">
+<code class="sig-name descname">INOUT</code><em class="property"> = 3</em><a class="headerlink" href="#PySAM.PySSC.PySSC.INOUT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.PySSC.PySSC.INPUT">
+<code class="sig-name descname">INPUT</code><em class="property"> = 1</em><a class="headerlink" href="#PySAM.PySSC.PySSC.INPUT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.PySSC.PySSC.INVALID">
+<code class="sig-name descname">INVALID</code><em class="property"> = 0</em><a class="headerlink" href="#PySAM.PySSC.PySSC.INVALID" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.PySSC.PySSC.MATRIX">
+<code class="sig-name descname">MATRIX</code><em class="property"> = 4</em><a class="headerlink" href="#PySAM.PySSC.PySSC.MATRIX" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.PySSC.PySSC.NUMBER">
+<code class="sig-name descname">NUMBER</code><em class="property"> = 2</em><a class="headerlink" href="#PySAM.PySSC.PySSC.NUMBER" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.PySSC.PySSC.OUTPUT">
+<code class="sig-name descname">OUTPUT</code><em class="property"> = 2</em><a class="headerlink" href="#PySAM.PySSC.PySSC.OUTPUT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.PySSC.PySSC.STRING">
+<code class="sig-name descname">STRING</code><em class="property"> = 1</em><a class="headerlink" href="#PySAM.PySSC.PySSC.STRING" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="PySAM.PySSC.dict_to_ssc_table">
+<code class="sig-prename descclassname">PySAM.PySSC.</code><code class="sig-name descname">dict_to_ssc_table</code><span class="sig-paren">(</span><em class="sig-param">py_dict</em>, <em class="sig-param">cmod_name</em><span class="sig-paren">)</span><a class="headerlink" href="#PySAM.PySSC.dict_to_ssc_table" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="PySAM.PySSC.dict_to_ssc_table_dat">
+<code class="sig-prename descclassname">PySAM.PySSC.</code><code class="sig-name descname">dict_to_ssc_table_dat</code><span class="sig-paren">(</span><em class="sig-param">py_dict</em>, <em class="sig-param">cmod_name</em>, <em class="sig-param">dat</em><span class="sig-paren">)</span><a class="headerlink" href="#PySAM.PySSC.dict_to_ssc_table_dat" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="PySAM.PySSC.ssc_cmod">
+<code class="sig-prename descclassname">PySAM.PySSC.</code><code class="sig-name descname">ssc_cmod</code><span class="sig-paren">(</span><em class="sig-param">dat</em>, <em class="sig-param">name</em><span class="sig-paren">)</span><a class="headerlink" href="#PySAM.PySSC.ssc_cmod" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="PySAM.PySSC.ssc_sim">
+<code class="sig-prename descclassname">PySAM.PySSC.</code><code class="sig-name descname">ssc_sim</code><span class="sig-paren">(</span><em class="sig-param">data_ssc</em>, <em class="sig-param">tech_model_name</em>, <em class="sig-param">financial_model_name</em><span class="sig-paren">)</span><a class="headerlink" href="#PySAM.PySSC.ssc_sim" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="PySAM.PySSC.ssc_sim_from_dict">
+<code class="sig-prename descclassname">PySAM.PySSC.</code><code class="sig-name descname">ssc_sim_from_dict</code><span class="sig-paren">(</span><em class="sig-param">data_pydict</em><span class="sig-paren">)</span><a class="headerlink" href="#PySAM.PySSC.ssc_sim_from_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run a technology compute module using parameters in a dict.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data_pydict</strong> (<em>dict</em>) – <dl class="simple">
+<dt>Required keys are:</dt><dd><dl class="simple">
+<dt>tech_model: str</dt><dd><p>name of the compute module to run.</p>
+</dd>
+<dt>financial_model: str or None</dt><dd><p>name of the financial model to apply. If None, no financial
+model is used.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>Other keys are names of args for the selected tech_model or
+financial_model.</p>
+</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>(dict)</strong> – keys are outputs from the selected compute module.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="PySAM.PySSC.ssc_table_to_dict">
+<code class="sig-prename descclassname">PySAM.PySSC.</code><code class="sig-name descname">ssc_table_to_dict</code><span class="sig-paren">(</span><em class="sig-param">cmod</em>, <em class="sig-param">dat</em><span class="sig-paren">)</span><a class="headerlink" href="#PySAM.PySSC.ssc_table_to_dict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </div>
 
 
@@ -89,17 +398,20 @@
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="Models.html" title="Module Names and Descriptions"
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="Examples.html" title="Examples"
              >next</a> |</li>
         <li class="right" >
-          <a href="index.html" title="Welcome to PySAM’s documentation!"
+          <a href="Tools.html" title="Battery Tools"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">PySAM 1.2 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">PySAM 2.0 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2019, NREL.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.3.
     </div>
   </body>
 </html>

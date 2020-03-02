@@ -5,21 +5,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Tcsiscc Module &#8212; PySAM 1.2 documentation</title>
+    <title>Tcsiscc &#8212; PySAM 2.0 documentation</title>
     <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/language_data.js"></script>
-    <script type="text/javascript" src="../_static/bizstyle.js"></script>
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/bizstyle.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <!--[if lt IE 9]>
-    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <script src="_static/css3-mediaqueries.js"></script>
     <![endif]-->
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
@@ -28,14 +28,17 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li class="nav-item nav-item-0"><a href="../index.html">PySAM 1.2 documentation</a> &#187;</li> 
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">PySAM 2.0 documentation</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h3><a href="../index.html">Table of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Tcsiscc Module</a><ul>
+<li><a class="reference internal" href="#">Tcsiscc</a><ul>
 <li><a class="reference internal" href="#creating-an-instance">Creating an Instance</a></li>
 <li><a class="reference internal" href="#functions">Functions</a></li>
 <li><a class="reference internal" href="#weather-group">Weather Group</a></li>
@@ -58,15 +61,15 @@
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
 
@@ -75,40 +78,2629 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="tcsiscc-module">
-<span id="tcsiscc"></span><h1>Tcsiscc Module<a class="headerlink" href="#tcsiscc-module" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="tcsiscc">
+<span id="id1"></span><h1>Tcsiscc<a class="headerlink" href="#tcsiscc" title="Permalink to this headline">¶</a></h1>
 <p>Wrapper for SAM Simulation Core model: <a class="reference external" href="https://github.com/NREL/ssc/blob/develop/ssc/cmod_tcsiscc.cpp">cmod_tcsiscc.cpp</a></p>
 <div class="section" id="creating-an-instance">
 <h2>Creating an Instance<a class="headerlink" href="#creating-an-instance" title="Permalink to this headline">¶</a></h2>
-<p>There are three methods to create a new instance of a PySAM module. Using <code class="docutils literal notranslate"><span class="pre">default</span></code> populates the newclass’ attributes with default values specific to a <code class="docutils literal notranslate"><span class="pre">config</span></code>. Each technology-financialconfiguration corresponds to a SAM GUI configuration. Using <code class="docutils literal notranslate"><span class="pre">new</span></code> creates an instance with empty attributes. The <code class="docutils literal notranslate"><span class="pre">wrap</span></code> function allows compatibility with PySSC, for details, refer to <span class="xref std std-doc">PySSC</span>.</p>
+<p>There are three methods to create a new instance of a PySAM module. Using <code class="docutils literal notranslate"><span class="pre">default</span></code> populates the newclass’ attributes with default values specific to a <code class="docutils literal notranslate"><span class="pre">config</span></code>. Each technology-financialconfiguration corresponds to a SAM GUI configuration. Using <code class="docutils literal notranslate"><span class="pre">new</span></code> creates an instance with empty attributes. The <code class="docutils literal notranslate"><span class="pre">wrap</span></code> function allows compatibility with PySSC, for details, refer to <a class="reference internal" href="../PySSC.html"><span class="doc">PySSC</span></a>.</p>
 <p><strong>Tcsiscc model description</strong></p>
+<span class="target" id="module-PySAM.Tcsiscc"></span><p>CSP molten salt power tower system with a natural gas combined cycle power plant</p>
+<dl class="function">
+<dt id="PySAM.Tcsiscc.default">
+<code class="sig-prename descclassname">PySAM.Tcsiscc.</code><code class="sig-name descname">default</code><span class="sig-paren">(</span><em class="sig-param">config</em><span class="sig-paren">)</span> &#x2192; Tcsiscc<a class="headerlink" href="#PySAM.Tcsiscc.default" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use financial config-specific default attributes
+config options:</p>
+<ul class="simple">
+<li><p>“ISCCSingleOwner”</p></li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="PySAM.Tcsiscc.from_existing">
+<code class="sig-prename descclassname">PySAM.Tcsiscc.</code><code class="sig-name descname">from_existing</code><span class="sig-paren">(</span><em class="sig-param">data</em>, <em class="sig-param">optional config</em><span class="sig-paren">)</span> &#x2192; Tcsiscc<a class="headerlink" href="#PySAM.Tcsiscc.from_existing" title="Permalink to this definition">¶</a></dt>
+<dd><p>Share underlying data with an existing PySAM class. If config provided, default attributes are loaded otherwise.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="PySAM.Tcsiscc.new">
+<code class="sig-prename descclassname">PySAM.Tcsiscc.</code><code class="sig-name descname">new</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Tcsiscc<a class="headerlink" href="#PySAM.Tcsiscc.new" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="PySAM.Tcsiscc.wrap">
+<code class="sig-prename descclassname">PySAM.Tcsiscc.</code><code class="sig-name descname">wrap</code><span class="sig-paren">(</span><em class="sig-param">ssc_data_t</em><span class="sig-paren">)</span> &#x2192; Tcsiscc<a class="headerlink" href="#PySAM.Tcsiscc.wrap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use existing PySSC data</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Do not call PySSC.data_free on the ssc_data_t provided to <code class="docutils literal notranslate"><span class="pre">wrap</span></code></p>
+</div>
+</dd></dl>
+
 </div>
 <div class="section" id="functions">
 <h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.Tcsiscc.Tcsiscc">
+<em class="property">class </em><code class="sig-prename descclassname">PySAM.Tcsiscc.</code><code class="sig-name descname">Tcsiscc</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class contains all the variable information for running a simulation. Variables are grouped together in the subclasses as properties. If property assignments are the wrong type, an error is thrown.</p>
+<dl class="method">
+<dt id="PySAM.Tcsiscc.Tcsiscc.assign">
+<code class="sig-name descname">assign</code><span class="sig-paren">(</span><em class="sig-param">dict</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from nested dictionary, except for Outputs</p>
+<p><code class="docutils literal notranslate"><span class="pre">nested_dict</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">'Weather':</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...},</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.Tcsiscc.Tcsiscc.execute">
+<code class="sig-name descname">execute</code><span class="sig-paren">(</span><em class="sig-param">int verbosity</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.execute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute simulation with verbosity level 0 (default) or 1</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.Tcsiscc.Tcsiscc.export">
+<code class="sig-name descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into nested dictionary</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.Tcsiscc.Tcsiscc.value">
+<code class="sig-name descname">value</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">optional value</em><span class="sig-paren">)</span> &#x2192; Union[None, float, dict, sequence, str]<a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set by name a value in any of the variable groups.</p>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="weather-group">
 <h2>Weather Group<a class="headerlink" href="#weather-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Weather">
+<em class="property">class </em><code class="sig-prename descclassname">PySAM.Tcsiscc.Tcsiscc.</code><code class="sig-name descname">Weather</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Weather" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Weather.assign">
+<code class="sig-name descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Weather.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">Weather_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Weather.export">
+<code class="sig-name descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Weather.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Weather.solar_resource_file">
+<code class="sig-name descname">solar_resource_file</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Weather.solar_resource_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>local weather file path</p>
+<p><em>Constraints</em>: LOCAL_FILE</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>str</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="moltensalttower-group">
 <h2>MoltenSaltTower Group<a class="headerlink" href="#moltensalttower-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.Tcsiscc.Tcsiscc.MoltenSaltTower">
+<em class="property">class </em><code class="sig-prename descclassname">PySAM.Tcsiscc.Tcsiscc.</code><code class="sig-name descname">MoltenSaltTower</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.MoltenSaltTower" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.Tcsiscc.Tcsiscc.MoltenSaltTower.assign">
+<code class="sig-name descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.MoltenSaltTower.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">MoltenSaltTower_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.Tcsiscc.Tcsiscc.MoltenSaltTower.export">
+<code class="sig-name descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.MoltenSaltTower.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.MoltenSaltTower.system_capacity">
+<code class="sig-name descname">system_capacity</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.MoltenSaltTower.system_capacity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Nameplate capacity [kW]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>W_dot_solar_des</p></li>
+<li><p>elev</p></li>
+<li><p>ngcc_model</p></li>
+<li><p>pinch_point_coldside</p></li>
+<li><p>pinch_point_hotside</p></li>
+<li><p>q_pb_design</p></li>
+<li><p>rec_htf</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="heliostat-group">
 <h2>Heliostat Group<a class="headerlink" href="#heliostat-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat">
+<em class="property">class </em><code class="sig-prename descclassname">PySAM.Tcsiscc.Tcsiscc.</code><code class="sig-name descname">Heliostat</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.assign">
+<code class="sig-name descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">Heliostat_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.export">
+<code class="sig-name descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.N_hel">
+<code class="sig-name descname">N_hel</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.N_hel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of heliostats [-]</p>
+<p><em>Required</em>: False</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.bop_spec_cost">
+<code class="sig-name descname">bop_spec_cost</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.bop_spec_cost" title="Permalink to this definition">¶</a></dt>
+<dd><p>BOS specific cost [$/kWe]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.c_atm_0">
+<code class="sig-name descname">c_atm_0</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.c_atm_0" title="Permalink to this definition">¶</a></dt>
+<dd><p>Attenuation coefficient 0</p>
+<p><em>Required</em>: If not provided, assumed to be 0.006789</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.c_atm_1">
+<code class="sig-name descname">c_atm_1</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.c_atm_1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Attenuation coefficient 1</p>
+<p><em>Required</em>: If not provided, assumed to be 0.1046</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.c_atm_2">
+<code class="sig-name descname">c_atm_2</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.c_atm_2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Attenuation coefficient 2</p>
+<p><em>Required</em>: If not provided, assumed to be -0.0107</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.c_atm_3">
+<code class="sig-name descname">c_atm_3</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.c_atm_3" title="Permalink to this definition">¶</a></dt>
+<dd><p>Attenuation coefficient 3</p>
+<p><em>Required</em>: If not provided, assumed to be 0.002845</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.calc_fluxmaps">
+<code class="sig-name descname">calc_fluxmaps</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.calc_fluxmaps" title="Permalink to this definition">¶</a></dt>
+<dd><p>Include fluxmap calculations</p>
+<p><em>Required</em>: If not provided, assumed to be 0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.cant_type">
+<code class="sig-name descname">cant_type</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.cant_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Heliostat cant method</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.check_max_flux">
+<code class="sig-name descname">check_max_flux</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.check_max_flux" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check max flux at design point</p>
+<p><em>Required</em>: If not provided, assumed to be 0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.contingency_rate">
+<code class="sig-name descname">contingency_rate</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.contingency_rate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Contingency for cost overrun [%]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.cost_sf_fixed">
+<code class="sig-name descname">cost_sf_fixed</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.cost_sf_fixed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Solar field fixed cost [$]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.csp_pt_cost_epc_fixed">
+<code class="sig-name descname">csp_pt_cost_epc_fixed</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.csp_pt_cost_epc_fixed" title="Permalink to this definition">¶</a></dt>
+<dd><p>EPC fixed [$]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.csp_pt_cost_epc_per_acre">
+<code class="sig-name descname">csp_pt_cost_epc_per_acre</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.csp_pt_cost_epc_per_acre" title="Permalink to this definition">¶</a></dt>
+<dd><p>EPC cost per acre [$/acre]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.csp_pt_cost_epc_per_watt">
+<code class="sig-name descname">csp_pt_cost_epc_per_watt</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.csp_pt_cost_epc_per_watt" title="Permalink to this definition">¶</a></dt>
+<dd><p>EPC cost per watt [$/W]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.csp_pt_cost_epc_percent">
+<code class="sig-name descname">csp_pt_cost_epc_percent</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.csp_pt_cost_epc_percent" title="Permalink to this definition">¶</a></dt>
+<dd><p>EPC cost percent of direct</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.csp_pt_cost_plm_fixed">
+<code class="sig-name descname">csp_pt_cost_plm_fixed</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.csp_pt_cost_plm_fixed" title="Permalink to this definition">¶</a></dt>
+<dd><p>PLM fixed [$]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.csp_pt_cost_plm_per_acre">
+<code class="sig-name descname">csp_pt_cost_plm_per_acre</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.csp_pt_cost_plm_per_acre" title="Permalink to this definition">¶</a></dt>
+<dd><p>PLM cost per acre [$/acre]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.csp_pt_cost_plm_per_watt">
+<code class="sig-name descname">csp_pt_cost_plm_per_watt</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.csp_pt_cost_plm_per_watt" title="Permalink to this definition">¶</a></dt>
+<dd><p>PLM cost per watt [$/W]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.csp_pt_cost_plm_percent">
+<code class="sig-name descname">csp_pt_cost_plm_percent</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.csp_pt_cost_plm_percent" title="Permalink to this definition">¶</a></dt>
+<dd><p>PLM cost percent of direct</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.csp_pt_sf_fixed_land_area">
+<code class="sig-name descname">csp_pt_sf_fixed_land_area</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.csp_pt_sf_fixed_land_area" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fixed land area [acre]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.csp_pt_sf_land_overhead_factor">
+<code class="sig-name descname">csp_pt_sf_land_overhead_factor</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.csp_pt_sf_land_overhead_factor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Land overhead factor</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.delta_flux_hrs">
+<code class="sig-name descname">delta_flux_hrs</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.delta_flux_hrs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hourly frequency in flux map lookup</p>
+<p><em>Required</em>: If not provided, assumed to be 1</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.dens_mirror">
+<code class="sig-name descname">dens_mirror</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.dens_mirror" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ratio of Reflective Area to Profile [-]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>A_sf</p></li>
+<li><p>total_installed_cost</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.dni_des">
+<code class="sig-name descname">dni_des</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.dni_des" title="Permalink to this definition">¶</a></dt>
+<dd><p>Design-point DNI [W/m2]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.eta_map">
+<code class="sig-name descname">eta_map</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.eta_map" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field efficiency array [-]</p>
+<p><em>Required</em>: False</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.flux_maps">
+<code class="sig-name descname">flux_maps</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.flux_maps" title="Permalink to this definition">¶</a></dt>
+<dd><p>Flux map intensities [-]</p>
+<p><em>Required</em>: False</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.flux_max">
+<code class="sig-name descname">flux_max</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.flux_max" title="Permalink to this definition">¶</a></dt>
+<dd><p>Maximum allowable flux</p>
+<p><em>Required</em>: If not provided, assumed to be 1000</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.flux_positions">
+<code class="sig-name descname">flux_positions</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.flux_positions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Flux map sun positions [deg]</p>
+<p><em>Required</em>: False</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.focus_type">
+<code class="sig-name descname">focus_type</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.focus_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Heliostat focus method</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.fossil_spec_cost">
+<code class="sig-name descname">fossil_spec_cost</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.fossil_spec_cost" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fossil system specific cost [$/kWe]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.h_tower">
+<code class="sig-name descname">h_tower</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.h_tower" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tower height [m]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>total_installed_cost</p></li>
+</ul>
+</dd>
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>THT</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.hel_stow_deploy">
+<code class="sig-name descname">hel_stow_deploy</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.hel_stow_deploy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stow/deploy elevation [deg]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.helio_active_fraction">
+<code class="sig-name descname">helio_active_fraction</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.helio_active_fraction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Heliostat active frac. [-]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.helio_aim_points">
+<code class="sig-name descname">helio_aim_points</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.helio_aim_points" title="Permalink to this definition">¶</a></dt>
+<dd><p>Heliostat aim point table [m]</p>
+<p><em>Required</em>: False</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.helio_height">
+<code class="sig-name descname">helio_height</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.helio_height" title="Permalink to this definition">¶</a></dt>
+<dd><p>Heliostat height [m]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>A_sf</p></li>
+<li><p>total_installed_cost</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.helio_optical_error">
+<code class="sig-name descname">helio_optical_error</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.helio_optical_error" title="Permalink to this definition">¶</a></dt>
+<dd><p>Heliostat optical error [rad]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.helio_positions">
+<code class="sig-name descname">helio_positions</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.helio_positions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Heliostat position table [m]</p>
+<p><em>Required</em>: True if run_type=1</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>A_sf</p></li>
+<li><p>total_installed_cost</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.helio_reflectance">
+<code class="sig-name descname">helio_reflectance</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.helio_reflectance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Heliostat reflectance [-]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.helio_width">
+<code class="sig-name descname">helio_width</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.helio_width" title="Permalink to this definition">¶</a></dt>
+<dd><p>Heliostat width [m]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>A_sf</p></li>
+<li><p>total_installed_cost</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.heliostat_spec_cost">
+<code class="sig-name descname">heliostat_spec_cost</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.heliostat_spec_cost" title="Permalink to this definition">¶</a></dt>
+<dd><p>Heliostat field cost [$/m2]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.interp_beta">
+<code class="sig-name descname">interp_beta</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.interp_beta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interpolation beta coef. [-]</p>
+<p><em>Required</em>: If not provided, assumed to be 1.99</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.interp_nug">
+<code class="sig-name descname">interp_nug</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.interp_nug" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interpolation nugget [-]</p>
+<p><em>Required</em>: If not provided, assumed to be 0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.is_optimize">
+<code class="sig-name descname">is_optimize</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.is_optimize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Do SolarPILOT optimization</p>
+<p><em>Required</em>: If not provided, assumed to be 0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.land_bound_list">
+<code class="sig-name descname">land_bound_list</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.land_bound_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Boundary table listing [-]</p>
+<p><em>Required</em>: False</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.land_bound_table">
+<code class="sig-name descname">land_bound_table</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.land_bound_table" title="Permalink to this definition">¶</a></dt>
+<dd><p>Land boundary table [m]</p>
+<p><em>Required</em>: False</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.land_bound_type">
+<code class="sig-name descname">land_bound_type</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.land_bound_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Land boundary type [-]</p>
+<p><em>Required</em>: If not provided, assumed to be 0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.land_max">
+<code class="sig-name descname">land_max</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.land_max" title="Permalink to this definition">¶</a></dt>
+<dd><p>Land max boundary [-ORm]</p>
+<p><em>Required</em>: If not provided, assumed to be 7.5</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.land_min">
+<code class="sig-name descname">land_min</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.land_min" title="Permalink to this definition">¶</a></dt>
+<dd><p>Land min boundary [-ORm]</p>
+<p><em>Required</em>: If not provided, assumed to be 0.75</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.land_spec_cost">
+<code class="sig-name descname">land_spec_cost</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.land_spec_cost" title="Permalink to this definition">¶</a></dt>
+<dd><p>Total land area cost [$/acre]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.n_facet_x">
+<code class="sig-name descname">n_facet_x</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.n_facet_x" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of heliostat facets - X</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.n_facet_y">
+<code class="sig-name descname">n_facet_y</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.n_facet_y" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of heliostat facets - Y</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.n_flux_days">
+<code class="sig-name descname">n_flux_days</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.n_flux_days" title="Permalink to this definition">¶</a></dt>
+<dd><p>No. days in flux map lookup</p>
+<p><em>Required</em>: If not provided, assumed to be 8</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.n_flux_x">
+<code class="sig-name descname">n_flux_x</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.n_flux_x" title="Permalink to this definition">¶</a></dt>
+<dd><p>Flux map X resolution [-]</p>
+<p><em>Required</em>: If not provided, assumed to be 12</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>N_panels</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.n_flux_y">
+<code class="sig-name descname">n_flux_y</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.n_flux_y" title="Permalink to this definition">¶</a></dt>
+<dd><p>Flux map Y resolution [-]</p>
+<p><em>Required</em>: If not provided, assumed to be 1</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.opt_algorithm">
+<code class="sig-name descname">opt_algorithm</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.opt_algorithm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Optimization algorithm</p>
+<p><em>Required</em>: If not provided, assumed to be 0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.opt_conv_tol">
+<code class="sig-name descname">opt_conv_tol</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.opt_conv_tol" title="Permalink to this definition">¶</a></dt>
+<dd><p>Optimization convergence tol</p>
+<p><em>Required</em>: If not provided, assumed to be 0.001</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.opt_flux_penalty">
+<code class="sig-name descname">opt_flux_penalty</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.opt_flux_penalty" title="Permalink to this definition">¶</a></dt>
+<dd><p>Optimization flux overage penalty</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.opt_init_step">
+<code class="sig-name descname">opt_init_step</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.opt_init_step" title="Permalink to this definition">¶</a></dt>
+<dd><p>Optimization initial step size</p>
+<p><em>Required</em>: If not provided, assumed to be 0.05</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.opt_max_iter">
+<code class="sig-name descname">opt_max_iter</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.opt_max_iter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Max. number iteration steps</p>
+<p><em>Required</em>: If not provided, assumed to be 200</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.p_start">
+<code class="sig-name descname">p_start</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.p_start" title="Permalink to this definition">¶</a></dt>
+<dd><p>Heliostat startup energy [kWe-hr]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.p_track">
+<code class="sig-name descname">p_track</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.p_track" title="Permalink to this definition">¶</a></dt>
+<dd><p>Heliostat tracking energy [kWe]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.plant_spec_cost">
+<code class="sig-name descname">plant_spec_cost</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.plant_spec_cost" title="Permalink to this definition">¶</a></dt>
+<dd><p>Power cycle specific cost [$/kWe]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.q_design">
+<code class="sig-name descname">q_design</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.q_design" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver thermal design power [MW]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>Q_rec_des</p></li>
+<li><p>q_pb_design</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.rec_absorptance">
+<code class="sig-name descname">rec_absorptance</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.rec_absorptance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver absorptance [-]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.rec_aspect">
+<code class="sig-name descname">rec_aspect</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.rec_aspect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver aspect ratio [-]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>D_rec</p></li>
+<li><p>H_rec</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.rec_cost_exp">
+<code class="sig-name descname">rec_cost_exp</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.rec_cost_exp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver cost scaling exponent</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.rec_height">
+<code class="sig-name descname">rec_height</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.rec_height" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver height [m]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>H_rec</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.rec_hl_perm2">
+<code class="sig-name descname">rec_hl_perm2</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.rec_hl_perm2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver design heatloss [kW/m2]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.rec_ref_area">
+<code class="sig-name descname">rec_ref_area</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.rec_ref_area" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver reference area for cost scale</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.rec_ref_cost">
+<code class="sig-name descname">rec_ref_cost</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.rec_ref_cost" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver reference cost [$]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.run_type">
+<code class="sig-name descname">run_type</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.run_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run type [-]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.sales_tax_frac">
+<code class="sig-name descname">sales_tax_frac</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.sales_tax_frac" title="Permalink to this definition">¶</a></dt>
+<dd><p>Percent of cost to which sales tax applies [%]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.sales_tax_rate">
+<code class="sig-name descname">sales_tax_rate</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.sales_tax_rate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sales tax rate [%]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>total_installed_cost</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.site_spec_cost">
+<code class="sig-name descname">site_spec_cost</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.site_spec_cost" title="Permalink to this definition">¶</a></dt>
+<dd><p>Site improvement cost [$/m2]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.tes_spec_cost">
+<code class="sig-name descname">tes_spec_cost</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.tes_spec_cost" title="Permalink to this definition">¶</a></dt>
+<dd><p>Thermal energy storage cost [$/kWht]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.total_installed_cost">
+<code class="sig-name descname">total_installed_cost</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.total_installed_cost" title="Permalink to this definition">¶</a></dt>
+<dd><p>Total installed cost [$]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>A_sf</p></li>
+<li><p>D_rec</p></li>
+<li><p>H_rec</p></li>
+<li><p>THT</p></li>
+<li><p>W_dot_solar_des</p></li>
+<li><p>dens_mirror</p></li>
+<li><p>elev</p></li>
+<li><p>h_tower</p></li>
+<li><p>helio_height</p></li>
+<li><p>helio_positions</p></li>
+<li><p>helio_width</p></li>
+<li><p>ngcc_model</p></li>
+<li><p>pinch_point_coldside</p></li>
+<li><p>pinch_point_hotside</p></li>
+<li><p>q_pb_design</p></li>
+<li><p>rec_htf</p></li>
+<li><p>receiver_type</p></li>
+<li><p>sales_tax_rate</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.tower_exp">
+<code class="sig-name descname">tower_exp</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.tower_exp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tower cost scaling exponent</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.tower_fixed_cost">
+<code class="sig-name descname">tower_fixed_cost</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.tower_fixed_cost" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tower fixed cost [$]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Heliostat.v_wind_max">
+<code class="sig-name descname">v_wind_max</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Heliostat.v_wind_max" title="Permalink to this definition">¶</a></dt>
+<dd><p>Max. wind velocity [m/s]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="receiver-group">
 <h2>Receiver Group<a class="headerlink" href="#receiver-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Receiver">
+<em class="property">class </em><code class="sig-prename descclassname">PySAM.Tcsiscc.Tcsiscc.</code><code class="sig-name descname">Receiver</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Receiver" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Receiver.assign">
+<code class="sig-name descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Receiver.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">Receiver_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Receiver.export">
+<code class="sig-name descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Receiver.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Receiver.A_sf">
+<code class="sig-name descname">A_sf</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Receiver.A_sf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Solar Field Area [m^2]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>total_installed_cost</p></li>
+</ul>
+</dd>
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>dens_mirror</p></li>
+<li><p>helio_height</p></li>
+<li><p>helio_positions</p></li>
+<li><p>helio_width</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Receiver.D_rec">
+<code class="sig-name descname">D_rec</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Receiver.D_rec" title="Permalink to this definition">¶</a></dt>
+<dd><p>The overall outer diameter of the receiver [m]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>rec_aspect</p></li>
+<li><p>total_installed_cost</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Receiver.Flow_type">
+<code class="sig-name descname">Flow_type</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Receiver.Flow_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>A flag indicating which flow pattern is used</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Receiver.H_rec">
+<code class="sig-name descname">H_rec</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Receiver.H_rec" title="Permalink to this definition">¶</a></dt>
+<dd><p>The height of the receiver [m]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>rec_aspect</p></li>
+<li><p>rec_height</p></li>
+<li><p>total_installed_cost</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Receiver.N_panels">
+<code class="sig-name descname">N_panels</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Receiver.N_panels" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of individual panels on the receiver</p>
+<p><em>Constraints</em>: INTEGER</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>n_flux_x</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Receiver.Q_rec_des">
+<code class="sig-name descname">Q_rec_des</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Receiver.Q_rec_des" title="Permalink to this definition">¶</a></dt>
+<dd><p>Design-point receiver thermal power output [MWt]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>m_dot_htf_max</p></li>
+<li><p>q_design</p></li>
+</ul>
+</dd>
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>q_pb_design</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Receiver.THT">
+<code class="sig-name descname">THT</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Receiver.THT" title="Permalink to this definition">¶</a></dt>
+<dd><p>The height of the tower (hel. pivot to rec equator) [m]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>h_tower</p></li>
+<li><p>piping_length</p></li>
+<li><p>total_installed_cost</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Receiver.T_htf_cold_des">
+<code class="sig-name descname">T_htf_cold_des</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Receiver.T_htf_cold_des" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cold HTF inlet temperature at design conditions [C]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>m_dot_htf_max</p></li>
+</ul>
+</dd>
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>elev</p></li>
+<li><p>ngcc_model</p></li>
+<li><p>pinch_point_coldside</p></li>
+<li><p>pinch_point_hotside</p></li>
+<li><p>q_pb_design</p></li>
+<li><p>rec_htf</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Receiver.T_htf_hot_des">
+<code class="sig-name descname">T_htf_hot_des</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Receiver.T_htf_hot_des" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hot HTF outlet temperature at design conditions [C]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>m_dot_htf_max</p></li>
+</ul>
+</dd>
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>elev</p></li>
+<li><p>ngcc_model</p></li>
+<li><p>pinch_point_coldside</p></li>
+<li><p>pinch_point_hotside</p></li>
+<li><p>q_pb_design</p></li>
+<li><p>rec_htf</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Receiver.crossover_shift">
+<code class="sig-name descname">crossover_shift</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Receiver.crossover_shift" title="Permalink to this definition">¶</a></dt>
+<dd><p>No. panels shift in receiver crossover position</p>
+<p><em>Required</em>: If not provided, assumed to be 0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Receiver.d_tube_out">
+<code class="sig-name descname">d_tube_out</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Receiver.d_tube_out" title="Permalink to this definition">¶</a></dt>
+<dd><p>The outer diameter of an individual receiver tube [mm]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Receiver.epsilon">
+<code class="sig-name descname">epsilon</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Receiver.epsilon" title="Permalink to this definition">¶</a></dt>
+<dd><p>The emissivity of the receiver surface coating</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Receiver.eta_pump">
+<code class="sig-name descname">eta_pump</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Receiver.eta_pump" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver HTF pump efficiency</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Receiver.f_rec_min">
+<code class="sig-name descname">f_rec_min</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Receiver.f_rec_min" title="Permalink to this definition">¶</a></dt>
+<dd><p>Minimum receiver mass flow rate turn down fraction</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Receiver.field_fl_props">
+<code class="sig-name descname">field_fl_props</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Receiver.field_fl_props" title="Permalink to this definition">¶</a></dt>
+<dd><p>User defined field fluid property data [-]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>m_dot_htf_max</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Receiver.hl_ffact">
+<code class="sig-name descname">hl_ffact</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Receiver.hl_ffact" title="Permalink to this definition">¶</a></dt>
+<dd><p>The heat loss factor (thermal loss fudge factor)</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Receiver.m_dot_htf_max">
+<code class="sig-name descname">m_dot_htf_max</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Receiver.m_dot_htf_max" title="Permalink to this definition">¶</a></dt>
+<dd><p>Maximum receiver mass flow rate [kg/hr]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>Q_rec_des</p></li>
+<li><p>T_htf_cold_des</p></li>
+<li><p>T_htf_hot_des</p></li>
+<li><p>elev</p></li>
+<li><p>field_fl_props</p></li>
+<li><p>ngcc_model</p></li>
+<li><p>pinch_point_coldside</p></li>
+<li><p>pinch_point_hotside</p></li>
+<li><p>q_pb_design</p></li>
+<li><p>rec_htf</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Receiver.mat_tube">
+<code class="sig-name descname">mat_tube</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Receiver.mat_tube" title="Permalink to this definition">¶</a></dt>
+<dd><p>The material name of the receiver tubes</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Receiver.rec_htf">
+<code class="sig-name descname">rec_htf</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Receiver.rec_htf" title="Permalink to this definition">¶</a></dt>
+<dd><p>The name of the HTF used in the receiver</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>T_htf_cold_des</p></li>
+<li><p>T_htf_hot_des</p></li>
+<li><p>W_dot_solar_des</p></li>
+<li><p>fossil_output</p></li>
+<li><p>m_dot_htf_max</p></li>
+<li><p>system_capacity</p></li>
+<li><p>total_installed_cost</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Receiver.rec_qf_delay">
+<code class="sig-name descname">rec_qf_delay</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Receiver.rec_qf_delay" title="Permalink to this definition">¶</a></dt>
+<dd><p>Energy-based rcvr startup delay (fraction of rated thermal power)</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Receiver.rec_su_delay">
+<code class="sig-name descname">rec_su_delay</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Receiver.rec_su_delay" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fixed startup delay time for the receiver [hr]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Receiver.receiver_type">
+<code class="sig-name descname">receiver_type</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Receiver.receiver_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>External=0, Cavity=1</p>
+<p><em>Constraints</em>: INTEGER</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>total_installed_cost</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Receiver.th_tube">
+<code class="sig-name descname">th_tube</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Receiver.th_tube" title="Permalink to this definition">¶</a></dt>
+<dd><p>The wall thickness of a single receiver tube [mm]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="powerblock-group">
 <h2>Powerblock Group<a class="headerlink" href="#powerblock-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Powerblock">
+<em class="property">class </em><code class="sig-prename descclassname">PySAM.Tcsiscc.Tcsiscc.</code><code class="sig-name descname">Powerblock</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Powerblock" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Powerblock.assign">
+<code class="sig-name descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Powerblock.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">Powerblock_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Powerblock.export">
+<code class="sig-name descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Powerblock.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Powerblock.elev">
+<code class="sig-name descname">elev</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Powerblock.elev" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plant elevation [m]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>T_htf_cold_des</p></li>
+<li><p>T_htf_hot_des</p></li>
+<li><p>W_dot_solar_des</p></li>
+<li><p>fossil_output</p></li>
+<li><p>m_dot_htf_max</p></li>
+<li><p>system_capacity</p></li>
+<li><p>total_installed_cost</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Powerblock.ngcc_model">
+<code class="sig-name descname">ngcc_model</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Powerblock.ngcc_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>NREL, 2: GE</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>T_htf_cold_des</p></li>
+<li><p>T_htf_hot_des</p></li>
+<li><p>W_dot_solar_des</p></li>
+<li><p>fossil_output</p></li>
+<li><p>m_dot_htf_max</p></li>
+<li><p>system_capacity</p></li>
+<li><p>total_installed_cost</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+<dt class="field-even">Type</dt>
+<dd class="field-even"><p>1</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Powerblock.pinch_point_coldside">
+<code class="sig-name descname">pinch_point_coldside</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Powerblock.pinch_point_coldside" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cold side HX pinch point [C]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>T_htf_cold_des</p></li>
+<li><p>T_htf_hot_des</p></li>
+<li><p>W_dot_solar_des</p></li>
+<li><p>fossil_output</p></li>
+<li><p>m_dot_htf_max</p></li>
+<li><p>system_capacity</p></li>
+<li><p>total_installed_cost</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Powerblock.pinch_point_hotside">
+<code class="sig-name descname">pinch_point_hotside</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Powerblock.pinch_point_hotside" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hot side temperature HX temperature difference [C]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>T_htf_cold_des</p></li>
+<li><p>T_htf_hot_des</p></li>
+<li><p>W_dot_solar_des</p></li>
+<li><p>fossil_output</p></li>
+<li><p>m_dot_htf_max</p></li>
+<li><p>system_capacity</p></li>
+<li><p>total_installed_cost</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Powerblock.q_pb_design">
+<code class="sig-name descname">q_pb_design</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Powerblock.q_pb_design" title="Permalink to this definition">¶</a></dt>
+<dd><p>Design point power block thermal power [MWt]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>Q_rec_des</p></li>
+<li><p>T_htf_cold_des</p></li>
+<li><p>T_htf_hot_des</p></li>
+<li><p>W_dot_solar_des</p></li>
+<li><p>fossil_output</p></li>
+<li><p>m_dot_htf_max</p></li>
+<li><p>q_design</p></li>
+<li><p>system_capacity</p></li>
+<li><p>total_installed_cost</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="parasitics-group">
 <h2>Parasitics Group<a class="headerlink" href="#parasitics-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Parasitics">
+<em class="property">class </em><code class="sig-prename descclassname">PySAM.Tcsiscc.Tcsiscc.</code><code class="sig-name descname">Parasitics</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Parasitics" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Parasitics.assign">
+<code class="sig-name descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Parasitics.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">Parasitics_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Parasitics.export">
+<code class="sig-name descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Parasitics.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Parasitics.Q_rec_des">
+<code class="sig-name descname">Q_rec_des</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Parasitics.Q_rec_des" title="Permalink to this definition">¶</a></dt>
+<dd><p>Design point solar field thermal output [MW]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>m_dot_htf_max</p></li>
+<li><p>q_design</p></li>
+</ul>
+</dd>
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>q_pb_design</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Parasitics.W_dot_solar_des">
+<code class="sig-name descname">W_dot_solar_des</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Parasitics.W_dot_solar_des" title="Permalink to this definition">¶</a></dt>
+<dd><p>Solar contribution to cycle output at design [MWe]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>system_capacity</p></li>
+<li><p>total_installed_cost</p></li>
+</ul>
+</dd>
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>elev</p></li>
+<li><p>ngcc_model</p></li>
+<li><p>pinch_point_coldside</p></li>
+<li><p>pinch_point_hotside</p></li>
+<li><p>q_pb_design</p></li>
+<li><p>rec_htf</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Parasitics.bop_par">
+<code class="sig-name descname">bop_par</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Parasitics.bop_par" title="Permalink to this definition">¶</a></dt>
+<dd><p>Balance of plant parasitic power fraction [MWe/MWcap]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Parasitics.bop_par_0">
+<code class="sig-name descname">bop_par_0</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Parasitics.bop_par_0" title="Permalink to this definition">¶</a></dt>
+<dd><p>Balance of plant parasitic power fraction - const coeff [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Parasitics.bop_par_1">
+<code class="sig-name descname">bop_par_1</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Parasitics.bop_par_1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Balance of plant parasitic power fraction - linear coeff [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Parasitics.bop_par_2">
+<code class="sig-name descname">bop_par_2</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Parasitics.bop_par_2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Balance of plant parasitic power fraction - quadratic coeff [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Parasitics.bop_par_f">
+<code class="sig-name descname">bop_par_f</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Parasitics.bop_par_f" title="Permalink to this definition">¶</a></dt>
+<dd><p>Balance of plant parasitic power fraction - mult frac [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Parasitics.fossil_output">
+<code class="sig-name descname">fossil_output</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Parasitics.fossil_output" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fossil-only cycle output at design [MWe]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>elev</p></li>
+<li><p>ngcc_model</p></li>
+<li><p>pinch_point_coldside</p></li>
+<li><p>pinch_point_hotside</p></li>
+<li><p>q_pb_design</p></li>
+<li><p>rec_htf</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Parasitics.pb_fixed_par">
+<code class="sig-name descname">pb_fixed_par</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Parasitics.pb_fixed_par" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fixed parasitic load - runs at all times [MWe/MWcap]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Parasitics.pb_pump_coef">
+<code class="sig-name descname">pb_pump_coef</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Parasitics.pb_pump_coef" title="Permalink to this definition">¶</a></dt>
+<dd><p>Required pumping power for HTF through power block [kJ/kg]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Parasitics.piping_length">
+<code class="sig-name descname">piping_length</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Parasitics.piping_length" title="Permalink to this definition">¶</a></dt>
+<dd><p>Total length of exposed piping [m]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>THT</p></li>
+<li><p>piping_length_const</p></li>
+<li><p>piping_length_mult</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Parasitics.piping_length_const">
+<code class="sig-name descname">piping_length_const</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Parasitics.piping_length_const" title="Permalink to this definition">¶</a></dt>
+<dd><p>Piping constant length [m]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>piping_length</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Parasitics.piping_length_mult">
+<code class="sig-name descname">piping_length_mult</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Parasitics.piping_length_mult" title="Permalink to this definition">¶</a></dt>
+<dd><p>Piping length multiplier</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>piping_length</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Parasitics.piping_loss">
+<code class="sig-name descname">piping_loss</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Parasitics.piping_loss" title="Permalink to this definition">¶</a></dt>
+<dd><p>Thermal loss per meter of piping [Wt/m]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="adjustmentfactors-group">
 <h2>AdjustmentFactors Group<a class="headerlink" href="#adjustmentfactors-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.Tcsiscc.Tcsiscc.AdjustmentFactors">
+<em class="property">class </em><code class="sig-prename descclassname">PySAM.Tcsiscc.Tcsiscc.</code><code class="sig-name descname">AdjustmentFactors</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.AdjustmentFactors" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.Tcsiscc.Tcsiscc.AdjustmentFactors.assign">
+<code class="sig-name descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.AdjustmentFactors.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.Tcsiscc.Tcsiscc.AdjustmentFactors.export">
+<code class="sig-name descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Dict<a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.AdjustmentFactors.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.AdjustmentFactors.constant">
+<code class="sig-name descname">constant</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.AdjustmentFactors.constant" title="Permalink to this definition">¶</a></dt>
+<dd><p>float</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>type</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.AdjustmentFactors.dc_constant">
+<code class="sig-name descname">dc_constant</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.AdjustmentFactors.dc_constant" title="Permalink to this definition">¶</a></dt>
+<dd><p>DC Constant loss adjustment [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.AdjustmentFactors.dc_hourly">
+<code class="sig-name descname">dc_hourly</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.AdjustmentFactors.dc_hourly" title="Permalink to this definition">¶</a></dt>
+<dd><p>DC Hourly Adjustment Factors [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.AdjustmentFactors.dc_periods">
+<code class="sig-name descname">dc_periods</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.AdjustmentFactors.dc_periods" title="Permalink to this definition">¶</a></dt>
+<dd><p>DC Period-based Adjustment Factors [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.AdjustmentFactors.hourly">
+<code class="sig-name descname">hourly</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.AdjustmentFactors.hourly" title="Permalink to this definition">¶</a></dt>
+<dd><p>AC Hourly Adjustment Factors [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.AdjustmentFactors.periods">
+<code class="sig-name descname">periods</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.AdjustmentFactors.periods" title="Permalink to this definition">¶</a></dt>
+<dd><p>AC Period-based Adjustment Factors [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.AdjustmentFactors.sf_constant">
+<code class="sig-name descname">sf_constant</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.AdjustmentFactors.sf_constant" title="Permalink to this definition">¶</a></dt>
+<dd><p>DC Constant loss adjustment [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.AdjustmentFactors.sf_hourly">
+<code class="sig-name descname">sf_hourly</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.AdjustmentFactors.sf_hourly" title="Permalink to this definition">¶</a></dt>
+<dd><p>DC Hourly Adjustment Factors [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.AdjustmentFactors.sf_periods">
+<code class="sig-name descname">sf_periods</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.AdjustmentFactors.sf_periods" title="Permalink to this definition">¶</a></dt>
+<dd><p>DC Period-based Adjustment Factors [%]</p>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="outputs-group">
 <h2>Outputs Group<a class="headerlink" href="#outputs-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Outputs">
+<em class="property">class </em><code class="sig-prename descclassname">PySAM.Tcsiscc.Tcsiscc.</code><code class="sig-name descname">Outputs</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Outputs" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Outputs.assign">
+<code class="sig-name descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Outputs.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">Outputs_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Outputs.export">
+<code class="sig-name descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Outputs.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Outputs.P_fixed">
+<code class="sig-name descname">P_fixed</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Outputs.P_fixed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parasitic power fixed load [MWe]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Outputs.P_plant_balance_tot">
+<code class="sig-name descname">P_plant_balance_tot</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Outputs.P_plant_balance_tot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parasitic power generation-dependent load [MWe]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Outputs.Q_dot_max">
+<code class="sig-name descname">Q_dot_max</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Outputs.Q_dot_max" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cycle max allowable thermal power to NGCC [MWt]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Outputs.Q_solar_total">
+<code class="sig-name descname">Q_solar_total</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Outputs.Q_solar_total" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver thermal power absorbed [MWt]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Outputs.Q_thermal">
+<code class="sig-name descname">Q_thermal</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Outputs.Q_thermal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver thermal power to HTF [MWt]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Outputs.T_htf_cold">
+<code class="sig-name descname">T_htf_cold</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Outputs.T_htf_cold" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver HTF temperature in [C]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Outputs.T_salt_hot">
+<code class="sig-name descname">T_salt_hot</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Outputs.T_salt_hot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver HTF temperature out [C]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Outputs.T_st_cold">
+<code class="sig-name descname">T_st_cold</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Outputs.T_st_cold" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cycle steam temp from NGCC to HX [C]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Outputs.T_st_hot">
+<code class="sig-name descname">T_st_hot</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Outputs.T_st_hot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cycle steam temp from HX back to NGCC [C]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Outputs.W_dot_pc_fossil">
+<code class="sig-name descname">W_dot_pc_fossil</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Outputs.W_dot_pc_fossil" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cycle net output only considering fossil power [MWe]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Outputs.W_dot_pc_hybrid">
+<code class="sig-name descname">W_dot_pc_hybrid</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Outputs.W_dot_pc_hybrid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cycle net output including solar power [MWe]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Outputs.W_dot_plant_fossil">
+<code class="sig-name descname">W_dot_plant_fossil</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Outputs.W_dot_plant_fossil" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plant net output only considering fossil power &amp; parasitics [MWe]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Outputs.W_dot_plant_hybrid">
+<code class="sig-name descname">W_dot_plant_hybrid</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Outputs.W_dot_plant_hybrid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plant net output including solar power &amp; parasitics [MWe]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Outputs.W_dot_plant_solar">
+<code class="sig-name descname">W_dot_plant_solar</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Outputs.W_dot_plant_solar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plant net output attributable to solar [MWe]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Outputs.W_dot_pump">
+<code class="sig-name descname">W_dot_pump</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Outputs.W_dot_pump" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parasitic power receiver HTF pump [MWe]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Outputs.annual_energy">
+<code class="sig-name descname">annual_energy</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Outputs.annual_energy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Annual Energy [kW]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Outputs.annual_fuel_usage">
+<code class="sig-name descname">annual_fuel_usage</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Outputs.annual_fuel_usage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Annual fuel usage [kWh]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Outputs.beam">
+<code class="sig-name descname">beam</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Outputs.beam" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resource Beam normal irradiance [W/m2]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Outputs.capacity_factor">
+<code class="sig-name descname">capacity_factor</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Outputs.capacity_factor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Capacity factor [%]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Outputs.eta_field">
+<code class="sig-name descname">eta_field</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Outputs.eta_field" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field optical efficiency</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Outputs.eta_fuel">
+<code class="sig-name descname">eta_fuel</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Outputs.eta_fuel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plant efficiency of fossil only operation (LHV basis) [%]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Outputs.eta_solar_use">
+<code class="sig-name descname">eta_solar_use</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Outputs.eta_solar_use" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plant solar use efficiency considering parasitics [-]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Outputs.eta_therm">
+<code class="sig-name descname">eta_therm</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Outputs.eta_therm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver thermal efficiency</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Outputs.f_timestep">
+<code class="sig-name descname">f_timestep</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Outputs.f_timestep" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver operating fraction after startup</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Outputs.field_eff_adj">
+<code class="sig-name descname">field_eff_adj</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Outputs.field_eff_adj" title="Permalink to this definition">¶</a></dt>
+<dd><p>Solar field efficiency w/ defocusing</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Outputs.fuel_use">
+<code class="sig-name descname">fuel_use</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Outputs.fuel_use" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cycle natural gas used during timestep [MMBTU]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Outputs.gen">
+<code class="sig-name descname">gen</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Outputs.gen" title="Permalink to this definition">¶</a></dt>
+<dd><p>System power generated [kW]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Outputs.hour">
+<code class="sig-name descname">hour</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Outputs.hour" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resource Hour of Day</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Outputs.kwh_per_kw">
+<code class="sig-name descname">kwh_per_kw</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Outputs.kwh_per_kw" title="Permalink to this definition">¶</a></dt>
+<dd><p>First year kWh/kW [kWh/kW]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Outputs.m_dot_salt_tot">
+<code class="sig-name descname">m_dot_salt_tot</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Outputs.m_dot_salt_tot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver mass flow rate, derated for startup [kg/s]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Outputs.m_dot_ss">
+<code class="sig-name descname">m_dot_ss</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Outputs.m_dot_ss" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver mass flow rate, steady state [kg/s]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Outputs.m_dot_steam">
+<code class="sig-name descname">m_dot_steam</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Outputs.m_dot_steam" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cycle solar steam mass flow rate [kg/hr]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Outputs.month">
+<code class="sig-name descname">month</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Outputs.month" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resource Month</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Outputs.pparasi">
+<code class="sig-name descname">pparasi</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Outputs.pparasi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parasitic power heliostat drives [MWe]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Outputs.pres">
+<code class="sig-name descname">pres</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Outputs.pres" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resource Pressure [mbar]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Outputs.q_conv_sum">
+<code class="sig-name descname">q_conv_sum</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Outputs.q_conv_sum" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver thermal power loss to convection [MWt]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Outputs.q_rad_sum">
+<code class="sig-name descname">q_rad_sum</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Outputs.q_rad_sum" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver thermal power loss to radiation [MWt]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Outputs.q_startup">
+<code class="sig-name descname">q_startup</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Outputs.q_startup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver startup power [MWt]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Outputs.solar_fraction">
+<code class="sig-name descname">solar_fraction</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Outputs.solar_fraction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plant solar fraction [-]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Outputs.solazi">
+<code class="sig-name descname">solazi</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Outputs.solazi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resource Solar Azimuth [deg]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Outputs.solzen">
+<code class="sig-name descname">solzen</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Outputs.solzen" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resource Solar Zenith [deg]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Outputs.system_heat_rate">
+<code class="sig-name descname">system_heat_rate</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Outputs.system_heat_rate" title="Permalink to this definition">¶</a></dt>
+<dd><p>System heat rate [MMBtu/MWh]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Outputs.tdry">
+<code class="sig-name descname">tdry</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Outputs.tdry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resource Dry bulb temperature [C]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Outputs.twet">
+<code class="sig-name descname">twet</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Outputs.twet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resource Wet bulb temperature [C]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Tcsiscc.Tcsiscc.Outputs.wspd">
+<code class="sig-name descname">wspd</code><a class="headerlink" href="#PySAM.Tcsiscc.Tcsiscc.Outputs.wspd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resource Wind Speed [m/s]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 </div>
 
@@ -124,12 +2716,15 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
-        <li class="nav-item nav-item-0"><a href="../index.html">PySAM 1.2 documentation</a> &#187;</li> 
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">PySAM 2.0 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2019, NREL.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.3.
     </div>
   </body>
 </html>

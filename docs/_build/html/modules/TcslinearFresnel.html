@@ -5,21 +5,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>TcslinearFresnel Module &#8212; PySAM 1.2 documentation</title>
+    <title>TcslinearFresnel &#8212; PySAM 2.0 documentation</title>
     <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/language_data.js"></script>
-    <script type="text/javascript" src="../_static/bizstyle.js"></script>
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/bizstyle.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <!--[if lt IE 9]>
-    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <script src="_static/css3-mediaqueries.js"></script>
     <![endif]-->
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
@@ -28,14 +28,17 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li class="nav-item nav-item-0"><a href="../index.html">PySAM 1.2 documentation</a> &#187;</li> 
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">PySAM 2.0 documentation</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h3><a href="../index.html">Table of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">TcslinearFresnel Module</a><ul>
+<li><a class="reference internal" href="#">TcslinearFresnel</a><ul>
 <li><a class="reference internal" href="#creating-an-instance">Creating an Instance</a></li>
 <li><a class="reference internal" href="#functions">Functions</a></li>
 <li><a class="reference internal" href="#weather-group">Weather Group</a></li>
@@ -58,15 +61,15 @@
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
 
@@ -75,40 +78,2787 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="tcslinearfresnel-module">
-<span id="tcslinearfresnel"></span><h1>TcslinearFresnel Module<a class="headerlink" href="#tcslinearfresnel-module" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="tcslinearfresnel">
+<span id="id1"></span><h1>TcslinearFresnel<a class="headerlink" href="#tcslinearfresnel" title="Permalink to this headline">¶</a></h1>
 <p>Wrapper for SAM Simulation Core model: <a class="reference external" href="https://github.com/NREL/ssc/blob/develop/ssc/cmod_tcslinear_fresnel.cpp">cmod_tcslinear_fresnel.cpp</a></p>
 <div class="section" id="creating-an-instance">
 <h2>Creating an Instance<a class="headerlink" href="#creating-an-instance" title="Permalink to this headline">¶</a></h2>
-<p>There are three methods to create a new instance of a PySAM module. Using <code class="docutils literal notranslate"><span class="pre">default</span></code> populates the newclass’ attributes with default values specific to a <code class="docutils literal notranslate"><span class="pre">config</span></code>. Each technology-financialconfiguration corresponds to a SAM GUI configuration. Using <code class="docutils literal notranslate"><span class="pre">new</span></code> creates an instance with empty attributes. The <code class="docutils literal notranslate"><span class="pre">wrap</span></code> function allows compatibility with PySSC, for details, refer to <span class="xref std std-doc">PySSC</span>.</p>
+<p>There are three methods to create a new instance of a PySAM module. Using <code class="docutils literal notranslate"><span class="pre">default</span></code> populates the newclass’ attributes with default values specific to a <code class="docutils literal notranslate"><span class="pre">config</span></code>. Each technology-financialconfiguration corresponds to a SAM GUI configuration. Using <code class="docutils literal notranslate"><span class="pre">new</span></code> creates an instance with empty attributes. The <code class="docutils literal notranslate"><span class="pre">wrap</span></code> function allows compatibility with PySSC, for details, refer to <a class="reference internal" href="../PySSC.html"><span class="doc">PySSC</span></a>.</p>
 <p><strong>TcslinearFresnel model description</strong></p>
+<span class="target" id="module-PySAM.TcslinearFresnel"></span><p>Process heat linear direct steam</p>
+<dl class="function">
+<dt id="PySAM.TcslinearFresnel.default">
+<code class="sig-prename descclassname">PySAM.TcslinearFresnel.</code><code class="sig-name descname">default</code><span class="sig-paren">(</span><em class="sig-param">config</em><span class="sig-paren">)</span> &#x2192; TcslinearFresnel<a class="headerlink" href="#PySAM.TcslinearFresnel.default" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use financial config-specific default attributes
+config options:</p>
+<ul class="simple">
+<li><p>“DSLFAllEquityPartnershipFlip”</p></li>
+<li><p>“DSLFCommercial”</p></li>
+<li><p>“DSLFLCOECalculator”</p></li>
+<li><p>“DSLFLeveragedPartnershipFlip”</p></li>
+<li><p>“DSLFMerchantPlant”</p></li>
+<li><p>“DSLFNone”</p></li>
+<li><p>“DSLFSaleLeaseback”</p></li>
+<li><p>“DSLFSingleOwner”</p></li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="PySAM.TcslinearFresnel.from_existing">
+<code class="sig-prename descclassname">PySAM.TcslinearFresnel.</code><code class="sig-name descname">from_existing</code><span class="sig-paren">(</span><em class="sig-param">data</em>, <em class="sig-param">optional config</em><span class="sig-paren">)</span> &#x2192; TcslinearFresnel<a class="headerlink" href="#PySAM.TcslinearFresnel.from_existing" title="Permalink to this definition">¶</a></dt>
+<dd><p>Share underlying data with an existing PySAM class. If config provided, default attributes are loaded otherwise.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="PySAM.TcslinearFresnel.new">
+<code class="sig-prename descclassname">PySAM.TcslinearFresnel.</code><code class="sig-name descname">new</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; TcslinearFresnel<a class="headerlink" href="#PySAM.TcslinearFresnel.new" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="PySAM.TcslinearFresnel.wrap">
+<code class="sig-prename descclassname">PySAM.TcslinearFresnel.</code><code class="sig-name descname">wrap</code><span class="sig-paren">(</span><em class="sig-param">ssc_data_t</em><span class="sig-paren">)</span> &#x2192; TcslinearFresnel<a class="headerlink" href="#PySAM.TcslinearFresnel.wrap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use existing PySSC data</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Do not call PySSC.data_free on the ssc_data_t provided to <code class="docutils literal notranslate"><span class="pre">wrap</span></code></p>
+</div>
+</dd></dl>
+
 </div>
 <div class="section" id="functions">
 <h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel">
+<em class="property">class </em><code class="sig-prename descclassname">PySAM.TcslinearFresnel.</code><code class="sig-name descname">TcslinearFresnel</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class contains all the variable information for running a simulation. Variables are grouped together in the subclasses as properties. If property assignments are the wrong type, an error is thrown.</p>
+<dl class="method">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.assign">
+<code class="sig-name descname">assign</code><span class="sig-paren">(</span><em class="sig-param">dict</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from nested dictionary, except for Outputs</p>
+<p><code class="docutils literal notranslate"><span class="pre">nested_dict</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">'Weather':</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...},</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.execute">
+<code class="sig-name descname">execute</code><span class="sig-paren">(</span><em class="sig-param">int verbosity</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.execute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute simulation with verbosity level 0 (default) or 1</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.export">
+<code class="sig-name descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into nested dictionary</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.value">
+<code class="sig-name descname">value</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">optional value</em><span class="sig-paren">)</span> &#x2192; Union[None, float, dict, sequence, str]<a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set by name a value in any of the variable groups.</p>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="weather-group">
 <h2>Weather Group<a class="headerlink" href="#weather-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Weather">
+<em class="property">class </em><code class="sig-prename descclassname">PySAM.TcslinearFresnel.TcslinearFresnel.</code><code class="sig-name descname">Weather</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Weather" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Weather.assign">
+<code class="sig-name descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Weather.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">Weather_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Weather.export">
+<code class="sig-name descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Weather.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Weather.azimuth">
+<code class="sig-name descname">azimuth</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Weather.azimuth" title="Permalink to this definition">¶</a></dt>
+<dd><p>Azimuth angle of surface/axis</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>ColAz</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Weather.file_name">
+<code class="sig-name descname">file_name</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Weather.file_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>local weather file path</p>
+<p><em>Constraints</em>: LOCAL_FILE</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>str</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Weather.tilt">
+<code class="sig-name descname">tilt</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Weather.tilt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tilt angle of surface/axis</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Weather.track_mode">
+<code class="sig-name descname">track_mode</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Weather.track_mode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tracking mode</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="linearfresnelr-group">
 <h2>LinearFresnelr Group<a class="headerlink" href="#linearfresnelr-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.LinearFresnelr">
+<em class="property">class </em><code class="sig-prename descclassname">PySAM.TcslinearFresnel.TcslinearFresnel.</code><code class="sig-name descname">LinearFresnelr</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.LinearFresnelr" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.LinearFresnelr.assign">
+<code class="sig-name descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.LinearFresnelr.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">LinearFresnelr_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.LinearFresnelr.export">
+<code class="sig-name descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.LinearFresnelr.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.LinearFresnelr.system_capacity">
+<code class="sig-name descname">system_capacity</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.LinearFresnelr.system_capacity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Nameplate capacity [kW]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>demand_var</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="toutranslator-group">
 <h2>TouTranslator Group<a class="headerlink" href="#toutranslator-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.TouTranslator">
+<em class="property">class </em><code class="sig-prename descclassname">PySAM.TcslinearFresnel.TcslinearFresnel.</code><code class="sig-name descname">TouTranslator</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.TouTranslator" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.TouTranslator.assign">
+<code class="sig-name descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.TouTranslator.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">TouTranslator_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.TouTranslator.export">
+<code class="sig-name descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.TouTranslator.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.TouTranslator.weekday_schedule">
+<code class="sig-name descname">weekday_schedule</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.TouTranslator.weekday_schedule" title="Permalink to this definition">¶</a></dt>
+<dd><p>12x24 Time of Use Values for week days</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.TouTranslator.weekend_schedule">
+<code class="sig-name descname">weekend_schedule</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.TouTranslator.weekend_schedule" title="Permalink to this definition">¶</a></dt>
+<dd><p>12x24 Time of Use Values for week end days</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="solarfield-group">
 <h2>Solarfield Group<a class="headerlink" href="#solarfield-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield">
+<em class="property">class </em><code class="sig-prename descclassname">PySAM.TcslinearFresnel.TcslinearFresnel.</code><code class="sig-name descname">Solarfield</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.assign">
+<code class="sig-name descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">Solarfield_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.export">
+<code class="sig-name descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.A_aperture">
+<code class="sig-name descname">A_aperture</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.A_aperture" title="Permalink to this definition">¶</a></dt>
+<dd><p>(boiler, SH) Reflective aperture area of the collector module [m^2]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.AbsorberMaterial">
+<code class="sig-name descname">AbsorberMaterial</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.AbsorberMaterial" title="Permalink to this definition">¶</a></dt>
+<dd><p>(boiler, SH) Absorber material type [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.AnnulusGas">
+<code class="sig-name descname">AnnulusGas</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.AnnulusGas" title="Permalink to this definition">¶</a></dt>
+<dd><p># field fracs) [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+<dt class="field-even">Type</dt>
+<dd class="field-even"><p>(boiler, SH) Annulus gas type {1=air; 26=Ar; 27=H2} (4</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.ColAz">
+<code class="sig-name descname">ColAz</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.ColAz" title="Permalink to this definition">¶</a></dt>
+<dd><p>Collector azimuth angle [deg]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>azimuth</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.D_2">
+<code class="sig-name descname">D_2</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.D_2" title="Permalink to this definition">¶</a></dt>
+<dd><p>(boiler, SH) The inner absorber tube diameter [m]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.D_3">
+<code class="sig-name descname">D_3</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.D_3" title="Permalink to this definition">¶</a></dt>
+<dd><p>(boiler, SH) The outer absorber tube diameter [m]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.D_4">
+<code class="sig-name descname">D_4</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.D_4" title="Permalink to this definition">¶</a></dt>
+<dd><p>(boiler, SH) The inner glass envelope diameter [m]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.D_5">
+<code class="sig-name descname">D_5</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.D_5" title="Permalink to this definition">¶</a></dt>
+<dd><p>(boiler, SH) The outer glass envelope diameter [m]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.D_p">
+<code class="sig-name descname">D_p</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.D_p" title="Permalink to this definition">¶</a></dt>
+<dd><p>(boiler, SH) The diameter of the absorber flow plug (optional) [m]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.Design_loss">
+<code class="sig-name descname">Design_loss</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.Design_loss" title="Permalink to this definition">¶</a></dt>
+<dd><p># field fracs) [W/m]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+<dt class="field-even">Type</dt>
+<dd class="field-even"><p>(boiler, SH) Receiver heat loss at design (4</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.Dirt_HCE">
+<code class="sig-name descname">Dirt_HCE</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.Dirt_HCE" title="Permalink to this definition">¶</a></dt>
+<dd><p># field fracs) [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+<dt class="field-even">Type</dt>
+<dd class="field-even"><p>(boiler, SH) Loss due to dirt on the receiver envelope (4</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.EPSILON_4">
+<code class="sig-name descname">EPSILON_4</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.EPSILON_4" title="Permalink to this definition">¶</a></dt>
+<dd><p># field fracs) [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+<dt class="field-even">Type</dt>
+<dd class="field-even"><p>(boiler, SH) Inner glass envelope emissivities (Pyrex) (4</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.Flow_type">
+<code class="sig-name descname">Flow_type</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.Flow_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>(boiler, SH) The flow type through the absorber [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.GeomEffects">
+<code class="sig-name descname">GeomEffects</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.GeomEffects" title="Permalink to this definition">¶</a></dt>
+<dd><p>(boiler, SH) User-defined geometry effects derate [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.GlazingIntactIn">
+<code class="sig-name descname">GlazingIntactIn</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.GlazingIntactIn" title="Permalink to this definition">¶</a></dt>
+<dd><p># field fracs) [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+<dt class="field-even">Type</dt>
+<dd class="field-even"><p>(boiler, SH) The glazing intact flag {true=0; false=1} (4</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.HCE_FieldFrac">
+<code class="sig-name descname">HCE_FieldFrac</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.HCE_FieldFrac" title="Permalink to this definition">¶</a></dt>
+<dd><p># field fracs) [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+<dt class="field-even">Type</dt>
+<dd class="field-even"><p>(boiler, SH) The fraction of the field occupied by this HCE type (4</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.HLCharType">
+<code class="sig-name descname">HLCharType</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.HLCharType" title="Permalink to this definition">¶</a></dt>
+<dd><p>(boiler, SH) Flag indicating the heat loss model type {1=poly.; 2=Forristall} [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.HL_W">
+<code class="sig-name descname">HL_W</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.HL_W" title="Permalink to this definition">¶</a></dt>
+<dd><p>(boiler, SH) Heat loss coef adj wind velocity (0,1,2,3,4 order terms) [1/(m/s)^order]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.HL_dT">
+<code class="sig-name descname">HL_dT</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.HL_dT" title="Permalink to this definition">¶</a></dt>
+<dd><p>(boiler, SH) Heat loss coefficient - HTF temperature (0,1,2,3,4 order terms) [W/m-K^order]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.IAM_L">
+<code class="sig-name descname">IAM_L</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.IAM_L" title="Permalink to this definition">¶</a></dt>
+<dd><p>(boiler, SH) Longitudinal Incident angle modifiers (0,1,2,3,4 order terms) [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.IAM_T">
+<code class="sig-name descname">IAM_T</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.IAM_T" title="Permalink to this definition">¶</a></dt>
+<dd><p>(boiler, SH) Transverse Incident angle modifiers (0,1,2,3,4 order terms) [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.I_bn">
+<code class="sig-name descname">I_bn</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.I_bn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Beam normal radiation (input kJ/m2-hr) [W/m2]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.I_bn_des">
+<code class="sig-name descname">I_bn_des</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.I_bn_des" title="Permalink to this definition">¶</a></dt>
+<dd><p>Design point irradiation value [W/m2]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>nLoops</p></li>
+<li><p>q_max_aux</p></li>
+<li><p>solarm</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.LHV_eff">
+<code class="sig-name descname">LHV_eff</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.LHV_eff" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fuel LHV efficiency (0..1) [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.L_col">
+<code class="sig-name descname">L_col</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.L_col" title="Permalink to this definition">¶</a></dt>
+<dd><p>(boiler, SH) Active length of the superheater section collector module [m]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.OptCharType">
+<code class="sig-name descname">OptCharType</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.OptCharType" title="Permalink to this definition">¶</a></dt>
+<dd><p>(boiler, SH) The optical characterization method [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.PB_fixed_par">
+<code class="sig-name descname">PB_fixed_par</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.PB_fixed_par" title="Permalink to this definition">¶</a></dt>
+<dd><p>fraction of rated gross power consumed at all hours of the year [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.PB_pump_coef">
+<code class="sig-name descname">PB_pump_coef</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.PB_pump_coef" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pumping power required to move 1kg of HTF through power block flow [kW/kg]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.P_a">
+<code class="sig-name descname">P_a</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.P_a" title="Permalink to this definition">¶</a></dt>
+<dd><p># field fracs) [torr]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+<dt class="field-even">Type</dt>
+<dd class="field-even"><p>(boiler, SH) Annulus gas pressure (4</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.P_amb">
+<code class="sig-name descname">P_amb</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.P_amb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ambient pressure [atm]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.P_turb_des">
+<code class="sig-name descname">P_turb_des</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.P_turb_des" title="Permalink to this definition">¶</a></dt>
+<dd><p>Design-point turbine inlet pressure [bar]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>P_boil_des</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.Pipe_hl_coef">
+<code class="sig-name descname">Pipe_hl_coef</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.Pipe_hl_coef" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loss coefficient from the header.. runner pipe.. and non-HCE pipin [W/m2-K]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>nLoops</p></li>
+<li><p>q_max_aux</p></li>
+<li><p>solarm</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.Rough">
+<code class="sig-name descname">Rough</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.Rough" title="Permalink to this definition">¶</a></dt>
+<dd><p>(boiler, SH) Roughness of the internal surface [m]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.SCA_drives_elec">
+<code class="sig-name descname">SCA_drives_elec</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.SCA_drives_elec" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tracking power.. in Watts per SCA drive [W/m2]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.Shadowing">
+<code class="sig-name descname">Shadowing</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.Shadowing" title="Permalink to this definition">¶</a></dt>
+<dd><p># field fracs) [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+<dt class="field-even">Type</dt>
+<dd class="field-even"><p>(boiler, SH) Receiver bellows shadowing loss factor (4</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.SolarAz_init">
+<code class="sig-name descname">SolarAz_init</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.SolarAz_init" title="Permalink to this definition">¶</a></dt>
+<dd><p>Solar azimuth angle [deg]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.SolarZen">
+<code class="sig-name descname">SolarZen</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.SolarZen" title="Permalink to this definition">¶</a></dt>
+<dd><p>Solar zenith angle [deg]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.T_amb_des_sf">
+<code class="sig-name descname">T_amb_des_sf</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.T_amb_des_sf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Design-point ambient temperature [C]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>nLoops</p></li>
+<li><p>q_max_aux</p></li>
+<li><p>solarm</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.T_db">
+<code class="sig-name descname">T_db</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.T_db" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dry bulb air temperature [C]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.T_dp">
+<code class="sig-name descname">T_dp</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.T_dp" title="Permalink to this definition">¶</a></dt>
+<dd><p>The dewpoint temperature [C]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.T_fp">
+<code class="sig-name descname">T_fp</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.T_fp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Freeze protection temperature (heat trace activation temperature) [C]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.T_pb_out_init">
+<code class="sig-name descname">T_pb_out_init</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.T_pb_out_init" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fluid temperature from the power block [C]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.Tau_envelope">
+<code class="sig-name descname">Tau_envelope</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.Tau_envelope" title="Permalink to this definition">¶</a></dt>
+<dd><p># field fracs) [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+<dt class="field-even">Type</dt>
+<dd class="field-even"><p>(boiler, SH) Envelope transmittance (4</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.TrackingError">
+<code class="sig-name descname">TrackingError</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.TrackingError" title="Permalink to this definition">¶</a></dt>
+<dd><p>(boiler, SH) User-defined tracking error derate [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.V_wind">
+<code class="sig-name descname">V_wind</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.V_wind" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ambient windspeed [m/s]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.V_wind_max">
+<code class="sig-name descname">V_wind_max</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.V_wind_max" title="Permalink to this definition">¶</a></dt>
+<dd><p>Maximum allowable wind velocity before safety stow [m/s]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.alpha_abs">
+<code class="sig-name descname">alpha_abs</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.alpha_abs" title="Permalink to this definition">¶</a></dt>
+<dd><p># field fracs) [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+<dt class="field-even">Type</dt>
+<dd class="field-even"><p>(boiler, SH) Absorber absorptance (4</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.alpha_env">
+<code class="sig-name descname">alpha_env</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.alpha_env" title="Permalink to this definition">¶</a></dt>
+<dd><p># field fracs) [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+<dt class="field-even">Type</dt>
+<dd class="field-even"><p>(boiler, SH) Envelope absorptance (4</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.aux_array">
+<code class="sig-name descname">aux_array</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.aux_array" title="Permalink to this definition">¶</a></dt>
+<dd><p>Aux_parVal, Aux_parPF, Aux_par0, Aux_par1, Aux_par2 [-]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.b_OpticalTable">
+<code class="sig-name descname">b_OpticalTable</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.b_OpticalTable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Values of the optical efficiency table [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.b_eps_HCE1">
+<code class="sig-name descname">b_eps_HCE1</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.b_eps_HCE1" title="Permalink to this definition">¶</a></dt>
+<dd><p>(temperature) Absorber emittance (eps) [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.b_eps_HCE2">
+<code class="sig-name descname">b_eps_HCE2</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.b_eps_HCE2" title="Permalink to this definition">¶</a></dt>
+<dd><p>(temperature) Absorber emittance (eps) [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.b_eps_HCE3">
+<code class="sig-name descname">b_eps_HCE3</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.b_eps_HCE3" title="Permalink to this definition">¶</a></dt>
+<dd><p>(temperature) Absorber emittance (eps) [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.b_eps_HCE4">
+<code class="sig-name descname">b_eps_HCE4</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.b_eps_HCE4" title="Permalink to this definition">¶</a></dt>
+<dd><p>(temperature) Absorber emittance (eps) [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.bop_array">
+<code class="sig-name descname">bop_array</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.bop_array" title="Permalink to this definition">¶</a></dt>
+<dd><p>BOP_parVal, BOP_parPF, BOP_par0, BOP_par1, BOP_par2 [-]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.cycle_cutoff_frac">
+<code class="sig-name descname">cycle_cutoff_frac</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.cycle_cutoff_frac" title="Permalink to this definition">¶</a></dt>
+<dd><p>Minimum turbine operation fraction before shutdown [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.cycle_max_fraction">
+<code class="sig-name descname">cycle_max_fraction</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.cycle_max_fraction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Maximum turbine over design operation fraction [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.dirt_mirror">
+<code class="sig-name descname">dirt_mirror</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.dirt_mirror" title="Permalink to this definition">¶</a></dt>
+<dd><p>(boiler, SH) User-defined dirt on mirror derate [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.dnifc">
+<code class="sig-name descname">dnifc</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.dnifc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Forecast DNI [W/m2]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.e_startup">
+<code class="sig-name descname">e_startup</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.e_startup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Thermal inertia contribution per sq meter of solar field [kJ/K-m2]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.error">
+<code class="sig-name descname">error</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.error" title="Permalink to this definition">¶</a></dt>
+<dd><p>(boiler, SH) User-defined general optical error derate [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.eta_pump">
+<code class="sig-name descname">eta_pump</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.eta_pump" title="Permalink to this definition">¶</a></dt>
+<dd><p>Feedwater pump efficiency [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.fP_boil_to_sh">
+<code class="sig-name descname">fP_boil_to_sh</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.fP_boil_to_sh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Design-point pressure drop between the boiler and superheater frac [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.fP_hdr_c">
+<code class="sig-name descname">fP_hdr_c</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.fP_hdr_c" title="Permalink to this definition">¶</a></dt>
+<dd><p>Average design-point cold header pressure drop fraction [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.fP_hdr_h">
+<code class="sig-name descname">fP_hdr_h</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.fP_hdr_h" title="Permalink to this definition">¶</a></dt>
+<dd><p>Average design-point hot header pressure drop fraction [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.fP_sf_boil">
+<code class="sig-name descname">fP_sf_boil</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.fP_sf_boil" title="Permalink to this definition">¶</a></dt>
+<dd><p>Design-point pressure drop across the solar field boiler fraction [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.fP_sf_sh">
+<code class="sig-name descname">fP_sf_sh</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.fP_sf_sh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Design-point pressure drop across the solar field superheater frac [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.ffrac">
+<code class="sig-name descname">ffrac</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.ffrac" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fossil dispatch logic - TOU periods [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.fossil_mode">
+<code class="sig-name descname">fossil_mode</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.fossil_mode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Operation mode for the fossil backup {1=Normal,2=supp,3=toppin} [none]</p>
+<p><em>Constraints</em>: INTEGER</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.is_multgeom">
+<code class="sig-name descname">is_multgeom</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.is_multgeom" title="Permalink to this definition">¶</a></dt>
+<dd><p>Does the superheater have a different geometry from the boiler {1=yes} [none]</p>
+<p><em>Constraints</em>: INTEGER</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.is_oncethru">
+<code class="sig-name descname">is_oncethru</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.is_oncethru" title="Permalink to this definition">¶</a></dt>
+<dd><p>Flag indicating whether flow is once through with superheat [none]</p>
+<p><em>Constraints</em>: INTEGER</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.is_sh">
+<code class="sig-name descname">is_sh</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.is_sh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Does the solar field include a superheating section [none]</p>
+<p><em>Constraints</em>: INTEGER</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.latitude">
+<code class="sig-name descname">latitude</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.latitude" title="Permalink to this definition">¶</a></dt>
+<dd><p>Site latitude resource page [deg]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.m_dot_htf_ref">
+<code class="sig-name descname">m_dot_htf_ref</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.m_dot_htf_ref" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reference HTF flow rate at design conditions [kg/hr]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.m_dot_min">
+<code class="sig-name descname">m_dot_min</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.m_dot_min" title="Permalink to this definition">¶</a></dt>
+<dd><p>Minimum loop flow rate [kg/s]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.m_pb_demand">
+<code class="sig-name descname">m_pb_demand</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.m_pb_demand" title="Permalink to this definition">¶</a></dt>
+<dd><p>Demand htf flow from the power block [kg/hr]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.nLoops">
+<code class="sig-name descname">nLoops</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.nLoops" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of loops [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>q_max_aux</p></li>
+<li><p>solarm</p></li>
+</ul>
+</dd>
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>I_bn_des</p></li>
+<li><p>Pipe_hl_coef</p></li>
+<li><p>T_amb_des_sf</p></li>
+<li><p>T_cold_ref</p></li>
+<li><p>T_hot</p></li>
+<li><p>demand_var</p></li>
+<li><p>eta_ref</p></li>
+<li><p>nModBoil</p></li>
+<li><p>nModSH</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.nModBoil">
+<code class="sig-name descname">nModBoil</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.nModBoil" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of modules in the boiler section [none]</p>
+<p><em>Constraints</em>: INTEGER</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>nLoops</p></li>
+<li><p>q_max_aux</p></li>
+<li><p>solarm</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.nModSH">
+<code class="sig-name descname">nModSH</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.nModSH" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of modules in the superheater section [none]</p>
+<p><em>Constraints</em>: INTEGER</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>nLoops</p></li>
+<li><p>q_max_aux</p></li>
+<li><p>solarm</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.q_max_aux">
+<code class="sig-name descname">q_max_aux</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.q_max_aux" title="Permalink to this definition">¶</a></dt>
+<dd><p>Maximum heat rate of the auxiliary heater [MW]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>I_bn_des</p></li>
+<li><p>Pipe_hl_coef</p></li>
+<li><p>T_amb_des_sf</p></li>
+<li><p>T_cold_ref</p></li>
+<li><p>T_hot</p></li>
+<li><p>demand_var</p></li>
+<li><p>eta_ref</p></li>
+<li><p>nLoops</p></li>
+<li><p>nModBoil</p></li>
+<li><p>nModSH</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.q_pb_des">
+<code class="sig-name descname">q_pb_des</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.q_pb_des" title="Permalink to this definition">¶</a></dt>
+<dd><p>Design heat input to the power block [MW]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>demand_var</p></li>
+<li><p>eta_ref</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.q_sby_frac">
+<code class="sig-name descname">q_sby_frac</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.q_sby_frac" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fraction of thermal power required for standby [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.rho_mirror_clean">
+<code class="sig-name descname">rho_mirror_clean</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.rho_mirror_clean" title="Permalink to this definition">¶</a></dt>
+<dd><p>(boiler, SH) User-defined clean mirror reflectivity [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.sh_OpticalTable">
+<code class="sig-name descname">sh_OpticalTable</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.sh_OpticalTable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Values of the optical efficiency table [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.sh_eps_HCE1">
+<code class="sig-name descname">sh_eps_HCE1</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.sh_eps_HCE1" title="Permalink to this definition">¶</a></dt>
+<dd><p>(temperature) Absorber emittance (eps) [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.sh_eps_HCE2">
+<code class="sig-name descname">sh_eps_HCE2</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.sh_eps_HCE2" title="Permalink to this definition">¶</a></dt>
+<dd><p>(temperature) Absorber emittance (eps) [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.sh_eps_HCE3">
+<code class="sig-name descname">sh_eps_HCE3</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.sh_eps_HCE3" title="Permalink to this definition">¶</a></dt>
+<dd><p>(temperature) Absorber emittance (eps) [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.sh_eps_HCE4">
+<code class="sig-name descname">sh_eps_HCE4</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.sh_eps_HCE4" title="Permalink to this definition">¶</a></dt>
+<dd><p>(temperature) Absorber emittance (eps) [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.shift">
+<code class="sig-name descname">shift</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.shift" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shift in longitude from local standard meridian [deg]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.solarm">
+<code class="sig-name descname">solarm</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.solarm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Solar multiple [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>I_bn_des</p></li>
+<li><p>Pipe_hl_coef</p></li>
+<li><p>T_amb_des_sf</p></li>
+<li><p>T_cold_ref</p></li>
+<li><p>T_hot</p></li>
+<li><p>demand_var</p></li>
+<li><p>eta_ref</p></li>
+<li><p>nLoops</p></li>
+<li><p>nModBoil</p></li>
+<li><p>nModSH</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.t_sby">
+<code class="sig-name descname">t_sby</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.t_sby" title="Permalink to this definition">¶</a></dt>
+<dd><p>Low resource standby period [hr]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.tes_hours">
+<code class="sig-name descname">tes_hours</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.tes_hours" title="Permalink to this definition">¶</a></dt>
+<dd><p>Equivalent full-load thermal storage hours [hr]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.theta_dep">
+<code class="sig-name descname">theta_dep</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.theta_dep" title="Permalink to this definition">¶</a></dt>
+<dd><p>deploy angle [deg]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.theta_stow">
+<code class="sig-name descname">theta_stow</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.theta_stow" title="Permalink to this definition">¶</a></dt>
+<dd><p>stow angle [deg]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.x_b_des">
+<code class="sig-name descname">x_b_des</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Solarfield.x_b_des" title="Permalink to this definition">¶</a></dt>
+<dd><p>Design point boiler outlet steam quality [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="heliostat-group">
 <h2>Heliostat Group<a class="headerlink" href="#heliostat-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Heliostat">
+<em class="property">class </em><code class="sig-prename descclassname">PySAM.TcslinearFresnel.TcslinearFresnel.</code><code class="sig-name descname">Heliostat</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Heliostat" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Heliostat.assign">
+<code class="sig-name descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Heliostat.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">Heliostat_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Heliostat.export">
+<code class="sig-name descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Heliostat.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Heliostat.csp_lf_sf_washes_per_year">
+<code class="sig-name descname">csp_lf_sf_washes_per_year</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Heliostat.csp_lf_sf_washes_per_year" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mirror washing frequency</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Heliostat.csp_lf_sf_water_per_wash">
+<code class="sig-name descname">csp_lf_sf_water_per_wash</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Heliostat.csp_lf_sf_water_per_wash" title="Permalink to this definition">¶</a></dt>
+<dd><p>Water usage per wash [L/m2_aper]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="powerblock-group">
 <h2>Powerblock Group<a class="headerlink" href="#powerblock-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Powerblock">
+<em class="property">class </em><code class="sig-prename descclassname">PySAM.TcslinearFresnel.TcslinearFresnel.</code><code class="sig-name descname">Powerblock</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Powerblock" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Powerblock.assign">
+<code class="sig-name descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Powerblock.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">Powerblock_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Powerblock.export">
+<code class="sig-name descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Powerblock.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Powerblock.CT">
+<code class="sig-name descname">CT</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Powerblock.CT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Flag for using dry cooling or wet cooling system [none]</p>
+<p><em>Constraints</em>: INTEGER</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Powerblock.F_wc">
+<code class="sig-name descname">F_wc</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Powerblock.F_wc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fraction indicating wet cooling use for hybrid system [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Powerblock.P_amb_pwb">
+<code class="sig-name descname">P_amb_pwb</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Powerblock.P_amb_pwb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ambient pressure [atm]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Powerblock.P_boil_des">
+<code class="sig-name descname">P_boil_des</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Powerblock.P_boil_des" title="Permalink to this definition">¶</a></dt>
+<dd><p>Boiler operating pressure &#64; design [bar]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>P_turb_des</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Powerblock.P_cond_min">
+<code class="sig-name descname">P_cond_min</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Powerblock.P_cond_min" title="Permalink to this definition">¶</a></dt>
+<dd><p>Minimum condenser pressure [inHg]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Powerblock.P_cond_ratio">
+<code class="sig-name descname">P_cond_ratio</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Powerblock.P_cond_ratio" title="Permalink to this definition">¶</a></dt>
+<dd><p>Condenser pressure ratio [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Powerblock.P_rh_ref">
+<code class="sig-name descname">P_rh_ref</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Powerblock.P_rh_ref" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reheater operating pressure at design [bar]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Powerblock.T_ITD_des">
+<code class="sig-name descname">T_ITD_des</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Powerblock.T_ITD_des" title="Permalink to this definition">¶</a></dt>
+<dd><p>ITD at design for dry system [C]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Powerblock.T_amb_des">
+<code class="sig-name descname">T_amb_des</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Powerblock.T_amb_des" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reference ambient temperature at design point [C]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Powerblock.T_approach">
+<code class="sig-name descname">T_approach</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Powerblock.T_approach" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cooling tower approach temperature [C]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Powerblock.T_cold_ref">
+<code class="sig-name descname">T_cold_ref</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Powerblock.T_cold_ref" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reference HTF outlet temperature at design [C]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>nLoops</p></li>
+<li><p>q_max_aux</p></li>
+<li><p>solarm</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Powerblock.T_db_pwb">
+<code class="sig-name descname">T_db_pwb</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Powerblock.T_db_pwb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ambient dry bulb temperature [C]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Powerblock.T_hot">
+<code class="sig-name descname">T_hot</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Powerblock.T_hot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hot HTF inlet temperature, from storage tank [C]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>nLoops</p></li>
+<li><p>q_max_aux</p></li>
+<li><p>solarm</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Powerblock.T_wb">
+<code class="sig-name descname">T_wb</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Powerblock.T_wb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ambient wet bulb temperature [C]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Powerblock.dT_cw_ref">
+<code class="sig-name descname">dT_cw_ref</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Powerblock.dT_cw_ref" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reference condenser cooling water inlet/outlet T diff [C]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Powerblock.demand_var">
+<code class="sig-name descname">demand_var</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Powerblock.demand_var" title="Permalink to this definition">¶</a></dt>
+<dd><p>Control signal indicating operational mode [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>nLoops</p></li>
+<li><p>q_max_aux</p></li>
+<li><p>q_pb_des</p></li>
+<li><p>solarm</p></li>
+<li><p>system_capacity</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Powerblock.dp_b">
+<code class="sig-name descname">dp_b</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Powerblock.dp_b" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pressure drop in boiler [Pa]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Powerblock.dp_rh">
+<code class="sig-name descname">dp_rh</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Powerblock.dp_rh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pressure drop in reheater [Pa]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Powerblock.dp_sh">
+<code class="sig-name descname">dp_sh</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Powerblock.dp_sh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pressure drop in superheater [Pa]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Powerblock.eta_ref">
+<code class="sig-name descname">eta_ref</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Powerblock.eta_ref" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reference conversion efficiency at design condition [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>nLoops</p></li>
+<li><p>q_max_aux</p></li>
+<li><p>q_pb_des</p></li>
+<li><p>solarm</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Powerblock.f_recSU">
+<code class="sig-name descname">f_recSU</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Powerblock.f_recSU" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fraction powerblock can run due to receiver startup [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Powerblock.m_dot_st">
+<code class="sig-name descname">m_dot_st</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Powerblock.m_dot_st" title="Permalink to this definition">¶</a></dt>
+<dd><p>HTF mass flow rate [kg/hr]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Powerblock.n_pl_inc">
+<code class="sig-name descname">n_pl_inc</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Powerblock.n_pl_inc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of part-load increments for the heat rejection system [none]</p>
+<p><em>Constraints</em>: INTEGER</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Powerblock.pb_bd_frac">
+<code class="sig-name descname">pb_bd_frac</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Powerblock.pb_bd_frac" title="Permalink to this definition">¶</a></dt>
+<dd><p>Power block blowdown steam fraction  [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Powerblock.pc_mode">
+<code class="sig-name descname">pc_mode</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Powerblock.pc_mode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cycle part load control, from plant controller [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Powerblock.q_sby_frac">
+<code class="sig-name descname">q_sby_frac</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Powerblock.q_sby_frac" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fraction of thermal power required for standby mode [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Powerblock.relhum">
+<code class="sig-name descname">relhum</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Powerblock.relhum" title="Permalink to this definition">¶</a></dt>
+<dd><p>Relative humidity of the ambient air [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Powerblock.rh_frac_ref">
+<code class="sig-name descname">rh_frac_ref</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Powerblock.rh_frac_ref" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reheater flow fraction at design [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Powerblock.standby_control">
+<code class="sig-name descname">standby_control</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Powerblock.standby_control" title="Permalink to this definition">¶</a></dt>
+<dd><p>Control signal indicating standby mode [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Powerblock.startup_frac">
+<code class="sig-name descname">startup_frac</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Powerblock.startup_frac" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fraction of design thermal power needed for startup [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Powerblock.startup_time">
+<code class="sig-name descname">startup_time</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Powerblock.startup_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Time needed for power block startup [hr]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="adjustmentfactors-group">
 <h2>AdjustmentFactors Group<a class="headerlink" href="#adjustmentfactors-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.AdjustmentFactors">
+<em class="property">class </em><code class="sig-prename descclassname">PySAM.TcslinearFresnel.TcslinearFresnel.</code><code class="sig-name descname">AdjustmentFactors</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.AdjustmentFactors" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.AdjustmentFactors.assign">
+<code class="sig-name descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.AdjustmentFactors.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.AdjustmentFactors.export">
+<code class="sig-name descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Dict<a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.AdjustmentFactors.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.AdjustmentFactors.constant">
+<code class="sig-name descname">constant</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.AdjustmentFactors.constant" title="Permalink to this definition">¶</a></dt>
+<dd><p>float</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>type</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.AdjustmentFactors.dc_constant">
+<code class="sig-name descname">dc_constant</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.AdjustmentFactors.dc_constant" title="Permalink to this definition">¶</a></dt>
+<dd><p>DC Constant loss adjustment [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.AdjustmentFactors.dc_hourly">
+<code class="sig-name descname">dc_hourly</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.AdjustmentFactors.dc_hourly" title="Permalink to this definition">¶</a></dt>
+<dd><p>DC Hourly Adjustment Factors [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.AdjustmentFactors.dc_periods">
+<code class="sig-name descname">dc_periods</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.AdjustmentFactors.dc_periods" title="Permalink to this definition">¶</a></dt>
+<dd><p>DC Period-based Adjustment Factors [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.AdjustmentFactors.hourly">
+<code class="sig-name descname">hourly</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.AdjustmentFactors.hourly" title="Permalink to this definition">¶</a></dt>
+<dd><p>AC Hourly Adjustment Factors [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.AdjustmentFactors.periods">
+<code class="sig-name descname">periods</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.AdjustmentFactors.periods" title="Permalink to this definition">¶</a></dt>
+<dd><p>AC Period-based Adjustment Factors [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.AdjustmentFactors.sf_constant">
+<code class="sig-name descname">sf_constant</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.AdjustmentFactors.sf_constant" title="Permalink to this definition">¶</a></dt>
+<dd><p>DC Constant loss adjustment [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.AdjustmentFactors.sf_hourly">
+<code class="sig-name descname">sf_hourly</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.AdjustmentFactors.sf_hourly" title="Permalink to this definition">¶</a></dt>
+<dd><p>DC Hourly Adjustment Factors [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.AdjustmentFactors.sf_periods">
+<code class="sig-name descname">sf_periods</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.AdjustmentFactors.sf_periods" title="Permalink to this definition">¶</a></dt>
+<dd><p>DC Period-based Adjustment Factors [%]</p>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="outputs-group">
 <h2>Outputs Group<a class="headerlink" href="#outputs-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Outputs">
+<em class="property">class </em><code class="sig-prename descclassname">PySAM.TcslinearFresnel.TcslinearFresnel.</code><code class="sig-name descname">Outputs</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Outputs" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.assign">
+<code class="sig-name descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">Outputs_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.export">
+<code class="sig-name descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.E_bal_startup">
+<code class="sig-name descname">E_bal_startup</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.E_bal_startup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cycle thermal energy startup [MWt]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.P_cond">
+<code class="sig-name descname">P_cond</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.P_cond" title="Permalink to this definition">¶</a></dt>
+<dd><p>Condenser pressure [Pa]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.P_sf_in">
+<code class="sig-name descname">P_sf_in</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.P_sf_in" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field steam pressure at inlet [bar]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.P_turb_in">
+<code class="sig-name descname">P_turb_in</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.P_turb_in" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cycle steam pressure at inlet [bar]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.T_field_in">
+<code class="sig-name descname">T_field_in</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.T_field_in" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field steam temperature at header inlet [C]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.T_field_out">
+<code class="sig-name descname">T_field_out</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.T_field_out" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field steam temperature at header outlet [C]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.T_loop_out">
+<code class="sig-name descname">T_loop_out</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.T_loop_out" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field steam temperature at collector outlet [C]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.T_pb_in">
+<code class="sig-name descname">T_pb_in</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.T_pb_in" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cycle steam temperature at inlet [C]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.T_pb_out">
+<code class="sig-name descname">T_pb_out</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.T_pb_out" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cycle steam temperature at outlet [C]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.W_cool_par">
+<code class="sig-name descname">W_cool_par</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.W_cool_par" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parasitic power condenser operation [MWe]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.W_cycle_gross">
+<code class="sig-name descname">W_cycle_gross</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.W_cycle_gross" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cycle electrical power output (gross) [MWe]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.W_dot_aux">
+<code class="sig-name descname">W_dot_aux</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.W_dot_aux" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parasitic power auxiliary heater operation [MWe]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.W_dot_bop">
+<code class="sig-name descname">W_dot_bop</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.W_dot_bop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parasitic power generation-dependent load [MWe]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.W_dot_col">
+<code class="sig-name descname">W_dot_col</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.W_dot_col" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parasitic power field collector drives [MWe]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.W_dot_fixed">
+<code class="sig-name descname">W_dot_fixed</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.W_dot_fixed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parasitic power fixed load [MWe]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.W_dot_pump">
+<code class="sig-name descname">W_dot_pump</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.W_dot_pump" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parasitic power solar field pump [MWe]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.W_net">
+<code class="sig-name descname">W_net</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.W_net" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cycle electrical power output (net) [MWe]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.annual_W_cycle_gross">
+<code class="sig-name descname">annual_W_cycle_gross</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.annual_W_cycle_gross" title="Permalink to this definition">¶</a></dt>
+<dd><p>Electrical source - Power cycle gross output [kWh]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.annual_energy">
+<code class="sig-name descname">annual_energy</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.annual_energy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Annual Energy [kWh]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.annual_fuel_usage">
+<code class="sig-name descname">annual_fuel_usage</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.annual_fuel_usage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Annual fuel usage [kWh]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.annual_total_water_use">
+<code class="sig-name descname">annual_total_water_use</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.annual_total_water_use" title="Permalink to this definition">¶</a></dt>
+<dd><p>cycle + mirror washing [m3]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+<dt class="field-even">Type</dt>
+<dd class="field-even"><p>Total Annual Water Usage</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.beam">
+<code class="sig-name descname">beam</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.beam" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resource Beam normal irradiance [W/m2]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.capacity_factor">
+<code class="sig-name descname">capacity_factor</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.capacity_factor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Capacity factor [%]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.conversion_factor">
+<code class="sig-name descname">conversion_factor</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.conversion_factor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gross to Net Conversion Factor [%]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.dP_tot">
+<code class="sig-name descname">dP_tot</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.dP_tot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field steam pressure loss [bar]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.defocus">
+<code class="sig-name descname">defocus</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.defocus" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field collector focus fraction</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.eta">
+<code class="sig-name descname">eta</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.eta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cycle efficiency (gross)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.eta_opt_ave">
+<code class="sig-name descname">eta_opt_ave</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.eta_opt_ave" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field collector optical efficiency</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.eta_sf">
+<code class="sig-name descname">eta_sf</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.eta_sf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field efficiency total</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.eta_thermal">
+<code class="sig-name descname">eta_thermal</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.eta_thermal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field thermal efficiency</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.f_bays">
+<code class="sig-name descname">f_bays</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.f_bays" title="Permalink to this definition">¶</a></dt>
+<dd><p>Condenser fraction of operating bays [none]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.gen">
+<code class="sig-name descname">gen</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.gen" title="Permalink to this definition">¶</a></dt>
+<dd><p>System power generated [kW]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.hour">
+<code class="sig-name descname">hour</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.hour" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resource Hour of Day</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.kwh_per_kw">
+<code class="sig-name descname">kwh_per_kw</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.kwh_per_kw" title="Permalink to this definition">¶</a></dt>
+<dd><p>First year kWh/kW [kWh/kW]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.m_dot">
+<code class="sig-name descname">m_dot</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.m_dot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field steam mass flow rate - loop [kg/s]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.m_dot_aux">
+<code class="sig-name descname">m_dot_aux</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.m_dot_aux" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fossil steam mass flow rate [kg/hr]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.m_dot_b_tot">
+<code class="sig-name descname">m_dot_b_tot</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.m_dot_b_tot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field steam mass flow rate - boiler [kg/hr]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.m_dot_field">
+<code class="sig-name descname">m_dot_field</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.m_dot_field" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field steam mass flow rate [kg/hr]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.m_dot_makeup">
+<code class="sig-name descname">m_dot_makeup</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.m_dot_makeup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cycle cooling water mass flow rate - makeup [kg/hr]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.m_dot_to_pb">
+<code class="sig-name descname">m_dot_to_pb</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.m_dot_to_pb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cycle steam mass flow rate [kg/hr]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.month">
+<code class="sig-name descname">month</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.month" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resource Month</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.monthly_energy">
+<code class="sig-name descname">monthly_energy</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.monthly_energy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Monthly Energy [kWh]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.pres">
+<code class="sig-name descname">pres</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.pres" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resource Pressure [mbar]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.q_aux_fluid">
+<code class="sig-name descname">q_aux_fluid</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.q_aux_fluid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fossil thermal power produced [MWt]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.q_aux_fuel">
+<code class="sig-name descname">q_aux_fuel</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.q_aux_fuel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fossil fuel usage [MMBTU]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.q_dump">
+<code class="sig-name descname">q_dump</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.q_dump" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cycle thermal energy dumped [MWt]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.q_field_delivered">
+<code class="sig-name descname">q_field_delivered</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.q_field_delivered" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field thermal power produced [MWt]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.q_inc_tot">
+<code class="sig-name descname">q_inc_tot</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.q_inc_tot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field thermal power incident [MWt]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.q_loss_piping">
+<code class="sig-name descname">q_loss_piping</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.q_loss_piping" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field thermal power header pipe loss [MWt]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.q_loss_rec">
+<code class="sig-name descname">q_loss_rec</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.q_loss_rec" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field thermal power receiver loss [MWt]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.q_loss_sf">
+<code class="sig-name descname">q_loss_sf</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.q_loss_sf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field thermal power loss [MWt]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.q_to_pb">
+<code class="sig-name descname">q_to_pb</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.q_to_pb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cycle thermal power input [MWt]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.solazi">
+<code class="sig-name descname">solazi</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.solazi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resource Solar Azimuth [deg]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.solzen">
+<code class="sig-name descname">solzen</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.solzen" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resource Solar Zenith [deg]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.system_heat_rate">
+<code class="sig-name descname">system_heat_rate</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.system_heat_rate" title="Permalink to this definition">¶</a></dt>
+<dd><p>System heat rate [MMBtu/MWh]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.tdry">
+<code class="sig-name descname">tdry</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.tdry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resource Dry bulb temperature [C]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.tou_value">
+<code class="sig-name descname">tou_value</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.tou_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resource Time-of-use value</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.twet">
+<code class="sig-name descname">twet</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.twet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resource Wet bulb temperature [C]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.wspd">
+<code class="sig-name descname">wspd</code><a class="headerlink" href="#PySAM.TcslinearFresnel.TcslinearFresnel.Outputs.wspd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resource Wind Speed [m/s]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 </div>
 
@@ -124,12 +2874,15 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
-        <li class="nav-item nav-item-0"><a href="../index.html">PySAM 1.2 documentation</a> &#187;</li> 
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">PySAM 2.0 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2019, NREL.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.3.
     </div>
   </body>
 </html>

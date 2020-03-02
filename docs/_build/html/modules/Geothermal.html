@@ -5,21 +5,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Geothermal Module &#8212; PySAM 1.2 documentation</title>
+    <title>Geothermal &#8212; PySAM 2.0 documentation</title>
     <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/language_data.js"></script>
-    <script type="text/javascript" src="../_static/bizstyle.js"></script>
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/bizstyle.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <!--[if lt IE 9]>
-    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <script src="_static/css3-mediaqueries.js"></script>
     <![endif]-->
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
@@ -28,18 +28,20 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li class="nav-item nav-item-0"><a href="../index.html">PySAM 1.2 documentation</a> &#187;</li> 
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">PySAM 2.0 documentation</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h3><a href="../index.html">Table of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Geothermal Module</a><ul>
+<li><a class="reference internal" href="#">Geothermal</a><ul>
 <li><a class="reference internal" href="#creating-an-instance">Creating an Instance</a></li>
 <li><a class="reference internal" href="#functions">Functions</a></li>
 <li><a class="reference internal" href="#geohourly-group">GeoHourly Group</a></li>
-<li><a class="reference internal" href="#weather-group">Weather Group</a></li>
 <li><a class="reference internal" href="#adjustmentfactors-group">AdjustmentFactors Group</a></li>
 <li><a class="reference internal" href="#outputs-group">Outputs Group</a></li>
 </ul>
@@ -54,15 +56,15 @@
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
 
@@ -71,28 +73,1933 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="geothermal-module">
-<span id="geothermal"></span><h1>Geothermal Module<a class="headerlink" href="#geothermal-module" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="geothermal">
+<span id="id1"></span><h1>Geothermal<a class="headerlink" href="#geothermal" title="Permalink to this headline">¶</a></h1>
 <p>Wrapper for SAM Simulation Core model: <a class="reference external" href="https://github.com/NREL/ssc/blob/develop/ssc/cmod_geothermal.cpp">cmod_geothermal.cpp</a></p>
 <div class="section" id="creating-an-instance">
 <h2>Creating an Instance<a class="headerlink" href="#creating-an-instance" title="Permalink to this headline">¶</a></h2>
-<p>There are three methods to create a new instance of a PySAM module. Using <code class="docutils literal notranslate"><span class="pre">default</span></code> populates the newclass’ attributes with default values specific to a <code class="docutils literal notranslate"><span class="pre">config</span></code>. Each technology-financialconfiguration corresponds to a SAM GUI configuration. Using <code class="docutils literal notranslate"><span class="pre">new</span></code> creates an instance with empty attributes. The <code class="docutils literal notranslate"><span class="pre">wrap</span></code> function allows compatibility with PySSC, for details, refer to <span class="xref std std-doc">PySSC</span>.</p>
+<p>There are three methods to create a new instance of a PySAM module. Using <code class="docutils literal notranslate"><span class="pre">default</span></code> populates the newclass’ attributes with default values specific to a <code class="docutils literal notranslate"><span class="pre">config</span></code>. Each technology-financialconfiguration corresponds to a SAM GUI configuration. Using <code class="docutils literal notranslate"><span class="pre">new</span></code> creates an instance with empty attributes. The <code class="docutils literal notranslate"><span class="pre">wrap</span></code> function allows compatibility with PySSC, for details, refer to <a class="reference internal" href="../PySSC.html"><span class="doc">PySSC</span></a>.</p>
 <p><strong>Geothermal model description</strong></p>
+<span class="target" id="module-PySAM.Geothermal"></span><p>Geothermal power model for hydrothermal and EGS systems with flash or binary conversion</p>
+<dl class="function">
+<dt id="PySAM.Geothermal.default">
+<code class="sig-prename descclassname">PySAM.Geothermal.</code><code class="sig-name descname">default</code><span class="sig-paren">(</span><em class="sig-param">config</em><span class="sig-paren">)</span> &#x2192; Geothermal<a class="headerlink" href="#PySAM.Geothermal.default" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use financial config-specific default attributes
+config options:</p>
+<ul class="simple">
+<li><p>“GeothermalPowerAllEquityPartnershipFlip”</p></li>
+<li><p>“GeothermalPowerIndependentPowerProducer”</p></li>
+<li><p>“GeothermalPowerLCOECalculator”</p></li>
+<li><p>“GeothermalPowerLeveragedPartnershipFlip”</p></li>
+<li><p>“GeothermalPowerMerchantPlant”</p></li>
+<li><p>“GeothermalPowerNone”</p></li>
+<li><p>“GeothermalPowerSaleLeaseback”</p></li>
+<li><p>“GeothermalPowerSingleOwner”</p></li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="PySAM.Geothermal.from_existing">
+<code class="sig-prename descclassname">PySAM.Geothermal.</code><code class="sig-name descname">from_existing</code><span class="sig-paren">(</span><em class="sig-param">data</em>, <em class="sig-param">optional config</em><span class="sig-paren">)</span> &#x2192; Geothermal<a class="headerlink" href="#PySAM.Geothermal.from_existing" title="Permalink to this definition">¶</a></dt>
+<dd><p>Share underlying data with an existing PySAM class. If config provided, default attributes are loaded otherwise.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="PySAM.Geothermal.new">
+<code class="sig-prename descclassname">PySAM.Geothermal.</code><code class="sig-name descname">new</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Geothermal<a class="headerlink" href="#PySAM.Geothermal.new" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="PySAM.Geothermal.wrap">
+<code class="sig-prename descclassname">PySAM.Geothermal.</code><code class="sig-name descname">wrap</code><span class="sig-paren">(</span><em class="sig-param">ssc_data_t</em><span class="sig-paren">)</span> &#x2192; Geothermal<a class="headerlink" href="#PySAM.Geothermal.wrap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use existing PySSC data</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Do not call PySSC.data_free on the ssc_data_t provided to <code class="docutils literal notranslate"><span class="pre">wrap</span></code></p>
+</div>
+</dd></dl>
+
 </div>
 <div class="section" id="functions">
 <h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.Geothermal.Geothermal">
+<em class="property">class </em><code class="sig-prename descclassname">PySAM.Geothermal.</code><code class="sig-name descname">Geothermal</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class contains all the variable information for running a simulation. Variables are grouped together in the subclasses as properties. If property assignments are the wrong type, an error is thrown.</p>
+<dl class="method">
+<dt id="PySAM.Geothermal.Geothermal.assign">
+<code class="sig-name descname">assign</code><span class="sig-paren">(</span><em class="sig-param">dict</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Geothermal.Geothermal.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from nested dictionary, except for Outputs</p>
+<p><code class="docutils literal notranslate"><span class="pre">nested_dict</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">'GeoHourly':</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...},</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.Geothermal.Geothermal.execute">
+<code class="sig-name descname">execute</code><span class="sig-paren">(</span><em class="sig-param">int verbosity</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Geothermal.Geothermal.execute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute simulation with verbosity level 0 (default) or 1</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.Geothermal.Geothermal.export">
+<code class="sig-name descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.Geothermal.Geothermal.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into nested dictionary</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.Geothermal.Geothermal.value">
+<code class="sig-name descname">value</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">optional value</em><span class="sig-paren">)</span> &#x2192; Union[None, float, dict, sequence, str]<a class="headerlink" href="#PySAM.Geothermal.Geothermal.value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set by name a value in any of the variable groups.</p>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="geohourly-group">
 <h2>GeoHourly Group<a class="headerlink" href="#geohourly-group" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="weather-group">
-<h2>Weather Group<a class="headerlink" href="#weather-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly">
+<em class="property">class </em><code class="sig-prename descclassname">PySAM.Geothermal.Geothermal.</code><code class="sig-name descname">GeoHourly</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly.assign">
+<code class="sig-name descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">GeoHourly_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly.export">
+<code class="sig-name descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly.CT">
+<code class="sig-name descname">CT</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly.CT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Condenser type (Wet, Dry,Hybrid) [(1-3)]</p>
+<p><em>Constraints</em>: INTEGER</p>
+<p><em>Required</em>: True if ui_calculations_only=0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly.HTF">
+<code class="sig-name descname">HTF</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly.HTF" title="Permalink to this definition">¶</a></dt>
+<dd><p>Heat trans fluid type ID [(1-27)]</p>
+<p><em>Constraints</em>: INTEGER</p>
+<p><em>Required</em>: True if ui_calculations_only=0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly.P_boil">
+<code class="sig-name descname">P_boil</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly.P_boil" title="Permalink to this definition">¶</a></dt>
+<dd><p>Design Boiler Pressure [bar]</p>
+<p><em>Required</em>: True if ui_calculations_only=0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly.P_cond_min">
+<code class="sig-name descname">P_cond_min</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly.P_cond_min" title="Permalink to this definition">¶</a></dt>
+<dd><p>Minimum condenser pressure [in Hg]</p>
+<p><em>Required</em>: True if ui_calculations_only=0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly.P_cond_ratio">
+<code class="sig-name descname">P_cond_ratio</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly.P_cond_ratio" title="Permalink to this definition">¶</a></dt>
+<dd><p>Condenser pressure ratio</p>
+<p><em>Required</em>: True if ui_calculations_only=0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly.T_ITD_des">
+<code class="sig-name descname">T_ITD_des</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly.T_ITD_des" title="Permalink to this definition">¶</a></dt>
+<dd><p>Design ITD for dry system [C]</p>
+<p><em>Required</em>: True if ui_calculations_only=0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly.T_amb_des">
+<code class="sig-name descname">T_amb_des</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly.T_amb_des" title="Permalink to this definition">¶</a></dt>
+<dd><p>Design ambient temperature [C]</p>
+<p><em>Required</em>: True if ui_calculations_only=0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly.T_approach">
+<code class="sig-name descname">T_approach</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly.T_approach" title="Permalink to this definition">¶</a></dt>
+<dd><p>Approach Temperature [C]</p>
+<p><em>Required</em>: True if ui_calculations_only=0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly.T_htf_cold_ref">
+<code class="sig-name descname">T_htf_cold_ref</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly.T_htf_cold_ref" title="Permalink to this definition">¶</a></dt>
+<dd><p>Outlet design temp [C]</p>
+<p><em>Required</em>: True if ui_calculations_only=0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly.T_htf_hot_ref">
+<code class="sig-name descname">T_htf_hot_ref</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly.T_htf_hot_ref" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inlet design temp [C]</p>
+<p><em>Required</em>: True if ui_calculations_only=0</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>design_temp</p></li>
+<li><p>resource_temp</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly.ambient_pressure">
+<code class="sig-name descname">ambient_pressure</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly.ambient_pressure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ambient pressure [psi]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>num_wells_getem</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly.analysis_type">
+<code class="sig-name descname">analysis_type</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly.analysis_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Analysis Type</p>
+<p><em>Constraints</em>: INTEGER</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>num_wells_getem</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly.casing_size">
+<code class="sig-name descname">casing_size</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly.casing_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Production pump casing size [in]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>num_wells_getem</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly.conversion_subtype">
+<code class="sig-name descname">conversion_subtype</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly.conversion_subtype" title="Permalink to this definition">¶</a></dt>
+<dd><p>Conversion Subtype</p>
+<p><em>Constraints</em>: INTEGER</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>num_wells_getem</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly.conversion_type">
+<code class="sig-name descname">conversion_type</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly.conversion_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Conversion Type</p>
+<p><em>Constraints</em>: INTEGER</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>num_wells_getem</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly.dT_cw_ref">
+<code class="sig-name descname">dT_cw_ref</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly.dT_cw_ref" title="Permalink to this definition">¶</a></dt>
+<dd><p>Design condenser cooling water inlet/outlet T diff [C]</p>
+<p><em>Required</em>: True if ui_calculations_only=0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly.decline_type">
+<code class="sig-name descname">decline_type</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly.decline_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Temp decline Type</p>
+<p><em>Constraints</em>: INTEGER</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>num_wells_getem</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly.delta_pressure_equip">
+<code class="sig-name descname">delta_pressure_equip</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly.delta_pressure_equip" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delta pressure across surface equipment [psi]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>num_wells_getem</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly.design_temp">
+<code class="sig-name descname">design_temp</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly.design_temp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Power block design temperature [C]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>T_htf_hot_ref</p></li>
+<li><p>num_wells_getem</p></li>
+</ul>
+</dd>
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>resource_temp</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly.eta_ref">
+<code class="sig-name descname">eta_ref</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly.eta_ref" title="Permalink to this definition">¶</a></dt>
+<dd><p>Desgin conversion efficiency [%]</p>
+<p><em>Required</em>: True if ui_calculations_only=0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly.excess_pressure_pump">
+<code class="sig-name descname">excess_pressure_pump</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly.excess_pressure_pump" title="Permalink to this definition">¶</a></dt>
+<dd><p>Excess pressure &#64; pump suction [psi]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>num_wells_getem</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly.file_name">
+<code class="sig-name descname">file_name</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly.file_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>local weather file path</p>
+<p><em>Constraints</em>: LOCAL_FILE</p>
+<p><em>Required</em>: True if ui_calculations_only=0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>str</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly.fracture_angle">
+<code class="sig-name descname">fracture_angle</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly.fracture_angle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fracture angle [deg]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>num_wells_getem</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly.fracture_aperature">
+<code class="sig-name descname">fracture_aperature</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly.fracture_aperature" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fracture aperature [m]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>num_wells_getem</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly.fracture_width">
+<code class="sig-name descname">fracture_width</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly.fracture_width" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fracture width [m]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>num_wells_getem</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly.geothermal_analysis_period">
+<code class="sig-name descname">geothermal_analysis_period</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly.geothermal_analysis_period" title="Permalink to this definition">¶</a></dt>
+<dd><p>Analysis Lifetime [years]</p>
+<p><em>Constraints</em>: INTEGER</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>num_wells_getem</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly.hc_ctl1">
+<code class="sig-name descname">hc_ctl1</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly.hc_ctl1" title="Permalink to this definition">¶</a></dt>
+<dd><p>HC Control 1</p>
+<p><em>Required</em>: True if ui_calculations_only=0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly.hc_ctl2">
+<code class="sig-name descname">hc_ctl2</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly.hc_ctl2" title="Permalink to this definition">¶</a></dt>
+<dd><p>HC Control 2</p>
+<p><em>Required</em>: True if ui_calculations_only=0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly.hc_ctl3">
+<code class="sig-name descname">hc_ctl3</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly.hc_ctl3" title="Permalink to this definition">¶</a></dt>
+<dd><p>HC Control 3</p>
+<p><em>Required</em>: True if ui_calculations_only=0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly.hc_ctl4">
+<code class="sig-name descname">hc_ctl4</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly.hc_ctl4" title="Permalink to this definition">¶</a></dt>
+<dd><p>HC Control 4</p>
+<p><em>Required</em>: True if ui_calculations_only=0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly.hc_ctl5">
+<code class="sig-name descname">hc_ctl5</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly.hc_ctl5" title="Permalink to this definition">¶</a></dt>
+<dd><p>HC Control 5</p>
+<p><em>Required</em>: True if ui_calculations_only=0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly.hc_ctl6">
+<code class="sig-name descname">hc_ctl6</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly.hc_ctl6" title="Permalink to this definition">¶</a></dt>
+<dd><p>HC Control 6</p>
+<p><em>Required</em>: True if ui_calculations_only=0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly.hc_ctl7">
+<code class="sig-name descname">hc_ctl7</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly.hc_ctl7" title="Permalink to this definition">¶</a></dt>
+<dd><p>HC Control 7</p>
+<p><em>Required</em>: True if ui_calculations_only=0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly.hc_ctl8">
+<code class="sig-name descname">hc_ctl8</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly.hc_ctl8" title="Permalink to this definition">¶</a></dt>
+<dd><p>HC Control 8</p>
+<p><em>Required</em>: True if ui_calculations_only=0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly.hc_ctl9">
+<code class="sig-name descname">hc_ctl9</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly.hc_ctl9" title="Permalink to this definition">¶</a></dt>
+<dd><p>HC Control 9</p>
+<p><em>Required</em>: True if ui_calculations_only=0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly.hr_pl_nlev">
+<code class="sig-name descname">hr_pl_nlev</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly.hr_pl_nlev" title="Permalink to this definition">¶</a></dt>
+<dd><p># part-load increments [(0-9)]</p>
+<p><em>Constraints</em>: INTEGER</p>
+<p><em>Required</em>: True if ui_calculations_only=0</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>num_wells_getem</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly.hybrid_dispatch_schedule">
+<code class="sig-name descname">hybrid_dispatch_schedule</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly.hybrid_dispatch_schedule" title="Permalink to this definition">¶</a></dt>
+<dd><p>Daily dispatch schedule</p>
+<p><em>Constraints</em>: TOUSCHED</p>
+<p><em>Required</em>: True if ui_calculations_only=0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>str</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly.inj_prod_well_distance">
+<code class="sig-name descname">inj_prod_well_distance</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly.inj_prod_well_distance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Distance from injection to production wells [m]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>num_wells_getem</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly.inj_well_diam">
+<code class="sig-name descname">inj_well_diam</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly.inj_well_diam" title="Permalink to this definition">¶</a></dt>
+<dd><p>Injection well diameter [in]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>num_wells_getem</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly.model_choice">
+<code class="sig-name descname">model_choice</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly.model_choice" title="Permalink to this definition">¶</a></dt>
+<dd><p>Which model to run (0,1,2)</p>
+<p><em>Constraints</em>: INTEGER</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>num_wells_getem</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly.nameplate">
+<code class="sig-name descname">nameplate</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly.nameplate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Desired plant output [kW]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>num_wells_getem</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly.num_fractures">
+<code class="sig-name descname">num_fractures</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly.num_fractures" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of fractures</p>
+<p><em>Constraints</em>: INTEGER</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>num_wells_getem</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly.num_wells">
+<code class="sig-name descname">num_wells</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly.num_wells" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of Wells</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>num_wells_getem</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly.num_wells_getem">
+<code class="sig-name descname">num_wells_getem</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly.num_wells_getem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of Wells GETEM calc’d</p>
+<p><em>Required</em>: True if ui_calculations_only=0</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>ambient_pressure</p></li>
+<li><p>analysis_type</p></li>
+<li><p>casing_size</p></li>
+<li><p>conversion_subtype</p></li>
+<li><p>conversion_type</p></li>
+<li><p>decline_type</p></li>
+<li><p>delta_pressure_equip</p></li>
+<li><p>design_temp</p></li>
+<li><p>excess_pressure_pump</p></li>
+<li><p>fracture_angle</p></li>
+<li><p>fracture_aperature</p></li>
+<li><p>fracture_width</p></li>
+<li><p>geothermal_analysis_period</p></li>
+<li><p>hr_pl_nlev</p></li>
+<li><p>inj_prod_well_distance</p></li>
+<li><p>inj_well_diam</p></li>
+<li><p>model_choice</p></li>
+<li><p>nameplate</p></li>
+<li><p>num_fractures</p></li>
+<li><p>num_wells</p></li>
+<li><p>plant_efficiency_input</p></li>
+<li><p>pump_efficiency</p></li>
+<li><p>reservoir_height</p></li>
+<li><p>reservoir_permeability</p></li>
+<li><p>reservoir_pressure_change</p></li>
+<li><p>reservoir_pressure_change_type</p></li>
+<li><p>reservoir_width</p></li>
+<li><p>resource_depth</p></li>
+<li><p>resource_temp</p></li>
+<li><p>resource_type</p></li>
+<li><p>rock_density</p></li>
+<li><p>rock_specific_heat</p></li>
+<li><p>rock_thermal_conductivity</p></li>
+<li><p>specified_pump_work_amount</p></li>
+<li><p>specify_pump_work</p></li>
+<li><p>subsurface_water_loss</p></li>
+<li><p>temp_decline_max</p></li>
+<li><p>temp_decline_rate</p></li>
+<li><p>well_diameter</p></li>
+<li><p>well_flow_rate</p></li>
+<li><p>wet_bulb_temp</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly.pb_bd_frac">
+<code class="sig-name descname">pb_bd_frac</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly.pb_bd_frac" title="Permalink to this definition">¶</a></dt>
+<dd><p>Blowdown steam fraction [%]</p>
+<p><em>Required</em>: True if ui_calculations_only=0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly.plant_efficiency_input">
+<code class="sig-name descname">plant_efficiency_input</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly.plant_efficiency_input" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plant efficiency</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>num_wells_getem</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly.pump_efficiency">
+<code class="sig-name descname">pump_efficiency</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly.pump_efficiency" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pump efficiency [%]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>num_wells_getem</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly.q_sby_frac">
+<code class="sig-name descname">q_sby_frac</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly.q_sby_frac" title="Permalink to this definition">¶</a></dt>
+<dd><p>% thermal power for standby mode [%]</p>
+<p><em>Required</em>: True if ui_calculations_only=0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly.reservoir_height">
+<code class="sig-name descname">reservoir_height</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly.reservoir_height" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reservoir height [m]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>num_wells_getem</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly.reservoir_permeability">
+<code class="sig-name descname">reservoir_permeability</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly.reservoir_permeability" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reservoir Permeability [darcys]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>num_wells_getem</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly.reservoir_pressure_change">
+<code class="sig-name descname">reservoir_pressure_change</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly.reservoir_pressure_change" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pressure change [psi-h/1000lb]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>num_wells_getem</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly.reservoir_pressure_change_type">
+<code class="sig-name descname">reservoir_pressure_change_type</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly.reservoir_pressure_change_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reservoir pressure change type</p>
+<p><em>Constraints</em>: INTEGER</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>num_wells_getem</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly.reservoir_width">
+<code class="sig-name descname">reservoir_width</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly.reservoir_width" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reservoir width [m]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>num_wells_getem</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly.resource_depth">
+<code class="sig-name descname">resource_depth</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly.resource_depth" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resource Depth [m]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>num_wells_getem</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly.resource_potential">
+<code class="sig-name descname">resource_potential</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly.resource_potential" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resource Potential [MW]</p>
+<p><em>Required</em>: True if ui_calculations_only=0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly.resource_temp">
+<code class="sig-name descname">resource_temp</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly.resource_temp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resource Temperature [C]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>T_htf_hot_ref</p></li>
+<li><p>design_temp</p></li>
+<li><p>num_wells_getem</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly.resource_type">
+<code class="sig-name descname">resource_type</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly.resource_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Type of Resource</p>
+<p><em>Constraints</em>: INTEGER</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>num_wells_getem</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly.rock_density">
+<code class="sig-name descname">rock_density</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly.rock_density" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rock density [kg/m^3]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>num_wells_getem</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly.rock_specific_heat">
+<code class="sig-name descname">rock_specific_heat</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly.rock_specific_heat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rock specific heat [J/kg-C]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>num_wells_getem</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly.rock_thermal_conductivity">
+<code class="sig-name descname">rock_thermal_conductivity</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly.rock_thermal_conductivity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rock thermal conductivity [J/m-day-C]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>num_wells_getem</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly.specified_pump_work_amount">
+<code class="sig-name descname">specified_pump_work_amount</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly.specified_pump_work_amount" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pump work specified by user [MW]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>num_wells_getem</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly.specify_pump_work">
+<code class="sig-name descname">specify_pump_work</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly.specify_pump_work" title="Permalink to this definition">¶</a></dt>
+<dd><p>Did user specify pump work? [0 or 1]</p>
+<p><em>Constraints</em>: INTEGER</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>num_wells_getem</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly.startup_frac">
+<code class="sig-name descname">startup_frac</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly.startup_frac" title="Permalink to this definition">¶</a></dt>
+<dd><p>% thermal power for startup [%]</p>
+<p><em>Required</em>: True if ui_calculations_only=0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly.startup_time">
+<code class="sig-name descname">startup_time</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly.startup_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hours to start power block [hours]</p>
+<p><em>Required</em>: True if ui_calculations_only=0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly.subsurface_water_loss">
+<code class="sig-name descname">subsurface_water_loss</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly.subsurface_water_loss" title="Permalink to this definition">¶</a></dt>
+<dd><p>Subsurface water loss [%]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>num_wells_getem</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly.system_use_lifetime_output">
+<code class="sig-name descname">system_use_lifetime_output</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly.system_use_lifetime_output" title="Permalink to this definition">¶</a></dt>
+<dd><p>Geothermal lifetime simulation [0/1]</p>
+<p><em>Options</em>: 0=SingleYearRepeated,1=RunEveryYear</p>
+<p><em>Constraints</em>: BOOLEAN</p>
+<p><em>Required</em>: If not provided, assumed to be 0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly.temp_decline_max">
+<code class="sig-name descname">temp_decline_max</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly.temp_decline_max" title="Permalink to this definition">¶</a></dt>
+<dd><p>Maximum temperature decline [C]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>num_wells_getem</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly.temp_decline_rate">
+<code class="sig-name descname">temp_decline_rate</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly.temp_decline_rate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Temperature decline rate [%/yr]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>num_wells_getem</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly.ui_calculations_only">
+<code class="sig-name descname">ui_calculations_only</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly.ui_calculations_only" title="Permalink to this definition">¶</a></dt>
+<dd><p>If = 1, only run UI calculations</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly.well_diameter">
+<code class="sig-name descname">well_diameter</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly.well_diameter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Production well diameter [in]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>num_wells_getem</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly.well_flow_rate">
+<code class="sig-name descname">well_flow_rate</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly.well_flow_rate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Production flow rate per well [kg/s]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>num_wells_getem</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.GeoHourly.wet_bulb_temp">
+<code class="sig-name descname">wet_bulb_temp</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.GeoHourly.wet_bulb_temp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wet Bulb Temperature [C]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>num_wells_getem</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="adjustmentfactors-group">
 <h2>AdjustmentFactors Group<a class="headerlink" href="#adjustmentfactors-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.Geothermal.Geothermal.AdjustmentFactors">
+<em class="property">class </em><code class="sig-prename descclassname">PySAM.Geothermal.Geothermal.</code><code class="sig-name descname">AdjustmentFactors</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.AdjustmentFactors" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.Geothermal.Geothermal.AdjustmentFactors.assign">
+<code class="sig-name descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Geothermal.Geothermal.AdjustmentFactors.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.Geothermal.Geothermal.AdjustmentFactors.export">
+<code class="sig-name descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Dict<a class="headerlink" href="#PySAM.Geothermal.Geothermal.AdjustmentFactors.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.AdjustmentFactors.constant">
+<code class="sig-name descname">constant</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.AdjustmentFactors.constant" title="Permalink to this definition">¶</a></dt>
+<dd><p>float</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>type</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.AdjustmentFactors.dc_constant">
+<code class="sig-name descname">dc_constant</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.AdjustmentFactors.dc_constant" title="Permalink to this definition">¶</a></dt>
+<dd><p>DC Constant loss adjustment [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.AdjustmentFactors.dc_hourly">
+<code class="sig-name descname">dc_hourly</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.AdjustmentFactors.dc_hourly" title="Permalink to this definition">¶</a></dt>
+<dd><p>DC Hourly Adjustment Factors [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.AdjustmentFactors.dc_periods">
+<code class="sig-name descname">dc_periods</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.AdjustmentFactors.dc_periods" title="Permalink to this definition">¶</a></dt>
+<dd><p>DC Period-based Adjustment Factors [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.AdjustmentFactors.hourly">
+<code class="sig-name descname">hourly</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.AdjustmentFactors.hourly" title="Permalink to this definition">¶</a></dt>
+<dd><p>AC Hourly Adjustment Factors [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.AdjustmentFactors.periods">
+<code class="sig-name descname">periods</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.AdjustmentFactors.periods" title="Permalink to this definition">¶</a></dt>
+<dd><p>AC Period-based Adjustment Factors [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.AdjustmentFactors.sf_constant">
+<code class="sig-name descname">sf_constant</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.AdjustmentFactors.sf_constant" title="Permalink to this definition">¶</a></dt>
+<dd><p>DC Constant loss adjustment [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.AdjustmentFactors.sf_hourly">
+<code class="sig-name descname">sf_hourly</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.AdjustmentFactors.sf_hourly" title="Permalink to this definition">¶</a></dt>
+<dd><p>DC Hourly Adjustment Factors [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.AdjustmentFactors.sf_periods">
+<code class="sig-name descname">sf_periods</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.AdjustmentFactors.sf_periods" title="Permalink to this definition">¶</a></dt>
+<dd><p>DC Period-based Adjustment Factors [%]</p>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="outputs-group">
 <h2>Outputs Group<a class="headerlink" href="#outputs-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.Geothermal.Geothermal.Outputs">
+<em class="property">class </em><code class="sig-prename descclassname">PySAM.Geothermal.Geothermal.</code><code class="sig-name descname">Outputs</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.Outputs" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.Geothermal.Geothermal.Outputs.assign">
+<code class="sig-name descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Geothermal.Geothermal.Outputs.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">Outputs_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.Geothermal.Geothermal.Outputs.export">
+<code class="sig-name descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.Geothermal.Geothermal.Outputs.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.Outputs.GF_flowrate">
+<code class="sig-name descname">GF_flowrate</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.Outputs.GF_flowrate" title="Permalink to this definition">¶</a></dt>
+<dd><p>GF Flow Rate [lb/h]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.Outputs.annual_energy">
+<code class="sig-name descname">annual_energy</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.Outputs.annual_energy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Annual Energy [kWh]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.Outputs.bottom_hole_pressure">
+<code class="sig-name descname">bottom_hole_pressure</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.Outputs.bottom_hole_pressure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bottom hole pres calculated by GETEM</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.Outputs.capacity_factor">
+<code class="sig-name descname">capacity_factor</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.Outputs.capacity_factor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Capacity factor</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.Outputs.condensate_pump_power">
+<code class="sig-name descname">condensate_pump_power</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.Outputs.condensate_pump_power" title="Permalink to this definition">¶</a></dt>
+<dd><p>hp</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.Outputs.cw_pump_head">
+<code class="sig-name descname">cw_pump_head</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.Outputs.cw_pump_head" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cooling Water Pump Head [lb/h]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.Outputs.cw_pump_work">
+<code class="sig-name descname">cw_pump_work</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.Outputs.cw_pump_work" title="Permalink to this definition">¶</a></dt>
+<dd><p>CW Pump Work [kW]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.Outputs.cwflow">
+<code class="sig-name descname">cwflow</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.Outputs.cwflow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cooling Water Flow [lb/h]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.Outputs.eff_secondlaw">
+<code class="sig-name descname">eff_secondlaw</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.Outputs.eff_secondlaw" title="Permalink to this definition">¶</a></dt>
+<dd><p>Second Law Efficiency [C]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.Outputs.first_year_output">
+<code class="sig-name descname">first_year_output</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.Outputs.first_year_output" title="Permalink to this definition">¶</a></dt>
+<dd><p>First Year Output [kWh]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.Outputs.flash_count">
+<code class="sig-name descname">flash_count</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.Outputs.flash_count" title="Permalink to this definition">¶</a></dt>
+<dd><p>Flash Count [(1 -2)]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.Outputs.gen">
+<code class="sig-name descname">gen</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.Outputs.gen" title="Permalink to this definition">¶</a></dt>
+<dd><p>System power generated [kW]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.Outputs.gross_output">
+<code class="sig-name descname">gross_output</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.Outputs.gross_output" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gross output from GETEM</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.Outputs.hp_flash_pressure">
+<code class="sig-name descname">hp_flash_pressure</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.Outputs.hp_flash_pressure" title="Permalink to this definition">¶</a></dt>
+<dd><p>HP Flash Pressure [psia]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.Outputs.kwh_per_kw">
+<code class="sig-name descname">kwh_per_kw</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.Outputs.kwh_per_kw" title="Permalink to this definition">¶</a></dt>
+<dd><p>First year kWh/kW</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.Outputs.lifetime_output">
+<code class="sig-name descname">lifetime_output</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.Outputs.lifetime_output" title="Permalink to this definition">¶</a></dt>
+<dd><p>Lifetime Output [kWh]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.Outputs.lp_flash_pressure">
+<code class="sig-name descname">lp_flash_pressure</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.Outputs.lp_flash_pressure" title="Permalink to this definition">¶</a></dt>
+<dd><p>LP Flash Pressure [psia]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.Outputs.monthly_energy">
+<code class="sig-name descname">monthly_energy</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.Outputs.monthly_energy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Monthly energy before performance adjustments [kWh]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.Outputs.monthly_power">
+<code class="sig-name descname">monthly_power</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.Outputs.monthly_power" title="Permalink to this definition">¶</a></dt>
+<dd><p>Monthly power [kW]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.Outputs.monthly_resource_temperature">
+<code class="sig-name descname">monthly_resource_temperature</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.Outputs.monthly_resource_temperature" title="Permalink to this definition">¶</a></dt>
+<dd><p>Monthly avg resource temperature [C]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.Outputs.ncg_condensate_pump">
+<code class="sig-name descname">ncg_condensate_pump</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.Outputs.ncg_condensate_pump" title="Permalink to this definition">¶</a></dt>
+<dd><p>Condensate Pump Work [kW]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.Outputs.num_wells_getem_output">
+<code class="sig-name descname">num_wells_getem_output</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.Outputs.num_wells_getem_output" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of wells calculated by GETEM</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.Outputs.plant_brine_eff">
+<code class="sig-name descname">plant_brine_eff</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.Outputs.plant_brine_eff" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plant Brine Efficiency</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.Outputs.pressure_ratio_1">
+<code class="sig-name descname">pressure_ratio_1</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.Outputs.pressure_ratio_1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Suction Steam Ratio 1</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.Outputs.pressure_ratio_2">
+<code class="sig-name descname">pressure_ratio_2</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.Outputs.pressure_ratio_2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Suction Steam Ratio 2</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.Outputs.pressure_ratio_3">
+<code class="sig-name descname">pressure_ratio_3</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.Outputs.pressure_ratio_3" title="Permalink to this definition">¶</a></dt>
+<dd><p>Suction Steam Ratio 3</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.Outputs.pump_depth_ft">
+<code class="sig-name descname">pump_depth_ft</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.Outputs.pump_depth_ft" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pump depth calculated by GETEM [ft]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.Outputs.pump_hp">
+<code class="sig-name descname">pump_hp</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.Outputs.pump_hp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pump hp calculated by GETEM [hp]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.Outputs.pump_work">
+<code class="sig-name descname">pump_work</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.Outputs.pump_work" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pump work calculated by GETEM [MW]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.Outputs.qCondenser">
+<code class="sig-name descname">qCondenser</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.Outputs.qCondenser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Condenser Heat Rejected [btu/h]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.Outputs.qRejectByStage_1">
+<code class="sig-name descname">qRejectByStage_1</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.Outputs.qRejectByStage_1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Heat Rejected by NCG Condenser Stage 1 [BTU/h]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.Outputs.qRejectByStage_2">
+<code class="sig-name descname">qRejectByStage_2</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.Outputs.qRejectByStage_2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Heat Rejected by NCG Condenser Stage 2 [BTU/h]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.Outputs.qRejectByStage_3">
+<code class="sig-name descname">qRejectByStage_3</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.Outputs.qRejectByStage_3" title="Permalink to this definition">¶</a></dt>
+<dd><p>Heat Rejected by NCG Condenser Stage 3 [BTU/h]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.Outputs.qRejectTotal">
+<code class="sig-name descname">qRejectTotal</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.Outputs.qRejectTotal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Total Heat Rejection [btu/h]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.Outputs.reservoir_avg_temp">
+<code class="sig-name descname">reservoir_avg_temp</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.Outputs.reservoir_avg_temp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Avg reservoir temp calculated by GETEM [C]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.Outputs.reservoir_pressure">
+<code class="sig-name descname">reservoir_pressure</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.Outputs.reservoir_pressure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reservoir pres calculated by GETEM</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.Outputs.spec_vol">
+<code class="sig-name descname">spec_vol</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.Outputs.spec_vol" title="Permalink to this definition">¶</a></dt>
+<dd><p>HP Specific Volume [cft/lb]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.Outputs.spec_vol_lp">
+<code class="sig-name descname">spec_vol_lp</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.Outputs.spec_vol_lp" title="Permalink to this definition">¶</a></dt>
+<dd><p>LP Specific Volume [cft/lb]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.Outputs.system_lifetime_recapitalize">
+<code class="sig-name descname">system_lifetime_recapitalize</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.Outputs.system_lifetime_recapitalize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resource replacement? (1=yes)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.Outputs.timestep_dry_bulb">
+<code class="sig-name descname">timestep_dry_bulb</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.Outputs.timestep_dry_bulb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dry bulb temperature in each time step [C]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.Outputs.timestep_pressure">
+<code class="sig-name descname">timestep_pressure</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.Outputs.timestep_pressure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Atmospheric pressure in each time step [atm]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.Outputs.timestep_resource_temperature">
+<code class="sig-name descname">timestep_resource_temperature</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.Outputs.timestep_resource_temperature" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resource temperature in each time step [C]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.Outputs.timestep_test_values">
+<code class="sig-name descname">timestep_test_values</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.Outputs.timestep_test_values" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test output values in each time step</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.Outputs.timestep_wet_bulb">
+<code class="sig-name descname">timestep_wet_bulb</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.Outputs.timestep_wet_bulb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wet bulb temperature in each time step [C]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.Outputs.v_stage_1">
+<code class="sig-name descname">v_stage_1</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.Outputs.v_stage_1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Vacumm Pump Stage 1 [kW]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.Outputs.v_stage_2">
+<code class="sig-name descname">v_stage_2</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.Outputs.v_stage_2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Vacumm Pump Stage 2 [kW]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.Outputs.v_stage_3">
+<code class="sig-name descname">v_stage_3</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.Outputs.v_stage_3" title="Permalink to this definition">¶</a></dt>
+<dd><p>Vacumm Pump Stage 3 [kW]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.Outputs.x_hp">
+<code class="sig-name descname">x_hp</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.Outputs.x_hp" title="Permalink to this definition">¶</a></dt>
+<dd><p>HP Mass Fraction [%]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Geothermal.Geothermal.Outputs.x_lp">
+<code class="sig-name descname">x_lp</code><a class="headerlink" href="#PySAM.Geothermal.Geothermal.Outputs.x_lp" title="Permalink to this definition">¶</a></dt>
+<dd><p>LP Mass Fraction [%]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 </div>
 
@@ -108,12 +2015,15 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
-        <li class="nav-item nav-item-0"><a href="../index.html">PySAM 1.2 documentation</a> &#187;</li> 
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">PySAM 2.0 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2019, NREL.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.3.
     </div>
   </body>
 </html>

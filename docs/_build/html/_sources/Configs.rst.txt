@@ -1,7 +1,7 @@
 .. Configs:
 
 Configuration Names and SSC Models
-==================================
+**********************************
 
 A configuration is a combination of compute modules required to model a type of system (performance model) or project (performance model plus financial models).
 
@@ -206,25 +206,25 @@ A configuration is a combination of compute modules required to model a type of 
 	* - Physical Trough-Single Owner
 	  -  tcstrough_physical, singleowner
 	* - PVWatts-All Equity Partnership Flip
-	  -  pvwattsv5, equpartflip
+	  -  pvwattsv7, equpartflip
 	* - PVWatts-Commercial
-	  -  pvwattsv5, battwatts, utilityrate5, cashloan
+	  -  pvwattsv7, battwatts, utilityrate5, cashloan
 	* - PVWatts-Host Developer
-	  -  pvwattsv5, utilityrate5, host_developer
+	  -  pvwattsv7, utilityrate5, host_developer
 	* - PVWatts-LCOE Calculator
-	  -  pvwattsv5, lcoefcr
+	  -  pvwattsv7, lcoefcr
 	* - PVWatts-Leveraged Partnership Flip
-	  -  pvwattsv5, levpartflip
+	  -  pvwattsv7, levpartflip
 	* - PVWatts-None
-	  -  pvwattsv5
+	  -  pvwattsv7
 	* - PVWatts-Residential
-	  -  pvwattsv5, belpe, battwatts, utilityrate5, cashloan
+	  -  pvwattsv7, belpe, battwatts, utilityrate5, cashloan
 	* - PVWatts-Sale Leaseback
-	  -  pvwattsv5, saleleaseback
+	  -  pvwattsv7, saleleaseback
 	* - PVWatts-Single Owner
-	  -  pvwattsv5, singleowner
+	  -  pvwattsv7, singleowner
 	* - PVWatts-Third Party
-	  -  pvwattsv5, belpe, battwatts, utilityrate5, thirdpartyownership
+	  -  pvwattsv7, belpe, battwatts, utilityrate5, thirdpartyownership
 	* - Solar Water Heating-Commercial
 	  -  swh, utilityrate5, cashloan
 	* - Solar Water Heating-LCOE Calculator

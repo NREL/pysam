@@ -1,6 +1,6 @@
 .. _Fuelcell:
 
-Fuelcell Module
+Fuelcell
 **************************
 
 Wrapper for SAM Simulation Core model: `cmod_fuelcell.cpp <https://github.com/NREL/ssc/blob/develop/ssc/cmod_fuelcell.cpp>`_
@@ -8,7 +8,7 @@ Wrapper for SAM Simulation Core model: `cmod_fuelcell.cpp <https://github.com/NR
 Creating an Instance
 =========================
 
-There are three methods to create a new instance of a PySAM module. Using ``default`` populates the newclass' attributes with default values specific to a ``config``. Each technology-financialconfiguration corresponds to a SAM GUI configuration. Using ``new`` creates an instance with empty attributes. The ``wrap`` function allows compatibility with PySSC, for details, refer to :doc:`PySSC`.
+There are three methods to create a new instance of a PySAM module. Using ``default`` populates the newclass' attributes with default values specific to a ``config``. Each technology-financialconfiguration corresponds to a SAM GUI configuration. Using ``new`` creates an instance with empty attributes. The ``wrap`` function allows compatibility with PySSC, for details, refer to :doc:`../PySSC`.
 
 **Fuelcell model description**
 

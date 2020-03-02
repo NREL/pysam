@@ -5,21 +5,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Fuelcell Module &#8212; PySAM 1.2 documentation</title>
+    <title>Fuelcell &#8212; PySAM 2.0 documentation</title>
     <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/language_data.js"></script>
-    <script type="text/javascript" src="../_static/bizstyle.js"></script>
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/bizstyle.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <!--[if lt IE 9]>
-    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <script src="_static/css3-mediaqueries.js"></script>
     <![endif]-->
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
@@ -28,14 +28,17 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li class="nav-item nav-item-0"><a href="../index.html">PySAM 1.2 documentation</a> &#187;</li> 
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">PySAM 2.0 documentation</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h3><a href="../index.html">Table of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Fuelcell Module</a><ul>
+<li><a class="reference internal" href="#">Fuelcell</a><ul>
 <li><a class="reference internal" href="#creating-an-instance">Creating an Instance</a></li>
 <li><a class="reference internal" href="#functions">Functions</a></li>
 <li><a class="reference internal" href="#common-group">Common Group</a></li>
@@ -55,15 +58,15 @@
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
 
@@ -72,31 +75,867 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="fuelcell-module">
-<span id="fuelcell"></span><h1>Fuelcell Module<a class="headerlink" href="#fuelcell-module" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="fuelcell">
+<span id="id1"></span><h1>Fuelcell<a class="headerlink" href="#fuelcell" title="Permalink to this headline">¶</a></h1>
 <p>Wrapper for SAM Simulation Core model: <a class="reference external" href="https://github.com/NREL/ssc/blob/develop/ssc/cmod_fuelcell.cpp">cmod_fuelcell.cpp</a></p>
 <div class="section" id="creating-an-instance">
 <h2>Creating an Instance<a class="headerlink" href="#creating-an-instance" title="Permalink to this headline">¶</a></h2>
-<p>There are three methods to create a new instance of a PySAM module. Using <code class="docutils literal notranslate"><span class="pre">default</span></code> populates the newclass’ attributes with default values specific to a <code class="docutils literal notranslate"><span class="pre">config</span></code>. Each technology-financialconfiguration corresponds to a SAM GUI configuration. Using <code class="docutils literal notranslate"><span class="pre">new</span></code> creates an instance with empty attributes. The <code class="docutils literal notranslate"><span class="pre">wrap</span></code> function allows compatibility with PySSC, for details, refer to <span class="xref std std-doc">PySSC</span>.</p>
+<p>There are three methods to create a new instance of a PySAM module. Using <code class="docutils literal notranslate"><span class="pre">default</span></code> populates the newclass’ attributes with default values specific to a <code class="docutils literal notranslate"><span class="pre">config</span></code>. Each technology-financialconfiguration corresponds to a SAM GUI configuration. Using <code class="docutils literal notranslate"><span class="pre">new</span></code> creates an instance with empty attributes. The <code class="docutils literal notranslate"><span class="pre">wrap</span></code> function allows compatibility with PySSC, for details, refer to <a class="reference internal" href="../PySSC.html"><span class="doc">PySSC</span></a>.</p>
 <p><strong>Fuelcell model description</strong></p>
+<span class="target" id="module-PySAM.Fuelcell"></span><p>Fuel cell model</p>
+<dl class="function">
+<dt id="PySAM.Fuelcell.default">
+<code class="sig-prename descclassname">PySAM.Fuelcell.</code><code class="sig-name descname">default</code><span class="sig-paren">(</span><em class="sig-param">config</em><span class="sig-paren">)</span> &#x2192; Fuelcell<a class="headerlink" href="#PySAM.Fuelcell.default" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use financial config-specific default attributes
+config options:</p>
+<ul class="simple">
+<li><p>“FuelCellCommercial”</p></li>
+<li><p>“FuelCellSingleOwner”</p></li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="PySAM.Fuelcell.from_existing">
+<code class="sig-prename descclassname">PySAM.Fuelcell.</code><code class="sig-name descname">from_existing</code><span class="sig-paren">(</span><em class="sig-param">data</em>, <em class="sig-param">optional config</em><span class="sig-paren">)</span> &#x2192; Fuelcell<a class="headerlink" href="#PySAM.Fuelcell.from_existing" title="Permalink to this definition">¶</a></dt>
+<dd><p>Share underlying data with an existing PySAM class. If config provided, default attributes are loaded otherwise.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="PySAM.Fuelcell.new">
+<code class="sig-prename descclassname">PySAM.Fuelcell.</code><code class="sig-name descname">new</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Fuelcell<a class="headerlink" href="#PySAM.Fuelcell.new" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="PySAM.Fuelcell.wrap">
+<code class="sig-prename descclassname">PySAM.Fuelcell.</code><code class="sig-name descname">wrap</code><span class="sig-paren">(</span><em class="sig-param">ssc_data_t</em><span class="sig-paren">)</span> &#x2192; Fuelcell<a class="headerlink" href="#PySAM.Fuelcell.wrap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use existing PySSC data</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Do not call PySSC.data_free on the ssc_data_t provided to <code class="docutils literal notranslate"><span class="pre">wrap</span></code></p>
+</div>
+</dd></dl>
+
 </div>
 <div class="section" id="functions">
 <h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.Fuelcell.Fuelcell">
+<em class="property">class </em><code class="sig-prename descclassname">PySAM.Fuelcell.</code><code class="sig-name descname">Fuelcell</code><a class="headerlink" href="#PySAM.Fuelcell.Fuelcell" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class contains all the variable information for running a simulation. Variables are grouped together in the subclasses as properties. If property assignments are the wrong type, an error is thrown.</p>
+<dl class="method">
+<dt id="PySAM.Fuelcell.Fuelcell.assign">
+<code class="sig-name descname">assign</code><span class="sig-paren">(</span><em class="sig-param">dict</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Fuelcell.Fuelcell.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from nested dictionary, except for Outputs</p>
+<p><code class="docutils literal notranslate"><span class="pre">nested_dict</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">'Common':</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...},</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.Fuelcell.Fuelcell.execute">
+<code class="sig-name descname">execute</code><span class="sig-paren">(</span><em class="sig-param">int verbosity</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Fuelcell.Fuelcell.execute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute simulation with verbosity level 0 (default) or 1</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.Fuelcell.Fuelcell.export">
+<code class="sig-name descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.Fuelcell.Fuelcell.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into nested dictionary</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.Fuelcell.Fuelcell.value">
+<code class="sig-name descname">value</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">optional value</em><span class="sig-paren">)</span> &#x2192; Union[None, float, dict, sequence, str]<a class="headerlink" href="#PySAM.Fuelcell.Fuelcell.value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set by name a value in any of the variable groups.</p>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="common-group">
 <h2>Common Group<a class="headerlink" href="#common-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.Fuelcell.Fuelcell.Common">
+<em class="property">class </em><code class="sig-prename descclassname">PySAM.Fuelcell.Fuelcell.</code><code class="sig-name descname">Common</code><a class="headerlink" href="#PySAM.Fuelcell.Fuelcell.Common" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.Fuelcell.Fuelcell.Common.assign">
+<code class="sig-name descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Fuelcell.Fuelcell.Common.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">Common_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.Fuelcell.Fuelcell.Common.export">
+<code class="sig-name descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.Fuelcell.Fuelcell.Common.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Fuelcell.Fuelcell.Common.annual_energy">
+<code class="sig-name descname">annual_energy</code><a class="headerlink" href="#PySAM.Fuelcell.Fuelcell.Common.annual_energy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Annual Energy [kWh]</p>
+<p><em>Required</em>: If not provided, assumed to be 0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Fuelcell.Fuelcell.Common.capacity_factor">
+<code class="sig-name descname">capacity_factor</code><a class="headerlink" href="#PySAM.Fuelcell.Fuelcell.Common.capacity_factor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Capacity factor [%]</p>
+<p><em>Required</em>: If not provided, assumed to be 0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Fuelcell.Fuelcell.Common.gen">
+<code class="sig-name descname">gen</code><a class="headerlink" href="#PySAM.Fuelcell.Fuelcell.Common.gen" title="Permalink to this definition">¶</a></dt>
+<dd><p>System power generated [kW]</p>
+<p><em>Info</em>: Lifetime system generation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Fuelcell.Fuelcell.Common.percent_complete">
+<code class="sig-name descname">percent_complete</code><a class="headerlink" href="#PySAM.Fuelcell.Fuelcell.Common.percent_complete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Estimated simulation status [%]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="lifetime-group">
 <h2>Lifetime Group<a class="headerlink" href="#lifetime-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.Fuelcell.Fuelcell.Lifetime">
+<em class="property">class </em><code class="sig-prename descclassname">PySAM.Fuelcell.Fuelcell.</code><code class="sig-name descname">Lifetime</code><a class="headerlink" href="#PySAM.Fuelcell.Fuelcell.Lifetime" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.Fuelcell.Fuelcell.Lifetime.assign">
+<code class="sig-name descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Fuelcell.Fuelcell.Lifetime.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">Lifetime_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.Fuelcell.Fuelcell.Lifetime.export">
+<code class="sig-name descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.Fuelcell.Fuelcell.Lifetime.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Fuelcell.Fuelcell.Lifetime.analysis_period">
+<code class="sig-name descname">analysis_period</code><a class="headerlink" href="#PySAM.Fuelcell.Fuelcell.Lifetime.analysis_period" title="Permalink to this definition">¶</a></dt>
+<dd><p>Lifetime analysis period [years]</p>
+<p><em>Info</em>: The number of years in the simulation</p>
+<p><em>Required</em>: True if system_use_lifetime_output=1</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Fuelcell.Fuelcell.Lifetime.system_use_lifetime_output">
+<code class="sig-name descname">system_use_lifetime_output</code><a class="headerlink" href="#PySAM.Fuelcell.Fuelcell.Lifetime.system_use_lifetime_output" title="Permalink to this definition">¶</a></dt>
+<dd><p>Lifetime simulation [0/1]</p>
+<p><em>Options</em>: 0=SingleYearRepeated,1=RunEveryYear</p>
+<p><em>Constraints</em>: BOOLEAN</p>
+<p><em>Required</em>: If not provided, assumed to be 0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="load-group">
 <h2>Load Group<a class="headerlink" href="#load-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.Fuelcell.Fuelcell.Load">
+<em class="property">class </em><code class="sig-prename descclassname">PySAM.Fuelcell.Fuelcell.</code><code class="sig-name descname">Load</code><a class="headerlink" href="#PySAM.Fuelcell.Fuelcell.Load" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.Fuelcell.Fuelcell.Load.assign">
+<code class="sig-name descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Fuelcell.Fuelcell.Load.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">Load_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.Fuelcell.Fuelcell.Load.export">
+<code class="sig-name descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.Fuelcell.Fuelcell.Load.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Fuelcell.Fuelcell.Load.load">
+<code class="sig-name descname">load</code><a class="headerlink" href="#PySAM.Fuelcell.Fuelcell.Load.load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Electricity load (year 1) [kW]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="fuelcell-group">
 <h2>FuelCell Group<a class="headerlink" href="#fuelcell-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.Fuelcell.Fuelcell.FuelCell">
+<em class="property">class </em><code class="sig-prename descclassname">PySAM.Fuelcell.Fuelcell.</code><code class="sig-name descname">FuelCell</code><a class="headerlink" href="#PySAM.Fuelcell.Fuelcell.FuelCell" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.Fuelcell.Fuelcell.FuelCell.assign">
+<code class="sig-name descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Fuelcell.Fuelcell.FuelCell.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">FuelCell_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.Fuelcell.Fuelcell.FuelCell.export">
+<code class="sig-name descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.Fuelcell.Fuelcell.FuelCell.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Fuelcell.Fuelcell.FuelCell.dispatch_manual_fuelcellcharge">
+<code class="sig-name descname">dispatch_manual_fuelcellcharge</code><a class="headerlink" href="#PySAM.Fuelcell.Fuelcell.FuelCell.dispatch_manual_fuelcellcharge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Periods 1-6 charging allowed?</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Fuelcell.Fuelcell.FuelCell.dispatch_manual_fuelcelldischarge">
+<code class="sig-name descname">dispatch_manual_fuelcelldischarge</code><a class="headerlink" href="#PySAM.Fuelcell.Fuelcell.FuelCell.dispatch_manual_fuelcelldischarge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Periods 1-6 discharging allowed?</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>dispatch_manual_percent_fc_discharge</p></li>
+<li><p>dispatch_manual_units_fc_discharge</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Fuelcell.Fuelcell.FuelCell.dispatch_manual_percent_fc_discharge">
+<code class="sig-name descname">dispatch_manual_percent_fc_discharge</code><a class="headerlink" href="#PySAM.Fuelcell.Fuelcell.FuelCell.dispatch_manual_percent_fc_discharge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Periods 1-6 percent of max fuelcell output</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>dispatch_manual_fuelcelldischarge</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Fuelcell.Fuelcell.FuelCell.dispatch_manual_sched">
+<code class="sig-name descname">dispatch_manual_sched</code><a class="headerlink" href="#PySAM.Fuelcell.Fuelcell.FuelCell.dispatch_manual_sched" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dispatch schedule for weekday</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Fuelcell.Fuelcell.FuelCell.dispatch_manual_sched_weekend">
+<code class="sig-name descname">dispatch_manual_sched_weekend</code><a class="headerlink" href="#PySAM.Fuelcell.Fuelcell.FuelCell.dispatch_manual_sched_weekend" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dispatch schedule for weekend</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Fuelcell.Fuelcell.FuelCell.dispatch_manual_units_fc_discharge">
+<code class="sig-name descname">dispatch_manual_units_fc_discharge</code><a class="headerlink" href="#PySAM.Fuelcell.Fuelcell.FuelCell.dispatch_manual_units_fc_discharge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Periods 1-6 number of fuel cell units?</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>dispatch_manual_fuelcelldischarge</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Fuelcell.Fuelcell.FuelCell.fuelcell_availability_schedule">
+<code class="sig-name descname">fuelcell_availability_schedule</code><a class="headerlink" href="#PySAM.Fuelcell.Fuelcell.FuelCell.fuelcell_availability_schedule" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hour of year start shutdown/Column 2: Hours duration of shutdown ]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+<dt class="field-even">Type</dt>
+<dd class="field-even"><p>Fuel cell availability schedule  [Column 1</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Fuelcell.Fuelcell.FuelCell.fuelcell_degradation">
+<code class="sig-name descname">fuelcell_degradation</code><a class="headerlink" href="#PySAM.Fuelcell.Fuelcell.FuelCell.fuelcell_degradation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fuel cell degradation per hour [kW/h]</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>fuelcell_unit_max_power</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Fuelcell.Fuelcell.FuelCell.fuelcell_degradation_restart">
+<code class="sig-name descname">fuelcell_degradation_restart</code><a class="headerlink" href="#PySAM.Fuelcell.Fuelcell.FuelCell.fuelcell_degradation_restart" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fuel cell degradation at restart [kW]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Fuelcell.Fuelcell.FuelCell.fuelcell_degradation_restart_schedule">
+<code class="sig-name descname">fuelcell_degradation_restart_schedule</code><a class="headerlink" href="#PySAM.Fuelcell.Fuelcell.FuelCell.fuelcell_degradation_restart_schedule" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fuel cell enable scheduled restarts [0/1]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Fuelcell.Fuelcell.FuelCell.fuelcell_degradation_restarts_per_year">
+<code class="sig-name descname">fuelcell_degradation_restarts_per_year</code><a class="headerlink" href="#PySAM.Fuelcell.Fuelcell.FuelCell.fuelcell_degradation_restarts_per_year" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fuel cell scheduled restarts per year</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Fuelcell.Fuelcell.FuelCell.fuelcell_dispatch">
+<code class="sig-name descname">fuelcell_dispatch</code><a class="headerlink" href="#PySAM.Fuelcell.Fuelcell.FuelCell.fuelcell_dispatch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fuel cell dispatch input per unit [kW]</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>fuelcell_unit_max_power</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Fuelcell.Fuelcell.FuelCell.fuelcell_dispatch_choice">
+<code class="sig-name descname">fuelcell_dispatch_choice</code><a class="headerlink" href="#PySAM.Fuelcell.Fuelcell.FuelCell.fuelcell_dispatch_choice" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fuel cell dispatch choice [0/1/2]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Fuelcell.Fuelcell.FuelCell.fuelcell_dynamic_response_down">
+<code class="sig-name descname">fuelcell_dynamic_response_down</code><a class="headerlink" href="#PySAM.Fuelcell.Fuelcell.FuelCell.fuelcell_dynamic_response_down" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fuel cell ramp rate limit down [kW/h]</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>fuelcell_number_of_units</p></li>
+<li><p>fuelcell_unit_max_power</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Fuelcell.Fuelcell.FuelCell.fuelcell_dynamic_response_up">
+<code class="sig-name descname">fuelcell_dynamic_response_up</code><a class="headerlink" href="#PySAM.Fuelcell.Fuelcell.FuelCell.fuelcell_dynamic_response_up" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fuel cell ramp rate limit up [kW/h]</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>fuelcell_number_of_units</p></li>
+<li><p>fuelcell_unit_max_power</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Fuelcell.Fuelcell.FuelCell.fuelcell_efficiency">
+<code class="sig-name descname">fuelcell_efficiency</code><a class="headerlink" href="#PySAM.Fuelcell.Fuelcell.FuelCell.fuelcell_efficiency" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fuel cell efficiency table</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Fuelcell.Fuelcell.FuelCell.fuelcell_efficiency_choice">
+<code class="sig-name descname">fuelcell_efficiency_choice</code><a class="headerlink" href="#PySAM.Fuelcell.Fuelcell.FuelCell.fuelcell_efficiency_choice" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fuel cell efficiency definition choice  [0/1]</p>
+<p><em>Options</em>: 0=OriginalNameplate,1=DegradedNameplate</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Fuelcell.Fuelcell.FuelCell.fuelcell_fixed_pct">
+<code class="sig-name descname">fuelcell_fixed_pct</code><a class="headerlink" href="#PySAM.Fuelcell.Fuelcell.FuelCell.fuelcell_fixed_pct" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fuel cell fixed operation percent [%]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Fuelcell.Fuelcell.FuelCell.fuelcell_fuel_available">
+<code class="sig-name descname">fuelcell_fuel_available</code><a class="headerlink" href="#PySAM.Fuelcell.Fuelcell.FuelCell.fuelcell_fuel_available" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fuel cell available fuel quantity [MCf]</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>fuelcell_fuel_type</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Fuelcell.Fuelcell.FuelCell.fuelcell_fuel_price">
+<code class="sig-name descname">fuelcell_fuel_price</code><a class="headerlink" href="#PySAM.Fuelcell.Fuelcell.FuelCell.fuelcell_fuel_price" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fuel cell price [$/MCf]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Fuelcell.Fuelcell.FuelCell.fuelcell_fuel_type">
+<code class="sig-name descname">fuelcell_fuel_type</code><a class="headerlink" href="#PySAM.Fuelcell.Fuelcell.FuelCell.fuelcell_fuel_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fuel cell type [0/1]</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>fuelcell_fuel_available</p></li>
+<li><p>fuelcell_lhv</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Fuelcell.Fuelcell.FuelCell.fuelcell_is_started">
+<code class="sig-name descname">fuelcell_is_started</code><a class="headerlink" href="#PySAM.Fuelcell.Fuelcell.FuelCell.fuelcell_is_started" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fuel cell is started [0/1]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Fuelcell.Fuelcell.FuelCell.fuelcell_lhv">
+<code class="sig-name descname">fuelcell_lhv</code><a class="headerlink" href="#PySAM.Fuelcell.Fuelcell.FuelCell.fuelcell_lhv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fuel cell lower heating value [Btu/ft3]</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>fuelcell_fuel_type</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Fuelcell.Fuelcell.FuelCell.fuelcell_number_of_units">
+<code class="sig-name descname">fuelcell_number_of_units</code><a class="headerlink" href="#PySAM.Fuelcell.Fuelcell.FuelCell.fuelcell_number_of_units" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fuel cell number of units</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>fuelcell_dynamic_response_down</p></li>
+<li><p>fuelcell_dynamic_response_up</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Fuelcell.Fuelcell.FuelCell.fuelcell_operation_options">
+<code class="sig-name descname">fuelcell_operation_options</code><a class="headerlink" href="#PySAM.Fuelcell.Fuelcell.FuelCell.fuelcell_operation_options" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fuel cell turn off options [0/1]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Fuelcell.Fuelcell.FuelCell.fuelcell_replacement_option">
+<code class="sig-name descname">fuelcell_replacement_option</code><a class="headerlink" href="#PySAM.Fuelcell.Fuelcell.FuelCell.fuelcell_replacement_option" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fuel cell replacement option [0/1/2]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Fuelcell.Fuelcell.FuelCell.fuelcell_replacement_percent">
+<code class="sig-name descname">fuelcell_replacement_percent</code><a class="headerlink" href="#PySAM.Fuelcell.Fuelcell.FuelCell.fuelcell_replacement_percent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fuel cell replace at percentage</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Fuelcell.Fuelcell.FuelCell.fuelcell_replacement_schedule">
+<code class="sig-name descname">fuelcell_replacement_schedule</code><a class="headerlink" href="#PySAM.Fuelcell.Fuelcell.FuelCell.fuelcell_replacement_schedule" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fuel cell replace on schedule</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Fuelcell.Fuelcell.FuelCell.fuelcell_shutdown_time">
+<code class="sig-name descname">fuelcell_shutdown_time</code><a class="headerlink" href="#PySAM.Fuelcell.Fuelcell.FuelCell.fuelcell_shutdown_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fuel cell shutdown hours [hours]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Fuelcell.Fuelcell.FuelCell.fuelcell_startup_time">
+<code class="sig-name descname">fuelcell_startup_time</code><a class="headerlink" href="#PySAM.Fuelcell.Fuelcell.FuelCell.fuelcell_startup_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fuel cell startup hours [hours]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Fuelcell.Fuelcell.FuelCell.fuelcell_type">
+<code class="sig-name descname">fuelcell_type</code><a class="headerlink" href="#PySAM.Fuelcell.Fuelcell.FuelCell.fuelcell_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fuel cell type [0/1/2]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Fuelcell.Fuelcell.FuelCell.fuelcell_unit_max_power">
+<code class="sig-name descname">fuelcell_unit_max_power</code><a class="headerlink" href="#PySAM.Fuelcell.Fuelcell.FuelCell.fuelcell_unit_max_power" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fuel cell max power per unit [kW]</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>fuelcell_degradation</p></li>
+<li><p>fuelcell_dispatch</p></li>
+<li><p>fuelcell_dynamic_response_down</p></li>
+<li><p>fuelcell_dynamic_response_up</p></li>
+<li><p>fuelcell_unit_min_power</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Fuelcell.Fuelcell.FuelCell.fuelcell_unit_min_power">
+<code class="sig-name descname">fuelcell_unit_min_power</code><a class="headerlink" href="#PySAM.Fuelcell.Fuelcell.FuelCell.fuelcell_unit_min_power" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fuel cell min power per unit [kW]</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>fuelcell_unit_max_power</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="outputs-group">
 <h2>Outputs Group<a class="headerlink" href="#outputs-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.Fuelcell.Fuelcell.Outputs">
+<em class="property">class </em><code class="sig-prename descclassname">PySAM.Fuelcell.Fuelcell.</code><code class="sig-name descname">Outputs</code><a class="headerlink" href="#PySAM.Fuelcell.Fuelcell.Outputs" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.Fuelcell.Fuelcell.Outputs.assign">
+<code class="sig-name descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Fuelcell.Fuelcell.Outputs.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">Outputs_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.Fuelcell.Fuelcell.Outputs.export">
+<code class="sig-name descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.Fuelcell.Fuelcell.Outputs.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Fuelcell.Fuelcell.Outputs.annual_fuel_usage">
+<code class="sig-name descname">annual_fuel_usage</code><a class="headerlink" href="#PySAM.Fuelcell.Fuelcell.Outputs.annual_fuel_usage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Annual Fuel Usage [kWht]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Fuelcell.Fuelcell.Outputs.annual_fuel_usage_lifetime">
+<code class="sig-name descname">annual_fuel_usage_lifetime</code><a class="headerlink" href="#PySAM.Fuelcell.Fuelcell.Outputs.annual_fuel_usage_lifetime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Annual Fuel Usage (lifetime) [kWht]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Fuelcell.Fuelcell.Outputs.fuelcell_electrical_efficiency">
+<code class="sig-name descname">fuelcell_electrical_efficiency</code><a class="headerlink" href="#PySAM.Fuelcell.Fuelcell.Outputs.fuelcell_electrical_efficiency" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fuel cell electrical efficiency [%]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Fuelcell.Fuelcell.Outputs.fuelcell_fuel_consumption_mcf">
+<code class="sig-name descname">fuelcell_fuel_consumption_mcf</code><a class="headerlink" href="#PySAM.Fuelcell.Fuelcell.Outputs.fuelcell_fuel_consumption_mcf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fuel consumption of fuel cell [MCf]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Fuelcell.Fuelcell.Outputs.fuelcell_percent_load">
+<code class="sig-name descname">fuelcell_percent_load</code><a class="headerlink" href="#PySAM.Fuelcell.Fuelcell.Outputs.fuelcell_percent_load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fuel cell percent load [%]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Fuelcell.Fuelcell.Outputs.fuelcell_power">
+<code class="sig-name descname">fuelcell_power</code><a class="headerlink" href="#PySAM.Fuelcell.Fuelcell.Outputs.fuelcell_power" title="Permalink to this definition">¶</a></dt>
+<dd><p>Electricity from fuel cell [kW]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Fuelcell.Fuelcell.Outputs.fuelcell_power_max_percent">
+<code class="sig-name descname">fuelcell_power_max_percent</code><a class="headerlink" href="#PySAM.Fuelcell.Fuelcell.Outputs.fuelcell_power_max_percent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fuel cell max power percent available [%]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Fuelcell.Fuelcell.Outputs.fuelcell_power_thermal">
+<code class="sig-name descname">fuelcell_power_thermal</code><a class="headerlink" href="#PySAM.Fuelcell.Fuelcell.Outputs.fuelcell_power_thermal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Heat from fuel cell [kWt]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Fuelcell.Fuelcell.Outputs.fuelcell_replacement">
+<code class="sig-name descname">fuelcell_replacement</code><a class="headerlink" href="#PySAM.Fuelcell.Fuelcell.Outputs.fuelcell_replacement" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fuel cell replacements per year [number/year]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Fuelcell.Fuelcell.Outputs.fuelcell_to_grid">
+<code class="sig-name descname">fuelcell_to_grid</code><a class="headerlink" href="#PySAM.Fuelcell.Fuelcell.Outputs.fuelcell_to_grid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Electricity to grid from fuel cell [kW]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Fuelcell.Fuelcell.Outputs.fuelcell_to_load">
+<code class="sig-name descname">fuelcell_to_load</code><a class="headerlink" href="#PySAM.Fuelcell.Fuelcell.Outputs.fuelcell_to_load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Electricity to load from fuel cell [kW]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Fuelcell.Fuelcell.Outputs.gen">
+<code class="sig-name descname">gen</code><a class="headerlink" href="#PySAM.Fuelcell.Fuelcell.Outputs.gen" title="Permalink to this definition">¶</a></dt>
+<dd><p>System power generated [kW]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Fuelcell.Fuelcell.Outputs.system_heat_rate">
+<code class="sig-name descname">system_heat_rate</code><a class="headerlink" href="#PySAM.Fuelcell.Fuelcell.Outputs.system_heat_rate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Heat rate conversion factor (MMBTUs/MWhe) [MMBTUs/MWhe]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 </div>
 
@@ -112,12 +951,15 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
-        <li class="nav-item nav-item-0"><a href="../index.html">PySAM 1.2 documentation</a> &#187;</li> 
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">PySAM 2.0 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2019, NREL.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.3.
     </div>
   </body>
 </html>

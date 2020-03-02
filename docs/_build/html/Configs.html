@@ -5,23 +5,23 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Configuration Names and SSC Models &#8212; PySAM 1.2 documentation</title>
+    <title>Configuration Names and SSC Models &#8212; PySAM 2.0 documentation</title>
     <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
-    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/language_data.js"></script>
-    <script type="text/javascript" src="_static/bizstyle.js"></script>
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="_static/bizstyle.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="To import a case from the SAM GUI" href="Import.html" />
-    <link rel="prev" title="Module Names and Descriptions" href="Models.html" />
+    <link rel="next" title="Battery Tools" href="Tools.html" />
+    <link rel="prev" title="Modules" href="Models.html" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <!--[if lt IE 9]>
-    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <script src="_static/css3-mediaqueries.js"></script>
     <![endif]-->
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
@@ -31,22 +31,25 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="Import.html" title="To import a case from the SAM GUI"
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="Tools.html" title="Battery Tools"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="Models.html" title="Module Names and Descriptions"
+          <a href="Models.html" title="Modules"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">PySAM 1.2 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">PySAM 2.0 documentation</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h4>Previous topic</h4>
   <p class="topless"><a href="Models.html"
-                        title="previous chapter">Module Names and Descriptions</a></p>
+                        title="previous chapter">Modules</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="Import.html"
-                        title="next chapter">To import a case from the SAM GUI</a></p>
+  <p class="topless"><a href="Tools.html"
+                        title="next chapter">Battery Tools</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -55,15 +58,15 @@
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
 
@@ -75,7 +78,7 @@
   <div class="section" id="configuration-names-and-ssc-models">
 <h1>Configuration Names and SSC Models<a class="headerlink" href="#configuration-names-and-ssc-models" title="Permalink to this headline">¶</a></h1>
 <p>A configuration is a combination of compute modules required to model a type of system (performance model) or project (performance model plus financial models).</p>
-<table class="colwidths-given docutils align-center">
+<table class="colwidths-given docutils align-default">
 <colgroup>
 <col style="width: 33%" />
 <col style="width: 67%" />
@@ -378,34 +381,34 @@
 <td><p>tcstrough_physical, singleowner</p></td>
 </tr>
 <tr class="row-odd"><td><p>PVWatts-All Equity Partnership Flip</p></td>
-<td><p>pvwattsv5, equpartflip</p></td>
+<td><p>pvwattsv7, equpartflip</p></td>
 </tr>
 <tr class="row-even"><td><p>PVWatts-Commercial</p></td>
-<td><p>pvwattsv5, battwatts, utilityrate5, cashloan</p></td>
+<td><p>pvwattsv7, battwatts, utilityrate5, cashloan</p></td>
 </tr>
 <tr class="row-odd"><td><p>PVWatts-Host Developer</p></td>
-<td><p>pvwattsv5, utilityrate5, host_developer</p></td>
+<td><p>pvwattsv7, utilityrate5, host_developer</p></td>
 </tr>
 <tr class="row-even"><td><p>PVWatts-LCOE Calculator</p></td>
-<td><p>pvwattsv5, lcoefcr</p></td>
+<td><p>pvwattsv7, lcoefcr</p></td>
 </tr>
 <tr class="row-odd"><td><p>PVWatts-Leveraged Partnership Flip</p></td>
-<td><p>pvwattsv5, levpartflip</p></td>
+<td><p>pvwattsv7, levpartflip</p></td>
 </tr>
 <tr class="row-even"><td><p>PVWatts-None</p></td>
-<td><p>pvwattsv5</p></td>
+<td><p>pvwattsv7</p></td>
 </tr>
 <tr class="row-odd"><td><p>PVWatts-Residential</p></td>
-<td><p>pvwattsv5, belpe, battwatts, utilityrate5, cashloan</p></td>
+<td><p>pvwattsv7, belpe, battwatts, utilityrate5, cashloan</p></td>
 </tr>
 <tr class="row-even"><td><p>PVWatts-Sale Leaseback</p></td>
-<td><p>pvwattsv5, saleleaseback</p></td>
+<td><p>pvwattsv7, saleleaseback</p></td>
 </tr>
 <tr class="row-odd"><td><p>PVWatts-Single Owner</p></td>
-<td><p>pvwattsv5, singleowner</p></td>
+<td><p>pvwattsv7, singleowner</p></td>
 </tr>
 <tr class="row-even"><td><p>PVWatts-Third Party</p></td>
-<td><p>pvwattsv5, belpe, battwatts, utilityrate5, thirdpartyownership</p></td>
+<td><p>pvwattsv7, belpe, battwatts, utilityrate5, thirdpartyownership</p></td>
 </tr>
 <tr class="row-odd"><td><p>Solar Water Heating-Commercial</p></td>
 <td><p>swh, utilityrate5, cashloan</p></td>
@@ -460,17 +463,20 @@
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="Import.html" title="To import a case from the SAM GUI"
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="Tools.html" title="Battery Tools"
              >next</a> |</li>
         <li class="right" >
-          <a href="Models.html" title="Module Names and Descriptions"
+          <a href="Models.html" title="Modules"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">PySAM 1.2 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">PySAM 2.0 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2019, NREL.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.3.
     </div>
   </body>
 </html>

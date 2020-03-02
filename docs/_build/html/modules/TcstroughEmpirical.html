@@ -5,21 +5,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>TcstroughEmpirical Module &#8212; PySAM 1.2 documentation</title>
+    <title>TcstroughEmpirical &#8212; PySAM 2.0 documentation</title>
     <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/language_data.js"></script>
-    <script type="text/javascript" src="../_static/bizstyle.js"></script>
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/bizstyle.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <!--[if lt IE 9]>
-    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <script src="_static/css3-mediaqueries.js"></script>
     <![endif]-->
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
@@ -28,14 +28,17 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li class="nav-item nav-item-0"><a href="../index.html">PySAM 1.2 documentation</a> &#187;</li> 
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">PySAM 2.0 documentation</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h3><a href="../index.html">Table of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">TcstroughEmpirical Module</a><ul>
+<li><a class="reference internal" href="#">TcstroughEmpirical</a><ul>
 <li><a class="reference internal" href="#creating-an-instance">Creating an Instance</a></li>
 <li><a class="reference internal" href="#functions">Functions</a></li>
 <li><a class="reference internal" href="#weather-group">Weather Group</a></li>
@@ -61,15 +64,15 @@
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
 
@@ -78,49 +81,3005 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="tcstroughempirical-module">
-<span id="tcstroughempirical"></span><h1>TcstroughEmpirical Module<a class="headerlink" href="#tcstroughempirical-module" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="tcstroughempirical">
+<span id="id1"></span><h1>TcstroughEmpirical<a class="headerlink" href="#tcstroughempirical" title="Permalink to this headline">¶</a></h1>
 <p>Wrapper for SAM Simulation Core model: <a class="reference external" href="https://github.com/NREL/ssc/blob/develop/ssc/cmod_tcstrough_empirical.cpp">cmod_tcstrough_empirical.cpp</a></p>
 <div class="section" id="creating-an-instance">
 <h2>Creating an Instance<a class="headerlink" href="#creating-an-instance" title="Permalink to this headline">¶</a></h2>
-<p>There are three methods to create a new instance of a PySAM module. Using <code class="docutils literal notranslate"><span class="pre">default</span></code> populates the newclass’ attributes with default values specific to a <code class="docutils literal notranslate"><span class="pre">config</span></code>. Each technology-financialconfiguration corresponds to a SAM GUI configuration. Using <code class="docutils literal notranslate"><span class="pre">new</span></code> creates an instance with empty attributes. The <code class="docutils literal notranslate"><span class="pre">wrap</span></code> function allows compatibility with PySSC, for details, refer to <span class="xref std std-doc">PySSC</span>.</p>
+<p>There are three methods to create a new instance of a PySAM module. Using <code class="docutils literal notranslate"><span class="pre">default</span></code> populates the newclass’ attributes with default values specific to a <code class="docutils literal notranslate"><span class="pre">config</span></code>. Each technology-financialconfiguration corresponds to a SAM GUI configuration. Using <code class="docutils literal notranslate"><span class="pre">new</span></code> creates an instance with empty attributes. The <code class="docutils literal notranslate"><span class="pre">wrap</span></code> function allows compatibility with PySSC, for details, refer to <a class="reference internal" href="../PySSC.html"><span class="doc">PySSC</span></a>.</p>
 <p><strong>TcstroughEmpirical model description</strong></p>
+<span class="target" id="module-PySAM.TcstroughEmpirical"></span><p>CSP parabolic trough model based on empirically-derived coefficients and equations for power generation</p>
+<dl class="function">
+<dt id="PySAM.TcstroughEmpirical.default">
+<code class="sig-prename descclassname">PySAM.TcstroughEmpirical.</code><code class="sig-name descname">default</code><span class="sig-paren">(</span><em class="sig-param">config</em><span class="sig-paren">)</span> &#x2192; TcstroughEmpirical<a class="headerlink" href="#PySAM.TcstroughEmpirical.default" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use financial config-specific default attributes
+config options:</p>
+<ul class="simple">
+<li><p>“EmpiricalTroughAllEquityPartnershipFlip”</p></li>
+<li><p>“EmpiricalTroughCommercial”</p></li>
+<li><p>“EmpiricalTroughCommercialPPA”</p></li>
+<li><p>“EmpiricalTroughIndependentPowerProducer”</p></li>
+<li><p>“EmpiricalTroughLCOECalculator”</p></li>
+<li><p>“EmpiricalTroughLeveragedPartnershipFlip”</p></li>
+<li><p>“EmpiricalTroughMerchantPlant”</p></li>
+<li><p>“EmpiricalTroughNone”</p></li>
+<li><p>“EmpiricalTroughSaleLeaseback”</p></li>
+<li><p>“EmpiricalTroughSingleOwner”</p></li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="PySAM.TcstroughEmpirical.from_existing">
+<code class="sig-prename descclassname">PySAM.TcstroughEmpirical.</code><code class="sig-name descname">from_existing</code><span class="sig-paren">(</span><em class="sig-param">data</em>, <em class="sig-param">optional config</em><span class="sig-paren">)</span> &#x2192; TcstroughEmpirical<a class="headerlink" href="#PySAM.TcstroughEmpirical.from_existing" title="Permalink to this definition">¶</a></dt>
+<dd><p>Share underlying data with an existing PySAM class. If config provided, default attributes are loaded otherwise.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="PySAM.TcstroughEmpirical.new">
+<code class="sig-prename descclassname">PySAM.TcstroughEmpirical.</code><code class="sig-name descname">new</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; TcstroughEmpirical<a class="headerlink" href="#PySAM.TcstroughEmpirical.new" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="PySAM.TcstroughEmpirical.wrap">
+<code class="sig-prename descclassname">PySAM.TcstroughEmpirical.</code><code class="sig-name descname">wrap</code><span class="sig-paren">(</span><em class="sig-param">ssc_data_t</em><span class="sig-paren">)</span> &#x2192; TcstroughEmpirical<a class="headerlink" href="#PySAM.TcstroughEmpirical.wrap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use existing PySSC data</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Do not call PySSC.data_free on the ssc_data_t provided to <code class="docutils literal notranslate"><span class="pre">wrap</span></code></p>
+</div>
+</dd></dl>
+
 </div>
 <div class="section" id="functions">
 <h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical">
+<em class="property">class </em><code class="sig-prename descclassname">PySAM.TcstroughEmpirical.</code><code class="sig-name descname">TcstroughEmpirical</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class contains all the variable information for running a simulation. Variables are grouped together in the subclasses as properties. If property assignments are the wrong type, an error is thrown.</p>
+<dl class="method">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.assign">
+<code class="sig-name descname">assign</code><span class="sig-paren">(</span><em class="sig-param">dict</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from nested dictionary, except for Outputs</p>
+<p><code class="docutils literal notranslate"><span class="pre">nested_dict</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">'Weather':</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...},</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.execute">
+<code class="sig-name descname">execute</code><span class="sig-paren">(</span><em class="sig-param">int verbosity</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.execute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute simulation with verbosity level 0 (default) or 1</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.export">
+<code class="sig-name descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into nested dictionary</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.value">
+<code class="sig-name descname">value</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">optional value</em><span class="sig-paren">)</span> &#x2192; Union[None, float, dict, sequence, str]<a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set by name a value in any of the variable groups.</p>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="weather-group">
 <h2>Weather Group<a class="headerlink" href="#weather-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Weather">
+<em class="property">class </em><code class="sig-prename descclassname">PySAM.TcstroughEmpirical.TcstroughEmpirical.</code><code class="sig-name descname">Weather</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Weather" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Weather.assign">
+<code class="sig-name descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Weather.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">Weather_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Weather.export">
+<code class="sig-name descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Weather.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Weather.azimuth">
+<code class="sig-name descname">azimuth</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Weather.azimuth" title="Permalink to this definition">¶</a></dt>
+<dd><p>Azimuth angle of surface/axis</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Weather.file_name">
+<code class="sig-name descname">file_name</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Weather.file_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>local weather file path</p>
+<p><em>Constraints</em>: LOCAL_FILE</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>str</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Weather.tilt">
+<code class="sig-name descname">tilt</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Weather.tilt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tilt angle of surface/axis</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Weather.track_mode">
+<code class="sig-name descname">track_mode</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Weather.track_mode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tracking mode</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="trough-group">
 <h2>Trough Group<a class="headerlink" href="#trough-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Trough">
+<em class="property">class </em><code class="sig-prename descclassname">PySAM.TcstroughEmpirical.TcstroughEmpirical.</code><code class="sig-name descname">Trough</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Trough" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Trough.assign">
+<code class="sig-name descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Trough.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">Trough_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Trough.export">
+<code class="sig-name descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Trough.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Trough.system_capacity">
+<code class="sig-name descname">system_capacity</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Trough.system_capacity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Nameplate capacity [kW]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>TurbOutG</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="toutranslator-group">
 <h2>TouTranslator Group<a class="headerlink" href="#toutranslator-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.TouTranslator">
+<em class="property">class </em><code class="sig-prename descclassname">PySAM.TcstroughEmpirical.TcstroughEmpirical.</code><code class="sig-name descname">TouTranslator</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.TouTranslator" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.TouTranslator.assign">
+<code class="sig-name descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.TouTranslator.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">TouTranslator_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.TouTranslator.export">
+<code class="sig-name descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.TouTranslator.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.TouTranslator.weekday_schedule">
+<code class="sig-name descname">weekday_schedule</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.TouTranslator.weekday_schedule" title="Permalink to this definition">¶</a></dt>
+<dd><p>12x24 Time of Use Values for week days</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.TouTranslator.weekend_schedule">
+<code class="sig-name descname">weekend_schedule</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.TouTranslator.weekend_schedule" title="Permalink to this definition">¶</a></dt>
+<dd><p>12x24 Time of Use Values for week end days</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="solarfield-group">
 <h2>Solarfield Group<a class="headerlink" href="#solarfield-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Solarfield">
+<em class="property">class </em><code class="sig-prename descclassname">PySAM.TcstroughEmpirical.TcstroughEmpirical.</code><code class="sig-name descname">Solarfield</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Solarfield" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Solarfield.assign">
+<code class="sig-name descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Solarfield.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">Solarfield_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Solarfield.export">
+<code class="sig-name descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Solarfield.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Solarfield.DepAngle">
+<code class="sig-name descname">DepAngle</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Solarfield.DepAngle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deployment Angle [deg]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Solarfield.Distance_SCA">
+<code class="sig-name descname">Distance_SCA</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Solarfield.Distance_SCA" title="Permalink to this definition">¶</a></dt>
+<dd><p>Distance between SCAs in Row [m]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Solarfield.HTFFluid">
+<code class="sig-name descname">HTFFluid</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Solarfield.HTFFluid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Type of Heat Transfer Fluid used</p>
+<p><em>Constraints</em>: INTEGER</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Solarfield.HtfGalArea">
+<code class="sig-name descname">HtfGalArea</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Solarfield.HtfGalArea" title="Permalink to this definition">¶</a></dt>
+<dd><p>HTF Fluids in Gallons per Field Area [gal/m2]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Solarfield.MinHtfTemp">
+<code class="sig-name descname">MinHtfTemp</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Solarfield.MinHtfTemp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Minimum Heat Transfer Fluid Temperature [C]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Solarfield.NumScas">
+<code class="sig-name descname">NumScas</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Solarfield.NumScas" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of SCAs per Row</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Solarfield.Row_Distance">
+<code class="sig-name descname">Row_Distance</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Solarfield.Row_Distance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Distance between Rows of SCAs [m]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Solarfield.SFTempInit">
+<code class="sig-name descname">SFTempInit</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Solarfield.SFTempInit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Solar Field Initial Temperature [C]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Solarfield.SfInTempD">
+<code class="sig-name descname">SfInTempD</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Solarfield.SfInTempD" title="Permalink to this definition">¶</a></dt>
+<dd><p>Solar Field Design Inlet Temperature [C]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>AntiFrPar</p></li>
+<li><p>ChtfPar</p></li>
+<li><p>PTSmax</p></li>
+<li><p>SfPar</p></li>
+<li><p>Solar_Field_Area</p></li>
+<li><p>Solar_Field_Mult</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Solarfield.SfOutTempD">
+<code class="sig-name descname">SfOutTempD</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Solarfield.SfOutTempD" title="Permalink to this definition">¶</a></dt>
+<dd><p>Solar Field Design Outlet Temperature [C]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>AntiFrPar</p></li>
+<li><p>ChtfPar</p></li>
+<li><p>PTSmax</p></li>
+<li><p>SfPar</p></li>
+<li><p>Solar_Field_Area</p></li>
+<li><p>Solar_Field_Mult</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Solarfield.SfPipeHl1">
+<code class="sig-name descname">SfPipeHl1</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Solarfield.SfPipeHl1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Solar field piping heat loss at reduced temp. - linear term [C^(-1)]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>AntiFrPar</p></li>
+<li><p>ChtfPar</p></li>
+<li><p>PTSmax</p></li>
+<li><p>SfPar</p></li>
+<li><p>Solar_Field_Area</p></li>
+<li><p>Solar_Field_Mult</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Solarfield.SfPipeHl2">
+<code class="sig-name descname">SfPipeHl2</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Solarfield.SfPipeHl2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Solar field piping heat loss at reduced temp. - quadratic term [C^(-2)]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>AntiFrPar</p></li>
+<li><p>ChtfPar</p></li>
+<li><p>PTSmax</p></li>
+<li><p>SfPar</p></li>
+<li><p>Solar_Field_Area</p></li>
+<li><p>Solar_Field_Mult</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Solarfield.SfPipeHl3">
+<code class="sig-name descname">SfPipeHl3</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Solarfield.SfPipeHl3" title="Permalink to this definition">¶</a></dt>
+<dd><p>Solar field piping heat loss at reduced temp. - cubic term [C^(-3)]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>AntiFrPar</p></li>
+<li><p>ChtfPar</p></li>
+<li><p>PTSmax</p></li>
+<li><p>SfPar</p></li>
+<li><p>Solar_Field_Area</p></li>
+<li><p>Solar_Field_Mult</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Solarfield.SfPipeHl300">
+<code class="sig-name descname">SfPipeHl300</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Solarfield.SfPipeHl300" title="Permalink to this definition">¶</a></dt>
+<dd><p>Solar field piping heat loss at design [W/m2]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>AntiFrPar</p></li>
+<li><p>ChtfPar</p></li>
+<li><p>PTSmax</p></li>
+<li><p>SfPar</p></li>
+<li><p>Solar_Field_Area</p></li>
+<li><p>Solar_Field_Mult</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Solarfield.Solar_Field_Area">
+<code class="sig-name descname">Solar_Field_Area</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Solarfield.Solar_Field_Area" title="Permalink to this definition">¶</a></dt>
+<dd><p>Solar Field Area [m2]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>AntiFrPar</p></li>
+<li><p>ChtfPar</p></li>
+<li><p>SfPar</p></li>
+</ul>
+</dd>
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>ConcFac</p></li>
+<li><p>GeoAcc</p></li>
+<li><p>HCEdust</p></li>
+<li><p>MirCln</p></li>
+<li><p>MirRef</p></li>
+<li><p>SCA_aper</p></li>
+<li><p>SfInTempD</p></li>
+<li><p>SfOutTempD</p></li>
+<li><p>SfPipeHl1</p></li>
+<li><p>SfPipeHl2</p></li>
+<li><p>SfPipeHl3</p></li>
+<li><p>SfPipeHl300</p></li>
+<li><p>TrkTwstErr</p></li>
+<li><p>TurbEffG</p></li>
+<li><p>TurbOutG</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Solarfield.Solar_Field_Mult">
+<code class="sig-name descname">Solar_Field_Mult</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Solarfield.Solar_Field_Mult" title="Permalink to this definition">¶</a></dt>
+<dd><p>Solar Field Multiple</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>PTSmax</p></li>
+</ul>
+</dd>
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>ConcFac</p></li>
+<li><p>GeoAcc</p></li>
+<li><p>HCEdust</p></li>
+<li><p>MirCln</p></li>
+<li><p>MirRef</p></li>
+<li><p>SCA_aper</p></li>
+<li><p>SfInTempD</p></li>
+<li><p>SfOutTempD</p></li>
+<li><p>SfPipeHl1</p></li>
+<li><p>SfPipeHl2</p></li>
+<li><p>SfPipeHl3</p></li>
+<li><p>SfPipeHl300</p></li>
+<li><p>TrkTwstErr</p></li>
+<li><p>TurbEffG</p></li>
+<li><p>TurbOutG</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Solarfield.Stow_Angle">
+<code class="sig-name descname">Stow_Angle</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Solarfield.Stow_Angle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Night-Time Trough Stow Angle [deg]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Solarfield.i_SfTi">
+<code class="sig-name descname">i_SfTi</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Solarfield.i_SfTi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Solar Field HTF inlet Temperature (if -999, calculated) [C]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="sca-group">
 <h2>Sca Group<a class="headerlink" href="#sca-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Sca">
+<em class="property">class </em><code class="sig-prename descclassname">PySAM.TcstroughEmpirical.TcstroughEmpirical.</code><code class="sig-name descname">Sca</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Sca" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Sca.assign">
+<code class="sig-name descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Sca.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">Sca_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Sca.export">
+<code class="sig-name descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Sca.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Sca.Ave_Focal_Length">
+<code class="sig-name descname">Ave_Focal_Length</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Sca.Ave_Focal_Length" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Sca.ConcFac">
+<code class="sig-name descname">ConcFac</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Sca.ConcFac" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>AntiFrPar</p></li>
+<li><p>ChtfPar</p></li>
+<li><p>PTSmax</p></li>
+<li><p>SfPar</p></li>
+<li><p>Solar_Field_Area</p></li>
+<li><p>Solar_Field_Mult</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Sca.GeoAcc">
+<code class="sig-name descname">GeoAcc</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Sca.GeoAcc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>AntiFrPar</p></li>
+<li><p>ChtfPar</p></li>
+<li><p>PTSmax</p></li>
+<li><p>SfPar</p></li>
+<li><p>Solar_Field_Area</p></li>
+<li><p>Solar_Field_Mult</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Sca.IamF0">
+<code class="sig-name descname">IamF0</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Sca.IamF0" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Sca.IamF1">
+<code class="sig-name descname">IamF1</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Sca.IamF1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Sca.IamF2">
+<code class="sig-name descname">IamF2</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Sca.IamF2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Sca.MirCln">
+<code class="sig-name descname">MirCln</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Sca.MirCln" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>AntiFrPar</p></li>
+<li><p>ChtfPar</p></li>
+<li><p>PTSmax</p></li>
+<li><p>SfPar</p></li>
+<li><p>Solar_Field_Area</p></li>
+<li><p>Solar_Field_Mult</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Sca.MirRef">
+<code class="sig-name descname">MirRef</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Sca.MirRef" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>AntiFrPar</p></li>
+<li><p>ChtfPar</p></li>
+<li><p>PTSmax</p></li>
+<li><p>SfPar</p></li>
+<li><p>Solar_Field_Area</p></li>
+<li><p>Solar_Field_Mult</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Sca.SCA_aper">
+<code class="sig-name descname">SCA_aper</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Sca.SCA_aper" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>AntiFrPar</p></li>
+<li><p>ChtfPar</p></li>
+<li><p>PTSmax</p></li>
+<li><p>RefMirrAper</p></li>
+<li><p>SfPar</p></li>
+<li><p>Solar_Field_Area</p></li>
+<li><p>Solar_Field_Mult</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Sca.ScaLen">
+<code class="sig-name descname">ScaLen</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Sca.ScaLen" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Sca.SfAvail">
+<code class="sig-name descname">SfAvail</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Sca.SfAvail" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Sca.TrkTwstErr">
+<code class="sig-name descname">TrkTwstErr</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Sca.TrkTwstErr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>AntiFrPar</p></li>
+<li><p>ChtfPar</p></li>
+<li><p>PTSmax</p></li>
+<li><p>SfPar</p></li>
+<li><p>Solar_Field_Area</p></li>
+<li><p>Solar_Field_Mult</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="hce-group">
 <h2>Hce Group<a class="headerlink" href="#hce-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Hce">
+<em class="property">class </em><code class="sig-prename descclassname">PySAM.TcstroughEmpirical.TcstroughEmpirical.</code><code class="sig-name descname">Hce</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Hce" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Hce.assign">
+<code class="sig-name descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Hce.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">Hce_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Hce.export">
+<code class="sig-name descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Hce.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Hce.HCEBelShad">
+<code class="sig-name descname">HCEBelShad</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Hce.HCEBelShad" title="Permalink to this definition">¶</a></dt>
+<dd><p>label</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Hce.HCEEnvTrans">
+<code class="sig-name descname">HCEEnvTrans</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Hce.HCEEnvTrans" title="Permalink to this definition">¶</a></dt>
+<dd><p>label</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Hce.HCEFrac">
+<code class="sig-name descname">HCEFrac</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Hce.HCEFrac" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fraction of field that is this type of HCE</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Hce.HCE_A0">
+<code class="sig-name descname">HCE_A0</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Hce.HCE_A0" title="Permalink to this definition">¶</a></dt>
+<dd><p>label</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Hce.HCE_A1">
+<code class="sig-name descname">HCE_A1</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Hce.HCE_A1" title="Permalink to this definition">¶</a></dt>
+<dd><p>label</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Hce.HCE_A2">
+<code class="sig-name descname">HCE_A2</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Hce.HCE_A2" title="Permalink to this definition">¶</a></dt>
+<dd><p>label</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Hce.HCE_A3">
+<code class="sig-name descname">HCE_A3</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Hce.HCE_A3" title="Permalink to this definition">¶</a></dt>
+<dd><p>label</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Hce.HCE_A4">
+<code class="sig-name descname">HCE_A4</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Hce.HCE_A4" title="Permalink to this definition">¶</a></dt>
+<dd><p>label</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Hce.HCE_A5">
+<code class="sig-name descname">HCE_A5</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Hce.HCE_A5" title="Permalink to this definition">¶</a></dt>
+<dd><p>label</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Hce.HCE_A6">
+<code class="sig-name descname">HCE_A6</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Hce.HCE_A6" title="Permalink to this definition">¶</a></dt>
+<dd><p>label</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Hce.HCEabs">
+<code class="sig-name descname">HCEabs</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Hce.HCEabs" title="Permalink to this definition">¶</a></dt>
+<dd><p>label</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Hce.HCEdust">
+<code class="sig-name descname">HCEdust</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Hce.HCEdust" title="Permalink to this definition">¶</a></dt>
+<dd><p>label</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>AntiFrPar</p></li>
+<li><p>ChtfPar</p></li>
+<li><p>PTSmax</p></li>
+<li><p>SfPar</p></li>
+<li><p>Solar_Field_Area</p></li>
+<li><p>Solar_Field_Mult</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Hce.HCEmisc">
+<code class="sig-name descname">HCEmisc</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Hce.HCEmisc" title="Permalink to this definition">¶</a></dt>
+<dd><p>label</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Hce.HCEtype">
+<code class="sig-name descname">HCEtype</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Hce.HCEtype" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number indicating the receiver type</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Hce.NumHCETypes">
+<code class="sig-name descname">NumHCETypes</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Hce.NumHCETypes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of HCE types</p>
+<p><em>Constraints</em>: INTEGER</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Hce.PerfFac">
+<code class="sig-name descname">PerfFac</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Hce.PerfFac" title="Permalink to this definition">¶</a></dt>
+<dd><p>label</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Hce.RefMirrAper">
+<code class="sig-name descname">RefMirrAper</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Hce.RefMirrAper" title="Permalink to this definition">¶</a></dt>
+<dd><p>label</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>SCA_aper</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="pwrb-group">
 <h2>Pwrb Group<a class="headerlink" href="#pwrb-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Pwrb">
+<em class="property">class </em><code class="sig-prename descclassname">PySAM.TcstroughEmpirical.TcstroughEmpirical.</code><code class="sig-name descname">Pwrb</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Pwrb" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Pwrb.assign">
+<code class="sig-name descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Pwrb.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">Pwrb_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Pwrb.export">
+<code class="sig-name descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Pwrb.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Pwrb.E2TPLF0">
+<code class="sig-name descname">E2TPLF0</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Pwrb.E2TPLF0" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Pwrb.E2TPLF1">
+<code class="sig-name descname">E2TPLF1</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Pwrb.E2TPLF1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Pwrb.E2TPLF2">
+<code class="sig-name descname">E2TPLF2</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Pwrb.E2TPLF2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Pwrb.E2TPLF3">
+<code class="sig-name descname">E2TPLF3</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Pwrb.E2TPLF3" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Pwrb.E2TPLF4">
+<code class="sig-name descname">E2TPLF4</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Pwrb.E2TPLF4" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Pwrb.LHVBoilEff">
+<code class="sig-name descname">LHVBoilEff</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Pwrb.LHVBoilEff" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Pwrb.MaxGrOut">
+<code class="sig-name descname">MaxGrOut</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Pwrb.MaxGrOut" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>PFSmax</p></li>
+<li><p>PTSmax</p></li>
+<li><p>PTTMAX</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Pwrb.MinGrOut">
+<code class="sig-name descname">MinGrOut</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Pwrb.MinGrOut" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>PTTMIN</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Pwrb.PTTMAX">
+<code class="sig-name descname">PTTMAX</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Pwrb.PTTMAX" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>MaxGrOut</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Pwrb.PTTMIN">
+<code class="sig-name descname">PTTMIN</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Pwrb.PTTMIN" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>MinGrOut</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Pwrb.T2EPLF0">
+<code class="sig-name descname">T2EPLF0</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Pwrb.T2EPLF0" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Pwrb.T2EPLF1">
+<code class="sig-name descname">T2EPLF1</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Pwrb.T2EPLF1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Pwrb.T2EPLF2">
+<code class="sig-name descname">T2EPLF2</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Pwrb.T2EPLF2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Pwrb.T2EPLF3">
+<code class="sig-name descname">T2EPLF3</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Pwrb.T2EPLF3" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Pwrb.T2EPLF4">
+<code class="sig-name descname">T2EPLF4</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Pwrb.T2EPLF4" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Pwrb.TempCorr0">
+<code class="sig-name descname">TempCorr0</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Pwrb.TempCorr0" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Pwrb.TempCorr1">
+<code class="sig-name descname">TempCorr1</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Pwrb.TempCorr1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Pwrb.TempCorr2">
+<code class="sig-name descname">TempCorr2</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Pwrb.TempCorr2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Pwrb.TempCorr3">
+<code class="sig-name descname">TempCorr3</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Pwrb.TempCorr3" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Pwrb.TempCorr4">
+<code class="sig-name descname">TempCorr4</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Pwrb.TempCorr4" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Pwrb.TempCorrF">
+<code class="sig-name descname">TempCorrF</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Pwrb.TempCorrF" title="Permalink to this definition">¶</a></dt>
+<dd><p>Temp Correction Mode (0=wetbulb 1=drybulb basis)</p>
+<p><em>Constraints</em>: INTEGER</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Pwrb.TurSUE">
+<code class="sig-name descname">TurSUE</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Pwrb.TurSUE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Pwrb.TurbEffG">
+<code class="sig-name descname">TurbEffG</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Pwrb.TurbEffG" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>AntiFrPar</p></li>
+<li><p>ChtfPar</p></li>
+<li><p>PFSmax</p></li>
+<li><p>PTSmax</p></li>
+<li><p>SfPar</p></li>
+<li><p>Solar_Field_Area</p></li>
+<li><p>Solar_Field_Mult</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Pwrb.TurbOutG">
+<code class="sig-name descname">TurbOutG</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Pwrb.TurbOutG" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>AntiFrPar</p></li>
+<li><p>BOPPar</p></li>
+<li><p>ChtfPar</p></li>
+<li><p>CtPar</p></li>
+<li><p>HhtfPar</p></li>
+<li><p>HtrPar</p></li>
+<li><p>PFSmax</p></li>
+<li><p>PTSmax</p></li>
+<li><p>PbFixPar</p></li>
+<li><p>SfPar</p></li>
+<li><p>Solar_Field_Area</p></li>
+<li><p>Solar_Field_Mult</p></li>
+<li><p>system_capacity</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="tes-group">
 <h2>Tes Group<a class="headerlink" href="#tes-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Tes">
+<em class="property">class </em><code class="sig-prename descclassname">PySAM.TcstroughEmpirical.TcstroughEmpirical.</code><code class="sig-name descname">Tes</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Tes" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Tes.assign">
+<code class="sig-name descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Tes.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">Tes_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Tes.export">
+<code class="sig-name descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Tes.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Tes.E_tes_ini">
+<code class="sig-name descname">E_tes_ini</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Tes.E_tes_ini" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initial TES energy - fraction of max</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Tes.FossilFill">
+<code class="sig-name descname">FossilFill</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Tes.FossilFill" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Tes.NUMTOU">
+<code class="sig-name descname">NUMTOU</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Tes.NUMTOU" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Tes.PFSmax">
+<code class="sig-name descname">PFSmax</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Tes.PFSmax" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>MaxGrOut</p></li>
+<li><p>TurTesEffAdj</p></li>
+<li><p>TurTesOutAdj</p></li>
+<li><p>TurbEffG</p></li>
+<li><p>TurbOutG</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Tes.PTSmax">
+<code class="sig-name descname">PTSmax</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Tes.PTSmax" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>ConcFac</p></li>
+<li><p>GeoAcc</p></li>
+<li><p>HCEdust</p></li>
+<li><p>MaxGrOut</p></li>
+<li><p>MirCln</p></li>
+<li><p>MirRef</p></li>
+<li><p>SCA_aper</p></li>
+<li><p>SfInTempD</p></li>
+<li><p>SfOutTempD</p></li>
+<li><p>SfPipeHl1</p></li>
+<li><p>SfPipeHl2</p></li>
+<li><p>SfPipeHl3</p></li>
+<li><p>SfPipeHl300</p></li>
+<li><p>Solar_Field_Mult</p></li>
+<li><p>TrkTwstErr</p></li>
+<li><p>TurbEffG</p></li>
+<li><p>TurbOutG</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Tes.TSHOURS">
+<code class="sig-name descname">TSHOURS</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Tes.TSHOURS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Tes.TSLogic">
+<code class="sig-name descname">TSLogic</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Tes.TSLogic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Tes.TnkHL">
+<code class="sig-name descname">TnkHL</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Tes.TnkHL" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Tes.TurTesEffAdj">
+<code class="sig-name descname">TurTesEffAdj</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Tes.TurTesEffAdj" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>PFSmax</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Tes.TurTesOutAdj">
+<code class="sig-name descname">TurTesOutAdj</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Tes.TurTesOutAdj" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>PFSmax</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="parasitic-group">
 <h2>Parasitic Group<a class="headerlink" href="#parasitic-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Parasitic">
+<em class="property">class </em><code class="sig-prename descclassname">PySAM.TcstroughEmpirical.TcstroughEmpirical.</code><code class="sig-name descname">Parasitic</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Parasitic" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Parasitic.assign">
+<code class="sig-name descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Parasitic.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">Parasitic_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Parasitic.export">
+<code class="sig-name descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Parasitic.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Parasitic.AntiFrPar">
+<code class="sig-name descname">AntiFrPar</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Parasitic.AntiFrPar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>ChtfPar</p></li>
+<li><p>ChtfParPF</p></li>
+<li><p>ConcFac</p></li>
+<li><p>GeoAcc</p></li>
+<li><p>HCEdust</p></li>
+<li><p>MirCln</p></li>
+<li><p>MirRef</p></li>
+<li><p>SCA_aper</p></li>
+<li><p>SfInTempD</p></li>
+<li><p>SfOutTempD</p></li>
+<li><p>SfPipeHl1</p></li>
+<li><p>SfPipeHl2</p></li>
+<li><p>SfPipeHl3</p></li>
+<li><p>SfPipeHl300</p></li>
+<li><p>Solar_Field_Area</p></li>
+<li><p>TrkTwstErr</p></li>
+<li><p>TurbEffG</p></li>
+<li><p>TurbOutG</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Parasitic.BOPPar">
+<code class="sig-name descname">BOPPar</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Parasitic.BOPPar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>BOPParPF</p></li>
+<li><p>TurbOutG</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Parasitic.BOPParF0">
+<code class="sig-name descname">BOPParF0</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Parasitic.BOPParF0" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Parasitic.BOPParF1">
+<code class="sig-name descname">BOPParF1</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Parasitic.BOPParF1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Parasitic.BOPParF2">
+<code class="sig-name descname">BOPParF2</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Parasitic.BOPParF2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Parasitic.BOPParPF">
+<code class="sig-name descname">BOPParPF</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Parasitic.BOPParPF" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>BOPPar</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Parasitic.CHTFParF0">
+<code class="sig-name descname">CHTFParF0</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Parasitic.CHTFParF0" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Parasitic.CHTFParF1">
+<code class="sig-name descname">CHTFParF1</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Parasitic.CHTFParF1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Parasitic.CHTFParF2">
+<code class="sig-name descname">CHTFParF2</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Parasitic.CHTFParF2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Parasitic.ChtfPar">
+<code class="sig-name descname">ChtfPar</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Parasitic.ChtfPar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>AntiFrPar</p></li>
+</ul>
+</dd>
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>ChtfParPF</p></li>
+<li><p>ConcFac</p></li>
+<li><p>GeoAcc</p></li>
+<li><p>HCEdust</p></li>
+<li><p>MirCln</p></li>
+<li><p>MirRef</p></li>
+<li><p>SCA_aper</p></li>
+<li><p>SfInTempD</p></li>
+<li><p>SfOutTempD</p></li>
+<li><p>SfPipeHl1</p></li>
+<li><p>SfPipeHl2</p></li>
+<li><p>SfPipeHl3</p></li>
+<li><p>SfPipeHl300</p></li>
+<li><p>Solar_Field_Area</p></li>
+<li><p>TrkTwstErr</p></li>
+<li><p>TurbEffG</p></li>
+<li><p>TurbOutG</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Parasitic.ChtfParPF">
+<code class="sig-name descname">ChtfParPF</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Parasitic.ChtfParPF" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>AntiFrPar</p></li>
+<li><p>ChtfPar</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Parasitic.CtOpF">
+<code class="sig-name descname">CtOpF</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Parasitic.CtOpF" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label</p>
+<p><em>Constraints</em>: INTEGER</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Parasitic.CtPar">
+<code class="sig-name descname">CtPar</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Parasitic.CtPar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>CtParPF</p></li>
+<li><p>TurbOutG</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Parasitic.CtParF0">
+<code class="sig-name descname">CtParF0</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Parasitic.CtParF0" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Parasitic.CtParF1">
+<code class="sig-name descname">CtParF1</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Parasitic.CtParF1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Parasitic.CtParF2">
+<code class="sig-name descname">CtParF2</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Parasitic.CtParF2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Parasitic.CtParPF">
+<code class="sig-name descname">CtParPF</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Parasitic.CtParPF" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>CtPar</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Parasitic.HhtfPar">
+<code class="sig-name descname">HhtfPar</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Parasitic.HhtfPar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>HhtfParPF</p></li>
+<li><p>TurbOutG</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Parasitic.HhtfParF0">
+<code class="sig-name descname">HhtfParF0</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Parasitic.HhtfParF0" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Parasitic.HhtfParF1">
+<code class="sig-name descname">HhtfParF1</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Parasitic.HhtfParF1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Parasitic.HhtfParF2">
+<code class="sig-name descname">HhtfParF2</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Parasitic.HhtfParF2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Parasitic.HhtfParPF">
+<code class="sig-name descname">HhtfParPF</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Parasitic.HhtfParPF" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>HhtfPar</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Parasitic.HtrPar">
+<code class="sig-name descname">HtrPar</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Parasitic.HtrPar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>HtrParPF</p></li>
+<li><p>TurbOutG</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Parasitic.HtrParF0">
+<code class="sig-name descname">HtrParF0</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Parasitic.HtrParF0" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Parasitic.HtrParF1">
+<code class="sig-name descname">HtrParF1</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Parasitic.HtrParF1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Parasitic.HtrParF2">
+<code class="sig-name descname">HtrParF2</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Parasitic.HtrParF2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Parasitic.HtrParPF">
+<code class="sig-name descname">HtrParPF</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Parasitic.HtrParPF" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>HtrPar</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Parasitic.PbFixPar">
+<code class="sig-name descname">PbFixPar</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Parasitic.PbFixPar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>TurbOutG</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Parasitic.SfPar">
+<code class="sig-name descname">SfPar</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Parasitic.SfPar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>ConcFac</p></li>
+<li><p>GeoAcc</p></li>
+<li><p>HCEdust</p></li>
+<li><p>MirCln</p></li>
+<li><p>MirRef</p></li>
+<li><p>SCA_aper</p></li>
+<li><p>SfInTempD</p></li>
+<li><p>SfOutTempD</p></li>
+<li><p>SfParPF</p></li>
+<li><p>SfPipeHl1</p></li>
+<li><p>SfPipeHl2</p></li>
+<li><p>SfPipeHl3</p></li>
+<li><p>SfPipeHl300</p></li>
+<li><p>Solar_Field_Area</p></li>
+<li><p>TrkTwstErr</p></li>
+<li><p>TurbEffG</p></li>
+<li><p>TurbOutG</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Parasitic.SfParPF">
+<code class="sig-name descname">SfParPF</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Parasitic.SfParPF" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>SfPar</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="adjustmentfactors-group">
 <h2>AdjustmentFactors Group<a class="headerlink" href="#adjustmentfactors-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.AdjustmentFactors">
+<em class="property">class </em><code class="sig-prename descclassname">PySAM.TcstroughEmpirical.TcstroughEmpirical.</code><code class="sig-name descname">AdjustmentFactors</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.AdjustmentFactors" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.AdjustmentFactors.assign">
+<code class="sig-name descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.AdjustmentFactors.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.AdjustmentFactors.export">
+<code class="sig-name descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Dict<a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.AdjustmentFactors.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.AdjustmentFactors.constant">
+<code class="sig-name descname">constant</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.AdjustmentFactors.constant" title="Permalink to this definition">¶</a></dt>
+<dd><p>float</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>type</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.AdjustmentFactors.dc_constant">
+<code class="sig-name descname">dc_constant</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.AdjustmentFactors.dc_constant" title="Permalink to this definition">¶</a></dt>
+<dd><p>DC Constant loss adjustment [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.AdjustmentFactors.dc_hourly">
+<code class="sig-name descname">dc_hourly</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.AdjustmentFactors.dc_hourly" title="Permalink to this definition">¶</a></dt>
+<dd><p>DC Hourly Adjustment Factors [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.AdjustmentFactors.dc_periods">
+<code class="sig-name descname">dc_periods</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.AdjustmentFactors.dc_periods" title="Permalink to this definition">¶</a></dt>
+<dd><p>DC Period-based Adjustment Factors [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.AdjustmentFactors.hourly">
+<code class="sig-name descname">hourly</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.AdjustmentFactors.hourly" title="Permalink to this definition">¶</a></dt>
+<dd><p>AC Hourly Adjustment Factors [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.AdjustmentFactors.periods">
+<code class="sig-name descname">periods</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.AdjustmentFactors.periods" title="Permalink to this definition">¶</a></dt>
+<dd><p>AC Period-based Adjustment Factors [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.AdjustmentFactors.sf_constant">
+<code class="sig-name descname">sf_constant</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.AdjustmentFactors.sf_constant" title="Permalink to this definition">¶</a></dt>
+<dd><p>DC Constant loss adjustment [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.AdjustmentFactors.sf_hourly">
+<code class="sig-name descname">sf_hourly</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.AdjustmentFactors.sf_hourly" title="Permalink to this definition">¶</a></dt>
+<dd><p>DC Hourly Adjustment Factors [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.AdjustmentFactors.sf_periods">
+<code class="sig-name descname">sf_periods</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.AdjustmentFactors.sf_periods" title="Permalink to this definition">¶</a></dt>
+<dd><p>DC Period-based Adjustment Factors [%]</p>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="outputs-group">
 <h2>Outputs Group<a class="headerlink" href="#outputs-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs">
+<em class="property">class </em><code class="sig-prename descclassname">PySAM.TcstroughEmpirical.TcstroughEmpirical.</code><code class="sig-name descname">Outputs</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.assign">
+<code class="sig-name descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">Outputs_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.export">
+<code class="sig-name descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.AveSfTemp">
+<code class="sig-name descname">AveSfTemp</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.AveSfTemp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field HTF temperature average [C]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.ColEff">
+<code class="sig-name descname">ColEff</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.ColEff" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field collector thermal and optical efficiency</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.CosTheta">
+<code class="sig-name descname">CosTheta</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.CosTheta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field collector cosine efficiency</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.Egr">
+<code class="sig-name descname">Egr</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.Egr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cycle electrical power output (gross) [MWe]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.EgrFos">
+<code class="sig-name descname">EgrFos</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.EgrFos" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cycle electrical power output (gross, fossil share) [MWe]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.EgrSol">
+<code class="sig-name descname">EgrSol</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.EgrSol" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cycle electrical power output (gross, solar share) [MWe]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.EndLoss">
+<code class="sig-name descname">EndLoss</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.EndLoss" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field collector optical end loss</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.Enet">
+<code class="sig-name descname">Enet</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.Enet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cycle electrical power output (net) [MWe]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.Epar">
+<code class="sig-name descname">Epar</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.Epar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parasitic power total consumption [MWe]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.EparAnti">
+<code class="sig-name descname">EparAnti</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.EparAnti" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parasitic power freeze protection pump [MWe]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.EparBOP">
+<code class="sig-name descname">EparBOP</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.EparBOP" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parasitic power generation-dependent load [MWe]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.EparCHTF">
+<code class="sig-name descname">EparCHTF</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.EparCHTF" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parasitic power solar field HTF pump [MWe]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.EparCT">
+<code class="sig-name descname">EparCT</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.EparCT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parasitic power condenser operation [MWe]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.EparHhtf">
+<code class="sig-name descname">EparHhtf</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.EparHhtf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parasitic power TES and Cycle HTF pump [MWe]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.EparHtr">
+<code class="sig-name descname">EparHtr</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.EparHtr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parasitic power auxiliary heater operation [MWe]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.EparOffLine">
+<code class="sig-name descname">EparOffLine</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.EparOffLine" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parasitic power - offline total [MWe]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.EparOnLine">
+<code class="sig-name descname">EparOnLine</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.EparOnLine" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parasitic power - online total [MWe]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.EparPB">
+<code class="sig-name descname">EparPB</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.EparPB" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parasitic power fixed load [MWe]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.EparSf">
+<code class="sig-name descname">EparSf</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.EparSf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parasitic power field collector drives [MWe]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.Ets">
+<code class="sig-name descname">Ets</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.Ets" title="Permalink to this definition">¶</a></dt>
+<dd><p>TES thermal energy available [MWht]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.Ftrack">
+<code class="sig-name descname">Ftrack</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.Ftrack" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field collector fraction of time period tracking</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.IAM">
+<code class="sig-name descname">IAM</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.IAM" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field collector incidence angle modifier</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.QTsFull">
+<code class="sig-name descname">QTsFull</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.QTsFull" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cycle thermal energy dumped - TES is full [MWt]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.QTsHl">
+<code class="sig-name descname">QTsHl</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.QTsHl" title="Permalink to this definition">¶</a></dt>
+<dd><p>TES thermal losses from tank(s) [MWt]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.QTurSu">
+<code class="sig-name descname">QTurSu</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.QTurSu" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cycle thermal startup energy [MWt]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.Qdni">
+<code class="sig-name descname">Qdni</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.Qdni" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field thermal power total incident [MWt]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.Qdump">
+<code class="sig-name descname">Qdump</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.Qdump" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cycle thermal energy dumped - solar field [MWt]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.Qfts">
+<code class="sig-name descname">Qfts</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.Qfts" title="Permalink to this definition">¶</a></dt>
+<dd><p>TES thermal energy from storage [MWt]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.Qgas">
+<code class="sig-name descname">Qgas</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.Qgas" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fossil thermal power produced [MWt]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.QhtfFpHtr">
+<code class="sig-name descname">QhtfFpHtr</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.QhtfFpHtr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fossil freeze protection provided [MWt]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.QhtfFpTES">
+<code class="sig-name descname">QhtfFpTES</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.QhtfFpTES" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parasitic thermal TES freeze protection [MWt]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.QhtfFreezeProt">
+<code class="sig-name descname">QhtfFreezeProt</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.QhtfFreezeProt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parasitic thermal field freeze protection [MWt]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.Qmin">
+<code class="sig-name descname">Qmin</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.Qmin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cycle thermal energy dumped - min. load requirement [MWt]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.QnipCosTh">
+<code class="sig-name descname">QnipCosTh</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.QnipCosTh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field collector DNI-cosine product [W/m2]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.Qsf">
+<code class="sig-name descname">Qsf</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.Qsf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field thermal power total produced [MWt]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.QsfAbs">
+<code class="sig-name descname">QsfAbs</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.QsfAbs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field thermal power absorbed [MWt]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.QsfHceHL">
+<code class="sig-name descname">QsfHceHL</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.QsfHceHL" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field thermal power receiver total loss [MWt]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.QsfPipeHL">
+<code class="sig-name descname">QsfPipeHL</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.QsfPipeHL" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field thermal power pipe losses [MWt]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.QsfWarmup">
+<code class="sig-name descname">QsfWarmup</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.QsfWarmup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field HTF energy inertial (consumed) [MWht]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.Qsfnipcosth">
+<code class="sig-name descname">Qsfnipcosth</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.Qsfnipcosth" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field thermal power incident after cosine [MWt]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.Qtpb">
+<code class="sig-name descname">Qtpb</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.Qtpb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cycle thermal power input [MWt]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.Qtts">
+<code class="sig-name descname">Qtts</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.Qtts" title="Permalink to this definition">¶</a></dt>
+<dd><p>TES thermal energy into storage [MWt]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.RecHl">
+<code class="sig-name descname">RecHl</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.RecHl" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field thermal power receiver heat loss [kJ/hr-m2]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.RowShadow">
+<code class="sig-name descname">RowShadow</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.RowShadow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field collector row shadowing loss</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.SfMassFlow">
+<code class="sig-name descname">SfMassFlow</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.SfMassFlow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field HTF mass flow rate total [kg/s]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.SfTo">
+<code class="sig-name descname">SfTo</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.SfTo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field HTF temperature hot header outlet [C]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.Theta">
+<code class="sig-name descname">Theta</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.Theta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field collector solar incidence angle [deg]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.TrackAngle">
+<code class="sig-name descname">TrackAngle</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.TrackAngle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field collector tracking angle [deg]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.annual_W_cycle_gross">
+<code class="sig-name descname">annual_W_cycle_gross</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.annual_W_cycle_gross" title="Permalink to this definition">¶</a></dt>
+<dd><p>Electrical source - Power cycle gross output [kWh]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.annual_energy">
+<code class="sig-name descname">annual_energy</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.annual_energy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Annual energy [kWh]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.annual_fuel_usage">
+<code class="sig-name descname">annual_fuel_usage</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.annual_fuel_usage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Annual fuel usage [kWh]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.beam">
+<code class="sig-name descname">beam</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.beam" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resource Beam normal irradiance [W/m2]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.capacity_factor">
+<code class="sig-name descname">capacity_factor</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.capacity_factor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Capacity factor [%]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.conversion_factor">
+<code class="sig-name descname">conversion_factor</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.conversion_factor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gross to Net Conversion Factor [%]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.gen">
+<code class="sig-name descname">gen</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.gen" title="Permalink to this definition">¶</a></dt>
+<dd><p>System power generated [kW]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.hour">
+<code class="sig-name descname">hour</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.hour" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resource Hour of Day</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.kwh_per_kw">
+<code class="sig-name descname">kwh_per_kw</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.kwh_per_kw" title="Permalink to this definition">¶</a></dt>
+<dd><p>First year kWh/kW [kWh/kW]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.month">
+<code class="sig-name descname">month</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.month" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resource Month</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.monthly_energy">
+<code class="sig-name descname">monthly_energy</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.monthly_energy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Monthly energy [kWh]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.o_SfTi">
+<code class="sig-name descname">o_SfTi</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.o_SfTi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field HTF temperature cold header inlet [C]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.pres">
+<code class="sig-name descname">pres</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.pres" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resource Pressure [mbar]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.solazi">
+<code class="sig-name descname">solazi</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.solazi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resource Solar Azimuth [deg]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.solzen">
+<code class="sig-name descname">solzen</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.solzen" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resource Solar Zenith [deg]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.system_heat_rate">
+<code class="sig-name descname">system_heat_rate</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.system_heat_rate" title="Permalink to this definition">¶</a></dt>
+<dd><p>System heat rate [MMBtu/MWh]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.system_use_lifetime_output">
+<code class="sig-name descname">system_use_lifetime_output</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.system_use_lifetime_output" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use lifetime output [0/1]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.tdry">
+<code class="sig-name descname">tdry</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.tdry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resource Dry bulb temperature [C]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.tou_value">
+<code class="sig-name descname">tou_value</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.tou_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resource time-of-use value</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.twet">
+<code class="sig-name descname">twet</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.twet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resource Wet bulb temperature [C]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.wspd">
+<code class="sig-name descname">wspd</code><a class="headerlink" href="#PySAM.TcstroughEmpirical.TcstroughEmpirical.Outputs.wspd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resource Wind Speed [m/s]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 </div>
 
@@ -136,12 +3095,15 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
-        <li class="nav-item nav-item-0"><a href="../index.html">PySAM 1.2 documentation</a> &#187;</li> 
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">PySAM 2.0 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2019, NREL.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.3.
     </div>
   </body>
 </html>

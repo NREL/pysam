@@ -5,22 +5,22 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Welcome to PySAM’s documentation! &#8212; PySAM 1.2 documentation</title>
+    <title>Welcome to NREL-PySAM’s documentation! &#8212; PySAM 2.0 documentation</title>
     <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
-    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/language_data.js"></script>
-    <script type="text/javascript" src="_static/bizstyle.js"></script>
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="_static/bizstyle.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="PySSC" href="PySSC.html" />
+    <link rel="next" title="Modules" href="Models.html" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <!--[if lt IE 9]>
-    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <script src="_static/css3-mediaqueries.js"></script>
     <![endif]-->
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
@@ -30,27 +30,34 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="PySSC.html" title="PySSC"
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="Models.html" title="Modules"
              accesskey="N">next</a> |</li>
-        <li class="nav-item nav-item-0"><a href="#">PySAM 1.2 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="#">PySAM 2.0 documentation</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h3><a href="#">Table of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Welcome to PySAM’s documentation!</a></li>
-<li><a class="reference internal" href="#getting-started">Getting Started</a></li>
+<li><a class="reference internal" href="#">Welcome to NREL-PySAM’s documentation!</a></li>
+<li><a class="reference internal" href="#version-2-0-and-upgrading-from-older-versions">Version 2.0 and Upgrading from Older Versions</a></li>
+<li><a class="reference internal" href="#getting-started">Getting Started</a><ul>
+<li><a class="reference internal" href="#installation">Installation</a></li>
+<li><a class="reference internal" href="#writing-your-first-pysam-script">Writing Your First PySAM Script</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#available-models">Available Models</a></li>
 <li><a class="reference internal" href="#sam-configurations">SAM Configurations</a></li>
-<li><a class="reference internal" href="#importing-a-sam-gui-case">Importing a SAM GUI Case</a></li>
 <li><a class="reference internal" href="#pysam-documentation-pages">PySAM Documentation Pages</a></li>
 <li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
 </ul>
 
   <h4>Next topic</h4>
-  <p class="topless"><a href="PySSC.html"
-                        title="next chapter">PySSC</a></p>
+  <p class="topless"><a href="Models.html"
+                        title="next chapter">Modules</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -59,15 +66,15 @@
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
 
@@ -76,9 +83,9 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="welcome-to-pysam-s-documentation">
-<h1>Welcome to PySAM’s documentation!<a class="headerlink" href="#welcome-to-pysam-s-documentation" title="Permalink to this headline">¶</a></h1>
-<p>PySAM is a wrapper for the National Renewable Energy Laboratory’s <a class="reference external" href="http://sam.nrel.gov">System Advisor Model</a> (SAM).</p>
+  <div class="section" id="welcome-to-nrel-pysam-s-documentation">
+<h1>Welcome to NREL-PySAM’s documentation!<a class="headerlink" href="#welcome-to-nrel-pysam-s-documentation" title="Permalink to this headline">¶</a></h1>
+<p>NREL-PySAM is a wrapper for the National Renewable Energy Laboratory’s <a class="reference external" href="http://sam.nrel.gov">System Advisor Model</a> (SAM), a simulator for renewable energy, not to be confused with <a class="reference external" href="https://pysam.readthedocs.io/en/latest/api.html">pysam</a>, which is for reading sequence alignment files often used in genetics.</p>
 <p>SAM is a performance and financial model designed to facilitate decision making for people involved in the renewable energy industry:</p>
 <ul class="simple">
 <li><p>Project managers and engineers</p></li>
@@ -88,69 +95,82 @@
 </ul>
 <p><a class="reference external" href="http://www.github.com/nrel/sam">SAM</a> is open-source. PySAM provides a native Python interface for the models found in SAM Simulation Core, <a class="reference external" href="http://www.github.com/nrel/ssc">SSC</a>.</p>
 </div>
+<div class="section" id="version-2-0-and-upgrading-from-older-versions">
+<h1>Version 2.0 and Upgrading from Older Versions<a class="headerlink" href="#version-2-0-and-upgrading-from-older-versions" title="Permalink to this headline">¶</a></h1>
+<p>Between major version changes, in addition to new features, modules and bug fixes, the group to which a variable belongs may change.
+The groups should stabilize after the initial releases.
+Please see <a class="reference internal" href="Version.html"><span class="doc">Version 2.0.2</span></a> for more details.</p>
+</div>
 <div class="section" id="getting-started">
 <h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
-<p>PySAM is available on PyPi and Anaconda (Windows and MacOSX only) as NREL-PySAM. NREL-PySAM-stubs is the stub file package providing autocompletion features.</p>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>For Python 3.5 to 3.8, as NREL-PySAM is available on PyPi. It is also available on Anaconda for MacOSX up to 3.8 and on Windows up to 3.7. NREL-PySAM-stubs is the stub file package providing auto-completion features.</p>
 <p>To install from PyPi:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">NREL</span><span class="o">-</span><span class="n">PySAM</span>
-<span class="n">pip</span> <span class="n">install</span> <span class="n">NREL</span><span class="o">-</span><span class="n">PySAM</span><span class="o">-</span><span class="n">stubs</span>
 </pre></div>
 </div>
 <p>To install from Anaconda, the NREL channel needs to be appended:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">config</span> <span class="o">--</span><span class="n">append</span> <span class="n">channels</span> <span class="n">NREL</span>
-<span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">nrel</span> <span class="n">nrel</span><span class="o">-</span><span class="n">pysam</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">config</span> <span class="o">--</span><span class="n">env</span> <span class="o">--</span><span class="n">append</span> <span class="n">channels</span> <span class="n">nrel</span>
+<span class="n">conda</span> <span class="n">install</span> <span class="n">nrel</span><span class="o">-</span><span class="n">pysam</span>
 </pre></div>
 </div>
+</div>
+<div class="section" id="writing-your-first-pysam-script">
+<h2>Writing Your First PySAM Script<a class="headerlink" href="#writing-your-first-pysam-script" title="Permalink to this headline">¶</a></h2>
+<p>Before you write your first PySAM script it really helps to familiarize
+yourself with SAM.  If you are not already familiar with SAM, it is recommended
+you install it, and run a simulation of interest to you.  Though SAM is one
+program, it is made up of a number of simulation modules, that are run
+sequentially by the SAM graphical user interface.  The particular modules that
+are run are determined by the type of simulation you are doing.  In general
+technology models are followed by financial models.  For example,
+if you are running a PVWatts Distributed Commercial simulation, the modules in
+the order they should be run are
+pvwattsv7, battwatts, utilityrate5, and cashloan.  To find the modules you need look at <a class="reference internal" href="Configs.html"><span class="doc">Configuration Names and SSC Models</span></a> and search for your simulation type.</p>
 <p>Each technology and financial model is its own module, which can be imported by:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">PySAM.</span><span class="o">&lt;</span><span class="n">PySAM</span> <span class="n">Module</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <p>The original Python SDK, PySSC, is bundled, and can be imported by:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">PySAM.PySSC</span> <span class="k">import</span> <span class="n">PySSC</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">PySAM.PySSC</span> <span class="kn">import</span> <span class="n">PySSC</span>
 </pre></div>
 </div>
-<p>There are three methods to create a new instance of a PySAM module. Using <code class="docutils literal notranslate"><span class="pre">default</span></code> populates the newclass’ attributes with default values specific to a <code class="docutils literal notranslate"><span class="pre">config</span></code>. Each technology-financialconfiguration corresponds to a SAM GUI configuration. Using <code class="docutils literal notranslate"><span class="pre">new</span></code> creates an instance with empty attributes. The <code class="docutils literal notranslate"><span class="pre">wrap</span></code> function allows compatibility with PySSC, for details, refer to <a class="reference internal" href="PySSC.html"><span class="doc">PySSC</span></a>.</p>
-<p>Create a new empty model:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">PySAM</span><span class="o">.&lt;</span><span class="n">PySAM</span> <span class="n">Module</span><span class="o">&gt;.</span><span class="n">new</span><span class="p">()</span>
-</pre></div>
-</div>
-<p>Create a new model with values assigned from defaults:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">PySAM</span><span class="o">.&lt;</span><span class="n">PySAM</span> <span class="n">Module</span><span class="o">&gt;.</span><span class="n">default</span><span class="p">(</span><span class="n">string</span> <span class="n">configuration</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Built-in documentation is also available with help.</p>
-<p>View parameter groups per class and available default values:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">help</span><span class="p">(</span><span class="n">PySAM</span><span class="o">.&lt;</span><span class="n">PySAM</span> <span class="n">Module</span><span class="o">&gt;</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>View descriptions of parameters in a group:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">help</span><span class="p">(</span><span class="n">PySAM</span><span class="o">.&lt;</span><span class="n">PySAM</span> <span class="n">Module</span><span class="o">&gt;.&lt;</span><span class="n">group</span><span class="o">&gt;</span><span class="p">)</span>
-</pre></div>
+<p>For examples of using PySAM modules, see <a class="reference internal" href="Examples.html"><span class="doc">Examples</span></a></p>
 </div>
 </div>
 <div class="section" id="available-models">
 <h1>Available Models<a class="headerlink" href="#available-models" title="Permalink to this headline">¶</a></h1>
-<p>For a table of available models, see <a class="reference internal" href="Models.html"><span class="doc">Module Names and Descriptions</span></a>, or refer to <a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a>.</p>
+<p>For a table of available models, see <a class="reference internal" href="Models.html"><span class="doc">Modules</span></a>, or refer to <a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a>.</p>
 </div>
 <div class="section" id="sam-configurations">
 <h1>SAM Configurations<a class="headerlink" href="#sam-configurations" title="Permalink to this headline">¶</a></h1>
 <p>For a table of SAM configurations and the sequence of models required to run them, see <a class="reference internal" href="Configs.html"><span class="doc">Configuration Names and SSC Models</span></a>.</p>
 </div>
-<div class="section" id="importing-a-sam-gui-case">
-<h1>Importing a SAM GUI Case<a class="headerlink" href="#importing-a-sam-gui-case" title="Permalink to this headline">¶</a></h1>
-<p>For an example of how to import the modules and variables from a SAM GUI Case, see <a class="reference internal" href="Import.html"><span class="doc">To import a case from the SAM GUI</span></a>.</p>
-</div>
 <div class="section" id="pysam-documentation-pages">
 <h1>PySAM Documentation Pages<a class="headerlink" href="#pysam-documentation-pages" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="PySSC.html">PySSC</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Models.html">Module Names and Descriptions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Models.html">Modules</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Models.html#system-simulation-module-names-and-descriptions">System Simulation Module Names and Descriptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Models.html#other-modules-names-and-descriptions">Other Modules Names and Descriptions</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="Configs.html">Configuration Names and SSC Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tools.html">Battery Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tools.html#resource-tools">Resource Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PySSC.html">PySSC</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Examples.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Examples.html#accessing-variables">Accessing Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Examples.html#creating-a-simulation-from-multiple-modules">Creating a Simulation from Multiple Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Examples.html#importing-a-sam-gui-case">Importing a SAM GUI Case</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Examples.html#sizing-a-pv-battery-system-with-reopt">Sizing a PV + Battery system with ReOpt</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="Import.html">To import a case from the SAM GUI</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="Import.html#export-from-sam-gui">1: Export from SAM GUI</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Import.html#create-each-model-by-wrapping-the-data">2: Create each model by wrapping the data</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Import.html#make-a-sequence-of-models">3: Make a sequence of models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Import.html#executing-a-sequence-of-models">3: Executing a sequence of models</a></li>
 </ul>
 </li>
 </ul>
@@ -178,14 +198,17 @@
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="PySSC.html" title="PySSC"
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="Models.html" title="Modules"
              >next</a> |</li>
-        <li class="nav-item nav-item-0"><a href="#">PySAM 1.2 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="#">PySAM 2.0 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2019, NREL.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.3.
     </div>
   </body>
 </html>

@@ -5,21 +5,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Battwatts Module &#8212; PySAM 1.2 documentation</title>
+    <title>Battwatts &#8212; PySAM 2.0 documentation</title>
     <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/language_data.js"></script>
-    <script type="text/javascript" src="../_static/bizstyle.js"></script>
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/bizstyle.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <!--[if lt IE 9]>
-    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <script src="_static/css3-mediaqueries.js"></script>
     <![endif]-->
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
@@ -28,19 +28,21 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li class="nav-item nav-item-0"><a href="../index.html">PySAM 1.2 documentation</a> &#187;</li> 
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">PySAM 2.0 documentation</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h3><a href="../index.html">Table of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Battwatts Module</a><ul>
+<li><a class="reference internal" href="#">Battwatts</a><ul>
 <li><a class="reference internal" href="#creating-an-instance">Creating an Instance</a></li>
 <li><a class="reference internal" href="#functions">Functions</a></li>
-<li><a class="reference internal" href="#batterymodelsimple-group">BatteryModelSimple Group</a></li>
-<li><a class="reference internal" href="#common-group">Common Group</a></li>
-<li><a class="reference internal" href="#electricloadother-group">ElectricLoadOther Group</a></li>
+<li><a class="reference internal" href="#lifetime-group">Lifetime Group</a></li>
+<li><a class="reference internal" href="#battery-group">Battery Group</a></li>
 <li><a class="reference internal" href="#outputs-group">Outputs Group</a></li>
 </ul>
 </li>
@@ -54,15 +56,15 @@
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
 
@@ -71,28 +73,1072 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="battwatts-module">
-<span id="battwatts"></span><h1>Battwatts Module<a class="headerlink" href="#battwatts-module" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="battwatts">
+<span id="id1"></span><h1>Battwatts<a class="headerlink" href="#battwatts" title="Permalink to this headline">¶</a></h1>
 <p>Wrapper for SAM Simulation Core model: <a class="reference external" href="https://github.com/NREL/ssc/blob/develop/ssc/cmod_battwatts.cpp">cmod_battwatts.cpp</a></p>
 <div class="section" id="creating-an-instance">
 <h2>Creating an Instance<a class="headerlink" href="#creating-an-instance" title="Permalink to this headline">¶</a></h2>
-<p>There are three methods to create a new instance of a PySAM module. Using <code class="docutils literal notranslate"><span class="pre">default</span></code> populates the newclass’ attributes with default values specific to a <code class="docutils literal notranslate"><span class="pre">config</span></code>. Each technology-financialconfiguration corresponds to a SAM GUI configuration. Using <code class="docutils literal notranslate"><span class="pre">new</span></code> creates an instance with empty attributes. The <code class="docutils literal notranslate"><span class="pre">wrap</span></code> function allows compatibility with PySSC, for details, refer to <span class="xref std std-doc">PySSC</span>.</p>
+<p>There are three methods to create a new instance of a PySAM module. Using <code class="docutils literal notranslate"><span class="pre">default</span></code> populates the newclass’ attributes with default values specific to a <code class="docutils literal notranslate"><span class="pre">config</span></code>. Each technology-financialconfiguration corresponds to a SAM GUI configuration. Using <code class="docutils literal notranslate"><span class="pre">new</span></code> creates an instance with empty attributes. The <code class="docutils literal notranslate"><span class="pre">wrap</span></code> function allows compatibility with PySSC, for details, refer to <a class="reference internal" href="../PySSC.html"><span class="doc">PySSC</span></a>.</p>
 <p><strong>Battwatts model description</strong></p>
+<span class="target" id="module-PySAM.Battwatts"></span><p>Simplified battery storage model</p>
+<dl class="function">
+<dt id="PySAM.Battwatts.default">
+<code class="sig-prename descclassname">PySAM.Battwatts.</code><code class="sig-name descname">default</code><span class="sig-paren">(</span><em class="sig-param">config</em><span class="sig-paren">)</span> &#x2192; Battwatts<a class="headerlink" href="#PySAM.Battwatts.default" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use financial config-specific default attributes
+config options:</p>
+<ul class="simple">
+<li><p>“PVWattsCommercial”</p></li>
+<li><p>“PVWattsHostDeveloper”</p></li>
+<li><p>“PVWattsResidential”</p></li>
+<li><p>“PVWattsThirdParty”</p></li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="PySAM.Battwatts.from_existing">
+<code class="sig-prename descclassname">PySAM.Battwatts.</code><code class="sig-name descname">from_existing</code><span class="sig-paren">(</span><em class="sig-param">data</em>, <em class="sig-param">optional config</em><span class="sig-paren">)</span> &#x2192; Battwatts<a class="headerlink" href="#PySAM.Battwatts.from_existing" title="Permalink to this definition">¶</a></dt>
+<dd><p>Share underlying data with an existing PySAM class. If config provided, default attributes are loaded otherwise.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="PySAM.Battwatts.new">
+<code class="sig-prename descclassname">PySAM.Battwatts.</code><code class="sig-name descname">new</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Battwatts<a class="headerlink" href="#PySAM.Battwatts.new" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="PySAM.Battwatts.wrap">
+<code class="sig-prename descclassname">PySAM.Battwatts.</code><code class="sig-name descname">wrap</code><span class="sig-paren">(</span><em class="sig-param">ssc_data_t</em><span class="sig-paren">)</span> &#x2192; Battwatts<a class="headerlink" href="#PySAM.Battwatts.wrap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use existing PySSC data</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Do not call PySSC.data_free on the ssc_data_t provided to <code class="docutils literal notranslate"><span class="pre">wrap</span></code></p>
+</div>
+</dd></dl>
+
 </div>
 <div class="section" id="functions">
 <h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.Battwatts.Battwatts">
+<em class="property">class </em><code class="sig-prename descclassname">PySAM.Battwatts.</code><code class="sig-name descname">Battwatts</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class contains all the variable information for running a simulation. Variables are grouped together in the subclasses as properties. If property assignments are the wrong type, an error is thrown.</p>
+<dl class="method">
+<dt id="PySAM.Battwatts.Battwatts.assign">
+<code class="sig-name descname">assign</code><span class="sig-paren">(</span><em class="sig-param">dict</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Battwatts.Battwatts.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from nested dictionary, except for Outputs</p>
+<p><code class="docutils literal notranslate"><span class="pre">nested_dict</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">'Lifetime':</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...},</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.Battwatts.Battwatts.execute">
+<code class="sig-name descname">execute</code><span class="sig-paren">(</span><em class="sig-param">int verbosity</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Battwatts.Battwatts.execute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute simulation with verbosity level 0 (default) or 1</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.Battwatts.Battwatts.export">
+<code class="sig-name descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.Battwatts.Battwatts.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into nested dictionary</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.Battwatts.Battwatts.value">
+<code class="sig-name descname">value</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">optional value</em><span class="sig-paren">)</span> &#x2192; Union[None, float, dict, sequence, str]<a class="headerlink" href="#PySAM.Battwatts.Battwatts.value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set by name a value in any of the variable groups.</p>
+</dd></dl>
+
+</dd></dl>
+
 </div>
-<div class="section" id="batterymodelsimple-group">
-<h2>BatteryModelSimple Group<a class="headerlink" href="#batterymodelsimple-group" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="lifetime-group">
+<h2>Lifetime Group<a class="headerlink" href="#lifetime-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.Battwatts.Battwatts.Lifetime">
+<em class="property">class </em><code class="sig-prename descclassname">PySAM.Battwatts.Battwatts.</code><code class="sig-name descname">Lifetime</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Lifetime" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.Battwatts.Battwatts.Lifetime.assign">
+<code class="sig-name descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Battwatts.Battwatts.Lifetime.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">Lifetime_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.Battwatts.Battwatts.Lifetime.export">
+<code class="sig-name descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.Battwatts.Battwatts.Lifetime.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Lifetime.analysis_period">
+<code class="sig-name descname">analysis_period</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Lifetime.analysis_period" title="Permalink to this definition">¶</a></dt>
+<dd><p>Lifetime analysis period [years]</p>
+<p><em>Info</em>: The number of years in the simulation</p>
+<p><em>Required</em>: True if system_use_lifetime_output=1</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Lifetime.system_use_lifetime_output">
+<code class="sig-name descname">system_use_lifetime_output</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Lifetime.system_use_lifetime_output" title="Permalink to this definition">¶</a></dt>
+<dd><p>PV lifetime simulation [0/1]</p>
+<p><em>Options</em>: 0=SingleYearRepeated,1=RunEveryYear</p>
+<p><em>Constraints</em>: BOOLEAN</p>
+<p><em>Required</em>: If not provided, assumed to be 0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
-<div class="section" id="common-group">
-<h2>Common Group<a class="headerlink" href="#common-group" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="electricloadother-group">
-<h2>ElectricLoadOther Group<a class="headerlink" href="#electricloadother-group" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="battery-group">
+<h2>Battery Group<a class="headerlink" href="#battery-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.Battwatts.Battwatts.Battery">
+<em class="property">class </em><code class="sig-prename descclassname">PySAM.Battwatts.Battwatts.</code><code class="sig-name descname">Battery</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Battery" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.Battwatts.Battwatts.Battery.assign">
+<code class="sig-name descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Battwatts.Battwatts.Battery.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">Battery_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.Battwatts.Battwatts.Battery.export">
+<code class="sig-name descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.Battwatts.Battwatts.Battery.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Battery.ac">
+<code class="sig-name descname">ac</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Battery.ac" title="Permalink to this definition">¶</a></dt>
+<dd><p>AC inverter power [W]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Battery.batt_custom_dispatch">
+<code class="sig-name descname">batt_custom_dispatch</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Battery.batt_custom_dispatch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Battery Dispatch [kW]</p>
+<p><em>Required</em>: True if batt_simple_dispatch=2</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Battery.batt_simple_chemistry">
+<code class="sig-name descname">batt_simple_chemistry</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Battery.batt_simple_chemistry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Battery Chemistry [0=LeadAcid,1=Li-ion/2]</p>
+<p><em>Required</em>: If not provided, assumed to be 0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Battery.batt_simple_dispatch">
+<code class="sig-name descname">batt_simple_dispatch</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Battery.batt_simple_dispatch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Battery Dispatch [0=PeakShavingLookAhead,1=PeakShavingLookBehind,2=Custom]</p>
+<p><em>Required</em>: If not provided, assumed to be 0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Battery.batt_simple_enable">
+<code class="sig-name descname">batt_simple_enable</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Battery.batt_simple_enable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Enable Battery [0/1]</p>
+<p><em>Constraints</em>: BOOLEAN</p>
+<p><em>Required</em>: If not provided, assumed to be 0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Battery.batt_simple_kw">
+<code class="sig-name descname">batt_simple_kw</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Battery.batt_simple_kw" title="Permalink to this definition">¶</a></dt>
+<dd><p>Battery Power [kW]</p>
+<p><em>Required</em>: If not provided, assumed to be 0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Battery.batt_simple_kwh">
+<code class="sig-name descname">batt_simple_kwh</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Battery.batt_simple_kwh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Battery Capacity [kWh]</p>
+<p><em>Required</em>: If not provided, assumed to be 0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Battery.batt_simple_meter_position">
+<code class="sig-name descname">batt_simple_meter_position</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Battery.batt_simple_meter_position" title="Permalink to this definition">¶</a></dt>
+<dd><p>Battery Meter Position [0=BehindTheMeter,1=FrontOfMeter]</p>
+<p><em>Required</em>: If not provided, assumed to be 0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Battery.crit_load">
+<code class="sig-name descname">crit_load</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Battery.crit_load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Critical electricity load (year 1) [kW]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Battery.dc">
+<code class="sig-name descname">dc</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Battery.dc" title="Permalink to this definition">¶</a></dt>
+<dd><p>DC array power [W]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Battery.inverter_efficiency">
+<code class="sig-name descname">inverter_efficiency</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Battery.inverter_efficiency" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inverter Efficiency [%]</p>
+<p><em>Constraints</em>: MIN=0,MAX=100</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Battery.load">
+<code class="sig-name descname">load</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Battery.load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Electricity load (year 1) [kW]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="outputs-group">
 <h2>Outputs Group<a class="headerlink" href="#outputs-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.Battwatts.Battwatts.Outputs">
+<em class="property">class </em><code class="sig-prename descclassname">PySAM.Battwatts.Battwatts.</code><code class="sig-name descname">Outputs</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Outputs" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.Battwatts.Battwatts.Outputs.assign">
+<code class="sig-name descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.Battwatts.Battwatts.Outputs.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">Outputs_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.Battwatts.Battwatts.Outputs.export">
+<code class="sig-name descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.Battwatts.Battwatts.Outputs.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Outputs.annual_export_to_grid_energy">
+<code class="sig-name descname">annual_export_to_grid_energy</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Outputs.annual_export_to_grid_energy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Annual energy exported to grid [kWh]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Outputs.annual_import_to_grid_energy">
+<code class="sig-name descname">annual_import_to_grid_energy</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Outputs.annual_import_to_grid_energy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Annual energy imported from grid [kWh]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Outputs.average_battery_conversion_efficiency">
+<code class="sig-name descname">average_battery_conversion_efficiency</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Outputs.average_battery_conversion_efficiency" title="Permalink to this definition">¶</a></dt>
+<dd><p>Battery average cycle conversion efficiency [%]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Outputs.average_battery_roundtrip_efficiency">
+<code class="sig-name descname">average_battery_roundtrip_efficiency</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Outputs.average_battery_roundtrip_efficiency" title="Permalink to this definition">¶</a></dt>
+<dd><p>Battery average roundtrip efficiency [%]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Outputs.avg_critical_load">
+<code class="sig-name descname">avg_critical_load</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Outputs.avg_critical_load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Average critical load met for resilience [kWh]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Outputs.batt_DOD">
+<code class="sig-name descname">batt_DOD</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Outputs.batt_DOD" title="Permalink to this definition">¶</a></dt>
+<dd><p>Battery cycle depth of discharge [%]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Outputs.batt_DOD_cycle_average">
+<code class="sig-name descname">batt_DOD_cycle_average</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Outputs.batt_DOD_cycle_average" title="Permalink to this definition">¶</a></dt>
+<dd><p>Battery average cycle DOD</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Outputs.batt_I">
+<code class="sig-name descname">batt_I</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Outputs.batt_I" title="Permalink to this definition">¶</a></dt>
+<dd><p>Battery current [A]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Outputs.batt_SOC">
+<code class="sig-name descname">batt_SOC</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Outputs.batt_SOC" title="Permalink to this definition">¶</a></dt>
+<dd><p>Battery state of charge [%]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Outputs.batt_annual_charge_energy">
+<code class="sig-name descname">batt_annual_charge_energy</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Outputs.batt_annual_charge_energy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Battery annual energy charged [kWh]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Outputs.batt_annual_charge_from_grid">
+<code class="sig-name descname">batt_annual_charge_from_grid</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Outputs.batt_annual_charge_from_grid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Battery annual energy charged from grid [kWh]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Outputs.batt_annual_charge_from_pv">
+<code class="sig-name descname">batt_annual_charge_from_pv</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Outputs.batt_annual_charge_from_pv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Battery annual energy charged from PV [kWh]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Outputs.batt_annual_discharge_energy">
+<code class="sig-name descname">batt_annual_discharge_energy</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Outputs.batt_annual_discharge_energy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Battery annual energy discharged [kWh]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Outputs.batt_annual_energy_loss">
+<code class="sig-name descname">batt_annual_energy_loss</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Outputs.batt_annual_energy_loss" title="Permalink to this definition">¶</a></dt>
+<dd><p>Battery annual energy loss [kWh]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Outputs.batt_annual_energy_system_loss">
+<code class="sig-name descname">batt_annual_energy_system_loss</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Outputs.batt_annual_energy_system_loss" title="Permalink to this definition">¶</a></dt>
+<dd><p>Battery annual system energy loss [kWh]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Outputs.batt_bank_installed_capacity">
+<code class="sig-name descname">batt_bank_installed_capacity</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Outputs.batt_bank_installed_capacity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Battery bank installed capacity [kWh]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Outputs.batt_bank_replacement">
+<code class="sig-name descname">batt_bank_replacement</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Outputs.batt_bank_replacement" title="Permalink to this definition">¶</a></dt>
+<dd><p>Battery bank replacements per year [number/year]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Outputs.batt_capacity_percent">
+<code class="sig-name descname">batt_capacity_percent</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Outputs.batt_capacity_percent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Battery relative capacity to nameplate [%]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Outputs.batt_capacity_percent_calendar">
+<code class="sig-name descname">batt_capacity_percent_calendar</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Outputs.batt_capacity_percent_calendar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Battery relative capacity to nameplate (calendar) [%]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Outputs.batt_capacity_percent_cycle">
+<code class="sig-name descname">batt_capacity_percent_cycle</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Outputs.batt_capacity_percent_cycle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Battery relative capacity to nameplate (cycling) [%]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Outputs.batt_capacity_thermal_percent">
+<code class="sig-name descname">batt_capacity_thermal_percent</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Outputs.batt_capacity_thermal_percent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Battery capacity percent for temperature [%]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Outputs.batt_conversion_loss">
+<code class="sig-name descname">batt_conversion_loss</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Outputs.batt_conversion_loss" title="Permalink to this definition">¶</a></dt>
+<dd><p>Electricity loss in battery power electronics [kW]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Outputs.batt_cost_to_cycle">
+<code class="sig-name descname">batt_cost_to_cycle</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Outputs.batt_cost_to_cycle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Battery computed cost to cycle [$/cycle]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Outputs.batt_cycles">
+<code class="sig-name descname">batt_cycles</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Outputs.batt_cycles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Battery number of cycles</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Outputs.batt_dispatch_sched">
+<code class="sig-name descname">batt_dispatch_sched</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Outputs.batt_dispatch_sched" title="Permalink to this definition">¶</a></dt>
+<dd><p>Battery dispatch schedule</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Outputs.batt_power">
+<code class="sig-name descname">batt_power</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Outputs.batt_power" title="Permalink to this definition">¶</a></dt>
+<dd><p>Electricity to/from battery [kW]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Outputs.batt_power_target">
+<code class="sig-name descname">batt_power_target</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Outputs.batt_power_target" title="Permalink to this definition">¶</a></dt>
+<dd><p>Electricity battery power target for automated dispatch [kW]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Outputs.batt_pv_charge_percent">
+<code class="sig-name descname">batt_pv_charge_percent</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Outputs.batt_pv_charge_percent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Battery percent energy charged from PV [%]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Outputs.batt_q0">
+<code class="sig-name descname">batt_q0</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Outputs.batt_q0" title="Permalink to this definition">¶</a></dt>
+<dd><p>Battery total charge [Ah]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Outputs.batt_q1">
+<code class="sig-name descname">batt_q1</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Outputs.batt_q1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Battery available charge [Ah]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Outputs.batt_q2">
+<code class="sig-name descname">batt_q2</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Outputs.batt_q2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Battery bound charge [Ah]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Outputs.batt_qmax">
+<code class="sig-name descname">batt_qmax</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Outputs.batt_qmax" title="Permalink to this definition">¶</a></dt>
+<dd><p>Battery maximum charge with degradation [Ah]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Outputs.batt_qmaxI">
+<code class="sig-name descname">batt_qmaxI</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Outputs.batt_qmaxI" title="Permalink to this definition">¶</a></dt>
+<dd><p>Battery maximum capacity at current [Ah]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Outputs.batt_qmax_thermal">
+<code class="sig-name descname">batt_qmax_thermal</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Outputs.batt_qmax_thermal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Battery maximum charge at temperature [Ah]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Outputs.batt_revenue_charge">
+<code class="sig-name descname">batt_revenue_charge</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Outputs.batt_revenue_charge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Revenue to charge from system [$/kWh]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Outputs.batt_revenue_clipcharge">
+<code class="sig-name descname">batt_revenue_clipcharge</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Outputs.batt_revenue_clipcharge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Revenue to charge from clipped [$/kWh]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Outputs.batt_revenue_discharge">
+<code class="sig-name descname">batt_revenue_discharge</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Outputs.batt_revenue_discharge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Revenue to discharge [$/kWh]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Outputs.batt_revenue_gridcharge">
+<code class="sig-name descname">batt_revenue_gridcharge</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Outputs.batt_revenue_gridcharge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Revenue to charge from grid [$/kWh]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Outputs.batt_system_loss">
+<code class="sig-name descname">batt_system_loss</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Outputs.batt_system_loss" title="Permalink to this definition">¶</a></dt>
+<dd><p>Electricity loss from battery ancillary equipment [kW]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Outputs.batt_temperature">
+<code class="sig-name descname">batt_temperature</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Outputs.batt_temperature" title="Permalink to this definition">¶</a></dt>
+<dd><p>Battery temperature [C]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Outputs.batt_to_grid">
+<code class="sig-name descname">batt_to_grid</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Outputs.batt_to_grid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Electricity to grid from battery [kW]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Outputs.batt_to_load">
+<code class="sig-name descname">batt_to_load</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Outputs.batt_to_load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Electricity to load from battery [kW]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Outputs.batt_voltage">
+<code class="sig-name descname">batt_voltage</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Outputs.batt_voltage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Battery voltage [V]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Outputs.batt_voltage_cell">
+<code class="sig-name descname">batt_voltage_cell</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Outputs.batt_voltage_cell" title="Permalink to this definition">¶</a></dt>
+<dd><p>Battery cell voltage [V]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Outputs.cdf_of_surviving">
+<code class="sig-name descname">cdf_of_surviving</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Outputs.cdf_of_surviving" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cumulative probabilities of autonomous hours for resilience</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Outputs.fuelcell_to_batt">
+<code class="sig-name descname">fuelcell_to_batt</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Outputs.fuelcell_to_batt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Electricity to battery from fuel cell [kW]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Outputs.gen">
+<code class="sig-name descname">gen</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Outputs.gen" title="Permalink to this definition">¶</a></dt>
+<dd><p>System power generated [kW]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Outputs.grid_power">
+<code class="sig-name descname">grid_power</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Outputs.grid_power" title="Permalink to this definition">¶</a></dt>
+<dd><p>Electricity to/from grid [kW]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Outputs.grid_power_target">
+<code class="sig-name descname">grid_power_target</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Outputs.grid_power_target" title="Permalink to this definition">¶</a></dt>
+<dd><p>Electricity grid power target for automated dispatch [kW]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Outputs.grid_to_batt">
+<code class="sig-name descname">grid_to_batt</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Outputs.grid_to_batt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Electricity to battery from grid [kW]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Outputs.grid_to_load">
+<code class="sig-name descname">grid_to_load</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Outputs.grid_to_load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Electricity to load from grid [kW]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Outputs.market_sell_rate_series_yr1">
+<code class="sig-name descname">market_sell_rate_series_yr1</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Outputs.market_sell_rate_series_yr1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Market sell rate (Year 1) [$/MWh]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Outputs.monthly_batt_to_grid">
+<code class="sig-name descname">monthly_batt_to_grid</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Outputs.monthly_batt_to_grid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Energy to grid from battery [kWh]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Outputs.monthly_batt_to_load">
+<code class="sig-name descname">monthly_batt_to_load</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Outputs.monthly_batt_to_load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Energy to load from battery [kWh]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Outputs.monthly_grid_to_batt">
+<code class="sig-name descname">monthly_grid_to_batt</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Outputs.monthly_grid_to_batt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Energy to battery from grid [kWh]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Outputs.monthly_grid_to_load">
+<code class="sig-name descname">monthly_grid_to_load</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Outputs.monthly_grid_to_load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Energy to load from grid [kWh]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Outputs.monthly_pv_to_batt">
+<code class="sig-name descname">monthly_pv_to_batt</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Outputs.monthly_pv_to_batt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Energy to battery from PV [kWh]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Outputs.monthly_pv_to_grid">
+<code class="sig-name descname">monthly_pv_to_grid</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Outputs.monthly_pv_to_grid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Energy to grid from PV [kWh]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Outputs.monthly_pv_to_load">
+<code class="sig-name descname">monthly_pv_to_load</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Outputs.monthly_pv_to_load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Energy to load from PV [kWh]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Outputs.outage_durations">
+<code class="sig-name descname">outage_durations</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Outputs.outage_durations" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of autonomous hours for resilience from min to max [hr]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Outputs.pdf_of_surviving">
+<code class="sig-name descname">pdf_of_surviving</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Outputs.pdf_of_surviving" title="Permalink to this definition">¶</a></dt>
+<dd><p>Probabilities of autonomous hours for resilience</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Outputs.pv_to_batt">
+<code class="sig-name descname">pv_to_batt</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Outputs.pv_to_batt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Electricity to battery from PV [kW]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Outputs.pv_to_grid">
+<code class="sig-name descname">pv_to_grid</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Outputs.pv_to_grid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Electricity to grid from PV [kW]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Outputs.pv_to_load">
+<code class="sig-name descname">pv_to_load</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Outputs.pv_to_load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Electricity to load from PV [kW]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Outputs.resilience_hrs">
+<code class="sig-name descname">resilience_hrs</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Outputs.resilience_hrs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hours of autonomy during outage at each timestep for resilience [hr]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Outputs.resilience_hrs_avg">
+<code class="sig-name descname">resilience_hrs_avg</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Outputs.resilience_hrs_avg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Avg hours of autonomy for resilience [hr]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Outputs.resilience_hrs_max">
+<code class="sig-name descname">resilience_hrs_max</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Outputs.resilience_hrs_max" title="Permalink to this definition">¶</a></dt>
+<dd><p>Max hours of autonomy for resilience [hr]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Outputs.resilience_hrs_min">
+<code class="sig-name descname">resilience_hrs_min</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Outputs.resilience_hrs_min" title="Permalink to this definition">¶</a></dt>
+<dd><p>Min hours of autonomy for resilience  [hr]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.Battwatts.Battwatts.Outputs.survival_function">
+<code class="sig-name descname">survival_function</code><a class="headerlink" href="#PySAM.Battwatts.Battwatts.Outputs.survival_function" title="Permalink to this definition">¶</a></dt>
+<dd><p>Survival function of autonomous hours for resilience</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 </div>
 
@@ -108,12 +1154,15 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
-        <li class="nav-item nav-item-0"><a href="../index.html">PySAM 1.2 documentation</a> &#187;</li> 
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">PySAM 2.0 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2019, NREL.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.3.
     </div>
   </body>
 </html>

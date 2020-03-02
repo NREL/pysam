@@ -5,21 +5,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>TroughPhysicalProcessHeat Module &#8212; PySAM 1.2 documentation</title>
+    <title>TroughPhysicalProcessHeat &#8212; PySAM 2.0 documentation</title>
     <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/language_data.js"></script>
-    <script type="text/javascript" src="../_static/bizstyle.js"></script>
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/bizstyle.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <!--[if lt IE 9]>
-    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <script src="_static/css3-mediaqueries.js"></script>
     <![endif]-->
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
@@ -28,14 +28,17 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li class="nav-item nav-item-0"><a href="../index.html">PySAM 1.2 documentation</a> &#187;</li> 
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">PySAM 2.0 documentation</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h3><a href="../index.html">Table of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">TroughPhysicalProcessHeat Module</a><ul>
+<li><a class="reference internal" href="#">TroughPhysicalProcessHeat</a><ul>
 <li><a class="reference internal" href="#creating-an-instance">Creating an Instance</a></li>
 <li><a class="reference internal" href="#functions">Functions</a></li>
 <li><a class="reference internal" href="#weather-group">Weather Group</a></li>
@@ -44,6 +47,8 @@
 <li><a class="reference internal" href="#systemdesign-group">SystemDesign Group</a></li>
 <li><a class="reference internal" href="#tes-group">TES Group</a></li>
 <li><a class="reference internal" href="#tes2tank-group">TES2tank Group</a></li>
+<li><a class="reference internal" href="#tou-group">Tou Group</a></li>
+<li><a class="reference internal" href="#system-group">System Group</a></li>
 <li><a class="reference internal" href="#powerblock-group">Powerblock Group</a></li>
 <li><a class="reference internal" href="#adjustmentfactors-group">AdjustmentFactors Group</a></li>
 <li><a class="reference internal" href="#outputs-group">Outputs Group</a></li>
@@ -59,15 +64,15 @@
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
 
@@ -76,43 +81,3316 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="troughphysicalprocessheat-module">
-<span id="troughphysicalprocessheat"></span><h1>TroughPhysicalProcessHeat Module<a class="headerlink" href="#troughphysicalprocessheat-module" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="troughphysicalprocessheat">
+<span id="id1"></span><h1>TroughPhysicalProcessHeat<a class="headerlink" href="#troughphysicalprocessheat" title="Permalink to this headline">¶</a></h1>
 <p>Wrapper for SAM Simulation Core model: <a class="reference external" href="https://github.com/NREL/ssc/blob/develop/ssc/cmod_trough_physical_process_heat.cpp">cmod_trough_physical_process_heat.cpp</a></p>
 <div class="section" id="creating-an-instance">
 <h2>Creating an Instance<a class="headerlink" href="#creating-an-instance" title="Permalink to this headline">¶</a></h2>
-<p>There are three methods to create a new instance of a PySAM module. Using <code class="docutils literal notranslate"><span class="pre">default</span></code> populates the newclass’ attributes with default values specific to a <code class="docutils literal notranslate"><span class="pre">config</span></code>. Each technology-financialconfiguration corresponds to a SAM GUI configuration. Using <code class="docutils literal notranslate"><span class="pre">new</span></code> creates an instance with empty attributes. The <code class="docutils literal notranslate"><span class="pre">wrap</span></code> function allows compatibility with PySSC, for details, refer to <span class="xref std std-doc">PySSC</span>.</p>
+<p>There are three methods to create a new instance of a PySAM module. Using <code class="docutils literal notranslate"><span class="pre">default</span></code> populates the newclass’ attributes with default values specific to a <code class="docutils literal notranslate"><span class="pre">config</span></code>. Each technology-financialconfiguration corresponds to a SAM GUI configuration. Using <code class="docutils literal notranslate"><span class="pre">new</span></code> creates an instance with empty attributes. The <code class="docutils literal notranslate"><span class="pre">wrap</span></code> function allows compatibility with PySSC, for details, refer to <a class="reference internal" href="../PySSC.html"><span class="doc">PySSC</span></a>.</p>
 <p><strong>TroughPhysicalProcessHeat model description</strong></p>
+<span class="target" id="module-PySAM.TroughPhysicalProcessHeat"></span><p>Parabolic trough for industrial process heat applications</p>
+<dl class="function">
+<dt id="PySAM.TroughPhysicalProcessHeat.default">
+<code class="sig-prename descclassname">PySAM.TroughPhysicalProcessHeat.</code><code class="sig-name descname">default</code><span class="sig-paren">(</span><em class="sig-param">config</em><span class="sig-paren">)</span> &#x2192; TroughPhysicalProcessHeat<a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.default" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use financial config-specific default attributes
+config options:</p>
+<ul class="simple">
+<li><p>“PhysicalTroughIPHLCOHCalculator”</p></li>
+<li><p>“PhysicalTroughIPHNone”</p></li>
+</ul>
+</dd></dl>
+
+<dl class="function">
+<dt id="PySAM.TroughPhysicalProcessHeat.from_existing">
+<code class="sig-prename descclassname">PySAM.TroughPhysicalProcessHeat.</code><code class="sig-name descname">from_existing</code><span class="sig-paren">(</span><em class="sig-param">data</em>, <em class="sig-param">optional config</em><span class="sig-paren">)</span> &#x2192; TroughPhysicalProcessHeat<a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.from_existing" title="Permalink to this definition">¶</a></dt>
+<dd><p>Share underlying data with an existing PySAM class. If config provided, default attributes are loaded otherwise.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="PySAM.TroughPhysicalProcessHeat.new">
+<code class="sig-prename descclassname">PySAM.TroughPhysicalProcessHeat.</code><code class="sig-name descname">new</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; TroughPhysicalProcessHeat<a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.new" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="PySAM.TroughPhysicalProcessHeat.wrap">
+<code class="sig-prename descclassname">PySAM.TroughPhysicalProcessHeat.</code><code class="sig-name descname">wrap</code><span class="sig-paren">(</span><em class="sig-param">ssc_data_t</em><span class="sig-paren">)</span> &#x2192; TroughPhysicalProcessHeat<a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.wrap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use existing PySSC data</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Do not call PySSC.data_free on the ssc_data_t provided to <code class="docutils literal notranslate"><span class="pre">wrap</span></code></p>
+</div>
+</dd></dl>
+
 </div>
 <div class="section" id="functions">
 <h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat">
+<em class="property">class </em><code class="sig-prename descclassname">PySAM.TroughPhysicalProcessHeat.</code><code class="sig-name descname">TroughPhysicalProcessHeat</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class contains all the variable information for running a simulation. Variables are grouped together in the subclasses as properties. If property assignments are the wrong type, an error is thrown.</p>
+<dl class="method">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.assign">
+<code class="sig-name descname">assign</code><span class="sig-paren">(</span><em class="sig-param">dict</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from nested dictionary, except for Outputs</p>
+<p><code class="docutils literal notranslate"><span class="pre">nested_dict</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">'Weather':</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...},</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.execute">
+<code class="sig-name descname">execute</code><span class="sig-paren">(</span><em class="sig-param">int verbosity</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.execute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute simulation with verbosity level 0 (default) or 1</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.export">
+<code class="sig-name descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into nested dictionary</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.value">
+<code class="sig-name descname">value</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">optional value</em><span class="sig-paren">)</span> &#x2192; Union[None, float, dict, sequence, str]<a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get or set by name a value in any of the variable groups.</p>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="weather-group">
 <h2>Weather Group<a class="headerlink" href="#weather-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Weather">
+<em class="property">class </em><code class="sig-prename descclassname">PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.</code><code class="sig-name descname">Weather</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Weather" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Weather.assign">
+<code class="sig-name descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Weather.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">Weather_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Weather.export">
+<code class="sig-name descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Weather.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Weather.azimuth">
+<code class="sig-name descname">azimuth</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Weather.azimuth" title="Permalink to this definition">¶</a></dt>
+<dd><p>Azimuth angle of surface/axis [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Weather.file_name">
+<code class="sig-name descname">file_name</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Weather.file_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Local weather file with path [none]</p>
+<p><em>Constraints</em>: LOCAL_FILE</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>str</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Weather.tilt">
+<code class="sig-name descname">tilt</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Weather.tilt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tilt angle of surface/axis [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Weather.track_mode">
+<code class="sig-name descname">track_mode</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Weather.track_mode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tracking mode [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="solarfield-group">
 <h2>SolarField Group<a class="headerlink" href="#solarfield-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField">
+<em class="property">class </em><code class="sig-prename descclassname">PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.</code><code class="sig-name descname">SolarField</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.assign">
+<code class="sig-name descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">SolarField_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.export">
+<code class="sig-name descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.A_aperture">
+<code class="sig-name descname">A_aperture</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.A_aperture" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reflective aperture area of the collector [m2]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>SCAInfoArray</p></li>
+<li><p>nColt</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.AbsorberMaterial">
+<code class="sig-name descname">AbsorberMaterial</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.AbsorberMaterial" title="Permalink to this definition">¶</a></dt>
+<dd><p>Absorber material type [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.AnnulusGas">
+<code class="sig-name descname">AnnulusGas</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.AnnulusGas" title="Permalink to this definition">¶</a></dt>
+<dd><p>Annulus gas type (1=air, 26=Ar, 27=H2) [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.Ave_Focal_Length">
+<code class="sig-name descname">Ave_Focal_Length</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.Ave_Focal_Length" title="Permalink to this definition">¶</a></dt>
+<dd><p>Average focal length of the collector  [m]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>SCAInfoArray</p></li>
+<li><p>nColt</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.ColperSCA">
+<code class="sig-name descname">ColperSCA</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.ColperSCA" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of individual collector sections in an SCA  [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>SCAInfoArray</p></li>
+<li><p>nColt</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.D_2">
+<code class="sig-name descname">D_2</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.D_2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inner absorber tube diameter [m]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.D_3">
+<code class="sig-name descname">D_3</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.D_3" title="Permalink to this definition">¶</a></dt>
+<dd><p>Outer absorber tube diameter [m]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.D_4">
+<code class="sig-name descname">D_4</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.D_4" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inner glass envelope diameter  [m]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.D_5">
+<code class="sig-name descname">D_5</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.D_5" title="Permalink to this definition">¶</a></dt>
+<dd><p>Outer glass envelope diameter  [m]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.D_cpnt">
+<code class="sig-name descname">D_cpnt</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.D_cpnt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interconnect component diameters, row=intc, col=cpnt [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>nSCA</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.D_p">
+<code class="sig-name descname">D_p</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.D_p" title="Permalink to this definition">¶</a></dt>
+<dd><p>Diameter of the absorber flow plug (optional)  [m]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.Design_loss">
+<code class="sig-name descname">Design_loss</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.Design_loss" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver heat loss at design [W/m]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.Dirt_HCE">
+<code class="sig-name descname">Dirt_HCE</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.Dirt_HCE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loss due to dirt on the receiver envelope [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.Dirt_mirror">
+<code class="sig-name descname">Dirt_mirror</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.Dirt_mirror" title="Permalink to this definition">¶</a></dt>
+<dd><p>User-defined dirt on mirror derate [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>SCAInfoArray</p></li>
+<li><p>nColt</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.Distance_SCA">
+<code class="sig-name descname">Distance_SCA</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.Distance_SCA" title="Permalink to this definition">¶</a></dt>
+<dd><p>Piping distance between SCA’s in the field [m]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>SCAInfoArray</p></li>
+<li><p>nColt</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.EPSILON_4">
+<code class="sig-name descname">EPSILON_4</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.EPSILON_4" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inner glass envelope emissivities (Pyrex)  [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.EPSILON_5">
+<code class="sig-name descname">EPSILON_5</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.EPSILON_5" title="Permalink to this definition">¶</a></dt>
+<dd><p>Outer glass envelope emissivities (Pyrex)  [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.Error">
+<code class="sig-name descname">Error</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.Error" title="Permalink to this definition">¶</a></dt>
+<dd><p>User-defined general optical error derate  [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>SCAInfoArray</p></li>
+<li><p>nColt</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.FieldConfig">
+<code class="sig-name descname">FieldConfig</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.FieldConfig" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of subfield headers [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.Flow_type">
+<code class="sig-name descname">Flow_type</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.Flow_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Flow type through the absorber [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.Fluid">
+<code class="sig-name descname">Fluid</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.Fluid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field HTF fluid ID number [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.GeomEffects">
+<code class="sig-name descname">GeomEffects</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.GeomEffects" title="Permalink to this definition">¶</a></dt>
+<dd><p>User-defined geometry effects derate [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>SCAInfoArray</p></li>
+<li><p>nColt</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.GlazingIntactIn">
+<code class="sig-name descname">GlazingIntactIn</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.GlazingIntactIn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Glazing intact (broken glass) flag {1=true, else=false} [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.HCE_FieldFrac">
+<code class="sig-name descname">HCE_FieldFrac</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.HCE_FieldFrac" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fraction of the field occupied by this HCE type  [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.HDR_rough">
+<code class="sig-name descname">HDR_rough</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.HDR_rough" title="Permalink to this definition">¶</a></dt>
+<dd><p>Header pipe roughness [m]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.IAM_matrix">
+<code class="sig-name descname">IAM_matrix</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.IAM_matrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>IAM coefficients, matrix for 4 collectors [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.I_bn_des">
+<code class="sig-name descname">I_bn_des</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.I_bn_des" title="Permalink to this definition">¶</a></dt>
+<dd><p>Solar irradiation at design [C]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>nLoops</p></li>
+<li><p>solar_mult</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.K_cpnt">
+<code class="sig-name descname">K_cpnt</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.K_cpnt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interconnect component minor loss coefficients, row=intc, col=cpnt [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>nSCA</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.L_SCA">
+<code class="sig-name descname">L_SCA</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.L_SCA" title="Permalink to this definition">¶</a></dt>
+<dd><p>Length of the SCA  [m]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>SCAInfoArray</p></li>
+<li><p>nColt</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.L_aperture">
+<code class="sig-name descname">L_aperture</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.L_aperture" title="Permalink to this definition">¶</a></dt>
+<dd><p>Length of a single mirror/HCE unit [m]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>SCAInfoArray</p></li>
+<li><p>nColt</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.L_cpnt">
+<code class="sig-name descname">L_cpnt</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.L_cpnt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interconnect component lengths, row=intc, col=cpnt [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>nSCA</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.L_heat_sink_piping">
+<code class="sig-name descname">L_heat_sink_piping</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.L_heat_sink_piping" title="Permalink to this definition">¶</a></dt>
+<dd><p>Length of piping (full mass flow) through heat sink (if applicable) [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.L_rnr_per_xpan">
+<code class="sig-name descname">L_rnr_per_xpan</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.L_rnr_per_xpan" title="Permalink to this definition">¶</a></dt>
+<dd><p>Threshold length of straight runner pipe without an expansion loop [m]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.L_xpan_hdr">
+<code class="sig-name descname">L_xpan_hdr</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.L_xpan_hdr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compined perpendicular lengths of each header expansion loop [m]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.L_xpan_rnr">
+<code class="sig-name descname">L_xpan_rnr</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.L_xpan_rnr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compined perpendicular lengths of each runner expansion loop [m]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.Min_rnr_xpans">
+<code class="sig-name descname">Min_rnr_xpans</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.Min_rnr_xpans" title="Permalink to this definition">¶</a></dt>
+<dd><p>Minimum number of expansion loops per single-diameter runner section [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.N_hdr_per_xpan">
+<code class="sig-name descname">N_hdr_per_xpan</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.N_hdr_per_xpan" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of collector loops per expansion loop [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.N_max_hdr_diams">
+<code class="sig-name descname">N_max_hdr_diams</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.N_max_hdr_diams" title="Permalink to this definition">¶</a></dt>
+<dd><p>Maximum number of diameters in each of the hot and cold headers [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.P_a">
+<code class="sig-name descname">P_a</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.P_a" title="Permalink to this definition">¶</a></dt>
+<dd><p>Annulus gas pressure [torr]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.Pipe_hl_coef">
+<code class="sig-name descname">Pipe_hl_coef</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.Pipe_hl_coef" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loss coefficient from the header, runner pipe, and non-HCE piping [m/s]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.Rho_mirror_clean">
+<code class="sig-name descname">Rho_mirror_clean</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.Rho_mirror_clean" title="Permalink to this definition">¶</a></dt>
+<dd><p>User-defined clean mirror reflectivity [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>SCAInfoArray</p></li>
+<li><p>nColt</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.Rough">
+<code class="sig-name descname">Rough</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.Rough" title="Permalink to this definition">¶</a></dt>
+<dd><p>Roughness of the internal surface  [m]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.Row_Distance">
+<code class="sig-name descname">Row_Distance</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.Row_Distance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Spacing between rows (centerline to centerline) [m]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.SCADefocusArray">
+<code class="sig-name descname">SCADefocusArray</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.SCADefocusArray" title="Permalink to this definition">¶</a></dt>
+<dd><p>Collector defocus order [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.SCAInfoArray">
+<code class="sig-name descname">SCAInfoArray</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.SCAInfoArray" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver (,1) and collector (,2) type for each assembly in loop [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>A_aperture</p></li>
+<li><p>Ave_Focal_Length</p></li>
+<li><p>ColperSCA</p></li>
+<li><p>Dirt_mirror</p></li>
+<li><p>Distance_SCA</p></li>
+<li><p>Error</p></li>
+<li><p>GeomEffects</p></li>
+<li><p>L_SCA</p></li>
+<li><p>L_aperture</p></li>
+<li><p>Rho_mirror_clean</p></li>
+<li><p>TrackingError</p></li>
+<li><p>W_aperture</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.SCA_drives_elec">
+<code class="sig-name descname">SCA_drives_elec</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.SCA_drives_elec" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tracking power, in Watts per SCA drive [W/m2-K]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.Shadowing">
+<code class="sig-name descname">Shadowing</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.Shadowing" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver bellows shadowing loss factor [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.T_fp">
+<code class="sig-name descname">T_fp</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.T_fp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Freeze protection temperature (heat trace activation temperature) [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.T_loop_in_des">
+<code class="sig-name descname">T_loop_in_des</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.T_loop_in_des" title="Permalink to this definition">¶</a></dt>
+<dd><p>Design loop inlet temperature [C]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.T_loop_out">
+<code class="sig-name descname">T_loop_out</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.T_loop_out" title="Permalink to this definition">¶</a></dt>
+<dd><p>Target loop outlet temperature [C]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.Tau_envelope">
+<code class="sig-name descname">Tau_envelope</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.Tau_envelope" title="Permalink to this definition">¶</a></dt>
+<dd><p>Envelope transmittance [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.TrackingError">
+<code class="sig-name descname">TrackingError</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.TrackingError" title="Permalink to this definition">¶</a></dt>
+<dd><p>User-defined tracking error derate [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>SCAInfoArray</p></li>
+<li><p>nColt</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.Type_cpnt">
+<code class="sig-name descname">Type_cpnt</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.Type_cpnt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interconnect component type, row=intc, col=cpnt [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>nSCA</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.V_hdr_cold_max">
+<code class="sig-name descname">V_hdr_cold_max</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.V_hdr_cold_max" title="Permalink to this definition">¶</a></dt>
+<dd><p>Maximum HTF velocity in the cold headers at design [m/s]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.V_hdr_cold_min">
+<code class="sig-name descname">V_hdr_cold_min</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.V_hdr_cold_min" title="Permalink to this definition">¶</a></dt>
+<dd><p>Minimum HTF velocity in the cold headers at design [m/s]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.V_hdr_hot_max">
+<code class="sig-name descname">V_hdr_hot_max</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.V_hdr_hot_max" title="Permalink to this definition">¶</a></dt>
+<dd><p>Maximum HTF velocity in the hot headers at design [m/s]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.V_hdr_hot_min">
+<code class="sig-name descname">V_hdr_hot_min</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.V_hdr_hot_min" title="Permalink to this definition">¶</a></dt>
+<dd><p>Minimum HTF velocity in the hot headers at design [m/s]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.W_aperture">
+<code class="sig-name descname">W_aperture</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.W_aperture" title="Permalink to this definition">¶</a></dt>
+<dd><p>The collector aperture width (Total structural area used for shadowing) [m]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>SCAInfoArray</p></li>
+<li><p>nColt</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.accept_init">
+<code class="sig-name descname">accept_init</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.accept_init" title="Permalink to this definition">¶</a></dt>
+<dd><p>In acceptance testing mode - require steady-state startup [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.accept_loc">
+<code class="sig-name descname">accept_loc</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.accept_loc" title="Permalink to this definition">¶</a></dt>
+<dd><p>In acceptance testing mode - temperature sensor location [1/2]</p>
+<p><em>Info</em>: hx/loop</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.accept_mode">
+<code class="sig-name descname">accept_mode</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.accept_mode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Acceptance testing mode? [0/1]</p>
+<p><em>Info</em>: no/yes</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.alpha_abs">
+<code class="sig-name descname">alpha_abs</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.alpha_abs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Absorber absorptance  [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.alpha_env">
+<code class="sig-name descname">alpha_env</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.alpha_env" title="Permalink to this definition">¶</a></dt>
+<dd><p>Envelope absorptance  [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.calc_design_pipe_vals">
+<code class="sig-name descname">calc_design_pipe_vals</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.calc_design_pipe_vals" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate temps and pressures at design conditions for runners and headers [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.custom_sf_pipe_sizes">
+<code class="sig-name descname">custom_sf_pipe_sizes</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.custom_sf_pipe_sizes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use custom solar field pipe diams, wallthks, and lengths [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.epsilon_3_11">
+<code class="sig-name descname">epsilon_3_11</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.epsilon_3_11" title="Permalink to this definition">¶</a></dt>
+<dd><p>Absorber emittance for receiver type 1 variation 1 [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.epsilon_3_12">
+<code class="sig-name descname">epsilon_3_12</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.epsilon_3_12" title="Permalink to this definition">¶</a></dt>
+<dd><p>Absorber emittance for receiver type 1 variation 2 [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.epsilon_3_13">
+<code class="sig-name descname">epsilon_3_13</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.epsilon_3_13" title="Permalink to this definition">¶</a></dt>
+<dd><p>Absorber emittance for receiver type 1 variation 3 [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.epsilon_3_14">
+<code class="sig-name descname">epsilon_3_14</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.epsilon_3_14" title="Permalink to this definition">¶</a></dt>
+<dd><p>Absorber emittance for receiver type 1 variation 4 [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.epsilon_3_21">
+<code class="sig-name descname">epsilon_3_21</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.epsilon_3_21" title="Permalink to this definition">¶</a></dt>
+<dd><p>Absorber emittance for receiver type 2 variation 1 [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.epsilon_3_22">
+<code class="sig-name descname">epsilon_3_22</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.epsilon_3_22" title="Permalink to this definition">¶</a></dt>
+<dd><p>Absorber emittance for receiver type 2 variation 2 [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.epsilon_3_23">
+<code class="sig-name descname">epsilon_3_23</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.epsilon_3_23" title="Permalink to this definition">¶</a></dt>
+<dd><p>Absorber emittance for receiver type 2 variation 3 [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.epsilon_3_24">
+<code class="sig-name descname">epsilon_3_24</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.epsilon_3_24" title="Permalink to this definition">¶</a></dt>
+<dd><p>Absorber emittance for receiver type 2 variation 4 [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.epsilon_3_31">
+<code class="sig-name descname">epsilon_3_31</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.epsilon_3_31" title="Permalink to this definition">¶</a></dt>
+<dd><p>Absorber emittance for receiver type 3 variation 1 [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.epsilon_3_32">
+<code class="sig-name descname">epsilon_3_32</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.epsilon_3_32" title="Permalink to this definition">¶</a></dt>
+<dd><p>Absorber emittance for receiver type 3 variation 2 [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.epsilon_3_33">
+<code class="sig-name descname">epsilon_3_33</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.epsilon_3_33" title="Permalink to this definition">¶</a></dt>
+<dd><p>Absorber emittance for receiver type 3 variation 3 [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.epsilon_3_34">
+<code class="sig-name descname">epsilon_3_34</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.epsilon_3_34" title="Permalink to this definition">¶</a></dt>
+<dd><p>Absorber emittance for receiver type 3 variation 4 [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.epsilon_3_41">
+<code class="sig-name descname">epsilon_3_41</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.epsilon_3_41" title="Permalink to this definition">¶</a></dt>
+<dd><p>Absorber emittance for receiver type 4 variation 1 [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.epsilon_3_42">
+<code class="sig-name descname">epsilon_3_42</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.epsilon_3_42" title="Permalink to this definition">¶</a></dt>
+<dd><p>Absorber emittance for receiver type 4 variation 2 [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.epsilon_3_43">
+<code class="sig-name descname">epsilon_3_43</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.epsilon_3_43" title="Permalink to this definition">¶</a></dt>
+<dd><p>Absorber emittance for receiver type 4 variation 3 [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.epsilon_3_44">
+<code class="sig-name descname">epsilon_3_44</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.epsilon_3_44" title="Permalink to this definition">¶</a></dt>
+<dd><p>Absorber emittance for receiver type 4 variation 4 [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.eta_pump">
+<code class="sig-name descname">eta_pump</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.eta_pump" title="Permalink to this definition">¶</a></dt>
+<dd><p>HTF pump efficiency [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.is_model_heat_sink_piping">
+<code class="sig-name descname">is_model_heat_sink_piping</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.is_model_heat_sink_piping" title="Permalink to this definition">¶</a></dt>
+<dd><p>Should model consider piping through heat sink? [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.m_dot_htfmax">
+<code class="sig-name descname">m_dot_htfmax</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.m_dot_htfmax" title="Permalink to this definition">¶</a></dt>
+<dd><p>Maximum loop HTF flow rate [kg/s]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.m_dot_htfmin">
+<code class="sig-name descname">m_dot_htfmin</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.m_dot_htfmin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Minimum loop HTF flow rate [kg/s]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.mc_bal_cold">
+<code class="sig-name descname">mc_bal_cold</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.mc_bal_cold" title="Permalink to this definition">¶</a></dt>
+<dd><p>Heat capacity of the balance of plant on the cold side [kWht/K-MWt]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.mc_bal_hot">
+<code class="sig-name descname">mc_bal_hot</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.mc_bal_hot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Heat capacity of the balance of plant on the hot side [kWht/K-MWt]</p>
+<p><em>Info</em>: none</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.mc_bal_sca">
+<code class="sig-name descname">mc_bal_sca</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.mc_bal_sca" title="Permalink to this definition">¶</a></dt>
+<dd><p>Non-HTF heat capacity associated with each SCA - per meter basis [Wht/K-m]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.nColt">
+<code class="sig-name descname">nColt</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.nColt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of collector types [none]</p>
+<p><em>Options</em>: constant=4</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>A_aperture</p></li>
+<li><p>Ave_Focal_Length</p></li>
+<li><p>ColperSCA</p></li>
+<li><p>Dirt_mirror</p></li>
+<li><p>Distance_SCA</p></li>
+<li><p>Error</p></li>
+<li><p>GeomEffects</p></li>
+<li><p>L_SCA</p></li>
+<li><p>L_aperture</p></li>
+<li><p>Rho_mirror_clean</p></li>
+<li><p>TrackingError</p></li>
+<li><p>W_aperture</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.nHCEVar">
+<code class="sig-name descname">nHCEVar</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.nHCEVar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of HCE variants per type [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.nHCEt">
+<code class="sig-name descname">nHCEt</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.nHCEt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of HCE types [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.nLoops">
+<code class="sig-name descname">nLoops</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.nLoops" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of loops in the field [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>solar_mult</p></li>
+</ul>
+</dd>
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>I_bn_des</p></li>
+<li><p>q_pb_design</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.nSCA">
+<code class="sig-name descname">nSCA</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.nSCA" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of SCAs in a loop [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>D_cpnt</p></li>
+<li><p>K_cpnt</p></li>
+<li><p>L_cpnt</p></li>
+<li><p>Type_cpnt</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.northsouth_field_sep">
+<code class="sig-name descname">northsouth_field_sep</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.northsouth_field_sep" title="Permalink to this definition">¶</a></dt>
+<dd><p>North/south separation between subfields. 0 = SCAs are touching [m]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.offset_xpan_hdr">
+<code class="sig-name descname">offset_xpan_hdr</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.offset_xpan_hdr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Location of first header expansion loop. 1 = after first collector loop [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.sf_hdr_diams">
+<code class="sig-name descname">sf_hdr_diams</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.sf_hdr_diams" title="Permalink to this definition">¶</a></dt>
+<dd><p>Custom header diameters [m]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.sf_hdr_lengths">
+<code class="sig-name descname">sf_hdr_lengths</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.sf_hdr_lengths" title="Permalink to this definition">¶</a></dt>
+<dd><p>Custom header lengths [m]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.sf_hdr_wallthicks">
+<code class="sig-name descname">sf_hdr_wallthicks</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.sf_hdr_wallthicks" title="Permalink to this definition">¶</a></dt>
+<dd><p>Custom header wall thicknesses [m]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.sf_rnr_diams">
+<code class="sig-name descname">sf_rnr_diams</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.sf_rnr_diams" title="Permalink to this definition">¶</a></dt>
+<dd><p>Custom runner diameters [m]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.sf_rnr_lengths">
+<code class="sig-name descname">sf_rnr_lengths</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.sf_rnr_lengths" title="Permalink to this definition">¶</a></dt>
+<dd><p>Custom runner lengths [m]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.sf_rnr_wallthicks">
+<code class="sig-name descname">sf_rnr_wallthicks</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.sf_rnr_wallthicks" title="Permalink to this definition">¶</a></dt>
+<dd><p>Custom runner wall thicknesses [m]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.solar_mult">
+<code class="sig-name descname">solar_mult</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.solar_mult" title="Permalink to this definition">¶</a></dt>
+<dd><p>Solar multiple [none]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>I_bn_des</p></li>
+<li><p>nLoops</p></li>
+<li><p>q_pb_design</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.theta_dep">
+<code class="sig-name descname">theta_dep</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.theta_dep" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deploy angle [deg]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.theta_stow">
+<code class="sig-name descname">theta_stow</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.theta_stow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stow angle [deg]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.washing_frequency">
+<code class="sig-name descname">washing_frequency</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.washing_frequency" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mirror washing frequency [-/year]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.water_usage_per_wash">
+<code class="sig-name descname">water_usage_per_wash</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.water_usage_per_wash" title="Permalink to this definition">¶</a></dt>
+<dd><p>Water usage per wash [L/m2_aper]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.wind_stow_speed">
+<code class="sig-name descname">wind_stow_speed</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SolarField.wind_stow_speed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Trough wind stow speed [m/s]</p>
+<p><em>Required</em>: If not provided, assumed to be 50</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="controller-group">
 <h2>Controller Group<a class="headerlink" href="#controller-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Controller">
+<em class="property">class </em><code class="sig-prename descclassname">PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.</code><code class="sig-name descname">Controller</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Controller" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Controller.assign">
+<code class="sig-name descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Controller.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">Controller_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Controller.export">
+<code class="sig-name descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Controller.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Controller.field_fl_props">
+<code class="sig-name descname">field_fl_props</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Controller.field_fl_props" title="Permalink to this definition">¶</a></dt>
+<dd><p>User defined field fluid property data [-]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Controller.pb_pump_coef">
+<code class="sig-name descname">pb_pump_coef</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Controller.pb_pump_coef" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pumping power to move 1kg of HTF through PB loop [kW/kg]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Controller.q_pb_design">
+<code class="sig-name descname">q_pb_design</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Controller.q_pb_design" title="Permalink to this definition">¶</a></dt>
+<dd><p>Design heat input to power block [MWt]</p>
+<p><em>Required</em>: True</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>nLoops</p></li>
+<li><p>solar_mult</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="systemdesign-group">
 <h2>SystemDesign Group<a class="headerlink" href="#systemdesign-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SystemDesign">
+<em class="property">class </em><code class="sig-prename descclassname">PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.</code><code class="sig-name descname">SystemDesign</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SystemDesign" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SystemDesign.assign">
+<code class="sig-name descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SystemDesign.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">SystemDesign_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SystemDesign.export">
+<code class="sig-name descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SystemDesign.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SystemDesign.tshours">
+<code class="sig-name descname">tshours</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SystemDesign.tshours" title="Permalink to this definition">¶</a></dt>
+<dd><p>Equivalent full-load thermal storage hours [hr]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="tes-group">
 <h2>TES Group<a class="headerlink" href="#tes-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.TES">
+<em class="property">class </em><code class="sig-prename descclassname">PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.</code><code class="sig-name descname">TES</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.TES" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.TES.assign">
+<code class="sig-name descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.TES.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">TES_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.TES.export">
+<code class="sig-name descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.TES.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.TES.cold_tank_Thtr">
+<code class="sig-name descname">cold_tank_Thtr</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.TES.cold_tank_Thtr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Minimum allowable cold tank HTF temp [C]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.TES.cold_tank_max_heat">
+<code class="sig-name descname">cold_tank_max_heat</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.TES.cold_tank_max_heat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rated heater capacity for cold tank heating [MW]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.TES.h_tank">
+<code class="sig-name descname">h_tank</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.TES.h_tank" title="Permalink to this definition">¶</a></dt>
+<dd><p>Total height of tank (height of HTF when tank is full [m]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.TES.init_hot_htf_percent">
+<code class="sig-name descname">init_hot_htf_percent</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.TES.init_hot_htf_percent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initial fraction of avail. vol that is hot [%]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.TES.tank_pairs">
+<code class="sig-name descname">tank_pairs</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.TES.tank_pairs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of equivalent tank pairs [-]</p>
+<p><em>Constraints</em>: INTEGER</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.TES.u_tank">
+<code class="sig-name descname">u_tank</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.TES.u_tank" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loss coefficient from the tank [W/m2-K]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="tes2tank-group">
 <h2>TES2tank Group<a class="headerlink" href="#tes2tank-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.TES2tank">
+<em class="property">class </em><code class="sig-prename descclassname">PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.</code><code class="sig-name descname">TES2tank</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.TES2tank" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.TES2tank.assign">
+<code class="sig-name descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.TES2tank.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">TES2tank_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.TES2tank.export">
+<code class="sig-name descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.TES2tank.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.TES2tank.h_tank_min">
+<code class="sig-name descname">h_tank_min</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.TES2tank.h_tank_min" title="Permalink to this definition">¶</a></dt>
+<dd><p>Minimum allowable HTF height in storage tank [m]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.TES2tank.hot_tank_Thtr">
+<code class="sig-name descname">hot_tank_Thtr</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.TES2tank.hot_tank_Thtr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Minimum allowable hot tank HTF temp [C]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.TES2tank.hot_tank_max_heat">
+<code class="sig-name descname">hot_tank_max_heat</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.TES2tank.hot_tank_max_heat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rated heater capacity for hot tank heating [MW]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="tou-group">
+<h2>Tou Group<a class="headerlink" href="#tou-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou">
+<em class="property">class </em><code class="sig-prename descclassname">PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.</code><code class="sig-name descname">Tou</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.assign">
+<code class="sig-name descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">Tou_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.export">
+<code class="sig-name descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.ampl_data_dir">
+<code class="sig-name descname">ampl_data_dir</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.ampl_data_dir" title="Permalink to this definition">¶</a></dt>
+<dd><p>AMPL data file directory [-]</p>
+<p><em>Required</em>: If not provided, assumed to be ‘’</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>str</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.ampl_exec_call">
+<code class="sig-name descname">ampl_exec_call</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.ampl_exec_call" title="Permalink to this definition">¶</a></dt>
+<dd><p>System command to run AMPL code [-]</p>
+<p><em>Required</em>: If not provided, assumed to be ‘ampl sdk_solution.run’</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>str</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.disp_csu_cost">
+<code class="sig-name descname">disp_csu_cost</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.disp_csu_cost" title="Permalink to this definition">¶</a></dt>
+<dd><p>Heat sink startup cost [$]</p>
+<p><em>Required</em>: True if is_dispatch=1</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.disp_frequency">
+<code class="sig-name descname">disp_frequency</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.disp_frequency" title="Permalink to this definition">¶</a></dt>
+<dd><p>Frequency for dispatch optimization calculations [hour]</p>
+<p><em>Required</em>: True if is_dispatch=1</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.disp_horizon">
+<code class="sig-name descname">disp_horizon</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.disp_horizon" title="Permalink to this definition">¶</a></dt>
+<dd><p>Time horizon for dispatch optimization [hour]</p>
+<p><em>Required</em>: True if is_dispatch=1</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.disp_max_iter">
+<code class="sig-name descname">disp_max_iter</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.disp_max_iter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Max. no. dispatch optimization iterations [-]</p>
+<p><em>Required</em>: True if is_dispatch=1</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.disp_mip_gap">
+<code class="sig-name descname">disp_mip_gap</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.disp_mip_gap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dispatch optimization solution tolerance [-]</p>
+<p><em>Required</em>: True if is_dispatch=1</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.disp_pen_delta_w">
+<code class="sig-name descname">disp_pen_delta_w</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.disp_pen_delta_w" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dispatch heat production change penalty [$/kWt-change]</p>
+<p><em>Required</em>: True if is_dispatch=1</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.disp_reporting">
+<code class="sig-name descname">disp_reporting</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.disp_reporting" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dispatch optimization reporting level [-]</p>
+<p><em>Required</em>: If not provided, assumed to be -1</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.disp_rsu_cost">
+<code class="sig-name descname">disp_rsu_cost</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.disp_rsu_cost" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver startup cost [$]</p>
+<p><em>Required</em>: True if is_dispatch=1</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.disp_spec_bb">
+<code class="sig-name descname">disp_spec_bb</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.disp_spec_bb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dispatch optimization B&amp;B heuristic [-]</p>
+<p><em>Required</em>: If not provided, assumed to be -1</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.disp_spec_presolve">
+<code class="sig-name descname">disp_spec_presolve</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.disp_spec_presolve" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dispatch optimization presolve heuristic [-]</p>
+<p><em>Required</em>: If not provided, assumed to be -1</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.disp_spec_scaling">
+<code class="sig-name descname">disp_spec_scaling</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.disp_spec_scaling" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dispatch optimization scaling heuristic [-]</p>
+<p><em>Required</em>: If not provided, assumed to be -1</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.disp_steps_per_hour">
+<code class="sig-name descname">disp_steps_per_hour</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.disp_steps_per_hour" title="Permalink to this definition">¶</a></dt>
+<dd><p>Time steps per hour for dispatch optimization calculations [-]</p>
+<p><em>Required</em>: If not provided, assumed to be 1</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.disp_time_weighting">
+<code class="sig-name descname">disp_time_weighting</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.disp_time_weighting" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dispatch optimization future time discounting factor [-]</p>
+<p><em>Required</em>: If not provided, assumed to be 0.99</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.disp_timeout">
+<code class="sig-name descname">disp_timeout</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.disp_timeout" title="Permalink to this definition">¶</a></dt>
+<dd><p>Max. dispatch optimization solve duration [s]</p>
+<p><em>Required</em>: True if is_dispatch=1</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.dispatch_factor1">
+<code class="sig-name descname">dispatch_factor1</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.dispatch_factor1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dispatch payment factor 1</p>
+<p><em>Required</em>: If not provided, assumed to be 1</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.dispatch_factor2">
+<code class="sig-name descname">dispatch_factor2</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.dispatch_factor2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dispatch payment factor 2</p>
+<p><em>Required</em>: If not provided, assumed to be 1</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.dispatch_factor3">
+<code class="sig-name descname">dispatch_factor3</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.dispatch_factor3" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dispatch payment factor 3</p>
+<p><em>Required</em>: If not provided, assumed to be 1</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.dispatch_factor4">
+<code class="sig-name descname">dispatch_factor4</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.dispatch_factor4" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dispatch payment factor 4</p>
+<p><em>Required</em>: If not provided, assumed to be 1</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.dispatch_factor5">
+<code class="sig-name descname">dispatch_factor5</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.dispatch_factor5" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dispatch payment factor 5</p>
+<p><em>Required</em>: If not provided, assumed to be 1</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.dispatch_factor6">
+<code class="sig-name descname">dispatch_factor6</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.dispatch_factor6" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dispatch payment factor 6</p>
+<p><em>Required</em>: If not provided, assumed to be 1</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.dispatch_factor7">
+<code class="sig-name descname">dispatch_factor7</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.dispatch_factor7" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dispatch payment factor 7</p>
+<p><em>Required</em>: If not provided, assumed to be 1</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.dispatch_factor8">
+<code class="sig-name descname">dispatch_factor8</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.dispatch_factor8" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dispatch payment factor 8</p>
+<p><em>Required</em>: If not provided, assumed to be 1</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.dispatch_factor9">
+<code class="sig-name descname">dispatch_factor9</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.dispatch_factor9" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dispatch payment factor 9</p>
+<p><em>Required</em>: If not provided, assumed to be 1</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.dispatch_factors_ts">
+<code class="sig-name descname">dispatch_factors_ts</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.dispatch_factors_ts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dispatch payment factor array</p>
+<p><em>Required</em>: True if ppa_multiplier_model=1</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.dispatch_sched_weekday">
+<code class="sig-name descname">dispatch_sched_weekday</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.dispatch_sched_weekday" title="Permalink to this definition">¶</a></dt>
+<dd><p>12x24 PPA pricing Weekday schedule</p>
+<p><em>Required</em>: If not provided, assumed to be 1</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>weekday_schedule</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.dispatch_sched_weekend">
+<code class="sig-name descname">dispatch_sched_weekend</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.dispatch_sched_weekend" title="Permalink to this definition">¶</a></dt>
+<dd><p>12x24 PPA pricing Weekend schedule</p>
+<p><em>Required</em>: If not provided, assumed to be 1</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>weekend_schedule</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.dispatch_series">
+<code class="sig-name descname">dispatch_series</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.dispatch_series" title="Permalink to this definition">¶</a></dt>
+<dd><p>Time series dispatch factors</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.f_turb_tou_periods">
+<code class="sig-name descname">f_turb_tou_periods</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.f_turb_tou_periods" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dispatch logic for heat sink load fraction [-]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.is_ampl_engine">
+<code class="sig-name descname">is_ampl_engine</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.is_ampl_engine" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run dispatch optimization with external AMPL engine [-]</p>
+<p><em>Required</em>: If not provided, assumed to be 0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.is_dispatch">
+<code class="sig-name descname">is_dispatch</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.is_dispatch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Allow dispatch optimization? [-]</p>
+<p><em>Required</em>: If not provided, assumed to be 0</p>
+<dl class="simple">
+<dt><em>Changes to this variable may require updating the values of the following</em>:</dt><dd><ul class="simple">
+<li><p>is_wlim_series</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.is_dispatch_series">
+<code class="sig-name descname">is_dispatch_series</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.is_dispatch_series" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use time-series dispatch factors</p>
+<p><em>Required</em>: If not provided, assumed to be 1</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.is_wlim_series">
+<code class="sig-name descname">is_wlim_series</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.is_wlim_series" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use time-series net heat generation limits</p>
+<p><em>Required</em>: If not provided, assumed to be 0</p>
+<dl class="simple">
+<dt><em>This variable may need to be updated if the values of the following have changed</em>:</dt><dd><ul class="simple">
+<li><p>is_dispatch</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.is_write_ampl_dat">
+<code class="sig-name descname">is_write_ampl_dat</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.is_write_ampl_dat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write AMPL data files for dispatch run [-]</p>
+<p><em>Required</em>: If not provided, assumed to be 0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.ppa_multiplier_model">
+<code class="sig-name descname">ppa_multiplier_model</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.ppa_multiplier_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>PPA multiplier model [0/1]</p>
+<p><em>Options</em>: 0=diurnal,1=timestep</p>
+<p><em>Constraints</em>: INTEGER,MIN=0</p>
+<p><em>Required</em>: If not provided, assumed to be 0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.q_rec_heattrace">
+<code class="sig-name descname">q_rec_heattrace</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.q_rec_heattrace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver heat trace energy consumption during startup [kWe-hr]</p>
+<p><em>Required</em>: If not provided, assumed to be 0.0</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.q_rec_standby">
+<code class="sig-name descname">q_rec_standby</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.q_rec_standby" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver standby energy consumption [kWt]</p>
+<p><em>Required</em>: If not provided, assumed to be 9e99</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.weekday_schedule">
+<code class="sig-name descname">weekday_schedule</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.weekday_schedule" title="Permalink to this definition">¶</a></dt>
+<dd><p>12x24 CSP operation Time-of-Use Weekday schedule [-]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.weekend_schedule">
+<code class="sig-name descname">weekend_schedule</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.weekend_schedule" title="Permalink to this definition">¶</a></dt>
+<dd><p>12x24 CSP operation Time-of-Use Weekend schedule [-]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence[sequence]</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.wlim_series">
+<code class="sig-name descname">wlim_series</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou.wlim_series" title="Permalink to this definition">¶</a></dt>
+<dd><p>Time series net heat generation limits [kWt]</p>
+<p><em>Required</em>: True if is_wlim_series=1</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="system-group">
+<h2>System Group<a class="headerlink" href="#system-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.System">
+<em class="property">class </em><code class="sig-prename descclassname">PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.</code><code class="sig-name descname">System</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.System" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.System.assign">
+<code class="sig-name descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.System.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">System_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.System.export">
+<code class="sig-name descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.System.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.System.aux_array">
+<code class="sig-name descname">aux_array</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.System.aux_array" title="Permalink to this definition">¶</a></dt>
+<dd><p>Auxiliary heater, mult frac and const, linear and quad coeff</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.System.bop_array">
+<code class="sig-name descname">bop_array</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.System.bop_array" title="Permalink to this definition">¶</a></dt>
+<dd><p>Balance of plant parasitic power fraction, mult frac and const, linear and quad coeff</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.System.pb_fixed_par">
+<code class="sig-name descname">pb_fixed_par</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.System.pb_fixed_par" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fraction of rated gross power constantly consumed [MWe/MWcap]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="powerblock-group">
 <h2>Powerblock Group<a class="headerlink" href="#powerblock-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Powerblock">
+<em class="property">class </em><code class="sig-prename descclassname">PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.</code><code class="sig-name descname">Powerblock</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Powerblock" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Powerblock.assign">
+<code class="sig-name descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Powerblock.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">Powerblock_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Powerblock.export">
+<code class="sig-name descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Powerblock.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Powerblock.L_rnr_pb">
+<code class="sig-name descname">L_rnr_pb</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Powerblock.L_rnr_pb" title="Permalink to this definition">¶</a></dt>
+<dd><p>Length of runner pipe in power block [m]</p>
+<p><em>Required</em>: True</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="adjustmentfactors-group">
 <h2>AdjustmentFactors Group<a class="headerlink" href="#adjustmentfactors-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.AdjustmentFactors">
+<em class="property">class </em><code class="sig-prename descclassname">PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.</code><code class="sig-name descname">AdjustmentFactors</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.AdjustmentFactors" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.AdjustmentFactors.assign">
+<code class="sig-name descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.AdjustmentFactors.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.AdjustmentFactors.export">
+<code class="sig-name descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Dict<a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.AdjustmentFactors.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.AdjustmentFactors.constant">
+<code class="sig-name descname">constant</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.AdjustmentFactors.constant" title="Permalink to this definition">¶</a></dt>
+<dd><p>float</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>type</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.AdjustmentFactors.dc_constant">
+<code class="sig-name descname">dc_constant</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.AdjustmentFactors.dc_constant" title="Permalink to this definition">¶</a></dt>
+<dd><p>DC Constant loss adjustment [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.AdjustmentFactors.dc_hourly">
+<code class="sig-name descname">dc_hourly</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.AdjustmentFactors.dc_hourly" title="Permalink to this definition">¶</a></dt>
+<dd><p>DC Hourly Adjustment Factors [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.AdjustmentFactors.dc_periods">
+<code class="sig-name descname">dc_periods</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.AdjustmentFactors.dc_periods" title="Permalink to this definition">¶</a></dt>
+<dd><p>DC Period-based Adjustment Factors [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.AdjustmentFactors.hourly">
+<code class="sig-name descname">hourly</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.AdjustmentFactors.hourly" title="Permalink to this definition">¶</a></dt>
+<dd><p>AC Hourly Adjustment Factors [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.AdjustmentFactors.periods">
+<code class="sig-name descname">periods</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.AdjustmentFactors.periods" title="Permalink to this definition">¶</a></dt>
+<dd><p>AC Period-based Adjustment Factors [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.AdjustmentFactors.sf_constant">
+<code class="sig-name descname">sf_constant</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.AdjustmentFactors.sf_constant" title="Permalink to this definition">¶</a></dt>
+<dd><p>DC Constant loss adjustment [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.AdjustmentFactors.sf_hourly">
+<code class="sig-name descname">sf_hourly</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.AdjustmentFactors.sf_hourly" title="Permalink to this definition">¶</a></dt>
+<dd><p>DC Hourly Adjustment Factors [%]</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.AdjustmentFactors.sf_periods">
+<code class="sig-name descname">sf_periods</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.AdjustmentFactors.sf_periods" title="Permalink to this definition">¶</a></dt>
+<dd><p>DC Period-based Adjustment Factors [%]</p>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="outputs-group">
 <h2>Outputs Group<a class="headerlink" href="#outputs-group" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs">
+<em class="property">class </em><code class="sig-prename descclassname">PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.</code><code class="sig-name descname">Outputs</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.assign">
+<code class="sig-name descname">assign</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.assign" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assign attributes from dictionary</p>
+<p><code class="docutils literal notranslate"><span class="pre">Outputs_vals</span> <span class="pre">=</span> <span class="pre">{</span> <span class="pre">var:</span> <span class="pre">val,</span> <span class="pre">...}</span></code></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.export">
+<code class="sig-name descname">export</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export attributes into dictionary</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.CosTh_ave">
+<code class="sig-name descname">CosTh_ave</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.CosTh_ave" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field collector cosine efficiency</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.EndLoss_ave">
+<code class="sig-name descname">EndLoss_ave</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.EndLoss_ave" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field collector optical end loss</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.EqOpteff">
+<code class="sig-name descname">EqOpteff</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.EqOpteff" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field optical efficiency before defocus</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.IAM_ave">
+<code class="sig-name descname">IAM_ave</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.IAM_ave" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field collector incidence angle modifier</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.RowShadow_ave">
+<code class="sig-name descname">RowShadow_ave</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.RowShadow_ave" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field collector row shadowing loss</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.SCAs_def">
+<code class="sig-name descname">SCAs_def</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.SCAs_def" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field fraction of focused SCAs</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.T_field_cold_in">
+<code class="sig-name descname">T_field_cold_in</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.T_field_cold_in" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field timestep-averaged inlet temperature [C]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.T_field_hot_out">
+<code class="sig-name descname">T_field_hot_out</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.T_field_hot_out" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field timestep-averaged outlet temperature [C]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.T_heat_sink_in">
+<code class="sig-name descname">T_heat_sink_in</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.T_heat_sink_in" title="Permalink to this definition">¶</a></dt>
+<dd><p>Heat sink HTF inlet temp [C]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.T_heat_sink_out">
+<code class="sig-name descname">T_heat_sink_out</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.T_heat_sink_out" title="Permalink to this definition">¶</a></dt>
+<dd><p>Heat sink HTF outlet temp [C]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.T_rec_cold_in">
+<code class="sig-name descname">T_rec_cold_in</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.T_rec_cold_in" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loop timestep-averaged inlet temperature [C]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.T_rec_hot_out">
+<code class="sig-name descname">T_rec_hot_out</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.T_rec_hot_out" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loop timestep-averaged outlet temperature [C]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.T_tes_cold">
+<code class="sig-name descname">T_tes_cold</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.T_tes_cold" title="Permalink to this definition">¶</a></dt>
+<dd><p>TES cold temperature [C]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.T_tes_hot">
+<code class="sig-name descname">T_tes_hot</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.T_tes_hot" title="Permalink to this definition">¶</a></dt>
+<dd><p>TES hot temperature [C]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.Theta_ave">
+<code class="sig-name descname">Theta_ave</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.Theta_ave" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field collector solar incidence angle [deg]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.W_dot_field_pump">
+<code class="sig-name descname">W_dot_field_pump</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.W_dot_field_pump" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field htf pumping power [MWe]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.W_dot_parasitic_tot">
+<code class="sig-name descname">W_dot_parasitic_tot</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.W_dot_parasitic_tot" title="Permalink to this definition">¶</a></dt>
+<dd><p>System total electrical parasitic [MWe]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.W_dot_pc_pump">
+<code class="sig-name descname">W_dot_pc_pump</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.W_dot_pc_pump" title="Permalink to this definition">¶</a></dt>
+<dd><p>Heat sink pumping power [MWe]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.W_dot_sca_track">
+<code class="sig-name descname">W_dot_sca_track</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.W_dot_sca_track" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field collector tracking power [MWe]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.annual_electricity_consumption">
+<code class="sig-name descname">annual_electricity_consumption</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.annual_electricity_consumption" title="Permalink to this definition">¶</a></dt>
+<dd><p>Annual electricity consumption w/ avail derate [kWe-hr]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.annual_energy">
+<code class="sig-name descname">annual_energy</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.annual_energy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Annual Net Thermal Energy Production w/ avail derate [kWt-hr]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.annual_field_freeze_protection">
+<code class="sig-name descname">annual_field_freeze_protection</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.annual_field_freeze_protection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Annual thermal power for field freeze protection [kWt-hr]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.annual_gross_energy">
+<code class="sig-name descname">annual_gross_energy</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.annual_gross_energy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Annual Gross Thermal Energy Production w/ avail derate [kWt-hr]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.annual_tes_freeze_protection">
+<code class="sig-name descname">annual_tes_freeze_protection</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.annual_tes_freeze_protection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Annual thermal power for TES freeze protection [kWt-hr]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.annual_thermal_consumption">
+<code class="sig-name descname">annual_thermal_consumption</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.annual_thermal_consumption" title="Permalink to this definition">¶</a></dt>
+<dd><p>Annual thermal freeze protection required [kWt-hr]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.annual_total_water_use">
+<code class="sig-name descname">annual_total_water_use</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.annual_total_water_use" title="Permalink to this definition">¶</a></dt>
+<dd><p>Total Annual Water Usage [m^3]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.beam">
+<code class="sig-name descname">beam</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.beam" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resource Beam normal irradiance [W/m2]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.deltaP_field">
+<code class="sig-name descname">deltaP_field</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.deltaP_field" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field pressure drop [bar]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.dni_costh">
+<code class="sig-name descname">dni_costh</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.dni_costh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field collector DNI-cosine product [W/m2]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.e_ch_tes">
+<code class="sig-name descname">e_ch_tes</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.e_ch_tes" title="Permalink to this definition">¶</a></dt>
+<dd><p>TES charge state [MWht]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.e_dot_field_int_energy">
+<code class="sig-name descname">e_dot_field_int_energy</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.e_dot_field_int_energy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field change in material/htf internal energy [MWt]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.hour_day">
+<code class="sig-name descname">hour_day</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.hour_day" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resource Hour of Day</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.m_dot_balance">
+<code class="sig-name descname">m_dot_balance</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.m_dot_balance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Relative mass flow balance error</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.m_dot_field_delivered">
+<code class="sig-name descname">m_dot_field_delivered</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.m_dot_field_delivered" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field total mass flow delivered [kg/s]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.m_dot_field_recirc">
+<code class="sig-name descname">m_dot_field_recirc</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.m_dot_field_recirc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field total mass flow recirculated [kg/s]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.m_dot_htf_heat_sink">
+<code class="sig-name descname">m_dot_htf_heat_sink</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.m_dot_htf_heat_sink" title="Permalink to this definition">¶</a></dt>
+<dd><p>Heat sink HTF mass flow [kg/s]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.m_dot_loop">
+<code class="sig-name descname">m_dot_loop</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.m_dot_loop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver mass flow rate [kg/s]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.m_dot_tes_ch">
+<code class="sig-name descname">m_dot_tes_ch</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.m_dot_tes_ch" title="Permalink to this definition">¶</a></dt>
+<dd><p>TES charge mass flow rate [kg/s]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.m_dot_tes_dc">
+<code class="sig-name descname">m_dot_tes_dc</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.m_dot_tes_dc" title="Permalink to this definition">¶</a></dt>
+<dd><p>TES discharge mass flow rate [kg/s]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.month">
+<code class="sig-name descname">month</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.month" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resource Month</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.op_mode_1">
+<code class="sig-name descname">op_mode_1</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.op_mode_1" title="Permalink to this definition">¶</a></dt>
+<dd><p>1st operating mode</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.op_mode_2">
+<code class="sig-name descname">op_mode_2</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.op_mode_2" title="Permalink to this definition">¶</a></dt>
+<dd><p>2nd op. mode, if applicable</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.op_mode_3">
+<code class="sig-name descname">op_mode_3</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.op_mode_3" title="Permalink to this definition">¶</a></dt>
+<dd><p>3rd op. mode, if applicable</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.pres">
+<code class="sig-name descname">pres</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.pres" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resource Pressure [mbar]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.q_balance">
+<code class="sig-name descname">q_balance</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.q_balance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Relative energy balance error</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.q_ch_tes">
+<code class="sig-name descname">q_ch_tes</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.q_ch_tes" title="Permalink to this definition">¶</a></dt>
+<dd><p>TES charge thermal power [MWt]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.q_dc_tes">
+<code class="sig-name descname">q_dc_tes</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.q_dc_tes" title="Permalink to this definition">¶</a></dt>
+<dd><p>TES discharge thermal power [MWt]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.q_dot_freeze_prot">
+<code class="sig-name descname">q_dot_freeze_prot</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.q_dot_freeze_prot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field freeze protection required [MWt]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.q_dot_htf_sf_out">
+<code class="sig-name descname">q_dot_htf_sf_out</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.q_dot_htf_sf_out" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field thermal power leaving in HTF [MWt]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.q_dot_piping_loss">
+<code class="sig-name descname">q_dot_piping_loss</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.q_dot_piping_loss" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field piping thermal losses [MWt]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.q_dot_rec_abs">
+<code class="sig-name descname">q_dot_rec_abs</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.q_dot_rec_abs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver thermal power absorbed [MWt]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.q_dot_rec_inc">
+<code class="sig-name descname">q_dot_rec_inc</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.q_dot_rec_inc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver thermal power incident [MWt]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.q_dot_rec_thermal_loss">
+<code class="sig-name descname">q_dot_rec_thermal_loss</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.q_dot_rec_thermal_loss" title="Permalink to this definition">¶</a></dt>
+<dd><p>Receiver thermal losses [MWt]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.q_dot_to_heat_sink">
+<code class="sig-name descname">q_dot_to_heat_sink</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.q_dot_to_heat_sink" title="Permalink to this definition">¶</a></dt>
+<dd><p>Heat sink thermal power [MWt]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.q_inc_sf_tot">
+<code class="sig-name descname">q_inc_sf_tot</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.q_inc_sf_tot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field thermal power incident [MWt]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.q_tes_heater">
+<code class="sig-name descname">q_tes_heater</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.q_tes_heater" title="Permalink to this definition">¶</a></dt>
+<dd><p>TES freeze protection power [MWe]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.qinc_costh">
+<code class="sig-name descname">qinc_costh</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.qinc_costh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field thermal power incident after cosine [MWt]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.solazi">
+<code class="sig-name descname">solazi</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.solazi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resource Solar Azimuth [deg]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.solzen">
+<code class="sig-name descname">solzen</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.solzen" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resource Solar Zenith [deg]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.tank_losses">
+<code class="sig-name descname">tank_losses</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.tank_losses" title="Permalink to this definition">¶</a></dt>
+<dd><p>TES thermal losses [MWt]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.tdry">
+<code class="sig-name descname">tdry</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.tdry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resource Dry bulb temperature [C]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.time_hr">
+<code class="sig-name descname">time_hr</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.time_hr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Time at end of timestep [hr]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.twet">
+<code class="sig-name descname">twet</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.twet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resource Wet bulb temperature [C]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.wspd">
+<code class="sig-name descname">wspd</code><a class="headerlink" href="#PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Outputs.wspd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resource Wind Speed [m/s]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><em>sequence</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 </div>
 
@@ -128,12 +3406,15 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              >index</a></li>
-        <li class="nav-item nav-item-0"><a href="../index.html">PySAM 1.2 documentation</a> &#187;</li> 
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">PySAM 2.0 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2019, NREL.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.3.
     </div>
   </body>
 </html>

@@ -6,7 +6,7 @@
 Welcome to NREL-PySAM's documentation!
 =================================
 
-NREL-PySAM is a wrapper for the National Renewable Energy Laboratory's `System Advisor Model <http://sam.nrel.gov>`_ (SAM).
+NREL-PySAM is a wrapper for the National Renewable Energy Laboratory's `System Advisor Model <http://sam.nrel.gov>`_ (SAM), a simulator for renewable energy, not to be confused with `pysam <https://pysam.readthedocs.io/en/latest/api.html>`_, which is for reading sequence alignment files often used in genetics.
 
 SAM is a performance and financial model designed to facilitate decision making for people involved in the renewable energy industry:
 
@@ -29,7 +29,9 @@ Please see :doc:`Version` for more details.
 Getting Started
 ===============
 
-For Python 3.5 to 3.8, as NREL-PySAM is available on PyPi. It is also availabble on Anaconda for MacOSX up to 3.8 and on Windows up to 3.7. NREL-PySAM-stubs is the stub file package providing auto-completion features.
+Installation
+^^^^^^^^^^^^
+For Python 3.5 to 3.8, as NREL-PySAM is available on PyPi. It is also available on Anaconda for MacOSX up to 3.8 and on Windows up to 3.7. NREL-PySAM-stubs is the stub file package providing auto-completion features.
 
 To install from PyPi::
 
@@ -39,6 +41,21 @@ To install from Anaconda, the NREL channel needs to be appended::
 
     conda config --env --append channels nrel
     conda install nrel-pysam
+
+Writing Your First PySAM Script
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Before you write your first PySAM script it really helps to familiarize 
+yourself with SAM.  If you are not already familiar with SAM, it is recommended
+you install it, and run a simulation of interest to you.  Though SAM is one 
+program, it is made up of a number of simulation modules, that are run 
+sequentially by the SAM graphical user interface.  The particular modules that
+are run are determined by the type of simulation you are doing.  In general
+technology models are followed by financial models.  For example,
+if you are running a PVWatts Distributed Commercial simulation, the modules in
+the order they should be run are
+pvwattsv7, battwatts, utilityrate5, and cashloan.  To find the modules you
+need, look at :doc:`Configs` and search for your simulation type.  
 
 Each technology and financial model is its own module, which can be imported by::
 
