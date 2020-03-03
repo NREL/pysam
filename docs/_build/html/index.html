@@ -43,14 +43,12 @@
   <h3><a href="#">Table of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Welcome to NREL-PySAM’s documentation!</a></li>
-<li><a class="reference internal" href="#version-2-0-and-upgrading-from-older-versions">Version 2.0 and Upgrading from Older Versions</a></li>
 <li><a class="reference internal" href="#getting-started">Getting Started</a><ul>
 <li><a class="reference internal" href="#installation">Installation</a></li>
 <li><a class="reference internal" href="#writing-your-first-pysam-script">Writing Your First PySAM Script</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#available-models">Available Models</a></li>
-<li><a class="reference internal" href="#sam-configurations">SAM Configurations</a></li>
+<li><a class="reference internal" href="#version-2-0-and-upgrading-from-older-versions">Version 2.0 and Upgrading from Older Versions</a></li>
 <li><a class="reference internal" href="#pysam-documentation-pages">PySAM Documentation Pages</a></li>
 <li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
 </ul>
@@ -93,19 +91,13 @@
 <li><p>Technology developers</p></li>
 <li><p>Researchers</p></li>
 </ul>
-<p><a class="reference external" href="http://www.github.com/nrel/sam">SAM</a> is open-source. PySAM provides a native Python interface for the models found in SAM Simulation Core, <a class="reference external" href="http://www.github.com/nrel/ssc">SSC</a>.</p>
-</div>
-<div class="section" id="version-2-0-and-upgrading-from-older-versions">
-<h1>Version 2.0 and Upgrading from Older Versions<a class="headerlink" href="#version-2-0-and-upgrading-from-older-versions" title="Permalink to this headline">¶</a></h1>
-<p>Between major version changes, in addition to new features, modules and bug fixes, the group to which a variable belongs may change.
-The groups should stabilize after the initial releases.
-Please see <a class="reference internal" href="Version.html"><span class="doc">Version 2.0.2</span></a> for more details.</p>
+<p><a class="reference external" href="http://www.github.com/nrel/sam">SAM</a> is open-source. PySAM provides a native Python interface for the models found in SAM Simulation Core, (<a class="reference external" href="http://www.github.com/nrel/ssc">SSC</a>).</p>
 </div>
 <div class="section" id="getting-started">
 <h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
-<p>For Python 3.5 to 3.8, as NREL-PySAM is available on PyPi. It is also available on Anaconda for MacOSX up to 3.8 and on Windows up to 3.7. NREL-PySAM-stubs is the stub file package providing auto-completion features.</p>
+<p>For Python 3.5 to 3.8, as NREL-PySAM is available on PyPi. It is also available on Anaconda for MacOSX up to 3.8 and on Windows and Linux up to 3.7. NREL-PySAM-stubs is the stub file package providing auto-completion features.</p>
 <p>To install from PyPi:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">NREL</span><span class="o">-</span><span class="n">PySAM</span>
 </pre></div>
@@ -120,32 +112,33 @@ Please see <a class="reference internal" href="Version.html"><span class="doc">V
 <h2>Writing Your First PySAM Script<a class="headerlink" href="#writing-your-first-pysam-script" title="Permalink to this headline">¶</a></h2>
 <p>Before you write your first PySAM script it really helps to familiarize
 yourself with SAM.  If you are not already familiar with SAM, it is recommended
-you install it, and run a simulation of interest to you.  Though SAM is one
-program, it is made up of a number of simulation modules, that are run
+you install it, and run a simulation of interest to you.  SAM is a graphical user interface to the SAM Simulation Core library of models.  Using it provides an easy introduction to the simulations that can be done using the library.  PySAM is a python interface to the same SAM Simulation Core that allows you to customize SAM for your specific needs.</p>
+<p>There is a lot of data needed to run a SAM simulation.  Entering that data with assignment statements in PySAM can be tedious.  Fortunately, you can enter the data using the SAM graphical user interface, and save that data to a JSON file, which can then be loaded by PySAM. You can then modify and use the data in PySAM with python as needed.</p>
+<p>Though SAM is one
+program, it is made up of a number of simulation modules that are run
 sequentially by the SAM graphical user interface.  The particular modules that
-are run are determined by the type of simulation you are doing.  In general
+are run are determined by the type of simulation you are doing.  In general,
 technology models are followed by financial models.  For example,
 if you are running a PVWatts Distributed Commercial simulation, the modules in
 the order they should be run are
-pvwattsv7, battwatts, utilityrate5, and cashloan.  To find the modules you need look at <a class="reference internal" href="Configs.html"><span class="doc">Configuration Names and SSC Models</span></a> and search for your simulation type.</p>
-<p>Each technology and financial model is its own module, which can be imported by:</p>
+pvwattsv7, battwatts, utilityrate5, and cashloan.  To find which modules you
+need and the order to run them, look at <a class="reference internal" href="Configs.html"><span class="doc">Configuration Names and SSC Models</span></a> and search for your simulation type.</p>
+<p>Each technology and financial model is its own module. Module documentation is in <a class="reference internal" href="Models.html"><span class="doc">Modules</span></a> or refer to <a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a>.  Each module can be imported by:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">PySAM.</span><span class="o">&lt;</span><span class="n">PySAM</span> <span class="n">Module</span><span class="o">&gt;</span>
 </pre></div>
 </div>
-<p>The original Python SDK, PySSC, is bundled, and can be imported by:</p>
+<p>The original Python SDK, <a class="reference internal" href="PySSC.html"><span class="doc">PySSC</span></a>, is bundled, and can be imported by:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">PySAM.PySSC</span> <span class="kn">import</span> <span class="n">PySSC</span>
 </pre></div>
 </div>
-<p>For examples of using PySAM modules, see <a class="reference internal" href="Examples.html"><span class="doc">Examples</span></a></p>
+<p>For examples of using PySAM modules, see <a class="reference internal" href="Examples.html"><span class="doc">Examples</span></a> and the Examples folder of the source.</p>
 </div>
 </div>
-<div class="section" id="available-models">
-<h1>Available Models<a class="headerlink" href="#available-models" title="Permalink to this headline">¶</a></h1>
-<p>For a table of available models, see <a class="reference internal" href="Models.html"><span class="doc">Modules</span></a>, or refer to <a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a>.</p>
-</div>
-<div class="section" id="sam-configurations">
-<h1>SAM Configurations<a class="headerlink" href="#sam-configurations" title="Permalink to this headline">¶</a></h1>
-<p>For a table of SAM configurations and the sequence of models required to run them, see <a class="reference internal" href="Configs.html"><span class="doc">Configuration Names and SSC Models</span></a>.</p>
+<div class="section" id="version-2-0-and-upgrading-from-older-versions">
+<h1>Version 2.0 and Upgrading from Older Versions<a class="headerlink" href="#version-2-0-and-upgrading-from-older-versions" title="Permalink to this headline">¶</a></h1>
+<p>Between major version changes, in addition to new features, modules and bug fixes, the group to which a variable belongs may change.
+The groups should stabilize after the initial releases.
+Please see <a class="reference internal" href="Version.html"><span class="doc">Version 2.0.2</span></a> for more details.</p>
 </div>
 <div class="section" id="pysam-documentation-pages">
 <h1>PySAM Documentation Pages<a class="headerlink" href="#pysam-documentation-pages" title="Permalink to this headline">¶</a></h1>
