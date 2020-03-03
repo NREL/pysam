@@ -30,7 +30,7 @@ If the group name isn't known, a variable can be accessed using `value`::
 
     system_model.value('solar_resource_file')
     
-    filename = 'My_File'
+    filename = 'My_TMY_or_TYA_File'
     # This is how you would assign the variable, solar_resource_file to your own file name.
     system_model.value('solar_resource_file', filename)
 
@@ -66,7 +66,7 @@ functions for each model are called sequentially to do the simulation.::
     system_model = pv.default('PVWattsSingleOwner')
     financial_model = so.from_existing(system_model, 'PVWattsSingleOwner')
 
-		filename = 'My_File'
+    filename = 'My_TMY_or_TYA_File'
     system_model.SolarResource.solar_resource_file = filename
 
     system_model.execute()
@@ -76,7 +76,7 @@ functions for each model are called sequentially to do the simulation.::
 
 
 Importing a SAM GUI Case
-*******************
+************************
 
 Entering or changing all the data describing your simulation from default values
 can be tedious, and make your python script less readable.  An alternative is to
@@ -86,11 +86,11 @@ For an example of how to import the modules and variables from a SAM GUI Case, s
 
 
 Sizing a PV + Battery system with ReOpt
-**************************************
+***************************************
 
 Pvwattsv7 and Pvsamv1 have the option to size and dispatch a StandAloneBattery 
-or Battwatts model from ReOpt Lite's
-optimization. The Utilityrate5 model is also required to provide electric tariff 
+or Battwatts model from `ReOpt Lite's <https://reopt.nrel.gov/>`_ optimization. 
+The Utilityrate5 model is also required to provide electric tariff 
 info, and other financial models
 such as Cashloan may also be linked to provide financial parameters. The 
 `Reopt_size_battery_post` function returns
