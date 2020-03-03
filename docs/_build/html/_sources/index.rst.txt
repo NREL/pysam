@@ -23,7 +23,7 @@ Getting Started
 
 Installation
 ^^^^^^^^^^^^
-For Python 3.5 to 3.8, as NREL-PySAM is available on PyPi. It is also available on Anaconda for MacOSX up to 3.8 and on Windows and Linux up to 3.7. NREL-PySAM-stubs is the stub file package providing auto-completion features.
+PySAM for Python 3.5 to 3.8, as NREL-PySAM, is available on PyPi. It is also available on Anaconda for MacOSX up to 3.8 and on Windows and Linux up to 3.7. NREL-PySAM-stubs is the stub file package providing auto-completion features.
 
 To install from PyPi::
 

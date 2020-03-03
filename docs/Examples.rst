@@ -6,9 +6,13 @@ Examples
 Accessing Variables
 *******************
 
-All variables in a PySAM class are organized into subclasses called Groups. There are several ways to access a variable.
+All variables in a PySAM class are organized into subclasses called Groups. 
+There are several ways to access a variable.  The subclass and variable names 
+and descriptions are given in the :doc:`Models` documentation. 
 
-Directly as <class><subclass><variable>, as for the LocationAndResource group in Pvwattsv7::
+Variables may be accessed directly as <class>.<subclass>.<variable>.  For
+ example, the solar_resource_file which is part of the subclass SolarResource
+ group in Pvwattsv7::
 
     import PySAM.Pvwattsv7 as pv
 
@@ -25,6 +29,9 @@ Groups and variables can also be accessed using `__getattribute__`. Variables ca
 If the group name isn't known, a variable can be accessed using `value`::
 
     system_model.value('solar_resource_file')
+    
+    filename = 'My_File'
+    # This is how you would assign the variable, solar_resource_file to your own file name.
     system_model.value('solar_resource_file', filename)
 
 
@@ -35,14 +42,23 @@ The `assign` and `export` functions can be used to work with groups of variables
     system_model.SystemDesign.export()
 
 Creating a Simulation from Multiple Modules
-**************************************
+*******************************************
 
 
-This is how to create a PV PPA plant simulation using the simplified PV model, Pvwattsv7, and Singleowner, where the
-values are loaded from the set of default parameters in the configuration "PVWattsSingleOwner".
+Suppose you wish to create a PV Power Purchase Agreement (PPA) single owner 
+plant simulation. First you go to :doc:`Configs`, where you find the modules you 
+need for this simulation are Pvwattsv7, and Singleowner in that order.  In this 
+simple example the values are loaded from the set of default parameters in the 
+configuration "PVWattsSingleOwner".  The docs listing possible configurations of 
+the modules are found in the documentation for those :doc:`Models`; for example,
+for Pvwattsv7 they are found in :doc:`modules/Pvwattsv7`.  There is a 
+configuration for each of the types of simulations listed in :doc:`Configs`.
 
-The Singleowner model is created using the `from_existing` function so that it shares the same underlying data as the
-PVwattsv7 model. The execute function of each model is called sequentially.::
+The Singleowner model is created using the `from_existing` function so that it 
+shares the same underlying data as the
+PVwattsv7 model.  This means when the Pvwattsv7 model is executed, the data for 
+the financial Singleowner model is loaded from its outputs. The execute 
+functions for each model are called sequentially to do the simulation.::
 
     import PySAM.Pvwattsv7 as pv
     import PySAM.Singleowner as so
@@ -50,6 +66,7 @@ PVwattsv7 model. The execute function of each model is called sequentially.::
     system_model = pv.default('PVWattsSingleOwner')
     financial_model = so.from_existing(system_model, 'PVWattsSingleOwner')
 
+		filename = 'My_File'
     system_model.SolarResource.solar_resource_file = filename
 
     system_model.execute()
@@ -61,17 +78,24 @@ PVwattsv7 model. The execute function of each model is called sequentially.::
 Importing a SAM GUI Case
 *******************
 
-
+Entering or changing all the data describing your simulation from default values
+can be tedious, and make your python script less readable.  An alternative is to
+use the SAM GUI to enter the data, and then to save the inputs as a JSON file.
+This file can then be imported into PySAM, making for less tedium.
 For an example of how to import the modules and variables from a SAM GUI Case, see :doc:`Import`.
 
 
 Sizing a PV + Battery system with ReOpt
 **************************************
 
-Pvwattsv7 and Pvsamv1 have the option to size and dispatch a StandAloneBattery or Battwatts model from ReOpt Lite's
-optimization. The Utilityrate5 model is also required to provide electric tariff info, and other financial models
-such as Cashloan may also be linked to provide financial parameters. The `Reopt_size_battery_post` function returns
-a properly-formatted dictionary of ReOpt inputs that can then be posted to the ReOpt Lite API as a json string::
+Pvwattsv7 and Pvsamv1 have the option to size and dispatch a StandAloneBattery 
+or Battwatts model from ReOpt Lite's
+optimization. The Utilityrate5 model is also required to provide electric tariff 
+info, and other financial models
+such as Cashloan may also be linked to provide financial parameters. The 
+`Reopt_size_battery_post` function returns
+a properly-formatted dictionary of ReOpt inputs that can then be posted to the 
+ReOpt Lite API as a json string::
 
     import PySAM.Utilityrate5 as ur
     import PySAM.Pvsamv1 as pvsam
