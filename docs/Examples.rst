@@ -89,13 +89,13 @@ Sizing a PV + Battery system with ReOpt
 ***************************************
 
 Pvwattsv7 and Pvsamv1 have the option to size and dispatch a StandAloneBattery 
-or Battwatts model from `ReOpt Lite's <https://reopt.nrel.gov/>`_ optimization. 
+or Battwatts model from `ReOpt Lite's <https://developer.nrel.gov/docs/energy-optimization/reopt-v1/>`_ optimization. 
 The Utilityrate5 model is also required to provide electric tariff 
 info, and other financial models
 such as Cashloan may also be linked to provide financial parameters. The 
 `Reopt_size_battery_post` function returns
 a properly-formatted dictionary of ReOpt inputs that can then be posted to the 
-ReOpt Lite API as a json string::
+`ReOpt Lite's API <https://github.com/NREL/REopt-API-Analysis>`_ as a json string::
 
     import PySAM.Utilityrate5 as ur
     import PySAM.Pvsamv1 as pvsam

@@ -43,9 +43,16 @@
   <h3><a href="index.html">Table of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">To import a case from the SAM GUI</a><ul>
-<li><a class="reference internal" href="#export-from-sam-gui">1: Export from SAM GUI</a></li>
-<li><a class="reference internal" href="#create-each-model-by-wrapping-the-data">2: Create each model by wrapping the data</a></li>
-<li><a class="reference internal" href="#executing-a-sequence-of-models">3: Executing a sequence of models</a></li>
+<li><a class="reference internal" href="#export-from-sam-gui">Export from SAM GUI</a></li>
+<li><a class="reference internal" href="#move-the-data-into-the-appropriate-pysam-module-classes">Move the data into the appropriate PySAM Module Classes</a><ul>
+<li><a class="reference internal" href="#example">Example</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#execute-the-sequence-of-models">Execute the sequence of models</a><ul>
+<li><a class="reference internal" href="#example-continued">Example (Continued)</a></li>
+<li><a class="reference internal" href="#possible-problems">Possible Problems</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -81,43 +88,77 @@
   <div class="section" id="to-import-a-case-from-the-sam-gui">
 <h1>To import a case from the SAM GUI<a class="headerlink" href="#to-import-a-case-from-the-sam-gui" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="export-from-sam-gui">
-<h2>1: Export from SAM GUI<a class="headerlink" href="#export-from-sam-gui" title="Permalink to this headline">¶</a></h2>
-<p>On the drop-down menu for the case, click <strong>Generate code</strong> then <strong>JSON for inputs</strong>, and export the case inputs to a JSON file.</p>
+<h2>Export from SAM GUI<a class="headerlink" href="#export-from-sam-gui" title="Permalink to this headline">¶</a></h2>
+<p>On the drop-down menu for the case, click <strong>Generate code</strong> then
+<strong>JSON for inputs</strong>, and export the case inputs to a JSON file.
+This file will have the case name as the file prefix, with the
+suffix being “.json”.</p>
 </div>
-<div class="section" id="create-each-model-by-wrapping-the-data">
-<h2>2: Create each model by wrapping the data<a class="headerlink" href="#create-each-model-by-wrapping-the-data" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="move-the-data-into-the-appropriate-pysam-module-classes">
+<h2>Move the data into the appropriate PySAM Module Classes<a class="headerlink" href="#move-the-data-into-the-appropriate-pysam-module-classes" title="Permalink to this headline">¶</a></h2>
 <p>For each SSC compute module required for the simulation (see <a class="reference internal" href="Configs.html"><span class="doc">Configuration Names and SSC Models</span></a>), create a new PySSC data table and wrap it with the equivalent PySAM class, releasing memory ownership to the newly created instance. Do not call <code class="docutils literal notranslate"><span class="pre">PySSC.data_free</span></code> on the data passed to the wrap function!</p>
-<p>For example, the following code imports the parameters from a JSON file named “genericsystem_case.json” that was exported from a <strong>Generic System - PPA Single Owner</strong> case in SAM, creates a PySSC table for the Generic System and Single Owner SSC compute modules, and then wraps each table in the appropriate PySAM class:</p>
+<div class="section" id="example">
+<h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
+<p>Suppose we wish to make a python script that replicates the
+simulation SAM does for a PVWatts Distributed Commercial installation.  We go to  <a class="reference internal" href="Configs.html"><span class="doc">Configuration Names and SSC Models</span></a> where we find that the three modules we need are <em>pvwatts7</em>, <em>utilityrate5</em>, and <em>cashloan</em>, in that order.  In our python script, we import the modules, <code class="docutils literal notranslate"><span class="pre">json</span></code> (because we are reading a JSON file), the three modules for our simulation, and <code class="docutils literal notranslate"><span class="pre">PySSC</span></code> which is used to move the data into the proper classes.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
-<span class="kn">import</span> <span class="nn">PySAM.GenericSystem</span> <span class="k">as</span> <span class="nn">GenericSystem</span>
-<span class="kn">import</span> <span class="nn">PySAM.Singleowner</span> <span class="k">as</span> <span class="nn">Singleowner</span>
-<span class="kn">from</span> <span class="nn">PySAM.PySSC</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">PySAM.Pvwattsv7</span> <span class="k">as</span> <span class="nn">PVWatts</span>
+<span class="kn">import</span> <span class="nn">PySAM.Utilityrate5</span> <span class="k">as</span> <span class="nn">UtilityRate</span>
+<span class="kn">import</span> <span class="nn">PySAM.Cashloan</span> <span class="k">as</span> <span class="nn">Cashloan</span>
+<span class="kn">import</span> <span class="nn">PySAM.PySSC</span> <span class="k">as</span> <span class="nn">pssc</span>
 
-<span class="n">ssc</span> <span class="o">=</span> <span class="n">PySSC</span><span class="p">()</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;genericsystem_case.json&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-    <span class="n">dic</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-    <span class="n">gs_dat</span> <span class="o">=</span> <span class="n">dict_to_ssc_table</span><span class="p">(</span><span class="n">dic</span><span class="p">,</span> <span class="s2">&quot;generic_system&quot;</span><span class="p">)</span>
-    <span class="n">so_dat</span> <span class="o">=</span> <span class="n">dict_to_ssc_table</span><span class="p">(</span><span class="n">dic</span><span class="p">,</span> <span class="s2">&quot;singleowner&quot;</span><span class="p">)</span>
-    <span class="n">gs</span> <span class="o">=</span> <span class="n">GenericSystem</span><span class="o">.</span><span class="n">wrap</span><span class="p">(</span><span class="n">gs_dat</span><span class="p">)</span>
-
-    <span class="c1"># to create GenericSystem and Singleowner combined simulation, sharing the same data</span>
-    <span class="n">so</span> <span class="o">=</span> <span class="n">Singleowner</span><span class="o">.</span><span class="n">from_existing</span><span class="p">(</span><span class="n">gs</span><span class="p">)</span>
-    <span class="n">so</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">Singleowner</span><span class="o">.</span><span class="n">wrap</span><span class="p">(</span><span class="n">so_dat</span><span class="p">)</span><span class="o">.</span><span class="n">export</span><span class="p">())</span>
+<span class="n">ssc</span> <span class="o">=</span> <span class="n">pssc</span><span class="o">.</span><span class="n">PySSC</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The json file you exported from the SAM GUI is then loaded.  Make sure to change the name to that of the file you exported.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">json_file_path</span> <span class="o">=</span> <span class="s1">&#39;pvwattsdistcomm.json&#39;</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">json_file_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">dic</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The next three lines make data structures for the models listed.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pv_dat</span> <span class="o">=</span> <span class="n">pssc</span><span class="o">.</span><span class="n">dict_to_ssc_table</span><span class="p">(</span><span class="n">dic</span><span class="p">,</span> <span class="s2">&quot;pvwattsv7&quot;</span><span class="p">)</span>
+<span class="n">ur_dat</span> <span class="o">=</span> <span class="n">pssc</span><span class="o">.</span><span class="n">dict_to_ssc_table</span><span class="p">(</span><span class="n">dic</span><span class="p">,</span> <span class="s2">&quot;utilityrate5&quot;</span><span class="p">)</span>
+<span class="n">cl_dat</span> <span class="o">=</span> <span class="n">pssc</span><span class="o">.</span><span class="n">dict_to_ssc_table</span><span class="p">(</span><span class="n">dic</span><span class="p">,</span> <span class="s2">&quot;cashloan&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Next we move that data into the model classes, starting with the
+first one to be executed, and then basing the subsequent ones on
+that one, so their inputs will fill with the outputs of the
+previously run modules.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pv</span> <span class="o">=</span> <span class="n">PVWatts</span><span class="o">.</span><span class="n">wrap</span><span class="p">(</span><span class="n">pv_dat</span><span class="p">)</span>
+<span class="n">ur</span> <span class="o">=</span> <span class="n">UtilityRate</span><span class="o">.</span><span class="n">from_existing</span><span class="p">(</span><span class="n">pv</span><span class="p">,</span> <span class="s1">&#39;PVWattsCommercial&#39;</span><span class="p">)</span>
+<span class="n">cl</span> <span class="o">=</span> <span class="n">Cashloan</span><span class="o">.</span><span class="n">from_existing</span><span class="p">(</span><span class="n">pv</span><span class="p">,</span> <span class="s1">&#39;PVWattsCommercial&#39;</span><span class="p">)</span>
+<span class="n">ur</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">UtilityRate</span><span class="o">.</span><span class="n">wrap</span><span class="p">(</span><span class="n">ur_dat</span><span class="p">)</span><span class="o">.</span><span class="n">export</span><span class="p">())</span>
+<span class="n">cl</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">Cashloan</span><span class="o">.</span><span class="n">wrap</span><span class="p">(</span><span class="n">cl_dat</span><span class="p">)</span><span class="o">.</span><span class="n">export</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="executing-a-sequence-of-models">
-<h2>3: Executing a sequence of models<a class="headerlink" href="#executing-a-sequence-of-models" title="Permalink to this headline">¶</a></h2>
-<p>Downsteam models require upstream model outputs as inputs. Since the underlying data between <cite>gs</cite> and <cite>so</cite> are shared
-due to the <cite>from_existing</cite> function, the outputs of <cite>gs</cite> required as inputs to <cite>so</cite> will automatically be accessible to <cite>so</cite>.
+</div>
+<div class="section" id="execute-the-sequence-of-models">
+<h2>Execute the sequence of models<a class="headerlink" href="#execute-the-sequence-of-models" title="Permalink to this headline">¶</a></h2>
+<p>Downsteam models require upstream model outputs as inputs. Since the underlying data between <cite>pv</cite>, <cite>ur</cite> and <cite>cl</cite> are shared
+due to the <cite>from_existing</cite> function, the outputs of <cite>pv</cite> required as inputs to <cite>ur</cite> and <cite>cl</cite> will automatically be accessible to them.
 To execute a model, use <code class="docutils literal notranslate"><span class="pre">execute(verbosity)</span></code> where 0 indicates minimal messages and 1 produces log messages.
-All outputs are available in the Outputs group of a PySAM class.:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gs</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
-<span class="n">so</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
-<span class="n">so</span><span class="o">.</span><span class="n">Outputs</span><span class="o">.</span><span class="n">export</span><span class="p">()</span> <span class="c1"># as dictionary</span>
+All outputs are available in the Outputs group of a PySAM class.</p>
+<div class="section" id="example-continued">
+<h3>Example (Continued)<a class="headerlink" href="#example-continued" title="Permalink to this headline">¶</a></h3>
+<p>Here we continue our example.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pv</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+<span class="n">ur</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+<span class="n">cl</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>For some compute module input parameters, the SAM graphical user interface (GUI) uses equations to calculate the value
+<p>We can then print out some of the data.  The variable and group names are found in the <a class="reference internal" href="Models.html"><span class="doc">Modules</span></a>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;ac_annual: &#39;</span><span class="p">,</span> <span class="n">pv</span><span class="o">.</span><span class="n">Outputs</span><span class="o">.</span><span class="n">ac_annual</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;ur_ec_tou_mat: &#39;</span><span class="p">,</span> <span class="n">ur</span><span class="o">.</span><span class="n">ElectricityRates</span><span class="o">.</span><span class="n">ur_ec_tou_mat</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;cl.Outputs.npv: &#39;</span><span class="p">,</span> <span class="n">cl</span><span class="o">.</span><span class="n">Outputs</span><span class="o">.</span><span class="n">npv</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="possible-problems">
+<h3>Possible Problems<a class="headerlink" href="#possible-problems" title="Permalink to this headline">¶</a></h3>
+<p>You probably noticed that in SAM, there are black and blue input variables.  The blue ones are calculated by the SAM GUI from the black ones.  For some compute module input parameters the SAM graphical user interface (GUI) uses equations to calculate the value
 of the parameter from special GUI inputs that are not passed to the compute module. Other compute module input parameters
 are used by more than one compute module in the simulation. In some cases, you may need to write additional code to ensure
 values for these parameters are correctly assigned. We hope to eliminate the need for this additional code in the future.</p>
@@ -145,6 +186,7 @@ to ensure the change is accounted for in <code class="docutils literal notransla
 <span class="c1"># y = land cost in $/acre</span>
 <span class="n">so</span><span class="o">.</span><span class="n">SystemCosts</span><span class="o">.</span><span class="n">total_installed_cost</span> <span class="o">=</span> <span class="n">cost_without_land</span> <span class="o">+</span> <span class="n">y</span> <span class="o">*</span> <span class="n">land_area</span>
 </pre></div>
+</div>
 </div>
 </div>
 </div>
