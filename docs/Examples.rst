@@ -3,6 +3,8 @@
 Examples
 ========
 
+There are a few example python scripts using PySAM in the Examples directory of the github repository.
+
 Accessing Variables
 *******************
 
