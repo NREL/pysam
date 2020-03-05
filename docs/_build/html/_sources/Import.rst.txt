@@ -9,10 +9,7 @@ Export from SAM GUI
 On the drop-down menu for the case, click **Generate code** then 
 **JSON for inputs**, and export the case inputs to a JSON file. 
 This file will have the case name as the file prefix, with the
-suffix being ".json".  When you save the JSON file, two other files are also
-saved.  They are ssc.so, and sscpi.h, and they are specific to the version
-of SAM you used.  These need to be in the same directory
-your python script runs in, because PySAM uses them to do its simulations.
+suffix being ".json".
 
 Move the data into the appropriate PySAM Module Classes
 =======================================================
