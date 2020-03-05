@@ -92,7 +92,10 @@
 <p>On the drop-down menu for the case, click <strong>Generate code</strong> then
 <strong>JSON for inputs</strong>, and export the case inputs to a JSON file.
 This file will have the case name as the file prefix, with the
-suffix being “.json”.</p>
+suffix being “.json”.  When you save the JSON file, two other files are also
+saved.  They are ssc.so, and sscpi.h, and they are specific to the version
+of SAM you used.  These need to be in the same directory
+your python script runs in, because PySAM uses them to do its simulations.</p>
 </div>
 <div class="section" id="move-the-data-into-the-appropriate-pysam-module-classes">
 <h2>Move the data into the appropriate PySAM Module Classes<a class="headerlink" href="#move-the-data-into-the-appropriate-pysam-module-classes" title="Permalink to this headline">¶</a></h2>
