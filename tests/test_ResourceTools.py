@@ -2,6 +2,7 @@ import pytest
 from pathlib import Path
 
 import PySAM.ResourceTools as tools
+import PySAM.Windpower as wp
 
 
 def test_solar():
@@ -20,4 +21,11 @@ def test_wind():
     data = tools.SRW_to_wind_data(wind)
     assert(data['fields'] == [1, 2, 4, 3, 1, 2, 4, 3, 1, 2, 4, 3, 1, 2, 4, 3])
     assert(data['heights'] == [50, 50, 50, 50, 80, 80, 80, 80, 110, 110, 110, 110, 140, 140, 140, 140])
-    assert(data['data'][0] == [9.587,0.953420183,173,9.466,10.247,0.950086356,174,11.637,10.627,0.946649889,175,13.249,10.997,0.94340982,175,14.509])
+    assert(data['data'][0] == [9.587, 0.953420183, 173, 9.466, 10.247, 0.950086356, 174, 11.637, 10.627, 0.946649889,
+                               175, 13.249, 10.997, 0.94340982, 175, 14.509])
+
+    wind_model = wp.new()
+    wind_model.Resource.wind_resource_data = data
+    returned_data = wind_model.Resource.wind_resource_data['data'][0]
+    for i, d in enumerate(data['data'][0]):
+        assert(d == pytest.approx(returned_data[i], 1e-3))

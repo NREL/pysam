@@ -16,7 +16,7 @@ Directly as <class><subclass><variable>, as for the LocationAndResource group in
     system_model.SolarResource.solar_resource_file
 
 
-Groups and variables can also be accessed using `__getattribute__`. Variables can be set with `__setattr__::
+Groups and variables can also be accessed using `__getattribute__`. Variables can be set with `__setattr__`::
 
     system_model.__getattribute__('SolarResource').__getattribute__('solar_resource_file')
     system_model.__getattribute__('SolarResource').__setattr__('solar_resource_file') = filename
@@ -25,7 +25,7 @@ Groups and variables can also be accessed using `__getattribute__`. Variables ca
 If the group name isn't known, a variable can be accessed using `value`::
 
     system_model.value('solar_resource_file')
-    system_model.valie('solar_resource_file', filename)
+    system_model.value('solar_resource_file', filename)
 
 
 The `assign` and `export` functions can be used to work with groups of variables in dictionaries::

@@ -6,6 +6,7 @@ Version 2.0.2
 Jan 27, 2020 ~ SAM 2020.2.x, SSC Version 233
 
 * All new functions and models in `latest SAM Release <https://nrel.github.io/SAM/doc/releasenotes.html>`_
+    - Switched from PVwattsv5 to PVwattsv7
 * New functions (Reopt_size_batter_post, value, from_existing)
     - Chaining cmods together
     - Get variable by a name without knowing group, list all variables

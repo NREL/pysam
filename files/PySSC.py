@@ -267,7 +267,7 @@ def ssc_sim(data_ssc, tech_model_name, financial_model_name):
         tech_model_dict["cmod_success"] = 0
         return tech_model_dict
 
-    if financial_model_name is None:
+    if financial_model_name in [None, "none"]:
         tech_model_dict["cmod_success"] = 1
         return tech_model_dict
 
