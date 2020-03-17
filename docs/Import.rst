@@ -3,47 +3,83 @@
 To import a case from the SAM GUI
 *********************************
 
-1: Export from SAM GUI
+Export from SAM GUI
 ======================
 
-On the drop-down menu for the case, click **Generate code** then **JSON for inputs**, and export the case inputs to a JSON file.
+On the drop-down menu for the case, click **Generate code** then 
+**JSON for inputs**, and export the case inputs to a JSON file. 
+This file will have the case name as the file prefix, with the
+suffix being ".json".
 
-2: Create each model by wrapping the data
-=========================================
+Move the data into the appropriate PySAM Module Classes
+=======================================================
 
 For each SSC compute module required for the simulation (see :doc:`Configs`), create a new PySSC data table and wrap it with the equivalent PySAM class, releasing memory ownership to the newly created instance. Do not call ``PySSC.data_free`` on the data passed to the wrap function!
 
-For example, the following code imports the parameters from a JSON file named "genericsystem_case.json" that was exported from a **Generic System - PPA Single Owner** case in SAM, creates a PySSC table for the Generic System and Single Owner SSC compute modules, and then wraps each table in the appropriate PySAM class::
-
+Example
+^^^^^^^
+Suppose we wish to make a python script that replicates the
+simulation SAM does for a PVWatts Distributed Commercial installation.  We go to  :doc:`Configs` where we find that the three modules we need are *pvwatts7*, *utilityrate5*, and *cashloan*, in that order.  In our python script, we import the modules, ``json`` (because we are reading a JSON file), the three modules for our simulation, and ``PySSC`` which is used to move the data into the proper classes.
+::
     import json
-    import PySAM.GenericSystem as GenericSystem
-    import PySAM.Singleowner as Singleowner
-    from PySAM.PySSC import *
+    import PySAM.Pvwattsv7 as PVWatts
+    import PySAM.Utilityrate5 as UtilityRate
+    import PySAM.Cashloan as Cashloan
+    import PySAM.PySSC as pssc
+    
+    ssc = pssc.PySSC() 
+    
+The json file you exported from the SAM GUI is then loaded.  Make sure to change the name to that of the file you exported.
+::  
+    
+    json_file_path = 'pvwattsdistcomm.json' 
+    f = open(json_file_path)
+    dic = json.load(f)
+The next three lines make data structures for the models listed.
+::
+    pv_dat = pssc.dict_to_ssc_table(dic, "pvwattsv7")
+    ur_dat = pssc.dict_to_ssc_table(dic, "utilityrate5")
+    cl_dat = pssc.dict_to_ssc_table(dic, "cashloan")
+    f.close()
 
-    ssc = PySSC()
-    with open("genericsystem_case.json") as f:
-        dic = json.load(f)
-        gs_dat = dict_to_ssc_table(dic, "generic_system")
-        so_dat = dict_to_ssc_table(dic, "singleowner")
-        gs = GenericSystem.wrap(gs_dat)
+Next we move that data into the model classes, starting with the
+first one to be executed, and then basing the subsequent ones on
+that one, so their inputs will fill with the outputs of the 
+previously run modules.
+::
+    pv = PVWatts.wrap(pv_dat)  
+    ur = UtilityRate.from_existing(pv, 'PVWattsCommercial')
+    cl = Cashloan.from_existing(pv, 'PVWattsCommercial')
+    ur.assign(UtilityRate.wrap(ur_dat).export())
+    cl.assign(Cashloan.wrap(cl_dat).export())
+    
 
-        # to create GenericSystem and Singleowner combined simulation, sharing the same data
-        so = Singleowner.from_existing(gs)
-        so.assign(Singleowner.wrap(so_dat).export())
 
-3: Executing a sequence of models
-============================
+Execute the sequence of models
+=================================
 
-Downsteam models require upstream model outputs as inputs. Since the underlying data between `gs` and `so` are shared
-due to the `from_existing` function, the outputs of `gs` required as inputs to `so` will automatically be accessible to `so`.
+Downsteam models require upstream model outputs as inputs. Since the underlying data between `pv`, `ur` and `cl` are shared
+due to the `from_existing` function, the outputs of `pv` required as inputs to `ur` and `cl` will automatically be accessible to them.
 To execute a model, use ``execute(verbosity)`` where 0 indicates minimal messages and 1 produces log messages.
-All outputs are available in the Outputs group of a PySAM class.::
+All outputs are available in the Outputs group of a PySAM class.
 
-	gs.execute()
-	so.execute()
-	so.Outputs.export() # as dictionary
+Example (Continued)
+^^^^^^^^^^^^^^^^^^^
+Here we continue our example.
+::
+    pv.execute()
+    ur.execute()
+    cl.execute()
+    
+We can then print out some of the data.  The variable and group names are found in the :doc:`Models`.
+::    
+    print('ac_annual: ', pv.Outputs.ac_annual)
+    print('ur_ec_tou_mat: ', ur.ElectricityRates.ur_ec_tou_mat)
+    print('cl.Outputs.npv: ', cl.Outputs.npv)
 
-For some compute module input parameters, the SAM graphical user interface (GUI) uses equations to calculate the value
+Possible Problems
+^^^^^^^^^^^^^^^^^
+You probably noticed that in SAM, there are black and blue input variables.  The blue ones are calculated by the SAM GUI from the black ones.  For some compute module input parameters the SAM graphical user interface (GUI) uses equations to calculate the value
 of the parameter from special GUI inputs that are not passed to the compute module. Other compute module input parameters
 are used by more than one compute module in the simulation. In some cases, you may need to write additional code to ensure
 values for these parameters are correctly assigned. We hope to eliminate the need for this additional code in the future.
