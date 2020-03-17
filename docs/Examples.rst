@@ -12,9 +12,8 @@ All variables in a PySAM class are organized into subclasses called Groups.
 There are several ways to access a variable.  The subclass and variable names 
 and descriptions are given in the :doc:`Models` documentation. 
 
-Variables may be accessed directly as <class>.<subclass>.<variable>.  For
- example, the solar_resource_file which is part of the subclass SolarResource
- group in Pvwattsv7::
+Variables may be accessed directly as `<class>.<subclass>.<variable>`.  
+For example, `the solar_resource_file` which is part of the subclass `SolarResource` group in Pvwattsv7::
 
     import PySAM.Pvwattsv7 as pv
 

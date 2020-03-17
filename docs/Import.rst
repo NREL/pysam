@@ -33,13 +33,14 @@ The json file you exported from the SAM GUI is then loaded.  Make sure to change
 ::  
     
     json_file_path = 'pvwattsdistcomm.json' 
-    with open(json_file_path) as f:
-            dic = json.load(f)
+    f = open(json_file_path)
+    dic = json.load(f)
 The next three lines make data structures for the models listed.
 ::
     pv_dat = pssc.dict_to_ssc_table(dic, "pvwattsv7")
     ur_dat = pssc.dict_to_ssc_table(dic, "utilityrate5")
     cl_dat = pssc.dict_to_ssc_table(dic, "cashloan")
+    f.close()
 
 Next we move that data into the model classes, starting with the
 first one to be executed, and then basing the subsequent ones on
