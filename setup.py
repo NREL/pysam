@@ -104,8 +104,10 @@ def _decode(o):
     else:
         return o
 
-shutil.rmtree('files/defaults')
-os.mkdir('files/defaults')
+defaults_df_dir = 'files/defaults'
+if os.path.exists(defaults_df_dir):
+    shutil.rmtree(defaults_df_dir)
+os.mkdir(defaults_df_dir)
 # generate defaults and copy them into installation
 for filename in os.listdir(defaults_dir):
     with open(defaults_dir + '/' + filename) as f:
