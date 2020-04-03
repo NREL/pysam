@@ -6,8 +6,8 @@ To import a case from the SAM GUI
 Export from SAM GUI
 ======================
 
-On the drop-down menu for the case, click **Generate code** then 
-**JSON for inputs**, and export the case inputs to a JSON file. 
+On the drop-down menu for the case, click **Generate code** then
+**JSON for inputs**, and export the case inputs to a JSON file.
 This file will have the case name as the file prefix, with the
 suffix being ".json".
 
@@ -19,40 +19,43 @@ For each SSC compute module required for the simulation (see :doc:`Configs`), cr
 Example
 ^^^^^^^
 Suppose we wish to make a python script that replicates the
-simulation SAM does for a PVWatts Distributed Commercial installation.  We go to  :doc:`Configs` where we find that the three modules we need are *pvwatts7*, *utilityrate5*, and *cashloan*, in that order.  In our python script, we import the modules, ``json`` (because we are reading a JSON file), the three modules for our simulation, and ``PySSC`` which is used to move the data into the proper classes.
+simulation SAM does for a PVWatts Distributed Commercial installation.  We go to  :doc:`Configs` where we find that the three modules we need are *pvwatts7*, *grid*, *utilityrate5*, and *cashloan*, in that order.  In our python script, we import the modules, ``json`` (because we are reading a JSON file), the three modules for our simulation, and ``PySSC`` which is used to move the data into the proper classes.
 ::
     import json
     import PySAM.Pvwattsv7 as PVWatts
+    import PySAM.Grid as Grid
     import PySAM.Utilityrate5 as UtilityRate
     import PySAM.Cashloan as Cashloan
     import PySAM.PySSC as pssc
-    
-    ssc = pssc.PySSC() 
-    
+
+    ssc = pssc.PySSC()
+
 The json file you exported from the SAM GUI is then loaded.  Make sure to change the name to that of the file you exported.
-::  
-    
-    json_file_path = 'pvwattsdistcomm.json' 
+::
+
+    json_file_path = 'pvwattsdistcomm.json'
     f = open(json_file_path)
     dic = json.load(f)
 The next three lines make data structures for the models listed.
 ::
     pv_dat = pssc.dict_to_ssc_table(dic, "pvwattsv7")
+    grid_dat = pssc.dict_to_ssc_table(dic, "grid")
     ur_dat = pssc.dict_to_ssc_table(dic, "utilityrate5")
     cl_dat = pssc.dict_to_ssc_table(dic, "cashloan")
     f.close()
 
 Next we move that data into the model classes, starting with the
 first one to be executed, and then basing the subsequent ones on
-that one, so their inputs will fill with the outputs of the 
+that one, so their inputs will fill with the outputs of the
 previously run modules.
 ::
-    pv = PVWatts.wrap(pv_dat)  
+    pv = PVWatts.wrap(pv_dat)
+    grid = Grid.from_existing(pv)
     ur = UtilityRate.from_existing(pv, 'PVWattsCommercial')
     cl = Cashloan.from_existing(pv, 'PVWattsCommercial')
+    grid.assign(Grid.wrap(grid_dat).export())
     ur.assign(UtilityRate.wrap(ur_dat).export())
     cl.assign(Cashloan.wrap(cl_dat).export())
-    
 
 
 Execute the sequence of models
@@ -68,11 +71,12 @@ Example (Continued)
 Here we continue our example.
 ::
     pv.execute()
+    grid.execute()
     ur.execute()
     cl.execute()
-    
+
 We can then print out some of the data.  The variable and group names are found in the :doc:`Models`.
-::    
+::
     print('ac_annual: ', pv.Outputs.ac_annual)
     print('ur_ec_tou_mat: ', ur.ElectricityRates.ur_ec_tou_mat)
     print('cl.Outputs.npv: ', cl.Outputs.npv)
@@ -97,7 +101,7 @@ For example, for the Flat Plate PV-Single Owner configuration, the ground covera
 It is an input to the Flat Plate PV compute module for self-shading calculations, and also may be used in GUI equations
 to calculate the land cost component of the total installed cost input to the Single Owner compute module.
 If your Python code changes the value of ``Pvsamv1.SystemDesign.gcr`` to ``x``, and you are including land cost ``y``
-in $/acre in your analysis, you need code like the following adapted from the GUI equations in 
+in $/acre in your analysis, you need code like the following adapted from the GUI equations in
 `runtime/ui/PV System Design.txt <https://github.com/NREL/SAM/blob/develop/deploy/runtime/ui/PV%20System%20Design.txt>`_
 to ensure the change is accounted for in ``Singleowner.SystemCosts.total_installed_cost``::
 
