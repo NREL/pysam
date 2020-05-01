@@ -1,4 +1,4 @@
-Documentation here: https://pysam-docs.readthedocs.io/en/latest/
+Documentation here: https://nrel-pysam.readthedocs.io
 
 * Provides a wrapper around the SAM library that groups together the C API functions by technology or financial model into modules.
 * Includes error-checking, explicit input and output definition, and conversion between Python data types.
@@ -6,6 +6,24 @@ Documentation here: https://pysam-docs.readthedocs.io/en/latest/
 * Automatically assign default values to input parameters from SAM's default value database.
 * Built-in documentation of models and parameters.
 * Minimum Python 3.5 for Windows 7 64-bit, MacOSX 10.6, or CentOS 5.
+
+## Version 2.0.2, Jan 27, 2020 ~ SAM 2020.2.x, SSC Version 233
+
+* All new functions and models in latest SAM Release
+* New functions (Reopt_size_batter_post, value, from_existing)
+* Chaining cmods together
+* Get variable by a name without knowing group, list all variables
+* New Tools section (BatteryTools, ResourceTools)
+* Easy way to create wind or solar data
+* Battery sizing
+* All compute modules to PySAM
+* Major reorganization of variable groups
+* Bug fixes
+* fopen defaults
+* turbine powercurve
+* Documentation features
+* Downstream and upstream variable suggestions
+* Examples page
 
 ## Version 1.2.dev3, August 21, 2019 ~ SAM 2018.11.11.3, SSC Version 211
 * Wind PRUF framework

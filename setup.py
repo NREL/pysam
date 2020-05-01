@@ -170,7 +170,7 @@ setup(
     name='NREL-PySAM',
     version=latest_version,
     distclass=distclass,
-    url='https://pysam-docs.readthedocs.io',
+    url='https://nrel-pysam.readthedocs.io',
     description="National Renewable Energy Laboratory's System Advisor Model Python Wrapper",
     long_description=long_description,
     long_description_content_type='text/markdown',

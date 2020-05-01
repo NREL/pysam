@@ -31,4 +31,4 @@ gs.execute()
 grid.execute()
 so.execute()
 print('Made it past execute.')
-print(so.Outputs.export()) # as dictionary
+print(gs.export()) # as dictionary
