@@ -8372,18 +8372,6 @@ BatterySystem_set_batt_dc_dc_efficiency(VarGroupObject *self, PyObject *value, v
 }
 
 static PyObject *
-BatterySystem_get_batt_height(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Pvsamv1_BatterySystem_batt_height_nget, self->data_ptr);
-}
-
-static int
-BatterySystem_set_batt_height(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Pvsamv1_BatterySystem_batt_height_nset, self->data_ptr);
-}
-
-static PyObject *
 BatterySystem_get_batt_inverter_efficiency_cutoff(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Pvsamv1_BatterySystem_batt_inverter_efficiency_cutoff_nget, self->data_ptr);
@@ -8393,18 +8381,6 @@ static int
 BatterySystem_set_batt_inverter_efficiency_cutoff(VarGroupObject *self, PyObject *value, void *closure)
 {
 	return PySAM_double_setter(value, SAM_Pvsamv1_BatterySystem_batt_inverter_efficiency_cutoff_nset, self->data_ptr);
-}
-
-static PyObject *
-BatterySystem_get_batt_length(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Pvsamv1_BatterySystem_batt_length_nget, self->data_ptr);
-}
-
-static int
-BatterySystem_set_batt_length(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Pvsamv1_BatterySystem_batt_length_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -8588,15 +8564,15 @@ BatterySystem_set_batt_replacement_schedule_percent(VarGroupObject *self, PyObje
 }
 
 static PyObject *
-BatterySystem_get_batt_width(VarGroupObject *self, void *closure)
+BatterySystem_get_batt_surface_area(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Pvsamv1_BatterySystem_batt_width_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Pvsamv1_BatterySystem_batt_surface_area_nget, self->data_ptr);
 }
 
 static int
-BatterySystem_set_batt_width(VarGroupObject *self, PyObject *value, void *closure)
+BatterySystem_set_batt_surface_area(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Pvsamv1_BatterySystem_batt_width_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Pvsamv1_BatterySystem_batt_surface_area_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -8660,14 +8636,8 @@ static PyGetSetDef BatterySystem_getset[] = {
 {"batt_dc_dc_efficiency", (getter)BatterySystem_get_batt_dc_dc_efficiency,(setter)BatterySystem_set_batt_dc_dc_efficiency,
 	PyDoc_STR("*float*: PV DC to battery DC efficiency"),
  	NULL},
-{"batt_height", (getter)BatterySystem_get_batt_height,(setter)BatterySystem_set_batt_height,
-	PyDoc_STR("*float*: Battery height [m]"),
- 	NULL},
 {"batt_inverter_efficiency_cutoff", (getter)BatterySystem_get_batt_inverter_efficiency_cutoff,(setter)BatterySystem_set_batt_inverter_efficiency_cutoff,
 	PyDoc_STR("*float*: Inverter efficiency at which to cut battery charge or discharge off [%]"),
- 	NULL},
-{"batt_length", (getter)BatterySystem_get_batt_length,(setter)BatterySystem_set_batt_length,
-	PyDoc_STR("*float*: Battery length [m]"),
  	NULL},
 {"batt_loss_choice", (getter)BatterySystem_get_batt_loss_choice,(setter)BatterySystem_set_batt_loss_choice,
 	PyDoc_STR("*float*: Loss power input option [0/1]\n\n*Options*: 0=Monthly,1=TimeSeries\n\n*Required*: If not provided, assumed to be 0"),
@@ -8714,8 +8684,8 @@ static PyGetSetDef BatterySystem_getset[] = {
 {"batt_replacement_schedule_percent", (getter)BatterySystem_get_batt_replacement_schedule_percent,(setter)BatterySystem_set_batt_replacement_schedule_percent,
 	PyDoc_STR("*sequence*: Percentage of battery capacity to replace in each year [%]\n\n*Options*: length <= analysis_period\n\n*Required*: True if batt_replacement_option=2"),
  	NULL},
-{"batt_width", (getter)BatterySystem_get_batt_width,(setter)BatterySystem_set_batt_width,
-	PyDoc_STR("*float*: Battery width [m]"),
+{"batt_surface_area", (getter)BatterySystem_get_batt_surface_area,(setter)BatterySystem_set_batt_surface_area,
+	PyDoc_STR("*float*: Battery surface area [m^2]"),
  	NULL},
 {"en_batt", (getter)BatterySystem_get_en_batt,(setter)BatterySystem_set_en_batt,
 	PyDoc_STR("*float*: Enable battery storage model [0/1]\n\n*Required*: If not provided, assumed to be 0"),

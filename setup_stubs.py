@@ -2,7 +2,7 @@ from setuptools import setup
 import distutils
 import sys
 
-latest_version = '2.1.dev0'
+latest_version = '2.1.dev1'
 
 # determine if making PyPi or Conda distribution
 distclass = distutils.core.Distribution

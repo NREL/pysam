@@ -50,9 +50,7 @@ class BatterySystem(object):
 	batt_cycle_cost_choice = float
 	batt_dc_ac_efficiency = float
 	batt_dc_dc_efficiency = float
-	batt_height = float
 	batt_inverter_efficiency_cutoff = float
-	batt_length = float
 	batt_loss_choice = float
 	batt_losses = tuple
 	batt_losses_charging = tuple
@@ -68,7 +66,7 @@ class BatterySystem(object):
 	batt_replacement_option = float
 	batt_replacement_schedule = tuple
 	batt_replacement_schedule_percent = tuple
-	batt_width = float
+	batt_surface_area = float
 	en_batt = float
 	om_replacement_cost1 = tuple
 
