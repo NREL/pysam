@@ -388,7 +388,7 @@ newPvGetShadeLossMppObject(void* data_ptr)
 	CmodObject *self;
 	self = PyObject_New(CmodObject, &PvGetShadeLossMpp_Type);
 
-	PySAM_TECH_ATTR("PvGetShadeLossMpp", SAM_PvGetShadeLossMpp_construct)
+	PySAM_TECH_ATTR()
 
 	PyObject* PVShadeLossDB_obj = PVShadeLossDB_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "PVShadeLossDB", PVShadeLossDB_obj);
@@ -397,7 +397,6 @@ newPvGetShadeLossMppObject(void* data_ptr)
 	PyObject* Outputs_obj = Outputs_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
 	Py_DECREF(Outputs_obj);
-
 
 	return self;
 }
@@ -408,8 +407,12 @@ static void
 PvGetShadeLossMpp_dealloc(CmodObject *self)
 {
 	Py_XDECREF(self->x_attr);
-	if (!self->data_owner_ptr)
-		SAM_PvGetShadeLossMpp_destruct(self->data_ptr);
+
+	if (!self->data_owner_ptr) {
+		SAM_error error = new_error();
+		SAM_table_destruct(self->data_ptr, &error);
+		PySAM_has_error(error);
+	}
 	PyObject_Del(self);
 }
 
@@ -425,7 +428,6 @@ PvGetShadeLossMpp_execute(CmodObject *self, PyObject *args)
 	SAM_error error = new_error();
 	SAM_PvGetShadeLossMpp_execute(self->data_ptr, verbosity, &error);
 	if (PySAM_has_error(error )) return NULL;
-
 	Py_INCREF(Py_None);
 	return Py_None;
 }
@@ -456,7 +458,7 @@ PvGetShadeLossMpp_export(CmodObject *self, PyObject *args)
 static PyObject *
 PvGetShadeLossMpp_value(CmodObject *self, PyObject *args)
 {
-	return CmodObject_value(self, args);
+	return Cmod_value(self, args);
 }
 
 static PyMethodDef PvGetShadeLossMpp_methods[] = {

@@ -409,7 +409,7 @@ newMhkWaveObject(void* data_ptr)
 	CmodObject *self;
 	self = PyObject_New(CmodObject, &MhkWave_Type);
 
-	PySAM_TECH_ATTR("MhkWave", SAM_MhkWave_construct)
+	PySAM_TECH_ATTR()
 
 	PyObject* MHKWave_obj = MHKWave_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "MHKWave", MHKWave_obj);
@@ -418,7 +418,6 @@ newMhkWaveObject(void* data_ptr)
 	PyObject* Outputs_obj = Outputs_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
 	Py_DECREF(Outputs_obj);
-
 
 	return self;
 }
@@ -429,8 +428,12 @@ static void
 MhkWave_dealloc(CmodObject *self)
 {
 	Py_XDECREF(self->x_attr);
-	if (!self->data_owner_ptr)
-		SAM_MhkWave_destruct(self->data_ptr);
+
+	if (!self->data_owner_ptr) {
+		SAM_error error = new_error();
+		SAM_table_destruct(self->data_ptr, &error);
+		PySAM_has_error(error);
+	}
 	PyObject_Del(self);
 }
 
@@ -446,7 +449,6 @@ MhkWave_execute(CmodObject *self, PyObject *args)
 	SAM_error error = new_error();
 	SAM_MhkWave_execute(self->data_ptr, verbosity, &error);
 	if (PySAM_has_error(error )) return NULL;
-
 	Py_INCREF(Py_None);
 	return Py_None;
 }
@@ -477,7 +479,7 @@ MhkWave_export(CmodObject *self, PyObject *args)
 static PyObject *
 MhkWave_value(CmodObject *self, PyObject *args)
 {
-	return CmodObject_value(self, args);
+	return Cmod_value(self, args);
 }
 
 static PyMethodDef MhkWave_methods[] = {
@@ -646,7 +648,7 @@ static PyMethodDef MhkWaveModule_methods[] = {
 				PyDoc_STR("new() -> MhkWave")},
 		{"default",             MhkWave_default,         METH_VARARGS,
 				PyDoc_STR("default(config) -> MhkWave\n\nUse financial config-specific default attributes\n"
-				"config options:\n\n- \"MHKwaveLCOECalculator\"")},
+				"config options:\n\n- \"MEwaveLCOECalculator\"")},
 		{"wrap",             MhkWave_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> MhkWave\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   MhkWave_from_existing,        METH_VARARGS,

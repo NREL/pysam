@@ -403,7 +403,7 @@ newSinglediodeparamsObject(void* data_ptr)
 	CmodObject *self;
 	self = PyObject_New(CmodObject, &Singlediodeparams_Type);
 
-	PySAM_TECH_ATTR("Singlediodeparams", SAM_Singlediodeparams_construct)
+	PySAM_TECH_ATTR()
 
 	PyObject* SingleDiodeModel_obj = SingleDiodeModel_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "SingleDiodeModel", SingleDiodeModel_obj);
@@ -412,7 +412,6 @@ newSinglediodeparamsObject(void* data_ptr)
 	PyObject* Outputs_obj = Outputs_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
 	Py_DECREF(Outputs_obj);
-
 
 	return self;
 }
@@ -423,8 +422,12 @@ static void
 Singlediodeparams_dealloc(CmodObject *self)
 {
 	Py_XDECREF(self->x_attr);
-	if (!self->data_owner_ptr)
-		SAM_Singlediodeparams_destruct(self->data_ptr);
+
+	if (!self->data_owner_ptr) {
+		SAM_error error = new_error();
+		SAM_table_destruct(self->data_ptr, &error);
+		PySAM_has_error(error);
+	}
 	PyObject_Del(self);
 }
 
@@ -440,7 +443,6 @@ Singlediodeparams_execute(CmodObject *self, PyObject *args)
 	SAM_error error = new_error();
 	SAM_Singlediodeparams_execute(self->data_ptr, verbosity, &error);
 	if (PySAM_has_error(error )) return NULL;
-
 	Py_INCREF(Py_None);
 	return Py_None;
 }
@@ -471,7 +473,7 @@ Singlediodeparams_export(CmodObject *self, PyObject *args)
 static PyObject *
 Singlediodeparams_value(CmodObject *self, PyObject *args)
 {
-	return CmodObject_value(self, args);
+	return Cmod_value(self, args);
 }
 
 static PyMethodDef Singlediodeparams_methods[] = {

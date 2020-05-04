@@ -11,6 +11,7 @@ class Weather(object):
 
 	azimuth = float
 	file_name = str
+	solar_resource_data = dict
 	tilt = float
 	track_mode = float
 
@@ -149,6 +150,7 @@ class Controller(object):
 	field_fl_props = tuple
 	pb_pump_coef = float
 	q_pb_design = float
+	tanks_in_parallel = float
 
 
 class SystemDesign(object):
@@ -244,6 +246,7 @@ class Tou(object):
 	is_ampl_engine = float
 	is_dispatch = float
 	is_dispatch_series = float
+	is_tod_pc_target_also_pc_max = float
 	is_wlim_series = float
 	is_write_ampl_dat = float
 	ppa_multiplier_model = float
@@ -342,18 +345,26 @@ class Outputs(object):
 	annual_thermal_consumption = float
 	annual_total_water_use = float
 	beam = tuple
+	capacity_factor = float
 	deltaP_field = tuple
 	dni_costh = tuple
 	e_ch_tes = tuple
 	e_dot_field_int_energy = tuple
 	hour_day = tuple
+	kwh_per_kw = float
 	m_dot_balance = tuple
+	m_dot_cr_to_tes_hot = tuple
+	m_dot_cycle_to_field = tuple
 	m_dot_field_delivered = tuple
 	m_dot_field_recirc = tuple
+	m_dot_field_to_cycle = tuple
 	m_dot_htf_heat_sink = tuple
 	m_dot_loop = tuple
-	m_dot_tes_ch = tuple
-	m_dot_tes_dc = tuple
+	m_dot_pc_to_tes_cold = tuple
+	m_dot_tes_cold_out = tuple
+	m_dot_tes_hot_out = tuple
+	mass_tes_cold = tuple
+	mass_tes_hot = tuple
 	month = tuple
 	op_mode_1 = tuple
 	op_mode_2 = tuple

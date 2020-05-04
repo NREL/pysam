@@ -8711,7 +8711,7 @@ newUtilityrate2Object(void* data_ptr)
 	CmodObject *self;
 	self = PyObject_New(CmodObject, &Utilityrate2_Type);
 
-	PySAM_TECH_ATTR("Utilityrate2", SAM_Utilityrate2_construct)
+	PySAM_TECH_ATTR()
 
 	PyObject* Common_obj = Common_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Common", Common_obj);
@@ -8725,7 +8725,6 @@ newUtilityrate2Object(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
 	Py_DECREF(Outputs_obj);
 
-
 	return self;
 }
 
@@ -8735,8 +8734,12 @@ static void
 Utilityrate2_dealloc(CmodObject *self)
 {
 	Py_XDECREF(self->x_attr);
-	if (!self->data_owner_ptr)
-		SAM_Utilityrate2_destruct(self->data_ptr);
+
+	if (!self->data_owner_ptr) {
+		SAM_error error = new_error();
+		SAM_table_destruct(self->data_ptr, &error);
+		PySAM_has_error(error);
+	}
 	PyObject_Del(self);
 }
 
@@ -8752,7 +8755,6 @@ Utilityrate2_execute(CmodObject *self, PyObject *args)
 	SAM_error error = new_error();
 	SAM_Utilityrate2_execute(self->data_ptr, verbosity, &error);
 	if (PySAM_has_error(error )) return NULL;
-
 	Py_INCREF(Py_None);
 	return Py_None;
 }
@@ -8783,7 +8785,7 @@ Utilityrate2_export(CmodObject *self, PyObject *args)
 static PyObject *
 Utilityrate2_value(CmodObject *self, PyObject *args)
 {
-	return CmodObject_value(self, args);
+	return Cmod_value(self, args);
 }
 
 static PyMethodDef Utilityrate2_methods[] = {

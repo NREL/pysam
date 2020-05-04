@@ -521,7 +521,7 @@ static PyGetSetDef SystemDesign_getset[] = {
 	PyDoc_STR("*float*: DC to AC ratio [ratio]\n\n*Constraints*: POSITIVE\n\n*Required*: If not provided, assumed to be 1.1"),
  	NULL},
 {"gcr", (getter)SystemDesign_get_gcr,(setter)SystemDesign_set_gcr,
-	PyDoc_STR("*float*: Ground coverage ratio [0..1]\n\n*Constraints*: MIN=0,MAX=1\n\n*Required*: If not provided, assumed to be 0.4"),
+	PyDoc_STR("*float*: Ground coverage ratio [0..1]\n\n*Constraints*: MIN=0.01,MAX=0.99\n\n*Required*: If not provided, assumed to be 0.4"),
  	NULL},
 {"inv_eff", (getter)SystemDesign_get_inv_eff,(setter)SystemDesign_set_inv_eff,
 	PyDoc_STR("*float*: Inverter efficiency at rated power [%]\n\n*Constraints*: MIN=90,MAX=99.5\n\n*Required*: If not provided, assumed to be 96"),
@@ -1020,7 +1020,7 @@ newPvwattsv5Object(void* data_ptr)
 	CmodObject *self;
 	self = PyObject_New(CmodObject, &Pvwattsv5_Type);
 
-	PySAM_TECH_ATTR("Pvwattsv5", SAM_Pvwattsv5_construct)
+	PySAM_TECH_ATTR()
 
 	PyObject* Lifetime_obj = Lifetime_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Lifetime", Lifetime_obj);
@@ -1053,7 +1053,6 @@ newPvwattsv5Object(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
 	Py_DECREF(Outputs_obj);
 
-
 	return self;
 }
 
@@ -1063,8 +1062,12 @@ static void
 Pvwattsv5_dealloc(CmodObject *self)
 {
 	Py_XDECREF(self->x_attr);
-	if (!self->data_owner_ptr)
-		SAM_Pvwattsv5_destruct(self->data_ptr);
+
+	if (!self->data_owner_ptr) {
+		SAM_error error = new_error();
+		SAM_table_destruct(self->data_ptr, &error);
+		PySAM_has_error(error);
+	}
 	PyObject_Del(self);
 }
 
@@ -1080,7 +1083,6 @@ Pvwattsv5_execute(CmodObject *self, PyObject *args)
 	SAM_error error = new_error();
 	SAM_Pvwattsv5_execute(self->data_ptr, verbosity, &error);
 	if (PySAM_has_error(error )) return NULL;
-
 	Py_INCREF(Py_None);
 	return Py_None;
 }
@@ -1111,7 +1113,7 @@ Pvwattsv5_export(CmodObject *self, PyObject *args)
 static PyObject *
 Pvwattsv5_value(CmodObject *self, PyObject *args)
 {
-	return CmodObject_value(self, args);
+	return Cmod_value(self, args);
 }
 
 static PyMethodDef Pvwattsv5_methods[] = {

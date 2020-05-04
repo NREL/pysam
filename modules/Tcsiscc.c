@@ -190,7 +190,7 @@ MoltenSaltTower_set_system_capacity(VarGroupObject *self, PyObject *value, void 
 
 static PyGetSetDef MoltenSaltTower_getset[] = {
 {"system_capacity", (getter)MoltenSaltTower_get_system_capacity,(setter)MoltenSaltTower_set_system_capacity,
-	PyDoc_STR("*float*: Nameplate capacity [kW]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - W_dot_solar_des\n\t - elev\n\t - ngcc_model\n\t - pinch_point_coldside\n\t - pinch_point_hotside\n\t - q_pb_design\n\t - rec_htf\n"),
+	PyDoc_STR("*float*: Nameplate capacity [kW]\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1310,7 +1310,7 @@ static PyGetSetDef Heliostat_getset[] = {
 	PyDoc_STR("*float*: Hourly frequency in flux map lookup\n\n*Required*: If not provided, assumed to be 1"),
  	NULL},
 {"dens_mirror", (getter)Heliostat_get_dens_mirror,(setter)Heliostat_set_dens_mirror,
-	PyDoc_STR("*float*: Ratio of Reflective Area to Profile [-]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - A_sf\n\t - total_installed_cost\n"),
+	PyDoc_STR("*float*: Ratio of Reflective Area to Profile [-]\n\n*Required*: True"),
  	NULL},
 {"dni_des", (getter)Heliostat_get_dni_des,(setter)Heliostat_set_dni_des,
 	PyDoc_STR("*float*: Design-point DNI [W/m2]\n\n*Required*: True"),
@@ -1334,7 +1334,7 @@ static PyGetSetDef Heliostat_getset[] = {
 	PyDoc_STR("*float*: Fossil system specific cost [$/kWe]\n\n*Required*: True"),
  	NULL},
 {"h_tower", (getter)Heliostat_get_h_tower,(setter)Heliostat_set_h_tower,
-	PyDoc_STR("*float*: Tower height [m]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - total_installed_cost\n\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - THT\n"),
+	PyDoc_STR("*float*: Tower height [m]\n\n*Required*: True"),
  	NULL},
 {"hel_stow_deploy", (getter)Heliostat_get_hel_stow_deploy,(setter)Heliostat_set_hel_stow_deploy,
 	PyDoc_STR("*float*: Stow/deploy elevation [deg]\n\n*Required*: True"),
@@ -1346,19 +1346,19 @@ static PyGetSetDef Heliostat_getset[] = {
 	PyDoc_STR("*sequence[sequence]*: Heliostat aim point table [m]\n\n*Required*: False"),
  	NULL},
 {"helio_height", (getter)Heliostat_get_helio_height,(setter)Heliostat_set_helio_height,
-	PyDoc_STR("*float*: Heliostat height [m]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - A_sf\n\t - total_installed_cost\n"),
+	PyDoc_STR("*float*: Heliostat height [m]\n\n*Required*: True"),
  	NULL},
 {"helio_optical_error", (getter)Heliostat_get_helio_optical_error,(setter)Heliostat_set_helio_optical_error,
 	PyDoc_STR("*float*: Heliostat optical error [rad]\n\n*Required*: True"),
  	NULL},
 {"helio_positions", (getter)Heliostat_get_helio_positions,(setter)Heliostat_set_helio_positions,
-	PyDoc_STR("*sequence[sequence]*: Heliostat position table [m]\n\n*Required*: True if run_type=1\n\n*Changes to this variable may require updating the values of the following*: \n\t - A_sf\n\t - total_installed_cost\n"),
+	PyDoc_STR("*sequence[sequence]*: Heliostat position table [m]\n\n*Required*: True if run_type=1"),
  	NULL},
 {"helio_reflectance", (getter)Heliostat_get_helio_reflectance,(setter)Heliostat_set_helio_reflectance,
 	PyDoc_STR("*float*: Heliostat reflectance [-]\n\n*Required*: True"),
  	NULL},
 {"helio_width", (getter)Heliostat_get_helio_width,(setter)Heliostat_set_helio_width,
-	PyDoc_STR("*float*: Heliostat width [m]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - A_sf\n\t - total_installed_cost\n"),
+	PyDoc_STR("*float*: Heliostat width [m]\n\n*Required*: True"),
  	NULL},
 {"heliostat_spec_cost", (getter)Heliostat_get_heliostat_spec_cost,(setter)Heliostat_set_heliostat_spec_cost,
 	PyDoc_STR("*float*: Heliostat field cost [$/m2]\n\n*Required*: True"),
@@ -1400,7 +1400,7 @@ static PyGetSetDef Heliostat_getset[] = {
 	PyDoc_STR("*float*: No. days in flux map lookup\n\n*Required*: If not provided, assumed to be 8"),
  	NULL},
 {"n_flux_x", (getter)Heliostat_get_n_flux_x,(setter)Heliostat_set_n_flux_x,
-	PyDoc_STR("*float*: Flux map X resolution [-]\n\n*Required*: If not provided, assumed to be 12\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - N_panels\n"),
+	PyDoc_STR("*float*: Flux map X resolution [-]\n\n*Required*: If not provided, assumed to be 12"),
  	NULL},
 {"n_flux_y", (getter)Heliostat_get_n_flux_y,(setter)Heliostat_set_n_flux_y,
 	PyDoc_STR("*float*: Flux map Y resolution [-]\n\n*Required*: If not provided, assumed to be 1"),
@@ -1430,19 +1430,19 @@ static PyGetSetDef Heliostat_getset[] = {
 	PyDoc_STR("*float*: Power cycle specific cost [$/kWe]\n\n*Required*: True"),
  	NULL},
 {"q_design", (getter)Heliostat_get_q_design,(setter)Heliostat_set_q_design,
-	PyDoc_STR("*float*: Receiver thermal design power [MW]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - Q_rec_des\n\t - q_pb_design\n"),
+	PyDoc_STR("*float*: Receiver thermal design power [MW]\n\n*Required*: True"),
  	NULL},
 {"rec_absorptance", (getter)Heliostat_get_rec_absorptance,(setter)Heliostat_set_rec_absorptance,
 	PyDoc_STR("*float*: Receiver absorptance [-]\n\n*Required*: True"),
  	NULL},
 {"rec_aspect", (getter)Heliostat_get_rec_aspect,(setter)Heliostat_set_rec_aspect,
-	PyDoc_STR("*float*: Receiver aspect ratio [-]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - D_rec\n\t - H_rec\n"),
+	PyDoc_STR("*float*: Receiver aspect ratio [-]\n\n*Required*: True"),
  	NULL},
 {"rec_cost_exp", (getter)Heliostat_get_rec_cost_exp,(setter)Heliostat_set_rec_cost_exp,
 	PyDoc_STR("*float*: Receiver cost scaling exponent\n\n*Required*: True"),
  	NULL},
 {"rec_height", (getter)Heliostat_get_rec_height,(setter)Heliostat_set_rec_height,
-	PyDoc_STR("*float*: Receiver height [m]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - H_rec\n"),
+	PyDoc_STR("*float*: Receiver height [m]\n\n*Required*: True"),
  	NULL},
 {"rec_hl_perm2", (getter)Heliostat_get_rec_hl_perm2,(setter)Heliostat_set_rec_hl_perm2,
 	PyDoc_STR("*float*: Receiver design heatloss [kW/m2]\n\n*Required*: True"),
@@ -1460,7 +1460,7 @@ static PyGetSetDef Heliostat_getset[] = {
 	PyDoc_STR("*float*: Percent of cost to which sales tax applies [%]\n\n*Required*: True"),
  	NULL},
 {"sales_tax_rate", (getter)Heliostat_get_sales_tax_rate,(setter)Heliostat_set_sales_tax_rate,
-	PyDoc_STR("*float*: Sales tax rate [%]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - total_installed_cost\n"),
+	PyDoc_STR("*float*: Sales tax rate [%]\n\n*Required*: True"),
  	NULL},
 {"site_spec_cost", (getter)Heliostat_get_site_spec_cost,(setter)Heliostat_set_site_spec_cost,
 	PyDoc_STR("*float*: Site improvement cost [$/m2]\n\n*Required*: True"),
@@ -1469,7 +1469,7 @@ static PyGetSetDef Heliostat_getset[] = {
 	PyDoc_STR("*float*: Thermal energy storage cost [$/kWht]\n\n*Required*: True"),
  	NULL},
 {"total_installed_cost", (getter)Heliostat_get_total_installed_cost,(setter)Heliostat_set_total_installed_cost,
-	PyDoc_STR("*float*: Total installed cost [$]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - A_sf\n\t - D_rec\n\t - H_rec\n\t - THT\n\t - W_dot_solar_des\n\t - dens_mirror\n\t - elev\n\t - h_tower\n\t - helio_height\n\t - helio_positions\n\t - helio_width\n\t - ngcc_model\n\t - pinch_point_coldside\n\t - pinch_point_hotside\n\t - q_pb_design\n\t - rec_htf\n\t - receiver_type\n\t - sales_tax_rate\n"),
+	PyDoc_STR("*float*: Total installed cost [$]\n\n*Required*: True"),
  	NULL},
 {"tower_exp", (getter)Heliostat_get_tower_exp,(setter)Heliostat_set_tower_exp,
 	PyDoc_STR("*float*: Tower cost scaling exponent\n\n*Required*: True"),
@@ -1860,31 +1860,31 @@ Receiver_set_th_tube(VarGroupObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef Receiver_getset[] = {
 {"A_sf", (getter)Receiver_get_A_sf,(setter)Receiver_set_A_sf,
-	PyDoc_STR("*float*: Solar Field Area [m^2]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - total_installed_cost\n\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - dens_mirror\n\t - helio_height\n\t - helio_positions\n\t - helio_width\n"),
+	PyDoc_STR("*float*: Solar Field Area [m^2]\n\n*Required*: True"),
  	NULL},
 {"D_rec", (getter)Receiver_get_D_rec,(setter)Receiver_set_D_rec,
-	PyDoc_STR("*float*: The overall outer diameter of the receiver [m]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - rec_aspect\n\t - total_installed_cost\n"),
+	PyDoc_STR("*float*: The overall outer diameter of the receiver [m]\n\n*Required*: True"),
  	NULL},
 {"Flow_type", (getter)Receiver_get_Flow_type,(setter)Receiver_set_Flow_type,
 	PyDoc_STR("*float*: A flag indicating which flow pattern is used\n\n*Required*: True"),
  	NULL},
 {"H_rec", (getter)Receiver_get_H_rec,(setter)Receiver_set_H_rec,
-	PyDoc_STR("*float*: The height of the receiver [m]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - rec_aspect\n\t - rec_height\n\t - total_installed_cost\n"),
+	PyDoc_STR("*float*: The height of the receiver [m]\n\n*Required*: True"),
  	NULL},
 {"N_panels", (getter)Receiver_get_N_panels,(setter)Receiver_set_N_panels,
-	PyDoc_STR("*float*: Number of individual panels on the receiver\n\n*Constraints*: INTEGER\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - n_flux_x\n"),
+	PyDoc_STR("*float*: Number of individual panels on the receiver\n\n*Constraints*: INTEGER\n\n*Required*: True"),
  	NULL},
 {"Q_rec_des", (getter)Receiver_get_Q_rec_des,(setter)Receiver_set_Q_rec_des,
-	PyDoc_STR("*float*: Design-point receiver thermal power output [MWt]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - m_dot_htf_max\n\t - q_design\n\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - q_pb_design\n"),
+	PyDoc_STR("*float*: Design-point receiver thermal power output [MWt]\n\n*Required*: True"),
  	NULL},
 {"THT", (getter)Receiver_get_THT,(setter)Receiver_set_THT,
-	PyDoc_STR("*float*: The height of the tower (hel. pivot to rec equator) [m]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - h_tower\n\t - piping_length\n\t - total_installed_cost\n"),
+	PyDoc_STR("*float*: The height of the tower (hel. pivot to rec equator) [m]\n\n*Required*: True"),
  	NULL},
 {"T_htf_cold_des", (getter)Receiver_get_T_htf_cold_des,(setter)Receiver_set_T_htf_cold_des,
-	PyDoc_STR("*float*: Cold HTF inlet temperature at design conditions [C]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - m_dot_htf_max\n\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - elev\n\t - ngcc_model\n\t - pinch_point_coldside\n\t - pinch_point_hotside\n\t - q_pb_design\n\t - rec_htf\n"),
+	PyDoc_STR("*float*: Cold HTF inlet temperature at design conditions [C]\n\n*Required*: True"),
  	NULL},
 {"T_htf_hot_des", (getter)Receiver_get_T_htf_hot_des,(setter)Receiver_set_T_htf_hot_des,
-	PyDoc_STR("*float*: Hot HTF outlet temperature at design conditions [C]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - m_dot_htf_max\n\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - elev\n\t - ngcc_model\n\t - pinch_point_coldside\n\t - pinch_point_hotside\n\t - q_pb_design\n\t - rec_htf\n"),
+	PyDoc_STR("*float*: Hot HTF outlet temperature at design conditions [C]\n\n*Required*: True"),
  	NULL},
 {"crossover_shift", (getter)Receiver_get_crossover_shift,(setter)Receiver_set_crossover_shift,
 	PyDoc_STR("*float*: No. panels shift in receiver crossover position\n\n*Required*: If not provided, assumed to be 0"),
@@ -1902,19 +1902,19 @@ static PyGetSetDef Receiver_getset[] = {
 	PyDoc_STR("*float*: Minimum receiver mass flow rate turn down fraction\n\n*Required*: True"),
  	NULL},
 {"field_fl_props", (getter)Receiver_get_field_fl_props,(setter)Receiver_set_field_fl_props,
-	PyDoc_STR("*sequence[sequence]*: User defined field fluid property data [-]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - m_dot_htf_max\n"),
+	PyDoc_STR("*sequence[sequence]*: User defined field fluid property data [-]\n\n*Required*: True"),
  	NULL},
 {"hl_ffact", (getter)Receiver_get_hl_ffact,(setter)Receiver_set_hl_ffact,
 	PyDoc_STR("*float*: The heat loss factor (thermal loss fudge factor)\n\n*Required*: True"),
  	NULL},
 {"m_dot_htf_max", (getter)Receiver_get_m_dot_htf_max,(setter)Receiver_set_m_dot_htf_max,
-	PyDoc_STR("*float*: Maximum receiver mass flow rate [kg/hr]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - Q_rec_des\n\t - T_htf_cold_des\n\t - T_htf_hot_des\n\t - elev\n\t - field_fl_props\n\t - ngcc_model\n\t - pinch_point_coldside\n\t - pinch_point_hotside\n\t - q_pb_design\n\t - rec_htf\n"),
+	PyDoc_STR("*float*: Maximum receiver mass flow rate [kg/hr]\n\n*Required*: True"),
  	NULL},
 {"mat_tube", (getter)Receiver_get_mat_tube,(setter)Receiver_set_mat_tube,
 	PyDoc_STR("*float*: The material name of the receiver tubes\n\n*Required*: True"),
  	NULL},
 {"rec_htf", (getter)Receiver_get_rec_htf,(setter)Receiver_set_rec_htf,
-	PyDoc_STR("*float*: The name of the HTF used in the receiver\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - T_htf_cold_des\n\t - T_htf_hot_des\n\t - W_dot_solar_des\n\t - fossil_output\n\t - m_dot_htf_max\n\t - system_capacity\n\t - total_installed_cost\n"),
+	PyDoc_STR("*float*: The name of the HTF used in the receiver\n\n*Required*: True"),
  	NULL},
 {"rec_qf_delay", (getter)Receiver_get_rec_qf_delay,(setter)Receiver_set_rec_qf_delay,
 	PyDoc_STR("*float*: Energy-based rcvr startup delay (fraction of rated thermal power)\n\n*Required*: True"),
@@ -1923,7 +1923,7 @@ static PyGetSetDef Receiver_getset[] = {
 	PyDoc_STR("*float*: Fixed startup delay time for the receiver [hr]\n\n*Required*: True"),
  	NULL},
 {"receiver_type", (getter)Receiver_get_receiver_type,(setter)Receiver_set_receiver_type,
-	PyDoc_STR("*float*: External=0, Cavity=1\n\n*Constraints*: INTEGER\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - total_installed_cost\n"),
+	PyDoc_STR("*float*: External=0, Cavity=1\n\n*Constraints*: INTEGER\n\n*Required*: True"),
  	NULL},
 {"th_tube", (getter)Receiver_get_th_tube,(setter)Receiver_set_th_tube,
 	PyDoc_STR("*float*: The wall thickness of a single receiver tube [mm]\n\n*Required*: True"),
@@ -2092,19 +2092,19 @@ Powerblock_set_q_pb_design(VarGroupObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef Powerblock_getset[] = {
 {"elev", (getter)Powerblock_get_elev,(setter)Powerblock_set_elev,
-	PyDoc_STR("*float*: Plant elevation [m]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - T_htf_cold_des\n\t - T_htf_hot_des\n\t - W_dot_solar_des\n\t - fossil_output\n\t - m_dot_htf_max\n\t - system_capacity\n\t - total_installed_cost\n"),
+	PyDoc_STR("*float*: Plant elevation [m]\n\n*Required*: True"),
  	NULL},
 {"ngcc_model", (getter)Powerblock_get_ngcc_model,(setter)Powerblock_set_ngcc_model,
-	PyDoc_STR("*float*: 1: NREL, 2: GE\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - T_htf_cold_des\n\t - T_htf_hot_des\n\t - W_dot_solar_des\n\t - fossil_output\n\t - m_dot_htf_max\n\t - system_capacity\n\t - total_installed_cost\n"),
+	PyDoc_STR("*float*: 1: NREL, 2: GE\n\n*Required*: True"),
  	NULL},
 {"pinch_point_coldside", (getter)Powerblock_get_pinch_point_coldside,(setter)Powerblock_set_pinch_point_coldside,
-	PyDoc_STR("*float*: Cold side HX pinch point [C]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - T_htf_cold_des\n\t - T_htf_hot_des\n\t - W_dot_solar_des\n\t - fossil_output\n\t - m_dot_htf_max\n\t - system_capacity\n\t - total_installed_cost\n"),
+	PyDoc_STR("*float*: Cold side HX pinch point [C]\n\n*Required*: True"),
  	NULL},
 {"pinch_point_hotside", (getter)Powerblock_get_pinch_point_hotside,(setter)Powerblock_set_pinch_point_hotside,
-	PyDoc_STR("*float*: Hot side temperature HX temperature difference [C]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - T_htf_cold_des\n\t - T_htf_hot_des\n\t - W_dot_solar_des\n\t - fossil_output\n\t - m_dot_htf_max\n\t - system_capacity\n\t - total_installed_cost\n"),
+	PyDoc_STR("*float*: Hot side temperature HX temperature difference [C]\n\n*Required*: True"),
  	NULL},
 {"q_pb_design", (getter)Powerblock_get_q_pb_design,(setter)Powerblock_set_q_pb_design,
-	PyDoc_STR("*float*: Design point power block thermal power [MWt]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - Q_rec_des\n\t - T_htf_cold_des\n\t - T_htf_hot_des\n\t - W_dot_solar_des\n\t - fossil_output\n\t - m_dot_htf_max\n\t - q_design\n\t - system_capacity\n\t - total_installed_cost\n"),
+	PyDoc_STR("*float*: Design point power block thermal power [MWt]\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -2378,10 +2378,10 @@ Parasitics_set_piping_loss(VarGroupObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef Parasitics_getset[] = {
 {"Q_rec_des", (getter)Parasitics_get_Q_rec_des,(setter)Parasitics_set_Q_rec_des,
-	PyDoc_STR("*float*: Design point solar field thermal output [MW]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - m_dot_htf_max\n\t - q_design\n\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - q_pb_design\n"),
+	PyDoc_STR("*float*: Design point solar field thermal output [MW]\n\n*Required*: True"),
  	NULL},
 {"W_dot_solar_des", (getter)Parasitics_get_W_dot_solar_des,(setter)Parasitics_set_W_dot_solar_des,
-	PyDoc_STR("*float*: Solar contribution to cycle output at design [MWe]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - system_capacity\n\t - total_installed_cost\n\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - elev\n\t - ngcc_model\n\t - pinch_point_coldside\n\t - pinch_point_hotside\n\t - q_pb_design\n\t - rec_htf\n"),
+	PyDoc_STR("*float*: Solar contribution to cycle output at design [MWe]\n\n*Required*: True"),
  	NULL},
 {"bop_par", (getter)Parasitics_get_bop_par,(setter)Parasitics_set_bop_par,
 	PyDoc_STR("*float*: Balance of plant parasitic power fraction [MWe/MWcap]\n\n*Required*: True"),
@@ -2399,7 +2399,7 @@ static PyGetSetDef Parasitics_getset[] = {
 	PyDoc_STR("*float*: Balance of plant parasitic power fraction - mult frac [none]\n\n*Required*: True"),
  	NULL},
 {"fossil_output", (getter)Parasitics_get_fossil_output,(setter)Parasitics_set_fossil_output,
-	PyDoc_STR("*float*: Fossil-only cycle output at design [MWe]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - elev\n\t - ngcc_model\n\t - pinch_point_coldside\n\t - pinch_point_hotside\n\t - q_pb_design\n\t - rec_htf\n"),
+	PyDoc_STR("*float*: Fossil-only cycle output at design [MWe]\n\n*Required*: True"),
  	NULL},
 {"pb_fixed_par", (getter)Parasitics_get_pb_fixed_par,(setter)Parasitics_set_pb_fixed_par,
 	PyDoc_STR("*float*: Fixed parasitic load - runs at all times [MWe/MWcap]\n\n*Required*: True"),
@@ -2408,13 +2408,13 @@ static PyGetSetDef Parasitics_getset[] = {
 	PyDoc_STR("*float*: Required pumping power for HTF through power block [kJ/kg]\n\n*Required*: True"),
  	NULL},
 {"piping_length", (getter)Parasitics_get_piping_length,(setter)Parasitics_set_piping_length,
-	PyDoc_STR("*float*: Total length of exposed piping [m]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - THT\n\t - piping_length_const\n\t - piping_length_mult\n"),
+	PyDoc_STR("*float*: Total length of exposed piping [m]\n\n*Required*: True"),
  	NULL},
 {"piping_length_const", (getter)Parasitics_get_piping_length_const,(setter)Parasitics_set_piping_length_const,
-	PyDoc_STR("*float*: Piping constant length [m]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - piping_length\n"),
+	PyDoc_STR("*float*: Piping constant length [m]\n\n*Required*: True"),
  	NULL},
 {"piping_length_mult", (getter)Parasitics_get_piping_length_mult,(setter)Parasitics_set_piping_length_mult,
-	PyDoc_STR("*float*: Piping length multiplier\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - piping_length\n"),
+	PyDoc_STR("*float*: Piping length multiplier\n\n*Required*: True"),
  	NULL},
 {"piping_loss", (getter)Parasitics_get_piping_loss,(setter)Parasitics_set_piping_loss,
 	PyDoc_STR("*float*: Thermal loss per meter of piping [Wt/m]\n\n*Required*: True"),
@@ -2988,7 +2988,7 @@ newTcsisccObject(void* data_ptr)
 	CmodObject *self;
 	self = PyObject_New(CmodObject, &Tcsiscc_Type);
 
-	PySAM_TECH_ATTR("Tcsiscc", SAM_Tcsiscc_construct)
+	PySAM_TECH_ATTR()
 
 	PyObject* Weather_obj = Weather_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Weather", Weather_obj);
@@ -3033,7 +3033,6 @@ newTcsisccObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
 	Py_DECREF(Outputs_obj);
 
-
 	return self;
 }
 
@@ -3043,8 +3042,12 @@ static void
 Tcsiscc_dealloc(CmodObject *self)
 {
 	Py_XDECREF(self->x_attr);
-	if (!self->data_owner_ptr)
-		SAM_Tcsiscc_destruct(self->data_ptr);
+
+	if (!self->data_owner_ptr) {
+		SAM_error error = new_error();
+		SAM_table_destruct(self->data_ptr, &error);
+		PySAM_has_error(error);
+	}
 	PyObject_Del(self);
 }
 
@@ -3060,7 +3063,6 @@ Tcsiscc_execute(CmodObject *self, PyObject *args)
 	SAM_error error = new_error();
 	SAM_Tcsiscc_execute(self->data_ptr, verbosity, &error);
 	if (PySAM_has_error(error )) return NULL;
-
 	Py_INCREF(Py_None);
 	return Py_None;
 }
@@ -3091,7 +3093,7 @@ Tcsiscc_export(CmodObject *self, PyObject *args)
 static PyObject *
 Tcsiscc_value(CmodObject *self, PyObject *args)
 {
-	return CmodObject_value(self, args);
+	return Cmod_value(self, args);
 }
 
 static PyMethodDef Tcsiscc_methods[] = {
@@ -3260,7 +3262,7 @@ static PyMethodDef TcsisccModule_methods[] = {
 				PyDoc_STR("new() -> Tcsiscc")},
 		{"default",             Tcsiscc_default,         METH_VARARGS,
 				PyDoc_STR("default(config) -> Tcsiscc\n\nUse financial config-specific default attributes\n"
-				"config options:\n\n- \"ISCCSingleOwner\"")},
+				"")},
 		{"wrap",             Tcsiscc_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Tcsiscc\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   Tcsiscc_from_existing,        METH_VARARGS,

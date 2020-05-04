@@ -1673,7 +1673,7 @@ newHcpvObject(void* data_ptr)
 	CmodObject *self;
 	self = PyObject_New(CmodObject, &Hcpv_Type);
 
-	PySAM_TECH_ATTR("Hcpv", SAM_Hcpv_construct)
+	PySAM_TECH_ATTR()
 
 	PyObject* SolarResourceData_obj = SolarResourceData_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "SolarResourceData", SolarResourceData_obj);
@@ -1714,7 +1714,6 @@ newHcpvObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
 	Py_DECREF(Outputs_obj);
 
-
 	return self;
 }
 
@@ -1724,8 +1723,12 @@ static void
 Hcpv_dealloc(CmodObject *self)
 {
 	Py_XDECREF(self->x_attr);
-	if (!self->data_owner_ptr)
-		SAM_Hcpv_destruct(self->data_ptr);
+
+	if (!self->data_owner_ptr) {
+		SAM_error error = new_error();
+		SAM_table_destruct(self->data_ptr, &error);
+		PySAM_has_error(error);
+	}
 	PyObject_Del(self);
 }
 
@@ -1741,7 +1744,6 @@ Hcpv_execute(CmodObject *self, PyObject *args)
 	SAM_error error = new_error();
 	SAM_Hcpv_execute(self->data_ptr, verbosity, &error);
 	if (PySAM_has_error(error )) return NULL;
-
 	Py_INCREF(Py_None);
 	return Py_None;
 }
@@ -1772,7 +1774,7 @@ Hcpv_export(CmodObject *self, PyObject *args)
 static PyObject *
 Hcpv_value(CmodObject *self, PyObject *args)
 {
-	return CmodObject_value(self, args);
+	return Cmod_value(self, args);
 }
 
 static PyMethodDef Hcpv_methods[] = {
@@ -1941,7 +1943,7 @@ static PyMethodDef HcpvModule_methods[] = {
 				PyDoc_STR("new() -> Hcpv")},
 		{"default",             Hcpv_default,         METH_VARARGS,
 				PyDoc_STR("default(config) -> Hcpv\n\nUse financial config-specific default attributes\n"
-				"config options:\n\n- \"HighXConcentratingPVAllEquityPartnershipFlip\"\n- \"HighXConcentratingPVIndependentPowerProducer\"\n- \"HighXConcentratingPVLCOECalculator\"\n- \"HighXConcentratingPVLeveragedPartnershipFlip\"\n- \"HighXConcentratingPVMerchantPlant\"\n- \"HighXConcentratingPVNone\"\n- \"HighXConcentratingPVSaleLeaseback\"\n- \"HighXConcentratingPVSingleOwner\"")},
+				"config options:\n\n- \"HighXConcentratingPVAllEquityPartnershipFlip\"\n- \"HighXConcentratingPVLCOECalculator\"\n- \"HighXConcentratingPVLeveragedPartnershipFlip\"\n- \"HighXConcentratingPVMerchantPlant\"\n- \"HighXConcentratingPVNone\"\n- \"HighXConcentratingPVSaleLeaseback\"\n- \"HighXConcentratingPVSingleOwner\"")},
 		{"wrap",             Hcpv_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Hcpv\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   Hcpv_from_existing,        METH_VARARGS,

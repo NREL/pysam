@@ -81,6 +81,7 @@ class Lifetime(object):
 	dc_lifetime_losses = tuple
 	en_ac_lifetime_losses = float
 	en_dc_lifetime_losses = float
+	save_full_lifetime_variables = float
 	system_use_lifetime_output = float
 
 

@@ -25,6 +25,13 @@ typedef struct {
     PyObject *data_owner_ptr;     // NULL if owns data_ptr, otherwise pts to another PySAM object
 } CmodObject;
 
+typedef struct {
+    PyObject_HEAD
+    SAM_table data_ptr;
+    PyObject *x_attr;        /* Attributes dictionary */
+    PyObject *data_owner_ptr;     // NULL if owns data_ptr, otherwise pts to another PySAM object
+    SAM_module cmod_ptr;
+} CmodStatefulObject;
 
 //
 // Error Handling
@@ -134,12 +141,19 @@ static int PySAM_check_lib_loaded(){
 // Macros for defining attribute dictionaries and methods
 //
 
-#define PySAM_TECH_ATTR(tech, ctor) \
+#define PySAM_TECH_ATTR() \
 if (self == NULL) return NULL; SAM_error error = new_error(); \
-if(!data_ptr) self->data_ptr = (*ctor)(0, &error); else self->data_ptr = data_ptr; \
+if(!data_ptr) self->data_ptr = SAM_table_construct(&error); else self->data_ptr = data_ptr; \
 if (PySAM_has_error(error)) return NULL; \
 PyObject* attr_dict = PyDict_New(); self->x_attr = attr_dict;
 
+#define PySAM_TECH_STATEFUL_ATTR(ctor) \
+if (self == NULL) return NULL; SAM_error error = new_error(); \
+if(!data_ptr) self->data_ptr = SAM_table_construct(&error); else self->data_ptr = data_ptr; \
+if (PySAM_has_error(error)) return NULL; \
+error = new_error(); self->cmod_ptr = ctor(self->data_ptr, &error); \
+if (PySAM_has_error(error)) return NULL; \
+PyObject* attr_dict = PyDict_New(); self->x_attr = attr_dict;
 
 static PyObject * PySAM_get_attr(PyObject *self, PyObject* x_attr, PyObject *name){
     if (x_attr != NULL) {
@@ -1020,14 +1034,13 @@ static int PySAM_load_defaults(PyObject* self, PyObject* x_attr, void* data_ptr,
 
 // assigning value by name
 
-static PyGetSetDef* CmodType_find_getset(CmodObject * self, const char* name, char* VarGroup_name){
+static PyObject* PySAM_run_getset(PyObject *self, PyObject *arg, PyObject * x_attr, char* name, char* VarGroup_name){
     if (!PySAM_check_lib_loaded()) return NULL;
 
-    CmodObject* cmod_obj = (CmodObject*)self;
     PyObject* key;
     PyObject* value;
     Py_ssize_t pos = 0;
-    while (PyDict_Next(cmod_obj->x_attr, &pos, &key, &value)) {
+    while (PyDict_Next(x_attr, &pos, &key, &value)) {
         PyTypeObject* var_type = value->ob_type;
         PyGetSetDef* getset = var_type->tp_getset;
         if (!getset)
@@ -1038,39 +1051,44 @@ static PyGetSetDef* CmodType_find_getset(CmodObject * self, const char* name, ch
                 if (VarGroup_name){
                     strcpy(VarGroup_name, getset->name);
                 }
-                return getset;
+                if (!arg){
+                    return (*getset->get)(self, NULL);
+                }
+                else{
+                    if ((*getset->set)(self, arg, NULL) == 0){
+                        Py_INCREF(Py_None);
+                        return Py_None;
+                    }
+                    return NULL;
+                }
             }
             getset++;
         }
     }
+    char str[256];
+    PySAM_concat_msg(str, "'value' error, could not find attribute: ", name);
+    PyErr_SetString(PySAM_ErrorObject, str);
     return NULL;
 }
 
-static PyObject * CmodObject_value(CmodObject *self, PyObject *args)
+static PyObject * CmodStateful_value(CmodStatefulObject *self, PyObject *args)
 {
     char* name = 0;
     PyObject* value = NULL;
     if (!PyArg_ParseTuple(args, "s|O", &name, &value))
 		return NULL;
 
-    PyGetSetDef* getset = CmodType_find_getset(self, name, NULL);
-    if (!getset){
-        char str[256];
-        PySAM_concat_msg(str, "'value' error, could not find attribute: ", name);
-        PyErr_SetString(PySAM_ErrorObject, str);
-        return NULL;
-    }
+    return PySAM_run_getset((PyObject *)self, value, self->x_attr, name, NULL);
+}
 
-    if (!value){
-        return (*getset->get)((PyObject*)self, NULL);
-    }
-    else{
-        if ((*getset->set)((PyObject*)self, value, NULL) == 0){
-            Py_INCREF(Py_None);
-            return Py_None;
-        }
-        return NULL;
-    }
+static PyObject * Cmod_value(CmodObject *self, PyObject *args)
+{
+    char* name = 0;
+    PyObject* value = NULL;
+    if (!PyArg_ParseTuple(args, "s|O", &name, &value))
+		return NULL;
+
+    return PySAM_run_getset((PyObject *)self, value, self->x_attr, name, NULL);
 }
 
 #endif //PYSAM_SAM_UTILS_H

@@ -2454,7 +2454,7 @@ newTcsdishObject(void* data_ptr)
 	CmodObject *self;
 	self = PyObject_New(CmodObject, &Tcsdish_Type);
 
-	PySAM_TECH_ATTR("Tcsdish", SAM_Tcsdish_construct)
+	PySAM_TECH_ATTR()
 
 	PyObject* Weather_obj = Weather_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Weather", Weather_obj);
@@ -2499,7 +2499,6 @@ newTcsdishObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
 	Py_DECREF(Outputs_obj);
 
-
 	return self;
 }
 
@@ -2509,8 +2508,12 @@ static void
 Tcsdish_dealloc(CmodObject *self)
 {
 	Py_XDECREF(self->x_attr);
-	if (!self->data_owner_ptr)
-		SAM_Tcsdish_destruct(self->data_ptr);
+
+	if (!self->data_owner_ptr) {
+		SAM_error error = new_error();
+		SAM_table_destruct(self->data_ptr, &error);
+		PySAM_has_error(error);
+	}
 	PyObject_Del(self);
 }
 
@@ -2526,7 +2529,6 @@ Tcsdish_execute(CmodObject *self, PyObject *args)
 	SAM_error error = new_error();
 	SAM_Tcsdish_execute(self->data_ptr, verbosity, &error);
 	if (PySAM_has_error(error )) return NULL;
-
 	Py_INCREF(Py_None);
 	return Py_None;
 }
@@ -2557,7 +2559,7 @@ Tcsdish_export(CmodObject *self, PyObject *args)
 static PyObject *
 Tcsdish_value(CmodObject *self, PyObject *args)
 {
-	return CmodObject_value(self, args);
+	return Cmod_value(self, args);
 }
 
 static PyMethodDef Tcsdish_methods[] = {
@@ -2726,7 +2728,7 @@ static PyMethodDef TcsdishModule_methods[] = {
 				PyDoc_STR("new() -> Tcsdish")},
 		{"default",             Tcsdish_default,         METH_VARARGS,
 				PyDoc_STR("default(config) -> Tcsdish\n\nUse financial config-specific default attributes\n"
-				"config options:\n\n- \"DishStirlingAllEquityPartnershipFlip\"\n- \"DishStirlingCommercial\"\n- \"DishStirlingCommercialPPA\"\n- \"DishStirlingIndependentPowerProducer\"\n- \"DishStirlingLCOECalculator\"\n- \"DishStirlingLeveragedPartnershipFlip\"\n- \"DishStirlingMerchantPlant\"\n- \"DishStirlingNone\"\n- \"DishStirlingSaleLeaseback\"\n- \"DishStirlingSingleOwner\"")},
+				"config options:\n\n- \"DishStirlingAllEquityPartnershipFlip\"\n- \"DishStirlingCommercial\"\n- \"DishStirlingLCOECalculator\"\n- \"DishStirlingLeveragedPartnershipFlip\"\n- \"DishStirlingMerchantPlant\"\n- \"DishStirlingNone\"\n- \"DishStirlingSaleLeaseback\"\n- \"DishStirlingSingleOwner\"")},
 		{"wrap",             Tcsdish_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Tcsdish\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   Tcsdish_from_existing,        METH_VARARGS,

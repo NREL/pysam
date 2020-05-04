@@ -682,7 +682,7 @@ static PyGetSetDef SystemDesign_getset[] = {
 	PyDoc_STR("*float*: Enable tracker stow at high wind speeds [0/1]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"gcr", (getter)SystemDesign_get_gcr,(setter)SystemDesign_set_gcr,
-	PyDoc_STR("*float*: Ground coverage ratio [0..1]\n\n*Constraints*: MIN=0,MAX=1\n\n*Required*: If not provided, assumed to be 0.4"),
+	PyDoc_STR("*float*: Ground coverage ratio [0..1]\n\n*Constraints*: MIN=0.01,MAX=0.99\n\n*Required*: If not provided, assumed to be 0.4"),
  	NULL},
 {"gust_factor", (getter)SystemDesign_get_gust_factor,(setter)SystemDesign_set_gust_factor,
 	PyDoc_STR("*float*: Wind gust estimation factor\n\n*Required*: False"),
@@ -1220,7 +1220,7 @@ newPvwattsv7Object(void* data_ptr)
 	CmodObject *self;
 	self = PyObject_New(CmodObject, &Pvwattsv7_Type);
 
-	PySAM_TECH_ATTR("Pvwattsv7", SAM_Pvwattsv7_construct)
+	PySAM_TECH_ATTR()
 
 	PyObject* SolarResource_obj = SolarResource_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "SolarResource", SolarResource_obj);
@@ -1253,7 +1253,6 @@ newPvwattsv7Object(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
 	Py_DECREF(Outputs_obj);
 
-
 	return self;
 }
 
@@ -1263,8 +1262,12 @@ static void
 Pvwattsv7_dealloc(CmodObject *self)
 {
 	Py_XDECREF(self->x_attr);
-	if (!self->data_owner_ptr)
-		SAM_Pvwattsv7_destruct(self->data_ptr);
+
+	if (!self->data_owner_ptr) {
+		SAM_error error = new_error();
+		SAM_table_destruct(self->data_ptr, &error);
+		PySAM_has_error(error);
+	}
 	PyObject_Del(self);
 }
 
@@ -1280,7 +1283,6 @@ Pvwattsv7_execute(CmodObject *self, PyObject *args)
 	SAM_error error = new_error();
 	SAM_Pvwattsv7_execute(self->data_ptr, verbosity, &error);
 	if (PySAM_has_error(error )) return NULL;
-
 	Py_INCREF(Py_None);
 	return Py_None;
 }
@@ -1311,7 +1313,7 @@ Pvwattsv7_export(CmodObject *self, PyObject *args)
 static PyObject *
 Pvwattsv7_value(CmodObject *self, PyObject *args)
 {
-	return CmodObject_value(self, args);
+	return Cmod_value(self, args);
 }
 
 static PyMethodDef Pvwattsv7_methods[] = {
@@ -1482,7 +1484,7 @@ static PyMethodDef Pvwattsv7Module_methods[] = {
 				PyDoc_STR("new() -> Pvwattsv7")},
 		{"default",             Pvwattsv7_default,         METH_VARARGS,
 				PyDoc_STR("default(config) -> Pvwattsv7\n\nUse financial config-specific default attributes\n"
-				"config options:\n\n- \"FuelCellCommercial\"\n- \"FuelCellSingleOwner\"\n- \"PVWattsAllEquityPartnershipFlip\"\n- \"PVWattsCommercial\"\n- \"PVWattsCommercialPPA\"\n- \"PVWattsHostDeveloper\"\n- \"PVWattsIndependentPowerProducer\"\n- \"PVWattsLCOECalculator\"\n- \"PVWattsLeveragedPartnershipFlip\"\n- \"PVWattsMerchantPlant\"\n- \"PVWattsNone\"\n- \"PVWattsResidential\"\n- \"PVWattsSaleLeaseback\"\n- \"PVWattsSingleOwner\"\n- \"PVWattsThirdParty\"")},
+				"config options:\n\n- \"FuelCellCommercial\"\n- \"FuelCellSingleOwner\"\n- \"PVWattsBatteryCommercial\"\n- \"PVWattsBatteryHostDeveloper\"\n- \"PVWattsBatteryResidential\"\n- \"PVWattsBatteryThirdParty\"\n- \"PVWattsAllEquityPartnershipFlip\"\n- \"PVWattsCommercial\"\n- \"PVWattsHostDeveloper\"\n- \"PVWattsLCOECalculator\"\n- \"PVWattsLeveragedPartnershipFlip\"\n- \"PVWattsMerchantPlant\"\n- \"PVWattsNone\"\n- \"PVWattsResidential\"\n- \"PVWattsSaleLeaseback\"\n- \"PVWattsSingleOwner\"\n- \"PVWattsThirdParty\"")},
 		{"wrap",             Pvwattsv7_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Pvwattsv7\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   Pvwattsv7_from_existing,        METH_VARARGS,

@@ -4235,7 +4235,7 @@ newTcsdirectSteamObject(void* data_ptr)
 	CmodObject *self;
 	self = PyObject_New(CmodObject, &TcsdirectSteam_Type);
 
-	PySAM_TECH_ATTR("TcsdirectSteam", SAM_TcsdirectSteam_construct)
+	PySAM_TECH_ATTR()
 
 	PyObject* Weather_obj = Weather_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Weather", Weather_obj);
@@ -4288,7 +4288,6 @@ newTcsdirectSteamObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
 	Py_DECREF(Outputs_obj);
 
-
 	return self;
 }
 
@@ -4298,8 +4297,12 @@ static void
 TcsdirectSteam_dealloc(CmodObject *self)
 {
 	Py_XDECREF(self->x_attr);
-	if (!self->data_owner_ptr)
-		SAM_TcsdirectSteam_destruct(self->data_ptr);
+
+	if (!self->data_owner_ptr) {
+		SAM_error error = new_error();
+		SAM_table_destruct(self->data_ptr, &error);
+		PySAM_has_error(error);
+	}
 	PyObject_Del(self);
 }
 
@@ -4315,7 +4318,6 @@ TcsdirectSteam_execute(CmodObject *self, PyObject *args)
 	SAM_error error = new_error();
 	SAM_TcsdirectSteam_execute(self->data_ptr, verbosity, &error);
 	if (PySAM_has_error(error )) return NULL;
-
 	Py_INCREF(Py_None);
 	return Py_None;
 }
@@ -4346,7 +4348,7 @@ TcsdirectSteam_export(CmodObject *self, PyObject *args)
 static PyObject *
 TcsdirectSteam_value(CmodObject *self, PyObject *args)
 {
-	return CmodObject_value(self, args);
+	return Cmod_value(self, args);
 }
 
 static PyMethodDef TcsdirectSteam_methods[] = {

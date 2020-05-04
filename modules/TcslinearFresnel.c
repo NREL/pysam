@@ -3294,7 +3294,7 @@ newTcslinearFresnelObject(void* data_ptr)
 	CmodObject *self;
 	self = PyObject_New(CmodObject, &TcslinearFresnel_Type);
 
-	PySAM_TECH_ATTR("TcslinearFresnel", SAM_TcslinearFresnel_construct)
+	PySAM_TECH_ATTR()
 
 	PyObject* Weather_obj = Weather_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Weather", Weather_obj);
@@ -3339,7 +3339,6 @@ newTcslinearFresnelObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
 	Py_DECREF(Outputs_obj);
 
-
 	return self;
 }
 
@@ -3349,8 +3348,12 @@ static void
 TcslinearFresnel_dealloc(CmodObject *self)
 {
 	Py_XDECREF(self->x_attr);
-	if (!self->data_owner_ptr)
-		SAM_TcslinearFresnel_destruct(self->data_ptr);
+
+	if (!self->data_owner_ptr) {
+		SAM_error error = new_error();
+		SAM_table_destruct(self->data_ptr, &error);
+		PySAM_has_error(error);
+	}
 	PyObject_Del(self);
 }
 
@@ -3366,7 +3369,6 @@ TcslinearFresnel_execute(CmodObject *self, PyObject *args)
 	SAM_error error = new_error();
 	SAM_TcslinearFresnel_execute(self->data_ptr, verbosity, &error);
 	if (PySAM_has_error(error )) return NULL;
-
 	Py_INCREF(Py_None);
 	return Py_None;
 }
@@ -3397,7 +3399,7 @@ TcslinearFresnel_export(CmodObject *self, PyObject *args)
 static PyObject *
 TcslinearFresnel_value(CmodObject *self, PyObject *args)
 {
-	return CmodObject_value(self, args);
+	return Cmod_value(self, args);
 }
 
 static PyMethodDef TcslinearFresnel_methods[] = {

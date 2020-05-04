@@ -12,7 +12,7 @@ from distutils.core import Command
 #
 ###################################################################################################
 
-latest_version = '2.0.2'
+latest_version = '2.1.dev0'
 
 # determine if making PyPi or Conda distribution
 distclass = distutils.core.Distribution
@@ -163,7 +163,7 @@ setup(
     name='NREL-PySAM',
     version=latest_version,
     distclass=distclass,
-    url='https://pysam-docs.readthedocs.io',
+    url='https://nrel-pysam.readthedocs.io',
     description="National Renewable Energy Laboratory's System Advisor Model Python Wrapper",
     long_description=long_description,
     long_description_content_type='text/markdown',

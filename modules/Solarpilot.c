@@ -1117,7 +1117,7 @@ newSolarpilotObject(void* data_ptr)
 	CmodObject *self;
 	self = PyObject_New(CmodObject, &Solarpilot_Type);
 
-	PySAM_TECH_ATTR("Solarpilot", SAM_Solarpilot_construct)
+	PySAM_TECH_ATTR()
 
 	PyObject* SolarPILOT_obj = SolarPILOT_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "SolarPILOT", SolarPILOT_obj);
@@ -1126,7 +1126,6 @@ newSolarpilotObject(void* data_ptr)
 	PyObject* Outputs_obj = Outputs_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
 	Py_DECREF(Outputs_obj);
-
 
 	return self;
 }
@@ -1137,8 +1136,12 @@ static void
 Solarpilot_dealloc(CmodObject *self)
 {
 	Py_XDECREF(self->x_attr);
-	if (!self->data_owner_ptr)
-		SAM_Solarpilot_destruct(self->data_ptr);
+
+	if (!self->data_owner_ptr) {
+		SAM_error error = new_error();
+		SAM_table_destruct(self->data_ptr, &error);
+		PySAM_has_error(error);
+	}
 	PyObject_Del(self);
 }
 
@@ -1154,7 +1157,6 @@ Solarpilot_execute(CmodObject *self, PyObject *args)
 	SAM_error error = new_error();
 	SAM_Solarpilot_execute(self->data_ptr, verbosity, &error);
 	if (PySAM_has_error(error )) return NULL;
-
 	Py_INCREF(Py_None);
 	return Py_None;
 }
@@ -1185,7 +1187,7 @@ Solarpilot_export(CmodObject *self, PyObject *args)
 static PyObject *
 Solarpilot_value(CmodObject *self, PyObject *args)
 {
-	return CmodObject_value(self, args);
+	return Cmod_value(self, args);
 }
 
 static PyMethodDef Solarpilot_methods[] = {

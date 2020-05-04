@@ -16,7 +16,6 @@ class MHKCosts(object):
 	development_cost_input = float
 	development_cost_method = float
 	device_rated_power = float
-	device_type = float
 	devices_per_row = float
 	eng_and_mgmt_cost_input = float
 	eng_and_mgmt_cost_method = float
@@ -24,6 +23,8 @@ class MHKCosts(object):
 	export_cable_system_cost_input = float
 	export_cable_system_cost_method = float
 	inter_array_cable_length = float
+	lib_wave_device = str
+	library_or_input_wec = float
 	marine_energy_tech = float
 	mooring_found_substruc_cost_input = float
 	mooring_found_substruc_cost_method = float

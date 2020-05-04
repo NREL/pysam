@@ -563,7 +563,7 @@ newPvwattsv1PoaObject(void* data_ptr)
 	CmodObject *self;
 	self = PyObject_New(CmodObject, &Pvwattsv1Poa_Type);
 
-	PySAM_TECH_ATTR("Pvwattsv1Poa", SAM_Pvwattsv1Poa_construct)
+	PySAM_TECH_ATTR()
 
 	PyObject* Weather_obj = Weather_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Weather", Weather_obj);
@@ -577,7 +577,6 @@ newPvwattsv1PoaObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
 	Py_DECREF(Outputs_obj);
 
-
 	return self;
 }
 
@@ -587,8 +586,12 @@ static void
 Pvwattsv1Poa_dealloc(CmodObject *self)
 {
 	Py_XDECREF(self->x_attr);
-	if (!self->data_owner_ptr)
-		SAM_Pvwattsv1Poa_destruct(self->data_ptr);
+
+	if (!self->data_owner_ptr) {
+		SAM_error error = new_error();
+		SAM_table_destruct(self->data_ptr, &error);
+		PySAM_has_error(error);
+	}
 	PyObject_Del(self);
 }
 
@@ -604,7 +607,6 @@ Pvwattsv1Poa_execute(CmodObject *self, PyObject *args)
 	SAM_error error = new_error();
 	SAM_Pvwattsv1Poa_execute(self->data_ptr, verbosity, &error);
 	if (PySAM_has_error(error )) return NULL;
-
 	Py_INCREF(Py_None);
 	return Py_None;
 }
@@ -635,7 +637,7 @@ Pvwattsv1Poa_export(CmodObject *self, PyObject *args)
 static PyObject *
 Pvwattsv1Poa_value(CmodObject *self, PyObject *args)
 {
-	return CmodObject_value(self, args);
+	return Cmod_value(self, args);
 }
 
 static PyMethodDef Pvwattsv1Poa_methods[] = {

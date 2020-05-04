@@ -260,6 +260,7 @@ class ThermalStorage(object):
 	hot_tank_Thtr = float
 	hot_tank_max_heat = float
 	tank_pairs = float
+	tanks_in_parallel = float
 	u_tank = float
 
 
@@ -396,6 +397,7 @@ class SystemControl(object):
 	is_ampl_engine = float
 	is_dispatch = float
 	is_dispatch_series = float
+	is_tod_pc_target_also_pc_max = float
 	is_wlim_series = float
 	is_write_ampl_dat = float
 	pb_fixed_par = float
@@ -612,12 +614,18 @@ class Outputs(object):
 	kwh_per_kw = float
 	m_cold = tuple
 	m_dot_balance = tuple
+	m_dot_cr_to_tes_hot = tuple
+	m_dot_cycle_to_field = tuple
+	m_dot_field_to_cycle = tuple
 	m_dot_pc = tuple
+	m_dot_pc_to_tes_cold = tuple
 	m_dot_rec = tuple
-	m_dot_tes_ch = tuple
-	m_dot_tes_dc = tuple
+	m_dot_tes_cold_out = tuple
+	m_dot_tes_hot_out = tuple
 	m_dot_water_pc = tuple
 	m_warm = tuple
+	mass_tes_cold = tuple
+	mass_tes_hot = tuple
 	n_op_modes = tuple
 	op_mode_1 = tuple
 	op_mode_2 = tuple
@@ -649,6 +657,7 @@ class Outputs(object):
 	q_thermal_loss = tuple
 	radcool_control = tuple
 	rh = tuple
+	sco2_preprocess_table_out = tuple
 	sf_adjust_out = tuple
 	solaz = tuple
 	solzen = tuple
@@ -660,9 +669,6 @@ class Outputs(object):
 	total_installed_cost = float
 	tou_value = tuple
 	twet = tuple
-	ud_T_amb_ind_od_out = tuple
-	ud_T_htf_ind_od_out = tuple
-	ud_m_dot_htf_ind_od_out = tuple
 	ui_direct_subtotal = float
 	wspd = tuple
 

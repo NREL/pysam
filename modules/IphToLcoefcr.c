@@ -256,109 +256,6 @@ static PyTypeObject SimpleLCOE_Type = {
 		0,                          /*tp_is_gc*/
 };
 
-
-/*
- * Outputs Group
- */ 
-
-static PyTypeObject Outputs_Type;
-
-static PyObject *
-Outputs_new(SAM_IphToLcoefcr data_ptr)
-{
-	PyObject* new_obj = Outputs_Type.tp_alloc(&Outputs_Type,0);
-
-	VarGroupObject* Outputs_obj = (VarGroupObject*)new_obj;
-
-	Outputs_obj->data_ptr = (SAM_table)data_ptr;
-
-	return new_obj;
-}
-
-/* Outputs methods */
-
-static PyObject *
-Outputs_assign(VarGroupObject *self, PyObject *args)
-{
-	PyObject* dict;
-	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
-		return NULL;
-	}
-
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "IphToLcoefcr", "Outputs")){
-		return NULL;
-	}
-
-	Py_INCREF(Py_None);
-	return Py_None;
-}
-
-static PyObject *
-Outputs_export(VarGroupObject *self, PyObject *args)
-{
-	PyTypeObject* tp = &Outputs_Type;
-	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
-	return dict;
-}
-
-static PyMethodDef Outputs_methods[] = {
-		{"assign",            (PyCFunction)Outputs_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Outputs_vals = { var: val, ...}``")},
-		{"export",            (PyCFunction)Outputs_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
-		{NULL,              NULL}           /* sentinel */
-};
-
-static PyGetSetDef Outputs_getset[] = {
-	{NULL}  /* Sentinel */
-};
-
-static PyTypeObject Outputs_Type = {
-		/* The ob_type field must be initialized in the module init function
-		 * to be portable to Windows without using C++. */
-		PyVarObject_HEAD_INIT(NULL, 0)
-		"IphToLcoefcr.Outputs",             /*tp_name*/
-		sizeof(VarGroupObject),          /*tp_basicsize*/
-		0,                          /*tp_itemsize*/
-		/* methods */
-		0,    /*tp_dealloc*/
-		0,                          /*tp_print*/
-		(getattrfunc)0,             /*tp_getattr*/
-		0,                          /*tp_setattr*/
-		0,                          /*tp_reserved*/
-		0,                          /*tp_repr*/
-		0,                          /*tp_as_number*/
-		0,                          /*tp_as_sequence*/
-		0,                          /*tp_as_mapping*/
-		0,                          /*tp_hash*/
-		0,                          /*tp_call*/
-		0,                          /*tp_str*/
-		0,                          /*tp_getattro*/
-		0,                          /*tp_setattro*/
-		0,                          /*tp_as_buffer*/
-		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
-		0,                          /*tp_doc*/
-		0,                          /*tp_traverse*/
-		0,                          /*tp_clear*/
-		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistofnset*/
-		0,                          /*tp_iter*/
-		0,                          /*tp_iternext*/
-		Outputs_methods,         /*tp_methods*/
-		0,                          /*tp_members*/
-		Outputs_getset,          /*tp_getset*/
-		0,                          /*tp_base*/
-		0,                          /*tp_dict*/
-		0,                          /*tp_descr_get*/
-		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictofnset*/
-		0,                          /*tp_init*/
-		0,                          /*tp_alloc*/
-		0,             /*tp_new*/
-		0,                          /*tp_free*/
-		0,                          /*tp_is_gc*/
-};
-
 /*
  * IphToLcoefcr
  */
@@ -371,7 +268,7 @@ newIphToLcoefcrObject(void* data_ptr)
 	CmodObject *self;
 	self = PyObject_New(CmodObject, &IphToLcoefcr_Type);
 
-	PySAM_TECH_ATTR("IphToLcoefcr", SAM_IphToLcoefcr_construct)
+	PySAM_TECH_ATTR()
 
 	PyObject* IPHLCOH_obj = IPHLCOH_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "IPHLCOH", IPHLCOH_obj);
@@ -380,11 +277,6 @@ newIphToLcoefcrObject(void* data_ptr)
 	PyObject* SimpleLCOE_obj = SimpleLCOE_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "SimpleLCOE", SimpleLCOE_obj);
 	Py_DECREF(SimpleLCOE_obj);
-
-	PyObject* Outputs_obj = Outputs_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
-	Py_DECREF(Outputs_obj);
-
 
 	return self;
 }
@@ -395,8 +287,12 @@ static void
 IphToLcoefcr_dealloc(CmodObject *self)
 {
 	Py_XDECREF(self->x_attr);
-	if (!self->data_owner_ptr)
-		SAM_IphToLcoefcr_destruct(self->data_ptr);
+
+	if (!self->data_owner_ptr) {
+		SAM_error error = new_error();
+		SAM_table_destruct(self->data_ptr, &error);
+		PySAM_has_error(error);
+	}
 	PyObject_Del(self);
 }
 
@@ -412,7 +308,6 @@ IphToLcoefcr_execute(CmodObject *self, PyObject *args)
 	SAM_error error = new_error();
 	SAM_IphToLcoefcr_execute(self->data_ptr, verbosity, &error);
 	if (PySAM_has_error(error )) return NULL;
-
 	Py_INCREF(Py_None);
 	return Py_None;
 }
@@ -443,7 +338,7 @@ IphToLcoefcr_export(CmodObject *self, PyObject *args)
 static PyObject *
 IphToLcoefcr_value(CmodObject *self, PyObject *args)
 {
-	return CmodObject_value(self, args);
+	return Cmod_value(self, args);
 }
 
 static PyMethodDef IphToLcoefcr_methods[] = {
@@ -649,13 +544,6 @@ IphToLcoefcrModule_exec(PyObject *m)
 				"SimpleLCOE",
 				(PyObject*)&SimpleLCOE_Type);
 	Py_DECREF(&SimpleLCOE_Type);
-
-	/// Add the Outputs type object to IphToLcoefcr_Type
-	if (PyType_Ready(&Outputs_Type) < 0) { goto fail; }
-	PyDict_SetItemString(IphToLcoefcr_Type.tp_dict,
-				"Outputs",
-				(PyObject*)&Outputs_Type);
-	Py_DECREF(&Outputs_Type);
 
 	/// Add the IphToLcoefcr type object to the module
 	if (PyType_Ready(&IphToLcoefcr_Type) < 0) { goto fail; }

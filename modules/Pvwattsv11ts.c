@@ -691,7 +691,7 @@ newPvwattsv11tsObject(void* data_ptr)
 	CmodObject *self;
 	self = PyObject_New(CmodObject, &Pvwattsv11ts_Type);
 
-	PySAM_TECH_ATTR("Pvwattsv11ts", SAM_Pvwattsv11ts_construct)
+	PySAM_TECH_ATTR()
 
 	PyObject* PVWatts_obj = PVWatts_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "PVWatts", PVWatts_obj);
@@ -700,7 +700,6 @@ newPvwattsv11tsObject(void* data_ptr)
 	PyObject* Outputs_obj = Outputs_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
 	Py_DECREF(Outputs_obj);
-
 
 	return self;
 }
@@ -711,8 +710,12 @@ static void
 Pvwattsv11ts_dealloc(CmodObject *self)
 {
 	Py_XDECREF(self->x_attr);
-	if (!self->data_owner_ptr)
-		SAM_Pvwattsv11ts_destruct(self->data_ptr);
+
+	if (!self->data_owner_ptr) {
+		SAM_error error = new_error();
+		SAM_table_destruct(self->data_ptr, &error);
+		PySAM_has_error(error);
+	}
 	PyObject_Del(self);
 }
 
@@ -728,7 +731,6 @@ Pvwattsv11ts_execute(CmodObject *self, PyObject *args)
 	SAM_error error = new_error();
 	SAM_Pvwattsv11ts_execute(self->data_ptr, verbosity, &error);
 	if (PySAM_has_error(error )) return NULL;
-
 	Py_INCREF(Py_None);
 	return Py_None;
 }
@@ -759,7 +761,7 @@ Pvwattsv11ts_export(CmodObject *self, PyObject *args)
 static PyObject *
 Pvwattsv11ts_value(CmodObject *self, PyObject *args)
 {
-	return CmodObject_value(self, args);
+	return Cmod_value(self, args);
 }
 
 static PyMethodDef Pvwattsv11ts_methods[] = {

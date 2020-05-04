@@ -379,7 +379,7 @@ newWaveFileReaderObject(void* data_ptr)
 	CmodObject *self;
 	self = PyObject_New(CmodObject, &WaveFileReader_Type);
 
-	PySAM_TECH_ATTR("WaveFileReader", SAM_WaveFileReader_construct)
+	PySAM_TECH_ATTR()
 
 	PyObject* WeatherReader_obj = WeatherReader_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "WeatherReader", WeatherReader_obj);
@@ -388,7 +388,6 @@ newWaveFileReaderObject(void* data_ptr)
 	PyObject* Outputs_obj = Outputs_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
 	Py_DECREF(Outputs_obj);
-
 
 	return self;
 }
@@ -399,8 +398,12 @@ static void
 WaveFileReader_dealloc(CmodObject *self)
 {
 	Py_XDECREF(self->x_attr);
-	if (!self->data_owner_ptr)
-		SAM_WaveFileReader_destruct(self->data_ptr);
+
+	if (!self->data_owner_ptr) {
+		SAM_error error = new_error();
+		SAM_table_destruct(self->data_ptr, &error);
+		PySAM_has_error(error);
+	}
 	PyObject_Del(self);
 }
 
@@ -416,7 +419,6 @@ WaveFileReader_execute(CmodObject *self, PyObject *args)
 	SAM_error error = new_error();
 	SAM_WaveFileReader_execute(self->data_ptr, verbosity, &error);
 	if (PySAM_has_error(error )) return NULL;
-
 	Py_INCREF(Py_None);
 	return Py_None;
 }
@@ -447,7 +449,7 @@ WaveFileReader_export(CmodObject *self, PyObject *args)
 static PyObject *
 WaveFileReader_value(CmodObject *self, PyObject *args)
 {
-	return CmodObject_value(self, args);
+	return Cmod_value(self, args);
 }
 
 static PyMethodDef WaveFileReader_methods[] = {
@@ -616,7 +618,7 @@ static PyMethodDef WaveFileReaderModule_methods[] = {
 				PyDoc_STR("new() -> WaveFileReader")},
 		{"default",             WaveFileReader_default,         METH_VARARGS,
 				PyDoc_STR("default(config) -> WaveFileReader\n\nUse financial config-specific default attributes\n"
-				"config options:\n\n- \"MHKwaveLCOECalculator\"")},
+				"config options:\n\n- \"MEwaveLCOECalculator\"")},
 		{"wrap",             WaveFileReader_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> WaveFileReader\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   WaveFileReader_from_existing,        METH_VARARGS,

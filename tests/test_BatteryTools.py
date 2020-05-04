@@ -5,10 +5,10 @@ import PySAM.StandAloneBattery as batt
 
 
 def test_leadacid():
-    model = batt.default("GenericSystemCommercial")
+    model = batt.default("GenericBatteryCommercial")
     model.BatteryCell.batt_chem = 0
-    assert(model.BatterySystem.batt_computed_bank_capacity == pytest.approx(100, .5))
-    assert(model.BatterySystem.batt_power_charge_max_kwdc == pytest.approx(50, 0.5))
+    assert(model.BatterySystem.batt_computed_bank_capacity != pytest.approx(100, .5))
+    assert(model.BatterySystem.batt_power_charge_max_kwdc != pytest.approx(50, 0.5))
 
     PySAM.BatteryTools.battery_model_sizing(model, 100, 400, 500)
     assert(model.BatterySystem.batt_computed_strings == 370)
@@ -25,7 +25,7 @@ def test_leadacid():
 
 
 def test_liion():
-    model = batt.default("GenericSystemCommercial")
+    model = batt.default("GenericBatteryCommercial")
     model.BatteryCell.batt_chem = 1
     PySAM.BatteryTools.battery_model_sizing(model, 100, 400, 500)
     assert(model.BatterySystem.batt_computed_bank_capacity == pytest.approx(400, 5))
@@ -33,7 +33,7 @@ def test_liion():
 
 
 def test_dc():
-    model = batt.default("GenericSystemCommercial")
+    model = batt.default("GenericBatteryCommercial")
     model.BatteryCell.batt_chem = 1
     model.Inverter.inverter_model = 0
     model.Inverter.inv_snl_eff_cec = 50

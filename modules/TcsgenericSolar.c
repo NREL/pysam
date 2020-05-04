@@ -2077,7 +2077,7 @@ newTcsgenericSolarObject(void* data_ptr)
 	CmodObject *self;
 	self = PyObject_New(CmodObject, &TcsgenericSolar_Type);
 
-	PySAM_TECH_ATTR("TcsgenericSolar", SAM_TcsgenericSolar_construct)
+	PySAM_TECH_ATTR()
 
 	PyObject* Weather_obj = Weather_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Weather", Weather_obj);
@@ -2114,7 +2114,6 @@ newTcsgenericSolarObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
 	Py_DECREF(Outputs_obj);
 
-
 	return self;
 }
 
@@ -2124,8 +2123,12 @@ static void
 TcsgenericSolar_dealloc(CmodObject *self)
 {
 	Py_XDECREF(self->x_attr);
-	if (!self->data_owner_ptr)
-		SAM_TcsgenericSolar_destruct(self->data_ptr);
+
+	if (!self->data_owner_ptr) {
+		SAM_error error = new_error();
+		SAM_table_destruct(self->data_ptr, &error);
+		PySAM_has_error(error);
+	}
 	PyObject_Del(self);
 }
 
@@ -2141,7 +2144,6 @@ TcsgenericSolar_execute(CmodObject *self, PyObject *args)
 	SAM_error error = new_error();
 	SAM_TcsgenericSolar_execute(self->data_ptr, verbosity, &error);
 	if (PySAM_has_error(error )) return NULL;
-
 	Py_INCREF(Py_None);
 	return Py_None;
 }
@@ -2172,7 +2174,7 @@ TcsgenericSolar_export(CmodObject *self, PyObject *args)
 static PyObject *
 TcsgenericSolar_value(CmodObject *self, PyObject *args)
 {
-	return CmodObject_value(self, args);
+	return Cmod_value(self, args);
 }
 
 static PyMethodDef TcsgenericSolar_methods[] = {
@@ -2341,7 +2343,7 @@ static PyMethodDef TcsgenericSolarModule_methods[] = {
 				PyDoc_STR("new() -> TcsgenericSolar")},
 		{"default",             TcsgenericSolar_default,         METH_VARARGS,
 				PyDoc_STR("default(config) -> TcsgenericSolar\n\nUse financial config-specific default attributes\n"
-				"config options:\n\n- \"GenericCSPSystemAllEquityPartnershipFlip\"\n- \"GenericCSPSystemCommercial\"\n- \"GenericCSPSystemCommercialPPA\"\n- \"GenericCSPSystemIndependentPowerProducer\"\n- \"GenericCSPSystemLCOECalculator\"\n- \"GenericCSPSystemLeveragedPartnershipFlip\"\n- \"GenericCSPSystemMerchantPlant\"\n- \"GenericCSPSystemNone\"\n- \"GenericCSPSystemSaleLeaseback\"\n- \"GenericCSPSystemSingleOwner\"")},
+				"config options:\n\n- \"GenericCSPSystemAllEquityPartnershipFlip\"\n- \"GenericCSPSystemCommercial\"\n- \"GenericCSPSystemLCOECalculator\"\n- \"GenericCSPSystemLeveragedPartnershipFlip\"\n- \"GenericCSPSystemMerchantPlant\"\n- \"GenericCSPSystemNone\"\n- \"GenericCSPSystemSaleLeaseback\"\n- \"GenericCSPSystemSingleOwner\"")},
 		{"wrap",             TcsgenericSolar_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> TcsgenericSolar\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   TcsgenericSolar_from_existing,        METH_VARARGS,

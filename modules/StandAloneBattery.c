@@ -791,10 +791,10 @@ static PyGetSetDef BatterySystem_getset[] = {
 	PyDoc_STR("*float*: Enable battery replacement? [0=none,1=capacity based,2=user schedule]\n\n*Constraints*: INTEGER,MIN=0,MAX=2\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"batt_replacement_schedule", (getter)BatterySystem_get_batt_replacement_schedule,(setter)BatterySystem_set_batt_replacement_schedule,
-	PyDoc_STR("*sequence*: Battery bank replacements per year (user specified) [number/year]\n\n*Required*: True if batt_replacement_option=2"),
+	PyDoc_STR("*sequence*: Battery bank number of replacements in each year [number/year]\n\n*Options*: length <= analysis_period\n\n*Required*: True if batt_replacement_option=2"),
  	NULL},
 {"batt_replacement_schedule_percent", (getter)BatterySystem_get_batt_replacement_schedule_percent,(setter)BatterySystem_set_batt_replacement_schedule_percent,
-	PyDoc_STR("*sequence*: Percentage of battery capacity to replace in year [%]\n\n*Required*: True if batt_replacement_option=2"),
+	PyDoc_STR("*sequence*: Percentage of battery capacity to replace in each year [%]\n\n*Options*: length <= analysis_period\n\n*Required*: True if batt_replacement_option=2"),
  	NULL},
 {"batt_width", (getter)BatterySystem_get_batt_width,(setter)BatterySystem_set_batt_width,
 	PyDoc_STR("*float*: Battery width [m]\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - batt_Qfull\n\t - batt_Vnom_default\n\t - batt_ac_or_dc\n\t - batt_chem\n\t - batt_computed_bank_capacity\n\t - batt_current_choice\n\t - batt_dc_ac_efficiency\n\t - batt_dc_dc_efficiency\n"),
@@ -3918,7 +3918,7 @@ newStandAloneBatteryObject(void* data_ptr)
 	CmodObject *self;
 	self = PyObject_New(CmodObject, &StandAloneBattery_Type);
 
-	PySAM_TECH_ATTR("StandAloneBattery", SAM_Battery_construct)
+	PySAM_TECH_ATTR()
 
 	PyObject* Simulation_obj = Simulation_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Simulation", Simulation_obj);
@@ -3972,7 +3972,6 @@ newStandAloneBatteryObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
 	Py_DECREF(Outputs_obj);
 
-
 	return self;
 }
 
@@ -3982,8 +3981,12 @@ static void
 StandAloneBattery_dealloc(CmodObject *self)
 {
 	Py_XDECREF(self->x_attr);
-	if (!self->data_owner_ptr)
-		SAM_Battery_destruct(self->data_ptr);
+
+	if (!self->data_owner_ptr) {
+		SAM_error error = new_error();
+		SAM_table_destruct(self->data_ptr, &error);
+		PySAM_has_error(error);
+	}
 	PyObject_Del(self);
 }
 
@@ -3999,7 +4002,6 @@ StandAloneBattery_execute(CmodObject *self, PyObject *args)
 	SAM_error error = new_error();
 	SAM_Battery_execute(self->data_ptr, verbosity, &error);
 	if (PySAM_has_error(error )) return NULL;
-
 	Py_INCREF(Py_None);
 	return Py_None;
 }
@@ -4030,7 +4032,7 @@ StandAloneBattery_export(CmodObject *self, PyObject *args)
 static PyObject *
 StandAloneBattery_value(CmodObject *self, PyObject *args)
 {
-	return CmodObject_value(self, args);
+	return Cmod_value(self, args);
 }
 
 static PyMethodDef StandAloneBattery_methods[] = {
@@ -4199,7 +4201,7 @@ static PyMethodDef StandAloneBatteryModule_methods[] = {
 				PyDoc_STR("new() -> StandAloneBattery")},
 		{"default",             StandAloneBattery_default,         METH_VARARGS,
 				PyDoc_STR("default(config) -> StandAloneBattery\n\nUse financial config-specific default attributes\n"
-				"config options:\n\n- \"BatteryNone\"\n- \"FuelCellCommercial\"\n- \"FuelCellSingleOwner\"\n- \"GenericSystemAllEquityPartnershipFlip\"\n- \"GenericSystemCommercial\"\n- \"GenericSystemCommercialPPA\"\n- \"GenericSystemHostDeveloper\"\n- \"GenericSystemIndependentPowerProducer\"\n- \"GenericSystemLeveragedPartnershipFlip\"\n- \"GenericSystemMerchantPlant\"\n- \"GenericSystemResidential\"\n- \"GenericSystemSaleLeaseback\"\n- \"GenericSystemSingleOwner\"\n- \"GenericSystemThirdParty\"")},
+				"config options:\n\n- \"FuelCellCommercial\"\n- \"FuelCellSingleOwner\"\n- \"GenericBatteryAllEquityPartnershipFlip\"\n- \"GenericBatteryCommercial\"\n- \"GenericBatteryHostDeveloper\"\n- \"GenericBatteryLeveragedPartnershipFlip\"\n- \"GenericBatteryMerchantPlant\"\n- \"GenericBatteryResidential\"\n- \"GenericBatterySaleLeaseback\"\n- \"GenericBatterySingleOwner\"\n- \"GenericBatteryThirdParty\"")},
 		{"wrap",             StandAloneBattery_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> StandAloneBattery\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   StandAloneBattery_from_existing,        METH_VARARGS,

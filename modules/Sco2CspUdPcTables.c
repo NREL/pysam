@@ -2931,7 +2931,7 @@ newSco2CspUdPcTablesObject(void* data_ptr)
 	CmodObject *self;
 	self = PyObject_New(CmodObject, &Sco2CspUdPcTables_Type);
 
-	PySAM_TECH_ATTR("Sco2CspUdPcTables", SAM_Sco2CspUdPcTables_construct)
+	PySAM_TECH_ATTR()
 
 	PyObject* SystemDesign_obj = SystemDesign_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "SystemDesign", SystemDesign_obj);
@@ -2961,7 +2961,6 @@ newSco2CspUdPcTablesObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
 	Py_DECREF(Outputs_obj);
 
-
 	return self;
 }
 
@@ -2971,8 +2970,12 @@ static void
 Sco2CspUdPcTables_dealloc(CmodObject *self)
 {
 	Py_XDECREF(self->x_attr);
-	if (!self->data_owner_ptr)
-		SAM_Sco2CspUdPcTables_destruct(self->data_ptr);
+
+	if (!self->data_owner_ptr) {
+		SAM_error error = new_error();
+		SAM_table_destruct(self->data_ptr, &error);
+		PySAM_has_error(error);
+	}
 	PyObject_Del(self);
 }
 
@@ -2988,7 +2991,6 @@ Sco2CspUdPcTables_execute(CmodObject *self, PyObject *args)
 	SAM_error error = new_error();
 	SAM_Sco2CspUdPcTables_execute(self->data_ptr, verbosity, &error);
 	if (PySAM_has_error(error )) return NULL;
-
 	Py_INCREF(Py_None);
 	return Py_None;
 }
@@ -3019,7 +3021,7 @@ Sco2CspUdPcTables_export(CmodObject *self, PyObject *args)
 static PyObject *
 Sco2CspUdPcTables_value(CmodObject *self, PyObject *args)
 {
-	return CmodObject_value(self, args);
+	return Cmod_value(self, args);
 }
 
 static PyMethodDef Sco2CspUdPcTables_methods[] = {

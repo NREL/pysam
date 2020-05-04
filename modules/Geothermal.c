@@ -1744,7 +1744,7 @@ newGeothermalObject(void* data_ptr)
 	CmodObject *self;
 	self = PyObject_New(CmodObject, &Geothermal_Type);
 
-	PySAM_TECH_ATTR("Geothermal", SAM_Geothermal_construct)
+	PySAM_TECH_ATTR()
 
 	PyObject* GeoHourly_obj = GeoHourly_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "GeoHourly", GeoHourly_obj);
@@ -1769,7 +1769,6 @@ newGeothermalObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
 	Py_DECREF(Outputs_obj);
 
-
 	return self;
 }
 
@@ -1779,8 +1778,12 @@ static void
 Geothermal_dealloc(CmodObject *self)
 {
 	Py_XDECREF(self->x_attr);
-	if (!self->data_owner_ptr)
-		SAM_Geothermal_destruct(self->data_ptr);
+
+	if (!self->data_owner_ptr) {
+		SAM_error error = new_error();
+		SAM_table_destruct(self->data_ptr, &error);
+		PySAM_has_error(error);
+	}
 	PyObject_Del(self);
 }
 
@@ -1796,7 +1799,6 @@ Geothermal_execute(CmodObject *self, PyObject *args)
 	SAM_error error = new_error();
 	SAM_Geothermal_execute(self->data_ptr, verbosity, &error);
 	if (PySAM_has_error(error )) return NULL;
-
 	Py_INCREF(Py_None);
 	return Py_None;
 }
@@ -1827,7 +1829,7 @@ Geothermal_export(CmodObject *self, PyObject *args)
 static PyObject *
 Geothermal_value(CmodObject *self, PyObject *args)
 {
-	return CmodObject_value(self, args);
+	return Cmod_value(self, args);
 }
 
 static PyMethodDef Geothermal_methods[] = {
@@ -1996,7 +1998,7 @@ static PyMethodDef GeothermalModule_methods[] = {
 				PyDoc_STR("new() -> Geothermal")},
 		{"default",             Geothermal_default,         METH_VARARGS,
 				PyDoc_STR("default(config) -> Geothermal\n\nUse financial config-specific default attributes\n"
-				"config options:\n\n- \"GeothermalPowerAllEquityPartnershipFlip\"\n- \"GeothermalPowerIndependentPowerProducer\"\n- \"GeothermalPowerLCOECalculator\"\n- \"GeothermalPowerLeveragedPartnershipFlip\"\n- \"GeothermalPowerMerchantPlant\"\n- \"GeothermalPowerNone\"\n- \"GeothermalPowerSaleLeaseback\"\n- \"GeothermalPowerSingleOwner\"")},
+				"config options:\n\n- \"GeothermalPowerAllEquityPartnershipFlip\"\n- \"GeothermalPowerLCOECalculator\"\n- \"GeothermalPowerLeveragedPartnershipFlip\"\n- \"GeothermalPowerMerchantPlant\"\n- \"GeothermalPowerNone\"\n- \"GeothermalPowerSaleLeaseback\"\n- \"GeothermalPowerSingleOwner\"")},
 		{"wrap",             Geothermal_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Geothermal\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   Geothermal_from_existing,        METH_VARARGS,

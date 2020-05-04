@@ -39,7 +39,7 @@ def test_reopt_sizing_pvsam(solar_resource):
     import PySAM.Utilityrate5 as ur
     sys = pvsam.default("FlatPlatePVCommercial")
     fin = ur.from_existing(sys, "FlatPlatePVCommercial")
-    bt = stbt.from_existing(sys, "BatteryNone")
+    bt = stbt.from_existing(sys, "GenericBatteryCommercial")
 
     sys.SolarResource.solar_resource_file = solar_resource
     bt.Load.crit_load = [0] * 8760

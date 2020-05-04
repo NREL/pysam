@@ -2224,7 +2224,7 @@ newUtilityrate5Object(void* data_ptr)
 	CmodObject *self;
 	self = PyObject_New(CmodObject, &Utilityrate5_Type);
 
-	PySAM_TECH_ATTR("Utilityrate5", SAM_Utilityrate5_construct)
+	PySAM_TECH_ATTR()
 
 	PyObject* ElectricityRates_obj = ElectricityRates_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "ElectricityRates", ElectricityRates_obj);
@@ -2246,7 +2246,6 @@ newUtilityrate5Object(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
 	Py_DECREF(Outputs_obj);
 
-
 	return self;
 }
 
@@ -2256,8 +2255,12 @@ static void
 Utilityrate5_dealloc(CmodObject *self)
 {
 	Py_XDECREF(self->x_attr);
-	if (!self->data_owner_ptr)
-		SAM_Utilityrate5_destruct(self->data_ptr);
+
+	if (!self->data_owner_ptr) {
+		SAM_error error = new_error();
+		SAM_table_destruct(self->data_ptr, &error);
+		PySAM_has_error(error);
+	}
 	PyObject_Del(self);
 }
 
@@ -2273,7 +2276,6 @@ Utilityrate5_execute(CmodObject *self, PyObject *args)
 	SAM_error error = new_error();
 	SAM_Utilityrate5_execute(self->data_ptr, verbosity, &error);
 	if (PySAM_has_error(error )) return NULL;
-
 	Py_INCREF(Py_None);
 	return Py_None;
 }
@@ -2304,7 +2306,7 @@ Utilityrate5_export(CmodObject *self, PyObject *args)
 static PyObject *
 Utilityrate5_value(CmodObject *self, PyObject *args)
 {
-	return CmodObject_value(self, args);
+	return Cmod_value(self, args);
 }
 
 static PyMethodDef Utilityrate5_methods[] = {
@@ -2473,7 +2475,7 @@ static PyMethodDef Utilityrate5Module_methods[] = {
 				PyDoc_STR("new() -> Utilityrate5")},
 		{"default",             Utilityrate5_default,         METH_VARARGS,
 				PyDoc_STR("default(config) -> Utilityrate5\n\nUse financial config-specific default attributes\n"
-				"config options:\n\n- \"BiopowerCommercial\"\n- \"DSLFCommercial\"\n- \"DishStirlingCommercial\"\n- \"EmpiricalTroughCommercial\"\n- \"FlatPlatePVCommercial\"\n- \"FlatPlatePVHostDeveloper\"\n- \"FlatPlatePVMerchantPlant\"\n- \"FlatPlatePVResidential\"\n- \"FlatPlatePVSingleOwner\"\n- \"FlatPlatePVThirdParty\"\n- \"FuelCellCommercial\"\n- \"FuelCellSingleOwner\"\n- \"GenericCSPSystemCommercial\"\n- \"GenericSystemCommercial\"\n- \"GenericSystemHostDeveloper\"\n- \"GenericSystemResidential\"\n- \"GenericSystemThirdParty\"\n- \"MSLFCommercial\"\n- \"PVWattsCommercial\"\n- \"PVWattsHostDeveloper\"\n- \"PVWattsResidential\"\n- \"PVWattsThirdParty\"\n- \"PhysicalTroughCommercial\"\n- \"SolarWaterHeatingCommercial\"\n- \"SolarWaterHeatingResidential\"\n- \"WindPowerCommercial\"\n- \"WindPowerResidential\"")},
+				"config options:\n\n- \"BiopowerCommercial\"\n- \"DSLFCommercial\"\n- \"DishStirlingCommercial\"\n- \"EmpiricalTroughCommercial\"\n- \"FlatPlatePVCommercial\"\n- \"FlatPlatePVHostDeveloper\"\n- \"FlatPlatePVResidential\"\n- \"FlatPlatePVThirdParty\"\n- \"FuelCellCommercial\"\n- \"FuelCellSingleOwner\"\n- \"GenericBatteryCommercial\"\n- \"GenericBatteryHostDeveloper\"\n- \"GenericBatteryResidential\"\n- \"GenericBatterySingleOwner\"\n- \"GenericBatteryThirdParty\"\n- \"GenericCSPSystemCommercial\"\n- \"GenericSystemCommercial\"\n- \"GenericSystemHostDeveloper\"\n- \"GenericSystemResidential\"\n- \"GenericSystemThirdParty\"\n- \"MSLFCommercial\"\n- \"PVBatteryCommercial\"\n- \"PVBatteryHostDeveloper\"\n- \"PVBatteryResidential\"\n- \"PVBatterySingleOwner\"\n- \"PVBatteryThirdParty\"\n- \"PVWattsBatteryCommercial\"\n- \"PVWattsBatteryHostDeveloper\"\n- \"PVWattsBatteryResidential\"\n- \"PVWattsBatteryThirdParty\"\n- \"PVWattsCommercial\"\n- \"PVWattsHostDeveloper\"\n- \"PVWattsResidential\"\n- \"PVWattsThirdParty\"\n- \"PhysicalTroughCommercial\"\n- \"SolarWaterHeatingCommercial\"\n- \"SolarWaterHeatingResidential\"\n- \"WindPowerCommercial\"\n- \"WindPowerResidential\"")},
 		{"wrap",             Utilityrate5_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Utilityrate5\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   Utilityrate5_from_existing,        METH_VARARGS,

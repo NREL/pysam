@@ -10,6 +10,7 @@ class Weather(object):
 
 
 	file_name = str
+	solar_resource_data = dict
 
 
 class Solarfield(object):
@@ -175,12 +176,14 @@ class Outputs(object):
 	annual_thermal_consumption = float
 	annual_total_water_use = float
 	beam = tuple
+	capacity_factor = float
 	defocus = tuple
 	deltaP_field = tuple
 	e_dot_field_int_energy = tuple
 	eta_opt_ave = tuple
 	gen = tuple
 	hour_day = tuple
+	kwh_per_kw = float
 	m_dot_field = tuple
 	m_dot_loop = tuple
 	month = tuple

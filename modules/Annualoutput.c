@@ -358,7 +358,7 @@ newAnnualoutputObject(void* data_ptr)
 	CmodObject *self;
 	self = PyObject_New(CmodObject, &Annualoutput_Type);
 
-	PySAM_TECH_ATTR("Annualoutput", SAM_Annualoutput_construct)
+	PySAM_TECH_ATTR()
 
 	PyObject* AnnualOutput_obj = AnnualOutput_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "AnnualOutput", AnnualOutput_obj);
@@ -367,7 +367,6 @@ newAnnualoutputObject(void* data_ptr)
 	PyObject* Outputs_obj = Outputs_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
 	Py_DECREF(Outputs_obj);
-
 
 	return self;
 }
@@ -378,8 +377,12 @@ static void
 Annualoutput_dealloc(CmodObject *self)
 {
 	Py_XDECREF(self->x_attr);
-	if (!self->data_owner_ptr)
-		SAM_Annualoutput_destruct(self->data_ptr);
+
+	if (!self->data_owner_ptr) {
+		SAM_error error = new_error();
+		SAM_table_destruct(self->data_ptr, &error);
+		PySAM_has_error(error);
+	}
 	PyObject_Del(self);
 }
 
@@ -395,7 +398,6 @@ Annualoutput_execute(CmodObject *self, PyObject *args)
 	SAM_error error = new_error();
 	SAM_Annualoutput_execute(self->data_ptr, verbosity, &error);
 	if (PySAM_has_error(error )) return NULL;
-
 	Py_INCREF(Py_None);
 	return Py_None;
 }
@@ -426,7 +428,7 @@ Annualoutput_export(CmodObject *self, PyObject *args)
 static PyObject *
 Annualoutput_value(CmodObject *self, PyObject *args)
 {
-	return CmodObject_value(self, args);
+	return Cmod_value(self, args);
 }
 
 static PyMethodDef Annualoutput_methods[] = {

@@ -1249,7 +1249,7 @@ newThirdpartyownershipObject(void* data_ptr)
 	CmodObject *self;
 	self = PyObject_New(CmodObject, &Thirdpartyownership_Type);
 
-	PySAM_TECH_ATTR("Thirdpartyownership", SAM_Thirdpartyownership_construct)
+	PySAM_TECH_ATTR()
 
 	PyObject* Depreciation_obj = Depreciation_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Depreciation", Depreciation_obj);
@@ -1283,7 +1283,6 @@ newThirdpartyownershipObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
 	Py_DECREF(Outputs_obj);
 
-
 	return self;
 }
 
@@ -1293,8 +1292,12 @@ static void
 Thirdpartyownership_dealloc(CmodObject *self)
 {
 	Py_XDECREF(self->x_attr);
-	if (!self->data_owner_ptr)
-		SAM_Thirdpartyownership_destruct(self->data_ptr);
+
+	if (!self->data_owner_ptr) {
+		SAM_error error = new_error();
+		SAM_table_destruct(self->data_ptr, &error);
+		PySAM_has_error(error);
+	}
 	PyObject_Del(self);
 }
 
@@ -1310,7 +1313,6 @@ Thirdpartyownership_execute(CmodObject *self, PyObject *args)
 	SAM_error error = new_error();
 	SAM_Thirdpartyownership_execute(self->data_ptr, verbosity, &error);
 	if (PySAM_has_error(error )) return NULL;
-
 	Py_INCREF(Py_None);
 	return Py_None;
 }
@@ -1341,7 +1343,7 @@ Thirdpartyownership_export(CmodObject *self, PyObject *args)
 static PyObject *
 Thirdpartyownership_value(CmodObject *self, PyObject *args)
 {
-	return CmodObject_value(self, args);
+	return Cmod_value(self, args);
 }
 
 static PyMethodDef Thirdpartyownership_methods[] = {
@@ -1510,7 +1512,7 @@ static PyMethodDef ThirdpartyownershipModule_methods[] = {
 				PyDoc_STR("new() -> Thirdpartyownership")},
 		{"default",             Thirdpartyownership_default,         METH_VARARGS,
 				PyDoc_STR("default(config) -> Thirdpartyownership\n\nUse financial config-specific default attributes\n"
-				"config options:\n\n- \"FlatPlatePVThirdParty\"\n- \"GenericSystemThirdParty\"\n- \"PVWattsThirdParty\"")},
+				"config options:\n\n- \"FlatPlatePVThirdParty\"\n- \"GenericBatteryThirdParty\"\n- \"GenericSystemThirdParty\"\n- \"PVBatteryThirdParty\"\n- \"PVWattsBatteryThirdParty\"\n- \"PVWattsThirdParty\"")},
 		{"wrap",             Thirdpartyownership_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Thirdpartyownership\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   Thirdpartyownership_from_existing,        METH_VARARGS,

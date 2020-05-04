@@ -307,7 +307,7 @@ static PyGetSetDef Lifetime_getset[] = {
 	PyDoc_STR("*float*: Lifetime analysis period [years]\n\n*Required*: True if system_use_lifetime_output=1"),
  	NULL},
 {"generic_degradation", (getter)Lifetime_get_generic_degradation,(setter)Lifetime_set_generic_degradation,
-	PyDoc_STR("*sequence*: Annual module degradation [%/year]\n\n*Required*: True if system_use_lifetime_output=1"),
+	PyDoc_STR("*sequence*: Annual AC degradation [%/year]\n\n*Required*: True if system_use_lifetime_output=1"),
  	NULL},
 {"system_use_lifetime_output", (getter)Lifetime_get_system_use_lifetime_output,(setter)Lifetime_set_system_use_lifetime_output,
 	PyDoc_STR("*float*: Generic lifetime simulation [0/1]\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: If not provided, assumed to be 0"),
@@ -548,7 +548,7 @@ newGenericSystemObject(void* data_ptr)
 	CmodObject *self;
 	self = PyObject_New(CmodObject, &GenericSystem_Type);
 
-	PySAM_TECH_ATTR("GenericSystem", SAM_GenericSystem_construct)
+	PySAM_TECH_ATTR()
 
 	PyObject* Plant_obj = Plant_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Plant", Plant_obj);
@@ -577,7 +577,6 @@ newGenericSystemObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
 	Py_DECREF(Outputs_obj);
 
-
 	return self;
 }
 
@@ -587,8 +586,12 @@ static void
 GenericSystem_dealloc(CmodObject *self)
 {
 	Py_XDECREF(self->x_attr);
-	if (!self->data_owner_ptr)
-		SAM_GenericSystem_destruct(self->data_ptr);
+
+	if (!self->data_owner_ptr) {
+		SAM_error error = new_error();
+		SAM_table_destruct(self->data_ptr, &error);
+		PySAM_has_error(error);
+	}
 	PyObject_Del(self);
 }
 
@@ -604,7 +607,6 @@ GenericSystem_execute(CmodObject *self, PyObject *args)
 	SAM_error error = new_error();
 	SAM_GenericSystem_execute(self->data_ptr, verbosity, &error);
 	if (PySAM_has_error(error )) return NULL;
-
 	Py_INCREF(Py_None);
 	return Py_None;
 }
@@ -635,7 +637,7 @@ GenericSystem_export(CmodObject *self, PyObject *args)
 static PyObject *
 GenericSystem_value(CmodObject *self, PyObject *args)
 {
-	return CmodObject_value(self, args);
+	return Cmod_value(self, args);
 }
 
 static PyMethodDef GenericSystem_methods[] = {
@@ -804,7 +806,7 @@ static PyMethodDef GenericSystemModule_methods[] = {
 				PyDoc_STR("new() -> GenericSystem")},
 		{"default",             GenericSystem_default,         METH_VARARGS,
 				PyDoc_STR("default(config) -> GenericSystem\n\nUse financial config-specific default attributes\n"
-				"config options:\n\n- \"GenericSystemAllEquityPartnershipFlip\"\n- \"GenericSystemCommercial\"\n- \"GenericSystemCommercialPPA\"\n- \"GenericSystemHostDeveloper\"\n- \"GenericSystemIndependentPowerProducer\"\n- \"GenericSystemLCOECalculator\"\n- \"GenericSystemLeveragedPartnershipFlip\"\n- \"GenericSystemMerchantPlant\"\n- \"GenericSystemNone\"\n- \"GenericSystemResidential\"\n- \"GenericSystemSaleLeaseback\"\n- \"GenericSystemSingleOwner\"\n- \"GenericSystemThirdParty\"")},
+				"config options:\n\n- \"GenericBatteryAllEquityPartnershipFlip\"\n- \"GenericBatteryCommercial\"\n- \"GenericBatteryHostDeveloper\"\n- \"GenericBatteryLeveragedPartnershipFlip\"\n- \"GenericBatteryMerchantPlant\"\n- \"GenericBatteryResidential\"\n- \"GenericBatterySaleLeaseback\"\n- \"GenericBatterySingleOwner\"\n- \"GenericBatteryThirdParty\"\n- \"GenericSystemAllEquityPartnershipFlip\"\n- \"GenericSystemCommercial\"\n- \"GenericSystemHostDeveloper\"\n- \"GenericSystemLCOECalculator\"\n- \"GenericSystemLeveragedPartnershipFlip\"\n- \"GenericSystemMerchantPlant\"\n- \"GenericSystemNone\"\n- \"GenericSystemResidential\"\n- \"GenericSystemSaleLeaseback\"\n- \"GenericSystemSingleOwner\"\n- \"GenericSystemThirdParty\"")},
 		{"wrap",             GenericSystem_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> GenericSystem\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   GenericSystem_from_existing,        METH_VARARGS,

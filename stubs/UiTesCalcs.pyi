@@ -9,16 +9,16 @@ class Common(object):
 		pass
 
 
-	TES_HTF_code = float
-	TES_HTF_props = tuple
-	T_HTF_cold = float
-	T_HTF_hot = float
-	W_dot_pb_des = float
-	eta_pb_des = float
+	P_ref = float
+	T_htf_cold_des = float
+	T_htf_hot_des = float
+	design_eff = float
+	field_fl_props = tuple
 	h_tank = float
 	h_tank_min = float
+	rec_htf = float
 	tank_pairs = float
-	tes_hrs = float
+	tshours = float
 	u_tank = float
 
 
@@ -33,12 +33,12 @@ class Outputs(object):
 		pass
 
 
-	HTF_dens = float
-	d_tank = float
-	q_dot_loss = float
-	q_tes_des = float
-	vol_one_temp_avail = float
-	vol_one_temp_total = float
+	csp_pt_tes_htf_density = float
+	csp_pt_tes_tank_diameter = float
+	q_dot_tes_est = float
+	q_tes = float
+	tes_avail_vol = float
+	vol_tank = float
 
 
 class UiTesCalcs(object):

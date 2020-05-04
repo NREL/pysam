@@ -1025,16 +1025,16 @@ static PyGetSetDef HeliostatField_getset[] = {
 	PyDoc_STR("*float*: Number of heliostats"),
  	NULL},
 {"c_atm_0", (getter)HeliostatField_get_c_atm_0,(setter)HeliostatField_set_c_atm_0,
-	PyDoc_STR("*float*: Attenuation coefficient 0\n\n*Required*: If not provided, assumed to be 0.006789"),
+	PyDoc_STR("*float*: Attenuation coefficient 0\n\n*Required*: If not provided, assumed to be 0.006789\n\n*Changes to this variable may require updating the values of the following*: \n\t - field_model_type\n\t - helio_area_tot\n\t - opt_algorithm\n\t - opt_flux_penalty\n"),
  	NULL},
 {"c_atm_1", (getter)HeliostatField_get_c_atm_1,(setter)HeliostatField_set_c_atm_1,
-	PyDoc_STR("*float*: Attenuation coefficient 1\n\n*Required*: If not provided, assumed to be 0.1046"),
+	PyDoc_STR("*float*: Attenuation coefficient 1\n\n*Required*: If not provided, assumed to be 0.1046\n\n*Changes to this variable may require updating the values of the following*: \n\t - field_model_type\n\t - helio_area_tot\n\t - opt_algorithm\n\t - opt_flux_penalty\n"),
  	NULL},
 {"c_atm_2", (getter)HeliostatField_get_c_atm_2,(setter)HeliostatField_set_c_atm_2,
-	PyDoc_STR("*float*: Attenuation coefficient 2\n\n*Required*: If not provided, assumed to be -0.0107"),
+	PyDoc_STR("*float*: Attenuation coefficient 2\n\n*Required*: If not provided, assumed to be -0.0107\n\n*Changes to this variable may require updating the values of the following*: \n\t - field_model_type\n\t - helio_area_tot\n\t - opt_algorithm\n\t - opt_flux_penalty\n"),
  	NULL},
 {"c_atm_3", (getter)HeliostatField_get_c_atm_3,(setter)HeliostatField_set_c_atm_3,
-	PyDoc_STR("*float*: Attenuation coefficient 3\n\n*Required*: If not provided, assumed to be 0.002845"),
+	PyDoc_STR("*float*: Attenuation coefficient 3\n\n*Required*: If not provided, assumed to be 0.002845\n\n*Changes to this variable may require updating the values of the following*: \n\t - field_model_type\n\t - helio_area_tot\n\t - opt_algorithm\n\t - opt_flux_penalty\n"),
  	NULL},
 {"calc_fluxmaps", (getter)HeliostatField_get_calc_fluxmaps,(setter)HeliostatField_set_calc_fluxmaps,
 	PyDoc_STR("*float*: Include fluxmap calculations\n\n*Required*: If not provided, assumed to be 0"),
@@ -1052,7 +1052,7 @@ static PyGetSetDef HeliostatField_getset[] = {
 	PyDoc_STR("*float*: Land overhead factor\n\n*Required*: True"),
  	NULL},
 {"dens_mirror", (getter)HeliostatField_get_dens_mirror,(setter)HeliostatField_set_dens_mirror,
-	PyDoc_STR("*float*: Ratio of heliostat reflective area to profile\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - helio_area_tot\n"),
+	PyDoc_STR("*float*: Ratio of heliostat reflective area to profile\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - field_model_type\n\t - helio_area_tot\n\t - opt_algorithm\n\t - opt_flux_penalty\n"),
  	NULL},
 {"eta_map", (getter)HeliostatField_get_eta_map,(setter)HeliostatField_set_eta_map,
 	PyDoc_STR("*sequence[sequence]*: Field efficiency array\n\n*Required*: False"),
@@ -1061,7 +1061,7 @@ static PyGetSetDef HeliostatField_getset[] = {
 	PyDoc_STR("*float*: Use 3D AOD format field efficiency array\n\n*Info*: heliostat"),
  	NULL},
 {"field_model_type", (getter)HeliostatField_get_field_model_type,(setter)HeliostatField_set_field_model_type,
-	PyDoc_STR("*float*: 0=design field and tower/receiver geometry, 1=design field, 2=user specified field, 3=user performance maps vs solar position\n\n*Required*: True"),
+	PyDoc_STR("*float*: 0=design field and tower/receiver geometry, 1=design field, 2=user specified field, 3=user performance maps vs solar position\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - P_ref\n\t - c_atm_0\n\t - c_atm_1\n\t - c_atm_2\n\t - c_atm_3\n\t - dens_mirror\n\t - design_eff\n\t - dni_des\n\t - gross_net_conversion_factor\n\t - h_tower\n\t - helio_height\n\t - helio_optical_error_mrad\n\t - helio_positions\n\t - helio_width\n\t - land_area_base\n\t - land_max\n\t - land_min\n\t - solarm\n\t - tshours\n"),
  	NULL},
 {"flux_maps", (getter)HeliostatField_get_flux_maps,(setter)HeliostatField_set_flux_maps,
 	PyDoc_STR("*sequence[sequence]*: Flux map intensities\n\n*Required*: False"),
@@ -1079,19 +1079,19 @@ static PyGetSetDef HeliostatField_getset[] = {
 	PyDoc_STR("*sequence[sequence]*: Heliostat aim point table [m]\n\n*Required*: False"),
  	NULL},
 {"helio_height", (getter)HeliostatField_get_helio_height,(setter)HeliostatField_set_helio_height,
-	PyDoc_STR("*float*: Heliostat height [m]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - helio_area_tot\n"),
+	PyDoc_STR("*float*: Heliostat height [m]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - field_model_type\n\t - helio_area_tot\n\t - opt_algorithm\n\t - opt_flux_penalty\n"),
  	NULL},
 {"helio_optical_error_mrad", (getter)HeliostatField_get_helio_optical_error_mrad,(setter)HeliostatField_set_helio_optical_error_mrad,
-	PyDoc_STR("*float*: Heliostat optical error [mrad]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Heliostat optical error [mrad]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - field_model_type\n\t - helio_area_tot\n\t - opt_algorithm\n\t - opt_flux_penalty\n"),
  	NULL},
 {"helio_positions", (getter)HeliostatField_get_helio_positions,(setter)HeliostatField_set_helio_positions,
-	PyDoc_STR("*sequence[sequence]*: Heliostat position table\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - helio_area_tot\n\t - land_area_base\n"),
+	PyDoc_STR("*sequence[sequence]*: Heliostat position table\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - field_model_type\n\t - helio_area_tot\n\t - opt_algorithm\n\t - opt_flux_penalty\n"),
  	NULL},
 {"helio_reflectance", (getter)HeliostatField_get_helio_reflectance,(setter)HeliostatField_set_helio_reflectance,
 	PyDoc_STR("*float*: Heliostat reflectance\n\n*Required*: True"),
  	NULL},
 {"helio_width", (getter)HeliostatField_get_helio_width,(setter)HeliostatField_set_helio_width,
-	PyDoc_STR("*float*: Heliostat width [m]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - helio_area_tot\n"),
+	PyDoc_STR("*float*: Heliostat width [m]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - field_model_type\n\t - helio_area_tot\n\t - opt_algorithm\n\t - opt_flux_penalty\n"),
  	NULL},
 {"interp_beta", (getter)HeliostatField_get_interp_beta,(setter)HeliostatField_set_interp_beta,
 	PyDoc_STR("*float*: Interpolation beta coef. [-]\n\n*Required*: If not provided, assumed to be 1.99"),
@@ -1100,7 +1100,7 @@ static PyGetSetDef HeliostatField_getset[] = {
 	PyDoc_STR("*float*: Interpolation nugget [-]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"land_area_base", (getter)HeliostatField_get_land_area_base,(setter)HeliostatField_set_land_area_base,
-	PyDoc_STR("*float*: Base land area occupied by heliostats [acre]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - helio_positions\n"),
+	PyDoc_STR("*float*: Base land area occupied by heliostats [acre]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - field_model_type\n\t - helio_area_tot\n\t - opt_algorithm\n\t - opt_flux_penalty\n"),
  	NULL},
 {"land_bound_list", (getter)HeliostatField_get_land_bound_list,(setter)HeliostatField_set_land_bound_list,
 	PyDoc_STR("*sequence*: Land boundary table listing\n\n*Required*: False"),
@@ -1109,10 +1109,10 @@ static PyGetSetDef HeliostatField_getset[] = {
 	PyDoc_STR("*sequence[sequence]*: Land boundary table [m]\n\n*Required*: False"),
  	NULL},
 {"land_max", (getter)HeliostatField_get_land_max,(setter)HeliostatField_set_land_max,
-	PyDoc_STR("*float*: Land max boundary [-ORm]\n\n*Required*: If not provided, assumed to be 7.5"),
+	PyDoc_STR("*float*: Land max boundary [-ORm]\n\n*Required*: If not provided, assumed to be 7.5\n\n*Changes to this variable may require updating the values of the following*: \n\t - field_model_type\n\t - helio_area_tot\n\t - opt_algorithm\n\t - opt_flux_penalty\n"),
  	NULL},
 {"land_min", (getter)HeliostatField_get_land_min,(setter)HeliostatField_set_land_min,
-	PyDoc_STR("*float*: Land min boundary [-ORm]\n\n*Required*: If not provided, assumed to be 0.75"),
+	PyDoc_STR("*float*: Land min boundary [-ORm]\n\n*Required*: If not provided, assumed to be 0.75\n\n*Changes to this variable may require updating the values of the following*: \n\t - field_model_type\n\t - helio_area_tot\n\t - opt_algorithm\n\t - opt_flux_penalty\n"),
  	NULL},
 {"n_facet_x", (getter)HeliostatField_get_n_facet_x,(setter)HeliostatField_set_n_facet_x,
 	PyDoc_STR("*float*: Number of heliostat facets - X\n\n*Required*: True"),
@@ -1121,13 +1121,13 @@ static PyGetSetDef HeliostatField_getset[] = {
 	PyDoc_STR("*float*: Number of heliostat facets - Y\n\n*Required*: True"),
  	NULL},
 {"opt_algorithm", (getter)HeliostatField_get_opt_algorithm,(setter)HeliostatField_set_opt_algorithm,
-	PyDoc_STR("*float*: Optimization algorithm\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Optimization algorithm\n\n*Required*: If not provided, assumed to be 0\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - P_ref\n\t - c_atm_0\n\t - c_atm_1\n\t - c_atm_2\n\t - c_atm_3\n\t - dens_mirror\n\t - design_eff\n\t - dni_des\n\t - gross_net_conversion_factor\n\t - h_tower\n\t - helio_height\n\t - helio_optical_error_mrad\n\t - helio_positions\n\t - helio_width\n\t - land_area_base\n\t - land_max\n\t - land_min\n\t - solarm\n\t - tshours\n"),
  	NULL},
 {"opt_conv_tol", (getter)HeliostatField_get_opt_conv_tol,(setter)HeliostatField_set_opt_conv_tol,
 	PyDoc_STR("*float*: Optimization convergence tolerance\n\n*Required*: If not provided, assumed to be 0.001"),
  	NULL},
 {"opt_flux_penalty", (getter)HeliostatField_get_opt_flux_penalty,(setter)HeliostatField_set_opt_flux_penalty,
-	PyDoc_STR("*float*: Optimization flux overage penalty\n\n*Required*: True"),
+	PyDoc_STR("*float*: Optimization flux overage penalty\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - P_ref\n\t - c_atm_0\n\t - c_atm_1\n\t - c_atm_2\n\t - c_atm_3\n\t - dens_mirror\n\t - design_eff\n\t - dni_des\n\t - gross_net_conversion_factor\n\t - h_tower\n\t - helio_height\n\t - helio_optical_error_mrad\n\t - helio_positions\n\t - helio_width\n\t - land_area_base\n\t - land_max\n\t - land_min\n\t - solarm\n\t - tshours\n"),
  	NULL},
 {"opt_init_step", (getter)HeliostatField_get_opt_init_step,(setter)HeliostatField_set_opt_init_step,
 	PyDoc_STR("*float*: Optimization initial step size\n\n*Required*: If not provided, assumed to be 0.05"),
@@ -1362,7 +1362,7 @@ SystemDesign_set_tshours(VarGroupObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef SystemDesign_getset[] = {
 {"P_ref", (getter)SystemDesign_get_P_ref,(setter)SystemDesign_set_P_ref,
-	PyDoc_STR("*float*: Reference output electric power at design condition [MW]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Reference output electric power at design condition [MW]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - field_model_type\n\t - helio_area_tot\n\t - opt_algorithm\n\t - opt_flux_penalty\n\t - wlim_series\n"),
  	NULL},
 {"T_htf_cold_des", (getter)SystemDesign_get_T_htf_cold_des,(setter)SystemDesign_set_T_htf_cold_des,
 	PyDoc_STR("*float*: Cold HTF inlet temperature at design conditions [C]\n\n*Required*: True"),
@@ -1371,22 +1371,22 @@ static PyGetSetDef SystemDesign_getset[] = {
 	PyDoc_STR("*float*: Hot HTF outlet temperature at design conditions [C]\n\n*Required*: True"),
  	NULL},
 {"design_eff", (getter)SystemDesign_get_design_eff,(setter)SystemDesign_set_design_eff,
-	PyDoc_STR("*float*: Power cycle efficiency at design [none]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Power cycle efficiency at design [none]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - field_model_type\n\t - helio_area_tot\n\t - opt_algorithm\n\t - opt_flux_penalty\n"),
  	NULL},
 {"dni_des", (getter)SystemDesign_get_dni_des,(setter)SystemDesign_set_dni_des,
-	PyDoc_STR("*float*: Design-point DNI [W/m2]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Design-point DNI [W/m2]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - field_model_type\n\t - helio_area_tot\n\t - opt_algorithm\n\t - opt_flux_penalty\n"),
  	NULL},
 {"gross_net_conversion_factor", (getter)SystemDesign_get_gross_net_conversion_factor,(setter)SystemDesign_set_gross_net_conversion_factor,
-	PyDoc_STR("*float*: Estimated gross to net conversion factor\n\n*Required*: True"),
+	PyDoc_STR("*float*: Estimated gross to net conversion factor\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - field_model_type\n\t - helio_area_tot\n\t - opt_algorithm\n\t - opt_flux_penalty\n"),
  	NULL},
 {"sf_excess", (getter)SystemDesign_get_sf_excess,(setter)SystemDesign_set_sf_excess,
 	PyDoc_STR("*float*: Heliostat field multiple\n\n*Required*: If not provided, assumed to be 1.0"),
  	NULL},
 {"solarm", (getter)SystemDesign_get_solarm,(setter)SystemDesign_set_solarm,
-	PyDoc_STR("*float*: Solar multiple [-]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Solar multiple [-]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - field_model_type\n\t - helio_area_tot\n\t - opt_algorithm\n\t - opt_flux_penalty\n"),
  	NULL},
 {"tshours", (getter)SystemDesign_get_tshours,(setter)SystemDesign_set_tshours,
-	PyDoc_STR("*float*: Equivalent full-load thermal storage hours [hr]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Equivalent full-load thermal storage hours [hr]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - field_model_type\n\t - helio_area_tot\n\t - opt_algorithm\n\t - opt_flux_penalty\n"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -2023,7 +2023,7 @@ static PyGetSetDef TowerAndReceiver_getset[] = {
 	PyDoc_STR("*float*: Maximum allowable flux\n\n*Required*: If not provided, assumed to be 1000"),
  	NULL},
 {"h_tower", (getter)TowerAndReceiver_get_h_tower,(setter)TowerAndReceiver_set_h_tower,
-	PyDoc_STR("*float*: Tower height [m]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Tower height [m]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - field_model_type\n\t - helio_area_tot\n\t - opt_algorithm\n\t - opt_flux_penalty\n"),
  	NULL},
 {"heat_trace_power", (getter)TowerAndReceiver_get_heat_trace_power,(setter)TowerAndReceiver_set_heat_trace_power,
 	PyDoc_STR("*float*: Riser/downcomer heat trace power during startup [kW/m]\n\n*Required*: If not provided, assumed to be 500.0"),
@@ -3156,6 +3156,18 @@ ThermalStorage_set_tank_pairs(VarGroupObject *self, PyObject *value, void *closu
 }
 
 static PyObject *
+ThermalStorage_get_tanks_in_parallel(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_ThermalStorage_tanks_in_parallel_nget, self->data_ptr);
+}
+
+static int
+ThermalStorage_set_tanks_in_parallel(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_ThermalStorage_tanks_in_parallel_nset, self->data_ptr);
+}
+
+static PyObject *
 ThermalStorage_get_u_tank(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_TcsmoltenSalt_ThermalStorage_u_tank_nget, self->data_ptr);
@@ -3191,6 +3203,9 @@ static PyGetSetDef ThermalStorage_getset[] = {
  	NULL},
 {"tank_pairs", (getter)ThermalStorage_get_tank_pairs,(setter)ThermalStorage_set_tank_pairs,
 	PyDoc_STR("*float*: Number of equivalent tank pairs\n\n*Constraints*: INTEGER\n\n*Required*: True"),
+ 	NULL},
+{"tanks_in_parallel", (getter)ThermalStorage_get_tanks_in_parallel,(setter)ThermalStorage_set_tanks_in_parallel,
+	PyDoc_STR("*float*: Tanks are in parallel, not in series, with solar field [-]\n\n*Required*: True"),
  	NULL},
 {"u_tank", (getter)ThermalStorage_get_u_tank,(setter)ThermalStorage_set_u_tank,
 	PyDoc_STR("*float*: Loss coefficient from the tank [W/m2-K]\n\n*Required*: True"),
@@ -3743,7 +3758,7 @@ static PyGetSetDef RADCOOL_getset[] = {
 	PyDoc_STR("*float*: Minimum allowable water height in storage tank [m]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"helio_area_tot", (getter)RADCOOL_get_helio_area_tot,(setter)RADCOOL_set_helio_area_tot,
-	PyDoc_STR("*float*: Heliostat total reflective area [-]\n\n*Required*: If not provided, assumed to be 0\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - dens_mirror\n\t - helio_height\n\t - helio_positions\n\t - helio_width\n"),
+	PyDoc_STR("*float*: Heliostat total reflective area [-]\n\n*Required*: If not provided, assumed to be 0\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - P_ref\n\t - c_atm_0\n\t - c_atm_1\n\t - c_atm_2\n\t - c_atm_3\n\t - dens_mirror\n\t - design_eff\n\t - dni_des\n\t - gross_net_conversion_factor\n\t - h_tower\n\t - helio_height\n\t - helio_optical_error_mrad\n\t - helio_positions\n\t - helio_width\n\t - land_area_base\n\t - land_max\n\t - land_min\n\t - solarm\n\t - tshours\n"),
  	NULL},
 {"k_panel", (getter)RADCOOL_get_k_panel,(setter)RADCOOL_set_k_panel,
 	PyDoc_STR("*float*: Thermal conductivity of radiator panel material [W/m-K]\n\n*Required*: If not provided, assumed to be 235"),
@@ -4753,6 +4768,18 @@ SystemControl_set_is_dispatch_series(VarGroupObject *self, PyObject *value, void
 }
 
 static PyObject *
+SystemControl_get_is_tod_pc_target_also_pc_max(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_is_tod_pc_target_also_pc_max_nget, self->data_ptr);
+}
+
+static int
+SystemControl_set_is_tod_pc_target_also_pc_max(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_is_tod_pc_target_also_pc_max_nset, self->data_ptr);
+}
+
+static PyObject *
 SystemControl_get_is_wlim_series(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_is_wlim_series_nget, self->data_ptr);
@@ -4907,34 +4934,34 @@ static PyGetSetDef SystemControl_getset[] = {
 	PyDoc_STR("*str*: System command to run AMPL code\n\n*Required*: If not provided, assumed to be 'ampl sdk_solution.run'"),
  	NULL},
 {"aux_par", (getter)SystemControl_get_aux_par,(setter)SystemControl_set_aux_par,
-	PyDoc_STR("*float*: Aux heater, boiler parasitic [MWe/MWcap]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Aux heater, boiler parasitic [MWe/MWcap]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - wlim_series\n"),
  	NULL},
 {"aux_par_0", (getter)SystemControl_get_aux_par_0,(setter)SystemControl_set_aux_par_0,
-	PyDoc_STR("*float*: Aux heater, boiler parasitic - constant coefficient\n\n*Required*: True"),
+	PyDoc_STR("*float*: Aux heater, boiler parasitic - constant coefficient\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - wlim_series\n"),
  	NULL},
 {"aux_par_1", (getter)SystemControl_get_aux_par_1,(setter)SystemControl_set_aux_par_1,
-	PyDoc_STR("*float*: Aux heater, boiler parasitic - linear coefficient\n\n*Required*: True"),
+	PyDoc_STR("*float*: Aux heater, boiler parasitic - linear coefficient\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - wlim_series\n"),
  	NULL},
 {"aux_par_2", (getter)SystemControl_get_aux_par_2,(setter)SystemControl_set_aux_par_2,
-	PyDoc_STR("*float*: Aux heater, boiler parasitic - quadratic coefficient\n\n*Required*: True"),
+	PyDoc_STR("*float*: Aux heater, boiler parasitic - quadratic coefficient\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - wlim_series\n"),
  	NULL},
 {"aux_par_f", (getter)SystemControl_get_aux_par_f,(setter)SystemControl_set_aux_par_f,
-	PyDoc_STR("*float*: Aux heater, boiler parasitic - multiplying fraction\n\n*Required*: True"),
+	PyDoc_STR("*float*: Aux heater, boiler parasitic - multiplying fraction\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - wlim_series\n"),
  	NULL},
 {"bop_par", (getter)SystemControl_get_bop_par,(setter)SystemControl_set_bop_par,
-	PyDoc_STR("*float*: Balance of plant parasitic power fraction [MWe/MWcap]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Balance of plant parasitic power fraction [MWe/MWcap]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - wlim_series\n"),
  	NULL},
 {"bop_par_0", (getter)SystemControl_get_bop_par_0,(setter)SystemControl_set_bop_par_0,
-	PyDoc_STR("*float*: Balance of plant parasitic power fraction - const coeff\n\n*Required*: True"),
+	PyDoc_STR("*float*: Balance of plant parasitic power fraction - const coeff\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - wlim_series\n"),
  	NULL},
 {"bop_par_1", (getter)SystemControl_get_bop_par_1,(setter)SystemControl_set_bop_par_1,
-	PyDoc_STR("*float*: Balance of plant parasitic power fraction - linear coeff\n\n*Required*: True"),
+	PyDoc_STR("*float*: Balance of plant parasitic power fraction - linear coeff\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - wlim_series\n"),
  	NULL},
 {"bop_par_2", (getter)SystemControl_get_bop_par_2,(setter)SystemControl_set_bop_par_2,
-	PyDoc_STR("*float*: Balance of plant parasitic power fraction - quadratic coeff\n\n*Required*: True"),
+	PyDoc_STR("*float*: Balance of plant parasitic power fraction - quadratic coeff\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - wlim_series\n"),
  	NULL},
 {"bop_par_f", (getter)SystemControl_get_bop_par_f,(setter)SystemControl_set_bop_par_f,
-	PyDoc_STR("*float*: Balance of plant parasitic power fraction - mult frac\n\n*Required*: True"),
+	PyDoc_STR("*float*: Balance of plant parasitic power fraction - mult frac\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - wlim_series\n"),
  	NULL},
 {"disp_csu_cost", (getter)SystemControl_get_disp_csu_cost,(setter)SystemControl_set_disp_csu_cost,
 	PyDoc_STR("*float*: Cycle startup cost [$]\n\n*Required*: True if is_dispatch=1"),
@@ -4996,6 +5023,9 @@ static PyGetSetDef SystemControl_getset[] = {
 {"is_dispatch_series", (getter)SystemControl_get_is_dispatch_series,(setter)SystemControl_set_is_dispatch_series,
 	PyDoc_STR("*float*: Use time-series dispatch factors\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
+{"is_tod_pc_target_also_pc_max", (getter)SystemControl_get_is_tod_pc_target_also_pc_max,(setter)SystemControl_set_is_tod_pc_target_also_pc_max,
+	PyDoc_STR("*float*: Is the TOD target cycle heat input also the max cycle heat input?\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
 {"is_wlim_series", (getter)SystemControl_get_is_wlim_series,(setter)SystemControl_set_is_wlim_series,
 	PyDoc_STR("*float*: Use time-series net electricity generation limits\n\n*Required*: If not provided, assumed to be 0\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - is_dispatch\n"),
  	NULL},
@@ -5030,7 +5060,7 @@ static PyGetSetDef SystemControl_getset[] = {
 	PyDoc_STR("*sequence[sequence]*: 12x24 CSP operation Time-of-Use Weekend schedule\n\n*Required*: True"),
  	NULL},
 {"wlim_series", (getter)SystemControl_get_wlim_series,(setter)SystemControl_set_wlim_series,
-	PyDoc_STR("*sequence*: Time series net electicity generation limits [kWe]\n\n*Required*: True if is_wlim_series=1"),
+	PyDoc_STR("*sequence*: Time series net electicity generation limits [kWe]\n\n*Required*: True if is_wlim_series=1\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - P_ref\n\t - aux_par\n\t - aux_par_0\n\t - aux_par_1\n\t - aux_par_2\n\t - aux_par_f\n\t - bop_par\n\t - bop_par_0\n\t - bop_par_1\n\t - bop_par_2\n\t - bop_par_f\n"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -6508,9 +6538,33 @@ Outputs_get_m_dot_balance(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_m_dot_cr_to_tes_hot(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_TcsmoltenSalt_Outputs_m_dot_cr_to_tes_hot_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_m_dot_cycle_to_field(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_TcsmoltenSalt_Outputs_m_dot_cycle_to_field_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_m_dot_field_to_cycle(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_TcsmoltenSalt_Outputs_m_dot_field_to_cycle_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_m_dot_pc(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_TcsmoltenSalt_Outputs_m_dot_pc_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_m_dot_pc_to_tes_cold(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_TcsmoltenSalt_Outputs_m_dot_pc_to_tes_cold_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -6520,15 +6574,15 @@ Outputs_get_m_dot_rec(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_m_dot_tes_ch(VarGroupObject *self, void *closure)
+Outputs_get_m_dot_tes_cold_out(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsmoltenSalt_Outputs_m_dot_tes_ch_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_TcsmoltenSalt_Outputs_m_dot_tes_cold_out_aget, self->data_ptr);
 }
 
 static PyObject *
-Outputs_get_m_dot_tes_dc(VarGroupObject *self, void *closure)
+Outputs_get_m_dot_tes_hot_out(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsmoltenSalt_Outputs_m_dot_tes_dc_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_TcsmoltenSalt_Outputs_m_dot_tes_hot_out_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -6541,6 +6595,18 @@ static PyObject *
 Outputs_get_m_warm(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_TcsmoltenSalt_Outputs_m_warm_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_mass_tes_cold(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_TcsmoltenSalt_Outputs_mass_tes_cold_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_mass_tes_hot(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_TcsmoltenSalt_Outputs_mass_tes_hot_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -6730,6 +6796,12 @@ Outputs_get_rh(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_sco2_preprocess_table_out(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_TcsmoltenSalt_Outputs_sco2_preprocess_table_out_mget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_sf_adjust_out(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_TcsmoltenSalt_Outputs_sf_adjust_out_aget, self->data_ptr);
@@ -6793,24 +6865,6 @@ static PyObject *
 Outputs_get_twet(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_TcsmoltenSalt_Outputs_twet_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_ud_T_amb_ind_od_out(VarGroupObject *self, void *closure)
-{
-	return PySAM_matrix_getter(SAM_TcsmoltenSalt_Outputs_ud_T_amb_ind_od_out_mget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_ud_T_htf_ind_od_out(VarGroupObject *self, void *closure)
-{
-	return PySAM_matrix_getter(SAM_TcsmoltenSalt_Outputs_ud_T_htf_ind_od_out_mget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_ud_m_dot_htf_ind_od_out(VarGroupObject *self, void *closure)
-{
-	return PySAM_matrix_getter(SAM_TcsmoltenSalt_Outputs_ud_m_dot_htf_ind_od_out_mget, self->data_ptr);
 }
 
 static PyObject *
@@ -7162,23 +7216,41 @@ static PyGetSetDef Outputs_getset[] = {
 {"m_dot_balance", (getter)Outputs_get_m_dot_balance,(setter)0,
 	PyDoc_STR("*sequence*: Relative mass flow balance error"),
  	NULL},
+{"m_dot_cr_to_tes_hot", (getter)Outputs_get_m_dot_cr_to_tes_hot,(setter)0,
+	PyDoc_STR("*sequence*: Mass flow: field to hot TES [kg/s]"),
+ 	NULL},
+{"m_dot_cycle_to_field", (getter)Outputs_get_m_dot_cycle_to_field,(setter)0,
+	PyDoc_STR("*sequence*: Mass flow: cycle to field [kg/s]"),
+ 	NULL},
+{"m_dot_field_to_cycle", (getter)Outputs_get_m_dot_field_to_cycle,(setter)0,
+	PyDoc_STR("*sequence*: Mass flow: field to cycle [kg/s]"),
+ 	NULL},
 {"m_dot_pc", (getter)Outputs_get_m_dot_pc,(setter)0,
 	PyDoc_STR("*sequence*: PC HTF mass flow rate [kg/s]"),
+ 	NULL},
+{"m_dot_pc_to_tes_cold", (getter)Outputs_get_m_dot_pc_to_tes_cold,(setter)0,
+	PyDoc_STR("*sequence*: Mass flow: cycle to cold TES [kg/s]"),
  	NULL},
 {"m_dot_rec", (getter)Outputs_get_m_dot_rec,(setter)0,
 	PyDoc_STR("*sequence*: Receiver mass flow rate [kg/s]"),
  	NULL},
-{"m_dot_tes_ch", (getter)Outputs_get_m_dot_tes_ch,(setter)0,
-	PyDoc_STR("*sequence*: TES charge mass flow rate [kg/s]"),
+{"m_dot_tes_cold_out", (getter)Outputs_get_m_dot_tes_cold_out,(setter)0,
+	PyDoc_STR("*sequence*: Mass flow: TES cold out [kg/s]"),
  	NULL},
-{"m_dot_tes_dc", (getter)Outputs_get_m_dot_tes_dc,(setter)0,
-	PyDoc_STR("*sequence*: TES discharge mass flow rate [kg/s]"),
+{"m_dot_tes_hot_out", (getter)Outputs_get_m_dot_tes_hot_out,(setter)0,
+	PyDoc_STR("*sequence*: Mass flow: TES hot out [kg/s]"),
  	NULL},
 {"m_dot_water_pc", (getter)Outputs_get_m_dot_water_pc,(setter)0,
 	PyDoc_STR("*sequence*: PC water consumption, makeup + cooling [kg/s]"),
  	NULL},
 {"m_warm", (getter)Outputs_get_m_warm,(setter)0,
 	PyDoc_STR("*sequence*: Cold storage warm tank mass [kg]"),
+ 	NULL},
+{"mass_tes_cold", (getter)Outputs_get_mass_tes_cold,(setter)0,
+	PyDoc_STR("*sequence*: TES cold tank mass (end) [kg]"),
+ 	NULL},
+{"mass_tes_hot", (getter)Outputs_get_mass_tes_hot,(setter)0,
+	PyDoc_STR("*sequence*: TES hot tank mass (end) [kg]"),
  	NULL},
 {"n_op_modes", (getter)Outputs_get_n_op_modes,(setter)0,
 	PyDoc_STR("*sequence*: Operating modes in reporting timestep"),
@@ -7273,6 +7345,9 @@ static PyGetSetDef Outputs_getset[] = {
 {"rh", (getter)Outputs_get_rh,(setter)0,
 	PyDoc_STR("*sequence*: Resource relative humidity [%]"),
  	NULL},
+{"sco2_preprocess_table_out", (getter)Outputs_get_sco2_preprocess_table_out,(setter)0,
+	PyDoc_STR("*sequence[sequence]*: sCO2 cycle preprocessed data in UDPC format"),
+ 	NULL},
 {"sf_adjust_out", (getter)Outputs_get_sf_adjust_out,(setter)0,
 	PyDoc_STR("*sequence*: Field availability adjustment factor"),
  	NULL},
@@ -7305,15 +7380,6 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"twet", (getter)Outputs_get_twet,(setter)0,
 	PyDoc_STR("*sequence*: Resource wet Bulb temperature [C]"),
- 	NULL},
-{"ud_T_amb_ind_od_out", (getter)Outputs_get_ud_T_amb_ind_od_out,(setter)0,
-	PyDoc_STR("*sequence[sequence]*: T_amb cycle off design"),
- 	NULL},
-{"ud_T_htf_ind_od_out", (getter)Outputs_get_ud_T_htf_ind_od_out,(setter)0,
-	PyDoc_STR("*sequence[sequence]*: T_htf_hot cycle off design"),
- 	NULL},
-{"ud_m_dot_htf_ind_od_out", (getter)Outputs_get_ud_m_dot_htf_ind_od_out,(setter)0,
-	PyDoc_STR("*sequence[sequence]*: M_dot_htf cycle off design"),
  	NULL},
 {"ui_direct_subtotal", (getter)Outputs_get_ui_direct_subtotal,(setter)0,
 	PyDoc_STR("*float*: Direct capital precontingency cost [$]"),
@@ -7382,7 +7448,7 @@ newTcsmoltenSaltObject(void* data_ptr)
 	CmodObject *self;
 	self = PyObject_New(CmodObject, &TcsmoltenSalt_Type);
 
-	PySAM_TECH_ATTR("TcsmoltenSalt", SAM_TcsmoltenSalt_construct)
+	PySAM_TECH_ATTR()
 
 	PyObject* SolarResource_obj = SolarResource_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "SolarResource", SolarResource_obj);
@@ -7459,7 +7525,6 @@ newTcsmoltenSaltObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
 	Py_DECREF(Outputs_obj);
 
-
 	return self;
 }
 
@@ -7469,8 +7534,12 @@ static void
 TcsmoltenSalt_dealloc(CmodObject *self)
 {
 	Py_XDECREF(self->x_attr);
-	if (!self->data_owner_ptr)
-		SAM_TcsmoltenSalt_destruct(self->data_ptr);
+
+	if (!self->data_owner_ptr) {
+		SAM_error error = new_error();
+		SAM_table_destruct(self->data_ptr, &error);
+		PySAM_has_error(error);
+	}
 	PyObject_Del(self);
 }
 
@@ -7486,7 +7555,6 @@ TcsmoltenSalt_execute(CmodObject *self, PyObject *args)
 	SAM_error error = new_error();
 	SAM_TcsmoltenSalt_execute(self->data_ptr, verbosity, &error);
 	if (PySAM_has_error(error )) return NULL;
-
 	Py_INCREF(Py_None);
 	return Py_None;
 }
@@ -7517,7 +7585,7 @@ TcsmoltenSalt_export(CmodObject *self, PyObject *args)
 static PyObject *
 TcsmoltenSalt_value(CmodObject *self, PyObject *args)
 {
-	return CmodObject_value(self, args);
+	return Cmod_value(self, args);
 }
 
 static PyMethodDef TcsmoltenSalt_methods[] = {

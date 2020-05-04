@@ -3438,7 +3438,7 @@ newTcstroughEmpiricalObject(void* data_ptr)
 	CmodObject *self;
 	self = PyObject_New(CmodObject, &TcstroughEmpirical_Type);
 
-	PySAM_TECH_ATTR("TcstroughEmpirical", SAM_TcstroughEmpirical_construct)
+	PySAM_TECH_ATTR()
 
 	PyObject* Weather_obj = Weather_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Weather", Weather_obj);
@@ -3495,7 +3495,6 @@ newTcstroughEmpiricalObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
 	Py_DECREF(Outputs_obj);
 
-
 	return self;
 }
 
@@ -3505,8 +3504,12 @@ static void
 TcstroughEmpirical_dealloc(CmodObject *self)
 {
 	Py_XDECREF(self->x_attr);
-	if (!self->data_owner_ptr)
-		SAM_TcstroughEmpirical_destruct(self->data_ptr);
+
+	if (!self->data_owner_ptr) {
+		SAM_error error = new_error();
+		SAM_table_destruct(self->data_ptr, &error);
+		PySAM_has_error(error);
+	}
 	PyObject_Del(self);
 }
 
@@ -3522,7 +3525,6 @@ TcstroughEmpirical_execute(CmodObject *self, PyObject *args)
 	SAM_error error = new_error();
 	SAM_TcstroughEmpirical_execute(self->data_ptr, verbosity, &error);
 	if (PySAM_has_error(error )) return NULL;
-
 	Py_INCREF(Py_None);
 	return Py_None;
 }
@@ -3553,7 +3555,7 @@ TcstroughEmpirical_export(CmodObject *self, PyObject *args)
 static PyObject *
 TcstroughEmpirical_value(CmodObject *self, PyObject *args)
 {
-	return CmodObject_value(self, args);
+	return Cmod_value(self, args);
 }
 
 static PyMethodDef TcstroughEmpirical_methods[] = {
@@ -3722,7 +3724,7 @@ static PyMethodDef TcstroughEmpiricalModule_methods[] = {
 				PyDoc_STR("new() -> TcstroughEmpirical")},
 		{"default",             TcstroughEmpirical_default,         METH_VARARGS,
 				PyDoc_STR("default(config) -> TcstroughEmpirical\n\nUse financial config-specific default attributes\n"
-				"config options:\n\n- \"EmpiricalTroughAllEquityPartnershipFlip\"\n- \"EmpiricalTroughCommercial\"\n- \"EmpiricalTroughCommercialPPA\"\n- \"EmpiricalTroughIndependentPowerProducer\"\n- \"EmpiricalTroughLCOECalculator\"\n- \"EmpiricalTroughLeveragedPartnershipFlip\"\n- \"EmpiricalTroughMerchantPlant\"\n- \"EmpiricalTroughNone\"\n- \"EmpiricalTroughSaleLeaseback\"\n- \"EmpiricalTroughSingleOwner\"")},
+				"config options:\n\n- \"EmpiricalTroughAllEquityPartnershipFlip\"\n- \"EmpiricalTroughCommercial\"\n- \"EmpiricalTroughLCOECalculator\"\n- \"EmpiricalTroughLeveragedPartnershipFlip\"\n- \"EmpiricalTroughMerchantPlant\"\n- \"EmpiricalTroughNone\"\n- \"EmpiricalTroughSaleLeaseback\"\n- \"EmpiricalTroughSingleOwner\"")},
 		{"wrap",             TcstroughEmpirical_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> TcstroughEmpirical\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   TcstroughEmpirical_from_existing,        METH_VARARGS,

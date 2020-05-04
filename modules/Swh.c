@@ -697,7 +697,7 @@ static PyGetSetDef SWH_getset[] = {
 	PyDoc_STR("*float*: Pipe insulation thickness [m]\n\n*Constraints*: POSITIVE\n\n*Required*: True"),
  	NULL},
 {"pipe_k", (getter)SWH_get_pipe_k,(setter)SWH_set_pipe_k,
-	PyDoc_STR("*float*: Pipe insulation conductivity [W/m2.C]\n\n*Constraints*: POSITIVE\n\n*Required*: True"),
+	PyDoc_STR("*float*: Pipe insulation conductivity [W/m-C]\n\n*Constraints*: POSITIVE\n\n*Required*: True"),
  	NULL},
 {"pipe_length", (getter)SWH_get_pipe_length,(setter)SWH_set_pipe_length,
 	PyDoc_STR("*float*: Length of piping in system [m]\n\n*Constraints*: POSITIVE\n\n*Required*: True"),
@@ -1226,7 +1226,7 @@ newSwhObject(void* data_ptr)
 	CmodObject *self;
 	self = PyObject_New(CmodObject, &Swh_Type);
 
-	PySAM_TECH_ATTR("Swh", SAM_Swh_construct)
+	PySAM_TECH_ATTR()
 
 	PyObject* Weather_obj = Weather_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Weather", Weather_obj);
@@ -1255,7 +1255,6 @@ newSwhObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
 	Py_DECREF(Outputs_obj);
 
-
 	return self;
 }
 
@@ -1265,8 +1264,12 @@ static void
 Swh_dealloc(CmodObject *self)
 {
 	Py_XDECREF(self->x_attr);
-	if (!self->data_owner_ptr)
-		SAM_Swh_destruct(self->data_ptr);
+
+	if (!self->data_owner_ptr) {
+		SAM_error error = new_error();
+		SAM_table_destruct(self->data_ptr, &error);
+		PySAM_has_error(error);
+	}
 	PyObject_Del(self);
 }
 
@@ -1282,7 +1285,6 @@ Swh_execute(CmodObject *self, PyObject *args)
 	SAM_error error = new_error();
 	SAM_Swh_execute(self->data_ptr, verbosity, &error);
 	if (PySAM_has_error(error )) return NULL;
-
 	Py_INCREF(Py_None);
 	return Py_None;
 }
@@ -1313,7 +1315,7 @@ Swh_export(CmodObject *self, PyObject *args)
 static PyObject *
 Swh_value(CmodObject *self, PyObject *args)
 {
-	return CmodObject_value(self, args);
+	return Cmod_value(self, args);
 }
 
 static PyMethodDef Swh_methods[] = {

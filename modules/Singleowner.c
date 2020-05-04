@@ -4467,7 +4467,7 @@ static PyGetSetDef BatterySystem_getset[] = {
 	PyDoc_STR("*float*: Battery cost [$/kWh]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
 {"en_batt", (getter)BatterySystem_get_en_batt,(setter)BatterySystem_set_en_batt,
-	PyDoc_STR("*float*: Enable battery storage model [0/1]\n\n*Required*: If not provided, assumed to be 0\n\n*Changes to this variable may require updating the values of the following*: \n\t - cp_battery_nameplate\n"),
+	PyDoc_STR("*float*: Enable battery storage model [0/1]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"grid_to_batt", (getter)BatterySystem_get_grid_to_batt,(setter)BatterySystem_set_grid_to_batt,
 	PyDoc_STR("*sequence*: Electricity to battery from grid [kW]"),
@@ -5388,7 +5388,7 @@ static PyGetSetDef CapacityPayments_getset[] = {
 	PyDoc_STR("*float*: Capacity payment type\n\n*Options*: 0=Energy basis,1=Fixed amount\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: True"),
  	NULL},
 {"cp_system_nameplate", (getter)CapacityPayments_get_cp_system_nameplate,(setter)CapacityPayments_set_cp_system_nameplate,
-	PyDoc_STR("*float*: System nameplate [MW]\n\n*Constraints*: MIN=0\n\n*Required*: True if cp_capacity_payment_type=0"),
+	PyDoc_STR("*float*: System nameplate [MW]\n\n*Constraints*: MIN=0\n\n*Required*: True if cp_capacity_payment_type=0\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - system_capacity\n"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -10655,7 +10655,7 @@ newSingleownerObject(void* data_ptr)
 	CmodObject *self;
 	self = PyObject_New(CmodObject, &Singleowner_Type);
 
-	PySAM_TECH_ATTR("Singleowner", SAM_Singleowner_construct)
+	PySAM_TECH_ATTR()
 
 	PyObject* Revenue_obj = Revenue_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Revenue", Revenue_obj);
@@ -10717,7 +10717,6 @@ newSingleownerObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
 	Py_DECREF(Outputs_obj);
 
-
 	return self;
 }
 
@@ -10727,8 +10726,12 @@ static void
 Singleowner_dealloc(CmodObject *self)
 {
 	Py_XDECREF(self->x_attr);
-	if (!self->data_owner_ptr)
-		SAM_Singleowner_destruct(self->data_ptr);
+
+	if (!self->data_owner_ptr) {
+		SAM_error error = new_error();
+		SAM_table_destruct(self->data_ptr, &error);
+		PySAM_has_error(error);
+	}
 	PyObject_Del(self);
 }
 
@@ -10744,7 +10747,6 @@ Singleowner_execute(CmodObject *self, PyObject *args)
 	SAM_error error = new_error();
 	SAM_Singleowner_execute(self->data_ptr, verbosity, &error);
 	if (PySAM_has_error(error )) return NULL;
-
 	Py_INCREF(Py_None);
 	return Py_None;
 }
@@ -10775,7 +10777,7 @@ Singleowner_export(CmodObject *self, PyObject *args)
 static PyObject *
 Singleowner_value(CmodObject *self, PyObject *args)
 {
-	return CmodObject_value(self, args);
+	return Cmod_value(self, args);
 }
 
 static PyMethodDef Singleowner_methods[] = {
@@ -10944,7 +10946,7 @@ static PyMethodDef SingleownerModule_methods[] = {
 				PyDoc_STR("new() -> Singleowner")},
 		{"default",             Singleowner_default,         METH_VARARGS,
 				PyDoc_STR("default(config) -> Singleowner\n\nUse financial config-specific default attributes\n"
-				"config options:\n\n- \"BiopowerSingleOwner\"\n- \"DSLFSingleOwner\"\n- \"DSPTSingleOwner\"\n- \"DishStirlingSingleOwner\"\n- \"EmpiricalTroughSingleOwner\"\n- \"FlatPlatePVSingleOwner\"\n- \"FuelCellSingleOwner\"\n- \"GenericCSPSystemSingleOwner\"\n- \"GenericSystemSingleOwner\"\n- \"GeothermalPowerSingleOwner\"\n- \"HighXConcentratingPVSingleOwner\"\n- \"ISCCSingleOwner\"\n- \"MSLFSingleOwner\"\n- \"MSPTSingleOwner\"\n- \"PVWattsSingleOwner\"\n- \"PhysicalTroughSingleOwner\"\n- \"WindPowerSingleOwner\"")},
+				"config options:\n\n- \"BiopowerSingleOwner\"\n- \"DSLFSingleOwner\"\n- \"DSPTSingleOwner\"\n- \"DishStirlingSingleOwner\"\n- \"EmpiricalTroughSingleOwner\"\n- \"FlatPlatePVSingleOwner\"\n- \"FuelCellSingleOwner\"\n- \"GenericBatterySingleOwner\"\n- \"GenericCSPSystemSingleOwner\"\n- \"GenericSystemSingleOwner\"\n- \"GeothermalPowerSingleOwner\"\n- \"HighXConcentratingPVSingleOwner\"\n- \"MSLFSingleOwner\"\n- \"MSPTSingleOwner\"\n- \"PVBatterySingleOwner\"\n- \"PVWattsSingleOwner\"\n- \"PhysicalTroughSingleOwner\"\n- \"WindPowerSingleOwner\"")},
 		{"wrap",             Singleowner_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Singleowner\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   Singleowner_from_existing,        METH_VARARGS,
