@@ -7,7 +7,7 @@ Documentation here: https://nrel-pysam.readthedocs.io
 * Built-in documentation of models and parameters.
 * Minimum Python 3.5 for Windows 7 64-bit, MacOSX 10.6, or CentOS 5.
 
-## Version 2.1.dev0
+## Version 2.1.1, ~ SAM 2020.2.29 r3, SSC Version
 * BatteryStateful module
 * Battery model fixes
 * SAM Release fixes
@@ -17,7 +17,7 @@ Documentation here: https://nrel-pysam.readthedocs.io
 	- bifacial bug
 * ssc_sim_from_dict bug fix
 ? Version attribute
-* URDBv7 in ResourceTools (more units)
+* URDBv7 in ResourceTools bug fix
 ? case-insensitive default names
 ? missing windows defaults
 ? Mac wind error
