@@ -94,13 +94,15 @@ def URDBv7_to_ElectricityRates(urdb_response):
         dictionary with response fields following https://openei.org/services/doc/rest/util_rates/?version=7
     :return: dictionary for PySAM.UtilityRate5.UtilityRate5.ElectricityRates
     """
+    urdb_data = dict()
+    urdb_data['en_electricity_rates'] = 1
 
     def try_get_schedule(urdb_name, data_name):
         if urdb_name in urdb_response.keys():
-            data[data_name] = urdb_response[urdb_name]
+            urdb_data[data_name] = urdb_response[urdb_name]
             for i in range(12):
                 for j in range(24):
-                    data[data_name][i][j] += 1
+                    urdb_data[data_name][i][j] += 1
 
     def try_get_rate_structure(urdb_name, data_name):
         mat = []
@@ -117,60 +119,87 @@ def URDBv7_to_ElectricityRates(urdb_response):
                     sell = 0
                     if 'sell' in entry.keys():
                         sell = entry['sell']
-                    units = ['kwh', 'kw']
                     if 'unit' in entry.keys():
-                        if entry['unit'].lower() not in units:
+                        if entry['unit'].lower() != "kWh".lower():
                             raise RuntimeError("UtilityRateDatabase error: unrecognized unit in rate structure")
                     mat.append((i + 1, j + 1, tier_max, 0.0, rate, sell))
-            data[data_name] = mat
+            urdb_data[data_name] = mat
 
-    data = dict()
-    data['en_electricity_rates'] = 1
+    def try_get_demand_structure(urdb_name, data_name):
+        mat = []
+        if urdb_name in urdb_response.keys():
+            structure = urdb_response[urdb_name]
+            for i, period in enumerate(structure):
+                for j, entry in enumerate(period):
+                    rate = entry['rate']
+                    if 'adj' in entry.keys():
+                        rate += entry['adj']
+                    tier_max = 1e38
+                    if 'max' in entry.keys():
+                        tier_max = entry['max']
+                    if 'unit' in entry.keys():
+                        if entry['unit'].lower() != "kW".lower():
+                            raise RuntimeError("UtilityRateDatabase error: unrecognized unit in rate structure")
+                    mat.append((i + 1, j + 1, tier_max, rate))
+            if data_name:
+                urdb_data[data_name] = mat
+            else:
+                return mat
 
-    rules = urdb_response['dgrules']
-    if rules == "Net Metering":
-        data['ur_metering_option'] = 0
-    elif rules == "Net Billing Instantaneous":
-        data['ur_metering_option'] = 2
-    elif rules == "Net Billing Hourly":
-        data['ur_metering_option'] = 3
-    elif rules == "Buy All Sell All":
-        data['ur_metering_option'] = 4
+    if "dgrules" in urdb_response.keys():
+        rules = urdb_response['dgrules']  # dgrules
+        if rules == "Net Metering":
+            urdb_data['ur_metering_option'] = 0
+        elif rules == "Net Billing Instantaneous":
+            urdb_data['ur_metering_option'] = 2
+        elif rules == "Net Billing Hourly":
+            urdb_data['ur_metering_option'] = 3
+        elif rules == "Buy All Sell All":
+            urdb_data['ur_metering_option'] = 4
+    else:
+        # if no metering option provided, assume Net Metering
+        urdb_data['ur_metering_option'] = 0
 
-    if 'fixedchargefirstmeter' in urdb_response.keys():
+    if 'fixedchargefirstmeter' in urdb_response.keys() and 'fixedchargeunits' in urdb_response.keys():
         fixed_charge = urdb_response['fixedchargefirstmeter']
         fixed_charge_units = urdb_response['fixedchargeunits']
         if fixed_charge_units == "$/day":
-            fixed_charge *= 365/30
+            fixed_charge *= 365 / 30
         elif fixed_charge_units == "$/year":
             fixed_charge /= 12
-        data['ur_fixed_monthly_charge'] = fixed_charge
+        urdb_data['ur_monthly_fixed_charge'] = fixed_charge
 
     if 'mincharge' in urdb_response.keys():
         min_charge = urdb_response['mincharge']
         min_charge_units = urdb_response['minchargeunits']
         if min_charge_units == "$/year":
-            data['ur_annual_min_charge'] = min_charge
+            urdb_data['ur_annual_min_charge'] = min_charge
         else:
             if min_charge_units == "$/day":
                 min_charge *= 365 / 30
-            data['ur_monthly_min_charge'] = min_charge
+            urdb_data['ur_monthly_min_charge'] = min_charge
 
     try_get_schedule('energyweekdayschedule', 'ur_ec_sched_weekday')
     try_get_schedule('energyweekendschedule', 'ur_ec_sched_weekend')
-
-    if 'flatdemandmonths' in urdb_response.keys():
-        data['ur_dc_enable'] = 1
-        flat_mat = []
-        flat_demand = urdb_response['flatdemandmonths']
-        for i in range(12):
-            flat_mat.append([i, 1, 1e38, flat_demand[i]])
-        data['ur_dc_flat_mat'] = flat_mat
-
     try_get_rate_structure('energyratestructure', 'ur_ec_tou_mat')
-    try_get_rate_structure('flatdemandstructure', 'ur_dc_flat_mat')
-    try_get_rate_structure('demandratestructure', 'ur_dc_tou_mat')
+
+    try_get_demand_structure('demandratestructure', 'ur_dc_tou_mat')
     try_get_schedule('demandweekdayschedule', 'ur_dc_sched_weekday')
     try_get_schedule('demandweekendschedule', 'ur_dc_sched_weekend')
 
-    return data
+    flat_demand_structure = try_get_demand_structure('flatdemandstructure', None)
+
+    if 'flatdemandmonths' in urdb_response.keys():
+        urdb_data['ur_dc_enable'] = 1
+        flat_mat = []
+        flat_demand = urdb_response['flatdemandmonths']
+        for month, tier in enumerate(flat_demand):
+            periods = [r for r in flat_demand_structure if r[0] == int(tier + 1)]
+            month_row = []
+            for p in periods:
+                month_row.append(month)
+                month_row += [p[i] for i in (1, 2, 3)]
+            flat_mat.append(month_row)
+        urdb_data['ur_dc_flat_mat'] = flat_mat
+
+    return urdb_data
