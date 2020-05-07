@@ -4,6 +4,7 @@ import json
 
 import PySAM.ResourceTools as tools
 import PySAM.Windpower as wp
+import PySAM.Pvwattsv7 as pv
 
 
 def test_solar():
@@ -15,6 +16,13 @@ def test_solar():
     assert (data['df'][7] == 16)
     assert (data['gh'][7] == 27)
     assert (data['tdry'][7] == pytest.approx(8.96, 0.1))
+    model = pv.default("PVwattsNone")
+    model.SolarResource.solar_resource_data = data
+    model.execute()
+    aep = model.Outputs.annual_energy
+    model.SolarResource.solar_resource_file = solar
+    model.execute()
+    assert(aep == pytest.approx(model.Outputs.annual_energy, 1))
 
 
 def test_wind():
