@@ -1,7 +1,4 @@
-typedef struct {
-    PyObject_HEAD
-    SAM_Windpower   data_ptr;
-} WindGroupObject;
+#include "SAM_eqns.h"
 
 char Turbine_calculate_powercurve_doc[] =
     "Calculates the power produced by a wind turbine at windspeeds incremented by 0.25 m/s\\n\\n"
@@ -44,7 +41,7 @@ static PyObject* Turbine_calculate_powercurve(PyObject *self, PyObject *args, Py
         return NULL;
 
 
-    WindGroupObject* self_obj = (WindGroupObject*)self;
+    VarGroupObject* self_obj = (VarGroupObject*)self;
 
     // elevation depends on model choice
     SAM_error error = new_error();
