@@ -225,7 +225,7 @@ class FetchResourceFiles():
     ------
     tech (str): one of 'wind' or 'pv'
     workers (int): number of threads to use when parellelizing downloads
-    resource_year (int): year to grab resources from. 
+    resource_year (int): year to grab resources from.
         can be 'tmy' for solar
     resource_interval_min (int): time interval of resource data
     nrel_api_key (str): NREL developer API key, available here https://developer.nrel.gov/signup/
@@ -234,8 +234,8 @@ class FetchResourceFiles():
     Methods
     -------
     run():
-        fetch resource profiles for an iterable of lat/lons and save to disk. 
-        the attribute `.resource_file_paths_dict` offers a dictionary with keys as lat/lon tuples and 
+        fetch resource profiles for an iterable of lat/lons and save to disk.
+        the attribute `.resource_file_paths_dict` offers a dictionary with keys as lat/lon tuples and
 
 
     """
@@ -243,7 +243,8 @@ class FetchResourceFiles():
     def __init__(self, tech, nrel_api_key, nrel_api_email,
                  workers=1,
                  resource_year='tmy',
-                 resource_interval_min=60):
+                 resource_interval_min=60,
+                 SAM_resource_dir=None):
 
         self.tech = tech
         self.nrel_api_key = nrel_api_key
@@ -254,9 +255,10 @@ class FetchResourceFiles():
         self.workers = workers
 
         # --- Make folder to store resource_files ---
-        self.SAM_resource_dir = os.path.join('data','PySAM Downloaded Weather Files')
+        if not SAM_resource_dir:
+            self.SAM_resource_dir = os.path.join(os.getcwd(),'data','PySAM Downloaded Weather Files')
         if not os.path.exists(self.SAM_resource_dir):
-            os.mkdir(self.SAM_resource_dir)
+            os.makedirs(self.SAM_resource_dir)
 
         if tech == 'pv':
             self.data_function = self._NSRDB_worker
