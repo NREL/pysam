@@ -1,10 +1,9 @@
-import json, marshal, os, ntpath, shutil
+import json, marshal, os, shutil
 from setuptools import setup, Extension
-import distutils
 import sys
-from shutil import copyfile
 import distutils.dir_util
 from distutils.core import Command
+from files.version import __version__
 
 ###################################################################################################
 #
@@ -12,7 +11,7 @@ from distutils.core import Command
 #
 ###################################################################################################
 
-latest_version = '2.0.2'
+latest_version = __version__
 
 # determine if making PyPi or Conda distribution
 distclass = distutils.core.Distribution
@@ -37,7 +36,7 @@ with open(os.path.join(this_directory, 'RELEASE.md'), encoding='utf-8') as f:
 
 # prepare package
 libs = []
-libfiles = []
+libfiles = ['__init__.py', 'version.py']
 extra_compile_args = ["-Wno-implicit-function-declaration", "-Wno-unused-function", "-Wno-strict-prototypes"]
 extra_link_args = []
 defines = []
@@ -47,19 +46,19 @@ if sys.platform == 'darwin':
     vars = sysconfig.get_config_vars()
     vars['LDSHARED'] = vars['LDSHARED'].replace('-bundle', '-dynamiclib')
     libs = ['SAM_api', 'ssc']
-    libfiles = ['libSAM_api.so', 'libssc.so']
+    libfiles += ['libSAM_api.so', 'libssc.so']
     extra_link_args = ["-Wl,-rpath,@loader_path/"]
     extra_compile_args.append("-Wno-ignored-attributes")
 
 if sys.platform == 'linux':
     libs = ['SAM_api', 'ssc']
-    libfiles = ['libSAM_api.so', 'libssc.so']
+    libfiles += ['libSAM_api.so', 'libssc.so']
     extra_link_args = ["-Wl,-rpath,$ORIGIN/"]
     extra_compile_args.append('-Wno-attributes')
 
 if sys.platform == 'win32':
     libs = ['SAM_api', 'ssc']
-    libfiles = ['SAM_api.dll', 'ssc.dll', 'SAM_api.lib', 'ssc.lib']
+    libfiles += ['SAM_api.dll', 'ssc.dll', 'SAM_api.lib', 'ssc.lib']
     defines = [('__WINDOWS__', '1')]
     extra_compile_args = []
 
@@ -117,10 +116,10 @@ for filename in os.listdir(defaults_dir):
         data = json.load(f)
 
         dic = data[list(data.keys())[0]]
-        with open('files/defaults/' + name[0] + '.df', "wb") as out:
+        with open('files/defaults/' + name[0].lower() + '.df', "wb") as out:
             marshal.dump(dic, out)
 
-for filename in os.listdir(defaults_dir):
+for filename in os.listdir(defaults_df_dir):
     libfiles.append('defaults/' + os.path.splitext(filename)[0] + '.df')
 
 # make list of all extension modules

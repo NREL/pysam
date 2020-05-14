@@ -1,6 +1,9 @@
 from setuptools import setup
 import distutils
 import sys
+from files.version import __version__
+
+latest_version = __version__
 
 # determine if making PyPi or Conda distribution
 distclass = distutils.core.Distribution

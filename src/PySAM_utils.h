@@ -4,6 +4,7 @@
 #include <Python.h>
 #include <marshal.h>
 #include <stdio.h>
+#include <ctype.h>
 
 #if defined(__WINDOWS__)
 #define strcasecmp _stricmp
@@ -30,23 +31,10 @@ typedef struct {
 // Error Handling
 //
 
-static PyObject *PySAM_ErrorObject;
-
-static int PySAM_init_error(PyObject* m){
-    if (PySAM_ErrorObject == NULL) {
-        PySAM_ErrorObject = PyErr_NewException("PySAM.error", NULL, NULL);
-        if (PySAM_ErrorObject == NULL)
-            return -1;
-    }
-    Py_INCREF(PySAM_ErrorObject);
-    PyModule_AddObject(m, "error", PySAM_ErrorObject);
-    return 0;
-}
-
 static int PySAM_has_error(SAM_error error){
     const char* cc = error_message(error);
     if ((cc != NULL) && (cc[0] != '\0')) {
-        PyErr_SetString(PySAM_ErrorObject, cc);
+        PyErr_SetString(PyExc_Exception, cc);
         error_destruct(error);
         return 1;
     }
@@ -61,7 +49,7 @@ static int PySAM_has_error_msg(SAM_error error, const char *msg){
         strncat(err_msg, cc, strlen(err_msg) - 1);
         strncat(err_msg, ". ", 2);
         strncat(err_msg, msg, strlen(msg));
-        PyErr_SetString(PySAM_ErrorObject, err_msg);
+        PyErr_SetString(PyExc_Exception, err_msg);
         error_destruct(error);
         return 1;
     }
@@ -94,7 +82,7 @@ static int PySAM_load_lib(PyObject* m){
         PyObject* file = PyModule_GetFilenameObject(m);
 
         if (!file){
-            PyErr_SetString(PySAM_ErrorObject, "Could not get module filepath");
+            PyErr_SetString(PyExc_Exception, "Could not get module filepath");
             Py_XDECREF(file);
             return -1;
         }
@@ -441,7 +429,7 @@ static PyObject* PySAM_table_to_dict(SAM_table table){
                 break;
             case SAM_INVALID:
             default:
-                PyErr_SetString(PySAM_ErrorObject, "Table contains entry with invalid type. Types must be number, string"
+                PyErr_SetString(PyExc_Exception, "Table contains entry with invalid type. Types must be number, string"
                                                    ", sequence, or dict.");
                 goto fail;
         }
@@ -500,7 +488,7 @@ static SAM_table PySAM_dict_to_table(PyObject* dict){
             if (!first){
                 char str[256];
                 PySAM_concat_msg(str, "Error assigning empty tuple to ", name);
-                PyErr_SetString(PySAM_ErrorObject, str);
+                PyErr_SetString(PyExc_Exception, str);
                 goto fail;
             }
 
@@ -776,7 +764,7 @@ static int PySAM_assign_from_dict(void *data_ptr, PyObject *dict, const char *te
             if (!first){
                 char str[256];
                 PySAM_concat_msg(str, "Error assigning empty tuple to ", name);
-                PyErr_SetString(PySAM_ErrorObject, str);
+                PyErr_SetString(PyExc_Exception, str);
                 Py_XDECREF(first);
                 goto fail;
             }
@@ -804,7 +792,7 @@ static int PySAM_assign_from_dict(void *data_ptr, PyObject *dict, const char *te
                         PySAM_concat_msg(str, name, " items must be numeric.");
                         break;
                 }
-                PyErr_SetString(PySAM_ErrorObject, str);
+                PyErr_SetString(PyExc_Exception, str);
                 goto fail;
             }
             // array
@@ -833,7 +821,7 @@ static int PySAM_assign_from_dict(void *data_ptr, PyObject *dict, const char *te
                         PySAM_concat_msg(str, name, "must be iterable matrix must be rectangular.");
                         break;
                 }
-                PyErr_SetString(PySAM_ErrorObject, str);
+                PyErr_SetString(PyExc_Exception, str);
                 goto fail;
             }
         }
@@ -855,7 +843,7 @@ static int PySAM_assign_from_dict(void *data_ptr, PyObject *dict, const char *te
         else {
             char str[256];
             PySAM_concat_msg(str, name, " assignment value must be numeric, string, tuple or dict.");
-            PyErr_SetString(PySAM_ErrorObject, str);
+            PyErr_SetString(PyExc_Exception, str);
             goto fail;
         }
         Py_DECREF(ascii_mystring);
@@ -991,16 +979,31 @@ PySAM_export_to_nested_dict(PyObject *self, PyObject *x_attr) {
     return export;
 }
 
+char *lower_case(char *string)
+{
+    char *temp = strdup(string);
+    unsigned char *tptr = (unsigned char *)temp;
+    while(*tptr) {
+        *tptr = tolower(*tptr);
+        tptr++;
+    }
+    return temp;
+}
+
 /// Loading defaults from marshalled data
-static int PySAM_load_defaults(PyObject* self, PyObject* x_attr, void* data_ptr, const char* cmod, char* def){
+static int PySAM_load_defaults(PyObject* self, PyObject* x_attr, void* data_ptr, char* cmod, char* def){
     FILE* f = NULL;
     char path[256];
 
-    sprintf(path, "%sdefaults/%s_%s.df", SAM_lib_dir, cmod, def);
-    f = fopen(path, "rb");
+    char* def_lower = lower_case(def);
+    char* cmod_lower = lower_case(cmod);
+    sprintf(path, "%sdefaults/%s_%s.df", SAM_lib_dir, cmod_lower, def_lower);
+    free(def_lower);
+    free(cmod_lower);
 
+    f = fopen(path, "rb");
     if (!f){
-        PyErr_SetString(PySAM_ErrorObject, "Could not open defaults file.");
+        PyErr_SetString(PyExc_Exception, "Could not open defaults file.");
         return -1;
     }
 
@@ -1008,7 +1011,7 @@ static int PySAM_load_defaults(PyObject* self, PyObject* x_attr, void* data_ptr,
     fclose(f);
 
     if (!dict){
-        PyErr_SetString(PySAM_ErrorObject, "Could not load defaults dict.");
+        PyErr_SetString(PyExc_Exception, "Could not load defaults dict.");
         return -1;
     }
 

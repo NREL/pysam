@@ -53,7 +53,7 @@ static PyObject* Turbine_calculate_powercurve(PyObject *self, PyObject *args, Py
         printf("Warning: Resource.wind_resource_model_choice not set. Elevation should be 0 if not using Weibull wind characteristics.\n");
     }
     if (model_choice != 0 && model_choice != 1 && model_choice != 2){
-        PyErr_SetString(PySAM_ErrorObject, "Resource.wind_resource_model_choice must be 0 or 1");
+        PyErr_SetString(PyExc_Exception, "Resource.wind_resource_model_choice must be 0 or 1");
         return NULL;
     }
     if (model_choice == 0 && elev != 0.){
