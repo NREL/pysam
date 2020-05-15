@@ -1,6 +1,6 @@
 
-NREL-PySAM: System Advisor Model
-=======================================
+NREL-PySAM
+==========
 
 NREL-PySAM is a wrapper for the National Renewable Energy Laboratory's `System Advisor Model <http://sam.nrel.gov>`_ (SAM), a simulator for renewable energy, not to be confused with `pysam <https://pysam.readthedocs.io/en/latest/api.html>`_, which is for reading sequence alignment files often used in genetics.
 

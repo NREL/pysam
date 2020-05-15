@@ -19,7 +19,7 @@ master_doc = 'index'
 
 # -- Project information -----------------------------------------------------
 
-project = 'PySAM'
+project = 'NREL-PySAM'
 copyright = '2019, NREL'
 author = 'dguittet'
 
