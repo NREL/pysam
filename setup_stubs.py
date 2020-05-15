@@ -24,7 +24,7 @@ for filename in listdir('stubs'):
 
 setup(
     name='NREL-PySAM-stubs',
-    version='2.0.2',
+    version=latest_version,
     distclass=distclass,
     url='http://www.github.com/nrel/pysam',
     description="National Renewable Energy Laboratory's System Advisor Model Python Wrapper, stub files",

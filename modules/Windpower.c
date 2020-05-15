@@ -1497,7 +1497,7 @@ newWindpowerObject(void* data_ptr)
 	CmodObject *self;
 	self = PyObject_New(CmodObject, &Windpower_Type);
 
-	PySAM_TECH_ATTR("Windpower", SAM_Windpower_construct)
+	PySAM_TECH_ATTR()
 
 	PyObject* Resource_obj = Resource_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Resource", Resource_obj);
@@ -1527,7 +1527,7 @@ newWindpowerObject(void* data_ptr)
 	Py_XDECREF(AdjustmentFactorsModule);
 
 	if (!Adjust_obj){
-		PyErr_SetString(PySAM_ErrorObject, "Couldn't create AdjustmentFactorsObject\n");
+		PyErr_SetString(PyExc_Exception, "Couldn't create AdjustmentFactorsObject\n");
 		return NULL;
 	}
 
@@ -1538,7 +1538,6 @@ newWindpowerObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
 	Py_DECREF(Outputs_obj);
 
-
 	return self;
 }
 
@@ -1548,8 +1547,12 @@ static void
 Windpower_dealloc(CmodObject *self)
 {
 	Py_XDECREF(self->x_attr);
-	if (!self->data_owner_ptr)
-		SAM_Windpower_destruct(self->data_ptr);
+
+	if (!self->data_owner_ptr) {
+		SAM_error error = new_error();
+		SAM_table_destruct(self->data_ptr, &error);
+		PySAM_has_error(error);
+	}
 	PyObject_Del(self);
 }
 
@@ -1565,7 +1568,6 @@ Windpower_execute(CmodObject *self, PyObject *args)
 	SAM_error error = new_error();
 	SAM_Windpower_execute(self->data_ptr, verbosity, &error);
 	if (PySAM_has_error(error )) return NULL;
-
 	Py_INCREF(Py_None);
 	return Py_None;
 }
@@ -1596,7 +1598,7 @@ Windpower_export(CmodObject *self, PyObject *args)
 static PyObject *
 Windpower_value(CmodObject *self, PyObject *args)
 {
-	return CmodObject_value(self, args);
+	return Cmod_value(self, args);
 }
 
 static PyMethodDef Windpower_methods[] = {
@@ -1765,7 +1767,7 @@ static PyMethodDef WindpowerModule_methods[] = {
 				PyDoc_STR("new() -> Windpower")},
 		{"default",             Windpower_default,         METH_VARARGS,
 				PyDoc_STR("default(config) -> Windpower\n\nUse financial config-specific default attributes\n"
-				"config options:\n\n- \"WindPowerAllEquityPartnershipFlip\"\n- \"WindPowerCommercial\"\n- \"WindPowerCommercialPPA\"\n- \"WindPowerIndependentPowerProducer\"\n- \"WindPowerLCOECalculator\"\n- \"WindPowerLeveragedPartnershipFlip\"\n- \"WindPowerMerchantPlant\"\n- \"WindPowerNone\"\n- \"WindPowerResidential\"\n- \"WindPowerSaleLeaseback\"\n- \"WindPowerSingleOwner\"")},
+				"config options:\n\n- \"WindPowerAllEquityPartnershipFlip\"\n- \"WindPowerCommercial\"\n- \"WindPowerLCOECalculator\"\n- \"WindPowerLeveragedPartnershipFlip\"\n- \"WindPowerMerchantPlant\"\n- \"WindPowerNone\"\n- \"WindPowerResidential\"\n- \"WindPowerSaleLeaseback\"\n- \"WindPowerSingleOwner\"")},
 		{"wrap",             Windpower_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Windpower\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   Windpower_from_existing,        METH_VARARGS,
@@ -1784,7 +1786,6 @@ WindpowerModule_exec(PyObject *m)
 	 * object; doing it here is required for portability, too. */
 
 	if (PySAM_load_lib(m) < 0) goto fail;
-	if (PySAM_init_error(m) < 0) goto fail;
 
 	Windpower_Type.tp_dict = PyDict_New();
 	if (!Windpower_Type.tp_dict) { goto fail; }

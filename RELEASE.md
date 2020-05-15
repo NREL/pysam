@@ -7,7 +7,7 @@ Documentation here: https://nrel-pysam.readthedocs.io
 * Built-in documentation of models and parameters.
 * Minimum Python 3.5 for Windows 7 64-bit, MacOSX 10.6, or CentOS 5.
 
-## Version 2.1.0, ~ SAM 2020.2.29 r3, SSC Version 239
+## Version 2.1.1, ~ SAM 2020.2.29 r3, SSC Version 239
 * SAM Release fixes for revision 3
 * reopt size post bug
 * ssc_sim_from_dict bug fix

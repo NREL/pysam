@@ -143,18 +143,6 @@ MHKCosts_set_device_rated_power(VarGroupObject *self, PyObject *value, void *clo
 }
 
 static PyObject *
-MHKCosts_get_device_type(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_MhkCosts_MHKCosts_device_type_nget, self->data_ptr);
-}
-
-static int
-MHKCosts_set_device_type(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_MhkCosts_MHKCosts_device_type_nset, self->data_ptr);
-}
-
-static PyObject *
 MHKCosts_get_devices_per_row(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_MhkCosts_MHKCosts_devices_per_row_nget, self->data_ptr);
@@ -236,6 +224,30 @@ static int
 MHKCosts_set_inter_array_cable_length(VarGroupObject *self, PyObject *value, void *closure)
 {
 	return PySAM_double_setter(value, SAM_MhkCosts_MHKCosts_inter_array_cable_length_nset, self->data_ptr);
+}
+
+static PyObject *
+MHKCosts_get_lib_wave_device(VarGroupObject *self, void *closure)
+{
+	return PySAM_string_getter(SAM_MhkCosts_MHKCosts_lib_wave_device_sget, self->data_ptr);
+}
+
+static int
+MHKCosts_set_lib_wave_device(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_string_setter(value, SAM_MhkCosts_MHKCosts_lib_wave_device_sset, self->data_ptr);
+}
+
+static PyObject *
+MHKCosts_get_library_or_input_wec(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MhkCosts_MHKCosts_library_or_input_wec_nget, self->data_ptr);
+}
+
+static int
+MHKCosts_set_library_or_input_wec(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_MhkCosts_MHKCosts_library_or_input_wec_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -464,9 +476,6 @@ static PyGetSetDef MHKCosts_getset[] = {
 {"device_rated_power", (getter)MHKCosts_get_device_rated_power,(setter)MHKCosts_set_device_rated_power,
 	PyDoc_STR("*float*: Rated capacity of device [kW]\n\n*Constraints*: MIN=0\n\n*Required*: True"),
  	NULL},
-{"device_type", (getter)MHKCosts_get_device_type,(setter)MHKCosts_set_device_type,
-	PyDoc_STR("*float*: Device Type [0/1/2/3/4]\n\n*Options*: 0=Generic,1=RM3,2=RM5,3=RM6,4=RM1\n\n*Constraints*: MIN=0,MAX=4\n\n*Required*: If not provided, assumed to be 0"),
- 	NULL},
 {"devices_per_row", (getter)MHKCosts_get_devices_per_row,(setter)MHKCosts_set_devices_per_row,
 	PyDoc_STR("*float*: Number of wave devices per row in array\n\n*Constraints*: INTEGER\n\n*Required*: True"),
  	NULL},
@@ -487,6 +496,12 @@ static PyGetSetDef MHKCosts_getset[] = {
  	NULL},
 {"inter_array_cable_length", (getter)MHKCosts_get_inter_array_cable_length,(setter)MHKCosts_set_inter_array_cable_length,
 	PyDoc_STR("*float*: Inter-array cable length [m]\n\n*Constraints*: MIN=0\n\n*Required*: True"),
+ 	NULL},
+{"lib_wave_device", (getter)MHKCosts_get_lib_wave_device,(setter)MHKCosts_set_lib_wave_device,
+	PyDoc_STR("*str*: Wave library name\n\n*Required*: True if marine_energy_tech=0"),
+ 	NULL},
+{"library_or_input_wec", (getter)MHKCosts_get_library_or_input_wec,(setter)MHKCosts_set_library_or_input_wec,
+	PyDoc_STR("*float*: Wave library or user input\n\n*Options*: 0=Library,1=User\n\n*Required*: True if marine_energy_tech=0"),
  	NULL},
 {"marine_energy_tech", (getter)MHKCosts_get_marine_energy_tech,(setter)MHKCosts_set_marine_energy_tech,
 	PyDoc_STR("*float*: Marine energy technology [0/1]\n\n*Options*: 0=Wave,1=Tidal\n\n*Constraints*: MIN=0,MAX=1\n\n*Required*: True"),
@@ -874,7 +889,7 @@ newMhkCostsObject(void* data_ptr)
 	CmodObject *self;
 	self = PyObject_New(CmodObject, &MhkCosts_Type);
 
-	PySAM_TECH_ATTR("MhkCosts", SAM_MhkCosts_construct)
+	PySAM_TECH_ATTR()
 
 	PyObject* MHKCosts_obj = MHKCosts_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "MHKCosts", MHKCosts_obj);
@@ -883,7 +898,6 @@ newMhkCostsObject(void* data_ptr)
 	PyObject* Outputs_obj = Outputs_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
 	Py_DECREF(Outputs_obj);
-
 
 	return self;
 }
@@ -894,8 +908,12 @@ static void
 MhkCosts_dealloc(CmodObject *self)
 {
 	Py_XDECREF(self->x_attr);
-	if (!self->data_owner_ptr)
-		SAM_MhkCosts_destruct(self->data_ptr);
+
+	if (!self->data_owner_ptr) {
+		SAM_error error = new_error();
+		SAM_table_destruct(self->data_ptr, &error);
+		PySAM_has_error(error);
+	}
 	PyObject_Del(self);
 }
 
@@ -911,7 +929,6 @@ MhkCosts_execute(CmodObject *self, PyObject *args)
 	SAM_error error = new_error();
 	SAM_MhkCosts_execute(self->data_ptr, verbosity, &error);
 	if (PySAM_has_error(error )) return NULL;
-
 	Py_INCREF(Py_None);
 	return Py_None;
 }
@@ -942,7 +959,7 @@ MhkCosts_export(CmodObject *self, PyObject *args)
 static PyObject *
 MhkCosts_value(CmodObject *self, PyObject *args)
 {
-	return CmodObject_value(self, args);
+	return Cmod_value(self, args);
 }
 
 static PyMethodDef MhkCosts_methods[] = {
@@ -1130,7 +1147,6 @@ MhkCostsModule_exec(PyObject *m)
 	 * object; doing it here is required for portability, too. */
 
 	if (PySAM_load_lib(m) < 0) goto fail;
-	if (PySAM_init_error(m) < 0) goto fail;
 
 	MhkCosts_Type.tp_dict = PyDict_New();
 	if (!MhkCosts_Type.tp_dict) { goto fail; }

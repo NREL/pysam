@@ -454,18 +454,6 @@ BatterySystem_set_batt_dc_dc_efficiency(VarGroupObject *self, PyObject *value, v
 }
 
 static PyObject *
-BatterySystem_get_batt_height(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Battery_BatterySystem_batt_height_nget, self->data_ptr);
-}
-
-static int
-BatterySystem_set_batt_height(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Battery_BatterySystem_batt_height_nset, self->data_ptr);
-}
-
-static PyObject *
 BatterySystem_get_batt_inverter_efficiency_cutoff(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Battery_BatterySystem_batt_inverter_efficiency_cutoff_nget, self->data_ptr);
@@ -475,18 +463,6 @@ static int
 BatterySystem_set_batt_inverter_efficiency_cutoff(VarGroupObject *self, PyObject *value, void *closure)
 {
 	return PySAM_double_setter(value, SAM_Battery_BatterySystem_batt_inverter_efficiency_cutoff_nset, self->data_ptr);
-}
-
-static PyObject *
-BatterySystem_get_batt_length(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Battery_BatterySystem_batt_length_nget, self->data_ptr);
-}
-
-static int
-BatterySystem_set_batt_length(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Battery_BatterySystem_batt_length_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -670,15 +646,15 @@ BatterySystem_set_batt_replacement_schedule_percent(VarGroupObject *self, PyObje
 }
 
 static PyObject *
-BatterySystem_get_batt_width(VarGroupObject *self, void *closure)
+BatterySystem_get_batt_surface_area(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Battery_BatterySystem_batt_width_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Battery_BatterySystem_batt_surface_area_nget, self->data_ptr);
 }
 
 static int
-BatterySystem_set_batt_width(VarGroupObject *self, PyObject *value, void *closure)
+BatterySystem_set_batt_surface_area(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Battery_BatterySystem_batt_width_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Battery_BatterySystem_batt_surface_area_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -710,10 +686,10 @@ static PyGetSetDef BatterySystem_getset[] = {
 	PyDoc_STR("*float*: Inverter AC to battery DC efficiency"),
  	NULL},
 {"batt_ac_or_dc", (getter)BatterySystem_get_batt_ac_or_dc,(setter)BatterySystem_set_batt_ac_or_dc,
-	PyDoc_STR("*float*: Battery interconnection (AC or DC)\n\n*Options*: 0=DC_Connected,1=AC_Connected\n\n*Changes to this variable may require updating the values of the following*: \n\t - LeadAcid_q10_computed\n\t - LeadAcid_q20_computed\n\t - LeadAcid_qn_computed\n\t - batt_Qexp\n\t - batt_Qfull_flow\n\t - batt_Qnom\n\t - batt_computed_bank_capacity\n\t - batt_computed_series\n\t - batt_computed_strings\n\t - batt_current_charge_max\n\t - batt_current_discharge_max\n\t - batt_height\n\t - batt_length\n\t - batt_mass\n\t - batt_power_charge_max_kwac\n\t - batt_power_charge_max_kwdc\n\t - batt_power_discharge_max_kwac\n\t - batt_power_discharge_max_kwdc\n\t - batt_width\n"),
+	PyDoc_STR("*float*: Battery interconnection (AC or DC)\n\n*Options*: 0=DC_Connected,1=AC_Connected\n\n*Changes to this variable may require updating the values of the following*: \n\t - LeadAcid_q10_computed\n\t - LeadAcid_q20_computed\n\t - LeadAcid_qn_computed\n\t - batt_Qexp\n\t - batt_Qfull_flow\n\t - batt_Qnom\n\t - batt_computed_bank_capacity\n\t - batt_computed_series\n\t - batt_computed_strings\n\t - batt_current_charge_max\n\t - batt_current_discharge_max\n\t - batt_mass\n\t - batt_power_charge_max_kwac\n\t - batt_power_charge_max_kwdc\n\t - batt_power_discharge_max_kwac\n\t - batt_power_discharge_max_kwdc\n\t - batt_surface_area\n"),
  	NULL},
 {"batt_computed_bank_capacity", (getter)BatterySystem_get_batt_computed_bank_capacity,(setter)BatterySystem_set_batt_computed_bank_capacity,
-	PyDoc_STR("*float*: Computed bank capacity [kWh]\n\n*Changes to this variable may require updating the values of the following*: \n\t - batt_Qexp\n\t - batt_Qfull_flow\n\t - batt_Qnom\n\t - batt_height\n\t - batt_length\n\t - batt_mass\n\t - batt_width\n\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - batt_Qfull\n\t - batt_Vnom_default\n\t - batt_ac_or_dc\n\t - batt_chem\n\t - batt_current_choice\n\t - batt_dc_ac_efficiency\n\t - batt_dc_dc_efficiency\n"),
+	PyDoc_STR("*float*: Computed bank capacity [kWh]\n\n*Changes to this variable may require updating the values of the following*: \n\t - batt_Qexp\n\t - batt_Qfull_flow\n\t - batt_Qnom\n\t - batt_mass\n\t - batt_surface_area\n\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - batt_Qfull\n\t - batt_Vnom_default\n\t - batt_ac_or_dc\n\t - batt_chem\n\t - batt_current_choice\n\t - batt_dc_ac_efficiency\n\t - batt_dc_dc_efficiency\n"),
  	NULL},
 {"batt_computed_series", (getter)BatterySystem_get_batt_computed_series,(setter)BatterySystem_set_batt_computed_series,
 	PyDoc_STR("*float*: Number of cells in series\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - batt_Qfull\n\t - batt_Vnom_default\n\t - batt_ac_or_dc\n\t - batt_chem\n\t - batt_current_choice\n\t - batt_dc_ac_efficiency\n\t - batt_dc_dc_efficiency\n"),
@@ -725,7 +701,7 @@ static PyGetSetDef BatterySystem_getset[] = {
 	PyDoc_STR("*float*: Maximum charge current [A]\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - batt_Qfull\n\t - batt_Vnom_default\n\t - batt_ac_or_dc\n\t - batt_chem\n\t - batt_current_choice\n\t - batt_dc_ac_efficiency\n\t - batt_dc_dc_efficiency\n"),
  	NULL},
 {"batt_current_choice", (getter)BatterySystem_get_batt_current_choice,(setter)BatterySystem_set_batt_current_choice,
-	PyDoc_STR("*float*: Limit cells by current or power\n\n*Changes to this variable may require updating the values of the following*: \n\t - LeadAcid_q10_computed\n\t - LeadAcid_q20_computed\n\t - LeadAcid_qn_computed\n\t - batt_Qexp\n\t - batt_Qfull_flow\n\t - batt_Qnom\n\t - batt_computed_bank_capacity\n\t - batt_computed_series\n\t - batt_computed_strings\n\t - batt_current_charge_max\n\t - batt_current_discharge_max\n\t - batt_height\n\t - batt_length\n\t - batt_mass\n\t - batt_power_charge_max_kwac\n\t - batt_power_charge_max_kwdc\n\t - batt_power_discharge_max_kwac\n\t - batt_power_discharge_max_kwdc\n\t - batt_width\n"),
+	PyDoc_STR("*float*: Limit cells by current or power\n\n*Changes to this variable may require updating the values of the following*: \n\t - LeadAcid_q10_computed\n\t - LeadAcid_q20_computed\n\t - LeadAcid_qn_computed\n\t - batt_Qexp\n\t - batt_Qfull_flow\n\t - batt_Qnom\n\t - batt_computed_bank_capacity\n\t - batt_computed_series\n\t - batt_computed_strings\n\t - batt_current_charge_max\n\t - batt_current_discharge_max\n\t - batt_mass\n\t - batt_power_charge_max_kwac\n\t - batt_power_charge_max_kwdc\n\t - batt_power_discharge_max_kwac\n\t - batt_power_discharge_max_kwdc\n\t - batt_surface_area\n"),
  	NULL},
 {"batt_current_discharge_max", (getter)BatterySystem_get_batt_current_discharge_max,(setter)BatterySystem_set_batt_current_discharge_max,
 	PyDoc_STR("*float*: Maximum discharge current [A]\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - batt_Qfull\n\t - batt_Vnom_default\n\t - batt_ac_or_dc\n\t - batt_chem\n\t - batt_current_choice\n\t - batt_dc_ac_efficiency\n\t - batt_dc_dc_efficiency\n"),
@@ -737,19 +713,13 @@ static PyGetSetDef BatterySystem_getset[] = {
 	PyDoc_STR("*float*: Use SAM model for cycle costs or input custom [0/1]\n\n*Options*: 0=UseCostModel,1=InputCost"),
  	NULL},
 {"batt_dc_ac_efficiency", (getter)BatterySystem_get_batt_dc_ac_efficiency,(setter)BatterySystem_set_batt_dc_ac_efficiency,
-	PyDoc_STR("*float*: Battery DC to AC efficiency\n\n*Changes to this variable may require updating the values of the following*: \n\t - LeadAcid_q10_computed\n\t - LeadAcid_q20_computed\n\t - LeadAcid_qn_computed\n\t - batt_Qexp\n\t - batt_Qfull_flow\n\t - batt_Qnom\n\t - batt_computed_bank_capacity\n\t - batt_computed_series\n\t - batt_computed_strings\n\t - batt_current_charge_max\n\t - batt_current_discharge_max\n\t - batt_height\n\t - batt_length\n\t - batt_mass\n\t - batt_power_charge_max_kwac\n\t - batt_power_charge_max_kwdc\n\t - batt_power_discharge_max_kwac\n\t - batt_power_discharge_max_kwdc\n\t - batt_width\n"),
+	PyDoc_STR("*float*: Battery DC to AC efficiency\n\n*Changes to this variable may require updating the values of the following*: \n\t - LeadAcid_q10_computed\n\t - LeadAcid_q20_computed\n\t - LeadAcid_qn_computed\n\t - batt_Qexp\n\t - batt_Qfull_flow\n\t - batt_Qnom\n\t - batt_computed_bank_capacity\n\t - batt_computed_series\n\t - batt_computed_strings\n\t - batt_current_charge_max\n\t - batt_current_discharge_max\n\t - batt_mass\n\t - batt_power_charge_max_kwac\n\t - batt_power_charge_max_kwdc\n\t - batt_power_discharge_max_kwac\n\t - batt_power_discharge_max_kwdc\n\t - batt_surface_area\n"),
  	NULL},
 {"batt_dc_dc_efficiency", (getter)BatterySystem_get_batt_dc_dc_efficiency,(setter)BatterySystem_set_batt_dc_dc_efficiency,
-	PyDoc_STR("*float*: PV DC to battery DC efficiency\n\n*Changes to this variable may require updating the values of the following*: \n\t - LeadAcid_q10_computed\n\t - LeadAcid_q20_computed\n\t - LeadAcid_qn_computed\n\t - batt_Qexp\n\t - batt_Qfull_flow\n\t - batt_Qnom\n\t - batt_computed_bank_capacity\n\t - batt_computed_series\n\t - batt_computed_strings\n\t - batt_current_charge_max\n\t - batt_current_discharge_max\n\t - batt_height\n\t - batt_length\n\t - batt_mass\n\t - batt_power_charge_max_kwac\n\t - batt_power_charge_max_kwdc\n\t - batt_power_discharge_max_kwac\n\t - batt_power_discharge_max_kwdc\n\t - batt_width\n"),
- 	NULL},
-{"batt_height", (getter)BatterySystem_get_batt_height,(setter)BatterySystem_set_batt_height,
-	PyDoc_STR("*float*: Battery height [m]\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - batt_Qfull\n\t - batt_Vnom_default\n\t - batt_ac_or_dc\n\t - batt_chem\n\t - batt_computed_bank_capacity\n\t - batt_current_choice\n\t - batt_dc_ac_efficiency\n\t - batt_dc_dc_efficiency\n"),
+	PyDoc_STR("*float*: PV DC to battery DC efficiency\n\n*Changes to this variable may require updating the values of the following*: \n\t - LeadAcid_q10_computed\n\t - LeadAcid_q20_computed\n\t - LeadAcid_qn_computed\n\t - batt_Qexp\n\t - batt_Qfull_flow\n\t - batt_Qnom\n\t - batt_computed_bank_capacity\n\t - batt_computed_series\n\t - batt_computed_strings\n\t - batt_current_charge_max\n\t - batt_current_discharge_max\n\t - batt_mass\n\t - batt_power_charge_max_kwac\n\t - batt_power_charge_max_kwdc\n\t - batt_power_discharge_max_kwac\n\t - batt_power_discharge_max_kwdc\n\t - batt_surface_area\n"),
  	NULL},
 {"batt_inverter_efficiency_cutoff", (getter)BatterySystem_get_batt_inverter_efficiency_cutoff,(setter)BatterySystem_set_batt_inverter_efficiency_cutoff,
 	PyDoc_STR("*float*: Inverter efficiency at which to cut battery charge or discharge off [%]"),
- 	NULL},
-{"batt_length", (getter)BatterySystem_get_batt_length,(setter)BatterySystem_set_batt_length,
-	PyDoc_STR("*float*: Battery length [m]\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - batt_Qfull\n\t - batt_Vnom_default\n\t - batt_ac_or_dc\n\t - batt_chem\n\t - batt_computed_bank_capacity\n\t - batt_current_choice\n\t - batt_dc_ac_efficiency\n\t - batt_dc_dc_efficiency\n"),
  	NULL},
 {"batt_loss_choice", (getter)BatterySystem_get_batt_loss_choice,(setter)BatterySystem_set_batt_loss_choice,
 	PyDoc_STR("*float*: Loss power input option [0/1]\n\n*Options*: 0=Monthly,1=TimeSeries\n\n*Required*: If not provided, assumed to be 0"),
@@ -791,13 +761,13 @@ static PyGetSetDef BatterySystem_getset[] = {
 	PyDoc_STR("*float*: Enable battery replacement? [0=none,1=capacity based,2=user schedule]\n\n*Constraints*: INTEGER,MIN=0,MAX=2\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"batt_replacement_schedule", (getter)BatterySystem_get_batt_replacement_schedule,(setter)BatterySystem_set_batt_replacement_schedule,
-	PyDoc_STR("*sequence*: Battery bank replacements per year (user specified) [number/year]\n\n*Required*: True if batt_replacement_option=2"),
+	PyDoc_STR("*sequence*: Battery bank number of replacements in each year [number/year]\n\n*Options*: length <= analysis_period\n\n*Required*: True if batt_replacement_option=2"),
  	NULL},
 {"batt_replacement_schedule_percent", (getter)BatterySystem_get_batt_replacement_schedule_percent,(setter)BatterySystem_set_batt_replacement_schedule_percent,
-	PyDoc_STR("*sequence*: Percentage of battery capacity to replace in year [%]\n\n*Required*: True if batt_replacement_option=2"),
+	PyDoc_STR("*sequence*: Percentage of battery capacity to replace in each year [%]\n\n*Options*: length <= analysis_period\n\n*Required*: True if batt_replacement_option=2"),
  	NULL},
-{"batt_width", (getter)BatterySystem_get_batt_width,(setter)BatterySystem_set_batt_width,
-	PyDoc_STR("*float*: Battery width [m]\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - batt_Qfull\n\t - batt_Vnom_default\n\t - batt_ac_or_dc\n\t - batt_chem\n\t - batt_computed_bank_capacity\n\t - batt_current_choice\n\t - batt_dc_ac_efficiency\n\t - batt_dc_dc_efficiency\n"),
+{"batt_surface_area", (getter)BatterySystem_get_batt_surface_area,(setter)BatterySystem_set_batt_surface_area,
+	PyDoc_STR("*float*: Battery surface area [m^2]\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - batt_Qfull\n\t - batt_Vnom_default\n\t - batt_ac_or_dc\n\t - batt_chem\n\t - batt_computed_bank_capacity\n\t - batt_current_choice\n\t - batt_dc_ac_efficiency\n\t - batt_dc_dc_efficiency\n"),
  	NULL},
 {"en_batt", (getter)BatterySystem_get_en_batt,(setter)BatterySystem_set_en_batt,
 	PyDoc_STR("*float*: Enable battery storage model [0/1]\n\n*Required*: If not provided, assumed to be 0"),
@@ -1595,7 +1565,7 @@ static PyGetSetDef BatteryCell_getset[] = {
 	PyDoc_STR("*float*: Cell capacity at end of exponential zone [Ah]\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - batt_Qfull\n\t - batt_Vnom_default\n\t - batt_ac_or_dc\n\t - batt_chem\n\t - batt_computed_bank_capacity\n\t - batt_current_choice\n\t - batt_dc_ac_efficiency\n\t - batt_dc_dc_efficiency\n"),
  	NULL},
 {"batt_Qfull", (getter)BatteryCell_get_batt_Qfull,(setter)BatteryCell_set_batt_Qfull,
-	PyDoc_STR("*float*: Fully charged cell capacity [Ah]\n\n*Changes to this variable may require updating the values of the following*: \n\t - LeadAcid_q10_computed\n\t - LeadAcid_q20_computed\n\t - LeadAcid_qn_computed\n\t - batt_Qexp\n\t - batt_Qfull_flow\n\t - batt_Qnom\n\t - batt_computed_bank_capacity\n\t - batt_computed_series\n\t - batt_computed_strings\n\t - batt_current_charge_max\n\t - batt_current_discharge_max\n\t - batt_height\n\t - batt_length\n\t - batt_mass\n\t - batt_power_charge_max_kwac\n\t - batt_power_charge_max_kwdc\n\t - batt_power_discharge_max_kwac\n\t - batt_power_discharge_max_kwdc\n\t - batt_width\n"),
+	PyDoc_STR("*float*: Fully charged cell capacity [Ah]\n\n*Changes to this variable may require updating the values of the following*: \n\t - LeadAcid_q10_computed\n\t - LeadAcid_q20_computed\n\t - LeadAcid_qn_computed\n\t - batt_Qexp\n\t - batt_Qfull_flow\n\t - batt_Qnom\n\t - batt_computed_bank_capacity\n\t - batt_computed_series\n\t - batt_computed_strings\n\t - batt_current_charge_max\n\t - batt_current_discharge_max\n\t - batt_mass\n\t - batt_power_charge_max_kwac\n\t - batt_power_charge_max_kwdc\n\t - batt_power_discharge_max_kwac\n\t - batt_power_discharge_max_kwdc\n\t - batt_surface_area\n"),
  	NULL},
 {"batt_Qfull_flow", (getter)BatteryCell_get_batt_Qfull_flow,(setter)BatteryCell_set_batt_Qfull_flow,
 	PyDoc_STR("*float*: Fully charged flow battery capacity [Ah]\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - batt_Qfull\n\t - batt_Vnom_default\n\t - batt_ac_or_dc\n\t - batt_chem\n\t - batt_computed_bank_capacity\n\t - batt_current_choice\n\t - batt_dc_ac_efficiency\n\t - batt_dc_dc_efficiency\n"),
@@ -1613,7 +1583,7 @@ static PyGetSetDef BatteryCell_getset[] = {
 	PyDoc_STR("*float*: Cell voltage at end of nominal zone [V]"),
  	NULL},
 {"batt_Vnom_default", (getter)BatteryCell_get_batt_Vnom_default,(setter)BatteryCell_set_batt_Vnom_default,
-	PyDoc_STR("*float*: Default nominal cell voltage [V]\n\n*Changes to this variable may require updating the values of the following*: \n\t - LeadAcid_q10_computed\n\t - LeadAcid_q20_computed\n\t - LeadAcid_qn_computed\n\t - batt_Qexp\n\t - batt_Qfull_flow\n\t - batt_Qnom\n\t - batt_computed_bank_capacity\n\t - batt_computed_series\n\t - batt_computed_strings\n\t - batt_current_charge_max\n\t - batt_current_discharge_max\n\t - batt_height\n\t - batt_length\n\t - batt_mass\n\t - batt_power_charge_max_kwac\n\t - batt_power_charge_max_kwdc\n\t - batt_power_discharge_max_kwac\n\t - batt_power_discharge_max_kwdc\n\t - batt_width\n"),
+	PyDoc_STR("*float*: Default nominal cell voltage [V]\n\n*Changes to this variable may require updating the values of the following*: \n\t - LeadAcid_q10_computed\n\t - LeadAcid_q20_computed\n\t - LeadAcid_qn_computed\n\t - batt_Qexp\n\t - batt_Qfull_flow\n\t - batt_Qnom\n\t - batt_computed_bank_capacity\n\t - batt_computed_series\n\t - batt_computed_strings\n\t - batt_current_charge_max\n\t - batt_current_discharge_max\n\t - batt_mass\n\t - batt_power_charge_max_kwac\n\t - batt_power_charge_max_kwdc\n\t - batt_power_discharge_max_kwac\n\t - batt_power_discharge_max_kwdc\n\t - batt_surface_area\n"),
  	NULL},
 {"batt_calendar_a", (getter)BatteryCell_get_batt_calendar_a,(setter)BatteryCell_set_batt_calendar_a,
 	PyDoc_STR("*float*: Calendar life model coefficient [1/sqrt(day)]"),
@@ -1634,7 +1604,7 @@ static PyGetSetDef BatteryCell_getset[] = {
 	PyDoc_STR("*float*: Calendar life model initial capacity cofficient"),
  	NULL},
 {"batt_chem", (getter)BatteryCell_get_batt_chem,(setter)BatteryCell_set_batt_chem,
-	PyDoc_STR("*float*: Battery chemistry\n\n*Options*: 0=LeadAcid,1=LiIon\n\n*Changes to this variable may require updating the values of the following*: \n\t - LeadAcid_q10_computed\n\t - LeadAcid_q20_computed\n\t - LeadAcid_qn_computed\n\t - batt_Qexp\n\t - batt_Qfull_flow\n\t - batt_Qnom\n\t - batt_computed_bank_capacity\n\t - batt_computed_series\n\t - batt_computed_strings\n\t - batt_current_charge_max\n\t - batt_current_discharge_max\n\t - batt_height\n\t - batt_length\n\t - batt_mass\n\t - batt_power_charge_max_kwac\n\t - batt_power_charge_max_kwdc\n\t - batt_power_discharge_max_kwac\n\t - batt_power_discharge_max_kwdc\n\t - batt_width\n"),
+	PyDoc_STR("*float*: Battery chemistry\n\n*Options*: 0=LeadAcid,1=LiIon\n\n*Changes to this variable may require updating the values of the following*: \n\t - LeadAcid_q10_computed\n\t - LeadAcid_q20_computed\n\t - LeadAcid_qn_computed\n\t - batt_Qexp\n\t - batt_Qfull_flow\n\t - batt_Qnom\n\t - batt_computed_bank_capacity\n\t - batt_computed_series\n\t - batt_computed_strings\n\t - batt_current_charge_max\n\t - batt_current_discharge_max\n\t - batt_mass\n\t - batt_power_charge_max_kwac\n\t - batt_power_charge_max_kwdc\n\t - batt_power_discharge_max_kwac\n\t - batt_power_discharge_max_kwdc\n\t - batt_surface_area\n"),
  	NULL},
 {"batt_h_to_ambient", (getter)BatteryCell_get_batt_h_to_ambient,(setter)BatteryCell_set_batt_h_to_ambient,
 	PyDoc_STR("*float*: Heat transfer between battery and environment [W/m2K]"),
@@ -1893,25 +1863,25 @@ Inverter_set_inverter_model(VarGroupObject *self, PyObject *value, void *closure
 
 static PyGetSetDef Inverter_getset[] = {
 {"inv_cec_cg_eff_cec", (getter)Inverter_get_inv_cec_cg_eff_cec,(setter)Inverter_set_inv_cec_cg_eff_cec,
-	PyDoc_STR("*float*: Inverter Coefficient Generator CEC Efficiency [%]\n\n*Changes to this variable may require updating the values of the following*: \n\t - LeadAcid_q10_computed\n\t - LeadAcid_q20_computed\n\t - LeadAcid_qn_computed\n\t - batt_Qexp\n\t - batt_Qfull_flow\n\t - batt_Qnom\n\t - batt_computed_bank_capacity\n\t - batt_computed_series\n\t - batt_computed_strings\n\t - batt_current_charge_max\n\t - batt_current_discharge_max\n\t - batt_height\n\t - batt_length\n\t - batt_mass\n\t - batt_power_charge_max_kwac\n\t - batt_power_charge_max_kwdc\n\t - batt_power_discharge_max_kwac\n\t - batt_power_discharge_max_kwdc\n\t - batt_width\n"),
+	PyDoc_STR("*float*: Inverter Coefficient Generator CEC Efficiency [%]\n\n*Changes to this variable may require updating the values of the following*: \n\t - LeadAcid_q10_computed\n\t - LeadAcid_q20_computed\n\t - LeadAcid_qn_computed\n\t - batt_Qexp\n\t - batt_Qfull_flow\n\t - batt_Qnom\n\t - batt_computed_bank_capacity\n\t - batt_computed_series\n\t - batt_computed_strings\n\t - batt_current_charge_max\n\t - batt_current_discharge_max\n\t - batt_mass\n\t - batt_power_charge_max_kwac\n\t - batt_power_charge_max_kwdc\n\t - batt_power_discharge_max_kwac\n\t - batt_power_discharge_max_kwdc\n\t - batt_surface_area\n"),
  	NULL},
 {"inv_cec_cg_paco", (getter)Inverter_get_inv_cec_cg_paco,(setter)Inverter_set_inv_cec_cg_paco,
 	PyDoc_STR("*float*: Inverter Coefficient Generator Max AC Power [Wac]"),
  	NULL},
 {"inv_ds_eff", (getter)Inverter_get_inv_ds_eff,(setter)Inverter_set_inv_ds_eff,
-	PyDoc_STR("*float*: Inverter Datasheet Efficiency [%]\n\n*Changes to this variable may require updating the values of the following*: \n\t - LeadAcid_q10_computed\n\t - LeadAcid_q20_computed\n\t - LeadAcid_qn_computed\n\t - batt_Qexp\n\t - batt_Qfull_flow\n\t - batt_Qnom\n\t - batt_computed_bank_capacity\n\t - batt_computed_series\n\t - batt_computed_strings\n\t - batt_current_charge_max\n\t - batt_current_discharge_max\n\t - batt_height\n\t - batt_length\n\t - batt_mass\n\t - batt_power_charge_max_kwac\n\t - batt_power_charge_max_kwdc\n\t - batt_power_discharge_max_kwac\n\t - batt_power_discharge_max_kwdc\n\t - batt_width\n"),
+	PyDoc_STR("*float*: Inverter Datasheet Efficiency [%]\n\n*Changes to this variable may require updating the values of the following*: \n\t - LeadAcid_q10_computed\n\t - LeadAcid_q20_computed\n\t - LeadAcid_qn_computed\n\t - batt_Qexp\n\t - batt_Qfull_flow\n\t - batt_Qnom\n\t - batt_computed_bank_capacity\n\t - batt_computed_series\n\t - batt_computed_strings\n\t - batt_current_charge_max\n\t - batt_current_discharge_max\n\t - batt_mass\n\t - batt_power_charge_max_kwac\n\t - batt_power_charge_max_kwdc\n\t - batt_power_discharge_max_kwac\n\t - batt_power_discharge_max_kwdc\n\t - batt_surface_area\n"),
  	NULL},
 {"inv_ds_paco", (getter)Inverter_get_inv_ds_paco,(setter)Inverter_set_inv_ds_paco,
 	PyDoc_STR("*float*: Inverter Datasheet Maximum AC Power [Wac]"),
  	NULL},
 {"inv_pd_eff", (getter)Inverter_get_inv_pd_eff,(setter)Inverter_set_inv_pd_eff,
-	PyDoc_STR("*float*: Inverter Partload Efficiency [%]\n\n*Changes to this variable may require updating the values of the following*: \n\t - LeadAcid_q10_computed\n\t - LeadAcid_q20_computed\n\t - LeadAcid_qn_computed\n\t - batt_Qexp\n\t - batt_Qfull_flow\n\t - batt_Qnom\n\t - batt_computed_bank_capacity\n\t - batt_computed_series\n\t - batt_computed_strings\n\t - batt_current_charge_max\n\t - batt_current_discharge_max\n\t - batt_height\n\t - batt_length\n\t - batt_mass\n\t - batt_power_charge_max_kwac\n\t - batt_power_charge_max_kwdc\n\t - batt_power_discharge_max_kwac\n\t - batt_power_discharge_max_kwdc\n\t - batt_width\n"),
+	PyDoc_STR("*float*: Inverter Partload Efficiency [%]\n\n*Changes to this variable may require updating the values of the following*: \n\t - LeadAcid_q10_computed\n\t - LeadAcid_q20_computed\n\t - LeadAcid_qn_computed\n\t - batt_Qexp\n\t - batt_Qfull_flow\n\t - batt_Qnom\n\t - batt_computed_bank_capacity\n\t - batt_computed_series\n\t - batt_computed_strings\n\t - batt_current_charge_max\n\t - batt_current_discharge_max\n\t - batt_mass\n\t - batt_power_charge_max_kwac\n\t - batt_power_charge_max_kwdc\n\t - batt_power_discharge_max_kwac\n\t - batt_power_discharge_max_kwdc\n\t - batt_surface_area\n"),
  	NULL},
 {"inv_pd_paco", (getter)Inverter_get_inv_pd_paco,(setter)Inverter_set_inv_pd_paco,
 	PyDoc_STR("*float*: Inverter Partload Maximum AC Power [Wac]"),
  	NULL},
 {"inv_snl_eff_cec", (getter)Inverter_get_inv_snl_eff_cec,(setter)Inverter_set_inv_snl_eff_cec,
-	PyDoc_STR("*float*: Inverter Sandia CEC Efficiency [%]\n\n*Changes to this variable may require updating the values of the following*: \n\t - LeadAcid_q10_computed\n\t - LeadAcid_q20_computed\n\t - LeadAcid_qn_computed\n\t - batt_Qexp\n\t - batt_Qfull_flow\n\t - batt_Qnom\n\t - batt_computed_bank_capacity\n\t - batt_computed_series\n\t - batt_computed_strings\n\t - batt_current_charge_max\n\t - batt_current_discharge_max\n\t - batt_height\n\t - batt_length\n\t - batt_mass\n\t - batt_power_charge_max_kwac\n\t - batt_power_charge_max_kwdc\n\t - batt_power_discharge_max_kwac\n\t - batt_power_discharge_max_kwdc\n\t - batt_width\n"),
+	PyDoc_STR("*float*: Inverter Sandia CEC Efficiency [%]\n\n*Changes to this variable may require updating the values of the following*: \n\t - LeadAcid_q10_computed\n\t - LeadAcid_q20_computed\n\t - LeadAcid_qn_computed\n\t - batt_Qexp\n\t - batt_Qfull_flow\n\t - batt_Qnom\n\t - batt_computed_bank_capacity\n\t - batt_computed_series\n\t - batt_computed_strings\n\t - batt_current_charge_max\n\t - batt_current_discharge_max\n\t - batt_mass\n\t - batt_power_charge_max_kwac\n\t - batt_power_charge_max_kwdc\n\t - batt_power_discharge_max_kwac\n\t - batt_power_discharge_max_kwdc\n\t - batt_surface_area\n"),
  	NULL},
 {"inv_snl_paco", (getter)Inverter_get_inv_snl_paco,(setter)Inverter_set_inv_snl_paco,
 	PyDoc_STR("*float*: Inverter Sandia Maximum AC Power [Wac]"),
@@ -1920,7 +1890,7 @@ static PyGetSetDef Inverter_getset[] = {
 	PyDoc_STR("*float*: Number of inverters"),
  	NULL},
 {"inverter_model", (getter)Inverter_get_inverter_model,(setter)Inverter_set_inverter_model,
-	PyDoc_STR("*float*: Inverter model specifier\n\n*Options*: 0=cec,1=datasheet,2=partload,3=coefficientgenerator,4=generic\n\n*Constraints*: INTEGER,MIN=0,MAX=4\n\n*Required*: If not provided, assumed to be 4\n\n*Changes to this variable may require updating the values of the following*: \n\t - LeadAcid_q10_computed\n\t - LeadAcid_q20_computed\n\t - LeadAcid_qn_computed\n\t - batt_Qexp\n\t - batt_Qfull_flow\n\t - batt_Qnom\n\t - batt_computed_bank_capacity\n\t - batt_computed_series\n\t - batt_computed_strings\n\t - batt_current_charge_max\n\t - batt_current_discharge_max\n\t - batt_height\n\t - batt_length\n\t - batt_mass\n\t - batt_power_charge_max_kwac\n\t - batt_power_charge_max_kwdc\n\t - batt_power_discharge_max_kwac\n\t - batt_power_discharge_max_kwdc\n\t - batt_width\n"),
+	PyDoc_STR("*float*: Inverter model specifier\n\n*Options*: 0=cec,1=datasheet,2=partload,3=coefficientgenerator,4=generic\n\n*Constraints*: INTEGER,MIN=0,MAX=4\n\n*Required*: If not provided, assumed to be 4\n\n*Changes to this variable may require updating the values of the following*: \n\t - LeadAcid_q10_computed\n\t - LeadAcid_q20_computed\n\t - LeadAcid_qn_computed\n\t - batt_Qexp\n\t - batt_Qfull_flow\n\t - batt_Qnom\n\t - batt_computed_bank_capacity\n\t - batt_computed_series\n\t - batt_computed_strings\n\t - batt_current_charge_max\n\t - batt_current_discharge_max\n\t - batt_mass\n\t - batt_power_charge_max_kwac\n\t - batt_power_charge_max_kwdc\n\t - batt_power_discharge_max_kwac\n\t - batt_power_discharge_max_kwdc\n\t - batt_surface_area\n"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -3918,7 +3888,7 @@ newStandAloneBatteryObject(void* data_ptr)
 	CmodObject *self;
 	self = PyObject_New(CmodObject, &StandAloneBattery_Type);
 
-	PySAM_TECH_ATTR("StandAloneBattery", SAM_Battery_construct)
+	PySAM_TECH_ATTR()
 
 	PyObject* Simulation_obj = Simulation_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Simulation", Simulation_obj);
@@ -3972,7 +3942,6 @@ newStandAloneBatteryObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
 	Py_DECREF(Outputs_obj);
 
-
 	return self;
 }
 
@@ -3982,8 +3951,12 @@ static void
 StandAloneBattery_dealloc(CmodObject *self)
 {
 	Py_XDECREF(self->x_attr);
-	if (!self->data_owner_ptr)
-		SAM_Battery_destruct(self->data_ptr);
+
+	if (!self->data_owner_ptr) {
+		SAM_error error = new_error();
+		SAM_table_destruct(self->data_ptr, &error);
+		PySAM_has_error(error);
+	}
 	PyObject_Del(self);
 }
 
@@ -3999,7 +3972,6 @@ StandAloneBattery_execute(CmodObject *self, PyObject *args)
 	SAM_error error = new_error();
 	SAM_Battery_execute(self->data_ptr, verbosity, &error);
 	if (PySAM_has_error(error )) return NULL;
-
 	Py_INCREF(Py_None);
 	return Py_None;
 }
@@ -4030,7 +4002,7 @@ StandAloneBattery_export(CmodObject *self, PyObject *args)
 static PyObject *
 StandAloneBattery_value(CmodObject *self, PyObject *args)
 {
-	return CmodObject_value(self, args);
+	return Cmod_value(self, args);
 }
 
 static PyMethodDef StandAloneBattery_methods[] = {
@@ -4199,7 +4171,7 @@ static PyMethodDef StandAloneBatteryModule_methods[] = {
 				PyDoc_STR("new() -> StandAloneBattery")},
 		{"default",             StandAloneBattery_default,         METH_VARARGS,
 				PyDoc_STR("default(config) -> StandAloneBattery\n\nUse financial config-specific default attributes\n"
-				"config options:\n\n- \"BatteryNone\"\n- \"FuelCellCommercial\"\n- \"FuelCellSingleOwner\"\n- \"GenericSystemAllEquityPartnershipFlip\"\n- \"GenericSystemCommercial\"\n- \"GenericSystemCommercialPPA\"\n- \"GenericSystemHostDeveloper\"\n- \"GenericSystemIndependentPowerProducer\"\n- \"GenericSystemLeveragedPartnershipFlip\"\n- \"GenericSystemMerchantPlant\"\n- \"GenericSystemResidential\"\n- \"GenericSystemSaleLeaseback\"\n- \"GenericSystemSingleOwner\"\n- \"GenericSystemThirdParty\"")},
+				"config options:\n\n- \"FuelCellCommercial\"\n- \"FuelCellSingleOwner\"\n- \"GenericBatteryAllEquityPartnershipFlip\"\n- \"GenericBatteryCommercial\"\n- \"GenericBatteryHostDeveloper\"\n- \"GenericBatteryLeveragedPartnershipFlip\"\n- \"GenericBatteryMerchantPlant\"\n- \"GenericBatteryResidential\"\n- \"GenericBatterySaleLeaseback\"\n- \"GenericBatterySingleOwner\"\n- \"GenericBatteryThirdParty\"")},
 		{"wrap",             StandAloneBattery_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> StandAloneBattery\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   StandAloneBattery_from_existing,        METH_VARARGS,
@@ -4218,7 +4190,6 @@ StandAloneBatteryModule_exec(PyObject *m)
 	 * object; doing it here is required for portability, too. */
 
 	if (PySAM_load_lib(m) < 0) goto fail;
-	if (PySAM_init_error(m) < 0) goto fail;
 
 	StandAloneBattery_Type.tp_dict = PyDict_New();
 	if (!StandAloneBattery_Type.tp_dict) { goto fail; }

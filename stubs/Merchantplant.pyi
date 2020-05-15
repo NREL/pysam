@@ -302,11 +302,13 @@ class Revenue(object):
 	mp_ancserv1_revenue = tuple
 	mp_ancserv2_revenue = tuple
 	mp_ancserv3_revenue = tuple
+	mp_ancserv4_revenue = tuple
 	mp_enable_ancserv1 = float
 	mp_enable_ancserv2 = float
 	mp_enable_ancserv3 = float
 	mp_enable_ancserv4 = float
 	mp_enable_energy_market_revenue = float
+	mp_energy_market_revenue = tuple
 
 
 class BatterySystem(object):
@@ -374,21 +376,6 @@ class Lifetime(object):
 
 
 	system_use_lifetime_output = float
-
-
-class Market(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> Dict[Dict]
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	mp_ancserv4_revenue = tuple
-	mp_energy_market_revenue = tuple
 
 
 class FuelCell(object):
@@ -968,7 +955,6 @@ class Merchantplant(object):
 	SystemOutput = SystemOutput
 	UtilityBill = UtilityBill
 	Lifetime = Lifetime
-	Market = Market
 	FuelCell = FuelCell
 	CapacityPayments = CapacityPayments
 	GridLimits = GridLimits

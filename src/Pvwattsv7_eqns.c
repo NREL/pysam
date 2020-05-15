@@ -1,8 +1,4 @@
-typedef struct {
-    PyObject_HEAD
-    PyObject            *x_attr;        /* Attributes dictionary */
-    SAM_table   data_ptr;
-} PVObject;
+#include "SAM_eqns.h"
 
 char Reopt_size_battery_post_doc[] =
         "Given a PV system with Utilityrate5 parameters, get the optimal battery size. Wind and additional PV are disabled.\n"

@@ -83,6 +83,18 @@ Weather_set_file_name(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyObject *
+Weather_get_solar_resource_data(VarGroupObject *self, void *closure)
+{
+	return PySAM_table_getter(SAM_TroughPhysicalProcessHeat_Weather_solar_resource_data_tget, self->data_ptr);
+}
+
+static int
+Weather_set_solar_resource_data(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_table_setter(value, SAM_TroughPhysicalProcessHeat_Weather_solar_resource_data_tset, self->data_ptr);
+}
+
+static PyObject *
 Weather_get_tilt(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_Weather_tilt_nget, self->data_ptr);
@@ -112,6 +124,9 @@ static PyGetSetDef Weather_getset[] = {
  	NULL},
 {"file_name", (getter)Weather_get_file_name,(setter)Weather_set_file_name,
 	PyDoc_STR("*str*: Local weather file with path [none]\n\n*Constraints*: LOCAL_FILE\n\n*Required*: True"),
+ 	NULL},
+{"solar_resource_data", (getter)Weather_get_solar_resource_data,(setter)Weather_set_solar_resource_data,
+	PyDoc_STR("*dict*: Weather resource data in memory\n\n*Required*: False"),
  	NULL},
 {"tilt", (getter)Weather_get_tilt,(setter)Weather_set_tilt,
 	PyDoc_STR("*float*: Tilt angle of surface/axis [none]\n\n*Required*: True"),
@@ -1965,6 +1980,18 @@ Controller_set_q_pb_design(VarGroupObject *self, PyObject *value, void *closure)
 	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_Controller_q_pb_design_nset, self->data_ptr);
 }
 
+static PyObject *
+Controller_get_tanks_in_parallel(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_Controller_tanks_in_parallel_nget, self->data_ptr);
+}
+
+static int
+Controller_set_tanks_in_parallel(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_Controller_tanks_in_parallel_nset, self->data_ptr);
+}
+
 static PyGetSetDef Controller_getset[] = {
 {"field_fl_props", (getter)Controller_get_field_fl_props,(setter)Controller_set_field_fl_props,
 	PyDoc_STR("*sequence[sequence]*: User defined field fluid property data [-]\n\n*Required*: True"),
@@ -1974,6 +2001,9 @@ static PyGetSetDef Controller_getset[] = {
  	NULL},
 {"q_pb_design", (getter)Controller_get_q_pb_design,(setter)Controller_set_q_pb_design,
 	PyDoc_STR("*float*: Design heat input to power block [MWt]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - nLoops\n\t - solar_mult\n"),
+ 	NULL},
+{"tanks_in_parallel", (getter)Controller_get_tanks_in_parallel,(setter)Controller_set_tanks_in_parallel,
+	PyDoc_STR("*float*: Tanks are in parallel, not in series, with solar field [-]\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -2933,6 +2963,18 @@ Tou_set_is_dispatch_series(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyObject *
+Tou_get_is_tod_pc_target_also_pc_max(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_Tou_is_tod_pc_target_also_pc_max_nget, self->data_ptr);
+}
+
+static int
+Tou_set_is_tod_pc_target_also_pc_max(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_Tou_is_tod_pc_target_also_pc_max_nset, self->data_ptr);
+}
+
+static PyObject *
 Tou_get_is_wlim_series(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_Tou_is_wlim_series_nget, self->data_ptr);
@@ -3108,10 +3150,10 @@ static PyGetSetDef Tou_getset[] = {
 	PyDoc_STR("*sequence*: Dispatch payment factor array\n\n*Required*: True if ppa_multiplier_model=1"),
  	NULL},
 {"dispatch_sched_weekday", (getter)Tou_get_dispatch_sched_weekday,(setter)Tou_set_dispatch_sched_weekday,
-	PyDoc_STR("*sequence[sequence]*: 12x24 PPA pricing Weekday schedule\n\n*Required*: If not provided, assumed to be 1\n\n*Changes to this variable may require updating the values of the following*: \n\t - weekday_schedule\n"),
+	PyDoc_STR("*sequence[sequence]*: 12x24 PPA pricing Weekday schedule\n\n*Required*: If not provided, assumed to be 1"),
  	NULL},
 {"dispatch_sched_weekend", (getter)Tou_get_dispatch_sched_weekend,(setter)Tou_set_dispatch_sched_weekend,
-	PyDoc_STR("*sequence[sequence]*: 12x24 PPA pricing Weekend schedule\n\n*Required*: If not provided, assumed to be 1\n\n*Changes to this variable may require updating the values of the following*: \n\t - weekend_schedule\n"),
+	PyDoc_STR("*sequence[sequence]*: 12x24 PPA pricing Weekend schedule\n\n*Required*: If not provided, assumed to be 1"),
  	NULL},
 {"dispatch_series", (getter)Tou_get_dispatch_series,(setter)Tou_set_dispatch_series,
 	PyDoc_STR("*sequence*: Time series dispatch factors"),
@@ -3127,6 +3169,9 @@ static PyGetSetDef Tou_getset[] = {
  	NULL},
 {"is_dispatch_series", (getter)Tou_get_is_dispatch_series,(setter)Tou_set_is_dispatch_series,
 	PyDoc_STR("*float*: Use time-series dispatch factors\n\n*Required*: If not provided, assumed to be 1"),
+ 	NULL},
+{"is_tod_pc_target_also_pc_max", (getter)Tou_get_is_tod_pc_target_also_pc_max,(setter)Tou_set_is_tod_pc_target_also_pc_max,
+	PyDoc_STR("*float*: Is the TOD target cycle heat input also the max cycle heat input?\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"is_wlim_series", (getter)Tou_get_is_wlim_series,(setter)Tou_set_is_wlim_series,
 	PyDoc_STR("*float*: Use time-series net heat generation limits\n\n*Required*: If not provided, assumed to be 0\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - is_dispatch\n"),
@@ -3683,6 +3728,12 @@ Outputs_get_beam(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_capacity_factor(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_Outputs_capacity_factor_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_deltaP_field(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_TroughPhysicalProcessHeat_Outputs_deltaP_field_aget, self->data_ptr);
@@ -3713,9 +3764,27 @@ Outputs_get_hour_day(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_kwh_per_kw(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_Outputs_kwh_per_kw_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_m_dot_balance(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_TroughPhysicalProcessHeat_Outputs_m_dot_balance_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_m_dot_cr_to_tes_hot(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_TroughPhysicalProcessHeat_Outputs_m_dot_cr_to_tes_hot_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_m_dot_cycle_to_field(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_TroughPhysicalProcessHeat_Outputs_m_dot_cycle_to_field_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -3731,6 +3800,12 @@ Outputs_get_m_dot_field_recirc(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_m_dot_field_to_cycle(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_TroughPhysicalProcessHeat_Outputs_m_dot_field_to_cycle_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_m_dot_htf_heat_sink(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_TroughPhysicalProcessHeat_Outputs_m_dot_htf_heat_sink_aget, self->data_ptr);
@@ -3743,15 +3818,33 @@ Outputs_get_m_dot_loop(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_m_dot_tes_ch(VarGroupObject *self, void *closure)
+Outputs_get_m_dot_pc_to_tes_cold(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TroughPhysicalProcessHeat_Outputs_m_dot_tes_ch_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_TroughPhysicalProcessHeat_Outputs_m_dot_pc_to_tes_cold_aget, self->data_ptr);
 }
 
 static PyObject *
-Outputs_get_m_dot_tes_dc(VarGroupObject *self, void *closure)
+Outputs_get_m_dot_tes_cold_out(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TroughPhysicalProcessHeat_Outputs_m_dot_tes_dc_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_TroughPhysicalProcessHeat_Outputs_m_dot_tes_cold_out_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_m_dot_tes_hot_out(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_TroughPhysicalProcessHeat_Outputs_m_dot_tes_hot_out_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_mass_tes_cold(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_TroughPhysicalProcessHeat_Outputs_mass_tes_cold_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_mass_tes_hot(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_TroughPhysicalProcessHeat_Outputs_mass_tes_hot_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -3986,6 +4079,9 @@ static PyGetSetDef Outputs_getset[] = {
 {"beam", (getter)Outputs_get_beam,(setter)0,
 	PyDoc_STR("*sequence*: Resource Beam normal irradiance [W/m2]"),
  	NULL},
+{"capacity_factor", (getter)Outputs_get_capacity_factor,(setter)0,
+	PyDoc_STR("*float*: Capacity factor [%]"),
+ 	NULL},
 {"deltaP_field", (getter)Outputs_get_deltaP_field,(setter)0,
 	PyDoc_STR("*sequence*: Field pressure drop [bar]"),
  	NULL},
@@ -4001,8 +4097,17 @@ static PyGetSetDef Outputs_getset[] = {
 {"hour_day", (getter)Outputs_get_hour_day,(setter)0,
 	PyDoc_STR("*sequence*: Resource Hour of Day"),
  	NULL},
+{"kwh_per_kw", (getter)Outputs_get_kwh_per_kw,(setter)0,
+	PyDoc_STR("*float*: First year kWh/kW [kWht/kWt]"),
+ 	NULL},
 {"m_dot_balance", (getter)Outputs_get_m_dot_balance,(setter)0,
 	PyDoc_STR("*sequence*: Relative mass flow balance error"),
+ 	NULL},
+{"m_dot_cr_to_tes_hot", (getter)Outputs_get_m_dot_cr_to_tes_hot,(setter)0,
+	PyDoc_STR("*sequence*: Mass flow: field to hot TES [kg/s]"),
+ 	NULL},
+{"m_dot_cycle_to_field", (getter)Outputs_get_m_dot_cycle_to_field,(setter)0,
+	PyDoc_STR("*sequence*: Mass flow: cycle to field [kg/s]"),
  	NULL},
 {"m_dot_field_delivered", (getter)Outputs_get_m_dot_field_delivered,(setter)0,
 	PyDoc_STR("*sequence*: Field total mass flow delivered [kg/s]"),
@@ -4010,17 +4115,29 @@ static PyGetSetDef Outputs_getset[] = {
 {"m_dot_field_recirc", (getter)Outputs_get_m_dot_field_recirc,(setter)0,
 	PyDoc_STR("*sequence*: Field total mass flow recirculated [kg/s]"),
  	NULL},
+{"m_dot_field_to_cycle", (getter)Outputs_get_m_dot_field_to_cycle,(setter)0,
+	PyDoc_STR("*sequence*: Mass flow: field to cycle [kg/s]"),
+ 	NULL},
 {"m_dot_htf_heat_sink", (getter)Outputs_get_m_dot_htf_heat_sink,(setter)0,
 	PyDoc_STR("*sequence*: Heat sink HTF mass flow [kg/s]"),
  	NULL},
 {"m_dot_loop", (getter)Outputs_get_m_dot_loop,(setter)0,
 	PyDoc_STR("*sequence*: Receiver mass flow rate [kg/s]"),
  	NULL},
-{"m_dot_tes_ch", (getter)Outputs_get_m_dot_tes_ch,(setter)0,
-	PyDoc_STR("*sequence*: TES charge mass flow rate [kg/s]"),
+{"m_dot_pc_to_tes_cold", (getter)Outputs_get_m_dot_pc_to_tes_cold,(setter)0,
+	PyDoc_STR("*sequence*: Mass flow: cycle to cold TES [kg/s]"),
  	NULL},
-{"m_dot_tes_dc", (getter)Outputs_get_m_dot_tes_dc,(setter)0,
-	PyDoc_STR("*sequence*: TES discharge mass flow rate [kg/s]"),
+{"m_dot_tes_cold_out", (getter)Outputs_get_m_dot_tes_cold_out,(setter)0,
+	PyDoc_STR("*sequence*: Mass flow: TES cold out [kg/s]"),
+ 	NULL},
+{"m_dot_tes_hot_out", (getter)Outputs_get_m_dot_tes_hot_out,(setter)0,
+	PyDoc_STR("*sequence*: Mass flow: TES hot out [kg/s]"),
+ 	NULL},
+{"mass_tes_cold", (getter)Outputs_get_mass_tes_cold,(setter)0,
+	PyDoc_STR("*sequence*: TES cold tank mass (end) [kg]"),
+ 	NULL},
+{"mass_tes_hot", (getter)Outputs_get_mass_tes_hot,(setter)0,
+	PyDoc_STR("*sequence*: TES hot tank mass (end) [kg]"),
  	NULL},
 {"month", (getter)Outputs_get_month,(setter)0,
 	PyDoc_STR("*sequence*: Resource Month"),
@@ -4158,7 +4275,7 @@ newTroughPhysicalProcessHeatObject(void* data_ptr)
 	CmodObject *self;
 	self = PyObject_New(CmodObject, &TroughPhysicalProcessHeat_Type);
 
-	PySAM_TECH_ATTR("TroughPhysicalProcessHeat", SAM_TroughPhysicalProcessHeat_construct)
+	PySAM_TECH_ATTR()
 
 	PyObject* Weather_obj = Weather_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Weather", Weather_obj);
@@ -4204,7 +4321,7 @@ newTroughPhysicalProcessHeatObject(void* data_ptr)
 	Py_XDECREF(AdjustmentFactorsModule);
 
 	if (!Adjust_obj){
-		PyErr_SetString(PySAM_ErrorObject, "Couldn't create AdjustmentFactorsObject\n");
+		PyErr_SetString(PyExc_Exception, "Couldn't create AdjustmentFactorsObject\n");
 		return NULL;
 	}
 
@@ -4215,7 +4332,6 @@ newTroughPhysicalProcessHeatObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
 	Py_DECREF(Outputs_obj);
 
-
 	return self;
 }
 
@@ -4225,8 +4341,12 @@ static void
 TroughPhysicalProcessHeat_dealloc(CmodObject *self)
 {
 	Py_XDECREF(self->x_attr);
-	if (!self->data_owner_ptr)
-		SAM_TroughPhysicalProcessHeat_destruct(self->data_ptr);
+
+	if (!self->data_owner_ptr) {
+		SAM_error error = new_error();
+		SAM_table_destruct(self->data_ptr, &error);
+		PySAM_has_error(error);
+	}
 	PyObject_Del(self);
 }
 
@@ -4242,7 +4362,6 @@ TroughPhysicalProcessHeat_execute(CmodObject *self, PyObject *args)
 	SAM_error error = new_error();
 	SAM_TroughPhysicalProcessHeat_execute(self->data_ptr, verbosity, &error);
 	if (PySAM_has_error(error )) return NULL;
-
 	Py_INCREF(Py_None);
 	return Py_None;
 }
@@ -4273,7 +4392,7 @@ TroughPhysicalProcessHeat_export(CmodObject *self, PyObject *args)
 static PyObject *
 TroughPhysicalProcessHeat_value(CmodObject *self, PyObject *args)
 {
-	return CmodObject_value(self, args);
+	return Cmod_value(self, args);
 }
 
 static PyMethodDef TroughPhysicalProcessHeat_methods[] = {
@@ -4461,7 +4580,6 @@ TroughPhysicalProcessHeatModule_exec(PyObject *m)
 	 * object; doing it here is required for portability, too. */
 
 	if (PySAM_load_lib(m) < 0) goto fail;
-	if (PySAM_init_error(m) < 0) goto fail;
 
 	TroughPhysicalProcessHeat_Type.tp_dict = PyDict_New();
 	if (!TroughPhysicalProcessHeat_Type.tp_dict) { goto fail; }

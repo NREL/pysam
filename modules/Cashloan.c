@@ -309,7 +309,7 @@ static PyGetSetDef FinancialParameters_getset[] = {
 	PyDoc_STR("*sequence*: State income tax rate [%]\n\n*Required*: True"),
  	NULL},
 {"system_capacity", (getter)FinancialParameters_get_system_capacity,(setter)FinancialParameters_set_system_capacity,
-	PyDoc_STR("*float*: System nameplate capacity [kW]\n\n*Constraints*: POSITIVE\n\n*Required*: True"),
+	PyDoc_STR("*float*: System nameplate capacity [kW]\n\n*Constraints*: POSITIVE\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - total_installed_cost\n"),
  	NULL},
 {"system_heat_rate", (getter)FinancialParameters_get_system_heat_rate,(setter)FinancialParameters_set_system_heat_rate,
 	PyDoc_STR("*float*: System heat rate [MMBTus/MWh]\n\n*Constraints*: MIN=0\n\n*Required*: If not provided, assumed to be 0.0"),
@@ -880,7 +880,7 @@ static PyGetSetDef SystemCosts_getset[] = {
 	PyDoc_STR("*float*: Replacement cost escalation [%/year]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
 {"total_installed_cost", (getter)SystemCosts_get_total_installed_cost,(setter)SystemCosts_set_total_installed_cost,
-	PyDoc_STR("*float*: Total installed cost [$]\n\n*Constraints*: MIN=0\n\n*Required*: True"),
+	PyDoc_STR("*float*: Total installed cost [$]\n\n*Constraints*: MIN=0\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - battery_per_kWh\n"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -3080,7 +3080,7 @@ static PyGetSetDef BatterySystem_getset[] = {
 	PyDoc_STR("*sequence*: Battery bank replacements per year [number/year]"),
  	NULL},
 {"batt_computed_bank_capacity", (getter)BatterySystem_get_batt_computed_bank_capacity,(setter)BatterySystem_set_batt_computed_bank_capacity,
-	PyDoc_STR("*float*: Battery bank capacity [kWh]\n\n*Required*: If not provided, assumed to be 0.0"),
+	PyDoc_STR("*float*: Battery bank capacity [kWh]\n\n*Required*: If not provided, assumed to be 0.0\n\n*Changes to this variable may require updating the values of the following*: \n\t - total_installed_cost\n"),
  	NULL},
 {"batt_replacement_option", (getter)BatterySystem_get_batt_replacement_option,(setter)BatterySystem_set_batt_replacement_option,
 	PyDoc_STR("*float*: Enable battery replacement? [0=none,1=capacity based,2=user schedule]\n\n*Constraints*: INTEGER,MIN=0,MAX=2\n\n*Required*: If not provided, assumed to be 0"),
@@ -3089,10 +3089,10 @@ static PyGetSetDef BatterySystem_getset[] = {
 	PyDoc_STR("*sequence*: Battery bank replacements per year (user specified) [number/year]"),
  	NULL},
 {"battery_per_kWh", (getter)BatterySystem_get_battery_per_kWh,(setter)BatterySystem_set_battery_per_kWh,
-	PyDoc_STR("*float*: Battery cost [$/kWh]\n\n*Required*: If not provided, assumed to be 0.0"),
+	PyDoc_STR("*float*: Battery cost [$/kWh]\n\n*Required*: If not provided, assumed to be 0.0\n\n*Changes to this variable may require updating the values of the following*: \n\t - total_installed_cost\n"),
  	NULL},
 {"en_batt", (getter)BatterySystem_get_en_batt,(setter)BatterySystem_set_en_batt,
-	PyDoc_STR("*float*: Enable battery storage model [0/1]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Enable battery storage model [0/1]\n\n*Required*: If not provided, assumed to be 0\n\n*Changes to this variable may require updating the values of the following*: \n\t - total_installed_cost\n"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -4828,7 +4828,7 @@ newCashloanObject(void* data_ptr)
 	CmodObject *self;
 	self = PyObject_New(CmodObject, &Cashloan_Type);
 
-	PySAM_TECH_ATTR("Cashloan", SAM_Cashloan_construct)
+	PySAM_TECH_ATTR()
 
 	PyObject* FinancialParameters_obj = FinancialParameters_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "FinancialParameters", FinancialParameters_obj);
@@ -4874,7 +4874,6 @@ newCashloanObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
 	Py_DECREF(Outputs_obj);
 
-
 	return self;
 }
 
@@ -4884,8 +4883,12 @@ static void
 Cashloan_dealloc(CmodObject *self)
 {
 	Py_XDECREF(self->x_attr);
-	if (!self->data_owner_ptr)
-		SAM_Cashloan_destruct(self->data_ptr);
+
+	if (!self->data_owner_ptr) {
+		SAM_error error = new_error();
+		SAM_table_destruct(self->data_ptr, &error);
+		PySAM_has_error(error);
+	}
 	PyObject_Del(self);
 }
 
@@ -4901,7 +4904,6 @@ Cashloan_execute(CmodObject *self, PyObject *args)
 	SAM_error error = new_error();
 	SAM_Cashloan_execute(self->data_ptr, verbosity, &error);
 	if (PySAM_has_error(error )) return NULL;
-
 	Py_INCREF(Py_None);
 	return Py_None;
 }
@@ -4932,7 +4934,7 @@ Cashloan_export(CmodObject *self, PyObject *args)
 static PyObject *
 Cashloan_value(CmodObject *self, PyObject *args)
 {
-	return CmodObject_value(self, args);
+	return Cmod_value(self, args);
 }
 
 static PyMethodDef Cashloan_methods[] = {
@@ -5101,7 +5103,7 @@ static PyMethodDef CashloanModule_methods[] = {
 				PyDoc_STR("new() -> Cashloan")},
 		{"default",             Cashloan_default,         METH_VARARGS,
 				PyDoc_STR("default(config) -> Cashloan\n\nUse financial config-specific default attributes\n"
-				"config options:\n\n- \"BiopowerCommercial\"\n- \"DSLFCommercial\"\n- \"DishStirlingCommercial\"\n- \"EmpiricalTroughCommercial\"\n- \"FlatPlatePVCommercial\"\n- \"FlatPlatePVResidential\"\n- \"FuelCellCommercial\"\n- \"GenericCSPSystemCommercial\"\n- \"GenericSystemCommercial\"\n- \"GenericSystemResidential\"\n- \"MSLFCommercial\"\n- \"PVWattsCommercial\"\n- \"PVWattsResidential\"\n- \"PhysicalTroughCommercial\"\n- \"SolarWaterHeatingCommercial\"\n- \"SolarWaterHeatingResidential\"\n- \"WindPowerCommercial\"\n- \"WindPowerResidential\"")},
+				"config options:\n\n- \"BiopowerCommercial\"\n- \"DSLFCommercial\"\n- \"DishStirlingCommercial\"\n- \"EmpiricalTroughCommercial\"\n- \"FlatPlatePVCommercial\"\n- \"FlatPlatePVResidential\"\n- \"FuelCellCommercial\"\n- \"GenericBatteryCommercial\"\n- \"GenericBatteryResidential\"\n- \"GenericCSPSystemCommercial\"\n- \"GenericSystemCommercial\"\n- \"GenericSystemResidential\"\n- \"MSLFCommercial\"\n- \"PVBatteryCommercial\"\n- \"PVBatteryResidential\"\n- \"PVWattsBatteryCommercial\"\n- \"PVWattsBatteryResidential\"\n- \"PVWattsCommercial\"\n- \"PVWattsResidential\"\n- \"PhysicalTroughCommercial\"\n- \"SolarWaterHeatingCommercial\"\n- \"SolarWaterHeatingResidential\"\n- \"WindPowerCommercial\"\n- \"WindPowerResidential\"")},
 		{"wrap",             Cashloan_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Cashloan\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   Cashloan_from_existing,        METH_VARARGS,
@@ -5120,7 +5122,6 @@ CashloanModule_exec(PyObject *m)
 	 * object; doing it here is required for portability, too. */
 
 	if (PySAM_load_lib(m) < 0) goto fail;
-	if (PySAM_init_error(m) < 0) goto fail;
 
 	Cashloan_Type.tp_dict = PyDict_New();
 	if (!Cashloan_Type.tp_dict) { goto fail; }

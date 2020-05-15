@@ -70,9 +70,24 @@ Weather_set_file_name(VarGroupObject *self, PyObject *value, void *closure)
 	return PySAM_string_setter(value, SAM_LinearFresnelDsgIph_Weather_file_name_sset, self->data_ptr);
 }
 
+static PyObject *
+Weather_get_solar_resource_data(VarGroupObject *self, void *closure)
+{
+	return PySAM_table_getter(SAM_LinearFresnelDsgIph_Weather_solar_resource_data_tget, self->data_ptr);
+}
+
+static int
+Weather_set_solar_resource_data(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_table_setter(value, SAM_LinearFresnelDsgIph_Weather_solar_resource_data_tset, self->data_ptr);
+}
+
 static PyGetSetDef Weather_getset[] = {
 {"file_name", (getter)Weather_get_file_name,(setter)Weather_set_file_name,
 	PyDoc_STR("*str*: local weather file path\n\n*Constraints*: LOCAL_FILE\n\n*Required*: True"),
+ 	NULL},
+{"solar_resource_data", (getter)Weather_get_solar_resource_data,(setter)Weather_set_solar_resource_data,
+	PyDoc_STR("*dict*: Weather resource data in memory\n\n*Required*: False"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1663,6 +1678,12 @@ Outputs_get_beam(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_capacity_factor(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_LinearFresnelDsgIph_Outputs_capacity_factor_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_defocus(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_LinearFresnelDsgIph_Outputs_defocus_aget, self->data_ptr);
@@ -1696,6 +1717,12 @@ static PyObject *
 Outputs_get_hour_day(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_LinearFresnelDsgIph_Outputs_hour_day_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_kwh_per_kw(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_LinearFresnelDsgIph_Outputs_kwh_per_kw_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -1891,6 +1918,9 @@ static PyGetSetDef Outputs_getset[] = {
 {"beam", (getter)Outputs_get_beam,(setter)0,
 	PyDoc_STR("*sequence*: Resource Beam normal irradiance [W/m2]"),
  	NULL},
+{"capacity_factor", (getter)Outputs_get_capacity_factor,(setter)0,
+	PyDoc_STR("*float*: Capacity factor [%]"),
+ 	NULL},
 {"defocus", (getter)Outputs_get_defocus,(setter)0,
 	PyDoc_STR("*sequence*: Field collector focus fraction"),
  	NULL},
@@ -1908,6 +1938,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"hour_day", (getter)Outputs_get_hour_day,(setter)0,
 	PyDoc_STR("*sequence*: Resource Hour of Day"),
+ 	NULL},
+{"kwh_per_kw", (getter)Outputs_get_kwh_per_kw,(setter)0,
+	PyDoc_STR("*float*: First year kWh/kW [kWht/kWt]"),
  	NULL},
 {"m_dot_field", (getter)Outputs_get_m_dot_field,(setter)0,
 	PyDoc_STR("*sequence*: Field total mass flow rate [kg/s]"),
@@ -2045,7 +2078,7 @@ newLinearFresnelDsgIphObject(void* data_ptr)
 	CmodObject *self;
 	self = PyObject_New(CmodObject, &LinearFresnelDsgIph_Type);
 
-	PySAM_TECH_ATTR("LinearFresnelDsgIph", SAM_LinearFresnelDsgIph_construct)
+	PySAM_TECH_ATTR()
 
 	PyObject* Weather_obj = Weather_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Weather", Weather_obj);
@@ -2075,7 +2108,7 @@ newLinearFresnelDsgIphObject(void* data_ptr)
 	Py_XDECREF(AdjustmentFactorsModule);
 
 	if (!Adjust_obj){
-		PyErr_SetString(PySAM_ErrorObject, "Couldn't create AdjustmentFactorsObject\n");
+		PyErr_SetString(PyExc_Exception, "Couldn't create AdjustmentFactorsObject\n");
 		return NULL;
 	}
 
@@ -2086,7 +2119,6 @@ newLinearFresnelDsgIphObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
 	Py_DECREF(Outputs_obj);
 
-
 	return self;
 }
 
@@ -2096,8 +2128,12 @@ static void
 LinearFresnelDsgIph_dealloc(CmodObject *self)
 {
 	Py_XDECREF(self->x_attr);
-	if (!self->data_owner_ptr)
-		SAM_LinearFresnelDsgIph_destruct(self->data_ptr);
+
+	if (!self->data_owner_ptr) {
+		SAM_error error = new_error();
+		SAM_table_destruct(self->data_ptr, &error);
+		PySAM_has_error(error);
+	}
 	PyObject_Del(self);
 }
 
@@ -2113,7 +2149,6 @@ LinearFresnelDsgIph_execute(CmodObject *self, PyObject *args)
 	SAM_error error = new_error();
 	SAM_LinearFresnelDsgIph_execute(self->data_ptr, verbosity, &error);
 	if (PySAM_has_error(error )) return NULL;
-
 	Py_INCREF(Py_None);
 	return Py_None;
 }
@@ -2144,7 +2179,7 @@ LinearFresnelDsgIph_export(CmodObject *self, PyObject *args)
 static PyObject *
 LinearFresnelDsgIph_value(CmodObject *self, PyObject *args)
 {
-	return CmodObject_value(self, args);
+	return Cmod_value(self, args);
 }
 
 static PyMethodDef LinearFresnelDsgIph_methods[] = {
@@ -2332,7 +2367,6 @@ LinearFresnelDsgIphModule_exec(PyObject *m)
 	 * object; doing it here is required for portability, too. */
 
 	if (PySAM_load_lib(m) < 0) goto fail;
-	if (PySAM_init_error(m) < 0) goto fail;
 
 	LinearFresnelDsgIph_Type.tp_dict = PyDict_New();
 	if (!LinearFresnelDsgIph_Type.tp_dict) { goto fail; }

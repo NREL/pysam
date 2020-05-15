@@ -451,7 +451,7 @@ newPvsandiainvObject(void* data_ptr)
 	CmodObject *self;
 	self = PyObject_New(CmodObject, &Pvsandiainv_Type);
 
-	PySAM_TECH_ATTR("Pvsandiainv", SAM_Pvsandiainv_construct)
+	PySAM_TECH_ATTR()
 
 	PyObject* SandiaInverterModel_obj = SandiaInverterModel_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "SandiaInverterModel", SandiaInverterModel_obj);
@@ -460,7 +460,6 @@ newPvsandiainvObject(void* data_ptr)
 	PyObject* Outputs_obj = Outputs_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
 	Py_DECREF(Outputs_obj);
-
 
 	return self;
 }
@@ -471,8 +470,12 @@ static void
 Pvsandiainv_dealloc(CmodObject *self)
 {
 	Py_XDECREF(self->x_attr);
-	if (!self->data_owner_ptr)
-		SAM_Pvsandiainv_destruct(self->data_ptr);
+
+	if (!self->data_owner_ptr) {
+		SAM_error error = new_error();
+		SAM_table_destruct(self->data_ptr, &error);
+		PySAM_has_error(error);
+	}
 	PyObject_Del(self);
 }
 
@@ -488,7 +491,6 @@ Pvsandiainv_execute(CmodObject *self, PyObject *args)
 	SAM_error error = new_error();
 	SAM_Pvsandiainv_execute(self->data_ptr, verbosity, &error);
 	if (PySAM_has_error(error )) return NULL;
-
 	Py_INCREF(Py_None);
 	return Py_None;
 }
@@ -519,7 +521,7 @@ Pvsandiainv_export(CmodObject *self, PyObject *args)
 static PyObject *
 Pvsandiainv_value(CmodObject *self, PyObject *args)
 {
-	return CmodObject_value(self, args);
+	return Cmod_value(self, args);
 }
 
 static PyMethodDef Pvsandiainv_methods[] = {
@@ -707,7 +709,6 @@ PvsandiainvModule_exec(PyObject *m)
 	 * object; doing it here is required for portability, too. */
 
 	if (PySAM_load_lib(m) < 0) goto fail;
-	if (PySAM_init_error(m) < 0) goto fail;
 
 	Pvsandiainv_Type.tp_dict = PyDict_New();
 	if (!Pvsandiainv_Type.tp_dict) { goto fail; }

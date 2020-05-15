@@ -4970,7 +4970,7 @@ static PyGetSetDef TimeOfDelivery_getset[] = {
 	PyDoc_STR("*float*: PPA multiplier model [0/1]\n\n*Options*: 0=diurnal,1=timestep\n\n*Constraints*: INTEGER,MIN=0\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"system_use_lifetime_output", (getter)TimeOfDelivery_get_system_use_lifetime_output,(setter)TimeOfDelivery_set_system_use_lifetime_output,
-	PyDoc_STR("*float*: Lifetime hourly system outputs [0/1]\n\n*Options*: 0=hourly first year,1=hourly lifetime\n\n*Constraints*: INTEGER,MIN=0\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - system_use_recapitalization\n"),
+	PyDoc_STR("*float*: Lifetime hourly system outputs [0/1]\n\n*Options*: 0=hourly first year,1=hourly lifetime\n\n*Constraints*: INTEGER,MIN=0\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -10316,7 +10316,7 @@ newHostDeveloperObject(void* data_ptr)
 	CmodObject *self;
 	self = PyObject_New(CmodObject, &HostDeveloper_Type);
 
-	PySAM_TECH_ATTR("HostDeveloper", SAM_HostDeveloper_construct)
+	PySAM_TECH_ATTR()
 
 	PyObject* Revenue_obj = Revenue_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Revenue", Revenue_obj);
@@ -10378,7 +10378,6 @@ newHostDeveloperObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
 	Py_DECREF(Outputs_obj);
 
-
 	return self;
 }
 
@@ -10388,8 +10387,12 @@ static void
 HostDeveloper_dealloc(CmodObject *self)
 {
 	Py_XDECREF(self->x_attr);
-	if (!self->data_owner_ptr)
-		SAM_HostDeveloper_destruct(self->data_ptr);
+
+	if (!self->data_owner_ptr) {
+		SAM_error error = new_error();
+		SAM_table_destruct(self->data_ptr, &error);
+		PySAM_has_error(error);
+	}
 	PyObject_Del(self);
 }
 
@@ -10405,7 +10408,6 @@ HostDeveloper_execute(CmodObject *self, PyObject *args)
 	SAM_error error = new_error();
 	SAM_HostDeveloper_execute(self->data_ptr, verbosity, &error);
 	if (PySAM_has_error(error )) return NULL;
-
 	Py_INCREF(Py_None);
 	return Py_None;
 }
@@ -10436,7 +10438,7 @@ HostDeveloper_export(CmodObject *self, PyObject *args)
 static PyObject *
 HostDeveloper_value(CmodObject *self, PyObject *args)
 {
-	return CmodObject_value(self, args);
+	return Cmod_value(self, args);
 }
 
 static PyMethodDef HostDeveloper_methods[] = {
@@ -10605,7 +10607,7 @@ static PyMethodDef HostDeveloperModule_methods[] = {
 				PyDoc_STR("new() -> HostDeveloper")},
 		{"default",             HostDeveloper_default,         METH_VARARGS,
 				PyDoc_STR("default(config) -> HostDeveloper\n\nUse financial config-specific default attributes\n"
-				"config options:\n\n- \"FlatPlatePVHostDeveloper\"\n- \"GenericSystemHostDeveloper\"\n- \"PVWattsHostDeveloper\"")},
+				"config options:\n\n- \"FlatPlatePVHostDeveloper\"\n- \"GenericBatteryHostDeveloper\"\n- \"GenericSystemHostDeveloper\"\n- \"PVBatteryHostDeveloper\"\n- \"PVWattsBatteryHostDeveloper\"\n- \"PVWattsHostDeveloper\"")},
 		{"wrap",             HostDeveloper_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> HostDeveloper\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   HostDeveloper_from_existing,        METH_VARARGS,
@@ -10624,7 +10626,6 @@ HostDeveloperModule_exec(PyObject *m)
 	 * object; doing it here is required for portability, too. */
 
 	if (PySAM_load_lib(m) < 0) goto fail;
-	if (PySAM_init_error(m) < 0) goto fail;
 
 	HostDeveloper_Type.tp_dict = PyDict_New();
 	if (!HostDeveloper_Type.tp_dict) { goto fail; }

@@ -1157,7 +1157,7 @@ newBattwattsObject(void* data_ptr)
 	CmodObject *self;
 	self = PyObject_New(CmodObject, &Battwatts_Type);
 
-	PySAM_TECH_ATTR("Battwatts", SAM_Battwatts_construct)
+	PySAM_TECH_ATTR()
 
 	PyObject* Lifetime_obj = Lifetime_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Lifetime", Lifetime_obj);
@@ -1171,7 +1171,6 @@ newBattwattsObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
 	Py_DECREF(Outputs_obj);
 
-
 	return self;
 }
 
@@ -1181,8 +1180,12 @@ static void
 Battwatts_dealloc(CmodObject *self)
 {
 	Py_XDECREF(self->x_attr);
-	if (!self->data_owner_ptr)
-		SAM_Battwatts_destruct(self->data_ptr);
+
+	if (!self->data_owner_ptr) {
+		SAM_error error = new_error();
+		SAM_table_destruct(self->data_ptr, &error);
+		PySAM_has_error(error);
+	}
 	PyObject_Del(self);
 }
 
@@ -1198,7 +1201,6 @@ Battwatts_execute(CmodObject *self, PyObject *args)
 	SAM_error error = new_error();
 	SAM_Battwatts_execute(self->data_ptr, verbosity, &error);
 	if (PySAM_has_error(error )) return NULL;
-
 	Py_INCREF(Py_None);
 	return Py_None;
 }
@@ -1229,7 +1231,7 @@ Battwatts_export(CmodObject *self, PyObject *args)
 static PyObject *
 Battwatts_value(CmodObject *self, PyObject *args)
 {
-	return CmodObject_value(self, args);
+	return Cmod_value(self, args);
 }
 
 static PyMethodDef Battwatts_methods[] = {
@@ -1398,7 +1400,7 @@ static PyMethodDef BattwattsModule_methods[] = {
 				PyDoc_STR("new() -> Battwatts")},
 		{"default",             Battwatts_default,         METH_VARARGS,
 				PyDoc_STR("default(config) -> Battwatts\n\nUse financial config-specific default attributes\n"
-				"config options:\n\n- \"PVWattsCommercial\"\n- \"PVWattsHostDeveloper\"\n- \"PVWattsResidential\"\n- \"PVWattsThirdParty\"")},
+				"config options:\n\n- \"PVWattsBatteryCommercial\"\n- \"PVWattsBatteryHostDeveloper\"\n- \"PVWattsBatteryResidential\"\n- \"PVWattsBatteryThirdParty\"")},
 		{"wrap",             Battwatts_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Battwatts\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   Battwatts_from_existing,        METH_VARARGS,
@@ -1417,7 +1419,6 @@ BattwattsModule_exec(PyObject *m)
 	 * object; doing it here is required for portability, too. */
 
 	if (PySAM_load_lib(m) < 0) goto fail;
-	if (PySAM_init_error(m) < 0) goto fail;
 
 	Battwatts_Type.tp_dict = PyDict_New();
 	if (!Battwatts_Type.tp_dict) { goto fail; }

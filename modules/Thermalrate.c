@@ -605,7 +605,7 @@ newThermalrateObject(void* data_ptr)
 	CmodObject *self;
 	self = PyObject_New(CmodObject, &Thermalrate_Type);
 
-	PySAM_TECH_ATTR("Thermalrate", SAM_Thermalrate_construct)
+	PySAM_TECH_ATTR()
 
 	PyObject* ThermalRate_obj = ThermalRate_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "ThermalRate", ThermalRate_obj);
@@ -619,7 +619,6 @@ newThermalrateObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
 	Py_DECREF(Outputs_obj);
 
-
 	return self;
 }
 
@@ -629,8 +628,12 @@ static void
 Thermalrate_dealloc(CmodObject *self)
 {
 	Py_XDECREF(self->x_attr);
-	if (!self->data_owner_ptr)
-		SAM_Thermalrate_destruct(self->data_ptr);
+
+	if (!self->data_owner_ptr) {
+		SAM_error error = new_error();
+		SAM_table_destruct(self->data_ptr, &error);
+		PySAM_has_error(error);
+	}
 	PyObject_Del(self);
 }
 
@@ -646,7 +649,6 @@ Thermalrate_execute(CmodObject *self, PyObject *args)
 	SAM_error error = new_error();
 	SAM_Thermalrate_execute(self->data_ptr, verbosity, &error);
 	if (PySAM_has_error(error )) return NULL;
-
 	Py_INCREF(Py_None);
 	return Py_None;
 }
@@ -677,7 +679,7 @@ Thermalrate_export(CmodObject *self, PyObject *args)
 static PyObject *
 Thermalrate_value(CmodObject *self, PyObject *args)
 {
-	return CmodObject_value(self, args);
+	return Cmod_value(self, args);
 }
 
 static PyMethodDef Thermalrate_methods[] = {
@@ -865,7 +867,6 @@ ThermalrateModule_exec(PyObject *m)
 	 * object; doing it here is required for portability, too. */
 
 	if (PySAM_load_lib(m) < 0) goto fail;
-	if (PySAM_init_error(m) < 0) goto fail;
 
 	Thermalrate_Type.tp_dict = PyDict_New();
 	if (!Thermalrate_Type.tp_dict) { goto fail; }

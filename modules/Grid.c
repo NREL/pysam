@@ -751,7 +751,7 @@ newGridObject(void* data_ptr)
 	CmodObject *self;
 	self = PyObject_New(CmodObject, &Grid_Type);
 
-	PySAM_TECH_ATTR("Grid", SAM_Grid_construct)
+	PySAM_TECH_ATTR()
 
 	PyObject* Lifetime_obj = Lifetime_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Lifetime", Lifetime_obj);
@@ -773,7 +773,6 @@ newGridObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
 	Py_DECREF(Outputs_obj);
 
-
 	return self;
 }
 
@@ -783,8 +782,12 @@ static void
 Grid_dealloc(CmodObject *self)
 {
 	Py_XDECREF(self->x_attr);
-	if (!self->data_owner_ptr)
-		SAM_Grid_destruct(self->data_ptr);
+
+	if (!self->data_owner_ptr) {
+		SAM_error error = new_error();
+		SAM_table_destruct(self->data_ptr, &error);
+		PySAM_has_error(error);
+	}
 	PyObject_Del(self);
 }
 
@@ -800,7 +803,6 @@ Grid_execute(CmodObject *self, PyObject *args)
 	SAM_error error = new_error();
 	SAM_Grid_execute(self->data_ptr, verbosity, &error);
 	if (PySAM_has_error(error )) return NULL;
-
 	Py_INCREF(Py_None);
 	return Py_None;
 }
@@ -831,7 +833,7 @@ Grid_export(CmodObject *self, PyObject *args)
 static PyObject *
 Grid_value(CmodObject *self, PyObject *args)
 {
-	return CmodObject_value(self, args);
+	return Cmod_value(self, args);
 }
 
 static PyMethodDef Grid_methods[] = {
@@ -1000,7 +1002,7 @@ static PyMethodDef GridModule_methods[] = {
 				PyDoc_STR("new() -> Grid")},
 		{"default",             Grid_default,         METH_VARARGS,
 				PyDoc_STR("default(config) -> Grid\n\nUse financial config-specific default attributes\n"
-				"config options:\n\n- \"BiopowerAllEquityPartnershipFlip\"\n- \"BiopowerCommercial\"\n- \"BiopowerCommercialPPA\"\n- \"BiopowerIndependentPowerProducer\"\n- \"BiopowerLCOECalculator\"\n- \"BiopowerLeveragedPartnershipFlip\"\n- \"BiopowerMerchantPlant\"\n- \"BiopowerNone\"\n- \"BiopowerSaleLeaseback\"\n- \"BiopowerSingleOwner\"\n- \"DSLFAllEquityPartnershipFlip\"\n- \"DSLFCommercial\"\n- \"DSLFLCOECalculator\"\n- \"DSLFLeveragedPartnershipFlip\"\n- \"DSLFMerchantPlant\"\n- \"DSLFNone\"\n- \"DSLFSaleLeaseback\"\n- \"DSLFSingleOwner\"\n- \"DSPTAllEquityPartnershipFlip\"\n- \"DSPTLeveragedPartnershipFlip\"\n- \"DSPTMerchantPlant\"\n- \"DSPTSaleLeaseback\"\n- \"DSPTSingleOwner\"\n- \"DishStirlingAllEquityPartnershipFlip\"\n- \"DishStirlingCommercial\"\n- \"DishStirlingCommercialPPA\"\n- \"DishStirlingIndependentPowerProducer\"\n- \"DishStirlingLCOECalculator\"\n- \"DishStirlingLeveragedPartnershipFlip\"\n- \"DishStirlingMerchantPlant\"\n- \"DishStirlingNone\"\n- \"DishStirlingSaleLeaseback\"\n- \"DishStirlingSingleOwner\"\n- \"FlatPlatePVAllEquityPartnershipFlip\"\n- \"FlatPlatePVCommercial\"\n- \"FlatPlatePVCommercialPPA\"\n- \"FlatPlatePVHostDeveloper\"\n- \"FlatPlatePVIndependentPowerProducer\"\n- \"FlatPlatePVLCOECalculator\"\n- \"FlatPlatePVLeveragedPartnershipFlip\"\n- \"FlatPlatePVMerchantPlant\"\n- \"FlatPlatePVNone\"\n- \"FlatPlatePVResidential\"\n- \"FlatPlatePVSaleLeaseback\"\n- \"FlatPlatePVSingleOwner\"\n- \"FlatPlatePVThirdParty\"\n- \"FuelCellCommercial\"\n- \"FuelCellSingleOwner\"\n- \"GenericCSPSystemAllEquityPartnershipFlip\"\n- \"GenericCSPSystemCommercial\"\n- \"GenericCSPSystemCommercialPPA\"\n- \"GenericCSPSystemIndependentPowerProducer\"\n- \"GenericCSPSystemLCOECalculator\"\n- \"GenericCSPSystemLeveragedPartnershipFlip\"\n- \"GenericCSPSystemMerchantPlant\"\n- \"GenericCSPSystemNone\"\n- \"GenericCSPSystemSaleLeaseback\"\n- \"GenericCSPSystemSingleOwner\"\n- \"GenericSystemAllEquityPartnershipFlip\"\n- \"GenericSystemCommercial\"\n- \"GenericSystemCommercialPPA\"\n- \"GenericSystemHostDeveloper\"\n- \"GenericSystemIndependentPowerProducer\"\n- \"GenericSystemLCOECalculator\"\n- \"GenericSystemLeveragedPartnershipFlip\"\n- \"GenericSystemMerchantPlant\"\n- \"GenericSystemNone\"\n- \"GenericSystemResidential\"\n- \"GenericSystemSaleLeaseback\"\n- \"GenericSystemSingleOwner\"\n- \"GenericSystemThirdParty\"\n- \"GeothermalPowerAllEquityPartnershipFlip\"\n- \"GeothermalPowerIndependentPowerProducer\"\n- \"GeothermalPowerLCOECalculator\"\n- \"GeothermalPowerLeveragedPartnershipFlip\"\n- \"GeothermalPowerMerchantPlant\"\n- \"GeothermalPowerNone\"\n- \"GeothermalPowerSaleLeaseback\"\n- \"GeothermalPowerSingleOwner\"\n- \"HighXConcentratingPVAllEquityPartnershipFlip\"\n- \"HighXConcentratingPVIndependentPowerProducer\"\n- \"HighXConcentratingPVLCOECalculator\"\n- \"HighXConcentratingPVLeveragedPartnershipFlip\"\n- \"HighXConcentratingPVMerchantPlant\"\n- \"HighXConcentratingPVNone\"\n- \"HighXConcentratingPVSaleLeaseback\"\n- \"HighXConcentratingPVSingleOwner\"\n- \"ISCCSingleOwner\"\n- \"MSLFAllEquityPartnershipFlip\"\n- \"MSLFCommercial\"\n- \"MSLFLCOECalculator\"\n- \"MSLFLeveragedPartnershipFlip\"\n- \"MSLFMerchantPlant\"\n- \"MSLFNone\"\n- \"MSLFSaleLeaseback\"\n- \"MSLFSingleOwner\"\n- \"MSPTAllEquityPartnershipFlip\"\n- \"MSPTLeveragedPartnershipFlip\"\n- \"MSPTMerchantPlant\"\n- \"MSPTSaleLeaseback\"\n- \"MSPTSingleOwner\"\n- \"PVWattsAllEquityPartnershipFlip\"\n- \"PVWattsCommercial\"\n- \"PVWattsCommercialPPA\"\n- \"PVWattsHostDeveloper\"\n- \"PVWattsIndependentPowerProducer\"\n- \"PVWattsLCOECalculator\"\n- \"PVWattsLeveragedPartnershipFlip\"\n- \"PVWattsMerchantPlant\"\n- \"PVWattsNone\"\n- \"PVWattsResidential\"\n- \"PVWattsSaleLeaseback\"\n- \"PVWattsSingleOwner\"\n- \"PVWattsThirdParty\"\n- \"PhysicalTroughAllEquityPartnershipFlip\"\n- \"PhysicalTroughCommercial\"\n- \"PhysicalTroughIndependentPowerProducer\"\n- \"PhysicalTroughLCOECalculator\"\n- \"PhysicalTroughLeveragedPartnershipFlip\"\n- \"PhysicalTroughMerchantPlant\"\n- \"PhysicalTroughNone\"\n- \"PhysicalTroughSaleLeaseback\"\n- \"PhysicalTroughSingleOwner\"\n- \"WindPowerAllEquityPartnershipFlip\"\n- \"WindPowerCommercial\"\n- \"WindPowerCommercialPPA\"\n- \"WindPowerIndependentPowerProducer\"\n- \"WindPowerLCOECalculator\"\n- \"WindPowerLeveragedPartnershipFlip\"\n- \"WindPowerMerchantPlant\"\n- \"WindPowerNone\"\n- \"WindPowerResidential\"\n- \"WindPowerSaleLeaseback\"\n- \"WindPowerSingleOwner\"")},
+				"config options:\n\n- \"BiopowerAllEquityPartnershipFlip\"\n- \"BiopowerCommercial\"\n- \"BiopowerLCOECalculator\"\n- \"BiopowerLeveragedPartnershipFlip\"\n- \"BiopowerMerchantPlant\"\n- \"BiopowerNone\"\n- \"BiopowerSaleLeaseback\"\n- \"BiopowerSingleOwner\"\n- \"DSLFAllEquityPartnershipFlip\"\n- \"DSLFCommercial\"\n- \"DSLFLCOECalculator\"\n- \"DSLFLeveragedPartnershipFlip\"\n- \"DSLFMerchantPlant\"\n- \"DSLFNone\"\n- \"DSLFSaleLeaseback\"\n- \"DSLFSingleOwner\"\n- \"DSPTAllEquityPartnershipFlip\"\n- \"DSPTLeveragedPartnershipFlip\"\n- \"DSPTMerchantPlant\"\n- \"DSPTSaleLeaseback\"\n- \"DSPTSingleOwner\"\n- \"DishStirlingAllEquityPartnershipFlip\"\n- \"DishStirlingCommercial\"\n- \"DishStirlingLCOECalculator\"\n- \"DishStirlingLeveragedPartnershipFlip\"\n- \"DishStirlingMerchantPlant\"\n- \"DishStirlingNone\"\n- \"DishStirlingSaleLeaseback\"\n- \"DishStirlingSingleOwner\"\n- \"FlatPlatePVAllEquityPartnershipFlip\"\n- \"FlatPlatePVCommercial\"\n- \"FlatPlatePVHostDeveloper\"\n- \"FlatPlatePVLCOECalculator\"\n- \"FlatPlatePVLeveragedPartnershipFlip\"\n- \"FlatPlatePVMerchantPlant\"\n- \"FlatPlatePVNone\"\n- \"FlatPlatePVResidential\"\n- \"FlatPlatePVSaleLeaseback\"\n- \"FlatPlatePVSingleOwner\"\n- \"FlatPlatePVThirdParty\"\n- \"FuelCellCommercial\"\n- \"FuelCellSingleOwner\"\n- \"GenericBatteryAllEquityPartnershipFlip\"\n- \"GenericBatteryCommercial\"\n- \"GenericBatteryHostDeveloper\"\n- \"GenericBatteryLeveragedPartnershipFlip\"\n- \"GenericBatteryMerchantPlant\"\n- \"GenericBatteryResidential\"\n- \"GenericBatterySaleLeaseback\"\n- \"GenericBatterySingleOwner\"\n- \"GenericBatteryThirdParty\"\n- \"GenericCSPSystemAllEquityPartnershipFlip\"\n- \"GenericCSPSystemCommercial\"\n- \"GenericCSPSystemLCOECalculator\"\n- \"GenericCSPSystemLeveragedPartnershipFlip\"\n- \"GenericCSPSystemMerchantPlant\"\n- \"GenericCSPSystemNone\"\n- \"GenericCSPSystemSaleLeaseback\"\n- \"GenericCSPSystemSingleOwner\"\n- \"GenericSystemAllEquityPartnershipFlip\"\n- \"GenericSystemCommercial\"\n- \"GenericSystemHostDeveloper\"\n- \"GenericSystemLCOECalculator\"\n- \"GenericSystemLeveragedPartnershipFlip\"\n- \"GenericSystemMerchantPlant\"\n- \"GenericSystemNone\"\n- \"GenericSystemResidential\"\n- \"GenericSystemSaleLeaseback\"\n- \"GenericSystemSingleOwner\"\n- \"GenericSystemThirdParty\"\n- \"GeothermalPowerAllEquityPartnershipFlip\"\n- \"GeothermalPowerLCOECalculator\"\n- \"GeothermalPowerLeveragedPartnershipFlip\"\n- \"GeothermalPowerMerchantPlant\"\n- \"GeothermalPowerNone\"\n- \"GeothermalPowerSaleLeaseback\"\n- \"GeothermalPowerSingleOwner\"\n- \"HighXConcentratingPVAllEquityPartnershipFlip\"\n- \"HighXConcentratingPVLCOECalculator\"\n- \"HighXConcentratingPVLeveragedPartnershipFlip\"\n- \"HighXConcentratingPVMerchantPlant\"\n- \"HighXConcentratingPVNone\"\n- \"HighXConcentratingPVSaleLeaseback\"\n- \"HighXConcentratingPVSingleOwner\"\n- \"MSLFAllEquityPartnershipFlip\"\n- \"MSLFCommercial\"\n- \"MSLFLCOECalculator\"\n- \"MSLFLeveragedPartnershipFlip\"\n- \"MSLFMerchantPlant\"\n- \"MSLFNone\"\n- \"MSLFSaleLeaseback\"\n- \"MSLFSingleOwner\"\n- \"MSPTAllEquityPartnershipFlip\"\n- \"MSPTLeveragedPartnershipFlip\"\n- \"MSPTMerchantPlant\"\n- \"MSPTSaleLeaseback\"\n- \"MSPTSingleOwner\"\n- \"PVBatteryAllEquityPartnershipFlip\"\n- \"PVBatteryCommercial\"\n- \"PVBatteryHostDeveloper\"\n- \"PVBatteryLeveragedPartnershipFlip\"\n- \"PVBatteryMerchantPlant\"\n- \"PVBatteryResidential\"\n- \"PVBatterySaleLeaseback\"\n- \"PVBatterySingleOwner\"\n- \"PVBatteryThirdParty\"\n- \"PVWattsBatteryCommercial\"\n- \"PVWattsBatteryHostDeveloper\"\n- \"PVWattsBatteryResidential\"\n- \"PVWattsBatteryThirdParty\"\n- \"PVWattsAllEquityPartnershipFlip\"\n- \"PVWattsCommercial\"\n- \"PVWattsHostDeveloper\"\n- \"PVWattsLCOECalculator\"\n- \"PVWattsLeveragedPartnershipFlip\"\n- \"PVWattsMerchantPlant\"\n- \"PVWattsNone\"\n- \"PVWattsResidential\"\n- \"PVWattsSaleLeaseback\"\n- \"PVWattsSingleOwner\"\n- \"PVWattsThirdParty\"\n- \"PhysicalTroughAllEquityPartnershipFlip\"\n- \"PhysicalTroughCommercial\"\n- \"PhysicalTroughLCOECalculator\"\n- \"PhysicalTroughLeveragedPartnershipFlip\"\n- \"PhysicalTroughMerchantPlant\"\n- \"PhysicalTroughNone\"\n- \"PhysicalTroughSaleLeaseback\"\n- \"PhysicalTroughSingleOwner\"\n- \"WindPowerAllEquityPartnershipFlip\"\n- \"WindPowerCommercial\"\n- \"WindPowerLCOECalculator\"\n- \"WindPowerLeveragedPartnershipFlip\"\n- \"WindPowerMerchantPlant\"\n- \"WindPowerNone\"\n- \"WindPowerResidential\"\n- \"WindPowerSaleLeaseback\"\n- \"WindPowerSingleOwner\"")},
 		{"wrap",             Grid_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Grid\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   Grid_from_existing,        METH_VARARGS,
@@ -1019,7 +1021,6 @@ GridModule_exec(PyObject *m)
 	 * object; doing it here is required for portability, too. */
 
 	if (PySAM_load_lib(m) < 0) goto fail;
-	if (PySAM_init_error(m) < 0) goto fail;
 
 	Grid_Type.tp_dict = PyDict_New();
 	if (!Grid_Type.tp_dict) { goto fail; }

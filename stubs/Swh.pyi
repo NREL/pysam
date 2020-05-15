@@ -1,4 +1,4 @@
-class Weather(object):
+class SolarResource(object):
 	def assign(self): 
 		pass
 
@@ -9,6 +9,7 @@ class Weather(object):
 		pass
 
 
+	solar_resource_data = dict
 	solar_resource_file = str
 
 
@@ -150,7 +151,7 @@ class Swh(object):
 	def __init__(self, *args, **kwargs):
 		pass
 
-	Weather = Weather
+	SolarResource = SolarResource
 	SWH = SWH
 	AdjustmentFactors = AdjustmentFactors
 	Outputs = Outputs

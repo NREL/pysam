@@ -1,1 +1,2 @@
-NREL-PySAM==2.0.1
+NREL-PySAM
+pandas

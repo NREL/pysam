@@ -59,75 +59,63 @@ static PyMethodDef Common_methods[] = {
 };
 
 static PyObject *
-Common_get_TES_HTF_code(VarGroupObject *self, void *closure)
+Common_get_P_ref(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_UiTesCalcs_Common_TES_HTF_code_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_UiTesCalcs_Common_P_ref_nget, self->data_ptr);
 }
 
 static int
-Common_set_TES_HTF_code(VarGroupObject *self, PyObject *value, void *closure)
+Common_set_P_ref(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_UiTesCalcs_Common_TES_HTF_code_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_UiTesCalcs_Common_P_ref_nset, self->data_ptr);
 }
 
 static PyObject *
-Common_get_TES_HTF_props(VarGroupObject *self, void *closure)
+Common_get_T_htf_cold_des(VarGroupObject *self, void *closure)
 {
-	return PySAM_matrix_getter(SAM_UiTesCalcs_Common_TES_HTF_props_mget, self->data_ptr);
+	return PySAM_double_getter(SAM_UiTesCalcs_Common_T_htf_cold_des_nget, self->data_ptr);
 }
 
 static int
-Common_set_TES_HTF_props(VarGroupObject *self, PyObject *value, void *closure)
+Common_set_T_htf_cold_des(VarGroupObject *self, PyObject *value, void *closure)
 {
-		return PySAM_matrix_setter(value, SAM_UiTesCalcs_Common_TES_HTF_props_mset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_UiTesCalcs_Common_T_htf_cold_des_nset, self->data_ptr);
 }
 
 static PyObject *
-Common_get_T_HTF_cold(VarGroupObject *self, void *closure)
+Common_get_T_htf_hot_des(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_UiTesCalcs_Common_T_HTF_cold_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_UiTesCalcs_Common_T_htf_hot_des_nget, self->data_ptr);
 }
 
 static int
-Common_set_T_HTF_cold(VarGroupObject *self, PyObject *value, void *closure)
+Common_set_T_htf_hot_des(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_UiTesCalcs_Common_T_HTF_cold_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_UiTesCalcs_Common_T_htf_hot_des_nset, self->data_ptr);
 }
 
 static PyObject *
-Common_get_T_HTF_hot(VarGroupObject *self, void *closure)
+Common_get_design_eff(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_UiTesCalcs_Common_T_HTF_hot_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_UiTesCalcs_Common_design_eff_nget, self->data_ptr);
 }
 
 static int
-Common_set_T_HTF_hot(VarGroupObject *self, PyObject *value, void *closure)
+Common_set_design_eff(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_UiTesCalcs_Common_T_HTF_hot_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_UiTesCalcs_Common_design_eff_nset, self->data_ptr);
 }
 
 static PyObject *
-Common_get_W_dot_pb_des(VarGroupObject *self, void *closure)
+Common_get_field_fl_props(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_UiTesCalcs_Common_W_dot_pb_des_nget, self->data_ptr);
+	return PySAM_matrix_getter(SAM_UiTesCalcs_Common_field_fl_props_mget, self->data_ptr);
 }
 
 static int
-Common_set_W_dot_pb_des(VarGroupObject *self, PyObject *value, void *closure)
+Common_set_field_fl_props(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_UiTesCalcs_Common_W_dot_pb_des_nset, self->data_ptr);
-}
-
-static PyObject *
-Common_get_eta_pb_des(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_UiTesCalcs_Common_eta_pb_des_nget, self->data_ptr);
-}
-
-static int
-Common_set_eta_pb_des(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_UiTesCalcs_Common_eta_pb_des_nset, self->data_ptr);
+		return PySAM_matrix_setter(value, SAM_UiTesCalcs_Common_field_fl_props_mset, self->data_ptr);
 }
 
 static PyObject *
@@ -155,6 +143,18 @@ Common_set_h_tank_min(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyObject *
+Common_get_rec_htf(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_UiTesCalcs_Common_rec_htf_nget, self->data_ptr);
+}
+
+static int
+Common_set_rec_htf(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_UiTesCalcs_Common_rec_htf_nset, self->data_ptr);
+}
+
+static PyObject *
 Common_get_tank_pairs(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_UiTesCalcs_Common_tank_pairs_nget, self->data_ptr);
@@ -167,15 +167,15 @@ Common_set_tank_pairs(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyObject *
-Common_get_tes_hrs(VarGroupObject *self, void *closure)
+Common_get_tshours(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_UiTesCalcs_Common_tes_hrs_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_UiTesCalcs_Common_tshours_nget, self->data_ptr);
 }
 
 static int
-Common_set_tes_hrs(VarGroupObject *self, PyObject *value, void *closure)
+Common_set_tshours(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_UiTesCalcs_Common_tes_hrs_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_UiTesCalcs_Common_tshours_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -191,23 +191,20 @@ Common_set_u_tank(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyGetSetDef Common_getset[] = {
-{"TES_HTF_code", (getter)Common_get_TES_HTF_code,(setter)Common_set_TES_HTF_code,
-	PyDoc_STR("*float*: TES storage fluid code\n\n*Required*: True"),
- 	NULL},
-{"TES_HTF_props", (getter)Common_get_TES_HTF_props,(setter)Common_set_TES_HTF_props,
-	PyDoc_STR("*sequence[sequence]*: User defined tes storage fluid prop data\n\n*Info*: 7 columns (T,Cp,dens,visc,kvisc,cond,h), at least 3 rows\n\n*Required*: True"),
- 	NULL},
-{"T_HTF_cold", (getter)Common_get_T_HTF_cold,(setter)Common_set_T_HTF_cold,
-	PyDoc_STR("*float*: Cold HTF temp (out of TES HX, if applicable) [C]\n\n*Required*: True"),
- 	NULL},
-{"T_HTF_hot", (getter)Common_get_T_HTF_hot,(setter)Common_set_T_HTF_hot,
-	PyDoc_STR("*float*: Hot HTF temp (into TES HX, if applicable) [C]\n\n*Required*: True"),
- 	NULL},
-{"W_dot_pb_des", (getter)Common_get_W_dot_pb_des,(setter)Common_set_W_dot_pb_des,
+{"P_ref", (getter)Common_get_P_ref,(setter)Common_set_P_ref,
 	PyDoc_STR("*float*: Power cycle output at design [MWe]\n\n*Required*: True"),
  	NULL},
-{"eta_pb_des", (getter)Common_get_eta_pb_des,(setter)Common_set_eta_pb_des,
+{"T_htf_cold_des", (getter)Common_get_T_htf_cold_des,(setter)Common_set_T_htf_cold_des,
+	PyDoc_STR("*float*: Cold HTF temp (out of TES HX, if applicable) [C]\n\n*Required*: True"),
+ 	NULL},
+{"T_htf_hot_des", (getter)Common_get_T_htf_hot_des,(setter)Common_set_T_htf_hot_des,
+	PyDoc_STR("*float*: Hot HTF temp (into TES HX, if applicable) [C]\n\n*Required*: True"),
+ 	NULL},
+{"design_eff", (getter)Common_get_design_eff,(setter)Common_set_design_eff,
 	PyDoc_STR("*float*: Power cycle thermal efficiency\n\n*Required*: True"),
+ 	NULL},
+{"field_fl_props", (getter)Common_get_field_fl_props,(setter)Common_set_field_fl_props,
+	PyDoc_STR("*sequence[sequence]*: User defined tes storage fluid prop data\n\n*Info*: 7 columns (T,Cp,dens,visc,kvisc,cond,h), at least 3 rows\n\n*Required*: True"),
  	NULL},
 {"h_tank", (getter)Common_get_h_tank,(setter)Common_set_h_tank,
 	PyDoc_STR("*float*: Total height of tank (HTF when tank is full [m]\n\n*Required*: True"),
@@ -215,10 +212,13 @@ static PyGetSetDef Common_getset[] = {
 {"h_tank_min", (getter)Common_get_h_tank_min,(setter)Common_set_h_tank_min,
 	PyDoc_STR("*float*: Min. allowable HTF height in storage tank [m]\n\n*Required*: True"),
  	NULL},
+{"rec_htf", (getter)Common_get_rec_htf,(setter)Common_set_rec_htf,
+	PyDoc_STR("*float*: TES storage fluid code\n\n*Required*: True"),
+ 	NULL},
 {"tank_pairs", (getter)Common_get_tank_pairs,(setter)Common_set_tank_pairs,
 	PyDoc_STR("*float*: Number of equivalent tank pairs\n\n*Required*: True"),
  	NULL},
-{"tes_hrs", (getter)Common_get_tes_hrs,(setter)Common_set_tes_hrs,
+{"tshours", (getter)Common_get_tshours,(setter)Common_set_tshours,
 	PyDoc_STR("*float*: Hours of TES relative to q_dot_pb_des [hr]\n\n*Required*: True"),
  	NULL},
 {"u_tank", (getter)Common_get_u_tank,(setter)Common_set_u_tank,
@@ -327,58 +327,58 @@ static PyMethodDef Outputs_methods[] = {
 };
 
 static PyObject *
-Outputs_get_HTF_dens(VarGroupObject *self, void *closure)
+Outputs_get_csp_pt_tes_htf_density(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_UiTesCalcs_Outputs_HTF_dens_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_UiTesCalcs_Outputs_csp_pt_tes_htf_density_nget, self->data_ptr);
 }
 
 static PyObject *
-Outputs_get_d_tank(VarGroupObject *self, void *closure)
+Outputs_get_csp_pt_tes_tank_diameter(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_UiTesCalcs_Outputs_d_tank_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_UiTesCalcs_Outputs_csp_pt_tes_tank_diameter_nget, self->data_ptr);
 }
 
 static PyObject *
-Outputs_get_q_dot_loss(VarGroupObject *self, void *closure)
+Outputs_get_q_dot_tes_est(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_UiTesCalcs_Outputs_q_dot_loss_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_UiTesCalcs_Outputs_q_dot_tes_est_nget, self->data_ptr);
 }
 
 static PyObject *
-Outputs_get_q_tes_des(VarGroupObject *self, void *closure)
+Outputs_get_q_tes(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_UiTesCalcs_Outputs_q_tes_des_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_UiTesCalcs_Outputs_q_tes_nget, self->data_ptr);
 }
 
 static PyObject *
-Outputs_get_vol_one_temp_avail(VarGroupObject *self, void *closure)
+Outputs_get_tes_avail_vol(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_UiTesCalcs_Outputs_vol_one_temp_avail_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_UiTesCalcs_Outputs_tes_avail_vol_nget, self->data_ptr);
 }
 
 static PyObject *
-Outputs_get_vol_one_temp_total(VarGroupObject *self, void *closure)
+Outputs_get_vol_tank(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_UiTesCalcs_Outputs_vol_one_temp_total_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_UiTesCalcs_Outputs_vol_tank_nget, self->data_ptr);
 }
 
 static PyGetSetDef Outputs_getset[] = {
-{"HTF_dens", (getter)Outputs_get_HTF_dens,(setter)0,
+{"csp_pt_tes_htf_density", (getter)Outputs_get_csp_pt_tes_htf_density,(setter)0,
 	PyDoc_STR("*float*: HTF dens [kg/m^3]"),
  	NULL},
-{"d_tank", (getter)Outputs_get_d_tank,(setter)0,
+{"csp_pt_tes_tank_diameter", (getter)Outputs_get_csp_pt_tes_tank_diameter,(setter)0,
 	PyDoc_STR("*float*: Single tank diameter [m]"),
  	NULL},
-{"q_dot_loss", (getter)Outputs_get_q_dot_loss,(setter)0,
+{"q_dot_tes_est", (getter)Outputs_get_q_dot_tes_est,(setter)0,
 	PyDoc_STR("*float*: Estimated tank heat loss to env. [MWt]"),
  	NULL},
-{"q_tes_des", (getter)Outputs_get_q_tes_des,(setter)0,
+{"q_tes", (getter)Outputs_get_q_tes,(setter)0,
 	PyDoc_STR("*float*: TES thermal capacity at design [MWt-hr]"),
  	NULL},
-{"vol_one_temp_avail", (getter)Outputs_get_vol_one_temp_avail,(setter)0,
+{"tes_avail_vol", (getter)Outputs_get_tes_avail_vol,(setter)0,
 	PyDoc_STR("*float*: Available single temp storage volume [m^3]"),
  	NULL},
-{"vol_one_temp_total", (getter)Outputs_get_vol_one_temp_total,(setter)0,
+{"vol_tank", (getter)Outputs_get_vol_tank,(setter)0,
 	PyDoc_STR("*float*: Total single temp storage volume [m^3]"),
  	NULL},
 	{NULL}  /* Sentinel */
@@ -442,7 +442,7 @@ newUiTesCalcsObject(void* data_ptr)
 	CmodObject *self;
 	self = PyObject_New(CmodObject, &UiTesCalcs_Type);
 
-	PySAM_TECH_ATTR("UiTesCalcs", SAM_UiTesCalcs_construct)
+	PySAM_TECH_ATTR()
 
 	PyObject* Common_obj = Common_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Common", Common_obj);
@@ -451,7 +451,6 @@ newUiTesCalcsObject(void* data_ptr)
 	PyObject* Outputs_obj = Outputs_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
 	Py_DECREF(Outputs_obj);
-
 
 	return self;
 }
@@ -462,8 +461,12 @@ static void
 UiTesCalcs_dealloc(CmodObject *self)
 {
 	Py_XDECREF(self->x_attr);
-	if (!self->data_owner_ptr)
-		SAM_UiTesCalcs_destruct(self->data_ptr);
+
+	if (!self->data_owner_ptr) {
+		SAM_error error = new_error();
+		SAM_table_destruct(self->data_ptr, &error);
+		PySAM_has_error(error);
+	}
 	PyObject_Del(self);
 }
 
@@ -479,7 +482,6 @@ UiTesCalcs_execute(CmodObject *self, PyObject *args)
 	SAM_error error = new_error();
 	SAM_UiTesCalcs_execute(self->data_ptr, verbosity, &error);
 	if (PySAM_has_error(error )) return NULL;
-
 	Py_INCREF(Py_None);
 	return Py_None;
 }
@@ -510,7 +512,7 @@ UiTesCalcs_export(CmodObject *self, PyObject *args)
 static PyObject *
 UiTesCalcs_value(CmodObject *self, PyObject *args)
 {
-	return CmodObject_value(self, args);
+	return Cmod_value(self, args);
 }
 
 static PyMethodDef UiTesCalcs_methods[] = {
@@ -698,7 +700,6 @@ UiTesCalcsModule_exec(PyObject *m)
 	 * object; doing it here is required for portability, too. */
 
 	if (PySAM_load_lib(m) < 0) goto fail;
-	if (PySAM_init_error(m) < 0) goto fail;
 
 	UiTesCalcs_Type.tp_dict = PyDict_New();
 	if (!UiTesCalcs_Type.tp_dict) { goto fail; }

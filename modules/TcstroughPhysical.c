@@ -5075,7 +5075,7 @@ newTcstroughPhysicalObject(void* data_ptr)
 	CmodObject *self;
 	self = PyObject_New(CmodObject, &TcstroughPhysical_Type);
 
-	PySAM_TECH_ATTR("TcstroughPhysical", SAM_TcstroughPhysical_construct)
+	PySAM_TECH_ATTR()
 
 	PyObject* Weather_obj = Weather_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Weather", Weather_obj);
@@ -5117,7 +5117,7 @@ newTcstroughPhysicalObject(void* data_ptr)
 	Py_XDECREF(AdjustmentFactorsModule);
 
 	if (!Adjust_obj){
-		PyErr_SetString(PySAM_ErrorObject, "Couldn't create AdjustmentFactorsObject\n");
+		PyErr_SetString(PyExc_Exception, "Couldn't create AdjustmentFactorsObject\n");
 		return NULL;
 	}
 
@@ -5128,7 +5128,6 @@ newTcstroughPhysicalObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
 	Py_DECREF(Outputs_obj);
 
-
 	return self;
 }
 
@@ -5138,8 +5137,12 @@ static void
 TcstroughPhysical_dealloc(CmodObject *self)
 {
 	Py_XDECREF(self->x_attr);
-	if (!self->data_owner_ptr)
-		SAM_TcstroughPhysical_destruct(self->data_ptr);
+
+	if (!self->data_owner_ptr) {
+		SAM_error error = new_error();
+		SAM_table_destruct(self->data_ptr, &error);
+		PySAM_has_error(error);
+	}
 	PyObject_Del(self);
 }
 
@@ -5155,7 +5158,6 @@ TcstroughPhysical_execute(CmodObject *self, PyObject *args)
 	SAM_error error = new_error();
 	SAM_TcstroughPhysical_execute(self->data_ptr, verbosity, &error);
 	if (PySAM_has_error(error )) return NULL;
-
 	Py_INCREF(Py_None);
 	return Py_None;
 }
@@ -5186,7 +5188,7 @@ TcstroughPhysical_export(CmodObject *self, PyObject *args)
 static PyObject *
 TcstroughPhysical_value(CmodObject *self, PyObject *args)
 {
-	return CmodObject_value(self, args);
+	return Cmod_value(self, args);
 }
 
 static PyMethodDef TcstroughPhysical_methods[] = {
@@ -5374,7 +5376,6 @@ TcstroughPhysicalModule_exec(PyObject *m)
 	 * object; doing it here is required for portability, too. */
 
 	if (PySAM_load_lib(m) < 0) goto fail;
-	if (PySAM_init_error(m) < 0) goto fail;
 
 	TcstroughPhysical_Type.tp_dict = PyDict_New();
 	if (!TcstroughPhysical_Type.tp_dict) { goto fail; }

@@ -14,12 +14,15 @@ from requests.packages.urllib3.util.retry import Retry
 import pandas as pd
 import numpy as np
 
+
 def TMY_CSV_to_solar_data(filename):
     """
     Format a TMY csv file as 'solar_resource_data' dictionary for use in PySAM.
-    :param: filename:
-        any csv resource file formatted according to NSRDB
-    :return: dictionary for PySAM.Pvwattsv7.Pvwattsv7.SolarResource, and other models
+    For more information about TMY CSV file format, see https://sam.nrel.gov/weather-data/weather-data-publications.html
+
+    :param filename: Any csv resource file formatted according to NSRDB
+
+    :return: Dictionary for PySAM.Pvwattsv7.Pvwattsv7.SolarResource, and other models
     """
     if not os.path.isfile(filename):
         raise FileNotFoundError(filename + " does not exist.")
@@ -63,9 +66,11 @@ def TMY_CSV_to_solar_data(filename):
 def SRW_to_wind_data(filename):
     """
     Format as 'wind_resource_data' dictionary for use in PySAM.
-    :param: filename:
-        srw wind resource file
-    :return: dictionary for PySAM.Windpower.Windpower.Resource
+    For more information about SRW file format, see https://sam.nrel.gov/weather-data/weather-data-publications.html
+
+    :param filename: A .srw wind resource file
+
+    :return: Dictionary for PySAM.Windpower.Windpower.Resource
     """
     if not os.path.isfile(filename):
         raise FileNotFoundError(filename + " does not exist.")
@@ -101,7 +106,8 @@ def URDBv7_to_ElectricityRates(urdb_response):
             model = PySAM.UtilityRate5.new()
             rates = PySAM.ResourceTools.URDBv7_to_ElectricityRates(urdb_response)
             model.ElectricityRates.assign(rates)
-    :param: urdb_response
+
+    :param: urdb_response:
         dictionary with response fields following https://openei.org/services/doc/rest/util_rates/?version=7
     :return: dictionary for PySAM.UtilityRate5.UtilityRate5.ElectricityRates
     """
@@ -221,22 +227,13 @@ class FetchResourceFiles():
     Download U.S. solar and wind resource data for SAM from NRELs developer network
     https://developer.nrel.gov/
 
-    Inputs
-    ------
-    tech (str): one of 'wind' or 'pv'
-    workers (int): number of threads to use when parellelizing downloads
-    resource_year (int): year to grab resources from.
+    :param: tech (str): one of 'wind' or 'pv'
+    :param: workers (int): number of threads to use when parellelizing downloads
+    :param: resource_year (int): year to grab resources from.
         can be 'tmy' for solar
-    resource_interval_min (int): time interval of resource data
-    nrel_api_key (str): NREL developer API key, available here https://developer.nrel.gov/signup/
+    :param: resource_interval_min (int): time interval of resource data
+    :param: nrel_api_key (str): NREL developer API key, available here https://developer.nrel.gov/signup/
     nrel_api_email (str): email associated with nrel_api_key
-
-    Methods
-    -------
-    run():
-        fetch resource profiles for an iterable of lat/lons and save to disk.
-        the attribute `.resource_file_paths_dict` offers a dictionary with keys as lat/lon tuples and
-
 
     """
 
@@ -244,7 +241,7 @@ class FetchResourceFiles():
                  workers=1,
                  resource_year='tmy',
                  resource_interval_min=60,
-                 SAM_resource_dir=None):
+                 resource_dir=None):
 
         self.tech = tech
         self.nrel_api_key = nrel_api_key
@@ -255,8 +252,9 @@ class FetchResourceFiles():
         self.workers = workers
 
         # --- Make folder to store resource_files ---
-        if not SAM_resource_dir:
-            self.SAM_resource_dir = os.path.join(os.getcwd(),'data','PySAM Downloaded Weather Files')
+        self.SAM_resource_dir = resource_dir
+        if not self.SAM_resource_dir:
+            self.SAM_resource_dir = os.path.join(os.getcwd(), 'data', 'PySAM Downloaded Weather Files')
         if not os.path.exists(self.SAM_resource_dir):
             os.makedirs(self.SAM_resource_dir)
 
@@ -269,7 +267,7 @@ class FetchResourceFiles():
                 self.resource_year = 2012
 
         else:
-            raise NotImplementedError(f'Please write a wrapper to fetch data for the new technology type {tech}')
+            raise NotImplementedError('Please write a wrapper to fetch data for the new technology type {}'.format(tech))
 
     def _requests_retry_session(self, retries=10,
                                 backoff_factor=1,
@@ -360,18 +358,18 @@ class FetchResourceFiles():
 
         # --- Intialize File Path ---
         file_path = os.path.join(
-            self.SAM_resource_dir, f"{lat}_{lon}_psm3_{self.resource_interval_min}_{self.resource_year}.csv")
+            self.SAM_resource_dir, "{}_{}_psm3_{}_{}.csv".format(lat, lon, self.resource_interval_min, self.resource_year))
 
         # --- See if file path already exists ---
         if os.path.exists(file_path):
             return file_path  # file already exists, just return path...
 
         else:
-            print(f"Downloading NSRDB file for {lat}_{lon}...")
+            print("Downloading NSRDB file for {}_{}...".format(lat, lon))
 
             # --- Find url for closest point ---
             lookup_base_url = 'https://developer.nrel.gov/api/solar/'
-            lookup_query_url = f"nsrdb_data_query.json?api_key={self.nrel_api_key}&wkt=POINT({lon}+{lat})"
+            lookup_query_url = "nsrdb_data_query.json?api_key={}&wkt=POINT({}+{})".format(self.nrel_api_key, lon, lat)
             lookup_url = lookup_base_url + lookup_query_url
             lookup_response = retry_session.get(lookup_url)
 
@@ -407,18 +405,19 @@ class FetchResourceFiles():
 
         # --- Intialize File Path ---
         file_path = os.path.join(
-            self.SAM_resource_dir, f"{lat}_{lon}_wtk_{self.resource_interval_min}_{self.resource_year}.srw")
+            self.SAM_resource_dir, "{}_{}_wtk_{}_{}.srw".format(lat, lon, self.resource_interval_min, self.resource_year))
 
         # --- See if file path already exists ---
         if os.path.exists(file_path):
             return file_path  # file already exists, just return path...
 
         else:
-            print(f"Downloading wind toolkit file for {lat}_{lon}...")
+            print("Downloading wind toolkit file for {}_{}...".format(lat, lon))
 
             # --- Find url for closest point ---
             year_base_url = 'https://developer.nrel.gov/api/wind-toolkit/wind/'
-            year_query_url = f"wtk_download.csv?api_key={self.nrel_api_key}&wkt=POINT({lon}+{lat})&attributes=wind_speed,wind_direction,power,temperature,pressure&names={self.resource_year}&utc=true&email={self.nrel_api_email}"
+            year_query_url = "wtk_download.csv?api_key={}&wkt=POINT({}+{})&attributes=wind_speed,wind_direction,power,temperature,pressure&names={}&utc=true&email={}".format(
+                self.nrel_api_key, lon, lat, self.resource_year, self.nrel_api_email)
             year_url = year_base_url + year_query_url
             year_response = retry_session.get(year_url)
 
@@ -441,7 +440,7 @@ class FetchResourceFiles():
         """
 
         print('\n')
-        print(f'Beginning data download for {self.tech} using {self.workers} thread workers')
+        print('Beginning data download for {} using {} thread workers'.format(self.tech, self.workers))
 
         # --- Initialize Session w/ retries ---
         if self.workers > 1:

@@ -69,20 +69,6 @@ if sys.platform == 'win32':
 #
 ###################################################################################################
 
-# dynamic library files should be exported to pysam/files by post-build step of each library but copy over headers
-
-distutils.dir_util.copy_tree(
-    includepath,
-    this_directory+"/include",
-    update=1,
-    verbose=1,
-)
-
-for filename in os.listdir(srcpath):
-    name = os.path.splitext(filename)
-    if name[1] == ".h":
-        copyfile(os.path.join(srcpath, filename), os.path.join("src", filename))
-
 # serialize all defaults into dict
 def _decode(o):
     if isinstance(o, str):
@@ -126,7 +112,7 @@ for filename in os.listdir(defaults_df_dir):
 extension_modules = [Extension('PySAM.AdjustmentFactors',
                      ['src/AdjustmentFactors.c'],
                     define_macros=defines,
-                    include_dirs=["include", "src"],
+                    include_dirs=[srcpath, includepath, "src"],
                     library_dirs=[libpath],
                     libraries=libs,
                     extra_compile_args=extra_compile_args,
@@ -137,7 +123,7 @@ for filename in os.listdir(this_directory+"/modules"):
     extension_modules.append(Extension('PySAM.' + os.path.splitext(filename)[0],
                              ['modules/' + filename],
                             define_macros=defines,
-                            include_dirs=["include", "src"],
+                            include_dirs=[srcpath, includepath, "src"],
                             library_dirs=[libpath],
                             libraries=libs,
                             extra_compile_args=extra_compile_args,
@@ -190,3 +176,6 @@ setup(
     ext_modules=extension_modules
 )
 
+
+# Clean up
+shutil.rmtree(defaults_df_dir)

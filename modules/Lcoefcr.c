@@ -307,7 +307,7 @@ newLcoefcrObject(void* data_ptr)
 	CmodObject *self;
 	self = PyObject_New(CmodObject, &Lcoefcr_Type);
 
-	PySAM_TECH_ATTR("Lcoefcr", SAM_Lcoefcr_construct)
+	PySAM_TECH_ATTR()
 
 	PyObject* SimpleLCOE_obj = SimpleLCOE_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "SimpleLCOE", SimpleLCOE_obj);
@@ -316,7 +316,6 @@ newLcoefcrObject(void* data_ptr)
 	PyObject* Outputs_obj = Outputs_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
 	Py_DECREF(Outputs_obj);
-
 
 	return self;
 }
@@ -327,8 +326,12 @@ static void
 Lcoefcr_dealloc(CmodObject *self)
 {
 	Py_XDECREF(self->x_attr);
-	if (!self->data_owner_ptr)
-		SAM_Lcoefcr_destruct(self->data_ptr);
+
+	if (!self->data_owner_ptr) {
+		SAM_error error = new_error();
+		SAM_table_destruct(self->data_ptr, &error);
+		PySAM_has_error(error);
+	}
 	PyObject_Del(self);
 }
 
@@ -344,7 +347,6 @@ Lcoefcr_execute(CmodObject *self, PyObject *args)
 	SAM_error error = new_error();
 	SAM_Lcoefcr_execute(self->data_ptr, verbosity, &error);
 	if (PySAM_has_error(error )) return NULL;
-
 	Py_INCREF(Py_None);
 	return Py_None;
 }
@@ -375,7 +377,7 @@ Lcoefcr_export(CmodObject *self, PyObject *args)
 static PyObject *
 Lcoefcr_value(CmodObject *self, PyObject *args)
 {
-	return CmodObject_value(self, args);
+	return Cmod_value(self, args);
 }
 
 static PyMethodDef Lcoefcr_methods[] = {
@@ -544,7 +546,7 @@ static PyMethodDef LcoefcrModule_methods[] = {
 				PyDoc_STR("new() -> Lcoefcr")},
 		{"default",             Lcoefcr_default,         METH_VARARGS,
 				PyDoc_STR("default(config) -> Lcoefcr\n\nUse financial config-specific default attributes\n"
-				"config options:\n\n- \"BiopowerLCOECalculator\"\n- \"DSGLIPHLCOHCalculator\"\n- \"DSLFLCOECalculator\"\n- \"DishStirlingLCOECalculator\"\n- \"EmpiricalTroughLCOECalculator\"\n- \"FlatPlatePVLCOECalculator\"\n- \"GenericCSPSystemLCOECalculator\"\n- \"GenericSystemLCOECalculator\"\n- \"GeothermalPowerLCOECalculator\"\n- \"HighXConcentratingPVLCOECalculator\"\n- \"MHKtidalLCOECalculator\"\n- \"MHKwaveLCOECalculator\"\n- \"MSLFLCOECalculator\"\n- \"PVWattsLCOECalculator\"\n- \"PhysicalTroughIPHLCOHCalculator\"\n- \"PhysicalTroughLCOECalculator\"\n- \"SolarWaterHeatingLCOECalculator\"\n- \"WindPowerLCOECalculator\"")},
+				"config options:\n\n- \"BiopowerLCOECalculator\"\n- \"DSGLIPHLCOHCalculator\"\n- \"DSLFLCOECalculator\"\n- \"DishStirlingLCOECalculator\"\n- \"EmpiricalTroughLCOECalculator\"\n- \"FlatPlatePVLCOECalculator\"\n- \"GenericCSPSystemLCOECalculator\"\n- \"GenericSystemLCOECalculator\"\n- \"GeothermalPowerLCOECalculator\"\n- \"HighXConcentratingPVLCOECalculator\"\n- \"MEtidalLCOECalculator\"\n- \"MEwaveLCOECalculator\"\n- \"MSLFLCOECalculator\"\n- \"PVWattsLCOECalculator\"\n- \"PhysicalTroughIPHLCOHCalculator\"\n- \"PhysicalTroughLCOECalculator\"\n- \"SolarWaterHeatingLCOECalculator\"\n- \"WindPowerLCOECalculator\"")},
 		{"wrap",             Lcoefcr_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Lcoefcr\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   Lcoefcr_from_existing,        METH_VARARGS,
@@ -563,7 +565,6 @@ LcoefcrModule_exec(PyObject *m)
 	 * object; doing it here is required for portability, too. */
 
 	if (PySAM_load_lib(m) < 0) goto fail;
-	if (PySAM_init_error(m) < 0) goto fail;
 
 	Lcoefcr_Type.tp_dict = PyDict_New();
 	if (!Lcoefcr_Type.tp_dict) { goto fail; }

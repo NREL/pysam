@@ -81,12 +81,6 @@ Lifetime Group
 .. autoclass:: PySAM.Merchantplant.Merchantplant.Lifetime
 	:members:
 
-Market Group
-==============
-
-.. autoclass:: PySAM.Merchantplant.Merchantplant.Market
-	:members:
-
 FuelCell Group
 ==============
 
