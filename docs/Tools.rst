@@ -13,7 +13,7 @@ These functions help with solar resource, wind resource and utility rate data, d
 See how to download solar resource data from the National Solar Radiation Database or wind resource data from the WindToolKit.
 Use resource files directly in your PySAM models or input them as dictionaries.
 
-.. automodule:: PySAM.ResourceTools
+.. automodule:: files.ResourceTools
     :members:
     :undoc-members:
 
@@ -21,7 +21,7 @@ Use resource files directly in your PySAM models or input them as dictionaries.
 Battery Tools
 *************
 
-.. automodule:: PySAM.BatteryTools
+.. automodule:: files.BatteryTools
     :members:
     :undoc-members:
 

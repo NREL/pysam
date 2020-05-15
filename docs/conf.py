@@ -13,7 +13,7 @@
 import os
 import sys
 import PySAM
-# sys.path.insert(0, 'PySAM')
+sys.path.insert(0, "..")
 
 master_doc = 'index'
 
