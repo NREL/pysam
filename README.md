@@ -24,7 +24,7 @@ https://nrel-pysam.readthedocs.io
 	pip install NREL-PySAM
 	```
 
-2. Anaconda:
+2. Anaconda (<2.0.2 only):
 	```
 	conda config --env --append channels nrel
 	conda install nrel-pysam
@@ -35,7 +35,7 @@ https://nrel-pysam.readthedocs.io
 ## Usage Examples
 - [Demo](https://github.com/NREL/pysam/blob/master/demo.py)
 - [Importing a SAM case](https://nrel-pysam.readthedocs.io/en/latest/Import.html)
-- [Basic functionality](https://github.com/NREL/pysam/blob/master/tests/test_pysam_all.py)
+- [Examples](https://github.com/NREL/pysam/blob/master/Examples)
 
 
 ## Structure
