@@ -110,7 +110,8 @@ def test_resourcefilefetcher():
     wtkfetcher = tools.FetchResourceFiles(
         tech='wind',
         nrel_api_key=NREL_API_KEY,
-        nrel_api_email=NREL_API_EMAIL)
+        nrel_api_email=NREL_API_EMAIL,
+        resource_dir=resource_dir)
     wtkfetcher.fetch(lon_lats)
 
     # --- read csv and confirm dimensions ---
