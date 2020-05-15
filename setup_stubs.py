@@ -5,8 +5,6 @@ from files.version import __version__
 
 latest_version = __version__
 
-latest_version = '2.1.dev1'
-
 # determine if making PyPi or Conda distribution
 distclass = distutils.core.Distribution
 if sys.argv[1] == "bdist_conda":

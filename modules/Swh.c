@@ -7,34 +7,34 @@
 
 
 /*
- * Weather Group
+ * SolarResource Group
  */ 
 
-static PyTypeObject Weather_Type;
+static PyTypeObject SolarResource_Type;
 
 static PyObject *
-Weather_new(SAM_Swh data_ptr)
+SolarResource_new(SAM_Swh data_ptr)
 {
-	PyObject* new_obj = Weather_Type.tp_alloc(&Weather_Type,0);
+	PyObject* new_obj = SolarResource_Type.tp_alloc(&SolarResource_Type,0);
 
-	VarGroupObject* Weather_obj = (VarGroupObject*)new_obj;
+	VarGroupObject* SolarResource_obj = (VarGroupObject*)new_obj;
 
-	Weather_obj->data_ptr = (SAM_table)data_ptr;
+	SolarResource_obj->data_ptr = (SAM_table)data_ptr;
 
 	return new_obj;
 }
 
-/* Weather methods */
+/* SolarResource methods */
 
 static PyObject *
-Weather_assign(VarGroupObject *self, PyObject *args)
+SolarResource_assign(VarGroupObject *self, PyObject *args)
 {
 	PyObject* dict;
 	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Swh", "Weather")){
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Swh", "SolarResource")){
 		return NULL;
 	}
 
@@ -43,45 +43,60 @@ Weather_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
-Weather_export(VarGroupObject *self, PyObject *args)
+SolarResource_export(VarGroupObject *self, PyObject *args)
 {
-	PyTypeObject* tp = &Weather_Type;
+	PyTypeObject* tp = &SolarResource_Type;
 	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
 	return dict;
 }
 
-static PyMethodDef Weather_methods[] = {
-		{"assign",            (PyCFunction)Weather_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Weather_vals = { var: val, ...}``")},
-		{"export",            (PyCFunction)Weather_export,  METH_VARARGS,
+static PyMethodDef SolarResource_methods[] = {
+		{"assign",            (PyCFunction)SolarResource_assign,  METH_VARARGS,
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``SolarResource_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)SolarResource_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 static PyObject *
-Weather_get_solar_resource_file(VarGroupObject *self, void *closure)
+SolarResource_get_solar_resource_data(VarGroupObject *self, void *closure)
 {
-	return PySAM_string_getter(SAM_Swh_Weather_solar_resource_file_sget, self->data_ptr);
+	return PySAM_table_getter(SAM_Swh_SolarResource_solar_resource_data_tget, self->data_ptr);
 }
 
 static int
-Weather_set_solar_resource_file(VarGroupObject *self, PyObject *value, void *closure)
+SolarResource_set_solar_resource_data(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_string_setter(value, SAM_Swh_Weather_solar_resource_file_sset, self->data_ptr);
+	return PySAM_table_setter(value, SAM_Swh_SolarResource_solar_resource_data_tset, self->data_ptr);
 }
 
-static PyGetSetDef Weather_getset[] = {
-{"solar_resource_file", (getter)Weather_get_solar_resource_file,(setter)Weather_set_solar_resource_file,
-	PyDoc_STR("*str*: local weather file path\n\n*Constraints*: LOCAL_FILE\n\n*Required*: True"),
+static PyObject *
+SolarResource_get_solar_resource_file(VarGroupObject *self, void *closure)
+{
+	return PySAM_string_getter(SAM_Swh_SolarResource_solar_resource_file_sget, self->data_ptr);
+}
+
+static int
+SolarResource_set_solar_resource_file(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_string_setter(value, SAM_Swh_SolarResource_solar_resource_file_sset, self->data_ptr);
+}
+
+static PyGetSetDef SolarResource_getset[] = {
+{"solar_resource_data", (getter)SolarResource_get_solar_resource_data,(setter)SolarResource_set_solar_resource_data,
+	PyDoc_STR("*dict*: Weather data\n\n*Info*: dn,df,tdry,wspd,lat,lon,tz\n\n*Required*: False"),
+ 	NULL},
+{"solar_resource_file", (getter)SolarResource_get_solar_resource_file,(setter)SolarResource_set_solar_resource_file,
+	PyDoc_STR("*str*: local weather file path\n\n*Constraints*: LOCAL_FILE\n\n*Required*: False"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
 
-static PyTypeObject Weather_Type = {
+static PyTypeObject SolarResource_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"Swh.Weather",             /*tp_name*/
+		"Swh.SolarResource",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -108,9 +123,9 @@ static PyTypeObject Weather_Type = {
 		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
-		Weather_methods,         /*tp_methods*/
+		SolarResource_methods,         /*tp_methods*/
 		0,                          /*tp_members*/
-		Weather_getset,          /*tp_getset*/
+		SolarResource_getset,          /*tp_getset*/
 		0,                          /*tp_base*/
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
@@ -1228,9 +1243,9 @@ newSwhObject(void* data_ptr)
 
 	PySAM_TECH_ATTR()
 
-	PyObject* Weather_obj = Weather_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "Weather", Weather_obj);
-	Py_DECREF(Weather_obj);
+	PyObject* SolarResource_obj = SolarResource_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "SolarResource", SolarResource_obj);
+	Py_DECREF(SolarResource_obj);
 
 	PyObject* SWH_obj = SWH_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "SWH", SWH_obj);
@@ -1244,7 +1259,7 @@ newSwhObject(void* data_ptr)
 	Py_XDECREF(AdjustmentFactorsModule);
 
 	if (!Adjust_obj){
-		PyErr_SetString(PySAM_ErrorObject, "Couldn't create AdjustmentFactorsObject\n");
+		PyErr_SetString(PyExc_Exception, "Couldn't create AdjustmentFactorsObject\n");
 		return NULL;
 	}
 
@@ -1322,7 +1337,7 @@ static PyMethodDef Swh_methods[] = {
 		{"execute",            (PyCFunction)Swh_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
 		{"assign",            (PyCFunction)Swh_assign,  METH_VARARGS,
-				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Weather': { var: val, ...}, ...}``")},
+				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Solar Resource': { var: val, ...}, ...}``")},
 		{"export",            (PyCFunction)Swh_export,  METH_VARARGS,
 				PyDoc_STR("export() -> dict\n Export attributes into nested dictionary")},
 		{"value",             (PyCFunction)Swh_value, METH_VARARGS,
@@ -1503,7 +1518,6 @@ SwhModule_exec(PyObject *m)
 	 * object; doing it here is required for portability, too. */
 
 	if (PySAM_load_lib(m) < 0) goto fail;
-	if (PySAM_init_error(m) < 0) goto fail;
 
 	Swh_Type.tp_dict = PyDict_New();
 	if (!Swh_Type.tp_dict) { goto fail; }
@@ -1527,12 +1541,12 @@ SwhModule_exec(PyObject *m)
 	Py_DECREF(&AdjustmentFactors_Type);
 	Py_XDECREF(AdjustmentFactors_Type);
 
-	/// Add the Weather type object to Swh_Type
-	if (PyType_Ready(&Weather_Type) < 0) { goto fail; }
+	/// Add the SolarResource type object to Swh_Type
+	if (PyType_Ready(&SolarResource_Type) < 0) { goto fail; }
 	PyDict_SetItemString(Swh_Type.tp_dict,
-				"Weather",
-				(PyObject*)&Weather_Type);
-	Py_DECREF(&Weather_Type);
+				"SolarResource",
+				(PyObject*)&SolarResource_Type);
+	Py_DECREF(&SolarResource_Type);
 
 	/// Add the SWH type object to Swh_Type
 	if (PyType_Ready(&SWH_Type) < 0) { goto fail; }

@@ -1070,7 +1070,7 @@ static PyObject* PySAM_run_getset(PyObject *self, PyObject *arg, PyObject * x_at
     }
     char str[256];
     PySAM_concat_msg(str, "'value' error, could not find attribute: ", name);
-    PyErr_SetString(PySAM_ErrorObject, str);
+    PyErr_SetString(PyExc_AttributeError, str);
     return NULL;
 }
 

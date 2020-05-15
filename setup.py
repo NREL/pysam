@@ -176,3 +176,6 @@ setup(
     ext_modules=extension_modules
 )
 
+
+# Clean up
+shutil.rmtree(defaults_df_dir)

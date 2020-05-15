@@ -120,7 +120,7 @@ Controls_set_run_sequentially(VarGroupObject *self, PyObject *value, void *closu
 
 static PyGetSetDef Controls_getset[] = {
 {"control_mode", (getter)Controls_get_control_mode,(setter)Controls_set_control_mode,
-	PyDoc_STR("*float*: Control using current (0) or power (1) [hr]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Control using current (0) or power (1) [0/1]\n\n*Required*: True"),
  	NULL},
 {"dt_hr", (getter)Controls_get_dt_hr,(setter)Controls_set_dt_hr,
 	PyDoc_STR("*float*: Time step in hours [hr]\n\n*Required*: True"),
@@ -2231,7 +2231,6 @@ BatteryStatefulModule_exec(PyObject *m)
 	 * object; doing it here is required for portability, too. */
 
 	if (PySAM_load_lib(m) < 0) goto fail;
-	if (PySAM_init_error(m) < 0) goto fail;
 
 	BatteryStateful_Type.tp_dict = PyDict_New();
 	if (!BatteryStateful_Type.tp_dict) { goto fail; }

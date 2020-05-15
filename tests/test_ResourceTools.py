@@ -1,3 +1,6 @@
+import sys
+sys.path.append('.')
+import shutil
 import pytest
 from pathlib import Path
 import json
@@ -43,7 +46,7 @@ def test_wind():
 
 
 def test_urdb():
-    urdb = Path(__file__).parent / "urdbv7.json"
+    urdb = str(Path(__file__).parent / "urdbv7.json")
     with open(urdb, 'r') as file:
         urdb_data = json.load(file)
     ur5 = tools.URDBv7_to_ElectricityRates(urdb_data)
@@ -79,6 +82,7 @@ def test_urdb():
     assert(dc_tou_tested == dc_tou)
     assert(flat_mat_tested == flat_mat)
 
+
 def test_resourcefilefetcher():
 
     # please get your own API key from here https://developer.nrel.gov/signup/
@@ -87,18 +91,21 @@ def test_resourcefilefetcher():
 
     lon_lats = [(-105.1800775, 39.7383155)] #golden CO
 
+    resource_dir = str(Path(__file__).parent / "tmp")
+
     # --- fetch solar ---
     solarfetcher = tools.FetchResourceFiles(
                     tech='pv',
                     nrel_api_key=NREL_API_KEY,
-                    nrel_api_email=NREL_API_EMAIL)
+                    nrel_api_email=NREL_API_EMAIL,
+                    resource_dir=resource_dir)
     solarfetcher.fetch(lon_lats)
-    
+
     # --- read csv and confirm dimensions ---
     solar_path_dict = solarfetcher.resource_file_paths_dict
     solar_fp = solar_path_dict[lon_lats[0]]
     solar_csv = pd.read_csv(solar_fp)
-    
+
     # --- fetch wind ---
     wtkfetcher = tools.FetchResourceFiles(
         tech='wind',
@@ -113,7 +120,6 @@ def test_resourcefilefetcher():
 
     assert solar_csv.shape == (8762, 20)
     assert wtk_csv.shape == (8764, 10)
-    
 
+    shutil.rmtree(resource_dir)
 
-    

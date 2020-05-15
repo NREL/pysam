@@ -1400,7 +1400,7 @@ static PyMethodDef BattwattsModule_methods[] = {
 				PyDoc_STR("new() -> Battwatts")},
 		{"default",             Battwatts_default,         METH_VARARGS,
 				PyDoc_STR("default(config) -> Battwatts\n\nUse financial config-specific default attributes\n"
-				"config options:\n\n- \"PVWattsBatteryCommercial\"\n- \"PVWattsBatteryHostDeveloper\"\n- \"PVWattsBatteryResidential\"\n- \"PVWattsBatteryThirdParty\"\n- \"PVWattsCommercial\"\n- \"PVWattsHostDeveloper\"\n- \"PVWattsResidential\"\n- \"PVWattsThirdParty\"")},
+				"config options:\n\n- \"PVWattsBatteryCommercial\"\n- \"PVWattsBatteryHostDeveloper\"\n- \"PVWattsBatteryResidential\"\n- \"PVWattsBatteryThirdParty\"")},
 		{"wrap",             Battwatts_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Battwatts\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   Battwatts_from_existing,        METH_VARARGS,
@@ -1419,7 +1419,6 @@ BattwattsModule_exec(PyObject *m)
 	 * object; doing it here is required for portability, too. */
 
 	if (PySAM_load_lib(m) < 0) goto fail;
-	if (PySAM_init_error(m) < 0) goto fail;
 
 	Battwatts_Type.tp_dict = PyDict_New();
 	if (!Battwatts_Type.tp_dict) { goto fail; }
