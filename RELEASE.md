@@ -8,7 +8,7 @@ Documentation here: https://nrel-pysam.readthedocs.io
 * Minimum Python 3.5 for Windows 7 64-bit, MacOSX 10.6, or CentOS 5.
 
 ## Version 2.1.1, ~ SAM 2020.2.29 r2, SSC Version 239
-* SAM Release fixes for revision 3
+* SAM Release fixes for revision 2
 * reopt size post bug
 * ssc_sim_from_dict bug fix
 * Version attribute: `PySAM.__version__`
