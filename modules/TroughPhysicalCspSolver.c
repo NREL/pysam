@@ -4360,7 +4360,7 @@ newTroughPhysicalCspSolverObject(void* data_ptr)
 	Py_XDECREF(AdjustmentFactorsModule);
 
 	if (!Adjust_obj){
-		PyErr_SetString(PySAM_ErrorObject, "Couldn't create AdjustmentFactorsObject\n");
+		PyErr_SetString(PyExc_Exception, "Couldn't create AdjustmentFactorsObject\n");
 		return NULL;
 	}
 
@@ -4619,7 +4619,6 @@ TroughPhysicalCspSolverModule_exec(PyObject *m)
 	 * object; doing it here is required for portability, too. */
 
 	if (PySAM_load_lib(m) < 0) goto fail;
-	if (PySAM_init_error(m) < 0) goto fail;
 
 	TroughPhysicalCspSolver_Type.tp_dict = PyDict_New();
 	if (!TroughPhysicalCspSolver_Type.tp_dict) { goto fail; }

@@ -2494,7 +2494,6 @@ Utilityrate5Module_exec(PyObject *m)
 	 * object; doing it here is required for portability, too. */
 
 	if (PySAM_load_lib(m) < 0) goto fail;
-	if (PySAM_init_error(m) < 0) goto fail;
 
 	Utilityrate5_Type.tp_dict = PyDict_New();
 	if (!Utilityrate5_Type.tp_dict) { goto fail; }

@@ -21,10 +21,10 @@ Functions
 .. autoclass:: PySAM.Swh.Swh
 	:members:
 
-Weather Group
+SolarResource Group
 ==============
 
-.. autoclass:: PySAM.Swh.Swh.Weather
+.. autoclass:: PySAM.Swh.Swh.SolarResource
 	:members:
 
 SWH Group

@@ -1,14 +1,30 @@
+# --- python built ins ---
 import csv
 import os
 from collections import defaultdict
+import concurrent.futures as cf
+import itertools
+import io
+import requests
+import copy
+from requests.adapters import HTTPAdapter
+from requests.packages.urllib3.util.retry import Retry
+
+# --- external libraries ---
+import pandas as pd
+import numpy as np
 
 
 def TMY_CSV_to_solar_data(filename):
     """
     Format a TMY csv file as 'solar_resource_data' dictionary for use in PySAM.
-    :param: filename:
-        any csv resource file formatted according to NSRDB
-    :return: dictionary for PySAM.Pvwattsv7.Pvwattsv7.SolarResource, and other models
+    For more information about TMY CSV file format, see https://sam.nrel.gov/weather-data/weather-data-publications.html
+
+    Args:
+        filename: Any csv resource file formatted according to NSRDB
+
+    Returns:
+        weather: Dictionary for PySAM.Pvwattsv7.Pvwattsv7.SolarResource, and other models
     """
     if not os.path.isfile(filename):
         raise FileNotFoundError(filename + " does not exist.")
@@ -52,9 +68,13 @@ def TMY_CSV_to_solar_data(filename):
 def SRW_to_wind_data(filename):
     """
     Format as 'wind_resource_data' dictionary for use in PySAM.
-    :param: filename:
-        srw wind resource file
-    :return: dictionary for PySAM.Windpower.Windpower.Resource
+    For more information about SRW file format, see https://sam.nrel.gov/weather-data/weather-data-publications.html
+
+    Args:
+        filename: A .srw wind resource file
+
+    Returns:
+        data_dict: Dictionary for PySAM.Windpower.Windpower.Resource
     """
     if not os.path.isfile(filename):
         raise FileNotFoundError(filename + " does not exist.")
@@ -203,3 +223,248 @@ def URDBv7_to_ElectricityRates(urdb_response):
         urdb_data['ur_dc_flat_mat'] = flat_mat
 
     return urdb_data
+
+
+class FetchResourceFiles():
+    """
+    Download U.S. solar and wind resource data for SAM from NRELs developer network
+    https://developer.nrel.gov/
+
+    Inputs
+    ------
+    tech (str): one of 'wind' or 'pv'
+    workers (int): number of threads to use when parellelizing downloads
+    resource_year (int): year to grab resources from.
+        can be 'tmy' for solar
+    resource_interval_min (int): time interval of resource data
+    nrel_api_key (str): NREL developer API key, available here https://developer.nrel.gov/signup/
+    nrel_api_email (str): email associated with nrel_api_key
+
+    Methods
+    -------
+    run():
+        fetch resource profiles for an iterable of lat/lons and save to disk.
+        the attribute `.resource_file_paths_dict` offers a dictionary with keys as lat/lon tuples and
+
+
+    """
+
+    def __init__(self, tech, nrel_api_key, nrel_api_email,
+                 workers=1,
+                 resource_year='tmy',
+                 resource_interval_min=60,
+                 resource_dir=None):
+
+        self.tech = tech
+        self.nrel_api_key = nrel_api_key
+        self.nrel_api_email = nrel_api_email
+
+        self.resource_year = resource_year
+        self.resource_interval_min = resource_interval_min
+        self.workers = workers
+
+        # --- Make folder to store resource_files ---
+        self.SAM_resource_dir = resource_dir
+        if not self.SAM_resource_dir:
+            self.SAM_resource_dir = os.path.join(os.getcwd(), 'data', 'PySAM Downloaded Weather Files')
+        if not os.path.exists(self.SAM_resource_dir):
+            os.makedirs(self.SAM_resource_dir)
+
+        if tech == 'pv':
+            self.data_function = self._NSRDB_worker
+        elif tech == 'wind':
+            self.data_function = self._windtk_worker
+
+            if self.resource_year == 'tmy':  # tmy not available for wind
+                self.resource_year = 2012
+
+        else:
+            raise NotImplementedError('Please write a wrapper to fetch data for the new technology type {}'.format(tech))
+
+    def _requests_retry_session(self, retries=10,
+                                backoff_factor=1,
+                                status_forcelist=(429, 500, 502, 504),
+                                session=None):
+        """https://www.peterbe.com/plog/best-practice-with-retries-with-requests"""
+        session = session or requests.Session()
+        session.verify = False
+        retry = Retry(
+            total=retries,
+            read=retries,
+            connect=retries,
+            backoff_factor=backoff_factor,
+            status_forcelist=status_forcelist,
+        )
+        adapter = HTTPAdapter(max_retries=retry)
+        session.mount('http://', adapter)
+        session.mount('https://', adapter)
+        return session
+
+    def _csv_to_srw(self, raw_csv):
+        #TODO: convert gen profiles to local tz
+
+        # --- grab df ---
+        for_df = copy.deepcopy(raw_csv)
+        df = pd.read_csv(for_df, header=3)
+
+        # --- grab header data ---
+        for_header = copy.deepcopy(raw_csv)
+        header = pd.read_csv(for_header, nrows=3, header=None).values
+        site_id = header[0, 1]
+        site_tz = header[0, 3]
+        site_lon = header[1, 1]
+        site_lat = header[2, 1]
+        site_year = df.iloc[0]['Year']
+
+        # --- create header lines ---
+        h1 = np.array([int(site_id), 'city??', 'state??', 'USA', site_year,
+                       site_lat, site_lon, 'elevation??', 1, 8760])  # meta info
+        h2 = np.array(["WTK .csv converted to .srw for SAM", None, None,
+                       None, None, None, None, None, None, None])  # descriptive text
+        h3 = np.array(['temperature', 'pressure', 'direction',
+                       'speed', None, None, None, None, None, None])  # variables
+        h4 = np.array(['C', 'atm', 'degrees', 'm/s', None,
+                       None, None, None, None, None])  # units
+        h5 = np.array([100, 100, 100, 100, None, None,
+                       None, None, None, None])  # hubheight
+        header = pd.DataFrame(np.vstack([h1, h2, h3, h4, h5]))
+        assert header.shape == (5, 10)
+
+        # --- resample to 8760 ---
+        df['datetime'] = pd.to_datetime(
+            df[['Year', 'Month', 'Day', 'Hour', 'Minute']])
+        df.set_index('datetime', inplace=True)
+        df = df.resample('H').first()
+
+        # --- drop leap days ---
+        df = df.loc[~((df.index.month == 2) & (df.index.day == 29))]
+
+        # --- convert K to celsius ---
+        df['temperature'] = df['air temperature at 2m (K)'] - 273.15
+
+        # --- convert PA to atm ---
+        df['pressure'] = df['surface air pressure (Pa)'] / 101325
+
+        # --- rename ---
+        rename_dict = {'wind speed at 100m (m/s)': 'speed',
+                       'wind direction at 100m (deg)': 'direction'}
+        df.rename(rename_dict, inplace=True, axis='columns')
+
+        # --- clean up ---
+        df = df[['temperature', 'pressure', 'direction', 'speed']]
+        df.columns = [0, 1, 2, 3]
+        assert df.shape == (8760, 4)
+
+        out = pd.concat([header, df], axis='rows')
+        out.reset_index(drop=True, inplace=True)
+        return out
+
+    def _NSRDB_worker(self, job):
+        """Query NSRDB to save .csv 8760 of TMY solar data. To be applied on row with a 'lat' and 'long column."""
+
+        # --- unpack job ---
+        lon, lat = job
+
+        # --- initialize sesson ---
+        retry_session = self._requests_retry_session()
+
+        # --- Intialize File Path ---
+        file_path = os.path.join(
+            self.SAM_resource_dir, "{}_{}_psm3_{}_{}.csv".format(lat, lon, self.resource_interval_min, self.resource_year))
+
+        # --- See if file path already exists ---
+        if os.path.exists(file_path):
+            return file_path  # file already exists, just return path...
+
+        else:
+            print("Downloading NSRDB file for {}_{}...".format(lat, lon))
+
+            # --- Find url for closest point ---
+            lookup_base_url = 'https://developer.nrel.gov/api/solar/'
+            lookup_query_url = "nsrdb_data_query.json?api_key={}&wkt=POINT({}+{})".format(self.nrel_api_key, lon, lat)
+            lookup_url = lookup_base_url + lookup_query_url
+            lookup_response = retry_session.get(lookup_url)
+
+            if lookup_response.ok:
+                lookup_json = lookup_response.json()
+                links = lookup_json['outputs'][0]['links']
+                year_url_dict = {d['year']: d['link'] for d in links if d['interval'] == self.resource_interval_min}
+                year_url = year_url_dict[self.resource_year]
+                year_url = year_url.replace('yourapikey', self.nrel_api_key).replace(
+                    'youremail', self.nrel_api_email)
+
+                # --- Get year data ---
+                year_response = retry_session.get(year_url)
+                if year_response.ok:
+                    # --- Convert response to string, read as pandas df, write to csv ---
+                    csv = io.StringIO(year_response.text)
+                    df = pd.read_csv(csv)
+                    df.to_csv(file_path, index=False)
+                    return file_path
+                else:
+                    return 'error at year_response'
+
+            else:
+                return 'error at lookup_response'
+
+    def _windtk_worker(self, job):
+
+        # --- unpack job ---
+        lon, lat = job
+
+        # --- initialize sesson ---
+        retry_session = self._requests_retry_session()
+
+        # --- Intialize File Path ---
+        file_path = os.path.join(
+            self.SAM_resource_dir, "{}_{}_wtk_{}_{}.srw".format(lat, lon, self.resource_interval_min, self.resource_year))
+
+        # --- See if file path already exists ---
+        if os.path.exists(file_path):
+            return file_path  # file already exists, just return path...
+
+        else:
+            print("Downloading wind toolkit file for {}_{}...".format(lat, lon))
+
+            # --- Find url for closest point ---
+            year_base_url = 'https://developer.nrel.gov/api/wind-toolkit/wind/'
+            year_query_url = "wtk_download.csv?api_key={}&wkt=POINT({}+{})&attributes=wind_speed,wind_direction,power,temperature,pressure&names={}&utc=true&email={}".format(
+                self.nrel_api_key, lon, lat, self.resource_year, self.nrel_api_email)
+            year_url = year_base_url + year_query_url
+            year_response = retry_session.get(year_url)
+
+            if year_response.ok:
+                # --- Convert response to string, read as pandas df, write to csv ---
+                raw_csv = io.StringIO(year_response.text)
+                df = self._csv_to_srw(raw_csv)
+                df.to_csv(file_path, index=False, header=False, na_rep='')
+                return file_path
+            else:
+                return 'error at year_response'
+
+    def fetch(self, points):
+        """
+        Creates dict with {region:path_to_SAM_resource_file}.
+
+        Input
+        -----
+        points(iterable): iterable of lon/lat tuples, i.e. Shapely Points
+        """
+
+        print('\n')
+        print('Beginning data download for {} using {} thread workers'.format(self.tech, self.workers))
+
+        # --- Initialize Session w/ retries ---
+        if self.workers > 1:
+            with cf.ThreadPoolExecutor(max_workers=self.workers) as executor:
+                futures = [executor.submit(self.data_function, job) for job in points]
+                results = [f.result() for f in futures]
+
+        else:
+            results = []
+            for job in points:
+                results.append(self.data_function(job))
+
+        self.resource_file_paths = results
+        self.resource_file_paths_dict = dict(zip(points, results))
+        return self

@@ -12,18 +12,19 @@
 
 import os
 import sys
+import PySAM
 # sys.path.insert(0, 'PySAM')
 
 master_doc = 'index'
 
 # -- Project information -----------------------------------------------------
 
-project = 'PySAM'
+project = 'NREL-PySAM'
 copyright = '2019, NREL'
 author = 'dguittet'
 
 # The full version, including alpha/beta/rc tags
-release = '2.0'
+release = PySAM.__version__
 
 
 # -- General configuration ---------------------------------------------------
