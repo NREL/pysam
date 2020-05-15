@@ -20,11 +20,9 @@ def TMY_CSV_to_solar_data(filename):
     Format a TMY csv file as 'solar_resource_data' dictionary for use in PySAM.
     For more information about TMY CSV file format, see https://sam.nrel.gov/weather-data/weather-data-publications.html
 
-    Args:
-        filename: Any csv resource file formatted according to NSRDB
+    :param filename: Any csv resource file formatted according to NSRDB
 
-    Returns:
-        weather: Dictionary for PySAM.Pvwattsv7.Pvwattsv7.SolarResource, and other models
+    :return: Dictionary for PySAM.Pvwattsv7.Pvwattsv7.SolarResource, and other models
     """
     if not os.path.isfile(filename):
         raise FileNotFoundError(filename + " does not exist.")
@@ -70,11 +68,9 @@ def SRW_to_wind_data(filename):
     Format as 'wind_resource_data' dictionary for use in PySAM.
     For more information about SRW file format, see https://sam.nrel.gov/weather-data/weather-data-publications.html
 
-    Args:
-        filename: A .srw wind resource file
+    :param filename: A .srw wind resource file
 
-    Returns:
-        data_dict: Dictionary for PySAM.Windpower.Windpower.Resource
+    :return: Dictionary for PySAM.Windpower.Windpower.Resource
     """
     if not os.path.isfile(filename):
         raise FileNotFoundError(filename + " does not exist.")
@@ -110,7 +106,8 @@ def URDBv7_to_ElectricityRates(urdb_response):
             model = PySAM.UtilityRate5.new()
             rates = PySAM.ResourceTools.URDBv7_to_ElectricityRates(urdb_response)
             model.ElectricityRates.assign(rates)
-    :param: urdb_response
+
+    :param: urdb_response:
         dictionary with response fields following https://openei.org/services/doc/rest/util_rates/?version=7
     :return: dictionary for PySAM.UtilityRate5.UtilityRate5.ElectricityRates
     """
@@ -230,22 +227,13 @@ class FetchResourceFiles():
     Download U.S. solar and wind resource data for SAM from NRELs developer network
     https://developer.nrel.gov/
 
-    Inputs
-    ------
-    tech (str): one of 'wind' or 'pv'
-    workers (int): number of threads to use when parellelizing downloads
-    resource_year (int): year to grab resources from.
+    :param: tech (str): one of 'wind' or 'pv'
+    :param: workers (int): number of threads to use when parellelizing downloads
+    :param: resource_year (int): year to grab resources from.
         can be 'tmy' for solar
-    resource_interval_min (int): time interval of resource data
-    nrel_api_key (str): NREL developer API key, available here https://developer.nrel.gov/signup/
+    :param: resource_interval_min (int): time interval of resource data
+    :param: nrel_api_key (str): NREL developer API key, available here https://developer.nrel.gov/signup/
     nrel_api_email (str): email associated with nrel_api_key
-
-    Methods
-    -------
-    run():
-        fetch resource profiles for an iterable of lat/lons and save to disk.
-        the attribute `.resource_file_paths_dict` offers a dictionary with keys as lat/lon tuples and
-
 
     """
 

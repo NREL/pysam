@@ -5,12 +5,6 @@ Tools
 
 These helper functions provide additional functionality for working with specific models.
 
-Battery Tools
-*************
-
-.. automodule:: PySAM.BatteryTools
-    :members:
-    :undoc-members:
 
 Resource Tools
 *************
@@ -22,3 +16,12 @@ Use resource files directly in your PySAM models or input them as dictionaries.
 .. automodule:: PySAM.ResourceTools
     :members:
     :undoc-members:
+
+
+Battery Tools
+*************
+
+.. automodule:: PySAM.BatteryTools
+    :members:
+    :undoc-members:
+
