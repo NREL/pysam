@@ -14,12 +14,17 @@ from requests.packages.urllib3.util.retry import Retry
 import pandas as pd
 import numpy as np
 
+
 def TMY_CSV_to_solar_data(filename):
     """
     Format a TMY csv file as 'solar_resource_data' dictionary for use in PySAM.
-    :param: filename:
-        any csv resource file formatted according to NSRDB
-    :return: dictionary for PySAM.Pvwattsv7.Pvwattsv7.SolarResource, and other models
+    For more information about TMY CSV file format, see https://sam.nrel.gov/weather-data/weather-data-publications.html
+
+    Args:
+        filename: Any csv resource file formatted according to NSRDB
+
+    Returns:
+        weather: Dictionary for PySAM.Pvwattsv7.Pvwattsv7.SolarResource, and other models
     """
     if not os.path.isfile(filename):
         raise FileNotFoundError(filename + " does not exist.")
@@ -63,9 +68,13 @@ def TMY_CSV_to_solar_data(filename):
 def SRW_to_wind_data(filename):
     """
     Format as 'wind_resource_data' dictionary for use in PySAM.
-    :param: filename:
-        srw wind resource file
-    :return: dictionary for PySAM.Windpower.Windpower.Resource
+    For more information about SRW file format, see https://sam.nrel.gov/weather-data/weather-data-publications.html
+
+    Args:
+        filename: A .srw wind resource file
+
+    Returns:
+        data_dict: Dictionary for PySAM.Windpower.Windpower.Resource
     """
     if not os.path.isfile(filename):
         raise FileNotFoundError(filename + " does not exist.")
