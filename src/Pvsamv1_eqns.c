@@ -39,7 +39,7 @@ static PyObject* Reopt_size_battery_post(PyObject *self, PyObject *args, PyObjec
             return NULL;
 
         if (strlen(resource_file) == 0){
-            PyErr_SetString(PySAM_ErrorObject, "Reopt_size_battery_pot error: solar_resource_file or solar_resource_data must be provided.");
+            PyErr_SetString(PyExc_Exception, "Reopt_size_battery_pot error: solar_resource_file or solar_resource_data must be provided.");
             return NULL;
         }
         SAM_table ssc_data = SAM_table_construct(NULL);

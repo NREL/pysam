@@ -1,6 +1,9 @@
 from setuptools import setup
 import distutils
 import sys
+from files.version import __version__
+
+latest_version = __version__
 
 latest_version = '2.1.dev1'
 

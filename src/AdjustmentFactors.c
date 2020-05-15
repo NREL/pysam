@@ -27,7 +27,7 @@ AdjustmentFactors_new(PyObject* self, PyObject* args)
 
     PyObject* data_cap;
     if (!PyArg_ParseTuple(args, "O", &data_cap)){
-        PyErr_SetString(PySAM_ErrorObject, "AdjustmentFactors initialization requires a data ptr.");
+        PyErr_SetString(PyExc_Exception, "AdjustmentFactors initialization requires a data ptr.");
         return NULL;
     }
 
@@ -277,7 +277,6 @@ AdjustmentFactorsModule_exec(PyObject *m)
                        (PyObject*)&AdjustmentFactors_Type);
 
 	if (PySAM_load_lib(m) < 0) goto fail;
-	if (PySAM_init_error(m) < 0) goto fail;
 
     return 0;
     fail:
