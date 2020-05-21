@@ -919,6 +919,12 @@ Outputs_get_estimated_rows(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_gen(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvwattsv7_Outputs_gen_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_gh(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Pvwattsv7_Outputs_gh_aget, self->data_ptr);
@@ -1092,6 +1098,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"estimated_rows", (getter)Outputs_get_estimated_rows,(setter)0,
 	PyDoc_STR("*float*: Estimated number of rows in the system"),
+ 	NULL},
+{"gen", (getter)Outputs_get_gen,(setter)0,
+	PyDoc_STR("*sequence*: System power generated [kW]"),
  	NULL},
 {"gh", (getter)Outputs_get_gh,(setter)0,
 	PyDoc_STR("*sequence*: Weather file global horizontal irradiance [W/m2]"),
@@ -1493,7 +1502,7 @@ static PyMethodDef Pvwattsv7Module_methods[] = {
 };
 
 PyDoc_STRVAR(module_doc,
-			 "Pvwattsv7");
+			 "Photovoltaic system using basic NREL PVWatts V7 algorithm. Does not do detailed degradation or loss modeling. If those are important, please use pvsamv1.");
 
 
 static int

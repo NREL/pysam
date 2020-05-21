@@ -150,14 +150,17 @@ class TowerAndReceiver(object):
 	is_rec_startup_from_T_soln = float
 	is_rec_startup_trans = float
 	mat_tube = float
+	min_fill_time = float
+	min_preheat_time = float
 	n_flux_days = float
 	piping_length_const = float
 	piping_length_mult = float
 	piping_loss = float
-	piping_loss_coeff = float
 	preheat_flux = float
-	preheat_target_Tdiff = float
 	rec_absorptance = float
+	rec_clearsky_dni = tuple
+	rec_clearsky_fraction = float
+	rec_clearsky_model = float
 	rec_height = float
 	rec_hl_perm2 = float
 	rec_htf = float
@@ -513,6 +516,8 @@ class Outputs(object):
 	P_rec_heattrace = tuple
 	P_tower_pump = tuple
 	Q_thermal = tuple
+	Q_thermal_ss = tuple
+	Q_thermal_ss_csky = tuple
 	T_cold = tuple
 	T_cond_out = tuple
 	T_panel_out_max = tuple
@@ -540,6 +545,7 @@ class Outputs(object):
 	annual_total_water_use = float
 	beam = tuple
 	capacity_factor = float
+	clearsky = tuple
 	const_per_interest1 = float
 	const_per_interest2 = float
 	const_per_interest3 = float

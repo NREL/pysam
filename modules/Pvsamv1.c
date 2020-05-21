@@ -13039,7 +13039,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Electricity battery power target for automated dispatch [kW]"),
  	NULL},
 {"batt_pv_charge_percent", (getter)Outputs_get_batt_pv_charge_percent,(setter)0,
-	PyDoc_STR("*float*: Battery percent energy charged from PV [%]"),
+	PyDoc_STR("*float*: Battery charge energy charged from system [%]"),
  	NULL},
 {"batt_q0", (getter)Outputs_get_batt_q0,(setter)0,
 	PyDoc_STR("*sequence*: Battery total charge [Ah]"),

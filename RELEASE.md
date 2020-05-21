@@ -7,13 +7,13 @@ Documentation here: https://nrel-pysam.readthedocs.io
 * Built-in documentation of models and parameters.
 * Minimum Python 3.5 for Windows 7 64-bit, MacOSX 10.6, or CentOS 5.
 
-## Version 2.1.1, ~ SAM 2020.2.29 r2, SSC Version 239
+## Version 2.1.2, ~ SAM 2020.2.29 r2, SSC Version 240
 * SAM Release fixes for revision 2
 * reopt size post bug
 * ssc_sim_from_dict bug fix
 * Version attribute: `PySAM.__version__`
 * URDBv7 in ResourceTools bug fix
-* ResourceFetcher for WindToolKit and National Solar Radiation Database downlaods
+* ResourceFetcher for WindToolKit and National Solar Radiation Database downloads
 * case-insensitive default configuration names
 * Generic Exception replaces PySAM.Error for easier MP debugging
 

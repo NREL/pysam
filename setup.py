@@ -25,7 +25,7 @@ defaults_dir = os.environ['SAMNTDIR']+"/api/api_autogen/library/defaults/"
 includepath = os.environ['SAMNTDIR']+"/api/include"
 srcpath = os.environ['SAMNTDIR']+"/api/src"
 
-this_directory = os.path.abspath(os.path.dirname(__file__))
+this_directory = os.environ['PYSAMDIR']
 libpath = this_directory+"/files"
 
 

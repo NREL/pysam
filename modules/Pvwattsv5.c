@@ -725,6 +725,12 @@ Outputs_get_elev(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_gen(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvwattsv5_Outputs_gen_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_gh(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Pvwattsv5_Outputs_gh_aget, self->data_ptr);
@@ -892,6 +898,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"elev", (getter)Outputs_get_elev,(setter)0,
 	PyDoc_STR("*float*: Site elevation [m]"),
+ 	NULL},
+{"gen", (getter)Outputs_get_gen,(setter)0,
+	PyDoc_STR("*sequence*: AC system power (lifetime) [kWh]"),
  	NULL},
 {"gh", (getter)Outputs_get_gh,(setter)0,
 	PyDoc_STR("*sequence*: Global horizontal irradiance [W/m2]"),
