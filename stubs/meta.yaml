@@ -1,0 +1,30 @@
+{% set name = "NREL-PySAM-stubs" %}
+{% set version = environ.get('VERSION') %}
+
+package:
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
+
+build:
+  number: 0
+  script: "pip install {{environ.get('PYSAMDIR')}}/dist/NREL_PySAM_stubs-{{version}}-py3-none-any.whl"
+
+requirements:
+  host:
+    - pip
+    - python
+  run:
+    - python
+
+about:
+  home: https://nrel-pysam.readthedocs.io
+  license: BSD 3-Clause
+  license_family: BSD
+  license_file:
+  summary: National Renewable Energy Laboratory's System Advisor Model Python Wrapper, stub files
+  doc_url:
+  dev_url:
+
+extra:
+  recipe-maintainers:
+    - dguittet

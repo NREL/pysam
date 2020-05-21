@@ -1,0 +1,31 @@
+{% set name = "NREL-PySAM" %}
+{% set version = environ.get('VERSION') %}
+
+package:
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
+
+build:
+    script_env:
+        - PYSAMDIR
+        - SAMNTDIR
+
+requirements:
+  host:
+    - pip
+    - python
+  run:
+    - python
+
+about:
+  home: https://nrel-pysam.readthedocs.io
+  license: BSD 3-Clause
+  license_family: BSD
+  license_file:
+  summary: National Renewable Energy Laboratory's System Advisor Model Python Wrapper
+  doc_url:
+  dev_url:
+
+extra:
+  recipe-maintainers:
+    - dguittet
