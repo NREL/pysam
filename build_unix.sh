@@ -13,7 +13,9 @@ cmake .. -DCMAKE_BUILD_TYPE=Export -DSAMAPI_EXPORT=1
 cmake --build . --target SAM_api -j 6
 
 # Building the PyPi and Anaconda packages
-# requires Miniconda installed with an environment per Python version from 3.5 to 3.8
+# requires Anaconda installed with an environment per Python version from 3.5 to 3.8
+# named pysam_build_3.5 pysam_build_3.6 pysam_build_3.7 pysam_build_3.8
+
 
 cd $PYSAMDIR || exit
 source $(conda info --base)/etc/profile.d/conda.sh
@@ -35,7 +37,8 @@ do
 done
 python setup_stubs.py bdist_wheel
 
-#./build_conda.sh
+./build_conda.sh
+
 
 #
 # Building for Manylinux1

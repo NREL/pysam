@@ -8,7 +8,6 @@ package:
 build:
     script_env:
         - PYSAMDIR
-        - SAMNTDIR
 
 requirements:
   host:
