@@ -47,7 +47,7 @@ python setup_stubs.py bdist_wheel
 cd ..
 docker pull quay.io/pypa/manylinux1_x86_64
 docker run --rm -v $(pwd):/io quay.io/pypa/manylinux1_x86_64 /io/pysam/build_manylinux.sh
-rename -s linux manylinux1 pysam/*-linux-*
+rename -s linux manylinux1 $PYSAMDIR/dist/*-linux_*
 
 
 #
