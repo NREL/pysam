@@ -36,6 +36,6 @@ May not be compatible with different builds of the CPython reference interpreter
 - [Examples](https://github.com/NREL/pysam/blob/master/Examples)
 
 
-# Citing this package
+## Citing this package
 
 PySAM Version 2.1.1. National Renewable Energy Laboratory. Golden, CO. Accessed May 27, 2020. https://github.com/nrel/pysam
