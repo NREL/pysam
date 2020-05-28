@@ -101,7 +101,7 @@ static PyGetSetDef SolarResource_getset[] = {
 	PyDoc_STR("*sequence*: Albedo [frac]\n\n*Info*: if provided, will overwrite weather file albedo"),
  	NULL},
 {"solar_resource_data", (getter)SolarResource_get_solar_resource_data,(setter)SolarResource_set_solar_resource_data,
-	PyDoc_STR("*dict*: Weather data\n\n*Info*: dn,df,tdry,wspd,lat,lon,tz\n\n*Required*: False"),
+	PyDoc_STR("*dict*: Weather data\n\n*Info*: dn,df,tdry,wspd,lat,lon,tz,elev\n\n*Required*: False"),
  	NULL},
 {"solar_resource_file", (getter)SolarResource_get_solar_resource_file,(setter)SolarResource_set_solar_resource_file,
 	PyDoc_STR("*str*: Weather file path\n\n*Required*: False"),

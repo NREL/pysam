@@ -20,7 +20,7 @@ this_directory = os.environ['PYSAMDIR']
 with open(path.join(this_directory, 'RELEASE.md'), encoding='utf-8') as f:
     long_description = f.read()
 
-libfiles = ['__init__.pyi']
+libfiles = ['__init__.pyi', 'AdjustmentFactors.pyi']
 
 for filename in listdir(path.join(this_directory, 'stubs', 'stubs')):
     libfiles.append(filename)

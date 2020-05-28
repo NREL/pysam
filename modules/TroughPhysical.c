@@ -4311,24 +4311,6 @@ Outputs_get_m_dot_balance(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_m_dot_cold_tank_to_hot_tank(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_TroughPhysical_Outputs_m_dot_cold_tank_to_hot_tank_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_m_dot_cr_to_tes_hot(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_TroughPhysical_Outputs_m_dot_cr_to_tes_hot_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_m_dot_cycle_to_field(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_TroughPhysical_Outputs_m_dot_cycle_to_field_aget, self->data_ptr);
-}
-
-static PyObject *
 Outputs_get_m_dot_field_delivered(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_TroughPhysical_Outputs_m_dot_field_delivered_aget, self->data_ptr);
@@ -4338,12 +4320,6 @@ static PyObject *
 Outputs_get_m_dot_field_recirc(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_TroughPhysical_Outputs_m_dot_field_recirc_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_m_dot_field_to_cycle(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_TroughPhysical_Outputs_m_dot_field_to_cycle_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -4359,39 +4335,21 @@ Outputs_get_m_dot_pc(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_m_dot_pc_to_tes_cold(VarGroupObject *self, void *closure)
+Outputs_get_m_dot_tes_ch(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TroughPhysical_Outputs_m_dot_pc_to_tes_cold_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_TroughPhysical_Outputs_m_dot_tes_ch_aget, self->data_ptr);
 }
 
 static PyObject *
-Outputs_get_m_dot_tes_cold_out(VarGroupObject *self, void *closure)
+Outputs_get_m_dot_tes_dc(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TroughPhysical_Outputs_m_dot_tes_cold_out_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_m_dot_tes_hot_out(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_TroughPhysical_Outputs_m_dot_tes_hot_out_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_TroughPhysical_Outputs_m_dot_tes_dc_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_m_dot_water_pc(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_TroughPhysical_Outputs_m_dot_water_pc_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_mass_tes_cold(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_TroughPhysical_Outputs_mass_tes_cold_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_mass_tes_hot(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_TroughPhysical_Outputs_mass_tes_hot_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -4986,23 +4944,11 @@ static PyGetSetDef Outputs_getset[] = {
 {"m_dot_balance", (getter)Outputs_get_m_dot_balance,(setter)0,
 	PyDoc_STR("*sequence*: Relative mass flow balance error"),
  	NULL},
-{"m_dot_cold_tank_to_hot_tank", (getter)Outputs_get_m_dot_cold_tank_to_hot_tank,(setter)0,
-	PyDoc_STR("*sequence*: Mass flow: cold tank to hot tank [kg/s]"),
- 	NULL},
-{"m_dot_cr_to_tes_hot", (getter)Outputs_get_m_dot_cr_to_tes_hot,(setter)0,
-	PyDoc_STR("*sequence*: Mass flow: field to hot TES [kg/s]"),
- 	NULL},
-{"m_dot_cycle_to_field", (getter)Outputs_get_m_dot_cycle_to_field,(setter)0,
-	PyDoc_STR("*sequence*: Mass flow: cycle to field [kg/s]"),
- 	NULL},
 {"m_dot_field_delivered", (getter)Outputs_get_m_dot_field_delivered,(setter)0,
 	PyDoc_STR("*sequence*: Field total mass flow delivered [kg/s]"),
  	NULL},
 {"m_dot_field_recirc", (getter)Outputs_get_m_dot_field_recirc,(setter)0,
 	PyDoc_STR("*sequence*: Field total mass flow recirculated [kg/s]"),
- 	NULL},
-{"m_dot_field_to_cycle", (getter)Outputs_get_m_dot_field_to_cycle,(setter)0,
-	PyDoc_STR("*sequence*: Mass flow: field to cycle [kg/s]"),
  	NULL},
 {"m_dot_loop", (getter)Outputs_get_m_dot_loop,(setter)0,
 	PyDoc_STR("*sequence*: Receiver mass flow rate [kg/s]"),
@@ -5010,23 +4956,14 @@ static PyGetSetDef Outputs_getset[] = {
 {"m_dot_pc", (getter)Outputs_get_m_dot_pc,(setter)0,
 	PyDoc_STR("*sequence*: PC HTF mass flow rate [kg/s]"),
  	NULL},
-{"m_dot_pc_to_tes_cold", (getter)Outputs_get_m_dot_pc_to_tes_cold,(setter)0,
-	PyDoc_STR("*sequence*: Mass flow: cycle to cold TES [kg/s]"),
+{"m_dot_tes_ch", (getter)Outputs_get_m_dot_tes_ch,(setter)0,
+	PyDoc_STR("*sequence*: TES charge mass flow rate [kg/s]"),
  	NULL},
-{"m_dot_tes_cold_out", (getter)Outputs_get_m_dot_tes_cold_out,(setter)0,
-	PyDoc_STR("*sequence*: Mass flow: TES cold out [kg/s]"),
- 	NULL},
-{"m_dot_tes_hot_out", (getter)Outputs_get_m_dot_tes_hot_out,(setter)0,
-	PyDoc_STR("*sequence*: Mass flow: TES hot out [kg/s]"),
+{"m_dot_tes_dc", (getter)Outputs_get_m_dot_tes_dc,(setter)0,
+	PyDoc_STR("*sequence*: TES discharge mass flow rate [kg/s]"),
  	NULL},
 {"m_dot_water_pc", (getter)Outputs_get_m_dot_water_pc,(setter)0,
 	PyDoc_STR("*sequence*: PC water consumption: makeup + cooling [kg/s]"),
- 	NULL},
-{"mass_tes_cold", (getter)Outputs_get_mass_tes_cold,(setter)0,
-	PyDoc_STR("*sequence*: TES cold tank mass (end) [kg]"),
- 	NULL},
-{"mass_tes_hot", (getter)Outputs_get_mass_tes_hot,(setter)0,
-	PyDoc_STR("*sequence*: TES hot tank mass (end) [kg]"),
  	NULL},
 {"month", (getter)Outputs_get_month,(setter)0,
 	PyDoc_STR("*sequence*: Resource Month"),
