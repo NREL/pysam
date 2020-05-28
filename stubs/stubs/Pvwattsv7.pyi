@@ -113,6 +113,7 @@ class Outputs(object):
 	dn = tuple
 	elev = float
 	estimated_rows = float
+	gen = tuple
 	gh = tuple
 	inverter_efficiency = float
 	kwh_per_kw = float

@@ -1743,6 +1743,30 @@ TowerAndReceiver_set_mat_tube(VarGroupObject *self, PyObject *value, void *closu
 }
 
 static PyObject *
+TowerAndReceiver_get_min_fill_time(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_min_fill_time_nget, self->data_ptr);
+}
+
+static int
+TowerAndReceiver_set_min_fill_time(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_min_fill_time_nset, self->data_ptr);
+}
+
+static PyObject *
+TowerAndReceiver_get_min_preheat_time(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_min_preheat_time_nget, self->data_ptr);
+}
+
+static int
+TowerAndReceiver_set_min_preheat_time(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_min_preheat_time_nset, self->data_ptr);
+}
+
+static PyObject *
 TowerAndReceiver_get_n_flux_days(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_n_flux_days_nget, self->data_ptr);
@@ -1791,18 +1815,6 @@ TowerAndReceiver_set_piping_loss(VarGroupObject *self, PyObject *value, void *cl
 }
 
 static PyObject *
-TowerAndReceiver_get_piping_loss_coeff(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_piping_loss_coeff_nget, self->data_ptr);
-}
-
-static int
-TowerAndReceiver_set_piping_loss_coeff(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_piping_loss_coeff_nset, self->data_ptr);
-}
-
-static PyObject *
 TowerAndReceiver_get_preheat_flux(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_preheat_flux_nget, self->data_ptr);
@@ -1815,18 +1827,6 @@ TowerAndReceiver_set_preheat_flux(VarGroupObject *self, PyObject *value, void *c
 }
 
 static PyObject *
-TowerAndReceiver_get_preheat_target_Tdiff(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_preheat_target_Tdiff_nget, self->data_ptr);
-}
-
-static int
-TowerAndReceiver_set_preheat_target_Tdiff(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_preheat_target_Tdiff_nset, self->data_ptr);
-}
-
-static PyObject *
 TowerAndReceiver_get_rec_absorptance(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_rec_absorptance_nget, self->data_ptr);
@@ -1836,6 +1836,42 @@ static int
 TowerAndReceiver_set_rec_absorptance(VarGroupObject *self, PyObject *value, void *closure)
 {
 	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_rec_absorptance_nset, self->data_ptr);
+}
+
+static PyObject *
+TowerAndReceiver_get_rec_clearsky_dni(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_TcsmoltenSalt_TowerAndReceiver_rec_clearsky_dni_aget, self->data_ptr);
+}
+
+static int
+TowerAndReceiver_set_rec_clearsky_dni(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_rec_clearsky_dni_aset, self->data_ptr);
+}
+
+static PyObject *
+TowerAndReceiver_get_rec_clearsky_fraction(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_rec_clearsky_fraction_nget, self->data_ptr);
+}
+
+static int
+TowerAndReceiver_set_rec_clearsky_fraction(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_rec_clearsky_fraction_nset, self->data_ptr);
+}
+
+static PyObject *
+TowerAndReceiver_get_rec_clearsky_model(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_rec_clearsky_model_nget, self->data_ptr);
+}
+
+static int
+TowerAndReceiver_set_rec_clearsky_model(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_rec_clearsky_model_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -2032,7 +2068,7 @@ static PyGetSetDef TowerAndReceiver_getset[] = {
 	PyDoc_STR("*float*: The heat loss factor (thermal loss fudge factor)\n\n*Required*: True"),
  	NULL},
 {"is_rec_enforce_min_startup", (getter)TowerAndReceiver_get_is_rec_enforce_min_startup,(setter)TowerAndReceiver_set_is_rec_enforce_min_startup,
-	PyDoc_STR("*float*: Always enforce minimum startup time\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Always enforce minimum startup time\n\n*Required*: If not provided, assumed to be 1"),
  	NULL},
 {"is_rec_model_trans", (getter)TowerAndReceiver_get_is_rec_model_trans,(setter)TowerAndReceiver_set_is_rec_model_trans,
 	PyDoc_STR("*float*: Formulate receiver model as transient?\n\n*Required*: If not provided, assumed to be 0"),
@@ -2046,6 +2082,12 @@ static PyGetSetDef TowerAndReceiver_getset[] = {
 {"mat_tube", (getter)TowerAndReceiver_get_mat_tube,(setter)TowerAndReceiver_set_mat_tube,
 	PyDoc_STR("*float*: Receiver tube material, 2=Stainless AISI316\n\n*Required*: True"),
  	NULL},
+{"min_fill_time", (getter)TowerAndReceiver_get_min_fill_time,(setter)TowerAndReceiver_set_min_fill_time,
+	PyDoc_STR("*float*: Startup time delay for filling the receiver/piping [hr]\n\n*Required*: If not provided, assumed to be 0.1333"),
+ 	NULL},
+{"min_preheat_time", (getter)TowerAndReceiver_get_min_preheat_time,(setter)TowerAndReceiver_set_min_preheat_time,
+	PyDoc_STR("*float*: Minimum time required in preheat startup stage [hr]\n\n*Required*: If not provided, assumed to be 0.0"),
+ 	NULL},
 {"n_flux_days", (getter)TowerAndReceiver_get_n_flux_days,(setter)TowerAndReceiver_set_n_flux_days,
 	PyDoc_STR("*float*: Number of days in flux map lookup\n\n*Required*: If not provided, assumed to be 8"),
  	NULL},
@@ -2058,17 +2100,20 @@ static PyGetSetDef TowerAndReceiver_getset[] = {
 {"piping_loss", (getter)TowerAndReceiver_get_piping_loss,(setter)TowerAndReceiver_set_piping_loss,
 	PyDoc_STR("*float*: Thermal loss per meter of piping [Wt/m]\n\n*Required*: True"),
  	NULL},
-{"piping_loss_coeff", (getter)TowerAndReceiver_get_piping_loss_coeff,(setter)TowerAndReceiver_set_piping_loss_coeff,
-	PyDoc_STR("*float*: Wetted loss coefficient for riser or downcomer [W/m2/K]\n\n*Required*: If not provided, assumed to be 5.0"),
- 	NULL},
 {"preheat_flux", (getter)TowerAndReceiver_get_preheat_flux,(setter)TowerAndReceiver_set_preheat_flux,
 	PyDoc_STR("*float*: Tube absorbed solar flux during preheat [kW/m2]\n\n*Required*: If not provided, assumed to be 50.0"),
  	NULL},
-{"preheat_target_Tdiff", (getter)TowerAndReceiver_get_preheat_target_Tdiff,(setter)TowerAndReceiver_set_preheat_target_Tdiff,
-	PyDoc_STR("*float*: Target tube T at end of preheat - design pt cold HTF temperature [C]\n\n*Required*: If not provided, assumed to be 25.0"),
- 	NULL},
 {"rec_absorptance", (getter)TowerAndReceiver_get_rec_absorptance,(setter)TowerAndReceiver_set_rec_absorptance,
 	PyDoc_STR("*float*: Receiver absorptance\n\n*Required*: True"),
+ 	NULL},
+{"rec_clearsky_dni", (getter)TowerAndReceiver_get_rec_clearsky_dni,(setter)TowerAndReceiver_set_rec_clearsky_dni,
+	PyDoc_STR("*sequence*: User-defined clear-sky DNI [W/m2]\n\n*Required*: True if rec_clearsky_model=0"),
+ 	NULL},
+{"rec_clearsky_fraction", (getter)TowerAndReceiver_get_rec_clearsky_fraction,(setter)TowerAndReceiver_set_rec_clearsky_fraction,
+	PyDoc_STR("*float*: Weighting fraction on clear-sky DNI for receiver flow control\n\n*Required*: If not provided, assumed to be 0.0"),
+ 	NULL},
+{"rec_clearsky_model", (getter)TowerAndReceiver_get_rec_clearsky_model,(setter)TowerAndReceiver_set_rec_clearsky_model,
+	PyDoc_STR("*float*: Clearsky model: None = -1, User-defined data = 0, Meinel = 1; Hottel = 2; Allen = 3; Moon = 4\n\n*Required*: If not provided, assumed to be -1"),
  	NULL},
 {"rec_height", (getter)TowerAndReceiver_get_rec_height,(setter)TowerAndReceiver_set_rec_height,
 	PyDoc_STR("*float*: Receiver height [m]\n\n*Required*: True"),
@@ -2092,10 +2137,10 @@ static PyGetSetDef TowerAndReceiver_getset[] = {
 	PyDoc_STR("*float*: Riser thermal mass multiplier\n\n*Required*: If not provided, assumed to be 1.0"),
  	NULL},
 {"startup_ramp_time", (getter)TowerAndReceiver_get_startup_ramp_time,(setter)TowerAndReceiver_set_startup_ramp_time,
-	PyDoc_STR("*float*: Time required to reach full flux during receiver startup [hr]\n\n*Required*: If not provided, assumed to be 0.0"),
+	PyDoc_STR("*float*: Time required to reach full flux during receiver startup [hr]\n\n*Required*: If not provided, assumed to be 0.1333"),
  	NULL},
 {"startup_target_Tdiff", (getter)TowerAndReceiver_get_startup_target_Tdiff,(setter)TowerAndReceiver_set_startup_target_Tdiff,
-	PyDoc_STR("*float*: Target HTF T at end of startup - design pt hot HTF temperature [C]\n\n*Required*: If not provided, assumed to be -5.0"),
+	PyDoc_STR("*float*: Target HTF T at end of startup - steady state hot HTF temperature [C]\n\n*Required*: If not provided, assumed to be -5.0"),
  	NULL},
 {"th_riser", (getter)TowerAndReceiver_get_th_riser,(setter)TowerAndReceiver_set_th_riser,
 	PyDoc_STR("*float*: Riser or downcomer tube wall thickness [mm]\n\n*Required*: If not provided, assumed to be 15.0"),
@@ -5932,6 +5977,18 @@ Outputs_get_Q_thermal(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_Q_thermal_ss(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_TcsmoltenSalt_Outputs_Q_thermal_ss_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_Q_thermal_ss_csky(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_TcsmoltenSalt_Outputs_Q_thermal_ss_csky_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_T_cold(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_TcsmoltenSalt_Outputs_T_cold_aget, self->data_ptr);
@@ -6091,6 +6148,12 @@ static PyObject *
 Outputs_get_capacity_factor(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_TcsmoltenSalt_Outputs_capacity_factor_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_clearsky(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_TcsmoltenSalt_Outputs_clearsky_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -6913,6 +6976,12 @@ static PyGetSetDef Outputs_getset[] = {
 {"Q_thermal", (getter)Outputs_get_Q_thermal,(setter)0,
 	PyDoc_STR("*sequence*: Receiver thermal power to HTF less piping loss [MWt]"),
  	NULL},
+{"Q_thermal_ss", (getter)Outputs_get_Q_thermal_ss,(setter)0,
+	PyDoc_STR("*sequence*: Receiver thermal power to HTF less piping loss (steady state) [MWt]"),
+ 	NULL},
+{"Q_thermal_ss_csky", (getter)Outputs_get_Q_thermal_ss_csky,(setter)0,
+	PyDoc_STR("*sequence*: Receiver thermal power to HTF less piping loss under clear-sky conditions (steady state) [MWt]"),
+ 	NULL},
 {"T_cold", (getter)Outputs_get_T_cold,(setter)0,
 	PyDoc_STR("*sequence*: Cold storage cold temperature [C]"),
  	NULL},
@@ -6993,6 +7062,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"capacity_factor", (getter)Outputs_get_capacity_factor,(setter)0,
 	PyDoc_STR("*float*: Capacity factor [%]"),
+ 	NULL},
+{"clearsky", (getter)Outputs_get_clearsky,(setter)0,
+	PyDoc_STR("*sequence*: Predicted clear-sky beam normal irradiance [W/m2]"),
  	NULL},
 {"const_per_interest1", (getter)Outputs_get_const_per_interest1,(setter)0,
 	PyDoc_STR("*float*: Interest cost, loan 1 [$]"),

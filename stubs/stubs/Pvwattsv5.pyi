@@ -99,6 +99,7 @@ class Outputs(object):
 	df = tuple
 	dn = tuple
 	elev = float
+	gen = tuple
 	gh = tuple
 	inverter_count = float
 	inverter_efficiency = float
