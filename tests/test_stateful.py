@@ -1,7 +1,6 @@
-import PySAM.BatteryStateful as bt
+def stateful():
+    import PySAM.BatteryStateful as bt
 
-
-def test_battery_sf():
     b = bt.new()
 
     params = {"control_mode": 0, "input_current": 1, "chem": 1, "nominal_energy": 10, "nominal_voltage": 500,
@@ -20,6 +19,12 @@ def test_battery_sf():
 
     for k, v in params.items():
         b.value(k, v)
+
+    b.setup()
+    b.execute()
+    print(b.StatePack.export())
+    b.execute()
+    print(b.StatePack.export())
 
     b.setup()
     b.execute()

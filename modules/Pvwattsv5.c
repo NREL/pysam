@@ -900,7 +900,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*float*: Site elevation [m]"),
  	NULL},
 {"gen", (getter)Outputs_get_gen,(setter)0,
-	PyDoc_STR("*sequence*: AC system power (lifetime) [kWh]"),
+	PyDoc_STR("*sequence*: System power generated [kW]"),
  	NULL},
 {"gh", (getter)Outputs_get_gh,(setter)0,
 	PyDoc_STR("*sequence*: Global horizontal irradiance [W/m2]"),
