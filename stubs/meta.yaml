@@ -6,8 +6,10 @@ package:
   version: "{{ version }}"
 
 build:
-  number: 0
-  script: "pip install {{environ.get('PYSAMDIR')}}/dist/NREL_PySAM_stubs-{{version}}-py3-none-any.whl"
+    number: 0
+    script:
+        - "export PIP_NO_INDEX='False'"
+        - "{{ PYTHON }} -m pip install {{name}}=={{version}}"
 
 requirements:
   host:

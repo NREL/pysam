@@ -5,9 +5,6 @@ package:
   name: "{{ name|lower }}"
   version: "{{ version }}"
 
-#source:
-#  url: dist/NREL-PySAM-{{version}}.tar.gz
-
 build:
     number: 0
     script:
