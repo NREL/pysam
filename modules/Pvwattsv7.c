@@ -101,7 +101,7 @@ static PyGetSetDef SolarResource_getset[] = {
 	PyDoc_STR("*sequence*: Albedo [frac]\n\n*Info*: if provided, will overwrite weather file albedo"),
  	NULL},
 {"solar_resource_data", (getter)SolarResource_get_solar_resource_data,(setter)SolarResource_set_solar_resource_data,
-	PyDoc_STR("*dict*: Weather data\n\n*Info*: dn,df,tdry,wspd,lat,lon,tz\n\n*Required*: False"),
+	PyDoc_STR("*dict*: Weather data\n\n*Info*: dn,df,tdry,wspd,lat,lon,tz,elev\n\n*Required*: False"),
  	NULL},
 {"solar_resource_file", (getter)SolarResource_get_solar_resource_file,(setter)SolarResource_set_solar_resource_file,
 	PyDoc_STR("*str*: Weather file path\n\n*Required*: False"),
@@ -919,6 +919,12 @@ Outputs_get_estimated_rows(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_gen(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvwattsv7_Outputs_gen_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_gh(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Pvwattsv7_Outputs_gh_aget, self->data_ptr);
@@ -1092,6 +1098,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"estimated_rows", (getter)Outputs_get_estimated_rows,(setter)0,
 	PyDoc_STR("*float*: Estimated number of rows in the system"),
+ 	NULL},
+{"gen", (getter)Outputs_get_gen,(setter)0,
+	PyDoc_STR("*sequence*: System power generated [kW]"),
  	NULL},
 {"gh", (getter)Outputs_get_gh,(setter)0,
 	PyDoc_STR("*sequence*: Weather file global horizontal irradiance [W/m2]"),
@@ -1493,7 +1502,7 @@ static PyMethodDef Pvwattsv7Module_methods[] = {
 };
 
 PyDoc_STRVAR(module_doc,
-			 "Pvwattsv7");
+			 "Photovoltaic system using basic NREL PVWatts V7 algorithm. Does not do detailed degradation or loss modeling. If those are important, please use pvsamv1.");
 
 
 static int

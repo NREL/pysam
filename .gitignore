@@ -24,3 +24,4 @@ manylinux/
 *.eggs
 \.vs/
 files/defaults/
+*.pyc

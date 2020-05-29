@@ -3156,18 +3156,6 @@ ThermalStorage_set_tank_pairs(VarGroupObject *self, PyObject *value, void *closu
 }
 
 static PyObject *
-ThermalStorage_get_tanks_in_parallel(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_ThermalStorage_tanks_in_parallel_nget, self->data_ptr);
-}
-
-static int
-ThermalStorage_set_tanks_in_parallel(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_ThermalStorage_tanks_in_parallel_nset, self->data_ptr);
-}
-
-static PyObject *
 ThermalStorage_get_u_tank(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_TcsmoltenSalt_ThermalStorage_u_tank_nget, self->data_ptr);
@@ -3203,9 +3191,6 @@ static PyGetSetDef ThermalStorage_getset[] = {
  	NULL},
 {"tank_pairs", (getter)ThermalStorage_get_tank_pairs,(setter)ThermalStorage_set_tank_pairs,
 	PyDoc_STR("*float*: Number of equivalent tank pairs\n\n*Constraints*: INTEGER\n\n*Required*: True"),
- 	NULL},
-{"tanks_in_parallel", (getter)ThermalStorage_get_tanks_in_parallel,(setter)ThermalStorage_set_tanks_in_parallel,
-	PyDoc_STR("*float*: Tanks are in parallel, not in series, with solar field [-]\n\n*Required*: True"),
  	NULL},
 {"u_tank", (getter)ThermalStorage_get_u_tank,(setter)ThermalStorage_set_u_tank,
 	PyDoc_STR("*float*: Loss coefficient from the tank [W/m2-K]\n\n*Required*: True"),
@@ -6538,33 +6523,9 @@ Outputs_get_m_dot_balance(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_m_dot_cr_to_tes_hot(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_TcsmoltenSalt_Outputs_m_dot_cr_to_tes_hot_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_m_dot_cycle_to_field(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_TcsmoltenSalt_Outputs_m_dot_cycle_to_field_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_m_dot_field_to_cycle(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_TcsmoltenSalt_Outputs_m_dot_field_to_cycle_aget, self->data_ptr);
-}
-
-static PyObject *
 Outputs_get_m_dot_pc(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_TcsmoltenSalt_Outputs_m_dot_pc_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_m_dot_pc_to_tes_cold(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_TcsmoltenSalt_Outputs_m_dot_pc_to_tes_cold_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -6574,15 +6535,15 @@ Outputs_get_m_dot_rec(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_m_dot_tes_cold_out(VarGroupObject *self, void *closure)
+Outputs_get_m_dot_tes_ch(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsmoltenSalt_Outputs_m_dot_tes_cold_out_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_TcsmoltenSalt_Outputs_m_dot_tes_ch_aget, self->data_ptr);
 }
 
 static PyObject *
-Outputs_get_m_dot_tes_hot_out(VarGroupObject *self, void *closure)
+Outputs_get_m_dot_tes_dc(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsmoltenSalt_Outputs_m_dot_tes_hot_out_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_TcsmoltenSalt_Outputs_m_dot_tes_dc_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -6595,18 +6556,6 @@ static PyObject *
 Outputs_get_m_warm(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_TcsmoltenSalt_Outputs_m_warm_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_mass_tes_cold(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_TcsmoltenSalt_Outputs_mass_tes_cold_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_mass_tes_hot(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_TcsmoltenSalt_Outputs_mass_tes_hot_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -7216,41 +7165,23 @@ static PyGetSetDef Outputs_getset[] = {
 {"m_dot_balance", (getter)Outputs_get_m_dot_balance,(setter)0,
 	PyDoc_STR("*sequence*: Relative mass flow balance error"),
  	NULL},
-{"m_dot_cr_to_tes_hot", (getter)Outputs_get_m_dot_cr_to_tes_hot,(setter)0,
-	PyDoc_STR("*sequence*: Mass flow: field to hot TES [kg/s]"),
- 	NULL},
-{"m_dot_cycle_to_field", (getter)Outputs_get_m_dot_cycle_to_field,(setter)0,
-	PyDoc_STR("*sequence*: Mass flow: cycle to field [kg/s]"),
- 	NULL},
-{"m_dot_field_to_cycle", (getter)Outputs_get_m_dot_field_to_cycle,(setter)0,
-	PyDoc_STR("*sequence*: Mass flow: field to cycle [kg/s]"),
- 	NULL},
 {"m_dot_pc", (getter)Outputs_get_m_dot_pc,(setter)0,
 	PyDoc_STR("*sequence*: PC HTF mass flow rate [kg/s]"),
- 	NULL},
-{"m_dot_pc_to_tes_cold", (getter)Outputs_get_m_dot_pc_to_tes_cold,(setter)0,
-	PyDoc_STR("*sequence*: Mass flow: cycle to cold TES [kg/s]"),
  	NULL},
 {"m_dot_rec", (getter)Outputs_get_m_dot_rec,(setter)0,
 	PyDoc_STR("*sequence*: Receiver mass flow rate [kg/s]"),
  	NULL},
-{"m_dot_tes_cold_out", (getter)Outputs_get_m_dot_tes_cold_out,(setter)0,
-	PyDoc_STR("*sequence*: Mass flow: TES cold out [kg/s]"),
+{"m_dot_tes_ch", (getter)Outputs_get_m_dot_tes_ch,(setter)0,
+	PyDoc_STR("*sequence*: TES charge mass flow rate [kg/s]"),
  	NULL},
-{"m_dot_tes_hot_out", (getter)Outputs_get_m_dot_tes_hot_out,(setter)0,
-	PyDoc_STR("*sequence*: Mass flow: TES hot out [kg/s]"),
+{"m_dot_tes_dc", (getter)Outputs_get_m_dot_tes_dc,(setter)0,
+	PyDoc_STR("*sequence*: TES discharge mass flow rate [kg/s]"),
  	NULL},
 {"m_dot_water_pc", (getter)Outputs_get_m_dot_water_pc,(setter)0,
 	PyDoc_STR("*sequence*: PC water consumption, makeup + cooling [kg/s]"),
  	NULL},
 {"m_warm", (getter)Outputs_get_m_warm,(setter)0,
 	PyDoc_STR("*sequence*: Cold storage warm tank mass [kg]"),
- 	NULL},
-{"mass_tes_cold", (getter)Outputs_get_mass_tes_cold,(setter)0,
-	PyDoc_STR("*sequence*: TES cold tank mass (end) [kg]"),
- 	NULL},
-{"mass_tes_hot", (getter)Outputs_get_mass_tes_hot,(setter)0,
-	PyDoc_STR("*sequence*: TES hot tank mass (end) [kg]"),
  	NULL},
 {"n_op_modes", (getter)Outputs_get_n_op_modes,(setter)0,
 	PyDoc_STR("*sequence*: Operating modes in reporting timestep"),

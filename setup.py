@@ -25,7 +25,7 @@ defaults_dir = os.environ['SAMNTDIR']+"/api/api_autogen/library/defaults/"
 includepath = os.environ['SAMNTDIR']+"/api/include"
 srcpath = os.environ['SAMNTDIR']+"/api/src"
 
-this_directory = os.path.abspath(os.path.dirname(__file__))
+this_directory = os.environ['PYSAMDIR']
 libpath = this_directory+"/files"
 
 
@@ -112,7 +112,7 @@ for filename in os.listdir(defaults_df_dir):
 extension_modules = [Extension('PySAM.AdjustmentFactors',
                      ['src/AdjustmentFactors.c'],
                     define_macros=defines,
-                    include_dirs=[srcpath, includepath, "src"],
+                    include_dirs=[srcpath, includepath, this_directory + "src"],
                     library_dirs=[libpath],
                     libraries=libs,
                     extra_compile_args=extra_compile_args,
@@ -123,7 +123,7 @@ for filename in os.listdir(this_directory+"/modules"):
     extension_modules.append(Extension('PySAM.' + os.path.splitext(filename)[0],
                              ['modules/' + filename],
                             define_macros=defines,
-                            include_dirs=[srcpath, includepath, "src"],
+                            include_dirs=[srcpath, includepath, this_directory + "src"],
                             library_dirs=[libpath],
                             libraries=libs,
                             extra_compile_args=extra_compile_args,

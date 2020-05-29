@@ -1,6 +1,9 @@
 from setuptools import setup
 import distutils
 import sys
+import os
+import sys
+sys.path.append('.')
 from files.version import __version__
 
 latest_version = __version__
@@ -13,13 +16,13 @@ if sys.argv[1] == "bdist_conda":
 
 # prepare package description
 from os import path, listdir
-this_directory = path.abspath(path.dirname(__file__))
+this_directory = os.environ['PYSAMDIR']
 with open(path.join(this_directory, 'RELEASE.md'), encoding='utf-8') as f:
     long_description = f.read()
 
-libfiles = ['__init__.pyi']
+libfiles = ['__init__.pyi', 'AdjustmentFactors.pyi']
 
-for filename in listdir('stubs'):
+for filename in listdir(path.join(this_directory, 'stubs', 'stubs')):
     libfiles.append(filename)
 
 setup(

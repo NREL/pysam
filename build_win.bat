@@ -1,15 +1,5 @@
 @ECHO OFF
 
-cd %SSCDIR%
-git checkout develop
-echo y | git pull
-cd %SAMNTDIR%
-git checkout develop
-echo y | git pull
-cd %PYSAMDIR%
-git checkout develop
-echo y | git pull
-
 mkdir %SSCDIR%\..\build_pysam
 cd %SSCDIR%\..\build_pysam
 
@@ -19,6 +9,7 @@ devenv /build Release system_advisor_model.sln
 
 cd %PYSAMDIR%
 echo y | rmdir build /s
+echo y | rm dist/*
 
 FOR %%i IN (pysam_build_3.5, pysam_build_3.6 pysam_build_3.7, pysam_build_3.8) DO (
 	call deactivate
@@ -33,5 +24,8 @@ FOR %%i IN (pysam_build_3.5, pysam_build_3.6 pysam_build_3.7, pysam_build_3.8) D
 	)
     python setup.py bdist_wheel
 )
+REM twine upload dist/*.whl
+%bash% conda_build.sh
+REM anaconda upload -u nrel dist/*.tar.bz2
 
 REM rmdir %SSCDIR%\..\build_pysam /s
