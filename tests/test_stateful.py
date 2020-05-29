@@ -25,3 +25,9 @@ def stateful():
     print(b.StatePack.export())
     b.execute()
     print(b.StatePack.export())
+
+    b.setup()
+    b.execute()
+    print(b.StatePack.export())
+    b.execute()
+    print(b.StatePack.export())
