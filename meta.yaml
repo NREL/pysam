@@ -5,12 +5,17 @@ package:
   name: "{{ name|lower }}"
   version: "{{ version }}"
 
+#source:
+#  url: dist/NREL-PySAM-{{version}}.tar.gz
+
 build:
-    script_env:
-        - PYSAMDIR
+    number: 0
+    script:
+        - "export PIP_NO_INDEX='False'"
+        - "{{ PYTHON }} -m pip install {{name}}=={{version}}"
 
 requirements:
-  host:
+  build:
     - pip
     - python
   run:

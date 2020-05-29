@@ -1,0 +1,4 @@
+include files/*SAM*
+include files/*ssc*
+include src/*
+include RELEASE.md

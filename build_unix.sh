@@ -20,6 +20,7 @@ cmake --build . --target SAM_api -j 6
 cd $PYSAMDIR || exit
 source $(conda info --base)/etc/profile.d/conda.sh
 rm -rf build
+rm -rf dist
 
 for PYTHONENV in pysam_build_3.5 pysam_build_3.6 pysam_build_3.7 pysam_build_3.8
 do
@@ -48,6 +49,7 @@ cd ..
 docker pull quay.io/pypa/manylinux1_x86_64
 docker run --rm -v $(pwd):/io quay.io/pypa/manylinux1_x86_64 /io/pysam/build_manylinux.sh
 rename -s linux manylinux1 $PYSAMDIR/dist/*-linux_*
+twine upload $PYSAMDIR/dist/*.whl
 
 
 #
