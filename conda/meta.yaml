@@ -5,12 +5,6 @@ package:
   name: "{{ name|lower }}"
   version: "{{ version }}"
 
-build:
-    number: 0
-    script:
-        - "export PIP_NO_INDEX='False'"
-        - "{{ PYTHON }} -m pip install {{name}}=={{version}}"
-
 requirements:
   build:
     - pip
