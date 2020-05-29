@@ -65,12 +65,12 @@ and how to chain models together to create a configuration. PySAM includes tools
    Tools
 
 
-Version 2.0 and Upgrading from Older Versions
-------------------------------------------
+Release notes
+--------------
+For information on versions, updates and matching SAM releases, please see `Release notes <https://github.com/NREL/pysam/blob/master/RELEASE.md>`_
 
-Between major version changes, in addition to new features, modules and bug fixes, the group to which a variable belongs may change.
-The groups should stabilize after the initial releases.
-Please see :doc:`Version` for more details.
+* **Version 2.0 and Upgrading from Older Versions**: Between major version changes, in addition to new features, modules and bug fixes, the group to which a variable belongs may change.
+The groups should stabilize after the initial releases. Please see :doc:`Version` for more details.
 
 
 .. toctree::
