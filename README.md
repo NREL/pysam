@@ -21,12 +21,12 @@ https://nrel-pysam.readthedocs.io
 ## Installing
 1. PyPi:
 	```
-	pip install NREL-PySAM
+	pip install nrel-pysam
 	```
 
 2. Anaconda (<1.2.1 only):
 	```
-	conda install -c nrel nrel-pysam
+	conda install -c nrel nrel-pysam nrel-pysam-stubs
 	```
 
 May not be compatible with different builds of the CPython reference interpreter, and not with alternative interpreters such as PyPy, IronPython or Jython
