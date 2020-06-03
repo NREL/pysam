@@ -13,11 +13,14 @@ cmake .. -DCMAKE_BUILD_TYPE=Export -DSAMAPI_EXPORT=1
 cmake --build . --target SAM_api -j 6
 
 # Building the PyPi and Anaconda packages
-# requires Miniconda installed with an environment per Python version from 3.5 to 3.8
+# requires Anaconda installed with an environment per Python version from 3.5 to 3.8
+# named pysam_build_3.5 pysam_build_3.6 pysam_build_3.7 pysam_build_3.8
+
 
 cd $PYSAMDIR || exit
 source $(conda info --base)/etc/profile.d/conda.sh
 rm -rf build
+rm -rf dist/*
 
 for PYTHONENV in pysam_build_3.5 pysam_build_3.6 pysam_build_3.7 pysam_build_3.8
 do
@@ -33,9 +36,13 @@ do
    fi
    python setup.py bdist_wheel
 done
-python setup_stubs.py bdist_wheel
+python stubs/setup.py bdist_wheel
+twine upload $PYSAMDIR/dist/*.whl
 
-#./build_conda.sh
+$PYSAMDIR/build_conda.sh
+anaconda upload -u nrel $PYSAMDIR/dist/osx-64/*.tar.bz2
+
+rm -rf dist/*
 
 #
 # Building for Manylinux1
@@ -44,12 +51,8 @@ python setup_stubs.py bdist_wheel
 cd ..
 docker pull quay.io/pypa/manylinux1_x86_64
 docker run --rm -v $(pwd):/io quay.io/pypa/manylinux1_x86_64 /io/pysam/build_manylinux.sh
-rename -s linux manylinux1 pysam/*-linux-*
+rename -s linux manylinux1 $PYSAMDIR/dist/*-linux_*
+twine upload $PYSAMDIR/dist/*.whl
 
-
-#
-# Building for Anaconda for Linux
-#
-
-#docker pull continuumio/anaconda
-#docker run --rm -v $(pwd):/io continuumio/anaconda PYSAMDIR=/io/pysam /io/pysam/build_conda.sh
+docker pull continuumio/anaconda
+docker run --rm --env PYSAMDIR=/io/pysam -v $(pwd):/io continuumio/anaconda /io/pysam/build_conda.sh

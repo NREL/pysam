@@ -1,11 +1,4 @@
-Documentation here: https://nrel-pysam.readthedocs.io
-
-* Provides a wrapper around the SAM library that groups together the C API functions by technology or financial model into modules.
-* Includes error-checking, explicit input and output definition, and conversion between Python data types.
-* PySAM modules are compatible with PySSC, which is included as a subpackage. PySSC is the original wrapper used by SAM's code generator.
-* Automatically assign default values to input parameters from SAM's default value database.
-* Built-in documentation of models and parameters.
-* Minimum Python 3.5 for Windows 7 64-bit, MacOSX 10.6, or CentOS 5.
+# Release Notes
 
 ## Version 2.1.2, ~ SAM 2020.2.29 r2, SSC Version 240
 * SAM Release fixes for revision 2
