@@ -1,34 +1,27 @@
 from setuptools import setup
-import distutils
-import sys
 import os
-import sys
-sys.path.append('.')
+import shutil
 from files.version import __version__
 
 latest_version = __version__
 
-# determine if making PyPi or Conda distribution
-distclass = distutils.core.Distribution
-if sys.argv[1] == "bdist_conda":
-    import distutils.command.bdist_conda
-    distclass = distutils.command.bdist_conda.CondaDistribution
-
 # prepare package description
 from os import path, listdir
-this_directory = os.environ['PYSAMDIR']
-with open(path.join(this_directory, 'RELEASE.md'), encoding='utf-8') as f:
+pysamdir = os.environ['PYSAMDIR']
+os.chdir(pysamdir)
+with open(path.join(pysamdir, 'RELEASE.md'), encoding='utf-8') as f:
     long_description = f.read()
 
-libfiles = ['__init__.pyi', 'AdjustmentFactors.pyi']
+for filename in ('__init__.py', 'AdjustmentFactors.pyi'):
+    shutil.copyfile(path.join(pysamdir, "stubs", filename), path.join(pysamdir, 'stubs', 'stubs', filename))
 
-for filename in listdir(path.join(this_directory, 'stubs', 'stubs')):
+libfiles = []
+for filename in listdir(path.join(pysamdir, 'stubs', 'stubs')):
     libfiles.append(filename)
 
 setup(
     name='NREL-PySAM-stubs',
     version=latest_version,
-    distclass=distclass,
     url='http://www.github.com/nrel/pysam',
     description="National Renewable Energy Laboratory's System Advisor Model Python Wrapper, stub files",
     long_description=long_description,
@@ -38,7 +31,7 @@ setup(
     author_email="dguittet@nrel.gov",
     include_package_data=True,
     packages=['PySAM-stubs'],
-    package_dir={'PySAM-stubs': 'stubs'},
+    package_dir={'PySAM-stubs': 'stubs/stubs'},
     package_data={
         '': libfiles},
     zip_safe=False

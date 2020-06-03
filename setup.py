@@ -1,7 +1,6 @@
 import json, marshal, os, shutil
 from setuptools import setup, Extension
 import sys
-import distutils.dir_util
 from distutils.core import Command
 from files.version import __version__
 
@@ -12,13 +11,6 @@ from files.version import __version__
 ###################################################################################################
 
 latest_version = __version__
-
-# determine if making PyPi or Conda distribution
-distclass = distutils.core.Distribution
-if sys.argv[1] == "bdist_conda":
-    import distutils.command.bdist_conda
-    distclass = distutils.command.bdist_conda.CondaDistribution
-
 
 # defaults and include directories
 defaults_dir = os.environ['SAMNTDIR']+"/api/api_autogen/library/defaults/"
@@ -154,7 +146,6 @@ class PostProcess(Command):
 setup(
     name='NREL-PySAM',
     version=latest_version,
-    distclass=distclass,
     url='https://nrel-pysam.readthedocs.io',
     description="National Renewable Energy Laboratory's System Advisor Model Python Wrapper",
     long_description=long_description,

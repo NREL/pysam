@@ -7,12 +7,12 @@ PySAM for Python 3.5 to 3.8, as NREL-PySAM, is available on PyPi. It is also ava
 
 To install from PyPi::
 
-	pip install NREL-PySAM
+	pip install nrel-pysam
 
 To install from Anaconda, the NREL channel needs to be appended::
 
     conda config --env --append channels nrel
-    conda install nrel-pysam
+    conda install nrel-pysam nrel-pysam-stubs
 
 Writing Your First PySAM Script
 *******************************

@@ -11,6 +11,7 @@ requirements:
     - python
   run:
     - python
+    - nrel-pysam-stubs
 
 about:
   home: https://nrel-pysam.readthedocs.io
