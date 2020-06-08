@@ -1,5 +1,9 @@
 # Release Notes
 
+## Version 2.1.4, June 8, 2020 ~ SAM 2020.2.29 r2, SSC Version 240
+* Pvwattsv5_1ts bug fix
+* Self-shading calculation speed-up for Pvwattsv7, Pvsamv1 & Pvwattsv5
+
 ## Version 2.1.3, May 29, 2020 ~ SAM 2020.2.29 r2, SSC Version 240
 * [SAM Release fixes for revision 2](https://nrel.github.io/SAM/doc/releasenotes.html)
 

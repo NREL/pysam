@@ -27,7 +27,7 @@ do
    conda activate $PYTHONENV
    yes | pip install -r tests/requirements.txt
    yes | pip uninstall NREL-PySAM NREL-PySAM-stubs
-   python setup.py install
+   python setup.py install || exit
    pytest -s tests
    retVal=$?
    if [ $retVal -ne 0 ]; then
