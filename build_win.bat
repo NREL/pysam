@@ -9,7 +9,7 @@ devenv /build Release system_advisor_model.sln
 
 cd %PYSAMDIR%
 echo y | rmdir build /s
-echo y | rm dist/*
+echo y | del dist/*
 
 FOR %%i IN (pysam_build_3.5, pysam_build_3.6 pysam_build_3.7, pysam_build_3.8) DO (
 	call deactivate
