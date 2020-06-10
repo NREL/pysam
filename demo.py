@@ -8,6 +8,8 @@ import PySAM.Singleowner as Singleowner
 from PySAM.PySSC import *
 
 import PySAM.Pvsamv1 as Pvsamv1
+
+
 def gcr_func(x, y):
     # set up base
     a = Pvsamv1.default("FlatPlatePVSingleowner")
@@ -24,7 +26,6 @@ def gcr_func(x, y):
     land_area = a.CECPerformanceModelWithModuleDatabase.cec_area * (a.SystemDesign.subarray1_nstrings
                         * a.SystemDesign.subarray1_modules_per_string) / x * 0.0002471
 
-
     a.execute()
     # total_installed_cost = total_direct_cost + permitting_total + engr_total + grid_total + landprep_total + sales_tax_total + land_total
     b.SystemCosts.total_installed_cost += y * land_area * 1000
@@ -34,7 +35,6 @@ def gcr_func(x, y):
 
 
 import time
-
 
 import multiprocessing
 from itertools import product

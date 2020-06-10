@@ -81,6 +81,7 @@ def _decode(o):
     else:
         return o
 
+
 defaults_df_dir = 'files/defaults'
 if os.path.exists(defaults_df_dir):
     shutil.rmtree(defaults_df_dir)
@@ -124,13 +125,17 @@ for filename in os.listdir(this_directory + "/modules"):
 
 # function to rename macosx distribution for Python 3.7 to be minimum version of 10.12 instead of 10.14
 
+
 class PostProcess(Command):
     description = "rename macosx distribution for Python 3.7 to be minimum version of 10.12 instead of 10.14"
     user_options = []
+
     def initialize_options(self):
         self.cwd = None
+
     def finalize_options(self):
         self.cwd = os.getcwd()
+
     def run(self):
         assert os.getcwd() == self.cwd, 'Must be in package root: %s' % self.cwd
         name = "NREL_PySAM-" + latest_version + "-" + "cp37-cp37m-macosx_10_14_x86_64.whl"
@@ -142,6 +147,7 @@ class PostProcess(Command):
 # setup script
 #
 ###################################################################################################
+
 
 setup(
     name='NREL-PySAM',

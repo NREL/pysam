@@ -1,5 +1,6 @@
 import math
 
+
 def size_li_ion_battery(input_dict):
     """
     All efficiencies and rates in percentages, 0-100.
