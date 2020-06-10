@@ -1,5 +1,6 @@
 import time
 import random
+import collections
 random.seed(1)
 
 

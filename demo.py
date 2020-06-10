@@ -1,11 +1,11 @@
 import matplotlib.pyplot as plot
-from mpl_toolkits.mplot3d import Axes3D
 import numpy as np
 
-import json
-import PySAM.GenericSystem as GenericSystem
 import PySAM.Singleowner as Singleowner
-from PySAM.PySSC import *
+
+import time
+import multiprocessing
+from itertools import product
 
 import PySAM.Pvsamv1 as Pvsamv1
 def gcr_func(x, y):
@@ -33,11 +33,6 @@ def gcr_func(x, y):
     return b.Outputs.analysis_period_irr
 
 
-import time
-
-
-import multiprocessing
-from itertools import product
 
 x = np.arange(1, 11)
 y = np.arange(1, 11)
