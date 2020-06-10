@@ -93,6 +93,7 @@ import PySAM.PySSC as pssc
 import xlrd as xlrd
 from xlutils.copy import copy as xl_copy
 
+
 def output(filename, wb, years, NPV, period):
     new_wb = xl_copy(wb)
     sheet1 = new_wb.add_sheet('Results')
@@ -107,6 +108,7 @@ def output(filename, wb, years, NPV, period):
         sheet1.write(i+1, 2, period[i])
 
     new_wb.save(filename)
+
 
 years_to_plot = 10
 
