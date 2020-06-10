@@ -1,4 +1,9 @@
+"""
+Most recently tested against PySAM 2.1.4
+"""
+
 import matplotlib.pyplot as plot
+from mpl_toolkits.mplot3d import Axes3D
 import numpy as np
 
 import PySAM.Singleowner as Singleowner
@@ -29,13 +34,14 @@ def gcr_func(x, y):
     a.execute()
     # total_installed_cost = total_direct_cost + permitting_total + engr_total + grid_total + landprep_total + sales_tax_total + land_total
     b.SystemCosts.total_installed_cost += y * land_area * 1000
+    b.SystemOutput.system_pre_curtailment_kwac = a.Outputs.gen
     b.SystemOutput.gen = a.Outputs.gen
     b.execute()
     return b.Outputs.analysis_period_irr
 
 
-x = np.arange(1, 11)
-y = np.arange(1, 11)
+x = np.arange(1, 10)
+y = np.arange(1, 10)
 
 X, Y = np.meshgrid(x, y)
 
@@ -49,11 +55,11 @@ multi2 = time.process_time()
 print("multi process time:", multi2 - multi1, "\n")
 
 results = np.array([results])
-results = np.reshape(results, (-1, 10))
+results = np.reshape(results, (-1, 9))
 print(results)
 
 fig = plot.figure()
-ax = fig.add_subplot(111, projection='3d')
+ax = Axes3D(fig)
 ax.plot_surface(X, Y, results)
 plot.show()
 
