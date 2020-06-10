@@ -36,7 +36,6 @@ def gcr_func(x, y):
 
 import time
 
-
 import multiprocessing
 from itertools import product
 
