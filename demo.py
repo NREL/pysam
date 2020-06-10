@@ -42,19 +42,19 @@ from itertools import product
 x = np.arange(1, 11)
 y = np.arange(1, 11)
 
-X,Y = np.meshgrid(x, y)
+X, Y = np.meshgrid(x, y)
 
 multi1 = time.process_time()
 
 if __name__ == '__main__':
     with multiprocessing.Pool(processes=4) as pool:
-        results = pool.starmap(gcr_func, product(x/10, repeat=2))
+        results = pool.starmap(gcr_func, product(x / 10, repeat=2))
 
 multi2 = time.process_time()
 print("multi process time:", multi2 - multi1, "\n")
 
 results = np.array([results])
-results = np.reshape(results, (-1,10))
+results = np.reshape(results, (-1, 10))
 print(results)
 
 fig = plot.figure()
