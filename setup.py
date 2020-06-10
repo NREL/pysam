@@ -13,12 +13,12 @@ from files.version import __version__
 latest_version = __version__
 
 # defaults and include directories
-defaults_dir = os.environ['SAMNTDIR']+"/api/api_autogen/library/defaults/"
-includepath = os.environ['SAMNTDIR']+"/api/include"
-srcpath = os.environ['SAMNTDIR']+"/api/src"
+defaults_dir = os.environ['SAMNTDIR'] + "/api/api_autogen/library/defaults/"
+includepath = os.environ['SAMNTDIR'] + "/api/include"
+srcpath = os.environ['SAMNTDIR'] + "/api/src"
 
 this_directory = os.environ['PYSAMDIR']
-libpath = this_directory+"/files"
+libpath = this_directory + "/files"
 
 
 # prepare package description
@@ -81,6 +81,7 @@ def _decode(o):
     else:
         return o
 
+
 defaults_df_dir = 'files/defaults'
 if os.path.exists(defaults_df_dir):
     shutil.rmtree(defaults_df_dir)
@@ -111,7 +112,7 @@ extension_modules = [Extension('PySAM.AdjustmentFactors',
                     extra_link_args=extra_link_args
                     )]
 
-for filename in os.listdir(this_directory+"/modules"):
+for filename in os.listdir(this_directory + "/modules"):
     extension_modules.append(Extension('PySAM.' + os.path.splitext(filename)[0],
                              ['modules/' + filename],
                             define_macros=defines,
@@ -124,13 +125,17 @@ for filename in os.listdir(this_directory+"/modules"):
 
 # function to rename macosx distribution for Python 3.7 to be minimum version of 10.12 instead of 10.14
 
+
 class PostProcess(Command):
     description = "rename macosx distribution for Python 3.7 to be minimum version of 10.12 instead of 10.14"
     user_options = []
+
     def initialize_options(self):
         self.cwd = None
+
     def finalize_options(self):
         self.cwd = os.getcwd()
+
     def run(self):
         assert os.getcwd() == self.cwd, 'Must be in package root: %s' % self.cwd
         name = "NREL_PySAM-" + latest_version + "-" + "cp37-cp37m-macosx_10_14_x86_64.whl"
@@ -142,6 +147,7 @@ class PostProcess(Command):
 # setup script
 #
 ###################################################################################################
+
 
 setup(
     name='NREL-PySAM',
