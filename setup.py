@@ -13,12 +13,12 @@ from files.version import __version__
 latest_version = __version__
 
 # defaults and include directories
-defaults_dir = os.environ['SAMNTDIR']+"/api/api_autogen/library/defaults/"
-includepath = os.environ['SAMNTDIR']+"/api/include"
-srcpath = os.environ['SAMNTDIR']+"/api/src"
+defaults_dir = os.environ['SAMNTDIR'] + "/api/api_autogen/library/defaults/"
+includepath = os.environ['SAMNTDIR'] + "/api/include"
+srcpath = os.environ['SAMNTDIR'] + "/api/src"
 
 this_directory = os.environ['PYSAMDIR']
-libpath = this_directory+"/files"
+libpath = this_directory + "/files"
 
 
 # prepare package description
@@ -111,7 +111,7 @@ extension_modules = [Extension('PySAM.AdjustmentFactors',
                     extra_link_args=extra_link_args
                     )]
 
-for filename in os.listdir(this_directory+"/modules"):
+for filename in os.listdir(this_directory + "/modules"):
     extension_modules.append(Extension('PySAM.' + os.path.splitext(filename)[0],
                              ['modules/' + filename],
                             define_macros=defines,
