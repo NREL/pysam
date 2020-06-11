@@ -3,6 +3,8 @@
 import string, sys, struct, os
 from ctypes import *
 c_number = c_double  # must be c_double or c_float depending on how defined in sscapi.h
+
+
 class PySSC:
     def __init__(self):
         this_directory = os.path.abspath(os.path.dirname(__file__))
@@ -313,10 +315,12 @@ def ssc_cmod(dat, name):
     # Get python dictionary representing compute module with all inputs/outputs defined
     return [True, ssc_table_to_dict(cmod, dat)]
 
+
 def dict_to_ssc_table(py_dict, cmod_name):
     ssc = PySSC()
     dat = ssc.data_create()
     return dict_to_ssc_table_dat(py_dict, cmod_name, dat)
+
 
 def dict_to_ssc_table_dat(py_dict, cmod_name, dat):
     ssc = PySSC()

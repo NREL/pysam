@@ -1,5 +1,6 @@
 import time
 import random
+import collections
 random.seed(1)
 
 
@@ -120,8 +121,8 @@ def test3(n):
     from PySAM.PySSC import PySSC
     import PySAM.GenericSystem as GenericSystem
 
-
     ssc = PySSC()
+
     def old_no_import_rand():
         # ssc.module_exec_set_print(0)
         data = ssc.data_create()
@@ -172,7 +173,6 @@ def test3(n):
 #
 # Testing with dictionary loading
 #
-
 def test4(n):
     import PySAM.GenericSystem as GenericSystem
     from PySAM.PySSC import PySSC
@@ -237,14 +237,10 @@ def test4(n):
                     raise ValueError("not matrix")
         ssc.data_free(data)
 
-
-
-
     def new_dict():
 
         gs = GenericSystem.new()
         gs.assign(dict_new)
-
 
     # time old version
 

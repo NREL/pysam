@@ -1,5 +1,6 @@
 import PySAM.Windpower as wp
 
+
 def test_Turbine_calculate_powercurve_error():
     a = wp.new()
     try:
@@ -7,6 +8,7 @@ def test_Turbine_calculate_powercurve_error():
                                    cut_out=25, drive_train=0)
     except:
         assert(True)
+
 
 def test_Turbine_calculate_powercurve_default():
     a = wp.new()
