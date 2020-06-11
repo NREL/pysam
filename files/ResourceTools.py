@@ -289,7 +289,7 @@ class FetchResourceFiles():
         return session
 
     def _csv_to_srw(self, raw_csv):
-        #TODO: convert gen profiles to local tz
+        #  TODO: convert gen profiles to local tz
 
         # --- grab df ---
         for_df = copy.deepcopy(raw_csv)

@@ -17,9 +17,9 @@ import PySAM.StandAloneBattery as battery_model
 import PySAM.Pvsamv1 as pvsam
 from PySAM.PySSC import *
 
-weather_file = sys.argv[1] #.csv weather file with tmy format
+weather_file = sys.argv[1]  # .csv weather file with tmy format
 
-analysis_period = 1 # years
+analysis_period = 1  # years
 days_in_year = 365
 
 # Create the detailed residential pv model using PySAM's defaults
@@ -32,14 +32,14 @@ system_model.SolarResource.solar_resource_file = weather_file
 
 # 24 hours of dispatch data, duplicated for each day. Would need to extend daily_dispatch for subhourly
 lifetime_dispatch = []
-daily_dispatch = [0, 0, 0, 0, 0, 0, 0, -2, -2, -2, -2, -2, -1, 0, 0, 0, 0, 2, 4, 2, 2, 0, 0, 0] #kW, negative is charging
+daily_dispatch = [0, 0, 0, 0, 0, 0, 0, -2, -2, -2, -2, -2, -1, 0, 0, 0, 0, 2, 4, 2, 2, 0, 0, 0]  # kW, negative is charging
 # Extend daily lists for entire analysis period
 for i in range(0, days_in_year * analysis_period):
     lifetime_dispatch.extend(daily_dispatch)
 
 # Change from default dispatch to custom dispatch
-battery.BatteryDispatch.batt_dispatch_choice = 3 # custom dispatch
-battery.BatteryDispatch.batt_custom_dispatch = lifetime_dispatch # converts list to tuple
+battery.BatteryDispatch.batt_dispatch_choice = 3  # custom dispatch
+battery.BatteryDispatch.batt_custom_dispatch = lifetime_dispatch  # converts list to tuple
 
 # Run the model. Change argument to 1 for verbose
 system_model.execute(0)
