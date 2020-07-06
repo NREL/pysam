@@ -1,5 +1,9 @@
 name: Lint Code Base
 
+on:
+  push:
+    branches: [ master, dev ]
+
 jobs:
   build:
     name: Lint Code Base
