@@ -1,6 +1,7 @@
 #  Created with SAM version 2019.1.21
 
-import string, sys, struct, os
+import os
+import sys
 from ctypes import *
 c_number = c_double  # must be c_double or c_float depending on how defined in sscapi.h
 
@@ -305,7 +306,7 @@ def ssc_cmod(dat, name):
         print(name + ' simulation error')
         idx = 1
         msg = ssc.module_log(cmod, 0)
-        while (msg != None):
+        while msg is not None:
             print(' : ' + msg.decode("utf - 8"))
             msg = ssc.module_log(cmod, idx)
             idx = idx + 1
@@ -362,7 +363,7 @@ def dict_to_ssc_table_dat(py_dict, cmod_name, dat):
             #    print ("Did not find key: ", ssc_input_data_name)
 
             # Set compute module data to dictionary value
-            if (is_str_test_key == True):
+            if is_str_test_key:
                 if (ssc_input_data_type == 1):
                     ssc.data_set_string(dat, ssc_input_data_name.encode("ascii"),
                                         py_dict[ssc_input_data_name].encode("ascii"))

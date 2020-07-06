@@ -436,5 +436,3 @@ if not testing:
         output(xl_file_path, wb, years, npv_array, simple_payback_array)
 root = tk.Tk()
 root.withdraw()
-
-

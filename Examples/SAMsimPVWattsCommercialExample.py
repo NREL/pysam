@@ -75,4 +75,3 @@ if verbose:  # Print out some results.  The variable names can be found in
     print('cl.Outputs.adjusted_installed cost',
           cl.Outputs.adjusted_installed_cost)
     print()
-
