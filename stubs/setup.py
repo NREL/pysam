@@ -12,8 +12,10 @@ os.chdir(pysamdir)
 with open(path.join(pysamdir, 'RELEASE.md'), encoding='utf-8') as f:
     long_description = f.read()
 
-for filename in ('__init__.py', 'AdjustmentFactors.pyi'):
-    shutil.copyfile(path.join(pysamdir, "stubs", filename), path.join(pysamdir, 'stubs', 'stubs', filename))
+# stubs/stubs folder gets emptied during creation of stub files, so need to add these two files back in
+open(path.join(pysamdir, "stubs", 'stubs', '__init__.py'), 'w').close()
+shutil.copyfile(path.join(pysamdir, "stubs", 'AdjustmentFactors.pyi'),
+                path.join(pysamdir, 'stubs', 'stubs', 'AdjustmentFactors.pyi'))
 
 libfiles = []
 for filename in listdir(path.join(pysamdir, 'stubs', 'stubs')):

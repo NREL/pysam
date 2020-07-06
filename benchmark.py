@@ -1,6 +1,7 @@
 import time
 import random
 import collections
+import math
 random.seed(1)
 
 
@@ -56,7 +57,11 @@ def test1(n):
 
     t2 = time.process_time()
     t_new = t2 - t1
-    print("Time with importing module:\t", round(t_old, 5), "\t", round(t_new, 5), "\t", round(t_old / t_new, 5))
+    if math.isclose(0, t_new, rel_tol=1e-5):
+        factor = None
+    else:
+        factor = round(t_old / t_new, 5)
+    print("Time with importing module:\t", round(t_old, 5), "\t", round(t_new, 5), "\t", factor)
 
 
 #
@@ -111,7 +116,11 @@ def test2(n):
     t2 = time.process_time()
 
     t_new = t2 - t1
-    print("Time w/o importing module:\t", round(t_old, 5), "\t", round(t_new, 5), "\t", round(t_old / t_new, 5))
+    if math.isclose(0, t_new, rel_tol=1e-5):
+        factor = None
+    else:
+        factor = round(t_old / t_new, 5)
+    print("Time w/o importing module:\t", round(t_old, 5), "\t", round(t_new, 5), "\t", factor)
 
 
 #
@@ -166,7 +175,11 @@ def test3(n):
     t2 = time.process_time()
 
     t_new = t2 - t1
-    print("Time w/o importing + rand:\t", round(t_old, 5), "\t", round(t_new, 5), "\t", round(t_old / t_new, 5))
+    if math.isclose(0, t_new, rel_tol=1e-5):
+        factor = None
+    else:
+        factor = round(t_old / t_new, 5)
+    print("Time w/o importing + rand:\t", round(t_old, 5), "\t", round(t_new, 5), "\t", factor)
 
 
 
@@ -260,7 +273,11 @@ def test4(n):
     t2 = time.process_time()
 
     t_new = t2 - t1
-    print("Time w/o importing w/ dict:\t", round(t_old, 5), "\t", round(t_new, 5), "\t", round(t_old / t_new, 5))
+    if math.isclose(0, t_new, rel_tol=1e-5):
+        factor = None
+    else:
+        factor = round(t_old / t_new, 5)
+    print("Time w/o importing w/ dict:\t", round(t_old, 5), "\t", round(t_new, 5), "\t", factor)
 
 
 
