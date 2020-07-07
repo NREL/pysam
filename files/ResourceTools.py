@@ -3,7 +3,6 @@ import csv
 import os
 from collections import defaultdict
 import concurrent.futures as cf
-import itertools
 import io
 import requests
 import copy
@@ -76,7 +75,6 @@ def SRW_to_wind_data(filename):
         raise FileNotFoundError(filename + " does not exist.")
     data_dict = dict()
     field_names = ('Temperature', 'Pressure', 'Speed', 'Direction')
-    fields_id = (1, 2, 3, 4)
     with open(filename) as file_in:
         file_in.readline()
         file_in.readline()
@@ -289,7 +287,7 @@ class FetchResourceFiles():
         return session
 
     def _csv_to_srw(self, raw_csv):
-        #TODO: convert gen profiles to local tz
+        #  TODO: convert gen profiles to local tz
 
         # --- grab df ---
         for_df = copy.deepcopy(raw_csv)

@@ -49,5 +49,5 @@ def test_dc():
     PySAM.BatteryTools.battery_model_sizing(model, 100, 400, 500)
     assert (model.BatterySystem.batt_computed_bank_capacity == pytest.approx(400, 1))
     assert (model.BatterySystem.batt_power_charge_max_kwdc == pytest.approx(100, 1))
-    print (model.BatterySystem.batt_power_charge_max_kwac)
-    print (model.BatterySystem.batt_power_charge_max_kwdc)
+    print(model.BatterySystem.batt_power_charge_max_kwac)
+    print(model.BatterySystem.batt_power_charge_max_kwdc)

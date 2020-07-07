@@ -2,11 +2,11 @@ from setuptools import setup
 import os
 import shutil
 from files.version import __version__
+from os import path, listdir
 
 latest_version = __version__
 
 # prepare package description
-from os import path, listdir
 pysamdir = os.environ['PYSAMDIR']
 os.chdir(pysamdir)
 with open(path.join(pysamdir, 'RELEASE.md'), encoding='utf-8') as f:
@@ -38,4 +38,3 @@ setup(
         '': libfiles},
     zip_safe=False
 )
-

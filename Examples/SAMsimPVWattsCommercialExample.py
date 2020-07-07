@@ -37,7 +37,7 @@ verbose = True  # Make False if you don't want all the debugging info.
 # in the added simulation case.  Choose "JSON for inputs" and a .json file
 # with the title of your simulation case will be created where you select with
 # the "Open" button on the file dialog.
-json_file_path = 'Examples/100kW_PVWatts.json' # Change this file name to yours!
+json_file_path = 'Examples/100kW_PVWatts.json'  # Change this file name to yours!
 with open(json_file_path) as f:
         dic = json.load(f)
 # The next seven lines are needed to load the PySAM data structures with the
@@ -61,7 +61,7 @@ grid.execute()
 ur.execute()
 cl.execute()
 
-if verbose: # Print out some results.  The variable names can be found in
+if verbose:  # Print out some results.  The variable names can be found in
     # the model pages of the docs.
     print('Replicating SAM Results using PySAM')
     print('ac_annual: ', pv.Outputs.ac_annual)
@@ -75,4 +75,3 @@ if verbose: # Print out some results.  The variable names can be found in
     print('cl.Outputs.adjusted_installed cost',
           cl.Outputs.adjusted_installed_cost)
     print()
-
