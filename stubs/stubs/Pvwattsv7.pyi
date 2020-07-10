@@ -2,7 +2,7 @@ class SolarResource(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -18,7 +18,7 @@ class Lifetime(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -34,7 +34,7 @@ class SystemDesign(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -92,7 +92,7 @@ class Outputs(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -166,16 +166,16 @@ class Pvwattsv7(object):
 	Outputs = Outputs
 
 
-def default(config) -> Pvwattsv7
+def default(config) -> Pvwattsv7:
 	pass
 
-def new() -> Pvwattsv7
+def new() -> Pvwattsv7:
 	pass
 
-def wrap(ssc_data_t) -> Pvwattsv7
+def wrap(ssc_data_t) -> Pvwattsv7:
 	pass
 
-def from_existing(model, config="") -> Pvwattsv7
+def from_existing(model, config="") -> Pvwattsv7:
 	pass
 
 __loader__ = None 

@@ -2,7 +2,7 @@ class Heliostat(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -16,7 +16,7 @@ class SystemCosts(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -53,7 +53,7 @@ class Receiver(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -70,7 +70,7 @@ class TES(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -84,7 +84,7 @@ class SystemDesign(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -99,7 +99,7 @@ class Outputs(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -152,16 +152,16 @@ class CbMsptSystemCosts(object):
 	Outputs = Outputs
 
 
-def default(config) -> CbMsptSystemCosts
+def default(config) -> CbMsptSystemCosts:
 	pass
 
-def new() -> CbMsptSystemCosts
+def new() -> CbMsptSystemCosts:
 	pass
 
-def wrap(ssc_data_t) -> CbMsptSystemCosts
+def wrap(ssc_data_t) -> CbMsptSystemCosts:
 	pass
 
-def from_existing(model, config="") -> CbMsptSystemCosts
+def from_existing(model, config="") -> CbMsptSystemCosts:
 	pass
 
 __loader__ = None 

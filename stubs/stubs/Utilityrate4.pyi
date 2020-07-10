@@ -2,7 +2,7 @@ class Common(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -33,7 +33,7 @@ class TimeSeries(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -48,7 +48,7 @@ class Financials(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -62,7 +62,7 @@ class AnnualOutput(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -76,7 +76,7 @@ class Outputs(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -239,16 +239,16 @@ class Utilityrate4(object):
 	Outputs = Outputs
 
 
-def default(config) -> Utilityrate4
+def default(config) -> Utilityrate4:
 	pass
 
-def new() -> Utilityrate4
+def new() -> Utilityrate4:
 	pass
 
-def wrap(ssc_data_t) -> Utilityrate4
+def wrap(ssc_data_t) -> Utilityrate4:
 	pass
 
-def from_existing(model, config="") -> Utilityrate4
+def from_existing(model, config="") -> Utilityrate4:
 	pass
 
 __loader__ = None 

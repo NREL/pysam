@@ -2,7 +2,7 @@ class SandiaInverterModel(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -26,7 +26,7 @@ class Outputs(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -65,16 +65,16 @@ class Pvsandiainv(object):
 	Outputs = Outputs
 
 
-def default(config) -> Pvsandiainv
+def default(config) -> Pvsandiainv:
 	pass
 
-def new() -> Pvsandiainv
+def new() -> Pvsandiainv:
 	pass
 
-def wrap(ssc_data_t) -> Pvsandiainv
+def wrap(ssc_data_t) -> Pvsandiainv:
 	pass
 
-def from_existing(model, config="") -> Pvsandiainv
+def from_existing(model, config="") -> Pvsandiainv:
 	pass
 
 __loader__ = None 

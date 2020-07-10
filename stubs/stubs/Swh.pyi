@@ -2,7 +2,7 @@ class SolarResource(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -17,7 +17,7 @@ class SWH(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -88,7 +88,7 @@ class Outputs(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -157,16 +157,16 @@ class Swh(object):
 	Outputs = Outputs
 
 
-def default(config) -> Swh
+def default(config) -> Swh:
 	pass
 
-def new() -> Swh
+def new() -> Swh:
 	pass
 
-def wrap(ssc_data_t) -> Swh
+def wrap(ssc_data_t) -> Swh:
 	pass
 
-def from_existing(model, config="") -> Swh
+def from_existing(model, config="") -> Swh:
 	pass
 
 __loader__ = None 

@@ -2,7 +2,7 @@ class SixParameterSolver(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -25,7 +25,7 @@ class Outputs(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -63,16 +63,16 @@ class SixParsolve(object):
 	Outputs = Outputs
 
 
-def default(config) -> SixParsolve
+def default(config) -> SixParsolve:
 	pass
 
-def new() -> SixParsolve
+def new() -> SixParsolve:
 	pass
 
-def wrap(ssc_data_t) -> SixParsolve
+def wrap(ssc_data_t) -> SixParsolve:
 	pass
 
-def from_existing(model, config="") -> SixParsolve
+def from_existing(model, config="") -> SixParsolve:
 	pass
 
 __loader__ = None 

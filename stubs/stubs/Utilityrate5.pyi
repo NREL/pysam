@@ -2,7 +2,7 @@ class ElectricityRates(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -21,6 +21,7 @@ class ElectricityRates(object):
 	ur_ec_sched_weekday = tuple
 	ur_ec_sched_weekend = tuple
 	ur_ec_tou_mat = tuple
+	ur_en_ts_buy_rate = float
 	ur_en_ts_sell_rate = float
 	ur_metering_option = float
 	ur_monthly_fixed_charge = float
@@ -35,7 +36,7 @@ class Lifetime(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -51,7 +52,7 @@ class SystemOutput(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -66,7 +67,7 @@ class Load(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -81,7 +82,7 @@ class Outputs(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -259,16 +260,16 @@ class Utilityrate5(object):
 	Outputs = Outputs
 
 
-def default(config) -> Utilityrate5
+def default(config) -> Utilityrate5:
 	pass
 
-def new() -> Utilityrate5
+def new() -> Utilityrate5:
 	pass
 
-def wrap(ssc_data_t) -> Utilityrate5
+def wrap(ssc_data_t) -> Utilityrate5:
 	pass
 
-def from_existing(model, config="") -> Utilityrate5
+def from_existing(model, config="") -> Utilityrate5:
 	pass
 
 __loader__ = None 

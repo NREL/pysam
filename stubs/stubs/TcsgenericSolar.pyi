@@ -2,7 +2,7 @@ class Weather(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -19,7 +19,7 @@ class GenericSolar(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -33,7 +33,7 @@ class TouTranslator(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -48,7 +48,7 @@ class Type260(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -135,7 +135,7 @@ class Outputs(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -241,16 +241,16 @@ class TcsgenericSolar(object):
 	Outputs = Outputs
 
 
-def default(config) -> TcsgenericSolar
+def default(config) -> TcsgenericSolar:
 	pass
 
-def new() -> TcsgenericSolar
+def new() -> TcsgenericSolar:
 	pass
 
-def wrap(ssc_data_t) -> TcsgenericSolar
+def wrap(ssc_data_t) -> TcsgenericSolar:
 	pass
 
-def from_existing(model, config="") -> TcsgenericSolar
+def from_existing(model, config="") -> TcsgenericSolar:
 	pass
 
 __loader__ = None 

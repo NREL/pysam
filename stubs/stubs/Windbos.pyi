@@ -2,7 +2,7 @@ class WindBos(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -47,7 +47,7 @@ class Outputs(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -96,16 +96,16 @@ class Windbos(object):
 	Outputs = Outputs
 
 
-def default(config) -> Windbos
+def default(config) -> Windbos:
 	pass
 
-def new() -> Windbos
+def new() -> Windbos:
 	pass
 
-def wrap(ssc_data_t) -> Windbos
+def wrap(ssc_data_t) -> Windbos:
 	pass
 
-def from_existing(model, config="") -> Windbos
+def from_existing(model, config="") -> Windbos:
 	pass
 
 __loader__ = None 

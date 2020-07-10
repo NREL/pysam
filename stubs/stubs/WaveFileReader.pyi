@@ -2,7 +2,7 @@ class WeatherReader(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -17,7 +17,7 @@ class Outputs(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -63,16 +63,16 @@ class WaveFileReader(object):
 	Outputs = Outputs
 
 
-def default(config) -> WaveFileReader
+def default(config) -> WaveFileReader:
 	pass
 
-def new() -> WaveFileReader
+def new() -> WaveFileReader:
 	pass
 
-def wrap(ssc_data_t) -> WaveFileReader
+def wrap(ssc_data_t) -> WaveFileReader:
 	pass
 
-def from_existing(model, config="") -> WaveFileReader
+def from_existing(model, config="") -> WaveFileReader:
 	pass
 
 __loader__ = None 

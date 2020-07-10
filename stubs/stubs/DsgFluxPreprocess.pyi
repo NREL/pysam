@@ -2,7 +2,7 @@ class Common(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -34,7 +34,7 @@ class Outputs(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -70,16 +70,16 @@ class DsgFluxPreprocess(object):
 	Outputs = Outputs
 
 
-def default(config) -> DsgFluxPreprocess
+def default(config) -> DsgFluxPreprocess:
 	pass
 
-def new() -> DsgFluxPreprocess
+def new() -> DsgFluxPreprocess:
 	pass
 
-def wrap(ssc_data_t) -> DsgFluxPreprocess
+def wrap(ssc_data_t) -> DsgFluxPreprocess:
 	pass
 
-def from_existing(model, config="") -> DsgFluxPreprocess
+def from_existing(model, config="") -> DsgFluxPreprocess:
 	pass
 
 __loader__ = None 

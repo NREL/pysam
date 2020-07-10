@@ -2,7 +2,7 @@ class Common(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -18,7 +18,7 @@ class Outputs(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -71,16 +71,16 @@ class InvCecCg(object):
 	Outputs = Outputs
 
 
-def default(config) -> InvCecCg
+def default(config) -> InvCecCg:
 	pass
 
-def new() -> InvCecCg
+def new() -> InvCecCg:
 	pass
 
-def wrap(ssc_data_t) -> InvCecCg
+def wrap(ssc_data_t) -> InvCecCg:
 	pass
 
-def from_existing(model, config="") -> InvCecCg
+def from_existing(model, config="") -> InvCecCg:
 	pass
 
 __loader__ = None 

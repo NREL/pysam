@@ -2,7 +2,7 @@ class MHKTidal(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -23,7 +23,7 @@ class Outputs(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -61,16 +61,16 @@ class MhkTidal(object):
 	Outputs = Outputs
 
 
-def default(config) -> MhkTidal
+def default(config) -> MhkTidal:
 	pass
 
-def new() -> MhkTidal
+def new() -> MhkTidal:
 	pass
 
-def wrap(ssc_data_t) -> MhkTidal
+def wrap(ssc_data_t) -> MhkTidal:
 	pass
 
-def from_existing(model, config="") -> MhkTidal
+def from_existing(model, config="") -> MhkTidal:
 	pass
 
 __loader__ = None 

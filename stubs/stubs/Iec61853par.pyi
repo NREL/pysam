@@ -2,7 +2,7 @@ class IEC61853(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -19,7 +19,7 @@ class Outputs(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -64,16 +64,16 @@ class Iec61853par(object):
 	Outputs = Outputs
 
 
-def default(config) -> Iec61853par
+def default(config) -> Iec61853par:
 	pass
 
-def new() -> Iec61853par
+def new() -> Iec61853par:
 	pass
 
-def wrap(ssc_data_t) -> Iec61853par
+def wrap(ssc_data_t) -> Iec61853par:
 	pass
 
-def from_existing(model, config="") -> Iec61853par
+def from_existing(model, config="") -> Iec61853par:
 	pass
 
 __loader__ = None 

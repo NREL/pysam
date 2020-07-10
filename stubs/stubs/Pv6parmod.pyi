@@ -2,7 +2,7 @@ class Weather(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -25,7 +25,7 @@ class CEC6ParameterPVModuleModel(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -56,7 +56,7 @@ class Outputs(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -94,16 +94,16 @@ class Pv6parmod(object):
 	Outputs = Outputs
 
 
-def default(config) -> Pv6parmod
+def default(config) -> Pv6parmod:
 	pass
 
-def new() -> Pv6parmod
+def new() -> Pv6parmod:
 	pass
 
-def wrap(ssc_data_t) -> Pv6parmod
+def wrap(ssc_data_t) -> Pv6parmod:
 	pass
 
-def from_existing(model, config="") -> Pv6parmod
+def from_existing(model, config="") -> Pv6parmod:
 	pass
 
 __loader__ = None 

@@ -2,7 +2,7 @@ class Depreciation(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -21,7 +21,7 @@ class Financials(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -37,7 +37,7 @@ class FinancialThirdPartyOwnership(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -51,7 +51,7 @@ class Common(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -66,7 +66,7 @@ class AnnualOutput(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -81,7 +81,7 @@ class CashFlow(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -98,7 +98,7 @@ class ElectricityCost(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -113,7 +113,7 @@ class Outputs(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -163,16 +163,16 @@ class Thirdpartyownership(object):
 	Outputs = Outputs
 
 
-def default(config) -> Thirdpartyownership
+def default(config) -> Thirdpartyownership:
 	pass
 
-def new() -> Thirdpartyownership
+def new() -> Thirdpartyownership:
 	pass
 
-def wrap(ssc_data_t) -> Thirdpartyownership
+def wrap(ssc_data_t) -> Thirdpartyownership:
 	pass
 
-def from_existing(model, config="") -> Thirdpartyownership
+def from_existing(model, config="") -> Thirdpartyownership:
 	pass
 
 __loader__ = None 

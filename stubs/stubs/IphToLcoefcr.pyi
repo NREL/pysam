@@ -2,7 +2,7 @@ class IPHLCOH(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -17,7 +17,7 @@ class SimpleLCOE(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -31,7 +31,7 @@ class Outputs(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -64,16 +64,16 @@ class IphToLcoefcr(object):
 	Outputs = Outputs
 
 
-def default(config) -> IphToLcoefcr
+def default(config) -> IphToLcoefcr:
 	pass
 
-def new() -> IphToLcoefcr
+def new() -> IphToLcoefcr:
 	pass
 
-def wrap(ssc_data_t) -> IphToLcoefcr
+def wrap(ssc_data_t) -> IphToLcoefcr:
 	pass
 
-def from_existing(model, config="") -> IphToLcoefcr
+def from_existing(model, config="") -> IphToLcoefcr:
 	pass
 
 __loader__ = None 

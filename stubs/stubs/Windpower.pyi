@@ -2,7 +2,7 @@ class Resource(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -22,7 +22,7 @@ class Turbine(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -43,7 +43,7 @@ class Farm(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -61,7 +61,7 @@ class Losses(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -99,7 +99,7 @@ class Uncertainty(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -133,7 +133,7 @@ class Outputs(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -192,16 +192,16 @@ class Windpower(object):
 	Outputs = Outputs
 
 
-def default(config) -> Windpower
+def default(config) -> Windpower:
 	pass
 
-def new() -> Windpower
+def new() -> Windpower:
 	pass
 
-def wrap(ssc_data_t) -> Windpower
+def wrap(ssc_data_t) -> Windpower:
 	pass
 
-def from_existing(model, config="") -> Windpower
+def from_existing(model, config="") -> Windpower:
 	pass
 
 __loader__ = None 

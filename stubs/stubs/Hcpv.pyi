@@ -2,7 +2,7 @@ class SolarResourceData(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -16,7 +16,7 @@ class PVWatts(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -30,7 +30,7 @@ class HCPVModule(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -61,7 +61,7 @@ class InverterCECDatabase(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -84,7 +84,7 @@ class HCPVArray(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -134,7 +134,7 @@ class Outputs(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -208,16 +208,16 @@ class Hcpv(object):
 	Outputs = Outputs
 
 
-def default(config) -> Hcpv
+def default(config) -> Hcpv:
 	pass
 
-def new() -> Hcpv
+def new() -> Hcpv:
 	pass
 
-def wrap(ssc_data_t) -> Hcpv
+def wrap(ssc_data_t) -> Hcpv:
 	pass
 
-def from_existing(model, config="") -> Hcpv
+def from_existing(model, config="") -> Hcpv:
 	pass
 
 __loader__ = None 

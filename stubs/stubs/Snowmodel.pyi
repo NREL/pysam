@@ -2,7 +2,7 @@ class PVSnowModel(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -23,7 +23,7 @@ class TimeSeries(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -38,7 +38,7 @@ class Outputs(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -77,16 +77,16 @@ class Snowmodel(object):
 	Outputs = Outputs
 
 
-def default(config) -> Snowmodel
+def default(config) -> Snowmodel:
 	pass
 
-def new() -> Snowmodel
+def new() -> Snowmodel:
 	pass
 
-def wrap(ssc_data_t) -> Snowmodel
+def wrap(ssc_data_t) -> Snowmodel:
 	pass
 
-def from_existing(model, config="") -> Snowmodel
+def from_existing(model, config="") -> Snowmodel:
 	pass
 
 __loader__ = None 

@@ -2,7 +2,7 @@ class GeoHourly(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -43,7 +43,7 @@ class Outputs(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -76,16 +76,16 @@ class GeothermalCosts(object):
 	Outputs = Outputs
 
 
-def default(config) -> GeothermalCosts
+def default(config) -> GeothermalCosts:
 	pass
 
-def new() -> GeothermalCosts
+def new() -> GeothermalCosts:
 	pass
 
-def wrap(ssc_data_t) -> GeothermalCosts
+def wrap(ssc_data_t) -> GeothermalCosts:
 	pass
 
-def from_existing(model, config="") -> GeothermalCosts
+def from_existing(model, config="") -> GeothermalCosts:
 	pass
 
 __loader__ = None 

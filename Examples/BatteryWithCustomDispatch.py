@@ -10,7 +10,6 @@ Most recently tested against PySAM 2.1.4
 """
 
 import PySAM.StandAloneBattery as battery_model
-from PySAM.PySSC import *
 
 analysis_period = 1  # years
 steps_in_year = 8760  # currently hours in year, multiply this for subhourly tests (example * 12 for 5 minute tests)

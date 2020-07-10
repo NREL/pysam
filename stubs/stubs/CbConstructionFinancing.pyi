@@ -2,7 +2,7 @@ class SystemCosts(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -16,7 +16,7 @@ class FinancialParameters(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -49,7 +49,7 @@ class Outputs(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -101,16 +101,16 @@ class CbConstructionFinancing(object):
 	Outputs = Outputs
 
 
-def default(config) -> CbConstructionFinancing
+def default(config) -> CbConstructionFinancing:
 	pass
 
-def new() -> CbConstructionFinancing
+def new() -> CbConstructionFinancing:
 	pass
 
-def wrap(ssc_data_t) -> CbConstructionFinancing
+def wrap(ssc_data_t) -> CbConstructionFinancing:
 	pass
 
-def from_existing(model, config="") -> CbConstructionFinancing
+def from_existing(model, config="") -> CbConstructionFinancing:
 	pass
 
 __loader__ = None 
