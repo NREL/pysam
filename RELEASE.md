@@ -1,7 +1,19 @@
 # Release Notes
 
-## Version 2.1.2, ~ SAM 2020.2.29 r2, SSC Version 240
-* SAM Release fixes for revision 2
+## Version 2.1.5, July 7, 2020 ~ SAM 2020.2.29 r2, SSC Version 240
+* Updates to enable non-annual (single timestep or multiple, non-8760 timestep) simulations via weather input data
+(NOT weather files) for both pvsamv1 and pvwattsv7
+* Vanadium Redox Flow battery bug fix
+* Transformer loss units bug fix
+
+## Version 2.1.4, June 8, 2020 ~ SAM 2020.2.29 r2, SSC Version 240
+* Pvwattsv5_1ts bug fix
+* Self-shading calculation speed-up for Pvwattsv7, Pvsamv1 & Pvwattsv5
+
+## Version 2.1.3, May 29, 2020 ~ SAM 2020.2.29 r2, SSC Version 240
+* [SAM Release fixes for revision 2](https://nrel.github.io/SAM/doc/releasenotes.html)
+
+## Version 2.1.1, May 15, 2020 ~ SAM 2020.2.29 r1, SSC Version 238
 * reopt size post bug
 * ssc_sim_from_dict bug fix
 * Version attribute: `PySAM.__version__`
