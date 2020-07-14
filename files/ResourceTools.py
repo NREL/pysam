@@ -291,16 +291,16 @@ class FetchResourceFiles():
 
         # --- grab df ---
         for_df = copy.deepcopy(raw_csv)
-        df = pd.read_csv(for_df, header=3)
+        df = pd.read_csv(for_df, header=1)
 
         # --- grab header data ---
         for_header = copy.deepcopy(raw_csv)
         header = pd.read_csv(for_header, nrows=3, header=None).values
         site_id = header[0, 1]
         site_tz = header[0, 3]
-        site_lon = header[1, 1]
-        site_lat = header[2, 1]
-        site_year = df.iloc[0]['Year']
+        site_lon = header[0, 7]
+        site_lat = header[0, 9]
+        site_year = header[2, 0]
 
         # --- create header lines ---
         h1 = np.array([int(site_id), 'city??', 'state??', 'USA', site_year,
@@ -326,10 +326,10 @@ class FetchResourceFiles():
         df = df.loc[~((df.index.month == 2) & (df.index.day == 29))]
 
         # --- convert K to celsius ---
-        df['temperature'] = df['air temperature at 2m (K)'] - 273.15
+        df['temperature'] = df['air temperature at 100m (C)']
 
         # --- convert PA to atm ---
-        df['pressure'] = df['surface air pressure (Pa)'] / 101325
+        df['pressure'] = df['air pressure at 100m (Pa)'] / 101325
 
         # --- rename ---
         rename_dict = {'wind speed at 100m (m/s)': 'speed',
@@ -414,7 +414,7 @@ class FetchResourceFiles():
 
             # --- Find url for closest point ---
             year_base_url = 'https://developer.nrel.gov/api/wind-toolkit/wind/'
-            year_query_url = "wtk_download.csv?api_key={}&wkt=POINT({}+{})&attributes=wind_speed,wind_direction,power,temperature,pressure&names={}&utc=true&email={}".format(
+            year_query_url = "wtk_download.csv?api_key={}&wkt=POINT({}+{})&attributes=wind_speed,wind_direction,temperature,pressure&names={}&utc=true&email={}".format(
                 self.nrel_api_key, lon, lat, self.resource_year, self.nrel_api_email)
             year_url = year_base_url + year_query_url
             year_response = retry_session.get(year_url)
@@ -426,7 +426,7 @@ class FetchResourceFiles():
                 df.to_csv(file_path, index=False, header=False, na_rep='')
                 return file_path
             else:
-                return 'error at year_response'
+                return 'error at year_response. URL: ' + year_url
 
     def fetch(self, points):
         """
