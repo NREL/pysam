@@ -2,7 +2,7 @@ class WeatherFileChecker(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -16,7 +16,7 @@ class Outputs(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -48,16 +48,16 @@ class Wfcheck(object):
 	Outputs = Outputs
 
 
-def default(config) -> Wfcheck
+def default(config) -> Wfcheck:
 	pass
 
-def new() -> Wfcheck
+def new() -> Wfcheck:
 	pass
 
-def wrap(ssc_data_t) -> Wfcheck
+def wrap(ssc_data_t) -> Wfcheck:
 	pass
 
-def from_existing(model, config="") -> Wfcheck
+def from_existing(model, config="") -> Wfcheck:
 	pass
 
 __loader__ = None 

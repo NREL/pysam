@@ -2,7 +2,7 @@ class Weather(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -17,7 +17,7 @@ class Solarfield(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -91,7 +91,7 @@ class Powerblock(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -106,7 +106,7 @@ class Heliostat(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -121,7 +121,7 @@ class HeatSink(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -155,7 +155,7 @@ class Outputs(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -239,16 +239,16 @@ class LinearFresnelDsgIph(object):
 	Outputs = Outputs
 
 
-def default(config) -> LinearFresnelDsgIph
+def default(config) -> LinearFresnelDsgIph:
 	pass
 
-def new() -> LinearFresnelDsgIph
+def new() -> LinearFresnelDsgIph:
 	pass
 
-def wrap(ssc_data_t) -> LinearFresnelDsgIph
+def wrap(ssc_data_t) -> LinearFresnelDsgIph:
 	pass
 
-def from_existing(model, config="") -> LinearFresnelDsgIph
+def from_existing(model, config="") -> LinearFresnelDsgIph:
 	pass
 
 __loader__ = None 

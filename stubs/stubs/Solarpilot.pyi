@@ -2,7 +2,7 @@ class SolarPILOT(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -65,7 +65,7 @@ class Outputs(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -113,16 +113,16 @@ class Solarpilot(object):
 	Outputs = Outputs
 
 
-def default(config) -> Solarpilot
+def default(config) -> Solarpilot:
 	pass
 
-def new() -> Solarpilot
+def new() -> Solarpilot:
 	pass
 
-def wrap(ssc_data_t) -> Solarpilot
+def wrap(ssc_data_t) -> Solarpilot:
 	pass
 
-def from_existing(model, config="") -> Solarpilot
+def from_existing(model, config="") -> Solarpilot:
 	pass
 
 __loader__ = None 

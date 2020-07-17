@@ -2,7 +2,7 @@ class WeatherFileConverter(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -19,7 +19,7 @@ class Outputs(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -51,16 +51,16 @@ class Wfcsvconv(object):
 	Outputs = Outputs
 
 
-def default(config) -> Wfcsvconv
+def default(config) -> Wfcsvconv:
 	pass
 
-def new() -> Wfcsvconv
+def new() -> Wfcsvconv:
 	pass
 
-def wrap(ssc_data_t) -> Wfcsvconv
+def wrap(ssc_data_t) -> Wfcsvconv:
 	pass
 
-def from_existing(model, config="") -> Wfcsvconv
+def from_existing(model, config="") -> Wfcsvconv:
 	pass
 
 __loader__ = None 

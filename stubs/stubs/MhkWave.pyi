@@ -2,7 +2,7 @@ class MHKWave(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -25,7 +25,7 @@ class Outputs(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -61,16 +61,16 @@ class MhkWave(object):
 	Outputs = Outputs
 
 
-def default(config) -> MhkWave
+def default(config) -> MhkWave:
 	pass
 
-def new() -> MhkWave
+def new() -> MhkWave:
 	pass
 
-def wrap(ssc_data_t) -> MhkWave
+def wrap(ssc_data_t) -> MhkWave:
 	pass
 
-def from_existing(model, config="") -> MhkWave
+def from_existing(model, config="") -> MhkWave:
 	pass
 
 __loader__ = None 

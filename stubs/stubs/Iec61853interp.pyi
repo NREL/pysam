@@ -2,7 +2,7 @@ class IEC61853(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -17,7 +17,7 @@ class SingleDiodeModel(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -32,7 +32,7 @@ class Outputs(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -70,16 +70,16 @@ class Iec61853interp(object):
 	Outputs = Outputs
 
 
-def default(config) -> Iec61853interp
+def default(config) -> Iec61853interp:
 	pass
 
-def new() -> Iec61853interp
+def new() -> Iec61853interp:
 	pass
 
-def wrap(ssc_data_t) -> Iec61853interp
+def wrap(ssc_data_t) -> Iec61853interp:
 	pass
 
-def from_existing(model, config="") -> Iec61853interp
+def from_existing(model, config="") -> Iec61853interp:
 	pass
 
 __loader__ = None 

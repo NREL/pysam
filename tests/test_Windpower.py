@@ -1,5 +1,6 @@
 import PySAM.Windpower as wp
 
+
 def test_Turbine_calculate_powercurve_error():
     a = wp.new()
     try:
@@ -8,10 +9,11 @@ def test_Turbine_calculate_powercurve_error():
     except:
         assert(True)
 
+
 def test_Turbine_calculate_powercurve_default():
     a = wp.new()
     a.Resource.wind_resource_model_choice = 0
-    a.Turbine.calculate_powercurve(turbine_size=1500, rotor_diameter=75, elevation=0, max_cp=0.45,max_tip_speed=80, max_tip_sp_ratio=8, cut_in=4,
+    a.Turbine.calculate_powercurve(turbine_size=1500, rotor_diameter=75, elevation=0, max_cp=0.45, max_tip_speed=80, max_tip_sp_ratio=8, cut_in=4,
                                cut_out=25, drive_train=0)
     assert(abs(a.Turbine.wind_turbine_powercurve_windspeeds[1] - 0.25) < 0.01)
     assert(abs(a.Turbine.wind_turbine_powercurve_powerout[17] - 64.050) < 0.01)

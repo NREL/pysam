@@ -2,7 +2,7 @@ class SystemDesign(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -25,7 +25,7 @@ class HeatExchangerDesign(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -61,7 +61,7 @@ class CycleDesign(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -81,7 +81,7 @@ class PHXDesign(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -95,7 +95,7 @@ class AirCoolerDesign(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -111,7 +111,7 @@ class Common(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -135,7 +135,7 @@ class Outputs(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -324,16 +324,16 @@ class Sco2CspUdPcTables(object):
 	Outputs = Outputs
 
 
-def default(config) -> Sco2CspUdPcTables
+def default(config) -> Sco2CspUdPcTables:
 	pass
 
-def new() -> Sco2CspUdPcTables
+def new() -> Sco2CspUdPcTables:
 	pass
 
-def wrap(ssc_data_t) -> Sco2CspUdPcTables
+def wrap(ssc_data_t) -> Sco2CspUdPcTables:
 	pass
 
-def from_existing(model, config="") -> Sco2CspUdPcTables
+def from_existing(model, config="") -> Sco2CspUdPcTables:
 	pass
 
 __loader__ = None 

@@ -1,5 +1,6 @@
 import math
 
+
 def size_li_ion_battery(input_dict):
     """
     All efficiencies and rates in percentages, 0-100.
@@ -141,7 +142,7 @@ def size_li_ion_battery(input_dict):
             batt_bank_power_charge_ac = desired_power
         else:
             batt_bank_power_discharge_ac = desired_power * batt_dc_ac_efficiency
-            batt_bank_power_charge_ac =  desired_power / batt_dc_ac_efficiency
+            batt_bank_power_charge_ac = desired_power / batt_dc_ac_efficiency
     else:
         if size_by_ac_not_dc:
             batt_bank_power_discharge_ac = desired_power

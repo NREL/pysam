@@ -2,7 +2,7 @@ class Plant(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -22,7 +22,7 @@ class Lifetime(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -58,7 +58,7 @@ class Outputs(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -100,16 +100,16 @@ class GenericSystem(object):
 	Outputs = Outputs
 
 
-def default(config) -> GenericSystem
+def default(config) -> GenericSystem:
 	pass
 
-def new() -> GenericSystem
+def new() -> GenericSystem:
 	pass
 
-def wrap(ssc_data_t) -> GenericSystem
+def wrap(ssc_data_t) -> GenericSystem:
 	pass
 
-def from_existing(model, config="") -> GenericSystem
+def from_existing(model, config="") -> GenericSystem:
 	pass
 
 __loader__ = None 

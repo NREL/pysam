@@ -3,6 +3,8 @@
 """
 Created on Wed Mar  4 13:47:58 2020
 
+Most recently tested against PySAM 2.1.4
+
 @author: frohro
 """
 import json
@@ -31,4 +33,4 @@ gs.execute()
 grid.execute()
 so.execute()
 print('Made it past execute.')
-print(gs.Outputs.export()) # as dictionary
+print(gs.Outputs.export())  # as dictionary

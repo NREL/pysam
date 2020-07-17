@@ -25,7 +25,6 @@ def test_functionality():
         a = GenericSystem.new()
         b = a.Plant
 
-
         # Test setting values with correct types
 
         a.Plant.derate = 1
@@ -47,13 +46,11 @@ def test_functionality():
         except:
             n_tests_passed += 1
 
-
         try:
             c = GenericSystem.new()
             c.Plant.energy_output_array = (1, "2")
         except:
             n_tests_passed += 1
-
 
         # Test assigning from dictionary
 
@@ -64,7 +61,6 @@ def test_functionality():
         assert(b.derate == 10)
         assert(b.energy_output_array == (10, 20))
         n_tests_passed += 1
-
 
         PlantDict = {'derate': 1,
                           'energy_output_array': (2, 2)}
@@ -96,7 +92,6 @@ def test_functionality():
             c.Plant.assign(PlantDict)
         except:
             n_tests_passed += 1
-
 
         # exporting to dictionary
 
@@ -133,7 +128,6 @@ def test_functionality():
         assert(ValDict['constant'] == 10 and ValDict['hourly'] == (10, 20) and ValDict['periods'] == ((10, 20), (30, 40)))
         n_tests_passed += 1
 
-
         # Test nested dictionary assignment and export
 
         TechDict = {'Plant': {'derate': 100,
@@ -149,7 +143,6 @@ def test_functionality():
         (100, 200), (300, 400)))
         n_tests_passed += 1
 
-
         # Test reading from PySSC
 
         data = ssc.data_create()
@@ -158,7 +151,6 @@ def test_functionality():
         a = GenericSystem.wrap(data)
         assert(a.Plant.derate == 1000)
         assert(a.Plant.energy_output_array == (1000, 2000))
-
 
         # Test strings and tables with error cases
         import PySAM.Pvwattsv5 as Pvwattsv5
@@ -171,7 +163,7 @@ def test_functionality():
         n_tests_passed += 1
 
         c = Pvwattsv5.new()
-        datDict = {'num': 1, 'arr': (1, 2),  'str': 'str', 'mat': ((1, 2), (3, 4)), 'table': {'yo': 0}}
+        datDict = {'num': 1, 'arr': (1, 2), 'str': 'str', 'mat': ((1, 2), (3, 4)), 'table': {'yo': 0}}
         c.SolarResource.solar_resource_data = datDict
         DataDict = c.SolarResource.solar_resource_data
         assert(DataDict['num'] == 1 and DataDict['arr'] == (1, 2))
@@ -205,7 +197,7 @@ def test_functionality():
         # Test conversion between technology attributes and nested dictionary
 
         genDict = a.export()
-        assert(genDict['SolarResource']['solar_resource_data']['str'] == 'str' )
+        assert(genDict['SolarResource']['solar_resource_data']['str'] == 'str')
         n_tests_passed += 1
 
         a = Pvwattsv5.new()
@@ -229,7 +221,6 @@ def test_functionality():
         if round == 3:
             tracker.print_diff()
 
-
     tracker.print_diff()
 
 
@@ -245,7 +236,7 @@ def try_import(mod, config):
 
 
 def test_import_all():
-    for filename in os.listdir(os.environ['SAMNTDIR']+"/api/api_autogen/library/defaults"):
+    for filename in os.listdir(os.environ['SAMNTDIR'] + "/api/api_autogen/library/defaults"):
         names = os.path.splitext(filename)[0].split('_')
         mod = names[0]
         if mod == 'Battery':

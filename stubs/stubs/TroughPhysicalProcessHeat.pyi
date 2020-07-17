@@ -2,7 +2,7 @@ class Weather(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -20,7 +20,7 @@ class SolarField(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -140,7 +140,7 @@ class Controller(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -156,7 +156,7 @@ class SystemDesign(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -170,7 +170,7 @@ class TES(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -189,7 +189,7 @@ class TES2tank(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -205,7 +205,7 @@ class Tou(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -260,7 +260,7 @@ class System(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -276,7 +276,7 @@ class Powerblock(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -310,7 +310,7 @@ class Outputs(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -417,16 +417,16 @@ class TroughPhysicalProcessHeat(object):
 	Outputs = Outputs
 
 
-def default(config) -> TroughPhysicalProcessHeat
+def default(config) -> TroughPhysicalProcessHeat:
 	pass
 
-def new() -> TroughPhysicalProcessHeat
+def new() -> TroughPhysicalProcessHeat:
 	pass
 
-def wrap(ssc_data_t) -> TroughPhysicalProcessHeat
+def wrap(ssc_data_t) -> TroughPhysicalProcessHeat:
 	pass
 
-def from_existing(model, config="") -> TroughPhysicalProcessHeat
+def from_existing(model, config="") -> TroughPhysicalProcessHeat:
 	pass
 
 __loader__ = None 

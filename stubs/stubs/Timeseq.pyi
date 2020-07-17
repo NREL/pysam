@@ -2,7 +2,7 @@ class TimeSequence(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -18,7 +18,7 @@ class Outputs(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -56,16 +56,16 @@ class Timeseq(object):
 	Outputs = Outputs
 
 
-def default(config) -> Timeseq
+def default(config) -> Timeseq:
 	pass
 
-def new() -> Timeseq
+def new() -> Timeseq:
 	pass
 
-def wrap(ssc_data_t) -> Timeseq
+def wrap(ssc_data_t) -> Timeseq:
 	pass
 
-def from_existing(model, config="") -> Timeseq
+def from_existing(model, config="") -> Timeseq:
 	pass
 
 __loader__ = None 

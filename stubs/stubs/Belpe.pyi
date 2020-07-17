@@ -2,7 +2,7 @@ class LoadProfileEstimator(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -38,7 +38,7 @@ class Outputs(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -70,16 +70,16 @@ class Belpe(object):
 	Outputs = Outputs
 
 
-def default(config) -> Belpe
+def default(config) -> Belpe:
 	pass
 
-def new() -> Belpe
+def new() -> Belpe:
 	pass
 
-def wrap(ssc_data_t) -> Belpe
+def wrap(ssc_data_t) -> Belpe:
 	pass
 
-def from_existing(model, config="") -> Belpe
+def from_existing(model, config="") -> Belpe:
 	pass
 
 __loader__ = None 

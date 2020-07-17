@@ -2,7 +2,7 @@ class Common(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -22,7 +22,7 @@ class Outputs(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -59,16 +59,16 @@ class IsccDesignPoint(object):
 	Outputs = Outputs
 
 
-def default(config) -> IsccDesignPoint
+def default(config) -> IsccDesignPoint:
 	pass
 
-def new() -> IsccDesignPoint
+def new() -> IsccDesignPoint:
 	pass
 
-def wrap(ssc_data_t) -> IsccDesignPoint
+def wrap(ssc_data_t) -> IsccDesignPoint:
 	pass
 
-def from_existing(model, config="") -> IsccDesignPoint
+def from_existing(model, config="") -> IsccDesignPoint:
 	pass
 
 __loader__ = None 

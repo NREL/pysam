@@ -2,7 +2,7 @@ class PVWatts(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -31,7 +31,7 @@ class SystemDesign(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -53,7 +53,7 @@ class Outputs(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -88,16 +88,16 @@ class Pvwattsv51ts(object):
 	Outputs = Outputs
 
 
-def default(config) -> Pvwattsv51ts
+def default(config) -> Pvwattsv51ts:
 	pass
 
-def new() -> Pvwattsv51ts
+def new() -> Pvwattsv51ts:
 	pass
 
-def wrap(ssc_data_t) -> Pvwattsv51ts
+def wrap(ssc_data_t) -> Pvwattsv51ts:
 	pass
 
-def from_existing(model, config="") -> Pvwattsv51ts
+def from_existing(model, config="") -> Pvwattsv51ts:
 	pass
 
 __loader__ = None 

@@ -2,7 +2,7 @@ class Common(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -16,7 +16,7 @@ class Outputs(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -50,16 +50,16 @@ class Layoutarea(object):
 	Outputs = Outputs
 
 
-def default(config) -> Layoutarea
+def default(config) -> Layoutarea:
 	pass
 
-def new() -> Layoutarea
+def new() -> Layoutarea:
 	pass
 
-def wrap(ssc_data_t) -> Layoutarea
+def wrap(ssc_data_t) -> Layoutarea:
 	pass
 
-def from_existing(model, config="") -> Layoutarea
+def from_existing(model, config="") -> Layoutarea:
 	pass
 
 __loader__ = None 

@@ -2,7 +2,7 @@ class WindCsm(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -25,7 +25,7 @@ class Outputs(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -81,16 +81,16 @@ class Windcsm(object):
 	Outputs = Outputs
 
 
-def default(config) -> Windcsm
+def default(config) -> Windcsm:
 	pass
 
-def new() -> Windcsm
+def new() -> Windcsm:
 	pass
 
-def wrap(ssc_data_t) -> Windcsm
+def wrap(ssc_data_t) -> Windcsm:
 	pass
 
-def from_existing(model, config="") -> Windcsm
+def from_existing(model, config="") -> Windcsm:
 	pass
 
 __loader__ = None 

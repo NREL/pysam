@@ -2,7 +2,7 @@ class Common(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -19,7 +19,7 @@ class Lifetime(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -34,7 +34,7 @@ class Load(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -48,7 +48,7 @@ class FuelCell(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -94,7 +94,7 @@ class Outputs(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -142,16 +142,16 @@ class Fuelcell(object):
 	Outputs = Outputs
 
 
-def default(config) -> Fuelcell
+def default(config) -> Fuelcell:
 	pass
 
-def new() -> Fuelcell
+def new() -> Fuelcell:
 	pass
 
-def wrap(ssc_data_t) -> Fuelcell
+def wrap(ssc_data_t) -> Fuelcell:
 	pass
 
-def from_existing(model, config="") -> Fuelcell
+def from_existing(model, config="") -> Fuelcell:
 	pass
 
 __loader__ = None 

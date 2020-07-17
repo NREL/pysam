@@ -2,7 +2,7 @@ class PVShadeLossDB(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -23,7 +23,7 @@ class Outputs(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -60,16 +60,16 @@ class PvGetShadeLossMpp(object):
 	Outputs = Outputs
 
 
-def default(config) -> PvGetShadeLossMpp
+def default(config) -> PvGetShadeLossMpp:
 	pass
 
-def new() -> PvGetShadeLossMpp
+def new() -> PvGetShadeLossMpp:
 	pass
 
-def wrap(ssc_data_t) -> PvGetShadeLossMpp
+def wrap(ssc_data_t) -> PvGetShadeLossMpp:
 	pass
 
-def from_existing(model, config="") -> PvGetShadeLossMpp
+def from_existing(model, config="") -> PvGetShadeLossMpp:
 	pass
 
 __loader__ = None 

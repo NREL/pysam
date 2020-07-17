@@ -1,0 +1,4 @@
+pytest
+pympler
+pandas
+requests

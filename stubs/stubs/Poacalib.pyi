@@ -2,7 +2,7 @@ class POACalibrate(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -25,7 +25,7 @@ class Outputs(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -58,16 +58,16 @@ class Poacalib(object):
 	Outputs = Outputs
 
 
-def default(config) -> Poacalib
+def default(config) -> Poacalib:
 	pass
 
-def new() -> Poacalib
+def new() -> Poacalib:
 	pass
 
-def wrap(ssc_data_t) -> Poacalib
+def wrap(ssc_data_t) -> Poacalib:
 	pass
 
-def from_existing(model, config="") -> Poacalib
+def from_existing(model, config="") -> Poacalib:
 	pass
 
 __loader__ = None 

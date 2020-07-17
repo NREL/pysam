@@ -2,7 +2,7 @@ class Common(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -23,7 +23,7 @@ class Outputs(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -65,16 +65,16 @@ class Sco2AirCooler(object):
 	Outputs = Outputs
 
 
-def default(config) -> Sco2AirCooler
+def default(config) -> Sco2AirCooler:
 	pass
 
-def new() -> Sco2AirCooler
+def new() -> Sco2AirCooler:
 	pass
 
-def wrap(ssc_data_t) -> Sco2AirCooler
+def wrap(ssc_data_t) -> Sco2AirCooler:
 	pass
 
-def from_existing(model, config="") -> Sco2AirCooler
+def from_existing(model, config="") -> Sco2AirCooler:
 	pass
 
 __loader__ = None 

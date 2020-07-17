@@ -2,7 +2,7 @@ class Biopower(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -133,7 +133,7 @@ class Outputs(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -245,16 +245,16 @@ class Biomass(object):
 	Outputs = Outputs
 
 
-def default(config) -> Biomass
+def default(config) -> Biomass:
 	pass
 
-def new() -> Biomass
+def new() -> Biomass:
 	pass
 
-def wrap(ssc_data_t) -> Biomass
+def wrap(ssc_data_t) -> Biomass:
 	pass
 
-def from_existing(model, config="") -> Biomass
+def from_existing(model, config="") -> Biomass:
 	pass
 
 __loader__ = None 

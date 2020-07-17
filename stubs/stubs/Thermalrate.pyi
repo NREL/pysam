@@ -2,7 +2,7 @@ class ThermalRate(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -27,7 +27,7 @@ class Lifetime(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -43,7 +43,7 @@ class Outputs(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -82,16 +82,16 @@ class Thermalrate(object):
 	Outputs = Outputs
 
 
-def default(config) -> Thermalrate
+def default(config) -> Thermalrate:
 	pass
 
-def new() -> Thermalrate
+def new() -> Thermalrate:
 	pass
 
-def wrap(ssc_data_t) -> Thermalrate
+def wrap(ssc_data_t) -> Thermalrate:
 	pass
 
-def from_existing(model, config="") -> Thermalrate
+def from_existing(model, config="") -> Thermalrate:
 	pass
 
 __loader__ = None 
