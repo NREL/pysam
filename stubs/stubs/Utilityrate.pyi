@@ -2,7 +2,7 @@ class Common(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -160,7 +160,7 @@ class Outputs(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -258,16 +258,16 @@ class Utilityrate(object):
 	Outputs = Outputs
 
 
-def default(config) -> Utilityrate
+def default(config) -> Utilityrate:
 	pass
 
-def new() -> Utilityrate
+def new() -> Utilityrate:
 	pass
 
-def wrap(ssc_data_t) -> Utilityrate
+def wrap(ssc_data_t) -> Utilityrate:
 	pass
 
-def from_existing(model, config="") -> Utilityrate
+def from_existing(model, config="") -> Utilityrate:
 	pass
 
 __loader__ = None 

@@ -2,7 +2,7 @@ class Hce(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -30,7 +30,7 @@ class Outputs(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -65,16 +65,16 @@ class CbEmpiricalHceHeatLoss(object):
 	Outputs = Outputs
 
 
-def default(config) -> CbEmpiricalHceHeatLoss
+def default(config) -> CbEmpiricalHceHeatLoss:
 	pass
 
-def new() -> CbEmpiricalHceHeatLoss
+def new() -> CbEmpiricalHceHeatLoss:
 	pass
 
-def wrap(ssc_data_t) -> CbEmpiricalHceHeatLoss
+def wrap(ssc_data_t) -> CbEmpiricalHceHeatLoss:
 	pass
 
-def from_existing(model, config="") -> CbEmpiricalHceHeatLoss
+def from_existing(model, config="") -> CbEmpiricalHceHeatLoss:
 	pass
 
 __loader__ = None 

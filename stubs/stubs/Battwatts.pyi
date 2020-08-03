@@ -2,7 +2,7 @@ class Lifetime(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -17,7 +17,7 @@ class Battery(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -42,7 +42,7 @@ class Outputs(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -144,16 +144,16 @@ class Battwatts(object):
 	Outputs = Outputs
 
 
-def default(config) -> Battwatts
+def default(config) -> Battwatts:
 	pass
 
-def new() -> Battwatts
+def new() -> Battwatts:
 	pass
 
-def wrap(ssc_data_t) -> Battwatts
+def wrap(ssc_data_t) -> Battwatts:
 	pass
 
-def from_existing(model, config="") -> Battwatts
+def from_existing(model, config="") -> Battwatts:
 	pass
 
 __loader__ = None 

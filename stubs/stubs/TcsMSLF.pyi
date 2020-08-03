@@ -2,7 +2,7 @@ class Weather(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -19,7 +19,7 @@ class Mslf(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -33,7 +33,7 @@ class TouTranslator(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -48,7 +48,7 @@ class Controller(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -204,7 +204,7 @@ class SolarField(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -219,7 +219,7 @@ class Powerblock(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -252,7 +252,7 @@ class UserDefinedPC(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -268,7 +268,7 @@ class Enet(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -304,7 +304,7 @@ class Outputs(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -423,16 +423,16 @@ class TcsMSLF(object):
 	Outputs = Outputs
 
 
-def default(config) -> TcsMSLF
+def default(config) -> TcsMSLF:
 	pass
 
-def new() -> TcsMSLF
+def new() -> TcsMSLF:
 	pass
 
-def wrap(ssc_data_t) -> TcsMSLF
+def wrap(ssc_data_t) -> TcsMSLF:
 	pass
 
-def from_existing(model, config="") -> TcsMSLF
+def from_existing(model, config="") -> TcsMSLF:
 	pass
 
 __loader__ = None 

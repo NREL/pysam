@@ -2,7 +2,7 @@ class Weather(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -19,7 +19,7 @@ class Trough(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -33,7 +33,7 @@ class TouTranslator(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -48,7 +48,7 @@ class Solarfield(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -79,7 +79,7 @@ class Sca(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -104,7 +104,7 @@ class Hce(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -134,7 +134,7 @@ class Pwrb(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -171,7 +171,7 @@ class Tes(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -194,7 +194,7 @@ class Parasitic(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -257,7 +257,7 @@ class Outputs(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -367,16 +367,16 @@ class TcstroughEmpirical(object):
 	Outputs = Outputs
 
 
-def default(config) -> TcstroughEmpirical
+def default(config) -> TcstroughEmpirical:
 	pass
 
-def new() -> TcstroughEmpirical
+def new() -> TcstroughEmpirical:
 	pass
 
-def wrap(ssc_data_t) -> TcstroughEmpirical
+def wrap(ssc_data_t) -> TcstroughEmpirical:
 	pass
 
-def from_existing(model, config="") -> TcstroughEmpirical
+def from_existing(model, config="") -> TcstroughEmpirical:
 	pass
 
 __loader__ = None 

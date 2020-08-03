@@ -2,7 +2,7 @@ class Common(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -19,7 +19,7 @@ class Outputs(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -52,16 +52,16 @@ class UserHtfComparison(object):
 	Outputs = Outputs
 
 
-def default(config) -> UserHtfComparison
+def default(config) -> UserHtfComparison:
 	pass
 
-def new() -> UserHtfComparison
+def new() -> UserHtfComparison:
 	pass
 
-def wrap(ssc_data_t) -> UserHtfComparison
+def wrap(ssc_data_t) -> UserHtfComparison:
 	pass
 
-def from_existing(model, config="") -> UserHtfComparison
+def from_existing(model, config="") -> UserHtfComparison:
 	pass
 
 __loader__ = None 

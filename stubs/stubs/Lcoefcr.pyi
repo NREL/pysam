@@ -2,7 +2,7 @@ class SimpleLCOE(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -20,7 +20,7 @@ class Outputs(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -53,16 +53,16 @@ class Lcoefcr(object):
 	Outputs = Outputs
 
 
-def default(config) -> Lcoefcr
+def default(config) -> Lcoefcr:
 	pass
 
-def new() -> Lcoefcr
+def new() -> Lcoefcr:
 	pass
 
-def wrap(ssc_data_t) -> Lcoefcr
+def wrap(ssc_data_t) -> Lcoefcr:
 	pass
 
-def from_existing(model, config="") -> Lcoefcr
+def from_existing(model, config="") -> Lcoefcr:
 	pass
 
 __loader__ = None 

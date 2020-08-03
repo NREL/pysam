@@ -2,7 +2,7 @@ class SingleDiodeModel(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -21,7 +21,7 @@ class Outputs(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -57,16 +57,16 @@ class Singlediode(object):
 	Outputs = Outputs
 
 
-def default(config) -> Singlediode
+def default(config) -> Singlediode:
 	pass
 
-def new() -> Singlediode
+def new() -> Singlediode:
 	pass
 
-def wrap(ssc_data_t) -> Singlediode
+def wrap(ssc_data_t) -> Singlediode:
 	pass
 
-def from_existing(model, config="") -> Singlediode
+def from_existing(model, config="") -> Singlediode:
 	pass
 
 __loader__ = None 

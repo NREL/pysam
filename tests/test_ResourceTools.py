@@ -7,7 +7,7 @@ import json
 
 import pandas as pd
 
-import files.ResourceTools as tools #change back to module import
+import files.ResourceTools as tools  # change back to module import
 import PySAM.Windpower as wp
 import PySAM.Pvwattsv7 as pv
 
@@ -89,7 +89,7 @@ def test_resourcefilefetcher():
     NREL_API_KEY = 'OJOhB72tEAwfSX6HF3AUpL6cEebh24cgdjbK7D1X'
     NREL_API_EMAIL = 'sam.koebrich@NREL.gov'
 
-    lon_lats = [(-105.1800775, 39.7383155)] #golden CO
+    lon_lats = [(-105.1800775, 39.7383155)]  # golden CO
 
     resource_dir = str(Path(__file__).parent / "tmp")
 

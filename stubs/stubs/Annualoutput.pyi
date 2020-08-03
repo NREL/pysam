@@ -2,7 +2,7 @@ class AnnualOutput(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -21,7 +21,7 @@ class Outputs(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -58,16 +58,16 @@ class Annualoutput(object):
 	Outputs = Outputs
 
 
-def default(config) -> Annualoutput
+def default(config) -> Annualoutput:
 	pass
 
-def new() -> Annualoutput
+def new() -> Annualoutput:
 	pass
 
-def wrap(ssc_data_t) -> Annualoutput
+def wrap(ssc_data_t) -> Annualoutput:
 	pass
 
-def from_existing(model, config="") -> Annualoutput
+def from_existing(model, config="") -> Annualoutput:
 	pass
 
 __loader__ = None 

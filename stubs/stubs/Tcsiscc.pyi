@@ -2,7 +2,7 @@ class Weather(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -16,7 +16,7 @@ class MoltenSaltTower(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -30,7 +30,7 @@ class Heliostat(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -122,7 +122,7 @@ class Receiver(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -158,7 +158,7 @@ class Powerblock(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -176,7 +176,7 @@ class Parasitics(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -223,7 +223,7 @@ class Outputs(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -306,16 +306,16 @@ class Tcsiscc(object):
 	Outputs = Outputs
 
 
-def default(config) -> Tcsiscc
+def default(config) -> Tcsiscc:
 	pass
 
-def new() -> Tcsiscc
+def new() -> Tcsiscc:
 	pass
 
-def wrap(ssc_data_t) -> Tcsiscc
+def wrap(ssc_data_t) -> Tcsiscc:
 	pass
 
-def from_existing(model, config="") -> Tcsiscc
+def from_existing(model, config="") -> Tcsiscc:
 	pass
 
 __loader__ = None 

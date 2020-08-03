@@ -2,7 +2,7 @@ class UserDefinedPowerCycle(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -16,7 +16,7 @@ class Outputs(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -60,16 +60,16 @@ class UiUdpcChecks(object):
 	Outputs = Outputs
 
 
-def default(config) -> UiUdpcChecks
+def default(config) -> UiUdpcChecks:
 	pass
 
-def new() -> UiUdpcChecks
+def new() -> UiUdpcChecks:
 	pass
 
-def wrap(ssc_data_t) -> UiUdpcChecks
+def wrap(ssc_data_t) -> UiUdpcChecks:
 	pass
 
-def from_existing(model, config="") -> UiUdpcChecks
+def from_existing(model, config="") -> UiUdpcChecks:
 	pass
 
 __loader__ = None 

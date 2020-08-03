@@ -2,7 +2,7 @@ class Weather(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -19,7 +19,7 @@ class LinearFresnelr(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -33,7 +33,7 @@ class TouTranslator(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -48,7 +48,7 @@ class Solarfield(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -156,7 +156,7 @@ class Heliostat(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -171,7 +171,7 @@ class Powerblock(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -235,7 +235,7 @@ class Outputs(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -332,16 +332,16 @@ class TcslinearFresnel(object):
 	Outputs = Outputs
 
 
-def default(config) -> TcslinearFresnel
+def default(config) -> TcslinearFresnel:
 	pass
 
-def new() -> TcslinearFresnel
+def new() -> TcslinearFresnel:
 	pass
 
-def wrap(ssc_data_t) -> TcslinearFresnel
+def wrap(ssc_data_t) -> TcslinearFresnel:
 	pass
 
-def from_existing(model, config="") -> TcslinearFresnel
+def from_existing(model, config="") -> TcslinearFresnel:
 	pass
 
 __loader__ = None 

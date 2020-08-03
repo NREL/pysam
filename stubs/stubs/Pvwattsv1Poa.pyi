@@ -2,7 +2,7 @@ class Weather(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -22,7 +22,7 @@ class PVWatts(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -42,7 +42,7 @@ class Outputs(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -78,16 +78,16 @@ class Pvwattsv1Poa(object):
 	Outputs = Outputs
 
 
-def default(config) -> Pvwattsv1Poa
+def default(config) -> Pvwattsv1Poa:
 	pass
 
-def new() -> Pvwattsv1Poa
+def new() -> Pvwattsv1Poa:
 	pass
 
-def wrap(ssc_data_t) -> Pvwattsv1Poa
+def wrap(ssc_data_t) -> Pvwattsv1Poa:
 	pass
 
-def from_existing(model, config="") -> Pvwattsv1Poa
+def from_existing(model, config="") -> Pvwattsv1Poa:
 	pass
 
 __loader__ = None 

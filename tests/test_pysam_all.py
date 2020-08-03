@@ -163,7 +163,7 @@ def test_functionality():
         n_tests_passed += 1
 
         c = Pvwattsv5.new()
-        datDict = {'num': 1, 'arr': (1, 2),  'str': 'str', 'mat': ((1, 2), (3, 4)), 'table': {'yo': 0}}
+        datDict = {'num': 1, 'arr': (1, 2), 'str': 'str', 'mat': ((1, 2), (3, 4)), 'table': {'yo': 0}}
         c.SolarResource.solar_resource_data = datDict
         DataDict = c.SolarResource.solar_resource_data
         assert(DataDict['num'] == 1 and DataDict['arr'] == (1, 2))
@@ -197,7 +197,7 @@ def test_functionality():
         # Test conversion between technology attributes and nested dictionary
 
         genDict = a.export()
-        assert(genDict['SolarResource']['solar_resource_data']['str'] == 'str' )
+        assert(genDict['SolarResource']['solar_resource_data']['str'] == 'str')
         n_tests_passed += 1
 
         a = Pvwattsv5.new()
@@ -236,7 +236,7 @@ def try_import(mod, config):
 
 
 def test_import_all():
-    for filename in os.listdir(os.environ['SAMNTDIR']+"/api/api_autogen/library/defaults"):
+    for filename in os.listdir(os.environ['SAMNTDIR'] + "/api/api_autogen/library/defaults"):
         names = os.path.splitext(filename)[0].split('_')
         mod = names[0]
         if mod == 'Battery':

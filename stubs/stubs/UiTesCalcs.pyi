@@ -2,7 +2,7 @@ class Common(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -26,7 +26,7 @@ class Outputs(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -64,16 +64,16 @@ class UiTesCalcs(object):
 	Outputs = Outputs
 
 
-def default(config) -> UiTesCalcs
+def default(config) -> UiTesCalcs:
 	pass
 
-def new() -> UiTesCalcs
+def new() -> UiTesCalcs:
 	pass
 
-def wrap(ssc_data_t) -> UiTesCalcs
+def wrap(ssc_data_t) -> UiTesCalcs:
 	pass
 
-def from_existing(model, config="") -> UiTesCalcs
+def from_existing(model, config="") -> UiTesCalcs:
 	pass
 
 __loader__ = None 

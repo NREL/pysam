@@ -2,7 +2,7 @@ class Lifetime(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -17,7 +17,7 @@ class GridLimits(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -33,7 +33,7 @@ class SystemOutput(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -48,7 +48,7 @@ class Load(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -62,7 +62,7 @@ class Outputs(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]
+	def export(self) -> Dict[Dict]:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -108,16 +108,16 @@ class Grid(object):
 	Outputs = Outputs
 
 
-def default(config) -> Grid
+def default(config) -> Grid:
 	pass
 
-def new() -> Grid
+def new() -> Grid:
 	pass
 
-def wrap(ssc_data_t) -> Grid
+def wrap(ssc_data_t) -> Grid:
 	pass
 
-def from_existing(model, config="") -> Grid
+def from_existing(model, config="") -> Grid:
 	pass
 
 __loader__ = None 
