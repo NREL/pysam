@@ -7,169 +7,6 @@
 
 
 /*
- * Common Group
- */ 
-
-static PyTypeObject Common_Type;
-
-static PyObject *
-Common_new(SAM_Fuelcell data_ptr)
-{
-	PyObject* new_obj = Common_Type.tp_alloc(&Common_Type,0);
-
-	VarGroupObject* Common_obj = (VarGroupObject*)new_obj;
-
-	Common_obj->data_ptr = (SAM_table)data_ptr;
-
-	return new_obj;
-}
-
-/* Common methods */
-
-static PyObject *
-Common_assign(VarGroupObject *self, PyObject *args)
-{
-	PyObject* dict;
-	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
-		return NULL;
-	}
-
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Fuelcell", "Common")){
-		return NULL;
-	}
-
-	Py_INCREF(Py_None);
-	return Py_None;
-}
-
-static PyObject *
-Common_export(VarGroupObject *self, PyObject *args)
-{
-	PyTypeObject* tp = &Common_Type;
-	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
-	return dict;
-}
-
-static PyMethodDef Common_methods[] = {
-		{"assign",            (PyCFunction)Common_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Common_vals = { var: val, ...}``")},
-		{"export",            (PyCFunction)Common_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
-		{NULL,              NULL}           /* sentinel */
-};
-
-static PyObject *
-Common_get_annual_energy(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Fuelcell_Common_annual_energy_nget, self->data_ptr);
-}
-
-static int
-Common_set_annual_energy(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Fuelcell_Common_annual_energy_nset, self->data_ptr);
-}
-
-static PyObject *
-Common_get_capacity_factor(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Fuelcell_Common_capacity_factor_nget, self->data_ptr);
-}
-
-static int
-Common_set_capacity_factor(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Fuelcell_Common_capacity_factor_nset, self->data_ptr);
-}
-
-static PyObject *
-Common_get_gen(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Fuelcell_Common_gen_aget, self->data_ptr);
-}
-
-static int
-Common_set_gen(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_Fuelcell_Common_gen_aset, self->data_ptr);
-}
-
-static PyObject *
-Common_get_percent_complete(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Fuelcell_Common_percent_complete_nget, self->data_ptr);
-}
-
-static int
-Common_set_percent_complete(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Fuelcell_Common_percent_complete_nset, self->data_ptr);
-}
-
-static PyGetSetDef Common_getset[] = {
-{"annual_energy", (getter)Common_get_annual_energy,(setter)Common_set_annual_energy,
-	PyDoc_STR("*float*: Annual Energy [kWh]\n\n*Required*: If not provided, assumed to be 0"),
- 	NULL},
-{"capacity_factor", (getter)Common_get_capacity_factor,(setter)Common_set_capacity_factor,
-	PyDoc_STR("*float*: Capacity factor [%]\n\n*Required*: If not provided, assumed to be 0"),
- 	NULL},
-{"gen", (getter)Common_get_gen,(setter)Common_set_gen,
-	PyDoc_STR("*sequence*: System power generated [kW]\n\n*Info*: Lifetime system generation"),
- 	NULL},
-{"percent_complete", (getter)Common_get_percent_complete,(setter)Common_set_percent_complete,
-	PyDoc_STR("*float*: Estimated simulation status [%]"),
- 	NULL},
-	{NULL}  /* Sentinel */
-};
-
-static PyTypeObject Common_Type = {
-		/* The ob_type field must be initialized in the module init function
-		 * to be portable to Windows without using C++. */
-		PyVarObject_HEAD_INIT(NULL, 0)
-		"Fuelcell.Common",             /*tp_name*/
-		sizeof(VarGroupObject),          /*tp_basicsize*/
-		0,                          /*tp_itemsize*/
-		/* methods */
-		0,    /*tp_dealloc*/
-		0,                          /*tp_print*/
-		(getattrfunc)0,             /*tp_getattr*/
-		0,                          /*tp_setattr*/
-		0,                          /*tp_reserved*/
-		0,                          /*tp_repr*/
-		0,                          /*tp_as_number*/
-		0,                          /*tp_as_sequence*/
-		0,                          /*tp_as_mapping*/
-		0,                          /*tp_hash*/
-		0,                          /*tp_call*/
-		0,                          /*tp_str*/
-		0,                          /*tp_getattro*/
-		0,                          /*tp_setattro*/
-		0,                          /*tp_as_buffer*/
-		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
-		0,                          /*tp_doc*/
-		0,                          /*tp_traverse*/
-		0,                          /*tp_clear*/
-		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistofnset*/
-		0,                          /*tp_iter*/
-		0,                          /*tp_iternext*/
-		Common_methods,         /*tp_methods*/
-		0,                          /*tp_members*/
-		Common_getset,          /*tp_getset*/
-		0,                          /*tp_base*/
-		0,                          /*tp_dict*/
-		0,                          /*tp_descr_get*/
-		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictofnset*/
-		0,                          /*tp_init*/
-		0,                          /*tp_alloc*/
-		0,             /*tp_new*/
-		0,                          /*tp_free*/
-		0,                          /*tp_is_gc*/
-};
-
-
-/*
  * Lifetime Group
  */ 
 
@@ -289,6 +126,154 @@ static PyTypeObject Lifetime_Type = {
 		Lifetime_methods,         /*tp_methods*/
 		0,                          /*tp_members*/
 		Lifetime_getset,          /*tp_getset*/
+		0,                          /*tp_base*/
+		0,                          /*tp_dict*/
+		0,                          /*tp_descr_get*/
+		0,                          /*tp_descr_set*/
+		0,                          /*tp_dictofnset*/
+		0,                          /*tp_init*/
+		0,                          /*tp_alloc*/
+		0,             /*tp_new*/
+		0,                          /*tp_free*/
+		0,                          /*tp_is_gc*/
+};
+
+
+/*
+ * Common Group
+ */ 
+
+static PyTypeObject Common_Type;
+
+static PyObject *
+Common_new(SAM_Fuelcell data_ptr)
+{
+	PyObject* new_obj = Common_Type.tp_alloc(&Common_Type,0);
+
+	VarGroupObject* Common_obj = (VarGroupObject*)new_obj;
+
+	Common_obj->data_ptr = (SAM_table)data_ptr;
+
+	return new_obj;
+}
+
+/* Common methods */
+
+static PyObject *
+Common_assign(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Fuelcell", "Common")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+Common_export(VarGroupObject *self, PyObject *args)
+{
+	PyTypeObject* tp = &Common_Type;
+	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
+	return dict;
+}
+
+static PyMethodDef Common_methods[] = {
+		{"assign",            (PyCFunction)Common_assign,  METH_VARARGS,
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Common_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)Common_export,  METH_VARARGS,
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+		{NULL,              NULL}           /* sentinel */
+};
+
+static PyObject *
+Common_get_annual_energy(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Fuelcell_Common_annual_energy_nget, self->data_ptr);
+}
+
+static int
+Common_set_annual_energy(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Fuelcell_Common_annual_energy_nset, self->data_ptr);
+}
+
+static PyObject *
+Common_get_capacity_factor(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Fuelcell_Common_capacity_factor_nget, self->data_ptr);
+}
+
+static int
+Common_set_capacity_factor(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Fuelcell_Common_capacity_factor_nset, self->data_ptr);
+}
+
+static PyObject *
+Common_get_gen(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Fuelcell_Common_gen_aget, self->data_ptr);
+}
+
+static int
+Common_set_gen(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Fuelcell_Common_gen_aset, self->data_ptr);
+}
+
+static PyGetSetDef Common_getset[] = {
+{"annual_energy", (getter)Common_get_annual_energy,(setter)Common_set_annual_energy,
+	PyDoc_STR("*float*: Annual Energy [kWh]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"capacity_factor", (getter)Common_get_capacity_factor,(setter)Common_set_capacity_factor,
+	PyDoc_STR("*float*: Capacity factor [%]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"gen", (getter)Common_get_gen,(setter)Common_set_gen,
+	PyDoc_STR("*sequence*: System power generated [kW]\n\n*Info*: Lifetime system generation"),
+ 	NULL},
+	{NULL}  /* Sentinel */
+};
+
+static PyTypeObject Common_Type = {
+		/* The ob_type field must be initialized in the module init function
+		 * to be portable to Windows without using C++. */
+		PyVarObject_HEAD_INIT(NULL, 0)
+		"Fuelcell.Common",             /*tp_name*/
+		sizeof(VarGroupObject),          /*tp_basicsize*/
+		0,                          /*tp_itemsize*/
+		/* methods */
+		0,    /*tp_dealloc*/
+		0,                          /*tp_print*/
+		(getattrfunc)0,             /*tp_getattr*/
+		0,                          /*tp_setattr*/
+		0,                          /*tp_reserved*/
+		0,                          /*tp_repr*/
+		0,                          /*tp_as_number*/
+		0,                          /*tp_as_sequence*/
+		0,                          /*tp_as_mapping*/
+		0,                          /*tp_hash*/
+		0,                          /*tp_call*/
+		0,                          /*tp_str*/
+		0,                          /*tp_getattro*/
+		0,                          /*tp_setattro*/
+		0,                          /*tp_as_buffer*/
+		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
+		0,                          /*tp_doc*/
+		0,                          /*tp_traverse*/
+		0,                          /*tp_clear*/
+		0,                          /*tp_richcompare*/
+		0,                          /*tp_weaklistofnset*/
+		0,                          /*tp_iter*/
+		0,                          /*tp_iternext*/
+		Common_methods,         /*tp_methods*/
+		0,                          /*tp_members*/
+		Common_getset,          /*tp_getset*/
 		0,                          /*tp_base*/
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
@@ -1251,13 +1236,13 @@ newFuelcellObject(void* data_ptr)
 
 	PySAM_TECH_ATTR()
 
-	PyObject* Common_obj = Common_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "Common", Common_obj);
-	Py_DECREF(Common_obj);
-
 	PyObject* Lifetime_obj = Lifetime_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Lifetime", Lifetime_obj);
 	Py_DECREF(Lifetime_obj);
+
+	PyObject* Common_obj = Common_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "Common", Common_obj);
+	Py_DECREF(Common_obj);
 
 	PyObject* Load_obj = Load_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Load", Load_obj);
@@ -1338,7 +1323,7 @@ static PyMethodDef Fuelcell_methods[] = {
 		{"execute",            (PyCFunction)Fuelcell_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
 		{"assign",            (PyCFunction)Fuelcell_assign,  METH_VARARGS,
-				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Common': { var: val, ...}, ...}``")},
+				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Lifetime': { var: val, ...}, ...}``")},
 		{"export",            (PyCFunction)Fuelcell_export,  METH_VARARGS,
 				PyDoc_STR("export() -> dict\n Export attributes into nested dictionary")},
 		{"value",             (PyCFunction)Fuelcell_value, METH_VARARGS,
@@ -1523,19 +1508,19 @@ FuelcellModule_exec(PyObject *m)
 	Fuelcell_Type.tp_dict = PyDict_New();
 	if (!Fuelcell_Type.tp_dict) { goto fail; }
 
-	/// Add the Common type object to Fuelcell_Type
-	if (PyType_Ready(&Common_Type) < 0) { goto fail; }
-	PyDict_SetItemString(Fuelcell_Type.tp_dict,
-				"Common",
-				(PyObject*)&Common_Type);
-	Py_DECREF(&Common_Type);
-
 	/// Add the Lifetime type object to Fuelcell_Type
 	if (PyType_Ready(&Lifetime_Type) < 0) { goto fail; }
 	PyDict_SetItemString(Fuelcell_Type.tp_dict,
 				"Lifetime",
 				(PyObject*)&Lifetime_Type);
 	Py_DECREF(&Lifetime_Type);
+
+	/// Add the Common type object to Fuelcell_Type
+	if (PyType_Ready(&Common_Type) < 0) { goto fail; }
+	PyDict_SetItemString(Fuelcell_Type.tp_dict,
+				"Common",
+				(PyObject*)&Common_Type);
+	Py_DECREF(&Common_Type);
 
 	/// Add the Load type object to Fuelcell_Type
 	if (PyType_Ready(&Load_Type) < 0) { goto fail; }

@@ -33,6 +33,12 @@ Battery Group
 .. autoclass:: PySAM.Battwatts.Battwatts.Battery
 	:members:
 
+Load Group
+==============
+
+.. autoclass:: PySAM.Battwatts.Battwatts.Load
+	:members:
+
 Outputs Group
 ==============
 

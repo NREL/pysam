@@ -6,6 +6,10 @@
 * Vanadium Redox Flow battery bug fix
 * Transformer loss units bug fix
 
+## Version 2.1.5.dev1, Aug 3, 2020 ~ SAM 2020.2.29 r3, SSC Version 242
+* BatteryStateful bug fixes: thermal, voltage
+* Stub files syntax fix
+
 ## Version 2.1.4, June 8, 2020 ~ SAM 2020.2.29 r2, SSC Version 240
 * Pvwattsv5_1ts bug fix
 * Self-shading calculation speed-up for Pvwattsv7, Pvsamv1 & Pvwattsv5

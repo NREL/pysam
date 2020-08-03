@@ -423,6 +423,124 @@ static PyTypeObject Battery_Type = {
 
 
 /*
+ * Load Group
+ */ 
+
+static PyTypeObject Load_Type;
+
+static PyObject *
+Load_new(SAM_Battwatts data_ptr)
+{
+	PyObject* new_obj = Load_Type.tp_alloc(&Load_Type,0);
+
+	VarGroupObject* Load_obj = (VarGroupObject*)new_obj;
+
+	Load_obj->data_ptr = (SAM_table)data_ptr;
+
+	return new_obj;
+}
+
+/* Load methods */
+
+static PyObject *
+Load_assign(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Battwatts", "Load")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+Load_export(VarGroupObject *self, PyObject *args)
+{
+	PyTypeObject* tp = &Load_Type;
+	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
+	return dict;
+}
+
+static PyMethodDef Load_methods[] = {
+		{"assign",            (PyCFunction)Load_assign,  METH_VARARGS,
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Load_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)Load_export,  METH_VARARGS,
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+		{NULL,              NULL}           /* sentinel */
+};
+
+static PyObject *
+Load_get_load_escalation(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Battwatts_Load_load_escalation_aget, self->data_ptr);
+}
+
+static int
+Load_set_load_escalation(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Battwatts_Load_load_escalation_aset, self->data_ptr);
+}
+
+static PyGetSetDef Load_getset[] = {
+{"load_escalation", (getter)Load_get_load_escalation,(setter)Load_set_load_escalation,
+	PyDoc_STR("*sequence*: Annual load escalation [%/year]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+	{NULL}  /* Sentinel */
+};
+
+static PyTypeObject Load_Type = {
+		/* The ob_type field must be initialized in the module init function
+		 * to be portable to Windows without using C++. */
+		PyVarObject_HEAD_INIT(NULL, 0)
+		"Battwatts.Load",             /*tp_name*/
+		sizeof(VarGroupObject),          /*tp_basicsize*/
+		0,                          /*tp_itemsize*/
+		/* methods */
+		0,    /*tp_dealloc*/
+		0,                          /*tp_print*/
+		(getattrfunc)0,             /*tp_getattr*/
+		0,                          /*tp_setattr*/
+		0,                          /*tp_reserved*/
+		0,                          /*tp_repr*/
+		0,                          /*tp_as_number*/
+		0,                          /*tp_as_sequence*/
+		0,                          /*tp_as_mapping*/
+		0,                          /*tp_hash*/
+		0,                          /*tp_call*/
+		0,                          /*tp_str*/
+		0,                          /*tp_getattro*/
+		0,                          /*tp_setattro*/
+		0,                          /*tp_as_buffer*/
+		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
+		0,                          /*tp_doc*/
+		0,                          /*tp_traverse*/
+		0,                          /*tp_clear*/
+		0,                          /*tp_richcompare*/
+		0,                          /*tp_weaklistofnset*/
+		0,                          /*tp_iter*/
+		0,                          /*tp_iternext*/
+		Load_methods,         /*tp_methods*/
+		0,                          /*tp_members*/
+		Load_getset,          /*tp_getset*/
+		0,                          /*tp_base*/
+		0,                          /*tp_dict*/
+		0,                          /*tp_descr_get*/
+		0,                          /*tp_descr_set*/
+		0,                          /*tp_dictofnset*/
+		0,                          /*tp_init*/
+		0,                          /*tp_alloc*/
+		0,             /*tp_new*/
+		0,                          /*tp_free*/
+		0,                          /*tp_is_gc*/
+};
+
+
+/*
  * Outputs Group
  */ 
 
@@ -1167,6 +1285,10 @@ newBattwattsObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "Battery", Battery_obj);
 	Py_DECREF(Battery_obj);
 
+	PyObject* Load_obj = Load_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "Load", Load_obj);
+	Py_DECREF(Load_obj);
+
 	PyObject* Outputs_obj = Outputs_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
 	Py_DECREF(Outputs_obj);
@@ -1436,6 +1558,13 @@ BattwattsModule_exec(PyObject *m)
 				"Battery",
 				(PyObject*)&Battery_Type);
 	Py_DECREF(&Battery_Type);
+
+	/// Add the Load type object to Battwatts_Type
+	if (PyType_Ready(&Load_Type) < 0) { goto fail; }
+	PyDict_SetItemString(Battwatts_Type.tp_dict,
+				"Load",
+				(PyObject*)&Load_Type);
+	Py_DECREF(&Load_Type);
 
 	/// Add the Outputs type object to Battwatts_Type
 	if (PyType_Ready(&Outputs_Type) < 0) { goto fail; }

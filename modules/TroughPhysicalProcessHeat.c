@@ -1980,6 +1980,18 @@ Controller_set_q_pb_design(VarGroupObject *self, PyObject *value, void *closure)
 	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_Controller_q_pb_design_nset, self->data_ptr);
 }
 
+static PyObject *
+Controller_get_tanks_in_parallel(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_Controller_tanks_in_parallel_nget, self->data_ptr);
+}
+
+static int
+Controller_set_tanks_in_parallel(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_Controller_tanks_in_parallel_nset, self->data_ptr);
+}
+
 static PyGetSetDef Controller_getset[] = {
 {"field_fl_props", (getter)Controller_get_field_fl_props,(setter)Controller_set_field_fl_props,
 	PyDoc_STR("*sequence[sequence]*: User defined field fluid property data [-]\n\n*Required*: True"),
@@ -1989,6 +2001,9 @@ static PyGetSetDef Controller_getset[] = {
  	NULL},
 {"q_pb_design", (getter)Controller_get_q_pb_design,(setter)Controller_set_q_pb_design,
 	PyDoc_STR("*float*: Design heat input to power block [MWt]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - nLoops\n\t - solar_mult\n"),
+ 	NULL},
+{"tanks_in_parallel", (getter)Controller_get_tanks_in_parallel,(setter)Controller_set_tanks_in_parallel,
+	PyDoc_STR("*float*: Tanks are in parallel, not in series, with solar field [-]\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -3761,6 +3776,18 @@ Outputs_get_m_dot_balance(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_m_dot_cr_to_tes_hot(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_TroughPhysicalProcessHeat_Outputs_m_dot_cr_to_tes_hot_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_m_dot_cycle_to_field(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_TroughPhysicalProcessHeat_Outputs_m_dot_cycle_to_field_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_m_dot_field_delivered(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_TroughPhysicalProcessHeat_Outputs_m_dot_field_delivered_aget, self->data_ptr);
@@ -3770,6 +3797,12 @@ static PyObject *
 Outputs_get_m_dot_field_recirc(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_TroughPhysicalProcessHeat_Outputs_m_dot_field_recirc_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_m_dot_field_to_cycle(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_TroughPhysicalProcessHeat_Outputs_m_dot_field_to_cycle_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -3785,15 +3818,33 @@ Outputs_get_m_dot_loop(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_m_dot_tes_ch(VarGroupObject *self, void *closure)
+Outputs_get_m_dot_pc_to_tes_cold(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TroughPhysicalProcessHeat_Outputs_m_dot_tes_ch_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_TroughPhysicalProcessHeat_Outputs_m_dot_pc_to_tes_cold_aget, self->data_ptr);
 }
 
 static PyObject *
-Outputs_get_m_dot_tes_dc(VarGroupObject *self, void *closure)
+Outputs_get_m_dot_tes_cold_out(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TroughPhysicalProcessHeat_Outputs_m_dot_tes_dc_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_TroughPhysicalProcessHeat_Outputs_m_dot_tes_cold_out_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_m_dot_tes_hot_out(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_TroughPhysicalProcessHeat_Outputs_m_dot_tes_hot_out_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_mass_tes_cold(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_TroughPhysicalProcessHeat_Outputs_mass_tes_cold_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_mass_tes_hot(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_TroughPhysicalProcessHeat_Outputs_mass_tes_hot_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -4052,11 +4103,20 @@ static PyGetSetDef Outputs_getset[] = {
 {"m_dot_balance", (getter)Outputs_get_m_dot_balance,(setter)0,
 	PyDoc_STR("*sequence*: Relative mass flow balance error"),
  	NULL},
+{"m_dot_cr_to_tes_hot", (getter)Outputs_get_m_dot_cr_to_tes_hot,(setter)0,
+	PyDoc_STR("*sequence*: Mass flow: field to hot TES [kg/s]"),
+ 	NULL},
+{"m_dot_cycle_to_field", (getter)Outputs_get_m_dot_cycle_to_field,(setter)0,
+	PyDoc_STR("*sequence*: Mass flow: cycle to field [kg/s]"),
+ 	NULL},
 {"m_dot_field_delivered", (getter)Outputs_get_m_dot_field_delivered,(setter)0,
 	PyDoc_STR("*sequence*: Field total mass flow delivered [kg/s]"),
  	NULL},
 {"m_dot_field_recirc", (getter)Outputs_get_m_dot_field_recirc,(setter)0,
 	PyDoc_STR("*sequence*: Field total mass flow recirculated [kg/s]"),
+ 	NULL},
+{"m_dot_field_to_cycle", (getter)Outputs_get_m_dot_field_to_cycle,(setter)0,
+	PyDoc_STR("*sequence*: Mass flow: field to cycle [kg/s]"),
  	NULL},
 {"m_dot_htf_heat_sink", (getter)Outputs_get_m_dot_htf_heat_sink,(setter)0,
 	PyDoc_STR("*sequence*: Heat sink HTF mass flow [kg/s]"),
@@ -4064,11 +4124,20 @@ static PyGetSetDef Outputs_getset[] = {
 {"m_dot_loop", (getter)Outputs_get_m_dot_loop,(setter)0,
 	PyDoc_STR("*sequence*: Receiver mass flow rate [kg/s]"),
  	NULL},
-{"m_dot_tes_ch", (getter)Outputs_get_m_dot_tes_ch,(setter)0,
-	PyDoc_STR("*sequence*: TES charge mass flow rate [kg/s]"),
+{"m_dot_pc_to_tes_cold", (getter)Outputs_get_m_dot_pc_to_tes_cold,(setter)0,
+	PyDoc_STR("*sequence*: Mass flow: cycle to cold TES [kg/s]"),
  	NULL},
-{"m_dot_tes_dc", (getter)Outputs_get_m_dot_tes_dc,(setter)0,
-	PyDoc_STR("*sequence*: TES discharge mass flow rate [kg/s]"),
+{"m_dot_tes_cold_out", (getter)Outputs_get_m_dot_tes_cold_out,(setter)0,
+	PyDoc_STR("*sequence*: Mass flow: TES cold out [kg/s]"),
+ 	NULL},
+{"m_dot_tes_hot_out", (getter)Outputs_get_m_dot_tes_hot_out,(setter)0,
+	PyDoc_STR("*sequence*: Mass flow: TES hot out [kg/s]"),
+ 	NULL},
+{"mass_tes_cold", (getter)Outputs_get_mass_tes_cold,(setter)0,
+	PyDoc_STR("*sequence*: TES cold tank mass (end) [kg]"),
+ 	NULL},
+{"mass_tes_hot", (getter)Outputs_get_mass_tes_hot,(setter)0,
+	PyDoc_STR("*sequence*: TES hot tank mass (end) [kg]"),
  	NULL},
 {"month", (getter)Outputs_get_month,(setter)0,
 	PyDoc_STR("*sequence*: Resource Month"),

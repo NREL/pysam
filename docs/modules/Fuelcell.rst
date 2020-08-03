@@ -21,16 +21,16 @@ Functions
 .. autoclass:: PySAM.Fuelcell.Fuelcell
 	:members:
 
-Common Group
-==============
-
-.. autoclass:: PySAM.Fuelcell.Fuelcell.Common
-	:members:
-
 Lifetime Group
 ==============
 
 .. autoclass:: PySAM.Fuelcell.Fuelcell.Lifetime
+	:members:
+
+Common Group
+==============
+
+.. autoclass:: PySAM.Fuelcell.Fuelcell.Common
 	:members:
 
 Load Group

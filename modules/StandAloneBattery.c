@@ -1049,12 +1049,27 @@ Load_set_load(VarGroupObject *self, PyObject *value, void *closure)
 	return PySAM_array_setter(value, SAM_Battery_Load_load_aset, self->data_ptr);
 }
 
+static PyObject *
+Load_get_load_escalation(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Battery_Load_load_escalation_aget, self->data_ptr);
+}
+
+static int
+Load_set_load_escalation(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Battery_Load_load_escalation_aset, self->data_ptr);
+}
+
 static PyGetSetDef Load_getset[] = {
 {"crit_load", (getter)Load_get_crit_load,(setter)Load_set_crit_load,
 	PyDoc_STR("*sequence*: Critical electricity load (year 1) [kW]"),
  	NULL},
 {"load", (getter)Load_get_load,(setter)Load_set_load,
 	PyDoc_STR("*sequence*: Electricity load (year 1) [kW]"),
+ 	NULL},
+{"load_escalation", (getter)Load_get_load_escalation,(setter)Load_set_load_escalation,
+	PyDoc_STR("*sequence*: Annual load escalation [%/year]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -2221,6 +2236,18 @@ BatteryDispatch_set_batt_look_ahead_hours(VarGroupObject *self, PyObject *value,
 }
 
 static PyObject *
+BatteryDispatch_get_batt_pv_ac_forecast(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Battery_BatteryDispatch_batt_pv_ac_forecast_aget, self->data_ptr);
+}
+
+static int
+BatteryDispatch_set_batt_pv_ac_forecast(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Battery_BatteryDispatch_batt_pv_ac_forecast_aset, self->data_ptr);
+}
+
+static PyObject *
 BatteryDispatch_get_batt_pv_clipping_forecast(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Battery_BatteryDispatch_batt_pv_clipping_forecast_aget, self->data_ptr);
@@ -2230,18 +2257,6 @@ static int
 BatteryDispatch_set_batt_pv_clipping_forecast(VarGroupObject *self, PyObject *value, void *closure)
 {
 	return PySAM_array_setter(value, SAM_Battery_BatteryDispatch_batt_pv_clipping_forecast_aset, self->data_ptr);
-}
-
-static PyObject *
-BatteryDispatch_get_batt_pv_dc_forecast(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Battery_BatteryDispatch_batt_pv_dc_forecast_aget, self->data_ptr);
-}
-
-static int
-BatteryDispatch_set_batt_pv_dc_forecast(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_Battery_BatteryDispatch_batt_pv_dc_forecast_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -2404,11 +2419,11 @@ static PyGetSetDef BatteryDispatch_getset[] = {
 {"batt_look_ahead_hours", (getter)BatteryDispatch_get_batt_look_ahead_hours,(setter)BatteryDispatch_set_batt_look_ahead_hours,
 	PyDoc_STR("*float*: Hours to look ahead in automated dispatch [hours]"),
  	NULL},
-{"batt_pv_clipping_forecast", (getter)BatteryDispatch_get_batt_pv_clipping_forecast,(setter)BatteryDispatch_set_batt_pv_clipping_forecast,
-	PyDoc_STR("*sequence*: Power clipping forecast [kW]\n\n*Required*: True if en_batt=1&batt_meter_position=1&batt_dispatch_choice=2"),
+{"batt_pv_ac_forecast", (getter)BatteryDispatch_get_batt_pv_ac_forecast,(setter)BatteryDispatch_set_batt_pv_ac_forecast,
+	PyDoc_STR("*sequence*: PV ac power forecast [kW]"),
  	NULL},
-{"batt_pv_dc_forecast", (getter)BatteryDispatch_get_batt_pv_dc_forecast,(setter)BatteryDispatch_set_batt_pv_dc_forecast,
-	PyDoc_STR("*sequence*: DC power forecast [kW]\n\n*Required*: True if en_batt=1&batt_meter_position=1&batt_dispatch_choice=2"),
+{"batt_pv_clipping_forecast", (getter)BatteryDispatch_get_batt_pv_clipping_forecast,(setter)BatteryDispatch_set_batt_pv_clipping_forecast,
+	PyDoc_STR("*sequence*: PV clipping forecast [kW]"),
  	NULL},
 {"batt_target_choice", (getter)BatteryDispatch_get_batt_target_choice,(setter)BatteryDispatch_set_batt_target_choice,
 	PyDoc_STR("*float*: Target power input option [0/1]\n\n*Options*: 0=InputMonthlyTarget,1=InputFullTimeSeries\n\n*Required*: True if en_batt=1&batt_meter_position=0&batt_dispatch_choice=2"),

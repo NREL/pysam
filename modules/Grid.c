@@ -484,9 +484,24 @@ Load_set_load(VarGroupObject *self, PyObject *value, void *closure)
 	return PySAM_array_setter(value, SAM_Grid_Load_load_aset, self->data_ptr);
 }
 
+static PyObject *
+Load_get_load_escalation(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Grid_Load_load_escalation_aget, self->data_ptr);
+}
+
+static int
+Load_set_load_escalation(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Grid_Load_load_escalation_aset, self->data_ptr);
+}
+
 static PyGetSetDef Load_getset[] = {
 {"load", (getter)Load_get_load,(setter)Load_set_load,
 	PyDoc_STR("*sequence*: Electricity load (year 1) [kW]"),
+ 	NULL},
+{"load_escalation", (getter)Load_get_load_escalation,(setter)Load_set_load_escalation,
+	PyDoc_STR("*sequence*: Annual load escalation [%/year]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 	{NULL}  /* Sentinel */
 };

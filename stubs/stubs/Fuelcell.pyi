@@ -1,3 +1,18 @@
+class Lifetime(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> Dict[Dict]:
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
+	analysis_period = float
+	system_use_lifetime_output = float
+
+
 class Common(object):
 	def assign(self): 
 		pass
@@ -12,22 +27,6 @@ class Common(object):
 	annual_energy = float
 	capacity_factor = float
 	gen = tuple
-	percent_complete = float
-
-
-class Lifetime(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> Dict[Dict]:
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	analysis_period = float
-	system_use_lifetime_output = float
 
 
 class Load(object):
@@ -135,8 +134,8 @@ class Fuelcell(object):
 	def __init__(self, *args, **kwargs):
 		pass
 
-	Common = Common
 	Lifetime = Lifetime
+	Common = Common
 	Load = Load
 	FuelCell = FuelCell
 	Outputs = Outputs

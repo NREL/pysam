@@ -100,6 +100,7 @@ class Load(object):
 
 	crit_load = tuple
 	load = tuple
+	load_escalation = tuple
 
 
 class BatteryCell(object):
@@ -204,8 +205,8 @@ class BatteryDispatch(object):
 	batt_dispatch_choice = float
 	batt_dispatch_update_frequency_hours = float
 	batt_look_ahead_hours = float
+	batt_pv_ac_forecast = tuple
 	batt_pv_clipping_forecast = tuple
-	batt_pv_dc_forecast = tuple
 	batt_target_choice = float
 	batt_target_power = tuple
 	batt_target_power_monthly = tuple
