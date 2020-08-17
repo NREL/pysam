@@ -367,7 +367,7 @@ class FetchResourceFiles():
 
             # --- Find url for closest point ---
             lookup_base_url = 'https://developer.nrel.gov/api/solar/'
-            lookup_query_url = "nsrdb_data_query.json?api_key={}&wkt=POINT({}+{})".format(self.nrel_api_key, lon, lat)
+            lookup_query_url = "nsrdb_data_query.json?api_key={}&wkt=POINT({}+{})&utc=false".format(self.nrel_api_key, lon, lat)
             lookup_url = lookup_base_url + lookup_query_url
             lookup_response = retry_session.get(lookup_url)
 
