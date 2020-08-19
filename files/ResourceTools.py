@@ -74,13 +74,15 @@ def SRW_to_wind_data(filename):
     if not os.path.isfile(filename):
         raise FileNotFoundError(filename + " does not exist.")
     data_dict = dict()
-    field_names = ('Temperature', 'Pressure', 'Speed', 'Direction')
+    field_names = ('temperature', 'pressure', 'speed', 'direction')
     with open(filename) as file_in:
         file_in.readline()
         file_in.readline()
         fields = str(file_in.readline().strip()).split(',')
+        fields = [i for i in fields if i] #remove empty strings
         file_in.readline()
         heights = str(file_in.readline().strip()).split(',')
+        heights = [i for i in heights if i] #remove empty strings
         data_dict['heights'] = [float(i) for i in heights]
         data_dict['fields'] = []
 
@@ -92,6 +94,7 @@ def SRW_to_wind_data(filename):
         data_dict['data'] = []
         reader = csv.reader(file_in)
         for row in reader:
+            row = [i for i in row if i] #remove empty strings
             data_dict['data'].append([float(i) for i in row])
 
         return data_dict
@@ -287,7 +290,6 @@ class FetchResourceFiles():
         return session
 
     def _csv_to_srw(self, raw_csv):
-        #  TODO: convert gen profiles to local tz
 
         # --- grab df ---
         for_df = copy.deepcopy(raw_csv)
@@ -367,7 +369,7 @@ class FetchResourceFiles():
 
             # --- Find url for closest point ---
             lookup_base_url = 'https://developer.nrel.gov/api/solar/'
-            lookup_query_url = "nsrdb_data_query.json?api_key={}&wkt=POINT({}+{})&utc=false".format(self.nrel_api_key, lon, lat)
+            lookup_query_url = "nsrdb_data_query.json?api_key={}&wkt=POINT({}+{})".format(self.nrel_api_key, lon, lat)
             lookup_url = lookup_base_url + lookup_query_url
             lookup_response = retry_session.get(lookup_url)
 
@@ -414,7 +416,7 @@ class FetchResourceFiles():
 
             # --- Find url for closest point ---
             year_base_url = 'https://developer.nrel.gov/api/wind-toolkit/wind/'
-            year_query_url = "wtk_download.csv?api_key={}&wkt=POINT({}+{})&attributes=wind_speed,wind_direction,temperature,pressure&names={}&utc=true&email={}".format(
+            year_query_url = "wtk_download.csv?api_key={}&wkt=POINT({}+{})&attributes=wind_speed,wind_direction,temperature,pressure&names={}&utc=false&email={}".format(
                 self.nrel_api_key, lon, lat, self.resource_year, self.nrel_api_email)
             year_url = year_base_url + year_query_url
             year_response = retry_session.get(year_url)
