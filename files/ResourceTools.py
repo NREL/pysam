@@ -78,24 +78,27 @@ def SRW_to_wind_data(filename):
     if not os.path.isfile(filename):
         raise FileNotFoundError(filename + " does not exist.")
     data_dict = dict()
-    field_names = ('Temperature', 'Pressure', 'Speed', 'Direction')
+    field_names = ('temperature', 'pressure', 'speed', 'direction')
     with open(filename) as file_in:
         file_in.readline()
         file_in.readline()
         fields = str(file_in.readline().strip()).split(',')
+        fields = [i for i in fields if i] #remove empty strings
         file_in.readline()
         heights = str(file_in.readline().strip()).split(',')
+        heights = [i for i in heights if i] #remove empty strings
         data_dict['heights'] = [float(i) for i in heights]
         data_dict['fields'] = []
 
         for field_name in fields:
-            if field_name not in field_names:
-                raise ValueError(field_name + " required for wind data")
-            data_dict['fields'].append(field_names.index(field_name) + 1)
+            if field_name.lower() not in field_names:
+                raise ValueError(field_name.lower() + " required for wind data")
+            data_dict['fields'].append(field_names.index(field_name.lower()) + 1)
 
         data_dict['data'] = []
         reader = csv.reader(file_in)
         for row in reader:
+            row = [i for i in row if i] #remove empty strings
             data_dict['data'].append([float(i) for i in row])
 
         return data_dict
@@ -357,7 +360,6 @@ class FetchResourceFiles():
         return session
 
     def _csv_to_srw(self, raw_csv):
-        #  TODO: convert gen profiles to local tz
 
         # --- grab df ---
         for_df = copy.deepcopy(raw_csv)
