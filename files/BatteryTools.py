@@ -1,7 +1,7 @@
 import math
 
 
-def size_li_ion_battery(input_dict):
+def calculate_battery_size(input_dict):
     """
     All efficiencies and rates in percentages, 0-100.
 
@@ -86,79 +86,74 @@ def size_li_ion_battery(input_dict):
     ac_connected = bool(input_dict['batt_ac_or_dc'])
     size_by_ac_not_dc = bool(input_dict['size_by_ac_not_dc'])
 
-    # convert all the sizing values to DC via conversion efficiencies
-    if ac_connected:
-        for key in ('size_by_ac_not_dc', 'batt_dc_ac_efficiency'):
-            if key not in input_dict or input_dict[key] > 100:
-                raise ValueError
-        batt_dc_ac_efficiency = input_dict['batt_dc_ac_efficiency'] * 0.01
-        if size_by_ac_not_dc:
-            desired_capacity /= batt_dc_ac_efficiency
-            desired_power /= batt_dc_ac_efficiency
-    else:
-        if 'inverter_eff' not in input_dict:
-            raise ValueError
-        inv_eff = input_dict['inverter_eff'] * 0.01
-        if inv_eff > 1:
-            raise ValueError
-        if 'batt_dc_dc_efficiency' in input_dict:
-            batt_dc_dc_efficiency = input_dict['batt_dc_dc_efficiency'] * 0.01
-            inv_eff *= batt_dc_dc_efficiency
-        if size_by_ac_not_dc:
-            desired_capacity /= inv_eff
-            desired_power /= inv_eff
-
     check_keys(('batt_Qfull', 'batt_Vnom_default', 'desired_voltage'))
 
     batt_Qfull = input_dict['batt_Qfull']
     batt_Vnom_default = input_dict['batt_Vnom_default']
     desired_voltage = input_dict['desired_voltage']
 
-    max_rate_discharge = desired_power / desired_capacity
-    max_rate_charge = max_rate_discharge
-    num_series = math.ceil(desired_voltage / batt_Vnom_default)
-    num_strings = round(desired_capacity * 1000 / (batt_Qfull * batt_Vnom_default * num_series))
-
-    computed_voltage = batt_Vnom_default * num_series
-    batt_capacity = batt_Qfull * computed_voltage * num_strings * 0.001
-    batt_power = batt_capacity * max_rate_discharge
-
     output_dict = dict()
-    output_dict['voltage'] = computed_voltage
-    output_dict['power'] = batt_capacity * max_rate_discharge
-    output_dict['batt_computed_bank_capacity'] = batt_capacity
-    output_dict['batt_computed_series'] = num_series
-    output_dict['batt_computed_strings'] = num_strings
-    output_dict['time_capacity'] = batt_capacity / batt_power
-    output_dict['batt_current_charge_max'] = batt_Qfull * num_strings * max_rate_charge
-    output_dict['batt_current_discharge_max'] = batt_Qfull * num_strings * max_rate_discharge
-    output_dict['batt_power_discharge_max_kwdc'] = batt_power
-    output_dict['batt_power_charge_max_kwdc'] = batt_capacity * max_rate_charge
 
-    # Now update AC power limit
+    def size_from_strings(capacity):
+        num_series = math.ceil(desired_voltage / batt_Vnom_default)
+        num_strings = round(capacity * 1000 / (batt_Qfull * batt_Vnom_default * num_series))
+        computed_voltage = batt_Vnom_default * num_series
+        computed_capacity = batt_Qfull * computed_voltage * num_strings * 0.001
+        max_rate = desired_power / desired_capacity
+        computed_power = computed_capacity * max_rate
+        output_dict['voltage'] = computed_voltage
+        output_dict['batt_computed_series'] = num_series
+        output_dict['batt_computed_strings'] = num_strings
+        output_dict['power'] = computed_capacity * max_rate
+        output_dict['batt_computed_bank_capacity'] = computed_capacity
+        output_dict['time_capacity'] = computed_capacity / computed_power
+        return computed_capacity, computed_power, max_rate
+
+    # convert all the sizing values to DC via conversion efficiencies
     if ac_connected:
-        if size_by_ac_not_dc:
-            batt_bank_power_discharge_ac = desired_power
-            batt_bank_power_charge_ac = desired_power
-        else:
-            batt_bank_power_discharge_ac = desired_power * batt_dc_ac_efficiency
-            batt_bank_power_charge_ac = desired_power / batt_dc_ac_efficiency
+        for key in ('size_by_ac_not_dc', 'batt_dc_ac_efficiency'):
+            if key not in input_dict or input_dict[key] > 100:
+                raise ValueError
+        conv_eff = input_dict['batt_dc_ac_efficiency'] * 0.01
     else:
-        if size_by_ac_not_dc:
-            batt_bank_power_discharge_ac = desired_power
-            batt_bank_power_charge_ac = desired_power
-        else:
-            batt_bank_power_discharge_ac = desired_power * inv_eff
-            batt_bank_power_charge_ac = desired_power / inv_eff
+        if 'inverter_eff' not in input_dict:
+            raise ValueError
+        conv_eff = input_dict['inverter_eff'] * 0.01
+        if conv_eff > 1:
+            raise ValueError
+        if 'batt_dc_dc_efficiency' in input_dict:
+            batt_dc_dc_efficiency = input_dict['batt_dc_dc_efficiency'] * 0.01
+            conv_eff *= batt_dc_dc_efficiency
 
+    # sizes are AC side
+    if size_by_ac_not_dc:
+        desired_capacity /= conv_eff
+        desired_power /= conv_eff
+
+        batt_capacity, batt_power, max_rate = size_from_strings(desired_capacity)
+        batt_bank_power_discharge_ac = batt_power * conv_eff
+        batt_bank_power_charge_ac = batt_power * conv_eff
+        batt_bank_power_discharge_dc = batt_bank_power_discharge_ac / conv_eff
+        batt_bank_power_charge_dc = batt_bank_power_charge_ac * conv_eff
+    else:
+        batt_capacity, batt_power, max_rate = size_from_strings(desired_capacity)
+        batt_bank_power_discharge_dc = batt_bank_power_charge_dc = batt_power
+        batt_bank_power_discharge_ac = batt_bank_power_discharge_dc * conv_eff
+        batt_bank_power_charge_ac = batt_bank_power_charge_dc / conv_eff
+
+    output_dict['batt_power_discharge_max_kwdc'] = batt_bank_power_discharge_dc
+    output_dict['batt_power_charge_max_kwdc'] = batt_bank_power_charge_dc
+    output_dict['batt_current_charge_max'] = batt_bank_power_charge_dc / output_dict['voltage'] * 1000
+    output_dict['batt_current_discharge_max'] = batt_bank_power_discharge_dc / output_dict['voltage'] * 1000
     output_dict['batt_power_discharge_max_kwac'] = batt_bank_power_discharge_ac
     output_dict['batt_power_charge_max_kwac'] = batt_bank_power_charge_ac
 
-    batt_chem = True
+    is_lead_acid = True
     if 'batt_chem' in input_dict:
-        batt_chem = bool(input_dict['batt_chem'])
+        is_lead_acid = bool(input_dict['batt_chem'])
 
-    if batt_chem == 0:
+    if is_lead_acid == 0:
+        num_strings = output_dict["batt_computed_strings"]
         check_keys(('LeadAcid_q10', 'LeadAcid_q20', 'LeadAcid_qn', 'LeadAcid_tn'))
         q10_computed = num_strings * input_dict['LeadAcid_q10'] * batt_Qfull * 0.01
         q20_computed = num_strings * input_dict['LeadAcid_q20'] * batt_Qfull * 0.01
@@ -172,7 +167,8 @@ def size_li_ion_battery(input_dict):
 
 
 def battery_model_sizing(model, desired_power, desired_capacity, desired_voltage,
-                         leadacid_q10=None, leadacid_q20=None, leadacid_qn=None, leadacid_tn=None):
+                         leadacid_q10=None, leadacid_q20=None, leadacid_qn=None, leadacid_tn=None,
+                         size_by_ac_not_dc=None):
     """
     Modifies model with new sizing
 
@@ -191,6 +187,8 @@ def battery_model_sizing(model, desired_power, desired_capacity, desired_voltage
         new Capacity at n-hour discharge rate
     :param leadacid_tn: optional float
         Hour for leadacid_qn
+    :param size_by_ac_not_dc: optional bool
+        Sizes for power and capacity are on AC side not DC side of battery-inverter
     :return: output_dictionary of sizing parameters
     """
     input_dict = dict()
@@ -228,9 +226,12 @@ def battery_model_sizing(model, desired_power, desired_capacity, desired_voltage
     input_dict['desired_power'] = desired_power
     input_dict['desired_capacity'] = desired_capacity
     input_dict['desired_voltage'] = desired_voltage
-    input_dict['size_by_ac_not_dc'] = input_dict['batt_ac_or_dc']
+    if size_by_ac_not_dc is not None:
+        input_dict['size_by_ac_not_dc'] = size_by_ac_not_dc
+    else:
+        input_dict['size_by_ac_not_dc'] = input_dict['batt_ac_or_dc']
 
-    if not input_dict['size_by_ac_not_dc']:
+    if not input_dict['batt_ac_or_dc']:
         inv_model = int(model.Inverter.inverter_model)
         if inv_model == 0:
             input_dict['inverter_eff'] = model.Inverter.inv_snl_eff_cec
@@ -243,7 +244,7 @@ def battery_model_sizing(model, desired_power, desired_capacity, desired_voltage
         else:
             raise ValueError
 
-    output_dict = size_li_ion_battery(input_dict)
+    output_dict = calculate_battery_size(input_dict)
 
     computed_inputs = ('batt_computed_bank_capacity', 'batt_computed_series', 'batt_computed_strings',
                        'batt_current_charge_max', 'batt_current_discharge_max', 'batt_power_charge_max_kwac',
