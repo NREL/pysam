@@ -97,6 +97,8 @@ def calculate_battery_size(input_dict):
     def size_from_strings(capacity):
         num_series = math.ceil(desired_voltage / batt_Vnom_default)
         num_strings = round(capacity * 1000 / (batt_Qfull * batt_Vnom_default * num_series))
+        if num_strings < 1:
+            raise ValueError("Calculated number of strings less than 1; increase desired capacity.")
         computed_voltage = batt_Vnom_default * num_series
         computed_capacity = batt_Qfull * computed_voltage * num_strings * 0.001
         max_rate = desired_power / desired_capacity
