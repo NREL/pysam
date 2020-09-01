@@ -91,9 +91,9 @@ def SRW_to_wind_data(filename):
         data_dict['fields'] = []
 
         for field_name in fields:
-            if field_name not in field_names:
-                raise ValueError(field_name + " required for wind data")
-            data_dict['fields'].append(field_names.index(field_name) + 1)
+            if field_name.lower() not in field_names:
+                raise ValueError(field_name.lower() + " required for wind data")
+            data_dict['fields'].append(field_names.index(field_name.lower()) + 1)
 
         data_dict['data'] = []
         reader = csv.reader(file_in)
