@@ -81,6 +81,7 @@ class Lifetime(object):
 	dc_lifetime_losses = tuple
 	en_ac_lifetime_losses = float
 	en_dc_lifetime_losses = float
+	inflation_rate = float
 	save_full_lifetime_variables = float
 	system_use_lifetime_output = float
 
@@ -678,7 +679,7 @@ class BatterySystem(object):
 	batt_current_charge_max = float
 	batt_current_choice = float
 	batt_current_discharge_max = float
-	batt_cycle_cost = float
+	batt_cycle_cost = tuple
 	batt_cycle_cost_choice = float
 	batt_dc_ac_efficiency = float
 	batt_dc_dc_efficiency = float
@@ -811,11 +812,24 @@ class ElectricityRates(object):
 
 
 	en_electricity_rates = float
+	rate_escalation = tuple
+	ur_dc_enable = float
+	ur_dc_flat_mat = tuple
+	ur_dc_sched_weekday = tuple
+	ur_dc_sched_weekend = tuple
+	ur_dc_tou_mat = tuple
 	ur_ec_sched_weekday = tuple
 	ur_ec_sched_weekend = tuple
 	ur_ec_tou_mat = tuple
+	ur_en_ts_buy_rate = float
 	ur_en_ts_sell_rate = float
+	ur_metering_option = float
+	ur_nm_credit_month = float
+	ur_nm_credit_rollover = float
+	ur_nm_yearend_sell_rate = float
+	ur_sell_eq_buy = float
 	ur_ts_buy_rate = tuple
+	ur_ts_sell_rate = tuple
 
 
 class FuelCell(object):

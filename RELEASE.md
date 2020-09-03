@@ -1,5 +1,9 @@
 # Release Notes
 
+## Version 2.1.5.dev3, Sep 3, 2020 ~ SAM 2020.2.29 r3, SSC Version 242
+* Price Signals Dispatch
+* Bug fix in PVWattsBatteryCommercial and PVBatteryCommercial incentives defaults
+
 ## Version 2.1.5.dev2, Aug 10, 2020 ~ SAM 2020.2.29 r3, SSC Version 242
 * BatteryStateful bug fixes: current
 
