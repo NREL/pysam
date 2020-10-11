@@ -38,4 +38,4 @@ May not be compatible with different builds of the CPython reference interpreter
 
 ## Citing this package
 
-PySAM Version 2.1.1. National Renewable Energy Laboratory. Golden, CO. Accessed May 27, 2020. https://github.com/nrel/pysam
+PySAM <Version>. National Renewable Energy Laboratory. Golden, CO. Accessed <date>. https://github.com/nrel/pysam
