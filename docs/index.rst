@@ -22,11 +22,9 @@ energy power system simulation in a few steps following some examples. Or, take 
 application can be imported into PySAM.
 
 * **First steps**:
-  :doc:`Installation and Import <GettingStarted>`
-
-* **Creating models**
-  :doc:`Examples <Examples>` |
-  :doc:`Importing a case from SAM <Import>`
+  :doc:`Installation and Import <GettingStarted>` |
+  :doc:`Examples <Examples>`
+https://nrel-pysam.readthedocs.io/en/master/Configs.html
 
 
 .. toctree::
@@ -42,12 +40,13 @@ application can be imported into PySAM.
 Models and Tools
 ------------------------------------------
 
-PySAM offers all the technology and financial models available in SAM as separate modules. Learn about individual models
-and how to chain models together to create a configuration. PySAM includes tools that provide design and resource functionality.
+PySAM offers all the technology and financial models available in SAM as separate unit modules. Learn about individual modules
+and how to chain them together to represent a specific configuration such as Distributed Wind or Single Owner PV + Battery.
+PySAM also includes tools that provide design and resource functionality.
 
-* **Technology and Financial Models**:
-  :doc:`Available models <Models>` |
-  :doc:`Configurations <Configs>` |
+* **SAM Simulations**:
+  :doc:`Technology and financial Unit Modules <Models>` |
+  :doc:`Building up Simulations corresponding to SAM Configurations <Configs>` |
 
 
 * **Tools**:
