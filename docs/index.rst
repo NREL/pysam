@@ -13,9 +13,9 @@ SAM is a performance and financial model designed to facilitate decision making 
 
 `SAM <http://www.github.com/nrel/sam>`_ is open-source. PySAM provides a native Python interface for the models found in SAM Simulation Core, (`SSC <http://www.github.com/nrel/ssc>`_).
 
-PySAM enables developers to run the underlying modules that make up a simulation in SAM.
-A single simulation such as for a PV Battery Commercial case is process chaining together multiple unit modules.
-PySAM, and SAM's other software development kits, expose these unit modules so that they can be customized and embedded in software applications.
+PySAM enables developers to run the underlying unit modules that make up a simulation in SAM.
+A single simulation may comprise a single module or a process chaining together multiple unit modules.
+PySAM exposes these unit modules in a native Python interface so that they can be customized and embedded in software applications.
 
 Getting Started
 ------------------------------------------
@@ -27,7 +27,7 @@ application can be imported into PySAM.
 * **First steps**:
   :doc:`Installation and Import <GettingStarted>` |
   :doc:`Examples <Examples>` |
-  :doc:`Webinars <https://sam.nrel.gov/software-development-kit-sdk/pysam.html>`
+  :doc:`Webinars <Webinars>`
 
 
 .. toctree::
