@@ -12,314 +12,312 @@ A configuration is a combination of compute modules required to model a type of 
 	* - SAM Configuration
 	  - SSC Compute Module(s)
 	* - Biopower-All Equity Partnership Flip
-	  - biomass, grid, equpartflip
+	  - :doc:`modules/Biomass`, :doc:`modules/Grid`, :doc:`modules/Equpartflip`
 	* - Biopower-LCOE Calculator
-	  - biomass, grid, lcoefcr
+	  - :doc:`modules/Biomass`, :doc:`modules/Grid`, :doc:`modules/Lcoefcr`
 	* - Biopower-Leveraged Partnership Flip
-	  - biomass, grid, levpartflip
+	  - :doc:`modules/Biomass`, :doc:`modules/Grid`, :doc:`modules/Levpartflip`
 	* - Biopower-Merchant Plant
-	  - biomass, grid, merchantplant
+	  - :doc:`modules/Biomass`, :doc:`modules/Grid`, :doc:`modules/Merchantplant`
 	* - Biopower-None
-	  - biomass, grid
+	  - :doc:`modules/Biomass`, :doc:`modules/Grid`
 	* - Biopower-Sale Leaseback
-	  - biomass, grid, saleleaseback
+	  - :doc:`modules/Biomass`, :doc:`modules/Grid`, :doc:`modules/Saleleaseback`
 	* - Biopower-Single Owner
-	  - biomass, grid, singleowner
+	  - :doc:`modules/Biomass`, :doc:`modules/Grid`, :doc:`modules/Singleowner`
 	* - DSGL IPH-LCOH Calculator
-	  - linear_fresnel_dsg_iph, iph_to_lcoefcr, lcoefcr
+	  - :doc:`modules/LinearFresnelDsgIph`, :doc:`modules/IphToLcoefcr`, :doc:`modules/Lcoefcr`
 	* - DSGL IPH-None
-	  - linear_fresnel_dsg_iph
+	  - :doc:`modules/LinearFresnelDsgIph`
 	* - DSLF-All Equity Partnership Flip
-	  - tcslinear_fresnel, grid, equpartflip
+	  - :doc:`modules/TcslinearFresnel`, :doc:`modules/Grid`, :doc:`modules/Equpartflip`
 	* - DSLF-Commercial
-	  - tcslinear_fresnel, grid, utilityrate5, cashloan
+	  - :doc:`modules/TcslinearFresnel`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/Cashloan`
 	* - DSLF-LCOE Calculator
-	  - tcslinear_fresnel, grid, lcoefcr
+	  - :doc:`modules/TcslinearFresnel`, :doc:`modules/Grid`, :doc:`modules/Lcoefcr`
 	* - DSLF-Leveraged Partnership Flip
-	  - tcslinear_fresnel, grid, levpartflip
+	  - :doc:`modules/TcslinearFresnel`, :doc:`modules/Grid`, :doc:`modules/Levpartflip`
 	* - DSLF-Merchant Plant
-	  - tcslinear_fresnel, grid, merchantplant
+	  - :doc:`modules/TcslinearFresnel`, :doc:`modules/Grid`, :doc:`modules/Merchantplant`
 	* - DSLF-None
-	  - tcslinear_fresnel, grid
+	  - :doc:`modules/TcslinearFresnel`, :doc:`modules/Grid`
 	* - DSLF-Sale Leaseback
-	  - tcslinear_fresnel, grid, saleleaseback
+	  - :doc:`modules/TcslinearFresnel`, :doc:`modules/Grid`, :doc:`modules/Saleleaseback`
 	* - DSLF-Single Owner
-	  - tcslinear_fresnel, grid, singleowner
+	  - :doc:`modules/TcslinearFresnel`, :doc:`modules/Grid`, :doc:`modules/Singleowner`
 	* - DSPT-All Equity Partnership Flip
-	  - tcsdirect_steam, grid, equpartflip
+	  - :doc:`modules/TcsdirectSteam`, :doc:`modules/Grid`, :doc:`modules/Equpartflip`
 	* - DSPT-Leveraged Partnership Flip
-	  - tcsdirect_steam, grid, levpartflip
+	  - :doc:`modules/TcsdirectSteam`, :doc:`modules/Grid`, :doc:`modules/Levpartflip`
 	* - DSPT-Merchant Plant
-	  - tcsdirect_steam, grid, merchantplant
+	  - :doc:`modules/TcsdirectSteam`, :doc:`modules/Grid`, :doc:`modules/Merchantplant`
 	* - DSPT-Sale Leaseback
-	  - tcsdirect_steam, grid, saleleaseback
+	  - :doc:`modules/TcsdirectSteam`, :doc:`modules/Grid`, :doc:`modules/Saleleaseback`
 	* - DSPT-Single Owner
-	  - tcsdirect_steam, grid, singleowner
+	  - :doc:`modules/TcsdirectSteam`, :doc:`modules/Grid`, :doc:`modules/Singleowner`
 	* - Dish Stirling-All Equity Partnership Flip
-	  - tcsdish, grid, equpartflip
+	  - :doc:`modules/Tcsdish`, :doc:`modules/Grid`, :doc:`modules/Equpartflip`
 	* - Dish Stirling-Commercial
-	  - tcsdish, grid, utilityrate5, cashloan
+	  - :doc:`modules/Tcsdish`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/Cashloan`
 	* - Dish Stirling-LCOE Calculator
-	  - tcsdish, grid, lcoefcr
+	  - :doc:`modules/Tcsdish`, :doc:`modules/Grid`, :doc:`modules/Lcoefcr`
 	* - Dish Stirling-Leveraged Partnership Flip
-	  - tcsdish, grid, levpartflip
+	  - :doc:`modules/Tcsdish`, :doc:`modules/Grid`, :doc:`modules/Levpartflip`
 	* - Dish Stirling-Merchant Plant
-	  - tcsdish, grid, merchantplant
+	  - :doc:`modules/Tcsdish`, :doc:`modules/Grid`, :doc:`modules/Merchantplant`
 	* - Dish Stirling-None
-	  - tcsdish, grid
+	  - :doc:`modules/Tcsdish`, :doc:`modules/Grid`
 	* - Dish Stirling-Sale Leaseback
-	  - tcsdish, grid, saleleaseback
+	  - :doc:`modules/Tcsdish`, :doc:`modules/Grid`, :doc:`modules/Saleleaseback`
 	* - Dish Stirling-Single Owner
-	  - tcsdish, grid, singleowner
+	  - :doc:`modules/Tcsdish`, :doc:`modules/Grid`, :doc:`modules/Singleowner`
 	* - Empirical Trough-All Equity Partnership Flip
-	  - tcstrough_empirical, equpartflip
+	  - :doc:`modules/TcstroughEmpirical`, :doc:`modules/Equpartflip`
 	* - Empirical Trough-Commercial
-	  - tcstrough_empirical, utilityrate5, cashloan
+	  - :doc:`modules/TcstroughEmpirical`, :doc:`modules/Utilityrate5`, :doc:`modules/Cashloan`
 	* - Empirical Trough-LCOE Calculator
-	  - tcstrough_empirical, lcoefcr
+	  - :doc:`modules/TcstroughEmpirical`, :doc:`modules/Lcoefcr`
 	* - Empirical Trough-Leveraged Partnership Flip
-	  - tcstrough_empirical, levpartflip
+	  - :doc:`modules/TcstroughEmpirical`, :doc:`modules/Levpartflip`
 	* - Empirical Trough-Merchant Plant
-	  - tcstrough_empirical, merchantplant
+	  - :doc:`modules/TcstroughEmpirical`, :doc:`modules/Merchantplant`
 	* - Empirical Trough-None
-	  - tcstrough_empirical
+	  - :doc:`modules/TcstroughEmpirical`
 	* - Empirical Trough-Sale Leaseback
-	  - tcstrough_empirical, saleleaseback
+	  - :doc:`modules/TcstroughEmpirical`, :doc:`modules/Saleleaseback`
 	* - Empirical Trough-Single Owner
-	  - tcstrough_empirical, singleowner
+	  - :doc:`modules/TcstroughEmpirical`, :doc:`modules/Singleowner`
 	* - Flat Plate PV-All Equity Partnership Flip
-	  - pvsamv1, grid, equpartflip
+	  - :doc:`modules/Pvsamv1`, :doc:`modules/Grid`, :doc:`modules/Equpartflip`
 	* - Flat Plate PV-Commercial
-	  - pvsamv1, grid, utilityrate5, cashloan
+	  - :doc:`modules/Pvsamv1`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/Cashloan`
 	* - Flat Plate PV-Host Developer
-	  - pvsamv1, grid, utilityrate5, host_developer
+	  - :doc:`modules/Pvsamv1`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/HostDeveloper`
 	* - Flat Plate PV-LCOE Calculator
-	  - pvsamv1, grid, lcoefcr
+	  - :doc:`modules/Pvsamv1`, :doc:`modules/Grid`, :doc:`modules/Lcoefcr`
 	* - Flat Plate PV-Leveraged Partnership Flip
-	  - pvsamv1, grid, levpartflip
+	  - :doc:`modules/Pvsamv1`, :doc:`modules/Grid`, :doc:`modules/Levpartflip`
 	* - Flat Plate PV-Merchant Plant
-	  - pvsamv1, grid, merchantplant
+	  - :doc:`modules/Pvsamv1`, :doc:`modules/Grid`, :doc:`modules/Merchantplant`
 	* - Flat Plate PV-None
-	  - pvsamv1, grid
+	  - :doc:`modules/Pvsamv1`, :doc:`modules/Grid`
 	* - Flat Plate PV-Residential
-	  - belpe, pvsamv1, grid, utilityrate5, cashloan
+	  - :doc:`modules/Belpe`, :doc:`modules/Pvsamv1`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/Cashloan`
 	* - Flat Plate PV-Sale Leaseback
-	  - pvsamv1, grid, saleleaseback
+	  - :doc:`modules/Pvsamv1`, :doc:`modules/Grid`, :doc:`modules/Saleleaseback`
 	* - Flat Plate PV-Single Owner
-	  - pvsamv1, grid, singleowner
+	  - :doc:`modules/Pvsamv1`, :doc:`modules/Grid`, :doc:`modules/Singleowner`
 	* - Flat Plate PV-Third Party
-	  - belpe, pvsamv1, grid, utilityrate5, thirdpartyownership
+	  - :doc:`modules/Belpe`, :doc:`modules/Pvsamv1`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/Thirdpartyownership`
 	* - Fuel Cell-Commercial
-	  - pvwattsv7, fuelcell, battery, grid, utilityrate5, thermalrate, cashloan
+	  - :doc:`modules/Pvwattsv7`, :doc:`modules/Fuelcell`, :doc:`modules/StandAloneBattery`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/Thermalrate`, :doc:`modules/Cashloan`
 	* - Fuel Cell-Single Owner
-	  - pvwattsv7, fuelcell, battery, grid, utilityrate5, thermalrate, singleowner
+	  - :doc:`modules/Pvwattsv7`, :doc:`modules/Fuelcell`, :doc:`modules/StandAloneBattery`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/Thermalrate`, :doc:`modules/Singleowner`
 	* - Generic Battery-All Equity Partnership Flip
-	  - generic_system, battery, grid, equpartflip
+	  - :doc:`modules/GenericSystem`, :doc:`modules/StandAloneBattery`, :doc:`modules/Grid`, :doc:`modules/Equpartflip`
 	* - Generic Battery-Commercial
-	  - generic_system, battery, grid, utilityrate5, cashloan
+	  - :doc:`modules/GenericSystem`, :doc:`modules/StandAloneBattery`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/Cashloan`
 	* - Generic Battery-Host Developer
-	  - generic_system, battery, grid, utilityrate5, host_developer
+	  - :doc:`modules/GenericSystem`, :doc:`modules/StandAloneBattery`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/HostDeveloper`
 	* - Generic Battery-Leveraged Partnership Flip
-	  - generic_system, battery, grid, levpartflip
+	  - :doc:`modules/GenericSystem`, :doc:`modules/StandAloneBattery`, :doc:`modules/Grid`, :doc:`modules/Levpartflip`
 	* - Generic Battery-Merchant Plant
-	  - generic_system, battery, grid, merchantplant
+	  - :doc:`modules/GenericSystem`, :doc:`modules/StandAloneBattery`, :doc:`modules/Grid`, :doc:`modules/Merchantplant`
 	* - Generic Battery-Residential
-	  - belpe, generic_system, battery, grid, utilityrate5, cashloan
+	  - :doc:`modules/Belpe`, :doc:`modules/GenericSystem`, :doc:`modules/StandAloneBattery`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/Cashloan`
 	* - Generic Battery-Sale Leaseback
-	  - generic_system, battery, grid, saleleaseback
+	  - :doc:`modules/GenericSystem`, :doc:`modules/StandAloneBattery`, :doc:`modules/Grid`, :doc:`modules/Saleleaseback`
 	* - Generic Battery-Single Owner
-	  - generic_system, battery, grid, utilityrate5, singleowner
+	  - :doc:`modules/GenericSystem`, :doc:`modules/StandAloneBattery`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/Singleowner`
 	* - Generic Battery-Third Party
-	  - belpe, generic_system, battery, grid, utilityrate5, thirdpartyownership
+	  - :doc:`modules/Belpe`, :doc:`modules/GenericSystem`, :doc:`modules/StandAloneBattery`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/Thirdpartyownership`
 	* - Generic CSP System-All Equity Partnership Flip
-	  - tcsgeneric_solar, grid, equpartflip
+	  - :doc:`modules/TcsgenericSolar`, :doc:`modules/Grid`, :doc:`modules/Equpartflip`
 	* - Generic CSP System-Commercial
-	  - tcsgeneric_solar, grid, utilityrate5, cashloan
+	  - :doc:`modules/TcsgenericSolar`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/Cashloan`
 	* - Generic CSP System-LCOE Calculator
-	  - tcsgeneric_solar, grid, lcoefcr
+	  - :doc:`modules/TcsgenericSolar`, :doc:`modules/Grid`, :doc:`modules/Lcoefcr`
 	* - Generic CSP System-Leveraged Partnership Flip
-	  - tcsgeneric_solar, grid, levpartflip
+	  - :doc:`modules/TcsgenericSolar`, :doc:`modules/Grid`, :doc:`modules/Levpartflip`
 	* - Generic CSP System-Merchant Plant
-	  - tcsgeneric_solar, grid, merchantplant
+	  - :doc:`modules/TcsgenericSolar`, :doc:`modules/Grid`, :doc:`modules/Merchantplant`
 	* - Generic CSP System-None
-	  - tcsgeneric_solar, grid
+	  - :doc:`modules/TcsgenericSolar`, :doc:`modules/Grid`
 	* - Generic CSP System-Sale Leaseback
-	  - tcsgeneric_solar, grid, saleleaseback
+	  - :doc:`modules/TcsgenericSolar`, :doc:`modules/Grid`, :doc:`modules/Saleleaseback`
 	* - Generic CSP System-Single Owner
-	  - tcsgeneric_solar, grid, singleowner
+	  - :doc:`modules/TcsgenericSolar`, :doc:`modules/Grid`, :doc:`modules/Singleowner`
 	* - Generic System-All Equity Partnership Flip
-	  - generic_system, grid, equpartflip
+	  - :doc:`modules/GenericSystem`, :doc:`modules/Grid`, :doc:`modules/Equpartflip`
 	* - Generic System-Commercial
-	  - generic_system, grid, utilityrate5, cashloan
+	  - :doc:`modules/GenericSystem`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/Cashloan`
 	* - Generic System-Host Developer
-	  - generic_system, grid, utilityrate5, host_developer
+	  - :doc:`modules/GenericSystem`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/HostDeveloper`
 	* - Generic System-LCOE Calculator
-	  - generic_system, grid, lcoefcr
+	  - :doc:`modules/GenericSystem`, :doc:`modules/Grid`, :doc:`modules/Lcoefcr`
 	* - Generic System-Leveraged Partnership Flip
-	  - generic_system, grid, levpartflip
+	  - :doc:`modules/GenericSystem`, :doc:`modules/Grid`, :doc:`modules/Levpartflip`
 	* - Generic System-Merchant Plant
-	  - generic_system, grid, merchantplant
+	  - :doc:`modules/GenericSystem`, :doc:`modules/Grid`, :doc:`modules/Merchantplant`
 	* - Generic System-None
-	  - generic_system, grid
+	  - :doc:`modules/GenericSystem`, :doc:`modules/Grid`
 	* - Generic System-Residential
-	  - generic_system, grid, utilityrate5, cashloan
+	  - :doc:`modules/GenericSystem`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/Cashloan`
 	* - Generic System-Sale Leaseback
-	  - generic_system, grid, saleleaseback
+	  - :doc:`modules/GenericSystem`, :doc:`modules/Grid`, :doc:`modules/Saleleaseback`
 	* - Generic System-Single Owner
-	  - generic_system, grid, singleowner
+	  - :doc:`modules/GenericSystem`, :doc:`modules/Grid`, :doc:`modules/Singleowner`
 	* - Generic System-Third Party
-	  - generic_system, grid, utilityrate5, thirdpartyownership
+	  - :doc:`modules/GenericSystem`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/Thirdpartyownership`
 	* - Geothermal Power-All Equity Partnership Flip
-	  - geothermal, grid, equpartflip
+	  - :doc:`modules/Geothermal`, :doc:`modules/Grid`, :doc:`modules/Equpartflip`
 	* - Geothermal Power-LCOE Calculator
-	  - geothermal, grid, lcoefcr
+	  - :doc:`modules/Geothermal`, :doc:`modules/Grid`, :doc:`modules/Lcoefcr`
 	* - Geothermal Power-Leveraged Partnership Flip
-	  - geothermal, grid, levpartflip
+	  - :doc:`modules/Geothermal`, :doc:`modules/Grid`, :doc:`modules/Levpartflip`
 	* - Geothermal Power-Merchant Plant
-	  - geothermal, grid, merchantplant
+	  - :doc:`modules/Geothermal`, :doc:`modules/Grid`, :doc:`modules/Merchantplant`
 	* - Geothermal Power-None
-	  - geothermal, grid
+	  - :doc:`modules/Geothermal`, :doc:`modules/Grid`
 	* - Geothermal Power-Sale Leaseback
-	  - geothermal, grid, saleleaseback
+	  - :doc:`modules/Geothermal`, :doc:`modules/Grid`, :doc:`modules/Saleleaseback`
 	* - Geothermal Power-Single Owner
-	  - geothermal, grid, singleowner
+	  - :doc:`modules/Geothermal`, :doc:`modules/Grid`, :doc:`modules/Singleowner`
 	* - High-X Concentrating PV-All Equity Partnership Flip
-	  - hcpv, grid, equpartflip
+	  - :doc:`modules/Hcpv`, :doc:`modules/Grid`, :doc:`modules/Equpartflip`
 	* - High-X Concentrating PV-LCOE Calculator
-	  - hcpv, grid, lcoefcr
+	  - :doc:`modules/Hcpv`, :doc:`modules/Grid`, :doc:`modules/Lcoefcr`
 	* - High-X Concentrating PV-Leveraged Partnership Flip
-	  - hcpv, grid, levpartflip
+	  - :doc:`modules/Hcpv`, :doc:`modules/Grid`, :doc:`modules/Levpartflip`
 	* - High-X Concentrating PV-Merchant Plant
-	  - hcpv, grid, merchantplant
+	  - :doc:`modules/Hcpv`, :doc:`modules/Grid`, :doc:`modules/Merchantplant`
 	* - High-X Concentrating PV-None
-	  - hcpv, grid
+	  - :doc:`modules/Hcpv`, :doc:`modules/Grid`
 	* - High-X Concentrating PV-Sale Leaseback
-	  - hcpv, grid, saleleaseback
+	  - :doc:`modules/Hcpv`, :doc:`modules/Grid`, :doc:`modules/Saleleaseback`
 	* - High-X Concentrating PV-Single Owner
-	  - hcpv, grid, singleowner
+	  - :doc:`modules/Hcpv`, :doc:`modules/Grid`, :doc:`modules/Singleowner`
 	* - MEtidal-LCOE Calculator
-	  - mhk_tidal, lcoefcr
+	  - :doc:`modules/MhkTidal`, :doc:`modules/Lcoefcr`
 	* - MEwave-LCOE Calculator
-	  - wave_file_reader, mhk_wave, lcoefcr
+	  - :doc:`modules/WaveFileReader`, :doc:`modules/MhkWave`, :doc:`modules/Lcoefcr`
 	* - MSLF-All Equity Partnership Flip
-	  - tcsMSLF, grid, equpartflip
+	  - :doc:`modules/TcsMSLF`, :doc:`modules/Grid`, :doc:`modules/Equpartflip`
 	* - MSLF-Commercial
-	  - tcsMSLF, grid, utilityrate5, cashloan
+	  - :doc:`modules/TcsMSLF`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/Cashloan`
 	* - MSLF-LCOE Calculator
-	  - tcsMSLF, grid, lcoefcr
+	  - :doc:`modules/TcsMSLF`, :doc:`modules/Grid`, :doc:`modules/Lcoefcr`
 	* - MSLF-Leveraged Partnership Flip
-	  - tcsMSLF, grid, levpartflip
+	  - :doc:`modules/TcsMSLF`, :doc:`modules/Grid`, :doc:`modules/Levpartflip`
 	* - MSLF-Merchant Plant
-	  - tcsMSLF, grid, merchantplant
+	  - :doc:`modules/TcsMSLF`, :doc:`modules/Grid`, :doc:`modules/Merchantplant`
 	* - MSLF-None
-	  - tcsMSLF, grid
+	  - :doc:`modules/TcsMSLF`, :doc:`modules/Grid`
 	* - MSLF-Sale Leaseback
-	  - tcsMSLF, grid, saleleaseback
+	  - :doc:`modules/TcsMSLF`, :doc:`modules/Grid`, :doc:`modules/Saleleaseback`
 	* - MSLF-Single Owner
-	  - tcsMSLF, grid, singleowner
+	  - :doc:`modules/TcsMSLF`, :doc:`modules/Grid`, :doc:`modules/Singleowner`
 	* - MSPT-All Equity Partnership Flip
-	  - tcsmolten_salt, grid, equpartflip
+	  - :doc:`modules/TcsmoltenSalt`, :doc:`modules/Grid`, :doc:`modules/Equpartflip`
 	* - MSPT-Leveraged Partnership Flip
-	  - tcsmolten_salt, grid, levpartflip
+	  - :doc:`modules/TcsmoltenSalt`, :doc:`modules/Grid`, :doc:`modules/Levpartflip`
 	* - MSPT-Merchant Plant
-	  - tcsmolten_salt, grid, merchantplant
+	  - :doc:`modules/TcsmoltenSalt`, :doc:`modules/Grid`, :doc:`modules/Merchantplant`
 	* - MSPT-Sale Leaseback
-	  - tcsmolten_salt, grid, saleleaseback
+	  - :doc:`modules/TcsmoltenSalt`, :doc:`modules/Grid`, :doc:`modules/Saleleaseback`
 	* - MSPT-Single Owner
-	  - tcsmolten_salt, grid, singleowner
+	  - :doc:`modules/TcsmoltenSalt`, :doc:`modules/Grid`, :doc:`modules/Singleowner`
 	* - PV Battery-All Equity Partnership Flip
-	  - pvsamv1, grid, equpartflip
+	  - :doc:`modules/Pvsamv1`, :doc:`modules/Grid`, :doc:`modules/Equpartflip`
 	* - PV Battery-Commercial
-	  - pvsamv1, grid, utilityrate5, cashloan
+	  - :doc:`modules/Pvsamv1`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/Cashloan`
 	* - PV Battery-Host Developer
-	  - pvsamv1, grid, utilityrate5, host_developer
+	  - :doc:`modules/Pvsamv1`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/HostDeveloper`
 	* - PV Battery-Leveraged Partnership Flip
-	  - pvsamv1, grid, levpartflip
+	  - :doc:`modules/Pvsamv1`, :doc:`modules/Grid`, :doc:`modules/Levpartflip`
 	* - PV Battery-Merchant Plant
-	  - pvsamv1, grid, merchantplant
+	  - :doc:`modules/Pvsamv1`, :doc:`modules/Grid`, :doc:`modules/Merchantplant`
 	* - PV Battery-Residential
-	  - belpe, pvsamv1, grid, utilityrate5, cashloan
+	  - :doc:`modules/Belpe`, :doc:`modules/Pvsamv1`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/Cashloan`
 	* - PV Battery-Sale Leaseback
-	  - pvsamv1, grid, saleleaseback
+	  - :doc:`modules/Pvsamv1`, :doc:`modules/Grid`, :doc:`modules/Saleleaseback`
 	* - PV Battery-Single Owner
-	  - pvsamv1, grid, utilityrate5, singleowner
+	  - :doc:`modules/Pvsamv1`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/Singleowner`
 	* - PV Battery-Third Party
-	  - belpe, pvsamv1, grid, utilityrate5, thirdpartyownership
+	  - :doc:`modules/Belpe`, :doc:`modules/Pvsamv1`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/Thirdpartyownership`
 	* - PVWatts Battery-Commercial
-	  - pvwattsv7, battwatts, grid, utilityrate5, cashloan
+	  - :doc:`modules/Pvwattsv7`, :doc:`modules/Battwatts`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/Cashloan`
 	* - PVWatts Battery-Host Developer
-	  - pvwattsv7, battwatts, grid, utilityrate5, host_developer
+	  - :doc:`modules/Pvwattsv7`, :doc:`modules/Battwatts`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/HostDeveloper`
 	* - PVWatts Battery-Residential
-	  - pvwattsv7, belpe, battwatts, grid, utilityrate5, cashloan
+	  - :doc:`modules/Pvwattsv7`, :doc:`modules/Belpe`, :doc:`modules/Battwatts`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/Cashloan`
 	* - PVWatts Battery-Third Party
-	  - pvwattsv7, belpe, battwatts, grid, utilityrate5, thirdpartyownership
+	  - :doc:`modules/Pvwattsv7`, :doc:`modules/Belpe`, :doc:`modules/Battwatts`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/Thirdpartyownership`
 	* - PVWatts-All Equity Partnership Flip
-	  - pvwattsv7, grid, equpartflip
+	  - :doc:`modules/Pvwattsv7`, :doc:`modules/Grid`, :doc:`modules/Equpartflip`
 	* - PVWatts-Commercial
-	  - pvwattsv7, grid, utilityrate5, cashloan
+	  - :doc:`modules/Pvwattsv7`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/Cashloan`
 	* - PVWatts-Host Developer
-	  - pvwattsv7, grid, utilityrate5, host_developer
+	  - :doc:`modules/Pvwattsv7`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/HostDeveloper`
 	* - PVWatts-LCOE Calculator
-	  - pvwattsv7, grid, lcoefcr
+	  - :doc:`modules/Pvwattsv7`, :doc:`modules/Grid`, :doc:`modules/Lcoefcr`
 	* - PVWatts-Leveraged Partnership Flip
-	  - pvwattsv7, grid, levpartflip
+	  - :doc:`modules/Pvwattsv7`, :doc:`modules/Grid`, :doc:`modules/Levpartflip`
 	* - PVWatts-Merchant Plant
-	  - pvwattsv7, grid, merchantplant
+	  - :doc:`modules/Pvwattsv7`, :doc:`modules/Grid`, :doc:`modules/Merchantplant`
 	* - PVWatts-None
-	  - pvwattsv7, grid
+	  - :doc:`modules/Pvwattsv7`, :doc:`modules/Grid`
 	* - PVWatts-Residential
-	  - pvwattsv7, belpe, grid, utilityrate5, cashloan
+	  - :doc:`modules/Pvwattsv7`, :doc:`modules/Belpe`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/Cashloan`
 	* - PVWatts-Sale Leaseback
-	  - pvwattsv7, grid, saleleaseback
+	  - :doc:`modules/Pvwattsv7`, :doc:`modules/Grid`, :doc:`modules/Saleleaseback`
 	* - PVWatts-Single Owner
-	  - pvwattsv7, grid, singleowner
+	  - :doc:`modules/Pvwattsv7`, :doc:`modules/Grid`, :doc:`modules/Singleowner`
 	* - PVWatts-Third Party
-	  - pvwattsv7, belpe, grid, utilityrate5, thirdpartyownership
+	  - :doc:`modules/Pvwattsv7`, :doc:`modules/Belpe`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/Thirdpartyownership`
 	* - Physical Trough IPH-LCOH Calculator
-	  - trough_physical_process_heat, iph_to_lcoefcr, lcoefcr
+	  - :doc:`modules/TroughPhysicalProcessHeat`, :doc:`modules/IphToLcoefcr`, :doc:`modules/Lcoefcr`
 	* - Physical Trough IPH-None
-	  - trough_physical_process_heat
+	  - :doc:`modules/TroughPhysicalProcessHeat`
 	* - Physical Trough-All Equity Partnership Flip
-	  - trough_physical, grid, equpartflip
+	  - :doc:`modules/TroughPhysical`, :doc:`modules/Grid`, :doc:`modules/Equpartflip`
 	* - Physical Trough-Commercial
-	  - trough_physical, grid, utilityrate5, cashloan
+	  - :doc:`modules/TroughPhysical`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/Cashloan`
 	* - Physical Trough-LCOE Calculator
-	  - trough_physical, grid, lcoefcr
+	  - :doc:`modules/TroughPhysical`, :doc:`modules/Grid`, :doc:`modules/Lcoefcr`
 	* - Physical Trough-Leveraged Partnership Flip
-	  - trough_physical, grid, levpartflip
+	  - :doc:`modules/TroughPhysical`, :doc:`modules/Grid`, :doc:`modules/Levpartflip`
 	* - Physical Trough-Merchant Plant
-	  - trough_physical, grid, merchantplant
+	  - :doc:`modules/TroughPhysical`, :doc:`modules/Grid`, :doc:`modules/Merchantplant`
 	* - Physical Trough-None
-	  - trough_physical, grid
+	  - :doc:`modules/TroughPhysical`, :doc:`modules/Grid`
 	* - Physical Trough-Sale Leaseback
-	  - trough_physical, grid, saleleaseback
+	  - :doc:`modules/TroughPhysical`, :doc:`modules/Grid`, :doc:`modules/Saleleaseback`
 	* - Physical Trough-Single Owner
-	  - trough_physical, grid, singleowner
+	  - :doc:`modules/TroughPhysical`, :doc:`modules/Grid`, :doc:`modules/Singleowner`
 	* - Solar Water Heating-Commercial
-	  - swh, utilityrate5, cashloan
+	  - :doc:`modules/Swh`, :doc:`modules/Utilityrate5`, :doc:`modules/Cashloan`
 	* - Solar Water Heating-LCOE Calculator
-	  - swh, lcoefcr
+	  - :doc:`modules/Swh`, :doc:`modules/Lcoefcr`
 	* - Solar Water Heating-None
-	  - swh
+	  - :doc:`modules/Swh`
 	* - Solar Water Heating-Residential
-	  - swh, belpe, utilityrate5, cashloan
+	  - :doc:`modules/Swh`, :doc:`modules/Belpe`, :doc:`modules/Utilityrate5`, :doc:`modules/Cashloan`
 	* - Wind Power-All Equity Partnership Flip
-	  - windpower, grid, equpartflip
+	  - :doc:`modules/Windpower`, :doc:`modules/Grid`, :doc:`modules/Equpartflip`
 	* - Wind Power-Commercial
-	  - windpower, grid, utilityrate5, cashloan
+	  - :doc:`modules/Windpower`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/Cashloan`
 	* - Wind Power-LCOE Calculator
-	  - windpower, grid, lcoefcr
+	  - :doc:`modules/Windpower`, :doc:`modules/Grid`, :doc:`modules/Lcoefcr`
 	* - Wind Power-Leveraged Partnership Flip
-	  - windpower, grid, levpartflip
+	  - :doc:`modules/Windpower`, :doc:`modules/Grid`, :doc:`modules/Levpartflip`
 	* - Wind Power-Merchant Plant
-	  - windpower, grid, merchantplant
+	  - :doc:`modules/Windpower`, :doc:`modules/Grid`, :doc:`modules/Merchantplant`
 	* - Wind Power-None
-	  - windpower, grid
+	  - :doc:`modules/Windpower`, :doc:`modules/Grid`
 	* - Wind Power-Residential
-	  - windpower, grid, utilityrate5, cashloan
+	  - :doc:`modules/Windpower`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/Cashloan`
 	* - Wind Power-Sale Leaseback
-	  - windpower, grid, saleleaseback
+	  - :doc:`modules/Windpower`, :doc:`modules/Grid`, :doc:`modules/Saleleaseback`
 	* - Wind Power-Single Owner
-	  - windpower, grid, singleowner
-
-
+	  - :doc:`modules/Windpower`, :doc:`modules/Grid`, :doc:`modules/Singleowner`
