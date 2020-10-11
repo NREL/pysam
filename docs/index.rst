@@ -24,7 +24,6 @@ application can be imported into PySAM.
 * **First steps**:
   :doc:`Installation and Import <GettingStarted>` |
   :doc:`Examples <Examples>`
-https://nrel-pysam.readthedocs.io/en/master/Configs.html
 
 
 .. toctree::
@@ -44,8 +43,11 @@ PySAM offers all the technology and financial models available in SAM as separat
 and how to chain them together to represent a specific configuration such as Distributed Wind or Single Owner PV + Battery.
 PySAM also includes tools that provide design and resource functionality.
 
-* **SAM Simulations**:
-  :doc:`Technology and financial Unit Modules <Models>` |
+* **Models**:
+  :doc:`Technology and financial Unit Modules <Models>`
+
+
+* **Simulations**:
   :doc:`Building up Simulations corresponding to SAM Configurations <Configs>` |
 
 
