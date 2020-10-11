@@ -13,6 +13,9 @@ SAM is a performance and financial model designed to facilitate decision making 
 
 `SAM <http://www.github.com/nrel/sam>`_ is open-source. PySAM provides a native Python interface for the models found in SAM Simulation Core, (`SSC <http://www.github.com/nrel/ssc>`_).
 
+PySAM enables developers to run the underlying modules that make up a simulation in SAM.
+A single simulation such as for a PV Battery Commercial case is process chaining together multiple unit modules.
+PySAM, and SAM's other software development kits, expose these unit modules so that they can be customized and embedded in software applications.
 
 Getting Started
 ------------------------------------------
@@ -22,11 +25,9 @@ energy power system simulation in a few steps following some examples. Or, take 
 application can be imported into PySAM.
 
 * **First steps**:
-  :doc:`Installation and Import <GettingStarted>`
-
-* **Creating models**
+  :doc:`Installation and Import <GettingStarted>` |
   :doc:`Examples <Examples>` |
-  :doc:`Importing a case from SAM <Import>`
+  :doc:`Webinars <https://sam.nrel.gov/software-development-kit-sdk/pysam.html>`
 
 
 .. toctree::
@@ -34,20 +35,20 @@ application can be imported into PySAM.
    :hidden:
    :caption: Getting Started
 
-   /GettingStarted
-   /Examples
-   /Import
-
 
 Models and Tools
 ------------------------------------------
 
-PySAM offers all the technology and financial models available in SAM as separate modules. Learn about individual models
-and how to chain models together to create a configuration. PySAM includes tools that provide design and resource functionality.
+PySAM offers all the technology and financial models available in SAM as separate unit modules. Learn about individual modules
+and how to chain them together to represent a specific configuration such as Distributed Wind or Single Owner PV + Battery.
+PySAM also includes tools that provide design and resource functionality.
 
-* **Technology and Financial Models**:
-  :doc:`Available models <Models>` |
-  :doc:`Configurations <Configs>` |
+* **Models**:
+  :doc:`Technology and financial Unit Modules <Models>`
+
+
+* **Simulations**:
+  :doc:`Building up Simulations corresponding to SAM Configurations <Configs>`
 
 
 * **Tools**:
@@ -59,10 +60,6 @@ and how to chain models together to create a configuration. PySAM includes tools
    :maxdepth: 2
    :hidden:
    :caption: Models and Tools
-
-   Models
-   Configs
-   Tools
 
 
 Release notes
