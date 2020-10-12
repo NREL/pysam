@@ -17,6 +17,21 @@ PySAM enables developers to run the underlying unit modules that make up a simul
 A single simulation may comprise a single module or a process chaining together multiple unit modules.
 PySAM exposes these unit modules in a native Python interface so that they can be customized and embedded in software applications.
 
+.. toctree::
+    :maxdepth: 2
+    :hidden:
+    :caption: Contents:
+
+    GettingStarted.rst
+    Examples.rst
+    Webinars.rst
+    Models.rst
+    Configs.rst
+    Import.rst
+    Tools.rst
+    PySSC.rst
+    Version.rst
+
 Getting Started
 ------------------------------------------
 
@@ -25,16 +40,9 @@ energy power system simulation in a few steps following some examples. Or, take 
 application can be imported into PySAM.
 
 * **First steps**:
-  :doc:`Installation and Import <GettingStarted>` |
+  :doc:`Installation <GettingStarted>` |
   :doc:`Examples <Examples>` |
   :doc:`Webinars <Webinars>`
-
-
-.. toctree::
-   :maxdepth: 2
-   :hidden:
-   :caption: Getting Started
-
 
 Models and Tools
 ------------------------------------------
@@ -48,7 +56,8 @@ PySAM also includes tools that provide design and resource functionality.
 
 
 * **Simulations**:
-  :doc:`Building up Simulations corresponding to SAM Configurations <Configs>`
+  :doc:`Building up Simulations corresponding to SAM Configurations <Configs>` |
+  :doc:`Importing a Simulation from SAM <Import>`
 
 
 * **Tools**:
@@ -56,23 +65,9 @@ PySAM also includes tools that provide design and resource functionality.
   :doc:`PySSC Wrapper <PySSC>`
 
 
-.. toctree::
-   :maxdepth: 2
-   :hidden:
-   :caption: Models and Tools
-
-
 Release notes
 --------------
 For information on versions, updates and matching SAM releases, please see `Release notes <https://github.com/NREL/pysam/blob/master/RELEASE.md>`_
 
 * **Version 2.0 and Upgrading from Older Versions**: Between major version changes, in addition to new features, modules and bug fixes, the group to which a variable belongs may change.
-
-
-.. toctree::
-   :maxdepth: 2
-   :hidden:
-   :caption: About Read the Docs
-
-   PySSC
 
