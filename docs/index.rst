@@ -30,7 +30,6 @@ PySAM exposes these unit modules in a native Python interface so that they can b
     Import.rst
     Tools.rst
     PySSC.rst
-    Version.rst
 
 Getting Started
 ------------------------------------------
