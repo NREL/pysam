@@ -23,6 +23,7 @@ PySAM exposes these unit modules in a native Python interface so that they can b
     :caption: Contents:
 
     GettingStarted.rst
+    Initialization.rst
     Examples.rst
     Webinars.rst
     Models.rst
@@ -30,7 +31,6 @@ PySAM exposes these unit modules in a native Python interface so that they can b
     Import.rst
     Tools.rst
     PySSC.rst
-    Version.rst
 
 Getting Started
 ------------------------------------------
@@ -41,6 +41,9 @@ application can be imported into PySAM.
 
 * **First steps**:
   :doc:`Installation <GettingStarted>` |
+  :doc:`Model Initialization <Initialization>`
+
+* **Tutorials**:
   :doc:`Examples <Examples>` |
   :doc:`Webinars <Webinars>`
 
