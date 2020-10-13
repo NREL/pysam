@@ -61,8 +61,8 @@ previously run modules.
 Execute the sequence of models
 =================================
 
-Downsteam models require upstream model outputs as inputs. Since the underlying data between `pv`, `ur` and `cl` are shared
-due to the `from_existing` function, the outputs of `pv` required as inputs to `ur` and `cl` will automatically be accessible to them.
+Downsteam models require upstream model outputs as inputs. Since the underlying data between ``pv``, ``ur`` and ``cl`` are shared
+due to the ``from_existing`` function, the outputs of ``pv`` required as inputs to ``ur`` and ``cl`` will automatically be accessible to them.
 To execute a model, use ``execute(verbosity)`` where 0 indicates minimal messages and 1 produces log messages.
 All outputs are available in the Outputs group of a PySAM class.
 
