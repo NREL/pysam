@@ -698,8 +698,8 @@ static PyMethodDef Sco2DesignCycleModule_methods[] = {
 		{"new",             Sco2DesignCycle_new,         METH_VARARGS,
 				PyDoc_STR("new() -> Sco2DesignCycle")},
 		{"default",             Sco2DesignCycle_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Sco2DesignCycle\n\nUse financial config-specific default attributes\n"
-				"")},
+				PyDoc_STR("default(config) -> Sco2DesignCycle\n\nUse default attributes\n"
+				"None")},
 		{"wrap",             Sco2DesignCycle_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Sco2DesignCycle\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   Sco2DesignCycle_from_existing,        METH_VARARGS,

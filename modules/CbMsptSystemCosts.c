@@ -1522,8 +1522,8 @@ static PyMethodDef CbMsptSystemCostsModule_methods[] = {
 		{"new",             CbMsptSystemCosts_new,         METH_VARARGS,
 				PyDoc_STR("new() -> CbMsptSystemCosts")},
 		{"default",             CbMsptSystemCosts_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> CbMsptSystemCosts\n\nUse financial config-specific default attributes\n"
-				"")},
+				PyDoc_STR("default(config) -> CbMsptSystemCosts\n\nUse default attributes\n"
+				"None")},
 		{"wrap",             CbMsptSystemCosts_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> CbMsptSystemCosts\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   CbMsptSystemCosts_from_existing,        METH_VARARGS,

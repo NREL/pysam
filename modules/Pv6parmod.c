@@ -1033,8 +1033,8 @@ static PyMethodDef Pv6parmodModule_methods[] = {
 		{"new",             Pv6parmod_new,         METH_VARARGS,
 				PyDoc_STR("new() -> Pv6parmod")},
 		{"default",             Pv6parmod_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Pv6parmod\n\nUse financial config-specific default attributes\n"
-				"")},
+				PyDoc_STR("default(config) -> Pv6parmod\n\nUse default attributes\n"
+				"None")},
 		{"wrap",             Pv6parmod_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Pv6parmod\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   Pv6parmod_from_existing,        METH_VARARGS,

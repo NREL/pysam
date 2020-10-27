@@ -13,12 +13,15 @@ class PVWatts(object):
 	beam = float
 	day = float
 	diffuse = float
+	dry_temperature = float
+	elevation = float
 	hour = float
 	lat = float
 	lon = float
 	minute = float
 	month = float
 	poa = float
+	pressure = float
 	tamb = float
 	tcell = float
 	time_step = float

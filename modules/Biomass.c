@@ -2657,8 +2657,8 @@ static PyMethodDef BiomassModule_methods[] = {
 		{"new",             Biomass_new,         METH_VARARGS,
 				PyDoc_STR("new() -> Biomass")},
 		{"default",             Biomass_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Biomass\n\nUse financial config-specific default attributes\n"
-				"config options:\n\n- \"BiopowerAllEquityPartnershipFlip\"\n- \"BiopowerLCOECalculator\"\n- \"BiopowerLeveragedPartnershipFlip\"\n- \"BiopowerMerchantPlant\"\n- \"BiopowerNone\"\n- \"BiopowerSaleLeaseback\"\n- \"BiopowerSingleOwner\"")},
+				PyDoc_STR("default(config) -> Biomass\n\nUse default attributes\n"
+				"`config` options:\n\n- \"BiopowerAllEquityPartnershipFlip\"\n- \"BiopowerLCOECalculator\"\n- \"BiopowerLeveragedPartnershipFlip\"\n- \"BiopowerMerchantPlant\"\n- \"BiopowerNone\"\n- \"BiopowerSaleLeaseback\"\n- \"BiopowerSingleOwner\"")},
 		{"wrap",             Biomass_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Biomass\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   Biomass_from_existing,        METH_VARARGS,

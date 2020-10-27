@@ -671,8 +671,8 @@ static PyMethodDef Sco2AirCoolerModule_methods[] = {
 		{"new",             Sco2AirCooler_new,         METH_VARARGS,
 				PyDoc_STR("new() -> Sco2AirCooler")},
 		{"default",             Sco2AirCooler_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Sco2AirCooler\n\nUse financial config-specific default attributes\n"
-				"")},
+				PyDoc_STR("default(config) -> Sco2AirCooler\n\nUse default attributes\n"
+				"None")},
 		{"wrap",             Sco2AirCooler_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Sco2AirCooler\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   Sco2AirCooler_from_existing,        METH_VARARGS,

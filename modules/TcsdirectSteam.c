@@ -4516,8 +4516,8 @@ static PyMethodDef TcsdirectSteamModule_methods[] = {
 		{"new",             TcsdirectSteam_new,         METH_VARARGS,
 				PyDoc_STR("new() -> TcsdirectSteam")},
 		{"default",             TcsdirectSteam_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> TcsdirectSteam\n\nUse financial config-specific default attributes\n"
-				"config options:\n\n- \"DSPTAllEquityPartnershipFlip\"\n- \"DSPTLeveragedPartnershipFlip\"\n- \"DSPTMerchantPlant\"\n- \"DSPTSaleLeaseback\"\n- \"DSPTSingleOwner\"")},
+				PyDoc_STR("default(config) -> TcsdirectSteam\n\nUse default attributes\n"
+				"`config` options:\n\n- \"DSPTAllEquityPartnershipFlip\"\n- \"DSPTLeveragedPartnershipFlip\"\n- \"DSPTMerchantPlant\"\n- \"DSPTSaleLeaseback\"\n- \"DSPTSingleOwner\"")},
 		{"wrap",             TcsdirectSteam_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> TcsdirectSteam\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   TcsdirectSteam_from_existing,        METH_VARARGS,

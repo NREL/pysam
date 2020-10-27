@@ -2342,8 +2342,8 @@ static PyMethodDef TcsgenericSolarModule_methods[] = {
 		{"new",             TcsgenericSolar_new,         METH_VARARGS,
 				PyDoc_STR("new() -> TcsgenericSolar")},
 		{"default",             TcsgenericSolar_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> TcsgenericSolar\n\nUse financial config-specific default attributes\n"
-				"config options:\n\n- \"GenericCSPSystemAllEquityPartnershipFlip\"\n- \"GenericCSPSystemCommercial\"\n- \"GenericCSPSystemLCOECalculator\"\n- \"GenericCSPSystemLeveragedPartnershipFlip\"\n- \"GenericCSPSystemMerchantPlant\"\n- \"GenericCSPSystemNone\"\n- \"GenericCSPSystemSaleLeaseback\"\n- \"GenericCSPSystemSingleOwner\"")},
+				PyDoc_STR("default(config) -> TcsgenericSolar\n\nUse default attributes\n"
+				"`config` options:\n\n- \"GenericCSPSystemAllEquityPartnershipFlip\"\n- \"GenericCSPSystemCommercial\"\n- \"GenericCSPSystemLCOECalculator\"\n- \"GenericCSPSystemLeveragedPartnershipFlip\"\n- \"GenericCSPSystemMerchantPlant\"\n- \"GenericCSPSystemNone\"\n- \"GenericCSPSystemSaleLeaseback\"\n- \"GenericCSPSystemSingleOwner\"")},
 		{"wrap",             TcsgenericSolar_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> TcsgenericSolar\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   TcsgenericSolar_from_existing,        METH_VARARGS,

@@ -506,8 +506,8 @@ static PyMethodDef IphToLcoefcrModule_methods[] = {
 		{"new",             IphToLcoefcr_new,         METH_VARARGS,
 				PyDoc_STR("new() -> IphToLcoefcr")},
 		{"default",             IphToLcoefcr_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> IphToLcoefcr\n\nUse financial config-specific default attributes\n"
-				"config options:\n\n- \"DSGLIPHLCOHCalculator\"\n- \"PhysicalTroughIPHLCOHCalculator\"")},
+				PyDoc_STR("default(config) -> IphToLcoefcr\n\nUse default attributes\n"
+				"`config` options:\n\n- \"DSGLIPHLCOHCalculator\"\n- \"PhysicalTroughIPHLCOHCalculator\"")},
 		{"wrap",             IphToLcoefcr_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> IphToLcoefcr\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   IphToLcoefcr_from_existing,        METH_VARARGS,

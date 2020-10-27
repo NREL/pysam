@@ -495,7 +495,7 @@ static PyGetSetDef FinancialParameters_getset[] = {
 	PyDoc_STR("*float*: Analyis period [years]\n\n*Constraints*: INTEGER,MIN=0,MAX=50\n\n*Required*: If not provided, assumed to be 30"),
  	NULL},
 {"construction_financing_cost", (getter)FinancialParameters_get_construction_financing_cost,(setter)FinancialParameters_set_construction_financing_cost,
-	PyDoc_STR("*float*: Construction financing total [$]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - battery_per_kWh\n\t - total_installed_cost\n"),
+	PyDoc_STR("*float*: Construction financing total [$]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - total_installed_cost\n"),
  	NULL},
 {"cost_debt_closing", (getter)FinancialParameters_get_cost_debt_closing,(setter)FinancialParameters_set_cost_debt_closing,
 	PyDoc_STR("*float*: Debt closing cost [$]\n\n*Constraints*: MIN=0\n\n*Required*: If not provided, assumed to be 250000"),
@@ -588,7 +588,7 @@ static PyGetSetDef FinancialParameters_getset[] = {
 	PyDoc_STR("*sequence*: State income tax rate [%]\n\n*Required*: True"),
  	NULL},
 {"system_capacity", (getter)FinancialParameters_get_system_capacity,(setter)FinancialParameters_set_system_capacity,
-	PyDoc_STR("*float*: System nameplate capacity [kW]\n\n*Constraints*: POSITIVE\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - construction_financing_cost\n\t - cp_system_nameplate\n\t - total_installed_cost\n"),
+	PyDoc_STR("*float*: System nameplate capacity [kW]\n\n*Constraints*: POSITIVE\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - cp_system_nameplate\n"),
  	NULL},
 {"system_heat_rate", (getter)FinancialParameters_get_system_heat_rate,(setter)FinancialParameters_set_system_heat_rate,
 	PyDoc_STR("*float*: System heat rate [MMBTus/MWh]\n\n*Constraints*: MIN=0\n\n*Required*: If not provided, assumed to be 0.0"),
@@ -1225,7 +1225,7 @@ static PyGetSetDef SystemCosts_getset[] = {
 	PyDoc_STR("*float*: Recapitalization expenses [0/1]\n\n*Options*: 0=None,1=Recapitalize\n\n*Constraints*: INTEGER,MIN=0\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"total_installed_cost", (getter)SystemCosts_get_total_installed_cost,(setter)SystemCosts_set_total_installed_cost,
-	PyDoc_STR("*float*: Installed cost [$]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - construction_financing_cost\n\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - battery_per_kWh\n"),
+	PyDoc_STR("*float*: Installed cost [$]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - construction_financing_cost\n"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -4250,15 +4250,15 @@ BatterySystem_set_batt_replacement_option(VarGroupObject *self, PyObject *value,
 }
 
 static PyObject *
-BatterySystem_get_batt_replacement_schedule(VarGroupObject *self, void *closure)
+BatterySystem_get_batt_replacement_schedule_percent(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Merchantplant_BatterySystem_batt_replacement_schedule_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Merchantplant_BatterySystem_batt_replacement_schedule_percent_aget, self->data_ptr);
 }
 
 static int
-BatterySystem_set_batt_replacement_schedule(VarGroupObject *self, PyObject *value, void *closure)
+BatterySystem_set_batt_replacement_schedule_percent(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_Merchantplant_BatterySystem_batt_replacement_schedule_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Merchantplant_BatterySystem_batt_replacement_schedule_percent_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -4302,7 +4302,7 @@ static PyGetSetDef BatterySystem_getset[] = {
 	PyDoc_STR("*sequence*: Battery bank replacements per year [number/year]"),
  	NULL},
 {"batt_computed_bank_capacity", (getter)BatterySystem_get_batt_computed_bank_capacity,(setter)BatterySystem_set_batt_computed_bank_capacity,
-	PyDoc_STR("*float*: Battery bank capacity [kWh]\n\n*Required*: If not provided, assumed to be 0.0\n\n*Changes to this variable may require updating the values of the following*: \n\t - construction_financing_cost\n\t - cp_battery_nameplate\n\t - total_installed_cost\n"),
+	PyDoc_STR("*float*: Battery bank capacity [kWh]\n\n*Required*: If not provided, assumed to be 0.0\n\n*Changes to this variable may require updating the values of the following*: \n\t - cp_battery_nameplate\n"),
  	NULL},
 {"batt_meter_position", (getter)BatterySystem_get_batt_meter_position,(setter)BatterySystem_set_batt_meter_position,
 	PyDoc_STR("*float*: Position of battery relative to electric meter"),
@@ -4310,11 +4310,11 @@ static PyGetSetDef BatterySystem_getset[] = {
 {"batt_replacement_option", (getter)BatterySystem_get_batt_replacement_option,(setter)BatterySystem_set_batt_replacement_option,
 	PyDoc_STR("*float*: Enable battery replacement? [0=none,1=capacity based,2=user schedule]\n\n*Constraints*: INTEGER,MIN=0,MAX=2\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
-{"batt_replacement_schedule", (getter)BatterySystem_get_batt_replacement_schedule,(setter)BatterySystem_set_batt_replacement_schedule,
-	PyDoc_STR("*sequence*: Battery bank replacements per year (user specified) [number/year]"),
+{"batt_replacement_schedule_percent", (getter)BatterySystem_get_batt_replacement_schedule_percent,(setter)BatterySystem_set_batt_replacement_schedule_percent,
+	PyDoc_STR("*sequence*: Percentage of battery capacity to replace in each year [%]\n\n*Options*: length <= analysis_period"),
  	NULL},
 {"battery_per_kWh", (getter)BatterySystem_get_battery_per_kWh,(setter)BatterySystem_set_battery_per_kWh,
-	PyDoc_STR("*float*: Battery cost [$/kWh]\n\n*Required*: If not provided, assumed to be 0.0\n\n*Changes to this variable may require updating the values of the following*: \n\t - construction_financing_cost\n\t - total_installed_cost\n"),
+	PyDoc_STR("*float*: Battery cost [$/kWh]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
 {"en_batt", (getter)BatterySystem_get_en_batt,(setter)BatterySystem_set_en_batt,
 	PyDoc_STR("*float*: Enable battery storage model [0/1]\n\n*Required*: If not provided, assumed to be 0"),
@@ -4495,7 +4495,7 @@ static PyGetSetDef SystemOutput_getset[] = {
 	PyDoc_STR("*sequence*: Power generated by renewable resource [kW]\n\n*Required*: True"),
  	NULL},
 {"system_capacity", (getter)SystemOutput_get_system_capacity,(setter)SystemOutput_set_system_capacity,
-	PyDoc_STR("*float*: System nameplate capacity [kW]\n\n*Constraints*: MIN=1e-3\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - construction_financing_cost\n\t - cp_system_nameplate\n\t - total_installed_cost\n"),
+	PyDoc_STR("*float*: System nameplate capacity [kW]\n\n*Constraints*: MIN=1e-3\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - cp_system_nameplate\n"),
  	NULL},
 {"system_pre_curtailment_kwac", (getter)SystemOutput_get_system_pre_curtailment_kwac,(setter)SystemOutput_set_system_pre_curtailment_kwac,
 	PyDoc_STR("*sequence*: System power before grid curtailment [kW]\n\n*Info*: System generation"),
@@ -10043,8 +10043,8 @@ static PyMethodDef MerchantplantModule_methods[] = {
 		{"new",             Merchantplant_new,         METH_VARARGS,
 				PyDoc_STR("new() -> Merchantplant")},
 		{"default",             Merchantplant_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Merchantplant\n\nUse financial config-specific default attributes\n"
-				"config options:\n\n- \"BiopowerMerchantPlant\"\n- \"DSLFMerchantPlant\"\n- \"DSPTMerchantPlant\"\n- \"DishStirlingMerchantPlant\"\n- \"EmpiricalTroughMerchantPlant\"\n- \"FlatPlatePVMerchantPlant\"\n- \"GenericBatteryMerchantPlant\"\n- \"GenericCSPSystemMerchantPlant\"\n- \"GenericSystemMerchantPlant\"\n- \"GeothermalPowerMerchantPlant\"\n- \"HighXConcentratingPVMerchantPlant\"\n- \"MSLFMerchantPlant\"\n- \"MSPTMerchantPlant\"\n- \"PVBatteryMerchantPlant\"\n- \"PVWattsMerchantPlant\"\n- \"PhysicalTroughMerchantPlant\"\n- \"WindPowerMerchantPlant\"")},
+				PyDoc_STR("default(config) -> Merchantplant\n\nUse default attributes\n"
+				"`config` options:\n\n- \"BiopowerMerchantPlant\"\n- \"DSLFMerchantPlant\"\n- \"DSPTMerchantPlant\"\n- \"DishStirlingMerchantPlant\"\n- \"EmpiricalTroughMerchantPlant\"\n- \"FlatPlatePVMerchantPlant\"\n- \"GenericBatteryMerchantPlant\"\n- \"GenericCSPSystemMerchantPlant\"\n- \"GenericSystemMerchantPlant\"\n- \"GeothermalPowerMerchantPlant\"\n- \"HighXConcentratingPVMerchantPlant\"\n- \"MSLFMerchantPlant\"\n- \"MSPTMerchantPlant\"\n- \"PVBatteryMerchantPlant\"\n- \"PVWattsMerchantPlant\"\n- \"PhysicalTroughMerchantPlant\"\n- \"WindPowerMerchantPlant\"")},
 		{"wrap",             Merchantplant_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Merchantplant\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   Merchantplant_from_existing,        METH_VARARGS,

@@ -14,9 +14,12 @@ class POACalibrate(object):
 	array_tilt = float
 	beam = tuple
 	diffuse = tuple
+	dry_temperature = float
+	elevation = float
 	latitude = float
 	longitude = float
 	poa = tuple
+	pressure = float
 	time_zone = float
 	year = float
 

@@ -626,8 +626,8 @@ static PyMethodDef PvGetShadeLossMppModule_methods[] = {
 		{"new",             PvGetShadeLossMpp_new,         METH_VARARGS,
 				PyDoc_STR("new() -> PvGetShadeLossMpp")},
 		{"default",             PvGetShadeLossMpp_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> PvGetShadeLossMpp\n\nUse financial config-specific default attributes\n"
-				"")},
+				PyDoc_STR("default(config) -> PvGetShadeLossMpp\n\nUse default attributes\n"
+				"None")},
 		{"wrap",             PvGetShadeLossMpp_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> PvGetShadeLossMpp\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   PvGetShadeLossMpp_from_existing,        METH_VARARGS,

@@ -5588,8 +5588,8 @@ static PyMethodDef TroughPhysicalModule_methods[] = {
 		{"new",             TroughPhysical_new,         METH_VARARGS,
 				PyDoc_STR("new() -> TroughPhysical")},
 		{"default",             TroughPhysical_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> TroughPhysical\n\nUse financial config-specific default attributes\n"
-				"config options:\n\n- \"PhysicalTroughAllEquityPartnershipFlip\"\n- \"PhysicalTroughCommercial\"\n- \"PhysicalTroughLCOECalculator\"\n- \"PhysicalTroughLeveragedPartnershipFlip\"\n- \"PhysicalTroughMerchantPlant\"\n- \"PhysicalTroughNone\"\n- \"PhysicalTroughSaleLeaseback\"\n- \"PhysicalTroughSingleOwner\"")},
+				PyDoc_STR("default(config) -> TroughPhysical\n\nUse default attributes\n"
+				"`config` options:\n\n- \"PhysicalTroughAllEquityPartnershipFlip\"\n- \"PhysicalTroughCommercial\"\n- \"PhysicalTroughLCOECalculator\"\n- \"PhysicalTroughLeveragedPartnershipFlip\"\n- \"PhysicalTroughMerchantPlant\"\n- \"PhysicalTroughNone\"\n- \"PhysicalTroughSaleLeaseback\"\n- \"PhysicalTroughSingleOwner\"")},
 		{"wrap",             TroughPhysical_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> TroughPhysical\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   TroughPhysical_from_existing,        METH_VARARGS,

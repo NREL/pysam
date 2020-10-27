@@ -886,18 +886,6 @@ ParamsPack_set_replacement_option(VarGroupObject *self, PyObject *value, void *c
 }
 
 static PyObject *
-ParamsPack_get_replacement_schedule(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_BatteryStateful_ParamsPack_replacement_schedule_aget, self->data_ptr);
-}
-
-static int
-ParamsPack_set_replacement_schedule(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_BatteryStateful_ParamsPack_replacement_schedule_aset, self->data_ptr);
-}
-
-static PyObject *
 ParamsPack_get_replacement_schedule_percent(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_BatteryStateful_ParamsPack_replacement_schedule_percent_aget, self->data_ptr);
@@ -972,9 +960,6 @@ static PyGetSetDef ParamsPack_getset[] = {
  	NULL},
 {"replacement_option", (getter)ParamsPack_get_replacement_option,(setter)ParamsPack_set_replacement_option,
 	PyDoc_STR("*float*: Replacements: none (0), by capacity (1), or schedule (2) [0=none,1=capacity limit,2=yearly schedule]\n\n*Constraints*: INTEGER,MIN=0,MAX=2\n\n*Required*: If not provided, assumed to be 0"),
- 	NULL},
-{"replacement_schedule", (getter)ParamsPack_get_replacement_schedule,(setter)ParamsPack_set_replacement_schedule,
-	PyDoc_STR("*sequence*: Battery bank number of replacements in each year [[number/year]]\n\n*Options*: length <= analysis_period\n\n*Required*: True if replacement_option=2"),
  	NULL},
 {"replacement_schedule_percent", (getter)ParamsPack_get_replacement_schedule_percent,(setter)ParamsPack_set_replacement_schedule_percent,
 	PyDoc_STR("*sequence*: Percentage of battery capacity to replace in each year [[%/year]]\n\n*Options*: length <= analysis_period\n\n*Required*: True if replacement_option=2"),
@@ -2196,8 +2181,8 @@ static PyMethodDef BatteryStatefulModule_methods[] = {
 		{"new",             BatteryStateful_new,         METH_VARARGS,
 				PyDoc_STR("new() -> BatteryStateful")},
 		{"default",             BatteryStateful_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> BatteryStateful\n\nUse financial config-specific default attributes\n"
-				"")},
+				PyDoc_STR("default(config) -> BatteryStateful\n\nUse default attributes\n"
+				"`config` options:\n\n- \"LFPGraphite\"\n- \"LeadAcid\"\n- \"NMCGraphite\"")},
 		{"wrap",             BatteryStateful_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> BatteryStateful\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   BatteryStateful_from_existing,        METH_VARARGS,

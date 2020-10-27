@@ -2727,8 +2727,8 @@ static PyMethodDef TcsdishModule_methods[] = {
 		{"new",             Tcsdish_new,         METH_VARARGS,
 				PyDoc_STR("new() -> Tcsdish")},
 		{"default",             Tcsdish_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Tcsdish\n\nUse financial config-specific default attributes\n"
-				"config options:\n\n- \"DishStirlingAllEquityPartnershipFlip\"\n- \"DishStirlingCommercial\"\n- \"DishStirlingLCOECalculator\"\n- \"DishStirlingLeveragedPartnershipFlip\"\n- \"DishStirlingMerchantPlant\"\n- \"DishStirlingNone\"\n- \"DishStirlingSaleLeaseback\"\n- \"DishStirlingSingleOwner\"")},
+				PyDoc_STR("default(config) -> Tcsdish\n\nUse default attributes\n"
+				"`config` options:\n\n- \"DishStirlingAllEquityPartnershipFlip\"\n- \"DishStirlingCommercial\"\n- \"DishStirlingLCOECalculator\"\n- \"DishStirlingLeveragedPartnershipFlip\"\n- \"DishStirlingMerchantPlant\"\n- \"DishStirlingNone\"\n- \"DishStirlingSaleLeaseback\"\n- \"DishStirlingSingleOwner\"")},
 		{"wrap",             Tcsdish_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Tcsdish\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   Tcsdish_from_existing,        METH_VARARGS,

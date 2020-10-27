@@ -584,8 +584,8 @@ static PyMethodDef UiUdpcChecksModule_methods[] = {
 		{"new",             UiUdpcChecks_new,         METH_VARARGS,
 				PyDoc_STR("new() -> UiUdpcChecks")},
 		{"default",             UiUdpcChecks_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> UiUdpcChecks\n\nUse financial config-specific default attributes\n"
-				"")},
+				PyDoc_STR("default(config) -> UiUdpcChecks\n\nUse default attributes\n"
+				"None")},
 		{"wrap",             UiUdpcChecks_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> UiUdpcChecks\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   UiUdpcChecks_from_existing,        METH_VARARGS,

@@ -3951,8 +3951,8 @@ static PyMethodDef Sco2CspSystemModule_methods[] = {
 		{"new",             Sco2CspSystem_new,         METH_VARARGS,
 				PyDoc_STR("new() -> Sco2CspSystem")},
 		{"default",             Sco2CspSystem_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Sco2CspSystem\n\nUse financial config-specific default attributes\n"
-				"")},
+				PyDoc_STR("default(config) -> Sco2CspSystem\n\nUse default attributes\n"
+				"None")},
 		{"wrap",             Sco2CspSystem_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Sco2CspSystem\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   Sco2CspSystem_from_existing,        METH_VARARGS,

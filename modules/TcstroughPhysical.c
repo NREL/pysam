@@ -5356,8 +5356,8 @@ static PyMethodDef TcstroughPhysicalModule_methods[] = {
 		{"new",             TcstroughPhysical_new,         METH_VARARGS,
 				PyDoc_STR("new() -> TcstroughPhysical")},
 		{"default",             TcstroughPhysical_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> TcstroughPhysical\n\nUse financial config-specific default attributes\n"
-				"")},
+				PyDoc_STR("default(config) -> TcstroughPhysical\n\nUse default attributes\n"
+				"None")},
 		{"wrap",             TcstroughPhysical_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> TcstroughPhysical\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   TcstroughPhysical_from_existing,        METH_VARARGS,

@@ -4560,8 +4560,8 @@ static PyMethodDef TroughPhysicalProcessHeatModule_methods[] = {
 		{"new",             TroughPhysicalProcessHeat_new,         METH_VARARGS,
 				PyDoc_STR("new() -> TroughPhysicalProcessHeat")},
 		{"default",             TroughPhysicalProcessHeat_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> TroughPhysicalProcessHeat\n\nUse financial config-specific default attributes\n"
-				"config options:\n\n- \"PhysicalTroughIPHLCOHCalculator\"\n- \"PhysicalTroughIPHNone\"")},
+				PyDoc_STR("default(config) -> TroughPhysicalProcessHeat\n\nUse default attributes\n"
+				"`config` options:\n\n- \"PhysicalTroughIPHLCOHCalculator\"\n- \"PhysicalTroughIPHNone\"")},
 		{"wrap",             TroughPhysicalProcessHeat_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> TroughPhysicalProcessHeat\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   TroughPhysicalProcessHeat_from_existing,        METH_VARARGS,

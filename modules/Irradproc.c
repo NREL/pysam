@@ -143,6 +143,30 @@ IrradianceProcessor_set_diffuse(VarGroupObject *self, PyObject *value, void *clo
 }
 
 static PyObject *
+IrradianceProcessor_get_dry_temperature(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Irradproc_IrradianceProcessor_dry_temperature_nget, self->data_ptr);
+}
+
+static int
+IrradianceProcessor_set_dry_temperature(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Irradproc_IrradianceProcessor_dry_temperature_nset, self->data_ptr);
+}
+
+static PyObject *
+IrradianceProcessor_get_elevation(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Irradproc_IrradianceProcessor_elevation_nget, self->data_ptr);
+}
+
+static int
+IrradianceProcessor_set_elevation(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Irradproc_IrradianceProcessor_elevation_nset, self->data_ptr);
+}
+
+static PyObject *
 IrradianceProcessor_get_gcr(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Irradproc_IrradianceProcessor_gcr_nget, self->data_ptr);
@@ -239,6 +263,18 @@ IrradianceProcessor_set_month(VarGroupObject *self, PyObject *value, void *closu
 }
 
 static PyObject *
+IrradianceProcessor_get_pressure(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Irradproc_IrradianceProcessor_pressure_nget, self->data_ptr);
+}
+
+static int
+IrradianceProcessor_set_pressure(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Irradproc_IrradianceProcessor_pressure_nset, self->data_ptr);
+}
+
+static PyObject *
 IrradianceProcessor_get_rotlim(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Irradproc_IrradianceProcessor_rotlim_nget, self->data_ptr);
@@ -332,6 +368,12 @@ static PyGetSetDef IrradianceProcessor_getset[] = {
 {"diffuse", (getter)IrradianceProcessor_get_diffuse,(setter)IrradianceProcessor_set_diffuse,
 	PyDoc_STR("*sequence*: Diffuse horizontal irradiance [W/m2]\n\n*Constraints*: LENGTH_EQUAL=beam\n\n*Required*: irrad_mode~1"),
  	NULL},
+{"dry_temperature", (getter)IrradianceProcessor_get_dry_temperature,(setter)IrradianceProcessor_set_dry_temperature,
+	PyDoc_STR("*float*: Dry Temperature [°C]\n\n*Required*: False"),
+ 	NULL},
+{"elevation", (getter)IrradianceProcessor_get_elevation,(setter)IrradianceProcessor_set_elevation,
+	PyDoc_STR("*float*: Elevation [m]\n\n*Required*: False"),
+ 	NULL},
 {"gcr", (getter)IrradianceProcessor_get_gcr,(setter)IrradianceProcessor_set_gcr,
 	PyDoc_STR("*float*: Ground coverage ratio [0..1]\n\n*Constraints*: MIN=0,MAX=1\n\n*Required*: True if backtrack=1"),
  	NULL},
@@ -355,6 +397,9 @@ static PyGetSetDef IrradianceProcessor_getset[] = {
  	NULL},
 {"month", (getter)IrradianceProcessor_get_month,(setter)IrradianceProcessor_set_month,
 	PyDoc_STR("*sequence*: Month [mn]\n\n*Info*: 1-12\n\n*Constraints*: LENGTH_EQUAL=beam\n\n*Required*: True"),
+ 	NULL},
+{"pressure", (getter)IrradianceProcessor_get_pressure,(setter)IrradianceProcessor_set_pressure,
+	PyDoc_STR("*float*: Pressure [mbars]\n\n*Required*: False"),
  	NULL},
 {"rotlim", (getter)IrradianceProcessor_get_rotlim,(setter)IrradianceProcessor_set_rotlim,
 	PyDoc_STR("*float*: Rotational limit on tracker [deg]\n\n*Constraints*: MIN=0,MAX=90\n\n*Required*: If not provided, assumed to be 45"),
@@ -911,8 +956,8 @@ static PyMethodDef IrradprocModule_methods[] = {
 		{"new",             Irradproc_new,         METH_VARARGS,
 				PyDoc_STR("new() -> Irradproc")},
 		{"default",             Irradproc_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Irradproc\n\nUse financial config-specific default attributes\n"
-				"")},
+				PyDoc_STR("default(config) -> Irradproc\n\nUse default attributes\n"
+				"None")},
 		{"wrap",             Irradproc_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Irradproc\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   Irradproc_from_existing,        METH_VARARGS,

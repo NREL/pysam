@@ -1294,8 +1294,8 @@ static PyMethodDef Pvwattsv1Module_methods[] = {
 		{"new",             Pvwattsv1_new,         METH_VARARGS,
 				PyDoc_STR("new() -> Pvwattsv1")},
 		{"default",             Pvwattsv1_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Pvwattsv1\n\nUse financial config-specific default attributes\n"
-				"")},
+				PyDoc_STR("default(config) -> Pvwattsv1\n\nUse default attributes\n"
+				"None")},
 		{"wrap",             Pvwattsv1_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Pvwattsv1\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   Pvwattsv1_from_existing,        METH_VARARGS,

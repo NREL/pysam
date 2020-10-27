@@ -647,8 +647,8 @@ static PyMethodDef MhkWaveModule_methods[] = {
 		{"new",             MhkWave_new,         METH_VARARGS,
 				PyDoc_STR("new() -> MhkWave")},
 		{"default",             MhkWave_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> MhkWave\n\nUse financial config-specific default attributes\n"
-				"config options:\n\n- \"MEwaveLCOECalculator\"")},
+				PyDoc_STR("default(config) -> MhkWave\n\nUse default attributes\n"
+				"`config` options:\n\n- \"MEwaveLCOECalculator\"")},
 		{"wrap",             MhkWave_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> MhkWave\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   MhkWave_from_existing,        METH_VARARGS,

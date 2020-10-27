@@ -1521,8 +1521,8 @@ static PyMethodDef BattwattsModule_methods[] = {
 		{"new",             Battwatts_new,         METH_VARARGS,
 				PyDoc_STR("new() -> Battwatts")},
 		{"default",             Battwatts_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Battwatts\n\nUse financial config-specific default attributes\n"
-				"config options:\n\n- \"PVWattsBatteryCommercial\"\n- \"PVWattsBatteryHostDeveloper\"\n- \"PVWattsBatteryResidential\"\n- \"PVWattsBatteryThirdParty\"")},
+				PyDoc_STR("default(config) -> Battwatts\n\nUse default attributes\n"
+				"`config` options:\n\n- \"PVWattsBatteryCommercial\"\n- \"PVWattsBatteryHostDeveloper\"\n- \"PVWattsBatteryResidential\"\n- \"PVWattsBatteryThirdParty\"")},
 		{"wrap",             Battwatts_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Battwatts\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   Battwatts_from_existing,        METH_VARARGS,

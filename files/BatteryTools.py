@@ -172,7 +172,7 @@ def battery_model_sizing(model, desired_power, desired_capacity, desired_voltage
     """
     Modifies model with new sizing
 
-    :param model: PySAM.StandAloneBattery model
+    :param model: PySAM.Battery model
     :param desired_power: float
         kWAC if AC-connected, kWDC otherwise
     :param desired_capacity: float

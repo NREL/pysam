@@ -617,8 +617,8 @@ static PyMethodDef WaveFileReaderModule_methods[] = {
 		{"new",             WaveFileReader_new,         METH_VARARGS,
 				PyDoc_STR("new() -> WaveFileReader")},
 		{"default",             WaveFileReader_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> WaveFileReader\n\nUse financial config-specific default attributes\n"
-				"config options:\n\n- \"MEwaveLCOECalculator\"")},
+				PyDoc_STR("default(config) -> WaveFileReader\n\nUse default attributes\n"
+				"`config` options:\n\n- \"MEwaveLCOECalculator\"")},
 		{"wrap",             WaveFileReader_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> WaveFileReader\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   WaveFileReader_from_existing,        METH_VARARGS,

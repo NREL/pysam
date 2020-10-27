@@ -1,7 +1,7 @@
 import pytest
 
 import PySAM.BatteryTools as BatteryTools
-import PySAM.StandAloneBattery as batt
+import PySAM.Battery as batt
 
 
 def test_leadacid():

@@ -7825,8 +7825,8 @@ static PyMethodDef TcsmoltenSaltModule_methods[] = {
 		{"new",             TcsmoltenSalt_new,         METH_VARARGS,
 				PyDoc_STR("new() -> TcsmoltenSalt")},
 		{"default",             TcsmoltenSalt_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> TcsmoltenSalt\n\nUse financial config-specific default attributes\n"
-				"config options:\n\n- \"MSPTAllEquityPartnershipFlip\"\n- \"MSPTLeveragedPartnershipFlip\"\n- \"MSPTMerchantPlant\"\n- \"MSPTSaleLeaseback\"\n- \"MSPTSingleOwner\"")},
+				PyDoc_STR("default(config) -> TcsmoltenSalt\n\nUse default attributes\n"
+				"`config` options:\n\n- \"MSPTAllEquityPartnershipFlip\"\n- \"MSPTLeveragedPartnershipFlip\"\n- \"MSPTMerchantPlant\"\n- \"MSPTSaleLeaseback\"\n- \"MSPTSingleOwner\"")},
 		{"wrap",             TcsmoltenSalt_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> TcsmoltenSalt\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   TcsmoltenSalt_from_existing,        METH_VARARGS,

@@ -827,8 +827,8 @@ static PyMethodDef WindcsmModule_methods[] = {
 		{"new",             Windcsm_new,         METH_VARARGS,
 				PyDoc_STR("new() -> Windcsm")},
 		{"default",             Windcsm_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Windcsm\n\nUse financial config-specific default attributes\n"
-				"")},
+				PyDoc_STR("default(config) -> Windcsm\n\nUse default attributes\n"
+				"None")},
 		{"wrap",             Windcsm_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Windcsm\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   Windcsm_from_existing,        METH_VARARGS,

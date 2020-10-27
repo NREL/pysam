@@ -5,15 +5,15 @@ Any list of floats with length analysis_period * steps_in_year can be used for d
 This example requires a typical model year (tmy) weather file, which can be downloaded using the SAM GUI
 
 Additional financial models, inputs, and outputs can be found at:
-* PV: https://nrel-pysam.readthedocs.io/en/2.0.2/modules/Pvsamv1.html
-* Battery: https://nrel-pysam.readthedocs.io/en/2.0.2/modules/StandAloneBattery.html
+* PV: https://nrel-pysam.readthedocs.io/en/master/modules/Pvsamv1.html
+* Battery: https://nrel-pysam.readthedocs.io/en/master/modules/Battery.html
 
-Most recently tested against PySAM 2.0.2
+Most recently tested against PySAM 2.2
 
 @author: brtietz
 """
 
-import PySAM.StandAloneBattery as battery_model
+import PySAM.Battery as battery_model
 import PySAM.Pvsamv1 as pvsam
 from PySAM.PySSC import *
 
@@ -25,7 +25,7 @@ days_in_year = 365
 # Create the detailed residential pv model using PySAM's defaults
 system_model = pvsam.default("FlatPlatePVResidential")
 # Create the battery model based on the PV defaults
-battery = battery_model.from_existing(system_model, "BatteryNone")
+battery = battery_model.from_existing(system_model, "GenericBatteryResidential")
 
 # Default model does not include a weather file, so set that based on the command line path
 system_model.SolarResource.solar_resource_file = weather_file
