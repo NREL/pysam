@@ -5,6 +5,22 @@ import PySAM.BatteryStateful as BattStfl
 
 
 def battery_model_sizing(model, desired_power, desired_capacity, desired_voltage, size_by_ac_not_dc=None):
+    """
+    Sizes the battery model using its current configuration such as chemistry, cell properties, etc
+    and modifies the model's power, capacity and voltage without changing its fundamental properties
+
+    :param model: PySAM.Battery.Battery or PySAM.BatteryStateful.BatteryStateful
+    :param desired_power: float
+        Battery: kWAC if AC-connected, kWDC otherwise
+        BatteryStateful: battery kWDC
+    :param desired_capacity: float
+        Battery: kWhAC if AC-connected, kWhDC otherwise
+        BatteryStateful: battery kWhDC
+    :param desired_voltage: float
+        volts
+    :param size_by_ac_not_dc: optional bool
+        Sizes for power and capacity are on AC side not DC side of battery-inverter regardless of connection type
+    """
     if type(model) == Batt.Battery:
         size_battery(model, desired_power, desired_capacity, desired_voltage, size_by_ac_not_dc)
     elif type(model) == BattStfl.BatteryStateful:
@@ -14,6 +30,13 @@ def battery_model_sizing(model, desired_power, desired_capacity, desired_voltage
 
 
 def battery_model_change_chemistry(model, chem):
+    """
+    Changes the chemistry and cell properties of the battery to use defaults for that chemistry from BatteryStateful
+
+    :param model: PySAM.Battery.Battery or PySAM.BatteryStateful.BatteryStateful
+    :param chem: string
+        'leadacid', 'lfpgraphite', 'nmcgraphite'
+    """
     chem = chem.lower()
     if chem != 'leadacid' and chem != 'lfpgraphite' and chem != 'nmcgraphite':
         raise NotImplementedError
@@ -28,6 +51,7 @@ def battery_model_change_chemistry(model, chem):
 
 def size_battery(model, desired_power, desired_capacity, desired_voltage, size_by_ac_not_dc=None):
     """
+    Helper function for battery_model_sizing
     Modifies Battery model with new sizing. For BatteryStateful use size_batterystateful
 
     :param model: PySAM.Battery model
@@ -120,9 +144,11 @@ def size_battery(model, desired_power, desired_capacity, desired_voltage, size_b
 
 def size_batterystateful(model: BattStfl.BatteryStateful, _, desired_capacity, desired_voltage):
     """
+    Helper function for battery_model_sizing
+
     Modifies BatteryStateful model with new sizing. For Battery use size_battery
 
-    Also battery side DC sizing
+    Only battery side DC sizing
 
     :param model: PySAM.Battery model
     :param _: not used
@@ -316,6 +342,8 @@ def calculate_battery_size(input_dict):
 
 def calculate_thermal_params(input_dict):
     """
+    Calculates the mass and surface area of a battery by calculating from its current parameters the
+    mass / specific energy and volume / specific energy ratios.
 
     :param:
         input_dict:
@@ -353,6 +381,9 @@ def calculate_thermal_params(input_dict):
 
 
 def chem_battery(model: Batt.Battery, chem):
+    """
+    Helper function for battery_model_change_chemistry
+    """
     if type(model) != Batt.Battery:
         raise TypeError
 
@@ -400,6 +431,9 @@ def chem_battery(model: Batt.Battery, chem):
 
 
 def chem_batterystateful(model: BattStfl.BatteryStateful, chem):
+    """
+    Helper function for battery_model_change_chemistry
+    """
     if type(model) != BattStfl.BatteryStateful:
         raise TypeError
 
