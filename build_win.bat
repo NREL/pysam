@@ -4,7 +4,7 @@ mkdir %SSCDIR%\..\build_pysam
 cd %SSCDIR%\..\build_pysam
 
 REM skip api_autogen since the files should not need to be regenerated
-cmake -G "Visual Studio 15 2017 Win64" -DCMAKE_CONFIGURATION_TYPES="Release" -DCMAKE_SYSTEM_VERSION=10.0 -Dskip_tools=1 -Dskip_tests=1 -Dskip_autogen=1 ..
+cmake -G "Visual Studio 15 2017 Win64" -DCMAKE_CONFIGURATION_TYPES="Release" -DCMAKE_SYSTEM_VERSION=10.0 -DSAM_SKIP_TOOLS=1 -DSAM_SKIP_TESTS=1 -DSAM_SKIP_AUTOGEN=1 -DSAMAPI_EXPORT=1 ..
 devenv /build Release system_advisor_model.sln
 
 cd %PYSAMDIR%
