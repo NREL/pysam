@@ -119,6 +119,18 @@ POACalibrate_set_diffuse(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyObject *
+POACalibrate_get_elevation(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Poacalib_POACalibrate_elevation_nget, self->data_ptr);
+}
+
+static int
+POACalibrate_set_elevation(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Poacalib_POACalibrate_elevation_nset, self->data_ptr);
+}
+
+static PyObject *
 POACalibrate_get_latitude(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Poacalib_POACalibrate_latitude_nget, self->data_ptr);
@@ -152,6 +164,30 @@ static int
 POACalibrate_set_poa(VarGroupObject *self, PyObject *value, void *closure)
 {
 	return PySAM_array_setter(value, SAM_Poacalib_POACalibrate_poa_aset, self->data_ptr);
+}
+
+static PyObject *
+POACalibrate_get_pressure(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Poacalib_POACalibrate_pressure_nget, self->data_ptr);
+}
+
+static int
+POACalibrate_set_pressure(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Poacalib_POACalibrate_pressure_nset, self->data_ptr);
+}
+
+static PyObject *
+POACalibrate_get_tamb(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Poacalib_POACalibrate_tamb_nget, self->data_ptr);
+}
+
+static int
+POACalibrate_set_tamb(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Poacalib_POACalibrate_tamb_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -194,6 +230,9 @@ static PyGetSetDef POACalibrate_getset[] = {
 {"diffuse", (getter)POACalibrate_get_diffuse,(setter)POACalibrate_set_diffuse,
 	PyDoc_STR("*sequence*: Diffuse Irradiation [W/m^2]\n\n*Constraints*: LENGTH=8760\n\n*Required*: True"),
  	NULL},
+{"elevation", (getter)POACalibrate_get_elevation,(setter)POACalibrate_set_elevation,
+	PyDoc_STR("*float*: Elevation [m]\n\n*Required*: False"),
+ 	NULL},
 {"latitude", (getter)POACalibrate_get_latitude,(setter)POACalibrate_set_latitude,
 	PyDoc_STR("*float*: Latitude [decimal degrees]\n\n*Options*: N= positive\n\n*Required*: True"),
  	NULL},
@@ -202,6 +241,12 @@ static PyGetSetDef POACalibrate_getset[] = {
  	NULL},
 {"poa", (getter)POACalibrate_get_poa,(setter)POACalibrate_set_poa,
 	PyDoc_STR("*sequence*: Plane of Array [W/m^2]\n\n*Constraints*: LENGTH=8760\n\n*Required*: True"),
+ 	NULL},
+{"pressure", (getter)POACalibrate_get_pressure,(setter)POACalibrate_set_pressure,
+	PyDoc_STR("*float*: Pressure [millibars]\n\n*Required*: False"),
+ 	NULL},
+{"tamb", (getter)POACalibrate_get_tamb,(setter)POACalibrate_set_tamb,
+	PyDoc_STR("*float*: Ambient Temperature (dry bulb temperature) [°C]\n\n*Required*: False"),
  	NULL},
 {"time_zone", (getter)POACalibrate_get_time_zone,(setter)POACalibrate_set_time_zone,
 	PyDoc_STR("*float*: Time Zone\n\n*Options*: -7= Denver\n\n*Constraints*: MIN=-12,MAX=12\n\n*Required*: True"),
@@ -620,8 +665,8 @@ static PyMethodDef PoacalibModule_methods[] = {
 		{"new",             Poacalib_new,         METH_VARARGS,
 				PyDoc_STR("new() -> Poacalib")},
 		{"default",             Poacalib_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Poacalib\n\nUse financial config-specific default attributes\n"
-				"")},
+				PyDoc_STR("default(config) -> Poacalib\n\nUse default attributes\n"
+				"None")},
 		{"wrap",             Poacalib_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Poacalib\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   Poacalib_from_existing,        METH_VARARGS,

@@ -79,7 +79,6 @@ class ParamsPack(object):
 	nominal_voltage = float
 	replacement_capacity = float
 	replacement_option = float
-	replacement_schedule = tuple
 	replacement_schedule_percent = tuple
 	schedule_loss = tuple
 	surface_area = float
@@ -111,7 +110,7 @@ class StatePack(object):
 	heat_dissipated = float
 	indices_replaced = tuple
 	last_idx = float
-	loss_percent = float
+	loss_kw = float
 	n_replacements = float
 
 

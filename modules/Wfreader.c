@@ -851,8 +851,8 @@ static PyMethodDef WfreaderModule_methods[] = {
 		{"new",             Wfreader_new,         METH_VARARGS,
 				PyDoc_STR("new() -> Wfreader")},
 		{"default",             Wfreader_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Wfreader\n\nUse financial config-specific default attributes\n"
-				"")},
+				PyDoc_STR("default(config) -> Wfreader\n\nUse default attributes\n"
+				"None")},
 		{"wrap",             Wfreader_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Wfreader\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   Wfreader_from_existing,        METH_VARARGS,

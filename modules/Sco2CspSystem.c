@@ -384,6 +384,30 @@ HeatExchangerDesign_set_HTR_min_dT_des_in(VarGroupObject *self, PyObject *value,
 }
 
 static PyObject *
+HeatExchangerDesign_get_HTR_n_sub_hx(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Sco2CspSystem_HeatExchangerDesign_HTR_n_sub_hx_nget, self->data_ptr);
+}
+
+static int
+HeatExchangerDesign_set_HTR_n_sub_hx(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Sco2CspSystem_HeatExchangerDesign_HTR_n_sub_hx_nset, self->data_ptr);
+}
+
+static PyObject *
+HeatExchangerDesign_get_HTR_od_model(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Sco2CspSystem_HeatExchangerDesign_HTR_od_model_nget, self->data_ptr);
+}
+
+static int
+HeatExchangerDesign_set_HTR_od_model(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Sco2CspSystem_HeatExchangerDesign_HTR_od_model_nset, self->data_ptr);
+}
+
+static PyObject *
 HeatExchangerDesign_get_HT_recup_eff_max(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Sco2CspSystem_HeatExchangerDesign_HT_recup_eff_max_nget, self->data_ptr);
@@ -465,6 +489,30 @@ static int
 HeatExchangerDesign_set_LTR_min_dT_des_in(VarGroupObject *self, PyObject *value, void *closure)
 {
 	return PySAM_double_setter(value, SAM_Sco2CspSystem_HeatExchangerDesign_LTR_min_dT_des_in_nset, self->data_ptr);
+}
+
+static PyObject *
+HeatExchangerDesign_get_LTR_n_sub_hx(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Sco2CspSystem_HeatExchangerDesign_LTR_n_sub_hx_nget, self->data_ptr);
+}
+
+static int
+HeatExchangerDesign_set_LTR_n_sub_hx(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Sco2CspSystem_HeatExchangerDesign_LTR_n_sub_hx_nset, self->data_ptr);
+}
+
+static PyObject *
+HeatExchangerDesign_get_LTR_od_model(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Sco2CspSystem_HeatExchangerDesign_LTR_od_model_nget, self->data_ptr);
+}
+
+static int
+HeatExchangerDesign_set_LTR_od_model(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Sco2CspSystem_HeatExchangerDesign_LTR_od_model_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -576,6 +624,18 @@ HeatExchangerDesign_set_min_phx_deltaT(VarGroupObject *self, PyObject *value, vo
 }
 
 static PyObject *
+HeatExchangerDesign_get_od_rel_tol(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Sco2CspSystem_HeatExchangerDesign_od_rel_tol_nget, self->data_ptr);
+}
+
+static int
+HeatExchangerDesign_set_od_rel_tol(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Sco2CspSystem_HeatExchangerDesign_od_rel_tol_nset, self->data_ptr);
+}
+
+static PyObject *
 HeatExchangerDesign_get_rel_tol(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Sco2CspSystem_HeatExchangerDesign_rel_tol_nget, self->data_ptr);
@@ -606,6 +666,12 @@ static PyGetSetDef HeatExchangerDesign_getset[] = {
 {"HTR_min_dT_des_in", (getter)HeatExchangerDesign_get_HTR_min_dT_des_in,(setter)HeatExchangerDesign_set_HTR_min_dT_des_in,
 	PyDoc_STR("*float*: Design minimum allowable temperature difference in HTR [C]\n\n*Info*: High temperature recuperator\n\n*Required*: True if design_method=3"),
  	NULL},
+{"HTR_n_sub_hx", (getter)HeatExchangerDesign_get_HTR_n_sub_hx,(setter)HeatExchangerDesign_set_HTR_n_sub_hx,
+	PyDoc_STR("*float*: HTR number of model subsections [-]\n\n*Info*: High temperature recuperator\n\n*Required*: If not provided, assumed to be 10"),
+ 	NULL},
+{"HTR_od_model", (getter)HeatExchangerDesign_get_HTR_od_model,(setter)HeatExchangerDesign_set_HTR_od_model,
+	PyDoc_STR("*float*: 0: mass flow scale, 1: conductance ratio model [-]\n\n*Info*: High temperature recuperator\n\n*Required*: If not provided, assumed to be 1"),
+ 	NULL},
 {"HT_recup_eff_max", (getter)HeatExchangerDesign_get_HT_recup_eff_max,(setter)HeatExchangerDesign_set_HT_recup_eff_max,
 	PyDoc_STR("*float*: Maximum allowable effectiveness in HTR [-]\n\n*Info*: High temperature recuperator\n\n*Required*: If not provided, assumed to be 1.0"),
  	NULL},
@@ -626,6 +692,12 @@ static PyGetSetDef HeatExchangerDesign_getset[] = {
  	NULL},
 {"LTR_min_dT_des_in", (getter)HeatExchangerDesign_get_LTR_min_dT_des_in,(setter)HeatExchangerDesign_set_LTR_min_dT_des_in,
 	PyDoc_STR("*float*: Design minimum allowable temperature difference in LTR [C]\n\n*Info*: Low temperature recuperator\n\n*Required*: True if design_method=3"),
+ 	NULL},
+{"LTR_n_sub_hx", (getter)HeatExchangerDesign_get_LTR_n_sub_hx,(setter)HeatExchangerDesign_set_LTR_n_sub_hx,
+	PyDoc_STR("*float*: LTR number of model subsections [-]\n\n*Info*: Low temperature recuperator\n\n*Required*: If not provided, assumed to be 10"),
+ 	NULL},
+{"LTR_od_model", (getter)HeatExchangerDesign_get_LTR_od_model,(setter)HeatExchangerDesign_set_LTR_od_model,
+	PyDoc_STR("*float*: 0: mass flow scale, 1: conductance ratio model [-]\n\n*Info*: Low temperature recuperator\n\n*Required*: If not provided, assumed to be 1"),
  	NULL},
 {"LT_recup_eff_max", (getter)HeatExchangerDesign_get_LT_recup_eff_max,(setter)HeatExchangerDesign_set_LT_recup_eff_max,
 	PyDoc_STR("*float*: Maximum allowable effectiveness in LTR [-]\n\n*Info*: Low temperature recuperator\n\n*Required*: If not provided, assumed to be 1.0"),
@@ -653,6 +725,9 @@ static PyGetSetDef HeatExchangerDesign_getset[] = {
  	NULL},
 {"min_phx_deltaT", (getter)HeatExchangerDesign_get_min_phx_deltaT,(setter)HeatExchangerDesign_set_min_phx_deltaT,
 	PyDoc_STR("*float*: Minimum design temperature difference across PHX [C]\n\n*Info*: High temperature recuperator\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"od_rel_tol", (getter)HeatExchangerDesign_get_od_rel_tol,(setter)HeatExchangerDesign_set_od_rel_tol,
+	PyDoc_STR("*float*: Baseline off-design relative convergence tolerance exponent (10^-od_rel_tol) [-]\n\n*Info*: High temperature recuperator\n\n*Required*: If not provided, assumed to be 3"),
  	NULL},
 {"rel_tol", (getter)HeatExchangerDesign_get_rel_tol,(setter)HeatExchangerDesign_set_rel_tol,
 	PyDoc_STR("*float*: Baseline solver and optimization relative tolerance exponent (10^-rel_tol) [-]\n\n*Info*: High temperature recuperator\n\n*Required*: If not provided, assumed to be 3"),
@@ -708,34 +783,34 @@ static PyTypeObject HeatExchangerDesign_Type = {
 
 
 /*
- * CycleDesign Group
+ * Common Group
  */ 
 
-static PyTypeObject CycleDesign_Type;
+static PyTypeObject Common_Type;
 
 static PyObject *
-CycleDesign_new(SAM_Sco2CspSystem data_ptr)
+Common_new(SAM_Sco2CspSystem data_ptr)
 {
-	PyObject* new_obj = CycleDesign_Type.tp_alloc(&CycleDesign_Type,0);
+	PyObject* new_obj = Common_Type.tp_alloc(&Common_Type,0);
 
-	VarGroupObject* CycleDesign_obj = (VarGroupObject*)new_obj;
+	VarGroupObject* Common_obj = (VarGroupObject*)new_obj;
 
-	CycleDesign_obj->data_ptr = (SAM_table)data_ptr;
+	Common_obj->data_ptr = (SAM_table)data_ptr;
 
 	return new_obj;
 }
 
-/* CycleDesign methods */
+/* Common methods */
 
 static PyObject *
-CycleDesign_assign(VarGroupObject *self, PyObject *args)
+Common_assign(VarGroupObject *self, PyObject *args)
 {
 	PyObject* dict;
 	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Sco2CspSystem", "CycleDesign")){
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Sco2CspSystem", "Common")){
 		return NULL;
 	}
 
@@ -744,135 +819,285 @@ CycleDesign_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
-CycleDesign_export(VarGroupObject *self, PyObject *args)
+Common_export(VarGroupObject *self, PyObject *args)
 {
-	PyTypeObject* tp = &CycleDesign_Type;
+	PyTypeObject* tp = &Common_Type;
 	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
 	return dict;
 }
 
-static PyMethodDef CycleDesign_methods[] = {
-		{"assign",            (PyCFunction)CycleDesign_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``CycleDesign_vals = { var: val, ...}``")},
-		{"export",            (PyCFunction)CycleDesign_export,  METH_VARARGS,
+static PyMethodDef Common_methods[] = {
+		{"assign",            (PyCFunction)Common_assign,  METH_VARARGS,
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Common_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)Common_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 static PyObject *
-CycleDesign_get_PHX_co2_deltaP_des_in(VarGroupObject *self, void *closure)
+Common_get_PHX_co2_deltaP_des_in(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Sco2CspSystem_CycleDesign_PHX_co2_deltaP_des_in_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Sco2CspSystem_Common_PHX_co2_deltaP_des_in_nget, self->data_ptr);
 }
 
 static int
-CycleDesign_set_PHX_co2_deltaP_des_in(VarGroupObject *self, PyObject *value, void *closure)
+Common_set_PHX_co2_deltaP_des_in(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Sco2CspSystem_CycleDesign_PHX_co2_deltaP_des_in_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Sco2CspSystem_Common_PHX_co2_deltaP_des_in_nset, self->data_ptr);
 }
 
 static PyObject *
-CycleDesign_get_P_high_limit(VarGroupObject *self, void *closure)
+Common_get_P_high_limit(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Sco2CspSystem_CycleDesign_P_high_limit_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Sco2CspSystem_Common_P_high_limit_nget, self->data_ptr);
 }
 
 static int
-CycleDesign_set_P_high_limit(VarGroupObject *self, PyObject *value, void *closure)
+Common_set_P_high_limit(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Sco2CspSystem_CycleDesign_P_high_limit_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Sco2CspSystem_Common_P_high_limit_nset, self->data_ptr);
 }
 
 static PyObject *
-CycleDesign_get_deltaP_counterHX_frac(VarGroupObject *self, void *closure)
+Common_get_deltaP_counterHX_frac(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Sco2CspSystem_CycleDesign_deltaP_counterHX_frac_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Sco2CspSystem_Common_deltaP_counterHX_frac_nget, self->data_ptr);
 }
 
 static int
-CycleDesign_set_deltaP_counterHX_frac(VarGroupObject *self, PyObject *value, void *closure)
+Common_set_deltaP_counterHX_frac(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Sco2CspSystem_CycleDesign_deltaP_counterHX_frac_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Sco2CspSystem_Common_deltaP_counterHX_frac_nset, self->data_ptr);
 }
 
 static PyObject *
-CycleDesign_get_eta_isen_mc(VarGroupObject *self, void *closure)
+Common_get_eta_isen_mc(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Sco2CspSystem_CycleDesign_eta_isen_mc_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Sco2CspSystem_Common_eta_isen_mc_nget, self->data_ptr);
 }
 
 static int
-CycleDesign_set_eta_isen_mc(VarGroupObject *self, PyObject *value, void *closure)
+Common_set_eta_isen_mc(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Sco2CspSystem_CycleDesign_eta_isen_mc_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Sco2CspSystem_Common_eta_isen_mc_nset, self->data_ptr);
 }
 
 static PyObject *
-CycleDesign_get_eta_isen_pc(VarGroupObject *self, void *closure)
+Common_get_eta_isen_pc(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Sco2CspSystem_CycleDesign_eta_isen_pc_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Sco2CspSystem_Common_eta_isen_pc_nget, self->data_ptr);
 }
 
 static int
-CycleDesign_set_eta_isen_pc(VarGroupObject *self, PyObject *value, void *closure)
+Common_set_eta_isen_pc(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Sco2CspSystem_CycleDesign_eta_isen_pc_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Sco2CspSystem_Common_eta_isen_pc_nset, self->data_ptr);
 }
 
 static PyObject *
-CycleDesign_get_eta_isen_rc(VarGroupObject *self, void *closure)
+Common_get_eta_isen_rc(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Sco2CspSystem_CycleDesign_eta_isen_rc_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Sco2CspSystem_Common_eta_isen_rc_nget, self->data_ptr);
 }
 
 static int
-CycleDesign_set_eta_isen_rc(VarGroupObject *self, PyObject *value, void *closure)
+Common_set_eta_isen_rc(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Sco2CspSystem_CycleDesign_eta_isen_rc_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Sco2CspSystem_Common_eta_isen_rc_nset, self->data_ptr);
 }
 
 static PyObject *
-CycleDesign_get_eta_isen_t(VarGroupObject *self, void *closure)
+Common_get_eta_isen_t(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Sco2CspSystem_CycleDesign_eta_isen_t_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Sco2CspSystem_Common_eta_isen_t_nget, self->data_ptr);
 }
 
 static int
-CycleDesign_set_eta_isen_t(VarGroupObject *self, PyObject *value, void *closure)
+Common_set_eta_isen_t(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Sco2CspSystem_CycleDesign_eta_isen_t_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Sco2CspSystem_Common_eta_isen_t_nset, self->data_ptr);
 }
 
-static PyGetSetDef CycleDesign_getset[] = {
-{"PHX_co2_deltaP_des_in", (getter)CycleDesign_get_PHX_co2_deltaP_des_in,(setter)CycleDesign_set_PHX_co2_deltaP_des_in,
+static PyObject *
+Common_get_is_gen_od_polynomials(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Sco2CspSystem_Common_is_gen_od_polynomials_nget, self->data_ptr);
+}
+
+static int
+Common_set_is_gen_od_polynomials(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Sco2CspSystem_Common_is_gen_od_polynomials_nset, self->data_ptr);
+}
+
+static PyObject *
+Common_get_mc_comp_type(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Sco2CspSystem_Common_mc_comp_type_nget, self->data_ptr);
+}
+
+static int
+Common_set_mc_comp_type(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Sco2CspSystem_Common_mc_comp_type_nset, self->data_ptr);
+}
+
+static PyObject *
+Common_get_od_P_mc_in_sweep(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Sco2CspSystem_Common_od_P_mc_in_sweep_aget, self->data_ptr);
+}
+
+static int
+Common_set_od_P_mc_in_sweep(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Sco2CspSystem_Common_od_P_mc_in_sweep_aset, self->data_ptr);
+}
+
+static PyObject *
+Common_get_od_T_mc_in_sweep(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Sco2CspSystem_Common_od_T_mc_in_sweep_aget, self->data_ptr);
+}
+
+static int
+Common_set_od_T_mc_in_sweep(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Sco2CspSystem_Common_od_T_mc_in_sweep_aset, self->data_ptr);
+}
+
+static PyObject *
+Common_get_od_T_t_in_mode(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Sco2CspSystem_Common_od_T_t_in_mode_nget, self->data_ptr);
+}
+
+static int
+Common_set_od_T_t_in_mode(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Sco2CspSystem_Common_od_T_t_in_mode_nset, self->data_ptr);
+}
+
+static PyObject *
+Common_get_od_cases(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Sco2CspSystem_Common_od_cases_mget, self->data_ptr);
+}
+
+static int
+Common_set_od_cases(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Sco2CspSystem_Common_od_cases_mset, self->data_ptr);
+}
+
+static PyObject *
+Common_get_od_generate_udpc(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Sco2CspSystem_Common_od_generate_udpc_aget, self->data_ptr);
+}
+
+static int
+Common_set_od_generate_udpc(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Sco2CspSystem_Common_od_generate_udpc_aset, self->data_ptr);
+}
+
+static PyObject *
+Common_get_od_max_htf_m_dot(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Sco2CspSystem_Common_od_max_htf_m_dot_mget, self->data_ptr);
+}
+
+static int
+Common_set_od_max_htf_m_dot(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Sco2CspSystem_Common_od_max_htf_m_dot_mset, self->data_ptr);
+}
+
+static PyObject *
+Common_get_od_opt_objective(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Sco2CspSystem_Common_od_opt_objective_nget, self->data_ptr);
+}
+
+static int
+Common_set_od_opt_objective(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Sco2CspSystem_Common_od_opt_objective_nset, self->data_ptr);
+}
+
+static PyObject *
+Common_get_od_set_control(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Sco2CspSystem_Common_od_set_control_mget, self->data_ptr);
+}
+
+static int
+Common_set_od_set_control(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Sco2CspSystem_Common_od_set_control_mset, self->data_ptr);
+}
+
+static PyGetSetDef Common_getset[] = {
+{"PHX_co2_deltaP_des_in", (getter)Common_get_PHX_co2_deltaP_des_in,(setter)Common_set_PHX_co2_deltaP_des_in,
 	PyDoc_STR("*float*: PHX co2 side pressure drop as fraction of inlet pressure [-]"),
  	NULL},
-{"P_high_limit", (getter)CycleDesign_get_P_high_limit,(setter)CycleDesign_set_P_high_limit,
+{"P_high_limit", (getter)Common_get_P_high_limit,(setter)Common_set_P_high_limit,
 	PyDoc_STR("*float*: High pressure limit in cycle [MPa]\n\n*Required*: True"),
  	NULL},
-{"deltaP_counterHX_frac", (getter)CycleDesign_get_deltaP_counterHX_frac,(setter)CycleDesign_set_deltaP_counterHX_frac,
+{"deltaP_counterHX_frac", (getter)Common_get_deltaP_counterHX_frac,(setter)Common_set_deltaP_counterHX_frac,
 	PyDoc_STR("*float*: Fraction of CO2 inlet pressure that is design point counterflow HX (recups & PHX) pressure drop [-]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
-{"eta_isen_mc", (getter)CycleDesign_get_eta_isen_mc,(setter)CycleDesign_set_eta_isen_mc,
+{"eta_isen_mc", (getter)Common_get_eta_isen_mc,(setter)Common_set_eta_isen_mc,
 	PyDoc_STR("*float*: Design main compressor isentropic efficiency [-]\n\n*Required*: True"),
  	NULL},
-{"eta_isen_pc", (getter)CycleDesign_get_eta_isen_pc,(setter)CycleDesign_set_eta_isen_pc,
+{"eta_isen_pc", (getter)Common_get_eta_isen_pc,(setter)Common_set_eta_isen_pc,
 	PyDoc_STR("*float*: Design precompressor isentropic efficiency [-]\n\n*Required*: True if cycle_config=2"),
  	NULL},
-{"eta_isen_rc", (getter)CycleDesign_get_eta_isen_rc,(setter)CycleDesign_set_eta_isen_rc,
+{"eta_isen_rc", (getter)Common_get_eta_isen_rc,(setter)Common_set_eta_isen_rc,
 	PyDoc_STR("*float*: Design re-compressor isentropic efficiency [-]\n\n*Required*: True"),
  	NULL},
-{"eta_isen_t", (getter)CycleDesign_get_eta_isen_t,(setter)CycleDesign_set_eta_isen_t,
+{"eta_isen_t", (getter)Common_get_eta_isen_t,(setter)Common_set_eta_isen_t,
 	PyDoc_STR("*float*: Design turbine isentropic efficiency [-]\n\n*Required*: True"),
+ 	NULL},
+{"is_gen_od_polynomials", (getter)Common_get_is_gen_od_polynomials,(setter)Common_set_is_gen_od_polynomials,
+	PyDoc_STR("*float*: Generate off-design polynomials for Generic CSP models? 1 = Yes, 0 = No\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"mc_comp_type", (getter)Common_get_mc_comp_type,(setter)Common_set_mc_comp_type,
+	PyDoc_STR("*float*: Main compressor compressor type 1: SNL 2: CompA [-]\n\n*Required*: If not provided, assumed to be 1"),
+ 	NULL},
+{"od_P_mc_in_sweep", (getter)Common_get_od_P_mc_in_sweep,(setter)Common_set_od_P_mc_in_sweep,
+	PyDoc_STR("*sequence*: Columns: 0) T_htf_C, 1) m_dot_htf_ND, 2) T_amb_C, 3) T_mc_in_C, 4) T_pc_in_C, 5) f_N_rc (=1 use design, <0, frac_des = abs(input), 6) f_N_mc (=1 use design, <0, frac_des = abs(input), 7) f_N_pc (=1 use design, =0 optimize, <0, frac_des = abs(input)), 8) PHX_f_dP (=1 use design, <0 = abs(input)"),
+ 	NULL},
+{"od_T_mc_in_sweep", (getter)Common_get_od_T_mc_in_sweep,(setter)Common_set_od_T_mc_in_sweep,
+	PyDoc_STR("*sequence*: Columns: 0) T_htf_C, 1) m_dot_htf_ND, 2) T_amb_C,3) f_N_rc (=1 use design, <0, frac_des = abs(input),4) f_N_mc (=1 use design, <0, frac_des = abs(input),5) f_N_pc (=1 use design, <0, frac_des = abs(input),6) PHX_f_dP (=1 use design, <0 = abs(input)"),
+ 	NULL},
+{"od_T_t_in_mode", (getter)Common_get_od_T_t_in_mode,(setter)Common_set_od_T_t_in_mode,
+	PyDoc_STR("*float*: 0: model solves co2/HTF PHX od model to calculate turbine inlet temp, 1: model sets turbine inlet temp to HTF hot temp\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"od_cases", (getter)Common_get_od_cases,(setter)Common_set_od_cases,
+	PyDoc_STR("*sequence[sequence]*: Columns: 0) T_htf_C, 1) m_dot_htf_ND, 2) T_amb_C, 3) f_N_rc (=1 use design, =0 optimize, <0, frac_des = abs(input)), 4) f_N_mc (=1 use design, =0 optimize, <0, frac_des = abs(input)), 5) f_N_pc (=1 use design, =0 optimize, <0, frac_des = abs(input)), 6) PHX_f_dP (=1 use design, <0 = abs(input), Rows: cases"),
+ 	NULL},
+{"od_generate_udpc", (getter)Common_get_od_generate_udpc,(setter)Common_set_od_generate_udpc,
+	PyDoc_STR("*sequence*: True/False, f_N_rc (=1 use design, =0 optimize, <0, frac_des = abs(input), f_N_mc (=1 use design, =0 optimize, <0, frac_des = abs(input), PHX_f_dP (=1 use design, <0 = abs(input)"),
+ 	NULL},
+{"od_max_htf_m_dot", (getter)Common_get_od_max_htf_m_dot,(setter)Common_set_od_max_htf_m_dot,
+	PyDoc_STR("*sequence[sequence]*: Columns: T_htf_C, T_amb_C, f_N_rc (=1 use design, <0, frac_des = abs(input), f_N_mc (=1 use design, <0, frac_des = abs(input), PHX_f_dP (=1 use design, <0 = abs(input), Rows: cases"),
+ 	NULL},
+{"od_opt_objective", (getter)Common_get_od_opt_objective,(setter)Common_set_od_opt_objective,
+	PyDoc_STR("*float*: 0: find P_LP_in to achieve target power, optimize efficiency 1: find P_LP_in to achieve T_HTF_cold, optimize efficiency\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"od_set_control", (getter)Common_get_od_set_control,(setter)Common_set_od_set_control,
+	PyDoc_STR("*sequence[sequence]*: Columns: 0) T_htf_C, 1) m_dot_htf_ND, 2) T_amb_C, 3) P_LP_in_MPa, 4) T_mc_in_C, 5) T_pc_in_C, 6) f_N_rc (=1 use design, <0, frac_des = abs(input), 7) f_N_mc (=1 use design, <0, frac_des = abs(input), 8) f_N_pc (=1 use design, =0 optimize, <0, frac_des = abs(input)), 9) PHX_f_dP (=1 use design, <0 = abs(input), Rows: cases"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
 
-static PyTypeObject CycleDesign_Type = {
+static PyTypeObject Common_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"Sco2CspSystem.CycleDesign",             /*tp_name*/
+		"Sco2CspSystem.Common",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -899,9 +1124,9 @@ static PyTypeObject CycleDesign_Type = {
 		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
-		CycleDesign_methods,         /*tp_methods*/
+		Common_methods,         /*tp_methods*/
 		0,                          /*tp_members*/
-		CycleDesign_getset,          /*tp_getset*/
+		Common_getset,          /*tp_getset*/
 		0,                          /*tp_base*/
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
@@ -968,6 +1193,30 @@ static PyMethodDef PHXDesign_methods[] = {
 };
 
 static PyObject *
+PHXDesign_get_PHX_n_sub_hx(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Sco2CspSystem_PHXDesign_PHX_n_sub_hx_nget, self->data_ptr);
+}
+
+static int
+PHXDesign_set_PHX_n_sub_hx(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Sco2CspSystem_PHXDesign_PHX_n_sub_hx_nset, self->data_ptr);
+}
+
+static PyObject *
+PHXDesign_get_PHX_od_model(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Sco2CspSystem_PHXDesign_PHX_od_model_nget, self->data_ptr);
+}
+
+static int
+PHXDesign_set_PHX_od_model(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Sco2CspSystem_PHXDesign_PHX_od_model_nset, self->data_ptr);
+}
+
+static PyObject *
 PHXDesign_get_dT_PHX_cold_approach(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Sco2CspSystem_PHXDesign_dT_PHX_cold_approach_nget, self->data_ptr);
@@ -980,6 +1229,12 @@ PHXDesign_set_dT_PHX_cold_approach(VarGroupObject *self, PyObject *value, void *
 }
 
 static PyGetSetDef PHXDesign_getset[] = {
+{"PHX_n_sub_hx", (getter)PHXDesign_get_PHX_n_sub_hx,(setter)PHXDesign_set_PHX_n_sub_hx,
+	PyDoc_STR("*float*: Number of subsections in PHX model [-]\n\n*Required*: If not provided, assumed to be 10"),
+ 	NULL},
+{"PHX_od_model", (getter)PHXDesign_get_PHX_od_model,(setter)PHXDesign_set_PHX_od_model,
+	PyDoc_STR("*float*: 0: mass flow scale, 1: conductance ratio model [-]\n\n*Required*: If not provided, assumed to be 1"),
+ 	NULL},
 {"dT_PHX_cold_approach", (getter)PHXDesign_get_dT_PHX_cold_approach,(setter)PHXDesign_set_dT_PHX_cold_approach,
 	PyDoc_STR("*float*: Temp diff btw cold HTF and cold CO2 [C]\n\n*Required*: True"),
  	NULL},
@@ -1086,6 +1341,18 @@ static PyMethodDef AirCoolerDesign_methods[] = {
 };
 
 static PyObject *
+AirCoolerDesign_get_N_nodes_air_cooler_pass(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Sco2CspSystem_AirCoolerDesign_N_nodes_air_cooler_pass_nget, self->data_ptr);
+}
+
+static int
+AirCoolerDesign_set_N_nodes_air_cooler_pass(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Sco2CspSystem_AirCoolerDesign_N_nodes_air_cooler_pass_nset, self->data_ptr);
+}
+
+static PyObject *
 AirCoolerDesign_get_deltaP_cooler_frac(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Sco2CspSystem_AirCoolerDesign_deltaP_cooler_frac_nget, self->data_ptr);
@@ -1095,6 +1362,18 @@ static int
 AirCoolerDesign_set_deltaP_cooler_frac(VarGroupObject *self, PyObject *value, void *closure)
 {
 	return PySAM_double_setter(value, SAM_Sco2CspSystem_AirCoolerDesign_deltaP_cooler_frac_nset, self->data_ptr);
+}
+
+static PyObject *
+AirCoolerDesign_get_eta_air_cooler_fan(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Sco2CspSystem_AirCoolerDesign_eta_air_cooler_fan_nget, self->data_ptr);
+}
+
+static int
+AirCoolerDesign_set_eta_air_cooler_fan(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Sco2CspSystem_AirCoolerDesign_eta_air_cooler_fan_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -1122,8 +1401,14 @@ AirCoolerDesign_set_is_design_air_cooler(VarGroupObject *self, PyObject *value, 
 }
 
 static PyGetSetDef AirCoolerDesign_getset[] = {
+{"N_nodes_air_cooler_pass", (getter)AirCoolerDesign_get_N_nodes_air_cooler_pass,(setter)AirCoolerDesign_set_N_nodes_air_cooler_pass,
+	PyDoc_STR("*float*: Number of nodes in single air cooler pass\n\n*Required*: If not provided, assumed to be 10"),
+ 	NULL},
 {"deltaP_cooler_frac", (getter)AirCoolerDesign_get_deltaP_cooler_frac,(setter)AirCoolerDesign_set_deltaP_cooler_frac,
 	PyDoc_STR("*float*: Fraction of CO2 inlet pressure that is design point cooler CO2 pressure drop\n\n*Required*: True"),
+ 	NULL},
+{"eta_air_cooler_fan", (getter)AirCoolerDesign_get_eta_air_cooler_fan,(setter)AirCoolerDesign_set_eta_air_cooler_fan,
+	PyDoc_STR("*float*: Air cooler fan isentropic efficiency\n\n*Required*: If not provided, assumed to be 0.5"),
  	NULL},
 {"fan_power_frac", (getter)AirCoolerDesign_get_fan_power_frac,(setter)AirCoolerDesign_set_fan_power_frac,
 	PyDoc_STR("*float*: Fraction of net cycle power consumed by air cooler fan\n\n*Required*: True"),
@@ -1168,199 +1453,6 @@ static PyTypeObject AirCoolerDesign_Type = {
 		AirCoolerDesign_methods,         /*tp_methods*/
 		0,                          /*tp_members*/
 		AirCoolerDesign_getset,          /*tp_getset*/
-		0,                          /*tp_base*/
-		0,                          /*tp_dict*/
-		0,                          /*tp_descr_get*/
-		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictofnset*/
-		0,                          /*tp_init*/
-		0,                          /*tp_alloc*/
-		0,             /*tp_new*/
-		0,                          /*tp_free*/
-		0,                          /*tp_is_gc*/
-};
-
-
-/*
- * Common Group
- */ 
-
-static PyTypeObject Common_Type;
-
-static PyObject *
-Common_new(SAM_Sco2CspSystem data_ptr)
-{
-	PyObject* new_obj = Common_Type.tp_alloc(&Common_Type,0);
-
-	VarGroupObject* Common_obj = (VarGroupObject*)new_obj;
-
-	Common_obj->data_ptr = (SAM_table)data_ptr;
-
-	return new_obj;
-}
-
-/* Common methods */
-
-static PyObject *
-Common_assign(VarGroupObject *self, PyObject *args)
-{
-	PyObject* dict;
-	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
-		return NULL;
-	}
-
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Sco2CspSystem", "Common")){
-		return NULL;
-	}
-
-	Py_INCREF(Py_None);
-	return Py_None;
-}
-
-static PyObject *
-Common_export(VarGroupObject *self, PyObject *args)
-{
-	PyTypeObject* tp = &Common_Type;
-	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
-	return dict;
-}
-
-static PyMethodDef Common_methods[] = {
-		{"assign",            (PyCFunction)Common_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Common_vals = { var: val, ...}``")},
-		{"export",            (PyCFunction)Common_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
-		{NULL,              NULL}           /* sentinel */
-};
-
-static PyObject *
-Common_get_is_gen_od_polynomials(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Sco2CspSystem_Common_is_gen_od_polynomials_nget, self->data_ptr);
-}
-
-static int
-Common_set_is_gen_od_polynomials(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Sco2CspSystem_Common_is_gen_od_polynomials_nset, self->data_ptr);
-}
-
-static PyObject *
-Common_get_od_P_mc_in_sweep(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Sco2CspSystem_Common_od_P_mc_in_sweep_aget, self->data_ptr);
-}
-
-static int
-Common_set_od_P_mc_in_sweep(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_Sco2CspSystem_Common_od_P_mc_in_sweep_aset, self->data_ptr);
-}
-
-static PyObject *
-Common_get_od_T_t_in_mode(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Sco2CspSystem_Common_od_T_t_in_mode_nget, self->data_ptr);
-}
-
-static int
-Common_set_od_T_t_in_mode(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Sco2CspSystem_Common_od_T_t_in_mode_nset, self->data_ptr);
-}
-
-static PyObject *
-Common_get_od_cases(VarGroupObject *self, void *closure)
-{
-	return PySAM_matrix_getter(SAM_Sco2CspSystem_Common_od_cases_mget, self->data_ptr);
-}
-
-static int
-Common_set_od_cases(VarGroupObject *self, PyObject *value, void *closure)
-{
-		return PySAM_matrix_setter(value, SAM_Sco2CspSystem_Common_od_cases_mset, self->data_ptr);
-}
-
-static PyObject *
-Common_get_od_generate_udpc(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Sco2CspSystem_Common_od_generate_udpc_aget, self->data_ptr);
-}
-
-static int
-Common_set_od_generate_udpc(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_Sco2CspSystem_Common_od_generate_udpc_aset, self->data_ptr);
-}
-
-static PyObject *
-Common_get_od_set_control(VarGroupObject *self, void *closure)
-{
-	return PySAM_matrix_getter(SAM_Sco2CspSystem_Common_od_set_control_mget, self->data_ptr);
-}
-
-static int
-Common_set_od_set_control(VarGroupObject *self, PyObject *value, void *closure)
-{
-		return PySAM_matrix_setter(value, SAM_Sco2CspSystem_Common_od_set_control_mset, self->data_ptr);
-}
-
-static PyGetSetDef Common_getset[] = {
-{"is_gen_od_polynomials", (getter)Common_get_is_gen_od_polynomials,(setter)Common_set_is_gen_od_polynomials,
-	PyDoc_STR("*float*: Generate off-design polynomials for Generic CSP models? 1 = Yes, 0 = No\n\n*Required*: If not provided, assumed to be 0"),
- 	NULL},
-{"od_P_mc_in_sweep", (getter)Common_get_od_P_mc_in_sweep,(setter)Common_set_od_P_mc_in_sweep,
-	PyDoc_STR("*sequence*: Columns: T_htf_C, m_dot_htf_ND, T_amb_C, f_N_rc (=1 use design, <0, frac_des = abs(input), f_N_mc (=1 use design, <0, frac_des = abs(input), PHX_f_dP (=1 use design, <0 = abs(input)"),
- 	NULL},
-{"od_T_t_in_mode", (getter)Common_get_od_T_t_in_mode,(setter)Common_set_od_T_t_in_mode,
-	PyDoc_STR("*float*: 0: model solves co2/HTF PHX od model to calculate turbine inlet temp, 1: model sets turbine inlet temp to HTF hot temp\n\n*Required*: If not provided, assumed to be 0"),
- 	NULL},
-{"od_cases", (getter)Common_get_od_cases,(setter)Common_set_od_cases,
-	PyDoc_STR("*sequence[sequence]*: Columns: T_htf_C, m_dot_htf_ND, T_amb_C, f_N_rc (=1 use design, =0 optimize, <0, frac_des = abs(input), f_N_mc (=1 use design, =0 optimize, <0, frac_des = abs(input), PHX_f_dP (=1 use design, <0 = abs(input), Rows: cases"),
- 	NULL},
-{"od_generate_udpc", (getter)Common_get_od_generate_udpc,(setter)Common_set_od_generate_udpc,
-	PyDoc_STR("*sequence*: True/False, f_N_rc (=1 use design, =0 optimize, <0, frac_des = abs(input), f_N_mc (=1 use design, =0 optimize, <0, frac_des = abs(input), PHX_f_dP (=1 use design, <0 = abs(input)"),
- 	NULL},
-{"od_set_control", (getter)Common_get_od_set_control,(setter)Common_set_od_set_control,
-	PyDoc_STR("*sequence[sequence]*: Columns: T_htf_C, m_dot_htf_ND, T_amb_C, P_LP_in_MPa, f_N_rc (=1 use design, <0, frac_des = abs(input), f_N_mc (=1 use design, <0, frac_des = abs(input), PHX_f_dP (=1 use design, <0 = abs(input), Rows: cases"),
- 	NULL},
-	{NULL}  /* Sentinel */
-};
-
-static PyTypeObject Common_Type = {
-		/* The ob_type field must be initialized in the module init function
-		 * to be portable to Windows without using C++. */
-		PyVarObject_HEAD_INIT(NULL, 0)
-		"Sco2CspSystem.Common",             /*tp_name*/
-		sizeof(VarGroupObject),          /*tp_basicsize*/
-		0,                          /*tp_itemsize*/
-		/* methods */
-		0,    /*tp_dealloc*/
-		0,                          /*tp_print*/
-		(getattrfunc)0,             /*tp_getattr*/
-		0,                          /*tp_setattr*/
-		0,                          /*tp_reserved*/
-		0,                          /*tp_repr*/
-		0,                          /*tp_as_number*/
-		0,                          /*tp_as_sequence*/
-		0,                          /*tp_as_mapping*/
-		0,                          /*tp_hash*/
-		0,                          /*tp_call*/
-		0,                          /*tp_str*/
-		0,                          /*tp_getattro*/
-		0,                          /*tp_setattro*/
-		0,                          /*tp_as_buffer*/
-		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
-		0,                          /*tp_doc*/
-		0,                          /*tp_traverse*/
-		0,                          /*tp_clear*/
-		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistofnset*/
-		0,                          /*tp_iter*/
-		0,                          /*tp_iternext*/
-		Common_methods,         /*tp_methods*/
-		0,                          /*tp_members*/
-		Common_getset,          /*tp_getset*/
 		0,                          /*tp_base*/
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
@@ -1502,144 +1594,6 @@ static PyObject *
 Outputs_get_HTR_min_dT_od(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Sco2CspSystem_Outputs_HTR_min_dT_od_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_IP_cooler_P_in(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_IP_cooler_P_in_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_IP_cooler_T_in(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_IP_cooler_T_in_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_IP_cooler_UA(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_IP_cooler_UA_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_IP_cooler_W_dot_fan(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_IP_cooler_W_dot_fan_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_IP_cooler_W_dot_fan_od(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Sco2CspSystem_Outputs_IP_cooler_W_dot_fan_od_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_IP_cooler_cost(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_IP_cooler_cost_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_IP_cooler_m_dot_co2(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_IP_cooler_m_dot_co2_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_IP_cooler_q_dot(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_IP_cooler_q_dot_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_LP_cooler_P_in(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_LP_cooler_P_in_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_LP_cooler_T_in(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_LP_cooler_T_in_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_LP_cooler_T_in_od(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Sco2CspSystem_Outputs_LP_cooler_T_in_od_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_LP_cooler_UA(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_LP_cooler_UA_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_LP_cooler_W_dot_fan(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_LP_cooler_W_dot_fan_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_LP_cooler_W_dot_fan_od(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Sco2CspSystem_Outputs_LP_cooler_W_dot_fan_od_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_LP_cooler_co2_deltaP_des(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_LP_cooler_co2_deltaP_des_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_LP_cooler_co2_deltaP_od(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Sco2CspSystem_Outputs_LP_cooler_co2_deltaP_od_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_LP_cooler_cost(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_LP_cooler_cost_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_LP_cooler_in_isen_deltah_to_P_mc_out(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_LP_cooler_in_isen_deltah_to_P_mc_out_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_LP_cooler_in_isen_deltah_to_P_mc_out_od(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Sco2CspSystem_Outputs_LP_cooler_in_isen_deltah_to_P_mc_out_od_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_LP_cooler_m_dot_co2(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_LP_cooler_m_dot_co2_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_LP_cooler_q_dot(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_LP_cooler_q_dot_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_LP_cooler_rho_in(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_LP_cooler_rho_in_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_LP_cooler_rho_in_od(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Sco2CspSystem_Outputs_LP_cooler_rho_in_od_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -1925,6 +1879,18 @@ Outputs_get_UA_PHX(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_W_dot_net_less_cooling(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_W_dot_net_less_cooling_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_W_dot_net_less_cooling_od(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Sco2CspSystem_Outputs_W_dot_net_less_cooling_od_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_W_dot_net_od(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Sco2CspSystem_Outputs_W_dot_net_od_aget, self->data_ptr);
@@ -2063,6 +2029,18 @@ Outputs_get_eta_thermal_calc(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_eta_thermal_net_less_cooling_des(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_eta_thermal_net_less_cooling_des_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_eta_thermal_net_less_cooling_od(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Sco2CspSystem_Outputs_eta_thermal_net_less_cooling_od_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_eta_thermal_od(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Sco2CspSystem_Outputs_eta_thermal_od_aget, self->data_ptr);
@@ -2141,6 +2119,12 @@ Outputs_get_mc_N_od(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_mc_N_od_perc(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Sco2CspSystem_Outputs_mc_N_od_perc_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_mc_T_out(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_mc_T_out_nget, self->data_ptr);
@@ -2162,6 +2146,96 @@ static PyObject *
 Outputs_get_mc_W_dot_od(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Sco2CspSystem_Outputs_mc_W_dot_od_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_mc_cooler_P_in(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_mc_cooler_P_in_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_mc_cooler_T_in(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_mc_cooler_T_in_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_mc_cooler_T_in_od(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Sco2CspSystem_Outputs_mc_cooler_T_in_od_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_mc_cooler_UA(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_mc_cooler_UA_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_mc_cooler_W_dot_fan(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_mc_cooler_W_dot_fan_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_mc_cooler_W_dot_fan_od(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Sco2CspSystem_Outputs_mc_cooler_W_dot_fan_od_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_mc_cooler_co2_deltaP_des(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_mc_cooler_co2_deltaP_des_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_mc_cooler_co2_deltaP_od(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Sco2CspSystem_Outputs_mc_cooler_co2_deltaP_od_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_mc_cooler_cost(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_mc_cooler_cost_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_mc_cooler_in_isen_deltah_to_P_mc_out(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_mc_cooler_in_isen_deltah_to_P_mc_out_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_mc_cooler_in_isen_deltah_to_P_mc_out_od(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Sco2CspSystem_Outputs_mc_cooler_in_isen_deltah_to_P_mc_out_od_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_mc_cooler_m_dot_co2(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_mc_cooler_m_dot_co2_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_mc_cooler_q_dot(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_mc_cooler_q_dot_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_mc_cooler_rho_in(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_mc_cooler_rho_in_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_mc_cooler_rho_in_od(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Sco2CspSystem_Outputs_mc_cooler_rho_in_od_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -2291,18 +2365,6 @@ Outputs_get_od_code(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_od_opt_conv_tol(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Sco2CspSystem_Outputs_od_opt_conv_tol_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_od_opt_obj_code(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Sco2CspSystem_Outputs_od_opt_obj_code_aget, self->data_ptr);
-}
-
-static PyObject *
 Outputs_get_pc_D(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Sco2CspSystem_Outputs_pc_D_aget, self->data_ptr);
@@ -2354,6 +2416,54 @@ static PyObject *
 Outputs_get_pc_W_dot_od(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Sco2CspSystem_Outputs_pc_W_dot_od_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_pc_cooler_P_in(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_pc_cooler_P_in_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_pc_cooler_T_in(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_pc_cooler_T_in_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_pc_cooler_UA(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_pc_cooler_UA_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_pc_cooler_W_dot_fan(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_pc_cooler_W_dot_fan_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_pc_cooler_W_dot_fan_od(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Sco2CspSystem_Outputs_pc_cooler_W_dot_fan_od_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_pc_cooler_cost(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_pc_cooler_cost_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_pc_cooler_m_dot_co2(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_pc_cooler_m_dot_co2_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_pc_cooler_q_dot(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_pc_cooler_q_dot_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -2516,6 +2626,12 @@ static PyObject *
 Outputs_get_rc_N_od(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Sco2CspSystem_Outputs_rc_N_od_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_rc_N_od_perc(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Sco2CspSystem_Outputs_rc_N_od_perc_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -2831,6 +2947,18 @@ Outputs_get_t_cost(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_t_delta_h_isen_des(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_t_delta_h_isen_des_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_t_delta_h_isen_od(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Sco2CspSystem_Outputs_t_delta_h_isen_od_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_t_eta_od(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Sco2CspSystem_Outputs_t_eta_od_aget, self->data_ptr);
@@ -2858,6 +2986,18 @@ static PyObject *
 Outputs_get_t_nu_od(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Sco2CspSystem_Outputs_t_nu_od_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_t_rho_in_des(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Sco2CspSystem_Outputs_t_rho_in_des_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_t_rho_in_od(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Sco2CspSystem_Outputs_t_rho_in_od_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -2935,75 +3075,6 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"HTR_min_dT_od", (getter)Outputs_get_HTR_min_dT_od,(setter)0,
 	PyDoc_STR("*sequence*: Off-design high temp recup minimum temperature difference [C]"),
- 	NULL},
-{"IP_cooler_P_in", (getter)Outputs_get_IP_cooler_P_in,(setter)0,
-	PyDoc_STR("*float*: Intermediate pressure cross flow cooler inlet pressure [MPa]"),
- 	NULL},
-{"IP_cooler_T_in", (getter)Outputs_get_IP_cooler_T_in,(setter)0,
-	PyDoc_STR("*float*: Intermediate pressure cross flow cooler inlet temperature [C]"),
- 	NULL},
-{"IP_cooler_UA", (getter)Outputs_get_IP_cooler_UA,(setter)0,
-	PyDoc_STR("*float*: Intermediate pressure cross flow cooler conductance [MW/K]"),
- 	NULL},
-{"IP_cooler_W_dot_fan", (getter)Outputs_get_IP_cooler_W_dot_fan,(setter)0,
-	PyDoc_STR("*float*: Intermediate pressure cooler fan power [MWe]"),
- 	NULL},
-{"IP_cooler_W_dot_fan_od", (getter)Outputs_get_IP_cooler_W_dot_fan_od,(setter)0,
-	PyDoc_STR("*sequence*: Off-design Intermediate pressure cooler fan power [MWe]"),
- 	NULL},
-{"IP_cooler_cost", (getter)Outputs_get_IP_cooler_cost,(setter)0,
-	PyDoc_STR("*float*: Intermediate pressure cooler cost [M$]"),
- 	NULL},
-{"IP_cooler_m_dot_co2", (getter)Outputs_get_IP_cooler_m_dot_co2,(setter)0,
-	PyDoc_STR("*float*: Intermediate pressure cross flow cooler CO2 mass flow rate [kg/s]"),
- 	NULL},
-{"IP_cooler_q_dot", (getter)Outputs_get_IP_cooler_q_dot,(setter)0,
-	PyDoc_STR("*float*: Intermediate pressure cooler heat transfer [MWt]"),
- 	NULL},
-{"LP_cooler_P_in", (getter)Outputs_get_LP_cooler_P_in,(setter)0,
-	PyDoc_STR("*float*: Low pressure cross flow cooler inlet pressure [MPa]"),
- 	NULL},
-{"LP_cooler_T_in", (getter)Outputs_get_LP_cooler_T_in,(setter)0,
-	PyDoc_STR("*float*: Low pressure cross flow cooler inlet temperature [C]"),
- 	NULL},
-{"LP_cooler_T_in_od", (getter)Outputs_get_LP_cooler_T_in_od,(setter)0,
-	PyDoc_STR("*sequence*: Off-design Low pressure cooler inlet temperature [C]"),
- 	NULL},
-{"LP_cooler_UA", (getter)Outputs_get_LP_cooler_UA,(setter)0,
-	PyDoc_STR("*float*: Low pressure cross flow cooler conductance [MW/K]"),
- 	NULL},
-{"LP_cooler_W_dot_fan", (getter)Outputs_get_LP_cooler_W_dot_fan,(setter)0,
-	PyDoc_STR("*float*: Low pressure cooler fan power [MWe]"),
- 	NULL},
-{"LP_cooler_W_dot_fan_od", (getter)Outputs_get_LP_cooler_W_dot_fan_od,(setter)0,
-	PyDoc_STR("*sequence*: Off-design Low pressure cooler fan power [MWe]"),
- 	NULL},
-{"LP_cooler_co2_deltaP_des", (getter)Outputs_get_LP_cooler_co2_deltaP_des,(setter)0,
-	PyDoc_STR("*float*: Low pressure cooler co2 side design pressure drop [-]"),
- 	NULL},
-{"LP_cooler_co2_deltaP_od", (getter)Outputs_get_LP_cooler_co2_deltaP_od,(setter)0,
-	PyDoc_STR("*sequence*: Off-design Off-design low pressure cooler co2 side pressure drop [-]"),
- 	NULL},
-{"LP_cooler_cost", (getter)Outputs_get_LP_cooler_cost,(setter)0,
-	PyDoc_STR("*float*: Low pressure cooler cost [M$]"),
- 	NULL},
-{"LP_cooler_in_isen_deltah_to_P_mc_out", (getter)Outputs_get_LP_cooler_in_isen_deltah_to_P_mc_out,(setter)0,
-	PyDoc_STR("*float*: Low pressure cross flow cooler inlet isen enthalpy rise to mc outlet pressure [kJ/kg]"),
- 	NULL},
-{"LP_cooler_in_isen_deltah_to_P_mc_out_od", (getter)Outputs_get_LP_cooler_in_isen_deltah_to_P_mc_out_od,(setter)0,
-	PyDoc_STR("*sequence*: Off-design Low pressure cooler inlet isen enthalpy rise to mc outlet pressure [kJ/kg]"),
- 	NULL},
-{"LP_cooler_m_dot_co2", (getter)Outputs_get_LP_cooler_m_dot_co2,(setter)0,
-	PyDoc_STR("*float*: Low pressure cross flow cooler CO2 mass flow rate [kg/s]"),
- 	NULL},
-{"LP_cooler_q_dot", (getter)Outputs_get_LP_cooler_q_dot,(setter)0,
-	PyDoc_STR("*float*: Low pressure cooler heat transfer [MWt]"),
- 	NULL},
-{"LP_cooler_rho_in", (getter)Outputs_get_LP_cooler_rho_in,(setter)0,
-	PyDoc_STR("*float*: Low pressure cross flow cooler inlet density [kg/m3]"),
- 	NULL},
-{"LP_cooler_rho_in_od", (getter)Outputs_get_LP_cooler_rho_in_od,(setter)0,
-	PyDoc_STR("*sequence*: Off-design Low pressure cooler inlet density [kg/m3]"),
  	NULL},
 {"LTR_HP_T_out_des", (getter)Outputs_get_LTR_HP_T_out_des,(setter)0,
 	PyDoc_STR("*float*: Low temp recuperator HP outlet temperature [C]"),
@@ -3146,6 +3217,12 @@ static PyGetSetDef Outputs_getset[] = {
 {"UA_PHX", (getter)Outputs_get_UA_PHX,(setter)0,
 	PyDoc_STR("*float*: PHX Conductance [MW/K]"),
  	NULL},
+{"W_dot_net_less_cooling", (getter)Outputs_get_W_dot_net_less_cooling,(setter)0,
+	PyDoc_STR("*float*: System power output subtracting cooling parastics [MWe,System Design Solution]"),
+ 	NULL},
+{"W_dot_net_less_cooling_od", (getter)Outputs_get_W_dot_net_less_cooling_od,(setter)0,
+	PyDoc_STR("*sequence*: Off-design system output subtracting cooling parastics [MWe]"),
+ 	NULL},
 {"W_dot_net_od", (getter)Outputs_get_W_dot_net_od,(setter)0,
 	PyDoc_STR("*sequence*: Off-design cycle net output (no cooling pars) [MWe]"),
  	NULL},
@@ -3215,6 +3292,12 @@ static PyGetSetDef Outputs_getset[] = {
 {"eta_thermal_calc", (getter)Outputs_get_eta_thermal_calc,(setter)0,
 	PyDoc_STR("*float*: Calculated cycle thermal efficiency [-]"),
  	NULL},
+{"eta_thermal_net_less_cooling_des", (getter)Outputs_get_eta_thermal_net_less_cooling_des,(setter)0,
+	PyDoc_STR("*float*: Calculated cycle thermal efficiency using W_dot_net_less_cooling [-]"),
+ 	NULL},
+{"eta_thermal_net_less_cooling_od", (getter)Outputs_get_eta_thermal_net_less_cooling_od,(setter)0,
+	PyDoc_STR("*sequence*: Calculated cycle thermal efficiency using W_dot_net_less_cooling [-]"),
+ 	NULL},
 {"eta_thermal_od", (getter)Outputs_get_eta_thermal_od,(setter)0,
 	PyDoc_STR("*sequence*: Off-design cycle thermal efficiency"),
  	NULL},
@@ -3254,6 +3337,9 @@ static PyGetSetDef Outputs_getset[] = {
 {"mc_N_od", (getter)Outputs_get_mc_N_od,(setter)0,
 	PyDoc_STR("*sequence*: Off-design main compressor speed [rpm]"),
  	NULL},
+{"mc_N_od_perc", (getter)Outputs_get_mc_N_od_perc,(setter)0,
+	PyDoc_STR("*sequence*: Off-design main compressor speed relative to design [%]"),
+ 	NULL},
 {"mc_T_out", (getter)Outputs_get_mc_T_out,(setter)0,
 	PyDoc_STR("*float*: Compressor outlet temperature [C]"),
  	NULL},
@@ -3265,6 +3351,51 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"mc_W_dot_od", (getter)Outputs_get_mc_W_dot_od,(setter)0,
 	PyDoc_STR("*sequence*: Off-design main compressor power [MWe]"),
+ 	NULL},
+{"mc_cooler_P_in", (getter)Outputs_get_mc_cooler_P_in,(setter)0,
+	PyDoc_STR("*float*: Low pressure cross flow cooler inlet pressure [MPa]"),
+ 	NULL},
+{"mc_cooler_T_in", (getter)Outputs_get_mc_cooler_T_in,(setter)0,
+	PyDoc_STR("*float*: Low pressure cross flow cooler inlet temperature [C]"),
+ 	NULL},
+{"mc_cooler_T_in_od", (getter)Outputs_get_mc_cooler_T_in_od,(setter)0,
+	PyDoc_STR("*sequence*: Off-design Low pressure cooler inlet temperature [C]"),
+ 	NULL},
+{"mc_cooler_UA", (getter)Outputs_get_mc_cooler_UA,(setter)0,
+	PyDoc_STR("*float*: Low pressure cross flow cooler conductance [MW/K]"),
+ 	NULL},
+{"mc_cooler_W_dot_fan", (getter)Outputs_get_mc_cooler_W_dot_fan,(setter)0,
+	PyDoc_STR("*float*: Low pressure cooler fan power [MWe]"),
+ 	NULL},
+{"mc_cooler_W_dot_fan_od", (getter)Outputs_get_mc_cooler_W_dot_fan_od,(setter)0,
+	PyDoc_STR("*sequence*: Off-design Low pressure cooler fan power [MWe]"),
+ 	NULL},
+{"mc_cooler_co2_deltaP_des", (getter)Outputs_get_mc_cooler_co2_deltaP_des,(setter)0,
+	PyDoc_STR("*float*: Low pressure cooler co2 side design pressure drop [-]"),
+ 	NULL},
+{"mc_cooler_co2_deltaP_od", (getter)Outputs_get_mc_cooler_co2_deltaP_od,(setter)0,
+	PyDoc_STR("*sequence*: Off-design Off-design low pressure cooler co2 side pressure drop [-]"),
+ 	NULL},
+{"mc_cooler_cost", (getter)Outputs_get_mc_cooler_cost,(setter)0,
+	PyDoc_STR("*float*: Low pressure cooler cost [M$]"),
+ 	NULL},
+{"mc_cooler_in_isen_deltah_to_P_mc_out", (getter)Outputs_get_mc_cooler_in_isen_deltah_to_P_mc_out,(setter)0,
+	PyDoc_STR("*float*: Low pressure cross flow cooler inlet isen enthalpy rise to mc outlet pressure [kJ/kg]"),
+ 	NULL},
+{"mc_cooler_in_isen_deltah_to_P_mc_out_od", (getter)Outputs_get_mc_cooler_in_isen_deltah_to_P_mc_out_od,(setter)0,
+	PyDoc_STR("*sequence*: Off-design Low pressure cooler inlet isen enthalpy rise to mc outlet pressure [kJ/kg]"),
+ 	NULL},
+{"mc_cooler_m_dot_co2", (getter)Outputs_get_mc_cooler_m_dot_co2,(setter)0,
+	PyDoc_STR("*float*: Low pressure cross flow cooler CO2 mass flow rate [kg/s]"),
+ 	NULL},
+{"mc_cooler_q_dot", (getter)Outputs_get_mc_cooler_q_dot,(setter)0,
+	PyDoc_STR("*float*: Low pressure cooler heat transfer [MWt]"),
+ 	NULL},
+{"mc_cooler_rho_in", (getter)Outputs_get_mc_cooler_rho_in,(setter)0,
+	PyDoc_STR("*float*: Low pressure cross flow cooler inlet density [kg/m3]"),
+ 	NULL},
+{"mc_cooler_rho_in_od", (getter)Outputs_get_mc_cooler_rho_in_od,(setter)0,
+	PyDoc_STR("*sequence*: Off-design Low pressure cooler inlet density [kg/m3]"),
  	NULL},
 {"mc_cost", (getter)Outputs_get_mc_cost,(setter)0,
 	PyDoc_STR("*float*: Compressor cost [M$]"),
@@ -3329,12 +3460,6 @@ static PyGetSetDef Outputs_getset[] = {
 {"od_code", (getter)Outputs_get_od_code,(setter)0,
 	PyDoc_STR("*sequence*: Diagnostic info [-]"),
  	NULL},
-{"od_opt_conv_tol", (getter)Outputs_get_od_opt_conv_tol,(setter)0,
-	PyDoc_STR("*sequence*: Off design optimizer convergence tolerance"),
- 	NULL},
-{"od_opt_obj_code", (getter)Outputs_get_od_opt_obj_code,(setter)0,
-	PyDoc_STR("*sequence*: 1: MAX_ETA, 2: MAX_POWER"),
- 	NULL},
 {"pc_D", (getter)Outputs_get_pc_D,(setter)0,
 	PyDoc_STR("*sequence*: Precompressor stage diameters [m]"),
  	NULL},
@@ -3361,6 +3486,30 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"pc_W_dot_od", (getter)Outputs_get_pc_W_dot_od,(setter)0,
 	PyDoc_STR("*sequence*: Off-design precompressor power [MWe]"),
+ 	NULL},
+{"pc_cooler_P_in", (getter)Outputs_get_pc_cooler_P_in,(setter)0,
+	PyDoc_STR("*float*: Intermediate pressure cross flow cooler inlet pressure [MPa]"),
+ 	NULL},
+{"pc_cooler_T_in", (getter)Outputs_get_pc_cooler_T_in,(setter)0,
+	PyDoc_STR("*float*: Intermediate pressure cross flow cooler inlet temperature [C]"),
+ 	NULL},
+{"pc_cooler_UA", (getter)Outputs_get_pc_cooler_UA,(setter)0,
+	PyDoc_STR("*float*: Intermediate pressure cross flow cooler conductance [MW/K]"),
+ 	NULL},
+{"pc_cooler_W_dot_fan", (getter)Outputs_get_pc_cooler_W_dot_fan,(setter)0,
+	PyDoc_STR("*float*: Intermediate pressure cooler fan power [MWe]"),
+ 	NULL},
+{"pc_cooler_W_dot_fan_od", (getter)Outputs_get_pc_cooler_W_dot_fan_od,(setter)0,
+	PyDoc_STR("*sequence*: Off-design Intermediate pressure cooler fan power [MWe]"),
+ 	NULL},
+{"pc_cooler_cost", (getter)Outputs_get_pc_cooler_cost,(setter)0,
+	PyDoc_STR("*float*: Intermediate pressure cooler cost [M$]"),
+ 	NULL},
+{"pc_cooler_m_dot_co2", (getter)Outputs_get_pc_cooler_m_dot_co2,(setter)0,
+	PyDoc_STR("*float*: Intermediate pressure cross flow cooler CO2 mass flow rate [kg/s]"),
+ 	NULL},
+{"pc_cooler_q_dot", (getter)Outputs_get_pc_cooler_q_dot,(setter)0,
+	PyDoc_STR("*float*: Intermediate pressure cooler heat transfer [MWt]"),
  	NULL},
 {"pc_cost", (getter)Outputs_get_pc_cost,(setter)0,
 	PyDoc_STR("*float*: Precompressor cost [M$]"),
@@ -3442,6 +3591,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"rc_N_od", (getter)Outputs_get_rc_N_od,(setter)0,
 	PyDoc_STR("*sequence*: Off-design recompressor shaft speed [rpm]"),
+ 	NULL},
+{"rc_N_od_perc", (getter)Outputs_get_rc_N_od_perc,(setter)0,
+	PyDoc_STR("*sequence*: Off-design recompressor shaft speed relative to design [%]"),
  	NULL},
 {"rc_P_in_des", (getter)Outputs_get_rc_P_in_des,(setter)0,
 	PyDoc_STR("*float*: Recompressor inlet pressure [MPa]"),
@@ -3599,6 +3751,12 @@ static PyGetSetDef Outputs_getset[] = {
 {"t_cost", (getter)Outputs_get_t_cost,(setter)0,
 	PyDoc_STR("*float*: Tubine cost [M$]"),
  	NULL},
+{"t_delta_h_isen_des", (getter)Outputs_get_t_delta_h_isen_des,(setter)0,
+	PyDoc_STR("*float*: Turbine isentropic specific work [kJ/kg]"),
+ 	NULL},
+{"t_delta_h_isen_od", (getter)Outputs_get_t_delta_h_isen_od,(setter)0,
+	PyDoc_STR("*sequence*: Off-design turbine isentropic specific work [kg/s]"),
+ 	NULL},
 {"t_eta_od", (getter)Outputs_get_t_eta_od,(setter)0,
 	PyDoc_STR("*sequence*: Off-design turbine efficiency [-]"),
  	NULL},
@@ -3613,6 +3771,12 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"t_nu_od", (getter)Outputs_get_t_nu_od,(setter)0,
 	PyDoc_STR("*sequence*: Off-design turbine velocity ratio [-]"),
+ 	NULL},
+{"t_rho_in_des", (getter)Outputs_get_t_rho_in_des,(setter)0,
+	PyDoc_STR("*float*: Turbine inlet density [kg/m3]"),
+ 	NULL},
+{"t_rho_in_od", (getter)Outputs_get_t_rho_in_od,(setter)0,
+	PyDoc_STR("*sequence*: Off-design turbine inlet density [kg/m3]"),
  	NULL},
 {"t_tip_ratio_des", (getter)Outputs_get_t_tip_ratio_des,(setter)0,
 	PyDoc_STR("*float*: Turbine design tip speed ratio"),
@@ -3703,9 +3867,9 @@ newSco2CspSystemObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "HeatExchangerDesign", HeatExchangerDesign_obj);
 	Py_DECREF(HeatExchangerDesign_obj);
 
-	PyObject* CycleDesign_obj = CycleDesign_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "CycleDesign", CycleDesign_obj);
-	Py_DECREF(CycleDesign_obj);
+	PyObject* Common_obj = Common_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "Common", Common_obj);
+	Py_DECREF(Common_obj);
 
 	PyObject* PHXDesign_obj = PHXDesign_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "PHXDesign", PHXDesign_obj);
@@ -3714,10 +3878,6 @@ newSco2CspSystemObject(void* data_ptr)
 	PyObject* AirCoolerDesign_obj = AirCoolerDesign_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "AirCoolerDesign", AirCoolerDesign_obj);
 	Py_DECREF(AirCoolerDesign_obj);
-
-	PyObject* Common_obj = Common_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "Common", Common_obj);
-	Py_DECREF(Common_obj);
 
 	PyObject* Outputs_obj = Outputs_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
@@ -3951,8 +4111,8 @@ static PyMethodDef Sco2CspSystemModule_methods[] = {
 		{"new",             Sco2CspSystem_new,         METH_VARARGS,
 				PyDoc_STR("new() -> Sco2CspSystem")},
 		{"default",             Sco2CspSystem_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Sco2CspSystem\n\nUse financial config-specific default attributes\n"
-				"")},
+				PyDoc_STR("default(config) -> Sco2CspSystem\n\nUse default attributes\n"
+				"None")},
 		{"wrap",             Sco2CspSystem_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Sco2CspSystem\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   Sco2CspSystem_from_existing,        METH_VARARGS,
@@ -3989,12 +4149,12 @@ Sco2CspSystemModule_exec(PyObject *m)
 				(PyObject*)&HeatExchangerDesign_Type);
 	Py_DECREF(&HeatExchangerDesign_Type);
 
-	/// Add the CycleDesign type object to Sco2CspSystem_Type
-	if (PyType_Ready(&CycleDesign_Type) < 0) { goto fail; }
+	/// Add the Common type object to Sco2CspSystem_Type
+	if (PyType_Ready(&Common_Type) < 0) { goto fail; }
 	PyDict_SetItemString(Sco2CspSystem_Type.tp_dict,
-				"CycleDesign",
-				(PyObject*)&CycleDesign_Type);
-	Py_DECREF(&CycleDesign_Type);
+				"Common",
+				(PyObject*)&Common_Type);
+	Py_DECREF(&Common_Type);
 
 	/// Add the PHXDesign type object to Sco2CspSystem_Type
 	if (PyType_Ready(&PHXDesign_Type) < 0) { goto fail; }
@@ -4009,13 +4169,6 @@ Sco2CspSystemModule_exec(PyObject *m)
 				"AirCoolerDesign",
 				(PyObject*)&AirCoolerDesign_Type);
 	Py_DECREF(&AirCoolerDesign_Type);
-
-	/// Add the Common type object to Sco2CspSystem_Type
-	if (PyType_Ready(&Common_Type) < 0) { goto fail; }
-	PyDict_SetItemString(Sco2CspSystem_Type.tp_dict,
-				"Common",
-				(PyObject*)&Common_Type);
-	Py_DECREF(&Common_Type);
 
 	/// Add the Outputs type object to Sco2CspSystem_Type
 	if (PyType_Ready(&Outputs_Type) < 0) { goto fail; }

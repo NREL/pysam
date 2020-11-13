@@ -1513,8 +1513,8 @@ static PyMethodDef SwhModule_methods[] = {
 		{"new",             Swh_new,         METH_VARARGS,
 				PyDoc_STR("new() -> Swh")},
 		{"default",             Swh_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Swh\n\nUse financial config-specific default attributes\n"
-				"config options:\n\n- \"SolarWaterHeatingCommercial\"\n- \"SolarWaterHeatingLCOECalculator\"\n- \"SolarWaterHeatingNone\"\n- \"SolarWaterHeatingResidential\"")},
+				PyDoc_STR("default(config) -> Swh\n\nUse default attributes\n"
+				"`config` options:\n\n- \"SolarWaterHeatingCommercial\"\n- \"SolarWaterHeatingLCOECalculator\"\n- \"SolarWaterHeatingNone\"\n- \"SolarWaterHeatingResidential\"")},
 		{"wrap",             Swh_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Swh\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   Swh_from_existing,        METH_VARARGS,

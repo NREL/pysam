@@ -81,7 +81,7 @@ static PyTypeObject Simulation_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"StandAloneBattery.Simulation",             /*tp_name*/
+		"Battery.Simulation",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -229,7 +229,7 @@ static PyTypeObject Lifetime_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"StandAloneBattery.Lifetime",             /*tp_name*/
+		"Battery.Lifetime",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -637,18 +637,6 @@ BatterySystem_set_batt_replacement_option(VarGroupObject *self, PyObject *value,
 }
 
 static PyObject *
-BatterySystem_get_batt_replacement_schedule(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Battery_BatterySystem_batt_replacement_schedule_aget, self->data_ptr);
-}
-
-static int
-BatterySystem_set_batt_replacement_schedule(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_Battery_BatterySystem_batt_replacement_schedule_aset, self->data_ptr);
-}
-
-static PyObject *
 BatterySystem_get_batt_replacement_schedule_percent(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Battery_BatterySystem_batt_replacement_schedule_percent_aget, self->data_ptr);
@@ -698,34 +686,34 @@ BatterySystem_set_om_replacement_cost1(VarGroupObject *self, PyObject *value, vo
 
 static PyGetSetDef BatterySystem_getset[] = {
 {"batt_ac_dc_efficiency", (getter)BatterySystem_get_batt_ac_dc_efficiency,(setter)BatterySystem_set_batt_ac_dc_efficiency,
-	PyDoc_STR("*float*: Inverter AC to battery DC efficiency"),
+	PyDoc_STR("*float*: Inverter AC to battery DC efficiency\n\n*Changes to this variable may require updating the values of the following*: \n\t - LeadAcid_q10_computed\n\t - LeadAcid_q20_computed\n\t - LeadAcid_qn_computed\n\t - batt_Qexp\n\t - batt_Qfull_flow\n\t - batt_Qnom\n\t - batt_computed_bank_capacity\n\t - batt_computed_series\n\t - batt_computed_strings\n\t - batt_current_charge_max\n\t - batt_current_discharge_max\n\t - batt_mass\n\t - batt_power_charge_max_kwac\n\t - batt_power_charge_max_kwdc\n\t - batt_power_discharge_max_kwac\n\t - batt_power_discharge_max_kwdc\n\t - batt_surface_area\n"),
  	NULL},
 {"batt_ac_or_dc", (getter)BatterySystem_get_batt_ac_or_dc,(setter)BatterySystem_set_batt_ac_or_dc,
 	PyDoc_STR("*float*: Battery interconnection (AC or DC)\n\n*Options*: 0=DC_Connected,1=AC_Connected\n\n*Changes to this variable may require updating the values of the following*: \n\t - LeadAcid_q10_computed\n\t - LeadAcid_q20_computed\n\t - LeadAcid_qn_computed\n\t - batt_Qexp\n\t - batt_Qfull_flow\n\t - batt_Qnom\n\t - batt_computed_bank_capacity\n\t - batt_computed_series\n\t - batt_computed_strings\n\t - batt_current_charge_max\n\t - batt_current_discharge_max\n\t - batt_mass\n\t - batt_power_charge_max_kwac\n\t - batt_power_charge_max_kwdc\n\t - batt_power_discharge_max_kwac\n\t - batt_power_discharge_max_kwdc\n\t - batt_surface_area\n"),
  	NULL},
 {"batt_computed_bank_capacity", (getter)BatterySystem_get_batt_computed_bank_capacity,(setter)BatterySystem_set_batt_computed_bank_capacity,
-	PyDoc_STR("*float*: Computed bank capacity [kWh]\n\n*Changes to this variable may require updating the values of the following*: \n\t - batt_Qexp\n\t - batt_Qfull_flow\n\t - batt_Qnom\n\t - batt_mass\n\t - batt_surface_area\n\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - batt_Qfull\n\t - batt_Vnom_default\n\t - batt_ac_or_dc\n\t - batt_chem\n\t - batt_current_choice\n\t - batt_dc_ac_efficiency\n\t - batt_dc_dc_efficiency\n"),
+	PyDoc_STR("*float*: Computed bank capacity [kWh]\n\n*Changes to this variable may require updating the values of the following*: \n\t - batt_Qexp\n\t - batt_Qfull_flow\n\t - batt_Qnom\n\t - batt_mass\n\t - batt_surface_area\n\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - batt_Qfull\n\t - batt_Vnom_default\n\t - batt_ac_dc_efficiency\n\t - batt_ac_or_dc\n\t - batt_chem\n\t - batt_current_choice\n\t - batt_dc_ac_efficiency\n\t - batt_dc_dc_efficiency\n"),
  	NULL},
 {"batt_computed_series", (getter)BatterySystem_get_batt_computed_series,(setter)BatterySystem_set_batt_computed_series,
-	PyDoc_STR("*float*: Number of cells in series\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - batt_Qfull\n\t - batt_Vnom_default\n\t - batt_ac_or_dc\n\t - batt_chem\n\t - batt_current_choice\n\t - batt_dc_ac_efficiency\n\t - batt_dc_dc_efficiency\n"),
+	PyDoc_STR("*float*: Number of cells in series\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - batt_Qfull\n\t - batt_Vnom_default\n\t - batt_ac_dc_efficiency\n\t - batt_ac_or_dc\n\t - batt_chem\n\t - batt_current_choice\n\t - batt_dc_ac_efficiency\n\t - batt_dc_dc_efficiency\n"),
  	NULL},
 {"batt_computed_strings", (getter)BatterySystem_get_batt_computed_strings,(setter)BatterySystem_set_batt_computed_strings,
-	PyDoc_STR("*float*: Number of strings of cells\n\n*Changes to this variable may require updating the values of the following*: \n\t - LeadAcid_q10_computed\n\t - LeadAcid_q20_computed\n\t - LeadAcid_qn_computed\n\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - batt_Qfull\n\t - batt_Vnom_default\n\t - batt_ac_or_dc\n\t - batt_chem\n\t - batt_current_choice\n\t - batt_dc_ac_efficiency\n\t - batt_dc_dc_efficiency\n"),
+	PyDoc_STR("*float*: Number of strings of cells\n\n*Changes to this variable may require updating the values of the following*: \n\t - LeadAcid_q10_computed\n\t - LeadAcid_q20_computed\n\t - LeadAcid_qn_computed\n\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - batt_Qfull\n\t - batt_Vnom_default\n\t - batt_ac_dc_efficiency\n\t - batt_ac_or_dc\n\t - batt_chem\n\t - batt_current_choice\n\t - batt_dc_ac_efficiency\n\t - batt_dc_dc_efficiency\n"),
  	NULL},
 {"batt_current_charge_max", (getter)BatterySystem_get_batt_current_charge_max,(setter)BatterySystem_set_batt_current_charge_max,
-	PyDoc_STR("*float*: Maximum charge current [A]\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - batt_Qfull\n\t - batt_Vnom_default\n\t - batt_ac_or_dc\n\t - batt_chem\n\t - batt_current_choice\n\t - batt_dc_ac_efficiency\n\t - batt_dc_dc_efficiency\n"),
+	PyDoc_STR("*float*: Maximum charge current [A]\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - batt_Qfull\n\t - batt_Vnom_default\n\t - batt_ac_dc_efficiency\n\t - batt_ac_or_dc\n\t - batt_chem\n\t - batt_current_choice\n\t - batt_dc_ac_efficiency\n\t - batt_dc_dc_efficiency\n"),
  	NULL},
 {"batt_current_choice", (getter)BatterySystem_get_batt_current_choice,(setter)BatterySystem_set_batt_current_choice,
 	PyDoc_STR("*float*: Limit cells by current or power\n\n*Changes to this variable may require updating the values of the following*: \n\t - LeadAcid_q10_computed\n\t - LeadAcid_q20_computed\n\t - LeadAcid_qn_computed\n\t - batt_Qexp\n\t - batt_Qfull_flow\n\t - batt_Qnom\n\t - batt_computed_bank_capacity\n\t - batt_computed_series\n\t - batt_computed_strings\n\t - batt_current_charge_max\n\t - batt_current_discharge_max\n\t - batt_mass\n\t - batt_power_charge_max_kwac\n\t - batt_power_charge_max_kwdc\n\t - batt_power_discharge_max_kwac\n\t - batt_power_discharge_max_kwdc\n\t - batt_surface_area\n"),
  	NULL},
 {"batt_current_discharge_max", (getter)BatterySystem_get_batt_current_discharge_max,(setter)BatterySystem_set_batt_current_discharge_max,
-	PyDoc_STR("*float*: Maximum discharge current [A]\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - batt_Qfull\n\t - batt_Vnom_default\n\t - batt_ac_or_dc\n\t - batt_chem\n\t - batt_current_choice\n\t - batt_dc_ac_efficiency\n\t - batt_dc_dc_efficiency\n"),
+	PyDoc_STR("*float*: Maximum discharge current [A]\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - batt_Qfull\n\t - batt_Vnom_default\n\t - batt_ac_dc_efficiency\n\t - batt_ac_or_dc\n\t - batt_chem\n\t - batt_current_choice\n\t - batt_dc_ac_efficiency\n\t - batt_dc_dc_efficiency\n"),
  	NULL},
 {"batt_cycle_cost", (getter)BatterySystem_get_batt_cycle_cost,(setter)BatterySystem_set_batt_cycle_cost,
-	PyDoc_STR("*sequence*: Input battery cycle costs [$/cycle-kWh]"),
+	PyDoc_STR("*sequence*: Input battery cycle degradaton penalty per year [$/cycle-kWh]\n\n*Info*: length 1 or analysis_period, length 1 will be extended using inflation"),
  	NULL},
 {"batt_cycle_cost_choice", (getter)BatterySystem_get_batt_cycle_cost_choice,(setter)BatterySystem_set_batt_cycle_cost_choice,
-	PyDoc_STR("*float*: Use SAM model for cycle costs or input custom [0/1]\n\n*Options*: 0=UseCostModel,1=InputCost"),
+	PyDoc_STR("*float*: Use SAM cost model for degradaton penalty or input custom via batt_cycle_cost [0/1]\n\n*Options*: 0=UseCostModel,1=InputCost"),
  	NULL},
 {"batt_dc_ac_efficiency", (getter)BatterySystem_get_batt_dc_ac_efficiency,(setter)BatterySystem_set_batt_dc_ac_efficiency,
 	PyDoc_STR("*float*: Battery DC to AC efficiency\n\n*Changes to this variable may require updating the values of the following*: \n\t - LeadAcid_q10_computed\n\t - LeadAcid_q20_computed\n\t - LeadAcid_qn_computed\n\t - batt_Qexp\n\t - batt_Qfull_flow\n\t - batt_Qnom\n\t - batt_computed_bank_capacity\n\t - batt_computed_series\n\t - batt_computed_strings\n\t - batt_current_charge_max\n\t - batt_current_discharge_max\n\t - batt_mass\n\t - batt_power_charge_max_kwac\n\t - batt_power_charge_max_kwdc\n\t - batt_power_discharge_max_kwac\n\t - batt_power_discharge_max_kwdc\n\t - batt_surface_area\n"),
@@ -740,34 +728,34 @@ static PyGetSetDef BatterySystem_getset[] = {
 	PyDoc_STR("*float*: Loss power input option [0/1]\n\n*Options*: 0=Monthly,1=TimeSeries\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"batt_losses", (getter)BatterySystem_get_batt_losses,(setter)BatterySystem_set_batt_losses,
-	PyDoc_STR("*sequence*: Battery system losses at each timestep [kW]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*sequence*: Battery system losses at each timestep (kW DC for DC connected, AC for AC connected) [kW]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"batt_losses_charging", (getter)BatterySystem_get_batt_losses_charging,(setter)BatterySystem_set_batt_losses_charging,
-	PyDoc_STR("*sequence*: Battery system losses when charging [kW]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*sequence*: Battery system losses when charging (kW DC for DC connected, AC for AC connected) [kW]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"batt_losses_discharging", (getter)BatterySystem_get_batt_losses_discharging,(setter)BatterySystem_set_batt_losses_discharging,
-	PyDoc_STR("*sequence*: Battery system losses when discharging [kW]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*sequence*: Battery system losses when discharging (kW DC for DC connected, AC for AC connected) [kW]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"batt_losses_idle", (getter)BatterySystem_get_batt_losses_idle,(setter)BatterySystem_set_batt_losses_idle,
-	PyDoc_STR("*sequence*: Battery system losses when idle [kW]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*sequence*: Battery system losses when idle (kW DC for DC connected, AC for AC connected) [kW]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"batt_mass", (getter)BatterySystem_get_batt_mass,(setter)BatterySystem_set_batt_mass,
-	PyDoc_STR("*float*: Battery mass [kg]\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - batt_Qfull\n\t - batt_Vnom_default\n\t - batt_ac_or_dc\n\t - batt_chem\n\t - batt_computed_bank_capacity\n\t - batt_current_choice\n\t - batt_dc_ac_efficiency\n\t - batt_dc_dc_efficiency\n"),
+	PyDoc_STR("*float*: Battery mass [kg]\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - batt_Qfull\n\t - batt_Vnom_default\n\t - batt_ac_dc_efficiency\n\t - batt_ac_or_dc\n\t - batt_chem\n\t - batt_computed_bank_capacity\n\t - batt_current_choice\n\t - batt_dc_ac_efficiency\n\t - batt_dc_dc_efficiency\n"),
  	NULL},
 {"batt_meter_position", (getter)BatterySystem_get_batt_meter_position,(setter)BatterySystem_set_batt_meter_position,
 	PyDoc_STR("*float*: Position of battery relative to electric meter\n\n*Options*: 0=BehindTheMeter,1=FrontOfMeter"),
  	NULL},
 {"batt_power_charge_max_kwac", (getter)BatterySystem_get_batt_power_charge_max_kwac,(setter)BatterySystem_set_batt_power_charge_max_kwac,
-	PyDoc_STR("*float*: Maximum charge power (AC) [kWac]\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - batt_Qfull\n\t - batt_Vnom_default\n\t - batt_ac_or_dc\n\t - batt_chem\n\t - batt_current_choice\n\t - batt_dc_ac_efficiency\n\t - batt_dc_dc_efficiency\n"),
+	PyDoc_STR("*float*: Maximum charge power (AC) [kWac]\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - batt_Qfull\n\t - batt_Vnom_default\n\t - batt_ac_dc_efficiency\n\t - batt_ac_or_dc\n\t - batt_chem\n\t - batt_current_choice\n\t - batt_dc_ac_efficiency\n\t - batt_dc_dc_efficiency\n"),
  	NULL},
 {"batt_power_charge_max_kwdc", (getter)BatterySystem_get_batt_power_charge_max_kwdc,(setter)BatterySystem_set_batt_power_charge_max_kwdc,
-	PyDoc_STR("*float*: Maximum charge power (DC) [kWdc]\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - batt_Qfull\n\t - batt_Vnom_default\n\t - batt_ac_or_dc\n\t - batt_chem\n\t - batt_current_choice\n\t - batt_dc_ac_efficiency\n\t - batt_dc_dc_efficiency\n"),
+	PyDoc_STR("*float*: Maximum charge power (DC) [kWdc]\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - batt_Qfull\n\t - batt_Vnom_default\n\t - batt_ac_dc_efficiency\n\t - batt_ac_or_dc\n\t - batt_chem\n\t - batt_current_choice\n\t - batt_dc_ac_efficiency\n\t - batt_dc_dc_efficiency\n"),
  	NULL},
 {"batt_power_discharge_max_kwac", (getter)BatterySystem_get_batt_power_discharge_max_kwac,(setter)BatterySystem_set_batt_power_discharge_max_kwac,
-	PyDoc_STR("*float*: Maximum discharge power (AC) [kWac]\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - batt_Qfull\n\t - batt_Vnom_default\n\t - batt_ac_or_dc\n\t - batt_chem\n\t - batt_current_choice\n\t - batt_dc_ac_efficiency\n\t - batt_dc_dc_efficiency\n"),
+	PyDoc_STR("*float*: Maximum discharge power (AC) [kWac]\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - batt_Qfull\n\t - batt_Vnom_default\n\t - batt_ac_dc_efficiency\n\t - batt_ac_or_dc\n\t - batt_chem\n\t - batt_current_choice\n\t - batt_dc_ac_efficiency\n\t - batt_dc_dc_efficiency\n"),
  	NULL},
 {"batt_power_discharge_max_kwdc", (getter)BatterySystem_get_batt_power_discharge_max_kwdc,(setter)BatterySystem_set_batt_power_discharge_max_kwdc,
-	PyDoc_STR("*float*: Maximum discharge power (DC) [kWdc]\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - batt_Qfull\n\t - batt_Vnom_default\n\t - batt_ac_or_dc\n\t - batt_chem\n\t - batt_current_choice\n\t - batt_dc_ac_efficiency\n\t - batt_dc_dc_efficiency\n"),
+	PyDoc_STR("*float*: Maximum discharge power (DC) [kWdc]\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - batt_Qfull\n\t - batt_Vnom_default\n\t - batt_ac_dc_efficiency\n\t - batt_ac_or_dc\n\t - batt_chem\n\t - batt_current_choice\n\t - batt_dc_ac_efficiency\n\t - batt_dc_dc_efficiency\n"),
  	NULL},
 {"batt_replacement_capacity", (getter)BatterySystem_get_batt_replacement_capacity,(setter)BatterySystem_set_batt_replacement_capacity,
 	PyDoc_STR("*float*: Capacity degradation at which to replace battery [%]"),
@@ -775,14 +763,11 @@ static PyGetSetDef BatterySystem_getset[] = {
 {"batt_replacement_option", (getter)BatterySystem_get_batt_replacement_option,(setter)BatterySystem_set_batt_replacement_option,
 	PyDoc_STR("*float*: Enable battery replacement? [0=none,1=capacity based,2=user schedule]\n\n*Constraints*: INTEGER,MIN=0,MAX=2\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
-{"batt_replacement_schedule", (getter)BatterySystem_get_batt_replacement_schedule,(setter)BatterySystem_set_batt_replacement_schedule,
-	PyDoc_STR("*sequence*: Battery bank number of replacements in each year [number/year]\n\n*Options*: length <= analysis_period\n\n*Required*: True if batt_replacement_option=2"),
- 	NULL},
 {"batt_replacement_schedule_percent", (getter)BatterySystem_get_batt_replacement_schedule_percent,(setter)BatterySystem_set_batt_replacement_schedule_percent,
 	PyDoc_STR("*sequence*: Percentage of battery capacity to replace in each year [%]\n\n*Options*: length <= analysis_period\n\n*Required*: True if batt_replacement_option=2"),
  	NULL},
 {"batt_surface_area", (getter)BatterySystem_get_batt_surface_area,(setter)BatterySystem_set_batt_surface_area,
-	PyDoc_STR("*float*: Battery surface area [m^2]\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - batt_Qfull\n\t - batt_Vnom_default\n\t - batt_ac_or_dc\n\t - batt_chem\n\t - batt_computed_bank_capacity\n\t - batt_current_choice\n\t - batt_dc_ac_efficiency\n\t - batt_dc_dc_efficiency\n"),
+	PyDoc_STR("*float*: Battery surface area [m^2]\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - batt_Qfull\n\t - batt_Vnom_default\n\t - batt_ac_dc_efficiency\n\t - batt_ac_or_dc\n\t - batt_chem\n\t - batt_computed_bank_capacity\n\t - batt_current_choice\n\t - batt_dc_ac_efficiency\n\t - batt_dc_dc_efficiency\n"),
  	NULL},
 {"en_batt", (getter)BatterySystem_get_en_batt,(setter)BatterySystem_set_en_batt,
 	PyDoc_STR("*float*: Enable battery storage model [0/1]\n\n*Required*: If not provided, assumed to be 0"),
@@ -797,7 +782,7 @@ static PyTypeObject BatterySystem_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"StandAloneBattery.BatterySystem",             /*tp_name*/
+		"Battery.BatterySystem",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -945,7 +930,7 @@ static PyTypeObject SystemOutput_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"StandAloneBattery.SystemOutput",             /*tp_name*/
+		"Battery.SystemOutput",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -1093,7 +1078,7 @@ static PyTypeObject Load_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"StandAloneBattery.Load",             /*tp_name*/
+		"Battery.Load",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -1574,13 +1559,13 @@ BatteryCell_set_cap_vs_temp(VarGroupObject *self, PyObject *value, void *closure
 
 static PyGetSetDef BatteryCell_getset[] = {
 {"LeadAcid_q10_computed", (getter)BatteryCell_get_LeadAcid_q10_computed,(setter)BatteryCell_set_LeadAcid_q10_computed,
-	PyDoc_STR("*float*: Capacity at 10-hour discharge rate [Ah]\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - batt_Qfull\n\t - batt_Vnom_default\n\t - batt_ac_or_dc\n\t - batt_chem\n\t - batt_computed_strings\n\t - batt_current_choice\n\t - batt_dc_ac_efficiency\n\t - batt_dc_dc_efficiency\n"),
+	PyDoc_STR("*float*: Capacity at 10-hour discharge rate [Ah]\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - batt_Qfull\n\t - batt_Vnom_default\n\t - batt_ac_dc_efficiency\n\t - batt_ac_or_dc\n\t - batt_chem\n\t - batt_computed_strings\n\t - batt_current_choice\n\t - batt_dc_ac_efficiency\n\t - batt_dc_dc_efficiency\n"),
  	NULL},
 {"LeadAcid_q20_computed", (getter)BatteryCell_get_LeadAcid_q20_computed,(setter)BatteryCell_set_LeadAcid_q20_computed,
-	PyDoc_STR("*float*: Capacity at 20-hour discharge rate [Ah]\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - batt_Qfull\n\t - batt_Vnom_default\n\t - batt_ac_or_dc\n\t - batt_chem\n\t - batt_computed_strings\n\t - batt_current_choice\n\t - batt_dc_ac_efficiency\n\t - batt_dc_dc_efficiency\n"),
+	PyDoc_STR("*float*: Capacity at 20-hour discharge rate [Ah]\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - batt_Qfull\n\t - batt_Vnom_default\n\t - batt_ac_dc_efficiency\n\t - batt_ac_or_dc\n\t - batt_chem\n\t - batt_computed_strings\n\t - batt_current_choice\n\t - batt_dc_ac_efficiency\n\t - batt_dc_dc_efficiency\n"),
  	NULL},
 {"LeadAcid_qn_computed", (getter)BatteryCell_get_LeadAcid_qn_computed,(setter)BatteryCell_set_LeadAcid_qn_computed,
-	PyDoc_STR("*float*: Capacity at discharge rate for n-hour rate [Ah]\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - batt_Qfull\n\t - batt_Vnom_default\n\t - batt_ac_or_dc\n\t - batt_chem\n\t - batt_computed_strings\n\t - batt_current_choice\n\t - batt_dc_ac_efficiency\n\t - batt_dc_dc_efficiency\n"),
+	PyDoc_STR("*float*: Capacity at discharge rate for n-hour rate [Ah]\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - batt_Qfull\n\t - batt_Vnom_default\n\t - batt_ac_dc_efficiency\n\t - batt_ac_or_dc\n\t - batt_chem\n\t - batt_computed_strings\n\t - batt_current_choice\n\t - batt_dc_ac_efficiency\n\t - batt_dc_dc_efficiency\n"),
  	NULL},
 {"LeadAcid_tn", (getter)BatteryCell_get_LeadAcid_tn,(setter)BatteryCell_set_LeadAcid_tn,
 	PyDoc_STR("*float*: Time to discharge [h]"),
@@ -1592,16 +1577,16 @@ static PyGetSetDef BatteryCell_getset[] = {
 	PyDoc_STR("*float*: Battery specific heat capacity [J/KgK]"),
  	NULL},
 {"batt_Qexp", (getter)BatteryCell_get_batt_Qexp,(setter)BatteryCell_set_batt_Qexp,
-	PyDoc_STR("*float*: Cell capacity at end of exponential zone [Ah]\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - batt_Qfull\n\t - batt_Vnom_default\n\t - batt_ac_or_dc\n\t - batt_chem\n\t - batt_computed_bank_capacity\n\t - batt_current_choice\n\t - batt_dc_ac_efficiency\n\t - batt_dc_dc_efficiency\n"),
+	PyDoc_STR("*float*: Cell capacity at end of exponential zone [Ah]\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - batt_Qfull\n\t - batt_Vnom_default\n\t - batt_ac_dc_efficiency\n\t - batt_ac_or_dc\n\t - batt_chem\n\t - batt_computed_bank_capacity\n\t - batt_current_choice\n\t - batt_dc_ac_efficiency\n\t - batt_dc_dc_efficiency\n"),
  	NULL},
 {"batt_Qfull", (getter)BatteryCell_get_batt_Qfull,(setter)BatteryCell_set_batt_Qfull,
 	PyDoc_STR("*float*: Fully charged cell capacity [Ah]\n\n*Changes to this variable may require updating the values of the following*: \n\t - LeadAcid_q10_computed\n\t - LeadAcid_q20_computed\n\t - LeadAcid_qn_computed\n\t - batt_Qexp\n\t - batt_Qfull_flow\n\t - batt_Qnom\n\t - batt_computed_bank_capacity\n\t - batt_computed_series\n\t - batt_computed_strings\n\t - batt_current_charge_max\n\t - batt_current_discharge_max\n\t - batt_mass\n\t - batt_power_charge_max_kwac\n\t - batt_power_charge_max_kwdc\n\t - batt_power_discharge_max_kwac\n\t - batt_power_discharge_max_kwdc\n\t - batt_surface_area\n"),
  	NULL},
 {"batt_Qfull_flow", (getter)BatteryCell_get_batt_Qfull_flow,(setter)BatteryCell_set_batt_Qfull_flow,
-	PyDoc_STR("*float*: Fully charged flow battery capacity [Ah]\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - batt_Qfull\n\t - batt_Vnom_default\n\t - batt_ac_or_dc\n\t - batt_chem\n\t - batt_computed_bank_capacity\n\t - batt_current_choice\n\t - batt_dc_ac_efficiency\n\t - batt_dc_dc_efficiency\n"),
+	PyDoc_STR("*float*: Fully charged flow battery capacity [Ah]\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - batt_Qfull\n\t - batt_Vnom_default\n\t - batt_ac_dc_efficiency\n\t - batt_ac_or_dc\n\t - batt_chem\n\t - batt_computed_bank_capacity\n\t - batt_current_choice\n\t - batt_dc_ac_efficiency\n\t - batt_dc_dc_efficiency\n"),
  	NULL},
 {"batt_Qnom", (getter)BatteryCell_get_batt_Qnom,(setter)BatteryCell_set_batt_Qnom,
-	PyDoc_STR("*float*: Cell capacity at end of nominal zone [Ah]\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - batt_Qfull\n\t - batt_Vnom_default\n\t - batt_ac_or_dc\n\t - batt_chem\n\t - batt_computed_bank_capacity\n\t - batt_current_choice\n\t - batt_dc_ac_efficiency\n\t - batt_dc_dc_efficiency\n"),
+	PyDoc_STR("*float*: Cell capacity at end of nominal zone [Ah]\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - batt_Qfull\n\t - batt_Vnom_default\n\t - batt_ac_dc_efficiency\n\t - batt_ac_or_dc\n\t - batt_chem\n\t - batt_computed_bank_capacity\n\t - batt_current_choice\n\t - batt_dc_ac_efficiency\n\t - batt_dc_dc_efficiency\n"),
  	NULL},
 {"batt_Vexp", (getter)BatteryCell_get_batt_Vexp,(setter)BatteryCell_set_batt_Vexp,
 	PyDoc_STR("*float*: Cell voltage at end of exponential zone [V]"),
@@ -1658,7 +1643,7 @@ static PyGetSetDef BatteryCell_getset[] = {
 	PyDoc_STR("*float*: Internal resistance [Ohm]"),
  	NULL},
 {"batt_room_temperature_celsius", (getter)BatteryCell_get_batt_room_temperature_celsius,(setter)BatteryCell_set_batt_room_temperature_celsius,
-	PyDoc_STR("*sequence*: Temperature of storage room [C]"),
+	PyDoc_STR("*sequence*: Temperature of storage room [C]\n\n*Options*: length=1 for fixed, # of weatherfile records otherwise"),
  	NULL},
 {"batt_voltage_choice", (getter)BatteryCell_get_batt_voltage_choice,(setter)BatteryCell_set_batt_voltage_choice,
 	PyDoc_STR("*float*: Battery voltage input option [0/1]\n\n*Options*: 0=UseVoltageModel,1=InputVoltageTable\n\n*Required*: If not provided, assumed to be 0"),
@@ -1676,7 +1661,7 @@ static PyTypeObject BatteryCell_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"StandAloneBattery.BatteryCell",             /*tp_name*/
+		"Battery.BatteryCell",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -1929,7 +1914,7 @@ static PyTypeObject Inverter_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"StandAloneBattery.Inverter",             /*tp_name*/
+		"Battery.Inverter",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -2047,7 +2032,7 @@ static PyTypeObject Losses_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"StandAloneBattery.Losses",             /*tp_name*/
+		"Battery.Losses",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -2480,7 +2465,7 @@ static PyTypeObject BatteryDispatch_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"StandAloneBattery.BatteryDispatch",             /*tp_name*/
+		"Battery.BatteryDispatch",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -2510,394 +2495,6 @@ static PyTypeObject BatteryDispatch_Type = {
 		BatteryDispatch_methods,         /*tp_methods*/
 		0,                          /*tp_members*/
 		BatteryDispatch_getset,          /*tp_getset*/
-		0,                          /*tp_base*/
-		0,                          /*tp_dict*/
-		0,                          /*tp_descr_get*/
-		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictofnset*/
-		0,                          /*tp_init*/
-		0,                          /*tp_alloc*/
-		0,             /*tp_new*/
-		0,                          /*tp_free*/
-		0,                          /*tp_is_gc*/
-};
-
-
-/*
- * ElectricityRates Group
- */ 
-
-static PyTypeObject ElectricityRates_Type;
-
-static PyObject *
-ElectricityRates_new(SAM_Battery data_ptr)
-{
-	PyObject* new_obj = ElectricityRates_Type.tp_alloc(&ElectricityRates_Type,0);
-
-	VarGroupObject* ElectricityRates_obj = (VarGroupObject*)new_obj;
-
-	ElectricityRates_obj->data_ptr = (SAM_table)data_ptr;
-
-	return new_obj;
-}
-
-/* ElectricityRates methods */
-
-static PyObject *
-ElectricityRates_assign(VarGroupObject *self, PyObject *args)
-{
-	PyObject* dict;
-	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
-		return NULL;
-	}
-
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Battery", "ElectricityRates")){
-		return NULL;
-	}
-
-	Py_INCREF(Py_None);
-	return Py_None;
-}
-
-static PyObject *
-ElectricityRates_export(VarGroupObject *self, PyObject *args)
-{
-	PyTypeObject* tp = &ElectricityRates_Type;
-	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
-	return dict;
-}
-
-static PyMethodDef ElectricityRates_methods[] = {
-		{"assign",            (PyCFunction)ElectricityRates_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``ElectricityRates_vals = { var: val, ...}``")},
-		{"export",            (PyCFunction)ElectricityRates_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
-		{NULL,              NULL}           /* sentinel */
-};
-
-static PyObject *
-ElectricityRates_get_en_electricity_rates(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Battery_ElectricityRates_en_electricity_rates_nget, self->data_ptr);
-}
-
-static int
-ElectricityRates_set_en_electricity_rates(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Battery_ElectricityRates_en_electricity_rates_nset, self->data_ptr);
-}
-
-static PyObject *
-ElectricityRates_get_rate_escalation(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Battery_ElectricityRates_rate_escalation_aget, self->data_ptr);
-}
-
-static int
-ElectricityRates_set_rate_escalation(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_Battery_ElectricityRates_rate_escalation_aset, self->data_ptr);
-}
-
-static PyObject *
-ElectricityRates_get_ur_dc_enable(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Battery_ElectricityRates_ur_dc_enable_nget, self->data_ptr);
-}
-
-static int
-ElectricityRates_set_ur_dc_enable(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Battery_ElectricityRates_ur_dc_enable_nset, self->data_ptr);
-}
-
-static PyObject *
-ElectricityRates_get_ur_dc_flat_mat(VarGroupObject *self, void *closure)
-{
-	return PySAM_matrix_getter(SAM_Battery_ElectricityRates_ur_dc_flat_mat_mget, self->data_ptr);
-}
-
-static int
-ElectricityRates_set_ur_dc_flat_mat(VarGroupObject *self, PyObject *value, void *closure)
-{
-		return PySAM_matrix_setter(value, SAM_Battery_ElectricityRates_ur_dc_flat_mat_mset, self->data_ptr);
-}
-
-static PyObject *
-ElectricityRates_get_ur_dc_sched_weekday(VarGroupObject *self, void *closure)
-{
-	return PySAM_matrix_getter(SAM_Battery_ElectricityRates_ur_dc_sched_weekday_mget, self->data_ptr);
-}
-
-static int
-ElectricityRates_set_ur_dc_sched_weekday(VarGroupObject *self, PyObject *value, void *closure)
-{
-		return PySAM_matrix_setter(value, SAM_Battery_ElectricityRates_ur_dc_sched_weekday_mset, self->data_ptr);
-}
-
-static PyObject *
-ElectricityRates_get_ur_dc_sched_weekend(VarGroupObject *self, void *closure)
-{
-	return PySAM_matrix_getter(SAM_Battery_ElectricityRates_ur_dc_sched_weekend_mget, self->data_ptr);
-}
-
-static int
-ElectricityRates_set_ur_dc_sched_weekend(VarGroupObject *self, PyObject *value, void *closure)
-{
-		return PySAM_matrix_setter(value, SAM_Battery_ElectricityRates_ur_dc_sched_weekend_mset, self->data_ptr);
-}
-
-static PyObject *
-ElectricityRates_get_ur_dc_tou_mat(VarGroupObject *self, void *closure)
-{
-	return PySAM_matrix_getter(SAM_Battery_ElectricityRates_ur_dc_tou_mat_mget, self->data_ptr);
-}
-
-static int
-ElectricityRates_set_ur_dc_tou_mat(VarGroupObject *self, PyObject *value, void *closure)
-{
-		return PySAM_matrix_setter(value, SAM_Battery_ElectricityRates_ur_dc_tou_mat_mset, self->data_ptr);
-}
-
-static PyObject *
-ElectricityRates_get_ur_ec_sched_weekday(VarGroupObject *self, void *closure)
-{
-	return PySAM_matrix_getter(SAM_Battery_ElectricityRates_ur_ec_sched_weekday_mget, self->data_ptr);
-}
-
-static int
-ElectricityRates_set_ur_ec_sched_weekday(VarGroupObject *self, PyObject *value, void *closure)
-{
-		return PySAM_matrix_setter(value, SAM_Battery_ElectricityRates_ur_ec_sched_weekday_mset, self->data_ptr);
-}
-
-static PyObject *
-ElectricityRates_get_ur_ec_sched_weekend(VarGroupObject *self, void *closure)
-{
-	return PySAM_matrix_getter(SAM_Battery_ElectricityRates_ur_ec_sched_weekend_mget, self->data_ptr);
-}
-
-static int
-ElectricityRates_set_ur_ec_sched_weekend(VarGroupObject *self, PyObject *value, void *closure)
-{
-		return PySAM_matrix_setter(value, SAM_Battery_ElectricityRates_ur_ec_sched_weekend_mset, self->data_ptr);
-}
-
-static PyObject *
-ElectricityRates_get_ur_ec_tou_mat(VarGroupObject *self, void *closure)
-{
-	return PySAM_matrix_getter(SAM_Battery_ElectricityRates_ur_ec_tou_mat_mget, self->data_ptr);
-}
-
-static int
-ElectricityRates_set_ur_ec_tou_mat(VarGroupObject *self, PyObject *value, void *closure)
-{
-		return PySAM_matrix_setter(value, SAM_Battery_ElectricityRates_ur_ec_tou_mat_mset, self->data_ptr);
-}
-
-static PyObject *
-ElectricityRates_get_ur_en_ts_buy_rate(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Battery_ElectricityRates_ur_en_ts_buy_rate_nget, self->data_ptr);
-}
-
-static int
-ElectricityRates_set_ur_en_ts_buy_rate(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Battery_ElectricityRates_ur_en_ts_buy_rate_nset, self->data_ptr);
-}
-
-static PyObject *
-ElectricityRates_get_ur_en_ts_sell_rate(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Battery_ElectricityRates_ur_en_ts_sell_rate_nget, self->data_ptr);
-}
-
-static int
-ElectricityRates_set_ur_en_ts_sell_rate(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Battery_ElectricityRates_ur_en_ts_sell_rate_nset, self->data_ptr);
-}
-
-static PyObject *
-ElectricityRates_get_ur_metering_option(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Battery_ElectricityRates_ur_metering_option_nget, self->data_ptr);
-}
-
-static int
-ElectricityRates_set_ur_metering_option(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Battery_ElectricityRates_ur_metering_option_nset, self->data_ptr);
-}
-
-static PyObject *
-ElectricityRates_get_ur_nm_credit_month(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Battery_ElectricityRates_ur_nm_credit_month_nget, self->data_ptr);
-}
-
-static int
-ElectricityRates_set_ur_nm_credit_month(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Battery_ElectricityRates_ur_nm_credit_month_nset, self->data_ptr);
-}
-
-static PyObject *
-ElectricityRates_get_ur_nm_credit_rollover(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Battery_ElectricityRates_ur_nm_credit_rollover_nget, self->data_ptr);
-}
-
-static int
-ElectricityRates_set_ur_nm_credit_rollover(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Battery_ElectricityRates_ur_nm_credit_rollover_nset, self->data_ptr);
-}
-
-static PyObject *
-ElectricityRates_get_ur_nm_yearend_sell_rate(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Battery_ElectricityRates_ur_nm_yearend_sell_rate_nget, self->data_ptr);
-}
-
-static int
-ElectricityRates_set_ur_nm_yearend_sell_rate(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Battery_ElectricityRates_ur_nm_yearend_sell_rate_nset, self->data_ptr);
-}
-
-static PyObject *
-ElectricityRates_get_ur_sell_eq_buy(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Battery_ElectricityRates_ur_sell_eq_buy_nget, self->data_ptr);
-}
-
-static int
-ElectricityRates_set_ur_sell_eq_buy(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Battery_ElectricityRates_ur_sell_eq_buy_nset, self->data_ptr);
-}
-
-static PyObject *
-ElectricityRates_get_ur_ts_buy_rate(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Battery_ElectricityRates_ur_ts_buy_rate_aget, self->data_ptr);
-}
-
-static int
-ElectricityRates_set_ur_ts_buy_rate(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_Battery_ElectricityRates_ur_ts_buy_rate_aset, self->data_ptr);
-}
-
-static PyObject *
-ElectricityRates_get_ur_ts_sell_rate(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Battery_ElectricityRates_ur_ts_sell_rate_aget, self->data_ptr);
-}
-
-static int
-ElectricityRates_set_ur_ts_sell_rate(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_Battery_ElectricityRates_ur_ts_sell_rate_aset, self->data_ptr);
-}
-
-static PyGetSetDef ElectricityRates_getset[] = {
-{"en_electricity_rates", (getter)ElectricityRates_get_en_electricity_rates,(setter)ElectricityRates_set_en_electricity_rates,
-	PyDoc_STR("*float*: Enable Electricity Rates [0/1]\n\n*Options*: 0=EnableElectricityRates,1=NoRates"),
- 	NULL},
-{"rate_escalation", (getter)ElectricityRates_get_rate_escalation,(setter)ElectricityRates_set_rate_escalation,
-	PyDoc_STR("*sequence*: Annual electricity rate escalation [%/year]\n\n*Required*: If not provided, assumed to be 0"),
- 	NULL},
-{"ur_dc_enable", (getter)ElectricityRates_get_ur_dc_enable,(setter)ElectricityRates_set_ur_dc_enable,
-	PyDoc_STR("*float*: Enable demand charge [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
- 	NULL},
-{"ur_dc_flat_mat", (getter)ElectricityRates_get_ur_dc_flat_mat,(setter)ElectricityRates_set_ur_dc_flat_mat,
-	PyDoc_STR("*sequence[sequence]*: Demand rates (flat) table\n\n*Required*: True if ur_dc_enable=1"),
- 	NULL},
-{"ur_dc_sched_weekday", (getter)ElectricityRates_get_ur_dc_sched_weekday,(setter)ElectricityRates_set_ur_dc_sched_weekday,
-	PyDoc_STR("*sequence[sequence]*: Demand charge weekday schedule\n\n*Info*: 12x24"),
- 	NULL},
-{"ur_dc_sched_weekend", (getter)ElectricityRates_get_ur_dc_sched_weekend,(setter)ElectricityRates_set_ur_dc_sched_weekend,
-	PyDoc_STR("*sequence[sequence]*: Demand charge weekend schedule\n\n*Info*: 12x24"),
- 	NULL},
-{"ur_dc_tou_mat", (getter)ElectricityRates_get_ur_dc_tou_mat,(setter)ElectricityRates_set_ur_dc_tou_mat,
-	PyDoc_STR("*sequence[sequence]*: Demand rates (TOU) table\n\n*Required*: True if ur_dc_enable=1"),
- 	NULL},
-{"ur_ec_sched_weekday", (getter)ElectricityRates_get_ur_ec_sched_weekday,(setter)ElectricityRates_set_ur_ec_sched_weekday,
-	PyDoc_STR("*sequence[sequence]*: Energy charge weekday schedule\n\n*Info*: 12x24\n\n*Required*: True if en_batt=1&batt_meter_position=0&batt_dispatch_choice=5"),
- 	NULL},
-{"ur_ec_sched_weekend", (getter)ElectricityRates_get_ur_ec_sched_weekend,(setter)ElectricityRates_set_ur_ec_sched_weekend,
-	PyDoc_STR("*sequence[sequence]*: Energy charge weekend schedule\n\n*Info*: 12x24\n\n*Required*: True if en_batt=1&batt_meter_position=0&batt_dispatch_choice=5"),
- 	NULL},
-{"ur_ec_tou_mat", (getter)ElectricityRates_get_ur_ec_tou_mat,(setter)ElectricityRates_set_ur_ec_tou_mat,
-	PyDoc_STR("*sequence[sequence]*: Energy rates table\n\n*Required*: True if en_batt=1&batt_meter_position=0&batt_dispatch_choice=5"),
- 	NULL},
-{"ur_en_ts_buy_rate", (getter)ElectricityRates_get_ur_en_ts_buy_rate,(setter)ElectricityRates_set_ur_en_ts_buy_rate,
-	PyDoc_STR("*float*: Enable time step buy rates [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
- 	NULL},
-{"ur_en_ts_sell_rate", (getter)ElectricityRates_get_ur_en_ts_sell_rate,(setter)ElectricityRates_set_ur_en_ts_sell_rate,
-	PyDoc_STR("*float*: Enable time step sell rates [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
- 	NULL},
-{"ur_metering_option", (getter)ElectricityRates_get_ur_metering_option,(setter)ElectricityRates_set_ur_metering_option,
-	PyDoc_STR("*float*: Metering options [0=net energy metering,1=net energy metering with $ credits,2=net billing,3=net billing with carryover to next month,4=buy all - sell all]\n\n*Info*: Net metering monthly excess\n\n*Constraints*: INTEGER,MIN=0,MAX=4\n\n*Required*: If not provided, assumed to be 0"),
- 	NULL},
-{"ur_nm_credit_month", (getter)ElectricityRates_get_ur_nm_credit_month,(setter)ElectricityRates_set_ur_nm_credit_month,
-	PyDoc_STR("*float*: Month of rollover credits [$/kWh]\n\n*Constraints*: INTEGER,MIN=0,MAX=11\n\n*Required*: If not provided, assumed to be 11"),
- 	NULL},
-{"ur_nm_credit_rollover", (getter)ElectricityRates_get_ur_nm_credit_rollover,(setter)ElectricityRates_set_ur_nm_credit_rollover,
-	PyDoc_STR("*float*: Roll over credits to next year [0/1]\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: If not provided, assumed to be 0"),
- 	NULL},
-{"ur_nm_yearend_sell_rate", (getter)ElectricityRates_get_ur_nm_yearend_sell_rate,(setter)ElectricityRates_set_ur_nm_yearend_sell_rate,
-	PyDoc_STR("*float*: Net metering credit sell rate [$/kWh]\n\n*Required*: If not provided, assumed to be 0.0"),
- 	NULL},
-{"ur_sell_eq_buy", (getter)ElectricityRates_get_ur_sell_eq_buy,(setter)ElectricityRates_set_ur_sell_eq_buy,
-	PyDoc_STR("*float*: Set sell rate equal to buy rate [0/1]\n\n*Info*: Optional override\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
- 	NULL},
-{"ur_ts_buy_rate", (getter)ElectricityRates_get_ur_ts_buy_rate,(setter)ElectricityRates_set_ur_ts_buy_rate,
-	PyDoc_STR("*sequence*: Time step buy rates [0/1]"),
- 	NULL},
-{"ur_ts_sell_rate", (getter)ElectricityRates_get_ur_ts_sell_rate,(setter)ElectricityRates_set_ur_ts_sell_rate,
-	PyDoc_STR("*sequence*: Time step sell rates [0/1]"),
- 	NULL},
-	{NULL}  /* Sentinel */
-};
-
-static PyTypeObject ElectricityRates_Type = {
-		/* The ob_type field must be initialized in the module init function
-		 * to be portable to Windows without using C++. */
-		PyVarObject_HEAD_INIT(NULL, 0)
-		"StandAloneBattery.ElectricityRates",             /*tp_name*/
-		sizeof(VarGroupObject),          /*tp_basicsize*/
-		0,                          /*tp_itemsize*/
-		/* methods */
-		0,    /*tp_dealloc*/
-		0,                          /*tp_print*/
-		(getattrfunc)0,             /*tp_getattr*/
-		0,                          /*tp_setattr*/
-		0,                          /*tp_reserved*/
-		0,                          /*tp_repr*/
-		0,                          /*tp_as_number*/
-		0,                          /*tp_as_sequence*/
-		0,                          /*tp_as_mapping*/
-		0,                          /*tp_hash*/
-		0,                          /*tp_call*/
-		0,                          /*tp_str*/
-		0,                          /*tp_getattro*/
-		0,                          /*tp_setattro*/
-		0,                          /*tp_as_buffer*/
-		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
-		0,                          /*tp_doc*/
-		0,                          /*tp_traverse*/
-		0,                          /*tp_clear*/
-		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistofnset*/
-		0,                          /*tp_iter*/
-		0,                          /*tp_iternext*/
-		ElectricityRates_methods,         /*tp_methods*/
-		0,                          /*tp_members*/
-		ElectricityRates_getset,          /*tp_getset*/
 		0,                          /*tp_base*/
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
@@ -2986,7 +2583,7 @@ static PyTypeObject FuelCell_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"StandAloneBattery.FuelCell",             /*tp_name*/
+		"Battery.FuelCell",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -3344,7 +2941,7 @@ static PyTypeObject PriceSignal_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"StandAloneBattery.PriceSignal",             /*tp_name*/
+		"Battery.PriceSignal",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -3374,6 +2971,424 @@ static PyTypeObject PriceSignal_Type = {
 		PriceSignal_methods,         /*tp_methods*/
 		0,                          /*tp_members*/
 		PriceSignal_getset,          /*tp_getset*/
+		0,                          /*tp_base*/
+		0,                          /*tp_dict*/
+		0,                          /*tp_descr_get*/
+		0,                          /*tp_descr_set*/
+		0,                          /*tp_dictofnset*/
+		0,                          /*tp_init*/
+		0,                          /*tp_alloc*/
+		0,             /*tp_new*/
+		0,                          /*tp_free*/
+		0,                          /*tp_is_gc*/
+};
+
+
+/*
+ * ElectricityRates Group
+ */ 
+
+static PyTypeObject ElectricityRates_Type;
+
+static PyObject *
+ElectricityRates_new(SAM_Battery data_ptr)
+{
+	PyObject* new_obj = ElectricityRates_Type.tp_alloc(&ElectricityRates_Type,0);
+
+	VarGroupObject* ElectricityRates_obj = (VarGroupObject*)new_obj;
+
+	ElectricityRates_obj->data_ptr = (SAM_table)data_ptr;
+
+	return new_obj;
+}
+
+/* ElectricityRates methods */
+
+static PyObject *
+ElectricityRates_assign(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Battery", "ElectricityRates")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+ElectricityRates_export(VarGroupObject *self, PyObject *args)
+{
+	PyTypeObject* tp = &ElectricityRates_Type;
+	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
+	return dict;
+}
+
+static PyMethodDef ElectricityRates_methods[] = {
+		{"assign",            (PyCFunction)ElectricityRates_assign,  METH_VARARGS,
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``ElectricityRates_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)ElectricityRates_export,  METH_VARARGS,
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+		{NULL,              NULL}           /* sentinel */
+};
+
+static PyObject *
+ElectricityRates_get_rate_escalation(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Battery_ElectricityRates_rate_escalation_aget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_rate_escalation(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Battery_ElectricityRates_rate_escalation_aset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_annual_min_charge(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Battery_ElectricityRates_ur_annual_min_charge_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_annual_min_charge(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Battery_ElectricityRates_ur_annual_min_charge_nset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_dc_enable(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Battery_ElectricityRates_ur_dc_enable_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_dc_enable(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Battery_ElectricityRates_ur_dc_enable_nset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_dc_flat_mat(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Battery_ElectricityRates_ur_dc_flat_mat_mget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_dc_flat_mat(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Battery_ElectricityRates_ur_dc_flat_mat_mset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_dc_sched_weekday(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Battery_ElectricityRates_ur_dc_sched_weekday_mget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_dc_sched_weekday(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Battery_ElectricityRates_ur_dc_sched_weekday_mset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_dc_sched_weekend(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Battery_ElectricityRates_ur_dc_sched_weekend_mget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_dc_sched_weekend(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Battery_ElectricityRates_ur_dc_sched_weekend_mset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_dc_tou_mat(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Battery_ElectricityRates_ur_dc_tou_mat_mget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_dc_tou_mat(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Battery_ElectricityRates_ur_dc_tou_mat_mset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_ec_sched_weekday(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Battery_ElectricityRates_ur_ec_sched_weekday_mget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_ec_sched_weekday(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Battery_ElectricityRates_ur_ec_sched_weekday_mset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_ec_sched_weekend(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Battery_ElectricityRates_ur_ec_sched_weekend_mget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_ec_sched_weekend(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Battery_ElectricityRates_ur_ec_sched_weekend_mset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_ec_tou_mat(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Battery_ElectricityRates_ur_ec_tou_mat_mget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_ec_tou_mat(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Battery_ElectricityRates_ur_ec_tou_mat_mset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_en_ts_buy_rate(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Battery_ElectricityRates_ur_en_ts_buy_rate_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_en_ts_buy_rate(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Battery_ElectricityRates_ur_en_ts_buy_rate_nset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_en_ts_sell_rate(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Battery_ElectricityRates_ur_en_ts_sell_rate_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_en_ts_sell_rate(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Battery_ElectricityRates_ur_en_ts_sell_rate_nset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_metering_option(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Battery_ElectricityRates_ur_metering_option_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_metering_option(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Battery_ElectricityRates_ur_metering_option_nset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_monthly_fixed_charge(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Battery_ElectricityRates_ur_monthly_fixed_charge_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_monthly_fixed_charge(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Battery_ElectricityRates_ur_monthly_fixed_charge_nset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_monthly_min_charge(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Battery_ElectricityRates_ur_monthly_min_charge_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_monthly_min_charge(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Battery_ElectricityRates_ur_monthly_min_charge_nset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_nm_credit_month(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Battery_ElectricityRates_ur_nm_credit_month_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_nm_credit_month(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Battery_ElectricityRates_ur_nm_credit_month_nset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_nm_credit_rollover(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Battery_ElectricityRates_ur_nm_credit_rollover_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_nm_credit_rollover(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Battery_ElectricityRates_ur_nm_credit_rollover_nset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_nm_yearend_sell_rate(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Battery_ElectricityRates_ur_nm_yearend_sell_rate_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_nm_yearend_sell_rate(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Battery_ElectricityRates_ur_nm_yearend_sell_rate_nset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_sell_eq_buy(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Battery_ElectricityRates_ur_sell_eq_buy_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_sell_eq_buy(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Battery_ElectricityRates_ur_sell_eq_buy_nset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_ts_buy_rate(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Battery_ElectricityRates_ur_ts_buy_rate_aget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_ts_buy_rate(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Battery_ElectricityRates_ur_ts_buy_rate_aset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_ts_sell_rate(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Battery_ElectricityRates_ur_ts_sell_rate_aget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_ts_sell_rate(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Battery_ElectricityRates_ur_ts_sell_rate_aset, self->data_ptr);
+}
+
+static PyGetSetDef ElectricityRates_getset[] = {
+{"rate_escalation", (getter)ElectricityRates_get_rate_escalation,(setter)ElectricityRates_set_rate_escalation,
+	PyDoc_STR("*sequence*: Annual electricity rate escalation [%/year]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"ur_annual_min_charge", (getter)ElectricityRates_get_ur_annual_min_charge,(setter)ElectricityRates_set_ur_annual_min_charge,
+	PyDoc_STR("*float*: Annual minimum charge [$]\n\n*Required*: If not provided, assumed to be 0.0"),
+ 	NULL},
+{"ur_dc_enable", (getter)ElectricityRates_get_ur_dc_enable,(setter)ElectricityRates_set_ur_dc_enable,
+	PyDoc_STR("*float*: Enable demand charge [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"ur_dc_flat_mat", (getter)ElectricityRates_get_ur_dc_flat_mat,(setter)ElectricityRates_set_ur_dc_flat_mat,
+	PyDoc_STR("*sequence[sequence]*: Demand rates (flat) table\n\n*Required*: True if ur_dc_enable=1"),
+ 	NULL},
+{"ur_dc_sched_weekday", (getter)ElectricityRates_get_ur_dc_sched_weekday,(setter)ElectricityRates_set_ur_dc_sched_weekday,
+	PyDoc_STR("*sequence[sequence]*: Demand charge weekday schedule\n\n*Info*: 12x24"),
+ 	NULL},
+{"ur_dc_sched_weekend", (getter)ElectricityRates_get_ur_dc_sched_weekend,(setter)ElectricityRates_set_ur_dc_sched_weekend,
+	PyDoc_STR("*sequence[sequence]*: Demand charge weekend schedule\n\n*Info*: 12x24"),
+ 	NULL},
+{"ur_dc_tou_mat", (getter)ElectricityRates_get_ur_dc_tou_mat,(setter)ElectricityRates_set_ur_dc_tou_mat,
+	PyDoc_STR("*sequence[sequence]*: Demand rates (TOU) table\n\n*Required*: True if ur_dc_enable=1"),
+ 	NULL},
+{"ur_ec_sched_weekday", (getter)ElectricityRates_get_ur_ec_sched_weekday,(setter)ElectricityRates_set_ur_ec_sched_weekday,
+	PyDoc_STR("*sequence[sequence]*: Energy charge weekday schedule\n\n*Info*: 12x24"),
+ 	NULL},
+{"ur_ec_sched_weekend", (getter)ElectricityRates_get_ur_ec_sched_weekend,(setter)ElectricityRates_set_ur_ec_sched_weekend,
+	PyDoc_STR("*sequence[sequence]*: Energy charge weekend schedule\n\n*Info*: 12x24"),
+ 	NULL},
+{"ur_ec_tou_mat", (getter)ElectricityRates_get_ur_ec_tou_mat,(setter)ElectricityRates_set_ur_ec_tou_mat,
+	PyDoc_STR("*sequence[sequence]*: Energy rates table"),
+ 	NULL},
+{"ur_en_ts_buy_rate", (getter)ElectricityRates_get_ur_en_ts_buy_rate,(setter)ElectricityRates_set_ur_en_ts_buy_rate,
+	PyDoc_STR("*float*: Enable time step buy rates [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"ur_en_ts_sell_rate", (getter)ElectricityRates_get_ur_en_ts_sell_rate,(setter)ElectricityRates_set_ur_en_ts_sell_rate,
+	PyDoc_STR("*float*: Enable time step sell rates [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"ur_metering_option", (getter)ElectricityRates_get_ur_metering_option,(setter)ElectricityRates_set_ur_metering_option,
+	PyDoc_STR("*float*: Metering options [0=net energy metering,1=net energy metering with $ credits,2=net billing,3=net billing with carryover to next month,4=buy all - sell all]\n\n*Info*: Net metering monthly excess\n\n*Constraints*: INTEGER,MIN=0,MAX=4\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"ur_monthly_fixed_charge", (getter)ElectricityRates_get_ur_monthly_fixed_charge,(setter)ElectricityRates_set_ur_monthly_fixed_charge,
+	PyDoc_STR("*float*: Monthly fixed charge [$]\n\n*Required*: If not provided, assumed to be 0.0"),
+ 	NULL},
+{"ur_monthly_min_charge", (getter)ElectricityRates_get_ur_monthly_min_charge,(setter)ElectricityRates_set_ur_monthly_min_charge,
+	PyDoc_STR("*float*: Monthly minimum charge [$]\n\n*Required*: If not provided, assumed to be 0.0"),
+ 	NULL},
+{"ur_nm_credit_month", (getter)ElectricityRates_get_ur_nm_credit_month,(setter)ElectricityRates_set_ur_nm_credit_month,
+	PyDoc_STR("*float*: Month of year end payout (true-up) [mn]\n\n*Constraints*: INTEGER,MIN=0,MAX=11\n\n*Required*: If not provided, assumed to be 11"),
+ 	NULL},
+{"ur_nm_credit_rollover", (getter)ElectricityRates_get_ur_nm_credit_rollover,(setter)ElectricityRates_set_ur_nm_credit_rollover,
+	PyDoc_STR("*float*: Apply net metering true-up credits to future bills [0/1]\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"ur_nm_yearend_sell_rate", (getter)ElectricityRates_get_ur_nm_yearend_sell_rate,(setter)ElectricityRates_set_ur_nm_yearend_sell_rate,
+	PyDoc_STR("*float*: Net metering true-up credit sell rate [$/kWh]\n\n*Required*: If not provided, assumed to be 0.0"),
+ 	NULL},
+{"ur_sell_eq_buy", (getter)ElectricityRates_get_ur_sell_eq_buy,(setter)ElectricityRates_set_ur_sell_eq_buy,
+	PyDoc_STR("*float*: Set sell rate equal to buy rate [0/1]\n\n*Info*: Optional override\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"ur_ts_buy_rate", (getter)ElectricityRates_get_ur_ts_buy_rate,(setter)ElectricityRates_set_ur_ts_buy_rate,
+	PyDoc_STR("*sequence*: Time step buy rates [0/1]"),
+ 	NULL},
+{"ur_ts_sell_rate", (getter)ElectricityRates_get_ur_ts_sell_rate,(setter)ElectricityRates_set_ur_ts_sell_rate,
+	PyDoc_STR("*sequence*: Time step sell rates [0/1]"),
+ 	NULL},
+	{NULL}  /* Sentinel */
+};
+
+static PyTypeObject ElectricityRates_Type = {
+		/* The ob_type field must be initialized in the module init function
+		 * to be portable to Windows without using C++. */
+		PyVarObject_HEAD_INIT(NULL, 0)
+		"Battery.ElectricityRates",             /*tp_name*/
+		sizeof(VarGroupObject),          /*tp_basicsize*/
+		0,                          /*tp_itemsize*/
+		/* methods */
+		0,    /*tp_dealloc*/
+		0,                          /*tp_print*/
+		(getattrfunc)0,             /*tp_getattr*/
+		0,                          /*tp_setattr*/
+		0,                          /*tp_reserved*/
+		0,                          /*tp_repr*/
+		0,                          /*tp_as_number*/
+		0,                          /*tp_as_sequence*/
+		0,                          /*tp_as_mapping*/
+		0,                          /*tp_hash*/
+		0,                          /*tp_call*/
+		0,                          /*tp_str*/
+		0,                          /*tp_getattro*/
+		0,                          /*tp_setattro*/
+		0,                          /*tp_as_buffer*/
+		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
+		0,                          /*tp_doc*/
+		0,                          /*tp_traverse*/
+		0,                          /*tp_clear*/
+		0,                          /*tp_richcompare*/
+		0,                          /*tp_weaklistofnset*/
+		0,                          /*tp_iter*/
+		0,                          /*tp_iternext*/
+		ElectricityRates_methods,         /*tp_methods*/
+		0,                          /*tp_members*/
+		ElectricityRates_getset,          /*tp_getset*/
 		0,                          /*tp_base*/
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
@@ -3506,9 +3521,9 @@ Outputs_get_batt_annual_charge_from_grid(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_batt_annual_charge_from_pv(VarGroupObject *self, void *closure)
+Outputs_get_batt_annual_charge_from_system(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Battery_Outputs_batt_annual_charge_from_pv_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Battery_Outputs_batt_annual_charge_from_system_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -3602,12 +3617,6 @@ Outputs_get_batt_power_target(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_batt_pv_charge_percent(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Battery_Outputs_batt_pv_charge_percent_nget, self->data_ptr);
-}
-
-static PyObject *
 Outputs_get_batt_q0(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Battery_Outputs_batt_q0_aget, self->data_ptr);
@@ -3668,6 +3677,12 @@ Outputs_get_batt_revenue_gridcharge(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_batt_system_charge_percent(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Battery_Outputs_batt_system_charge_percent_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_batt_system_loss(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Battery_Outputs_batt_system_loss_aget, self->data_ptr);
@@ -3713,6 +3728,12 @@ static PyObject *
 Outputs_get_fuelcell_to_batt(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Battery_Outputs_fuelcell_to_batt_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_gen_without_battery(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Battery_Outputs_gen_without_battery_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -3770,21 +3791,21 @@ Outputs_get_monthly_grid_to_load(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_monthly_pv_to_batt(VarGroupObject *self, void *closure)
+Outputs_get_monthly_system_to_batt(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Battery_Outputs_monthly_pv_to_batt_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Battery_Outputs_monthly_system_to_batt_aget, self->data_ptr);
 }
 
 static PyObject *
-Outputs_get_monthly_pv_to_grid(VarGroupObject *self, void *closure)
+Outputs_get_monthly_system_to_grid(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Battery_Outputs_monthly_pv_to_grid_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Battery_Outputs_monthly_system_to_grid_aget, self->data_ptr);
 }
 
 static PyObject *
-Outputs_get_monthly_pv_to_load(VarGroupObject *self, void *closure)
+Outputs_get_monthly_system_to_load(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Battery_Outputs_monthly_pv_to_load_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Battery_Outputs_monthly_system_to_load_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -3797,24 +3818,6 @@ static PyObject *
 Outputs_get_pdf_of_surviving(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Battery_Outputs_pdf_of_surviving_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_pv_to_batt(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Battery_Outputs_pv_to_batt_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_pv_to_grid(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Battery_Outputs_pv_to_grid_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_pv_to_load(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Battery_Outputs_pv_to_load_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -3845,6 +3848,24 @@ static PyObject *
 Outputs_get_survival_function(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Battery_Outputs_survival_function_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_system_to_batt(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Battery_Outputs_system_to_batt_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_system_to_grid(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Battery_Outputs_system_to_grid_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_system_to_load(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Battery_Outputs_system_to_load_aget, self->data_ptr);
 }
 
 static PyGetSetDef Outputs_getset[] = {
@@ -3881,7 +3902,7 @@ static PyGetSetDef Outputs_getset[] = {
 {"batt_annual_charge_from_grid", (getter)Outputs_get_batt_annual_charge_from_grid,(setter)0,
 	PyDoc_STR("*sequence*: Battery annual energy charged from grid [kWh]"),
  	NULL},
-{"batt_annual_charge_from_pv", (getter)Outputs_get_batt_annual_charge_from_pv,(setter)0,
+{"batt_annual_charge_from_system", (getter)Outputs_get_batt_annual_charge_from_system,(setter)0,
 	PyDoc_STR("*sequence*: Battery annual energy charged from system [kWh]"),
  	NULL},
 {"batt_annual_discharge_energy", (getter)Outputs_get_batt_annual_discharge_energy,(setter)0,
@@ -3915,7 +3936,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Electricity loss in battery power electronics [kW]"),
  	NULL},
 {"batt_cost_to_cycle", (getter)Outputs_get_batt_cost_to_cycle,(setter)0,
-	PyDoc_STR("*sequence*: Battery computed cost to cycle [$/cycle]"),
+	PyDoc_STR("*sequence*: Battery computed cycle degradation penalty [$/cycle FOM, $/cycle-kWh BTM]"),
  	NULL},
 {"batt_cycles", (getter)Outputs_get_batt_cycles,(setter)0,
 	PyDoc_STR("*sequence*: Battery number of cycles"),
@@ -3928,9 +3949,6 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"batt_power_target", (getter)Outputs_get_batt_power_target,(setter)0,
 	PyDoc_STR("*sequence*: Electricity battery power target for automated dispatch [kW]"),
- 	NULL},
-{"batt_pv_charge_percent", (getter)Outputs_get_batt_pv_charge_percent,(setter)0,
-	PyDoc_STR("*float*: Battery charge energy charged from system [%]"),
  	NULL},
 {"batt_q0", (getter)Outputs_get_batt_q0,(setter)0,
 	PyDoc_STR("*sequence*: Battery total charge [Ah]"),
@@ -3962,8 +3980,11 @@ static PyGetSetDef Outputs_getset[] = {
 {"batt_revenue_gridcharge", (getter)Outputs_get_batt_revenue_gridcharge,(setter)0,
 	PyDoc_STR("*sequence*: Revenue to charge from grid [$/kWh]"),
  	NULL},
+{"batt_system_charge_percent", (getter)Outputs_get_batt_system_charge_percent,(setter)0,
+	PyDoc_STR("*float*: Battery charge energy charged from system [%]"),
+ 	NULL},
 {"batt_system_loss", (getter)Outputs_get_batt_system_loss,(setter)0,
-	PyDoc_STR("*sequence*: Electricity loss from battery ancillary equipment [kW]"),
+	PyDoc_STR("*sequence*: Electricity loss from battery ancillary equipment (kW DC for DC connected, AC for AC connected) [kW]"),
  	NULL},
 {"batt_temperature", (getter)Outputs_get_batt_temperature,(setter)0,
 	PyDoc_STR("*sequence*: Battery temperature [C]"),
@@ -3985,6 +4006,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"fuelcell_to_batt", (getter)Outputs_get_fuelcell_to_batt,(setter)0,
 	PyDoc_STR("*sequence*: Electricity to battery from fuel cell [kW]"),
+ 	NULL},
+{"gen_without_battery", (getter)Outputs_get_gen_without_battery,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced without the battery or curtailment [kW]"),
  	NULL},
 {"grid_power", (getter)Outputs_get_grid_power,(setter)0,
 	PyDoc_STR("*sequence*: Electricity to/from grid [kW]"),
@@ -4013,13 +4037,13 @@ static PyGetSetDef Outputs_getset[] = {
 {"monthly_grid_to_load", (getter)Outputs_get_monthly_grid_to_load,(setter)0,
 	PyDoc_STR("*sequence*: Energy to load from grid [kWh]"),
  	NULL},
-{"monthly_pv_to_batt", (getter)Outputs_get_monthly_pv_to_batt,(setter)0,
+{"monthly_system_to_batt", (getter)Outputs_get_monthly_system_to_batt,(setter)0,
 	PyDoc_STR("*sequence*: Energy to battery from system [kWh]"),
  	NULL},
-{"monthly_pv_to_grid", (getter)Outputs_get_monthly_pv_to_grid,(setter)0,
+{"monthly_system_to_grid", (getter)Outputs_get_monthly_system_to_grid,(setter)0,
 	PyDoc_STR("*sequence*: Energy to grid from system [kWh]"),
  	NULL},
-{"monthly_pv_to_load", (getter)Outputs_get_monthly_pv_to_load,(setter)0,
+{"monthly_system_to_load", (getter)Outputs_get_monthly_system_to_load,(setter)0,
 	PyDoc_STR("*sequence*: Energy to load from system [kWh]"),
  	NULL},
 {"outage_durations", (getter)Outputs_get_outage_durations,(setter)0,
@@ -4027,15 +4051,6 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"pdf_of_surviving", (getter)Outputs_get_pdf_of_surviving,(setter)0,
 	PyDoc_STR("*sequence*: Probabilities of autonomous hours for resilience "),
- 	NULL},
-{"pv_to_batt", (getter)Outputs_get_pv_to_batt,(setter)0,
-	PyDoc_STR("*sequence*: Electricity to battery from system [kW]"),
- 	NULL},
-{"pv_to_grid", (getter)Outputs_get_pv_to_grid,(setter)0,
-	PyDoc_STR("*sequence*: Electricity to grid from system [kW]"),
- 	NULL},
-{"pv_to_load", (getter)Outputs_get_pv_to_load,(setter)0,
-	PyDoc_STR("*sequence*: Electricity to load from system [kW]"),
  	NULL},
 {"resilience_hrs", (getter)Outputs_get_resilience_hrs,(setter)0,
 	PyDoc_STR("*sequence*: Hours of autonomy during outage at each timestep for resilience [hr]"),
@@ -4052,6 +4067,15 @@ static PyGetSetDef Outputs_getset[] = {
 {"survival_function", (getter)Outputs_get_survival_function,(setter)0,
 	PyDoc_STR("*sequence*: Survival function of autonomous hours for resilience"),
  	NULL},
+{"system_to_batt", (getter)Outputs_get_system_to_batt,(setter)0,
+	PyDoc_STR("*sequence*: Electricity to battery from system [kW]"),
+ 	NULL},
+{"system_to_grid", (getter)Outputs_get_system_to_grid,(setter)0,
+	PyDoc_STR("*sequence*: Electricity to grid from system [kW]"),
+ 	NULL},
+{"system_to_load", (getter)Outputs_get_system_to_load,(setter)0,
+	PyDoc_STR("*sequence*: Electricity to load from system [kW]"),
+ 	NULL},
 	{NULL}  /* Sentinel */
 };
 
@@ -4059,7 +4083,7 @@ static PyTypeObject Outputs_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"StandAloneBattery.Outputs",             /*tp_name*/
+		"Battery.Outputs",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -4102,16 +4126,16 @@ static PyTypeObject Outputs_Type = {
 };
 
 /*
- * StandAloneBattery
+ * Battery
  */
 
-static PyTypeObject StandAloneBattery_Type;
+static PyTypeObject Battery_Type;
 
 static CmodObject *
-newStandAloneBatteryObject(void* data_ptr)
+newBatteryObject(void* data_ptr)
 {
 	CmodObject *self;
-	self = PyObject_New(CmodObject, &StandAloneBattery_Type);
+	self = PyObject_New(CmodObject, &Battery_Type);
 
 	PySAM_TECH_ATTR()
 
@@ -4151,10 +4175,6 @@ newStandAloneBatteryObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "BatteryDispatch", BatteryDispatch_obj);
 	Py_DECREF(BatteryDispatch_obj);
 
-	PyObject* ElectricityRates_obj = ElectricityRates_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "ElectricityRates", ElectricityRates_obj);
-	Py_DECREF(ElectricityRates_obj);
-
 	PyObject* FuelCell_obj = FuelCell_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "FuelCell", FuelCell_obj);
 	Py_DECREF(FuelCell_obj);
@@ -4163,6 +4183,10 @@ newStandAloneBatteryObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "PriceSignal", PriceSignal_obj);
 	Py_DECREF(PriceSignal_obj);
 
+	PyObject* ElectricityRates_obj = ElectricityRates_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "ElectricityRates", ElectricityRates_obj);
+	Py_DECREF(ElectricityRates_obj);
+
 	PyObject* Outputs_obj = Outputs_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
 	Py_DECREF(Outputs_obj);
@@ -4170,10 +4194,10 @@ newStandAloneBatteryObject(void* data_ptr)
 	return self;
 }
 
-/* StandAloneBattery methods */
+/* Battery methods */
 
 static void
-StandAloneBattery_dealloc(CmodObject *self)
+Battery_dealloc(CmodObject *self)
 {
 	Py_XDECREF(self->x_attr);
 
@@ -4187,7 +4211,7 @@ StandAloneBattery_dealloc(CmodObject *self)
 
 
 static PyObject *
-StandAloneBattery_execute(CmodObject *self, PyObject *args)
+Battery_execute(CmodObject *self, PyObject *args)
 {
 	int verbosity = 0;
 
@@ -4203,7 +4227,7 @@ StandAloneBattery_execute(CmodObject *self, PyObject *args)
 
 
 static PyObject *
-StandAloneBattery_assign(CmodObject *self, PyObject *args)
+Battery_assign(CmodObject *self, PyObject *args)
 {
 	PyObject* dict;
 	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
@@ -4219,53 +4243,53 @@ StandAloneBattery_assign(CmodObject *self, PyObject *args)
 
 
 static PyObject *
-StandAloneBattery_export(CmodObject *self, PyObject *args)
+Battery_export(CmodObject *self, PyObject *args)
 {
 	return PySAM_export_to_nested_dict((PyObject *) self, self->x_attr);
 }
 
 static PyObject *
-StandAloneBattery_value(CmodObject *self, PyObject *args)
+Battery_value(CmodObject *self, PyObject *args)
 {
 	return Cmod_value(self, args);
 }
 
-static PyMethodDef StandAloneBattery_methods[] = {
-		{"execute",            (PyCFunction)StandAloneBattery_execute,  METH_VARARGS,
+static PyMethodDef Battery_methods[] = {
+		{"execute",            (PyCFunction)Battery_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
-		{"assign",            (PyCFunction)StandAloneBattery_assign,  METH_VARARGS,
+		{"assign",            (PyCFunction)Battery_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Simulation': { var: val, ...}, ...}``")},
-		{"export",            (PyCFunction)StandAloneBattery_export,  METH_VARARGS,
+		{"export",            (PyCFunction)Battery_export,  METH_VARARGS,
 				PyDoc_STR("export() -> dict\n Export attributes into nested dictionary")},
-		{"value",             (PyCFunction)StandAloneBattery_value, METH_VARARGS,
+		{"value",             (PyCFunction)Battery_value, METH_VARARGS,
 				PyDoc_STR("value(name, optional value) -> Union[None, float, dict, sequence, str]\n Get or set by name a value in any of the variable groups.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 static PyObject *
-StandAloneBattery_getattro(CmodObject *self, PyObject *name)
+Battery_getattro(CmodObject *self, PyObject *name)
 {
 	return PySAM_get_attr((PyObject*) self, (PyObject*) self->x_attr, name);
 }
 
 static int
-StandAloneBattery_setattr(CmodObject *self, const char *name, PyObject *v)
+Battery_setattr(CmodObject *self, const char *name, PyObject *v)
 {
 	return PySAM_set_attr((PyObject*)self, (PyObject*)self->x_attr, name, v);
 }
 
-static PyTypeObject StandAloneBattery_Type = {
+static PyTypeObject Battery_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"StandAloneBattery",            /*tp_name*/
+		"Battery",            /*tp_name*/
 		sizeof(CmodObject),/*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
-		(destructor)StandAloneBattery_dealloc,    /*tp_dealloc*/
+		(destructor)Battery_dealloc,    /*tp_dealloc*/
 		0,                          /*tp_print*/
 		(getattrfunc)0,             /*tp_getattr*/
-		(setattrfunc)StandAloneBattery_setattr,   /*tp_setattr*/
+		(setattrfunc)Battery_setattr,   /*tp_setattr*/
 		0,                          /*tp_reserved*/
 		0,                          /*tp_repr*/
 		0,                          /*tp_as_number*/
@@ -4274,7 +4298,7 @@ static PyTypeObject StandAloneBattery_Type = {
 		0,                          /*tp_hash*/
 		0,                          /*tp_call*/
 		0,                          /*tp_str*/
-		(getattrofunc)StandAloneBattery_getattro, /*tp_getattro*/
+		(getattrofunc)Battery_getattro, /*tp_getattro*/
 		0,                          /*tp_setattro*/
 		0,                          /*tp_as_buffer*/
 		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
@@ -4285,7 +4309,7 @@ static PyTypeObject StandAloneBattery_Type = {
 		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
-		StandAloneBattery_methods,      /*tp_methods*/
+		Battery_methods,      /*tp_methods*/
 		0,                          /*tp_members*/
 		0,       /*tp_getset*/
 		0,                          /*tp_base*/
@@ -4303,13 +4327,13 @@ static PyTypeObject StandAloneBattery_Type = {
 /* --------------------------------------------------------------------- */
 
 
-/* Function of no arguments returning new StandAloneBattery object */
+/* Function of no arguments returning new Battery object */
 
 static PyObject *
-StandAloneBattery_new(PyObject *self, PyObject *args)
+Battery_new(PyObject *self, PyObject *args)
 {
 	CmodObject *rv;
-	rv = newStandAloneBatteryObject(0);
+	rv = newBatteryObject(0);
 	if (rv == NULL)
 		return NULL;
 
@@ -4318,7 +4342,7 @@ StandAloneBattery_new(PyObject *self, PyObject *args)
 }
 
 static PyObject *
-StandAloneBattery_wrap(PyObject *self, PyObject *args)
+Battery_wrap(PyObject *self, PyObject *args)
 {
 	CmodObject *rv;
 	long long int ptr = 0;  // 64 bit arch
@@ -4326,7 +4350,7 @@ StandAloneBattery_wrap(PyObject *self, PyObject *args)
 		PyErr_BadArgument();
 		return NULL;
 	}
-	rv = newStandAloneBatteryObject((void*)ptr);
+	rv = newBatteryObject((void*)ptr);
 	if (rv == NULL)
 		return NULL;
 
@@ -4335,7 +4359,7 @@ StandAloneBattery_wrap(PyObject *self, PyObject *args)
 }
 
 static PyObject *
-StandAloneBattery_default(PyObject *self, PyObject *args)
+Battery_default(PyObject *self, PyObject *args)
 {
 	CmodObject *rv;
 	char* def = 0;
@@ -4343,7 +4367,7 @@ StandAloneBattery_default(PyObject *self, PyObject *args)
 		PyErr_BadArgument();
 		return NULL;
 	}
-	rv = newStandAloneBatteryObject(0);
+	rv = newBatteryObject(0);
 	if (rv == NULL)
 		return NULL;
 
@@ -4354,7 +4378,7 @@ StandAloneBattery_default(PyObject *self, PyObject *args)
 }
 
 static PyObject *
-StandAloneBattery_from_existing(PyObject *self, PyObject *args)
+Battery_from_existing(PyObject *self, PyObject *args)
 {
 	CmodObject *rv;
 	PyObject * module = 0;
@@ -4374,7 +4398,7 @@ StandAloneBattery_from_existing(PyObject *self, PyObject *args)
 	if (data_size < 0)
 		goto fail;
 
-	rv = newStandAloneBatteryObject((void*)ptr);
+	rv = newBatteryObject((void*)ptr);
 	if (rv == NULL)
 		goto fail;
 	rv->data_owner_ptr = module;
@@ -4391,16 +4415,16 @@ StandAloneBattery_from_existing(PyObject *self, PyObject *args)
 
 /* List of functions defined in the module */
 
-static PyMethodDef StandAloneBatteryModule_methods[] = {
-		{"new",             StandAloneBattery_new,         METH_VARARGS,
-				PyDoc_STR("new() -> StandAloneBattery")},
-		{"default",             StandAloneBattery_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> StandAloneBattery\n\nUse financial config-specific default attributes\n"
-				"config options:\n\n- \"FuelCellCommercial\"\n- \"FuelCellSingleOwner\"\n- \"GenericBatteryAllEquityPartnershipFlip\"\n- \"GenericBatteryCommercial\"\n- \"GenericBatteryHostDeveloper\"\n- \"GenericBatteryLeveragedPartnershipFlip\"\n- \"GenericBatteryMerchantPlant\"\n- \"GenericBatteryResidential\"\n- \"GenericBatterySaleLeaseback\"\n- \"GenericBatterySingleOwner\"\n- \"GenericBatteryThirdParty\"")},
-		{"wrap",             StandAloneBattery_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> StandAloneBattery\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
-		{"from_existing",   StandAloneBattery_from_existing,        METH_VARARGS,
-				PyDoc_STR("from_existing(data, optional config) -> StandAloneBattery\n\nShare underlying data with an existing PySAM class. If config provided, default attributes are loaded otherwise.")},
+static PyMethodDef BatteryModule_methods[] = {
+		{"new",             Battery_new,         METH_VARARGS,
+				PyDoc_STR("new() -> Battery")},
+		{"default",             Battery_default,         METH_VARARGS,
+				PyDoc_STR("default(config) -> Battery\n\nUse default attributes\n"
+				"`config` options:\n\n- \"FuelCellCommercial\"\n- \"FuelCellSingleOwner\"\n- \"GenericBatteryAllEquityPartnershipFlip\"\n- \"GenericBatteryCommercial\"\n- \"GenericBatteryHostDeveloper\"\n- \"GenericBatteryLeveragedPartnershipFlip\"\n- \"GenericBatteryMerchantPlant\"\n- \"GenericBatteryResidential\"\n- \"GenericBatterySaleLeaseback\"\n- \"GenericBatterySingleOwner\"\n- \"GenericBatteryThirdParty\"")},
+		{"wrap",             Battery_wrap,         METH_VARARGS,
+				PyDoc_STR("wrap(ssc_data_t) -> Battery\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
+		{"from_existing",   Battery_from_existing,        METH_VARARGS,
+				PyDoc_STR("from_existing(data, optional config) -> Battery\n\nShare underlying data with an existing PySAM class. If config provided, default attributes are loaded otherwise.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -4409,112 +4433,112 @@ PyDoc_STRVAR(module_doc,
 
 
 static int
-StandAloneBatteryModule_exec(PyObject *m)
+BatteryModule_exec(PyObject *m)
 {
 	/* Finalize the type object including setting type of the new type
 	 * object; doing it here is required for portability, too. */
 
 	if (PySAM_load_lib(m) < 0) goto fail;
 
-	StandAloneBattery_Type.tp_dict = PyDict_New();
-	if (!StandAloneBattery_Type.tp_dict) { goto fail; }
+	Battery_Type.tp_dict = PyDict_New();
+	if (!Battery_Type.tp_dict) { goto fail; }
 
-	/// Add the Simulation type object to StandAloneBattery_Type
+	/// Add the Simulation type object to Battery_Type
 	if (PyType_Ready(&Simulation_Type) < 0) { goto fail; }
-	PyDict_SetItemString(StandAloneBattery_Type.tp_dict,
+	PyDict_SetItemString(Battery_Type.tp_dict,
 				"Simulation",
 				(PyObject*)&Simulation_Type);
 	Py_DECREF(&Simulation_Type);
 
-	/// Add the Lifetime type object to StandAloneBattery_Type
+	/// Add the Lifetime type object to Battery_Type
 	if (PyType_Ready(&Lifetime_Type) < 0) { goto fail; }
-	PyDict_SetItemString(StandAloneBattery_Type.tp_dict,
+	PyDict_SetItemString(Battery_Type.tp_dict,
 				"Lifetime",
 				(PyObject*)&Lifetime_Type);
 	Py_DECREF(&Lifetime_Type);
 
-	/// Add the BatterySystem type object to StandAloneBattery_Type
+	/// Add the BatterySystem type object to Battery_Type
 	if (PyType_Ready(&BatterySystem_Type) < 0) { goto fail; }
-	PyDict_SetItemString(StandAloneBattery_Type.tp_dict,
+	PyDict_SetItemString(Battery_Type.tp_dict,
 				"BatterySystem",
 				(PyObject*)&BatterySystem_Type);
 	Py_DECREF(&BatterySystem_Type);
 
-	/// Add the SystemOutput type object to StandAloneBattery_Type
+	/// Add the SystemOutput type object to Battery_Type
 	if (PyType_Ready(&SystemOutput_Type) < 0) { goto fail; }
-	PyDict_SetItemString(StandAloneBattery_Type.tp_dict,
+	PyDict_SetItemString(Battery_Type.tp_dict,
 				"SystemOutput",
 				(PyObject*)&SystemOutput_Type);
 	Py_DECREF(&SystemOutput_Type);
 
-	/// Add the Load type object to StandAloneBattery_Type
+	/// Add the Load type object to Battery_Type
 	if (PyType_Ready(&Load_Type) < 0) { goto fail; }
-	PyDict_SetItemString(StandAloneBattery_Type.tp_dict,
+	PyDict_SetItemString(Battery_Type.tp_dict,
 				"Load",
 				(PyObject*)&Load_Type);
 	Py_DECREF(&Load_Type);
 
-	/// Add the BatteryCell type object to StandAloneBattery_Type
+	/// Add the BatteryCell type object to Battery_Type
 	if (PyType_Ready(&BatteryCell_Type) < 0) { goto fail; }
-	PyDict_SetItemString(StandAloneBattery_Type.tp_dict,
+	PyDict_SetItemString(Battery_Type.tp_dict,
 				"BatteryCell",
 				(PyObject*)&BatteryCell_Type);
 	Py_DECREF(&BatteryCell_Type);
 
-	/// Add the Inverter type object to StandAloneBattery_Type
+	/// Add the Inverter type object to Battery_Type
 	if (PyType_Ready(&Inverter_Type) < 0) { goto fail; }
-	PyDict_SetItemString(StandAloneBattery_Type.tp_dict,
+	PyDict_SetItemString(Battery_Type.tp_dict,
 				"Inverter",
 				(PyObject*)&Inverter_Type);
 	Py_DECREF(&Inverter_Type);
 
-	/// Add the Losses type object to StandAloneBattery_Type
+	/// Add the Losses type object to Battery_Type
 	if (PyType_Ready(&Losses_Type) < 0) { goto fail; }
-	PyDict_SetItemString(StandAloneBattery_Type.tp_dict,
+	PyDict_SetItemString(Battery_Type.tp_dict,
 				"Losses",
 				(PyObject*)&Losses_Type);
 	Py_DECREF(&Losses_Type);
 
-	/// Add the BatteryDispatch type object to StandAloneBattery_Type
+	/// Add the BatteryDispatch type object to Battery_Type
 	if (PyType_Ready(&BatteryDispatch_Type) < 0) { goto fail; }
-	PyDict_SetItemString(StandAloneBattery_Type.tp_dict,
+	PyDict_SetItemString(Battery_Type.tp_dict,
 				"BatteryDispatch",
 				(PyObject*)&BatteryDispatch_Type);
 	Py_DECREF(&BatteryDispatch_Type);
 
-	/// Add the ElectricityRates type object to StandAloneBattery_Type
-	if (PyType_Ready(&ElectricityRates_Type) < 0) { goto fail; }
-	PyDict_SetItemString(StandAloneBattery_Type.tp_dict,
-				"ElectricityRates",
-				(PyObject*)&ElectricityRates_Type);
-	Py_DECREF(&ElectricityRates_Type);
-
-	/// Add the FuelCell type object to StandAloneBattery_Type
+	/// Add the FuelCell type object to Battery_Type
 	if (PyType_Ready(&FuelCell_Type) < 0) { goto fail; }
-	PyDict_SetItemString(StandAloneBattery_Type.tp_dict,
+	PyDict_SetItemString(Battery_Type.tp_dict,
 				"FuelCell",
 				(PyObject*)&FuelCell_Type);
 	Py_DECREF(&FuelCell_Type);
 
-	/// Add the PriceSignal type object to StandAloneBattery_Type
+	/// Add the PriceSignal type object to Battery_Type
 	if (PyType_Ready(&PriceSignal_Type) < 0) { goto fail; }
-	PyDict_SetItemString(StandAloneBattery_Type.tp_dict,
+	PyDict_SetItemString(Battery_Type.tp_dict,
 				"PriceSignal",
 				(PyObject*)&PriceSignal_Type);
 	Py_DECREF(&PriceSignal_Type);
 
-	/// Add the Outputs type object to StandAloneBattery_Type
+	/// Add the ElectricityRates type object to Battery_Type
+	if (PyType_Ready(&ElectricityRates_Type) < 0) { goto fail; }
+	PyDict_SetItemString(Battery_Type.tp_dict,
+				"ElectricityRates",
+				(PyObject*)&ElectricityRates_Type);
+	Py_DECREF(&ElectricityRates_Type);
+
+	/// Add the Outputs type object to Battery_Type
 	if (PyType_Ready(&Outputs_Type) < 0) { goto fail; }
-	PyDict_SetItemString(StandAloneBattery_Type.tp_dict,
+	PyDict_SetItemString(Battery_Type.tp_dict,
 				"Outputs",
 				(PyObject*)&Outputs_Type);
 	Py_DECREF(&Outputs_Type);
 
-	/// Add the StandAloneBattery type object to the module
-	if (PyType_Ready(&StandAloneBattery_Type) < 0) { goto fail; }
+	/// Add the Battery type object to the module
+	if (PyType_Ready(&Battery_Type) < 0) { goto fail; }
 	PyModule_AddObject(m,
-				"StandAloneBattery",
-				(PyObject*)&StandAloneBattery_Type);
+				"Battery",
+				(PyObject*)&Battery_Type);
 
 	return 0;
 	fail:
@@ -4522,18 +4546,18 @@ StandAloneBatteryModule_exec(PyObject *m)
 	return -1;
 }
 
-static struct PyModuleDef_Slot StandAloneBatteryModule_slots[] = {
-		{Py_mod_exec, StandAloneBatteryModule_exec},
+static struct PyModuleDef_Slot BatteryModule_slots[] = {
+		{Py_mod_exec, BatteryModule_exec},
 		{0, NULL},
 };
 
-static struct PyModuleDef StandAloneBatteryModule = {
+static struct PyModuleDef BatteryModule = {
 		PyModuleDef_HEAD_INIT,
-		"StandAloneBattery",
+		"Battery",
 		module_doc,
 		0,
-		StandAloneBatteryModule_methods,
-		StandAloneBatteryModule_slots,
+		BatteryModule_methods,
+		BatteryModule_slots,
 		NULL,
 		NULL,
 		NULL
@@ -4542,7 +4566,7 @@ static struct PyModuleDef StandAloneBatteryModule = {
 /* Export function for the module */
 
 PyMODINIT_FUNC
-PyInit_StandAloneBattery(void)
+PyInit_Battery(void)
 {
-	return PyModuleDef_Init(&StandAloneBatteryModule);
+	return PyModuleDef_Init(&BatteryModule);
 }

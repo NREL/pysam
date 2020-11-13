@@ -9,7 +9,11 @@ class MHKWave(object):
 		pass
 
 
+	balance_of_system_cost_total = float
+	device_costs_total = float
 	device_rated_power = float
+	financial_cost_total = float
+	fixed_charge_rate = float
 	loss_additional = float
 	loss_array_spacing = float
 	loss_downtime = float
@@ -17,6 +21,7 @@ class MHKWave(object):
 	loss_transmission = float
 	number_devices = float
 	system_capacity = float
+	total_operating_cost = float
 	wave_power_matrix = tuple
 	wave_resource_matrix = tuple
 
@@ -36,6 +41,24 @@ class Outputs(object):
 	annual_energy_distribution = tuple
 	capacity_factor = float
 	device_average_power = float
+	total_bos_cost_kwh = float
+	total_bos_cost_lcoe = float
+	total_capital_cost_kwh = float
+	total_capital_cost_lcoe = float
+	total_device_cost_kwh = float
+	total_device_cost_lcoe = float
+	total_financial_cost_kwh = float
+	total_financial_cost_lcoe = float
+	total_om_cost_kwh = float
+	total_om_cost_lcoe = float
+	wave_power_end_height = float
+	wave_power_end_period = float
+	wave_power_start_height = float
+	wave_power_start_period = float
+	wave_resource_end_height = float
+	wave_resource_end_period = float
+	wave_resource_start_height = float
+	wave_resource_start_period = float
 
 
 class MhkWave(object):

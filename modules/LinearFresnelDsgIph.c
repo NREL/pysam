@@ -2347,8 +2347,8 @@ static PyMethodDef LinearFresnelDsgIphModule_methods[] = {
 		{"new",             LinearFresnelDsgIph_new,         METH_VARARGS,
 				PyDoc_STR("new() -> LinearFresnelDsgIph")},
 		{"default",             LinearFresnelDsgIph_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> LinearFresnelDsgIph\n\nUse financial config-specific default attributes\n"
-				"config options:\n\n- \"DSGLIPHLCOHCalculator\"\n- \"DSGLIPHNone\"")},
+				PyDoc_STR("default(config) -> LinearFresnelDsgIph\n\nUse default attributes\n"
+				"`config` options:\n\n- \"DSGLIPHLCOHCalculator\"\n- \"DSGLIPHNone\"")},
 		{"wrap",             LinearFresnelDsgIph_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> LinearFresnelDsgIph\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   LinearFresnelDsgIph_from_existing,        METH_VARARGS,

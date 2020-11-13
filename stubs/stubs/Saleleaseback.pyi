@@ -381,7 +381,7 @@ class BatterySystem(object):
 	batt_bank_replacement = tuple
 	batt_computed_bank_capacity = float
 	batt_replacement_option = float
-	batt_replacement_schedule = tuple
+	batt_replacement_schedule_percent = tuple
 	battery_per_kWh = float
 	en_batt = float
 

@@ -119,6 +119,18 @@ PVWatts_set_diffuse(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyObject *
+PVWatts_get_elevation(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvwattsv11ts_PVWatts_elevation_nget, self->data_ptr);
+}
+
+static int
+PVWatts_set_elevation(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvwattsv11ts_PVWatts_elevation_nset, self->data_ptr);
+}
+
+static PyObject *
 PVWatts_get_fd(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Pvwattsv11ts_PVWatts_fd_nget, self->data_ptr);
@@ -248,6 +260,18 @@ static int
 PVWatts_set_poa_cutin(VarGroupObject *self, PyObject *value, void *closure)
 {
 	return PySAM_double_setter(value, SAM_Pvwattsv11ts_PVWatts_poa_cutin_nset, self->data_ptr);
+}
+
+static PyObject *
+PVWatts_get_pressure(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvwattsv11ts_PVWatts_pressure_nget, self->data_ptr);
+}
+
+static int
+PVWatts_set_pressure(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvwattsv11ts_PVWatts_pressure_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -434,6 +458,9 @@ static PyGetSetDef PVWatts_getset[] = {
 {"diffuse", (getter)PVWatts_get_diffuse,(setter)PVWatts_set_diffuse,
 	PyDoc_STR("*float*: Diffuse irradiance [W/m2]\n\n*Required*: True"),
  	NULL},
+{"elevation", (getter)PVWatts_get_elevation,(setter)PVWatts_set_elevation,
+	PyDoc_STR("*float*: Elevation [m]\n\n*Required*: False"),
+ 	NULL},
 {"fd", (getter)PVWatts_get_fd,(setter)PVWatts_set_fd,
 	PyDoc_STR("*float*: Diffuse fraction [0..1]\n\n*Constraints*: MIN=0,MAX=1\n\n*Required*: If not provided, assumed to be 1.0"),
  	NULL},
@@ -467,6 +494,9 @@ static PyGetSetDef PVWatts_getset[] = {
 {"poa_cutin", (getter)PVWatts_get_poa_cutin,(setter)PVWatts_set_poa_cutin,
 	PyDoc_STR("*float*: Min reqd irradiance for operation [W/m2]\n\n*Constraints*: MIN=0\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
+{"pressure", (getter)PVWatts_get_pressure,(setter)PVWatts_set_pressure,
+	PyDoc_STR("*float*: Pressure [millibars]\n\n*Required*: False"),
+ 	NULL},
 {"rotlim", (getter)PVWatts_get_rotlim,(setter)PVWatts_set_rotlim,
 	PyDoc_STR("*float*: Tracker rotation limit (+/- 1 axis) [deg]\n\n*Constraints*: MIN=1,MAX=90\n\n*Required*: If not provided, assumed to be 45.0"),
  	NULL},
@@ -483,7 +513,7 @@ static PyGetSetDef PVWatts_getset[] = {
 	PyDoc_STR("*float*: Reference cell temperature [C]\n\n*Constraints*: POSITIVE\n\n*Required*: If not provided, assumed to be 25.0"),
  	NULL},
 {"tamb", (getter)PVWatts_get_tamb,(setter)PVWatts_set_tamb,
-	PyDoc_STR("*float*: Ambient temperature [C]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Ambient temperature (dry bulb temperature) [C]\n\n*Required*: True"),
  	NULL},
 {"tcell", (getter)PVWatts_get_tcell,(setter)PVWatts_set_tcell,
 	PyDoc_STR("*float*: Module temperature [C]\n\n*Required*: True"),
@@ -929,8 +959,8 @@ static PyMethodDef Pvwattsv11tsModule_methods[] = {
 		{"new",             Pvwattsv11ts_new,         METH_VARARGS,
 				PyDoc_STR("new() -> Pvwattsv11ts")},
 		{"default",             Pvwattsv11ts_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Pvwattsv11ts\n\nUse financial config-specific default attributes\n"
-				"")},
+				PyDoc_STR("default(config) -> Pvwattsv11ts\n\nUse default attributes\n"
+				"None")},
 		{"wrap",             Pvwattsv11ts_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Pvwattsv11ts\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   Pvwattsv11ts_from_existing,        METH_VARARGS,

@@ -3567,8 +3567,8 @@ static PyMethodDef TcslinearFresnelModule_methods[] = {
 		{"new",             TcslinearFresnel_new,         METH_VARARGS,
 				PyDoc_STR("new() -> TcslinearFresnel")},
 		{"default",             TcslinearFresnel_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> TcslinearFresnel\n\nUse financial config-specific default attributes\n"
-				"config options:\n\n- \"DSLFAllEquityPartnershipFlip\"\n- \"DSLFCommercial\"\n- \"DSLFLCOECalculator\"\n- \"DSLFLeveragedPartnershipFlip\"\n- \"DSLFMerchantPlant\"\n- \"DSLFNone\"\n- \"DSLFSaleLeaseback\"\n- \"DSLFSingleOwner\"")},
+				PyDoc_STR("default(config) -> TcslinearFresnel\n\nUse default attributes\n"
+				"`config` options:\n\n- \"DSLFAllEquityPartnershipFlip\"\n- \"DSLFCommercial\"\n- \"DSLFLCOECalculator\"\n- \"DSLFLeveragedPartnershipFlip\"\n- \"DSLFMerchantPlant\"\n- \"DSLFNone\"\n- \"DSLFSaleLeaseback\"\n- \"DSLFSingleOwner\"")},
 		{"wrap",             TcslinearFresnel_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> TcslinearFresnel\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   TcslinearFresnel_from_existing,        METH_VARARGS,

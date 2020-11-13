@@ -9,6 +9,7 @@ class MHKCosts(object):
 		pass
 
 
+	annual_energy = float
 	array_cable_system_cost_input = float
 	array_cable_system_cost_method = float
 	assembly_and_install_cost_input = float
@@ -74,6 +75,11 @@ class Outputs(object):
 	reserve_accounts = float
 	site_access_port_staging_cost_modeled = float
 	structural_assembly_cost_modeled = float
+	total_bos_cost_per_kwh = float
+	total_capital_cost_per_kwh = float
+	total_device_cost_per_kwh = float
+	total_financial_cost_per_kwh = float
+	total_operations_cost_per_kwh = float
 
 
 class MhkCosts(object):

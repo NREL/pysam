@@ -65,7 +65,6 @@ class BatterySystem(object):
 	batt_power_discharge_max_kwdc = float
 	batt_replacement_capacity = float
 	batt_replacement_option = float
-	batt_replacement_schedule = tuple
 	batt_replacement_schedule_percent = tuple
 	batt_surface_area = float
 	en_batt = float
@@ -221,38 +220,6 @@ class BatteryDispatch(object):
 	dispatch_manual_sched_weekend = tuple
 
 
-class ElectricityRates(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> Dict[Dict]:
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	en_electricity_rates = float
-	rate_escalation = tuple
-	ur_dc_enable = float
-	ur_dc_flat_mat = tuple
-	ur_dc_sched_weekday = tuple
-	ur_dc_sched_weekend = tuple
-	ur_dc_tou_mat = tuple
-	ur_ec_sched_weekday = tuple
-	ur_ec_sched_weekend = tuple
-	ur_ec_tou_mat = tuple
-	ur_en_ts_buy_rate = float
-	ur_en_ts_sell_rate = float
-	ur_metering_option = float
-	ur_nm_credit_month = float
-	ur_nm_credit_rollover = float
-	ur_nm_yearend_sell_rate = float
-	ur_sell_eq_buy = float
-	ur_ts_buy_rate = tuple
-	ur_ts_sell_rate = tuple
-
-
 class FuelCell(object):
 	def assign(self): 
 		pass
@@ -297,6 +264,40 @@ class PriceSignal(object):
 	ppa_price_input = tuple
 
 
+class ElectricityRates(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> Dict[Dict]:
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
+	rate_escalation = tuple
+	ur_annual_min_charge = float
+	ur_dc_enable = float
+	ur_dc_flat_mat = tuple
+	ur_dc_sched_weekday = tuple
+	ur_dc_sched_weekend = tuple
+	ur_dc_tou_mat = tuple
+	ur_ec_sched_weekday = tuple
+	ur_ec_sched_weekend = tuple
+	ur_ec_tou_mat = tuple
+	ur_en_ts_buy_rate = float
+	ur_en_ts_sell_rate = float
+	ur_metering_option = float
+	ur_monthly_fixed_charge = float
+	ur_monthly_min_charge = float
+	ur_nm_credit_month = float
+	ur_nm_credit_rollover = float
+	ur_nm_yearend_sell_rate = float
+	ur_sell_eq_buy = float
+	ur_ts_buy_rate = tuple
+	ur_ts_sell_rate = tuple
+
+
 class Outputs(object):
 	def assign(self): 
 		pass
@@ -319,7 +320,7 @@ class Outputs(object):
 	batt_SOC = tuple
 	batt_annual_charge_energy = tuple
 	batt_annual_charge_from_grid = tuple
-	batt_annual_charge_from_pv = tuple
+	batt_annual_charge_from_system = tuple
 	batt_annual_discharge_energy = tuple
 	batt_annual_energy_loss = tuple
 	batt_annual_energy_system_loss = tuple
@@ -335,7 +336,6 @@ class Outputs(object):
 	batt_dispatch_sched = tuple
 	batt_power = tuple
 	batt_power_target = tuple
-	batt_pv_charge_percent = float
 	batt_q0 = tuple
 	batt_q1 = tuple
 	batt_q2 = tuple
@@ -346,6 +346,7 @@ class Outputs(object):
 	batt_revenue_clipcharge = tuple
 	batt_revenue_discharge = tuple
 	batt_revenue_gridcharge = tuple
+	batt_system_charge_percent = float
 	batt_system_loss = tuple
 	batt_temperature = tuple
 	batt_to_grid = tuple
@@ -354,6 +355,7 @@ class Outputs(object):
 	batt_voltage_cell = tuple
 	cdf_of_surviving = tuple
 	fuelcell_to_batt = tuple
+	gen_without_battery = tuple
 	grid_power = tuple
 	grid_power_target = tuple
 	grid_to_batt = tuple
@@ -363,22 +365,22 @@ class Outputs(object):
 	monthly_batt_to_load = tuple
 	monthly_grid_to_batt = tuple
 	monthly_grid_to_load = tuple
-	monthly_pv_to_batt = tuple
-	monthly_pv_to_grid = tuple
-	monthly_pv_to_load = tuple
+	monthly_system_to_batt = tuple
+	monthly_system_to_grid = tuple
+	monthly_system_to_load = tuple
 	outage_durations = tuple
 	pdf_of_surviving = tuple
-	pv_to_batt = tuple
-	pv_to_grid = tuple
-	pv_to_load = tuple
 	resilience_hrs = tuple
 	resilience_hrs_avg = float
 	resilience_hrs_max = float
 	resilience_hrs_min = float
 	survival_function = tuple
+	system_to_batt = tuple
+	system_to_grid = tuple
+	system_to_load = tuple
 
 
-class StandAloneBattery(object):
+class Battery(object):
 	def assign(self, dict):
 		pass
 
@@ -406,22 +408,22 @@ class StandAloneBattery(object):
 	Inverter = Inverter
 	Losses = Losses
 	BatteryDispatch = BatteryDispatch
-	ElectricityRates = ElectricityRates
 	FuelCell = FuelCell
 	PriceSignal = PriceSignal
+	ElectricityRates = ElectricityRates
 	Outputs = Outputs
 
 
-def default(config) -> StandAloneBattery:
+def default(config) -> Battery:
 	pass
 
-def new() -> StandAloneBattery:
+def new() -> Battery:
 	pass
 
-def wrap(ssc_data_t) -> StandAloneBattery:
+def wrap(ssc_data_t) -> Battery:
 	pass
 
-def from_existing(model, config="") -> StandAloneBattery:
+def from_existing(model, config="") -> Battery:
 	pass
 
 __loader__ = None 

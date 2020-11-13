@@ -3261,8 +3261,8 @@ static PyMethodDef TcsisccModule_methods[] = {
 		{"new",             Tcsiscc_new,         METH_VARARGS,
 				PyDoc_STR("new() -> Tcsiscc")},
 		{"default",             Tcsiscc_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Tcsiscc\n\nUse financial config-specific default attributes\n"
-				"")},
+				PyDoc_STR("default(config) -> Tcsiscc\n\nUse default attributes\n"
+				"None")},
 		{"wrap",             Tcsiscc_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Tcsiscc\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   Tcsiscc_from_existing,        METH_VARARGS,

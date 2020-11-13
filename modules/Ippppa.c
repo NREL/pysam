@@ -5586,8 +5586,8 @@ static PyMethodDef IppppaModule_methods[] = {
 		{"new",             Ippppa_new,         METH_VARARGS,
 				PyDoc_STR("new() -> Ippppa")},
 		{"default",             Ippppa_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Ippppa\n\nUse financial config-specific default attributes\n"
-				"")},
+				PyDoc_STR("default(config) -> Ippppa\n\nUse default attributes\n"
+				"None")},
 		{"wrap",             Ippppa_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Ippppa\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   Ippppa_from_existing,        METH_VARARGS,

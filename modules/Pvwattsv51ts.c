@@ -107,6 +107,18 @@ PVWatts_set_diffuse(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyObject *
+PVWatts_get_elevation(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvwattsv51ts_PVWatts_elevation_nget, self->data_ptr);
+}
+
+static int
+PVWatts_set_elevation(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvwattsv51ts_PVWatts_elevation_nset, self->data_ptr);
+}
+
+static PyObject *
 PVWatts_get_hour(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Pvwattsv51ts_PVWatts_hour_nget, self->data_ptr);
@@ -176,6 +188,30 @@ static int
 PVWatts_set_poa(VarGroupObject *self, PyObject *value, void *closure)
 {
 	return PySAM_double_setter(value, SAM_Pvwattsv51ts_PVWatts_poa_nset, self->data_ptr);
+}
+
+static PyObject *
+PVWatts_get_pressure(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvwattsv51ts_PVWatts_pressure_nget, self->data_ptr);
+}
+
+static int
+PVWatts_set_pressure(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvwattsv51ts_PVWatts_pressure_nset, self->data_ptr);
+}
+
+static PyObject *
+PVWatts_get_shaded_percent(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvwattsv51ts_PVWatts_shaded_percent_nget, self->data_ptr);
+}
+
+static int
+PVWatts_set_shaded_percent(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvwattsv51ts_PVWatts_shaded_percent_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -263,6 +299,9 @@ static PyGetSetDef PVWatts_getset[] = {
 {"diffuse", (getter)PVWatts_get_diffuse,(setter)PVWatts_set_diffuse,
 	PyDoc_STR("*float*: Diffuse irradiance [W/m2]\n\n*Required*: True"),
  	NULL},
+{"elevation", (getter)PVWatts_get_elevation,(setter)PVWatts_set_elevation,
+	PyDoc_STR("*float*: Elevation [m]\n\n*Required*: False"),
+ 	NULL},
 {"hour", (getter)PVWatts_get_hour,(setter)PVWatts_set_hour,
 	PyDoc_STR("*float*: Hour [hr]\n\n*Info*: 0-23\n\n*Required*: True"),
  	NULL},
@@ -281,8 +320,14 @@ static PyGetSetDef PVWatts_getset[] = {
 {"poa", (getter)PVWatts_get_poa,(setter)PVWatts_set_poa,
 	PyDoc_STR("*float*: Plane of array irradiance [W/m2]\n\n*Info*: Output from last time step may be used as input"),
  	NULL},
+{"pressure", (getter)PVWatts_get_pressure,(setter)PVWatts_set_pressure,
+	PyDoc_STR("*float*: Pressure [mbars]\n\n*Required*: False"),
+ 	NULL},
+{"shaded_percent", (getter)PVWatts_get_shaded_percent,(setter)PVWatts_set_shaded_percent,
+	PyDoc_STR("*float*: Percent of panels that are shaded [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
 {"tamb", (getter)PVWatts_get_tamb,(setter)PVWatts_set_tamb,
-	PyDoc_STR("*float*: Ambient temperature [C]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Ambient temperature (dry bulb temperature) [C]\n\n*Required*: True"),
  	NULL},
 {"tcell", (getter)PVWatts_get_tcell,(setter)PVWatts_set_tcell,
 	PyDoc_STR("*float*: Module temperature [C]\n\n*Info*: Output from last time step may be used as input"),
@@ -961,8 +1006,8 @@ static PyMethodDef Pvwattsv51tsModule_methods[] = {
 		{"new",             Pvwattsv51ts_new,         METH_VARARGS,
 				PyDoc_STR("new() -> Pvwattsv51ts")},
 		{"default",             Pvwattsv51ts_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Pvwattsv51ts\n\nUse financial config-specific default attributes\n"
-				"")},
+				PyDoc_STR("default(config) -> Pvwattsv51ts\n\nUse default attributes\n"
+				"None")},
 		{"wrap",             Pvwattsv51ts_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Pvwattsv51ts\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   Pvwattsv51ts_from_existing,        METH_VARARGS,

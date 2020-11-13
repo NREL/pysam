@@ -167,15 +167,15 @@ class Outputs(object):
 	energy_wo_sys_ec_nov_tp = tuple
 	energy_wo_sys_ec_oct_tp = tuple
 	energy_wo_sys_ec_sep_tp = tuple
-	excess_dollars_applied_ym = tuple
-	excess_dollars_earned_ym = tuple
-	excess_kwhs_applied_ym = tuple
 	excess_kwhs_earned_ym = tuple
 	lifetime_load = tuple
 	monthly_tou_demand_charge_w_sys = tuple
 	monthly_tou_demand_charge_wo_sys = tuple
 	monthly_tou_demand_peak_w_sys = tuple
 	monthly_tou_demand_peak_wo_sys = tuple
+	net_billing_credits_ym = tuple
+	nm_dollars_applied_ym = tuple
+	nm_total_rollover_kwh_ym = tuple
 	savings_year1 = float
 	surplus_w_sys_ec_apr_tp = tuple
 	surplus_w_sys_ec_aug_tp = tuple
@@ -194,9 +194,6 @@ class Outputs(object):
 	utility_bill_wo_sys = tuple
 	utility_bill_wo_sys_ym = tuple
 	year1_electric_load = float
-	year1_excess_dollars_applied = tuple
-	year1_excess_dollars_earned = tuple
-	year1_excess_kwhs_applied = tuple
 	year1_excess_kwhs_earned = tuple
 	year1_hourly_dc_peak_per_period = tuple
 	year1_hourly_dc_tou_schedule = tuple
@@ -213,7 +210,6 @@ class Outputs(object):
 	year1_hourly_salespurchases_with_system = tuple
 	year1_hourly_salespurchases_without_system = tuple
 	year1_hourly_system_to_load = tuple
-	year1_monthly_cumulative_excess_dollars = tuple
 	year1_monthly_cumulative_excess_generation = tuple
 	year1_monthly_dc_fixed_with_system = tuple
 	year1_monthly_dc_fixed_without_system = tuple
@@ -234,6 +230,9 @@ class Outputs(object):
 	year1_monthly_use_wo_system = tuple
 	year1_monthly_utility_bill_w_sys = tuple
 	year1_monthly_utility_bill_wo_sys = tuple
+	year1_net_billing_credits = tuple
+	year1_nm_dollars_applied = tuple
+	year1_nm_total_rollover_kwh = tuple
 
 
 class Utilityrate5(object):

@@ -847,8 +847,8 @@ static PyMethodDef ThermalrateModule_methods[] = {
 		{"new",             Thermalrate_new,         METH_VARARGS,
 				PyDoc_STR("new() -> Thermalrate")},
 		{"default",             Thermalrate_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Thermalrate\n\nUse financial config-specific default attributes\n"
-				"config options:\n\n- \"FuelCellCommercial\"\n- \"FuelCellSingleOwner\"")},
+				PyDoc_STR("default(config) -> Thermalrate\n\nUse default attributes\n"
+				"`config` options:\n\n- \"FuelCellCommercial\"\n- \"FuelCellSingleOwner\"")},
 		{"wrap",             Thermalrate_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Thermalrate\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   Thermalrate_from_existing,        METH_VARARGS,

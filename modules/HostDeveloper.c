@@ -1358,7 +1358,7 @@ static PyGetSetDef SystemCosts_getset[] = {
 	PyDoc_STR("*float*: Replacement cost escalation [%/year]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
 {"total_installed_cost", (getter)SystemCosts_get_total_installed_cost,(setter)SystemCosts_set_total_installed_cost,
-	PyDoc_STR("*float*: Installed cost [$]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - construction_financing_cost\n\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - battery_per_kWh\n"),
+	PyDoc_STR("*float*: Installed cost [$]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - construction_financing_cost\n"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -5088,7 +5088,7 @@ ConstructionFinancing_set_construction_financing_cost(VarGroupObject *self, PyOb
 
 static PyGetSetDef ConstructionFinancing_getset[] = {
 {"construction_financing_cost", (getter)ConstructionFinancing_get_construction_financing_cost,(setter)ConstructionFinancing_set_construction_financing_cost,
-	PyDoc_STR("*float*: Construction financing total [$]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - battery_per_kWh\n\t - total_installed_cost\n"),
+	PyDoc_STR("*float*: Construction financing total [$]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - total_installed_cost\n"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -5229,15 +5229,15 @@ BatterySystem_set_batt_replacement_option(VarGroupObject *self, PyObject *value,
 }
 
 static PyObject *
-BatterySystem_get_batt_replacement_schedule(VarGroupObject *self, void *closure)
+BatterySystem_get_batt_replacement_schedule_percent(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_HostDeveloper_BatterySystem_batt_replacement_schedule_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_HostDeveloper_BatterySystem_batt_replacement_schedule_percent_aget, self->data_ptr);
 }
 
 static int
-BatterySystem_set_batt_replacement_schedule(VarGroupObject *self, PyObject *value, void *closure)
+BatterySystem_set_batt_replacement_schedule_percent(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_HostDeveloper_BatterySystem_batt_replacement_schedule_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_HostDeveloper_BatterySystem_batt_replacement_schedule_percent_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -5269,19 +5269,19 @@ static PyGetSetDef BatterySystem_getset[] = {
 	PyDoc_STR("*sequence*: Battery bank replacements per year [number/year]"),
  	NULL},
 {"batt_computed_bank_capacity", (getter)BatterySystem_get_batt_computed_bank_capacity,(setter)BatterySystem_set_batt_computed_bank_capacity,
-	PyDoc_STR("*float*: Battery bank capacity [kWh]\n\n*Required*: If not provided, assumed to be 0.0\n\n*Changes to this variable may require updating the values of the following*: \n\t - construction_financing_cost\n\t - total_installed_cost\n"),
+	PyDoc_STR("*float*: Battery bank capacity [kWh]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
 {"batt_replacement_option", (getter)BatterySystem_get_batt_replacement_option,(setter)BatterySystem_set_batt_replacement_option,
 	PyDoc_STR("*float*: Enable battery replacement? [0=none,1=capacity based,2=user schedule]\n\n*Constraints*: INTEGER,MIN=0,MAX=2\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
-{"batt_replacement_schedule", (getter)BatterySystem_get_batt_replacement_schedule,(setter)BatterySystem_set_batt_replacement_schedule,
-	PyDoc_STR("*sequence*: Battery bank replacements per year (user specified) [number/year]"),
+{"batt_replacement_schedule_percent", (getter)BatterySystem_get_batt_replacement_schedule_percent,(setter)BatterySystem_set_batt_replacement_schedule_percent,
+	PyDoc_STR("*sequence*: Percentage of battery capacity to replace in each year [%]\n\n*Options*: length <= analysis_period"),
  	NULL},
 {"battery_per_kWh", (getter)BatterySystem_get_battery_per_kWh,(setter)BatterySystem_set_battery_per_kWh,
-	PyDoc_STR("*float*: Battery cost [$/kWh]\n\n*Required*: If not provided, assumed to be 0.0\n\n*Changes to this variable may require updating the values of the following*: \n\t - construction_financing_cost\n\t - total_installed_cost\n"),
+	PyDoc_STR("*float*: Battery cost [$/kWh]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
 {"en_batt", (getter)BatterySystem_get_en_batt,(setter)BatterySystem_set_en_batt,
-	PyDoc_STR("*float*: Enable battery storage model [0/1]\n\n*Required*: If not provided, assumed to be 0\n\n*Changes to this variable may require updating the values of the following*: \n\t - construction_financing_cost\n\t - total_installed_cost\n"),
+	PyDoc_STR("*float*: Enable battery storage model [0/1]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -10606,8 +10606,8 @@ static PyMethodDef HostDeveloperModule_methods[] = {
 		{"new",             HostDeveloper_new,         METH_VARARGS,
 				PyDoc_STR("new() -> HostDeveloper")},
 		{"default",             HostDeveloper_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> HostDeveloper\n\nUse financial config-specific default attributes\n"
-				"config options:\n\n- \"FlatPlatePVHostDeveloper\"\n- \"GenericBatteryHostDeveloper\"\n- \"GenericSystemHostDeveloper\"\n- \"PVBatteryHostDeveloper\"\n- \"PVWattsBatteryHostDeveloper\"\n- \"PVWattsHostDeveloper\"")},
+				PyDoc_STR("default(config) -> HostDeveloper\n\nUse default attributes\n"
+				"`config` options:\n\n- \"FlatPlatePVHostDeveloper\"\n- \"GenericBatteryHostDeveloper\"\n- \"GenericSystemHostDeveloper\"\n- \"PVBatteryHostDeveloper\"\n- \"PVWattsBatteryHostDeveloper\"\n- \"PVWattsHostDeveloper\"")},
 		{"wrap",             HostDeveloper_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> HostDeveloper\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   HostDeveloper_from_existing,        METH_VARARGS,
