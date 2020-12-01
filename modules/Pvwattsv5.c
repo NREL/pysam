@@ -900,7 +900,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*float*: Site elevation [m]"),
  	NULL},
 {"gen", (getter)Outputs_get_gen,(setter)0,
-	PyDoc_STR("*sequence*: System power generated [kW]"),
+	PyDoc_STR("*sequence*: AC system power (lifetime) [kWh]"),
  	NULL},
 {"gh", (getter)Outputs_get_gh,(setter)0,
 	PyDoc_STR("*sequence*: Global horizontal irradiance [W/m2]"),
@@ -1290,8 +1290,8 @@ static PyMethodDef Pvwattsv5Module_methods[] = {
 		{"new",             Pvwattsv5_new,         METH_VARARGS,
 				PyDoc_STR("new() -> Pvwattsv5")},
 		{"default",             Pvwattsv5_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Pvwattsv5\n\nUse financial config-specific default attributes\n"
-				"")},
+				PyDoc_STR("default(config) -> Pvwattsv5\n\nUse default attributes\n"
+				"None")},
 		{"wrap",             Pvwattsv5_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Pvwattsv5\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   Pvwattsv5_from_existing,        METH_VARARGS,

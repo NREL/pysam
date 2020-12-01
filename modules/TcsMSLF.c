@@ -4606,8 +4606,8 @@ static PyMethodDef TcsMSLFModule_methods[] = {
 		{"new",             TcsMSLF_new,         METH_VARARGS,
 				PyDoc_STR("new() -> TcsMSLF")},
 		{"default",             TcsMSLF_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> TcsMSLF\n\nUse financial config-specific default attributes\n"
-				"config options:\n\n- \"MSLFAllEquityPartnershipFlip\"\n- \"MSLFCommercial\"\n- \"MSLFLCOECalculator\"\n- \"MSLFLeveragedPartnershipFlip\"\n- \"MSLFMerchantPlant\"\n- \"MSLFNone\"\n- \"MSLFSaleLeaseback\"\n- \"MSLFSingleOwner\"")},
+				PyDoc_STR("default(config) -> TcsMSLF\n\nUse default attributes\n"
+				"`config` options:\n\n- \"MSLFAllEquityPartnershipFlip\"\n- \"MSLFCommercial\"\n- \"MSLFLCOECalculator\"\n- \"MSLFLeveragedPartnershipFlip\"\n- \"MSLFMerchantPlant\"\n- \"MSLFNone\"\n- \"MSLFSaleLeaseback\"\n- \"MSLFSingleOwner\"")},
 		{"wrap",             TcsMSLF_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> TcsMSLF\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   TcsMSLF_from_existing,        METH_VARARGS,

@@ -494,8 +494,8 @@ static PyMethodDef LayoutareaModule_methods[] = {
 		{"new",             Layoutarea_new,         METH_VARARGS,
 				PyDoc_STR("new() -> Layoutarea")},
 		{"default",             Layoutarea_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Layoutarea\n\nUse financial config-specific default attributes\n"
-				"")},
+				PyDoc_STR("default(config) -> Layoutarea\n\nUse default attributes\n"
+				"None")},
 		{"wrap",             Layoutarea_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Layoutarea\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   Layoutarea_from_existing,        METH_VARARGS,

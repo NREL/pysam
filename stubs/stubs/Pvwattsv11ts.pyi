@@ -14,6 +14,8 @@ class PVWatts(object):
 	day = float
 	derate = float
 	diffuse = float
+	dry_temperature = float
+	elevation = float
 	fd = float
 	gamma = float
 	hour = float
@@ -25,6 +27,7 @@ class PVWatts(object):
 	month = float
 	poa = float
 	poa_cutin = float
+	pressure = float
 	rotlim = float
 	snow = float
 	system_size = float

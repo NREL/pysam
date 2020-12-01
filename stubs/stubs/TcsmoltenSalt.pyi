@@ -150,14 +150,17 @@ class TowerAndReceiver(object):
 	is_rec_startup_from_T_soln = float
 	is_rec_startup_trans = float
 	mat_tube = float
+	min_fill_time = float
+	min_preheat_time = float
 	n_flux_days = float
 	piping_length_const = float
 	piping_length_mult = float
 	piping_loss = float
-	piping_loss_coeff = float
 	preheat_flux = float
-	preheat_target_Tdiff = float
 	rec_absorptance = float
+	rec_clearsky_dni = tuple
+	rec_clearsky_fraction = float
+	rec_clearsky_model = float
 	rec_height = float
 	rec_hl_perm2 = float
 	rec_htf = float
@@ -260,6 +263,7 @@ class ThermalStorage(object):
 	hot_tank_Thtr = float
 	hot_tank_max_heat = float
 	tank_pairs = float
+	tanks_in_parallel = float
 	u_tank = float
 
 
@@ -512,6 +516,8 @@ class Outputs(object):
 	P_rec_heattrace = tuple
 	P_tower_pump = tuple
 	Q_thermal = tuple
+	Q_thermal_ss = tuple
+	Q_thermal_ss_csky = tuple
 	T_cold = tuple
 	T_cond_out = tuple
 	T_panel_out_max = tuple
@@ -539,6 +545,7 @@ class Outputs(object):
 	annual_total_water_use = float
 	beam = tuple
 	capacity_factor = float
+	clearsky = tuple
 	const_per_interest1 = float
 	const_per_interest2 = float
 	const_per_interest3 = float
@@ -613,12 +620,18 @@ class Outputs(object):
 	kwh_per_kw = float
 	m_cold = tuple
 	m_dot_balance = tuple
+	m_dot_cr_to_tes_hot = tuple
+	m_dot_cycle_to_field = tuple
+	m_dot_field_to_cycle = tuple
 	m_dot_pc = tuple
+	m_dot_pc_to_tes_cold = tuple
 	m_dot_rec = tuple
-	m_dot_tes_ch = tuple
-	m_dot_tes_dc = tuple
+	m_dot_tes_cold_out = tuple
+	m_dot_tes_hot_out = tuple
 	m_dot_water_pc = tuple
 	m_warm = tuple
+	mass_tes_cold = tuple
+	mass_tes_hot = tuple
 	n_op_modes = tuple
 	op_mode_1 = tuple
 	op_mode_2 = tuple

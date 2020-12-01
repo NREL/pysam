@@ -56,6 +56,7 @@ class Load(object):
 
 
 	load = tuple
+	load_escalation = tuple
 
 
 class Outputs(object):

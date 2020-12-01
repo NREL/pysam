@@ -1355,8 +1355,8 @@ static PyMethodDef SolarpilotModule_methods[] = {
 		{"new",             Solarpilot_new,         METH_VARARGS,
 				PyDoc_STR("new() -> Solarpilot")},
 		{"default",             Solarpilot_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Solarpilot\n\nUse financial config-specific default attributes\n"
-				"")},
+				PyDoc_STR("default(config) -> Solarpilot\n\nUse default attributes\n"
+				"None")},
 		{"wrap",             Solarpilot_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Solarpilot\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   Solarpilot_from_existing,        METH_VARARGS,

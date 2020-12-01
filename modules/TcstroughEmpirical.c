@@ -3723,8 +3723,8 @@ static PyMethodDef TcstroughEmpiricalModule_methods[] = {
 		{"new",             TcstroughEmpirical_new,         METH_VARARGS,
 				PyDoc_STR("new() -> TcstroughEmpirical")},
 		{"default",             TcstroughEmpirical_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> TcstroughEmpirical\n\nUse financial config-specific default attributes\n"
-				"config options:\n\n- \"EmpiricalTroughAllEquityPartnershipFlip\"\n- \"EmpiricalTroughCommercial\"\n- \"EmpiricalTroughLCOECalculator\"\n- \"EmpiricalTroughLeveragedPartnershipFlip\"\n- \"EmpiricalTroughMerchantPlant\"\n- \"EmpiricalTroughNone\"\n- \"EmpiricalTroughSaleLeaseback\"\n- \"EmpiricalTroughSingleOwner\"")},
+				PyDoc_STR("default(config) -> TcstroughEmpirical\n\nUse default attributes\n"
+				"`config` options:\n\n- \"EmpiricalTroughAllEquityPartnershipFlip\"\n- \"EmpiricalTroughCommercial\"\n- \"EmpiricalTroughLCOECalculator\"\n- \"EmpiricalTroughLeveragedPartnershipFlip\"\n- \"EmpiricalTroughMerchantPlant\"\n- \"EmpiricalTroughNone\"\n- \"EmpiricalTroughSaleLeaseback\"\n- \"EmpiricalTroughSingleOwner\"")},
 		{"wrap",             TcstroughEmpirical_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> TcstroughEmpirical\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   TcstroughEmpirical_from_existing,        METH_VARARGS,

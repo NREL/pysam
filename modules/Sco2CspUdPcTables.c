@@ -3189,8 +3189,8 @@ static PyMethodDef Sco2CspUdPcTablesModule_methods[] = {
 		{"new",             Sco2CspUdPcTables_new,         METH_VARARGS,
 				PyDoc_STR("new() -> Sco2CspUdPcTables")},
 		{"default",             Sco2CspUdPcTables_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Sco2CspUdPcTables\n\nUse financial config-specific default attributes\n"
-				"")},
+				PyDoc_STR("default(config) -> Sco2CspUdPcTables\n\nUse default attributes\n"
+				"None")},
 		{"wrap",             Sco2CspUdPcTables_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Sco2CspUdPcTables\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   Sco2CspUdPcTables_from_existing,        METH_VARARGS,

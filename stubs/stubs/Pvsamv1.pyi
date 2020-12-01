@@ -81,6 +81,7 @@ class Lifetime(object):
 	dc_lifetime_losses = tuple
 	en_ac_lifetime_losses = float
 	en_dc_lifetime_losses = float
+	inflation_rate = float
 	save_full_lifetime_variables = float
 	system_use_lifetime_output = float
 
@@ -678,7 +679,7 @@ class BatterySystem(object):
 	batt_current_charge_max = float
 	batt_current_choice = float
 	batt_current_discharge_max = float
-	batt_cycle_cost = float
+	batt_cycle_cost = tuple
 	batt_cycle_cost_choice = float
 	batt_dc_ac_efficiency = float
 	batt_dc_dc_efficiency = float
@@ -696,7 +697,6 @@ class BatterySystem(object):
 	batt_power_discharge_max_kwdc = float
 	batt_replacement_capacity = float
 	batt_replacement_option = float
-	batt_replacement_schedule = tuple
 	batt_replacement_schedule_percent = tuple
 	batt_surface_area = float
 	en_batt = float
@@ -716,6 +716,7 @@ class Load(object):
 
 	crit_load = tuple
 	load = tuple
+	load_escalation = tuple
 
 
 class BatteryCell(object):
@@ -783,8 +784,8 @@ class BatteryDispatch(object):
 	batt_dispatch_choice = float
 	batt_dispatch_update_frequency_hours = float
 	batt_look_ahead_hours = float
+	batt_pv_ac_forecast = tuple
 	batt_pv_clipping_forecast = tuple
-	batt_pv_dc_forecast = tuple
 	batt_target_choice = float
 	batt_target_power = tuple
 	batt_target_power_monthly = tuple
@@ -796,25 +797,6 @@ class BatteryDispatch(object):
 	dispatch_manual_percent_gridcharge = tuple
 	dispatch_manual_sched = tuple
 	dispatch_manual_sched_weekend = tuple
-
-
-class ElectricityRates(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> Dict[Dict]:
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	en_electricity_rates = float
-	ur_ec_sched_weekday = tuple
-	ur_ec_sched_weekend = tuple
-	ur_ec_tou_mat = tuple
-	ur_en_ts_sell_rate = float
-	ur_ts_buy_rate = tuple
 
 
 class FuelCell(object):
@@ -859,6 +841,40 @@ class PriceSignal(object):
 	mp_energy_market_revenue = tuple
 	ppa_multiplier_model = float
 	ppa_price_input = tuple
+
+
+class ElectricityRates(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> Dict[Dict]:
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
+	rate_escalation = tuple
+	ur_annual_min_charge = float
+	ur_dc_enable = float
+	ur_dc_flat_mat = tuple
+	ur_dc_sched_weekday = tuple
+	ur_dc_sched_weekend = tuple
+	ur_dc_tou_mat = tuple
+	ur_ec_sched_weekday = tuple
+	ur_ec_sched_weekend = tuple
+	ur_ec_tou_mat = tuple
+	ur_en_ts_buy_rate = float
+	ur_en_ts_sell_rate = float
+	ur_metering_option = float
+	ur_monthly_fixed_charge = float
+	ur_monthly_min_charge = float
+	ur_nm_credit_month = float
+	ur_nm_credit_rollover = float
+	ur_nm_yearend_sell_rate = float
+	ur_sell_eq_buy = float
+	ur_ts_buy_rate = tuple
+	ur_ts_sell_rate = tuple
 
 
 class AdjustmentFactors(object):
@@ -1282,9 +1298,9 @@ class Pvsamv1(object):
 	Load = Load
 	BatteryCell = BatteryCell
 	BatteryDispatch = BatteryDispatch
-	ElectricityRates = ElectricityRates
 	FuelCell = FuelCell
 	PriceSignal = PriceSignal
+	ElectricityRates = ElectricityRates
 	AdjustmentFactors = AdjustmentFactors
 	Outputs = Outputs
 

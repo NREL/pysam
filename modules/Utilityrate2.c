@@ -8953,8 +8953,8 @@ static PyMethodDef Utilityrate2Module_methods[] = {
 		{"new",             Utilityrate2_new,         METH_VARARGS,
 				PyDoc_STR("new() -> Utilityrate2")},
 		{"default",             Utilityrate2_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Utilityrate2\n\nUse financial config-specific default attributes\n"
-				"")},
+				PyDoc_STR("default(config) -> Utilityrate2\n\nUse default attributes\n"
+				"None")},
 		{"wrap",             Utilityrate2_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Utilityrate2\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   Utilityrate2_from_existing,        METH_VARARGS,

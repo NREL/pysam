@@ -928,7 +928,7 @@ static PyGetSetDef FinancialParameters_getset[] = {
 	PyDoc_STR("*float*: Analyis period [years]\n\n*Constraints*: INTEGER,MIN=0,MAX=50\n\n*Required*: If not provided, assumed to be 30"),
  	NULL},
 {"construction_financing_cost", (getter)FinancialParameters_get_construction_financing_cost,(setter)FinancialParameters_set_construction_financing_cost,
-	PyDoc_STR("*float*: Construction financing total [$]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - total_installed_cost\n"),
+	PyDoc_STR("*float*: Construction financing total [$]\n\n*Required*: True"),
  	NULL},
 {"cost_debt_closing", (getter)FinancialParameters_get_cost_debt_closing,(setter)FinancialParameters_set_cost_debt_closing,
 	PyDoc_STR("*float*: Debt closing cost [$]\n\n*Constraints*: MIN=0\n\n*Required*: If not provided, assumed to be 250000"),
@@ -4400,15 +4400,15 @@ BatterySystem_set_batt_replacement_option(VarGroupObject *self, PyObject *value,
 }
 
 static PyObject *
-BatterySystem_get_batt_replacement_schedule(VarGroupObject *self, void *closure)
+BatterySystem_get_batt_replacement_schedule_percent(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Singleowner_BatterySystem_batt_replacement_schedule_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Singleowner_BatterySystem_batt_replacement_schedule_percent_aget, self->data_ptr);
 }
 
 static int
-BatterySystem_set_batt_replacement_schedule(VarGroupObject *self, PyObject *value, void *closure)
+BatterySystem_set_batt_replacement_schedule_percent(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_Singleowner_BatterySystem_batt_replacement_schedule_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Singleowner_BatterySystem_batt_replacement_schedule_percent_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -4460,8 +4460,8 @@ static PyGetSetDef BatterySystem_getset[] = {
 {"batt_replacement_option", (getter)BatterySystem_get_batt_replacement_option,(setter)BatterySystem_set_batt_replacement_option,
 	PyDoc_STR("*float*: Enable battery replacement? [0=none,1=capacity based,2=user schedule]\n\n*Constraints*: INTEGER,MIN=0,MAX=2\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
-{"batt_replacement_schedule", (getter)BatterySystem_get_batt_replacement_schedule,(setter)BatterySystem_set_batt_replacement_schedule,
-	PyDoc_STR("*sequence*: Battery bank replacements per year (user specified) [number/year]"),
+{"batt_replacement_schedule_percent", (getter)BatterySystem_get_batt_replacement_schedule_percent,(setter)BatterySystem_set_batt_replacement_schedule_percent,
+	PyDoc_STR("*sequence*: Percentage of battery capacity to replace in each year [%]\n\n*Options*: length <= analysis_period"),
  	NULL},
 {"battery_per_kWh", (getter)BatterySystem_get_battery_per_kWh,(setter)BatterySystem_set_battery_per_kWh,
 	PyDoc_STR("*float*: Battery cost [$/kWh]\n\n*Required*: If not provided, assumed to be 0.0"),
@@ -5388,7 +5388,7 @@ static PyGetSetDef CapacityPayments_getset[] = {
 	PyDoc_STR("*float*: Capacity payment type\n\n*Options*: 0=Energy basis,1=Fixed amount\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: True"),
  	NULL},
 {"cp_system_nameplate", (getter)CapacityPayments_get_cp_system_nameplate,(setter)CapacityPayments_set_cp_system_nameplate,
-	PyDoc_STR("*float*: System nameplate [MW]\n\n*Constraints*: MIN=0\n\n*Required*: True if cp_capacity_payment_type=0\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - system_capacity\n"),
+	PyDoc_STR("*float*: System nameplate [MW]\n\n*Constraints*: MIN=0\n\n*Required*: True if cp_capacity_payment_type=0"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -10945,8 +10945,8 @@ static PyMethodDef SingleownerModule_methods[] = {
 		{"new",             Singleowner_new,         METH_VARARGS,
 				PyDoc_STR("new() -> Singleowner")},
 		{"default",             Singleowner_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Singleowner\n\nUse financial config-specific default attributes\n"
-				"config options:\n\n- \"BiopowerSingleOwner\"\n- \"DSLFSingleOwner\"\n- \"DSPTSingleOwner\"\n- \"DishStirlingSingleOwner\"\n- \"EmpiricalTroughSingleOwner\"\n- \"FlatPlatePVSingleOwner\"\n- \"FuelCellSingleOwner\"\n- \"GenericBatterySingleOwner\"\n- \"GenericCSPSystemSingleOwner\"\n- \"GenericSystemSingleOwner\"\n- \"GeothermalPowerSingleOwner\"\n- \"HighXConcentratingPVSingleOwner\"\n- \"MSLFSingleOwner\"\n- \"MSPTSingleOwner\"\n- \"PVBatterySingleOwner\"\n- \"PVWattsSingleOwner\"\n- \"PhysicalTroughSingleOwner\"\n- \"WindPowerSingleOwner\"")},
+				PyDoc_STR("default(config) -> Singleowner\n\nUse default attributes\n"
+				"`config` options:\n\n- \"BiopowerSingleOwner\"\n- \"DSLFSingleOwner\"\n- \"DSPTSingleOwner\"\n- \"DishStirlingSingleOwner\"\n- \"EmpiricalTroughSingleOwner\"\n- \"FlatPlatePVSingleOwner\"\n- \"FuelCellSingleOwner\"\n- \"GenericBatterySingleOwner\"\n- \"GenericCSPSystemSingleOwner\"\n- \"GenericSystemSingleOwner\"\n- \"GeothermalPowerSingleOwner\"\n- \"HighXConcentratingPVSingleOwner\"\n- \"MSLFSingleOwner\"\n- \"MSPTSingleOwner\"\n- \"PVBatterySingleOwner\"\n- \"PVWattsSingleOwner\"\n- \"PhysicalTroughSingleOwner\"\n- \"WindPowerSingleOwner\"")},
 		{"wrap",             Singleowner_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Singleowner\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   Singleowner_from_existing,        METH_VARARGS,

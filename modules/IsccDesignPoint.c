@@ -611,8 +611,8 @@ static PyMethodDef IsccDesignPointModule_methods[] = {
 		{"new",             IsccDesignPoint_new,         METH_VARARGS,
 				PyDoc_STR("new() -> IsccDesignPoint")},
 		{"default",             IsccDesignPoint_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> IsccDesignPoint\n\nUse financial config-specific default attributes\n"
-				"")},
+				PyDoc_STR("default(config) -> IsccDesignPoint\n\nUse default attributes\n"
+				"None")},
 		{"wrap",             IsccDesignPoint_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> IsccDesignPoint\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   IsccDesignPoint_from_existing,        METH_VARARGS,

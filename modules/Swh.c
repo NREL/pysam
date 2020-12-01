@@ -396,6 +396,18 @@ SWH_set_load(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyObject *
+SWH_get_load_escalation(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Swh_SWH_load_escalation_aget, self->data_ptr);
+}
+
+static int
+SWH_set_load_escalation(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Swh_SWH_load_escalation_aset, self->data_ptr);
+}
+
+static PyObject *
 SWH_get_mdot(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Swh_SWH_mdot_nget, self->data_ptr);
@@ -698,6 +710,9 @@ static PyGetSetDef SWH_getset[] = {
  	NULL},
 {"load", (getter)SWH_get_load,(setter)SWH_set_load,
 	PyDoc_STR("*sequence*: Electricity load (year 1) [kW]"),
+ 	NULL},
+{"load_escalation", (getter)SWH_get_load_escalation,(setter)SWH_set_load_escalation,
+	PyDoc_STR("*sequence*: Annual load escalation [%/year]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"mdot", (getter)SWH_get_mdot,(setter)SWH_set_mdot,
 	PyDoc_STR("*float*: Total system mass flow rate [kg/s]\n\n*Constraints*: POSITIVE\n\n*Required*: True"),
@@ -1498,8 +1513,8 @@ static PyMethodDef SwhModule_methods[] = {
 		{"new",             Swh_new,         METH_VARARGS,
 				PyDoc_STR("new() -> Swh")},
 		{"default",             Swh_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Swh\n\nUse financial config-specific default attributes\n"
-				"config options:\n\n- \"SolarWaterHeatingCommercial\"\n- \"SolarWaterHeatingLCOECalculator\"\n- \"SolarWaterHeatingNone\"\n- \"SolarWaterHeatingResidential\"")},
+				PyDoc_STR("default(config) -> Swh\n\nUse default attributes\n"
+				"`config` options:\n\n- \"SolarWaterHeatingCommercial\"\n- \"SolarWaterHeatingLCOECalculator\"\n- \"SolarWaterHeatingNone\"\n- \"SolarWaterHeatingResidential\"")},
 		{"wrap",             Swh_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Swh\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   Swh_from_existing,        METH_VARARGS,

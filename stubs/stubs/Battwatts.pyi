@@ -38,6 +38,20 @@ class Battery(object):
 	load = tuple
 
 
+class Load(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> Dict[Dict]:
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
+	load_escalation = tuple
+
+
 class Outputs(object):
 	def assign(self): 
 		pass
@@ -141,6 +155,7 @@ class Battwatts(object):
 
 	Lifetime = Lifetime
 	Battery = Battery
+	Load = Load
 	Outputs = Outputs
 
 

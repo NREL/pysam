@@ -1,5 +1,27 @@
 # Release Notes
 
+## Version 2.2.0
+* Rename StandAloneBattery to Battery
+* New module: BatteryStateful with 3 defaults: NMCGraphite, LFPGraphite, LeadAcid
+* BatteryTools functions for switching chemistries
+
+## Version 2.1.5.dev3, Sep 3, 2020 ~ SAM 2020.2.29 r3, SSC Version 242
+* Price Signals Dispatch
+* Bug fix in PVWattsBatteryCommercial and PVBatteryCommercial incentives defaults
+
+## Version 2.1.5.dev2, Aug 10, 2020 ~ SAM 2020.2.29 r3, SSC Version 242
+* BatteryStateful bug fixes: current
+
+## Version 2.1.5.dev1, Aug 3, 2020 ~ SAM 2020.2.29 r3, SSC Version 242
+* BatteryStateful bug fixes: thermal, voltage
+* Stub files syntax fix
+
+## Version 2.1.5, July 7, 2020 ~ SAM 2020.2.29 r2, SSC Version 240
+* Updates to enable non-annual (single timestep or multiple, non-8760 timestep) simulations via weather input data
+(NOT weather files) for both pvsamv1 and pvwattsv7
+* Vanadium Redox Flow battery bug fix
+* Transformer loss units bug fix
+
 ## Version 2.1.4, June 8, 2020 ~ SAM 2020.2.29 r2, SSC Version 240
 * Pvwattsv5_1ts bug fix
 * Self-shading calculation speed-up for Pvwattsv7, Pvsamv1 & Pvwattsv5

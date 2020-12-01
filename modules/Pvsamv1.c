@@ -939,6 +939,18 @@ Lifetime_set_en_dc_lifetime_losses(VarGroupObject *self, PyObject *value, void *
 }
 
 static PyObject *
+Lifetime_get_inflation_rate(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_Lifetime_inflation_rate_nget, self->data_ptr);
+}
+
+static int
+Lifetime_set_inflation_rate(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_Lifetime_inflation_rate_nset, self->data_ptr);
+}
+
+static PyObject *
 Lifetime_get_save_full_lifetime_variables(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Pvsamv1_Lifetime_save_full_lifetime_variables_nget, self->data_ptr);
@@ -980,6 +992,9 @@ static PyGetSetDef Lifetime_getset[] = {
  	NULL},
 {"en_dc_lifetime_losses", (getter)Lifetime_get_en_dc_lifetime_losses,(setter)Lifetime_set_en_dc_lifetime_losses,
 	PyDoc_STR("*float*: Enable lifetime daily DC losses [0/1]\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"inflation_rate", (getter)Lifetime_get_inflation_rate,(setter)Lifetime_set_inflation_rate,
+	PyDoc_STR("*float*: Inflation rate [%]\n\n*Constraints*: MIN=-99\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"save_full_lifetime_variables", (getter)Lifetime_get_save_full_lifetime_variables,(setter)Lifetime_set_save_full_lifetime_variables,
 	PyDoc_STR("*float*: Save and display vars for full lifetime [0/1]\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: True if system_use_lifetime_output=1"),
@@ -8326,13 +8341,13 @@ BatterySystem_set_batt_current_discharge_max(VarGroupObject *self, PyObject *val
 static PyObject *
 BatterySystem_get_batt_cycle_cost(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Pvsamv1_BatterySystem_batt_cycle_cost_nget, self->data_ptr);
+	return PySAM_array_getter(SAM_Pvsamv1_BatterySystem_batt_cycle_cost_aget, self->data_ptr);
 }
 
 static int
 BatterySystem_set_batt_cycle_cost(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Pvsamv1_BatterySystem_batt_cycle_cost_nset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Pvsamv1_BatterySystem_batt_cycle_cost_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -8540,18 +8555,6 @@ BatterySystem_set_batt_replacement_option(VarGroupObject *self, PyObject *value,
 }
 
 static PyObject *
-BatterySystem_get_batt_replacement_schedule(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Pvsamv1_BatterySystem_batt_replacement_schedule_aget, self->data_ptr);
-}
-
-static int
-BatterySystem_set_batt_replacement_schedule(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_Pvsamv1_BatterySystem_batt_replacement_schedule_aset, self->data_ptr);
-}
-
-static PyObject *
 BatterySystem_get_batt_replacement_schedule_percent(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Pvsamv1_BatterySystem_batt_replacement_schedule_percent_aget, self->data_ptr);
@@ -8625,10 +8628,10 @@ static PyGetSetDef BatterySystem_getset[] = {
 	PyDoc_STR("*float*: Maximum discharge current [A]"),
  	NULL},
 {"batt_cycle_cost", (getter)BatterySystem_get_batt_cycle_cost,(setter)BatterySystem_set_batt_cycle_cost,
-	PyDoc_STR("*float*: Input battery cycle costs [$/cycle-kWh]"),
+	PyDoc_STR("*sequence*: Input battery cycle degradaton penalty per year [$/cycle-kWh]\n\n*Info*: length 1 or analysis_period, length 1 will be extended using inflation"),
  	NULL},
 {"batt_cycle_cost_choice", (getter)BatterySystem_get_batt_cycle_cost_choice,(setter)BatterySystem_set_batt_cycle_cost_choice,
-	PyDoc_STR("*float*: Use SAM model for cycle costs or input custom [0/1]\n\n*Options*: 0=UseCostModel,1=InputCost"),
+	PyDoc_STR("*float*: Use SAM cost model for degradaton penalty or input custom via batt_cycle_cost [0/1]\n\n*Options*: 0=UseCostModel,1=InputCost"),
  	NULL},
 {"batt_dc_ac_efficiency", (getter)BatterySystem_get_batt_dc_ac_efficiency,(setter)BatterySystem_set_batt_dc_ac_efficiency,
 	PyDoc_STR("*float*: Battery DC to AC efficiency"),
@@ -8677,9 +8680,6 @@ static PyGetSetDef BatterySystem_getset[] = {
  	NULL},
 {"batt_replacement_option", (getter)BatterySystem_get_batt_replacement_option,(setter)BatterySystem_set_batt_replacement_option,
 	PyDoc_STR("*float*: Enable battery replacement? [0=none,1=capacity based,2=user schedule]\n\n*Constraints*: INTEGER,MIN=0,MAX=2\n\n*Required*: If not provided, assumed to be 0"),
- 	NULL},
-{"batt_replacement_schedule", (getter)BatterySystem_get_batt_replacement_schedule,(setter)BatterySystem_set_batt_replacement_schedule,
-	PyDoc_STR("*sequence*: Battery bank number of replacements in each year [number/year]\n\n*Options*: length <= analysis_period\n\n*Required*: True if batt_replacement_option=2"),
  	NULL},
 {"batt_replacement_schedule_percent", (getter)BatterySystem_get_batt_replacement_schedule_percent,(setter)BatterySystem_set_batt_replacement_schedule_percent,
 	PyDoc_STR("*sequence*: Percentage of battery capacity to replace in each year [%]\n\n*Options*: length <= analysis_period\n\n*Required*: True if batt_replacement_option=2"),
@@ -8819,12 +8819,27 @@ Load_set_load(VarGroupObject *self, PyObject *value, void *closure)
 	return PySAM_array_setter(value, SAM_Pvsamv1_Load_load_aset, self->data_ptr);
 }
 
+static PyObject *
+Load_get_load_escalation(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvsamv1_Load_load_escalation_aget, self->data_ptr);
+}
+
+static int
+Load_set_load_escalation(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Pvsamv1_Load_load_escalation_aset, self->data_ptr);
+}
+
 static PyGetSetDef Load_getset[] = {
 {"crit_load", (getter)Load_get_crit_load,(setter)Load_set_crit_load,
 	PyDoc_STR("*sequence*: Critical Electricity load (year 1) [kW]"),
  	NULL},
 {"load", (getter)Load_get_load,(setter)Load_set_load,
 	PyDoc_STR("*sequence*: Electricity load (year 1) [kW]\n\n*Required*: False"),
+ 	NULL},
+{"load_escalation", (getter)Load_get_load_escalation,(setter)Load_set_load_escalation,
+	PyDoc_STR("*sequence*: Annual load escalation [%/year]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -9620,6 +9635,18 @@ BatteryDispatch_set_batt_look_ahead_hours(VarGroupObject *self, PyObject *value,
 }
 
 static PyObject *
+BatteryDispatch_get_batt_pv_ac_forecast(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvsamv1_BatteryDispatch_batt_pv_ac_forecast_aget, self->data_ptr);
+}
+
+static int
+BatteryDispatch_set_batt_pv_ac_forecast(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Pvsamv1_BatteryDispatch_batt_pv_ac_forecast_aset, self->data_ptr);
+}
+
+static PyObject *
 BatteryDispatch_get_batt_pv_clipping_forecast(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Pvsamv1_BatteryDispatch_batt_pv_clipping_forecast_aget, self->data_ptr);
@@ -9629,18 +9656,6 @@ static int
 BatteryDispatch_set_batt_pv_clipping_forecast(VarGroupObject *self, PyObject *value, void *closure)
 {
 	return PySAM_array_setter(value, SAM_Pvsamv1_BatteryDispatch_batt_pv_clipping_forecast_aset, self->data_ptr);
-}
-
-static PyObject *
-BatteryDispatch_get_batt_pv_dc_forecast(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Pvsamv1_BatteryDispatch_batt_pv_dc_forecast_aget, self->data_ptr);
-}
-
-static int
-BatteryDispatch_set_batt_pv_dc_forecast(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_Pvsamv1_BatteryDispatch_batt_pv_dc_forecast_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -9795,7 +9810,7 @@ static PyGetSetDef BatteryDispatch_getset[] = {
 	PyDoc_STR("*float*: Grid charging allowed for automated dispatch? [kW]"),
  	NULL},
 {"batt_dispatch_choice", (getter)BatteryDispatch_get_batt_dispatch_choice,(setter)BatteryDispatch_set_batt_dispatch_choice,
-	PyDoc_STR("*float*: Battery dispatch algorithm [0/1/2/3/4]\n\n*Options*: If behind the meter: 0=PeakShavingLookAhead,1=PeakShavingLookBehind,2=InputGridTarget,3=InputBatteryPower,4=ManualDispatch, if front of meter: 0=AutomatedLookAhead,1=AutomatedLookBehind,2=AutomatedInputForecast,3=InputBatteryPower,4=ManualDispatch\n\n*Required*: True if en_batt=1"),
+	PyDoc_STR("*float*: Battery dispatch algorithm [0/1/2/3/4/5]\n\n*Options*: If behind the meter: 0=PeakShavingLookAhead,1=PeakShavingLookBehind,2=InputGridTarget,3=InputBatteryPower,4=ManualDispatch,5=PriceSignalForecast if front of meter: 0=AutomatedLookAhead,1=AutomatedLookBehind,2=AutomatedInputForecast,3=InputBatteryPower,4=ManualDispatch\n\n*Required*: True if en_batt=1"),
  	NULL},
 {"batt_dispatch_update_frequency_hours", (getter)BatteryDispatch_get_batt_dispatch_update_frequency_hours,(setter)BatteryDispatch_set_batt_dispatch_update_frequency_hours,
 	PyDoc_STR("*float*: Frequency to update the look-ahead dispatch [hours]"),
@@ -9803,11 +9818,11 @@ static PyGetSetDef BatteryDispatch_getset[] = {
 {"batt_look_ahead_hours", (getter)BatteryDispatch_get_batt_look_ahead_hours,(setter)BatteryDispatch_set_batt_look_ahead_hours,
 	PyDoc_STR("*float*: Hours to look ahead in automated dispatch [hours]"),
  	NULL},
-{"batt_pv_clipping_forecast", (getter)BatteryDispatch_get_batt_pv_clipping_forecast,(setter)BatteryDispatch_set_batt_pv_clipping_forecast,
-	PyDoc_STR("*sequence*: Power clipping forecast [kW]\n\n*Required*: True if en_batt=1&batt_meter_position=1&batt_dispatch_choice=2"),
+{"batt_pv_ac_forecast", (getter)BatteryDispatch_get_batt_pv_ac_forecast,(setter)BatteryDispatch_set_batt_pv_ac_forecast,
+	PyDoc_STR("*sequence*: PV ac power forecast [kW]"),
  	NULL},
-{"batt_pv_dc_forecast", (getter)BatteryDispatch_get_batt_pv_dc_forecast,(setter)BatteryDispatch_set_batt_pv_dc_forecast,
-	PyDoc_STR("*sequence*: DC power forecast [kW]\n\n*Required*: True if en_batt=1&batt_meter_position=1&batt_dispatch_choice=2"),
+{"batt_pv_clipping_forecast", (getter)BatteryDispatch_get_batt_pv_clipping_forecast,(setter)BatteryDispatch_set_batt_pv_clipping_forecast,
+	PyDoc_STR("*sequence*: PV clipping forecast [kW]"),
  	NULL},
 {"batt_target_choice", (getter)BatteryDispatch_get_batt_target_choice,(setter)BatteryDispatch_set_batt_target_choice,
 	PyDoc_STR("*float*: Target power input option [0/1]\n\n*Options*: 0=InputMonthlyTarget,1=InputFullTimeSeries\n\n*Required*: True if en_batt=1&batt_meter_position=0&batt_dispatch_choice=2"),
@@ -9879,199 +9894,6 @@ static PyTypeObject BatteryDispatch_Type = {
 		BatteryDispatch_methods,         /*tp_methods*/
 		0,                          /*tp_members*/
 		BatteryDispatch_getset,          /*tp_getset*/
-		0,                          /*tp_base*/
-		0,                          /*tp_dict*/
-		0,                          /*tp_descr_get*/
-		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictofnset*/
-		0,                          /*tp_init*/
-		0,                          /*tp_alloc*/
-		0,             /*tp_new*/
-		0,                          /*tp_free*/
-		0,                          /*tp_is_gc*/
-};
-
-
-/*
- * ElectricityRates Group
- */ 
-
-static PyTypeObject ElectricityRates_Type;
-
-static PyObject *
-ElectricityRates_new(SAM_Pvsamv1 data_ptr)
-{
-	PyObject* new_obj = ElectricityRates_Type.tp_alloc(&ElectricityRates_Type,0);
-
-	VarGroupObject* ElectricityRates_obj = (VarGroupObject*)new_obj;
-
-	ElectricityRates_obj->data_ptr = (SAM_table)data_ptr;
-
-	return new_obj;
-}
-
-/* ElectricityRates methods */
-
-static PyObject *
-ElectricityRates_assign(VarGroupObject *self, PyObject *args)
-{
-	PyObject* dict;
-	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
-		return NULL;
-	}
-
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Pvsamv1", "ElectricityRates")){
-		return NULL;
-	}
-
-	Py_INCREF(Py_None);
-	return Py_None;
-}
-
-static PyObject *
-ElectricityRates_export(VarGroupObject *self, PyObject *args)
-{
-	PyTypeObject* tp = &ElectricityRates_Type;
-	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
-	return dict;
-}
-
-static PyMethodDef ElectricityRates_methods[] = {
-		{"assign",            (PyCFunction)ElectricityRates_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``ElectricityRates_vals = { var: val, ...}``")},
-		{"export",            (PyCFunction)ElectricityRates_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
-		{NULL,              NULL}           /* sentinel */
-};
-
-static PyObject *
-ElectricityRates_get_en_electricity_rates(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Pvsamv1_ElectricityRates_en_electricity_rates_nget, self->data_ptr);
-}
-
-static int
-ElectricityRates_set_en_electricity_rates(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Pvsamv1_ElectricityRates_en_electricity_rates_nset, self->data_ptr);
-}
-
-static PyObject *
-ElectricityRates_get_ur_ec_sched_weekday(VarGroupObject *self, void *closure)
-{
-	return PySAM_matrix_getter(SAM_Pvsamv1_ElectricityRates_ur_ec_sched_weekday_mget, self->data_ptr);
-}
-
-static int
-ElectricityRates_set_ur_ec_sched_weekday(VarGroupObject *self, PyObject *value, void *closure)
-{
-		return PySAM_matrix_setter(value, SAM_Pvsamv1_ElectricityRates_ur_ec_sched_weekday_mset, self->data_ptr);
-}
-
-static PyObject *
-ElectricityRates_get_ur_ec_sched_weekend(VarGroupObject *self, void *closure)
-{
-	return PySAM_matrix_getter(SAM_Pvsamv1_ElectricityRates_ur_ec_sched_weekend_mget, self->data_ptr);
-}
-
-static int
-ElectricityRates_set_ur_ec_sched_weekend(VarGroupObject *self, PyObject *value, void *closure)
-{
-		return PySAM_matrix_setter(value, SAM_Pvsamv1_ElectricityRates_ur_ec_sched_weekend_mset, self->data_ptr);
-}
-
-static PyObject *
-ElectricityRates_get_ur_ec_tou_mat(VarGroupObject *self, void *closure)
-{
-	return PySAM_matrix_getter(SAM_Pvsamv1_ElectricityRates_ur_ec_tou_mat_mget, self->data_ptr);
-}
-
-static int
-ElectricityRates_set_ur_ec_tou_mat(VarGroupObject *self, PyObject *value, void *closure)
-{
-		return PySAM_matrix_setter(value, SAM_Pvsamv1_ElectricityRates_ur_ec_tou_mat_mset, self->data_ptr);
-}
-
-static PyObject *
-ElectricityRates_get_ur_en_ts_sell_rate(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Pvsamv1_ElectricityRates_ur_en_ts_sell_rate_nget, self->data_ptr);
-}
-
-static int
-ElectricityRates_set_ur_en_ts_sell_rate(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Pvsamv1_ElectricityRates_ur_en_ts_sell_rate_nset, self->data_ptr);
-}
-
-static PyObject *
-ElectricityRates_get_ur_ts_buy_rate(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Pvsamv1_ElectricityRates_ur_ts_buy_rate_aget, self->data_ptr);
-}
-
-static int
-ElectricityRates_set_ur_ts_buy_rate(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_Pvsamv1_ElectricityRates_ur_ts_buy_rate_aset, self->data_ptr);
-}
-
-static PyGetSetDef ElectricityRates_getset[] = {
-{"en_electricity_rates", (getter)ElectricityRates_get_en_electricity_rates,(setter)ElectricityRates_set_en_electricity_rates,
-	PyDoc_STR("*float*: Enable Electricity Rates [0/1]\n\n*Options*: 0=EnableElectricityRates,1=NoRates"),
- 	NULL},
-{"ur_ec_sched_weekday", (getter)ElectricityRates_get_ur_ec_sched_weekday,(setter)ElectricityRates_set_ur_ec_sched_weekday,
-	PyDoc_STR("*sequence[sequence]*: Energy charge weekday schedule\n\n*Info*: 12 x 24 matrix\n\n*Required*: True if en_batt=1&batt_meter_position=1&batt_dispatch_choice=2"),
- 	NULL},
-{"ur_ec_sched_weekend", (getter)ElectricityRates_get_ur_ec_sched_weekend,(setter)ElectricityRates_set_ur_ec_sched_weekend,
-	PyDoc_STR("*sequence[sequence]*: Energy charge weekend schedule\n\n*Info*: 12 x 24 matrix\n\n*Required*: True if en_batt=1&batt_meter_position=1&batt_dispatch_choice=2"),
- 	NULL},
-{"ur_ec_tou_mat", (getter)ElectricityRates_get_ur_ec_tou_mat,(setter)ElectricityRates_set_ur_ec_tou_mat,
-	PyDoc_STR("*sequence[sequence]*: Energy rates table\n\n*Required*: True if en_batt=1&batt_meter_position=1&batt_dispatch_choice=2"),
- 	NULL},
-{"ur_en_ts_sell_rate", (getter)ElectricityRates_get_ur_en_ts_sell_rate,(setter)ElectricityRates_set_ur_en_ts_sell_rate,
-	PyDoc_STR("*float*: Enable time step sell rates [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: True if en_batt=1&batt_meter_position=1&batt_dispatch_choice=2"),
- 	NULL},
-{"ur_ts_buy_rate", (getter)ElectricityRates_get_ur_ts_buy_rate,(setter)ElectricityRates_set_ur_ts_buy_rate,
-	PyDoc_STR("*sequence*: Time step buy rates [0/1]\n\n*Required*: True if en_batt=1&batt_meter_position=1&batt_dispatch_choice=2"),
- 	NULL},
-	{NULL}  /* Sentinel */
-};
-
-static PyTypeObject ElectricityRates_Type = {
-		/* The ob_type field must be initialized in the module init function
-		 * to be portable to Windows without using C++. */
-		PyVarObject_HEAD_INIT(NULL, 0)
-		"Pvsamv1.ElectricityRates",             /*tp_name*/
-		sizeof(VarGroupObject),          /*tp_basicsize*/
-		0,                          /*tp_itemsize*/
-		/* methods */
-		0,    /*tp_dealloc*/
-		0,                          /*tp_print*/
-		(getattrfunc)0,             /*tp_getattr*/
-		0,                          /*tp_setattr*/
-		0,                          /*tp_reserved*/
-		0,                          /*tp_repr*/
-		0,                          /*tp_as_number*/
-		0,                          /*tp_as_sequence*/
-		0,                          /*tp_as_mapping*/
-		0,                          /*tp_hash*/
-		0,                          /*tp_call*/
-		0,                          /*tp_str*/
-		0,                          /*tp_getattro*/
-		0,                          /*tp_setattro*/
-		0,                          /*tp_as_buffer*/
-		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
-		0,                          /*tp_doc*/
-		0,                          /*tp_traverse*/
-		0,                          /*tp_clear*/
-		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistofnset*/
-		0,                          /*tp_iter*/
-		0,                          /*tp_iternext*/
-		ElectricityRates_methods,         /*tp_methods*/
-		0,                          /*tp_members*/
-		ElectricityRates_getset,          /*tp_getset*/
 		0,                          /*tp_base*/
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
@@ -10548,6 +10370,424 @@ static PyTypeObject PriceSignal_Type = {
 		PriceSignal_methods,         /*tp_methods*/
 		0,                          /*tp_members*/
 		PriceSignal_getset,          /*tp_getset*/
+		0,                          /*tp_base*/
+		0,                          /*tp_dict*/
+		0,                          /*tp_descr_get*/
+		0,                          /*tp_descr_set*/
+		0,                          /*tp_dictofnset*/
+		0,                          /*tp_init*/
+		0,                          /*tp_alloc*/
+		0,             /*tp_new*/
+		0,                          /*tp_free*/
+		0,                          /*tp_is_gc*/
+};
+
+
+/*
+ * ElectricityRates Group
+ */ 
+
+static PyTypeObject ElectricityRates_Type;
+
+static PyObject *
+ElectricityRates_new(SAM_Pvsamv1 data_ptr)
+{
+	PyObject* new_obj = ElectricityRates_Type.tp_alloc(&ElectricityRates_Type,0);
+
+	VarGroupObject* ElectricityRates_obj = (VarGroupObject*)new_obj;
+
+	ElectricityRates_obj->data_ptr = (SAM_table)data_ptr;
+
+	return new_obj;
+}
+
+/* ElectricityRates methods */
+
+static PyObject *
+ElectricityRates_assign(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Pvsamv1", "ElectricityRates")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+ElectricityRates_export(VarGroupObject *self, PyObject *args)
+{
+	PyTypeObject* tp = &ElectricityRates_Type;
+	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
+	return dict;
+}
+
+static PyMethodDef ElectricityRates_methods[] = {
+		{"assign",            (PyCFunction)ElectricityRates_assign,  METH_VARARGS,
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``ElectricityRates_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)ElectricityRates_export,  METH_VARARGS,
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+		{NULL,              NULL}           /* sentinel */
+};
+
+static PyObject *
+ElectricityRates_get_rate_escalation(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvsamv1_ElectricityRates_rate_escalation_aget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_rate_escalation(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Pvsamv1_ElectricityRates_rate_escalation_aset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_annual_min_charge(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_ElectricityRates_ur_annual_min_charge_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_annual_min_charge(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_ElectricityRates_ur_annual_min_charge_nset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_dc_enable(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_ElectricityRates_ur_dc_enable_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_dc_enable(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_ElectricityRates_ur_dc_enable_nset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_dc_flat_mat(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Pvsamv1_ElectricityRates_ur_dc_flat_mat_mget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_dc_flat_mat(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Pvsamv1_ElectricityRates_ur_dc_flat_mat_mset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_dc_sched_weekday(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Pvsamv1_ElectricityRates_ur_dc_sched_weekday_mget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_dc_sched_weekday(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Pvsamv1_ElectricityRates_ur_dc_sched_weekday_mset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_dc_sched_weekend(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Pvsamv1_ElectricityRates_ur_dc_sched_weekend_mget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_dc_sched_weekend(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Pvsamv1_ElectricityRates_ur_dc_sched_weekend_mset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_dc_tou_mat(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Pvsamv1_ElectricityRates_ur_dc_tou_mat_mget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_dc_tou_mat(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Pvsamv1_ElectricityRates_ur_dc_tou_mat_mset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_ec_sched_weekday(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Pvsamv1_ElectricityRates_ur_ec_sched_weekday_mget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_ec_sched_weekday(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Pvsamv1_ElectricityRates_ur_ec_sched_weekday_mset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_ec_sched_weekend(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Pvsamv1_ElectricityRates_ur_ec_sched_weekend_mget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_ec_sched_weekend(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Pvsamv1_ElectricityRates_ur_ec_sched_weekend_mset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_ec_tou_mat(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Pvsamv1_ElectricityRates_ur_ec_tou_mat_mget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_ec_tou_mat(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Pvsamv1_ElectricityRates_ur_ec_tou_mat_mset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_en_ts_buy_rate(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_ElectricityRates_ur_en_ts_buy_rate_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_en_ts_buy_rate(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_ElectricityRates_ur_en_ts_buy_rate_nset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_en_ts_sell_rate(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_ElectricityRates_ur_en_ts_sell_rate_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_en_ts_sell_rate(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_ElectricityRates_ur_en_ts_sell_rate_nset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_metering_option(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_ElectricityRates_ur_metering_option_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_metering_option(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_ElectricityRates_ur_metering_option_nset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_monthly_fixed_charge(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_ElectricityRates_ur_monthly_fixed_charge_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_monthly_fixed_charge(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_ElectricityRates_ur_monthly_fixed_charge_nset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_monthly_min_charge(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_ElectricityRates_ur_monthly_min_charge_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_monthly_min_charge(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_ElectricityRates_ur_monthly_min_charge_nset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_nm_credit_month(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_ElectricityRates_ur_nm_credit_month_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_nm_credit_month(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_ElectricityRates_ur_nm_credit_month_nset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_nm_credit_rollover(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_ElectricityRates_ur_nm_credit_rollover_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_nm_credit_rollover(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_ElectricityRates_ur_nm_credit_rollover_nset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_nm_yearend_sell_rate(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_ElectricityRates_ur_nm_yearend_sell_rate_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_nm_yearend_sell_rate(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_ElectricityRates_ur_nm_yearend_sell_rate_nset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_sell_eq_buy(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_ElectricityRates_ur_sell_eq_buy_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_sell_eq_buy(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_ElectricityRates_ur_sell_eq_buy_nset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_ts_buy_rate(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvsamv1_ElectricityRates_ur_ts_buy_rate_aget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_ts_buy_rate(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Pvsamv1_ElectricityRates_ur_ts_buy_rate_aset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_ts_sell_rate(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvsamv1_ElectricityRates_ur_ts_sell_rate_aget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_ts_sell_rate(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Pvsamv1_ElectricityRates_ur_ts_sell_rate_aset, self->data_ptr);
+}
+
+static PyGetSetDef ElectricityRates_getset[] = {
+{"rate_escalation", (getter)ElectricityRates_get_rate_escalation,(setter)ElectricityRates_set_rate_escalation,
+	PyDoc_STR("*sequence*: Annual electricity rate escalation [%/year]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"ur_annual_min_charge", (getter)ElectricityRates_get_ur_annual_min_charge,(setter)ElectricityRates_set_ur_annual_min_charge,
+	PyDoc_STR("*float*: Annual minimum charge [$]\n\n*Required*: If not provided, assumed to be 0.0"),
+ 	NULL},
+{"ur_dc_enable", (getter)ElectricityRates_get_ur_dc_enable,(setter)ElectricityRates_set_ur_dc_enable,
+	PyDoc_STR("*float*: Enable demand charge [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"ur_dc_flat_mat", (getter)ElectricityRates_get_ur_dc_flat_mat,(setter)ElectricityRates_set_ur_dc_flat_mat,
+	PyDoc_STR("*sequence[sequence]*: Demand rates (flat) table\n\n*Required*: True if ur_dc_enable=1"),
+ 	NULL},
+{"ur_dc_sched_weekday", (getter)ElectricityRates_get_ur_dc_sched_weekday,(setter)ElectricityRates_set_ur_dc_sched_weekday,
+	PyDoc_STR("*sequence[sequence]*: Demand charge weekday schedule\n\n*Info*: 12x24"),
+ 	NULL},
+{"ur_dc_sched_weekend", (getter)ElectricityRates_get_ur_dc_sched_weekend,(setter)ElectricityRates_set_ur_dc_sched_weekend,
+	PyDoc_STR("*sequence[sequence]*: Demand charge weekend schedule\n\n*Info*: 12x24"),
+ 	NULL},
+{"ur_dc_tou_mat", (getter)ElectricityRates_get_ur_dc_tou_mat,(setter)ElectricityRates_set_ur_dc_tou_mat,
+	PyDoc_STR("*sequence[sequence]*: Demand rates (TOU) table\n\n*Required*: True if ur_dc_enable=1"),
+ 	NULL},
+{"ur_ec_sched_weekday", (getter)ElectricityRates_get_ur_ec_sched_weekday,(setter)ElectricityRates_set_ur_ec_sched_weekday,
+	PyDoc_STR("*sequence[sequence]*: Energy charge weekday schedule\n\n*Info*: 12x24"),
+ 	NULL},
+{"ur_ec_sched_weekend", (getter)ElectricityRates_get_ur_ec_sched_weekend,(setter)ElectricityRates_set_ur_ec_sched_weekend,
+	PyDoc_STR("*sequence[sequence]*: Energy charge weekend schedule\n\n*Info*: 12x24"),
+ 	NULL},
+{"ur_ec_tou_mat", (getter)ElectricityRates_get_ur_ec_tou_mat,(setter)ElectricityRates_set_ur_ec_tou_mat,
+	PyDoc_STR("*sequence[sequence]*: Energy rates table"),
+ 	NULL},
+{"ur_en_ts_buy_rate", (getter)ElectricityRates_get_ur_en_ts_buy_rate,(setter)ElectricityRates_set_ur_en_ts_buy_rate,
+	PyDoc_STR("*float*: Enable time step buy rates [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"ur_en_ts_sell_rate", (getter)ElectricityRates_get_ur_en_ts_sell_rate,(setter)ElectricityRates_set_ur_en_ts_sell_rate,
+	PyDoc_STR("*float*: Enable time step sell rates [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"ur_metering_option", (getter)ElectricityRates_get_ur_metering_option,(setter)ElectricityRates_set_ur_metering_option,
+	PyDoc_STR("*float*: Metering options [0=net energy metering,1=net energy metering with $ credits,2=net billing,3=net billing with carryover to next month,4=buy all - sell all]\n\n*Info*: Net metering monthly excess\n\n*Constraints*: INTEGER,MIN=0,MAX=4\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"ur_monthly_fixed_charge", (getter)ElectricityRates_get_ur_monthly_fixed_charge,(setter)ElectricityRates_set_ur_monthly_fixed_charge,
+	PyDoc_STR("*float*: Monthly fixed charge [$]\n\n*Required*: If not provided, assumed to be 0.0"),
+ 	NULL},
+{"ur_monthly_min_charge", (getter)ElectricityRates_get_ur_monthly_min_charge,(setter)ElectricityRates_set_ur_monthly_min_charge,
+	PyDoc_STR("*float*: Monthly minimum charge [$]\n\n*Required*: If not provided, assumed to be 0.0"),
+ 	NULL},
+{"ur_nm_credit_month", (getter)ElectricityRates_get_ur_nm_credit_month,(setter)ElectricityRates_set_ur_nm_credit_month,
+	PyDoc_STR("*float*: Month of rollover credits [$/kWh]\n\n*Constraints*: INTEGER,MIN=0,MAX=11\n\n*Required*: If not provided, assumed to be 11"),
+ 	NULL},
+{"ur_nm_credit_rollover", (getter)ElectricityRates_get_ur_nm_credit_rollover,(setter)ElectricityRates_set_ur_nm_credit_rollover,
+	PyDoc_STR("*float*: Roll over credits to next year [0/1]\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"ur_nm_yearend_sell_rate", (getter)ElectricityRates_get_ur_nm_yearend_sell_rate,(setter)ElectricityRates_set_ur_nm_yearend_sell_rate,
+	PyDoc_STR("*float*: Net metering credit sell rate [$/kWh]\n\n*Required*: If not provided, assumed to be 0.0"),
+ 	NULL},
+{"ur_sell_eq_buy", (getter)ElectricityRates_get_ur_sell_eq_buy,(setter)ElectricityRates_set_ur_sell_eq_buy,
+	PyDoc_STR("*float*: Set sell rate equal to buy rate [0/1]\n\n*Info*: Optional override\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"ur_ts_buy_rate", (getter)ElectricityRates_get_ur_ts_buy_rate,(setter)ElectricityRates_set_ur_ts_buy_rate,
+	PyDoc_STR("*sequence*: Time step buy rates [0/1]"),
+ 	NULL},
+{"ur_ts_sell_rate", (getter)ElectricityRates_get_ur_ts_sell_rate,(setter)ElectricityRates_set_ur_ts_sell_rate,
+	PyDoc_STR("*sequence*: Time step sell rates [0/1]"),
+ 	NULL},
+	{NULL}  /* Sentinel */
+};
+
+static PyTypeObject ElectricityRates_Type = {
+		/* The ob_type field must be initialized in the module init function
+		 * to be portable to Windows without using C++. */
+		PyVarObject_HEAD_INIT(NULL, 0)
+		"Pvsamv1.ElectricityRates",             /*tp_name*/
+		sizeof(VarGroupObject),          /*tp_basicsize*/
+		0,                          /*tp_itemsize*/
+		/* methods */
+		0,    /*tp_dealloc*/
+		0,                          /*tp_print*/
+		(getattrfunc)0,             /*tp_getattr*/
+		0,                          /*tp_setattr*/
+		0,                          /*tp_reserved*/
+		0,                          /*tp_repr*/
+		0,                          /*tp_as_number*/
+		0,                          /*tp_as_sequence*/
+		0,                          /*tp_as_mapping*/
+		0,                          /*tp_hash*/
+		0,                          /*tp_call*/
+		0,                          /*tp_str*/
+		0,                          /*tp_getattro*/
+		0,                          /*tp_setattro*/
+		0,                          /*tp_as_buffer*/
+		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
+		0,                          /*tp_doc*/
+		0,                          /*tp_traverse*/
+		0,                          /*tp_clear*/
+		0,                          /*tp_richcompare*/
+		0,                          /*tp_weaklistofnset*/
+		0,                          /*tp_iter*/
+		0,                          /*tp_iternext*/
+		ElectricityRates_methods,         /*tp_methods*/
+		0,                          /*tp_members*/
+		ElectricityRates_getset,          /*tp_getset*/
 		0,                          /*tp_base*/
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
@@ -12712,7 +12952,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Weather file albedo"),
  	NULL},
 {"annual_ac_battery_loss_percent", (getter)Outputs_get_annual_ac_battery_loss_percent,(setter)0,
-	PyDoc_STR("*float*: AC connected battery loss- year 1 [%]"),
+	PyDoc_STR("*float*: AC-connected battery loss - year 1 [%]"),
  	NULL},
 {"annual_ac_gross", (getter)Outputs_get_annual_ac_gross,(setter)0,
 	PyDoc_STR("*float*: Annual AC energy gross [kWh/yr]"),
@@ -12733,7 +12973,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*float*: AC inverter thermal derate loss [%]"),
  	NULL},
 {"annual_ac_lifetime_loss_percent", (getter)Outputs_get_annual_ac_lifetime_loss_percent,(setter)0,
-	PyDoc_STR("*float*: Lifetime daily AC loss- year 1 [%]"),
+	PyDoc_STR("*float*: AC lifetime daily loss - year 1 [%]"),
  	NULL},
 {"annual_ac_loss_ond", (getter)Outputs_get_annual_ac_loss_ond,(setter)0,
 	PyDoc_STR("*float*: Annual AC loss OND model [kWh/yr]"),
@@ -12952,13 +13192,13 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*float*: Subarray 4 DC wiring loss [kWh]"),
  	NULL},
 {"annual_total_loss_percent", (getter)Outputs_get_annual_total_loss_percent,(setter)0,
-	PyDoc_STR("*float*: PV System Loss, from Nominal POA to Net AC [kWh]"),
+	PyDoc_STR("*float*: Total loss from nominal POA to net AC [kWh]"),
  	NULL},
 {"annual_transmission_loss", (getter)Outputs_get_annual_transmission_loss,(setter)0,
 	PyDoc_STR("*float*: Transmission loss [kWh]"),
  	NULL},
 {"annual_transmission_loss_percent", (getter)Outputs_get_annual_transmission_loss_percent,(setter)0,
-	PyDoc_STR("*float*: Transmission loss [%]"),
+	PyDoc_STR("*float*: AC transmission loss [%]"),
  	NULL},
 {"annual_xfmr_loss_percent", (getter)Outputs_get_annual_xfmr_loss_percent,(setter)0,
 	PyDoc_STR("*float*: Transformer loss percent [%]"),
@@ -13105,10 +13345,10 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Inverter clipping loss DC MPPT voltage limits [kW]"),
  	NULL},
 {"dc_net", (getter)Outputs_get_dc_net,(setter)0,
-	PyDoc_STR("*sequence*: Array DC power [kW]"),
+	PyDoc_STR("*sequence*: Inverter DC input power [kW]"),
  	NULL},
 {"dc_snow_loss", (getter)Outputs_get_dc_snow_loss,(setter)0,
-	PyDoc_STR("*sequence*: Array DC power loss due to snow [kW]"),
+	PyDoc_STR("*sequence*: DC power loss due to snow [kW]"),
  	NULL},
 {"df", (getter)Outputs_get_df,(setter)0,
 	PyDoc_STR("*sequence*: Irradiance DHI from weather file [W/m2]"),
@@ -13189,10 +13429,10 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Energy to load from battery [kWh]"),
  	NULL},
 {"monthly_dc", (getter)Outputs_get_monthly_dc,(setter)0,
-	PyDoc_STR("*sequence*: PV array DC energy [kWh/mo]"),
+	PyDoc_STR("*sequence*: DC energy [kWh/mo]"),
  	NULL},
 {"monthly_energy", (getter)Outputs_get_monthly_energy,(setter)0,
-	PyDoc_STR("*sequence*: System AC energy [kWh/mo]"),
+	PyDoc_STR("*sequence*: AC energy [kWh/mo]"),
  	NULL},
 {"monthly_grid_to_batt", (getter)Outputs_get_monthly_grid_to_batt,(setter)0,
 	PyDoc_STR("*sequence*: Energy to battery from grid [kWh]"),
@@ -13865,10 +14105,6 @@ newPvsamv1Object(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "BatteryDispatch", BatteryDispatch_obj);
 	Py_DECREF(BatteryDispatch_obj);
 
-	PyObject* ElectricityRates_obj = ElectricityRates_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "ElectricityRates", ElectricityRates_obj);
-	Py_DECREF(ElectricityRates_obj);
-
 	PyObject* FuelCell_obj = FuelCell_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "FuelCell", FuelCell_obj);
 	Py_DECREF(FuelCell_obj);
@@ -13876,6 +14112,10 @@ newPvsamv1Object(void* data_ptr)
 	PyObject* PriceSignal_obj = PriceSignal_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "PriceSignal", PriceSignal_obj);
 	Py_DECREF(PriceSignal_obj);
+
+	PyObject* ElectricityRates_obj = ElectricityRates_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "ElectricityRates", ElectricityRates_obj);
+	Py_DECREF(ElectricityRates_obj);
 
 	PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
 
@@ -14126,8 +14366,8 @@ static PyMethodDef Pvsamv1Module_methods[] = {
 		{"new",             Pvsamv1_new,         METH_VARARGS,
 				PyDoc_STR("new() -> Pvsamv1")},
 		{"default",             Pvsamv1_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Pvsamv1\n\nUse financial config-specific default attributes\n"
-				"config options:\n\n- \"FlatPlatePVAllEquityPartnershipFlip\"\n- \"FlatPlatePVCommercial\"\n- \"FlatPlatePVHostDeveloper\"\n- \"FlatPlatePVLCOECalculator\"\n- \"FlatPlatePVLeveragedPartnershipFlip\"\n- \"FlatPlatePVMerchantPlant\"\n- \"FlatPlatePVNone\"\n- \"FlatPlatePVResidential\"\n- \"FlatPlatePVSaleLeaseback\"\n- \"FlatPlatePVSingleOwner\"\n- \"FlatPlatePVThirdParty\"\n- \"PVBatteryAllEquityPartnershipFlip\"\n- \"PVBatteryCommercial\"\n- \"PVBatteryHostDeveloper\"\n- \"PVBatteryLeveragedPartnershipFlip\"\n- \"PVBatteryMerchantPlant\"\n- \"PVBatteryResidential\"\n- \"PVBatterySaleLeaseback\"\n- \"PVBatterySingleOwner\"\n- \"PVBatteryThirdParty\"")},
+				PyDoc_STR("default(config) -> Pvsamv1\n\nUse default attributes\n"
+				"`config` options:\n\n- \"FlatPlatePVAllEquityPartnershipFlip\"\n- \"FlatPlatePVCommercial\"\n- \"FlatPlatePVHostDeveloper\"\n- \"FlatPlatePVLCOECalculator\"\n- \"FlatPlatePVLeveragedPartnershipFlip\"\n- \"FlatPlatePVMerchantPlant\"\n- \"FlatPlatePVNone\"\n- \"FlatPlatePVResidential\"\n- \"FlatPlatePVSaleLeaseback\"\n- \"FlatPlatePVSingleOwner\"\n- \"FlatPlatePVThirdParty\"\n- \"PVBatteryAllEquityPartnershipFlip\"\n- \"PVBatteryCommercial\"\n- \"PVBatteryHostDeveloper\"\n- \"PVBatteryLeveragedPartnershipFlip\"\n- \"PVBatteryMerchantPlant\"\n- \"PVBatteryResidential\"\n- \"PVBatterySaleLeaseback\"\n- \"PVBatterySingleOwner\"\n- \"PVBatteryThirdParty\"")},
 		{"wrap",             Pvsamv1_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Pvsamv1\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   Pvsamv1_from_existing,        METH_VARARGS,
@@ -14330,13 +14570,6 @@ Pvsamv1Module_exec(PyObject *m)
 				(PyObject*)&BatteryDispatch_Type);
 	Py_DECREF(&BatteryDispatch_Type);
 
-	/// Add the ElectricityRates type object to Pvsamv1_Type
-	if (PyType_Ready(&ElectricityRates_Type) < 0) { goto fail; }
-	PyDict_SetItemString(Pvsamv1_Type.tp_dict,
-				"ElectricityRates",
-				(PyObject*)&ElectricityRates_Type);
-	Py_DECREF(&ElectricityRates_Type);
-
 	/// Add the FuelCell type object to Pvsamv1_Type
 	if (PyType_Ready(&FuelCell_Type) < 0) { goto fail; }
 	PyDict_SetItemString(Pvsamv1_Type.tp_dict,
@@ -14350,6 +14583,13 @@ Pvsamv1Module_exec(PyObject *m)
 				"PriceSignal",
 				(PyObject*)&PriceSignal_Type);
 	Py_DECREF(&PriceSignal_Type);
+
+	/// Add the ElectricityRates type object to Pvsamv1_Type
+	if (PyType_Ready(&ElectricityRates_Type) < 0) { goto fail; }
+	PyDict_SetItemString(Pvsamv1_Type.tp_dict,
+				"ElectricityRates",
+				(PyObject*)&ElectricityRates_Type);
+	Py_DECREF(&ElectricityRates_Type);
 
 	/// Add the Outputs type object to Pvsamv1_Type
 	if (PyType_Ready(&Outputs_Type) < 0) { goto fail; }

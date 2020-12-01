@@ -5,7 +5,7 @@ import PySAM.Pvwattsv7 as pv
 import PySAM.Battwatts as bt
 import PySAM.Utilityrate5 as ur
 import PySAM.Pvsamv1 as pvsam
-import PySAM.StandAloneBattery as stbt
+import PySAM.Battery as stbt
 
 
 @pytest.fixture

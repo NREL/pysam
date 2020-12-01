@@ -1,6 +1,6 @@
-def stateful():
-    import PySAM.BatteryStateful as bt
+import PySAM.BatteryStateful as bt
 
+def test_stateful():
     b = bt.new()
 
     params = {"control_mode": 0, "input_current": 1, "chem": 1, "nominal_energy": 10, "nominal_voltage": 500,
@@ -21,13 +21,13 @@ def stateful():
         b.value(k, v)
 
     b.setup()
-    b.execute()
+    b.execute(0)
     print(b.StatePack.export())
-    b.execute()
+    b.execute(0)
     print(b.StatePack.export())
 
     b.setup()
-    b.execute()
+    b.execute(0)
     print(b.StatePack.export())
-    b.execute()
+    b.execute(0)
     print(b.StatePack.export())

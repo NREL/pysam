@@ -369,8 +369,8 @@ static PyMethodDef WfcheckModule_methods[] = {
 		{"new",             Wfcheck_new,         METH_VARARGS,
 				PyDoc_STR("new() -> Wfcheck")},
 		{"default",             Wfcheck_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Wfcheck\n\nUse financial config-specific default attributes\n"
-				"")},
+				PyDoc_STR("default(config) -> Wfcheck\n\nUse default attributes\n"
+				"None")},
 		{"wrap",             Wfcheck_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Wfcheck\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   Wfcheck_from_existing,        METH_VARARGS,

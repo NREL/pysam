@@ -26,6 +26,8 @@ class ElectricityRates(object):
 	ur_metering_option = float
 	ur_monthly_fixed_charge = float
 	ur_monthly_min_charge = float
+	ur_nm_credit_month = float
+	ur_nm_credit_rollover = float
 	ur_nm_yearend_sell_rate = float
 	ur_sell_eq_buy = float
 	ur_ts_buy_rate = tuple
