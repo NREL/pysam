@@ -239,8 +239,6 @@ def test_import_all():
     for filename in os.listdir(os.environ['SAMNTDIR'] + "/api/api_autogen/library/defaults"):
         names = os.path.splitext(filename)[0].split('_')
         mod = names[0]
-        if mod == 'Battery':
-            mod = 'StandAloneBattery'
         config = names[1]
         try_import(mod, config)
 

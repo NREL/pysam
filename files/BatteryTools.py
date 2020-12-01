@@ -1,8 +1,194 @@
 import math
 
+import PySAM.Battery as Batt
+import PySAM.BatteryStateful as BattStfl
+
+
+def battery_model_sizing(model, desired_power, desired_capacity, desired_voltage, size_by_ac_not_dc=None):
+    """
+    Sizes the battery model using its current configuration such as chemistry, cell properties, etc
+    and modifies the model's power, capacity and voltage without changing its fundamental properties
+
+    :param model: PySAM.Battery.Battery or PySAM.BatteryStateful.BatteryStateful
+    :param desired_power: float
+        Battery: kWAC if AC-connected, kWDC otherwise
+        BatteryStateful: battery kWDC
+    :param desired_capacity: float
+        Battery: kWhAC if AC-connected, kWhDC otherwise
+        BatteryStateful: battery kWhDC
+    :param desired_voltage: float
+        volts
+    :param size_by_ac_not_dc: optional bool
+        Sizes for power and capacity are on AC side not DC side of battery-inverter regardless of connection type
+    """
+    if type(model) == Batt.Battery:
+        size_battery(model, desired_power, desired_capacity, desired_voltage, size_by_ac_not_dc)
+    elif type(model) == BattStfl.BatteryStateful:
+        size_batterystateful(model, desired_power, desired_capacity, desired_voltage)
+    else:
+        raise TypeError
+
+
+def battery_model_change_chemistry(model, chem):
+    """
+    Changes the chemistry and cell properties of the battery to use defaults for that chemistry from BatteryStateful
+
+    :param model: PySAM.Battery.Battery or PySAM.BatteryStateful.BatteryStateful
+    :param chem: string
+        'leadacid', 'lfpgraphite', 'nmcgraphite'
+    """
+    chem = chem.lower()
+    if chem != 'leadacid' and chem != 'lfpgraphite' and chem != 'nmcgraphite':
+        raise NotImplementedError
+
+    if type(model) == Batt.Battery:
+        chem_battery(model, chem)
+    elif type(model) == BattStfl.BatteryStateful:
+        chem_batterystateful(model, chem)
+    else:
+        raise TypeError
+
+
+def size_battery(model, desired_power, desired_capacity, desired_voltage, size_by_ac_not_dc=None):
+    """
+    Helper function for battery_model_sizing
+    Modifies Battery model with new sizing. For BatteryStateful use size_batterystateful
+
+    :param model: PySAM.Battery model
+    :param desired_power: float
+        kWAC if AC-connected, kWDC otherwise
+    :param desired_capacity: float
+        kWhAC if AC-connected, kWhDC otherwise
+    :param desired_voltage: float
+        volts
+    :param size_by_ac_not_dc: optional bool
+        Sizes for power and capacity are on AC side not DC side of battery-inverter
+    :return: output_dictionary of sizing parameters
+    """
+    if type(model) != Batt.Battery:
+        raise TypeError
+
+    #
+    # calculate size
+    #
+    sizing_inputs = dict()
+
+    original_capacity = model.value('batt_computed_bank_capacity')
+    chem = int(model.BatteryCell.batt_chem)
+
+    # lead acid specific parameters, reuse them if new ones aren't provided
+    if chem == 0:
+        string_cap_ratio = model.BatterySystem.batt_computed_strings * model.BatteryCell.batt_Qfull * 0.01
+        leadacid_q10 = model.BatteryCell.LeadAcid_q10_computed
+        leadacid_q20 = model.BatteryCell.LeadAcid_q20_computed
+        leadacid_qn = model.BatteryCell.LeadAcid_qn_computed
+        leadacid_tn = model.BatteryCell.LeadAcid_tn
+        sizing_inputs['LeadAcid_q10'] = leadacid_q10
+        sizing_inputs['LeadAcid_q20'] = leadacid_q20
+        sizing_inputs['LeadAcid_qn'] = leadacid_qn
+        sizing_inputs['LeadAcid_tn'] = leadacid_tn
+
+    input_names = ('batt_chem', 'batt_Qfull', 'batt_Vnom_default', 'batt_ac_or_dc',
+                   'batt_dc_ac_efficiency', 'batt_dc_dc_efficiency')
+
+    for name in input_names:
+        sizing_inputs[name] = model.value(name)
+
+    sizing_inputs['desired_power'] = desired_power
+    sizing_inputs['desired_capacity'] = desired_capacity
+    sizing_inputs['desired_voltage'] = desired_voltage
+    if size_by_ac_not_dc is not None:
+        sizing_inputs['size_by_ac_not_dc'] = size_by_ac_not_dc
+    else:
+        sizing_inputs['size_by_ac_not_dc'] = sizing_inputs['batt_ac_or_dc']
+
+    if not sizing_inputs['batt_ac_or_dc']:
+        inv_model = int(model.Inverter.inverter_model)
+        if inv_model == 0:
+            sizing_inputs['inverter_eff'] = model.Inverter.inv_snl_eff_cec
+        elif inv_model == 1:
+            sizing_inputs['inverter_eff'] = model.Inverter.inv_ds_eff
+        elif inv_model == 2:
+            sizing_inputs['inverter_eff'] = model.Inverter.inv_pd_eff
+        elif inv_model == 3:
+            sizing_inputs['inverter_eff'] = model.Inverter.inv_cec_cg_eff_cec
+        else:
+            raise ValueError
+
+    sizing_outputs = calculate_battery_size(sizing_inputs)
+
+    computed_inputs = ('batt_computed_bank_capacity', 'batt_computed_series', 'batt_computed_strings',
+                       'batt_current_charge_max', 'batt_current_discharge_max', 'batt_power_charge_max_kwac',
+                       'batt_power_discharge_max_kwac', 'batt_power_charge_max_kwdc', 'batt_power_discharge_max_kwdc')
+
+    for name in computed_inputs:
+        model.value(name, sizing_outputs[name])
+
+    #
+    # calculate thermal
+    #
+    thermal_inputs = {
+        'mass': model.value('batt_mass'),
+        'surface_area': model.value('batt_surface_area'),
+        'original_capacity': original_capacity,
+        'desired_capacity': sizing_outputs['batt_computed_bank_capacity']
+    }
+
+    thermal_outputs = calculate_thermal_params(thermal_inputs)
+
+    model.value('batt_mass', thermal_outputs['mass'])
+    model.value('batt_surface_area', thermal_outputs['surface_area'])
+
+    return sizing_outputs.update(thermal_outputs)
+
+
+def size_batterystateful(model: BattStfl.BatteryStateful, _, desired_capacity, desired_voltage):
+    """
+    Helper function for battery_model_sizing
+
+    Modifies BatteryStateful model with new sizing. For Battery use size_battery
+
+    Only battery side DC sizing
+
+    :param model: PySAM.Battery model
+    :param _: not used
+    :param desired_capacity: float
+        kWhAC if AC-connected, kWhDC otherwise
+    :param desired_voltage: float
+        volts
+    :return: output_dictionary of sizing parameters
+    """
+    #
+    # calculate size
+    #
+    if type(model) != BattStfl.BatteryStateful:
+        raise TypeError
+
+    original_capacity = model.ParamsPack.nominal_energy
+
+    model.ParamsPack.nominal_voltage = desired_voltage
+    model.ParamsPack.nominal_energy = desired_capacity
+
+    #
+    # calculate thermal
+    #
+    thermal_inputs = {
+        'mass': model.ParamsPack.mass,
+        'surface_area': model.ParamsPack.surface_area,
+        'original_capacity': original_capacity,
+        'desired_capacity': desired_capacity
+    }
+
+    thermal_outputs = calculate_thermal_params(thermal_inputs)
+
+    model.ParamsPack.mass = thermal_outputs['mass']
+    model.ParamsPack.surface_area = thermal_outputs['surface_area']
+
 
 def calculate_battery_size(input_dict):
     """
+    Helper function to `battery_model_sizing`
+
     All efficiencies and rates in percentages, 0-100.
 
     Inverter efficiency depends on which inverter model is being used, `inverter_model`.
@@ -107,6 +293,9 @@ def calculate_battery_size(input_dict):
         output_dict['power'] = computed_capacity * max_rate
         output_dict['batt_computed_bank_capacity'] = computed_capacity
         output_dict['time_capacity'] = computed_capacity / computed_power
+        if abs(computed_capacity - capacity) / capacity > 0.05:
+            raise ValueError("Could not meet desired battery capacity. Consider adjusting the desired voltage, "
+                             "or battery cell properties")
         return computed_capacity, computed_power, max_rate
 
     # convert all the sizing values to DC via conversion efficiencies
@@ -148,113 +337,123 @@ def calculate_battery_size(input_dict):
     output_dict['batt_power_discharge_max_kwac'] = batt_bank_power_discharge_ac
     output_dict['batt_power_charge_max_kwac'] = batt_bank_power_charge_ac
 
-    is_lead_acid = True
-    if 'batt_chem' in input_dict:
-        is_lead_acid = bool(input_dict['batt_chem'])
-
-    if is_lead_acid == 0:
-        num_strings = output_dict["batt_computed_strings"]
-        check_keys(('LeadAcid_q10', 'LeadAcid_q20', 'LeadAcid_qn', 'LeadAcid_tn'))
-        q10_computed = num_strings * input_dict['LeadAcid_q10'] * batt_Qfull * 0.01
-        q20_computed = num_strings * input_dict['LeadAcid_q20'] * batt_Qfull * 0.01
-        qn_computed = num_strings * input_dict['LeadAcid_qn'] * batt_Qfull * 0.01
-
-        output_dict['LeadAcid_q10_computed'] = q10_computed
-        output_dict['LeadAcid_q20_computed'] = q20_computed
-        output_dict['LeadAcid_qn_computed'] = qn_computed
-
     return output_dict
 
 
-def battery_model_sizing(model, desired_power, desired_capacity, desired_voltage,
-                         leadacid_q10=None, leadacid_q20=None, leadacid_qn=None, leadacid_tn=None,
-                         size_by_ac_not_dc=None):
+def calculate_thermal_params(input_dict):
     """
-    Modifies model with new sizing
+    Calculates the mass and surface area of a battery by calculating from its current parameters the
+    mass / specific energy and volume / specific energy ratios.
 
-    :param model: PySAM.StandAloneBattery model
-    :param desired_power: float
-        kWAC if AC-connected, kWDC otherwise
-    :param desired_capacity: float
-        kWhAC if AC-connected, kWhDC otherwise
-    :param desired_voltage: float
-        volts
-    :param leadacid_q10: optional float
-        new Capacity at 10-hour discharge rate
-    :param leadacid_q20: optional float
-        new Capacity at 20-hour discharge rate
-    :param leadacid_qn: optional float
-        new Capacity at n-hour discharge rate
-    :param leadacid_tn: optional float
-        Hour for leadacid_qn
-    :param size_by_ac_not_dc: optional bool
-        Sizes for power and capacity are on AC side not DC side of battery-inverter
-    :return: output_dictionary of sizing parameters
+    :param:
+        input_dict:
+            mass: float
+                kg of battery at original size
+            surface_area: float
+                m^2 of battery at original size
+            original_capacity: float
+                Wh of battery
+            desired_capacity: float
+                Wh of new battery size
+    Returns:
+        output_dict:
+            mass: float
+                kg of battery at desired size
+            surface_area: float
+                m^w of battery at desired size
     """
-    input_dict = dict()
+    mass = input_dict['mass']
+    surface_area = input_dict['surface_area']
+    original_capacity = input_dict['original_capacity']
+    desired_capacity = input_dict['desired_capacity']
 
-    chem = int(model.BatteryCell.batt_chem)
+    mass_per_specific_energy = mass / original_capacity
 
-    # lead acid specific parameters, reuse them if new ones aren't provided
-    if chem == 0:
-        string_cap_ratio = model.BatterySystem.batt_computed_strings * model.BatteryCell.batt_Qfull * 0.01
-        if leadacid_q10 is None:
-            leadacid_q10 = model.BatteryCell.LeadAcid_q10_computed
-        else:
-            leadacid_q10 /= string_cap_ratio
-        if leadacid_q20 is None:
-            leadacid_q20 = model.BatteryCell.LeadAcid_q20_computed
-        else:
-            leadacid_q20 /= string_cap_ratio
-        if leadacid_qn is None:
-            leadacid_qn = model.BatteryCell.LeadAcid_qn_computed
-        else:
-            leadacid_qn /= string_cap_ratio
-        if leadacid_tn is None:
-            leadacid_tn = model.BatteryCell.LeadAcid_tn
-        input_dict['LeadAcid_q10'] = leadacid_q10
-        input_dict['LeadAcid_q20'] = leadacid_q20
-        input_dict['LeadAcid_qn'] = leadacid_qn
-        input_dict['LeadAcid_tn'] = leadacid_tn
+    volume = (surface_area / 6) ** (3/2)
 
-    input_names = ('batt_chem', 'batt_Qfull', 'batt_Vnom_default', 'batt_ac_or_dc',
-                   'batt_dc_ac_efficiency', 'batt_dc_dc_efficiency')
+    volume_per_specific_energy = volume / original_capacity
 
-    for name in input_names:
-        input_dict[name] = model.value(name)
+    output_dict = {
+        'mass': mass_per_specific_energy * desired_capacity,
+        'surface_area': (volume_per_specific_energy * desired_capacity) ** (2/3) * 6,
+    }
+    return output_dict
 
-    input_dict['desired_power'] = desired_power
-    input_dict['desired_capacity'] = desired_capacity
-    input_dict['desired_voltage'] = desired_voltage
-    if size_by_ac_not_dc is not None:
-        input_dict['size_by_ac_not_dc'] = size_by_ac_not_dc
+
+def chem_battery(model: Batt.Battery, chem):
+    """
+    Helper function for battery_model_change_chemistry
+    """
+    if type(model) != Batt.Battery:
+        raise TypeError
+
+    chem = chem.lower()
+
+    if chem != 'leadacid' and chem != 'lfpgraphite' and chem != 'nmcgraphite':
+        raise NotImplementedError
+
+    if chem == 'leadacid':
+        model.BatteryCell.batt_chem = 0
     else:
-        input_dict['size_by_ac_not_dc'] = input_dict['batt_ac_or_dc']
+        model.BatteryCell.batt_chem = 1
 
-    if not input_dict['batt_ac_or_dc']:
-        inv_model = int(model.Inverter.inverter_model)
-        if inv_model == 0:
-            input_dict['inverter_eff'] = model.Inverter.inv_snl_eff_cec
-        elif inv_model == 1:
-            input_dict['inverter_eff'] = model.Inverter.inv_ds_eff
-        elif inv_model == 2:
-            input_dict['inverter_eff'] = model.Inverter.inv_pd_eff
-        elif inv_model == 3:
-            input_dict['inverter_eff'] = model.Inverter.inv_cec_cg_eff_cec
-        else:
-            raise ValueError
+    original_capacity = model.value('batt_computed_bank_capacity')
+    original_voltage = model.BatteryCell.batt_Vnom_default * model.BatterySystem.batt_computed_series
+    if model.BatterySystem.batt_ac_or_dc:
+        original_power = model.BatterySystem.batt_power_discharge_max_kwac
+    else:
+        original_power = model.BatterySystem.batt_power_discharge_max_kwdc
 
-    output_dict = calculate_battery_size(input_dict)
+    params_dict = BattStfl.default(chem).export()
 
-    computed_inputs = ('batt_computed_bank_capacity', 'batt_computed_series', 'batt_computed_strings',
-                       'batt_current_charge_max', 'batt_current_discharge_max', 'batt_power_charge_max_kwac',
-                       'batt_power_discharge_max_kwac', 'batt_power_charge_max_kwdc', 'batt_power_discharge_max_kwdc')
+    for group in ('ParamsCell', 'ParamsPack'):
+        for k, v in params_dict[group].items():
+            if k == 'nominal_voltage' or k == "T_room_init":
+                continue
+            elif k == 'cycling_matrix':
+                k = 'batt_lifetime_matrix'
+            elif 'leadacid' in k:
+                k = 'LeadAcid' + k[8:]
+                if 'tn' not in k:
+                    k += '_computed'
+            elif k == 'h':
+                k = 'batt_h_to_ambient'
+            elif k == 'nominal_energy':
+                k = 'batt_computed_bank_capacity'
+            elif k == 'cap_vs_temp':
+                pass
+            else:
+                k = 'batt_' + k
 
-    if input_dict['batt_chem'] == 0:
-        computed_inputs += ('LeadAcid_q10_computed', 'LeadAcid_q20_computed', 'LeadAcid_qn_computed')
-        model.BatteryCell.LeadAcid_tn = leadacid_tn
+            model.value(k, v)
 
-    for name in computed_inputs:
-        model.value(name, output_dict[name])
+    battery_model_sizing(model, original_power, original_capacity, original_voltage)
 
-    return output_dict
+
+def chem_batterystateful(model: BattStfl.BatteryStateful, chem):
+    """
+    Helper function for battery_model_change_chemistry
+    """
+    if type(model) != BattStfl.BatteryStateful:
+        raise TypeError
+
+    chem = chem.lower()
+
+    if chem != 'LeadAcid' and chem != 'lfpgraphite' and chem != 'nmcgraphite':
+        raise NotImplementedError
+
+    if chem == 'leadacid':
+        model.ParamsCell.chem = 0
+    else:
+        model.ParamsCell.chem = 1
+
+    original_capacity = model.ParamsPack.nominal_energy
+    original_voltage = model.ParamsPack.nominal_voltage
+
+    params_dict = BattStfl.default(chem).export()
+
+    for group in ('ParamsCell', 'ParamsPack'):
+        for k, v in params_dict[group].items():
+            model.value(k, v)
+
+    battery_model_sizing(model, -1, original_capacity, original_voltage)

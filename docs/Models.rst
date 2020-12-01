@@ -22,9 +22,12 @@ The following modules are used in the SAM GUI's technology-financial simulations
     * - PySAM Module
       - SAM Desktop
       - Description
+    * - :doc:`modules/Battery`
+      -  Generic System-Battery
+      -  Detailed battery storage model
     * - :doc:`modules/Battwatts`
-      -
-      - Simplified battery storage model
+      - PVWatts-Battery
+      -  Simplified battery storage model
     * - :doc:`modules/Belpe`
       -  Residential, Commercial and Third Party
       -  Electric load calculator for residential buildings
@@ -85,9 +88,6 @@ The following modules are used in the SAM GUI's technology-financial simulations
     * - :doc:`modules/Singleowner`
       -  PPA single owner (utility)
       -  PPA single owner financial model
-    * - :doc:`modules/StandAloneBattery`
-      -
-      -  Detailed battery storage model
     * - :doc:`modules/Swh`
       -  Solar water heating
       -  Solar water heating model for residential and commercial building applications
@@ -149,6 +149,8 @@ These modules provide helper functions or are older versions of above modules.
       - Description
     * - :doc:`modules/Annualoutput`
       - Annual Output
+    * - :doc:`modules/BatteryStateful`
+      - Single timestep battery carrying state
     * - :doc:`modules/CbConstructionFinancing`
       - Construction financing cost calculations
     * - :doc:`modules/CbEmpiricalHceHeatLoss`

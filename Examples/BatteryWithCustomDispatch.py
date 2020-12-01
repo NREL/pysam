@@ -2,14 +2,14 @@
 This example script shows how to set up a stand alone battery with custom dispatch using a default battery model
 Any list of floats with length analysis_period * steps_in_year can be used for dispatch
 
-Additional financial models, inputs, and outputs can be found at https://nrel-pysam.readthedocs.io/en/2.0.2/modules/StandAloneBattery.html
+Additional financial models, inputs, and outputs can be found at https://nrel-pysam.readthedocs.io/en/master/modules/Battery.html
 
-Most recently tested against PySAM 2.1.4
+Most recently tested against PySAM 2.2
 
 @author: brtietz
 """
 
-import PySAM.StandAloneBattery as battery_model
+import PySAM.Battery as battery_model
 
 analysis_period = 1  # years
 steps_in_year = 8760  # currently hours in year, multiply this for subhourly tests (example * 12 for 5 minute tests)
