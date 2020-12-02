@@ -5,7 +5,6 @@ TcsmoltenSalt
 
 Wrapper for SAM Simulation Core model: `cmod_tcsmolten_salt.cpp <https://github.com/NREL/ssc/blob/develop/ssc/cmod_tcsmolten_salt.cpp>`_
 
-
 Creating an Instance
 ===================================
 
