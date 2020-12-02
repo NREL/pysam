@@ -15,7 +15,7 @@ def test_stateful():
               "monthly_charge_loss": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
               "monthly_discharge_loss": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
               "monthly_idle_loss": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], "schedule_loss": [], "replacement_option": 0,
-              "replacement_capacity": 0.000, "replacement_schedule": [], "replacement_schedule_percent": []}
+              "replacement_capacity": 0.000}
 
     for k, v in params.items():
         b.value(k, v)

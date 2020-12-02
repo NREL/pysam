@@ -11,7 +11,7 @@ cd %PYSAMDIR%
 echo y | rmdir build /s
 echo y | del dist/*
 
-FOR %%i IN (pysam_build_3.5, pysam_build_3.6 pysam_build_3.7, pysam_build_3.8) DO (
+FOR %%i IN (pysam_build_3.5, pysam_build_3.6 pysam_build_3.7, pysam_build_3.8 pysam_build_3.9) DO (
 	call deactivate
     call activate %%i
     echo y | pip install -r tests/requirements.txt

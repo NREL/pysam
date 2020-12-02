@@ -1425,12 +1425,6 @@ Outputs_get_nm_dollars_applied_ym(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_nm_total_rollover_kwh_ym(VarGroupObject *self, void *closure)
-{
-	return PySAM_matrix_getter(SAM_Utilityrate5_Outputs_nm_total_rollover_kwh_ym_mget, self->data_ptr);
-}
-
-static PyObject *
 Outputs_get_savings_year1(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Utilityrate5_Outputs_savings_year1_nget, self->data_ptr);
@@ -1766,12 +1760,6 @@ Outputs_get_year1_nm_dollars_applied(VarGroupObject *self, void *closure)
 	return PySAM_array_getter(SAM_Utilityrate5_Outputs_year1_nm_dollars_applied_aget, self->data_ptr);
 }
 
-static PyObject *
-Outputs_get_year1_nm_total_rollover_kwh(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Utilityrate5_Outputs_year1_nm_total_rollover_kwh_aget, self->data_ptr);
-}
-
 static PyGetSetDef Outputs_getset[] = {
 {"annual_electric_load", (getter)Outputs_get_annual_electric_load,(setter)0,
 	PyDoc_STR("*sequence*: Electricity load total in each year [kWh]"),
@@ -2002,7 +1990,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence[sequence]*: Electricity usage without system Sep [kWh]"),
  	NULL},
 {"excess_kwhs_earned_ym", (getter)Outputs_get_excess_kwhs_earned_ym,(setter)0,
-	PyDoc_STR("*sequence[sequence]*: Excess generation (kWh) [kWh]"),
+	PyDoc_STR("*sequence[sequence]*: Excess generation [kWh]"),
  	NULL},
 {"lifetime_load", (getter)Outputs_get_lifetime_load,(setter)0,
 	PyDoc_STR("*sequence*: Lifetime electricity load [kW]"),
@@ -2020,13 +2008,10 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence[sequence]*: Demand peak without system [kW]"),
  	NULL},
 {"net_billing_credits_ym", (getter)Outputs_get_net_billing_credits_ym,(setter)0,
-	PyDoc_STR("*sequence[sequence]*: Net billing credits [$]"),
+	PyDoc_STR("*sequence[sequence]*: Net billing credit [$]"),
  	NULL},
 {"nm_dollars_applied_ym", (getter)Outputs_get_nm_dollars_applied_ym,(setter)0,
-	PyDoc_STR("*sequence[sequence]*: Net metering credit $ [$]"),
- 	NULL},
-{"nm_total_rollover_kwh_ym", (getter)Outputs_get_nm_total_rollover_kwh_ym,(setter)0,
-	PyDoc_STR("*sequence[sequence]*: Net metering month to month rollover credits (cumulative) [kWh]"),
+	PyDoc_STR("*sequence[sequence]*: Net metering credit [$]"),
  	NULL},
 {"savings_year1", (getter)Outputs_get_savings_year1,(setter)0,
 	PyDoc_STR("*float*: Electricity bill savings with system (year 1) [$/yr]"),
@@ -2083,7 +2068,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*float*: Electricity load total (year 1) [kWh/yr]"),
  	NULL},
 {"year1_excess_kwhs_earned", (getter)Outputs_get_year1_excess_kwhs_earned,(setter)0,
-	PyDoc_STR("*sequence*: Excess generation (kWh) [kWh/mo]"),
+	PyDoc_STR("*sequence*: Excess generation [kWh/mo]"),
  	NULL},
 {"year1_hourly_dc_peak_per_period", (getter)Outputs_get_year1_hourly_dc_peak_per_period,(setter)0,
 	PyDoc_STR("*sequence*: Electricity peak from grid per TOU period (year 1 hourly) [kW]"),
@@ -2131,7 +2116,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Electricity from system to load (year 1 hourly) [kWh]"),
  	NULL},
 {"year1_monthly_cumulative_excess_generation", (getter)Outputs_get_year1_monthly_cumulative_excess_generation,(setter)0,
-	PyDoc_STR("*sequence*: Net metering cumulative kWh credit earned for annual true-up [kWh/mo]"),
+	PyDoc_STR("*sequence*: Net metering cumulative credit for annual true-up [kWh/mo]"),
  	NULL},
 {"year1_monthly_dc_fixed_with_system", (getter)Outputs_get_year1_monthly_dc_fixed_with_system,(setter)0,
 	PyDoc_STR("*sequence*: Demand charge (flat) with system [$/mo]"),
@@ -2191,13 +2176,10 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Electricity bill without system [$/mo]"),
  	NULL},
 {"year1_net_billing_credits", (getter)Outputs_get_year1_net_billing_credits,(setter)0,
-	PyDoc_STR("*sequence*: Net billing credits [$/mo]"),
+	PyDoc_STR("*sequence*: Net billing credit [$/mo]"),
  	NULL},
 {"year1_nm_dollars_applied", (getter)Outputs_get_year1_nm_dollars_applied,(setter)0,
-	PyDoc_STR("*sequence*: Net metering credit $ [$/mo]"),
- 	NULL},
-{"year1_nm_total_rollover_kwh", (getter)Outputs_get_year1_nm_total_rollover_kwh,(setter)0,
-	PyDoc_STR("*sequence*: Net metering month to month rollover credits (cumulative) [kWh]"),
+	PyDoc_STR("*sequence*: Net metering credit [$/mo]"),
  	NULL},
 	{NULL}  /* Sentinel */
 };

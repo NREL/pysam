@@ -175,7 +175,6 @@ class Outputs(object):
 	monthly_tou_demand_peak_wo_sys = tuple
 	net_billing_credits_ym = tuple
 	nm_dollars_applied_ym = tuple
-	nm_total_rollover_kwh_ym = tuple
 	savings_year1 = float
 	surplus_w_sys_ec_apr_tp = tuple
 	surplus_w_sys_ec_aug_tp = tuple
@@ -232,7 +231,6 @@ class Outputs(object):
 	year1_monthly_utility_bill_wo_sys = tuple
 	year1_net_billing_credits = tuple
 	year1_nm_dollars_applied = tuple
-	year1_nm_total_rollover_kwh = tuple
 
 
 class Utilityrate5(object):

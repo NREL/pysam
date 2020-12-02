@@ -3936,7 +3936,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Electricity loss in battery power electronics [kW]"),
  	NULL},
 {"batt_cost_to_cycle", (getter)Outputs_get_batt_cost_to_cycle,(setter)0,
-	PyDoc_STR("*sequence*: Battery computed cycle degradation penalty [$/cycle FOM, $/cycle-kWh BTM]"),
+	PyDoc_STR("*sequence*: Battery computed cycle degradation penalty [$/cycle-kWh]"),
  	NULL},
 {"batt_cycles", (getter)Outputs_get_batt_cycles,(setter)0,
 	PyDoc_STR("*sequence*: Battery number of cycles"),
