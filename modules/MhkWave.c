@@ -59,6 +59,30 @@ static PyMethodDef MHKWave_methods[] = {
 };
 
 static PyObject *
+MHKWave_get_balance_of_system_cost_total(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MhkWave_MHKWave_balance_of_system_cost_total_nget, self->data_ptr);
+}
+
+static int
+MHKWave_set_balance_of_system_cost_total(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_MhkWave_MHKWave_balance_of_system_cost_total_nset, self->data_ptr);
+}
+
+static PyObject *
+MHKWave_get_device_costs_total(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MhkWave_MHKWave_device_costs_total_nget, self->data_ptr);
+}
+
+static int
+MHKWave_set_device_costs_total(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_MhkWave_MHKWave_device_costs_total_nset, self->data_ptr);
+}
+
+static PyObject *
 MHKWave_get_device_rated_power(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_MhkWave_MHKWave_device_rated_power_nget, self->data_ptr);
@@ -68,6 +92,30 @@ static int
 MHKWave_set_device_rated_power(VarGroupObject *self, PyObject *value, void *closure)
 {
 	return PySAM_double_setter(value, SAM_MhkWave_MHKWave_device_rated_power_nset, self->data_ptr);
+}
+
+static PyObject *
+MHKWave_get_financial_cost_total(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MhkWave_MHKWave_financial_cost_total_nget, self->data_ptr);
+}
+
+static int
+MHKWave_set_financial_cost_total(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_MhkWave_MHKWave_financial_cost_total_nset, self->data_ptr);
+}
+
+static PyObject *
+MHKWave_get_fixed_charge_rate(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MhkWave_MHKWave_fixed_charge_rate_nget, self->data_ptr);
+}
+
+static int
+MHKWave_set_fixed_charge_rate(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_MhkWave_MHKWave_fixed_charge_rate_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -155,6 +203,18 @@ MHKWave_set_system_capacity(VarGroupObject *self, PyObject *value, void *closure
 }
 
 static PyObject *
+MHKWave_get_total_operating_cost(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MhkWave_MHKWave_total_operating_cost_nget, self->data_ptr);
+}
+
+static int
+MHKWave_set_total_operating_cost(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_MhkWave_MHKWave_total_operating_cost_nset, self->data_ptr);
+}
+
+static PyObject *
 MHKWave_get_wave_power_matrix(VarGroupObject *self, void *closure)
 {
 	return PySAM_matrix_getter(SAM_MhkWave_MHKWave_wave_power_matrix_mget, self->data_ptr);
@@ -179,8 +239,20 @@ MHKWave_set_wave_resource_matrix(VarGroupObject *self, PyObject *value, void *cl
 }
 
 static PyGetSetDef MHKWave_getset[] = {
+{"balance_of_system_cost_total", (getter)MHKWave_get_balance_of_system_cost_total,(setter)MHKWave_set_balance_of_system_cost_total,
+	PyDoc_STR("*float*: BOS costs [$]\n\n*Required*: If not provided, assumed to be 1\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - device_costs_total\n\t - device_rated_power\n\t - number_devices\n\t - system_capacity\n\t - wave_power_matrix\n"),
+ 	NULL},
+{"device_costs_total", (getter)MHKWave_get_device_costs_total,(setter)MHKWave_set_device_costs_total,
+	PyDoc_STR("*float*: Device costs [$]\n\n*Required*: If not provided, assumed to be 1\n\n*Changes to this variable may require updating the values of the following*: \n\t - balance_of_system_cost_total\n\t - financial_cost_total\n\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - device_rated_power\n\t - number_devices\n\t - system_capacity\n\t - wave_power_matrix\n"),
+ 	NULL},
 {"device_rated_power", (getter)MHKWave_get_device_rated_power,(setter)MHKWave_set_device_rated_power,
-	PyDoc_STR("*float*: Rated capacity of device [kW]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - number_devices\n\t - system_capacity\n\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - wave_power_matrix\n"),
+	PyDoc_STR("*float*: Rated capacity of device [kW]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - balance_of_system_cost_total\n\t - device_costs_total\n\t - financial_cost_total\n\t - number_devices\n\t - system_capacity\n\t - total_operating_cost\n\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - wave_power_matrix\n"),
+ 	NULL},
+{"financial_cost_total", (getter)MHKWave_get_financial_cost_total,(setter)MHKWave_set_financial_cost_total,
+	PyDoc_STR("*float*: Financial costs [$]\n\n*Required*: If not provided, assumed to be 1\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - device_costs_total\n\t - device_rated_power\n\t - number_devices\n\t - system_capacity\n\t - wave_power_matrix\n"),
+ 	NULL},
+{"fixed_charge_rate", (getter)MHKWave_get_fixed_charge_rate,(setter)MHKWave_set_fixed_charge_rate,
+	PyDoc_STR("*float*: FCR from LCOE Cost page\n\n*Required*: If not provided, assumed to be 1"),
  	NULL},
 {"loss_additional", (getter)MHKWave_get_loss_additional,(setter)MHKWave_set_loss_additional,
 	PyDoc_STR("*float*: Additional losses [%]\n\n*Required*: True"),
@@ -198,13 +270,16 @@ static PyGetSetDef MHKWave_getset[] = {
 	PyDoc_STR("*float*: Transmission losses [%]\n\n*Required*: True"),
  	NULL},
 {"number_devices", (getter)MHKWave_get_number_devices,(setter)MHKWave_set_number_devices,
-	PyDoc_STR("*float*: Number of wave devices in the system\n\n*Constraints*: INTEGER\n\n*Required*: If not provided, assumed to be 1\n\n*Changes to this variable may require updating the values of the following*: \n\t - system_capacity\n\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - device_rated_power\n\t - wave_power_matrix\n"),
+	PyDoc_STR("*float*: Number of wave devices in the system\n\n*Constraints*: INTEGER\n\n*Required*: If not provided, assumed to be 1\n\n*Changes to this variable may require updating the values of the following*: \n\t - balance_of_system_cost_total\n\t - device_costs_total\n\t - financial_cost_total\n\t - system_capacity\n\t - total_operating_cost\n\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - device_rated_power\n\t - wave_power_matrix\n"),
  	NULL},
 {"system_capacity", (getter)MHKWave_get_system_capacity,(setter)MHKWave_set_system_capacity,
-	PyDoc_STR("*float*: System Nameplate Capacity [kW]\n\n*Required*: If not provided, assumed to be 0\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - device_rated_power\n\t - number_devices\n\t - wave_power_matrix\n"),
+	PyDoc_STR("*float*: System Nameplate Capacity [kW]\n\n*Required*: If not provided, assumed to be 0\n\n*Changes to this variable may require updating the values of the following*: \n\t - balance_of_system_cost_total\n\t - device_costs_total\n\t - financial_cost_total\n\t - total_operating_cost\n\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - device_rated_power\n\t - number_devices\n\t - wave_power_matrix\n"),
+ 	NULL},
+{"total_operating_cost", (getter)MHKWave_get_total_operating_cost,(setter)MHKWave_set_total_operating_cost,
+	PyDoc_STR("*float*: O&M costs [$]\n\n*Required*: If not provided, assumed to be 1\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - device_rated_power\n\t - number_devices\n\t - system_capacity\n\t - wave_power_matrix\n"),
  	NULL},
 {"wave_power_matrix", (getter)MHKWave_get_wave_power_matrix,(setter)MHKWave_set_wave_power_matrix,
-	PyDoc_STR("*sequence[sequence]*: Wave Power Matrix\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - device_rated_power\n\t - number_devices\n\t - system_capacity\n"),
+	PyDoc_STR("*sequence[sequence]*: Wave Power Matrix\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - balance_of_system_cost_total\n\t - device_costs_total\n\t - device_rated_power\n\t - financial_cost_total\n\t - number_devices\n\t - system_capacity\n\t - total_operating_cost\n"),
  	NULL},
 {"wave_resource_matrix", (getter)MHKWave_get_wave_resource_matrix,(setter)MHKWave_set_wave_resource_matrix,
 	PyDoc_STR("*sequence[sequence]*: Frequency distribution of wave resource as a function of Hs and Te\n\n*Required*: True"),
@@ -335,6 +410,114 @@ Outputs_get_device_average_power(VarGroupObject *self, void *closure)
 	return PySAM_double_getter(SAM_MhkWave_Outputs_device_average_power_nget, self->data_ptr);
 }
 
+static PyObject *
+Outputs_get_total_bos_cost_kwh(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MhkWave_Outputs_total_bos_cost_kwh_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_total_bos_cost_lcoe(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MhkWave_Outputs_total_bos_cost_lcoe_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_total_capital_cost_kwh(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MhkWave_Outputs_total_capital_cost_kwh_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_total_capital_cost_lcoe(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MhkWave_Outputs_total_capital_cost_lcoe_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_total_device_cost_kwh(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MhkWave_Outputs_total_device_cost_kwh_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_total_device_cost_lcoe(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MhkWave_Outputs_total_device_cost_lcoe_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_total_financial_cost_kwh(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MhkWave_Outputs_total_financial_cost_kwh_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_total_financial_cost_lcoe(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MhkWave_Outputs_total_financial_cost_lcoe_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_total_om_cost_kwh(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MhkWave_Outputs_total_om_cost_kwh_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_total_om_cost_lcoe(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MhkWave_Outputs_total_om_cost_lcoe_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_wave_power_end_height(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MhkWave_Outputs_wave_power_end_height_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_wave_power_end_period(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MhkWave_Outputs_wave_power_end_period_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_wave_power_start_height(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MhkWave_Outputs_wave_power_start_height_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_wave_power_start_period(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MhkWave_Outputs_wave_power_start_period_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_wave_resource_end_height(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MhkWave_Outputs_wave_resource_end_height_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_wave_resource_end_period(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MhkWave_Outputs_wave_resource_end_period_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_wave_resource_start_height(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MhkWave_Outputs_wave_resource_start_height_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_wave_resource_start_period(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MhkWave_Outputs_wave_resource_start_period_nget, self->data_ptr);
+}
+
 static PyGetSetDef Outputs_getset[] = {
 {"annual_energy", (getter)Outputs_get_annual_energy,(setter)0,
 	PyDoc_STR("*float*: Annual energy production of array [kWh]"),
@@ -347,6 +530,60 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"device_average_power", (getter)Outputs_get_device_average_power,(setter)0,
 	PyDoc_STR("*float*: Average power production of a single device [kW]"),
+ 	NULL},
+{"total_bos_cost_kwh", (getter)Outputs_get_total_bos_cost_kwh,(setter)0,
+	PyDoc_STR("*float*: Balance of system costs per unit annual energy [$/kWh]"),
+ 	NULL},
+{"total_bos_cost_lcoe", (getter)Outputs_get_total_bos_cost_lcoe,(setter)0,
+	PyDoc_STR("*float*: BOS cost [%]"),
+ 	NULL},
+{"total_capital_cost_kwh", (getter)Outputs_get_total_capital_cost_kwh,(setter)0,
+	PyDoc_STR("*float*: Capital costs per unit annual energy [$/kWh]"),
+ 	NULL},
+{"total_capital_cost_lcoe", (getter)Outputs_get_total_capital_cost_lcoe,(setter)0,
+	PyDoc_STR("*float*: Capital cost as percentage of overall LCOE [%]"),
+ 	NULL},
+{"total_device_cost_kwh", (getter)Outputs_get_total_device_cost_kwh,(setter)0,
+	PyDoc_STR("*float*: Device costs per unit annual energy [$/kWh]"),
+ 	NULL},
+{"total_device_cost_lcoe", (getter)Outputs_get_total_device_cost_lcoe,(setter)0,
+	PyDoc_STR("*float*: Device cost [%]"),
+ 	NULL},
+{"total_financial_cost_kwh", (getter)Outputs_get_total_financial_cost_kwh,(setter)0,
+	PyDoc_STR("*float*: Financial costs per unit annual energy [$/kWh]"),
+ 	NULL},
+{"total_financial_cost_lcoe", (getter)Outputs_get_total_financial_cost_lcoe,(setter)0,
+	PyDoc_STR("*float*: Financial cost [%]"),
+ 	NULL},
+{"total_om_cost_kwh", (getter)Outputs_get_total_om_cost_kwh,(setter)0,
+	PyDoc_STR("*float*: O&M costs per unit annual energy [$/kWh]"),
+ 	NULL},
+{"total_om_cost_lcoe", (getter)Outputs_get_total_om_cost_lcoe,(setter)0,
+	PyDoc_STR("*float*: O&M cost (annual) [%]"),
+ 	NULL},
+{"wave_power_end_height", (getter)Outputs_get_wave_power_end_height,(setter)0,
+	PyDoc_STR("*float*: Wave height at which last non-zero WEC power output occurs (m)"),
+ 	NULL},
+{"wave_power_end_period", (getter)Outputs_get_wave_power_end_period,(setter)0,
+	PyDoc_STR("*float*: Wave period at which last non-zero WEC power output occurs (s)"),
+ 	NULL},
+{"wave_power_start_height", (getter)Outputs_get_wave_power_start_height,(setter)0,
+	PyDoc_STR("*float*: Wave height at which first non-zero WEC power output occurs (m)"),
+ 	NULL},
+{"wave_power_start_period", (getter)Outputs_get_wave_power_start_period,(setter)0,
+	PyDoc_STR("*float*: Wave period at which first non-zero WEC power output occurs (s)"),
+ 	NULL},
+{"wave_resource_end_height", (getter)Outputs_get_wave_resource_end_height,(setter)0,
+	PyDoc_STR("*float*: Wave height at which last non-zero wave resource value occurs (m)"),
+ 	NULL},
+{"wave_resource_end_period", (getter)Outputs_get_wave_resource_end_period,(setter)0,
+	PyDoc_STR("*float*: Wave period at which last non-zero wave resource value occurs (s)"),
+ 	NULL},
+{"wave_resource_start_height", (getter)Outputs_get_wave_resource_start_height,(setter)0,
+	PyDoc_STR("*float*: Wave height at which first non-zero wave resource value occurs (m)"),
+ 	NULL},
+{"wave_resource_start_period", (getter)Outputs_get_wave_resource_start_period,(setter)0,
+	PyDoc_STR("*float*: Wave period at which first non-zero wave resource value occurs (s)"),
  	NULL},
 	{NULL}  /* Sentinel */
 };

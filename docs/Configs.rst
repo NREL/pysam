@@ -93,36 +93,12 @@ A SAM simulation is a combination of unit compute_modules that models a type of 
     * - Detailed PV-Battery - Third Party Owner - Host
       - Detailed photovoltaic model with battery storage. Third party ownership from host perspective for PPA or lease agreement
       - :doc:`modules/Belpe`, :doc:`modules/Pvsamv1`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/Thirdpartyownership`
-    * - Dish Stirling - Commercial Owner
-      - Dish Stirling model with parameters for SES and WGA-ADDS systems. Renewable energy system displaces commercial building electric load
-      - :doc:`modules/Tcsdish`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/Cashloan`
-    * - Dish Stirling - LCOE Calculator (FCR Method)
-      - Dish Stirling model with parameters for SES and WGA-ADDS systems. Calculate LCOE using fixed charge rate method
-      - :doc:`modules/Tcsdish`, :doc:`modules/Grid`, :doc:`modules/Lcoefcr`
-    * - Dish Stirling - Merchant Plant
-      - Dish Stirling model with parameters for SES and WGA-ADDS systems. Merchant plant with constant DSCR and ancillary services revenue, reserve accounts and depreciation allocations
-      - :doc:`modules/Tcsdish`, :doc:`modules/Grid`, :doc:`modules/Merchantplant`
-    * - Dish Stirling - No Financial Model
-      - Dish Stirling model with parameters for SES and WGA-ADDS systems. Run the performance model with no financial model
-      - :doc:`modules/Tcsdish`, :doc:`modules/Grid`
-    * - Dish Stirling - Partnership Flip with Debt
-      - Dish Stirling model with parameters for SES and WGA-ADDS systems. Developer/investor partnership flip PPA structure with debt
-      - :doc:`modules/Tcsdish`, :doc:`modules/Grid`, :doc:`modules/Levpartflip`
-    * - Dish Stirling - Partnership Flip without Debt
-      - Dish Stirling model with parameters for SES and WGA-ADDS systems. Developer/investor partnership flip PPA structure without debt
-      - :doc:`modules/Tcsdish`, :doc:`modules/Grid`, :doc:`modules/Equpartflip`
-    * - Dish Stirling - Sale Leaseback
-      - Dish Stirling model with parameters for SES and WGA-ADDS systems. Sale leaseback partnership PPA structure
-      - :doc:`modules/Tcsdish`, :doc:`modules/Grid`, :doc:`modules/Saleleaseback`
-    * - Dish Stirling - Single Owner
-      - Dish Stirling model with parameters for SES and WGA-ADDS systems. Single owner PPA with constant DSCR and IRR target year, reserve accounts and depreciation allocations
-      - :doc:`modules/Tcsdish`, :doc:`modules/Grid`, :doc:`modules/Singleowner`
     * - Fuel Cell-PV-Battery - Commercial Owner
       - Fuel cell with photovoltaic system and optional electric battery for commercial building or PPA project applications. Renewable energy system displaces commercial building electric load
-      - :doc:`modules/Pvwattsv7`, :doc:`modules/Fuelcell`, :doc:`modules/StandAloneBattery`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/Thermalrate`, :doc:`modules/Cashloan`
+      - :doc:`modules/Pvwattsv7`, :doc:`modules/Fuelcell`, :doc:`modules/Battery`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/Thermalrate`, :doc:`modules/Cashloan`
     * - Fuel Cell-PV-Battery - Single Owner
       - Fuel cell with photovoltaic system and optional electric battery for commercial building or PPA project applications. Single owner PPA with constant DSCR and IRR target year, reserve accounts and depreciation allocations
-      - :doc:`modules/Pvwattsv7`, :doc:`modules/Fuelcell`, :doc:`modules/StandAloneBattery`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/Thermalrate`, :doc:`modules/Singleowner`
+      - :doc:`modules/Pvwattsv7`, :doc:`modules/Fuelcell`, :doc:`modules/Battery`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/Thermalrate`, :doc:`modules/Singleowner`
     * - Generic Model - Commercial Owner
       - CSP power system with solar field modeled using a table of optical efficiency values. Renewable energy system displaces commercial building electric load
       - :doc:`modules/TcsgenericSolar`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/Cashloan`
@@ -182,31 +158,31 @@ A SAM simulation is a combination of unit compute_modules that models a type of 
       - :doc:`modules/GenericSystem`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/Thirdpartyownership`
     * - Generic System-Battery - Commercial Owner
       - Generic system model with battery storage. Renewable energy system displaces commercial building electric load
-      - :doc:`modules/GenericSystem`, :doc:`modules/StandAloneBattery`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/Cashloan`
+      - :doc:`modules/GenericSystem`, :doc:`modules/Battery`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/Cashloan`
     * - Generic System-Battery - Merchant Plant
       - Generic system model with battery storage. Merchant plant with constant DSCR and ancillary services revenue, reserve accounts and depreciation allocations
-      - :doc:`modules/GenericSystem`, :doc:`modules/StandAloneBattery`, :doc:`modules/Grid`, :doc:`modules/Merchantplant`
+      - :doc:`modules/GenericSystem`, :doc:`modules/Battery`, :doc:`modules/Grid`, :doc:`modules/Merchantplant`
     * - Generic System-Battery - Partnership Flip with Debt
       - Generic system model with battery storage. Developer/investor partnership flip PPA structure with debt
-      - :doc:`modules/GenericSystem`, :doc:`modules/StandAloneBattery`, :doc:`modules/Grid`, :doc:`modules/Levpartflip`
+      - :doc:`modules/GenericSystem`, :doc:`modules/Battery`, :doc:`modules/Grid`, :doc:`modules/Levpartflip`
     * - Generic System-Battery - Partnership Flip without Debt
       - Generic system model with battery storage. Developer/investor partnership flip PPA structure without debt
-      - :doc:`modules/GenericSystem`, :doc:`modules/StandAloneBattery`, :doc:`modules/Grid`, :doc:`modules/Equpartflip`
+      - :doc:`modules/GenericSystem`, :doc:`modules/Battery`, :doc:`modules/Grid`, :doc:`modules/Equpartflip`
     * - Generic System-Battery - Residential Owner
       - Generic system model with battery storage. Renewable energy system displaces residential home electric load
-      - :doc:`modules/Belpe`, :doc:`modules/GenericSystem`, :doc:`modules/StandAloneBattery`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/Cashloan`
+      - :doc:`modules/Belpe`, :doc:`modules/GenericSystem`, :doc:`modules/Battery`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/Cashloan`
     * - Generic System-Battery - Sale Leaseback
       - Generic system model with battery storage. Sale leaseback partnership PPA structure
-      - :doc:`modules/GenericSystem`, :doc:`modules/StandAloneBattery`, :doc:`modules/Grid`, :doc:`modules/Saleleaseback`
+      - :doc:`modules/GenericSystem`, :doc:`modules/Battery`, :doc:`modules/Grid`, :doc:`modules/Saleleaseback`
     * - Generic System-Battery - Single Owner
       - Generic system model with battery storage. Single owner PPA with constant DSCR and IRR target year, reserve accounts and depreciation allocations
-      - :doc:`modules/GenericSystem`, :doc:`modules/StandAloneBattery`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/Singleowner`
+      - :doc:`modules/GenericSystem`, :doc:`modules/Battery`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/Singleowner`
     * - Generic System-Battery - Third Party - Host / Developer
       - Generic system model with battery storage. Third party ownershop from host and developer perspective for PPA
-      - :doc:`modules/GenericSystem`, :doc:`modules/StandAloneBattery`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/HostDeveloper`
+      - :doc:`modules/GenericSystem`, :doc:`modules/Battery`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/HostDeveloper`
     * - Generic System-Battery - Third Party Owner - Host
       - Generic system model with battery storage. Third party ownership from host perspective for PPA or lease agreement
-      - :doc:`modules/Belpe`, :doc:`modules/GenericSystem`, :doc:`modules/StandAloneBattery`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/Thirdpartyownership`
+      - :doc:`modules/Belpe`, :doc:`modules/GenericSystem`, :doc:`modules/Battery`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/Thirdpartyownership`
     * - Geothermal - LCOE Calculator (FCR Method)
       - Geothermal power model for hydrothermal and EGS systems with flash or binary conversion. Calculate LCOE using fixed charge rate method
       - :doc:`modules/Geothermal`, :doc:`modules/Grid`, :doc:`modules/Lcoefcr`
@@ -357,21 +333,6 @@ A SAM simulation is a combination of unit compute_modules that models a type of 
     * - Parabolic Trough - Physical - Single Owner
       - CSP parabolic trough system using heat transfer and thermodynamic component models. Single owner PPA with constant DSCR and IRR target year, reserve accounts and depreciation allocations
       - :doc:`modules/TroughPhysical`, :doc:`modules/Grid`, :doc:`modules/Singleowner`
-    * - Power Tower Direct Steam - Merchant Plant
-      - CSP direct steam power tower system using heat transfer and thermodynamic component models. Merchant plant with constant DSCR and ancillary services revenue, reserve accounts and depreciation allocations
-      - :doc:`modules/TcsdirectSteam`, :doc:`modules/Grid`, :doc:`modules/Merchantplant`
-    * - Power Tower Direct Steam - Partnership Flip with Debt
-      - CSP direct steam power tower system using heat transfer and thermodynamic component models. Developer/investor partnership flip PPA structure with debt
-      - :doc:`modules/TcsdirectSteam`, :doc:`modules/Grid`, :doc:`modules/Levpartflip`
-    * - Power Tower Direct Steam - Partnership Flip without Debt
-      - CSP direct steam power tower system using heat transfer and thermodynamic component models. Developer/investor partnership flip PPA structure without debt
-      - :doc:`modules/TcsdirectSteam`, :doc:`modules/Grid`, :doc:`modules/Equpartflip`
-    * - Power Tower Direct Steam - Sale Leaseback
-      - CSP direct steam power tower system using heat transfer and thermodynamic component models. Sale leaseback partnership PPA structure
-      - :doc:`modules/TcsdirectSteam`, :doc:`modules/Grid`, :doc:`modules/Saleleaseback`
-    * - Power Tower Direct Steam - Single Owner
-      - CSP direct steam power tower system using heat transfer and thermodynamic component models. Single owner PPA with constant DSCR and IRR target year, reserve accounts and depreciation allocations
-      - :doc:`modules/TcsdirectSteam`, :doc:`modules/Grid`, :doc:`modules/Singleowner`
     * - Power Tower Molten Salt - Merchant Plant
       - CSP molten salt power tower system using heat transfer and thermodynamic component models. Merchant plant with constant DSCR and ancillary services revenue, reserve accounts and depreciation allocations
       - :doc:`modules/TcsmoltenSalt`, :doc:`modules/Grid`, :doc:`modules/Merchantplant`

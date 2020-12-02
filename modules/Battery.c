@@ -728,16 +728,16 @@ static PyGetSetDef BatterySystem_getset[] = {
 	PyDoc_STR("*float*: Loss power input option [0/1]\n\n*Options*: 0=Monthly,1=TimeSeries\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"batt_losses", (getter)BatterySystem_get_batt_losses,(setter)BatterySystem_set_batt_losses,
-	PyDoc_STR("*sequence*: Battery system losses at each timestep [kW]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*sequence*: Battery system losses at each timestep (kW DC for DC connected, AC for AC connected) [kW]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"batt_losses_charging", (getter)BatterySystem_get_batt_losses_charging,(setter)BatterySystem_set_batt_losses_charging,
-	PyDoc_STR("*sequence*: Battery system losses when charging [kW]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*sequence*: Battery system losses when charging (kW DC for DC connected, AC for AC connected) [kW]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"batt_losses_discharging", (getter)BatterySystem_get_batt_losses_discharging,(setter)BatterySystem_set_batt_losses_discharging,
-	PyDoc_STR("*sequence*: Battery system losses when discharging [kW]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*sequence*: Battery system losses when discharging (kW DC for DC connected, AC for AC connected) [kW]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"batt_losses_idle", (getter)BatterySystem_get_batt_losses_idle,(setter)BatterySystem_set_batt_losses_idle,
-	PyDoc_STR("*sequence*: Battery system losses when idle [kW]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*sequence*: Battery system losses when idle (kW DC for DC connected, AC for AC connected) [kW]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"batt_mass", (getter)BatterySystem_get_batt_mass,(setter)BatterySystem_set_batt_mass,
 	PyDoc_STR("*float*: Battery mass [kg]\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - batt_Qfull\n\t - batt_Vnom_default\n\t - batt_ac_dc_efficiency\n\t - batt_ac_or_dc\n\t - batt_chem\n\t - batt_computed_bank_capacity\n\t - batt_current_choice\n\t - batt_dc_ac_efficiency\n\t - batt_dc_dc_efficiency\n"),
@@ -1643,7 +1643,7 @@ static PyGetSetDef BatteryCell_getset[] = {
 	PyDoc_STR("*float*: Internal resistance [Ohm]"),
  	NULL},
 {"batt_room_temperature_celsius", (getter)BatteryCell_get_batt_room_temperature_celsius,(setter)BatteryCell_set_batt_room_temperature_celsius,
-	PyDoc_STR("*sequence*: Temperature of storage room [C]"),
+	PyDoc_STR("*sequence*: Temperature of storage room [C]\n\n*Options*: length=1 for fixed, # of weatherfile records otherwise"),
  	NULL},
 {"batt_voltage_choice", (getter)BatteryCell_get_batt_voltage_choice,(setter)BatteryCell_set_batt_voltage_choice,
 	PyDoc_STR("*float*: Battery voltage input option [0/1]\n\n*Options*: 0=UseVoltageModel,1=InputVoltageTable\n\n*Required*: If not provided, assumed to be 0"),
@@ -3335,13 +3335,13 @@ static PyGetSetDef ElectricityRates_getset[] = {
 	PyDoc_STR("*float*: Monthly minimum charge [$]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
 {"ur_nm_credit_month", (getter)ElectricityRates_get_ur_nm_credit_month,(setter)ElectricityRates_set_ur_nm_credit_month,
-	PyDoc_STR("*float*: Month of rollover credits [$/kWh]\n\n*Constraints*: INTEGER,MIN=0,MAX=11\n\n*Required*: If not provided, assumed to be 11"),
+	PyDoc_STR("*float*: Month of year end payout (true-up) [mn]\n\n*Constraints*: INTEGER,MIN=0,MAX=11\n\n*Required*: If not provided, assumed to be 11"),
  	NULL},
 {"ur_nm_credit_rollover", (getter)ElectricityRates_get_ur_nm_credit_rollover,(setter)ElectricityRates_set_ur_nm_credit_rollover,
-	PyDoc_STR("*float*: Roll over credits to next year [0/1]\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Apply net metering true-up credits to future bills [0/1]\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"ur_nm_yearend_sell_rate", (getter)ElectricityRates_get_ur_nm_yearend_sell_rate,(setter)ElectricityRates_set_ur_nm_yearend_sell_rate,
-	PyDoc_STR("*float*: Net metering credit sell rate [$/kWh]\n\n*Required*: If not provided, assumed to be 0.0"),
+	PyDoc_STR("*float*: Net metering true-up credit sell rate [$/kWh]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
 {"ur_sell_eq_buy", (getter)ElectricityRates_get_ur_sell_eq_buy,(setter)ElectricityRates_set_ur_sell_eq_buy,
 	PyDoc_STR("*float*: Set sell rate equal to buy rate [0/1]\n\n*Info*: Optional override\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
@@ -3521,9 +3521,9 @@ Outputs_get_batt_annual_charge_from_grid(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_batt_annual_charge_from_pv(VarGroupObject *self, void *closure)
+Outputs_get_batt_annual_charge_from_system(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Battery_Outputs_batt_annual_charge_from_pv_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Battery_Outputs_batt_annual_charge_from_system_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -3617,12 +3617,6 @@ Outputs_get_batt_power_target(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_batt_pv_charge_percent(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Battery_Outputs_batt_pv_charge_percent_nget, self->data_ptr);
-}
-
-static PyObject *
 Outputs_get_batt_q0(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Battery_Outputs_batt_q0_aget, self->data_ptr);
@@ -3683,6 +3677,12 @@ Outputs_get_batt_revenue_gridcharge(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_batt_system_charge_percent(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Battery_Outputs_batt_system_charge_percent_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_batt_system_loss(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Battery_Outputs_batt_system_loss_aget, self->data_ptr);
@@ -3728,6 +3728,12 @@ static PyObject *
 Outputs_get_fuelcell_to_batt(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Battery_Outputs_fuelcell_to_batt_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_gen_without_battery(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Battery_Outputs_gen_without_battery_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -3785,21 +3791,21 @@ Outputs_get_monthly_grid_to_load(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_monthly_pv_to_batt(VarGroupObject *self, void *closure)
+Outputs_get_monthly_system_to_batt(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Battery_Outputs_monthly_pv_to_batt_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Battery_Outputs_monthly_system_to_batt_aget, self->data_ptr);
 }
 
 static PyObject *
-Outputs_get_monthly_pv_to_grid(VarGroupObject *self, void *closure)
+Outputs_get_monthly_system_to_grid(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Battery_Outputs_monthly_pv_to_grid_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Battery_Outputs_monthly_system_to_grid_aget, self->data_ptr);
 }
 
 static PyObject *
-Outputs_get_monthly_pv_to_load(VarGroupObject *self, void *closure)
+Outputs_get_monthly_system_to_load(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Battery_Outputs_monthly_pv_to_load_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Battery_Outputs_monthly_system_to_load_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -3812,24 +3818,6 @@ static PyObject *
 Outputs_get_pdf_of_surviving(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Battery_Outputs_pdf_of_surviving_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_pv_to_batt(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Battery_Outputs_pv_to_batt_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_pv_to_grid(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Battery_Outputs_pv_to_grid_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_pv_to_load(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Battery_Outputs_pv_to_load_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -3860,6 +3848,24 @@ static PyObject *
 Outputs_get_survival_function(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Battery_Outputs_survival_function_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_system_to_batt(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Battery_Outputs_system_to_batt_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_system_to_grid(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Battery_Outputs_system_to_grid_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_system_to_load(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Battery_Outputs_system_to_load_aget, self->data_ptr);
 }
 
 static PyGetSetDef Outputs_getset[] = {
@@ -3896,7 +3902,7 @@ static PyGetSetDef Outputs_getset[] = {
 {"batt_annual_charge_from_grid", (getter)Outputs_get_batt_annual_charge_from_grid,(setter)0,
 	PyDoc_STR("*sequence*: Battery annual energy charged from grid [kWh]"),
  	NULL},
-{"batt_annual_charge_from_pv", (getter)Outputs_get_batt_annual_charge_from_pv,(setter)0,
+{"batt_annual_charge_from_system", (getter)Outputs_get_batt_annual_charge_from_system,(setter)0,
 	PyDoc_STR("*sequence*: Battery annual energy charged from system [kWh]"),
  	NULL},
 {"batt_annual_discharge_energy", (getter)Outputs_get_batt_annual_discharge_energy,(setter)0,
@@ -3930,7 +3936,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Electricity loss in battery power electronics [kW]"),
  	NULL},
 {"batt_cost_to_cycle", (getter)Outputs_get_batt_cost_to_cycle,(setter)0,
-	PyDoc_STR("*sequence*: Battery computed cost to cycle [$/cycle]"),
+	PyDoc_STR("*sequence*: Battery computed cycle degradation penalty [$/cycle-kWh]"),
  	NULL},
 {"batt_cycles", (getter)Outputs_get_batt_cycles,(setter)0,
 	PyDoc_STR("*sequence*: Battery number of cycles"),
@@ -3943,9 +3949,6 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"batt_power_target", (getter)Outputs_get_batt_power_target,(setter)0,
 	PyDoc_STR("*sequence*: Electricity battery power target for automated dispatch [kW]"),
- 	NULL},
-{"batt_pv_charge_percent", (getter)Outputs_get_batt_pv_charge_percent,(setter)0,
-	PyDoc_STR("*float*: Battery charge energy charged from system [%]"),
  	NULL},
 {"batt_q0", (getter)Outputs_get_batt_q0,(setter)0,
 	PyDoc_STR("*sequence*: Battery total charge [Ah]"),
@@ -3977,8 +3980,11 @@ static PyGetSetDef Outputs_getset[] = {
 {"batt_revenue_gridcharge", (getter)Outputs_get_batt_revenue_gridcharge,(setter)0,
 	PyDoc_STR("*sequence*: Revenue to charge from grid [$/kWh]"),
  	NULL},
+{"batt_system_charge_percent", (getter)Outputs_get_batt_system_charge_percent,(setter)0,
+	PyDoc_STR("*float*: Battery charge energy charged from system [%]"),
+ 	NULL},
 {"batt_system_loss", (getter)Outputs_get_batt_system_loss,(setter)0,
-	PyDoc_STR("*sequence*: Electricity loss from battery ancillary equipment [kW]"),
+	PyDoc_STR("*sequence*: Electricity loss from battery ancillary equipment (kW DC for DC connected, AC for AC connected) [kW]"),
  	NULL},
 {"batt_temperature", (getter)Outputs_get_batt_temperature,(setter)0,
 	PyDoc_STR("*sequence*: Battery temperature [C]"),
@@ -4000,6 +4006,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"fuelcell_to_batt", (getter)Outputs_get_fuelcell_to_batt,(setter)0,
 	PyDoc_STR("*sequence*: Electricity to battery from fuel cell [kW]"),
+ 	NULL},
+{"gen_without_battery", (getter)Outputs_get_gen_without_battery,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced without the battery or curtailment [kW]"),
  	NULL},
 {"grid_power", (getter)Outputs_get_grid_power,(setter)0,
 	PyDoc_STR("*sequence*: Electricity to/from grid [kW]"),
@@ -4028,13 +4037,13 @@ static PyGetSetDef Outputs_getset[] = {
 {"monthly_grid_to_load", (getter)Outputs_get_monthly_grid_to_load,(setter)0,
 	PyDoc_STR("*sequence*: Energy to load from grid [kWh]"),
  	NULL},
-{"monthly_pv_to_batt", (getter)Outputs_get_monthly_pv_to_batt,(setter)0,
+{"monthly_system_to_batt", (getter)Outputs_get_monthly_system_to_batt,(setter)0,
 	PyDoc_STR("*sequence*: Energy to battery from system [kWh]"),
  	NULL},
-{"monthly_pv_to_grid", (getter)Outputs_get_monthly_pv_to_grid,(setter)0,
+{"monthly_system_to_grid", (getter)Outputs_get_monthly_system_to_grid,(setter)0,
 	PyDoc_STR("*sequence*: Energy to grid from system [kWh]"),
  	NULL},
-{"monthly_pv_to_load", (getter)Outputs_get_monthly_pv_to_load,(setter)0,
+{"monthly_system_to_load", (getter)Outputs_get_monthly_system_to_load,(setter)0,
 	PyDoc_STR("*sequence*: Energy to load from system [kWh]"),
  	NULL},
 {"outage_durations", (getter)Outputs_get_outage_durations,(setter)0,
@@ -4042,15 +4051,6 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"pdf_of_surviving", (getter)Outputs_get_pdf_of_surviving,(setter)0,
 	PyDoc_STR("*sequence*: Probabilities of autonomous hours for resilience "),
- 	NULL},
-{"pv_to_batt", (getter)Outputs_get_pv_to_batt,(setter)0,
-	PyDoc_STR("*sequence*: Electricity to battery from system [kW]"),
- 	NULL},
-{"pv_to_grid", (getter)Outputs_get_pv_to_grid,(setter)0,
-	PyDoc_STR("*sequence*: Electricity to grid from system [kW]"),
- 	NULL},
-{"pv_to_load", (getter)Outputs_get_pv_to_load,(setter)0,
-	PyDoc_STR("*sequence*: Electricity to load from system [kW]"),
  	NULL},
 {"resilience_hrs", (getter)Outputs_get_resilience_hrs,(setter)0,
 	PyDoc_STR("*sequence*: Hours of autonomy during outage at each timestep for resilience [hr]"),
@@ -4066,6 +4066,15 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"survival_function", (getter)Outputs_get_survival_function,(setter)0,
 	PyDoc_STR("*sequence*: Survival function of autonomous hours for resilience"),
+ 	NULL},
+{"system_to_batt", (getter)Outputs_get_system_to_batt,(setter)0,
+	PyDoc_STR("*sequence*: Electricity to battery from system [kW]"),
+ 	NULL},
+{"system_to_grid", (getter)Outputs_get_system_to_grid,(setter)0,
+	PyDoc_STR("*sequence*: Electricity to grid from system [kW]"),
+ 	NULL},
+{"system_to_load", (getter)Outputs_get_system_to_load,(setter)0,
+	PyDoc_STR("*sequence*: Electricity to load from system [kW]"),
  	NULL},
 	{NULL}  /* Sentinel */
 };

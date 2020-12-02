@@ -38,6 +38,8 @@ class HeatExchangerDesign(object):
 	HTR_design_code = float
 	HTR_eff_des_in = float
 	HTR_min_dT_des_in = float
+	HTR_n_sub_hx = float
+	HTR_od_model = float
 	HT_recup_eff_max = float
 	LTR_HP_deltaP_des_in = float
 	LTR_LP_deltaP_des_in = float
@@ -45,6 +47,8 @@ class HeatExchangerDesign(object):
 	LTR_design_code = float
 	LTR_eff_des_in = float
 	LTR_min_dT_des_in = float
+	LTR_n_sub_hx = float
+	LTR_od_model = float
 	LT_recup_eff_max = float
 	UA_recup_tot_des = float
 	cycle_config = float
@@ -54,10 +58,11 @@ class HeatExchangerDesign(object):
 	is_P_high_fixed = float
 	is_recomp_ok = float
 	min_phx_deltaT = float
+	od_rel_tol = float
 	rel_tol = float
 
 
-class CycleDesign(object):
+class Common(object):
 	def assign(self): 
 		pass
 
@@ -75,6 +80,16 @@ class CycleDesign(object):
 	eta_isen_pc = float
 	eta_isen_rc = float
 	eta_isen_t = float
+	is_gen_od_polynomials = float
+	mc_comp_type = float
+	od_P_mc_in_sweep = tuple
+	od_T_mc_in_sweep = tuple
+	od_T_t_in_mode = float
+	od_cases = tuple
+	od_generate_udpc = tuple
+	od_max_htf_m_dot = tuple
+	od_opt_objective = float
+	od_set_control = tuple
 
 
 class PHXDesign(object):
@@ -88,6 +103,8 @@ class PHXDesign(object):
 		pass
 
 
+	PHX_n_sub_hx = float
+	PHX_od_model = float
 	dT_PHX_cold_approach = float
 
 
@@ -102,28 +119,11 @@ class AirCoolerDesign(object):
 		pass
 
 
+	N_nodes_air_cooler_pass = float
 	deltaP_cooler_frac = float
+	eta_air_cooler_fan = float
 	fan_power_frac = float
 	is_design_air_cooler = float
-
-
-class Common(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> Dict[Dict]:
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	is_gen_od_polynomials = float
-	od_P_mc_in_sweep = tuple
-	od_T_t_in_mode = float
-	od_cases = tuple
-	od_generate_udpc = tuple
-	od_set_control = tuple
 
 
 class Outputs(object):
@@ -150,29 +150,6 @@ class Outputs(object):
 	HTR_cost = float
 	HTR_min_dT = float
 	HTR_min_dT_od = tuple
-	IP_cooler_P_in = float
-	IP_cooler_T_in = float
-	IP_cooler_UA = float
-	IP_cooler_W_dot_fan = float
-	IP_cooler_W_dot_fan_od = tuple
-	IP_cooler_cost = float
-	IP_cooler_m_dot_co2 = float
-	IP_cooler_q_dot = float
-	LP_cooler_P_in = float
-	LP_cooler_T_in = float
-	LP_cooler_T_in_od = tuple
-	LP_cooler_UA = float
-	LP_cooler_W_dot_fan = float
-	LP_cooler_W_dot_fan_od = tuple
-	LP_cooler_co2_deltaP_des = float
-	LP_cooler_co2_deltaP_od = tuple
-	LP_cooler_cost = float
-	LP_cooler_in_isen_deltah_to_P_mc_out = float
-	LP_cooler_in_isen_deltah_to_P_mc_out_od = tuple
-	LP_cooler_m_dot_co2 = float
-	LP_cooler_q_dot = float
-	LP_cooler_rho_in = float
-	LP_cooler_rho_in_od = tuple
 	LTR_HP_T_out_des = float
 	LTR_HP_T_out_od = tuple
 	LTR_HP_deltaP_des = float
@@ -220,6 +197,8 @@ class Outputs(object):
 	T_state_points = tuple
 	T_turb_in = float
 	UA_PHX = float
+	W_dot_net_less_cooling = float
+	W_dot_net_less_cooling_od = tuple
 	W_dot_net_od = tuple
 	c_tot_W_dot = float
 	c_tot_W_dot_od = tuple
@@ -243,6 +222,8 @@ class Outputs(object):
 	eff_LTR_od = tuple
 	eff_PHX = float
 	eta_thermal_calc = float
+	eta_thermal_net_less_cooling_des = float
+	eta_thermal_net_less_cooling_od = tuple
 	eta_thermal_od = tuple
 	h_mc_data = tuple
 	h_pc_data = tuple
@@ -256,10 +237,26 @@ class Outputs(object):
 	mc_D = tuple
 	mc_N_des = float
 	mc_N_od = tuple
+	mc_N_od_perc = tuple
 	mc_T_out = float
 	mc_T_out_od = tuple
 	mc_W_dot = float
 	mc_W_dot_od = tuple
+	mc_cooler_P_in = float
+	mc_cooler_T_in = float
+	mc_cooler_T_in_od = tuple
+	mc_cooler_UA = float
+	mc_cooler_W_dot_fan = float
+	mc_cooler_W_dot_fan_od = tuple
+	mc_cooler_co2_deltaP_des = float
+	mc_cooler_co2_deltaP_od = tuple
+	mc_cooler_cost = float
+	mc_cooler_in_isen_deltah_to_P_mc_out = float
+	mc_cooler_in_isen_deltah_to_P_mc_out_od = tuple
+	mc_cooler_m_dot_co2 = float
+	mc_cooler_q_dot = float
+	mc_cooler_rho_in = float
+	mc_cooler_rho_in_od = tuple
 	mc_cost = float
 	mc_eta_od = tuple
 	mc_eta_stages_des = tuple
@@ -281,8 +278,6 @@ class Outputs(object):
 	mc_tip_ratio_des = tuple
 	mc_tip_ratio_od = tuple
 	od_code = tuple
-	od_opt_conv_tol = tuple
-	od_opt_obj_code = tuple
 	pc_D = tuple
 	pc_N_des = float
 	pc_N_od = tuple
@@ -292,6 +287,14 @@ class Outputs(object):
 	pc_T_in_od = tuple
 	pc_W_dot = float
 	pc_W_dot_od = tuple
+	pc_cooler_P_in = float
+	pc_cooler_T_in = float
+	pc_cooler_UA = float
+	pc_cooler_W_dot_fan = float
+	pc_cooler_W_dot_fan_od = tuple
+	pc_cooler_cost = float
+	pc_cooler_m_dot_co2 = float
+	pc_cooler_q_dot = float
 	pc_cost = float
 	pc_eta_od = tuple
 	pc_eta_stages_des = tuple
@@ -319,6 +322,7 @@ class Outputs(object):
 	rc_D = tuple
 	rc_N_des = float
 	rc_N_od = tuple
+	rc_N_od_perc = tuple
 	rc_P_in_des = float
 	rc_P_in_od = tuple
 	rc_P_out_des = float
@@ -371,11 +375,15 @@ class Outputs(object):
 	t_W_dot = float
 	t_W_dot_od = tuple
 	t_cost = float
+	t_delta_h_isen_des = float
+	t_delta_h_isen_od = tuple
 	t_eta_od = tuple
 	t_m_dot_des = float
 	t_m_dot_od = tuple
 	t_nu_des = float
 	t_nu_od = tuple
+	t_rho_in_des = float
+	t_rho_in_od = tuple
 	t_tip_ratio_des = float
 	t_tip_ratio_od = tuple
 	udpc_n_T_amb = float
@@ -405,10 +413,9 @@ class Sco2CspSystem(object):
 
 	SystemDesign = SystemDesign
 	HeatExchangerDesign = HeatExchangerDesign
-	CycleDesign = CycleDesign
+	Common = Common
 	PHXDesign = PHXDesign
 	AirCoolerDesign = AirCoolerDesign
-	Common = Common
 	Outputs = Outputs
 
 

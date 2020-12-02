@@ -951,7 +951,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Sun up over horizon [0/1]"),
  	NULL},
 {"tamb", (getter)Outputs_get_tamb,(setter)0,
-	PyDoc_STR("*sequence*: Ambient temperature [C]"),
+	PyDoc_STR("*sequence*: Ambient temperature (dry bulb temperature) [C]"),
  	NULL},
 {"tcell", (getter)Outputs_get_tcell,(setter)0,
 	PyDoc_STR("*sequence*: Module temperature [C]"),

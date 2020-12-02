@@ -9,7 +9,7 @@
 
 mkdir -p ~/SAM-Dev/cmake-build-export
 cd ~/SAM-Dev/cmake-build-export || exit
-cmake .. -DCMAKE_BUILD_TYPE=Export -DSAMAPI_EXPORT=1
+cmake .. -DCMAKE_BUILD_TYPE=Release -DSAMAPI_EXPORT=1 -DSAM_SKIP_AUTOGEN=0
 cmake --build . --target SAM_api -j 6
 
 # Building the PyPi and Anaconda packages
@@ -22,7 +22,7 @@ source $(conda info --base)/etc/profile.d/conda.sh
 rm -rf build
 rm -rf dist/*
 
-for PYTHONENV in pysam_build_3.5 pysam_build_3.6 pysam_build_3.7 pysam_build_3.8
+for PYTHONENV in pysam_build_3.5 pysam_build_3.6 pysam_build_3.7 pysam_build_3.8 pysam_build_3.9
 do
    conda activate $PYTHONENV
    yes | pip install -r tests/requirements.txt
@@ -37,10 +37,10 @@ do
    python setup.py bdist_wheel
 done
 python stubs/setup.py bdist_wheel
-twine upload $PYSAMDIR/dist/*.whl
+twine upload $PYSAMDIR/dist/*.whl || exit
 
 $PYSAMDIR/build_conda.sh
-anaconda upload -u nrel $PYSAMDIR/dist/osx-64/*.tar.bz2
+anaconda upload -u nrel $PYSAMDIR/dist/osx-64/*.tar.bz2 || exit
 
 rm -rf dist/*
 

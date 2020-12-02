@@ -910,7 +910,6 @@ class Outputs(object):
 	npv_sta_pbi_income = float
 	npv_thermal_value = float
 	npv_uti_pbi_income = float
-	ppa_gen = tuple
 	present_value_fuel = float
 	present_value_insandproptax = float
 	present_value_oandm = float
@@ -920,6 +919,7 @@ class Outputs(object):
 	prop_tax_assessed_value = float
 	purchase_of_property = float
 	pv_cafds = float
+	revenue_gen = tuple
 	salvage_value = float
 	size_of_debt = float
 	size_of_equity = float

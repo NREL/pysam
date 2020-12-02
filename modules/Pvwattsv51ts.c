@@ -107,18 +107,6 @@ PVWatts_set_diffuse(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyObject *
-PVWatts_get_dry_temperature(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Pvwattsv51ts_PVWatts_dry_temperature_nget, self->data_ptr);
-}
-
-static int
-PVWatts_set_dry_temperature(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Pvwattsv51ts_PVWatts_dry_temperature_nset, self->data_ptr);
-}
-
-static PyObject *
 PVWatts_get_elevation(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Pvwattsv51ts_PVWatts_elevation_nget, self->data_ptr);
@@ -215,6 +203,18 @@ PVWatts_set_pressure(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyObject *
+PVWatts_get_shaded_percent(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvwattsv51ts_PVWatts_shaded_percent_nget, self->data_ptr);
+}
+
+static int
+PVWatts_set_shaded_percent(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvwattsv51ts_PVWatts_shaded_percent_nset, self->data_ptr);
+}
+
+static PyObject *
 PVWatts_get_tamb(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Pvwattsv51ts_PVWatts_tamb_nget, self->data_ptr);
@@ -299,9 +299,6 @@ static PyGetSetDef PVWatts_getset[] = {
 {"diffuse", (getter)PVWatts_get_diffuse,(setter)PVWatts_set_diffuse,
 	PyDoc_STR("*float*: Diffuse irradiance [W/m2]\n\n*Required*: True"),
  	NULL},
-{"dry_temperature", (getter)PVWatts_get_dry_temperature,(setter)PVWatts_set_dry_temperature,
-	PyDoc_STR("*float*: Dry Temperature [°C]\n\n*Required*: False"),
- 	NULL},
 {"elevation", (getter)PVWatts_get_elevation,(setter)PVWatts_set_elevation,
 	PyDoc_STR("*float*: Elevation [m]\n\n*Required*: False"),
  	NULL},
@@ -326,8 +323,11 @@ static PyGetSetDef PVWatts_getset[] = {
 {"pressure", (getter)PVWatts_get_pressure,(setter)PVWatts_set_pressure,
 	PyDoc_STR("*float*: Pressure [mbars]\n\n*Required*: False"),
  	NULL},
+{"shaded_percent", (getter)PVWatts_get_shaded_percent,(setter)PVWatts_set_shaded_percent,
+	PyDoc_STR("*float*: Percent of panels that are shaded [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
 {"tamb", (getter)PVWatts_get_tamb,(setter)PVWatts_set_tamb,
-	PyDoc_STR("*float*: Ambient temperature [C]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Ambient temperature (dry bulb temperature) [C]\n\n*Required*: True"),
  	NULL},
 {"tcell", (getter)PVWatts_get_tcell,(setter)PVWatts_set_tcell,
 	PyDoc_STR("*float*: Module temperature [C]\n\n*Info*: Output from last time step may be used as input"),

@@ -320,7 +320,7 @@ class Outputs(object):
 	batt_SOC = tuple
 	batt_annual_charge_energy = tuple
 	batt_annual_charge_from_grid = tuple
-	batt_annual_charge_from_pv = tuple
+	batt_annual_charge_from_system = tuple
 	batt_annual_discharge_energy = tuple
 	batt_annual_energy_loss = tuple
 	batt_annual_energy_system_loss = tuple
@@ -336,7 +336,6 @@ class Outputs(object):
 	batt_dispatch_sched = tuple
 	batt_power = tuple
 	batt_power_target = tuple
-	batt_pv_charge_percent = float
 	batt_q0 = tuple
 	batt_q1 = tuple
 	batt_q2 = tuple
@@ -347,6 +346,7 @@ class Outputs(object):
 	batt_revenue_clipcharge = tuple
 	batt_revenue_discharge = tuple
 	batt_revenue_gridcharge = tuple
+	batt_system_charge_percent = float
 	batt_system_loss = tuple
 	batt_temperature = tuple
 	batt_to_grid = tuple
@@ -355,6 +355,7 @@ class Outputs(object):
 	batt_voltage_cell = tuple
 	cdf_of_surviving = tuple
 	fuelcell_to_batt = tuple
+	gen_without_battery = tuple
 	grid_power = tuple
 	grid_power_target = tuple
 	grid_to_batt = tuple
@@ -364,19 +365,19 @@ class Outputs(object):
 	monthly_batt_to_load = tuple
 	monthly_grid_to_batt = tuple
 	monthly_grid_to_load = tuple
-	monthly_pv_to_batt = tuple
-	monthly_pv_to_grid = tuple
-	monthly_pv_to_load = tuple
+	monthly_system_to_batt = tuple
+	monthly_system_to_grid = tuple
+	monthly_system_to_load = tuple
 	outage_durations = tuple
 	pdf_of_surviving = tuple
-	pv_to_batt = tuple
-	pv_to_grid = tuple
-	pv_to_load = tuple
 	resilience_hrs = tuple
 	resilience_hrs_avg = float
 	resilience_hrs_max = float
 	resilience_hrs_min = float
 	survival_function = tuple
+	system_to_batt = tuple
+	system_to_grid = tuple
+	system_to_load = tuple
 
 
 class Battery(object):

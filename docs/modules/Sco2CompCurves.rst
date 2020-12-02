@@ -1,9 +1,9 @@
-.. _Wfcsvconv:
+.. _Sco2CompCurves:
 
-Wfcsvconv
+Sco2CompCurves
 ***********************************
 
-Wrapper for SAM Simulation Core model: `cmod_wfcsvconv.cpp <https://github.com/NREL/ssc/blob/develop/ssc/cmod_wfcsvconv.cpp>`_
+Wrapper for SAM Simulation Core model: `cmod_sco2_comp_curves.cpp <https://github.com/NREL/ssc/blob/develop/ssc/cmod_sco2_comp_curves.cpp>`_
 
 Input Consistency Warning
 ==================================
@@ -21,20 +21,26 @@ Creating an Instance
 
 Refer to the :ref:`Initializing a Model <initializing>` page for details on the different ways to create an instance of a PySAM class.
 
-**Wfcsvconv model description**
+**Sco2CompCurves model description**
 
-.. automodule:: PySAM.Wfcsvconv
+.. automodule:: PySAM.Sco2CompCurves
 	:members:
 
 Functions
 ===================================
 
-.. autoclass:: PySAM.Wfcsvconv.Wfcsvconv
+.. autoclass:: PySAM.Sco2CompCurves.Sco2CompCurves
 	:members:
 
-WeatherFileConverter Group
+Common Group
 ======================================================
 
-.. autoclass:: PySAM.Wfcsvconv.Wfcsvconv.WeatherFileConverter
+.. autoclass:: PySAM.Sco2CompCurves.Sco2CompCurves.Common
+	:members:
+
+Outputs Group
+======================================================
+
+.. autoclass:: PySAM.Sco2CompCurves.Sco2CompCurves.Outputs
 	:members:
 

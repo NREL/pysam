@@ -110,7 +110,7 @@ class StatePack(object):
 	heat_dissipated = float
 	indices_replaced = tuple
 	last_idx = float
-	loss_percent = float
+	loss_kw = float
 	n_replacements = float
 
 

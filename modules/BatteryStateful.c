@@ -553,7 +553,7 @@ static PyGetSetDef ParamsCell_getset[] = {
 	PyDoc_STR("*float*: Cell capacity at end of exponential zone [Ah]\n\n*Required*: True if voltage_choice=0&chem~2"),
  	NULL},
 {"Qfull", (getter)ParamsCell_get_Qfull,(setter)ParamsCell_set_Qfull,
-	PyDoc_STR("*float*: Fully charged cell capacity [Ah]\n\n*Required*: True if voltage_choice=0&chem~2"),
+	PyDoc_STR("*float*: Fully charged cell capacity [Ah]\n\n*Required*: True"),
  	NULL},
 {"Qfull_flow", (getter)ParamsCell_get_Qfull_flow,(setter)ParamsCell_set_Qfull_flow,
 	PyDoc_STR("*float*: Fully charged flow battery capacity [Ah]\n\n*Required*: True if voltage_choice=0&chem=3"),
@@ -1253,15 +1253,15 @@ StatePack_set_last_idx(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyObject *
-StatePack_get_loss_percent(VarGroupObject *self, void *closure)
+StatePack_get_loss_kw(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_BatteryStateful_StatePack_loss_percent_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_BatteryStateful_StatePack_loss_kw_nget, self->data_ptr);
 }
 
 static int
-StatePack_set_loss_percent(VarGroupObject *self, PyObject *value, void *closure)
+StatePack_set_loss_kw(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_BatteryStateful_StatePack_loss_percent_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_BatteryStateful_StatePack_loss_kw_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -1322,8 +1322,8 @@ static PyGetSetDef StatePack_getset[] = {
 {"last_idx", (getter)StatePack_get_last_idx,(setter)StatePack_set_last_idx,
 	PyDoc_STR("*float*: Last index (lifetime)"),
  	NULL},
-{"loss_percent", (getter)StatePack_get_loss_percent,(setter)StatePack_set_loss_percent,
-	PyDoc_STR("*float*: Power loss percent [%]"),
+{"loss_kw", (getter)StatePack_get_loss_kw,(setter)StatePack_set_loss_kw,
+	PyDoc_STR("*float*: Ancillary power loss (kW DC for DC connected, AC for AC connected) [kW]"),
  	NULL},
 {"n_replacements", (getter)StatePack_get_n_replacements,(setter)StatePack_set_n_replacements,
 	PyDoc_STR("*float*: Number of replacements at current year"),

@@ -59,6 +59,18 @@ static PyMethodDef MHKCosts_methods[] = {
 };
 
 static PyObject *
+MHKCosts_get_annual_energy(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MhkCosts_MHKCosts_annual_energy_nget, self->data_ptr);
+}
+
+static int
+MHKCosts_set_annual_energy(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_MhkCosts_MHKCosts_annual_energy_nset, self->data_ptr);
+}
+
+static PyObject *
 MHKCosts_get_array_cable_system_cost_input(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_MhkCosts_MHKCosts_array_cable_system_cost_input_nget, self->data_ptr);
@@ -455,23 +467,26 @@ MHKCosts_set_system_capacity(VarGroupObject *self, PyObject *value, void *closur
 }
 
 static PyGetSetDef MHKCosts_getset[] = {
+{"annual_energy", (getter)MHKCosts_get_annual_energy,(setter)MHKCosts_set_annual_energy,
+	PyDoc_STR("*float*: Annual energy production [kWh]\n\n*Required*: True"),
+ 	NULL},
 {"array_cable_system_cost_input", (getter)MHKCosts_get_array_cable_system_cost_input,(setter)MHKCosts_set_array_cable_system_cost_input,
 	PyDoc_STR("*float*: Array cable system cost [$]\n\n*Required*: True"),
  	NULL},
 {"array_cable_system_cost_method", (getter)MHKCosts_get_array_cable_system_cost_method,(setter)MHKCosts_set_array_cable_system_cost_method,
-	PyDoc_STR("*float*: Array cable system cost method [0/1/2]\n\n*Options*: 0=Enter in $/kW,1=Enter in $,2=Use modeled value\n\n*Constraints*: MIN=0,MAX=2\n\n*Required*: True"),
+	PyDoc_STR("*float*: Array cable system cost method [0/1/2]\n\n*Options*: 0=Enter in $/kW,1=Enter in $,2=Use modeled value\n\n*Constraints*: MIN=0,MAX=3\n\n*Required*: True"),
  	NULL},
 {"assembly_and_install_cost_input", (getter)MHKCosts_get_assembly_and_install_cost_input,(setter)MHKCosts_set_assembly_and_install_cost_input,
 	PyDoc_STR("*float*: Assembly and installation cost [$]\n\n*Required*: True"),
  	NULL},
 {"assembly_and_install_cost_method", (getter)MHKCosts_get_assembly_and_install_cost_method,(setter)MHKCosts_set_assembly_and_install_cost_method,
-	PyDoc_STR("*float*: Assembly and installation cost method [0/1/2]\n\n*Options*: 0=Enter in $/kW,1=Enter in $,2=Use modeled value\n\n*Constraints*: MIN=0,MAX=2\n\n*Required*: True"),
+	PyDoc_STR("*float*: Assembly and installation cost method [0/1/2]\n\n*Options*: 0=Enter in $/kW,1=Enter in $,2=Use modeled value\n\n*Constraints*: MIN=0,MAX=3\n\n*Required*: True"),
  	NULL},
 {"development_cost_input", (getter)MHKCosts_get_development_cost_input,(setter)MHKCosts_set_development_cost_input,
 	PyDoc_STR("*float*: Development cost [$]\n\n*Required*: True"),
  	NULL},
 {"development_cost_method", (getter)MHKCosts_get_development_cost_method,(setter)MHKCosts_set_development_cost_method,
-	PyDoc_STR("*float*: Development cost method [0/1/2]\n\n*Options*: 0=Enter in $/kW,1=Enter in $,2=Use modeled value\n\n*Constraints*: MIN=0,MAX=2\n\n*Required*: True"),
+	PyDoc_STR("*float*: Development cost method [0/1/2]\n\n*Options*: 0=Enter in $/kW,1=Enter in $,2=Use modeled value,3=Enter in itemized costs\n\n*Constraints*: MIN=0,MAX=3\n\n*Required*: True"),
  	NULL},
 {"device_rated_power", (getter)MHKCosts_get_device_rated_power,(setter)MHKCosts_set_device_rated_power,
 	PyDoc_STR("*float*: Rated capacity of device [kW]\n\n*Constraints*: MIN=0\n\n*Required*: True"),
@@ -483,7 +498,7 @@ static PyGetSetDef MHKCosts_getset[] = {
 	PyDoc_STR("*float*: Engineering and management cost [$]\n\n*Required*: True"),
  	NULL},
 {"eng_and_mgmt_cost_method", (getter)MHKCosts_get_eng_and_mgmt_cost_method,(setter)MHKCosts_set_eng_and_mgmt_cost_method,
-	PyDoc_STR("*float*: Engineering and management cost method [0/1/2]\n\n*Options*: 0=Enter in $/kW,1=Enter in $,2=Use modeled value\n\n*Constraints*: MIN=0,MAX=2\n\n*Required*: True"),
+	PyDoc_STR("*float*: Engineering and management cost method [0/1/2]\n\n*Options*: 0=Enter in $/kW,1=Enter in $,2=Use modeled value,3=Enter in itemized costs\n\n*Constraints*: MIN=0,MAX=3\n\n*Required*: True"),
  	NULL},
 {"export_cable_length", (getter)MHKCosts_get_export_cable_length,(setter)MHKCosts_set_export_cable_length,
 	PyDoc_STR("*float*: Export cable length [m]\n\n*Constraints*: MIN=0\n\n*Required*: True"),
@@ -492,7 +507,7 @@ static PyGetSetDef MHKCosts_getset[] = {
 	PyDoc_STR("*float*: Export cable system cost [$]\n\n*Required*: True"),
  	NULL},
 {"export_cable_system_cost_method", (getter)MHKCosts_get_export_cable_system_cost_method,(setter)MHKCosts_set_export_cable_system_cost_method,
-	PyDoc_STR("*float*: Export cable system cost method [0/1/2]\n\n*Options*: 0=Enter in $/kW,1=Enter in $,2=Use modeled value\n\n*Constraints*: MIN=0,MAX=2\n\n*Required*: True"),
+	PyDoc_STR("*float*: Export cable system cost method [0/1/2]\n\n*Options*: 0=Enter in $/kW,1=Enter in $,2=Use modeled value\n\n*Constraints*: MIN=0,MAX=3\n\n*Required*: True"),
  	NULL},
 {"inter_array_cable_length", (getter)MHKCosts_get_inter_array_cable_length,(setter)MHKCosts_set_inter_array_cable_length,
 	PyDoc_STR("*float*: Inter-array cable length [m]\n\n*Constraints*: MIN=0\n\n*Required*: True"),
@@ -510,37 +525,37 @@ static PyGetSetDef MHKCosts_getset[] = {
 	PyDoc_STR("*float*: Mooring, foundation, and substructure cost [$]\n\n*Required*: True"),
  	NULL},
 {"mooring_found_substruc_cost_method", (getter)MHKCosts_get_mooring_found_substruc_cost_method,(setter)MHKCosts_set_mooring_found_substruc_cost_method,
-	PyDoc_STR("*float*: Mooring, foundation, and substructure cost method [0/1/2]\n\n*Options*: 0=Enter in $/kW,1=Enter in $,2=Use modeled value\n\n*Constraints*: MIN=0,MAX=2\n\n*Required*: True"),
+	PyDoc_STR("*float*: Mooring, foundation, and substructure cost method [0/1/2]\n\n*Options*: 0=Enter in $/kW,1=Enter in $,2=Use modeled value,3=Use itemized costs in $\n\n*Constraints*: MIN=0,MAX=3\n\n*Required*: True"),
  	NULL},
 {"offshore_substation_cost_input", (getter)MHKCosts_get_offshore_substation_cost_input,(setter)MHKCosts_set_offshore_substation_cost_input,
 	PyDoc_STR("*float*: Offshore substation cost [$]\n\n*Required*: True"),
  	NULL},
 {"offshore_substation_cost_method", (getter)MHKCosts_get_offshore_substation_cost_method,(setter)MHKCosts_set_offshore_substation_cost_method,
-	PyDoc_STR("*float*: Offshore substation cost method [0/1/2]\n\n*Options*: 0=Enter in $/kW,1=Enter in $,2=Use modeled value\n\n*Constraints*: MIN=0,MAX=2\n\n*Required*: True"),
+	PyDoc_STR("*float*: Offshore substation cost method [0/1/2]\n\n*Options*: 0=Enter in $/kW,1=Enter in $,2=Use modeled value\n\n*Constraints*: MIN=0,MAX=3\n\n*Required*: True"),
  	NULL},
 {"onshore_substation_cost_input", (getter)MHKCosts_get_onshore_substation_cost_input,(setter)MHKCosts_set_onshore_substation_cost_input,
 	PyDoc_STR("*float*: Onshore substation cost [$]\n\n*Required*: True"),
  	NULL},
 {"onshore_substation_cost_method", (getter)MHKCosts_get_onshore_substation_cost_method,(setter)MHKCosts_set_onshore_substation_cost_method,
-	PyDoc_STR("*float*: Onshore substation cost method [0/1/2]\n\n*Options*: 0=Enter in $/kW,1=Enter in $,2=Use modeled value\n\n*Constraints*: MIN=0,MAX=2\n\n*Required*: True"),
+	PyDoc_STR("*float*: Onshore substation cost method [0/1/2]\n\n*Options*: 0=Enter in $/kW,1=Enter in $,2=Use modeled value\n\n*Constraints*: MIN=0,MAX=3\n\n*Required*: True"),
  	NULL},
 {"other_elec_infra_cost_input", (getter)MHKCosts_get_other_elec_infra_cost_input,(setter)MHKCosts_set_other_elec_infra_cost_input,
 	PyDoc_STR("*float*: Other electrical infrastructure cost [$]\n\n*Required*: True"),
  	NULL},
 {"other_elec_infra_cost_method", (getter)MHKCosts_get_other_elec_infra_cost_method,(setter)MHKCosts_set_other_elec_infra_cost_method,
-	PyDoc_STR("*float*: Other electrical infrastructure cost method [0/1/2]\n\n*Options*: 0=Enter in $/kW,1=Enter in $,2=Use modeled value\n\n*Constraints*: MIN=0,MAX=2\n\n*Required*: True"),
+	PyDoc_STR("*float*: Other electrical infrastructure cost method [0/1/2]\n\n*Options*: 0=Enter in $/kW,1=Enter in $,2=Use modeled value\n\n*Constraints*: MIN=0,MAX=3\n\n*Required*: True"),
  	NULL},
 {"other_infrastructure_cost_input", (getter)MHKCosts_get_other_infrastructure_cost_input,(setter)MHKCosts_set_other_infrastructure_cost_input,
 	PyDoc_STR("*float*: Other infrastructure cost [$]\n\n*Required*: True"),
  	NULL},
 {"other_infrastructure_cost_method", (getter)MHKCosts_get_other_infrastructure_cost_method,(setter)MHKCosts_set_other_infrastructure_cost_method,
-	PyDoc_STR("*float*: Other infrastructure cost method [0/1/2]\n\n*Options*: 0=Enter in $/kW,1=Enter in $,2=Use modeled value\n\n*Constraints*: MIN=0,MAX=2\n\n*Required*: True"),
+	PyDoc_STR("*float*: Other infrastructure cost method [0/1/2]\n\n*Options*: 0=Enter in $/kW,1=Enter in $,2=Use modeled value\n\n*Constraints*: MIN=0,MAX=3\n\n*Required*: True"),
  	NULL},
 {"power_takeoff_system_cost_input", (getter)MHKCosts_get_power_takeoff_system_cost_input,(setter)MHKCosts_set_power_takeoff_system_cost_input,
 	PyDoc_STR("*float*: Power take-off system cost [$]\n\n*Required*: True"),
  	NULL},
 {"power_takeoff_system_cost_method", (getter)MHKCosts_get_power_takeoff_system_cost_method,(setter)MHKCosts_set_power_takeoff_system_cost_method,
-	PyDoc_STR("*float*: Power take-off system cost method [0/1/2]\n\n*Options*: 0=Enter in $/kW,1=Enter in $,2=Use modeled value\n\n*Constraints*: MIN=0,MAX=2\n\n*Required*: True"),
+	PyDoc_STR("*float*: Power take-off system cost method [0/1/2]\n\n*Options*: 0=Enter in $/kW,1=Enter in $,2=Use modeled value,3=Use itemized costs in $\n\n*Constraints*: MIN=0,MAX=3\n\n*Required*: True"),
  	NULL},
 {"riser_cable_length", (getter)MHKCosts_get_riser_cable_length,(setter)MHKCosts_set_riser_cable_length,
 	PyDoc_STR("*float*: Riser cable length [m]\n\n*Constraints*: MIN=0\n\n*Required*: True"),
@@ -549,7 +564,7 @@ static PyGetSetDef MHKCosts_getset[] = {
 	PyDoc_STR("*float*: Structural assembly cost [$]\n\n*Required*: True"),
  	NULL},
 {"structural_assembly_cost_method", (getter)MHKCosts_get_structural_assembly_cost_method,(setter)MHKCosts_set_structural_assembly_cost_method,
-	PyDoc_STR("*float*: Structural assembly cost method [0/1/2]\n\n*Options*: 0=Enter in $/kW,1=Enter in $,2=Use modeled value\n\n*Constraints*: MIN=0,MAX=2\n\n*Required*: True"),
+	PyDoc_STR("*float*: Structural assembly cost method [0/1/2]\n\n*Options*: 0=Enter in $/kW,1=Enter in $,2=Use modeled value,3=Use itemized costs in $\n\n*Constraints*: MIN=0,MAX=3\n\n*Required*: True"),
  	NULL},
 {"system_capacity", (getter)MHKCosts_get_system_capacity,(setter)MHKCosts_set_system_capacity,
 	PyDoc_STR("*float*: System Nameplate Capacity [kW]\n\n*Constraints*: MIN=0\n\n*Required*: True"),
@@ -770,6 +785,36 @@ Outputs_get_structural_assembly_cost_modeled(VarGroupObject *self, void *closure
 	return PySAM_double_getter(SAM_MhkCosts_Outputs_structural_assembly_cost_modeled_nget, self->data_ptr);
 }
 
+static PyObject *
+Outputs_get_total_bos_cost_per_kwh(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MhkCosts_Outputs_total_bos_cost_per_kwh_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_total_capital_cost_per_kwh(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MhkCosts_Outputs_total_capital_cost_per_kwh_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_total_device_cost_per_kwh(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MhkCosts_Outputs_total_device_cost_per_kwh_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_total_financial_cost_per_kwh(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MhkCosts_Outputs_total_financial_cost_per_kwh_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_total_operations_cost_per_kwh(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MhkCosts_Outputs_total_operations_cost_per_kwh_nget, self->data_ptr);
+}
+
 static PyGetSetDef Outputs_getset[] = {
 {"array_cable_system_cost_modeled", (getter)Outputs_get_array_cable_system_cost_modeled,(setter)0,
 	PyDoc_STR("*float*: Modeled array cable system cost [$]"),
@@ -827,6 +872,21 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"structural_assembly_cost_modeled", (getter)Outputs_get_structural_assembly_cost_modeled,(setter)0,
 	PyDoc_STR("*float*: Modeled structural assembly cost [$]"),
+ 	NULL},
+{"total_bos_cost_per_kwh", (getter)Outputs_get_total_bos_cost_per_kwh,(setter)0,
+	PyDoc_STR("*float*: Total bos costs per kWh [$/kWh]"),
+ 	NULL},
+{"total_capital_cost_per_kwh", (getter)Outputs_get_total_capital_cost_per_kwh,(setter)0,
+	PyDoc_STR("*float*: Total capital costs per kWh [$/kWh]"),
+ 	NULL},
+{"total_device_cost_per_kwh", (getter)Outputs_get_total_device_cost_per_kwh,(setter)0,
+	PyDoc_STR("*float*: Total device costs per kWh [$/kWh]"),
+ 	NULL},
+{"total_financial_cost_per_kwh", (getter)Outputs_get_total_financial_cost_per_kwh,(setter)0,
+	PyDoc_STR("*float*: Total financial costs per kWh [$/kWh]"),
+ 	NULL},
+{"total_operations_cost_per_kwh", (getter)Outputs_get_total_operations_cost_per_kwh,(setter)0,
+	PyDoc_STR("*float*: Total operations costs per kWh [$/kWh]"),
  	NULL},
 	{NULL}  /* Sentinel */
 };

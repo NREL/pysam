@@ -91,12 +91,6 @@ The following modules are used in the SAM GUI's technology-financial simulations
     * - :doc:`modules/Swh`
       -  Solar water heating
       -  Solar water heating model for residential and commercial building applications
-    * - :doc:`modules/TcsdirectSteam`
-      -  CSP power tower direct steam
-      -  CSP direct steam power tower model for power generation
-    * - :doc:`modules/Tcsdish`
-      -  CSP dish Stirling
-      -  CSP dish-Stirling model with parameters for SES and WGA-ADDS systems for power generation
     * - :doc:`modules/TcsgenericSolar`
       -  CSP generic model
       -  CSP power system model with solar field characterized using a table of optical efficiency values
@@ -215,6 +209,10 @@ These modules provide helper functions or are older versions of above modules.
       - Estimates the Detrimental Effects due to Snow Fall
     * - :doc:`modules/Solarpilot`
       - SolarPILOT - CSP tower solar field layout tool.
+    * - :doc:`modules/TcsdirectSteam`
+      -  CSP direct steam power tower model for power generation
+    * - :doc:`modules/Tcsdish`
+      -  CSP dish-Stirling model with parameters for SES and WGA-ADDS systems for power generation
     * - :doc:`modules/TcstroughPhysical`
       - CSP model using the emperical trough TCS types.
     * - :doc:`modules/Timeseq`

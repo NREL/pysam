@@ -8166,12 +8166,6 @@ Outputs_get_npv_uti_pbi_income(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_ppa_gen(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Merchantplant_Outputs_ppa_gen_aget, self->data_ptr);
-}
-
-static PyObject *
 Outputs_get_present_value_fuel(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Merchantplant_Outputs_present_value_fuel_nget, self->data_ptr);
@@ -8223,6 +8217,12 @@ static PyObject *
 Outputs_get_pv_cafds(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Merchantplant_Outputs_pv_cafds_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_revenue_gen(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Merchantplant_Outputs_revenue_gen_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -9654,9 +9654,6 @@ static PyGetSetDef Outputs_getset[] = {
 {"npv_uti_pbi_income", (getter)Outputs_get_npv_uti_pbi_income,(setter)0,
 	PyDoc_STR("*float*: Present value of utility PBI income [$]"),
  	NULL},
-{"ppa_gen", (getter)Outputs_get_ppa_gen,(setter)0,
-	PyDoc_STR("*sequence*: Electricity used to calculate PPA revenue [kW]"),
- 	NULL},
 {"present_value_fuel", (getter)Outputs_get_present_value_fuel,(setter)0,
 	PyDoc_STR("*float*: Present value of fuel O&M [$]"),
  	NULL},
@@ -9683,6 +9680,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"pv_cafds", (getter)Outputs_get_pv_cafds,(setter)0,
 	PyDoc_STR("*float*: Present value of CAFDS [$]"),
+ 	NULL},
+{"revenue_gen", (getter)Outputs_get_revenue_gen,(setter)0,
+	PyDoc_STR("*sequence*: Electricity used to calculate PPA revenue [kW]"),
  	NULL},
 {"salvage_value", (getter)Outputs_get_salvage_value,(setter)0,
 	PyDoc_STR("*float*: Net pre-tax cash salvage value [$]"),
@@ -10044,7 +10044,7 @@ static PyMethodDef MerchantplantModule_methods[] = {
 				PyDoc_STR("new() -> Merchantplant")},
 		{"default",             Merchantplant_default,         METH_VARARGS,
 				PyDoc_STR("default(config) -> Merchantplant\n\nUse default attributes\n"
-				"`config` options:\n\n- \"BiopowerMerchantPlant\"\n- \"DSLFMerchantPlant\"\n- \"DSPTMerchantPlant\"\n- \"DishStirlingMerchantPlant\"\n- \"EmpiricalTroughMerchantPlant\"\n- \"FlatPlatePVMerchantPlant\"\n- \"GenericBatteryMerchantPlant\"\n- \"GenericCSPSystemMerchantPlant\"\n- \"GenericSystemMerchantPlant\"\n- \"GeothermalPowerMerchantPlant\"\n- \"HighXConcentratingPVMerchantPlant\"\n- \"MSLFMerchantPlant\"\n- \"MSPTMerchantPlant\"\n- \"PVBatteryMerchantPlant\"\n- \"PVWattsMerchantPlant\"\n- \"PhysicalTroughMerchantPlant\"\n- \"WindPowerMerchantPlant\"")},
+				"`config` options:\n\n- \"BiopowerMerchantPlant\"\n- \"DSLFMerchantPlant\"\n- \"EmpiricalTroughMerchantPlant\"\n- \"FlatPlatePVMerchantPlant\"\n- \"GenericBatteryMerchantPlant\"\n- \"GenericCSPSystemMerchantPlant\"\n- \"GenericSystemMerchantPlant\"\n- \"GeothermalPowerMerchantPlant\"\n- \"HighXConcentratingPVMerchantPlant\"\n- \"MSLFMerchantPlant\"\n- \"MSPTMerchantPlant\"\n- \"PVBatteryMerchantPlant\"\n- \"PVWattsMerchantPlant\"\n- \"PhysicalTroughMerchantPlant\"\n- \"WindPowerMerchantPlant\"")},
 		{"wrap",             Merchantplant_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Merchantplant\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   Merchantplant_from_existing,        METH_VARARGS,

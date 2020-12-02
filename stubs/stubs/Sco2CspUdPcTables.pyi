@@ -38,6 +38,8 @@ class HeatExchangerDesign(object):
 	HTR_design_code = float
 	HTR_eff_des_in = float
 	HTR_min_dT_des_in = float
+	HTR_n_sub_hx = float
+	HTR_od_model = float
 	HT_recup_eff_max = float
 	LTR_HP_deltaP_des_in = float
 	LTR_LP_deltaP_des_in = float
@@ -45,6 +47,8 @@ class HeatExchangerDesign(object):
 	LTR_design_code = float
 	LTR_eff_des_in = float
 	LTR_min_dT_des_in = float
+	LTR_n_sub_hx = float
+	LTR_od_model = float
 	LT_recup_eff_max = float
 	UA_recup_tot_des = float
 	cycle_config = float
@@ -57,7 +61,7 @@ class HeatExchangerDesign(object):
 	rel_tol = float
 
 
-class CycleDesign(object):
+class Common(object):
 	def assign(self): 
 		pass
 
@@ -70,11 +74,23 @@ class CycleDesign(object):
 
 	PHX_co2_deltaP_des_in = float
 	P_high_limit = float
+	T_amb_high = float
+	T_amb_low = float
+	T_htf_hot_high = float
+	T_htf_hot_low = float
 	deltaP_counterHX_frac = float
 	eta_isen_mc = float
 	eta_isen_pc = float
 	eta_isen_rc = float
 	eta_isen_t = float
+	is_apply_default_htf_mins = float
+	is_generate_udpc = float
+	m_dot_htf_ND_high = float
+	m_dot_htf_ND_low = float
+	mc_comp_type = float
+	n_T_amb = float
+	n_T_htf_hot = float
+	n_m_dot_htf_ND = float
 
 
 class PHXDesign(object):
@@ -88,6 +104,8 @@ class PHXDesign(object):
 		pass
 
 
+	PHX_n_sub_hx = float
+	PHX_od_model = float
 	dT_PHX_cold_approach = float
 
 
@@ -102,33 +120,11 @@ class AirCoolerDesign(object):
 		pass
 
 
+	N_nodes_air_cooler_pass = float
 	deltaP_cooler_frac = float
+	eta_air_cooler_fan = float
 	fan_power_frac = float
 	is_design_air_cooler = float
-
-
-class Common(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> Dict[Dict]:
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	T_amb_high = float
-	T_amb_low = float
-	T_htf_hot_high = float
-	T_htf_hot_low = float
-	is_apply_default_htf_mins = float
-	is_generate_udpc = float
-	m_dot_htf_ND_high = float
-	m_dot_htf_ND_low = float
-	n_T_amb = float
-	n_T_htf_hot = float
-	n_m_dot_htf_ND = float
 
 
 class Outputs(object):
@@ -150,23 +146,6 @@ class Outputs(object):
 	HTR_UA_calculated = float
 	HTR_cost = float
 	HTR_min_dT = float
-	IP_cooler_P_in = float
-	IP_cooler_T_in = float
-	IP_cooler_UA = float
-	IP_cooler_W_dot_fan = float
-	IP_cooler_cost = float
-	IP_cooler_m_dot_co2 = float
-	IP_cooler_q_dot = float
-	LP_cooler_P_in = float
-	LP_cooler_T_in = float
-	LP_cooler_UA = float
-	LP_cooler_W_dot_fan = float
-	LP_cooler_co2_deltaP_des = float
-	LP_cooler_cost = float
-	LP_cooler_in_isen_deltah_to_P_mc_out = float
-	LP_cooler_m_dot_co2 = float
-	LP_cooler_q_dot = float
-	LP_cooler_rho_in = float
 	LTR_HP_T_out_des = float
 	LTR_HP_deltaP_des = float
 	LTR_LP_deltaP_des = float
@@ -202,6 +181,7 @@ class Outputs(object):
 	T_state_points = tuple
 	T_turb_in = float
 	UA_PHX = float
+	W_dot_net_less_cooling = float
 	c_tot_W_dot = float
 	c_tot_cost = float
 	cooler_tot_UA = float
@@ -215,6 +195,7 @@ class Outputs(object):
 	eff_LTR = float
 	eff_PHX = float
 	eta_thermal_calc = float
+	eta_thermal_net_less_cooling_des = float
 	h_mc_data = tuple
 	h_pc_data = tuple
 	h_rc_data = tuple
@@ -227,6 +208,16 @@ class Outputs(object):
 	mc_N_des = float
 	mc_T_out = float
 	mc_W_dot = float
+	mc_cooler_P_in = float
+	mc_cooler_T_in = float
+	mc_cooler_UA = float
+	mc_cooler_W_dot_fan = float
+	mc_cooler_co2_deltaP_des = float
+	mc_cooler_cost = float
+	mc_cooler_in_isen_deltah_to_P_mc_out = float
+	mc_cooler_m_dot_co2 = float
+	mc_cooler_q_dot = float
+	mc_cooler_rho_in = float
 	mc_cost = float
 	mc_eta_stages_des = tuple
 	mc_ideal_spec_work = float
@@ -243,6 +234,13 @@ class Outputs(object):
 	pc_P_in_des = float
 	pc_T_in_des = float
 	pc_W_dot = float
+	pc_cooler_P_in = float
+	pc_cooler_T_in = float
+	pc_cooler_UA = float
+	pc_cooler_W_dot_fan = float
+	pc_cooler_cost = float
+	pc_cooler_m_dot_co2 = float
+	pc_cooler_q_dot = float
 	pc_cost = float
 	pc_eta_stages_des = tuple
 	pc_ideal_spec_work_des = float
@@ -291,8 +289,10 @@ class Outputs(object):
 	t_T_out_des = float
 	t_W_dot = float
 	t_cost = float
+	t_delta_h_isen_des = float
 	t_m_dot_des = float
 	t_nu_des = float
+	t_rho_in_des = float
 	t_tip_ratio_des = float
 
 
@@ -317,10 +317,9 @@ class Sco2CspUdPcTables(object):
 
 	SystemDesign = SystemDesign
 	HeatExchangerDesign = HeatExchangerDesign
-	CycleDesign = CycleDesign
+	Common = Common
 	PHXDesign = PHXDesign
 	AirCoolerDesign = AirCoolerDesign
-	Common = Common
 	Outputs = Outputs
 
 

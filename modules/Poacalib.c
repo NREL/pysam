@@ -119,18 +119,6 @@ POACalibrate_set_diffuse(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyObject *
-POACalibrate_get_dry_temperature(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Poacalib_POACalibrate_dry_temperature_nget, self->data_ptr);
-}
-
-static int
-POACalibrate_set_dry_temperature(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Poacalib_POACalibrate_dry_temperature_nset, self->data_ptr);
-}
-
-static PyObject *
 POACalibrate_get_elevation(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Poacalib_POACalibrate_elevation_nget, self->data_ptr);
@@ -191,6 +179,18 @@ POACalibrate_set_pressure(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyObject *
+POACalibrate_get_tamb(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Poacalib_POACalibrate_tamb_nget, self->data_ptr);
+}
+
+static int
+POACalibrate_set_tamb(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Poacalib_POACalibrate_tamb_nset, self->data_ptr);
+}
+
+static PyObject *
 POACalibrate_get_time_zone(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Poacalib_POACalibrate_time_zone_nget, self->data_ptr);
@@ -230,9 +230,6 @@ static PyGetSetDef POACalibrate_getset[] = {
 {"diffuse", (getter)POACalibrate_get_diffuse,(setter)POACalibrate_set_diffuse,
 	PyDoc_STR("*sequence*: Diffuse Irradiation [W/m^2]\n\n*Constraints*: LENGTH=8760\n\n*Required*: True"),
  	NULL},
-{"dry_temperature", (getter)POACalibrate_get_dry_temperature,(setter)POACalibrate_set_dry_temperature,
-	PyDoc_STR("*float*: Dry Temperature [°C]\n\n*Required*: False"),
- 	NULL},
 {"elevation", (getter)POACalibrate_get_elevation,(setter)POACalibrate_set_elevation,
 	PyDoc_STR("*float*: Elevation [m]\n\n*Required*: False"),
  	NULL},
@@ -247,6 +244,9 @@ static PyGetSetDef POACalibrate_getset[] = {
  	NULL},
 {"pressure", (getter)POACalibrate_get_pressure,(setter)POACalibrate_set_pressure,
 	PyDoc_STR("*float*: Pressure [millibars]\n\n*Required*: False"),
+ 	NULL},
+{"tamb", (getter)POACalibrate_get_tamb,(setter)POACalibrate_set_tamb,
+	PyDoc_STR("*float*: Ambient Temperature (dry bulb temperature) [°C]\n\n*Required*: False"),
  	NULL},
 {"time_zone", (getter)POACalibrate_get_time_zone,(setter)POACalibrate_set_time_zone,
 	PyDoc_STR("*float*: Time Zone\n\n*Options*: -7= Denver\n\n*Constraints*: MIN=-12,MAX=12\n\n*Required*: True"),

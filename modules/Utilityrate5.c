@@ -387,13 +387,13 @@ static PyGetSetDef ElectricityRates_getset[] = {
 	PyDoc_STR("*float*: Monthly minimum charge [$]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
 {"ur_nm_credit_month", (getter)ElectricityRates_get_ur_nm_credit_month,(setter)ElectricityRates_set_ur_nm_credit_month,
-	PyDoc_STR("*float*: Month of rollover credits [$/kWh]\n\n*Constraints*: INTEGER,MIN=0,MAX=11\n\n*Required*: If not provided, assumed to be 11"),
+	PyDoc_STR("*float*: Month of year end payout (true-up) [mn]\n\n*Constraints*: INTEGER,MIN=0,MAX=11\n\n*Required*: If not provided, assumed to be 11"),
  	NULL},
 {"ur_nm_credit_rollover", (getter)ElectricityRates_get_ur_nm_credit_rollover,(setter)ElectricityRates_set_ur_nm_credit_rollover,
-	PyDoc_STR("*float*: Roll over credits to next year [0/1]\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Apply net metering true-up credits to future bills [0/1]\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"ur_nm_yearend_sell_rate", (getter)ElectricityRates_get_ur_nm_yearend_sell_rate,(setter)ElectricityRates_set_ur_nm_yearend_sell_rate,
-	PyDoc_STR("*float*: Net metering credit sell rate [$/kWh]\n\n*Required*: If not provided, assumed to be 0.0"),
+	PyDoc_STR("*float*: Net metering true-up credit sell rate [$/kWh]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
 {"ur_sell_eq_buy", (getter)ElectricityRates_get_ur_sell_eq_buy,(setter)ElectricityRates_set_ur_sell_eq_buy,
 	PyDoc_STR("*float*: Set sell rate equal to buy rate [0/1]\n\n*Info*: Optional override\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
@@ -1377,24 +1377,6 @@ Outputs_get_energy_wo_sys_ec_sep_tp(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_excess_dollars_applied_ym(VarGroupObject *self, void *closure)
-{
-	return PySAM_matrix_getter(SAM_Utilityrate5_Outputs_excess_dollars_applied_ym_mget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_excess_dollars_earned_ym(VarGroupObject *self, void *closure)
-{
-	return PySAM_matrix_getter(SAM_Utilityrate5_Outputs_excess_dollars_earned_ym_mget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_excess_kwhs_applied_ym(VarGroupObject *self, void *closure)
-{
-	return PySAM_matrix_getter(SAM_Utilityrate5_Outputs_excess_kwhs_applied_ym_mget, self->data_ptr);
-}
-
-static PyObject *
 Outputs_get_excess_kwhs_earned_ym(VarGroupObject *self, void *closure)
 {
 	return PySAM_matrix_getter(SAM_Utilityrate5_Outputs_excess_kwhs_earned_ym_mget, self->data_ptr);
@@ -1428,6 +1410,18 @@ static PyObject *
 Outputs_get_monthly_tou_demand_peak_wo_sys(VarGroupObject *self, void *closure)
 {
 	return PySAM_matrix_getter(SAM_Utilityrate5_Outputs_monthly_tou_demand_peak_wo_sys_mget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_net_billing_credits_ym(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Utilityrate5_Outputs_net_billing_credits_ym_mget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_nm_dollars_applied_ym(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Utilityrate5_Outputs_nm_dollars_applied_ym_mget, self->data_ptr);
 }
 
 static PyObject *
@@ -1539,24 +1533,6 @@ Outputs_get_year1_electric_load(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_year1_excess_dollars_applied(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Utilityrate5_Outputs_year1_excess_dollars_applied_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_year1_excess_dollars_earned(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Utilityrate5_Outputs_year1_excess_dollars_earned_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_year1_excess_kwhs_applied(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Utilityrate5_Outputs_year1_excess_kwhs_applied_aget, self->data_ptr);
-}
-
-static PyObject *
 Outputs_get_year1_excess_kwhs_earned(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Utilityrate5_Outputs_year1_excess_kwhs_earned_aget, self->data_ptr);
@@ -1650,12 +1626,6 @@ static PyObject *
 Outputs_get_year1_hourly_system_to_load(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Utilityrate5_Outputs_year1_hourly_system_to_load_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_year1_monthly_cumulative_excess_dollars(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Utilityrate5_Outputs_year1_monthly_cumulative_excess_dollars_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -1776,6 +1746,18 @@ static PyObject *
 Outputs_get_year1_monthly_utility_bill_wo_sys(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Utilityrate5_Outputs_year1_monthly_utility_bill_wo_sys_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_year1_net_billing_credits(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Utilityrate5_Outputs_year1_net_billing_credits_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_year1_nm_dollars_applied(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Utilityrate5_Outputs_year1_nm_dollars_applied_aget, self->data_ptr);
 }
 
 static PyGetSetDef Outputs_getset[] = {
@@ -2007,17 +1989,8 @@ static PyGetSetDef Outputs_getset[] = {
 {"energy_wo_sys_ec_sep_tp", (getter)Outputs_get_energy_wo_sys_ec_sep_tp,(setter)0,
 	PyDoc_STR("*sequence[sequence]*: Electricity usage without system Sep [kWh]"),
  	NULL},
-{"excess_dollars_applied_ym", (getter)Outputs_get_excess_dollars_applied_ym,(setter)0,
-	PyDoc_STR("*sequence[sequence]*: Excess generation $ credit applied [$]"),
- 	NULL},
-{"excess_dollars_earned_ym", (getter)Outputs_get_excess_dollars_earned_ym,(setter)0,
-	PyDoc_STR("*sequence[sequence]*: Excess generation $ credit earned [$]"),
- 	NULL},
-{"excess_kwhs_applied_ym", (getter)Outputs_get_excess_kwhs_applied_ym,(setter)0,
-	PyDoc_STR("*sequence[sequence]*: Excess generation kWh credit applied [kWh]"),
- 	NULL},
 {"excess_kwhs_earned_ym", (getter)Outputs_get_excess_kwhs_earned_ym,(setter)0,
-	PyDoc_STR("*sequence[sequence]*: Excess generation kWh credit earned [kWh]"),
+	PyDoc_STR("*sequence[sequence]*: Excess generation [kWh]"),
  	NULL},
 {"lifetime_load", (getter)Outputs_get_lifetime_load,(setter)0,
 	PyDoc_STR("*sequence*: Lifetime electricity load [kW]"),
@@ -2033,6 +2006,12 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"monthly_tou_demand_peak_wo_sys", (getter)Outputs_get_monthly_tou_demand_peak_wo_sys,(setter)0,
 	PyDoc_STR("*sequence[sequence]*: Demand peak without system [kW]"),
+ 	NULL},
+{"net_billing_credits_ym", (getter)Outputs_get_net_billing_credits_ym,(setter)0,
+	PyDoc_STR("*sequence[sequence]*: Net billing credit [$]"),
+ 	NULL},
+{"nm_dollars_applied_ym", (getter)Outputs_get_nm_dollars_applied_ym,(setter)0,
+	PyDoc_STR("*sequence[sequence]*: Net metering credit [$]"),
  	NULL},
 {"savings_year1", (getter)Outputs_get_savings_year1,(setter)0,
 	PyDoc_STR("*float*: Electricity bill savings with system (year 1) [$/yr]"),
@@ -2088,17 +2067,8 @@ static PyGetSetDef Outputs_getset[] = {
 {"year1_electric_load", (getter)Outputs_get_year1_electric_load,(setter)0,
 	PyDoc_STR("*float*: Electricity load total (year 1) [kWh/yr]"),
  	NULL},
-{"year1_excess_dollars_applied", (getter)Outputs_get_year1_excess_dollars_applied,(setter)0,
-	PyDoc_STR("*sequence*: Excess generation $ credit applied [$/mo]"),
- 	NULL},
-{"year1_excess_dollars_earned", (getter)Outputs_get_year1_excess_dollars_earned,(setter)0,
-	PyDoc_STR("*sequence*: Excess generation $ credit earned [$/mo]"),
- 	NULL},
-{"year1_excess_kwhs_applied", (getter)Outputs_get_year1_excess_kwhs_applied,(setter)0,
-	PyDoc_STR("*sequence*: Excess generation kWh credit applied [kWh/mo]"),
- 	NULL},
 {"year1_excess_kwhs_earned", (getter)Outputs_get_year1_excess_kwhs_earned,(setter)0,
-	PyDoc_STR("*sequence*: Excess generation kWh credit earned [kWh/mo]"),
+	PyDoc_STR("*sequence*: Excess generation [kWh/mo]"),
  	NULL},
 {"year1_hourly_dc_peak_per_period", (getter)Outputs_get_year1_hourly_dc_peak_per_period,(setter)0,
 	PyDoc_STR("*sequence*: Electricity peak from grid per TOU period (year 1 hourly) [kW]"),
@@ -2145,11 +2115,8 @@ static PyGetSetDef Outputs_getset[] = {
 {"year1_hourly_system_to_load", (getter)Outputs_get_year1_hourly_system_to_load,(setter)0,
 	PyDoc_STR("*sequence*: Electricity from system to load (year 1 hourly) [kWh]"),
  	NULL},
-{"year1_monthly_cumulative_excess_dollars", (getter)Outputs_get_year1_monthly_cumulative_excess_dollars,(setter)0,
-	PyDoc_STR("*sequence*: Excess generation cumulative $ credit earned [$/mo]"),
- 	NULL},
 {"year1_monthly_cumulative_excess_generation", (getter)Outputs_get_year1_monthly_cumulative_excess_generation,(setter)0,
-	PyDoc_STR("*sequence*: Excess generation cumulative kWh credit earned [kWh/mo]"),
+	PyDoc_STR("*sequence*: Net metering cumulative credit for annual true-up [kWh/mo]"),
  	NULL},
 {"year1_monthly_dc_fixed_with_system", (getter)Outputs_get_year1_monthly_dc_fixed_with_system,(setter)0,
 	PyDoc_STR("*sequence*: Demand charge (flat) with system [$/mo]"),
@@ -2207,6 +2174,12 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"year1_monthly_utility_bill_wo_sys", (getter)Outputs_get_year1_monthly_utility_bill_wo_sys,(setter)0,
 	PyDoc_STR("*sequence*: Electricity bill without system [$/mo]"),
+ 	NULL},
+{"year1_net_billing_credits", (getter)Outputs_get_year1_net_billing_credits,(setter)0,
+	PyDoc_STR("*sequence*: Net billing credit [$/mo]"),
+ 	NULL},
+{"year1_nm_dollars_applied", (getter)Outputs_get_year1_nm_dollars_applied,(setter)0,
+	PyDoc_STR("*sequence*: Net metering credit [$/mo]"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -2520,7 +2493,7 @@ static PyMethodDef Utilityrate5Module_methods[] = {
 				PyDoc_STR("new() -> Utilityrate5")},
 		{"default",             Utilityrate5_default,         METH_VARARGS,
 				PyDoc_STR("default(config) -> Utilityrate5\n\nUse default attributes\n"
-				"`config` options:\n\n- \"DSLFCommercial\"\n- \"DishStirlingCommercial\"\n- \"EmpiricalTroughCommercial\"\n- \"FlatPlatePVCommercial\"\n- \"FlatPlatePVHostDeveloper\"\n- \"FlatPlatePVResidential\"\n- \"FlatPlatePVThirdParty\"\n- \"FuelCellCommercial\"\n- \"FuelCellSingleOwner\"\n- \"GenericBatteryCommercial\"\n- \"GenericBatteryHostDeveloper\"\n- \"GenericBatteryResidential\"\n- \"GenericBatterySingleOwner\"\n- \"GenericBatteryThirdParty\"\n- \"GenericCSPSystemCommercial\"\n- \"GenericSystemCommercial\"\n- \"GenericSystemHostDeveloper\"\n- \"GenericSystemResidential\"\n- \"GenericSystemThirdParty\"\n- \"MSLFCommercial\"\n- \"PVBatteryCommercial\"\n- \"PVBatteryHostDeveloper\"\n- \"PVBatteryResidential\"\n- \"PVBatterySingleOwner\"\n- \"PVBatteryThirdParty\"\n- \"PVWattsBatteryCommercial\"\n- \"PVWattsBatteryHostDeveloper\"\n- \"PVWattsBatteryResidential\"\n- \"PVWattsBatteryThirdParty\"\n- \"PVWattsCommercial\"\n- \"PVWattsHostDeveloper\"\n- \"PVWattsResidential\"\n- \"PVWattsThirdParty\"\n- \"PhysicalTroughCommercial\"\n- \"SolarWaterHeatingCommercial\"\n- \"SolarWaterHeatingResidential\"\n- \"WindPowerCommercial\"\n- \"WindPowerResidential\"")},
+				"`config` options:\n\n- \"DSLFCommercial\"\n- \"EmpiricalTroughCommercial\"\n- \"FlatPlatePVCommercial\"\n- \"FlatPlatePVHostDeveloper\"\n- \"FlatPlatePVResidential\"\n- \"FlatPlatePVThirdParty\"\n- \"FuelCellCommercial\"\n- \"FuelCellSingleOwner\"\n- \"GenericBatteryCommercial\"\n- \"GenericBatteryHostDeveloper\"\n- \"GenericBatteryResidential\"\n- \"GenericBatterySingleOwner\"\n- \"GenericBatteryThirdParty\"\n- \"GenericCSPSystemCommercial\"\n- \"GenericSystemCommercial\"\n- \"GenericSystemHostDeveloper\"\n- \"GenericSystemResidential\"\n- \"GenericSystemThirdParty\"\n- \"MSLFCommercial\"\n- \"PVBatteryCommercial\"\n- \"PVBatteryHostDeveloper\"\n- \"PVBatteryResidential\"\n- \"PVBatterySingleOwner\"\n- \"PVBatteryThirdParty\"\n- \"PVWattsBatteryCommercial\"\n- \"PVWattsBatteryHostDeveloper\"\n- \"PVWattsBatteryResidential\"\n- \"PVWattsBatteryThirdParty\"\n- \"PVWattsCommercial\"\n- \"PVWattsHostDeveloper\"\n- \"PVWattsResidential\"\n- \"PVWattsThirdParty\"\n- \"PhysicalTroughCommercial\"\n- \"SolarWaterHeatingCommercial\"\n- \"SolarWaterHeatingResidential\"\n- \"WindPowerCommercial\"\n- \"WindPowerResidential\"")},
 		{"wrap",             Utilityrate5_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Utilityrate5\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   Utilityrate5_from_existing,        METH_VARARGS,

@@ -16,7 +16,6 @@ class IrradianceProcessor(object):
 	beam = tuple
 	day = tuple
 	diffuse = tuple
-	dry_temperature = float
 	elevation = float
 	gcr = float
 	global = tuple
@@ -29,6 +28,7 @@ class IrradianceProcessor(object):
 	pressure = float
 	rotlim = float
 	sky_model = float
+	tamb = float
 	tilt = float
 	track_mode = float
 	tz = float

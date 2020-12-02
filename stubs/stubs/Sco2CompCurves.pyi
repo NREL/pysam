@@ -1,4 +1,4 @@
-class POACalibrate(object):
+class Common(object):
 	def assign(self): 
 		pass
 
@@ -9,19 +9,9 @@ class POACalibrate(object):
 		pass
 
 
-	albedo = float
-	array_az = float
-	array_tilt = float
-	beam = tuple
-	diffuse = tuple
-	elevation = float
-	latitude = float
-	longitude = float
-	poa = tuple
-	pressure = float
-	tamb = float
-	time_zone = float
-	year = float
+	P_comp_in = float
+	T_comp_in = float
+	comp_type = float
 
 
 class Outputs(object):
@@ -35,10 +25,18 @@ class Outputs(object):
 		pass
 
 
-	pcalc = tuple
+	eta = tuple
+	eta_ND = tuple
+	eta_norm_design = float
+	phi = tuple
+	phi_ND = tuple
+	phi_design = float
+	psi = tuple
+	psi_ND = tuple
+	psi_design = float
 
 
-class Poacalib(object):
+class Sco2CompCurves(object):
 	def assign(self, dict):
 		pass
 
@@ -57,20 +55,20 @@ class Poacalib(object):
 	def __init__(self, *args, **kwargs):
 		pass
 
-	POACalibrate = POACalibrate
+	Common = Common
 	Outputs = Outputs
 
 
-def default(config) -> Poacalib:
+def default(config) -> Sco2CompCurves:
 	pass
 
-def new() -> Poacalib:
+def new() -> Sco2CompCurves:
 	pass
 
-def wrap(ssc_data_t) -> Poacalib:
+def wrap(ssc_data_t) -> Sco2CompCurves:
 	pass
 
-def from_existing(model, config="") -> Poacalib:
+def from_existing(model, config="") -> Sco2CompCurves:
 	pass
 
 __loader__ = None 

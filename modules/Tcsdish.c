@@ -190,7 +190,7 @@ Dish_set_system_capacity(VarGroupObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef Dish_getset[] = {
 {"system_capacity", (getter)Dish_get_system_capacity,(setter)Dish_set_system_capacity,
-	PyDoc_STR("*float*: Nameplate capacity [kW]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - n_ew\n\t - n_ns\n"),
+	PyDoc_STR("*float*: Nameplate capacity [kW]\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -521,10 +521,10 @@ static PyGetSetDef Type295_getset[] = {
 	PyDoc_STR("*float*: Slot gap height [m]\n\n*Required*: True"),
  	NULL},
 {"n_ew", (getter)Type295_get_n_ew,(setter)Type295_set_n_ew,
-	PyDoc_STR("*float*: Number of collectors East-West [-]\n\n*Constraints*: INTEGER\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Number of collectors East-West [-]\n\n*Constraints*: INTEGER\n\n*Required*: True"),
  	NULL},
 {"n_ns", (getter)Type295_get_n_ns,(setter)Type295_set_n_ns,
-	PyDoc_STR("*float*: Number of collectors North-South [-]\n\n*Constraints*: INTEGER\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Number of collectors North-South [-]\n\n*Constraints*: INTEGER\n\n*Required*: True"),
  	NULL},
 {"ns_dish_sep", (getter)Type295_get_ns_dish_sep,(setter)Type295_set_ns_dish_sep,
 	PyDoc_STR("*float*: Collector separation North-South [m]\n\n*Required*: True"),
@@ -2728,7 +2728,7 @@ static PyMethodDef TcsdishModule_methods[] = {
 				PyDoc_STR("new() -> Tcsdish")},
 		{"default",             Tcsdish_default,         METH_VARARGS,
 				PyDoc_STR("default(config) -> Tcsdish\n\nUse default attributes\n"
-				"`config` options:\n\n- \"DishStirlingAllEquityPartnershipFlip\"\n- \"DishStirlingCommercial\"\n- \"DishStirlingLCOECalculator\"\n- \"DishStirlingLeveragedPartnershipFlip\"\n- \"DishStirlingMerchantPlant\"\n- \"DishStirlingNone\"\n- \"DishStirlingSaleLeaseback\"\n- \"DishStirlingSingleOwner\"")},
+				"None")},
 		{"wrap",             Tcsdish_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Tcsdish\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   Tcsdish_from_existing,        METH_VARARGS,

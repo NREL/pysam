@@ -14,7 +14,6 @@ class PVWatts(object):
 	day = float
 	derate = float
 	diffuse = float
-	dry_temperature = float
 	elevation = float
 	fd = float
 	gamma = float

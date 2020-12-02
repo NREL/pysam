@@ -339,7 +339,6 @@ class BatterySystem(object):
 	batt_replacement_schedule_percent = tuple
 	battery_per_kWh = float
 	en_batt = float
-	grid_to_batt = tuple
 
 
 class ElectricityRates(object):
@@ -370,6 +369,7 @@ class SystemOutput(object):
 	annual_energy_pre_curtailment_ac = float
 	degradation = tuple
 	gen = tuple
+	gen_without_battery = tuple
 	system_capacity = float
 	system_pre_curtailment_kwac = tuple
 
@@ -527,7 +527,12 @@ class Outputs(object):
 	cf_energy_net_nov = tuple
 	cf_energy_net_oct = tuple
 	cf_energy_net_sep = tuple
+	cf_energy_purchases = tuple
+	cf_energy_purchases_value = tuple
+	cf_energy_sales = tuple
+	cf_energy_sales_value = tuple
 	cf_energy_value = tuple
+	cf_energy_without_battery = tuple
 	cf_feddepr_custom = tuple
 	cf_feddepr_macrs_15 = tuple
 	cf_feddepr_macrs_5 = tuple
@@ -909,6 +914,7 @@ class Outputs(object):
 	flip_actual_year = float
 	flip_target_irr = float
 	flip_target_year = float
+	gen_purchases = tuple
 	ibi_fedtax_total = float
 	ibi_statax_total = float
 	ibi_total = float
@@ -1002,7 +1008,6 @@ class Outputs(object):
 	npv_uti_pbi_income = float
 	ppa = float
 	ppa_escalation = float
-	ppa_gen = tuple
 	ppa_multipliers = tuple
 	ppa_price = float
 	present_value_fuel = float
@@ -1014,6 +1019,7 @@ class Outputs(object):
 	prop_tax_assessed_value = float
 	purchase_of_property = float
 	pv_cafds = float
+	revenue_gen = tuple
 	salvage_value = float
 	size_of_debt = float
 	size_of_equity = float

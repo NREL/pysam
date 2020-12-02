@@ -304,6 +304,7 @@ class CECPerformanceModelWithModuleDatabase(object):
 	cec_standoff = float
 	cec_t_noct = float
 	cec_temp_corr_mode = float
+	cec_transient_thermal_model_unit_mass = float
 	cec_v_mp_ref = float
 	cec_v_oc_ref = float
 
@@ -334,6 +335,7 @@ class CECPerformanceModelWithUserEnteredSpecifications(object):
 	6par_nser = float
 	6par_standoff = float
 	6par_tnoct = float
+	6par_transient_thermal_model_unit_mass = float
 	6par_vmp = float
 	6par_voc = float
 
@@ -389,6 +391,7 @@ class SandiaPVArrayPerformanceModelWithModuleDatabase(object):
 	snl_ref_b = float
 	snl_ref_dT = float
 	snl_series_cells = float
+	snl_transient_thermal_model_unit_mass = float
 	snl_vmpo = float
 	snl_voco = float
 
@@ -925,7 +928,6 @@ class Outputs(object):
 	annual_ac_inv_eff_loss_percent = float
 	annual_ac_inv_pnt_loss_percent = float
 	annual_ac_inv_pso_loss_percent = float
-	annual_ac_inv_tdc_loss_percent = float
 	annual_ac_lifetime_loss_percent = float
 	annual_ac_loss_ond = float
 	annual_ac_perf_adj_loss_percent = float
@@ -935,6 +937,7 @@ class Outputs(object):
 	annual_dc_diodes_loss = float
 	annual_dc_diodes_loss_percent = float
 	annual_dc_gross = float
+	annual_dc_inv_tdc_loss_percent = float
 	annual_dc_invmppt_loss = float
 	annual_dc_lifetime_loss_percent = float
 	annual_dc_loss_ond = float
@@ -1012,7 +1015,7 @@ class Outputs(object):
 	batt_SOC = tuple
 	batt_annual_charge_energy = tuple
 	batt_annual_charge_from_grid = tuple
-	batt_annual_charge_from_pv = tuple
+	batt_annual_charge_from_system = tuple
 	batt_annual_discharge_energy = tuple
 	batt_annual_energy_loss = tuple
 	batt_annual_energy_system_loss = tuple
@@ -1028,7 +1031,6 @@ class Outputs(object):
 	batt_dispatch_sched = tuple
 	batt_power = tuple
 	batt_power_target = tuple
-	batt_pv_charge_percent = float
 	batt_q0 = tuple
 	batt_q1 = tuple
 	batt_q2 = tuple
@@ -1039,6 +1041,7 @@ class Outputs(object):
 	batt_revenue_clipcharge = tuple
 	batt_revenue_discharge = tuple
 	batt_revenue_gridcharge = tuple
+	batt_system_charge_percent = float
 	batt_system_loss = tuple
 	batt_temperature = tuple
 	batt_to_grid = tuple
@@ -1058,6 +1061,7 @@ class Outputs(object):
 	dn_calc = tuple
 	fuelcell_to_batt = tuple
 	gen = tuple
+	gen_without_battery = tuple
 	gh = tuple
 	gh_calc = tuple
 	grid_power = tuple
@@ -1088,10 +1092,10 @@ class Outputs(object):
 	monthly_poa_front = tuple
 	monthly_poa_nom = tuple
 	monthly_poa_rear = tuple
-	monthly_pv_to_batt = tuple
-	monthly_pv_to_grid = tuple
-	monthly_pv_to_load = tuple
 	monthly_snow_loss = tuple
+	monthly_system_to_batt = tuple
+	monthly_system_to_grid = tuple
+	monthly_system_to_load = tuple
 	nameplate_dc_rating = float
 	outage_durations = tuple
 	pdf_of_surviving = tuple
@@ -1104,9 +1108,6 @@ class Outputs(object):
 	poa_rear = tuple
 	poa_shaded = tuple
 	poa_shaded_soiled = tuple
-	pv_to_batt = tuple
-	pv_to_grid = tuple
-	pv_to_load = tuple
 	resilience_hrs = tuple
 	resilience_hrs_avg = float
 	resilience_hrs_max = float
@@ -1242,6 +1243,9 @@ class Outputs(object):
 	sunpos_hour = tuple
 	sunup = tuple
 	survival_function = tuple
+	system_to_batt = tuple
+	system_to_grid = tuple
+	system_to_load = tuple
 	tdry = tuple
 	ts_shift_hours = float
 	wfpoa = tuple

@@ -9,13 +9,15 @@ class Common(object):
 		pass
 
 
-	P_co2_hot_in = float
-	T_amb = float
-	T_co2_cold_out = float
-	T_co2_hot_in = float
-	W_dot_fan = float
-	deltaP = float
-	q_dot_reject = float
+	P_co2_hot_des = float
+	T_amb_des = float
+	T_co2_cold_des = float
+	T_co2_hot_des = float
+	W_dot_fan_des = float
+	deltaP_co2_des = float
+	od_calc_T_co2_cold = tuple
+	od_calc_W_dot_fan = tuple
+	q_dot_des = float
 	site_elevation = float
 
 
@@ -30,15 +32,26 @@ class Outputs(object):
 		pass
 
 
+	P_co2_cold_od = tuple
+	P_co2_hot_od = tuple
+	T_amb_od = tuple
+	T_co2_cold_od = tuple
+	T_co2_hot_od = tuple
 	UA_total = float
+	W_dot_fan_od = tuple
+	W_dot_fan_od_ND = tuple
 	d_tube_in = float
 	d_tube_out = float
+	deltaP_co2_od = tuple
 	depth_footprint = float
 	length = float
 	m_V_hx_material = float
+	m_dot_co2_od_ND = tuple
 	n_passes_series = float
 	number_of_tubes = float
 	parallel_paths = float
+	q_dot_od = tuple
+	q_dot_od_ND = tuple
 	width_footprint = float
 
 

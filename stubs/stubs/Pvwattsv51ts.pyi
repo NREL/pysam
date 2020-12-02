@@ -13,7 +13,6 @@ class PVWatts(object):
 	beam = float
 	day = float
 	diffuse = float
-	dry_temperature = float
 	elevation = float
 	hour = float
 	lat = float
@@ -22,6 +21,7 @@ class PVWatts(object):
 	month = float
 	poa = float
 	pressure = float
+	shaded_percent = float
 	tamb = float
 	tcell = float
 	time_step = float

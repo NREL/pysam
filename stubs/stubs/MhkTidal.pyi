@@ -9,6 +9,10 @@ class MHKTidal(object):
 		pass
 
 
+	balance_of_system_cost_total = float
+	device_costs_total = float
+	financial_cost_total = float
+	fixed_charge_rate = float
 	loss_additional = float
 	loss_array_spacing = float
 	loss_downtime = float
@@ -17,6 +21,7 @@ class MHKTidal(object):
 	number_devices = float
 	tidal_power_curve = tuple
 	tidal_resource = tuple
+	total_operating_cost = float
 
 
 class Outputs(object):
@@ -36,6 +41,20 @@ class Outputs(object):
 	capacity_factor = float
 	device_average_power = float
 	device_rated_capacity = float
+	tidal_power_end_velocity = float
+	tidal_power_start_velocity = float
+	tidal_resource_end_velocity = float
+	tidal_resource_start_velocity = float
+	total_bos_cost_kwh = float
+	total_bos_cost_lcoe = float
+	total_capital_cost_kwh = float
+	total_capital_cost_lcoe = float
+	total_device_cost_kwh = float
+	total_device_cost_lcoe = float
+	total_financial_cost_kwh = float
+	total_financial_cost_lcoe = float
+	total_om_cost_kwh = float
+	total_om_cost_lcoe = float
 
 
 class MhkTidal(object):

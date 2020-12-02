@@ -10112,7 +10112,7 @@ static PyMethodDef SaleleasebackModule_methods[] = {
 				PyDoc_STR("new() -> Saleleaseback")},
 		{"default",             Saleleaseback_default,         METH_VARARGS,
 				PyDoc_STR("default(config) -> Saleleaseback\n\nUse default attributes\n"
-				"`config` options:\n\n- \"BiopowerSaleLeaseback\"\n- \"DSLFSaleLeaseback\"\n- \"DSPTSaleLeaseback\"\n- \"DishStirlingSaleLeaseback\"\n- \"EmpiricalTroughSaleLeaseback\"\n- \"FlatPlatePVSaleLeaseback\"\n- \"GenericBatterySaleLeaseback\"\n- \"GenericCSPSystemSaleLeaseback\"\n- \"GenericSystemSaleLeaseback\"\n- \"GeothermalPowerSaleLeaseback\"\n- \"HighXConcentratingPVSaleLeaseback\"\n- \"MSLFSaleLeaseback\"\n- \"MSPTSaleLeaseback\"\n- \"PVBatterySaleLeaseback\"\n- \"PVWattsSaleLeaseback\"\n- \"PhysicalTroughSaleLeaseback\"\n- \"WindPowerSaleLeaseback\"")},
+				"`config` options:\n\n- \"BiopowerSaleLeaseback\"\n- \"DSLFSaleLeaseback\"\n- \"EmpiricalTroughSaleLeaseback\"\n- \"FlatPlatePVSaleLeaseback\"\n- \"GenericBatterySaleLeaseback\"\n- \"GenericCSPSystemSaleLeaseback\"\n- \"GenericSystemSaleLeaseback\"\n- \"GeothermalPowerSaleLeaseback\"\n- \"HighXConcentratingPVSaleLeaseback\"\n- \"MSLFSaleLeaseback\"\n- \"MSPTSaleLeaseback\"\n- \"PVBatterySaleLeaseback\"\n- \"PVWattsSaleLeaseback\"\n- \"PhysicalTroughSaleLeaseback\"\n- \"WindPowerSaleLeaseback\"")},
 		{"wrap",             Saleleaseback_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Saleleaseback\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   Saleleaseback_from_existing,        METH_VARARGS,

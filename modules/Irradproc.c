@@ -143,18 +143,6 @@ IrradianceProcessor_set_diffuse(VarGroupObject *self, PyObject *value, void *clo
 }
 
 static PyObject *
-IrradianceProcessor_get_dry_temperature(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Irradproc_IrradianceProcessor_dry_temperature_nget, self->data_ptr);
-}
-
-static int
-IrradianceProcessor_set_dry_temperature(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Irradproc_IrradianceProcessor_dry_temperature_nset, self->data_ptr);
-}
-
-static PyObject *
 IrradianceProcessor_get_elevation(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Irradproc_IrradianceProcessor_elevation_nget, self->data_ptr);
@@ -299,6 +287,18 @@ IrradianceProcessor_set_sky_model(VarGroupObject *self, PyObject *value, void *c
 }
 
 static PyObject *
+IrradianceProcessor_get_tamb(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Irradproc_IrradianceProcessor_tamb_nget, self->data_ptr);
+}
+
+static int
+IrradianceProcessor_set_tamb(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Irradproc_IrradianceProcessor_tamb_nset, self->data_ptr);
+}
+
+static PyObject *
 IrradianceProcessor_get_tilt(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Irradproc_IrradianceProcessor_tilt_nget, self->data_ptr);
@@ -368,9 +368,6 @@ static PyGetSetDef IrradianceProcessor_getset[] = {
 {"diffuse", (getter)IrradianceProcessor_get_diffuse,(setter)IrradianceProcessor_set_diffuse,
 	PyDoc_STR("*sequence*: Diffuse horizontal irradiance [W/m2]\n\n*Constraints*: LENGTH_EQUAL=beam\n\n*Required*: irrad_mode~1"),
  	NULL},
-{"dry_temperature", (getter)IrradianceProcessor_get_dry_temperature,(setter)IrradianceProcessor_set_dry_temperature,
-	PyDoc_STR("*float*: Dry Temperature [°C]\n\n*Required*: False"),
- 	NULL},
 {"elevation", (getter)IrradianceProcessor_get_elevation,(setter)IrradianceProcessor_set_elevation,
 	PyDoc_STR("*float*: Elevation [m]\n\n*Required*: False"),
  	NULL},
@@ -406,6 +403,9 @@ static PyGetSetDef IrradianceProcessor_getset[] = {
  	NULL},
 {"sky_model", (getter)IrradianceProcessor_get_sky_model,(setter)IrradianceProcessor_set_sky_model,
 	PyDoc_STR("*float*: Tilted surface irradiance model [0/1/2]\n\n*Info*: Isotropic,HDKR,Perez\n\n*Constraints*: INTEGER,MIN=0,MAX=2\n\n*Required*: If not provided, assumed to be 2"),
+ 	NULL},
+{"tamb", (getter)IrradianceProcessor_get_tamb,(setter)IrradianceProcessor_set_tamb,
+	PyDoc_STR("*float*: Ambient Temperature (dry bulb temperature) [°C]\n\n*Required*: False"),
  	NULL},
 {"tilt", (getter)IrradianceProcessor_get_tilt,(setter)IrradianceProcessor_set_tilt,
 	PyDoc_STR("*float*: Tilt angle [deg]\n\n*Options*: H=0,V=90\n\n*Constraints*: MIN=0,MAX=90\n\n*Required*: False"),

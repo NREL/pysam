@@ -17,6 +17,7 @@ The particular unit ``compute_modules`` that are run are determined by the type 
 In general, technology models are followed by financial models.
 To find which modules you need and the order to run them, look at :doc:`Configs` and search for your configuration type.
 
+.. _initializing:
 
 Initializing a Model
 ********************
