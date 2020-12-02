@@ -81,9 +81,12 @@ We can then print out some of the data.  The variable and group names are found 
     print('ur_ec_tou_mat: ', ur.ElectricityRates.ur_ec_tou_mat)
     print('cl.Outputs.npv: ', cl.Outputs.npv)
 
+.. _possible_problems:
+
 Possible Problems
 ^^^^^^^^^^^^^^^^^
-You probably noticed that in SAM, there are black and blue input variables.  The blue ones are calculated by the SAM GUI from the black ones.  For some compute module input parameters the SAM graphical user interface (GUI) uses equations to calculate the value
+You probably noticed that in SAM, there are black and blue input variables.  The blue ones are calculated by the SAM GUI from the black ones.
+For some compute module input parameters the SAM graphical user interface (GUI) uses equations to calculate the value
 of the parameter from special GUI inputs that are not passed to the compute module. Other compute module input parameters
 are used by more than one compute module in the simulation. In some cases, you may need to write additional code to ensure
 values for these parameters are correctly assigned. We hope to eliminate the need for this additional code in the future.
