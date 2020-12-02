@@ -1,9 +1,13 @@
 # Release Notes
 
-## Version 2.2.0
+## Version 2.2.0, Dec 2, 2020 ~ SAM 2020.11.29, SSC Version 250
+* [SAM Release updates for Version 2020.11.29](https://nrel.github.io/SAM/doc/releasenotes.html)
 * Rename StandAloneBattery to Battery
 * New module: BatteryStateful with 3 defaults: NMCGraphite, LFPGraphite, LeadAcid
 * BatteryTools functions for switching chemistries
+* Update Docs to show list of interdependent variables at beginning
+* All changes from 2.1.5.devx versions
+* First PySAM package for Python 3.9
 
 ## Version 2.1.5.dev3, Sep 3, 2020 ~ SAM 2020.2.29 r3, SSC Version 242
 * Price Signals Dispatch

@@ -15,7 +15,7 @@ make -j 6
 
 mkdir -p /io/build_linux_sam
 cd /io/build_linux_sam
-# rm -rf *
+rm -rf *
 cmake ${SAMNTDIR}/api -DCMAKE_BUILD_TYPE=Export -DSAMAPI_EXPORT=1 -DSAM_SKIP_AUTOGEN=1 ../sam/api
 make -j 6
 

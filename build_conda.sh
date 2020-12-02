@@ -19,7 +19,7 @@ export VERSION
 
 yes | conda install conda-build
 conda activate base
-for PYTHONVER in 3.5 3.6 3.7 3.8
+for PYTHONVER in 3.5 3.6 3.7 3.8 3.9
 do
    conda-build stubs --output-folder=dist --python=$PYTHONVER || exit
    conda build purge
@@ -27,7 +27,7 @@ done
 anaconda upload -u nrel dist/$DIST_NAME/*pysam-stubs*.bz2 || exit
 rm -rf dist/$DIST_NAME
 
-for PYTHONVER in 3.5 3.6 3.7 3.8
+for PYTHONVER in 3.5 3.6 3.7 3.8 3.9
 do
    conda-build conda --output-folder=dist --python=$PYTHONVER || exit
    conda build purge
