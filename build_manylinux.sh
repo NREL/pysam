@@ -20,7 +20,7 @@ cmake ${SAMNTDIR}/api -DCMAKE_BUILD_TYPE=Export -DSAMAPI_EXPORT=1 -DSAM_SKIP_AUT
 make -j 6
 
 cd $PYSAMDIR
-for PYTHONENV in cp35-cp35m cp36-cp36m cp37-cp37m cp38-cp38
+for PYTHONENV in cp35-cp35m cp36-cp36m cp37-cp37m cp38-cp38 cp39-cp39
 do
    yes | /opt/python/$PYTHONENV/bin/pip install -r tests/requirements.txt
    yes | /opt/python/$PYTHONENV/bin/pip uninstall NREL-PySAM NREL-PySAM-stubs

@@ -37,10 +37,10 @@ do
    python setup.py bdist_wheel
 done
 python stubs/setup.py bdist_wheel
-twine upload $PYSAMDIR/dist/*.whl
+twine upload $PYSAMDIR/dist/*.whl || exit
 
 $PYSAMDIR/build_conda.sh
-anaconda upload -u nrel $PYSAMDIR/dist/osx-64/*.tar.bz2
+anaconda upload -u nrel $PYSAMDIR/dist/osx-64/*.tar.bz2 || exit
 
 rm -rf dist/*
 
