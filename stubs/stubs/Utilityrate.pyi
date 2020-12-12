@@ -2,7 +2,7 @@ class Common(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -160,7 +160,7 @@ class Outputs(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 

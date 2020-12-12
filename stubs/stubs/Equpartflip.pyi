@@ -2,7 +2,7 @@ class Revenue(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -22,7 +22,7 @@ class FinancialParameters(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -56,7 +56,7 @@ class SystemCosts(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -100,7 +100,7 @@ class TaxCreditIncentives(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -133,7 +133,7 @@ class Depreciation(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -186,7 +186,7 @@ class PaymentIncentives(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -287,7 +287,7 @@ class SystemOutput(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -303,7 +303,7 @@ class Recapitalization(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -320,7 +320,7 @@ class TimeOfDelivery(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -347,7 +347,7 @@ class ConstructionFinancing(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -361,7 +361,7 @@ class OtherCapitalCosts(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -379,7 +379,7 @@ class IRRTargets(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -399,7 +399,7 @@ class DeveloperCapitalRecovery(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -414,7 +414,7 @@ class BatterySystem(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -433,7 +433,7 @@ class Outputs(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 

@@ -2,7 +2,7 @@ class WeatherReader(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -17,7 +17,7 @@ class Outputs(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -27,8 +27,8 @@ class Outputs(object):
 	albedo = tuple
 	annual_albedo = float
 	annual_beam = float
-	annual_diffuse = float
-	annual_global = float
+	annual_diff = float
+	annual_glob = float
 	annual_snow = float
 	annual_tdry = float
 	annual_wspd = float
@@ -37,10 +37,10 @@ class Outputs(object):
 	country = str
 	day = tuple
 	description = str
-	diffuse = tuple
+	diff = tuple
 	elev = float
 	format = str
-	global = tuple
+	glob = tuple
 	hour = tuple
 	lat = float
 	location = str

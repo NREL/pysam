@@ -210,15 +210,15 @@ Outputs_get_annual_beam(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_annual_diffuse(VarGroupObject *self, void *closure)
+Outputs_get_annual_diff(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Wfreader_Outputs_annual_diffuse_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Wfreader_Outputs_annual_diff_nget, self->data_ptr);
 }
 
 static PyObject *
-Outputs_get_annual_global(VarGroupObject *self, void *closure)
+Outputs_get_annual_glob(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Wfreader_Outputs_annual_global_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Wfreader_Outputs_annual_glob_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -270,9 +270,9 @@ Outputs_get_description(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_diffuse(VarGroupObject *self, void *closure)
+Outputs_get_diff(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Wfreader_Outputs_diffuse_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Wfreader_Outputs_diff_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -288,9 +288,9 @@ Outputs_get_format(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_global(VarGroupObject *self, void *closure)
+Outputs_get_glob(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Wfreader_Outputs_global_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Wfreader_Outputs_glob_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -441,10 +441,10 @@ static PyGetSetDef Outputs_getset[] = {
 {"annual_beam", (getter)Outputs_get_annual_beam,(setter)0,
 	PyDoc_STR("*float*: Average daily beam normal [kWh/m2/day]"),
  	NULL},
-{"annual_diffuse", (getter)Outputs_get_annual_diffuse,(setter)0,
+{"annual_diff", (getter)Outputs_get_annual_diff,(setter)0,
 	PyDoc_STR("*float*: Average daily diffuse [kWh/m2/day]"),
  	NULL},
-{"annual_global", (getter)Outputs_get_annual_global,(setter)0,
+{"annual_glob", (getter)Outputs_get_annual_glob,(setter)0,
 	PyDoc_STR("*float*: Average daily global horizontal [kWh/m2/day]"),
  	NULL},
 {"annual_snow", (getter)Outputs_get_annual_snow,(setter)0,
@@ -471,7 +471,7 @@ static PyGetSetDef Outputs_getset[] = {
 {"description", (getter)Outputs_get_description,(setter)0,
 	PyDoc_STR("*str*: Description"),
  	NULL},
-{"diffuse", (getter)Outputs_get_diffuse,(setter)0,
+{"diff", (getter)Outputs_get_diff,(setter)0,
 	PyDoc_STR("*sequence*: Diffuse Horizontal Irradiance [W/m2]"),
  	NULL},
 {"elev", (getter)Outputs_get_elev,(setter)0,
@@ -480,7 +480,7 @@ static PyGetSetDef Outputs_getset[] = {
 {"format", (getter)Outputs_get_format,(setter)0,
 	PyDoc_STR("*str*: File format"),
  	NULL},
-{"global", (getter)Outputs_get_global,(setter)0,
+{"glob", (getter)Outputs_get_glob,(setter)0,
 	PyDoc_STR("*sequence*: Global Horizontal Irradiance [W/m2]"),
  	NULL},
 {"hour", (getter)Outputs_get_hour,(setter)0,
