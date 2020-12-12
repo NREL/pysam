@@ -36,6 +36,7 @@ do
    fi
    python setup.py bdist_wheel
 done
+mypy stubs/stubs || exit
 python stubs/setup.py bdist_wheel
 twine upload $PYSAMDIR/dist/*.whl || exit
 

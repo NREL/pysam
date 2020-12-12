@@ -25,3 +25,5 @@ manylinux/
 \.vs/
 files/defaults/
 *.pyc
+
+.mypy_cache
