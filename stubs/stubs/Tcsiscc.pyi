@@ -284,6 +284,9 @@ class Tcsiscc(object):
 	def value(self, name, value=None):
 		pass
 
+	def unassign(self, name):
+		pass
+
 	def execute(self, int_verbosity):
 		pass
 

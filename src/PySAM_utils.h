@@ -1094,4 +1094,28 @@ static PyObject * Cmod_value(CmodObject *self, PyObject *args)
     return PySAM_run_getset((PyObject *)self, value, self->x_attr, name, NULL);
 }
 
+static PyObject * CmodStateful_unassign(CmodStatefulObject *self, PyObject *args)
+{
+    char* name = 0;
+    if (!PyArg_ParseTuple(args, "s", &name))
+		return NULL;
+
+    SAM_error error = new_error();
+    SAM_table_unassign_entry(self->data_ptr, name, &error);
+    PySAM_has_error(error);
+    return Py_None;
+}
+
+static PyObject * Cmod_unassign(CmodObject *self, PyObject *args)
+{
+    char* name = 0;
+    if (!PyArg_ParseTuple(args, "s", &name))
+		return NULL;
+
+    SAM_error error = new_error();
+    SAM_table_unassign_entry(self->data_ptr, name, &error);
+    PySAM_has_error(error);
+    return Py_None;
+}
+
 #endif //PYSAM_SAM_UTILS_H
