@@ -1542,9 +1542,9 @@ Outputs_get_gen(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_global(VarGroupObject *self, void *closure)
+Outputs_get_glob(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsgenericSolar_Outputs_global_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_TcsgenericSolar_Outputs_glob_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -1884,7 +1884,7 @@ static PyGetSetDef Outputs_getset[] = {
 {"gen", (getter)Outputs_get_gen,(setter)0,
 	PyDoc_STR("*sequence*: System power generated [kW]"),
  	NULL},
-{"global", (getter)Outputs_get_global,(setter)0,
+{"glob", (getter)Outputs_get_glob,(setter)0,
 	PyDoc_STR("*sequence*: Resource Global horizontal irradiance [W/m2]"),
  	NULL},
 {"hour", (getter)Outputs_get_hour,(setter)0,
