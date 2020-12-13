@@ -1949,10 +1949,10 @@ BatteryStateful_dealloc(CmodStatefulObject *self)
 		SAM_table_destruct(self->data_ptr, &error);
 		PySAM_has_error(error);
 	}
-	if (!self->cmod_ptr) {
-	SAM_error error = new_error();
-	SAM_module_destruct(self->cmod_ptr, &error);
-	PySAM_has_error(error);
+	if (self->cmod_ptr) {
+		SAM_error error = new_error();
+		SAM_module_destruct(self->cmod_ptr, &error);
+		PySAM_has_error(error);
 	}
 	PyObject_Del(self);
 }
