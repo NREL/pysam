@@ -40,7 +40,7 @@ mypy stubs/stubs || exit
 python stubs/setup.py bdist_wheel
 twine upload $PYSAMDIR/dist/*.whl || exit
 
-$PYSAMDIR/build_conda.sh
+$PYSAMDIR/build_conda.sh || exit
 anaconda upload -u nrel $PYSAMDIR/dist/osx-64/*.tar.bz2 || exit
 
 rm -rf dist/*
@@ -53,7 +53,7 @@ cd ..
 docker pull quay.io/pypa/manylinux1_x86_64
 docker run --rm -v $(pwd):/io quay.io/pypa/manylinux1_x86_64 /io/pysam/build_manylinux.sh
 rename -s linux manylinux1 $PYSAMDIR/dist/*-linux_*
-twine upload $PYSAMDIR/dist/*.whl
+twine upload $PYSAMDIR/dist/*.whl || exit
 
 docker pull continuumio/anaconda
 docker run --rm --env PYSAMDIR=/io/pysam -v $(pwd):/io continuumio/anaconda /io/pysam/build_conda.sh

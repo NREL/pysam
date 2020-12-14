@@ -3,6 +3,9 @@
 cd $PYSAMDIR || exit
 source $(conda info --base)/etc/profile.d/conda.sh
 
+# get `CONDA_TOKEN` env variable, required for authentication
+source .env || exit
+
 DIST_NAME=''
 if [ `uname` = "Linux" ] ;
 then
@@ -28,13 +31,13 @@ do
    conda-build stubs --output-folder=$DIST_DIR --python=$PYTHONVER || exit
    conda build purge
 done
-anaconda upload -u nrel dist/$DIST_NAME/*pysam-stubs*.bz2 || exit
+anaconda -t $CONDA_TOKEN upload -u nrel dist/$DIST_NAME/*pysam-stubs*.bz2 || exit
 rm -rf dist/$DIST_NAME
 
-for PYTHONVER in 3.6 3.7
+for PYTHONVER in 3.5 3.6 3.7 3.8 3.9
 do
    export PYTHONVER
-   conda-build conda --output-folder=$DIST_DIR --python=$PYTHONVER --prefix-length=0 || exit
+   conda-build conda --output-folder=$DIST_DIR --python=$PYTHONVER --prefix-length=0 -c nrel || exit
    conda build purge
 done
-anaconda upload -u nrel dist/$DIST_NAME/*pysam*.bz2
+anaconda -t $CONDA_TOKEN upload -u nrel dist/$DIST_NAME/*pysam*.bz2
