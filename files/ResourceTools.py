@@ -225,6 +225,11 @@ def URDBv7_to_ElectricityRates(urdb_response):
             flat_mat.append(month_row)
         urdb_data['ur_dc_flat_mat'] = flat_mat
 
+    if urdb_data['ur_dc_enable'] == 1 and "ur_dc_tou_mat" not in urdb_data.keys():
+        urdb_data['ur_dc_tou_mat'] = [[1, 1, 1e38, 0], ]
+        urdb_data['ur_dc_sched_weekday'] = [[1] * 24 for i in range(12)]
+        urdb_data['ur_dc_sched_weekend'] = urdb_data['ur_dc_sched_weekday']
+
     return urdb_data
 
 
