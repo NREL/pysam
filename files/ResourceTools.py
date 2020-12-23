@@ -129,6 +129,12 @@ def URDBv7_to_ElectricityRates(urdb_response):
 
     def try_get_rate_structure(urdb_name, data_name):
         mat = []
+        supported_units = {
+            "kwh" : 0,
+            "kwh/kw" : 1,
+            "kwh daily" : 2,
+            "kwh/kw daily" : 3
+        }
         if urdb_name in urdb_response.keys():
             structure = urdb_response[urdb_name]
             for i, period in enumerate(structure):
@@ -142,10 +148,13 @@ def URDBv7_to_ElectricityRates(urdb_response):
                     sell = 0
                     if 'sell' in entry.keys():
                         sell = entry['sell']
+                    units = 0
                     if 'unit' in entry.keys():
-                        if entry['unit'].lower() != "kWh".lower():
+                        try:
+                            units = supported_units[entry['unit'].lower()]
+                        except KeyError:
                             raise RuntimeError("UtilityRateDatabase error: unrecognized unit in rate structure")
-                    mat.append((i + 1, j + 1, tier_max, 0.0, rate, sell))
+                    mat.append((i + 1, j + 1, tier_max, units, rate, sell))
             urdb_data[data_name] = mat
 
     def try_get_demand_structure(urdb_name, data_name):
