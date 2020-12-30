@@ -2125,6 +2125,7 @@ BatteryStateful_wrap(PyObject *self, PyObject *args)
 		return NULL;
 
 	rv->data_owner_ptr = NULL;
+	rv->cmod_ptr = NULL;
 	return (PyObject *)rv;
 }
 
@@ -2144,6 +2145,7 @@ BatteryStateful_default(PyObject *self, PyObject *args)
 	rv->data_owner_ptr = NULL;
 	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "BatteryStateful", def);
 
+	rv->cmod_ptr = NULL;
 	return (PyObject *)rv;
 }
 
@@ -2172,6 +2174,7 @@ BatteryStateful_from_existing(PyObject *self, PyObject *args)
 	if (rv == NULL)
 		goto fail;
 	rv->data_owner_ptr = module;
+	rv->cmod_ptr = NULL;
 	if (!def)
 		return (PyObject *)rv;
 	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "BatteryStateful", def);
