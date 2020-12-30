@@ -47,8 +47,6 @@ class BatterySystem(object):
 	batt_current_charge_max = float
 	batt_current_choice = float
 	batt_current_discharge_max = float
-	batt_cycle_cost = tuple
-	batt_cycle_cost_choice = float
 	batt_dc_ac_efficiency = float
 	batt_dc_dc_efficiency = float
 	batt_inverter_efficiency_cutoff = float
@@ -198,6 +196,8 @@ class BatteryDispatch(object):
 
 	batt_auto_gridcharge_max_daily = float
 	batt_custom_dispatch = tuple
+	batt_cycle_cost = tuple
+	batt_cycle_cost_choice = float
 	batt_dispatch_auto_can_charge = float
 	batt_dispatch_auto_can_clipcharge = float
 	batt_dispatch_auto_can_fuelcellcharge = float
