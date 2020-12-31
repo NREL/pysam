@@ -3,6 +3,7 @@
 ## Version 2.2.1,
 * Add `unassign` function to modules
 * Fix mypy errors in stubs
+* Fix BatteryStateful bugs: memory leak; unintialized pointer in some constructors
 ? Fix docs for TcsMoltenSalt
 ? Leap year 2/29 date is now acceptable
 

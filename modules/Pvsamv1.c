@@ -8384,30 +8384,6 @@ BatterySystem_set_batt_current_discharge_max(VarGroupObject *self, PyObject *val
 }
 
 static PyObject *
-BatterySystem_get_batt_cycle_cost(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Pvsamv1_BatterySystem_batt_cycle_cost_aget, self->data_ptr);
-}
-
-static int
-BatterySystem_set_batt_cycle_cost(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_Pvsamv1_BatterySystem_batt_cycle_cost_aset, self->data_ptr);
-}
-
-static PyObject *
-BatterySystem_get_batt_cycle_cost_choice(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Pvsamv1_BatterySystem_batt_cycle_cost_choice_nget, self->data_ptr);
-}
-
-static int
-BatterySystem_set_batt_cycle_cost_choice(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Pvsamv1_BatterySystem_batt_cycle_cost_choice_nset, self->data_ptr);
-}
-
-static PyObject *
 BatterySystem_get_batt_dc_ac_efficiency(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Pvsamv1_BatterySystem_batt_dc_ac_efficiency_nget, self->data_ptr);
@@ -8671,12 +8647,6 @@ static PyGetSetDef BatterySystem_getset[] = {
  	NULL},
 {"batt_current_discharge_max", (getter)BatterySystem_get_batt_current_discharge_max,(setter)BatterySystem_set_batt_current_discharge_max,
 	PyDoc_STR("*float*: Maximum discharge current [A]"),
- 	NULL},
-{"batt_cycle_cost", (getter)BatterySystem_get_batt_cycle_cost,(setter)BatterySystem_set_batt_cycle_cost,
-	PyDoc_STR("*sequence*: Input battery cycle degradaton penalty per year [$/cycle-kWh]\n\n*Info*: length 1 or analysis_period, length 1 will be extended using inflation"),
- 	NULL},
-{"batt_cycle_cost_choice", (getter)BatterySystem_get_batt_cycle_cost_choice,(setter)BatterySystem_set_batt_cycle_cost_choice,
-	PyDoc_STR("*float*: Use SAM cost model for degradaton penalty or input custom via batt_cycle_cost [0/1]\n\n*Options*: 0=UseCostModel,1=InputCost"),
  	NULL},
 {"batt_dc_ac_efficiency", (getter)BatterySystem_get_batt_dc_ac_efficiency,(setter)BatterySystem_set_batt_dc_ac_efficiency,
 	PyDoc_STR("*float*: Battery DC to AC efficiency"),
@@ -9596,6 +9566,30 @@ BatteryDispatch_set_batt_custom_dispatch(VarGroupObject *self, PyObject *value, 
 }
 
 static PyObject *
+BatteryDispatch_get_batt_cycle_cost(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvsamv1_BatteryDispatch_batt_cycle_cost_aget, self->data_ptr);
+}
+
+static int
+BatteryDispatch_set_batt_cycle_cost(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Pvsamv1_BatteryDispatch_batt_cycle_cost_aset, self->data_ptr);
+}
+
+static PyObject *
+BatteryDispatch_get_batt_cycle_cost_choice(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_BatteryDispatch_batt_cycle_cost_choice_nget, self->data_ptr);
+}
+
+static int
+BatteryDispatch_set_batt_cycle_cost_choice(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_BatteryDispatch_batt_cycle_cost_choice_nset, self->data_ptr);
+}
+
+static PyObject *
 BatteryDispatch_get_batt_dispatch_auto_can_charge(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Pvsamv1_BatteryDispatch_batt_dispatch_auto_can_charge_nget, self->data_ptr);
@@ -9841,6 +9835,12 @@ static PyGetSetDef BatteryDispatch_getset[] = {
  	NULL},
 {"batt_custom_dispatch", (getter)BatteryDispatch_get_batt_custom_dispatch,(setter)BatteryDispatch_set_batt_custom_dispatch,
 	PyDoc_STR("*sequence*: Custom battery power for every time step [kW]\n\n*Info*: kWAC if AC-connected, else kWDC\n\n*Required*: True if en_batt=1&batt_dispatch_choice=3"),
+ 	NULL},
+{"batt_cycle_cost", (getter)BatteryDispatch_get_batt_cycle_cost,(setter)BatteryDispatch_set_batt_cycle_cost,
+	PyDoc_STR("*sequence*: Input battery cycle degradaton penalty per year [$/cycle-kWh]\n\n*Info*: length 1 or analysis_period, length 1 will be extended using inflation"),
+ 	NULL},
+{"batt_cycle_cost_choice", (getter)BatteryDispatch_get_batt_cycle_cost_choice,(setter)BatteryDispatch_set_batt_cycle_cost_choice,
+	PyDoc_STR("*float*: Use SAM cost model for degradaton penalty or input custom via batt_cycle_cost [0/1]\n\n*Options*: 0=UseCostModel,1=InputCost"),
  	NULL},
 {"batt_dispatch_auto_can_charge", (getter)BatteryDispatch_get_batt_dispatch_auto_can_charge,(setter)BatteryDispatch_set_batt_dispatch_auto_can_charge,
 	PyDoc_STR("*float*: System charging allowed for automated dispatch? [kW]"),

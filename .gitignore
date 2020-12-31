@@ -17,6 +17,8 @@ env/
 venv*/
 __pycache__
 
+.env
+
 #distributions
 dist/
 manylinux/
