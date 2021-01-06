@@ -47,7 +47,7 @@ static void PySAM_error_context_clear(){
 
 static void PySAM_error_context_set(const char * msg){
     PySAM_error_context_clear();
-    PySAM_error_context = malloc(strlen(msg) + 8);
+    PySAM_error_context = malloc(strlen(msg) + 12);
     strcpy(PySAM_error_context, msg);
     char error_msg[] = " error: ";
     strcat(PySAM_error_context, error_msg);
