@@ -227,6 +227,8 @@ def URDBv7_to_ElectricityRates(urdb_response):
         flat_demand = urdb_response['flatdemandmonths']
         for month, tier in enumerate(flat_demand):
             periods = [r for r in flat_demand_structure if r[0] == int(tier + 1)]
+            if len(periods) > 1:
+                raise ValueError("flat demand rate structure does not support multiple periods per month")
             month_row = []
             for p in periods:
                 month_row.append(month)
