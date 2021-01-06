@@ -38,10 +38,36 @@ typedef struct {
 // Error Handling
 //
 
+static char *PySAM_error_context;
+
+static void PySAM_error_context_clear(){
+    if (PySAM_error_context) free(PySAM_error_context);
+    PySAM_error_context = NULL;
+}
+
+static void PySAM_error_context_set(const char * msg){
+    PySAM_error_context_clear();
+    PySAM_error_context = malloc(strlen(msg) + 8);
+    strcpy(PySAM_error_context, msg);
+    char error_msg[] = " error: ";
+    strcat(PySAM_error_context, error_msg);
+}
+
+static void PySAM_error_set_with_context(const char * msg){
+    char err_msg[1024];
+    if (PySAM_error_context) {
+        strcpy(err_msg, PySAM_error_context);
+        strcat(err_msg, msg);
+        PyErr_SetString(PyExc_Exception, err_msg);
+    }
+    else
+        PyErr_SetString(PyExc_Exception, msg);
+}
+
 static int PySAM_has_error(SAM_error error){
     const char* cc = error_message(error);
     if ((cc != NULL) && (cc[0] != '\0')) {
-        PyErr_SetString(PyExc_Exception, cc);
+        PySAM_error_set_with_context(cc);
         error_destruct(error);
         return 1;
     }
@@ -52,11 +78,11 @@ static int PySAM_has_error(SAM_error error){
 static int PySAM_has_error_msg(SAM_error error, const char *msg){
     const char* cc = error_message(error);
     if ((cc != NULL) && (cc[0] != '\0')) {
-        char err_msg[256];
-        strncat(err_msg, cc, strlen(err_msg) - 1);
-        strncat(err_msg, ". ", 2);
-        strncat(err_msg, msg, strlen(msg));
-        PyErr_SetString(PyExc_Exception, err_msg);
+        char err_msg[1024];
+        strcpy(err_msg, cc);
+        strcat(err_msg, ". ");
+        strcat(err_msg, msg);
+        PySAM_error_set_with_context(err_msg);
         error_destruct(error);
         return 1;
     }
@@ -202,13 +228,13 @@ static int PySAM_seq_to_array(PyObject *value, double **arr, int *seqlen){
         if(!item) {
             Py_DECREF(seq);
             free(*arr);
-            PyErr_SetString(PyExc_TypeError, "error converting tuple to array: could not get item");
+            PySAM_error_set_with_context("error converting tuple to array: could not get item");
             return -3;
         }
         if(!PyNumber_Check(item)) {
             Py_DECREF(seq);
             free(*arr);
-            PyErr_SetString(PyExc_TypeError, "error converting tuple to array: all items must be numbers");
+            PySAM_error_set_with_context("error converting tuple to array: all items must be numbers");
             return -4;
         }
         fitem = PyNumber_Float(item);
@@ -247,7 +273,7 @@ static int PySAM_seq_to_matrix(PyObject *value, double **mat, int *nrows, int *n
         if (PySequence_Fast_GET_SIZE(row) != *ncols){
             free(*mat);
             Py_DECREF(seq);
-            PyErr_SetString(PyExc_TypeError, "Matrix must be rectangular.");
+            PySAM_error_set_with_context("Matrix must be rectangular.");
             return -6;
         }
         int res = PySAM_seq_to_array(row, &arr, &seqlen);
@@ -256,7 +282,7 @@ static int PySAM_seq_to_matrix(PyObject *value, double **mat, int *nrows, int *n
             Py_DECREF(seq);
             char str[256];
             sprintf(str, "Error (%d) converting nested tuple %d into row in matrix.", res, i);
-            PyErr_SetString(PyExc_TypeError, str);
+            PySAM_error_set_with_context(str);
             return res;
         }
         double* mat_pos = &((*mat)[*ncols * i]);
@@ -443,7 +469,7 @@ static PyObject* PySAM_table_to_dict(SAM_table table){
                 break;
             case SAM_INVALID:
             default:
-                PyErr_SetString(PyExc_Exception, "Table contains entry with invalid type. Types must be number, string"
+                PySAM_error_set_with_context("Table contains entry with invalid type. Types must be number, string"
                                                    ", sequence, or dict.");
                 goto fail;
         }
@@ -502,7 +528,7 @@ static SAM_table PySAM_dict_to_table(PyObject* dict){
             if (!first){
                 char str[256];
                 PySAM_concat_msg(str, "Error assigning empty tuple to ", name);
-                PyErr_SetString(PyExc_Exception, str);
+                PySAM_error_set_with_context(str);
                 goto fail;
             }
 
@@ -572,11 +598,11 @@ static PyObject* PySAM_double_getter(SAM_get_double_t func, void *data_ptr){
 
 static int PySAM_double_setter(PyObject *value, SAM_set_double_t func, void *data_ptr) {
     if (value == NULL) {
-        PyErr_SetString(PyExc_TypeError, "No value provided");
+        PySAM_error_set_with_context("No value provided");
         return -1;
     }
     if (!PyNumber_Float(value)) {
-        PyErr_SetString(PyExc_TypeError, "Value must be numeric");
+        PySAM_error_set_with_context("Value must be numeric");
         return -1;
     }
 
@@ -601,11 +627,11 @@ static PyObject* PySAM_string_getter(SAM_get_string_t func, void *data_ptr){
 
 static int PySAM_string_setter(PyObject *value, SAM_set_string_t func, void *data_ptr) {
     if (value == NULL) {
-        PyErr_SetString(PyExc_TypeError, "No value provided");
+        PySAM_error_set_with_context("No value provided");
         return -1;
     }
     if (!PyUnicode_Check(value)) {
-        PyErr_SetString(PyExc_TypeError, "Value must be string");
+        PySAM_error_set_with_context("Value must be string");
         return -1;
     }
     PyObject* ascii_mystring = PyUnicode_AsASCIIString(value);
@@ -705,7 +731,7 @@ static PyObject* PySAM_table_getter(SAM_get_table_t func,void *data_ptr){
 
 static int PySAM_table_setter(PyObject *value, SAM_set_table_t func, void *data_ptr){
     if (!PyDict_Check(value)){
-        PyErr_SetString(PyExc_TypeError, "Table must be set from dict.");
+        PySAM_error_set_with_context("Table must be set from dict.");
         return -1;
     }
 
@@ -745,6 +771,8 @@ static int PySAM_assign_from_dict(void *data_ptr, PyObject *dict, const char *te
         ascii_mystring = PyUnicode_AsASCIIString(key);
         char* name = PyBytes_AsString(ascii_mystring);
 
+        PySAM_error_context_set(name);
+
         // numeric
         if (PyNumber_Check(value)){
             SAM_error error = new_error();
@@ -778,7 +806,7 @@ static int PySAM_assign_from_dict(void *data_ptr, PyObject *dict, const char *te
             if (!first){
                 char str[256];
                 PySAM_concat_msg(str, "Error assigning empty tuple to ", name);
-                PyErr_SetString(PyExc_Exception, str);
+                PySAM_error_set_with_context(str);
                 Py_XDECREF(first);
                 goto fail;
             }
@@ -789,25 +817,12 @@ static int PySAM_assign_from_dict(void *data_ptr, PyObject *dict, const char *te
                 SAM_set_matrix_t func = SAM_set_matrix_func(SAM_lib_handle, tech, group, name, &error);
                 if (PySAM_has_error_msg(error, "Either parameter does not exist or is not matrix type.")) goto fail;
 
-                char str[256];
                 switch(PySAM_matrix_setter(value, func, data_ptr)){
                     case 0: // no error
                         continue;
-                    case -5:
+                    default:
                         goto fail;
-                    case -1:
-                        PySAM_concat_msg(str, name, " must be iterable.");
-                        break;
-                    case -2:
-                        PySAM_concat_msg(str, name, " memory unavailble.");
-                        break;
-                    case -3:
-                    case -4:
-                        PySAM_concat_msg(str, name, " items must be numeric.");
-                        break;
                 }
-                PyErr_SetString(PyExc_Exception, str);
-                goto fail;
             }
             // array
             else{
@@ -815,28 +830,12 @@ static int PySAM_assign_from_dict(void *data_ptr, PyObject *dict, const char *te
                 SAM_set_array_t func = SAM_set_array_func(SAM_lib_handle, tech, group, name, &error);
                 if (PySAM_has_error_msg(error, "Either parameter does not exist or is not array type.")) goto fail;
 
-                char str[256];
                 switch(PySAM_array_setter(value, func, data_ptr)){
                     case 0: // no error
                         continue;
-                    case -5:
+                    default:
                         goto fail;
-                    case -1:
-                        PySAM_concat_msg(str, name, "must be iterable.");
-                        break;
-                    case -2:
-                        PySAM_concat_msg(str, name, " memory unavailble.");
-                        break;
-                    case -3:
-                    case -4:
-                        PySAM_concat_msg(str, name, " items must be numeric.");
-                        break;
-                    case -6:
-                        PySAM_concat_msg(str, name, "must be iterable matrix must be rectangular.");
-                        break;
                 }
-                PyErr_SetString(PyExc_Exception, str);
-                goto fail;
             }
         }
         else if (PyDict_Check(value)) {
@@ -857,16 +856,18 @@ static int PySAM_assign_from_dict(void *data_ptr, PyObject *dict, const char *te
         else {
             char str[256];
             PySAM_concat_msg(str, name, " assignment value must be numeric, string, tuple or dict.");
-            PyErr_SetString(PyExc_Exception, str);
+            PySAM_error_set_with_context(str);
             goto fail;
         }
         Py_DECREF(ascii_mystring);
     }
     Py_XDECREF(dict);
+    PySAM_error_context_clear();
     return 1;
     fail:
     Py_XDECREF(ascii_mystring);
     Py_XDECREF(dict);
+    PySAM_error_context_clear();
     return 0;
 }
 
@@ -1017,7 +1018,7 @@ static int PySAM_load_defaults(PyObject* self, PyObject* x_attr, void* data_ptr,
 
     f = fopen(path, "rb");
     if (!f){
-        PyErr_SetString(PyExc_Exception, "Could not open defaults file.");
+        PyErr_SetString(PyExc_Exception, "Default configuration by that name was not found.");
         return -1;
     }
 
