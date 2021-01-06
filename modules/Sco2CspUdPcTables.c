@@ -3214,8 +3214,10 @@ Sco2CspUdPcTables_default(PyObject *self, PyObject *args)
 		return NULL;
 
 	rv->data_owner_ptr = NULL;
-	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Sco2CspUdPcTables", def);
-
+	if (PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Sco2CspUdPcTables", def) < 0) {
+		Sco2CspUdPcTables_dealloc(rv);
+		return NULL;
+	}
 	return (PyObject *)rv;
 }
 

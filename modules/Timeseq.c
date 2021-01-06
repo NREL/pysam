@@ -521,8 +521,10 @@ Timeseq_default(PyObject *self, PyObject *args)
 		return NULL;
 
 	rv->data_owner_ptr = NULL;
-	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Timeseq", def);
-
+	if (PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Timeseq", def) < 0) {
+		Timeseq_dealloc(rv);
+		return NULL;
+	}
 	return (PyObject *)rv;
 }
 

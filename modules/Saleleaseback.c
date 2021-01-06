@@ -10072,8 +10072,10 @@ Saleleaseback_default(PyObject *self, PyObject *args)
 		return NULL;
 
 	rv->data_owner_ptr = NULL;
-	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Saleleaseback", def);
-
+	if (PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Saleleaseback", def) < 0) {
+		Saleleaseback_dealloc(rv);
+		return NULL;
+	}
 	return (PyObject *)rv;
 }
 

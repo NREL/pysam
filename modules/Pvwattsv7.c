@@ -1453,8 +1453,10 @@ Pvwattsv7_default(PyObject *self, PyObject *args)
 		return NULL;
 
 	rv->data_owner_ptr = NULL;
-	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Pvwattsv7", def);
-
+	if (PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Pvwattsv7", def) < 0) {
+		Pvwattsv7_dealloc(rv);
+		return NULL;
+	}
 	return (PyObject *)rv;
 }
 

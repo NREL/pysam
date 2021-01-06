@@ -2618,8 +2618,10 @@ Biomass_default(PyObject *self, PyObject *args)
 		return NULL;
 
 	rv->data_owner_ptr = NULL;
-	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Biomass", def);
-
+	if (PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Biomass", def) < 0) {
+		Biomass_dealloc(rv);
+		return NULL;
+	}
 	return (PyObject *)rv;
 }
 

@@ -808,8 +808,10 @@ Thermalrate_default(PyObject *self, PyObject *args)
 		return NULL;
 
 	rv->data_owner_ptr = NULL;
-	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Thermalrate", def);
-
+	if (PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Thermalrate", def) < 0) {
+		Thermalrate_dealloc(rv);
+		return NULL;
+	}
 	return (PyObject *)rv;
 }
 

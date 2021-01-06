@@ -506,8 +506,10 @@ Lcoefcr_default(PyObject *self, PyObject *args)
 		return NULL;
 
 	rv->data_owner_ptr = NULL;
-	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Lcoefcr", def);
-
+	if (PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Lcoefcr", def) < 0) {
+		Lcoefcr_dealloc(rv);
+		return NULL;
+	}
 	return (PyObject *)rv;
 }
 

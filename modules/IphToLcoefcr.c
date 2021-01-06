@@ -467,8 +467,10 @@ IphToLcoefcr_default(PyObject *self, PyObject *args)
 		return NULL;
 
 	rv->data_owner_ptr = NULL;
-	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "IphToLcoefcr", def);
-
+	if (PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "IphToLcoefcr", def) < 0) {
+		IphToLcoefcr_dealloc(rv);
+		return NULL;
+	}
 	return (PyObject *)rv;
 }
 

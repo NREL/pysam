@@ -572,8 +572,10 @@ IsccDesignPoint_default(PyObject *self, PyObject *args)
 		return NULL;
 
 	rv->data_owner_ptr = NULL;
-	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "IsccDesignPoint", def);
-
+	if (PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "IsccDesignPoint", def) < 0) {
+		IsccDesignPoint_dealloc(rv);
+		return NULL;
+	}
 	return (PyObject *)rv;
 }
 

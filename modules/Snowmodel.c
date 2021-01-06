@@ -733,8 +733,10 @@ Snowmodel_default(PyObject *self, PyObject *args)
 		return NULL;
 
 	rv->data_owner_ptr = NULL;
-	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Snowmodel", def);
-
+	if (PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Snowmodel", def) < 0) {
+		Snowmodel_dealloc(rv);
+		return NULL;
+	}
 	return (PyObject *)rv;
 }
 

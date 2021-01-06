@@ -1903,8 +1903,10 @@ Hcpv_default(PyObject *self, PyObject *args)
 		return NULL;
 
 	rv->data_owner_ptr = NULL;
-	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Hcpv", def);
-
+	if (PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Hcpv", def) < 0) {
+		Hcpv_dealloc(rv);
+		return NULL;
+	}
 	return (PyObject *)rv;
 }
 

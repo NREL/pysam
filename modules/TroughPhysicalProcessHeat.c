@@ -4521,8 +4521,10 @@ TroughPhysicalProcessHeat_default(PyObject *self, PyObject *args)
 		return NULL;
 
 	rv->data_owner_ptr = NULL;
-	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "TroughPhysicalProcessHeat", def);
-
+	if (PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "TroughPhysicalProcessHeat", def) < 0) {
+		TroughPhysicalProcessHeat_dealloc(rv);
+		return NULL;
+	}
 	return (PyObject *)rv;
 }
 

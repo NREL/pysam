@@ -1445,8 +1445,10 @@ Fuelcell_default(PyObject *self, PyObject *args)
 		return NULL;
 
 	rv->data_owner_ptr = NULL;
-	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Fuelcell", def);
-
+	if (PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Fuelcell", def) < 0) {
+		Fuelcell_dealloc(rv);
+		return NULL;
+	}
 	return (PyObject *)rv;
 }
 

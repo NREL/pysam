@@ -1474,8 +1474,10 @@ Swh_default(PyObject *self, PyObject *args)
 		return NULL;
 
 	rv->data_owner_ptr = NULL;
-	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Swh", def);
-
+	if (PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Swh", def) < 0) {
+		Swh_dealloc(rv);
+		return NULL;
+	}
 	return (PyObject *)rv;
 }
 

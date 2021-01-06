@@ -1472,8 +1472,10 @@ Thirdpartyownership_default(PyObject *self, PyObject *args)
 		return NULL;
 
 	rv->data_owner_ptr = NULL;
-	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Thirdpartyownership", def);
-
+	if (PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Thirdpartyownership", def) < 0) {
+		Thirdpartyownership_dealloc(rv);
+		return NULL;
+	}
 	return (PyObject *)rv;
 }
 

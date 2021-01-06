@@ -5317,8 +5317,10 @@ TcstroughPhysical_default(PyObject *self, PyObject *args)
 		return NULL;
 
 	rv->data_owner_ptr = NULL;
-	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "TcstroughPhysical", def);
-
+	if (PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "TcstroughPhysical", def) < 0) {
+		TcstroughPhysical_dealloc(rv);
+		return NULL;
+	}
 	return (PyObject *)rv;
 }
 

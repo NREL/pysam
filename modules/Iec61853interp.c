@@ -634,8 +634,10 @@ Iec61853interp_default(PyObject *self, PyObject *args)
 		return NULL;
 
 	rv->data_owner_ptr = NULL;
-	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Iec61853interp", def);
-
+	if (PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Iec61853interp", def) < 0) {
+		Iec61853interp_dealloc(rv);
+		return NULL;
+	}
 	return (PyObject *)rv;
 }
 

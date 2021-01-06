@@ -587,8 +587,10 @@ PvGetShadeLossMpp_default(PyObject *self, PyObject *args)
 		return NULL;
 
 	rv->data_owner_ptr = NULL;
-	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "PvGetShadeLossMpp", def);
-
+	if (PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "PvGetShadeLossMpp", def) < 0) {
+		PvGetShadeLossMpp_dealloc(rv);
+		return NULL;
+	}
 	return (PyObject *)rv;
 }
 

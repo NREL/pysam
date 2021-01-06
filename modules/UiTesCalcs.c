@@ -641,8 +641,10 @@ UiTesCalcs_default(PyObject *self, PyObject *args)
 		return NULL;
 
 	rv->data_owner_ptr = NULL;
-	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "UiTesCalcs", def);
-
+	if (PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "UiTesCalcs", def) < 0) {
+		UiTesCalcs_dealloc(rv);
+		return NULL;
+	}
 	return (PyObject *)rv;
 }
 

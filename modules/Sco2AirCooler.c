@@ -761,8 +761,10 @@ Sco2AirCooler_default(PyObject *self, PyObject *args)
 		return NULL;
 
 	rv->data_owner_ptr = NULL;
-	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Sco2AirCooler", def);
-
+	if (PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Sco2AirCooler", def) < 0) {
+		Sco2AirCooler_dealloc(rv);
+		return NULL;
+	}
 	return (PyObject *)rv;
 }
 

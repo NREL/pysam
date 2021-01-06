@@ -375,8 +375,10 @@ Wfcsvconv_default(PyObject *self, PyObject *args)
 		return NULL;
 
 	rv->data_owner_ptr = NULL;
-	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Wfcsvconv", def);
-
+	if (PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Wfcsvconv", def) < 0) {
+		Wfcsvconv_dealloc(rv);
+		return NULL;
+	}
 	return (PyObject *)rv;
 }
 

@@ -920,8 +920,10 @@ Pvwattsv11ts_default(PyObject *self, PyObject *args)
 		return NULL;
 
 	rv->data_owner_ptr = NULL;
-	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Pvwattsv11ts", def);
-
+	if (PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Pvwattsv11ts", def) < 0) {
+		Pvwattsv11ts_dealloc(rv);
+		return NULL;
+	}
 	return (PyObject *)rv;
 }
 

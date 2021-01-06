@@ -967,8 +967,10 @@ Pvwattsv51ts_default(PyObject *self, PyObject *args)
 		return NULL;
 
 	rv->data_owner_ptr = NULL;
-	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Pvwattsv51ts", def);
-
+	if (PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Pvwattsv51ts", def) < 0) {
+		Pvwattsv51ts_dealloc(rv);
+		return NULL;
+	}
 	return (PyObject *)rv;
 }
 

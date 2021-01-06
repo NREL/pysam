@@ -2143,8 +2143,10 @@ BatteryStateful_default(PyObject *self, PyObject *args)
 		return NULL;
 
 	rv->data_owner_ptr = NULL;
-	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "BatteryStateful", def);
-
+	if (PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "BatteryStateful", def) < 0) {
+		BatteryStateful_dealloc(rv);
+		return NULL;
+	}
 	rv->cmod_ptr = NULL;
 	return (PyObject *)rv;
 }
