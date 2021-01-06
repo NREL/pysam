@@ -904,26 +904,31 @@ static int PySAM_assign_from_nested_dict(PyObject* self, PyObject* x_attr, void 
         ascii_mystring = PyUnicode_AsASCIIString(key);
         char* name = PyBytes_AsString(ascii_mystring);
 
+        PySAM_error_context_set(name);
+
         if (strcmp(name, "Outputs") == 0)
             continue;
 
         if(!PyDict_Check(value)){
-            PyErr_SetString(PyExc_TypeError, "Must assign Technology module attributes with nested dictionaries");
-            return 0;
+            PySAM_error_set_with_context("Invalid dictionary");
+            goto fail;
         }
         if (strcmp(name, "AdjustmentFactors") == 0){
             PyObject* adj_obj = PyDict_GetItemString(x_attr, "AdjustmentFactors");
             if (!PyObject_CallMethod(adj_obj, "assign", "(O)", value)){
-                PyErr_SetString(PyExc_ImportError, "Could not call 'assign' from imported AdjustmentFactors module.");
-                return -1;
+                PySAM_error_set_with_context("Could not call 'assign' from imported AdjustmentFactors module.");
+                goto fail;
             }
         }
         else if (!PySAM_assign_from_dict(data_ptr, value, tech, name))
-            return 0;
-
+            goto fail;
     }
     Py_XDECREF(ascii_mystring);
     return 1;
+    fail:
+    Py_XDECREF(ascii_mystring);
+    PySAM_error_context_clear();
+    return 0;
 }
 
 //
