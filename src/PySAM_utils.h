@@ -924,6 +924,7 @@ static int PySAM_assign_from_nested_dict(PyObject* self, PyObject* x_attr, void 
             goto fail;
     }
     Py_XDECREF(ascii_mystring);
+    PySAM_error_context_clear();
     return 1;
     fail:
     Py_XDECREF(ascii_mystring);
