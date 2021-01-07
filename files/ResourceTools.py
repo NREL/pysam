@@ -235,6 +235,8 @@ def URDBv7_to_ElectricityRates(urdb_response):
                 month_row += [p[i] for i in (1, 2, 3)]
             flat_mat.append(month_row)
         urdb_data['ur_dc_flat_mat'] = flat_mat
+    elif 'ur_dc_enable' not in urdb_response.keys():
+        urdb_data['ur_dc_enable'] = 0
 
     if urdb_data['ur_dc_enable'] == 1 and "ur_dc_tou_mat" not in urdb_data.keys():
         urdb_data['ur_dc_tou_mat'] = [[1, 1, 1e38, 0], ]
