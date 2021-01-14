@@ -910,7 +910,7 @@ static int PySAM_assign_from_nested_dict(PyObject* self, PyObject* x_attr, void 
             continue;
 
         if(!PyDict_Check(value)){
-            PySAM_error_set_with_context("Invalid dictionary");
+            PySAM_error_set_with_context("Mismatch between provided input and expected structure. PySAM modules are assigned using nested dictionaries. Restructure your input or double check which object to which you are assigning the input.");
             goto fail;
         }
         if (strcmp(name, "AdjustmentFactors") == 0){
