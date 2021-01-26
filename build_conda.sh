@@ -43,5 +43,3 @@ do
    conda build purge
 done
 anaconda -t $CONDA_TOKEN upload -u nrel dist/$DIST_NAME/*pysam*.bz2
-
-conda build purge
