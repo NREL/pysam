@@ -13,6 +13,8 @@ then
 elif [ `uname` = "Darwin" ] ;
 then
     DIST_NAME='osx-64'
+else
+    DIST_NAME='win-64'
 fi
 rm -rf dist/$DIST_NAME
 
@@ -26,7 +28,7 @@ export DIST_DIR
 
 yes | conda install conda-build
 conda activate base
-for PYTHONVER in 3.5 3.6 3.7 3.8 3.9
+for PYTHONVER in 3.6 3.7 3.8 3.9
 do
    conda-build stubs --output-folder=$DIST_DIR --python=$PYTHONVER || exit
    conda build purge
@@ -34,10 +36,10 @@ done
 anaconda -t $CONDA_TOKEN upload -u nrel dist/$DIST_NAME/*pysam-stubs*.bz2 || exit
 rm -rf dist/$DIST_NAME
 
-for PYTHONVER in 3.5 3.6 3.7 3.8 3.9
+for PYTHONVER in 3.6 3.7 3.8 3.9
 do
    export PYTHONVER
-   conda-build conda --output-folder=$DIST_DIR --python=$PYTHONVER --prefix-length=0 -c nrel || exit
+   conda-build conda --output-folder=$DIST_DIR --python=$PYTHONVER --prefix-length=0 || exit
    conda build purge
 done
 anaconda -t $CONDA_TOKEN upload -u nrel dist/$DIST_NAME/*pysam*.bz2
