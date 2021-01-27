@@ -4,7 +4,7 @@ import PySAM.Battery as Batt
 import PySAM.BatteryStateful as BattStfl
 
 
-def battery_model_sizing(model, desired_power, desired_capacity, desired_voltage, size_by_ac_not_dc=None):
+def battery_model_sizing(model, desired_power, desired_capacity, desired_voltage, size_by_ac_not_dc=None, module_dict=None):
     """
     Sizes the battery model using its current configuration such as chemistry, cell properties, etc
     and modifies the model's power, capacity and voltage without changing its fundamental properties
@@ -20,11 +20,20 @@ def battery_model_sizing(model, desired_power, desired_capacity, desired_voltage
         volts
     :param size_by_ac_not_dc: optional bool
         Sizes for power and capacity are on AC side not DC side of battery-inverter regardless of connection type
+    :param module_dict: optional dict
+        Module specs for scaling surface area
+            capacity: float
+                Utility-scale module capacity for scaling surface area
+                Battery: kWhAC if AC-connected, kWhDC otherwise
+                BatteryStateful: battery kWhDC
+            surface_area: float
+                Utility-scale module surface area m^2
+                m^2 of module battery
     """
     if type(model) == Batt.Battery:
-        size_battery(model, desired_power, desired_capacity, desired_voltage, size_by_ac_not_dc)
+        size_battery(model, desired_power, desired_capacity, desired_voltage, size_by_ac_not_dc, module_dict=module_dict)
     elif type(model) == BattStfl.BatteryStateful:
-        size_batterystateful(model, desired_power, desired_capacity, desired_voltage)
+        size_batterystateful(model, desired_power, desired_capacity, desired_voltage, module_dict=module_dict)
     else:
         raise TypeError
 
@@ -49,7 +58,7 @@ def battery_model_change_chemistry(model, chem):
         raise TypeError
 
 
-def size_battery(model, desired_power, desired_capacity, desired_voltage, size_by_ac_not_dc=None):
+def size_battery(model, desired_power, desired_capacity, desired_voltage, size_by_ac_not_dc=None, module_dict=None):
     """
     Helper function for battery_model_sizing
     Modifies Battery model with new sizing. For BatteryStateful use size_batterystateful
@@ -63,6 +72,14 @@ def size_battery(model, desired_power, desired_capacity, desired_voltage, size_b
         volts
     :param size_by_ac_not_dc: optional bool
         Sizes for power and capacity are on AC side not DC side of battery-inverter
+    :param module_dict: optional dict
+        Module specs for scaling surface area
+            capacity: float
+                Utility-scale module capacity for scaling surface area
+                kWhAC if AC-connected, kWhDC otherwise
+            surface_area: float
+                Utility-scale module surface area m^2
+                m^2 of module battery
     :return: output_dictionary of sizing parameters
     """
     if type(model) != Batt.Battery:
@@ -133,6 +150,9 @@ def size_battery(model, desired_power, desired_capacity, desired_voltage, size_b
         'original_capacity': original_capacity,
         'desired_capacity': sizing_outputs['batt_computed_bank_capacity']
     }
+    if module_dict is not None:
+        module_dict = {'module_'+k: v for k, v in module_dict.items()}
+        thermal_inputs.update(module_dict)
 
     thermal_outputs = calculate_thermal_params(thermal_inputs)
 
@@ -142,7 +162,7 @@ def size_battery(model, desired_power, desired_capacity, desired_voltage, size_b
     return sizing_outputs.update(thermal_outputs)
 
 
-def size_batterystateful(model: BattStfl.BatteryStateful, _, desired_capacity, desired_voltage):
+def size_batterystateful(model: BattStfl.BatteryStateful, _, desired_capacity, desired_voltage, module_dict=None):
     """
     Helper function for battery_model_sizing
 
@@ -156,6 +176,14 @@ def size_batterystateful(model: BattStfl.BatteryStateful, _, desired_capacity, d
         kWhAC if AC-connected, kWhDC otherwise
     :param desired_voltage: float
         volts
+    :param module_dict: optional dict
+        Module specs for scaling surface area
+            capacity: float
+                Utility-scale module capacity for scaling surface area
+                kWhAC if AC-connected, kWhDC otherwise
+            surface_area: float
+                Utility-scale module surface area m^2
+                m^2 of module battery
     :return: output_dictionary of sizing parameters
     """
     #
@@ -178,6 +206,9 @@ def size_batterystateful(model: BattStfl.BatteryStateful, _, desired_capacity, d
         'original_capacity': original_capacity,
         'desired_capacity': desired_capacity
     }
+    if module_dict is not None:
+        module_dict = {'module_'+k: v for k, v in module_dict.items()}
+        thermal_inputs.update(module_dict)
 
     thermal_outputs = calculate_thermal_params(thermal_inputs)
 
@@ -345,6 +376,9 @@ def calculate_thermal_params(input_dict):
     Calculates the mass and surface area of a battery by calculating from its current parameters the
     mass / specific energy and volume / specific energy ratios.
 
+    If module_capacity and module_surface_area are provided, battery surface area is calculated by 
+    scaling module_surface_area by the number of modules required to fulfill desired capacity. 
+
     :param:
         input_dict:
             mass: float
@@ -355,12 +389,16 @@ def calculate_thermal_params(input_dict):
                 Wh of battery
             desired_capacity: float
                 Wh of new battery size
+            module_capacity: optional float
+                Wh of module battery size
+            module_surface_area: optional float
+                m^2 of module battery
     Returns:
         output_dict:
             mass: float
                 kg of battery at desired size
             surface_area: float
-                m^w of battery at desired size
+                m^2 of battery at desired size
     """
     mass = input_dict['mass']
     surface_area = input_dict['surface_area']
@@ -377,6 +415,12 @@ def calculate_thermal_params(input_dict):
         'mass': mass_per_specific_energy * desired_capacity,
         'surface_area': (volume_per_specific_energy * desired_capacity) ** (2/3) * 6,
     }
+
+    if input_dict.has_key('module_capacity') and input_dict.has_key('module_surface_area'):
+        module_capacity = input_dict['module_capacity']
+        module_surface_area = input_dict['module_surface_area']
+        output_dict['surface_area'] = module_surface_area*desired_capacity/module_capacity
+
     return output_dict
 
 
