@@ -48,6 +48,7 @@ class ParamsCell(object):
 	leadacid_q20 = float
 	leadacid_qn = float
 	leadacid_tn = float
+	life_model = float
 	maximum_SOC = float
 	minimum_SOC = float
 	resistance = float

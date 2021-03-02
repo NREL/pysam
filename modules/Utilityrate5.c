@@ -1503,6 +1503,18 @@ Outputs_get_surplus_w_sys_ec_sep_tp(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_true_up_credits_ym(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Utilityrate5_Outputs_true_up_credits_ym_mget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_two_meter_sales_ym(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Utilityrate5_Outputs_two_meter_sales_ym_mget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_utility_bill_w_sys(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Utilityrate5_Outputs_utility_bill_w_sys_aget, self->data_ptr);
@@ -1758,6 +1770,18 @@ static PyObject *
 Outputs_get_year1_nm_dollars_applied(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Utilityrate5_Outputs_year1_nm_dollars_applied_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_year1_true_up_credits(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Utilityrate5_Outputs_year1_true_up_credits_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_year1_two_meter_sales(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Utilityrate5_Outputs_year1_two_meter_sales_aget, self->data_ptr);
 }
 
 static PyGetSetDef Outputs_getset[] = {
@@ -2052,6 +2076,12 @@ static PyGetSetDef Outputs_getset[] = {
 {"surplus_w_sys_ec_sep_tp", (getter)Outputs_get_surplus_w_sys_ec_sep_tp,(setter)0,
 	PyDoc_STR("*sequence[sequence]*: Electricity exports with system Sep [kWh]"),
  	NULL},
+{"true_up_credits_ym", (getter)Outputs_get_true_up_credits_ym,(setter)0,
+	PyDoc_STR("*sequence[sequence]*: Net annual true-up payments [$]"),
+ 	NULL},
+{"two_meter_sales_ym", (getter)Outputs_get_two_meter_sales_ym,(setter)0,
+	PyDoc_STR("*sequence[sequence]*: Buy all sell all electricity sales to grid [$]"),
+ 	NULL},
 {"utility_bill_w_sys", (getter)Outputs_get_utility_bill_w_sys,(setter)0,
 	PyDoc_STR("*sequence*: Electricity bill with system [$]"),
  	NULL},
@@ -2180,6 +2210,12 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"year1_nm_dollars_applied", (getter)Outputs_get_year1_nm_dollars_applied,(setter)0,
 	PyDoc_STR("*sequence*: Net metering credit [$/mo]"),
+ 	NULL},
+{"year1_true_up_credits", (getter)Outputs_get_year1_true_up_credits,(setter)0,
+	PyDoc_STR("*sequence*: Net annual true-up payments [$/mo]"),
+ 	NULL},
+{"year1_two_meter_sales", (getter)Outputs_get_year1_two_meter_sales,(setter)0,
+	PyDoc_STR("*sequence*: Buy all sell all electricity sales to grid [$/mo]"),
  	NULL},
 	{NULL}  /* Sentinel */
 };

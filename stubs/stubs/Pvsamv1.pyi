@@ -754,6 +754,7 @@ class BatteryCell(object):
 	batt_chem = float
 	batt_h_to_ambient = float
 	batt_initial_SOC = float
+	batt_life_model = float
 	batt_lifetime_matrix = tuple
 	batt_maximum_SOC = float
 	batt_minimum_SOC = float

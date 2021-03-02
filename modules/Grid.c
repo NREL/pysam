@@ -8,7 +8,7 @@
 
 /*
  * Lifetime Group
- */
+ */ 
 
 static PyTypeObject Lifetime_Type;
 
@@ -141,7 +141,7 @@ static PyTypeObject Lifetime_Type = {
 
 /*
  * GridLimits Group
- */
+ */ 
 
 static PyTypeObject GridLimits_Type;
 
@@ -289,7 +289,7 @@ static PyTypeObject GridLimits_Type = {
 
 /*
  * SystemOutput Group
- */
+ */ 
 
 static PyTypeObject SystemOutput_Type;
 
@@ -422,7 +422,7 @@ static PyTypeObject SystemOutput_Type = {
 
 /*
  * Load Group
- */
+ */ 
 
 static PyTypeObject Load_Type;
 
@@ -555,7 +555,7 @@ static PyTypeObject Load_Type = {
 
 /*
  * Outputs Group
- */
+ */ 
 
 static PyTypeObject Outputs_Type;
 

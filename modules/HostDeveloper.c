@@ -8678,7 +8678,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Battery replacement cost [$]"),
  	NULL},
 {"cf_battery_replacement_cost_schedule", (getter)Outputs_get_cf_battery_replacement_cost_schedule,(setter)0,
-	PyDoc_STR("*sequence*: Battery replacement cost schedule [$/kWh]"),
+	PyDoc_STR("*sequence*: Battery replacement cost schedule [$]"),
  	NULL},
 {"cf_cash_for_ds", (getter)Outputs_get_cf_cash_for_ds,(setter)0,
 	PyDoc_STR("*sequence*: Cash available for debt service (CAFDS) [$]"),

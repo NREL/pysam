@@ -486,6 +486,18 @@ ParamsCell_set_leadacid_tn(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyObject *
+ParamsCell_get_life_model(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_BatteryStateful_ParamsCell_life_model_nget, self->data_ptr);
+}
+
+static int
+ParamsCell_set_life_model(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_BatteryStateful_ParamsCell_life_model_nset, self->data_ptr);
+}
+
+static PyObject *
 ParamsCell_get_maximum_SOC(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_BatteryStateful_ParamsCell_maximum_SOC_nget, self->data_ptr);
@@ -574,28 +586,28 @@ static PyGetSetDef ParamsCell_getset[] = {
 	PyDoc_STR("*float*: Default nominal cell voltage [V]\n\n*Required*: True"),
  	NULL},
 {"calendar_a", (getter)ParamsCell_get_calendar_a,(setter)ParamsCell_set_calendar_a,
-	PyDoc_STR("*float*: Calendar life model coefficient [1/sqrt(day)]\n\n*Required*: True if calendar_choice=1"),
+	PyDoc_STR("*float*: Calendar life model coefficient [1/sqrt(day)]\n\n*Required*: True if life_model=0&calendar_choice=1"),
  	NULL},
 {"calendar_b", (getter)ParamsCell_get_calendar_b,(setter)ParamsCell_set_calendar_b,
-	PyDoc_STR("*float*: Calendar life model coefficient [K]\n\n*Required*: True if calendar_choice=1"),
+	PyDoc_STR("*float*: Calendar life model coefficient [K]\n\n*Required*: True if life_model=0&calendar_choice=1"),
  	NULL},
 {"calendar_c", (getter)ParamsCell_get_calendar_c,(setter)ParamsCell_set_calendar_c,
-	PyDoc_STR("*float*: Calendar life model coefficient [K]\n\n*Required*: True if calendar_choice=1"),
+	PyDoc_STR("*float*: Calendar life model coefficient [K]\n\n*Required*: True if life_model=0&calendar_choice=1"),
  	NULL},
 {"calendar_choice", (getter)ParamsCell_get_calendar_choice,(setter)ParamsCell_set_calendar_choice,
-	PyDoc_STR("*float*: Calendar life degradation input option [0/1/2]\n\n*Options*: 0=None,1=LithiomIonModel,2=InputLossTable\n\n*Required*: True"),
+	PyDoc_STR("*float*: Calendar life degradation input option [0/1/2]\n\n*Options*: 0=None,1=LithiomIonModel,2=InputLossTable\n\n*Required*: True if life_model=0"),
  	NULL},
 {"calendar_matrix", (getter)ParamsCell_get_calendar_matrix,(setter)ParamsCell_set_calendar_matrix,
-	PyDoc_STR("*sequence[sequence]*: Table with Day # and Capacity % columns [[[#, %]]]\n\n*Required*: True if calendar_choice=2"),
+	PyDoc_STR("*sequence[sequence]*: Table with Day # and Capacity % columns [[[#, %]]]\n\n*Required*: True if life_model=0&calendar_choice=2"),
  	NULL},
 {"calendar_q0", (getter)ParamsCell_get_calendar_q0,(setter)ParamsCell_set_calendar_q0,
-	PyDoc_STR("*float*: Calendar life model initial capacity cofficient\n\n*Required*: True if calendar_choice=1"),
+	PyDoc_STR("*float*: Calendar life model initial capacity cofficient\n\n*Required*: True if life_model=0&calendar_choice=1"),
  	NULL},
 {"chem", (getter)ParamsCell_get_chem,(setter)ParamsCell_set_chem,
 	PyDoc_STR("*float*: Lead Acid (0), Li Ion (1), Vanadium Redox (2), Iron Flow (3) [0/1/2/3]\n\n*Required*: True"),
  	NULL},
 {"cycling_matrix", (getter)ParamsCell_get_cycling_matrix,(setter)ParamsCell_set_cycling_matrix,
-	PyDoc_STR("*sequence[sequence]*: Table with DOD %, Cycle #, and Capacity % columns [[[%, #, %]]]\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: Table with DOD %, Cycle #, and Capacity % columns [[[%, #, %]]]\n\n*Required*: True if life_model=0"),
  	NULL},
 {"initial_SOC", (getter)ParamsCell_get_initial_SOC,(setter)ParamsCell_set_initial_SOC,
 	PyDoc_STR("*float*: Initial state-of-charge [%]\n\n*Required*: True"),
@@ -611,6 +623,9 @@ static PyGetSetDef ParamsCell_getset[] = {
  	NULL},
 {"leadacid_tn", (getter)ParamsCell_get_leadacid_tn,(setter)ParamsCell_set_leadacid_tn,
 	PyDoc_STR("*float*: Hours to discharge for qn rate [h]\n\n*Required*: True if chem=0"),
+ 	NULL},
+{"life_model", (getter)ParamsCell_get_life_model,(setter)ParamsCell_set_life_model,
+	PyDoc_STR("*float*: Battery life model specifier [0/1]\n\n*Options*: 0=calendar/cycle,1=NMC\n\n*Required*: True"),
  	NULL},
 {"maximum_SOC", (getter)ParamsCell_get_maximum_SOC,(setter)ParamsCell_set_maximum_SOC,
 	PyDoc_STR("*float*: Maximum allowed state-of-charge [%]\n\n*Required*: True"),
@@ -929,7 +944,7 @@ static PyGetSetDef ParamsPack_getset[] = {
 	PyDoc_STR("*float*: Temperature of storage room [C]\n\n*Required*: True"),
  	NULL},
 {"cap_vs_temp", (getter)ParamsPack_get_cap_vs_temp,(setter)ParamsPack_set_cap_vs_temp,
-	PyDoc_STR("*sequence[sequence]*: Table with Temperature and Capacity % as columns [[[C,%]]]\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: Table with Temperature and Capacity % as columns [[[C,%]]]\n\n*Required*: True if life_model=0"),
  	NULL},
 {"h", (getter)ParamsPack_get_h,(setter)ParamsPack_set_h,
 	PyDoc_STR("*float*: Heat transfer between battery and environment [W/m2K]\n\n*Required*: True"),
