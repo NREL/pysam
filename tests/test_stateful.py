@@ -16,6 +16,6 @@ def test_stateful():
 
     b.Controls.input_power = 0.5
     b.execute(0)
-    assert(b.StatePack.SOC == approx(45.9993))
+    assert(b.StatePack.SOC == approx(44.81135))
 
 

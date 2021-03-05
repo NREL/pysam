@@ -4,9 +4,9 @@
 * Add `unassign` function to modules
 * Fix mypy errors in stubs
 * Fix BatteryStateful bugs: memory leak; unintialized pointer in some constructors; fix `setup` error messaging
-* BatteryStateful ability to use adaptive timestep in simulation
+* BatteryStateful features: ability to use adaptive timestep in simulation; speed up execution
 ? Fix docs for TcsMoltenSalt
-? Leap year 2/29 date is now acceptable
+* Leap year 2/29 date is now acceptable
 ? Other Issues and PRs?
 
 ## Version 2.2.0, Dec 2, 2020 ~ SAM 2020.11.29, SSC Version 250
