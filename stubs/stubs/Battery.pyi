@@ -122,6 +122,7 @@ class BatteryCell(object):
 	batt_Qfull = float
 	batt_Qfull_flow = float
 	batt_Qnom = float
+	batt_Vcut = float
 	batt_Vexp = float
 	batt_Vfull = float
 	batt_Vnom = float

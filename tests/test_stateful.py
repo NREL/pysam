@@ -16,14 +16,14 @@ def test_stateful():
 
     b.Controls.input_power = 0.5
     b.execute(0)
-    assert (b.StatePack.SOC == approx(44.81135))
+    assert (b.StatePack.SOC == approx(44.811, 1e-2))
 
 
 def test_stateful_from_data():
     b = bt.new()
     d = {'Controls': {'control_mode': 1.0, 'dt_hr': 0.016666666666666666, 'input_power': 0.0},
          'ParamsCell': {'C_rate': 0.2, 'Qexp': 2.584, 'Qfull': 3.2, 'Qnom': 3.126, 'Vexp': 3.53, 'Vfull': 4.2,
-                        'Vnom': 3.342, 'Vnom_default': 3.6, 'life_model': 1, 'chem': 1.0,
+                        'Vnom': 3.342, 'Vcut': 0, 'Vnom_default': 3.6, 'life_model': 1, 'chem': 1.0,
                         'cycling_matrix': ((10.0, 0.0, 100.85333333333334), (10.0, 1250.0, 94.88402967051991),
                                            (10.0, 2500.0, 88.91472600735459), (10.0, 3750.0, 82.94542234383735),
                                            (10.0, 5000.0, 76.97611867996821), (20.0, 0.0, 100.85333333333334),
@@ -48,3 +48,4 @@ def test_stateful_from_data():
             dd[k] = v
     b.assign(d)
     b.setup()
+    assert b.Controls.control_mode == 1

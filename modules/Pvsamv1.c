@@ -9079,6 +9079,18 @@ BatteryCell_set_batt_Qnom(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyObject *
+BatteryCell_get_batt_Vcut(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_BatteryCell_batt_Vcut_nget, self->data_ptr);
+}
+
+static int
+BatteryCell_set_batt_Vcut(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_BatteryCell_batt_Vcut_nset, self->data_ptr);
+}
+
+static PyObject *
 BatteryCell_get_batt_Vexp(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Pvsamv1_BatteryCell_batt_Vexp_nget, self->data_ptr);
@@ -9384,6 +9396,9 @@ static PyGetSetDef BatteryCell_getset[] = {
  	NULL},
 {"batt_Qnom", (getter)BatteryCell_get_batt_Qnom,(setter)BatteryCell_set_batt_Qnom,
 	PyDoc_STR("*float*: Cell capacity at end of nominal zone [Ah]"),
+ 	NULL},
+{"batt_Vcut", (getter)BatteryCell_get_batt_Vcut,(setter)BatteryCell_set_batt_Vcut,
+	PyDoc_STR("*float*: Cutoff voltage for battery rated capacity [V]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"batt_Vexp", (getter)BatteryCell_get_batt_Vexp,(setter)BatteryCell_set_batt_Vexp,
 	PyDoc_STR("*float*: Cell voltage at end of exponential zone [V]"),

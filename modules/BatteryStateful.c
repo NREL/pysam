@@ -282,6 +282,18 @@ ParamsCell_set_Qnom(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyObject *
+ParamsCell_get_Vcut(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_BatteryStateful_ParamsCell_Vcut_nget, self->data_ptr);
+}
+
+static int
+ParamsCell_set_Vcut(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_BatteryStateful_ParamsCell_Vcut_nset, self->data_ptr);
+}
+
+static PyObject *
 ParamsCell_get_Vexp(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_BatteryStateful_ParamsCell_Vexp_nget, self->data_ptr);
@@ -572,6 +584,9 @@ static PyGetSetDef ParamsCell_getset[] = {
  	NULL},
 {"Qnom", (getter)ParamsCell_get_Qnom,(setter)ParamsCell_set_Qnom,
 	PyDoc_STR("*float*: Cell capacity at end of nominal zone [Ah]\n\n*Required*: True if voltage_choice=0&chem~2"),
+ 	NULL},
+{"Vcut", (getter)ParamsCell_get_Vcut,(setter)ParamsCell_set_Vcut,
+	PyDoc_STR("*float*: Cell cutoff voltage [V]\n\n*Required*: True if voltage_choice=0&chem~2"),
  	NULL},
 {"Vexp", (getter)ParamsCell_get_Vexp,(setter)ParamsCell_set_Vexp,
 	PyDoc_STR("*float*: Cell voltage at end of exponential zone [V]\n\n*Required*: True if voltage_choice=0&chem~2"),

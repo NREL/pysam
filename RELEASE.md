@@ -5,6 +5,7 @@
 * Fix mypy errors in stubs
 * Fix BatteryStateful bugs: memory leak; unintialized pointer in some constructors; fix `setup` error messaging
 * BatteryStateful features: ability to use adaptive timestep in simulation; speed up execution; Smith 2017 Life Model
+* Voltage cutoff feature for battery model (Battery & BatteryStateful)
 * Fix docs for TcsMoltenSalt
 * Leap year 2/29 date is now acceptable
 * [SAM Release updates for Version 2020.11.29 Revision 1](https://nrel.github.io/SAM/doc/releasenotes.html)

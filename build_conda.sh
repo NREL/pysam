@@ -28,6 +28,7 @@ export DIST_DIR
 
 yes | conda install conda-build
 conda activate base
+conda update -n base -c defaults conda
 for PYTHONVER in 3.6 3.7 3.8 3.9
 do
    conda-build stubs --output-folder=$DIST_DIR --python=$PYTHONVER || exit

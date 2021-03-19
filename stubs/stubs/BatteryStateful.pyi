@@ -31,6 +31,7 @@ class ParamsCell(object):
 	Qfull = float
 	Qfull_flow = float
 	Qnom = float
+	Vcut = float
 	Vexp = float
 	Vfull = float
 	Vnom = float
