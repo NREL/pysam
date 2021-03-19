@@ -1,13 +1,17 @@
 # Release Notes
 
 ## Version 2.2.1, Mar 19, 2021 ~ SAM 2020.11.29 Revision 1, SSC Version 253
-* Add `unassign` function to modules
-* Fix mypy errors in stubs
-* Fix BatteryStateful bugs: memory leak; unintialized pointer in some constructors; fix `setup` error messaging
+* Add `unassign` function to modules (#65)
+* Fix mypy errors in stubs (#47)
+* Fix BatteryStateful bugs: memory leak; unintialized pointer in some constructors; fix `setup` error messaging (#67)
 * BatteryStateful features: ability to use adaptive timestep in simulation; speed up execution; Smith 2017 Life Model
 * Voltage cutoff feature for battery model (Battery & BatteryStateful)
-* Fix docs for TcsMoltenSalt
+* Battery sizing tool can use per-module scaling for surface area (#77)
+* Updates to ResourceTools for weather download (#53, #50)
 * Leap year 2/29 date is now acceptable
+* Fix docs for TcsMoltenSalt (#66)
+* Update Import from SAM GUI example to use "PySAM JSON" option in Generate Code
+* Better error messaging (#74)
 * [SAM Release updates for Version 2020.11.29 Revision 1](https://nrel.github.io/SAM/doc/releasenotes.html)
 
 ## Version 2.2.0, Dec 2, 2020 ~ SAM 2020.11.29, SSC Version 250
