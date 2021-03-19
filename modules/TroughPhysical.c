@@ -3834,7 +3834,7 @@ static PyGetSetDef Controller_getset[] = {
 	PyDoc_STR("*sequence[sequence]*: Custom TES diameters [m]\n\n*Required*: True"),
  	NULL},
 {"tes_lengths", (getter)Controller_get_tes_lengths,(setter)Controller_set_tes_lengths,
-	PyDoc_STR("*sequence[sequence]*: Custom TES lengths [m]\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: Custom TES lengths [m]"),
  	NULL},
 {"tes_pump_coef", (getter)Controller_get_tes_pump_coef,(setter)Controller_set_tes_pump_coef,
 	PyDoc_STR("*float*: Pumping power to move 1kg of HTF through tes loop [kW/(kg/s)]\n\n*Required*: True"),
@@ -5423,8 +5423,14 @@ TroughPhysical_value(CmodObject *self, PyObject *args)
 	return Cmod_value(self, args);
 }
 
+static PyObject *
+TroughPhysical_unassign(CmodObject *self, PyObject *args)
+{
+	return Cmod_unassign(self, args);
+}
+
 static PyMethodDef TroughPhysical_methods[] = {
-		{"execute",            (PyCFunction)TroughPhysical_execute,  METH_VARARGS,
+		{"execute",           (PyCFunction)TroughPhysical_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
 		{"assign",            (PyCFunction)TroughPhysical_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'weather': { var: val, ...}, ...}``")},
@@ -5432,6 +5438,8 @@ static PyMethodDef TroughPhysical_methods[] = {
 				PyDoc_STR("export() -> dict\n Export attributes into nested dictionary")},
 		{"value",             (PyCFunction)TroughPhysical_value, METH_VARARGS,
 				PyDoc_STR("value(name, optional value) -> Union[None, float, dict, sequence, str]\n Get or set by name a value in any of the variable groups.")},
+		{"unassign",          (PyCFunction)TroughPhysical_unassign, METH_VARARGS,
+				PyDoc_STR("unassign(name) -> None\n Unassign a value in any of the variable groups.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -5541,8 +5549,10 @@ TroughPhysical_default(PyObject *self, PyObject *args)
 		return NULL;
 
 	rv->data_owner_ptr = NULL;
-	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "TroughPhysical", def);
-
+	if (PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "TroughPhysical", def) < 0) {
+		TroughPhysical_dealloc(rv);
+		return NULL;
+	}
 	return (PyObject *)rv;
 }
 

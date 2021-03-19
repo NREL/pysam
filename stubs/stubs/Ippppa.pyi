@@ -2,7 +2,7 @@ class FinancialParameters(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -29,7 +29,7 @@ class SystemCosts(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -72,7 +72,7 @@ class Depreciation(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -91,7 +91,7 @@ class TaxCreditIncentives(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -124,7 +124,7 @@ class PaymentIncentives(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -225,7 +225,7 @@ class Common(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -275,7 +275,7 @@ class Outputs(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -474,6 +474,9 @@ class Ippppa(object):
 		pass
 
 	def value(self, name, value=None):
+		pass
+
+	def unassign(self, name):
 		pass
 
 	def execute(self, int_verbosity):

@@ -1125,8 +1125,14 @@ Pvwattsv5_value(CmodObject *self, PyObject *args)
 	return Cmod_value(self, args);
 }
 
+static PyObject *
+Pvwattsv5_unassign(CmodObject *self, PyObject *args)
+{
+	return Cmod_unassign(self, args);
+}
+
 static PyMethodDef Pvwattsv5_methods[] = {
-		{"execute",            (PyCFunction)Pvwattsv5_execute,  METH_VARARGS,
+		{"execute",           (PyCFunction)Pvwattsv5_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
 		{"assign",            (PyCFunction)Pvwattsv5_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Lifetime': { var: val, ...}, ...}``")},
@@ -1134,6 +1140,8 @@ static PyMethodDef Pvwattsv5_methods[] = {
 				PyDoc_STR("export() -> dict\n Export attributes into nested dictionary")},
 		{"value",             (PyCFunction)Pvwattsv5_value, METH_VARARGS,
 				PyDoc_STR("value(name, optional value) -> Union[None, float, dict, sequence, str]\n Get or set by name a value in any of the variable groups.")},
+		{"unassign",          (PyCFunction)Pvwattsv5_unassign, METH_VARARGS,
+				PyDoc_STR("unassign(name) -> None\n Unassign a value in any of the variable groups.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -1243,8 +1251,10 @@ Pvwattsv5_default(PyObject *self, PyObject *args)
 		return NULL;
 
 	rv->data_owner_ptr = NULL;
-	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Pvwattsv5", def);
-
+	if (PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Pvwattsv5", def) < 0) {
+		Pvwattsv5_dealloc(rv);
+		return NULL;
+	}
 	return (PyObject *)rv;
 }
 

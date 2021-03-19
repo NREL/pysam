@@ -530,8 +530,14 @@ InvCecCg_value(CmodObject *self, PyObject *args)
 	return Cmod_value(self, args);
 }
 
+static PyObject *
+InvCecCg_unassign(CmodObject *self, PyObject *args)
+{
+	return Cmod_unassign(self, args);
+}
+
 static PyMethodDef InvCecCg_methods[] = {
-		{"execute",            (PyCFunction)InvCecCg_execute,  METH_VARARGS,
+		{"execute",           (PyCFunction)InvCecCg_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
 		{"assign",            (PyCFunction)InvCecCg_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Common': { var: val, ...}, ...}``")},
@@ -539,6 +545,8 @@ static PyMethodDef InvCecCg_methods[] = {
 				PyDoc_STR("export() -> dict\n Export attributes into nested dictionary")},
 		{"value",             (PyCFunction)InvCecCg_value, METH_VARARGS,
 				PyDoc_STR("value(name, optional value) -> Union[None, float, dict, sequence, str]\n Get or set by name a value in any of the variable groups.")},
+		{"unassign",          (PyCFunction)InvCecCg_unassign, METH_VARARGS,
+				PyDoc_STR("unassign(name) -> None\n Unassign a value in any of the variable groups.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -648,8 +656,10 @@ InvCecCg_default(PyObject *self, PyObject *args)
 		return NULL;
 
 	rv->data_owner_ptr = NULL;
-	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "InvCecCg", def);
-
+	if (PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "InvCecCg", def) < 0) {
+		InvCecCg_dealloc(rv);
+		return NULL;
+	}
 	return (PyObject *)rv;
 }
 

@@ -39,7 +39,7 @@ if sys.platform == 'darwin':
     vars['LDSHARED'] = vars['LDSHARED'].replace('-bundle', '-dynamiclib')
     libs = ['SAM_api', 'ssc']
     libfiles += ['libSAM_api.so', 'libssc.so']
-    extra_link_args = ["-Wl,-rpath,@loader_path/"]
+    extra_link_args = ["-headerpad_max_install_names", "-Wl,-rpath,@loader_path/"]
     extra_compile_args.append("-Wno-ignored-attributes")
 
 if sys.platform == 'linux':

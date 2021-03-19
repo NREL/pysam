@@ -3898,274 +3898,274 @@ static PyMethodDef CECPerformanceModelWithUserEnteredSpecifications_methods[] = 
 };
 
 static PyObject *
-CECPerformanceModelWithUserEnteredSpecifications_get_6par_aisc(VarGroupObject *self, void *closure)
+CECPerformanceModelWithUserEnteredSpecifications_get_sixpar_aisc(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Pvsamv1_CECPerformanceModelWithUserEnteredSpecifications_6par_aisc_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Pvsamv1_CECPerformanceModelWithUserEnteredSpecifications_sixpar_aisc_nget, self->data_ptr);
 }
 
 static int
-CECPerformanceModelWithUserEnteredSpecifications_set_6par_aisc(VarGroupObject *self, PyObject *value, void *closure)
+CECPerformanceModelWithUserEnteredSpecifications_set_sixpar_aisc(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Pvsamv1_CECPerformanceModelWithUserEnteredSpecifications_6par_aisc_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Pvsamv1_CECPerformanceModelWithUserEnteredSpecifications_sixpar_aisc_nset, self->data_ptr);
 }
 
 static PyObject *
-CECPerformanceModelWithUserEnteredSpecifications_get_6par_area(VarGroupObject *self, void *closure)
+CECPerformanceModelWithUserEnteredSpecifications_get_sixpar_area(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Pvsamv1_CECPerformanceModelWithUserEnteredSpecifications_6par_area_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Pvsamv1_CECPerformanceModelWithUserEnteredSpecifications_sixpar_area_nget, self->data_ptr);
 }
 
 static int
-CECPerformanceModelWithUserEnteredSpecifications_set_6par_area(VarGroupObject *self, PyObject *value, void *closure)
+CECPerformanceModelWithUserEnteredSpecifications_set_sixpar_area(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Pvsamv1_CECPerformanceModelWithUserEnteredSpecifications_6par_area_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Pvsamv1_CECPerformanceModelWithUserEnteredSpecifications_sixpar_area_nset, self->data_ptr);
 }
 
 static PyObject *
-CECPerformanceModelWithUserEnteredSpecifications_get_6par_bifacial_ground_clearance_height(VarGroupObject *self, void *closure)
+CECPerformanceModelWithUserEnteredSpecifications_get_sixpar_bifacial_ground_clearance_height(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Pvsamv1_CECPerformanceModelWithUserEnteredSpecifications_6par_bifacial_ground_clearance_height_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Pvsamv1_CECPerformanceModelWithUserEnteredSpecifications_sixpar_bifacial_ground_clearance_height_nget, self->data_ptr);
 }
 
 static int
-CECPerformanceModelWithUserEnteredSpecifications_set_6par_bifacial_ground_clearance_height(VarGroupObject *self, PyObject *value, void *closure)
+CECPerformanceModelWithUserEnteredSpecifications_set_sixpar_bifacial_ground_clearance_height(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Pvsamv1_CECPerformanceModelWithUserEnteredSpecifications_6par_bifacial_ground_clearance_height_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Pvsamv1_CECPerformanceModelWithUserEnteredSpecifications_sixpar_bifacial_ground_clearance_height_nset, self->data_ptr);
 }
 
 static PyObject *
-CECPerformanceModelWithUserEnteredSpecifications_get_6par_bifacial_transmission_factor(VarGroupObject *self, void *closure)
+CECPerformanceModelWithUserEnteredSpecifications_get_sixpar_bifacial_transmission_factor(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Pvsamv1_CECPerformanceModelWithUserEnteredSpecifications_6par_bifacial_transmission_factor_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Pvsamv1_CECPerformanceModelWithUserEnteredSpecifications_sixpar_bifacial_transmission_factor_nget, self->data_ptr);
 }
 
 static int
-CECPerformanceModelWithUserEnteredSpecifications_set_6par_bifacial_transmission_factor(VarGroupObject *self, PyObject *value, void *closure)
+CECPerformanceModelWithUserEnteredSpecifications_set_sixpar_bifacial_transmission_factor(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Pvsamv1_CECPerformanceModelWithUserEnteredSpecifications_6par_bifacial_transmission_factor_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Pvsamv1_CECPerformanceModelWithUserEnteredSpecifications_sixpar_bifacial_transmission_factor_nset, self->data_ptr);
 }
 
 static PyObject *
-CECPerformanceModelWithUserEnteredSpecifications_get_6par_bifaciality(VarGroupObject *self, void *closure)
+CECPerformanceModelWithUserEnteredSpecifications_get_sixpar_bifaciality(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Pvsamv1_CECPerformanceModelWithUserEnteredSpecifications_6par_bifaciality_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Pvsamv1_CECPerformanceModelWithUserEnteredSpecifications_sixpar_bifaciality_nget, self->data_ptr);
 }
 
 static int
-CECPerformanceModelWithUserEnteredSpecifications_set_6par_bifaciality(VarGroupObject *self, PyObject *value, void *closure)
+CECPerformanceModelWithUserEnteredSpecifications_set_sixpar_bifaciality(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Pvsamv1_CECPerformanceModelWithUserEnteredSpecifications_6par_bifaciality_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Pvsamv1_CECPerformanceModelWithUserEnteredSpecifications_sixpar_bifaciality_nset, self->data_ptr);
 }
 
 static PyObject *
-CECPerformanceModelWithUserEnteredSpecifications_get_6par_bvoc(VarGroupObject *self, void *closure)
+CECPerformanceModelWithUserEnteredSpecifications_get_sixpar_bvoc(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Pvsamv1_CECPerformanceModelWithUserEnteredSpecifications_6par_bvoc_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Pvsamv1_CECPerformanceModelWithUserEnteredSpecifications_sixpar_bvoc_nget, self->data_ptr);
 }
 
 static int
-CECPerformanceModelWithUserEnteredSpecifications_set_6par_bvoc(VarGroupObject *self, PyObject *value, void *closure)
+CECPerformanceModelWithUserEnteredSpecifications_set_sixpar_bvoc(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Pvsamv1_CECPerformanceModelWithUserEnteredSpecifications_6par_bvoc_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Pvsamv1_CECPerformanceModelWithUserEnteredSpecifications_sixpar_bvoc_nset, self->data_ptr);
 }
 
 static PyObject *
-CECPerformanceModelWithUserEnteredSpecifications_get_6par_celltech(VarGroupObject *self, void *closure)
+CECPerformanceModelWithUserEnteredSpecifications_get_sixpar_celltech(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Pvsamv1_CECPerformanceModelWithUserEnteredSpecifications_6par_celltech_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Pvsamv1_CECPerformanceModelWithUserEnteredSpecifications_sixpar_celltech_nget, self->data_ptr);
 }
 
 static int
-CECPerformanceModelWithUserEnteredSpecifications_set_6par_celltech(VarGroupObject *self, PyObject *value, void *closure)
+CECPerformanceModelWithUserEnteredSpecifications_set_sixpar_celltech(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Pvsamv1_CECPerformanceModelWithUserEnteredSpecifications_6par_celltech_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Pvsamv1_CECPerformanceModelWithUserEnteredSpecifications_sixpar_celltech_nset, self->data_ptr);
 }
 
 static PyObject *
-CECPerformanceModelWithUserEnteredSpecifications_get_6par_gpmp(VarGroupObject *self, void *closure)
+CECPerformanceModelWithUserEnteredSpecifications_get_sixpar_gpmp(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Pvsamv1_CECPerformanceModelWithUserEnteredSpecifications_6par_gpmp_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Pvsamv1_CECPerformanceModelWithUserEnteredSpecifications_sixpar_gpmp_nget, self->data_ptr);
 }
 
 static int
-CECPerformanceModelWithUserEnteredSpecifications_set_6par_gpmp(VarGroupObject *self, PyObject *value, void *closure)
+CECPerformanceModelWithUserEnteredSpecifications_set_sixpar_gpmp(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Pvsamv1_CECPerformanceModelWithUserEnteredSpecifications_6par_gpmp_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Pvsamv1_CECPerformanceModelWithUserEnteredSpecifications_sixpar_gpmp_nset, self->data_ptr);
 }
 
 static PyObject *
-CECPerformanceModelWithUserEnteredSpecifications_get_6par_imp(VarGroupObject *self, void *closure)
+CECPerformanceModelWithUserEnteredSpecifications_get_sixpar_imp(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Pvsamv1_CECPerformanceModelWithUserEnteredSpecifications_6par_imp_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Pvsamv1_CECPerformanceModelWithUserEnteredSpecifications_sixpar_imp_nget, self->data_ptr);
 }
 
 static int
-CECPerformanceModelWithUserEnteredSpecifications_set_6par_imp(VarGroupObject *self, PyObject *value, void *closure)
+CECPerformanceModelWithUserEnteredSpecifications_set_sixpar_imp(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Pvsamv1_CECPerformanceModelWithUserEnteredSpecifications_6par_imp_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Pvsamv1_CECPerformanceModelWithUserEnteredSpecifications_sixpar_imp_nset, self->data_ptr);
 }
 
 static PyObject *
-CECPerformanceModelWithUserEnteredSpecifications_get_6par_is_bifacial(VarGroupObject *self, void *closure)
+CECPerformanceModelWithUserEnteredSpecifications_get_sixpar_is_bifacial(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Pvsamv1_CECPerformanceModelWithUserEnteredSpecifications_6par_is_bifacial_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Pvsamv1_CECPerformanceModelWithUserEnteredSpecifications_sixpar_is_bifacial_nget, self->data_ptr);
 }
 
 static int
-CECPerformanceModelWithUserEnteredSpecifications_set_6par_is_bifacial(VarGroupObject *self, PyObject *value, void *closure)
+CECPerformanceModelWithUserEnteredSpecifications_set_sixpar_is_bifacial(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Pvsamv1_CECPerformanceModelWithUserEnteredSpecifications_6par_is_bifacial_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Pvsamv1_CECPerformanceModelWithUserEnteredSpecifications_sixpar_is_bifacial_nset, self->data_ptr);
 }
 
 static PyObject *
-CECPerformanceModelWithUserEnteredSpecifications_get_6par_isc(VarGroupObject *self, void *closure)
+CECPerformanceModelWithUserEnteredSpecifications_get_sixpar_isc(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Pvsamv1_CECPerformanceModelWithUserEnteredSpecifications_6par_isc_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Pvsamv1_CECPerformanceModelWithUserEnteredSpecifications_sixpar_isc_nget, self->data_ptr);
 }
 
 static int
-CECPerformanceModelWithUserEnteredSpecifications_set_6par_isc(VarGroupObject *self, PyObject *value, void *closure)
+CECPerformanceModelWithUserEnteredSpecifications_set_sixpar_isc(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Pvsamv1_CECPerformanceModelWithUserEnteredSpecifications_6par_isc_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Pvsamv1_CECPerformanceModelWithUserEnteredSpecifications_sixpar_isc_nset, self->data_ptr);
 }
 
 static PyObject *
-CECPerformanceModelWithUserEnteredSpecifications_get_6par_mounting(VarGroupObject *self, void *closure)
+CECPerformanceModelWithUserEnteredSpecifications_get_sixpar_mounting(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Pvsamv1_CECPerformanceModelWithUserEnteredSpecifications_6par_mounting_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Pvsamv1_CECPerformanceModelWithUserEnteredSpecifications_sixpar_mounting_nget, self->data_ptr);
 }
 
 static int
-CECPerformanceModelWithUserEnteredSpecifications_set_6par_mounting(VarGroupObject *self, PyObject *value, void *closure)
+CECPerformanceModelWithUserEnteredSpecifications_set_sixpar_mounting(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Pvsamv1_CECPerformanceModelWithUserEnteredSpecifications_6par_mounting_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Pvsamv1_CECPerformanceModelWithUserEnteredSpecifications_sixpar_mounting_nset, self->data_ptr);
 }
 
 static PyObject *
-CECPerformanceModelWithUserEnteredSpecifications_get_6par_nser(VarGroupObject *self, void *closure)
+CECPerformanceModelWithUserEnteredSpecifications_get_sixpar_nser(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Pvsamv1_CECPerformanceModelWithUserEnteredSpecifications_6par_nser_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Pvsamv1_CECPerformanceModelWithUserEnteredSpecifications_sixpar_nser_nget, self->data_ptr);
 }
 
 static int
-CECPerformanceModelWithUserEnteredSpecifications_set_6par_nser(VarGroupObject *self, PyObject *value, void *closure)
+CECPerformanceModelWithUserEnteredSpecifications_set_sixpar_nser(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Pvsamv1_CECPerformanceModelWithUserEnteredSpecifications_6par_nser_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Pvsamv1_CECPerformanceModelWithUserEnteredSpecifications_sixpar_nser_nset, self->data_ptr);
 }
 
 static PyObject *
-CECPerformanceModelWithUserEnteredSpecifications_get_6par_standoff(VarGroupObject *self, void *closure)
+CECPerformanceModelWithUserEnteredSpecifications_get_sixpar_standoff(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Pvsamv1_CECPerformanceModelWithUserEnteredSpecifications_6par_standoff_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Pvsamv1_CECPerformanceModelWithUserEnteredSpecifications_sixpar_standoff_nget, self->data_ptr);
 }
 
 static int
-CECPerformanceModelWithUserEnteredSpecifications_set_6par_standoff(VarGroupObject *self, PyObject *value, void *closure)
+CECPerformanceModelWithUserEnteredSpecifications_set_sixpar_standoff(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Pvsamv1_CECPerformanceModelWithUserEnteredSpecifications_6par_standoff_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Pvsamv1_CECPerformanceModelWithUserEnteredSpecifications_sixpar_standoff_nset, self->data_ptr);
 }
 
 static PyObject *
-CECPerformanceModelWithUserEnteredSpecifications_get_6par_tnoct(VarGroupObject *self, void *closure)
+CECPerformanceModelWithUserEnteredSpecifications_get_sixpar_tnoct(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Pvsamv1_CECPerformanceModelWithUserEnteredSpecifications_6par_tnoct_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Pvsamv1_CECPerformanceModelWithUserEnteredSpecifications_sixpar_tnoct_nget, self->data_ptr);
 }
 
 static int
-CECPerformanceModelWithUserEnteredSpecifications_set_6par_tnoct(VarGroupObject *self, PyObject *value, void *closure)
+CECPerformanceModelWithUserEnteredSpecifications_set_sixpar_tnoct(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Pvsamv1_CECPerformanceModelWithUserEnteredSpecifications_6par_tnoct_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Pvsamv1_CECPerformanceModelWithUserEnteredSpecifications_sixpar_tnoct_nset, self->data_ptr);
 }
 
 static PyObject *
-CECPerformanceModelWithUserEnteredSpecifications_get_6par_transient_thermal_model_unit_mass(VarGroupObject *self, void *closure)
+CECPerformanceModelWithUserEnteredSpecifications_get_sixpar_transient_thermal_model_unit_mass(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Pvsamv1_CECPerformanceModelWithUserEnteredSpecifications_6par_transient_thermal_model_unit_mass_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Pvsamv1_CECPerformanceModelWithUserEnteredSpecifications_sixpar_transient_thermal_model_unit_mass_nget, self->data_ptr);
 }
 
 static int
-CECPerformanceModelWithUserEnteredSpecifications_set_6par_transient_thermal_model_unit_mass(VarGroupObject *self, PyObject *value, void *closure)
+CECPerformanceModelWithUserEnteredSpecifications_set_sixpar_transient_thermal_model_unit_mass(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Pvsamv1_CECPerformanceModelWithUserEnteredSpecifications_6par_transient_thermal_model_unit_mass_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Pvsamv1_CECPerformanceModelWithUserEnteredSpecifications_sixpar_transient_thermal_model_unit_mass_nset, self->data_ptr);
 }
 
 static PyObject *
-CECPerformanceModelWithUserEnteredSpecifications_get_6par_vmp(VarGroupObject *self, void *closure)
+CECPerformanceModelWithUserEnteredSpecifications_get_sixpar_vmp(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Pvsamv1_CECPerformanceModelWithUserEnteredSpecifications_6par_vmp_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Pvsamv1_CECPerformanceModelWithUserEnteredSpecifications_sixpar_vmp_nget, self->data_ptr);
 }
 
 static int
-CECPerformanceModelWithUserEnteredSpecifications_set_6par_vmp(VarGroupObject *self, PyObject *value, void *closure)
+CECPerformanceModelWithUserEnteredSpecifications_set_sixpar_vmp(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Pvsamv1_CECPerformanceModelWithUserEnteredSpecifications_6par_vmp_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Pvsamv1_CECPerformanceModelWithUserEnteredSpecifications_sixpar_vmp_nset, self->data_ptr);
 }
 
 static PyObject *
-CECPerformanceModelWithUserEnteredSpecifications_get_6par_voc(VarGroupObject *self, void *closure)
+CECPerformanceModelWithUserEnteredSpecifications_get_sixpar_voc(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Pvsamv1_CECPerformanceModelWithUserEnteredSpecifications_6par_voc_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Pvsamv1_CECPerformanceModelWithUserEnteredSpecifications_sixpar_voc_nget, self->data_ptr);
 }
 
 static int
-CECPerformanceModelWithUserEnteredSpecifications_set_6par_voc(VarGroupObject *self, PyObject *value, void *closure)
+CECPerformanceModelWithUserEnteredSpecifications_set_sixpar_voc(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Pvsamv1_CECPerformanceModelWithUserEnteredSpecifications_6par_voc_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Pvsamv1_CECPerformanceModelWithUserEnteredSpecifications_sixpar_voc_nset, self->data_ptr);
 }
 
 static PyGetSetDef CECPerformanceModelWithUserEnteredSpecifications_getset[] = {
-{"6par_aisc", (getter)CECPerformanceModelWithUserEnteredSpecifications_get_6par_aisc,(setter)CECPerformanceModelWithUserEnteredSpecifications_set_6par_aisc,
+{"sixpar_aisc", (getter)CECPerformanceModelWithUserEnteredSpecifications_get_sixpar_aisc,(setter)CECPerformanceModelWithUserEnteredSpecifications_set_sixpar_aisc,
 	PyDoc_STR("*float*: Short circuit current temperature coefficient [A/C]\n\n*Required*: True if module_model=2\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - 6par_isc\n"),
  	NULL},
-{"6par_area", (getter)CECPerformanceModelWithUserEnteredSpecifications_get_6par_area,(setter)CECPerformanceModelWithUserEnteredSpecifications_set_6par_area,
+{"sixpar_area", (getter)CECPerformanceModelWithUserEnteredSpecifications_get_sixpar_area,(setter)CECPerformanceModelWithUserEnteredSpecifications_set_sixpar_area,
 	PyDoc_STR("*float*: Module area [m2]\n\n*Required*: True if module_model=2"),
  	NULL},
-{"6par_bifacial_ground_clearance_height", (getter)CECPerformanceModelWithUserEnteredSpecifications_get_6par_bifacial_ground_clearance_height,(setter)CECPerformanceModelWithUserEnteredSpecifications_set_6par_bifacial_ground_clearance_height,
+{"sixpar_bifacial_ground_clearance_height", (getter)CECPerformanceModelWithUserEnteredSpecifications_get_sixpar_bifacial_ground_clearance_height,(setter)CECPerformanceModelWithUserEnteredSpecifications_set_sixpar_bifacial_ground_clearance_height,
 	PyDoc_STR("*float*: Module ground clearance height [m]\n\n*Required*: True if module_model=2"),
  	NULL},
-{"6par_bifacial_transmission_factor", (getter)CECPerformanceModelWithUserEnteredSpecifications_get_6par_bifacial_transmission_factor,(setter)CECPerformanceModelWithUserEnteredSpecifications_set_6par_bifacial_transmission_factor,
+{"sixpar_bifacial_transmission_factor", (getter)CECPerformanceModelWithUserEnteredSpecifications_get_sixpar_bifacial_transmission_factor,(setter)CECPerformanceModelWithUserEnteredSpecifications_set_sixpar_bifacial_transmission_factor,
 	PyDoc_STR("*float*: Bifacial transmission factor [0-1]\n\n*Required*: True if module_model=2"),
  	NULL},
-{"6par_bifaciality", (getter)CECPerformanceModelWithUserEnteredSpecifications_get_6par_bifaciality,(setter)CECPerformanceModelWithUserEnteredSpecifications_set_6par_bifaciality,
+{"sixpar_bifaciality", (getter)CECPerformanceModelWithUserEnteredSpecifications_get_sixpar_bifaciality,(setter)CECPerformanceModelWithUserEnteredSpecifications_set_sixpar_bifaciality,
 	PyDoc_STR("*float*: Bifaciality factor [%]\n\n*Required*: True if module_model=2"),
  	NULL},
-{"6par_bvoc", (getter)CECPerformanceModelWithUserEnteredSpecifications_get_6par_bvoc,(setter)CECPerformanceModelWithUserEnteredSpecifications_set_6par_bvoc,
+{"sixpar_bvoc", (getter)CECPerformanceModelWithUserEnteredSpecifications_get_sixpar_bvoc,(setter)CECPerformanceModelWithUserEnteredSpecifications_set_sixpar_bvoc,
 	PyDoc_STR("*float*: Open circuit voltage temperature coefficient [V/C]\n\n*Required*: True if module_model=2\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - 6par_voc\n"),
  	NULL},
-{"6par_celltech", (getter)CECPerformanceModelWithUserEnteredSpecifications_get_6par_celltech,(setter)CECPerformanceModelWithUserEnteredSpecifications_set_6par_celltech,
+{"sixpar_celltech", (getter)CECPerformanceModelWithUserEnteredSpecifications_get_sixpar_celltech,(setter)CECPerformanceModelWithUserEnteredSpecifications_set_sixpar_celltech,
 	PyDoc_STR("*float*: Solar cell technology type\n\n*Options*: monoSi=0,multiSi=1,CdTe=2,CIS=3,CIGS=4,Amorphous=5\n\n*Constraints*: INTEGER,MIN=0,MAX=5\n\n*Required*: True if module_model=2"),
  	NULL},
-{"6par_gpmp", (getter)CECPerformanceModelWithUserEnteredSpecifications_get_6par_gpmp,(setter)CECPerformanceModelWithUserEnteredSpecifications_set_6par_gpmp,
+{"sixpar_gpmp", (getter)CECPerformanceModelWithUserEnteredSpecifications_get_sixpar_gpmp,(setter)CECPerformanceModelWithUserEnteredSpecifications_set_sixpar_gpmp,
 	PyDoc_STR("*float*: Maximum power point temperature coefficient [%/C]\n\n*Required*: True if module_model=2"),
  	NULL},
-{"6par_imp", (getter)CECPerformanceModelWithUserEnteredSpecifications_get_6par_imp,(setter)CECPerformanceModelWithUserEnteredSpecifications_set_6par_imp,
+{"sixpar_imp", (getter)CECPerformanceModelWithUserEnteredSpecifications_get_sixpar_imp,(setter)CECPerformanceModelWithUserEnteredSpecifications_set_sixpar_imp,
 	PyDoc_STR("*float*: Imp [A]\n\n*Required*: True if module_model=2\n\n*Changes to this variable may require updating the values of the following*: \n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
-{"6par_is_bifacial", (getter)CECPerformanceModelWithUserEnteredSpecifications_get_6par_is_bifacial,(setter)CECPerformanceModelWithUserEnteredSpecifications_set_6par_is_bifacial,
+{"sixpar_is_bifacial", (getter)CECPerformanceModelWithUserEnteredSpecifications_get_sixpar_is_bifacial,(setter)CECPerformanceModelWithUserEnteredSpecifications_set_sixpar_is_bifacial,
 	PyDoc_STR("*float*: Modules are bifacial [0/1]\n\n*Required*: True if module_model=2"),
  	NULL},
-{"6par_isc", (getter)CECPerformanceModelWithUserEnteredSpecifications_get_6par_isc,(setter)CECPerformanceModelWithUserEnteredSpecifications_set_6par_isc,
+{"sixpar_isc", (getter)CECPerformanceModelWithUserEnteredSpecifications_get_sixpar_isc,(setter)CECPerformanceModelWithUserEnteredSpecifications_set_sixpar_isc,
 	PyDoc_STR("*float*: Isc [A]\n\n*Required*: True if module_model=2\n\n*Changes to this variable may require updating the values of the following*: \n\t - 6par_aisc\n"),
  	NULL},
-{"6par_mounting", (getter)CECPerformanceModelWithUserEnteredSpecifications_get_6par_mounting,(setter)CECPerformanceModelWithUserEnteredSpecifications_set_6par_mounting,
+{"sixpar_mounting", (getter)CECPerformanceModelWithUserEnteredSpecifications_get_sixpar_mounting,(setter)CECPerformanceModelWithUserEnteredSpecifications_set_sixpar_mounting,
 	PyDoc_STR("*float*: Array mounting height\n\n*Options*: 0=one story,1=two story\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: True if module_model=2"),
  	NULL},
-{"6par_nser", (getter)CECPerformanceModelWithUserEnteredSpecifications_get_6par_nser,(setter)CECPerformanceModelWithUserEnteredSpecifications_set_6par_nser,
+{"sixpar_nser", (getter)CECPerformanceModelWithUserEnteredSpecifications_get_sixpar_nser,(setter)CECPerformanceModelWithUserEnteredSpecifications_set_sixpar_nser,
 	PyDoc_STR("*float*: Nseries\n\n*Constraints*: INTEGER,POSITIVE\n\n*Required*: True if module_model=2"),
  	NULL},
-{"6par_standoff", (getter)CECPerformanceModelWithUserEnteredSpecifications_get_6par_standoff,(setter)CECPerformanceModelWithUserEnteredSpecifications_set_6par_standoff,
+{"sixpar_standoff", (getter)CECPerformanceModelWithUserEnteredSpecifications_get_sixpar_standoff,(setter)CECPerformanceModelWithUserEnteredSpecifications_set_sixpar_standoff,
 	PyDoc_STR("*float*: Standoff mode\n\n*Options*: 0=bipv,1=>3.5in,2=2.5-3.5in,3=1.5-2.5in,4=0.5-1.5in,5=<0.5in,6=ground/rack\n\n*Constraints*: INTEGER,MIN=0,MAX=6\n\n*Required*: True if module_model=2"),
  	NULL},
-{"6par_tnoct", (getter)CECPerformanceModelWithUserEnteredSpecifications_get_6par_tnoct,(setter)CECPerformanceModelWithUserEnteredSpecifications_set_6par_tnoct,
+{"sixpar_tnoct", (getter)CECPerformanceModelWithUserEnteredSpecifications_get_sixpar_tnoct,(setter)CECPerformanceModelWithUserEnteredSpecifications_set_sixpar_tnoct,
 	PyDoc_STR("*float*: Nominal operating cell temperature [C]\n\n*Required*: True if module_model=2"),
  	NULL},
-{"6par_transient_thermal_model_unit_mass", (getter)CECPerformanceModelWithUserEnteredSpecifications_get_6par_transient_thermal_model_unit_mass,(setter)CECPerformanceModelWithUserEnteredSpecifications_set_6par_transient_thermal_model_unit_mass,
+{"sixpar_transient_thermal_model_unit_mass", (getter)CECPerformanceModelWithUserEnteredSpecifications_get_sixpar_transient_thermal_model_unit_mass,(setter)CECPerformanceModelWithUserEnteredSpecifications_set_sixpar_transient_thermal_model_unit_mass,
 	PyDoc_STR("*float*: Module unit mass [kg/m^2]\n\n*Required*: True if module_model=2"),
  	NULL},
-{"6par_vmp", (getter)CECPerformanceModelWithUserEnteredSpecifications_get_6par_vmp,(setter)CECPerformanceModelWithUserEnteredSpecifications_set_6par_vmp,
+{"sixpar_vmp", (getter)CECPerformanceModelWithUserEnteredSpecifications_get_sixpar_vmp,(setter)CECPerformanceModelWithUserEnteredSpecifications_set_sixpar_vmp,
 	PyDoc_STR("*float*: Maximum power point voltage [V]\n\n*Required*: True if module_model=2\n\n*Changes to this variable may require updating the values of the following*: \n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
-{"6par_voc", (getter)CECPerformanceModelWithUserEnteredSpecifications_get_6par_voc,(setter)CECPerformanceModelWithUserEnteredSpecifications_set_6par_voc,
+{"sixpar_voc", (getter)CECPerformanceModelWithUserEnteredSpecifications_get_sixpar_voc,(setter)CECPerformanceModelWithUserEnteredSpecifications_set_sixpar_voc,
 	PyDoc_STR("*float*: Voc [V]\n\n*Required*: True if module_model=2\n\n*Changes to this variable may require updating the values of the following*: \n\t - 6par_bvoc\n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
 	{NULL}  /* Sentinel */
@@ -8384,30 +8384,6 @@ BatterySystem_set_batt_current_discharge_max(VarGroupObject *self, PyObject *val
 }
 
 static PyObject *
-BatterySystem_get_batt_cycle_cost(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Pvsamv1_BatterySystem_batt_cycle_cost_aget, self->data_ptr);
-}
-
-static int
-BatterySystem_set_batt_cycle_cost(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_Pvsamv1_BatterySystem_batt_cycle_cost_aset, self->data_ptr);
-}
-
-static PyObject *
-BatterySystem_get_batt_cycle_cost_choice(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Pvsamv1_BatterySystem_batt_cycle_cost_choice_nget, self->data_ptr);
-}
-
-static int
-BatterySystem_set_batt_cycle_cost_choice(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Pvsamv1_BatterySystem_batt_cycle_cost_choice_nset, self->data_ptr);
-}
-
-static PyObject *
 BatterySystem_get_batt_dc_ac_efficiency(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Pvsamv1_BatterySystem_batt_dc_ac_efficiency_nget, self->data_ptr);
@@ -8671,12 +8647,6 @@ static PyGetSetDef BatterySystem_getset[] = {
  	NULL},
 {"batt_current_discharge_max", (getter)BatterySystem_get_batt_current_discharge_max,(setter)BatterySystem_set_batt_current_discharge_max,
 	PyDoc_STR("*float*: Maximum discharge current [A]"),
- 	NULL},
-{"batt_cycle_cost", (getter)BatterySystem_get_batt_cycle_cost,(setter)BatterySystem_set_batt_cycle_cost,
-	PyDoc_STR("*sequence*: Input battery cycle degradaton penalty per year [$/cycle-kWh]\n\n*Info*: length 1 or analysis_period, length 1 will be extended using inflation"),
- 	NULL},
-{"batt_cycle_cost_choice", (getter)BatterySystem_get_batt_cycle_cost_choice,(setter)BatterySystem_set_batt_cycle_cost_choice,
-	PyDoc_STR("*float*: Use SAM cost model for degradaton penalty or input custom via batt_cycle_cost [0/1]\n\n*Options*: 0=UseCostModel,1=InputCost"),
  	NULL},
 {"batt_dc_ac_efficiency", (getter)BatterySystem_get_batt_dc_ac_efficiency,(setter)BatterySystem_set_batt_dc_ac_efficiency,
 	PyDoc_STR("*float*: Battery DC to AC efficiency"),
@@ -9109,6 +9079,18 @@ BatteryCell_set_batt_Qnom(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyObject *
+BatteryCell_get_batt_Vcut(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_BatteryCell_batt_Vcut_nget, self->data_ptr);
+}
+
+static int
+BatteryCell_set_batt_Vcut(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_BatteryCell_batt_Vcut_nset, self->data_ptr);
+}
+
+static PyObject *
 BatteryCell_get_batt_Vexp(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Pvsamv1_BatteryCell_batt_Vexp_nget, self->data_ptr);
@@ -9265,6 +9247,18 @@ BatteryCell_set_batt_initial_SOC(VarGroupObject *self, PyObject *value, void *cl
 }
 
 static PyObject *
+BatteryCell_get_batt_life_model(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_BatteryCell_batt_life_model_nget, self->data_ptr);
+}
+
+static int
+BatteryCell_set_batt_life_model(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_BatteryCell_batt_life_model_nset, self->data_ptr);
+}
+
+static PyObject *
 BatteryCell_get_batt_lifetime_matrix(VarGroupObject *self, void *closure)
 {
 	return PySAM_matrix_getter(SAM_Pvsamv1_BatteryCell_batt_lifetime_matrix_mget, self->data_ptr);
@@ -9403,6 +9397,9 @@ static PyGetSetDef BatteryCell_getset[] = {
 {"batt_Qnom", (getter)BatteryCell_get_batt_Qnom,(setter)BatteryCell_set_batt_Qnom,
 	PyDoc_STR("*float*: Cell capacity at end of nominal zone [Ah]"),
  	NULL},
+{"batt_Vcut", (getter)BatteryCell_get_batt_Vcut,(setter)BatteryCell_set_batt_Vcut,
+	PyDoc_STR("*float*: Cutoff voltage for battery rated capacity [V]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
 {"batt_Vexp", (getter)BatteryCell_get_batt_Vexp,(setter)BatteryCell_set_batt_Vexp,
 	PyDoc_STR("*float*: Cell voltage at end of exponential zone [V]"),
  	NULL},
@@ -9416,22 +9413,22 @@ static PyGetSetDef BatteryCell_getset[] = {
 	PyDoc_STR("*float*: Default nominal cell voltage [V]"),
  	NULL},
 {"batt_calendar_a", (getter)BatteryCell_get_batt_calendar_a,(setter)BatteryCell_set_batt_calendar_a,
-	PyDoc_STR("*float*: Calendar life model coefficient [1/sqrt(day)]"),
+	PyDoc_STR("*float*: Calendar life model coefficient [1/sqrt(day)]\n\n*Required*: True if en_batt=1&batt_life_model=0&batt_calendar_choice=1"),
  	NULL},
 {"batt_calendar_b", (getter)BatteryCell_get_batt_calendar_b,(setter)BatteryCell_set_batt_calendar_b,
-	PyDoc_STR("*float*: Calendar life model coefficient [K]"),
+	PyDoc_STR("*float*: Calendar life model coefficient [K]\n\n*Required*: True if en_batt=1&batt_life_model=0&batt_calendar_choice=1"),
  	NULL},
 {"batt_calendar_c", (getter)BatteryCell_get_batt_calendar_c,(setter)BatteryCell_set_batt_calendar_c,
-	PyDoc_STR("*float*: Calendar life model coefficient [K]"),
+	PyDoc_STR("*float*: Calendar life model coefficient [K]\n\n*Required*: True if en_batt=1&batt_life_model=0&batt_calendar_choice=1"),
  	NULL},
 {"batt_calendar_choice", (getter)BatteryCell_get_batt_calendar_choice,(setter)BatteryCell_set_batt_calendar_choice,
-	PyDoc_STR("*float*: Calendar life degradation input option [0/1/2]\n\n*Options*: 0=NoCalendarDegradation,1=LithiomIonModel,2=InputLossTable"),
+	PyDoc_STR("*float*: Calendar life degradation input option [0/1/2]\n\n*Options*: 0=NoCalendarDegradation,1=LithiomIonModel,2=InputLossTable\n\n*Required*: True if en_batt=1&batt_life_model=0"),
  	NULL},
 {"batt_calendar_lifetime_matrix", (getter)BatteryCell_get_batt_calendar_lifetime_matrix,(setter)BatteryCell_set_batt_calendar_lifetime_matrix,
-	PyDoc_STR("*sequence[sequence]*: Days vs capacity"),
+	PyDoc_STR("*sequence[sequence]*: Days vs capacity\n\n*Required*: True if en_batt=1&batt_life_model=0&batt_calendar_choice=2"),
  	NULL},
 {"batt_calendar_q0", (getter)BatteryCell_get_batt_calendar_q0,(setter)BatteryCell_set_batt_calendar_q0,
-	PyDoc_STR("*float*: Calendar life model initial capacity cofficient"),
+	PyDoc_STR("*float*: Calendar life model initial capacity cofficient\n\n*Required*: True if en_batt=1&batt_life_model=0&batt_calendar_choice=1"),
  	NULL},
 {"batt_chem", (getter)BatteryCell_get_batt_chem,(setter)BatteryCell_set_batt_chem,
 	PyDoc_STR("*float*: Battery chemistry\n\n*Options*: 0=LeadAcid,1=LiIon"),
@@ -9442,8 +9439,11 @@ static PyGetSetDef BatteryCell_getset[] = {
 {"batt_initial_SOC", (getter)BatteryCell_get_batt_initial_SOC,(setter)BatteryCell_set_batt_initial_SOC,
 	PyDoc_STR("*float*: Initial state-of-charge [%]"),
  	NULL},
+{"batt_life_model", (getter)BatteryCell_get_batt_life_model,(setter)BatteryCell_set_batt_life_model,
+	PyDoc_STR("*float*: Battery life model specifier [0/1]\n\n*Options*: 0=calendar/cycle,1=NMC\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
 {"batt_lifetime_matrix", (getter)BatteryCell_get_batt_lifetime_matrix,(setter)BatteryCell_set_batt_lifetime_matrix,
-	PyDoc_STR("*sequence[sequence]*: Cycles vs capacity at different depths-of-discharge"),
+	PyDoc_STR("*sequence[sequence]*: Cycles vs capacity at different depths-of-discharge\n\n*Required*: True if en_batt=1&batt_life_model=0"),
  	NULL},
 {"batt_maximum_SOC", (getter)BatteryCell_get_batt_maximum_SOC,(setter)BatteryCell_set_batt_maximum_SOC,
 	PyDoc_STR("*float*: Maximum allowed state-of-charge [%]"),
@@ -9593,6 +9593,30 @@ static int
 BatteryDispatch_set_batt_custom_dispatch(VarGroupObject *self, PyObject *value, void *closure)
 {
 	return PySAM_array_setter(value, SAM_Pvsamv1_BatteryDispatch_batt_custom_dispatch_aset, self->data_ptr);
+}
+
+static PyObject *
+BatteryDispatch_get_batt_cycle_cost(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvsamv1_BatteryDispatch_batt_cycle_cost_aget, self->data_ptr);
+}
+
+static int
+BatteryDispatch_set_batt_cycle_cost(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Pvsamv1_BatteryDispatch_batt_cycle_cost_aset, self->data_ptr);
+}
+
+static PyObject *
+BatteryDispatch_get_batt_cycle_cost_choice(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_BatteryDispatch_batt_cycle_cost_choice_nget, self->data_ptr);
+}
+
+static int
+BatteryDispatch_set_batt_cycle_cost_choice(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_BatteryDispatch_batt_cycle_cost_choice_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -9841,6 +9865,12 @@ static PyGetSetDef BatteryDispatch_getset[] = {
  	NULL},
 {"batt_custom_dispatch", (getter)BatteryDispatch_get_batt_custom_dispatch,(setter)BatteryDispatch_set_batt_custom_dispatch,
 	PyDoc_STR("*sequence*: Custom battery power for every time step [kW]\n\n*Info*: kWAC if AC-connected, else kWDC\n\n*Required*: True if en_batt=1&batt_dispatch_choice=3"),
+ 	NULL},
+{"batt_cycle_cost", (getter)BatteryDispatch_get_batt_cycle_cost,(setter)BatteryDispatch_set_batt_cycle_cost,
+	PyDoc_STR("*sequence*: Input battery cycle degradaton penalty per year [$/cycle-kWh]\n\n*Info*: length 1 or analysis_period, length 1 will be extended using inflation\n\n*Required*: True if batt_cycle_cost_choice=1"),
+ 	NULL},
+{"batt_cycle_cost_choice", (getter)BatteryDispatch_get_batt_cycle_cost_choice,(setter)BatteryDispatch_set_batt_cycle_cost_choice,
+	PyDoc_STR("*float*: Use SAM cost model for degradaton penalty or input custom via batt_cycle_cost [0/1]\n\n*Options*: 0=UseCostModel,1=InputCost\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"batt_dispatch_auto_can_charge", (getter)BatteryDispatch_get_batt_dispatch_auto_can_charge,(setter)BatteryDispatch_set_batt_dispatch_auto_can_charge,
 	PyDoc_STR("*float*: System charging allowed for automated dispatch? [kW]"),
@@ -10897,42 +10927,6 @@ static PyMethodDef Outputs_methods[] = {
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
-
-static PyObject *
-Outputs_get_6par_Adj(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Pvsamv1_Outputs_6par_Adj_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_6par_Il(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Pvsamv1_Outputs_6par_Il_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_6par_Io(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Pvsamv1_Outputs_6par_Io_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_6par_Rs(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Pvsamv1_Outputs_6par_Rs_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_6par_Rsh(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Pvsamv1_Outputs_6par_Rsh_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_6par_a(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Pvsamv1_Outputs_6par_a_nget, self->data_ptr);
-}
 
 static PyObject *
 Outputs_get_ac_loss(VarGroupObject *self, void *closure)
@@ -12129,6 +12123,42 @@ Outputs_get_shadedb_subarray4_shade_frac(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_sixpar_Adj(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_Outputs_sixpar_Adj_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_sixpar_Il(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_Outputs_sixpar_Il_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_sixpar_Io(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_Outputs_sixpar_Io_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_sixpar_Rs(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_Outputs_sixpar_Rs_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_sixpar_Rsh(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_Outputs_sixpar_Rsh_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_sixpar_a(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_Outputs_sixpar_a_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_snowdepth(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Pvsamv1_Outputs_snowdepth_aget, self->data_ptr);
@@ -12969,24 +12999,6 @@ Outputs_get_xfmr_nll_year1(VarGroupObject *self, void *closure)
 }
 
 static PyGetSetDef Outputs_getset[] = {
-{"6par_Adj", (getter)Outputs_get_6par_Adj,(setter)0,
-	PyDoc_STR("*float*: CEC 6-parameter: Adj"),
- 	NULL},
-{"6par_Il", (getter)Outputs_get_6par_Il,(setter)0,
-	PyDoc_STR("*float*: CEC 6-parameter: Il"),
- 	NULL},
-{"6par_Io", (getter)Outputs_get_6par_Io,(setter)0,
-	PyDoc_STR("*float*: CEC 6-parameter: Io"),
- 	NULL},
-{"6par_Rs", (getter)Outputs_get_6par_Rs,(setter)0,
-	PyDoc_STR("*float*: CEC 6-parameter: Rs"),
- 	NULL},
-{"6par_Rsh", (getter)Outputs_get_6par_Rsh,(setter)0,
-	PyDoc_STR("*float*: CEC 6-parameter: Rsh"),
- 	NULL},
-{"6par_a", (getter)Outputs_get_6par_a,(setter)0,
-	PyDoc_STR("*float*: CEC 6-parameter: a"),
- 	NULL},
 {"ac_loss", (getter)Outputs_get_ac_loss,(setter)0,
 	PyDoc_STR("*float*: AC wiring loss [%]"),
  	NULL},
@@ -13583,6 +13595,24 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"shadedb_subarray4_shade_frac", (getter)Outputs_get_shadedb_subarray4_shade_frac,(setter)0,
 	PyDoc_STR("*sequence*: Subarray 4 Partial external shading DC factor [frac]"),
+ 	NULL},
+{"sixpar_Adj", (getter)Outputs_get_sixpar_Adj,(setter)0,
+	PyDoc_STR("*float*: CEC 6-parameter: Adj"),
+ 	NULL},
+{"sixpar_Il", (getter)Outputs_get_sixpar_Il,(setter)0,
+	PyDoc_STR("*float*: CEC 6-parameter: Il"),
+ 	NULL},
+{"sixpar_Io", (getter)Outputs_get_sixpar_Io,(setter)0,
+	PyDoc_STR("*float*: CEC 6-parameter: Io"),
+ 	NULL},
+{"sixpar_Rs", (getter)Outputs_get_sixpar_Rs,(setter)0,
+	PyDoc_STR("*float*: CEC 6-parameter: Rs"),
+ 	NULL},
+{"sixpar_Rsh", (getter)Outputs_get_sixpar_Rsh,(setter)0,
+	PyDoc_STR("*float*: CEC 6-parameter: Rsh"),
+ 	NULL},
+{"sixpar_a", (getter)Outputs_get_sixpar_a,(setter)0,
+	PyDoc_STR("*float*: CEC 6-parameter: a"),
  	NULL},
 {"snowdepth", (getter)Outputs_get_snowdepth,(setter)0,
 	PyDoc_STR("*sequence*: Weather file snow depth [cm]"),
@@ -14253,8 +14283,14 @@ Pvsamv1_value(CmodObject *self, PyObject *args)
 	return Cmod_value(self, args);
 }
 
+static PyObject *
+Pvsamv1_unassign(CmodObject *self, PyObject *args)
+{
+	return Cmod_unassign(self, args);
+}
+
 static PyMethodDef Pvsamv1_methods[] = {
-		{"execute",            (PyCFunction)Pvsamv1_execute,  METH_VARARGS,
+		{"execute",           (PyCFunction)Pvsamv1_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
 		{"assign",            (PyCFunction)Pvsamv1_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Solar Resource': { var: val, ...}, ...}``")},
@@ -14262,6 +14298,8 @@ static PyMethodDef Pvsamv1_methods[] = {
 				PyDoc_STR("export() -> dict\n Export attributes into nested dictionary")},
 		{"value",             (PyCFunction)Pvsamv1_value, METH_VARARGS,
 				PyDoc_STR("value(name, optional value) -> Union[None, float, dict, sequence, str]\n Get or set by name a value in any of the variable groups.")},
+		{"unassign",          (PyCFunction)Pvsamv1_unassign, METH_VARARGS,
+				PyDoc_STR("unassign(name) -> None\n Unassign a value in any of the variable groups.")},
 		{"Reopt_size_battery_post", (PyCFunction)Reopt_size_battery_post, METH_VARARGS | METH_KEYWORDS,
 			Reopt_size_battery_post_doc},
 		{NULL,              NULL}           /* sentinel */
@@ -14373,8 +14411,10 @@ Pvsamv1_default(PyObject *self, PyObject *args)
 		return NULL;
 
 	rv->data_owner_ptr = NULL;
-	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Pvsamv1", def);
-
+	if (PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Pvsamv1", def) < 0) {
+		Pvsamv1_dealloc(rv);
+		return NULL;
+	}
 	return (PyObject *)rv;
 }
 

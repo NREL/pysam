@@ -2,7 +2,7 @@ class SolarResource(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -21,7 +21,7 @@ class Losses(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -68,7 +68,7 @@ class Lifetime(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -90,7 +90,7 @@ class SystemDesign(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -153,7 +153,7 @@ class Shading(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -190,7 +190,7 @@ class Layout(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -216,7 +216,7 @@ class Module(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -230,7 +230,7 @@ class SimpleEfficiencyModuleModel(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -267,7 +267,7 @@ class CECPerformanceModelWithModuleDatabase(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -313,38 +313,38 @@ class CECPerformanceModelWithUserEnteredSpecifications(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
 		pass
 
 
-	6par_aisc = float
-	6par_area = float
-	6par_bifacial_ground_clearance_height = float
-	6par_bifacial_transmission_factor = float
-	6par_bifaciality = float
-	6par_bvoc = float
-	6par_celltech = float
-	6par_gpmp = float
-	6par_imp = float
-	6par_is_bifacial = float
-	6par_isc = float
-	6par_mounting = float
-	6par_nser = float
-	6par_standoff = float
-	6par_tnoct = float
-	6par_transient_thermal_model_unit_mass = float
-	6par_vmp = float
-	6par_voc = float
+	sixpar_aisc = float
+	sixpar_area = float
+	sixpar_bifacial_ground_clearance_height = float
+	sixpar_bifacial_transmission_factor = float
+	sixpar_bifaciality = float
+	sixpar_bvoc = float
+	sixpar_celltech = float
+	sixpar_gpmp = float
+	sixpar_imp = float
+	sixpar_is_bifacial = float
+	sixpar_isc = float
+	sixpar_mounting = float
+	sixpar_nser = float
+	sixpar_standoff = float
+	sixpar_tnoct = float
+	sixpar_transient_thermal_model_unit_mass = float
+	sixpar_vmp = float
+	sixpar_voc = float
 
 
 class SandiaPVArrayPerformanceModelWithModuleDatabase(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -400,7 +400,7 @@ class IEC61853SingleDiodeModel(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -439,7 +439,7 @@ class MermoudLejeuneSingleDiodeModel(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -503,7 +503,7 @@ class Inverter(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -529,7 +529,7 @@ class InverterCECDatabase(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -553,7 +553,7 @@ class InverterCECCoefficientGenerator(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -577,7 +577,7 @@ class InverterDatasheet(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -597,7 +597,7 @@ class InverterPartLoadCurve(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -618,7 +618,7 @@ class InverterMermoudLejeuneModel(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -667,7 +667,7 @@ class BatterySystem(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -682,8 +682,6 @@ class BatterySystem(object):
 	batt_current_charge_max = float
 	batt_current_choice = float
 	batt_current_discharge_max = float
-	batt_cycle_cost = tuple
-	batt_cycle_cost_choice = float
 	batt_dc_ac_efficiency = float
 	batt_dc_dc_efficiency = float
 	batt_inverter_efficiency_cutoff = float
@@ -710,7 +708,7 @@ class Load(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -726,7 +724,7 @@ class BatteryCell(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -743,6 +741,7 @@ class BatteryCell(object):
 	batt_Qfull = float
 	batt_Qfull_flow = float
 	batt_Qnom = float
+	batt_Vcut = float
 	batt_Vexp = float
 	batt_Vfull = float
 	batt_Vnom = float
@@ -756,6 +755,7 @@ class BatteryCell(object):
 	batt_chem = float
 	batt_h_to_ambient = float
 	batt_initial_SOC = float
+	batt_life_model = float
 	batt_lifetime_matrix = tuple
 	batt_maximum_SOC = float
 	batt_minimum_SOC = float
@@ -771,7 +771,7 @@ class BatteryDispatch(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -780,6 +780,8 @@ class BatteryDispatch(object):
 
 	batt_auto_gridcharge_max_daily = float
 	batt_custom_dispatch = tuple
+	batt_cycle_cost = tuple
+	batt_cycle_cost_choice = float
 	batt_dispatch_auto_can_charge = float
 	batt_dispatch_auto_can_clipcharge = float
 	batt_dispatch_auto_can_fuelcellcharge = float
@@ -806,7 +808,7 @@ class FuelCell(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -820,7 +822,7 @@ class PriceSignal(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -850,7 +852,7 @@ class ElectricityRates(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -904,19 +906,13 @@ class Outputs(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
 		pass
 
 
-	6par_Adj = float
-	6par_Il = float
-	6par_Io = float
-	6par_Rs = float
-	6par_Rsh = float
-	6par_a = float
 	ac_loss = float
 	ac_transmission_loss = tuple
 	ac_wiring_loss = tuple
@@ -1116,6 +1112,12 @@ class Outputs(object):
 	shadedb_subarray2_shade_frac = tuple
 	shadedb_subarray3_shade_frac = tuple
 	shadedb_subarray4_shade_frac = tuple
+	sixpar_Adj = float
+	sixpar_Il = float
+	sixpar_Io = float
+	sixpar_Rs = float
+	sixpar_Rsh = float
+	sixpar_a = float
 	snowdepth = tuple
 	sol_alt = tuple
 	sol_azi = tuple
@@ -1263,6 +1265,9 @@ class Pvsamv1(object):
 		pass
 
 	def value(self, name, value=None):
+		pass
+
+	def unassign(self, name):
 		pass
 
 	def execute(self, int_verbosity):

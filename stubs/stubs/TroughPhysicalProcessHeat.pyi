@@ -2,7 +2,7 @@ class Weather(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -20,7 +20,7 @@ class SolarField(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -140,7 +140,7 @@ class Controller(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -157,7 +157,7 @@ class SystemDesign(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -171,7 +171,7 @@ class TES(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -190,7 +190,7 @@ class TES2tank(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -206,7 +206,7 @@ class Tou(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -261,7 +261,7 @@ class System(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -277,7 +277,7 @@ class Powerblock(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -311,7 +311,7 @@ class Outputs(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -397,6 +397,9 @@ class TroughPhysicalProcessHeat(object):
 		pass
 
 	def value(self, name, value=None):
+		pass
+
+	def unassign(self, name):
 		pass
 
 	def execute(self, int_verbosity):

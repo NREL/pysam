@@ -1503,6 +1503,18 @@ Outputs_get_surplus_w_sys_ec_sep_tp(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_true_up_credits_ym(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Utilityrate5_Outputs_true_up_credits_ym_mget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_two_meter_sales_ym(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Utilityrate5_Outputs_two_meter_sales_ym_mget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_utility_bill_w_sys(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Utilityrate5_Outputs_utility_bill_w_sys_aget, self->data_ptr);
@@ -1758,6 +1770,18 @@ static PyObject *
 Outputs_get_year1_nm_dollars_applied(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Utilityrate5_Outputs_year1_nm_dollars_applied_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_year1_true_up_credits(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Utilityrate5_Outputs_year1_true_up_credits_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_year1_two_meter_sales(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Utilityrate5_Outputs_year1_two_meter_sales_aget, self->data_ptr);
 }
 
 static PyGetSetDef Outputs_getset[] = {
@@ -2052,6 +2076,12 @@ static PyGetSetDef Outputs_getset[] = {
 {"surplus_w_sys_ec_sep_tp", (getter)Outputs_get_surplus_w_sys_ec_sep_tp,(setter)0,
 	PyDoc_STR("*sequence[sequence]*: Electricity exports with system Sep [kWh]"),
  	NULL},
+{"true_up_credits_ym", (getter)Outputs_get_true_up_credits_ym,(setter)0,
+	PyDoc_STR("*sequence[sequence]*: Net annual true-up payments [$]"),
+ 	NULL},
+{"two_meter_sales_ym", (getter)Outputs_get_two_meter_sales_ym,(setter)0,
+	PyDoc_STR("*sequence[sequence]*: Buy all sell all electricity sales to grid [$]"),
+ 	NULL},
 {"utility_bill_w_sys", (getter)Outputs_get_utility_bill_w_sys,(setter)0,
 	PyDoc_STR("*sequence*: Electricity bill with system [$]"),
  	NULL},
@@ -2180,6 +2210,12 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"year1_nm_dollars_applied", (getter)Outputs_get_year1_nm_dollars_applied,(setter)0,
 	PyDoc_STR("*sequence*: Net metering credit [$/mo]"),
+ 	NULL},
+{"year1_true_up_credits", (getter)Outputs_get_year1_true_up_credits,(setter)0,
+	PyDoc_STR("*sequence*: Net annual true-up payments [$/mo]"),
+ 	NULL},
+{"year1_two_meter_sales", (getter)Outputs_get_year1_two_meter_sales,(setter)0,
+	PyDoc_STR("*sequence*: Buy all sell all electricity sales to grid [$/mo]"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -2327,8 +2363,14 @@ Utilityrate5_value(CmodObject *self, PyObject *args)
 	return Cmod_value(self, args);
 }
 
+static PyObject *
+Utilityrate5_unassign(CmodObject *self, PyObject *args)
+{
+	return Cmod_unassign(self, args);
+}
+
 static PyMethodDef Utilityrate5_methods[] = {
-		{"execute",            (PyCFunction)Utilityrate5_execute,  METH_VARARGS,
+		{"execute",           (PyCFunction)Utilityrate5_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
 		{"assign",            (PyCFunction)Utilityrate5_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Electricity Rates': { var: val, ...}, ...}``")},
@@ -2336,6 +2378,8 @@ static PyMethodDef Utilityrate5_methods[] = {
 				PyDoc_STR("export() -> dict\n Export attributes into nested dictionary")},
 		{"value",             (PyCFunction)Utilityrate5_value, METH_VARARGS,
 				PyDoc_STR("value(name, optional value) -> Union[None, float, dict, sequence, str]\n Get or set by name a value in any of the variable groups.")},
+		{"unassign",          (PyCFunction)Utilityrate5_unassign, METH_VARARGS,
+				PyDoc_STR("unassign(name) -> None\n Unassign a value in any of the variable groups.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -2445,8 +2489,10 @@ Utilityrate5_default(PyObject *self, PyObject *args)
 		return NULL;
 
 	rv->data_owner_ptr = NULL;
-	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Utilityrate5", def);
-
+	if (PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Utilityrate5", def) < 0) {
+		Utilityrate5_dealloc(rv);
+		return NULL;
+	}
 	return (PyObject *)rv;
 }
 

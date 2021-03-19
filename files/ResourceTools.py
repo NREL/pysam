@@ -129,6 +129,12 @@ def URDBv7_to_ElectricityRates(urdb_response):
 
     def try_get_rate_structure(urdb_name, data_name):
         mat = []
+        supported_units = {
+            "kwh" : 0,
+            "kwh/kw" : 1,
+            "kwh daily" : 2,
+            "kwh/kw daily" : 3
+        }
         if urdb_name in urdb_response.keys():
             structure = urdb_response[urdb_name]
             for i, period in enumerate(structure):
@@ -142,10 +148,13 @@ def URDBv7_to_ElectricityRates(urdb_response):
                     sell = 0
                     if 'sell' in entry.keys():
                         sell = entry['sell']
+                    units = 0
                     if 'unit' in entry.keys():
-                        if entry['unit'].lower() != "kWh".lower():
+                        try:
+                            units = supported_units[entry['unit'].lower()]
+                        except KeyError:
                             raise RuntimeError("UtilityRateDatabase error: unrecognized unit in rate structure")
-                    mat.append((i + 1, j + 1, tier_max, 0.0, rate, sell))
+                    mat.append((i + 1, j + 1, tier_max, units, rate, sell))
             urdb_data[data_name] = mat
 
     def try_get_demand_structure(urdb_name, data_name):
@@ -218,12 +227,21 @@ def URDBv7_to_ElectricityRates(urdb_response):
         flat_demand = urdb_response['flatdemandmonths']
         for month, tier in enumerate(flat_demand):
             periods = [r for r in flat_demand_structure if r[0] == int(tier + 1)]
+            if len(periods) > 1:
+                raise ValueError("flat demand rate structure does not support multiple periods per month")
             month_row = []
             for p in periods:
                 month_row.append(month)
                 month_row += [p[i] for i in (1, 2, 3)]
             flat_mat.append(month_row)
         urdb_data['ur_dc_flat_mat'] = flat_mat
+    elif "demandratestructure" not in urdb_response.keys():
+        urdb_data['ur_dc_enable'] = 0
+
+    if urdb_data['ur_dc_enable'] == 1 and "ur_dc_tou_mat" not in urdb_data.keys():
+        urdb_data['ur_dc_tou_mat'] = [[1, 1, 1e38, 0], ]
+        urdb_data['ur_dc_sched_weekday'] = [[1] * 24 for i in range(12)]
+        urdb_data['ur_dc_sched_weekend'] = urdb_data['ur_dc_sched_weekday']
 
     return urdb_data
 

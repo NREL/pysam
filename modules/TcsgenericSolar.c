@@ -1542,9 +1542,9 @@ Outputs_get_gen(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_global(VarGroupObject *self, void *closure)
+Outputs_get_glob(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsgenericSolar_Outputs_global_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_TcsgenericSolar_Outputs_glob_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -1884,7 +1884,7 @@ static PyGetSetDef Outputs_getset[] = {
 {"gen", (getter)Outputs_get_gen,(setter)0,
 	PyDoc_STR("*sequence*: System power generated [kW]"),
  	NULL},
-{"global", (getter)Outputs_get_global,(setter)0,
+{"glob", (getter)Outputs_get_glob,(setter)0,
 	PyDoc_STR("*sequence*: Resource Global horizontal irradiance [W/m2]"),
  	NULL},
 {"hour", (getter)Outputs_get_hour,(setter)0,
@@ -2177,8 +2177,14 @@ TcsgenericSolar_value(CmodObject *self, PyObject *args)
 	return Cmod_value(self, args);
 }
 
+static PyObject *
+TcsgenericSolar_unassign(CmodObject *self, PyObject *args)
+{
+	return Cmod_unassign(self, args);
+}
+
 static PyMethodDef TcsgenericSolar_methods[] = {
-		{"execute",            (PyCFunction)TcsgenericSolar_execute,  METH_VARARGS,
+		{"execute",           (PyCFunction)TcsgenericSolar_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
 		{"assign",            (PyCFunction)TcsgenericSolar_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Weather': { var: val, ...}, ...}``")},
@@ -2186,6 +2192,8 @@ static PyMethodDef TcsgenericSolar_methods[] = {
 				PyDoc_STR("export() -> dict\n Export attributes into nested dictionary")},
 		{"value",             (PyCFunction)TcsgenericSolar_value, METH_VARARGS,
 				PyDoc_STR("value(name, optional value) -> Union[None, float, dict, sequence, str]\n Get or set by name a value in any of the variable groups.")},
+		{"unassign",          (PyCFunction)TcsgenericSolar_unassign, METH_VARARGS,
+				PyDoc_STR("unassign(name) -> None\n Unassign a value in any of the variable groups.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -2295,8 +2303,10 @@ TcsgenericSolar_default(PyObject *self, PyObject *args)
 		return NULL;
 
 	rv->data_owner_ptr = NULL;
-	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "TcsgenericSolar", def);
-
+	if (PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "TcsgenericSolar", def) < 0) {
+		TcsgenericSolar_dealloc(rv);
+		return NULL;
+	}
 	return (PyObject *)rv;
 }
 
