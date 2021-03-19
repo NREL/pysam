@@ -4,10 +4,10 @@
 * Add `unassign` function to modules
 * Fix mypy errors in stubs
 * Fix BatteryStateful bugs: memory leak; unintialized pointer in some constructors; fix `setup` error messaging
-* BatteryStateful features: ability to use adaptive timestep in simulation; speed up execution
-? Fix docs for TcsMoltenSalt
+* BatteryStateful features: ability to use adaptive timestep in simulation; speed up execution; Smith 2017 Life Model
+* Fix docs for TcsMoltenSalt
 * Leap year 2/29 date is now acceptable
-? Other Issues and PRs?
+* [SAM Release updates for Version 2020.11.29 Revision 1](https://nrel.github.io/SAM/doc/releasenotes.html)
 
 ## Version 2.2.0, Dec 2, 2020 ~ SAM 2020.11.29, SSC Version 250
 * [SAM Release updates for Version 2020.11.29](https://nrel.github.io/SAM/doc/releasenotes.html)
