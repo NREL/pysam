@@ -31,6 +31,7 @@ class ParamsCell(object):
 	Qfull = float
 	Qfull_flow = float
 	Qnom = float
+	Vcut = float
 	Vexp = float
 	Vfull = float
 	Vnom = float
@@ -48,6 +49,7 @@ class ParamsCell(object):
 	leadacid_q20 = float
 	leadacid_qn = float
 	leadacid_tn = float
+	life_model = float
 	maximum_SOC = float
 	minimum_SOC = float
 	resistance = float

@@ -188,6 +188,8 @@ class Outputs(object):
 	surplus_w_sys_ec_nov_tp = tuple
 	surplus_w_sys_ec_oct_tp = tuple
 	surplus_w_sys_ec_sep_tp = tuple
+	true_up_credits_ym = tuple
+	two_meter_sales_ym = tuple
 	utility_bill_w_sys = tuple
 	utility_bill_w_sys_ym = tuple
 	utility_bill_wo_sys = tuple
@@ -231,6 +233,8 @@ class Outputs(object):
 	year1_monthly_utility_bill_wo_sys = tuple
 	year1_net_billing_credits = tuple
 	year1_nm_dollars_applied = tuple
+	year1_true_up_credits = tuple
+	year1_two_meter_sales = tuple
 
 
 class Utilityrate5(object):

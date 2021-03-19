@@ -3834,7 +3834,7 @@ static PyGetSetDef Controller_getset[] = {
 	PyDoc_STR("*sequence[sequence]*: Custom TES diameters [m]\n\n*Required*: True"),
  	NULL},
 {"tes_lengths", (getter)Controller_get_tes_lengths,(setter)Controller_set_tes_lengths,
-	PyDoc_STR("*sequence[sequence]*: Custom TES lengths [m]\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: Custom TES lengths [m]"),
  	NULL},
 {"tes_pump_coef", (getter)Controller_get_tes_pump_coef,(setter)Controller_set_tes_pump_coef,
 	PyDoc_STR("*float*: Pumping power to move 1kg of HTF through tes loop [kW/(kg/s)]\n\n*Required*: True"),

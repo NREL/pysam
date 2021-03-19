@@ -8,8 +8,8 @@ Wrapper for SAM Simulation Core model: `cmod_tcstrough_empirical.cpp <https://gi
 Input Consistency Warning
 ==================================
 
-As described in :ref:`Possible Problems <possible_problems>`, some input parameters are interdepedent but the equations accounting for these
-interdependencies that enforce consistency among these input parameters are not available in the PySAM module. Therefore,
+As described in :ref:`Possible Problems <possible_problems>`, some input parameters are interdependent but the equations 
+that enforce consistency are not available in this PySAM module. Therefore,
 the onus is on the PySAM user to check that interdependencies are correctly handled. The variables which may require
 additional logic include:
 
