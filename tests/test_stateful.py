@@ -1,33 +1,51 @@
+from pytest import approx
+
 import PySAM.BatteryStateful as bt
 
+
 def test_stateful():
+    b = bt.default("NMCGraphite")
+    b.Controls.control_mode = 1
+    b.Controls.dt_hr = 1
+    b.ParamsCell.minimum_SOC = 10
+    b.ParamsCell.maximum_SOC = 90
+    b.ParamsCell.initial_SOC = 50
+    b.Controls.input_power = 0
+    b.setup()
+    assert (b.StatePack.SOC == approx(50))
+
+    b.Controls.input_power = 0.5
+    b.execute(0)
+    assert (b.StatePack.SOC == approx(44.811, 1e-2))
+
+
+def test_stateful_from_data():
     b = bt.new()
-
-    params = {"control_mode": 0, "input_current": 1, "chem": 1, "nominal_energy": 10, "nominal_voltage": 500,
-              "initial_SOC": 50.000, "maximum_SOC": 95.000, "minimum_SOC": 5.000, "dt_hr": 1.000, "leadacid_tn": 0.000,
-              "leadacid_qn": 0.000, "leadacid_q10": 0.000, "leadacid_q20": 0.000, "voltage_choice": 0,
-              "Vnom_default": 3.600, "resistance": 0.0001, "Vfull": 4.100, "Vexp": 4.050, "Vnom": 3.400, "Qfull": 2.250,
-              "Qexp": 0.040, "Qnom": 2.000, "C_rate": 0.200, "mass": 507.000, "surface_area": 2.018, "Cp": 1004.000,
-              "h": 20.000, "cap_vs_temp": [[-10, 60], [0, 80], [25, 1E+2], [40, 1E+2]], "T_room_init": 20,
-              "cycling_matrix": [[20, 0, 1E+2], [20, 5E+3, 80], [20, 1E+4, 60], [80, 0, 1E+2], [80, 1E+3, 80],
-                                 [80, 2E+3, 60]], "calendar_choice": 1, "calendar_q0": 1.020, "calendar_a": 0.003,
-              "calendar_b": -7280.000, "calendar_c": 930.000, "calendar_matrix": [[-3.1E+231]], "loss_choice": 0,
-              "monthly_charge_loss": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
-              "monthly_discharge_loss": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
-              "monthly_idle_loss": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], "schedule_loss": [], "replacement_option": 0,
-              "replacement_capacity": 0.000}
-
-    for k, v in params.items():
-        b.value(k, v)
-
+    d = {'Controls': {'control_mode': 1.0, 'dt_hr': 0.016666666666666666, 'input_power': 0.0},
+         'ParamsCell': {'C_rate': 0.2, 'Qexp': 2.584, 'Qfull': 3.2, 'Qnom': 3.126, 'Vexp': 3.53, 'Vfull': 4.2,
+                        'Vnom': 3.342, 'Vcut': 0, 'Vnom_default': 3.6, 'life_model': 1, 'chem': 1.0,
+                        'cycling_matrix': ((10.0, 0.0, 100.85333333333334), (10.0, 1250.0, 94.88402967051991),
+                                           (10.0, 2500.0, 88.91472600735459), (10.0, 3750.0, 82.94542234383735),
+                                           (10.0, 5000.0, 76.97611867996821), (20.0, 0.0, 100.85333333333334),
+                                           (20.0, 1250.0, 94.87983534903533), (20.0, 2500.0, 88.90633717426442),
+                                           (20.0, 3750.0, 82.93283880899575), (20.0, 5000.0, 76.95934025320447),
+                                           (40.0, 0.0, 100.85333333333334), (40.0, 1250.0, 94.78221121806645),
+                                           (40.0, 2500.0, 88.71098572007159), (40.0, 3750.0, 82.63965652437861),
+                                           (40.0, 5000.0, 76.56822331441485), (80.0, 0.0, 100.85333333333334),
+                                           (80.0, 1250.0, 92.48380979037378), (80.0, 2500.0, 84.0542799046757),
+                                           (80.0, 3750.0, 75.5600050138485), (80.0, 5000.0, 66.99558786034476),
+                                           (100.0, 0.0, 100.85333333333334), (100.0, 1250.0, 88.12558851005116),
+                                           (100.0, 2500.0, 74.87324171194942), (100.0, 3750.0, 60.95107257220129),
+                                           (100.0, 5000.0, 46.13117125424217)), 'initial_SOC': 50.0,
+                        'maximum_SOC': 90.0, 'minimum_SOC': 10.0, 'resistance': 0.001155, 'voltage_choice': 0.0},
+         'ParamsPack': {'Cp': 1500.0, 'T_room_init': 12.717792686395654,
+                        'cap_vs_temp': ((0.0, 80.2), (23.0, 100.0), (30.0, 103.1), (45.0, 105.4)), 'h': 7.5,
+                        'mass': 6470.406178696914, 'nominal_energy': 653.5763816865569, 'nominal_voltage': 500.0,
+                        'surface_area': 33.602970087562625}, 'StatePack': {}, 'StateCell': {}}
+    dd = dict()
+    for gr, vr in d.items():
+        for k, v in vr.items():
+            dd[k] = v
+    b.assign(d)
     b.setup()
-    b.execute(0)
-    print(b.StatePack.export())
-    b.execute(0)
-    print(b.StatePack.export())
-
-    b.setup()
-    b.execute(0)
-    print(b.StatePack.export())
-    b.execute(0)
-    print(b.StatePack.export())
+    assert b.Controls.control_mode == 1

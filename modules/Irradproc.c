@@ -131,15 +131,15 @@ IrradianceProcessor_set_day(VarGroupObject *self, PyObject *value, void *closure
 }
 
 static PyObject *
-IrradianceProcessor_get_diffuse(VarGroupObject *self, void *closure)
+IrradianceProcessor_get_diff(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Irradproc_IrradianceProcessor_diffuse_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Irradproc_IrradianceProcessor_diff_aget, self->data_ptr);
 }
 
 static int
-IrradianceProcessor_set_diffuse(VarGroupObject *self, PyObject *value, void *closure)
+IrradianceProcessor_set_diff(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_Irradproc_IrradianceProcessor_diffuse_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Irradproc_IrradianceProcessor_diff_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -167,15 +167,15 @@ IrradianceProcessor_set_gcr(VarGroupObject *self, PyObject *value, void *closure
 }
 
 static PyObject *
-IrradianceProcessor_get_global(VarGroupObject *self, void *closure)
+IrradianceProcessor_get_glob(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Irradproc_IrradianceProcessor_global_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Irradproc_IrradianceProcessor_glob_aget, self->data_ptr);
 }
 
 static int
-IrradianceProcessor_set_global(VarGroupObject *self, PyObject *value, void *closure)
+IrradianceProcessor_set_glob(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_Irradproc_IrradianceProcessor_global_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Irradproc_IrradianceProcessor_glob_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -365,7 +365,7 @@ static PyGetSetDef IrradianceProcessor_getset[] = {
 {"day", (getter)IrradianceProcessor_get_day,(setter)IrradianceProcessor_set_day,
 	PyDoc_STR("*sequence*: Day [dy]\n\n*Info*: 1-days in month\n\n*Constraints*: LENGTH_EQUAL=beam\n\n*Required*: True"),
  	NULL},
-{"diffuse", (getter)IrradianceProcessor_get_diffuse,(setter)IrradianceProcessor_set_diffuse,
+{"diff", (getter)IrradianceProcessor_get_diff,(setter)IrradianceProcessor_set_diff,
 	PyDoc_STR("*sequence*: Diffuse horizontal irradiance [W/m2]\n\n*Constraints*: LENGTH_EQUAL=beam\n\n*Required*: irrad_mode~1"),
  	NULL},
 {"elevation", (getter)IrradianceProcessor_get_elevation,(setter)IrradianceProcessor_set_elevation,
@@ -374,7 +374,7 @@ static PyGetSetDef IrradianceProcessor_getset[] = {
 {"gcr", (getter)IrradianceProcessor_get_gcr,(setter)IrradianceProcessor_set_gcr,
 	PyDoc_STR("*float*: Ground coverage ratio [0..1]\n\n*Constraints*: MIN=0,MAX=1\n\n*Required*: True if backtrack=1"),
  	NULL},
-{"global", (getter)IrradianceProcessor_get_global,(setter)IrradianceProcessor_set_global,
+{"glob", (getter)IrradianceProcessor_get_glob,(setter)IrradianceProcessor_set_glob,
 	PyDoc_STR("*sequence*: Global horizontal irradiance [W/m2]\n\n*Constraints*: LENGTH_EQUAL=beam\n\n*Required*: irrad_mode~0"),
  	NULL},
 {"hour", (getter)IrradianceProcessor_get_hour,(setter)IrradianceProcessor_set_hour,
@@ -791,8 +791,14 @@ Irradproc_value(CmodObject *self, PyObject *args)
 	return Cmod_value(self, args);
 }
 
+static PyObject *
+Irradproc_unassign(CmodObject *self, PyObject *args)
+{
+	return Cmod_unassign(self, args);
+}
+
 static PyMethodDef Irradproc_methods[] = {
-		{"execute",            (PyCFunction)Irradproc_execute,  METH_VARARGS,
+		{"execute",           (PyCFunction)Irradproc_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
 		{"assign",            (PyCFunction)Irradproc_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Irradiance Processor': { var: val, ...}, ...}``")},
@@ -800,6 +806,8 @@ static PyMethodDef Irradproc_methods[] = {
 				PyDoc_STR("export() -> dict\n Export attributes into nested dictionary")},
 		{"value",             (PyCFunction)Irradproc_value, METH_VARARGS,
 				PyDoc_STR("value(name, optional value) -> Union[None, float, dict, sequence, str]\n Get or set by name a value in any of the variable groups.")},
+		{"unassign",          (PyCFunction)Irradproc_unassign, METH_VARARGS,
+				PyDoc_STR("unassign(name) -> None\n Unassign a value in any of the variable groups.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -909,8 +917,10 @@ Irradproc_default(PyObject *self, PyObject *args)
 		return NULL;
 
 	rv->data_owner_ptr = NULL;
-	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Irradproc", def);
-
+	if (PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Irradproc", def) < 0) {
+		Irradproc_dealloc(rv);
+		return NULL;
+	}
 	return (PyObject *)rv;
 }
 

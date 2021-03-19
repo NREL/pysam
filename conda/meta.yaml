@@ -13,6 +13,12 @@ requirements:
     - python
     - nrel-pysam-stubs
 
+build:
+  script_env:
+   - PYTHONVER
+   - VERSION
+   - DIST_DIR
+
 about:
   home: https://nrel-pysam.readthedocs.io
   license: BSD 3-Clause

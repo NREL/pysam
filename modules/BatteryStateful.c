@@ -282,6 +282,18 @@ ParamsCell_set_Qnom(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyObject *
+ParamsCell_get_Vcut(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_BatteryStateful_ParamsCell_Vcut_nget, self->data_ptr);
+}
+
+static int
+ParamsCell_set_Vcut(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_BatteryStateful_ParamsCell_Vcut_nset, self->data_ptr);
+}
+
+static PyObject *
 ParamsCell_get_Vexp(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_BatteryStateful_ParamsCell_Vexp_nget, self->data_ptr);
@@ -486,6 +498,18 @@ ParamsCell_set_leadacid_tn(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyObject *
+ParamsCell_get_life_model(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_BatteryStateful_ParamsCell_life_model_nget, self->data_ptr);
+}
+
+static int
+ParamsCell_set_life_model(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_BatteryStateful_ParamsCell_life_model_nset, self->data_ptr);
+}
+
+static PyObject *
 ParamsCell_get_maximum_SOC(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_BatteryStateful_ParamsCell_maximum_SOC_nget, self->data_ptr);
@@ -561,6 +585,9 @@ static PyGetSetDef ParamsCell_getset[] = {
 {"Qnom", (getter)ParamsCell_get_Qnom,(setter)ParamsCell_set_Qnom,
 	PyDoc_STR("*float*: Cell capacity at end of nominal zone [Ah]\n\n*Required*: True if voltage_choice=0&chem~2"),
  	NULL},
+{"Vcut", (getter)ParamsCell_get_Vcut,(setter)ParamsCell_set_Vcut,
+	PyDoc_STR("*float*: Cell cutoff voltage [V]\n\n*Required*: True if voltage_choice=0&chem~2"),
+ 	NULL},
 {"Vexp", (getter)ParamsCell_get_Vexp,(setter)ParamsCell_set_Vexp,
 	PyDoc_STR("*float*: Cell voltage at end of exponential zone [V]\n\n*Required*: True if voltage_choice=0&chem~2"),
  	NULL},
@@ -574,28 +601,28 @@ static PyGetSetDef ParamsCell_getset[] = {
 	PyDoc_STR("*float*: Default nominal cell voltage [V]\n\n*Required*: True"),
  	NULL},
 {"calendar_a", (getter)ParamsCell_get_calendar_a,(setter)ParamsCell_set_calendar_a,
-	PyDoc_STR("*float*: Calendar life model coefficient [1/sqrt(day)]\n\n*Required*: True if calendar_choice=1"),
+	PyDoc_STR("*float*: Calendar life model coefficient [1/sqrt(day)]\n\n*Required*: True if life_model=0&calendar_choice=1"),
  	NULL},
 {"calendar_b", (getter)ParamsCell_get_calendar_b,(setter)ParamsCell_set_calendar_b,
-	PyDoc_STR("*float*: Calendar life model coefficient [K]\n\n*Required*: True if calendar_choice=1"),
+	PyDoc_STR("*float*: Calendar life model coefficient [K]\n\n*Required*: True if life_model=0&calendar_choice=1"),
  	NULL},
 {"calendar_c", (getter)ParamsCell_get_calendar_c,(setter)ParamsCell_set_calendar_c,
-	PyDoc_STR("*float*: Calendar life model coefficient [K]\n\n*Required*: True if calendar_choice=1"),
+	PyDoc_STR("*float*: Calendar life model coefficient [K]\n\n*Required*: True if life_model=0&calendar_choice=1"),
  	NULL},
 {"calendar_choice", (getter)ParamsCell_get_calendar_choice,(setter)ParamsCell_set_calendar_choice,
-	PyDoc_STR("*float*: Calendar life degradation input option [0/1/2]\n\n*Options*: 0=None,1=LithiomIonModel,2=InputLossTable\n\n*Required*: True"),
+	PyDoc_STR("*float*: Calendar life degradation input option [0/1/2]\n\n*Options*: 0=None,1=LithiomIonModel,2=InputLossTable\n\n*Required*: True if life_model=0"),
  	NULL},
 {"calendar_matrix", (getter)ParamsCell_get_calendar_matrix,(setter)ParamsCell_set_calendar_matrix,
-	PyDoc_STR("*sequence[sequence]*: Table with Day # and Capacity % columns [[[#, %]]]\n\n*Required*: True if calendar_choice=2"),
+	PyDoc_STR("*sequence[sequence]*: Table with Day # and Capacity % columns [[[#, %]]]\n\n*Required*: True if life_model=0&calendar_choice=2"),
  	NULL},
 {"calendar_q0", (getter)ParamsCell_get_calendar_q0,(setter)ParamsCell_set_calendar_q0,
-	PyDoc_STR("*float*: Calendar life model initial capacity cofficient\n\n*Required*: True if calendar_choice=1"),
+	PyDoc_STR("*float*: Calendar life model initial capacity cofficient\n\n*Required*: True if life_model=0&calendar_choice=1"),
  	NULL},
 {"chem", (getter)ParamsCell_get_chem,(setter)ParamsCell_set_chem,
 	PyDoc_STR("*float*: Lead Acid (0), Li Ion (1), Vanadium Redox (2), Iron Flow (3) [0/1/2/3]\n\n*Required*: True"),
  	NULL},
 {"cycling_matrix", (getter)ParamsCell_get_cycling_matrix,(setter)ParamsCell_set_cycling_matrix,
-	PyDoc_STR("*sequence[sequence]*: Table with DOD %, Cycle #, and Capacity % columns [[[%, #, %]]]\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: Table with DOD %, Cycle #, and Capacity % columns [[[%, #, %]]]\n\n*Required*: True if life_model=0"),
  	NULL},
 {"initial_SOC", (getter)ParamsCell_get_initial_SOC,(setter)ParamsCell_set_initial_SOC,
 	PyDoc_STR("*float*: Initial state-of-charge [%]\n\n*Required*: True"),
@@ -611,6 +638,9 @@ static PyGetSetDef ParamsCell_getset[] = {
  	NULL},
 {"leadacid_tn", (getter)ParamsCell_get_leadacid_tn,(setter)ParamsCell_set_leadacid_tn,
 	PyDoc_STR("*float*: Hours to discharge for qn rate [h]\n\n*Required*: True if chem=0"),
+ 	NULL},
+{"life_model", (getter)ParamsCell_get_life_model,(setter)ParamsCell_set_life_model,
+	PyDoc_STR("*float*: Battery life model specifier [0/1]\n\n*Options*: 0=calendar/cycle,1=NMC\n\n*Required*: True"),
  	NULL},
 {"maximum_SOC", (getter)ParamsCell_get_maximum_SOC,(setter)ParamsCell_set_maximum_SOC,
 	PyDoc_STR("*float*: Maximum allowed state-of-charge [%]\n\n*Required*: True"),
@@ -929,7 +959,7 @@ static PyGetSetDef ParamsPack_getset[] = {
 	PyDoc_STR("*float*: Temperature of storage room [C]\n\n*Required*: True"),
  	NULL},
 {"cap_vs_temp", (getter)ParamsPack_get_cap_vs_temp,(setter)ParamsPack_set_cap_vs_temp,
-	PyDoc_STR("*sequence[sequence]*: Table with Temperature and Capacity % as columns [[[C,%]]]\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: Table with Temperature and Capacity % as columns [[[C,%]]]\n\n*Required*: True if life_model=0"),
  	NULL},
 {"h", (getter)ParamsPack_get_h,(setter)ParamsPack_set_h,
 	PyDoc_STR("*float*: Heat transfer between battery and environment [W/m2K]\n\n*Required*: True"),
@@ -1949,10 +1979,10 @@ BatteryStateful_dealloc(CmodStatefulObject *self)
 		SAM_table_destruct(self->data_ptr, &error);
 		PySAM_has_error(error);
 	}
-	if (!self->cmod_ptr) {
-	SAM_error error = new_error();
-	SAM_module_destruct(self->cmod_ptr, &error);
-	PySAM_has_error(error);
+	if (self->cmod_ptr) {
+		SAM_error error = new_error();
+		SAM_module_destruct(self->cmod_ptr, &error);
+		PySAM_has_error(error);
 	}
 	PyObject_Del(self);
 }
@@ -2013,10 +2043,16 @@ BatteryStateful_value(CmodStatefulObject *self, PyObject *args)
 	return CmodStateful_value(self, args);
 }
 
+static PyObject *
+BatteryStateful_unassign(CmodStatefulObject *self, PyObject *args)
+{
+	return CmodStateful_unassign(self, args);
+}
+
 static PyMethodDef BatteryStateful_methods[] = {
 		{"setup",            (PyCFunction)BatteryStateful_setup,  METH_VARARGS,
 				PyDoc_STR("setup() -> None\n Setup parameters in simulation")},
-		{"execute",            (PyCFunction)BatteryStateful_execute,  METH_VARARGS,
+		{"execute",           (PyCFunction)BatteryStateful_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
 		{"assign",            (PyCFunction)BatteryStateful_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Controls': { var: val, ...}, ...}``")},
@@ -2024,6 +2060,8 @@ static PyMethodDef BatteryStateful_methods[] = {
 				PyDoc_STR("export() -> dict\n Export attributes into nested dictionary")},
 		{"value",             (PyCFunction)BatteryStateful_value, METH_VARARGS,
 				PyDoc_STR("value(name, optional value) -> Union[None, float, dict, sequence, str]\n Get or set by name a value in any of the variable groups.")},
+		{"unassign",          (PyCFunction)BatteryStateful_unassign, METH_VARARGS,
+				PyDoc_STR("unassign(name) -> None\n Unassign a value in any of the variable groups.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -2117,6 +2155,7 @@ BatteryStateful_wrap(PyObject *self, PyObject *args)
 		return NULL;
 
 	rv->data_owner_ptr = NULL;
+	rv->cmod_ptr = NULL;
 	return (PyObject *)rv;
 }
 
@@ -2134,8 +2173,11 @@ BatteryStateful_default(PyObject *self, PyObject *args)
 		return NULL;
 
 	rv->data_owner_ptr = NULL;
-	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "BatteryStateful", def);
-
+	if (PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "BatteryStateful", def) < 0) {
+		BatteryStateful_dealloc(rv);
+		return NULL;
+	}
+	rv->cmod_ptr = NULL;
 	return (PyObject *)rv;
 }
 
@@ -2164,6 +2206,7 @@ BatteryStateful_from_existing(PyObject *self, PyObject *args)
 	if (rv == NULL)
 		goto fail;
 	rv->data_owner_ptr = module;
+	rv->cmod_ptr = NULL;
 	if (!def)
 		return (PyObject *)rv;
 	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "BatteryStateful", def);

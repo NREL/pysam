@@ -8171,7 +8171,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Battery replacement cost [$]"),
  	NULL},
 {"cf_battery_replacement_cost_schedule", (getter)Outputs_get_cf_battery_replacement_cost_schedule,(setter)0,
-	PyDoc_STR("*sequence*: Battery replacement cost schedule [$/kWh]"),
+	PyDoc_STR("*sequence*: Battery replacement cost schedule [$]"),
  	NULL},
 {"cf_disbursement_equip1", (getter)Outputs_get_cf_disbursement_equip1,(setter)0,
 	PyDoc_STR("*sequence*: Reserve disbursement major equipment 1 [$]"),
@@ -9946,8 +9946,14 @@ Saleleaseback_value(CmodObject *self, PyObject *args)
 	return Cmod_value(self, args);
 }
 
+static PyObject *
+Saleleaseback_unassign(CmodObject *self, PyObject *args)
+{
+	return Cmod_unassign(self, args);
+}
+
 static PyMethodDef Saleleaseback_methods[] = {
-		{"execute",            (PyCFunction)Saleleaseback_execute,  METH_VARARGS,
+		{"execute",           (PyCFunction)Saleleaseback_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
 		{"assign",            (PyCFunction)Saleleaseback_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Revenue': { var: val, ...}, ...}``")},
@@ -9955,6 +9961,8 @@ static PyMethodDef Saleleaseback_methods[] = {
 				PyDoc_STR("export() -> dict\n Export attributes into nested dictionary")},
 		{"value",             (PyCFunction)Saleleaseback_value, METH_VARARGS,
 				PyDoc_STR("value(name, optional value) -> Union[None, float, dict, sequence, str]\n Get or set by name a value in any of the variable groups.")},
+		{"unassign",          (PyCFunction)Saleleaseback_unassign, METH_VARARGS,
+				PyDoc_STR("unassign(name) -> None\n Unassign a value in any of the variable groups.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -10064,8 +10072,10 @@ Saleleaseback_default(PyObject *self, PyObject *args)
 		return NULL;
 
 	rv->data_owner_ptr = NULL;
-	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Saleleaseback", def);
-
+	if (PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Saleleaseback", def) < 0) {
+		Saleleaseback_dealloc(rv);
+		return NULL;
+	}
 	return (PyObject *)rv;
 }
 

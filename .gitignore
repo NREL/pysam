@@ -17,6 +17,8 @@ env/
 venv*/
 __pycache__
 
+.env
+
 #distributions
 dist/
 manylinux/
@@ -25,3 +27,5 @@ manylinux/
 \.vs/
 files/defaults/
 *.pyc
+
+.mypy_cache

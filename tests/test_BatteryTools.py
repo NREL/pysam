@@ -127,7 +127,6 @@ def test_battery_model_change_chemistry():
     assert(model.value('batt_computed_bank_capacity') == pytest.approx(original_capacity, 0.1))
     assert(model.value('batt_power_discharge_max_kwac') == pytest.approx(original_power, 0.1))
     assert(model.BatteryCell.batt_C_rate == cell_params['C_rate'])
-    assert(model.BatteryCell.batt_calendar_choice == cell_params['calendar_choice'])
     assert(model.BatteryCell.batt_Vexp == cell_params['Vexp'])
     assert(model.BatteryCell.batt_Cp == pack_params['Cp'])
 
@@ -143,6 +142,5 @@ def test_batterystateful_model_change_chemistry():
     pack_params = params_new['ParamsPack']
 
     assert(model.value('nominal_energy') == pytest.approx(original_capacity, 0.1))
-    assert(model.ParamsCell.calendar_choice == cell_params['calendar_choice'])
     assert(model.ParamsCell.Vnom_default == cell_params['Vnom_default'])
     assert(model.ParamsPack.Cp == pack_params['Cp'])

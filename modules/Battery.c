@@ -421,30 +421,6 @@ BatterySystem_set_batt_current_discharge_max(VarGroupObject *self, PyObject *val
 }
 
 static PyObject *
-BatterySystem_get_batt_cycle_cost(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Battery_BatterySystem_batt_cycle_cost_aget, self->data_ptr);
-}
-
-static int
-BatterySystem_set_batt_cycle_cost(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_Battery_BatterySystem_batt_cycle_cost_aset, self->data_ptr);
-}
-
-static PyObject *
-BatterySystem_get_batt_cycle_cost_choice(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Battery_BatterySystem_batt_cycle_cost_choice_nget, self->data_ptr);
-}
-
-static int
-BatterySystem_set_batt_cycle_cost_choice(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Battery_BatterySystem_batt_cycle_cost_choice_nset, self->data_ptr);
-}
-
-static PyObject *
 BatterySystem_get_batt_dc_ac_efficiency(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Battery_BatterySystem_batt_dc_ac_efficiency_nget, self->data_ptr);
@@ -708,12 +684,6 @@ static PyGetSetDef BatterySystem_getset[] = {
  	NULL},
 {"batt_current_discharge_max", (getter)BatterySystem_get_batt_current_discharge_max,(setter)BatterySystem_set_batt_current_discharge_max,
 	PyDoc_STR("*float*: Maximum discharge current [A]\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - batt_Qfull\n\t - batt_Vnom_default\n\t - batt_ac_dc_efficiency\n\t - batt_ac_or_dc\n\t - batt_chem\n\t - batt_current_choice\n\t - batt_dc_ac_efficiency\n\t - batt_dc_dc_efficiency\n"),
- 	NULL},
-{"batt_cycle_cost", (getter)BatterySystem_get_batt_cycle_cost,(setter)BatterySystem_set_batt_cycle_cost,
-	PyDoc_STR("*sequence*: Input battery cycle degradaton penalty per year [$/cycle-kWh]\n\n*Info*: length 1 or analysis_period, length 1 will be extended using inflation"),
- 	NULL},
-{"batt_cycle_cost_choice", (getter)BatterySystem_get_batt_cycle_cost_choice,(setter)BatterySystem_set_batt_cycle_cost_choice,
-	PyDoc_STR("*float*: Use SAM cost model for degradaton penalty or input custom via batt_cycle_cost [0/1]\n\n*Options*: 0=UseCostModel,1=InputCost"),
  	NULL},
 {"batt_dc_ac_efficiency", (getter)BatterySystem_get_batt_dc_ac_efficiency,(setter)BatterySystem_set_batt_dc_ac_efficiency,
 	PyDoc_STR("*float*: Battery DC to AC efficiency\n\n*Changes to this variable may require updating the values of the following*: \n\t - LeadAcid_q10_computed\n\t - LeadAcid_q20_computed\n\t - LeadAcid_qn_computed\n\t - batt_Qexp\n\t - batt_Qfull_flow\n\t - batt_Qnom\n\t - batt_computed_bank_capacity\n\t - batt_computed_series\n\t - batt_computed_strings\n\t - batt_current_charge_max\n\t - batt_current_discharge_max\n\t - batt_mass\n\t - batt_power_charge_max_kwac\n\t - batt_power_charge_max_kwdc\n\t - batt_power_discharge_max_kwac\n\t - batt_power_discharge_max_kwdc\n\t - batt_surface_area\n"),
@@ -1294,6 +1264,18 @@ BatteryCell_set_batt_Qnom(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyObject *
+BatteryCell_get_batt_Vcut(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Battery_BatteryCell_batt_Vcut_nget, self->data_ptr);
+}
+
+static int
+BatteryCell_set_batt_Vcut(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Battery_BatteryCell_batt_Vcut_nset, self->data_ptr);
+}
+
+static PyObject *
 BatteryCell_get_batt_Vexp(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Battery_BatteryCell_batt_Vexp_nget, self->data_ptr);
@@ -1450,6 +1432,18 @@ BatteryCell_set_batt_initial_SOC(VarGroupObject *self, PyObject *value, void *cl
 }
 
 static PyObject *
+BatteryCell_get_batt_life_model(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Battery_BatteryCell_batt_life_model_nget, self->data_ptr);
+}
+
+static int
+BatteryCell_set_batt_life_model(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Battery_BatteryCell_batt_life_model_nset, self->data_ptr);
+}
+
+static PyObject *
 BatteryCell_get_batt_lifetime_matrix(VarGroupObject *self, void *closure)
 {
 	return PySAM_matrix_getter(SAM_Battery_BatteryCell_batt_lifetime_matrix_mget, self->data_ptr);
@@ -1588,6 +1582,9 @@ static PyGetSetDef BatteryCell_getset[] = {
 {"batt_Qnom", (getter)BatteryCell_get_batt_Qnom,(setter)BatteryCell_set_batt_Qnom,
 	PyDoc_STR("*float*: Cell capacity at end of nominal zone [Ah]\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - batt_Qfull\n\t - batt_Vnom_default\n\t - batt_ac_dc_efficiency\n\t - batt_ac_or_dc\n\t - batt_chem\n\t - batt_computed_bank_capacity\n\t - batt_current_choice\n\t - batt_dc_ac_efficiency\n\t - batt_dc_dc_efficiency\n"),
  	NULL},
+{"batt_Vcut", (getter)BatteryCell_get_batt_Vcut,(setter)BatteryCell_set_batt_Vcut,
+	PyDoc_STR("*float*: Cutoff voltage for battery rated capacity [V]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
 {"batt_Vexp", (getter)BatteryCell_get_batt_Vexp,(setter)BatteryCell_set_batt_Vexp,
 	PyDoc_STR("*float*: Cell voltage at end of exponential zone [V]"),
  	NULL},
@@ -1601,22 +1598,22 @@ static PyGetSetDef BatteryCell_getset[] = {
 	PyDoc_STR("*float*: Default nominal cell voltage [V]\n\n*Changes to this variable may require updating the values of the following*: \n\t - LeadAcid_q10_computed\n\t - LeadAcid_q20_computed\n\t - LeadAcid_qn_computed\n\t - batt_Qexp\n\t - batt_Qfull_flow\n\t - batt_Qnom\n\t - batt_computed_bank_capacity\n\t - batt_computed_series\n\t - batt_computed_strings\n\t - batt_current_charge_max\n\t - batt_current_discharge_max\n\t - batt_mass\n\t - batt_power_charge_max_kwac\n\t - batt_power_charge_max_kwdc\n\t - batt_power_discharge_max_kwac\n\t - batt_power_discharge_max_kwdc\n\t - batt_surface_area\n"),
  	NULL},
 {"batt_calendar_a", (getter)BatteryCell_get_batt_calendar_a,(setter)BatteryCell_set_batt_calendar_a,
-	PyDoc_STR("*float*: Calendar life model coefficient [1/sqrt(day)]"),
+	PyDoc_STR("*float*: Calendar life model coefficient [1/sqrt(day)]\n\n*Required*: True if en_batt=1&batt_life_model=0&batt_calendar_choice=1"),
  	NULL},
 {"batt_calendar_b", (getter)BatteryCell_get_batt_calendar_b,(setter)BatteryCell_set_batt_calendar_b,
-	PyDoc_STR("*float*: Calendar life model coefficient [K]"),
+	PyDoc_STR("*float*: Calendar life model coefficient [K]\n\n*Required*: True if en_batt=1&batt_life_model=0&batt_calendar_choice=1"),
  	NULL},
 {"batt_calendar_c", (getter)BatteryCell_get_batt_calendar_c,(setter)BatteryCell_set_batt_calendar_c,
-	PyDoc_STR("*float*: Calendar life model coefficient [K]"),
+	PyDoc_STR("*float*: Calendar life model coefficient [K]\n\n*Required*: True if en_batt=1&batt_life_model=0&batt_calendar_choice=1"),
  	NULL},
 {"batt_calendar_choice", (getter)BatteryCell_get_batt_calendar_choice,(setter)BatteryCell_set_batt_calendar_choice,
-	PyDoc_STR("*float*: Calendar life degradation input option [0/1/2]\n\n*Options*: 0=NoCalendarDegradation,1=LithiomIonModel,2=InputLossTable"),
+	PyDoc_STR("*float*: Calendar life degradation input option [0/1/2]\n\n*Options*: 0=NoCalendarDegradation,1=LithiomIonModel,2=InputLossTable\n\n*Required*: True if en_batt=1&batt_life_model=0"),
  	NULL},
 {"batt_calendar_lifetime_matrix", (getter)BatteryCell_get_batt_calendar_lifetime_matrix,(setter)BatteryCell_set_batt_calendar_lifetime_matrix,
-	PyDoc_STR("*sequence[sequence]*: Days vs capacity"),
+	PyDoc_STR("*sequence[sequence]*: Days vs capacity\n\n*Required*: True if en_batt=1&batt_life_model=0&batt_calendar_choice=2"),
  	NULL},
 {"batt_calendar_q0", (getter)BatteryCell_get_batt_calendar_q0,(setter)BatteryCell_set_batt_calendar_q0,
-	PyDoc_STR("*float*: Calendar life model initial capacity cofficient"),
+	PyDoc_STR("*float*: Calendar life model initial capacity cofficient\n\n*Required*: True if en_batt=1&batt_life_model=0&batt_calendar_choice=1"),
  	NULL},
 {"batt_chem", (getter)BatteryCell_get_batt_chem,(setter)BatteryCell_set_batt_chem,
 	PyDoc_STR("*float*: Battery chemistry\n\n*Options*: 0=LeadAcid,1=LiIon\n\n*Changes to this variable may require updating the values of the following*: \n\t - LeadAcid_q10_computed\n\t - LeadAcid_q20_computed\n\t - LeadAcid_qn_computed\n\t - batt_Qexp\n\t - batt_Qfull_flow\n\t - batt_Qnom\n\t - batt_computed_bank_capacity\n\t - batt_computed_series\n\t - batt_computed_strings\n\t - batt_current_charge_max\n\t - batt_current_discharge_max\n\t - batt_mass\n\t - batt_power_charge_max_kwac\n\t - batt_power_charge_max_kwdc\n\t - batt_power_discharge_max_kwac\n\t - batt_power_discharge_max_kwdc\n\t - batt_surface_area\n"),
@@ -1627,8 +1624,11 @@ static PyGetSetDef BatteryCell_getset[] = {
 {"batt_initial_SOC", (getter)BatteryCell_get_batt_initial_SOC,(setter)BatteryCell_set_batt_initial_SOC,
 	PyDoc_STR("*float*: Initial state-of-charge [%]"),
  	NULL},
+{"batt_life_model", (getter)BatteryCell_get_batt_life_model,(setter)BatteryCell_set_batt_life_model,
+	PyDoc_STR("*float*: Battery life model specifier [0/1]\n\n*Options*: 0=calendar/cycle,1=NMC\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
 {"batt_lifetime_matrix", (getter)BatteryCell_get_batt_lifetime_matrix,(setter)BatteryCell_set_batt_lifetime_matrix,
-	PyDoc_STR("*sequence[sequence]*: Cycles vs capacity at different depths-of-discharge"),
+	PyDoc_STR("*sequence[sequence]*: Cycles vs capacity at different depths-of-discharge\n\n*Required*: True if en_batt=1&batt_life_model=0"),
  	NULL},
 {"batt_maximum_SOC", (getter)BatteryCell_get_batt_maximum_SOC,(setter)BatteryCell_set_batt_maximum_SOC,
 	PyDoc_STR("*float*: Maximum allowed state-of-charge [%]"),
@@ -2152,6 +2152,30 @@ BatteryDispatch_set_batt_custom_dispatch(VarGroupObject *self, PyObject *value, 
 }
 
 static PyObject *
+BatteryDispatch_get_batt_cycle_cost(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Battery_BatteryDispatch_batt_cycle_cost_aget, self->data_ptr);
+}
+
+static int
+BatteryDispatch_set_batt_cycle_cost(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Battery_BatteryDispatch_batt_cycle_cost_aset, self->data_ptr);
+}
+
+static PyObject *
+BatteryDispatch_get_batt_cycle_cost_choice(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Battery_BatteryDispatch_batt_cycle_cost_choice_nget, self->data_ptr);
+}
+
+static int
+BatteryDispatch_set_batt_cycle_cost_choice(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Battery_BatteryDispatch_batt_cycle_cost_choice_nset, self->data_ptr);
+}
+
+static PyObject *
 BatteryDispatch_get_batt_dispatch_auto_can_charge(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Battery_BatteryDispatch_batt_dispatch_auto_can_charge_nget, self->data_ptr);
@@ -2397,6 +2421,12 @@ static PyGetSetDef BatteryDispatch_getset[] = {
  	NULL},
 {"batt_custom_dispatch", (getter)BatteryDispatch_get_batt_custom_dispatch,(setter)BatteryDispatch_set_batt_custom_dispatch,
 	PyDoc_STR("*sequence*: Custom battery power for every time step [kW]\n\n*Info*: kWAC if AC-connected, else kWDC\n\n*Required*: True if en_batt=1&batt_dispatch_choice=3"),
+ 	NULL},
+{"batt_cycle_cost", (getter)BatteryDispatch_get_batt_cycle_cost,(setter)BatteryDispatch_set_batt_cycle_cost,
+	PyDoc_STR("*sequence*: Input battery cycle degradaton penalty per year [$/cycle-kWh]\n\n*Info*: length 1 or analysis_period, length 1 will be extended using inflation\n\n*Required*: True if batt_cycle_cost_choice=1"),
+ 	NULL},
+{"batt_cycle_cost_choice", (getter)BatteryDispatch_get_batt_cycle_cost_choice,(setter)BatteryDispatch_set_batt_cycle_cost_choice,
+	PyDoc_STR("*float*: Use SAM cost model for degradaton penalty or input custom via batt_cycle_cost [0/1]\n\n*Options*: 0=UseCostModel,1=InputCost\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"batt_dispatch_auto_can_charge", (getter)BatteryDispatch_get_batt_dispatch_auto_can_charge,(setter)BatteryDispatch_set_batt_dispatch_auto_can_charge,
 	PyDoc_STR("*float*: System charging allowed for automated dispatch? [kW]"),
@@ -4254,8 +4284,14 @@ Battery_value(CmodObject *self, PyObject *args)
 	return Cmod_value(self, args);
 }
 
+static PyObject *
+Battery_unassign(CmodObject *self, PyObject *args)
+{
+	return Cmod_unassign(self, args);
+}
+
 static PyMethodDef Battery_methods[] = {
-		{"execute",            (PyCFunction)Battery_execute,  METH_VARARGS,
+		{"execute",           (PyCFunction)Battery_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
 		{"assign",            (PyCFunction)Battery_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Simulation': { var: val, ...}, ...}``")},
@@ -4263,6 +4299,8 @@ static PyMethodDef Battery_methods[] = {
 				PyDoc_STR("export() -> dict\n Export attributes into nested dictionary")},
 		{"value",             (PyCFunction)Battery_value, METH_VARARGS,
 				PyDoc_STR("value(name, optional value) -> Union[None, float, dict, sequence, str]\n Get or set by name a value in any of the variable groups.")},
+		{"unassign",          (PyCFunction)Battery_unassign, METH_VARARGS,
+				PyDoc_STR("unassign(name) -> None\n Unassign a value in any of the variable groups.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -4372,8 +4410,10 @@ Battery_default(PyObject *self, PyObject *args)
 		return NULL;
 
 	rv->data_owner_ptr = NULL;
-	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Battery", def);
-
+	if (PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Battery", def) < 0) {
+		Battery_dealloc(rv);
+		return NULL;
+	}
 	return (PyObject *)rv;
 }
 

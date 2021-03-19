@@ -59,18 +59,6 @@ static PyMethodDef MHKCosts_methods[] = {
 };
 
 static PyObject *
-MHKCosts_get_annual_energy(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_MhkCosts_MHKCosts_annual_energy_nget, self->data_ptr);
-}
-
-static int
-MHKCosts_set_annual_energy(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_MhkCosts_MHKCosts_annual_energy_nset, self->data_ptr);
-}
-
-static PyObject *
 MHKCosts_get_array_cable_system_cost_input(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_MhkCosts_MHKCosts_array_cable_system_cost_input_nget, self->data_ptr);
@@ -467,9 +455,6 @@ MHKCosts_set_system_capacity(VarGroupObject *self, PyObject *value, void *closur
 }
 
 static PyGetSetDef MHKCosts_getset[] = {
-{"annual_energy", (getter)MHKCosts_get_annual_energy,(setter)MHKCosts_set_annual_energy,
-	PyDoc_STR("*float*: Annual energy production [kWh]\n\n*Required*: True"),
- 	NULL},
 {"array_cable_system_cost_input", (getter)MHKCosts_get_array_cable_system_cost_input,(setter)MHKCosts_set_array_cable_system_cost_input,
 	PyDoc_STR("*float*: Array cable system cost [$]\n\n*Required*: True"),
  	NULL},
@@ -785,36 +770,6 @@ Outputs_get_structural_assembly_cost_modeled(VarGroupObject *self, void *closure
 	return PySAM_double_getter(SAM_MhkCosts_Outputs_structural_assembly_cost_modeled_nget, self->data_ptr);
 }
 
-static PyObject *
-Outputs_get_total_bos_cost_per_kwh(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_MhkCosts_Outputs_total_bos_cost_per_kwh_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_total_capital_cost_per_kwh(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_MhkCosts_Outputs_total_capital_cost_per_kwh_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_total_device_cost_per_kwh(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_MhkCosts_Outputs_total_device_cost_per_kwh_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_total_financial_cost_per_kwh(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_MhkCosts_Outputs_total_financial_cost_per_kwh_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_total_operations_cost_per_kwh(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_MhkCosts_Outputs_total_operations_cost_per_kwh_nget, self->data_ptr);
-}
-
 static PyGetSetDef Outputs_getset[] = {
 {"array_cable_system_cost_modeled", (getter)Outputs_get_array_cable_system_cost_modeled,(setter)0,
 	PyDoc_STR("*float*: Modeled array cable system cost [$]"),
@@ -872,21 +827,6 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"structural_assembly_cost_modeled", (getter)Outputs_get_structural_assembly_cost_modeled,(setter)0,
 	PyDoc_STR("*float*: Modeled structural assembly cost [$]"),
- 	NULL},
-{"total_bos_cost_per_kwh", (getter)Outputs_get_total_bos_cost_per_kwh,(setter)0,
-	PyDoc_STR("*float*: Total bos costs per kWh [$/kWh]"),
- 	NULL},
-{"total_capital_cost_per_kwh", (getter)Outputs_get_total_capital_cost_per_kwh,(setter)0,
-	PyDoc_STR("*float*: Total capital costs per kWh [$/kWh]"),
- 	NULL},
-{"total_device_cost_per_kwh", (getter)Outputs_get_total_device_cost_per_kwh,(setter)0,
-	PyDoc_STR("*float*: Total device costs per kWh [$/kWh]"),
- 	NULL},
-{"total_financial_cost_per_kwh", (getter)Outputs_get_total_financial_cost_per_kwh,(setter)0,
-	PyDoc_STR("*float*: Total financial costs per kWh [$/kWh]"),
- 	NULL},
-{"total_operations_cost_per_kwh", (getter)Outputs_get_total_operations_cost_per_kwh,(setter)0,
-	PyDoc_STR("*float*: Total operations costs per kWh [$/kWh]"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1022,8 +962,14 @@ MhkCosts_value(CmodObject *self, PyObject *args)
 	return Cmod_value(self, args);
 }
 
+static PyObject *
+MhkCosts_unassign(CmodObject *self, PyObject *args)
+{
+	return Cmod_unassign(self, args);
+}
+
 static PyMethodDef MhkCosts_methods[] = {
-		{"execute",            (PyCFunction)MhkCosts_execute,  METH_VARARGS,
+		{"execute",           (PyCFunction)MhkCosts_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
 		{"assign",            (PyCFunction)MhkCosts_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'MHKCosts': { var: val, ...}, ...}``")},
@@ -1031,6 +977,8 @@ static PyMethodDef MhkCosts_methods[] = {
 				PyDoc_STR("export() -> dict\n Export attributes into nested dictionary")},
 		{"value",             (PyCFunction)MhkCosts_value, METH_VARARGS,
 				PyDoc_STR("value(name, optional value) -> Union[None, float, dict, sequence, str]\n Get or set by name a value in any of the variable groups.")},
+		{"unassign",          (PyCFunction)MhkCosts_unassign, METH_VARARGS,
+				PyDoc_STR("unassign(name) -> None\n Unassign a value in any of the variable groups.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -1140,8 +1088,10 @@ MhkCosts_default(PyObject *self, PyObject *args)
 		return NULL;
 
 	rv->data_owner_ptr = NULL;
-	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "MhkCosts", def);
-
+	if (PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "MhkCosts", def) < 0) {
+		MhkCosts_dealloc(rv);
+		return NULL;
+	}
 	return (PyObject *)rv;
 }
 

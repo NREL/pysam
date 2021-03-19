@@ -2,7 +2,7 @@ class Simulation(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -16,7 +16,7 @@ class Lifetime(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -32,7 +32,7 @@ class BatterySystem(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -47,8 +47,6 @@ class BatterySystem(object):
 	batt_current_charge_max = float
 	batt_current_choice = float
 	batt_current_discharge_max = float
-	batt_cycle_cost = tuple
-	batt_cycle_cost_choice = float
 	batt_dc_ac_efficiency = float
 	batt_dc_dc_efficiency = float
 	batt_inverter_efficiency_cutoff = float
@@ -75,7 +73,7 @@ class SystemOutput(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -91,7 +89,7 @@ class Load(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -107,7 +105,7 @@ class BatteryCell(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -124,6 +122,7 @@ class BatteryCell(object):
 	batt_Qfull = float
 	batt_Qfull_flow = float
 	batt_Qnom = float
+	batt_Vcut = float
 	batt_Vexp = float
 	batt_Vfull = float
 	batt_Vnom = float
@@ -137,6 +136,7 @@ class BatteryCell(object):
 	batt_chem = float
 	batt_h_to_ambient = float
 	batt_initial_SOC = float
+	batt_life_model = float
 	batt_lifetime_matrix = tuple
 	batt_maximum_SOC = float
 	batt_minimum_SOC = float
@@ -152,7 +152,7 @@ class Inverter(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -175,7 +175,7 @@ class Losses(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -189,7 +189,7 @@ class BatteryDispatch(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -198,6 +198,8 @@ class BatteryDispatch(object):
 
 	batt_auto_gridcharge_max_daily = float
 	batt_custom_dispatch = tuple
+	batt_cycle_cost = tuple
+	batt_cycle_cost_choice = float
 	batt_dispatch_auto_can_charge = float
 	batt_dispatch_auto_can_clipcharge = float
 	batt_dispatch_auto_can_fuelcellcharge = float
@@ -224,7 +226,7 @@ class FuelCell(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -238,7 +240,7 @@ class PriceSignal(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -268,7 +270,7 @@ class ElectricityRates(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -302,7 +304,7 @@ class Outputs(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -385,6 +387,9 @@ class Battery(object):
 		pass
 
 	def value(self, name, value=None):
+		pass
+
+	def unassign(self, name):
 		pass
 
 	def execute(self, int_verbosity):

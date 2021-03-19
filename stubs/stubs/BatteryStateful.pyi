@@ -2,7 +2,7 @@ class Controls(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -19,7 +19,7 @@ class ParamsCell(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -31,6 +31,7 @@ class ParamsCell(object):
 	Qfull = float
 	Qfull_flow = float
 	Qnom = float
+	Vcut = float
 	Vexp = float
 	Vfull = float
 	Vnom = float
@@ -48,6 +49,7 @@ class ParamsCell(object):
 	leadacid_q20 = float
 	leadacid_qn = float
 	leadacid_tn = float
+	life_model = float
 	maximum_SOC = float
 	minimum_SOC = float
 	resistance = float
@@ -59,7 +61,7 @@ class ParamsPack(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -88,7 +90,7 @@ class StatePack(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -118,7 +120,7 @@ class StateCell(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -159,7 +161,7 @@ class Outputs(object):
 	def assign(self): 
 		pass
 
-	def export(self) -> Dict[Dict]:
+	def export(self) -> dict:
 		pass
 
 	def __init__(self, *args, **kwargs): 
@@ -173,6 +175,9 @@ class BatteryStateful(object):
 		pass
 
 	def value(self, name, value=None):
+		pass
+
+	def unassign(self, name):
 		pass
 
 	def execute(self, int_verbosity):
