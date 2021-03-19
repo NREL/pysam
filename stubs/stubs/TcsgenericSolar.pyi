@@ -168,7 +168,6 @@ class Outputs(object):
 	f_sfhl_tamb = tuple
 	f_sfhl_vwind = tuple
 	gen = tuple
-	glob = tuple
 	hour = tuple
 	kwh_per_kw = float
 	month = tuple

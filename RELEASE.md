@@ -1,6 +1,6 @@
 # Release Notes
 
-## Version 2.2.1, Mar 19, 2021 ~ SAM 2020.11.29 Revision 1, SSC Version 253
+## Version 2.2.2, Mar 19, 2021 ~ SAM 2020.11.29 Revision 1, SSC Version 253
 * Add `unassign` function to modules (#65)
 * Fix mypy errors in stubs (#47)
 * Fix BatteryStateful bugs: memory leak; unintialized pointer in some constructors; fix `setup` error messaging (#67)
