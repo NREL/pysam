@@ -3611,6 +3611,12 @@ Outputs_get_annual_energy(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_annual_energy_distribution_time(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_TroughPhysicalCspSolver_Outputs_annual_energy_distribution_time_mget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_annual_total_water_use(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_TroughPhysicalCspSolver_Outputs_annual_total_water_use_nget, self->data_ptr);
@@ -4048,6 +4054,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"annual_energy", (getter)Outputs_get_annual_energy,(setter)0,
 	PyDoc_STR("*float*: Annual total electric power to grid [kWhe]"),
+ 	NULL},
+{"annual_energy_distribution_time", (getter)Outputs_get_annual_energy_distribution_time,(setter)0,
+	PyDoc_STR("*sequence[sequence]*: Annual energy production as function of time [kW]"),
  	NULL},
 {"annual_total_water_use", (getter)Outputs_get_annual_total_water_use,(setter)0,
 	PyDoc_STR("*float*: Total Annual Water Usage: cycle + mirror washing [m3]"),

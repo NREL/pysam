@@ -314,6 +314,7 @@ class Outputs(object):
 	TrackAngle = tuple
 	annual_W_cycle_gross = float
 	annual_energy = float
+	annual_energy_distribution_time = tuple
 	annual_fuel_usage = float
 	beam = tuple
 	capacity_factor = float

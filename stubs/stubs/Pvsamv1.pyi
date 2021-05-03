@@ -954,6 +954,7 @@ class Outputs(object):
 	annual_dc_wiring_loss = float
 	annual_dc_wiring_loss_percent = float
 	annual_energy = float
+	annual_energy_distribution_time = tuple
 	annual_export_to_grid_energy = tuple
 	annual_gh = float
 	annual_import_to_grid_energy = tuple

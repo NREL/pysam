@@ -66,6 +66,7 @@ class Outputs(object):
 
 
 	annual_energy = float
+	annual_energy_distribution_time = tuple
 	annual_fuel_usage = float
 	capacity_factor = float
 	gen = tuple

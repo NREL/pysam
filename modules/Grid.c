@@ -630,6 +630,12 @@ Outputs_get_annual_ac_interconnect_loss_percent(VarGroupObject *self, void *clos
 }
 
 static PyObject *
+Outputs_get_annual_energy_distribution_time(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Grid_Outputs_annual_energy_distribution_time_mget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_annual_energy_pre_curtailment_ac(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Grid_Outputs_annual_energy_pre_curtailment_ac_nget, self->data_ptr);
@@ -683,6 +689,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"annual_ac_interconnect_loss_percent", (getter)Outputs_get_annual_ac_interconnect_loss_percent,(setter)0,
 	PyDoc_STR("*float*: Annual Energy loss from interconnection limit (year 1) [%]"),
+ 	NULL},
+{"annual_energy_distribution_time", (getter)Outputs_get_annual_energy_distribution_time,(setter)0,
+	PyDoc_STR("*sequence[sequence]*: Annual energy production as function of time [kW]"),
  	NULL},
 {"annual_energy_pre_curtailment_ac", (getter)Outputs_get_annual_energy_pre_curtailment_ac,(setter)0,
 	PyDoc_STR("*float*: Annual Energy AC pre-curtailment (year 1) [kWh]"),

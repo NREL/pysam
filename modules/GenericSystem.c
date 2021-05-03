@@ -421,6 +421,12 @@ Outputs_get_annual_energy(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_annual_energy_distribution_time(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_GenericSystem_Outputs_annual_energy_distribution_time_mget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_annual_fuel_usage(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_GenericSystem_Outputs_annual_fuel_usage_nget, self->data_ptr);
@@ -465,6 +471,9 @@ Outputs_get_water_usage(VarGroupObject *self, void *closure)
 static PyGetSetDef Outputs_getset[] = {
 {"annual_energy", (getter)Outputs_get_annual_energy,(setter)0,
 	PyDoc_STR("*float*: Annual Energy [kWh]"),
+ 	NULL},
+{"annual_energy_distribution_time", (getter)Outputs_get_annual_energy_distribution_time,(setter)0,
+	PyDoc_STR("*sequence[sequence]*: Annual energy production as function of time [kW]"),
  	NULL},
 {"annual_fuel_usage", (getter)Outputs_get_annual_fuel_usage,(setter)0,
 	PyDoc_STR("*float*: Annual Fuel Usage [kWht]"),

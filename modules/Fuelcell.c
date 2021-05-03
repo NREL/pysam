@@ -1056,6 +1056,18 @@ static PyMethodDef Outputs_methods[] = {
 };
 
 static PyObject *
+Outputs_get_annual_energy_distribution_time(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Fuelcell_Outputs_annual_energy_distribution_time_mget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_annual_energy_distribution_time_fc(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Fuelcell_Outputs_annual_energy_distribution_time_fc_mget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_annual_fuel_usage(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Fuelcell_Outputs_annual_fuel_usage_nget, self->data_ptr);
@@ -1134,6 +1146,12 @@ Outputs_get_system_heat_rate(VarGroupObject *self, void *closure)
 }
 
 static PyGetSetDef Outputs_getset[] = {
+{"annual_energy_distribution_time", (getter)Outputs_get_annual_energy_distribution_time,(setter)0,
+	PyDoc_STR("*sequence[sequence]*: Annual energy production as function of time [kW]"),
+ 	NULL},
+{"annual_energy_distribution_time_fc", (getter)Outputs_get_annual_energy_distribution_time_fc,(setter)0,
+	PyDoc_STR("*sequence[sequence]*: Annual energy production (PV + battery + fuel cell) as function of Time"),
+ 	NULL},
 {"annual_fuel_usage", (getter)Outputs_get_annual_fuel_usage,(setter)0,
 	PyDoc_STR("*float*: Annual Fuel Usage [kWht]"),
  	NULL},

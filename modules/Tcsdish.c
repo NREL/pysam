@@ -2000,6 +2000,12 @@ Outputs_get_annual_energy(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_annual_energy_distribution_time(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Tcsdish_Outputs_annual_energy_distribution_time_mget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_beam(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Tcsdish_Outputs_beam_aget, self->data_ptr);
@@ -2284,6 +2290,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"annual_energy", (getter)Outputs_get_annual_energy,(setter)0,
 	PyDoc_STR("*float*: Annual Energy [kWh]"),
+ 	NULL},
+{"annual_energy_distribution_time", (getter)Outputs_get_annual_energy_distribution_time,(setter)0,
+	PyDoc_STR("*sequence[sequence]*: Annual energy production as function of time [kW]"),
  	NULL},
 {"beam", (getter)Outputs_get_beam,(setter)0,
 	PyDoc_STR("*sequence*: Resource Beam normal irradiance [W/m2]"),

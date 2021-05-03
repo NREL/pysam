@@ -172,6 +172,7 @@ class Outputs(object):
 	W_dot_sca_track = tuple
 	annual_electricity_consumption = float
 	annual_energy = float
+	annual_energy_distribution_time = tuple
 	annual_field_energy = float
 	annual_thermal_consumption = float
 	annual_total_water_use = float

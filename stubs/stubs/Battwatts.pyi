@@ -63,6 +63,7 @@ class Outputs(object):
 		pass
 
 
+	annual_energy_distribution_time = tuple
 	annual_export_to_grid_energy = tuple
 	annual_import_to_grid_energy = tuple
 	average_battery_conversion_efficiency = float

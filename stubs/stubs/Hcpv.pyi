@@ -147,6 +147,7 @@ class Outputs(object):
 	annual_dc = float
 	annual_dc_net = float
 	annual_energy = float
+	annual_energy_distribution_time = tuple
 	annual_input_radiation = float
 	capacity_factor = float
 	dc_loss_stowing_kwh = float

@@ -74,6 +74,7 @@ class Outputs(object):
 	annual_ac_curtailment_loss_percent = float
 	annual_ac_interconnect_loss_kwh = float
 	annual_ac_interconnect_loss_percent = float
+	annual_energy_distribution_time = tuple
 	annual_energy_pre_curtailment_ac = float
 	annual_energy_pre_interconnect_ac = float
 	capacity_factor_curtailment_ac = float
