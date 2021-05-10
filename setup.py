@@ -41,7 +41,6 @@ if sys.platform == 'darwin':
     libfiles += ['libSAM_api.so', 'libsscd.so']
     extra_link_args = ["-headerpad_max_install_names", "-Wl,-rpath,@loader_path/"]
     extra_compile_args.append("-Wno-ignored-attributes")
-    extra_compile_args.append("-g")
 
 if sys.platform == 'linux':
     libs = ['SAM_api', 'ssc']
@@ -51,7 +50,7 @@ if sys.platform == 'linux':
 
 if sys.platform == 'win32':
     libs = ['SAM_api', 'ssc']
-    libfiles += ['SAM_api.dll', 'ssc.dll', 'SAM_api.lib', 'ssc.lib']
+    libfiles += ['SAM_api.dll', 'sscd.dll', 'SAM_api.lib', 'sscd.lib']
     defines = [('__WINDOWS__', '1')]
     extra_compile_args = []
 
