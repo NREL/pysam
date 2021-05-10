@@ -49,7 +49,7 @@ if sys.platform == 'linux':
     extra_compile_args.append('-Wno-attributes')
 
 if sys.platform == 'win32':
-    libs = ['SAM_api', 'ssc']
+    libs = ['SAM_api', 'sscd']
     libfiles += ['SAM_api.dll', 'sscd.dll', 'SAM_api.lib', 'sscd.lib']
     defines = [('__WINDOWS__', '1')]
     extra_compile_args = []
