@@ -37,10 +37,11 @@ if sys.platform == 'darwin':
     from distutils import sysconfig
     vars = sysconfig.get_config_vars()
     vars['LDSHARED'] = vars['LDSHARED'].replace('-bundle', '-dynamiclib')
-    libs = ['SAM_api', 'ssc']
-    libfiles += ['libSAM_api.so', 'libssc.so']
+    libs = ['SAM_api', 'sscd']
+    libfiles += ['libSAM_api.so', 'libsscd.so']
     extra_link_args = ["-headerpad_max_install_names", "-Wl,-rpath,@loader_path/"]
     extra_compile_args.append("-Wno-ignored-attributes")
+    extra_compile_args.append("-g")
 
 if sys.platform == 'linux':
     libs = ['SAM_api', 'ssc']
