@@ -16,11 +16,17 @@ additional logic include:
  - A_aperture
  - Ave_Focal_Length
  - ColperSCA
+ - D_2
  - D_cpnt
+ - Design_loss
+ - Dirt_HCE
  - Dirt_mirror
  - Distance_SCA
  - Error
+ - Fluid
  - GeomEffects
+ - HCE_FieldFrac
+ - IAM_matrix
  - I_bn_des
  - K_cpnt
  - L_SCA
@@ -28,17 +34,41 @@ additional logic include:
  - L_cpnt
  - P_ref
  - Rho_mirror_clean
+ - Row_Distance
+ - SCADefocusArray
  - SCAInfoArray
+ - SCA_drives_elec
+ - Shadowing
+ - T_loop_in_des
+ - T_loop_out
+ - Tau_envelope
  - TrackingError
  - Type_cpnt
  - W_aperture
+ - alpha_abs
+ - azimuth
+ - disp_wlim_maxspec
  - eta_ref
+ - field_fl_props
+ - fluid_dens_inlet_temp
+ - fluid_dens_outlet_temp
+ - gross_net_conversion_factor
  - is_dispatch
  - is_wlim_series
- - nColt
+ - lat
+ - m_dot_htfmax
+ - m_dot_htfmin
  - nLoops
  - nSCA
+ - non_solar_field_land_area_multiplier
+ - radio_sm_or_area
  - solar_mult
+ - specified_solar_multiple
+ - specified_total_aperture
+ - tilt
+ - trough_loop_control
+ - tshours
+ - wlim_series
 
 Provided for each of these inputs is a list of other inputs that are potentially interdependent. 
 

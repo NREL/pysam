@@ -147,10 +147,19 @@ class Controller(object):
 		pass
 
 
+	disp_wlim_maxspec = float
 	field_fl_props = tuple
+	fluid_dens_inlet_temp = float
+	fluid_dens_outlet_temp = float
+	lat = float
+	non_solar_field_land_area_multiplier = float
 	pb_pump_coef = float
 	q_pb_design = float
+	radio_sm_or_area = float
+	specified_solar_multiple = float
+	specified_total_aperture = float
 	tanks_in_parallel = float
+	trough_loop_control = tuple
 
 
 class SystemDesign(object):

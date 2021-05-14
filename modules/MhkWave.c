@@ -95,6 +95,18 @@ MHKWave_set_device_rated_power(VarGroupObject *self, PyObject *value, void *clos
 }
 
 static PyObject *
+MHKWave_get_energy_period(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_MhkWave_MHKWave_energy_period_aget, self->data_ptr);
+}
+
+static int
+MHKWave_set_energy_period(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_MhkWave_MHKWave_energy_period_aset, self->data_ptr);
+}
+
+static PyObject *
 MHKWave_get_financial_cost_total(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_MhkWave_MHKWave_financial_cost_total_nget, self->data_ptr);
@@ -191,6 +203,18 @@ MHKWave_set_number_devices(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyObject *
+MHKWave_get_significant_wave_height(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_MhkWave_MHKWave_significant_wave_height_aget, self->data_ptr);
+}
+
+static int
+MHKWave_set_significant_wave_height(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_MhkWave_MHKWave_significant_wave_height_aset, self->data_ptr);
+}
+
+static PyObject *
 MHKWave_get_system_capacity(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_MhkWave_MHKWave_system_capacity_nget, self->data_ptr);
@@ -227,6 +251,18 @@ MHKWave_set_wave_power_matrix(VarGroupObject *self, PyObject *value, void *closu
 }
 
 static PyObject *
+MHKWave_get_wave_resource_data(VarGroupObject *self, void *closure)
+{
+	return PySAM_table_getter(SAM_MhkWave_MHKWave_wave_resource_data_tget, self->data_ptr);
+}
+
+static int
+MHKWave_set_wave_resource_data(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_table_setter(value, SAM_MhkWave_MHKWave_wave_resource_data_tset, self->data_ptr);
+}
+
+static PyObject *
 MHKWave_get_wave_resource_matrix(VarGroupObject *self, void *closure)
 {
 	return PySAM_matrix_getter(SAM_MhkWave_MHKWave_wave_resource_matrix_mget, self->data_ptr);
@@ -238,6 +274,18 @@ MHKWave_set_wave_resource_matrix(VarGroupObject *self, PyObject *value, void *cl
 		return PySAM_matrix_setter(value, SAM_MhkWave_MHKWave_wave_resource_matrix_mset, self->data_ptr);
 }
 
+static PyObject *
+MHKWave_get_wave_resource_model_choice(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MhkWave_MHKWave_wave_resource_model_choice_nget, self->data_ptr);
+}
+
+static int
+MHKWave_set_wave_resource_model_choice(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_MhkWave_MHKWave_wave_resource_model_choice_nset, self->data_ptr);
+}
+
 static PyGetSetDef MHKWave_getset[] = {
 {"balance_of_system_cost_total", (getter)MHKWave_get_balance_of_system_cost_total,(setter)MHKWave_set_balance_of_system_cost_total,
 	PyDoc_STR("*float*: BOS costs [$]\n\n*Required*: If not provided, assumed to be 1\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - device_costs_total\n\t - device_rated_power\n\t - number_devices\n\t - system_capacity\n\t - wave_power_matrix\n"),
@@ -247,6 +295,9 @@ static PyGetSetDef MHKWave_getset[] = {
  	NULL},
 {"device_rated_power", (getter)MHKWave_get_device_rated_power,(setter)MHKWave_set_device_rated_power,
 	PyDoc_STR("*float*: Rated capacity of device [kW]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - balance_of_system_cost_total\n\t - device_costs_total\n\t - financial_cost_total\n\t - number_devices\n\t - system_capacity\n\t - total_operating_cost\n\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - wave_power_matrix\n"),
+ 	NULL},
+{"energy_period", (getter)MHKWave_get_energy_period,(setter)MHKWave_set_energy_period,
+	PyDoc_STR("*sequence*: Wave period time series data [s]\n\n*Required*: False"),
  	NULL},
 {"financial_cost_total", (getter)MHKWave_get_financial_cost_total,(setter)MHKWave_set_financial_cost_total,
 	PyDoc_STR("*float*: Financial costs [$]\n\n*Required*: If not provided, assumed to be 1\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - device_costs_total\n\t - device_rated_power\n\t - number_devices\n\t - system_capacity\n\t - wave_power_matrix\n"),
@@ -272,6 +323,9 @@ static PyGetSetDef MHKWave_getset[] = {
 {"number_devices", (getter)MHKWave_get_number_devices,(setter)MHKWave_set_number_devices,
 	PyDoc_STR("*float*: Number of wave devices in the system\n\n*Constraints*: INTEGER\n\n*Required*: If not provided, assumed to be 1\n\n*Changes to this variable may require updating the values of the following*: \n\t - balance_of_system_cost_total\n\t - device_costs_total\n\t - financial_cost_total\n\t - system_capacity\n\t - total_operating_cost\n\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - device_rated_power\n\t - wave_power_matrix\n"),
  	NULL},
+{"significant_wave_height", (getter)MHKWave_get_significant_wave_height,(setter)MHKWave_set_significant_wave_height,
+	PyDoc_STR("*sequence*: Significant wave height time series data [m]\n\n*Required*: False"),
+ 	NULL},
 {"system_capacity", (getter)MHKWave_get_system_capacity,(setter)MHKWave_set_system_capacity,
 	PyDoc_STR("*float*: System Nameplate Capacity [kW]\n\n*Required*: If not provided, assumed to be 0\n\n*Changes to this variable may require updating the values of the following*: \n\t - balance_of_system_cost_total\n\t - device_costs_total\n\t - financial_cost_total\n\t - total_operating_cost\n\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - device_rated_power\n\t - number_devices\n\t - wave_power_matrix\n"),
  	NULL},
@@ -281,8 +335,14 @@ static PyGetSetDef MHKWave_getset[] = {
 {"wave_power_matrix", (getter)MHKWave_get_wave_power_matrix,(setter)MHKWave_set_wave_power_matrix,
 	PyDoc_STR("*sequence[sequence]*: Wave Power Matrix\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - balance_of_system_cost_total\n\t - device_costs_total\n\t - device_rated_power\n\t - financial_cost_total\n\t - number_devices\n\t - system_capacity\n\t - total_operating_cost\n"),
  	NULL},
+{"wave_resource_data", (getter)MHKWave_get_wave_resource_data,(setter)MHKWave_set_wave_resource_data,
+	PyDoc_STR("*dict*: Array input of wave_resource_matrix (JPD) or time series (significant_wave_height and energy_period) data\n\n*Required*: False"),
+ 	NULL},
 {"wave_resource_matrix", (getter)MHKWave_get_wave_resource_matrix,(setter)MHKWave_set_wave_resource_matrix,
-	PyDoc_STR("*sequence[sequence]*: Frequency distribution of wave resource as a function of Hs and Te\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: Frequency distribution of wave resource as a function of Hs and Te\n\n*Required*: False"),
+ 	NULL},
+{"wave_resource_model_choice", (getter)MHKWave_get_wave_resource_model_choice,(setter)MHKWave_set_wave_resource_model_choice,
+	PyDoc_STR("*float*: Hourly or JPD wave resource data [0/1]\n\n*Constraints*: INTEGER\n\n*Required*: If not provided, assumed to be 1"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -321,6 +381,139 @@ static PyTypeObject MHKWave_Type = {
 		MHKWave_methods,         /*tp_methods*/
 		0,                          /*tp_members*/
 		MHKWave_getset,          /*tp_getset*/
+		0,                          /*tp_base*/
+		0,                          /*tp_dict*/
+		0,                          /*tp_descr_get*/
+		0,                          /*tp_descr_set*/
+		0,                          /*tp_dictofnset*/
+		0,                          /*tp_init*/
+		0,                          /*tp_alloc*/
+		0,             /*tp_new*/
+		0,                          /*tp_free*/
+		0,                          /*tp_is_gc*/
+};
+
+
+/*
+ * WeatherReader Group
+ */ 
+
+static PyTypeObject WeatherReader_Type;
+
+static PyObject *
+WeatherReader_new(SAM_MhkWave data_ptr)
+{
+	PyObject* new_obj = WeatherReader_Type.tp_alloc(&WeatherReader_Type,0);
+
+	VarGroupObject* WeatherReader_obj = (VarGroupObject*)new_obj;
+
+	WeatherReader_obj->data_ptr = (SAM_table)data_ptr;
+
+	return new_obj;
+}
+
+/* WeatherReader methods */
+
+static PyObject *
+WeatherReader_assign(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "MhkWave", "WeatherReader")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+WeatherReader_export(VarGroupObject *self, PyObject *args)
+{
+	PyTypeObject* tp = &WeatherReader_Type;
+	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
+	return dict;
+}
+
+static PyMethodDef WeatherReader_methods[] = {
+		{"assign",            (PyCFunction)WeatherReader_assign,  METH_VARARGS,
+			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``WeatherReader_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)WeatherReader_export,  METH_VARARGS,
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+		{NULL,              NULL}           /* sentinel */
+};
+
+static PyObject *
+WeatherReader_get_number_hours(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_MhkWave_WeatherReader_number_hours_aget, self->data_ptr);
+}
+
+static int
+WeatherReader_set_number_hours(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_MhkWave_WeatherReader_number_hours_aset, self->data_ptr);
+}
+
+static PyObject *
+WeatherReader_get_number_records(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_MhkWave_WeatherReader_number_records_aget, self->data_ptr);
+}
+
+static int
+WeatherReader_set_number_records(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_MhkWave_WeatherReader_number_records_aset, self->data_ptr);
+}
+
+static PyGetSetDef WeatherReader_getset[] = {
+{"number_hours", (getter)WeatherReader_get_number_hours,(setter)WeatherReader_set_number_hours,
+	PyDoc_STR("*sequence*: Number of hours in wave time series\n\n*Required*: False"),
+ 	NULL},
+{"number_records", (getter)WeatherReader_get_number_records,(setter)WeatherReader_set_number_records,
+	PyDoc_STR("*sequence*: Number of records in wave time series\n\n*Required*: False"),
+ 	NULL},
+	{NULL}  /* Sentinel */
+};
+
+static PyTypeObject WeatherReader_Type = {
+		/* The ob_type field must be initialized in the module init function
+		 * to be portable to Windows without using C++. */
+		PyVarObject_HEAD_INIT(NULL, 0)
+		"MhkWave.WeatherReader",             /*tp_name*/
+		sizeof(VarGroupObject),          /*tp_basicsize*/
+		0,                          /*tp_itemsize*/
+		/* methods */
+		0,    /*tp_dealloc*/
+		0,                          /*tp_print*/
+		(getattrfunc)0,             /*tp_getattr*/
+		0,                          /*tp_setattr*/
+		0,                          /*tp_reserved*/
+		0,                          /*tp_repr*/
+		0,                          /*tp_as_number*/
+		0,                          /*tp_as_sequence*/
+		0,                          /*tp_as_mapping*/
+		0,                          /*tp_hash*/
+		0,                          /*tp_call*/
+		0,                          /*tp_str*/
+		0,                          /*tp_getattro*/
+		0,                          /*tp_setattro*/
+		0,                          /*tp_as_buffer*/
+		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
+		0,                          /*tp_doc*/
+		0,                          /*tp_traverse*/
+		0,                          /*tp_clear*/
+		0,                          /*tp_richcompare*/
+		0,                          /*tp_weaklistofnset*/
+		0,                          /*tp_iter*/
+		0,                          /*tp_iternext*/
+		WeatherReader_methods,         /*tp_methods*/
+		0,                          /*tp_members*/
+		WeatherReader_getset,          /*tp_getset*/
 		0,                          /*tp_base*/
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
@@ -399,6 +592,12 @@ Outputs_get_annual_energy_distribution(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_annual_energy_distribution_time(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_MhkWave_Outputs_annual_energy_distribution_time_mget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_capacity_factor(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_MhkWave_Outputs_capacity_factor_nget, self->data_ptr);
@@ -408,6 +607,42 @@ static PyObject *
 Outputs_get_device_average_power(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_MhkWave_Outputs_device_average_power_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_energy_period_index_mat(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_MhkWave_Outputs_energy_period_index_mat_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_gen(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_MhkWave_Outputs_gen_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_hourly_energy(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_MhkWave_Outputs_hourly_energy_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_numberHours(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MhkWave_Outputs_numberHours_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_numberRecords(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MhkWave_Outputs_numberRecords_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_sig_wave_height_index_mat(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_MhkWave_Outputs_sig_wave_height_index_mat_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -483,6 +718,12 @@ Outputs_get_wave_power_end_period(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_wave_power_index_mat(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_MhkWave_Outputs_wave_power_index_mat_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_wave_power_start_height(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_MhkWave_Outputs_wave_power_start_height_nget, self->data_ptr);
@@ -525,11 +766,32 @@ static PyGetSetDef Outputs_getset[] = {
 {"annual_energy_distribution", (getter)Outputs_get_annual_energy_distribution,(setter)0,
 	PyDoc_STR("*sequence[sequence]*: Annual energy production as function of Hs and Te"),
  	NULL},
+{"annual_energy_distribution_time", (getter)Outputs_get_annual_energy_distribution_time,(setter)0,
+	PyDoc_STR("*sequence[sequence]*: Annual energy production as function of Time"),
+ 	NULL},
 {"capacity_factor", (getter)Outputs_get_capacity_factor,(setter)0,
 	PyDoc_STR("*float*: Capacity Factor [%]"),
  	NULL},
 {"device_average_power", (getter)Outputs_get_device_average_power,(setter)0,
 	PyDoc_STR("*float*: Average power production of a single device [kW]"),
+ 	NULL},
+{"energy_period_index_mat", (getter)Outputs_get_energy_period_index_mat,(setter)0,
+	PyDoc_STR("*sequence*: Wave period index locations for time series [s]"),
+ 	NULL},
+{"gen", (getter)Outputs_get_gen,(setter)0,
+	PyDoc_STR("*sequence*: Device power generated [kW]"),
+ 	NULL},
+{"hourly_energy", (getter)Outputs_get_hourly_energy,(setter)0,
+	PyDoc_STR("*sequence*: Hourly energy production of device [kWh]"),
+ 	NULL},
+{"numberHours", (getter)Outputs_get_numberHours,(setter)0,
+	PyDoc_STR("*float*: Number of Hours"),
+ 	NULL},
+{"numberRecords", (getter)Outputs_get_numberRecords,(setter)0,
+	PyDoc_STR("*float*: Number of Records"),
+ 	NULL},
+{"sig_wave_height_index_mat", (getter)Outputs_get_sig_wave_height_index_mat,(setter)0,
+	PyDoc_STR("*sequence*: Wave height index locations for time series [m]"),
  	NULL},
 {"total_bos_cost_kwh", (getter)Outputs_get_total_bos_cost_kwh,(setter)0,
 	PyDoc_STR("*float*: Balance of system costs per unit annual energy [$/kWh]"),
@@ -566,6 +828,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"wave_power_end_period", (getter)Outputs_get_wave_power_end_period,(setter)0,
 	PyDoc_STR("*float*: Wave period at which last non-zero WEC power output occurs (s)"),
+ 	NULL},
+{"wave_power_index_mat", (getter)Outputs_get_wave_power_index_mat,(setter)0,
+	PyDoc_STR("*sequence*: Wave power for time series [kW]"),
  	NULL},
 {"wave_power_start_height", (getter)Outputs_get_wave_power_start_height,(setter)0,
 	PyDoc_STR("*float*: Wave height at which first non-zero WEC power output occurs (m)"),
@@ -651,6 +916,10 @@ newMhkWaveObject(void* data_ptr)
 	PyObject* MHKWave_obj = MHKWave_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "MHKWave", MHKWave_obj);
 	Py_DECREF(MHKWave_obj);
+
+	PyObject* WeatherReader_obj = WeatherReader_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "WeatherReader", WeatherReader_obj);
+	Py_DECREF(WeatherReader_obj);
 
 	PyObject* Outputs_obj = Outputs_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
@@ -924,6 +1193,13 @@ MhkWaveModule_exec(PyObject *m)
 				"MHKWave",
 				(PyObject*)&MHKWave_Type);
 	Py_DECREF(&MHKWave_Type);
+
+	/// Add the WeatherReader type object to MhkWave_Type
+	if (PyType_Ready(&WeatherReader_Type) < 0) { goto fail; }
+	PyDict_SetItemString(MhkWave_Type.tp_dict,
+				"WeatherReader",
+				(PyObject*)&WeatherReader_Type);
+	Py_DECREF(&WeatherReader_Type);
 
 	/// Add the Outputs type object to MhkWave_Type
 	if (PyType_Ready(&Outputs_Type) < 0) { goto fail; }

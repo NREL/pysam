@@ -1,5 +1,8 @@
 # Release Notes
 
+## Version 2.2.3, May 14, 2021 ~ SAM 2020.11.29 Revision 2, SSC Version 256
+* [SAM Release updates for Version 2020.11.29 Revision 2](https://nrel.github.io/SAM/doc/releasenotes.html)
+
 ## Version 2.2.2, Mar 19, 2021 ~ SAM 2020.11.29 Revision 1, SSC Version 253
 * Add `unassign` function to modules (#65)
 * Fix mypy errors in stubs (#47)

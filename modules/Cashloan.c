@@ -3282,7 +3282,7 @@ static PyGetSetDef FuelCell_getset[] = {
 	PyDoc_STR("*sequence*: Fuel cell replacements per year [number/year]"),
  	NULL},
 {"fuelcell_replacement_option", (getter)FuelCell_get_fuelcell_replacement_option,(setter)FuelCell_set_fuelcell_replacement_option,
-	PyDoc_STR("*float*: Enable fuel cell replacement? [0=none,1=capacity based,2=user schedule]\n\n*Constraints*: INTEGER,MIN=0,MAX=2\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Enable fuel cell replacement? [0=none,1=capacity based,2=user schedule]\n\n*Constraints*: INTEGER,MIN=0,MAX=2"),
  	NULL},
 {"fuelcell_replacement_schedule", (getter)FuelCell_get_fuelcell_replacement_schedule,(setter)FuelCell_set_fuelcell_replacement_schedule,
 	PyDoc_STR("*sequence*: Fuel cell replacements per year (user specified) [number/year]"),

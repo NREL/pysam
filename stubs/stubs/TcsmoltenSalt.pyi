@@ -667,6 +667,7 @@ class Outputs(object):
 	sf_adjust_out = tuple
 	solaz = tuple
 	solzen = tuple
+	system_capacity = float
 	tank_losses = tuple
 	tdry = tuple
 	time_hr = tuple

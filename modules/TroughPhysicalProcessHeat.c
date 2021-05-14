@@ -120,7 +120,7 @@ Weather_set_track_mode(VarGroupObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef Weather_getset[] = {
 {"azimuth", (getter)Weather_get_azimuth,(setter)Weather_set_azimuth,
-	PyDoc_STR("*float*: Azimuth angle of surface/axis [none]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Azimuth angle of surface/axis [none]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - L_aperture\n"),
  	NULL},
 {"file_name", (getter)Weather_get_file_name,(setter)Weather_set_file_name,
 	PyDoc_STR("*str*: Local weather file with path [none]\n\n*Constraints*: LOCAL_FILE\n\n*Required*: True"),
@@ -129,7 +129,7 @@ static PyGetSetDef Weather_getset[] = {
 	PyDoc_STR("*dict*: Weather resource data in memory\n\n*Required*: False"),
  	NULL},
 {"tilt", (getter)Weather_get_tilt,(setter)Weather_set_tilt,
-	PyDoc_STR("*float*: Tilt angle of surface/axis [none]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Tilt angle of surface/axis [none]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - L_aperture\n"),
  	NULL},
 {"track_mode", (getter)Weather_get_track_mode,(setter)Weather_set_track_mode,
 	PyDoc_STR("*float*: Tracking mode [none]\n\n*Required*: True"),
@@ -1522,7 +1522,7 @@ SolarField_set_wind_stow_speed(VarGroupObject *self, PyObject *value, void *clos
 
 static PyGetSetDef SolarField_getset[] = {
 {"A_aperture", (getter)SolarField_get_A_aperture,(setter)SolarField_set_A_aperture,
-	PyDoc_STR("*sequence*: Reflective aperture area of the collector [m2]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - SCAInfoArray\n\t - nColt\n"),
+	PyDoc_STR("*sequence*: Reflective aperture area of the collector [m2]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - D_cpnt\n\t - K_cpnt\n\t - L_cpnt\n\t - SCADefocusArray\n\t - SCAInfoArray\n\t - Type_cpnt\n\t - nLoops\n\t - solar_mult\n"),
  	NULL},
 {"AbsorberMaterial", (getter)SolarField_get_AbsorberMaterial,(setter)SolarField_set_AbsorberMaterial,
 	PyDoc_STR("*sequence[sequence]*: Absorber material type [none]\n\n*Required*: True"),
@@ -1531,13 +1531,13 @@ static PyGetSetDef SolarField_getset[] = {
 	PyDoc_STR("*sequence[sequence]*: Annulus gas type (1=air, 26=Ar, 27=H2) [none]\n\n*Required*: True"),
  	NULL},
 {"Ave_Focal_Length", (getter)SolarField_get_Ave_Focal_Length,(setter)SolarField_set_Ave_Focal_Length,
-	PyDoc_STR("*sequence*: Average focal length of the collector  [m]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - SCAInfoArray\n\t - nColt\n"),
+	PyDoc_STR("*sequence*: Average focal length of the collector  [m]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - L_aperture\n"),
  	NULL},
 {"ColperSCA", (getter)SolarField_get_ColperSCA,(setter)SolarField_set_ColperSCA,
-	PyDoc_STR("*sequence*: Number of individual collector sections in an SCA  [none]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - SCAInfoArray\n\t - nColt\n"),
+	PyDoc_STR("*sequence*: Number of individual collector sections in an SCA  [none]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - L_aperture\n"),
  	NULL},
 {"D_2", (getter)SolarField_get_D_2,(setter)SolarField_set_D_2,
-	PyDoc_STR("*sequence[sequence]*: Inner absorber tube diameter [m]\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: Inner absorber tube diameter [m]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - D_cpnt\n\t - K_cpnt\n\t - L_cpnt\n\t - SCADefocusArray\n\t - SCAInfoArray\n\t - Type_cpnt\n\t - nLoops\n\t - solar_mult\n"),
  	NULL},
 {"D_3", (getter)SolarField_get_D_3,(setter)SolarField_set_D_3,
 	PyDoc_STR("*sequence[sequence]*: Outer absorber tube diameter [m]\n\n*Required*: True"),
@@ -1549,22 +1549,22 @@ static PyGetSetDef SolarField_getset[] = {
 	PyDoc_STR("*sequence[sequence]*: Outer glass envelope diameter  [m]\n\n*Required*: True"),
  	NULL},
 {"D_cpnt", (getter)SolarField_get_D_cpnt,(setter)SolarField_set_D_cpnt,
-	PyDoc_STR("*sequence[sequence]*: Interconnect component diameters, row=intc, col=cpnt [none]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - nSCA\n"),
+	PyDoc_STR("*sequence[sequence]*: Interconnect component diameters, row=intc, col=cpnt [none]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - A_aperture\n\t - D_2\n\t - Design_loss\n\t - Dirt_HCE\n\t - Dirt_mirror\n\t - Error\n\t - Fluid\n\t - GeomEffects\n\t - HCE_FieldFrac\n\t - I_bn_des\n\t - L_SCA\n\t - Rho_mirror_clean\n\t - Row_Distance\n\t - SCA_drives_elec\n\t - Shadowing\n\t - T_loop_in_des\n\t - T_loop_out\n\t - Tau_envelope\n\t - TrackingError\n\t - W_aperture\n\t - alpha_abs\n\t - field_fl_props\n\t - fluid_dens_inlet_temp\n\t - fluid_dens_outlet_temp\n\t - m_dot_htfmax\n\t - m_dot_htfmin\n\t - nSCA\n\t - non_solar_field_land_area_multiplier\n\t - q_pb_design\n\t - radio_sm_or_area\n\t - specified_solar_multiple\n\t - specified_total_aperture\n\t - trough_loop_control\n\t - tshours\n"),
  	NULL},
 {"D_p", (getter)SolarField_get_D_p,(setter)SolarField_set_D_p,
 	PyDoc_STR("*sequence[sequence]*: Diameter of the absorber flow plug (optional)  [m]\n\n*Required*: True"),
  	NULL},
 {"Design_loss", (getter)SolarField_get_Design_loss,(setter)SolarField_set_Design_loss,
-	PyDoc_STR("*sequence[sequence]*: Receiver heat loss at design [W/m]\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: Receiver heat loss at design [W/m]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - D_cpnt\n\t - K_cpnt\n\t - L_cpnt\n\t - SCADefocusArray\n\t - SCAInfoArray\n\t - Type_cpnt\n\t - nLoops\n\t - solar_mult\n"),
  	NULL},
 {"Dirt_HCE", (getter)SolarField_get_Dirt_HCE,(setter)SolarField_set_Dirt_HCE,
-	PyDoc_STR("*sequence[sequence]*: Loss due to dirt on the receiver envelope [none]\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: Loss due to dirt on the receiver envelope [none]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - D_cpnt\n\t - K_cpnt\n\t - L_cpnt\n\t - SCADefocusArray\n\t - SCAInfoArray\n\t - Type_cpnt\n\t - nLoops\n\t - solar_mult\n"),
  	NULL},
 {"Dirt_mirror", (getter)SolarField_get_Dirt_mirror,(setter)SolarField_set_Dirt_mirror,
-	PyDoc_STR("*sequence*: User-defined dirt on mirror derate [none]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - SCAInfoArray\n\t - nColt\n"),
+	PyDoc_STR("*sequence*: User-defined dirt on mirror derate [none]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - D_cpnt\n\t - K_cpnt\n\t - L_cpnt\n\t - SCADefocusArray\n\t - SCAInfoArray\n\t - Type_cpnt\n\t - nLoops\n\t - solar_mult\n"),
  	NULL},
 {"Distance_SCA", (getter)SolarField_get_Distance_SCA,(setter)SolarField_set_Distance_SCA,
-	PyDoc_STR("*sequence*: Piping distance between SCA's in the field [m]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - SCAInfoArray\n\t - nColt\n"),
+	PyDoc_STR("*sequence*: Piping distance between SCA's in the field [m]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - L_aperture\n"),
  	NULL},
 {"EPSILON_4", (getter)SolarField_get_EPSILON_4,(setter)SolarField_set_EPSILON_4,
 	PyDoc_STR("*sequence[sequence]*: Inner glass envelope emissivities (Pyrex)  [none]\n\n*Required*: True"),
@@ -1573,7 +1573,7 @@ static PyGetSetDef SolarField_getset[] = {
 	PyDoc_STR("*sequence[sequence]*: Outer glass envelope emissivities (Pyrex)  [none]\n\n*Required*: True"),
  	NULL},
 {"Error", (getter)SolarField_get_Error,(setter)SolarField_set_Error,
-	PyDoc_STR("*sequence*: User-defined general optical error derate  [none]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - SCAInfoArray\n\t - nColt\n"),
+	PyDoc_STR("*sequence*: User-defined general optical error derate  [none]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - D_cpnt\n\t - K_cpnt\n\t - L_cpnt\n\t - SCADefocusArray\n\t - SCAInfoArray\n\t - Type_cpnt\n\t - nLoops\n\t - solar_mult\n"),
  	NULL},
 {"FieldConfig", (getter)SolarField_get_FieldConfig,(setter)SolarField_set_FieldConfig,
 	PyDoc_STR("*float*: Number of subfield headers [none]\n\n*Required*: True"),
@@ -1582,37 +1582,37 @@ static PyGetSetDef SolarField_getset[] = {
 	PyDoc_STR("*sequence[sequence]*: Flow type through the absorber [none]\n\n*Required*: True"),
  	NULL},
 {"Fluid", (getter)SolarField_get_Fluid,(setter)SolarField_set_Fluid,
-	PyDoc_STR("*float*: Field HTF fluid ID number [none]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Field HTF fluid ID number [none]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - D_cpnt\n\t - K_cpnt\n\t - L_cpnt\n\t - SCADefocusArray\n\t - SCAInfoArray\n\t - Type_cpnt\n\t - nLoops\n\t - solar_mult\n"),
  	NULL},
 {"GeomEffects", (getter)SolarField_get_GeomEffects,(setter)SolarField_set_GeomEffects,
-	PyDoc_STR("*sequence*: User-defined geometry effects derate [none]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - SCAInfoArray\n\t - nColt\n"),
+	PyDoc_STR("*sequence*: User-defined geometry effects derate [none]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - D_cpnt\n\t - K_cpnt\n\t - L_cpnt\n\t - SCADefocusArray\n\t - SCAInfoArray\n\t - Type_cpnt\n\t - nLoops\n\t - solar_mult\n"),
  	NULL},
 {"GlazingIntactIn", (getter)SolarField_get_GlazingIntactIn,(setter)SolarField_set_GlazingIntactIn,
 	PyDoc_STR("*sequence[sequence]*: Glazing intact (broken glass) flag {1=true, else=false} [none]\n\n*Required*: True"),
  	NULL},
 {"HCE_FieldFrac", (getter)SolarField_get_HCE_FieldFrac,(setter)SolarField_set_HCE_FieldFrac,
-	PyDoc_STR("*sequence[sequence]*: Fraction of the field occupied by this HCE type  [none]\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: Fraction of the field occupied by this HCE type  [none]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - D_cpnt\n\t - K_cpnt\n\t - L_cpnt\n\t - SCADefocusArray\n\t - SCAInfoArray\n\t - Type_cpnt\n\t - nLoops\n\t - solar_mult\n"),
  	NULL},
 {"HDR_rough", (getter)SolarField_get_HDR_rough,(setter)SolarField_set_HDR_rough,
 	PyDoc_STR("*float*: Header pipe roughness [m]\n\n*Required*: True"),
  	NULL},
 {"IAM_matrix", (getter)SolarField_get_IAM_matrix,(setter)SolarField_set_IAM_matrix,
-	PyDoc_STR("*sequence[sequence]*: IAM coefficients, matrix for 4 collectors [none]\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: IAM coefficients, matrix for 4 collectors [none]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - L_aperture\n"),
  	NULL},
 {"I_bn_des", (getter)SolarField_get_I_bn_des,(setter)SolarField_set_I_bn_des,
-	PyDoc_STR("*float*: Solar irradiation at design [C]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - nLoops\n\t - solar_mult\n"),
+	PyDoc_STR("*float*: Solar irradiation at design [C]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - D_cpnt\n\t - K_cpnt\n\t - L_cpnt\n\t - SCADefocusArray\n\t - SCAInfoArray\n\t - Type_cpnt\n\t - nLoops\n\t - solar_mult\n"),
  	NULL},
 {"K_cpnt", (getter)SolarField_get_K_cpnt,(setter)SolarField_set_K_cpnt,
-	PyDoc_STR("*sequence[sequence]*: Interconnect component minor loss coefficients, row=intc, col=cpnt [none]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - nSCA\n"),
+	PyDoc_STR("*sequence[sequence]*: Interconnect component minor loss coefficients, row=intc, col=cpnt [none]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - A_aperture\n\t - D_2\n\t - Design_loss\n\t - Dirt_HCE\n\t - Dirt_mirror\n\t - Error\n\t - Fluid\n\t - GeomEffects\n\t - HCE_FieldFrac\n\t - I_bn_des\n\t - L_SCA\n\t - Rho_mirror_clean\n\t - Row_Distance\n\t - SCA_drives_elec\n\t - Shadowing\n\t - T_loop_in_des\n\t - T_loop_out\n\t - Tau_envelope\n\t - TrackingError\n\t - W_aperture\n\t - alpha_abs\n\t - field_fl_props\n\t - fluid_dens_inlet_temp\n\t - fluid_dens_outlet_temp\n\t - m_dot_htfmax\n\t - m_dot_htfmin\n\t - nSCA\n\t - non_solar_field_land_area_multiplier\n\t - q_pb_design\n\t - radio_sm_or_area\n\t - specified_solar_multiple\n\t - specified_total_aperture\n\t - trough_loop_control\n\t - tshours\n"),
  	NULL},
 {"L_SCA", (getter)SolarField_get_L_SCA,(setter)SolarField_set_L_SCA,
-	PyDoc_STR("*sequence*: Length of the SCA  [m]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - SCAInfoArray\n\t - nColt\n"),
+	PyDoc_STR("*sequence*: Length of the SCA  [m]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - D_cpnt\n\t - K_cpnt\n\t - L_aperture\n\t - L_cpnt\n\t - SCADefocusArray\n\t - SCAInfoArray\n\t - Type_cpnt\n\t - nLoops\n\t - solar_mult\n"),
  	NULL},
 {"L_aperture", (getter)SolarField_get_L_aperture,(setter)SolarField_set_L_aperture,
-	PyDoc_STR("*sequence*: Length of a single mirror/HCE unit [m]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - SCAInfoArray\n\t - nColt\n"),
+	PyDoc_STR("*sequence*: Length of a single mirror/HCE unit [m]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - Ave_Focal_Length\n\t - ColperSCA\n\t - Distance_SCA\n\t - IAM_matrix\n\t - L_SCA\n\t - azimuth\n\t - lat\n\t - nSCA\n\t - tilt\n"),
  	NULL},
 {"L_cpnt", (getter)SolarField_get_L_cpnt,(setter)SolarField_set_L_cpnt,
-	PyDoc_STR("*sequence[sequence]*: Interconnect component lengths, row=intc, col=cpnt [none]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - nSCA\n"),
+	PyDoc_STR("*sequence[sequence]*: Interconnect component lengths, row=intc, col=cpnt [none]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - A_aperture\n\t - D_2\n\t - Design_loss\n\t - Dirt_HCE\n\t - Dirt_mirror\n\t - Error\n\t - Fluid\n\t - GeomEffects\n\t - HCE_FieldFrac\n\t - I_bn_des\n\t - L_SCA\n\t - Rho_mirror_clean\n\t - Row_Distance\n\t - SCA_drives_elec\n\t - Shadowing\n\t - T_loop_in_des\n\t - T_loop_out\n\t - Tau_envelope\n\t - TrackingError\n\t - W_aperture\n\t - alpha_abs\n\t - field_fl_props\n\t - fluid_dens_inlet_temp\n\t - fluid_dens_outlet_temp\n\t - m_dot_htfmax\n\t - m_dot_htfmin\n\t - nSCA\n\t - non_solar_field_land_area_multiplier\n\t - q_pb_design\n\t - radio_sm_or_area\n\t - specified_solar_multiple\n\t - specified_total_aperture\n\t - trough_loop_control\n\t - tshours\n"),
  	NULL},
 {"L_heat_sink_piping", (getter)SolarField_get_L_heat_sink_piping,(setter)SolarField_set_L_heat_sink_piping,
 	PyDoc_STR("*float*: Length of piping (full mass flow) through heat sink (if applicable) [none]\n\n*Required*: True"),
@@ -1642,43 +1642,43 @@ static PyGetSetDef SolarField_getset[] = {
 	PyDoc_STR("*float*: Loss coefficient from the header, runner pipe, and non-HCE piping [m/s]\n\n*Required*: True"),
  	NULL},
 {"Rho_mirror_clean", (getter)SolarField_get_Rho_mirror_clean,(setter)SolarField_set_Rho_mirror_clean,
-	PyDoc_STR("*sequence*: User-defined clean mirror reflectivity [none]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - SCAInfoArray\n\t - nColt\n"),
+	PyDoc_STR("*sequence*: User-defined clean mirror reflectivity [none]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - D_cpnt\n\t - K_cpnt\n\t - L_cpnt\n\t - SCADefocusArray\n\t - SCAInfoArray\n\t - Type_cpnt\n\t - nLoops\n\t - solar_mult\n"),
  	NULL},
 {"Rough", (getter)SolarField_get_Rough,(setter)SolarField_set_Rough,
 	PyDoc_STR("*sequence[sequence]*: Roughness of the internal surface  [m]\n\n*Required*: True"),
  	NULL},
 {"Row_Distance", (getter)SolarField_get_Row_Distance,(setter)SolarField_set_Row_Distance,
-	PyDoc_STR("*float*: Spacing between rows (centerline to centerline) [m]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Spacing between rows (centerline to centerline) [m]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - D_cpnt\n\t - K_cpnt\n\t - L_cpnt\n\t - SCADefocusArray\n\t - SCAInfoArray\n\t - Type_cpnt\n\t - nLoops\n\t - solar_mult\n"),
  	NULL},
 {"SCADefocusArray", (getter)SolarField_get_SCADefocusArray,(setter)SolarField_set_SCADefocusArray,
-	PyDoc_STR("*sequence*: Collector defocus order [none]\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: Collector defocus order [none]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - A_aperture\n\t - D_2\n\t - Design_loss\n\t - Dirt_HCE\n\t - Dirt_mirror\n\t - Error\n\t - Fluid\n\t - GeomEffects\n\t - HCE_FieldFrac\n\t - I_bn_des\n\t - L_SCA\n\t - Rho_mirror_clean\n\t - Row_Distance\n\t - SCA_drives_elec\n\t - Shadowing\n\t - T_loop_in_des\n\t - T_loop_out\n\t - Tau_envelope\n\t - TrackingError\n\t - W_aperture\n\t - alpha_abs\n\t - field_fl_props\n\t - fluid_dens_inlet_temp\n\t - fluid_dens_outlet_temp\n\t - m_dot_htfmax\n\t - m_dot_htfmin\n\t - nSCA\n\t - non_solar_field_land_area_multiplier\n\t - q_pb_design\n\t - radio_sm_or_area\n\t - specified_solar_multiple\n\t - specified_total_aperture\n\t - trough_loop_control\n\t - tshours\n"),
  	NULL},
 {"SCAInfoArray", (getter)SolarField_get_SCAInfoArray,(setter)SolarField_set_SCAInfoArray,
-	PyDoc_STR("*sequence[sequence]*: Receiver (,1) and collector (,2) type for each assembly in loop [none]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - A_aperture\n\t - Ave_Focal_Length\n\t - ColperSCA\n\t - Dirt_mirror\n\t - Distance_SCA\n\t - Error\n\t - GeomEffects\n\t - L_SCA\n\t - L_aperture\n\t - Rho_mirror_clean\n\t - TrackingError\n\t - W_aperture\n"),
+	PyDoc_STR("*sequence[sequence]*: Receiver (,1) and collector (,2) type for each assembly in loop [none]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - A_aperture\n\t - D_2\n\t - Design_loss\n\t - Dirt_HCE\n\t - Dirt_mirror\n\t - Error\n\t - Fluid\n\t - GeomEffects\n\t - HCE_FieldFrac\n\t - I_bn_des\n\t - L_SCA\n\t - Rho_mirror_clean\n\t - Row_Distance\n\t - SCA_drives_elec\n\t - Shadowing\n\t - T_loop_in_des\n\t - T_loop_out\n\t - Tau_envelope\n\t - TrackingError\n\t - W_aperture\n\t - alpha_abs\n\t - field_fl_props\n\t - fluid_dens_inlet_temp\n\t - fluid_dens_outlet_temp\n\t - m_dot_htfmax\n\t - m_dot_htfmin\n\t - nSCA\n\t - non_solar_field_land_area_multiplier\n\t - q_pb_design\n\t - radio_sm_or_area\n\t - specified_solar_multiple\n\t - specified_total_aperture\n\t - trough_loop_control\n\t - tshours\n"),
  	NULL},
 {"SCA_drives_elec", (getter)SolarField_get_SCA_drives_elec,(setter)SolarField_set_SCA_drives_elec,
-	PyDoc_STR("*float*: Tracking power, in Watts per SCA drive [W/m2-K]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Tracking power, in Watts per SCA drive [W/m2-K]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - D_cpnt\n\t - K_cpnt\n\t - L_cpnt\n\t - SCADefocusArray\n\t - SCAInfoArray\n\t - Type_cpnt\n\t - nLoops\n\t - solar_mult\n"),
  	NULL},
 {"Shadowing", (getter)SolarField_get_Shadowing,(setter)SolarField_set_Shadowing,
-	PyDoc_STR("*sequence[sequence]*: Receiver bellows shadowing loss factor [none]\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: Receiver bellows shadowing loss factor [none]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - D_cpnt\n\t - K_cpnt\n\t - L_cpnt\n\t - SCADefocusArray\n\t - SCAInfoArray\n\t - Type_cpnt\n\t - nLoops\n\t - solar_mult\n"),
  	NULL},
 {"T_fp", (getter)SolarField_get_T_fp,(setter)SolarField_set_T_fp,
 	PyDoc_STR("*float*: Freeze protection temperature (heat trace activation temperature) [none]\n\n*Required*: True"),
  	NULL},
 {"T_loop_in_des", (getter)SolarField_get_T_loop_in_des,(setter)SolarField_set_T_loop_in_des,
-	PyDoc_STR("*float*: Design loop inlet temperature [C]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Design loop inlet temperature [C]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - D_cpnt\n\t - K_cpnt\n\t - L_cpnt\n\t - SCADefocusArray\n\t - SCAInfoArray\n\t - Type_cpnt\n\t - nLoops\n\t - solar_mult\n"),
  	NULL},
 {"T_loop_out", (getter)SolarField_get_T_loop_out,(setter)SolarField_set_T_loop_out,
-	PyDoc_STR("*float*: Target loop outlet temperature [C]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Target loop outlet temperature [C]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - D_cpnt\n\t - K_cpnt\n\t - L_cpnt\n\t - SCADefocusArray\n\t - SCAInfoArray\n\t - Type_cpnt\n\t - nLoops\n\t - solar_mult\n"),
  	NULL},
 {"Tau_envelope", (getter)SolarField_get_Tau_envelope,(setter)SolarField_set_Tau_envelope,
-	PyDoc_STR("*sequence[sequence]*: Envelope transmittance [none]\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: Envelope transmittance [none]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - D_cpnt\n\t - K_cpnt\n\t - L_cpnt\n\t - SCADefocusArray\n\t - SCAInfoArray\n\t - Type_cpnt\n\t - nLoops\n\t - solar_mult\n"),
  	NULL},
 {"TrackingError", (getter)SolarField_get_TrackingError,(setter)SolarField_set_TrackingError,
-	PyDoc_STR("*sequence*: User-defined tracking error derate [none]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - SCAInfoArray\n\t - nColt\n"),
+	PyDoc_STR("*sequence*: User-defined tracking error derate [none]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - D_cpnt\n\t - K_cpnt\n\t - L_cpnt\n\t - SCADefocusArray\n\t - SCAInfoArray\n\t - Type_cpnt\n\t - nLoops\n\t - solar_mult\n"),
  	NULL},
 {"Type_cpnt", (getter)SolarField_get_Type_cpnt,(setter)SolarField_set_Type_cpnt,
-	PyDoc_STR("*sequence[sequence]*: Interconnect component type, row=intc, col=cpnt [none]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - nSCA\n"),
+	PyDoc_STR("*sequence[sequence]*: Interconnect component type, row=intc, col=cpnt [none]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - A_aperture\n\t - D_2\n\t - Design_loss\n\t - Dirt_HCE\n\t - Dirt_mirror\n\t - Error\n\t - Fluid\n\t - GeomEffects\n\t - HCE_FieldFrac\n\t - I_bn_des\n\t - L_SCA\n\t - Rho_mirror_clean\n\t - Row_Distance\n\t - SCA_drives_elec\n\t - Shadowing\n\t - T_loop_in_des\n\t - T_loop_out\n\t - Tau_envelope\n\t - TrackingError\n\t - W_aperture\n\t - alpha_abs\n\t - field_fl_props\n\t - fluid_dens_inlet_temp\n\t - fluid_dens_outlet_temp\n\t - m_dot_htfmax\n\t - m_dot_htfmin\n\t - nSCA\n\t - non_solar_field_land_area_multiplier\n\t - q_pb_design\n\t - radio_sm_or_area\n\t - specified_solar_multiple\n\t - specified_total_aperture\n\t - trough_loop_control\n\t - tshours\n"),
  	NULL},
 {"V_hdr_cold_max", (getter)SolarField_get_V_hdr_cold_max,(setter)SolarField_set_V_hdr_cold_max,
 	PyDoc_STR("*float*: Maximum HTF velocity in the cold headers at design [m/s]\n\n*Required*: True"),
@@ -1693,7 +1693,7 @@ static PyGetSetDef SolarField_getset[] = {
 	PyDoc_STR("*float*: Minimum HTF velocity in the hot headers at design [m/s]\n\n*Required*: True"),
  	NULL},
 {"W_aperture", (getter)SolarField_get_W_aperture,(setter)SolarField_set_W_aperture,
-	PyDoc_STR("*sequence*: The collector aperture width (Total structural area used for shadowing) [m]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - SCAInfoArray\n\t - nColt\n"),
+	PyDoc_STR("*sequence*: The collector aperture width (Total structural area used for shadowing) [m]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - D_cpnt\n\t - K_cpnt\n\t - L_cpnt\n\t - SCADefocusArray\n\t - SCAInfoArray\n\t - Type_cpnt\n\t - nLoops\n\t - solar_mult\n"),
  	NULL},
 {"accept_init", (getter)SolarField_get_accept_init,(setter)SolarField_set_accept_init,
 	PyDoc_STR("*float*: In acceptance testing mode - require steady-state startup [none]\n\n*Required*: True"),
@@ -1705,7 +1705,7 @@ static PyGetSetDef SolarField_getset[] = {
 	PyDoc_STR("*float*: Acceptance testing mode? [0/1]\n\n*Info*: no/yes\n\n*Required*: True"),
  	NULL},
 {"alpha_abs", (getter)SolarField_get_alpha_abs,(setter)SolarField_set_alpha_abs,
-	PyDoc_STR("*sequence[sequence]*: Absorber absorptance  [none]\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: Absorber absorptance  [none]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - D_cpnt\n\t - K_cpnt\n\t - L_cpnt\n\t - SCADefocusArray\n\t - SCAInfoArray\n\t - Type_cpnt\n\t - nLoops\n\t - solar_mult\n"),
  	NULL},
 {"alpha_env", (getter)SolarField_get_alpha_env,(setter)SolarField_set_alpha_env,
 	PyDoc_STR("*sequence[sequence]*: Envelope absorptance  [none]\n\n*Required*: True"),
@@ -1771,10 +1771,10 @@ static PyGetSetDef SolarField_getset[] = {
 	PyDoc_STR("*float*: Should model consider piping through heat sink? [none]\n\n*Required*: True"),
  	NULL},
 {"m_dot_htfmax", (getter)SolarField_get_m_dot_htfmax,(setter)SolarField_set_m_dot_htfmax,
-	PyDoc_STR("*float*: Maximum loop HTF flow rate [kg/s]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Maximum loop HTF flow rate [kg/s]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - D_cpnt\n\t - K_cpnt\n\t - L_cpnt\n\t - SCADefocusArray\n\t - SCAInfoArray\n\t - Type_cpnt\n\t - nLoops\n\t - solar_mult\n"),
  	NULL},
 {"m_dot_htfmin", (getter)SolarField_get_m_dot_htfmin,(setter)SolarField_set_m_dot_htfmin,
-	PyDoc_STR("*float*: Minimum loop HTF flow rate [kg/s]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Minimum loop HTF flow rate [kg/s]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - D_cpnt\n\t - K_cpnt\n\t - L_cpnt\n\t - SCADefocusArray\n\t - SCAInfoArray\n\t - Type_cpnt\n\t - nLoops\n\t - solar_mult\n"),
  	NULL},
 {"mc_bal_cold", (getter)SolarField_get_mc_bal_cold,(setter)SolarField_set_mc_bal_cold,
 	PyDoc_STR("*float*: Heat capacity of the balance of plant on the cold side [kWht/K-MWt]\n\n*Required*: True"),
@@ -1786,7 +1786,7 @@ static PyGetSetDef SolarField_getset[] = {
 	PyDoc_STR("*float*: Non-HTF heat capacity associated with each SCA - per meter basis [Wht/K-m]\n\n*Required*: True"),
  	NULL},
 {"nColt", (getter)SolarField_get_nColt,(setter)SolarField_set_nColt,
-	PyDoc_STR("*float*: Number of collector types [none]\n\n*Options*: constant=4\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - A_aperture\n\t - Ave_Focal_Length\n\t - ColperSCA\n\t - Dirt_mirror\n\t - Distance_SCA\n\t - Error\n\t - GeomEffects\n\t - L_SCA\n\t - L_aperture\n\t - Rho_mirror_clean\n\t - TrackingError\n\t - W_aperture\n"),
+	PyDoc_STR("*float*: Number of collector types [none]\n\n*Options*: constant=4\n\n*Required*: True"),
  	NULL},
 {"nHCEVar", (getter)SolarField_get_nHCEVar,(setter)SolarField_set_nHCEVar,
 	PyDoc_STR("*float*: Number of HCE variants per type [none]\n\n*Required*: True"),
@@ -1795,10 +1795,10 @@ static PyGetSetDef SolarField_getset[] = {
 	PyDoc_STR("*float*: Number of HCE types [none]\n\n*Required*: True"),
  	NULL},
 {"nLoops", (getter)SolarField_get_nLoops,(setter)SolarField_set_nLoops,
-	PyDoc_STR("*float*: Number of loops in the field [none]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - solar_mult\n\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - I_bn_des\n\t - q_pb_design\n"),
+	PyDoc_STR("*float*: Number of loops in the field [none]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - A_aperture\n\t - D_2\n\t - Design_loss\n\t - Dirt_HCE\n\t - Dirt_mirror\n\t - Error\n\t - Fluid\n\t - GeomEffects\n\t - HCE_FieldFrac\n\t - I_bn_des\n\t - L_SCA\n\t - Rho_mirror_clean\n\t - Row_Distance\n\t - SCA_drives_elec\n\t - Shadowing\n\t - T_loop_in_des\n\t - T_loop_out\n\t - Tau_envelope\n\t - TrackingError\n\t - W_aperture\n\t - alpha_abs\n\t - field_fl_props\n\t - fluid_dens_inlet_temp\n\t - fluid_dens_outlet_temp\n\t - m_dot_htfmax\n\t - m_dot_htfmin\n\t - nSCA\n\t - non_solar_field_land_area_multiplier\n\t - q_pb_design\n\t - radio_sm_or_area\n\t - specified_solar_multiple\n\t - specified_total_aperture\n\t - trough_loop_control\n\t - tshours\n"),
  	NULL},
 {"nSCA", (getter)SolarField_get_nSCA,(setter)SolarField_set_nSCA,
-	PyDoc_STR("*float*: Number of SCAs in a loop [none]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - D_cpnt\n\t - K_cpnt\n\t - L_cpnt\n\t - Type_cpnt\n"),
+	PyDoc_STR("*float*: Number of SCAs in a loop [none]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - D_cpnt\n\t - K_cpnt\n\t - L_aperture\n\t - L_cpnt\n\t - SCADefocusArray\n\t - SCAInfoArray\n\t - Type_cpnt\n\t - nLoops\n\t - solar_mult\n"),
  	NULL},
 {"northsouth_field_sep", (getter)SolarField_get_northsouth_field_sep,(setter)SolarField_set_northsouth_field_sep,
 	PyDoc_STR("*float*: North/south separation between subfields. 0 = SCAs are touching [m]\n\n*Required*: True"),
@@ -1825,7 +1825,7 @@ static PyGetSetDef SolarField_getset[] = {
 	PyDoc_STR("*sequence[sequence]*: Custom runner wall thicknesses [m]\n\n*Required*: True"),
  	NULL},
 {"solar_mult", (getter)SolarField_get_solar_mult,(setter)SolarField_set_solar_mult,
-	PyDoc_STR("*float*: Solar multiple [none]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - I_bn_des\n\t - nLoops\n\t - q_pb_design\n"),
+	PyDoc_STR("*float*: Solar multiple [none]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - A_aperture\n\t - D_2\n\t - Design_loss\n\t - Dirt_HCE\n\t - Dirt_mirror\n\t - Error\n\t - Fluid\n\t - GeomEffects\n\t - HCE_FieldFrac\n\t - I_bn_des\n\t - L_SCA\n\t - Rho_mirror_clean\n\t - Row_Distance\n\t - SCA_drives_elec\n\t - Shadowing\n\t - T_loop_in_des\n\t - T_loop_out\n\t - Tau_envelope\n\t - TrackingError\n\t - W_aperture\n\t - alpha_abs\n\t - field_fl_props\n\t - fluid_dens_inlet_temp\n\t - fluid_dens_outlet_temp\n\t - m_dot_htfmax\n\t - m_dot_htfmin\n\t - nSCA\n\t - non_solar_field_land_area_multiplier\n\t - q_pb_design\n\t - radio_sm_or_area\n\t - specified_solar_multiple\n\t - specified_total_aperture\n\t - trough_loop_control\n\t - tshours\n"),
  	NULL},
 {"theta_dep", (getter)SolarField_get_theta_dep,(setter)SolarField_set_theta_dep,
 	PyDoc_STR("*float*: Deploy angle [deg]\n\n*Required*: True"),
@@ -1945,6 +1945,18 @@ static PyMethodDef Controller_methods[] = {
 };
 
 static PyObject *
+Controller_get_disp_wlim_maxspec(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_Controller_disp_wlim_maxspec_nget, self->data_ptr);
+}
+
+static int
+Controller_set_disp_wlim_maxspec(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_Controller_disp_wlim_maxspec_nset, self->data_ptr);
+}
+
+static PyObject *
 Controller_get_field_fl_props(VarGroupObject *self, void *closure)
 {
 	return PySAM_matrix_getter(SAM_TroughPhysicalProcessHeat_Controller_field_fl_props_mget, self->data_ptr);
@@ -1954,6 +1966,54 @@ static int
 Controller_set_field_fl_props(VarGroupObject *self, PyObject *value, void *closure)
 {
 		return PySAM_matrix_setter(value, SAM_TroughPhysicalProcessHeat_Controller_field_fl_props_mset, self->data_ptr);
+}
+
+static PyObject *
+Controller_get_fluid_dens_inlet_temp(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_Controller_fluid_dens_inlet_temp_nget, self->data_ptr);
+}
+
+static int
+Controller_set_fluid_dens_inlet_temp(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_Controller_fluid_dens_inlet_temp_nset, self->data_ptr);
+}
+
+static PyObject *
+Controller_get_fluid_dens_outlet_temp(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_Controller_fluid_dens_outlet_temp_nget, self->data_ptr);
+}
+
+static int
+Controller_set_fluid_dens_outlet_temp(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_Controller_fluid_dens_outlet_temp_nset, self->data_ptr);
+}
+
+static PyObject *
+Controller_get_lat(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_Controller_lat_nget, self->data_ptr);
+}
+
+static int
+Controller_set_lat(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_Controller_lat_nset, self->data_ptr);
+}
+
+static PyObject *
+Controller_get_non_solar_field_land_area_multiplier(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_Controller_non_solar_field_land_area_multiplier_nget, self->data_ptr);
+}
+
+static int
+Controller_set_non_solar_field_land_area_multiplier(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_Controller_non_solar_field_land_area_multiplier_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -1981,6 +2041,42 @@ Controller_set_q_pb_design(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyObject *
+Controller_get_radio_sm_or_area(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_Controller_radio_sm_or_area_nget, self->data_ptr);
+}
+
+static int
+Controller_set_radio_sm_or_area(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_Controller_radio_sm_or_area_nset, self->data_ptr);
+}
+
+static PyObject *
+Controller_get_specified_solar_multiple(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_Controller_specified_solar_multiple_nget, self->data_ptr);
+}
+
+static int
+Controller_set_specified_solar_multiple(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_Controller_specified_solar_multiple_nset, self->data_ptr);
+}
+
+static PyObject *
+Controller_get_specified_total_aperture(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_Controller_specified_total_aperture_nget, self->data_ptr);
+}
+
+static int
+Controller_set_specified_total_aperture(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_Controller_specified_total_aperture_nset, self->data_ptr);
+}
+
+static PyObject *
 Controller_get_tanks_in_parallel(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_Controller_tanks_in_parallel_nget, self->data_ptr);
@@ -1992,18 +2088,57 @@ Controller_set_tanks_in_parallel(VarGroupObject *self, PyObject *value, void *cl
 	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_Controller_tanks_in_parallel_nset, self->data_ptr);
 }
 
+static PyObject *
+Controller_get_trough_loop_control(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_TroughPhysicalProcessHeat_Controller_trough_loop_control_aget, self->data_ptr);
+}
+
+static int
+Controller_set_trough_loop_control(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_TroughPhysicalProcessHeat_Controller_trough_loop_control_aset, self->data_ptr);
+}
+
 static PyGetSetDef Controller_getset[] = {
+{"disp_wlim_maxspec", (getter)Controller_get_disp_wlim_maxspec,(setter)Controller_set_disp_wlim_maxspec,
+	PyDoc_STR("*float*: disp_wlim_maxspec [-]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - is_wlim_series\n\t - wlim_series\n"),
+ 	NULL},
 {"field_fl_props", (getter)Controller_get_field_fl_props,(setter)Controller_set_field_fl_props,
-	PyDoc_STR("*sequence[sequence]*: User defined field fluid property data [-]\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: User defined field fluid property data [-]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - D_cpnt\n\t - K_cpnt\n\t - L_cpnt\n\t - SCADefocusArray\n\t - SCAInfoArray\n\t - Type_cpnt\n\t - nLoops\n\t - solar_mult\n"),
+ 	NULL},
+{"fluid_dens_inlet_temp", (getter)Controller_get_fluid_dens_inlet_temp,(setter)Controller_set_fluid_dens_inlet_temp,
+	PyDoc_STR("*float*: fluid_dens_inlet_temp [-]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - D_cpnt\n\t - K_cpnt\n\t - L_cpnt\n\t - SCADefocusArray\n\t - SCAInfoArray\n\t - Type_cpnt\n\t - nLoops\n\t - solar_mult\n"),
+ 	NULL},
+{"fluid_dens_outlet_temp", (getter)Controller_get_fluid_dens_outlet_temp,(setter)Controller_set_fluid_dens_outlet_temp,
+	PyDoc_STR("*float*: fluid_dens_outlet_temp [-]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - D_cpnt\n\t - K_cpnt\n\t - L_cpnt\n\t - SCADefocusArray\n\t - SCAInfoArray\n\t - Type_cpnt\n\t - nLoops\n\t - solar_mult\n"),
+ 	NULL},
+{"lat", (getter)Controller_get_lat,(setter)Controller_set_lat,
+	PyDoc_STR("*float*: lat [-]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - L_aperture\n"),
+ 	NULL},
+{"non_solar_field_land_area_multiplier", (getter)Controller_get_non_solar_field_land_area_multiplier,(setter)Controller_set_non_solar_field_land_area_multiplier,
+	PyDoc_STR("*float*: non_solar_field_land_area_multiplier [-]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - D_cpnt\n\t - K_cpnt\n\t - L_cpnt\n\t - SCADefocusArray\n\t - SCAInfoArray\n\t - Type_cpnt\n\t - nLoops\n\t - solar_mult\n"),
  	NULL},
 {"pb_pump_coef", (getter)Controller_get_pb_pump_coef,(setter)Controller_set_pb_pump_coef,
 	PyDoc_STR("*float*: Pumping power to move 1kg of HTF through PB loop [kW/kg]\n\n*Required*: True"),
  	NULL},
 {"q_pb_design", (getter)Controller_get_q_pb_design,(setter)Controller_set_q_pb_design,
-	PyDoc_STR("*float*: Design heat input to power block [MWt]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - nLoops\n\t - solar_mult\n"),
+	PyDoc_STR("*float*: Design heat input to power block [MWt]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - D_cpnt\n\t - K_cpnt\n\t - L_cpnt\n\t - SCADefocusArray\n\t - SCAInfoArray\n\t - Type_cpnt\n\t - nLoops\n\t - solar_mult\n"),
+ 	NULL},
+{"radio_sm_or_area", (getter)Controller_get_radio_sm_or_area,(setter)Controller_set_radio_sm_or_area,
+	PyDoc_STR("*float*: radio_sm_or_area [-]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - D_cpnt\n\t - K_cpnt\n\t - L_cpnt\n\t - SCADefocusArray\n\t - SCAInfoArray\n\t - Type_cpnt\n\t - nLoops\n\t - solar_mult\n"),
+ 	NULL},
+{"specified_solar_multiple", (getter)Controller_get_specified_solar_multiple,(setter)Controller_set_specified_solar_multiple,
+	PyDoc_STR("*float*: specified_solar_multiple [-]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - D_cpnt\n\t - K_cpnt\n\t - L_cpnt\n\t - SCADefocusArray\n\t - SCAInfoArray\n\t - Type_cpnt\n\t - nLoops\n\t - solar_mult\n"),
+ 	NULL},
+{"specified_total_aperture", (getter)Controller_get_specified_total_aperture,(setter)Controller_set_specified_total_aperture,
+	PyDoc_STR("*float*: specified_total_aperture [-]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - D_cpnt\n\t - K_cpnt\n\t - L_cpnt\n\t - SCADefocusArray\n\t - SCAInfoArray\n\t - Type_cpnt\n\t - nLoops\n\t - solar_mult\n"),
  	NULL},
 {"tanks_in_parallel", (getter)Controller_get_tanks_in_parallel,(setter)Controller_set_tanks_in_parallel,
 	PyDoc_STR("*float*: Tanks are in parallel, not in series, with solar field [-]\n\n*Required*: True"),
+ 	NULL},
+{"trough_loop_control", (getter)Controller_get_trough_loop_control,(setter)Controller_set_trough_loop_control,
+	PyDoc_STR("*sequence*: trough_loop_control [-]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - D_cpnt\n\t - K_cpnt\n\t - L_cpnt\n\t - SCADefocusArray\n\t - SCAInfoArray\n\t - Type_cpnt\n\t - nLoops\n\t - solar_mult\n"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -2121,7 +2256,7 @@ SystemDesign_set_tshours(VarGroupObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef SystemDesign_getset[] = {
 {"tshours", (getter)SystemDesign_get_tshours,(setter)SystemDesign_set_tshours,
-	PyDoc_STR("*float*: Equivalent full-load thermal storage hours [hr]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Equivalent full-load thermal storage hours [hr]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - D_cpnt\n\t - K_cpnt\n\t - L_cpnt\n\t - SCADefocusArray\n\t - SCAInfoArray\n\t - Type_cpnt\n\t - nLoops\n\t - solar_mult\n"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -3165,7 +3300,7 @@ static PyGetSetDef Tou_getset[] = {
 	PyDoc_STR("*float*: Run dispatch optimization with external AMPL engine [-]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"is_dispatch", (getter)Tou_get_is_dispatch,(setter)Tou_set_is_dispatch,
-	PyDoc_STR("*float*: Allow dispatch optimization? [-]\n\n*Required*: If not provided, assumed to be 0\n\n*Changes to this variable may require updating the values of the following*: \n\t - is_wlim_series\n"),
+	PyDoc_STR("*float*: Allow dispatch optimization? [-]\n\n*Required*: If not provided, assumed to be 0\n\n*Changes to this variable may require updating the values of the following*: \n\t - is_wlim_series\n\t - wlim_series\n"),
  	NULL},
 {"is_dispatch_series", (getter)Tou_get_is_dispatch_series,(setter)Tou_set_is_dispatch_series,
 	PyDoc_STR("*float*: Use time-series dispatch factors\n\n*Required*: If not provided, assumed to be 1"),
@@ -3174,7 +3309,7 @@ static PyGetSetDef Tou_getset[] = {
 	PyDoc_STR("*float*: Is the TOD target cycle heat input also the max cycle heat input?\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"is_wlim_series", (getter)Tou_get_is_wlim_series,(setter)Tou_set_is_wlim_series,
-	PyDoc_STR("*float*: Use time-series net heat generation limits\n\n*Required*: If not provided, assumed to be 0\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - is_dispatch\n"),
+	PyDoc_STR("*float*: Use time-series net heat generation limits\n\n*Required*: If not provided, assumed to be 0\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - disp_wlim_maxspec\n\t - is_dispatch\n"),
  	NULL},
 {"is_write_ampl_dat", (getter)Tou_get_is_write_ampl_dat,(setter)Tou_set_is_write_ampl_dat,
 	PyDoc_STR("*float*: Write AMPL data files for dispatch run [-]\n\n*Required*: If not provided, assumed to be 0"),
@@ -3195,7 +3330,7 @@ static PyGetSetDef Tou_getset[] = {
 	PyDoc_STR("*sequence[sequence]*: 12x24 CSP operation Time-of-Use Weekend schedule [-]\n\n*Required*: True"),
  	NULL},
 {"wlim_series", (getter)Tou_get_wlim_series,(setter)Tou_set_wlim_series,
-	PyDoc_STR("*sequence*: Time series net heat generation limits [kWt]\n\n*Required*: True if is_wlim_series=1"),
+	PyDoc_STR("*sequence*: Time series net heat generation limits [kWt]\n\n*Required*: True if is_wlim_series=1\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - disp_wlim_maxspec\n\t - is_dispatch\n"),
  	NULL},
 	{NULL}  /* Sentinel */
 };

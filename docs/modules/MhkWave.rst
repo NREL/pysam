@@ -46,6 +46,12 @@ MHKWave Group
 .. autoclass:: PySAM.MhkWave.MhkWave.MHKWave
 	:members:
 
+WeatherReader Group
+======================================================
+
+.. autoclass:: PySAM.MhkWave.MhkWave.WeatherReader
+	:members:
+
 Outputs Group
 ======================================================
 
