@@ -6883,6 +6883,12 @@ Outputs_get_solzen(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_system_capacity(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_Outputs_system_capacity_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_tank_losses(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_TcsmoltenSalt_Outputs_tank_losses_aget, self->data_ptr);
@@ -7428,6 +7434,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"solzen", (getter)Outputs_get_solzen,(setter)0,
 	PyDoc_STR("*sequence*: Resource solar zenith [deg]"),
+ 	NULL},
+{"system_capacity", (getter)Outputs_get_system_capacity,(setter)0,
+	PyDoc_STR("*float*: System capacity [kWe]"),
  	NULL},
 {"tank_losses", (getter)Outputs_get_tank_losses,(setter)0,
 	PyDoc_STR("*sequence*: TES thermal losses [MWt]"),
