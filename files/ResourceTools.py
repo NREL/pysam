@@ -251,67 +251,42 @@ class FetchResourceFiles():
     Download solar and wind resource files from NREL developer network
     https://developer.nrel.gov/.
 
-    ## Parameters
-
-    ### tech (str) *Required*
-
-    Name of technology.
-
-        'wind' for NREL WIND Toolkit at https://developer.nrel.gov/docs/wind/wind-toolkit/wtk-download/
+    :param str tech: *Required* Name of technology. 
+        'wind' for NREL WIND Toolkit at https://developer.nrel.gov/docs/wind/wind-toolkit/wtk-download/.
         'solar' for NREL NSRDB at https://developer.nrel.gov/docs/solar/nsrdb/nsrdb_data_query/
 
-    ### nrel_api_key (str) *Required*
+    !param str nrel_api_key: *Required* NREL developer API key, available at https://developer.nrel.gov/signup/.
 
-    NREL developer API key, available at https://developer.nrel.gov/signup/.
+    :param str nrel_api_email: *Required* Email address associated with nrel_api_key.
 
-    ### nrel_api_email (str) *Required*
+    :param str resource_dir: Directory to store downloaded files. 
+        Default = 'None', which results in `data/PySAM Downloaded Weather Files`.
 
-    Email address associated with nrel_api_key.
+    :param int workers: Number of threads to use when parellelizing downloads.
+        Default = 1.
 
-    ### resource_dir (str)
-
-    Directory to store downloaded files.  Default = None, which results in
-    `data/PySAM Downloaded Weather Files`.
-
-    ### workers (int)
-
-    Number of threads to use when parellelizing downloads. Default = 1.
-
-    ### resource_type (str)
-
-    Name of API for NSRDB solar data. Default = 'psm3-tmy' for solar,
-    '' for wind.
-
+    :param str resource_type: Name of API for NSRDB solar data. 
+        Default = 'psm3-tmy' for solar, '' for wind. 
         'psm3' for 30- or 60-minute single-year file
         'psm3-tmy' for 60-minute TMY, TGY, or TDY typical-year file
         'psm3-5min' for 5-, 30- or 60-minute single-year file
         '' for WIND Toolkit
 
-    ### resource_year (str)
-
-    Data year, changes over time so check API documentation for latest
-    information.  Default = 'tmy' for solar, '2014' for wind.
-
+    :param str resource_year: Data year, changes over time so check API documentation for latest information.  
+        Default = 'tmy' for solar, '2014' for wind.
         '1998' to '2019', etc. for NSRDB psm3
         'tmy' for latest TMY file from NSRDB psm3-tmy
         'tmy-2016' to 'tmy-2018', etc. for NSRDB psm3-tmy
         '2018', etc. for NSRDB psm3-5min
         '2007' to '2014' for WIND Toolkit
 
-    ### resource_interval_min (int)
+    :param int resource_interval_min: Time interval of resource data in minutes. See available intervals under `resource_type` above.  
+        Default = 60.
 
-    Time interval of resource data in minutes. See available intervals under
-    `resource_type` above.  Default = 60.
-
-    ### resource_height (int)
-
-    Wind resource measurement height above ground in meters.  Default = 100.
-
-        10, 40, 60, 80, 100, 120, 140, 160
-            for windspeed, winddirection, temperature
-        0, 100, 200
-            for pressure
-
+    :param int resource_height: For wind only, wind resource measurement height above ground in meters.
+        Default = 100.
+        10, 40, 60, 80, 100, 120, 140, 160 for windspeed, winddirection, temperature
+        0, 100, 200 for pressure
     """
 
     def __init__(self, tech, nrel_api_key, nrel_api_email,
@@ -553,9 +528,7 @@ class FetchResourceFiles():
         """
         Creates dict with {region:path_to_SAM_resource_file}.
 
-        ## Input
-
-        points(iterable): iterable of lon/lat tuples, i.e. Shapely Points
+        :param iterable points: Iterable of lon/lat tuples, i.e. Shapely Points.
         """
 
         print('\nStarting data download for {} using {} thread workers.'.format(self.tech, self.workers))
