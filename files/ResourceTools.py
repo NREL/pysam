@@ -472,20 +472,15 @@ class FetchResourceFiles():
                 if len(outputs) < 1:
                     print('No URLS available for {}, {}.'.format(lat, lon))
                     return
-                names = [output['name'] for output in outputs]
-                links = [output['links'] for output in outputs]
                 ok = False
-                for items in links:
-                    for name in names:
-                        if self.resource_type == name:
-                            for link in links:
-                                for i in link:
-                                    if self.resource_year == str(i['year']) and self.resource_interval_min == i['interval']:
-                                        ok = True
-                                        data_url = i['link']
-                                        data_url = data_url.replace(
-                                            'yourapikey', self.nrel_api_key).replace(
-                                            'youremail', self.nrel_api_email+'&utc=false')
+                for output in outputs:
+                    if output['name'] == self.resource_type:
+                        for link in output['links']:
+                            if self.resource_year == str(link['year']) and self.resource_interval_min == link['interval']:
+                                ok = True
+                                data_url = link['link'].replace(
+                                    'yourapikey', self.nrel_api_key).replace(
+                                    'youremail', self.nrel_api_email) + '&utc=false'
 
                 # --- Get data ---
                 if ok:
