@@ -3151,6 +3151,54 @@ ElectricityRates_set_ur_dc_tou_mat(VarGroupObject *self, PyObject *value, void *
 }
 
 static PyObject *
+ElectricityRates_get_ur_ec_billing_demand_lookback_percentages(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Battery_ElectricityRates_ur_ec_billing_demand_lookback_percentages_mget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_ec_billing_demand_lookback_percentages(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Battery_ElectricityRates_ur_ec_billing_demand_lookback_percentages_mset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_ec_billing_demand_lookback_period(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Battery_ElectricityRates_ur_ec_billing_demand_lookback_period_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_ec_billing_demand_lookback_period(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Battery_ElectricityRates_ur_ec_billing_demand_lookback_period_nset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_ec_billing_demand_minimum(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Battery_ElectricityRates_ur_ec_billing_demand_minimum_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_ec_billing_demand_minimum(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Battery_ElectricityRates_ur_ec_billing_demand_minimum_nset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_ec_enable_billing_demand(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Battery_ElectricityRates_ur_ec_enable_billing_demand_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_ec_enable_billing_demand(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Battery_ElectricityRates_ur_ec_enable_billing_demand_nset, self->data_ptr);
+}
+
+static PyObject *
 ElectricityRates_get_ur_ec_sched_weekday(VarGroupObject *self, void *closure)
 {
 	return PySAM_matrix_getter(SAM_Battery_ElectricityRates_ur_ec_sched_weekday_mget, self->data_ptr);
@@ -3318,6 +3366,18 @@ ElectricityRates_set_ur_ts_sell_rate(VarGroupObject *self, PyObject *value, void
 	return PySAM_array_setter(value, SAM_Battery_ElectricityRates_ur_ts_sell_rate_aset, self->data_ptr);
 }
 
+static PyObject *
+ElectricityRates_get_ur_yearzero_usage_peaks(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Battery_ElectricityRates_ur_yearzero_usage_peaks_aget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_yearzero_usage_peaks(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Battery_ElectricityRates_ur_yearzero_usage_peaks_aset, self->data_ptr);
+}
+
 static PyGetSetDef ElectricityRates_getset[] = {
 {"rate_escalation", (getter)ElectricityRates_get_rate_escalation,(setter)ElectricityRates_set_rate_escalation,
 	PyDoc_STR("*sequence*: Annual electricity rate escalation [%/year]\n\n*Required*: If not provided, assumed to be 0"),
@@ -3339,6 +3399,18 @@ static PyGetSetDef ElectricityRates_getset[] = {
  	NULL},
 {"ur_dc_tou_mat", (getter)ElectricityRates_get_ur_dc_tou_mat,(setter)ElectricityRates_set_ur_dc_tou_mat,
 	PyDoc_STR("*sequence[sequence]*: Demand rates (TOU) table\n\n*Required*: True if ur_dc_enable=1"),
+ 	NULL},
+{"ur_ec_billing_demand_lookback_percentages", (getter)ElectricityRates_get_ur_ec_billing_demand_lookback_percentages,(setter)ElectricityRates_set_ur_ec_billing_demand_lookback_percentages,
+	PyDoc_STR("*sequence[sequence]*: Billing demand lookback percentages by month and consider actual peak demand\n\n*Info*: 12x2\n\n*Required*: True if ur_ec_enable_billing_demand=1"),
+ 	NULL},
+{"ur_ec_billing_demand_lookback_period", (getter)ElectricityRates_get_ur_ec_billing_demand_lookback_period,(setter)ElectricityRates_set_ur_ec_billing_demand_lookback_period,
+	PyDoc_STR("*float*: Billing demand lookback period [mn]\n\n*Constraints*: INTEGER,MIN=0,MAX=12\n\n*Required*: True if ur_ec_enable_billing_demand=1"),
+ 	NULL},
+{"ur_ec_billing_demand_minimum", (getter)ElectricityRates_get_ur_ec_billing_demand_minimum,(setter)ElectricityRates_set_ur_ec_billing_demand_minimum,
+	PyDoc_STR("*float*: Minimum billing demand\n\n*Required*: True if ur_ec_enable_billing_demand=1"),
+ 	NULL},
+{"ur_ec_enable_billing_demand", (getter)ElectricityRates_get_ur_ec_enable_billing_demand,(setter)ElectricityRates_set_ur_ec_enable_billing_demand,
+	PyDoc_STR("*float*: Enable billing demand for energy charges [0/1]\n\n*Options*: 0=disable,1=enable\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"ur_ec_sched_weekday", (getter)ElectricityRates_get_ur_ec_sched_weekday,(setter)ElectricityRates_set_ur_ec_sched_weekday,
 	PyDoc_STR("*sequence[sequence]*: Energy charge weekday schedule\n\n*Info*: 12x24"),
@@ -3381,6 +3453,9 @@ static PyGetSetDef ElectricityRates_getset[] = {
  	NULL},
 {"ur_ts_sell_rate", (getter)ElectricityRates_get_ur_ts_sell_rate,(setter)ElectricityRates_set_ur_ts_sell_rate,
 	PyDoc_STR("*sequence*: Time step sell rates [0/1]"),
+ 	NULL},
+{"ur_yearzero_usage_peaks", (getter)ElectricityRates_get_ur_yearzero_usage_peaks,(setter)ElectricityRates_set_ur_yearzero_usage_peaks,
+	PyDoc_STR("*sequence*: Peak usage by month for year zero\n\n*Info*: 12\n\n*Required*: True if ur_ec_enable_billing_demand=1"),
  	NULL},
 	{NULL}  /* Sentinel */
 };

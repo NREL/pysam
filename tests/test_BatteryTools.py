@@ -11,7 +11,7 @@ def test_leadacid():
     assert(model.BatterySystem.batt_computed_bank_capacity != pytest.approx(100, .5))
     assert(model.BatterySystem.batt_power_charge_max_kwdc != pytest.approx(50, 0.5))
 
-    BatteryTools.battery_model_sizing(model, 100, 400, 500)
+    BatteryTools.battery_model_sizing(model, desired_power=100, desired_capacity=400, desired_voltage=500)
     assert(model.BatterySystem.batt_computed_strings == 261)
     assert(model.BatterySystem.batt_computed_series == 139)
     assert(model.BatterySystem.batt_computed_bank_capacity == pytest.approx(417, 1))

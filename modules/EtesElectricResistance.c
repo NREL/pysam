@@ -2244,6 +2244,246 @@ static PyMethodDef FinancialParameters_methods[] = {
 };
 
 static PyObject *
+FinancialParameters_get_const_per_interest_rate1(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesElectricResistance_FinancialParameters_const_per_interest_rate1_nget, self->data_ptr);
+}
+
+static int
+FinancialParameters_set_const_per_interest_rate1(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_EtesElectricResistance_FinancialParameters_const_per_interest_rate1_nset, self->data_ptr);
+}
+
+static PyObject *
+FinancialParameters_get_const_per_interest_rate2(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesElectricResistance_FinancialParameters_const_per_interest_rate2_nget, self->data_ptr);
+}
+
+static int
+FinancialParameters_set_const_per_interest_rate2(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_EtesElectricResistance_FinancialParameters_const_per_interest_rate2_nset, self->data_ptr);
+}
+
+static PyObject *
+FinancialParameters_get_const_per_interest_rate3(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesElectricResistance_FinancialParameters_const_per_interest_rate3_nget, self->data_ptr);
+}
+
+static int
+FinancialParameters_set_const_per_interest_rate3(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_EtesElectricResistance_FinancialParameters_const_per_interest_rate3_nset, self->data_ptr);
+}
+
+static PyObject *
+FinancialParameters_get_const_per_interest_rate4(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesElectricResistance_FinancialParameters_const_per_interest_rate4_nget, self->data_ptr);
+}
+
+static int
+FinancialParameters_set_const_per_interest_rate4(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_EtesElectricResistance_FinancialParameters_const_per_interest_rate4_nset, self->data_ptr);
+}
+
+static PyObject *
+FinancialParameters_get_const_per_interest_rate5(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesElectricResistance_FinancialParameters_const_per_interest_rate5_nget, self->data_ptr);
+}
+
+static int
+FinancialParameters_set_const_per_interest_rate5(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_EtesElectricResistance_FinancialParameters_const_per_interest_rate5_nset, self->data_ptr);
+}
+
+static PyObject *
+FinancialParameters_get_const_per_months1(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesElectricResistance_FinancialParameters_const_per_months1_nget, self->data_ptr);
+}
+
+static int
+FinancialParameters_set_const_per_months1(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_EtesElectricResistance_FinancialParameters_const_per_months1_nset, self->data_ptr);
+}
+
+static PyObject *
+FinancialParameters_get_const_per_months2(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesElectricResistance_FinancialParameters_const_per_months2_nget, self->data_ptr);
+}
+
+static int
+FinancialParameters_set_const_per_months2(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_EtesElectricResistance_FinancialParameters_const_per_months2_nset, self->data_ptr);
+}
+
+static PyObject *
+FinancialParameters_get_const_per_months3(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesElectricResistance_FinancialParameters_const_per_months3_nget, self->data_ptr);
+}
+
+static int
+FinancialParameters_set_const_per_months3(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_EtesElectricResistance_FinancialParameters_const_per_months3_nset, self->data_ptr);
+}
+
+static PyObject *
+FinancialParameters_get_const_per_months4(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesElectricResistance_FinancialParameters_const_per_months4_nget, self->data_ptr);
+}
+
+static int
+FinancialParameters_set_const_per_months4(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_EtesElectricResistance_FinancialParameters_const_per_months4_nset, self->data_ptr);
+}
+
+static PyObject *
+FinancialParameters_get_const_per_months5(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesElectricResistance_FinancialParameters_const_per_months5_nget, self->data_ptr);
+}
+
+static int
+FinancialParameters_set_const_per_months5(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_EtesElectricResistance_FinancialParameters_const_per_months5_nset, self->data_ptr);
+}
+
+static PyObject *
+FinancialParameters_get_const_per_percent1(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesElectricResistance_FinancialParameters_const_per_percent1_nget, self->data_ptr);
+}
+
+static int
+FinancialParameters_set_const_per_percent1(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_EtesElectricResistance_FinancialParameters_const_per_percent1_nset, self->data_ptr);
+}
+
+static PyObject *
+FinancialParameters_get_const_per_percent2(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesElectricResistance_FinancialParameters_const_per_percent2_nget, self->data_ptr);
+}
+
+static int
+FinancialParameters_set_const_per_percent2(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_EtesElectricResistance_FinancialParameters_const_per_percent2_nset, self->data_ptr);
+}
+
+static PyObject *
+FinancialParameters_get_const_per_percent3(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesElectricResistance_FinancialParameters_const_per_percent3_nget, self->data_ptr);
+}
+
+static int
+FinancialParameters_set_const_per_percent3(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_EtesElectricResistance_FinancialParameters_const_per_percent3_nset, self->data_ptr);
+}
+
+static PyObject *
+FinancialParameters_get_const_per_percent4(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesElectricResistance_FinancialParameters_const_per_percent4_nget, self->data_ptr);
+}
+
+static int
+FinancialParameters_set_const_per_percent4(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_EtesElectricResistance_FinancialParameters_const_per_percent4_nset, self->data_ptr);
+}
+
+static PyObject *
+FinancialParameters_get_const_per_percent5(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesElectricResistance_FinancialParameters_const_per_percent5_nget, self->data_ptr);
+}
+
+static int
+FinancialParameters_set_const_per_percent5(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_EtesElectricResistance_FinancialParameters_const_per_percent5_nset, self->data_ptr);
+}
+
+static PyObject *
+FinancialParameters_get_const_per_upfront_rate1(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesElectricResistance_FinancialParameters_const_per_upfront_rate1_nget, self->data_ptr);
+}
+
+static int
+FinancialParameters_set_const_per_upfront_rate1(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_EtesElectricResistance_FinancialParameters_const_per_upfront_rate1_nset, self->data_ptr);
+}
+
+static PyObject *
+FinancialParameters_get_const_per_upfront_rate2(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesElectricResistance_FinancialParameters_const_per_upfront_rate2_nget, self->data_ptr);
+}
+
+static int
+FinancialParameters_set_const_per_upfront_rate2(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_EtesElectricResistance_FinancialParameters_const_per_upfront_rate2_nset, self->data_ptr);
+}
+
+static PyObject *
+FinancialParameters_get_const_per_upfront_rate3(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesElectricResistance_FinancialParameters_const_per_upfront_rate3_nget, self->data_ptr);
+}
+
+static int
+FinancialParameters_set_const_per_upfront_rate3(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_EtesElectricResistance_FinancialParameters_const_per_upfront_rate3_nset, self->data_ptr);
+}
+
+static PyObject *
+FinancialParameters_get_const_per_upfront_rate4(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesElectricResistance_FinancialParameters_const_per_upfront_rate4_nget, self->data_ptr);
+}
+
+static int
+FinancialParameters_set_const_per_upfront_rate4(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_EtesElectricResistance_FinancialParameters_const_per_upfront_rate4_nset, self->data_ptr);
+}
+
+static PyObject *
+FinancialParameters_get_const_per_upfront_rate5(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesElectricResistance_FinancialParameters_const_per_upfront_rate5_nget, self->data_ptr);
+}
+
+static int
+FinancialParameters_set_const_per_upfront_rate5(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_EtesElectricResistance_FinancialParameters_const_per_upfront_rate5_nset, self->data_ptr);
+}
+
+static PyObject *
 FinancialParameters_get_sales_tax_rate(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_EtesElectricResistance_FinancialParameters_sales_tax_rate_nget, self->data_ptr);
@@ -2256,6 +2496,66 @@ FinancialParameters_set_sales_tax_rate(VarGroupObject *self, PyObject *value, vo
 }
 
 static PyGetSetDef FinancialParameters_getset[] = {
+{"const_per_interest_rate1", (getter)FinancialParameters_get_const_per_interest_rate1,(setter)FinancialParameters_set_const_per_interest_rate1,
+	PyDoc_STR("*float*: Interest rate, loan 1 [%]\n\n*Required*: True"),
+ 	NULL},
+{"const_per_interest_rate2", (getter)FinancialParameters_get_const_per_interest_rate2,(setter)FinancialParameters_set_const_per_interest_rate2,
+	PyDoc_STR("*float*: Interest rate, loan 2 [%]\n\n*Required*: True"),
+ 	NULL},
+{"const_per_interest_rate3", (getter)FinancialParameters_get_const_per_interest_rate3,(setter)FinancialParameters_set_const_per_interest_rate3,
+	PyDoc_STR("*float*: Interest rate, loan 3 [%]\n\n*Required*: True"),
+ 	NULL},
+{"const_per_interest_rate4", (getter)FinancialParameters_get_const_per_interest_rate4,(setter)FinancialParameters_set_const_per_interest_rate4,
+	PyDoc_STR("*float*: Interest rate, loan 4 [%]\n\n*Required*: True"),
+ 	NULL},
+{"const_per_interest_rate5", (getter)FinancialParameters_get_const_per_interest_rate5,(setter)FinancialParameters_set_const_per_interest_rate5,
+	PyDoc_STR("*float*: Interest rate, loan 5 [%]\n\n*Required*: True"),
+ 	NULL},
+{"const_per_months1", (getter)FinancialParameters_get_const_per_months1,(setter)FinancialParameters_set_const_per_months1,
+	PyDoc_STR("*float*: Months prior to operation, loan 1\n\n*Required*: True"),
+ 	NULL},
+{"const_per_months2", (getter)FinancialParameters_get_const_per_months2,(setter)FinancialParameters_set_const_per_months2,
+	PyDoc_STR("*float*: Months prior to operation, loan 2\n\n*Required*: True"),
+ 	NULL},
+{"const_per_months3", (getter)FinancialParameters_get_const_per_months3,(setter)FinancialParameters_set_const_per_months3,
+	PyDoc_STR("*float*: Months prior to operation, loan 3\n\n*Required*: True"),
+ 	NULL},
+{"const_per_months4", (getter)FinancialParameters_get_const_per_months4,(setter)FinancialParameters_set_const_per_months4,
+	PyDoc_STR("*float*: Months prior to operation, loan 4\n\n*Required*: True"),
+ 	NULL},
+{"const_per_months5", (getter)FinancialParameters_get_const_per_months5,(setter)FinancialParameters_set_const_per_months5,
+	PyDoc_STR("*float*: Months prior to operation, loan 5\n\n*Required*: True"),
+ 	NULL},
+{"const_per_percent1", (getter)FinancialParameters_get_const_per_percent1,(setter)FinancialParameters_set_const_per_percent1,
+	PyDoc_STR("*float*: Percent of total installed cost, loan 1 [%]\n\n*Required*: True"),
+ 	NULL},
+{"const_per_percent2", (getter)FinancialParameters_get_const_per_percent2,(setter)FinancialParameters_set_const_per_percent2,
+	PyDoc_STR("*float*: Percent of total installed cost, loan 2 [%]\n\n*Required*: True"),
+ 	NULL},
+{"const_per_percent3", (getter)FinancialParameters_get_const_per_percent3,(setter)FinancialParameters_set_const_per_percent3,
+	PyDoc_STR("*float*: Percent of total installed cost, loan 3 [%]\n\n*Required*: True"),
+ 	NULL},
+{"const_per_percent4", (getter)FinancialParameters_get_const_per_percent4,(setter)FinancialParameters_set_const_per_percent4,
+	PyDoc_STR("*float*: Percent of total installed cost, loan 4 [%]\n\n*Required*: True"),
+ 	NULL},
+{"const_per_percent5", (getter)FinancialParameters_get_const_per_percent5,(setter)FinancialParameters_set_const_per_percent5,
+	PyDoc_STR("*float*: Percent of total installed cost, loan 5 [%]\n\n*Required*: True"),
+ 	NULL},
+{"const_per_upfront_rate1", (getter)FinancialParameters_get_const_per_upfront_rate1,(setter)FinancialParameters_set_const_per_upfront_rate1,
+	PyDoc_STR("*float*: Upfront fee on principal, loan 1 [%]\n\n*Required*: True"),
+ 	NULL},
+{"const_per_upfront_rate2", (getter)FinancialParameters_get_const_per_upfront_rate2,(setter)FinancialParameters_set_const_per_upfront_rate2,
+	PyDoc_STR("*float*: Upfront fee on principal, loan 2 [%]\n\n*Required*: True"),
+ 	NULL},
+{"const_per_upfront_rate3", (getter)FinancialParameters_get_const_per_upfront_rate3,(setter)FinancialParameters_set_const_per_upfront_rate3,
+	PyDoc_STR("*float*: Upfront fee on principal, loan 3 [%]\n\n*Required*: True"),
+ 	NULL},
+{"const_per_upfront_rate4", (getter)FinancialParameters_get_const_per_upfront_rate4,(setter)FinancialParameters_set_const_per_upfront_rate4,
+	PyDoc_STR("*float*: Upfront fee on principal, loan 4 [%]\n\n*Required*: True"),
+ 	NULL},
+{"const_per_upfront_rate5", (getter)FinancialParameters_get_const_per_upfront_rate5,(setter)FinancialParameters_set_const_per_upfront_rate5,
+	PyDoc_STR("*float*: Upfront fee on principal, loan 5 [%]\n\n*Required*: True"),
+ 	NULL},
 {"sales_tax_rate", (getter)FinancialParameters_get_sales_tax_rate,(setter)FinancialParameters_set_sales_tax_rate,
 	PyDoc_STR("*float*: Sales tax rate [%]\n\n*Required*: True"),
  	NULL},
@@ -2362,6 +2662,18 @@ static PyMethodDef Outputs_methods[] = {
 };
 
 static PyObject *
+Outputs_get_T_tes_cold(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_EtesElectricResistance_Outputs_T_tes_cold_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_T_tes_hot(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_EtesElectricResistance_Outputs_T_tes_hot_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_W_dot_cycle_gross(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_EtesElectricResistance_Outputs_W_dot_cycle_gross_aget, self->data_ptr);
@@ -2440,6 +2752,12 @@ Outputs_get_annual_energy_full_availability(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_construction_financing_cost(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesElectricResistance_Outputs_construction_financing_cost_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_e_ch_tes(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_EtesElectricResistance_Outputs_e_ch_tes_aget, self->data_ptr);
@@ -2449,6 +2767,18 @@ static PyObject *
 Outputs_get_gen(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_EtesElectricResistance_Outputs_gen_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_mass_tes_cold(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_EtesElectricResistance_Outputs_mass_tes_cold_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_mass_tes_hot(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_EtesElectricResistance_Outputs_mass_tes_hot_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -2500,12 +2830,30 @@ Outputs_get_q_dot_tes_losses(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_system_capacity(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesElectricResistance_Outputs_system_capacity_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_time_hr(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_EtesElectricResistance_Outputs_time_hr_aget, self->data_ptr);
 }
 
+static PyObject *
+Outputs_get_total_installed_cost(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesElectricResistance_Outputs_total_installed_cost_nget, self->data_ptr);
+}
+
 static PyGetSetDef Outputs_getset[] = {
+{"T_tes_cold", (getter)Outputs_get_T_tes_cold,(setter)0,
+	PyDoc_STR("*sequence*: TES cold temperature [C]"),
+ 	NULL},
+{"T_tes_hot", (getter)Outputs_get_T_tes_hot,(setter)0,
+	PyDoc_STR("*sequence*: TES hot temperature [C]"),
+ 	NULL},
 {"W_dot_cycle_gross", (getter)Outputs_get_W_dot_cycle_gross,(setter)0,
 	PyDoc_STR("*sequence*: PC electrical power gross (no cooling parasitics) [MWe]"),
  	NULL},
@@ -2545,11 +2893,20 @@ static PyGetSetDef Outputs_getset[] = {
 {"annual_energy_full_availability", (getter)Outputs_get_annual_energy_full_availability,(setter)0,
 	PyDoc_STR("*float*: Annual total electric power to grid w/ full availability [MWhe]"),
  	NULL},
+{"construction_financing_cost", (getter)Outputs_get_construction_financing_cost,(setter)0,
+	PyDoc_STR("*float*: Total construction financing cost [$]"),
+ 	NULL},
 {"e_ch_tes", (getter)Outputs_get_e_ch_tes,(setter)0,
 	PyDoc_STR("*sequence*: TES charge state [MWht]"),
  	NULL},
 {"gen", (getter)Outputs_get_gen,(setter)0,
 	PyDoc_STR("*sequence*: Total electric power to grid with available derate [kWe]"),
+ 	NULL},
+{"mass_tes_cold", (getter)Outputs_get_mass_tes_cold,(setter)0,
+	PyDoc_STR("*sequence*: TES cold tank mass (end) [kg]"),
+ 	NULL},
+{"mass_tes_hot", (getter)Outputs_get_mass_tes_hot,(setter)0,
+	PyDoc_STR("*sequence*: TES hot tank mass (end) [kg]"),
  	NULL},
 {"q_dot_ch_tes", (getter)Outputs_get_q_dot_ch_tes,(setter)0,
 	PyDoc_STR("*sequence*: TES charge thermal power [MWt]"),
@@ -2575,8 +2932,14 @@ static PyGetSetDef Outputs_getset[] = {
 {"q_dot_tes_losses", (getter)Outputs_get_q_dot_tes_losses,(setter)0,
 	PyDoc_STR("*sequence*: TES thermal losses [MWt]"),
  	NULL},
+{"system_capacity", (getter)Outputs_get_system_capacity,(setter)0,
+	PyDoc_STR("*float*: System capacity [kWe]"),
+ 	NULL},
 {"time_hr", (getter)Outputs_get_time_hr,(setter)0,
 	PyDoc_STR("*sequence*: Time at end of timestep [hr]"),
+ 	NULL},
+{"total_installed_cost", (getter)Outputs_get_total_installed_cost,(setter)0,
+	PyDoc_STR("*float*: Total installed cost [$]"),
  	NULL},
 	{NULL}  /* Sentinel */
 };

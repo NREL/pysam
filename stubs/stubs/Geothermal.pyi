@@ -116,7 +116,6 @@ class Outputs(object):
 
 	GF_flowrate = float
 	annual_energy = float
-	annual_energy_distribution_time = tuple
 	bottom_hole_pressure = float
 	capacity_factor = float
 	condensate_pump_power = float

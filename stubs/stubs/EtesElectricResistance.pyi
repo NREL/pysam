@@ -216,6 +216,26 @@ class FinancialParameters(object):
 		pass
 
 
+	const_per_interest_rate1 = float
+	const_per_interest_rate2 = float
+	const_per_interest_rate3 = float
+	const_per_interest_rate4 = float
+	const_per_interest_rate5 = float
+	const_per_months1 = float
+	const_per_months2 = float
+	const_per_months3 = float
+	const_per_months4 = float
+	const_per_months5 = float
+	const_per_percent1 = float
+	const_per_percent2 = float
+	const_per_percent3 = float
+	const_per_percent4 = float
+	const_per_percent5 = float
+	const_per_upfront_rate1 = float
+	const_per_upfront_rate2 = float
+	const_per_upfront_rate3 = float
+	const_per_upfront_rate4 = float
+	const_per_upfront_rate5 = float
 	sales_tax_rate = float
 
 
@@ -250,6 +270,8 @@ class Outputs(object):
 		pass
 
 
+	T_tes_cold = tuple
+	T_tes_hot = tuple
 	W_dot_cycle_gross = tuple
 	W_dot_heater = tuple
 	W_dot_out_net = tuple
@@ -263,8 +285,11 @@ class Outputs(object):
 	annual_Q_tes_losses = float
 	annual_energy = float
 	annual_energy_full_availability = float
+	construction_financing_cost = float
 	e_ch_tes = tuple
 	gen = tuple
+	mass_tes_cold = tuple
+	mass_tes_hot = tuple
 	q_dot_ch_tes = tuple
 	q_dot_cycle = tuple
 	q_dot_cycle_startup = tuple
@@ -273,7 +298,9 @@ class Outputs(object):
 	q_dot_heater_to_htf = tuple
 	q_dot_tes_heater = tuple
 	q_dot_tes_losses = tuple
+	system_capacity = float
 	time_hr = tuple
+	total_installed_cost = float
 
 
 class EtesElectricResistance(object):

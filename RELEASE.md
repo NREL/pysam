@@ -1,6 +1,7 @@
 # Release Notes
 
-## Version 2.2.3, May 14, 2021 ~ SAM 2020.11.29 Revision 2, SSC Version 256
+## Version 2.2.3,  ~ SAM 2020.11.29 Revision 2, SSC Version 
+* Fix ResourceTools solar resource download bug (#86)
 * [SAM Release updates for Version 2020.11.29 Revision 2](https://nrel.github.io/SAM/doc/releasenotes.html)
 
 ## Version 2.2.2, Mar 19, 2021 ~ SAM 2020.11.29 Revision 1, SSC Version 253

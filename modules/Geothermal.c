@@ -1254,12 +1254,6 @@ Outputs_get_annual_energy(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_annual_energy_distribution_time(VarGroupObject *self, void *closure)
-{
-	return PySAM_matrix_getter(SAM_Geothermal_Outputs_annual_energy_distribution_time_mget, self->data_ptr);
-}
-
-static PyObject *
 Outputs_get_bottom_hole_pressure(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Geothermal_Outputs_bottom_hole_pressure_nget, self->data_ptr);
@@ -1547,9 +1541,6 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"annual_energy", (getter)Outputs_get_annual_energy,(setter)0,
 	PyDoc_STR("*float*: Annual Energy [kWh]"),
- 	NULL},
-{"annual_energy_distribution_time", (getter)Outputs_get_annual_energy_distribution_time,(setter)0,
-	PyDoc_STR("*sequence[sequence]*: Annual energy production as function of Time"),
  	NULL},
 {"bottom_hole_pressure", (getter)Outputs_get_bottom_hole_pressure,(setter)0,
 	PyDoc_STR("*float*: Bottom hole pres calculated by GETEM"),

@@ -1,4 +1,4 @@
-class WeatherReader(object):
+class Common(object):
 	def assign(self): 
 		pass
 
@@ -9,8 +9,7 @@ class WeatherReader(object):
 		pass
 
 
-	use_specific_wf_wave = float
-	wave_resource_filename = str
+	q_pb_design = float
 
 
 class Outputs(object):
@@ -24,23 +23,10 @@ class Outputs(object):
 		pass
 
 
-	average_power_flux = float
-	bathymetry = str
-	city = str
-	country = str
-	data_source = str
-	lat = float
-	lon = float
-	name = str
-	nearby_buoy_number = str
-	notes = str
-	sea_bed = str
-	state = str
-	tz = float
-	wave_resource_matrix = tuple
+	W_dot_fossil = float
 
 
-class WaveFileReader(object):
+class TestUdPowerCycle(object):
 	def assign(self, dict):
 		pass
 
@@ -62,20 +48,20 @@ class WaveFileReader(object):
 	def __init__(self, *args, **kwargs):
 		pass
 
-	WeatherReader = WeatherReader
+	Common = Common
 	Outputs = Outputs
 
 
-def default(config) -> WaveFileReader:
+def default(config) -> TestUdPowerCycle:
 	pass
 
-def new() -> WaveFileReader:
+def new() -> TestUdPowerCycle:
 	pass
 
-def wrap(ssc_data_t) -> WaveFileReader:
+def wrap(ssc_data_t) -> TestUdPowerCycle:
 	pass
 
-def from_existing(model, config="") -> WaveFileReader:
+def from_existing(model, config="") -> TestUdPowerCycle:
 	pass
 
 __loader__ = None 

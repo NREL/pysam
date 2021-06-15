@@ -38,6 +38,12 @@ UserDefinedPowerCycle Group
 .. autoclass:: PySAM.UiUdpcChecks.UiUdpcChecks.UserDefinedPowerCycle
 	:members:
 
+Common Group
+======================================================
+
+.. autoclass:: PySAM.UiUdpcChecks.UiUdpcChecks.Common
+	:members:
+
 Outputs Group
 ======================================================
 

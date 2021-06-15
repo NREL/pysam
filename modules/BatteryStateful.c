@@ -1461,6 +1461,30 @@ static PyMethodDef StateCell_methods[] = {
 };
 
 static PyObject *
+StateCell_get_DOD_max(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_BatteryStateful_StateCell_DOD_max_nget, self->data_ptr);
+}
+
+static int
+StateCell_set_DOD_max(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_BatteryStateful_StateCell_DOD_max_nset, self->data_ptr);
+}
+
+static PyObject *
+StateCell_get_DOD_min(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_BatteryStateful_StateCell_DOD_min_nget, self->data_ptr);
+}
+
+static int
+StateCell_set_DOD_min(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_BatteryStateful_StateCell_DOD_min_nset, self->data_ptr);
+}
+
+static PyObject *
 StateCell_get_I_loss(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_BatteryStateful_StateCell_I_loss_nget, self->data_ptr);
@@ -1506,6 +1530,66 @@ static int
 StateCell_set_average_range(VarGroupObject *self, PyObject *value, void *closure)
 {
 	return PySAM_double_setter(value, SAM_BatteryStateful_StateCell_average_range_nset, self->data_ptr);
+}
+
+static PyObject *
+StateCell_get_b1_dt(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_BatteryStateful_StateCell_b1_dt_nget, self->data_ptr);
+}
+
+static int
+StateCell_set_b1_dt(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_BatteryStateful_StateCell_b1_dt_nset, self->data_ptr);
+}
+
+static PyObject *
+StateCell_get_b2_dt(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_BatteryStateful_StateCell_b2_dt_nget, self->data_ptr);
+}
+
+static int
+StateCell_set_b2_dt(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_BatteryStateful_StateCell_b2_dt_nset, self->data_ptr);
+}
+
+static PyObject *
+StateCell_get_b3_dt(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_BatteryStateful_StateCell_b3_dt_nget, self->data_ptr);
+}
+
+static int
+StateCell_set_b3_dt(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_BatteryStateful_StateCell_b3_dt_nset, self->data_ptr);
+}
+
+static PyObject *
+StateCell_get_c0_dt(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_BatteryStateful_StateCell_c0_dt_nget, self->data_ptr);
+}
+
+static int
+StateCell_set_c0_dt(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_BatteryStateful_StateCell_c0_dt_nset, self->data_ptr);
+}
+
+static PyObject *
+StateCell_get_c2_dt(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_BatteryStateful_StateCell_c2_dt_nget, self->data_ptr);
+}
+
+static int
+StateCell_set_c2_dt(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_BatteryStateful_StateCell_c2_dt_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -1557,6 +1641,66 @@ StateCell_set_charge_mode(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyObject *
+StateCell_get_cum_dt(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_BatteryStateful_StateCell_cum_dt_nget, self->data_ptr);
+}
+
+static int
+StateCell_set_cum_dt(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_BatteryStateful_StateCell_cum_dt_nset, self->data_ptr);
+}
+
+static PyObject *
+StateCell_get_cycle_DOD(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_BatteryStateful_StateCell_cycle_DOD_nget, self->data_ptr);
+}
+
+static int
+StateCell_set_cycle_DOD(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_BatteryStateful_StateCell_cycle_DOD_nset, self->data_ptr);
+}
+
+static PyObject *
+StateCell_get_cycle_DOD_max(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_BatteryStateful_StateCell_cycle_DOD_max_aget, self->data_ptr);
+}
+
+static int
+StateCell_set_cycle_DOD_max(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_BatteryStateful_StateCell_cycle_DOD_max_aset, self->data_ptr);
+}
+
+static PyObject *
+StateCell_get_cycle_DOD_range(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_BatteryStateful_StateCell_cycle_DOD_range_aget, self->data_ptr);
+}
+
+static int
+StateCell_set_cycle_DOD_range(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_BatteryStateful_StateCell_cycle_DOD_range_aset, self->data_ptr);
+}
+
+static PyObject *
+StateCell_get_cycle_range(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_BatteryStateful_StateCell_cycle_range_nget, self->data_ptr);
+}
+
+static int
+StateCell_set_cycle_range(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_BatteryStateful_StateCell_cycle_range_nset, self->data_ptr);
+}
+
+static PyObject *
 StateCell_get_day_age_of_battery(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_BatteryStateful_StateCell_day_age_of_battery_nget, self->data_ptr);
@@ -1578,6 +1722,54 @@ static int
 StateCell_set_dq_relative_calendar_old(VarGroupObject *self, PyObject *value, void *closure)
 {
 	return PySAM_double_setter(value, SAM_BatteryStateful_StateCell_dq_relative_calendar_old_nset, self->data_ptr);
+}
+
+static PyObject *
+StateCell_get_dq_relative_li1(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_BatteryStateful_StateCell_dq_relative_li1_nget, self->data_ptr);
+}
+
+static int
+StateCell_set_dq_relative_li1(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_BatteryStateful_StateCell_dq_relative_li1_nset, self->data_ptr);
+}
+
+static PyObject *
+StateCell_get_dq_relative_li2(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_BatteryStateful_StateCell_dq_relative_li2_nget, self->data_ptr);
+}
+
+static int
+StateCell_set_dq_relative_li2(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_BatteryStateful_StateCell_dq_relative_li2_nset, self->data_ptr);
+}
+
+static PyObject *
+StateCell_get_dq_relative_li3(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_BatteryStateful_StateCell_dq_relative_li3_nget, self->data_ptr);
+}
+
+static int
+StateCell_set_dq_relative_li3(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_BatteryStateful_StateCell_dq_relative_li3_nset, self->data_ptr);
+}
+
+static PyObject *
+StateCell_get_dq_relative_neg(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_BatteryStateful_StateCell_dq_relative_neg_nget, self->data_ptr);
+}
+
+static int
+StateCell_set_dq_relative_neg(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_BatteryStateful_StateCell_dq_relative_neg_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -1689,6 +1881,30 @@ StateCell_set_q_relative_cycle(VarGroupObject *self, PyObject *value, void *clos
 }
 
 static PyObject *
+StateCell_get_q_relative_li(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_BatteryStateful_StateCell_q_relative_li_nget, self->data_ptr);
+}
+
+static int
+StateCell_set_q_relative_li(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_BatteryStateful_StateCell_q_relative_li_nset, self->data_ptr);
+}
+
+static PyObject *
+StateCell_get_q_relative_neg(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_BatteryStateful_StateCell_q_relative_neg_nget, self->data_ptr);
+}
+
+static int
+StateCell_set_q_relative_neg(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_BatteryStateful_StateCell_q_relative_neg_nset, self->data_ptr);
+}
+
+static PyObject *
 StateCell_get_q_relative_thermal(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_BatteryStateful_StateCell_q_relative_thermal_nget, self->data_ptr);
@@ -1784,19 +2000,13 @@ StateCell_set_rainflow_peaks(VarGroupObject *self, PyObject *value, void *closur
 	return PySAM_array_setter(value, SAM_BatteryStateful_StateCell_rainflow_peaks_aset, self->data_ptr);
 }
 
-static PyObject *
-StateCell_get_range(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_BatteryStateful_StateCell_range_nget, self->data_ptr);
-}
-
-static int
-StateCell_set_range(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_BatteryStateful_StateCell_range_nset, self->data_ptr);
-}
-
 static PyGetSetDef StateCell_getset[] = {
+{"DOD_max", (getter)StateCell_get_DOD_max,(setter)StateCell_set_DOD_max,
+	PyDoc_STR("*float*: Max DOD of battery for current day [%]\n\n*Info*: NREL NMC Life Model"),
+ 	NULL},
+{"DOD_min", (getter)StateCell_get_DOD_min,(setter)StateCell_set_DOD_min,
+	PyDoc_STR("*float*: Min DOD of battery for current day [%]\n\n*Info*: NREL NMC Life Model"),
+ 	NULL},
 {"I_loss", (getter)StateCell_get_I_loss,(setter)StateCell_set_I_loss,
 	PyDoc_STR("*float*: Lifetime and thermal losses [A]"),
  	NULL},
@@ -1807,7 +2017,22 @@ static PyGetSetDef StateCell_getset[] = {
 	PyDoc_STR("*float*: Battery temperature at end of last time step [C]"),
  	NULL},
 {"average_range", (getter)StateCell_get_average_range,(setter)StateCell_set_average_range,
-	PyDoc_STR("*float*: Average cycle range [%]"),
+	PyDoc_STR("*float*: Average cycle cycle_range [%]"),
+ 	NULL},
+{"b1_dt", (getter)StateCell_get_b1_dt,(setter)StateCell_set_b1_dt,
+	PyDoc_STR("*float*: b1 coefficient cumulated for current day [day^-0.5]\n\n*Info*: NREL NMC Life Model"),
+ 	NULL},
+{"b2_dt", (getter)StateCell_get_b2_dt,(setter)StateCell_set_b2_dt,
+	PyDoc_STR("*float*: b2 coefficient cumulated for current day [1/cycle]\n\n*Info*: NREL NMC Life Model"),
+ 	NULL},
+{"b3_dt", (getter)StateCell_get_b3_dt,(setter)StateCell_set_b3_dt,
+	PyDoc_STR("*float*: b3 coefficient cumulated for current day [1]\n\n*Info*: NREL NMC Life Model"),
+ 	NULL},
+{"c0_dt", (getter)StateCell_get_c0_dt,(setter)StateCell_set_c0_dt,
+	PyDoc_STR("*float*: c0 coefficient cumulated for current day [Ah]\n\n*Info*: NREL NMC Life Model"),
+ 	NULL},
+{"c2_dt", (getter)StateCell_get_c2_dt,(setter)StateCell_set_c2_dt,
+	PyDoc_STR("*float*: c2 coefficient cumulated for current day [1/cycle]\n\n*Info*: NREL NMC Life Model"),
  	NULL},
 {"cell_current", (getter)StateCell_get_cell_current,(setter)StateCell_set_cell_current,
 	PyDoc_STR("*float*: Cell current [A]"),
@@ -1821,11 +2046,38 @@ static PyGetSetDef StateCell_getset[] = {
 {"charge_mode", (getter)StateCell_get_charge_mode,(setter)StateCell_set_charge_mode,
 	PyDoc_STR("*float*: Charge (0), Idle (1), Discharge (2) [0/1/2]"),
  	NULL},
+{"cum_dt", (getter)StateCell_get_cum_dt,(setter)StateCell_set_cum_dt,
+	PyDoc_STR("*float*: Elapsed time for current day [day]\n\n*Info*: NREL NMC Life Model"),
+ 	NULL},
+{"cycle_DOD", (getter)StateCell_get_cycle_DOD,(setter)StateCell_set_cycle_DOD,
+	PyDoc_STR("*float*: cycle_DOD of last cycle [%]"),
+ 	NULL},
+{"cycle_DOD_max", (getter)StateCell_get_cycle_DOD_max,(setter)StateCell_set_cycle_DOD_max,
+	PyDoc_STR("*sequence*: Max DODs of cycles concluded in current day [%]\n\n*Info*: NREL NMC Life Model"),
+ 	NULL},
+{"cycle_DOD_range", (getter)StateCell_get_cycle_DOD_range,(setter)StateCell_set_cycle_DOD_range,
+	PyDoc_STR("*sequence*: DOD cycle_range of each cycle [%]\n\n*Info*: NREL NMC Life Model"),
+ 	NULL},
+{"cycle_range", (getter)StateCell_get_cycle_range,(setter)StateCell_set_cycle_range,
+	PyDoc_STR("*float*: Range of last cycle [%]"),
+ 	NULL},
 {"day_age_of_battery", (getter)StateCell_get_day_age_of_battery,(setter)StateCell_set_day_age_of_battery,
 	PyDoc_STR("*float*: Day age of battery [day]"),
  	NULL},
 {"dq_relative_calendar_old", (getter)StateCell_get_dq_relative_calendar_old,(setter)StateCell_set_dq_relative_calendar_old,
 	PyDoc_STR("*float*: Change in capacity of last time step [%]"),
+ 	NULL},
+{"dq_relative_li1", (getter)StateCell_get_dq_relative_li1,(setter)StateCell_set_dq_relative_li1,
+	PyDoc_STR("*float*: Cumulative capacity change from time-dependent Li loss [1]\n\n*Info*: NREL NMC Life Model"),
+ 	NULL},
+{"dq_relative_li2", (getter)StateCell_get_dq_relative_li2,(setter)StateCell_set_dq_relative_li2,
+	PyDoc_STR("*float*: Cumulative capacity change from cycle-dependent Li loss [1]\n\n*Info*: NREL NMC Life Model"),
+ 	NULL},
+{"dq_relative_li3", (getter)StateCell_get_dq_relative_li3,(setter)StateCell_set_dq_relative_li3,
+	PyDoc_STR("*float*: Cumulative capacity change from BOL Li loss [1]\n\n*Info*: NREL NMC Life Model"),
+ 	NULL},
+{"dq_relative_neg", (getter)StateCell_get_dq_relative_neg,(setter)StateCell_set_dq_relative_neg,
+	PyDoc_STR("*float*: Cumulative capacity change from negative electrode [1]\n\n*Info*: NREL NMC Life Model"),
  	NULL},
 {"n_cycles", (getter)StateCell_get_n_cycles,(setter)StateCell_set_n_cycles,
 	PyDoc_STR("*float*: Number of cycles"),
@@ -1854,6 +2106,12 @@ static PyGetSetDef StateCell_getset[] = {
 {"q_relative_cycle", (getter)StateCell_get_q_relative_cycle,(setter)StateCell_set_q_relative_cycle,
 	PyDoc_STR("*float*: Relative capacity due to cycling effects [%]"),
  	NULL},
+{"q_relative_li", (getter)StateCell_get_q_relative_li,(setter)StateCell_set_q_relative_li,
+	PyDoc_STR("*float*: Relative capacity due to loss of lithium inventory [%]\n\n*Info*: NREL NMC Life Model"),
+ 	NULL},
+{"q_relative_neg", (getter)StateCell_get_q_relative_neg,(setter)StateCell_set_q_relative_neg,
+	PyDoc_STR("*float*: Relative capacity due to loss of anode material [%]\n\n*Info*: NREL NMC Life Model"),
+ 	NULL},
 {"q_relative_thermal", (getter)StateCell_get_q_relative_thermal,(setter)StateCell_set_q_relative_thermal,
 	PyDoc_STR("*float*: Relative capacity due to thermal effects [Ah]"),
  	NULL},
@@ -1867,19 +2125,16 @@ static PyGetSetDef StateCell_getset[] = {
 	PyDoc_STR("*float*: Lead acid - Cell capacity at n-hr discharge rate [Ah]"),
  	NULL},
 {"rainflow_Xlt", (getter)StateCell_get_rainflow_Xlt,(setter)StateCell_set_rainflow_Xlt,
-	PyDoc_STR("*float*: Rainflow range of second to last half cycle [%]"),
+	PyDoc_STR("*float*: Rainflow cycle_range of second to last half cycle [%]"),
  	NULL},
 {"rainflow_Ylt", (getter)StateCell_get_rainflow_Ylt,(setter)StateCell_set_rainflow_Ylt,
-	PyDoc_STR("*float*: Rainflow range of last half cycle [%]"),
+	PyDoc_STR("*float*: Rainflow cycle_range of last half cycle [%]"),
  	NULL},
 {"rainflow_jlt", (getter)StateCell_get_rainflow_jlt,(setter)StateCell_set_rainflow_jlt,
 	PyDoc_STR("*float*: Rainflow number of turning points"),
  	NULL},
 {"rainflow_peaks", (getter)StateCell_get_rainflow_peaks,(setter)StateCell_set_rainflow_peaks,
-	PyDoc_STR("*sequence*: Rainflow peaks of DOD [[%]]"),
- 	NULL},
-{"range", (getter)StateCell_get_range,(setter)StateCell_set_range,
-	PyDoc_STR("*float*: Cycle range [%]"),
+	PyDoc_STR("*sequence*: Rainflow peaks of cycle_DOD [[%]]"),
  	NULL},
 	{NULL}  /* Sentinel */
 };

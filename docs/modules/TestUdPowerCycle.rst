@@ -1,9 +1,9 @@
-.. _MhkWave:
+.. _TestUdPowerCycle:
 
-MhkWave
+TestUdPowerCycle
 ***********************************
 
-Wrapper for SAM Simulation Core model: `cmod_mhk_wave.cpp <https://github.com/NREL/ssc/blob/develop/ssc/cmod_mhk_wave.cpp>`_
+Wrapper for SAM Simulation Core model: `cmod_test_ud_power_cycle.cpp <https://github.com/NREL/ssc/blob/develop/ssc/cmod_test_ud_power_cycle.cpp>`_
 
 Input Consistency Warning
 ==================================
@@ -13,14 +13,6 @@ that enforce consistency are not available in this PySAM module. Therefore,
 the onus is on the PySAM user to check that interdependencies are correctly handled. The variables which may require
 additional logic include:
 
- - balance_of_system_cost_total
- - device_costs_total
- - device_rated_power
- - financial_cost_total
- - number_devices
- - system_capacity
- - total_operating_cost
- - wave_power_matrix
 
 Provided for each of these inputs is a list of other inputs that are potentially interdependent. 
 
@@ -29,26 +21,26 @@ Creating an Instance
 
 Refer to the :ref:`Initializing a Model <initializing>` page for details on the different ways to create an instance of a PySAM class.
 
-**MhkWave model description**
+**TestUdPowerCycle model description**
 
-.. automodule:: PySAM.MhkWave
+.. automodule:: PySAM.TestUdPowerCycle
 	:members:
 
 Functions
 ===================================
 
-.. autoclass:: PySAM.MhkWave.MhkWave
+.. autoclass:: PySAM.TestUdPowerCycle.TestUdPowerCycle
 	:members:
 
-MHKWave Group
+Common Group
 ======================================================
 
-.. autoclass:: PySAM.MhkWave.MhkWave.MHKWave
+.. autoclass:: PySAM.TestUdPowerCycle.TestUdPowerCycle.Common
 	:members:
 
 Outputs Group
 ======================================================
 
-.. autoclass:: PySAM.MhkWave.MhkWave.Outputs
+.. autoclass:: PySAM.TestUdPowerCycle.TestUdPowerCycle.Outputs
 	:members:
 
