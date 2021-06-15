@@ -2489,7 +2489,7 @@ static PyMethodDef BatteryStatefulModule_methods[] = {
 };
 
 PyDoc_STRVAR(module_doc,
-			 "BatteryStateful");
+			 "BatteryStateful has two major differences from the Battery module: 1) it contains only the “physical” component models of the battery (thermal, voltage, capacity, lifetime) and none of the dispatch methods (peak shaving, etc) of the Battery module; 2) the Battery module runs annual or multi-year simulations in a single execution, whereas BatteryStateful is run one timestep at a time using control variables, current or power, and can be run at sub-minute timesteps.");
 
 
 static int
