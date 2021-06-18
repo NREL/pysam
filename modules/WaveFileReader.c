@@ -637,7 +637,7 @@ static PyMethodDef WaveFileReaderModule_methods[] = {
 };
 
 PyDoc_STRVAR(module_doc,
-			 "WaveFileReader");
+			 "Load wave resource data from file. Data can be in either Probability distribution format or 3-hour time series arrays");
 
 
 static int
