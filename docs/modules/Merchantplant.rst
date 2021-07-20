@@ -108,6 +108,24 @@ CapacityPayments Group
 .. autoclass:: PySAM.Merchantplant.Merchantplant.CapacityPayments
 	:members:
 
+Battery Group
+======================================================
+
+.. autoclass:: PySAM.Merchantplant.Merchantplant.Battery
+	:members:
+
+ChargesByMonth Group
+======================================================
+
+.. autoclass:: PySAM.Merchantplant.Merchantplant.ChargesByMonth
+	:members:
+
+Monthly Group
+======================================================
+
+.. autoclass:: PySAM.Merchantplant.Merchantplant.Monthly
+	:members:
+
 GridLimits Group
 ======================================================
 

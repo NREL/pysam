@@ -43,6 +43,23 @@ Controls_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+Controls_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Controls_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "BatteryStateful", "Controls")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 Controls_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &Controls_Type;
@@ -52,7 +69,9 @@ Controls_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Controls_methods[] = {
 		{"assign",            (PyCFunction)Controls_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Controls_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Controls_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Controls_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Controls_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Controls_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -206,6 +225,23 @@ ParamsCell_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+ParamsCell_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &ParamsCell_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "BatteryStateful", "ParamsCell")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 ParamsCell_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &ParamsCell_Type;
@@ -215,7 +251,9 @@ ParamsCell_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef ParamsCell_methods[] = {
 		{"assign",            (PyCFunction)ParamsCell_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``ParamsCell_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``ParamsCell_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)ParamsCell_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``ParamsCell_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)ParamsCell_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -640,7 +678,7 @@ static PyGetSetDef ParamsCell_getset[] = {
 	PyDoc_STR("*float*: Hours to discharge for qn rate [h]\n\n*Required*: True if chem=0"),
  	NULL},
 {"life_model", (getter)ParamsCell_get_life_model,(setter)ParamsCell_set_life_model,
-	PyDoc_STR("*float*: Battery life model specifier [0/1]\n\n*Options*: 0=calendar/cycle,1=NMC\n\n*Required*: True"),
+	PyDoc_STR("*float*: Battery life model specifier [0/1]\n\n*Options*: 0=calendar/cycle,1=NMC,2=LMO/LTO\n\n*Required*: True"),
  	NULL},
 {"maximum_SOC", (getter)ParamsCell_get_maximum_SOC,(setter)ParamsCell_set_maximum_SOC,
 	PyDoc_STR("*float*: Maximum allowed state-of-charge [%]\n\n*Required*: True"),
@@ -744,6 +782,23 @@ ParamsPack_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+ParamsPack_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &ParamsPack_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "BatteryStateful", "ParamsPack")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 ParamsPack_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &ParamsPack_Type;
@@ -753,7 +808,9 @@ ParamsPack_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef ParamsPack_methods[] = {
 		{"assign",            (PyCFunction)ParamsPack_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``ParamsPack_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``ParamsPack_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)ParamsPack_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``ParamsPack_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)ParamsPack_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -1087,6 +1144,23 @@ StatePack_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+StatePack_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &StatePack_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "BatteryStateful", "StatePack")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 StatePack_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &StatePack_Type;
@@ -1096,7 +1170,9 @@ StatePack_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef StatePack_methods[] = {
 		{"assign",            (PyCFunction)StatePack_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``StatePack_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``StatePack_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)StatePack_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``StatePack_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)StatePack_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -1445,6 +1521,23 @@ StateCell_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+StateCell_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &StateCell_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "BatteryStateful", "StateCell")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 StateCell_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &StateCell_Type;
@@ -1454,7 +1547,9 @@ StateCell_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef StateCell_methods[] = {
 		{"assign",            (PyCFunction)StateCell_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``StateCell_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``StateCell_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)StateCell_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``StateCell_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)StateCell_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -1482,6 +1577,30 @@ static int
 StateCell_set_DOD_min(VarGroupObject *self, PyObject *value, void *closure)
 {
 	return PySAM_double_setter(value, SAM_BatteryStateful_StateCell_DOD_min_nset, self->data_ptr);
+}
+
+static PyObject *
+StateCell_get_EFC(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_BatteryStateful_StateCell_EFC_nget, self->data_ptr);
+}
+
+static int
+StateCell_set_EFC(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_BatteryStateful_StateCell_EFC_nset, self->data_ptr);
+}
+
+static PyObject *
+StateCell_get_EFC_dt(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_BatteryStateful_StateCell_EFC_dt_nget, self->data_ptr);
+}
+
+static int
+StateCell_set_EFC_dt(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_BatteryStateful_StateCell_EFC_dt_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -1713,6 +1832,18 @@ StateCell_set_day_age_of_battery(VarGroupObject *self, PyObject *value, void *cl
 }
 
 static PyObject *
+StateCell_get_dq_relative_cal(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_BatteryStateful_StateCell_dq_relative_cal_nget, self->data_ptr);
+}
+
+static int
+StateCell_set_dq_relative_cal(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_BatteryStateful_StateCell_dq_relative_cal_nset, self->data_ptr);
+}
+
+static PyObject *
 StateCell_get_dq_relative_calendar_old(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_BatteryStateful_StateCell_dq_relative_calendar_old_nget, self->data_ptr);
@@ -1722,6 +1853,18 @@ static int
 StateCell_set_dq_relative_calendar_old(VarGroupObject *self, PyObject *value, void *closure)
 {
 	return PySAM_double_setter(value, SAM_BatteryStateful_StateCell_dq_relative_calendar_old_nset, self->data_ptr);
+}
+
+static PyObject *
+StateCell_get_dq_relative_cyc(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_BatteryStateful_StateCell_dq_relative_cyc_nget, self->data_ptr);
+}
+
+static int
+StateCell_set_dq_relative_cyc(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_BatteryStateful_StateCell_dq_relative_cyc_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -2000,12 +2143,30 @@ StateCell_set_rainflow_peaks(VarGroupObject *self, PyObject *value, void *closur
 	return PySAM_array_setter(value, SAM_BatteryStateful_StateCell_rainflow_peaks_aset, self->data_ptr);
 }
 
+static PyObject *
+StateCell_get_temp_avg(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_BatteryStateful_StateCell_temp_avg_nget, self->data_ptr);
+}
+
+static int
+StateCell_set_temp_avg(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_BatteryStateful_StateCell_temp_avg_nset, self->data_ptr);
+}
+
 static PyGetSetDef StateCell_getset[] = {
 {"DOD_max", (getter)StateCell_get_DOD_max,(setter)StateCell_set_DOD_max,
-	PyDoc_STR("*float*: Max DOD of battery for current day [%]\n\n*Info*: NREL NMC Life Model"),
+	PyDoc_STR("*float*: Max DOD of battery for current day [%]\n\n*Info*: Cycles for Life Model"),
  	NULL},
 {"DOD_min", (getter)StateCell_get_DOD_min,(setter)StateCell_set_DOD_min,
-	PyDoc_STR("*float*: Min DOD of battery for current day [%]\n\n*Info*: NREL NMC Life Model"),
+	PyDoc_STR("*float*: Min DOD of battery for current day [%]\n\n*Info*: Cycles for Life Model"),
+ 	NULL},
+{"EFC", (getter)StateCell_get_EFC,(setter)StateCell_set_EFC,
+	PyDoc_STR("*float*: Total Equivalent Full Cycles [1]\n\n*Info*: LMO/LTO Life Model"),
+ 	NULL},
+{"EFC_dt", (getter)StateCell_get_EFC_dt,(setter)StateCell_set_EFC_dt,
+	PyDoc_STR("*float*: Equivalent Full Cycles cumulated for current day [1]\n\n*Info*: LMO/LTO Life Model"),
  	NULL},
 {"I_loss", (getter)StateCell_get_I_loss,(setter)StateCell_set_I_loss,
 	PyDoc_STR("*float*: Lifetime and thermal losses [A]"),
@@ -2020,19 +2181,19 @@ static PyGetSetDef StateCell_getset[] = {
 	PyDoc_STR("*float*: Average cycle cycle_range [%]"),
  	NULL},
 {"b1_dt", (getter)StateCell_get_b1_dt,(setter)StateCell_set_b1_dt,
-	PyDoc_STR("*float*: b1 coefficient cumulated for current day [day^-0.5]\n\n*Info*: NREL NMC Life Model"),
+	PyDoc_STR("*float*: b1 coefficient cumulated for current day [day^-0.5]\n\n*Info*: NMC Life Model"),
  	NULL},
 {"b2_dt", (getter)StateCell_get_b2_dt,(setter)StateCell_set_b2_dt,
-	PyDoc_STR("*float*: b2 coefficient cumulated for current day [1/cycle]\n\n*Info*: NREL NMC Life Model"),
+	PyDoc_STR("*float*: b2 coefficient cumulated for current day [1/cycle]\n\n*Info*: NMC Life Model"),
  	NULL},
 {"b3_dt", (getter)StateCell_get_b3_dt,(setter)StateCell_set_b3_dt,
-	PyDoc_STR("*float*: b3 coefficient cumulated for current day [1]\n\n*Info*: NREL NMC Life Model"),
+	PyDoc_STR("*float*: b3 coefficient cumulated for current day [1]\n\n*Info*: NMC Life Model"),
  	NULL},
 {"c0_dt", (getter)StateCell_get_c0_dt,(setter)StateCell_set_c0_dt,
-	PyDoc_STR("*float*: c0 coefficient cumulated for current day [Ah]\n\n*Info*: NREL NMC Life Model"),
+	PyDoc_STR("*float*: c0 coefficient cumulated for current day [Ah]\n\n*Info*: NMC Life Model"),
  	NULL},
 {"c2_dt", (getter)StateCell_get_c2_dt,(setter)StateCell_set_c2_dt,
-	PyDoc_STR("*float*: c2 coefficient cumulated for current day [1/cycle]\n\n*Info*: NREL NMC Life Model"),
+	PyDoc_STR("*float*: c2 coefficient cumulated for current day [1/cycle]\n\n*Info*: NMC Life Model"),
  	NULL},
 {"cell_current", (getter)StateCell_get_cell_current,(setter)StateCell_set_cell_current,
 	PyDoc_STR("*float*: Cell current [A]"),
@@ -2047,16 +2208,16 @@ static PyGetSetDef StateCell_getset[] = {
 	PyDoc_STR("*float*: Charge (0), Idle (1), Discharge (2) [0/1/2]"),
  	NULL},
 {"cum_dt", (getter)StateCell_get_cum_dt,(setter)StateCell_set_cum_dt,
-	PyDoc_STR("*float*: Elapsed time for current day [day]\n\n*Info*: NREL NMC Life Model"),
+	PyDoc_STR("*float*: Elapsed time for current day [day]\n\n*Info*: Cycles for Life Model"),
  	NULL},
 {"cycle_DOD", (getter)StateCell_get_cycle_DOD,(setter)StateCell_set_cycle_DOD,
 	PyDoc_STR("*float*: cycle_DOD of last cycle [%]"),
  	NULL},
 {"cycle_DOD_max", (getter)StateCell_get_cycle_DOD_max,(setter)StateCell_set_cycle_DOD_max,
-	PyDoc_STR("*sequence*: Max DODs of cycles concluded in current day [%]\n\n*Info*: NREL NMC Life Model"),
+	PyDoc_STR("*sequence*: Max DODs of cycles concluded in current day [%]\n\n*Info*: Cycles for Life Model"),
  	NULL},
 {"cycle_DOD_range", (getter)StateCell_get_cycle_DOD_range,(setter)StateCell_set_cycle_DOD_range,
-	PyDoc_STR("*sequence*: DOD cycle_range of each cycle [%]\n\n*Info*: NREL NMC Life Model"),
+	PyDoc_STR("*sequence*: DOD cycle_range of each cycle [%]\n\n*Info*: NMC Life Model"),
  	NULL},
 {"cycle_range", (getter)StateCell_get_cycle_range,(setter)StateCell_set_cycle_range,
 	PyDoc_STR("*float*: Range of last cycle [%]"),
@@ -2064,20 +2225,26 @@ static PyGetSetDef StateCell_getset[] = {
 {"day_age_of_battery", (getter)StateCell_get_day_age_of_battery,(setter)StateCell_set_day_age_of_battery,
 	PyDoc_STR("*float*: Day age of battery [day]"),
  	NULL},
+{"dq_relative_cal", (getter)StateCell_get_dq_relative_cal,(setter)StateCell_set_dq_relative_cal,
+	PyDoc_STR("*float*: Cumulative capacity change from calendar degradation [%]\n\n*Info*: LMO/LTO Life Model"),
+ 	NULL},
 {"dq_relative_calendar_old", (getter)StateCell_get_dq_relative_calendar_old,(setter)StateCell_set_dq_relative_calendar_old,
 	PyDoc_STR("*float*: Change in capacity of last time step [%]"),
  	NULL},
+{"dq_relative_cyc", (getter)StateCell_get_dq_relative_cyc,(setter)StateCell_set_dq_relative_cyc,
+	PyDoc_STR("*float*: Cumulative capacity change from cycling degradation [%]\n\n*Info*: LMO/LTO Life Model"),
+ 	NULL},
 {"dq_relative_li1", (getter)StateCell_get_dq_relative_li1,(setter)StateCell_set_dq_relative_li1,
-	PyDoc_STR("*float*: Cumulative capacity change from time-dependent Li loss [1]\n\n*Info*: NREL NMC Life Model"),
+	PyDoc_STR("*float*: Cumulative capacity change from time-dependent Li loss [1]\n\n*Info*: NMC Life Model"),
  	NULL},
 {"dq_relative_li2", (getter)StateCell_get_dq_relative_li2,(setter)StateCell_set_dq_relative_li2,
-	PyDoc_STR("*float*: Cumulative capacity change from cycle-dependent Li loss [1]\n\n*Info*: NREL NMC Life Model"),
+	PyDoc_STR("*float*: Cumulative capacity change from cycle-dependent Li loss [1]\n\n*Info*: NMC Life Model"),
  	NULL},
 {"dq_relative_li3", (getter)StateCell_get_dq_relative_li3,(setter)StateCell_set_dq_relative_li3,
-	PyDoc_STR("*float*: Cumulative capacity change from BOL Li loss [1]\n\n*Info*: NREL NMC Life Model"),
+	PyDoc_STR("*float*: Cumulative capacity change from BOL Li loss [1]\n\n*Info*: NMC Life Model"),
  	NULL},
 {"dq_relative_neg", (getter)StateCell_get_dq_relative_neg,(setter)StateCell_set_dq_relative_neg,
-	PyDoc_STR("*float*: Cumulative capacity change from negative electrode [1]\n\n*Info*: NREL NMC Life Model"),
+	PyDoc_STR("*float*: Cumulative capacity change from negative electrode [1]\n\n*Info*: NMC Life Model"),
  	NULL},
 {"n_cycles", (getter)StateCell_get_n_cycles,(setter)StateCell_set_n_cycles,
 	PyDoc_STR("*float*: Number of cycles"),
@@ -2107,10 +2274,10 @@ static PyGetSetDef StateCell_getset[] = {
 	PyDoc_STR("*float*: Relative capacity due to cycling effects [%]"),
  	NULL},
 {"q_relative_li", (getter)StateCell_get_q_relative_li,(setter)StateCell_set_q_relative_li,
-	PyDoc_STR("*float*: Relative capacity due to loss of lithium inventory [%]\n\n*Info*: NREL NMC Life Model"),
+	PyDoc_STR("*float*: Relative capacity due to loss of lithium inventory [%]\n\n*Info*: NMC Life Model"),
  	NULL},
 {"q_relative_neg", (getter)StateCell_get_q_relative_neg,(setter)StateCell_set_q_relative_neg,
-	PyDoc_STR("*float*: Relative capacity due to loss of anode material [%]\n\n*Info*: NREL NMC Life Model"),
+	PyDoc_STR("*float*: Relative capacity due to loss of anode material [%]\n\n*Info*: NMC Life Model"),
  	NULL},
 {"q_relative_thermal", (getter)StateCell_get_q_relative_thermal,(setter)StateCell_set_q_relative_thermal,
 	PyDoc_STR("*float*: Relative capacity due to thermal effects [%]"),
@@ -2135,6 +2302,9 @@ static PyGetSetDef StateCell_getset[] = {
  	NULL},
 {"rainflow_peaks", (getter)StateCell_get_rainflow_peaks,(setter)StateCell_set_rainflow_peaks,
 	PyDoc_STR("*sequence*: Rainflow peaks of cycle_DOD [[%]]"),
+ 	NULL},
+{"temp_avg", (getter)StateCell_get_temp_avg,(setter)StateCell_set_temp_avg,
+	PyDoc_STR("*float*: Average temperature for current day [K]\n\n*Info*: LMO/LTO Life Model"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -2285,6 +2455,20 @@ BatteryStateful_assign(CmodStatefulObject *self, PyObject *args)
 	return Py_None;
 }
 
+static PyObject *
+BatteryStateful_replace(CmodObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_replace_from_nested_dict((PyObject*)self, self->x_attr, self->data_ptr, dict, "BatteryStateful"))
+		return NULL;
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
 
 static PyObject *
 BatteryStateful_export(CmodStatefulObject *self, PyObject *args)
@@ -2311,6 +2495,8 @@ static PyMethodDef BatteryStateful_methods[] = {
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
 		{"assign",            (PyCFunction)BatteryStateful_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Controls': { var: val, ...}, ...}``")},
+		{"replace",            (PyCFunction)BatteryStateful_replace,  METH_VARARGS,
+				PyDoc_STR("replace(dict) -> None\n Replace attributes from nested dictionary, except for Outputs. Unassigns all values in each Group then assigns from the input dict.\n\n``nested_dict = { 'Controls': { var: val, ...}, ...}``")},
 		{"export",            (PyCFunction)BatteryStateful_export,  METH_VARARGS,
 				PyDoc_STR("export() -> dict\n Export attributes into nested dictionary")},
 		{"value",             (PyCFunction)BatteryStateful_value, METH_VARARGS,

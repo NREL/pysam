@@ -43,6 +43,23 @@ WeatherReader_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+WeatherReader_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &WeatherReader_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "WaveFileReader", "WeatherReader")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 WeatherReader_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &WeatherReader_Type;
@@ -52,7 +69,9 @@ WeatherReader_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef WeatherReader_methods[] = {
 		{"assign",            (PyCFunction)WeatherReader_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``WeatherReader_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``WeatherReader_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)WeatherReader_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``WeatherReader_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)WeatherReader_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -82,12 +101,42 @@ WeatherReader_set_wave_resource_filename(VarGroupObject *self, PyObject *value, 
 	return PySAM_string_setter(value, SAM_WaveFileReader_WeatherReader_wave_resource_filename_sset, self->data_ptr);
 }
 
+static PyObject *
+WeatherReader_get_wave_resource_filename_ts(VarGroupObject *self, void *closure)
+{
+	return PySAM_string_getter(SAM_WaveFileReader_WeatherReader_wave_resource_filename_ts_sget, self->data_ptr);
+}
+
+static int
+WeatherReader_set_wave_resource_filename_ts(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_string_setter(value, SAM_WaveFileReader_WeatherReader_wave_resource_filename_ts_sset, self->data_ptr);
+}
+
+static PyObject *
+WeatherReader_get_wave_resource_model_choice(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_WaveFileReader_WeatherReader_wave_resource_model_choice_nget, self->data_ptr);
+}
+
+static int
+WeatherReader_set_wave_resource_model_choice(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_WaveFileReader_WeatherReader_wave_resource_model_choice_nset, self->data_ptr);
+}
+
 static PyGetSetDef WeatherReader_getset[] = {
 {"use_specific_wf_wave", (getter)WeatherReader_get_use_specific_wf_wave,(setter)WeatherReader_set_use_specific_wf_wave,
-	PyDoc_STR("*float*: user specified file [0/1]\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: If not provided, assumed to be 0\n\n*Changes to this variable may require updating the values of the following*: \n\t - wave_resource_filename\n"),
+	PyDoc_STR("*float*: user specified file [0/1]\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"wave_resource_filename", (getter)WeatherReader_get_wave_resource_filename,(setter)WeatherReader_set_wave_resource_filename,
-	PyDoc_STR("*str*: local weather file path\n\n*Constraints*: LOCAL_FILE\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - use_specific_wf_wave\n"),
+	PyDoc_STR("*str*: File path with Wave Height x Period Distribution as 2-D PDF\n\n*Constraints*: LOCAL_FILE\n\n*Required*: True if wave_resource_model_choice=0"),
+ 	NULL},
+{"wave_resource_filename_ts", (getter)WeatherReader_get_wave_resource_filename_ts,(setter)WeatherReader_set_wave_resource_filename_ts,
+	PyDoc_STR("*str*: File path with 3-hour Wave Height and Period data as Time Series array\n\n*Constraints*: LOCAL_FILE\n\n*Required*: True if wave_resource_model_choice=1"),
+ 	NULL},
+{"wave_resource_model_choice", (getter)WeatherReader_get_wave_resource_model_choice,(setter)WeatherReader_set_wave_resource_model_choice,
+	PyDoc_STR("*float*: Joint PDF or 3-hour wave resource data [0/1]\n\n*Constraints*: INTEGER\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -176,6 +225,23 @@ Outputs_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+Outputs_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Outputs_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "WaveFileReader", "Outputs")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 Outputs_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &Outputs_Type;
@@ -185,7 +251,9 @@ Outputs_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Outputs_methods[] = {
 		{"assign",            (PyCFunction)Outputs_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Outputs_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Outputs_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Outputs_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Outputs_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -222,6 +290,24 @@ Outputs_get_data_source(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_day(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_WaveFileReader_Outputs_day_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_energy_period(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_WaveFileReader_Outputs_energy_period_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_hour(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_WaveFileReader_Outputs_hour_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_lat(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_WaveFileReader_Outputs_lat_nget, self->data_ptr);
@@ -231,6 +317,18 @@ static PyObject *
 Outputs_get_lon(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_WaveFileReader_Outputs_lon_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_minute(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_WaveFileReader_Outputs_minute_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_month(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_WaveFileReader_Outputs_month_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -252,9 +350,27 @@ Outputs_get_notes(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_number_hours(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_WaveFileReader_Outputs_number_hours_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_number_records(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_WaveFileReader_Outputs_number_records_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_sea_bed(VarGroupObject *self, void *closure)
 {
 	return PySAM_string_getter(SAM_WaveFileReader_Outputs_sea_bed_sget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_significant_wave_height(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_WaveFileReader_Outputs_significant_wave_height_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -275,6 +391,12 @@ Outputs_get_wave_resource_matrix(VarGroupObject *self, void *closure)
 	return PySAM_matrix_getter(SAM_WaveFileReader_Outputs_wave_resource_matrix_mget, self->data_ptr);
 }
 
+static PyObject *
+Outputs_get_year(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_WaveFileReader_Outputs_year_aget, self->data_ptr);
+}
+
 static PyGetSetDef Outputs_getset[] = {
 {"average_power_flux", (getter)Outputs_get_average_power_flux,(setter)0,
 	PyDoc_STR("*float*: Distance to shore [kW/m]"),
@@ -291,11 +413,26 @@ static PyGetSetDef Outputs_getset[] = {
 {"data_source", (getter)Outputs_get_data_source,(setter)0,
 	PyDoc_STR("*str*: Data source"),
  	NULL},
+{"day", (getter)Outputs_get_day,(setter)0,
+	PyDoc_STR("*sequence*: Day [dy]"),
+ 	NULL},
+{"energy_period", (getter)Outputs_get_energy_period,(setter)0,
+	PyDoc_STR("*sequence*: Wave period time series data [s]"),
+ 	NULL},
+{"hour", (getter)Outputs_get_hour,(setter)0,
+	PyDoc_STR("*sequence*: Hour [hr]"),
+ 	NULL},
 {"lat", (getter)Outputs_get_lat,(setter)0,
 	PyDoc_STR("*float*: Latitude [deg]"),
  	NULL},
 {"lon", (getter)Outputs_get_lon,(setter)0,
 	PyDoc_STR("*float*: Longitude [deg]"),
+ 	NULL},
+{"minute", (getter)Outputs_get_minute,(setter)0,
+	PyDoc_STR("*sequence*: Minute [min]"),
+ 	NULL},
+{"month", (getter)Outputs_get_month,(setter)0,
+	PyDoc_STR("*sequence*: Month [mn]"),
  	NULL},
 {"name", (getter)Outputs_get_name,(setter)0,
 	PyDoc_STR("*str*: Name"),
@@ -306,8 +443,17 @@ static PyGetSetDef Outputs_getset[] = {
 {"notes", (getter)Outputs_get_notes,(setter)0,
 	PyDoc_STR("*str*: Notes"),
  	NULL},
+{"number_hours", (getter)Outputs_get_number_hours,(setter)0,
+	PyDoc_STR("*float*: Number of hours in wave time series"),
+ 	NULL},
+{"number_records", (getter)Outputs_get_number_records,(setter)0,
+	PyDoc_STR("*float*: Number of records in wave time series"),
+ 	NULL},
 {"sea_bed", (getter)Outputs_get_sea_bed,(setter)0,
 	PyDoc_STR("*str*: Sea bed"),
+ 	NULL},
+{"significant_wave_height", (getter)Outputs_get_significant_wave_height,(setter)0,
+	PyDoc_STR("*sequence*: Wave height time series data [m]"),
  	NULL},
 {"state", (getter)Outputs_get_state,(setter)0,
 	PyDoc_STR("*str*: State"),
@@ -317,6 +463,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"wave_resource_matrix", (getter)Outputs_get_wave_resource_matrix,(setter)0,
 	PyDoc_STR("*sequence[sequence]*: Frequency distribution of resource [m/s]"),
+ 	NULL},
+{"year", (getter)Outputs_get_year,(setter)0,
+	PyDoc_STR("*sequence*: Year [yr]"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -439,6 +588,20 @@ WaveFileReader_assign(CmodObject *self, PyObject *args)
 	return Py_None;
 }
 
+static PyObject *
+WaveFileReader_replace(CmodObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_replace_from_nested_dict((PyObject*)self, self->x_attr, self->data_ptr, dict, "WaveFileReader"))
+		return NULL;
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
 
 static PyObject *
 WaveFileReader_export(CmodObject *self, PyObject *args)
@@ -463,6 +626,8 @@ static PyMethodDef WaveFileReader_methods[] = {
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
 		{"assign",            (PyCFunction)WaveFileReader_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Weather Reader': { var: val, ...}, ...}``")},
+		{"replace",            (PyCFunction)WaveFileReader_replace,  METH_VARARGS,
+				PyDoc_STR("replace(dict) -> None\n Replace attributes from nested dictionary, except for Outputs. Unassigns all values in each Group then assigns from the input dict.\n\n``nested_dict = { 'Weather Reader': { var: val, ...}, ...}``")},
 		{"export",            (PyCFunction)WaveFileReader_export,  METH_VARARGS,
 				PyDoc_STR("export() -> dict\n Export attributes into nested dictionary")},
 		{"value",             (PyCFunction)WaveFileReader_value, METH_VARARGS,
@@ -628,7 +793,7 @@ static PyMethodDef WaveFileReaderModule_methods[] = {
 				PyDoc_STR("new() -> WaveFileReader")},
 		{"default",             WaveFileReader_default,         METH_VARARGS,
 				PyDoc_STR("default(config) -> WaveFileReader\n\nUse default attributes\n"
-				"`config` options:\n\n- \"MEwaveLCOECalculator\"")},
+				"`config` options:\n\n- \"MEwaveLCOECalculator\"\n- \"MEwaveNone\"")},
 		{"wrap",             WaveFileReader_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> WaveFileReader\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   WaveFileReader_from_existing,        METH_VARARGS,
@@ -637,7 +802,7 @@ static PyMethodDef WaveFileReaderModule_methods[] = {
 };
 
 PyDoc_STRVAR(module_doc,
-			 "Load wave resource data from file. Data can be in either Probability distribution format or 3-hour time series arrays");
+			 "Load wave resource data from file. Data can be in either probability distribution format or 3-hour time series arrays");
 
 
 static int

@@ -97,8 +97,10 @@ class Load(object):
 
 
 	crit_load = tuple
+	grid_outage = tuple
 	load = tuple
 	load_escalation = tuple
+	run_resiliency_calcs = float
 
 
 class BatteryCell(object):

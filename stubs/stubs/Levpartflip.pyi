@@ -32,6 +32,7 @@ class FinancialParameters(object):
 
 
 	analysis_period = float
+	batt_salvage_percentage = float
 	cost_debt_closing = float
 	cost_debt_fee = float
 	cost_other_financing = float
@@ -80,18 +81,20 @@ class SystemCosts(object):
 	add_om_num_types = float
 	annual_fuel_usage = float
 	annual_fuel_usage_lifetime = tuple
+	om_batt_capacity_cost = tuple
+	om_batt_fixed_cost = tuple
+	om_batt_replacement_cost = tuple
+	om_batt_variable_cost = tuple
 	om_capacity = tuple
-	om_capacity1 = tuple
-	om_capacity1_nameplate = float
-	om_capacity2 = tuple
-	om_capacity2_nameplate = float
 	om_capacity_escal = float
 	om_fixed = tuple
-	om_fixed1 = tuple
-	om_fixed2 = tuple
 	om_fixed_escal = float
 	om_fuel_cost = tuple
 	om_fuel_cost_escal = float
+	om_fuelcell_capacity_cost = tuple
+	om_fuelcell_fixed_cost = tuple
+	om_fuelcell_replacement_cost = tuple
+	om_fuelcell_variable_cost = tuple
 	om_opt_fuel_1_cost = tuple
 	om_opt_fuel_1_cost_escal = float
 	om_opt_fuel_1_usage = float
@@ -99,15 +102,13 @@ class SystemCosts(object):
 	om_opt_fuel_2_cost_escal = float
 	om_opt_fuel_2_usage = float
 	om_production = tuple
-	om_production1 = tuple
 	om_production1_values = tuple
-	om_production2 = tuple
 	om_production2_values = tuple
 	om_production_escal = float
-	om_replacement_cost1 = tuple
-	om_replacement_cost2 = tuple
 	om_replacement_cost_escal = float
 	total_installed_cost = float
+	ui_batt_capacity = float
+	ui_fuelcell_capacity = float
 
 
 class TaxCreditIncentives(object):
@@ -422,6 +423,59 @@ class IRRTargets(object):
 	tax_investor_preflip_tax_percent = float
 
 
+class Battery(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> dict:
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
+	batt_annual_charge_from_system = tuple
+	batt_annual_discharge_energy = tuple
+	batt_capacity_percent = tuple
+	battery_total_cost_lcos = float
+	grid_to_batt = tuple
+	monthly_batt_to_grid = tuple
+	monthly_grid_to_batt = tuple
+	monthly_grid_to_load = tuple
+	monthly_system_to_grid = tuple
+
+
+class ChargesByMonth(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> dict:
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
+	charge_w_sys_ec_ym = tuple
+	true_up_credits_ym = tuple
+	year1_monthly_ec_charge_with_system = tuple
+
+
+class Monthly(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> dict:
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
+	year1_monthly_ec_charge_gross_with_system = tuple
+	year1_monthly_electricity_to_grid = tuple
+
+
 class BatterySystem(object):
 	def assign(self): 
 		pass
@@ -462,10 +516,15 @@ class Outputs(object):
 	cbi_total_oth = float
 	cbi_total_sta = float
 	cbi_total_uti = float
-	cf_annual_costs = tuple
+	cf_annual_cost_lcos = tuple
+	cf_annual_discharge_lcos = tuple
+	cf_batt_replacement_cost = tuple
 	cf_battery_replacement_cost = tuple
 	cf_battery_replacement_cost_schedule = tuple
 	cf_cash_for_ds = tuple
+	cf_charging_cost_grid = tuple
+	cf_charging_cost_grid_month = tuple
+	cf_charging_cost_pv = tuple
 	cf_debt_balance = tuple
 	cf_debt_payment_interest = tuple
 	cf_debt_payment_principal = tuple
@@ -536,6 +595,9 @@ class Outputs(object):
 	cf_insurance_expense = tuple
 	cf_length = float
 	cf_net_salvage_value = tuple
+	cf_om_batt_capacity_expense = tuple
+	cf_om_batt_fixed_expense = tuple
+	cf_om_batt_production_expense = tuple
 	cf_om_capacity_expense = tuple
 	cf_om_fixed_expense = tuple
 	cf_om_fuel_expense = tuple
@@ -620,6 +682,7 @@ class Outputs(object):
 	cf_revenue_nov = tuple
 	cf_revenue_oct = tuple
 	cf_revenue_sep = tuple
+	cf_salvage_cost_lcos = tuple
 	cf_sponsor_aftertax = tuple
 	cf_sponsor_aftertax_cash = tuple
 	cf_sponsor_aftertax_irr = tuple
@@ -968,11 +1031,16 @@ class Outputs(object):
 	lcoptc_fed_real = float
 	lcoptc_sta_nom = float
 	lcoptc_sta_real = float
+	lcos_nom = float
+	lcos_real = float
 	lppa_nom = float
 	lppa_real = float
 	min_dscr = float
 	nominal_discount_rate = float
 	npv_annual_costs = float
+	npv_annual_costs_lcos = float
+	npv_energy_lcos_nom = float
+	npv_energy_lcos_real = float
 	npv_energy_nom = float
 	npv_energy_real = float
 	npv_ppa_revenue = float
@@ -1040,6 +1108,9 @@ class Levpartflip(object):
 	ConstructionFinancing = ConstructionFinancing
 	OtherCapitalCosts = OtherCapitalCosts
 	IRRTargets = IRRTargets
+	Battery = Battery
+	ChargesByMonth = ChargesByMonth
+	Monthly = Monthly
 	BatterySystem = BatterySystem
 	Outputs = Outputs
 

@@ -261,6 +261,7 @@ class Tou(object):
 	ppa_multiplier_model = float
 	q_rec_heattrace = float
 	q_rec_standby = float
+	timestep_load_fractions = tuple
 	weekday_schedule = tuple
 	weekend_schedule = tuple
 	wlim_series = tuple

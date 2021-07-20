@@ -39,18 +39,20 @@ class SystemCosts(object):
 	add_om_num_types = float
 	annual_fuel_usage = float
 	annual_fuel_usage_lifetime = tuple
+	om_batt_capacity_cost = tuple
+	om_batt_fixed_cost = tuple
+	om_batt_replacement_cost = tuple
+	om_batt_variable_cost = tuple
 	om_capacity = tuple
-	om_capacity1 = tuple
-	om_capacity1_nameplate = float
-	om_capacity2 = tuple
-	om_capacity2_nameplate = float
 	om_capacity_escal = float
 	om_fixed = tuple
-	om_fixed1 = tuple
-	om_fixed2 = tuple
 	om_fixed_escal = float
 	om_fuel_cost = tuple
 	om_fuel_cost_escal = float
+	om_fuelcell_capacity_cost = tuple
+	om_fuelcell_fixed_cost = tuple
+	om_fuelcell_replacement_cost = tuple
+	om_fuelcell_variable_cost = tuple
 	om_opt_fuel_1_cost = tuple
 	om_opt_fuel_1_cost_escal = float
 	om_opt_fuel_1_usage = float
@@ -58,14 +60,12 @@ class SystemCosts(object):
 	om_opt_fuel_2_cost_escal = float
 	om_opt_fuel_2_usage = float
 	om_production = tuple
-	om_production1 = tuple
 	om_production1_values = tuple
-	om_production2 = tuple
 	om_production2_values = tuple
 	om_production_escal = float
-	om_replacement_cost1 = tuple
-	om_replacement_cost2 = tuple
 	om_replacement_cost_escal = float
+	ui_batt_capacity = float
+	ui_fuelcell_capacity = float
 
 
 class Depreciation(object):

@@ -112,6 +112,24 @@ IRRTargets Group
 .. autoclass:: PySAM.Levpartflip.Levpartflip.IRRTargets
 	:members:
 
+Battery Group
+======================================================
+
+.. autoclass:: PySAM.Levpartflip.Levpartflip.Battery
+	:members:
+
+ChargesByMonth Group
+======================================================
+
+.. autoclass:: PySAM.Levpartflip.Levpartflip.ChargesByMonth
+	:members:
+
+Monthly Group
+======================================================
+
+.. autoclass:: PySAM.Levpartflip.Levpartflip.Monthly
+	:members:
+
 BatterySystem Group
 ======================================================
 

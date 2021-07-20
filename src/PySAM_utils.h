@@ -933,6 +933,67 @@ static int PySAM_assign_from_nested_dict(PyObject* self, PyObject* x_attr, void 
 }
 
 //
+// Methods for replacing class attributes from a dictionary
+//
+
+static int PySAM_replace_from_dict(PyTypeObject *tp, void *data_ptr, PyObject *dict, const char *tech, const char *group){
+    PyGetSetDef* getset = tp->tp_getset;
+    while(getset->name){
+        SAM_error error = new_error();
+        char ssc_name[1024];
+        if (strcmp(group, "AdjustmentFactors") == 0){
+            strcpy(ssc_name, "adjust:");
+            strcat(ssc_name, getset->name);
+        }
+        else {
+            strcpy(ssc_name, getset->name);
+        }
+        SAM_table_unassign_entry(data_ptr, ssc_name, &error);
+        PySAM_has_error(error);
+        getset++;
+    }
+    return PySAM_assign_from_dict(data_ptr, dict, tech, group);
+}
+
+static int PySAM_replace_from_nested_dict(PyObject* self, PyObject* x_attr, void *data_ptr, PyObject *dict, const char *tech){
+    PyObject* key;
+    PyObject* group_val;
+    Py_ssize_t pos = 0;
+
+    PyObject* ascii_mystring = NULL;
+    PyObject* empty_dict = PyDict_New();
+
+    while (PyDict_Next(x_attr, &pos, &key, &group_val)){
+        ascii_mystring = PyUnicode_AsASCIIString(key);
+        char* name = PyBytes_AsString(ascii_mystring);
+        PySAM_error_context_set(name);
+
+        if (strcmp(name, "Outputs") == 0)
+            continue;
+
+        PyObject* value = PyDict_GetItemString(dict, name);
+
+        if (!value)
+            value = empty_dict;
+
+        PyTypeObject* tp = (PyTypeObject*)PyObject_Type(group_val);
+        int success = PySAM_replace_from_dict(tp, data_ptr, value, tech, name);
+        Py_XDECREF(tp);
+        if (!success)
+            goto fail;
+    }
+    Py_XDECREF(empty_dict);
+    Py_XDECREF(ascii_mystring);
+    PySAM_error_context_clear();
+    return 1;
+    fail:
+    Py_XDECREF(empty_dict);
+    Py_XDECREF(ascii_mystring);
+    PySAM_error_context_clear();
+    return 0;
+}
+
+//
 // Methods for exporting class attributes into a dictionary
 //
 
@@ -1042,7 +1103,7 @@ static int PySAM_load_defaults(PyObject* self, PyObject* x_attr, void* data_ptr,
     return 0;
 }
 
-// assigning value by name
+// assigning and unassigning value by name
 
 static PyObject* PySAM_run_getset(PyObject *self, PyObject *arg, PyObject * x_attr, char* name, char* VarGroup_name){
     if (!PySAM_check_lib_loaded()) return NULL;

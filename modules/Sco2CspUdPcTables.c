@@ -43,6 +43,23 @@ SystemDesign_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+SystemDesign_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &SystemDesign_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Sco2CspUdPcTables", "SystemDesign")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 SystemDesign_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &SystemDesign_Type;
@@ -52,7 +69,9 @@ SystemDesign_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef SystemDesign_methods[] = {
 		{"assign",            (PyCFunction)SystemDesign_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``SystemDesign_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``SystemDesign_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)SystemDesign_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``SystemDesign_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)SystemDesign_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -296,6 +315,23 @@ HeatExchangerDesign_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+HeatExchangerDesign_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &HeatExchangerDesign_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Sco2CspUdPcTables", "HeatExchangerDesign")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 HeatExchangerDesign_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &HeatExchangerDesign_Type;
@@ -305,7 +341,9 @@ HeatExchangerDesign_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef HeatExchangerDesign_methods[] = {
 		{"assign",            (PyCFunction)HeatExchangerDesign_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``HeatExchangerDesign_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``HeatExchangerDesign_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)HeatExchangerDesign_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``HeatExchangerDesign_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)HeatExchangerDesign_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -804,6 +842,23 @@ Common_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+Common_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Common_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Sco2CspUdPcTables", "Common")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 Common_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &Common_Type;
@@ -813,7 +868,9 @@ Common_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Common_methods[] = {
 		{"assign",            (PyCFunction)Common_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Common_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Common_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Common_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Common_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Common_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -1192,6 +1249,23 @@ PHXDesign_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+PHXDesign_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &PHXDesign_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Sco2CspUdPcTables", "PHXDesign")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 PHXDesign_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &PHXDesign_Type;
@@ -1201,7 +1275,9 @@ PHXDesign_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef PHXDesign_methods[] = {
 		{"assign",            (PyCFunction)PHXDesign_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``PHXDesign_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``PHXDesign_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)PHXDesign_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``PHXDesign_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)PHXDesign_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -1340,6 +1416,23 @@ AirCoolerDesign_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+AirCoolerDesign_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &AirCoolerDesign_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Sco2CspUdPcTables", "AirCoolerDesign")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 AirCoolerDesign_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &AirCoolerDesign_Type;
@@ -1349,7 +1442,9 @@ AirCoolerDesign_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef AirCoolerDesign_methods[] = {
 		{"assign",            (PyCFunction)AirCoolerDesign_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``AirCoolerDesign_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``AirCoolerDesign_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)AirCoolerDesign_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``AirCoolerDesign_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)AirCoolerDesign_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -1518,6 +1613,23 @@ Outputs_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+Outputs_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Outputs_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Sco2CspUdPcTables", "Outputs")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 Outputs_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &Outputs_Type;
@@ -1527,7 +1639,9 @@ Outputs_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Outputs_methods[] = {
 		{"assign",            (PyCFunction)Outputs_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Outputs_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Outputs_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Outputs_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Outputs_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -3075,6 +3189,20 @@ Sco2CspUdPcTables_assign(CmodObject *self, PyObject *args)
 	return Py_None;
 }
 
+static PyObject *
+Sco2CspUdPcTables_replace(CmodObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_replace_from_nested_dict((PyObject*)self, self->x_attr, self->data_ptr, dict, "Sco2CspUdPcTables"))
+		return NULL;
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
 
 static PyObject *
 Sco2CspUdPcTables_export(CmodObject *self, PyObject *args)
@@ -3099,6 +3227,8 @@ static PyMethodDef Sco2CspUdPcTables_methods[] = {
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
 		{"assign",            (PyCFunction)Sco2CspUdPcTables_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'System Design': { var: val, ...}, ...}``")},
+		{"replace",            (PyCFunction)Sco2CspUdPcTables_replace,  METH_VARARGS,
+				PyDoc_STR("replace(dict) -> None\n Replace attributes from nested dictionary, except for Outputs. Unassigns all values in each Group then assigns from the input dict.\n\n``nested_dict = { 'System Design': { var: val, ...}, ...}``")},
 		{"export",            (PyCFunction)Sco2CspUdPcTables_export,  METH_VARARGS,
 				PyDoc_STR("export() -> dict\n Export attributes into nested dictionary")},
 		{"value",             (PyCFunction)Sco2CspUdPcTables_value, METH_VARARGS,

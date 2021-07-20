@@ -43,6 +43,23 @@ PVSnowModel_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+PVSnowModel_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &PVSnowModel_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Snowmodel", "PVSnowModel")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 PVSnowModel_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &PVSnowModel_Type;
@@ -52,7 +69,9 @@ PVSnowModel_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef PVSnowModel_methods[] = {
 		{"assign",            (PyCFunction)PVSnowModel_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``PVSnowModel_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``PVSnowModel_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)PVSnowModel_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``PVSnowModel_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)PVSnowModel_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -266,6 +285,23 @@ TimeSeries_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+TimeSeries_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &TimeSeries_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Snowmodel", "TimeSeries")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 TimeSeries_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &TimeSeries_Type;
@@ -275,7 +311,9 @@ TimeSeries_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef TimeSeries_methods[] = {
 		{"assign",            (PyCFunction)TimeSeries_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``TimeSeries_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``TimeSeries_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)TimeSeries_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``TimeSeries_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)TimeSeries_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -399,6 +437,23 @@ Outputs_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+Outputs_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Outputs_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Snowmodel", "Outputs")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 Outputs_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &Outputs_Type;
@@ -408,7 +463,9 @@ Outputs_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Outputs_methods[] = {
 		{"assign",            (PyCFunction)Outputs_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Outputs_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Outputs_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Outputs_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Outputs_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -594,6 +651,20 @@ Snowmodel_assign(CmodObject *self, PyObject *args)
 	return Py_None;
 }
 
+static PyObject *
+Snowmodel_replace(CmodObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_replace_from_nested_dict((PyObject*)self, self->x_attr, self->data_ptr, dict, "Snowmodel"))
+		return NULL;
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
 
 static PyObject *
 Snowmodel_export(CmodObject *self, PyObject *args)
@@ -618,6 +689,8 @@ static PyMethodDef Snowmodel_methods[] = {
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
 		{"assign",            (PyCFunction)Snowmodel_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'PV Snow Model': { var: val, ...}, ...}``")},
+		{"replace",            (PyCFunction)Snowmodel_replace,  METH_VARARGS,
+				PyDoc_STR("replace(dict) -> None\n Replace attributes from nested dictionary, except for Outputs. Unassigns all values in each Group then assigns from the input dict.\n\n``nested_dict = { 'PV Snow Model': { var: val, ...}, ...}``")},
 		{"export",            (PyCFunction)Snowmodel_export,  METH_VARARGS,
 				PyDoc_STR("export() -> dict\n Export attributes into nested dictionary")},
 		{"value",             (PyCFunction)Snowmodel_value, METH_VARARGS,

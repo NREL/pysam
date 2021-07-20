@@ -13,8 +13,6 @@ that enforce consistency are not available in this PySAM module. Therefore,
 the onus is on the PySAM user to check that interdependencies are correctly handled. The variables which may require
 additional logic include:
 
- - use_specific_wf_wave
- - wave_resource_filename
 
 Provided for each of these inputs is a list of other inputs that are potentially interdependent. 
 
