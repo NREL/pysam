@@ -1,5 +1,7 @@
+from typing import Union
 import math
 
+import PySAM.Pvsamv1 as PVBatt
 import PySAM.Battery as Batt
 import PySAM.BatteryStateful as BattStfl
 
@@ -41,7 +43,7 @@ def battery_model_sizing(model, desired_power, desired_capacity, desired_voltage
         if not module_specs.keys() == {'capacity', 'surface_area'}:
             raise TypeError("module_specs must contain 'capacity' and 'surface_area' keys only." )
 
-    if type(model) == Batt.Battery:
+    if type(model) == Batt.Battery or type(model) == PVBatt.Pvsamv1:
         size_battery(model, desired_power, desired_capacity, desired_voltage, size_by_ac_not_dc, module_dict=module_specs)
     elif type(model) == BattStfl.BatteryStateful:
         size_batterystateful(model, desired_power, desired_capacity, desired_voltage, module_dict=module_specs)
@@ -61,7 +63,7 @@ def battery_model_change_chemistry(model, chem):
     if chem not in available_chems:
         raise NotImplementedError
 
-    if type(model) == Batt.Battery:
+    if type(model) == Batt.Battery or type(model) == PVBatt.Pvsamv1:
         chem_battery(model, chem)
     elif type(model) == BattStfl.BatteryStateful:
         chem_batterystateful(model, chem)
@@ -93,7 +95,7 @@ def size_battery(model, desired_power, desired_capacity, desired_voltage, size_b
                 m^2 of module battery
     :return: output_dictionary of sizing parameters
     """
-    if type(model) != Batt.Battery:
+    if type(model) != Batt.Battery and type(model) != PVBatt.Pvsamv1:
         raise TypeError
 
     #
@@ -435,11 +437,11 @@ def calculate_thermal_params(input_dict):
     return output_dict
 
 
-def chem_battery(model: Batt.Battery, chem):
+def chem_battery(model: Union[Batt.Battery, PVBatt.Pvsamv1], chem):
     """
     Helper function for battery_model_change_chemistry
     """
-    if type(model) != Batt.Battery:
+    if type(model) != Batt.Battery and type(model) != PVBatt.Pvsamv1:
         raise TypeError
 
     chem = chem.lower()
