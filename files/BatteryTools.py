@@ -3,14 +3,16 @@ import math
 import PySAM.Battery as Batt
 import PySAM.BatteryStateful as BattStfl
 
+available_chems = ['leadacid', 'lfpgraphite', 'nmcgraphite', 'lmolto']
+
 
 def battery_model_sizing(model, desired_power, desired_capacity, desired_voltage, size_by_ac_not_dc=None, module_specs: dict=None):
     """
     Sizes the battery model using its current configuration such as chemistry, cell properties, etc
     and modifies the model's power, capacity and voltage without changing its fundamental properties
 
-    The battery's thermal parameters (surface area and mass) are modified according to assumptions 
-    about the mass and volume per specific energy and assuming the battery is a cube. If the battery's 
+    The battery's thermal parameters (surface area and mass) are modified according to assumptions
+    about the mass and volume per specific energy and assuming the battery is a cube. If the battery's
     thermal parameters should be sized according to a particular module's capacity and surface area,
     use the module_specs input.
 
@@ -53,10 +55,10 @@ def battery_model_change_chemistry(model, chem):
 
     :param model: PySAM.Battery.Battery or PySAM.BatteryStateful.BatteryStateful
     :param chem: string
-        'leadacid', 'lfpgraphite', 'nmcgraphite'
+        'leadacid', 'lfpgraphite', 'nmcgraphite', 'lmolto'
     """
     chem = chem.lower()
-    if chem != 'leadacid' and chem != 'lfpgraphite' and chem != 'nmcgraphite':
+    if chem not in available_chems:
         raise NotImplementedError
 
     if type(model) == Batt.Battery:
@@ -385,8 +387,8 @@ def calculate_thermal_params(input_dict):
     Calculates the mass and surface area of a battery by calculating from its current parameters the
     mass / specific energy and volume / specific energy ratios.
 
-    If module_capacity and module_surface_area are provided, battery surface area is calculated by 
-    scaling module_surface_area by the number of modules required to fulfill desired capacity. 
+    If module_capacity and module_surface_area are provided, battery surface area is calculated by
+    scaling module_surface_area by the number of modules required to fulfill desired capacity.
 
     :param:
         input_dict:
@@ -441,8 +443,7 @@ def chem_battery(model: Batt.Battery, chem):
         raise TypeError
 
     chem = chem.lower()
-
-    if chem != 'leadacid' and chem != 'lfpgraphite' and chem != 'nmcgraphite':
+    if chem not in available_chems:
         raise NotImplementedError
 
     if chem == 'leadacid':
@@ -492,7 +493,7 @@ def chem_batterystateful(model: BattStfl.BatteryStateful, chem):
 
     chem = chem.lower()
 
-    if chem != 'LeadAcid' and chem != 'lfpgraphite' and chem != 'nmcgraphite':
+    if chem not in available_chems:
         raise NotImplementedError
 
     if chem == 'leadacid':

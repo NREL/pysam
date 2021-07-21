@@ -144,3 +144,23 @@ def test_batterystateful_model_change_chemistry():
     assert(model.value('nominal_energy') == pytest.approx(original_capacity, 0.1))
     assert(model.ParamsCell.Vnom_default == cell_params['Vnom_default'])
     assert(model.ParamsPack.Cp == pack_params['Cp'])
+
+
+def test_batterystateful_model_lmolto():
+    model = battstfl.default("lmolto")
+    original_capacity = model.ParamsPack.nominal_energy
+
+    BatteryTools.battery_model_change_chemistry(model, 'nmcgraphite')
+
+    params_new = battstfl.default('nmcgraphite').export()
+    cell_params = params_new['ParamsCell']
+    pack_params = params_new['ParamsPack']
+
+    assert(model.value('nominal_energy') == pytest.approx(original_capacity, 0.1))
+    assert(model.ParamsCell.Vnom_default == cell_params['Vnom_default'])
+    assert(model.ParamsPack.Cp == pack_params['Cp'])
+
+    model = battstfl.default("lmolto")
+    BatteryTools.battery_model_sizing(model, 100, 400, 500, size_by_ac_not_dc=True)
+    assert (model.ParamsPack.nominal_energy == pytest.approx(400, 1))
+    assert(model.ParamsPack.nominal_voltage == 500)
