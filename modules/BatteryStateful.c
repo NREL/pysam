@@ -2666,7 +2666,7 @@ static PyMethodDef BatteryStatefulModule_methods[] = {
 				PyDoc_STR("new() -> BatteryStateful")},
 		{"default",             BatteryStateful_default,         METH_VARARGS,
 				PyDoc_STR("default(config) -> BatteryStateful\n\nUse default attributes\n"
-				"`config` options:\n\n- \"LFPGraphite\"\n- \"LeadAcid\"\n- \"NMCGraphite\"")},
+				"`config` options:\n\n- \"LFPGraphite\"\n- \"LMOLTO\"\n- \"LeadAcid\"\n- \"NMCGraphite\"")},
 		{"wrap",             BatteryStateful_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> BatteryStateful\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   BatteryStateful_from_existing,        METH_VARARGS,
