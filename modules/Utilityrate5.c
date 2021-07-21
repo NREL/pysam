@@ -43,6 +43,23 @@ ElectricityRates_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+ElectricityRates_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &ElectricityRates_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Utilityrate5", "ElectricityRates")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 ElectricityRates_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &ElectricityRates_Type;
@@ -52,7 +69,9 @@ ElectricityRates_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef ElectricityRates_methods[] = {
 		{"assign",            (PyCFunction)ElectricityRates_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``ElectricityRates_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``ElectricityRates_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)ElectricityRates_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``ElectricityRates_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)ElectricityRates_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -566,6 +585,23 @@ Lifetime_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+Lifetime_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Lifetime_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Utilityrate5", "Lifetime")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 Lifetime_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &Lifetime_Type;
@@ -575,7 +611,9 @@ Lifetime_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Lifetime_methods[] = {
 		{"assign",            (PyCFunction)Lifetime_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Lifetime_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Lifetime_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Lifetime_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Lifetime_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Lifetime_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -714,6 +752,23 @@ SystemOutput_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+SystemOutput_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &SystemOutput_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Utilityrate5", "SystemOutput")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 SystemOutput_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &SystemOutput_Type;
@@ -723,7 +778,9 @@ SystemOutput_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef SystemOutput_methods[] = {
 		{"assign",            (PyCFunction)SystemOutput_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``SystemOutput_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``SystemOutput_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)SystemOutput_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``SystemOutput_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)SystemOutput_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -847,6 +904,23 @@ Load_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+Load_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Load_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Utilityrate5", "Load")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 Load_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &Load_Type;
@@ -856,7 +930,9 @@ Load_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Load_methods[] = {
 		{"assign",            (PyCFunction)Load_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Load_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Load_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Load_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Load_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Load_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -980,6 +1056,23 @@ Outputs_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+Outputs_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Outputs_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Utilityrate5", "Outputs")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 Outputs_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &Outputs_Type;
@@ -989,7 +1082,9 @@ Outputs_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Outputs_methods[] = {
 		{"assign",            (PyCFunction)Outputs_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Outputs_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Outputs_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Outputs_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Outputs_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -2461,6 +2556,20 @@ Utilityrate5_assign(CmodObject *self, PyObject *args)
 	return Py_None;
 }
 
+static PyObject *
+Utilityrate5_replace(CmodObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_replace_from_nested_dict((PyObject*)self, self->x_attr, self->data_ptr, dict, "Utilityrate5"))
+		return NULL;
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
 
 static PyObject *
 Utilityrate5_export(CmodObject *self, PyObject *args)
@@ -2485,6 +2594,8 @@ static PyMethodDef Utilityrate5_methods[] = {
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
 		{"assign",            (PyCFunction)Utilityrate5_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Electricity Rates': { var: val, ...}, ...}``")},
+		{"replace",            (PyCFunction)Utilityrate5_replace,  METH_VARARGS,
+				PyDoc_STR("replace(dict) -> None\n Replace attributes from nested dictionary, except for Outputs. Unassigns all values in each Group then assigns from the input dict.\n\n``nested_dict = { 'Electricity Rates': { var: val, ...}, ...}``")},
 		{"export",            (PyCFunction)Utilityrate5_export,  METH_VARARGS,
 				PyDoc_STR("export() -> dict\n Export attributes into nested dictionary")},
 		{"value",             (PyCFunction)Utilityrate5_value, METH_VARARGS,

@@ -49,7 +49,9 @@ class Load(object):
 		pass
 
 
+	grid_outage = tuple
 	load_escalation = tuple
+	run_resiliency_calcs = float
 
 
 class Outputs(object):

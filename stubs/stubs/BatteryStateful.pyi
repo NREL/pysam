@@ -129,6 +129,8 @@ class StateCell(object):
 
 	DOD_max = float
 	DOD_min = float
+	EFC = float
+	EFC_dt = float
 	I_loss = float
 	SOC_prev = float
 	T_batt_prev = float
@@ -148,7 +150,9 @@ class StateCell(object):
 	cycle_DOD_range = tuple
 	cycle_range = float
 	day_age_of_battery = float
+	dq_relative_cal = float
 	dq_relative_calendar_old = float
+	dq_relative_cyc = float
 	dq_relative_li1 = float
 	dq_relative_li2 = float
 	dq_relative_li3 = float
@@ -172,6 +176,7 @@ class StateCell(object):
 	rainflow_Ylt = float
 	rainflow_jlt = float
 	rainflow_peaks = tuple
+	temp_avg = float
 
 
 class Outputs(object):

@@ -229,6 +229,8 @@ These modules provide helper functions or are older versions of above modules.
       - Complex utility rate structure net revenue calculator OpenEI Version 4
     * - :doc:`modules/Utilityrate`
       - Complex utility rate structure net revenue calculator
+    * - :doc:`modules/WaveFileReader`
+      - Wave resource data file reader (CSV)
     * - :doc:`modules/Wfcheck`
       - Weather file checker.
     * - :doc:`modules/Wfcsvconv`

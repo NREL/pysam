@@ -43,6 +43,23 @@ Lifetime_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+Lifetime_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Lifetime_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Grid", "Lifetime")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 Lifetime_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &Lifetime_Type;
@@ -52,7 +69,9 @@ Lifetime_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Lifetime_methods[] = {
 		{"assign",            (PyCFunction)Lifetime_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Lifetime_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Lifetime_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Lifetime_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Lifetime_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Lifetime_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -176,6 +195,23 @@ GridLimits_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+GridLimits_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &GridLimits_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Grid", "GridLimits")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 GridLimits_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &GridLimits_Type;
@@ -185,7 +221,9 @@ GridLimits_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef GridLimits_methods[] = {
 		{"assign",            (PyCFunction)GridLimits_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``GridLimits_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``GridLimits_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)GridLimits_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``GridLimits_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)GridLimits_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -324,6 +362,23 @@ SystemOutput_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+SystemOutput_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &SystemOutput_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Grid", "SystemOutput")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 SystemOutput_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &SystemOutput_Type;
@@ -333,7 +388,9 @@ SystemOutput_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef SystemOutput_methods[] = {
 		{"assign",            (PyCFunction)SystemOutput_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``SystemOutput_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``SystemOutput_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)SystemOutput_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``SystemOutput_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)SystemOutput_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -457,6 +514,23 @@ Load_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+Load_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Load_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Grid", "Load")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 Load_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &Load_Type;
@@ -466,11 +540,37 @@ Load_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Load_methods[] = {
 		{"assign",            (PyCFunction)Load_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Load_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Load_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Load_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Load_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Load_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
+
+static PyObject *
+Load_get_crit_load(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Grid_Load_crit_load_aget, self->data_ptr);
+}
+
+static int
+Load_set_crit_load(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Grid_Load_crit_load_aset, self->data_ptr);
+}
+
+static PyObject *
+Load_get_grid_outage(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Grid_Load_grid_outage_aget, self->data_ptr);
+}
+
+static int
+Load_set_grid_outage(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Grid_Load_grid_outage_aset, self->data_ptr);
+}
 
 static PyObject *
 Load_get_load(VarGroupObject *self, void *closure)
@@ -497,6 +597,12 @@ Load_set_load_escalation(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyGetSetDef Load_getset[] = {
+{"crit_load", (getter)Load_get_crit_load,(setter)Load_set_crit_load,
+	PyDoc_STR("*sequence*: Critical electricity load (year 1) [kW]"),
+ 	NULL},
+{"grid_outage", (getter)Load_get_grid_outage,(setter)Load_set_grid_outage,
+	PyDoc_STR("*sequence*: Timesteps with grid outage [0/1]\n\n*Options*: 0=GridAvailable,1=GridUnavailable,Length=load"),
+ 	NULL},
 {"load", (getter)Load_get_load,(setter)Load_set_load,
 	PyDoc_STR("*sequence*: Electricity load (year 1) [kW]"),
  	NULL},
@@ -590,6 +696,23 @@ Outputs_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+Outputs_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Outputs_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Grid", "Outputs")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 Outputs_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &Outputs_Type;
@@ -599,7 +722,9 @@ Outputs_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Outputs_methods[] = {
 		{"assign",            (PyCFunction)Outputs_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Outputs_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Outputs_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Outputs_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Outputs_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -847,6 +972,20 @@ Grid_assign(CmodObject *self, PyObject *args)
 	return Py_None;
 }
 
+static PyObject *
+Grid_replace(CmodObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_replace_from_nested_dict((PyObject*)self, self->x_attr, self->data_ptr, dict, "Grid"))
+		return NULL;
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
 
 static PyObject *
 Grid_export(CmodObject *self, PyObject *args)
@@ -871,6 +1010,8 @@ static PyMethodDef Grid_methods[] = {
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
 		{"assign",            (PyCFunction)Grid_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Lifetime': { var: val, ...}, ...}``")},
+		{"replace",            (PyCFunction)Grid_replace,  METH_VARARGS,
+				PyDoc_STR("replace(dict) -> None\n Replace attributes from nested dictionary, except for Outputs. Unassigns all values in each Group then assigns from the input dict.\n\n``nested_dict = { 'Lifetime': { var: val, ...}, ...}``")},
 		{"export",            (PyCFunction)Grid_export,  METH_VARARGS,
 				PyDoc_STR("export() -> dict\n Export attributes into nested dictionary")},
 		{"value",             (PyCFunction)Grid_value, METH_VARARGS,

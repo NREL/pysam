@@ -55,6 +55,8 @@ class Load(object):
 		pass
 
 
+	crit_load = tuple
+	grid_outage = tuple
 	load = tuple
 	load_escalation = tuple
 
