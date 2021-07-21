@@ -43,6 +43,23 @@ FinancialParameters_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+FinancialParameters_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &FinancialParameters_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Cashloan", "FinancialParameters")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 FinancialParameters_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &FinancialParameters_Type;
@@ -52,7 +69,9 @@ FinancialParameters_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef FinancialParameters_methods[] = {
 		{"assign",            (PyCFunction)FinancialParameters_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``FinancialParameters_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``FinancialParameters_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)FinancialParameters_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``FinancialParameters_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)FinancialParameters_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -68,6 +87,18 @@ static int
 FinancialParameters_set_analysis_period(VarGroupObject *self, PyObject *value, void *closure)
 {
 	return PySAM_double_setter(value, SAM_Cashloan_FinancialParameters_analysis_period_nset, self->data_ptr);
+}
+
+static PyObject *
+FinancialParameters_get_batt_salvage_percentage(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Cashloan_FinancialParameters_batt_salvage_percentage_nget, self->data_ptr);
+}
+
+static int
+FinancialParameters_set_batt_salvage_percentage(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Cashloan_FinancialParameters_batt_salvage_percentage_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -266,6 +297,9 @@ static PyGetSetDef FinancialParameters_getset[] = {
 {"analysis_period", (getter)FinancialParameters_get_analysis_period,(setter)FinancialParameters_set_analysis_period,
 	PyDoc_STR("*float*: Analyis period [years]\n\n*Constraints*: INTEGER,MIN=0,MAX=50\n\n*Required*: If not provided, assumed to be 30"),
  	NULL},
+{"batt_salvage_percentage", (getter)FinancialParameters_get_batt_salvage_percentage,(setter)FinancialParameters_set_batt_salvage_percentage,
+	PyDoc_STR("*float*: Net pre-tax cash battery salvage value [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
 {"debt_fraction", (getter)FinancialParameters_get_debt_fraction,(setter)FinancialParameters_set_debt_fraction,
 	PyDoc_STR("*float*: Debt percentage [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
@@ -401,6 +435,23 @@ SystemCosts_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+SystemCosts_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &SystemCosts_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Cashloan", "SystemCosts")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 SystemCosts_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &SystemCosts_Type;
@@ -410,7 +461,9 @@ SystemCosts_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef SystemCosts_methods[] = {
 		{"assign",            (PyCFunction)SystemCosts_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``SystemCosts_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``SystemCosts_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)SystemCosts_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``SystemCosts_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)SystemCosts_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -453,6 +506,54 @@ SystemCosts_set_annual_fuel_usage_lifetime(VarGroupObject *self, PyObject *value
 }
 
 static PyObject *
+SystemCosts_get_om_batt_capacity_cost(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Cashloan_SystemCosts_om_batt_capacity_cost_aget, self->data_ptr);
+}
+
+static int
+SystemCosts_set_om_batt_capacity_cost(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Cashloan_SystemCosts_om_batt_capacity_cost_aset, self->data_ptr);
+}
+
+static PyObject *
+SystemCosts_get_om_batt_fixed_cost(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Cashloan_SystemCosts_om_batt_fixed_cost_aget, self->data_ptr);
+}
+
+static int
+SystemCosts_set_om_batt_fixed_cost(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Cashloan_SystemCosts_om_batt_fixed_cost_aset, self->data_ptr);
+}
+
+static PyObject *
+SystemCosts_get_om_batt_replacement_cost(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Cashloan_SystemCosts_om_batt_replacement_cost_aget, self->data_ptr);
+}
+
+static int
+SystemCosts_set_om_batt_replacement_cost(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Cashloan_SystemCosts_om_batt_replacement_cost_aset, self->data_ptr);
+}
+
+static PyObject *
+SystemCosts_get_om_batt_variable_cost(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Cashloan_SystemCosts_om_batt_variable_cost_aget, self->data_ptr);
+}
+
+static int
+SystemCosts_set_om_batt_variable_cost(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Cashloan_SystemCosts_om_batt_variable_cost_aset, self->data_ptr);
+}
+
+static PyObject *
 SystemCosts_get_om_capacity(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Cashloan_SystemCosts_om_capacity_aget, self->data_ptr);
@@ -462,54 +563,6 @@ static int
 SystemCosts_set_om_capacity(VarGroupObject *self, PyObject *value, void *closure)
 {
 	return PySAM_array_setter(value, SAM_Cashloan_SystemCosts_om_capacity_aset, self->data_ptr);
-}
-
-static PyObject *
-SystemCosts_get_om_capacity1(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Cashloan_SystemCosts_om_capacity1_aget, self->data_ptr);
-}
-
-static int
-SystemCosts_set_om_capacity1(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_Cashloan_SystemCosts_om_capacity1_aset, self->data_ptr);
-}
-
-static PyObject *
-SystemCosts_get_om_capacity1_nameplate(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Cashloan_SystemCosts_om_capacity1_nameplate_nget, self->data_ptr);
-}
-
-static int
-SystemCosts_set_om_capacity1_nameplate(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Cashloan_SystemCosts_om_capacity1_nameplate_nset, self->data_ptr);
-}
-
-static PyObject *
-SystemCosts_get_om_capacity2(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Cashloan_SystemCosts_om_capacity2_aget, self->data_ptr);
-}
-
-static int
-SystemCosts_set_om_capacity2(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_Cashloan_SystemCosts_om_capacity2_aset, self->data_ptr);
-}
-
-static PyObject *
-SystemCosts_get_om_capacity2_nameplate(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Cashloan_SystemCosts_om_capacity2_nameplate_nget, self->data_ptr);
-}
-
-static int
-SystemCosts_set_om_capacity2_nameplate(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Cashloan_SystemCosts_om_capacity2_nameplate_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -534,30 +587,6 @@ static int
 SystemCosts_set_om_fixed(VarGroupObject *self, PyObject *value, void *closure)
 {
 	return PySAM_array_setter(value, SAM_Cashloan_SystemCosts_om_fixed_aset, self->data_ptr);
-}
-
-static PyObject *
-SystemCosts_get_om_fixed1(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Cashloan_SystemCosts_om_fixed1_aget, self->data_ptr);
-}
-
-static int
-SystemCosts_set_om_fixed1(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_Cashloan_SystemCosts_om_fixed1_aset, self->data_ptr);
-}
-
-static PyObject *
-SystemCosts_get_om_fixed2(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Cashloan_SystemCosts_om_fixed2_aget, self->data_ptr);
-}
-
-static int
-SystemCosts_set_om_fixed2(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_Cashloan_SystemCosts_om_fixed2_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -594,6 +623,54 @@ static int
 SystemCosts_set_om_fuel_cost_escal(VarGroupObject *self, PyObject *value, void *closure)
 {
 	return PySAM_double_setter(value, SAM_Cashloan_SystemCosts_om_fuel_cost_escal_nset, self->data_ptr);
+}
+
+static PyObject *
+SystemCosts_get_om_fuelcell_capacity_cost(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Cashloan_SystemCosts_om_fuelcell_capacity_cost_aget, self->data_ptr);
+}
+
+static int
+SystemCosts_set_om_fuelcell_capacity_cost(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Cashloan_SystemCosts_om_fuelcell_capacity_cost_aset, self->data_ptr);
+}
+
+static PyObject *
+SystemCosts_get_om_fuelcell_fixed_cost(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Cashloan_SystemCosts_om_fuelcell_fixed_cost_aget, self->data_ptr);
+}
+
+static int
+SystemCosts_set_om_fuelcell_fixed_cost(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Cashloan_SystemCosts_om_fuelcell_fixed_cost_aset, self->data_ptr);
+}
+
+static PyObject *
+SystemCosts_get_om_fuelcell_replacement_cost(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Cashloan_SystemCosts_om_fuelcell_replacement_cost_aget, self->data_ptr);
+}
+
+static int
+SystemCosts_set_om_fuelcell_replacement_cost(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Cashloan_SystemCosts_om_fuelcell_replacement_cost_aset, self->data_ptr);
+}
+
+static PyObject *
+SystemCosts_get_om_fuelcell_variable_cost(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Cashloan_SystemCosts_om_fuelcell_variable_cost_aget, self->data_ptr);
+}
+
+static int
+SystemCosts_set_om_fuelcell_variable_cost(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Cashloan_SystemCosts_om_fuelcell_variable_cost_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -681,18 +758,6 @@ SystemCosts_set_om_production(VarGroupObject *self, PyObject *value, void *closu
 }
 
 static PyObject *
-SystemCosts_get_om_production1(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Cashloan_SystemCosts_om_production1_aget, self->data_ptr);
-}
-
-static int
-SystemCosts_set_om_production1(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_Cashloan_SystemCosts_om_production1_aset, self->data_ptr);
-}
-
-static PyObject *
 SystemCosts_get_om_production1_values(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Cashloan_SystemCosts_om_production1_values_aget, self->data_ptr);
@@ -702,18 +767,6 @@ static int
 SystemCosts_set_om_production1_values(VarGroupObject *self, PyObject *value, void *closure)
 {
 	return PySAM_array_setter(value, SAM_Cashloan_SystemCosts_om_production1_values_aset, self->data_ptr);
-}
-
-static PyObject *
-SystemCosts_get_om_production2(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Cashloan_SystemCosts_om_production2_aget, self->data_ptr);
-}
-
-static int
-SystemCosts_set_om_production2(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_Cashloan_SystemCosts_om_production2_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -741,30 +794,6 @@ SystemCosts_set_om_production_escal(VarGroupObject *self, PyObject *value, void 
 }
 
 static PyObject *
-SystemCosts_get_om_replacement_cost1(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Cashloan_SystemCosts_om_replacement_cost1_aget, self->data_ptr);
-}
-
-static int
-SystemCosts_set_om_replacement_cost1(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_Cashloan_SystemCosts_om_replacement_cost1_aset, self->data_ptr);
-}
-
-static PyObject *
-SystemCosts_get_om_replacement_cost2(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Cashloan_SystemCosts_om_replacement_cost2_aget, self->data_ptr);
-}
-
-static int
-SystemCosts_set_om_replacement_cost2(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_Cashloan_SystemCosts_om_replacement_cost2_aset, self->data_ptr);
-}
-
-static PyObject *
 SystemCosts_get_om_replacement_cost_escal(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Cashloan_SystemCosts_om_replacement_cost_escal_nget, self->data_ptr);
@@ -788,6 +817,30 @@ SystemCosts_set_total_installed_cost(VarGroupObject *self, PyObject *value, void
 	return PySAM_double_setter(value, SAM_Cashloan_SystemCosts_total_installed_cost_nset, self->data_ptr);
 }
 
+static PyObject *
+SystemCosts_get_ui_batt_capacity(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Cashloan_SystemCosts_ui_batt_capacity_nget, self->data_ptr);
+}
+
+static int
+SystemCosts_set_ui_batt_capacity(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Cashloan_SystemCosts_ui_batt_capacity_nset, self->data_ptr);
+}
+
+static PyObject *
+SystemCosts_get_ui_fuelcell_capacity(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Cashloan_SystemCosts_ui_fuelcell_capacity_nget, self->data_ptr);
+}
+
+static int
+SystemCosts_set_ui_fuelcell_capacity(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Cashloan_SystemCosts_ui_fuelcell_capacity_nset, self->data_ptr);
+}
+
 static PyGetSetDef SystemCosts_getset[] = {
 {"add_om_num_types", (getter)SystemCosts_get_add_om_num_types,(setter)SystemCosts_set_add_om_num_types,
 	PyDoc_STR("*float*: Number of O and M types\n\n*Constraints*: INTEGER,MIN=0,MAX=2\n\n*Required*: If not provided, assumed to be 0"),
@@ -798,32 +851,26 @@ static PyGetSetDef SystemCosts_getset[] = {
 {"annual_fuel_usage_lifetime", (getter)SystemCosts_get_annual_fuel_usage_lifetime,(setter)SystemCosts_set_annual_fuel_usage_lifetime,
 	PyDoc_STR("*sequence*: Fuel usage (lifetime) [kWht]"),
  	NULL},
-{"om_capacity", (getter)SystemCosts_get_om_capacity,(setter)SystemCosts_set_om_capacity,
-	PyDoc_STR("*sequence*: Capacity-based O&M amount [$/kWcap]\n\n*Required*: If not provided, assumed to be 0.0"),
- 	NULL},
-{"om_capacity1", (getter)SystemCosts_get_om_capacity1,(setter)SystemCosts_set_om_capacity1,
+{"om_batt_capacity_cost", (getter)SystemCosts_get_om_batt_capacity_cost,(setter)SystemCosts_set_om_batt_capacity_cost,
 	PyDoc_STR("*sequence*: Battery capacity-based System Costs amount [$/kWcap]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
-{"om_capacity1_nameplate", (getter)SystemCosts_get_om_capacity1_nameplate,(setter)SystemCosts_set_om_capacity1_nameplate,
-	PyDoc_STR("*float*: Battery capacity for System Costs values [kW]\n\n*Required*: If not provided, assumed to be 0"),
+{"om_batt_fixed_cost", (getter)SystemCosts_get_om_batt_fixed_cost,(setter)SystemCosts_set_om_batt_fixed_cost,
+	PyDoc_STR("*sequence*: Battery fixed System Costs annual amount [$/year]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
-{"om_capacity2", (getter)SystemCosts_get_om_capacity2,(setter)SystemCosts_set_om_capacity2,
-	PyDoc_STR("*sequence*: Fuel cell capacity-based System Costs amount [$/kWcap]\n\n*Required*: If not provided, assumed to be 0.0"),
+{"om_batt_replacement_cost", (getter)SystemCosts_get_om_batt_replacement_cost,(setter)SystemCosts_set_om_batt_replacement_cost,
+	PyDoc_STR("*sequence*: Replacement cost 1 [$/kWh]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
-{"om_capacity2_nameplate", (getter)SystemCosts_get_om_capacity2_nameplate,(setter)SystemCosts_set_om_capacity2_nameplate,
-	PyDoc_STR("*float*: Fuel cell capacity for System Costs values [kW]\n\n*Required*: If not provided, assumed to be 0"),
+{"om_batt_variable_cost", (getter)SystemCosts_get_om_batt_variable_cost,(setter)SystemCosts_set_om_batt_variable_cost,
+	PyDoc_STR("*sequence*: Battery production-based System Costs amount [$/MWh]\n\n*Required*: If not provided, assumed to be 0.0"),
+ 	NULL},
+{"om_capacity", (getter)SystemCosts_get_om_capacity,(setter)SystemCosts_set_om_capacity,
+	PyDoc_STR("*sequence*: Capacity-based O&M amount [$/kWcap]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
 {"om_capacity_escal", (getter)SystemCosts_get_om_capacity_escal,(setter)SystemCosts_set_om_capacity_escal,
 	PyDoc_STR("*float*: Capacity-based O&M escalation [%/year]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
 {"om_fixed", (getter)SystemCosts_get_om_fixed,(setter)SystemCosts_set_om_fixed,
 	PyDoc_STR("*sequence*: Fixed O&M annual amount [$/year]\n\n*Required*: If not provided, assumed to be 0.0"),
- 	NULL},
-{"om_fixed1", (getter)SystemCosts_get_om_fixed1,(setter)SystemCosts_set_om_fixed1,
-	PyDoc_STR("*sequence*: Battery fixed System Costs annual amount [$/year]\n\n*Required*: If not provided, assumed to be 0.0"),
- 	NULL},
-{"om_fixed2", (getter)SystemCosts_get_om_fixed2,(setter)SystemCosts_set_om_fixed2,
-	PyDoc_STR("*sequence*: Fuel cell fixed System Costs annual amount [$/year]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
 {"om_fixed_escal", (getter)SystemCosts_get_om_fixed_escal,(setter)SystemCosts_set_om_fixed_escal,
 	PyDoc_STR("*float*: Fixed O&M escalation [%/year]\n\n*Required*: If not provided, assumed to be 0.0"),
@@ -833,6 +880,18 @@ static PyGetSetDef SystemCosts_getset[] = {
  	NULL},
 {"om_fuel_cost_escal", (getter)SystemCosts_get_om_fuel_cost_escal,(setter)SystemCosts_set_om_fuel_cost_escal,
 	PyDoc_STR("*float*: Fuel cost escalation [%/year]\n\n*Required*: If not provided, assumed to be 0.0"),
+ 	NULL},
+{"om_fuelcell_capacity_cost", (getter)SystemCosts_get_om_fuelcell_capacity_cost,(setter)SystemCosts_set_om_fuelcell_capacity_cost,
+	PyDoc_STR("*sequence*: Fuel cell capacity-based System Costs amount [$/kWcap]\n\n*Required*: If not provided, assumed to be 0.0"),
+ 	NULL},
+{"om_fuelcell_fixed_cost", (getter)SystemCosts_get_om_fuelcell_fixed_cost,(setter)SystemCosts_set_om_fuelcell_fixed_cost,
+	PyDoc_STR("*sequence*: Fuel cell fixed System Costs annual amount [$/year]\n\n*Required*: If not provided, assumed to be 0.0"),
+ 	NULL},
+{"om_fuelcell_replacement_cost", (getter)SystemCosts_get_om_fuelcell_replacement_cost,(setter)SystemCosts_set_om_fuelcell_replacement_cost,
+	PyDoc_STR("*sequence*: Replacement cost 2 [$/kW]\n\n*Required*: If not provided, assumed to be 0.0"),
+ 	NULL},
+{"om_fuelcell_variable_cost", (getter)SystemCosts_get_om_fuelcell_variable_cost,(setter)SystemCosts_set_om_fuelcell_variable_cost,
+	PyDoc_STR("*sequence*: Fuel cell production-based System Costs amount [$/MWh]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
 {"om_opt_fuel_1_cost", (getter)SystemCosts_get_om_opt_fuel_1_cost,(setter)SystemCosts_set_om_opt_fuel_1_cost,
 	PyDoc_STR("*sequence*: Biomass feedstock cost [$/unit]\n\n*Required*: If not provided, assumed to be 0.0"),
@@ -855,14 +914,8 @@ static PyGetSetDef SystemCosts_getset[] = {
 {"om_production", (getter)SystemCosts_get_om_production,(setter)SystemCosts_set_om_production,
 	PyDoc_STR("*sequence*: Production-based O&M amount [$/MWh]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
-{"om_production1", (getter)SystemCosts_get_om_production1,(setter)SystemCosts_set_om_production1,
-	PyDoc_STR("*sequence*: Battery production-based System Costs amount [$/MWh]\n\n*Required*: If not provided, assumed to be 0.0"),
- 	NULL},
 {"om_production1_values", (getter)SystemCosts_get_om_production1_values,(setter)SystemCosts_set_om_production1_values,
 	PyDoc_STR("*sequence*: Battery production for System Costs values [kWh]\n\n*Required*: If not provided, assumed to be 0"),
- 	NULL},
-{"om_production2", (getter)SystemCosts_get_om_production2,(setter)SystemCosts_set_om_production2,
-	PyDoc_STR("*sequence*: Fuel cell production-based System Costs amount [$/MWh]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
 {"om_production2_values", (getter)SystemCosts_get_om_production2_values,(setter)SystemCosts_set_om_production2_values,
 	PyDoc_STR("*sequence*: Fuel cell production for System Costs values [kWh]\n\n*Required*: If not provided, assumed to be 0"),
@@ -870,17 +923,17 @@ static PyGetSetDef SystemCosts_getset[] = {
 {"om_production_escal", (getter)SystemCosts_get_om_production_escal,(setter)SystemCosts_set_om_production_escal,
 	PyDoc_STR("*float*: Production-based O&M escalation [%/year]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
-{"om_replacement_cost1", (getter)SystemCosts_get_om_replacement_cost1,(setter)SystemCosts_set_om_replacement_cost1,
-	PyDoc_STR("*sequence*: Replacement cost 1 [$/kWh]\n\n*Required*: If not provided, assumed to be 0.0"),
- 	NULL},
-{"om_replacement_cost2", (getter)SystemCosts_get_om_replacement_cost2,(setter)SystemCosts_set_om_replacement_cost2,
-	PyDoc_STR("*sequence*: Replacement cost 2 [$/kW]\n\n*Required*: If not provided, assumed to be 0.0"),
- 	NULL},
 {"om_replacement_cost_escal", (getter)SystemCosts_get_om_replacement_cost_escal,(setter)SystemCosts_set_om_replacement_cost_escal,
 	PyDoc_STR("*float*: Replacement cost escalation [%/year]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
 {"total_installed_cost", (getter)SystemCosts_get_total_installed_cost,(setter)SystemCosts_set_total_installed_cost,
 	PyDoc_STR("*float*: Total installed cost [$]\n\n*Constraints*: MIN=0\n\n*Required*: True"),
+ 	NULL},
+{"ui_batt_capacity", (getter)SystemCosts_get_ui_batt_capacity,(setter)SystemCosts_set_ui_batt_capacity,
+	PyDoc_STR("*float*: Battery capacity for System Costs values [kW]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"ui_fuelcell_capacity", (getter)SystemCosts_get_ui_fuelcell_capacity,(setter)SystemCosts_set_ui_fuelcell_capacity,
+	PyDoc_STR("*float*: Fuel cell capacity for System Costs values [kW]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -969,6 +1022,23 @@ Depreciation_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+Depreciation_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Depreciation_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Cashloan", "Depreciation")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 Depreciation_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &Depreciation_Type;
@@ -978,7 +1048,9 @@ Depreciation_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Depreciation_methods[] = {
 		{"assign",            (PyCFunction)Depreciation_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Depreciation_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Depreciation_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Depreciation_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Depreciation_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Depreciation_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -1162,6 +1234,23 @@ TaxCreditIncentives_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+TaxCreditIncentives_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &TaxCreditIncentives_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Cashloan", "TaxCreditIncentives")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 TaxCreditIncentives_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &TaxCreditIncentives_Type;
@@ -1171,7 +1260,9 @@ TaxCreditIncentives_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef TaxCreditIncentives_methods[] = {
 		{"assign",            (PyCFunction)TaxCreditIncentives_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``TaxCreditIncentives_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``TaxCreditIncentives_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)TaxCreditIncentives_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``TaxCreditIncentives_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)TaxCreditIncentives_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -1565,6 +1656,23 @@ PaymentIncentives_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+PaymentIncentives_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &PaymentIncentives_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Cashloan", "PaymentIncentives")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 PaymentIncentives_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &PaymentIncentives_Type;
@@ -1574,7 +1682,9 @@ PaymentIncentives_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef PaymentIncentives_methods[] = {
 		{"assign",            (PyCFunction)PaymentIncentives_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``PaymentIncentives_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``PaymentIncentives_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)PaymentIncentives_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``PaymentIncentives_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)PaymentIncentives_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -2988,6 +3098,23 @@ BatterySystem_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+BatterySystem_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &BatterySystem_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Cashloan", "BatterySystem")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 BatterySystem_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &BatterySystem_Type;
@@ -2997,7 +3124,9 @@ BatterySystem_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef BatterySystem_methods[] = {
 		{"assign",            (PyCFunction)BatterySystem_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``BatterySystem_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``BatterySystem_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)BatterySystem_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``BatterySystem_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)BatterySystem_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -3181,6 +3310,23 @@ FuelCell_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+FuelCell_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &FuelCell_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Cashloan", "FuelCell")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 FuelCell_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &FuelCell_Type;
@@ -3190,7 +3336,9 @@ FuelCell_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef FuelCell_methods[] = {
 		{"assign",            (PyCFunction)FuelCell_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``FuelCell_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``FuelCell_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)FuelCell_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``FuelCell_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)FuelCell_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -3282,7 +3430,7 @@ static PyGetSetDef FuelCell_getset[] = {
 	PyDoc_STR("*sequence*: Fuel cell replacements per year [number/year]"),
  	NULL},
 {"fuelcell_replacement_option", (getter)FuelCell_get_fuelcell_replacement_option,(setter)FuelCell_set_fuelcell_replacement_option,
-	PyDoc_STR("*float*: Enable fuel cell replacement? [0=none,1=capacity based,2=user schedule]\n\n*Constraints*: INTEGER,MIN=0,MAX=2\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Enable fuel cell replacement? [0=none,1=capacity based,2=user schedule]\n\n*Constraints*: INTEGER,MIN=0,MAX=2"),
  	NULL},
 {"fuelcell_replacement_schedule", (getter)FuelCell_get_fuelcell_replacement_schedule,(setter)FuelCell_set_fuelcell_replacement_schedule,
 	PyDoc_STR("*sequence*: Fuel cell replacements per year (user specified) [number/year]"),
@@ -3374,6 +3522,23 @@ SystemOutput_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+SystemOutput_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &SystemOutput_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Cashloan", "SystemOutput")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 SystemOutput_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &SystemOutput_Type;
@@ -3383,7 +3548,9 @@ SystemOutput_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef SystemOutput_methods[] = {
 		{"assign",            (PyCFunction)SystemOutput_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``SystemOutput_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``SystemOutput_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)SystemOutput_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``SystemOutput_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)SystemOutput_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -3537,6 +3704,23 @@ Lifetime_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+Lifetime_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Lifetime_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Cashloan", "Lifetime")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 Lifetime_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &Lifetime_Type;
@@ -3546,7 +3730,9 @@ Lifetime_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Lifetime_methods[] = {
 		{"assign",            (PyCFunction)Lifetime_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Lifetime_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Lifetime_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Lifetime_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Lifetime_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Lifetime_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -3655,6 +3841,23 @@ ThirdPartyOwnership_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+ThirdPartyOwnership_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &ThirdPartyOwnership_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Cashloan", "ThirdPartyOwnership")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 ThirdPartyOwnership_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &ThirdPartyOwnership_Type;
@@ -3664,7 +3867,9 @@ ThirdPartyOwnership_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef ThirdPartyOwnership_methods[] = {
 		{"assign",            (PyCFunction)ThirdPartyOwnership_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``ThirdPartyOwnership_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``ThirdPartyOwnership_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)ThirdPartyOwnership_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``ThirdPartyOwnership_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)ThirdPartyOwnership_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -3752,6 +3957,582 @@ static PyTypeObject ThirdPartyOwnership_Type = {
 
 
 /*
+ * Battery Group
+ */ 
+
+static PyTypeObject Battery_Type;
+
+static PyObject *
+Battery_new(SAM_Cashloan data_ptr)
+{
+	PyObject* new_obj = Battery_Type.tp_alloc(&Battery_Type,0);
+
+	VarGroupObject* Battery_obj = (VarGroupObject*)new_obj;
+
+	Battery_obj->data_ptr = (SAM_table)data_ptr;
+
+	return new_obj;
+}
+
+/* Battery methods */
+
+static PyObject *
+Battery_assign(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Cashloan", "Battery")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+Battery_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Battery_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Cashloan", "Battery")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+Battery_export(VarGroupObject *self, PyObject *args)
+{
+	PyTypeObject* tp = &Battery_Type;
+	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
+	return dict;
+}
+
+static PyMethodDef Battery_methods[] = {
+		{"assign",            (PyCFunction)Battery_assign,  METH_VARARGS,
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Battery_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Battery_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Battery_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)Battery_export,  METH_VARARGS,
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+		{NULL,              NULL}           /* sentinel */
+};
+
+static PyObject *
+Battery_get_batt_annual_charge_from_system(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Cashloan_Battery_batt_annual_charge_from_system_aget, self->data_ptr);
+}
+
+static int
+Battery_set_batt_annual_charge_from_system(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Cashloan_Battery_batt_annual_charge_from_system_aset, self->data_ptr);
+}
+
+static PyObject *
+Battery_get_batt_annual_discharge_energy(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Cashloan_Battery_batt_annual_discharge_energy_aget, self->data_ptr);
+}
+
+static int
+Battery_set_batt_annual_discharge_energy(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Cashloan_Battery_batt_annual_discharge_energy_aset, self->data_ptr);
+}
+
+static PyObject *
+Battery_get_batt_capacity_percent(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Cashloan_Battery_batt_capacity_percent_aget, self->data_ptr);
+}
+
+static int
+Battery_set_batt_capacity_percent(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Cashloan_Battery_batt_capacity_percent_aset, self->data_ptr);
+}
+
+static PyObject *
+Battery_get_battery_total_cost_lcos(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Cashloan_Battery_battery_total_cost_lcos_nget, self->data_ptr);
+}
+
+static int
+Battery_set_battery_total_cost_lcos(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Cashloan_Battery_battery_total_cost_lcos_nset, self->data_ptr);
+}
+
+static PyObject *
+Battery_get_grid_to_batt(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Cashloan_Battery_grid_to_batt_aget, self->data_ptr);
+}
+
+static int
+Battery_set_grid_to_batt(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Cashloan_Battery_grid_to_batt_aset, self->data_ptr);
+}
+
+static PyObject *
+Battery_get_monthly_batt_to_grid(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Cashloan_Battery_monthly_batt_to_grid_aget, self->data_ptr);
+}
+
+static int
+Battery_set_monthly_batt_to_grid(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Cashloan_Battery_monthly_batt_to_grid_aset, self->data_ptr);
+}
+
+static PyObject *
+Battery_get_monthly_grid_to_batt(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Cashloan_Battery_monthly_grid_to_batt_aget, self->data_ptr);
+}
+
+static int
+Battery_set_monthly_grid_to_batt(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Cashloan_Battery_monthly_grid_to_batt_aset, self->data_ptr);
+}
+
+static PyObject *
+Battery_get_monthly_grid_to_load(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Cashloan_Battery_monthly_grid_to_load_aget, self->data_ptr);
+}
+
+static int
+Battery_set_monthly_grid_to_load(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Cashloan_Battery_monthly_grid_to_load_aset, self->data_ptr);
+}
+
+static PyObject *
+Battery_get_monthly_system_to_grid(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Cashloan_Battery_monthly_system_to_grid_aget, self->data_ptr);
+}
+
+static int
+Battery_set_monthly_system_to_grid(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Cashloan_Battery_monthly_system_to_grid_aset, self->data_ptr);
+}
+
+static PyGetSetDef Battery_getset[] = {
+{"batt_annual_charge_from_system", (getter)Battery_get_batt_annual_charge_from_system,(setter)Battery_set_batt_annual_charge_from_system,
+	PyDoc_STR("*sequence*: Battery annual energy charged from system [kWh]"),
+ 	NULL},
+{"batt_annual_discharge_energy", (getter)Battery_get_batt_annual_discharge_energy,(setter)Battery_set_batt_annual_discharge_energy,
+	PyDoc_STR("*sequence*: Battery annual energy discharged [kWh]"),
+ 	NULL},
+{"batt_capacity_percent", (getter)Battery_get_batt_capacity_percent,(setter)Battery_set_batt_capacity_percent,
+	PyDoc_STR("*sequence*: Battery relative capacity to nameplate [%]"),
+ 	NULL},
+{"battery_total_cost_lcos", (getter)Battery_get_battery_total_cost_lcos,(setter)Battery_set_battery_total_cost_lcos,
+	PyDoc_STR("*float*: Battery total investment cost [$]"),
+ 	NULL},
+{"grid_to_batt", (getter)Battery_get_grid_to_batt,(setter)Battery_set_grid_to_batt,
+	PyDoc_STR("*sequence*: Electricity to grid from battery [kW]"),
+ 	NULL},
+{"monthly_batt_to_grid", (getter)Battery_get_monthly_batt_to_grid,(setter)Battery_set_monthly_batt_to_grid,
+	PyDoc_STR("*sequence*: Energy to grid from battery [kWh]\n\n*Constraints*: LENGTH=12"),
+ 	NULL},
+{"monthly_grid_to_batt", (getter)Battery_get_monthly_grid_to_batt,(setter)Battery_set_monthly_grid_to_batt,
+	PyDoc_STR("*sequence*: Energy to battery from grid [kWh]\n\n*Constraints*: LENGTH=12"),
+ 	NULL},
+{"monthly_grid_to_load", (getter)Battery_get_monthly_grid_to_load,(setter)Battery_set_monthly_grid_to_load,
+	PyDoc_STR("*sequence*: Energy to load from grid [kWh]\n\n*Constraints*: LENGTH=12"),
+ 	NULL},
+{"monthly_system_to_grid", (getter)Battery_get_monthly_system_to_grid,(setter)Battery_set_monthly_system_to_grid,
+	PyDoc_STR("*sequence*: Energy to grid from system [kWh]\n\n*Constraints*: LENGTH=12"),
+ 	NULL},
+	{NULL}  /* Sentinel */
+};
+
+static PyTypeObject Battery_Type = {
+		/* The ob_type field must be initialized in the module init function
+		 * to be portable to Windows without using C++. */
+		PyVarObject_HEAD_INIT(NULL, 0)
+		"Cashloan.Battery",             /*tp_name*/
+		sizeof(VarGroupObject),          /*tp_basicsize*/
+		0,                          /*tp_itemsize*/
+		/* methods */
+		0,    /*tp_dealloc*/
+		0,                          /*tp_print*/
+		(getattrfunc)0,             /*tp_getattr*/
+		0,                          /*tp_setattr*/
+		0,                          /*tp_reserved*/
+		0,                          /*tp_repr*/
+		0,                          /*tp_as_number*/
+		0,                          /*tp_as_sequence*/
+		0,                          /*tp_as_mapping*/
+		0,                          /*tp_hash*/
+		0,                          /*tp_call*/
+		0,                          /*tp_str*/
+		0,                          /*tp_getattro*/
+		0,                          /*tp_setattro*/
+		0,                          /*tp_as_buffer*/
+		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
+		0,                          /*tp_doc*/
+		0,                          /*tp_traverse*/
+		0,                          /*tp_clear*/
+		0,                          /*tp_richcompare*/
+		0,                          /*tp_weaklistofnset*/
+		0,                          /*tp_iter*/
+		0,                          /*tp_iternext*/
+		Battery_methods,         /*tp_methods*/
+		0,                          /*tp_members*/
+		Battery_getset,          /*tp_getset*/
+		0,                          /*tp_base*/
+		0,                          /*tp_dict*/
+		0,                          /*tp_descr_get*/
+		0,                          /*tp_descr_set*/
+		0,                          /*tp_dictofnset*/
+		0,                          /*tp_init*/
+		0,                          /*tp_alloc*/
+		0,             /*tp_new*/
+		0,                          /*tp_free*/
+		0,                          /*tp_is_gc*/
+};
+
+
+/*
+ * ChargesByMonth Group
+ */ 
+
+static PyTypeObject ChargesByMonth_Type;
+
+static PyObject *
+ChargesByMonth_new(SAM_Cashloan data_ptr)
+{
+	PyObject* new_obj = ChargesByMonth_Type.tp_alloc(&ChargesByMonth_Type,0);
+
+	VarGroupObject* ChargesByMonth_obj = (VarGroupObject*)new_obj;
+
+	ChargesByMonth_obj->data_ptr = (SAM_table)data_ptr;
+
+	return new_obj;
+}
+
+/* ChargesByMonth methods */
+
+static PyObject *
+ChargesByMonth_assign(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Cashloan", "ChargesByMonth")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+ChargesByMonth_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &ChargesByMonth_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Cashloan", "ChargesByMonth")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+ChargesByMonth_export(VarGroupObject *self, PyObject *args)
+{
+	PyTypeObject* tp = &ChargesByMonth_Type;
+	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
+	return dict;
+}
+
+static PyMethodDef ChargesByMonth_methods[] = {
+		{"assign",            (PyCFunction)ChargesByMonth_assign,  METH_VARARGS,
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``ChargesByMonth_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)ChargesByMonth_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``ChargesByMonth_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)ChargesByMonth_export,  METH_VARARGS,
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+		{NULL,              NULL}           /* sentinel */
+};
+
+static PyObject *
+ChargesByMonth_get_charge_w_sys_ec_ym(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Cashloan_ChargesByMonth_charge_w_sys_ec_ym_mget, self->data_ptr);
+}
+
+static int
+ChargesByMonth_set_charge_w_sys_ec_ym(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Cashloan_ChargesByMonth_charge_w_sys_ec_ym_mset, self->data_ptr);
+}
+
+static PyObject *
+ChargesByMonth_get_true_up_credits_ym(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Cashloan_ChargesByMonth_true_up_credits_ym_mget, self->data_ptr);
+}
+
+static int
+ChargesByMonth_set_true_up_credits_ym(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Cashloan_ChargesByMonth_true_up_credits_ym_mset, self->data_ptr);
+}
+
+static PyObject *
+ChargesByMonth_get_year1_monthly_ec_charge_with_system(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Cashloan_ChargesByMonth_year1_monthly_ec_charge_with_system_aget, self->data_ptr);
+}
+
+static int
+ChargesByMonth_set_year1_monthly_ec_charge_with_system(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Cashloan_ChargesByMonth_year1_monthly_ec_charge_with_system_aset, self->data_ptr);
+}
+
+static PyGetSetDef ChargesByMonth_getset[] = {
+{"charge_w_sys_ec_ym", (getter)ChargesByMonth_get_charge_w_sys_ec_ym,(setter)ChargesByMonth_set_charge_w_sys_ec_ym,
+	PyDoc_STR("*sequence[sequence]*: Energy charge with system [$]"),
+ 	NULL},
+{"true_up_credits_ym", (getter)ChargesByMonth_get_true_up_credits_ym,(setter)ChargesByMonth_set_true_up_credits_ym,
+	PyDoc_STR("*sequence[sequence]*: Net annual true-up payments [$]"),
+ 	NULL},
+{"year1_monthly_ec_charge_with_system", (getter)ChargesByMonth_get_year1_monthly_ec_charge_with_system,(setter)ChargesByMonth_set_year1_monthly_ec_charge_with_system,
+	PyDoc_STR("*sequence*: Energy charge with system [$]"),
+ 	NULL},
+	{NULL}  /* Sentinel */
+};
+
+static PyTypeObject ChargesByMonth_Type = {
+		/* The ob_type field must be initialized in the module init function
+		 * to be portable to Windows without using C++. */
+		PyVarObject_HEAD_INIT(NULL, 0)
+		"Cashloan.ChargesByMonth",             /*tp_name*/
+		sizeof(VarGroupObject),          /*tp_basicsize*/
+		0,                          /*tp_itemsize*/
+		/* methods */
+		0,    /*tp_dealloc*/
+		0,                          /*tp_print*/
+		(getattrfunc)0,             /*tp_getattr*/
+		0,                          /*tp_setattr*/
+		0,                          /*tp_reserved*/
+		0,                          /*tp_repr*/
+		0,                          /*tp_as_number*/
+		0,                          /*tp_as_sequence*/
+		0,                          /*tp_as_mapping*/
+		0,                          /*tp_hash*/
+		0,                          /*tp_call*/
+		0,                          /*tp_str*/
+		0,                          /*tp_getattro*/
+		0,                          /*tp_setattro*/
+		0,                          /*tp_as_buffer*/
+		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
+		0,                          /*tp_doc*/
+		0,                          /*tp_traverse*/
+		0,                          /*tp_clear*/
+		0,                          /*tp_richcompare*/
+		0,                          /*tp_weaklistofnset*/
+		0,                          /*tp_iter*/
+		0,                          /*tp_iternext*/
+		ChargesByMonth_methods,         /*tp_methods*/
+		0,                          /*tp_members*/
+		ChargesByMonth_getset,          /*tp_getset*/
+		0,                          /*tp_base*/
+		0,                          /*tp_dict*/
+		0,                          /*tp_descr_get*/
+		0,                          /*tp_descr_set*/
+		0,                          /*tp_dictofnset*/
+		0,                          /*tp_init*/
+		0,                          /*tp_alloc*/
+		0,             /*tp_new*/
+		0,                          /*tp_free*/
+		0,                          /*tp_is_gc*/
+};
+
+
+/*
+ * Monthly Group
+ */ 
+
+static PyTypeObject Monthly_Type;
+
+static PyObject *
+Monthly_new(SAM_Cashloan data_ptr)
+{
+	PyObject* new_obj = Monthly_Type.tp_alloc(&Monthly_Type,0);
+
+	VarGroupObject* Monthly_obj = (VarGroupObject*)new_obj;
+
+	Monthly_obj->data_ptr = (SAM_table)data_ptr;
+
+	return new_obj;
+}
+
+/* Monthly methods */
+
+static PyObject *
+Monthly_assign(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Cashloan", "Monthly")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+Monthly_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Monthly_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Cashloan", "Monthly")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+Monthly_export(VarGroupObject *self, PyObject *args)
+{
+	PyTypeObject* tp = &Monthly_Type;
+	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
+	return dict;
+}
+
+static PyMethodDef Monthly_methods[] = {
+		{"assign",            (PyCFunction)Monthly_assign,  METH_VARARGS,
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Monthly_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Monthly_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Monthly_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)Monthly_export,  METH_VARARGS,
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+		{NULL,              NULL}           /* sentinel */
+};
+
+static PyObject *
+Monthly_get_year1_monthly_ec_charge_gross_with_system(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Cashloan_Monthly_year1_monthly_ec_charge_gross_with_system_aget, self->data_ptr);
+}
+
+static int
+Monthly_set_year1_monthly_ec_charge_gross_with_system(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Cashloan_Monthly_year1_monthly_ec_charge_gross_with_system_aset, self->data_ptr);
+}
+
+static PyObject *
+Monthly_get_year1_monthly_electricity_to_grid(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Cashloan_Monthly_year1_monthly_electricity_to_grid_aget, self->data_ptr);
+}
+
+static int
+Monthly_set_year1_monthly_electricity_to_grid(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Cashloan_Monthly_year1_monthly_electricity_to_grid_aset, self->data_ptr);
+}
+
+static PyGetSetDef Monthly_getset[] = {
+{"year1_monthly_ec_charge_gross_with_system", (getter)Monthly_get_year1_monthly_ec_charge_gross_with_system,(setter)Monthly_set_year1_monthly_ec_charge_gross_with_system,
+	PyDoc_STR("*sequence*: Energy charge with system before credits [$/mo]\n\n*Constraints*: LENGTH=12"),
+ 	NULL},
+{"year1_monthly_electricity_to_grid", (getter)Monthly_get_year1_monthly_electricity_to_grid,(setter)Monthly_set_year1_monthly_electricity_to_grid,
+	PyDoc_STR("*sequence*: Electricity to/from grid [kWh/mo]\n\n*Constraints*: LENGTH=12"),
+ 	NULL},
+	{NULL}  /* Sentinel */
+};
+
+static PyTypeObject Monthly_Type = {
+		/* The ob_type field must be initialized in the module init function
+		 * to be portable to Windows without using C++. */
+		PyVarObject_HEAD_INIT(NULL, 0)
+		"Cashloan.Monthly",             /*tp_name*/
+		sizeof(VarGroupObject),          /*tp_basicsize*/
+		0,                          /*tp_itemsize*/
+		/* methods */
+		0,    /*tp_dealloc*/
+		0,                          /*tp_print*/
+		(getattrfunc)0,             /*tp_getattr*/
+		0,                          /*tp_setattr*/
+		0,                          /*tp_reserved*/
+		0,                          /*tp_repr*/
+		0,                          /*tp_as_number*/
+		0,                          /*tp_as_sequence*/
+		0,                          /*tp_as_mapping*/
+		0,                          /*tp_hash*/
+		0,                          /*tp_call*/
+		0,                          /*tp_str*/
+		0,                          /*tp_getattro*/
+		0,                          /*tp_setattro*/
+		0,                          /*tp_as_buffer*/
+		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
+		0,                          /*tp_doc*/
+		0,                          /*tp_traverse*/
+		0,                          /*tp_clear*/
+		0,                          /*tp_richcompare*/
+		0,                          /*tp_weaklistofnset*/
+		0,                          /*tp_iter*/
+		0,                          /*tp_iternext*/
+		Monthly_methods,         /*tp_methods*/
+		0,                          /*tp_members*/
+		Monthly_getset,          /*tp_getset*/
+		0,                          /*tp_base*/
+		0,                          /*tp_dict*/
+		0,                          /*tp_descr_get*/
+		0,                          /*tp_descr_set*/
+		0,                          /*tp_dictofnset*/
+		0,                          /*tp_init*/
+		0,                          /*tp_alloc*/
+		0,             /*tp_new*/
+		0,                          /*tp_free*/
+		0,                          /*tp_is_gc*/
+};
+
+
+/*
  * Outputs Group
  */ 
 
@@ -3788,6 +4569,23 @@ Outputs_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+Outputs_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Outputs_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Cashloan", "Outputs")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 Outputs_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &Outputs_Type;
@@ -3797,7 +4595,9 @@ Outputs_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Outputs_methods[] = {
 		{"assign",            (PyCFunction)Outputs_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Outputs_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Outputs_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Outputs_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Outputs_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -3864,6 +4664,24 @@ Outputs_get_cf_after_tax_net_equity_cost_flow(VarGroupObject *self, void *closur
 }
 
 static PyObject *
+Outputs_get_cf_annual_cost_lcos(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Cashloan_Outputs_cf_annual_cost_lcos_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_annual_discharge_lcos(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Cashloan_Outputs_cf_annual_discharge_lcos_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_batt_replacement_cost(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Cashloan_Outputs_cf_batt_replacement_cost_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_cf_battery_replacement_cost(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Cashloan_Outputs_cf_battery_replacement_cost_aget, self->data_ptr);
@@ -3873,6 +4691,24 @@ static PyObject *
 Outputs_get_cf_battery_replacement_cost_schedule(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Cashloan_Outputs_cf_battery_replacement_cost_schedule_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_charging_cost_grid(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Cashloan_Outputs_cf_charging_cost_grid_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_charging_cost_grid_month(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Cashloan_Outputs_cf_charging_cost_grid_month_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_charging_cost_pv(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Cashloan_Outputs_cf_charging_cost_pv_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -4038,6 +4874,24 @@ Outputs_get_cf_nte(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_cf_om_batt_capacity_expense(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Cashloan_Outputs_cf_om_batt_capacity_expense_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_om_batt_fixed_expense(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Cashloan_Outputs_cf_om_batt_fixed_expense_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_om_batt_production_expense(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Cashloan_Outputs_cf_om_batt_production_expense_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_cf_om_capacity1_expense(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Cashloan_Outputs_cf_om_capacity1_expense_aget, self->data_ptr);
@@ -4197,6 +5051,12 @@ static PyObject *
 Outputs_get_cf_ptc_total(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Cashloan_Outputs_cf_ptc_total_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_salvage_cost_lcos(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Cashloan_Outputs_cf_salvage_cost_lcos_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -4374,6 +5234,18 @@ Outputs_get_lcoptc_sta_real(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_lcos_nom(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Cashloan_Outputs_lcos_nom_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_lcos_real(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Cashloan_Outputs_lcos_real_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_lnte_nom(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Cashloan_Outputs_lnte_nom_nget, self->data_ptr);
@@ -4395,6 +5267,24 @@ static PyObject *
 Outputs_get_npv(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Cashloan_Outputs_npv_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_npv_annual_costs_lcos(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Cashloan_Outputs_npv_annual_costs_lcos_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_npv_energy_lcos_nom(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Cashloan_Outputs_npv_energy_lcos_nom_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_npv_energy_lcos_real(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Cashloan_Outputs_npv_energy_lcos_real_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -4476,11 +5366,29 @@ static PyGetSetDef Outputs_getset[] = {
 {"cf_after_tax_net_equity_cost_flow", (getter)Outputs_get_cf_after_tax_net_equity_cost_flow,(setter)0,
 	PyDoc_STR("*sequence*: After-tax annual costs [$]"),
  	NULL},
+{"cf_annual_cost_lcos", (getter)Outputs_get_cf_annual_cost_lcos,(setter)0,
+	PyDoc_STR("*sequence*: Annual storage costs [$]"),
+ 	NULL},
+{"cf_annual_discharge_lcos", (getter)Outputs_get_cf_annual_discharge_lcos,(setter)0,
+	PyDoc_STR("*sequence*: Annual storage discharge [kWh]"),
+ 	NULL},
+{"cf_batt_replacement_cost", (getter)Outputs_get_cf_batt_replacement_cost,(setter)0,
+	PyDoc_STR("*sequence*: Annual cost of battery replacements [$]"),
+ 	NULL},
 {"cf_battery_replacement_cost", (getter)Outputs_get_cf_battery_replacement_cost,(setter)0,
 	PyDoc_STR("*sequence*: Battery replacement cost [$]"),
  	NULL},
 {"cf_battery_replacement_cost_schedule", (getter)Outputs_get_cf_battery_replacement_cost_schedule,(setter)0,
 	PyDoc_STR("*sequence*: Battery replacement cost schedule [$]"),
+ 	NULL},
+{"cf_charging_cost_grid", (getter)Outputs_get_cf_charging_cost_grid,(setter)0,
+	PyDoc_STR("*sequence*: Annual cost to charge from grid [$]"),
+ 	NULL},
+{"cf_charging_cost_grid_month", (getter)Outputs_get_cf_charging_cost_grid_month,(setter)0,
+	PyDoc_STR("*sequence*: Annual cost to charge from grid (monthly) [$]"),
+ 	NULL},
+{"cf_charging_cost_pv", (getter)Outputs_get_cf_charging_cost_pv,(setter)0,
+	PyDoc_STR("*sequence*: Annual cost to charge from system [$]"),
  	NULL},
 {"cf_cumulative_payback_with_expenses", (getter)Outputs_get_cf_cumulative_payback_with_expenses,(setter)0,
 	PyDoc_STR("*sequence*: Cumulative simple payback with expenses [$]"),
@@ -4563,6 +5471,15 @@ static PyGetSetDef Outputs_getset[] = {
 {"cf_nte", (getter)Outputs_get_cf_nte,(setter)0,
 	PyDoc_STR("*sequence*: Not to exceed (NTE) [cents/kWh]"),
  	NULL},
+{"cf_om_batt_capacity_expense", (getter)Outputs_get_cf_om_batt_capacity_expense,(setter)0,
+	PyDoc_STR("*sequence*: Annual cost for battery capacity based maintenance [$]"),
+ 	NULL},
+{"cf_om_batt_fixed_expense", (getter)Outputs_get_cf_om_batt_fixed_expense,(setter)0,
+	PyDoc_STR("*sequence*: Annual fixed cost for battery maintenance [$]"),
+ 	NULL},
+{"cf_om_batt_production_expense", (getter)Outputs_get_cf_om_batt_production_expense,(setter)0,
+	PyDoc_STR("*sequence*: Annual cost to for battery production based maintenance [$]"),
+ 	NULL},
 {"cf_om_capacity1_expense", (getter)Outputs_get_cf_om_capacity1_expense,(setter)0,
 	PyDoc_STR("*sequence*: Battery capacity-based expense [$]"),
  	NULL},
@@ -4643,6 +5560,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"cf_ptc_total", (getter)Outputs_get_cf_ptc_total,(setter)0,
 	PyDoc_STR("*sequence*: Total PTC [$]"),
+ 	NULL},
+{"cf_salvage_cost_lcos", (getter)Outputs_get_cf_salvage_cost_lcos,(setter)0,
+	PyDoc_STR("*sequence*: Annual battery salvage value costs [$]"),
  	NULL},
 {"cf_sta_and_fed_tax_savings", (getter)Outputs_get_cf_sta_and_fed_tax_savings,(setter)0,
 	PyDoc_STR("*sequence*: Total tax savings (federal and state) [$]"),
@@ -4731,6 +5651,12 @@ static PyGetSetDef Outputs_getset[] = {
 {"lcoptc_sta_real", (getter)Outputs_get_lcoptc_sta_real,(setter)0,
 	PyDoc_STR("*float*: Levelized state PTC (real) [cents/kWh]"),
  	NULL},
+{"lcos_nom", (getter)Outputs_get_lcos_nom,(setter)0,
+	PyDoc_STR("*float*: Levelized cost of storage (nominal) [cents/kWh]"),
+ 	NULL},
+{"lcos_real", (getter)Outputs_get_lcos_real,(setter)0,
+	PyDoc_STR("*float*: Levelized cost of storage (real) [cents/kWh]"),
+ 	NULL},
 {"lnte_nom", (getter)Outputs_get_lnte_nom,(setter)0,
 	PyDoc_STR("*float*: Nominal LNTE [cents/kWh]"),
  	NULL},
@@ -4742,6 +5668,15 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"npv", (getter)Outputs_get_npv,(setter)0,
 	PyDoc_STR("*float*: Net present value [$]"),
+ 	NULL},
+{"npv_annual_costs_lcos", (getter)Outputs_get_npv_annual_costs_lcos,(setter)0,
+	PyDoc_STR("*float*: Present value of annual storage costs [$]"),
+ 	NULL},
+{"npv_energy_lcos_nom", (getter)Outputs_get_npv_energy_lcos_nom,(setter)0,
+	PyDoc_STR("*float*: Present value of annual stored energy (nominal) [kWh]"),
+ 	NULL},
+{"npv_energy_lcos_real", (getter)Outputs_get_npv_energy_lcos_real,(setter)0,
+	PyDoc_STR("*float*: Present value of annual stored energy (real) [kWh]"),
  	NULL},
 {"payback", (getter)Outputs_get_payback,(setter)0,
 	PyDoc_STR("*float*: Payback period [years]"),
@@ -4870,6 +5805,18 @@ newCashloanObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "ThirdPartyOwnership", ThirdPartyOwnership_obj);
 	Py_DECREF(ThirdPartyOwnership_obj);
 
+	PyObject* Battery_obj = Battery_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "Battery", Battery_obj);
+	Py_DECREF(Battery_obj);
+
+	PyObject* ChargesByMonth_obj = ChargesByMonth_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "ChargesByMonth", ChargesByMonth_obj);
+	Py_DECREF(ChargesByMonth_obj);
+
+	PyObject* Monthly_obj = Monthly_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "Monthly", Monthly_obj);
+	Py_DECREF(Monthly_obj);
+
 	PyObject* Outputs_obj = Outputs_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
 	Py_DECREF(Outputs_obj);
@@ -4924,6 +5871,20 @@ Cashloan_assign(CmodObject *self, PyObject *args)
 	return Py_None;
 }
 
+static PyObject *
+Cashloan_replace(CmodObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_replace_from_nested_dict((PyObject*)self, self->x_attr, self->data_ptr, dict, "Cashloan"))
+		return NULL;
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
 
 static PyObject *
 Cashloan_export(CmodObject *self, PyObject *args)
@@ -4948,6 +5909,8 @@ static PyMethodDef Cashloan_methods[] = {
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
 		{"assign",            (PyCFunction)Cashloan_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Financial Parameters': { var: val, ...}, ...}``")},
+		{"replace",            (PyCFunction)Cashloan_replace,  METH_VARARGS,
+				PyDoc_STR("replace(dict) -> None\n Replace attributes from nested dictionary, except for Outputs. Unassigns all values in each Group then assigns from the input dict.\n\n``nested_dict = { 'Financial Parameters': { var: val, ...}, ...}``")},
 		{"export",            (PyCFunction)Cashloan_export,  METH_VARARGS,
 				PyDoc_STR("export() -> dict\n Export attributes into nested dictionary")},
 		{"value",             (PyCFunction)Cashloan_value, METH_VARARGS,
@@ -5205,6 +6168,27 @@ CashloanModule_exec(PyObject *m)
 				"ThirdPartyOwnership",
 				(PyObject*)&ThirdPartyOwnership_Type);
 	Py_DECREF(&ThirdPartyOwnership_Type);
+
+	/// Add the Battery type object to Cashloan_Type
+	if (PyType_Ready(&Battery_Type) < 0) { goto fail; }
+	PyDict_SetItemString(Cashloan_Type.tp_dict,
+				"Battery",
+				(PyObject*)&Battery_Type);
+	Py_DECREF(&Battery_Type);
+
+	/// Add the ChargesByMonth type object to Cashloan_Type
+	if (PyType_Ready(&ChargesByMonth_Type) < 0) { goto fail; }
+	PyDict_SetItemString(Cashloan_Type.tp_dict,
+				"ChargesByMonth",
+				(PyObject*)&ChargesByMonth_Type);
+	Py_DECREF(&ChargesByMonth_Type);
+
+	/// Add the Monthly type object to Cashloan_Type
+	if (PyType_Ready(&Monthly_Type) < 0) { goto fail; }
+	PyDict_SetItemString(Cashloan_Type.tp_dict,
+				"Monthly",
+				(PyObject*)&Monthly_Type);
+	Py_DECREF(&Monthly_Type);
 
 	/// Add the Outputs type object to Cashloan_Type
 	if (PyType_Ready(&Outputs_Type) < 0) { goto fail; }

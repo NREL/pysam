@@ -97,8 +97,10 @@ class Load(object):
 
 
 	crit_load = tuple
+	grid_outage = tuple
 	load = tuple
 	load_escalation = tuple
+	run_resiliency_calcs = float
 
 
 class BatteryCell(object):
@@ -284,6 +286,10 @@ class ElectricityRates(object):
 	ur_dc_sched_weekday = tuple
 	ur_dc_sched_weekend = tuple
 	ur_dc_tou_mat = tuple
+	ur_ec_billing_demand_lookback_percentages = tuple
+	ur_ec_billing_demand_lookback_period = float
+	ur_ec_billing_demand_minimum = float
+	ur_ec_enable_billing_demand = float
 	ur_ec_sched_weekday = tuple
 	ur_ec_sched_weekend = tuple
 	ur_ec_tou_mat = tuple
@@ -298,6 +304,7 @@ class ElectricityRates(object):
 	ur_sell_eq_buy = float
 	ur_ts_buy_rate = tuple
 	ur_ts_sell_rate = tuple
+	ur_yearzero_usage_peaks = tuple
 
 
 class Outputs(object):

@@ -1,9 +1,9 @@
-.. _Sco2DesignPoint:
+.. _TestUdPowerCycle:
 
-Sco2DesignPoint
+TestUdPowerCycle
 ***********************************
 
-Wrapper for SAM Simulation Core model: `cmod_sco2_design_point.cpp <https://github.com/NREL/ssc/blob/develop/ssc/cmod_sco2_design_point.cpp>`_
+Wrapper for SAM Simulation Core model: `cmod_test_ud_power_cycle.cpp <https://github.com/NREL/ssc/blob/develop/ssc/cmod_test_ud_power_cycle.cpp>`_
 
 Input Consistency Warning
 ==================================
@@ -21,26 +21,26 @@ Creating an Instance
 
 Refer to the :ref:`Initializing a Model <initializing>` page for details on the different ways to create an instance of a PySAM class.
 
-**Sco2DesignPoint model description**
+**TestUdPowerCycle model description**
 
-.. automodule:: PySAM.Sco2DesignPoint
+.. automodule:: PySAM.TestUdPowerCycle
 	:members:
 
 Functions
 ===================================
 
-.. autoclass:: PySAM.Sco2DesignPoint.Sco2DesignPoint
+.. autoclass:: PySAM.TestUdPowerCycle.TestUdPowerCycle
 	:members:
 
 Common Group
 ======================================================
 
-.. autoclass:: PySAM.Sco2DesignPoint.Sco2DesignPoint.Common
+.. autoclass:: PySAM.TestUdPowerCycle.TestUdPowerCycle.Common
 	:members:
 
 Outputs Group
 ======================================================
 
-.. autoclass:: PySAM.Sco2DesignPoint.Sco2DesignPoint.Outputs
+.. autoclass:: PySAM.TestUdPowerCycle.TestUdPowerCycle.Outputs
 	:members:
 

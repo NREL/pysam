@@ -1,9 +1,9 @@
-.. _Cashloan:
+.. _EtesElectricResistance:
 
-Cashloan
+EtesElectricResistance
 ***********************************
 
-Wrapper for SAM Simulation Core model: `cmod_cashloan.cpp <https://github.com/NREL/ssc/blob/develop/ssc/cmod_cashloan.cpp>`_
+Wrapper for SAM Simulation Core model: `cmod_etes_electric_resistance.cpp <https://github.com/NREL/ssc/blob/develop/ssc/cmod_etes_electric_resistance.cpp>`_
 
 Input Consistency Warning
 ==================================
@@ -21,98 +21,92 @@ Creating an Instance
 
 Refer to the :ref:`Initializing a Model <initializing>` page for details on the different ways to create an instance of a PySAM class.
 
-**Cashloan model description**
+**EtesElectricResistance model description**
 
-.. automodule:: PySAM.Cashloan
+.. automodule:: PySAM.EtesElectricResistance
 	:members:
 
 Functions
 ===================================
 
-.. autoclass:: PySAM.Cashloan.Cashloan
+.. autoclass:: PySAM.EtesElectricResistance.EtesElectricResistance
 	:members:
 
-FinancialParameters Group
+SolarResource Group
 ======================================================
 
-.. autoclass:: PySAM.Cashloan.Cashloan.FinancialParameters
+.. autoclass:: PySAM.EtesElectricResistance.EtesElectricResistance.SolarResource
+	:members:
+
+SystemControl Group
+======================================================
+
+.. autoclass:: PySAM.EtesElectricResistance.EtesElectricResistance.SystemControl
+	:members:
+
+SystemDesign Group
+======================================================
+
+.. autoclass:: PySAM.EtesElectricResistance.EtesElectricResistance.SystemDesign
+	:members:
+
+PowerCycle Group
+======================================================
+
+.. autoclass:: PySAM.EtesElectricResistance.EtesElectricResistance.PowerCycle
+	:members:
+
+RankineCycle Group
+======================================================
+
+.. autoclass:: PySAM.EtesElectricResistance.EtesElectricResistance.RankineCycle
+	:members:
+
+UserDefinedPowerCycle Group
+======================================================
+
+.. autoclass:: PySAM.EtesElectricResistance.EtesElectricResistance.UserDefinedPowerCycle
+	:members:
+
+ThermalStorage Group
+======================================================
+
+.. autoclass:: PySAM.EtesElectricResistance.EtesElectricResistance.ThermalStorage
+	:members:
+
+TimeOfDeliveryFactors Group
+======================================================
+
+.. autoclass:: PySAM.EtesElectricResistance.EtesElectricResistance.TimeOfDeliveryFactors
+	:members:
+
+SystemCost Group
+======================================================
+
+.. autoclass:: PySAM.EtesElectricResistance.EtesElectricResistance.SystemCost
 	:members:
 
 SystemCosts Group
 ======================================================
 
-.. autoclass:: PySAM.Cashloan.Cashloan.SystemCosts
+.. autoclass:: PySAM.EtesElectricResistance.EtesElectricResistance.SystemCosts
 	:members:
 
-Depreciation Group
+FinancialParameters Group
 ======================================================
 
-.. autoclass:: PySAM.Cashloan.Cashloan.Depreciation
+.. autoclass:: PySAM.EtesElectricResistance.EtesElectricResistance.FinancialParameters
 	:members:
 
-TaxCreditIncentives Group
+AdjustmentFactors Group
 ======================================================
 
-.. autoclass:: PySAM.Cashloan.Cashloan.TaxCreditIncentives
-	:members:
-
-PaymentIncentives Group
-======================================================
-
-.. autoclass:: PySAM.Cashloan.Cashloan.PaymentIncentives
-	:members:
-
-BatterySystem Group
-======================================================
-
-.. autoclass:: PySAM.Cashloan.Cashloan.BatterySystem
-	:members:
-
-FuelCell Group
-======================================================
-
-.. autoclass:: PySAM.Cashloan.Cashloan.FuelCell
-	:members:
-
-SystemOutput Group
-======================================================
-
-.. autoclass:: PySAM.Cashloan.Cashloan.SystemOutput
-	:members:
-
-Lifetime Group
-======================================================
-
-.. autoclass:: PySAM.Cashloan.Cashloan.Lifetime
-	:members:
-
-ThirdPartyOwnership Group
-======================================================
-
-.. autoclass:: PySAM.Cashloan.Cashloan.ThirdPartyOwnership
-	:members:
-
-Battery Group
-======================================================
-
-.. autoclass:: PySAM.Cashloan.Cashloan.Battery
-	:members:
-
-ChargesByMonth Group
-======================================================
-
-.. autoclass:: PySAM.Cashloan.Cashloan.ChargesByMonth
-	:members:
-
-Monthly Group
-======================================================
-
-.. autoclass:: PySAM.Cashloan.Cashloan.Monthly
+.. autoclass:: PySAM.EtesElectricResistance.EtesElectricResistance.AdjustmentFactors
 	:members:
 
 Outputs Group
 ======================================================
 
-.. autoclass:: PySAM.Cashloan.Cashloan.Outputs
+.. autoclass:: PySAM.EtesElectricResistance.EtesElectricResistance.Outputs
 	:members:
 

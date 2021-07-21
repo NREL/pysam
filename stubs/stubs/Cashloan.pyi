@@ -10,6 +10,7 @@ class FinancialParameters(object):
 
 
 	analysis_period = float
+	batt_salvage_percentage = float
 	debt_fraction = float
 	federal_tax_rate = tuple
 	inflation_rate = float
@@ -42,18 +43,20 @@ class SystemCosts(object):
 	add_om_num_types = float
 	annual_fuel_usage = float
 	annual_fuel_usage_lifetime = tuple
+	om_batt_capacity_cost = tuple
+	om_batt_fixed_cost = tuple
+	om_batt_replacement_cost = tuple
+	om_batt_variable_cost = tuple
 	om_capacity = tuple
-	om_capacity1 = tuple
-	om_capacity1_nameplate = float
-	om_capacity2 = tuple
-	om_capacity2_nameplate = float
 	om_capacity_escal = float
 	om_fixed = tuple
-	om_fixed1 = tuple
-	om_fixed2 = tuple
 	om_fixed_escal = float
 	om_fuel_cost = tuple
 	om_fuel_cost_escal = float
+	om_fuelcell_capacity_cost = tuple
+	om_fuelcell_fixed_cost = tuple
+	om_fuelcell_replacement_cost = tuple
+	om_fuelcell_variable_cost = tuple
 	om_opt_fuel_1_cost = tuple
 	om_opt_fuel_1_cost_escal = float
 	om_opt_fuel_1_usage = float
@@ -61,15 +64,13 @@ class SystemCosts(object):
 	om_opt_fuel_2_cost_escal = float
 	om_opt_fuel_2_usage = float
 	om_production = tuple
-	om_production1 = tuple
 	om_production1_values = tuple
-	om_production2 = tuple
 	om_production2_values = tuple
 	om_production_escal = float
-	om_replacement_cost1 = tuple
-	om_replacement_cost2 = tuple
 	om_replacement_cost_escal = float
 	total_installed_cost = float
+	ui_batt_capacity = float
+	ui_fuelcell_capacity = float
 
 
 class Depreciation(object):
@@ -309,6 +310,59 @@ class ThirdPartyOwnership(object):
 	elec_cost_without_system = tuple
 
 
+class Battery(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> dict:
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
+	batt_annual_charge_from_system = tuple
+	batt_annual_discharge_energy = tuple
+	batt_capacity_percent = tuple
+	battery_total_cost_lcos = float
+	grid_to_batt = tuple
+	monthly_batt_to_grid = tuple
+	monthly_grid_to_batt = tuple
+	monthly_grid_to_load = tuple
+	monthly_system_to_grid = tuple
+
+
+class ChargesByMonth(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> dict:
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
+	charge_w_sys_ec_ym = tuple
+	true_up_credits_ym = tuple
+	year1_monthly_ec_charge_with_system = tuple
+
+
+class Monthly(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> dict:
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
+	year1_monthly_ec_charge_gross_with_system = tuple
+	year1_monthly_electricity_to_grid = tuple
+
+
 class Outputs(object):
 	def assign(self): 
 		pass
@@ -330,8 +384,14 @@ class Outputs(object):
 	cbi_total_uti = float
 	cf_after_tax_cash_flow = tuple
 	cf_after_tax_net_equity_cost_flow = tuple
+	cf_annual_cost_lcos = tuple
+	cf_annual_discharge_lcos = tuple
+	cf_batt_replacement_cost = tuple
 	cf_battery_replacement_cost = tuple
 	cf_battery_replacement_cost_schedule = tuple
+	cf_charging_cost_grid = tuple
+	cf_charging_cost_grid_month = tuple
+	cf_charging_cost_pv = tuple
 	cf_cumulative_payback_with_expenses = tuple
 	cf_cumulative_payback_without_expenses = tuple
 	cf_debt_balance = tuple
@@ -359,6 +419,9 @@ class Outputs(object):
 	cf_length = float
 	cf_net_salvage_value = tuple
 	cf_nte = tuple
+	cf_om_batt_capacity_expense = tuple
+	cf_om_batt_fixed_expense = tuple
+	cf_om_batt_production_expense = tuple
 	cf_om_capacity1_expense = tuple
 	cf_om_capacity2_expense = tuple
 	cf_om_capacity_expense = tuple
@@ -386,6 +449,7 @@ class Outputs(object):
 	cf_ptc_fed = tuple
 	cf_ptc_sta = tuple
 	cf_ptc_total = tuple
+	cf_salvage_cost_lcos = tuple
 	cf_sta_and_fed_tax_savings = tuple
 	cf_sta_depr_sched = tuple
 	cf_sta_depreciation = tuple
@@ -415,10 +479,15 @@ class Outputs(object):
 	lcoptc_fed_real = float
 	lcoptc_sta_nom = float
 	lcoptc_sta_real = float
+	lcos_nom = float
+	lcos_real = float
 	lnte_nom = float
 	lnte_real = float
 	loan_amount = float
 	npv = float
+	npv_annual_costs_lcos = float
+	npv_energy_lcos_nom = float
+	npv_energy_lcos_real = float
 	payback = float
 	present_value_fuel = float
 	present_value_insandproptax = float
@@ -461,6 +530,9 @@ class Cashloan(object):
 	SystemOutput = SystemOutput
 	Lifetime = Lifetime
 	ThirdPartyOwnership = ThirdPartyOwnership
+	Battery = Battery
+	ChargesByMonth = ChargesByMonth
+	Monthly = Monthly
 	Outputs = Outputs
 
 

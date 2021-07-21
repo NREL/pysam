@@ -43,6 +43,23 @@ Weather_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+Weather_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Weather_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "TcsgenericSolar", "Weather")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 Weather_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &Weather_Type;
@@ -52,7 +69,9 @@ Weather_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Weather_methods[] = {
 		{"assign",            (PyCFunction)Weather_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Weather_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Weather_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Weather_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Weather_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Weather_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -206,6 +225,23 @@ GenericSolar_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+GenericSolar_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &GenericSolar_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "TcsgenericSolar", "GenericSolar")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 GenericSolar_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &GenericSolar_Type;
@@ -215,7 +251,9 @@ GenericSolar_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef GenericSolar_methods[] = {
 		{"assign",            (PyCFunction)GenericSolar_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``GenericSolar_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``GenericSolar_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)GenericSolar_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``GenericSolar_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)GenericSolar_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -324,6 +362,23 @@ TouTranslator_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+TouTranslator_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &TouTranslator_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "TcsgenericSolar", "TouTranslator")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 TouTranslator_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &TouTranslator_Type;
@@ -333,7 +388,9 @@ TouTranslator_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef TouTranslator_methods[] = {
 		{"assign",            (PyCFunction)TouTranslator_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``TouTranslator_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``TouTranslator_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)TouTranslator_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``TouTranslator_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)TouTranslator_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -457,6 +514,23 @@ Type260_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+Type260_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Type260_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "TcsgenericSolar", "Type260")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 Type260_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &Type260_Type;
@@ -466,7 +540,9 @@ Type260_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Type260_methods[] = {
 		{"assign",            (PyCFunction)Type260_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Type260_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Type260_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Type260_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Type260_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Type260_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -1370,6 +1446,23 @@ Outputs_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+Outputs_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Outputs_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "TcsgenericSolar", "Outputs")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 Outputs_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &Outputs_Type;
@@ -1379,7 +1472,9 @@ Outputs_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Outputs_methods[] = {
 		{"assign",            (PyCFunction)Outputs_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Outputs_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Outputs_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Outputs_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Outputs_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -1389,6 +1484,12 @@ static PyObject *
 Outputs_get_annual_energy(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_TcsgenericSolar_Outputs_annual_energy_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_annual_energy_distribution_time(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_TcsgenericSolar_Outputs_annual_energy_distribution_time_mget, self->data_ptr);
 }
 
 static PyObject *
@@ -1809,6 +1910,9 @@ static PyGetSetDef Outputs_getset[] = {
 {"annual_energy", (getter)Outputs_get_annual_energy,(setter)0,
 	PyDoc_STR("*float*: Annual Energy [kWh]"),
  	NULL},
+{"annual_energy_distribution_time", (getter)Outputs_get_annual_energy_distribution_time,(setter)0,
+	PyDoc_STR("*sequence[sequence]*: Annual energy production as function of time [kW]"),
+ 	NULL},
 {"annual_fuel_usage", (getter)Outputs_get_annual_fuel_usage,(setter)0,
 	PyDoc_STR("*float*: Annual fuel usage [kWh]"),
  	NULL},
@@ -2164,6 +2268,20 @@ TcsgenericSolar_assign(CmodObject *self, PyObject *args)
 	return Py_None;
 }
 
+static PyObject *
+TcsgenericSolar_replace(CmodObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_replace_from_nested_dict((PyObject*)self, self->x_attr, self->data_ptr, dict, "TcsgenericSolar"))
+		return NULL;
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
 
 static PyObject *
 TcsgenericSolar_export(CmodObject *self, PyObject *args)
@@ -2188,6 +2306,8 @@ static PyMethodDef TcsgenericSolar_methods[] = {
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
 		{"assign",            (PyCFunction)TcsgenericSolar_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Weather': { var: val, ...}, ...}``")},
+		{"replace",            (PyCFunction)TcsgenericSolar_replace,  METH_VARARGS,
+				PyDoc_STR("replace(dict) -> None\n Replace attributes from nested dictionary, except for Outputs. Unassigns all values in each Group then assigns from the input dict.\n\n``nested_dict = { 'Weather': { var: val, ...}, ...}``")},
 		{"export",            (PyCFunction)TcsgenericSolar_export,  METH_VARARGS,
 				PyDoc_STR("export() -> dict\n Export attributes into nested dictionary")},
 		{"value",             (PyCFunction)TcsgenericSolar_value, METH_VARARGS,

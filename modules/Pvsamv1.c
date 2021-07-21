@@ -45,6 +45,23 @@ SolarResource_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+SolarResource_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &SolarResource_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Pvsamv1", "SolarResource")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 SolarResource_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &SolarResource_Type;
@@ -54,7 +71,9 @@ SolarResource_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef SolarResource_methods[] = {
 		{"assign",            (PyCFunction)SolarResource_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``SolarResource_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``SolarResource_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)SolarResource_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``SolarResource_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)SolarResource_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -238,6 +257,23 @@ Losses_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+Losses_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Losses_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Pvsamv1", "Losses")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 Losses_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &Losses_Type;
@@ -247,7 +283,9 @@ Losses_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Losses_methods[] = {
 		{"assign",            (PyCFunction)Losses_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Losses_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Losses_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Losses_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Losses_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Losses_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -851,6 +889,23 @@ Lifetime_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+Lifetime_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Lifetime_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Pvsamv1", "Lifetime")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 Lifetime_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &Lifetime_Type;
@@ -860,7 +915,9 @@ Lifetime_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Lifetime_methods[] = {
 		{"assign",            (PyCFunction)Lifetime_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Lifetime_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Lifetime_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Lifetime_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Lifetime_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Lifetime_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -1089,6 +1146,23 @@ SystemDesign_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+SystemDesign_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &SystemDesign_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Pvsamv1", "SystemDesign")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 SystemDesign_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &SystemDesign_Type;
@@ -1098,7 +1172,9 @@ SystemDesign_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef SystemDesign_methods[] = {
 		{"assign",            (PyCFunction)SystemDesign_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``SystemDesign_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``SystemDesign_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)SystemDesign_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``SystemDesign_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)SystemDesign_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -1942,6 +2018,23 @@ Shading_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+Shading_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Shading_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Pvsamv1", "Shading")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 Shading_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &Shading_Type;
@@ -1951,7 +2044,9 @@ Shading_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Shading_methods[] = {
 		{"assign",            (PyCFunction)Shading_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Shading_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Shading_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Shading_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Shading_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Shading_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -2405,6 +2500,23 @@ Layout_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+Layout_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Layout_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Pvsamv1", "Layout")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 Layout_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &Layout_Type;
@@ -2414,7 +2526,9 @@ Layout_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Layout_methods[] = {
 		{"assign",            (PyCFunction)Layout_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Layout_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Layout_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Layout_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Layout_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Layout_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -2703,6 +2817,23 @@ Module_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+Module_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Module_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Pvsamv1", "Module")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 Module_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &Module_Type;
@@ -2712,7 +2843,9 @@ Module_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Module_methods[] = {
 		{"assign",            (PyCFunction)Module_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Module_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Module_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Module_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Module_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Module_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -2821,6 +2954,23 @@ SimpleEfficiencyModuleModel_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+SimpleEfficiencyModuleModel_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &SimpleEfficiencyModuleModel_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Pvsamv1", "SimpleEfficiencyModuleModel")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 SimpleEfficiencyModuleModel_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &SimpleEfficiencyModuleModel_Type;
@@ -2830,7 +2980,9 @@ SimpleEfficiencyModuleModel_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef SimpleEfficiencyModuleModel_methods[] = {
 		{"assign",            (PyCFunction)SimpleEfficiencyModuleModel_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``SimpleEfficiencyModuleModel_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``SimpleEfficiencyModuleModel_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)SimpleEfficiencyModuleModel_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``SimpleEfficiencyModuleModel_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)SimpleEfficiencyModuleModel_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -3284,6 +3436,23 @@ CECPerformanceModelWithModuleDatabase_assign(VarGroupObject *self, PyObject *arg
 }
 
 static PyObject *
+CECPerformanceModelWithModuleDatabase_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &CECPerformanceModelWithModuleDatabase_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Pvsamv1", "CECPerformanceModelWithModuleDatabase")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 CECPerformanceModelWithModuleDatabase_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &CECPerformanceModelWithModuleDatabase_Type;
@@ -3293,7 +3462,9 @@ CECPerformanceModelWithModuleDatabase_export(VarGroupObject *self, PyObject *arg
 
 static PyMethodDef CECPerformanceModelWithModuleDatabase_methods[] = {
 		{"assign",            (PyCFunction)CECPerformanceModelWithModuleDatabase_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``CECPerformanceModelWithModuleDatabase_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``CECPerformanceModelWithModuleDatabase_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)CECPerformanceModelWithModuleDatabase_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``CECPerformanceModelWithModuleDatabase_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)CECPerformanceModelWithModuleDatabase_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -3882,6 +4053,23 @@ CECPerformanceModelWithUserEnteredSpecifications_assign(VarGroupObject *self, Py
 }
 
 static PyObject *
+CECPerformanceModelWithUserEnteredSpecifications_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &CECPerformanceModelWithUserEnteredSpecifications_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Pvsamv1", "CECPerformanceModelWithUserEnteredSpecifications")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 CECPerformanceModelWithUserEnteredSpecifications_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &CECPerformanceModelWithUserEnteredSpecifications_Type;
@@ -3891,7 +4079,9 @@ CECPerformanceModelWithUserEnteredSpecifications_export(VarGroupObject *self, Py
 
 static PyMethodDef CECPerformanceModelWithUserEnteredSpecifications_methods[] = {
 		{"assign",            (PyCFunction)CECPerformanceModelWithUserEnteredSpecifications_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``CECPerformanceModelWithUserEnteredSpecifications_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``CECPerformanceModelWithUserEnteredSpecifications_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)CECPerformanceModelWithUserEnteredSpecifications_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``CECPerformanceModelWithUserEnteredSpecifications_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)CECPerformanceModelWithUserEnteredSpecifications_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -4255,6 +4445,23 @@ SandiaPVArrayPerformanceModelWithModuleDatabase_assign(VarGroupObject *self, PyO
 }
 
 static PyObject *
+SandiaPVArrayPerformanceModelWithModuleDatabase_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &SandiaPVArrayPerformanceModelWithModuleDatabase_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Pvsamv1", "SandiaPVArrayPerformanceModelWithModuleDatabase")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 SandiaPVArrayPerformanceModelWithModuleDatabase_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &SandiaPVArrayPerformanceModelWithModuleDatabase_Type;
@@ -4264,7 +4471,9 @@ SandiaPVArrayPerformanceModelWithModuleDatabase_export(VarGroupObject *self, PyO
 
 static PyMethodDef SandiaPVArrayPerformanceModelWithModuleDatabase_methods[] = {
 		{"assign",            (PyCFunction)SandiaPVArrayPerformanceModelWithModuleDatabase_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``SandiaPVArrayPerformanceModelWithModuleDatabase_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``SandiaPVArrayPerformanceModelWithModuleDatabase_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)SandiaPVArrayPerformanceModelWithModuleDatabase_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``SandiaPVArrayPerformanceModelWithModuleDatabase_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)SandiaPVArrayPerformanceModelWithModuleDatabase_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -5003,6 +5212,23 @@ IEC61853SingleDiodeModel_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+IEC61853SingleDiodeModel_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &IEC61853SingleDiodeModel_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Pvsamv1", "IEC61853SingleDiodeModel")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 IEC61853SingleDiodeModel_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &IEC61853SingleDiodeModel_Type;
@@ -5012,7 +5238,9 @@ IEC61853SingleDiodeModel_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef IEC61853SingleDiodeModel_methods[] = {
 		{"assign",            (PyCFunction)IEC61853SingleDiodeModel_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``IEC61853SingleDiodeModel_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``IEC61853SingleDiodeModel_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)IEC61853SingleDiodeModel_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``IEC61853SingleDiodeModel_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)IEC61853SingleDiodeModel_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -5496,6 +5724,23 @@ MermoudLejeuneSingleDiodeModel_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+MermoudLejeuneSingleDiodeModel_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &MermoudLejeuneSingleDiodeModel_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Pvsamv1", "MermoudLejeuneSingleDiodeModel")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 MermoudLejeuneSingleDiodeModel_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &MermoudLejeuneSingleDiodeModel_Type;
@@ -5505,7 +5750,9 @@ MermoudLejeuneSingleDiodeModel_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef MermoudLejeuneSingleDiodeModel_methods[] = {
 		{"assign",            (PyCFunction)MermoudLejeuneSingleDiodeModel_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``MermoudLejeuneSingleDiodeModel_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``MermoudLejeuneSingleDiodeModel_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)MermoudLejeuneSingleDiodeModel_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``MermoudLejeuneSingleDiodeModel_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)MermoudLejeuneSingleDiodeModel_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -6364,6 +6611,23 @@ Inverter_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+Inverter_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Inverter_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Pvsamv1", "Inverter")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 Inverter_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &Inverter_Type;
@@ -6373,7 +6637,9 @@ Inverter_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Inverter_methods[] = {
 		{"assign",            (PyCFunction)Inverter_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Inverter_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Inverter_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Inverter_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Inverter_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Inverter_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -6662,6 +6928,23 @@ InverterCECDatabase_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+InverterCECDatabase_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &InverterCECDatabase_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Pvsamv1", "InverterCECDatabase")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 InverterCECDatabase_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &InverterCECDatabase_Type;
@@ -6671,7 +6954,9 @@ InverterCECDatabase_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef InverterCECDatabase_methods[] = {
 		{"assign",            (PyCFunction)InverterCECDatabase_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``InverterCECDatabase_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``InverterCECDatabase_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)InverterCECDatabase_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``InverterCECDatabase_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)InverterCECDatabase_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -6930,6 +7215,23 @@ InverterCECCoefficientGenerator_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+InverterCECCoefficientGenerator_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &InverterCECCoefficientGenerator_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Pvsamv1", "InverterCECCoefficientGenerator")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 InverterCECCoefficientGenerator_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &InverterCECCoefficientGenerator_Type;
@@ -6939,7 +7241,9 @@ InverterCECCoefficientGenerator_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef InverterCECCoefficientGenerator_methods[] = {
 		{"assign",            (PyCFunction)InverterCECCoefficientGenerator_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``InverterCECCoefficientGenerator_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``InverterCECCoefficientGenerator_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)InverterCECCoefficientGenerator_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``InverterCECCoefficientGenerator_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)InverterCECCoefficientGenerator_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -7198,6 +7502,23 @@ InverterDatasheet_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+InverterDatasheet_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &InverterDatasheet_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Pvsamv1", "InverterDatasheet")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 InverterDatasheet_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &InverterDatasheet_Type;
@@ -7207,7 +7528,9 @@ InverterDatasheet_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef InverterDatasheet_methods[] = {
 		{"assign",            (PyCFunction)InverterDatasheet_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``InverterDatasheet_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``InverterDatasheet_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)InverterDatasheet_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``InverterDatasheet_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)InverterDatasheet_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -7406,6 +7729,23 @@ InverterPartLoadCurve_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+InverterPartLoadCurve_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &InverterPartLoadCurve_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Pvsamv1", "InverterPartLoadCurve")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 InverterPartLoadCurve_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &InverterPartLoadCurve_Type;
@@ -7415,7 +7755,9 @@ InverterPartLoadCurve_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef InverterPartLoadCurve_methods[] = {
 		{"assign",            (PyCFunction)InverterPartLoadCurve_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``InverterPartLoadCurve_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``InverterPartLoadCurve_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)InverterPartLoadCurve_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``InverterPartLoadCurve_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)InverterPartLoadCurve_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -7629,6 +7971,23 @@ InverterMermoudLejeuneModel_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+InverterMermoudLejeuneModel_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &InverterMermoudLejeuneModel_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Pvsamv1", "InverterMermoudLejeuneModel")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 InverterMermoudLejeuneModel_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &InverterMermoudLejeuneModel_Type;
@@ -7638,7 +7997,9 @@ InverterMermoudLejeuneModel_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef InverterMermoudLejeuneModel_methods[] = {
 		{"assign",            (PyCFunction)InverterMermoudLejeuneModel_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``InverterMermoudLejeuneModel_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``InverterMermoudLejeuneModel_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)InverterMermoudLejeuneModel_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``InverterMermoudLejeuneModel_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)InverterMermoudLejeuneModel_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -8272,6 +8633,23 @@ BatterySystem_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+BatterySystem_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &BatterySystem_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Pvsamv1", "BatterySystem")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 BatterySystem_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &BatterySystem_Type;
@@ -8281,7 +8659,9 @@ BatterySystem_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef BatterySystem_methods[] = {
 		{"assign",            (PyCFunction)BatterySystem_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``BatterySystem_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``BatterySystem_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)BatterySystem_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``BatterySystem_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)BatterySystem_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -8631,22 +9011,22 @@ static PyGetSetDef BatterySystem_getset[] = {
 	PyDoc_STR("*float*: Battery interconnection (AC or DC)\n\n*Options*: 0=DC_Connected,1=AC_Connected\n\n*Changes to this variable may require updating the values of the following*: \n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
 {"batt_computed_bank_capacity", (getter)BatterySystem_get_batt_computed_bank_capacity,(setter)BatterySystem_set_batt_computed_bank_capacity,
-	PyDoc_STR("*float*: Computed bank capacity [kWh]"),
+	PyDoc_STR("*float*: Battery computed bank capacity [kWh]"),
  	NULL},
 {"batt_computed_series", (getter)BatterySystem_get_batt_computed_series,(setter)BatterySystem_set_batt_computed_series,
-	PyDoc_STR("*float*: Number of cells in series"),
+	PyDoc_STR("*float*: Battery number of cells in series"),
  	NULL},
 {"batt_computed_strings", (getter)BatterySystem_get_batt_computed_strings,(setter)BatterySystem_set_batt_computed_strings,
-	PyDoc_STR("*float*: Number of strings of cells"),
+	PyDoc_STR("*float*: Battery number of strings of cells"),
  	NULL},
 {"batt_current_charge_max", (getter)BatterySystem_get_batt_current_charge_max,(setter)BatterySystem_set_batt_current_charge_max,
-	PyDoc_STR("*float*: Maximum charge current [A]"),
+	PyDoc_STR("*float*: Battery maximum charge current [A]"),
  	NULL},
 {"batt_current_choice", (getter)BatterySystem_get_batt_current_choice,(setter)BatterySystem_set_batt_current_choice,
 	PyDoc_STR("*float*: Limit cells by current or power"),
  	NULL},
 {"batt_current_discharge_max", (getter)BatterySystem_get_batt_current_discharge_max,(setter)BatterySystem_set_batt_current_discharge_max,
-	PyDoc_STR("*float*: Maximum discharge current [A]"),
+	PyDoc_STR("*float*: Battery maximum discharge current [A]"),
  	NULL},
 {"batt_dc_ac_efficiency", (getter)BatterySystem_get_batt_dc_ac_efficiency,(setter)BatterySystem_set_batt_dc_ac_efficiency,
 	PyDoc_STR("*float*: Battery DC to AC efficiency"),
@@ -8679,16 +9059,16 @@ static PyGetSetDef BatterySystem_getset[] = {
 	PyDoc_STR("*float*: Position of battery relative to electric meter\n\n*Options*: 0=BehindTheMeter,1=FrontOfMeter"),
  	NULL},
 {"batt_power_charge_max_kwac", (getter)BatterySystem_get_batt_power_charge_max_kwac,(setter)BatterySystem_set_batt_power_charge_max_kwac,
-	PyDoc_STR("*float*: Maximum charge power (AC) [kWac]"),
+	PyDoc_STR("*float*: Battery maximum charge power (AC) [kWac]"),
  	NULL},
 {"batt_power_charge_max_kwdc", (getter)BatterySystem_get_batt_power_charge_max_kwdc,(setter)BatterySystem_set_batt_power_charge_max_kwdc,
-	PyDoc_STR("*float*: Maximum charge power (DC) [kWdc]"),
+	PyDoc_STR("*float*: Battery maximum charge power (DC) [kWdc]"),
  	NULL},
 {"batt_power_discharge_max_kwac", (getter)BatterySystem_get_batt_power_discharge_max_kwac,(setter)BatterySystem_set_batt_power_discharge_max_kwac,
-	PyDoc_STR("*float*: Maximum discharge power (AC) [kWac]"),
+	PyDoc_STR("*float*: Battery maximum discharge power (AC) [kWac]"),
  	NULL},
 {"batt_power_discharge_max_kwdc", (getter)BatterySystem_get_batt_power_discharge_max_kwdc,(setter)BatterySystem_set_batt_power_discharge_max_kwdc,
-	PyDoc_STR("*float*: Maximum discharge power (DC) [kWdc]\n\n*Changes to this variable may require updating the values of the following*: \n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Battery maximum discharge power (DC) [kWdc]\n\n*Changes to this variable may require updating the values of the following*: \n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
 {"batt_replacement_capacity", (getter)BatterySystem_get_batt_replacement_capacity,(setter)BatterySystem_set_batt_replacement_capacity,
 	PyDoc_STR("*float*: Capacity degradation at which to replace battery [%]"),
@@ -8795,6 +9175,23 @@ Load_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+Load_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Load_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Pvsamv1", "Load")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 Load_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &Load_Type;
@@ -8804,7 +9201,9 @@ Load_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Load_methods[] = {
 		{"assign",            (PyCFunction)Load_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Load_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Load_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Load_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Load_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Load_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -8820,6 +9219,18 @@ static int
 Load_set_crit_load(VarGroupObject *self, PyObject *value, void *closure)
 {
 	return PySAM_array_setter(value, SAM_Pvsamv1_Load_crit_load_aset, self->data_ptr);
+}
+
+static PyObject *
+Load_get_grid_outage(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvsamv1_Load_grid_outage_aget, self->data_ptr);
+}
+
+static int
+Load_set_grid_outage(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Pvsamv1_Load_grid_outage_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -8846,15 +9257,33 @@ Load_set_load_escalation(VarGroupObject *self, PyObject *value, void *closure)
 	return PySAM_array_setter(value, SAM_Pvsamv1_Load_load_escalation_aset, self->data_ptr);
 }
 
+static PyObject *
+Load_get_run_resiliency_calcs(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_Load_run_resiliency_calcs_nget, self->data_ptr);
+}
+
+static int
+Load_set_run_resiliency_calcs(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_Load_run_resiliency_calcs_nset, self->data_ptr);
+}
+
 static PyGetSetDef Load_getset[] = {
 {"crit_load", (getter)Load_get_crit_load,(setter)Load_set_crit_load,
 	PyDoc_STR("*sequence*: Critical Electricity load (year 1) [kW]"),
+ 	NULL},
+{"grid_outage", (getter)Load_get_grid_outage,(setter)Load_set_grid_outage,
+	PyDoc_STR("*sequence*: Timesteps with grid outage [0/1]\n\n*Options*: 0=GridAvailable,1=GridUnavailable,Length=load"),
  	NULL},
 {"load", (getter)Load_get_load,(setter)Load_set_load,
 	PyDoc_STR("*sequence*: Electricity load (year 1) [kW]\n\n*Required*: False"),
  	NULL},
 {"load_escalation", (getter)Load_get_load_escalation,(setter)Load_set_load_escalation,
 	PyDoc_STR("*sequence*: Annual load escalation [%/year]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"run_resiliency_calcs", (getter)Load_get_run_resiliency_calcs,(setter)Load_set_run_resiliency_calcs,
+	PyDoc_STR("*float*: Enable resilence calculations for every timestep [0/1]\n\n*Options*: 0=DisableCalcs,1=EnableCalcs\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -8943,6 +9372,23 @@ BatteryCell_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+BatteryCell_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &BatteryCell_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Pvsamv1", "BatteryCell")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 BatteryCell_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &BatteryCell_Type;
@@ -8952,7 +9398,9 @@ BatteryCell_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef BatteryCell_methods[] = {
 		{"assign",            (PyCFunction)BatteryCell_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``BatteryCell_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``BatteryCell_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)BatteryCell_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``BatteryCell_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)BatteryCell_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -9440,7 +9888,7 @@ static PyGetSetDef BatteryCell_getset[] = {
 	PyDoc_STR("*float*: Initial state-of-charge [%]"),
  	NULL},
 {"batt_life_model", (getter)BatteryCell_get_batt_life_model,(setter)BatteryCell_set_batt_life_model,
-	PyDoc_STR("*float*: Battery life model specifier [0/1]\n\n*Options*: 0=calendar/cycle,1=NMC\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Battery life model specifier [0/1/2]\n\n*Options*: 0=calendar/cycle,1=NMC,2=LMO/LTO\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"batt_lifetime_matrix", (getter)BatteryCell_get_batt_lifetime_matrix,(setter)BatteryCell_set_batt_lifetime_matrix,
 	PyDoc_STR("*sequence[sequence]*: Cycles vs capacity at different depths-of-discharge\n\n*Required*: True if en_batt=1&batt_life_model=0"),
@@ -9556,6 +10004,23 @@ BatteryDispatch_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+BatteryDispatch_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &BatteryDispatch_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Pvsamv1", "BatteryDispatch")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 BatteryDispatch_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &BatteryDispatch_Type;
@@ -9565,7 +10030,9 @@ BatteryDispatch_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef BatteryDispatch_methods[] = {
 		{"assign",            (PyCFunction)BatteryDispatch_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``BatteryDispatch_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``BatteryDispatch_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)BatteryDispatch_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``BatteryDispatch_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)BatteryDispatch_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -10019,6 +10486,23 @@ FuelCell_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+FuelCell_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &FuelCell_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Pvsamv1", "FuelCell")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 FuelCell_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &FuelCell_Type;
@@ -10028,7 +10512,9 @@ FuelCell_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef FuelCell_methods[] = {
 		{"assign",            (PyCFunction)FuelCell_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``FuelCell_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``FuelCell_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)FuelCell_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``FuelCell_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)FuelCell_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -10137,6 +10623,23 @@ PriceSignal_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+PriceSignal_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &PriceSignal_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Pvsamv1", "PriceSignal")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 PriceSignal_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &PriceSignal_Type;
@@ -10146,7 +10649,9 @@ PriceSignal_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef PriceSignal_methods[] = {
 		{"assign",            (PyCFunction)PriceSignal_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``PriceSignal_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``PriceSignal_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)PriceSignal_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``PriceSignal_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)PriceSignal_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -10495,6 +11000,23 @@ ElectricityRates_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+ElectricityRates_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &ElectricityRates_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Pvsamv1", "ElectricityRates")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 ElectricityRates_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &ElectricityRates_Type;
@@ -10504,7 +11026,9 @@ ElectricityRates_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef ElectricityRates_methods[] = {
 		{"assign",            (PyCFunction)ElectricityRates_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``ElectricityRates_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``ElectricityRates_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)ElectricityRates_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``ElectricityRates_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)ElectricityRates_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -10592,6 +11116,54 @@ static int
 ElectricityRates_set_ur_dc_tou_mat(VarGroupObject *self, PyObject *value, void *closure)
 {
 		return PySAM_matrix_setter(value, SAM_Pvsamv1_ElectricityRates_ur_dc_tou_mat_mset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_ec_billing_demand_lookback_percentages(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Pvsamv1_ElectricityRates_ur_ec_billing_demand_lookback_percentages_mget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_ec_billing_demand_lookback_percentages(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Pvsamv1_ElectricityRates_ur_ec_billing_demand_lookback_percentages_mset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_ec_billing_demand_lookback_period(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_ElectricityRates_ur_ec_billing_demand_lookback_period_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_ec_billing_demand_lookback_period(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_ElectricityRates_ur_ec_billing_demand_lookback_period_nset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_ec_billing_demand_minimum(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_ElectricityRates_ur_ec_billing_demand_minimum_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_ec_billing_demand_minimum(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_ElectricityRates_ur_ec_billing_demand_minimum_nset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_ec_enable_billing_demand(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_ElectricityRates_ur_ec_enable_billing_demand_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_ec_enable_billing_demand(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_ElectricityRates_ur_ec_enable_billing_demand_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -10762,6 +11334,18 @@ ElectricityRates_set_ur_ts_sell_rate(VarGroupObject *self, PyObject *value, void
 	return PySAM_array_setter(value, SAM_Pvsamv1_ElectricityRates_ur_ts_sell_rate_aset, self->data_ptr);
 }
 
+static PyObject *
+ElectricityRates_get_ur_yearzero_usage_peaks(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvsamv1_ElectricityRates_ur_yearzero_usage_peaks_aget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_yearzero_usage_peaks(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Pvsamv1_ElectricityRates_ur_yearzero_usage_peaks_aset, self->data_ptr);
+}
+
 static PyGetSetDef ElectricityRates_getset[] = {
 {"rate_escalation", (getter)ElectricityRates_get_rate_escalation,(setter)ElectricityRates_set_rate_escalation,
 	PyDoc_STR("*sequence*: Annual electricity rate escalation [%/year]\n\n*Required*: If not provided, assumed to be 0"),
@@ -10783,6 +11367,18 @@ static PyGetSetDef ElectricityRates_getset[] = {
  	NULL},
 {"ur_dc_tou_mat", (getter)ElectricityRates_get_ur_dc_tou_mat,(setter)ElectricityRates_set_ur_dc_tou_mat,
 	PyDoc_STR("*sequence[sequence]*: Demand rates (TOU) table\n\n*Required*: True if ur_dc_enable=1"),
+ 	NULL},
+{"ur_ec_billing_demand_lookback_percentages", (getter)ElectricityRates_get_ur_ec_billing_demand_lookback_percentages,(setter)ElectricityRates_set_ur_ec_billing_demand_lookback_percentages,
+	PyDoc_STR("*sequence[sequence]*: Billing demand lookback percentages by month and consider actual peak demand\n\n*Info*: 12x2\n\n*Required*: True if ur_ec_enable_billing_demand=1"),
+ 	NULL},
+{"ur_ec_billing_demand_lookback_period", (getter)ElectricityRates_get_ur_ec_billing_demand_lookback_period,(setter)ElectricityRates_set_ur_ec_billing_demand_lookback_period,
+	PyDoc_STR("*float*: Billing demand lookback period [mn]\n\n*Constraints*: INTEGER,MIN=0,MAX=12\n\n*Required*: True if ur_ec_enable_billing_demand=1"),
+ 	NULL},
+{"ur_ec_billing_demand_minimum", (getter)ElectricityRates_get_ur_ec_billing_demand_minimum,(setter)ElectricityRates_set_ur_ec_billing_demand_minimum,
+	PyDoc_STR("*float*: Minimum billing demand\n\n*Required*: True if ur_ec_enable_billing_demand=1"),
+ 	NULL},
+{"ur_ec_enable_billing_demand", (getter)ElectricityRates_get_ur_ec_enable_billing_demand,(setter)ElectricityRates_set_ur_ec_enable_billing_demand,
+	PyDoc_STR("*float*: Enable billing demand for energy charges [0/1]\n\n*Options*: 0=disable,1=enable\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"ur_ec_sched_weekday", (getter)ElectricityRates_get_ur_ec_sched_weekday,(setter)ElectricityRates_set_ur_ec_sched_weekday,
 	PyDoc_STR("*sequence[sequence]*: Energy charge weekday schedule\n\n*Info*: 12x24"),
@@ -10825,6 +11421,9 @@ static PyGetSetDef ElectricityRates_getset[] = {
  	NULL},
 {"ur_ts_sell_rate", (getter)ElectricityRates_get_ur_ts_sell_rate,(setter)ElectricityRates_set_ur_ts_sell_rate,
 	PyDoc_STR("*sequence*: Time step sell rates [0/1]"),
+ 	NULL},
+{"ur_yearzero_usage_peaks", (getter)ElectricityRates_get_ur_yearzero_usage_peaks,(setter)ElectricityRates_set_ur_yearzero_usage_peaks,
+	PyDoc_STR("*sequence*: Peak usage by month for year zero\n\n*Info*: 12\n\n*Required*: True if ur_ec_enable_billing_demand=1"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -10913,6 +11512,23 @@ Outputs_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+Outputs_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Outputs_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Pvsamv1", "Outputs")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 Outputs_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &Outputs_Type;
@@ -10922,7 +11538,9 @@ Outputs_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Outputs_methods[] = {
 		{"assign",            (PyCFunction)Outputs_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Outputs_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Outputs_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Outputs_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Outputs_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -11172,6 +11790,12 @@ static PyObject *
 Outputs_get_annual_energy(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Pvsamv1_Outputs_annual_energy_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_annual_energy_distribution_time(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Pvsamv1_Outputs_annual_energy_distribution_time_mget, self->data_ptr);
 }
 
 static PyObject *
@@ -13122,6 +13746,9 @@ static PyGetSetDef Outputs_getset[] = {
 {"annual_energy", (getter)Outputs_get_annual_energy,(setter)0,
 	PyDoc_STR("*float*: Annual AC energy [kWh]"),
  	NULL},
+{"annual_energy_distribution_time", (getter)Outputs_get_annual_energy_distribution_time,(setter)0,
+	PyDoc_STR("*sequence[sequence]*: Annual energy production as function of time [kW]"),
+ 	NULL},
 {"annual_export_to_grid_energy", (getter)Outputs_get_annual_export_to_grid_energy,(setter)0,
 	PyDoc_STR("*sequence*: Annual energy exported to grid [kWh]"),
  	NULL},
@@ -13324,7 +13951,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Battery capacity percent for temperature [%]"),
  	NULL},
 {"batt_conversion_loss", (getter)Outputs_get_batt_conversion_loss,(setter)0,
-	PyDoc_STR("*sequence*: Electricity loss in battery power electronics [kW]"),
+	PyDoc_STR("*sequence*: Battery loss from power electronics [kW]"),
  	NULL},
 {"batt_cost_to_cycle", (getter)Outputs_get_batt_cost_to_cycle,(setter)0,
 	PyDoc_STR("*sequence*: Battery computed cycle degradation penalty [$/cycle-kWh]"),
@@ -13375,7 +14002,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*float*: Battery charge energy charged from system [%]"),
  	NULL},
 {"batt_system_loss", (getter)Outputs_get_batt_system_loss,(setter)0,
-	PyDoc_STR("*sequence*: Electricity loss from battery ancillary equipment (kW DC for DC connected, AC for AC connected) [kW]"),
+	PyDoc_STR("*sequence*: Battery loss from ancillary equipment [kW]"),
  	NULL},
 {"batt_temperature", (getter)Outputs_get_batt_temperature,(setter)0,
 	PyDoc_STR("*sequence*: Battery temperature [C]"),
@@ -13657,7 +14284,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Subarray 1 Axis rotation ideal for 1 axis trackers [deg]"),
  	NULL},
 {"subarray1_isc", (getter)Outputs_get_subarray1_isc,(setter)0,
-	PyDoc_STR("*sequence*: Subarray 1 Short circuit DC current [A]"),
+	PyDoc_STR("*sequence*: Subarray 1 String short circuit DC current [A]"),
  	NULL},
 {"subarray1_linear_derate", (getter)Outputs_get_subarray1_linear_derate,(setter)0,
 	PyDoc_STR("*sequence*: Subarray 1 Self-shading linear beam irradiance factor [frac]"),
@@ -13747,7 +14374,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Subarray 2 Axis rotation ideal for 1 axis trackers [deg]"),
  	NULL},
 {"subarray2_isc", (getter)Outputs_get_subarray2_isc,(setter)0,
-	PyDoc_STR("*sequence*: Subarray 2 Short circuit DC current [A]"),
+	PyDoc_STR("*sequence*: Subarray 2 String short circuit DC current [A]"),
  	NULL},
 {"subarray2_linear_derate", (getter)Outputs_get_subarray2_linear_derate,(setter)0,
 	PyDoc_STR("*sequence*: Subarray 2 Self-shading linear beam irradiance factor [frac]"),
@@ -13837,7 +14464,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Subarray 3 Axis rotation ideal for 1 axis trackers [deg]"),
  	NULL},
 {"subarray3_isc", (getter)Outputs_get_subarray3_isc,(setter)0,
-	PyDoc_STR("*sequence*: Subarray 3 Short circuit DC current [A]"),
+	PyDoc_STR("*sequence*: Subarray 3 String short circuit DC current [A]"),
  	NULL},
 {"subarray3_linear_derate", (getter)Outputs_get_subarray3_linear_derate,(setter)0,
 	PyDoc_STR("*sequence*: Subarray 3 Self-shading linear beam irradiance factor [frac]"),
@@ -13927,7 +14554,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Subarray 4 Axis rotation ideal for 1 axis trackers [deg]"),
  	NULL},
 {"subarray4_isc", (getter)Outputs_get_subarray4_isc,(setter)0,
-	PyDoc_STR("*sequence*: Subarray 4 Short circuit DC current [A]"),
+	PyDoc_STR("*sequence*: Subarray 4 String short circuit DC current [A]"),
  	NULL},
 {"subarray4_linear_derate", (getter)Outputs_get_subarray4_linear_derate,(setter)0,
 	PyDoc_STR("*sequence*: Subarray 4 Self-shading linear beam irradiance factor [frac]"),
@@ -14270,6 +14897,20 @@ Pvsamv1_assign(CmodObject *self, PyObject *args)
 	return Py_None;
 }
 
+static PyObject *
+Pvsamv1_replace(CmodObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_replace_from_nested_dict((PyObject*)self, self->x_attr, self->data_ptr, dict, "Pvsamv1"))
+		return NULL;
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
 
 static PyObject *
 Pvsamv1_export(CmodObject *self, PyObject *args)
@@ -14294,6 +14935,8 @@ static PyMethodDef Pvsamv1_methods[] = {
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
 		{"assign",            (PyCFunction)Pvsamv1_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Solar Resource': { var: val, ...}, ...}``")},
+		{"replace",            (PyCFunction)Pvsamv1_replace,  METH_VARARGS,
+				PyDoc_STR("replace(dict) -> None\n Replace attributes from nested dictionary, except for Outputs. Unassigns all values in each Group then assigns from the input dict.\n\n``nested_dict = { 'Solar Resource': { var: val, ...}, ...}``")},
 		{"export",            (PyCFunction)Pvsamv1_export,  METH_VARARGS,
 				PyDoc_STR("export() -> dict\n Export attributes into nested dictionary")},
 		{"value",             (PyCFunction)Pvsamv1_value, METH_VARARGS,

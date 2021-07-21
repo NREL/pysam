@@ -246,6 +246,7 @@ class Outputs(object):
 	W_dot_plant_solar = tuple
 	W_dot_pump = tuple
 	annual_energy = float
+	annual_energy_distribution_time = tuple
 	annual_fuel_usage = float
 	beam = tuple
 	capacity_factor = float

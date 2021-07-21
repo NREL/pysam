@@ -209,6 +209,7 @@ class Outputs(object):
 	annual_Power_out_col = float
 	annual_Q_rec_losses = float
 	annual_energy = float
+	annual_energy_distribution_time = tuple
 	beam = tuple
 	capacity_factor = float
 	conversion_factor = float

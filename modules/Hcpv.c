@@ -43,6 +43,23 @@ SolarResourceData_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+SolarResourceData_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &SolarResourceData_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Hcpv", "SolarResourceData")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 SolarResourceData_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &SolarResourceData_Type;
@@ -52,7 +69,9 @@ SolarResourceData_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef SolarResourceData_methods[] = {
 		{"assign",            (PyCFunction)SolarResourceData_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``SolarResourceData_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``SolarResourceData_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)SolarResourceData_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``SolarResourceData_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)SolarResourceData_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -161,6 +180,23 @@ PVWatts_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+PVWatts_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &PVWatts_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Hcpv", "PVWatts")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 PVWatts_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &PVWatts_Type;
@@ -170,7 +206,9 @@ PVWatts_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef PVWatts_methods[] = {
 		{"assign",            (PyCFunction)PVWatts_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``PVWatts_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``PVWatts_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)PVWatts_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``PVWatts_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)PVWatts_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -279,6 +317,23 @@ HCPVModule_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+HCPVModule_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &HCPVModule_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Hcpv", "HCPVModule")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 HCPVModule_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &HCPVModule_Type;
@@ -288,7 +343,9 @@ HCPVModule_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef HCPVModule_methods[] = {
 		{"assign",            (PyCFunction)HCPVModule_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``HCPVModule_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``HCPVModule_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)HCPVModule_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``HCPVModule_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)HCPVModule_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -652,6 +709,23 @@ InverterCECDatabase_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+InverterCECDatabase_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &InverterCECDatabase_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Hcpv", "InverterCECDatabase")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 InverterCECDatabase_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &InverterCECDatabase_Type;
@@ -661,7 +735,9 @@ InverterCECDatabase_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef InverterCECDatabase_methods[] = {
 		{"assign",            (PyCFunction)InverterCECDatabase_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``InverterCECDatabase_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``InverterCECDatabase_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)InverterCECDatabase_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``InverterCECDatabase_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)InverterCECDatabase_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -905,6 +981,23 @@ HCPVArray_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+HCPVArray_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &HCPVArray_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Hcpv", "HCPVArray")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 HCPVArray_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &HCPVArray_Type;
@@ -914,7 +1007,9 @@ HCPVArray_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef HCPVArray_methods[] = {
 		{"assign",            (PyCFunction)HCPVArray_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``HCPVArray_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``HCPVArray_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)HCPVArray_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``HCPVArray_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)HCPVArray_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -1263,6 +1358,23 @@ Outputs_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+Outputs_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Outputs_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Hcpv", "Outputs")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 Outputs_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &Outputs_Type;
@@ -1272,7 +1384,9 @@ Outputs_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Outputs_methods[] = {
 		{"assign",            (PyCFunction)Outputs_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Outputs_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Outputs_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Outputs_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Outputs_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -1312,6 +1426,12 @@ static PyObject *
 Outputs_get_annual_energy(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Hcpv_Outputs_annual_energy_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_annual_energy_distribution_time(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Hcpv_Outputs_annual_energy_distribution_time_mget, self->data_ptr);
 }
 
 static PyObject *
@@ -1518,6 +1638,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"annual_energy", (getter)Outputs_get_annual_energy,(setter)0,
 	PyDoc_STR("*float*: Annual Energy [kWh]"),
+ 	NULL},
+{"annual_energy_distribution_time", (getter)Outputs_get_annual_energy_distribution_time,(setter)0,
+	PyDoc_STR("*sequence[sequence]*: Annual energy production as function of time [kW]"),
  	NULL},
 {"annual_input_radiation", (getter)Outputs_get_annual_input_radiation,(setter)0,
 	PyDoc_STR("*float*: Input radiation [kWh]"),
@@ -1764,6 +1887,20 @@ Hcpv_assign(CmodObject *self, PyObject *args)
 	return Py_None;
 }
 
+static PyObject *
+Hcpv_replace(CmodObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_replace_from_nested_dict((PyObject*)self, self->x_attr, self->data_ptr, dict, "Hcpv"))
+		return NULL;
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
 
 static PyObject *
 Hcpv_export(CmodObject *self, PyObject *args)
@@ -1788,6 +1925,8 @@ static PyMethodDef Hcpv_methods[] = {
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
 		{"assign",            (PyCFunction)Hcpv_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'SolarResourceData': { var: val, ...}, ...}``")},
+		{"replace",            (PyCFunction)Hcpv_replace,  METH_VARARGS,
+				PyDoc_STR("replace(dict) -> None\n Replace attributes from nested dictionary, except for Outputs. Unassigns all values in each Group then assigns from the input dict.\n\n``nested_dict = { 'SolarResourceData': { var: val, ...}, ...}``")},
 		{"export",            (PyCFunction)Hcpv_export,  METH_VARARGS,
 				PyDoc_STR("export() -> dict\n Export attributes into nested dictionary")},
 		{"value",             (PyCFunction)Hcpv_value, METH_VARARGS,

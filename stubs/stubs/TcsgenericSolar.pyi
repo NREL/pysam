@@ -143,6 +143,7 @@ class Outputs(object):
 
 
 	annual_energy = float
+	annual_energy_distribution_time = tuple
 	annual_fuel_usage = float
 	annual_q_dump_tot = float
 	annual_q_fossil = float

@@ -43,6 +43,23 @@ Weather_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+Weather_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Weather_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Tcsdish", "Weather")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 Weather_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &Weather_Type;
@@ -52,7 +69,9 @@ Weather_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Weather_methods[] = {
 		{"assign",            (PyCFunction)Weather_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Weather_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Weather_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Weather_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Weather_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Weather_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -161,6 +180,23 @@ Dish_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+Dish_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Dish_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Tcsdish", "Dish")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 Dish_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &Dish_Type;
@@ -170,7 +206,9 @@ Dish_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Dish_methods[] = {
 		{"assign",            (PyCFunction)Dish_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Dish_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Dish_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Dish_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Dish_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Dish_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -279,6 +317,23 @@ Type295_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+Type295_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Type295_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Tcsdish", "Type295")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 Type295_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &Type295_Type;
@@ -288,7 +343,9 @@ Type295_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Type295_methods[] = {
 		{"assign",            (PyCFunction)Type295_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Type295_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Type295_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Type295_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Type295_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Type295_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -637,6 +694,23 @@ Type296_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+Type296_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Type296_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Tcsdish", "Type296")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 Type296_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &Type296_Type;
@@ -646,7 +720,9 @@ Type296_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Type296_methods[] = {
 		{"assign",            (PyCFunction)Type296_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Type296_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Type296_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Type296_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Type296_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Type296_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -965,6 +1041,23 @@ Type297_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+Type297_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Type297_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Tcsdish", "Type297")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 Type297_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &Type297_Type;
@@ -974,7 +1067,9 @@ Type297_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Type297_methods[] = {
 		{"assign",            (PyCFunction)Type297_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Type297_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Type297_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Type297_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Type297_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Type297_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -1218,6 +1313,23 @@ Type298_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+Type298_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Type298_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Tcsdish", "Type298")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 Type298_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &Type298_Type;
@@ -1227,7 +1339,9 @@ Type298_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Type298_methods[] = {
 		{"assign",            (PyCFunction)Type298_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Type298_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Type298_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Type298_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Type298_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Type298_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -1846,6 +1960,23 @@ Outputs_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+Outputs_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Outputs_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Tcsdish", "Outputs")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 Outputs_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &Outputs_Type;
@@ -1855,7 +1986,9 @@ Outputs_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Outputs_methods[] = {
 		{"assign",            (PyCFunction)Outputs_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Outputs_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Outputs_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Outputs_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Outputs_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -1997,6 +2130,12 @@ static PyObject *
 Outputs_get_annual_energy(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Tcsdish_Outputs_annual_energy_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_annual_energy_distribution_time(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Tcsdish_Outputs_annual_energy_distribution_time_mget, self->data_ptr);
 }
 
 static PyObject *
@@ -2285,6 +2424,9 @@ static PyGetSetDef Outputs_getset[] = {
 {"annual_energy", (getter)Outputs_get_annual_energy,(setter)0,
 	PyDoc_STR("*float*: Annual Energy [kWh]"),
  	NULL},
+{"annual_energy_distribution_time", (getter)Outputs_get_annual_energy_distribution_time,(setter)0,
+	PyDoc_STR("*sequence[sequence]*: Annual energy production as function of time [kW]"),
+ 	NULL},
 {"beam", (getter)Outputs_get_beam,(setter)0,
 	PyDoc_STR("*sequence*: Resource Beam normal irradiance [W/m2]"),
  	NULL},
@@ -2549,6 +2691,20 @@ Tcsdish_assign(CmodObject *self, PyObject *args)
 	return Py_None;
 }
 
+static PyObject *
+Tcsdish_replace(CmodObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_replace_from_nested_dict((PyObject*)self, self->x_attr, self->data_ptr, dict, "Tcsdish"))
+		return NULL;
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
 
 static PyObject *
 Tcsdish_export(CmodObject *self, PyObject *args)
@@ -2573,6 +2729,8 @@ static PyMethodDef Tcsdish_methods[] = {
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
 		{"assign",            (PyCFunction)Tcsdish_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Weather': { var: val, ...}, ...}``")},
+		{"replace",            (PyCFunction)Tcsdish_replace,  METH_VARARGS,
+				PyDoc_STR("replace(dict) -> None\n Replace attributes from nested dictionary, except for Outputs. Unassigns all values in each Group then assigns from the input dict.\n\n``nested_dict = { 'Weather': { var: val, ...}, ...}``")},
 		{"export",            (PyCFunction)Tcsdish_export,  METH_VARARGS,
 				PyDoc_STR("export() -> dict\n Export attributes into nested dictionary")},
 		{"value",             (PyCFunction)Tcsdish_value, METH_VARARGS,

@@ -45,6 +45,23 @@ Resource_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+Resource_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Resource_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Windpower", "Resource")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 Resource_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &Resource_Type;
@@ -54,7 +71,9 @@ Resource_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Resource_methods[] = {
 		{"assign",            (PyCFunction)Resource_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Resource_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Resource_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Resource_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Resource_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Resource_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -253,6 +272,23 @@ Turbine_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+Turbine_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Turbine_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Windpower", "Turbine")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 Turbine_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &Turbine_Type;
@@ -262,7 +298,9 @@ Turbine_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Turbine_methods[] = {
 		{"assign",            (PyCFunction)Turbine_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Turbine_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Turbine_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Turbine_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Turbine_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Turbine_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{"calculate_powercurve", (PyCFunction)Turbine_calculate_powercurve, METH_VARARGS | METH_KEYWORDS,
@@ -448,6 +486,23 @@ Farm_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+Farm_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Farm_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Windpower", "Farm")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 Farm_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &Farm_Type;
@@ -457,7 +512,9 @@ Farm_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Farm_methods[] = {
 		{"assign",            (PyCFunction)Farm_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Farm_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Farm_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Farm_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Farm_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Farm_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -626,6 +683,23 @@ Losses_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+Losses_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Losses_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Windpower", "Losses")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 Losses_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &Losses_Type;
@@ -635,7 +709,9 @@ Losses_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Losses_methods[] = {
 		{"assign",            (PyCFunction)Losses_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Losses_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Losses_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Losses_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Losses_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Losses_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -1104,6 +1180,23 @@ Uncertainty_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+Uncertainty_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Uncertainty_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Windpower", "Uncertainty")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 Uncertainty_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &Uncertainty_Type;
@@ -1113,7 +1206,9 @@ Uncertainty_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Uncertainty_methods[] = {
 		{"assign",            (PyCFunction)Uncertainty_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Uncertainty_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Uncertainty_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Uncertainty_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Uncertainty_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Uncertainty_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -1222,6 +1317,23 @@ Outputs_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+Outputs_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Outputs_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Windpower", "Outputs")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 Outputs_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &Outputs_Type;
@@ -1231,7 +1343,9 @@ Outputs_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Outputs_methods[] = {
 		{"assign",            (PyCFunction)Outputs_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Outputs_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Outputs_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Outputs_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Outputs_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -1241,6 +1355,12 @@ static PyObject *
 Outputs_get_annual_energy(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Windpower_Outputs_annual_energy_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_annual_energy_distribution_time(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Windpower_Outputs_annual_energy_distribution_time_mget, self->data_ptr);
 }
 
 static PyObject *
@@ -1372,6 +1492,9 @@ Outputs_get_wind_speed_average(VarGroupObject *self, void *closure)
 static PyGetSetDef Outputs_getset[] = {
 {"annual_energy", (getter)Outputs_get_annual_energy,(setter)0,
 	PyDoc_STR("*float*: Annual Energy [kWh]"),
+ 	NULL},
+{"annual_energy_distribution_time", (getter)Outputs_get_annual_energy_distribution_time,(setter)0,
+	PyDoc_STR("*sequence[sequence]*: Annual energy production as function of time [kW]"),
  	NULL},
 {"annual_energy_p75", (getter)Outputs_get_annual_energy_p75,(setter)0,
 	PyDoc_STR("*float*: Annual energy with 75% probability of exceedance [kWh]"),
@@ -1588,6 +1711,20 @@ Windpower_assign(CmodObject *self, PyObject *args)
 	return Py_None;
 }
 
+static PyObject *
+Windpower_replace(CmodObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_replace_from_nested_dict((PyObject*)self, self->x_attr, self->data_ptr, dict, "Windpower"))
+		return NULL;
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
 
 static PyObject *
 Windpower_export(CmodObject *self, PyObject *args)
@@ -1612,6 +1749,8 @@ static PyMethodDef Windpower_methods[] = {
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
 		{"assign",            (PyCFunction)Windpower_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Resource': { var: val, ...}, ...}``")},
+		{"replace",            (PyCFunction)Windpower_replace,  METH_VARARGS,
+				PyDoc_STR("replace(dict) -> None\n Replace attributes from nested dictionary, except for Outputs. Unassigns all values in each Group then assigns from the input dict.\n\n``nested_dict = { 'Resource': { var: val, ...}, ...}``")},
 		{"export",            (PyCFunction)Windpower_export,  METH_VARARGS,
 				PyDoc_STR("export() -> dict\n Export attributes into nested dictionary")},
 		{"value",             (PyCFunction)Windpower_value, METH_VARARGS,

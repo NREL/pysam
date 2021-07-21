@@ -39,6 +39,66 @@ class TimeOfDeliveryFactors(object):
 	ppa_multiplier_model = float
 
 
+class SystemControl(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> dict:
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
+	F_wc = tuple
+	ampl_data_dir = str
+	ampl_exec_call = str
+	aux_par = float
+	aux_par_0 = float
+	aux_par_1 = float
+	aux_par_2 = float
+	aux_par_f = float
+	bop_par = float
+	bop_par_0 = float
+	bop_par_1 = float
+	bop_par_2 = float
+	bop_par_f = float
+	disp_csu_cost = float
+	disp_frequency = float
+	disp_horizon = float
+	disp_inventory_incentive = float
+	disp_max_iter = float
+	disp_mip_gap = float
+	disp_pen_delta_w = float
+	disp_reporting = float
+	disp_rsu_cost = float
+	disp_spec_bb = float
+	disp_spec_presolve = float
+	disp_spec_scaling = float
+	disp_steps_per_hour = float
+	disp_time_weighting = float
+	disp_timeout = float
+	dispatch_series = tuple
+	f_turb_tou_periods = tuple
+	is_ampl_engine = float
+	is_dispatch = float
+	is_dispatch_series = float
+	is_tod_pc_target_also_pc_max = float
+	is_wlim_series = float
+	is_write_ampl_dat = float
+	pb_fixed_par = float
+	q_rec_heattrace = float
+	q_rec_standby = float
+	time_start = float
+	time_steps_per_hour = float
+	time_stop = float
+	timestep_load_fractions = tuple
+	vacuum_arrays = float
+	weekday_schedule = tuple
+	weekend_schedule = tuple
+	wlim_series = tuple
+
+
 class HeliostatField(object):
 	def assign(self): 
 		pass
@@ -356,65 +416,6 @@ class RankineCycle(object):
 	tech_type = float
 
 
-class SystemControl(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> dict:
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	F_wc = tuple
-	ampl_data_dir = str
-	ampl_exec_call = str
-	aux_par = float
-	aux_par_0 = float
-	aux_par_1 = float
-	aux_par_2 = float
-	aux_par_f = float
-	bop_par = float
-	bop_par_0 = float
-	bop_par_1 = float
-	bop_par_2 = float
-	bop_par_f = float
-	disp_csu_cost = float
-	disp_frequency = float
-	disp_horizon = float
-	disp_inventory_incentive = float
-	disp_max_iter = float
-	disp_mip_gap = float
-	disp_pen_delta_w = float
-	disp_reporting = float
-	disp_rsu_cost = float
-	disp_spec_bb = float
-	disp_spec_presolve = float
-	disp_spec_scaling = float
-	disp_steps_per_hour = float
-	disp_time_weighting = float
-	disp_timeout = float
-	dispatch_series = tuple
-	f_turb_tou_periods = tuple
-	is_ampl_engine = float
-	is_dispatch = float
-	is_dispatch_series = float
-	is_tod_pc_target_also_pc_max = float
-	is_wlim_series = float
-	is_write_ampl_dat = float
-	pb_fixed_par = float
-	q_rec_heattrace = float
-	q_rec_standby = float
-	time_start = float
-	time_steps_per_hour = float
-	time_stop = float
-	vacuum_arrays = float
-	weekday_schedule = tuple
-	weekend_schedule = tuple
-	wlim_series = tuple
-
-
 class UserDefinedPowerCycle(object):
 	def assign(self): 
 		pass
@@ -667,6 +668,7 @@ class Outputs(object):
 	sf_adjust_out = tuple
 	solaz = tuple
 	solzen = tuple
+	system_capacity = float
 	tank_losses = tuple
 	tdry = tuple
 	time_hr = tuple
@@ -703,6 +705,7 @@ class TcsmoltenSalt(object):
 
 	SolarResource = SolarResource
 	TimeOfDeliveryFactors = TimeOfDeliveryFactors
+	SystemControl = SystemControl
 	HeliostatField = HeliostatField
 	SystemDesign = SystemDesign
 	TowerAndReceiver = TowerAndReceiver
@@ -712,7 +715,6 @@ class TcsmoltenSalt(object):
 	RADCOOL = RADCOOL
 	PowerCycle = PowerCycle
 	RankineCycle = RankineCycle
-	SystemControl = SystemControl
 	UserDefinedPowerCycle = UserDefinedPowerCycle
 	SCO2Cycle = SCO2Cycle
 	AdjustmentFactors = AdjustmentFactors

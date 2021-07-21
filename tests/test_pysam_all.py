@@ -218,6 +218,27 @@ def test_functionality():
         assert(a.value("energy_output_array")[1] == 1)
         assert(a.value("energy_output_array")[2] == 2)
 
+        # Test `replace` function
+        a.Plant.replace({"derate": 0})
+        assert(a.Plant.derate == 0)
+        try:
+            a.Plant.energy_output_array
+            assert False
+        except:
+            n_tests_passed += 1
+            assert True
+
+        a = GenericSystem.default("GenericSystemNone")
+        a.Lifetime.system_use_lifetime_output = 1
+        a.replace({"Plant": {"derate": 1}})
+        assert(a.Plant.derate == 1)
+        try:
+            a.Lifetime.system_use_lifetime_output
+            assert False
+        except:
+            n_tests_passed += 1
+            assert True
+
         if round == 3:
             tracker.print_diff()
 

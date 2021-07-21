@@ -369,6 +369,7 @@ class Outputs(object):
 	W_net = tuple
 	annual_W_cycle_gross = float
 	annual_energy = float
+	annual_energy_distribution_time = tuple
 	annual_fuel_usage = float
 	annual_q_abs_tot = float
 	annual_q_aux = float

@@ -117,6 +117,7 @@ class Outputs(object):
 	annual_Q_auxonly = float
 	annual_Q_deliv = float
 	annual_energy = float
+	annual_energy_distribution_time = tuple
 	beam = tuple
 	capacity_factor = float
 	diffuse = tuple

@@ -127,16 +127,36 @@ class StateCell(object):
 		pass
 
 
+	DOD_max = float
+	DOD_min = float
+	EFC = float
+	EFC_dt = float
 	I_loss = float
 	SOC_prev = float
 	T_batt_prev = float
 	average_range = float
+	b1_dt = float
+	b2_dt = float
+	b3_dt = float
+	c0_dt = float
+	c2_dt = float
 	cell_current = float
 	cell_voltage = float
 	chargeChange = float
 	charge_mode = float
+	cum_dt = float
+	cycle_DOD = float
+	cycle_DOD_max = tuple
+	cycle_DOD_range = tuple
+	cycle_range = float
 	day_age_of_battery = float
+	dq_relative_cal = float
 	dq_relative_calendar_old = float
+	dq_relative_cyc = float
+	dq_relative_li1 = float
+	dq_relative_li2 = float
+	dq_relative_li3 = float
+	dq_relative_neg = float
 	n_cycles = float
 	prev_charge = float
 	q0 = float
@@ -146,6 +166,8 @@ class StateCell(object):
 	q_relative = float
 	q_relative_calendar = float
 	q_relative_cycle = float
+	q_relative_li = float
+	q_relative_neg = float
 	q_relative_thermal = float
 	qmax_lifetime = float
 	qmax_thermal = float
@@ -154,7 +176,7 @@ class StateCell(object):
 	rainflow_Ylt = float
 	rainflow_jlt = float
 	rainflow_peaks = tuple
-	range = float
+	temp_avg = float
 
 
 class Outputs(object):

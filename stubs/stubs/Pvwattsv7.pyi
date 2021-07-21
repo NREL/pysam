@@ -103,6 +103,7 @@ class Outputs(object):
 	ac_annual = float
 	ac_monthly = tuple
 	annual_energy = float
+	annual_energy_distribution_time = tuple
 	aoi = tuple
 	capacity_factor = float
 	city = str

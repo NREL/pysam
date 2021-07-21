@@ -43,6 +43,23 @@ SolarResource_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+SolarResource_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &SolarResource_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "TcsmoltenSalt", "SolarResource")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 SolarResource_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &SolarResource_Type;
@@ -52,7 +69,9 @@ SolarResource_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef SolarResource_methods[] = {
 		{"assign",            (PyCFunction)SolarResource_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``SolarResource_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``SolarResource_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)SolarResource_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``SolarResource_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)SolarResource_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -176,6 +195,23 @@ TimeOfDeliveryFactors_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+TimeOfDeliveryFactors_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &TimeOfDeliveryFactors_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "TcsmoltenSalt", "TimeOfDeliveryFactors")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 TimeOfDeliveryFactors_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &TimeOfDeliveryFactors_Type;
@@ -185,7 +221,9 @@ TimeOfDeliveryFactors_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef TimeOfDeliveryFactors_methods[] = {
 		{"assign",            (PyCFunction)TimeOfDeliveryFactors_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``TimeOfDeliveryFactors_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``TimeOfDeliveryFactors_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)TimeOfDeliveryFactors_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``TimeOfDeliveryFactors_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)TimeOfDeliveryFactors_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -438,6 +476,833 @@ static PyTypeObject TimeOfDeliveryFactors_Type = {
 
 
 /*
+ * SystemControl Group
+ */ 
+
+static PyTypeObject SystemControl_Type;
+
+static PyObject *
+SystemControl_new(SAM_TcsmoltenSalt data_ptr)
+{
+	PyObject* new_obj = SystemControl_Type.tp_alloc(&SystemControl_Type,0);
+
+	VarGroupObject* SystemControl_obj = (VarGroupObject*)new_obj;
+
+	SystemControl_obj->data_ptr = (SAM_table)data_ptr;
+
+	return new_obj;
+}
+
+/* SystemControl methods */
+
+static PyObject *
+SystemControl_assign(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "TcsmoltenSalt", "SystemControl")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+SystemControl_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &SystemControl_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "TcsmoltenSalt", "SystemControl")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+SystemControl_export(VarGroupObject *self, PyObject *args)
+{
+	PyTypeObject* tp = &SystemControl_Type;
+	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
+	return dict;
+}
+
+static PyMethodDef SystemControl_methods[] = {
+		{"assign",            (PyCFunction)SystemControl_assign,  METH_VARARGS,
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``SystemControl_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)SystemControl_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``SystemControl_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)SystemControl_export,  METH_VARARGS,
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+		{NULL,              NULL}           /* sentinel */
+};
+
+static PyObject *
+SystemControl_get_F_wc(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_TcsmoltenSalt_SystemControl_F_wc_aget, self->data_ptr);
+}
+
+static int
+SystemControl_set_F_wc(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_TcsmoltenSalt_SystemControl_F_wc_aset, self->data_ptr);
+}
+
+static PyObject *
+SystemControl_get_ampl_data_dir(VarGroupObject *self, void *closure)
+{
+	return PySAM_string_getter(SAM_TcsmoltenSalt_SystemControl_ampl_data_dir_sget, self->data_ptr);
+}
+
+static int
+SystemControl_set_ampl_data_dir(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_string_setter(value, SAM_TcsmoltenSalt_SystemControl_ampl_data_dir_sset, self->data_ptr);
+}
+
+static PyObject *
+SystemControl_get_ampl_exec_call(VarGroupObject *self, void *closure)
+{
+	return PySAM_string_getter(SAM_TcsmoltenSalt_SystemControl_ampl_exec_call_sget, self->data_ptr);
+}
+
+static int
+SystemControl_set_ampl_exec_call(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_string_setter(value, SAM_TcsmoltenSalt_SystemControl_ampl_exec_call_sset, self->data_ptr);
+}
+
+static PyObject *
+SystemControl_get_aux_par(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_aux_par_nget, self->data_ptr);
+}
+
+static int
+SystemControl_set_aux_par(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_aux_par_nset, self->data_ptr);
+}
+
+static PyObject *
+SystemControl_get_aux_par_0(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_aux_par_0_nget, self->data_ptr);
+}
+
+static int
+SystemControl_set_aux_par_0(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_aux_par_0_nset, self->data_ptr);
+}
+
+static PyObject *
+SystemControl_get_aux_par_1(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_aux_par_1_nget, self->data_ptr);
+}
+
+static int
+SystemControl_set_aux_par_1(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_aux_par_1_nset, self->data_ptr);
+}
+
+static PyObject *
+SystemControl_get_aux_par_2(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_aux_par_2_nget, self->data_ptr);
+}
+
+static int
+SystemControl_set_aux_par_2(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_aux_par_2_nset, self->data_ptr);
+}
+
+static PyObject *
+SystemControl_get_aux_par_f(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_aux_par_f_nget, self->data_ptr);
+}
+
+static int
+SystemControl_set_aux_par_f(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_aux_par_f_nset, self->data_ptr);
+}
+
+static PyObject *
+SystemControl_get_bop_par(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_bop_par_nget, self->data_ptr);
+}
+
+static int
+SystemControl_set_bop_par(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_bop_par_nset, self->data_ptr);
+}
+
+static PyObject *
+SystemControl_get_bop_par_0(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_bop_par_0_nget, self->data_ptr);
+}
+
+static int
+SystemControl_set_bop_par_0(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_bop_par_0_nset, self->data_ptr);
+}
+
+static PyObject *
+SystemControl_get_bop_par_1(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_bop_par_1_nget, self->data_ptr);
+}
+
+static int
+SystemControl_set_bop_par_1(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_bop_par_1_nset, self->data_ptr);
+}
+
+static PyObject *
+SystemControl_get_bop_par_2(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_bop_par_2_nget, self->data_ptr);
+}
+
+static int
+SystemControl_set_bop_par_2(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_bop_par_2_nset, self->data_ptr);
+}
+
+static PyObject *
+SystemControl_get_bop_par_f(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_bop_par_f_nget, self->data_ptr);
+}
+
+static int
+SystemControl_set_bop_par_f(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_bop_par_f_nset, self->data_ptr);
+}
+
+static PyObject *
+SystemControl_get_disp_csu_cost(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_disp_csu_cost_nget, self->data_ptr);
+}
+
+static int
+SystemControl_set_disp_csu_cost(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_disp_csu_cost_nset, self->data_ptr);
+}
+
+static PyObject *
+SystemControl_get_disp_frequency(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_disp_frequency_nget, self->data_ptr);
+}
+
+static int
+SystemControl_set_disp_frequency(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_disp_frequency_nset, self->data_ptr);
+}
+
+static PyObject *
+SystemControl_get_disp_horizon(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_disp_horizon_nget, self->data_ptr);
+}
+
+static int
+SystemControl_set_disp_horizon(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_disp_horizon_nset, self->data_ptr);
+}
+
+static PyObject *
+SystemControl_get_disp_inventory_incentive(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_disp_inventory_incentive_nget, self->data_ptr);
+}
+
+static int
+SystemControl_set_disp_inventory_incentive(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_disp_inventory_incentive_nset, self->data_ptr);
+}
+
+static PyObject *
+SystemControl_get_disp_max_iter(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_disp_max_iter_nget, self->data_ptr);
+}
+
+static int
+SystemControl_set_disp_max_iter(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_disp_max_iter_nset, self->data_ptr);
+}
+
+static PyObject *
+SystemControl_get_disp_mip_gap(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_disp_mip_gap_nget, self->data_ptr);
+}
+
+static int
+SystemControl_set_disp_mip_gap(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_disp_mip_gap_nset, self->data_ptr);
+}
+
+static PyObject *
+SystemControl_get_disp_pen_delta_w(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_disp_pen_delta_w_nget, self->data_ptr);
+}
+
+static int
+SystemControl_set_disp_pen_delta_w(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_disp_pen_delta_w_nset, self->data_ptr);
+}
+
+static PyObject *
+SystemControl_get_disp_reporting(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_disp_reporting_nget, self->data_ptr);
+}
+
+static int
+SystemControl_set_disp_reporting(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_disp_reporting_nset, self->data_ptr);
+}
+
+static PyObject *
+SystemControl_get_disp_rsu_cost(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_disp_rsu_cost_nget, self->data_ptr);
+}
+
+static int
+SystemControl_set_disp_rsu_cost(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_disp_rsu_cost_nset, self->data_ptr);
+}
+
+static PyObject *
+SystemControl_get_disp_spec_bb(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_disp_spec_bb_nget, self->data_ptr);
+}
+
+static int
+SystemControl_set_disp_spec_bb(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_disp_spec_bb_nset, self->data_ptr);
+}
+
+static PyObject *
+SystemControl_get_disp_spec_presolve(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_disp_spec_presolve_nget, self->data_ptr);
+}
+
+static int
+SystemControl_set_disp_spec_presolve(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_disp_spec_presolve_nset, self->data_ptr);
+}
+
+static PyObject *
+SystemControl_get_disp_spec_scaling(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_disp_spec_scaling_nget, self->data_ptr);
+}
+
+static int
+SystemControl_set_disp_spec_scaling(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_disp_spec_scaling_nset, self->data_ptr);
+}
+
+static PyObject *
+SystemControl_get_disp_steps_per_hour(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_disp_steps_per_hour_nget, self->data_ptr);
+}
+
+static int
+SystemControl_set_disp_steps_per_hour(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_disp_steps_per_hour_nset, self->data_ptr);
+}
+
+static PyObject *
+SystemControl_get_disp_time_weighting(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_disp_time_weighting_nget, self->data_ptr);
+}
+
+static int
+SystemControl_set_disp_time_weighting(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_disp_time_weighting_nset, self->data_ptr);
+}
+
+static PyObject *
+SystemControl_get_disp_timeout(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_disp_timeout_nget, self->data_ptr);
+}
+
+static int
+SystemControl_set_disp_timeout(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_disp_timeout_nset, self->data_ptr);
+}
+
+static PyObject *
+SystemControl_get_dispatch_series(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_TcsmoltenSalt_SystemControl_dispatch_series_aget, self->data_ptr);
+}
+
+static int
+SystemControl_set_dispatch_series(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_TcsmoltenSalt_SystemControl_dispatch_series_aset, self->data_ptr);
+}
+
+static PyObject *
+SystemControl_get_f_turb_tou_periods(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_TcsmoltenSalt_SystemControl_f_turb_tou_periods_aget, self->data_ptr);
+}
+
+static int
+SystemControl_set_f_turb_tou_periods(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_TcsmoltenSalt_SystemControl_f_turb_tou_periods_aset, self->data_ptr);
+}
+
+static PyObject *
+SystemControl_get_is_ampl_engine(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_is_ampl_engine_nget, self->data_ptr);
+}
+
+static int
+SystemControl_set_is_ampl_engine(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_is_ampl_engine_nset, self->data_ptr);
+}
+
+static PyObject *
+SystemControl_get_is_dispatch(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_is_dispatch_nget, self->data_ptr);
+}
+
+static int
+SystemControl_set_is_dispatch(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_is_dispatch_nset, self->data_ptr);
+}
+
+static PyObject *
+SystemControl_get_is_dispatch_series(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_is_dispatch_series_nget, self->data_ptr);
+}
+
+static int
+SystemControl_set_is_dispatch_series(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_is_dispatch_series_nset, self->data_ptr);
+}
+
+static PyObject *
+SystemControl_get_is_tod_pc_target_also_pc_max(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_is_tod_pc_target_also_pc_max_nget, self->data_ptr);
+}
+
+static int
+SystemControl_set_is_tod_pc_target_also_pc_max(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_is_tod_pc_target_also_pc_max_nset, self->data_ptr);
+}
+
+static PyObject *
+SystemControl_get_is_wlim_series(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_is_wlim_series_nget, self->data_ptr);
+}
+
+static int
+SystemControl_set_is_wlim_series(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_is_wlim_series_nset, self->data_ptr);
+}
+
+static PyObject *
+SystemControl_get_is_write_ampl_dat(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_is_write_ampl_dat_nget, self->data_ptr);
+}
+
+static int
+SystemControl_set_is_write_ampl_dat(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_is_write_ampl_dat_nset, self->data_ptr);
+}
+
+static PyObject *
+SystemControl_get_pb_fixed_par(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_pb_fixed_par_nget, self->data_ptr);
+}
+
+static int
+SystemControl_set_pb_fixed_par(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_pb_fixed_par_nset, self->data_ptr);
+}
+
+static PyObject *
+SystemControl_get_q_rec_heattrace(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_q_rec_heattrace_nget, self->data_ptr);
+}
+
+static int
+SystemControl_set_q_rec_heattrace(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_q_rec_heattrace_nset, self->data_ptr);
+}
+
+static PyObject *
+SystemControl_get_q_rec_standby(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_q_rec_standby_nget, self->data_ptr);
+}
+
+static int
+SystemControl_set_q_rec_standby(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_q_rec_standby_nset, self->data_ptr);
+}
+
+static PyObject *
+SystemControl_get_time_start(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_time_start_nget, self->data_ptr);
+}
+
+static int
+SystemControl_set_time_start(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_time_start_nset, self->data_ptr);
+}
+
+static PyObject *
+SystemControl_get_time_steps_per_hour(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_time_steps_per_hour_nget, self->data_ptr);
+}
+
+static int
+SystemControl_set_time_steps_per_hour(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_time_steps_per_hour_nset, self->data_ptr);
+}
+
+static PyObject *
+SystemControl_get_time_stop(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_time_stop_nget, self->data_ptr);
+}
+
+static int
+SystemControl_set_time_stop(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_time_stop_nset, self->data_ptr);
+}
+
+static PyObject *
+SystemControl_get_timestep_load_fractions(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_TcsmoltenSalt_SystemControl_timestep_load_fractions_aget, self->data_ptr);
+}
+
+static int
+SystemControl_set_timestep_load_fractions(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_TcsmoltenSalt_SystemControl_timestep_load_fractions_aset, self->data_ptr);
+}
+
+static PyObject *
+SystemControl_get_vacuum_arrays(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_vacuum_arrays_nget, self->data_ptr);
+}
+
+static int
+SystemControl_set_vacuum_arrays(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_vacuum_arrays_nset, self->data_ptr);
+}
+
+static PyObject *
+SystemControl_get_weekday_schedule(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_TcsmoltenSalt_SystemControl_weekday_schedule_mget, self->data_ptr);
+}
+
+static int
+SystemControl_set_weekday_schedule(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_TcsmoltenSalt_SystemControl_weekday_schedule_mset, self->data_ptr);
+}
+
+static PyObject *
+SystemControl_get_weekend_schedule(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_TcsmoltenSalt_SystemControl_weekend_schedule_mget, self->data_ptr);
+}
+
+static int
+SystemControl_set_weekend_schedule(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_TcsmoltenSalt_SystemControl_weekend_schedule_mset, self->data_ptr);
+}
+
+static PyObject *
+SystemControl_get_wlim_series(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_TcsmoltenSalt_SystemControl_wlim_series_aget, self->data_ptr);
+}
+
+static int
+SystemControl_set_wlim_series(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_TcsmoltenSalt_SystemControl_wlim_series_aset, self->data_ptr);
+}
+
+static PyGetSetDef SystemControl_getset[] = {
+{"F_wc", (getter)SystemControl_get_F_wc,(setter)SystemControl_set_F_wc,
+	PyDoc_STR("*sequence*: TOU array of fractions indicating wet cooling share for hybrid cooling\n\n*Required*: True if pc_config=0"),
+ 	NULL},
+{"ampl_data_dir", (getter)SystemControl_get_ampl_data_dir,(setter)SystemControl_set_ampl_data_dir,
+	PyDoc_STR("*str*: AMPL data file directory\n\n*Required*: If not provided, assumed to be ''"),
+ 	NULL},
+{"ampl_exec_call", (getter)SystemControl_get_ampl_exec_call,(setter)SystemControl_set_ampl_exec_call,
+	PyDoc_STR("*str*: System command to run AMPL code\n\n*Required*: If not provided, assumed to be 'ampl sdk_solution.run'"),
+ 	NULL},
+{"aux_par", (getter)SystemControl_get_aux_par,(setter)SystemControl_set_aux_par,
+	PyDoc_STR("*float*: Aux heater, boiler parasitic [MWe/MWcap]\n\n*Required*: True"),
+ 	NULL},
+{"aux_par_0", (getter)SystemControl_get_aux_par_0,(setter)SystemControl_set_aux_par_0,
+	PyDoc_STR("*float*: Aux heater, boiler parasitic - constant coefficient\n\n*Required*: True"),
+ 	NULL},
+{"aux_par_1", (getter)SystemControl_get_aux_par_1,(setter)SystemControl_set_aux_par_1,
+	PyDoc_STR("*float*: Aux heater, boiler parasitic - linear coefficient\n\n*Required*: True"),
+ 	NULL},
+{"aux_par_2", (getter)SystemControl_get_aux_par_2,(setter)SystemControl_set_aux_par_2,
+	PyDoc_STR("*float*: Aux heater, boiler parasitic - quadratic coefficient\n\n*Required*: True"),
+ 	NULL},
+{"aux_par_f", (getter)SystemControl_get_aux_par_f,(setter)SystemControl_set_aux_par_f,
+	PyDoc_STR("*float*: Aux heater, boiler parasitic - multiplying fraction\n\n*Required*: True"),
+ 	NULL},
+{"bop_par", (getter)SystemControl_get_bop_par,(setter)SystemControl_set_bop_par,
+	PyDoc_STR("*float*: Balance of plant parasitic power fraction [MWe/MWcap]\n\n*Required*: True"),
+ 	NULL},
+{"bop_par_0", (getter)SystemControl_get_bop_par_0,(setter)SystemControl_set_bop_par_0,
+	PyDoc_STR("*float*: Balance of plant parasitic power fraction - const coeff\n\n*Required*: True"),
+ 	NULL},
+{"bop_par_1", (getter)SystemControl_get_bop_par_1,(setter)SystemControl_set_bop_par_1,
+	PyDoc_STR("*float*: Balance of plant parasitic power fraction - linear coeff\n\n*Required*: True"),
+ 	NULL},
+{"bop_par_2", (getter)SystemControl_get_bop_par_2,(setter)SystemControl_set_bop_par_2,
+	PyDoc_STR("*float*: Balance of plant parasitic power fraction - quadratic coeff\n\n*Required*: True"),
+ 	NULL},
+{"bop_par_f", (getter)SystemControl_get_bop_par_f,(setter)SystemControl_set_bop_par_f,
+	PyDoc_STR("*float*: Balance of plant parasitic power fraction - mult frac\n\n*Required*: True"),
+ 	NULL},
+{"disp_csu_cost", (getter)SystemControl_get_disp_csu_cost,(setter)SystemControl_set_disp_csu_cost,
+	PyDoc_STR("*float*: Cycle startup cost [$]\n\n*Required*: True if is_dispatch=1"),
+ 	NULL},
+{"disp_frequency", (getter)SystemControl_get_disp_frequency,(setter)SystemControl_set_disp_frequency,
+	PyDoc_STR("*float*: Frequency for dispatch optimization calculations [hour]\n\n*Required*: True if is_dispatch=1"),
+ 	NULL},
+{"disp_horizon", (getter)SystemControl_get_disp_horizon,(setter)SystemControl_set_disp_horizon,
+	PyDoc_STR("*float*: Time horizon for dispatch optimization [hour]\n\n*Required*: True if is_dispatch=1"),
+ 	NULL},
+{"disp_inventory_incentive", (getter)SystemControl_get_disp_inventory_incentive,(setter)SystemControl_set_disp_inventory_incentive,
+	PyDoc_STR("*float*: Dispatch storage terminal inventory incentive multiplier\n\n*Required*: If not provided, assumed to be 0.0"),
+ 	NULL},
+{"disp_max_iter", (getter)SystemControl_get_disp_max_iter,(setter)SystemControl_set_disp_max_iter,
+	PyDoc_STR("*float*: Max number of dispatch optimization iterations\n\n*Required*: True if is_dispatch=1"),
+ 	NULL},
+{"disp_mip_gap", (getter)SystemControl_get_disp_mip_gap,(setter)SystemControl_set_disp_mip_gap,
+	PyDoc_STR("*float*: Dispatch optimization solution tolerance\n\n*Required*: True if is_dispatch=1"),
+ 	NULL},
+{"disp_pen_delta_w", (getter)SystemControl_get_disp_pen_delta_w,(setter)SystemControl_set_disp_pen_delta_w,
+	PyDoc_STR("*float*: Dispatch cycle production change penalty [$/kWe-change]\n\n*Required*: True if is_dispatch=1"),
+ 	NULL},
+{"disp_reporting", (getter)SystemControl_get_disp_reporting,(setter)SystemControl_set_disp_reporting,
+	PyDoc_STR("*float*: Dispatch optimization reporting level\n\n*Required*: If not provided, assumed to be -1"),
+ 	NULL},
+{"disp_rsu_cost", (getter)SystemControl_get_disp_rsu_cost,(setter)SystemControl_set_disp_rsu_cost,
+	PyDoc_STR("*float*: Receiver startup cost [$]\n\n*Required*: True if is_dispatch=1"),
+ 	NULL},
+{"disp_spec_bb", (getter)SystemControl_get_disp_spec_bb,(setter)SystemControl_set_disp_spec_bb,
+	PyDoc_STR("*float*: Dispatch optimization B&B heuristic\n\n*Required*: If not provided, assumed to be -1"),
+ 	NULL},
+{"disp_spec_presolve", (getter)SystemControl_get_disp_spec_presolve,(setter)SystemControl_set_disp_spec_presolve,
+	PyDoc_STR("*float*: Dispatch optimization presolve heuristic\n\n*Required*: If not provided, assumed to be -1"),
+ 	NULL},
+{"disp_spec_scaling", (getter)SystemControl_get_disp_spec_scaling,(setter)SystemControl_set_disp_spec_scaling,
+	PyDoc_STR("*float*: Dispatch optimization scaling heuristic\n\n*Required*: If not provided, assumed to be -1"),
+ 	NULL},
+{"disp_steps_per_hour", (getter)SystemControl_get_disp_steps_per_hour,(setter)SystemControl_set_disp_steps_per_hour,
+	PyDoc_STR("*float*: Time steps per hour for dispatch optimization calculations\n\n*Required*: If not provided, assumed to be 1"),
+ 	NULL},
+{"disp_time_weighting", (getter)SystemControl_get_disp_time_weighting,(setter)SystemControl_set_disp_time_weighting,
+	PyDoc_STR("*float*: Dispatch optimization future time discounting factor\n\n*Required*: If not provided, assumed to be 0.99"),
+ 	NULL},
+{"disp_timeout", (getter)SystemControl_get_disp_timeout,(setter)SystemControl_set_disp_timeout,
+	PyDoc_STR("*float*: Max dispatch optimization solve duration [s]\n\n*Required*: True if is_dispatch=1"),
+ 	NULL},
+{"dispatch_series", (getter)SystemControl_get_dispatch_series,(setter)SystemControl_set_dispatch_series,
+	PyDoc_STR("*sequence*: Time series dispatch factors"),
+ 	NULL},
+{"f_turb_tou_periods", (getter)SystemControl_get_f_turb_tou_periods,(setter)SystemControl_set_f_turb_tou_periods,
+	PyDoc_STR("*sequence*: Dispatch logic for turbine load fraction\n\n*Required*: True"),
+ 	NULL},
+{"is_ampl_engine", (getter)SystemControl_get_is_ampl_engine,(setter)SystemControl_set_is_ampl_engine,
+	PyDoc_STR("*float*: Run dispatch optimization with external AMPL engine\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"is_dispatch", (getter)SystemControl_get_is_dispatch,(setter)SystemControl_set_is_dispatch,
+	PyDoc_STR("*float*: Allow dispatch optimization?\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"is_dispatch_series", (getter)SystemControl_get_is_dispatch_series,(setter)SystemControl_set_is_dispatch_series,
+	PyDoc_STR("*float*: Use time-series dispatch factors\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"is_tod_pc_target_also_pc_max", (getter)SystemControl_get_is_tod_pc_target_also_pc_max,(setter)SystemControl_set_is_tod_pc_target_also_pc_max,
+	PyDoc_STR("*float*: Is the TOD target cycle heat input also the max cycle heat input?\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"is_wlim_series", (getter)SystemControl_get_is_wlim_series,(setter)SystemControl_set_is_wlim_series,
+	PyDoc_STR("*float*: Use time-series net electricity generation limits\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"is_write_ampl_dat", (getter)SystemControl_get_is_write_ampl_dat,(setter)SystemControl_set_is_write_ampl_dat,
+	PyDoc_STR("*float*: Write AMPL data files for dispatch run\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"pb_fixed_par", (getter)SystemControl_get_pb_fixed_par,(setter)SystemControl_set_pb_fixed_par,
+	PyDoc_STR("*float*: Fixed parasitic load - runs at all times [MWe/MWcap]\n\n*Required*: True"),
+ 	NULL},
+{"q_rec_heattrace", (getter)SystemControl_get_q_rec_heattrace,(setter)SystemControl_set_q_rec_heattrace,
+	PyDoc_STR("*float*: Receiver heat trace energy consumption during startup [kWe-hr]\n\n*Required*: If not provided, assumed to be 0.0"),
+ 	NULL},
+{"q_rec_standby", (getter)SystemControl_get_q_rec_standby,(setter)SystemControl_set_q_rec_standby,
+	PyDoc_STR("*float*: Receiver standby energy consumption [kWt]\n\n*Required*: If not provided, assumed to be 9e99"),
+ 	NULL},
+{"time_start", (getter)SystemControl_get_time_start,(setter)SystemControl_set_time_start,
+	PyDoc_STR("*float*: Simulation start time [s]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"time_steps_per_hour", (getter)SystemControl_get_time_steps_per_hour,(setter)SystemControl_set_time_steps_per_hour,
+	PyDoc_STR("*float*: Number of simulation time steps per hour\n\n*Required*: If not provided, assumed to be -1"),
+ 	NULL},
+{"time_stop", (getter)SystemControl_get_time_stop,(setter)SystemControl_set_time_stop,
+	PyDoc_STR("*float*: Simulation stop time [s]\n\n*Required*: If not provided, assumed to be 31536000"),
+ 	NULL},
+{"timestep_load_fractions", (getter)SystemControl_get_timestep_load_fractions,(setter)SystemControl_set_timestep_load_fractions,
+	PyDoc_STR("*sequence*: Turbine load fraction for each timestep, alternative to block dispatch\n\n*Required*: False"),
+ 	NULL},
+{"vacuum_arrays", (getter)SystemControl_get_vacuum_arrays,(setter)SystemControl_set_vacuum_arrays,
+	PyDoc_STR("*float*: Allocate arrays for only the required number of steps\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"weekday_schedule", (getter)SystemControl_get_weekday_schedule,(setter)SystemControl_set_weekday_schedule,
+	PyDoc_STR("*sequence[sequence]*: 12x24 CSP operation Time-of-Use Weekday schedule\n\n*Required*: True"),
+ 	NULL},
+{"weekend_schedule", (getter)SystemControl_get_weekend_schedule,(setter)SystemControl_set_weekend_schedule,
+	PyDoc_STR("*sequence[sequence]*: 12x24 CSP operation Time-of-Use Weekend schedule\n\n*Required*: True"),
+ 	NULL},
+{"wlim_series", (getter)SystemControl_get_wlim_series,(setter)SystemControl_set_wlim_series,
+	PyDoc_STR("*sequence*: Time series net electicity generation limits [kWe]\n\n*Required*: True if is_wlim_series=1"),
+ 	NULL},
+	{NULL}  /* Sentinel */
+};
+
+static PyTypeObject SystemControl_Type = {
+		/* The ob_type field must be initialized in the module init function
+		 * to be portable to Windows without using C++. */
+		PyVarObject_HEAD_INIT(NULL, 0)
+		"TcsmoltenSalt.SystemControl",             /*tp_name*/
+		sizeof(VarGroupObject),          /*tp_basicsize*/
+		0,                          /*tp_itemsize*/
+		/* methods */
+		0,    /*tp_dealloc*/
+		0,                          /*tp_print*/
+		(getattrfunc)0,             /*tp_getattr*/
+		0,                          /*tp_setattr*/
+		0,                          /*tp_reserved*/
+		0,                          /*tp_repr*/
+		0,                          /*tp_as_number*/
+		0,                          /*tp_as_sequence*/
+		0,                          /*tp_as_mapping*/
+		0,                          /*tp_hash*/
+		0,                          /*tp_call*/
+		0,                          /*tp_str*/
+		0,                          /*tp_getattro*/
+		0,                          /*tp_setattro*/
+		0,                          /*tp_as_buffer*/
+		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
+		0,                          /*tp_doc*/
+		0,                          /*tp_traverse*/
+		0,                          /*tp_clear*/
+		0,                          /*tp_richcompare*/
+		0,                          /*tp_weaklistofnset*/
+		0,                          /*tp_iter*/
+		0,                          /*tp_iternext*/
+		SystemControl_methods,         /*tp_methods*/
+		0,                          /*tp_members*/
+		SystemControl_getset,          /*tp_getset*/
+		0,                          /*tp_base*/
+		0,                          /*tp_dict*/
+		0,                          /*tp_descr_get*/
+		0,                          /*tp_descr_set*/
+		0,                          /*tp_dictofnset*/
+		0,                          /*tp_init*/
+		0,                          /*tp_alloc*/
+		0,             /*tp_new*/
+		0,                          /*tp_free*/
+		0,                          /*tp_is_gc*/
+};
+
+
+/*
  * HeliostatField Group
  */ 
 
@@ -474,6 +1339,23 @@ HeliostatField_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+HeliostatField_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &HeliostatField_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "TcsmoltenSalt", "HeliostatField")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 HeliostatField_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &HeliostatField_Type;
@@ -483,7 +1365,9 @@ HeliostatField_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef HeliostatField_methods[] = {
 		{"assign",            (PyCFunction)HeliostatField_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``HeliostatField_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``HeliostatField_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)HeliostatField_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``HeliostatField_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)HeliostatField_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -1237,6 +2121,23 @@ SystemDesign_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+SystemDesign_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &SystemDesign_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "TcsmoltenSalt", "SystemDesign")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 SystemDesign_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &SystemDesign_Type;
@@ -1246,7 +2147,9 @@ SystemDesign_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef SystemDesign_methods[] = {
 		{"assign",            (PyCFunction)SystemDesign_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``SystemDesign_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``SystemDesign_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)SystemDesign_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``SystemDesign_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)SystemDesign_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -1475,6 +2378,23 @@ TowerAndReceiver_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+TowerAndReceiver_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &TowerAndReceiver_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "TcsmoltenSalt", "TowerAndReceiver")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 TowerAndReceiver_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &TowerAndReceiver_Type;
@@ -1484,7 +2404,9 @@ TowerAndReceiver_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef TowerAndReceiver_methods[] = {
 		{"assign",            (PyCFunction)TowerAndReceiver_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``TowerAndReceiver_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``TowerAndReceiver_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)TowerAndReceiver_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``TowerAndReceiver_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)TowerAndReceiver_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -2238,6 +3160,23 @@ SystemCosts_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+SystemCosts_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &SystemCosts_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "TcsmoltenSalt", "SystemCosts")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 SystemCosts_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &SystemCosts_Type;
@@ -2247,7 +3186,9 @@ SystemCosts_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef SystemCosts_methods[] = {
 		{"assign",            (PyCFunction)SystemCosts_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``SystemCosts_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``SystemCosts_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)SystemCosts_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``SystemCosts_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)SystemCosts_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -2671,6 +3612,23 @@ FinancialParameters_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+FinancialParameters_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &FinancialParameters_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "TcsmoltenSalt", "FinancialParameters")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 FinancialParameters_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &FinancialParameters_Type;
@@ -2680,7 +3638,9 @@ FinancialParameters_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef FinancialParameters_methods[] = {
 		{"assign",            (PyCFunction)FinancialParameters_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``FinancialParameters_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``FinancialParameters_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)FinancialParameters_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``FinancialParameters_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)FinancialParameters_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -3089,6 +4049,23 @@ ThermalStorage_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+ThermalStorage_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &ThermalStorage_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "TcsmoltenSalt", "ThermalStorage")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 ThermalStorage_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &ThermalStorage_Type;
@@ -3098,7 +4075,9 @@ ThermalStorage_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef ThermalStorage_methods[] = {
 		{"assign",            (PyCFunction)ThermalStorage_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``ThermalStorage_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``ThermalStorage_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)ThermalStorage_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``ThermalStorage_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)ThermalStorage_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -3342,6 +4321,23 @@ RADCOOL_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+RADCOOL_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &RADCOOL_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "TcsmoltenSalt", "RADCOOL")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 RADCOOL_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &RADCOOL_Type;
@@ -3351,7 +4347,9 @@ RADCOOL_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef RADCOOL_methods[] = {
 		{"assign",            (PyCFunction)RADCOOL_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``RADCOOL_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``RADCOOL_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)RADCOOL_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``RADCOOL_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)RADCOOL_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -3925,6 +4923,23 @@ PowerCycle_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+PowerCycle_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &PowerCycle_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "TcsmoltenSalt", "PowerCycle")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 PowerCycle_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &PowerCycle_Type;
@@ -3934,7 +4949,9 @@ PowerCycle_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef PowerCycle_methods[] = {
 		{"assign",            (PyCFunction)PowerCycle_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``PowerCycle_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``PowerCycle_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)PowerCycle_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``PowerCycle_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)PowerCycle_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -4133,6 +5150,23 @@ RankineCycle_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+RankineCycle_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &RankineCycle_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "TcsmoltenSalt", "RankineCycle")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 RankineCycle_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &RankineCycle_Type;
@@ -4142,7 +5176,9 @@ RankineCycle_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef RankineCycle_methods[] = {
 		{"assign",            (PyCFunction)RankineCycle_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``RankineCycle_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``RankineCycle_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)RankineCycle_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``RankineCycle_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)RankineCycle_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -4365,799 +5401,6 @@ static PyTypeObject RankineCycle_Type = {
 
 
 /*
- * SystemControl Group
- */ 
-
-static PyTypeObject SystemControl_Type;
-
-static PyObject *
-SystemControl_new(SAM_TcsmoltenSalt data_ptr)
-{
-	PyObject* new_obj = SystemControl_Type.tp_alloc(&SystemControl_Type,0);
-
-	VarGroupObject* SystemControl_obj = (VarGroupObject*)new_obj;
-
-	SystemControl_obj->data_ptr = (SAM_table)data_ptr;
-
-	return new_obj;
-}
-
-/* SystemControl methods */
-
-static PyObject *
-SystemControl_assign(VarGroupObject *self, PyObject *args)
-{
-	PyObject* dict;
-	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
-		return NULL;
-	}
-
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "TcsmoltenSalt", "SystemControl")){
-		return NULL;
-	}
-
-	Py_INCREF(Py_None);
-	return Py_None;
-}
-
-static PyObject *
-SystemControl_export(VarGroupObject *self, PyObject *args)
-{
-	PyTypeObject* tp = &SystemControl_Type;
-	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
-	return dict;
-}
-
-static PyMethodDef SystemControl_methods[] = {
-		{"assign",            (PyCFunction)SystemControl_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``SystemControl_vals = { var: val, ...}``")},
-		{"export",            (PyCFunction)SystemControl_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
-		{NULL,              NULL}           /* sentinel */
-};
-
-static PyObject *
-SystemControl_get_F_wc(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_TcsmoltenSalt_SystemControl_F_wc_aget, self->data_ptr);
-}
-
-static int
-SystemControl_set_F_wc(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_TcsmoltenSalt_SystemControl_F_wc_aset, self->data_ptr);
-}
-
-static PyObject *
-SystemControl_get_ampl_data_dir(VarGroupObject *self, void *closure)
-{
-	return PySAM_string_getter(SAM_TcsmoltenSalt_SystemControl_ampl_data_dir_sget, self->data_ptr);
-}
-
-static int
-SystemControl_set_ampl_data_dir(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_string_setter(value, SAM_TcsmoltenSalt_SystemControl_ampl_data_dir_sset, self->data_ptr);
-}
-
-static PyObject *
-SystemControl_get_ampl_exec_call(VarGroupObject *self, void *closure)
-{
-	return PySAM_string_getter(SAM_TcsmoltenSalt_SystemControl_ampl_exec_call_sget, self->data_ptr);
-}
-
-static int
-SystemControl_set_ampl_exec_call(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_string_setter(value, SAM_TcsmoltenSalt_SystemControl_ampl_exec_call_sset, self->data_ptr);
-}
-
-static PyObject *
-SystemControl_get_aux_par(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_aux_par_nget, self->data_ptr);
-}
-
-static int
-SystemControl_set_aux_par(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_aux_par_nset, self->data_ptr);
-}
-
-static PyObject *
-SystemControl_get_aux_par_0(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_aux_par_0_nget, self->data_ptr);
-}
-
-static int
-SystemControl_set_aux_par_0(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_aux_par_0_nset, self->data_ptr);
-}
-
-static PyObject *
-SystemControl_get_aux_par_1(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_aux_par_1_nget, self->data_ptr);
-}
-
-static int
-SystemControl_set_aux_par_1(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_aux_par_1_nset, self->data_ptr);
-}
-
-static PyObject *
-SystemControl_get_aux_par_2(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_aux_par_2_nget, self->data_ptr);
-}
-
-static int
-SystemControl_set_aux_par_2(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_aux_par_2_nset, self->data_ptr);
-}
-
-static PyObject *
-SystemControl_get_aux_par_f(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_aux_par_f_nget, self->data_ptr);
-}
-
-static int
-SystemControl_set_aux_par_f(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_aux_par_f_nset, self->data_ptr);
-}
-
-static PyObject *
-SystemControl_get_bop_par(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_bop_par_nget, self->data_ptr);
-}
-
-static int
-SystemControl_set_bop_par(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_bop_par_nset, self->data_ptr);
-}
-
-static PyObject *
-SystemControl_get_bop_par_0(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_bop_par_0_nget, self->data_ptr);
-}
-
-static int
-SystemControl_set_bop_par_0(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_bop_par_0_nset, self->data_ptr);
-}
-
-static PyObject *
-SystemControl_get_bop_par_1(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_bop_par_1_nget, self->data_ptr);
-}
-
-static int
-SystemControl_set_bop_par_1(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_bop_par_1_nset, self->data_ptr);
-}
-
-static PyObject *
-SystemControl_get_bop_par_2(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_bop_par_2_nget, self->data_ptr);
-}
-
-static int
-SystemControl_set_bop_par_2(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_bop_par_2_nset, self->data_ptr);
-}
-
-static PyObject *
-SystemControl_get_bop_par_f(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_bop_par_f_nget, self->data_ptr);
-}
-
-static int
-SystemControl_set_bop_par_f(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_bop_par_f_nset, self->data_ptr);
-}
-
-static PyObject *
-SystemControl_get_disp_csu_cost(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_disp_csu_cost_nget, self->data_ptr);
-}
-
-static int
-SystemControl_set_disp_csu_cost(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_disp_csu_cost_nset, self->data_ptr);
-}
-
-static PyObject *
-SystemControl_get_disp_frequency(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_disp_frequency_nget, self->data_ptr);
-}
-
-static int
-SystemControl_set_disp_frequency(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_disp_frequency_nset, self->data_ptr);
-}
-
-static PyObject *
-SystemControl_get_disp_horizon(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_disp_horizon_nget, self->data_ptr);
-}
-
-static int
-SystemControl_set_disp_horizon(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_disp_horizon_nset, self->data_ptr);
-}
-
-static PyObject *
-SystemControl_get_disp_inventory_incentive(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_disp_inventory_incentive_nget, self->data_ptr);
-}
-
-static int
-SystemControl_set_disp_inventory_incentive(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_disp_inventory_incentive_nset, self->data_ptr);
-}
-
-static PyObject *
-SystemControl_get_disp_max_iter(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_disp_max_iter_nget, self->data_ptr);
-}
-
-static int
-SystemControl_set_disp_max_iter(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_disp_max_iter_nset, self->data_ptr);
-}
-
-static PyObject *
-SystemControl_get_disp_mip_gap(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_disp_mip_gap_nget, self->data_ptr);
-}
-
-static int
-SystemControl_set_disp_mip_gap(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_disp_mip_gap_nset, self->data_ptr);
-}
-
-static PyObject *
-SystemControl_get_disp_pen_delta_w(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_disp_pen_delta_w_nget, self->data_ptr);
-}
-
-static int
-SystemControl_set_disp_pen_delta_w(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_disp_pen_delta_w_nset, self->data_ptr);
-}
-
-static PyObject *
-SystemControl_get_disp_reporting(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_disp_reporting_nget, self->data_ptr);
-}
-
-static int
-SystemControl_set_disp_reporting(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_disp_reporting_nset, self->data_ptr);
-}
-
-static PyObject *
-SystemControl_get_disp_rsu_cost(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_disp_rsu_cost_nget, self->data_ptr);
-}
-
-static int
-SystemControl_set_disp_rsu_cost(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_disp_rsu_cost_nset, self->data_ptr);
-}
-
-static PyObject *
-SystemControl_get_disp_spec_bb(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_disp_spec_bb_nget, self->data_ptr);
-}
-
-static int
-SystemControl_set_disp_spec_bb(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_disp_spec_bb_nset, self->data_ptr);
-}
-
-static PyObject *
-SystemControl_get_disp_spec_presolve(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_disp_spec_presolve_nget, self->data_ptr);
-}
-
-static int
-SystemControl_set_disp_spec_presolve(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_disp_spec_presolve_nset, self->data_ptr);
-}
-
-static PyObject *
-SystemControl_get_disp_spec_scaling(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_disp_spec_scaling_nget, self->data_ptr);
-}
-
-static int
-SystemControl_set_disp_spec_scaling(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_disp_spec_scaling_nset, self->data_ptr);
-}
-
-static PyObject *
-SystemControl_get_disp_steps_per_hour(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_disp_steps_per_hour_nget, self->data_ptr);
-}
-
-static int
-SystemControl_set_disp_steps_per_hour(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_disp_steps_per_hour_nset, self->data_ptr);
-}
-
-static PyObject *
-SystemControl_get_disp_time_weighting(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_disp_time_weighting_nget, self->data_ptr);
-}
-
-static int
-SystemControl_set_disp_time_weighting(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_disp_time_weighting_nset, self->data_ptr);
-}
-
-static PyObject *
-SystemControl_get_disp_timeout(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_disp_timeout_nget, self->data_ptr);
-}
-
-static int
-SystemControl_set_disp_timeout(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_disp_timeout_nset, self->data_ptr);
-}
-
-static PyObject *
-SystemControl_get_dispatch_series(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_TcsmoltenSalt_SystemControl_dispatch_series_aget, self->data_ptr);
-}
-
-static int
-SystemControl_set_dispatch_series(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_TcsmoltenSalt_SystemControl_dispatch_series_aset, self->data_ptr);
-}
-
-static PyObject *
-SystemControl_get_f_turb_tou_periods(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_TcsmoltenSalt_SystemControl_f_turb_tou_periods_aget, self->data_ptr);
-}
-
-static int
-SystemControl_set_f_turb_tou_periods(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_TcsmoltenSalt_SystemControl_f_turb_tou_periods_aset, self->data_ptr);
-}
-
-static PyObject *
-SystemControl_get_is_ampl_engine(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_is_ampl_engine_nget, self->data_ptr);
-}
-
-static int
-SystemControl_set_is_ampl_engine(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_is_ampl_engine_nset, self->data_ptr);
-}
-
-static PyObject *
-SystemControl_get_is_dispatch(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_is_dispatch_nget, self->data_ptr);
-}
-
-static int
-SystemControl_set_is_dispatch(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_is_dispatch_nset, self->data_ptr);
-}
-
-static PyObject *
-SystemControl_get_is_dispatch_series(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_is_dispatch_series_nget, self->data_ptr);
-}
-
-static int
-SystemControl_set_is_dispatch_series(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_is_dispatch_series_nset, self->data_ptr);
-}
-
-static PyObject *
-SystemControl_get_is_tod_pc_target_also_pc_max(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_is_tod_pc_target_also_pc_max_nget, self->data_ptr);
-}
-
-static int
-SystemControl_set_is_tod_pc_target_also_pc_max(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_is_tod_pc_target_also_pc_max_nset, self->data_ptr);
-}
-
-static PyObject *
-SystemControl_get_is_wlim_series(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_is_wlim_series_nget, self->data_ptr);
-}
-
-static int
-SystemControl_set_is_wlim_series(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_is_wlim_series_nset, self->data_ptr);
-}
-
-static PyObject *
-SystemControl_get_is_write_ampl_dat(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_is_write_ampl_dat_nget, self->data_ptr);
-}
-
-static int
-SystemControl_set_is_write_ampl_dat(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_is_write_ampl_dat_nset, self->data_ptr);
-}
-
-static PyObject *
-SystemControl_get_pb_fixed_par(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_pb_fixed_par_nget, self->data_ptr);
-}
-
-static int
-SystemControl_set_pb_fixed_par(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_pb_fixed_par_nset, self->data_ptr);
-}
-
-static PyObject *
-SystemControl_get_q_rec_heattrace(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_q_rec_heattrace_nget, self->data_ptr);
-}
-
-static int
-SystemControl_set_q_rec_heattrace(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_q_rec_heattrace_nset, self->data_ptr);
-}
-
-static PyObject *
-SystemControl_get_q_rec_standby(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_q_rec_standby_nget, self->data_ptr);
-}
-
-static int
-SystemControl_set_q_rec_standby(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_q_rec_standby_nset, self->data_ptr);
-}
-
-static PyObject *
-SystemControl_get_time_start(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_time_start_nget, self->data_ptr);
-}
-
-static int
-SystemControl_set_time_start(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_time_start_nset, self->data_ptr);
-}
-
-static PyObject *
-SystemControl_get_time_steps_per_hour(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_time_steps_per_hour_nget, self->data_ptr);
-}
-
-static int
-SystemControl_set_time_steps_per_hour(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_time_steps_per_hour_nset, self->data_ptr);
-}
-
-static PyObject *
-SystemControl_get_time_stop(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_time_stop_nget, self->data_ptr);
-}
-
-static int
-SystemControl_set_time_stop(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_time_stop_nset, self->data_ptr);
-}
-
-static PyObject *
-SystemControl_get_vacuum_arrays(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_vacuum_arrays_nget, self->data_ptr);
-}
-
-static int
-SystemControl_set_vacuum_arrays(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_vacuum_arrays_nset, self->data_ptr);
-}
-
-static PyObject *
-SystemControl_get_weekday_schedule(VarGroupObject *self, void *closure)
-{
-	return PySAM_matrix_getter(SAM_TcsmoltenSalt_SystemControl_weekday_schedule_mget, self->data_ptr);
-}
-
-static int
-SystemControl_set_weekday_schedule(VarGroupObject *self, PyObject *value, void *closure)
-{
-		return PySAM_matrix_setter(value, SAM_TcsmoltenSalt_SystemControl_weekday_schedule_mset, self->data_ptr);
-}
-
-static PyObject *
-SystemControl_get_weekend_schedule(VarGroupObject *self, void *closure)
-{
-	return PySAM_matrix_getter(SAM_TcsmoltenSalt_SystemControl_weekend_schedule_mget, self->data_ptr);
-}
-
-static int
-SystemControl_set_weekend_schedule(VarGroupObject *self, PyObject *value, void *closure)
-{
-		return PySAM_matrix_setter(value, SAM_TcsmoltenSalt_SystemControl_weekend_schedule_mset, self->data_ptr);
-}
-
-static PyObject *
-SystemControl_get_wlim_series(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_TcsmoltenSalt_SystemControl_wlim_series_aget, self->data_ptr);
-}
-
-static int
-SystemControl_set_wlim_series(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_TcsmoltenSalt_SystemControl_wlim_series_aset, self->data_ptr);
-}
-
-static PyGetSetDef SystemControl_getset[] = {
-{"F_wc", (getter)SystemControl_get_F_wc,(setter)SystemControl_set_F_wc,
-	PyDoc_STR("*sequence*: TOU array of fractions indicating wet cooling share for hybrid cooling\n\n*Required*: True if pc_config=0"),
- 	NULL},
-{"ampl_data_dir", (getter)SystemControl_get_ampl_data_dir,(setter)SystemControl_set_ampl_data_dir,
-	PyDoc_STR("*str*: AMPL data file directory\n\n*Required*: If not provided, assumed to be ''"),
- 	NULL},
-{"ampl_exec_call", (getter)SystemControl_get_ampl_exec_call,(setter)SystemControl_set_ampl_exec_call,
-	PyDoc_STR("*str*: System command to run AMPL code\n\n*Required*: If not provided, assumed to be 'ampl sdk_solution.run'"),
- 	NULL},
-{"aux_par", (getter)SystemControl_get_aux_par,(setter)SystemControl_set_aux_par,
-	PyDoc_STR("*float*: Aux heater, boiler parasitic [MWe/MWcap]\n\n*Required*: True"),
- 	NULL},
-{"aux_par_0", (getter)SystemControl_get_aux_par_0,(setter)SystemControl_set_aux_par_0,
-	PyDoc_STR("*float*: Aux heater, boiler parasitic - constant coefficient\n\n*Required*: True"),
- 	NULL},
-{"aux_par_1", (getter)SystemControl_get_aux_par_1,(setter)SystemControl_set_aux_par_1,
-	PyDoc_STR("*float*: Aux heater, boiler parasitic - linear coefficient\n\n*Required*: True"),
- 	NULL},
-{"aux_par_2", (getter)SystemControl_get_aux_par_2,(setter)SystemControl_set_aux_par_2,
-	PyDoc_STR("*float*: Aux heater, boiler parasitic - quadratic coefficient\n\n*Required*: True"),
- 	NULL},
-{"aux_par_f", (getter)SystemControl_get_aux_par_f,(setter)SystemControl_set_aux_par_f,
-	PyDoc_STR("*float*: Aux heater, boiler parasitic - multiplying fraction\n\n*Required*: True"),
- 	NULL},
-{"bop_par", (getter)SystemControl_get_bop_par,(setter)SystemControl_set_bop_par,
-	PyDoc_STR("*float*: Balance of plant parasitic power fraction [MWe/MWcap]\n\n*Required*: True"),
- 	NULL},
-{"bop_par_0", (getter)SystemControl_get_bop_par_0,(setter)SystemControl_set_bop_par_0,
-	PyDoc_STR("*float*: Balance of plant parasitic power fraction - const coeff\n\n*Required*: True"),
- 	NULL},
-{"bop_par_1", (getter)SystemControl_get_bop_par_1,(setter)SystemControl_set_bop_par_1,
-	PyDoc_STR("*float*: Balance of plant parasitic power fraction - linear coeff\n\n*Required*: True"),
- 	NULL},
-{"bop_par_2", (getter)SystemControl_get_bop_par_2,(setter)SystemControl_set_bop_par_2,
-	PyDoc_STR("*float*: Balance of plant parasitic power fraction - quadratic coeff\n\n*Required*: True"),
- 	NULL},
-{"bop_par_f", (getter)SystemControl_get_bop_par_f,(setter)SystemControl_set_bop_par_f,
-	PyDoc_STR("*float*: Balance of plant parasitic power fraction - mult frac\n\n*Required*: True"),
- 	NULL},
-{"disp_csu_cost", (getter)SystemControl_get_disp_csu_cost,(setter)SystemControl_set_disp_csu_cost,
-	PyDoc_STR("*float*: Cycle startup cost [$]\n\n*Required*: True if is_dispatch=1"),
- 	NULL},
-{"disp_frequency", (getter)SystemControl_get_disp_frequency,(setter)SystemControl_set_disp_frequency,
-	PyDoc_STR("*float*: Frequency for dispatch optimization calculations [hour]\n\n*Required*: True if is_dispatch=1"),
- 	NULL},
-{"disp_horizon", (getter)SystemControl_get_disp_horizon,(setter)SystemControl_set_disp_horizon,
-	PyDoc_STR("*float*: Time horizon for dispatch optimization [hour]\n\n*Required*: True if is_dispatch=1"),
- 	NULL},
-{"disp_inventory_incentive", (getter)SystemControl_get_disp_inventory_incentive,(setter)SystemControl_set_disp_inventory_incentive,
-	PyDoc_STR("*float*: Dispatch storage terminal inventory incentive multiplier\n\n*Required*: If not provided, assumed to be 0.0"),
- 	NULL},
-{"disp_max_iter", (getter)SystemControl_get_disp_max_iter,(setter)SystemControl_set_disp_max_iter,
-	PyDoc_STR("*float*: Max number of dispatch optimization iterations\n\n*Required*: True if is_dispatch=1"),
- 	NULL},
-{"disp_mip_gap", (getter)SystemControl_get_disp_mip_gap,(setter)SystemControl_set_disp_mip_gap,
-	PyDoc_STR("*float*: Dispatch optimization solution tolerance\n\n*Required*: True if is_dispatch=1"),
- 	NULL},
-{"disp_pen_delta_w", (getter)SystemControl_get_disp_pen_delta_w,(setter)SystemControl_set_disp_pen_delta_w,
-	PyDoc_STR("*float*: Dispatch cycle production change penalty [$/kWe-change]\n\n*Required*: True if is_dispatch=1"),
- 	NULL},
-{"disp_reporting", (getter)SystemControl_get_disp_reporting,(setter)SystemControl_set_disp_reporting,
-	PyDoc_STR("*float*: Dispatch optimization reporting level\n\n*Required*: If not provided, assumed to be -1"),
- 	NULL},
-{"disp_rsu_cost", (getter)SystemControl_get_disp_rsu_cost,(setter)SystemControl_set_disp_rsu_cost,
-	PyDoc_STR("*float*: Receiver startup cost [$]\n\n*Required*: True if is_dispatch=1"),
- 	NULL},
-{"disp_spec_bb", (getter)SystemControl_get_disp_spec_bb,(setter)SystemControl_set_disp_spec_bb,
-	PyDoc_STR("*float*: Dispatch optimization B&B heuristic\n\n*Required*: If not provided, assumed to be -1"),
- 	NULL},
-{"disp_spec_presolve", (getter)SystemControl_get_disp_spec_presolve,(setter)SystemControl_set_disp_spec_presolve,
-	PyDoc_STR("*float*: Dispatch optimization presolve heuristic\n\n*Required*: If not provided, assumed to be -1"),
- 	NULL},
-{"disp_spec_scaling", (getter)SystemControl_get_disp_spec_scaling,(setter)SystemControl_set_disp_spec_scaling,
-	PyDoc_STR("*float*: Dispatch optimization scaling heuristic\n\n*Required*: If not provided, assumed to be -1"),
- 	NULL},
-{"disp_steps_per_hour", (getter)SystemControl_get_disp_steps_per_hour,(setter)SystemControl_set_disp_steps_per_hour,
-	PyDoc_STR("*float*: Time steps per hour for dispatch optimization calculations\n\n*Required*: If not provided, assumed to be 1"),
- 	NULL},
-{"disp_time_weighting", (getter)SystemControl_get_disp_time_weighting,(setter)SystemControl_set_disp_time_weighting,
-	PyDoc_STR("*float*: Dispatch optimization future time discounting factor\n\n*Required*: If not provided, assumed to be 0.99"),
- 	NULL},
-{"disp_timeout", (getter)SystemControl_get_disp_timeout,(setter)SystemControl_set_disp_timeout,
-	PyDoc_STR("*float*: Max dispatch optimization solve duration [s]\n\n*Required*: True if is_dispatch=1"),
- 	NULL},
-{"dispatch_series", (getter)SystemControl_get_dispatch_series,(setter)SystemControl_set_dispatch_series,
-	PyDoc_STR("*sequence*: Time series dispatch factors"),
- 	NULL},
-{"f_turb_tou_periods", (getter)SystemControl_get_f_turb_tou_periods,(setter)SystemControl_set_f_turb_tou_periods,
-	PyDoc_STR("*sequence*: Dispatch logic for turbine load fraction\n\n*Required*: True"),
- 	NULL},
-{"is_ampl_engine", (getter)SystemControl_get_is_ampl_engine,(setter)SystemControl_set_is_ampl_engine,
-	PyDoc_STR("*float*: Run dispatch optimization with external AMPL engine\n\n*Required*: If not provided, assumed to be 0"),
- 	NULL},
-{"is_dispatch", (getter)SystemControl_get_is_dispatch,(setter)SystemControl_set_is_dispatch,
-	PyDoc_STR("*float*: Allow dispatch optimization?\n\n*Required*: If not provided, assumed to be 0"),
- 	NULL},
-{"is_dispatch_series", (getter)SystemControl_get_is_dispatch_series,(setter)SystemControl_set_is_dispatch_series,
-	PyDoc_STR("*float*: Use time-series dispatch factors\n\n*Required*: If not provided, assumed to be 0"),
- 	NULL},
-{"is_tod_pc_target_also_pc_max", (getter)SystemControl_get_is_tod_pc_target_also_pc_max,(setter)SystemControl_set_is_tod_pc_target_also_pc_max,
-	PyDoc_STR("*float*: Is the TOD target cycle heat input also the max cycle heat input?\n\n*Required*: If not provided, assumed to be 0"),
- 	NULL},
-{"is_wlim_series", (getter)SystemControl_get_is_wlim_series,(setter)SystemControl_set_is_wlim_series,
-	PyDoc_STR("*float*: Use time-series net electricity generation limits\n\n*Required*: If not provided, assumed to be 0"),
- 	NULL},
-{"is_write_ampl_dat", (getter)SystemControl_get_is_write_ampl_dat,(setter)SystemControl_set_is_write_ampl_dat,
-	PyDoc_STR("*float*: Write AMPL data files for dispatch run\n\n*Required*: If not provided, assumed to be 0"),
- 	NULL},
-{"pb_fixed_par", (getter)SystemControl_get_pb_fixed_par,(setter)SystemControl_set_pb_fixed_par,
-	PyDoc_STR("*float*: Fixed parasitic load - runs at all times [MWe/MWcap]\n\n*Required*: True"),
- 	NULL},
-{"q_rec_heattrace", (getter)SystemControl_get_q_rec_heattrace,(setter)SystemControl_set_q_rec_heattrace,
-	PyDoc_STR("*float*: Receiver heat trace energy consumption during startup [kWe-hr]\n\n*Required*: If not provided, assumed to be 0.0"),
- 	NULL},
-{"q_rec_standby", (getter)SystemControl_get_q_rec_standby,(setter)SystemControl_set_q_rec_standby,
-	PyDoc_STR("*float*: Receiver standby energy consumption [kWt]\n\n*Required*: If not provided, assumed to be 9e99"),
- 	NULL},
-{"time_start", (getter)SystemControl_get_time_start,(setter)SystemControl_set_time_start,
-	PyDoc_STR("*float*: Simulation start time [s]\n\n*Required*: If not provided, assumed to be 0"),
- 	NULL},
-{"time_steps_per_hour", (getter)SystemControl_get_time_steps_per_hour,(setter)SystemControl_set_time_steps_per_hour,
-	PyDoc_STR("*float*: Number of simulation time steps per hour\n\n*Required*: If not provided, assumed to be -1"),
- 	NULL},
-{"time_stop", (getter)SystemControl_get_time_stop,(setter)SystemControl_set_time_stop,
-	PyDoc_STR("*float*: Simulation stop time [s]\n\n*Required*: If not provided, assumed to be 31536000"),
- 	NULL},
-{"vacuum_arrays", (getter)SystemControl_get_vacuum_arrays,(setter)SystemControl_set_vacuum_arrays,
-	PyDoc_STR("*float*: Allocate arrays for only the required number of steps\n\n*Required*: If not provided, assumed to be 0"),
- 	NULL},
-{"weekday_schedule", (getter)SystemControl_get_weekday_schedule,(setter)SystemControl_set_weekday_schedule,
-	PyDoc_STR("*sequence[sequence]*: 12x24 CSP operation Time-of-Use Weekday schedule\n\n*Required*: True"),
- 	NULL},
-{"weekend_schedule", (getter)SystemControl_get_weekend_schedule,(setter)SystemControl_set_weekend_schedule,
-	PyDoc_STR("*sequence[sequence]*: 12x24 CSP operation Time-of-Use Weekend schedule\n\n*Required*: True"),
- 	NULL},
-{"wlim_series", (getter)SystemControl_get_wlim_series,(setter)SystemControl_set_wlim_series,
-	PyDoc_STR("*sequence*: Time series net electicity generation limits [kWe]\n\n*Required*: True if is_wlim_series=1"),
- 	NULL},
-	{NULL}  /* Sentinel */
-};
-
-static PyTypeObject SystemControl_Type = {
-		/* The ob_type field must be initialized in the module init function
-		 * to be portable to Windows without using C++. */
-		PyVarObject_HEAD_INIT(NULL, 0)
-		"TcsmoltenSalt.SystemControl",             /*tp_name*/
-		sizeof(VarGroupObject),          /*tp_basicsize*/
-		0,                          /*tp_itemsize*/
-		/* methods */
-		0,    /*tp_dealloc*/
-		0,                          /*tp_print*/
-		(getattrfunc)0,             /*tp_getattr*/
-		0,                          /*tp_setattr*/
-		0,                          /*tp_reserved*/
-		0,                          /*tp_repr*/
-		0,                          /*tp_as_number*/
-		0,                          /*tp_as_sequence*/
-		0,                          /*tp_as_mapping*/
-		0,                          /*tp_hash*/
-		0,                          /*tp_call*/
-		0,                          /*tp_str*/
-		0,                          /*tp_getattro*/
-		0,                          /*tp_setattro*/
-		0,                          /*tp_as_buffer*/
-		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
-		0,                          /*tp_doc*/
-		0,                          /*tp_traverse*/
-		0,                          /*tp_clear*/
-		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistofnset*/
-		0,                          /*tp_iter*/
-		0,                          /*tp_iternext*/
-		SystemControl_methods,         /*tp_methods*/
-		0,                          /*tp_members*/
-		SystemControl_getset,          /*tp_getset*/
-		0,                          /*tp_base*/
-		0,                          /*tp_dict*/
-		0,                          /*tp_descr_get*/
-		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictofnset*/
-		0,                          /*tp_init*/
-		0,                          /*tp_alloc*/
-		0,             /*tp_new*/
-		0,                          /*tp_free*/
-		0,                          /*tp_is_gc*/
-};
-
-
-/*
  * UserDefinedPowerCycle Group
  */ 
 
@@ -5194,6 +5437,23 @@ UserDefinedPowerCycle_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+UserDefinedPowerCycle_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &UserDefinedPowerCycle_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "TcsmoltenSalt", "UserDefinedPowerCycle")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 UserDefinedPowerCycle_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &UserDefinedPowerCycle_Type;
@@ -5203,7 +5463,9 @@ UserDefinedPowerCycle_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef UserDefinedPowerCycle_methods[] = {
 		{"assign",            (PyCFunction)UserDefinedPowerCycle_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``UserDefinedPowerCycle_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``UserDefinedPowerCycle_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)UserDefinedPowerCycle_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``UserDefinedPowerCycle_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)UserDefinedPowerCycle_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -5342,6 +5604,23 @@ SCO2Cycle_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+SCO2Cycle_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &SCO2Cycle_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "TcsmoltenSalt", "SCO2Cycle")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 SCO2Cycle_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &SCO2Cycle_Type;
@@ -5351,7 +5630,9 @@ SCO2Cycle_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef SCO2Cycle_methods[] = {
 		{"assign",            (PyCFunction)SCO2Cycle_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``SCO2Cycle_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``SCO2Cycle_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)SCO2Cycle_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``SCO2Cycle_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)SCO2Cycle_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -5895,6 +6176,23 @@ Outputs_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+Outputs_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Outputs_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "TcsmoltenSalt", "Outputs")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 Outputs_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &Outputs_Type;
@@ -5904,7 +6202,9 @@ Outputs_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Outputs_methods[] = {
 		{"assign",            (PyCFunction)Outputs_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Outputs_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Outputs_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Outputs_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Outputs_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -6883,6 +7183,12 @@ Outputs_get_solzen(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_system_capacity(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_Outputs_system_capacity_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_tank_losses(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_TcsmoltenSalt_Outputs_tank_losses_aget, self->data_ptr);
@@ -7429,6 +7735,9 @@ static PyGetSetDef Outputs_getset[] = {
 {"solzen", (getter)Outputs_get_solzen,(setter)0,
 	PyDoc_STR("*sequence*: Resource solar zenith [deg]"),
  	NULL},
+{"system_capacity", (getter)Outputs_get_system_capacity,(setter)0,
+	PyDoc_STR("*float*: System capacity [kWe]"),
+ 	NULL},
 {"tank_losses", (getter)Outputs_get_tank_losses,(setter)0,
 	PyDoc_STR("*sequence*: TES thermal losses [MWt]"),
  	NULL},
@@ -7530,6 +7839,10 @@ newTcsmoltenSaltObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "TimeOfDeliveryFactors", TimeOfDeliveryFactors_obj);
 	Py_DECREF(TimeOfDeliveryFactors_obj);
 
+	PyObject* SystemControl_obj = SystemControl_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "SystemControl", SystemControl_obj);
+	Py_DECREF(SystemControl_obj);
+
 	PyObject* HeliostatField_obj = HeliostatField_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "HeliostatField", HeliostatField_obj);
 	Py_DECREF(HeliostatField_obj);
@@ -7565,10 +7878,6 @@ newTcsmoltenSaltObject(void* data_ptr)
 	PyObject* RankineCycle_obj = RankineCycle_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "RankineCycle", RankineCycle_obj);
 	Py_DECREF(RankineCycle_obj);
-
-	PyObject* SystemControl_obj = SystemControl_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "SystemControl", SystemControl_obj);
-	Py_DECREF(SystemControl_obj);
 
 	PyObject* UserDefinedPowerCycle_obj = UserDefinedPowerCycle_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "UserDefinedPowerCycle", UserDefinedPowerCycle_obj);
@@ -7647,6 +7956,20 @@ TcsmoltenSalt_assign(CmodObject *self, PyObject *args)
 	return Py_None;
 }
 
+static PyObject *
+TcsmoltenSalt_replace(CmodObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_replace_from_nested_dict((PyObject*)self, self->x_attr, self->data_ptr, dict, "TcsmoltenSalt"))
+		return NULL;
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
 
 static PyObject *
 TcsmoltenSalt_export(CmodObject *self, PyObject *args)
@@ -7671,6 +7994,8 @@ static PyMethodDef TcsmoltenSalt_methods[] = {
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
 		{"assign",            (PyCFunction)TcsmoltenSalt_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Solar Resource': { var: val, ...}, ...}``")},
+		{"replace",            (PyCFunction)TcsmoltenSalt_replace,  METH_VARARGS,
+				PyDoc_STR("replace(dict) -> None\n Replace attributes from nested dictionary, except for Outputs. Unassigns all values in each Group then assigns from the input dict.\n\n``nested_dict = { 'Solar Resource': { var: val, ...}, ...}``")},
 		{"export",            (PyCFunction)TcsmoltenSalt_export,  METH_VARARGS,
 				PyDoc_STR("export() -> dict\n Export attributes into nested dictionary")},
 		{"value",             (PyCFunction)TcsmoltenSalt_value, METH_VARARGS,
@@ -7892,6 +8217,13 @@ TcsmoltenSaltModule_exec(PyObject *m)
 				(PyObject*)&TimeOfDeliveryFactors_Type);
 	Py_DECREF(&TimeOfDeliveryFactors_Type);
 
+	/// Add the SystemControl type object to TcsmoltenSalt_Type
+	if (PyType_Ready(&SystemControl_Type) < 0) { goto fail; }
+	PyDict_SetItemString(TcsmoltenSalt_Type.tp_dict,
+				"SystemControl",
+				(PyObject*)&SystemControl_Type);
+	Py_DECREF(&SystemControl_Type);
+
 	/// Add the HeliostatField type object to TcsmoltenSalt_Type
 	if (PyType_Ready(&HeliostatField_Type) < 0) { goto fail; }
 	PyDict_SetItemString(TcsmoltenSalt_Type.tp_dict,
@@ -7954,13 +8286,6 @@ TcsmoltenSaltModule_exec(PyObject *m)
 				"RankineCycle",
 				(PyObject*)&RankineCycle_Type);
 	Py_DECREF(&RankineCycle_Type);
-
-	/// Add the SystemControl type object to TcsmoltenSalt_Type
-	if (PyType_Ready(&SystemControl_Type) < 0) { goto fail; }
-	PyDict_SetItemString(TcsmoltenSalt_Type.tp_dict,
-				"SystemControl",
-				(PyObject*)&SystemControl_Type);
-	Py_DECREF(&SystemControl_Type);
 
 	/// Add the UserDefinedPowerCycle type object to TcsmoltenSalt_Type
 	if (PyType_Ready(&UserDefinedPowerCycle_Type) < 0) { goto fail; }

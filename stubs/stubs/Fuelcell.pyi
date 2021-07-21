@@ -100,6 +100,8 @@ class Outputs(object):
 		pass
 
 
+	annual_energy_distribution_time = tuple
+	annual_energy_distribution_time_fc = tuple
 	annual_fuel_usage = float
 	annual_fuel_usage_lifetime = tuple
 	fuelcell_electrical_efficiency = tuple

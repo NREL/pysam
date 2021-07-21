@@ -118,6 +118,24 @@ BatterySystem Group
 .. autoclass:: PySAM.HostDeveloper.HostDeveloper.BatterySystem
 	:members:
 
+Battery Group
+======================================================
+
+.. autoclass:: PySAM.HostDeveloper.HostDeveloper.Battery
+	:members:
+
+ChargesByMonth Group
+======================================================
+
+.. autoclass:: PySAM.HostDeveloper.HostDeveloper.ChargesByMonth
+	:members:
+
+Monthly Group
+======================================================
+
+.. autoclass:: PySAM.HostDeveloper.HostDeveloper.Monthly
+	:members:
+
 Outputs Group
 ======================================================
 

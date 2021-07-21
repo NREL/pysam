@@ -33,6 +33,12 @@ TimeOfDeliveryFactors Group
 .. autoclass:: PySAM.TcsmoltenSalt.TcsmoltenSalt.TimeOfDeliveryFactors
 	:members:
 
+SystemControl Group
+======================================================
+
+.. autoclass:: PySAM.TcsmoltenSalt.TcsmoltenSalt.SystemControl
+	:members:
+
 HeliostatField Group
 ======================================================
 
@@ -85,12 +91,6 @@ RankineCycle Group
 ======================================================
 
 .. autoclass:: PySAM.TcsmoltenSalt.TcsmoltenSalt.RankineCycle
-	:members:
-
-SystemControl Group
-======================================================
-
-.. autoclass:: PySAM.TcsmoltenSalt.TcsmoltenSalt.SystemControl
 	:members:
 
 UserDefinedPowerCycle Group

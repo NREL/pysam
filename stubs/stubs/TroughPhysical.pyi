@@ -251,6 +251,7 @@ class Tou(object):
 	ppa_multiplier_model = float
 	q_rec_heattrace = float
 	q_rec_standby = float
+	timestep_load_fractions = tuple
 	weekday_schedule = tuple
 	weekend_schedule = tuple
 	wlim_series = tuple
@@ -291,13 +292,22 @@ class Controller(object):
 	V_tes_des = float
 	custom_tes_p_loss = float
 	custom_tes_pipe_sizes = float
+	disp_wlim_maxspec = float
+	fluid_dens_inlet_temp = float
+	fluid_dens_outlet_temp = float
 	has_hot_tank_bypass = float
 	k_tes_loss_coeffs = tuple
+	lat = float
+	non_solar_field_land_area_multiplier = float
+	radio_sm_or_area = float
+	specified_solar_multiple = float
+	specified_total_aperture = float
 	tanks_in_parallel = float
 	tes_diams = tuple
 	tes_lengths = tuple
 	tes_pump_coef = float
 	tes_wallthicks = tuple
+	trough_loop_control = tuple
 
 
 class AdjustmentFactors(object):

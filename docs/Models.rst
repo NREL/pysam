@@ -174,7 +174,7 @@ These modules provide helper functions or are older versions of above modules.
     * - :doc:`modules/Poacalib`
       - Calibrates beam and diffuse to give POA input
     * - :doc:`modules/Pv6parmod`
-      - CEC 6 Parameter PV module model performance calculator.  Does not include weather file reading or irradiance processing, or inverter (DC to AC) modeling.
+      - CEC 6 Parameter PV module model performance calculator. Does not include weather file reading or irradiance processing, or inverter (DC to AC) modeling.
     * - :doc:`modules/PvGetShadeLossMpp`
       - PV get shade loss fraction for strings
     * - :doc:`modules/Pvsandiainv`
@@ -190,15 +190,11 @@ These modules provide helper functions or are older versions of above modules.
     * - :doc:`modules/Pvwattsv5`
       - PVWatts V5 - integrated hourly weather reader and PV system simulator.
     * - :doc:`modules/Sco2AirCooler`
-      - Returns air cooler dimensions given fluid and location design points
+      - Supercritical CO2 Power Cycle Air Cooler. Returns air cooler dimensions given fluid and location design points
     * - :doc:`modules/Sco2CspSystem`
-      - ...
+      - Supercritical CO2 Power Cycle Design and Off-Design Simulation
     * - :doc:`modules/Sco2CspUdPcTables`
-      - ...
-    * - :doc:`modules/Sco2DesignCycle`
-      - Calls sCO2 auto-design cycle function
-    * - :doc:`modules/Sco2DesignPoint`
-      - Returns optimized sco2 cycle parameters given inputs
+      - Supercritical CO2 Power Cycle. Returns optimized sco2 cycle parameters given inputs
     * - :doc:`modules/Singlediode`
       - Single diode model function.
     * - :doc:`modules/Singlediodeparams`
