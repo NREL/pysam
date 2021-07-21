@@ -3,6 +3,10 @@
 ## Version 2.2.3,  ~ SAM 2020.11.29 Revision 2, SSC Version
 * Fix ResourceTools solar resource download bug (#86)
 * Update Models.rst and module docs
+* New analytic battery life model for LMO/LTO chemistry
+* Updates and Examples for WaveFileReader (#87)
+* Fix bug in 5-min PV files (#88)
+* Add `replace` function for Module and Module's Groups (#93)
 * [SAM Release updates for Version 2020.11.29 Revision 2](https://nrel.github.io/SAM/doc/releasenotes.html)
 
 ## Version 2.2.2, Mar 19, 2021 ~ SAM 2020.11.29 Revision 1, SSC Version 253
