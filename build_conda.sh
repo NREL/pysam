@@ -16,7 +16,6 @@ then
 else
     DIST_NAME='win-64'
 fi
-rm -rf dist/$DIST_NAME
 
 # read version
 VERSION="$(python -c 'from files.version import __version__; print(__version__)' 2>&1)"
