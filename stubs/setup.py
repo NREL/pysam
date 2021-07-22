@@ -1,6 +1,8 @@
 from setuptools import setup
 import os
 import shutil
+import sys
+sys.path.append(os.environ.get("PYSAMDIR"))
 from files.version import __version__
 from os import path, listdir
 

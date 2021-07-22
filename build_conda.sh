@@ -33,7 +33,6 @@ do
    conda-build stubs --output-folder=$DIST_DIR --python=$PYTHONVER || exit
    conda build purge
 done
-anaconda -t $CONDA_TOKEN upload -u nrel dist/$DIST_NAME/*pysam-stubs*.bz2 || exit
 
 for PYTHONVER in 3.6 3.7 3.8 3.9
 do
@@ -41,4 +40,4 @@ do
    conda-build conda --output-folder=$DIST_DIR --python=$PYTHONVER --prefix-length=0 || exit
    conda build purge
 done
-anaconda -t $CONDA_TOKEN upload -u nrel dist/$DIST_NAME/*pysam*.bz2
+
