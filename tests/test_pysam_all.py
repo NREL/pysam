@@ -1,4 +1,5 @@
 import os
+import sys
 from pathlib import Path
 import glob
 import importlib
@@ -308,17 +309,28 @@ def assign_values(mod, i):
         except:
             pass
         try:
+            m.value("analysis_period", 1)
+            m.value("batt_dispatch_choice", 0)
+        except:
+            pass
+        try:
             m.execute(0)
         except:
             raise RuntimeError(f"Failed to run {mod} with default {default}")
 
 
 def test_run_all():
-    techs = ("TroughPhysicalProcessHeat", "Battwatts", "Biomass", "Geothermal", "LinearFresnelDsgIph", "MhkTidal",
-             "MhkWave", "TcsMSLF", "TcsgenericSolar", "TcslinearFresnel", "TcstroughEmpirical", "TroughPhysical",
-             "Pvsamv1", "Pvwattsv7", "Pvwattsv5", "TcsmoltenSalt", "Hcpv", "Swh", "TcsdirectSteam",
-             "Tcsiscc", "Windpower", "GenericSystem", "Grid")
+    # only run test on first Python version to be built, since this test is very time consuming
+    minor_ver = sys.version_info[1]
+    if minor_ver != 6:
+        return
+    techs = (
+        "TroughPhysicalProcessHeat", "Battwatts", "Biomass", "Geothermal", "LinearFresnelDsgIph", "MhkTidal",
+        "MhkWave", "TcsMSLF", "TcsgenericSolar", "TcslinearFresnel", "TcstroughEmpirical", "TroughPhysical",
+        "Pvsamv1", "Pvwattsv7", "Pvwattsv5", "TcsmoltenSalt", "Hcpv", "Swh", "TcsdirectSteam",
+        "Tcsiscc", "Windpower", "GenericSystem", "Grid")
     for mod in techs:
         mod_name = "PySAM." + mod
         i = importlib.import_module(mod_name)
         m = assign_values(mod, i)
+        print(f"{mod} passed")

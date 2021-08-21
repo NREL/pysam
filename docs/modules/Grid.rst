@@ -38,12 +38,6 @@ Lifetime Group
 .. autoclass:: PySAM.Grid.Grid.Lifetime
 	:members:
 
-GridLimits Group
-======================================================
-
-.. autoclass:: PySAM.Grid.Grid.GridLimits
-	:members:
-
 SystemOutput Group
 ======================================================
 
@@ -54,6 +48,12 @@ Load Group
 ======================================================
 
 .. autoclass:: PySAM.Grid.Grid.Load
+	:members:
+
+GridLimits Group
+======================================================
+
+.. autoclass:: PySAM.Grid.Grid.GridLimits
 	:members:
 
 Outputs Group

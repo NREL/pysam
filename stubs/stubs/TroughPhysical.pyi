@@ -66,8 +66,6 @@ class SolarField(object):
 	Rho_mirror_clean = tuple
 	Rough = tuple
 	Row_Distance = float
-	SCADefocusArray = tuple
-	SCAInfoArray = tuple
 	SCA_drives_elec = float
 	Shadowing = tuple
 	T_fp = float
@@ -129,7 +127,6 @@ class SolarField(object):
 	sf_rnr_diams = tuple
 	sf_rnr_lengths = tuple
 	sf_rnr_wallthicks = tuple
-	solar_mult = float
 	theta_dep = float
 	theta_stow = float
 	tilt = float
@@ -257,6 +254,34 @@ class Tou(object):
 	wlim_series = tuple
 
 
+class FinancialModel(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> dict:
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
+	csp_financial_model = float
+
+
+class Revenue(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> dict:
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
+	mp_energy_market_revenue = tuple
+
+
 class System(object):
 	def assign(self): 
 		pass
@@ -293,13 +318,9 @@ class Controller(object):
 	custom_tes_p_loss = float
 	custom_tes_pipe_sizes = float
 	disp_wlim_maxspec = float
-	fluid_dens_inlet_temp = float
-	fluid_dens_outlet_temp = float
 	has_hot_tank_bypass = float
 	k_tes_loss_coeffs = tuple
-	lat = float
 	non_solar_field_land_area_multiplier = float
-	radio_sm_or_area = float
 	specified_solar_multiple = float
 	specified_total_aperture = float
 	tanks_in_parallel = float
@@ -308,6 +329,7 @@ class Controller(object):
 	tes_pump_coef = float
 	tes_wallthicks = tuple
 	trough_loop_control = tuple
+	use_solar_mult_or_aperture_area = float
 
 
 class AdjustmentFactors(object):
@@ -478,6 +500,7 @@ class Outputs(object):
 	recirculating = tuple
 	rh = tuple
 	sim_duration = float
+	solar_multiple_actual = float
 	solazi = tuple
 	solzen = tuple
 	tank_losses = tuple
@@ -515,6 +538,8 @@ class TroughPhysical(object):
 	Powerblock = Powerblock
 	TES = TES
 	Tou = Tou
+	FinancialModel = FinancialModel
+	Revenue = Revenue
 	System = System
 	Controller = Controller
 	AdjustmentFactors = AdjustmentFactors

@@ -70,8 +70,6 @@ class SolarField(object):
 	Rho_mirror_clean = tuple
 	Rough = tuple
 	Row_Distance = float
-	SCADefocusArray = tuple
-	SCAInfoArray = tuple
 	SCA_drives_elec = float
 	Shadowing = tuple
 	T_fp = float
@@ -128,7 +126,6 @@ class SolarField(object):
 	sf_rnr_diams = tuple
 	sf_rnr_lengths = tuple
 	sf_rnr_wallthicks = tuple
-	solar_mult = float
 	theta_dep = float
 	theta_stow = float
 	washing_frequency = float
@@ -149,15 +146,10 @@ class Controller(object):
 
 	disp_wlim_maxspec = float
 	field_fl_props = tuple
-	fluid_dens_inlet_temp = float
-	fluid_dens_outlet_temp = float
-	lat = float
 	non_solar_field_land_area_multiplier = float
 	pb_pump_coef = float
 	q_pb_design = float
-	radio_sm_or_area = float
 	specified_solar_multiple = float
-	specified_total_aperture = float
 	tanks_in_parallel = float
 	trough_loop_control = tuple
 
@@ -393,6 +385,7 @@ class Outputs(object):
 	q_inc_sf_tot = tuple
 	q_tes_heater = tuple
 	qinc_costh = tuple
+	solar_multiple_actual = float
 	solazi = tuple
 	solzen = tuple
 	tank_losses = tuple

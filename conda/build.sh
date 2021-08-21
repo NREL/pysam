@@ -19,7 +19,7 @@ fi
 
 pattern=$DIST_DIR/NREL_PySAM-*$VERSION*"${PYTHONVER//.}"*$OS_NAME*whl
 FILE=( $pattern )
-pattern=$DIST_DIR/NREL_PySAM_stubs-*$VERSION*"${PYTHONVER//.}"*$OS_NAME*whl
+pattern=$DIST_DIR/NREL_PySAM_stubs-*$VERSION*whl
 STUBS_FILE=( $pattern )
 
 if [ -f "$FILE" ]; then

@@ -159,6 +159,143 @@ static PyTypeObject SolarResource_Type = {
 
 
 /*
+ * FinancialModel Group
+ */ 
+
+static PyTypeObject FinancialModel_Type;
+
+static PyObject *
+FinancialModel_new(SAM_TcsmoltenSalt data_ptr)
+{
+	PyObject* new_obj = FinancialModel_Type.tp_alloc(&FinancialModel_Type,0);
+
+	VarGroupObject* FinancialModel_obj = (VarGroupObject*)new_obj;
+
+	FinancialModel_obj->data_ptr = (SAM_table)data_ptr;
+
+	return new_obj;
+}
+
+/* FinancialModel methods */
+
+static PyObject *
+FinancialModel_assign(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "TcsmoltenSalt", "FinancialModel")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+FinancialModel_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &FinancialModel_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "TcsmoltenSalt", "FinancialModel")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+FinancialModel_export(VarGroupObject *self, PyObject *args)
+{
+	PyTypeObject* tp = &FinancialModel_Type;
+	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
+	return dict;
+}
+
+static PyMethodDef FinancialModel_methods[] = {
+		{"assign",            (PyCFunction)FinancialModel_assign,  METH_VARARGS,
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``FinancialModel_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)FinancialModel_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``FinancialModel_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)FinancialModel_export,  METH_VARARGS,
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+		{NULL,              NULL}           /* sentinel */
+};
+
+static PyObject *
+FinancialModel_get_csp_financial_model(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_FinancialModel_csp_financial_model_nget, self->data_ptr);
+}
+
+static int
+FinancialModel_set_csp_financial_model(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_FinancialModel_csp_financial_model_nset, self->data_ptr);
+}
+
+static PyGetSetDef FinancialModel_getset[] = {
+{"csp_financial_model", (getter)FinancialModel_get_csp_financial_model,(setter)FinancialModel_set_csp_financial_model,
+	PyDoc_STR("*float*:  [1-8]\n\n*Constraints*: INTEGER,MIN=0\n\n*Required*: If not provided, assumed to be 1"),
+ 	NULL},
+	{NULL}  /* Sentinel */
+};
+
+static PyTypeObject FinancialModel_Type = {
+		/* The ob_type field must be initialized in the module init function
+		 * to be portable to Windows without using C++. */
+		PyVarObject_HEAD_INIT(NULL, 0)
+		"TcsmoltenSalt.FinancialModel",             /*tp_name*/
+		sizeof(VarGroupObject),          /*tp_basicsize*/
+		0,                          /*tp_itemsize*/
+		/* methods */
+		0,    /*tp_dealloc*/
+		0,                          /*tp_print*/
+		(getattrfunc)0,             /*tp_getattr*/
+		0,                          /*tp_setattr*/
+		0,                          /*tp_reserved*/
+		0,                          /*tp_repr*/
+		0,                          /*tp_as_number*/
+		0,                          /*tp_as_sequence*/
+		0,                          /*tp_as_mapping*/
+		0,                          /*tp_hash*/
+		0,                          /*tp_call*/
+		0,                          /*tp_str*/
+		0,                          /*tp_getattro*/
+		0,                          /*tp_setattro*/
+		0,                          /*tp_as_buffer*/
+		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
+		0,                          /*tp_doc*/
+		0,                          /*tp_traverse*/
+		0,                          /*tp_clear*/
+		0,                          /*tp_richcompare*/
+		0,                          /*tp_weaklistofnset*/
+		0,                          /*tp_iter*/
+		0,                          /*tp_iternext*/
+		FinancialModel_methods,         /*tp_methods*/
+		0,                          /*tp_members*/
+		FinancialModel_getset,          /*tp_getset*/
+		0,                          /*tp_base*/
+		0,                          /*tp_dict*/
+		0,                          /*tp_descr_get*/
+		0,                          /*tp_descr_set*/
+		0,                          /*tp_dictofnset*/
+		0,                          /*tp_init*/
+		0,                          /*tp_alloc*/
+		0,             /*tp_new*/
+		0,                          /*tp_free*/
+		0,                          /*tp_is_gc*/
+};
+
+
+/*
  * TimeOfDeliveryFactors Group
  */ 
 
@@ -387,43 +524,43 @@ TimeOfDeliveryFactors_set_ppa_multiplier_model(VarGroupObject *self, PyObject *v
 
 static PyGetSetDef TimeOfDeliveryFactors_getset[] = {
 {"dispatch_factor1", (getter)TimeOfDeliveryFactors_get_dispatch_factor1,(setter)TimeOfDeliveryFactors_set_dispatch_factor1,
-	PyDoc_STR("*float*: Dispatch payment factor 1\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: Dispatch payment factor 1\n\n*Required*: True if ppa_multiplier_model=0&csp_financial_model<5&is_dispatch=1"),
  	NULL},
 {"dispatch_factor2", (getter)TimeOfDeliveryFactors_get_dispatch_factor2,(setter)TimeOfDeliveryFactors_set_dispatch_factor2,
-	PyDoc_STR("*float*: Dispatch payment factor 2\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: Dispatch payment factor 2\n\n*Required*: True if ppa_multiplier_model=0&csp_financial_model<5&is_dispatch=1"),
  	NULL},
 {"dispatch_factor3", (getter)TimeOfDeliveryFactors_get_dispatch_factor3,(setter)TimeOfDeliveryFactors_set_dispatch_factor3,
-	PyDoc_STR("*float*: Dispatch payment factor 3\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: Dispatch payment factor 3\n\n*Required*: True if ppa_multiplier_model=0&csp_financial_model<5&is_dispatch=1"),
  	NULL},
 {"dispatch_factor4", (getter)TimeOfDeliveryFactors_get_dispatch_factor4,(setter)TimeOfDeliveryFactors_set_dispatch_factor4,
-	PyDoc_STR("*float*: Dispatch payment factor 4\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: Dispatch payment factor 4\n\n*Required*: True if ppa_multiplier_model=0&csp_financial_model<5&is_dispatch=1"),
  	NULL},
 {"dispatch_factor5", (getter)TimeOfDeliveryFactors_get_dispatch_factor5,(setter)TimeOfDeliveryFactors_set_dispatch_factor5,
-	PyDoc_STR("*float*: Dispatch payment factor 5\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: Dispatch payment factor 5\n\n*Required*: True if ppa_multiplier_model=0&csp_financial_model<5&is_dispatch=1"),
  	NULL},
 {"dispatch_factor6", (getter)TimeOfDeliveryFactors_get_dispatch_factor6,(setter)TimeOfDeliveryFactors_set_dispatch_factor6,
-	PyDoc_STR("*float*: Dispatch payment factor 6\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: Dispatch payment factor 6\n\n*Required*: True if ppa_multiplier_model=0&csp_financial_model<5&is_dispatch=1"),
  	NULL},
 {"dispatch_factor7", (getter)TimeOfDeliveryFactors_get_dispatch_factor7,(setter)TimeOfDeliveryFactors_set_dispatch_factor7,
-	PyDoc_STR("*float*: Dispatch payment factor 7\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: Dispatch payment factor 7\n\n*Required*: True if ppa_multiplier_model=0&csp_financial_model<5&is_dispatch=1"),
  	NULL},
 {"dispatch_factor8", (getter)TimeOfDeliveryFactors_get_dispatch_factor8,(setter)TimeOfDeliveryFactors_set_dispatch_factor8,
-	PyDoc_STR("*float*: Dispatch payment factor 8\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: Dispatch payment factor 8\n\n*Required*: True if ppa_multiplier_model=0&csp_financial_model<5&is_dispatch=1"),
  	NULL},
 {"dispatch_factor9", (getter)TimeOfDeliveryFactors_get_dispatch_factor9,(setter)TimeOfDeliveryFactors_set_dispatch_factor9,
-	PyDoc_STR("*float*: Dispatch payment factor 9\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: Dispatch payment factor 9\n\n*Required*: True if ppa_multiplier_model=0&csp_financial_model<5&is_dispatch=1"),
  	NULL},
 {"dispatch_factors_ts", (getter)TimeOfDeliveryFactors_get_dispatch_factors_ts,(setter)TimeOfDeliveryFactors_set_dispatch_factors_ts,
-	PyDoc_STR("*sequence*: Dispatch payment factor array\n\n*Required*: True if ppa_multiplier_model=1"),
+	PyDoc_STR("*sequence*: Dispatch payment factor array\n\n*Required*: True if ppa_multiplier_model=1&csp_financial_model<5&is_dispatch=1"),
  	NULL},
 {"dispatch_sched_weekday", (getter)TimeOfDeliveryFactors_get_dispatch_sched_weekday,(setter)TimeOfDeliveryFactors_set_dispatch_sched_weekday,
-	PyDoc_STR("*sequence[sequence]*: PPA pricing weekday schedule, 12x24\n\n*Required*: If not provided, assumed to be [[1]]"),
+	PyDoc_STR("*sequence[sequence]*: PPA pricing weekday schedule, 12x24\n\n*Required*: True if ppa_multiplier_model=0&csp_financial_model<5&is_dispatch=1"),
  	NULL},
 {"dispatch_sched_weekend", (getter)TimeOfDeliveryFactors_get_dispatch_sched_weekend,(setter)TimeOfDeliveryFactors_set_dispatch_sched_weekend,
-	PyDoc_STR("*sequence[sequence]*: PPA pricing weekend schedule, 12x24\n\n*Required*: If not provided, assumed to be [[1]]"),
+	PyDoc_STR("*sequence[sequence]*: PPA pricing weekend schedule, 12x24\n\n*Required*: True if ppa_multiplier_model=0&csp_financial_model<5&is_dispatch=1"),
  	NULL},
 {"ppa_multiplier_model", (getter)TimeOfDeliveryFactors_get_ppa_multiplier_model,(setter)TimeOfDeliveryFactors_set_ppa_multiplier_model,
-	PyDoc_STR("*float*: PPA multiplier model [0/1]\n\n*Options*: 0=diurnal,1=timestep\n\n*Constraints*: INTEGER,MIN=0\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: PPA multiplier model 0: dispatch factors dispatch_factorX, 1: hourly multipliers dispatch_factors_ts [0/1]\n\n*Options*: 0=diurnal,1=timestep\n\n*Constraints*: INTEGER,MIN=0\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -6140,6 +6277,143 @@ static PyTypeObject SCO2Cycle_Type = {
 
 
 /*
+ * Revenue Group
+ */ 
+
+static PyTypeObject Revenue_Type;
+
+static PyObject *
+Revenue_new(SAM_TcsmoltenSalt data_ptr)
+{
+	PyObject* new_obj = Revenue_Type.tp_alloc(&Revenue_Type,0);
+
+	VarGroupObject* Revenue_obj = (VarGroupObject*)new_obj;
+
+	Revenue_obj->data_ptr = (SAM_table)data_ptr;
+
+	return new_obj;
+}
+
+/* Revenue methods */
+
+static PyObject *
+Revenue_assign(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "TcsmoltenSalt", "Revenue")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+Revenue_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Revenue_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "TcsmoltenSalt", "Revenue")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+Revenue_export(VarGroupObject *self, PyObject *args)
+{
+	PyTypeObject* tp = &Revenue_Type;
+	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
+	return dict;
+}
+
+static PyMethodDef Revenue_methods[] = {
+		{"assign",            (PyCFunction)Revenue_assign,  METH_VARARGS,
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Revenue_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Revenue_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Revenue_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)Revenue_export,  METH_VARARGS,
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+		{NULL,              NULL}           /* sentinel */
+};
+
+static PyObject *
+Revenue_get_mp_energy_market_revenue(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_TcsmoltenSalt_Revenue_mp_energy_market_revenue_mget, self->data_ptr);
+}
+
+static int
+Revenue_set_mp_energy_market_revenue(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_TcsmoltenSalt_Revenue_mp_energy_market_revenue_mset, self->data_ptr);
+}
+
+static PyGetSetDef Revenue_getset[] = {
+{"mp_energy_market_revenue", (getter)Revenue_get_mp_energy_market_revenue,(setter)Revenue_set_mp_energy_market_revenue,
+	PyDoc_STR("*sequence[sequence]*: Energy market revenue input\n\n*Info*: Lifetime x 2[Cleared Capacity(MW),Price($/MWh)]\n\n*Required*: True if csp_financial_model=6&is_dispatch=1"),
+ 	NULL},
+	{NULL}  /* Sentinel */
+};
+
+static PyTypeObject Revenue_Type = {
+		/* The ob_type field must be initialized in the module init function
+		 * to be portable to Windows without using C++. */
+		PyVarObject_HEAD_INIT(NULL, 0)
+		"TcsmoltenSalt.Revenue",             /*tp_name*/
+		sizeof(VarGroupObject),          /*tp_basicsize*/
+		0,                          /*tp_itemsize*/
+		/* methods */
+		0,    /*tp_dealloc*/
+		0,                          /*tp_print*/
+		(getattrfunc)0,             /*tp_getattr*/
+		0,                          /*tp_setattr*/
+		0,                          /*tp_reserved*/
+		0,                          /*tp_repr*/
+		0,                          /*tp_as_number*/
+		0,                          /*tp_as_sequence*/
+		0,                          /*tp_as_mapping*/
+		0,                          /*tp_hash*/
+		0,                          /*tp_call*/
+		0,                          /*tp_str*/
+		0,                          /*tp_getattro*/
+		0,                          /*tp_setattro*/
+		0,                          /*tp_as_buffer*/
+		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
+		0,                          /*tp_doc*/
+		0,                          /*tp_traverse*/
+		0,                          /*tp_clear*/
+		0,                          /*tp_richcompare*/
+		0,                          /*tp_weaklistofnset*/
+		0,                          /*tp_iter*/
+		0,                          /*tp_iternext*/
+		Revenue_methods,         /*tp_methods*/
+		0,                          /*tp_members*/
+		Revenue_getset,          /*tp_getset*/
+		0,                          /*tp_base*/
+		0,                          /*tp_dict*/
+		0,                          /*tp_descr_get*/
+		0,                          /*tp_descr_set*/
+		0,                          /*tp_dictofnset*/
+		0,                          /*tp_init*/
+		0,                          /*tp_alloc*/
+		0,             /*tp_new*/
+		0,                          /*tp_free*/
+		0,                          /*tp_is_gc*/
+};
+
+
+/*
  * Outputs Group
  */ 
 
@@ -7835,6 +8109,10 @@ newTcsmoltenSaltObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "SolarResource", SolarResource_obj);
 	Py_DECREF(SolarResource_obj);
 
+	PyObject* FinancialModel_obj = FinancialModel_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "FinancialModel", FinancialModel_obj);
+	Py_DECREF(FinancialModel_obj);
+
 	PyObject* TimeOfDeliveryFactors_obj = TimeOfDeliveryFactors_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "TimeOfDeliveryFactors", TimeOfDeliveryFactors_obj);
 	Py_DECREF(TimeOfDeliveryFactors_obj);
@@ -7886,6 +8164,10 @@ newTcsmoltenSaltObject(void* data_ptr)
 	PyObject* SCO2Cycle_obj = SCO2Cycle_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "SCO2Cycle", SCO2Cycle_obj);
 	Py_DECREF(SCO2Cycle_obj);
+
+	PyObject* Revenue_obj = Revenue_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "Revenue", Revenue_obj);
+	Py_DECREF(Revenue_obj);
 
 	PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
 
@@ -8210,6 +8492,13 @@ TcsmoltenSaltModule_exec(PyObject *m)
 				(PyObject*)&SolarResource_Type);
 	Py_DECREF(&SolarResource_Type);
 
+	/// Add the FinancialModel type object to TcsmoltenSalt_Type
+	if (PyType_Ready(&FinancialModel_Type) < 0) { goto fail; }
+	PyDict_SetItemString(TcsmoltenSalt_Type.tp_dict,
+				"FinancialModel",
+				(PyObject*)&FinancialModel_Type);
+	Py_DECREF(&FinancialModel_Type);
+
 	/// Add the TimeOfDeliveryFactors type object to TcsmoltenSalt_Type
 	if (PyType_Ready(&TimeOfDeliveryFactors_Type) < 0) { goto fail; }
 	PyDict_SetItemString(TcsmoltenSalt_Type.tp_dict,
@@ -8300,6 +8589,13 @@ TcsmoltenSaltModule_exec(PyObject *m)
 				"SCO2Cycle",
 				(PyObject*)&SCO2Cycle_Type);
 	Py_DECREF(&SCO2Cycle_Type);
+
+	/// Add the Revenue type object to TcsmoltenSalt_Type
+	if (PyType_Ready(&Revenue_Type) < 0) { goto fail; }
+	PyDict_SetItemString(TcsmoltenSalt_Type.tp_dict,
+				"Revenue",
+				(PyObject*)&Revenue_Type);
+	Py_DECREF(&Revenue_Type);
 
 	/// Add the Outputs type object to TcsmoltenSalt_Type
 	if (PyType_Ready(&Outputs_Type) < 0) { goto fail; }

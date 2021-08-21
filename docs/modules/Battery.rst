@@ -133,6 +133,12 @@ ElectricityRates Group
 .. autoclass:: PySAM.Battery.Battery.ElectricityRates
 	:members:
 
+GridLimits Group
+======================================================
+
+.. autoclass:: PySAM.Battery.Battery.GridLimits
+	:members:
+
 Outputs Group
 ======================================================
 

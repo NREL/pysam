@@ -39,7 +39,7 @@ done
 mypy stubs/stubs || exit
 python stubs/setup.py bdist_wheel
 
-$PYSAMDIR/build_conda.sh || exit
+yes | $PYSAMDIR/build_conda.sh || exit
 
 #
 # Building for Manylinux1

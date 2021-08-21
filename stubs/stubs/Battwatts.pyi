@@ -54,6 +54,22 @@ class Load(object):
 	run_resiliency_calcs = float
 
 
+class GridLimits(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> dict:
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
+	enable_interconnection_limit = float
+	grid_curtailment = tuple
+	grid_interconnection_limit_kwac = float
+
+
 class Outputs(object):
 	def assign(self): 
 		pass
@@ -93,6 +109,18 @@ class Outputs(object):
 	batt_dispatch_sched = tuple
 	batt_power = tuple
 	batt_power_target = tuple
+	batt_pvs_PV_ramp_interval = tuple
+	batt_pvs_P_pv_ac = tuple
+	batt_pvs_battpower = tuple
+	batt_pvs_battsoc = tuple
+	batt_pvs_curtail = tuple
+	batt_pvs_energy_to_grid_percent = float
+	batt_pvs_energy_to_grid_percent_sam = float
+	batt_pvs_forecast_pv_energy = tuple
+	batt_pvs_outpower = tuple
+	batt_pvs_violation_count = float
+	batt_pvs_violation_list = tuple
+	batt_pvs_violation_percent = float
 	batt_q0 = tuple
 	batt_q1 = tuple
 	batt_q2 = tuple
@@ -111,6 +139,7 @@ class Outputs(object):
 	batt_voltage = tuple
 	batt_voltage_cell = tuple
 	cdf_of_surviving = tuple
+	crit_load_unmet = tuple
 	fuelcell_to_batt = tuple
 	gen = tuple
 	gen_without_battery = tuple
@@ -118,11 +147,13 @@ class Outputs(object):
 	grid_power_target = tuple
 	grid_to_batt = tuple
 	grid_to_load = tuple
+	interconnection_loss = tuple
 	market_sell_rate_series_yr1 = tuple
 	monthly_batt_to_grid = tuple
 	monthly_batt_to_load = tuple
 	monthly_grid_to_batt = tuple
 	monthly_grid_to_load = tuple
+	monthly_interconnection_loss = tuple
 	monthly_system_to_batt = tuple
 	monthly_system_to_grid = tuple
 	monthly_system_to_load = tuple
@@ -163,6 +194,7 @@ class Battwatts(object):
 	Lifetime = Lifetime
 	Battery = Battery
 	Load = Load
+	GridLimits = GridLimits
 	Outputs = Outputs
 
 
