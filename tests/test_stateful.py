@@ -37,6 +37,22 @@ def test_stateful_lead():
     assert (b.StatePack.SOC == approx(11.77, 1e-2))
 
 
+def test_stateful_lmolto():
+    b = bt.default("LMOLTO")
+    b.Controls.control_mode = 1
+    b.Controls.dt_hr = 1
+    b.ParamsCell.minimum_SOC = 10
+    b.ParamsCell.maximum_SOC = 90
+    b.ParamsCell.initial_SOC = 50
+    b.Controls.input_power = 0
+    b.setup()
+    assert (b.StatePack.SOC == approx(50))
+
+    b.Controls.input_power = 0.5
+    b.execute(0)
+    assert (b.StatePack.SOC == approx(45.216, 1e-2))
+
+
 def test_stateful_from_data():
     b = bt.new()
     d = {'Controls': {'control_mode': 1.0, 'dt_hr': 0.016666666666666666, 'input_power': 0.0},

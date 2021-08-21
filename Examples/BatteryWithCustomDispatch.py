@@ -4,7 +4,7 @@ Any list of floats with length analysis_period * steps_in_year can be used for d
 
 Additional financial models, inputs, and outputs can be found at https://nrel-pysam.readthedocs.io/en/master/modules/Battery.html
 
-Most recently tested against PySAM 2.2
+Most recently tested against PySAM 2.2.3
 
 @author: brtietz
 """

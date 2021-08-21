@@ -16,7 +16,6 @@ then
 else
     DIST_NAME='win-64'
 fi
-rm -rf dist/$DIST_NAME
 
 # read version
 VERSION="$(python -c 'from files.version import __version__; print(__version__)' 2>&1)"
@@ -34,7 +33,6 @@ do
    conda-build stubs --output-folder=$DIST_DIR --python=$PYTHONVER || exit
    conda build purge
 done
-anaconda -t $CONDA_TOKEN upload -u nrel dist/$DIST_NAME/*pysam-stubs*.bz2 || exit
 
 for PYTHONVER in 3.6 3.7 3.8 3.9
 do
@@ -42,4 +40,4 @@ do
    conda-build conda --output-folder=$DIST_DIR --python=$PYTHONVER --prefix-length=0 || exit
    conda build purge
 done
-anaconda -t $CONDA_TOKEN upload -u nrel dist/$DIST_NAME/*pysam*.bz2
+

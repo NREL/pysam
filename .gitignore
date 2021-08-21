@@ -6,6 +6,7 @@ cmake-build-debug/
 cmake-build-release/
 *.pyproj
 *.sln
+*.ipynb_checkpoints
 
 #os specific
 .idea/

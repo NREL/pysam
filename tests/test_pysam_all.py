@@ -4,7 +4,6 @@ import glob
 import importlib
 import PySAM.GenericSystem as GenericSystem
 from pympler.tracker import SummaryTracker
-import gc
 from PySAM.PySSC import PySSC
 
 ssc = PySSC()
@@ -269,8 +268,8 @@ wf = str(Path(__file__).parent / "AR Northwestern-Flat Lands.srw")
 
 
 def assign_values(mod, i):
-    defs_path = str(Path(__file__).parent.parent / "files" / "defaults" / ("*" + mod.lower())) + "*"
-    defaults = glob.glob(defs_path)
+    defaults = glob.glob(os.environ['SAMNTDIR'] + "/api/api_autogen/library/defaults/" + mod + "_*.json")
+
     for default in defaults:
         default = os.path.basename(default).split('.')[0].split('_')[1]
         m = i.default(default)
@@ -291,22 +290,35 @@ def assign_values(mod, i):
         elif mod == "Grid":
             m.SystemOutput.gen = [1 for i in range(8760)]
             m.Lifetime.system_use_lifetime_output = 0
+        elif mod == "Battwatts":
+            m.value("ac", [1] * 8760)
+            m.value("inverter_efficiency", 0.96)
+        else:
+            try:
+                m.value("solar_resource_file", sf)
+            except:
+                try:
+                    m.value("file_name", sf)
+                except:
+                    pass
 
         try:
             m.SystemOutput.system_capacity = 10000
             m.TimeSeries.gen = [1 for i in range(8760)]
         except:
             pass
-        m.execute(0)
+        try:
+            m.execute(0)
+        except:
+            raise RuntimeError(f"Failed to run {mod} with default {default}")
 
 
 def test_run_all():
-    techs = ("Pvsamv1", "Pvwattsv7", "Pvwattsv5", "TcsmoltenSalt", "Hcpv", "Swh", "TcsdirectSteam",
+    techs = ("TroughPhysicalProcessHeat", "Battwatts", "Biomass", "Geothermal", "LinearFresnelDsgIph", "MhkTidal",
+             "MhkWave", "TcsMSLF", "TcsgenericSolar", "TcslinearFresnel", "TcstroughEmpirical", "TroughPhysical",
+             "Pvsamv1", "Pvwattsv7", "Pvwattsv5", "TcsmoltenSalt", "Hcpv", "Swh", "TcsdirectSteam",
              "Tcsiscc", "Windpower", "GenericSystem", "Grid")
     for mod in techs:
         mod_name = "PySAM." + mod
-        config = mod_name + "SingleOwner"
         i = importlib.import_module(mod_name)
         m = assign_values(mod, i)
-
-

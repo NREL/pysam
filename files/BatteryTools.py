@@ -1,7 +1,11 @@
+from typing import Union
 import math
 
+import PySAM.Pvsamv1 as PVBatt
 import PySAM.Battery as Batt
 import PySAM.BatteryStateful as BattStfl
+
+available_chems = ['leadacid', 'lfpgraphite', 'nmcgraphite', 'lmolto']
 
 
 def battery_model_sizing(model, desired_power, desired_capacity, desired_voltage, size_by_ac_not_dc=None, module_specs: dict=None):
@@ -9,8 +13,8 @@ def battery_model_sizing(model, desired_power, desired_capacity, desired_voltage
     Sizes the battery model using its current configuration such as chemistry, cell properties, etc
     and modifies the model's power, capacity and voltage without changing its fundamental properties
 
-    The battery's thermal parameters (surface area and mass) are modified according to assumptions 
-    about the mass and volume per specific energy and assuming the battery is a cube. If the battery's 
+    The battery's thermal parameters (surface area and mass) are modified according to assumptions
+    about the mass and volume per specific energy and assuming the battery is a cube. If the battery's
     thermal parameters should be sized according to a particular module's capacity and surface area,
     use the module_specs input.
 
@@ -39,7 +43,7 @@ def battery_model_sizing(model, desired_power, desired_capacity, desired_voltage
         if not module_specs.keys() == {'capacity', 'surface_area'}:
             raise TypeError("module_specs must contain 'capacity' and 'surface_area' keys only." )
 
-    if type(model) == Batt.Battery:
+    if type(model) == Batt.Battery or type(model) == PVBatt.Pvsamv1:
         size_battery(model, desired_power, desired_capacity, desired_voltage, size_by_ac_not_dc, module_dict=module_specs)
     elif type(model) == BattStfl.BatteryStateful:
         size_batterystateful(model, desired_power, desired_capacity, desired_voltage, module_dict=module_specs)
@@ -53,13 +57,13 @@ def battery_model_change_chemistry(model, chem):
 
     :param model: PySAM.Battery.Battery or PySAM.BatteryStateful.BatteryStateful
     :param chem: string
-        'leadacid', 'lfpgraphite', 'nmcgraphite'
+        'leadacid', 'lfpgraphite', 'nmcgraphite', 'lmolto'
     """
     chem = chem.lower()
-    if chem != 'leadacid' and chem != 'lfpgraphite' and chem != 'nmcgraphite':
+    if chem not in available_chems:
         raise NotImplementedError
 
-    if type(model) == Batt.Battery:
+    if type(model) == Batt.Battery or type(model) == PVBatt.Pvsamv1:
         chem_battery(model, chem)
     elif type(model) == BattStfl.BatteryStateful:
         chem_batterystateful(model, chem)
@@ -91,7 +95,7 @@ def size_battery(model, desired_power, desired_capacity, desired_voltage, size_b
                 m^2 of module battery
     :return: output_dictionary of sizing parameters
     """
-    if type(model) != Batt.Battery:
+    if type(model) != Batt.Battery and type(model) != PVBatt.Pvsamv1:
         raise TypeError
 
     #
@@ -385,8 +389,8 @@ def calculate_thermal_params(input_dict):
     Calculates the mass and surface area of a battery by calculating from its current parameters the
     mass / specific energy and volume / specific energy ratios.
 
-    If module_capacity and module_surface_area are provided, battery surface area is calculated by 
-    scaling module_surface_area by the number of modules required to fulfill desired capacity. 
+    If module_capacity and module_surface_area are provided, battery surface area is calculated by
+    scaling module_surface_area by the number of modules required to fulfill desired capacity.
 
     :param:
         input_dict:
@@ -433,16 +437,15 @@ def calculate_thermal_params(input_dict):
     return output_dict
 
 
-def chem_battery(model: Batt.Battery, chem):
+def chem_battery(model: Union[Batt.Battery, PVBatt.Pvsamv1], chem):
     """
     Helper function for battery_model_change_chemistry
     """
-    if type(model) != Batt.Battery:
+    if type(model) != Batt.Battery and type(model) != PVBatt.Pvsamv1:
         raise TypeError
 
     chem = chem.lower()
-
-    if chem != 'leadacid' and chem != 'lfpgraphite' and chem != 'nmcgraphite':
+    if chem not in available_chems:
         raise NotImplementedError
 
     if chem == 'leadacid':
@@ -492,7 +495,7 @@ def chem_batterystateful(model: BattStfl.BatteryStateful, chem):
 
     chem = chem.lower()
 
-    if chem != 'LeadAcid' and chem != 'lfpgraphite' and chem != 'nmcgraphite':
+    if chem not in available_chems:
         raise NotImplementedError
 
     if chem == 'leadacid':
