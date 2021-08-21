@@ -1,6 +1,11 @@
 # Release Notes
 
-## Version 2.2.3,  ~ SAM 2020.11.29 Revision 2, SSC Version
+## Version 2.2.4, Aug 20, 2021 ~ SAM 2020.11.29, Revision 2, SSC Version 259
+* Fix bug in Battery LMO/LTO life model
+* Fix a few cost defaults for PV PPA-model configuration
+* Clean up PhysicalTroughProcessHeat inputs
+
+## Version 2.2.3, July 22, 2021 ~ SAM 2020.11.29 Revision 2, SSC Version
 * Fix ResourceTools solar resource download bug (#86)
 * Update Models.rst and module docs
 * New analytic battery life model for LMO/LTO chemistry

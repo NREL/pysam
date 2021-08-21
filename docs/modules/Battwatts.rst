@@ -50,6 +50,12 @@ Load Group
 .. autoclass:: PySAM.Battwatts.Battwatts.Load
 	:members:
 
+GridLimits Group
+======================================================
+
+.. autoclass:: PySAM.Battwatts.Battwatts.GridLimits
+	:members:
+
 Outputs Group
 ======================================================
 

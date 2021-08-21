@@ -67,8 +67,10 @@ class SystemCosts(object):
 	add_om_num_types = float
 	annual_fuel_usage = float
 	annual_fuel_usage_lifetime = tuple
+	fuelcell_annual_energy_discharged = tuple
 	om_batt_capacity_cost = tuple
 	om_batt_fixed_cost = tuple
+	om_batt_nameplate = float
 	om_batt_replacement_cost = tuple
 	om_batt_variable_cost = tuple
 	om_capacity = tuple
@@ -79,6 +81,7 @@ class SystemCosts(object):
 	om_fuel_cost_escal = float
 	om_fuelcell_capacity_cost = tuple
 	om_fuelcell_fixed_cost = tuple
+	om_fuelcell_nameplate = float
 	om_fuelcell_replacement_cost = tuple
 	om_fuelcell_variable_cost = tuple
 	om_opt_fuel_1_cost = tuple
@@ -93,8 +96,6 @@ class SystemCosts(object):
 	om_production_escal = float
 	om_replacement_cost_escal = float
 	total_installed_cost = float
-	ui_batt_capacity = float
-	ui_fuelcell_capacity = float
 
 
 class TaxCreditIncentives(object):

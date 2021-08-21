@@ -506,6 +506,18 @@ SystemCosts_set_annual_fuel_usage_lifetime(VarGroupObject *self, PyObject *value
 }
 
 static PyObject *
+SystemCosts_get_fuelcell_annual_energy_discharged(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Cashloan_SystemCosts_fuelcell_annual_energy_discharged_aget, self->data_ptr);
+}
+
+static int
+SystemCosts_set_fuelcell_annual_energy_discharged(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Cashloan_SystemCosts_fuelcell_annual_energy_discharged_aset, self->data_ptr);
+}
+
+static PyObject *
 SystemCosts_get_om_batt_capacity_cost(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Cashloan_SystemCosts_om_batt_capacity_cost_aget, self->data_ptr);
@@ -527,6 +539,18 @@ static int
 SystemCosts_set_om_batt_fixed_cost(VarGroupObject *self, PyObject *value, void *closure)
 {
 	return PySAM_array_setter(value, SAM_Cashloan_SystemCosts_om_batt_fixed_cost_aset, self->data_ptr);
+}
+
+static PyObject *
+SystemCosts_get_om_batt_nameplate(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Cashloan_SystemCosts_om_batt_nameplate_nget, self->data_ptr);
+}
+
+static int
+SystemCosts_set_om_batt_nameplate(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Cashloan_SystemCosts_om_batt_nameplate_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -647,6 +671,18 @@ static int
 SystemCosts_set_om_fuelcell_fixed_cost(VarGroupObject *self, PyObject *value, void *closure)
 {
 	return PySAM_array_setter(value, SAM_Cashloan_SystemCosts_om_fuelcell_fixed_cost_aset, self->data_ptr);
+}
+
+static PyObject *
+SystemCosts_get_om_fuelcell_nameplate(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Cashloan_SystemCosts_om_fuelcell_nameplate_nget, self->data_ptr);
+}
+
+static int
+SystemCosts_set_om_fuelcell_nameplate(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Cashloan_SystemCosts_om_fuelcell_nameplate_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -817,30 +853,6 @@ SystemCosts_set_total_installed_cost(VarGroupObject *self, PyObject *value, void
 	return PySAM_double_setter(value, SAM_Cashloan_SystemCosts_total_installed_cost_nset, self->data_ptr);
 }
 
-static PyObject *
-SystemCosts_get_ui_batt_capacity(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Cashloan_SystemCosts_ui_batt_capacity_nget, self->data_ptr);
-}
-
-static int
-SystemCosts_set_ui_batt_capacity(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Cashloan_SystemCosts_ui_batt_capacity_nset, self->data_ptr);
-}
-
-static PyObject *
-SystemCosts_get_ui_fuelcell_capacity(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Cashloan_SystemCosts_ui_fuelcell_capacity_nget, self->data_ptr);
-}
-
-static int
-SystemCosts_set_ui_fuelcell_capacity(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Cashloan_SystemCosts_ui_fuelcell_capacity_nset, self->data_ptr);
-}
-
 static PyGetSetDef SystemCosts_getset[] = {
 {"add_om_num_types", (getter)SystemCosts_get_add_om_num_types,(setter)SystemCosts_set_add_om_num_types,
 	PyDoc_STR("*float*: Number of O and M types\n\n*Constraints*: INTEGER,MIN=0,MAX=2\n\n*Required*: If not provided, assumed to be 0"),
@@ -851,11 +863,17 @@ static PyGetSetDef SystemCosts_getset[] = {
 {"annual_fuel_usage_lifetime", (getter)SystemCosts_get_annual_fuel_usage_lifetime,(setter)SystemCosts_set_annual_fuel_usage_lifetime,
 	PyDoc_STR("*sequence*: Fuel usage (lifetime) [kWht]"),
  	NULL},
+{"fuelcell_annual_energy_discharged", (getter)SystemCosts_get_fuelcell_annual_energy_discharged,(setter)SystemCosts_set_fuelcell_annual_energy_discharged,
+	PyDoc_STR("*sequence*: Annual energy from fuelcell [kWh]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
 {"om_batt_capacity_cost", (getter)SystemCosts_get_om_batt_capacity_cost,(setter)SystemCosts_set_om_batt_capacity_cost,
 	PyDoc_STR("*sequence*: Battery capacity-based System Costs amount [$/kWcap]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
 {"om_batt_fixed_cost", (getter)SystemCosts_get_om_batt_fixed_cost,(setter)SystemCosts_set_om_batt_fixed_cost,
 	PyDoc_STR("*sequence*: Battery fixed System Costs annual amount [$/year]\n\n*Required*: If not provided, assumed to be 0.0"),
+ 	NULL},
+{"om_batt_nameplate", (getter)SystemCosts_get_om_batt_nameplate,(setter)SystemCosts_set_om_batt_nameplate,
+	PyDoc_STR("*float*: Battery capacity for System Costs values [kW]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"om_batt_replacement_cost", (getter)SystemCosts_get_om_batt_replacement_cost,(setter)SystemCosts_set_om_batt_replacement_cost,
 	PyDoc_STR("*sequence*: Replacement cost 1 [$/kWh]\n\n*Required*: If not provided, assumed to be 0.0"),
@@ -886,6 +904,9 @@ static PyGetSetDef SystemCosts_getset[] = {
  	NULL},
 {"om_fuelcell_fixed_cost", (getter)SystemCosts_get_om_fuelcell_fixed_cost,(setter)SystemCosts_set_om_fuelcell_fixed_cost,
 	PyDoc_STR("*sequence*: Fuel cell fixed System Costs annual amount [$/year]\n\n*Required*: If not provided, assumed to be 0.0"),
+ 	NULL},
+{"om_fuelcell_nameplate", (getter)SystemCosts_get_om_fuelcell_nameplate,(setter)SystemCosts_set_om_fuelcell_nameplate,
+	PyDoc_STR("*float*: Fuel cell capacity for System Costs values [kW]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"om_fuelcell_replacement_cost", (getter)SystemCosts_get_om_fuelcell_replacement_cost,(setter)SystemCosts_set_om_fuelcell_replacement_cost,
 	PyDoc_STR("*sequence*: Replacement cost 2 [$/kW]\n\n*Required*: If not provided, assumed to be 0.0"),
@@ -928,12 +949,6 @@ static PyGetSetDef SystemCosts_getset[] = {
  	NULL},
 {"total_installed_cost", (getter)SystemCosts_get_total_installed_cost,(setter)SystemCosts_set_total_installed_cost,
 	PyDoc_STR("*float*: Total installed cost [$]\n\n*Constraints*: MIN=0\n\n*Required*: True"),
- 	NULL},
-{"ui_batt_capacity", (getter)SystemCosts_get_ui_batt_capacity,(setter)SystemCosts_set_ui_batt_capacity,
-	PyDoc_STR("*float*: Battery capacity for System Costs values [kW]\n\n*Required*: If not provided, assumed to be 0"),
- 	NULL},
-{"ui_fuelcell_capacity", (getter)SystemCosts_get_ui_fuelcell_capacity,(setter)SystemCosts_set_ui_fuelcell_capacity,
-	PyDoc_STR("*float*: Fuel cell capacity for System Costs values [kW]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 	{NULL}  /* Sentinel */
 };

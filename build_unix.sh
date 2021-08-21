@@ -40,7 +40,7 @@ mypy stubs/stubs || exit
 python stubs/setup.py bdist_wheel
 twine upload $PYSAMDIR/dist/*.whl || exit
 
-$PYSAMDIR/build_conda.sh || exit
+yes | $PYSAMDIR/build_conda.sh || exit
 anaconda upload -u nrel $PYSAMDIR/dist/osx-64/*.tar.bz2 || exit
 
 rm -rf dist/*

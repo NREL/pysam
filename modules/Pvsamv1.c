@@ -10147,6 +10147,186 @@ BatteryDispatch_set_batt_dispatch_choice(VarGroupObject *self, PyObject *value, 
 }
 
 static PyObject *
+BatteryDispatch_get_batt_dispatch_pvs_ac_lb(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_BatteryDispatch_batt_dispatch_pvs_ac_lb_nget, self->data_ptr);
+}
+
+static int
+BatteryDispatch_set_batt_dispatch_pvs_ac_lb(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_BatteryDispatch_batt_dispatch_pvs_ac_lb_nset, self->data_ptr);
+}
+
+static PyObject *
+BatteryDispatch_get_batt_dispatch_pvs_ac_lb_enable(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_BatteryDispatch_batt_dispatch_pvs_ac_lb_enable_nget, self->data_ptr);
+}
+
+static int
+BatteryDispatch_set_batt_dispatch_pvs_ac_lb_enable(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_BatteryDispatch_batt_dispatch_pvs_ac_lb_enable_nset, self->data_ptr);
+}
+
+static PyObject *
+BatteryDispatch_get_batt_dispatch_pvs_ac_ub(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_BatteryDispatch_batt_dispatch_pvs_ac_ub_nget, self->data_ptr);
+}
+
+static int
+BatteryDispatch_set_batt_dispatch_pvs_ac_ub(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_BatteryDispatch_batt_dispatch_pvs_ac_ub_nset, self->data_ptr);
+}
+
+static PyObject *
+BatteryDispatch_get_batt_dispatch_pvs_ac_ub_enable(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_BatteryDispatch_batt_dispatch_pvs_ac_ub_enable_nget, self->data_ptr);
+}
+
+static int
+BatteryDispatch_set_batt_dispatch_pvs_ac_ub_enable(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_BatteryDispatch_batt_dispatch_pvs_ac_ub_enable_nset, self->data_ptr);
+}
+
+static PyObject *
+BatteryDispatch_get_batt_dispatch_pvs_curtail_as_control(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_BatteryDispatch_batt_dispatch_pvs_curtail_as_control_nget, self->data_ptr);
+}
+
+static int
+BatteryDispatch_set_batt_dispatch_pvs_curtail_as_control(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_BatteryDispatch_batt_dispatch_pvs_curtail_as_control_nset, self->data_ptr);
+}
+
+static PyObject *
+BatteryDispatch_get_batt_dispatch_pvs_curtail_if_violation(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_BatteryDispatch_batt_dispatch_pvs_curtail_if_violation_nget, self->data_ptr);
+}
+
+static int
+BatteryDispatch_set_batt_dispatch_pvs_curtail_if_violation(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_BatteryDispatch_batt_dispatch_pvs_curtail_if_violation_nset, self->data_ptr);
+}
+
+static PyObject *
+BatteryDispatch_get_batt_dispatch_pvs_forecast_shift_periods(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_BatteryDispatch_batt_dispatch_pvs_forecast_shift_periods_nget, self->data_ptr);
+}
+
+static int
+BatteryDispatch_set_batt_dispatch_pvs_forecast_shift_periods(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_BatteryDispatch_batt_dispatch_pvs_forecast_shift_periods_nset, self->data_ptr);
+}
+
+static PyObject *
+BatteryDispatch_get_batt_dispatch_pvs_kf(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_BatteryDispatch_batt_dispatch_pvs_kf_nget, self->data_ptr);
+}
+
+static int
+BatteryDispatch_set_batt_dispatch_pvs_kf(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_BatteryDispatch_batt_dispatch_pvs_kf_nset, self->data_ptr);
+}
+
+static PyObject *
+BatteryDispatch_get_batt_dispatch_pvs_ki(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_BatteryDispatch_batt_dispatch_pvs_ki_nget, self->data_ptr);
+}
+
+static int
+BatteryDispatch_set_batt_dispatch_pvs_ki(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_BatteryDispatch_batt_dispatch_pvs_ki_nset, self->data_ptr);
+}
+
+static PyObject *
+BatteryDispatch_get_batt_dispatch_pvs_kp(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_BatteryDispatch_batt_dispatch_pvs_kp_nget, self->data_ptr);
+}
+
+static int
+BatteryDispatch_set_batt_dispatch_pvs_kp(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_BatteryDispatch_batt_dispatch_pvs_kp_nset, self->data_ptr);
+}
+
+static PyObject *
+BatteryDispatch_get_batt_dispatch_pvs_max_ramp(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_BatteryDispatch_batt_dispatch_pvs_max_ramp_nget, self->data_ptr);
+}
+
+static int
+BatteryDispatch_set_batt_dispatch_pvs_max_ramp(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_BatteryDispatch_batt_dispatch_pvs_max_ramp_nset, self->data_ptr);
+}
+
+static PyObject *
+BatteryDispatch_get_batt_dispatch_pvs_nameplate_ac(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_BatteryDispatch_batt_dispatch_pvs_nameplate_ac_nget, self->data_ptr);
+}
+
+static int
+BatteryDispatch_set_batt_dispatch_pvs_nameplate_ac(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_BatteryDispatch_batt_dispatch_pvs_nameplate_ac_nset, self->data_ptr);
+}
+
+static PyObject *
+BatteryDispatch_get_batt_dispatch_pvs_short_forecast_enable(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_BatteryDispatch_batt_dispatch_pvs_short_forecast_enable_nget, self->data_ptr);
+}
+
+static int
+BatteryDispatch_set_batt_dispatch_pvs_short_forecast_enable(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_BatteryDispatch_batt_dispatch_pvs_short_forecast_enable_nset, self->data_ptr);
+}
+
+static PyObject *
+BatteryDispatch_get_batt_dispatch_pvs_soc_rest(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_BatteryDispatch_batt_dispatch_pvs_soc_rest_nget, self->data_ptr);
+}
+
+static int
+BatteryDispatch_set_batt_dispatch_pvs_soc_rest(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_BatteryDispatch_batt_dispatch_pvs_soc_rest_nset, self->data_ptr);
+}
+
+static PyObject *
+BatteryDispatch_get_batt_dispatch_pvs_timestep_multiplier(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_BatteryDispatch_batt_dispatch_pvs_timestep_multiplier_nget, self->data_ptr);
+}
+
+static int
+BatteryDispatch_set_batt_dispatch_pvs_timestep_multiplier(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_BatteryDispatch_batt_dispatch_pvs_timestep_multiplier_nset, self->data_ptr);
+}
+
+static PyObject *
 BatteryDispatch_get_batt_dispatch_update_frequency_hours(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Pvsamv1_BatteryDispatch_batt_dispatch_update_frequency_hours_nget, self->data_ptr);
@@ -10353,6 +10533,51 @@ static PyGetSetDef BatteryDispatch_getset[] = {
  	NULL},
 {"batt_dispatch_choice", (getter)BatteryDispatch_get_batt_dispatch_choice,(setter)BatteryDispatch_set_batt_dispatch_choice,
 	PyDoc_STR("*float*: Battery dispatch algorithm [0/1/2/3/4/5]\n\n*Options*: If behind the meter: 0=PeakShavingLookAhead,1=PeakShavingLookBehind,2=InputGridTarget,3=InputBatteryPower,4=ManualDispatch,5=PriceSignalForecast if front of meter: 0=AutomatedLookAhead,1=AutomatedLookBehind,2=AutomatedInputForecast,3=InputBatteryPower,4=ManualDispatch\n\n*Required*: True if en_batt=1"),
+ 	NULL},
+{"batt_dispatch_pvs_ac_lb", (getter)BatteryDispatch_get_batt_dispatch_pvs_ac_lb,(setter)BatteryDispatch_set_batt_dispatch_pvs_ac_lb,
+	PyDoc_STR("*float*: AC lower bound [fraction of nameplate]\n\n*Required*: True if en_batt=1&batt_meter_position=1&batt_dispatch_choice=5"),
+ 	NULL},
+{"batt_dispatch_pvs_ac_lb_enable", (getter)BatteryDispatch_get_batt_dispatch_pvs_ac_lb_enable,(setter)BatteryDispatch_set_batt_dispatch_pvs_ac_lb_enable,
+	PyDoc_STR("*float*: Enable AC lower bound [0/1]\n\n*Required*: True if en_batt=1&batt_meter_position=1&batt_dispatch_choice=5"),
+ 	NULL},
+{"batt_dispatch_pvs_ac_ub", (getter)BatteryDispatch_get_batt_dispatch_pvs_ac_ub,(setter)BatteryDispatch_set_batt_dispatch_pvs_ac_ub,
+	PyDoc_STR("*float*: AC upper bound [fraction of nameplate]\n\n*Required*: True if en_batt=1&batt_meter_position=1&batt_dispatch_choice=5"),
+ 	NULL},
+{"batt_dispatch_pvs_ac_ub_enable", (getter)BatteryDispatch_get_batt_dispatch_pvs_ac_ub_enable,(setter)BatteryDispatch_set_batt_dispatch_pvs_ac_ub_enable,
+	PyDoc_STR("*float*: Enable AC upper bound [0/1]\n\n*Required*: True if en_batt=1&batt_meter_position=1&batt_dispatch_choice=5"),
+ 	NULL},
+{"batt_dispatch_pvs_curtail_as_control", (getter)BatteryDispatch_get_batt_dispatch_pvs_curtail_as_control,(setter)BatteryDispatch_set_batt_dispatch_pvs_curtail_as_control,
+	PyDoc_STR("*float*: Correct up-ramp violations [0/1]\n\n*Required*: True if en_batt=1&batt_meter_position=1&batt_dispatch_choice=5"),
+ 	NULL},
+{"batt_dispatch_pvs_curtail_if_violation", (getter)BatteryDispatch_get_batt_dispatch_pvs_curtail_if_violation,(setter)BatteryDispatch_set_batt_dispatch_pvs_curtail_if_violation,
+	PyDoc_STR("*float*: Curtail violations [0/1]\n\n*Required*: True if en_batt=1&batt_meter_position=1&batt_dispatch_choice=5"),
+ 	NULL},
+{"batt_dispatch_pvs_forecast_shift_periods", (getter)BatteryDispatch_get_batt_dispatch_pvs_forecast_shift_periods,(setter)BatteryDispatch_set_batt_dispatch_pvs_forecast_shift_periods,
+	PyDoc_STR("*float*: Forecasting window [periods of ramp intervals]\n\n*Required*: True if en_batt=1&batt_meter_position=1&batt_dispatch_choice=5"),
+ 	NULL},
+{"batt_dispatch_pvs_kf", (getter)BatteryDispatch_get_batt_dispatch_pvs_kf,(setter)BatteryDispatch_set_batt_dispatch_pvs_kf,
+	PyDoc_STR("*float*: Forecast accumulation error multiplier (kf)\n\n*Required*: True if en_batt=1&batt_meter_position=1&batt_dispatch_choice=5"),
+ 	NULL},
+{"batt_dispatch_pvs_ki", (getter)BatteryDispatch_get_batt_dispatch_pvs_ki,(setter)BatteryDispatch_set_batt_dispatch_pvs_ki,
+	PyDoc_STR("*float*: Return to rest SOC multiplier (ki)\n\n*Required*: True if en_batt=1&batt_meter_position=1&batt_dispatch_choice=5"),
+ 	NULL},
+{"batt_dispatch_pvs_kp", (getter)BatteryDispatch_get_batt_dispatch_pvs_kp,(setter)BatteryDispatch_set_batt_dispatch_pvs_kp,
+	PyDoc_STR("*float*: Track PV power multiplier (kp)\n\n*Required*: True if en_batt=1&batt_meter_position=1&batt_dispatch_choice=5"),
+ 	NULL},
+{"batt_dispatch_pvs_max_ramp", (getter)BatteryDispatch_get_batt_dispatch_pvs_max_ramp,(setter)BatteryDispatch_set_batt_dispatch_pvs_max_ramp,
+	PyDoc_STR("*float*: Maximum ramp rate [% of nameplate per ramp interval]\n\n*Required*: True if en_batt=1&batt_meter_position=1&batt_dispatch_choice=5"),
+ 	NULL},
+{"batt_dispatch_pvs_nameplate_ac", (getter)BatteryDispatch_get_batt_dispatch_pvs_nameplate_ac,(setter)BatteryDispatch_set_batt_dispatch_pvs_nameplate_ac,
+	PyDoc_STR("*float*: Nameplate for pv smoothing [kWac]\n\n*Required*: True if en_batt=1&batt_meter_position=1&batt_dispatch_choice=5"),
+ 	NULL},
+{"batt_dispatch_pvs_short_forecast_enable", (getter)BatteryDispatch_get_batt_dispatch_pvs_short_forecast_enable,(setter)BatteryDispatch_set_batt_dispatch_pvs_short_forecast_enable,
+	PyDoc_STR("*float*: Enable short term power forecast [0/1]\n\n*Required*: True if en_batt=1&batt_meter_position=1&batt_dispatch_choice=5"),
+ 	NULL},
+{"batt_dispatch_pvs_soc_rest", (getter)BatteryDispatch_get_batt_dispatch_pvs_soc_rest,(setter)BatteryDispatch_set_batt_dispatch_pvs_soc_rest,
+	PyDoc_STR("*float*: Battery resting SOC [%]\n\n*Required*: True if en_batt=1&batt_meter_position=1&batt_dispatch_choice=5"),
+ 	NULL},
+{"batt_dispatch_pvs_timestep_multiplier", (getter)BatteryDispatch_get_batt_dispatch_pvs_timestep_multiplier,(setter)BatteryDispatch_set_batt_dispatch_pvs_timestep_multiplier,
+	PyDoc_STR("*float*: Ramp timestep multiplier\n\n*Required*: True if en_batt=1&batt_meter_position=1&batt_dispatch_choice=5"),
  	NULL},
 {"batt_dispatch_update_frequency_hours", (getter)BatteryDispatch_get_batt_dispatch_update_frequency_hours,(setter)BatteryDispatch_set_batt_dispatch_update_frequency_hours,
 	PyDoc_STR("*float*: Frequency to update the look-ahead dispatch [hours]"),
@@ -11476,6 +11701,173 @@ static PyTypeObject ElectricityRates_Type = {
 
 
 /*
+ * GridLimits Group
+ */ 
+
+static PyTypeObject GridLimits_Type;
+
+static PyObject *
+GridLimits_new(SAM_Pvsamv1 data_ptr)
+{
+	PyObject* new_obj = GridLimits_Type.tp_alloc(&GridLimits_Type,0);
+
+	VarGroupObject* GridLimits_obj = (VarGroupObject*)new_obj;
+
+	GridLimits_obj->data_ptr = (SAM_table)data_ptr;
+
+	return new_obj;
+}
+
+/* GridLimits methods */
+
+static PyObject *
+GridLimits_assign(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Pvsamv1", "GridLimits")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+GridLimits_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &GridLimits_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Pvsamv1", "GridLimits")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+GridLimits_export(VarGroupObject *self, PyObject *args)
+{
+	PyTypeObject* tp = &GridLimits_Type;
+	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
+	return dict;
+}
+
+static PyMethodDef GridLimits_methods[] = {
+		{"assign",            (PyCFunction)GridLimits_assign,  METH_VARARGS,
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``GridLimits_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)GridLimits_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``GridLimits_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)GridLimits_export,  METH_VARARGS,
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+		{NULL,              NULL}           /* sentinel */
+};
+
+static PyObject *
+GridLimits_get_enable_interconnection_limit(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_GridLimits_enable_interconnection_limit_nget, self->data_ptr);
+}
+
+static int
+GridLimits_set_enable_interconnection_limit(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_GridLimits_enable_interconnection_limit_nset, self->data_ptr);
+}
+
+static PyObject *
+GridLimits_get_grid_curtailment(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvsamv1_GridLimits_grid_curtailment_aget, self->data_ptr);
+}
+
+static int
+GridLimits_set_grid_curtailment(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Pvsamv1_GridLimits_grid_curtailment_aset, self->data_ptr);
+}
+
+static PyObject *
+GridLimits_get_grid_interconnection_limit_kwac(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_GridLimits_grid_interconnection_limit_kwac_nget, self->data_ptr);
+}
+
+static int
+GridLimits_set_grid_interconnection_limit_kwac(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_GridLimits_grid_interconnection_limit_kwac_nset, self->data_ptr);
+}
+
+static PyGetSetDef GridLimits_getset[] = {
+{"enable_interconnection_limit", (getter)GridLimits_get_enable_interconnection_limit,(setter)GridLimits_set_enable_interconnection_limit,
+	PyDoc_STR("*float*: Enable grid interconnection limit [0/1]\n\n*Info*: Enable a grid interconnection limit"),
+ 	NULL},
+{"grid_curtailment", (getter)GridLimits_get_grid_curtailment,(setter)GridLimits_set_grid_curtailment,
+	PyDoc_STR("*sequence*: Grid curtailment as energy delivery limit (first year) [MW]\n\n*Required*: False"),
+ 	NULL},
+{"grid_interconnection_limit_kwac", (getter)GridLimits_get_grid_interconnection_limit_kwac,(setter)GridLimits_set_grid_interconnection_limit_kwac,
+	PyDoc_STR("*float*: Grid interconnection limit [kWac]"),
+ 	NULL},
+	{NULL}  /* Sentinel */
+};
+
+static PyTypeObject GridLimits_Type = {
+		/* The ob_type field must be initialized in the module init function
+		 * to be portable to Windows without using C++. */
+		PyVarObject_HEAD_INIT(NULL, 0)
+		"Pvsamv1.GridLimits",             /*tp_name*/
+		sizeof(VarGroupObject),          /*tp_basicsize*/
+		0,                          /*tp_itemsize*/
+		/* methods */
+		0,    /*tp_dealloc*/
+		0,                          /*tp_print*/
+		(getattrfunc)0,             /*tp_getattr*/
+		0,                          /*tp_setattr*/
+		0,                          /*tp_reserved*/
+		0,                          /*tp_repr*/
+		0,                          /*tp_as_number*/
+		0,                          /*tp_as_sequence*/
+		0,                          /*tp_as_mapping*/
+		0,                          /*tp_hash*/
+		0,                          /*tp_call*/
+		0,                          /*tp_str*/
+		0,                          /*tp_getattro*/
+		0,                          /*tp_setattro*/
+		0,                          /*tp_as_buffer*/
+		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
+		0,                          /*tp_doc*/
+		0,                          /*tp_traverse*/
+		0,                          /*tp_clear*/
+		0,                          /*tp_richcompare*/
+		0,                          /*tp_weaklistofnset*/
+		0,                          /*tp_iter*/
+		0,                          /*tp_iternext*/
+		GridLimits_methods,         /*tp_methods*/
+		0,                          /*tp_members*/
+		GridLimits_getset,          /*tp_getset*/
+		0,                          /*tp_base*/
+		0,                          /*tp_dict*/
+		0,                          /*tp_descr_get*/
+		0,                          /*tp_descr_set*/
+		0,                          /*tp_dictofnset*/
+		0,                          /*tp_init*/
+		0,                          /*tp_alloc*/
+		0,             /*tp_new*/
+		0,                          /*tp_free*/
+		0,                          /*tp_is_gc*/
+};
+
+
+/*
  * Outputs Group
  */ 
 
@@ -11547,9 +11939,21 @@ static PyMethodDef Outputs_methods[] = {
 };
 
 static PyObject *
+Outputs_get_ac_lifetime_loss(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvsamv1_Outputs_ac_lifetime_loss_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_ac_loss(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Pvsamv1_Outputs_ac_loss_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_ac_perf_adj_loss(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvsamv1_Outputs_ac_perf_adj_loss_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -12237,6 +12641,78 @@ Outputs_get_batt_power_target(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_batt_pvs_PV_ramp_interval(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvsamv1_Outputs_batt_pvs_PV_ramp_interval_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_batt_pvs_P_pv_ac(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvsamv1_Outputs_batt_pvs_P_pv_ac_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_batt_pvs_battpower(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvsamv1_Outputs_batt_pvs_battpower_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_batt_pvs_battsoc(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvsamv1_Outputs_batt_pvs_battsoc_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_batt_pvs_curtail(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvsamv1_Outputs_batt_pvs_curtail_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_batt_pvs_energy_to_grid_percent(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_Outputs_batt_pvs_energy_to_grid_percent_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_batt_pvs_energy_to_grid_percent_sam(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_Outputs_batt_pvs_energy_to_grid_percent_sam_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_batt_pvs_forecast_pv_energy(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvsamv1_Outputs_batt_pvs_forecast_pv_energy_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_batt_pvs_outpower(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvsamv1_Outputs_batt_pvs_outpower_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_batt_pvs_violation_count(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_Outputs_batt_pvs_violation_count_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_batt_pvs_violation_list(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvsamv1_Outputs_batt_pvs_violation_list_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_batt_pvs_violation_percent(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_Outputs_batt_pvs_violation_percent_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_batt_q0(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Pvsamv1_Outputs_batt_q0_aget, self->data_ptr);
@@ -12357,6 +12833,12 @@ Outputs_get_cdf_of_surviving(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_crit_load_unmet(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvsamv1_Outputs_crit_load_unmet_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_dc_degrade_factor(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Pvsamv1_Outputs_dc_degrade_factor_aget, self->data_ptr);
@@ -12456,6 +12938,12 @@ static PyObject *
 Outputs_get_grid_to_load(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Pvsamv1_Outputs_grid_to_load_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_interconnection_loss(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvsamv1_Outputs_interconnection_loss_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -12564,6 +13052,12 @@ static PyObject *
 Outputs_get_monthly_grid_to_load(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Pvsamv1_Outputs_monthly_grid_to_load_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_monthly_interconnection_loss(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvsamv1_Outputs_monthly_interconnection_loss_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -13623,8 +14117,14 @@ Outputs_get_xfmr_nll_year1(VarGroupObject *self, void *closure)
 }
 
 static PyGetSetDef Outputs_getset[] = {
+{"ac_lifetime_loss", (getter)Outputs_get_ac_lifetime_loss,(setter)0,
+	PyDoc_STR("*sequence*: AC lifetime daily loss [kW]"),
+ 	NULL},
 {"ac_loss", (getter)Outputs_get_ac_loss,(setter)0,
 	PyDoc_STR("*float*: AC wiring loss [%]"),
+ 	NULL},
+{"ac_perf_adj_loss", (getter)Outputs_get_ac_perf_adj_loss,(setter)0,
+	PyDoc_STR("*sequence*: AC performance adjustment loss [kW]"),
  	NULL},
 {"ac_transmission_loss", (getter)Outputs_get_ac_transmission_loss,(setter)0,
 	PyDoc_STR("*sequence*: Transmission loss [kW]"),
@@ -13968,6 +14468,42 @@ static PyGetSetDef Outputs_getset[] = {
 {"batt_power_target", (getter)Outputs_get_batt_power_target,(setter)0,
 	PyDoc_STR("*sequence*: Electricity battery power target for automated dispatch [kW]"),
  	NULL},
+{"batt_pvs_PV_ramp_interval", (getter)Outputs_get_batt_pvs_PV_ramp_interval,(setter)0,
+	PyDoc_STR("*sequence*: PV smoothing PV power sampled [kW]"),
+ 	NULL},
+{"batt_pvs_P_pv_ac", (getter)Outputs_get_batt_pvs_P_pv_ac,(setter)0,
+	PyDoc_STR("*sequence*: PV smoothing PV power before smoothing [kW]"),
+ 	NULL},
+{"batt_pvs_battpower", (getter)Outputs_get_batt_pvs_battpower,(setter)0,
+	PyDoc_STR("*sequence*: PV smoothing battpower [kW]"),
+ 	NULL},
+{"batt_pvs_battsoc", (getter)Outputs_get_batt_pvs_battsoc,(setter)0,
+	PyDoc_STR("*sequence*: PV smoothing battery SOC [%]"),
+ 	NULL},
+{"batt_pvs_curtail", (getter)Outputs_get_batt_pvs_curtail,(setter)0,
+	PyDoc_STR("*sequence*: PV smoothing curtailed power [kW]"),
+ 	NULL},
+{"batt_pvs_energy_to_grid_percent", (getter)Outputs_get_batt_pvs_energy_to_grid_percent,(setter)0,
+	PyDoc_STR("*float*: PV smoothing energy to grid percent (loss due to curtail and battery loss) [%]"),
+ 	NULL},
+{"batt_pvs_energy_to_grid_percent_sam", (getter)Outputs_get_batt_pvs_energy_to_grid_percent_sam,(setter)0,
+	PyDoc_STR("*float*: PV smoothing energy to grid percent actual (loss due to curtail and battery loss) [%]"),
+ 	NULL},
+{"batt_pvs_forecast_pv_energy", (getter)Outputs_get_batt_pvs_forecast_pv_energy,(setter)0,
+	PyDoc_STR("*sequence*: PV smoothing PV power forecast [kW]"),
+ 	NULL},
+{"batt_pvs_outpower", (getter)Outputs_get_batt_pvs_outpower,(setter)0,
+	PyDoc_STR("*sequence*: PV smoothing outpower [kW]"),
+ 	NULL},
+{"batt_pvs_violation_count", (getter)Outputs_get_batt_pvs_violation_count,(setter)0,
+	PyDoc_STR("*float*: PV smoothing violation count"),
+ 	NULL},
+{"batt_pvs_violation_list", (getter)Outputs_get_batt_pvs_violation_list,(setter)0,
+	PyDoc_STR("*sequence*: PV smoothing violation"),
+ 	NULL},
+{"batt_pvs_violation_percent", (getter)Outputs_get_batt_pvs_violation_percent,(setter)0,
+	PyDoc_STR("*float*: PV smoothing violation percent (of all intervals-including nighttime) [%]"),
+ 	NULL},
 {"batt_q0", (getter)Outputs_get_batt_q0,(setter)0,
 	PyDoc_STR("*sequence*: Battery total charge [Ah]"),
  	NULL},
@@ -14028,6 +14564,9 @@ static PyGetSetDef Outputs_getset[] = {
 {"cdf_of_surviving", (getter)Outputs_get_cdf_of_surviving,(setter)0,
 	PyDoc_STR("*sequence*: Cumulative probabilities of autonomous hours for resilience"),
  	NULL},
+{"crit_load_unmet", (getter)Outputs_get_crit_load_unmet,(setter)0,
+	PyDoc_STR("*sequence*: Critical load unmet in this timestep [kW]"),
+ 	NULL},
 {"dc_degrade_factor", (getter)Outputs_get_dc_degrade_factor,(setter)0,
 	PyDoc_STR("*sequence*: Annual DC degradation factor"),
  	NULL},
@@ -14078,6 +14617,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"grid_to_load", (getter)Outputs_get_grid_to_load,(setter)0,
 	PyDoc_STR("*sequence*: Electricity to load from grid [kW]"),
+ 	NULL},
+{"interconnection_loss", (getter)Outputs_get_interconnection_loss,(setter)0,
+	PyDoc_STR("*sequence*: Electricity loss due to curtailment, interconnection, or outage [kW]"),
  	NULL},
 {"inv_cliploss", (getter)Outputs_get_inv_cliploss,(setter)0,
 	PyDoc_STR("*sequence*: Inverter clipping loss AC power limit [kW]"),
@@ -14132,6 +14674,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"monthly_grid_to_load", (getter)Outputs_get_monthly_grid_to_load,(setter)0,
 	PyDoc_STR("*sequence*: Energy to load from grid [kWh]"),
+ 	NULL},
+{"monthly_interconnection_loss", (getter)Outputs_get_monthly_interconnection_loss,(setter)0,
+	PyDoc_STR("*sequence*: Energy loss due to curtailment, interconnection, or outage [kWh]"),
  	NULL},
 {"monthly_poa_beam_eff", (getter)Outputs_get_monthly_poa_beam_eff,(setter)0,
 	PyDoc_STR("*sequence*: POA front-side irradiance beam after shading and soiling [kWh/mo]"),
@@ -14828,6 +15373,10 @@ newPvsamv1Object(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "ElectricityRates", ElectricityRates_obj);
 	Py_DECREF(ElectricityRates_obj);
 
+	PyObject* GridLimits_obj = GridLimits_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "GridLimits", GridLimits_obj);
+	Py_DECREF(GridLimits_obj);
+
 	PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
 
 	PyObject* data_cap = PyCapsule_New(self->data_ptr, NULL, NULL);
@@ -15327,6 +15876,13 @@ Pvsamv1Module_exec(PyObject *m)
 				"ElectricityRates",
 				(PyObject*)&ElectricityRates_Type);
 	Py_DECREF(&ElectricityRates_Type);
+
+	/// Add the GridLimits type object to Pvsamv1_Type
+	if (PyType_Ready(&GridLimits_Type) < 0) { goto fail; }
+	PyDict_SetItemString(Pvsamv1_Type.tp_dict,
+				"GridLimits",
+				(PyObject*)&GridLimits_Type);
+	Py_DECREF(&GridLimits_Type);
 
 	/// Add the Outputs type object to Pvsamv1_Type
 	if (PyType_Ready(&Outputs_Type) < 0) { goto fail; }

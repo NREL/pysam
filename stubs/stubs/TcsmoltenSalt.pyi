@@ -13,6 +13,20 @@ class SolarResource(object):
 	solar_resource_file = str
 
 
+class FinancialModel(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> dict:
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
+	csp_financial_model = float
+
+
 class TimeOfDeliveryFactors(object):
 	def assign(self): 
 		pass
@@ -475,6 +489,20 @@ class SCO2Cycle(object):
 	sco2ud_m_dot_htf_low = float
 
 
+class Revenue(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> dict:
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
+	mp_energy_market_revenue = tuple
+
+
 class AdjustmentFactors(object):
 	def assign(self): 
 		pass
@@ -704,6 +732,7 @@ class TcsmoltenSalt(object):
 		pass
 
 	SolarResource = SolarResource
+	FinancialModel = FinancialModel
 	TimeOfDeliveryFactors = TimeOfDeliveryFactors
 	SystemControl = SystemControl
 	HeliostatField = HeliostatField
@@ -717,6 +746,7 @@ class TcsmoltenSalt(object):
 	RankineCycle = RankineCycle
 	UserDefinedPowerCycle = UserDefinedPowerCycle
 	SCO2Cycle = SCO2Cycle
+	Revenue = Revenue
 	AdjustmentFactors = AdjustmentFactors
 	Outputs = Outputs
 

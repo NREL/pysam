@@ -9,7 +9,7 @@ ln -s /opt/python/cp37-cp37m/bin/cmake /usr/bin/cmake
 
 mkdir -p /io/build_linux_ssc
 cd /io/build_linux_ssc
-rm -rf *
+#rm -rf *
 cmake ${SSCDIR} -DCMAKE_BUILD_TYPE=Release -DSAM_SKIP_TOOLS=1 -DSAMAPI_EXPORT=1 -DSAM_SKIP_TESTS=1 ../ssc/
 make -j 6
 

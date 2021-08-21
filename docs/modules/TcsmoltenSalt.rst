@@ -27,6 +27,12 @@ SolarResource Group
 .. autoclass:: PySAM.TcsmoltenSalt.TcsmoltenSalt.SolarResource
 	:members:
 
+FinancialModel Group
+======================================================
+
+.. autoclass:: PySAM.TcsmoltenSalt.TcsmoltenSalt.FinancialModel
+	:members:
+
 TimeOfDeliveryFactors Group
 ======================================================
 
@@ -103,6 +109,12 @@ SCO2Cycle Group
 ======================================================
 
 .. autoclass:: PySAM.TcsmoltenSalt.TcsmoltenSalt.SCO2Cycle
+	:members:
+
+Revenue Group
+======================================================
+
+.. autoclass:: PySAM.TcsmoltenSalt.TcsmoltenSalt.Revenue
 	:members:
 
 AdjustmentFactors Group

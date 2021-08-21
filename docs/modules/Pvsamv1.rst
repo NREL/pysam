@@ -296,6 +296,12 @@ ElectricityRates Group
 .. autoclass:: PySAM.Pvsamv1.Pvsamv1.ElectricityRates
 	:members:
 
+GridLimits Group
+======================================================
+
+.. autoclass:: PySAM.Pvsamv1.Pvsamv1.GridLimits
+	:members:
+
 AdjustmentFactors Group
 ======================================================
 

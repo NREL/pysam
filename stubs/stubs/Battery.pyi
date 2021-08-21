@@ -207,6 +207,21 @@ class BatteryDispatch(object):
 	batt_dispatch_auto_can_fuelcellcharge = float
 	batt_dispatch_auto_can_gridcharge = float
 	batt_dispatch_choice = float
+	batt_dispatch_pvs_ac_lb = float
+	batt_dispatch_pvs_ac_lb_enable = float
+	batt_dispatch_pvs_ac_ub = float
+	batt_dispatch_pvs_ac_ub_enable = float
+	batt_dispatch_pvs_curtail_as_control = float
+	batt_dispatch_pvs_curtail_if_violation = float
+	batt_dispatch_pvs_forecast_shift_periods = float
+	batt_dispatch_pvs_kf = float
+	batt_dispatch_pvs_ki = float
+	batt_dispatch_pvs_kp = float
+	batt_dispatch_pvs_max_ramp = float
+	batt_dispatch_pvs_nameplate_ac = float
+	batt_dispatch_pvs_short_forecast_enable = float
+	batt_dispatch_pvs_soc_rest = float
+	batt_dispatch_pvs_timestep_multiplier = float
 	batt_dispatch_update_frequency_hours = float
 	batt_look_ahead_hours = float
 	batt_pv_ac_forecast = tuple
@@ -307,6 +322,22 @@ class ElectricityRates(object):
 	ur_yearzero_usage_peaks = tuple
 
 
+class GridLimits(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> dict:
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
+	enable_interconnection_limit = float
+	grid_curtailment = tuple
+	grid_interconnection_limit_kwac = float
+
+
 class Outputs(object):
 	def assign(self): 
 		pass
@@ -345,6 +376,18 @@ class Outputs(object):
 	batt_dispatch_sched = tuple
 	batt_power = tuple
 	batt_power_target = tuple
+	batt_pvs_PV_ramp_interval = tuple
+	batt_pvs_P_pv_ac = tuple
+	batt_pvs_battpower = tuple
+	batt_pvs_battsoc = tuple
+	batt_pvs_curtail = tuple
+	batt_pvs_energy_to_grid_percent = float
+	batt_pvs_energy_to_grid_percent_sam = float
+	batt_pvs_forecast_pv_energy = tuple
+	batt_pvs_outpower = tuple
+	batt_pvs_violation_count = float
+	batt_pvs_violation_list = tuple
+	batt_pvs_violation_percent = float
 	batt_q0 = tuple
 	batt_q1 = tuple
 	batt_q2 = tuple
@@ -363,17 +406,20 @@ class Outputs(object):
 	batt_voltage = tuple
 	batt_voltage_cell = tuple
 	cdf_of_surviving = tuple
+	crit_load_unmet = tuple
 	fuelcell_to_batt = tuple
 	gen_without_battery = tuple
 	grid_power = tuple
 	grid_power_target = tuple
 	grid_to_batt = tuple
 	grid_to_load = tuple
+	interconnection_loss = tuple
 	market_sell_rate_series_yr1 = tuple
 	monthly_batt_to_grid = tuple
 	monthly_batt_to_load = tuple
 	monthly_grid_to_batt = tuple
 	monthly_grid_to_load = tuple
+	monthly_interconnection_loss = tuple
 	monthly_system_to_batt = tuple
 	monthly_system_to_grid = tuple
 	monthly_system_to_load = tuple
@@ -423,6 +469,7 @@ class Battery(object):
 	FuelCell = FuelCell
 	PriceSignal = PriceSignal
 	ElectricityRates = ElectricityRates
+	GridLimits = GridLimits
 	Outputs = Outputs
 
 
