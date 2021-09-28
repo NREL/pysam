@@ -21,6 +21,10 @@ def test_solar():
     assert (data['df'][7] == 16)
     assert (data['gh'][7] == 27)
     assert (data['tdry'][7] == pytest.approx(8.96, 0.1))
+    assert (data['tdew'][7] == pytest.approx(-0.03, 0.1))
+    assert (data['rhum'][7] == pytest.approx(25.0, 0.1))
+    assert (data['wdir'][7] == pytest.approx(351, 0.1))
+
     model = pv.default("PVwattsNone")
     model.SolarResource.solar_resource_data = data
     model.execute()
@@ -81,6 +85,30 @@ def test_urdb():
     assert(ec_tou_tested == ec_tou)
     assert(dc_tou_tested == dc_tou)
     assert(flat_mat_tested == flat_mat)
+
+
+def test_urdb_2():
+    urdb = str(Path(__file__).parent / "urdbv7.json")
+    with open(urdb, 'r') as file:
+        urdb_data = json.load(file)
+        urdb_data.pop("flatdemandmonths")
+    ur5 = tools.URDBv7_to_ElectricityRates(urdb_data)
+
+    ec_tou = [1, 1, 100, 0, 0.070768997073173523, 0,
+              1, 2, 9.9999996802856925e+37, 0, 0.082948997616767883, 0,
+              2, 1, 100, 0, 0.056908998638391495, 0,
+              2, 2, 9.9999996802856925e+37, 0, 0.069078996777534485, 0]
+
+    dc_tou = [1, 1, 100, 19.538999557495117,
+              1, 2, 9.9999996802856925e+37, 13.093000411987305,
+              2, 1, 100, 8.0909996032714844,
+              2, 2, 9.9999996802856925e+37, 4.6760001182556152]
+
+    ec_tou_tested = [item for sublist in ur5['ur_ec_tou_mat'] for item in sublist]
+    dc_tou_tested = [item for sublist in ur5['ur_dc_tou_mat'] for item in sublist]
+
+    assert(ec_tou_tested == ec_tou)
+    assert(dc_tou_tested == dc_tou)
 
 
 def test_resourcefilefetcher():

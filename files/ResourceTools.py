@@ -61,6 +61,20 @@ def SAM_CSV_to_solar_data(filename):
         weather['gh'] = wfd.pop('GHI')
         weather['wspd'] = wfd.pop('Wind Speed')
         weather['tdry'] = wfd.pop('Temperature')
+        if 'Wind Direction' in wfd.keys():
+            weather['wdir'] = wfd.pop('Wind Direction')
+        if 'Pressure' in wfd.keys():
+            weather['pres'] = wfd.pop('Pressure')
+        if 'Dew Point' in wfd.keys():
+            weather['tdew'] = wfd.pop('Dew Point')
+        if 'Relative Humidity' in wfd.keys():
+            weather['rhum'] = wfd.pop('Relative Humidity')
+        if 'RH' in wfd.keys():
+            weather['rhum'] = wfd.pop('RH')
+        if 'Surface Albedo' in wfd.keys():
+            weather['alb'] = wfd.pop('Surface Albedo')
+        if 'Snow Depth' in wfd.keys():
+            weather['snow'] = wfd.pop('Snow Depth')
 
         return weather
 
@@ -235,7 +249,9 @@ def URDBv7_to_ElectricityRates(urdb_response):
                 month_row += [p[i] for i in (1, 2, 3)]
             flat_mat.append(month_row)
         urdb_data['ur_dc_flat_mat'] = flat_mat
-    elif "demandratestructure" not in urdb_response.keys():
+    elif "demandratestructure" in urdb_response.keys():
+        urdb_data['ur_dc_enable'] = 1
+    else:
         urdb_data['ur_dc_enable'] = 0
 
     if urdb_data['ur_dc_enable'] == 1 and "ur_dc_tou_mat" not in urdb_data.keys():
@@ -251,7 +267,7 @@ class FetchResourceFiles():
     Download solar and wind resource files from NREL developer network
     https://developer.nrel.gov/.
 
-    :param str tech: *Required* Name of technology. 
+    :param str tech: *Required* Name of technology.
         'wind' for NREL WIND Toolkit at https://developer.nrel.gov/docs/wind/wind-toolkit/wtk-download/.
         'solar' for NREL NSRDB at https://developer.nrel.gov/docs/solar/nsrdb/nsrdb_data_query/
 
@@ -259,20 +275,20 @@ class FetchResourceFiles():
 
     :param str nrel_api_email: *Required* Email address associated with nrel_api_key.
 
-    :param str resource_dir: Directory to store downloaded files. 
+    :param str resource_dir: Directory to store downloaded files.
         Default = 'None', which results in `data/PySAM Downloaded Weather Files`.
 
     :param int workers: Number of threads to use when parellelizing downloads.
         Default = 1.
 
-    :param str resource_type: Name of API for NSRDB solar data. 
-        Default = 'psm3-tmy' for solar, '' for wind. 
+    :param str resource_type: Name of API for NSRDB solar data.
+        Default = 'psm3-tmy' for solar, '' for wind.
         'psm3' for 30- or 60-minute single-year file
         'psm3-tmy' for 60-minute TMY, TGY, or TDY typical-year file
         'psm3-5min' for 5-, 30- or 60-minute single-year file
         '' for WIND Toolkit
 
-    :param str resource_year: Data year, changes over time so check API documentation for latest information.  
+    :param str resource_year: Data year, changes over time so check API documentation for latest information.
         Default = 'tmy' for solar, '2014' for wind.
         '1998' to '2019', etc. for NSRDB psm3
         'tmy' for latest TMY file from NSRDB psm3-tmy
@@ -280,7 +296,7 @@ class FetchResourceFiles():
         '2018', etc. for NSRDB psm3-5min
         '2007' to '2014' for WIND Toolkit
 
-    :param int resource_interval_min: Time interval of resource data in minutes. See available intervals under `resource_type` above.  
+    :param int resource_interval_min: Time interval of resource data in minutes. See available intervals under `resource_type` above.
         Default = 60.
 
     :param int resource_height: For wind only, wind resource measurement height above ground in meters.
