@@ -21,6 +21,10 @@ def test_solar():
     assert (data['df'][7] == 16)
     assert (data['gh'][7] == 27)
     assert (data['tdry'][7] == pytest.approx(8.96, 0.1))
+    assert (data['tdew'][7] == pytest.approx(-0.03, 0.1))
+    assert (data['rhum'][7] == pytest.approx(25.0, 0.1))
+    assert (data['wdir'][7] == pytest.approx(351, 0.1))
+
     model = pv.default("PVwattsNone")
     model.SolarResource.solar_resource_data = data
     model.execute()

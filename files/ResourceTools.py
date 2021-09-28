@@ -61,6 +61,20 @@ def SAM_CSV_to_solar_data(filename):
         weather['gh'] = wfd.pop('GHI')
         weather['wspd'] = wfd.pop('Wind Speed')
         weather['tdry'] = wfd.pop('Temperature')
+        if 'Wind Direction' in wfd.keys():
+            weather['wdir'] = wfd.pop('Wind Direction')
+        if 'Pressure' in wfd.keys():
+            weather['pres'] = wfd.pop('Pressure')
+        if 'Dew Point' in wfd.keys():
+            weather['tdew'] = wfd.pop('Dew Point')
+        if 'Relative Humidity' in wfd.keys():
+            weather['rhum'] = wfd.pop('Relative Humidity')
+        if 'RH' in wfd.keys():
+            weather['rhum'] = wfd.pop('RH')
+        if 'Surface Albedo' in wfd.keys():
+            weather['alb'] = wfd.pop('Surface Albedo')
+        if 'Snow Depth' in wfd.keys():
+            weather['snow'] = wfd.pop('Snow Depth')
 
         return weather
 
