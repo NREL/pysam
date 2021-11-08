@@ -278,6 +278,12 @@ BatteryDispatch Group
 .. autoclass:: PySAM.Pvsamv1.Pvsamv1.BatteryDispatch
 	:members:
 
+SystemCosts Group
+======================================================
+
+.. autoclass:: PySAM.Pvsamv1.Pvsamv1.SystemCosts
+	:members:
+
 FuelCell Group
 ======================================================
 

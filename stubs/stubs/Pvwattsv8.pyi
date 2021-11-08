@@ -12,6 +12,7 @@ class SolarResource(object):
 	albedo = tuple
 	solar_resource_data = dict
 	solar_resource_file = str
+	use_wf_albedo = float
 
 
 class Lifetime(object):
@@ -41,7 +42,6 @@ class SystemDesign(object):
 		pass
 
 
-	ac_plant_max_f = float
 	array_type = float
 	azimuth = float
 	batt_simple_enable = float
@@ -141,7 +141,7 @@ class Outputs(object):
 	wspd = tuple
 
 
-class Pvwattsv7(object):
+class Pvwattsv8(object):
 	def assign(self, dict):
 		pass
 
@@ -163,8 +163,6 @@ class Pvwattsv7(object):
 	def __init__(self, *args, **kwargs):
 		pass
 
-	def Reopt_size_battery_post(self, args):
-		pass
 	SolarResource = SolarResource
 	Lifetime = Lifetime
 	SystemDesign = SystemDesign
@@ -172,16 +170,16 @@ class Pvwattsv7(object):
 	Outputs = Outputs
 
 
-def default(config) -> Pvwattsv7:
+def default(config) -> Pvwattsv8:
 	pass
 
-def new() -> Pvwattsv7:
+def new() -> Pvwattsv8:
 	pass
 
-def wrap(ssc_data_t) -> Pvwattsv7:
+def wrap(ssc_data_t) -> Pvwattsv8:
 	pass
 
-def from_existing(model, config="") -> Pvwattsv7:
+def from_existing(model, config="") -> Pvwattsv8:
 	pass
 
 __loader__ = None 

@@ -94,22 +94,10 @@ OtherCapitalCosts Group
 .. autoclass:: PySAM.Saleleaseback.Saleleaseback.OtherCapitalCosts
 	:members:
 
-Battery Group
+LCOS Group
 ======================================================
 
-.. autoclass:: PySAM.Saleleaseback.Saleleaseback.Battery
-	:members:
-
-ChargesByMonth Group
-======================================================
-
-.. autoclass:: PySAM.Saleleaseback.Saleleaseback.ChargesByMonth
-	:members:
-
-Monthly Group
-======================================================
-
-.. autoclass:: PySAM.Saleleaseback.Saleleaseback.Monthly
+.. autoclass:: PySAM.Saleleaseback.Saleleaseback.LCOS
 	:members:
 
 BatterySystem Group

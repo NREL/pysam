@@ -112,22 +112,10 @@ DeveloperCapitalRecovery Group
 .. autoclass:: PySAM.Equpartflip.Equpartflip.DeveloperCapitalRecovery
 	:members:
 
-Battery Group
+LCOS Group
 ======================================================
 
-.. autoclass:: PySAM.Equpartflip.Equpartflip.Battery
-	:members:
-
-ChargesByMonth Group
-======================================================
-
-.. autoclass:: PySAM.Equpartflip.Equpartflip.ChargesByMonth
-	:members:
-
-Monthly Group
-======================================================
-
-.. autoclass:: PySAM.Equpartflip.Equpartflip.Monthly
+.. autoclass:: PySAM.Equpartflip.Equpartflip.LCOS
 	:members:
 
 BatterySystem Group

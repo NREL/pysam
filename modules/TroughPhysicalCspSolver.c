@@ -3915,6 +3915,12 @@ Outputs_get_disp_qsfsu_expected(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_disp_rel_mip_gap(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_TroughPhysicalCspSolver_Outputs_disp_rel_mip_gap_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_disp_rev_expected(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_TroughPhysicalCspSolver_Outputs_disp_rev_expected_aget, self->data_ptr);
@@ -3942,6 +3948,12 @@ static PyObject *
 Outputs_get_disp_solve_time_ann(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_TroughPhysicalCspSolver_Outputs_disp_solve_time_ann_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_disp_subopt_flag(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_TroughPhysicalCspSolver_Outputs_disp_subopt_flag_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -4302,6 +4314,9 @@ static PyGetSetDef Outputs_getset[] = {
 {"disp_qsfsu_expected", (getter)Outputs_get_disp_qsfsu_expected,(setter)0,
 	PyDoc_STR("*sequence*: Dispatch expected solar field startup enegy [MWt]"),
  	NULL},
+{"disp_rel_mip_gap", (getter)Outputs_get_disp_rel_mip_gap,(setter)0,
+	PyDoc_STR("*sequence*: Dispatch relative MIP gap"),
+ 	NULL},
 {"disp_rev_expected", (getter)Outputs_get_disp_rev_expected,(setter)0,
 	PyDoc_STR("*sequence*: Dispatch expected revenue factor"),
  	NULL},
@@ -4316,6 +4331,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"disp_solve_time_ann", (getter)Outputs_get_disp_solve_time_ann,(setter)0,
 	PyDoc_STR("*float*: Annual sum of dispatch solver time"),
+ 	NULL},
+{"disp_subopt_flag", (getter)Outputs_get_disp_subopt_flag,(setter)0,
+	PyDoc_STR("*sequence*: Dispatch suboptimal solution flag"),
  	NULL},
 {"disp_tes_expected", (getter)Outputs_get_disp_tes_expected,(setter)0,
 	PyDoc_STR("*sequence*: Dispatch expected TES charge level [MWht]"),

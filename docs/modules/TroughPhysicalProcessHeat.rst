@@ -63,6 +63,12 @@ Tou Group
 .. autoclass:: PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.Tou
 	:members:
 
+SystemControl Group
+======================================================
+
+.. autoclass:: PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SystemControl
+	:members:
+
 System Group
 ======================================================
 

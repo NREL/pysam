@@ -23,18 +23,48 @@ class SystemControl(object):
 		pass
 
 
-	F_wc = tuple
 	bop_par = float
 	bop_par_0 = float
 	bop_par_1 = float
 	bop_par_2 = float
 	bop_par_f = float
+	disp_csu_cost = float
+	disp_down_time_min = float
+	disp_frequency = float
+	disp_horizon = float
+	disp_hsu_cost = float
+	disp_max_iter = float
+	disp_mip_gap = float
+	disp_pen_delta_w = float
+	disp_reporting = float
+	disp_spec_bb = float
+	disp_spec_presolve = float
+	disp_spec_scaling = float
+	disp_steps_per_hour = float
+	disp_time_weighting = float
+	disp_timeout = float
+	disp_up_time_min = float
 	is_dispatch = float
 	pb_fixed_par = float
+	sim_type = float
 	time_start = float
 	time_steps_per_hour = float
 	time_stop = float
 	vacuum_arrays = float
+
+
+class FinancialModel(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> dict:
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
+	etes_financial_model = float
 
 
 class SystemDesign(object):
@@ -130,15 +160,31 @@ class ThermalStorage(object):
 
 	cold_tank_Thtr = float
 	cold_tank_max_heat = float
-	csp_pt_tes_init_hot_htf_percent = float
 	h_tank = float
 	h_tank_min = float
+	hot_htf_code = float
 	hot_tank_Thtr = float
 	hot_tank_max_heat = float
 	tank_pairs = float
-	tes_fl_code = float
+	tes_init_hot_htf_percent = float
 	u_tank = float
-	ud_tes_fl_props = tuple
+	ud_hot_htf_props = tuple
+
+
+class Heater(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> dict:
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
+	f_q_dot_des_allowable_su = float
+	f_q_dot_heater_min = float
+	hrs_startup_at_max_rate = float
 
 
 class TimeOfDeliveryFactors(object):
@@ -165,6 +211,21 @@ class TimeOfDeliveryFactors(object):
 	dispatch_sched_weekday = tuple
 	dispatch_sched_weekend = tuple
 	ppa_multiplier_model = float
+
+
+class Revenue(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> dict:
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
+	mp_energy_market_revenue = tuple
+	ppa_price_input = tuple
 
 
 class SystemCost(object):
@@ -270,9 +331,23 @@ class Outputs(object):
 		pass
 
 
+	E_heater_su_des = float
+	Q_tes_des = float
+	T_htf_cycle_in = tuple
+	T_htf_cycle_out = tuple
+	T_htf_heater_in = tuple
+	T_htf_heater_out = tuple
 	T_tes_cold = tuple
 	T_tes_hot = tuple
+	V_tes_htf_avail = float
+	V_tes_htf_total = float
+	W_dot_bop_design = float
+	W_dot_bop_parasitics = tuple
+	W_dot_cycle_cooling = tuple
 	W_dot_cycle_gross = tuple
+	W_dot_cycle_htf_pump = tuple
+	W_dot_cycle_net = tuple
+	W_dot_fixed_parasitics = tuple
 	W_dot_heater = tuple
 	W_dot_out_net = tuple
 	annual_E_cycle_gross = float
@@ -285,22 +360,83 @@ class Outputs(object):
 	annual_Q_tes_losses = float
 	annual_energy = float
 	annual_energy_full_availability = float
+	bop_cost_calc = float
 	construction_financing_cost = float
+	contingency_cost_calc = float
+	cp_htf_cycle_des = float
+	cycle_cost_calc = float
+	d_tank_tes = float
+	dens_store_htf_at_T_ave = float
+	direct_subtotal_cost_calc = float
+	disp_iter_ann = float
+	disp_obj_relax = tuple
+	disp_objective = tuple
+	disp_objective_ann = float
+	disp_pceff_expected = tuple
+	disp_presolve_nconstr = tuple
+	disp_presolve_nconstr_ann = float
+	disp_presolve_nvar = tuple
+	disp_presolve_nvar_ann = float
+	disp_qpbsu_expected = tuple
+	disp_qsf_expected = tuple
+	disp_qsfprod_expected = tuple
+	disp_qsfsu_expected = tuple
+	disp_rel_mip_gap = tuple
+	disp_rev_expected = tuple
+	disp_solve_iter = tuple
+	disp_solve_state = tuple
+	disp_solve_state_ann = float
+	disp_solve_time = tuple
+	disp_solve_time_ann = float
+	disp_subopt_flag = tuple
+	disp_tes_expected = tuple
+	disp_wpb_expected = tuple
 	e_ch_tes = tuple
+	elec_purchase_price_mult = tuple
+	epc_cost_calc = float
+	eta_cycle_gross = tuple
+	eta_cycle_net = tuple
+	flip_target_percent = float
 	gen = tuple
+	heater_cost_calc = float
+	installed_per_cap_cost_calc = float
+	land_cost_calc = float
+	m_dot_balance = tuple
+	m_dot_htf_cycle = tuple
+	m_dot_htf_cycle_des = float
+	m_dot_htf_heater = tuple
+	m_dot_water_cycle = tuple
 	mass_tes_cold = tuple
 	mass_tes_hot = tuple
+	n_op_modes = tuple
+	nameplate = float
+	op_mode_1 = tuple
+	op_mode_2 = tuple
+	op_mode_3 = tuple
+	ppa_soln_mode = float
+	q_balance = tuple
 	q_dot_ch_tes = tuple
 	q_dot_cycle = tuple
 	q_dot_cycle_startup = tuple
 	q_dot_dc_tes = tuple
+	q_dot_heater_design = float
 	q_dot_heater_startup = tuple
 	q_dot_heater_to_htf = tuple
+	q_dot_loss_tes_des = float
 	q_dot_tes_heater = tuple
 	q_dot_tes_losses = tuple
+	q_pb_design = float
+	sales_tax_cost_calc = float
 	system_capacity = float
+	tdry = tuple
+	tes_cost_calc = float
 	time_hr = tuple
+	total_direct_cost_calc = float
+	total_indirect_cost_calc = float
 	total_installed_cost = float
+	tou_period = tuple
+	tshours_heater = float
+	twet = tuple
 
 
 class EtesElectricResistance(object):
@@ -327,12 +463,15 @@ class EtesElectricResistance(object):
 
 	SolarResource = SolarResource
 	SystemControl = SystemControl
+	FinancialModel = FinancialModel
 	SystemDesign = SystemDesign
 	PowerCycle = PowerCycle
 	RankineCycle = RankineCycle
 	UserDefinedPowerCycle = UserDefinedPowerCycle
 	ThermalStorage = ThermalStorage
+	Heater = Heater
 	TimeOfDeliveryFactors = TimeOfDeliveryFactors
+	Revenue = Revenue
 	SystemCost = SystemCost
 	SystemCosts = SystemCosts
 	FinancialParameters = FinancialParameters

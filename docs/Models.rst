@@ -79,7 +79,7 @@ The following modules are used in the SAM GUI's technology-financial simulations
     * - :doc:`modules/Pvsamv1`
       -  Photovoltaic (detailed)
       -  Detailed photovoltaic system model with separate components for module and inverter
-    * - :doc:`modules/Pvwattsv7`
+    * - :doc:`modules/Pvwattsv8`
       -  Photovoltaic (PVWatts)
       -  PVWatts photovoltaic system model with simple inputs
     * - :doc:`modules/Saleleaseback`

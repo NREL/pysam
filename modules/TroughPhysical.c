@@ -2550,18 +2550,6 @@ TES_set_init_hot_htf_percent(VarGroupObject *self, PyObject *value, void *closur
 }
 
 static PyObject *
-TES_get_is_hx(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TroughPhysical_TES_is_hx_nget, self->data_ptr);
-}
-
-static int
-TES_set_is_hx(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TroughPhysical_TES_is_hx_nset, self->data_ptr);
-}
-
-static PyObject *
 TES_get_store_fl_props(VarGroupObject *self, void *closure)
 {
 	return PySAM_matrix_getter(SAM_TroughPhysical_TES_store_fl_props_mget, self->data_ptr);
@@ -2645,9 +2633,6 @@ static PyGetSetDef TES_getset[] = {
  	NULL},
 {"init_hot_htf_percent", (getter)TES_get_init_hot_htf_percent,(setter)TES_set_init_hot_htf_percent,
 	PyDoc_STR("*float*: Initial fraction of avail. vol that is hot [%]\n\n*Required*: True"),
- 	NULL},
-{"is_hx", (getter)TES_get_is_hx,(setter)TES_set_is_hx,
-	PyDoc_STR("*float*: Heat exchanger (HX) exists (1=yes, 0=no) [-]\n\n*Required*: True"),
  	NULL},
 {"store_fl_props", (getter)TES_get_store_fl_props,(setter)TES_set_store_fl_props,
 	PyDoc_STR("*sequence[sequence]*: User defined storage fluid property data [-]\n\n*Required*: True"),
@@ -3468,6 +3453,143 @@ static PyTypeObject Tou_Type = {
 		Tou_methods,         /*tp_methods*/
 		0,                          /*tp_members*/
 		Tou_getset,          /*tp_getset*/
+		0,                          /*tp_base*/
+		0,                          /*tp_dict*/
+		0,                          /*tp_descr_get*/
+		0,                          /*tp_descr_set*/
+		0,                          /*tp_dictofnset*/
+		0,                          /*tp_init*/
+		0,                          /*tp_alloc*/
+		0,             /*tp_new*/
+		0,                          /*tp_free*/
+		0,                          /*tp_is_gc*/
+};
+
+
+/*
+ * SystemControl Group
+ */ 
+
+static PyTypeObject SystemControl_Type;
+
+static PyObject *
+SystemControl_new(SAM_TroughPhysical data_ptr)
+{
+	PyObject* new_obj = SystemControl_Type.tp_alloc(&SystemControl_Type,0);
+
+	VarGroupObject* SystemControl_obj = (VarGroupObject*)new_obj;
+
+	SystemControl_obj->data_ptr = (SAM_table)data_ptr;
+
+	return new_obj;
+}
+
+/* SystemControl methods */
+
+static PyObject *
+SystemControl_assign(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "TroughPhysical", "SystemControl")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+SystemControl_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &SystemControl_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "TroughPhysical", "SystemControl")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+SystemControl_export(VarGroupObject *self, PyObject *args)
+{
+	PyTypeObject* tp = &SystemControl_Type;
+	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
+	return dict;
+}
+
+static PyMethodDef SystemControl_methods[] = {
+		{"assign",            (PyCFunction)SystemControl_assign,  METH_VARARGS,
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``SystemControl_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)SystemControl_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``SystemControl_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)SystemControl_export,  METH_VARARGS,
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+		{NULL,              NULL}           /* sentinel */
+};
+
+static PyObject *
+SystemControl_get_disp_inventory_incentive(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TroughPhysical_SystemControl_disp_inventory_incentive_nget, self->data_ptr);
+}
+
+static int
+SystemControl_set_disp_inventory_incentive(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TroughPhysical_SystemControl_disp_inventory_incentive_nset, self->data_ptr);
+}
+
+static PyGetSetDef SystemControl_getset[] = {
+{"disp_inventory_incentive", (getter)SystemControl_get_disp_inventory_incentive,(setter)SystemControl_set_disp_inventory_incentive,
+	PyDoc_STR("*float*: Dispatch storage terminal inventory incentive multiplier\n\n*Required*: If not provided, assumed to be 0.0"),
+ 	NULL},
+	{NULL}  /* Sentinel */
+};
+
+static PyTypeObject SystemControl_Type = {
+		/* The ob_type field must be initialized in the module init function
+		 * to be portable to Windows without using C++. */
+		PyVarObject_HEAD_INIT(NULL, 0)
+		"TroughPhysical.SystemControl",             /*tp_name*/
+		sizeof(VarGroupObject),          /*tp_basicsize*/
+		0,                          /*tp_itemsize*/
+		/* methods */
+		0,    /*tp_dealloc*/
+		0,                          /*tp_print*/
+		(getattrfunc)0,             /*tp_getattr*/
+		0,                          /*tp_setattr*/
+		0,                          /*tp_reserved*/
+		0,                          /*tp_repr*/
+		0,                          /*tp_as_number*/
+		0,                          /*tp_as_sequence*/
+		0,                          /*tp_as_mapping*/
+		0,                          /*tp_hash*/
+		0,                          /*tp_call*/
+		0,                          /*tp_str*/
+		0,                          /*tp_getattro*/
+		0,                          /*tp_setattro*/
+		0,                          /*tp_as_buffer*/
+		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
+		0,                          /*tp_doc*/
+		0,                          /*tp_traverse*/
+		0,                          /*tp_clear*/
+		0,                          /*tp_richcompare*/
+		0,                          /*tp_weaklistofnset*/
+		0,                          /*tp_iter*/
+		0,                          /*tp_iternext*/
+		SystemControl_methods,         /*tp_methods*/
+		0,                          /*tp_members*/
+		SystemControl_getset,          /*tp_getset*/
 		0,                          /*tp_base*/
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
@@ -4683,6 +4805,12 @@ Outputs_get_disp_qsfsu_expected(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_disp_rel_mip_gap(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_TroughPhysical_Outputs_disp_rel_mip_gap_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_disp_rev_expected(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_TroughPhysical_Outputs_disp_rev_expected_aget, self->data_ptr);
@@ -4704,6 +4832,12 @@ static PyObject *
 Outputs_get_disp_solve_time(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_TroughPhysical_Outputs_disp_solve_time_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_disp_subopt_flag(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_TroughPhysical_Outputs_disp_subopt_flag_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -5433,6 +5567,9 @@ static PyGetSetDef Outputs_getset[] = {
 {"disp_qsfsu_expected", (getter)Outputs_get_disp_qsfsu_expected,(setter)0,
 	PyDoc_STR("*sequence*: Dispatch expected solar field startup enegy [MWt]"),
  	NULL},
+{"disp_rel_mip_gap", (getter)Outputs_get_disp_rel_mip_gap,(setter)0,
+	PyDoc_STR("*sequence*: Dispatch relative MIP gap"),
+ 	NULL},
 {"disp_rev_expected", (getter)Outputs_get_disp_rev_expected,(setter)0,
 	PyDoc_STR("*sequence*: Dispatch expected revenue factor"),
  	NULL},
@@ -5444,6 +5581,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"disp_solve_time", (getter)Outputs_get_disp_solve_time,(setter)0,
 	PyDoc_STR("*sequence*: Dispatch solver time [sec]"),
+ 	NULL},
+{"disp_subopt_flag", (getter)Outputs_get_disp_subopt_flag,(setter)0,
+	PyDoc_STR("*sequence*: Dispatch suboptimal solution flag"),
  	NULL},
 {"disp_tes_expected", (getter)Outputs_get_disp_tes_expected,(setter)0,
 	PyDoc_STR("*sequence*: Dispatch expected TES charge level [MWht]"),
@@ -5828,6 +5968,10 @@ newTroughPhysicalObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "Tou", Tou_obj);
 	Py_DECREF(Tou_obj);
 
+	PyObject* SystemControl_obj = SystemControl_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "SystemControl", SystemControl_obj);
+	Py_DECREF(SystemControl_obj);
+
 	PyObject* FinancialModel_obj = FinancialModel_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "FinancialModel", FinancialModel_obj);
 	Py_DECREF(FinancialModel_obj);
@@ -6118,7 +6262,7 @@ static PyMethodDef TroughPhysicalModule_methods[] = {
 				PyDoc_STR("new() -> TroughPhysical")},
 		{"default",             TroughPhysical_default,         METH_VARARGS,
 				PyDoc_STR("default(config) -> TroughPhysical\n\nUse default attributes\n"
-				"`config` options:\n\n- \"PhysicalTroughAllEquityPartnershipFlip\"\n- \"PhysicalTroughCommercial\"\n- \"PhysicalTroughLCOECalculator\"\n- \"PhysicalTroughLeveragedPartnershipFlip\"\n- \"PhysicalTroughMerchantPlant\"\n- \"PhysicalTroughNone\"\n- \"PhysicalTroughSaleLeaseback\"\n- \"PhysicalTroughSingleOwner\"")},
+				"`config` options:\n\n- \"PhysicalTroughAllEquityPartnershipFlip\"\n- \"PhysicalTroughLCOECalculator\"\n- \"PhysicalTroughLeveragedPartnershipFlip\"\n- \"PhysicalTroughMerchantPlant\"\n- \"PhysicalTroughNone\"\n- \"PhysicalTroughSaleLeaseback\"\n- \"PhysicalTroughSingleOwner\"")},
 		{"wrap",             TroughPhysical_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> TroughPhysical\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   TroughPhysical_from_existing,        METH_VARARGS,
@@ -6194,6 +6338,13 @@ TroughPhysicalModule_exec(PyObject *m)
 				"Tou",
 				(PyObject*)&Tou_Type);
 	Py_DECREF(&Tou_Type);
+
+	/// Add the SystemControl type object to TroughPhysical_Type
+	if (PyType_Ready(&SystemControl_Type) < 0) { goto fail; }
+	PyDict_SetItemString(TroughPhysical_Type.tp_dict,
+				"SystemControl",
+				(PyObject*)&SystemControl_Type);
+	Py_DECREF(&SystemControl_Type);
 
 	/// Add the FinancialModel type object to TroughPhysical_Type
 	if (PyType_Ready(&FinancialModel_Type) < 0) { goto fail; }

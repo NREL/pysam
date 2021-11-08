@@ -45,7 +45,6 @@ class FinancialParameters(object):
 
 
 	analysis_period = float
-	batt_salvage_percentage = float
 	construction_financing_cost = float
 	cost_debt_closing = float
 	cost_debt_fee = float
@@ -457,7 +456,7 @@ class GridLimits(object):
 	grid_curtailment_price_esc = float
 
 
-class Battery(object):
+class LCOS(object):
 	def assign(self): 
 		pass
 
@@ -468,45 +467,21 @@ class Battery(object):
 		pass
 
 
+	batt_annual_charge_energy = tuple
 	batt_annual_charge_from_system = tuple
 	batt_annual_discharge_energy = tuple
 	batt_capacity_percent = tuple
+	batt_salvage_percentage = float
 	battery_total_cost_lcos = float
+	charge_w_sys_ec_ym = tuple
 	grid_to_batt = tuple
 	monthly_batt_to_grid = tuple
 	monthly_grid_to_batt = tuple
 	monthly_grid_to_load = tuple
 	monthly_system_to_grid = tuple
-
-
-class ChargesByMonth(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> dict:
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	charge_w_sys_ec_ym = tuple
 	true_up_credits_ym = tuple
-	year1_monthly_ec_charge_with_system = tuple
-
-
-class Monthly(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> dict:
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
 	year1_monthly_ec_charge_gross_with_system = tuple
+	year1_monthly_ec_charge_with_system = tuple
 	year1_monthly_electricity_to_grid = tuple
 
 
@@ -534,7 +509,6 @@ class Outputs(object):
 	cf_annual_cost_lcos = tuple
 	cf_annual_costs = tuple
 	cf_annual_discharge_lcos = tuple
-	cf_batt_replacement_cost = tuple
 	cf_battery_replacement_cost = tuple
 	cf_battery_replacement_cost_schedule = tuple
 	cf_capacity_payment = tuple
@@ -1132,9 +1106,7 @@ class Singleowner(object):
 	FuelCell = FuelCell
 	CapacityPayments = CapacityPayments
 	GridLimits = GridLimits
-	Battery = Battery
-	ChargesByMonth = ChargesByMonth
-	Monthly = Monthly
+	LCOS = LCOS
 	Outputs = Outputs
 
 

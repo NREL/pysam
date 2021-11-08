@@ -121,22 +121,10 @@ GridLimits Group
 .. autoclass:: PySAM.Singleowner.Singleowner.GridLimits
 	:members:
 
-Battery Group
+LCOS Group
 ======================================================
 
-.. autoclass:: PySAM.Singleowner.Singleowner.Battery
-	:members:
-
-ChargesByMonth Group
-======================================================
-
-.. autoclass:: PySAM.Singleowner.Singleowner.ChargesByMonth
-	:members:
-
-Monthly Group
-======================================================
-
-.. autoclass:: PySAM.Singleowner.Singleowner.Monthly
+.. autoclass:: PySAM.Singleowner.Singleowner.LCOS
 	:members:
 
 Outputs Group

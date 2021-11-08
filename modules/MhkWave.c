@@ -620,6 +620,12 @@ Outputs_get_device_average_power(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_energy_period_data(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_MhkWave_Outputs_energy_period_data_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_energy_period_index_mat(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_MhkWave_Outputs_energy_period_index_mat_aget, self->data_ptr);
@@ -647,6 +653,12 @@ static PyObject *
 Outputs_get_numberRecords(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_MhkWave_Outputs_numberRecords_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_sig_wave_height_data(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_MhkWave_Outputs_sig_wave_height_data_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -785,6 +797,9 @@ static PyGetSetDef Outputs_getset[] = {
 {"device_average_power", (getter)Outputs_get_device_average_power,(setter)0,
 	PyDoc_STR("*float*: Average power production of a single device [kW]"),
  	NULL},
+{"energy_period_data", (getter)Outputs_get_energy_period_data,(setter)0,
+	PyDoc_STR("*sequence*: Energy period time series data [s]"),
+ 	NULL},
 {"energy_period_index_mat", (getter)Outputs_get_energy_period_index_mat,(setter)0,
 	PyDoc_STR("*sequence*: Wave period index locations for time series [s]"),
  	NULL},
@@ -799,6 +814,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"numberRecords", (getter)Outputs_get_numberRecords,(setter)0,
 	PyDoc_STR("*float*: Number of Records"),
+ 	NULL},
+{"sig_wave_height_data", (getter)Outputs_get_sig_wave_height_data,(setter)0,
+	PyDoc_STR("*sequence*: Significant wave height time series data [m]"),
  	NULL},
 {"sig_wave_height_index_mat", (getter)Outputs_get_sig_wave_height_index_mat,(setter)0,
 	PyDoc_STR("*sequence*: Wave height index locations for time series [m]"),

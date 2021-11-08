@@ -95,10 +95,10 @@ A SAM simulation is a combination of unit compute_modules that models a type of 
       - :doc:`modules/Belpe`, :doc:`modules/Pvsamv1`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/Thirdpartyownership`
     * - Fuel Cell-PV-Battery - Commercial Owner
       - Fuel cell with photovoltaic system and optional electric battery for commercial building or PPA project applications. Renewable energy system displaces commercial building electric load
-      - :doc:`modules/Pvwattsv7`, :doc:`modules/Fuelcell`, :doc:`modules/Battery`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/Thermalrate`, :doc:`modules/Cashloan`
+      - :doc:`modules/Pvwattsv8`, :doc:`modules/Fuelcell`, :doc:`modules/Battery`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/Thermalrate`, :doc:`modules/Cashloan`
     * - Fuel Cell-PV-Battery - Single Owner
       - Fuel cell with photovoltaic system and optional electric battery for commercial building or PPA project applications. Single owner PPA with constant DSCR and IRR target year, reserve accounts and depreciation allocations
-      - :doc:`modules/Pvwattsv7`, :doc:`modules/Fuelcell`, :doc:`modules/Battery`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/Thermalrate`, :doc:`modules/Singleowner`
+      - :doc:`modules/Pvwattsv8`, :doc:`modules/Fuelcell`, :doc:`modules/Battery`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/Thermalrate`, :doc:`modules/Singleowner`
     * - Generic Model - Commercial Owner
       - CSP power system with solar field modeled using a table of optical efficiency values. Renewable energy system displaces commercial building electric load
       - :doc:`modules/TcsgenericSolar`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/Cashloan`
@@ -350,49 +350,49 @@ A SAM simulation is a combination of unit compute_modules that models a type of 
       - :doc:`modules/TcsmoltenSalt`, :doc:`modules/Grid`, :doc:`modules/Singleowner`
     * - PVWatts - Commercial Owner
       - Photovoltaic system using basic NREL PVWatts V5 algorithm. Renewable energy system displaces commercial building electric load
-      - :doc:`modules/Pvwattsv7`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/Cashloan`
+      - :doc:`modules/Pvwattsv8`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/Cashloan`
     * - PVWatts - LCOE Calculator (FCR Method)
       - Photovoltaic system using basic NREL PVWatts V5 algorithm. Calculate LCOE using fixed charge rate method
-      - :doc:`modules/Pvwattsv7`, :doc:`modules/Grid`, :doc:`modules/Lcoefcr`
+      - :doc:`modules/Pvwattsv8`, :doc:`modules/Grid`, :doc:`modules/Lcoefcr`
     * - PVWatts - Merchant Plant
       - Photovoltaic system using basic NREL PVWatts V5 algorithm. Merchant plant with constant DSCR and ancillary services revenue, reserve accounts and depreciation allocations
-      - :doc:`modules/Pvwattsv7`, :doc:`modules/Grid`, :doc:`modules/Merchantplant`
+      - :doc:`modules/Pvwattsv8`, :doc:`modules/Grid`, :doc:`modules/Merchantplant`
     * - PVWatts - No Financial Model
       - Photovoltaic system using basic NREL PVWatts V5 algorithm. Run the performance model with no financial model
-      - :doc:`modules/Pvwattsv7`, :doc:`modules/Grid`
+      - :doc:`modules/Pvwattsv8`, :doc:`modules/Grid`
     * - PVWatts - Partnership Flip with Debt
       - Photovoltaic system using basic NREL PVWatts V5 algorithm. Developer/investor partnership flip PPA structure with debt
-      - :doc:`modules/Pvwattsv7`, :doc:`modules/Grid`, :doc:`modules/Levpartflip`
+      - :doc:`modules/Pvwattsv8`, :doc:`modules/Grid`, :doc:`modules/Levpartflip`
     * - PVWatts - Partnership Flip without Debt
       - Photovoltaic system using basic NREL PVWatts V5 algorithm. Developer/investor partnership flip PPA structure without debt
-      - :doc:`modules/Pvwattsv7`, :doc:`modules/Grid`, :doc:`modules/Equpartflip`
+      - :doc:`modules/Pvwattsv8`, :doc:`modules/Grid`, :doc:`modules/Equpartflip`
     * - PVWatts - Residential Owner
       - Photovoltaic system using basic NREL PVWatts V5 algorithm. Renewable energy system displaces residential home electric load
-      - :doc:`modules/Pvwattsv7`, :doc:`modules/Belpe`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/Cashloan`
+      - :doc:`modules/Pvwattsv8`, :doc:`modules/Belpe`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/Cashloan`
     * - PVWatts - Sale Leaseback
       - Photovoltaic system using basic NREL PVWatts V5 algorithm. Sale leaseback partnership PPA structure
-      - :doc:`modules/Pvwattsv7`, :doc:`modules/Grid`, :doc:`modules/Saleleaseback`
+      - :doc:`modules/Pvwattsv8`, :doc:`modules/Grid`, :doc:`modules/Saleleaseback`
     * - PVWatts - Single Owner
       - Photovoltaic system using basic NREL PVWatts V5 algorithm. Single owner PPA with constant DSCR and IRR target year, reserve accounts and depreciation allocations
-      - :doc:`modules/Pvwattsv7`, :doc:`modules/Grid`, :doc:`modules/Singleowner`
+      - :doc:`modules/Pvwattsv8`, :doc:`modules/Grid`, :doc:`modules/Singleowner`
     * - PVWatts - Third Party - Host / Developer
       - Photovoltaic system using basic NREL PVWatts V5 algorithm. Third party ownershop from host and developer perspective for PPA
-      - :doc:`modules/Pvwattsv7`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/HostDeveloper`
+      - :doc:`modules/Pvwattsv8`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/HostDeveloper`
     * - PVWatts - Third Party Owner - Host
       - Photovoltaic system using basic NREL PVWatts V5 algorithm. Third party ownership from host perspective for PPA or lease agreement
-      - :doc:`modules/Pvwattsv7`, :doc:`modules/Belpe`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/Thirdpartyownership`
+      - :doc:`modules/Pvwattsv8`, :doc:`modules/Belpe`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/Thirdpartyownership`
     * - PVWatts-Battery - Commercial Owner
       - PVWatts system model with battery storage. Renewable energy system displaces commercial building electric load
-      - :doc:`modules/Pvwattsv7`, :doc:`modules/Battwatts`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/Cashloan`
+      - :doc:`modules/Pvwattsv8`, :doc:`modules/Battwatts`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/Cashloan`
     * - PVWatts-Battery - Residential Owner
       - PVWatts system model with battery storage. Renewable energy system displaces residential home electric load
-      - :doc:`modules/Pvwattsv7`, :doc:`modules/Belpe`, :doc:`modules/Battwatts`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/Cashloan`
+      - :doc:`modules/Pvwattsv8`, :doc:`modules/Belpe`, :doc:`modules/Battwatts`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/Cashloan`
     * - PVWatts-Battery - Third Party - Host / Developer
       - PVWatts system model with battery storage. Third party ownershop from host and developer perspective for PPA
-      - :doc:`modules/Pvwattsv7`, :doc:`modules/Battwatts`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/HostDeveloper`
+      - :doc:`modules/Pvwattsv8`, :doc:`modules/Battwatts`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/HostDeveloper`
     * - PVWatts-Battery - Third Party Owner - Host
       - PVWatts system model with battery storage. Third party ownership from host perspective for PPA or lease agreement
-      - :doc:`modules/Pvwattsv7`, :doc:`modules/Belpe`, :doc:`modules/Battwatts`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/Thirdpartyownership`
+      - :doc:`modules/Pvwattsv8`, :doc:`modules/Belpe`, :doc:`modules/Battwatts`, :doc:`modules/Grid`, :doc:`modules/Utilityrate5`, :doc:`modules/Thirdpartyownership`
     * - Solar Water Heating - Commercial Owner
       - Solar water heating model for residential and commercial building applications. Renewable energy system displaces commercial building electric load
       - :doc:`modules/Swh`, :doc:`modules/Utilityrate5`, :doc:`modules/Cashloan`

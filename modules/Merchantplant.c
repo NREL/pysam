@@ -4087,6 +4087,18 @@ Revenue_set_flip_target_year(VarGroupObject *self, PyObject *value, void *closur
 }
 
 static PyObject *
+Revenue_get_mp_ancserv1_percent_gen(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Merchantplant_Revenue_mp_ancserv1_percent_gen_nget, self->data_ptr);
+}
+
+static int
+Revenue_set_mp_ancserv1_percent_gen(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Merchantplant_Revenue_mp_ancserv1_percent_gen_nset, self->data_ptr);
+}
+
+static PyObject *
 Revenue_get_mp_ancserv1_revenue(VarGroupObject *self, void *closure)
 {
 	return PySAM_matrix_getter(SAM_Merchantplant_Revenue_mp_ancserv1_revenue_mget, self->data_ptr);
@@ -4096,6 +4108,30 @@ static int
 Revenue_set_mp_ancserv1_revenue(VarGroupObject *self, PyObject *value, void *closure)
 {
 		return PySAM_matrix_setter(value, SAM_Merchantplant_Revenue_mp_ancserv1_revenue_mset, self->data_ptr);
+}
+
+static PyObject *
+Revenue_get_mp_ancserv1_revenue_single(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Merchantplant_Revenue_mp_ancserv1_revenue_single_mget, self->data_ptr);
+}
+
+static int
+Revenue_set_mp_ancserv1_revenue_single(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Merchantplant_Revenue_mp_ancserv1_revenue_single_mset, self->data_ptr);
+}
+
+static PyObject *
+Revenue_get_mp_ancserv2_percent_gen(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Merchantplant_Revenue_mp_ancserv2_percent_gen_nget, self->data_ptr);
+}
+
+static int
+Revenue_set_mp_ancserv2_percent_gen(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Merchantplant_Revenue_mp_ancserv2_percent_gen_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -4111,6 +4147,30 @@ Revenue_set_mp_ancserv2_revenue(VarGroupObject *self, PyObject *value, void *clo
 }
 
 static PyObject *
+Revenue_get_mp_ancserv2_revenue_single(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Merchantplant_Revenue_mp_ancserv2_revenue_single_mget, self->data_ptr);
+}
+
+static int
+Revenue_set_mp_ancserv2_revenue_single(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Merchantplant_Revenue_mp_ancserv2_revenue_single_mset, self->data_ptr);
+}
+
+static PyObject *
+Revenue_get_mp_ancserv3_percent_gen(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Merchantplant_Revenue_mp_ancserv3_percent_gen_nget, self->data_ptr);
+}
+
+static int
+Revenue_set_mp_ancserv3_percent_gen(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Merchantplant_Revenue_mp_ancserv3_percent_gen_nset, self->data_ptr);
+}
+
+static PyObject *
 Revenue_get_mp_ancserv3_revenue(VarGroupObject *self, void *closure)
 {
 	return PySAM_matrix_getter(SAM_Merchantplant_Revenue_mp_ancserv3_revenue_mget, self->data_ptr);
@@ -4120,6 +4180,30 @@ static int
 Revenue_set_mp_ancserv3_revenue(VarGroupObject *self, PyObject *value, void *closure)
 {
 		return PySAM_matrix_setter(value, SAM_Merchantplant_Revenue_mp_ancserv3_revenue_mset, self->data_ptr);
+}
+
+static PyObject *
+Revenue_get_mp_ancserv3_revenue_single(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Merchantplant_Revenue_mp_ancserv3_revenue_single_mget, self->data_ptr);
+}
+
+static int
+Revenue_set_mp_ancserv3_revenue_single(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Merchantplant_Revenue_mp_ancserv3_revenue_single_mset, self->data_ptr);
+}
+
+static PyObject *
+Revenue_get_mp_ancserv4_percent_gen(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Merchantplant_Revenue_mp_ancserv4_percent_gen_nget, self->data_ptr);
+}
+
+static int
+Revenue_set_mp_ancserv4_percent_gen(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Merchantplant_Revenue_mp_ancserv4_percent_gen_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -4135,6 +4219,18 @@ Revenue_set_mp_ancserv4_revenue(VarGroupObject *self, PyObject *value, void *clo
 }
 
 static PyObject *
+Revenue_get_mp_ancserv4_revenue_single(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Merchantplant_Revenue_mp_ancserv4_revenue_single_mget, self->data_ptr);
+}
+
+static int
+Revenue_set_mp_ancserv4_revenue_single(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Merchantplant_Revenue_mp_ancserv4_revenue_single_mset, self->data_ptr);
+}
+
+static PyObject *
 Revenue_get_mp_enable_ancserv1(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Merchantplant_Revenue_mp_enable_ancserv1_nget, self->data_ptr);
@@ -4144,6 +4240,18 @@ static int
 Revenue_set_mp_enable_ancserv1(VarGroupObject *self, PyObject *value, void *closure)
 {
 	return PySAM_double_setter(value, SAM_Merchantplant_Revenue_mp_enable_ancserv1_nset, self->data_ptr);
+}
+
+static PyObject *
+Revenue_get_mp_enable_ancserv1_percent_gen(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Merchantplant_Revenue_mp_enable_ancserv1_percent_gen_nget, self->data_ptr);
+}
+
+static int
+Revenue_set_mp_enable_ancserv1_percent_gen(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Merchantplant_Revenue_mp_enable_ancserv1_percent_gen_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -4159,6 +4267,18 @@ Revenue_set_mp_enable_ancserv2(VarGroupObject *self, PyObject *value, void *clos
 }
 
 static PyObject *
+Revenue_get_mp_enable_ancserv2_percent_gen(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Merchantplant_Revenue_mp_enable_ancserv2_percent_gen_nget, self->data_ptr);
+}
+
+static int
+Revenue_set_mp_enable_ancserv2_percent_gen(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Merchantplant_Revenue_mp_enable_ancserv2_percent_gen_nset, self->data_ptr);
+}
+
+static PyObject *
 Revenue_get_mp_enable_ancserv3(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Merchantplant_Revenue_mp_enable_ancserv3_nget, self->data_ptr);
@@ -4168,6 +4288,18 @@ static int
 Revenue_set_mp_enable_ancserv3(VarGroupObject *self, PyObject *value, void *closure)
 {
 	return PySAM_double_setter(value, SAM_Merchantplant_Revenue_mp_enable_ancserv3_nset, self->data_ptr);
+}
+
+static PyObject *
+Revenue_get_mp_enable_ancserv3_percent_gen(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Merchantplant_Revenue_mp_enable_ancserv3_percent_gen_nget, self->data_ptr);
+}
+
+static int
+Revenue_set_mp_enable_ancserv3_percent_gen(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Merchantplant_Revenue_mp_enable_ancserv3_percent_gen_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -4183,6 +4315,18 @@ Revenue_set_mp_enable_ancserv4(VarGroupObject *self, PyObject *value, void *clos
 }
 
 static PyObject *
+Revenue_get_mp_enable_ancserv4_percent_gen(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Merchantplant_Revenue_mp_enable_ancserv4_percent_gen_nget, self->data_ptr);
+}
+
+static int
+Revenue_set_mp_enable_ancserv4_percent_gen(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Merchantplant_Revenue_mp_enable_ancserv4_percent_gen_nset, self->data_ptr);
+}
+
+static PyObject *
 Revenue_get_mp_enable_energy_market_revenue(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Merchantplant_Revenue_mp_enable_energy_market_revenue_nget, self->data_ptr);
@@ -4192,6 +4336,18 @@ static int
 Revenue_set_mp_enable_energy_market_revenue(VarGroupObject *self, PyObject *value, void *closure)
 {
 	return PySAM_double_setter(value, SAM_Merchantplant_Revenue_mp_enable_energy_market_revenue_nset, self->data_ptr);
+}
+
+static PyObject *
+Revenue_get_mp_enable_market_percent_gen(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Merchantplant_Revenue_mp_enable_market_percent_gen_nget, self->data_ptr);
+}
+
+static int
+Revenue_set_mp_enable_market_percent_gen(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Merchantplant_Revenue_mp_enable_market_percent_gen_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -4206,6 +4362,30 @@ Revenue_set_mp_energy_market_revenue(VarGroupObject *self, PyObject *value, void
 		return PySAM_matrix_setter(value, SAM_Merchantplant_Revenue_mp_energy_market_revenue_mset, self->data_ptr);
 }
 
+static PyObject *
+Revenue_get_mp_energy_market_revenue_single(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Merchantplant_Revenue_mp_energy_market_revenue_single_mget, self->data_ptr);
+}
+
+static int
+Revenue_set_mp_energy_market_revenue_single(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Merchantplant_Revenue_mp_energy_market_revenue_single_mset, self->data_ptr);
+}
+
+static PyObject *
+Revenue_get_mp_market_percent_gen(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Merchantplant_Revenue_mp_market_percent_gen_nget, self->data_ptr);
+}
+
+static int
+Revenue_set_mp_market_percent_gen(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Merchantplant_Revenue_mp_market_percent_gen_nset, self->data_ptr);
+}
+
 static PyGetSetDef Revenue_getset[] = {
 {"flip_target_percent", (getter)Revenue_get_flip_target_percent,(setter)Revenue_set_flip_target_percent,
 	PyDoc_STR("*float*: After-tax IRR target [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 11"),
@@ -4213,35 +4393,80 @@ static PyGetSetDef Revenue_getset[] = {
 {"flip_target_year", (getter)Revenue_get_flip_target_year,(setter)Revenue_set_flip_target_year,
 	PyDoc_STR("*float*: IRR target year [Year]\n\n*Constraints*: MIN=1\n\n*Required*: If not provided, assumed to be 11"),
  	NULL},
+{"mp_ancserv1_percent_gen", (getter)Revenue_get_mp_ancserv1_percent_gen,(setter)Revenue_set_mp_ancserv1_percent_gen,
+	PyDoc_STR("*float*: Percent of demand to copy to cleared capacity array [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: True if mp_enable_ancserv1_percent_gen=1"),
+ 	NULL},
 {"mp_ancserv1_revenue", (getter)Revenue_get_mp_ancserv1_revenue,(setter)Revenue_set_mp_ancserv1_revenue,
 	PyDoc_STR("*sequence[sequence]*: Ancillary services 1 revenue input\n\n*Info*: Lifetime x 2[Cleared Capacity(MW),Price($/MWh)]\n\n*Required*: True"),
+ 	NULL},
+{"mp_ancserv1_revenue_single", (getter)Revenue_get_mp_ancserv1_revenue_single,(setter)Revenue_set_mp_ancserv1_revenue_single,
+	PyDoc_STR("*sequence[sequence]*: Ancillary services 1 revenue input\n\n*Info*: Lifetime x 1[Price($/MWh)]\n\n*Required*: True if mp_enable_ancserv1_percent_gen=1"),
+ 	NULL},
+{"mp_ancserv2_percent_gen", (getter)Revenue_get_mp_ancserv2_percent_gen,(setter)Revenue_set_mp_ancserv2_percent_gen,
+	PyDoc_STR("*float*: Percent of demand to copy to cleared capacity array [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: True if mp_enable_ancserv2_percent_gen=1"),
  	NULL},
 {"mp_ancserv2_revenue", (getter)Revenue_get_mp_ancserv2_revenue,(setter)Revenue_set_mp_ancserv2_revenue,
 	PyDoc_STR("*sequence[sequence]*: Ancillary services 2 revenue input\n\n*Info*: Lifetime x 2[Cleared Capacity(MW),Price($/MWh)]\n\n*Required*: True"),
  	NULL},
+{"mp_ancserv2_revenue_single", (getter)Revenue_get_mp_ancserv2_revenue_single,(setter)Revenue_set_mp_ancserv2_revenue_single,
+	PyDoc_STR("*sequence[sequence]*: Ancillary services 2 revenue input\n\n*Info*: Lifetime x 1[Price($/MWh)]\n\n*Required*: True if mp_enable_ancserv2_percent_gen=1"),
+ 	NULL},
+{"mp_ancserv3_percent_gen", (getter)Revenue_get_mp_ancserv3_percent_gen,(setter)Revenue_set_mp_ancserv3_percent_gen,
+	PyDoc_STR("*float*: Percent of demand to copy to cleared capacity array [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: True if mp_enable_ancserv3_percent_gen=1"),
+ 	NULL},
 {"mp_ancserv3_revenue", (getter)Revenue_get_mp_ancserv3_revenue,(setter)Revenue_set_mp_ancserv3_revenue,
 	PyDoc_STR("*sequence[sequence]*: Ancillary services 3 revenue input\n\n*Info*: Lifetime x 2 [Cleared Capacity(MW),Price($/MWh)]\n\n*Required*: True"),
+ 	NULL},
+{"mp_ancserv3_revenue_single", (getter)Revenue_get_mp_ancserv3_revenue_single,(setter)Revenue_set_mp_ancserv3_revenue_single,
+	PyDoc_STR("*sequence[sequence]*: Ancillary services 3 revenue input\n\n*Info*: Lifetime x 1[Price($/MWh)]\n\n*Required*: True if mp_enable_ancserv3_percent_gen=1"),
+ 	NULL},
+{"mp_ancserv4_percent_gen", (getter)Revenue_get_mp_ancserv4_percent_gen,(setter)Revenue_set_mp_ancserv4_percent_gen,
+	PyDoc_STR("*float*: Percent of demand to copy to cleared capacity array [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: True if mp_enable_ancserv4_percent_gen=1"),
  	NULL},
 {"mp_ancserv4_revenue", (getter)Revenue_get_mp_ancserv4_revenue,(setter)Revenue_set_mp_ancserv4_revenue,
 	PyDoc_STR("*sequence[sequence]*: Ancillary services 4 revenue input\n\n*Info*: Lifetime x 2 [Cleared Capacity(MW),Price($/MWh)]\n\n*Required*: True"),
  	NULL},
+{"mp_ancserv4_revenue_single", (getter)Revenue_get_mp_ancserv4_revenue_single,(setter)Revenue_set_mp_ancserv4_revenue_single,
+	PyDoc_STR("*sequence[sequence]*: Ancillary services 4 revenue input\n\n*Info*: Lifetime x 1[Price($/MWh)]\n\n*Required*: True if mp_enable_ancserv4_percent_gen=1"),
+ 	NULL},
 {"mp_enable_ancserv1", (getter)Revenue_get_mp_enable_ancserv1,(setter)Revenue_set_mp_enable_ancserv1,
 	PyDoc_STR("*float*: Enable ancillary services 1 Revenue [0/1]\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: True"),
+ 	NULL},
+{"mp_enable_ancserv1_percent_gen", (getter)Revenue_get_mp_enable_ancserv1_percent_gen,(setter)Revenue_set_mp_enable_ancserv1_percent_gen,
+	PyDoc_STR("*float*: Enable percent demand cleared capacity option for ancillary service 1 [0/1]\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: True"),
  	NULL},
 {"mp_enable_ancserv2", (getter)Revenue_get_mp_enable_ancserv2,(setter)Revenue_set_mp_enable_ancserv2,
 	PyDoc_STR("*float*: Enable ancillary services 2 Revenue [0/1]\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: True"),
  	NULL},
+{"mp_enable_ancserv2_percent_gen", (getter)Revenue_get_mp_enable_ancserv2_percent_gen,(setter)Revenue_set_mp_enable_ancserv2_percent_gen,
+	PyDoc_STR("*float*: Enable percent demand cleared capacity option for ancillary service 2 [0/1]\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: True"),
+ 	NULL},
 {"mp_enable_ancserv3", (getter)Revenue_get_mp_enable_ancserv3,(setter)Revenue_set_mp_enable_ancserv3,
 	PyDoc_STR("*float*: Enable ancillary services 3 Revenue [0/1]\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: True"),
+ 	NULL},
+{"mp_enable_ancserv3_percent_gen", (getter)Revenue_get_mp_enable_ancserv3_percent_gen,(setter)Revenue_set_mp_enable_ancserv3_percent_gen,
+	PyDoc_STR("*float*: Enable percent demand cleared capacity option for ancillary service 3 [0/1]\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: True"),
  	NULL},
 {"mp_enable_ancserv4", (getter)Revenue_get_mp_enable_ancserv4,(setter)Revenue_set_mp_enable_ancserv4,
 	PyDoc_STR("*float*: Enable ancillary services 4 Revenue [0/1]\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: True"),
  	NULL},
+{"mp_enable_ancserv4_percent_gen", (getter)Revenue_get_mp_enable_ancserv4_percent_gen,(setter)Revenue_set_mp_enable_ancserv4_percent_gen,
+	PyDoc_STR("*float*: Enable percent demand cleared capacity option for ancillary service 4 [0/1]\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: True"),
+ 	NULL},
 {"mp_enable_energy_market_revenue", (getter)Revenue_get_mp_enable_energy_market_revenue,(setter)Revenue_set_mp_enable_energy_market_revenue,
 	PyDoc_STR("*float*: Enable energy market revenue [0/1]\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: True"),
  	NULL},
+{"mp_enable_market_percent_gen", (getter)Revenue_get_mp_enable_market_percent_gen,(setter)Revenue_set_mp_enable_market_percent_gen,
+	PyDoc_STR("*float*: Enable percent demand cleared capacity option for market revenue [0/1]\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: True"),
+ 	NULL},
 {"mp_energy_market_revenue", (getter)Revenue_get_mp_energy_market_revenue,(setter)Revenue_set_mp_energy_market_revenue,
 	PyDoc_STR("*sequence[sequence]*: Energy market revenue input\n\n*Info*: Lifetime x 2[Cleared Capacity(MW),Price($/MWh)]\n\n*Required*: True"),
+ 	NULL},
+{"mp_energy_market_revenue_single", (getter)Revenue_get_mp_energy_market_revenue_single,(setter)Revenue_set_mp_energy_market_revenue_single,
+	PyDoc_STR("*sequence[sequence]*: Energy market revenue input\n\n*Info*: Lifetime x 1 [Price($/MWh)]\n\n*Required*: True if mp_enable_market_percent_gen=1"),
+ 	NULL},
+{"mp_market_percent_gen", (getter)Revenue_get_mp_market_percent_gen,(setter)Revenue_set_mp_market_percent_gen,
+	PyDoc_STR("*float*: Percent of demand to copy to cleared capacity array [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: True if mp_enable_market_percent_gen=1"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -5431,34 +5656,34 @@ static PyTypeObject CapacityPayments_Type = {
 
 
 /*
- * Battery Group
+ * LCOS Group
  */ 
 
-static PyTypeObject Battery_Type;
+static PyTypeObject LCOS_Type;
 
 static PyObject *
-Battery_new(SAM_Merchantplant data_ptr)
+LCOS_new(SAM_Merchantplant data_ptr)
 {
-	PyObject* new_obj = Battery_Type.tp_alloc(&Battery_Type,0);
+	PyObject* new_obj = LCOS_Type.tp_alloc(&LCOS_Type,0);
 
-	VarGroupObject* Battery_obj = (VarGroupObject*)new_obj;
+	VarGroupObject* LCOS_obj = (VarGroupObject*)new_obj;
 
-	Battery_obj->data_ptr = (SAM_table)data_ptr;
+	LCOS_obj->data_ptr = (SAM_table)data_ptr;
 
 	return new_obj;
 }
 
-/* Battery methods */
+/* LCOS methods */
 
 static PyObject *
-Battery_assign(VarGroupObject *self, PyObject *args)
+LCOS_assign(VarGroupObject *self, PyObject *args)
 {
 	PyObject* dict;
 	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Merchantplant", "Battery")){
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Merchantplant", "LCOS")){
 		return NULL;
 	}
 
@@ -5467,15 +5692,15 @@ Battery_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
-Battery_replace(VarGroupObject *self, PyObject *args)
+LCOS_replace(VarGroupObject *self, PyObject *args)
 {
 	PyObject* dict;
 	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
 		return NULL;
 	}
-	PyTypeObject* tp = &Battery_Type;
+	PyTypeObject* tp = &LCOS_Type;
 
-	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Merchantplant", "Battery")){
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Merchantplant", "LCOS")){
 		return NULL;
 	}
 
@@ -5484,486 +5709,272 @@ Battery_replace(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
-Battery_export(VarGroupObject *self, PyObject *args)
+LCOS_export(VarGroupObject *self, PyObject *args)
 {
-	PyTypeObject* tp = &Battery_Type;
+	PyTypeObject* tp = &LCOS_Type;
 	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
 	return dict;
 }
 
-static PyMethodDef Battery_methods[] = {
-		{"assign",            (PyCFunction)Battery_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Battery_vals = { var: val, ...}``")},
-		{"replace",            (PyCFunction)Battery_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Battery_vals = { var: val, ...}``")},
-		{"export",            (PyCFunction)Battery_export,  METH_VARARGS,
+static PyMethodDef LCOS_methods[] = {
+		{"assign",            (PyCFunction)LCOS_assign,  METH_VARARGS,
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``LCOS_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)LCOS_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``LCOS_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)LCOS_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 static PyObject *
-Battery_get_batt_annual_charge_from_system(VarGroupObject *self, void *closure)
+LCOS_get_batt_annual_charge_energy(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Merchantplant_Battery_batt_annual_charge_from_system_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Merchantplant_LCOS_batt_annual_charge_energy_aget, self->data_ptr);
 }
 
 static int
-Battery_set_batt_annual_charge_from_system(VarGroupObject *self, PyObject *value, void *closure)
+LCOS_set_batt_annual_charge_energy(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_Merchantplant_Battery_batt_annual_charge_from_system_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Merchantplant_LCOS_batt_annual_charge_energy_aset, self->data_ptr);
 }
 
 static PyObject *
-Battery_get_batt_annual_discharge_energy(VarGroupObject *self, void *closure)
+LCOS_get_batt_annual_charge_from_system(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Merchantplant_Battery_batt_annual_discharge_energy_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Merchantplant_LCOS_batt_annual_charge_from_system_aget, self->data_ptr);
 }
 
 static int
-Battery_set_batt_annual_discharge_energy(VarGroupObject *self, PyObject *value, void *closure)
+LCOS_set_batt_annual_charge_from_system(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_Merchantplant_Battery_batt_annual_discharge_energy_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Merchantplant_LCOS_batt_annual_charge_from_system_aset, self->data_ptr);
 }
 
 static PyObject *
-Battery_get_batt_capacity_percent(VarGroupObject *self, void *closure)
+LCOS_get_batt_annual_discharge_energy(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Merchantplant_Battery_batt_capacity_percent_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Merchantplant_LCOS_batt_annual_discharge_energy_aget, self->data_ptr);
 }
 
 static int
-Battery_set_batt_capacity_percent(VarGroupObject *self, PyObject *value, void *closure)
+LCOS_set_batt_annual_discharge_energy(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_Merchantplant_Battery_batt_capacity_percent_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Merchantplant_LCOS_batt_annual_discharge_energy_aset, self->data_ptr);
 }
 
 static PyObject *
-Battery_get_battery_total_cost_lcos(VarGroupObject *self, void *closure)
+LCOS_get_batt_capacity_percent(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Merchantplant_Battery_battery_total_cost_lcos_nget, self->data_ptr);
+	return PySAM_array_getter(SAM_Merchantplant_LCOS_batt_capacity_percent_aget, self->data_ptr);
 }
 
 static int
-Battery_set_battery_total_cost_lcos(VarGroupObject *self, PyObject *value, void *closure)
+LCOS_set_batt_capacity_percent(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Merchantplant_Battery_battery_total_cost_lcos_nset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Merchantplant_LCOS_batt_capacity_percent_aset, self->data_ptr);
 }
 
 static PyObject *
-Battery_get_grid_to_batt(VarGroupObject *self, void *closure)
+LCOS_get_batt_salvage_percentage(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Merchantplant_Battery_grid_to_batt_aget, self->data_ptr);
+	return PySAM_double_getter(SAM_Merchantplant_LCOS_batt_salvage_percentage_nget, self->data_ptr);
 }
 
 static int
-Battery_set_grid_to_batt(VarGroupObject *self, PyObject *value, void *closure)
+LCOS_set_batt_salvage_percentage(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_Merchantplant_Battery_grid_to_batt_aset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Merchantplant_LCOS_batt_salvage_percentage_nset, self->data_ptr);
 }
 
 static PyObject *
-Battery_get_monthly_batt_to_grid(VarGroupObject *self, void *closure)
+LCOS_get_battery_total_cost_lcos(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Merchantplant_Battery_monthly_batt_to_grid_aget, self->data_ptr);
+	return PySAM_double_getter(SAM_Merchantplant_LCOS_battery_total_cost_lcos_nget, self->data_ptr);
 }
 
 static int
-Battery_set_monthly_batt_to_grid(VarGroupObject *self, PyObject *value, void *closure)
+LCOS_set_battery_total_cost_lcos(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_Merchantplant_Battery_monthly_batt_to_grid_aset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Merchantplant_LCOS_battery_total_cost_lcos_nset, self->data_ptr);
 }
 
 static PyObject *
-Battery_get_monthly_grid_to_batt(VarGroupObject *self, void *closure)
+LCOS_get_charge_w_sys_ec_ym(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Merchantplant_Battery_monthly_grid_to_batt_aget, self->data_ptr);
+	return PySAM_matrix_getter(SAM_Merchantplant_LCOS_charge_w_sys_ec_ym_mget, self->data_ptr);
 }
 
 static int
-Battery_set_monthly_grid_to_batt(VarGroupObject *self, PyObject *value, void *closure)
+LCOS_set_charge_w_sys_ec_ym(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_Merchantplant_Battery_monthly_grid_to_batt_aset, self->data_ptr);
+		return PySAM_matrix_setter(value, SAM_Merchantplant_LCOS_charge_w_sys_ec_ym_mset, self->data_ptr);
 }
 
 static PyObject *
-Battery_get_monthly_grid_to_load(VarGroupObject *self, void *closure)
+LCOS_get_grid_to_batt(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Merchantplant_Battery_monthly_grid_to_load_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Merchantplant_LCOS_grid_to_batt_aget, self->data_ptr);
 }
 
 static int
-Battery_set_monthly_grid_to_load(VarGroupObject *self, PyObject *value, void *closure)
+LCOS_set_grid_to_batt(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_Merchantplant_Battery_monthly_grid_to_load_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Merchantplant_LCOS_grid_to_batt_aset, self->data_ptr);
 }
 
 static PyObject *
-Battery_get_monthly_system_to_grid(VarGroupObject *self, void *closure)
+LCOS_get_monthly_batt_to_grid(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Merchantplant_Battery_monthly_system_to_grid_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Merchantplant_LCOS_monthly_batt_to_grid_aget, self->data_ptr);
 }
 
 static int
-Battery_set_monthly_system_to_grid(VarGroupObject *self, PyObject *value, void *closure)
+LCOS_set_monthly_batt_to_grid(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_Merchantplant_Battery_monthly_system_to_grid_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Merchantplant_LCOS_monthly_batt_to_grid_aset, self->data_ptr);
 }
 
-static PyGetSetDef Battery_getset[] = {
-{"batt_annual_charge_from_system", (getter)Battery_get_batt_annual_charge_from_system,(setter)Battery_set_batt_annual_charge_from_system,
+static PyObject *
+LCOS_get_monthly_grid_to_batt(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Merchantplant_LCOS_monthly_grid_to_batt_aget, self->data_ptr);
+}
+
+static int
+LCOS_set_monthly_grid_to_batt(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Merchantplant_LCOS_monthly_grid_to_batt_aset, self->data_ptr);
+}
+
+static PyObject *
+LCOS_get_monthly_grid_to_load(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Merchantplant_LCOS_monthly_grid_to_load_aget, self->data_ptr);
+}
+
+static int
+LCOS_set_monthly_grid_to_load(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Merchantplant_LCOS_monthly_grid_to_load_aset, self->data_ptr);
+}
+
+static PyObject *
+LCOS_get_monthly_system_to_grid(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Merchantplant_LCOS_monthly_system_to_grid_aget, self->data_ptr);
+}
+
+static int
+LCOS_set_monthly_system_to_grid(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Merchantplant_LCOS_monthly_system_to_grid_aset, self->data_ptr);
+}
+
+static PyObject *
+LCOS_get_true_up_credits_ym(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Merchantplant_LCOS_true_up_credits_ym_mget, self->data_ptr);
+}
+
+static int
+LCOS_set_true_up_credits_ym(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Merchantplant_LCOS_true_up_credits_ym_mset, self->data_ptr);
+}
+
+static PyObject *
+LCOS_get_year1_monthly_ec_charge_gross_with_system(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Merchantplant_LCOS_year1_monthly_ec_charge_gross_with_system_aget, self->data_ptr);
+}
+
+static int
+LCOS_set_year1_monthly_ec_charge_gross_with_system(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Merchantplant_LCOS_year1_monthly_ec_charge_gross_with_system_aset, self->data_ptr);
+}
+
+static PyObject *
+LCOS_get_year1_monthly_ec_charge_with_system(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Merchantplant_LCOS_year1_monthly_ec_charge_with_system_aget, self->data_ptr);
+}
+
+static int
+LCOS_set_year1_monthly_ec_charge_with_system(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Merchantplant_LCOS_year1_monthly_ec_charge_with_system_aset, self->data_ptr);
+}
+
+static PyObject *
+LCOS_get_year1_monthly_electricity_to_grid(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Merchantplant_LCOS_year1_monthly_electricity_to_grid_aget, self->data_ptr);
+}
+
+static int
+LCOS_set_year1_monthly_electricity_to_grid(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Merchantplant_LCOS_year1_monthly_electricity_to_grid_aset, self->data_ptr);
+}
+
+static PyGetSetDef LCOS_getset[] = {
+{"batt_annual_charge_energy", (getter)LCOS_get_batt_annual_charge_energy,(setter)LCOS_set_batt_annual_charge_energy,
+	PyDoc_STR("*sequence*: Battery annual energy charged [kWh]"),
+ 	NULL},
+{"batt_annual_charge_from_system", (getter)LCOS_get_batt_annual_charge_from_system,(setter)LCOS_set_batt_annual_charge_from_system,
 	PyDoc_STR("*sequence*: Battery annual energy charged from system [kWh]"),
  	NULL},
-{"batt_annual_discharge_energy", (getter)Battery_get_batt_annual_discharge_energy,(setter)Battery_set_batt_annual_discharge_energy,
+{"batt_annual_discharge_energy", (getter)LCOS_get_batt_annual_discharge_energy,(setter)LCOS_set_batt_annual_discharge_energy,
 	PyDoc_STR("*sequence*: Battery annual energy discharged [kWh]"),
  	NULL},
-{"batt_capacity_percent", (getter)Battery_get_batt_capacity_percent,(setter)Battery_set_batt_capacity_percent,
+{"batt_capacity_percent", (getter)LCOS_get_batt_capacity_percent,(setter)LCOS_set_batt_capacity_percent,
 	PyDoc_STR("*sequence*: Battery relative capacity to nameplate [%]"),
  	NULL},
-{"battery_total_cost_lcos", (getter)Battery_get_battery_total_cost_lcos,(setter)Battery_set_battery_total_cost_lcos,
+{"batt_salvage_percentage", (getter)LCOS_get_batt_salvage_percentage,(setter)LCOS_set_batt_salvage_percentage,
+	PyDoc_STR("*float*: Net pre-tax cash battery salvage value [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"battery_total_cost_lcos", (getter)LCOS_get_battery_total_cost_lcos,(setter)LCOS_set_battery_total_cost_lcos,
 	PyDoc_STR("*float*: Battery total investment cost [$]"),
  	NULL},
-{"grid_to_batt", (getter)Battery_get_grid_to_batt,(setter)Battery_set_grid_to_batt,
-	PyDoc_STR("*sequence*: Electricity to grid from battery [kW]"),
- 	NULL},
-{"monthly_batt_to_grid", (getter)Battery_get_monthly_batt_to_grid,(setter)Battery_set_monthly_batt_to_grid,
-	PyDoc_STR("*sequence*: Energy to grid from battery [kWh]\n\n*Constraints*: LENGTH=12"),
- 	NULL},
-{"monthly_grid_to_batt", (getter)Battery_get_monthly_grid_to_batt,(setter)Battery_set_monthly_grid_to_batt,
-	PyDoc_STR("*sequence*: Energy to battery from grid [kWh]\n\n*Constraints*: LENGTH=12"),
- 	NULL},
-{"monthly_grid_to_load", (getter)Battery_get_monthly_grid_to_load,(setter)Battery_set_monthly_grid_to_load,
-	PyDoc_STR("*sequence*: Energy to load from grid [kWh]\n\n*Constraints*: LENGTH=12"),
- 	NULL},
-{"monthly_system_to_grid", (getter)Battery_get_monthly_system_to_grid,(setter)Battery_set_monthly_system_to_grid,
-	PyDoc_STR("*sequence*: Energy to grid from system [kWh]\n\n*Constraints*: LENGTH=12"),
- 	NULL},
-	{NULL}  /* Sentinel */
-};
-
-static PyTypeObject Battery_Type = {
-		/* The ob_type field must be initialized in the module init function
-		 * to be portable to Windows without using C++. */
-		PyVarObject_HEAD_INIT(NULL, 0)
-		"Merchantplant.Battery",             /*tp_name*/
-		sizeof(VarGroupObject),          /*tp_basicsize*/
-		0,                          /*tp_itemsize*/
-		/* methods */
-		0,    /*tp_dealloc*/
-		0,                          /*tp_print*/
-		(getattrfunc)0,             /*tp_getattr*/
-		0,                          /*tp_setattr*/
-		0,                          /*tp_reserved*/
-		0,                          /*tp_repr*/
-		0,                          /*tp_as_number*/
-		0,                          /*tp_as_sequence*/
-		0,                          /*tp_as_mapping*/
-		0,                          /*tp_hash*/
-		0,                          /*tp_call*/
-		0,                          /*tp_str*/
-		0,                          /*tp_getattro*/
-		0,                          /*tp_setattro*/
-		0,                          /*tp_as_buffer*/
-		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
-		0,                          /*tp_doc*/
-		0,                          /*tp_traverse*/
-		0,                          /*tp_clear*/
-		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistofnset*/
-		0,                          /*tp_iter*/
-		0,                          /*tp_iternext*/
-		Battery_methods,         /*tp_methods*/
-		0,                          /*tp_members*/
-		Battery_getset,          /*tp_getset*/
-		0,                          /*tp_base*/
-		0,                          /*tp_dict*/
-		0,                          /*tp_descr_get*/
-		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictofnset*/
-		0,                          /*tp_init*/
-		0,                          /*tp_alloc*/
-		0,             /*tp_new*/
-		0,                          /*tp_free*/
-		0,                          /*tp_is_gc*/
-};
-
-
-/*
- * ChargesByMonth Group
- */ 
-
-static PyTypeObject ChargesByMonth_Type;
-
-static PyObject *
-ChargesByMonth_new(SAM_Merchantplant data_ptr)
-{
-	PyObject* new_obj = ChargesByMonth_Type.tp_alloc(&ChargesByMonth_Type,0);
-
-	VarGroupObject* ChargesByMonth_obj = (VarGroupObject*)new_obj;
-
-	ChargesByMonth_obj->data_ptr = (SAM_table)data_ptr;
-
-	return new_obj;
-}
-
-/* ChargesByMonth methods */
-
-static PyObject *
-ChargesByMonth_assign(VarGroupObject *self, PyObject *args)
-{
-	PyObject* dict;
-	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
-		return NULL;
-	}
-
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Merchantplant", "ChargesByMonth")){
-		return NULL;
-	}
-
-	Py_INCREF(Py_None);
-	return Py_None;
-}
-
-static PyObject *
-ChargesByMonth_replace(VarGroupObject *self, PyObject *args)
-{
-	PyObject* dict;
-	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
-		return NULL;
-	}
-	PyTypeObject* tp = &ChargesByMonth_Type;
-
-	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Merchantplant", "ChargesByMonth")){
-		return NULL;
-	}
-
-	Py_INCREF(Py_None);
-	return Py_None;
-}
-
-static PyObject *
-ChargesByMonth_export(VarGroupObject *self, PyObject *args)
-{
-	PyTypeObject* tp = &ChargesByMonth_Type;
-	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
-	return dict;
-}
-
-static PyMethodDef ChargesByMonth_methods[] = {
-		{"assign",            (PyCFunction)ChargesByMonth_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``ChargesByMonth_vals = { var: val, ...}``")},
-		{"replace",            (PyCFunction)ChargesByMonth_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``ChargesByMonth_vals = { var: val, ...}``")},
-		{"export",            (PyCFunction)ChargesByMonth_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
-		{NULL,              NULL}           /* sentinel */
-};
-
-static PyObject *
-ChargesByMonth_get_charge_w_sys_ec_ym(VarGroupObject *self, void *closure)
-{
-	return PySAM_matrix_getter(SAM_Merchantplant_ChargesByMonth_charge_w_sys_ec_ym_mget, self->data_ptr);
-}
-
-static int
-ChargesByMonth_set_charge_w_sys_ec_ym(VarGroupObject *self, PyObject *value, void *closure)
-{
-		return PySAM_matrix_setter(value, SAM_Merchantplant_ChargesByMonth_charge_w_sys_ec_ym_mset, self->data_ptr);
-}
-
-static PyObject *
-ChargesByMonth_get_true_up_credits_ym(VarGroupObject *self, void *closure)
-{
-	return PySAM_matrix_getter(SAM_Merchantplant_ChargesByMonth_true_up_credits_ym_mget, self->data_ptr);
-}
-
-static int
-ChargesByMonth_set_true_up_credits_ym(VarGroupObject *self, PyObject *value, void *closure)
-{
-		return PySAM_matrix_setter(value, SAM_Merchantplant_ChargesByMonth_true_up_credits_ym_mset, self->data_ptr);
-}
-
-static PyObject *
-ChargesByMonth_get_year1_monthly_ec_charge_with_system(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Merchantplant_ChargesByMonth_year1_monthly_ec_charge_with_system_aget, self->data_ptr);
-}
-
-static int
-ChargesByMonth_set_year1_monthly_ec_charge_with_system(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_Merchantplant_ChargesByMonth_year1_monthly_ec_charge_with_system_aset, self->data_ptr);
-}
-
-static PyGetSetDef ChargesByMonth_getset[] = {
-{"charge_w_sys_ec_ym", (getter)ChargesByMonth_get_charge_w_sys_ec_ym,(setter)ChargesByMonth_set_charge_w_sys_ec_ym,
+{"charge_w_sys_ec_ym", (getter)LCOS_get_charge_w_sys_ec_ym,(setter)LCOS_set_charge_w_sys_ec_ym,
 	PyDoc_STR("*sequence[sequence]*: Energy charge with system [$]"),
  	NULL},
-{"true_up_credits_ym", (getter)ChargesByMonth_get_true_up_credits_ym,(setter)ChargesByMonth_set_true_up_credits_ym,
+{"grid_to_batt", (getter)LCOS_get_grid_to_batt,(setter)LCOS_set_grid_to_batt,
+	PyDoc_STR("*sequence*: Electricity to grid from battery [kW]"),
+ 	NULL},
+{"monthly_batt_to_grid", (getter)LCOS_get_monthly_batt_to_grid,(setter)LCOS_set_monthly_batt_to_grid,
+	PyDoc_STR("*sequence*: Energy to grid from battery [kWh]\n\n*Constraints*: LENGTH=12"),
+ 	NULL},
+{"monthly_grid_to_batt", (getter)LCOS_get_monthly_grid_to_batt,(setter)LCOS_set_monthly_grid_to_batt,
+	PyDoc_STR("*sequence*: Energy to battery from grid [kWh]\n\n*Constraints*: LENGTH=12"),
+ 	NULL},
+{"monthly_grid_to_load", (getter)LCOS_get_monthly_grid_to_load,(setter)LCOS_set_monthly_grid_to_load,
+	PyDoc_STR("*sequence*: Energy to load from grid [kWh]\n\n*Constraints*: LENGTH=12"),
+ 	NULL},
+{"monthly_system_to_grid", (getter)LCOS_get_monthly_system_to_grid,(setter)LCOS_set_monthly_system_to_grid,
+	PyDoc_STR("*sequence*: Energy to grid from system [kWh]\n\n*Constraints*: LENGTH=12"),
+ 	NULL},
+{"true_up_credits_ym", (getter)LCOS_get_true_up_credits_ym,(setter)LCOS_set_true_up_credits_ym,
 	PyDoc_STR("*sequence[sequence]*: Net annual true-up payments [$]"),
  	NULL},
-{"year1_monthly_ec_charge_with_system", (getter)ChargesByMonth_get_year1_monthly_ec_charge_with_system,(setter)ChargesByMonth_set_year1_monthly_ec_charge_with_system,
-	PyDoc_STR("*sequence*: Energy charge with system [$]"),
- 	NULL},
-	{NULL}  /* Sentinel */
-};
-
-static PyTypeObject ChargesByMonth_Type = {
-		/* The ob_type field must be initialized in the module init function
-		 * to be portable to Windows without using C++. */
-		PyVarObject_HEAD_INIT(NULL, 0)
-		"Merchantplant.ChargesByMonth",             /*tp_name*/
-		sizeof(VarGroupObject),          /*tp_basicsize*/
-		0,                          /*tp_itemsize*/
-		/* methods */
-		0,    /*tp_dealloc*/
-		0,                          /*tp_print*/
-		(getattrfunc)0,             /*tp_getattr*/
-		0,                          /*tp_setattr*/
-		0,                          /*tp_reserved*/
-		0,                          /*tp_repr*/
-		0,                          /*tp_as_number*/
-		0,                          /*tp_as_sequence*/
-		0,                          /*tp_as_mapping*/
-		0,                          /*tp_hash*/
-		0,                          /*tp_call*/
-		0,                          /*tp_str*/
-		0,                          /*tp_getattro*/
-		0,                          /*tp_setattro*/
-		0,                          /*tp_as_buffer*/
-		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
-		0,                          /*tp_doc*/
-		0,                          /*tp_traverse*/
-		0,                          /*tp_clear*/
-		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistofnset*/
-		0,                          /*tp_iter*/
-		0,                          /*tp_iternext*/
-		ChargesByMonth_methods,         /*tp_methods*/
-		0,                          /*tp_members*/
-		ChargesByMonth_getset,          /*tp_getset*/
-		0,                          /*tp_base*/
-		0,                          /*tp_dict*/
-		0,                          /*tp_descr_get*/
-		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictofnset*/
-		0,                          /*tp_init*/
-		0,                          /*tp_alloc*/
-		0,             /*tp_new*/
-		0,                          /*tp_free*/
-		0,                          /*tp_is_gc*/
-};
-
-
-/*
- * Monthly Group
- */ 
-
-static PyTypeObject Monthly_Type;
-
-static PyObject *
-Monthly_new(SAM_Merchantplant data_ptr)
-{
-	PyObject* new_obj = Monthly_Type.tp_alloc(&Monthly_Type,0);
-
-	VarGroupObject* Monthly_obj = (VarGroupObject*)new_obj;
-
-	Monthly_obj->data_ptr = (SAM_table)data_ptr;
-
-	return new_obj;
-}
-
-/* Monthly methods */
-
-static PyObject *
-Monthly_assign(VarGroupObject *self, PyObject *args)
-{
-	PyObject* dict;
-	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
-		return NULL;
-	}
-
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Merchantplant", "Monthly")){
-		return NULL;
-	}
-
-	Py_INCREF(Py_None);
-	return Py_None;
-}
-
-static PyObject *
-Monthly_replace(VarGroupObject *self, PyObject *args)
-{
-	PyObject* dict;
-	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
-		return NULL;
-	}
-	PyTypeObject* tp = &Monthly_Type;
-
-	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Merchantplant", "Monthly")){
-		return NULL;
-	}
-
-	Py_INCREF(Py_None);
-	return Py_None;
-}
-
-static PyObject *
-Monthly_export(VarGroupObject *self, PyObject *args)
-{
-	PyTypeObject* tp = &Monthly_Type;
-	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
-	return dict;
-}
-
-static PyMethodDef Monthly_methods[] = {
-		{"assign",            (PyCFunction)Monthly_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Monthly_vals = { var: val, ...}``")},
-		{"replace",            (PyCFunction)Monthly_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Monthly_vals = { var: val, ...}``")},
-		{"export",            (PyCFunction)Monthly_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
-		{NULL,              NULL}           /* sentinel */
-};
-
-static PyObject *
-Monthly_get_year1_monthly_ec_charge_gross_with_system(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Merchantplant_Monthly_year1_monthly_ec_charge_gross_with_system_aget, self->data_ptr);
-}
-
-static int
-Monthly_set_year1_monthly_ec_charge_gross_with_system(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_Merchantplant_Monthly_year1_monthly_ec_charge_gross_with_system_aset, self->data_ptr);
-}
-
-static PyObject *
-Monthly_get_year1_monthly_electricity_to_grid(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Merchantplant_Monthly_year1_monthly_electricity_to_grid_aget, self->data_ptr);
-}
-
-static int
-Monthly_set_year1_monthly_electricity_to_grid(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_Merchantplant_Monthly_year1_monthly_electricity_to_grid_aset, self->data_ptr);
-}
-
-static PyGetSetDef Monthly_getset[] = {
-{"year1_monthly_ec_charge_gross_with_system", (getter)Monthly_get_year1_monthly_ec_charge_gross_with_system,(setter)Monthly_set_year1_monthly_ec_charge_gross_with_system,
+{"year1_monthly_ec_charge_gross_with_system", (getter)LCOS_get_year1_monthly_ec_charge_gross_with_system,(setter)LCOS_set_year1_monthly_ec_charge_gross_with_system,
 	PyDoc_STR("*sequence*: Energy charge with system before credits [$/mo]\n\n*Constraints*: LENGTH=12"),
  	NULL},
-{"year1_monthly_electricity_to_grid", (getter)Monthly_get_year1_monthly_electricity_to_grid,(setter)Monthly_set_year1_monthly_electricity_to_grid,
+{"year1_monthly_ec_charge_with_system", (getter)LCOS_get_year1_monthly_ec_charge_with_system,(setter)LCOS_set_year1_monthly_ec_charge_with_system,
+	PyDoc_STR("*sequence*: Energy charge with system [$]"),
+ 	NULL},
+{"year1_monthly_electricity_to_grid", (getter)LCOS_get_year1_monthly_electricity_to_grid,(setter)LCOS_set_year1_monthly_electricity_to_grid,
 	PyDoc_STR("*sequence*: Electricity to/from grid [kWh/mo]\n\n*Constraints*: LENGTH=12"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
 
-static PyTypeObject Monthly_Type = {
+static PyTypeObject LCOS_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"Merchantplant.Monthly",             /*tp_name*/
+		"Merchantplant.LCOS",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -5990,9 +6001,9 @@ static PyTypeObject Monthly_Type = {
 		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
-		Monthly_methods,         /*tp_methods*/
+		LCOS_methods,         /*tp_methods*/
 		0,                          /*tp_members*/
-		Monthly_getset,          /*tp_getset*/
+		LCOS_getset,          /*tp_getset*/
 		0,                          /*tp_base*/
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
@@ -6329,12 +6340,6 @@ static PyObject *
 Outputs_get_cf_annual_discharge_lcos(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Merchantplant_Outputs_cf_annual_discharge_lcos_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_batt_replacement_cost(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Merchantplant_Outputs_cf_batt_replacement_cost_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -9263,9 +9268,6 @@ static PyGetSetDef Outputs_getset[] = {
 {"cf_annual_discharge_lcos", (getter)Outputs_get_cf_annual_discharge_lcos,(setter)0,
 	PyDoc_STR("*sequence*: Annual storage discharge [kWh]"),
  	NULL},
-{"cf_batt_replacement_cost", (getter)Outputs_get_cf_batt_replacement_cost,(setter)0,
-	PyDoc_STR("*sequence*: Annual cost of battery replacements [$]"),
- 	NULL},
 {"cf_battery_replacement_cost", (getter)Outputs_get_cf_battery_replacement_cost,(setter)0,
 	PyDoc_STR("*sequence*: Battery replacement cost [$]"),
  	NULL},
@@ -10814,17 +10816,9 @@ newMerchantplantObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "CapacityPayments", CapacityPayments_obj);
 	Py_DECREF(CapacityPayments_obj);
 
-	PyObject* Battery_obj = Battery_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "Battery", Battery_obj);
-	Py_DECREF(Battery_obj);
-
-	PyObject* ChargesByMonth_obj = ChargesByMonth_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "ChargesByMonth", ChargesByMonth_obj);
-	Py_DECREF(ChargesByMonth_obj);
-
-	PyObject* Monthly_obj = Monthly_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "Monthly", Monthly_obj);
-	Py_DECREF(Monthly_obj);
+	PyObject* LCOS_obj = LCOS_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "LCOS", LCOS_obj);
+	Py_DECREF(LCOS_obj);
 
 	PyObject* GridLimits_obj = GridLimits_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "GridLimits", GridLimits_obj);
@@ -11196,26 +11190,12 @@ MerchantplantModule_exec(PyObject *m)
 				(PyObject*)&CapacityPayments_Type);
 	Py_DECREF(&CapacityPayments_Type);
 
-	/// Add the Battery type object to Merchantplant_Type
-	if (PyType_Ready(&Battery_Type) < 0) { goto fail; }
+	/// Add the LCOS type object to Merchantplant_Type
+	if (PyType_Ready(&LCOS_Type) < 0) { goto fail; }
 	PyDict_SetItemString(Merchantplant_Type.tp_dict,
-				"Battery",
-				(PyObject*)&Battery_Type);
-	Py_DECREF(&Battery_Type);
-
-	/// Add the ChargesByMonth type object to Merchantplant_Type
-	if (PyType_Ready(&ChargesByMonth_Type) < 0) { goto fail; }
-	PyDict_SetItemString(Merchantplant_Type.tp_dict,
-				"ChargesByMonth",
-				(PyObject*)&ChargesByMonth_Type);
-	Py_DECREF(&ChargesByMonth_Type);
-
-	/// Add the Monthly type object to Merchantplant_Type
-	if (PyType_Ready(&Monthly_Type) < 0) { goto fail; }
-	PyDict_SetItemString(Merchantplant_Type.tp_dict,
-				"Monthly",
-				(PyObject*)&Monthly_Type);
-	Py_DECREF(&Monthly_Type);
+				"LCOS",
+				(PyObject*)&LCOS_Type);
+	Py_DECREF(&LCOS_Type);
 
 	/// Add the GridLimits type object to Merchantplant_Type
 	if (PyType_Ready(&GridLimits_Type) < 0) { goto fail; }

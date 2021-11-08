@@ -1,9 +1,9 @@
-.. _Tcsdish:
+.. _Pvwattsv8:
 
-Tcsdish
+Pvwattsv8
 ***********************************
 
-Wrapper for SAM Simulation Core model: `cmod_tcsdish.cpp <https://github.com/NREL/ssc/blob/develop/ssc/cmod_tcsdish.cpp>`_
+Wrapper for SAM Simulation Core model: `cmod_pvwattsv8.cpp <https://github.com/NREL/ssc/blob/develop/ssc/cmod_pvwattsv8.cpp>`_
 
 Input Consistency Warning
 ==================================
@@ -21,62 +21,44 @@ Creating an Instance
 
 Refer to the :ref:`Initializing a Model <initializing>` page for details on the different ways to create an instance of a PySAM class.
 
-**Tcsdish model description**
+**Pvwattsv8 model description**
 
-.. automodule:: PySAM.Tcsdish
+.. automodule:: PySAM.Pvwattsv8
 	:members:
 
 Functions
 ===================================
 
-.. autoclass:: PySAM.Tcsdish.Tcsdish
+.. autoclass:: PySAM.Pvwattsv8.Pvwattsv8
 	:members:
 
-Weather Group
+SolarResource Group
 ======================================================
 
-.. autoclass:: PySAM.Tcsdish.Tcsdish.Weather
+.. autoclass:: PySAM.Pvwattsv8.Pvwattsv8.SolarResource
 	:members:
 
-Dish Group
+Lifetime Group
 ======================================================
 
-.. autoclass:: PySAM.Tcsdish.Tcsdish.Dish
+.. autoclass:: PySAM.Pvwattsv8.Pvwattsv8.Lifetime
 	:members:
 
-Type295 Group
+SystemDesign Group
 ======================================================
 
-.. autoclass:: PySAM.Tcsdish.Tcsdish.Type295
-	:members:
-
-Type296 Group
-======================================================
-
-.. autoclass:: PySAM.Tcsdish.Tcsdish.Type296
-	:members:
-
-Type297 Group
-======================================================
-
-.. autoclass:: PySAM.Tcsdish.Tcsdish.Type297
-	:members:
-
-Type298 Group
-======================================================
-
-.. autoclass:: PySAM.Tcsdish.Tcsdish.Type298
+.. autoclass:: PySAM.Pvwattsv8.Pvwattsv8.SystemDesign
 	:members:
 
 AdjustmentFactors Group
 ======================================================
 
-.. autoclass:: PySAM.Tcsdish.Tcsdish.AdjustmentFactors
+.. autoclass:: PySAM.Pvwattsv8.Pvwattsv8.AdjustmentFactors
 	:members:
 
 Outputs Group
 ======================================================
 
-.. autoclass:: PySAM.Tcsdish.Tcsdish.Outputs
+.. autoclass:: PySAM.Pvwattsv8.Pvwattsv8.Outputs
 	:members:
 

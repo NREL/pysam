@@ -215,14 +215,14 @@ static PyMethodDef Outputs_methods[] = {
 };
 
 static PyObject *
-Outputs_get_W_dot_fossil(VarGroupObject *self, void *closure)
+Outputs_get_udpc_table_out(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TestUdPowerCycle_Outputs_W_dot_fossil_nget, self->data_ptr);
+	return PySAM_matrix_getter(SAM_TestUdPowerCycle_Outputs_udpc_table_out_mget, self->data_ptr);
 }
 
 static PyGetSetDef Outputs_getset[] = {
-{"W_dot_fossil", (getter)Outputs_get_W_dot_fossil,(setter)0,
-	PyDoc_STR("*float*: Electric output with no solar contribution [MWe]"),
+{"udpc_table_out", (getter)Outputs_get_udpc_table_out,(setter)0,
+	PyDoc_STR("*sequence[sequence]*: udpc table defined in cmod"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
