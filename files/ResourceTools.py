@@ -8,6 +8,7 @@ import requests
 import copy
 from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.util.retry import Retry
+import certifi
 
 import json
 
@@ -526,7 +527,7 @@ class FetchResourceFiles():
             data_query_url = "wtk-download.csv?api_key={}&wkt=POINT({}+{})&attributes=windspeed_{}m,winddirection_{}m,temperature_{}m,pressure_{}m&names={}&utc=false&interval={}&email={}".format(
                 self.nrel_api_key, lon, lat, self.resource_height, self.resource_height, self.resource_height, 100, self.resource_year, self.resource_interval_min, self.nrel_api_email)
             data_url = data_base_url + data_query_url
-            data_response = retry_session.get(data_url)
+            data_response = retry_session.get(data_url, verify=certifi.where())
 
             if data_response.ok:
                 # --- Convert response to string, read as pandas df, write to csv ---
