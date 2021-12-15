@@ -453,7 +453,7 @@ class FetchResourceFiles():
             lookup_base_url = 'https://developer.nrel.gov/api/nsrdb/v2/solar/'
             lookup_query_url = "nsrdb-data-query.json?api_key={}&wkt=POINT({}%20{})".format(self.nrel_api_key, lon, lat)
             lookup_url = lookup_base_url + lookup_query_url
-            lookup_response = retry_session.get(lookup_url)
+            lookup_response = retry_session.get(lookup_url, verify=certifi.where())
 
             if lookup_response.ok:
                 lookup_json = lookup_response.json()
@@ -477,7 +477,7 @@ class FetchResourceFiles():
                 # --- Get data ---
                 if ok:
                     print(data_url)
-                    data_response = retry_session.get(data_url)
+                    data_response = retry_session.get(data_url, verify=certifi.where())
                     if data_response.ok:
                         # --- Convert response to string, read as pandas df, write to csv ---
                         print('Downloading file.')
@@ -487,8 +487,11 @@ class FetchResourceFiles():
                         print('Success! File downloaded to {}.'.format(file_path))
                         return file_path
                     else:
-                        data_response_json = data_response.json()
-                        print( 'Request failed for {}\n{}'.format(data_url,data_response_json['errors'][0]))
+                        try:
+                            error_str = data_response.json()
+                        except:
+                            error_str = data_response.content.decode("utf-8")
+                        print(f"Request failed for {data_url}\n{error_str}")
                         return
                 else:
                     print('Failed to find URL for resource_type = {}, resource_year = {}, resource_inverval_min = {}'.format(self.resource_type,self.resource_year,self.resource_interval_min))
@@ -537,8 +540,11 @@ class FetchResourceFiles():
                 print('Success! File downloaded to {}.'.format(file_path))
                 return file_path
             else:
-                data_response_json = data_response.json()
-                print('Unable to download file from URL {}.\nMessage from server: {}.'.format(data_url,data_response_json['errors'][0]))
+                try:
+                    error_str = data_response.json()
+                except:
+                    error_str = data_response.content.decode("utf-8")
+                print('Unable to download file from URL {}.\nMessage from server: {}.'.format(data_url, error_str))
                 return
 
     def fetch(self, points):
