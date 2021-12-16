@@ -312,7 +312,9 @@ class FetchResourceFiles():
                  resource_year='tmy',
                  resource_interval_min=60,
                  resource_height=100,
-                 resource_dir=None):
+                 resource_dir=None,
+                 verbose=True):
+        self.verbose = verbose
 
         self.tech = tech
         self.nrel_api_key = nrel_api_key
@@ -444,10 +446,12 @@ class FetchResourceFiles():
 
         # --- See if file path already exists ---
         if os.path.exists(file_path):
-            print('File already exists. Skipping download: {}'.format(file_path))
+            if self.verbose:
+                print('File already exists. Skipping download: {}'.format(file_path))
             return file_path  # file already exists, just return path...
         else:
-            print("Getting list of available NSRDB files for {}, {}.".format(lat, lon))
+            if self.verbose:
+                print("Getting list of available NSRDB files for {}, {}.".format(lat, lon))
 
             # --- Find url for closest point ---
             lookup_base_url = 'https://developer.nrel.gov/api/nsrdb/v2/solar/'
@@ -459,7 +463,8 @@ class FetchResourceFiles():
                 lookup_json = lookup_response.json()
                 with open('{}/nsrdb_data_query_response_{}_{}.json'.format(self.SAM_resource_dir, lat, lon), 'w') as outfile:
                     json.dump(lookup_json, outfile)
-                    print('List of available data saved to {}.'.format(outfile.name))
+                    if self.verbose:
+                        print('List of available data saved to {}.'.format(outfile.name))
                 outputs = lookup_json['outputs']
                 if len(outputs) < 1:
                     print('No URLS available for {}, {}.'.format(lat, lon))
@@ -476,15 +481,18 @@ class FetchResourceFiles():
 
                 # --- Get data ---
                 if ok:
-                    print(data_url)
+                    if self.verbose:
+                        print(data_url)
                     data_response = retry_session.get(data_url, verify=certifi.where())
                     if data_response.ok:
                         # --- Convert response to string, read as pandas df, write to csv ---
-                        print('Downloading file.')
+                        if self.verbose:
+                            print('Downloading file.')
                         csv = io.StringIO(data_response.text)
                         df = pd.read_csv(csv)
                         df.to_csv(file_path, index=False)
-                        print('Success! File downloaded to {}.'.format(file_path))
+                        if self.verbose:
+                            print('Success! File downloaded to {}.'.format(file_path))
                         return file_path
                     else:
                         try:
@@ -519,11 +527,13 @@ class FetchResourceFiles():
 
         # --- See if file path already exists ---
         if os.path.exists(file_path):
-            print('File already exists, skipping download: {}'.format(file_path))
+            if self.verbose:
+                print('File already exists, skipping download: {}'.format(file_path))
             return file_path
 
         else:
-            print("Downloading file from WIND Toolkit for {}, {}.".format(lat, lon))
+            if self.verbose:
+                print("Downloading file from WIND Toolkit for {}, {}.".format(lat, lon))
 
             # --- Find url for closest point ---
             data_base_url = 'https://developer.nrel.gov/api/wind-toolkit/v2/wind/'
@@ -537,7 +547,8 @@ class FetchResourceFiles():
                 raw_csv = io.StringIO(data_response.text)
                 df = self._csv_to_srw(raw_csv)
                 df.to_csv(file_path, index=False, header=False, na_rep='')
-                print('Success! File downloaded to {}.'.format(file_path))
+                if self.verbose:
+                    print('Success! File downloaded to {}.'.format(file_path))
                 return file_path
             else:
                 try:
@@ -553,8 +564,8 @@ class FetchResourceFiles():
 
         :param iterable points: Iterable of lon/lat tuples, i.e. Shapely Points.
         """
-
-        print('\nStarting data download for {} using {} thread workers.'.format(self.tech, self.workers))
+        if self.verbose:
+            print('\nStarting data download for {} using {} thread workers.'.format(self.tech, self.workers))
 
         # --- Initialize Session w/ retries ---
         if self.workers > 1:
