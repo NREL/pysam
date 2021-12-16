@@ -107,6 +107,8 @@ class SystemDesign(object):
 	subarray1_mppt_input = float
 	subarray1_nstrings = float
 	subarray1_rotlim = float
+	subarray1_slope_azm = float
+	subarray1_slope_tilt = float
 	subarray1_tilt = float
 	subarray1_tilt_eq_lat = float
 	subarray1_track_mode = float
@@ -119,6 +121,8 @@ class SystemDesign(object):
 	subarray2_mppt_input = float
 	subarray2_nstrings = float
 	subarray2_rotlim = float
+	subarray2_slope_azm = float
+	subarray2_slope_tilt = float
 	subarray2_tilt = float
 	subarray2_tilt_eq_lat = float
 	subarray2_track_mode = float
@@ -131,6 +135,8 @@ class SystemDesign(object):
 	subarray3_mppt_input = float
 	subarray3_nstrings = float
 	subarray3_rotlim = float
+	subarray3_slope_azm = float
+	subarray3_slope_tilt = float
 	subarray3_tilt = float
 	subarray3_tilt_eq_lat = float
 	subarray3_track_mode = float
@@ -143,6 +149,8 @@ class SystemDesign(object):
 	subarray4_mppt_input = float
 	subarray4_nstrings = float
 	subarray4_rotlim = float
+	subarray4_slope_azm = float
+	subarray4_slope_tilt = float
 	subarray4_tilt = float
 	subarray4_tilt_eq_lat = float
 	subarray4_track_mode = float
@@ -494,7 +502,11 @@ class MermoudLejeuneSingleDiodeModel(object):
 	mlm_Width = float
 	mlm_alpha_isc = float
 	mlm_beta_voc_spec = float
+	mlm_bifacial_ground_clearance_height = float
+	mlm_bifacial_transmission_factor = float
+	mlm_bifaciality = float
 	mlm_groundRelfectionFraction = float
+	mlm_is_bifacial = float
 	mlm_mu_n = float
 	mlm_n_0 = float
 
@@ -701,6 +713,7 @@ class BatterySystem(object):
 	batt_replacement_schedule_percent = tuple
 	batt_surface_area = float
 	en_batt = float
+	en_standalone_batt = float
 	om_replacement_cost1 = tuple
 
 
@@ -785,6 +798,7 @@ class BatteryDispatch(object):
 	batt_custom_dispatch = tuple
 	batt_cycle_cost = tuple
 	batt_cycle_cost_choice = float
+	batt_dispatch_auto_btm_can_discharge_to_grid = float
 	batt_dispatch_auto_can_charge = float
 	batt_dispatch_auto_can_clipcharge = float
 	batt_dispatch_auto_can_fuelcellcharge = float
@@ -818,6 +832,7 @@ class BatteryDispatch(object):
 	batt_target_choice = float
 	batt_target_power = tuple
 	batt_target_power_monthly = tuple
+	dispatch_manual_btm_discharge_to_grid = tuple
 	dispatch_manual_charge = tuple
 	dispatch_manual_discharge = tuple
 	dispatch_manual_fuelcellcharge = tuple
@@ -900,20 +915,21 @@ class ElectricityRates(object):
 
 	rate_escalation = tuple
 	ur_annual_min_charge = float
+	ur_billing_demand_lookback_percentages = tuple
+	ur_billing_demand_lookback_period = float
+	ur_billing_demand_minimum = float
+	ur_dc_billing_demand_periods = tuple
 	ur_dc_enable = float
 	ur_dc_flat_mat = tuple
 	ur_dc_sched_weekday = tuple
 	ur_dc_sched_weekend = tuple
 	ur_dc_tou_mat = tuple
-	ur_ec_billing_demand_lookback_percentages = tuple
-	ur_ec_billing_demand_lookback_period = float
-	ur_ec_billing_demand_minimum = float
-	ur_ec_enable_billing_demand = float
 	ur_ec_sched_weekday = tuple
 	ur_ec_sched_weekend = tuple
 	ur_ec_tou_mat = tuple
 	ur_en_ts_buy_rate = float
 	ur_en_ts_sell_rate = float
+	ur_enable_billing_demand = float
 	ur_metering_option = float
 	ur_monthly_fixed_charge = float
 	ur_monthly_min_charge = float

@@ -126,6 +126,54 @@ ElectricityRates_set_ur_annual_min_charge(VarGroupObject *self, PyObject *value,
 }
 
 static PyObject *
+ElectricityRates_get_ur_billing_demand_lookback_percentages(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Utilityrate5_ElectricityRates_ur_billing_demand_lookback_percentages_mget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_billing_demand_lookback_percentages(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Utilityrate5_ElectricityRates_ur_billing_demand_lookback_percentages_mset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_billing_demand_lookback_period(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Utilityrate5_ElectricityRates_ur_billing_demand_lookback_period_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_billing_demand_lookback_period(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Utilityrate5_ElectricityRates_ur_billing_demand_lookback_period_nset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_billing_demand_minimum(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Utilityrate5_ElectricityRates_ur_billing_demand_minimum_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_billing_demand_minimum(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Utilityrate5_ElectricityRates_ur_billing_demand_minimum_nset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_dc_billing_demand_periods(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Utilityrate5_ElectricityRates_ur_dc_billing_demand_periods_mget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_dc_billing_demand_periods(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Utilityrate5_ElectricityRates_ur_dc_billing_demand_periods_mset, self->data_ptr);
+}
+
+static PyObject *
 ElectricityRates_get_ur_dc_enable(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Utilityrate5_ElectricityRates_ur_dc_enable_nget, self->data_ptr);
@@ -186,54 +234,6 @@ ElectricityRates_set_ur_dc_tou_mat(VarGroupObject *self, PyObject *value, void *
 }
 
 static PyObject *
-ElectricityRates_get_ur_ec_billing_demand_lookback_percentages(VarGroupObject *self, void *closure)
-{
-	return PySAM_matrix_getter(SAM_Utilityrate5_ElectricityRates_ur_ec_billing_demand_lookback_percentages_mget, self->data_ptr);
-}
-
-static int
-ElectricityRates_set_ur_ec_billing_demand_lookback_percentages(VarGroupObject *self, PyObject *value, void *closure)
-{
-		return PySAM_matrix_setter(value, SAM_Utilityrate5_ElectricityRates_ur_ec_billing_demand_lookback_percentages_mset, self->data_ptr);
-}
-
-static PyObject *
-ElectricityRates_get_ur_ec_billing_demand_lookback_period(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Utilityrate5_ElectricityRates_ur_ec_billing_demand_lookback_period_nget, self->data_ptr);
-}
-
-static int
-ElectricityRates_set_ur_ec_billing_demand_lookback_period(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Utilityrate5_ElectricityRates_ur_ec_billing_demand_lookback_period_nset, self->data_ptr);
-}
-
-static PyObject *
-ElectricityRates_get_ur_ec_billing_demand_minimum(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Utilityrate5_ElectricityRates_ur_ec_billing_demand_minimum_nget, self->data_ptr);
-}
-
-static int
-ElectricityRates_set_ur_ec_billing_demand_minimum(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Utilityrate5_ElectricityRates_ur_ec_billing_demand_minimum_nset, self->data_ptr);
-}
-
-static PyObject *
-ElectricityRates_get_ur_ec_enable_billing_demand(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Utilityrate5_ElectricityRates_ur_ec_enable_billing_demand_nget, self->data_ptr);
-}
-
-static int
-ElectricityRates_set_ur_ec_enable_billing_demand(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Utilityrate5_ElectricityRates_ur_ec_enable_billing_demand_nset, self->data_ptr);
-}
-
-static PyObject *
 ElectricityRates_get_ur_ec_sched_weekday(VarGroupObject *self, void *closure)
 {
 	return PySAM_matrix_getter(SAM_Utilityrate5_ElectricityRates_ur_ec_sched_weekday_mget, self->data_ptr);
@@ -291,6 +291,18 @@ static int
 ElectricityRates_set_ur_en_ts_sell_rate(VarGroupObject *self, PyObject *value, void *closure)
 {
 	return PySAM_double_setter(value, SAM_Utilityrate5_ElectricityRates_ur_en_ts_sell_rate_nset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_enable_billing_demand(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Utilityrate5_ElectricityRates_ur_enable_billing_demand_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_enable_billing_demand(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Utilityrate5_ElectricityRates_ur_enable_billing_demand_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -426,6 +438,18 @@ static PyGetSetDef ElectricityRates_getset[] = {
 {"ur_annual_min_charge", (getter)ElectricityRates_get_ur_annual_min_charge,(setter)ElectricityRates_set_ur_annual_min_charge,
 	PyDoc_STR("*float*: Annual minimum charge [$]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
+{"ur_billing_demand_lookback_percentages", (getter)ElectricityRates_get_ur_billing_demand_lookback_percentages,(setter)ElectricityRates_set_ur_billing_demand_lookback_percentages,
+	PyDoc_STR("*sequence[sequence]*: Billing demand lookback percentages by month and consider actual peak demand\n\n*Info*: 12x2\n\n*Required*: True if ur_enable_billing_demand=1"),
+ 	NULL},
+{"ur_billing_demand_lookback_period", (getter)ElectricityRates_get_ur_billing_demand_lookback_period,(setter)ElectricityRates_set_ur_billing_demand_lookback_period,
+	PyDoc_STR("*float*: Billing demand lookback period [mn]\n\n*Constraints*: INTEGER,MIN=0,MAX=12\n\n*Required*: True if ur_enable_billing_demand=1"),
+ 	NULL},
+{"ur_billing_demand_minimum", (getter)ElectricityRates_get_ur_billing_demand_minimum,(setter)ElectricityRates_set_ur_billing_demand_minimum,
+	PyDoc_STR("*float*: Minimum billing demand\n\n*Required*: True if ur_enable_billing_demand=1"),
+ 	NULL},
+{"ur_dc_billing_demand_periods", (getter)ElectricityRates_get_ur_dc_billing_demand_periods,(setter)ElectricityRates_set_ur_dc_billing_demand_periods,
+	PyDoc_STR("*sequence[sequence]*: Billing demand applicability to a given demand charge time of use period\n\n*Required*: True if ur_enable_billing_demand=1"),
+ 	NULL},
 {"ur_dc_enable", (getter)ElectricityRates_get_ur_dc_enable,(setter)ElectricityRates_set_ur_dc_enable,
 	PyDoc_STR("*float*: Enable demand charge [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
@@ -441,18 +465,6 @@ static PyGetSetDef ElectricityRates_getset[] = {
 {"ur_dc_tou_mat", (getter)ElectricityRates_get_ur_dc_tou_mat,(setter)ElectricityRates_set_ur_dc_tou_mat,
 	PyDoc_STR("*sequence[sequence]*: Demand rates (TOU) table\n\n*Required*: True if ur_dc_enable=1"),
  	NULL},
-{"ur_ec_billing_demand_lookback_percentages", (getter)ElectricityRates_get_ur_ec_billing_demand_lookback_percentages,(setter)ElectricityRates_set_ur_ec_billing_demand_lookback_percentages,
-	PyDoc_STR("*sequence[sequence]*: Billing demand lookback percentages by month and consider actual peak demand\n\n*Info*: 12x2\n\n*Required*: True if ur_ec_enable_billing_demand=1"),
- 	NULL},
-{"ur_ec_billing_demand_lookback_period", (getter)ElectricityRates_get_ur_ec_billing_demand_lookback_period,(setter)ElectricityRates_set_ur_ec_billing_demand_lookback_period,
-	PyDoc_STR("*float*: Billing demand lookback period [mn]\n\n*Constraints*: INTEGER,MIN=0,MAX=12\n\n*Required*: True if ur_ec_enable_billing_demand=1"),
- 	NULL},
-{"ur_ec_billing_demand_minimum", (getter)ElectricityRates_get_ur_ec_billing_demand_minimum,(setter)ElectricityRates_set_ur_ec_billing_demand_minimum,
-	PyDoc_STR("*float*: Minimum billing demand\n\n*Required*: True if ur_ec_enable_billing_demand=1"),
- 	NULL},
-{"ur_ec_enable_billing_demand", (getter)ElectricityRates_get_ur_ec_enable_billing_demand,(setter)ElectricityRates_set_ur_ec_enable_billing_demand,
-	PyDoc_STR("*float*: Enable billing demand for energy charges [0/1]\n\n*Options*: 0=disable,1=enable\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: If not provided, assumed to be 0"),
- 	NULL},
 {"ur_ec_sched_weekday", (getter)ElectricityRates_get_ur_ec_sched_weekday,(setter)ElectricityRates_set_ur_ec_sched_weekday,
 	PyDoc_STR("*sequence[sequence]*: Energy charge weekday schedule\n\n*Info*: 12x24"),
  	NULL},
@@ -467,6 +479,9 @@ static PyGetSetDef ElectricityRates_getset[] = {
  	NULL},
 {"ur_en_ts_sell_rate", (getter)ElectricityRates_get_ur_en_ts_sell_rate,(setter)ElectricityRates_set_ur_en_ts_sell_rate,
 	PyDoc_STR("*float*: Enable time step sell rates [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"ur_enable_billing_demand", (getter)ElectricityRates_get_ur_enable_billing_demand,(setter)ElectricityRates_set_ur_enable_billing_demand,
+	PyDoc_STR("*float*: Enable billing demand ratchets [0/1]\n\n*Options*: 0=disable,1=enable\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"ur_metering_option", (getter)ElectricityRates_get_ur_metering_option,(setter)ElectricityRates_set_ur_metering_option,
 	PyDoc_STR("*float*: Metering options [0=net energy metering,1=net energy metering with $ credits,2=net billing,3=net billing with carryover to next month,4=buy all - sell all]\n\n*Info*: Net metering monthly excess\n\n*Constraints*: INTEGER,MIN=0,MAX=4\n\n*Required*: If not provided, assumed to be 0"),
@@ -496,7 +511,7 @@ static PyGetSetDef ElectricityRates_getset[] = {
 	PyDoc_STR("*sequence*: Time step sell rates [0/1]"),
  	NULL},
 {"ur_yearzero_usage_peaks", (getter)ElectricityRates_get_ur_yearzero_usage_peaks,(setter)ElectricityRates_set_ur_yearzero_usage_peaks,
-	PyDoc_STR("*sequence*: Peak usage by month for year zero\n\n*Info*: 12\n\n*Required*: True if ur_ec_enable_billing_demand=1"),
+	PyDoc_STR("*sequence*: Peak usage by month for year zero\n\n*Info*: 12\n\n*Required*: True if ur_enable_billing_demand=1"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1989,10 +2004,10 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Bill load (year 1) [kWh]"),
  	NULL},
 {"billing_demand_w_sys_ym", (getter)Outputs_get_billing_demand_w_sys_ym,(setter)0,
-	PyDoc_STR("*sequence[sequence]*: Billing demand for kWh/kW rates with system [kW]"),
+	PyDoc_STR("*sequence[sequence]*: Billing demand with system [kW]"),
  	NULL},
 {"billing_demand_wo_sys_ym", (getter)Outputs_get_billing_demand_wo_sys_ym,(setter)0,
-	PyDoc_STR("*sequence[sequence]*: Billing demand for kWh/kW rates without system [kW]"),
+	PyDoc_STR("*sequence[sequence]*: Billing demand without system [kW]"),
  	NULL},
 {"charge_w_sys_dc_fixed", (getter)Outputs_get_charge_w_sys_dc_fixed,(setter)0,
 	PyDoc_STR("*sequence*: Demand charge with system (flat) [$]"),
@@ -2295,10 +2310,10 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence[sequence]*: Electricity bill without system [$]"),
  	NULL},
 {"year1_billing_demand_w_sys", (getter)Outputs_get_year1_billing_demand_w_sys,(setter)0,
-	PyDoc_STR("*sequence*: Billing demand for kWh/kW rates with system [kW]"),
+	PyDoc_STR("*sequence*: Billing demand with system [kW]"),
  	NULL},
 {"year1_billing_demand_wo_sys", (getter)Outputs_get_year1_billing_demand_wo_sys,(setter)0,
-	PyDoc_STR("*sequence*: Billing demand for kWh/kW rates without system [kW]"),
+	PyDoc_STR("*sequence*: Billing demand without system [kW]"),
  	NULL},
 {"year1_electric_load", (getter)Outputs_get_year1_electric_load,(setter)0,
 	PyDoc_STR("*float*: Electricity load total (year 1) [kWh/yr]"),
@@ -2761,7 +2776,7 @@ static PyMethodDef Utilityrate5Module_methods[] = {
 				PyDoc_STR("new() -> Utilityrate5")},
 		{"default",             Utilityrate5_default,         METH_VARARGS,
 				PyDoc_STR("default(config) -> Utilityrate5\n\nUse default attributes\n"
-				"`config` options:\n\n- \"DSLFCommercial\"\n- \"EmpiricalTroughCommercial\"\n- \"FlatPlatePVCommercial\"\n- \"FlatPlatePVHostDeveloper\"\n- \"FlatPlatePVResidential\"\n- \"FlatPlatePVThirdParty\"\n- \"FuelCellCommercial\"\n- \"FuelCellSingleOwner\"\n- \"GenericBatteryCommercial\"\n- \"GenericBatteryHostDeveloper\"\n- \"GenericBatteryResidential\"\n- \"GenericBatterySingleOwner\"\n- \"GenericBatteryThirdParty\"\n- \"GenericCSPSystemCommercial\"\n- \"GenericSystemCommercial\"\n- \"GenericSystemHostDeveloper\"\n- \"GenericSystemResidential\"\n- \"GenericSystemThirdParty\"\n- \"MSLFCommercial\"\n- \"PVBatteryCommercial\"\n- \"PVBatteryHostDeveloper\"\n- \"PVBatteryResidential\"\n- \"PVBatterySingleOwner\"\n- \"PVBatteryThirdParty\"\n- \"PVWattsBatteryCommercial\"\n- \"PVWattsBatteryHostDeveloper\"\n- \"PVWattsBatteryResidential\"\n- \"PVWattsBatteryThirdParty\"\n- \"PVWattsCommercial\"\n- \"PVWattsHostDeveloper\"\n- \"PVWattsResidential\"\n- \"PVWattsThirdParty\"\n- \"SolarWaterHeatingCommercial\"\n- \"SolarWaterHeatingResidential\"\n- \"WindPowerCommercial\"\n- \"WindPowerResidential\"")},
+				"`config` options:\n\n- \"BiopowerAllEquityPartnershipFlip\"\n- \"BiopowerLeveragedPartnershipFlip\"\n- \"BiopowerMerchantPlant\"\n- \"BiopowerSaleLeaseback\"\n- \"BiopowerSingleOwner\"\n- \"DSLFAllEquityPartnershipFlip\"\n- \"DSLFCommercial\"\n- \"DSLFLeveragedPartnershipFlip\"\n- \"DSLFMerchantPlant\"\n- \"DSLFSaleLeaseback\"\n- \"DSLFSingleOwner\"\n- \"EmpiricalTroughAllEquityPartnershipFlip\"\n- \"EmpiricalTroughCommercial\"\n- \"EmpiricalTroughLeveragedPartnershipFlip\"\n- \"EmpiricalTroughMerchantPlant\"\n- \"EmpiricalTroughSaleLeaseback\"\n- \"EmpiricalTroughSingleOwner\"\n- \"FlatPlatePVAllEquityPartnershipFlip\"\n- \"FlatPlatePVCommercial\"\n- \"FlatPlatePVHostDeveloper\"\n- \"FlatPlatePVLeveragedPartnershipFlip\"\n- \"FlatPlatePVMerchantPlant\"\n- \"FlatPlatePVResidential\"\n- \"FlatPlatePVSaleLeaseback\"\n- \"FlatPlatePVSingleOwner\"\n- \"FlatPlatePVThirdParty\"\n- \"FuelCellCommercial\"\n- \"FuelCellSingleOwner\"\n- \"GenericBatteryAllEquityPartnershipFlip\"\n- \"GenericBatteryCommercial\"\n- \"GenericBatteryHostDeveloper\"\n- \"GenericBatteryLeveragedPartnershipFlip\"\n- \"GenericBatteryMerchantPlant\"\n- \"GenericBatteryResidential\"\n- \"GenericBatterySaleLeaseback\"\n- \"GenericBatterySingleOwner\"\n- \"GenericBatteryThirdParty\"\n- \"GenericCSPSystemAllEquityPartnershipFlip\"\n- \"GenericCSPSystemCommercial\"\n- \"GenericCSPSystemLeveragedPartnershipFlip\"\n- \"GenericCSPSystemMerchantPlant\"\n- \"GenericCSPSystemSaleLeaseback\"\n- \"GenericCSPSystemSingleOwner\"\n- \"GenericSystemAllEquityPartnershipFlip\"\n- \"GenericSystemCommercial\"\n- \"GenericSystemHostDeveloper\"\n- \"GenericSystemLeveragedPartnershipFlip\"\n- \"GenericSystemMerchantPlant\"\n- \"GenericSystemResidential\"\n- \"GenericSystemSaleLeaseback\"\n- \"GenericSystemSingleOwner\"\n- \"GenericSystemThirdParty\"\n- \"GeothermalPowerAllEquityPartnershipFlip\"\n- \"GeothermalPowerLeveragedPartnershipFlip\"\n- \"GeothermalPowerMerchantPlant\"\n- \"GeothermalPowerSaleLeaseback\"\n- \"GeothermalPowerSingleOwner\"\n- \"HighXConcentratingPVAllEquityPartnershipFlip\"\n- \"HighXConcentratingPVLeveragedPartnershipFlip\"\n- \"HighXConcentratingPVMerchantPlant\"\n- \"HighXConcentratingPVSaleLeaseback\"\n- \"HighXConcentratingPVSingleOwner\"\n- \"MSLFAllEquityPartnershipFlip\"\n- \"MSLFCommercial\"\n- \"MSLFLeveragedPartnershipFlip\"\n- \"MSLFMerchantPlant\"\n- \"MSLFSaleLeaseback\"\n- \"MSLFSingleOwner\"\n- \"MSPTAllEquityPartnershipFlip\"\n- \"MSPTLeveragedPartnershipFlip\"\n- \"MSPTMerchantPlant\"\n- \"MSPTSaleLeaseback\"\n- \"MSPTSingleOwner\"\n- \"PVBatteryAllEquityPartnershipFlip\"\n- \"PVBatteryCommercial\"\n- \"PVBatteryHostDeveloper\"\n- \"PVBatteryLeveragedPartnershipFlip\"\n- \"PVBatteryMerchantPlant\"\n- \"PVBatteryResidential\"\n- \"PVBatterySaleLeaseback\"\n- \"PVBatterySingleOwner\"\n- \"PVBatteryThirdParty\"\n- \"PVWattsBatteryCommercial\"\n- \"PVWattsBatteryHostDeveloper\"\n- \"PVWattsBatteryResidential\"\n- \"PVWattsBatteryThirdParty\"\n- \"PVWattsAllEquityPartnershipFlip\"\n- \"PVWattsCommercial\"\n- \"PVWattsHostDeveloper\"\n- \"PVWattsLeveragedPartnershipFlip\"\n- \"PVWattsMerchantPlant\"\n- \"PVWattsResidential\"\n- \"PVWattsSaleLeaseback\"\n- \"PVWattsSingleOwner\"\n- \"PVWattsThirdParty\"\n- \"PhysicalTroughAllEquityPartnershipFlip\"\n- \"PhysicalTroughLeveragedPartnershipFlip\"\n- \"PhysicalTroughMerchantPlant\"\n- \"PhysicalTroughSaleLeaseback\"\n- \"PhysicalTroughSingleOwner\"\n- \"SolarWaterHeatingCommercial\"\n- \"SolarWaterHeatingResidential\"\n- \"StandaloneBatteryAllEquityPartnershipFlip\"\n- \"StandaloneBatteryCommercial\"\n- \"StandaloneBatteryHostDeveloper\"\n- \"StandaloneBatteryLeveragedPartnershipFlip\"\n- \"StandaloneBatteryMerchantPlant\"\n- \"StandaloneBatteryResidential\"\n- \"StandaloneBatterySaleLeaseback\"\n- \"StandaloneBatterySingleOwner\"\n- \"StandaloneBatteryThirdParty\"\n- \"WindPowerAllEquityPartnershipFlip\"\n- \"WindPowerCommercial\"\n- \"WindPowerLeveragedPartnershipFlip\"\n- \"WindPowerMerchantPlant\"\n- \"WindPowerResidential\"\n- \"WindPowerSaleLeaseback\"\n- \"WindPowerSingleOwner\"")},
 		{"wrap",             Utilityrate5_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Utilityrate5\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   Utilityrate5_from_existing,        METH_VARARGS,

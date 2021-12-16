@@ -69,6 +69,22 @@ class SystemCosts(object):
 	om_replacement_cost_escal = float
 
 
+class LandLease(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> dict:
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
+	land_area = float
+	om_land_lease = tuple
+	om_land_lease_escal = float
+
+
 class Depreciation(object):
 	def assign(self): 
 		pass
@@ -343,6 +359,7 @@ class Outputs(object):
 	cf_fed_taxable_income_less_deductions = tuple
 	cf_federal_tax_frac = tuple
 	cf_insurance_expense = tuple
+	cf_land_lease_expense = tuple
 	cf_length = float
 	cf_net_salvage_value = tuple
 	cf_om_capacity_expense = tuple
@@ -494,6 +511,7 @@ class Ippppa(object):
 
 	FinancialParameters = FinancialParameters
 	SystemCosts = SystemCosts
+	LandLease = LandLease
 	Depreciation = Depreciation
 	TaxCreditIncentives = TaxCreditIncentives
 	PaymentIncentives = PaymentIncentives

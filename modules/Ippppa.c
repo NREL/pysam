@@ -926,6 +926,173 @@ static PyTypeObject SystemCosts_Type = {
 
 
 /*
+ * LandLease Group
+ */ 
+
+static PyTypeObject LandLease_Type;
+
+static PyObject *
+LandLease_new(SAM_Ippppa data_ptr)
+{
+	PyObject* new_obj = LandLease_Type.tp_alloc(&LandLease_Type,0);
+
+	VarGroupObject* LandLease_obj = (VarGroupObject*)new_obj;
+
+	LandLease_obj->data_ptr = (SAM_table)data_ptr;
+
+	return new_obj;
+}
+
+/* LandLease methods */
+
+static PyObject *
+LandLease_assign(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Ippppa", "LandLease")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+LandLease_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &LandLease_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Ippppa", "LandLease")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+LandLease_export(VarGroupObject *self, PyObject *args)
+{
+	PyTypeObject* tp = &LandLease_Type;
+	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
+	return dict;
+}
+
+static PyMethodDef LandLease_methods[] = {
+		{"assign",            (PyCFunction)LandLease_assign,  METH_VARARGS,
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``LandLease_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)LandLease_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``LandLease_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)LandLease_export,  METH_VARARGS,
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+		{NULL,              NULL}           /* sentinel */
+};
+
+static PyObject *
+LandLease_get_land_area(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Ippppa_LandLease_land_area_nget, self->data_ptr);
+}
+
+static int
+LandLease_set_land_area(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Ippppa_LandLease_land_area_nset, self->data_ptr);
+}
+
+static PyObject *
+LandLease_get_om_land_lease(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Ippppa_LandLease_om_land_lease_aget, self->data_ptr);
+}
+
+static int
+LandLease_set_om_land_lease(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Ippppa_LandLease_om_land_lease_aset, self->data_ptr);
+}
+
+static PyObject *
+LandLease_get_om_land_lease_escal(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Ippppa_LandLease_om_land_lease_escal_nget, self->data_ptr);
+}
+
+static int
+LandLease_set_om_land_lease_escal(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Ippppa_LandLease_om_land_lease_escal_nset, self->data_ptr);
+}
+
+static PyGetSetDef LandLease_getset[] = {
+{"land_area", (getter)LandLease_get_land_area,(setter)LandLease_set_land_area,
+	PyDoc_STR("*float*: Total land area [acres]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"om_land_lease", (getter)LandLease_get_om_land_lease,(setter)LandLease_set_om_land_lease,
+	PyDoc_STR("*sequence*: Land lease cost [$/acre]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"om_land_lease_escal", (getter)LandLease_get_om_land_lease_escal,(setter)LandLease_set_om_land_lease_escal,
+	PyDoc_STR("*float*: Land lease cost escalation [%/yr]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+	{NULL}  /* Sentinel */
+};
+
+static PyTypeObject LandLease_Type = {
+		/* The ob_type field must be initialized in the module init function
+		 * to be portable to Windows without using C++. */
+		PyVarObject_HEAD_INIT(NULL, 0)
+		"Ippppa.LandLease",             /*tp_name*/
+		sizeof(VarGroupObject),          /*tp_basicsize*/
+		0,                          /*tp_itemsize*/
+		/* methods */
+		0,    /*tp_dealloc*/
+		0,                          /*tp_print*/
+		(getattrfunc)0,             /*tp_getattr*/
+		0,                          /*tp_setattr*/
+		0,                          /*tp_reserved*/
+		0,                          /*tp_repr*/
+		0,                          /*tp_as_number*/
+		0,                          /*tp_as_sequence*/
+		0,                          /*tp_as_mapping*/
+		0,                          /*tp_hash*/
+		0,                          /*tp_call*/
+		0,                          /*tp_str*/
+		0,                          /*tp_getattro*/
+		0,                          /*tp_setattro*/
+		0,                          /*tp_as_buffer*/
+		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
+		0,                          /*tp_doc*/
+		0,                          /*tp_traverse*/
+		0,                          /*tp_clear*/
+		0,                          /*tp_richcompare*/
+		0,                          /*tp_weaklistofnset*/
+		0,                          /*tp_iter*/
+		0,                          /*tp_iternext*/
+		LandLease_methods,         /*tp_methods*/
+		0,                          /*tp_members*/
+		LandLease_getset,          /*tp_getset*/
+		0,                          /*tp_base*/
+		0,                          /*tp_dict*/
+		0,                          /*tp_descr_get*/
+		0,                          /*tp_descr_set*/
+		0,                          /*tp_dictofnset*/
+		0,                          /*tp_init*/
+		0,                          /*tp_alloc*/
+		0,             /*tp_new*/
+		0,                          /*tp_free*/
+		0,                          /*tp_is_gc*/
+};
+
+
+/*
  * Depreciation Group
  */ 
 
@@ -4110,6 +4277,12 @@ Outputs_get_cf_insurance_expense(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_cf_land_lease_expense(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Ippppa_Outputs_cf_land_lease_expense_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_cf_length(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Ippppa_Outputs_cf_length_nget, self->data_ptr);
@@ -5040,6 +5213,9 @@ static PyGetSetDef Outputs_getset[] = {
 {"cf_insurance_expense", (getter)Outputs_get_cf_insurance_expense,(setter)0,
 	PyDoc_STR("*sequence*: Insurance expense [$]"),
  	NULL},
+{"cf_land_lease_expense", (getter)Outputs_get_cf_land_lease_expense,(setter)0,
+	PyDoc_STR("*sequence*: Land lease expense [$]"),
+ 	NULL},
 {"cf_length", (getter)Outputs_get_cf_length,(setter)0,
 	PyDoc_STR("*float*: Number of periods in cashflow"),
  	NULL},
@@ -5486,6 +5662,10 @@ newIppppaObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "SystemCosts", SystemCosts_obj);
 	Py_DECREF(SystemCosts_obj);
 
+	PyObject* LandLease_obj = LandLease_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "LandLease", LandLease_obj);
+	Py_DECREF(LandLease_obj);
+
 	PyObject* Depreciation_obj = Depreciation_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Depreciation", Depreciation_obj);
 	Py_DECREF(Depreciation_obj);
@@ -5797,6 +5977,13 @@ IppppaModule_exec(PyObject *m)
 				"SystemCosts",
 				(PyObject*)&SystemCosts_Type);
 	Py_DECREF(&SystemCosts_Type);
+
+	/// Add the LandLease type object to Ippppa_Type
+	if (PyType_Ready(&LandLease_Type) < 0) { goto fail; }
+	PyDict_SetItemString(Ippppa_Type.tp_dict,
+				"LandLease",
+				(PyObject*)&LandLease_Type);
+	Py_DECREF(&LandLease_Type);
 
 	/// Add the Depreciation type object to Ippppa_Type
 	if (PyType_Ready(&Depreciation_Type) < 0) { goto fail; }

@@ -28,6 +28,8 @@ class IrradianceProcessor(object):
 	pressure = float
 	rotlim = float
 	sky_model = float
+	slope_azm = float
+	slope_tilt = float
 	tamb = float
 	tilt = float
 	track_mode = float

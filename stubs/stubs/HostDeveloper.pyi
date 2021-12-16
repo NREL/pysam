@@ -38,6 +38,8 @@ class FinancialParameters(object):
 	debt_option = float
 	debt_percent = float
 	dscr = float
+	dscr_limit_debt_fraction = float
+	dscr_maximum_debt_fraction = float
 	dscr_reserve_months = float
 	equip1_reserve_cost = float
 	equip1_reserve_freq = float
@@ -109,6 +111,22 @@ class SystemCosts(object):
 	om_production_escal = float
 	om_replacement_cost_escal = float
 	total_installed_cost = float
+
+
+class LandLease(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> dict:
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
+	land_area = float
+	om_land_lease = tuple
+	om_land_lease_escal = float
 
 
 class TaxCreditIncentives(object):
@@ -319,6 +337,40 @@ class Host(object):
 	host_real_discount_rate = float
 
 
+class TimeSeries(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> dict:
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
+	year1_hourly_dc_with_system = tuple
+	year1_hourly_e_fromgrid = tuple
+	year1_hourly_ec_with_system = tuple
+
+
+class ChargesByMonth(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> dict:
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
+	charge_w_sys_ec_ym = tuple
+	charge_w_sys_fixed_ym = tuple
+	net_billing_credits_ym = tuple
+	nm_dollars_applied_ym = tuple
+	true_up_credits_ym = tuple
+
+
 class SystemOutput(object):
 	def assign(self): 
 		pass
@@ -331,21 +383,8 @@ class SystemOutput(object):
 
 
 	degradation = tuple
+	gen_purchases = tuple
 	system_capacity = float
-
-
-class ReturnOnEquity(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> dict:
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	roe_input = tuple
 
 
 class Moratorium(object):
@@ -437,6 +476,7 @@ class BatterySystem(object):
 	batt_replacement_schedule_percent = tuple
 	battery_per_kWh = float
 	en_batt = float
+	en_standalone_batt = float
 
 
 class LCOS(object):
@@ -570,7 +610,7 @@ class Outputs(object):
 	cf_funding_om = tuple
 	cf_funding_receivables = tuple
 	cf_insurance_expense = tuple
-	cf_lcog_costs = tuple
+	cf_land_lease_expense = tuple
 	cf_length = float
 	cf_net_salvage_value = tuple
 	cf_nte = tuple
@@ -584,6 +624,7 @@ class Outputs(object):
 	cf_om_opt_fuel_2_expense = tuple
 	cf_om_production_expense = tuple
 	cf_operating_expenses = tuple
+	cf_parasitic_cost = tuple
 	cf_payback_with_expenses = tuple
 	cf_pbi_fedtax_total = tuple
 	cf_pbi_statax_total = tuple
@@ -633,9 +674,6 @@ class Outputs(object):
 	cf_reserve_om = tuple
 	cf_reserve_receivables = tuple
 	cf_reserve_total = tuple
-	cf_return_on_equity = tuple
-	cf_return_on_equity_dollars = tuple
-	cf_return_on_equity_input = tuple
 	cf_revenue_apr = tuple
 	cf_revenue_aug = tuple
 	cf_revenue_dec = tuple
@@ -684,6 +722,7 @@ class Outputs(object):
 	cf_statax_taxable_incentives = tuple
 	cf_state_tax_frac = tuple
 	cf_total_revenue = tuple
+	cf_util_escal_rate = tuple
 	cost_debt_upfront = float
 	cost_financing = float
 	cost_installed = float
@@ -924,6 +963,7 @@ class Outputs(object):
 	flip_actual_year = float
 	flip_target_irr = float
 	flip_target_year = float
+	gen_purchases = tuple
 	host_nominal_discount_rate = float
 	ibi_fedtax_total = float
 	ibi_statax_total = float
@@ -990,12 +1030,6 @@ class Outputs(object):
 	itc_total_sta = float
 	lcoe_nom = float
 	lcoe_real = float
-	lcog = float
-	lcog_depr = float
-	lcog_loan_int = float
-	lcog_om = float
-	lcog_roe = float
-	lcog_wc_int = float
 	lcoptc_fed_nom = float
 	lcoptc_fed_real = float
 	lcoptc_sta_nom = float
@@ -1061,12 +1095,14 @@ class HostDeveloper(object):
 	Revenue = Revenue
 	FinancialParameters = FinancialParameters
 	SystemCosts = SystemCosts
+	LandLease = LandLease
 	TaxCreditIncentives = TaxCreditIncentives
 	Depreciation = Depreciation
 	PaymentIncentives = PaymentIncentives
 	Host = Host
+	TimeSeries = TimeSeries
+	ChargesByMonth = ChargesByMonth
 	SystemOutput = SystemOutput
-	ReturnOnEquity = ReturnOnEquity
 	Moratorium = Moratorium
 	Recapitalization = Recapitalization
 	TimeOfDelivery = TimeOfDelivery

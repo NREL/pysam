@@ -111,6 +111,18 @@ UserDefinedPowerCycle Group
 .. autoclass:: PySAM.TcsmoltenSalt.TcsmoltenSalt.UserDefinedPowerCycle
 	:members:
 
+FinancialSolutionMode Group
+======================================================
+
+.. autoclass:: PySAM.TcsmoltenSalt.TcsmoltenSalt.FinancialSolutionMode
+	:members:
+
+ElectricityRates Group
+======================================================
+
+.. autoclass:: PySAM.TcsmoltenSalt.TcsmoltenSalt.ElectricityRates
+	:members:
+
 Revenue Group
 ======================================================
 

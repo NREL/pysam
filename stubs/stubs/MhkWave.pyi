@@ -53,10 +53,10 @@ class Outputs(object):
 	annual_energy_distribution_time = tuple
 	capacity_factor = float
 	device_average_power = float
+	energy_hourly_kWh = tuple
 	energy_period_data = tuple
 	energy_period_index_mat = tuple
 	gen = tuple
-	hourly_energy = tuple
 	numberHours = float
 	numberRecords = float
 	sig_wave_height_data = tuple

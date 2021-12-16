@@ -238,6 +238,7 @@ class TowerAndReceiver(object):
 	piping_length_const = float
 	piping_length_mult = float
 	piping_loss = float
+	piping_loss_coefficient = float
 	preheat_flux = float
 	rec_absorptance = float
 	rec_clearsky_dni = tuple
@@ -471,6 +472,34 @@ class UserDefinedPowerCycle(object):
 	ud_m_dot_water_cool_des = float
 
 
+class FinancialSolutionMode(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> dict:
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
+	ppa_soln_mode = float
+
+
+class ElectricityRates(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> dict:
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
+	en_electricity_rates = float
+
+
 class Revenue(object):
 	def assign(self): 
 		pass
@@ -673,6 +702,7 @@ class Outputs(object):
 	q_dot_pc_startup = tuple
 	q_dot_pc_target = tuple
 	q_dot_rec_inc = tuple
+	q_dot_reflection_loss = tuple
 	q_heater = tuple
 	q_pb = tuple
 	q_pc_startup = tuple
@@ -736,6 +766,8 @@ class TcsmoltenSalt(object):
 	PowerCycle = PowerCycle
 	RankineCycle = RankineCycle
 	UserDefinedPowerCycle = UserDefinedPowerCycle
+	FinancialSolutionMode = FinancialSolutionMode
+	ElectricityRates = ElectricityRates
 	Revenue = Revenue
 	AdjustmentFactors = AdjustmentFactors
 	Outputs = Outputs

@@ -626,6 +626,30 @@ FinancialParameters_set_dscr(VarGroupObject *self, PyObject *value, void *closur
 }
 
 static PyObject *
+FinancialParameters_get_dscr_limit_debt_fraction(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Singleowner_FinancialParameters_dscr_limit_debt_fraction_nget, self->data_ptr);
+}
+
+static int
+FinancialParameters_set_dscr_limit_debt_fraction(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Singleowner_FinancialParameters_dscr_limit_debt_fraction_nset, self->data_ptr);
+}
+
+static PyObject *
+FinancialParameters_get_dscr_maximum_debt_fraction(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Singleowner_FinancialParameters_dscr_maximum_debt_fraction_nget, self->data_ptr);
+}
+
+static int
+FinancialParameters_set_dscr_maximum_debt_fraction(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Singleowner_FinancialParameters_dscr_maximum_debt_fraction_nset, self->data_ptr);
+}
+
+static PyObject *
 FinancialParameters_get_dscr_reserve_months(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Singleowner_FinancialParameters_dscr_reserve_months_nget, self->data_ptr);
@@ -878,18 +902,6 @@ FinancialParameters_set_reserves_interest(VarGroupObject *self, PyObject *value,
 }
 
 static PyObject *
-FinancialParameters_get_roe_input(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Singleowner_FinancialParameters_roe_input_aget, self->data_ptr);
-}
-
-static int
-FinancialParameters_set_roe_input(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_Singleowner_FinancialParameters_roe_input_aset, self->data_ptr);
-}
-
-static PyObject *
 FinancialParameters_get_salvage_percentage(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Singleowner_FinancialParameters_salvage_percentage_nget, self->data_ptr);
@@ -986,6 +998,12 @@ static PyGetSetDef FinancialParameters_getset[] = {
 {"dscr", (getter)FinancialParameters_get_dscr,(setter)FinancialParameters_set_dscr,
 	PyDoc_STR("*float*: Debt service coverage ratio\n\n*Constraints*: MIN=0\n\n*Required*: If not provided, assumed to be 1.5"),
  	NULL},
+{"dscr_limit_debt_fraction", (getter)FinancialParameters_get_dscr_limit_debt_fraction,(setter)FinancialParameters_set_dscr_limit_debt_fraction,
+	PyDoc_STR("*float*: Limit debt fraction [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"dscr_maximum_debt_fraction", (getter)FinancialParameters_get_dscr_maximum_debt_fraction,(setter)FinancialParameters_set_dscr_maximum_debt_fraction,
+	PyDoc_STR("*float*: Maximum debt fraction [%]\n\n*Constraints*: MIN=0\n\n*Required*: If not provided, assumed to be 100"),
+ 	NULL},
 {"dscr_reserve_months", (getter)FinancialParameters_get_dscr_reserve_months,(setter)FinancialParameters_set_dscr_reserve_months,
 	PyDoc_STR("*float*: Debt service reserve account [months P&I]\n\n*Constraints*: MIN=0\n\n*Required*: If not provided, assumed to be 6"),
  	NULL},
@@ -1049,9 +1067,6 @@ static PyGetSetDef FinancialParameters_getset[] = {
 {"reserves_interest", (getter)FinancialParameters_get_reserves_interest,(setter)FinancialParameters_set_reserves_interest,
 	PyDoc_STR("*float*: Interest on reserves [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 1.75"),
  	NULL},
-{"roe_input", (getter)FinancialParameters_get_roe_input,(setter)FinancialParameters_set_roe_input,
-	PyDoc_STR("*sequence*: Return on equity\n\n*Required*: If not provided, assumed to be 20"),
- 	NULL},
 {"salvage_percentage", (getter)FinancialParameters_get_salvage_percentage,(setter)FinancialParameters_set_salvage_percentage,
 	PyDoc_STR("*float*: Net pre-tax cash salvage value [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 10"),
  	NULL},
@@ -1059,7 +1074,7 @@ static PyGetSetDef FinancialParameters_getset[] = {
 	PyDoc_STR("*sequence*: State income tax rate [%]\n\n*Required*: True"),
  	NULL},
 {"system_capacity", (getter)FinancialParameters_get_system_capacity,(setter)FinancialParameters_set_system_capacity,
-	PyDoc_STR("*float*: System nameplate capacity [kW]\n\n*Constraints*: POSITIVE\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - cp_system_nameplate\n"),
+	PyDoc_STR("*float*: System nameplate capacity [kW]\n\n*Constraints*: POSITIVE\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - cp_battery_nameplate\n\t - cp_system_nameplate\n"),
  	NULL},
 {"system_heat_rate", (getter)FinancialParameters_get_system_heat_rate,(setter)FinancialParameters_set_system_heat_rate,
 	PyDoc_STR("*float*: System heat rate [MMBTus/MWh]\n\n*Constraints*: MIN=0\n\n*Required*: If not provided, assumed to be 0.0"),
@@ -1769,6 +1784,173 @@ static PyTypeObject SystemCosts_Type = {
 		SystemCosts_methods,         /*tp_methods*/
 		0,                          /*tp_members*/
 		SystemCosts_getset,          /*tp_getset*/
+		0,                          /*tp_base*/
+		0,                          /*tp_dict*/
+		0,                          /*tp_descr_get*/
+		0,                          /*tp_descr_set*/
+		0,                          /*tp_dictofnset*/
+		0,                          /*tp_init*/
+		0,                          /*tp_alloc*/
+		0,             /*tp_new*/
+		0,                          /*tp_free*/
+		0,                          /*tp_is_gc*/
+};
+
+
+/*
+ * LandLease Group
+ */ 
+
+static PyTypeObject LandLease_Type;
+
+static PyObject *
+LandLease_new(SAM_Singleowner data_ptr)
+{
+	PyObject* new_obj = LandLease_Type.tp_alloc(&LandLease_Type,0);
+
+	VarGroupObject* LandLease_obj = (VarGroupObject*)new_obj;
+
+	LandLease_obj->data_ptr = (SAM_table)data_ptr;
+
+	return new_obj;
+}
+
+/* LandLease methods */
+
+static PyObject *
+LandLease_assign(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Singleowner", "LandLease")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+LandLease_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &LandLease_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Singleowner", "LandLease")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+LandLease_export(VarGroupObject *self, PyObject *args)
+{
+	PyTypeObject* tp = &LandLease_Type;
+	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
+	return dict;
+}
+
+static PyMethodDef LandLease_methods[] = {
+		{"assign",            (PyCFunction)LandLease_assign,  METH_VARARGS,
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``LandLease_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)LandLease_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``LandLease_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)LandLease_export,  METH_VARARGS,
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+		{NULL,              NULL}           /* sentinel */
+};
+
+static PyObject *
+LandLease_get_land_area(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Singleowner_LandLease_land_area_nget, self->data_ptr);
+}
+
+static int
+LandLease_set_land_area(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Singleowner_LandLease_land_area_nset, self->data_ptr);
+}
+
+static PyObject *
+LandLease_get_om_land_lease(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Singleowner_LandLease_om_land_lease_aget, self->data_ptr);
+}
+
+static int
+LandLease_set_om_land_lease(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Singleowner_LandLease_om_land_lease_aset, self->data_ptr);
+}
+
+static PyObject *
+LandLease_get_om_land_lease_escal(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Singleowner_LandLease_om_land_lease_escal_nget, self->data_ptr);
+}
+
+static int
+LandLease_set_om_land_lease_escal(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Singleowner_LandLease_om_land_lease_escal_nset, self->data_ptr);
+}
+
+static PyGetSetDef LandLease_getset[] = {
+{"land_area", (getter)LandLease_get_land_area,(setter)LandLease_set_land_area,
+	PyDoc_STR("*float*: Total land area [acres]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"om_land_lease", (getter)LandLease_get_om_land_lease,(setter)LandLease_set_om_land_lease,
+	PyDoc_STR("*sequence*: Land lease cost [$/acre]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"om_land_lease_escal", (getter)LandLease_get_om_land_lease_escal,(setter)LandLease_set_om_land_lease_escal,
+	PyDoc_STR("*float*: Land lease cost escalation [%/yr]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+	{NULL}  /* Sentinel */
+};
+
+static PyTypeObject LandLease_Type = {
+		/* The ob_type field must be initialized in the module init function
+		 * to be portable to Windows without using C++. */
+		PyVarObject_HEAD_INIT(NULL, 0)
+		"Singleowner.LandLease",             /*tp_name*/
+		sizeof(VarGroupObject),          /*tp_basicsize*/
+		0,                          /*tp_itemsize*/
+		/* methods */
+		0,    /*tp_dealloc*/
+		0,                          /*tp_print*/
+		(getattrfunc)0,             /*tp_getattr*/
+		0,                          /*tp_setattr*/
+		0,                          /*tp_reserved*/
+		0,                          /*tp_repr*/
+		0,                          /*tp_as_number*/
+		0,                          /*tp_as_sequence*/
+		0,                          /*tp_as_mapping*/
+		0,                          /*tp_hash*/
+		0,                          /*tp_call*/
+		0,                          /*tp_str*/
+		0,                          /*tp_getattro*/
+		0,                          /*tp_setattro*/
+		0,                          /*tp_as_buffer*/
+		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
+		0,                          /*tp_doc*/
+		0,                          /*tp_traverse*/
+		0,                          /*tp_clear*/
+		0,                          /*tp_richcompare*/
+		0,                          /*tp_weaklistofnset*/
+		0,                          /*tp_iter*/
+		0,                          /*tp_iternext*/
+		LandLease_methods,         /*tp_methods*/
+		0,                          /*tp_members*/
+		LandLease_getset,          /*tp_getset*/
 		0,                          /*tp_base*/
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
@@ -4583,6 +4765,18 @@ BatterySystem_set_en_batt(VarGroupObject *self, PyObject *value, void *closure)
 	return PySAM_double_setter(value, SAM_Singleowner_BatterySystem_en_batt_nset, self->data_ptr);
 }
 
+static PyObject *
+BatterySystem_get_en_standalone_batt(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Singleowner_BatterySystem_en_standalone_batt_nget, self->data_ptr);
+}
+
+static int
+BatterySystem_set_en_standalone_batt(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Singleowner_BatterySystem_en_standalone_batt_nset, self->data_ptr);
+}
+
 static PyGetSetDef BatterySystem_getset[] = {
 {"batt_bank_replacement", (getter)BatterySystem_get_batt_bank_replacement,(setter)BatterySystem_set_batt_bank_replacement,
 	PyDoc_STR("*sequence*: Battery bank replacements per year [number/year]"),
@@ -4604,6 +4798,9 @@ static PyGetSetDef BatterySystem_getset[] = {
  	NULL},
 {"en_batt", (getter)BatterySystem_get_en_batt,(setter)BatterySystem_set_en_batt,
 	PyDoc_STR("*float*: Enable battery storage model [0/1]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"en_standalone_batt", (getter)BatterySystem_get_en_standalone_batt,(setter)BatterySystem_set_en_standalone_batt,
+	PyDoc_STR("*float*: Enable standalone battery storage model [0/1]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -4900,6 +5097,18 @@ SystemOutput_set_gen(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyObject *
+SystemOutput_get_gen_purchases(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Singleowner_SystemOutput_gen_purchases_aget, self->data_ptr);
+}
+
+static int
+SystemOutput_set_gen_purchases(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Singleowner_SystemOutput_gen_purchases_aset, self->data_ptr);
+}
+
+static PyObject *
 SystemOutput_get_gen_without_battery(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Singleowner_SystemOutput_gen_without_battery_aget, self->data_ptr);
@@ -4945,11 +5154,14 @@ static PyGetSetDef SystemOutput_getset[] = {
 {"gen", (getter)SystemOutput_get_gen,(setter)SystemOutput_set_gen,
 	PyDoc_STR("*sequence*: Net power to or from the grid [kW]\n\n*Required*: True"),
  	NULL},
+{"gen_purchases", (getter)SystemOutput_get_gen_purchases,(setter)SystemOutput_set_gen_purchases,
+	PyDoc_STR("*sequence*: Electricity from grid [kW]"),
+ 	NULL},
 {"gen_without_battery", (getter)SystemOutput_get_gen_without_battery,(setter)SystemOutput_set_gen_without_battery,
 	PyDoc_STR("*sequence*: Electricity to or from the renewable system, without the battery [kW]"),
  	NULL},
 {"system_capacity", (getter)SystemOutput_get_system_capacity,(setter)SystemOutput_set_system_capacity,
-	PyDoc_STR("*float*: System nameplate capacity [kW]\n\n*Constraints*: MIN=1e-3\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - cp_system_nameplate\n"),
+	PyDoc_STR("*float*: System nameplate capacity [kW]\n\n*Required*: If not provided, assumed to be 0\n\n*Changes to this variable may require updating the values of the following*: \n\t - cp_battery_nameplate\n\t - cp_system_nameplate\n"),
  	NULL},
 {"system_pre_curtailment_kwac", (getter)SystemOutput_get_system_pre_curtailment_kwac,(setter)SystemOutput_set_system_pre_curtailment_kwac,
 	PyDoc_STR("*sequence*: System power before grid curtailment [kW]\n\n*Info*: System generation"),
@@ -5635,7 +5847,7 @@ CapacityPayments_set_cp_system_nameplate(VarGroupObject *self, PyObject *value, 
 
 static PyGetSetDef CapacityPayments_getset[] = {
 {"cp_battery_nameplate", (getter)CapacityPayments_get_cp_battery_nameplate,(setter)CapacityPayments_set_cp_battery_nameplate,
-	PyDoc_STR("*float*: Battery nameplate [MW]\n\n*Constraints*: MIN=0\n\n*Required*: True if cp_capacity_payment_type=0"),
+	PyDoc_STR("*float*: Battery nameplate [MW]\n\n*Constraints*: MIN=0\n\n*Required*: True if cp_capacity_payment_type=0\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - cp_system_nameplate\n\t - system_capacity\n"),
  	NULL},
 {"cp_capacity_credit_percent", (getter)CapacityPayments_get_cp_capacity_credit_percent,(setter)CapacityPayments_set_cp_capacity_credit_percent,
 	PyDoc_STR("*sequence*: Capacity credit (eligible portion of nameplate) [%]\n\n*Required*: True if cp_capacity_payment_type=0"),
@@ -5650,7 +5862,7 @@ static PyGetSetDef CapacityPayments_getset[] = {
 	PyDoc_STR("*float*: Capacity payment type\n\n*Options*: 0=Energy basis,1=Fixed amount\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: True"),
  	NULL},
 {"cp_system_nameplate", (getter)CapacityPayments_get_cp_system_nameplate,(setter)CapacityPayments_set_cp_system_nameplate,
-	PyDoc_STR("*float*: System nameplate [MW]\n\n*Constraints*: MIN=0\n\n*Required*: True if cp_capacity_payment_type=0\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - system_capacity\n"),
+	PyDoc_STR("*float*: System nameplate [MW]\n\n*Constraints*: MIN=0\n\n*Required*: True if cp_capacity_payment_type=0\n\n*Changes to this variable may require updating the values of the following*: \n\t - cp_battery_nameplate\n\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - system_capacity\n"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -6217,6 +6429,158 @@ static PyTypeObject LCOS_Type = {
 
 
 /*
+ * ChargesByMonth Group
+ */ 
+
+static PyTypeObject ChargesByMonth_Type;
+
+static PyObject *
+ChargesByMonth_new(SAM_Singleowner data_ptr)
+{
+	PyObject* new_obj = ChargesByMonth_Type.tp_alloc(&ChargesByMonth_Type,0);
+
+	VarGroupObject* ChargesByMonth_obj = (VarGroupObject*)new_obj;
+
+	ChargesByMonth_obj->data_ptr = (SAM_table)data_ptr;
+
+	return new_obj;
+}
+
+/* ChargesByMonth methods */
+
+static PyObject *
+ChargesByMonth_assign(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Singleowner", "ChargesByMonth")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+ChargesByMonth_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &ChargesByMonth_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Singleowner", "ChargesByMonth")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+ChargesByMonth_export(VarGroupObject *self, PyObject *args)
+{
+	PyTypeObject* tp = &ChargesByMonth_Type;
+	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
+	return dict;
+}
+
+static PyMethodDef ChargesByMonth_methods[] = {
+		{"assign",            (PyCFunction)ChargesByMonth_assign,  METH_VARARGS,
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``ChargesByMonth_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)ChargesByMonth_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``ChargesByMonth_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)ChargesByMonth_export,  METH_VARARGS,
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+		{NULL,              NULL}           /* sentinel */
+};
+
+static PyObject *
+ChargesByMonth_get_net_billing_credits_ym(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Singleowner_ChargesByMonth_net_billing_credits_ym_mget, self->data_ptr);
+}
+
+static int
+ChargesByMonth_set_net_billing_credits_ym(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Singleowner_ChargesByMonth_net_billing_credits_ym_mset, self->data_ptr);
+}
+
+static PyObject *
+ChargesByMonth_get_nm_dollars_applied_ym(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Singleowner_ChargesByMonth_nm_dollars_applied_ym_mget, self->data_ptr);
+}
+
+static int
+ChargesByMonth_set_nm_dollars_applied_ym(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Singleowner_ChargesByMonth_nm_dollars_applied_ym_mset, self->data_ptr);
+}
+
+static PyGetSetDef ChargesByMonth_getset[] = {
+{"net_billing_credits_ym", (getter)ChargesByMonth_get_net_billing_credits_ym,(setter)ChargesByMonth_set_net_billing_credits_ym,
+	PyDoc_STR("*sequence[sequence]*: Net billing credit [$]"),
+ 	NULL},
+{"nm_dollars_applied_ym", (getter)ChargesByMonth_get_nm_dollars_applied_ym,(setter)ChargesByMonth_set_nm_dollars_applied_ym,
+	PyDoc_STR("*sequence[sequence]*: Net metering credit [$]"),
+ 	NULL},
+	{NULL}  /* Sentinel */
+};
+
+static PyTypeObject ChargesByMonth_Type = {
+		/* The ob_type field must be initialized in the module init function
+		 * to be portable to Windows without using C++. */
+		PyVarObject_HEAD_INIT(NULL, 0)
+		"Singleowner.ChargesByMonth",             /*tp_name*/
+		sizeof(VarGroupObject),          /*tp_basicsize*/
+		0,                          /*tp_itemsize*/
+		/* methods */
+		0,    /*tp_dealloc*/
+		0,                          /*tp_print*/
+		(getattrfunc)0,             /*tp_getattr*/
+		0,                          /*tp_setattr*/
+		0,                          /*tp_reserved*/
+		0,                          /*tp_repr*/
+		0,                          /*tp_as_number*/
+		0,                          /*tp_as_sequence*/
+		0,                          /*tp_as_mapping*/
+		0,                          /*tp_hash*/
+		0,                          /*tp_call*/
+		0,                          /*tp_str*/
+		0,                          /*tp_getattro*/
+		0,                          /*tp_setattro*/
+		0,                          /*tp_as_buffer*/
+		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
+		0,                          /*tp_doc*/
+		0,                          /*tp_traverse*/
+		0,                          /*tp_clear*/
+		0,                          /*tp_richcompare*/
+		0,                          /*tp_weaklistofnset*/
+		0,                          /*tp_iter*/
+		0,                          /*tp_iternext*/
+		ChargesByMonth_methods,         /*tp_methods*/
+		0,                          /*tp_members*/
+		ChargesByMonth_getset,          /*tp_getset*/
+		0,                          /*tp_base*/
+		0,                          /*tp_dict*/
+		0,                          /*tp_descr_get*/
+		0,                          /*tp_descr_set*/
+		0,                          /*tp_dictofnset*/
+		0,                          /*tp_init*/
+		0,                          /*tp_alloc*/
+		0,             /*tp_new*/
+		0,                          /*tp_free*/
+		0,                          /*tp_is_gc*/
+};
+
+
+/*
  * Outputs Group
  */ 
 
@@ -6690,12 +7054,6 @@ Outputs_get_cf_energy_purchases(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_cf_energy_purchases_value(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_energy_purchases_value_aget, self->data_ptr);
-}
-
-static PyObject *
 Outputs_get_cf_energy_sales(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_energy_sales_aget, self->data_ptr);
@@ -6870,9 +7228,9 @@ Outputs_get_cf_insurance_expense(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_cf_lcog_costs(VarGroupObject *self, void *closure)
+Outputs_get_cf_land_lease_expense(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_lcog_costs_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_land_lease_expense_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -7272,24 +7630,6 @@ Outputs_get_cf_reserve_total(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_cf_return_on_equity(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_return_on_equity_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_return_on_equity_dollars(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_return_on_equity_dollars_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_return_on_equity_input(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_return_on_equity_input_aget, self->data_ptr);
-}
-
-static PyObject *
 Outputs_get_cf_revenue_apr(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_revenue_apr_aget, self->data_ptr);
@@ -7581,6 +7921,12 @@ static PyObject *
 Outputs_get_cf_total_revenue(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_total_revenue_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_util_escal_rate(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_util_escal_rate_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -9426,42 +9772,6 @@ Outputs_get_lcoe_real(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_lcog(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Singleowner_Outputs_lcog_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_lcog_depr(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Singleowner_Outputs_lcog_depr_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_lcog_loan_int(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Singleowner_Outputs_lcog_loan_int_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_lcog_om(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Singleowner_Outputs_lcog_om_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_lcog_roe(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Singleowner_Outputs_lcog_roe_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_lcog_wc_int(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Singleowner_Outputs_lcog_wc_int_nget, self->data_ptr);
-}
-
-static PyObject *
 Outputs_get_lcoptc_fed_nom(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Singleowner_Outputs_lcoptc_fed_nom_nget, self->data_ptr);
@@ -9921,9 +10231,6 @@ static PyGetSetDef Outputs_getset[] = {
 {"cf_energy_purchases", (getter)Outputs_get_cf_energy_purchases,(setter)0,
 	PyDoc_STR("*sequence*: Energy from grid [kWh]"),
  	NULL},
-{"cf_energy_purchases_value", (getter)Outputs_get_cf_energy_purchases_value,(setter)0,
-	PyDoc_STR("*sequence*: PPA revenue lost to self-consumption [$]"),
- 	NULL},
 {"cf_energy_sales", (getter)Outputs_get_cf_energy_sales,(setter)0,
 	PyDoc_STR("*sequence*: Energy to grid [kWh]"),
  	NULL},
@@ -10011,8 +10318,8 @@ static PyGetSetDef Outputs_getset[] = {
 {"cf_insurance_expense", (getter)Outputs_get_cf_insurance_expense,(setter)0,
 	PyDoc_STR("*sequence*: Insurance expense [$]"),
  	NULL},
-{"cf_lcog_costs", (getter)Outputs_get_cf_lcog_costs,(setter)0,
-	PyDoc_STR("*sequence*: Total LCOG costs [$]"),
+{"cf_land_lease_expense", (getter)Outputs_get_cf_land_lease_expense,(setter)0,
+	PyDoc_STR("*sequence*: Land lease expense [$]"),
  	NULL},
 {"cf_length", (getter)Outputs_get_cf_length,(setter)0,
 	PyDoc_STR("*float*: Number of periods in cashflow"),
@@ -10212,15 +10519,6 @@ static PyGetSetDef Outputs_getset[] = {
 {"cf_reserve_total", (getter)Outputs_get_cf_reserve_total,(setter)0,
 	PyDoc_STR("*sequence*: Reserves total reserves balance [$]"),
  	NULL},
-{"cf_return_on_equity", (getter)Outputs_get_cf_return_on_equity,(setter)0,
-	PyDoc_STR("*sequence*: Return on equity [$/kWh]"),
- 	NULL},
-{"cf_return_on_equity_dollars", (getter)Outputs_get_cf_return_on_equity_dollars,(setter)0,
-	PyDoc_STR("*sequence*: Return on equity dollars [$]"),
- 	NULL},
-{"cf_return_on_equity_input", (getter)Outputs_get_cf_return_on_equity_input,(setter)0,
-	PyDoc_STR("*sequence*: Return on equity input [%]"),
- 	NULL},
 {"cf_revenue_apr", (getter)Outputs_get_cf_revenue_apr,(setter)0,
 	PyDoc_STR("*sequence*: PPA revenue by year for April [$]"),
  	NULL},
@@ -10367,6 +10665,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"cf_total_revenue", (getter)Outputs_get_cf_total_revenue,(setter)0,
 	PyDoc_STR("*sequence*: Total revenue [$]"),
+ 	NULL},
+{"cf_util_escal_rate", (getter)Outputs_get_cf_util_escal_rate,(setter)0,
+	PyDoc_STR("*sequence*: Annual battery salvage value costs [$]"),
  	NULL},
 {"cf_utility_bill", (getter)Outputs_get_cf_utility_bill,(setter)0,
 	PyDoc_STR("*sequence*: Electricity purchase [$]"),
@@ -11289,24 +11590,6 @@ static PyGetSetDef Outputs_getset[] = {
 {"lcoe_real", (getter)Outputs_get_lcoe_real,(setter)0,
 	PyDoc_STR("*float*: Levelized cost (real) [cents/kWh]"),
  	NULL},
-{"lcog", (getter)Outputs_get_lcog,(setter)0,
-	PyDoc_STR("*float*: LCOG Levelized cost of generation [cents/kWh]"),
- 	NULL},
-{"lcog_depr", (getter)Outputs_get_lcog_depr,(setter)0,
-	PyDoc_STR("*float*: LCOG depreciation [cents/kWh]"),
- 	NULL},
-{"lcog_loan_int", (getter)Outputs_get_lcog_loan_int,(setter)0,
-	PyDoc_STR("*float*: LCOG loan interest [cents/kWh]"),
- 	NULL},
-{"lcog_om", (getter)Outputs_get_lcog_om,(setter)0,
-	PyDoc_STR("*float*: LCOG O and M [cents/kWh]"),
- 	NULL},
-{"lcog_roe", (getter)Outputs_get_lcog_roe,(setter)0,
-	PyDoc_STR("*float*: LCOG return on equity [cents/kWh]"),
- 	NULL},
-{"lcog_wc_int", (getter)Outputs_get_lcog_wc_int,(setter)0,
-	PyDoc_STR("*float*: LCOG working capital interest [cents/kWh]"),
- 	NULL},
 {"lcoptc_fed_nom", (getter)Outputs_get_lcoptc_fed_nom,(setter)0,
 	PyDoc_STR("*float*: Levelized federal PTC (nominal) [cents/kWh]"),
  	NULL},
@@ -11511,6 +11794,10 @@ newSingleownerObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "SystemCosts", SystemCosts_obj);
 	Py_DECREF(SystemCosts_obj);
 
+	PyObject* LandLease_obj = LandLease_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "LandLease", LandLease_obj);
+	Py_DECREF(LandLease_obj);
+
 	PyObject* TaxCreditIncentives_obj = TaxCreditIncentives_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "TaxCreditIncentives", TaxCreditIncentives_obj);
 	Py_DECREF(TaxCreditIncentives_obj);
@@ -11558,6 +11845,10 @@ newSingleownerObject(void* data_ptr)
 	PyObject* LCOS_obj = LCOS_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "LCOS", LCOS_obj);
 	Py_DECREF(LCOS_obj);
+
+	PyObject* ChargesByMonth_obj = ChargesByMonth_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "ChargesByMonth", ChargesByMonth_obj);
+	Py_DECREF(ChargesByMonth_obj);
 
 	PyObject* Outputs_obj = Outputs_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
@@ -11818,7 +12109,7 @@ static PyMethodDef SingleownerModule_methods[] = {
 				PyDoc_STR("new() -> Singleowner")},
 		{"default",             Singleowner_default,         METH_VARARGS,
 				PyDoc_STR("default(config) -> Singleowner\n\nUse default attributes\n"
-				"`config` options:\n\n- \"BiopowerSingleOwner\"\n- \"DSLFSingleOwner\"\n- \"ETESSingleOwner\"\n- \"EmpiricalTroughSingleOwner\"\n- \"FlatPlatePVSingleOwner\"\n- \"FuelCellSingleOwner\"\n- \"GenericBatterySingleOwner\"\n- \"GenericCSPSystemSingleOwner\"\n- \"GenericSystemSingleOwner\"\n- \"GeothermalPowerSingleOwner\"\n- \"HighXConcentratingPVSingleOwner\"\n- \"MSLFSingleOwner\"\n- \"MSPTSingleOwner\"\n- \"PVBatterySingleOwner\"\n- \"PVWattsSingleOwner\"\n- \"PhysicalTroughSingleOwner\"\n- \"WindPowerSingleOwner\"")},
+				"`config` options:\n\n- \"BiopowerSingleOwner\"\n- \"DSLFSingleOwner\"\n- \"ETESSingleOwner\"\n- \"EmpiricalTroughSingleOwner\"\n- \"FlatPlatePVSingleOwner\"\n- \"FuelCellSingleOwner\"\n- \"GenericBatterySingleOwner\"\n- \"GenericCSPSystemSingleOwner\"\n- \"GenericSystemSingleOwner\"\n- \"GeothermalPowerSingleOwner\"\n- \"HighXConcentratingPVSingleOwner\"\n- \"MSLFSingleOwner\"\n- \"MSPTSingleOwner\"\n- \"PVBatterySingleOwner\"\n- \"PVWattsSingleOwner\"\n- \"PhysicalTroughSingleOwner\"\n- \"StandaloneBatterySingleOwner\"\n- \"WindPowerSingleOwner\"")},
 		{"wrap",             Singleowner_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Singleowner\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   Singleowner_from_existing,        METH_VARARGS,
@@ -11861,6 +12152,13 @@ SingleownerModule_exec(PyObject *m)
 				"SystemCosts",
 				(PyObject*)&SystemCosts_Type);
 	Py_DECREF(&SystemCosts_Type);
+
+	/// Add the LandLease type object to Singleowner_Type
+	if (PyType_Ready(&LandLease_Type) < 0) { goto fail; }
+	PyDict_SetItemString(Singleowner_Type.tp_dict,
+				"LandLease",
+				(PyObject*)&LandLease_Type);
+	Py_DECREF(&LandLease_Type);
 
 	/// Add the TaxCreditIncentives type object to Singleowner_Type
 	if (PyType_Ready(&TaxCreditIncentives_Type) < 0) { goto fail; }
@@ -11945,6 +12243,13 @@ SingleownerModule_exec(PyObject *m)
 				"LCOS",
 				(PyObject*)&LCOS_Type);
 	Py_DECREF(&LCOS_Type);
+
+	/// Add the ChargesByMonth type object to Singleowner_Type
+	if (PyType_Ready(&ChargesByMonth_Type) < 0) { goto fail; }
+	PyDict_SetItemString(Singleowner_Type.tp_dict,
+				"ChargesByMonth",
+				(PyObject*)&ChargesByMonth_Type);
+	Py_DECREF(&ChargesByMonth_Type);
 
 	/// Add the Outputs type object to Singleowner_Type
 	if (PyType_Ready(&Outputs_Type) < 0) { goto fail; }

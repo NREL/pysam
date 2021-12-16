@@ -1690,7 +1690,7 @@ static PyMethodDef ThirdpartyownershipModule_methods[] = {
 				PyDoc_STR("new() -> Thirdpartyownership")},
 		{"default",             Thirdpartyownership_default,         METH_VARARGS,
 				PyDoc_STR("default(config) -> Thirdpartyownership\n\nUse default attributes\n"
-				"`config` options:\n\n- \"FlatPlatePVThirdParty\"\n- \"GenericBatteryThirdParty\"\n- \"GenericSystemThirdParty\"\n- \"PVBatteryThirdParty\"\n- \"PVWattsBatteryThirdParty\"\n- \"PVWattsThirdParty\"")},
+				"`config` options:\n\n- \"FlatPlatePVThirdParty\"\n- \"GenericBatteryThirdParty\"\n- \"GenericSystemThirdParty\"\n- \"PVBatteryThirdParty\"\n- \"PVWattsBatteryThirdParty\"\n- \"PVWattsThirdParty\"\n- \"StandaloneBatteryThirdParty\"")},
 		{"wrap",             Thirdpartyownership_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Thirdpartyownership\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   Thirdpartyownership_from_existing,        METH_VARARGS,

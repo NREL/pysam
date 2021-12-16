@@ -1,38 +1,3 @@
-class Revenue(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> dict:
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	dispatch_factor1 = float
-	dispatch_factor2 = float
-	dispatch_factor3 = float
-	dispatch_factor4 = float
-	dispatch_factor5 = float
-	dispatch_factor6 = float
-	dispatch_factor7 = float
-	dispatch_factor8 = float
-	dispatch_factor9 = float
-	dispatch_factors_ts = tuple
-	dispatch_sched_weekday = tuple
-	dispatch_sched_weekend = tuple
-	flip_target_percent = float
-	flip_target_year = float
-	ppa_escalation = float
-	ppa_multiplier_model = float
-	ppa_price_input = tuple
-	ppa_soln_max = float
-	ppa_soln_max_iterations = float
-	ppa_soln_min = float
-	ppa_soln_mode = float
-	ppa_soln_tolerance = float
-
-
 class FinancialParameters(object):
 	def assign(self): 
 		pass
@@ -75,6 +40,7 @@ class FinancialParameters(object):
 	property_tax_rate = float
 	real_discount_rate = float
 	reserves_interest = float
+	roe_input = tuple
 	salvage_percentage = float
 	state_tax_rate = tuple
 	system_capacity = float
@@ -339,6 +305,21 @@ class PaymentIncentives(object):
 	pbi_uti_term = float
 
 
+class Revenue(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> dict:
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
+	flip_target_percent = float
+	flip_target_year = float
+
+
 class BatterySystem(object):
 	def assign(self): 
 		pass
@@ -422,6 +403,65 @@ class Lifetime(object):
 	system_use_lifetime_output = float
 
 
+class CommunitySolar(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> dict:
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
+	cs_cost_recurring_capacity = tuple
+	cs_cost_recurring_capacity_escal = float
+	cs_cost_recurring_fixed = tuple
+	cs_cost_recurring_fixed_escal = float
+	cs_cost_recurring_generation = tuple
+	cs_cost_recurring_generation_escal = float
+	cs_cost_upfront = float
+	cs_cost_upfront_per_capacity = float
+	subscriber1_bill_credit_rate = tuple
+	subscriber1_bill_credit_rate_escal = float
+	subscriber1_growth = float
+	subscriber1_payment_annual = tuple
+	subscriber1_payment_annual_escal = float
+	subscriber1_payment_generation = tuple
+	subscriber1_payment_generation_escal = float
+	subscriber1_payment_upfront = float
+	subscriber1_share = tuple
+	subscriber2_bill_credit_rate = tuple
+	subscriber2_bill_credit_rate_escal = float
+	subscriber2_growth = float
+	subscriber2_payment_annual = tuple
+	subscriber2_payment_annual_escal = float
+	subscriber2_payment_generation = tuple
+	subscriber2_payment_generation_escal = float
+	subscriber2_payment_upfront = float
+	subscriber2_share = tuple
+	subscriber3_bill_credit_rate = tuple
+	subscriber3_bill_credit_rate_escal = float
+	subscriber3_growth = float
+	subscriber3_payment_annual = tuple
+	subscriber3_payment_annual_escal = float
+	subscriber3_payment_generation = tuple
+	subscriber3_payment_generation_escal = float
+	subscriber3_payment_upfront = float
+	subscriber3_share = tuple
+	subscriber4_bill_credit_rate = tuple
+	subscriber4_bill_credit_rate_escal = float
+	subscriber4_growth = float
+	subscriber4_payment_annual = tuple
+	subscriber4_payment_annual_escal = float
+	subscriber4_payment_generation = tuple
+	subscriber4_payment_generation_escal = float
+	subscriber4_payment_upfront = float
+	subscriber4_share = tuple
+	unsubscribed_payment_generation = tuple
+	unsubscribed_payment_generation_escal = float
+
+
 class FuelCell(object):
 	def assign(self): 
 		pass
@@ -439,25 +479,6 @@ class FuelCell(object):
 	fuelcell_replacement = tuple
 	fuelcell_replacement_option = float
 	fuelcell_replacement_schedule = tuple
-
-
-class CapacityPayments(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> dict:
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	cp_battery_nameplate = float
-	cp_capacity_credit_percent = tuple
-	cp_capacity_payment_amount = tuple
-	cp_capacity_payment_esc = float
-	cp_capacity_payment_type = float
-	cp_system_nameplate = float
 
 
 class GridLimits(object):
@@ -550,6 +571,16 @@ class Outputs(object):
 	cf_charging_cost_grid = tuple
 	cf_charging_cost_grid_month = tuple
 	cf_charging_cost_pv = tuple
+	cf_community_solar_recurring_capacity = tuple
+	cf_community_solar_recurring_fixed = tuple
+	cf_community_solar_recurring_generation = tuple
+	cf_community_solar_subscriber1_revenue = tuple
+	cf_community_solar_subscriber2_revenue = tuple
+	cf_community_solar_subscriber3_revenue = tuple
+	cf_community_solar_subscriber4_revenue = tuple
+	cf_community_solar_unsubscribed_revenue = tuple
+	cf_community_solar_upfront = tuple
+	cf_community_solar_upfront_per_capacity = tuple
 	cf_curtailment_value = tuple
 	cf_debt_balance = tuple
 	cf_debt_payment_interest = tuple
@@ -566,40 +597,8 @@ class Outputs(object):
 	cf_effective_tax_frac = tuple
 	cf_energy_curtailed = tuple
 	cf_energy_net = tuple
-	cf_energy_net_apr = tuple
-	cf_energy_net_aug = tuple
-	cf_energy_net_dec = tuple
-	cf_energy_net_dispatch1 = tuple
-	cf_energy_net_dispatch2 = tuple
-	cf_energy_net_dispatch3 = tuple
-	cf_energy_net_dispatch4 = tuple
-	cf_energy_net_dispatch5 = tuple
-	cf_energy_net_dispatch6 = tuple
-	cf_energy_net_dispatch7 = tuple
-	cf_energy_net_dispatch8 = tuple
-	cf_energy_net_dispatch9 = tuple
-	cf_energy_net_feb = tuple
-	cf_energy_net_jan = tuple
-	cf_energy_net_jul = tuple
-	cf_energy_net_jun = tuple
-	cf_energy_net_mar = tuple
-	cf_energy_net_may = tuple
-	cf_energy_net_monthly_firstyear_TOD1 = tuple
-	cf_energy_net_monthly_firstyear_TOD2 = tuple
-	cf_energy_net_monthly_firstyear_TOD3 = tuple
-	cf_energy_net_monthly_firstyear_TOD4 = tuple
-	cf_energy_net_monthly_firstyear_TOD5 = tuple
-	cf_energy_net_monthly_firstyear_TOD6 = tuple
-	cf_energy_net_monthly_firstyear_TOD7 = tuple
-	cf_energy_net_monthly_firstyear_TOD8 = tuple
-	cf_energy_net_monthly_firstyear_TOD9 = tuple
-	cf_energy_net_nov = tuple
-	cf_energy_net_oct = tuple
-	cf_energy_net_sep = tuple
 	cf_energy_purchases = tuple
 	cf_energy_sales = tuple
-	cf_energy_sales_value = tuple
-	cf_energy_value = tuple
 	cf_energy_without_battery = tuple
 	cf_feddepr_custom = tuple
 	cf_feddepr_macrs_15 = tuple
@@ -627,6 +626,7 @@ class Outputs(object):
 	cf_funding_receivables = tuple
 	cf_insurance_expense = tuple
 	cf_land_lease_expense = tuple
+	cf_lcog_costs = tuple
 	cf_length = float
 	cf_net_salvage_value = tuple
 	cf_om_batt_capacity_expense = tuple
@@ -652,7 +652,6 @@ class Outputs(object):
 	cf_pbi_total_oth = tuple
 	cf_pbi_total_sta = tuple
 	cf_pbi_total_uti = tuple
-	cf_ppa_price = tuple
 	cf_pretax_cashflow = tuple
 	cf_pretax_dscr = tuple
 	cf_project_dsra = tuple
@@ -693,36 +692,9 @@ class Outputs(object):
 	cf_reserve_om = tuple
 	cf_reserve_receivables = tuple
 	cf_reserve_total = tuple
-	cf_revenue_apr = tuple
-	cf_revenue_aug = tuple
-	cf_revenue_dec = tuple
-	cf_revenue_dispatch1 = tuple
-	cf_revenue_dispatch2 = tuple
-	cf_revenue_dispatch3 = tuple
-	cf_revenue_dispatch4 = tuple
-	cf_revenue_dispatch5 = tuple
-	cf_revenue_dispatch6 = tuple
-	cf_revenue_dispatch7 = tuple
-	cf_revenue_dispatch8 = tuple
-	cf_revenue_dispatch9 = tuple
-	cf_revenue_feb = tuple
-	cf_revenue_jan = tuple
-	cf_revenue_jul = tuple
-	cf_revenue_jun = tuple
-	cf_revenue_mar = tuple
-	cf_revenue_may = tuple
-	cf_revenue_monthly_firstyear_TOD1 = tuple
-	cf_revenue_monthly_firstyear_TOD2 = tuple
-	cf_revenue_monthly_firstyear_TOD3 = tuple
-	cf_revenue_monthly_firstyear_TOD4 = tuple
-	cf_revenue_monthly_firstyear_TOD5 = tuple
-	cf_revenue_monthly_firstyear_TOD6 = tuple
-	cf_revenue_monthly_firstyear_TOD7 = tuple
-	cf_revenue_monthly_firstyear_TOD8 = tuple
-	cf_revenue_monthly_firstyear_TOD9 = tuple
-	cf_revenue_nov = tuple
-	cf_revenue_oct = tuple
-	cf_revenue_sep = tuple
+	cf_return_on_equity = tuple
+	cf_return_on_equity_dollars = tuple
+	cf_return_on_equity_input = tuple
 	cf_salvage_cost_lcos = tuple
 	cf_stadepr_custom = tuple
 	cf_stadepr_macrs_15 = tuple
@@ -740,10 +712,57 @@ class Outputs(object):
 	cf_statax_income_with_incentives = tuple
 	cf_statax_taxable_incentives = tuple
 	cf_state_tax_frac = tuple
-	cf_thermal_value = tuple
+	cf_subscriber1_bill_credit_amount = tuple
+	cf_subscriber1_bill_credit_rate = tuple
+	cf_subscriber1_cost_of_participation = tuple
+	cf_subscriber1_generation_payment = tuple
+	cf_subscriber1_net_benefit = tuple
+	cf_subscriber1_net_benefit_cumulative = tuple
+	cf_subscriber1_revenue_annual_payment = tuple
+	cf_subscriber1_revenue_generation = tuple
+	cf_subscriber1_revenue_upfront = tuple
+	cf_subscriber1_share_fraction = tuple
+	cf_subscriber1_share_of_generation = tuple
+	cf_subscriber2_bill_credit_amount = tuple
+	cf_subscriber2_bill_credit_rate = tuple
+	cf_subscriber2_cost_of_participation = tuple
+	cf_subscriber2_generation_payment = tuple
+	cf_subscriber2_net_benefit = tuple
+	cf_subscriber2_net_benefit_cumulative = tuple
+	cf_subscriber2_revenue_annual_payment = tuple
+	cf_subscriber2_revenue_generation = tuple
+	cf_subscriber2_revenue_upfront = tuple
+	cf_subscriber2_share_fraction = tuple
+	cf_subscriber2_share_of_generation = tuple
+	cf_subscriber3_bill_credit_amount = tuple
+	cf_subscriber3_bill_credit_rate = tuple
+	cf_subscriber3_cost_of_participation = tuple
+	cf_subscriber3_generation_payment = tuple
+	cf_subscriber3_net_benefit = tuple
+	cf_subscriber3_net_benefit_cumulative = tuple
+	cf_subscriber3_revenue_annual_payment = tuple
+	cf_subscriber3_revenue_generation = tuple
+	cf_subscriber3_revenue_upfront = tuple
+	cf_subscriber3_share_fraction = tuple
+	cf_subscriber3_share_of_generation = tuple
+	cf_subscriber4_bill_credit_amount = tuple
+	cf_subscriber4_bill_credit_rate = tuple
+	cf_subscriber4_cost_of_participation = tuple
+	cf_subscriber4_generation_payment = tuple
+	cf_subscriber4_net_benefit = tuple
+	cf_subscriber4_net_benefit_cumulative = tuple
+	cf_subscriber4_revenue_annual_payment = tuple
+	cf_subscriber4_revenue_generation = tuple
+	cf_subscriber4_revenue_upfront = tuple
+	cf_subscriber4_share_fraction = tuple
+	cf_subscriber4_share_of_generation = tuple
 	cf_total_revenue = tuple
+	cf_unsubscribed_share_fraction = tuple
+	cf_unsubscribed_share_of_generation = tuple
 	cf_util_escal_rate = tuple
 	cf_utility_bill = tuple
+	community_solar_upfront_cost = float
+	community_solar_upfront_revenue = float
 	cost_debt_upfront = float
 	cost_financing = float
 	cost_installed = float
@@ -953,33 +972,6 @@ class Outputs(object):
 	depr_stabas_sl_5 = float
 	depr_stabas_total = float
 	effective_tax_rate = float
-	firstyear_energy_dispatch1 = float
-	firstyear_energy_dispatch2 = float
-	firstyear_energy_dispatch3 = float
-	firstyear_energy_dispatch4 = float
-	firstyear_energy_dispatch5 = float
-	firstyear_energy_dispatch6 = float
-	firstyear_energy_dispatch7 = float
-	firstyear_energy_dispatch8 = float
-	firstyear_energy_dispatch9 = float
-	firstyear_energy_price1 = float
-	firstyear_energy_price2 = float
-	firstyear_energy_price3 = float
-	firstyear_energy_price4 = float
-	firstyear_energy_price5 = float
-	firstyear_energy_price6 = float
-	firstyear_energy_price7 = float
-	firstyear_energy_price8 = float
-	firstyear_energy_price9 = float
-	firstyear_revenue_dispatch1 = float
-	firstyear_revenue_dispatch2 = float
-	firstyear_revenue_dispatch3 = float
-	firstyear_revenue_dispatch4 = float
-	firstyear_revenue_dispatch5 = float
-	firstyear_revenue_dispatch6 = float
-	firstyear_revenue_dispatch7 = float
-	firstyear_revenue_dispatch8 = float
-	firstyear_revenue_dispatch9 = float
 	flip_actual_irr = float
 	flip_actual_year = float
 	flip_target_irr = float
@@ -1050,14 +1042,18 @@ class Outputs(object):
 	itc_total_sta = float
 	lcoe_nom = float
 	lcoe_real = float
+	lcog = float
+	lcog_depr = float
+	lcog_loan_int = float
+	lcog_om = float
+	lcog_roe = float
+	lcog_wc_int = float
 	lcoptc_fed_nom = float
 	lcoptc_fed_real = float
 	lcoptc_sta_nom = float
 	lcoptc_sta_real = float
 	lcos_nom = float
 	lcos_real = float
-	lppa_nom = float
-	lppa_real = float
 	min_dscr = float
 	nominal_discount_rate = float
 	npv_annual_costs = float
@@ -1070,14 +1066,10 @@ class Outputs(object):
 	npv_energy_real = float
 	npv_fed_pbi_income = float
 	npv_oth_pbi_income = float
-	npv_ppa_revenue = float
 	npv_salvage_value = float
 	npv_sta_pbi_income = float
 	npv_thermal_value = float
 	npv_uti_pbi_income = float
-	ppa = float
-	ppa_escalation = float
-	ppa_multipliers = tuple
 	ppa_price = float
 	present_value_fuel = float
 	present_value_insandproptax = float
@@ -1092,10 +1084,14 @@ class Outputs(object):
 	salvage_value = float
 	size_of_debt = float
 	size_of_equity = float
+	subscriber1_npv = float
+	subscriber2_npv = float
+	subscriber3_npv = float
+	subscriber4_npv = float
 	wacc = float
 
 
-class Singleowner(object):
+class Communitysolar(object):
 	def assign(self, dict):
 		pass
 
@@ -1117,36 +1113,36 @@ class Singleowner(object):
 	def __init__(self, *args, **kwargs):
 		pass
 
-	Revenue = Revenue
 	FinancialParameters = FinancialParameters
 	SystemCosts = SystemCosts
 	LandLease = LandLease
 	TaxCreditIncentives = TaxCreditIncentives
 	Depreciation = Depreciation
 	PaymentIncentives = PaymentIncentives
+	Revenue = Revenue
 	BatterySystem = BatterySystem
 	ElectricityRates = ElectricityRates
 	SystemOutput = SystemOutput
 	UtilityBill = UtilityBill
 	Lifetime = Lifetime
+	CommunitySolar = CommunitySolar
 	FuelCell = FuelCell
-	CapacityPayments = CapacityPayments
 	GridLimits = GridLimits
 	LCOS = LCOS
 	ChargesByMonth = ChargesByMonth
 	Outputs = Outputs
 
 
-def default(config) -> Singleowner:
+def default(config) -> Communitysolar:
 	pass
 
-def new() -> Singleowner:
+def new() -> Communitysolar:
 	pass
 
-def wrap(ssc_data_t) -> Singleowner:
+def wrap(ssc_data_t) -> Communitysolar:
 	pass
 
-def from_existing(model, config="") -> Singleowner:
+def from_existing(model, config="") -> Communitysolar:
 	pass
 
 __loader__ = None 

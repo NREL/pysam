@@ -52,6 +52,12 @@ SystemCosts Group
 .. autoclass:: PySAM.HostDeveloper.HostDeveloper.SystemCosts
 	:members:
 
+LandLease Group
+======================================================
+
+.. autoclass:: PySAM.HostDeveloper.HostDeveloper.LandLease
+	:members:
+
 TaxCreditIncentives Group
 ======================================================
 
@@ -76,16 +82,22 @@ Host Group
 .. autoclass:: PySAM.HostDeveloper.HostDeveloper.Host
 	:members:
 
+TimeSeries Group
+======================================================
+
+.. autoclass:: PySAM.HostDeveloper.HostDeveloper.TimeSeries
+	:members:
+
+ChargesByMonth Group
+======================================================
+
+.. autoclass:: PySAM.HostDeveloper.HostDeveloper.ChargesByMonth
+	:members:
+
 SystemOutput Group
 ======================================================
 
 .. autoclass:: PySAM.HostDeveloper.HostDeveloper.SystemOutput
-	:members:
-
-ReturnOnEquity Group
-======================================================
-
-.. autoclass:: PySAM.HostDeveloper.HostDeveloper.ReturnOnEquity
 	:members:
 
 Moratorium Group

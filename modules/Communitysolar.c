@@ -1,266 +1,9 @@
 #include <Python.h>
 
-#include <SAM_Levpartflip.h>
+#include <SAM_Communitysolar.h>
 #include <SAM_api.h>
 
 #include "PySAM_utils.h"
-
-
-/*
- * Revenue Group
- */ 
-
-static PyTypeObject Revenue_Type;
-
-static PyObject *
-Revenue_new(SAM_Levpartflip data_ptr)
-{
-	PyObject* new_obj = Revenue_Type.tp_alloc(&Revenue_Type,0);
-
-	VarGroupObject* Revenue_obj = (VarGroupObject*)new_obj;
-
-	Revenue_obj->data_ptr = (SAM_table)data_ptr;
-
-	return new_obj;
-}
-
-/* Revenue methods */
-
-static PyObject *
-Revenue_assign(VarGroupObject *self, PyObject *args)
-{
-	PyObject* dict;
-	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
-		return NULL;
-	}
-
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Levpartflip", "Revenue")){
-		return NULL;
-	}
-
-	Py_INCREF(Py_None);
-	return Py_None;
-}
-
-static PyObject *
-Revenue_replace(VarGroupObject *self, PyObject *args)
-{
-	PyObject* dict;
-	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
-		return NULL;
-	}
-	PyTypeObject* tp = &Revenue_Type;
-
-	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Levpartflip", "Revenue")){
-		return NULL;
-	}
-
-	Py_INCREF(Py_None);
-	return Py_None;
-}
-
-static PyObject *
-Revenue_export(VarGroupObject *self, PyObject *args)
-{
-	PyTypeObject* tp = &Revenue_Type;
-	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
-	return dict;
-}
-
-static PyMethodDef Revenue_methods[] = {
-		{"assign",            (PyCFunction)Revenue_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Revenue_vals = { var: val, ...}``")},
-		{"replace",            (PyCFunction)Revenue_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Revenue_vals = { var: val, ...}``")},
-		{"export",            (PyCFunction)Revenue_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
-		{NULL,              NULL}           /* sentinel */
-};
-
-static PyObject *
-Revenue_get_flip_target_percent(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Levpartflip_Revenue_flip_target_percent_nget, self->data_ptr);
-}
-
-static int
-Revenue_set_flip_target_percent(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Levpartflip_Revenue_flip_target_percent_nset, self->data_ptr);
-}
-
-static PyObject *
-Revenue_get_flip_target_year(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Levpartflip_Revenue_flip_target_year_nget, self->data_ptr);
-}
-
-static int
-Revenue_set_flip_target_year(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Levpartflip_Revenue_flip_target_year_nset, self->data_ptr);
-}
-
-static PyObject *
-Revenue_get_ppa_escalation(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Levpartflip_Revenue_ppa_escalation_nget, self->data_ptr);
-}
-
-static int
-Revenue_set_ppa_escalation(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Levpartflip_Revenue_ppa_escalation_nset, self->data_ptr);
-}
-
-static PyObject *
-Revenue_get_ppa_price_input(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Levpartflip_Revenue_ppa_price_input_aget, self->data_ptr);
-}
-
-static int
-Revenue_set_ppa_price_input(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_Levpartflip_Revenue_ppa_price_input_aset, self->data_ptr);
-}
-
-static PyObject *
-Revenue_get_ppa_soln_max(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Levpartflip_Revenue_ppa_soln_max_nget, self->data_ptr);
-}
-
-static int
-Revenue_set_ppa_soln_max(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Levpartflip_Revenue_ppa_soln_max_nset, self->data_ptr);
-}
-
-static PyObject *
-Revenue_get_ppa_soln_max_iterations(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Levpartflip_Revenue_ppa_soln_max_iterations_nget, self->data_ptr);
-}
-
-static int
-Revenue_set_ppa_soln_max_iterations(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Levpartflip_Revenue_ppa_soln_max_iterations_nset, self->data_ptr);
-}
-
-static PyObject *
-Revenue_get_ppa_soln_min(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Levpartflip_Revenue_ppa_soln_min_nget, self->data_ptr);
-}
-
-static int
-Revenue_set_ppa_soln_min(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Levpartflip_Revenue_ppa_soln_min_nset, self->data_ptr);
-}
-
-static PyObject *
-Revenue_get_ppa_soln_mode(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Levpartflip_Revenue_ppa_soln_mode_nget, self->data_ptr);
-}
-
-static int
-Revenue_set_ppa_soln_mode(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Levpartflip_Revenue_ppa_soln_mode_nset, self->data_ptr);
-}
-
-static PyObject *
-Revenue_get_ppa_soln_tolerance(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Levpartflip_Revenue_ppa_soln_tolerance_nget, self->data_ptr);
-}
-
-static int
-Revenue_set_ppa_soln_tolerance(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Levpartflip_Revenue_ppa_soln_tolerance_nset, self->data_ptr);
-}
-
-static PyGetSetDef Revenue_getset[] = {
-{"flip_target_percent", (getter)Revenue_get_flip_target_percent,(setter)Revenue_set_flip_target_percent,
-	PyDoc_STR("*float*: After-tax IRR target [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 11"),
- 	NULL},
-{"flip_target_year", (getter)Revenue_get_flip_target_year,(setter)Revenue_set_flip_target_year,
-	PyDoc_STR("*float*: IRR target year [Year]\n\n*Constraints*: MIN=1\n\n*Required*: If not provided, assumed to be 11"),
- 	NULL},
-{"ppa_escalation", (getter)Revenue_get_ppa_escalation,(setter)Revenue_set_ppa_escalation,
-	PyDoc_STR("*float*: PPA escalation rate [%/year]\n\n*Required*: If not provided, assumed to be 0"),
- 	NULL},
-{"ppa_price_input", (getter)Revenue_get_ppa_price_input,(setter)Revenue_set_ppa_price_input,
-	PyDoc_STR("*sequence*: PPA price in first year [$/kWh]\n\n*Required*: True"),
- 	NULL},
-{"ppa_soln_max", (getter)Revenue_get_ppa_soln_max,(setter)Revenue_set_ppa_soln_max,
-	PyDoc_STR("*float*: PPA solution maximum ppa [cents/kWh]\n\n*Required*: If not provided, assumed to be 100"),
- 	NULL},
-{"ppa_soln_max_iterations", (getter)Revenue_get_ppa_soln_max_iterations,(setter)Revenue_set_ppa_soln_max_iterations,
-	PyDoc_STR("*float*: PPA solution maximum number of iterations\n\n*Constraints*: INTEGER,MIN=1\n\n*Required*: If not provided, assumed to be 100"),
- 	NULL},
-{"ppa_soln_min", (getter)Revenue_get_ppa_soln_min,(setter)Revenue_set_ppa_soln_min,
-	PyDoc_STR("*float*: PPA solution minimum ppa [cents/kWh]\n\n*Required*: If not provided, assumed to be 0"),
- 	NULL},
-{"ppa_soln_mode", (getter)Revenue_get_ppa_soln_mode,(setter)Revenue_set_ppa_soln_mode,
-	PyDoc_STR("*float*: PPA solution mode [0/1]\n\n*Options*: 0=solve ppa,1=specify ppa\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: If not provided, assumed to be 0"),
- 	NULL},
-{"ppa_soln_tolerance", (getter)Revenue_get_ppa_soln_tolerance,(setter)Revenue_set_ppa_soln_tolerance,
-	PyDoc_STR("*float*: PPA solution tolerance\n\n*Required*: If not provided, assumed to be 1e-5"),
- 	NULL},
-	{NULL}  /* Sentinel */
-};
-
-static PyTypeObject Revenue_Type = {
-		/* The ob_type field must be initialized in the module init function
-		 * to be portable to Windows without using C++. */
-		PyVarObject_HEAD_INIT(NULL, 0)
-		"Levpartflip.Revenue",             /*tp_name*/
-		sizeof(VarGroupObject),          /*tp_basicsize*/
-		0,                          /*tp_itemsize*/
-		/* methods */
-		0,    /*tp_dealloc*/
-		0,                          /*tp_print*/
-		(getattrfunc)0,             /*tp_getattr*/
-		0,                          /*tp_setattr*/
-		0,                          /*tp_reserved*/
-		0,                          /*tp_repr*/
-		0,                          /*tp_as_number*/
-		0,                          /*tp_as_sequence*/
-		0,                          /*tp_as_mapping*/
-		0,                          /*tp_hash*/
-		0,                          /*tp_call*/
-		0,                          /*tp_str*/
-		0,                          /*tp_getattro*/
-		0,                          /*tp_setattro*/
-		0,                          /*tp_as_buffer*/
-		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
-		0,                          /*tp_doc*/
-		0,                          /*tp_traverse*/
-		0,                          /*tp_clear*/
-		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistofnset*/
-		0,                          /*tp_iter*/
-		0,                          /*tp_iternext*/
-		Revenue_methods,         /*tp_methods*/
-		0,                          /*tp_members*/
-		Revenue_getset,          /*tp_getset*/
-		0,                          /*tp_base*/
-		0,                          /*tp_dict*/
-		0,                          /*tp_descr_get*/
-		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictofnset*/
-		0,                          /*tp_init*/
-		0,                          /*tp_alloc*/
-		0,             /*tp_new*/
-		0,                          /*tp_free*/
-		0,                          /*tp_is_gc*/
-};
 
 
 /*
@@ -270,7 +13,7 @@ static PyTypeObject Revenue_Type = {
 static PyTypeObject FinancialParameters_Type;
 
 static PyObject *
-FinancialParameters_new(SAM_Levpartflip data_ptr)
+FinancialParameters_new(SAM_Communitysolar data_ptr)
 {
 	PyObject* new_obj = FinancialParameters_Type.tp_alloc(&FinancialParameters_Type,0);
 
@@ -291,7 +34,7 @@ FinancialParameters_assign(VarGroupObject *self, PyObject *args)
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Levpartflip", "FinancialParameters")){
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Communitysolar", "FinancialParameters")){
 		return NULL;
 	}
 
@@ -308,7 +51,7 @@ FinancialParameters_replace(VarGroupObject *self, PyObject *args)
 	}
 	PyTypeObject* tp = &FinancialParameters_Type;
 
-	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Levpartflip", "FinancialParameters")){
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Communitysolar", "FinancialParameters")){
 		return NULL;
 	}
 
@@ -337,441 +80,465 @@ static PyMethodDef FinancialParameters_methods[] = {
 static PyObject *
 FinancialParameters_get_analysis_period(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_FinancialParameters_analysis_period_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_FinancialParameters_analysis_period_nget, self->data_ptr);
 }
 
 static int
 FinancialParameters_set_analysis_period(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_FinancialParameters_analysis_period_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_FinancialParameters_analysis_period_nset, self->data_ptr);
 }
 
 static PyObject *
-FinancialParameters_get_batt_salvage_percentage(VarGroupObject *self, void *closure)
+FinancialParameters_get_construction_financing_cost(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_FinancialParameters_batt_salvage_percentage_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_FinancialParameters_construction_financing_cost_nget, self->data_ptr);
 }
 
 static int
-FinancialParameters_set_batt_salvage_percentage(VarGroupObject *self, PyObject *value, void *closure)
+FinancialParameters_set_construction_financing_cost(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_FinancialParameters_batt_salvage_percentage_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_FinancialParameters_construction_financing_cost_nset, self->data_ptr);
 }
 
 static PyObject *
 FinancialParameters_get_cost_debt_closing(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_FinancialParameters_cost_debt_closing_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_FinancialParameters_cost_debt_closing_nget, self->data_ptr);
 }
 
 static int
 FinancialParameters_set_cost_debt_closing(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_FinancialParameters_cost_debt_closing_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_FinancialParameters_cost_debt_closing_nset, self->data_ptr);
 }
 
 static PyObject *
 FinancialParameters_get_cost_debt_fee(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_FinancialParameters_cost_debt_fee_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_FinancialParameters_cost_debt_fee_nget, self->data_ptr);
 }
 
 static int
 FinancialParameters_set_cost_debt_fee(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_FinancialParameters_cost_debt_fee_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_FinancialParameters_cost_debt_fee_nset, self->data_ptr);
 }
 
 static PyObject *
 FinancialParameters_get_cost_other_financing(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_FinancialParameters_cost_other_financing_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_FinancialParameters_cost_other_financing_nget, self->data_ptr);
 }
 
 static int
 FinancialParameters_set_cost_other_financing(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_FinancialParameters_cost_other_financing_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_FinancialParameters_cost_other_financing_nset, self->data_ptr);
 }
 
 static PyObject *
 FinancialParameters_get_debt_option(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_FinancialParameters_debt_option_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_FinancialParameters_debt_option_nget, self->data_ptr);
 }
 
 static int
 FinancialParameters_set_debt_option(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_FinancialParameters_debt_option_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_FinancialParameters_debt_option_nset, self->data_ptr);
 }
 
 static PyObject *
 FinancialParameters_get_debt_percent(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_FinancialParameters_debt_percent_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_FinancialParameters_debt_percent_nget, self->data_ptr);
 }
 
 static int
 FinancialParameters_set_debt_percent(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_FinancialParameters_debt_percent_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_FinancialParameters_debt_percent_nset, self->data_ptr);
 }
 
 static PyObject *
 FinancialParameters_get_dscr(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_FinancialParameters_dscr_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_FinancialParameters_dscr_nget, self->data_ptr);
 }
 
 static int
 FinancialParameters_set_dscr(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_FinancialParameters_dscr_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_FinancialParameters_dscr_nset, self->data_ptr);
 }
 
 static PyObject *
 FinancialParameters_get_dscr_limit_debt_fraction(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_FinancialParameters_dscr_limit_debt_fraction_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_FinancialParameters_dscr_limit_debt_fraction_nget, self->data_ptr);
 }
 
 static int
 FinancialParameters_set_dscr_limit_debt_fraction(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_FinancialParameters_dscr_limit_debt_fraction_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_FinancialParameters_dscr_limit_debt_fraction_nset, self->data_ptr);
 }
 
 static PyObject *
 FinancialParameters_get_dscr_maximum_debt_fraction(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_FinancialParameters_dscr_maximum_debt_fraction_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_FinancialParameters_dscr_maximum_debt_fraction_nget, self->data_ptr);
 }
 
 static int
 FinancialParameters_set_dscr_maximum_debt_fraction(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_FinancialParameters_dscr_maximum_debt_fraction_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_FinancialParameters_dscr_maximum_debt_fraction_nset, self->data_ptr);
 }
 
 static PyObject *
 FinancialParameters_get_dscr_reserve_months(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_FinancialParameters_dscr_reserve_months_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_FinancialParameters_dscr_reserve_months_nget, self->data_ptr);
 }
 
 static int
 FinancialParameters_set_dscr_reserve_months(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_FinancialParameters_dscr_reserve_months_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_FinancialParameters_dscr_reserve_months_nset, self->data_ptr);
 }
 
 static PyObject *
 FinancialParameters_get_equip1_reserve_cost(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_FinancialParameters_equip1_reserve_cost_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_FinancialParameters_equip1_reserve_cost_nget, self->data_ptr);
 }
 
 static int
 FinancialParameters_set_equip1_reserve_cost(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_FinancialParameters_equip1_reserve_cost_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_FinancialParameters_equip1_reserve_cost_nset, self->data_ptr);
 }
 
 static PyObject *
 FinancialParameters_get_equip1_reserve_freq(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_FinancialParameters_equip1_reserve_freq_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_FinancialParameters_equip1_reserve_freq_nget, self->data_ptr);
 }
 
 static int
 FinancialParameters_set_equip1_reserve_freq(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_FinancialParameters_equip1_reserve_freq_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_FinancialParameters_equip1_reserve_freq_nset, self->data_ptr);
 }
 
 static PyObject *
 FinancialParameters_get_equip2_reserve_cost(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_FinancialParameters_equip2_reserve_cost_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_FinancialParameters_equip2_reserve_cost_nget, self->data_ptr);
 }
 
 static int
 FinancialParameters_set_equip2_reserve_cost(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_FinancialParameters_equip2_reserve_cost_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_FinancialParameters_equip2_reserve_cost_nset, self->data_ptr);
 }
 
 static PyObject *
 FinancialParameters_get_equip2_reserve_freq(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_FinancialParameters_equip2_reserve_freq_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_FinancialParameters_equip2_reserve_freq_nget, self->data_ptr);
 }
 
 static int
 FinancialParameters_set_equip2_reserve_freq(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_FinancialParameters_equip2_reserve_freq_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_FinancialParameters_equip2_reserve_freq_nset, self->data_ptr);
 }
 
 static PyObject *
 FinancialParameters_get_equip3_reserve_cost(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_FinancialParameters_equip3_reserve_cost_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_FinancialParameters_equip3_reserve_cost_nget, self->data_ptr);
 }
 
 static int
 FinancialParameters_set_equip3_reserve_cost(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_FinancialParameters_equip3_reserve_cost_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_FinancialParameters_equip3_reserve_cost_nset, self->data_ptr);
 }
 
 static PyObject *
 FinancialParameters_get_equip3_reserve_freq(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_FinancialParameters_equip3_reserve_freq_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_FinancialParameters_equip3_reserve_freq_nget, self->data_ptr);
 }
 
 static int
 FinancialParameters_set_equip3_reserve_freq(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_FinancialParameters_equip3_reserve_freq_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_FinancialParameters_equip3_reserve_freq_nset, self->data_ptr);
 }
 
 static PyObject *
 FinancialParameters_get_equip_reserve_depr_fed(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_FinancialParameters_equip_reserve_depr_fed_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_FinancialParameters_equip_reserve_depr_fed_nget, self->data_ptr);
 }
 
 static int
 FinancialParameters_set_equip_reserve_depr_fed(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_FinancialParameters_equip_reserve_depr_fed_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_FinancialParameters_equip_reserve_depr_fed_nset, self->data_ptr);
 }
 
 static PyObject *
 FinancialParameters_get_equip_reserve_depr_sta(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_FinancialParameters_equip_reserve_depr_sta_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_FinancialParameters_equip_reserve_depr_sta_nget, self->data_ptr);
 }
 
 static int
 FinancialParameters_set_equip_reserve_depr_sta(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_FinancialParameters_equip_reserve_depr_sta_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_FinancialParameters_equip_reserve_depr_sta_nset, self->data_ptr);
 }
 
 static PyObject *
 FinancialParameters_get_federal_tax_rate(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_FinancialParameters_federal_tax_rate_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_FinancialParameters_federal_tax_rate_aget, self->data_ptr);
 }
 
 static int
 FinancialParameters_set_federal_tax_rate(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_Levpartflip_FinancialParameters_federal_tax_rate_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Communitysolar_FinancialParameters_federal_tax_rate_aset, self->data_ptr);
 }
 
 static PyObject *
 FinancialParameters_get_inflation_rate(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_FinancialParameters_inflation_rate_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_FinancialParameters_inflation_rate_nget, self->data_ptr);
 }
 
 static int
 FinancialParameters_set_inflation_rate(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_FinancialParameters_inflation_rate_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_FinancialParameters_inflation_rate_nset, self->data_ptr);
 }
 
 static PyObject *
 FinancialParameters_get_insurance_rate(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_FinancialParameters_insurance_rate_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_FinancialParameters_insurance_rate_nget, self->data_ptr);
 }
 
 static int
 FinancialParameters_set_insurance_rate(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_FinancialParameters_insurance_rate_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_FinancialParameters_insurance_rate_nset, self->data_ptr);
+}
+
+static PyObject *
+FinancialParameters_get_loan_moratorium(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Communitysolar_FinancialParameters_loan_moratorium_nget, self->data_ptr);
+}
+
+static int
+FinancialParameters_set_loan_moratorium(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Communitysolar_FinancialParameters_loan_moratorium_nset, self->data_ptr);
 }
 
 static PyObject *
 FinancialParameters_get_months_receivables_reserve(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_FinancialParameters_months_receivables_reserve_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_FinancialParameters_months_receivables_reserve_nget, self->data_ptr);
 }
 
 static int
 FinancialParameters_set_months_receivables_reserve(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_FinancialParameters_months_receivables_reserve_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_FinancialParameters_months_receivables_reserve_nset, self->data_ptr);
 }
 
 static PyObject *
 FinancialParameters_get_months_working_reserve(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_FinancialParameters_months_working_reserve_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_FinancialParameters_months_working_reserve_nget, self->data_ptr);
 }
 
 static int
 FinancialParameters_set_months_working_reserve(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_FinancialParameters_months_working_reserve_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_FinancialParameters_months_working_reserve_nset, self->data_ptr);
 }
 
 static PyObject *
 FinancialParameters_get_payment_option(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_FinancialParameters_payment_option_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_FinancialParameters_payment_option_nget, self->data_ptr);
 }
 
 static int
 FinancialParameters_set_payment_option(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_FinancialParameters_payment_option_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_FinancialParameters_payment_option_nset, self->data_ptr);
 }
 
 static PyObject *
 FinancialParameters_get_prop_tax_assessed_decline(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_FinancialParameters_prop_tax_assessed_decline_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_FinancialParameters_prop_tax_assessed_decline_nget, self->data_ptr);
 }
 
 static int
 FinancialParameters_set_prop_tax_assessed_decline(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_FinancialParameters_prop_tax_assessed_decline_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_FinancialParameters_prop_tax_assessed_decline_nset, self->data_ptr);
 }
 
 static PyObject *
 FinancialParameters_get_prop_tax_cost_assessed_percent(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_FinancialParameters_prop_tax_cost_assessed_percent_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_FinancialParameters_prop_tax_cost_assessed_percent_nget, self->data_ptr);
 }
 
 static int
 FinancialParameters_set_prop_tax_cost_assessed_percent(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_FinancialParameters_prop_tax_cost_assessed_percent_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_FinancialParameters_prop_tax_cost_assessed_percent_nset, self->data_ptr);
 }
 
 static PyObject *
 FinancialParameters_get_property_tax_rate(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_FinancialParameters_property_tax_rate_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_FinancialParameters_property_tax_rate_nget, self->data_ptr);
 }
 
 static int
 FinancialParameters_set_property_tax_rate(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_FinancialParameters_property_tax_rate_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_FinancialParameters_property_tax_rate_nset, self->data_ptr);
 }
 
 static PyObject *
 FinancialParameters_get_real_discount_rate(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_FinancialParameters_real_discount_rate_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_FinancialParameters_real_discount_rate_nget, self->data_ptr);
 }
 
 static int
 FinancialParameters_set_real_discount_rate(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_FinancialParameters_real_discount_rate_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_FinancialParameters_real_discount_rate_nset, self->data_ptr);
 }
 
 static PyObject *
 FinancialParameters_get_reserves_interest(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_FinancialParameters_reserves_interest_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_FinancialParameters_reserves_interest_nget, self->data_ptr);
 }
 
 static int
 FinancialParameters_set_reserves_interest(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_FinancialParameters_reserves_interest_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_FinancialParameters_reserves_interest_nset, self->data_ptr);
+}
+
+static PyObject *
+FinancialParameters_get_roe_input(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_FinancialParameters_roe_input_aget, self->data_ptr);
+}
+
+static int
+FinancialParameters_set_roe_input(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Communitysolar_FinancialParameters_roe_input_aset, self->data_ptr);
 }
 
 static PyObject *
 FinancialParameters_get_salvage_percentage(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_FinancialParameters_salvage_percentage_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_FinancialParameters_salvage_percentage_nget, self->data_ptr);
 }
 
 static int
 FinancialParameters_set_salvage_percentage(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_FinancialParameters_salvage_percentage_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_FinancialParameters_salvage_percentage_nset, self->data_ptr);
 }
 
 static PyObject *
 FinancialParameters_get_state_tax_rate(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_FinancialParameters_state_tax_rate_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_FinancialParameters_state_tax_rate_aget, self->data_ptr);
 }
 
 static int
 FinancialParameters_set_state_tax_rate(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_Levpartflip_FinancialParameters_state_tax_rate_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Communitysolar_FinancialParameters_state_tax_rate_aset, self->data_ptr);
 }
 
 static PyObject *
 FinancialParameters_get_system_capacity(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_FinancialParameters_system_capacity_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_FinancialParameters_system_capacity_nget, self->data_ptr);
 }
 
 static int
 FinancialParameters_set_system_capacity(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_FinancialParameters_system_capacity_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_FinancialParameters_system_capacity_nset, self->data_ptr);
 }
 
 static PyObject *
 FinancialParameters_get_system_heat_rate(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_FinancialParameters_system_heat_rate_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_FinancialParameters_system_heat_rate_nget, self->data_ptr);
 }
 
 static int
 FinancialParameters_set_system_heat_rate(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_FinancialParameters_system_heat_rate_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_FinancialParameters_system_heat_rate_nset, self->data_ptr);
 }
 
 static PyObject *
 FinancialParameters_get_term_int_rate(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_FinancialParameters_term_int_rate_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_FinancialParameters_term_int_rate_nget, self->data_ptr);
 }
 
 static int
 FinancialParameters_set_term_int_rate(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_FinancialParameters_term_int_rate_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_FinancialParameters_term_int_rate_nset, self->data_ptr);
 }
 
 static PyObject *
 FinancialParameters_get_term_tenor(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_FinancialParameters_term_tenor_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_FinancialParameters_term_tenor_nget, self->data_ptr);
 }
 
 static int
 FinancialParameters_set_term_tenor(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_FinancialParameters_term_tenor_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_FinancialParameters_term_tenor_nset, self->data_ptr);
 }
 
 static PyGetSetDef FinancialParameters_getset[] = {
 {"analysis_period", (getter)FinancialParameters_get_analysis_period,(setter)FinancialParameters_set_analysis_period,
 	PyDoc_STR("*float*: Analyis period [years]\n\n*Constraints*: INTEGER,MIN=0,MAX=50\n\n*Required*: If not provided, assumed to be 30"),
  	NULL},
-{"batt_salvage_percentage", (getter)FinancialParameters_get_batt_salvage_percentage,(setter)FinancialParameters_set_batt_salvage_percentage,
-	PyDoc_STR("*float*: Net pre-tax cash battery salvage value [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 0"),
+{"construction_financing_cost", (getter)FinancialParameters_get_construction_financing_cost,(setter)FinancialParameters_set_construction_financing_cost,
+	PyDoc_STR("*float*: Construction financing total [$]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - total_installed_cost\n"),
  	NULL},
 {"cost_debt_closing", (getter)FinancialParameters_get_cost_debt_closing,(setter)FinancialParameters_set_cost_debt_closing,
 	PyDoc_STR("*float*: Debt closing cost [$]\n\n*Constraints*: MIN=0\n\n*Required*: If not provided, assumed to be 250000"),
@@ -833,6 +600,9 @@ static PyGetSetDef FinancialParameters_getset[] = {
 {"insurance_rate", (getter)FinancialParameters_get_insurance_rate,(setter)FinancialParameters_set_insurance_rate,
 	PyDoc_STR("*float*: Insurance rate [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
+{"loan_moratorium", (getter)FinancialParameters_get_loan_moratorium,(setter)FinancialParameters_set_loan_moratorium,
+	PyDoc_STR("*float*: Loan moratorium period [years]\n\n*Constraints*: INTEGER,MIN=0\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
 {"months_receivables_reserve", (getter)FinancialParameters_get_months_receivables_reserve,(setter)FinancialParameters_set_months_receivables_reserve,
 	PyDoc_STR("*float*: Receivables reserve months of PPA revenue [months]\n\n*Constraints*: MIN=0\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
@@ -857,6 +627,9 @@ static PyGetSetDef FinancialParameters_getset[] = {
 {"reserves_interest", (getter)FinancialParameters_get_reserves_interest,(setter)FinancialParameters_set_reserves_interest,
 	PyDoc_STR("*float*: Interest on reserves [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 1.75"),
  	NULL},
+{"roe_input", (getter)FinancialParameters_get_roe_input,(setter)FinancialParameters_set_roe_input,
+	PyDoc_STR("*sequence*: Return on equity\n\n*Required*: If not provided, assumed to be 20"),
+ 	NULL},
 {"salvage_percentage", (getter)FinancialParameters_get_salvage_percentage,(setter)FinancialParameters_set_salvage_percentage,
 	PyDoc_STR("*float*: Net pre-tax cash salvage value [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 10"),
  	NULL},
@@ -864,7 +637,7 @@ static PyGetSetDef FinancialParameters_getset[] = {
 	PyDoc_STR("*sequence*: State income tax rate [%]\n\n*Required*: True"),
  	NULL},
 {"system_capacity", (getter)FinancialParameters_get_system_capacity,(setter)FinancialParameters_set_system_capacity,
-	PyDoc_STR("*float*: System nameplate capacity [kW]\n\n*Constraints*: POSITIVE\n\n*Required*: True"),
+	PyDoc_STR("*float*: System nameplate capacity [kW]\n\n*Constraints*: POSITIVE\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - construction_financing_cost\n\t - land_area\n\t - total_installed_cost\n"),
  	NULL},
 {"system_heat_rate", (getter)FinancialParameters_get_system_heat_rate,(setter)FinancialParameters_set_system_heat_rate,
 	PyDoc_STR("*float*: System heat rate [MMBTus/MWh]\n\n*Constraints*: MIN=0\n\n*Required*: If not provided, assumed to be 0.0"),
@@ -882,7 +655,7 @@ static PyTypeObject FinancialParameters_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"Levpartflip.FinancialParameters",             /*tp_name*/
+		"Communitysolar.FinancialParameters",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -932,7 +705,7 @@ static PyTypeObject FinancialParameters_Type = {
 static PyTypeObject SystemCosts_Type;
 
 static PyObject *
-SystemCosts_new(SAM_Levpartflip data_ptr)
+SystemCosts_new(SAM_Communitysolar data_ptr)
 {
 	PyObject* new_obj = SystemCosts_Type.tp_alloc(&SystemCosts_Type,0);
 
@@ -953,7 +726,7 @@ SystemCosts_assign(VarGroupObject *self, PyObject *args)
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Levpartflip", "SystemCosts")){
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Communitysolar", "SystemCosts")){
 		return NULL;
 	}
 
@@ -970,7 +743,7 @@ SystemCosts_replace(VarGroupObject *self, PyObject *args)
 	}
 	PyTypeObject* tp = &SystemCosts_Type;
 
-	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Levpartflip", "SystemCosts")){
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Communitysolar", "SystemCosts")){
 		return NULL;
 	}
 
@@ -999,385 +772,433 @@ static PyMethodDef SystemCosts_methods[] = {
 static PyObject *
 SystemCosts_get_add_om_num_types(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_SystemCosts_add_om_num_types_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_SystemCosts_add_om_num_types_nget, self->data_ptr);
 }
 
 static int
 SystemCosts_set_add_om_num_types(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_SystemCosts_add_om_num_types_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_SystemCosts_add_om_num_types_nset, self->data_ptr);
 }
 
 static PyObject *
 SystemCosts_get_annual_fuel_usage(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_SystemCosts_annual_fuel_usage_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_SystemCosts_annual_fuel_usage_nget, self->data_ptr);
 }
 
 static int
 SystemCosts_set_annual_fuel_usage(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_SystemCosts_annual_fuel_usage_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_SystemCosts_annual_fuel_usage_nset, self->data_ptr);
 }
 
 static PyObject *
 SystemCosts_get_annual_fuel_usage_lifetime(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_SystemCosts_annual_fuel_usage_lifetime_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_SystemCosts_annual_fuel_usage_lifetime_aget, self->data_ptr);
 }
 
 static int
 SystemCosts_set_annual_fuel_usage_lifetime(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_Levpartflip_SystemCosts_annual_fuel_usage_lifetime_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Communitysolar_SystemCosts_annual_fuel_usage_lifetime_aset, self->data_ptr);
 }
 
 static PyObject *
 SystemCosts_get_fuelcell_annual_energy_discharged(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_SystemCosts_fuelcell_annual_energy_discharged_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_SystemCosts_fuelcell_annual_energy_discharged_aget, self->data_ptr);
 }
 
 static int
 SystemCosts_set_fuelcell_annual_energy_discharged(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_Levpartflip_SystemCosts_fuelcell_annual_energy_discharged_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Communitysolar_SystemCosts_fuelcell_annual_energy_discharged_aset, self->data_ptr);
 }
 
 static PyObject *
 SystemCosts_get_om_batt_capacity_cost(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_SystemCosts_om_batt_capacity_cost_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_SystemCosts_om_batt_capacity_cost_aget, self->data_ptr);
 }
 
 static int
 SystemCosts_set_om_batt_capacity_cost(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_Levpartflip_SystemCosts_om_batt_capacity_cost_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Communitysolar_SystemCosts_om_batt_capacity_cost_aset, self->data_ptr);
 }
 
 static PyObject *
 SystemCosts_get_om_batt_fixed_cost(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_SystemCosts_om_batt_fixed_cost_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_SystemCosts_om_batt_fixed_cost_aget, self->data_ptr);
 }
 
 static int
 SystemCosts_set_om_batt_fixed_cost(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_Levpartflip_SystemCosts_om_batt_fixed_cost_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Communitysolar_SystemCosts_om_batt_fixed_cost_aset, self->data_ptr);
 }
 
 static PyObject *
 SystemCosts_get_om_batt_nameplate(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_SystemCosts_om_batt_nameplate_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_SystemCosts_om_batt_nameplate_nget, self->data_ptr);
 }
 
 static int
 SystemCosts_set_om_batt_nameplate(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_SystemCosts_om_batt_nameplate_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_SystemCosts_om_batt_nameplate_nset, self->data_ptr);
 }
 
 static PyObject *
 SystemCosts_get_om_batt_replacement_cost(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_SystemCosts_om_batt_replacement_cost_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_SystemCosts_om_batt_replacement_cost_aget, self->data_ptr);
 }
 
 static int
 SystemCosts_set_om_batt_replacement_cost(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_Levpartflip_SystemCosts_om_batt_replacement_cost_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Communitysolar_SystemCosts_om_batt_replacement_cost_aset, self->data_ptr);
 }
 
 static PyObject *
 SystemCosts_get_om_batt_variable_cost(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_SystemCosts_om_batt_variable_cost_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_SystemCosts_om_batt_variable_cost_aget, self->data_ptr);
 }
 
 static int
 SystemCosts_set_om_batt_variable_cost(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_Levpartflip_SystemCosts_om_batt_variable_cost_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Communitysolar_SystemCosts_om_batt_variable_cost_aset, self->data_ptr);
 }
 
 static PyObject *
 SystemCosts_get_om_capacity(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_SystemCosts_om_capacity_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_SystemCosts_om_capacity_aget, self->data_ptr);
 }
 
 static int
 SystemCosts_set_om_capacity(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_Levpartflip_SystemCosts_om_capacity_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Communitysolar_SystemCosts_om_capacity_aset, self->data_ptr);
 }
 
 static PyObject *
 SystemCosts_get_om_capacity_escal(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_SystemCosts_om_capacity_escal_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_SystemCosts_om_capacity_escal_nget, self->data_ptr);
 }
 
 static int
 SystemCosts_set_om_capacity_escal(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_SystemCosts_om_capacity_escal_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_SystemCosts_om_capacity_escal_nset, self->data_ptr);
 }
 
 static PyObject *
 SystemCosts_get_om_fixed(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_SystemCosts_om_fixed_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_SystemCosts_om_fixed_aget, self->data_ptr);
 }
 
 static int
 SystemCosts_set_om_fixed(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_Levpartflip_SystemCosts_om_fixed_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Communitysolar_SystemCosts_om_fixed_aset, self->data_ptr);
 }
 
 static PyObject *
 SystemCosts_get_om_fixed_escal(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_SystemCosts_om_fixed_escal_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_SystemCosts_om_fixed_escal_nget, self->data_ptr);
 }
 
 static int
 SystemCosts_set_om_fixed_escal(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_SystemCosts_om_fixed_escal_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_SystemCosts_om_fixed_escal_nset, self->data_ptr);
 }
 
 static PyObject *
 SystemCosts_get_om_fuel_cost(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_SystemCosts_om_fuel_cost_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_SystemCosts_om_fuel_cost_aget, self->data_ptr);
 }
 
 static int
 SystemCosts_set_om_fuel_cost(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_Levpartflip_SystemCosts_om_fuel_cost_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Communitysolar_SystemCosts_om_fuel_cost_aset, self->data_ptr);
 }
 
 static PyObject *
 SystemCosts_get_om_fuel_cost_escal(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_SystemCosts_om_fuel_cost_escal_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_SystemCosts_om_fuel_cost_escal_nget, self->data_ptr);
 }
 
 static int
 SystemCosts_set_om_fuel_cost_escal(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_SystemCosts_om_fuel_cost_escal_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_SystemCosts_om_fuel_cost_escal_nset, self->data_ptr);
 }
 
 static PyObject *
 SystemCosts_get_om_fuelcell_capacity_cost(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_SystemCosts_om_fuelcell_capacity_cost_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_SystemCosts_om_fuelcell_capacity_cost_aget, self->data_ptr);
 }
 
 static int
 SystemCosts_set_om_fuelcell_capacity_cost(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_Levpartflip_SystemCosts_om_fuelcell_capacity_cost_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Communitysolar_SystemCosts_om_fuelcell_capacity_cost_aset, self->data_ptr);
 }
 
 static PyObject *
 SystemCosts_get_om_fuelcell_fixed_cost(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_SystemCosts_om_fuelcell_fixed_cost_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_SystemCosts_om_fuelcell_fixed_cost_aget, self->data_ptr);
 }
 
 static int
 SystemCosts_set_om_fuelcell_fixed_cost(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_Levpartflip_SystemCosts_om_fuelcell_fixed_cost_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Communitysolar_SystemCosts_om_fuelcell_fixed_cost_aset, self->data_ptr);
 }
 
 static PyObject *
 SystemCosts_get_om_fuelcell_nameplate(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_SystemCosts_om_fuelcell_nameplate_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_SystemCosts_om_fuelcell_nameplate_nget, self->data_ptr);
 }
 
 static int
 SystemCosts_set_om_fuelcell_nameplate(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_SystemCosts_om_fuelcell_nameplate_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_SystemCosts_om_fuelcell_nameplate_nset, self->data_ptr);
 }
 
 static PyObject *
 SystemCosts_get_om_fuelcell_replacement_cost(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_SystemCosts_om_fuelcell_replacement_cost_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_SystemCosts_om_fuelcell_replacement_cost_aget, self->data_ptr);
 }
 
 static int
 SystemCosts_set_om_fuelcell_replacement_cost(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_Levpartflip_SystemCosts_om_fuelcell_replacement_cost_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Communitysolar_SystemCosts_om_fuelcell_replacement_cost_aset, self->data_ptr);
 }
 
 static PyObject *
 SystemCosts_get_om_fuelcell_variable_cost(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_SystemCosts_om_fuelcell_variable_cost_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_SystemCosts_om_fuelcell_variable_cost_aget, self->data_ptr);
 }
 
 static int
 SystemCosts_set_om_fuelcell_variable_cost(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_Levpartflip_SystemCosts_om_fuelcell_variable_cost_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Communitysolar_SystemCosts_om_fuelcell_variable_cost_aset, self->data_ptr);
 }
 
 static PyObject *
 SystemCosts_get_om_opt_fuel_1_cost(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_SystemCosts_om_opt_fuel_1_cost_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_SystemCosts_om_opt_fuel_1_cost_aget, self->data_ptr);
 }
 
 static int
 SystemCosts_set_om_opt_fuel_1_cost(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_Levpartflip_SystemCosts_om_opt_fuel_1_cost_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Communitysolar_SystemCosts_om_opt_fuel_1_cost_aset, self->data_ptr);
 }
 
 static PyObject *
 SystemCosts_get_om_opt_fuel_1_cost_escal(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_SystemCosts_om_opt_fuel_1_cost_escal_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_SystemCosts_om_opt_fuel_1_cost_escal_nget, self->data_ptr);
 }
 
 static int
 SystemCosts_set_om_opt_fuel_1_cost_escal(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_SystemCosts_om_opt_fuel_1_cost_escal_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_SystemCosts_om_opt_fuel_1_cost_escal_nset, self->data_ptr);
 }
 
 static PyObject *
 SystemCosts_get_om_opt_fuel_1_usage(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_SystemCosts_om_opt_fuel_1_usage_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_SystemCosts_om_opt_fuel_1_usage_nget, self->data_ptr);
 }
 
 static int
 SystemCosts_set_om_opt_fuel_1_usage(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_SystemCosts_om_opt_fuel_1_usage_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_SystemCosts_om_opt_fuel_1_usage_nset, self->data_ptr);
 }
 
 static PyObject *
 SystemCosts_get_om_opt_fuel_2_cost(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_SystemCosts_om_opt_fuel_2_cost_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_SystemCosts_om_opt_fuel_2_cost_aget, self->data_ptr);
 }
 
 static int
 SystemCosts_set_om_opt_fuel_2_cost(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_Levpartflip_SystemCosts_om_opt_fuel_2_cost_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Communitysolar_SystemCosts_om_opt_fuel_2_cost_aset, self->data_ptr);
 }
 
 static PyObject *
 SystemCosts_get_om_opt_fuel_2_cost_escal(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_SystemCosts_om_opt_fuel_2_cost_escal_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_SystemCosts_om_opt_fuel_2_cost_escal_nget, self->data_ptr);
 }
 
 static int
 SystemCosts_set_om_opt_fuel_2_cost_escal(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_SystemCosts_om_opt_fuel_2_cost_escal_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_SystemCosts_om_opt_fuel_2_cost_escal_nset, self->data_ptr);
 }
 
 static PyObject *
 SystemCosts_get_om_opt_fuel_2_usage(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_SystemCosts_om_opt_fuel_2_usage_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_SystemCosts_om_opt_fuel_2_usage_nget, self->data_ptr);
 }
 
 static int
 SystemCosts_set_om_opt_fuel_2_usage(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_SystemCosts_om_opt_fuel_2_usage_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_SystemCosts_om_opt_fuel_2_usage_nset, self->data_ptr);
 }
 
 static PyObject *
 SystemCosts_get_om_production(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_SystemCosts_om_production_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_SystemCosts_om_production_aget, self->data_ptr);
 }
 
 static int
 SystemCosts_set_om_production(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_Levpartflip_SystemCosts_om_production_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Communitysolar_SystemCosts_om_production_aset, self->data_ptr);
 }
 
 static PyObject *
 SystemCosts_get_om_production1_values(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_SystemCosts_om_production1_values_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_SystemCosts_om_production1_values_aget, self->data_ptr);
 }
 
 static int
 SystemCosts_set_om_production1_values(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_Levpartflip_SystemCosts_om_production1_values_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Communitysolar_SystemCosts_om_production1_values_aset, self->data_ptr);
 }
 
 static PyObject *
 SystemCosts_get_om_production2_values(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_SystemCosts_om_production2_values_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_SystemCosts_om_production2_values_aget, self->data_ptr);
 }
 
 static int
 SystemCosts_set_om_production2_values(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_Levpartflip_SystemCosts_om_production2_values_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Communitysolar_SystemCosts_om_production2_values_aset, self->data_ptr);
 }
 
 static PyObject *
 SystemCosts_get_om_production_escal(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_SystemCosts_om_production_escal_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_SystemCosts_om_production_escal_nget, self->data_ptr);
 }
 
 static int
 SystemCosts_set_om_production_escal(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_SystemCosts_om_production_escal_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_SystemCosts_om_production_escal_nset, self->data_ptr);
 }
 
 static PyObject *
 SystemCosts_get_om_replacement_cost_escal(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_SystemCosts_om_replacement_cost_escal_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_SystemCosts_om_replacement_cost_escal_nget, self->data_ptr);
 }
 
 static int
 SystemCosts_set_om_replacement_cost_escal(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_SystemCosts_om_replacement_cost_escal_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_SystemCosts_om_replacement_cost_escal_nset, self->data_ptr);
+}
+
+static PyObject *
+SystemCosts_get_system_lifetime_recapitalize(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_SystemCosts_system_lifetime_recapitalize_aget, self->data_ptr);
+}
+
+static int
+SystemCosts_set_system_lifetime_recapitalize(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Communitysolar_SystemCosts_system_lifetime_recapitalize_aset, self->data_ptr);
+}
+
+static PyObject *
+SystemCosts_get_system_recapitalization_cost(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Communitysolar_SystemCosts_system_recapitalization_cost_nget, self->data_ptr);
+}
+
+static int
+SystemCosts_set_system_recapitalization_cost(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Communitysolar_SystemCosts_system_recapitalization_cost_nset, self->data_ptr);
+}
+
+static PyObject *
+SystemCosts_get_system_recapitalization_escalation(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Communitysolar_SystemCosts_system_recapitalization_escalation_nget, self->data_ptr);
+}
+
+static int
+SystemCosts_set_system_recapitalization_escalation(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Communitysolar_SystemCosts_system_recapitalization_escalation_nset, self->data_ptr);
+}
+
+static PyObject *
+SystemCosts_get_system_use_recapitalization(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Communitysolar_SystemCosts_system_use_recapitalization_nget, self->data_ptr);
+}
+
+static int
+SystemCosts_set_system_use_recapitalization(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Communitysolar_SystemCosts_system_use_recapitalization_nset, self->data_ptr);
 }
 
 static PyObject *
 SystemCosts_get_total_installed_cost(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_SystemCosts_total_installed_cost_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_SystemCosts_total_installed_cost_nget, self->data_ptr);
 }
 
 static int
 SystemCosts_set_total_installed_cost(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_SystemCosts_total_installed_cost_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_SystemCosts_total_installed_cost_nset, self->data_ptr);
 }
 
 static PyGetSetDef SystemCosts_getset[] = {
@@ -1474,6 +1295,18 @@ static PyGetSetDef SystemCosts_getset[] = {
 {"om_replacement_cost_escal", (getter)SystemCosts_get_om_replacement_cost_escal,(setter)SystemCosts_set_om_replacement_cost_escal,
 	PyDoc_STR("*float*: Replacement cost escalation [%/year]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
+{"system_lifetime_recapitalize", (getter)SystemCosts_get_system_lifetime_recapitalize,(setter)SystemCosts_set_system_lifetime_recapitalize,
+	PyDoc_STR("*sequence*: Recapitalization boolean\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"system_recapitalization_cost", (getter)SystemCosts_get_system_recapitalization_cost,(setter)SystemCosts_set_system_recapitalization_cost,
+	PyDoc_STR("*float*: Recapitalization cost [$]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"system_recapitalization_escalation", (getter)SystemCosts_get_system_recapitalization_escalation,(setter)SystemCosts_set_system_recapitalization_escalation,
+	PyDoc_STR("*float*: Recapitalization escalation (above inflation) [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"system_use_recapitalization", (getter)SystemCosts_get_system_use_recapitalization,(setter)SystemCosts_set_system_use_recapitalization,
+	PyDoc_STR("*float*: Recapitalization expenses [0/1]\n\n*Options*: 0=None,1=Recapitalize\n\n*Constraints*: INTEGER,MIN=0\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
 {"total_installed_cost", (getter)SystemCosts_get_total_installed_cost,(setter)SystemCosts_set_total_installed_cost,
 	PyDoc_STR("*float*: Installed cost [$]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - construction_financing_cost\n"),
  	NULL},
@@ -1484,7 +1317,7 @@ static PyTypeObject SystemCosts_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"Levpartflip.SystemCosts",             /*tp_name*/
+		"Communitysolar.SystemCosts",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -1534,7 +1367,7 @@ static PyTypeObject SystemCosts_Type = {
 static PyTypeObject LandLease_Type;
 
 static PyObject *
-LandLease_new(SAM_Levpartflip data_ptr)
+LandLease_new(SAM_Communitysolar data_ptr)
 {
 	PyObject* new_obj = LandLease_Type.tp_alloc(&LandLease_Type,0);
 
@@ -1555,7 +1388,7 @@ LandLease_assign(VarGroupObject *self, PyObject *args)
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Levpartflip", "LandLease")){
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Communitysolar", "LandLease")){
 		return NULL;
 	}
 
@@ -1572,7 +1405,7 @@ LandLease_replace(VarGroupObject *self, PyObject *args)
 	}
 	PyTypeObject* tp = &LandLease_Type;
 
-	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Levpartflip", "LandLease")){
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Communitysolar", "LandLease")){
 		return NULL;
 	}
 
@@ -1601,37 +1434,37 @@ static PyMethodDef LandLease_methods[] = {
 static PyObject *
 LandLease_get_land_area(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_LandLease_land_area_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_LandLease_land_area_nget, self->data_ptr);
 }
 
 static int
 LandLease_set_land_area(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_LandLease_land_area_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_LandLease_land_area_nset, self->data_ptr);
 }
 
 static PyObject *
 LandLease_get_om_land_lease(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_LandLease_om_land_lease_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_LandLease_om_land_lease_aget, self->data_ptr);
 }
 
 static int
 LandLease_set_om_land_lease(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_Levpartflip_LandLease_om_land_lease_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Communitysolar_LandLease_om_land_lease_aset, self->data_ptr);
 }
 
 static PyObject *
 LandLease_get_om_land_lease_escal(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_LandLease_om_land_lease_escal_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_LandLease_om_land_lease_escal_nget, self->data_ptr);
 }
 
 static int
 LandLease_set_om_land_lease_escal(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_LandLease_om_land_lease_escal_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_LandLease_om_land_lease_escal_nset, self->data_ptr);
 }
 
 static PyGetSetDef LandLease_getset[] = {
@@ -1651,7 +1484,7 @@ static PyTypeObject LandLease_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"Levpartflip.LandLease",             /*tp_name*/
+		"Communitysolar.LandLease",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -1701,7 +1534,7 @@ static PyTypeObject LandLease_Type = {
 static PyTypeObject TaxCreditIncentives_Type;
 
 static PyObject *
-TaxCreditIncentives_new(SAM_Levpartflip data_ptr)
+TaxCreditIncentives_new(SAM_Communitysolar data_ptr)
 {
 	PyObject* new_obj = TaxCreditIncentives_Type.tp_alloc(&TaxCreditIncentives_Type,0);
 
@@ -1722,7 +1555,7 @@ TaxCreditIncentives_assign(VarGroupObject *self, PyObject *args)
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Levpartflip", "TaxCreditIncentives")){
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Communitysolar", "TaxCreditIncentives")){
 		return NULL;
 	}
 
@@ -1739,7 +1572,7 @@ TaxCreditIncentives_replace(VarGroupObject *self, PyObject *args)
 	}
 	PyTypeObject* tp = &TaxCreditIncentives_Type;
 
-	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Levpartflip", "TaxCreditIncentives")){
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Communitysolar", "TaxCreditIncentives")){
 		return NULL;
 	}
 
@@ -1768,241 +1601,241 @@ static PyMethodDef TaxCreditIncentives_methods[] = {
 static PyObject *
 TaxCreditIncentives_get_itc_fed_amount(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_TaxCreditIncentives_itc_fed_amount_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_TaxCreditIncentives_itc_fed_amount_nget, self->data_ptr);
 }
 
 static int
 TaxCreditIncentives_set_itc_fed_amount(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_TaxCreditIncentives_itc_fed_amount_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_TaxCreditIncentives_itc_fed_amount_nset, self->data_ptr);
 }
 
 static PyObject *
 TaxCreditIncentives_get_itc_fed_amount_deprbas_fed(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_TaxCreditIncentives_itc_fed_amount_deprbas_fed_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_TaxCreditIncentives_itc_fed_amount_deprbas_fed_nget, self->data_ptr);
 }
 
 static int
 TaxCreditIncentives_set_itc_fed_amount_deprbas_fed(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_TaxCreditIncentives_itc_fed_amount_deprbas_fed_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_TaxCreditIncentives_itc_fed_amount_deprbas_fed_nset, self->data_ptr);
 }
 
 static PyObject *
 TaxCreditIncentives_get_itc_fed_amount_deprbas_sta(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_TaxCreditIncentives_itc_fed_amount_deprbas_sta_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_TaxCreditIncentives_itc_fed_amount_deprbas_sta_nget, self->data_ptr);
 }
 
 static int
 TaxCreditIncentives_set_itc_fed_amount_deprbas_sta(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_TaxCreditIncentives_itc_fed_amount_deprbas_sta_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_TaxCreditIncentives_itc_fed_amount_deprbas_sta_nset, self->data_ptr);
 }
 
 static PyObject *
 TaxCreditIncentives_get_itc_fed_percent(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_TaxCreditIncentives_itc_fed_percent_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_TaxCreditIncentives_itc_fed_percent_nget, self->data_ptr);
 }
 
 static int
 TaxCreditIncentives_set_itc_fed_percent(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_TaxCreditIncentives_itc_fed_percent_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_TaxCreditIncentives_itc_fed_percent_nset, self->data_ptr);
 }
 
 static PyObject *
 TaxCreditIncentives_get_itc_fed_percent_deprbas_fed(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_TaxCreditIncentives_itc_fed_percent_deprbas_fed_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_TaxCreditIncentives_itc_fed_percent_deprbas_fed_nget, self->data_ptr);
 }
 
 static int
 TaxCreditIncentives_set_itc_fed_percent_deprbas_fed(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_TaxCreditIncentives_itc_fed_percent_deprbas_fed_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_TaxCreditIncentives_itc_fed_percent_deprbas_fed_nset, self->data_ptr);
 }
 
 static PyObject *
 TaxCreditIncentives_get_itc_fed_percent_deprbas_sta(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_TaxCreditIncentives_itc_fed_percent_deprbas_sta_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_TaxCreditIncentives_itc_fed_percent_deprbas_sta_nget, self->data_ptr);
 }
 
 static int
 TaxCreditIncentives_set_itc_fed_percent_deprbas_sta(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_TaxCreditIncentives_itc_fed_percent_deprbas_sta_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_TaxCreditIncentives_itc_fed_percent_deprbas_sta_nset, self->data_ptr);
 }
 
 static PyObject *
 TaxCreditIncentives_get_itc_fed_percent_maxvalue(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_TaxCreditIncentives_itc_fed_percent_maxvalue_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_TaxCreditIncentives_itc_fed_percent_maxvalue_nget, self->data_ptr);
 }
 
 static int
 TaxCreditIncentives_set_itc_fed_percent_maxvalue(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_TaxCreditIncentives_itc_fed_percent_maxvalue_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_TaxCreditIncentives_itc_fed_percent_maxvalue_nset, self->data_ptr);
 }
 
 static PyObject *
 TaxCreditIncentives_get_itc_sta_amount(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_TaxCreditIncentives_itc_sta_amount_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_TaxCreditIncentives_itc_sta_amount_nget, self->data_ptr);
 }
 
 static int
 TaxCreditIncentives_set_itc_sta_amount(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_TaxCreditIncentives_itc_sta_amount_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_TaxCreditIncentives_itc_sta_amount_nset, self->data_ptr);
 }
 
 static PyObject *
 TaxCreditIncentives_get_itc_sta_amount_deprbas_fed(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_TaxCreditIncentives_itc_sta_amount_deprbas_fed_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_TaxCreditIncentives_itc_sta_amount_deprbas_fed_nget, self->data_ptr);
 }
 
 static int
 TaxCreditIncentives_set_itc_sta_amount_deprbas_fed(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_TaxCreditIncentives_itc_sta_amount_deprbas_fed_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_TaxCreditIncentives_itc_sta_amount_deprbas_fed_nset, self->data_ptr);
 }
 
 static PyObject *
 TaxCreditIncentives_get_itc_sta_amount_deprbas_sta(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_TaxCreditIncentives_itc_sta_amount_deprbas_sta_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_TaxCreditIncentives_itc_sta_amount_deprbas_sta_nget, self->data_ptr);
 }
 
 static int
 TaxCreditIncentives_set_itc_sta_amount_deprbas_sta(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_TaxCreditIncentives_itc_sta_amount_deprbas_sta_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_TaxCreditIncentives_itc_sta_amount_deprbas_sta_nset, self->data_ptr);
 }
 
 static PyObject *
 TaxCreditIncentives_get_itc_sta_percent(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_TaxCreditIncentives_itc_sta_percent_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_TaxCreditIncentives_itc_sta_percent_nget, self->data_ptr);
 }
 
 static int
 TaxCreditIncentives_set_itc_sta_percent(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_TaxCreditIncentives_itc_sta_percent_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_TaxCreditIncentives_itc_sta_percent_nset, self->data_ptr);
 }
 
 static PyObject *
 TaxCreditIncentives_get_itc_sta_percent_deprbas_fed(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_TaxCreditIncentives_itc_sta_percent_deprbas_fed_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_TaxCreditIncentives_itc_sta_percent_deprbas_fed_nget, self->data_ptr);
 }
 
 static int
 TaxCreditIncentives_set_itc_sta_percent_deprbas_fed(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_TaxCreditIncentives_itc_sta_percent_deprbas_fed_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_TaxCreditIncentives_itc_sta_percent_deprbas_fed_nset, self->data_ptr);
 }
 
 static PyObject *
 TaxCreditIncentives_get_itc_sta_percent_deprbas_sta(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_TaxCreditIncentives_itc_sta_percent_deprbas_sta_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_TaxCreditIncentives_itc_sta_percent_deprbas_sta_nget, self->data_ptr);
 }
 
 static int
 TaxCreditIncentives_set_itc_sta_percent_deprbas_sta(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_TaxCreditIncentives_itc_sta_percent_deprbas_sta_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_TaxCreditIncentives_itc_sta_percent_deprbas_sta_nset, self->data_ptr);
 }
 
 static PyObject *
 TaxCreditIncentives_get_itc_sta_percent_maxvalue(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_TaxCreditIncentives_itc_sta_percent_maxvalue_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_TaxCreditIncentives_itc_sta_percent_maxvalue_nget, self->data_ptr);
 }
 
 static int
 TaxCreditIncentives_set_itc_sta_percent_maxvalue(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_TaxCreditIncentives_itc_sta_percent_maxvalue_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_TaxCreditIncentives_itc_sta_percent_maxvalue_nset, self->data_ptr);
 }
 
 static PyObject *
 TaxCreditIncentives_get_ptc_fed_amount(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_TaxCreditIncentives_ptc_fed_amount_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_TaxCreditIncentives_ptc_fed_amount_aget, self->data_ptr);
 }
 
 static int
 TaxCreditIncentives_set_ptc_fed_amount(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_Levpartflip_TaxCreditIncentives_ptc_fed_amount_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Communitysolar_TaxCreditIncentives_ptc_fed_amount_aset, self->data_ptr);
 }
 
 static PyObject *
 TaxCreditIncentives_get_ptc_fed_escal(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_TaxCreditIncentives_ptc_fed_escal_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_TaxCreditIncentives_ptc_fed_escal_nget, self->data_ptr);
 }
 
 static int
 TaxCreditIncentives_set_ptc_fed_escal(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_TaxCreditIncentives_ptc_fed_escal_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_TaxCreditIncentives_ptc_fed_escal_nset, self->data_ptr);
 }
 
 static PyObject *
 TaxCreditIncentives_get_ptc_fed_term(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_TaxCreditIncentives_ptc_fed_term_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_TaxCreditIncentives_ptc_fed_term_nget, self->data_ptr);
 }
 
 static int
 TaxCreditIncentives_set_ptc_fed_term(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_TaxCreditIncentives_ptc_fed_term_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_TaxCreditIncentives_ptc_fed_term_nset, self->data_ptr);
 }
 
 static PyObject *
 TaxCreditIncentives_get_ptc_sta_amount(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_TaxCreditIncentives_ptc_sta_amount_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_TaxCreditIncentives_ptc_sta_amount_aget, self->data_ptr);
 }
 
 static int
 TaxCreditIncentives_set_ptc_sta_amount(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_Levpartflip_TaxCreditIncentives_ptc_sta_amount_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Communitysolar_TaxCreditIncentives_ptc_sta_amount_aset, self->data_ptr);
 }
 
 static PyObject *
 TaxCreditIncentives_get_ptc_sta_escal(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_TaxCreditIncentives_ptc_sta_escal_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_TaxCreditIncentives_ptc_sta_escal_nget, self->data_ptr);
 }
 
 static int
 TaxCreditIncentives_set_ptc_sta_escal(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_TaxCreditIncentives_ptc_sta_escal_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_TaxCreditIncentives_ptc_sta_escal_nset, self->data_ptr);
 }
 
 static PyObject *
 TaxCreditIncentives_get_ptc_sta_term(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_TaxCreditIncentives_ptc_sta_term_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_TaxCreditIncentives_ptc_sta_term_nget, self->data_ptr);
 }
 
 static int
 TaxCreditIncentives_set_ptc_sta_term(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_TaxCreditIncentives_ptc_sta_term_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_TaxCreditIncentives_ptc_sta_term_nset, self->data_ptr);
 }
 
 static PyGetSetDef TaxCreditIncentives_getset[] = {
@@ -2073,7 +1906,7 @@ static PyTypeObject TaxCreditIncentives_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"Levpartflip.TaxCreditIncentives",             /*tp_name*/
+		"Communitysolar.TaxCreditIncentives",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -2123,7 +1956,7 @@ static PyTypeObject TaxCreditIncentives_Type = {
 static PyTypeObject Depreciation_Type;
 
 static PyObject *
-Depreciation_new(SAM_Levpartflip data_ptr)
+Depreciation_new(SAM_Communitysolar data_ptr)
 {
 	PyObject* new_obj = Depreciation_Type.tp_alloc(&Depreciation_Type,0);
 
@@ -2144,7 +1977,7 @@ Depreciation_assign(VarGroupObject *self, PyObject *args)
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Levpartflip", "Depreciation")){
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Communitysolar", "Depreciation")){
 		return NULL;
 	}
 
@@ -2161,7 +1994,7 @@ Depreciation_replace(VarGroupObject *self, PyObject *args)
 	}
 	PyTypeObject* tp = &Depreciation_Type;
 
-	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Levpartflip", "Depreciation")){
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Communitysolar", "Depreciation")){
 		return NULL;
 	}
 
@@ -2190,481 +2023,481 @@ static PyMethodDef Depreciation_methods[] = {
 static PyObject *
 Depreciation_get_depr_alloc_custom_percent(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Depreciation_depr_alloc_custom_percent_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Depreciation_depr_alloc_custom_percent_nget, self->data_ptr);
 }
 
 static int
 Depreciation_set_depr_alloc_custom_percent(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_Depreciation_depr_alloc_custom_percent_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_Depreciation_depr_alloc_custom_percent_nset, self->data_ptr);
 }
 
 static PyObject *
 Depreciation_get_depr_alloc_macrs_15_percent(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Depreciation_depr_alloc_macrs_15_percent_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Depreciation_depr_alloc_macrs_15_percent_nget, self->data_ptr);
 }
 
 static int
 Depreciation_set_depr_alloc_macrs_15_percent(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_Depreciation_depr_alloc_macrs_15_percent_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_Depreciation_depr_alloc_macrs_15_percent_nset, self->data_ptr);
 }
 
 static PyObject *
 Depreciation_get_depr_alloc_macrs_5_percent(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Depreciation_depr_alloc_macrs_5_percent_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Depreciation_depr_alloc_macrs_5_percent_nget, self->data_ptr);
 }
 
 static int
 Depreciation_set_depr_alloc_macrs_5_percent(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_Depreciation_depr_alloc_macrs_5_percent_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_Depreciation_depr_alloc_macrs_5_percent_nset, self->data_ptr);
 }
 
 static PyObject *
 Depreciation_get_depr_alloc_sl_15_percent(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Depreciation_depr_alloc_sl_15_percent_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Depreciation_depr_alloc_sl_15_percent_nget, self->data_ptr);
 }
 
 static int
 Depreciation_set_depr_alloc_sl_15_percent(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_Depreciation_depr_alloc_sl_15_percent_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_Depreciation_depr_alloc_sl_15_percent_nset, self->data_ptr);
 }
 
 static PyObject *
 Depreciation_get_depr_alloc_sl_20_percent(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Depreciation_depr_alloc_sl_20_percent_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Depreciation_depr_alloc_sl_20_percent_nget, self->data_ptr);
 }
 
 static int
 Depreciation_set_depr_alloc_sl_20_percent(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_Depreciation_depr_alloc_sl_20_percent_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_Depreciation_depr_alloc_sl_20_percent_nset, self->data_ptr);
 }
 
 static PyObject *
 Depreciation_get_depr_alloc_sl_39_percent(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Depreciation_depr_alloc_sl_39_percent_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Depreciation_depr_alloc_sl_39_percent_nget, self->data_ptr);
 }
 
 static int
 Depreciation_set_depr_alloc_sl_39_percent(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_Depreciation_depr_alloc_sl_39_percent_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_Depreciation_depr_alloc_sl_39_percent_nset, self->data_ptr);
 }
 
 static PyObject *
 Depreciation_get_depr_alloc_sl_5_percent(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Depreciation_depr_alloc_sl_5_percent_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Depreciation_depr_alloc_sl_5_percent_nget, self->data_ptr);
 }
 
 static int
 Depreciation_set_depr_alloc_sl_5_percent(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_Depreciation_depr_alloc_sl_5_percent_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_Depreciation_depr_alloc_sl_5_percent_nset, self->data_ptr);
 }
 
 static PyObject *
 Depreciation_get_depr_bonus_fed(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Depreciation_depr_bonus_fed_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Depreciation_depr_bonus_fed_nget, self->data_ptr);
 }
 
 static int
 Depreciation_set_depr_bonus_fed(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_Depreciation_depr_bonus_fed_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_Depreciation_depr_bonus_fed_nset, self->data_ptr);
 }
 
 static PyObject *
 Depreciation_get_depr_bonus_fed_custom(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Depreciation_depr_bonus_fed_custom_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Depreciation_depr_bonus_fed_custom_nget, self->data_ptr);
 }
 
 static int
 Depreciation_set_depr_bonus_fed_custom(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_Depreciation_depr_bonus_fed_custom_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_Depreciation_depr_bonus_fed_custom_nset, self->data_ptr);
 }
 
 static PyObject *
 Depreciation_get_depr_bonus_fed_macrs_15(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Depreciation_depr_bonus_fed_macrs_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Depreciation_depr_bonus_fed_macrs_15_nget, self->data_ptr);
 }
 
 static int
 Depreciation_set_depr_bonus_fed_macrs_15(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_Depreciation_depr_bonus_fed_macrs_15_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_Depreciation_depr_bonus_fed_macrs_15_nset, self->data_ptr);
 }
 
 static PyObject *
 Depreciation_get_depr_bonus_fed_macrs_5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Depreciation_depr_bonus_fed_macrs_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Depreciation_depr_bonus_fed_macrs_5_nget, self->data_ptr);
 }
 
 static int
 Depreciation_set_depr_bonus_fed_macrs_5(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_Depreciation_depr_bonus_fed_macrs_5_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_Depreciation_depr_bonus_fed_macrs_5_nset, self->data_ptr);
 }
 
 static PyObject *
 Depreciation_get_depr_bonus_fed_sl_15(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Depreciation_depr_bonus_fed_sl_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Depreciation_depr_bonus_fed_sl_15_nget, self->data_ptr);
 }
 
 static int
 Depreciation_set_depr_bonus_fed_sl_15(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_Depreciation_depr_bonus_fed_sl_15_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_Depreciation_depr_bonus_fed_sl_15_nset, self->data_ptr);
 }
 
 static PyObject *
 Depreciation_get_depr_bonus_fed_sl_20(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Depreciation_depr_bonus_fed_sl_20_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Depreciation_depr_bonus_fed_sl_20_nget, self->data_ptr);
 }
 
 static int
 Depreciation_set_depr_bonus_fed_sl_20(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_Depreciation_depr_bonus_fed_sl_20_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_Depreciation_depr_bonus_fed_sl_20_nset, self->data_ptr);
 }
 
 static PyObject *
 Depreciation_get_depr_bonus_fed_sl_39(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Depreciation_depr_bonus_fed_sl_39_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Depreciation_depr_bonus_fed_sl_39_nget, self->data_ptr);
 }
 
 static int
 Depreciation_set_depr_bonus_fed_sl_39(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_Depreciation_depr_bonus_fed_sl_39_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_Depreciation_depr_bonus_fed_sl_39_nset, self->data_ptr);
 }
 
 static PyObject *
 Depreciation_get_depr_bonus_fed_sl_5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Depreciation_depr_bonus_fed_sl_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Depreciation_depr_bonus_fed_sl_5_nget, self->data_ptr);
 }
 
 static int
 Depreciation_set_depr_bonus_fed_sl_5(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_Depreciation_depr_bonus_fed_sl_5_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_Depreciation_depr_bonus_fed_sl_5_nset, self->data_ptr);
 }
 
 static PyObject *
 Depreciation_get_depr_bonus_sta(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Depreciation_depr_bonus_sta_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Depreciation_depr_bonus_sta_nget, self->data_ptr);
 }
 
 static int
 Depreciation_set_depr_bonus_sta(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_Depreciation_depr_bonus_sta_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_Depreciation_depr_bonus_sta_nset, self->data_ptr);
 }
 
 static PyObject *
 Depreciation_get_depr_bonus_sta_custom(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Depreciation_depr_bonus_sta_custom_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Depreciation_depr_bonus_sta_custom_nget, self->data_ptr);
 }
 
 static int
 Depreciation_set_depr_bonus_sta_custom(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_Depreciation_depr_bonus_sta_custom_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_Depreciation_depr_bonus_sta_custom_nset, self->data_ptr);
 }
 
 static PyObject *
 Depreciation_get_depr_bonus_sta_macrs_15(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Depreciation_depr_bonus_sta_macrs_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Depreciation_depr_bonus_sta_macrs_15_nget, self->data_ptr);
 }
 
 static int
 Depreciation_set_depr_bonus_sta_macrs_15(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_Depreciation_depr_bonus_sta_macrs_15_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_Depreciation_depr_bonus_sta_macrs_15_nset, self->data_ptr);
 }
 
 static PyObject *
 Depreciation_get_depr_bonus_sta_macrs_5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Depreciation_depr_bonus_sta_macrs_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Depreciation_depr_bonus_sta_macrs_5_nget, self->data_ptr);
 }
 
 static int
 Depreciation_set_depr_bonus_sta_macrs_5(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_Depreciation_depr_bonus_sta_macrs_5_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_Depreciation_depr_bonus_sta_macrs_5_nset, self->data_ptr);
 }
 
 static PyObject *
 Depreciation_get_depr_bonus_sta_sl_15(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Depreciation_depr_bonus_sta_sl_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Depreciation_depr_bonus_sta_sl_15_nget, self->data_ptr);
 }
 
 static int
 Depreciation_set_depr_bonus_sta_sl_15(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_Depreciation_depr_bonus_sta_sl_15_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_Depreciation_depr_bonus_sta_sl_15_nset, self->data_ptr);
 }
 
 static PyObject *
 Depreciation_get_depr_bonus_sta_sl_20(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Depreciation_depr_bonus_sta_sl_20_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Depreciation_depr_bonus_sta_sl_20_nget, self->data_ptr);
 }
 
 static int
 Depreciation_set_depr_bonus_sta_sl_20(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_Depreciation_depr_bonus_sta_sl_20_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_Depreciation_depr_bonus_sta_sl_20_nset, self->data_ptr);
 }
 
 static PyObject *
 Depreciation_get_depr_bonus_sta_sl_39(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Depreciation_depr_bonus_sta_sl_39_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Depreciation_depr_bonus_sta_sl_39_nget, self->data_ptr);
 }
 
 static int
 Depreciation_set_depr_bonus_sta_sl_39(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_Depreciation_depr_bonus_sta_sl_39_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_Depreciation_depr_bonus_sta_sl_39_nset, self->data_ptr);
 }
 
 static PyObject *
 Depreciation_get_depr_bonus_sta_sl_5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Depreciation_depr_bonus_sta_sl_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Depreciation_depr_bonus_sta_sl_5_nget, self->data_ptr);
 }
 
 static int
 Depreciation_set_depr_bonus_sta_sl_5(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_Depreciation_depr_bonus_sta_sl_5_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_Depreciation_depr_bonus_sta_sl_5_nset, self->data_ptr);
 }
 
 static PyObject *
 Depreciation_get_depr_custom_schedule(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Depreciation_depr_custom_schedule_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Depreciation_depr_custom_schedule_aget, self->data_ptr);
 }
 
 static int
 Depreciation_set_depr_custom_schedule(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_Levpartflip_Depreciation_depr_custom_schedule_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Communitysolar_Depreciation_depr_custom_schedule_aset, self->data_ptr);
 }
 
 static PyObject *
 Depreciation_get_depr_fedbas_method(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Depreciation_depr_fedbas_method_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Depreciation_depr_fedbas_method_nget, self->data_ptr);
 }
 
 static int
 Depreciation_set_depr_fedbas_method(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_Depreciation_depr_fedbas_method_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_Depreciation_depr_fedbas_method_nset, self->data_ptr);
 }
 
 static PyObject *
 Depreciation_get_depr_itc_fed_custom(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Depreciation_depr_itc_fed_custom_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Depreciation_depr_itc_fed_custom_nget, self->data_ptr);
 }
 
 static int
 Depreciation_set_depr_itc_fed_custom(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_Depreciation_depr_itc_fed_custom_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_Depreciation_depr_itc_fed_custom_nset, self->data_ptr);
 }
 
 static PyObject *
 Depreciation_get_depr_itc_fed_macrs_15(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Depreciation_depr_itc_fed_macrs_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Depreciation_depr_itc_fed_macrs_15_nget, self->data_ptr);
 }
 
 static int
 Depreciation_set_depr_itc_fed_macrs_15(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_Depreciation_depr_itc_fed_macrs_15_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_Depreciation_depr_itc_fed_macrs_15_nset, self->data_ptr);
 }
 
 static PyObject *
 Depreciation_get_depr_itc_fed_macrs_5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Depreciation_depr_itc_fed_macrs_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Depreciation_depr_itc_fed_macrs_5_nget, self->data_ptr);
 }
 
 static int
 Depreciation_set_depr_itc_fed_macrs_5(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_Depreciation_depr_itc_fed_macrs_5_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_Depreciation_depr_itc_fed_macrs_5_nset, self->data_ptr);
 }
 
 static PyObject *
 Depreciation_get_depr_itc_fed_sl_15(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Depreciation_depr_itc_fed_sl_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Depreciation_depr_itc_fed_sl_15_nget, self->data_ptr);
 }
 
 static int
 Depreciation_set_depr_itc_fed_sl_15(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_Depreciation_depr_itc_fed_sl_15_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_Depreciation_depr_itc_fed_sl_15_nset, self->data_ptr);
 }
 
 static PyObject *
 Depreciation_get_depr_itc_fed_sl_20(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Depreciation_depr_itc_fed_sl_20_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Depreciation_depr_itc_fed_sl_20_nget, self->data_ptr);
 }
 
 static int
 Depreciation_set_depr_itc_fed_sl_20(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_Depreciation_depr_itc_fed_sl_20_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_Depreciation_depr_itc_fed_sl_20_nset, self->data_ptr);
 }
 
 static PyObject *
 Depreciation_get_depr_itc_fed_sl_39(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Depreciation_depr_itc_fed_sl_39_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Depreciation_depr_itc_fed_sl_39_nget, self->data_ptr);
 }
 
 static int
 Depreciation_set_depr_itc_fed_sl_39(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_Depreciation_depr_itc_fed_sl_39_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_Depreciation_depr_itc_fed_sl_39_nset, self->data_ptr);
 }
 
 static PyObject *
 Depreciation_get_depr_itc_fed_sl_5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Depreciation_depr_itc_fed_sl_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Depreciation_depr_itc_fed_sl_5_nget, self->data_ptr);
 }
 
 static int
 Depreciation_set_depr_itc_fed_sl_5(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_Depreciation_depr_itc_fed_sl_5_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_Depreciation_depr_itc_fed_sl_5_nset, self->data_ptr);
 }
 
 static PyObject *
 Depreciation_get_depr_itc_sta_custom(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Depreciation_depr_itc_sta_custom_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Depreciation_depr_itc_sta_custom_nget, self->data_ptr);
 }
 
 static int
 Depreciation_set_depr_itc_sta_custom(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_Depreciation_depr_itc_sta_custom_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_Depreciation_depr_itc_sta_custom_nset, self->data_ptr);
 }
 
 static PyObject *
 Depreciation_get_depr_itc_sta_macrs_15(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Depreciation_depr_itc_sta_macrs_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Depreciation_depr_itc_sta_macrs_15_nget, self->data_ptr);
 }
 
 static int
 Depreciation_set_depr_itc_sta_macrs_15(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_Depreciation_depr_itc_sta_macrs_15_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_Depreciation_depr_itc_sta_macrs_15_nset, self->data_ptr);
 }
 
 static PyObject *
 Depreciation_get_depr_itc_sta_macrs_5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Depreciation_depr_itc_sta_macrs_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Depreciation_depr_itc_sta_macrs_5_nget, self->data_ptr);
 }
 
 static int
 Depreciation_set_depr_itc_sta_macrs_5(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_Depreciation_depr_itc_sta_macrs_5_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_Depreciation_depr_itc_sta_macrs_5_nset, self->data_ptr);
 }
 
 static PyObject *
 Depreciation_get_depr_itc_sta_sl_15(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Depreciation_depr_itc_sta_sl_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Depreciation_depr_itc_sta_sl_15_nget, self->data_ptr);
 }
 
 static int
 Depreciation_set_depr_itc_sta_sl_15(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_Depreciation_depr_itc_sta_sl_15_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_Depreciation_depr_itc_sta_sl_15_nset, self->data_ptr);
 }
 
 static PyObject *
 Depreciation_get_depr_itc_sta_sl_20(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Depreciation_depr_itc_sta_sl_20_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Depreciation_depr_itc_sta_sl_20_nget, self->data_ptr);
 }
 
 static int
 Depreciation_set_depr_itc_sta_sl_20(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_Depreciation_depr_itc_sta_sl_20_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_Depreciation_depr_itc_sta_sl_20_nset, self->data_ptr);
 }
 
 static PyObject *
 Depreciation_get_depr_itc_sta_sl_39(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Depreciation_depr_itc_sta_sl_39_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Depreciation_depr_itc_sta_sl_39_nget, self->data_ptr);
 }
 
 static int
 Depreciation_set_depr_itc_sta_sl_39(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_Depreciation_depr_itc_sta_sl_39_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_Depreciation_depr_itc_sta_sl_39_nset, self->data_ptr);
 }
 
 static PyObject *
 Depreciation_get_depr_itc_sta_sl_5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Depreciation_depr_itc_sta_sl_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Depreciation_depr_itc_sta_sl_5_nget, self->data_ptr);
 }
 
 static int
 Depreciation_set_depr_itc_sta_sl_5(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_Depreciation_depr_itc_sta_sl_5_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_Depreciation_depr_itc_sta_sl_5_nset, self->data_ptr);
 }
 
 static PyObject *
 Depreciation_get_depr_stabas_method(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Depreciation_depr_stabas_method_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Depreciation_depr_stabas_method_nget, self->data_ptr);
 }
 
 static int
 Depreciation_set_depr_stabas_method(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_Depreciation_depr_stabas_method_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_Depreciation_depr_stabas_method_nset, self->data_ptr);
 }
 
 static PyGetSetDef Depreciation_getset[] = {
@@ -2795,7 +2628,7 @@ static PyTypeObject Depreciation_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"Levpartflip.Depreciation",             /*tp_name*/
+		"Communitysolar.Depreciation",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -2845,7 +2678,7 @@ static PyTypeObject Depreciation_Type = {
 static PyTypeObject PaymentIncentives_Type;
 
 static PyObject *
-PaymentIncentives_new(SAM_Levpartflip data_ptr)
+PaymentIncentives_new(SAM_Communitysolar data_ptr)
 {
 	PyObject* new_obj = PaymentIncentives_Type.tp_alloc(&PaymentIncentives_Type,0);
 
@@ -2866,7 +2699,7 @@ PaymentIncentives_assign(VarGroupObject *self, PyObject *args)
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Levpartflip", "PaymentIncentives")){
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Communitysolar", "PaymentIncentives")){
 		return NULL;
 	}
 
@@ -2883,7 +2716,7 @@ PaymentIncentives_replace(VarGroupObject *self, PyObject *args)
 	}
 	PyTypeObject* tp = &PaymentIncentives_Type;
 
-	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Levpartflip", "PaymentIncentives")){
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Communitysolar", "PaymentIncentives")){
 		return NULL;
 	}
 
@@ -2912,1105 +2745,1105 @@ static PyMethodDef PaymentIncentives_methods[] = {
 static PyObject *
 PaymentIncentives_get_cbi_fed_amount(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_cbi_fed_amount_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_cbi_fed_amount_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_cbi_fed_amount(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_cbi_fed_amount_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_cbi_fed_amount_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_cbi_fed_deprbas_fed(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_cbi_fed_deprbas_fed_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_cbi_fed_deprbas_fed_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_cbi_fed_deprbas_fed(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_cbi_fed_deprbas_fed_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_cbi_fed_deprbas_fed_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_cbi_fed_deprbas_sta(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_cbi_fed_deprbas_sta_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_cbi_fed_deprbas_sta_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_cbi_fed_deprbas_sta(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_cbi_fed_deprbas_sta_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_cbi_fed_deprbas_sta_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_cbi_fed_maxvalue(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_cbi_fed_maxvalue_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_cbi_fed_maxvalue_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_cbi_fed_maxvalue(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_cbi_fed_maxvalue_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_cbi_fed_maxvalue_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_cbi_fed_tax_fed(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_cbi_fed_tax_fed_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_cbi_fed_tax_fed_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_cbi_fed_tax_fed(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_cbi_fed_tax_fed_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_cbi_fed_tax_fed_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_cbi_fed_tax_sta(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_cbi_fed_tax_sta_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_cbi_fed_tax_sta_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_cbi_fed_tax_sta(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_cbi_fed_tax_sta_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_cbi_fed_tax_sta_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_cbi_oth_amount(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_cbi_oth_amount_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_cbi_oth_amount_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_cbi_oth_amount(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_cbi_oth_amount_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_cbi_oth_amount_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_cbi_oth_deprbas_fed(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_cbi_oth_deprbas_fed_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_cbi_oth_deprbas_fed_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_cbi_oth_deprbas_fed(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_cbi_oth_deprbas_fed_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_cbi_oth_deprbas_fed_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_cbi_oth_deprbas_sta(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_cbi_oth_deprbas_sta_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_cbi_oth_deprbas_sta_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_cbi_oth_deprbas_sta(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_cbi_oth_deprbas_sta_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_cbi_oth_deprbas_sta_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_cbi_oth_maxvalue(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_cbi_oth_maxvalue_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_cbi_oth_maxvalue_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_cbi_oth_maxvalue(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_cbi_oth_maxvalue_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_cbi_oth_maxvalue_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_cbi_oth_tax_fed(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_cbi_oth_tax_fed_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_cbi_oth_tax_fed_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_cbi_oth_tax_fed(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_cbi_oth_tax_fed_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_cbi_oth_tax_fed_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_cbi_oth_tax_sta(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_cbi_oth_tax_sta_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_cbi_oth_tax_sta_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_cbi_oth_tax_sta(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_cbi_oth_tax_sta_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_cbi_oth_tax_sta_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_cbi_sta_amount(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_cbi_sta_amount_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_cbi_sta_amount_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_cbi_sta_amount(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_cbi_sta_amount_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_cbi_sta_amount_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_cbi_sta_deprbas_fed(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_cbi_sta_deprbas_fed_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_cbi_sta_deprbas_fed_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_cbi_sta_deprbas_fed(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_cbi_sta_deprbas_fed_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_cbi_sta_deprbas_fed_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_cbi_sta_deprbas_sta(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_cbi_sta_deprbas_sta_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_cbi_sta_deprbas_sta_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_cbi_sta_deprbas_sta(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_cbi_sta_deprbas_sta_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_cbi_sta_deprbas_sta_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_cbi_sta_maxvalue(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_cbi_sta_maxvalue_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_cbi_sta_maxvalue_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_cbi_sta_maxvalue(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_cbi_sta_maxvalue_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_cbi_sta_maxvalue_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_cbi_sta_tax_fed(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_cbi_sta_tax_fed_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_cbi_sta_tax_fed_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_cbi_sta_tax_fed(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_cbi_sta_tax_fed_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_cbi_sta_tax_fed_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_cbi_sta_tax_sta(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_cbi_sta_tax_sta_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_cbi_sta_tax_sta_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_cbi_sta_tax_sta(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_cbi_sta_tax_sta_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_cbi_sta_tax_sta_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_cbi_uti_amount(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_cbi_uti_amount_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_cbi_uti_amount_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_cbi_uti_amount(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_cbi_uti_amount_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_cbi_uti_amount_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_cbi_uti_deprbas_fed(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_cbi_uti_deprbas_fed_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_cbi_uti_deprbas_fed_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_cbi_uti_deprbas_fed(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_cbi_uti_deprbas_fed_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_cbi_uti_deprbas_fed_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_cbi_uti_deprbas_sta(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_cbi_uti_deprbas_sta_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_cbi_uti_deprbas_sta_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_cbi_uti_deprbas_sta(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_cbi_uti_deprbas_sta_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_cbi_uti_deprbas_sta_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_cbi_uti_maxvalue(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_cbi_uti_maxvalue_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_cbi_uti_maxvalue_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_cbi_uti_maxvalue(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_cbi_uti_maxvalue_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_cbi_uti_maxvalue_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_cbi_uti_tax_fed(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_cbi_uti_tax_fed_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_cbi_uti_tax_fed_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_cbi_uti_tax_fed(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_cbi_uti_tax_fed_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_cbi_uti_tax_fed_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_cbi_uti_tax_sta(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_cbi_uti_tax_sta_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_cbi_uti_tax_sta_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_cbi_uti_tax_sta(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_cbi_uti_tax_sta_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_cbi_uti_tax_sta_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_fed_amount(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_ibi_fed_amount_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_ibi_fed_amount_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_fed_amount(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_ibi_fed_amount_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_ibi_fed_amount_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_fed_amount_deprbas_fed(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_ibi_fed_amount_deprbas_fed_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_ibi_fed_amount_deprbas_fed_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_fed_amount_deprbas_fed(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_ibi_fed_amount_deprbas_fed_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_ibi_fed_amount_deprbas_fed_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_fed_amount_deprbas_sta(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_ibi_fed_amount_deprbas_sta_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_ibi_fed_amount_deprbas_sta_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_fed_amount_deprbas_sta(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_ibi_fed_amount_deprbas_sta_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_ibi_fed_amount_deprbas_sta_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_fed_amount_tax_fed(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_ibi_fed_amount_tax_fed_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_ibi_fed_amount_tax_fed_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_fed_amount_tax_fed(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_ibi_fed_amount_tax_fed_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_ibi_fed_amount_tax_fed_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_fed_amount_tax_sta(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_ibi_fed_amount_tax_sta_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_ibi_fed_amount_tax_sta_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_fed_amount_tax_sta(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_ibi_fed_amount_tax_sta_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_ibi_fed_amount_tax_sta_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_fed_percent(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_ibi_fed_percent_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_ibi_fed_percent_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_fed_percent(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_ibi_fed_percent_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_ibi_fed_percent_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_fed_percent_deprbas_fed(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_ibi_fed_percent_deprbas_fed_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_ibi_fed_percent_deprbas_fed_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_fed_percent_deprbas_fed(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_ibi_fed_percent_deprbas_fed_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_ibi_fed_percent_deprbas_fed_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_fed_percent_deprbas_sta(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_ibi_fed_percent_deprbas_sta_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_ibi_fed_percent_deprbas_sta_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_fed_percent_deprbas_sta(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_ibi_fed_percent_deprbas_sta_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_ibi_fed_percent_deprbas_sta_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_fed_percent_maxvalue(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_ibi_fed_percent_maxvalue_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_ibi_fed_percent_maxvalue_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_fed_percent_maxvalue(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_ibi_fed_percent_maxvalue_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_ibi_fed_percent_maxvalue_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_fed_percent_tax_fed(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_ibi_fed_percent_tax_fed_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_ibi_fed_percent_tax_fed_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_fed_percent_tax_fed(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_ibi_fed_percent_tax_fed_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_ibi_fed_percent_tax_fed_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_fed_percent_tax_sta(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_ibi_fed_percent_tax_sta_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_ibi_fed_percent_tax_sta_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_fed_percent_tax_sta(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_ibi_fed_percent_tax_sta_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_ibi_fed_percent_tax_sta_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_oth_amount(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_ibi_oth_amount_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_ibi_oth_amount_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_oth_amount(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_ibi_oth_amount_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_ibi_oth_amount_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_oth_amount_deprbas_fed(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_ibi_oth_amount_deprbas_fed_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_ibi_oth_amount_deprbas_fed_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_oth_amount_deprbas_fed(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_ibi_oth_amount_deprbas_fed_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_ibi_oth_amount_deprbas_fed_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_oth_amount_deprbas_sta(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_ibi_oth_amount_deprbas_sta_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_ibi_oth_amount_deprbas_sta_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_oth_amount_deprbas_sta(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_ibi_oth_amount_deprbas_sta_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_ibi_oth_amount_deprbas_sta_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_oth_amount_tax_fed(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_ibi_oth_amount_tax_fed_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_ibi_oth_amount_tax_fed_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_oth_amount_tax_fed(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_ibi_oth_amount_tax_fed_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_ibi_oth_amount_tax_fed_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_oth_amount_tax_sta(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_ibi_oth_amount_tax_sta_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_ibi_oth_amount_tax_sta_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_oth_amount_tax_sta(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_ibi_oth_amount_tax_sta_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_ibi_oth_amount_tax_sta_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_oth_percent(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_ibi_oth_percent_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_ibi_oth_percent_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_oth_percent(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_ibi_oth_percent_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_ibi_oth_percent_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_oth_percent_deprbas_fed(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_ibi_oth_percent_deprbas_fed_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_ibi_oth_percent_deprbas_fed_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_oth_percent_deprbas_fed(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_ibi_oth_percent_deprbas_fed_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_ibi_oth_percent_deprbas_fed_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_oth_percent_deprbas_sta(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_ibi_oth_percent_deprbas_sta_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_ibi_oth_percent_deprbas_sta_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_oth_percent_deprbas_sta(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_ibi_oth_percent_deprbas_sta_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_ibi_oth_percent_deprbas_sta_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_oth_percent_maxvalue(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_ibi_oth_percent_maxvalue_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_ibi_oth_percent_maxvalue_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_oth_percent_maxvalue(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_ibi_oth_percent_maxvalue_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_ibi_oth_percent_maxvalue_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_oth_percent_tax_fed(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_ibi_oth_percent_tax_fed_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_ibi_oth_percent_tax_fed_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_oth_percent_tax_fed(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_ibi_oth_percent_tax_fed_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_ibi_oth_percent_tax_fed_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_oth_percent_tax_sta(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_ibi_oth_percent_tax_sta_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_ibi_oth_percent_tax_sta_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_oth_percent_tax_sta(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_ibi_oth_percent_tax_sta_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_ibi_oth_percent_tax_sta_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_sta_amount(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_ibi_sta_amount_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_ibi_sta_amount_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_sta_amount(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_ibi_sta_amount_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_ibi_sta_amount_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_sta_amount_deprbas_fed(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_ibi_sta_amount_deprbas_fed_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_ibi_sta_amount_deprbas_fed_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_sta_amount_deprbas_fed(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_ibi_sta_amount_deprbas_fed_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_ibi_sta_amount_deprbas_fed_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_sta_amount_deprbas_sta(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_ibi_sta_amount_deprbas_sta_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_ibi_sta_amount_deprbas_sta_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_sta_amount_deprbas_sta(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_ibi_sta_amount_deprbas_sta_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_ibi_sta_amount_deprbas_sta_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_sta_amount_tax_fed(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_ibi_sta_amount_tax_fed_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_ibi_sta_amount_tax_fed_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_sta_amount_tax_fed(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_ibi_sta_amount_tax_fed_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_ibi_sta_amount_tax_fed_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_sta_amount_tax_sta(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_ibi_sta_amount_tax_sta_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_ibi_sta_amount_tax_sta_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_sta_amount_tax_sta(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_ibi_sta_amount_tax_sta_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_ibi_sta_amount_tax_sta_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_sta_percent(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_ibi_sta_percent_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_ibi_sta_percent_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_sta_percent(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_ibi_sta_percent_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_ibi_sta_percent_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_sta_percent_deprbas_fed(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_ibi_sta_percent_deprbas_fed_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_ibi_sta_percent_deprbas_fed_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_sta_percent_deprbas_fed(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_ibi_sta_percent_deprbas_fed_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_ibi_sta_percent_deprbas_fed_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_sta_percent_deprbas_sta(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_ibi_sta_percent_deprbas_sta_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_ibi_sta_percent_deprbas_sta_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_sta_percent_deprbas_sta(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_ibi_sta_percent_deprbas_sta_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_ibi_sta_percent_deprbas_sta_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_sta_percent_maxvalue(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_ibi_sta_percent_maxvalue_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_ibi_sta_percent_maxvalue_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_sta_percent_maxvalue(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_ibi_sta_percent_maxvalue_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_ibi_sta_percent_maxvalue_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_sta_percent_tax_fed(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_ibi_sta_percent_tax_fed_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_ibi_sta_percent_tax_fed_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_sta_percent_tax_fed(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_ibi_sta_percent_tax_fed_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_ibi_sta_percent_tax_fed_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_sta_percent_tax_sta(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_ibi_sta_percent_tax_sta_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_ibi_sta_percent_tax_sta_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_sta_percent_tax_sta(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_ibi_sta_percent_tax_sta_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_ibi_sta_percent_tax_sta_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_uti_amount(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_ibi_uti_amount_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_ibi_uti_amount_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_uti_amount(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_ibi_uti_amount_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_ibi_uti_amount_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_uti_amount_deprbas_fed(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_ibi_uti_amount_deprbas_fed_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_ibi_uti_amount_deprbas_fed_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_uti_amount_deprbas_fed(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_ibi_uti_amount_deprbas_fed_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_ibi_uti_amount_deprbas_fed_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_uti_amount_deprbas_sta(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_ibi_uti_amount_deprbas_sta_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_ibi_uti_amount_deprbas_sta_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_uti_amount_deprbas_sta(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_ibi_uti_amount_deprbas_sta_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_ibi_uti_amount_deprbas_sta_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_uti_amount_tax_fed(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_ibi_uti_amount_tax_fed_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_ibi_uti_amount_tax_fed_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_uti_amount_tax_fed(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_ibi_uti_amount_tax_fed_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_ibi_uti_amount_tax_fed_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_uti_amount_tax_sta(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_ibi_uti_amount_tax_sta_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_ibi_uti_amount_tax_sta_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_uti_amount_tax_sta(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_ibi_uti_amount_tax_sta_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_ibi_uti_amount_tax_sta_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_uti_percent(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_ibi_uti_percent_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_ibi_uti_percent_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_uti_percent(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_ibi_uti_percent_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_ibi_uti_percent_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_uti_percent_deprbas_fed(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_ibi_uti_percent_deprbas_fed_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_ibi_uti_percent_deprbas_fed_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_uti_percent_deprbas_fed(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_ibi_uti_percent_deprbas_fed_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_ibi_uti_percent_deprbas_fed_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_uti_percent_deprbas_sta(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_ibi_uti_percent_deprbas_sta_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_ibi_uti_percent_deprbas_sta_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_uti_percent_deprbas_sta(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_ibi_uti_percent_deprbas_sta_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_ibi_uti_percent_deprbas_sta_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_uti_percent_maxvalue(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_ibi_uti_percent_maxvalue_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_ibi_uti_percent_maxvalue_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_uti_percent_maxvalue(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_ibi_uti_percent_maxvalue_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_ibi_uti_percent_maxvalue_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_uti_percent_tax_fed(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_ibi_uti_percent_tax_fed_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_ibi_uti_percent_tax_fed_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_uti_percent_tax_fed(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_ibi_uti_percent_tax_fed_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_ibi_uti_percent_tax_fed_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_ibi_uti_percent_tax_sta(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_ibi_uti_percent_tax_sta_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_ibi_uti_percent_tax_sta_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_ibi_uti_percent_tax_sta(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_ibi_uti_percent_tax_sta_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_ibi_uti_percent_tax_sta_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_pbi_fed_amount(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_PaymentIncentives_pbi_fed_amount_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_PaymentIncentives_pbi_fed_amount_aget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_pbi_fed_amount(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_Levpartflip_PaymentIncentives_pbi_fed_amount_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Communitysolar_PaymentIncentives_pbi_fed_amount_aset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_pbi_fed_escal(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_pbi_fed_escal_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_pbi_fed_escal_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_pbi_fed_escal(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_pbi_fed_escal_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_pbi_fed_escal_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_pbi_fed_for_ds(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_pbi_fed_for_ds_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_pbi_fed_for_ds_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_pbi_fed_for_ds(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_pbi_fed_for_ds_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_pbi_fed_for_ds_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_pbi_fed_tax_fed(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_pbi_fed_tax_fed_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_pbi_fed_tax_fed_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_pbi_fed_tax_fed(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_pbi_fed_tax_fed_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_pbi_fed_tax_fed_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_pbi_fed_tax_sta(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_pbi_fed_tax_sta_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_pbi_fed_tax_sta_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_pbi_fed_tax_sta(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_pbi_fed_tax_sta_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_pbi_fed_tax_sta_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_pbi_fed_term(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_pbi_fed_term_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_pbi_fed_term_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_pbi_fed_term(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_pbi_fed_term_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_pbi_fed_term_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_pbi_oth_amount(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_PaymentIncentives_pbi_oth_amount_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_PaymentIncentives_pbi_oth_amount_aget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_pbi_oth_amount(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_Levpartflip_PaymentIncentives_pbi_oth_amount_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Communitysolar_PaymentIncentives_pbi_oth_amount_aset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_pbi_oth_escal(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_pbi_oth_escal_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_pbi_oth_escal_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_pbi_oth_escal(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_pbi_oth_escal_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_pbi_oth_escal_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_pbi_oth_for_ds(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_pbi_oth_for_ds_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_pbi_oth_for_ds_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_pbi_oth_for_ds(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_pbi_oth_for_ds_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_pbi_oth_for_ds_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_pbi_oth_tax_fed(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_pbi_oth_tax_fed_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_pbi_oth_tax_fed_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_pbi_oth_tax_fed(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_pbi_oth_tax_fed_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_pbi_oth_tax_fed_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_pbi_oth_tax_sta(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_pbi_oth_tax_sta_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_pbi_oth_tax_sta_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_pbi_oth_tax_sta(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_pbi_oth_tax_sta_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_pbi_oth_tax_sta_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_pbi_oth_term(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_pbi_oth_term_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_pbi_oth_term_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_pbi_oth_term(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_pbi_oth_term_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_pbi_oth_term_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_pbi_sta_amount(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_PaymentIncentives_pbi_sta_amount_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_PaymentIncentives_pbi_sta_amount_aget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_pbi_sta_amount(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_Levpartflip_PaymentIncentives_pbi_sta_amount_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Communitysolar_PaymentIncentives_pbi_sta_amount_aset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_pbi_sta_escal(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_pbi_sta_escal_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_pbi_sta_escal_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_pbi_sta_escal(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_pbi_sta_escal_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_pbi_sta_escal_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_pbi_sta_for_ds(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_pbi_sta_for_ds_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_pbi_sta_for_ds_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_pbi_sta_for_ds(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_pbi_sta_for_ds_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_pbi_sta_for_ds_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_pbi_sta_tax_fed(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_pbi_sta_tax_fed_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_pbi_sta_tax_fed_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_pbi_sta_tax_fed(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_pbi_sta_tax_fed_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_pbi_sta_tax_fed_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_pbi_sta_tax_sta(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_pbi_sta_tax_sta_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_pbi_sta_tax_sta_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_pbi_sta_tax_sta(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_pbi_sta_tax_sta_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_pbi_sta_tax_sta_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_pbi_sta_term(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_pbi_sta_term_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_pbi_sta_term_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_pbi_sta_term(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_pbi_sta_term_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_pbi_sta_term_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_pbi_uti_amount(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_PaymentIncentives_pbi_uti_amount_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_PaymentIncentives_pbi_uti_amount_aget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_pbi_uti_amount(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_Levpartflip_PaymentIncentives_pbi_uti_amount_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Communitysolar_PaymentIncentives_pbi_uti_amount_aset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_pbi_uti_escal(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_pbi_uti_escal_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_pbi_uti_escal_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_pbi_uti_escal(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_pbi_uti_escal_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_pbi_uti_escal_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_pbi_uti_for_ds(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_pbi_uti_for_ds_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_pbi_uti_for_ds_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_pbi_uti_for_ds(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_pbi_uti_for_ds_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_pbi_uti_for_ds_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_pbi_uti_tax_fed(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_pbi_uti_tax_fed_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_pbi_uti_tax_fed_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_pbi_uti_tax_fed(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_pbi_uti_tax_fed_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_pbi_uti_tax_fed_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_pbi_uti_tax_sta(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_pbi_uti_tax_sta_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_pbi_uti_tax_sta_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_pbi_uti_tax_sta(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_pbi_uti_tax_sta_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_pbi_uti_tax_sta_nset, self->data_ptr);
 }
 
 static PyObject *
 PaymentIncentives_get_pbi_uti_term(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_PaymentIncentives_pbi_uti_term_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_PaymentIncentives_pbi_uti_term_nget, self->data_ptr);
 }
 
 static int
 PaymentIncentives_set_pbi_uti_term(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_PaymentIncentives_pbi_uti_term_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_PaymentIncentives_pbi_uti_term_nset, self->data_ptr);
 }
 
 static PyGetSetDef PaymentIncentives_getset[] = {
@@ -4297,7 +4130,7 @@ static PyTypeObject PaymentIncentives_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"Levpartflip.PaymentIncentives",             /*tp_name*/
+		"Communitysolar.PaymentIncentives",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -4341,34 +4174,34 @@ static PyTypeObject PaymentIncentives_Type = {
 
 
 /*
- * SystemOutput Group
+ * Revenue Group
  */ 
 
-static PyTypeObject SystemOutput_Type;
+static PyTypeObject Revenue_Type;
 
 static PyObject *
-SystemOutput_new(SAM_Levpartflip data_ptr)
+Revenue_new(SAM_Communitysolar data_ptr)
 {
-	PyObject* new_obj = SystemOutput_Type.tp_alloc(&SystemOutput_Type,0);
+	PyObject* new_obj = Revenue_Type.tp_alloc(&Revenue_Type,0);
 
-	VarGroupObject* SystemOutput_obj = (VarGroupObject*)new_obj;
+	VarGroupObject* Revenue_obj = (VarGroupObject*)new_obj;
 
-	SystemOutput_obj->data_ptr = (SAM_table)data_ptr;
+	Revenue_obj->data_ptr = (SAM_table)data_ptr;
 
 	return new_obj;
 }
 
-/* SystemOutput methods */
+/* Revenue methods */
 
 static PyObject *
-SystemOutput_assign(VarGroupObject *self, PyObject *args)
+Revenue_assign(VarGroupObject *self, PyObject *args)
 {
 	PyObject* dict;
 	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Levpartflip", "SystemOutput")){
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Communitysolar", "Revenue")){
 		return NULL;
 	}
 
@@ -4377,15 +4210,15 @@ SystemOutput_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
-SystemOutput_replace(VarGroupObject *self, PyObject *args)
+Revenue_replace(VarGroupObject *self, PyObject *args)
 {
 	PyObject* dict;
 	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
 		return NULL;
 	}
-	PyTypeObject* tp = &SystemOutput_Type;
+	PyTypeObject* tp = &Revenue_Type;
 
-	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Levpartflip", "SystemOutput")){
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Communitysolar", "Revenue")){
 		return NULL;
 	}
 
@@ -4394,92 +4227,62 @@ SystemOutput_replace(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
-SystemOutput_export(VarGroupObject *self, PyObject *args)
+Revenue_export(VarGroupObject *self, PyObject *args)
 {
-	PyTypeObject* tp = &SystemOutput_Type;
+	PyTypeObject* tp = &Revenue_Type;
 	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
 	return dict;
 }
 
-static PyMethodDef SystemOutput_methods[] = {
-		{"assign",            (PyCFunction)SystemOutput_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``SystemOutput_vals = { var: val, ...}``")},
-		{"replace",            (PyCFunction)SystemOutput_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``SystemOutput_vals = { var: val, ...}``")},
-		{"export",            (PyCFunction)SystemOutput_export,  METH_VARARGS,
+static PyMethodDef Revenue_methods[] = {
+		{"assign",            (PyCFunction)Revenue_assign,  METH_VARARGS,
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Revenue_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Revenue_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Revenue_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)Revenue_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 static PyObject *
-SystemOutput_get_degradation(VarGroupObject *self, void *closure)
+Revenue_get_flip_target_percent(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_SystemOutput_degradation_aget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Revenue_flip_target_percent_nget, self->data_ptr);
 }
 
 static int
-SystemOutput_set_degradation(VarGroupObject *self, PyObject *value, void *closure)
+Revenue_set_flip_target_percent(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_Levpartflip_SystemOutput_degradation_aset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_Revenue_flip_target_percent_nset, self->data_ptr);
 }
 
 static PyObject *
-SystemOutput_get_gen(VarGroupObject *self, void *closure)
+Revenue_get_flip_target_year(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_SystemOutput_gen_aget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Revenue_flip_target_year_nget, self->data_ptr);
 }
 
 static int
-SystemOutput_set_gen(VarGroupObject *self, PyObject *value, void *closure)
+Revenue_set_flip_target_year(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_Levpartflip_SystemOutput_gen_aset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_Revenue_flip_target_year_nset, self->data_ptr);
 }
 
-static PyObject *
-SystemOutput_get_gen_purchases(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Levpartflip_SystemOutput_gen_purchases_aget, self->data_ptr);
-}
-
-static int
-SystemOutput_set_gen_purchases(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_Levpartflip_SystemOutput_gen_purchases_aset, self->data_ptr);
-}
-
-static PyObject *
-SystemOutput_get_system_capacity(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Levpartflip_SystemOutput_system_capacity_nget, self->data_ptr);
-}
-
-static int
-SystemOutput_set_system_capacity(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Levpartflip_SystemOutput_system_capacity_nset, self->data_ptr);
-}
-
-static PyGetSetDef SystemOutput_getset[] = {
-{"degradation", (getter)SystemOutput_get_degradation,(setter)SystemOutput_set_degradation,
-	PyDoc_STR("*sequence*: Annual energy degradation\n\n*Required*: True"),
+static PyGetSetDef Revenue_getset[] = {
+{"flip_target_percent", (getter)Revenue_get_flip_target_percent,(setter)Revenue_set_flip_target_percent,
+	PyDoc_STR("*float*: After-tax IRR target [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 11"),
  	NULL},
-{"gen", (getter)SystemOutput_get_gen,(setter)SystemOutput_set_gen,
-	PyDoc_STR("*sequence*: Power generated by renewable resource [kW]\n\n*Required*: True"),
- 	NULL},
-{"gen_purchases", (getter)SystemOutput_get_gen_purchases,(setter)SystemOutput_set_gen_purchases,
-	PyDoc_STR("*sequence*: Electricity from grid [kW]"),
- 	NULL},
-{"system_capacity", (getter)SystemOutput_get_system_capacity,(setter)SystemOutput_set_system_capacity,
-	PyDoc_STR("*float*: System nameplate capacity [kW]\n\n*Constraints*: MIN=1e-3\n\n*Required*: True"),
+{"flip_target_year", (getter)Revenue_get_flip_target_year,(setter)Revenue_set_flip_target_year,
+	PyDoc_STR("*float*: IRR target year [Year]\n\n*Constraints*: MIN=1\n\n*Required*: If not provided, assumed to be 11"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
 
-static PyTypeObject SystemOutput_Type = {
+static PyTypeObject Revenue_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"Levpartflip.SystemOutput",             /*tp_name*/
+		"Communitysolar.Revenue",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -4506,9 +4309,251 @@ static PyTypeObject SystemOutput_Type = {
 		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
-		SystemOutput_methods,         /*tp_methods*/
+		Revenue_methods,         /*tp_methods*/
 		0,                          /*tp_members*/
-		SystemOutput_getset,          /*tp_getset*/
+		Revenue_getset,          /*tp_getset*/
+		0,                          /*tp_base*/
+		0,                          /*tp_dict*/
+		0,                          /*tp_descr_get*/
+		0,                          /*tp_descr_set*/
+		0,                          /*tp_dictofnset*/
+		0,                          /*tp_init*/
+		0,                          /*tp_alloc*/
+		0,             /*tp_new*/
+		0,                          /*tp_free*/
+		0,                          /*tp_is_gc*/
+};
+
+
+/*
+ * BatterySystem Group
+ */ 
+
+static PyTypeObject BatterySystem_Type;
+
+static PyObject *
+BatterySystem_new(SAM_Communitysolar data_ptr)
+{
+	PyObject* new_obj = BatterySystem_Type.tp_alloc(&BatterySystem_Type,0);
+
+	VarGroupObject* BatterySystem_obj = (VarGroupObject*)new_obj;
+
+	BatterySystem_obj->data_ptr = (SAM_table)data_ptr;
+
+	return new_obj;
+}
+
+/* BatterySystem methods */
+
+static PyObject *
+BatterySystem_assign(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Communitysolar", "BatterySystem")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+BatterySystem_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &BatterySystem_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Communitysolar", "BatterySystem")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+BatterySystem_export(VarGroupObject *self, PyObject *args)
+{
+	PyTypeObject* tp = &BatterySystem_Type;
+	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
+	return dict;
+}
+
+static PyMethodDef BatterySystem_methods[] = {
+		{"assign",            (PyCFunction)BatterySystem_assign,  METH_VARARGS,
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``BatterySystem_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)BatterySystem_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``BatterySystem_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)BatterySystem_export,  METH_VARARGS,
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+		{NULL,              NULL}           /* sentinel */
+};
+
+static PyObject *
+BatterySystem_get_batt_bank_replacement(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_BatterySystem_batt_bank_replacement_aget, self->data_ptr);
+}
+
+static int
+BatterySystem_set_batt_bank_replacement(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Communitysolar_BatterySystem_batt_bank_replacement_aset, self->data_ptr);
+}
+
+static PyObject *
+BatterySystem_get_batt_computed_bank_capacity(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Communitysolar_BatterySystem_batt_computed_bank_capacity_nget, self->data_ptr);
+}
+
+static int
+BatterySystem_set_batt_computed_bank_capacity(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Communitysolar_BatterySystem_batt_computed_bank_capacity_nset, self->data_ptr);
+}
+
+static PyObject *
+BatterySystem_get_batt_meter_position(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Communitysolar_BatterySystem_batt_meter_position_nget, self->data_ptr);
+}
+
+static int
+BatterySystem_set_batt_meter_position(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Communitysolar_BatterySystem_batt_meter_position_nset, self->data_ptr);
+}
+
+static PyObject *
+BatterySystem_get_batt_replacement_option(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Communitysolar_BatterySystem_batt_replacement_option_nget, self->data_ptr);
+}
+
+static int
+BatterySystem_set_batt_replacement_option(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Communitysolar_BatterySystem_batt_replacement_option_nset, self->data_ptr);
+}
+
+static PyObject *
+BatterySystem_get_batt_replacement_schedule_percent(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_BatterySystem_batt_replacement_schedule_percent_aget, self->data_ptr);
+}
+
+static int
+BatterySystem_set_batt_replacement_schedule_percent(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Communitysolar_BatterySystem_batt_replacement_schedule_percent_aset, self->data_ptr);
+}
+
+static PyObject *
+BatterySystem_get_battery_per_kWh(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Communitysolar_BatterySystem_battery_per_kWh_nget, self->data_ptr);
+}
+
+static int
+BatterySystem_set_battery_per_kWh(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Communitysolar_BatterySystem_battery_per_kWh_nset, self->data_ptr);
+}
+
+static PyObject *
+BatterySystem_get_en_batt(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Communitysolar_BatterySystem_en_batt_nget, self->data_ptr);
+}
+
+static int
+BatterySystem_set_en_batt(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Communitysolar_BatterySystem_en_batt_nset, self->data_ptr);
+}
+
+static PyObject *
+BatterySystem_get_en_standalone_batt(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Communitysolar_BatterySystem_en_standalone_batt_nget, self->data_ptr);
+}
+
+static int
+BatterySystem_set_en_standalone_batt(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Communitysolar_BatterySystem_en_standalone_batt_nset, self->data_ptr);
+}
+
+static PyGetSetDef BatterySystem_getset[] = {
+{"batt_bank_replacement", (getter)BatterySystem_get_batt_bank_replacement,(setter)BatterySystem_set_batt_bank_replacement,
+	PyDoc_STR("*sequence*: Battery bank replacements per year [number/year]"),
+ 	NULL},
+{"batt_computed_bank_capacity", (getter)BatterySystem_get_batt_computed_bank_capacity,(setter)BatterySystem_set_batt_computed_bank_capacity,
+	PyDoc_STR("*float*: Battery bank capacity [kWh]\n\n*Required*: If not provided, assumed to be 0.0"),
+ 	NULL},
+{"batt_meter_position", (getter)BatterySystem_get_batt_meter_position,(setter)BatterySystem_set_batt_meter_position,
+	PyDoc_STR("*float*: Position of battery relative to electric meter"),
+ 	NULL},
+{"batt_replacement_option", (getter)BatterySystem_get_batt_replacement_option,(setter)BatterySystem_set_batt_replacement_option,
+	PyDoc_STR("*float*: Enable battery replacement? [0=none,1=capacity based,2=user schedule]\n\n*Constraints*: INTEGER,MIN=0,MAX=2\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"batt_replacement_schedule_percent", (getter)BatterySystem_get_batt_replacement_schedule_percent,(setter)BatterySystem_set_batt_replacement_schedule_percent,
+	PyDoc_STR("*sequence*: Percentage of battery capacity to replace in each year [%]\n\n*Options*: length <= analysis_period"),
+ 	NULL},
+{"battery_per_kWh", (getter)BatterySystem_get_battery_per_kWh,(setter)BatterySystem_set_battery_per_kWh,
+	PyDoc_STR("*float*: Battery cost [$/kWh]\n\n*Required*: If not provided, assumed to be 0.0"),
+ 	NULL},
+{"en_batt", (getter)BatterySystem_get_en_batt,(setter)BatterySystem_set_en_batt,
+	PyDoc_STR("*float*: Enable battery storage model [0/1]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"en_standalone_batt", (getter)BatterySystem_get_en_standalone_batt,(setter)BatterySystem_set_en_standalone_batt,
+	PyDoc_STR("*float*: Enable standalone battery storage model [0/1]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+	{NULL}  /* Sentinel */
+};
+
+static PyTypeObject BatterySystem_Type = {
+		/* The ob_type field must be initialized in the module init function
+		 * to be portable to Windows without using C++. */
+		PyVarObject_HEAD_INIT(NULL, 0)
+		"Communitysolar.BatterySystem",             /*tp_name*/
+		sizeof(VarGroupObject),          /*tp_basicsize*/
+		0,                          /*tp_itemsize*/
+		/* methods */
+		0,    /*tp_dealloc*/
+		0,                          /*tp_print*/
+		(getattrfunc)0,             /*tp_getattr*/
+		0,                          /*tp_setattr*/
+		0,                          /*tp_reserved*/
+		0,                          /*tp_repr*/
+		0,                          /*tp_as_number*/
+		0,                          /*tp_as_sequence*/
+		0,                          /*tp_as_mapping*/
+		0,                          /*tp_hash*/
+		0,                          /*tp_call*/
+		0,                          /*tp_str*/
+		0,                          /*tp_getattro*/
+		0,                          /*tp_setattro*/
+		0,                          /*tp_as_buffer*/
+		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
+		0,                          /*tp_doc*/
+		0,                          /*tp_traverse*/
+		0,                          /*tp_clear*/
+		0,                          /*tp_richcompare*/
+		0,                          /*tp_weaklistofnset*/
+		0,                          /*tp_iter*/
+		0,                          /*tp_iternext*/
+		BatterySystem_methods,         /*tp_methods*/
+		0,                          /*tp_members*/
+		BatterySystem_getset,          /*tp_getset*/
 		0,                          /*tp_base*/
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
@@ -4529,7 +4574,7 @@ static PyTypeObject SystemOutput_Type = {
 static PyTypeObject ElectricityRates_Type;
 
 static PyObject *
-ElectricityRates_new(SAM_Levpartflip data_ptr)
+ElectricityRates_new(SAM_Communitysolar data_ptr)
 {
 	PyObject* new_obj = ElectricityRates_Type.tp_alloc(&ElectricityRates_Type,0);
 
@@ -4550,7 +4595,7 @@ ElectricityRates_assign(VarGroupObject *self, PyObject *args)
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Levpartflip", "ElectricityRates")){
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Communitysolar", "ElectricityRates")){
 		return NULL;
 	}
 
@@ -4567,7 +4612,7 @@ ElectricityRates_replace(VarGroupObject *self, PyObject *args)
 	}
 	PyTypeObject* tp = &ElectricityRates_Type;
 
-	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Levpartflip", "ElectricityRates")){
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Communitysolar", "ElectricityRates")){
 		return NULL;
 	}
 
@@ -4596,13 +4641,13 @@ static PyMethodDef ElectricityRates_methods[] = {
 static PyObject *
 ElectricityRates_get_en_electricity_rates(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_ElectricityRates_en_electricity_rates_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_ElectricityRates_en_electricity_rates_nget, self->data_ptr);
 }
 
 static int
 ElectricityRates_set_en_electricity_rates(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_ElectricityRates_en_electricity_rates_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_ElectricityRates_en_electricity_rates_nset, self->data_ptr);
 }
 
 static PyGetSetDef ElectricityRates_getset[] = {
@@ -4616,7 +4661,7 @@ static PyTypeObject ElectricityRates_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"Levpartflip.ElectricityRates",             /*tp_name*/
+		"Communitysolar.ElectricityRates",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -4660,34 +4705,34 @@ static PyTypeObject ElectricityRates_Type = {
 
 
 /*
- * Moratorium Group
+ * SystemOutput Group
  */ 
 
-static PyTypeObject Moratorium_Type;
+static PyTypeObject SystemOutput_Type;
 
 static PyObject *
-Moratorium_new(SAM_Levpartflip data_ptr)
+SystemOutput_new(SAM_Communitysolar data_ptr)
 {
-	PyObject* new_obj = Moratorium_Type.tp_alloc(&Moratorium_Type,0);
+	PyObject* new_obj = SystemOutput_Type.tp_alloc(&SystemOutput_Type,0);
 
-	VarGroupObject* Moratorium_obj = (VarGroupObject*)new_obj;
+	VarGroupObject* SystemOutput_obj = (VarGroupObject*)new_obj;
 
-	Moratorium_obj->data_ptr = (SAM_table)data_ptr;
+	SystemOutput_obj->data_ptr = (SAM_table)data_ptr;
 
 	return new_obj;
 }
 
-/* Moratorium methods */
+/* SystemOutput methods */
 
 static PyObject *
-Moratorium_assign(VarGroupObject *self, PyObject *args)
+SystemOutput_assign(VarGroupObject *self, PyObject *args)
 {
 	PyObject* dict;
 	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Levpartflip", "Moratorium")){
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Communitysolar", "SystemOutput")){
 		return NULL;
 	}
 
@@ -4696,15 +4741,15 @@ Moratorium_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
-Moratorium_replace(VarGroupObject *self, PyObject *args)
+SystemOutput_replace(VarGroupObject *self, PyObject *args)
 {
 	PyObject* dict;
 	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
 		return NULL;
 	}
-	PyTypeObject* tp = &Moratorium_Type;
+	PyTypeObject* tp = &SystemOutput_Type;
 
-	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Levpartflip", "Moratorium")){
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Communitysolar", "SystemOutput")){
 		return NULL;
 	}
 
@@ -4713,47 +4758,137 @@ Moratorium_replace(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
-Moratorium_export(VarGroupObject *self, PyObject *args)
+SystemOutput_export(VarGroupObject *self, PyObject *args)
 {
-	PyTypeObject* tp = &Moratorium_Type;
+	PyTypeObject* tp = &SystemOutput_Type;
 	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
 	return dict;
 }
 
-static PyMethodDef Moratorium_methods[] = {
-		{"assign",            (PyCFunction)Moratorium_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Moratorium_vals = { var: val, ...}``")},
-		{"replace",            (PyCFunction)Moratorium_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Moratorium_vals = { var: val, ...}``")},
-		{"export",            (PyCFunction)Moratorium_export,  METH_VARARGS,
+static PyMethodDef SystemOutput_methods[] = {
+		{"assign",            (PyCFunction)SystemOutput_assign,  METH_VARARGS,
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``SystemOutput_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)SystemOutput_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``SystemOutput_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)SystemOutput_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 static PyObject *
-Moratorium_get_loan_moratorium(VarGroupObject *self, void *closure)
+SystemOutput_get_annual_energy_pre_curtailment_ac(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Moratorium_loan_moratorium_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_SystemOutput_annual_energy_pre_curtailment_ac_nget, self->data_ptr);
 }
 
 static int
-Moratorium_set_loan_moratorium(VarGroupObject *self, PyObject *value, void *closure)
+SystemOutput_set_annual_energy_pre_curtailment_ac(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_Moratorium_loan_moratorium_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_SystemOutput_annual_energy_pre_curtailment_ac_nset, self->data_ptr);
 }
 
-static PyGetSetDef Moratorium_getset[] = {
-{"loan_moratorium", (getter)Moratorium_get_loan_moratorium,(setter)Moratorium_set_loan_moratorium,
-	PyDoc_STR("*float*: Loan moratorium period [years]\n\n*Constraints*: INTEGER,MIN=0\n\n*Required*: If not provided, assumed to be 0"),
+static PyObject *
+SystemOutput_get_degradation(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_SystemOutput_degradation_aget, self->data_ptr);
+}
+
+static int
+SystemOutput_set_degradation(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Communitysolar_SystemOutput_degradation_aset, self->data_ptr);
+}
+
+static PyObject *
+SystemOutput_get_gen(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_SystemOutput_gen_aget, self->data_ptr);
+}
+
+static int
+SystemOutput_set_gen(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Communitysolar_SystemOutput_gen_aset, self->data_ptr);
+}
+
+static PyObject *
+SystemOutput_get_gen_purchases(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_SystemOutput_gen_purchases_aget, self->data_ptr);
+}
+
+static int
+SystemOutput_set_gen_purchases(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Communitysolar_SystemOutput_gen_purchases_aset, self->data_ptr);
+}
+
+static PyObject *
+SystemOutput_get_gen_without_battery(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_SystemOutput_gen_without_battery_aget, self->data_ptr);
+}
+
+static int
+SystemOutput_set_gen_without_battery(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Communitysolar_SystemOutput_gen_without_battery_aset, self->data_ptr);
+}
+
+static PyObject *
+SystemOutput_get_system_capacity(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Communitysolar_SystemOutput_system_capacity_nget, self->data_ptr);
+}
+
+static int
+SystemOutput_set_system_capacity(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Communitysolar_SystemOutput_system_capacity_nset, self->data_ptr);
+}
+
+static PyObject *
+SystemOutput_get_system_pre_curtailment_kwac(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_SystemOutput_system_pre_curtailment_kwac_aget, self->data_ptr);
+}
+
+static int
+SystemOutput_set_system_pre_curtailment_kwac(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Communitysolar_SystemOutput_system_pre_curtailment_kwac_aset, self->data_ptr);
+}
+
+static PyGetSetDef SystemOutput_getset[] = {
+{"annual_energy_pre_curtailment_ac", (getter)SystemOutput_get_annual_energy_pre_curtailment_ac,(setter)SystemOutput_set_annual_energy_pre_curtailment_ac,
+	PyDoc_STR("*float*: Annual Energy AC pre-curtailment (year 1) [kWh]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"degradation", (getter)SystemOutput_get_degradation,(setter)SystemOutput_set_degradation,
+	PyDoc_STR("*sequence*: Annual energy degradation\n\n*Required*: True"),
+ 	NULL},
+{"gen", (getter)SystemOutput_get_gen,(setter)SystemOutput_set_gen,
+	PyDoc_STR("*sequence*: Net power to or from the grid [kW]\n\n*Required*: True"),
+ 	NULL},
+{"gen_purchases", (getter)SystemOutput_get_gen_purchases,(setter)SystemOutput_set_gen_purchases,
+	PyDoc_STR("*sequence*: Electricity from grid [kW]"),
+ 	NULL},
+{"gen_without_battery", (getter)SystemOutput_get_gen_without_battery,(setter)SystemOutput_set_gen_without_battery,
+	PyDoc_STR("*sequence*: Electricity to or from the renewable system, without the battery [kW]"),
+ 	NULL},
+{"system_capacity", (getter)SystemOutput_get_system_capacity,(setter)SystemOutput_set_system_capacity,
+	PyDoc_STR("*float*: System nameplate capacity [kW]\n\n*Constraints*: MIN=1e-3\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - construction_financing_cost\n\t - land_area\n\t - total_installed_cost\n"),
+ 	NULL},
+{"system_pre_curtailment_kwac", (getter)SystemOutput_get_system_pre_curtailment_kwac,(setter)SystemOutput_set_system_pre_curtailment_kwac,
+	PyDoc_STR("*sequence*: System power before grid curtailment [kW]\n\n*Info*: System generation"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
 
-static PyTypeObject Moratorium_Type = {
+static PyTypeObject SystemOutput_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"Levpartflip.Moratorium",             /*tp_name*/
+		"Communitysolar.SystemOutput",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -4780,523 +4915,9 @@ static PyTypeObject Moratorium_Type = {
 		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
-		Moratorium_methods,         /*tp_methods*/
+		SystemOutput_methods,         /*tp_methods*/
 		0,                          /*tp_members*/
-		Moratorium_getset,          /*tp_getset*/
-		0,                          /*tp_base*/
-		0,                          /*tp_dict*/
-		0,                          /*tp_descr_get*/
-		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictofnset*/
-		0,                          /*tp_init*/
-		0,                          /*tp_alloc*/
-		0,             /*tp_new*/
-		0,                          /*tp_free*/
-		0,                          /*tp_is_gc*/
-};
-
-
-/*
- * Recapitalization Group
- */ 
-
-static PyTypeObject Recapitalization_Type;
-
-static PyObject *
-Recapitalization_new(SAM_Levpartflip data_ptr)
-{
-	PyObject* new_obj = Recapitalization_Type.tp_alloc(&Recapitalization_Type,0);
-
-	VarGroupObject* Recapitalization_obj = (VarGroupObject*)new_obj;
-
-	Recapitalization_obj->data_ptr = (SAM_table)data_ptr;
-
-	return new_obj;
-}
-
-/* Recapitalization methods */
-
-static PyObject *
-Recapitalization_assign(VarGroupObject *self, PyObject *args)
-{
-	PyObject* dict;
-	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
-		return NULL;
-	}
-
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Levpartflip", "Recapitalization")){
-		return NULL;
-	}
-
-	Py_INCREF(Py_None);
-	return Py_None;
-}
-
-static PyObject *
-Recapitalization_replace(VarGroupObject *self, PyObject *args)
-{
-	PyObject* dict;
-	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
-		return NULL;
-	}
-	PyTypeObject* tp = &Recapitalization_Type;
-
-	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Levpartflip", "Recapitalization")){
-		return NULL;
-	}
-
-	Py_INCREF(Py_None);
-	return Py_None;
-}
-
-static PyObject *
-Recapitalization_export(VarGroupObject *self, PyObject *args)
-{
-	PyTypeObject* tp = &Recapitalization_Type;
-	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
-	return dict;
-}
-
-static PyMethodDef Recapitalization_methods[] = {
-		{"assign",            (PyCFunction)Recapitalization_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Recapitalization_vals = { var: val, ...}``")},
-		{"replace",            (PyCFunction)Recapitalization_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Recapitalization_vals = { var: val, ...}``")},
-		{"export",            (PyCFunction)Recapitalization_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
-		{NULL,              NULL}           /* sentinel */
-};
-
-static PyObject *
-Recapitalization_get_system_lifetime_recapitalize(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Levpartflip_Recapitalization_system_lifetime_recapitalize_aget, self->data_ptr);
-}
-
-static int
-Recapitalization_set_system_lifetime_recapitalize(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_Levpartflip_Recapitalization_system_lifetime_recapitalize_aset, self->data_ptr);
-}
-
-static PyObject *
-Recapitalization_get_system_recapitalization_cost(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Levpartflip_Recapitalization_system_recapitalization_cost_nget, self->data_ptr);
-}
-
-static int
-Recapitalization_set_system_recapitalization_cost(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Levpartflip_Recapitalization_system_recapitalization_cost_nset, self->data_ptr);
-}
-
-static PyObject *
-Recapitalization_get_system_recapitalization_escalation(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Levpartflip_Recapitalization_system_recapitalization_escalation_nget, self->data_ptr);
-}
-
-static int
-Recapitalization_set_system_recapitalization_escalation(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Levpartflip_Recapitalization_system_recapitalization_escalation_nset, self->data_ptr);
-}
-
-static PyObject *
-Recapitalization_get_system_use_recapitalization(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Levpartflip_Recapitalization_system_use_recapitalization_nget, self->data_ptr);
-}
-
-static int
-Recapitalization_set_system_use_recapitalization(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Levpartflip_Recapitalization_system_use_recapitalization_nset, self->data_ptr);
-}
-
-static PyGetSetDef Recapitalization_getset[] = {
-{"system_lifetime_recapitalize", (getter)Recapitalization_get_system_lifetime_recapitalize,(setter)Recapitalization_set_system_lifetime_recapitalize,
-	PyDoc_STR("*sequence*: Recapitalization boolean\n\n*Required*: If not provided, assumed to be 0"),
- 	NULL},
-{"system_recapitalization_cost", (getter)Recapitalization_get_system_recapitalization_cost,(setter)Recapitalization_set_system_recapitalization_cost,
-	PyDoc_STR("*float*: Recapitalization cost [$]\n\n*Required*: If not provided, assumed to be 0"),
- 	NULL},
-{"system_recapitalization_escalation", (getter)Recapitalization_get_system_recapitalization_escalation,(setter)Recapitalization_set_system_recapitalization_escalation,
-	PyDoc_STR("*float*: Recapitalization escalation (above inflation) [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 0"),
- 	NULL},
-{"system_use_recapitalization", (getter)Recapitalization_get_system_use_recapitalization,(setter)Recapitalization_set_system_use_recapitalization,
-	PyDoc_STR("*float*: Recapitalization expenses [0/1]\n\n*Options*: 0=None,1=Recapitalize\n\n*Constraints*: INTEGER,MIN=0\n\n*Required*: If not provided, assumed to be 0"),
- 	NULL},
-	{NULL}  /* Sentinel */
-};
-
-static PyTypeObject Recapitalization_Type = {
-		/* The ob_type field must be initialized in the module init function
-		 * to be portable to Windows without using C++. */
-		PyVarObject_HEAD_INIT(NULL, 0)
-		"Levpartflip.Recapitalization",             /*tp_name*/
-		sizeof(VarGroupObject),          /*tp_basicsize*/
-		0,                          /*tp_itemsize*/
-		/* methods */
-		0,    /*tp_dealloc*/
-		0,                          /*tp_print*/
-		(getattrfunc)0,             /*tp_getattr*/
-		0,                          /*tp_setattr*/
-		0,                          /*tp_reserved*/
-		0,                          /*tp_repr*/
-		0,                          /*tp_as_number*/
-		0,                          /*tp_as_sequence*/
-		0,                          /*tp_as_mapping*/
-		0,                          /*tp_hash*/
-		0,                          /*tp_call*/
-		0,                          /*tp_str*/
-		0,                          /*tp_getattro*/
-		0,                          /*tp_setattro*/
-		0,                          /*tp_as_buffer*/
-		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
-		0,                          /*tp_doc*/
-		0,                          /*tp_traverse*/
-		0,                          /*tp_clear*/
-		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistofnset*/
-		0,                          /*tp_iter*/
-		0,                          /*tp_iternext*/
-		Recapitalization_methods,         /*tp_methods*/
-		0,                          /*tp_members*/
-		Recapitalization_getset,          /*tp_getset*/
-		0,                          /*tp_base*/
-		0,                          /*tp_dict*/
-		0,                          /*tp_descr_get*/
-		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictofnset*/
-		0,                          /*tp_init*/
-		0,                          /*tp_alloc*/
-		0,             /*tp_new*/
-		0,                          /*tp_free*/
-		0,                          /*tp_is_gc*/
-};
-
-
-/*
- * TimeOfDelivery Group
- */ 
-
-static PyTypeObject TimeOfDelivery_Type;
-
-static PyObject *
-TimeOfDelivery_new(SAM_Levpartflip data_ptr)
-{
-	PyObject* new_obj = TimeOfDelivery_Type.tp_alloc(&TimeOfDelivery_Type,0);
-
-	VarGroupObject* TimeOfDelivery_obj = (VarGroupObject*)new_obj;
-
-	TimeOfDelivery_obj->data_ptr = (SAM_table)data_ptr;
-
-	return new_obj;
-}
-
-/* TimeOfDelivery methods */
-
-static PyObject *
-TimeOfDelivery_assign(VarGroupObject *self, PyObject *args)
-{
-	PyObject* dict;
-	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
-		return NULL;
-	}
-
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Levpartflip", "TimeOfDelivery")){
-		return NULL;
-	}
-
-	Py_INCREF(Py_None);
-	return Py_None;
-}
-
-static PyObject *
-TimeOfDelivery_replace(VarGroupObject *self, PyObject *args)
-{
-	PyObject* dict;
-	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
-		return NULL;
-	}
-	PyTypeObject* tp = &TimeOfDelivery_Type;
-
-	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Levpartflip", "TimeOfDelivery")){
-		return NULL;
-	}
-
-	Py_INCREF(Py_None);
-	return Py_None;
-}
-
-static PyObject *
-TimeOfDelivery_export(VarGroupObject *self, PyObject *args)
-{
-	PyTypeObject* tp = &TimeOfDelivery_Type;
-	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
-	return dict;
-}
-
-static PyMethodDef TimeOfDelivery_methods[] = {
-		{"assign",            (PyCFunction)TimeOfDelivery_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``TimeOfDelivery_vals = { var: val, ...}``")},
-		{"replace",            (PyCFunction)TimeOfDelivery_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``TimeOfDelivery_vals = { var: val, ...}``")},
-		{"export",            (PyCFunction)TimeOfDelivery_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
-		{NULL,              NULL}           /* sentinel */
-};
-
-static PyObject *
-TimeOfDelivery_get_dispatch_factor1(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Levpartflip_TimeOfDelivery_dispatch_factor1_nget, self->data_ptr);
-}
-
-static int
-TimeOfDelivery_set_dispatch_factor1(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Levpartflip_TimeOfDelivery_dispatch_factor1_nset, self->data_ptr);
-}
-
-static PyObject *
-TimeOfDelivery_get_dispatch_factor2(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Levpartflip_TimeOfDelivery_dispatch_factor2_nget, self->data_ptr);
-}
-
-static int
-TimeOfDelivery_set_dispatch_factor2(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Levpartflip_TimeOfDelivery_dispatch_factor2_nset, self->data_ptr);
-}
-
-static PyObject *
-TimeOfDelivery_get_dispatch_factor3(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Levpartflip_TimeOfDelivery_dispatch_factor3_nget, self->data_ptr);
-}
-
-static int
-TimeOfDelivery_set_dispatch_factor3(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Levpartflip_TimeOfDelivery_dispatch_factor3_nset, self->data_ptr);
-}
-
-static PyObject *
-TimeOfDelivery_get_dispatch_factor4(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Levpartflip_TimeOfDelivery_dispatch_factor4_nget, self->data_ptr);
-}
-
-static int
-TimeOfDelivery_set_dispatch_factor4(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Levpartflip_TimeOfDelivery_dispatch_factor4_nset, self->data_ptr);
-}
-
-static PyObject *
-TimeOfDelivery_get_dispatch_factor5(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Levpartflip_TimeOfDelivery_dispatch_factor5_nget, self->data_ptr);
-}
-
-static int
-TimeOfDelivery_set_dispatch_factor5(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Levpartflip_TimeOfDelivery_dispatch_factor5_nset, self->data_ptr);
-}
-
-static PyObject *
-TimeOfDelivery_get_dispatch_factor6(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Levpartflip_TimeOfDelivery_dispatch_factor6_nget, self->data_ptr);
-}
-
-static int
-TimeOfDelivery_set_dispatch_factor6(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Levpartflip_TimeOfDelivery_dispatch_factor6_nset, self->data_ptr);
-}
-
-static PyObject *
-TimeOfDelivery_get_dispatch_factor7(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Levpartflip_TimeOfDelivery_dispatch_factor7_nget, self->data_ptr);
-}
-
-static int
-TimeOfDelivery_set_dispatch_factor7(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Levpartflip_TimeOfDelivery_dispatch_factor7_nset, self->data_ptr);
-}
-
-static PyObject *
-TimeOfDelivery_get_dispatch_factor8(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Levpartflip_TimeOfDelivery_dispatch_factor8_nget, self->data_ptr);
-}
-
-static int
-TimeOfDelivery_set_dispatch_factor8(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Levpartflip_TimeOfDelivery_dispatch_factor8_nset, self->data_ptr);
-}
-
-static PyObject *
-TimeOfDelivery_get_dispatch_factor9(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Levpartflip_TimeOfDelivery_dispatch_factor9_nget, self->data_ptr);
-}
-
-static int
-TimeOfDelivery_set_dispatch_factor9(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Levpartflip_TimeOfDelivery_dispatch_factor9_nset, self->data_ptr);
-}
-
-static PyObject *
-TimeOfDelivery_get_dispatch_factors_ts(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Levpartflip_TimeOfDelivery_dispatch_factors_ts_aget, self->data_ptr);
-}
-
-static int
-TimeOfDelivery_set_dispatch_factors_ts(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_Levpartflip_TimeOfDelivery_dispatch_factors_ts_aset, self->data_ptr);
-}
-
-static PyObject *
-TimeOfDelivery_get_dispatch_sched_weekday(VarGroupObject *self, void *closure)
-{
-	return PySAM_matrix_getter(SAM_Levpartflip_TimeOfDelivery_dispatch_sched_weekday_mget, self->data_ptr);
-}
-
-static int
-TimeOfDelivery_set_dispatch_sched_weekday(VarGroupObject *self, PyObject *value, void *closure)
-{
-		return PySAM_matrix_setter(value, SAM_Levpartflip_TimeOfDelivery_dispatch_sched_weekday_mset, self->data_ptr);
-}
-
-static PyObject *
-TimeOfDelivery_get_dispatch_sched_weekend(VarGroupObject *self, void *closure)
-{
-	return PySAM_matrix_getter(SAM_Levpartflip_TimeOfDelivery_dispatch_sched_weekend_mget, self->data_ptr);
-}
-
-static int
-TimeOfDelivery_set_dispatch_sched_weekend(VarGroupObject *self, PyObject *value, void *closure)
-{
-		return PySAM_matrix_setter(value, SAM_Levpartflip_TimeOfDelivery_dispatch_sched_weekend_mset, self->data_ptr);
-}
-
-static PyObject *
-TimeOfDelivery_get_ppa_multiplier_model(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Levpartflip_TimeOfDelivery_ppa_multiplier_model_nget, self->data_ptr);
-}
-
-static int
-TimeOfDelivery_set_ppa_multiplier_model(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Levpartflip_TimeOfDelivery_ppa_multiplier_model_nset, self->data_ptr);
-}
-
-static PyObject *
-TimeOfDelivery_get_system_use_lifetime_output(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Levpartflip_TimeOfDelivery_system_use_lifetime_output_nget, self->data_ptr);
-}
-
-static int
-TimeOfDelivery_set_system_use_lifetime_output(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Levpartflip_TimeOfDelivery_system_use_lifetime_output_nset, self->data_ptr);
-}
-
-static PyGetSetDef TimeOfDelivery_getset[] = {
-{"dispatch_factor1", (getter)TimeOfDelivery_get_dispatch_factor1,(setter)TimeOfDelivery_set_dispatch_factor1,
-	PyDoc_STR("*float*: TOD factor for period 1\n\n*Required*: True if ppa_multiplier_model=0"),
- 	NULL},
-{"dispatch_factor2", (getter)TimeOfDelivery_get_dispatch_factor2,(setter)TimeOfDelivery_set_dispatch_factor2,
-	PyDoc_STR("*float*: TOD factor for period 2\n\n*Required*: True if ppa_multiplier_model=0"),
- 	NULL},
-{"dispatch_factor3", (getter)TimeOfDelivery_get_dispatch_factor3,(setter)TimeOfDelivery_set_dispatch_factor3,
-	PyDoc_STR("*float*: TOD factor for period 3\n\n*Required*: True if ppa_multiplier_model=0"),
- 	NULL},
-{"dispatch_factor4", (getter)TimeOfDelivery_get_dispatch_factor4,(setter)TimeOfDelivery_set_dispatch_factor4,
-	PyDoc_STR("*float*: TOD factor for period 4\n\n*Required*: True if ppa_multiplier_model=0"),
- 	NULL},
-{"dispatch_factor5", (getter)TimeOfDelivery_get_dispatch_factor5,(setter)TimeOfDelivery_set_dispatch_factor5,
-	PyDoc_STR("*float*: TOD factor for period 5\n\n*Required*: True if ppa_multiplier_model=0"),
- 	NULL},
-{"dispatch_factor6", (getter)TimeOfDelivery_get_dispatch_factor6,(setter)TimeOfDelivery_set_dispatch_factor6,
-	PyDoc_STR("*float*: TOD factor for period 6\n\n*Required*: True if ppa_multiplier_model=0"),
- 	NULL},
-{"dispatch_factor7", (getter)TimeOfDelivery_get_dispatch_factor7,(setter)TimeOfDelivery_set_dispatch_factor7,
-	PyDoc_STR("*float*: TOD factor for period 7\n\n*Required*: True if ppa_multiplier_model=0"),
- 	NULL},
-{"dispatch_factor8", (getter)TimeOfDelivery_get_dispatch_factor8,(setter)TimeOfDelivery_set_dispatch_factor8,
-	PyDoc_STR("*float*: TOD factor for period 8\n\n*Required*: True if ppa_multiplier_model=0"),
- 	NULL},
-{"dispatch_factor9", (getter)TimeOfDelivery_get_dispatch_factor9,(setter)TimeOfDelivery_set_dispatch_factor9,
-	PyDoc_STR("*float*: TOD factor for period 9\n\n*Required*: True if ppa_multiplier_model=0"),
- 	NULL},
-{"dispatch_factors_ts", (getter)TimeOfDelivery_get_dispatch_factors_ts,(setter)TimeOfDelivery_set_dispatch_factors_ts,
-	PyDoc_STR("*sequence*: Dispatch payment factor array\n\n*Required*: True if ppa_multiplier_model=1"),
- 	NULL},
-{"dispatch_sched_weekday", (getter)TimeOfDelivery_get_dispatch_sched_weekday,(setter)TimeOfDelivery_set_dispatch_sched_weekday,
-	PyDoc_STR("*sequence[sequence]*: Diurnal weekday TOD periods [1..9]\n\n*Info*: 12 x 24 matrix\n\n*Required*: True if ppa_multiplier_model=0"),
- 	NULL},
-{"dispatch_sched_weekend", (getter)TimeOfDelivery_get_dispatch_sched_weekend,(setter)TimeOfDelivery_set_dispatch_sched_weekend,
-	PyDoc_STR("*sequence[sequence]*: Diurnal weekend TOD periods [1..9]\n\n*Info*: 12 x 24 matrix\n\n*Required*: True if ppa_multiplier_model=0"),
- 	NULL},
-{"ppa_multiplier_model", (getter)TimeOfDelivery_get_ppa_multiplier_model,(setter)TimeOfDelivery_set_ppa_multiplier_model,
-	PyDoc_STR("*float*: PPA multiplier model [0/1]\n\n*Options*: 0=diurnal,1=timestep\n\n*Constraints*: INTEGER,MIN=0\n\n*Required*: If not provided, assumed to be 0"),
- 	NULL},
-{"system_use_lifetime_output", (getter)TimeOfDelivery_get_system_use_lifetime_output,(setter)TimeOfDelivery_set_system_use_lifetime_output,
-	PyDoc_STR("*float*: Lifetime hourly system outputs [0/1]\n\n*Options*: 0=hourly first year,1=hourly lifetime\n\n*Constraints*: INTEGER,MIN=0\n\n*Required*: True"),
- 	NULL},
-	{NULL}  /* Sentinel */
-};
-
-static PyTypeObject TimeOfDelivery_Type = {
-		/* The ob_type field must be initialized in the module init function
-		 * to be portable to Windows without using C++. */
-		PyVarObject_HEAD_INIT(NULL, 0)
-		"Levpartflip.TimeOfDelivery",             /*tp_name*/
-		sizeof(VarGroupObject),          /*tp_basicsize*/
-		0,                          /*tp_itemsize*/
-		/* methods */
-		0,    /*tp_dealloc*/
-		0,                          /*tp_print*/
-		(getattrfunc)0,             /*tp_getattr*/
-		0,                          /*tp_setattr*/
-		0,                          /*tp_reserved*/
-		0,                          /*tp_repr*/
-		0,                          /*tp_as_number*/
-		0,                          /*tp_as_sequence*/
-		0,                          /*tp_as_mapping*/
-		0,                          /*tp_hash*/
-		0,                          /*tp_call*/
-		0,                          /*tp_str*/
-		0,                          /*tp_getattro*/
-		0,                          /*tp_setattro*/
-		0,                          /*tp_as_buffer*/
-		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
-		0,                          /*tp_doc*/
-		0,                          /*tp_traverse*/
-		0,                          /*tp_clear*/
-		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistofnset*/
-		0,                          /*tp_iter*/
-		0,                          /*tp_iternext*/
-		TimeOfDelivery_methods,         /*tp_methods*/
-		0,                          /*tp_members*/
-		TimeOfDelivery_getset,          /*tp_getset*/
+		SystemOutput_getset,          /*tp_getset*/
 		0,                          /*tp_base*/
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
@@ -5317,7 +4938,7 @@ static PyTypeObject TimeOfDelivery_Type = {
 static PyTypeObject UtilityBill_Type;
 
 static PyObject *
-UtilityBill_new(SAM_Levpartflip data_ptr)
+UtilityBill_new(SAM_Communitysolar data_ptr)
 {
 	PyObject* new_obj = UtilityBill_Type.tp_alloc(&UtilityBill_Type,0);
 
@@ -5338,7 +4959,7 @@ UtilityBill_assign(VarGroupObject *self, PyObject *args)
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Levpartflip", "UtilityBill")){
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Communitysolar", "UtilityBill")){
 		return NULL;
 	}
 
@@ -5355,7 +4976,7 @@ UtilityBill_replace(VarGroupObject *self, PyObject *args)
 	}
 	PyTypeObject* tp = &UtilityBill_Type;
 
-	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Levpartflip", "UtilityBill")){
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Communitysolar", "UtilityBill")){
 		return NULL;
 	}
 
@@ -5384,13 +5005,13 @@ static PyMethodDef UtilityBill_methods[] = {
 static PyObject *
 UtilityBill_get_utility_bill_w_sys(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_UtilityBill_utility_bill_w_sys_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_UtilityBill_utility_bill_w_sys_aget, self->data_ptr);
 }
 
 static int
 UtilityBill_set_utility_bill_w_sys(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_Levpartflip_UtilityBill_utility_bill_w_sys_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Communitysolar_UtilityBill_utility_bill_w_sys_aset, self->data_ptr);
 }
 
 static PyGetSetDef UtilityBill_getset[] = {
@@ -5404,7 +5025,7 @@ static PyTypeObject UtilityBill_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"Levpartflip.UtilityBill",             /*tp_name*/
+		"Communitysolar.UtilityBill",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -5448,34 +5069,34 @@ static PyTypeObject UtilityBill_Type = {
 
 
 /*
- * ConstructionFinancing Group
+ * Lifetime Group
  */ 
 
-static PyTypeObject ConstructionFinancing_Type;
+static PyTypeObject Lifetime_Type;
 
 static PyObject *
-ConstructionFinancing_new(SAM_Levpartflip data_ptr)
+Lifetime_new(SAM_Communitysolar data_ptr)
 {
-	PyObject* new_obj = ConstructionFinancing_Type.tp_alloc(&ConstructionFinancing_Type,0);
+	PyObject* new_obj = Lifetime_Type.tp_alloc(&Lifetime_Type,0);
 
-	VarGroupObject* ConstructionFinancing_obj = (VarGroupObject*)new_obj;
+	VarGroupObject* Lifetime_obj = (VarGroupObject*)new_obj;
 
-	ConstructionFinancing_obj->data_ptr = (SAM_table)data_ptr;
+	Lifetime_obj->data_ptr = (SAM_table)data_ptr;
 
 	return new_obj;
 }
 
-/* ConstructionFinancing methods */
+/* Lifetime methods */
 
 static PyObject *
-ConstructionFinancing_assign(VarGroupObject *self, PyObject *args)
+Lifetime_assign(VarGroupObject *self, PyObject *args)
 {
 	PyObject* dict;
 	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Levpartflip", "ConstructionFinancing")){
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Communitysolar", "Lifetime")){
 		return NULL;
 	}
 
@@ -5484,15 +5105,15 @@ ConstructionFinancing_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
-ConstructionFinancing_replace(VarGroupObject *self, PyObject *args)
+Lifetime_replace(VarGroupObject *self, PyObject *args)
 {
 	PyObject* dict;
 	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
 		return NULL;
 	}
-	PyTypeObject* tp = &ConstructionFinancing_Type;
+	PyTypeObject* tp = &Lifetime_Type;
 
-	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Levpartflip", "ConstructionFinancing")){
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Communitysolar", "Lifetime")){
 		return NULL;
 	}
 
@@ -5501,47 +5122,47 @@ ConstructionFinancing_replace(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
-ConstructionFinancing_export(VarGroupObject *self, PyObject *args)
+Lifetime_export(VarGroupObject *self, PyObject *args)
 {
-	PyTypeObject* tp = &ConstructionFinancing_Type;
+	PyTypeObject* tp = &Lifetime_Type;
 	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
 	return dict;
 }
 
-static PyMethodDef ConstructionFinancing_methods[] = {
-		{"assign",            (PyCFunction)ConstructionFinancing_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``ConstructionFinancing_vals = { var: val, ...}``")},
-		{"replace",            (PyCFunction)ConstructionFinancing_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``ConstructionFinancing_vals = { var: val, ...}``")},
-		{"export",            (PyCFunction)ConstructionFinancing_export,  METH_VARARGS,
+static PyMethodDef Lifetime_methods[] = {
+		{"assign",            (PyCFunction)Lifetime_assign,  METH_VARARGS,
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Lifetime_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Lifetime_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Lifetime_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)Lifetime_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 static PyObject *
-ConstructionFinancing_get_construction_financing_cost(VarGroupObject *self, void *closure)
+Lifetime_get_system_use_lifetime_output(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_ConstructionFinancing_construction_financing_cost_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Lifetime_system_use_lifetime_output_nget, self->data_ptr);
 }
 
 static int
-ConstructionFinancing_set_construction_financing_cost(VarGroupObject *self, PyObject *value, void *closure)
+Lifetime_set_system_use_lifetime_output(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_ConstructionFinancing_construction_financing_cost_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_Lifetime_system_use_lifetime_output_nset, self->data_ptr);
 }
 
-static PyGetSetDef ConstructionFinancing_getset[] = {
-{"construction_financing_cost", (getter)ConstructionFinancing_get_construction_financing_cost,(setter)ConstructionFinancing_set_construction_financing_cost,
-	PyDoc_STR("*float*: Construction financing total [$]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - total_installed_cost\n"),
+static PyGetSetDef Lifetime_getset[] = {
+{"system_use_lifetime_output", (getter)Lifetime_get_system_use_lifetime_output,(setter)Lifetime_set_system_use_lifetime_output,
+	PyDoc_STR("*float*: Lifetime hourly system outputs [0/1]\n\n*Options*: 0=hourly first year,1=hourly lifetime\n\n*Constraints*: INTEGER,MIN=0\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
 
-static PyTypeObject ConstructionFinancing_Type = {
+static PyTypeObject Lifetime_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"Levpartflip.ConstructionFinancing",             /*tp_name*/
+		"Communitysolar.Lifetime",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -5568,9 +5189,9 @@ static PyTypeObject ConstructionFinancing_Type = {
 		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
-		ConstructionFinancing_methods,         /*tp_methods*/
+		Lifetime_methods,         /*tp_methods*/
 		0,                          /*tp_members*/
-		ConstructionFinancing_getset,          /*tp_getset*/
+		Lifetime_getset,          /*tp_getset*/
 		0,                          /*tp_base*/
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
@@ -5585,34 +5206,34 @@ static PyTypeObject ConstructionFinancing_Type = {
 
 
 /*
- * OtherCapitalCosts Group
+ * CommunitySolar Group
  */ 
 
-static PyTypeObject OtherCapitalCosts_Type;
+static PyTypeObject CommunitySolar_Type;
 
 static PyObject *
-OtherCapitalCosts_new(SAM_Levpartflip data_ptr)
+CommunitySolar_new(SAM_Communitysolar data_ptr)
 {
-	PyObject* new_obj = OtherCapitalCosts_Type.tp_alloc(&OtherCapitalCosts_Type,0);
+	PyObject* new_obj = CommunitySolar_Type.tp_alloc(&CommunitySolar_Type,0);
 
-	VarGroupObject* OtherCapitalCosts_obj = (VarGroupObject*)new_obj;
+	VarGroupObject* CommunitySolar_obj = (VarGroupObject*)new_obj;
 
-	OtherCapitalCosts_obj->data_ptr = (SAM_table)data_ptr;
+	CommunitySolar_obj->data_ptr = (SAM_table)data_ptr;
 
 	return new_obj;
 }
 
-/* OtherCapitalCosts methods */
+/* CommunitySolar methods */
 
 static PyObject *
-OtherCapitalCosts_assign(VarGroupObject *self, PyObject *args)
+CommunitySolar_assign(VarGroupObject *self, PyObject *args)
 {
 	PyObject* dict;
 	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Levpartflip", "OtherCapitalCosts")){
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Communitysolar", "CommunitySolar")){
 		return NULL;
 	}
 
@@ -5621,15 +5242,15 @@ OtherCapitalCosts_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
-OtherCapitalCosts_replace(VarGroupObject *self, PyObject *args)
+CommunitySolar_replace(VarGroupObject *self, PyObject *args)
 {
 	PyObject* dict;
 	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
 		return NULL;
 	}
-	PyTypeObject* tp = &OtherCapitalCosts_Type;
+	PyTypeObject* tp = &CommunitySolar_Type;
 
-	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Levpartflip", "OtherCapitalCosts")){
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Communitysolar", "CommunitySolar")){
 		return NULL;
 	}
 
@@ -5638,62 +5259,722 @@ OtherCapitalCosts_replace(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
-OtherCapitalCosts_export(VarGroupObject *self, PyObject *args)
+CommunitySolar_export(VarGroupObject *self, PyObject *args)
 {
-	PyTypeObject* tp = &OtherCapitalCosts_Type;
+	PyTypeObject* tp = &CommunitySolar_Type;
 	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
 	return dict;
 }
 
-static PyMethodDef OtherCapitalCosts_methods[] = {
-		{"assign",            (PyCFunction)OtherCapitalCosts_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``OtherCapitalCosts_vals = { var: val, ...}``")},
-		{"replace",            (PyCFunction)OtherCapitalCosts_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``OtherCapitalCosts_vals = { var: val, ...}``")},
-		{"export",            (PyCFunction)OtherCapitalCosts_export,  METH_VARARGS,
+static PyMethodDef CommunitySolar_methods[] = {
+		{"assign",            (PyCFunction)CommunitySolar_assign,  METH_VARARGS,
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``CommunitySolar_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)CommunitySolar_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``CommunitySolar_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)CommunitySolar_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 static PyObject *
-OtherCapitalCosts_get_cost_dev_fee_percent(VarGroupObject *self, void *closure)
+CommunitySolar_get_cs_cost_recurring_capacity(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_OtherCapitalCosts_cost_dev_fee_percent_nget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_CommunitySolar_cs_cost_recurring_capacity_aget, self->data_ptr);
 }
 
 static int
-OtherCapitalCosts_set_cost_dev_fee_percent(VarGroupObject *self, PyObject *value, void *closure)
+CommunitySolar_set_cs_cost_recurring_capacity(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_OtherCapitalCosts_cost_dev_fee_percent_nset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Communitysolar_CommunitySolar_cs_cost_recurring_capacity_aset, self->data_ptr);
 }
 
 static PyObject *
-OtherCapitalCosts_get_cost_equity_closing(VarGroupObject *self, void *closure)
+CommunitySolar_get_cs_cost_recurring_capacity_escal(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_OtherCapitalCosts_cost_equity_closing_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_CommunitySolar_cs_cost_recurring_capacity_escal_nget, self->data_ptr);
 }
 
 static int
-OtherCapitalCosts_set_cost_equity_closing(VarGroupObject *self, PyObject *value, void *closure)
+CommunitySolar_set_cs_cost_recurring_capacity_escal(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_OtherCapitalCosts_cost_equity_closing_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_CommunitySolar_cs_cost_recurring_capacity_escal_nset, self->data_ptr);
 }
 
-static PyGetSetDef OtherCapitalCosts_getset[] = {
-{"cost_dev_fee_percent", (getter)OtherCapitalCosts_get_cost_dev_fee_percent,(setter)OtherCapitalCosts_set_cost_dev_fee_percent,
-	PyDoc_STR("*float*: Development fee (% pre-financing cost) [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 3"),
+static PyObject *
+CommunitySolar_get_cs_cost_recurring_fixed(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_CommunitySolar_cs_cost_recurring_fixed_aget, self->data_ptr);
+}
+
+static int
+CommunitySolar_set_cs_cost_recurring_fixed(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Communitysolar_CommunitySolar_cs_cost_recurring_fixed_aset, self->data_ptr);
+}
+
+static PyObject *
+CommunitySolar_get_cs_cost_recurring_fixed_escal(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Communitysolar_CommunitySolar_cs_cost_recurring_fixed_escal_nget, self->data_ptr);
+}
+
+static int
+CommunitySolar_set_cs_cost_recurring_fixed_escal(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Communitysolar_CommunitySolar_cs_cost_recurring_fixed_escal_nset, self->data_ptr);
+}
+
+static PyObject *
+CommunitySolar_get_cs_cost_recurring_generation(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_CommunitySolar_cs_cost_recurring_generation_aget, self->data_ptr);
+}
+
+static int
+CommunitySolar_set_cs_cost_recurring_generation(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Communitysolar_CommunitySolar_cs_cost_recurring_generation_aset, self->data_ptr);
+}
+
+static PyObject *
+CommunitySolar_get_cs_cost_recurring_generation_escal(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Communitysolar_CommunitySolar_cs_cost_recurring_generation_escal_nget, self->data_ptr);
+}
+
+static int
+CommunitySolar_set_cs_cost_recurring_generation_escal(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Communitysolar_CommunitySolar_cs_cost_recurring_generation_escal_nset, self->data_ptr);
+}
+
+static PyObject *
+CommunitySolar_get_cs_cost_upfront(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Communitysolar_CommunitySolar_cs_cost_upfront_nget, self->data_ptr);
+}
+
+static int
+CommunitySolar_set_cs_cost_upfront(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Communitysolar_CommunitySolar_cs_cost_upfront_nset, self->data_ptr);
+}
+
+static PyObject *
+CommunitySolar_get_cs_cost_upfront_per_capacity(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Communitysolar_CommunitySolar_cs_cost_upfront_per_capacity_nget, self->data_ptr);
+}
+
+static int
+CommunitySolar_set_cs_cost_upfront_per_capacity(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Communitysolar_CommunitySolar_cs_cost_upfront_per_capacity_nset, self->data_ptr);
+}
+
+static PyObject *
+CommunitySolar_get_subscriber1_bill_credit_rate(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_CommunitySolar_subscriber1_bill_credit_rate_aget, self->data_ptr);
+}
+
+static int
+CommunitySolar_set_subscriber1_bill_credit_rate(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Communitysolar_CommunitySolar_subscriber1_bill_credit_rate_aset, self->data_ptr);
+}
+
+static PyObject *
+CommunitySolar_get_subscriber1_bill_credit_rate_escal(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Communitysolar_CommunitySolar_subscriber1_bill_credit_rate_escal_nget, self->data_ptr);
+}
+
+static int
+CommunitySolar_set_subscriber1_bill_credit_rate_escal(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Communitysolar_CommunitySolar_subscriber1_bill_credit_rate_escal_nset, self->data_ptr);
+}
+
+static PyObject *
+CommunitySolar_get_subscriber1_growth(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Communitysolar_CommunitySolar_subscriber1_growth_nget, self->data_ptr);
+}
+
+static int
+CommunitySolar_set_subscriber1_growth(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Communitysolar_CommunitySolar_subscriber1_growth_nset, self->data_ptr);
+}
+
+static PyObject *
+CommunitySolar_get_subscriber1_payment_annual(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_CommunitySolar_subscriber1_payment_annual_aget, self->data_ptr);
+}
+
+static int
+CommunitySolar_set_subscriber1_payment_annual(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Communitysolar_CommunitySolar_subscriber1_payment_annual_aset, self->data_ptr);
+}
+
+static PyObject *
+CommunitySolar_get_subscriber1_payment_annual_escal(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Communitysolar_CommunitySolar_subscriber1_payment_annual_escal_nget, self->data_ptr);
+}
+
+static int
+CommunitySolar_set_subscriber1_payment_annual_escal(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Communitysolar_CommunitySolar_subscriber1_payment_annual_escal_nset, self->data_ptr);
+}
+
+static PyObject *
+CommunitySolar_get_subscriber1_payment_generation(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_CommunitySolar_subscriber1_payment_generation_aget, self->data_ptr);
+}
+
+static int
+CommunitySolar_set_subscriber1_payment_generation(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Communitysolar_CommunitySolar_subscriber1_payment_generation_aset, self->data_ptr);
+}
+
+static PyObject *
+CommunitySolar_get_subscriber1_payment_generation_escal(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Communitysolar_CommunitySolar_subscriber1_payment_generation_escal_nget, self->data_ptr);
+}
+
+static int
+CommunitySolar_set_subscriber1_payment_generation_escal(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Communitysolar_CommunitySolar_subscriber1_payment_generation_escal_nset, self->data_ptr);
+}
+
+static PyObject *
+CommunitySolar_get_subscriber1_payment_upfront(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Communitysolar_CommunitySolar_subscriber1_payment_upfront_nget, self->data_ptr);
+}
+
+static int
+CommunitySolar_set_subscriber1_payment_upfront(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Communitysolar_CommunitySolar_subscriber1_payment_upfront_nset, self->data_ptr);
+}
+
+static PyObject *
+CommunitySolar_get_subscriber1_share(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_CommunitySolar_subscriber1_share_aget, self->data_ptr);
+}
+
+static int
+CommunitySolar_set_subscriber1_share(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Communitysolar_CommunitySolar_subscriber1_share_aset, self->data_ptr);
+}
+
+static PyObject *
+CommunitySolar_get_subscriber2_bill_credit_rate(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_CommunitySolar_subscriber2_bill_credit_rate_aget, self->data_ptr);
+}
+
+static int
+CommunitySolar_set_subscriber2_bill_credit_rate(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Communitysolar_CommunitySolar_subscriber2_bill_credit_rate_aset, self->data_ptr);
+}
+
+static PyObject *
+CommunitySolar_get_subscriber2_bill_credit_rate_escal(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Communitysolar_CommunitySolar_subscriber2_bill_credit_rate_escal_nget, self->data_ptr);
+}
+
+static int
+CommunitySolar_set_subscriber2_bill_credit_rate_escal(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Communitysolar_CommunitySolar_subscriber2_bill_credit_rate_escal_nset, self->data_ptr);
+}
+
+static PyObject *
+CommunitySolar_get_subscriber2_growth(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Communitysolar_CommunitySolar_subscriber2_growth_nget, self->data_ptr);
+}
+
+static int
+CommunitySolar_set_subscriber2_growth(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Communitysolar_CommunitySolar_subscriber2_growth_nset, self->data_ptr);
+}
+
+static PyObject *
+CommunitySolar_get_subscriber2_payment_annual(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_CommunitySolar_subscriber2_payment_annual_aget, self->data_ptr);
+}
+
+static int
+CommunitySolar_set_subscriber2_payment_annual(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Communitysolar_CommunitySolar_subscriber2_payment_annual_aset, self->data_ptr);
+}
+
+static PyObject *
+CommunitySolar_get_subscriber2_payment_annual_escal(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Communitysolar_CommunitySolar_subscriber2_payment_annual_escal_nget, self->data_ptr);
+}
+
+static int
+CommunitySolar_set_subscriber2_payment_annual_escal(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Communitysolar_CommunitySolar_subscriber2_payment_annual_escal_nset, self->data_ptr);
+}
+
+static PyObject *
+CommunitySolar_get_subscriber2_payment_generation(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_CommunitySolar_subscriber2_payment_generation_aget, self->data_ptr);
+}
+
+static int
+CommunitySolar_set_subscriber2_payment_generation(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Communitysolar_CommunitySolar_subscriber2_payment_generation_aset, self->data_ptr);
+}
+
+static PyObject *
+CommunitySolar_get_subscriber2_payment_generation_escal(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Communitysolar_CommunitySolar_subscriber2_payment_generation_escal_nget, self->data_ptr);
+}
+
+static int
+CommunitySolar_set_subscriber2_payment_generation_escal(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Communitysolar_CommunitySolar_subscriber2_payment_generation_escal_nset, self->data_ptr);
+}
+
+static PyObject *
+CommunitySolar_get_subscriber2_payment_upfront(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Communitysolar_CommunitySolar_subscriber2_payment_upfront_nget, self->data_ptr);
+}
+
+static int
+CommunitySolar_set_subscriber2_payment_upfront(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Communitysolar_CommunitySolar_subscriber2_payment_upfront_nset, self->data_ptr);
+}
+
+static PyObject *
+CommunitySolar_get_subscriber2_share(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_CommunitySolar_subscriber2_share_aget, self->data_ptr);
+}
+
+static int
+CommunitySolar_set_subscriber2_share(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Communitysolar_CommunitySolar_subscriber2_share_aset, self->data_ptr);
+}
+
+static PyObject *
+CommunitySolar_get_subscriber3_bill_credit_rate(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_CommunitySolar_subscriber3_bill_credit_rate_aget, self->data_ptr);
+}
+
+static int
+CommunitySolar_set_subscriber3_bill_credit_rate(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Communitysolar_CommunitySolar_subscriber3_bill_credit_rate_aset, self->data_ptr);
+}
+
+static PyObject *
+CommunitySolar_get_subscriber3_bill_credit_rate_escal(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Communitysolar_CommunitySolar_subscriber3_bill_credit_rate_escal_nget, self->data_ptr);
+}
+
+static int
+CommunitySolar_set_subscriber3_bill_credit_rate_escal(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Communitysolar_CommunitySolar_subscriber3_bill_credit_rate_escal_nset, self->data_ptr);
+}
+
+static PyObject *
+CommunitySolar_get_subscriber3_growth(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Communitysolar_CommunitySolar_subscriber3_growth_nget, self->data_ptr);
+}
+
+static int
+CommunitySolar_set_subscriber3_growth(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Communitysolar_CommunitySolar_subscriber3_growth_nset, self->data_ptr);
+}
+
+static PyObject *
+CommunitySolar_get_subscriber3_payment_annual(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_CommunitySolar_subscriber3_payment_annual_aget, self->data_ptr);
+}
+
+static int
+CommunitySolar_set_subscriber3_payment_annual(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Communitysolar_CommunitySolar_subscriber3_payment_annual_aset, self->data_ptr);
+}
+
+static PyObject *
+CommunitySolar_get_subscriber3_payment_annual_escal(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Communitysolar_CommunitySolar_subscriber3_payment_annual_escal_nget, self->data_ptr);
+}
+
+static int
+CommunitySolar_set_subscriber3_payment_annual_escal(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Communitysolar_CommunitySolar_subscriber3_payment_annual_escal_nset, self->data_ptr);
+}
+
+static PyObject *
+CommunitySolar_get_subscriber3_payment_generation(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_CommunitySolar_subscriber3_payment_generation_aget, self->data_ptr);
+}
+
+static int
+CommunitySolar_set_subscriber3_payment_generation(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Communitysolar_CommunitySolar_subscriber3_payment_generation_aset, self->data_ptr);
+}
+
+static PyObject *
+CommunitySolar_get_subscriber3_payment_generation_escal(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Communitysolar_CommunitySolar_subscriber3_payment_generation_escal_nget, self->data_ptr);
+}
+
+static int
+CommunitySolar_set_subscriber3_payment_generation_escal(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Communitysolar_CommunitySolar_subscriber3_payment_generation_escal_nset, self->data_ptr);
+}
+
+static PyObject *
+CommunitySolar_get_subscriber3_payment_upfront(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Communitysolar_CommunitySolar_subscriber3_payment_upfront_nget, self->data_ptr);
+}
+
+static int
+CommunitySolar_set_subscriber3_payment_upfront(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Communitysolar_CommunitySolar_subscriber3_payment_upfront_nset, self->data_ptr);
+}
+
+static PyObject *
+CommunitySolar_get_subscriber3_share(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_CommunitySolar_subscriber3_share_aget, self->data_ptr);
+}
+
+static int
+CommunitySolar_set_subscriber3_share(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Communitysolar_CommunitySolar_subscriber3_share_aset, self->data_ptr);
+}
+
+static PyObject *
+CommunitySolar_get_subscriber4_bill_credit_rate(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_CommunitySolar_subscriber4_bill_credit_rate_aget, self->data_ptr);
+}
+
+static int
+CommunitySolar_set_subscriber4_bill_credit_rate(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Communitysolar_CommunitySolar_subscriber4_bill_credit_rate_aset, self->data_ptr);
+}
+
+static PyObject *
+CommunitySolar_get_subscriber4_bill_credit_rate_escal(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Communitysolar_CommunitySolar_subscriber4_bill_credit_rate_escal_nget, self->data_ptr);
+}
+
+static int
+CommunitySolar_set_subscriber4_bill_credit_rate_escal(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Communitysolar_CommunitySolar_subscriber4_bill_credit_rate_escal_nset, self->data_ptr);
+}
+
+static PyObject *
+CommunitySolar_get_subscriber4_growth(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Communitysolar_CommunitySolar_subscriber4_growth_nget, self->data_ptr);
+}
+
+static int
+CommunitySolar_set_subscriber4_growth(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Communitysolar_CommunitySolar_subscriber4_growth_nset, self->data_ptr);
+}
+
+static PyObject *
+CommunitySolar_get_subscriber4_payment_annual(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_CommunitySolar_subscriber4_payment_annual_aget, self->data_ptr);
+}
+
+static int
+CommunitySolar_set_subscriber4_payment_annual(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Communitysolar_CommunitySolar_subscriber4_payment_annual_aset, self->data_ptr);
+}
+
+static PyObject *
+CommunitySolar_get_subscriber4_payment_annual_escal(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Communitysolar_CommunitySolar_subscriber4_payment_annual_escal_nget, self->data_ptr);
+}
+
+static int
+CommunitySolar_set_subscriber4_payment_annual_escal(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Communitysolar_CommunitySolar_subscriber4_payment_annual_escal_nset, self->data_ptr);
+}
+
+static PyObject *
+CommunitySolar_get_subscriber4_payment_generation(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_CommunitySolar_subscriber4_payment_generation_aget, self->data_ptr);
+}
+
+static int
+CommunitySolar_set_subscriber4_payment_generation(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Communitysolar_CommunitySolar_subscriber4_payment_generation_aset, self->data_ptr);
+}
+
+static PyObject *
+CommunitySolar_get_subscriber4_payment_generation_escal(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Communitysolar_CommunitySolar_subscriber4_payment_generation_escal_nget, self->data_ptr);
+}
+
+static int
+CommunitySolar_set_subscriber4_payment_generation_escal(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Communitysolar_CommunitySolar_subscriber4_payment_generation_escal_nset, self->data_ptr);
+}
+
+static PyObject *
+CommunitySolar_get_subscriber4_payment_upfront(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Communitysolar_CommunitySolar_subscriber4_payment_upfront_nget, self->data_ptr);
+}
+
+static int
+CommunitySolar_set_subscriber4_payment_upfront(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Communitysolar_CommunitySolar_subscriber4_payment_upfront_nset, self->data_ptr);
+}
+
+static PyObject *
+CommunitySolar_get_subscriber4_share(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_CommunitySolar_subscriber4_share_aget, self->data_ptr);
+}
+
+static int
+CommunitySolar_set_subscriber4_share(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Communitysolar_CommunitySolar_subscriber4_share_aset, self->data_ptr);
+}
+
+static PyObject *
+CommunitySolar_get_unsubscribed_payment_generation(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_CommunitySolar_unsubscribed_payment_generation_aget, self->data_ptr);
+}
+
+static int
+CommunitySolar_set_unsubscribed_payment_generation(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Communitysolar_CommunitySolar_unsubscribed_payment_generation_aset, self->data_ptr);
+}
+
+static PyObject *
+CommunitySolar_get_unsubscribed_payment_generation_escal(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Communitysolar_CommunitySolar_unsubscribed_payment_generation_escal_nget, self->data_ptr);
+}
+
+static int
+CommunitySolar_set_unsubscribed_payment_generation_escal(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Communitysolar_CommunitySolar_unsubscribed_payment_generation_escal_nset, self->data_ptr);
+}
+
+static PyGetSetDef CommunitySolar_getset[] = {
+{"cs_cost_recurring_capacity", (getter)CommunitySolar_get_cs_cost_recurring_capacity,(setter)CommunitySolar_set_cs_cost_recurring_capacity,
+	PyDoc_STR("*sequence*: Recurring annual cost by capacity [$/kW-yr]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
-{"cost_equity_closing", (getter)OtherCapitalCosts_get_cost_equity_closing,(setter)OtherCapitalCosts_set_cost_equity_closing,
-	PyDoc_STR("*float*: Equity closing cost [$]\n\n*Constraints*: MIN=0\n\n*Required*: If not provided, assumed to be 100000"),
+{"cs_cost_recurring_capacity_escal", (getter)CommunitySolar_get_cs_cost_recurring_capacity_escal,(setter)CommunitySolar_set_cs_cost_recurring_capacity_escal,
+	PyDoc_STR("*float*: Recurring annual cost by capacity escalation [%/yr]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"cs_cost_recurring_fixed", (getter)CommunitySolar_get_cs_cost_recurring_fixed,(setter)CommunitySolar_set_cs_cost_recurring_fixed,
+	PyDoc_STR("*sequence*: Recurring annual fixed cost [$/yr]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"cs_cost_recurring_fixed_escal", (getter)CommunitySolar_get_cs_cost_recurring_fixed_escal,(setter)CommunitySolar_set_cs_cost_recurring_fixed_escal,
+	PyDoc_STR("*float*: Recurring annual fixed cost escalation [%/yr]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"cs_cost_recurring_generation", (getter)CommunitySolar_get_cs_cost_recurring_generation,(setter)CommunitySolar_set_cs_cost_recurring_generation,
+	PyDoc_STR("*sequence*: Recurring annual cost by generation [$/kWh]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"cs_cost_recurring_generation_escal", (getter)CommunitySolar_get_cs_cost_recurring_generation_escal,(setter)CommunitySolar_set_cs_cost_recurring_generation_escal,
+	PyDoc_STR("*float*: Recurring annual cost by generation escalation [%/yr]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"cs_cost_upfront", (getter)CommunitySolar_get_cs_cost_upfront,(setter)CommunitySolar_set_cs_cost_upfront,
+	PyDoc_STR("*float*: Up-front fixed cost [$]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"cs_cost_upfront_per_capacity", (getter)CommunitySolar_get_cs_cost_upfront_per_capacity,(setter)CommunitySolar_set_cs_cost_upfront_per_capacity,
+	PyDoc_STR("*float*: Up-front cost by capacity [$/kW]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"subscriber1_bill_credit_rate", (getter)CommunitySolar_get_subscriber1_bill_credit_rate,(setter)CommunitySolar_set_subscriber1_bill_credit_rate,
+	PyDoc_STR("*sequence*: Subscriber 1 bill credit rate [$/kWh]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"subscriber1_bill_credit_rate_escal", (getter)CommunitySolar_get_subscriber1_bill_credit_rate_escal,(setter)CommunitySolar_set_subscriber1_bill_credit_rate_escal,
+	PyDoc_STR("*float*: Subscriber 1 bill credit rate escalation [%/yr]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"subscriber1_growth", (getter)CommunitySolar_get_subscriber1_growth,(setter)CommunitySolar_set_subscriber1_growth,
+	PyDoc_STR("*float*: Subscriber 1 growth [%/yr]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"subscriber1_payment_annual", (getter)CommunitySolar_get_subscriber1_payment_annual,(setter)CommunitySolar_set_subscriber1_payment_annual,
+	PyDoc_STR("*sequence*: Subscriber 1 payment annual [$/yr]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"subscriber1_payment_annual_escal", (getter)CommunitySolar_get_subscriber1_payment_annual_escal,(setter)CommunitySolar_set_subscriber1_payment_annual_escal,
+	PyDoc_STR("*float*: Subscriber 1 payment annual escalation [%/yr]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"subscriber1_payment_generation", (getter)CommunitySolar_get_subscriber1_payment_generation,(setter)CommunitySolar_set_subscriber1_payment_generation,
+	PyDoc_STR("*sequence*: Subscriber 1 payment generation [$/kWh]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"subscriber1_payment_generation_escal", (getter)CommunitySolar_get_subscriber1_payment_generation_escal,(setter)CommunitySolar_set_subscriber1_payment_generation_escal,
+	PyDoc_STR("*float*: Subscriber 1 payment generation escalation [%/yr]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"subscriber1_payment_upfront", (getter)CommunitySolar_get_subscriber1_payment_upfront,(setter)CommunitySolar_set_subscriber1_payment_upfront,
+	PyDoc_STR("*float*: Subscriber 1 payment up-front [$]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"subscriber1_share", (getter)CommunitySolar_get_subscriber1_share,(setter)CommunitySolar_set_subscriber1_share,
+	PyDoc_STR("*sequence*: Subscriber 1 share [%]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"subscriber2_bill_credit_rate", (getter)CommunitySolar_get_subscriber2_bill_credit_rate,(setter)CommunitySolar_set_subscriber2_bill_credit_rate,
+	PyDoc_STR("*sequence*: Subscriber 2 bill credit rate [$/kWh]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"subscriber2_bill_credit_rate_escal", (getter)CommunitySolar_get_subscriber2_bill_credit_rate_escal,(setter)CommunitySolar_set_subscriber2_bill_credit_rate_escal,
+	PyDoc_STR("*float*: Subscriber 2 bill credit rate escalation [%/yr]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"subscriber2_growth", (getter)CommunitySolar_get_subscriber2_growth,(setter)CommunitySolar_set_subscriber2_growth,
+	PyDoc_STR("*float*: Subscriber 2 growth [%/yr]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"subscriber2_payment_annual", (getter)CommunitySolar_get_subscriber2_payment_annual,(setter)CommunitySolar_set_subscriber2_payment_annual,
+	PyDoc_STR("*sequence*: Subscriber 2 payment annual [$/yr]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"subscriber2_payment_annual_escal", (getter)CommunitySolar_get_subscriber2_payment_annual_escal,(setter)CommunitySolar_set_subscriber2_payment_annual_escal,
+	PyDoc_STR("*float*: Subscriber 2 payment annual escalation [%/yr]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"subscriber2_payment_generation", (getter)CommunitySolar_get_subscriber2_payment_generation,(setter)CommunitySolar_set_subscriber2_payment_generation,
+	PyDoc_STR("*sequence*: Subscriber 2 payment generation [$/kWh]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"subscriber2_payment_generation_escal", (getter)CommunitySolar_get_subscriber2_payment_generation_escal,(setter)CommunitySolar_set_subscriber2_payment_generation_escal,
+	PyDoc_STR("*float*: Subscriber 1 payment generation escalation [%/yr]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"subscriber2_payment_upfront", (getter)CommunitySolar_get_subscriber2_payment_upfront,(setter)CommunitySolar_set_subscriber2_payment_upfront,
+	PyDoc_STR("*float*: Subscriber 2 payment up-front [$]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"subscriber2_share", (getter)CommunitySolar_get_subscriber2_share,(setter)CommunitySolar_set_subscriber2_share,
+	PyDoc_STR("*sequence*: Subscriber 2 share [%]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"subscriber3_bill_credit_rate", (getter)CommunitySolar_get_subscriber3_bill_credit_rate,(setter)CommunitySolar_set_subscriber3_bill_credit_rate,
+	PyDoc_STR("*sequence*: Subscriber 3 bill credit rate [$/kWh]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"subscriber3_bill_credit_rate_escal", (getter)CommunitySolar_get_subscriber3_bill_credit_rate_escal,(setter)CommunitySolar_set_subscriber3_bill_credit_rate_escal,
+	PyDoc_STR("*float*: Subscriber 3 bill credit rate escalation [%/yr]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"subscriber3_growth", (getter)CommunitySolar_get_subscriber3_growth,(setter)CommunitySolar_set_subscriber3_growth,
+	PyDoc_STR("*float*: Subscriber 3 growth [%/yr]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"subscriber3_payment_annual", (getter)CommunitySolar_get_subscriber3_payment_annual,(setter)CommunitySolar_set_subscriber3_payment_annual,
+	PyDoc_STR("*sequence*: Subscriber 3 payment annual [$/yr]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"subscriber3_payment_annual_escal", (getter)CommunitySolar_get_subscriber3_payment_annual_escal,(setter)CommunitySolar_set_subscriber3_payment_annual_escal,
+	PyDoc_STR("*float*: Subscriber 3 payment annual escalation [%/yr]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"subscriber3_payment_generation", (getter)CommunitySolar_get_subscriber3_payment_generation,(setter)CommunitySolar_set_subscriber3_payment_generation,
+	PyDoc_STR("*sequence*: Subscriber 3 payment generation [$/kWh]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"subscriber3_payment_generation_escal", (getter)CommunitySolar_get_subscriber3_payment_generation_escal,(setter)CommunitySolar_set_subscriber3_payment_generation_escal,
+	PyDoc_STR("*float*: Subscriber 1 payment generation escalation [%/yr]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"subscriber3_payment_upfront", (getter)CommunitySolar_get_subscriber3_payment_upfront,(setter)CommunitySolar_set_subscriber3_payment_upfront,
+	PyDoc_STR("*float*: Subscriber 3 payment up-front [$]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"subscriber3_share", (getter)CommunitySolar_get_subscriber3_share,(setter)CommunitySolar_set_subscriber3_share,
+	PyDoc_STR("*sequence*: Subscriber 3 share [%]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"subscriber4_bill_credit_rate", (getter)CommunitySolar_get_subscriber4_bill_credit_rate,(setter)CommunitySolar_set_subscriber4_bill_credit_rate,
+	PyDoc_STR("*sequence*: Subscriber 4 bill credit rate [$/kWh]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"subscriber4_bill_credit_rate_escal", (getter)CommunitySolar_get_subscriber4_bill_credit_rate_escal,(setter)CommunitySolar_set_subscriber4_bill_credit_rate_escal,
+	PyDoc_STR("*float*: Subscriber 4 bill credit rate escalation [%/yr]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"subscriber4_growth", (getter)CommunitySolar_get_subscriber4_growth,(setter)CommunitySolar_set_subscriber4_growth,
+	PyDoc_STR("*float*: Subscriber 4 growth [%/yr]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"subscriber4_payment_annual", (getter)CommunitySolar_get_subscriber4_payment_annual,(setter)CommunitySolar_set_subscriber4_payment_annual,
+	PyDoc_STR("*sequence*: Subscriber 4 payment annual [$/yr]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"subscriber4_payment_annual_escal", (getter)CommunitySolar_get_subscriber4_payment_annual_escal,(setter)CommunitySolar_set_subscriber4_payment_annual_escal,
+	PyDoc_STR("*float*: Subscriber 4 payment annual escalation [%/yr]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"subscriber4_payment_generation", (getter)CommunitySolar_get_subscriber4_payment_generation,(setter)CommunitySolar_set_subscriber4_payment_generation,
+	PyDoc_STR("*sequence*: Subscriber 4 payment generation [$/kWh]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"subscriber4_payment_generation_escal", (getter)CommunitySolar_get_subscriber4_payment_generation_escal,(setter)CommunitySolar_set_subscriber4_payment_generation_escal,
+	PyDoc_STR("*float*: Subscriber 1 payment generation escalation [%/yr]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"subscriber4_payment_upfront", (getter)CommunitySolar_get_subscriber4_payment_upfront,(setter)CommunitySolar_set_subscriber4_payment_upfront,
+	PyDoc_STR("*float*: Subscriber 4 payment up-front [$]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"subscriber4_share", (getter)CommunitySolar_get_subscriber4_share,(setter)CommunitySolar_set_subscriber4_share,
+	PyDoc_STR("*sequence*: Subscriber 4 share [%]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"unsubscribed_payment_generation", (getter)CommunitySolar_get_unsubscribed_payment_generation,(setter)CommunitySolar_set_unsubscribed_payment_generation,
+	PyDoc_STR("*sequence*: Unsubscribed generation rate [$/kWh]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"unsubscribed_payment_generation_escal", (getter)CommunitySolar_get_unsubscribed_payment_generation_escal,(setter)CommunitySolar_set_unsubscribed_payment_generation_escal,
+	PyDoc_STR("*float*: Unsubscribed generation escalation [%/yr]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
 
-static PyTypeObject OtherCapitalCosts_Type = {
+static PyTypeObject CommunitySolar_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"Levpartflip.OtherCapitalCosts",             /*tp_name*/
+		"Communitysolar.CommunitySolar",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -5720,9 +6001,9 @@ static PyTypeObject OtherCapitalCosts_Type = {
 		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
-		OtherCapitalCosts_methods,         /*tp_methods*/
+		CommunitySolar_methods,         /*tp_methods*/
 		0,                          /*tp_members*/
-		OtherCapitalCosts_getset,          /*tp_getset*/
+		CommunitySolar_getset,          /*tp_getset*/
 		0,                          /*tp_base*/
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
@@ -5737,34 +6018,34 @@ static PyTypeObject OtherCapitalCosts_Type = {
 
 
 /*
- * IRRTargets Group
+ * FuelCell Group
  */ 
 
-static PyTypeObject IRRTargets_Type;
+static PyTypeObject FuelCell_Type;
 
 static PyObject *
-IRRTargets_new(SAM_Levpartflip data_ptr)
+FuelCell_new(SAM_Communitysolar data_ptr)
 {
-	PyObject* new_obj = IRRTargets_Type.tp_alloc(&IRRTargets_Type,0);
+	PyObject* new_obj = FuelCell_Type.tp_alloc(&FuelCell_Type,0);
 
-	VarGroupObject* IRRTargets_obj = (VarGroupObject*)new_obj;
+	VarGroupObject* FuelCell_obj = (VarGroupObject*)new_obj;
 
-	IRRTargets_obj->data_ptr = (SAM_table)data_ptr;
+	FuelCell_obj->data_ptr = (SAM_table)data_ptr;
 
 	return new_obj;
 }
 
-/* IRRTargets methods */
+/* FuelCell methods */
 
 static PyObject *
-IRRTargets_assign(VarGroupObject *self, PyObject *args)
+FuelCell_assign(VarGroupObject *self, PyObject *args)
 {
 	PyObject* dict;
 	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Levpartflip", "IRRTargets")){
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Communitysolar", "FuelCell")){
 		return NULL;
 	}
 
@@ -5773,15 +6054,15 @@ IRRTargets_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
-IRRTargets_replace(VarGroupObject *self, PyObject *args)
+FuelCell_replace(VarGroupObject *self, PyObject *args)
 {
 	PyObject* dict;
 	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
 		return NULL;
 	}
-	PyTypeObject* tp = &IRRTargets_Type;
+	PyTypeObject* tp = &FuelCell_Type;
 
-	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Levpartflip", "IRRTargets")){
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Communitysolar", "FuelCell")){
 		return NULL;
 	}
 
@@ -5790,107 +6071,122 @@ IRRTargets_replace(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
-IRRTargets_export(VarGroupObject *self, PyObject *args)
+FuelCell_export(VarGroupObject *self, PyObject *args)
 {
-	PyTypeObject* tp = &IRRTargets_Type;
+	PyTypeObject* tp = &FuelCell_Type;
 	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
 	return dict;
 }
 
-static PyMethodDef IRRTargets_methods[] = {
-		{"assign",            (PyCFunction)IRRTargets_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``IRRTargets_vals = { var: val, ...}``")},
-		{"replace",            (PyCFunction)IRRTargets_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``IRRTargets_vals = { var: val, ...}``")},
-		{"export",            (PyCFunction)IRRTargets_export,  METH_VARARGS,
+static PyMethodDef FuelCell_methods[] = {
+		{"assign",            (PyCFunction)FuelCell_assign,  METH_VARARGS,
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``FuelCell_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)FuelCell_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``FuelCell_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)FuelCell_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 static PyObject *
-IRRTargets_get_tax_investor_equity_percent(VarGroupObject *self, void *closure)
+FuelCell_get_en_fuelcell(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_IRRTargets_tax_investor_equity_percent_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_FuelCell_en_fuelcell_nget, self->data_ptr);
 }
 
 static int
-IRRTargets_set_tax_investor_equity_percent(VarGroupObject *self, PyObject *value, void *closure)
+FuelCell_set_en_fuelcell(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_IRRTargets_tax_investor_equity_percent_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_FuelCell_en_fuelcell_nset, self->data_ptr);
 }
 
 static PyObject *
-IRRTargets_get_tax_investor_postflip_cash_percent(VarGroupObject *self, void *closure)
+FuelCell_get_fuelcell_computed_bank_capacity(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_IRRTargets_tax_investor_postflip_cash_percent_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_FuelCell_fuelcell_computed_bank_capacity_nget, self->data_ptr);
 }
 
 static int
-IRRTargets_set_tax_investor_postflip_cash_percent(VarGroupObject *self, PyObject *value, void *closure)
+FuelCell_set_fuelcell_computed_bank_capacity(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_IRRTargets_tax_investor_postflip_cash_percent_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_FuelCell_fuelcell_computed_bank_capacity_nset, self->data_ptr);
 }
 
 static PyObject *
-IRRTargets_get_tax_investor_postflip_tax_percent(VarGroupObject *self, void *closure)
+FuelCell_get_fuelcell_per_kWh(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_IRRTargets_tax_investor_postflip_tax_percent_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_FuelCell_fuelcell_per_kWh_nget, self->data_ptr);
 }
 
 static int
-IRRTargets_set_tax_investor_postflip_tax_percent(VarGroupObject *self, PyObject *value, void *closure)
+FuelCell_set_fuelcell_per_kWh(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_IRRTargets_tax_investor_postflip_tax_percent_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_FuelCell_fuelcell_per_kWh_nset, self->data_ptr);
 }
 
 static PyObject *
-IRRTargets_get_tax_investor_preflip_cash_percent(VarGroupObject *self, void *closure)
+FuelCell_get_fuelcell_replacement(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_IRRTargets_tax_investor_preflip_cash_percent_nget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_FuelCell_fuelcell_replacement_aget, self->data_ptr);
 }
 
 static int
-IRRTargets_set_tax_investor_preflip_cash_percent(VarGroupObject *self, PyObject *value, void *closure)
+FuelCell_set_fuelcell_replacement(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_IRRTargets_tax_investor_preflip_cash_percent_nset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Communitysolar_FuelCell_fuelcell_replacement_aset, self->data_ptr);
 }
 
 static PyObject *
-IRRTargets_get_tax_investor_preflip_tax_percent(VarGroupObject *self, void *closure)
+FuelCell_get_fuelcell_replacement_option(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_IRRTargets_tax_investor_preflip_tax_percent_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_FuelCell_fuelcell_replacement_option_nget, self->data_ptr);
 }
 
 static int
-IRRTargets_set_tax_investor_preflip_tax_percent(VarGroupObject *self, PyObject *value, void *closure)
+FuelCell_set_fuelcell_replacement_option(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_IRRTargets_tax_investor_preflip_tax_percent_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_FuelCell_fuelcell_replacement_option_nset, self->data_ptr);
 }
 
-static PyGetSetDef IRRTargets_getset[] = {
-{"tax_investor_equity_percent", (getter)IRRTargets_get_tax_investor_equity_percent,(setter)IRRTargets_set_tax_investor_equity_percent,
-	PyDoc_STR("*float*: Investor equity [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 98"),
+static PyObject *
+FuelCell_get_fuelcell_replacement_schedule(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_FuelCell_fuelcell_replacement_schedule_aget, self->data_ptr);
+}
+
+static int
+FuelCell_set_fuelcell_replacement_schedule(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Communitysolar_FuelCell_fuelcell_replacement_schedule_aset, self->data_ptr);
+}
+
+static PyGetSetDef FuelCell_getset[] = {
+{"en_fuelcell", (getter)FuelCell_get_en_fuelcell,(setter)FuelCell_set_en_fuelcell,
+	PyDoc_STR("*float*: Enable fuel cell storage model [0/1]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
-{"tax_investor_postflip_cash_percent", (getter)IRRTargets_get_tax_investor_postflip_cash_percent,(setter)IRRTargets_set_tax_investor_postflip_cash_percent,
-	PyDoc_STR("*float*: Investor post-flip cash  [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 15"),
+{"fuelcell_computed_bank_capacity", (getter)FuelCell_get_fuelcell_computed_bank_capacity,(setter)FuelCell_set_fuelcell_computed_bank_capacity,
+	PyDoc_STR("*float*: Fuel cell capacity [kWh]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
-{"tax_investor_postflip_tax_percent", (getter)IRRTargets_get_tax_investor_postflip_tax_percent,(setter)IRRTargets_set_tax_investor_postflip_tax_percent,
-	PyDoc_STR("*float*: Investor post-flip tax benefit  [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 15"),
+{"fuelcell_per_kWh", (getter)FuelCell_get_fuelcell_per_kWh,(setter)FuelCell_set_fuelcell_per_kWh,
+	PyDoc_STR("*float*: Fuel cell cost [$/kWh]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
-{"tax_investor_preflip_cash_percent", (getter)IRRTargets_get_tax_investor_preflip_cash_percent,(setter)IRRTargets_set_tax_investor_preflip_cash_percent,
-	PyDoc_STR("*float*: Investor pre-flip cash  [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 98"),
+{"fuelcell_replacement", (getter)FuelCell_get_fuelcell_replacement,(setter)FuelCell_set_fuelcell_replacement,
+	PyDoc_STR("*sequence*: Fuel cell replacements per year [number/year]"),
  	NULL},
-{"tax_investor_preflip_tax_percent", (getter)IRRTargets_get_tax_investor_preflip_tax_percent,(setter)IRRTargets_set_tax_investor_preflip_tax_percent,
-	PyDoc_STR("*float*: Investor pre-flip tax benefit  [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: If not provided, assumed to be 98"),
+{"fuelcell_replacement_option", (getter)FuelCell_get_fuelcell_replacement_option,(setter)FuelCell_set_fuelcell_replacement_option,
+	PyDoc_STR("*float*: Enable fuel cell replacement? [0=none,1=capacity based,2=user schedule]\n\n*Constraints*: INTEGER,MIN=0,MAX=2"),
+ 	NULL},
+{"fuelcell_replacement_schedule", (getter)FuelCell_get_fuelcell_replacement_schedule,(setter)FuelCell_set_fuelcell_replacement_schedule,
+	PyDoc_STR("*sequence*: Fuel cell replacements per year (user specified) [number/year]"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
 
-static PyTypeObject IRRTargets_Type = {
+static PyTypeObject FuelCell_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"Levpartflip.IRRTargets",             /*tp_name*/
+		"Communitysolar.FuelCell",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -5917,9 +6213,161 @@ static PyTypeObject IRRTargets_Type = {
 		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
-		IRRTargets_methods,         /*tp_methods*/
+		FuelCell_methods,         /*tp_methods*/
 		0,                          /*tp_members*/
-		IRRTargets_getset,          /*tp_getset*/
+		FuelCell_getset,          /*tp_getset*/
+		0,                          /*tp_base*/
+		0,                          /*tp_dict*/
+		0,                          /*tp_descr_get*/
+		0,                          /*tp_descr_set*/
+		0,                          /*tp_dictofnset*/
+		0,                          /*tp_init*/
+		0,                          /*tp_alloc*/
+		0,             /*tp_new*/
+		0,                          /*tp_free*/
+		0,                          /*tp_is_gc*/
+};
+
+
+/*
+ * GridLimits Group
+ */ 
+
+static PyTypeObject GridLimits_Type;
+
+static PyObject *
+GridLimits_new(SAM_Communitysolar data_ptr)
+{
+	PyObject* new_obj = GridLimits_Type.tp_alloc(&GridLimits_Type,0);
+
+	VarGroupObject* GridLimits_obj = (VarGroupObject*)new_obj;
+
+	GridLimits_obj->data_ptr = (SAM_table)data_ptr;
+
+	return new_obj;
+}
+
+/* GridLimits methods */
+
+static PyObject *
+GridLimits_assign(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Communitysolar", "GridLimits")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+GridLimits_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &GridLimits_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Communitysolar", "GridLimits")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+GridLimits_export(VarGroupObject *self, PyObject *args)
+{
+	PyTypeObject* tp = &GridLimits_Type;
+	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
+	return dict;
+}
+
+static PyMethodDef GridLimits_methods[] = {
+		{"assign",            (PyCFunction)GridLimits_assign,  METH_VARARGS,
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``GridLimits_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)GridLimits_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``GridLimits_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)GridLimits_export,  METH_VARARGS,
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+		{NULL,              NULL}           /* sentinel */
+};
+
+static PyObject *
+GridLimits_get_grid_curtailment_price(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_GridLimits_grid_curtailment_price_aget, self->data_ptr);
+}
+
+static int
+GridLimits_set_grid_curtailment_price(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Communitysolar_GridLimits_grid_curtailment_price_aset, self->data_ptr);
+}
+
+static PyObject *
+GridLimits_get_grid_curtailment_price_esc(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Communitysolar_GridLimits_grid_curtailment_price_esc_nget, self->data_ptr);
+}
+
+static int
+GridLimits_set_grid_curtailment_price_esc(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Communitysolar_GridLimits_grid_curtailment_price_esc_nset, self->data_ptr);
+}
+
+static PyGetSetDef GridLimits_getset[] = {
+{"grid_curtailment_price", (getter)GridLimits_get_grid_curtailment_price,(setter)GridLimits_set_grid_curtailment_price,
+	PyDoc_STR("*sequence*: Curtailment price [$/kWh]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"grid_curtailment_price_esc", (getter)GridLimits_get_grid_curtailment_price_esc,(setter)GridLimits_set_grid_curtailment_price_esc,
+	PyDoc_STR("*float*: Curtailment price escalation [%]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+	{NULL}  /* Sentinel */
+};
+
+static PyTypeObject GridLimits_Type = {
+		/* The ob_type field must be initialized in the module init function
+		 * to be portable to Windows without using C++. */
+		PyVarObject_HEAD_INIT(NULL, 0)
+		"Communitysolar.GridLimits",             /*tp_name*/
+		sizeof(VarGroupObject),          /*tp_basicsize*/
+		0,                          /*tp_itemsize*/
+		/* methods */
+		0,    /*tp_dealloc*/
+		0,                          /*tp_print*/
+		(getattrfunc)0,             /*tp_getattr*/
+		0,                          /*tp_setattr*/
+		0,                          /*tp_reserved*/
+		0,                          /*tp_repr*/
+		0,                          /*tp_as_number*/
+		0,                          /*tp_as_sequence*/
+		0,                          /*tp_as_mapping*/
+		0,                          /*tp_hash*/
+		0,                          /*tp_call*/
+		0,                          /*tp_str*/
+		0,                          /*tp_getattro*/
+		0,                          /*tp_setattro*/
+		0,                          /*tp_as_buffer*/
+		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
+		0,                          /*tp_doc*/
+		0,                          /*tp_traverse*/
+		0,                          /*tp_clear*/
+		0,                          /*tp_richcompare*/
+		0,                          /*tp_weaklistofnset*/
+		0,                          /*tp_iter*/
+		0,                          /*tp_iternext*/
+		GridLimits_methods,         /*tp_methods*/
+		0,                          /*tp_members*/
+		GridLimits_getset,          /*tp_getset*/
 		0,                          /*tp_base*/
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
@@ -5940,7 +6388,7 @@ static PyTypeObject IRRTargets_Type = {
 static PyTypeObject LCOS_Type;
 
 static PyObject *
-LCOS_new(SAM_Levpartflip data_ptr)
+LCOS_new(SAM_Communitysolar data_ptr)
 {
 	PyObject* new_obj = LCOS_Type.tp_alloc(&LCOS_Type,0);
 
@@ -5961,7 +6409,7 @@ LCOS_assign(VarGroupObject *self, PyObject *args)
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Levpartflip", "LCOS")){
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Communitysolar", "LCOS")){
 		return NULL;
 	}
 
@@ -5978,7 +6426,7 @@ LCOS_replace(VarGroupObject *self, PyObject *args)
 	}
 	PyTypeObject* tp = &LCOS_Type;
 
-	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Levpartflip", "LCOS")){
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Communitysolar", "LCOS")){
 		return NULL;
 	}
 
@@ -6007,193 +6455,193 @@ static PyMethodDef LCOS_methods[] = {
 static PyObject *
 LCOS_get_batt_annual_charge_energy(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_LCOS_batt_annual_charge_energy_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_LCOS_batt_annual_charge_energy_aget, self->data_ptr);
 }
 
 static int
 LCOS_set_batt_annual_charge_energy(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_Levpartflip_LCOS_batt_annual_charge_energy_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Communitysolar_LCOS_batt_annual_charge_energy_aset, self->data_ptr);
 }
 
 static PyObject *
 LCOS_get_batt_annual_charge_from_system(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_LCOS_batt_annual_charge_from_system_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_LCOS_batt_annual_charge_from_system_aget, self->data_ptr);
 }
 
 static int
 LCOS_set_batt_annual_charge_from_system(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_Levpartflip_LCOS_batt_annual_charge_from_system_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Communitysolar_LCOS_batt_annual_charge_from_system_aset, self->data_ptr);
 }
 
 static PyObject *
 LCOS_get_batt_annual_discharge_energy(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_LCOS_batt_annual_discharge_energy_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_LCOS_batt_annual_discharge_energy_aget, self->data_ptr);
 }
 
 static int
 LCOS_set_batt_annual_discharge_energy(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_Levpartflip_LCOS_batt_annual_discharge_energy_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Communitysolar_LCOS_batt_annual_discharge_energy_aset, self->data_ptr);
 }
 
 static PyObject *
 LCOS_get_batt_capacity_percent(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_LCOS_batt_capacity_percent_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_LCOS_batt_capacity_percent_aget, self->data_ptr);
 }
 
 static int
 LCOS_set_batt_capacity_percent(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_Levpartflip_LCOS_batt_capacity_percent_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Communitysolar_LCOS_batt_capacity_percent_aset, self->data_ptr);
 }
 
 static PyObject *
 LCOS_get_batt_salvage_percentage(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_LCOS_batt_salvage_percentage_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_LCOS_batt_salvage_percentage_nget, self->data_ptr);
 }
 
 static int
 LCOS_set_batt_salvage_percentage(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_LCOS_batt_salvage_percentage_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_LCOS_batt_salvage_percentage_nset, self->data_ptr);
 }
 
 static PyObject *
 LCOS_get_battery_total_cost_lcos(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_LCOS_battery_total_cost_lcos_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_LCOS_battery_total_cost_lcos_nget, self->data_ptr);
 }
 
 static int
 LCOS_set_battery_total_cost_lcos(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Levpartflip_LCOS_battery_total_cost_lcos_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Communitysolar_LCOS_battery_total_cost_lcos_nset, self->data_ptr);
 }
 
 static PyObject *
 LCOS_get_charge_w_sys_ec_ym(VarGroupObject *self, void *closure)
 {
-	return PySAM_matrix_getter(SAM_Levpartflip_LCOS_charge_w_sys_ec_ym_mget, self->data_ptr);
+	return PySAM_matrix_getter(SAM_Communitysolar_LCOS_charge_w_sys_ec_ym_mget, self->data_ptr);
 }
 
 static int
 LCOS_set_charge_w_sys_ec_ym(VarGroupObject *self, PyObject *value, void *closure)
 {
-		return PySAM_matrix_setter(value, SAM_Levpartflip_LCOS_charge_w_sys_ec_ym_mset, self->data_ptr);
+		return PySAM_matrix_setter(value, SAM_Communitysolar_LCOS_charge_w_sys_ec_ym_mset, self->data_ptr);
 }
 
 static PyObject *
 LCOS_get_grid_to_batt(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_LCOS_grid_to_batt_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_LCOS_grid_to_batt_aget, self->data_ptr);
 }
 
 static int
 LCOS_set_grid_to_batt(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_Levpartflip_LCOS_grid_to_batt_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Communitysolar_LCOS_grid_to_batt_aset, self->data_ptr);
 }
 
 static PyObject *
 LCOS_get_monthly_batt_to_grid(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_LCOS_monthly_batt_to_grid_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_LCOS_monthly_batt_to_grid_aget, self->data_ptr);
 }
 
 static int
 LCOS_set_monthly_batt_to_grid(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_Levpartflip_LCOS_monthly_batt_to_grid_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Communitysolar_LCOS_monthly_batt_to_grid_aset, self->data_ptr);
 }
 
 static PyObject *
 LCOS_get_monthly_grid_to_batt(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_LCOS_monthly_grid_to_batt_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_LCOS_monthly_grid_to_batt_aget, self->data_ptr);
 }
 
 static int
 LCOS_set_monthly_grid_to_batt(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_Levpartflip_LCOS_monthly_grid_to_batt_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Communitysolar_LCOS_monthly_grid_to_batt_aset, self->data_ptr);
 }
 
 static PyObject *
 LCOS_get_monthly_grid_to_load(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_LCOS_monthly_grid_to_load_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_LCOS_monthly_grid_to_load_aget, self->data_ptr);
 }
 
 static int
 LCOS_set_monthly_grid_to_load(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_Levpartflip_LCOS_monthly_grid_to_load_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Communitysolar_LCOS_monthly_grid_to_load_aset, self->data_ptr);
 }
 
 static PyObject *
 LCOS_get_monthly_system_to_grid(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_LCOS_monthly_system_to_grid_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_LCOS_monthly_system_to_grid_aget, self->data_ptr);
 }
 
 static int
 LCOS_set_monthly_system_to_grid(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_Levpartflip_LCOS_monthly_system_to_grid_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Communitysolar_LCOS_monthly_system_to_grid_aset, self->data_ptr);
 }
 
 static PyObject *
 LCOS_get_true_up_credits_ym(VarGroupObject *self, void *closure)
 {
-	return PySAM_matrix_getter(SAM_Levpartflip_LCOS_true_up_credits_ym_mget, self->data_ptr);
+	return PySAM_matrix_getter(SAM_Communitysolar_LCOS_true_up_credits_ym_mget, self->data_ptr);
 }
 
 static int
 LCOS_set_true_up_credits_ym(VarGroupObject *self, PyObject *value, void *closure)
 {
-		return PySAM_matrix_setter(value, SAM_Levpartflip_LCOS_true_up_credits_ym_mset, self->data_ptr);
+		return PySAM_matrix_setter(value, SAM_Communitysolar_LCOS_true_up_credits_ym_mset, self->data_ptr);
 }
 
 static PyObject *
 LCOS_get_year1_monthly_ec_charge_gross_with_system(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_LCOS_year1_monthly_ec_charge_gross_with_system_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_LCOS_year1_monthly_ec_charge_gross_with_system_aget, self->data_ptr);
 }
 
 static int
 LCOS_set_year1_monthly_ec_charge_gross_with_system(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_Levpartflip_LCOS_year1_monthly_ec_charge_gross_with_system_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Communitysolar_LCOS_year1_monthly_ec_charge_gross_with_system_aset, self->data_ptr);
 }
 
 static PyObject *
 LCOS_get_year1_monthly_ec_charge_with_system(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_LCOS_year1_monthly_ec_charge_with_system_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_LCOS_year1_monthly_ec_charge_with_system_aget, self->data_ptr);
 }
 
 static int
 LCOS_set_year1_monthly_ec_charge_with_system(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_Levpartflip_LCOS_year1_monthly_ec_charge_with_system_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Communitysolar_LCOS_year1_monthly_ec_charge_with_system_aset, self->data_ptr);
 }
 
 static PyObject *
 LCOS_get_year1_monthly_electricity_to_grid(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_LCOS_year1_monthly_electricity_to_grid_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_LCOS_year1_monthly_electricity_to_grid_aget, self->data_ptr);
 }
 
 static int
 LCOS_set_year1_monthly_electricity_to_grid(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_Levpartflip_LCOS_year1_monthly_electricity_to_grid_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Communitysolar_LCOS_year1_monthly_electricity_to_grid_aset, self->data_ptr);
 }
 
 static PyGetSetDef LCOS_getset[] = {
@@ -6252,7 +6700,7 @@ static PyTypeObject LCOS_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"Levpartflip.LCOS",             /*tp_name*/
+		"Communitysolar.LCOS",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -6302,7 +6750,7 @@ static PyTypeObject LCOS_Type = {
 static PyTypeObject ChargesByMonth_Type;
 
 static PyObject *
-ChargesByMonth_new(SAM_Levpartflip data_ptr)
+ChargesByMonth_new(SAM_Communitysolar data_ptr)
 {
 	PyObject* new_obj = ChargesByMonth_Type.tp_alloc(&ChargesByMonth_Type,0);
 
@@ -6323,7 +6771,7 @@ ChargesByMonth_assign(VarGroupObject *self, PyObject *args)
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Levpartflip", "ChargesByMonth")){
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Communitysolar", "ChargesByMonth")){
 		return NULL;
 	}
 
@@ -6340,7 +6788,7 @@ ChargesByMonth_replace(VarGroupObject *self, PyObject *args)
 	}
 	PyTypeObject* tp = &ChargesByMonth_Type;
 
-	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Levpartflip", "ChargesByMonth")){
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Communitysolar", "ChargesByMonth")){
 		return NULL;
 	}
 
@@ -6369,25 +6817,25 @@ static PyMethodDef ChargesByMonth_methods[] = {
 static PyObject *
 ChargesByMonth_get_net_billing_credits_ym(VarGroupObject *self, void *closure)
 {
-	return PySAM_matrix_getter(SAM_Levpartflip_ChargesByMonth_net_billing_credits_ym_mget, self->data_ptr);
+	return PySAM_matrix_getter(SAM_Communitysolar_ChargesByMonth_net_billing_credits_ym_mget, self->data_ptr);
 }
 
 static int
 ChargesByMonth_set_net_billing_credits_ym(VarGroupObject *self, PyObject *value, void *closure)
 {
-		return PySAM_matrix_setter(value, SAM_Levpartflip_ChargesByMonth_net_billing_credits_ym_mset, self->data_ptr);
+		return PySAM_matrix_setter(value, SAM_Communitysolar_ChargesByMonth_net_billing_credits_ym_mset, self->data_ptr);
 }
 
 static PyObject *
 ChargesByMonth_get_nm_dollars_applied_ym(VarGroupObject *self, void *closure)
 {
-	return PySAM_matrix_getter(SAM_Levpartflip_ChargesByMonth_nm_dollars_applied_ym_mget, self->data_ptr);
+	return PySAM_matrix_getter(SAM_Communitysolar_ChargesByMonth_nm_dollars_applied_ym_mget, self->data_ptr);
 }
 
 static int
 ChargesByMonth_set_nm_dollars_applied_ym(VarGroupObject *self, PyObject *value, void *closure)
 {
-		return PySAM_matrix_setter(value, SAM_Levpartflip_ChargesByMonth_nm_dollars_applied_ym_mset, self->data_ptr);
+		return PySAM_matrix_setter(value, SAM_Communitysolar_ChargesByMonth_nm_dollars_applied_ym_mset, self->data_ptr);
 }
 
 static PyGetSetDef ChargesByMonth_getset[] = {
@@ -6404,7 +6852,7 @@ static PyTypeObject ChargesByMonth_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"Levpartflip.ChargesByMonth",             /*tp_name*/
+		"Communitysolar.ChargesByMonth",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -6448,240 +6896,13 @@ static PyTypeObject ChargesByMonth_Type = {
 
 
 /*
- * BatterySystem Group
- */ 
-
-static PyTypeObject BatterySystem_Type;
-
-static PyObject *
-BatterySystem_new(SAM_Levpartflip data_ptr)
-{
-	PyObject* new_obj = BatterySystem_Type.tp_alloc(&BatterySystem_Type,0);
-
-	VarGroupObject* BatterySystem_obj = (VarGroupObject*)new_obj;
-
-	BatterySystem_obj->data_ptr = (SAM_table)data_ptr;
-
-	return new_obj;
-}
-
-/* BatterySystem methods */
-
-static PyObject *
-BatterySystem_assign(VarGroupObject *self, PyObject *args)
-{
-	PyObject* dict;
-	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
-		return NULL;
-	}
-
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Levpartflip", "BatterySystem")){
-		return NULL;
-	}
-
-	Py_INCREF(Py_None);
-	return Py_None;
-}
-
-static PyObject *
-BatterySystem_replace(VarGroupObject *self, PyObject *args)
-{
-	PyObject* dict;
-	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
-		return NULL;
-	}
-	PyTypeObject* tp = &BatterySystem_Type;
-
-	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Levpartflip", "BatterySystem")){
-		return NULL;
-	}
-
-	Py_INCREF(Py_None);
-	return Py_None;
-}
-
-static PyObject *
-BatterySystem_export(VarGroupObject *self, PyObject *args)
-{
-	PyTypeObject* tp = &BatterySystem_Type;
-	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
-	return dict;
-}
-
-static PyMethodDef BatterySystem_methods[] = {
-		{"assign",            (PyCFunction)BatterySystem_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``BatterySystem_vals = { var: val, ...}``")},
-		{"replace",            (PyCFunction)BatterySystem_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``BatterySystem_vals = { var: val, ...}``")},
-		{"export",            (PyCFunction)BatterySystem_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
-		{NULL,              NULL}           /* sentinel */
-};
-
-static PyObject *
-BatterySystem_get_batt_bank_replacement(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Levpartflip_BatterySystem_batt_bank_replacement_aget, self->data_ptr);
-}
-
-static int
-BatterySystem_set_batt_bank_replacement(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_Levpartflip_BatterySystem_batt_bank_replacement_aset, self->data_ptr);
-}
-
-static PyObject *
-BatterySystem_get_batt_computed_bank_capacity(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Levpartflip_BatterySystem_batt_computed_bank_capacity_nget, self->data_ptr);
-}
-
-static int
-BatterySystem_set_batt_computed_bank_capacity(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Levpartflip_BatterySystem_batt_computed_bank_capacity_nset, self->data_ptr);
-}
-
-static PyObject *
-BatterySystem_get_batt_replacement_option(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Levpartflip_BatterySystem_batt_replacement_option_nget, self->data_ptr);
-}
-
-static int
-BatterySystem_set_batt_replacement_option(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Levpartflip_BatterySystem_batt_replacement_option_nset, self->data_ptr);
-}
-
-static PyObject *
-BatterySystem_get_batt_replacement_schedule_percent(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Levpartflip_BatterySystem_batt_replacement_schedule_percent_aget, self->data_ptr);
-}
-
-static int
-BatterySystem_set_batt_replacement_schedule_percent(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_Levpartflip_BatterySystem_batt_replacement_schedule_percent_aset, self->data_ptr);
-}
-
-static PyObject *
-BatterySystem_get_battery_per_kWh(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Levpartflip_BatterySystem_battery_per_kWh_nget, self->data_ptr);
-}
-
-static int
-BatterySystem_set_battery_per_kWh(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Levpartflip_BatterySystem_battery_per_kWh_nset, self->data_ptr);
-}
-
-static PyObject *
-BatterySystem_get_en_batt(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Levpartflip_BatterySystem_en_batt_nget, self->data_ptr);
-}
-
-static int
-BatterySystem_set_en_batt(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Levpartflip_BatterySystem_en_batt_nset, self->data_ptr);
-}
-
-static PyObject *
-BatterySystem_get_en_standalone_batt(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Levpartflip_BatterySystem_en_standalone_batt_nget, self->data_ptr);
-}
-
-static int
-BatterySystem_set_en_standalone_batt(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Levpartflip_BatterySystem_en_standalone_batt_nset, self->data_ptr);
-}
-
-static PyGetSetDef BatterySystem_getset[] = {
-{"batt_bank_replacement", (getter)BatterySystem_get_batt_bank_replacement,(setter)BatterySystem_set_batt_bank_replacement,
-	PyDoc_STR("*sequence*: Battery bank replacements per year [number/year]"),
- 	NULL},
-{"batt_computed_bank_capacity", (getter)BatterySystem_get_batt_computed_bank_capacity,(setter)BatterySystem_set_batt_computed_bank_capacity,
-	PyDoc_STR("*float*: Battery bank capacity [kWh]\n\n*Required*: If not provided, assumed to be 0.0"),
- 	NULL},
-{"batt_replacement_option", (getter)BatterySystem_get_batt_replacement_option,(setter)BatterySystem_set_batt_replacement_option,
-	PyDoc_STR("*float*: Enable battery replacement? [0=none,1=capacity based,2=user schedule]\n\n*Constraints*: INTEGER,MIN=0,MAX=2\n\n*Required*: If not provided, assumed to be 0"),
- 	NULL},
-{"batt_replacement_schedule_percent", (getter)BatterySystem_get_batt_replacement_schedule_percent,(setter)BatterySystem_set_batt_replacement_schedule_percent,
-	PyDoc_STR("*sequence*: Percentage of battery capacity to replace in each year [%]\n\n*Options*: length <= analysis_period"),
- 	NULL},
-{"battery_per_kWh", (getter)BatterySystem_get_battery_per_kWh,(setter)BatterySystem_set_battery_per_kWh,
-	PyDoc_STR("*float*: Battery cost [$/kWh]\n\n*Required*: If not provided, assumed to be 0.0"),
- 	NULL},
-{"en_batt", (getter)BatterySystem_get_en_batt,(setter)BatterySystem_set_en_batt,
-	PyDoc_STR("*float*: Enable battery storage model [0/1]\n\n*Required*: If not provided, assumed to be 0"),
- 	NULL},
-{"en_standalone_batt", (getter)BatterySystem_get_en_standalone_batt,(setter)BatterySystem_set_en_standalone_batt,
-	PyDoc_STR("*float*: Enable standalone battery storage model [0/1]\n\n*Required*: If not provided, assumed to be 0"),
- 	NULL},
-	{NULL}  /* Sentinel */
-};
-
-static PyTypeObject BatterySystem_Type = {
-		/* The ob_type field must be initialized in the module init function
-		 * to be portable to Windows without using C++. */
-		PyVarObject_HEAD_INIT(NULL, 0)
-		"Levpartflip.BatterySystem",             /*tp_name*/
-		sizeof(VarGroupObject),          /*tp_basicsize*/
-		0,                          /*tp_itemsize*/
-		/* methods */
-		0,    /*tp_dealloc*/
-		0,                          /*tp_print*/
-		(getattrfunc)0,             /*tp_getattr*/
-		0,                          /*tp_setattr*/
-		0,                          /*tp_reserved*/
-		0,                          /*tp_repr*/
-		0,                          /*tp_as_number*/
-		0,                          /*tp_as_sequence*/
-		0,                          /*tp_as_mapping*/
-		0,                          /*tp_hash*/
-		0,                          /*tp_call*/
-		0,                          /*tp_str*/
-		0,                          /*tp_getattro*/
-		0,                          /*tp_setattro*/
-		0,                          /*tp_as_buffer*/
-		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
-		0,                          /*tp_doc*/
-		0,                          /*tp_traverse*/
-		0,                          /*tp_clear*/
-		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistofnset*/
-		0,                          /*tp_iter*/
-		0,                          /*tp_iternext*/
-		BatterySystem_methods,         /*tp_methods*/
-		0,                          /*tp_members*/
-		BatterySystem_getset,          /*tp_getset*/
-		0,                          /*tp_base*/
-		0,                          /*tp_dict*/
-		0,                          /*tp_descr_get*/
-		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictofnset*/
-		0,                          /*tp_init*/
-		0,                          /*tp_alloc*/
-		0,             /*tp_new*/
-		0,                          /*tp_free*/
-		0,                          /*tp_is_gc*/
-};
-
-
-/*
  * Outputs Group
  */ 
 
 static PyTypeObject Outputs_Type;
 
 static PyObject *
-Outputs_new(SAM_Levpartflip data_ptr)
+Outputs_new(SAM_Communitysolar data_ptr)
 {
 	PyObject* new_obj = Outputs_Type.tp_alloc(&Outputs_Type,0);
 
@@ -6702,7 +6923,7 @@ Outputs_assign(VarGroupObject *self, PyObject *args)
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Levpartflip", "Outputs")){
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Communitysolar", "Outputs")){
 		return NULL;
 	}
 
@@ -6719,7 +6940,7 @@ Outputs_replace(VarGroupObject *self, PyObject *args)
 	}
 	PyTypeObject* tp = &Outputs_Type;
 
-	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Levpartflip", "Outputs")){
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Communitysolar", "Outputs")){
 		return NULL;
 	}
 
@@ -6748,3409 +6969,3229 @@ static PyMethodDef Outputs_methods[] = {
 static PyObject *
 Outputs_get_adjusted_installed_cost(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_adjusted_installed_cost_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_adjusted_installed_cost_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_analysis_period_irr(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_analysis_period_irr_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_analysis_period_irr_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cash_for_debt_service(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_cash_for_debt_service_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_cash_for_debt_service_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cbi_fedtax_total(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_cbi_fedtax_total_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_cbi_fedtax_total_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cbi_statax_total(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_cbi_statax_total_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_cbi_statax_total_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cbi_total(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_cbi_total_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_cbi_total_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cbi_total_fed(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_cbi_total_fed_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_cbi_total_fed_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cbi_total_oth(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_cbi_total_oth_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_cbi_total_oth_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cbi_total_sta(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_cbi_total_sta_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_cbi_total_sta_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cbi_total_uti(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_cbi_total_uti_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_cbi_total_uti_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_annual_cost_lcos(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_annual_cost_lcos_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_annual_cost_lcos_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_annual_costs(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_annual_costs_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_annual_costs_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_annual_discharge_lcos(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_annual_discharge_lcos_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_annual_discharge_lcos_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_battery_replacement_cost(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_battery_replacement_cost_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_battery_replacement_cost_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_battery_replacement_cost_schedule(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_battery_replacement_cost_schedule_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_battery_replacement_cost_schedule_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_capacity_payment(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_capacity_payment_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_cash_for_ds(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_cash_for_ds_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_cash_for_ds_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_charging_cost_grid(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_charging_cost_grid_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_charging_cost_grid_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_charging_cost_grid_month(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_charging_cost_grid_month_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_charging_cost_grid_month_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_charging_cost_pv(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_charging_cost_pv_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_charging_cost_pv_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_community_solar_recurring_capacity(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_community_solar_recurring_capacity_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_community_solar_recurring_fixed(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_community_solar_recurring_fixed_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_community_solar_recurring_generation(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_community_solar_recurring_generation_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_community_solar_subscriber1_revenue(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_community_solar_subscriber1_revenue_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_community_solar_subscriber2_revenue(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_community_solar_subscriber2_revenue_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_community_solar_subscriber3_revenue(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_community_solar_subscriber3_revenue_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_community_solar_subscriber4_revenue(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_community_solar_subscriber4_revenue_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_community_solar_unsubscribed_revenue(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_community_solar_unsubscribed_revenue_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_community_solar_upfront(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_community_solar_upfront_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_community_solar_upfront_per_capacity(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_community_solar_upfront_per_capacity_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_curtailment_value(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_curtailment_value_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_debt_balance(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_debt_balance_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_debt_balance_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_debt_payment_interest(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_debt_payment_interest_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_debt_payment_interest_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_debt_payment_principal(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_debt_payment_principal_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_debt_payment_principal_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_debt_payment_total(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_debt_payment_total_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_debt_payment_total_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_debt_size(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_debt_size_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_debt_size_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_disbursement_debtservice(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_disbursement_debtservice_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_disbursement_debtservice_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_disbursement_equip1(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_disbursement_equip1_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_disbursement_equip1_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_disbursement_equip2(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_disbursement_equip2_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_disbursement_equip2_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_disbursement_equip3(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_disbursement_equip3_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_disbursement_equip3_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_disbursement_om(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_disbursement_om_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_disbursement_om_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_disbursement_receivables(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_disbursement_receivables_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_disbursement_receivables_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_ebitda(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_ebitda_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_ebitda_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_effective_tax_frac(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_effective_tax_frac_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_effective_tax_frac_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_curtailed(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_energy_curtailed_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_energy_net(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_energy_net_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_energy_net_aget, self->data_ptr);
 }
 
 static PyObject *
-Outputs_get_cf_energy_net_apr(VarGroupObject *self, void *closure)
+Outputs_get_cf_energy_purchases(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_energy_net_apr_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_energy_purchases_aget, self->data_ptr);
 }
 
 static PyObject *
-Outputs_get_cf_energy_net_aug(VarGroupObject *self, void *closure)
+Outputs_get_cf_energy_sales(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_energy_net_aug_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_energy_sales_aget, self->data_ptr);
 }
 
 static PyObject *
-Outputs_get_cf_energy_net_dec(VarGroupObject *self, void *closure)
+Outputs_get_cf_energy_without_battery(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_energy_net_dec_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_dispatch1(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_energy_net_dispatch1_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_dispatch2(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_energy_net_dispatch2_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_dispatch3(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_energy_net_dispatch3_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_dispatch4(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_energy_net_dispatch4_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_dispatch5(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_energy_net_dispatch5_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_dispatch6(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_energy_net_dispatch6_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_dispatch7(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_energy_net_dispatch7_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_dispatch8(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_energy_net_dispatch8_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_dispatch9(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_energy_net_dispatch9_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_feb(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_energy_net_feb_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_jan(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_energy_net_jan_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_jul(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_energy_net_jul_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_jun(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_energy_net_jun_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_mar(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_energy_net_mar_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_may(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_energy_net_may_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_monthly_firstyear_TOD1(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_energy_net_monthly_firstyear_TOD1_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_monthly_firstyear_TOD2(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_energy_net_monthly_firstyear_TOD2_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_monthly_firstyear_TOD3(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_energy_net_monthly_firstyear_TOD3_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_monthly_firstyear_TOD4(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_energy_net_monthly_firstyear_TOD4_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_monthly_firstyear_TOD5(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_energy_net_monthly_firstyear_TOD5_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_monthly_firstyear_TOD6(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_energy_net_monthly_firstyear_TOD6_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_monthly_firstyear_TOD7(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_energy_net_monthly_firstyear_TOD7_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_monthly_firstyear_TOD8(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_energy_net_monthly_firstyear_TOD8_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_monthly_firstyear_TOD9(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_energy_net_monthly_firstyear_TOD9_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_nov(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_energy_net_nov_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_oct(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_energy_net_oct_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_sep(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_energy_net_sep_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_value(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_energy_value_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_energy_without_battery_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_feddepr_custom(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_feddepr_custom_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_feddepr_custom_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_feddepr_macrs_15(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_feddepr_macrs_15_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_feddepr_macrs_15_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_feddepr_macrs_5(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_feddepr_macrs_5_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_feddepr_macrs_5_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_feddepr_me1(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_feddepr_me1_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_feddepr_me1_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_feddepr_me2(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_feddepr_me2_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_feddepr_me2_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_feddepr_me3(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_feddepr_me3_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_feddepr_me3_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_feddepr_sl_15(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_feddepr_sl_15_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_feddepr_sl_15_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_feddepr_sl_20(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_feddepr_sl_20_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_feddepr_sl_20_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_feddepr_sl_39(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_feddepr_sl_39_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_feddepr_sl_39_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_feddepr_sl_5(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_feddepr_sl_5_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_feddepr_sl_5_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_feddepr_total(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_feddepr_total_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_feddepr_total_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_federal_tax_frac(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_federal_tax_frac_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_federal_tax_frac_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_fedtax(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_fedtax_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_fedtax_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_fedtax_income_prior_incentives(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_fedtax_income_prior_incentives_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_fedtax_income_prior_incentives_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_fedtax_income_with_incentives(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_fedtax_income_with_incentives_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_fedtax_income_with_incentives_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_fedtax_taxable_incentives(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_fedtax_taxable_incentives_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_fedtax_taxable_incentives_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_fuelcell_replacement_cost(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_fuelcell_replacement_cost_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_fuelcell_replacement_cost_schedule(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_fuelcell_replacement_cost_schedule_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_funding_debtservice(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_funding_debtservice_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_funding_debtservice_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_funding_equip1(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_funding_equip1_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_funding_equip1_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_funding_equip2(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_funding_equip2_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_funding_equip2_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_funding_equip3(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_funding_equip3_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_funding_equip3_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_funding_om(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_funding_om_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_funding_om_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_funding_receivables(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_funding_receivables_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_funding_receivables_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_insurance_expense(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_insurance_expense_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_insurance_expense_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_land_lease_expense(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_land_lease_expense_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_land_lease_expense_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_lcog_costs(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_lcog_costs_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_length(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_cf_length_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_cf_length_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_net_salvage_value(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_net_salvage_value_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_net_salvage_value_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_om_batt_capacity_expense(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_om_batt_capacity_expense_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_om_batt_capacity_expense_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_om_batt_fixed_expense(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_om_batt_fixed_expense_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_om_batt_fixed_expense_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_om_batt_production_expense(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_om_batt_production_expense_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_om_batt_production_expense_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_om_capacity1_expense(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_om_capacity1_expense_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_om_capacity2_expense(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_om_capacity2_expense_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_om_capacity_expense(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_om_capacity_expense_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_om_capacity_expense_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_om_fixed1_expense(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_om_fixed1_expense_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_om_fixed2_expense(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_om_fixed2_expense_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_om_fixed_expense(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_om_fixed_expense_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_om_fixed_expense_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_om_fuel_expense(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_om_fuel_expense_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_om_fuel_expense_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_om_opt_fuel_1_expense(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_om_opt_fuel_1_expense_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_om_opt_fuel_1_expense_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_om_opt_fuel_2_expense(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_om_opt_fuel_2_expense_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_om_opt_fuel_2_expense_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_om_production1_expense(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_om_production1_expense_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_om_production2_expense(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_om_production2_expense_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_om_production_expense(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_om_production_expense_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_om_production_expense_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_operating_expenses(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_operating_expenses_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_operating_expenses_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_pbi_fedtax_total(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_pbi_fedtax_total_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_pbi_fedtax_total_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_pbi_statax_total(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_pbi_statax_total_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_pbi_statax_total_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_pbi_total(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_pbi_total_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_pbi_total_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_pbi_total_fed(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_pbi_total_fed_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_pbi_total_fed_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_pbi_total_oth(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_pbi_total_oth_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_pbi_total_oth_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_pbi_total_sta(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_pbi_total_sta_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_pbi_total_sta_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_pbi_total_uti(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_pbi_total_uti_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_ppa_price(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_ppa_price_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_pbi_total_uti_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_pretax_cashflow(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_pretax_cashflow_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_pretax_cashflow_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_pretax_dscr(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_pretax_dscr_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_pretax_dscr_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_project_dsra(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_project_dsra_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_project_dsra_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_project_financing_activities(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_project_financing_activities_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_project_financing_activities_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_project_investing_activities(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_project_investing_activities_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_project_investing_activities_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_project_me1cs(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_project_me1cs_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_project_me1cs_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_project_me1ra(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_project_me1ra_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_project_me1ra_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_project_me2cs(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_project_me2cs_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_project_me2cs_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_project_me2ra(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_project_me2ra_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_project_me2ra_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_project_me3cs(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_project_me3cs_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_project_me3cs_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_project_me3ra(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_project_me3ra_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_project_me3ra_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_project_mecs(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_project_mecs_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_project_mecs_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_project_operating_activities(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_project_operating_activities_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_project_operating_activities_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_project_ra(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_project_ra_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_project_ra_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_project_receivablesra(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_project_receivablesra_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_project_receivablesra_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_project_return_aftertax(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_project_return_aftertax_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_project_return_aftertax_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_project_return_aftertax_cash(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_project_return_aftertax_cash_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_project_return_aftertax_cash_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_project_return_aftertax_irr(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_project_return_aftertax_irr_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_project_return_aftertax_irr_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_project_return_aftertax_max_irr(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_project_return_aftertax_max_irr_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_project_return_aftertax_npv(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_project_return_aftertax_npv_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_project_return_aftertax_npv_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_project_return_pretax(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_project_return_pretax_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_project_return_pretax_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_project_return_pretax_irr(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_project_return_pretax_irr_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_project_return_pretax_irr_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_project_return_pretax_npv(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_project_return_pretax_npv_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_project_return_pretax_npv_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_project_wcra(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_project_wcra_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_project_wcra_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_property_tax_assessed_value(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_property_tax_assessed_value_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_property_tax_assessed_value_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_property_tax_expense(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_property_tax_expense_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_property_tax_expense_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_ptc_fed(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_ptc_fed_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_ptc_fed_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_ptc_sta(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_ptc_sta_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_ptc_sta_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_ptc_total(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_ptc_total_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_ptc_total_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_pv_cash_for_ds(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_pv_cash_for_ds_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_pv_cash_for_ds_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_pv_interest_factor(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_pv_interest_factor_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_pv_interest_factor_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_recapitalization(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_recapitalization_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_recapitalization_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_reserve_debtservice(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_reserve_debtservice_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_reserve_debtservice_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_reserve_equip1(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_reserve_equip1_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_reserve_equip1_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_reserve_equip2(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_reserve_equip2_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_reserve_equip2_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_reserve_equip3(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_reserve_equip3_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_reserve_equip3_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_reserve_interest(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_reserve_interest_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_reserve_interest_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_reserve_om(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_reserve_om_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_reserve_om_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_reserve_receivables(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_reserve_receivables_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_reserve_receivables_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_reserve_total(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_reserve_total_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_reserve_total_aget, self->data_ptr);
 }
 
 static PyObject *
-Outputs_get_cf_revenue_apr(VarGroupObject *self, void *closure)
+Outputs_get_cf_return_on_equity(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_revenue_apr_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_return_on_equity_aget, self->data_ptr);
 }
 
 static PyObject *
-Outputs_get_cf_revenue_aug(VarGroupObject *self, void *closure)
+Outputs_get_cf_return_on_equity_dollars(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_revenue_aug_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_return_on_equity_dollars_aget, self->data_ptr);
 }
 
 static PyObject *
-Outputs_get_cf_revenue_dec(VarGroupObject *self, void *closure)
+Outputs_get_cf_return_on_equity_input(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_revenue_dec_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_revenue_dispatch1(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_revenue_dispatch1_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_revenue_dispatch2(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_revenue_dispatch2_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_revenue_dispatch3(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_revenue_dispatch3_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_revenue_dispatch4(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_revenue_dispatch4_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_revenue_dispatch5(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_revenue_dispatch5_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_revenue_dispatch6(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_revenue_dispatch6_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_revenue_dispatch7(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_revenue_dispatch7_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_revenue_dispatch8(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_revenue_dispatch8_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_revenue_dispatch9(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_revenue_dispatch9_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_revenue_feb(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_revenue_feb_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_revenue_jan(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_revenue_jan_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_revenue_jul(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_revenue_jul_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_revenue_jun(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_revenue_jun_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_revenue_mar(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_revenue_mar_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_revenue_may(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_revenue_may_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_revenue_monthly_firstyear_TOD1(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_revenue_monthly_firstyear_TOD1_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_revenue_monthly_firstyear_TOD2(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_revenue_monthly_firstyear_TOD2_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_revenue_monthly_firstyear_TOD3(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_revenue_monthly_firstyear_TOD3_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_revenue_monthly_firstyear_TOD4(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_revenue_monthly_firstyear_TOD4_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_revenue_monthly_firstyear_TOD5(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_revenue_monthly_firstyear_TOD5_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_revenue_monthly_firstyear_TOD6(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_revenue_monthly_firstyear_TOD6_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_revenue_monthly_firstyear_TOD7(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_revenue_monthly_firstyear_TOD7_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_revenue_monthly_firstyear_TOD8(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_revenue_monthly_firstyear_TOD8_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_revenue_monthly_firstyear_TOD9(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_revenue_monthly_firstyear_TOD9_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_revenue_nov(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_revenue_nov_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_revenue_oct(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_revenue_oct_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_revenue_sep(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_revenue_sep_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_return_on_equity_input_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_salvage_cost_lcos(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_salvage_cost_lcos_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_sponsor_aftertax(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_sponsor_aftertax_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_sponsor_aftertax_cash(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_sponsor_aftertax_cash_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_sponsor_aftertax_irr(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_sponsor_aftertax_irr_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_sponsor_aftertax_itc(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_sponsor_aftertax_itc_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_sponsor_aftertax_npv(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_sponsor_aftertax_npv_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_sponsor_aftertax_ptc(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_sponsor_aftertax_ptc_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_sponsor_aftertax_tax(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_sponsor_aftertax_tax_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_sponsor_pretax(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_sponsor_pretax_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_sponsor_pretax_cash(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_sponsor_pretax_cash_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_sponsor_pretax_irr(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_sponsor_pretax_irr_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_sponsor_pretax_npv(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_sponsor_pretax_npv_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_salvage_cost_lcos_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_stadepr_custom(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_stadepr_custom_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_stadepr_custom_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_stadepr_macrs_15(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_stadepr_macrs_15_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_stadepr_macrs_15_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_stadepr_macrs_5(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_stadepr_macrs_5_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_stadepr_macrs_5_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_stadepr_me1(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_stadepr_me1_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_stadepr_me1_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_stadepr_me2(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_stadepr_me2_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_stadepr_me2_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_stadepr_me3(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_stadepr_me3_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_stadepr_me3_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_stadepr_sl_15(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_stadepr_sl_15_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_stadepr_sl_15_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_stadepr_sl_20(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_stadepr_sl_20_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_stadepr_sl_20_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_stadepr_sl_39(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_stadepr_sl_39_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_stadepr_sl_39_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_stadepr_sl_5(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_stadepr_sl_5_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_stadepr_sl_5_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_stadepr_total(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_stadepr_total_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_stadepr_total_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_statax(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_statax_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_statax_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_statax_income_prior_incentives(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_statax_income_prior_incentives_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_statax_income_prior_incentives_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_statax_income_with_incentives(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_statax_income_with_incentives_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_statax_income_with_incentives_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_statax_taxable_incentives(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_statax_taxable_incentives_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_statax_taxable_incentives_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_state_tax_frac(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_state_tax_frac_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_state_tax_frac_aget, self->data_ptr);
 }
 
 static PyObject *
-Outputs_get_cf_tax_investor_aftertax(VarGroupObject *self, void *closure)
+Outputs_get_cf_subscriber1_bill_credit_amount(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_tax_investor_aftertax_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_subscriber1_bill_credit_amount_aget, self->data_ptr);
 }
 
 static PyObject *
-Outputs_get_cf_tax_investor_aftertax_cash(VarGroupObject *self, void *closure)
+Outputs_get_cf_subscriber1_bill_credit_rate(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_tax_investor_aftertax_cash_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_subscriber1_bill_credit_rate_aget, self->data_ptr);
 }
 
 static PyObject *
-Outputs_get_cf_tax_investor_aftertax_irr(VarGroupObject *self, void *closure)
+Outputs_get_cf_subscriber1_cost_of_participation(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_tax_investor_aftertax_irr_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_subscriber1_cost_of_participation_aget, self->data_ptr);
 }
 
 static PyObject *
-Outputs_get_cf_tax_investor_aftertax_itc(VarGroupObject *self, void *closure)
+Outputs_get_cf_subscriber1_generation_payment(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_tax_investor_aftertax_itc_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_subscriber1_generation_payment_aget, self->data_ptr);
 }
 
 static PyObject *
-Outputs_get_cf_tax_investor_aftertax_max_irr(VarGroupObject *self, void *closure)
+Outputs_get_cf_subscriber1_net_benefit(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_tax_investor_aftertax_max_irr_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_subscriber1_net_benefit_aget, self->data_ptr);
 }
 
 static PyObject *
-Outputs_get_cf_tax_investor_aftertax_npv(VarGroupObject *self, void *closure)
+Outputs_get_cf_subscriber1_net_benefit_cumulative(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_tax_investor_aftertax_npv_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_subscriber1_net_benefit_cumulative_aget, self->data_ptr);
 }
 
 static PyObject *
-Outputs_get_cf_tax_investor_aftertax_ptc(VarGroupObject *self, void *closure)
+Outputs_get_cf_subscriber1_revenue_annual_payment(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_tax_investor_aftertax_ptc_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_subscriber1_revenue_annual_payment_aget, self->data_ptr);
 }
 
 static PyObject *
-Outputs_get_cf_tax_investor_aftertax_tax(VarGroupObject *self, void *closure)
+Outputs_get_cf_subscriber1_revenue_generation(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_tax_investor_aftertax_tax_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_subscriber1_revenue_generation_aget, self->data_ptr);
 }
 
 static PyObject *
-Outputs_get_cf_tax_investor_pretax(VarGroupObject *self, void *closure)
+Outputs_get_cf_subscriber1_revenue_upfront(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_tax_investor_pretax_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_subscriber1_revenue_upfront_aget, self->data_ptr);
 }
 
 static PyObject *
-Outputs_get_cf_tax_investor_pretax_irr(VarGroupObject *self, void *closure)
+Outputs_get_cf_subscriber1_share_fraction(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_tax_investor_pretax_irr_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_subscriber1_share_fraction_aget, self->data_ptr);
 }
 
 static PyObject *
-Outputs_get_cf_tax_investor_pretax_npv(VarGroupObject *self, void *closure)
+Outputs_get_cf_subscriber1_share_of_generation(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_tax_investor_pretax_npv_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_subscriber1_share_of_generation_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_subscriber2_bill_credit_amount(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_subscriber2_bill_credit_amount_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_subscriber2_bill_credit_rate(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_subscriber2_bill_credit_rate_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_subscriber2_cost_of_participation(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_subscriber2_cost_of_participation_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_subscriber2_generation_payment(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_subscriber2_generation_payment_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_subscriber2_net_benefit(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_subscriber2_net_benefit_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_subscriber2_net_benefit_cumulative(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_subscriber2_net_benefit_cumulative_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_subscriber2_revenue_annual_payment(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_subscriber2_revenue_annual_payment_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_subscriber2_revenue_generation(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_subscriber2_revenue_generation_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_subscriber2_revenue_upfront(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_subscriber2_revenue_upfront_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_subscriber2_share_fraction(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_subscriber2_share_fraction_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_subscriber2_share_of_generation(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_subscriber2_share_of_generation_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_subscriber3_bill_credit_amount(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_subscriber3_bill_credit_amount_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_subscriber3_bill_credit_rate(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_subscriber3_bill_credit_rate_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_subscriber3_cost_of_participation(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_subscriber3_cost_of_participation_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_subscriber3_generation_payment(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_subscriber3_generation_payment_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_subscriber3_net_benefit(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_subscriber3_net_benefit_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_subscriber3_net_benefit_cumulative(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_subscriber3_net_benefit_cumulative_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_subscriber3_revenue_annual_payment(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_subscriber3_revenue_annual_payment_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_subscriber3_revenue_generation(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_subscriber3_revenue_generation_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_subscriber3_revenue_upfront(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_subscriber3_revenue_upfront_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_subscriber3_share_fraction(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_subscriber3_share_fraction_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_subscriber3_share_of_generation(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_subscriber3_share_of_generation_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_subscriber4_bill_credit_amount(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_subscriber4_bill_credit_amount_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_subscriber4_bill_credit_rate(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_subscriber4_bill_credit_rate_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_subscriber4_cost_of_participation(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_subscriber4_cost_of_participation_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_subscriber4_generation_payment(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_subscriber4_generation_payment_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_subscriber4_net_benefit(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_subscriber4_net_benefit_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_subscriber4_net_benefit_cumulative(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_subscriber4_net_benefit_cumulative_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_subscriber4_revenue_annual_payment(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_subscriber4_revenue_annual_payment_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_subscriber4_revenue_generation(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_subscriber4_revenue_generation_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_subscriber4_revenue_upfront(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_subscriber4_revenue_upfront_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_subscriber4_share_fraction(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_subscriber4_share_fraction_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_subscriber4_share_of_generation(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_subscriber4_share_of_generation_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_total_revenue(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_total_revenue_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_total_revenue_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_unsubscribed_share_fraction(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_unsubscribed_share_fraction_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_unsubscribed_share_of_generation(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_unsubscribed_share_of_generation_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_util_escal_rate(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_util_escal_rate_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_util_escal_rate_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cf_utility_bill(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_cf_utility_bill_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_cf_utility_bill_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_community_solar_upfront_cost(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_community_solar_upfront_cost_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_community_solar_upfront_revenue(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_community_solar_upfront_revenue_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cost_debt_upfront(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_cost_debt_upfront_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_cost_debt_upfront_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cost_financing(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_cost_financing_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_cost_financing_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cost_installed(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_cost_installed_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_cost_installed_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cost_installedperwatt(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_cost_installedperwatt_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_cost_installedperwatt_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cost_prefinancing(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_cost_prefinancing_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_cost_prefinancing_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_debt_fraction(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_debt_fraction_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_debt_fraction_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_alloc_custom(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_alloc_custom_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_alloc_custom_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_alloc_macrs_15(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_alloc_macrs_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_alloc_macrs_15_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_alloc_macrs_5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_alloc_macrs_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_alloc_macrs_5_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_alloc_none(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_alloc_none_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_alloc_none_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_alloc_none_percent(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_alloc_none_percent_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_alloc_none_percent_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_alloc_sl_15(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_alloc_sl_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_alloc_sl_15_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_alloc_sl_20(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_alloc_sl_20_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_alloc_sl_20_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_alloc_sl_39(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_alloc_sl_39_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_alloc_sl_39_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_alloc_sl_5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_alloc_sl_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_alloc_sl_5_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_alloc_total(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_alloc_total_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_alloc_total_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_after_itc_custom(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_after_itc_custom_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_after_itc_custom_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_after_itc_macrs_15(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_after_itc_macrs_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_after_itc_macrs_15_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_after_itc_macrs_5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_after_itc_macrs_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_after_itc_macrs_5_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_after_itc_sl_15(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_after_itc_sl_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_after_itc_sl_15_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_after_itc_sl_20(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_after_itc_sl_20_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_after_itc_sl_20_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_after_itc_sl_39(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_after_itc_sl_39_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_after_itc_sl_39_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_after_itc_sl_5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_after_itc_sl_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_after_itc_sl_5_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_after_itc_total(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_after_itc_total_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_after_itc_total_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_cbi_reduc_custom(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_cbi_reduc_custom_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_cbi_reduc_custom_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_cbi_reduc_macrs_15(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_cbi_reduc_macrs_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_cbi_reduc_macrs_15_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_cbi_reduc_macrs_5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_cbi_reduc_macrs_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_cbi_reduc_macrs_5_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_cbi_reduc_sl_15(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_cbi_reduc_sl_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_cbi_reduc_sl_15_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_cbi_reduc_sl_20(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_cbi_reduc_sl_20_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_cbi_reduc_sl_20_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_cbi_reduc_sl_39(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_cbi_reduc_sl_39_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_cbi_reduc_sl_39_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_cbi_reduc_sl_5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_cbi_reduc_sl_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_cbi_reduc_sl_5_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_cbi_reduc_total(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_cbi_reduc_total_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_cbi_reduc_total_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_custom(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_custom_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_custom_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_first_year_bonus_custom(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_first_year_bonus_custom_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_first_year_bonus_custom_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_first_year_bonus_macrs_15(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_first_year_bonus_macrs_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_first_year_bonus_macrs_15_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_first_year_bonus_macrs_5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_first_year_bonus_macrs_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_first_year_bonus_macrs_5_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_first_year_bonus_sl_15(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_first_year_bonus_sl_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_first_year_bonus_sl_15_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_first_year_bonus_sl_20(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_first_year_bonus_sl_20_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_first_year_bonus_sl_20_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_first_year_bonus_sl_39(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_first_year_bonus_sl_39_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_first_year_bonus_sl_39_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_first_year_bonus_sl_5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_first_year_bonus_sl_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_first_year_bonus_sl_5_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_first_year_bonus_total(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_first_year_bonus_total_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_first_year_bonus_total_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_fixed_amount_custom(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_fixed_amount_custom_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_fixed_amount_custom_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_fixed_amount_macrs_15(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_fixed_amount_macrs_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_fixed_amount_macrs_15_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_fixed_amount_macrs_5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_fixed_amount_macrs_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_fixed_amount_macrs_5_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_fixed_amount_sl_15(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_fixed_amount_sl_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_fixed_amount_sl_15_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_fixed_amount_sl_20(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_fixed_amount_sl_20_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_fixed_amount_sl_20_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_fixed_amount_sl_39(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_fixed_amount_sl_39_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_fixed_amount_sl_39_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_fixed_amount_sl_5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_fixed_amount_sl_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_fixed_amount_sl_5_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_fixed_amount_total(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_fixed_amount_total_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_fixed_amount_total_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_ibi_reduc_custom(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_ibi_reduc_custom_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_ibi_reduc_custom_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_ibi_reduc_macrs_15(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_ibi_reduc_macrs_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_ibi_reduc_macrs_15_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_ibi_reduc_macrs_5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_ibi_reduc_macrs_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_ibi_reduc_macrs_5_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_ibi_reduc_sl_15(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_ibi_reduc_sl_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_ibi_reduc_sl_15_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_ibi_reduc_sl_20(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_ibi_reduc_sl_20_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_ibi_reduc_sl_20_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_ibi_reduc_sl_39(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_ibi_reduc_sl_39_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_ibi_reduc_sl_39_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_ibi_reduc_sl_5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_ibi_reduc_sl_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_ibi_reduc_sl_5_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_ibi_reduc_total(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_ibi_reduc_total_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_ibi_reduc_total_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_itc_fed_reduction_custom(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_itc_fed_reduction_custom_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_itc_fed_reduction_custom_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_itc_fed_reduction_macrs_15(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_itc_fed_reduction_macrs_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_itc_fed_reduction_macrs_15_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_itc_fed_reduction_macrs_5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_itc_fed_reduction_macrs_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_itc_fed_reduction_macrs_5_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_itc_fed_reduction_sl_15(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_itc_fed_reduction_sl_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_itc_fed_reduction_sl_15_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_itc_fed_reduction_sl_20(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_itc_fed_reduction_sl_20_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_itc_fed_reduction_sl_20_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_itc_fed_reduction_sl_39(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_itc_fed_reduction_sl_39_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_itc_fed_reduction_sl_39_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_itc_fed_reduction_sl_5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_itc_fed_reduction_sl_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_itc_fed_reduction_sl_5_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_itc_fed_reduction_total(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_itc_fed_reduction_total_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_itc_fed_reduction_total_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_itc_sta_reduction_custom(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_itc_sta_reduction_custom_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_itc_sta_reduction_custom_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_itc_sta_reduction_macrs_15(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_itc_sta_reduction_macrs_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_itc_sta_reduction_macrs_15_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_itc_sta_reduction_macrs_5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_itc_sta_reduction_macrs_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_itc_sta_reduction_macrs_5_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_itc_sta_reduction_sl_15(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_itc_sta_reduction_sl_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_itc_sta_reduction_sl_15_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_itc_sta_reduction_sl_20(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_itc_sta_reduction_sl_20_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_itc_sta_reduction_sl_20_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_itc_sta_reduction_sl_39(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_itc_sta_reduction_sl_39_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_itc_sta_reduction_sl_39_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_itc_sta_reduction_sl_5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_itc_sta_reduction_sl_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_itc_sta_reduction_sl_5_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_itc_sta_reduction_total(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_itc_sta_reduction_total_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_itc_sta_reduction_total_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_macrs_15(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_macrs_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_macrs_15_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_macrs_5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_macrs_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_macrs_5_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_percent_amount_custom(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_percent_amount_custom_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_percent_amount_custom_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_percent_amount_macrs_15(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_percent_amount_macrs_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_percent_amount_macrs_15_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_percent_amount_macrs_5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_percent_amount_macrs_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_percent_amount_macrs_5_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_percent_amount_sl_15(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_percent_amount_sl_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_percent_amount_sl_15_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_percent_amount_sl_20(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_percent_amount_sl_20_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_percent_amount_sl_20_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_percent_amount_sl_39(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_percent_amount_sl_39_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_percent_amount_sl_39_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_percent_amount_sl_5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_percent_amount_sl_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_percent_amount_sl_5_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_percent_amount_total(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_percent_amount_total_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_percent_amount_total_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_percent_custom(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_percent_custom_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_percent_custom_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_percent_macrs_15(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_percent_macrs_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_percent_macrs_15_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_percent_macrs_5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_percent_macrs_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_percent_macrs_5_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_percent_qual_custom(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_percent_qual_custom_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_percent_qual_custom_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_percent_qual_macrs_15(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_percent_qual_macrs_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_percent_qual_macrs_15_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_percent_qual_macrs_5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_percent_qual_macrs_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_percent_qual_macrs_5_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_percent_qual_sl_15(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_percent_qual_sl_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_percent_qual_sl_15_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_percent_qual_sl_20(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_percent_qual_sl_20_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_percent_qual_sl_20_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_percent_qual_sl_39(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_percent_qual_sl_39_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_percent_qual_sl_39_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_percent_qual_sl_5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_percent_qual_sl_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_percent_qual_sl_5_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_percent_qual_total(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_percent_qual_total_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_percent_qual_total_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_percent_sl_15(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_percent_sl_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_percent_sl_15_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_percent_sl_20(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_percent_sl_20_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_percent_sl_20_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_percent_sl_39(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_percent_sl_39_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_percent_sl_39_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_percent_sl_5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_percent_sl_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_percent_sl_5_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_percent_total(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_percent_total_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_percent_total_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_prior_itc_custom(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_prior_itc_custom_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_prior_itc_custom_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_prior_itc_macrs_15(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_prior_itc_macrs_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_prior_itc_macrs_15_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_prior_itc_macrs_5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_prior_itc_macrs_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_prior_itc_macrs_5_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_prior_itc_sl_15(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_prior_itc_sl_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_prior_itc_sl_15_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_prior_itc_sl_20(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_prior_itc_sl_20_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_prior_itc_sl_20_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_prior_itc_sl_39(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_prior_itc_sl_39_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_prior_itc_sl_39_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_prior_itc_sl_5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_prior_itc_sl_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_prior_itc_sl_5_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_prior_itc_total(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_prior_itc_total_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_prior_itc_total_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_sl_15(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_sl_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_sl_15_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_sl_20(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_sl_20_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_sl_20_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_sl_39(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_sl_39_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_sl_39_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_sl_5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_sl_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_sl_5_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_fedbas_total(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_fedbas_total_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_fedbas_total_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_after_itc_custom(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_after_itc_custom_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_after_itc_custom_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_after_itc_macrs_15(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_after_itc_macrs_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_after_itc_macrs_15_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_after_itc_macrs_5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_after_itc_macrs_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_after_itc_macrs_5_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_after_itc_sl_15(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_after_itc_sl_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_after_itc_sl_15_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_after_itc_sl_20(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_after_itc_sl_20_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_after_itc_sl_20_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_after_itc_sl_39(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_after_itc_sl_39_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_after_itc_sl_39_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_after_itc_sl_5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_after_itc_sl_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_after_itc_sl_5_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_after_itc_total(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_after_itc_total_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_after_itc_total_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_cbi_reduc_custom(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_cbi_reduc_custom_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_cbi_reduc_custom_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_cbi_reduc_macrs_15(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_cbi_reduc_macrs_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_cbi_reduc_macrs_15_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_cbi_reduc_macrs_5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_cbi_reduc_macrs_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_cbi_reduc_macrs_5_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_cbi_reduc_sl_15(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_cbi_reduc_sl_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_cbi_reduc_sl_15_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_cbi_reduc_sl_20(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_cbi_reduc_sl_20_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_cbi_reduc_sl_20_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_cbi_reduc_sl_39(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_cbi_reduc_sl_39_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_cbi_reduc_sl_39_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_cbi_reduc_sl_5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_cbi_reduc_sl_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_cbi_reduc_sl_5_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_cbi_reduc_total(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_cbi_reduc_total_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_cbi_reduc_total_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_custom(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_custom_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_custom_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_first_year_bonus_custom(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_first_year_bonus_custom_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_first_year_bonus_custom_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_first_year_bonus_macrs_15(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_first_year_bonus_macrs_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_first_year_bonus_macrs_15_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_first_year_bonus_macrs_5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_first_year_bonus_macrs_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_first_year_bonus_macrs_5_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_first_year_bonus_sl_15(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_first_year_bonus_sl_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_first_year_bonus_sl_15_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_first_year_bonus_sl_20(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_first_year_bonus_sl_20_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_first_year_bonus_sl_20_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_first_year_bonus_sl_39(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_first_year_bonus_sl_39_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_first_year_bonus_sl_39_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_first_year_bonus_sl_5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_first_year_bonus_sl_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_first_year_bonus_sl_5_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_first_year_bonus_total(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_first_year_bonus_total_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_first_year_bonus_total_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_fixed_amount_custom(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_fixed_amount_custom_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_fixed_amount_custom_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_fixed_amount_macrs_15(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_fixed_amount_macrs_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_fixed_amount_macrs_15_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_fixed_amount_macrs_5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_fixed_amount_macrs_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_fixed_amount_macrs_5_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_fixed_amount_sl_15(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_fixed_amount_sl_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_fixed_amount_sl_15_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_fixed_amount_sl_20(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_fixed_amount_sl_20_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_fixed_amount_sl_20_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_fixed_amount_sl_39(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_fixed_amount_sl_39_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_fixed_amount_sl_39_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_fixed_amount_sl_5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_fixed_amount_sl_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_fixed_amount_sl_5_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_fixed_amount_total(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_fixed_amount_total_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_fixed_amount_total_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_ibi_reduc_custom(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_ibi_reduc_custom_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_ibi_reduc_custom_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_ibi_reduc_macrs_15(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_ibi_reduc_macrs_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_ibi_reduc_macrs_15_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_ibi_reduc_macrs_5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_ibi_reduc_macrs_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_ibi_reduc_macrs_5_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_ibi_reduc_sl_15(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_ibi_reduc_sl_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_ibi_reduc_sl_15_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_ibi_reduc_sl_20(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_ibi_reduc_sl_20_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_ibi_reduc_sl_20_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_ibi_reduc_sl_39(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_ibi_reduc_sl_39_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_ibi_reduc_sl_39_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_ibi_reduc_sl_5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_ibi_reduc_sl_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_ibi_reduc_sl_5_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_ibi_reduc_total(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_ibi_reduc_total_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_ibi_reduc_total_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_itc_fed_reduction_custom(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_itc_fed_reduction_custom_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_itc_fed_reduction_custom_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_itc_fed_reduction_macrs_15(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_itc_fed_reduction_macrs_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_itc_fed_reduction_macrs_15_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_itc_fed_reduction_macrs_5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_itc_fed_reduction_macrs_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_itc_fed_reduction_macrs_5_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_itc_fed_reduction_sl_15(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_itc_fed_reduction_sl_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_itc_fed_reduction_sl_15_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_itc_fed_reduction_sl_20(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_itc_fed_reduction_sl_20_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_itc_fed_reduction_sl_20_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_itc_fed_reduction_sl_39(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_itc_fed_reduction_sl_39_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_itc_fed_reduction_sl_39_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_itc_fed_reduction_sl_5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_itc_fed_reduction_sl_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_itc_fed_reduction_sl_5_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_itc_fed_reduction_total(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_itc_fed_reduction_total_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_itc_fed_reduction_total_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_itc_sta_reduction_custom(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_itc_sta_reduction_custom_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_itc_sta_reduction_custom_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_itc_sta_reduction_macrs_15(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_itc_sta_reduction_macrs_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_itc_sta_reduction_macrs_15_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_itc_sta_reduction_macrs_5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_itc_sta_reduction_macrs_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_itc_sta_reduction_macrs_5_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_itc_sta_reduction_sl_15(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_itc_sta_reduction_sl_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_itc_sta_reduction_sl_15_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_itc_sta_reduction_sl_20(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_itc_sta_reduction_sl_20_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_itc_sta_reduction_sl_20_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_itc_sta_reduction_sl_39(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_itc_sta_reduction_sl_39_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_itc_sta_reduction_sl_39_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_itc_sta_reduction_sl_5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_itc_sta_reduction_sl_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_itc_sta_reduction_sl_5_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_itc_sta_reduction_total(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_itc_sta_reduction_total_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_itc_sta_reduction_total_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_macrs_15(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_macrs_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_macrs_15_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_macrs_5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_macrs_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_macrs_5_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_percent_amount_custom(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_percent_amount_custom_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_percent_amount_custom_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_percent_amount_macrs_15(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_percent_amount_macrs_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_percent_amount_macrs_15_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_percent_amount_macrs_5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_percent_amount_macrs_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_percent_amount_macrs_5_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_percent_amount_sl_15(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_percent_amount_sl_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_percent_amount_sl_15_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_percent_amount_sl_20(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_percent_amount_sl_20_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_percent_amount_sl_20_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_percent_amount_sl_39(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_percent_amount_sl_39_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_percent_amount_sl_39_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_percent_amount_sl_5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_percent_amount_sl_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_percent_amount_sl_5_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_percent_amount_total(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_percent_amount_total_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_percent_amount_total_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_percent_custom(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_percent_custom_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_percent_custom_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_percent_macrs_15(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_percent_macrs_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_percent_macrs_15_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_percent_macrs_5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_percent_macrs_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_percent_macrs_5_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_percent_qual_custom(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_percent_qual_custom_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_percent_qual_custom_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_percent_qual_macrs_15(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_percent_qual_macrs_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_percent_qual_macrs_15_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_percent_qual_macrs_5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_percent_qual_macrs_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_percent_qual_macrs_5_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_percent_qual_sl_15(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_percent_qual_sl_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_percent_qual_sl_15_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_percent_qual_sl_20(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_percent_qual_sl_20_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_percent_qual_sl_20_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_percent_qual_sl_39(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_percent_qual_sl_39_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_percent_qual_sl_39_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_percent_qual_sl_5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_percent_qual_sl_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_percent_qual_sl_5_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_percent_qual_total(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_percent_qual_total_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_percent_qual_total_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_percent_sl_15(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_percent_sl_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_percent_sl_15_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_percent_sl_20(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_percent_sl_20_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_percent_sl_20_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_percent_sl_39(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_percent_sl_39_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_percent_sl_39_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_percent_sl_5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_percent_sl_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_percent_sl_5_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_percent_total(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_percent_total_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_percent_total_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_prior_itc_custom(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_prior_itc_custom_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_prior_itc_custom_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_prior_itc_macrs_15(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_prior_itc_macrs_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_prior_itc_macrs_15_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_prior_itc_macrs_5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_prior_itc_macrs_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_prior_itc_macrs_5_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_prior_itc_sl_15(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_prior_itc_sl_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_prior_itc_sl_15_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_prior_itc_sl_20(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_prior_itc_sl_20_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_prior_itc_sl_20_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_prior_itc_sl_39(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_prior_itc_sl_39_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_prior_itc_sl_39_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_prior_itc_sl_5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_prior_itc_sl_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_prior_itc_sl_5_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_prior_itc_total(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_prior_itc_total_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_prior_itc_total_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_sl_15(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_sl_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_sl_15_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_sl_20(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_sl_20_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_sl_20_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_sl_39(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_sl_39_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_sl_39_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_sl_5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_sl_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_sl_5_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_depr_stabas_total(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_depr_stabas_total_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_depr_stabas_total_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_effective_tax_rate(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_effective_tax_rate_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_firstyear_energy_dispatch1(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_firstyear_energy_dispatch1_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_firstyear_energy_dispatch2(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_firstyear_energy_dispatch2_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_firstyear_energy_dispatch3(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_firstyear_energy_dispatch3_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_firstyear_energy_dispatch4(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_firstyear_energy_dispatch4_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_firstyear_energy_dispatch5(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_firstyear_energy_dispatch5_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_firstyear_energy_dispatch6(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_firstyear_energy_dispatch6_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_firstyear_energy_dispatch7(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_firstyear_energy_dispatch7_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_firstyear_energy_dispatch8(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_firstyear_energy_dispatch8_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_firstyear_energy_dispatch9(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_firstyear_energy_dispatch9_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_firstyear_energy_price1(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_firstyear_energy_price1_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_firstyear_energy_price2(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_firstyear_energy_price2_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_firstyear_energy_price3(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_firstyear_energy_price3_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_firstyear_energy_price4(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_firstyear_energy_price4_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_firstyear_energy_price5(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_firstyear_energy_price5_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_firstyear_energy_price6(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_firstyear_energy_price6_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_firstyear_energy_price7(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_firstyear_energy_price7_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_firstyear_energy_price8(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_firstyear_energy_price8_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_firstyear_energy_price9(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_firstyear_energy_price9_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_firstyear_revenue_dispatch1(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_firstyear_revenue_dispatch1_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_firstyear_revenue_dispatch2(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_firstyear_revenue_dispatch2_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_firstyear_revenue_dispatch3(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_firstyear_revenue_dispatch3_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_firstyear_revenue_dispatch4(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_firstyear_revenue_dispatch4_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_firstyear_revenue_dispatch5(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_firstyear_revenue_dispatch5_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_firstyear_revenue_dispatch6(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_firstyear_revenue_dispatch6_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_firstyear_revenue_dispatch7(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_firstyear_revenue_dispatch7_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_firstyear_revenue_dispatch8(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_firstyear_revenue_dispatch8_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_firstyear_revenue_dispatch9(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_firstyear_revenue_dispatch9_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_effective_tax_rate_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_flip_actual_irr(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_flip_actual_irr_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_flip_actual_irr_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_flip_actual_year(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_flip_actual_year_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_flip_actual_year_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_flip_target_irr(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_flip_target_irr_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_flip_target_irr_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_flip_target_year(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_flip_target_year_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_flip_target_year_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_gen_purchases(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_gen_purchases_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_ibi_fedtax_total(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_ibi_fedtax_total_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_ibi_fedtax_total_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_ibi_statax_total(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_ibi_statax_total_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_ibi_statax_total_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_ibi_total(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_ibi_total_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_ibi_total_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_ibi_total_fed(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_ibi_total_fed_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_ibi_total_fed_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_ibi_total_oth(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_ibi_total_oth_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_ibi_total_oth_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_ibi_total_sta(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_ibi_total_sta_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_ibi_total_sta_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_ibi_total_uti(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_ibi_total_uti_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_ibi_total_uti_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_issuance_of_equity(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_issuance_of_equity_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_issuance_of_equity_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_itc_disallow_fed_fixed_custom(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_itc_disallow_fed_fixed_custom_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_itc_disallow_fed_fixed_custom_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_itc_disallow_fed_fixed_macrs_15(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_itc_disallow_fed_fixed_macrs_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_itc_disallow_fed_fixed_macrs_15_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_itc_disallow_fed_fixed_macrs_5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_itc_disallow_fed_fixed_macrs_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_itc_disallow_fed_fixed_macrs_5_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_itc_disallow_fed_fixed_sl_15(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_itc_disallow_fed_fixed_sl_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_itc_disallow_fed_fixed_sl_15_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_itc_disallow_fed_fixed_sl_20(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_itc_disallow_fed_fixed_sl_20_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_itc_disallow_fed_fixed_sl_20_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_itc_disallow_fed_fixed_sl_39(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_itc_disallow_fed_fixed_sl_39_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_itc_disallow_fed_fixed_sl_39_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_itc_disallow_fed_fixed_sl_5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_itc_disallow_fed_fixed_sl_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_itc_disallow_fed_fixed_sl_5_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_itc_disallow_fed_fixed_total(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_itc_disallow_fed_fixed_total_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_itc_disallow_fed_fixed_total_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_itc_disallow_fed_percent_custom(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_itc_disallow_fed_percent_custom_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_itc_disallow_fed_percent_custom_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_itc_disallow_fed_percent_macrs_15(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_itc_disallow_fed_percent_macrs_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_itc_disallow_fed_percent_macrs_15_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_itc_disallow_fed_percent_macrs_5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_itc_disallow_fed_percent_macrs_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_itc_disallow_fed_percent_macrs_5_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_itc_disallow_fed_percent_sl_15(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_itc_disallow_fed_percent_sl_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_itc_disallow_fed_percent_sl_15_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_itc_disallow_fed_percent_sl_20(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_itc_disallow_fed_percent_sl_20_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_itc_disallow_fed_percent_sl_20_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_itc_disallow_fed_percent_sl_39(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_itc_disallow_fed_percent_sl_39_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_itc_disallow_fed_percent_sl_39_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_itc_disallow_fed_percent_sl_5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_itc_disallow_fed_percent_sl_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_itc_disallow_fed_percent_sl_5_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_itc_disallow_fed_percent_total(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_itc_disallow_fed_percent_total_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_itc_disallow_fed_percent_total_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_itc_disallow_sta_fixed_custom(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_itc_disallow_sta_fixed_custom_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_itc_disallow_sta_fixed_custom_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_itc_disallow_sta_fixed_macrs_15(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_itc_disallow_sta_fixed_macrs_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_itc_disallow_sta_fixed_macrs_15_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_itc_disallow_sta_fixed_macrs_5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_itc_disallow_sta_fixed_macrs_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_itc_disallow_sta_fixed_macrs_5_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_itc_disallow_sta_fixed_sl_15(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_itc_disallow_sta_fixed_sl_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_itc_disallow_sta_fixed_sl_15_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_itc_disallow_sta_fixed_sl_20(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_itc_disallow_sta_fixed_sl_20_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_itc_disallow_sta_fixed_sl_20_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_itc_disallow_sta_fixed_sl_39(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_itc_disallow_sta_fixed_sl_39_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_itc_disallow_sta_fixed_sl_39_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_itc_disallow_sta_fixed_sl_5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_itc_disallow_sta_fixed_sl_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_itc_disallow_sta_fixed_sl_5_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_itc_disallow_sta_fixed_total(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_itc_disallow_sta_fixed_total_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_itc_disallow_sta_fixed_total_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_itc_disallow_sta_percent_custom(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_itc_disallow_sta_percent_custom_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_itc_disallow_sta_percent_custom_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_itc_disallow_sta_percent_macrs_15(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_itc_disallow_sta_percent_macrs_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_itc_disallow_sta_percent_macrs_15_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_itc_disallow_sta_percent_macrs_5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_itc_disallow_sta_percent_macrs_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_itc_disallow_sta_percent_macrs_5_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_itc_disallow_sta_percent_sl_15(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_itc_disallow_sta_percent_sl_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_itc_disallow_sta_percent_sl_15_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_itc_disallow_sta_percent_sl_20(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_itc_disallow_sta_percent_sl_20_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_itc_disallow_sta_percent_sl_20_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_itc_disallow_sta_percent_sl_39(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_itc_disallow_sta_percent_sl_39_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_itc_disallow_sta_percent_sl_39_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_itc_disallow_sta_percent_sl_5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_itc_disallow_sta_percent_sl_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_itc_disallow_sta_percent_sl_5_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_itc_disallow_sta_percent_total(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_itc_disallow_sta_percent_total_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_itc_disallow_sta_percent_total_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_itc_fed_fixed_total(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_itc_fed_fixed_total_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_itc_fed_fixed_total_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_itc_fed_percent_total(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_itc_fed_percent_total_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_itc_fed_percent_total_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_itc_fed_qual_custom(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_itc_fed_qual_custom_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_itc_fed_qual_custom_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_itc_fed_qual_macrs_15(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_itc_fed_qual_macrs_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_itc_fed_qual_macrs_15_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_itc_fed_qual_macrs_5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_itc_fed_qual_macrs_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_itc_fed_qual_macrs_5_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_itc_fed_qual_sl_15(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_itc_fed_qual_sl_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_itc_fed_qual_sl_15_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_itc_fed_qual_sl_20(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_itc_fed_qual_sl_20_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_itc_fed_qual_sl_20_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_itc_fed_qual_sl_39(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_itc_fed_qual_sl_39_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_itc_fed_qual_sl_39_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_itc_fed_qual_sl_5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_itc_fed_qual_sl_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_itc_fed_qual_sl_5_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_itc_fed_qual_total(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_itc_fed_qual_total_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_itc_fed_qual_total_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_itc_sta_fixed_total(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_itc_sta_fixed_total_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_itc_sta_fixed_total_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_itc_sta_percent_total(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_itc_sta_percent_total_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_itc_sta_percent_total_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_itc_sta_qual_custom(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_itc_sta_qual_custom_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_itc_sta_qual_custom_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_itc_sta_qual_macrs_15(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_itc_sta_qual_macrs_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_itc_sta_qual_macrs_15_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_itc_sta_qual_macrs_5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_itc_sta_qual_macrs_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_itc_sta_qual_macrs_5_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_itc_sta_qual_sl_15(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_itc_sta_qual_sl_15_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_itc_sta_qual_sl_15_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_itc_sta_qual_sl_20(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_itc_sta_qual_sl_20_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_itc_sta_qual_sl_20_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_itc_sta_qual_sl_39(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_itc_sta_qual_sl_39_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_itc_sta_qual_sl_39_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_itc_sta_qual_sl_5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_itc_sta_qual_sl_5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_itc_sta_qual_sl_5_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_itc_sta_qual_total(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_itc_sta_qual_total_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_itc_sta_qual_total_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_itc_total(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_itc_total_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_itc_total_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_itc_total_fed(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_itc_total_fed_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_itc_total_fed_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_itc_total_sta(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_itc_total_sta_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_itc_total_sta_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_lcoe_nom(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_lcoe_nom_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_lcoe_nom_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_lcoe_real(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_lcoe_real_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_lcoe_real_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_lcog(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_lcog_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_lcog_depr(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_lcog_depr_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_lcog_loan_int(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_lcog_loan_int_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_lcog_om(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_lcog_om_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_lcog_roe(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_lcog_roe_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_lcog_wc_int(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_lcog_wc_int_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_lcoptc_fed_nom(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_lcoptc_fed_nom_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_lcoptc_fed_nom_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_lcoptc_fed_real(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_lcoptc_fed_real_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_lcoptc_fed_real_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_lcoptc_sta_nom(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_lcoptc_sta_nom_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_lcoptc_sta_nom_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_lcoptc_sta_real(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_lcoptc_sta_real_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_lcoptc_sta_real_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_lcos_nom(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_lcos_nom_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_lcos_nom_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_lcos_real(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_lcos_real_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_lppa_nom(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_lppa_nom_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_lppa_real(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_lppa_real_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_lcos_real_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_min_dscr(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_min_dscr_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_min_dscr_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_nominal_discount_rate(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_nominal_discount_rate_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_nominal_discount_rate_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_npv_annual_costs(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_npv_annual_costs_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_npv_annual_costs_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_npv_annual_costs_lcos(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_npv_annual_costs_lcos_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_npv_annual_costs_lcos_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_npv_capacity_revenue(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_npv_capacity_revenue_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_npv_curtailment_revenue(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_npv_curtailment_revenue_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_npv_energy_lcos_nom(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_npv_energy_lcos_nom_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_npv_energy_lcos_nom_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_npv_energy_lcos_real(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_npv_energy_lcos_real_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_npv_energy_lcos_real_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_npv_energy_nom(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_npv_energy_nom_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_npv_energy_nom_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_npv_energy_real(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_npv_energy_real_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_npv_energy_real_nget, self->data_ptr);
 }
 
 static PyObject *
-Outputs_get_npv_ppa_revenue(VarGroupObject *self, void *closure)
+Outputs_get_npv_fed_pbi_income(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_npv_ppa_revenue_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_npv_fed_pbi_income_nget, self->data_ptr);
 }
 
 static PyObject *
-Outputs_get_ppa(VarGroupObject *self, void *closure)
+Outputs_get_npv_oth_pbi_income(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_ppa_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_npv_oth_pbi_income_nget, self->data_ptr);
 }
 
 static PyObject *
-Outputs_get_ppa_escalation(VarGroupObject *self, void *closure)
+Outputs_get_npv_salvage_value(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_ppa_escalation_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_npv_salvage_value_nget, self->data_ptr);
 }
 
 static PyObject *
-Outputs_get_ppa_multipliers(VarGroupObject *self, void *closure)
+Outputs_get_npv_sta_pbi_income(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Levpartflip_Outputs_ppa_multipliers_aget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_npv_sta_pbi_income_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_npv_thermal_value(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_npv_thermal_value_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_npv_uti_pbi_income(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_npv_uti_pbi_income_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_ppa_price(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_ppa_price_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_ppa_price_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_present_value_fuel(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_present_value_fuel_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_present_value_fuel_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_present_value_insandproptax(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_present_value_insandproptax_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_present_value_insandproptax_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_present_value_oandm(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_present_value_oandm_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_present_value_oandm_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_present_value_oandm_nonfuel(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_present_value_oandm_nonfuel_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_present_value_oandm_nonfuel_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_project_return_aftertax_irr(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_project_return_aftertax_irr_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_project_return_aftertax_npv(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_project_return_aftertax_npv_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_prop_tax_assessed_value(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_prop_tax_assessed_value_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_prop_tax_assessed_value_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_purchase_of_property(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_purchase_of_property_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_purchase_of_property_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_pv_cafds(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_pv_cafds_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_pv_cafds_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_revenue_gen(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_revenue_gen_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_salvage_value(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_salvage_value_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_salvage_value_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_size_of_debt(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_size_of_debt_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_size_of_debt_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_size_of_equity(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_size_of_equity_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_size_of_equity_nget, self->data_ptr);
 }
 
 static PyObject *
-Outputs_get_sponsor_aftertax_development(VarGroupObject *self, void *closure)
+Outputs_get_subscriber1_npv(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_sponsor_aftertax_development_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_subscriber1_npv_nget, self->data_ptr);
 }
 
 static PyObject *
-Outputs_get_sponsor_aftertax_equity(VarGroupObject *self, void *closure)
+Outputs_get_subscriber2_npv(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_sponsor_aftertax_equity_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_subscriber2_npv_nget, self->data_ptr);
 }
 
 static PyObject *
-Outputs_get_sponsor_aftertax_irr(VarGroupObject *self, void *closure)
+Outputs_get_subscriber3_npv(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_sponsor_aftertax_irr_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_subscriber3_npv_nget, self->data_ptr);
 }
 
 static PyObject *
-Outputs_get_sponsor_aftertax_npv(VarGroupObject *self, void *closure)
+Outputs_get_subscriber4_npv(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_sponsor_aftertax_npv_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_sponsor_pretax_development(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_sponsor_pretax_development_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_sponsor_pretax_equity(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_sponsor_pretax_equity_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_sponsor_pretax_irr(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_sponsor_pretax_irr_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_sponsor_pretax_npv(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_sponsor_pretax_npv_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_tax_investor_aftertax_irr(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_tax_investor_aftertax_irr_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_tax_investor_aftertax_npv(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_tax_investor_aftertax_npv_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_tax_investor_pretax_irr(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_tax_investor_pretax_irr_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_tax_investor_pretax_npv(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_tax_investor_pretax_npv_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_subscriber4_npv_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_wacc(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Levpartflip_Outputs_wacc_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Communitysolar_Outputs_wacc_nget, self->data_ptr);
 }
 
 static PyGetSetDef Outputs_getset[] = {
@@ -10161,7 +10202,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*float*: IRR at end of analysis period [%]"),
  	NULL},
 {"cash_for_debt_service", (getter)Outputs_get_cash_for_debt_service,(setter)0,
-	PyDoc_STR("*float*: Cash available for debt service [$]"),
+	PyDoc_STR("*float*: Cash available for debt service (CAFDS) [$]"),
  	NULL},
 {"cbi_fedtax_total", (getter)Outputs_get_cbi_fedtax_total,(setter)0,
 	PyDoc_STR("*float*: Federal taxable CBI income [$]"),
@@ -10199,6 +10240,9 @@ static PyGetSetDef Outputs_getset[] = {
 {"cf_battery_replacement_cost_schedule", (getter)Outputs_get_cf_battery_replacement_cost_schedule,(setter)0,
 	PyDoc_STR("*sequence*: Battery replacement cost schedule [$]"),
  	NULL},
+{"cf_capacity_payment", (getter)Outputs_get_cf_capacity_payment,(setter)0,
+	PyDoc_STR("*sequence*: Capacity payment revenue [$]"),
+ 	NULL},
 {"cf_cash_for_ds", (getter)Outputs_get_cf_cash_for_ds,(setter)0,
 	PyDoc_STR("*sequence*: Cash available for debt service (CAFDS) [$]"),
  	NULL},
@@ -10210,6 +10254,39 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"cf_charging_cost_pv", (getter)Outputs_get_cf_charging_cost_pv,(setter)0,
 	PyDoc_STR("*sequence*: Annual cost to charge from system [$]"),
+ 	NULL},
+{"cf_community_solar_recurring_capacity", (getter)Outputs_get_cf_community_solar_recurring_capacity,(setter)0,
+	PyDoc_STR("*sequence*: Community solar total recurring cost by capacity [$]"),
+ 	NULL},
+{"cf_community_solar_recurring_fixed", (getter)Outputs_get_cf_community_solar_recurring_fixed,(setter)0,
+	PyDoc_STR("*sequence*: Community solar recurring total fixed cost [$]"),
+ 	NULL},
+{"cf_community_solar_recurring_generation", (getter)Outputs_get_cf_community_solar_recurring_generation,(setter)0,
+	PyDoc_STR("*sequence*: Community solar total recurring cost by generation [$]"),
+ 	NULL},
+{"cf_community_solar_subscriber1_revenue", (getter)Outputs_get_cf_community_solar_subscriber1_revenue,(setter)0,
+	PyDoc_STR("*sequence*: Revenue from Subscriber 1 total [$]"),
+ 	NULL},
+{"cf_community_solar_subscriber2_revenue", (getter)Outputs_get_cf_community_solar_subscriber2_revenue,(setter)0,
+	PyDoc_STR("*sequence*: Revenue from Subscriber 2 total [$]"),
+ 	NULL},
+{"cf_community_solar_subscriber3_revenue", (getter)Outputs_get_cf_community_solar_subscriber3_revenue,(setter)0,
+	PyDoc_STR("*sequence*: Revenue from Subscriber 3 total [$]"),
+ 	NULL},
+{"cf_community_solar_subscriber4_revenue", (getter)Outputs_get_cf_community_solar_subscriber4_revenue,(setter)0,
+	PyDoc_STR("*sequence*: Revenue from Subscriber 4 total [$]"),
+ 	NULL},
+{"cf_community_solar_unsubscribed_revenue", (getter)Outputs_get_cf_community_solar_unsubscribed_revenue,(setter)0,
+	PyDoc_STR("*sequence*: Revenue from unsubscribed generation [$]"),
+ 	NULL},
+{"cf_community_solar_upfront", (getter)Outputs_get_cf_community_solar_upfront,(setter)0,
+	PyDoc_STR("*sequence*: Community solar total up-front fixed cost [$]"),
+ 	NULL},
+{"cf_community_solar_upfront_per_capacity", (getter)Outputs_get_cf_community_solar_upfront_per_capacity,(setter)0,
+	PyDoc_STR("*sequence*: Community solar total up-front cost by capacity [$]"),
+ 	NULL},
+{"cf_curtailment_value", (getter)Outputs_get_cf_curtailment_value,(setter)0,
+	PyDoc_STR("*sequence*: Curtailment payment revenue [$]"),
  	NULL},
 {"cf_debt_balance", (getter)Outputs_get_cf_debt_balance,(setter)0,
 	PyDoc_STR("*sequence*: Debt balance [$]"),
@@ -10227,22 +10304,22 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Size of debt [$]"),
  	NULL},
 {"cf_disbursement_debtservice", (getter)Outputs_get_cf_disbursement_debtservice,(setter)0,
-	PyDoc_STR("*sequence*: Reserve disbursement debt service [$]"),
+	PyDoc_STR("*sequence*: Reserves debt service disbursement  [$]"),
  	NULL},
 {"cf_disbursement_equip1", (getter)Outputs_get_cf_disbursement_equip1,(setter)0,
-	PyDoc_STR("*sequence*: Reserve disbursement major equipment 1 [$]"),
+	PyDoc_STR("*sequence*: Reserves major equipment 1 disbursement [$]"),
  	NULL},
 {"cf_disbursement_equip2", (getter)Outputs_get_cf_disbursement_equip2,(setter)0,
-	PyDoc_STR("*sequence*: Reserve disbursement major equipment 2 [$]"),
+	PyDoc_STR("*sequence*: Reserves major equipment 2 disbursement [$]"),
  	NULL},
 {"cf_disbursement_equip3", (getter)Outputs_get_cf_disbursement_equip3,(setter)0,
-	PyDoc_STR("*sequence*: Reserve disbursement major equipment 3 [$]"),
+	PyDoc_STR("*sequence*: Reserves major equipment 3 disbursement [$]"),
  	NULL},
 {"cf_disbursement_om", (getter)Outputs_get_cf_disbursement_om,(setter)0,
-	PyDoc_STR("*sequence*: Reserve disbursement working capital [$]"),
+	PyDoc_STR("*sequence*: Reserves working capital disbursement [$]"),
  	NULL},
 {"cf_disbursement_receivables", (getter)Outputs_get_cf_disbursement_receivables,(setter)0,
-	PyDoc_STR("*sequence*: Reserve disbursement receivables [$]"),
+	PyDoc_STR("*sequence*: Reserves receivables disbursement [$]"),
  	NULL},
 {"cf_ebitda", (getter)Outputs_get_cf_ebitda,(setter)0,
 	PyDoc_STR("*sequence*: EBITDA [$]"),
@@ -10250,101 +10327,20 @@ static PyGetSetDef Outputs_getset[] = {
 {"cf_effective_tax_frac", (getter)Outputs_get_cf_effective_tax_frac,(setter)0,
 	PyDoc_STR("*sequence*: Effective income tax rate [frac]"),
  	NULL},
+{"cf_energy_curtailed", (getter)Outputs_get_cf_energy_curtailed,(setter)0,
+	PyDoc_STR("*sequence*: Curtailed energy [kWh]"),
+ 	NULL},
 {"cf_energy_net", (getter)Outputs_get_cf_energy_net,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced [kWh]"),
+	PyDoc_STR("*sequence*: Net energy to grid [kWh]"),
  	NULL},
-{"cf_energy_net_apr", (getter)Outputs_get_cf_energy_net_apr,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by year in April [kWh]"),
+{"cf_energy_purchases", (getter)Outputs_get_cf_energy_purchases,(setter)0,
+	PyDoc_STR("*sequence*: Energy from grid [kWh]"),
  	NULL},
-{"cf_energy_net_aug", (getter)Outputs_get_cf_energy_net_aug,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by year in August [kWh]"),
+{"cf_energy_sales", (getter)Outputs_get_cf_energy_sales,(setter)0,
+	PyDoc_STR("*sequence*: Energy to grid [kWh]"),
  	NULL},
-{"cf_energy_net_dec", (getter)Outputs_get_cf_energy_net_dec,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by year in December [kWh]"),
- 	NULL},
-{"cf_energy_net_dispatch1", (getter)Outputs_get_cf_energy_net_dispatch1,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by year in TOD period 1 [kWh]"),
- 	NULL},
-{"cf_energy_net_dispatch2", (getter)Outputs_get_cf_energy_net_dispatch2,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by year in TOD period 2 [kWh]"),
- 	NULL},
-{"cf_energy_net_dispatch3", (getter)Outputs_get_cf_energy_net_dispatch3,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by year in TOD period 3 [kWh]"),
- 	NULL},
-{"cf_energy_net_dispatch4", (getter)Outputs_get_cf_energy_net_dispatch4,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by year in TOD period 4 [kWh]"),
- 	NULL},
-{"cf_energy_net_dispatch5", (getter)Outputs_get_cf_energy_net_dispatch5,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by year in TOD period 5 [kWh]"),
- 	NULL},
-{"cf_energy_net_dispatch6", (getter)Outputs_get_cf_energy_net_dispatch6,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by year in TOD period 6 [kWh]"),
- 	NULL},
-{"cf_energy_net_dispatch7", (getter)Outputs_get_cf_energy_net_dispatch7,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by year in TOD period 7 [kWh]"),
- 	NULL},
-{"cf_energy_net_dispatch8", (getter)Outputs_get_cf_energy_net_dispatch8,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by year in TOD period 8 [kWh]"),
- 	NULL},
-{"cf_energy_net_dispatch9", (getter)Outputs_get_cf_energy_net_dispatch9,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by year in TOD period 9 [kWh]"),
- 	NULL},
-{"cf_energy_net_feb", (getter)Outputs_get_cf_energy_net_feb,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by year in February [kWh]"),
- 	NULL},
-{"cf_energy_net_jan", (getter)Outputs_get_cf_energy_net_jan,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by year in January [kWh]"),
- 	NULL},
-{"cf_energy_net_jul", (getter)Outputs_get_cf_energy_net_jul,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by year in July [kWh]"),
- 	NULL},
-{"cf_energy_net_jun", (getter)Outputs_get_cf_energy_net_jun,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by year in June [kWh]"),
- 	NULL},
-{"cf_energy_net_mar", (getter)Outputs_get_cf_energy_net_mar,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by year in March [kWh]"),
- 	NULL},
-{"cf_energy_net_may", (getter)Outputs_get_cf_energy_net_may,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by year in May [kWh]"),
- 	NULL},
-{"cf_energy_net_monthly_firstyear_TOD1", (getter)Outputs_get_cf_energy_net_monthly_firstyear_TOD1,(setter)0,
-	PyDoc_STR("*sequence*: First year energy from the system by month for TOD period 1 [kWh]"),
- 	NULL},
-{"cf_energy_net_monthly_firstyear_TOD2", (getter)Outputs_get_cf_energy_net_monthly_firstyear_TOD2,(setter)0,
-	PyDoc_STR("*sequence*: First year energy from the system by month for TOD period 2 [kWh]"),
- 	NULL},
-{"cf_energy_net_monthly_firstyear_TOD3", (getter)Outputs_get_cf_energy_net_monthly_firstyear_TOD3,(setter)0,
-	PyDoc_STR("*sequence*: First year energy from the system by month for TOD period 3 [kWh]"),
- 	NULL},
-{"cf_energy_net_monthly_firstyear_TOD4", (getter)Outputs_get_cf_energy_net_monthly_firstyear_TOD4,(setter)0,
-	PyDoc_STR("*sequence*: First year energy from the system by month for TOD period 4 [kWh]"),
- 	NULL},
-{"cf_energy_net_monthly_firstyear_TOD5", (getter)Outputs_get_cf_energy_net_monthly_firstyear_TOD5,(setter)0,
-	PyDoc_STR("*sequence*: First year energy from the system by month for TOD period 5 [kWh]"),
- 	NULL},
-{"cf_energy_net_monthly_firstyear_TOD6", (getter)Outputs_get_cf_energy_net_monthly_firstyear_TOD6,(setter)0,
-	PyDoc_STR("*sequence*: First year energy from the system by month for TOD period 6 [kWh]"),
- 	NULL},
-{"cf_energy_net_monthly_firstyear_TOD7", (getter)Outputs_get_cf_energy_net_monthly_firstyear_TOD7,(setter)0,
-	PyDoc_STR("*sequence*: First year energy from the system by month for TOD period 7 [kWh]"),
- 	NULL},
-{"cf_energy_net_monthly_firstyear_TOD8", (getter)Outputs_get_cf_energy_net_monthly_firstyear_TOD8,(setter)0,
-	PyDoc_STR("*sequence*: First year energy from the system by month for TOD period 8 [kWh]"),
- 	NULL},
-{"cf_energy_net_monthly_firstyear_TOD9", (getter)Outputs_get_cf_energy_net_monthly_firstyear_TOD9,(setter)0,
-	PyDoc_STR("*sequence*: First year energy from the system by month for TOD period 9 [kWh]"),
- 	NULL},
-{"cf_energy_net_nov", (getter)Outputs_get_cf_energy_net_nov,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by year in November [kWh]"),
- 	NULL},
-{"cf_energy_net_oct", (getter)Outputs_get_cf_energy_net_oct,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by year in October [kWh]"),
- 	NULL},
-{"cf_energy_net_sep", (getter)Outputs_get_cf_energy_net_sep,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by year in September [kWh]"),
- 	NULL},
-{"cf_energy_value", (getter)Outputs_get_cf_energy_value,(setter)0,
-	PyDoc_STR("*sequence*: PPA revenue to project [$]"),
+{"cf_energy_without_battery", (getter)Outputs_get_cf_energy_without_battery,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced without the battery or curtailment [kWh]"),
  	NULL},
 {"cf_feddepr_custom", (getter)Outputs_get_cf_feddepr_custom,(setter)0,
 	PyDoc_STR("*sequence*: Federal depreciation from custom [$]"),
@@ -10394,29 +10390,38 @@ static PyGetSetDef Outputs_getset[] = {
 {"cf_fedtax_taxable_incentives", (getter)Outputs_get_cf_fedtax_taxable_incentives,(setter)0,
 	PyDoc_STR("*sequence*: Federal taxable incentives [$]"),
  	NULL},
+{"cf_fuelcell_replacement_cost", (getter)Outputs_get_cf_fuelcell_replacement_cost,(setter)0,
+	PyDoc_STR("*sequence*: Fuel cell replacement cost [$]"),
+ 	NULL},
+{"cf_fuelcell_replacement_cost_schedule", (getter)Outputs_get_cf_fuelcell_replacement_cost_schedule,(setter)0,
+	PyDoc_STR("*sequence*: Fuel cell replacement cost schedule [$/kW]"),
+ 	NULL},
 {"cf_funding_debtservice", (getter)Outputs_get_cf_funding_debtservice,(setter)0,
-	PyDoc_STR("*sequence*: Reserve funding debt service [$]"),
+	PyDoc_STR("*sequence*: Reserves debt service funding [$]"),
  	NULL},
 {"cf_funding_equip1", (getter)Outputs_get_cf_funding_equip1,(setter)0,
-	PyDoc_STR("*sequence*: Reserve funding major equipment 1 [$]"),
+	PyDoc_STR("*sequence*: Reserves major equipment 1 funding [$]"),
  	NULL},
 {"cf_funding_equip2", (getter)Outputs_get_cf_funding_equip2,(setter)0,
-	PyDoc_STR("*sequence*: Reserve funding major equipment 2 [$]"),
+	PyDoc_STR("*sequence*: Reserves major equipment 2 funding [$]"),
  	NULL},
 {"cf_funding_equip3", (getter)Outputs_get_cf_funding_equip3,(setter)0,
-	PyDoc_STR("*sequence*: Reserve funding major equipment 3 [$]"),
+	PyDoc_STR("*sequence*: Reserves major equipment 3 funding [$]"),
  	NULL},
 {"cf_funding_om", (getter)Outputs_get_cf_funding_om,(setter)0,
-	PyDoc_STR("*sequence*: Reserve funding working capital [$]"),
+	PyDoc_STR("*sequence*: Reserves working capital funding [$]"),
  	NULL},
 {"cf_funding_receivables", (getter)Outputs_get_cf_funding_receivables,(setter)0,
-	PyDoc_STR("*sequence*: Reserve funding receivables [$]"),
+	PyDoc_STR("*sequence*: Reserves receivables funding [$]"),
  	NULL},
 {"cf_insurance_expense", (getter)Outputs_get_cf_insurance_expense,(setter)0,
 	PyDoc_STR("*sequence*: Insurance expense [$]"),
  	NULL},
 {"cf_land_lease_expense", (getter)Outputs_get_cf_land_lease_expense,(setter)0,
 	PyDoc_STR("*sequence*: Land lease expense [$]"),
+ 	NULL},
+{"cf_lcog_costs", (getter)Outputs_get_cf_lcog_costs,(setter)0,
+	PyDoc_STR("*sequence*: Total LCOG costs [$]"),
  	NULL},
 {"cf_length", (getter)Outputs_get_cf_length,(setter)0,
 	PyDoc_STR("*float*: Number of periods in cashflow"),
@@ -10433,8 +10438,20 @@ static PyGetSetDef Outputs_getset[] = {
 {"cf_om_batt_production_expense", (getter)Outputs_get_cf_om_batt_production_expense,(setter)0,
 	PyDoc_STR("*sequence*: Annual cost to for battery production based maintenance [$]"),
  	NULL},
+{"cf_om_capacity1_expense", (getter)Outputs_get_cf_om_capacity1_expense,(setter)0,
+	PyDoc_STR("*sequence*: Battery capacity-based expense [$]"),
+ 	NULL},
+{"cf_om_capacity2_expense", (getter)Outputs_get_cf_om_capacity2_expense,(setter)0,
+	PyDoc_STR("*sequence*: Fuel cell capacity-based expense [$]"),
+ 	NULL},
 {"cf_om_capacity_expense", (getter)Outputs_get_cf_om_capacity_expense,(setter)0,
 	PyDoc_STR("*sequence*: O&M capacity-based expense [$]"),
+ 	NULL},
+{"cf_om_fixed1_expense", (getter)Outputs_get_cf_om_fixed1_expense,(setter)0,
+	PyDoc_STR("*sequence*: Battery fixed expense [$]"),
+ 	NULL},
+{"cf_om_fixed2_expense", (getter)Outputs_get_cf_om_fixed2_expense,(setter)0,
+	PyDoc_STR("*sequence*: Fuel cell fixed expense [$]"),
  	NULL},
 {"cf_om_fixed_expense", (getter)Outputs_get_cf_om_fixed_expense,(setter)0,
 	PyDoc_STR("*sequence*: O&M fixed expense [$]"),
@@ -10447,6 +10464,12 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"cf_om_opt_fuel_2_expense", (getter)Outputs_get_cf_om_opt_fuel_2_expense,(setter)0,
 	PyDoc_STR("*sequence*: O&M coal feedstock expense [$]"),
+ 	NULL},
+{"cf_om_production1_expense", (getter)Outputs_get_cf_om_production1_expense,(setter)0,
+	PyDoc_STR("*sequence*: Battery production-based expense [$]"),
+ 	NULL},
+{"cf_om_production2_expense", (getter)Outputs_get_cf_om_production2_expense,(setter)0,
+	PyDoc_STR("*sequence*: Fuel cell production-based expense [$]"),
  	NULL},
 {"cf_om_production_expense", (getter)Outputs_get_cf_om_production_expense,(setter)0,
 	PyDoc_STR("*sequence*: O&M production-based expense [$]"),
@@ -10475,23 +10498,20 @@ static PyGetSetDef Outputs_getset[] = {
 {"cf_pbi_total_uti", (getter)Outputs_get_cf_pbi_total_uti,(setter)0,
 	PyDoc_STR("*sequence*: Utility PBI income [$]"),
  	NULL},
-{"cf_ppa_price", (getter)Outputs_get_cf_ppa_price,(setter)0,
-	PyDoc_STR("*sequence*: PPA price [cents/kWh]"),
- 	NULL},
 {"cf_pretax_cashflow", (getter)Outputs_get_cf_pretax_cashflow,(setter)0,
-	PyDoc_STR("*sequence*: Total project pre-tax cash flow [$]"),
+	PyDoc_STR("*sequence*: Total pre-tax cash flow [$]"),
  	NULL},
 {"cf_pretax_dscr", (getter)Outputs_get_cf_pretax_dscr,(setter)0,
-	PyDoc_STR("*sequence*: Pre-tax DSCR"),
+	PyDoc_STR("*sequence*: DSCR (pre-tax)"),
  	NULL},
 {"cf_project_dsra", (getter)Outputs_get_cf_project_dsra,(setter)0,
-	PyDoc_STR("*sequence*: Reserve (increase)/decrease debt service [$]"),
+	PyDoc_STR("*sequence*: Reserve (increase)/decrease debt service  [$]"),
  	NULL},
 {"cf_project_financing_activities", (getter)Outputs_get_cf_project_financing_activities,(setter)0,
-	PyDoc_STR("*sequence*: Project cash flow from financing activities [$]"),
+	PyDoc_STR("*sequence*: Cash flow from financing activities [$]"),
  	NULL},
 {"cf_project_investing_activities", (getter)Outputs_get_cf_project_investing_activities,(setter)0,
-	PyDoc_STR("*sequence*: Project cash flow from investing activities [$]"),
+	PyDoc_STR("*sequence*: Cash flow from investing activities [$]"),
  	NULL},
 {"cf_project_me1cs", (getter)Outputs_get_cf_project_me1cs,(setter)0,
 	PyDoc_STR("*sequence*: Reserve capital spending major equipment 1 [$]"),
@@ -10515,7 +10535,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Reserve capital spending major equipment total [$]"),
  	NULL},
 {"cf_project_operating_activities", (getter)Outputs_get_cf_project_operating_activities,(setter)0,
-	PyDoc_STR("*sequence*: Project cash flow from operating activities [$]"),
+	PyDoc_STR("*sequence*: Cash flow from operating activities [$]"),
  	NULL},
 {"cf_project_ra", (getter)Outputs_get_cf_project_ra,(setter)0,
 	PyDoc_STR("*sequence*: Reserve (increase)/decrease total reserve account [$]"),
@@ -10524,25 +10544,28 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Reserve (increase)/decrease receivables [$]"),
  	NULL},
 {"cf_project_return_aftertax", (getter)Outputs_get_cf_project_return_aftertax,(setter)0,
-	PyDoc_STR("*sequence*: Total project after-tax returns [$]"),
+	PyDoc_STR("*sequence*: Total after-tax returns [$]"),
  	NULL},
 {"cf_project_return_aftertax_cash", (getter)Outputs_get_cf_project_return_aftertax_cash,(setter)0,
-	PyDoc_STR("*sequence*: Total project operating cash [$]"),
+	PyDoc_STR("*sequence*: Total after-tax cash returns [$]"),
  	NULL},
 {"cf_project_return_aftertax_irr", (getter)Outputs_get_cf_project_return_aftertax_irr,(setter)0,
-	PyDoc_STR("*sequence*: Project after-tax cumulative IRR [%]"),
+	PyDoc_STR("*sequence*: After-tax cumulative IRR [%]"),
+ 	NULL},
+{"cf_project_return_aftertax_max_irr", (getter)Outputs_get_cf_project_return_aftertax_max_irr,(setter)0,
+	PyDoc_STR("*sequence*: After-tax project maximum IRR [%]"),
  	NULL},
 {"cf_project_return_aftertax_npv", (getter)Outputs_get_cf_project_return_aftertax_npv,(setter)0,
-	PyDoc_STR("*sequence*: Project after-tax cumulative NPV [$]"),
+	PyDoc_STR("*sequence*: After-tax cumulative NPV [$]"),
  	NULL},
 {"cf_project_return_pretax", (getter)Outputs_get_cf_project_return_pretax,(setter)0,
-	PyDoc_STR("*sequence*: Total project pre-tax returns [$]"),
+	PyDoc_STR("*sequence*: Total pre-tax returns [$]"),
  	NULL},
 {"cf_project_return_pretax_irr", (getter)Outputs_get_cf_project_return_pretax_irr,(setter)0,
-	PyDoc_STR("*sequence*: Project pre-tax cumulative IRR [%]"),
+	PyDoc_STR("*sequence*: Pre-tax cumulative IRR [%]"),
  	NULL},
 {"cf_project_return_pretax_npv", (getter)Outputs_get_cf_project_return_pretax_npv,(setter)0,
-	PyDoc_STR("*sequence*: Project pre-tax cumulative NPV [$]"),
+	PyDoc_STR("*sequence*: Pre-tax cumulative NPV [$]"),
  	NULL},
 {"cf_project_wcra", (getter)Outputs_get_cf_project_wcra,(setter)0,
 	PyDoc_STR("*sequence*: Reserve (increase)/decrease working capital [$]"),
@@ -10572,154 +10595,40 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Recapitalization operating expense [$]"),
  	NULL},
 {"cf_reserve_debtservice", (getter)Outputs_get_cf_reserve_debtservice,(setter)0,
-	PyDoc_STR("*sequence*: Reserve account debt service [$]"),
+	PyDoc_STR("*sequence*: Reserves debt service balance [$]"),
  	NULL},
 {"cf_reserve_equip1", (getter)Outputs_get_cf_reserve_equip1,(setter)0,
-	PyDoc_STR("*sequence*: Reserve account major equipment 1 [$]"),
+	PyDoc_STR("*sequence*: Reserves major equipment 1 balance [$]"),
  	NULL},
 {"cf_reserve_equip2", (getter)Outputs_get_cf_reserve_equip2,(setter)0,
-	PyDoc_STR("*sequence*: Reserve account major equipment 2 [$]"),
+	PyDoc_STR("*sequence*: Reserves major equipment 2 balance [$]"),
  	NULL},
 {"cf_reserve_equip3", (getter)Outputs_get_cf_reserve_equip3,(setter)0,
-	PyDoc_STR("*sequence*: Reserve account major equipment 3 [$]"),
+	PyDoc_STR("*sequence*: Reserves major equipment 3 balance [$]"),
  	NULL},
 {"cf_reserve_interest", (getter)Outputs_get_cf_reserve_interest,(setter)0,
-	PyDoc_STR("*sequence*: Interest earned on reserve accounts [$]"),
+	PyDoc_STR("*sequence*: Interest earned on reserves [$]"),
  	NULL},
 {"cf_reserve_om", (getter)Outputs_get_cf_reserve_om,(setter)0,
-	PyDoc_STR("*sequence*: Reserve account working capital [$]"),
+	PyDoc_STR("*sequence*: Reserves working capital balance  [$]"),
  	NULL},
 {"cf_reserve_receivables", (getter)Outputs_get_cf_reserve_receivables,(setter)0,
-	PyDoc_STR("*sequence*: Reserve account receivables [$]"),
+	PyDoc_STR("*sequence*: Reserves receivables balance [$]"),
  	NULL},
 {"cf_reserve_total", (getter)Outputs_get_cf_reserve_total,(setter)0,
-	PyDoc_STR("*sequence*: Reserve account total reserves [$]"),
+	PyDoc_STR("*sequence*: Reserves total reserves balance [$]"),
  	NULL},
-{"cf_revenue_apr", (getter)Outputs_get_cf_revenue_apr,(setter)0,
-	PyDoc_STR("*sequence*: PPA revenue by year for April [$]"),
+{"cf_return_on_equity", (getter)Outputs_get_cf_return_on_equity,(setter)0,
+	PyDoc_STR("*sequence*: Return on equity [$/kWh]"),
  	NULL},
-{"cf_revenue_aug", (getter)Outputs_get_cf_revenue_aug,(setter)0,
-	PyDoc_STR("*sequence*: PPA revenue by year for August [$]"),
+{"cf_return_on_equity_dollars", (getter)Outputs_get_cf_return_on_equity_dollars,(setter)0,
+	PyDoc_STR("*sequence*: Return on equity dollars [$]"),
  	NULL},
-{"cf_revenue_dec", (getter)Outputs_get_cf_revenue_dec,(setter)0,
-	PyDoc_STR("*sequence*: PPA revenue by year for December [$]"),
- 	NULL},
-{"cf_revenue_dispatch1", (getter)Outputs_get_cf_revenue_dispatch1,(setter)0,
-	PyDoc_STR("*sequence*: PPA revenue by year for TOD period 1 [$]"),
- 	NULL},
-{"cf_revenue_dispatch2", (getter)Outputs_get_cf_revenue_dispatch2,(setter)0,
-	PyDoc_STR("*sequence*: PPA revenue by year for TOD period 2 [$]"),
- 	NULL},
-{"cf_revenue_dispatch3", (getter)Outputs_get_cf_revenue_dispatch3,(setter)0,
-	PyDoc_STR("*sequence*: PPA revenue by year for TOD period 3 [$]"),
- 	NULL},
-{"cf_revenue_dispatch4", (getter)Outputs_get_cf_revenue_dispatch4,(setter)0,
-	PyDoc_STR("*sequence*: PPA revenue by year for TOD period 4 [$]"),
- 	NULL},
-{"cf_revenue_dispatch5", (getter)Outputs_get_cf_revenue_dispatch5,(setter)0,
-	PyDoc_STR("*sequence*: PPA revenue by year for TOD period 5 [$]"),
- 	NULL},
-{"cf_revenue_dispatch6", (getter)Outputs_get_cf_revenue_dispatch6,(setter)0,
-	PyDoc_STR("*sequence*: PPA revenue by year for TOD period 6 [$]"),
- 	NULL},
-{"cf_revenue_dispatch7", (getter)Outputs_get_cf_revenue_dispatch7,(setter)0,
-	PyDoc_STR("*sequence*: PPA revenue by year for TOD period 7 [$]"),
- 	NULL},
-{"cf_revenue_dispatch8", (getter)Outputs_get_cf_revenue_dispatch8,(setter)0,
-	PyDoc_STR("*sequence*: PPA revenue by year for TOD period 8 [$]"),
- 	NULL},
-{"cf_revenue_dispatch9", (getter)Outputs_get_cf_revenue_dispatch9,(setter)0,
-	PyDoc_STR("*sequence*: PPA revenue by year for TOD period 9 [$]"),
- 	NULL},
-{"cf_revenue_feb", (getter)Outputs_get_cf_revenue_feb,(setter)0,
-	PyDoc_STR("*sequence*: PPA revenue by year for ebruary [$]"),
- 	NULL},
-{"cf_revenue_jan", (getter)Outputs_get_cf_revenue_jan,(setter)0,
-	PyDoc_STR("*sequence*: PPA revenue by year for January [$]"),
- 	NULL},
-{"cf_revenue_jul", (getter)Outputs_get_cf_revenue_jul,(setter)0,
-	PyDoc_STR("*sequence*: PPA revenue by year for July [$]"),
- 	NULL},
-{"cf_revenue_jun", (getter)Outputs_get_cf_revenue_jun,(setter)0,
-	PyDoc_STR("*sequence*: PPA revenue by year for June [$]"),
- 	NULL},
-{"cf_revenue_mar", (getter)Outputs_get_cf_revenue_mar,(setter)0,
-	PyDoc_STR("*sequence*: PPA revenue by year for March [$]"),
- 	NULL},
-{"cf_revenue_may", (getter)Outputs_get_cf_revenue_may,(setter)0,
-	PyDoc_STR("*sequence*: PPA revenue by year for May [$]"),
- 	NULL},
-{"cf_revenue_monthly_firstyear_TOD1", (getter)Outputs_get_cf_revenue_monthly_firstyear_TOD1,(setter)0,
-	PyDoc_STR("*sequence*: First year revenue from the system by month for TOD period 1 [$]"),
- 	NULL},
-{"cf_revenue_monthly_firstyear_TOD2", (getter)Outputs_get_cf_revenue_monthly_firstyear_TOD2,(setter)0,
-	PyDoc_STR("*sequence*: First year revenue from the system by month for TOD period 2 [$]"),
- 	NULL},
-{"cf_revenue_monthly_firstyear_TOD3", (getter)Outputs_get_cf_revenue_monthly_firstyear_TOD3,(setter)0,
-	PyDoc_STR("*sequence*: First year revenue from the system by month for TOD period 3 [$]"),
- 	NULL},
-{"cf_revenue_monthly_firstyear_TOD4", (getter)Outputs_get_cf_revenue_monthly_firstyear_TOD4,(setter)0,
-	PyDoc_STR("*sequence*: First year revenue from the system by month for TOD period 4 [$]"),
- 	NULL},
-{"cf_revenue_monthly_firstyear_TOD5", (getter)Outputs_get_cf_revenue_monthly_firstyear_TOD5,(setter)0,
-	PyDoc_STR("*sequence*: First year revenue from the system by month for TOD period 5 [$]"),
- 	NULL},
-{"cf_revenue_monthly_firstyear_TOD6", (getter)Outputs_get_cf_revenue_monthly_firstyear_TOD6,(setter)0,
-	PyDoc_STR("*sequence*: First year revenue from the system by month for TOD period 6 [$]"),
- 	NULL},
-{"cf_revenue_monthly_firstyear_TOD7", (getter)Outputs_get_cf_revenue_monthly_firstyear_TOD7,(setter)0,
-	PyDoc_STR("*sequence*: First year revenue from the system by month for TOD period 7 [$]"),
- 	NULL},
-{"cf_revenue_monthly_firstyear_TOD8", (getter)Outputs_get_cf_revenue_monthly_firstyear_TOD8,(setter)0,
-	PyDoc_STR("*sequence*: First year revenue from the system by month for TOD period 8 [$]"),
- 	NULL},
-{"cf_revenue_monthly_firstyear_TOD9", (getter)Outputs_get_cf_revenue_monthly_firstyear_TOD9,(setter)0,
-	PyDoc_STR("*sequence*: First year revenue from the system by month for TOD period 9 [$]"),
- 	NULL},
-{"cf_revenue_nov", (getter)Outputs_get_cf_revenue_nov,(setter)0,
-	PyDoc_STR("*sequence*: PPA revenue by year for November [$]"),
- 	NULL},
-{"cf_revenue_oct", (getter)Outputs_get_cf_revenue_oct,(setter)0,
-	PyDoc_STR("*sequence*: PPA revenue by year for October [$]"),
- 	NULL},
-{"cf_revenue_sep", (getter)Outputs_get_cf_revenue_sep,(setter)0,
-	PyDoc_STR("*sequence*: PPA revenue by year for September [$]"),
+{"cf_return_on_equity_input", (getter)Outputs_get_cf_return_on_equity_input,(setter)0,
+	PyDoc_STR("*sequence*: Return on equity input [%]"),
  	NULL},
 {"cf_salvage_cost_lcos", (getter)Outputs_get_cf_salvage_cost_lcos,(setter)0,
 	PyDoc_STR("*sequence*: Annual battery salvage value costs [$]"),
- 	NULL},
-{"cf_sponsor_aftertax", (getter)Outputs_get_cf_sponsor_aftertax,(setter)0,
-	PyDoc_STR("*sequence*: Developer after-tax returns [$]"),
- 	NULL},
-{"cf_sponsor_aftertax_cash", (getter)Outputs_get_cf_sponsor_aftertax_cash,(setter)0,
-	PyDoc_STR("*sequence*: Developer operating cash [$]"),
- 	NULL},
-{"cf_sponsor_aftertax_irr", (getter)Outputs_get_cf_sponsor_aftertax_irr,(setter)0,
-	PyDoc_STR("*sequence*: Developer after-tax cumulative IRR [%]"),
- 	NULL},
-{"cf_sponsor_aftertax_itc", (getter)Outputs_get_cf_sponsor_aftertax_itc,(setter)0,
-	PyDoc_STR("*sequence*: Developer share of ITC [$]"),
- 	NULL},
-{"cf_sponsor_aftertax_npv", (getter)Outputs_get_cf_sponsor_aftertax_npv,(setter)0,
-	PyDoc_STR("*sequence*: Developer after-tax cumulative NPV [$]"),
- 	NULL},
-{"cf_sponsor_aftertax_ptc", (getter)Outputs_get_cf_sponsor_aftertax_ptc,(setter)0,
-	PyDoc_STR("*sequence*: Developer share of PTC [$]"),
- 	NULL},
-{"cf_sponsor_aftertax_tax", (getter)Outputs_get_cf_sponsor_aftertax_tax,(setter)0,
-	PyDoc_STR("*sequence*: Developer share of tax benefit/(liability) [$]"),
- 	NULL},
-{"cf_sponsor_pretax", (getter)Outputs_get_cf_sponsor_pretax,(setter)0,
-	PyDoc_STR("*sequence*: Developer pre-tax returns [$]"),
- 	NULL},
-{"cf_sponsor_pretax_cash", (getter)Outputs_get_cf_sponsor_pretax_cash,(setter)0,
-	PyDoc_STR("*sequence*: Developer operating cash [$]"),
- 	NULL},
-{"cf_sponsor_pretax_irr", (getter)Outputs_get_cf_sponsor_pretax_irr,(setter)0,
-	PyDoc_STR("*sequence*: Developer pre-tax cumulative IRR [%]"),
- 	NULL},
-{"cf_sponsor_pretax_npv", (getter)Outputs_get_cf_sponsor_pretax_npv,(setter)0,
-	PyDoc_STR("*sequence*: Developer pre-tax cumulative NPV [$]"),
  	NULL},
 {"cf_stadepr_custom", (getter)Outputs_get_cf_stadepr_custom,(setter)0,
 	PyDoc_STR("*sequence*: State depreciation from custom [$]"),
@@ -10769,41 +10678,146 @@ static PyGetSetDef Outputs_getset[] = {
 {"cf_state_tax_frac", (getter)Outputs_get_cf_state_tax_frac,(setter)0,
 	PyDoc_STR("*sequence*: State income tax rate [frac]"),
  	NULL},
-{"cf_tax_investor_aftertax", (getter)Outputs_get_cf_tax_investor_aftertax,(setter)0,
-	PyDoc_STR("*sequence*: Investor after-tax returns [$]"),
+{"cf_subscriber1_bill_credit_amount", (getter)Outputs_get_cf_subscriber1_bill_credit_amount,(setter)0,
+	PyDoc_STR("*sequence*: Bill credit for Subscriber 1 class [$]"),
  	NULL},
-{"cf_tax_investor_aftertax_cash", (getter)Outputs_get_cf_tax_investor_aftertax_cash,(setter)0,
-	PyDoc_STR("*sequence*: Investor operating cash [$]"),
+{"cf_subscriber1_bill_credit_rate", (getter)Outputs_get_cf_subscriber1_bill_credit_rate,(setter)0,
+	PyDoc_STR("*sequence*: Subscriber 1 Bill credit rate [$/kWh]"),
  	NULL},
-{"cf_tax_investor_aftertax_irr", (getter)Outputs_get_cf_tax_investor_aftertax_irr,(setter)0,
-	PyDoc_STR("*sequence*: Investor after-tax cumulative IRR [%]"),
+{"cf_subscriber1_cost_of_participation", (getter)Outputs_get_cf_subscriber1_cost_of_participation,(setter)0,
+	PyDoc_STR("*sequence*: Cost of participation for Subscriber 1 class [$]"),
  	NULL},
-{"cf_tax_investor_aftertax_itc", (getter)Outputs_get_cf_tax_investor_aftertax_itc,(setter)0,
-	PyDoc_STR("*sequence*: Investor share of ITC [$]"),
+{"cf_subscriber1_generation_payment", (getter)Outputs_get_cf_subscriber1_generation_payment,(setter)0,
+	PyDoc_STR("*sequence*: Subscriber 1 Generation rate [$/kWh]"),
  	NULL},
-{"cf_tax_investor_aftertax_max_irr", (getter)Outputs_get_cf_tax_investor_aftertax_max_irr,(setter)0,
-	PyDoc_STR("*sequence*: Investor after-tax maximum IRR [%]"),
+{"cf_subscriber1_net_benefit", (getter)Outputs_get_cf_subscriber1_net_benefit,(setter)0,
+	PyDoc_STR("*sequence*: Net benefit for Subscriber 1 class [$]"),
  	NULL},
-{"cf_tax_investor_aftertax_npv", (getter)Outputs_get_cf_tax_investor_aftertax_npv,(setter)0,
-	PyDoc_STR("*sequence*: Investor after-tax cumulative NPV [$]"),
+{"cf_subscriber1_net_benefit_cumulative", (getter)Outputs_get_cf_subscriber1_net_benefit_cumulative,(setter)0,
+	PyDoc_STR("*sequence*: Cumulative net benefit for Subscriber 1 class [$]"),
  	NULL},
-{"cf_tax_investor_aftertax_ptc", (getter)Outputs_get_cf_tax_investor_aftertax_ptc,(setter)0,
-	PyDoc_STR("*sequence*: Investor share of PTC [$]"),
+{"cf_subscriber1_revenue_annual_payment", (getter)Outputs_get_cf_subscriber1_revenue_annual_payment,(setter)0,
+	PyDoc_STR("*sequence*: Revenue from Subscriber 1 annual payments [$]"),
  	NULL},
-{"cf_tax_investor_aftertax_tax", (getter)Outputs_get_cf_tax_investor_aftertax_tax,(setter)0,
-	PyDoc_STR("*sequence*: Investor share of tax benefit (liability) [$]"),
+{"cf_subscriber1_revenue_generation", (getter)Outputs_get_cf_subscriber1_revenue_generation,(setter)0,
+	PyDoc_STR("*sequence*: Revenue from Subscriber 1 generation payments [$]"),
  	NULL},
-{"cf_tax_investor_pretax", (getter)Outputs_get_cf_tax_investor_pretax,(setter)0,
-	PyDoc_STR("*sequence*: Investor pre-tax returns [$]"),
+{"cf_subscriber1_revenue_upfront", (getter)Outputs_get_cf_subscriber1_revenue_upfront,(setter)0,
+	PyDoc_STR("*sequence*: Revenue from Subscriber 1 up-front payments [$]"),
  	NULL},
-{"cf_tax_investor_pretax_irr", (getter)Outputs_get_cf_tax_investor_pretax_irr,(setter)0,
-	PyDoc_STR("*sequence*: Investor pre-tax cumulative IRR [%]"),
+{"cf_subscriber1_share_fraction", (getter)Outputs_get_cf_subscriber1_share_fraction,(setter)0,
+	PyDoc_STR("*sequence*: Subscriber 1 Share of system capacity"),
  	NULL},
-{"cf_tax_investor_pretax_npv", (getter)Outputs_get_cf_tax_investor_pretax_npv,(setter)0,
-	PyDoc_STR("*sequence*: Investor pre-tax cumulative NPV [$]"),
+{"cf_subscriber1_share_of_generation", (getter)Outputs_get_cf_subscriber1_share_of_generation,(setter)0,
+	PyDoc_STR("*sequence*: Subscriber 1 Share of generation [kWh]"),
+ 	NULL},
+{"cf_subscriber2_bill_credit_amount", (getter)Outputs_get_cf_subscriber2_bill_credit_amount,(setter)0,
+	PyDoc_STR("*sequence*: Bill credit for Subscriber 2 class [$]"),
+ 	NULL},
+{"cf_subscriber2_bill_credit_rate", (getter)Outputs_get_cf_subscriber2_bill_credit_rate,(setter)0,
+	PyDoc_STR("*sequence*: Subscriber 2 Bill credit rate [$/kWh]"),
+ 	NULL},
+{"cf_subscriber2_cost_of_participation", (getter)Outputs_get_cf_subscriber2_cost_of_participation,(setter)0,
+	PyDoc_STR("*sequence*: Cost of participation for Subscriber 2 class [$]"),
+ 	NULL},
+{"cf_subscriber2_generation_payment", (getter)Outputs_get_cf_subscriber2_generation_payment,(setter)0,
+	PyDoc_STR("*sequence*: Subscriber 2 Generation rate [$/kWh]"),
+ 	NULL},
+{"cf_subscriber2_net_benefit", (getter)Outputs_get_cf_subscriber2_net_benefit,(setter)0,
+	PyDoc_STR("*sequence*: Net benefit for Subscriber 2 class [$]"),
+ 	NULL},
+{"cf_subscriber2_net_benefit_cumulative", (getter)Outputs_get_cf_subscriber2_net_benefit_cumulative,(setter)0,
+	PyDoc_STR("*sequence*: Cumulative net benefit for Subscriber 2 class [$]"),
+ 	NULL},
+{"cf_subscriber2_revenue_annual_payment", (getter)Outputs_get_cf_subscriber2_revenue_annual_payment,(setter)0,
+	PyDoc_STR("*sequence*: Revenue from Subscriber 2 annual payments [$]"),
+ 	NULL},
+{"cf_subscriber2_revenue_generation", (getter)Outputs_get_cf_subscriber2_revenue_generation,(setter)0,
+	PyDoc_STR("*sequence*: Revenue from Subscriber 2 generation payments [$]"),
+ 	NULL},
+{"cf_subscriber2_revenue_upfront", (getter)Outputs_get_cf_subscriber2_revenue_upfront,(setter)0,
+	PyDoc_STR("*sequence*: Revenue from Subscriber 2 up-front payments [$]"),
+ 	NULL},
+{"cf_subscriber2_share_fraction", (getter)Outputs_get_cf_subscriber2_share_fraction,(setter)0,
+	PyDoc_STR("*sequence*: Subscriber 2 Share of system capacity"),
+ 	NULL},
+{"cf_subscriber2_share_of_generation", (getter)Outputs_get_cf_subscriber2_share_of_generation,(setter)0,
+	PyDoc_STR("*sequence*: Subscriber 2 Share of generation [kWh]"),
+ 	NULL},
+{"cf_subscriber3_bill_credit_amount", (getter)Outputs_get_cf_subscriber3_bill_credit_amount,(setter)0,
+	PyDoc_STR("*sequence*: Bill credit for Subscriber 3 class [$]"),
+ 	NULL},
+{"cf_subscriber3_bill_credit_rate", (getter)Outputs_get_cf_subscriber3_bill_credit_rate,(setter)0,
+	PyDoc_STR("*sequence*: Subscriber 3 Bill credit rate [$/kWh]"),
+ 	NULL},
+{"cf_subscriber3_cost_of_participation", (getter)Outputs_get_cf_subscriber3_cost_of_participation,(setter)0,
+	PyDoc_STR("*sequence*: Cost of participation for Subscriber 3 class [$]"),
+ 	NULL},
+{"cf_subscriber3_generation_payment", (getter)Outputs_get_cf_subscriber3_generation_payment,(setter)0,
+	PyDoc_STR("*sequence*: Subscriber 3 Generation rate [$/kWh]"),
+ 	NULL},
+{"cf_subscriber3_net_benefit", (getter)Outputs_get_cf_subscriber3_net_benefit,(setter)0,
+	PyDoc_STR("*sequence*: Net benefit for Subscriber 3 class [$]"),
+ 	NULL},
+{"cf_subscriber3_net_benefit_cumulative", (getter)Outputs_get_cf_subscriber3_net_benefit_cumulative,(setter)0,
+	PyDoc_STR("*sequence*: Cumulative net benefit for Subscriber 3 class [$]"),
+ 	NULL},
+{"cf_subscriber3_revenue_annual_payment", (getter)Outputs_get_cf_subscriber3_revenue_annual_payment,(setter)0,
+	PyDoc_STR("*sequence*: Revenue from Subscriber 3 annual payments [$]"),
+ 	NULL},
+{"cf_subscriber3_revenue_generation", (getter)Outputs_get_cf_subscriber3_revenue_generation,(setter)0,
+	PyDoc_STR("*sequence*: Revenue from Subscriber 3 generation payments [$]"),
+ 	NULL},
+{"cf_subscriber3_revenue_upfront", (getter)Outputs_get_cf_subscriber3_revenue_upfront,(setter)0,
+	PyDoc_STR("*sequence*: Revenue from Subscriber 3 up-front payments [$]"),
+ 	NULL},
+{"cf_subscriber3_share_fraction", (getter)Outputs_get_cf_subscriber3_share_fraction,(setter)0,
+	PyDoc_STR("*sequence*: Subscriber 3 Share of system capacity"),
+ 	NULL},
+{"cf_subscriber3_share_of_generation", (getter)Outputs_get_cf_subscriber3_share_of_generation,(setter)0,
+	PyDoc_STR("*sequence*: Subscriber 3 Share of generation [kWh]"),
+ 	NULL},
+{"cf_subscriber4_bill_credit_amount", (getter)Outputs_get_cf_subscriber4_bill_credit_amount,(setter)0,
+	PyDoc_STR("*sequence*: Bill credit for Subscriber 4 class [$]"),
+ 	NULL},
+{"cf_subscriber4_bill_credit_rate", (getter)Outputs_get_cf_subscriber4_bill_credit_rate,(setter)0,
+	PyDoc_STR("*sequence*: Subscriber 4 Bill credit rate [$/kWh]"),
+ 	NULL},
+{"cf_subscriber4_cost_of_participation", (getter)Outputs_get_cf_subscriber4_cost_of_participation,(setter)0,
+	PyDoc_STR("*sequence*: Cost of participation for Subscriber 4 class [$]"),
+ 	NULL},
+{"cf_subscriber4_generation_payment", (getter)Outputs_get_cf_subscriber4_generation_payment,(setter)0,
+	PyDoc_STR("*sequence*: Subscriber 4 Generation rate [$/kWh]"),
+ 	NULL},
+{"cf_subscriber4_net_benefit", (getter)Outputs_get_cf_subscriber4_net_benefit,(setter)0,
+	PyDoc_STR("*sequence*: Net benefit for Subscriber 4 class [$]"),
+ 	NULL},
+{"cf_subscriber4_net_benefit_cumulative", (getter)Outputs_get_cf_subscriber4_net_benefit_cumulative,(setter)0,
+	PyDoc_STR("*sequence*: Cumulative net benefit for Subscriber 4 class [$]"),
+ 	NULL},
+{"cf_subscriber4_revenue_annual_payment", (getter)Outputs_get_cf_subscriber4_revenue_annual_payment,(setter)0,
+	PyDoc_STR("*sequence*: Revenue from Subscriber 4 annual payments [$]"),
+ 	NULL},
+{"cf_subscriber4_revenue_generation", (getter)Outputs_get_cf_subscriber4_revenue_generation,(setter)0,
+	PyDoc_STR("*sequence*: Revenue from Subscriber 4 generation [$]"),
+ 	NULL},
+{"cf_subscriber4_revenue_upfront", (getter)Outputs_get_cf_subscriber4_revenue_upfront,(setter)0,
+	PyDoc_STR("*sequence*: Revenue from Subscriber 4 up-front payments [$]"),
+ 	NULL},
+{"cf_subscriber4_share_fraction", (getter)Outputs_get_cf_subscriber4_share_fraction,(setter)0,
+	PyDoc_STR("*sequence*: Subscriber 4 Share of system capacity"),
+ 	NULL},
+{"cf_subscriber4_share_of_generation", (getter)Outputs_get_cf_subscriber4_share_of_generation,(setter)0,
+	PyDoc_STR("*sequence*: Subscriber 4 Share of generation [kWh]"),
  	NULL},
 {"cf_total_revenue", (getter)Outputs_get_cf_total_revenue,(setter)0,
-	PyDoc_STR("*sequence*: Total revenue to project [$]"),
+	PyDoc_STR("*sequence*: Total revenue [$]"),
+ 	NULL},
+{"cf_unsubscribed_share_fraction", (getter)Outputs_get_cf_unsubscribed_share_fraction,(setter)0,
+	PyDoc_STR("*sequence*: Unsubscribed share of system capacity"),
+ 	NULL},
+{"cf_unsubscribed_share_of_generation", (getter)Outputs_get_cf_unsubscribed_share_of_generation,(setter)0,
+	PyDoc_STR("*sequence*: Unsubscribed share of generation [kWh]"),
  	NULL},
 {"cf_util_escal_rate", (getter)Outputs_get_cf_util_escal_rate,(setter)0,
 	PyDoc_STR("*sequence*: Annual battery salvage value costs [$]"),
@@ -10811,14 +10825,20 @@ static PyGetSetDef Outputs_getset[] = {
 {"cf_utility_bill", (getter)Outputs_get_cf_utility_bill,(setter)0,
 	PyDoc_STR("*sequence*: Electricity purchase [$]"),
  	NULL},
+{"community_solar_upfront_cost", (getter)Outputs_get_community_solar_upfront_cost,(setter)0,
+	PyDoc_STR("*float*: Community solar total up-front cost [$]"),
+ 	NULL},
+{"community_solar_upfront_revenue", (getter)Outputs_get_community_solar_upfront_revenue,(setter)0,
+	PyDoc_STR("*float*: Revenue from total up-front payments [$]"),
+ 	NULL},
 {"cost_debt_upfront", (getter)Outputs_get_cost_debt_upfront,(setter)0,
 	PyDoc_STR("*float*: Debt up-front fee [$]"),
  	NULL},
 {"cost_financing", (getter)Outputs_get_cost_financing,(setter)0,
-	PyDoc_STR("*float*: Financing Cost [$]"),
+	PyDoc_STR("*float*: Financing cost [$]"),
  	NULL},
 {"cost_installed", (getter)Outputs_get_cost_installed,(setter)0,
-	PyDoc_STR("*float*: Net capital cost"),
+	PyDoc_STR("*float*: Net capital cost [$]"),
  	NULL},
 {"cost_installedperwatt", (getter)Outputs_get_cost_installedperwatt,(setter)0,
 	PyDoc_STR("*float*: Net capital cost per watt [$/W]"),
@@ -10884,28 +10904,28 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*float*: Total federal depreciation basis after ITC reduction [$]"),
  	NULL},
 {"depr_fedbas_cbi_reduc_custom", (getter)Outputs_get_depr_fedbas_cbi_reduc_custom,(setter)0,
-	PyDoc_STR("*float*: Custom straight line federal cbi reduction [$]"),
+	PyDoc_STR("*float*: Custom straight line federal CBI reduction [$]"),
  	NULL},
 {"depr_fedbas_cbi_reduc_macrs_15", (getter)Outputs_get_depr_fedbas_cbi_reduc_macrs_15,(setter)0,
-	PyDoc_STR("*float*: 15-yr MACRS federal cbi reduction [$]"),
+	PyDoc_STR("*float*: 15-yr MACRS federal CBI reduction [$]"),
  	NULL},
 {"depr_fedbas_cbi_reduc_macrs_5", (getter)Outputs_get_depr_fedbas_cbi_reduc_macrs_5,(setter)0,
-	PyDoc_STR("*float*: 5-yr MACRS federal cbi reduction [$]"),
+	PyDoc_STR("*float*: 5-yr MACRS federal CBI reduction [$]"),
  	NULL},
 {"depr_fedbas_cbi_reduc_sl_15", (getter)Outputs_get_depr_fedbas_cbi_reduc_sl_15,(setter)0,
-	PyDoc_STR("*float*: 15-yr straight line federal cbi reduction [$]"),
+	PyDoc_STR("*float*: 15-yr straight line federal CBI reduction [$]"),
  	NULL},
 {"depr_fedbas_cbi_reduc_sl_20", (getter)Outputs_get_depr_fedbas_cbi_reduc_sl_20,(setter)0,
-	PyDoc_STR("*float*: 20-yr straight line federal cbi reduction [$]"),
+	PyDoc_STR("*float*: 20-yr straight line federal CBI reduction [$]"),
  	NULL},
 {"depr_fedbas_cbi_reduc_sl_39", (getter)Outputs_get_depr_fedbas_cbi_reduc_sl_39,(setter)0,
-	PyDoc_STR("*float*: 39-yr straight line federal cbi reduction [$]"),
+	PyDoc_STR("*float*: 39-yr straight line federal CBI reduction [$]"),
  	NULL},
 {"depr_fedbas_cbi_reduc_sl_5", (getter)Outputs_get_depr_fedbas_cbi_reduc_sl_5,(setter)0,
-	PyDoc_STR("*float*: 5-yr straight line federal cbi reduction [$]"),
+	PyDoc_STR("*float*: 5-yr straight line federal CBI reduction [$]"),
  	NULL},
 {"depr_fedbas_cbi_reduc_total", (getter)Outputs_get_depr_fedbas_cbi_reduc_total,(setter)0,
-	PyDoc_STR("*float*: Total federal cbi reduction [$]"),
+	PyDoc_STR("*float*: Total federal CBI reduction [$]"),
  	NULL},
 {"depr_fedbas_custom", (getter)Outputs_get_depr_fedbas_custom,(setter)0,
 	PyDoc_STR("*float*: Custom straight line federal depreciation basis [$]"),
@@ -10959,76 +10979,76 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*float*: Total depreciation ITC basis from federal fixed amount [$]"),
  	NULL},
 {"depr_fedbas_ibi_reduc_custom", (getter)Outputs_get_depr_fedbas_ibi_reduc_custom,(setter)0,
-	PyDoc_STR("*float*: Custom straight line federal ibi reduction [$]"),
+	PyDoc_STR("*float*: Custom straight line federal IBI reduction [$]"),
  	NULL},
 {"depr_fedbas_ibi_reduc_macrs_15", (getter)Outputs_get_depr_fedbas_ibi_reduc_macrs_15,(setter)0,
-	PyDoc_STR("*float*: 15-yr MACRS federal ibi reduction [$]"),
+	PyDoc_STR("*float*: 15-yr MACRS federal IBI reduction [$]"),
  	NULL},
 {"depr_fedbas_ibi_reduc_macrs_5", (getter)Outputs_get_depr_fedbas_ibi_reduc_macrs_5,(setter)0,
-	PyDoc_STR("*float*: 5-yr MACRS federal ibi reduction [$]"),
+	PyDoc_STR("*float*: 5-yr MACRS federal IBI reduction [$]"),
  	NULL},
 {"depr_fedbas_ibi_reduc_sl_15", (getter)Outputs_get_depr_fedbas_ibi_reduc_sl_15,(setter)0,
-	PyDoc_STR("*float*: 15-yr straight line federal ibi reduction [$]"),
+	PyDoc_STR("*float*: 15-yr straight line federal IBI reduction [$]"),
  	NULL},
 {"depr_fedbas_ibi_reduc_sl_20", (getter)Outputs_get_depr_fedbas_ibi_reduc_sl_20,(setter)0,
-	PyDoc_STR("*float*: 20-yr straight line federal ibi reduction [$]"),
+	PyDoc_STR("*float*: 20-yr straight line federal IBI reduction [$]"),
  	NULL},
 {"depr_fedbas_ibi_reduc_sl_39", (getter)Outputs_get_depr_fedbas_ibi_reduc_sl_39,(setter)0,
-	PyDoc_STR("*float*: 39-yr straight line federal ibi reduction [$]"),
+	PyDoc_STR("*float*: 39-yr straight line federal IBI reduction [$]"),
  	NULL},
 {"depr_fedbas_ibi_reduc_sl_5", (getter)Outputs_get_depr_fedbas_ibi_reduc_sl_5,(setter)0,
-	PyDoc_STR("*float*: 5-yr straight line federal ibi reduction [$]"),
+	PyDoc_STR("*float*: 5-yr straight line federal IBI reduction [$]"),
  	NULL},
 {"depr_fedbas_ibi_reduc_total", (getter)Outputs_get_depr_fedbas_ibi_reduc_total,(setter)0,
-	PyDoc_STR("*float*: Total federal ibi reduction [$]"),
+	PyDoc_STR("*float*: Total federal IBI reduction [$]"),
  	NULL},
 {"depr_fedbas_itc_fed_reduction_custom", (getter)Outputs_get_depr_fedbas_itc_fed_reduction_custom,(setter)0,
-	PyDoc_STR("*float*: Custom straight line federal basis federal ITC reduciton [$]"),
+	PyDoc_STR("*float*: Custom straight line federal basis federal ITC reduction [$]"),
  	NULL},
 {"depr_fedbas_itc_fed_reduction_macrs_15", (getter)Outputs_get_depr_fedbas_itc_fed_reduction_macrs_15,(setter)0,
-	PyDoc_STR("*float*: 15-yr MACRS federal basis federal ITC reduciton [$]"),
+	PyDoc_STR("*float*: 15-yr MACRS federal basis federal ITC reduction [$]"),
  	NULL},
 {"depr_fedbas_itc_fed_reduction_macrs_5", (getter)Outputs_get_depr_fedbas_itc_fed_reduction_macrs_5,(setter)0,
-	PyDoc_STR("*float*: 5-yr MACRS federal basis federal ITC reduciton [$]"),
+	PyDoc_STR("*float*: 5-yr MACRS federal basis federal ITC reduction [$]"),
  	NULL},
 {"depr_fedbas_itc_fed_reduction_sl_15", (getter)Outputs_get_depr_fedbas_itc_fed_reduction_sl_15,(setter)0,
-	PyDoc_STR("*float*: 15-yr straight line federal basis federal ITC reduciton [$]"),
+	PyDoc_STR("*float*: 15-yr straight line federal basis federal ITC reduction [$]"),
  	NULL},
 {"depr_fedbas_itc_fed_reduction_sl_20", (getter)Outputs_get_depr_fedbas_itc_fed_reduction_sl_20,(setter)0,
-	PyDoc_STR("*float*: 20-yr straight line federal basis federal ITC reduciton [$]"),
+	PyDoc_STR("*float*: 20-yr straight line federal basis federal ITC reduction [$]"),
  	NULL},
 {"depr_fedbas_itc_fed_reduction_sl_39", (getter)Outputs_get_depr_fedbas_itc_fed_reduction_sl_39,(setter)0,
-	PyDoc_STR("*float*: 39-yr straight line federal basis federal ITC reduciton [$]"),
+	PyDoc_STR("*float*: 39-yr straight line federal basis federal ITC reduction [$]"),
  	NULL},
 {"depr_fedbas_itc_fed_reduction_sl_5", (getter)Outputs_get_depr_fedbas_itc_fed_reduction_sl_5,(setter)0,
-	PyDoc_STR("*float*: 5-yr straight line federal basis federal ITC reduciton [$]"),
+	PyDoc_STR("*float*: 5-yr straight line federal basis federal ITC reduction [$]"),
  	NULL},
 {"depr_fedbas_itc_fed_reduction_total", (getter)Outputs_get_depr_fedbas_itc_fed_reduction_total,(setter)0,
-	PyDoc_STR("*float*: Total federal basis federal ITC reduciton [$]"),
+	PyDoc_STR("*float*: Total federal basis federal ITC reduction [$]"),
  	NULL},
 {"depr_fedbas_itc_sta_reduction_custom", (getter)Outputs_get_depr_fedbas_itc_sta_reduction_custom,(setter)0,
-	PyDoc_STR("*float*: Custom straight line federal basis state ITC reduciton [$]"),
+	PyDoc_STR("*float*: Custom straight line federal basis state ITC reduction [$]"),
  	NULL},
 {"depr_fedbas_itc_sta_reduction_macrs_15", (getter)Outputs_get_depr_fedbas_itc_sta_reduction_macrs_15,(setter)0,
-	PyDoc_STR("*float*: 15-yr MACRS federal basis state ITC reduciton [$]"),
+	PyDoc_STR("*float*: 15-yr MACRS federal basis state ITC reduction [$]"),
  	NULL},
 {"depr_fedbas_itc_sta_reduction_macrs_5", (getter)Outputs_get_depr_fedbas_itc_sta_reduction_macrs_5,(setter)0,
-	PyDoc_STR("*float*: 5-yr MACRS federal basis state ITC reduciton [$]"),
+	PyDoc_STR("*float*: 5-yr MACRS federal basis state ITC reduction [$]"),
  	NULL},
 {"depr_fedbas_itc_sta_reduction_sl_15", (getter)Outputs_get_depr_fedbas_itc_sta_reduction_sl_15,(setter)0,
-	PyDoc_STR("*float*: 15-yr straight line federal basis state ITC reduciton [$]"),
+	PyDoc_STR("*float*: 15-yr straight line federal basis state ITC reduction [$]"),
  	NULL},
 {"depr_fedbas_itc_sta_reduction_sl_20", (getter)Outputs_get_depr_fedbas_itc_sta_reduction_sl_20,(setter)0,
-	PyDoc_STR("*float*: 20-yr straight line federal basis state ITC reduciton [$]"),
+	PyDoc_STR("*float*: 20-yr straight line federal basis state ITC reduction [$]"),
  	NULL},
 {"depr_fedbas_itc_sta_reduction_sl_39", (getter)Outputs_get_depr_fedbas_itc_sta_reduction_sl_39,(setter)0,
-	PyDoc_STR("*float*: 39-yr straight line federal basis state ITC reduciton [$]"),
+	PyDoc_STR("*float*: 39-yr straight line federal basis state ITC reduction [$]"),
  	NULL},
 {"depr_fedbas_itc_sta_reduction_sl_5", (getter)Outputs_get_depr_fedbas_itc_sta_reduction_sl_5,(setter)0,
-	PyDoc_STR("*float*: 5-yr straight line federal basis state ITC reduciton [$]"),
+	PyDoc_STR("*float*: 5-yr straight line federal basis state ITC reduction [$]"),
  	NULL},
 {"depr_fedbas_itc_sta_reduction_total", (getter)Outputs_get_depr_fedbas_itc_sta_reduction_total,(setter)0,
-	PyDoc_STR("*float*: Total federal basis state ITC reduciton [$]"),
+	PyDoc_STR("*float*: Total federal basis state ITC reduction [$]"),
  	NULL},
 {"depr_fedbas_macrs_15", (getter)Outputs_get_depr_fedbas_macrs_15,(setter)0,
 	PyDoc_STR("*float*: 15-yr MACRS federal depreciation basis [$]"),
@@ -11172,28 +11192,28 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*float*: Total state depreciation basis after ITC reduction [$]"),
  	NULL},
 {"depr_stabas_cbi_reduc_custom", (getter)Outputs_get_depr_stabas_cbi_reduc_custom,(setter)0,
-	PyDoc_STR("*float*: Custom straight line state cbi reduction [$]"),
+	PyDoc_STR("*float*: Custom straight line state CBI reduction [$]"),
  	NULL},
 {"depr_stabas_cbi_reduc_macrs_15", (getter)Outputs_get_depr_stabas_cbi_reduc_macrs_15,(setter)0,
-	PyDoc_STR("*float*: 15-yr MACRS state cbi reduction [$]"),
+	PyDoc_STR("*float*: 15-yr MACRS state CBI reduction [$]"),
  	NULL},
 {"depr_stabas_cbi_reduc_macrs_5", (getter)Outputs_get_depr_stabas_cbi_reduc_macrs_5,(setter)0,
-	PyDoc_STR("*float*: 5-yr MACRS state cbi reduction [$]"),
+	PyDoc_STR("*float*: 5-yr MACRS state CBI reduction [$]"),
  	NULL},
 {"depr_stabas_cbi_reduc_sl_15", (getter)Outputs_get_depr_stabas_cbi_reduc_sl_15,(setter)0,
-	PyDoc_STR("*float*: 15-yr straight line state cbi reduction [$]"),
+	PyDoc_STR("*float*: 15-yr straight line state CBI reduction [$]"),
  	NULL},
 {"depr_stabas_cbi_reduc_sl_20", (getter)Outputs_get_depr_stabas_cbi_reduc_sl_20,(setter)0,
-	PyDoc_STR("*float*: 20-yr straight line state cbi reduction [$]"),
+	PyDoc_STR("*float*: 20-yr straight line state CBI reduction [$]"),
  	NULL},
 {"depr_stabas_cbi_reduc_sl_39", (getter)Outputs_get_depr_stabas_cbi_reduc_sl_39,(setter)0,
-	PyDoc_STR("*float*: 39-yr straight line state cbi reduction [$]"),
+	PyDoc_STR("*float*: 39-yr straight line state CBI reduction [$]"),
  	NULL},
 {"depr_stabas_cbi_reduc_sl_5", (getter)Outputs_get_depr_stabas_cbi_reduc_sl_5,(setter)0,
-	PyDoc_STR("*float*: 5-yr straight line state cbi reduction [$]"),
+	PyDoc_STR("*float*: 5-yr straight line state CBI reduction [$]"),
  	NULL},
 {"depr_stabas_cbi_reduc_total", (getter)Outputs_get_depr_stabas_cbi_reduc_total,(setter)0,
-	PyDoc_STR("*float*: Total state cbi reduction [$]"),
+	PyDoc_STR("*float*: Total state CBI reduction [$]"),
  	NULL},
 {"depr_stabas_custom", (getter)Outputs_get_depr_stabas_custom,(setter)0,
 	PyDoc_STR("*float*: Custom straight line state depreciation basis [$]"),
@@ -11247,76 +11267,76 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*float*: Total depreciation ITC basis from state fixed amount [$]"),
  	NULL},
 {"depr_stabas_ibi_reduc_custom", (getter)Outputs_get_depr_stabas_ibi_reduc_custom,(setter)0,
-	PyDoc_STR("*float*: Custom straight line state ibi reduction [$]"),
+	PyDoc_STR("*float*: Custom straight line state IBI reduction [$]"),
  	NULL},
 {"depr_stabas_ibi_reduc_macrs_15", (getter)Outputs_get_depr_stabas_ibi_reduc_macrs_15,(setter)0,
-	PyDoc_STR("*float*: 15-yr MACRS state ibi reduction [$]"),
+	PyDoc_STR("*float*: 15-yr MACRS state IBI reduction [$]"),
  	NULL},
 {"depr_stabas_ibi_reduc_macrs_5", (getter)Outputs_get_depr_stabas_ibi_reduc_macrs_5,(setter)0,
-	PyDoc_STR("*float*: 5-yr MACRS state ibi reduction [$]"),
+	PyDoc_STR("*float*: 5-yr MACRS state IBI reduction [$]"),
  	NULL},
 {"depr_stabas_ibi_reduc_sl_15", (getter)Outputs_get_depr_stabas_ibi_reduc_sl_15,(setter)0,
-	PyDoc_STR("*float*: 15-yr straight line state ibi reduction [$]"),
+	PyDoc_STR("*float*: 15-yr straight line state IBI reduction [$]"),
  	NULL},
 {"depr_stabas_ibi_reduc_sl_20", (getter)Outputs_get_depr_stabas_ibi_reduc_sl_20,(setter)0,
-	PyDoc_STR("*float*: 20-yr straight line state ibi reduction [$]"),
+	PyDoc_STR("*float*: 20-yr straight line state IBI reduction [$]"),
  	NULL},
 {"depr_stabas_ibi_reduc_sl_39", (getter)Outputs_get_depr_stabas_ibi_reduc_sl_39,(setter)0,
-	PyDoc_STR("*float*: 39-yr straight line state ibi reduction [$]"),
+	PyDoc_STR("*float*: 39-yr straight line state IBI reduction [$]"),
  	NULL},
 {"depr_stabas_ibi_reduc_sl_5", (getter)Outputs_get_depr_stabas_ibi_reduc_sl_5,(setter)0,
-	PyDoc_STR("*float*: 5-yr straight line state ibi reduction [$]"),
+	PyDoc_STR("*float*: 5-yr straight line state IBI reduction [$]"),
  	NULL},
 {"depr_stabas_ibi_reduc_total", (getter)Outputs_get_depr_stabas_ibi_reduc_total,(setter)0,
-	PyDoc_STR("*float*: Total state ibi reduction [$]"),
+	PyDoc_STR("*float*: Total state IBI reduction [$]"),
  	NULL},
 {"depr_stabas_itc_fed_reduction_custom", (getter)Outputs_get_depr_stabas_itc_fed_reduction_custom,(setter)0,
-	PyDoc_STR("*float*: Custom straight line state basis federal ITC reduciton [$]"),
+	PyDoc_STR("*float*: Custom straight line state basis federal ITC reduction [$]"),
  	NULL},
 {"depr_stabas_itc_fed_reduction_macrs_15", (getter)Outputs_get_depr_stabas_itc_fed_reduction_macrs_15,(setter)0,
-	PyDoc_STR("*float*: 15-yr MACRS state basis federal ITC reduciton [$]"),
+	PyDoc_STR("*float*: 15-yr MACRS state basis federal ITC reduction [$]"),
  	NULL},
 {"depr_stabas_itc_fed_reduction_macrs_5", (getter)Outputs_get_depr_stabas_itc_fed_reduction_macrs_5,(setter)0,
-	PyDoc_STR("*float*: 5-yr MACRS state basis federal ITC reduciton [$]"),
+	PyDoc_STR("*float*: 5-yr MACRS state basis federal ITC reduction [$]"),
  	NULL},
 {"depr_stabas_itc_fed_reduction_sl_15", (getter)Outputs_get_depr_stabas_itc_fed_reduction_sl_15,(setter)0,
-	PyDoc_STR("*float*: 15-yr straight line state basis federal ITC reduciton [$]"),
+	PyDoc_STR("*float*: 15-yr straight line state basis federal ITC reduction [$]"),
  	NULL},
 {"depr_stabas_itc_fed_reduction_sl_20", (getter)Outputs_get_depr_stabas_itc_fed_reduction_sl_20,(setter)0,
-	PyDoc_STR("*float*: 20-yr straight line state basis federal ITC reduciton [$]"),
+	PyDoc_STR("*float*: 20-yr straight line state basis federal ITC reduction [$]"),
  	NULL},
 {"depr_stabas_itc_fed_reduction_sl_39", (getter)Outputs_get_depr_stabas_itc_fed_reduction_sl_39,(setter)0,
-	PyDoc_STR("*float*: 39-yr straight line state basis federal ITC reduciton [$]"),
+	PyDoc_STR("*float*: 39-yr straight line state basis federal ITC reduction [$]"),
  	NULL},
 {"depr_stabas_itc_fed_reduction_sl_5", (getter)Outputs_get_depr_stabas_itc_fed_reduction_sl_5,(setter)0,
-	PyDoc_STR("*float*: 5-yr straight line state basis federal ITC reduciton [$]"),
+	PyDoc_STR("*float*: 5-yr straight line state basis federal ITC reduction [$]"),
  	NULL},
 {"depr_stabas_itc_fed_reduction_total", (getter)Outputs_get_depr_stabas_itc_fed_reduction_total,(setter)0,
-	PyDoc_STR("*float*: Total state basis federal ITC reduciton [$]"),
+	PyDoc_STR("*float*: Total state basis federal ITC reduction [$]"),
  	NULL},
 {"depr_stabas_itc_sta_reduction_custom", (getter)Outputs_get_depr_stabas_itc_sta_reduction_custom,(setter)0,
-	PyDoc_STR("*float*: Custom straight line state basis state ITC reduciton [$]"),
+	PyDoc_STR("*float*: Custom straight line state basis state ITC reduction [$]"),
  	NULL},
 {"depr_stabas_itc_sta_reduction_macrs_15", (getter)Outputs_get_depr_stabas_itc_sta_reduction_macrs_15,(setter)0,
-	PyDoc_STR("*float*: 15-yr MACRS state basis state ITC reduciton [$]"),
+	PyDoc_STR("*float*: 15-yr MACRS state basis state ITC reduction [$]"),
  	NULL},
 {"depr_stabas_itc_sta_reduction_macrs_5", (getter)Outputs_get_depr_stabas_itc_sta_reduction_macrs_5,(setter)0,
-	PyDoc_STR("*float*: 5-yr MACRS state basis state ITC reduciton [$]"),
+	PyDoc_STR("*float*: 5-yr MACRS state basis state ITC reduction [$]"),
  	NULL},
 {"depr_stabas_itc_sta_reduction_sl_15", (getter)Outputs_get_depr_stabas_itc_sta_reduction_sl_15,(setter)0,
-	PyDoc_STR("*float*: 15-yr straight line state basis state ITC reduciton [$]"),
+	PyDoc_STR("*float*: 15-yr straight line state basis state ITC reduction [$]"),
  	NULL},
 {"depr_stabas_itc_sta_reduction_sl_20", (getter)Outputs_get_depr_stabas_itc_sta_reduction_sl_20,(setter)0,
-	PyDoc_STR("*float*: 20-yr straight line state basis state ITC reduciton [$]"),
+	PyDoc_STR("*float*: 20-yr straight line state basis state ITC reduction [$]"),
  	NULL},
 {"depr_stabas_itc_sta_reduction_sl_39", (getter)Outputs_get_depr_stabas_itc_sta_reduction_sl_39,(setter)0,
-	PyDoc_STR("*float*: 39-yr straight line state basis state ITC reduciton [$]"),
+	PyDoc_STR("*float*: 39-yr straight line state basis state ITC reduction [$]"),
  	NULL},
 {"depr_stabas_itc_sta_reduction_sl_5", (getter)Outputs_get_depr_stabas_itc_sta_reduction_sl_5,(setter)0,
-	PyDoc_STR("*float*: 5-yr straight line state basis state ITC reduciton [$]"),
+	PyDoc_STR("*float*: 5-yr straight line state basis state ITC reduction [$]"),
  	NULL},
 {"depr_stabas_itc_sta_reduction_total", (getter)Outputs_get_depr_stabas_itc_sta_reduction_total,(setter)0,
-	PyDoc_STR("*float*: Total state basis state ITC reduciton [$]"),
+	PyDoc_STR("*float*: Total state basis state ITC reduction [$]"),
  	NULL},
 {"depr_stabas_macrs_15", (getter)Outputs_get_depr_stabas_macrs_15,(setter)0,
 	PyDoc_STR("*float*: 15-yr MACRS state depreciation basis [$]"),
@@ -11438,87 +11458,6 @@ static PyGetSetDef Outputs_getset[] = {
 {"effective_tax_rate", (getter)Outputs_get_effective_tax_rate,(setter)0,
 	PyDoc_STR("*float*: Effective tax rate [%]"),
  	NULL},
-{"firstyear_energy_dispatch1", (getter)Outputs_get_firstyear_energy_dispatch1,(setter)0,
-	PyDoc_STR("*float*: Energy produced in Year 1 TOD period 1 [kWh]"),
- 	NULL},
-{"firstyear_energy_dispatch2", (getter)Outputs_get_firstyear_energy_dispatch2,(setter)0,
-	PyDoc_STR("*float*: Energy produced in Year 1 TOD period 2 [kWh]"),
- 	NULL},
-{"firstyear_energy_dispatch3", (getter)Outputs_get_firstyear_energy_dispatch3,(setter)0,
-	PyDoc_STR("*float*: Energy produced in Year 1 TOD period 3 [kWh]"),
- 	NULL},
-{"firstyear_energy_dispatch4", (getter)Outputs_get_firstyear_energy_dispatch4,(setter)0,
-	PyDoc_STR("*float*: Energy produced in Year 1 TOD period 4 [kWh]"),
- 	NULL},
-{"firstyear_energy_dispatch5", (getter)Outputs_get_firstyear_energy_dispatch5,(setter)0,
-	PyDoc_STR("*float*: Energy produced in Year 1 TOD period 5 [kWh]"),
- 	NULL},
-{"firstyear_energy_dispatch6", (getter)Outputs_get_firstyear_energy_dispatch6,(setter)0,
-	PyDoc_STR("*float*: Energy produced in Year 1 TOD period 6 [kWh]"),
- 	NULL},
-{"firstyear_energy_dispatch7", (getter)Outputs_get_firstyear_energy_dispatch7,(setter)0,
-	PyDoc_STR("*float*: Energy produced in Year 1 TOD period 7 [kWh]"),
- 	NULL},
-{"firstyear_energy_dispatch8", (getter)Outputs_get_firstyear_energy_dispatch8,(setter)0,
-	PyDoc_STR("*float*: Energy produced in Year 1 TOD period 8 [kWh]"),
- 	NULL},
-{"firstyear_energy_dispatch9", (getter)Outputs_get_firstyear_energy_dispatch9,(setter)0,
-	PyDoc_STR("*float*: Energy produced in Year 1 TOD period 9 [kWh]"),
- 	NULL},
-{"firstyear_energy_price1", (getter)Outputs_get_firstyear_energy_price1,(setter)0,
-	PyDoc_STR("*float*: Power price in Year 1 TOD period 1 [cents/kWh]"),
- 	NULL},
-{"firstyear_energy_price2", (getter)Outputs_get_firstyear_energy_price2,(setter)0,
-	PyDoc_STR("*float*: Power price in Year 1 TOD period 2 [cents/kWh]"),
- 	NULL},
-{"firstyear_energy_price3", (getter)Outputs_get_firstyear_energy_price3,(setter)0,
-	PyDoc_STR("*float*: Power price in Year 1 TOD period 3 [cents/kWh]"),
- 	NULL},
-{"firstyear_energy_price4", (getter)Outputs_get_firstyear_energy_price4,(setter)0,
-	PyDoc_STR("*float*: Power price in Year 1 TOD period 4 [cents/kWh]"),
- 	NULL},
-{"firstyear_energy_price5", (getter)Outputs_get_firstyear_energy_price5,(setter)0,
-	PyDoc_STR("*float*: Power price in Year 1 TOD period 5 [cents/kWh]"),
- 	NULL},
-{"firstyear_energy_price6", (getter)Outputs_get_firstyear_energy_price6,(setter)0,
-	PyDoc_STR("*float*: Power price in Year 1 TOD period 6 [cents/kWh]"),
- 	NULL},
-{"firstyear_energy_price7", (getter)Outputs_get_firstyear_energy_price7,(setter)0,
-	PyDoc_STR("*float*: Power price in Year 1 TOD period 7 [cents/kWh]"),
- 	NULL},
-{"firstyear_energy_price8", (getter)Outputs_get_firstyear_energy_price8,(setter)0,
-	PyDoc_STR("*float*: Power price in Year 1 TOD period 8 [cents/kWh]"),
- 	NULL},
-{"firstyear_energy_price9", (getter)Outputs_get_firstyear_energy_price9,(setter)0,
-	PyDoc_STR("*float*: Power price in Year 1 TOD period 9 [cents/kWh]"),
- 	NULL},
-{"firstyear_revenue_dispatch1", (getter)Outputs_get_firstyear_revenue_dispatch1,(setter)0,
-	PyDoc_STR("*float*: PPA Revenue in Year 1 TOD period 1 [$]"),
- 	NULL},
-{"firstyear_revenue_dispatch2", (getter)Outputs_get_firstyear_revenue_dispatch2,(setter)0,
-	PyDoc_STR("*float*: PPA Revenue in Year 1 TOD period 2 [$]"),
- 	NULL},
-{"firstyear_revenue_dispatch3", (getter)Outputs_get_firstyear_revenue_dispatch3,(setter)0,
-	PyDoc_STR("*float*: PPA Revenue in Year 1 TOD period 3 [$]"),
- 	NULL},
-{"firstyear_revenue_dispatch4", (getter)Outputs_get_firstyear_revenue_dispatch4,(setter)0,
-	PyDoc_STR("*float*: PPA Revenue in Year 1 TOD period 4 [$]"),
- 	NULL},
-{"firstyear_revenue_dispatch5", (getter)Outputs_get_firstyear_revenue_dispatch5,(setter)0,
-	PyDoc_STR("*float*: PPA Revenue in Year 1 TOD period 5 [$]"),
- 	NULL},
-{"firstyear_revenue_dispatch6", (getter)Outputs_get_firstyear_revenue_dispatch6,(setter)0,
-	PyDoc_STR("*float*: PPA Revenue in Year 1 TOD period 6 [$]"),
- 	NULL},
-{"firstyear_revenue_dispatch7", (getter)Outputs_get_firstyear_revenue_dispatch7,(setter)0,
-	PyDoc_STR("*float*: PPA Revenue in Year 1 TOD period 7 [$]"),
- 	NULL},
-{"firstyear_revenue_dispatch8", (getter)Outputs_get_firstyear_revenue_dispatch8,(setter)0,
-	PyDoc_STR("*float*: PPA Revenue in Year 1 TOD period 8 [$]"),
- 	NULL},
-{"firstyear_revenue_dispatch9", (getter)Outputs_get_firstyear_revenue_dispatch9,(setter)0,
-	PyDoc_STR("*float*: PPA Revenue in Year 1 TOD period 9 [$]"),
- 	NULL},
 {"flip_actual_irr", (getter)Outputs_get_flip_actual_irr,(setter)0,
 	PyDoc_STR("*float*: IRR in target year [%]"),
  	NULL},
@@ -11530,6 +11469,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"flip_target_year", (getter)Outputs_get_flip_target_year,(setter)0,
 	PyDoc_STR("*float*: Target year to meet IRR"),
+ 	NULL},
+{"gen_purchases", (getter)Outputs_get_gen_purchases,(setter)0,
+	PyDoc_STR("*sequence*: Electricity from grid [kW]"),
  	NULL},
 {"ibi_fedtax_total", (getter)Outputs_get_ibi_fedtax_total,(setter)0,
 	PyDoc_STR("*float*: Federal taxable IBI income [$]"),
@@ -11726,6 +11668,24 @@ static PyGetSetDef Outputs_getset[] = {
 {"lcoe_real", (getter)Outputs_get_lcoe_real,(setter)0,
 	PyDoc_STR("*float*: Levelized cost (real) [cents/kWh]"),
  	NULL},
+{"lcog", (getter)Outputs_get_lcog,(setter)0,
+	PyDoc_STR("*float*: LCOG Levelized cost of generation [cents/kWh]"),
+ 	NULL},
+{"lcog_depr", (getter)Outputs_get_lcog_depr,(setter)0,
+	PyDoc_STR("*float*: LCOG depreciation [cents/kWh]"),
+ 	NULL},
+{"lcog_loan_int", (getter)Outputs_get_lcog_loan_int,(setter)0,
+	PyDoc_STR("*float*: LCOG loan interest [cents/kWh]"),
+ 	NULL},
+{"lcog_om", (getter)Outputs_get_lcog_om,(setter)0,
+	PyDoc_STR("*float*: LCOG O and M [cents/kWh]"),
+ 	NULL},
+{"lcog_roe", (getter)Outputs_get_lcog_roe,(setter)0,
+	PyDoc_STR("*float*: LCOG return on equity [cents/kWh]"),
+ 	NULL},
+{"lcog_wc_int", (getter)Outputs_get_lcog_wc_int,(setter)0,
+	PyDoc_STR("*float*: LCOG working capital interest [cents/kWh]"),
+ 	NULL},
 {"lcoptc_fed_nom", (getter)Outputs_get_lcoptc_fed_nom,(setter)0,
 	PyDoc_STR("*float*: Levelized federal PTC (nominal) [cents/kWh]"),
  	NULL},
@@ -11744,12 +11704,6 @@ static PyGetSetDef Outputs_getset[] = {
 {"lcos_real", (getter)Outputs_get_lcos_real,(setter)0,
 	PyDoc_STR("*float*: Levelized cost of storage (real) [cents/kWh]"),
  	NULL},
-{"lppa_nom", (getter)Outputs_get_lppa_nom,(setter)0,
-	PyDoc_STR("*float*: Levelized PPA price (nominal) [cents/kWh]"),
- 	NULL},
-{"lppa_real", (getter)Outputs_get_lppa_real,(setter)0,
-	PyDoc_STR("*float*: Levelized PPA price (real) [cents/kWh]"),
- 	NULL},
 {"min_dscr", (getter)Outputs_get_min_dscr,(setter)0,
 	PyDoc_STR("*float*: Minimum DSCR"),
  	NULL},
@@ -11761,6 +11715,12 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"npv_annual_costs_lcos", (getter)Outputs_get_npv_annual_costs_lcos,(setter)0,
 	PyDoc_STR("*float*: Present value of annual storage costs [$]"),
+ 	NULL},
+{"npv_capacity_revenue", (getter)Outputs_get_npv_capacity_revenue,(setter)0,
+	PyDoc_STR("*float*: Present value of capacity payment revenue [$]"),
+ 	NULL},
+{"npv_curtailment_revenue", (getter)Outputs_get_npv_curtailment_revenue,(setter)0,
+	PyDoc_STR("*float*: Present value of curtailment payment revenue [$]"),
  	NULL},
 {"npv_energy_lcos_nom", (getter)Outputs_get_npv_energy_lcos_nom,(setter)0,
 	PyDoc_STR("*float*: Present value of annual stored energy (nominal) [kWh]"),
@@ -11774,20 +11734,26 @@ static PyGetSetDef Outputs_getset[] = {
 {"npv_energy_real", (getter)Outputs_get_npv_energy_real,(setter)0,
 	PyDoc_STR("*float*: Present value of annual energy (real) [kWh]"),
  	NULL},
-{"npv_ppa_revenue", (getter)Outputs_get_npv_ppa_revenue,(setter)0,
-	PyDoc_STR("*float*: Present value of PPA revenue [$]"),
+{"npv_fed_pbi_income", (getter)Outputs_get_npv_fed_pbi_income,(setter)0,
+	PyDoc_STR("*float*: Present value of federal PBI income [$]"),
  	NULL},
-{"ppa", (getter)Outputs_get_ppa,(setter)0,
-	PyDoc_STR("*float*: PPA price (Year 1) [cents/kWh]"),
+{"npv_oth_pbi_income", (getter)Outputs_get_npv_oth_pbi_income,(setter)0,
+	PyDoc_STR("*float*: Present value of other PBI income [$]"),
  	NULL},
-{"ppa_escalation", (getter)Outputs_get_ppa_escalation,(setter)0,
-	PyDoc_STR("*float*: PPA price escalation [%/year]"),
+{"npv_salvage_value", (getter)Outputs_get_npv_salvage_value,(setter)0,
+	PyDoc_STR("*float*: Present value of salvage value [$]"),
  	NULL},
-{"ppa_multipliers", (getter)Outputs_get_ppa_multipliers,(setter)0,
-	PyDoc_STR("*sequence*: TOD factors"),
+{"npv_sta_pbi_income", (getter)Outputs_get_npv_sta_pbi_income,(setter)0,
+	PyDoc_STR("*float*: Present value of state PBI income [$]"),
+ 	NULL},
+{"npv_thermal_value", (getter)Outputs_get_npv_thermal_value,(setter)0,
+	PyDoc_STR("*float*: Present value of thermal value [$]"),
+ 	NULL},
+{"npv_uti_pbi_income", (getter)Outputs_get_npv_uti_pbi_income,(setter)0,
+	PyDoc_STR("*float*: Present value of utility PBI income [$]"),
  	NULL},
 {"ppa_price", (getter)Outputs_get_ppa_price,(setter)0,
-	PyDoc_STR("*float*: Initial year PPA price [cents/kWh]"),
+	PyDoc_STR("*float*: PPA price in first year [cents/kWh]"),
  	NULL},
 {"present_value_fuel", (getter)Outputs_get_present_value_fuel,(setter)0,
 	PyDoc_STR("*float*: Present value of fuel O&M [$]"),
@@ -11801,6 +11767,12 @@ static PyGetSetDef Outputs_getset[] = {
 {"present_value_oandm_nonfuel", (getter)Outputs_get_present_value_oandm_nonfuel,(setter)0,
 	PyDoc_STR("*float*: Present value of non-fuel O&M [$]"),
  	NULL},
+{"project_return_aftertax_irr", (getter)Outputs_get_project_return_aftertax_irr,(setter)0,
+	PyDoc_STR("*float*: Internal rate of return (IRR, after-tax) [%]"),
+ 	NULL},
+{"project_return_aftertax_npv", (getter)Outputs_get_project_return_aftertax_npv,(setter)0,
+	PyDoc_STR("*float*: Net present value (NPV, after-tax) [$]"),
+ 	NULL},
 {"prop_tax_assessed_value", (getter)Outputs_get_prop_tax_assessed_value,(setter)0,
 	PyDoc_STR("*float*: Assessed value of property for tax purposes [$]"),
  	NULL},
@@ -11808,52 +11780,31 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*float*: Purchase of property [$]"),
  	NULL},
 {"pv_cafds", (getter)Outputs_get_pv_cafds,(setter)0,
-	PyDoc_STR("*float*: Present value of cash available for debt service [$]"),
+	PyDoc_STR("*float*: Present value of CAFDS [$]"),
+ 	NULL},
+{"revenue_gen", (getter)Outputs_get_revenue_gen,(setter)0,
+	PyDoc_STR("*sequence*: Electricity to grid [kW]"),
  	NULL},
 {"salvage_value", (getter)Outputs_get_salvage_value,(setter)0,
 	PyDoc_STR("*float*: Net pre-tax cash salvage value [$]"),
  	NULL},
 {"size_of_debt", (getter)Outputs_get_size_of_debt,(setter)0,
-	PyDoc_STR("*float*: Total debt"),
+	PyDoc_STR("*float*: Size of debt [$]"),
  	NULL},
 {"size_of_equity", (getter)Outputs_get_size_of_equity,(setter)0,
-	PyDoc_STR("*float*: Total equity"),
+	PyDoc_STR("*float*: Equity [$]"),
  	NULL},
-{"sponsor_aftertax_development", (getter)Outputs_get_sponsor_aftertax_development,(setter)0,
-	PyDoc_STR("*float*: Developer after-tax development fee [$]"),
+{"subscriber1_npv", (getter)Outputs_get_subscriber1_npv,(setter)0,
+	PyDoc_STR("*float*: Subscriber 1 Net present value (NPV) [$]"),
  	NULL},
-{"sponsor_aftertax_equity", (getter)Outputs_get_sponsor_aftertax_equity,(setter)0,
-	PyDoc_STR("*float*: Developer equity investment [$]"),
+{"subscriber2_npv", (getter)Outputs_get_subscriber2_npv,(setter)0,
+	PyDoc_STR("*float*: Subscriber 2 Net present value (NPV) [$]"),
  	NULL},
-{"sponsor_aftertax_irr", (getter)Outputs_get_sponsor_aftertax_irr,(setter)0,
-	PyDoc_STR("*float*: Developer after-tax IRR at end of project [%]"),
+{"subscriber3_npv", (getter)Outputs_get_subscriber3_npv,(setter)0,
+	PyDoc_STR("*float*: Subscriber 3 Net present value (NPV) [$]"),
  	NULL},
-{"sponsor_aftertax_npv", (getter)Outputs_get_sponsor_aftertax_npv,(setter)0,
-	PyDoc_STR("*float*: Developer after-tax NPV [$]"),
- 	NULL},
-{"sponsor_pretax_development", (getter)Outputs_get_sponsor_pretax_development,(setter)0,
-	PyDoc_STR("*float*: Development fee [$]"),
- 	NULL},
-{"sponsor_pretax_equity", (getter)Outputs_get_sponsor_pretax_equity,(setter)0,
-	PyDoc_STR("*float*: Developer equity investment [$]"),
- 	NULL},
-{"sponsor_pretax_irr", (getter)Outputs_get_sponsor_pretax_irr,(setter)0,
-	PyDoc_STR("*float*: Developer pre-tax IRR at end of project [%]"),
- 	NULL},
-{"sponsor_pretax_npv", (getter)Outputs_get_sponsor_pretax_npv,(setter)0,
-	PyDoc_STR("*float*: Developer pre-tax NPV [$]"),
- 	NULL},
-{"tax_investor_aftertax_irr", (getter)Outputs_get_tax_investor_aftertax_irr,(setter)0,
-	PyDoc_STR("*float*: Investor after-tax IRR at end of project [%]"),
- 	NULL},
-{"tax_investor_aftertax_npv", (getter)Outputs_get_tax_investor_aftertax_npv,(setter)0,
-	PyDoc_STR("*float*: Investor after-tax NPV [$]"),
- 	NULL},
-{"tax_investor_pretax_irr", (getter)Outputs_get_tax_investor_pretax_irr,(setter)0,
-	PyDoc_STR("*float*: Investor pre-tax IRR at end of project [%]"),
- 	NULL},
-{"tax_investor_pretax_npv", (getter)Outputs_get_tax_investor_pretax_npv,(setter)0,
-	PyDoc_STR("*float*: Iinvestor pre-tax NPV [$]"),
+{"subscriber4_npv", (getter)Outputs_get_subscriber4_npv,(setter)0,
+	PyDoc_STR("*float*: Subscriber 4 Net present value (NPV) [$]"),
  	NULL},
 {"wacc", (getter)Outputs_get_wacc,(setter)0,
 	PyDoc_STR("*float*: Weighted average cost of capital (WACC) [$]"),
@@ -11865,7 +11816,7 @@ static PyTypeObject Outputs_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"Levpartflip.Outputs",             /*tp_name*/
+		"Communitysolar.Outputs",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -11908,22 +11859,18 @@ static PyTypeObject Outputs_Type = {
 };
 
 /*
- * Levpartflip
+ * Communitysolar
  */
 
-static PyTypeObject Levpartflip_Type;
+static PyTypeObject Communitysolar_Type;
 
 static CmodObject *
-newLevpartflipObject(void* data_ptr)
+newCommunitysolarObject(void* data_ptr)
 {
 	CmodObject *self;
-	self = PyObject_New(CmodObject, &Levpartflip_Type);
+	self = PyObject_New(CmodObject, &Communitysolar_Type);
 
 	PySAM_TECH_ATTR()
-
-	PyObject* Revenue_obj = Revenue_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "Revenue", Revenue_obj);
-	Py_DECREF(Revenue_obj);
 
 	PyObject* FinancialParameters_obj = FinancialParameters_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "FinancialParameters", FinancialParameters_obj);
@@ -11949,41 +11896,41 @@ newLevpartflipObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "PaymentIncentives", PaymentIncentives_obj);
 	Py_DECREF(PaymentIncentives_obj);
 
-	PyObject* SystemOutput_obj = SystemOutput_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "SystemOutput", SystemOutput_obj);
-	Py_DECREF(SystemOutput_obj);
+	PyObject* Revenue_obj = Revenue_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "Revenue", Revenue_obj);
+	Py_DECREF(Revenue_obj);
+
+	PyObject* BatterySystem_obj = BatterySystem_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "BatterySystem", BatterySystem_obj);
+	Py_DECREF(BatterySystem_obj);
 
 	PyObject* ElectricityRates_obj = ElectricityRates_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "ElectricityRates", ElectricityRates_obj);
 	Py_DECREF(ElectricityRates_obj);
 
-	PyObject* Moratorium_obj = Moratorium_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "Moratorium", Moratorium_obj);
-	Py_DECREF(Moratorium_obj);
-
-	PyObject* Recapitalization_obj = Recapitalization_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "Recapitalization", Recapitalization_obj);
-	Py_DECREF(Recapitalization_obj);
-
-	PyObject* TimeOfDelivery_obj = TimeOfDelivery_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "TimeOfDelivery", TimeOfDelivery_obj);
-	Py_DECREF(TimeOfDelivery_obj);
+	PyObject* SystemOutput_obj = SystemOutput_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "SystemOutput", SystemOutput_obj);
+	Py_DECREF(SystemOutput_obj);
 
 	PyObject* UtilityBill_obj = UtilityBill_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "UtilityBill", UtilityBill_obj);
 	Py_DECREF(UtilityBill_obj);
 
-	PyObject* ConstructionFinancing_obj = ConstructionFinancing_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "ConstructionFinancing", ConstructionFinancing_obj);
-	Py_DECREF(ConstructionFinancing_obj);
+	PyObject* Lifetime_obj = Lifetime_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "Lifetime", Lifetime_obj);
+	Py_DECREF(Lifetime_obj);
 
-	PyObject* OtherCapitalCosts_obj = OtherCapitalCosts_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "OtherCapitalCosts", OtherCapitalCosts_obj);
-	Py_DECREF(OtherCapitalCosts_obj);
+	PyObject* CommunitySolar_obj = CommunitySolar_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "CommunitySolar", CommunitySolar_obj);
+	Py_DECREF(CommunitySolar_obj);
 
-	PyObject* IRRTargets_obj = IRRTargets_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "IRRTargets", IRRTargets_obj);
-	Py_DECREF(IRRTargets_obj);
+	PyObject* FuelCell_obj = FuelCell_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "FuelCell", FuelCell_obj);
+	Py_DECREF(FuelCell_obj);
+
+	PyObject* GridLimits_obj = GridLimits_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "GridLimits", GridLimits_obj);
+	Py_DECREF(GridLimits_obj);
 
 	PyObject* LCOS_obj = LCOS_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "LCOS", LCOS_obj);
@@ -11993,10 +11940,6 @@ newLevpartflipObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "ChargesByMonth", ChargesByMonth_obj);
 	Py_DECREF(ChargesByMonth_obj);
 
-	PyObject* BatterySystem_obj = BatterySystem_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "BatterySystem", BatterySystem_obj);
-	Py_DECREF(BatterySystem_obj);
-
 	PyObject* Outputs_obj = Outputs_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
 	Py_DECREF(Outputs_obj);
@@ -12004,10 +11947,10 @@ newLevpartflipObject(void* data_ptr)
 	return self;
 }
 
-/* Levpartflip methods */
+/* Communitysolar methods */
 
 static void
-Levpartflip_dealloc(CmodObject *self)
+Communitysolar_dealloc(CmodObject *self)
 {
 	Py_XDECREF(self->x_attr);
 
@@ -12021,7 +11964,7 @@ Levpartflip_dealloc(CmodObject *self)
 
 
 static PyObject *
-Levpartflip_execute(CmodObject *self, PyObject *args)
+Communitysolar_execute(CmodObject *self, PyObject *args)
 {
 	int verbosity = 0;
 
@@ -12029,7 +11972,7 @@ Levpartflip_execute(CmodObject *self, PyObject *args)
 		return NULL;
 
 	SAM_error error = new_error();
-	SAM_Levpartflip_execute(self->data_ptr, verbosity, &error);
+	SAM_Communitysolar_execute(self->data_ptr, verbosity, &error);
 	if (PySAM_has_error(error )) return NULL;
 	Py_INCREF(Py_None);
 	return Py_None;
@@ -12037,14 +11980,14 @@ Levpartflip_execute(CmodObject *self, PyObject *args)
 
 
 static PyObject *
-Levpartflip_assign(CmodObject *self, PyObject *args)
+Communitysolar_assign(CmodObject *self, PyObject *args)
 {
 	PyObject* dict;
 	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_nested_dict((PyObject*)self, self->x_attr, self->data_ptr, dict, "Levpartflip"))
+	if (!PySAM_assign_from_nested_dict((PyObject*)self, self->x_attr, self->data_ptr, dict, "Communitysolar"))
 		return NULL;
 
 	Py_INCREF(Py_None);
@@ -12052,14 +11995,14 @@ Levpartflip_assign(CmodObject *self, PyObject *args)
 }
 
 static PyObject *
-Levpartflip_replace(CmodObject *self, PyObject *args)
+Communitysolar_replace(CmodObject *self, PyObject *args)
 {
 	PyObject* dict;
 	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
 		return NULL;
 	}
 
-	if (!PySAM_replace_from_nested_dict((PyObject*)self, self->x_attr, self->data_ptr, dict, "Levpartflip"))
+	if (!PySAM_replace_from_nested_dict((PyObject*)self, self->x_attr, self->data_ptr, dict, "Communitysolar"))
 		return NULL;
 
 	Py_INCREF(Py_None);
@@ -12067,63 +12010,63 @@ Levpartflip_replace(CmodObject *self, PyObject *args)
 }
 
 static PyObject *
-Levpartflip_export(CmodObject *self, PyObject *args)
+Communitysolar_export(CmodObject *self, PyObject *args)
 {
 	return PySAM_export_to_nested_dict((PyObject *) self, self->x_attr);
 }
 
 static PyObject *
-Levpartflip_value(CmodObject *self, PyObject *args)
+Communitysolar_value(CmodObject *self, PyObject *args)
 {
 	return Cmod_value(self, args);
 }
 
 static PyObject *
-Levpartflip_unassign(CmodObject *self, PyObject *args)
+Communitysolar_unassign(CmodObject *self, PyObject *args)
 {
 	return Cmod_unassign(self, args);
 }
 
-static PyMethodDef Levpartflip_methods[] = {
-		{"execute",           (PyCFunction)Levpartflip_execute,  METH_VARARGS,
+static PyMethodDef Communitysolar_methods[] = {
+		{"execute",           (PyCFunction)Communitysolar_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
-		{"assign",            (PyCFunction)Levpartflip_assign,  METH_VARARGS,
-				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Revenue': { var: val, ...}, ...}``")},
-		{"replace",            (PyCFunction)Levpartflip_replace,  METH_VARARGS,
-				PyDoc_STR("replace(dict) -> None\n Replace attributes from nested dictionary, except for Outputs. Unassigns all values in each Group then assigns from the input dict.\n\n``nested_dict = { 'Revenue': { var: val, ...}, ...}``")},
-		{"export",            (PyCFunction)Levpartflip_export,  METH_VARARGS,
+		{"assign",            (PyCFunction)Communitysolar_assign,  METH_VARARGS,
+				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Financial Parameters': { var: val, ...}, ...}``")},
+		{"replace",            (PyCFunction)Communitysolar_replace,  METH_VARARGS,
+				PyDoc_STR("replace(dict) -> None\n Replace attributes from nested dictionary, except for Outputs. Unassigns all values in each Group then assigns from the input dict.\n\n``nested_dict = { 'Financial Parameters': { var: val, ...}, ...}``")},
+		{"export",            (PyCFunction)Communitysolar_export,  METH_VARARGS,
 				PyDoc_STR("export() -> dict\n Export attributes into nested dictionary")},
-		{"value",             (PyCFunction)Levpartflip_value, METH_VARARGS,
+		{"value",             (PyCFunction)Communitysolar_value, METH_VARARGS,
 				PyDoc_STR("value(name, optional value) -> Union[None, float, dict, sequence, str]\n Get or set by name a value in any of the variable groups.")},
-		{"unassign",          (PyCFunction)Levpartflip_unassign, METH_VARARGS,
+		{"unassign",          (PyCFunction)Communitysolar_unassign, METH_VARARGS,
 				PyDoc_STR("unassign(name) -> None\n Unassign a value in any of the variable groups.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 static PyObject *
-Levpartflip_getattro(CmodObject *self, PyObject *name)
+Communitysolar_getattro(CmodObject *self, PyObject *name)
 {
 	return PySAM_get_attr((PyObject*) self, (PyObject*) self->x_attr, name);
 }
 
 static int
-Levpartflip_setattr(CmodObject *self, const char *name, PyObject *v)
+Communitysolar_setattr(CmodObject *self, const char *name, PyObject *v)
 {
 	return PySAM_set_attr((PyObject*)self, (PyObject*)self->x_attr, name, v);
 }
 
-static PyTypeObject Levpartflip_Type = {
+static PyTypeObject Communitysolar_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"Levpartflip",            /*tp_name*/
+		"Communitysolar",            /*tp_name*/
 		sizeof(CmodObject),/*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
-		(destructor)Levpartflip_dealloc,    /*tp_dealloc*/
+		(destructor)Communitysolar_dealloc,    /*tp_dealloc*/
 		0,                          /*tp_print*/
 		(getattrfunc)0,             /*tp_getattr*/
-		(setattrfunc)Levpartflip_setattr,   /*tp_setattr*/
+		(setattrfunc)Communitysolar_setattr,   /*tp_setattr*/
 		0,                          /*tp_reserved*/
 		0,                          /*tp_repr*/
 		0,                          /*tp_as_number*/
@@ -12132,7 +12075,7 @@ static PyTypeObject Levpartflip_Type = {
 		0,                          /*tp_hash*/
 		0,                          /*tp_call*/
 		0,                          /*tp_str*/
-		(getattrofunc)Levpartflip_getattro, /*tp_getattro*/
+		(getattrofunc)Communitysolar_getattro, /*tp_getattro*/
 		0,                          /*tp_setattro*/
 		0,                          /*tp_as_buffer*/
 		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
@@ -12143,7 +12086,7 @@ static PyTypeObject Levpartflip_Type = {
 		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
-		Levpartflip_methods,      /*tp_methods*/
+		Communitysolar_methods,      /*tp_methods*/
 		0,                          /*tp_members*/
 		0,       /*tp_getset*/
 		0,                          /*tp_base*/
@@ -12161,13 +12104,13 @@ static PyTypeObject Levpartflip_Type = {
 /* --------------------------------------------------------------------- */
 
 
-/* Function of no arguments returning new Levpartflip object */
+/* Function of no arguments returning new Communitysolar object */
 
 static PyObject *
-Levpartflip_new(PyObject *self, PyObject *args)
+Communitysolar_new(PyObject *self, PyObject *args)
 {
 	CmodObject *rv;
-	rv = newLevpartflipObject(0);
+	rv = newCommunitysolarObject(0);
 	if (rv == NULL)
 		return NULL;
 
@@ -12176,7 +12119,7 @@ Levpartflip_new(PyObject *self, PyObject *args)
 }
 
 static PyObject *
-Levpartflip_wrap(PyObject *self, PyObject *args)
+Communitysolar_wrap(PyObject *self, PyObject *args)
 {
 	CmodObject *rv;
 	long long int ptr = 0;  // 64 bit arch
@@ -12184,7 +12127,7 @@ Levpartflip_wrap(PyObject *self, PyObject *args)
 		PyErr_BadArgument();
 		return NULL;
 	}
-	rv = newLevpartflipObject((void*)ptr);
+	rv = newCommunitysolarObject((void*)ptr);
 	if (rv == NULL)
 		return NULL;
 
@@ -12193,7 +12136,7 @@ Levpartflip_wrap(PyObject *self, PyObject *args)
 }
 
 static PyObject *
-Levpartflip_default(PyObject *self, PyObject *args)
+Communitysolar_default(PyObject *self, PyObject *args)
 {
 	CmodObject *rv;
 	char* def = 0;
@@ -12201,20 +12144,20 @@ Levpartflip_default(PyObject *self, PyObject *args)
 		PyErr_BadArgument();
 		return NULL;
 	}
-	rv = newLevpartflipObject(0);
+	rv = newCommunitysolarObject(0);
 	if (rv == NULL)
 		return NULL;
 
 	rv->data_owner_ptr = NULL;
-	if (PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Levpartflip", def) < 0) {
-		Levpartflip_dealloc(rv);
+	if (PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Communitysolar", def) < 0) {
+		Communitysolar_dealloc(rv);
 		return NULL;
 	}
 	return (PyObject *)rv;
 }
 
 static PyObject *
-Levpartflip_from_existing(PyObject *self, PyObject *args)
+Communitysolar_from_existing(PyObject *self, PyObject *args)
 {
 	CmodObject *rv;
 	PyObject * module = 0;
@@ -12234,13 +12177,13 @@ Levpartflip_from_existing(PyObject *self, PyObject *args)
 	if (data_size < 0)
 		goto fail;
 
-	rv = newLevpartflipObject((void*)ptr);
+	rv = newCommunitysolarObject((void*)ptr);
 	if (rv == NULL)
 		goto fail;
 	rv->data_owner_ptr = module;
 	if (!def)
 		return (PyObject *)rv;
-	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Levpartflip", def);
+	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Communitysolar", def);
 	return (PyObject *)rv;
 
 	fail:
@@ -12251,179 +12194,165 @@ Levpartflip_from_existing(PyObject *self, PyObject *args)
 
 /* List of functions defined in the module */
 
-static PyMethodDef LevpartflipModule_methods[] = {
-		{"new",             Levpartflip_new,         METH_VARARGS,
-				PyDoc_STR("new() -> Levpartflip")},
-		{"default",             Levpartflip_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Levpartflip\n\nUse default attributes\n"
-				"`config` options:\n\n- \"BiopowerLeveragedPartnershipFlip\"\n- \"DSLFLeveragedPartnershipFlip\"\n- \"EmpiricalTroughLeveragedPartnershipFlip\"\n- \"FlatPlatePVLeveragedPartnershipFlip\"\n- \"GenericBatteryLeveragedPartnershipFlip\"\n- \"GenericCSPSystemLeveragedPartnershipFlip\"\n- \"GenericSystemLeveragedPartnershipFlip\"\n- \"GeothermalPowerLeveragedPartnershipFlip\"\n- \"HighXConcentratingPVLeveragedPartnershipFlip\"\n- \"MSLFLeveragedPartnershipFlip\"\n- \"MSPTLeveragedPartnershipFlip\"\n- \"PVBatteryLeveragedPartnershipFlip\"\n- \"PVWattsLeveragedPartnershipFlip\"\n- \"PhysicalTroughLeveragedPartnershipFlip\"\n- \"StandaloneBatteryLeveragedPartnershipFlip\"\n- \"WindPowerLeveragedPartnershipFlip\"")},
-		{"wrap",             Levpartflip_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> Levpartflip\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
-		{"from_existing",   Levpartflip_from_existing,        METH_VARARGS,
-				PyDoc_STR("from_existing(data, optional config) -> Levpartflip\n\nShare underlying data with an existing PySAM class. If config provided, default attributes are loaded otherwise.")},
+static PyMethodDef CommunitysolarModule_methods[] = {
+		{"new",             Communitysolar_new,         METH_VARARGS,
+				PyDoc_STR("new() -> Communitysolar")},
+		{"default",             Communitysolar_default,         METH_VARARGS,
+				PyDoc_STR("default(config) -> Communitysolar\n\nUse default attributes\n"
+				"`config` options:\n\n- \"PVWattsCommunitySolar\"")},
+		{"wrap",             Communitysolar_wrap,         METH_VARARGS,
+				PyDoc_STR("wrap(ssc_data_t) -> Communitysolar\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
+		{"from_existing",   Communitysolar_from_existing,        METH_VARARGS,
+				PyDoc_STR("from_existing(data, optional config) -> Communitysolar\n\nShare underlying data with an existing PySAM class. If config provided, default attributes are loaded otherwise.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 PyDoc_STRVAR(module_doc,
-			 "PPA leveraged partnership flip (with debt) financial model");
+			 "Community solar owner financial model");
 
 
 static int
-LevpartflipModule_exec(PyObject *m)
+CommunitysolarModule_exec(PyObject *m)
 {
 	/* Finalize the type object including setting type of the new type
 	 * object; doing it here is required for portability, too. */
 
 	if (PySAM_load_lib(m) < 0) goto fail;
 
-	Levpartflip_Type.tp_dict = PyDict_New();
-	if (!Levpartflip_Type.tp_dict) { goto fail; }
+	Communitysolar_Type.tp_dict = PyDict_New();
+	if (!Communitysolar_Type.tp_dict) { goto fail; }
 
-	/// Add the Revenue type object to Levpartflip_Type
-	if (PyType_Ready(&Revenue_Type) < 0) { goto fail; }
-	PyDict_SetItemString(Levpartflip_Type.tp_dict,
-				"Revenue",
-				(PyObject*)&Revenue_Type);
-	Py_DECREF(&Revenue_Type);
-
-	/// Add the FinancialParameters type object to Levpartflip_Type
+	/// Add the FinancialParameters type object to Communitysolar_Type
 	if (PyType_Ready(&FinancialParameters_Type) < 0) { goto fail; }
-	PyDict_SetItemString(Levpartflip_Type.tp_dict,
+	PyDict_SetItemString(Communitysolar_Type.tp_dict,
 				"FinancialParameters",
 				(PyObject*)&FinancialParameters_Type);
 	Py_DECREF(&FinancialParameters_Type);
 
-	/// Add the SystemCosts type object to Levpartflip_Type
+	/// Add the SystemCosts type object to Communitysolar_Type
 	if (PyType_Ready(&SystemCosts_Type) < 0) { goto fail; }
-	PyDict_SetItemString(Levpartflip_Type.tp_dict,
+	PyDict_SetItemString(Communitysolar_Type.tp_dict,
 				"SystemCosts",
 				(PyObject*)&SystemCosts_Type);
 	Py_DECREF(&SystemCosts_Type);
 
-	/// Add the LandLease type object to Levpartflip_Type
+	/// Add the LandLease type object to Communitysolar_Type
 	if (PyType_Ready(&LandLease_Type) < 0) { goto fail; }
-	PyDict_SetItemString(Levpartflip_Type.tp_dict,
+	PyDict_SetItemString(Communitysolar_Type.tp_dict,
 				"LandLease",
 				(PyObject*)&LandLease_Type);
 	Py_DECREF(&LandLease_Type);
 
-	/// Add the TaxCreditIncentives type object to Levpartflip_Type
+	/// Add the TaxCreditIncentives type object to Communitysolar_Type
 	if (PyType_Ready(&TaxCreditIncentives_Type) < 0) { goto fail; }
-	PyDict_SetItemString(Levpartflip_Type.tp_dict,
+	PyDict_SetItemString(Communitysolar_Type.tp_dict,
 				"TaxCreditIncentives",
 				(PyObject*)&TaxCreditIncentives_Type);
 	Py_DECREF(&TaxCreditIncentives_Type);
 
-	/// Add the Depreciation type object to Levpartflip_Type
+	/// Add the Depreciation type object to Communitysolar_Type
 	if (PyType_Ready(&Depreciation_Type) < 0) { goto fail; }
-	PyDict_SetItemString(Levpartflip_Type.tp_dict,
+	PyDict_SetItemString(Communitysolar_Type.tp_dict,
 				"Depreciation",
 				(PyObject*)&Depreciation_Type);
 	Py_DECREF(&Depreciation_Type);
 
-	/// Add the PaymentIncentives type object to Levpartflip_Type
+	/// Add the PaymentIncentives type object to Communitysolar_Type
 	if (PyType_Ready(&PaymentIncentives_Type) < 0) { goto fail; }
-	PyDict_SetItemString(Levpartflip_Type.tp_dict,
+	PyDict_SetItemString(Communitysolar_Type.tp_dict,
 				"PaymentIncentives",
 				(PyObject*)&PaymentIncentives_Type);
 	Py_DECREF(&PaymentIncentives_Type);
 
-	/// Add the SystemOutput type object to Levpartflip_Type
-	if (PyType_Ready(&SystemOutput_Type) < 0) { goto fail; }
-	PyDict_SetItemString(Levpartflip_Type.tp_dict,
-				"SystemOutput",
-				(PyObject*)&SystemOutput_Type);
-	Py_DECREF(&SystemOutput_Type);
+	/// Add the Revenue type object to Communitysolar_Type
+	if (PyType_Ready(&Revenue_Type) < 0) { goto fail; }
+	PyDict_SetItemString(Communitysolar_Type.tp_dict,
+				"Revenue",
+				(PyObject*)&Revenue_Type);
+	Py_DECREF(&Revenue_Type);
 
-	/// Add the ElectricityRates type object to Levpartflip_Type
-	if (PyType_Ready(&ElectricityRates_Type) < 0) { goto fail; }
-	PyDict_SetItemString(Levpartflip_Type.tp_dict,
-				"ElectricityRates",
-				(PyObject*)&ElectricityRates_Type);
-	Py_DECREF(&ElectricityRates_Type);
-
-	/// Add the Moratorium type object to Levpartflip_Type
-	if (PyType_Ready(&Moratorium_Type) < 0) { goto fail; }
-	PyDict_SetItemString(Levpartflip_Type.tp_dict,
-				"Moratorium",
-				(PyObject*)&Moratorium_Type);
-	Py_DECREF(&Moratorium_Type);
-
-	/// Add the Recapitalization type object to Levpartflip_Type
-	if (PyType_Ready(&Recapitalization_Type) < 0) { goto fail; }
-	PyDict_SetItemString(Levpartflip_Type.tp_dict,
-				"Recapitalization",
-				(PyObject*)&Recapitalization_Type);
-	Py_DECREF(&Recapitalization_Type);
-
-	/// Add the TimeOfDelivery type object to Levpartflip_Type
-	if (PyType_Ready(&TimeOfDelivery_Type) < 0) { goto fail; }
-	PyDict_SetItemString(Levpartflip_Type.tp_dict,
-				"TimeOfDelivery",
-				(PyObject*)&TimeOfDelivery_Type);
-	Py_DECREF(&TimeOfDelivery_Type);
-
-	/// Add the UtilityBill type object to Levpartflip_Type
-	if (PyType_Ready(&UtilityBill_Type) < 0) { goto fail; }
-	PyDict_SetItemString(Levpartflip_Type.tp_dict,
-				"UtilityBill",
-				(PyObject*)&UtilityBill_Type);
-	Py_DECREF(&UtilityBill_Type);
-
-	/// Add the ConstructionFinancing type object to Levpartflip_Type
-	if (PyType_Ready(&ConstructionFinancing_Type) < 0) { goto fail; }
-	PyDict_SetItemString(Levpartflip_Type.tp_dict,
-				"ConstructionFinancing",
-				(PyObject*)&ConstructionFinancing_Type);
-	Py_DECREF(&ConstructionFinancing_Type);
-
-	/// Add the OtherCapitalCosts type object to Levpartflip_Type
-	if (PyType_Ready(&OtherCapitalCosts_Type) < 0) { goto fail; }
-	PyDict_SetItemString(Levpartflip_Type.tp_dict,
-				"OtherCapitalCosts",
-				(PyObject*)&OtherCapitalCosts_Type);
-	Py_DECREF(&OtherCapitalCosts_Type);
-
-	/// Add the IRRTargets type object to Levpartflip_Type
-	if (PyType_Ready(&IRRTargets_Type) < 0) { goto fail; }
-	PyDict_SetItemString(Levpartflip_Type.tp_dict,
-				"IRRTargets",
-				(PyObject*)&IRRTargets_Type);
-	Py_DECREF(&IRRTargets_Type);
-
-	/// Add the LCOS type object to Levpartflip_Type
-	if (PyType_Ready(&LCOS_Type) < 0) { goto fail; }
-	PyDict_SetItemString(Levpartflip_Type.tp_dict,
-				"LCOS",
-				(PyObject*)&LCOS_Type);
-	Py_DECREF(&LCOS_Type);
-
-	/// Add the ChargesByMonth type object to Levpartflip_Type
-	if (PyType_Ready(&ChargesByMonth_Type) < 0) { goto fail; }
-	PyDict_SetItemString(Levpartflip_Type.tp_dict,
-				"ChargesByMonth",
-				(PyObject*)&ChargesByMonth_Type);
-	Py_DECREF(&ChargesByMonth_Type);
-
-	/// Add the BatterySystem type object to Levpartflip_Type
+	/// Add the BatterySystem type object to Communitysolar_Type
 	if (PyType_Ready(&BatterySystem_Type) < 0) { goto fail; }
-	PyDict_SetItemString(Levpartflip_Type.tp_dict,
+	PyDict_SetItemString(Communitysolar_Type.tp_dict,
 				"BatterySystem",
 				(PyObject*)&BatterySystem_Type);
 	Py_DECREF(&BatterySystem_Type);
 
-	/// Add the Outputs type object to Levpartflip_Type
+	/// Add the ElectricityRates type object to Communitysolar_Type
+	if (PyType_Ready(&ElectricityRates_Type) < 0) { goto fail; }
+	PyDict_SetItemString(Communitysolar_Type.tp_dict,
+				"ElectricityRates",
+				(PyObject*)&ElectricityRates_Type);
+	Py_DECREF(&ElectricityRates_Type);
+
+	/// Add the SystemOutput type object to Communitysolar_Type
+	if (PyType_Ready(&SystemOutput_Type) < 0) { goto fail; }
+	PyDict_SetItemString(Communitysolar_Type.tp_dict,
+				"SystemOutput",
+				(PyObject*)&SystemOutput_Type);
+	Py_DECREF(&SystemOutput_Type);
+
+	/// Add the UtilityBill type object to Communitysolar_Type
+	if (PyType_Ready(&UtilityBill_Type) < 0) { goto fail; }
+	PyDict_SetItemString(Communitysolar_Type.tp_dict,
+				"UtilityBill",
+				(PyObject*)&UtilityBill_Type);
+	Py_DECREF(&UtilityBill_Type);
+
+	/// Add the Lifetime type object to Communitysolar_Type
+	if (PyType_Ready(&Lifetime_Type) < 0) { goto fail; }
+	PyDict_SetItemString(Communitysolar_Type.tp_dict,
+				"Lifetime",
+				(PyObject*)&Lifetime_Type);
+	Py_DECREF(&Lifetime_Type);
+
+	/// Add the CommunitySolar type object to Communitysolar_Type
+	if (PyType_Ready(&CommunitySolar_Type) < 0) { goto fail; }
+	PyDict_SetItemString(Communitysolar_Type.tp_dict,
+				"CommunitySolar",
+				(PyObject*)&CommunitySolar_Type);
+	Py_DECREF(&CommunitySolar_Type);
+
+	/// Add the FuelCell type object to Communitysolar_Type
+	if (PyType_Ready(&FuelCell_Type) < 0) { goto fail; }
+	PyDict_SetItemString(Communitysolar_Type.tp_dict,
+				"FuelCell",
+				(PyObject*)&FuelCell_Type);
+	Py_DECREF(&FuelCell_Type);
+
+	/// Add the GridLimits type object to Communitysolar_Type
+	if (PyType_Ready(&GridLimits_Type) < 0) { goto fail; }
+	PyDict_SetItemString(Communitysolar_Type.tp_dict,
+				"GridLimits",
+				(PyObject*)&GridLimits_Type);
+	Py_DECREF(&GridLimits_Type);
+
+	/// Add the LCOS type object to Communitysolar_Type
+	if (PyType_Ready(&LCOS_Type) < 0) { goto fail; }
+	PyDict_SetItemString(Communitysolar_Type.tp_dict,
+				"LCOS",
+				(PyObject*)&LCOS_Type);
+	Py_DECREF(&LCOS_Type);
+
+	/// Add the ChargesByMonth type object to Communitysolar_Type
+	if (PyType_Ready(&ChargesByMonth_Type) < 0) { goto fail; }
+	PyDict_SetItemString(Communitysolar_Type.tp_dict,
+				"ChargesByMonth",
+				(PyObject*)&ChargesByMonth_Type);
+	Py_DECREF(&ChargesByMonth_Type);
+
+	/// Add the Outputs type object to Communitysolar_Type
 	if (PyType_Ready(&Outputs_Type) < 0) { goto fail; }
-	PyDict_SetItemString(Levpartflip_Type.tp_dict,
+	PyDict_SetItemString(Communitysolar_Type.tp_dict,
 				"Outputs",
 				(PyObject*)&Outputs_Type);
 	Py_DECREF(&Outputs_Type);
 
-	/// Add the Levpartflip type object to the module
-	if (PyType_Ready(&Levpartflip_Type) < 0) { goto fail; }
+	/// Add the Communitysolar type object to the module
+	if (PyType_Ready(&Communitysolar_Type) < 0) { goto fail; }
 	PyModule_AddObject(m,
-				"Levpartflip",
-				(PyObject*)&Levpartflip_Type);
+				"Communitysolar",
+				(PyObject*)&Communitysolar_Type);
 
 	return 0;
 	fail:
@@ -12431,18 +12360,18 @@ LevpartflipModule_exec(PyObject *m)
 	return -1;
 }
 
-static struct PyModuleDef_Slot LevpartflipModule_slots[] = {
-		{Py_mod_exec, LevpartflipModule_exec},
+static struct PyModuleDef_Slot CommunitysolarModule_slots[] = {
+		{Py_mod_exec, CommunitysolarModule_exec},
 		{0, NULL},
 };
 
-static struct PyModuleDef LevpartflipModule = {
+static struct PyModuleDef CommunitysolarModule = {
 		PyModuleDef_HEAD_INIT,
-		"Levpartflip",
+		"Communitysolar",
 		module_doc,
 		0,
-		LevpartflipModule_methods,
-		LevpartflipModule_slots,
+		CommunitysolarModule_methods,
+		CommunitysolarModule_slots,
 		NULL,
 		NULL,
 		NULL
@@ -12451,7 +12380,7 @@ static struct PyModuleDef LevpartflipModule = {
 /* Export function for the module */
 
 PyMODINIT_FUNC
-PyInit_Levpartflip(void)
+PyInit_Communitysolar(void)
 {
-	return PyModuleDef_Init(&LevpartflipModule);
+	return PyModuleDef_Init(&CommunitysolarModule);
 }

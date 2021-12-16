@@ -44,6 +44,12 @@ SystemCosts Group
 .. autoclass:: PySAM.Cashloan.Cashloan.SystemCosts
 	:members:
 
+LandLease Group
+======================================================
+
+.. autoclass:: PySAM.Cashloan.Cashloan.LandLease
+	:members:
+
 Depreciation Group
 ======================================================
 
@@ -72,6 +78,24 @@ FuelCell Group
 ======================================================
 
 .. autoclass:: PySAM.Cashloan.Cashloan.FuelCell
+	:members:
+
+ChargesByMonth Group
+======================================================
+
+.. autoclass:: PySAM.Cashloan.Cashloan.ChargesByMonth
+	:members:
+
+Battery Group
+======================================================
+
+.. autoclass:: PySAM.Cashloan.Cashloan.Battery
+	:members:
+
+TimeSeries Group
+======================================================
+
+.. autoclass:: PySAM.Cashloan.Cashloan.TimeSeries
 	:members:
 
 SystemOutput Group

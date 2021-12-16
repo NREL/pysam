@@ -296,6 +296,12 @@ Outputs_get_day(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_distance_to_shore_file(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_WaveFileReader_Outputs_distance_to_shore_file_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_energy_period(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_WaveFileReader_Outputs_energy_period_aget, self->data_ptr);
@@ -311,6 +317,12 @@ static PyObject *
 Outputs_get_lat(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_WaveFileReader_Outputs_lat_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_location_id(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_WaveFileReader_Outputs_location_id_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -386,6 +398,12 @@ Outputs_get_tz(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_water_depth_file(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_WaveFileReader_Outputs_water_depth_file_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_wave_resource_matrix(VarGroupObject *self, void *closure)
 {
 	return PySAM_matrix_getter(SAM_WaveFileReader_Outputs_wave_resource_matrix_mget, self->data_ptr);
@@ -399,7 +417,7 @@ Outputs_get_year(VarGroupObject *self, void *closure)
 
 static PyGetSetDef Outputs_getset[] = {
 {"average_power_flux", (getter)Outputs_get_average_power_flux,(setter)0,
-	PyDoc_STR("*float*: Distance to shore [kW/m]"),
+	PyDoc_STR("*float*: Average power flux [kW/m]"),
  	NULL},
 {"bathymetry", (getter)Outputs_get_bathymetry,(setter)0,
 	PyDoc_STR("*str*: Bathymetry"),
@@ -416,6 +434,9 @@ static PyGetSetDef Outputs_getset[] = {
 {"day", (getter)Outputs_get_day,(setter)0,
 	PyDoc_STR("*sequence*: Day [dy]"),
  	NULL},
+{"distance_to_shore_file", (getter)Outputs_get_distance_to_shore_file,(setter)0,
+	PyDoc_STR("*float*: Distance to shore [m]"),
+ 	NULL},
 {"energy_period", (getter)Outputs_get_energy_period,(setter)0,
 	PyDoc_STR("*sequence*: Wave period time series data [s]"),
  	NULL},
@@ -424,6 +445,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"lat", (getter)Outputs_get_lat,(setter)0,
 	PyDoc_STR("*float*: Latitude [deg]"),
+ 	NULL},
+{"location_id", (getter)Outputs_get_location_id,(setter)0,
+	PyDoc_STR("*float*: Location ID"),
  	NULL},
 {"lon", (getter)Outputs_get_lon,(setter)0,
 	PyDoc_STR("*float*: Longitude [deg]"),
@@ -460,6 +484,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"tz", (getter)Outputs_get_tz,(setter)0,
 	PyDoc_STR("*float*: Time zone"),
+ 	NULL},
+{"water_depth_file", (getter)Outputs_get_water_depth_file,(setter)0,
+	PyDoc_STR("*float*: Water depth [m]"),
  	NULL},
 {"wave_resource_matrix", (getter)Outputs_get_wave_resource_matrix,(setter)0,
 	PyDoc_STR("*sequence[sequence]*: Frequency distribution of resource [m/s]"),

@@ -1301,6 +1301,30 @@ SystemDesign_set_subarray1_rotlim(VarGroupObject *self, PyObject *value, void *c
 }
 
 static PyObject *
+SystemDesign_get_subarray1_slope_azm(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_SystemDesign_subarray1_slope_azm_nget, self->data_ptr);
+}
+
+static int
+SystemDesign_set_subarray1_slope_azm(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_SystemDesign_subarray1_slope_azm_nset, self->data_ptr);
+}
+
+static PyObject *
+SystemDesign_get_subarray1_slope_tilt(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_SystemDesign_subarray1_slope_tilt_nget, self->data_ptr);
+}
+
+static int
+SystemDesign_set_subarray1_slope_tilt(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_SystemDesign_subarray1_slope_tilt_nset, self->data_ptr);
+}
+
+static PyObject *
 SystemDesign_get_subarray1_tilt(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Pvsamv1_SystemDesign_subarray1_tilt_nget, self->data_ptr);
@@ -1442,6 +1466,30 @@ static int
 SystemDesign_set_subarray2_rotlim(VarGroupObject *self, PyObject *value, void *closure)
 {
 	return PySAM_double_setter(value, SAM_Pvsamv1_SystemDesign_subarray2_rotlim_nset, self->data_ptr);
+}
+
+static PyObject *
+SystemDesign_get_subarray2_slope_azm(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_SystemDesign_subarray2_slope_azm_nget, self->data_ptr);
+}
+
+static int
+SystemDesign_set_subarray2_slope_azm(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_SystemDesign_subarray2_slope_azm_nset, self->data_ptr);
+}
+
+static PyObject *
+SystemDesign_get_subarray2_slope_tilt(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_SystemDesign_subarray2_slope_tilt_nget, self->data_ptr);
+}
+
+static int
+SystemDesign_set_subarray2_slope_tilt(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_SystemDesign_subarray2_slope_tilt_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -1589,6 +1637,30 @@ SystemDesign_set_subarray3_rotlim(VarGroupObject *self, PyObject *value, void *c
 }
 
 static PyObject *
+SystemDesign_get_subarray3_slope_azm(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_SystemDesign_subarray3_slope_azm_nget, self->data_ptr);
+}
+
+static int
+SystemDesign_set_subarray3_slope_azm(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_SystemDesign_subarray3_slope_azm_nset, self->data_ptr);
+}
+
+static PyObject *
+SystemDesign_get_subarray3_slope_tilt(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_SystemDesign_subarray3_slope_tilt_nget, self->data_ptr);
+}
+
+static int
+SystemDesign_set_subarray3_slope_tilt(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_SystemDesign_subarray3_slope_tilt_nset, self->data_ptr);
+}
+
+static PyObject *
 SystemDesign_get_subarray3_tilt(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Pvsamv1_SystemDesign_subarray3_tilt_nget, self->data_ptr);
@@ -1733,6 +1805,30 @@ SystemDesign_set_subarray4_rotlim(VarGroupObject *self, PyObject *value, void *c
 }
 
 static PyObject *
+SystemDesign_get_subarray4_slope_azm(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_SystemDesign_subarray4_slope_azm_nget, self->data_ptr);
+}
+
+static int
+SystemDesign_set_subarray4_slope_azm(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_SystemDesign_subarray4_slope_azm_nset, self->data_ptr);
+}
+
+static PyObject *
+SystemDesign_get_subarray4_slope_tilt(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_SystemDesign_subarray4_slope_tilt_nget, self->data_ptr);
+}
+
+static int
+SystemDesign_set_subarray4_slope_tilt(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_SystemDesign_subarray4_slope_tilt_nset, self->data_ptr);
+}
+
+static PyObject *
 SystemDesign_get_subarray4_tilt(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Pvsamv1_SystemDesign_subarray4_tilt_nget, self->data_ptr);
@@ -1811,6 +1907,12 @@ static PyGetSetDef SystemDesign_getset[] = {
 {"subarray1_rotlim", (getter)SystemDesign_get_subarray1_rotlim,(setter)SystemDesign_set_subarray1_rotlim,
 	PyDoc_STR("*float*: Sub-array 1 Tracker rotation limit [deg]\n\n*Constraints*: MIN=0,MAX=85\n\n*Required*: If not provided, assumed to be 45"),
  	NULL},
+{"subarray1_slope_azm", (getter)SystemDesign_get_subarray1_slope_azm,(setter)SystemDesign_set_subarray1_slope_azm,
+	PyDoc_STR("*float*: Sub-array 1 terrain azimuth [deg]\n\n*Required*: If not provided, assumed to be 0.0"),
+ 	NULL},
+{"subarray1_slope_tilt", (getter)SystemDesign_get_subarray1_slope_tilt,(setter)SystemDesign_set_subarray1_slope_tilt,
+	PyDoc_STR("*float*: Sub-array 1 terrain tilt [deg]\n\n*Required*: If not provided, assumed to be 0.0"),
+ 	NULL},
 {"subarray1_tilt", (getter)SystemDesign_get_subarray1_tilt,(setter)SystemDesign_set_subarray1_tilt,
 	PyDoc_STR("*float*: Sub-array 1 Tilt [deg]\n\n*Options*: 0=horizontal,90=vertical\n\n*Constraints*: MIN=0,MAX=90"),
  	NULL},
@@ -1846,6 +1948,12 @@ static PyGetSetDef SystemDesign_getset[] = {
  	NULL},
 {"subarray2_rotlim", (getter)SystemDesign_get_subarray2_rotlim,(setter)SystemDesign_set_subarray2_rotlim,
 	PyDoc_STR("*float*: Sub-array 2 Tracker rotation limit [deg]\n\n*Constraints*: MIN=0,MAX=85\n\n*Required*: If not provided, assumed to be 45"),
+ 	NULL},
+{"subarray2_slope_azm", (getter)SystemDesign_get_subarray2_slope_azm,(setter)SystemDesign_set_subarray2_slope_azm,
+	PyDoc_STR("*float*: Sub-array 2 terrain azimuth [deg]\n\n*Required*: If not provided, assumed to be 0.0"),
+ 	NULL},
+{"subarray2_slope_tilt", (getter)SystemDesign_get_subarray2_slope_tilt,(setter)SystemDesign_set_subarray2_slope_tilt,
+	PyDoc_STR("*float*: Sub-array 2 terrain tilt [deg]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
 {"subarray2_tilt", (getter)SystemDesign_get_subarray2_tilt,(setter)SystemDesign_set_subarray2_tilt,
 	PyDoc_STR("*float*: Sub-array 2 Tilt [deg]\n\n*Options*: 0=horizontal,90=vertical\n\n*Constraints*: MIN=0,MAX=90"),
@@ -1883,6 +1991,12 @@ static PyGetSetDef SystemDesign_getset[] = {
 {"subarray3_rotlim", (getter)SystemDesign_get_subarray3_rotlim,(setter)SystemDesign_set_subarray3_rotlim,
 	PyDoc_STR("*float*: Sub-array 3 Tracker rotation limit [deg]\n\n*Constraints*: MIN=0,MAX=85\n\n*Required*: If not provided, assumed to be 45"),
  	NULL},
+{"subarray3_slope_azm", (getter)SystemDesign_get_subarray3_slope_azm,(setter)SystemDesign_set_subarray3_slope_azm,
+	PyDoc_STR("*float*: Sub-array 3 terrain azimuth [deg]\n\n*Required*: If not provided, assumed to be 0.0"),
+ 	NULL},
+{"subarray3_slope_tilt", (getter)SystemDesign_get_subarray3_slope_tilt,(setter)SystemDesign_set_subarray3_slope_tilt,
+	PyDoc_STR("*float*: Sub-array 3 terrain tilt [deg]\n\n*Required*: If not provided, assumed to be 0.0"),
+ 	NULL},
 {"subarray3_tilt", (getter)SystemDesign_get_subarray3_tilt,(setter)SystemDesign_set_subarray3_tilt,
 	PyDoc_STR("*float*: Sub-array 3 Tilt [deg]\n\n*Options*: 0=horizontal,90=vertical\n\n*Constraints*: MIN=0,MAX=90"),
  	NULL},
@@ -1918,6 +2032,12 @@ static PyGetSetDef SystemDesign_getset[] = {
  	NULL},
 {"subarray4_rotlim", (getter)SystemDesign_get_subarray4_rotlim,(setter)SystemDesign_set_subarray4_rotlim,
 	PyDoc_STR("*float*: Sub-array 4 Tracker rotation limit [deg]\n\n*Constraints*: MIN=0,MAX=85\n\n*Required*: If not provided, assumed to be 45"),
+ 	NULL},
+{"subarray4_slope_azm", (getter)SystemDesign_get_subarray4_slope_azm,(setter)SystemDesign_set_subarray4_slope_azm,
+	PyDoc_STR("*float*: Sub-array 4 terrain azimuth [deg]\n\n*Required*: If not provided, assumed to be 0.0"),
+ 	NULL},
+{"subarray4_slope_tilt", (getter)SystemDesign_get_subarray4_slope_tilt,(setter)SystemDesign_set_subarray4_slope_tilt,
+	PyDoc_STR("*float*: Sub-array 4 terrain tilt [deg]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
 {"subarray4_tilt", (getter)SystemDesign_get_subarray4_tilt,(setter)SystemDesign_set_subarray4_tilt,
 	PyDoc_STR("*float*: Sub-array 4 Tilt [deg]\n\n*Options*: 0=horizontal,90=vertical\n\n*Constraints*: MIN=0,MAX=90"),
@@ -6335,6 +6455,42 @@ MermoudLejeuneSingleDiodeModel_set_mlm_beta_voc_spec(VarGroupObject *self, PyObj
 }
 
 static PyObject *
+MermoudLejeuneSingleDiodeModel_get_mlm_bifacial_ground_clearance_height(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_MermoudLejeuneSingleDiodeModel_mlm_bifacial_ground_clearance_height_nget, self->data_ptr);
+}
+
+static int
+MermoudLejeuneSingleDiodeModel_set_mlm_bifacial_ground_clearance_height(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_MermoudLejeuneSingleDiodeModel_mlm_bifacial_ground_clearance_height_nset, self->data_ptr);
+}
+
+static PyObject *
+MermoudLejeuneSingleDiodeModel_get_mlm_bifacial_transmission_factor(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_MermoudLejeuneSingleDiodeModel_mlm_bifacial_transmission_factor_nget, self->data_ptr);
+}
+
+static int
+MermoudLejeuneSingleDiodeModel_set_mlm_bifacial_transmission_factor(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_MermoudLejeuneSingleDiodeModel_mlm_bifacial_transmission_factor_nset, self->data_ptr);
+}
+
+static PyObject *
+MermoudLejeuneSingleDiodeModel_get_mlm_bifaciality(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_MermoudLejeuneSingleDiodeModel_mlm_bifaciality_nget, self->data_ptr);
+}
+
+static int
+MermoudLejeuneSingleDiodeModel_set_mlm_bifaciality(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_MermoudLejeuneSingleDiodeModel_mlm_bifaciality_nset, self->data_ptr);
+}
+
+static PyObject *
 MermoudLejeuneSingleDiodeModel_get_mlm_groundRelfectionFraction(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Pvsamv1_MermoudLejeuneSingleDiodeModel_mlm_groundRelfectionFraction_nget, self->data_ptr);
@@ -6344,6 +6500,18 @@ static int
 MermoudLejeuneSingleDiodeModel_set_mlm_groundRelfectionFraction(VarGroupObject *self, PyObject *value, void *closure)
 {
 	return PySAM_double_setter(value, SAM_Pvsamv1_MermoudLejeuneSingleDiodeModel_mlm_groundRelfectionFraction_nset, self->data_ptr);
+}
+
+static PyObject *
+MermoudLejeuneSingleDiodeModel_get_mlm_is_bifacial(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_MermoudLejeuneSingleDiodeModel_mlm_is_bifacial_nget, self->data_ptr);
+}
+
+static int
+MermoudLejeuneSingleDiodeModel_set_mlm_is_bifacial(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_MermoudLejeuneSingleDiodeModel_mlm_is_bifacial_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -6515,8 +6683,20 @@ static PyGetSetDef MermoudLejeuneSingleDiodeModel_getset[] = {
 {"mlm_beta_voc_spec", (getter)MermoudLejeuneSingleDiodeModel_get_mlm_beta_voc_spec,(setter)MermoudLejeuneSingleDiodeModel_set_mlm_beta_voc_spec,
 	PyDoc_STR("*float*: Temperature coefficient for V_oc [V/K]\n\n*Required*: True if module_model=5"),
  	NULL},
+{"mlm_bifacial_ground_clearance_height", (getter)MermoudLejeuneSingleDiodeModel_get_mlm_bifacial_ground_clearance_height,(setter)MermoudLejeuneSingleDiodeModel_set_mlm_bifacial_ground_clearance_height,
+	PyDoc_STR("*float*: Module ground clearance height [m]\n\n*Required*: True if module_model=5"),
+ 	NULL},
+{"mlm_bifacial_transmission_factor", (getter)MermoudLejeuneSingleDiodeModel_get_mlm_bifacial_transmission_factor,(setter)MermoudLejeuneSingleDiodeModel_set_mlm_bifacial_transmission_factor,
+	PyDoc_STR("*float*: Bifacial transmission factor [0-1]\n\n*Required*: True if module_model=5"),
+ 	NULL},
+{"mlm_bifaciality", (getter)MermoudLejeuneSingleDiodeModel_get_mlm_bifaciality,(setter)MermoudLejeuneSingleDiodeModel_set_mlm_bifaciality,
+	PyDoc_STR("*float*: Bifaciality factor [%]\n\n*Required*: True if module_model=5"),
+ 	NULL},
 {"mlm_groundRelfectionFraction", (getter)MermoudLejeuneSingleDiodeModel_get_mlm_groundRelfectionFraction,(setter)MermoudLejeuneSingleDiodeModel_set_mlm_groundRelfectionFraction,
 	PyDoc_STR("*float*: Ground reflection fraction [-]\n\n*Required*: True if module_model=5"),
+ 	NULL},
+{"mlm_is_bifacial", (getter)MermoudLejeuneSingleDiodeModel_get_mlm_is_bifacial,(setter)MermoudLejeuneSingleDiodeModel_set_mlm_is_bifacial,
+	PyDoc_STR("*float*: Modules are bifacial [0/1]\n\n*Required*: True if module_model=5"),
  	NULL},
 {"mlm_mu_n", (getter)MermoudLejeuneSingleDiodeModel_get_mlm_mu_n,(setter)MermoudLejeuneSingleDiodeModel_set_mlm_mu_n,
 	PyDoc_STR("*float*: Temperature coefficient of gamma [1/K]\n\n*Required*: True if module_model=5"),
@@ -8992,6 +9172,18 @@ BatterySystem_set_en_batt(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyObject *
+BatterySystem_get_en_standalone_batt(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_BatterySystem_en_standalone_batt_nget, self->data_ptr);
+}
+
+static int
+BatterySystem_set_en_standalone_batt(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_BatterySystem_en_standalone_batt_nset, self->data_ptr);
+}
+
+static PyObject *
 BatterySystem_get_om_replacement_cost1(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Pvsamv1_BatterySystem_om_replacement_cost1_aget, self->data_ptr);
@@ -9084,6 +9276,9 @@ static PyGetSetDef BatterySystem_getset[] = {
  	NULL},
 {"en_batt", (getter)BatterySystem_get_en_batt,(setter)BatterySystem_set_en_batt,
 	PyDoc_STR("*float*: Enable battery storage model [0/1]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"en_standalone_batt", (getter)BatterySystem_get_en_standalone_batt,(setter)BatterySystem_set_en_standalone_batt,
+	PyDoc_STR("*float*: Enable standalone battery storage model [0/1]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"om_replacement_cost1", (getter)BatterySystem_get_om_replacement_cost1,(setter)BatterySystem_set_om_replacement_cost1,
 	PyDoc_STR("*sequence*: Cost to replace battery per kWh [$/kWh]"),
@@ -10105,6 +10300,18 @@ BatteryDispatch_set_batt_cycle_cost_choice(VarGroupObject *self, PyObject *value
 }
 
 static PyObject *
+BatteryDispatch_get_batt_dispatch_auto_btm_can_discharge_to_grid(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_BatteryDispatch_batt_dispatch_auto_btm_can_discharge_to_grid_nget, self->data_ptr);
+}
+
+static int
+BatteryDispatch_set_batt_dispatch_auto_btm_can_discharge_to_grid(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_BatteryDispatch_batt_dispatch_auto_btm_can_discharge_to_grid_nset, self->data_ptr);
+}
+
+static PyObject *
 BatteryDispatch_get_batt_dispatch_auto_can_charge(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Pvsamv1_BatteryDispatch_batt_dispatch_auto_can_charge_nget, self->data_ptr);
@@ -10501,6 +10708,18 @@ BatteryDispatch_set_batt_target_power_monthly(VarGroupObject *self, PyObject *va
 }
 
 static PyObject *
+BatteryDispatch_get_dispatch_manual_btm_discharge_to_grid(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvsamv1_BatteryDispatch_dispatch_manual_btm_discharge_to_grid_aget, self->data_ptr);
+}
+
+static int
+BatteryDispatch_set_dispatch_manual_btm_discharge_to_grid(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Pvsamv1_BatteryDispatch_dispatch_manual_btm_discharge_to_grid_aset, self->data_ptr);
+}
+
+static PyObject *
 BatteryDispatch_get_dispatch_manual_charge(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Pvsamv1_BatteryDispatch_dispatch_manual_charge_aget, self->data_ptr);
@@ -10598,7 +10817,7 @@ BatteryDispatch_set_dispatch_manual_sched_weekend(VarGroupObject *self, PyObject
 
 static PyGetSetDef BatteryDispatch_getset[] = {
 {"batt_custom_dispatch", (getter)BatteryDispatch_get_batt_custom_dispatch,(setter)BatteryDispatch_set_batt_custom_dispatch,
-	PyDoc_STR("*sequence*: Custom battery power for every time step [kW]\n\n*Info*: kWAC if AC-connected, else kWDC\n\n*Required*: True if en_batt=1&batt_dispatch_choice=2"),
+	PyDoc_STR("*sequence*: Custom battery power for every time step [kW]\n\n*Info*: kWAC if AC-connected, else kWDC\n\n*Required*: True if en_batt=1&en_standalone_batt=0&batt_dispatch_choice=2"),
  	NULL},
 {"batt_cycle_cost", (getter)BatteryDispatch_get_batt_cycle_cost,(setter)BatteryDispatch_set_batt_cycle_cost,
 	PyDoc_STR("*sequence*: Input battery cycle degradaton penalty per year [$/cycle-kWh]\n\n*Info*: length 1 or analysis_period, length 1 will be extended using inflation\n\n*Required*: True if batt_cycle_cost_choice=1"),
@@ -10606,11 +10825,14 @@ static PyGetSetDef BatteryDispatch_getset[] = {
 {"batt_cycle_cost_choice", (getter)BatteryDispatch_get_batt_cycle_cost_choice,(setter)BatteryDispatch_set_batt_cycle_cost_choice,
 	PyDoc_STR("*float*: Use SAM cost model for degradaton penalty or input custom via batt_cycle_cost [0/1]\n\n*Options*: 0=UseCostModel,1=InputCost\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
+{"batt_dispatch_auto_btm_can_discharge_to_grid", (getter)BatteryDispatch_get_batt_dispatch_auto_btm_can_discharge_to_grid,(setter)BatteryDispatch_set_batt_dispatch_auto_btm_can_discharge_to_grid,
+	PyDoc_STR("*float*: Behind the meter battery can discharge to grid? [0/1]"),
+ 	NULL},
 {"batt_dispatch_auto_can_charge", (getter)BatteryDispatch_get_batt_dispatch_auto_can_charge,(setter)BatteryDispatch_set_batt_dispatch_auto_can_charge,
 	PyDoc_STR("*float*: System charging allowed for automated dispatch? [0/1]"),
  	NULL},
 {"batt_dispatch_auto_can_clipcharge", (getter)BatteryDispatch_get_batt_dispatch_auto_can_clipcharge,(setter)BatteryDispatch_set_batt_dispatch_auto_can_clipcharge,
-	PyDoc_STR("*float*: Battery can charge from clipped power for automated dispatch? [0/1]"),
+	PyDoc_STR("*float*: Battery can charge from clipped power? [0/1]"),
  	NULL},
 {"batt_dispatch_auto_can_fuelcellcharge", (getter)BatteryDispatch_get_batt_dispatch_auto_can_fuelcellcharge,(setter)BatteryDispatch_set_batt_dispatch_auto_can_fuelcellcharge,
 	PyDoc_STR("*float*: Charging from fuel cell allowed for automated dispatch? [0/1]"),
@@ -10619,61 +10841,61 @@ static PyGetSetDef BatteryDispatch_getset[] = {
 	PyDoc_STR("*float*: Grid charging allowed for automated dispatch? [0/1]"),
  	NULL},
 {"batt_dispatch_charge_only_system_exceeds_load", (getter)BatteryDispatch_get_batt_dispatch_charge_only_system_exceeds_load,(setter)BatteryDispatch_set_batt_dispatch_charge_only_system_exceeds_load,
-	PyDoc_STR("*float*: Battery can charge from system only when system output exceeds load [0/1]\n\n*Required*: True if en_batt=1&batt_meter_position=0"),
+	PyDoc_STR("*float*: Battery can charge from system only when system output exceeds load [0/1]\n\n*Required*: True if en_batt=1&en_standalone_batt=0&batt_meter_position=0"),
  	NULL},
 {"batt_dispatch_choice", (getter)BatteryDispatch_get_batt_dispatch_choice,(setter)BatteryDispatch_set_batt_dispatch_choice,
 	PyDoc_STR("*float*: Battery dispatch algorithm [0/1/2/3/4]\n\n*Options*: If behind the meter: 0=PeakShaving,1=InputGridTarget,2=InputBatteryPower,3=ManualDispatch,4=PriceSignalForecast if front of meter: 0=AutomatedEconomic,1=PV_Smoothing,2=InputBatteryPower,3=ManualDispatch\n\n*Required*: True if en_batt=1"),
  	NULL},
 {"batt_dispatch_discharge_only_load_exceeds_system", (getter)BatteryDispatch_get_batt_dispatch_discharge_only_load_exceeds_system,(setter)BatteryDispatch_set_batt_dispatch_discharge_only_load_exceeds_system,
-	PyDoc_STR("*float*: Battery can discharge battery only when load exceeds system output [0/1]\n\n*Required*: True if en_batt=1&batt_meter_position=0"),
+	PyDoc_STR("*float*: Battery can discharge battery only when load exceeds system output [0/1]\n\n*Required*: True if en_batt=1&en_standalone_batt=0&batt_meter_position=0"),
  	NULL},
 {"batt_dispatch_load_forecast_choice", (getter)BatteryDispatch_get_batt_dispatch_load_forecast_choice,(setter)BatteryDispatch_set_batt_dispatch_load_forecast_choice,
 	PyDoc_STR("*float*: Load forecast choice for automatic dispatch [0/1/2]\n\n*Options*: 0=LookAhead,1=LookBehind,2=InputForecast\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"batt_dispatch_pvs_ac_lb", (getter)BatteryDispatch_get_batt_dispatch_pvs_ac_lb,(setter)BatteryDispatch_set_batt_dispatch_pvs_ac_lb,
-	PyDoc_STR("*float*: AC lower bound [fraction of nameplate]\n\n*Required*: True if en_batt=1&batt_meter_position=1&batt_dispatch_choice=1"),
+	PyDoc_STR("*float*: AC lower bound [fraction of nameplate]\n\n*Required*: True if en_batt=1&en_standalone_batt=0&batt_meter_position=1&batt_dispatch_choice=1"),
  	NULL},
 {"batt_dispatch_pvs_ac_lb_enable", (getter)BatteryDispatch_get_batt_dispatch_pvs_ac_lb_enable,(setter)BatteryDispatch_set_batt_dispatch_pvs_ac_lb_enable,
-	PyDoc_STR("*float*: Enable AC lower bound [0/1]\n\n*Required*: True if en_batt=1&batt_meter_position=1&batt_dispatch_choice=1"),
+	PyDoc_STR("*float*: Enable AC lower bound [0/1]\n\n*Required*: True if en_batt=1&en_standalone_batt=0&batt_meter_position=1&batt_dispatch_choice=1"),
  	NULL},
 {"batt_dispatch_pvs_ac_ub", (getter)BatteryDispatch_get_batt_dispatch_pvs_ac_ub,(setter)BatteryDispatch_set_batt_dispatch_pvs_ac_ub,
-	PyDoc_STR("*float*: AC upper bound [fraction of nameplate]\n\n*Required*: True if en_batt=1&batt_meter_position=1&batt_dispatch_choice=1"),
+	PyDoc_STR("*float*: AC upper bound [fraction of nameplate]\n\n*Required*: True if en_batt=1&en_standalone_batt=0&batt_meter_position=1&batt_dispatch_choice=1"),
  	NULL},
 {"batt_dispatch_pvs_ac_ub_enable", (getter)BatteryDispatch_get_batt_dispatch_pvs_ac_ub_enable,(setter)BatteryDispatch_set_batt_dispatch_pvs_ac_ub_enable,
-	PyDoc_STR("*float*: Enable AC upper bound [0/1]\n\n*Required*: True if en_batt=1&batt_meter_position=1&batt_dispatch_choice=1"),
+	PyDoc_STR("*float*: Enable AC upper bound [0/1]\n\n*Required*: True if en_batt=1&en_standalone_batt=0&batt_meter_position=1&batt_dispatch_choice=1"),
  	NULL},
 {"batt_dispatch_pvs_curtail_as_control", (getter)BatteryDispatch_get_batt_dispatch_pvs_curtail_as_control,(setter)BatteryDispatch_set_batt_dispatch_pvs_curtail_as_control,
-	PyDoc_STR("*float*: Correct up-ramp violations [0/1]\n\n*Required*: True if en_batt=1&batt_meter_position=1&batt_dispatch_choice=1"),
+	PyDoc_STR("*float*: Correct up-ramp violations [0/1]\n\n*Required*: True if en_batt=1&en_standalone_batt=0&batt_meter_position=1&batt_dispatch_choice=1"),
  	NULL},
 {"batt_dispatch_pvs_curtail_if_violation", (getter)BatteryDispatch_get_batt_dispatch_pvs_curtail_if_violation,(setter)BatteryDispatch_set_batt_dispatch_pvs_curtail_if_violation,
-	PyDoc_STR("*float*: Curtail violations [0/1]\n\n*Required*: True if en_batt=1&batt_meter_position=1&batt_dispatch_choice=1"),
+	PyDoc_STR("*float*: Curtail violations [0/1]\n\n*Required*: True if en_batt=1&en_standalone_batt=0&batt_meter_position=1&batt_dispatch_choice=1"),
  	NULL},
 {"batt_dispatch_pvs_forecast_shift_periods", (getter)BatteryDispatch_get_batt_dispatch_pvs_forecast_shift_periods,(setter)BatteryDispatch_set_batt_dispatch_pvs_forecast_shift_periods,
-	PyDoc_STR("*float*: Forecasting window [periods of ramp intervals]\n\n*Required*: True if en_batt=1&batt_meter_position=1&batt_dispatch_choice=1"),
+	PyDoc_STR("*float*: Forecasting window [periods of ramp intervals]\n\n*Required*: True if en_batt=1&en_standalone_batt=0&batt_meter_position=1&batt_dispatch_choice=1"),
  	NULL},
 {"batt_dispatch_pvs_kf", (getter)BatteryDispatch_get_batt_dispatch_pvs_kf,(setter)BatteryDispatch_set_batt_dispatch_pvs_kf,
-	PyDoc_STR("*float*: Forecast accumulation error multiplier (kf)\n\n*Required*: True if en_batt=1&batt_meter_position=1&batt_dispatch_choice=1"),
+	PyDoc_STR("*float*: Forecast accumulation error multiplier (kf)\n\n*Required*: True if en_batt=1&en_standalone_batt=0&batt_meter_position=1&batt_dispatch_choice=1"),
  	NULL},
 {"batt_dispatch_pvs_ki", (getter)BatteryDispatch_get_batt_dispatch_pvs_ki,(setter)BatteryDispatch_set_batt_dispatch_pvs_ki,
-	PyDoc_STR("*float*: Return to rest SOC multiplier (ki)\n\n*Required*: True if en_batt=1&batt_meter_position=1&batt_dispatch_choice=1"),
+	PyDoc_STR("*float*: Return to rest SOC multiplier (ki)\n\n*Required*: True if en_batt=1&en_standalone_batt=0&batt_meter_position=1&batt_dispatch_choice=1"),
  	NULL},
 {"batt_dispatch_pvs_kp", (getter)BatteryDispatch_get_batt_dispatch_pvs_kp,(setter)BatteryDispatch_set_batt_dispatch_pvs_kp,
-	PyDoc_STR("*float*: Track PV power multiplier (kp)\n\n*Required*: True if en_batt=1&batt_meter_position=1&batt_dispatch_choice=1"),
+	PyDoc_STR("*float*: Track PV power multiplier (kp)\n\n*Required*: True if en_batt=1&en_standalone_batt=0&batt_meter_position=1&batt_dispatch_choice=1"),
  	NULL},
 {"batt_dispatch_pvs_max_ramp", (getter)BatteryDispatch_get_batt_dispatch_pvs_max_ramp,(setter)BatteryDispatch_set_batt_dispatch_pvs_max_ramp,
-	PyDoc_STR("*float*: Maximum ramp rate [% of nameplate per ramp interval]\n\n*Required*: True if en_batt=1&batt_meter_position=1&batt_dispatch_choice=1"),
+	PyDoc_STR("*float*: Maximum ramp rate [% of nameplate per ramp interval]\n\n*Required*: True if en_batt=1&en_standalone_batt=0&batt_meter_position=1&batt_dispatch_choice=1"),
  	NULL},
 {"batt_dispatch_pvs_nameplate_ac", (getter)BatteryDispatch_get_batt_dispatch_pvs_nameplate_ac,(setter)BatteryDispatch_set_batt_dispatch_pvs_nameplate_ac,
-	PyDoc_STR("*float*: Nameplate for pv smoothing [kWac]\n\n*Required*: True if en_batt=1&batt_meter_position=1&batt_dispatch_choice=1"),
+	PyDoc_STR("*float*: Nameplate for pv smoothing [kWac]\n\n*Required*: True if en_batt=1&en_standalone_batt=0&batt_meter_position=1&batt_dispatch_choice=1"),
  	NULL},
 {"batt_dispatch_pvs_short_forecast_enable", (getter)BatteryDispatch_get_batt_dispatch_pvs_short_forecast_enable,(setter)BatteryDispatch_set_batt_dispatch_pvs_short_forecast_enable,
-	PyDoc_STR("*float*: Enable short term power forecast [0/1]\n\n*Required*: True if en_batt=1&batt_meter_position=1&batt_dispatch_choice=1"),
+	PyDoc_STR("*float*: Enable short term power forecast [0/1]\n\n*Required*: True if en_batt=1&en_standalone_batt=0&batt_meter_position=1&batt_dispatch_choice=1"),
  	NULL},
 {"batt_dispatch_pvs_soc_rest", (getter)BatteryDispatch_get_batt_dispatch_pvs_soc_rest,(setter)BatteryDispatch_set_batt_dispatch_pvs_soc_rest,
-	PyDoc_STR("*float*: Battery resting SOC [%]\n\n*Required*: True if en_batt=1&batt_meter_position=1&batt_dispatch_choice=1"),
+	PyDoc_STR("*float*: Battery resting SOC [%]\n\n*Required*: True if en_batt=1&en_standalone_batt=0&batt_meter_position=1&batt_dispatch_choice=1"),
  	NULL},
 {"batt_dispatch_pvs_timestep_multiplier", (getter)BatteryDispatch_get_batt_dispatch_pvs_timestep_multiplier,(setter)BatteryDispatch_set_batt_dispatch_pvs_timestep_multiplier,
-	PyDoc_STR("*float*: Ramp timestep multiplier\n\n*Required*: True if en_batt=1&batt_meter_position=1&batt_dispatch_choice=1"),
+	PyDoc_STR("*float*: Ramp timestep multiplier\n\n*Required*: True if en_batt=1&en_standalone_batt=0&batt_meter_position=1&batt_dispatch_choice=1"),
  	NULL},
 {"batt_dispatch_update_frequency_hours", (getter)BatteryDispatch_get_batt_dispatch_update_frequency_hours,(setter)BatteryDispatch_set_batt_dispatch_update_frequency_hours,
 	PyDoc_STR("*float*: Frequency to update the look-ahead dispatch [hours]"),
@@ -10697,7 +10919,7 @@ static PyGetSetDef BatteryDispatch_getset[] = {
 	PyDoc_STR("*sequence*: PV clipping forecast [kW]\n\n*Info*: Length either 8760 * steps per hour (values repeat each year) or 8760 * steps per hour * analysis period"),
  	NULL},
 {"batt_target_choice", (getter)BatteryDispatch_get_batt_target_choice,(setter)BatteryDispatch_set_batt_target_choice,
-	PyDoc_STR("*float*: Target power input option [0/1]\n\n*Options*: 0=InputMonthlyTarget,1=InputFullTimeSeries\n\n*Required*: True if en_batt=1&batt_meter_position=0&batt_dispatch_choice=1"),
+	PyDoc_STR("*float*: Target power input option [0/1]\n\n*Options*: 0=InputMonthlyTarget,1=InputFullTimeSeries\n\n*Required*: True if en_batt=1&en_standalone_batt=0&batt_meter_position=0&batt_dispatch_choice=1"),
  	NULL},
 {"batt_target_power", (getter)BatteryDispatch_get_batt_target_power,(setter)BatteryDispatch_set_batt_target_power,
 	PyDoc_STR("*sequence*: Grid target power for every time step [kW]\n\n*Required*: True if en_batt=1&batt_meter_position=0&batt_dispatch_choice=1"),
@@ -10705,8 +10927,11 @@ static PyGetSetDef BatteryDispatch_getset[] = {
 {"batt_target_power_monthly", (getter)BatteryDispatch_get_batt_target_power_monthly,(setter)BatteryDispatch_set_batt_target_power_monthly,
 	PyDoc_STR("*sequence*: Grid target power on monthly basis [kW]\n\n*Required*: True if en_batt=1&batt_meter_position=0&batt_dispatch_choice=1"),
  	NULL},
+{"dispatch_manual_btm_discharge_to_grid", (getter)BatteryDispatch_get_dispatch_manual_btm_discharge_to_grid,(setter)BatteryDispatch_set_dispatch_manual_btm_discharge_to_grid,
+	PyDoc_STR("*sequence*: Periods 1-6 behind the meter discharging to grid allowed?\n\n*Required*: True if en_batt=1&batt_dispatch_choice=3&batt_meter_position=0"),
+ 	NULL},
 {"dispatch_manual_charge", (getter)BatteryDispatch_get_dispatch_manual_charge,(setter)BatteryDispatch_set_dispatch_manual_charge,
-	PyDoc_STR("*sequence*: Periods 1-6 charging from system allowed?\n\n*Required*: True if en_batt=1&batt_dispatch_choice=3"),
+	PyDoc_STR("*sequence*: Periods 1-6 charging from system allowed?\n\n*Required*: True if en_batt=1&en_standalone_batt=0&batt_dispatch_choice=3"),
  	NULL},
 {"dispatch_manual_discharge", (getter)BatteryDispatch_get_dispatch_manual_discharge,(setter)BatteryDispatch_set_dispatch_manual_discharge,
 	PyDoc_STR("*sequence*: Periods 1-6 discharging allowed?\n\n*Required*: True if en_batt=1&batt_dispatch_choice=3"),
@@ -11541,6 +11766,54 @@ ElectricityRates_set_ur_annual_min_charge(VarGroupObject *self, PyObject *value,
 }
 
 static PyObject *
+ElectricityRates_get_ur_billing_demand_lookback_percentages(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Pvsamv1_ElectricityRates_ur_billing_demand_lookback_percentages_mget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_billing_demand_lookback_percentages(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Pvsamv1_ElectricityRates_ur_billing_demand_lookback_percentages_mset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_billing_demand_lookback_period(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_ElectricityRates_ur_billing_demand_lookback_period_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_billing_demand_lookback_period(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_ElectricityRates_ur_billing_demand_lookback_period_nset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_billing_demand_minimum(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_ElectricityRates_ur_billing_demand_minimum_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_billing_demand_minimum(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_ElectricityRates_ur_billing_demand_minimum_nset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_dc_billing_demand_periods(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Pvsamv1_ElectricityRates_ur_dc_billing_demand_periods_mget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_dc_billing_demand_periods(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Pvsamv1_ElectricityRates_ur_dc_billing_demand_periods_mset, self->data_ptr);
+}
+
+static PyObject *
 ElectricityRates_get_ur_dc_enable(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Pvsamv1_ElectricityRates_ur_dc_enable_nget, self->data_ptr);
@@ -11601,54 +11874,6 @@ ElectricityRates_set_ur_dc_tou_mat(VarGroupObject *self, PyObject *value, void *
 }
 
 static PyObject *
-ElectricityRates_get_ur_ec_billing_demand_lookback_percentages(VarGroupObject *self, void *closure)
-{
-	return PySAM_matrix_getter(SAM_Pvsamv1_ElectricityRates_ur_ec_billing_demand_lookback_percentages_mget, self->data_ptr);
-}
-
-static int
-ElectricityRates_set_ur_ec_billing_demand_lookback_percentages(VarGroupObject *self, PyObject *value, void *closure)
-{
-		return PySAM_matrix_setter(value, SAM_Pvsamv1_ElectricityRates_ur_ec_billing_demand_lookback_percentages_mset, self->data_ptr);
-}
-
-static PyObject *
-ElectricityRates_get_ur_ec_billing_demand_lookback_period(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Pvsamv1_ElectricityRates_ur_ec_billing_demand_lookback_period_nget, self->data_ptr);
-}
-
-static int
-ElectricityRates_set_ur_ec_billing_demand_lookback_period(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Pvsamv1_ElectricityRates_ur_ec_billing_demand_lookback_period_nset, self->data_ptr);
-}
-
-static PyObject *
-ElectricityRates_get_ur_ec_billing_demand_minimum(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Pvsamv1_ElectricityRates_ur_ec_billing_demand_minimum_nget, self->data_ptr);
-}
-
-static int
-ElectricityRates_set_ur_ec_billing_demand_minimum(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Pvsamv1_ElectricityRates_ur_ec_billing_demand_minimum_nset, self->data_ptr);
-}
-
-static PyObject *
-ElectricityRates_get_ur_ec_enable_billing_demand(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Pvsamv1_ElectricityRates_ur_ec_enable_billing_demand_nget, self->data_ptr);
-}
-
-static int
-ElectricityRates_set_ur_ec_enable_billing_demand(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Pvsamv1_ElectricityRates_ur_ec_enable_billing_demand_nset, self->data_ptr);
-}
-
-static PyObject *
 ElectricityRates_get_ur_ec_sched_weekday(VarGroupObject *self, void *closure)
 {
 	return PySAM_matrix_getter(SAM_Pvsamv1_ElectricityRates_ur_ec_sched_weekday_mget, self->data_ptr);
@@ -11706,6 +11931,18 @@ static int
 ElectricityRates_set_ur_en_ts_sell_rate(VarGroupObject *self, PyObject *value, void *closure)
 {
 	return PySAM_double_setter(value, SAM_Pvsamv1_ElectricityRates_ur_en_ts_sell_rate_nset, self->data_ptr);
+}
+
+static PyObject *
+ElectricityRates_get_ur_enable_billing_demand(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_ElectricityRates_ur_enable_billing_demand_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_ur_enable_billing_demand(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_ElectricityRates_ur_enable_billing_demand_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -11835,6 +12072,18 @@ static PyGetSetDef ElectricityRates_getset[] = {
 {"ur_annual_min_charge", (getter)ElectricityRates_get_ur_annual_min_charge,(setter)ElectricityRates_set_ur_annual_min_charge,
 	PyDoc_STR("*float*: Annual minimum charge [$]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
+{"ur_billing_demand_lookback_percentages", (getter)ElectricityRates_get_ur_billing_demand_lookback_percentages,(setter)ElectricityRates_set_ur_billing_demand_lookback_percentages,
+	PyDoc_STR("*sequence[sequence]*: Billing demand lookback percentages by month and consider actual peak demand\n\n*Info*: 12x2\n\n*Required*: True if ur_enable_billing_demand=1"),
+ 	NULL},
+{"ur_billing_demand_lookback_period", (getter)ElectricityRates_get_ur_billing_demand_lookback_period,(setter)ElectricityRates_set_ur_billing_demand_lookback_period,
+	PyDoc_STR("*float*: Billing demand lookback period [mn]\n\n*Constraints*: INTEGER,MIN=0,MAX=12\n\n*Required*: True if ur_enable_billing_demand=1"),
+ 	NULL},
+{"ur_billing_demand_minimum", (getter)ElectricityRates_get_ur_billing_demand_minimum,(setter)ElectricityRates_set_ur_billing_demand_minimum,
+	PyDoc_STR("*float*: Minimum billing demand\n\n*Required*: True if ur_enable_billing_demand=1"),
+ 	NULL},
+{"ur_dc_billing_demand_periods", (getter)ElectricityRates_get_ur_dc_billing_demand_periods,(setter)ElectricityRates_set_ur_dc_billing_demand_periods,
+	PyDoc_STR("*sequence[sequence]*: Billing demand applicability to a given demand charge time of use period\n\n*Required*: True if ur_enable_billing_demand=1"),
+ 	NULL},
 {"ur_dc_enable", (getter)ElectricityRates_get_ur_dc_enable,(setter)ElectricityRates_set_ur_dc_enable,
 	PyDoc_STR("*float*: Enable demand charge [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
@@ -11850,18 +12099,6 @@ static PyGetSetDef ElectricityRates_getset[] = {
 {"ur_dc_tou_mat", (getter)ElectricityRates_get_ur_dc_tou_mat,(setter)ElectricityRates_set_ur_dc_tou_mat,
 	PyDoc_STR("*sequence[sequence]*: Demand rates (TOU) table\n\n*Required*: True if ur_dc_enable=1"),
  	NULL},
-{"ur_ec_billing_demand_lookback_percentages", (getter)ElectricityRates_get_ur_ec_billing_demand_lookback_percentages,(setter)ElectricityRates_set_ur_ec_billing_demand_lookback_percentages,
-	PyDoc_STR("*sequence[sequence]*: Billing demand lookback percentages by month and consider actual peak demand\n\n*Info*: 12x2\n\n*Required*: True if ur_ec_enable_billing_demand=1"),
- 	NULL},
-{"ur_ec_billing_demand_lookback_period", (getter)ElectricityRates_get_ur_ec_billing_demand_lookback_period,(setter)ElectricityRates_set_ur_ec_billing_demand_lookback_period,
-	PyDoc_STR("*float*: Billing demand lookback period [mn]\n\n*Constraints*: INTEGER,MIN=0,MAX=12\n\n*Required*: True if ur_ec_enable_billing_demand=1"),
- 	NULL},
-{"ur_ec_billing_demand_minimum", (getter)ElectricityRates_get_ur_ec_billing_demand_minimum,(setter)ElectricityRates_set_ur_ec_billing_demand_minimum,
-	PyDoc_STR("*float*: Minimum billing demand\n\n*Required*: True if ur_ec_enable_billing_demand=1"),
- 	NULL},
-{"ur_ec_enable_billing_demand", (getter)ElectricityRates_get_ur_ec_enable_billing_demand,(setter)ElectricityRates_set_ur_ec_enable_billing_demand,
-	PyDoc_STR("*float*: Enable billing demand for energy charges [0/1]\n\n*Options*: 0=disable,1=enable\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: If not provided, assumed to be 0"),
- 	NULL},
 {"ur_ec_sched_weekday", (getter)ElectricityRates_get_ur_ec_sched_weekday,(setter)ElectricityRates_set_ur_ec_sched_weekday,
 	PyDoc_STR("*sequence[sequence]*: Energy charge weekday schedule\n\n*Info*: 12x24"),
  	NULL},
@@ -11876,6 +12113,9 @@ static PyGetSetDef ElectricityRates_getset[] = {
  	NULL},
 {"ur_en_ts_sell_rate", (getter)ElectricityRates_get_ur_en_ts_sell_rate,(setter)ElectricityRates_set_ur_en_ts_sell_rate,
 	PyDoc_STR("*float*: Enable time step sell rates [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"ur_enable_billing_demand", (getter)ElectricityRates_get_ur_enable_billing_demand,(setter)ElectricityRates_set_ur_enable_billing_demand,
+	PyDoc_STR("*float*: Enable billing demand ratchets [0/1]\n\n*Options*: 0=disable,1=enable\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"ur_metering_option", (getter)ElectricityRates_get_ur_metering_option,(setter)ElectricityRates_set_ur_metering_option,
 	PyDoc_STR("*float*: Metering options [0=net energy metering,1=net energy metering with $ credits,2=net billing,3=net billing with carryover to next month,4=buy all - sell all]\n\n*Info*: Net metering monthly excess\n\n*Constraints*: INTEGER,MIN=0,MAX=4\n\n*Required*: If not provided, assumed to be 0"),
@@ -11905,7 +12145,7 @@ static PyGetSetDef ElectricityRates_getset[] = {
 	PyDoc_STR("*sequence*: Time step sell rates [0/1]"),
  	NULL},
 {"ur_yearzero_usage_peaks", (getter)ElectricityRates_get_ur_yearzero_usage_peaks,(setter)ElectricityRates_set_ur_yearzero_usage_peaks,
-	PyDoc_STR("*sequence*: Peak usage by month for year zero\n\n*Info*: 12\n\n*Required*: True if ur_ec_enable_billing_demand=1"),
+	PyDoc_STR("*sequence*: Peak usage by month for year zero\n\n*Info*: 12\n\n*Required*: True if ur_enable_billing_demand=1"),
  	NULL},
 	{NULL}  /* Sentinel */
 };

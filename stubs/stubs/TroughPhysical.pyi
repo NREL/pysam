@@ -281,6 +281,34 @@ class FinancialModel(object):
 	csp_financial_model = float
 
 
+class FinancialSolutionMode(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> dict:
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
+	ppa_soln_mode = float
+
+
+class ElectricityRates(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> dict:
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
+	en_electricity_rates = float
+
+
 class Revenue(object):
 	def assign(self): 
 		pass
@@ -555,6 +583,8 @@ class TroughPhysical(object):
 	Tou = Tou
 	SystemControl = SystemControl
 	FinancialModel = FinancialModel
+	FinancialSolutionMode = FinancialSolutionMode
+	ElectricityRates = ElectricityRates
 	Revenue = Revenue
 	System = System
 	Controller = Controller

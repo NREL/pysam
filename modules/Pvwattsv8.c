@@ -8,7 +8,7 @@
 
 /*
  * SolarResource Group
- */ 
+ */
 
 static PyTypeObject SolarResource_Type;
 
@@ -190,7 +190,7 @@ static PyTypeObject SolarResource_Type = {
 
 /*
  * Lifetime Group
- */ 
+ */
 
 static PyTypeObject Lifetime_Type;
 
@@ -357,7 +357,7 @@ static PyTypeObject Lifetime_Type = {
 
 /*
  * SystemDesign Group
- */ 
+ */
 
 static PyTypeObject SystemDesign_Type;
 
@@ -839,7 +839,7 @@ static PyTypeObject SystemDesign_Type = {
 
 /*
  * Outputs Group
- */ 
+ */
 
 static PyTypeObject Outputs_Type;
 
@@ -1391,6 +1391,7 @@ Pvwattsv8_execute(CmodObject *self, PyObject *args)
 		return NULL;
 
 	SAM_error error = new_error();
+	printf("Pvwattsv8_execute\n");
 	SAM_Pvwattsv8_execute(self->data_ptr, verbosity, &error);
 	if (PySAM_has_error(error )) return NULL;
 	Py_INCREF(Py_None);
@@ -1618,7 +1619,7 @@ static PyMethodDef Pvwattsv8Module_methods[] = {
 				PyDoc_STR("new() -> Pvwattsv8")},
 		{"default",             Pvwattsv8_default,         METH_VARARGS,
 				PyDoc_STR("default(config) -> Pvwattsv8\n\nUse default attributes\n"
-				"`config` options:\n\n- \"FuelCellCommercial\"\n- \"FuelCellSingleOwner\"\n- \"PVWattsBatteryCommercial\"\n- \"PVWattsBatteryHostDeveloper\"\n- \"PVWattsBatteryResidential\"\n- \"PVWattsBatteryThirdParty\"\n- \"PVWattsAllEquityPartnershipFlip\"\n- \"PVWattsCommercial\"\n- \"PVWattsHostDeveloper\"\n- \"PVWattsLCOECalculator\"\n- \"PVWattsLeveragedPartnershipFlip\"\n- \"PVWattsMerchantPlant\"\n- \"PVWattsNone\"\n- \"PVWattsResidential\"\n- \"PVWattsSaleLeaseback\"\n- \"PVWattsSingleOwner\"\n- \"PVWattsThirdParty\"")},
+				"`config` options:\n\n- \"FuelCellCommercial\"\n- \"FuelCellSingleOwner\"\n- \"PVWattsBatteryCommercial\"\n- \"PVWattsBatteryHostDeveloper\"\n- \"PVWattsBatteryResidential\"\n- \"PVWattsBatteryThirdParty\"\n- \"PVWattsAllEquityPartnershipFlip\"\n- \"PVWattsCommercial\"\n- \"PVWattsCommunitySolar\"\n- \"PVWattsHostDeveloper\"\n- \"PVWattsLCOECalculator\"\n- \"PVWattsLeveragedPartnershipFlip\"\n- \"PVWattsMerchantPlant\"\n- \"PVWattsNone\"\n- \"PVWattsResidential\"\n- \"PVWattsSaleLeaseback\"\n- \"PVWattsSingleOwner\"\n- \"PVWattsThirdParty\"")},
 		{"wrap",             Pvwattsv8_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Pvwattsv8\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   Pvwattsv8_from_existing,        METH_VARARGS,

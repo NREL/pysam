@@ -73,6 +73,22 @@ class SystemCosts(object):
 	total_installed_cost = float
 
 
+class LandLease(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> dict:
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
+	land_area = float
+	om_land_lease = tuple
+	om_land_lease_escal = float
+
+
 class Depreciation(object):
 	def assign(self): 
 		pass
@@ -243,6 +259,7 @@ class BatterySystem(object):
 	batt_replacement_schedule_percent = tuple
 	battery_per_kWh = float
 	en_batt = float
+	en_standalone_batt = float
 
 
 class FuelCell(object):
@@ -264,6 +281,59 @@ class FuelCell(object):
 	fuelcell_replacement_schedule = tuple
 
 
+class ChargesByMonth(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> dict:
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
+	charge_w_sys_dc_tou_ym = tuple
+	charge_w_sys_ec_ym = tuple
+	charge_w_sys_fixed_ym = tuple
+	net_billing_credits_ym = tuple
+	nm_dollars_applied_ym = tuple
+	true_up_credits_ym = tuple
+	utility_bill_w_sys = tuple
+
+
+class Battery(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> dict:
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
+	batt_capacity_percent = tuple
+	monthly_batt_to_grid = tuple
+	monthly_grid_to_batt = tuple
+	monthly_grid_to_load = tuple
+
+
+class TimeSeries(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> dict:
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
+	year1_hourly_dc_with_system = tuple
+	year1_hourly_e_fromgrid = tuple
+	year1_hourly_ec_with_system = tuple
+
+
 class SystemOutput(object):
 	def assign(self): 
 		pass
@@ -279,6 +349,7 @@ class SystemOutput(object):
 	annual_themal_value = tuple
 	degradation = tuple
 	gen = tuple
+	gen_purchases = tuple
 
 
 class Lifetime(object):
@@ -391,6 +462,7 @@ class Outputs(object):
 	cf_fuelcell_replacement_cost = tuple
 	cf_fuelcell_replacement_cost_schedule = tuple
 	cf_insurance_expense = tuple
+	cf_land_lease_expense = tuple
 	cf_length = float
 	cf_net_salvage_value = tuple
 	cf_nte = tuple
@@ -410,6 +482,7 @@ class Outputs(object):
 	cf_om_production2_expense = tuple
 	cf_om_production_expense = tuple
 	cf_operating_expenses = tuple
+	cf_parasitic_cost = tuple
 	cf_payback_with_expenses = tuple
 	cf_payback_without_expenses = tuple
 	cf_pbi_fedtax_total = tuple
@@ -434,10 +507,13 @@ class Outputs(object):
 	cf_sta_taxable_income_less_deductions = tuple
 	cf_state_tax_frac = tuple
 	cf_thermal_value = tuple
+	cf_util_escal_rate = tuple
+	cf_utility_bill = tuple
 	cf_value_added = tuple
 	discounted_payback = float
 	effective_tax_rate = float
 	first_cost = float
+	gen_purchases = tuple
 	ibi_fedtax_total = float
 	ibi_statax_total = float
 	ibi_total = float
@@ -497,11 +573,15 @@ class Cashloan(object):
 
 	FinancialParameters = FinancialParameters
 	SystemCosts = SystemCosts
+	LandLease = LandLease
 	Depreciation = Depreciation
 	TaxCreditIncentives = TaxCreditIncentives
 	PaymentIncentives = PaymentIncentives
 	BatterySystem = BatterySystem
 	FuelCell = FuelCell
+	ChargesByMonth = ChargesByMonth
+	Battery = Battery
+	TimeSeries = TimeSeries
 	SystemOutput = SystemOutput
 	Lifetime = Lifetime
 	ThirdPartyOwnership = ThirdPartyOwnership

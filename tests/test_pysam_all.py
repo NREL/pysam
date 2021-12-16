@@ -294,6 +294,8 @@ def assign_values(mod, i):
         elif mod == "Battwatts":
             m.value("ac", [1] * 8760)
             m.value("inverter_efficiency", 0.96)
+        elif mod == "Battery":
+            m.value("gen", [1] * 8760)
         else:
             try:
                 m.value("solar_resource_file", sf)
@@ -325,10 +327,10 @@ def test_run_all():
     if minor_ver != 6:
         return
     techs = (
-        "TroughPhysicalProcessHeat", "Battwatts", "Biomass", "Geothermal", "LinearFresnelDsgIph", "MhkTidal",
-        "MhkWave", "TcsMSLF", "TcsgenericSolar", "TcslinearFresnel", "TcstroughEmpirical", "TroughPhysical",
-        "Pvsamv1", "Pvwattsv7", "Pvwattsv5", "TcsmoltenSalt", "Hcpv", "Swh", "TcsdirectSteam",
-        "Tcsiscc", "Windpower", "GenericSystem", "Grid")
+        "Battery", "Battwatts", "Biomass", "Geothermal", "LinearFresnelDsgIph", "MhkTidal", "MhkWave", "Windpower",
+        "Pvsamv1", "Pvwattsv7", "Pvwattsv5", "TcsmoltenSalt", "Hcpv", "Swh", "Tcsiscc", "GenericSystem", "Grid",
+        "TroughPhysicalProcessHeat", "TcsMSLF", "TcsgenericSolar", "TcslinearFresnel", "TcstroughEmpirical",
+        "TroughPhysical",)
     for mod in techs:
         mod_name = "PySAM." + mod
         i = importlib.import_module(mod_name)

@@ -50,6 +50,7 @@ class Farm(object):
 		pass
 
 
+	max_turbine_override = float
 	system_capacity = float
 	wind_farm_wake_model = float
 	wind_farm_xCoordinates = tuple

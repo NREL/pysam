@@ -63,6 +63,18 @@ FinancialModel Group
 .. autoclass:: PySAM.TroughPhysical.TroughPhysical.FinancialModel
 	:members:
 
+FinancialSolutionMode Group
+======================================================
+
+.. autoclass:: PySAM.TroughPhysical.TroughPhysical.FinancialSolutionMode
+	:members:
+
+ElectricityRates Group
+======================================================
+
+.. autoclass:: PySAM.TroughPhysical.TroughPhysical.ElectricityRates
+	:members:
+
 Revenue Group
 ======================================================
 

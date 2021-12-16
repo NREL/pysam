@@ -28,6 +28,7 @@ class GeoHourly(object):
 	decline_type = float
 	delta_pressure_equip = float
 	design_temp = float
+	dt_prod_well = float
 	eta_ref = float
 	excess_pressure_pump = float
 	file_name = str

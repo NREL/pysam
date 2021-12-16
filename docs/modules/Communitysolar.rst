@@ -1,9 +1,9 @@
-.. _Saleleaseback:
+.. _Communitysolar:
 
-Saleleaseback
+Communitysolar
 ***********************************
 
-Wrapper for SAM Simulation Core model: `cmod_saleleaseback.cpp <https://github.com/NREL/ssc/blob/develop/ssc/cmod_saleleaseback.cpp>`_
+Wrapper for SAM Simulation Core model: `cmod_communitysolar.cpp <https://github.com/NREL/ssc/blob/develop/ssc/cmod_communitysolar.cpp>`_
 
 Input Consistency Warning
 ==================================
@@ -14,6 +14,7 @@ the onus is on the PySAM user to check that interdependencies are correctly hand
 additional logic include:
 
  - construction_financing_cost
+ - land_area
  - total_installed_cost
 
 Provided for each of these inputs is a list of other inputs that are potentially interdependent. 
@@ -23,116 +24,122 @@ Creating an Instance
 
 Refer to the :ref:`Initializing a Model <initializing>` page for details on the different ways to create an instance of a PySAM class.
 
-**Saleleaseback model description**
+**Communitysolar model description**
 
-.. automodule:: PySAM.Saleleaseback
+.. automodule:: PySAM.Communitysolar
 	:members:
 
 Functions
 ===================================
 
-.. autoclass:: PySAM.Saleleaseback.Saleleaseback
-	:members:
-
-Revenue Group
-======================================================
-
-.. autoclass:: PySAM.Saleleaseback.Saleleaseback.Revenue
+.. autoclass:: PySAM.Communitysolar.Communitysolar
 	:members:
 
 FinancialParameters Group
 ======================================================
 
-.. autoclass:: PySAM.Saleleaseback.Saleleaseback.FinancialParameters
+.. autoclass:: PySAM.Communitysolar.Communitysolar.FinancialParameters
 	:members:
 
 SystemCosts Group
 ======================================================
 
-.. autoclass:: PySAM.Saleleaseback.Saleleaseback.SystemCosts
+.. autoclass:: PySAM.Communitysolar.Communitysolar.SystemCosts
 	:members:
 
 LandLease Group
 ======================================================
 
-.. autoclass:: PySAM.Saleleaseback.Saleleaseback.LandLease
+.. autoclass:: PySAM.Communitysolar.Communitysolar.LandLease
 	:members:
 
 TaxCreditIncentives Group
 ======================================================
 
-.. autoclass:: PySAM.Saleleaseback.Saleleaseback.TaxCreditIncentives
+.. autoclass:: PySAM.Communitysolar.Communitysolar.TaxCreditIncentives
 	:members:
 
 Depreciation Group
 ======================================================
 
-.. autoclass:: PySAM.Saleleaseback.Saleleaseback.Depreciation
+.. autoclass:: PySAM.Communitysolar.Communitysolar.Depreciation
 	:members:
 
 PaymentIncentives Group
 ======================================================
 
-.. autoclass:: PySAM.Saleleaseback.Saleleaseback.PaymentIncentives
+.. autoclass:: PySAM.Communitysolar.Communitysolar.PaymentIncentives
 	:members:
 
-SystemOutput Group
+Revenue Group
 ======================================================
 
-.. autoclass:: PySAM.Saleleaseback.Saleleaseback.SystemOutput
-	:members:
-
-ElectricityRates Group
-======================================================
-
-.. autoclass:: PySAM.Saleleaseback.Saleleaseback.ElectricityRates
-	:members:
-
-SaleLeaseback Group
-======================================================
-
-.. autoclass:: PySAM.Saleleaseback.Saleleaseback.SaleLeaseback
-	:members:
-
-TimeOfDelivery Group
-======================================================
-
-.. autoclass:: PySAM.Saleleaseback.Saleleaseback.TimeOfDelivery
-	:members:
-
-UtilityBill Group
-======================================================
-
-.. autoclass:: PySAM.Saleleaseback.Saleleaseback.UtilityBill
-	:members:
-
-OtherCapitalCosts Group
-======================================================
-
-.. autoclass:: PySAM.Saleleaseback.Saleleaseback.OtherCapitalCosts
-	:members:
-
-LCOS Group
-======================================================
-
-.. autoclass:: PySAM.Saleleaseback.Saleleaseback.LCOS
-	:members:
-
-ChargesByMonth Group
-======================================================
-
-.. autoclass:: PySAM.Saleleaseback.Saleleaseback.ChargesByMonth
+.. autoclass:: PySAM.Communitysolar.Communitysolar.Revenue
 	:members:
 
 BatterySystem Group
 ======================================================
 
-.. autoclass:: PySAM.Saleleaseback.Saleleaseback.BatterySystem
+.. autoclass:: PySAM.Communitysolar.Communitysolar.BatterySystem
+	:members:
+
+ElectricityRates Group
+======================================================
+
+.. autoclass:: PySAM.Communitysolar.Communitysolar.ElectricityRates
+	:members:
+
+SystemOutput Group
+======================================================
+
+.. autoclass:: PySAM.Communitysolar.Communitysolar.SystemOutput
+	:members:
+
+UtilityBill Group
+======================================================
+
+.. autoclass:: PySAM.Communitysolar.Communitysolar.UtilityBill
+	:members:
+
+Lifetime Group
+======================================================
+
+.. autoclass:: PySAM.Communitysolar.Communitysolar.Lifetime
+	:members:
+
+CommunitySolar Group
+======================================================
+
+.. autoclass:: PySAM.Communitysolar.Communitysolar.CommunitySolar
+	:members:
+
+FuelCell Group
+======================================================
+
+.. autoclass:: PySAM.Communitysolar.Communitysolar.FuelCell
+	:members:
+
+GridLimits Group
+======================================================
+
+.. autoclass:: PySAM.Communitysolar.Communitysolar.GridLimits
+	:members:
+
+LCOS Group
+======================================================
+
+.. autoclass:: PySAM.Communitysolar.Communitysolar.LCOS
+	:members:
+
+ChargesByMonth Group
+======================================================
+
+.. autoclass:: PySAM.Communitysolar.Communitysolar.ChargesByMonth
 	:members:
 
 Outputs Group
 ======================================================
 
-.. autoclass:: PySAM.Saleleaseback.Saleleaseback.Outputs
+.. autoclass:: PySAM.Communitysolar.Communitysolar.Outputs
 	:members:
 
