@@ -23,6 +23,7 @@ PySAM exposes these unit modules in a native Python interface so that they can b
     :caption: Contents:
 
     GettingStarted.rst
+    VersionChanges.rst
     Initialization.rst
     Examples.rst
     Webinars.rst
@@ -71,6 +72,8 @@ PySAM also includes tools that provide design and resource functionality.
 Release notes
 --------------
 For information on versions, updates and matching SAM releases, please see `Release notes <https://github.com/NREL/pysam/blob/master/RELEASE.md>`_
+
+   :doc:`Changes to Modules <VersionChanges>`
 
 * **Version 2.0 and Upgrading from Older Versions**: Between major version changes, in addition to new features, modules and bug fixes, the group to which a variable belongs may change.
 
