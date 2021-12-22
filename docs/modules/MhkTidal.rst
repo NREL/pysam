@@ -14,6 +14,7 @@ the onus is on the PySAM user to check that interdependencies are correctly hand
 additional logic include:
 
  - number_devices
+ - system_capacity
  - tidal_power_curve
 
 Provided for each of these inputs is a list of other inputs that are potentially interdependent. 

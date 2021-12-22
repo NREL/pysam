@@ -8,7 +8,7 @@
 
 /*
  * SolarResource Group
- */
+ */ 
 
 static PyTypeObject SolarResource_Type;
 
@@ -190,7 +190,7 @@ static PyTypeObject SolarResource_Type = {
 
 /*
  * Lifetime Group
- */
+ */ 
 
 static PyTypeObject Lifetime_Type;
 
@@ -357,7 +357,7 @@ static PyTypeObject Lifetime_Type = {
 
 /*
  * SystemDesign Group
- */
+ */ 
 
 static PyTypeObject SystemDesign_Type;
 
@@ -839,7 +839,7 @@ static PyTypeObject SystemDesign_Type = {
 
 /*
  * Outputs Group
- */
+ */ 
 
 static PyTypeObject Outputs_Type;
 
@@ -1391,7 +1391,6 @@ Pvwattsv8_execute(CmodObject *self, PyObject *args)
 		return NULL;
 
 	SAM_error error = new_error();
-	printf("Pvwattsv8_execute\n");
 	SAM_Pvwattsv8_execute(self->data_ptr, verbosity, &error);
 	if (PySAM_has_error(error )) return NULL;
 	Py_INCREF(Py_None);

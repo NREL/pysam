@@ -5,7 +5,8 @@
 * Fix SAM_CSV_to_solar_data function missing information (#98)
 * Fix URDBv7_to_ElectricityRates error for certain demand structures (#99)
 * Add Python 3.10 Support (#104)
-* New Examples
+* New Example for Selecting Modules and Inverter from the SAM Library (#103)
+* [SAM Release updates for Version 2020.12.02](https://nrel.github.io/SAM/doc/releasenotes.html)
 
 ## Version 2.2.4, Aug 20, 2021 ~ SAM 2020.11.29, Revision 2, SSC Version 259
 * Fix bug in Battery LMO/LTO life model

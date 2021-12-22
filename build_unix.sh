@@ -22,7 +22,7 @@ source $(conda info --base)/etc/profile.d/conda.sh
 rm -rf build
 rm -rf dist/*
 
-for PYTHONENV in pysam_build_3.6 pysam_build_3.7 pysam_build_3.8 pysam_build_3.9
+for PYTHONENV in pysam_build_3.6 pysam_build_3.7 pysam_build_3.8 pysam_build_3.9 pysam_build_3.10
 do
    conda activate $PYTHONENV
    yes | pip install -r tests/requirements.txt

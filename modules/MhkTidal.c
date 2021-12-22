@@ -198,6 +198,18 @@ MHKTidal_set_number_devices(VarGroupObject *self, PyObject *value, void *closure
 }
 
 static PyObject *
+MHKTidal_get_system_capacity(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MhkTidal_MHKTidal_system_capacity_nget, self->data_ptr);
+}
+
+static int
+MHKTidal_set_system_capacity(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_MhkTidal_MHKTidal_system_capacity_nset, self->data_ptr);
+}
+
+static PyObject *
 MHKTidal_get_tidal_power_curve(VarGroupObject *self, void *closure)
 {
 	return PySAM_matrix_getter(SAM_MhkTidal_MHKTidal_tidal_power_curve_mget, self->data_ptr);
@@ -262,10 +274,13 @@ static PyGetSetDef MHKTidal_getset[] = {
 	PyDoc_STR("*float*: Transmission losses [%]\n\n*Required*: True"),
  	NULL},
 {"number_devices", (getter)MHKTidal_get_number_devices,(setter)MHKTidal_set_number_devices,
-	PyDoc_STR("*float*: Number of tidal devices in the system\n\n*Constraints*: INTEGER\n\n*Required*: If not provided, assumed to be 1\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - tidal_power_curve\n"),
+	PyDoc_STR("*float*: Number of tidal devices in the system\n\n*Constraints*: INTEGER\n\n*Required*: If not provided, assumed to be 1\n\n*Changes to this variable may require updating the values of the following*: \n\t - system_capacity\n\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - tidal_power_curve\n"),
+ 	NULL},
+{"system_capacity", (getter)MHKTidal_get_system_capacity,(setter)MHKTidal_set_system_capacity,
+	PyDoc_STR("*float*: System Nameplate Capacity [kW]\n\n*Required*: If not provided, assumed to be 0\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - number_devices\n\t - tidal_power_curve\n"),
  	NULL},
 {"tidal_power_curve", (getter)MHKTidal_get_tidal_power_curve,(setter)MHKTidal_set_tidal_power_curve,
-	PyDoc_STR("*sequence[sequence]*: Power curve of tidal energy device as function of stream speeds [kW]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - number_devices\n"),
+	PyDoc_STR("*sequence[sequence]*: Power curve of tidal energy device as function of stream speeds [kW]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - number_devices\n\t - system_capacity\n"),
  	NULL},
 {"tidal_resource", (getter)MHKTidal_get_tidal_resource,(setter)MHKTidal_set_tidal_resource,
 	PyDoc_STR("*sequence[sequence]*: Frequency distribution of resource as a function of stream speeds\n\n*Required*: True"),
@@ -467,6 +482,12 @@ Outputs_get_total_bos_cost_lcoe(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_total_bos_cost_per_kw(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MhkTidal_Outputs_total_bos_cost_per_kw_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_total_capital_cost_kwh(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_MhkTidal_Outputs_total_capital_cost_kwh_nget, self->data_ptr);
@@ -476,6 +497,12 @@ static PyObject *
 Outputs_get_total_capital_cost_lcoe(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_MhkTidal_Outputs_total_capital_cost_lcoe_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_total_capital_cost_per_kw(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MhkTidal_Outputs_total_capital_cost_per_kw_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -491,6 +518,12 @@ Outputs_get_total_device_cost_lcoe(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_total_device_cost_per_kw(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MhkTidal_Outputs_total_device_cost_per_kw_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_total_financial_cost_kwh(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_MhkTidal_Outputs_total_financial_cost_kwh_nget, self->data_ptr);
@@ -503,6 +536,12 @@ Outputs_get_total_financial_cost_lcoe(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_total_financial_cost_per_kw(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MhkTidal_Outputs_total_financial_cost_per_kw_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_total_om_cost_kwh(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_MhkTidal_Outputs_total_om_cost_kwh_nget, self->data_ptr);
@@ -512,6 +551,12 @@ static PyObject *
 Outputs_get_total_om_cost_lcoe(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_MhkTidal_Outputs_total_om_cost_lcoe_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_total_operations_cost_per_kw(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MhkTidal_Outputs_total_operations_cost_per_kw_nget, self->data_ptr);
 }
 
 static PyGetSetDef Outputs_getset[] = {
@@ -551,11 +596,17 @@ static PyGetSetDef Outputs_getset[] = {
 {"total_bos_cost_lcoe", (getter)Outputs_get_total_bos_cost_lcoe,(setter)0,
 	PyDoc_STR("*float*: BOS cost [%]"),
  	NULL},
+{"total_bos_cost_per_kw", (getter)Outputs_get_total_bos_cost_per_kw,(setter)0,
+	PyDoc_STR("*float*: Balance of Systems cost per kW [$/kW]"),
+ 	NULL},
 {"total_capital_cost_kwh", (getter)Outputs_get_total_capital_cost_kwh,(setter)0,
 	PyDoc_STR("*float*: Capital costs per unit annual energy [$/kWh]"),
  	NULL},
 {"total_capital_cost_lcoe", (getter)Outputs_get_total_capital_cost_lcoe,(setter)0,
 	PyDoc_STR("*float*: Capital cost as percentage of overall LCOE [%]"),
+ 	NULL},
+{"total_capital_cost_per_kw", (getter)Outputs_get_total_capital_cost_per_kw,(setter)0,
+	PyDoc_STR("*float*: Capital cost per kW [$/kW]"),
  	NULL},
 {"total_device_cost_kwh", (getter)Outputs_get_total_device_cost_kwh,(setter)0,
 	PyDoc_STR("*float*: Device costs per unit annual energy [$/kWh]"),
@@ -563,17 +614,26 @@ static PyGetSetDef Outputs_getset[] = {
 {"total_device_cost_lcoe", (getter)Outputs_get_total_device_cost_lcoe,(setter)0,
 	PyDoc_STR("*float*: Device cost [%]"),
  	NULL},
+{"total_device_cost_per_kw", (getter)Outputs_get_total_device_cost_per_kw,(setter)0,
+	PyDoc_STR("*float*: Device cost per kW [$/kW]"),
+ 	NULL},
 {"total_financial_cost_kwh", (getter)Outputs_get_total_financial_cost_kwh,(setter)0,
 	PyDoc_STR("*float*: Financial costs per unit annual energy [$/kWh]"),
  	NULL},
 {"total_financial_cost_lcoe", (getter)Outputs_get_total_financial_cost_lcoe,(setter)0,
 	PyDoc_STR("*float*: Financial cost [%]"),
  	NULL},
+{"total_financial_cost_per_kw", (getter)Outputs_get_total_financial_cost_per_kw,(setter)0,
+	PyDoc_STR("*float*: Financial cost per kW [$/kW]"),
+ 	NULL},
 {"total_om_cost_kwh", (getter)Outputs_get_total_om_cost_kwh,(setter)0,
 	PyDoc_STR("*float*: O&M costs per unit annual energy [$/kWh]"),
  	NULL},
 {"total_om_cost_lcoe", (getter)Outputs_get_total_om_cost_lcoe,(setter)0,
 	PyDoc_STR("*float*: O&M cost (annual) [%]"),
+ 	NULL},
+{"total_operations_cost_per_kw", (getter)Outputs_get_total_operations_cost_per_kw,(setter)0,
+	PyDoc_STR("*float*: O&M cost per kW [$/kW]"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
