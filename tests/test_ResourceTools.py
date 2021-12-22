@@ -1,4 +1,5 @@
 import sys
+import os
 sys.path.append('.')
 import shutil
 import pytest
@@ -114,8 +115,8 @@ def test_urdb_2():
 def test_resourcefilefetcher():
 
     # please get your own API key from here https://developer.nrel.gov/signup/
-    NREL_API_KEY = 'HIiOQJN8C4dcWoJ5cxJ6Cl9LdEOQeo7c2bL67WqA'
-    NREL_API_EMAIL = 'dguittet@nrel.gov'
+    NREL_API_KEY = os.environ.get('NREL_API_KEY')
+    NREL_API_EMAIL = os.environ.get('NREL_API_EMAIL')
 
     lon_lats = [(-105.1800775, 39.7383155)]  # golden CO
 
