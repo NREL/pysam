@@ -1,6 +1,10 @@
 # Release Notes
 
-## Version 2.3.0, Dec 15, 2021 ~ SAM 2021.12.02, SSC Version 267
+## Version 3.0.0, Dec 23, 2021 ~ SAM 2021.12.02, SSC Version 267
+* __Warning: Significant changes to Battery and UtilityRate5 Modules, including redefinition of some variables.__
+ Please see [SSC Release Notes](https://nrel.github.io/ssc/doc/releasenotes.html) for description of functionality and
+ variable changes, and please see "Version Changes" section in [PySAM Documentation](https://nrel-pysam.readthedocs.io/)
+ for full list of variable changes.
 * Fix FetchResourceFiles's InsecureRequestWarning (#89); html error messages (#94); verbosity (#96)
 * Fix SAM_CSV_to_solar_data function missing information (#98)
 * Fix URDBv7_to_ElectricityRates error for certain demand structures (#99)

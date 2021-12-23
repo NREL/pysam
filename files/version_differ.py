@@ -10,19 +10,15 @@ from collections import OrderedDict
 from files.version import __version__
 
 
-#################################################################################################################
-#
-# This file compares the PySAM Modules' input variables and the defaults for these input variables between the
-# between the current release under development and the last official release. This helps track which variables
-# and defaults have changed between releases to make it easier to notify users during version upgrade.
-#
-# The output of this script is pysam/docs/VersionChanges.rst which documents for each PySAM Module:
-#     1. New Default files
-#     2. Removed Default files
-#     3. Modified Variables: New variables, Removed variables and Type-changed variables
-#     4. Modified Default Values
-#
-#################################################################################################################
+doc_str = "" \
+          "This page compares the PySAM Modules' input variables and the defaults for these input variables \n" \
+          "between the current release and the last release.\n\nThis helps track which variables\n" \
+          "and defaults have changed between releases to make it easier to notify users during version upgrade.\n\n" \
+          "Below are lists for each PySAM Module:\n" \
+          "    1. New Default configurations\n" \
+          "    2. Removed Default configurations\n" \
+          "    3. Modified Variables: New variables, Removed variables and Type-changed variables\n" \
+          "    4. Modified Default Values\n\n"
 
 #
 # Download the SAM repo tagged for the previous PySAM Release from Github to compare defaults
@@ -238,41 +234,41 @@ with open(os.path.join(pysam_dir, "docs", "VersionChanges.rst"), "w") as f:
     f.write('.. Version Changes:\n\n')
     f.write(f'Changes to Modules with Version {__version__}\n')
     f.write('===============================================\n\n')
-    f.write('This document shows the changes for each Module\n\n')
+    f.write(f'{doc_str}\n\n')
     for cmod, changes in doc_dict.items():
         f.write(cmod + "\n")
         f.write('************************************************\n\n')
         if 'new_defaults' in changes.keys():
             f.write(f':doc:`modules/{cmod}` New Default files:\n\n')
             for v in changes['new_defaults']:
-                f.write(f"\t - {v}\n")
+                f.write(f"     - {v}\n")
             f.write("\n")
         if 'del_defaults' in changes.keys():
             f.write(f':doc:`modules/{cmod}` Removed Default files\n\n')
             for v in changes['del_defaults']:
-                f.write(f"\t - {v}\n")
+                f.write(f"     - {v}\n")
             f.write("\n")
         if 'mod_variables' in changes.keys():
             f.write(f':doc:`modules/{cmod}` Modified Variables:\n\n')
             if 'Added variables' in changes['mod_variables']:
-                f.write('\tNew variables:\n\n')
+                f.write('    New variables:\n\n')
                 for v in changes['mod_variables']['Added variables']:
-                    f.write(f"\t\t - {v}\n")
+                    f.write(f"         - {v}\n")
                 f.write('\n')
             if 'Removed variables' in changes['mod_variables']:
-                f.write('\tRemoved variables:\n\n')
+                f.write('    Removed variables:\n\n')
                 for v in changes['mod_variables']['Removed variables']:
-                    f.write(f"\t\t - {v}\n")
+                    f.write(f"         - {v}\n")
                 f.write('\n')
             if 'Type changed' in changes['mod_variables']:
-                f.write('\tType-changed variables:\n\n')
+                f.write('    Type-changed variables:\n\n')
                 for v in changes['mod_variables']['Type changed']:
-                    f.write(f"\t\t - {v}\n")
+                    f.write(f"         - {v}\n")
                 f.write('\n')
         if 'mod_defaults' in changes.keys():
             f.write(f':doc:`modules/{cmod}` Modified Default Values:\n\n')
             for k, v in changes['mod_defaults'].items():
-                f.write(f"\t - {k}\n\n\t\t{list(v.keys())}\n\n")
+                f.write(f"     - {k}\n\n        {list(v.keys())}\n\n")
             f.write("\n")
         f.write('\n')
 

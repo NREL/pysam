@@ -33,6 +33,17 @@ PySAM exposes these unit modules in a native Python interface so that they can b
     Tools.rst
     PySSC.rst
 
+Release notes & Version Changes
+-------------------------------
+For information on versions, updates and matching SAM releases, please see `Release notes <https://github.com/NREL/pysam/blob/master/RELEASE.md>`_
+
+**Version 3.0 and Upgrading from Older Versions**: There are significant changes to the input variables for several modules.
+ Please see `SSC Release Notes <https://nrel.github.io/ssc/doc/releasenotes.html>`_ for description of functionality and
+ variable definition changes, and please see :doc:`Changes to Modules <VersionChanges>` for full list of changes per PySAM Module.
+
+ Between major version changes, in addition to new features, modules and bug fixes, the group to which a variable belongs may change.
+
+
 Getting Started
 ------------------------------------------
 
@@ -68,12 +79,4 @@ PySAM also includes tools that provide design and resource functionality.
   :doc:`Design & Resource Tools <Tools>` |
   :doc:`PySSC Wrapper <PySSC>`
 
-
-Release notes
---------------
-For information on versions, updates and matching SAM releases, please see `Release notes <https://github.com/NREL/pysam/blob/master/RELEASE.md>`_
-
-   :doc:`Changes to Modules <VersionChanges>`
-
-* **Version 2.0 and Upgrading from Older Versions**: Between major version changes, in addition to new features, modules and bug fixes, the group to which a variable belongs may change.
 
