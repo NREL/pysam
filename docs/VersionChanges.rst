@@ -3,33 +3,22 @@
 Changes to Modules with Version 3.0.0
 ===============================================
 
-This page compares the PySAM Modules' input variables and the defaults for these input variables between the
-current release and the last release.
+This page compares the PySAM Modules' input variables and the defaults for these input variables 
+between the current release and the last release.
 
 This helps track which variables and defaults have changed between releases to make it easier to notify users during version upgrade.
 
 Below are lists for each PySAM Module:
-     1. New Default configurations
-     2. Removed Default configurations
-     3. Modified Variables: New variables, Removed variables and Type-changed variables
-     4. Modified Default Values
+    1. New Default configurations
+    2. Removed Default configurations
+    3. Modified Variables: New variables, Removed variables and Type-changed variables
+    4. Modified Default Values
 
 Battery
 ************************************************
 
-:doc:`modules/Battery` New Default files:
+:doc:`modules/Battery` Modified Input Variables:
 
-     - StandaloneBatteryAllEquityPartnershipFlip
-     - StandaloneBatteryCommercial
-     - StandaloneBatteryHostDeveloper
-     - StandaloneBatteryLeveragedPartnershipFlip
-     - StandaloneBatteryMerchantPlant
-     - StandaloneBatteryResidential
-     - StandaloneBatterySaleLeaseback
-     - StandaloneBatterySingleOwner
-     - StandaloneBatteryThirdParty
-
-:doc:`modules/Battery` Modified Variables:
 
     The input `batt_dispatch_choice` was redefined and the new options are:
         - Front of meter:
@@ -47,246 +36,231 @@ Battery
     New variables:
 
          - batt_dispatch_auto_btm_can_discharge_to_grid
-         - batt_dispatch_auto_can_clipcharge
          - batt_dispatch_charge_only_system_exceeds_load
          - batt_dispatch_discharge_only_load_exceeds_system
          - batt_dispatch_load_forecast_choice
          - batt_dispatch_wf_forecast_choice
-         - batt_life_model
          - batt_load_ac_forecast
          - batt_load_ac_forecast_escalation
          - batt_minimum_outage_SOC
-         - batt_pv_ac_forecast
-         - batt_pv_clipping_forecast
-         - crit_load
          - crit_load_escalation
          - dispatch_manual_btm_discharge_to_grid
          - en_standalone_batt
-         - grid_outage
          - om_batt_replacement_cost
          - om_replacement_cost_escal
-         - rate_escalation
-         - run_resiliency_calcs
-         - ur_annual_min_charge
          - ur_billing_demand_lookback_percentages
          - ur_billing_demand_lookback_period
          - ur_billing_demand_minimum
          - ur_dc_billing_demand_periods
-         - ur_dc_enable
-         - ur_dc_flat_mat
-         - ur_dc_sched_weekday
-         - ur_dc_sched_weekend
-         - ur_dc_tou_mat
-         - ur_ec_sched_weekday
-         - ur_ec_sched_weekend
-         - ur_ec_tou_mat
-         - ur_en_ts_buy_rate
-         - ur_en_ts_sell_rate
          - ur_enable_billing_demand
-         - ur_metering_option
-         - ur_monthly_fixed_charge
-         - ur_monthly_min_charge
-         - ur_nm_credit_month
-         - ur_nm_credit_rollover
-         - ur_nm_yearend_sell_rate
-         - ur_ts_buy_rate
-         - ur_ts_sell_rate
-         - ur_yearzero_usage_peaks
 
     Removed variables:
 
+         - batt_auto_gridcharge_max_daily
          - ur_ec_billing_demand_lookback_percentages
          - ur_ec_billing_demand_lookback_period
          - ur_ec_billing_demand_minimum
          - ur_ec_enable_billing_demand
 
+:doc:`modules/Battery` New Default files:
+
+     - StandaloneBatteryAllEquityPartnershipFlip
+     - StandaloneBatteryCommercial
+     - StandaloneBatteryHostDeveloper
+     - StandaloneBatteryLeveragedPartnershipFlip
+     - StandaloneBatteryMerchantPlant
+     - StandaloneBatteryResidential
+     - StandaloneBatterySaleLeaseback
+     - StandaloneBatterySingleOwner
+     - StandaloneBatteryThirdParty
+
 :doc:`modules/Battery` Modified Default Values:
 
-     - Battery_FuelCellCommercial
+     - Utilityrate5_PVWattsBatteryHostDeveloper
 
-        ['batt_room_temperature_celsius', 'ur_yearzero_usage_peaks', 'batt_calendar_choice', 'batt_calendar_c']
+        ['degradation']
 
-     - Battery_FuelCellSingleOwner
+     - Cashloan_PVBatteryCommercial
 
-        ['batt_room_temperature_celsius', 'ur_ec_sched_weekend', 'ur_ec_tou_mat', 'ur_monthly_fixed_charge', 'ur_ec_sched_weekday', 'batt_calendar_choice', 'ur_dc_enable', 'batt_meter_position', 'ur_dc_sched_weekend', 'ur_dc_tou_mat', 'ur_dc_sched_weekday', 'batt_calendar_c', 'batt_minimum_SOC', 'ppa_price_input']
+        ['battery_per_kWh', 'om_batt_capacity_cost', 'loan_rate', 'om_batt_replacement_cost', 'om_capacity']
+
+     - Equpartflip_GenericBatteryAllEquityPartnershipFlip
+
+        ['reserves_interest', 'ppa_escalation', 'insurance_rate', 'battery_per_kWh', 'equip1_reserve_freq', 'om_batt_capacity_cost', 'equip1_reserve_cost', 'om_batt_replacement_cost', 'om_capacity']
+
+     - Battery_GenericBatteryThirdParty
+
+        ['batt_minimum_SOC', 'ur_yearzero_usage_peaks', 'batt_calendar_c']
+
+     - Pvsamv1_PVBatteryResidential
+
+        ['subarray2_mismatch_loss', 'inv_tdc_plc', 'batt_calendar_c', 'subarray3_mismatch_loss', 'ur_yearzero_usage_peaks', 'subarray1_mismatch_loss', 'subarray4_mismatch_loss', 'inv_tdc_cec_cg', 'dcoptimizer_loss', 'inv_tdc_ds', 'batt_minimum_SOC', 'inv_tdc_cec_db', 'use_wf_albedo']
+
+     - HostDeveloper_GenericBatteryHostDeveloper
+
+        ['reserves_interest', 'battery_per_kWh', 'equip1_reserve_freq', 'om_batt_capacity_cost', 'term_int_rate', 'equip1_reserve_cost', 'om_batt_replacement_cost']
 
      - Battery_GenericBatteryAllEquityPartnershipFlip
 
         ['dispatch_manual_sched', 'dispatch_manual_sched_weekend', 'batt_h_to_ambient', 'batt_calendar_c']
 
-     - Battery_GenericBatteryCommercial
+     - Levpartflip_PVBatteryLeveragedPartnershipFlip
 
-        ['batt_calendar_c', 'batt_minimum_SOC']
-
-     - Battery_GenericBatteryHostDeveloper
-
-        ['batt_calendar_c', 'batt_minimum_SOC']
-
-     - Battery_GenericBatteryLeveragedPartnershipFlip
-
-        ['dispatch_manual_sched', 'dispatch_manual_sched_weekend', 'batt_h_to_ambient', 'batt_calendar_c']
-
-     - Battery_GenericBatteryMerchantPlant
-
-        ['batt_dispatch_choice', 'mp_ancserv2_revenue', 'batt_dispatch_auto_can_clipcharge', 'dispatch_manual_sched', 'mp_ancserv3_revenue', 'dispatch_manual_sched_weekend', 'batt_room_temperature_celsius', 'mp_energy_market_revenue', 'mp_ancserv1_revenue', 'batt_h_to_ambient', 'batt_calendar_c', 'mp_ancserv4_revenue']
-
-     - Battery_GenericBatteryResidential
-
-        ['batt_dispatch_choice', 'ur_yearzero_usage_peaks', 'batt_calendar_c', 'batt_minimum_SOC']
-
-     - Battery_GenericBatterySaleLeaseback
-
-        ['dispatch_manual_sched', 'dispatch_manual_sched_weekend', 'batt_h_to_ambient', 'batt_calendar_c']
+        ['reserves_interest', 'ppa_escalation', 'insurance_rate', 'battery_per_kWh', 'equip1_reserve_freq', 'om_batt_capacity_cost', 'term_int_rate', 'equip1_reserve_cost', 'ppa_price_input', 'om_batt_replacement_cost', 'om_capacity']
 
      - Battery_GenericBatterySingleOwner
 
-        ['dispatch_manual_sched', 'dispatch_manual_sched_weekend', 'batt_h_to_ambient', 'ur_ec_tou_mat', 'ur_dc_tou_mat', 'batt_calendar_c']
-
-     - Battery_GenericBatteryThirdParty
-
-        ['ur_yearzero_usage_peaks', 'batt_calendar_c', 'batt_minimum_SOC']
-
-     - Battwatts_PVWattsBatteryCommercial
-
-        ['batt_simple_kwh', 'batt_simple_kw']
-
-     - Battwatts_PVWattsBatteryHostDeveloper
-
-        ['batt_simple_kwh', 'batt_simple_kw']
-
-     - Battwatts_PVWattsBatteryResidential
-
-        ['batt_simple_kwh', 'batt_simple_kw']
-
-     - Battwatts_PVWattsBatteryThirdParty
-
-        ['batt_simple_kwh', 'batt_simple_kw']
-
-     - Cashloan_GenericBatteryCommercial
-
-        ['om_batt_capacity_cost', 'om_batt_replacement_cost', 'loan_rate', 'battery_per_kWh']
-
-     - Cashloan_GenericBatteryResidential
-
-        ['om_batt_capacity_cost', 'om_batt_replacement_cost', 'loan_rate', 'om_capacity', 'battery_per_kWh', 'federal_tax_rate']
-
-     - Cashloan_PVBatteryCommercial
-
-        ['om_batt_capacity_cost', 'om_batt_replacement_cost', 'loan_rate', 'om_capacity', 'battery_per_kWh']
-
-     - Cashloan_PVBatteryResidential
-
-        ['om_batt_capacity_cost', 'om_batt_replacement_cost', 'loan_rate', 'battery_per_kWh', 'federal_tax_rate']
-
-     - Cashloan_PVWattsBatteryCommercial
-
-        ['om_capacity', 'total_installed_cost', 'battery_per_kWh', 'degradation', 'battery_total_cost_lcos']
-
-     - Cashloan_PVWattsBatteryResidential
-
-        ['system_capacity', 'battery_per_kWh', 'degradation', 'federal_tax_rate']
-
-     - Equpartflip_GenericBatteryAllEquityPartnershipFlip
-
-        ['insurance_rate', 'om_batt_capacity_cost', 'reserves_interest', 'om_batt_replacement_cost', 'equip1_reserve_cost', 'equip1_reserve_freq', 'ppa_escalation', 'om_capacity', 'battery_per_kWh']
-
-     - Equpartflip_PVBatteryAllEquityPartnershipFlip
-
-        ['insurance_rate', 'om_batt_capacity_cost', 'reserves_interest', 'om_batt_replacement_cost', 'equip1_reserve_cost', 'equip1_reserve_freq', 'ppa_escalation', 'om_capacity', 'ppa_price_input', 'battery_per_kWh']
-
-     - HostDeveloper_GenericBatteryHostDeveloper
-
-        ['om_batt_capacity_cost', 'reserves_interest', 'om_batt_replacement_cost', 'equip1_reserve_cost', 'equip1_reserve_freq', 'term_int_rate', 'battery_per_kWh']
-
-     - HostDeveloper_PVBatteryHostDeveloper
-
-        ['om_batt_capacity_cost', 'om_batt_replacement_cost', 'equip1_reserve_cost', 'equip1_reserve_freq', 'om_capacity', 'battery_per_kWh']
-
-     - HostDeveloper_PVWattsBatteryHostDeveloper
-
-        ['construction_financing_cost', 'total_installed_cost', 'battery_per_kWh', 'degradation', 'battery_total_cost_lcos']
-
-     - Levpartflip_GenericBatteryLeveragedPartnershipFlip
-
-        ['insurance_rate', 'om_batt_capacity_cost', 'reserves_interest', 'om_batt_replacement_cost', 'equip1_reserve_cost', 'equip1_reserve_freq', 'ppa_escalation', 'om_capacity', 'term_int_rate', 'battery_per_kWh']
-
-     - Levpartflip_PVBatteryLeveragedPartnershipFlip
-
-        ['insurance_rate', 'om_batt_capacity_cost', 'reserves_interest', 'om_batt_replacement_cost', 'equip1_reserve_cost', 'equip1_reserve_freq', 'ppa_escalation', 'om_capacity', 'term_int_rate', 'ppa_price_input', 'battery_per_kWh']
+        ['ur_ec_tou_mat', 'dispatch_manual_sched', 'dispatch_manual_sched_weekend', 'batt_h_to_ambient', 'batt_calendar_c', 'ur_dc_tou_mat']
 
      - Merchantplant_GenericBatteryMerchantPlant
 
-        ['insurance_rate', 'om_batt_capacity_cost', 'mp_ancserv2_revenue', 'reserves_interest', 'om_batt_replacement_cost', 'mp_ancserv3_revenue', 'equip1_reserve_cost', 'mp_energy_market_revenue', 'mp_ancserv1_revenue', 'equip1_reserve_freq', 'om_capacity', 'term_int_rate', 'battery_per_kWh', 'mp_ancserv4_revenue']
+        ['reserves_interest', 'mp_energy_market_revenue', 'insurance_rate', 'battery_per_kWh', 'equip1_reserve_freq', 'om_batt_capacity_cost', 'term_int_rate', 'equip1_reserve_cost', 'mp_ancserv3_revenue', 'mp_ancserv1_revenue', 'mp_ancserv4_revenue', 'om_batt_replacement_cost', 'om_capacity', 'mp_ancserv2_revenue']
 
-     - Merchantplant_PVBatteryMerchantPlant
+     - Battery_GenericBatteryCommercial
 
-        ['insurance_rate', 'om_batt_capacity_cost', 'mp_ancserv2_revenue', 'reserves_interest', 'om_batt_replacement_cost', 'mp_ancserv3_revenue', 'equip1_reserve_cost', 'mp_energy_market_revenue', 'mp_ancserv1_revenue', 'equip1_reserve_freq', 'om_capacity', 'term_int_rate', 'battery_per_kWh', 'mp_ancserv4_revenue']
-
-     - Pvsamv1_PVBatteryAllEquityPartnershipFlip
-
-        ['inv_tdc_cec_cg', 'subarray1_tilt', 'subarray1_track_mode', 'batt_calendar_c', 'inverter_count', 'inv_tdc_ds', 'dispatch_manual_sched_weekend', 'use_wf_albedo', 'ppa_price_input', 'inv_tdc_plc', 'inv_tdc_cec_db', 'dispatch_manual_sched', 'batt_h_to_ambient']
-
-     - Pvsamv1_PVBatteryCommercial
-
-        ['inv_tdc_cec_cg', 'batt_calendar_c', 'inv_tdc_ds', 'ur_yearzero_usage_peaks', 'use_wf_albedo', 'inv_tdc_plc', 'inv_tdc_cec_db', 'batt_minimum_SOC']
-
-     - Pvsamv1_PVBatteryHostDeveloper
-
-        ['inv_tdc_cec_cg', 'batt_calendar_c', 'inv_tdc_ds', 'use_wf_albedo', 'inv_tdc_plc', 'inv_tdc_cec_db', 'batt_minimum_SOC']
-
-     - Pvsamv1_PVBatteryLeveragedPartnershipFlip
-
-        ['inv_tdc_cec_cg', 'subarray1_tilt', 'subarray1_track_mode', 'batt_calendar_c', 'inverter_count', 'inv_tdc_ds', 'dispatch_manual_sched_weekend', 'use_wf_albedo', 'ppa_price_input', 'inv_tdc_plc', 'inv_tdc_cec_db', 'dispatch_manual_sched', 'batt_h_to_ambient']
-
-     - Pvsamv1_PVBatteryMerchantPlant
-
-        ['mp_ancserv2_revenue', 'inv_tdc_cec_cg', 'subarray1_tilt', 'mp_ancserv4_revenue', 'subarray1_track_mode', 'mp_ancserv3_revenue', 'batt_calendar_c', 'inverter_count', 'inv_tdc_ds', 'dispatch_manual_sched_weekend', 'batt_room_temperature_celsius', 'use_wf_albedo', 'inv_tdc_plc', 'inv_tdc_cec_db', 'dispatch_manual_sched', 'mp_energy_market_revenue', 'mp_ancserv1_revenue', 'batt_h_to_ambient']
-
-     - Pvsamv1_PVBatteryResidential
-
-        ['inv_tdc_cec_cg', 'subarray2_mismatch_loss', 'dcoptimizer_loss', 'subarray1_mismatch_loss', 'batt_calendar_c', 'subarray3_mismatch_loss', 'subarray4_mismatch_loss', 'inv_tdc_ds', 'ur_yearzero_usage_peaks', 'use_wf_albedo', 'inv_tdc_plc', 'inv_tdc_cec_db', 'batt_minimum_SOC']
-
-     - Pvsamv1_PVBatterySaleLeaseback
-
-        ['inv_tdc_cec_cg', 'subarray1_tilt', 'subarray1_track_mode', 'batt_calendar_c', 'inverter_count', 'inv_tdc_ds', 'dispatch_manual_sched_weekend', 'use_wf_albedo', 'ppa_price_input', 'inv_tdc_plc', 'inv_tdc_cec_db', 'dispatch_manual_sched', 'batt_h_to_ambient']
-
-     - Pvsamv1_PVBatterySingleOwner
-
-        ['batt_mass', 'batt_power_charge_max_kwdc', 'inv_tdc_cec_cg', 'subarray1_tilt', 'batt_computed_strings', 'batt_computed_bank_capacity', 'subarray1_track_mode', 'batt_current_discharge_max', 'batt_current_charge_max', 'ur_ec_tou_mat', 'batt_calendar_c', 'batt_surface_area', 'inverter_count', 'batt_power_charge_max_kwac', 'inv_tdc_ds', 'dispatch_manual_sched_weekend', 'ur_yearzero_usage_peaks', 'ur_dc_tou_mat', 'batt_Qfull_flow', 'use_wf_albedo', 'ppa_price_input', 'inv_tdc_plc', 'inv_tdc_cec_db', 'dispatch_manual_sched', 'batt_h_to_ambient', 'batt_power_discharge_max_kwdc', 'batt_power_discharge_max_kwac']
-
-     - Pvsamv1_PVBatteryThirdParty
-
-        ['inv_tdc_cec_cg', 'subarray2_mismatch_loss', 'dcoptimizer_loss', 'subarray1_mismatch_loss', 'batt_calendar_c', 'subarray3_mismatch_loss', 'subarray4_mismatch_loss', 'inv_tdc_ds', 'ur_yearzero_usage_peaks', 'use_wf_albedo', 'inv_tdc_plc', 'inv_tdc_cec_db', 'batt_minimum_SOC']
-
-     - Saleleaseback_GenericBatterySaleLeaseback
-
-        ['insurance_rate', 'om_batt_capacity_cost', 'reserves_interest', 'om_batt_replacement_cost', 'equip1_reserve_cost', 'equip1_reserve_freq', 'ppa_escalation', 'om_capacity', 'battery_per_kWh']
-
-     - Saleleaseback_PVBatterySaleLeaseback
-
-        ['insurance_rate', 'om_batt_capacity_cost', 'reserves_interest', 'om_batt_replacement_cost', 'equip1_reserve_cost', 'equip1_reserve_freq', 'ppa_escalation', 'om_capacity', 'ppa_price_input', 'battery_per_kWh']
-
-     - Singleowner_GenericBatterySingleOwner
-
-        ['insurance_rate', 'om_batt_capacity_cost', 'reserves_interest', 'om_batt_replacement_cost', 'equip1_reserve_cost', 'equip1_reserve_freq', 'ppa_escalation', 'om_capacity', 'term_int_rate', 'battery_per_kWh']
+        ['batt_minimum_SOC', 'batt_calendar_c']
 
      - Singleowner_PVBatterySingleOwner
 
-        ['insurance_rate', 'om_batt_capacity_cost', 'reserves_interest', 'om_batt_replacement_cost', 'equip1_reserve_cost', 'om_batt_nameplate', 'equip1_reserve_freq', 'construction_financing_cost', 'ppa_escalation', 'om_capacity', 'total_installed_cost', 'term_int_rate', 'ppa_price_input', 'battery_per_kWh', 'batt_computed_bank_capacity', 'battery_total_cost_lcos']
+        ['reserves_interest', 'ppa_escalation', 'insurance_rate', 'battery_per_kWh', 'equip1_reserve_freq', 'om_batt_capacity_cost', 'term_int_rate', 'equip1_reserve_cost', 'ppa_price_input', 'total_installed_cost', 'construction_financing_cost', 'om_batt_replacement_cost', 'om_capacity', 'om_batt_nameplate', 'battery_total_cost_lcos', 'batt_computed_bank_capacity']
 
      - Thirdpartyownership_PVWattsBatteryThirdParty
 
         ['degradation']
 
-     - Utilityrate5_GenericBatteryResidential
+     - HostDeveloper_PVBatteryHostDeveloper
+
+        ['battery_per_kWh', 'equip1_reserve_freq', 'om_batt_capacity_cost', 'equip1_reserve_cost', 'om_batt_replacement_cost', 'om_capacity']
+
+     - Equpartflip_PVBatteryAllEquityPartnershipFlip
+
+        ['reserves_interest', 'ppa_escalation', 'insurance_rate', 'battery_per_kWh', 'equip1_reserve_freq', 'om_batt_capacity_cost', 'equip1_reserve_cost', 'ppa_price_input', 'om_batt_replacement_cost', 'om_capacity']
+
+     - Pvsamv1_PVBatteryMerchantPlant
+
+        ['inv_tdc_plc', 'batt_calendar_c', 'batt_room_temperature_celsius', 'mp_energy_market_revenue', 'mp_ancserv1_revenue', 'dispatch_manual_sched_weekend', 'batt_h_to_ambient', 'mp_ancserv2_revenue', 'inv_tdc_cec_cg', 'subarray1_track_mode', 'mp_ancserv4_revenue', 'inverter_count', 'inv_tdc_ds', 'subarray1_tilt', 'dispatch_manual_sched', 'inv_tdc_cec_db', 'use_wf_albedo', 'mp_ancserv3_revenue']
+
+     - Pvsamv1_PVBatteryCommercial
+
+        ['inv_tdc_plc', 'batt_calendar_c', 'ur_yearzero_usage_peaks', 'inv_tdc_cec_cg', 'inv_tdc_ds', 'batt_minimum_SOC', 'inv_tdc_cec_db', 'use_wf_albedo']
+
+     - Battery_GenericBatteryResidential
+
+        ['batt_minimum_SOC', 'ur_yearzero_usage_peaks', 'batt_dispatch_choice', 'batt_calendar_c']
+
+     - Battery_GenericBatteryLeveragedPartnershipFlip
+
+        ['dispatch_manual_sched', 'dispatch_manual_sched_weekend', 'batt_h_to_ambient', 'batt_calendar_c']
+
+     - Pvsamv1_PVBatterySingleOwner
+
+        ['inv_tdc_plc', 'batt_computed_strings', 'batt_power_charge_max_kwdc', 'batt_calendar_c', 'ur_dc_tou_mat', 'batt_current_charge_max', 'ur_yearzero_usage_peaks', 'dispatch_manual_sched_weekend', 'batt_power_charge_max_kwac', 'batt_h_to_ambient', 'batt_computed_bank_capacity', 'ur_ec_tou_mat', 'inv_tdc_cec_cg', 'subarray1_track_mode', 'batt_Qfull_flow', 'batt_power_discharge_max_kwdc', 'batt_current_discharge_max', 'inverter_count', 'inv_tdc_ds', 'batt_surface_area', 'subarray1_tilt', 'dispatch_manual_sched', 'inv_tdc_cec_db', 'batt_power_discharge_max_kwac', 'use_wf_albedo', 'ppa_price_input', 'batt_mass']
+
+     - Pvsamv1_PVBatteryThirdParty
+
+        ['subarray2_mismatch_loss', 'inv_tdc_plc', 'batt_calendar_c', 'subarray3_mismatch_loss', 'ur_yearzero_usage_peaks', 'subarray1_mismatch_loss', 'subarray4_mismatch_loss', 'inv_tdc_cec_cg', 'dcoptimizer_loss', 'inv_tdc_ds', 'batt_minimum_SOC', 'inv_tdc_cec_db', 'use_wf_albedo']
+
+     - Pvsamv1_PVBatteryHostDeveloper
+
+        ['inv_tdc_plc', 'batt_calendar_c', 'inv_tdc_cec_cg', 'inv_tdc_ds', 'batt_minimum_SOC', 'inv_tdc_cec_db', 'use_wf_albedo']
+
+     - Battery_GenericBatterySaleLeaseback
+
+        ['dispatch_manual_sched', 'dispatch_manual_sched_weekend', 'batt_h_to_ambient', 'batt_calendar_c']
+
+     - Levpartflip_GenericBatteryLeveragedPartnershipFlip
+
+        ['reserves_interest', 'ppa_escalation', 'insurance_rate', 'battery_per_kWh', 'equip1_reserve_freq', 'om_batt_capacity_cost', 'term_int_rate', 'equip1_reserve_cost', 'om_batt_replacement_cost', 'om_capacity']
+
+     - Pvsamv1_PVBatteryAllEquityPartnershipFlip
+
+        ['inv_tdc_plc', 'batt_calendar_c', 'dispatch_manual_sched_weekend', 'batt_h_to_ambient', 'inv_tdc_cec_cg', 'subarray1_track_mode', 'inverter_count', 'inv_tdc_ds', 'subarray1_tilt', 'dispatch_manual_sched', 'inv_tdc_cec_db', 'use_wf_albedo', 'ppa_price_input']
+
+     - Cashloan_GenericBatteryCommercial
+
+        ['battery_per_kWh', 'om_batt_capacity_cost', 'loan_rate', 'om_batt_replacement_cost']
+
+     - Battery_FuelCellCommercial
+
+        ['batt_room_temperature_celsius', 'ur_yearzero_usage_peaks', 'batt_calendar_choice', 'batt_calendar_c']
+
+     - Battwatts_PVWattsBatteryHostDeveloper
+
+        ['batt_simple_kwh', 'batt_simple_kw']
+
+     - Utilityrate5_PVWattsBatteryResidential
+
+        ['ur_yearzero_usage_peaks', 'degradation']
+
+     - Utilityrate5_GenericBatteryThirdParty
 
         ['ur_yearzero_usage_peaks']
+
+     - Utilityrate5_PVWattsBatteryCommercial
+
+        ['ur_yearzero_usage_peaks', 'degradation']
 
      - Utilityrate5_GenericBatterySingleOwner
 
         ['ur_ec_tou_mat', 'ur_dc_tou_mat']
 
-     - Utilityrate5_GenericBatteryThirdParty
+     - Utilityrate5_PVWattsBatteryThirdParty
+
+        ['ur_yearzero_usage_peaks', 'degradation']
+
+     - Cashloan_PVWattsBatteryResidential
+
+        ['degradation', 'system_capacity', 'federal_tax_rate', 'battery_per_kWh']
+
+     - Cashloan_PVBatteryResidential
+
+        ['federal_tax_rate', 'battery_per_kWh', 'om_batt_capacity_cost', 'loan_rate', 'om_batt_replacement_cost']
+
+     - Cashloan_PVWattsBatteryCommercial
+
+        ['degradation', 'battery_per_kWh', 'total_installed_cost', 'om_capacity', 'battery_total_cost_lcos']
+
+     - Utilityrate5_PVBatterySingleOwner
+
+        ['ur_yearzero_usage_peaks', 'ur_ec_tou_mat', 'ur_dc_tou_mat']
+
+     - Utilityrate5_PVBatteryResidential
+
+        ['ur_yearzero_usage_peaks']
+
+     - HostDeveloper_PVWattsBatteryHostDeveloper
+
+        ['degradation', 'battery_per_kWh', 'total_installed_cost', 'construction_financing_cost', 'battery_total_cost_lcos']
+
+     - Saleleaseback_PVBatterySaleLeaseback
+
+        ['reserves_interest', 'ppa_escalation', 'insurance_rate', 'battery_per_kWh', 'equip1_reserve_freq', 'om_batt_capacity_cost', 'equip1_reserve_cost', 'ppa_price_input', 'om_batt_replacement_cost', 'om_capacity']
+
+     - Battwatts_PVWattsBatteryThirdParty
+
+        ['batt_simple_kwh', 'batt_simple_kw']
+
+     - Battery_GenericBatteryMerchantPlant
+
+        ['batt_room_temperature_celsius', 'mp_energy_market_revenue', 'dispatch_manual_sched', 'mp_ancserv3_revenue', 'batt_dispatch_auto_can_clipcharge', 'mp_ancserv1_revenue', 'dispatch_manual_sched_weekend', 'batt_dispatch_choice', 'batt_h_to_ambient', 'mp_ancserv4_revenue', 'batt_calendar_c', 'mp_ancserv2_revenue']
+
+     - Utilityrate5_PVBatteryThirdParty
+
+        ['ur_yearzero_usage_peaks']
+
+     - Merchantplant_PVBatteryMerchantPlant
+
+        ['reserves_interest', 'mp_energy_market_revenue', 'insurance_rate', 'battery_per_kWh', 'equip1_reserve_freq', 'om_batt_capacity_cost', 'term_int_rate', 'equip1_reserve_cost', 'mp_ancserv3_revenue', 'mp_ancserv1_revenue', 'mp_ancserv4_revenue', 'om_batt_replacement_cost', 'om_capacity', 'mp_ancserv2_revenue']
+
+     - Cashloan_GenericBatteryResidential
+
+        ['federal_tax_rate', 'battery_per_kWh', 'om_batt_capacity_cost', 'loan_rate', 'om_batt_replacement_cost', 'om_capacity']
+
+     - Battery_GenericBatteryHostDeveloper
+
+        ['batt_minimum_SOC', 'batt_calendar_c']
+
+     - Utilityrate5_GenericBatteryResidential
 
         ['ur_yearzero_usage_peaks']
 
@@ -294,63 +268,44 @@ Battery
 
         ['ur_yearzero_usage_peaks']
 
-     - Utilityrate5_PVBatteryResidential
+     - Pvsamv1_PVBatterySaleLeaseback
 
-        ['ur_yearzero_usage_peaks']
-
-     - Utilityrate5_PVBatterySingleOwner
-
-        ['ur_ec_tou_mat', 'ur_dc_tou_mat', 'ur_yearzero_usage_peaks']
-
-     - Utilityrate5_PVBatteryThirdParty
-
-        ['ur_yearzero_usage_peaks']
-
-     - Utilityrate5_PVWattsBatteryCommercial
-
-        ['degradation', 'ur_yearzero_usage_peaks']
-
-     - Utilityrate5_PVWattsBatteryHostDeveloper
-
-        ['degradation']
-
-     - Utilityrate5_PVWattsBatteryResidential
-
-        ['degradation', 'ur_yearzero_usage_peaks']
-
-     - Utilityrate5_PVWattsBatteryThirdParty
-
-        ['degradation', 'ur_yearzero_usage_peaks']
-
-
-
-Battwatts
-************************************************
-
-:doc:`modules/Battwatts` Modified Variables:
-
-    New variables:
-
-         - grid_outage
-
-:doc:`modules/Battwatts` Modified Default Values:
+        ['inv_tdc_plc', 'batt_calendar_c', 'dispatch_manual_sched_weekend', 'batt_h_to_ambient', 'inv_tdc_cec_cg', 'subarray1_track_mode', 'inverter_count', 'inv_tdc_ds', 'subarray1_tilt', 'dispatch_manual_sched', 'inv_tdc_cec_db', 'use_wf_albedo', 'ppa_price_input']
 
      - Battwatts_PVWattsBatteryCommercial
 
         ['batt_simple_kwh', 'batt_simple_kw']
 
-     - Battwatts_PVWattsBatteryHostDeveloper
+     - Battery_FuelCellSingleOwner
 
-        ['batt_simple_kwh', 'batt_simple_kw']
+        ['batt_room_temperature_celsius', 'ur_dc_sched_weekend', 'ur_ec_tou_mat', 'batt_meter_position', 'ur_dc_sched_weekday', 'batt_minimum_SOC', 'ur_monthly_fixed_charge', 'ppa_price_input', 'ur_ec_sched_weekend', 'batt_calendar_choice', 'ur_dc_enable', 'batt_calendar_c', 'ur_dc_tou_mat', 'ur_ec_sched_weekday']
+
+     - Singleowner_GenericBatterySingleOwner
+
+        ['reserves_interest', 'ppa_escalation', 'insurance_rate', 'battery_per_kWh', 'equip1_reserve_freq', 'om_batt_capacity_cost', 'term_int_rate', 'equip1_reserve_cost', 'om_batt_replacement_cost', 'om_capacity']
+
+     - Pvsamv1_PVBatteryLeveragedPartnershipFlip
+
+        ['inv_tdc_plc', 'batt_calendar_c', 'dispatch_manual_sched_weekend', 'batt_h_to_ambient', 'inv_tdc_cec_cg', 'subarray1_track_mode', 'inverter_count', 'inv_tdc_ds', 'subarray1_tilt', 'dispatch_manual_sched', 'inv_tdc_cec_db', 'use_wf_albedo', 'ppa_price_input']
+
+     - Saleleaseback_GenericBatterySaleLeaseback
+
+        ['reserves_interest', 'ppa_escalation', 'insurance_rate', 'battery_per_kWh', 'equip1_reserve_freq', 'om_batt_capacity_cost', 'equip1_reserve_cost', 'om_batt_replacement_cost', 'om_capacity']
 
      - Battwatts_PVWattsBatteryResidential
 
         ['batt_simple_kwh', 'batt_simple_kw']
 
-     - Battwatts_PVWattsBatteryThirdParty
 
-        ['batt_simple_kwh', 'batt_simple_kw']
 
+BatteryStateful
+************************************************
+
+:doc:`modules/BatteryStateful` Modified Input Variables:
+
+    New variables:
+
+         - cycle_counts
 
 
 Belpe
@@ -365,22 +320,15 @@ Belpe
 Cashloan
 ************************************************
 
-:doc:`modules/Cashloan` New Default files:
-
-     - StandaloneBatteryCommercial
-     - StandaloneBatteryResidential
-
-:doc:`modules/Cashloan` Removed Default files
-
-     - PhysicalTroughCommercial
-
-:doc:`modules/Cashloan` Modified Variables:
+:doc:`modules/Cashloan` Modified Input Variables:
 
     New variables:
 
+         - batt_annual_charge_energy
          - charge_w_sys_dc_tou_ym
          - charge_w_sys_fixed_ym
          - en_standalone_batt
+         - gen_purchases
          - land_area
          - net_billing_credits_ym
          - nm_dollars_applied_ym
@@ -391,13 +339,50 @@ Cashloan
          - year1_hourly_e_fromgrid
          - year1_hourly_ec_with_system
 
+:doc:`modules/Cashloan` New Default files:
+
+     - StandaloneBatteryCommercial
+     - StandaloneBatteryResidential
+
+:doc:`modules/Cashloan` Removed Default files
+
+     - PhysicalTroughCommercial
+
 :doc:`modules/Cashloan` Modified Default Values:
 
      - Cashloan_DSLFCommercial
 
         ['loan_rate']
 
-     - Cashloan_EmpiricalTroughCommercial
+     - Cashloan_PVBatteryCommercial
+
+        ['battery_per_kWh', 'om_batt_capacity_cost', 'loan_rate', 'om_batt_replacement_cost', 'om_capacity']
+
+     - Cashloan_GenericCSPSystemCommercial
+
+        ['loan_rate']
+
+     - Cashloan_FuelCellCommercial
+
+        ['insurance_rate', 'battery_per_kWh', 'om_batt_capacity_cost', 'loan_rate', 'om_fuelcell_capacity_cost', 'om_batt_replacement_cost']
+
+     - Cashloan_PVWattsResidential
+
+        ['system_capacity', 'insurance_rate', 'loan_rate']
+
+     - Cashloan_WindPowerResidential
+
+        ['federal_tax_rate', 'loan_rate']
+
+     - Cashloan_WindPowerCommercial
+
+        ['loan_rate']
+
+     - Cashloan_GenericSystemResidential
+
+        ['federal_tax_rate', 'loan_rate']
+
+     - Cashloan_SolarWaterHeatingCommercial
 
         ['loan_rate']
 
@@ -405,77 +390,49 @@ Cashloan
 
         ['insurance_rate', 'loan_rate', 'om_capacity']
 
-     - Cashloan_FlatPlatePVResidential
+     - Cashloan_SolarWaterHeatingResidential
 
-        ['insurance_rate', 'system_capacity', 'loan_rate', 'total_installed_cost']
-
-     - Cashloan_FuelCellCommercial
-
-        ['om_fuelcell_capacity_cost', 'insurance_rate', 'om_batt_capacity_cost', 'om_batt_replacement_cost', 'loan_rate', 'battery_per_kWh']
-
-     - Cashloan_GenericBatteryCommercial
-
-        ['om_batt_capacity_cost', 'om_batt_replacement_cost', 'loan_rate', 'battery_per_kWh']
-
-     - Cashloan_GenericBatteryResidential
-
-        ['om_batt_capacity_cost', 'om_batt_replacement_cost', 'loan_rate', 'om_capacity', 'battery_per_kWh', 'federal_tax_rate']
-
-     - Cashloan_GenericCSPSystemCommercial
-
-        ['loan_rate']
-
-     - Cashloan_GenericSystemCommercial
-
-        ['loan_rate']
-
-     - Cashloan_GenericSystemResidential
-
-        ['loan_rate', 'federal_tax_rate']
-
-     - Cashloan_MSLFCommercial
-
-        ['loan_rate']
-
-     - Cashloan_PVBatteryCommercial
-
-        ['om_batt_capacity_cost', 'om_batt_replacement_cost', 'loan_rate', 'om_capacity', 'battery_per_kWh']
-
-     - Cashloan_PVBatteryResidential
-
-        ['om_batt_capacity_cost', 'om_batt_replacement_cost', 'loan_rate', 'battery_per_kWh', 'federal_tax_rate']
-
-     - Cashloan_PVWattsBatteryCommercial
-
-        ['om_capacity', 'total_installed_cost', 'battery_per_kWh', 'degradation', 'battery_total_cost_lcos']
-
-     - Cashloan_PVWattsBatteryResidential
-
-        ['system_capacity', 'battery_per_kWh', 'degradation', 'federal_tax_rate']
+        ['federal_tax_rate', 'loan_rate']
 
      - Cashloan_PVWattsCommercial
 
         ['insurance_rate', 'loan_rate', 'om_capacity']
 
-     - Cashloan_PVWattsResidential
-
-        ['insurance_rate', 'system_capacity', 'loan_rate']
-
-     - Cashloan_SolarWaterHeatingCommercial
+     - Cashloan_EmpiricalTroughCommercial
 
         ['loan_rate']
 
-     - Cashloan_SolarWaterHeatingResidential
+     - Cashloan_GenericBatteryCommercial
 
-        ['loan_rate', 'federal_tax_rate']
+        ['battery_per_kWh', 'om_batt_capacity_cost', 'loan_rate', 'om_batt_replacement_cost']
 
-     - Cashloan_WindPowerCommercial
+     - Cashloan_PVWattsBatteryResidential
+
+        ['degradation', 'system_capacity', 'federal_tax_rate', 'battery_per_kWh']
+
+     - Cashloan_PVBatteryResidential
+
+        ['federal_tax_rate', 'battery_per_kWh', 'om_batt_capacity_cost', 'loan_rate', 'om_batt_replacement_cost']
+
+     - Cashloan_PVWattsBatteryCommercial
+
+        ['degradation', 'battery_per_kWh', 'total_installed_cost', 'om_capacity', 'battery_total_cost_lcos']
+
+     - Cashloan_GenericBatteryResidential
+
+        ['federal_tax_rate', 'battery_per_kWh', 'om_batt_capacity_cost', 'loan_rate', 'om_batt_replacement_cost', 'om_capacity']
+
+     - Cashloan_MSLFCommercial
 
         ['loan_rate']
 
-     - Cashloan_WindPowerResidential
+     - Cashloan_FlatPlatePVResidential
 
-        ['loan_rate', 'federal_tax_rate']
+        ['system_capacity', 'insurance_rate', 'loan_rate', 'total_installed_cost']
+
+     - Cashloan_GenericSystemCommercial
+
+        ['loan_rate']
 
 
 
@@ -490,210 +447,143 @@ Communitysolar
 Equpartflip
 ************************************************
 
-:doc:`modules/Equpartflip` New Default files:
-
-     - StandaloneBatteryAllEquityPartnershipFlip
-
-:doc:`modules/Equpartflip` Modified Variables:
+:doc:`modules/Equpartflip` Modified Input Variables:
 
     New variables:
 
+         - batt_annual_charge_energy
          - en_electricity_rates
          - en_standalone_batt
+         - gen_purchases
          - land_area
+         - net_billing_credits_ym
+         - nm_dollars_applied_ym
          - om_land_lease
          - om_land_lease_escal
+         - utility_bill_w_sys
+
+:doc:`modules/Equpartflip` New Default files:
+
+     - StandaloneBatteryAllEquityPartnershipFlip
 
 :doc:`modules/Equpartflip` Modified Default Values:
 
      - Equpartflip_BiopowerAllEquityPartnershipFlip
 
-        ['ppa_soln_mode', 'reserves_interest', 'equip1_reserve_cost', 'construction_financing_cost', 'ppa_price_input']
-
-     - Equpartflip_DSLFAllEquityPartnershipFlip
-
-        ['ppa_soln_mode', 'reserves_interest']
-
-     - Equpartflip_EmpiricalTroughAllEquityPartnershipFlip
-
-        ['ppa_soln_mode', 'reserves_interest']
-
-     - Equpartflip_FlatPlatePVAllEquityPartnershipFlip
-
-        ['insurance_rate', 'ppa_soln_mode', 'reserves_interest', 'equip1_reserve_cost', 'equip1_reserve_freq', 'om_capacity', 'ppa_price_input']
-
-     - Equpartflip_GenericBatteryAllEquityPartnershipFlip
-
-        ['insurance_rate', 'om_batt_capacity_cost', 'reserves_interest', 'om_batt_replacement_cost', 'equip1_reserve_cost', 'equip1_reserve_freq', 'ppa_escalation', 'om_capacity', 'battery_per_kWh']
-
-     - Equpartflip_GenericCSPSystemAllEquityPartnershipFlip
-
-        ['ppa_soln_mode', 'reserves_interest']
+        ['reserves_interest', 'equip1_reserve_cost', 'ppa_price_input', 'ppa_soln_mode', 'construction_financing_cost']
 
      - Equpartflip_GenericSystemAllEquityPartnershipFlip
 
-        ['ppa_soln_mode', 'reserves_interest', 'equip1_reserve_cost', 'ppa_price_input']
+        ['reserves_interest', 'equip1_reserve_cost', 'ppa_price_input', 'ppa_soln_mode']
 
-     - Equpartflip_GeothermalPowerAllEquityPartnershipFlip
+     - Equpartflip_GenericBatteryAllEquityPartnershipFlip
 
-        ['ppa_soln_mode', 'system_capacity', 'reserves_interest', 'equip1_reserve_cost', 'construction_financing_cost', 'system_recapitalization_cost', 'total_installed_cost']
+        ['reserves_interest', 'ppa_escalation', 'insurance_rate', 'battery_per_kWh', 'equip1_reserve_freq', 'om_batt_capacity_cost', 'equip1_reserve_cost', 'om_batt_replacement_cost', 'om_capacity']
 
-     - Equpartflip_HighXConcentratingPVAllEquityPartnershipFlip
+     - Equpartflip_GenericCSPSystemAllEquityPartnershipFlip
 
-        ['insurance_rate', 'ppa_soln_mode', 'reserves_interest', 'equip1_reserve_cost', 'equip1_reserve_freq']
-
-     - Equpartflip_MSLFAllEquityPartnershipFlip
-
-        ['ppa_soln_mode', 'reserves_interest']
-
-     - Equpartflip_MSPTAllEquityPartnershipFlip
-
-        ['ppa_soln_mode', 'reserves_interest']
-
-     - Equpartflip_PVBatteryAllEquityPartnershipFlip
-
-        ['insurance_rate', 'om_batt_capacity_cost', 'reserves_interest', 'om_batt_replacement_cost', 'equip1_reserve_cost', 'equip1_reserve_freq', 'ppa_escalation', 'om_capacity', 'ppa_price_input', 'battery_per_kWh']
-
-     - Equpartflip_PVWattsAllEquityPartnershipFlip
-
-        ['insurance_rate', 'ppa_soln_mode', 'reserves_interest', 'equip1_reserve_cost', 'equip1_reserve_freq', 'om_capacity', 'ppa_price_input']
-
-     - Equpartflip_PhysicalTroughAllEquityPartnershipFlip
-
-        ['ppa_soln_mode', 'reserves_interest']
+        ['reserves_interest', 'ppa_soln_mode']
 
      - Equpartflip_WindPowerAllEquityPartnershipFlip
 
-        ['insurance_rate', 'ppa_soln_mode', 'system_capacity', 'reserves_interest', 'equip1_reserve_cost']
+        ['reserves_interest', 'system_capacity', 'insurance_rate', 'equip1_reserve_cost', 'ppa_soln_mode']
+
+     - Equpartflip_FlatPlatePVAllEquityPartnershipFlip
+
+        ['reserves_interest', 'insurance_rate', 'equip1_reserve_freq', 'equip1_reserve_cost', 'ppa_price_input', 'ppa_soln_mode', 'om_capacity']
+
+     - Equpartflip_PVBatteryAllEquityPartnershipFlip
+
+        ['reserves_interest', 'ppa_escalation', 'insurance_rate', 'battery_per_kWh', 'equip1_reserve_freq', 'om_batt_capacity_cost', 'equip1_reserve_cost', 'ppa_price_input', 'om_batt_replacement_cost', 'om_capacity']
+
+     - Equpartflip_DSLFAllEquityPartnershipFlip
+
+        ['reserves_interest', 'ppa_soln_mode']
+
+     - Equpartflip_GeothermalPowerAllEquityPartnershipFlip
+
+        ['reserves_interest', 'system_capacity', 'equip1_reserve_cost', 'total_installed_cost', 'ppa_soln_mode', 'construction_financing_cost', 'system_recapitalization_cost']
+
+     - Equpartflip_EmpiricalTroughAllEquityPartnershipFlip
+
+        ['reserves_interest', 'ppa_soln_mode']
+
+     - Equpartflip_HighXConcentratingPVAllEquityPartnershipFlip
+
+        ['reserves_interest', 'insurance_rate', 'equip1_reserve_freq', 'equip1_reserve_cost', 'ppa_soln_mode']
+
+     - Equpartflip_MSLFAllEquityPartnershipFlip
+
+        ['reserves_interest', 'ppa_soln_mode']
+
+     - Equpartflip_MSPTAllEquityPartnershipFlip
+
+        ['reserves_interest', 'ppa_soln_mode']
+
+     - Equpartflip_PhysicalTroughAllEquityPartnershipFlip
+
+        ['reserves_interest', 'ppa_soln_mode']
+
+     - Equpartflip_PVWattsAllEquityPartnershipFlip
+
+        ['reserves_interest', 'insurance_rate', 'equip1_reserve_freq', 'equip1_reserve_cost', 'ppa_price_input', 'ppa_soln_mode', 'om_capacity']
 
 
 
 EtesElectricResistance
 ************************************************
 
+:doc:`modules/EtesElectricResistance` Modified Input Variables:
+
+    New variables:
+
+         - disp_csu_cost
+         - disp_down_time_min
+         - disp_frequency
+         - disp_horizon
+         - disp_hsu_cost
+         - disp_max_iter
+         - disp_mip_gap
+         - disp_pen_delta_w
+         - disp_reporting
+         - disp_spec_bb
+         - disp_spec_presolve
+         - disp_spec_scaling
+         - disp_steps_per_hour
+         - disp_time_weighting
+         - disp_timeout
+         - disp_up_time_min
+         - etes_financial_model
+         - f_q_dot_des_allowable_su
+         - f_q_dot_heater_min
+         - hot_htf_code
+         - hrs_startup_at_max_rate
+         - mp_energy_market_revenue
+         - ppa_price_input
+         - sim_type
+         - tes_init_hot_htf_percent
+         - ud_hot_htf_props
+
+    Removed variables:
+
+         - F_wc
+         - csp.pt.tes.init_hot_htf_percent
+         - tes_fl_code
+         - ud_tes_fl_props
+
 :doc:`modules/EtesElectricResistance` New Default files:
 
      - ETESSingleOwner
 
 
-GenericSystem
-************************************************
-
-:doc:`modules/GenericSystem` Modified Default Values:
-
-     - Cashloan_GenericSystemCommercial
-
-        ['loan_rate']
-
-     - Cashloan_GenericSystemResidential
-
-        ['loan_rate', 'federal_tax_rate']
-
-     - Equpartflip_GenericSystemAllEquityPartnershipFlip
-
-        ['ppa_soln_mode', 'reserves_interest', 'equip1_reserve_cost', 'ppa_price_input']
-
-     - GenericSystem_GenericSystemHostDeveloper
-
-        ['user_capacity_factor']
-
-     - GenericSystem_GenericSystemLeveragedPartnershipFlip
-
-        ['user_capacity_factor']
-
-     - GenericSystem_GenericSystemMerchantPlant
-
-        ['user_capacity_factor']
-
-     - HostDeveloper_GenericSystemHostDeveloper
-
-        ['state_tax_rate', 'reserves_interest', 'term_int_rate']
-
-     - Levpartflip_GenericSystemLeveragedPartnershipFlip
-
-        ['ppa_soln_mode', 'reserves_interest', 'equip1_reserve_cost', 'term_int_rate', 'ppa_price_input']
-
-     - Merchantplant_GenericSystemMerchantPlant
-
-        ['mp_ancserv2_revenue', 'reserves_interest', 'mp_ancserv3_revenue', 'equip1_reserve_cost', 'mp_energy_market_revenue', 'mp_ancserv1_revenue', 'term_int_rate', 'mp_ancserv4_revenue']
-
-     - Saleleaseback_GenericSystemSaleLeaseback
-
-        ['ppa_soln_mode', 'reserves_interest', 'equip1_reserve_cost', 'ppa_price_input']
-
-     - Singleowner_GenericSystemSingleOwner
-
-        ['ppa_soln_mode', 'reserves_interest', 'equip1_reserve_cost', 'term_int_rate', 'ppa_price_input']
-
-     - Utilityrate5_GenericSystemThirdParty
-
-        ['ur_yearzero_usage_peaks']
-
-
-
 Geothermal
 ************************************************
 
-:doc:`modules/Geothermal` Modified Variables:
+:doc:`modules/Geothermal` Modified Input Variables:
 
     New variables:
 
          - dt_prod_well
-
-:doc:`modules/Geothermal` Modified Default Values:
-
-     - Equpartflip_GeothermalPowerAllEquityPartnershipFlip
-
-        ['ppa_soln_mode', 'system_capacity', 'reserves_interest', 'equip1_reserve_cost', 'construction_financing_cost', 'system_recapitalization_cost', 'total_installed_cost']
-
-     - Geothermal_GeothermalPowerAllEquityPartnershipFlip
-
-        ['well_flow_rate', 'num_wells_getem', 'well_diameter']
-
-     - Geothermal_GeothermalPowerLCOECalculator
-
-        ['num_wells_getem']
-
-     - Geothermal_GeothermalPowerLeveragedPartnershipFlip
-
-        ['num_wells_getem']
-
-     - Geothermal_GeothermalPowerMerchantPlant
-
-        ['well_flow_rate', 'num_wells_getem', 'well_diameter']
-
-     - Geothermal_GeothermalPowerNone
-
-        ['num_wells_getem']
-
-     - Geothermal_GeothermalPowerSaleLeaseback
-
-        ['num_wells_getem']
-
-     - Geothermal_GeothermalPowerSingleOwner
-
-        ['num_wells_getem']
-
-     - Lcoefcr_GeothermalPowerLCOECalculator
-
-        ['fixed_operating_cost', 'capital_cost']
-
-     - Levpartflip_GeothermalPowerLeveragedPartnershipFlip
-
-        ['ppa_soln_mode', 'system_capacity', 'reserves_interest', 'equip1_reserve_cost', 'construction_financing_cost', 'system_recapitalization_cost', 'total_installed_cost', 'term_int_rate']
-
-     - Merchantplant_GeothermalPowerMerchantPlant
-
-        ['cp_system_nameplate', 'system_capacity', 'mp_ancserv2_revenue', 'reserves_interest', 'mp_ancserv3_revenue', 'equip1_reserve_cost', 'mp_energy_market_revenue', 'mp_ancserv1_revenue', 'construction_financing_cost', 'system_recapitalization_cost', 'total_installed_cost', 'term_int_rate', 'mp_ancserv4_revenue']
-
-     - Saleleaseback_GeothermalPowerSaleLeaseback
-
-        ['ppa_soln_mode', 'system_capacity', 'reserves_interest', 'equip1_reserve_cost', 'construction_financing_cost', 'system_recapitalization_cost', 'total_installed_cost']
-
-     - Singleowner_GeothermalPowerSingleOwner
-
-        ['cp_system_nameplate', 'ppa_soln_mode', 'system_capacity', 'reserves_interest', 'equip1_reserve_cost', 'construction_financing_cost', 'system_recapitalization_cost', 'total_installed_cost', 'term_int_rate']
-
 
 
 Grid
@@ -716,31 +606,25 @@ Grid
 
      - PhysicalTroughCommercial
 
-:doc:`modules/Grid` Modified Variables:
-
-    New variables:
-
-         - crit_load
-         - grid_outage
-
 
 HostDeveloper
 ************************************************
 
-:doc:`modules/HostDeveloper` New Default files:
-
-     - StandaloneBatteryHostDeveloper
-
-:doc:`modules/HostDeveloper` Modified Variables:
+:doc:`modules/HostDeveloper` Modified Input Variables:
 
     New variables:
 
+         - batt_annual_charge_energy
          - charge_w_sys_fixed_ym
          - dscr_limit_debt_fraction
          - dscr_maximum_debt_fraction
          - en_standalone_batt
+         - gen_purchases
+         - land_area
          - net_billing_credits_ym
          - nm_dollars_applied_ym
+         - om_land_lease
+         - om_land_lease_escal
          - year1_hourly_dc_with_system
          - year1_hourly_e_fromgrid
          - year1_hourly_ec_with_system
@@ -749,11 +633,27 @@ HostDeveloper
 
          - roe_input
 
+:doc:`modules/HostDeveloper` New Default files:
+
+     - StandaloneBatteryHostDeveloper
+
 :doc:`modules/HostDeveloper` Modified Default Values:
 
-     - Battery_GenericBatteryHostDeveloper
+     - Utilityrate5_PVWattsBatteryHostDeveloper
 
-        ['batt_calendar_c', 'batt_minimum_SOC']
+        ['degradation']
+
+     - HostDeveloper_GenericBatteryHostDeveloper
+
+        ['reserves_interest', 'battery_per_kWh', 'equip1_reserve_freq', 'om_batt_capacity_cost', 'term_int_rate', 'equip1_reserve_cost', 'om_batt_replacement_cost']
+
+     - HostDeveloper_PVBatteryHostDeveloper
+
+        ['battery_per_kWh', 'equip1_reserve_freq', 'om_batt_capacity_cost', 'equip1_reserve_cost', 'om_batt_replacement_cost', 'om_capacity']
+
+     - Pvsamv1_PVBatteryHostDeveloper
+
+        ['inv_tdc_plc', 'batt_calendar_c', 'inv_tdc_cec_cg', 'inv_tdc_ds', 'batt_minimum_SOC', 'inv_tdc_cec_db', 'use_wf_albedo']
 
      - Battwatts_PVWattsBatteryHostDeveloper
 
@@ -765,171 +665,154 @@ HostDeveloper
 
      - HostDeveloper_FlatPlatePVHostDeveloper
 
-        ['insurance_rate', 'ppa_soln_mode', 'reserves_interest', 'equip1_reserve_cost', 'equip1_reserve_freq', 'om_capacity', 'term_int_rate']
-
-     - HostDeveloper_GenericBatteryHostDeveloper
-
-        ['om_batt_capacity_cost', 'reserves_interest', 'om_batt_replacement_cost', 'equip1_reserve_cost', 'equip1_reserve_freq', 'term_int_rate', 'battery_per_kWh']
-
-     - HostDeveloper_GenericSystemHostDeveloper
-
-        ['state_tax_rate', 'reserves_interest', 'term_int_rate']
-
-     - HostDeveloper_PVBatteryHostDeveloper
-
-        ['om_batt_capacity_cost', 'om_batt_replacement_cost', 'equip1_reserve_cost', 'equip1_reserve_freq', 'om_capacity', 'battery_per_kWh']
-
-     - HostDeveloper_PVWattsBatteryHostDeveloper
-
-        ['construction_financing_cost', 'total_installed_cost', 'battery_per_kWh', 'degradation', 'battery_total_cost_lcos']
+        ['reserves_interest', 'insurance_rate', 'equip1_reserve_freq', 'term_int_rate', 'equip1_reserve_cost', 'ppa_soln_mode', 'om_capacity']
 
      - HostDeveloper_PVWattsHostDeveloper
 
-        ['insurance_rate', 'reserves_interest', 'equip1_reserve_cost', 'equip1_reserve_freq', 'om_capacity', 'term_int_rate']
+        ['reserves_interest', 'insurance_rate', 'equip1_reserve_freq', 'term_int_rate', 'equip1_reserve_cost', 'om_capacity']
 
      - Pvsamv1_FlatPlatePVHostDeveloper
 
-        ['inv_tdc_cec_cg', 'inv_tdc_ds', 'use_wf_albedo', 'inv_tdc_plc', 'inv_tdc_cec_db']
+        ['inv_tdc_plc', 'inv_tdc_cec_cg', 'inv_tdc_ds', 'inv_tdc_cec_db', 'use_wf_albedo']
 
-     - Pvsamv1_PVBatteryHostDeveloper
+     - HostDeveloper_GenericSystemHostDeveloper
 
-        ['inv_tdc_cec_cg', 'batt_calendar_c', 'inv_tdc_ds', 'use_wf_albedo', 'inv_tdc_plc', 'inv_tdc_cec_db', 'batt_minimum_SOC']
+        ['reserves_interest', 'term_int_rate', 'state_tax_rate']
 
-     - Utilityrate5_PVWattsBatteryHostDeveloper
+     - HostDeveloper_PVWattsBatteryHostDeveloper
 
-        ['degradation']
+        ['degradation', 'battery_per_kWh', 'total_installed_cost', 'construction_financing_cost', 'battery_total_cost_lcos']
+
+     - Battery_GenericBatteryHostDeveloper
+
+        ['batt_minimum_SOC', 'batt_calendar_c']
 
 
 
-Lcoefcr
+Ippppa
 ************************************************
 
-:doc:`modules/Lcoefcr` Modified Default Values:
+:doc:`modules/Ippppa` Modified Input Variables:
 
-     - Lcoefcr_FlatPlatePVLCOECalculator
+    New variables:
 
-        ['fixed_charge_rate', 'fixed_operating_cost', 'capital_cost']
+         - land_area
+         - om_land_lease
+         - om_land_lease_escal
 
-     - Lcoefcr_GeothermalPowerLCOECalculator
 
-        ['fixed_operating_cost', 'capital_cost']
+Irradproc
+************************************************
 
-     - Lcoefcr_MEtidalLCOECalculator
+:doc:`modules/Irradproc` Modified Input Variables:
 
-        ['annual_energy', 'fixed_operating_cost', 'capital_cost']
+    New variables:
 
-     - Lcoefcr_MEwaveLCOECalculator
-
-        ['annual_energy', 'capital_cost']
-
-     - Lcoefcr_PVWattsLCOECalculator
-
-        ['fixed_charge_rate', 'fixed_operating_cost', 'capital_cost']
-
-     - Lcoefcr_WindPowerLCOECalculator
-
-        ['fixed_charge_rate', 'fixed_operating_cost', 'capital_cost']
-
+         - slope_azm
+         - slope_tilt
 
 
 Levpartflip
 ************************************************
 
-:doc:`modules/Levpartflip` New Default files:
-
-     - StandaloneBatteryLeveragedPartnershipFlip
-
-:doc:`modules/Levpartflip` Modified Variables:
+:doc:`modules/Levpartflip` Modified Input Variables:
 
     New variables:
 
+         - batt_annual_charge_energy
          - dscr_limit_debt_fraction
          - dscr_maximum_debt_fraction
          - en_electricity_rates
          - en_standalone_batt
+         - gen_purchases
          - land_area
+         - net_billing_credits_ym
+         - nm_dollars_applied_ym
          - om_land_lease
          - om_land_lease_escal
+         - utility_bill_w_sys
+
+:doc:`modules/Levpartflip` New Default files:
+
+     - StandaloneBatteryLeveragedPartnershipFlip
 
 :doc:`modules/Levpartflip` Modified Default Values:
 
      - Levpartflip_BiopowerLeveragedPartnershipFlip
 
-        ['ppa_soln_mode', 'reserves_interest', 'equip1_reserve_cost', 'construction_financing_cost', 'term_int_rate', 'ppa_price_input']
-
-     - Levpartflip_DSLFLeveragedPartnershipFlip
-
-        ['ppa_soln_mode', 'reserves_interest', 'term_int_rate']
-
-     - Levpartflip_EmpiricalTroughLeveragedPartnershipFlip
-
-        ['ppa_soln_mode', 'reserves_interest', 'term_int_rate']
-
-     - Levpartflip_FlatPlatePVLeveragedPartnershipFlip
-
-        ['insurance_rate', 'ppa_soln_mode', 'reserves_interest', 'equip1_reserve_cost', 'equip1_reserve_freq', 'om_capacity', 'term_int_rate', 'ppa_price_input']
-
-     - Levpartflip_GenericBatteryLeveragedPartnershipFlip
-
-        ['insurance_rate', 'om_batt_capacity_cost', 'reserves_interest', 'om_batt_replacement_cost', 'equip1_reserve_cost', 'equip1_reserve_freq', 'ppa_escalation', 'om_capacity', 'term_int_rate', 'battery_per_kWh']
-
-     - Levpartflip_GenericCSPSystemLeveragedPartnershipFlip
-
-        ['ppa_soln_mode', 'reserves_interest', 'term_int_rate']
-
-     - Levpartflip_GenericSystemLeveragedPartnershipFlip
-
-        ['ppa_soln_mode', 'reserves_interest', 'equip1_reserve_cost', 'term_int_rate', 'ppa_price_input']
-
-     - Levpartflip_GeothermalPowerLeveragedPartnershipFlip
-
-        ['ppa_soln_mode', 'system_capacity', 'reserves_interest', 'equip1_reserve_cost', 'construction_financing_cost', 'system_recapitalization_cost', 'total_installed_cost', 'term_int_rate']
-
-     - Levpartflip_HighXConcentratingPVLeveragedPartnershipFlip
-
-        ['insurance_rate', 'ppa_soln_mode', 'reserves_interest', 'equip1_reserve_cost', 'equip1_reserve_freq', 'term_int_rate']
-
-     - Levpartflip_MSLFLeveragedPartnershipFlip
-
-        ['ppa_soln_mode', 'reserves_interest', 'term_int_rate']
-
-     - Levpartflip_MSPTLeveragedPartnershipFlip
-
-        ['ppa_soln_mode', 'reserves_interest', 'term_int_rate']
+        ['reserves_interest', 'term_int_rate', 'equip1_reserve_cost', 'ppa_price_input', 'ppa_soln_mode', 'construction_financing_cost']
 
      - Levpartflip_PVBatteryLeveragedPartnershipFlip
 
-        ['insurance_rate', 'om_batt_capacity_cost', 'reserves_interest', 'om_batt_replacement_cost', 'equip1_reserve_cost', 'equip1_reserve_freq', 'ppa_escalation', 'om_capacity', 'term_int_rate', 'ppa_price_input', 'battery_per_kWh']
-
-     - Levpartflip_PVWattsLeveragedPartnershipFlip
-
-        ['insurance_rate', 'ppa_soln_mode', 'reserves_interest', 'equip1_reserve_cost', 'equip1_reserve_freq', 'om_capacity', 'term_int_rate', 'ppa_price_input']
+        ['reserves_interest', 'ppa_escalation', 'insurance_rate', 'battery_per_kWh', 'equip1_reserve_freq', 'om_batt_capacity_cost', 'term_int_rate', 'equip1_reserve_cost', 'ppa_price_input', 'om_batt_replacement_cost', 'om_capacity']
 
      - Levpartflip_PhysicalTroughLeveragedPartnershipFlip
 
-        ['ppa_soln_mode', 'reserves_interest', 'term_int_rate']
+        ['reserves_interest', 'term_int_rate', 'ppa_soln_mode']
+
+     - Levpartflip_GeothermalPowerLeveragedPartnershipFlip
+
+        ['reserves_interest', 'system_capacity', 'term_int_rate', 'equip1_reserve_cost', 'total_installed_cost', 'ppa_soln_mode', 'construction_financing_cost', 'system_recapitalization_cost']
 
      - Levpartflip_WindPowerLeveragedPartnershipFlip
 
-        ['insurance_rate', 'ppa_soln_mode', 'system_capacity', 'reserves_interest', 'equip1_reserve_cost', 'term_int_rate']
+        ['reserves_interest', 'system_capacity', 'insurance_rate', 'term_int_rate', 'equip1_reserve_cost', 'ppa_soln_mode']
+
+     - Levpartflip_MSLFLeveragedPartnershipFlip
+
+        ['reserves_interest', 'term_int_rate', 'ppa_soln_mode']
+
+     - Levpartflip_GenericSystemLeveragedPartnershipFlip
+
+        ['reserves_interest', 'term_int_rate', 'equip1_reserve_cost', 'ppa_price_input', 'ppa_soln_mode']
+
+     - Levpartflip_MSPTLeveragedPartnershipFlip
+
+        ['reserves_interest', 'term_int_rate', 'ppa_soln_mode']
+
+     - Levpartflip_GenericBatteryLeveragedPartnershipFlip
+
+        ['reserves_interest', 'ppa_escalation', 'insurance_rate', 'battery_per_kWh', 'equip1_reserve_freq', 'om_batt_capacity_cost', 'term_int_rate', 'equip1_reserve_cost', 'om_batt_replacement_cost', 'om_capacity']
+
+     - Levpartflip_GenericCSPSystemLeveragedPartnershipFlip
+
+        ['reserves_interest', 'term_int_rate', 'ppa_soln_mode']
+
+     - Levpartflip_DSLFLeveragedPartnershipFlip
+
+        ['reserves_interest', 'term_int_rate', 'ppa_soln_mode']
+
+     - Levpartflip_EmpiricalTroughLeveragedPartnershipFlip
+
+        ['reserves_interest', 'term_int_rate', 'ppa_soln_mode']
+
+     - Levpartflip_HighXConcentratingPVLeveragedPartnershipFlip
+
+        ['reserves_interest', 'insurance_rate', 'equip1_reserve_freq', 'term_int_rate', 'equip1_reserve_cost', 'ppa_soln_mode']
+
+     - Levpartflip_FlatPlatePVLeveragedPartnershipFlip
+
+        ['reserves_interest', 'insurance_rate', 'equip1_reserve_freq', 'term_int_rate', 'equip1_reserve_cost', 'ppa_price_input', 'ppa_soln_mode', 'om_capacity']
+
+     - Levpartflip_PVWattsLeveragedPartnershipFlip
+
+        ['reserves_interest', 'insurance_rate', 'equip1_reserve_freq', 'term_int_rate', 'equip1_reserve_cost', 'ppa_price_input', 'ppa_soln_mode', 'om_capacity']
 
 
 
 Merchantplant
 ************************************************
 
-:doc:`modules/Merchantplant` New Default files:
-
-     - StandaloneBatteryMerchantPlant
-
-:doc:`modules/Merchantplant` Modified Variables:
+:doc:`modules/Merchantplant` Modified Input Variables:
 
     New variables:
 
+         - batt_annual_charge_energy
          - dscr_limit_debt_fraction
          - dscr_maximum_debt_fraction
          - en_electricity_rates
          - en_standalone_batt
+         - gen_purchases
          - land_area
          - mp_ancserv1_percent_gen
          - mp_ancserv1_revenue_single
@@ -946,6 +829,8 @@ Merchantplant
          - mp_enable_market_percent_gen
          - mp_energy_market_revenue_single
          - mp_market_percent_gen
+         - net_billing_credits_ym
+         - nm_dollars_applied_ym
          - om_land_lease
          - om_land_lease_escal
 
@@ -953,132 +838,119 @@ Merchantplant
 
          - roe_input
 
+:doc:`modules/Merchantplant` New Default files:
+
+     - StandaloneBatteryMerchantPlant
+
 :doc:`modules/Merchantplant` Modified Default Values:
-
-     - Merchantplant_BiopowerMerchantPlant
-
-        ['mp_ancserv2_revenue', 'reserves_interest', 'mp_ancserv3_revenue', 'equip1_reserve_cost', 'mp_energy_market_revenue', 'mp_ancserv1_revenue', 'term_int_rate', 'mp_ancserv4_revenue']
-
-     - Merchantplant_DSLFMerchantPlant
-
-        ['mp_ancserv2_revenue', 'reserves_interest', 'mp_ancserv3_revenue', 'mp_energy_market_revenue', 'mp_ancserv1_revenue', 'term_int_rate', 'mp_ancserv4_revenue']
-
-     - Merchantplant_EmpiricalTroughMerchantPlant
-
-        ['mp_ancserv2_revenue', 'reserves_interest', 'mp_ancserv3_revenue', 'mp_energy_market_revenue', 'mp_ancserv1_revenue', 'term_int_rate', 'mp_ancserv4_revenue']
-
-     - Merchantplant_FlatPlatePVMerchantPlant
-
-        ['insurance_rate', 'mp_ancserv2_revenue', 'reserves_interest', 'mp_ancserv3_revenue', 'equip1_reserve_cost', 'mp_energy_market_revenue', 'mp_ancserv1_revenue', 'equip1_reserve_freq', 'om_capacity', 'term_int_rate', 'mp_ancserv4_revenue']
-
-     - Merchantplant_GenericBatteryMerchantPlant
-
-        ['insurance_rate', 'om_batt_capacity_cost', 'mp_ancserv2_revenue', 'reserves_interest', 'om_batt_replacement_cost', 'mp_ancserv3_revenue', 'equip1_reserve_cost', 'mp_energy_market_revenue', 'mp_ancserv1_revenue', 'equip1_reserve_freq', 'om_capacity', 'term_int_rate', 'battery_per_kWh', 'mp_ancserv4_revenue']
-
-     - Merchantplant_GenericCSPSystemMerchantPlant
-
-        ['cp_system_nameplate', 'system_capacity', 'mp_ancserv2_revenue', 'reserves_interest', 'mp_ancserv3_revenue', 'mp_energy_market_revenue', 'mp_ancserv1_revenue', 'construction_financing_cost', 'total_installed_cost', 'term_int_rate', 'mp_ancserv4_revenue']
-
-     - Merchantplant_GenericSystemMerchantPlant
-
-        ['mp_ancserv2_revenue', 'reserves_interest', 'mp_ancserv3_revenue', 'equip1_reserve_cost', 'mp_energy_market_revenue', 'mp_ancserv1_revenue', 'term_int_rate', 'mp_ancserv4_revenue']
-
-     - Merchantplant_GeothermalPowerMerchantPlant
-
-        ['cp_system_nameplate', 'system_capacity', 'mp_ancserv2_revenue', 'reserves_interest', 'mp_ancserv3_revenue', 'equip1_reserve_cost', 'mp_energy_market_revenue', 'mp_ancserv1_revenue', 'construction_financing_cost', 'system_recapitalization_cost', 'total_installed_cost', 'term_int_rate', 'mp_ancserv4_revenue']
 
      - Merchantplant_HighXConcentratingPVMerchantPlant
 
-        ['insurance_rate', 'mp_ancserv2_revenue', 'reserves_interest', 'mp_ancserv3_revenue', 'equip1_reserve_cost', 'mp_energy_market_revenue', 'mp_ancserv1_revenue', 'equip1_reserve_freq', 'term_int_rate', 'mp_ancserv4_revenue']
+        ['reserves_interest', 'mp_energy_market_revenue', 'insurance_rate', 'equip1_reserve_freq', 'term_int_rate', 'equip1_reserve_cost', 'mp_ancserv3_revenue', 'mp_ancserv1_revenue', 'mp_ancserv4_revenue', 'mp_ancserv2_revenue']
 
-     - Merchantplant_MSLFMerchantPlant
+     - Merchantplant_GenericBatteryMerchantPlant
 
-        ['mp_ancserv2_revenue', 'reserves_interest', 'mp_ancserv3_revenue', 'mp_energy_market_revenue', 'mp_ancserv1_revenue', 'term_int_rate', 'mp_ancserv4_revenue']
+        ['reserves_interest', 'mp_energy_market_revenue', 'insurance_rate', 'battery_per_kWh', 'equip1_reserve_freq', 'om_batt_capacity_cost', 'term_int_rate', 'equip1_reserve_cost', 'mp_ancserv3_revenue', 'mp_ancserv1_revenue', 'mp_ancserv4_revenue', 'om_batt_replacement_cost', 'om_capacity', 'mp_ancserv2_revenue']
 
-     - Merchantplant_MSPTMerchantPlant
+     - Merchantplant_FlatPlatePVMerchantPlant
 
-        ['mp_ancserv2_revenue', 'reserves_interest', 'mp_ancserv3_revenue', 'mp_energy_market_revenue', 'mp_ancserv1_revenue', 'term_int_rate', 'mp_ancserv4_revenue']
-
-     - Merchantplant_PVBatteryMerchantPlant
-
-        ['insurance_rate', 'om_batt_capacity_cost', 'mp_ancserv2_revenue', 'reserves_interest', 'om_batt_replacement_cost', 'mp_ancserv3_revenue', 'equip1_reserve_cost', 'mp_energy_market_revenue', 'mp_ancserv1_revenue', 'equip1_reserve_freq', 'om_capacity', 'term_int_rate', 'battery_per_kWh', 'mp_ancserv4_revenue']
-
-     - Merchantplant_PVWattsMerchantPlant
-
-        ['insurance_rate', 'mp_ancserv2_revenue', 'reserves_interest', 'mp_ancserv3_revenue', 'equip1_reserve_cost', 'mp_energy_market_revenue', 'mp_ancserv1_revenue', 'equip1_reserve_freq', 'om_capacity', 'term_int_rate', 'mp_ancserv4_revenue']
+        ['reserves_interest', 'mp_energy_market_revenue', 'insurance_rate', 'equip1_reserve_freq', 'term_int_rate', 'equip1_reserve_cost', 'mp_ancserv3_revenue', 'mp_ancserv1_revenue', 'mp_ancserv4_revenue', 'om_capacity', 'mp_ancserv2_revenue']
 
      - Merchantplant_PhysicalTroughMerchantPlant
 
-        ['mp_ancserv2_revenue', 'reserves_interest', 'mp_ancserv3_revenue', 'mp_energy_market_revenue', 'mp_ancserv1_revenue', 'term_int_rate', 'mp_ancserv4_revenue']
+        ['reserves_interest', 'mp_energy_market_revenue', 'term_int_rate', 'mp_ancserv3_revenue', 'mp_ancserv1_revenue', 'mp_ancserv4_revenue', 'mp_ancserv2_revenue']
+
+     - Merchantplant_BiopowerMerchantPlant
+
+        ['reserves_interest', 'mp_energy_market_revenue', 'term_int_rate', 'equip1_reserve_cost', 'mp_ancserv3_revenue', 'mp_ancserv1_revenue', 'mp_ancserv4_revenue', 'mp_ancserv2_revenue']
+
+     - Merchantplant_PVWattsMerchantPlant
+
+        ['reserves_interest', 'mp_energy_market_revenue', 'insurance_rate', 'equip1_reserve_freq', 'term_int_rate', 'equip1_reserve_cost', 'mp_ancserv3_revenue', 'mp_ancserv1_revenue', 'mp_ancserv4_revenue', 'om_capacity', 'mp_ancserv2_revenue']
+
+     - Merchantplant_MSLFMerchantPlant
+
+        ['reserves_interest', 'mp_energy_market_revenue', 'term_int_rate', 'mp_ancserv3_revenue', 'mp_ancserv1_revenue', 'mp_ancserv4_revenue', 'mp_ancserv2_revenue']
 
      - Merchantplant_WindPowerMerchantPlant
 
-        ['insurance_rate', 'system_capacity', 'mp_ancserv2_revenue', 'reserves_interest', 'mp_ancserv3_revenue', 'equip1_reserve_cost', 'mp_energy_market_revenue', 'mp_ancserv1_revenue', 'term_int_rate', 'mp_ancserv4_revenue']
+        ['reserves_interest', 'mp_energy_market_revenue', 'system_capacity', 'insurance_rate', 'term_int_rate', 'equip1_reserve_cost', 'mp_ancserv3_revenue', 'mp_ancserv1_revenue', 'mp_ancserv4_revenue', 'mp_ancserv2_revenue']
+
+     - Merchantplant_DSLFMerchantPlant
+
+        ['reserves_interest', 'mp_energy_market_revenue', 'term_int_rate', 'mp_ancserv3_revenue', 'mp_ancserv1_revenue', 'mp_ancserv4_revenue', 'mp_ancserv2_revenue']
+
+     - Merchantplant_GenericSystemMerchantPlant
+
+        ['reserves_interest', 'mp_energy_market_revenue', 'term_int_rate', 'equip1_reserve_cost', 'mp_ancserv3_revenue', 'mp_ancserv1_revenue', 'mp_ancserv4_revenue', 'mp_ancserv2_revenue']
+
+     - Merchantplant_GenericCSPSystemMerchantPlant
+
+        ['reserves_interest', 'mp_energy_market_revenue', 'system_capacity', 'term_int_rate', 'mp_ancserv3_revenue', 'mp_ancserv1_revenue', 'total_installed_cost', 'construction_financing_cost', 'mp_ancserv4_revenue', 'cp_system_nameplate', 'mp_ancserv2_revenue']
+
+     - Merchantplant_EmpiricalTroughMerchantPlant
+
+        ['reserves_interest', 'mp_energy_market_revenue', 'term_int_rate', 'mp_ancserv3_revenue', 'mp_ancserv1_revenue', 'mp_ancserv4_revenue', 'mp_ancserv2_revenue']
+
+     - Merchantplant_GeothermalPowerMerchantPlant
+
+        ['reserves_interest', 'mp_energy_market_revenue', 'system_capacity', 'term_int_rate', 'equip1_reserve_cost', 'mp_ancserv3_revenue', 'mp_ancserv1_revenue', 'total_installed_cost', 'construction_financing_cost', 'mp_ancserv4_revenue', 'system_recapitalization_cost', 'cp_system_nameplate', 'mp_ancserv2_revenue']
+
+     - Merchantplant_PVBatteryMerchantPlant
+
+        ['reserves_interest', 'mp_energy_market_revenue', 'insurance_rate', 'battery_per_kWh', 'equip1_reserve_freq', 'om_batt_capacity_cost', 'term_int_rate', 'equip1_reserve_cost', 'mp_ancserv3_revenue', 'mp_ancserv1_revenue', 'mp_ancserv4_revenue', 'om_batt_replacement_cost', 'om_capacity', 'mp_ancserv2_revenue']
+
+     - Merchantplant_MSPTMerchantPlant
+
+        ['reserves_interest', 'mp_energy_market_revenue', 'term_int_rate', 'mp_ancserv3_revenue', 'mp_ancserv1_revenue', 'mp_ancserv4_revenue', 'mp_ancserv2_revenue']
 
 
 
 MhkTidal
 ************************************************
 
-:doc:`modules/MhkTidal` New Default files:
-
-     - MEtidalNone
-
-:doc:`modules/MhkTidal` Modified Variables:
+:doc:`modules/MhkTidal` Modified Input Variables:
 
     New variables:
 
          - system_capacity
 
+:doc:`modules/MhkTidal` New Default files:
+
+     - MEtidalNone
+
 :doc:`modules/MhkTidal` Modified Default Values:
 
      - MhkTidal_MEtidalLCOECalculator
 
-        ['balance_of_system_cost_total', 'number_devices', 'total_operating_cost', 'device_costs_total', 'financial_cost_total']
-
-
-
-MhkWave
-************************************************
-
-:doc:`modules/MhkWave` Modified Default Values:
-
-     - MhkWave_MEwaveLCOECalculator
-
-        ['balance_of_system_cost_total', 'significant_wave_height', 'energy_period', 'financial_cost_total']
-
-     - MhkWave_MEwaveNone
-
-        ['year']
+        ['balance_of_system_cost_total', 'device_costs_total', 'total_operating_cost', 'financial_cost_total', 'number_devices']
 
 
 
 Pvsamv1
 ************************************************
 
-:doc:`modules/Pvsamv1` Modified Variables:
+:doc:`modules/Pvsamv1` Modified Input Variables:
 
     New variables:
 
          - batt_dispatch_auto_btm_can_discharge_to_grid
-         - batt_dispatch_auto_can_clipcharge
          - batt_dispatch_charge_only_system_exceeds_load
          - batt_dispatch_discharge_only_load_exceeds_system
          - batt_dispatch_load_forecast_choice
          - batt_dispatch_wf_forecast_choice
-         - batt_life_model
          - batt_load_ac_forecast
          - batt_load_ac_forecast_escalation
          - batt_minimum_outage_SOC
-         - batt_pv_ac_forecast
-         - batt_pv_clipping_forecast
          - crit_load_escalation
          - dispatch_manual_btm_discharge_to_grid
          - en_standalone_batt
-         - grid_outage
+         - mlm_bifacial_ground_clearance_height
+         - mlm_bifacial_transmission_factor
+         - mlm_bifaciality
+         - mlm_is_bifacial
          - om_batt_replacement_cost
          - om_replacement_cost_escal
-         - rate_escalation
          - subarray1_slope_azm
          - subarray1_slope_tilt
          - subarray2_slope_azm
@@ -1087,121 +959,19 @@ Pvsamv1
          - subarray3_slope_tilt
          - subarray4_slope_azm
          - subarray4_slope_tilt
-         - ur_annual_min_charge
          - ur_billing_demand_lookback_percentages
          - ur_billing_demand_lookback_period
          - ur_billing_demand_minimum
          - ur_dc_billing_demand_periods
-         - ur_dc_enable
-         - ur_dc_flat_mat
-         - ur_dc_sched_weekday
-         - ur_dc_sched_weekend
-         - ur_dc_tou_mat
-         - ur_ec_sched_weekday
-         - ur_ec_sched_weekend
-         - ur_ec_tou_mat
-         - ur_en_ts_buy_rate
-         - ur_en_ts_sell_rate
          - ur_enable_billing_demand
-         - ur_metering_option
-         - ur_monthly_fixed_charge
-         - ur_monthly_min_charge
-         - ur_nm_credit_month
-         - ur_nm_credit_rollover
-         - ur_nm_yearend_sell_rate
-         - ur_ts_buy_rate
-         - ur_ts_sell_rate
-         - ur_yearzero_usage_peaks
 
     Removed variables:
 
+         - batt_auto_gridcharge_max_daily
          - ur_ec_billing_demand_lookback_percentages
          - ur_ec_billing_demand_lookback_period
          - ur_ec_billing_demand_minimum
          - ur_ec_enable_billing_demand
-
-:doc:`modules/Pvsamv1` Modified Default Values:
-
-     - Pvsamv1_FlatPlatePVAllEquityPartnershipFlip
-
-        ['subarray4_tilt', 'subarray2_track_mode', 'subarray3_track_mode', 'subarray2_tilt', 'inv_tdc_cec_cg', 'subarray1_tilt', 'subarray3_tilt', 'subarray1_track_mode', 'subarray4_track_mode', 'inverter_count', 'inv_tdc_ds', 'use_wf_albedo', 'ppa_price_input', 'inv_tdc_plc', 'inv_tdc_cec_db']
-
-     - Pvsamv1_FlatPlatePVCommercial
-
-        ['inv_tdc_cec_cg', 'inv_tdc_ds', 'use_wf_albedo', 'inv_tdc_plc', 'inv_tdc_cec_db']
-
-     - Pvsamv1_FlatPlatePVHostDeveloper
-
-        ['inv_tdc_cec_cg', 'inv_tdc_ds', 'use_wf_albedo', 'inv_tdc_plc', 'inv_tdc_cec_db']
-
-     - Pvsamv1_FlatPlatePVLCOECalculator
-
-        ['inverter_count', 'subarray4_tilt', 'inv_tdc_cec_db', 'system_capacity', 'inv_tdc_ds', 'subarray1_track_mode', 'subarray2_track_mode', 'subarray3_track_mode', 'subarray2_tilt', 'inv_tdc_cec_cg', 'subarray1_tilt', 'subarray3_tilt', 'subarray1_nstrings', 'use_wf_albedo', 'subarray4_track_mode', 'inv_tdc_plc']
-
-     - Pvsamv1_FlatPlatePVLeveragedPartnershipFlip
-
-        ['subarray4_tilt', 'subarray2_track_mode', 'subarray3_track_mode', 'subarray2_tilt', 'inv_tdc_cec_cg', 'subarray1_tilt', 'subarray3_tilt', 'subarray1_track_mode', 'subarray4_track_mode', 'inverter_count', 'inv_tdc_ds', 'use_wf_albedo', 'ppa_price_input', 'inv_tdc_plc', 'inv_tdc_cec_db']
-
-     - Pvsamv1_FlatPlatePVMerchantPlant
-
-        ['subarray4_tilt', 'mp_ancserv2_revenue', 'subarray2_track_mode', 'subarray3_track_mode', 'subarray2_tilt', 'inv_tdc_cec_cg', 'subarray1_tilt', 'subarray3_tilt', 'mp_ancserv4_revenue', 'subarray1_track_mode', 'mp_ancserv3_revenue', 'subarray4_track_mode', 'inverter_count', 'inv_tdc_ds', 'use_wf_albedo', 'inv_tdc_plc', 'inv_tdc_cec_db', 'mp_energy_market_revenue', 'mp_ancserv1_revenue']
-
-     - Pvsamv1_FlatPlatePVNone
-
-        ['inv_tdc_cec_db', 'inv_snl_pso', 'system_capacity', 'inv_snl_eff_cec', 'inv_tdc_ds', 'inv_snl_pdco', 'inv_snl_c3', 'inv_snl_pnt', 'inv_snl_paco', 'inv_snl_c0', 'inv_snl_c2', 'inv_tdc_cec_cg', 'subarray1_modules_per_string', 'inv_snl_vdcmax', 'subarray1_nstrings', 'mppt_hi_inverter', 'inv_snl_vdco', 'use_wf_albedo', 'mppt_low_inverter', 'inv_snl_c1', 'inv_tdc_plc']
-
-     - Pvsamv1_FlatPlatePVResidential
-
-        ['inv_snl_c0', 'inv_tdc_cec_cg', 'subarray2_mismatch_loss', 'inv_snl_c1', 'dcoptimizer_loss', 'inv_snl_pso', 'inv_snl_pdco', 'subarray1_mismatch_loss', 'inv_snl_c3', 'subarray1_nstrings', 'mppt_hi_inverter', 'subarray3_mismatch_loss', 'subarray4_mismatch_loss', 'inv_tdc_ds', 'inv_snl_c2', 'subarray1_modules_per_string', 'mppt_low_inverter', 'inv_snl_vdco', 'use_wf_albedo', 'inv_tdc_plc', 'inv_tdc_cec_db', 'system_capacity', 'inv_snl_eff_cec', 'inv_snl_pnt', 'inv_snl_paco', 'inv_snl_vdcmax']
-
-     - Pvsamv1_FlatPlatePVSaleLeaseback
-
-        ['subarray4_tilt', 'subarray2_track_mode', 'subarray3_track_mode', 'subarray2_tilt', 'inv_tdc_cec_cg', 'subarray1_tilt', 'subarray3_tilt', 'subarray1_track_mode', 'subarray4_track_mode', 'inverter_count', 'inv_tdc_ds', 'use_wf_albedo', 'ppa_price_input', 'inv_tdc_plc', 'inv_tdc_cec_db']
-
-     - Pvsamv1_FlatPlatePVSingleOwner
-
-        ['subarray4_tilt', 'subarray2_track_mode', 'subarray3_track_mode', 'subarray2_tilt', 'inv_tdc_cec_cg', 'subarray1_tilt', 'subarray3_tilt', 'subarray1_track_mode', 'subarray4_track_mode', 'inverter_count', 'inv_tdc_ds', 'use_wf_albedo', 'ppa_price_input', 'inv_tdc_plc', 'inv_tdc_cec_db']
-
-     - Pvsamv1_FlatPlatePVThirdParty
-
-        ['inv_snl_c0', 'inv_tdc_cec_cg', 'subarray2_mismatch_loss', 'inv_snl_c1', 'dcoptimizer_loss', 'inv_snl_pso', 'inv_snl_pdco', 'subarray1_mismatch_loss', 'inv_snl_c3', 'subarray1_nstrings', 'mppt_hi_inverter', 'subarray3_mismatch_loss', 'inverter_count', 'subarray4_mismatch_loss', 'inv_tdc_ds', 'ur_yearzero_usage_peaks', 'inv_snl_c2', 'subarray1_modules_per_string', 'mppt_low_inverter', 'inv_snl_vdco', 'use_wf_albedo', 'inv_tdc_plc', 'inv_tdc_cec_db', 'system_capacity', 'inv_snl_eff_cec', 'inv_snl_pnt', 'inv_snl_paco', 'inv_snl_vdcmax']
-
-     - Pvsamv1_PVBatteryAllEquityPartnershipFlip
-
-        ['inv_tdc_cec_cg', 'subarray1_tilt', 'subarray1_track_mode', 'batt_calendar_c', 'inverter_count', 'inv_tdc_ds', 'dispatch_manual_sched_weekend', 'use_wf_albedo', 'ppa_price_input', 'inv_tdc_plc', 'inv_tdc_cec_db', 'dispatch_manual_sched', 'batt_h_to_ambient']
-
-     - Pvsamv1_PVBatteryCommercial
-
-        ['inv_tdc_cec_cg', 'batt_calendar_c', 'inv_tdc_ds', 'ur_yearzero_usage_peaks', 'use_wf_albedo', 'inv_tdc_plc', 'inv_tdc_cec_db', 'batt_minimum_SOC']
-
-     - Pvsamv1_PVBatteryHostDeveloper
-
-        ['inv_tdc_cec_cg', 'batt_calendar_c', 'inv_tdc_ds', 'use_wf_albedo', 'inv_tdc_plc', 'inv_tdc_cec_db', 'batt_minimum_SOC']
-
-     - Pvsamv1_PVBatteryLeveragedPartnershipFlip
-
-        ['inv_tdc_cec_cg', 'subarray1_tilt', 'subarray1_track_mode', 'batt_calendar_c', 'inverter_count', 'inv_tdc_ds', 'dispatch_manual_sched_weekend', 'use_wf_albedo', 'ppa_price_input', 'inv_tdc_plc', 'inv_tdc_cec_db', 'dispatch_manual_sched', 'batt_h_to_ambient']
-
-     - Pvsamv1_PVBatteryMerchantPlant
-
-        ['mp_ancserv2_revenue', 'inv_tdc_cec_cg', 'subarray1_tilt', 'mp_ancserv4_revenue', 'subarray1_track_mode', 'mp_ancserv3_revenue', 'batt_calendar_c', 'inverter_count', 'inv_tdc_ds', 'dispatch_manual_sched_weekend', 'batt_room_temperature_celsius', 'use_wf_albedo', 'inv_tdc_plc', 'inv_tdc_cec_db', 'dispatch_manual_sched', 'mp_energy_market_revenue', 'mp_ancserv1_revenue', 'batt_h_to_ambient']
-
-     - Pvsamv1_PVBatteryResidential
-
-        ['inv_tdc_cec_cg', 'subarray2_mismatch_loss', 'dcoptimizer_loss', 'subarray1_mismatch_loss', 'batt_calendar_c', 'subarray3_mismatch_loss', 'subarray4_mismatch_loss', 'inv_tdc_ds', 'ur_yearzero_usage_peaks', 'use_wf_albedo', 'inv_tdc_plc', 'inv_tdc_cec_db', 'batt_minimum_SOC']
-
-     - Pvsamv1_PVBatterySaleLeaseback
-
-        ['inv_tdc_cec_cg', 'subarray1_tilt', 'subarray1_track_mode', 'batt_calendar_c', 'inverter_count', 'inv_tdc_ds', 'dispatch_manual_sched_weekend', 'use_wf_albedo', 'ppa_price_input', 'inv_tdc_plc', 'inv_tdc_cec_db', 'dispatch_manual_sched', 'batt_h_to_ambient']
-
-     - Pvsamv1_PVBatterySingleOwner
-
-        ['batt_mass', 'batt_power_charge_max_kwdc', 'inv_tdc_cec_cg', 'subarray1_tilt', 'batt_computed_strings', 'batt_computed_bank_capacity', 'subarray1_track_mode', 'batt_current_discharge_max', 'batt_current_charge_max', 'ur_ec_tou_mat', 'batt_calendar_c', 'batt_surface_area', 'inverter_count', 'batt_power_charge_max_kwac', 'inv_tdc_ds', 'dispatch_manual_sched_weekend', 'ur_yearzero_usage_peaks', 'ur_dc_tou_mat', 'batt_Qfull_flow', 'use_wf_albedo', 'ppa_price_input', 'inv_tdc_plc', 'inv_tdc_cec_db', 'dispatch_manual_sched', 'batt_h_to_ambient', 'batt_power_discharge_max_kwdc', 'batt_power_discharge_max_kwac']
-
-     - Pvsamv1_PVBatteryThirdParty
-
-        ['inv_tdc_cec_cg', 'subarray2_mismatch_loss', 'dcoptimizer_loss', 'subarray1_mismatch_loss', 'batt_calendar_c', 'subarray3_mismatch_loss', 'subarray4_mismatch_loss', 'inv_tdc_ds', 'ur_yearzero_usage_peaks', 'use_wf_albedo', 'inv_tdc_plc', 'inv_tdc_cec_db', 'batt_minimum_SOC']
-
 
 
 Pvwattsv7
@@ -1256,101 +1026,104 @@ Pvwattsv8
 Saleleaseback
 ************************************************
 
-:doc:`modules/Saleleaseback` New Default files:
-
-     - StandaloneBatterySaleLeaseback
-
-:doc:`modules/Saleleaseback` Modified Variables:
+:doc:`modules/Saleleaseback` Modified Input Variables:
 
     New variables:
 
+         - batt_annual_charge_energy
          - en_electricity_rates
          - en_standalone_batt
+         - gen_purchases
          - land_area
+         - net_billing_credits_ym
+         - nm_dollars_applied_ym
          - om_land_lease
          - om_land_lease_escal
+         - utility_bill_w_sys
+
+:doc:`modules/Saleleaseback` New Default files:
+
+     - StandaloneBatterySaleLeaseback
 
 :doc:`modules/Saleleaseback` Modified Default Values:
 
      - Saleleaseback_BiopowerSaleLeaseback
 
-        ['ppa_soln_mode', 'reserves_interest', 'equip1_reserve_cost', 'construction_financing_cost', 'ppa_price_input']
-
-     - Saleleaseback_DSLFSaleLeaseback
-
-        ['ppa_soln_mode', 'reserves_interest']
-
-     - Saleleaseback_EmpiricalTroughSaleLeaseback
-
-        ['ppa_soln_mode', 'reserves_interest']
-
-     - Saleleaseback_FlatPlatePVSaleLeaseback
-
-        ['insurance_rate', 'ppa_soln_mode', 'reserves_interest', 'equip1_reserve_cost', 'equip1_reserve_freq', 'om_capacity', 'ppa_price_input']
-
-     - Saleleaseback_GenericBatterySaleLeaseback
-
-        ['insurance_rate', 'om_batt_capacity_cost', 'reserves_interest', 'om_batt_replacement_cost', 'equip1_reserve_cost', 'equip1_reserve_freq', 'ppa_escalation', 'om_capacity', 'battery_per_kWh']
-
-     - Saleleaseback_GenericCSPSystemSaleLeaseback
-
-        ['ppa_soln_mode', 'reserves_interest']
-
-     - Saleleaseback_GenericSystemSaleLeaseback
-
-        ['ppa_soln_mode', 'reserves_interest', 'equip1_reserve_cost', 'ppa_price_input']
-
-     - Saleleaseback_GeothermalPowerSaleLeaseback
-
-        ['ppa_soln_mode', 'system_capacity', 'reserves_interest', 'equip1_reserve_cost', 'construction_financing_cost', 'system_recapitalization_cost', 'total_installed_cost']
-
-     - Saleleaseback_HighXConcentratingPVSaleLeaseback
-
-        ['insurance_rate', 'ppa_soln_mode', 'reserves_interest', 'equip1_reserve_cost', 'equip1_reserve_freq']
+        ['reserves_interest', 'equip1_reserve_cost', 'ppa_price_input', 'ppa_soln_mode', 'construction_financing_cost']
 
      - Saleleaseback_MSLFSaleLeaseback
 
-        ['ppa_soln_mode', 'reserves_interest']
+        ['reserves_interest', 'ppa_soln_mode']
 
-     - Saleleaseback_MSPTSaleLeaseback
+     - Saleleaseback_HighXConcentratingPVSaleLeaseback
 
-        ['ppa_soln_mode', 'reserves_interest']
+        ['reserves_interest', 'insurance_rate', 'equip1_reserve_freq', 'equip1_reserve_cost', 'ppa_soln_mode']
 
-     - Saleleaseback_PVBatterySaleLeaseback
+     - Saleleaseback_FlatPlatePVSaleLeaseback
 
-        ['insurance_rate', 'om_batt_capacity_cost', 'reserves_interest', 'om_batt_replacement_cost', 'equip1_reserve_cost', 'equip1_reserve_freq', 'ppa_escalation', 'om_capacity', 'ppa_price_input', 'battery_per_kWh']
+        ['reserves_interest', 'insurance_rate', 'equip1_reserve_freq', 'equip1_reserve_cost', 'ppa_price_input', 'ppa_soln_mode', 'om_capacity']
 
      - Saleleaseback_PVWattsSaleLeaseback
 
-        ['insurance_rate', 'ppa_soln_mode', 'reserves_interest', 'equip1_reserve_cost', 'equip1_reserve_freq', 'om_capacity', 'ppa_price_input']
-
-     - Saleleaseback_PhysicalTroughSaleLeaseback
-
-        ['ppa_soln_mode', 'reserves_interest']
+        ['reserves_interest', 'insurance_rate', 'equip1_reserve_freq', 'equip1_reserve_cost', 'ppa_price_input', 'ppa_soln_mode', 'om_capacity']
 
      - Saleleaseback_WindPowerSaleLeaseback
 
-        ['insurance_rate', 'ppa_soln_mode', 'system_capacity', 'reserves_interest', 'equip1_reserve_cost']
+        ['reserves_interest', 'system_capacity', 'insurance_rate', 'equip1_reserve_cost', 'ppa_soln_mode']
+
+     - Saleleaseback_MSPTSaleLeaseback
+
+        ['reserves_interest', 'ppa_soln_mode']
+
+     - Saleleaseback_GenericSystemSaleLeaseback
+
+        ['reserves_interest', 'equip1_reserve_cost', 'ppa_price_input', 'ppa_soln_mode']
+
+     - Saleleaseback_EmpiricalTroughSaleLeaseback
+
+        ['reserves_interest', 'ppa_soln_mode']
+
+     - Saleleaseback_PVBatterySaleLeaseback
+
+        ['reserves_interest', 'ppa_escalation', 'insurance_rate', 'battery_per_kWh', 'equip1_reserve_freq', 'om_batt_capacity_cost', 'equip1_reserve_cost', 'ppa_price_input', 'om_batt_replacement_cost', 'om_capacity']
+
+     - Saleleaseback_GeothermalPowerSaleLeaseback
+
+        ['reserves_interest', 'system_capacity', 'equip1_reserve_cost', 'total_installed_cost', 'ppa_soln_mode', 'construction_financing_cost', 'system_recapitalization_cost']
+
+     - Saleleaseback_DSLFSaleLeaseback
+
+        ['reserves_interest', 'ppa_soln_mode']
+
+     - Saleleaseback_PhysicalTroughSaleLeaseback
+
+        ['reserves_interest', 'ppa_soln_mode']
+
+     - Saleleaseback_GenericCSPSystemSaleLeaseback
+
+        ['reserves_interest', 'ppa_soln_mode']
+
+     - Saleleaseback_GenericBatterySaleLeaseback
+
+        ['reserves_interest', 'ppa_escalation', 'insurance_rate', 'battery_per_kWh', 'equip1_reserve_freq', 'om_batt_capacity_cost', 'equip1_reserve_cost', 'om_batt_replacement_cost', 'om_capacity']
 
 
 
 Singleowner
 ************************************************
 
-:doc:`modules/Singleowner` New Default files:
-
-     - ETESSingleOwner
-     - StandaloneBatterySingleOwner
-
-:doc:`modules/Singleowner` Modified Variables:
+:doc:`modules/Singleowner` Modified Input Variables:
 
     New variables:
 
+         - batt_annual_charge_energy
          - dscr_limit_debt_fraction
          - dscr_maximum_debt_fraction
-         - en_electricity_rates
          - en_standalone_batt
+         - gen_purchases
          - land_area
+         - net_billing_credits_ym
+         - nm_dollars_applied_ym
          - om_land_lease
          - om_land_lease_escal
 
@@ -1358,119 +1131,97 @@ Singleowner
 
          - roe_input
 
+:doc:`modules/Singleowner` New Default files:
+
+     - ETESSingleOwner
+     - StandaloneBatterySingleOwner
+
 :doc:`modules/Singleowner` Modified Default Values:
-
-     - Singleowner_BiopowerSingleOwner
-
-        ['ppa_soln_mode', 'reserves_interest', 'equip1_reserve_cost', 'term_int_rate', 'ppa_price_input']
-
-     - Singleowner_DSLFSingleOwner
-
-        ['ppa_soln_mode', 'reserves_interest', 'term_int_rate']
 
      - Singleowner_EmpiricalTroughSingleOwner
 
-        ['ppa_soln_mode', 'reserves_interest', 'term_int_rate']
+        ['reserves_interest', 'term_int_rate', 'ppa_soln_mode']
 
      - Singleowner_FlatPlatePVSingleOwner
 
-        ['insurance_rate', 'ppa_soln_mode', 'reserves_interest', 'equip1_reserve_cost', 'equip1_reserve_freq', 'om_capacity', 'term_int_rate', 'ppa_price_input']
-
-     - Singleowner_FuelCellSingleOwner
-
-        ['om_fuelcell_capacity_cost', 'insurance_rate', 'term_tenor', 'state_tax_rate', 'ppa_soln_mode', 'om_batt_capacity_cost', 'reserves_interest', 'equip1_reserve_cost', 'dscr', 'equip1_reserve_freq', 'cost_debt_fee', 'batt_meter_position', 'real_discount_rate', 'om_capacity', 'term_int_rate', 'ppa_price_input', 'battery_per_kWh', 'cost_debt_closing', 'federal_tax_rate']
-
-     - Singleowner_GenericBatterySingleOwner
-
-        ['insurance_rate', 'om_batt_capacity_cost', 'reserves_interest', 'om_batt_replacement_cost', 'equip1_reserve_cost', 'equip1_reserve_freq', 'ppa_escalation', 'om_capacity', 'term_int_rate', 'battery_per_kWh']
-
-     - Singleowner_GenericCSPSystemSingleOwner
-
-        ['ppa_soln_mode', 'reserves_interest', 'term_int_rate']
-
-     - Singleowner_GenericSystemSingleOwner
-
-        ['ppa_soln_mode', 'reserves_interest', 'equip1_reserve_cost', 'term_int_rate', 'ppa_price_input']
-
-     - Singleowner_GeothermalPowerSingleOwner
-
-        ['cp_system_nameplate', 'ppa_soln_mode', 'system_capacity', 'reserves_interest', 'equip1_reserve_cost', 'construction_financing_cost', 'system_recapitalization_cost', 'total_installed_cost', 'term_int_rate']
-
-     - Singleowner_HighXConcentratingPVSingleOwner
-
-        ['insurance_rate', 'ppa_soln_mode', 'reserves_interest', 'equip1_reserve_cost', 'equip1_reserve_freq', 'term_int_rate']
+        ['reserves_interest', 'insurance_rate', 'equip1_reserve_freq', 'term_int_rate', 'equip1_reserve_cost', 'ppa_price_input', 'ppa_soln_mode', 'om_capacity']
 
      - Singleowner_MSLFSingleOwner
 
-        ['ppa_soln_mode', 'reserves_interest', 'term_int_rate']
-
-     - Singleowner_MSPTSingleOwner
-
-        ['ppa_soln_mode', 'reserves_interest', 'term_int_rate']
-
-     - Singleowner_PVBatterySingleOwner
-
-        ['insurance_rate', 'om_batt_capacity_cost', 'reserves_interest', 'om_batt_replacement_cost', 'equip1_reserve_cost', 'om_batt_nameplate', 'equip1_reserve_freq', 'construction_financing_cost', 'ppa_escalation', 'om_capacity', 'total_installed_cost', 'term_int_rate', 'ppa_price_input', 'battery_per_kWh', 'batt_computed_bank_capacity', 'battery_total_cost_lcos']
+        ['reserves_interest', 'term_int_rate', 'ppa_soln_mode']
 
      - Singleowner_PVWattsSingleOwner
 
-        ['insurance_rate', 'ppa_soln_mode', 'reserves_interest', 'equip1_reserve_cost', 'equip1_reserve_freq', 'om_capacity', 'term_int_rate', 'ppa_price_input']
+        ['reserves_interest', 'insurance_rate', 'equip1_reserve_freq', 'term_int_rate', 'equip1_reserve_cost', 'ppa_price_input', 'ppa_soln_mode', 'om_capacity']
 
-     - Singleowner_PhysicalTroughSingleOwner
+     - Singleowner_PVBatterySingleOwner
 
-        ['ppa_soln_mode', 'reserves_interest', 'term_int_rate']
+        ['reserves_interest', 'ppa_escalation', 'insurance_rate', 'battery_per_kWh', 'equip1_reserve_freq', 'om_batt_capacity_cost', 'term_int_rate', 'equip1_reserve_cost', 'ppa_price_input', 'total_installed_cost', 'construction_financing_cost', 'om_batt_replacement_cost', 'om_capacity', 'om_batt_nameplate', 'battery_total_cost_lcos', 'batt_computed_bank_capacity']
+
+     - Singleowner_GenericSystemSingleOwner
+
+        ['reserves_interest', 'term_int_rate', 'equip1_reserve_cost', 'ppa_price_input', 'ppa_soln_mode']
+
+     - Singleowner_GeothermalPowerSingleOwner
+
+        ['reserves_interest', 'system_capacity', 'term_int_rate', 'equip1_reserve_cost', 'total_installed_cost', 'ppa_soln_mode', 'construction_financing_cost', 'cp_system_nameplate', 'system_recapitalization_cost']
+
+     - Singleowner_BiopowerSingleOwner
+
+        ['reserves_interest', 'term_int_rate', 'equip1_reserve_cost', 'ppa_price_input', 'ppa_soln_mode']
+
+     - Singleowner_DSLFSingleOwner
+
+        ['reserves_interest', 'term_int_rate', 'ppa_soln_mode']
 
      - Singleowner_WindPowerSingleOwner
 
-        ['insurance_rate', 'ppa_soln_mode', 'system_capacity', 'reserves_interest', 'equip1_reserve_cost', 'term_int_rate']
+        ['reserves_interest', 'system_capacity', 'insurance_rate', 'term_int_rate', 'equip1_reserve_cost', 'ppa_soln_mode']
+
+     - Singleowner_GenericCSPSystemSingleOwner
+
+        ['reserves_interest', 'term_int_rate', 'ppa_soln_mode']
+
+     - Singleowner_HighXConcentratingPVSingleOwner
+
+        ['reserves_interest', 'insurance_rate', 'equip1_reserve_freq', 'term_int_rate', 'equip1_reserve_cost', 'ppa_soln_mode']
+
+     - Singleowner_PhysicalTroughSingleOwner
+
+        ['reserves_interest', 'term_int_rate', 'ppa_soln_mode']
+
+     - Singleowner_MSPTSingleOwner
+
+        ['reserves_interest', 'term_int_rate', 'ppa_soln_mode']
+
+     - Singleowner_GenericBatterySingleOwner
+
+        ['reserves_interest', 'ppa_escalation', 'insurance_rate', 'battery_per_kWh', 'equip1_reserve_freq', 'om_batt_capacity_cost', 'term_int_rate', 'equip1_reserve_cost', 'om_batt_replacement_cost', 'om_capacity']
+
+     - Singleowner_FuelCellSingleOwner
+
+        ['reserves_interest', 'real_discount_rate', 'federal_tax_rate', 'batt_meter_position', 'insurance_rate', 'battery_per_kWh', 'equip1_reserve_freq', 'om_batt_capacity_cost', 'term_int_rate', 'equip1_reserve_cost', 'ppa_price_input', 'dscr', 'ppa_soln_mode', 'om_fuelcell_capacity_cost', 'om_capacity', 'term_tenor', 'cost_debt_closing', 'cost_debt_fee', 'state_tax_rate']
 
 
 
-TcsMSLF
+Solarpilot
 ************************************************
 
-:doc:`modules/TcsMSLF` Modified Default Values:
+:doc:`modules/Solarpilot` Modified Input Variables:
 
-     - TcsMSLF_MSLFLeveragedPartnershipFlip
+    New variables:
 
-        ['weekend_schedule']
-
-     - TcsMSLF_MSLFMerchantPlant
-
-        ['weekday_schedule', 'weekend_schedule']
-
-
-
-TcsgenericSolar
-************************************************
-
-:doc:`modules/TcsgenericSolar` Modified Default Values:
-
-     - TcsgenericSolar_GenericCSPSystemLeveragedPartnershipFlip
-
-        ['weekend_schedule']
-
-     - TcsgenericSolar_GenericCSPSystemMerchantPlant
-
-        ['weekday_schedule', 'w_des', 'qsf_des', 'system_capacity', 'weekend_schedule']
-
-
-
-TcslinearFresnel
-************************************************
-
-:doc:`modules/TcslinearFresnel` Modified Default Values:
-
-     - TcslinearFresnel_DSLFMerchantPlant
-
-        ['weekday_schedule', 'weekend_schedule']
-
+         - cav_rec_height
+         - cav_rec_span
+         - cav_rec_width
+         - n_cav_rec_panels
+         - receiver_type
 
 
 TcsmoltenSalt
 ************************************************
 
-:doc:`modules/TcsmoltenSalt` Modified Variables:
+:doc:`modules/TcsmoltenSalt` Modified Input Variables:
 
     New variables:
 
@@ -1480,6 +1231,11 @@ TcsmoltenSalt
          - cav_rec_span
          - cav_rec_width
          - en_electricity_rates
+         - f_q_dot_des_allowable_su
+         - f_q_dot_heater_min
+         - heater_mult
+         - hrs_startup_at_max_rate
+         - is_parallel_htr
          - n_cav_rec_panels
          - piping_loss_coefficient
          - ppa_soln_mode
@@ -1487,61 +1243,36 @@ TcsmoltenSalt
 
     Removed variables:
 
-         - piping_loss
-
-:doc:`modules/TcsmoltenSalt` Modified Default Values:
-
-     - TcsmoltenSalt_MSPTAllEquityPartnershipFlip
-
-        ['weekday_schedule', 'weekend_schedule', 'sf_constant', 'const_per_interest_rate1']
-
-     - TcsmoltenSalt_MSPTLeveragedPartnershipFlip
-
-        ['weekday_schedule', 'weekend_schedule', 'sf_constant', 'const_per_interest_rate1']
-
-     - TcsmoltenSalt_MSPTMerchantPlant
-
-        ['weekday_schedule', 'mp_energy_market_revenue', 'weekend_schedule', 'sf_constant', 'const_per_interest_rate1']
-
-     - TcsmoltenSalt_MSPTSaleLeaseback
-
-        ['weekday_schedule', 'weekend_schedule', 'sf_constant', 'const_per_interest_rate1']
-
-     - TcsmoltenSalt_MSPTSingleOwner
-
-        ['weekday_schedule', 'weekend_schedule', 'sf_constant', 'const_per_interest_rate1']
-
-
-
-TcstroughEmpirical
-************************************************
-
-:doc:`modules/TcstroughEmpirical` Modified Default Values:
-
-     - TcstroughEmpirical_EmpiricalTroughAllEquityPartnershipFlip
-
-        ['CtPar']
-
-     - TcstroughEmpirical_EmpiricalTroughCommercial
-
-        ['CtPar']
-
-     - TcstroughEmpirical_EmpiricalTroughLeveragedPartnershipFlip
-
-        ['weekend_schedule', 'CtPar']
-
-     - TcstroughEmpirical_EmpiricalTroughMerchantPlant
-
-        ['weekday_schedule', 'weekend_schedule', 'CtPar']
-
-     - TcstroughEmpirical_EmpiricalTroughSaleLeaseback
-
-        ['CtPar']
-
-     - TcstroughEmpirical_EmpiricalTroughSingleOwner
-
-        ['CtPar']
-
+         - P_high_limit
+         - _sco2_P_high_limit
+         - _sco2_P_ref
+         - _sco2_T_amb_des
+         - _sco2_T_approach
+         - _sco2_T_htf_hot_des
+         - _sco2_deltaT_PHX
+         - _sco2_design_eff
+         - _sco2_eta_c
+         - _sco2_eta_t
+         - _sco2_recup_eff_max
+         - deltaT_PHX
+         - eta_c
+         - eta_t
+         - fan_power_perc_net
+         - is_sco2_preprocess
+         - recup_eff_max
+         - sco2_T_amb_des
+         - sco2_T_approach
+         - sco2_cycle_config
+         - sco2ud_T_amb_high
+         - sco2ud_T_amb_ind_od
+         - sco2ud_T_amb_low
+         - sco2ud_T_htf_cold_calc
+         - sco2ud_T_htf_high
+         - sco2ud_T_htf_ind_od
+         - sco2ud_T_htf_low
+         - sco2ud_m_dot_htf_high
+         - sco2ud_m_dot_htf_ind_od
+         - sco2ud_m_dot_htf_low
 
 
 Thirdpartyownership
@@ -1562,20 +1293,21 @@ Thirdpartyownership
 TroughPhysical
 ************************************************
 
-:doc:`modules/TroughPhysical` Removed Default files
-
-     - PhysicalTroughCommercial
-
-:doc:`modules/TroughPhysical` Modified Variables:
+:doc:`modules/TroughPhysical` Modified Input Variables:
 
     New variables:
 
+         - disp_inventory_incentive
          - en_electricity_rates
          - ppa_soln_mode
 
     Removed variables:
 
          - is_hx
+
+:doc:`modules/TroughPhysical` Removed Default files
+
+     - PhysicalTroughCommercial
 
 :doc:`modules/TroughPhysical` Modified Default Values:
 
@@ -1585,8 +1317,52 @@ TroughPhysical
 
 
 
+TroughPhysicalProcessHeat
+************************************************
+
+:doc:`modules/TroughPhysicalProcessHeat` Modified Input Variables:
+
+    New variables:
+
+         - disp_inventory_incentive
+
+
+UiTesCalcs
+************************************************
+
+:doc:`modules/UiTesCalcs` Modified Input Variables:
+
+    New variables:
+
+         - dt_hot
+         - field_fluid
+         - store_fl_props
+         - store_fluid
+
+    Removed variables:
+
+         - rec_htf
+
+
 Utilityrate5
 ************************************************
+
+:doc:`modules/Utilityrate5` Modified Input Variables:
+
+    New variables:
+
+         - ur_billing_demand_lookback_percentages
+         - ur_billing_demand_lookback_period
+         - ur_billing_demand_minimum
+         - ur_dc_billing_demand_periods
+         - ur_enable_billing_demand
+
+    Removed variables:
+
+         - ur_ec_billing_demand_lookback_percentages
+         - ur_ec_billing_demand_lookback_period
+         - ur_ec_billing_demand_minimum
+         - ur_ec_enable_billing_demand
 
 :doc:`modules/Utilityrate5` New Default files:
 
@@ -1677,46 +1453,21 @@ Utilityrate5
 
      - PhysicalTroughCommercial
 
-:doc:`modules/Utilityrate5` Modified Variables:
-
-    New variables:
-
-         - ur_billing_demand_lookback_percentages
-         - ur_billing_demand_lookback_period
-         - ur_billing_demand_minimum
-         - ur_dc_billing_demand_periods
-         - ur_enable_billing_demand
-
-    Removed variables:
-
-         - ur_ec_billing_demand_lookback_percentages
-         - ur_ec_billing_demand_lookback_period
-         - ur_ec_billing_demand_minimum
-         - ur_ec_enable_billing_demand
-
 :doc:`modules/Utilityrate5` Modified Default Values:
 
-     - Utilityrate5_FlatPlatePVThirdParty
+     - Utilityrate5_PVWattsBatteryHostDeveloper
 
-        ['ur_yearzero_usage_peaks']
+        ['degradation']
+
+     - Utilityrate5_FuelCellSingleOwner
+
+        ['ur_monthly_fixed_charge', 'ur_dc_sched_weekend', 'ur_dc_sched_weekday', 'ur_dc_enable', 'ur_ec_sched_weekend', 'ur_ec_tou_mat', 'ur_dc_tou_mat', 'ur_ec_sched_weekday']
 
      - Utilityrate5_FuelCellCommercial
 
         ['ur_yearzero_usage_peaks']
 
-     - Utilityrate5_FuelCellSingleOwner
-
-        ['ur_ec_tou_mat', 'ur_monthly_fixed_charge', 'ur_ec_sched_weekday', 'ur_dc_enable', 'ur_dc_sched_weekend', 'ur_ec_sched_weekend', 'ur_dc_tou_mat', 'ur_dc_sched_weekday']
-
-     - Utilityrate5_GenericBatteryResidential
-
-        ['ur_yearzero_usage_peaks']
-
-     - Utilityrate5_GenericBatterySingleOwner
-
-        ['ur_ec_tou_mat', 'ur_dc_tou_mat']
-
-     - Utilityrate5_GenericBatteryThirdParty
+     - Utilityrate5_PVWattsThirdParty
 
         ['ur_yearzero_usage_peaks']
 
@@ -1724,39 +1475,47 @@ Utilityrate5
 
         ['ur_yearzero_usage_peaks']
 
-     - Utilityrate5_PVBatteryCommercial
+     - Utilityrate5_PVWattsBatteryResidential
+
+        ['ur_yearzero_usage_peaks', 'degradation']
+
+     - Utilityrate5_FlatPlatePVThirdParty
 
         ['ur_yearzero_usage_peaks']
 
-     - Utilityrate5_PVBatteryResidential
-
-        ['ur_yearzero_usage_peaks']
-
-     - Utilityrate5_PVBatterySingleOwner
-
-        ['ur_ec_tou_mat', 'ur_dc_tou_mat', 'ur_yearzero_usage_peaks']
-
-     - Utilityrate5_PVBatteryThirdParty
+     - Utilityrate5_GenericBatteryThirdParty
 
         ['ur_yearzero_usage_peaks']
 
      - Utilityrate5_PVWattsBatteryCommercial
 
-        ['degradation', 'ur_yearzero_usage_peaks']
+        ['ur_yearzero_usage_peaks', 'degradation']
 
-     - Utilityrate5_PVWattsBatteryHostDeveloper
+     - Utilityrate5_GenericBatterySingleOwner
 
-        ['degradation']
-
-     - Utilityrate5_PVWattsBatteryResidential
-
-        ['degradation', 'ur_yearzero_usage_peaks']
+        ['ur_ec_tou_mat', 'ur_dc_tou_mat']
 
      - Utilityrate5_PVWattsBatteryThirdParty
 
-        ['degradation', 'ur_yearzero_usage_peaks']
+        ['ur_yearzero_usage_peaks', 'degradation']
 
-     - Utilityrate5_PVWattsThirdParty
+     - Utilityrate5_PVBatterySingleOwner
+
+        ['ur_yearzero_usage_peaks', 'ur_ec_tou_mat', 'ur_dc_tou_mat']
+
+     - Utilityrate5_PVBatteryResidential
+
+        ['ur_yearzero_usage_peaks']
+
+     - Utilityrate5_PVBatteryThirdParty
+
+        ['ur_yearzero_usage_peaks']
+
+     - Utilityrate5_GenericBatteryResidential
+
+        ['ur_yearzero_usage_peaks']
+
+     - Utilityrate5_PVBatteryCommercial
 
         ['ur_yearzero_usage_peaks']
 
@@ -1765,31 +1524,10 @@ Utilityrate5
 Windpower
 ************************************************
 
-:doc:`modules/Windpower` Modified Default Values:
+:doc:`modules/Windpower` Modified Input Variables:
 
-     - Windpower_WindPowerAllEquityPartnershipFlip
+    New variables:
 
-        ['system_capacity', 'wind_turbine_rotor_diameter']
-
-     - Windpower_WindPowerLCOECalculator
-
-        ['wind_turbine_powercurve_powerout', 'wind_farm_xCoordinates', 'wind_farm_yCoordinates', 'system_capacity', 'wind_turbine_rotor_diameter']
-
-     - Windpower_WindPowerLeveragedPartnershipFlip
-
-        ['system_capacity', 'wind_turbine_rotor_diameter']
-
-     - Windpower_WindPowerMerchantPlant
-
-        ['system_capacity', 'wind_turbine_rotor_diameter']
-
-     - Windpower_WindPowerSaleLeaseback
-
-        ['system_capacity', 'wind_turbine_rotor_diameter']
-
-     - Windpower_WindPowerSingleOwner
-
-        ['system_capacity', 'wind_turbine_rotor_diameter']
-
+         - max_turbine_override
 
 

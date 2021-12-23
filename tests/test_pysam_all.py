@@ -328,9 +328,9 @@ def test_run_all():
         return
     techs = (
         "Battery", "Battwatts", "Biomass", "Geothermal", "LinearFresnelDsgIph", "MhkTidal", "MhkWave", "Windpower",
-        "Pvsamv1", "Pvwattsv7", "Pvwattsv5", "TcsmoltenSalt", "Hcpv", "Swh", "Tcsiscc", "GenericSystem", "Grid",
+        "Pvsamv1", "Pvwattsv7", "Pvwattsv5", "TcsmoltenSalt", "Hcpv", "Swh", "GenericSystem", "Grid",
         "TroughPhysicalProcessHeat", "TcsMSLF", "TcsgenericSolar", "TcslinearFresnel", "TcstroughEmpirical",
-        "TroughPhysical",)
+        "TroughPhysical", "EtesElectricResistance", )
     for mod in techs:
         mod_name = "PySAM." + mod
         i = importlib.import_module(mod_name)

@@ -1,7 +1,7 @@
 import pytest
 from pympler.tracker import SummaryTracker
 from pathlib import Path
-import PySAM.Pvwattsv7 as pv
+import PySAM.Pvwattsv8 as pv
 import PySAM.Battwatts as bt
 import PySAM.Utilityrate5 as ur
 import PySAM.Pvsamv1 as pvsam

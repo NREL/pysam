@@ -163,8 +163,6 @@ class Pvwattsv7(object):
 	def __init__(self, *args, **kwargs):
 		pass
 
-	def Reopt_size_battery_post(self, args):
-		pass
 	SolarResource = SolarResource
 	Lifetime = Lifetime
 	SystemDesign = SystemDesign

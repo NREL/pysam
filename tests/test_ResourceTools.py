@@ -10,7 +10,7 @@ import pandas as pd
 
 import PySAM.ResourceTools as tools  # change back to module import
 import PySAM.Windpower as wp
-import PySAM.Pvwattsv7 as pv
+import PySAM.Pvwattsv8 as pv
 
 
 def test_solar():
