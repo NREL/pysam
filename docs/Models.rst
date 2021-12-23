@@ -94,9 +94,6 @@ The following modules are used in the SAM GUI's technology-financial simulations
     * - :doc:`modules/TcsgenericSolar`
       -  CSP generic model
       -  CSP power system model with solar field characterized using a table of optical efficiency values
-    * - :doc:`modules/Tcsiscc`
-      -  CSP integrated solar combined cycle
-      -  CSP molten salt power tower system with a natural gas combined cycle power plant
     * - :doc:`modules/TcslinearFresnel`
       -  CSP linear Fresnel direct steam
       -  Linear Fresnel model with steam heat transfer fluid for industrial process heat applications
@@ -189,6 +186,8 @@ These modules provide helper functions or are older versions of above modules.
       - pvwattsv5_1ts- single timestep calculation of PV system performance.
     * - :doc:`modules/Pvwattsv5`
       - PVWatts V5 - integrated hourly weather reader and PV system simulator.
+    * - :doc:`modules/Pvwattsv7`
+      - PVWatts V7 - integrated hourly weather reader and PV system simulator.
     * - :doc:`modules/Sco2AirCooler`
       - Supercritical CO2 Power Cycle Air Cooler. Returns air cooler dimensions given fluid and location design points
     * - :doc:`modules/Sco2CspSystem`
@@ -205,10 +204,6 @@ These modules provide helper functions or are older versions of above modules.
       - Estimates the Detrimental Effects due to Snow Fall
     * - :doc:`modules/Solarpilot`
       - SolarPILOT - CSP tower solar field layout tool.
-    * - :doc:`modules/TcsdirectSteam`
-      -  CSP direct steam power tower model for power generation
-    * - :doc:`modules/Tcsdish`
-      -  CSP dish-Stirling model with parameters for SES and WGA-ADDS systems for power generation
     * - :doc:`modules/TcstroughPhysical`
       - CSP model using the emperical trough TCS types.
     * - :doc:`modules/Timeseq`

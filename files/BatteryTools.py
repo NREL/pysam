@@ -20,11 +20,9 @@ def battery_model_sizing(model, desired_power, desired_capacity, desired_voltage
 
     :param model: PySAM.Battery.Battery or PySAM.BatteryStateful.BatteryStateful
     :param desired_power: float
-        Battery: kWAC if AC-connected, kWDC otherwise
-        BatteryStateful: battery kWDC
+        Battery: kWAC if AC-connected, kWDC otherwise. BatteryStateful: battery kWDC
     :param desired_capacity: float
-        Battery: kWhAC if AC-connected, kWhDC otherwise
-        BatteryStateful: battery kWhDC
+        Battery: kWhAC if AC-connected, kWhDC otherwise. BatteryStateful: battery kWhDC
     :param desired_voltage: float
         volts
     :param size_by_ac_not_dc: optional bool
@@ -303,6 +301,7 @@ def calculate_battery_size(input_dict):
             LeadAcid_q20_computed: float 0-100, Ah
 
             LeadAcid_qn_computed: float 0-100, Ah
+
     """
 
     def check_keys(keys):

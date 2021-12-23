@@ -7,7 +7,7 @@ These helper functions provide additional functionality for working with specifi
 
 
 Resource Tools
-*************
+**************
 
 These can be accessed via **import PySAM.ResourceTools**
 

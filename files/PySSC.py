@@ -240,6 +240,7 @@ def ssc_sim_from_dict(data_pydict):
     -------
     (dict): dict
         keys are outputs from the selected compute module.
+
     """
     tech_model_name = data_pydict["tech_model"]
     # Convert python dictionary into ssc var info table
