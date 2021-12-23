@@ -12,13 +12,13 @@ from files.version import __version__
 
 doc_str = "" \
           "This page compares the PySAM Modules' input variables and the defaults for these input variables \n" \
-          "between the current release and the last release.\n\nThis helps track which variables\n" \
+          "between the current release and the last release.\n\nThis helps track which variables " \
           "and defaults have changed between releases to make it easier to notify users during version upgrade.\n\n" \
           "Below are lists for each PySAM Module:\n" \
           "    1. New Default configurations\n" \
           "    2. Removed Default configurations\n" \
           "    3. Modified Variables: New variables, Removed variables and Type-changed variables\n" \
-          "    4. Modified Default Values\n\n"
+          "    4. Modified Default Values"
 
 #
 # Download the SAM repo tagged for the previous PySAM Release from Github to compare defaults
