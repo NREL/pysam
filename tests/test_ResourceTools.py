@@ -134,10 +134,11 @@ def test_resourcefilefetcher():
     # --- read csv and confirm dimensions ---
     solar_path_dict = solarfetcher.resource_file_paths_dict
     solar_fp = solar_path_dict[lon_lats[0]]
-    reader = csv.DictReader(open(solar_fp, mode='r'))
-    list(reader)
-    num_timesteps = 8760
-    assert reader.line_num == num_timesteps + 3
+    with open(solar_fp, mode='r') as f:
+        reader = csv.DictReader(f)
+        list(reader)
+        num_timesteps = 8760
+        assert reader.line_num == num_timesteps + 3
 
     # --- test legacy 'pv' instead of 'solar'---
     solarfetcher = tools.FetchResourceFiles(
@@ -150,10 +151,11 @@ def test_resourcefilefetcher():
     # --- read csv and confirm dimensions ---
     solar_path_dict = solarfetcher.resource_file_paths_dict
     solar_fp = solar_path_dict[lon_lats[0]]
-    solar_csv = csv.DictReader(open(solar_fp, mode='r'))
-    list(solar_csv)
-    num_timesteps = 8760
-    assert solar_csv.line_num == num_timesteps + 3
+    with open(solar_fp, mode='r') as f:
+        solar_csv = csv.DictReader(f)
+        list(solar_csv)
+        num_timesteps = 8760
+        assert solar_csv.line_num == num_timesteps + 3
 
     # --- fetch solar single-year 30-min file from psm3 ---
     solarfetcher = tools.FetchResourceFiles(
@@ -169,10 +171,11 @@ def test_resourcefilefetcher():
     # --- read csv and confirm dimensions ---
     solar_path_dict = solarfetcher.resource_file_paths_dict
     solar_fp = solar_path_dict[lon_lats[0]]
-    solar_csv = csv.DictReader(open(solar_fp, mode='r'))
-    list(solar_csv)
-    num_timesteps = 17520
-    assert solar_csv.line_num == num_timesteps + 3
+    with open(solar_fp, mode='r') as f:
+        solar_csv = csv.DictReader(f)
+        list(solar_csv)
+        num_timesteps = 17520
+        assert solar_csv.line_num == num_timesteps + 3
 
     # --- fetch solar tgy for 2018 from psm3-tmy ---
     solarfetcher = tools.FetchResourceFiles(
@@ -187,10 +190,11 @@ def test_resourcefilefetcher():
     # --- read csv and confirm dimensions ---
     solar_path_dict = solarfetcher.resource_file_paths_dict
     solar_fp = solar_path_dict[lon_lats[0]]
-    solar_csv = csv.DictReader(open(solar_fp, mode='r'))
-    list(solar_csv)
-    num_timesteps = 8760
-    assert solar_csv.line_num == num_timesteps + 3
+    with open(solar_fp, mode='r') as f:
+        solar_csv = csv.DictReader(f)
+        list(solar_csv)
+        num_timesteps = 8760
+        assert solar_csv.line_num == num_timesteps + 3
 
     # --- fetch 5-minute data for 2018 from psm3-5min ---
     # this NSRDB API endpoint not working properly as of 8/21/2020
@@ -222,8 +226,9 @@ def test_resourcefilefetcher():
     # --- read csv and confirm dimensions ---
     wtk_path_dict = wtkfetcher.resource_file_paths_dict
     wtk_fp = wtk_path_dict[lon_lats[0]]
-    wtk_csv = csv.DictReader(open(wtk_fp, mode='r'))
-    list(wtk_csv)
-    assert wtk_csv.line_num == 8764 + 1
+    with open(wtk_fp, mode='r') as f:
+        wtk_csv = csv.DictReader(f)
+        list(wtk_csv)
+        assert wtk_csv.line_num == 8764 + 1
 
     shutil.rmtree(resource_dir)
