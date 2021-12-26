@@ -505,7 +505,7 @@ class FetchResourceFiles():
                     print('Failed to find URL for resource_type = {}, resource_year = {}, resource_inverval_min = {}'.format(self.resource_type,self.resource_year,self.resource_interval_min))
                     return
             else:
-                print('No data found for {}, {}.'.format(lat, lon))
+                print('Error for {}, {}: {}'.format(lat, lon, lookup_response.content.decode("utf-8")))
                 return
 
     def _windtk_worker(self, job):
