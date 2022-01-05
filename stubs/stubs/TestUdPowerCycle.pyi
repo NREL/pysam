@@ -23,7 +23,7 @@ class Outputs(object):
 		pass
 
 
-	W_dot_fossil = float
+	udpc_table_out = tuple
 
 
 class TestUdPowerCycle(object):

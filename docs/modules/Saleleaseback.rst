@@ -52,6 +52,12 @@ SystemCosts Group
 .. autoclass:: PySAM.Saleleaseback.Saleleaseback.SystemCosts
 	:members:
 
+LandLease Group
+======================================================
+
+.. autoclass:: PySAM.Saleleaseback.Saleleaseback.LandLease
+	:members:
+
 TaxCreditIncentives Group
 ======================================================
 
@@ -76,6 +82,12 @@ SystemOutput Group
 .. autoclass:: PySAM.Saleleaseback.Saleleaseback.SystemOutput
 	:members:
 
+ElectricityRates Group
+======================================================
+
+.. autoclass:: PySAM.Saleleaseback.Saleleaseback.ElectricityRates
+	:members:
+
 SaleLeaseback Group
 ======================================================
 
@@ -88,28 +100,28 @@ TimeOfDelivery Group
 .. autoclass:: PySAM.Saleleaseback.Saleleaseback.TimeOfDelivery
 	:members:
 
+UtilityBill Group
+======================================================
+
+.. autoclass:: PySAM.Saleleaseback.Saleleaseback.UtilityBill
+	:members:
+
 OtherCapitalCosts Group
 ======================================================
 
 .. autoclass:: PySAM.Saleleaseback.Saleleaseback.OtherCapitalCosts
 	:members:
 
-Battery Group
+LCOS Group
 ======================================================
 
-.. autoclass:: PySAM.Saleleaseback.Saleleaseback.Battery
+.. autoclass:: PySAM.Saleleaseback.Saleleaseback.LCOS
 	:members:
 
 ChargesByMonth Group
 ======================================================
 
 .. autoclass:: PySAM.Saleleaseback.Saleleaseback.ChargesByMonth
-	:members:
-
-Monthly Group
-======================================================
-
-.. autoclass:: PySAM.Saleleaseback.Saleleaseback.Monthly
 	:members:
 
 BatterySystem Group

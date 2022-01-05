@@ -8,6 +8,7 @@ import requests
 import copy
 from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.util.retry import Retry
+import certifi
 
 import json
 
@@ -456,7 +457,7 @@ class FetchResourceFiles():
             lookup_base_url = 'https://developer.nrel.gov/api/nsrdb/v2/solar/'
             lookup_query_url = "nsrdb-data-query.json?api_key={}&wkt=POINT({}%20{})".format(self.nrel_api_key, lon, lat)
             lookup_url = lookup_base_url + lookup_query_url
-            lookup_response = retry_session.get(lookup_url)
+            lookup_response = retry_session.get(lookup_url, verify=certifi.where())
 
             if lookup_response.ok:
                 lookup_json = lookup_response.json()
@@ -482,7 +483,7 @@ class FetchResourceFiles():
                 if ok:
                     if self.verbose:
                         print(data_url)
-                    data_response = retry_session.get(data_url)
+                    data_response = retry_session.get(data_url, verify=certifi.where())
                     if data_response.ok:
                         # --- Convert response to string, read as pandas df, write to csv ---
                         if self.verbose:
@@ -494,14 +495,17 @@ class FetchResourceFiles():
                             print('Success! File downloaded to {}.'.format(file_path))
                         return file_path
                     else:
-                        data_response_json = data_response.json()
-                        print('Request failed for {}\n{}'.format(data_url,data_response_json['errors'][0]))
+                        try:
+                            error_str = data_response.json()
+                        except:
+                            error_str = data_response.content.decode("utf-8")
+                        print(f"Request failed for {data_url}\n{error_str}")
                         return
                 else:
                     print('Failed to find URL for resource_type = {}, resource_year = {}, resource_inverval_min = {}'.format(self.resource_type,self.resource_year,self.resource_interval_min))
                     return
             else:
-                print('No data found for {}, {}.'.format(lat, lon))
+                print('Error for {}, {}: {}'.format(lat, lon, lookup_response.content.decode("utf-8")))
                 return
 
     def _windtk_worker(self, job):
@@ -536,7 +540,7 @@ class FetchResourceFiles():
             data_query_url = "wtk-download.csv?api_key={}&wkt=POINT({}+{})&attributes=windspeed_{}m,winddirection_{}m,temperature_{}m,pressure_{}m&names={}&utc=false&interval={}&email={}".format(
                 self.nrel_api_key, lon, lat, self.resource_height, self.resource_height, self.resource_height, 100, self.resource_year, self.resource_interval_min, self.nrel_api_email)
             data_url = data_base_url + data_query_url
-            data_response = retry_session.get(data_url)
+            data_response = retry_session.get(data_url, verify=certifi.where())
 
             if data_response.ok:
                 # --- Convert response to string, read as pandas df, write to csv ---
@@ -547,8 +551,11 @@ class FetchResourceFiles():
                     print('Success! File downloaded to {}.'.format(file_path))
                 return file_path
             else:
-                data_response_json = data_response.json()
-                print('Unable to download file from URL {}.\nMessage from server: {}.'.format(data_url,data_response_json['errors'][0]))
+                try:
+                    error_str = data_response.json()
+                except:
+                    error_str = data_response.content.decode("utf-8")
+                print('Unable to download file from URL {}.\nMessage from server: {}.'.format(data_url, error_str))
                 return
 
     def fetch(self, points):

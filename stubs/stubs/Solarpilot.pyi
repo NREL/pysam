@@ -15,6 +15,9 @@ class SolarPILOT(object):
 	c_atm_3 = float
 	calc_fluxmaps = float
 	cant_type = float
+	cav_rec_height = float
+	cav_rec_span = float
+	cav_rec_width = float
 	check_max_flux = float
 	contingency_rate = float
 	cost_sf_fixed = float
@@ -35,6 +38,7 @@ class SolarPILOT(object):
 	land_max = float
 	land_min = float
 	land_spec_cost = float
+	n_cav_rec_panels = float
 	n_facet_x = float
 	n_facet_y = float
 	n_flux_days = float
@@ -53,6 +57,7 @@ class SolarPILOT(object):
 	rec_hl_perm2 = float
 	rec_ref_area = float
 	rec_ref_cost = float
+	receiver_type = float
 	sales_tax_frac = float
 	sales_tax_rate = float
 	site_spec_cost = float
@@ -74,6 +79,7 @@ class Outputs(object):
 
 	area_sf = float
 	base_land_area = float
+	cav_rec_aper_width_opt = float
 	cost_land_tot = float
 	cost_rec_tot = float
 	cost_sf_tot = float

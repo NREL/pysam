@@ -66,6 +66,7 @@ class BatterySystem(object):
 	batt_replacement_schedule_percent = tuple
 	batt_surface_area = float
 	en_batt = float
+	en_standalone_batt = float
 	om_replacement_cost1 = tuple
 
 
@@ -97,6 +98,7 @@ class Load(object):
 
 
 	crit_load = tuple
+	crit_load_escalation = tuple
 	grid_outage = tuple
 	load = tuple
 	load_escalation = tuple
@@ -143,6 +145,7 @@ class BatteryCell(object):
 	batt_maximum_SOC = float
 	batt_minimum_SOC = float
 	batt_minimum_modetime = float
+	batt_minimum_outage_SOC = float
 	batt_resistance = float
 	batt_room_temperature_celsius = tuple
 	batt_voltage_choice = float
@@ -198,15 +201,18 @@ class BatteryDispatch(object):
 		pass
 
 
-	batt_auto_gridcharge_max_daily = float
 	batt_custom_dispatch = tuple
 	batt_cycle_cost = tuple
 	batt_cycle_cost_choice = float
+	batt_dispatch_auto_btm_can_discharge_to_grid = float
 	batt_dispatch_auto_can_charge = float
 	batt_dispatch_auto_can_clipcharge = float
 	batt_dispatch_auto_can_fuelcellcharge = float
 	batt_dispatch_auto_can_gridcharge = float
+	batt_dispatch_charge_only_system_exceeds_load = float
 	batt_dispatch_choice = float
+	batt_dispatch_discharge_only_load_exceeds_system = float
+	batt_dispatch_load_forecast_choice = float
 	batt_dispatch_pvs_ac_lb = float
 	batt_dispatch_pvs_ac_lb_enable = float
 	batt_dispatch_pvs_ac_ub = float
@@ -223,12 +229,16 @@ class BatteryDispatch(object):
 	batt_dispatch_pvs_soc_rest = float
 	batt_dispatch_pvs_timestep_multiplier = float
 	batt_dispatch_update_frequency_hours = float
+	batt_dispatch_wf_forecast_choice = float
+	batt_load_ac_forecast = tuple
+	batt_load_ac_forecast_escalation = tuple
 	batt_look_ahead_hours = float
 	batt_pv_ac_forecast = tuple
 	batt_pv_clipping_forecast = tuple
 	batt_target_choice = float
 	batt_target_power = tuple
 	batt_target_power_monthly = tuple
+	dispatch_manual_btm_discharge_to_grid = tuple
 	dispatch_manual_charge = tuple
 	dispatch_manual_discharge = tuple
 	dispatch_manual_fuelcellcharge = tuple
@@ -237,6 +247,21 @@ class BatteryDispatch(object):
 	dispatch_manual_percent_gridcharge = tuple
 	dispatch_manual_sched = tuple
 	dispatch_manual_sched_weekend = tuple
+
+
+class SystemCosts(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> dict:
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
+	om_batt_replacement_cost = tuple
+	om_replacement_cost_escal = float
 
 
 class FuelCell(object):
@@ -296,20 +321,21 @@ class ElectricityRates(object):
 
 	rate_escalation = tuple
 	ur_annual_min_charge = float
+	ur_billing_demand_lookback_percentages = tuple
+	ur_billing_demand_lookback_period = float
+	ur_billing_demand_minimum = float
+	ur_dc_billing_demand_periods = tuple
 	ur_dc_enable = float
 	ur_dc_flat_mat = tuple
 	ur_dc_sched_weekday = tuple
 	ur_dc_sched_weekend = tuple
 	ur_dc_tou_mat = tuple
-	ur_ec_billing_demand_lookback_percentages = tuple
-	ur_ec_billing_demand_lookback_period = float
-	ur_ec_billing_demand_minimum = float
-	ur_ec_enable_billing_demand = float
 	ur_ec_sched_weekday = tuple
 	ur_ec_sched_weekend = tuple
 	ur_ec_tou_mat = tuple
 	ur_en_ts_buy_rate = float
 	ur_en_ts_sell_rate = float
+	ur_enable_billing_demand = float
 	ur_metering_option = float
 	ur_monthly_fixed_charge = float
 	ur_monthly_min_charge = float
@@ -349,8 +375,12 @@ class Outputs(object):
 		pass
 
 
+	annual_crit_load = float
+	annual_crit_load_unmet = float
+	annual_crit_load_unmet_percentage = float
 	annual_export_to_grid_energy = tuple
 	annual_import_to_grid_energy = tuple
+	annual_outage_losses_unmet = float
 	average_battery_conversion_efficiency = float
 	average_battery_roundtrip_efficiency = float
 	avg_critical_load = float
@@ -403,9 +433,11 @@ class Outputs(object):
 	batt_temperature = tuple
 	batt_to_grid = tuple
 	batt_to_load = tuple
+	batt_to_system_load = tuple
 	batt_voltage = tuple
 	batt_voltage_cell = tuple
 	cdf_of_surviving = tuple
+	crit_load = tuple
 	crit_load_unmet = tuple
 	fuelcell_to_batt = tuple
 	gen_without_battery = tuple
@@ -417,13 +449,19 @@ class Outputs(object):
 	market_sell_rate_series_yr1 = tuple
 	monthly_batt_to_grid = tuple
 	monthly_batt_to_load = tuple
+	monthly_batt_to_system_load = tuple
+	monthly_crit_load = tuple
+	monthly_crit_load_unmet = tuple
+	monthly_crit_load_unmet_percentage = tuple
 	monthly_grid_to_batt = tuple
 	monthly_grid_to_load = tuple
 	monthly_interconnection_loss = tuple
+	monthly_outage_losses_unmet = tuple
 	monthly_system_to_batt = tuple
 	monthly_system_to_grid = tuple
 	monthly_system_to_load = tuple
 	outage_durations = tuple
+	outage_losses_unmet = tuple
 	pdf_of_surviving = tuple
 	resilience_hrs = tuple
 	resilience_hrs_avg = float
@@ -466,6 +504,7 @@ class Battery(object):
 	Inverter = Inverter
 	Losses = Losses
 	BatteryDispatch = BatteryDispatch
+	SystemCosts = SystemCosts
 	FuelCell = FuelCell
 	PriceSignal = PriceSignal
 	ElectricityRates = ElectricityRates

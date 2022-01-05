@@ -346,11 +346,13 @@ class Outputs(object):
 	disp_qsf_expected = tuple
 	disp_qsfprod_expected = tuple
 	disp_qsfsu_expected = tuple
+	disp_rel_mip_gap = tuple
 	disp_rev_expected = tuple
 	disp_solve_iter = tuple
 	disp_solve_state = tuple
 	disp_solve_time = tuple
 	disp_solve_time_ann = float
+	disp_subopt_flag = tuple
 	disp_tes_expected = tuple
 	disp_thermeff_expected = tuple
 	disp_wpb_expected = tuple

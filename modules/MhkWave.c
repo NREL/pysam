@@ -620,6 +620,18 @@ Outputs_get_device_average_power(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_energy_hourly_kWh(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_MhkWave_Outputs_energy_hourly_kWh_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_energy_period_data(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_MhkWave_Outputs_energy_period_data_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_energy_period_index_mat(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_MhkWave_Outputs_energy_period_index_mat_aget, self->data_ptr);
@@ -632,12 +644,6 @@ Outputs_get_gen(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_hourly_energy(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_MhkWave_Outputs_hourly_energy_aget, self->data_ptr);
-}
-
-static PyObject *
 Outputs_get_numberHours(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_MhkWave_Outputs_numberHours_nget, self->data_ptr);
@@ -647,6 +653,12 @@ static PyObject *
 Outputs_get_numberRecords(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_MhkWave_Outputs_numberRecords_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_sig_wave_height_data(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_MhkWave_Outputs_sig_wave_height_data_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -668,6 +680,12 @@ Outputs_get_total_bos_cost_lcoe(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_total_bos_cost_per_kw(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MhkWave_Outputs_total_bos_cost_per_kw_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_total_capital_cost_kwh(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_MhkWave_Outputs_total_capital_cost_kwh_nget, self->data_ptr);
@@ -677,6 +695,12 @@ static PyObject *
 Outputs_get_total_capital_cost_lcoe(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_MhkWave_Outputs_total_capital_cost_lcoe_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_total_capital_cost_per_kw(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MhkWave_Outputs_total_capital_cost_per_kw_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -692,6 +716,12 @@ Outputs_get_total_device_cost_lcoe(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_total_device_cost_per_kw(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MhkWave_Outputs_total_device_cost_per_kw_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_total_financial_cost_kwh(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_MhkWave_Outputs_total_financial_cost_kwh_nget, self->data_ptr);
@@ -704,6 +734,12 @@ Outputs_get_total_financial_cost_lcoe(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_total_financial_cost_per_kw(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MhkWave_Outputs_total_financial_cost_per_kw_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_total_om_cost_kwh(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_MhkWave_Outputs_total_om_cost_kwh_nget, self->data_ptr);
@@ -713,6 +749,12 @@ static PyObject *
 Outputs_get_total_om_cost_lcoe(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_MhkWave_Outputs_total_om_cost_lcoe_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_total_operations_cost_per_kw(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MhkWave_Outputs_total_operations_cost_per_kw_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -774,10 +816,10 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*float*: Annual energy production of array [kWh]"),
  	NULL},
 {"annual_energy_distribution", (getter)Outputs_get_annual_energy_distribution,(setter)0,
-	PyDoc_STR("*sequence[sequence]*: Annual energy production as function of Hs and Te"),
+	PyDoc_STR("*sequence[sequence]*: Annual energy production as function of Hs and Te [kWh]"),
  	NULL},
 {"annual_energy_distribution_time", (getter)Outputs_get_annual_energy_distribution_time,(setter)0,
-	PyDoc_STR("*sequence[sequence]*: Annual energy production as function of Time"),
+	PyDoc_STR("*sequence[sequence]*: Annual energy production as function of Time [kWh]"),
  	NULL},
 {"capacity_factor", (getter)Outputs_get_capacity_factor,(setter)0,
 	PyDoc_STR("*float*: Capacity Factor [%]"),
@@ -785,20 +827,26 @@ static PyGetSetDef Outputs_getset[] = {
 {"device_average_power", (getter)Outputs_get_device_average_power,(setter)0,
 	PyDoc_STR("*float*: Average power production of a single device [kW]"),
  	NULL},
+{"energy_hourly_kWh", (getter)Outputs_get_energy_hourly_kWh,(setter)0,
+	PyDoc_STR("*sequence*: Energy production of array [kWh]"),
+ 	NULL},
+{"energy_period_data", (getter)Outputs_get_energy_period_data,(setter)0,
+	PyDoc_STR("*sequence*: Energy period time series data [s]"),
+ 	NULL},
 {"energy_period_index_mat", (getter)Outputs_get_energy_period_index_mat,(setter)0,
 	PyDoc_STR("*sequence*: Wave period index locations for time series [s]"),
  	NULL},
 {"gen", (getter)Outputs_get_gen,(setter)0,
 	PyDoc_STR("*sequence*: System power generated [kW]"),
  	NULL},
-{"hourly_energy", (getter)Outputs_get_hourly_energy,(setter)0,
-	PyDoc_STR("*sequence*: Hourly energy production of device [kWh]"),
- 	NULL},
 {"numberHours", (getter)Outputs_get_numberHours,(setter)0,
 	PyDoc_STR("*float*: Number of Hours"),
  	NULL},
 {"numberRecords", (getter)Outputs_get_numberRecords,(setter)0,
 	PyDoc_STR("*float*: Number of Records"),
+ 	NULL},
+{"sig_wave_height_data", (getter)Outputs_get_sig_wave_height_data,(setter)0,
+	PyDoc_STR("*sequence*: Significant wave height time series data [m]"),
  	NULL},
 {"sig_wave_height_index_mat", (getter)Outputs_get_sig_wave_height_index_mat,(setter)0,
 	PyDoc_STR("*sequence*: Wave height index locations for time series [m]"),
@@ -809,11 +857,17 @@ static PyGetSetDef Outputs_getset[] = {
 {"total_bos_cost_lcoe", (getter)Outputs_get_total_bos_cost_lcoe,(setter)0,
 	PyDoc_STR("*float*: BOS cost [%]"),
  	NULL},
+{"total_bos_cost_per_kw", (getter)Outputs_get_total_bos_cost_per_kw,(setter)0,
+	PyDoc_STR("*float*: Balance of Systems cost per kW [$/kW]"),
+ 	NULL},
 {"total_capital_cost_kwh", (getter)Outputs_get_total_capital_cost_kwh,(setter)0,
 	PyDoc_STR("*float*: Capital costs per unit annual energy [$/kWh]"),
  	NULL},
 {"total_capital_cost_lcoe", (getter)Outputs_get_total_capital_cost_lcoe,(setter)0,
 	PyDoc_STR("*float*: Capital cost as percentage of overall LCOE [%]"),
+ 	NULL},
+{"total_capital_cost_per_kw", (getter)Outputs_get_total_capital_cost_per_kw,(setter)0,
+	PyDoc_STR("*float*: Capital cost per kW [$/kW]"),
  	NULL},
 {"total_device_cost_kwh", (getter)Outputs_get_total_device_cost_kwh,(setter)0,
 	PyDoc_STR("*float*: Device costs per unit annual energy [$/kWh]"),
@@ -821,17 +875,26 @@ static PyGetSetDef Outputs_getset[] = {
 {"total_device_cost_lcoe", (getter)Outputs_get_total_device_cost_lcoe,(setter)0,
 	PyDoc_STR("*float*: Device cost [%]"),
  	NULL},
+{"total_device_cost_per_kw", (getter)Outputs_get_total_device_cost_per_kw,(setter)0,
+	PyDoc_STR("*float*: Device cost per kW [$/kW]"),
+ 	NULL},
 {"total_financial_cost_kwh", (getter)Outputs_get_total_financial_cost_kwh,(setter)0,
 	PyDoc_STR("*float*: Financial costs per unit annual energy [$/kWh]"),
  	NULL},
 {"total_financial_cost_lcoe", (getter)Outputs_get_total_financial_cost_lcoe,(setter)0,
 	PyDoc_STR("*float*: Financial cost [%]"),
  	NULL},
+{"total_financial_cost_per_kw", (getter)Outputs_get_total_financial_cost_per_kw,(setter)0,
+	PyDoc_STR("*float*: Financial cost per kW [$/kW]"),
+ 	NULL},
 {"total_om_cost_kwh", (getter)Outputs_get_total_om_cost_kwh,(setter)0,
 	PyDoc_STR("*float*: O&M costs per unit annual energy [$/kWh]"),
  	NULL},
 {"total_om_cost_lcoe", (getter)Outputs_get_total_om_cost_lcoe,(setter)0,
 	PyDoc_STR("*float*: O&M cost (annual) [%]"),
+ 	NULL},
+{"total_operations_cost_per_kw", (getter)Outputs_get_total_operations_cost_per_kw,(setter)0,
+	PyDoc_STR("*float*: O&M cost per kW [$/kW]"),
  	NULL},
 {"wave_power_end_height", (getter)Outputs_get_wave_power_end_height,(setter)0,
 	PyDoc_STR("*float*: Wave height at which last non-zero WEC power output occurs (m)"),

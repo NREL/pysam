@@ -52,6 +52,12 @@ SystemCosts Group
 .. autoclass:: PySAM.Equpartflip.Equpartflip.SystemCosts
 	:members:
 
+LandLease Group
+======================================================
+
+.. autoclass:: PySAM.Equpartflip.Equpartflip.LandLease
+	:members:
+
 TaxCreditIncentives Group
 ======================================================
 
@@ -76,6 +82,12 @@ SystemOutput Group
 .. autoclass:: PySAM.Equpartflip.Equpartflip.SystemOutput
 	:members:
 
+ElectricityRates Group
+======================================================
+
+.. autoclass:: PySAM.Equpartflip.Equpartflip.ElectricityRates
+	:members:
+
 Recapitalization Group
 ======================================================
 
@@ -86,6 +98,12 @@ TimeOfDelivery Group
 ======================================================
 
 .. autoclass:: PySAM.Equpartflip.Equpartflip.TimeOfDelivery
+	:members:
+
+UtilityBill Group
+======================================================
+
+.. autoclass:: PySAM.Equpartflip.Equpartflip.UtilityBill
 	:members:
 
 ConstructionFinancing Group
@@ -112,22 +130,16 @@ DeveloperCapitalRecovery Group
 .. autoclass:: PySAM.Equpartflip.Equpartflip.DeveloperCapitalRecovery
 	:members:
 
-Battery Group
+LCOS Group
 ======================================================
 
-.. autoclass:: PySAM.Equpartflip.Equpartflip.Battery
+.. autoclass:: PySAM.Equpartflip.Equpartflip.LCOS
 	:members:
 
 ChargesByMonth Group
 ======================================================
 
 .. autoclass:: PySAM.Equpartflip.Equpartflip.ChargesByMonth
-	:members:
-
-Monthly Group
-======================================================
-
-.. autoclass:: PySAM.Equpartflip.Equpartflip.Monthly
 	:members:
 
 BatterySystem Group

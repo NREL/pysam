@@ -13,46 +13,6 @@ class SolarResource(object):
 	solar_resource_file = str
 
 
-class FinancialModel(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> dict:
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	csp_financial_model = float
-
-
-class TimeOfDeliveryFactors(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> dict:
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	dispatch_factor1 = float
-	dispatch_factor2 = float
-	dispatch_factor3 = float
-	dispatch_factor4 = float
-	dispatch_factor5 = float
-	dispatch_factor6 = float
-	dispatch_factor7 = float
-	dispatch_factor8 = float
-	dispatch_factor9 = float
-	dispatch_factors_ts = tuple
-	dispatch_sched_weekday = tuple
-	dispatch_sched_weekend = tuple
-	ppa_multiplier_model = float
-
-
 class SystemControl(object):
 	def assign(self): 
 		pass
@@ -97,6 +57,7 @@ class SystemControl(object):
 	is_ampl_engine = float
 	is_dispatch = float
 	is_dispatch_series = float
+	is_parallel_htr = float
 	is_tod_pc_target_also_pc_max = float
 	is_wlim_series = float
 	is_write_ampl_dat = float
@@ -111,6 +72,46 @@ class SystemControl(object):
 	weekday_schedule = tuple
 	weekend_schedule = tuple
 	wlim_series = tuple
+
+
+class FinancialModel(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> dict:
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
+	csp_financial_model = float
+
+
+class TimeOfDeliveryFactors(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> dict:
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
+	dispatch_factor1 = float
+	dispatch_factor2 = float
+	dispatch_factor3 = float
+	dispatch_factor4 = float
+	dispatch_factor5 = float
+	dispatch_factor6 = float
+	dispatch_factor7 = float
+	dispatch_factor8 = float
+	dispatch_factor9 = float
+	dispatch_factors_ts = tuple
+	dispatch_sched_weekday = tuple
+	dispatch_sched_weekend = tuple
+	ppa_multiplier_model = float
 
 
 class HeliostatField(object):
@@ -165,6 +166,7 @@ class HeliostatField(object):
 	opt_max_iter = float
 	p_start = float
 	p_track = float
+	receiver_type = float
 	v_wind_max = float
 	washing_frequency = float
 	water_usage_per_wash = float
@@ -206,6 +208,11 @@ class TowerAndReceiver(object):
 	D_rec = float
 	Flow_type = float
 	N_panels = float
+	cav_rec_height = float
+	cav_rec_passive_abs = float
+	cav_rec_passive_eps = float
+	cav_rec_span = float
+	cav_rec_width = float
 	crossover_shift = float
 	csp_pt_rec_max_oper_frac = float
 	d_tube_out = float
@@ -226,10 +233,12 @@ class TowerAndReceiver(object):
 	mat_tube = float
 	min_fill_time = float
 	min_preheat_time = float
+	n_cav_rec_panels = float
 	n_flux_days = float
 	piping_length_const = float
 	piping_length_mult = float
 	piping_loss = float
+	piping_loss_coefficient = float
 	preheat_flux = float
 	rec_absorptance = float
 	rec_clearsky_dni = tuple
@@ -316,6 +325,23 @@ class FinancialParameters(object):
 	const_per_upfront_rate4 = float
 	const_per_upfront_rate5 = float
 	sales_tax_rate = float
+
+
+class ParallelHeater(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> dict:
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
+	f_q_dot_des_allowable_su = float
+	f_q_dot_heater_min = float
+	heater_mult = float
+	hrs_startup_at_max_rate = float
 
 
 class ThermalStorage(object):
@@ -446,7 +472,7 @@ class UserDefinedPowerCycle(object):
 	ud_m_dot_water_cool_des = float
 
 
-class SCO2Cycle(object):
+class FinancialSolutionMode(object):
 	def assign(self): 
 		pass
 
@@ -457,36 +483,21 @@ class SCO2Cycle(object):
 		pass
 
 
-	P_high_limit = float
-	_sco2_P_high_limit = float
-	_sco2_P_ref = float
-	_sco2_T_amb_des = float
-	_sco2_T_approach = float
-	_sco2_T_htf_hot_des = float
-	_sco2_deltaT_PHX = float
-	_sco2_design_eff = float
-	_sco2_eta_c = float
-	_sco2_eta_t = float
-	_sco2_recup_eff_max = float
-	deltaT_PHX = float
-	eta_c = float
-	eta_t = float
-	fan_power_perc_net = float
-	is_sco2_preprocess = float
-	recup_eff_max = float
-	sco2_T_amb_des = float
-	sco2_T_approach = float
-	sco2_cycle_config = float
-	sco2ud_T_amb_high = float
-	sco2ud_T_amb_ind_od = tuple
-	sco2ud_T_amb_low = float
-	sco2ud_T_htf_cold_calc = float
-	sco2ud_T_htf_high = float
-	sco2ud_T_htf_ind_od = tuple
-	sco2ud_T_htf_low = float
-	sco2ud_m_dot_htf_high = float
-	sco2ud_m_dot_htf_ind_od = tuple
-	sco2ud_m_dot_htf_low = float
+	ppa_soln_mode = float
+
+
+class ElectricityRates(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> dict:
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
+	en_electricity_rates = float
 
 
 class Revenue(object):
@@ -549,6 +560,8 @@ class Outputs(object):
 	Q_thermal_ss_csky = tuple
 	T_cold = tuple
 	T_cond_out = tuple
+	T_htf_heater_in = tuple
+	T_htf_heater_out = tuple
 	T_panel_out_max = tuple
 	T_pc_in = tuple
 	T_pc_out = tuple
@@ -564,6 +577,7 @@ class Outputs(object):
 	T_wall_rec_outlet = tuple
 	T_wall_riser = tuple
 	T_warm = tuple
+	W_dot_heater = tuple
 	annual_W_cooling_tower = float
 	annual_W_cycle_gross = float
 	annual_energy = float
@@ -626,11 +640,13 @@ class Outputs(object):
 	disp_qsf_expected = tuple
 	disp_qsfprod_expected = tuple
 	disp_qsfsu_expected = tuple
+	disp_rel_mip_gap = tuple
 	disp_rev_expected = tuple
 	disp_solve_iter = tuple
 	disp_solve_state = tuple
 	disp_solve_time = tuple
 	disp_solve_time_ann = float
+	disp_subopt_flag = tuple
 	disp_tes_expected = tuple
 	disp_thermeff_expected = tuple
 	disp_wpb_expected = tuple
@@ -652,6 +668,7 @@ class Outputs(object):
 	m_dot_cr_to_tes_hot = tuple
 	m_dot_cycle_to_field = tuple
 	m_dot_field_to_cycle = tuple
+	m_dot_htf_heater = tuple
 	m_dot_pc = tuple
 	m_dot_pc_to_tes_cold = tuple
 	m_dot_rec = tuple
@@ -677,12 +694,15 @@ class Outputs(object):
 	q_dot_est_cr_su = tuple
 	q_dot_est_tes_ch = tuple
 	q_dot_est_tes_dc = tuple
+	q_dot_heater_startup = tuple
+	q_dot_heater_to_htf = tuple
 	q_dot_pc_max = tuple
 	q_dot_pc_min = tuple
 	q_dot_pc_sb = tuple
 	q_dot_pc_startup = tuple
 	q_dot_pc_target = tuple
 	q_dot_rec_inc = tuple
+	q_dot_reflection_loss = tuple
 	q_heater = tuple
 	q_pb = tuple
 	q_pc_startup = tuple
@@ -692,8 +712,8 @@ class Outputs(object):
 	q_thermal_loss = tuple
 	radcool_control = tuple
 	rh = tuple
-	sco2_preprocess_table_out = tuple
 	sf_adjust_out = tuple
+	sim_cpu_run_time = float
 	solaz = tuple
 	solzen = tuple
 	system_capacity = float
@@ -732,20 +752,22 @@ class TcsmoltenSalt(object):
 		pass
 
 	SolarResource = SolarResource
+	SystemControl = SystemControl
 	FinancialModel = FinancialModel
 	TimeOfDeliveryFactors = TimeOfDeliveryFactors
-	SystemControl = SystemControl
 	HeliostatField = HeliostatField
 	SystemDesign = SystemDesign
 	TowerAndReceiver = TowerAndReceiver
 	SystemCosts = SystemCosts
 	FinancialParameters = FinancialParameters
+	ParallelHeater = ParallelHeater
 	ThermalStorage = ThermalStorage
 	RADCOOL = RADCOOL
 	PowerCycle = PowerCycle
 	RankineCycle = RankineCycle
 	UserDefinedPowerCycle = UserDefinedPowerCycle
-	SCO2Cycle = SCO2Cycle
+	FinancialSolutionMode = FinancialSolutionMode
+	ElectricityRates = ElectricityRates
 	Revenue = Revenue
 	AdjustmentFactors = AdjustmentFactors
 	Outputs = Outputs

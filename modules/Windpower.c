@@ -521,6 +521,18 @@ static PyMethodDef Farm_methods[] = {
 };
 
 static PyObject *
+Farm_get_max_turbine_override(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Windpower_Farm_max_turbine_override_nget, self->data_ptr);
+}
+
+static int
+Farm_set_max_turbine_override(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Windpower_Farm_max_turbine_override_nset, self->data_ptr);
+}
+
+static PyObject *
 Farm_get_system_capacity(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Windpower_Farm_system_capacity_nget, self->data_ptr);
@@ -581,6 +593,9 @@ Farm_set_wind_resource_turbulence_coeff(VarGroupObject *self, PyObject *value, v
 }
 
 static PyGetSetDef Farm_getset[] = {
+{"max_turbine_override", (getter)Farm_get_max_turbine_override,(setter)Farm_set_max_turbine_override,
+	PyDoc_STR("*float*: Override the max number of turbines for wake modeling [numTurbines]\n\n*Info*: set new max num turbines"),
+ 	NULL},
 {"system_capacity", (getter)Farm_get_system_capacity,(setter)Farm_set_system_capacity,
 	PyDoc_STR("*float*: Nameplate capacity [kW]\n\n*Constraints*: MIN=0\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - wind_turbine_rotor_diameter\n"),
  	NULL},

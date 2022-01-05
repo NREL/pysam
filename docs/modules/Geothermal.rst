@@ -22,6 +22,7 @@ additional logic include:
  - decline_type
  - delta_pressure_equip
  - design_temp
+ - dt_prod_well
  - excess_pressure_pump
  - fracture_angle
  - fracture_aperature

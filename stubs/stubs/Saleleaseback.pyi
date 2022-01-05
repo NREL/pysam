@@ -30,7 +30,6 @@ class FinancialParameters(object):
 
 
 	analysis_period = float
-	batt_salvage_percentage = float
 	equip1_reserve_cost = float
 	equip1_reserve_freq = float
 	equip2_reserve_cost = float
@@ -94,6 +93,22 @@ class SystemCosts(object):
 	om_production2_values = tuple
 	om_production_escal = float
 	om_replacement_cost_escal = float
+
+
+class LandLease(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> dict:
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
+	land_area = float
+	om_land_lease = tuple
+	om_land_lease_escal = float
 
 
 class TaxCreditIncentives(object):
@@ -294,7 +309,22 @@ class SystemOutput(object):
 
 	degradation = tuple
 	gen = tuple
+	gen_purchases = tuple
 	system_capacity = float
+
+
+class ElectricityRates(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> dict:
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
+	en_electricity_rates = float
 
 
 class SaleLeaseback(object):
@@ -354,6 +384,20 @@ class TimeOfDelivery(object):
 	ppa_multiplier_model = float
 
 
+class UtilityBill(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> dict:
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
+	utility_bill_w_sys = tuple
+
+
 class OtherCapitalCosts(object):
 	def assign(self): 
 		pass
@@ -369,7 +413,7 @@ class OtherCapitalCosts(object):
 	months_working_reserve = float
 
 
-class Battery(object):
+class LCOS(object):
 	def assign(self): 
 		pass
 
@@ -380,15 +424,22 @@ class Battery(object):
 		pass
 
 
+	batt_annual_charge_energy = tuple
 	batt_annual_charge_from_system = tuple
 	batt_annual_discharge_energy = tuple
 	batt_capacity_percent = tuple
+	batt_salvage_percentage = float
 	battery_total_cost_lcos = float
+	charge_w_sys_ec_ym = tuple
 	grid_to_batt = tuple
 	monthly_batt_to_grid = tuple
 	monthly_grid_to_batt = tuple
 	monthly_grid_to_load = tuple
 	monthly_system_to_grid = tuple
+	true_up_credits_ym = tuple
+	year1_monthly_ec_charge_gross_with_system = tuple
+	year1_monthly_ec_charge_with_system = tuple
+	year1_monthly_electricity_to_grid = tuple
 
 
 class ChargesByMonth(object):
@@ -402,24 +453,8 @@ class ChargesByMonth(object):
 		pass
 
 
-	charge_w_sys_ec_ym = tuple
-	true_up_credits_ym = tuple
-	year1_monthly_ec_charge_with_system = tuple
-
-
-class Monthly(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> dict:
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	year1_monthly_ec_charge_gross_with_system = tuple
-	year1_monthly_electricity_to_grid = tuple
+	net_billing_credits_ym = tuple
+	nm_dollars_applied_ym = tuple
 
 
 class BatterySystem(object):
@@ -439,6 +474,7 @@ class BatterySystem(object):
 	batt_replacement_schedule_percent = tuple
 	battery_per_kWh = float
 	en_batt = float
+	en_standalone_batt = float
 
 
 class Outputs(object):
@@ -464,7 +500,6 @@ class Outputs(object):
 	cf_annual_cost_lcos = tuple
 	cf_annual_costs = tuple
 	cf_annual_discharge_lcos = tuple
-	cf_batt_replacement_cost = tuple
 	cf_battery_replacement_cost = tuple
 	cf_battery_replacement_cost_schedule = tuple
 	cf_charging_cost_grid = tuple
@@ -529,6 +564,7 @@ class Outputs(object):
 	cf_funding_om = tuple
 	cf_funding_receivables = tuple
 	cf_insurance_expense = tuple
+	cf_land_lease_expense = tuple
 	cf_length = float
 	cf_net_salvage_value = tuple
 	cf_om_batt_capacity_expense = tuple
@@ -667,6 +703,8 @@ class Outputs(object):
 	cf_tax_investor_statax_income_with_incentives = tuple
 	cf_tax_investor_statax_taxable_incentives = tuple
 	cf_total_revenue = tuple
+	cf_util_escal_rate = tuple
+	cf_utility_bill = tuple
 	cost_financing = float
 	cost_installed = float
 	cost_installedperwatt = float
@@ -981,6 +1019,7 @@ class Outputs(object):
 	lppa_nom = float
 	lppa_real = float
 	nominal_discount_rate = float
+	npv_annual_costs = float
 	npv_annual_costs_lcos = float
 	npv_energy_lcos_nom = float
 	npv_energy_lcos_real = float
@@ -1038,16 +1077,18 @@ class Saleleaseback(object):
 	Revenue = Revenue
 	FinancialParameters = FinancialParameters
 	SystemCosts = SystemCosts
+	LandLease = LandLease
 	TaxCreditIncentives = TaxCreditIncentives
 	Depreciation = Depreciation
 	PaymentIncentives = PaymentIncentives
 	SystemOutput = SystemOutput
+	ElectricityRates = ElectricityRates
 	SaleLeaseback = SaleLeaseback
 	TimeOfDelivery = TimeOfDelivery
+	UtilityBill = UtilityBill
 	OtherCapitalCosts = OtherCapitalCosts
-	Battery = Battery
+	LCOS = LCOS
 	ChargesByMonth = ChargesByMonth
-	Monthly = Monthly
 	BatterySystem = BatterySystem
 	Outputs = Outputs
 

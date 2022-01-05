@@ -306,6 +306,18 @@ GeoHourly_set_design_temp(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyObject *
+GeoHourly_get_dt_prod_well(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Geothermal_GeoHourly_dt_prod_well_nget, self->data_ptr);
+}
+
+static int
+GeoHourly_set_dt_prod_well(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Geothermal_GeoHourly_dt_prod_well_nset, self->data_ptr);
+}
+
+static PyObject *
 GeoHourly_get_eta_ref(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Geothermal_GeoHourly_eta_ref_nget, self->data_ptr);
@@ -999,6 +1011,9 @@ static PyGetSetDef GeoHourly_getset[] = {
 {"design_temp", (getter)GeoHourly_get_design_temp,(setter)GeoHourly_set_design_temp,
 	PyDoc_STR("*float*: Power block design temperature [C]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - T_htf_hot_ref\n\t - num_wells_getem\n\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - resource_temp\n"),
  	NULL},
+{"dt_prod_well", (getter)GeoHourly_get_dt_prod_well,(setter)GeoHourly_set_dt_prod_well,
+	PyDoc_STR("*float*: Temperature loss in production well [C]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - num_wells_getem\n"),
+ 	NULL},
 {"eta_ref", (getter)GeoHourly_get_eta_ref,(setter)GeoHourly_set_eta_ref,
 	PyDoc_STR("*float*: Desgin conversion efficiency [%]\n\n*Required*: True if ui_calculations_only=0"),
  	NULL},
@@ -1072,7 +1087,7 @@ static PyGetSetDef GeoHourly_getset[] = {
 	PyDoc_STR("*float*: Number of Wells\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - num_wells_getem\n"),
  	NULL},
 {"num_wells_getem", (getter)GeoHourly_get_num_wells_getem,(setter)GeoHourly_set_num_wells_getem,
-	PyDoc_STR("*float*: Number of Wells GETEM calc'd\n\n*Required*: True if ui_calculations_only=0\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - ambient_pressure\n\t - analysis_type\n\t - casing_size\n\t - conversion_subtype\n\t - conversion_type\n\t - decline_type\n\t - delta_pressure_equip\n\t - design_temp\n\t - excess_pressure_pump\n\t - fracture_angle\n\t - fracture_aperature\n\t - fracture_width\n\t - geothermal_analysis_period\n\t - hr_pl_nlev\n\t - inj_prod_well_distance\n\t - inj_well_diam\n\t - model_choice\n\t - nameplate\n\t - num_fractures\n\t - num_wells\n\t - plant_efficiency_input\n\t - pump_efficiency\n\t - reservoir_height\n\t - reservoir_permeability\n\t - reservoir_pressure_change\n\t - reservoir_pressure_change_type\n\t - reservoir_width\n\t - resource_depth\n\t - resource_temp\n\t - resource_type\n\t - rock_density\n\t - rock_specific_heat\n\t - rock_thermal_conductivity\n\t - specified_pump_work_amount\n\t - specify_pump_work\n\t - subsurface_water_loss\n\t - temp_decline_max\n\t - temp_decline_rate\n\t - well_diameter\n\t - well_flow_rate\n\t - wet_bulb_temp\n"),
+	PyDoc_STR("*float*: Number of Wells GETEM calc'd\n\n*Required*: True if ui_calculations_only=0\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - ambient_pressure\n\t - analysis_type\n\t - casing_size\n\t - conversion_subtype\n\t - conversion_type\n\t - decline_type\n\t - delta_pressure_equip\n\t - design_temp\n\t - dt_prod_well\n\t - excess_pressure_pump\n\t - fracture_angle\n\t - fracture_aperature\n\t - fracture_width\n\t - geothermal_analysis_period\n\t - hr_pl_nlev\n\t - inj_prod_well_distance\n\t - inj_well_diam\n\t - model_choice\n\t - nameplate\n\t - num_fractures\n\t - num_wells\n\t - plant_efficiency_input\n\t - pump_efficiency\n\t - reservoir_height\n\t - reservoir_permeability\n\t - reservoir_pressure_change\n\t - reservoir_pressure_change_type\n\t - reservoir_width\n\t - resource_depth\n\t - resource_temp\n\t - resource_type\n\t - rock_density\n\t - rock_specific_heat\n\t - rock_thermal_conductivity\n\t - specified_pump_work_amount\n\t - specify_pump_work\n\t - subsurface_water_loss\n\t - temp_decline_max\n\t - temp_decline_rate\n\t - well_diameter\n\t - well_flow_rate\n\t - wet_bulb_temp\n"),
  	NULL},
 {"pb_bd_frac", (getter)GeoHourly_get_pb_bd_frac,(setter)GeoHourly_set_pb_bd_frac,
 	PyDoc_STR("*float*: Blowdown steam fraction [%]\n\n*Required*: True if ui_calculations_only=0"),

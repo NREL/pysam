@@ -27,6 +27,12 @@ SolarResource Group
 .. autoclass:: PySAM.TcsmoltenSalt.TcsmoltenSalt.SolarResource
 	:members:
 
+SystemControl Group
+======================================================
+
+.. autoclass:: PySAM.TcsmoltenSalt.TcsmoltenSalt.SystemControl
+	:members:
+
 FinancialModel Group
 ======================================================
 
@@ -37,12 +43,6 @@ TimeOfDeliveryFactors Group
 ======================================================
 
 .. autoclass:: PySAM.TcsmoltenSalt.TcsmoltenSalt.TimeOfDeliveryFactors
-	:members:
-
-SystemControl Group
-======================================================
-
-.. autoclass:: PySAM.TcsmoltenSalt.TcsmoltenSalt.SystemControl
 	:members:
 
 HeliostatField Group
@@ -75,6 +75,12 @@ FinancialParameters Group
 .. autoclass:: PySAM.TcsmoltenSalt.TcsmoltenSalt.FinancialParameters
 	:members:
 
+ParallelHeater Group
+======================================================
+
+.. autoclass:: PySAM.TcsmoltenSalt.TcsmoltenSalt.ParallelHeater
+	:members:
+
 ThermalStorage Group
 ======================================================
 
@@ -105,10 +111,16 @@ UserDefinedPowerCycle Group
 .. autoclass:: PySAM.TcsmoltenSalt.TcsmoltenSalt.UserDefinedPowerCycle
 	:members:
 
-SCO2Cycle Group
+FinancialSolutionMode Group
 ======================================================
 
-.. autoclass:: PySAM.TcsmoltenSalt.TcsmoltenSalt.SCO2Cycle
+.. autoclass:: PySAM.TcsmoltenSalt.TcsmoltenSalt.FinancialSolutionMode
+	:members:
+
+ElectricityRates Group
+======================================================
+
+.. autoclass:: PySAM.TcsmoltenSalt.TcsmoltenSalt.ElectricityRates
 	:members:
 
 Revenue Group

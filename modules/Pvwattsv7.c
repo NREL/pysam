@@ -995,12 +995,6 @@ Outputs_get_elev(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_estimated_rows(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Pvwattsv7_Outputs_estimated_rows_nget, self->data_ptr);
-}
-
-static PyObject *
 Outputs_get_gen(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Pvwattsv7_Outputs_gen_aget, self->data_ptr);
@@ -1088,6 +1082,24 @@ static PyObject *
 Outputs_get_solrad_monthly(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Pvwattsv7_Outputs_solrad_monthly_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_ss_beam_factor(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvwattsv7_Outputs_ss_beam_factor_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_ss_gnd_diffuse_factor(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvwattsv7_Outputs_ss_gnd_diffuse_factor_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_ss_sky_diffuse_factor(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvwattsv7_Outputs_ss_sky_diffuse_factor_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -1181,9 +1193,6 @@ static PyGetSetDef Outputs_getset[] = {
 {"elev", (getter)Outputs_get_elev,(setter)0,
 	PyDoc_STR("*float*: Site elevation [m]"),
  	NULL},
-{"estimated_rows", (getter)Outputs_get_estimated_rows,(setter)0,
-	PyDoc_STR("*float*: Estimated number of rows in the system"),
- 	NULL},
 {"gen", (getter)Outputs_get_gen,(setter)0,
 	PyDoc_STR("*sequence*: System power generated [kW]"),
  	NULL},
@@ -1218,7 +1227,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Plane of array irradiance [kWh/m2]"),
  	NULL},
 {"shad_beam_factor", (getter)Outputs_get_shad_beam_factor,(setter)0,
-	PyDoc_STR("*sequence*: Shading factor for beam radiation"),
+	PyDoc_STR("*sequence*: External shading factor for beam radiation"),
  	NULL},
 {"snow", (getter)Outputs_get_snow,(setter)0,
 	PyDoc_STR("*sequence*: Weather file snow depth [cm]"),
@@ -1228,6 +1237,15 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"solrad_monthly", (getter)Outputs_get_solrad_monthly,(setter)0,
 	PyDoc_STR("*sequence*: Daily average solar irradiance [kWh/m2/day]"),
+ 	NULL},
+{"ss_beam_factor", (getter)Outputs_get_ss_beam_factor,(setter)0,
+	PyDoc_STR("*sequence*: Calculated self-shading factor for beam radiation"),
+ 	NULL},
+{"ss_gnd_diffuse_factor", (getter)Outputs_get_ss_gnd_diffuse_factor,(setter)0,
+	PyDoc_STR("*sequence*: Calculated self-shading factor for ground-reflected diffuse radiation"),
+ 	NULL},
+{"ss_sky_diffuse_factor", (getter)Outputs_get_ss_sky_diffuse_factor,(setter)0,
+	PyDoc_STR("*sequence*: Calculated self-shading factor for sky diffuse radiation"),
  	NULL},
 {"state", (getter)Outputs_get_state,(setter)0,
 	PyDoc_STR("*str*: State"),
@@ -1604,7 +1622,7 @@ static PyMethodDef Pvwattsv7Module_methods[] = {
 				PyDoc_STR("new() -> Pvwattsv7")},
 		{"default",             Pvwattsv7_default,         METH_VARARGS,
 				PyDoc_STR("default(config) -> Pvwattsv7\n\nUse default attributes\n"
-				"`config` options:\n\n- \"FuelCellCommercial\"\n- \"FuelCellSingleOwner\"\n- \"PVWattsBatteryCommercial\"\n- \"PVWattsBatteryHostDeveloper\"\n- \"PVWattsBatteryResidential\"\n- \"PVWattsBatteryThirdParty\"\n- \"PVWattsAllEquityPartnershipFlip\"\n- \"PVWattsCommercial\"\n- \"PVWattsHostDeveloper\"\n- \"PVWattsLCOECalculator\"\n- \"PVWattsLeveragedPartnershipFlip\"\n- \"PVWattsMerchantPlant\"\n- \"PVWattsNone\"\n- \"PVWattsResidential\"\n- \"PVWattsSaleLeaseback\"\n- \"PVWattsSingleOwner\"\n- \"PVWattsThirdParty\"")},
+				"None")},
 		{"wrap",             Pvwattsv7_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Pvwattsv7\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   Pvwattsv7_from_existing,        METH_VARARGS,
@@ -1613,7 +1631,7 @@ static PyMethodDef Pvwattsv7Module_methods[] = {
 };
 
 PyDoc_STRVAR(module_doc,
-			 "Photovoltaic system using basic NREL PVWatts V7 algorithm. Does not do detailed degradation or loss modeling. If those are important, please use pvsamv1.");
+			 "Pvwattsv7");
 
 
 static int

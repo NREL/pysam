@@ -159,460 +159,6 @@ static PyTypeObject SolarResource_Type = {
 
 
 /*
- * FinancialModel Group
- */ 
-
-static PyTypeObject FinancialModel_Type;
-
-static PyObject *
-FinancialModel_new(SAM_TcsmoltenSalt data_ptr)
-{
-	PyObject* new_obj = FinancialModel_Type.tp_alloc(&FinancialModel_Type,0);
-
-	VarGroupObject* FinancialModel_obj = (VarGroupObject*)new_obj;
-
-	FinancialModel_obj->data_ptr = (SAM_table)data_ptr;
-
-	return new_obj;
-}
-
-/* FinancialModel methods */
-
-static PyObject *
-FinancialModel_assign(VarGroupObject *self, PyObject *args)
-{
-	PyObject* dict;
-	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
-		return NULL;
-	}
-
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "TcsmoltenSalt", "FinancialModel")){
-		return NULL;
-	}
-
-	Py_INCREF(Py_None);
-	return Py_None;
-}
-
-static PyObject *
-FinancialModel_replace(VarGroupObject *self, PyObject *args)
-{
-	PyObject* dict;
-	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
-		return NULL;
-	}
-	PyTypeObject* tp = &FinancialModel_Type;
-
-	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "TcsmoltenSalt", "FinancialModel")){
-		return NULL;
-	}
-
-	Py_INCREF(Py_None);
-	return Py_None;
-}
-
-static PyObject *
-FinancialModel_export(VarGroupObject *self, PyObject *args)
-{
-	PyTypeObject* tp = &FinancialModel_Type;
-	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
-	return dict;
-}
-
-static PyMethodDef FinancialModel_methods[] = {
-		{"assign",            (PyCFunction)FinancialModel_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``FinancialModel_vals = { var: val, ...}``")},
-		{"replace",            (PyCFunction)FinancialModel_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``FinancialModel_vals = { var: val, ...}``")},
-		{"export",            (PyCFunction)FinancialModel_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
-		{NULL,              NULL}           /* sentinel */
-};
-
-static PyObject *
-FinancialModel_get_csp_financial_model(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_FinancialModel_csp_financial_model_nget, self->data_ptr);
-}
-
-static int
-FinancialModel_set_csp_financial_model(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_FinancialModel_csp_financial_model_nset, self->data_ptr);
-}
-
-static PyGetSetDef FinancialModel_getset[] = {
-{"csp_financial_model", (getter)FinancialModel_get_csp_financial_model,(setter)FinancialModel_set_csp_financial_model,
-	PyDoc_STR("*float*:  [1-8]\n\n*Constraints*: INTEGER,MIN=0\n\n*Required*: If not provided, assumed to be 1"),
- 	NULL},
-	{NULL}  /* Sentinel */
-};
-
-static PyTypeObject FinancialModel_Type = {
-		/* The ob_type field must be initialized in the module init function
-		 * to be portable to Windows without using C++. */
-		PyVarObject_HEAD_INIT(NULL, 0)
-		"TcsmoltenSalt.FinancialModel",             /*tp_name*/
-		sizeof(VarGroupObject),          /*tp_basicsize*/
-		0,                          /*tp_itemsize*/
-		/* methods */
-		0,    /*tp_dealloc*/
-		0,                          /*tp_print*/
-		(getattrfunc)0,             /*tp_getattr*/
-		0,                          /*tp_setattr*/
-		0,                          /*tp_reserved*/
-		0,                          /*tp_repr*/
-		0,                          /*tp_as_number*/
-		0,                          /*tp_as_sequence*/
-		0,                          /*tp_as_mapping*/
-		0,                          /*tp_hash*/
-		0,                          /*tp_call*/
-		0,                          /*tp_str*/
-		0,                          /*tp_getattro*/
-		0,                          /*tp_setattro*/
-		0,                          /*tp_as_buffer*/
-		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
-		0,                          /*tp_doc*/
-		0,                          /*tp_traverse*/
-		0,                          /*tp_clear*/
-		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistofnset*/
-		0,                          /*tp_iter*/
-		0,                          /*tp_iternext*/
-		FinancialModel_methods,         /*tp_methods*/
-		0,                          /*tp_members*/
-		FinancialModel_getset,          /*tp_getset*/
-		0,                          /*tp_base*/
-		0,                          /*tp_dict*/
-		0,                          /*tp_descr_get*/
-		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictofnset*/
-		0,                          /*tp_init*/
-		0,                          /*tp_alloc*/
-		0,             /*tp_new*/
-		0,                          /*tp_free*/
-		0,                          /*tp_is_gc*/
-};
-
-
-/*
- * TimeOfDeliveryFactors Group
- */ 
-
-static PyTypeObject TimeOfDeliveryFactors_Type;
-
-static PyObject *
-TimeOfDeliveryFactors_new(SAM_TcsmoltenSalt data_ptr)
-{
-	PyObject* new_obj = TimeOfDeliveryFactors_Type.tp_alloc(&TimeOfDeliveryFactors_Type,0);
-
-	VarGroupObject* TimeOfDeliveryFactors_obj = (VarGroupObject*)new_obj;
-
-	TimeOfDeliveryFactors_obj->data_ptr = (SAM_table)data_ptr;
-
-	return new_obj;
-}
-
-/* TimeOfDeliveryFactors methods */
-
-static PyObject *
-TimeOfDeliveryFactors_assign(VarGroupObject *self, PyObject *args)
-{
-	PyObject* dict;
-	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
-		return NULL;
-	}
-
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "TcsmoltenSalt", "TimeOfDeliveryFactors")){
-		return NULL;
-	}
-
-	Py_INCREF(Py_None);
-	return Py_None;
-}
-
-static PyObject *
-TimeOfDeliveryFactors_replace(VarGroupObject *self, PyObject *args)
-{
-	PyObject* dict;
-	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
-		return NULL;
-	}
-	PyTypeObject* tp = &TimeOfDeliveryFactors_Type;
-
-	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "TcsmoltenSalt", "TimeOfDeliveryFactors")){
-		return NULL;
-	}
-
-	Py_INCREF(Py_None);
-	return Py_None;
-}
-
-static PyObject *
-TimeOfDeliveryFactors_export(VarGroupObject *self, PyObject *args)
-{
-	PyTypeObject* tp = &TimeOfDeliveryFactors_Type;
-	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
-	return dict;
-}
-
-static PyMethodDef TimeOfDeliveryFactors_methods[] = {
-		{"assign",            (PyCFunction)TimeOfDeliveryFactors_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``TimeOfDeliveryFactors_vals = { var: val, ...}``")},
-		{"replace",            (PyCFunction)TimeOfDeliveryFactors_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``TimeOfDeliveryFactors_vals = { var: val, ...}``")},
-		{"export",            (PyCFunction)TimeOfDeliveryFactors_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
-		{NULL,              NULL}           /* sentinel */
-};
-
-static PyObject *
-TimeOfDeliveryFactors_get_dispatch_factor1(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_TimeOfDeliveryFactors_dispatch_factor1_nget, self->data_ptr);
-}
-
-static int
-TimeOfDeliveryFactors_set_dispatch_factor1(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TimeOfDeliveryFactors_dispatch_factor1_nset, self->data_ptr);
-}
-
-static PyObject *
-TimeOfDeliveryFactors_get_dispatch_factor2(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_TimeOfDeliveryFactors_dispatch_factor2_nget, self->data_ptr);
-}
-
-static int
-TimeOfDeliveryFactors_set_dispatch_factor2(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TimeOfDeliveryFactors_dispatch_factor2_nset, self->data_ptr);
-}
-
-static PyObject *
-TimeOfDeliveryFactors_get_dispatch_factor3(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_TimeOfDeliveryFactors_dispatch_factor3_nget, self->data_ptr);
-}
-
-static int
-TimeOfDeliveryFactors_set_dispatch_factor3(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TimeOfDeliveryFactors_dispatch_factor3_nset, self->data_ptr);
-}
-
-static PyObject *
-TimeOfDeliveryFactors_get_dispatch_factor4(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_TimeOfDeliveryFactors_dispatch_factor4_nget, self->data_ptr);
-}
-
-static int
-TimeOfDeliveryFactors_set_dispatch_factor4(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TimeOfDeliveryFactors_dispatch_factor4_nset, self->data_ptr);
-}
-
-static PyObject *
-TimeOfDeliveryFactors_get_dispatch_factor5(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_TimeOfDeliveryFactors_dispatch_factor5_nget, self->data_ptr);
-}
-
-static int
-TimeOfDeliveryFactors_set_dispatch_factor5(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TimeOfDeliveryFactors_dispatch_factor5_nset, self->data_ptr);
-}
-
-static PyObject *
-TimeOfDeliveryFactors_get_dispatch_factor6(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_TimeOfDeliveryFactors_dispatch_factor6_nget, self->data_ptr);
-}
-
-static int
-TimeOfDeliveryFactors_set_dispatch_factor6(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TimeOfDeliveryFactors_dispatch_factor6_nset, self->data_ptr);
-}
-
-static PyObject *
-TimeOfDeliveryFactors_get_dispatch_factor7(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_TimeOfDeliveryFactors_dispatch_factor7_nget, self->data_ptr);
-}
-
-static int
-TimeOfDeliveryFactors_set_dispatch_factor7(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TimeOfDeliveryFactors_dispatch_factor7_nset, self->data_ptr);
-}
-
-static PyObject *
-TimeOfDeliveryFactors_get_dispatch_factor8(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_TimeOfDeliveryFactors_dispatch_factor8_nget, self->data_ptr);
-}
-
-static int
-TimeOfDeliveryFactors_set_dispatch_factor8(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TimeOfDeliveryFactors_dispatch_factor8_nset, self->data_ptr);
-}
-
-static PyObject *
-TimeOfDeliveryFactors_get_dispatch_factor9(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_TimeOfDeliveryFactors_dispatch_factor9_nget, self->data_ptr);
-}
-
-static int
-TimeOfDeliveryFactors_set_dispatch_factor9(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TimeOfDeliveryFactors_dispatch_factor9_nset, self->data_ptr);
-}
-
-static PyObject *
-TimeOfDeliveryFactors_get_dispatch_factors_ts(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_TcsmoltenSalt_TimeOfDeliveryFactors_dispatch_factors_ts_aget, self->data_ptr);
-}
-
-static int
-TimeOfDeliveryFactors_set_dispatch_factors_ts(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_TcsmoltenSalt_TimeOfDeliveryFactors_dispatch_factors_ts_aset, self->data_ptr);
-}
-
-static PyObject *
-TimeOfDeliveryFactors_get_dispatch_sched_weekday(VarGroupObject *self, void *closure)
-{
-	return PySAM_matrix_getter(SAM_TcsmoltenSalt_TimeOfDeliveryFactors_dispatch_sched_weekday_mget, self->data_ptr);
-}
-
-static int
-TimeOfDeliveryFactors_set_dispatch_sched_weekday(VarGroupObject *self, PyObject *value, void *closure)
-{
-		return PySAM_matrix_setter(value, SAM_TcsmoltenSalt_TimeOfDeliveryFactors_dispatch_sched_weekday_mset, self->data_ptr);
-}
-
-static PyObject *
-TimeOfDeliveryFactors_get_dispatch_sched_weekend(VarGroupObject *self, void *closure)
-{
-	return PySAM_matrix_getter(SAM_TcsmoltenSalt_TimeOfDeliveryFactors_dispatch_sched_weekend_mget, self->data_ptr);
-}
-
-static int
-TimeOfDeliveryFactors_set_dispatch_sched_weekend(VarGroupObject *self, PyObject *value, void *closure)
-{
-		return PySAM_matrix_setter(value, SAM_TcsmoltenSalt_TimeOfDeliveryFactors_dispatch_sched_weekend_mset, self->data_ptr);
-}
-
-static PyObject *
-TimeOfDeliveryFactors_get_ppa_multiplier_model(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_TimeOfDeliveryFactors_ppa_multiplier_model_nget, self->data_ptr);
-}
-
-static int
-TimeOfDeliveryFactors_set_ppa_multiplier_model(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TimeOfDeliveryFactors_ppa_multiplier_model_nset, self->data_ptr);
-}
-
-static PyGetSetDef TimeOfDeliveryFactors_getset[] = {
-{"dispatch_factor1", (getter)TimeOfDeliveryFactors_get_dispatch_factor1,(setter)TimeOfDeliveryFactors_set_dispatch_factor1,
-	PyDoc_STR("*float*: Dispatch payment factor 1\n\n*Required*: True if ppa_multiplier_model=0&csp_financial_model<5&is_dispatch=1"),
- 	NULL},
-{"dispatch_factor2", (getter)TimeOfDeliveryFactors_get_dispatch_factor2,(setter)TimeOfDeliveryFactors_set_dispatch_factor2,
-	PyDoc_STR("*float*: Dispatch payment factor 2\n\n*Required*: True if ppa_multiplier_model=0&csp_financial_model<5&is_dispatch=1"),
- 	NULL},
-{"dispatch_factor3", (getter)TimeOfDeliveryFactors_get_dispatch_factor3,(setter)TimeOfDeliveryFactors_set_dispatch_factor3,
-	PyDoc_STR("*float*: Dispatch payment factor 3\n\n*Required*: True if ppa_multiplier_model=0&csp_financial_model<5&is_dispatch=1"),
- 	NULL},
-{"dispatch_factor4", (getter)TimeOfDeliveryFactors_get_dispatch_factor4,(setter)TimeOfDeliveryFactors_set_dispatch_factor4,
-	PyDoc_STR("*float*: Dispatch payment factor 4\n\n*Required*: True if ppa_multiplier_model=0&csp_financial_model<5&is_dispatch=1"),
- 	NULL},
-{"dispatch_factor5", (getter)TimeOfDeliveryFactors_get_dispatch_factor5,(setter)TimeOfDeliveryFactors_set_dispatch_factor5,
-	PyDoc_STR("*float*: Dispatch payment factor 5\n\n*Required*: True if ppa_multiplier_model=0&csp_financial_model<5&is_dispatch=1"),
- 	NULL},
-{"dispatch_factor6", (getter)TimeOfDeliveryFactors_get_dispatch_factor6,(setter)TimeOfDeliveryFactors_set_dispatch_factor6,
-	PyDoc_STR("*float*: Dispatch payment factor 6\n\n*Required*: True if ppa_multiplier_model=0&csp_financial_model<5&is_dispatch=1"),
- 	NULL},
-{"dispatch_factor7", (getter)TimeOfDeliveryFactors_get_dispatch_factor7,(setter)TimeOfDeliveryFactors_set_dispatch_factor7,
-	PyDoc_STR("*float*: Dispatch payment factor 7\n\n*Required*: True if ppa_multiplier_model=0&csp_financial_model<5&is_dispatch=1"),
- 	NULL},
-{"dispatch_factor8", (getter)TimeOfDeliveryFactors_get_dispatch_factor8,(setter)TimeOfDeliveryFactors_set_dispatch_factor8,
-	PyDoc_STR("*float*: Dispatch payment factor 8\n\n*Required*: True if ppa_multiplier_model=0&csp_financial_model<5&is_dispatch=1"),
- 	NULL},
-{"dispatch_factor9", (getter)TimeOfDeliveryFactors_get_dispatch_factor9,(setter)TimeOfDeliveryFactors_set_dispatch_factor9,
-	PyDoc_STR("*float*: Dispatch payment factor 9\n\n*Required*: True if ppa_multiplier_model=0&csp_financial_model<5&is_dispatch=1"),
- 	NULL},
-{"dispatch_factors_ts", (getter)TimeOfDeliveryFactors_get_dispatch_factors_ts,(setter)TimeOfDeliveryFactors_set_dispatch_factors_ts,
-	PyDoc_STR("*sequence*: Dispatch payment factor array\n\n*Required*: True if ppa_multiplier_model=1&csp_financial_model<5&is_dispatch=1"),
- 	NULL},
-{"dispatch_sched_weekday", (getter)TimeOfDeliveryFactors_get_dispatch_sched_weekday,(setter)TimeOfDeliveryFactors_set_dispatch_sched_weekday,
-	PyDoc_STR("*sequence[sequence]*: PPA pricing weekday schedule, 12x24\n\n*Required*: True if ppa_multiplier_model=0&csp_financial_model<5&is_dispatch=1"),
- 	NULL},
-{"dispatch_sched_weekend", (getter)TimeOfDeliveryFactors_get_dispatch_sched_weekend,(setter)TimeOfDeliveryFactors_set_dispatch_sched_weekend,
-	PyDoc_STR("*sequence[sequence]*: PPA pricing weekend schedule, 12x24\n\n*Required*: True if ppa_multiplier_model=0&csp_financial_model<5&is_dispatch=1"),
- 	NULL},
-{"ppa_multiplier_model", (getter)TimeOfDeliveryFactors_get_ppa_multiplier_model,(setter)TimeOfDeliveryFactors_set_ppa_multiplier_model,
-	PyDoc_STR("*float*: PPA multiplier model 0: dispatch factors dispatch_factorX, 1: hourly multipliers dispatch_factors_ts [0/1]\n\n*Options*: 0=diurnal,1=timestep\n\n*Constraints*: INTEGER,MIN=0\n\n*Required*: If not provided, assumed to be 0"),
- 	NULL},
-	{NULL}  /* Sentinel */
-};
-
-static PyTypeObject TimeOfDeliveryFactors_Type = {
-		/* The ob_type field must be initialized in the module init function
-		 * to be portable to Windows without using C++. */
-		PyVarObject_HEAD_INIT(NULL, 0)
-		"TcsmoltenSalt.TimeOfDeliveryFactors",             /*tp_name*/
-		sizeof(VarGroupObject),          /*tp_basicsize*/
-		0,                          /*tp_itemsize*/
-		/* methods */
-		0,    /*tp_dealloc*/
-		0,                          /*tp_print*/
-		(getattrfunc)0,             /*tp_getattr*/
-		0,                          /*tp_setattr*/
-		0,                          /*tp_reserved*/
-		0,                          /*tp_repr*/
-		0,                          /*tp_as_number*/
-		0,                          /*tp_as_sequence*/
-		0,                          /*tp_as_mapping*/
-		0,                          /*tp_hash*/
-		0,                          /*tp_call*/
-		0,                          /*tp_str*/
-		0,                          /*tp_getattro*/
-		0,                          /*tp_setattro*/
-		0,                          /*tp_as_buffer*/
-		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
-		0,                          /*tp_doc*/
-		0,                          /*tp_traverse*/
-		0,                          /*tp_clear*/
-		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistofnset*/
-		0,                          /*tp_iter*/
-		0,                          /*tp_iternext*/
-		TimeOfDeliveryFactors_methods,         /*tp_methods*/
-		0,                          /*tp_members*/
-		TimeOfDeliveryFactors_getset,          /*tp_getset*/
-		0,                          /*tp_base*/
-		0,                          /*tp_dict*/
-		0,                          /*tp_descr_get*/
-		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictofnset*/
-		0,                          /*tp_init*/
-		0,                          /*tp_alloc*/
-		0,             /*tp_new*/
-		0,                          /*tp_free*/
-		0,                          /*tp_is_gc*/
-};
-
-
-/*
  * SystemControl Group
  */ 
 
@@ -1080,6 +626,18 @@ SystemControl_set_is_dispatch_series(VarGroupObject *self, PyObject *value, void
 }
 
 static PyObject *
+SystemControl_get_is_parallel_htr(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_is_parallel_htr_nget, self->data_ptr);
+}
+
+static int
+SystemControl_set_is_parallel_htr(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_is_parallel_htr_nset, self->data_ptr);
+}
+
+static PyObject *
 SystemControl_get_is_tod_pc_target_also_pc_max(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_is_tod_pc_target_also_pc_max_nget, self->data_ptr);
@@ -1347,6 +905,9 @@ static PyGetSetDef SystemControl_getset[] = {
 {"is_dispatch_series", (getter)SystemControl_get_is_dispatch_series,(setter)SystemControl_set_is_dispatch_series,
 	PyDoc_STR("*float*: Use time-series dispatch factors\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
+{"is_parallel_htr", (getter)SystemControl_get_is_parallel_htr,(setter)SystemControl_set_is_parallel_htr,
+	PyDoc_STR("*float*: Does plant include a HTF heater parallel to solar field?\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
 {"is_tod_pc_target_also_pc_max", (getter)SystemControl_get_is_tod_pc_target_also_pc_max,(setter)SystemControl_set_is_tod_pc_target_also_pc_max,
 	PyDoc_STR("*float*: Is the TOD target cycle heat input also the max cycle heat input?\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
@@ -1426,6 +987,460 @@ static PyTypeObject SystemControl_Type = {
 		SystemControl_methods,         /*tp_methods*/
 		0,                          /*tp_members*/
 		SystemControl_getset,          /*tp_getset*/
+		0,                          /*tp_base*/
+		0,                          /*tp_dict*/
+		0,                          /*tp_descr_get*/
+		0,                          /*tp_descr_set*/
+		0,                          /*tp_dictofnset*/
+		0,                          /*tp_init*/
+		0,                          /*tp_alloc*/
+		0,             /*tp_new*/
+		0,                          /*tp_free*/
+		0,                          /*tp_is_gc*/
+};
+
+
+/*
+ * FinancialModel Group
+ */ 
+
+static PyTypeObject FinancialModel_Type;
+
+static PyObject *
+FinancialModel_new(SAM_TcsmoltenSalt data_ptr)
+{
+	PyObject* new_obj = FinancialModel_Type.tp_alloc(&FinancialModel_Type,0);
+
+	VarGroupObject* FinancialModel_obj = (VarGroupObject*)new_obj;
+
+	FinancialModel_obj->data_ptr = (SAM_table)data_ptr;
+
+	return new_obj;
+}
+
+/* FinancialModel methods */
+
+static PyObject *
+FinancialModel_assign(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "TcsmoltenSalt", "FinancialModel")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+FinancialModel_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &FinancialModel_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "TcsmoltenSalt", "FinancialModel")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+FinancialModel_export(VarGroupObject *self, PyObject *args)
+{
+	PyTypeObject* tp = &FinancialModel_Type;
+	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
+	return dict;
+}
+
+static PyMethodDef FinancialModel_methods[] = {
+		{"assign",            (PyCFunction)FinancialModel_assign,  METH_VARARGS,
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``FinancialModel_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)FinancialModel_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``FinancialModel_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)FinancialModel_export,  METH_VARARGS,
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+		{NULL,              NULL}           /* sentinel */
+};
+
+static PyObject *
+FinancialModel_get_csp_financial_model(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_FinancialModel_csp_financial_model_nget, self->data_ptr);
+}
+
+static int
+FinancialModel_set_csp_financial_model(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_FinancialModel_csp_financial_model_nset, self->data_ptr);
+}
+
+static PyGetSetDef FinancialModel_getset[] = {
+{"csp_financial_model", (getter)FinancialModel_get_csp_financial_model,(setter)FinancialModel_set_csp_financial_model,
+	PyDoc_STR("*float*:  [1-8]\n\n*Constraints*: INTEGER,MIN=0\n\n*Required*: If not provided, assumed to be 1"),
+ 	NULL},
+	{NULL}  /* Sentinel */
+};
+
+static PyTypeObject FinancialModel_Type = {
+		/* The ob_type field must be initialized in the module init function
+		 * to be portable to Windows without using C++. */
+		PyVarObject_HEAD_INIT(NULL, 0)
+		"TcsmoltenSalt.FinancialModel",             /*tp_name*/
+		sizeof(VarGroupObject),          /*tp_basicsize*/
+		0,                          /*tp_itemsize*/
+		/* methods */
+		0,    /*tp_dealloc*/
+		0,                          /*tp_print*/
+		(getattrfunc)0,             /*tp_getattr*/
+		0,                          /*tp_setattr*/
+		0,                          /*tp_reserved*/
+		0,                          /*tp_repr*/
+		0,                          /*tp_as_number*/
+		0,                          /*tp_as_sequence*/
+		0,                          /*tp_as_mapping*/
+		0,                          /*tp_hash*/
+		0,                          /*tp_call*/
+		0,                          /*tp_str*/
+		0,                          /*tp_getattro*/
+		0,                          /*tp_setattro*/
+		0,                          /*tp_as_buffer*/
+		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
+		0,                          /*tp_doc*/
+		0,                          /*tp_traverse*/
+		0,                          /*tp_clear*/
+		0,                          /*tp_richcompare*/
+		0,                          /*tp_weaklistofnset*/
+		0,                          /*tp_iter*/
+		0,                          /*tp_iternext*/
+		FinancialModel_methods,         /*tp_methods*/
+		0,                          /*tp_members*/
+		FinancialModel_getset,          /*tp_getset*/
+		0,                          /*tp_base*/
+		0,                          /*tp_dict*/
+		0,                          /*tp_descr_get*/
+		0,                          /*tp_descr_set*/
+		0,                          /*tp_dictofnset*/
+		0,                          /*tp_init*/
+		0,                          /*tp_alloc*/
+		0,             /*tp_new*/
+		0,                          /*tp_free*/
+		0,                          /*tp_is_gc*/
+};
+
+
+/*
+ * TimeOfDeliveryFactors Group
+ */ 
+
+static PyTypeObject TimeOfDeliveryFactors_Type;
+
+static PyObject *
+TimeOfDeliveryFactors_new(SAM_TcsmoltenSalt data_ptr)
+{
+	PyObject* new_obj = TimeOfDeliveryFactors_Type.tp_alloc(&TimeOfDeliveryFactors_Type,0);
+
+	VarGroupObject* TimeOfDeliveryFactors_obj = (VarGroupObject*)new_obj;
+
+	TimeOfDeliveryFactors_obj->data_ptr = (SAM_table)data_ptr;
+
+	return new_obj;
+}
+
+/* TimeOfDeliveryFactors methods */
+
+static PyObject *
+TimeOfDeliveryFactors_assign(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "TcsmoltenSalt", "TimeOfDeliveryFactors")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+TimeOfDeliveryFactors_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &TimeOfDeliveryFactors_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "TcsmoltenSalt", "TimeOfDeliveryFactors")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+TimeOfDeliveryFactors_export(VarGroupObject *self, PyObject *args)
+{
+	PyTypeObject* tp = &TimeOfDeliveryFactors_Type;
+	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
+	return dict;
+}
+
+static PyMethodDef TimeOfDeliveryFactors_methods[] = {
+		{"assign",            (PyCFunction)TimeOfDeliveryFactors_assign,  METH_VARARGS,
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``TimeOfDeliveryFactors_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)TimeOfDeliveryFactors_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``TimeOfDeliveryFactors_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)TimeOfDeliveryFactors_export,  METH_VARARGS,
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+		{NULL,              NULL}           /* sentinel */
+};
+
+static PyObject *
+TimeOfDeliveryFactors_get_dispatch_factor1(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TimeOfDeliveryFactors_dispatch_factor1_nget, self->data_ptr);
+}
+
+static int
+TimeOfDeliveryFactors_set_dispatch_factor1(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TimeOfDeliveryFactors_dispatch_factor1_nset, self->data_ptr);
+}
+
+static PyObject *
+TimeOfDeliveryFactors_get_dispatch_factor2(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TimeOfDeliveryFactors_dispatch_factor2_nget, self->data_ptr);
+}
+
+static int
+TimeOfDeliveryFactors_set_dispatch_factor2(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TimeOfDeliveryFactors_dispatch_factor2_nset, self->data_ptr);
+}
+
+static PyObject *
+TimeOfDeliveryFactors_get_dispatch_factor3(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TimeOfDeliveryFactors_dispatch_factor3_nget, self->data_ptr);
+}
+
+static int
+TimeOfDeliveryFactors_set_dispatch_factor3(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TimeOfDeliveryFactors_dispatch_factor3_nset, self->data_ptr);
+}
+
+static PyObject *
+TimeOfDeliveryFactors_get_dispatch_factor4(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TimeOfDeliveryFactors_dispatch_factor4_nget, self->data_ptr);
+}
+
+static int
+TimeOfDeliveryFactors_set_dispatch_factor4(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TimeOfDeliveryFactors_dispatch_factor4_nset, self->data_ptr);
+}
+
+static PyObject *
+TimeOfDeliveryFactors_get_dispatch_factor5(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TimeOfDeliveryFactors_dispatch_factor5_nget, self->data_ptr);
+}
+
+static int
+TimeOfDeliveryFactors_set_dispatch_factor5(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TimeOfDeliveryFactors_dispatch_factor5_nset, self->data_ptr);
+}
+
+static PyObject *
+TimeOfDeliveryFactors_get_dispatch_factor6(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TimeOfDeliveryFactors_dispatch_factor6_nget, self->data_ptr);
+}
+
+static int
+TimeOfDeliveryFactors_set_dispatch_factor6(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TimeOfDeliveryFactors_dispatch_factor6_nset, self->data_ptr);
+}
+
+static PyObject *
+TimeOfDeliveryFactors_get_dispatch_factor7(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TimeOfDeliveryFactors_dispatch_factor7_nget, self->data_ptr);
+}
+
+static int
+TimeOfDeliveryFactors_set_dispatch_factor7(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TimeOfDeliveryFactors_dispatch_factor7_nset, self->data_ptr);
+}
+
+static PyObject *
+TimeOfDeliveryFactors_get_dispatch_factor8(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TimeOfDeliveryFactors_dispatch_factor8_nget, self->data_ptr);
+}
+
+static int
+TimeOfDeliveryFactors_set_dispatch_factor8(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TimeOfDeliveryFactors_dispatch_factor8_nset, self->data_ptr);
+}
+
+static PyObject *
+TimeOfDeliveryFactors_get_dispatch_factor9(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TimeOfDeliveryFactors_dispatch_factor9_nget, self->data_ptr);
+}
+
+static int
+TimeOfDeliveryFactors_set_dispatch_factor9(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TimeOfDeliveryFactors_dispatch_factor9_nset, self->data_ptr);
+}
+
+static PyObject *
+TimeOfDeliveryFactors_get_dispatch_factors_ts(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_TcsmoltenSalt_TimeOfDeliveryFactors_dispatch_factors_ts_aget, self->data_ptr);
+}
+
+static int
+TimeOfDeliveryFactors_set_dispatch_factors_ts(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_TcsmoltenSalt_TimeOfDeliveryFactors_dispatch_factors_ts_aset, self->data_ptr);
+}
+
+static PyObject *
+TimeOfDeliveryFactors_get_dispatch_sched_weekday(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_TcsmoltenSalt_TimeOfDeliveryFactors_dispatch_sched_weekday_mget, self->data_ptr);
+}
+
+static int
+TimeOfDeliveryFactors_set_dispatch_sched_weekday(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_TcsmoltenSalt_TimeOfDeliveryFactors_dispatch_sched_weekday_mset, self->data_ptr);
+}
+
+static PyObject *
+TimeOfDeliveryFactors_get_dispatch_sched_weekend(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_TcsmoltenSalt_TimeOfDeliveryFactors_dispatch_sched_weekend_mget, self->data_ptr);
+}
+
+static int
+TimeOfDeliveryFactors_set_dispatch_sched_weekend(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_TcsmoltenSalt_TimeOfDeliveryFactors_dispatch_sched_weekend_mset, self->data_ptr);
+}
+
+static PyObject *
+TimeOfDeliveryFactors_get_ppa_multiplier_model(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TimeOfDeliveryFactors_ppa_multiplier_model_nget, self->data_ptr);
+}
+
+static int
+TimeOfDeliveryFactors_set_ppa_multiplier_model(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TimeOfDeliveryFactors_ppa_multiplier_model_nset, self->data_ptr);
+}
+
+static PyGetSetDef TimeOfDeliveryFactors_getset[] = {
+{"dispatch_factor1", (getter)TimeOfDeliveryFactors_get_dispatch_factor1,(setter)TimeOfDeliveryFactors_set_dispatch_factor1,
+	PyDoc_STR("*float*: Dispatch payment factor 1\n\n*Required*: True if ppa_multiplier_model=0&csp_financial_model<5&is_dispatch=1"),
+ 	NULL},
+{"dispatch_factor2", (getter)TimeOfDeliveryFactors_get_dispatch_factor2,(setter)TimeOfDeliveryFactors_set_dispatch_factor2,
+	PyDoc_STR("*float*: Dispatch payment factor 2\n\n*Required*: True if ppa_multiplier_model=0&csp_financial_model<5&is_dispatch=1"),
+ 	NULL},
+{"dispatch_factor3", (getter)TimeOfDeliveryFactors_get_dispatch_factor3,(setter)TimeOfDeliveryFactors_set_dispatch_factor3,
+	PyDoc_STR("*float*: Dispatch payment factor 3\n\n*Required*: True if ppa_multiplier_model=0&csp_financial_model<5&is_dispatch=1"),
+ 	NULL},
+{"dispatch_factor4", (getter)TimeOfDeliveryFactors_get_dispatch_factor4,(setter)TimeOfDeliveryFactors_set_dispatch_factor4,
+	PyDoc_STR("*float*: Dispatch payment factor 4\n\n*Required*: True if ppa_multiplier_model=0&csp_financial_model<5&is_dispatch=1"),
+ 	NULL},
+{"dispatch_factor5", (getter)TimeOfDeliveryFactors_get_dispatch_factor5,(setter)TimeOfDeliveryFactors_set_dispatch_factor5,
+	PyDoc_STR("*float*: Dispatch payment factor 5\n\n*Required*: True if ppa_multiplier_model=0&csp_financial_model<5&is_dispatch=1"),
+ 	NULL},
+{"dispatch_factor6", (getter)TimeOfDeliveryFactors_get_dispatch_factor6,(setter)TimeOfDeliveryFactors_set_dispatch_factor6,
+	PyDoc_STR("*float*: Dispatch payment factor 6\n\n*Required*: True if ppa_multiplier_model=0&csp_financial_model<5&is_dispatch=1"),
+ 	NULL},
+{"dispatch_factor7", (getter)TimeOfDeliveryFactors_get_dispatch_factor7,(setter)TimeOfDeliveryFactors_set_dispatch_factor7,
+	PyDoc_STR("*float*: Dispatch payment factor 7\n\n*Required*: True if ppa_multiplier_model=0&csp_financial_model<5&is_dispatch=1"),
+ 	NULL},
+{"dispatch_factor8", (getter)TimeOfDeliveryFactors_get_dispatch_factor8,(setter)TimeOfDeliveryFactors_set_dispatch_factor8,
+	PyDoc_STR("*float*: Dispatch payment factor 8\n\n*Required*: True if ppa_multiplier_model=0&csp_financial_model<5&is_dispatch=1"),
+ 	NULL},
+{"dispatch_factor9", (getter)TimeOfDeliveryFactors_get_dispatch_factor9,(setter)TimeOfDeliveryFactors_set_dispatch_factor9,
+	PyDoc_STR("*float*: Dispatch payment factor 9\n\n*Required*: True if ppa_multiplier_model=0&csp_financial_model<5&is_dispatch=1"),
+ 	NULL},
+{"dispatch_factors_ts", (getter)TimeOfDeliveryFactors_get_dispatch_factors_ts,(setter)TimeOfDeliveryFactors_set_dispatch_factors_ts,
+	PyDoc_STR("*sequence*: Dispatch payment factor array\n\n*Required*: True if ppa_multiplier_model=1&csp_financial_model<5&is_dispatch=1"),
+ 	NULL},
+{"dispatch_sched_weekday", (getter)TimeOfDeliveryFactors_get_dispatch_sched_weekday,(setter)TimeOfDeliveryFactors_set_dispatch_sched_weekday,
+	PyDoc_STR("*sequence[sequence]*: PPA pricing weekday schedule, 12x24\n\n*Required*: True if ppa_multiplier_model=0&csp_financial_model<5&is_dispatch=1"),
+ 	NULL},
+{"dispatch_sched_weekend", (getter)TimeOfDeliveryFactors_get_dispatch_sched_weekend,(setter)TimeOfDeliveryFactors_set_dispatch_sched_weekend,
+	PyDoc_STR("*sequence[sequence]*: PPA pricing weekend schedule, 12x24\n\n*Required*: True if ppa_multiplier_model=0&csp_financial_model<5&is_dispatch=1"),
+ 	NULL},
+{"ppa_multiplier_model", (getter)TimeOfDeliveryFactors_get_ppa_multiplier_model,(setter)TimeOfDeliveryFactors_set_ppa_multiplier_model,
+	PyDoc_STR("*float*: PPA multiplier model 0: dispatch factors dispatch_factorX, 1: hourly multipliers dispatch_factors_ts [0/1]\n\n*Options*: 0=diurnal,1=timestep\n\n*Constraints*: INTEGER,MIN=0\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+	{NULL}  /* Sentinel */
+};
+
+static PyTypeObject TimeOfDeliveryFactors_Type = {
+		/* The ob_type field must be initialized in the module init function
+		 * to be portable to Windows without using C++. */
+		PyVarObject_HEAD_INIT(NULL, 0)
+		"TcsmoltenSalt.TimeOfDeliveryFactors",             /*tp_name*/
+		sizeof(VarGroupObject),          /*tp_basicsize*/
+		0,                          /*tp_itemsize*/
+		/* methods */
+		0,    /*tp_dealloc*/
+		0,                          /*tp_print*/
+		(getattrfunc)0,             /*tp_getattr*/
+		0,                          /*tp_setattr*/
+		0,                          /*tp_reserved*/
+		0,                          /*tp_repr*/
+		0,                          /*tp_as_number*/
+		0,                          /*tp_as_sequence*/
+		0,                          /*tp_as_mapping*/
+		0,                          /*tp_hash*/
+		0,                          /*tp_call*/
+		0,                          /*tp_str*/
+		0,                          /*tp_getattro*/
+		0,                          /*tp_setattro*/
+		0,                          /*tp_as_buffer*/
+		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
+		0,                          /*tp_doc*/
+		0,                          /*tp_traverse*/
+		0,                          /*tp_clear*/
+		0,                          /*tp_richcompare*/
+		0,                          /*tp_weaklistofnset*/
+		0,                          /*tp_iter*/
+		0,                          /*tp_iternext*/
+		TimeOfDeliveryFactors_methods,         /*tp_methods*/
+		0,                          /*tp_members*/
+		TimeOfDeliveryFactors_getset,          /*tp_getset*/
 		0,                          /*tp_base*/
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
@@ -2003,6 +2018,18 @@ HeliostatField_set_p_track(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyObject *
+HeliostatField_get_receiver_type(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_HeliostatField_receiver_type_nget, self->data_ptr);
+}
+
+static int
+HeliostatField_set_receiver_type(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_HeliostatField_receiver_type_nset, self->data_ptr);
+}
+
+static PyObject *
 HeliostatField_get_v_wind_max(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_TcsmoltenSalt_HeliostatField_v_wind_max_nget, self->data_ptr);
@@ -2142,7 +2169,7 @@ static PyGetSetDef HeliostatField_getset[] = {
 	PyDoc_STR("*float*: Number of heliostat facets - Y\n\n*Required*: True"),
  	NULL},
 {"opt_algorithm", (getter)HeliostatField_get_opt_algorithm,(setter)HeliostatField_set_opt_algorithm,
-	PyDoc_STR("*float*: Optimization algorithm\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Optimization algorithm\n\n*Required*: If not provided, assumed to be 1"),
  	NULL},
 {"opt_conv_tol", (getter)HeliostatField_get_opt_conv_tol,(setter)HeliostatField_set_opt_conv_tol,
 	PyDoc_STR("*float*: Optimization convergence tolerance\n\n*Required*: If not provided, assumed to be 0.001"),
@@ -2161,6 +2188,9 @@ static PyGetSetDef HeliostatField_getset[] = {
  	NULL},
 {"p_track", (getter)HeliostatField_get_p_track,(setter)HeliostatField_set_p_track,
 	PyDoc_STR("*float*: Heliostat tracking energy [kWe]\n\n*Required*: True"),
+ 	NULL},
+{"receiver_type", (getter)HeliostatField_get_receiver_type,(setter)HeliostatField_set_receiver_type,
+	PyDoc_STR("*float*: 0: external (default), 1; cavity\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"v_wind_max", (getter)HeliostatField_get_v_wind_max,(setter)HeliostatField_set_v_wind_max,
 	PyDoc_STR("*float*: Heliostat max wind velocity [m/s]\n\n*Required*: True"),
@@ -2586,6 +2616,66 @@ TowerAndReceiver_set_N_panels(VarGroupObject *self, PyObject *value, void *closu
 }
 
 static PyObject *
+TowerAndReceiver_get_cav_rec_height(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_cav_rec_height_nget, self->data_ptr);
+}
+
+static int
+TowerAndReceiver_set_cav_rec_height(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_cav_rec_height_nset, self->data_ptr);
+}
+
+static PyObject *
+TowerAndReceiver_get_cav_rec_passive_abs(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_cav_rec_passive_abs_nget, self->data_ptr);
+}
+
+static int
+TowerAndReceiver_set_cav_rec_passive_abs(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_cav_rec_passive_abs_nset, self->data_ptr);
+}
+
+static PyObject *
+TowerAndReceiver_get_cav_rec_passive_eps(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_cav_rec_passive_eps_nget, self->data_ptr);
+}
+
+static int
+TowerAndReceiver_set_cav_rec_passive_eps(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_cav_rec_passive_eps_nset, self->data_ptr);
+}
+
+static PyObject *
+TowerAndReceiver_get_cav_rec_span(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_cav_rec_span_nget, self->data_ptr);
+}
+
+static int
+TowerAndReceiver_set_cav_rec_span(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_cav_rec_span_nset, self->data_ptr);
+}
+
+static PyObject *
+TowerAndReceiver_get_cav_rec_width(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_cav_rec_width_nget, self->data_ptr);
+}
+
+static int
+TowerAndReceiver_set_cav_rec_width(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_cav_rec_width_nset, self->data_ptr);
+}
+
+static PyObject *
 TowerAndReceiver_get_crossover_shift(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_crossover_shift_nget, self->data_ptr);
@@ -2826,6 +2916,18 @@ TowerAndReceiver_set_min_preheat_time(VarGroupObject *self, PyObject *value, voi
 }
 
 static PyObject *
+TowerAndReceiver_get_n_cav_rec_panels(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_n_cav_rec_panels_nget, self->data_ptr);
+}
+
+static int
+TowerAndReceiver_set_n_cav_rec_panels(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_n_cav_rec_panels_nset, self->data_ptr);
+}
+
+static PyObject *
 TowerAndReceiver_get_n_flux_days(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_n_flux_days_nget, self->data_ptr);
@@ -2871,6 +2973,18 @@ static int
 TowerAndReceiver_set_piping_loss(VarGroupObject *self, PyObject *value, void *closure)
 {
 	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_piping_loss_nset, self->data_ptr);
+}
+
+static PyObject *
+TowerAndReceiver_get_piping_loss_coefficient(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_TowerAndReceiver_piping_loss_coefficient_nget, self->data_ptr);
+}
+
+static int
+TowerAndReceiver_set_piping_loss_coefficient(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_TowerAndReceiver_piping_loss_coefficient_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -3087,6 +3201,21 @@ static PyGetSetDef TowerAndReceiver_getset[] = {
 {"N_panels", (getter)TowerAndReceiver_get_N_panels,(setter)TowerAndReceiver_set_N_panels,
 	PyDoc_STR("*float*: Number of individual panels on the receiver\n\n*Constraints*: INTEGER\n\n*Required*: True"),
  	NULL},
+{"cav_rec_height", (getter)TowerAndReceiver_get_cav_rec_height,(setter)TowerAndReceiver_set_cav_rec_height,
+	PyDoc_STR("*float*: Cavity receiver height [m]\n\n*Required*: True if receiver_type=1"),
+ 	NULL},
+{"cav_rec_passive_abs", (getter)TowerAndReceiver_get_cav_rec_passive_abs,(setter)TowerAndReceiver_set_cav_rec_passive_abs,
+	PyDoc_STR("*float*: Cavity receiver passive surface solar absorptance\n\n*Required*: True if receiver_type=1"),
+ 	NULL},
+{"cav_rec_passive_eps", (getter)TowerAndReceiver_get_cav_rec_passive_eps,(setter)TowerAndReceiver_set_cav_rec_passive_eps,
+	PyDoc_STR("*float*: Cavity receiver passive surface thermal emissivity\n\n*Required*: True if receiver_type=1"),
+ 	NULL},
+{"cav_rec_span", (getter)TowerAndReceiver_get_cav_rec_span,(setter)TowerAndReceiver_set_cav_rec_span,
+	PyDoc_STR("*float*: Cavity receiver span angle [deg]\n\n*Required*: True if receiver_type=1"),
+ 	NULL},
+{"cav_rec_width", (getter)TowerAndReceiver_get_cav_rec_width,(setter)TowerAndReceiver_set_cav_rec_width,
+	PyDoc_STR("*float*: Cavity receiver width [m]\n\n*Required*: True if receiver_type=1"),
+ 	NULL},
 {"crossover_shift", (getter)TowerAndReceiver_get_crossover_shift,(setter)TowerAndReceiver_set_crossover_shift,
 	PyDoc_STR("*float*: Number of panels shift in receiver crossover position\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
@@ -3147,6 +3276,9 @@ static PyGetSetDef TowerAndReceiver_getset[] = {
 {"min_preheat_time", (getter)TowerAndReceiver_get_min_preheat_time,(setter)TowerAndReceiver_set_min_preheat_time,
 	PyDoc_STR("*float*: Minimum time required in preheat startup stage [hr]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
+{"n_cav_rec_panels", (getter)TowerAndReceiver_get_n_cav_rec_panels,(setter)TowerAndReceiver_set_n_cav_rec_panels,
+	PyDoc_STR("*float*: Cavity receiver number of panels\n\n*Required*: True if receiver_type=1"),
+ 	NULL},
 {"n_flux_days", (getter)TowerAndReceiver_get_n_flux_days,(setter)TowerAndReceiver_set_n_flux_days,
 	PyDoc_STR("*float*: Number of days in flux map lookup\n\n*Required*: If not provided, assumed to be 8"),
  	NULL},
@@ -3157,7 +3289,10 @@ static PyGetSetDef TowerAndReceiver_getset[] = {
 	PyDoc_STR("*float*: Piping length multiplier\n\n*Required*: True"),
  	NULL},
 {"piping_loss", (getter)TowerAndReceiver_get_piping_loss,(setter)TowerAndReceiver_set_piping_loss,
-	PyDoc_STR("*float*: Thermal loss per meter of piping [Wt/m]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Thermal loss per meter of piping [Wt/m]"),
+ 	NULL},
+{"piping_loss_coefficient", (getter)TowerAndReceiver_get_piping_loss_coefficient,(setter)TowerAndReceiver_set_piping_loss_coefficient,
+	PyDoc_STR("*float*: Thermal loss per meter of piping [Wt/m2-K]"),
  	NULL},
 {"preheat_flux", (getter)TowerAndReceiver_get_preheat_flux,(setter)TowerAndReceiver_set_preheat_flux,
 	PyDoc_STR("*float*: Tube absorbed solar flux during preheat [kW/m2]\n\n*Required*: If not provided, assumed to be 50.0"),
@@ -4136,6 +4271,188 @@ static PyTypeObject FinancialParameters_Type = {
 		FinancialParameters_methods,         /*tp_methods*/
 		0,                          /*tp_members*/
 		FinancialParameters_getset,          /*tp_getset*/
+		0,                          /*tp_base*/
+		0,                          /*tp_dict*/
+		0,                          /*tp_descr_get*/
+		0,                          /*tp_descr_set*/
+		0,                          /*tp_dictofnset*/
+		0,                          /*tp_init*/
+		0,                          /*tp_alloc*/
+		0,             /*tp_new*/
+		0,                          /*tp_free*/
+		0,                          /*tp_is_gc*/
+};
+
+
+/*
+ * ParallelHeater Group
+ */ 
+
+static PyTypeObject ParallelHeater_Type;
+
+static PyObject *
+ParallelHeater_new(SAM_TcsmoltenSalt data_ptr)
+{
+	PyObject* new_obj = ParallelHeater_Type.tp_alloc(&ParallelHeater_Type,0);
+
+	VarGroupObject* ParallelHeater_obj = (VarGroupObject*)new_obj;
+
+	ParallelHeater_obj->data_ptr = (SAM_table)data_ptr;
+
+	return new_obj;
+}
+
+/* ParallelHeater methods */
+
+static PyObject *
+ParallelHeater_assign(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "TcsmoltenSalt", "ParallelHeater")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+ParallelHeater_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &ParallelHeater_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "TcsmoltenSalt", "ParallelHeater")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+ParallelHeater_export(VarGroupObject *self, PyObject *args)
+{
+	PyTypeObject* tp = &ParallelHeater_Type;
+	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
+	return dict;
+}
+
+static PyMethodDef ParallelHeater_methods[] = {
+		{"assign",            (PyCFunction)ParallelHeater_assign,  METH_VARARGS,
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``ParallelHeater_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)ParallelHeater_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``ParallelHeater_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)ParallelHeater_export,  METH_VARARGS,
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+		{NULL,              NULL}           /* sentinel */
+};
+
+static PyObject *
+ParallelHeater_get_f_q_dot_des_allowable_su(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_ParallelHeater_f_q_dot_des_allowable_su_nget, self->data_ptr);
+}
+
+static int
+ParallelHeater_set_f_q_dot_des_allowable_su(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_ParallelHeater_f_q_dot_des_allowable_su_nset, self->data_ptr);
+}
+
+static PyObject *
+ParallelHeater_get_f_q_dot_heater_min(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_ParallelHeater_f_q_dot_heater_min_nget, self->data_ptr);
+}
+
+static int
+ParallelHeater_set_f_q_dot_heater_min(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_ParallelHeater_f_q_dot_heater_min_nset, self->data_ptr);
+}
+
+static PyObject *
+ParallelHeater_get_heater_mult(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_ParallelHeater_heater_mult_nget, self->data_ptr);
+}
+
+static int
+ParallelHeater_set_heater_mult(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_ParallelHeater_heater_mult_nset, self->data_ptr);
+}
+
+static PyObject *
+ParallelHeater_get_hrs_startup_at_max_rate(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_ParallelHeater_hrs_startup_at_max_rate_nget, self->data_ptr);
+}
+
+static int
+ParallelHeater_set_hrs_startup_at_max_rate(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_ParallelHeater_hrs_startup_at_max_rate_nset, self->data_ptr);
+}
+
+static PyGetSetDef ParallelHeater_getset[] = {
+{"f_q_dot_des_allowable_su", (getter)ParallelHeater_get_f_q_dot_des_allowable_su,(setter)ParallelHeater_set_f_q_dot_des_allowable_su,
+	PyDoc_STR("*float*: Fraction of design power allowed during startup [-]\n\n*Required*: True if is_parallel_htr=1"),
+ 	NULL},
+{"f_q_dot_heater_min", (getter)ParallelHeater_get_f_q_dot_heater_min,(setter)ParallelHeater_set_f_q_dot_heater_min,
+	PyDoc_STR("*float*: Minimum allowable heater output as fraction of design\n\n*Required*: True if is_parallel_htr=1"),
+ 	NULL},
+{"heater_mult", (getter)ParallelHeater_get_heater_mult,(setter)ParallelHeater_set_heater_mult,
+	PyDoc_STR("*float*: Heater multiple relative to design cycle thermal power [-]\n\n*Required*: True if is_parallel_htr=1"),
+ 	NULL},
+{"hrs_startup_at_max_rate", (getter)ParallelHeater_get_hrs_startup_at_max_rate,(setter)ParallelHeater_set_hrs_startup_at_max_rate,
+	PyDoc_STR("*float*: Duration of startup at max startup power [hr]\n\n*Required*: True if is_parallel_htr=1"),
+ 	NULL},
+	{NULL}  /* Sentinel */
+};
+
+static PyTypeObject ParallelHeater_Type = {
+		/* The ob_type field must be initialized in the module init function
+		 * to be portable to Windows without using C++. */
+		PyVarObject_HEAD_INIT(NULL, 0)
+		"TcsmoltenSalt.ParallelHeater",             /*tp_name*/
+		sizeof(VarGroupObject),          /*tp_basicsize*/
+		0,                          /*tp_itemsize*/
+		/* methods */
+		0,    /*tp_dealloc*/
+		0,                          /*tp_print*/
+		(getattrfunc)0,             /*tp_getattr*/
+		0,                          /*tp_setattr*/
+		0,                          /*tp_reserved*/
+		0,                          /*tp_repr*/
+		0,                          /*tp_as_number*/
+		0,                          /*tp_as_sequence*/
+		0,                          /*tp_as_mapping*/
+		0,                          /*tp_hash*/
+		0,                          /*tp_call*/
+		0,                          /*tp_str*/
+		0,                          /*tp_getattro*/
+		0,                          /*tp_setattro*/
+		0,                          /*tp_as_buffer*/
+		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
+		0,                          /*tp_doc*/
+		0,                          /*tp_traverse*/
+		0,                          /*tp_clear*/
+		0,                          /*tp_richcompare*/
+		0,                          /*tp_weaklistofnset*/
+		0,                          /*tp_iter*/
+		0,                          /*tp_iternext*/
+		ParallelHeater_methods,         /*tp_methods*/
+		0,                          /*tp_members*/
+		ParallelHeater_getset,          /*tp_getset*/
 		0,                          /*tp_base*/
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
@@ -5189,7 +5506,7 @@ static PyGetSetDef PowerCycle_getset[] = {
 	PyDoc_STR("*float*: Pumping power to move 1kg of HTF through PB loop [kW/kg]\n\n*Required*: True"),
  	NULL},
 {"pc_config", (getter)PowerCycle_get_pc_config,(setter)PowerCycle_set_pc_config,
-	PyDoc_STR("*float*: PC configuration 0=Steam Rankine (224), 1=user defined, 2=sCO2 Recompression (424)\n\n*Constraints*: INTEGER\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: PC configuration 0=Steam Rankine (224), 1=user defined\n\n*Constraints*: INTEGER\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"q_sby_frac", (getter)PowerCycle_get_q_sby_frac,(setter)PowerCycle_set_q_sby_frac,
 	PyDoc_STR("*float*: Fraction of thermal power required for standby\n\n*Required*: True"),
@@ -5705,34 +6022,34 @@ static PyTypeObject UserDefinedPowerCycle_Type = {
 
 
 /*
- * SCO2Cycle Group
+ * FinancialSolutionMode Group
  */ 
 
-static PyTypeObject SCO2Cycle_Type;
+static PyTypeObject FinancialSolutionMode_Type;
 
 static PyObject *
-SCO2Cycle_new(SAM_TcsmoltenSalt data_ptr)
+FinancialSolutionMode_new(SAM_TcsmoltenSalt data_ptr)
 {
-	PyObject* new_obj = SCO2Cycle_Type.tp_alloc(&SCO2Cycle_Type,0);
+	PyObject* new_obj = FinancialSolutionMode_Type.tp_alloc(&FinancialSolutionMode_Type,0);
 
-	VarGroupObject* SCO2Cycle_obj = (VarGroupObject*)new_obj;
+	VarGroupObject* FinancialSolutionMode_obj = (VarGroupObject*)new_obj;
 
-	SCO2Cycle_obj->data_ptr = (SAM_table)data_ptr;
+	FinancialSolutionMode_obj->data_ptr = (SAM_table)data_ptr;
 
 	return new_obj;
 }
 
-/* SCO2Cycle methods */
+/* FinancialSolutionMode methods */
 
 static PyObject *
-SCO2Cycle_assign(VarGroupObject *self, PyObject *args)
+FinancialSolutionMode_assign(VarGroupObject *self, PyObject *args)
 {
 	PyObject* dict;
 	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "TcsmoltenSalt", "SCO2Cycle")){
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "TcsmoltenSalt", "FinancialSolutionMode")){
 		return NULL;
 	}
 
@@ -5741,15 +6058,15 @@ SCO2Cycle_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
-SCO2Cycle_replace(VarGroupObject *self, PyObject *args)
+FinancialSolutionMode_replace(VarGroupObject *self, PyObject *args)
 {
 	PyObject* dict;
 	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
 		return NULL;
 	}
-	PyTypeObject* tp = &SCO2Cycle_Type;
+	PyTypeObject* tp = &FinancialSolutionMode_Type;
 
-	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "TcsmoltenSalt", "SCO2Cycle")){
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "TcsmoltenSalt", "FinancialSolutionMode")){
 		return NULL;
 	}
 
@@ -5758,482 +6075,47 @@ SCO2Cycle_replace(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
-SCO2Cycle_export(VarGroupObject *self, PyObject *args)
+FinancialSolutionMode_export(VarGroupObject *self, PyObject *args)
 {
-	PyTypeObject* tp = &SCO2Cycle_Type;
+	PyTypeObject* tp = &FinancialSolutionMode_Type;
 	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
 	return dict;
 }
 
-static PyMethodDef SCO2Cycle_methods[] = {
-		{"assign",            (PyCFunction)SCO2Cycle_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``SCO2Cycle_vals = { var: val, ...}``")},
-		{"replace",            (PyCFunction)SCO2Cycle_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``SCO2Cycle_vals = { var: val, ...}``")},
-		{"export",            (PyCFunction)SCO2Cycle_export,  METH_VARARGS,
+static PyMethodDef FinancialSolutionMode_methods[] = {
+		{"assign",            (PyCFunction)FinancialSolutionMode_assign,  METH_VARARGS,
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``FinancialSolutionMode_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)FinancialSolutionMode_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``FinancialSolutionMode_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)FinancialSolutionMode_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 static PyObject *
-SCO2Cycle_get_P_high_limit(VarGroupObject *self, void *closure)
+FinancialSolutionMode_get_ppa_soln_mode(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsmoltenSalt_SCO2Cycle_P_high_limit_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcsmoltenSalt_FinancialSolutionMode_ppa_soln_mode_nget, self->data_ptr);
 }
 
 static int
-SCO2Cycle_set_P_high_limit(VarGroupObject *self, PyObject *value, void *closure)
+FinancialSolutionMode_set_ppa_soln_mode(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SCO2Cycle_P_high_limit_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_FinancialSolutionMode_ppa_soln_mode_nset, self->data_ptr);
 }
 
-static PyObject *
-SCO2Cycle_get__sco2_P_high_limit(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_SCO2Cycle__sco2_P_high_limit_nget, self->data_ptr);
-}
-
-static int
-SCO2Cycle_set__sco2_P_high_limit(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SCO2Cycle__sco2_P_high_limit_nset, self->data_ptr);
-}
-
-static PyObject *
-SCO2Cycle_get__sco2_P_ref(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_SCO2Cycle__sco2_P_ref_nget, self->data_ptr);
-}
-
-static int
-SCO2Cycle_set__sco2_P_ref(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SCO2Cycle__sco2_P_ref_nset, self->data_ptr);
-}
-
-static PyObject *
-SCO2Cycle_get__sco2_T_amb_des(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_SCO2Cycle__sco2_T_amb_des_nget, self->data_ptr);
-}
-
-static int
-SCO2Cycle_set__sco2_T_amb_des(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SCO2Cycle__sco2_T_amb_des_nset, self->data_ptr);
-}
-
-static PyObject *
-SCO2Cycle_get__sco2_T_approach(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_SCO2Cycle__sco2_T_approach_nget, self->data_ptr);
-}
-
-static int
-SCO2Cycle_set__sco2_T_approach(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SCO2Cycle__sco2_T_approach_nset, self->data_ptr);
-}
-
-static PyObject *
-SCO2Cycle_get__sco2_T_htf_hot_des(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_SCO2Cycle__sco2_T_htf_hot_des_nget, self->data_ptr);
-}
-
-static int
-SCO2Cycle_set__sco2_T_htf_hot_des(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SCO2Cycle__sco2_T_htf_hot_des_nset, self->data_ptr);
-}
-
-static PyObject *
-SCO2Cycle_get__sco2_deltaT_PHX(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_SCO2Cycle__sco2_deltaT_PHX_nget, self->data_ptr);
-}
-
-static int
-SCO2Cycle_set__sco2_deltaT_PHX(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SCO2Cycle__sco2_deltaT_PHX_nset, self->data_ptr);
-}
-
-static PyObject *
-SCO2Cycle_get__sco2_design_eff(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_SCO2Cycle__sco2_design_eff_nget, self->data_ptr);
-}
-
-static int
-SCO2Cycle_set__sco2_design_eff(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SCO2Cycle__sco2_design_eff_nset, self->data_ptr);
-}
-
-static PyObject *
-SCO2Cycle_get__sco2_eta_c(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_SCO2Cycle__sco2_eta_c_nget, self->data_ptr);
-}
-
-static int
-SCO2Cycle_set__sco2_eta_c(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SCO2Cycle__sco2_eta_c_nset, self->data_ptr);
-}
-
-static PyObject *
-SCO2Cycle_get__sco2_eta_t(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_SCO2Cycle__sco2_eta_t_nget, self->data_ptr);
-}
-
-static int
-SCO2Cycle_set__sco2_eta_t(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SCO2Cycle__sco2_eta_t_nset, self->data_ptr);
-}
-
-static PyObject *
-SCO2Cycle_get__sco2_recup_eff_max(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_SCO2Cycle__sco2_recup_eff_max_nget, self->data_ptr);
-}
-
-static int
-SCO2Cycle_set__sco2_recup_eff_max(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SCO2Cycle__sco2_recup_eff_max_nset, self->data_ptr);
-}
-
-static PyObject *
-SCO2Cycle_get_deltaT_PHX(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_SCO2Cycle_deltaT_PHX_nget, self->data_ptr);
-}
-
-static int
-SCO2Cycle_set_deltaT_PHX(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SCO2Cycle_deltaT_PHX_nset, self->data_ptr);
-}
-
-static PyObject *
-SCO2Cycle_get_eta_c(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_SCO2Cycle_eta_c_nget, self->data_ptr);
-}
-
-static int
-SCO2Cycle_set_eta_c(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SCO2Cycle_eta_c_nset, self->data_ptr);
-}
-
-static PyObject *
-SCO2Cycle_get_eta_t(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_SCO2Cycle_eta_t_nget, self->data_ptr);
-}
-
-static int
-SCO2Cycle_set_eta_t(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SCO2Cycle_eta_t_nset, self->data_ptr);
-}
-
-static PyObject *
-SCO2Cycle_get_fan_power_perc_net(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_SCO2Cycle_fan_power_perc_net_nget, self->data_ptr);
-}
-
-static int
-SCO2Cycle_set_fan_power_perc_net(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SCO2Cycle_fan_power_perc_net_nset, self->data_ptr);
-}
-
-static PyObject *
-SCO2Cycle_get_is_sco2_preprocess(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_SCO2Cycle_is_sco2_preprocess_nget, self->data_ptr);
-}
-
-static int
-SCO2Cycle_set_is_sco2_preprocess(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SCO2Cycle_is_sco2_preprocess_nset, self->data_ptr);
-}
-
-static PyObject *
-SCO2Cycle_get_recup_eff_max(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_SCO2Cycle_recup_eff_max_nget, self->data_ptr);
-}
-
-static int
-SCO2Cycle_set_recup_eff_max(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SCO2Cycle_recup_eff_max_nset, self->data_ptr);
-}
-
-static PyObject *
-SCO2Cycle_get_sco2_T_amb_des(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_SCO2Cycle_sco2_T_amb_des_nget, self->data_ptr);
-}
-
-static int
-SCO2Cycle_set_sco2_T_amb_des(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SCO2Cycle_sco2_T_amb_des_nset, self->data_ptr);
-}
-
-static PyObject *
-SCO2Cycle_get_sco2_T_approach(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_SCO2Cycle_sco2_T_approach_nget, self->data_ptr);
-}
-
-static int
-SCO2Cycle_set_sco2_T_approach(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SCO2Cycle_sco2_T_approach_nset, self->data_ptr);
-}
-
-static PyObject *
-SCO2Cycle_get_sco2_cycle_config(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_SCO2Cycle_sco2_cycle_config_nget, self->data_ptr);
-}
-
-static int
-SCO2Cycle_set_sco2_cycle_config(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SCO2Cycle_sco2_cycle_config_nset, self->data_ptr);
-}
-
-static PyObject *
-SCO2Cycle_get_sco2ud_T_amb_high(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_SCO2Cycle_sco2ud_T_amb_high_nget, self->data_ptr);
-}
-
-static int
-SCO2Cycle_set_sco2ud_T_amb_high(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SCO2Cycle_sco2ud_T_amb_high_nset, self->data_ptr);
-}
-
-static PyObject *
-SCO2Cycle_get_sco2ud_T_amb_ind_od(VarGroupObject *self, void *closure)
-{
-	return PySAM_matrix_getter(SAM_TcsmoltenSalt_SCO2Cycle_sco2ud_T_amb_ind_od_mget, self->data_ptr);
-}
-
-static int
-SCO2Cycle_set_sco2ud_T_amb_ind_od(VarGroupObject *self, PyObject *value, void *closure)
-{
-		return PySAM_matrix_setter(value, SAM_TcsmoltenSalt_SCO2Cycle_sco2ud_T_amb_ind_od_mset, self->data_ptr);
-}
-
-static PyObject *
-SCO2Cycle_get_sco2ud_T_amb_low(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_SCO2Cycle_sco2ud_T_amb_low_nget, self->data_ptr);
-}
-
-static int
-SCO2Cycle_set_sco2ud_T_amb_low(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SCO2Cycle_sco2ud_T_amb_low_nset, self->data_ptr);
-}
-
-static PyObject *
-SCO2Cycle_get_sco2ud_T_htf_cold_calc(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_SCO2Cycle_sco2ud_T_htf_cold_calc_nget, self->data_ptr);
-}
-
-static int
-SCO2Cycle_set_sco2ud_T_htf_cold_calc(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SCO2Cycle_sco2ud_T_htf_cold_calc_nset, self->data_ptr);
-}
-
-static PyObject *
-SCO2Cycle_get_sco2ud_T_htf_high(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_SCO2Cycle_sco2ud_T_htf_high_nget, self->data_ptr);
-}
-
-static int
-SCO2Cycle_set_sco2ud_T_htf_high(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SCO2Cycle_sco2ud_T_htf_high_nset, self->data_ptr);
-}
-
-static PyObject *
-SCO2Cycle_get_sco2ud_T_htf_ind_od(VarGroupObject *self, void *closure)
-{
-	return PySAM_matrix_getter(SAM_TcsmoltenSalt_SCO2Cycle_sco2ud_T_htf_ind_od_mget, self->data_ptr);
-}
-
-static int
-SCO2Cycle_set_sco2ud_T_htf_ind_od(VarGroupObject *self, PyObject *value, void *closure)
-{
-		return PySAM_matrix_setter(value, SAM_TcsmoltenSalt_SCO2Cycle_sco2ud_T_htf_ind_od_mset, self->data_ptr);
-}
-
-static PyObject *
-SCO2Cycle_get_sco2ud_T_htf_low(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_SCO2Cycle_sco2ud_T_htf_low_nget, self->data_ptr);
-}
-
-static int
-SCO2Cycle_set_sco2ud_T_htf_low(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SCO2Cycle_sco2ud_T_htf_low_nset, self->data_ptr);
-}
-
-static PyObject *
-SCO2Cycle_get_sco2ud_m_dot_htf_high(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_SCO2Cycle_sco2ud_m_dot_htf_high_nget, self->data_ptr);
-}
-
-static int
-SCO2Cycle_set_sco2ud_m_dot_htf_high(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SCO2Cycle_sco2ud_m_dot_htf_high_nset, self->data_ptr);
-}
-
-static PyObject *
-SCO2Cycle_get_sco2ud_m_dot_htf_ind_od(VarGroupObject *self, void *closure)
-{
-	return PySAM_matrix_getter(SAM_TcsmoltenSalt_SCO2Cycle_sco2ud_m_dot_htf_ind_od_mget, self->data_ptr);
-}
-
-static int
-SCO2Cycle_set_sco2ud_m_dot_htf_ind_od(VarGroupObject *self, PyObject *value, void *closure)
-{
-		return PySAM_matrix_setter(value, SAM_TcsmoltenSalt_SCO2Cycle_sco2ud_m_dot_htf_ind_od_mset, self->data_ptr);
-}
-
-static PyObject *
-SCO2Cycle_get_sco2ud_m_dot_htf_low(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_SCO2Cycle_sco2ud_m_dot_htf_low_nget, self->data_ptr);
-}
-
-static int
-SCO2Cycle_set_sco2ud_m_dot_htf_low(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SCO2Cycle_sco2ud_m_dot_htf_low_nset, self->data_ptr);
-}
-
-static PyGetSetDef SCO2Cycle_getset[] = {
-{"P_high_limit", (getter)SCO2Cycle_get_P_high_limit,(setter)SCO2Cycle_set_P_high_limit,
-	PyDoc_STR("*float*: Upper pressure limit in cycle [MPa]\n\n*Required*: True if pc_config=2"),
- 	NULL},
-{"_sco2_P_high_limit", (getter)SCO2Cycle_get__sco2_P_high_limit,(setter)SCO2Cycle_set__sco2_P_high_limit,
-	PyDoc_STR("*float*: Preprocess input: upper pressure limit [MPa]\n\n*Required*: True if is_sco2_preprocess=1"),
- 	NULL},
-{"_sco2_P_ref", (getter)SCO2Cycle_get__sco2_P_ref,(setter)SCO2Cycle_set__sco2_P_ref,
-	PyDoc_STR("*float*: Preprocess input: gross power output [MWe]\n\n*Info*: sco2_pc_pre"),
- 	NULL},
-{"_sco2_T_amb_des", (getter)SCO2Cycle_get__sco2_T_amb_des,(setter)SCO2Cycle_set__sco2_T_amb_des,
-	PyDoc_STR("*float*: Preprocess input: design ambient temperature [C]\n\n*Required*: True if is_sco2_preprocess=1"),
- 	NULL},
-{"_sco2_T_approach", (getter)SCO2Cycle_get__sco2_T_approach,(setter)SCO2Cycle_set__sco2_T_approach,
-	PyDoc_STR("*float*: Preprocess input: compressor approach temperature [C]\n\n*Required*: True if is_sco2_preprocess=1"),
- 	NULL},
-{"_sco2_T_htf_hot_des", (getter)SCO2Cycle_get__sco2_T_htf_hot_des,(setter)SCO2Cycle_set__sco2_T_htf_hot_des,
-	PyDoc_STR("*float*: Preprocess input: HTF hot temperature [C]\n\n*Required*: True if is_sco2_preprocess=1"),
- 	NULL},
-{"_sco2_deltaT_PHX", (getter)SCO2Cycle_get__sco2_deltaT_PHX,(setter)SCO2Cycle_set__sco2_deltaT_PHX,
-	PyDoc_STR("*float*: Preprocess input: PHX approach temperature [C]\n\n*Required*: True if is_sco2_preprocess=1"),
- 	NULL},
-{"_sco2_design_eff", (getter)SCO2Cycle_get__sco2_design_eff,(setter)SCO2Cycle_set__sco2_design_eff,
-	PyDoc_STR("*float*: Preprocess input: cycle thermal efficiency\n\n*Required*: True if is_sco2_preprocess=1"),
- 	NULL},
-{"_sco2_eta_c", (getter)SCO2Cycle_get__sco2_eta_c,(setter)SCO2Cycle_set__sco2_eta_c,
-	PyDoc_STR("*float*: Preprocess input: compressor isentropic efficiency\n\n*Required*: True if is_sco2_preprocess=1"),
- 	NULL},
-{"_sco2_eta_t", (getter)SCO2Cycle_get__sco2_eta_t,(setter)SCO2Cycle_set__sco2_eta_t,
-	PyDoc_STR("*float*: Preprocess input: turbine isentropic efficiency\n\n*Required*: True if is_sco2_preprocess=1"),
- 	NULL},
-{"_sco2_recup_eff_max", (getter)SCO2Cycle_get__sco2_recup_eff_max,(setter)SCO2Cycle_set__sco2_recup_eff_max,
-	PyDoc_STR("*float*: Preprocess input: max recuperator effectiveness\n\n*Required*: True if is_sco2_preprocess=1"),
- 	NULL},
-{"deltaT_PHX", (getter)SCO2Cycle_get_deltaT_PHX,(setter)SCO2Cycle_set_deltaT_PHX,
-	PyDoc_STR("*float*: Design temperature difference in PHX [C]\n\n*Required*: True if pc_config=2"),
- 	NULL},
-{"eta_c", (getter)SCO2Cycle_get_eta_c,(setter)SCO2Cycle_set_eta_c,
-	PyDoc_STR("*float*: Isentropic efficiency of compressor(s)\n\n*Required*: True if pc_config=2"),
- 	NULL},
-{"eta_t", (getter)SCO2Cycle_get_eta_t,(setter)SCO2Cycle_set_eta_t,
-	PyDoc_STR("*float*: Isentropic efficiency of turbine\n\n*Required*: True if pc_config=2"),
- 	NULL},
-{"fan_power_perc_net", (getter)SCO2Cycle_get_fan_power_perc_net,(setter)SCO2Cycle_set_fan_power_perc_net,
-	PyDoc_STR("*float*: Percent of net cycle output used for fan power at design [%]\n\n*Required*: True if pc_config=2"),
- 	NULL},
-{"is_sco2_preprocess", (getter)SCO2Cycle_get_is_sco2_preprocess,(setter)SCO2Cycle_set_is_sco2_preprocess,
-	PyDoc_STR("*float*: Is sco2 off-design performance preprocessed? 1=yes\n\n*Required*: If not provided, assumed to be 0"),
- 	NULL},
-{"recup_eff_max", (getter)SCO2Cycle_get_recup_eff_max,(setter)SCO2Cycle_set_recup_eff_max,
-	PyDoc_STR("*float*: Maximum recuperator effectiveness\n\n*Required*: True if pc_config=2"),
- 	NULL},
-{"sco2_T_amb_des", (getter)SCO2Cycle_get_sco2_T_amb_des,(setter)SCO2Cycle_set_sco2_T_amb_des,
-	PyDoc_STR("*float*: Ambient temperature at design point [C]\n\n*Required*: True if pc_config=2"),
- 	NULL},
-{"sco2_T_approach", (getter)SCO2Cycle_get_sco2_T_approach,(setter)SCO2Cycle_set_sco2_T_approach,
-	PyDoc_STR("*float*: Temperature difference between main compressor CO2 inlet and ambient air [C]\n\n*Required*: True if pc_config=2"),
- 	NULL},
-{"sco2_cycle_config", (getter)SCO2Cycle_get_sco2_cycle_config,(setter)SCO2Cycle_set_sco2_cycle_config,
-	PyDoc_STR("*float*: SCO2 cycle configuration, 1=recompression, 2=partial cooling\n\n*Required*: True if pc_config=2"),
- 	NULL},
-{"sco2ud_T_amb_high", (getter)SCO2Cycle_get_sco2ud_T_amb_high,(setter)SCO2Cycle_set_sco2ud_T_amb_high,
-	PyDoc_STR("*float*: High level ambient temperature for HTF mass flow rate parametric [C]\n\n*Required*: True if is_sco2_preprocess=1"),
- 	NULL},
-{"sco2ud_T_amb_ind_od", (getter)SCO2Cycle_get_sco2ud_T_amb_ind_od,(setter)SCO2Cycle_set_sco2ud_T_amb_ind_od,
-	PyDoc_STR("*sequence[sequence]*: Off design table of user-defined power cycle performance formed from parametric on T_amb [C]\n\n*Required*: True if is_sco2_preprocess=1"),
- 	NULL},
-{"sco2ud_T_amb_low", (getter)SCO2Cycle_get_sco2ud_T_amb_low,(setter)SCO2Cycle_set_sco2ud_T_amb_low,
-	PyDoc_STR("*float*: Low level ambient temperature for HTF mass flow rate parametric [C]\n\n*Required*: True if is_sco2_preprocess=1"),
- 	NULL},
-{"sco2ud_T_htf_cold_calc", (getter)SCO2Cycle_get_sco2ud_T_htf_cold_calc,(setter)SCO2Cycle_set_sco2ud_T_htf_cold_calc,
-	PyDoc_STR("*float*: HTF cold temperature from sCO2 cycle des, may be different than T_htf_cold_des [C]\n\n*Required*: True if is_sco2_preprocess=1"),
- 	NULL},
-{"sco2ud_T_htf_high", (getter)SCO2Cycle_get_sco2ud_T_htf_high,(setter)SCO2Cycle_set_sco2ud_T_htf_high,
-	PyDoc_STR("*float*: High level HTF inlet temperature for T_amb parametric [C]\n\n*Required*: True if is_sco2_preprocess=1"),
- 	NULL},
-{"sco2ud_T_htf_ind_od", (getter)SCO2Cycle_get_sco2ud_T_htf_ind_od,(setter)SCO2Cycle_set_sco2ud_T_htf_ind_od,
-	PyDoc_STR("*sequence[sequence]*: Off design table of user-defined power cycle performance formed from parametric on T_htf_hot [C]\n\n*Required*: True if is_sco2_preprocess=1"),
- 	NULL},
-{"sco2ud_T_htf_low", (getter)SCO2Cycle_get_sco2ud_T_htf_low,(setter)SCO2Cycle_set_sco2ud_T_htf_low,
-	PyDoc_STR("*float*: Low level HTF inlet temperature for T_amb parametric [C]\n\n*Required*: True if is_sco2_preprocess=1"),
- 	NULL},
-{"sco2ud_m_dot_htf_high", (getter)SCO2Cycle_get_sco2ud_m_dot_htf_high,(setter)SCO2Cycle_set_sco2ud_m_dot_htf_high,
-	PyDoc_STR("*float*: High level normalized HTF mass flow rate for T_HTF parametric\n\n*Required*: True if is_sco2_preprocess=1"),
- 	NULL},
-{"sco2ud_m_dot_htf_ind_od", (getter)SCO2Cycle_get_sco2ud_m_dot_htf_ind_od,(setter)SCO2Cycle_set_sco2ud_m_dot_htf_ind_od,
-	PyDoc_STR("*sequence[sequence]*: Off design table of user-defined power cycle performance formed from parametric on m_dot_htf [ND]\n\n*Required*: True if is_sco2_preprocess=1"),
- 	NULL},
-{"sco2ud_m_dot_htf_low", (getter)SCO2Cycle_get_sco2ud_m_dot_htf_low,(setter)SCO2Cycle_set_sco2ud_m_dot_htf_low,
-	PyDoc_STR("*float*: Low level normalized HTF mass flow rate for T_HTF parametric\n\n*Required*: True if is_sco2_preprocess=1"),
+static PyGetSetDef FinancialSolutionMode_getset[] = {
+{"ppa_soln_mode", (getter)FinancialSolutionMode_get_ppa_soln_mode,(setter)FinancialSolutionMode_set_ppa_soln_mode,
+	PyDoc_STR("*float*: PPA solution mode (0=Specify IRR target, 1=Specify PPA price)\n\n*Required*: True if ppa_multiplier_model=0&csp_financial_model<5&is_dispatch=1"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
 
-static PyTypeObject SCO2Cycle_Type = {
+static PyTypeObject FinancialSolutionMode_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"TcsmoltenSalt.SCO2Cycle",             /*tp_name*/
+		"TcsmoltenSalt.FinancialSolutionMode",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -6260,9 +6142,146 @@ static PyTypeObject SCO2Cycle_Type = {
 		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
-		SCO2Cycle_methods,         /*tp_methods*/
+		FinancialSolutionMode_methods,         /*tp_methods*/
 		0,                          /*tp_members*/
-		SCO2Cycle_getset,          /*tp_getset*/
+		FinancialSolutionMode_getset,          /*tp_getset*/
+		0,                          /*tp_base*/
+		0,                          /*tp_dict*/
+		0,                          /*tp_descr_get*/
+		0,                          /*tp_descr_set*/
+		0,                          /*tp_dictofnset*/
+		0,                          /*tp_init*/
+		0,                          /*tp_alloc*/
+		0,             /*tp_new*/
+		0,                          /*tp_free*/
+		0,                          /*tp_is_gc*/
+};
+
+
+/*
+ * ElectricityRates Group
+ */ 
+
+static PyTypeObject ElectricityRates_Type;
+
+static PyObject *
+ElectricityRates_new(SAM_TcsmoltenSalt data_ptr)
+{
+	PyObject* new_obj = ElectricityRates_Type.tp_alloc(&ElectricityRates_Type,0);
+
+	VarGroupObject* ElectricityRates_obj = (VarGroupObject*)new_obj;
+
+	ElectricityRates_obj->data_ptr = (SAM_table)data_ptr;
+
+	return new_obj;
+}
+
+/* ElectricityRates methods */
+
+static PyObject *
+ElectricityRates_assign(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "TcsmoltenSalt", "ElectricityRates")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+ElectricityRates_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &ElectricityRates_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "TcsmoltenSalt", "ElectricityRates")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+ElectricityRates_export(VarGroupObject *self, PyObject *args)
+{
+	PyTypeObject* tp = &ElectricityRates_Type;
+	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
+	return dict;
+}
+
+static PyMethodDef ElectricityRates_methods[] = {
+		{"assign",            (PyCFunction)ElectricityRates_assign,  METH_VARARGS,
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``ElectricityRates_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)ElectricityRates_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``ElectricityRates_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)ElectricityRates_export,  METH_VARARGS,
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+		{NULL,              NULL}           /* sentinel */
+};
+
+static PyObject *
+ElectricityRates_get_en_electricity_rates(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_ElectricityRates_en_electricity_rates_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_en_electricity_rates(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TcsmoltenSalt_ElectricityRates_en_electricity_rates_nset, self->data_ptr);
+}
+
+static PyGetSetDef ElectricityRates_getset[] = {
+{"en_electricity_rates", (getter)ElectricityRates_get_en_electricity_rates,(setter)ElectricityRates_set_en_electricity_rates,
+	PyDoc_STR("*float*: Enable electricity rates for grid purchase [0/1]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+	{NULL}  /* Sentinel */
+};
+
+static PyTypeObject ElectricityRates_Type = {
+		/* The ob_type field must be initialized in the module init function
+		 * to be portable to Windows without using C++. */
+		PyVarObject_HEAD_INIT(NULL, 0)
+		"TcsmoltenSalt.ElectricityRates",             /*tp_name*/
+		sizeof(VarGroupObject),          /*tp_basicsize*/
+		0,                          /*tp_itemsize*/
+		/* methods */
+		0,    /*tp_dealloc*/
+		0,                          /*tp_print*/
+		(getattrfunc)0,             /*tp_getattr*/
+		0,                          /*tp_setattr*/
+		0,                          /*tp_reserved*/
+		0,                          /*tp_repr*/
+		0,                          /*tp_as_number*/
+		0,                          /*tp_as_sequence*/
+		0,                          /*tp_as_mapping*/
+		0,                          /*tp_hash*/
+		0,                          /*tp_call*/
+		0,                          /*tp_str*/
+		0,                          /*tp_getattro*/
+		0,                          /*tp_setattro*/
+		0,                          /*tp_as_buffer*/
+		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
+		0,                          /*tp_doc*/
+		0,                          /*tp_traverse*/
+		0,                          /*tp_clear*/
+		0,                          /*tp_richcompare*/
+		0,                          /*tp_weaklistofnset*/
+		0,                          /*tp_iter*/
+		0,                          /*tp_iternext*/
+		ElectricityRates_methods,         /*tp_methods*/
+		0,                          /*tp_members*/
+		ElectricityRates_getset,          /*tp_getset*/
 		0,                          /*tp_base*/
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
@@ -6575,6 +6594,18 @@ Outputs_get_T_cond_out(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_T_htf_heater_in(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_TcsmoltenSalt_Outputs_T_htf_heater_in_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_T_htf_heater_out(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_TcsmoltenSalt_Outputs_T_htf_heater_out_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_T_panel_out_max(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_TcsmoltenSalt_Outputs_T_panel_out_max_aget, self->data_ptr);
@@ -6662,6 +6693,12 @@ static PyObject *
 Outputs_get_T_warm(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_TcsmoltenSalt_Outputs_T_warm_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_W_dot_heater(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_TcsmoltenSalt_Outputs_W_dot_heater_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -7037,6 +7074,12 @@ Outputs_get_disp_qsfsu_expected(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_disp_rel_mip_gap(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_TcsmoltenSalt_Outputs_disp_rel_mip_gap_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_disp_rev_expected(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_TcsmoltenSalt_Outputs_disp_rev_expected_aget, self->data_ptr);
@@ -7064,6 +7107,12 @@ static PyObject *
 Outputs_get_disp_solve_time_ann(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_TcsmoltenSalt_Outputs_disp_solve_time_ann_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_disp_subopt_flag(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_TcsmoltenSalt_Outputs_disp_subopt_flag_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -7190,6 +7239,12 @@ static PyObject *
 Outputs_get_m_dot_field_to_cycle(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_TcsmoltenSalt_Outputs_m_dot_field_to_cycle_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_m_dot_htf_heater(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_TcsmoltenSalt_Outputs_m_dot_htf_heater_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -7343,6 +7398,18 @@ Outputs_get_q_dot_est_tes_dc(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_q_dot_heater_startup(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_TcsmoltenSalt_Outputs_q_dot_heater_startup_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_q_dot_heater_to_htf(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_TcsmoltenSalt_Outputs_q_dot_heater_to_htf_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_q_dot_pc_max(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_TcsmoltenSalt_Outputs_q_dot_pc_max_aget, self->data_ptr);
@@ -7376,6 +7443,12 @@ static PyObject *
 Outputs_get_q_dot_rec_inc(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_TcsmoltenSalt_Outputs_q_dot_rec_inc_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_q_dot_reflection_loss(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_TcsmoltenSalt_Outputs_q_dot_reflection_loss_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -7433,15 +7506,15 @@ Outputs_get_rh(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_sco2_preprocess_table_out(VarGroupObject *self, void *closure)
-{
-	return PySAM_matrix_getter(SAM_TcsmoltenSalt_Outputs_sco2_preprocess_table_out_mget, self->data_ptr);
-}
-
-static PyObject *
 Outputs_get_sf_adjust_out(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_TcsmoltenSalt_Outputs_sf_adjust_out_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_sim_cpu_run_time(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_Outputs_sim_cpu_run_time_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -7568,6 +7641,12 @@ static PyGetSetDef Outputs_getset[] = {
 {"T_cond_out", (getter)Outputs_get_T_cond_out,(setter)0,
 	PyDoc_STR("*sequence*: PC condenser water outlet temperature [C]"),
  	NULL},
+{"T_htf_heater_in", (getter)Outputs_get_T_htf_heater_in,(setter)0,
+	PyDoc_STR("*sequence*: Parallel heater HTF inlet temperature [C]"),
+ 	NULL},
+{"T_htf_heater_out", (getter)Outputs_get_T_htf_heater_out,(setter)0,
+	PyDoc_STR("*sequence*: Parallel heater HTF outlet temperature [C]"),
+ 	NULL},
 {"T_panel_out_max", (getter)Outputs_get_T_panel_out_max,(setter)0,
 	PyDoc_STR("*sequence*: Receiver panel maximum HTF outlet temperature during timestep [C]"),
  	NULL},
@@ -7612,6 +7691,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"T_warm", (getter)Outputs_get_T_warm,(setter)0,
 	PyDoc_STR("*sequence*: Cold storage warm tank temperature [C]"),
+ 	NULL},
+{"W_dot_heater", (getter)Outputs_get_W_dot_heater,(setter)0,
+	PyDoc_STR("*sequence*: Parallel heater electricity consumption [MWe]"),
  	NULL},
 {"annual_W_cooling_tower", (getter)Outputs_get_annual_W_cooling_tower,(setter)0,
 	PyDoc_STR("*float*: Total of condenser operation parasitics [kWhe]"),
@@ -7799,6 +7881,9 @@ static PyGetSetDef Outputs_getset[] = {
 {"disp_qsfsu_expected", (getter)Outputs_get_disp_qsfsu_expected,(setter)0,
 	PyDoc_STR("*sequence*: Dispatch expected solar field startup enegy [MWt]"),
  	NULL},
+{"disp_rel_mip_gap", (getter)Outputs_get_disp_rel_mip_gap,(setter)0,
+	PyDoc_STR("*sequence*: Dispatch relative MIP gap"),
+ 	NULL},
 {"disp_rev_expected", (getter)Outputs_get_disp_rev_expected,(setter)0,
 	PyDoc_STR("*sequence*: Dispatch expected revenue factor"),
  	NULL},
@@ -7813,6 +7898,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"disp_solve_time_ann", (getter)Outputs_get_disp_solve_time_ann,(setter)0,
 	PyDoc_STR("*float*: Annual sum of dispatch solver time"),
+ 	NULL},
+{"disp_subopt_flag", (getter)Outputs_get_disp_subopt_flag,(setter)0,
+	PyDoc_STR("*sequence*: Dispatch suboptimal solution flag"),
  	NULL},
 {"disp_tes_expected", (getter)Outputs_get_disp_tes_expected,(setter)0,
 	PyDoc_STR("*sequence*: Dispatch expected TES charge level [MWht]"),
@@ -7876,6 +7964,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"m_dot_field_to_cycle", (getter)Outputs_get_m_dot_field_to_cycle,(setter)0,
 	PyDoc_STR("*sequence*: Mass flow: field to cycle [kg/s]"),
+ 	NULL},
+{"m_dot_htf_heater", (getter)Outputs_get_m_dot_htf_heater,(setter)0,
+	PyDoc_STR("*sequence*: Parallel heater HTF mass flow rate [kg/s]"),
  	NULL},
 {"m_dot_pc", (getter)Outputs_get_m_dot_pc,(setter)0,
 	PyDoc_STR("*sequence*: PC HTF mass flow rate [kg/s]"),
@@ -7952,6 +8043,12 @@ static PyGetSetDef Outputs_getset[] = {
 {"q_dot_est_tes_dc", (getter)Outputs_get_q_dot_est_tes_dc,(setter)0,
 	PyDoc_STR("*sequence*: Estimated max TES discharge thermal power [MWt]"),
  	NULL},
+{"q_dot_heater_startup", (getter)Outputs_get_q_dot_heater_startup,(setter)0,
+	PyDoc_STR("*sequence*: Parallel heater thermal power consumed during startup [MWt]"),
+ 	NULL},
+{"q_dot_heater_to_htf", (getter)Outputs_get_q_dot_heater_to_htf,(setter)0,
+	PyDoc_STR("*sequence*: Parallel heater thermal power to HTF [MWt]"),
+ 	NULL},
 {"q_dot_pc_max", (getter)Outputs_get_q_dot_pc_max,(setter)0,
 	PyDoc_STR("*sequence*: Max thermal power to PC [MWt]"),
  	NULL},
@@ -7969,6 +8066,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"q_dot_rec_inc", (getter)Outputs_get_q_dot_rec_inc,(setter)0,
 	PyDoc_STR("*sequence*: Receiver incident thermal power [MWt]"),
+ 	NULL},
+{"q_dot_reflection_loss", (getter)Outputs_get_q_dot_reflection_loss,(setter)0,
+	PyDoc_STR("*sequence*: Receiver reflection losses [MWt]"),
  	NULL},
 {"q_heater", (getter)Outputs_get_q_heater,(setter)0,
 	PyDoc_STR("*sequence*: TES freeze protection power [MWe]"),
@@ -7997,11 +8097,11 @@ static PyGetSetDef Outputs_getset[] = {
 {"rh", (getter)Outputs_get_rh,(setter)0,
 	PyDoc_STR("*sequence*: Resource relative humidity [%]"),
  	NULL},
-{"sco2_preprocess_table_out", (getter)Outputs_get_sco2_preprocess_table_out,(setter)0,
-	PyDoc_STR("*sequence[sequence]*: sCO2 cycle preprocessed data in UDPC format"),
- 	NULL},
 {"sf_adjust_out", (getter)Outputs_get_sf_adjust_out,(setter)0,
 	PyDoc_STR("*sequence*: Field availability adjustment factor"),
+ 	NULL},
+{"sim_cpu_run_time", (getter)Outputs_get_sim_cpu_run_time,(setter)0,
+	PyDoc_STR("*float*: Simulation duration clock time [s]"),
  	NULL},
 {"solaz", (getter)Outputs_get_solaz,(setter)0,
 	PyDoc_STR("*sequence*: Resource solar azimuth [deg]"),
@@ -8109,6 +8209,10 @@ newTcsmoltenSaltObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "SolarResource", SolarResource_obj);
 	Py_DECREF(SolarResource_obj);
 
+	PyObject* SystemControl_obj = SystemControl_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "SystemControl", SystemControl_obj);
+	Py_DECREF(SystemControl_obj);
+
 	PyObject* FinancialModel_obj = FinancialModel_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "FinancialModel", FinancialModel_obj);
 	Py_DECREF(FinancialModel_obj);
@@ -8116,10 +8220,6 @@ newTcsmoltenSaltObject(void* data_ptr)
 	PyObject* TimeOfDeliveryFactors_obj = TimeOfDeliveryFactors_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "TimeOfDeliveryFactors", TimeOfDeliveryFactors_obj);
 	Py_DECREF(TimeOfDeliveryFactors_obj);
-
-	PyObject* SystemControl_obj = SystemControl_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "SystemControl", SystemControl_obj);
-	Py_DECREF(SystemControl_obj);
 
 	PyObject* HeliostatField_obj = HeliostatField_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "HeliostatField", HeliostatField_obj);
@@ -8141,6 +8241,10 @@ newTcsmoltenSaltObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "FinancialParameters", FinancialParameters_obj);
 	Py_DECREF(FinancialParameters_obj);
 
+	PyObject* ParallelHeater_obj = ParallelHeater_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "ParallelHeater", ParallelHeater_obj);
+	Py_DECREF(ParallelHeater_obj);
+
 	PyObject* ThermalStorage_obj = ThermalStorage_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "ThermalStorage", ThermalStorage_obj);
 	Py_DECREF(ThermalStorage_obj);
@@ -8161,9 +8265,13 @@ newTcsmoltenSaltObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "UserDefinedPowerCycle", UserDefinedPowerCycle_obj);
 	Py_DECREF(UserDefinedPowerCycle_obj);
 
-	PyObject* SCO2Cycle_obj = SCO2Cycle_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "SCO2Cycle", SCO2Cycle_obj);
-	Py_DECREF(SCO2Cycle_obj);
+	PyObject* FinancialSolutionMode_obj = FinancialSolutionMode_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "FinancialSolutionMode", FinancialSolutionMode_obj);
+	Py_DECREF(FinancialSolutionMode_obj);
+
+	PyObject* ElectricityRates_obj = ElectricityRates_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "ElectricityRates", ElectricityRates_obj);
+	Py_DECREF(ElectricityRates_obj);
 
 	PyObject* Revenue_obj = Revenue_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Revenue", Revenue_obj);
@@ -8492,6 +8600,13 @@ TcsmoltenSaltModule_exec(PyObject *m)
 				(PyObject*)&SolarResource_Type);
 	Py_DECREF(&SolarResource_Type);
 
+	/// Add the SystemControl type object to TcsmoltenSalt_Type
+	if (PyType_Ready(&SystemControl_Type) < 0) { goto fail; }
+	PyDict_SetItemString(TcsmoltenSalt_Type.tp_dict,
+				"SystemControl",
+				(PyObject*)&SystemControl_Type);
+	Py_DECREF(&SystemControl_Type);
+
 	/// Add the FinancialModel type object to TcsmoltenSalt_Type
 	if (PyType_Ready(&FinancialModel_Type) < 0) { goto fail; }
 	PyDict_SetItemString(TcsmoltenSalt_Type.tp_dict,
@@ -8505,13 +8620,6 @@ TcsmoltenSaltModule_exec(PyObject *m)
 				"TimeOfDeliveryFactors",
 				(PyObject*)&TimeOfDeliveryFactors_Type);
 	Py_DECREF(&TimeOfDeliveryFactors_Type);
-
-	/// Add the SystemControl type object to TcsmoltenSalt_Type
-	if (PyType_Ready(&SystemControl_Type) < 0) { goto fail; }
-	PyDict_SetItemString(TcsmoltenSalt_Type.tp_dict,
-				"SystemControl",
-				(PyObject*)&SystemControl_Type);
-	Py_DECREF(&SystemControl_Type);
 
 	/// Add the HeliostatField type object to TcsmoltenSalt_Type
 	if (PyType_Ready(&HeliostatField_Type) < 0) { goto fail; }
@@ -8548,6 +8656,13 @@ TcsmoltenSaltModule_exec(PyObject *m)
 				(PyObject*)&FinancialParameters_Type);
 	Py_DECREF(&FinancialParameters_Type);
 
+	/// Add the ParallelHeater type object to TcsmoltenSalt_Type
+	if (PyType_Ready(&ParallelHeater_Type) < 0) { goto fail; }
+	PyDict_SetItemString(TcsmoltenSalt_Type.tp_dict,
+				"ParallelHeater",
+				(PyObject*)&ParallelHeater_Type);
+	Py_DECREF(&ParallelHeater_Type);
+
 	/// Add the ThermalStorage type object to TcsmoltenSalt_Type
 	if (PyType_Ready(&ThermalStorage_Type) < 0) { goto fail; }
 	PyDict_SetItemString(TcsmoltenSalt_Type.tp_dict,
@@ -8583,12 +8698,19 @@ TcsmoltenSaltModule_exec(PyObject *m)
 				(PyObject*)&UserDefinedPowerCycle_Type);
 	Py_DECREF(&UserDefinedPowerCycle_Type);
 
-	/// Add the SCO2Cycle type object to TcsmoltenSalt_Type
-	if (PyType_Ready(&SCO2Cycle_Type) < 0) { goto fail; }
+	/// Add the FinancialSolutionMode type object to TcsmoltenSalt_Type
+	if (PyType_Ready(&FinancialSolutionMode_Type) < 0) { goto fail; }
 	PyDict_SetItemString(TcsmoltenSalt_Type.tp_dict,
-				"SCO2Cycle",
-				(PyObject*)&SCO2Cycle_Type);
-	Py_DECREF(&SCO2Cycle_Type);
+				"FinancialSolutionMode",
+				(PyObject*)&FinancialSolutionMode_Type);
+	Py_DECREF(&FinancialSolutionMode_Type);
+
+	/// Add the ElectricityRates type object to TcsmoltenSalt_Type
+	if (PyType_Ready(&ElectricityRates_Type) < 0) { goto fail; }
+	PyDict_SetItemString(TcsmoltenSalt_Type.tp_dict,
+				"ElectricityRates",
+				(PyObject*)&ElectricityRates_Type);
+	Py_DECREF(&ElectricityRates_Type);
 
 	/// Add the Revenue type object to TcsmoltenSalt_Type
 	if (PyType_Ready(&Revenue_Type) < 0) { goto fail; }

@@ -22,7 +22,7 @@ source $(conda info --base)/etc/profile.d/conda.sh
 rm -rf build
 rm -rf dist/*
 
-for PYTHONENV in pysam_build_3.6 pysam_build_3.7 pysam_build_3.8 pysam_build_3.9
+for PYTHONENV in pysam_build_3.6 pysam_build_3.7 pysam_build_3.8 pysam_build_3.9 pysam_build_3.10
 do
    conda activate $PYTHONENV
    yes | pip install -r tests/requirements.txt
@@ -39,6 +39,8 @@ done
 mypy stubs/stubs || exit
 python stubs/setup.py bdist_wheel
 
+twine upload $PYSAMDIR/dist/*stubs*.whl
+
 yes | $PYSAMDIR/build_conda.sh || exit
 
 #
@@ -46,8 +48,8 @@ yes | $PYSAMDIR/build_conda.sh || exit
 #
 
 cd ..
-docker pull quay.io/pypa/manylinux1_x86_64
-docker run --rm -v $(pwd):/io quay.io/pypa/manylinux1_x86_64 /io/pysam/build_manylinux.sh
+docker pull quay.io/pypa/manylinux2010_x86_64
+docker run --rm -dit -v $(pwd):/io quay.io/pypa/manylinux2010_x86_64 /bin/bash
 rename -s linux manylinux1 $PYSAMDIR/dist/*-linux_*
 
 docker pull continuumio/anaconda

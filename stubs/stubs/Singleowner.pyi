@@ -45,7 +45,6 @@ class FinancialParameters(object):
 
 
 	analysis_period = float
-	batt_salvage_percentage = float
 	construction_financing_cost = float
 	cost_debt_closing = float
 	cost_debt_fee = float
@@ -53,6 +52,8 @@ class FinancialParameters(object):
 	debt_option = float
 	debt_percent = float
 	dscr = float
+	dscr_limit_debt_fraction = float
+	dscr_maximum_debt_fraction = float
 	dscr_reserve_months = float
 	equip1_reserve_cost = float
 	equip1_reserve_freq = float
@@ -74,7 +75,6 @@ class FinancialParameters(object):
 	property_tax_rate = float
 	real_discount_rate = float
 	reserves_interest = float
-	roe_input = tuple
 	salvage_percentage = float
 	state_tax_rate = tuple
 	system_capacity = float
@@ -130,6 +130,22 @@ class SystemCosts(object):
 	system_recapitalization_escalation = float
 	system_use_recapitalization = float
 	total_installed_cost = float
+
+
+class LandLease(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> dict:
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
+	land_area = float
+	om_land_lease = tuple
+	om_land_lease_escal = float
 
 
 class TaxCreditIncentives(object):
@@ -341,6 +357,7 @@ class BatterySystem(object):
 	batt_replacement_schedule_percent = tuple
 	battery_per_kWh = float
 	en_batt = float
+	en_standalone_batt = float
 
 
 class ElectricityRates(object):
@@ -371,6 +388,7 @@ class SystemOutput(object):
 	annual_energy_pre_curtailment_ac = float
 	degradation = tuple
 	gen = tuple
+	gen_purchases = tuple
 	gen_without_battery = tuple
 	system_capacity = float
 	system_pre_curtailment_kwac = tuple
@@ -457,7 +475,7 @@ class GridLimits(object):
 	grid_curtailment_price_esc = float
 
 
-class Battery(object):
+class LCOS(object):
 	def assign(self): 
 		pass
 
@@ -468,15 +486,22 @@ class Battery(object):
 		pass
 
 
+	batt_annual_charge_energy = tuple
 	batt_annual_charge_from_system = tuple
 	batt_annual_discharge_energy = tuple
 	batt_capacity_percent = tuple
+	batt_salvage_percentage = float
 	battery_total_cost_lcos = float
+	charge_w_sys_ec_ym = tuple
 	grid_to_batt = tuple
 	monthly_batt_to_grid = tuple
 	monthly_grid_to_batt = tuple
 	monthly_grid_to_load = tuple
 	monthly_system_to_grid = tuple
+	true_up_credits_ym = tuple
+	year1_monthly_ec_charge_gross_with_system = tuple
+	year1_monthly_ec_charge_with_system = tuple
+	year1_monthly_electricity_to_grid = tuple
 
 
 class ChargesByMonth(object):
@@ -490,24 +515,8 @@ class ChargesByMonth(object):
 		pass
 
 
-	charge_w_sys_ec_ym = tuple
-	true_up_credits_ym = tuple
-	year1_monthly_ec_charge_with_system = tuple
-
-
-class Monthly(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> dict:
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	year1_monthly_ec_charge_gross_with_system = tuple
-	year1_monthly_electricity_to_grid = tuple
+	net_billing_credits_ym = tuple
+	nm_dollars_applied_ym = tuple
 
 
 class Outputs(object):
@@ -534,7 +543,6 @@ class Outputs(object):
 	cf_annual_cost_lcos = tuple
 	cf_annual_costs = tuple
 	cf_annual_discharge_lcos = tuple
-	cf_batt_replacement_cost = tuple
 	cf_battery_replacement_cost = tuple
 	cf_battery_replacement_cost_schedule = tuple
 	cf_capacity_payment = tuple
@@ -589,7 +597,6 @@ class Outputs(object):
 	cf_energy_net_oct = tuple
 	cf_energy_net_sep = tuple
 	cf_energy_purchases = tuple
-	cf_energy_purchases_value = tuple
 	cf_energy_sales = tuple
 	cf_energy_sales_value = tuple
 	cf_energy_value = tuple
@@ -619,7 +626,7 @@ class Outputs(object):
 	cf_funding_om = tuple
 	cf_funding_receivables = tuple
 	cf_insurance_expense = tuple
-	cf_lcog_costs = tuple
+	cf_land_lease_expense = tuple
 	cf_length = float
 	cf_net_salvage_value = tuple
 	cf_om_batt_capacity_expense = tuple
@@ -686,9 +693,6 @@ class Outputs(object):
 	cf_reserve_om = tuple
 	cf_reserve_receivables = tuple
 	cf_reserve_total = tuple
-	cf_return_on_equity = tuple
-	cf_return_on_equity_dollars = tuple
-	cf_return_on_equity_input = tuple
 	cf_revenue_apr = tuple
 	cf_revenue_aug = tuple
 	cf_revenue_dec = tuple
@@ -738,6 +742,7 @@ class Outputs(object):
 	cf_state_tax_frac = tuple
 	cf_thermal_value = tuple
 	cf_total_revenue = tuple
+	cf_util_escal_rate = tuple
 	cf_utility_bill = tuple
 	cost_debt_upfront = float
 	cost_financing = float
@@ -1045,12 +1050,6 @@ class Outputs(object):
 	itc_total_sta = float
 	lcoe_nom = float
 	lcoe_real = float
-	lcog = float
-	lcog_depr = float
-	lcog_loan_int = float
-	lcog_om = float
-	lcog_roe = float
-	lcog_wc_int = float
 	lcoptc_fed_nom = float
 	lcoptc_fed_real = float
 	lcoptc_sta_nom = float
@@ -1121,6 +1120,7 @@ class Singleowner(object):
 	Revenue = Revenue
 	FinancialParameters = FinancialParameters
 	SystemCosts = SystemCosts
+	LandLease = LandLease
 	TaxCreditIncentives = TaxCreditIncentives
 	Depreciation = Depreciation
 	PaymentIncentives = PaymentIncentives
@@ -1132,9 +1132,8 @@ class Singleowner(object):
 	FuelCell = FuelCell
 	CapacityPayments = CapacityPayments
 	GridLimits = GridLimits
-	Battery = Battery
+	LCOS = LCOS
 	ChargesByMonth = ChargesByMonth
-	Monthly = Monthly
 	Outputs = Outputs
 
 

@@ -32,6 +32,9 @@ additional logic include:
  - batt_current_discharge_max
  - batt_dc_ac_efficiency
  - batt_dc_dc_efficiency
+ - batt_dispatch_load_forecast_choice
+ - batt_load_ac_forecast
+ - batt_load_ac_forecast_escalation
  - batt_mass
  - batt_power_charge_max_kwac
  - batt_power_charge_max_kwdc
@@ -42,6 +45,7 @@ additional logic include:
  - dispatch_manual_gridcharge
  - dispatch_manual_percent_discharge
  - dispatch_manual_percent_gridcharge
+ - load_escalation
 
 Provided for each of these inputs is a list of other inputs that are potentially interdependent. 
 
@@ -113,6 +117,12 @@ BatteryDispatch Group
 ======================================================
 
 .. autoclass:: PySAM.Battery.Battery.BatteryDispatch
+	:members:
+
+SystemCosts Group
+======================================================
+
+.. autoclass:: PySAM.Battery.Battery.SystemCosts
 	:members:
 
 FuelCell Group

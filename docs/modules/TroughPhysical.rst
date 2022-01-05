@@ -51,10 +51,28 @@ Tou Group
 .. autoclass:: PySAM.TroughPhysical.TroughPhysical.Tou
 	:members:
 
+SystemControl Group
+======================================================
+
+.. autoclass:: PySAM.TroughPhysical.TroughPhysical.SystemControl
+	:members:
+
 FinancialModel Group
 ======================================================
 
 .. autoclass:: PySAM.TroughPhysical.TroughPhysical.FinancialModel
+	:members:
+
+FinancialSolutionMode Group
+======================================================
+
+.. autoclass:: PySAM.TroughPhysical.TroughPhysical.FinancialSolutionMode
+	:members:
+
+ElectricityRates Group
+======================================================
+
+.. autoclass:: PySAM.TroughPhysical.TroughPhysical.ElectricityRates
 	:members:
 
 Revenue Group

@@ -306,6 +306,30 @@ IrradianceProcessor_set_sky_model(VarGroupObject *self, PyObject *value, void *c
 }
 
 static PyObject *
+IrradianceProcessor_get_slope_azm(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Irradproc_IrradianceProcessor_slope_azm_nget, self->data_ptr);
+}
+
+static int
+IrradianceProcessor_set_slope_azm(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Irradproc_IrradianceProcessor_slope_azm_nset, self->data_ptr);
+}
+
+static PyObject *
+IrradianceProcessor_get_slope_tilt(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Irradproc_IrradianceProcessor_slope_tilt_nget, self->data_ptr);
+}
+
+static int
+IrradianceProcessor_set_slope_tilt(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Irradproc_IrradianceProcessor_slope_tilt_nset, self->data_ptr);
+}
+
+static PyObject *
 IrradianceProcessor_get_tamb(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Irradproc_IrradianceProcessor_tamb_nget, self->data_ptr);
@@ -422,6 +446,12 @@ static PyGetSetDef IrradianceProcessor_getset[] = {
  	NULL},
 {"sky_model", (getter)IrradianceProcessor_get_sky_model,(setter)IrradianceProcessor_set_sky_model,
 	PyDoc_STR("*float*: Tilted surface irradiance model [0/1/2]\n\n*Info*: Isotropic,HDKR,Perez\n\n*Constraints*: INTEGER,MIN=0,MAX=2\n\n*Required*: If not provided, assumed to be 2"),
+ 	NULL},
+{"slope_azm", (getter)IrradianceProcessor_get_slope_azm,(setter)IrradianceProcessor_set_slope_azm,
+	PyDoc_STR("*float*: Terrain azimuth [deg]\n\n*Constraints*: MIN=0,MAX=1\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"slope_tilt", (getter)IrradianceProcessor_get_slope_tilt,(setter)IrradianceProcessor_set_slope_tilt,
+	PyDoc_STR("*float*: Terrain slope [deg]\n\n*Constraints*: MIN=0,MAX=1\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"tamb", (getter)IrradianceProcessor_get_tamb,(setter)IrradianceProcessor_set_tamb,
 	PyDoc_STR("*float*: Ambient Temperature (dry bulb temperature) [°C]\n\n*Required*: False"),

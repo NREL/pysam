@@ -259,6 +259,20 @@ class Tou(object):
 	wlim_series = tuple
 
 
+class SystemControl(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> dict:
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
+	disp_inventory_incentive = float
+
+
 class System(object):
 	def assign(self): 
 		pass
@@ -341,6 +355,7 @@ class Outputs(object):
 	W_dot_sca_track = tuple
 	annual_electricity_consumption = float
 	annual_energy = float
+	annual_energy_distribution_time = tuple
 	annual_field_freeze_protection = float
 	annual_gross_energy = float
 	annual_tes_freeze_protection = float
@@ -352,6 +367,7 @@ class Outputs(object):
 	dni_costh = tuple
 	e_ch_tes = tuple
 	e_dot_field_int_energy = tuple
+	gen = tuple
 	hour_day = tuple
 	kwh_per_kw = float
 	m_dot_balance = tuple
@@ -424,6 +440,7 @@ class TroughPhysicalProcessHeat(object):
 	TES = TES
 	TES2tank = TES2tank
 	Tou = Tou
+	SystemControl = SystemControl
 	System = System
 	Powerblock = Powerblock
 	AdjustmentFactors = AdjustmentFactors

@@ -745,7 +745,7 @@ static PyMethodDef BelpeModule_methods[] = {
 				PyDoc_STR("new() -> Belpe")},
 		{"default",             Belpe_default,         METH_VARARGS,
 				PyDoc_STR("default(config) -> Belpe\n\nUse default attributes\n"
-				"`config` options:\n\n- \"FlatPlatePVResidential\"\n- \"FlatPlatePVThirdParty\"\n- \"GenericBatteryResidential\"\n- \"GenericBatteryThirdParty\"\n- \"PVBatteryResidential\"\n- \"PVBatteryThirdParty\"\n- \"PVWattsBatteryResidential\"\n- \"PVWattsBatteryThirdParty\"\n- \"PVWattsResidential\"\n- \"PVWattsThirdParty\"\n- \"SolarWaterHeatingResidential\"")},
+				"`config` options:\n\n- \"FlatPlatePVResidential\"\n- \"FlatPlatePVThirdParty\"\n- \"GenericBatteryResidential\"\n- \"GenericBatteryThirdParty\"\n- \"PVBatteryResidential\"\n- \"PVBatteryThirdParty\"\n- \"PVWattsBatteryResidential\"\n- \"PVWattsBatteryThirdParty\"\n- \"PVWattsResidential\"\n- \"PVWattsThirdParty\"\n- \"SolarWaterHeatingResidential\"\n- \"StandaloneBatteryResidential\"\n- \"StandaloneBatteryThirdParty\"")},
 		{"wrap",             Belpe_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Belpe\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   Belpe_from_existing,        METH_VARARGS,

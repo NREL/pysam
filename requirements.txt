@@ -1,4 +1,3 @@
-pytest
-pympler
 pandas
+python-dotenv
 requests

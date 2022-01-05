@@ -13,12 +13,9 @@ that enforce consistency are not available in this PySAM module. Therefore,
 the onus is on the PySAM user to check that interdependencies are correctly handled. The variables which may require
 additional logic include:
 
- - balance_of_system_cost_total
- - device_costs_total
- - financial_cost_total
  - number_devices
+ - system_capacity
  - tidal_power_curve
- - total_operating_cost
 
 Provided for each of these inputs is a list of other inputs that are potentially interdependent. 
 

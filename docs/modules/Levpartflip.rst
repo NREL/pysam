@@ -52,6 +52,12 @@ SystemCosts Group
 .. autoclass:: PySAM.Levpartflip.Levpartflip.SystemCosts
 	:members:
 
+LandLease Group
+======================================================
+
+.. autoclass:: PySAM.Levpartflip.Levpartflip.LandLease
+	:members:
+
 TaxCreditIncentives Group
 ======================================================
 
@@ -76,6 +82,12 @@ SystemOutput Group
 .. autoclass:: PySAM.Levpartflip.Levpartflip.SystemOutput
 	:members:
 
+ElectricityRates Group
+======================================================
+
+.. autoclass:: PySAM.Levpartflip.Levpartflip.ElectricityRates
+	:members:
+
 Moratorium Group
 ======================================================
 
@@ -92,6 +104,12 @@ TimeOfDelivery Group
 ======================================================
 
 .. autoclass:: PySAM.Levpartflip.Levpartflip.TimeOfDelivery
+	:members:
+
+UtilityBill Group
+======================================================
+
+.. autoclass:: PySAM.Levpartflip.Levpartflip.UtilityBill
 	:members:
 
 ConstructionFinancing Group
@@ -112,22 +130,16 @@ IRRTargets Group
 .. autoclass:: PySAM.Levpartflip.Levpartflip.IRRTargets
 	:members:
 
-Battery Group
+LCOS Group
 ======================================================
 
-.. autoclass:: PySAM.Levpartflip.Levpartflip.Battery
+.. autoclass:: PySAM.Levpartflip.Levpartflip.LCOS
 	:members:
 
 ChargesByMonth Group
 ======================================================
 
 .. autoclass:: PySAM.Levpartflip.Levpartflip.ChargesByMonth
-	:members:
-
-Monthly Group
-======================================================
-
-.. autoclass:: PySAM.Levpartflip.Levpartflip.Monthly
 	:members:
 
 BatterySystem Group

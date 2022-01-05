@@ -32,9 +32,11 @@ class Outputs(object):
 	country = str
 	data_source = str
 	day = tuple
+	distance_to_shore_file = float
 	energy_period = tuple
 	hour = tuple
 	lat = float
+	location_id = float
 	lon = float
 	minute = tuple
 	month = tuple
@@ -47,6 +49,7 @@ class Outputs(object):
 	significant_wave_height = tuple
 	state = str
 	tz = float
+	water_depth_file = float
 	wave_resource_matrix = tuple
 	year = tuple
 

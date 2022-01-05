@@ -81,9 +81,13 @@ class Outputs(object):
 		pass
 
 
+	annual_crit_load = float
+	annual_crit_load_unmet = float
+	annual_crit_load_unmet_percentage = float
 	annual_energy_distribution_time = tuple
 	annual_export_to_grid_energy = tuple
 	annual_import_to_grid_energy = tuple
+	annual_outage_losses_unmet = float
 	average_battery_conversion_efficiency = float
 	average_battery_roundtrip_efficiency = float
 	avg_critical_load = float
@@ -136,9 +140,11 @@ class Outputs(object):
 	batt_temperature = tuple
 	batt_to_grid = tuple
 	batt_to_load = tuple
+	batt_to_system_load = tuple
 	batt_voltage = tuple
 	batt_voltage_cell = tuple
 	cdf_of_surviving = tuple
+	crit_load = tuple
 	crit_load_unmet = tuple
 	fuelcell_to_batt = tuple
 	gen = tuple
@@ -151,13 +157,19 @@ class Outputs(object):
 	market_sell_rate_series_yr1 = tuple
 	monthly_batt_to_grid = tuple
 	monthly_batt_to_load = tuple
+	monthly_batt_to_system_load = tuple
+	monthly_crit_load = tuple
+	monthly_crit_load_unmet = tuple
+	monthly_crit_load_unmet_percentage = tuple
 	monthly_grid_to_batt = tuple
 	monthly_grid_to_load = tuple
 	monthly_interconnection_loss = tuple
+	monthly_outage_losses_unmet = tuple
 	monthly_system_to_batt = tuple
 	monthly_system_to_grid = tuple
 	monthly_system_to_load = tuple
 	outage_durations = tuple
+	outage_losses_unmet = tuple
 	pdf_of_surviving = tuple
 	resilience_hrs = tuple
 	resilience_hrs_avg = float

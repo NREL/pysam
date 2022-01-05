@@ -190,7 +190,6 @@ class TES(object):
 	hot_tank_Thtr = float
 	hot_tank_max_heat = float
 	init_hot_htf_percent = float
-	is_hx = float
 	store_fl_props = tuple
 	store_fluid = float
 	tank_pairs = float
@@ -254,6 +253,20 @@ class Tou(object):
 	wlim_series = tuple
 
 
+class SystemControl(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> dict:
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
+	disp_inventory_incentive = float
+
+
 class FinancialModel(object):
 	def assign(self): 
 		pass
@@ -266,6 +279,34 @@ class FinancialModel(object):
 
 
 	csp_financial_model = float
+
+
+class FinancialSolutionMode(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> dict:
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
+	ppa_soln_mode = float
+
+
+class ElectricityRates(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> dict:
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
+	en_electricity_rates = float
 
 
 class Revenue(object):
@@ -405,10 +446,12 @@ class Outputs(object):
 	disp_qsf_expected = tuple
 	disp_qsfprod_expected = tuple
 	disp_qsfsu_expected = tuple
+	disp_rel_mip_gap = tuple
 	disp_rev_expected = tuple
 	disp_solve_iter = tuple
 	disp_solve_state = tuple
 	disp_solve_time = tuple
+	disp_subopt_flag = tuple
 	disp_tes_expected = tuple
 	disp_thermeff_expected = tuple
 	disp_wpb_expected = tuple
@@ -538,7 +581,10 @@ class TroughPhysical(object):
 	Powerblock = Powerblock
 	TES = TES
 	Tou = Tou
+	SystemControl = SystemControl
 	FinancialModel = FinancialModel
+	FinancialSolutionMode = FinancialSolutionMode
+	ElectricityRates = ElectricityRates
 	Revenue = Revenue
 	System = System
 	Controller = Controller

@@ -3411,6 +3411,143 @@ static PyTypeObject Tou_Type = {
 
 
 /*
+ * SystemControl Group
+ */ 
+
+static PyTypeObject SystemControl_Type;
+
+static PyObject *
+SystemControl_new(SAM_TroughPhysicalProcessHeat data_ptr)
+{
+	PyObject* new_obj = SystemControl_Type.tp_alloc(&SystemControl_Type,0);
+
+	VarGroupObject* SystemControl_obj = (VarGroupObject*)new_obj;
+
+	SystemControl_obj->data_ptr = (SAM_table)data_ptr;
+
+	return new_obj;
+}
+
+/* SystemControl methods */
+
+static PyObject *
+SystemControl_assign(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "TroughPhysicalProcessHeat", "SystemControl")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+SystemControl_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &SystemControl_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "TroughPhysicalProcessHeat", "SystemControl")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+SystemControl_export(VarGroupObject *self, PyObject *args)
+{
+	PyTypeObject* tp = &SystemControl_Type;
+	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
+	return dict;
+}
+
+static PyMethodDef SystemControl_methods[] = {
+		{"assign",            (PyCFunction)SystemControl_assign,  METH_VARARGS,
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``SystemControl_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)SystemControl_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``SystemControl_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)SystemControl_export,  METH_VARARGS,
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+		{NULL,              NULL}           /* sentinel */
+};
+
+static PyObject *
+SystemControl_get_disp_inventory_incentive(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_SystemControl_disp_inventory_incentive_nget, self->data_ptr);
+}
+
+static int
+SystemControl_set_disp_inventory_incentive(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_SystemControl_disp_inventory_incentive_nset, self->data_ptr);
+}
+
+static PyGetSetDef SystemControl_getset[] = {
+{"disp_inventory_incentive", (getter)SystemControl_get_disp_inventory_incentive,(setter)SystemControl_set_disp_inventory_incentive,
+	PyDoc_STR("*float*: Dispatch storage terminal inventory incentive multiplier\n\n*Required*: If not provided, assumed to be 0.0"),
+ 	NULL},
+	{NULL}  /* Sentinel */
+};
+
+static PyTypeObject SystemControl_Type = {
+		/* The ob_type field must be initialized in the module init function
+		 * to be portable to Windows without using C++. */
+		PyVarObject_HEAD_INIT(NULL, 0)
+		"TroughPhysicalProcessHeat.SystemControl",             /*tp_name*/
+		sizeof(VarGroupObject),          /*tp_basicsize*/
+		0,                          /*tp_itemsize*/
+		/* methods */
+		0,    /*tp_dealloc*/
+		0,                          /*tp_print*/
+		(getattrfunc)0,             /*tp_getattr*/
+		0,                          /*tp_setattr*/
+		0,                          /*tp_reserved*/
+		0,                          /*tp_repr*/
+		0,                          /*tp_as_number*/
+		0,                          /*tp_as_sequence*/
+		0,                          /*tp_as_mapping*/
+		0,                          /*tp_hash*/
+		0,                          /*tp_call*/
+		0,                          /*tp_str*/
+		0,                          /*tp_getattro*/
+		0,                          /*tp_setattro*/
+		0,                          /*tp_as_buffer*/
+		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
+		0,                          /*tp_doc*/
+		0,                          /*tp_traverse*/
+		0,                          /*tp_clear*/
+		0,                          /*tp_richcompare*/
+		0,                          /*tp_weaklistofnset*/
+		0,                          /*tp_iter*/
+		0,                          /*tp_iternext*/
+		SystemControl_methods,         /*tp_methods*/
+		0,                          /*tp_members*/
+		SystemControl_getset,          /*tp_getset*/
+		0,                          /*tp_base*/
+		0,                          /*tp_dict*/
+		0,                          /*tp_descr_get*/
+		0,                          /*tp_descr_set*/
+		0,                          /*tp_dictofnset*/
+		0,                          /*tp_init*/
+		0,                          /*tp_alloc*/
+		0,             /*tp_new*/
+		0,                          /*tp_free*/
+		0,                          /*tp_is_gc*/
+};
+
+
+/*
  * System Group
  */ 
 
@@ -3912,6 +4049,12 @@ Outputs_get_annual_energy(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_annual_energy_distribution_time(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_TroughPhysicalProcessHeat_Outputs_annual_energy_distribution_time_mget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_annual_field_freeze_protection(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_Outputs_annual_field_freeze_protection_nget, self->data_ptr);
@@ -3975,6 +4118,12 @@ static PyObject *
 Outputs_get_e_dot_field_int_energy(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_TroughPhysicalProcessHeat_Outputs_e_dot_field_int_energy_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_gen(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_TroughPhysicalProcessHeat_Outputs_gen_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -4287,6 +4436,9 @@ static PyGetSetDef Outputs_getset[] = {
 {"annual_energy", (getter)Outputs_get_annual_energy,(setter)0,
 	PyDoc_STR("*float*: Annual Net Thermal Energy Production w/ avail derate [kWt-hr]"),
  	NULL},
+{"annual_energy_distribution_time", (getter)Outputs_get_annual_energy_distribution_time,(setter)0,
+	PyDoc_STR("*sequence[sequence]*: Annual energy production as function of time [kW]"),
+ 	NULL},
 {"annual_field_freeze_protection", (getter)Outputs_get_annual_field_freeze_protection,(setter)0,
 	PyDoc_STR("*float*: Annual thermal power for field freeze protection [kWt-hr]"),
  	NULL},
@@ -4319,6 +4471,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"e_dot_field_int_energy", (getter)Outputs_get_e_dot_field_int_energy,(setter)0,
 	PyDoc_STR("*sequence*: Field change in material/htf internal energy [MWt]"),
+ 	NULL},
+{"gen", (getter)Outputs_get_gen,(setter)0,
+	PyDoc_STR("*sequence*: System power generated [kW]"),
  	NULL},
 {"hour_day", (getter)Outputs_get_hour_day,(setter)0,
 	PyDoc_STR("*sequence*: Resource Hour of Day"),
@@ -4533,6 +4688,10 @@ newTroughPhysicalProcessHeatObject(void* data_ptr)
 	PyObject* Tou_obj = Tou_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Tou", Tou_obj);
 	Py_DECREF(Tou_obj);
+
+	PyObject* SystemControl_obj = SystemControl_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "SystemControl", SystemControl_obj);
+	Py_DECREF(SystemControl_obj);
 
 	PyObject* System_obj = System_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "System", System_obj);
@@ -4906,6 +5065,13 @@ TroughPhysicalProcessHeatModule_exec(PyObject *m)
 				"Tou",
 				(PyObject*)&Tou_Type);
 	Py_DECREF(&Tou_Type);
+
+	/// Add the SystemControl type object to TroughPhysicalProcessHeat_Type
+	if (PyType_Ready(&SystemControl_Type) < 0) { goto fail; }
+	PyDict_SetItemString(TroughPhysicalProcessHeat_Type.tp_dict,
+				"SystemControl",
+				(PyObject*)&SystemControl_Type);
+	Py_DECREF(&SystemControl_Type);
 
 	/// Add the System type object to TroughPhysicalProcessHeat_Type
 	if (PyType_Ready(&System_Type) < 0) { goto fail; }

@@ -13,10 +13,13 @@ class Common(object):
 	T_htf_cold_des = float
 	T_htf_hot_des = float
 	design_eff = float
+	dt_hot = float
 	field_fl_props = tuple
+	field_fluid = float
 	h_tank = float
 	h_tank_min = float
-	rec_htf = float
+	store_fl_props = tuple
+	store_fluid = float
 	tank_pairs = float
 	tshours = float
 	u_tank = float
@@ -33,6 +36,7 @@ class Outputs(object):
 		pass
 
 
+	are_htfs_equal = float
 	csp_pt_tes_htf_density = float
 	csp_pt_tes_tank_diameter = float
 	q_dot_tes_est = float

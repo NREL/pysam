@@ -1808,6 +1808,18 @@ StateCell_set_cycle_DOD_range(VarGroupObject *self, PyObject *value, void *closu
 }
 
 static PyObject *
+StateCell_get_cycle_counts(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_BatteryStateful_StateCell_cycle_counts_mget, self->data_ptr);
+}
+
+static int
+StateCell_set_cycle_counts(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_BatteryStateful_StateCell_cycle_counts_mset, self->data_ptr);
+}
+
+static PyObject *
 StateCell_get_cycle_range(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_BatteryStateful_StateCell_cycle_range_nget, self->data_ptr);
@@ -2218,6 +2230,9 @@ static PyGetSetDef StateCell_getset[] = {
  	NULL},
 {"cycle_DOD_range", (getter)StateCell_get_cycle_DOD_range,(setter)StateCell_set_cycle_DOD_range,
 	PyDoc_STR("*sequence*: DOD cycle_range of each cycle [%]\n\n*Info*: NMC Life Model"),
+ 	NULL},
+{"cycle_counts", (getter)StateCell_get_cycle_counts,(setter)StateCell_set_cycle_counts,
+	PyDoc_STR("*sequence[sequence]*: Counts of cycles by DOD categories in cycle matrix"),
  	NULL},
 {"cycle_range", (getter)StateCell_get_cycle_range,(setter)StateCell_set_cycle_range,
 	PyDoc_STR("*float*: Range of last cycle [%]"),

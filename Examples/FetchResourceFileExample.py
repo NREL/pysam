@@ -13,6 +13,7 @@ free API key at at https://developer.nrel.gov/signup/.
 @authors: skoeb, cpaulgilman
 '''
 
+import os
 import PySAM.ResourceTools as tools  # MOVE BACK TO FILES FOLDER
 import PySAM.Windpower as wp
 import PySAM.Singleowner as so
@@ -21,8 +22,8 @@ import PySAM.Pvwattsv7 as pv
 import geocoder
 
 # replace with key and email address from https://developer.nrel.gov/signup/
-sam_api_key = ''
-sam_email = ''
+sam_api_key = os.environ.get('NREL_API_KEY')
+sam_email = os.environ.get('NREL_API_EMAIL')
 geocode_api_key = ''  # optional, may be required for geocoder
 
 # --- Location Coordinates ---

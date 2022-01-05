@@ -866,6 +866,24 @@ static PyMethodDef Outputs_methods[] = {
 };
 
 static PyObject *
+Outputs_get_annual_crit_load(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Battwatts_Outputs_annual_crit_load_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_annual_crit_load_unmet(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Battwatts_Outputs_annual_crit_load_unmet_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_annual_crit_load_unmet_percentage(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Battwatts_Outputs_annual_crit_load_unmet_percentage_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_annual_energy_distribution_time(VarGroupObject *self, void *closure)
 {
 	return PySAM_matrix_getter(SAM_Battwatts_Outputs_annual_energy_distribution_time_mget, self->data_ptr);
@@ -881,6 +899,12 @@ static PyObject *
 Outputs_get_annual_import_to_grid_energy(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Battwatts_Outputs_annual_import_to_grid_energy_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_annual_outage_losses_unmet(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Battwatts_Outputs_annual_outage_losses_unmet_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -1196,6 +1220,12 @@ Outputs_get_batt_to_load(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_batt_to_system_load(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Battwatts_Outputs_batt_to_system_load_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_batt_voltage(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Battwatts_Outputs_batt_voltage_aget, self->data_ptr);
@@ -1211,6 +1241,12 @@ static PyObject *
 Outputs_get_cdf_of_surviving(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Battwatts_Outputs_cdf_of_surviving_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_crit_load(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Battwatts_Outputs_crit_load_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -1286,6 +1322,30 @@ Outputs_get_monthly_batt_to_load(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_monthly_batt_to_system_load(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Battwatts_Outputs_monthly_batt_to_system_load_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_monthly_crit_load(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Battwatts_Outputs_monthly_crit_load_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_monthly_crit_load_unmet(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Battwatts_Outputs_monthly_crit_load_unmet_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_monthly_crit_load_unmet_percentage(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Battwatts_Outputs_monthly_crit_load_unmet_percentage_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_monthly_grid_to_batt(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Battwatts_Outputs_monthly_grid_to_batt_aget, self->data_ptr);
@@ -1301,6 +1361,12 @@ static PyObject *
 Outputs_get_monthly_interconnection_loss(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Battwatts_Outputs_monthly_interconnection_loss_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_monthly_outage_losses_unmet(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Battwatts_Outputs_monthly_outage_losses_unmet_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -1325,6 +1391,12 @@ static PyObject *
 Outputs_get_outage_durations(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Battwatts_Outputs_outage_durations_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_outage_losses_unmet(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Battwatts_Outputs_outage_losses_unmet_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -1382,6 +1454,15 @@ Outputs_get_system_to_load(VarGroupObject *self, void *closure)
 }
 
 static PyGetSetDef Outputs_getset[] = {
+{"annual_crit_load", (getter)Outputs_get_annual_crit_load,(setter)0,
+	PyDoc_STR("*float*: Critical load energy (year 1) [kWh]"),
+ 	NULL},
+{"annual_crit_load_unmet", (getter)Outputs_get_annual_crit_load_unmet,(setter)0,
+	PyDoc_STR("*float*: Critical load energy unmet (year 1) [kWh]"),
+ 	NULL},
+{"annual_crit_load_unmet_percentage", (getter)Outputs_get_annual_crit_load_unmet_percentage,(setter)0,
+	PyDoc_STR("*float*: Critical load unmet percentage (year 1) [%]"),
+ 	NULL},
 {"annual_energy_distribution_time", (getter)Outputs_get_annual_energy_distribution_time,(setter)0,
 	PyDoc_STR("*sequence[sequence]*: Annual energy production as function of time [kW]"),
  	NULL},
@@ -1390,6 +1471,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"annual_import_to_grid_energy", (getter)Outputs_get_annual_import_to_grid_energy,(setter)0,
 	PyDoc_STR("*sequence*: Annual energy imported from grid [kWh]"),
+ 	NULL},
+{"annual_outage_losses_unmet", (getter)Outputs_get_annual_outage_losses_unmet,(setter)0,
+	PyDoc_STR("*float*: Battery and system losses unmet energy (year 1) [kWh]"),
  	NULL},
 {"average_battery_conversion_efficiency", (getter)Outputs_get_average_battery_conversion_efficiency,(setter)0,
 	PyDoc_STR("*float*: Battery average cycle conversion efficiency [%]"),
@@ -1547,6 +1631,9 @@ static PyGetSetDef Outputs_getset[] = {
 {"batt_to_load", (getter)Outputs_get_batt_to_load,(setter)0,
 	PyDoc_STR("*sequence*: Electricity to load from battery [kW]"),
  	NULL},
+{"batt_to_system_load", (getter)Outputs_get_batt_to_system_load,(setter)0,
+	PyDoc_STR("*sequence*: Electricity to system loads from battery [kW]"),
+ 	NULL},
 {"batt_voltage", (getter)Outputs_get_batt_voltage,(setter)0,
 	PyDoc_STR("*sequence*: Battery voltage [V]"),
  	NULL},
@@ -1555,6 +1642,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"cdf_of_surviving", (getter)Outputs_get_cdf_of_surviving,(setter)0,
 	PyDoc_STR("*sequence*: Cumulative probabilities of autonomous hours for resilience"),
+ 	NULL},
+{"crit_load", (getter)Outputs_get_crit_load,(setter)0,
+	PyDoc_STR("*sequence*: Critical load in this timestep [kW]"),
  	NULL},
 {"crit_load_unmet", (getter)Outputs_get_crit_load_unmet,(setter)0,
 	PyDoc_STR("*sequence*: Critical load unmet in this timestep [kW]"),
@@ -1566,7 +1656,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: System power generated [kW]"),
  	NULL},
 {"gen_without_battery", (getter)Outputs_get_gen_without_battery,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced without the battery or curtailment [kW]"),
+	PyDoc_STR("*sequence*: Power produced without the battery or curtailment [kW]"),
  	NULL},
 {"grid_power", (getter)Outputs_get_grid_power,(setter)0,
 	PyDoc_STR("*sequence*: Electricity to/from grid [kW]"),
@@ -1592,6 +1682,18 @@ static PyGetSetDef Outputs_getset[] = {
 {"monthly_batt_to_load", (getter)Outputs_get_monthly_batt_to_load,(setter)0,
 	PyDoc_STR("*sequence*: Energy to load from battery [kWh]"),
  	NULL},
+{"monthly_batt_to_system_load", (getter)Outputs_get_monthly_batt_to_system_load,(setter)0,
+	PyDoc_STR("*sequence*: Energy to system loads from battery [kWh]"),
+ 	NULL},
+{"monthly_crit_load", (getter)Outputs_get_monthly_crit_load,(setter)0,
+	PyDoc_STR("*sequence*: Critical load energy [kWh]"),
+ 	NULL},
+{"monthly_crit_load_unmet", (getter)Outputs_get_monthly_crit_load_unmet,(setter)0,
+	PyDoc_STR("*sequence*: Critical load energy unmet [kWh]"),
+ 	NULL},
+{"monthly_crit_load_unmet_percentage", (getter)Outputs_get_monthly_crit_load_unmet_percentage,(setter)0,
+	PyDoc_STR("*sequence*: Critical load unmet percentage [%]"),
+ 	NULL},
 {"monthly_grid_to_batt", (getter)Outputs_get_monthly_grid_to_batt,(setter)0,
 	PyDoc_STR("*sequence*: Energy to battery from grid [kWh]"),
  	NULL},
@@ -1600,6 +1702,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"monthly_interconnection_loss", (getter)Outputs_get_monthly_interconnection_loss,(setter)0,
 	PyDoc_STR("*sequence*: Energy loss due to curtailment, interconnection, or outage [kWh]"),
+ 	NULL},
+{"monthly_outage_losses_unmet", (getter)Outputs_get_monthly_outage_losses_unmet,(setter)0,
+	PyDoc_STR("*sequence*: Battery and system losses unmet energy [kWh]"),
  	NULL},
 {"monthly_system_to_batt", (getter)Outputs_get_monthly_system_to_batt,(setter)0,
 	PyDoc_STR("*sequence*: Energy to battery from system [kWh]"),
@@ -1612,6 +1717,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"outage_durations", (getter)Outputs_get_outage_durations,(setter)0,
 	PyDoc_STR("*sequence*: List of autonomous hours for resilience from min to max [hr]"),
+ 	NULL},
+{"outage_losses_unmet", (getter)Outputs_get_outage_losses_unmet,(setter)0,
+	PyDoc_STR("*sequence*: Battery and system losses unmet in this timestep [kW]"),
  	NULL},
 {"pdf_of_surviving", (getter)Outputs_get_pdf_of_surviving,(setter)0,
 	PyDoc_STR("*sequence*: Probabilities of autonomous hours for resilience "),
