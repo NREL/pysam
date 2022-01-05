@@ -39,6 +39,8 @@ done
 mypy stubs/stubs || exit
 python stubs/setup.py bdist_wheel
 
+twine upload $PYSAMDIR/dist/*stubs*.whl
+
 yes | $PYSAMDIR/build_conda.sh || exit
 
 #
@@ -46,8 +48,8 @@ yes | $PYSAMDIR/build_conda.sh || exit
 #
 
 cd ..
-docker pull quay.io/pypa/manylinux1_x86_64
-docker run --rm -v $(pwd):/io quay.io/pypa/manylinux1_x86_64 /io/pysam/build_manylinux.sh
+docker pull quay.io/pypa/manylinux2010_x86_64
+docker run --rm -dit -v $(pwd):/io quay.io/pypa/manylinux2010_x86_64 /bin/bash
 rename -s linux manylinux1 $PYSAMDIR/dist/*-linux_*
 
 docker pull continuumio/anaconda
