@@ -48,6 +48,12 @@ SystemCosts Group
 .. autoclass:: PySAM.Merchantplant.Merchantplant.SystemCosts
 	:members:
 
+LandLease Group
+======================================================
+
+.. autoclass:: PySAM.Merchantplant.Merchantplant.LandLease
+	:members:
+
 TaxCreditIncentives Group
 ======================================================
 
@@ -78,6 +84,12 @@ BatterySystem Group
 .. autoclass:: PySAM.Merchantplant.Merchantplant.BatterySystem
 	:members:
 
+ElectricityRates Group
+======================================================
+
+.. autoclass:: PySAM.Merchantplant.Merchantplant.ElectricityRates
+	:members:
+
 SystemOutput Group
 ======================================================
 
@@ -106,6 +118,18 @@ CapacityPayments Group
 ======================================================
 
 .. autoclass:: PySAM.Merchantplant.Merchantplant.CapacityPayments
+	:members:
+
+LCOS Group
+======================================================
+
+.. autoclass:: PySAM.Merchantplant.Merchantplant.LCOS
+	:members:
+
+ChargesByMonth Group
+======================================================
+
+.. autoclass:: PySAM.Merchantplant.Merchantplant.ChargesByMonth
 	:members:
 
 GridLimits Group

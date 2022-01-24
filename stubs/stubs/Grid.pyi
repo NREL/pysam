@@ -13,22 +13,6 @@ class Lifetime(object):
 	system_use_lifetime_output = float
 
 
-class GridLimits(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> dict:
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	enable_interconnection_limit = float
-	grid_curtailment = tuple
-	grid_interconnection_limit_kwac = float
-
-
 class SystemOutput(object):
 	def assign(self): 
 		pass
@@ -55,8 +39,26 @@ class Load(object):
 		pass
 
 
+	crit_load = tuple
+	grid_outage = tuple
 	load = tuple
 	load_escalation = tuple
+
+
+class GridLimits(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> dict:
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
+	enable_interconnection_limit = float
+	grid_curtailment = tuple
+	grid_interconnection_limit_kwac = float
 
 
 class Outputs(object):
@@ -107,9 +109,9 @@ class Grid(object):
 		pass
 
 	Lifetime = Lifetime
-	GridLimits = GridLimits
 	SystemOutput = SystemOutput
 	Load = Load
+	GridLimits = GridLimits
 	Outputs = Outputs
 
 

@@ -9,18 +9,17 @@ ln -s /opt/python/cp37-cp37m/bin/cmake /usr/bin/cmake
 
 mkdir -p /io/build_linux_ssc
 cd /io/build_linux_ssc
-rm -rf *
-cmake ${SSCDIR} -DCMAKE_BUILD_TYPE=Release -DSAM_SKIP_TOOLS=1 -DSAMAPI_EXPORT=1 -DSAM_SKIP_TESTS=1 ../ssc/
+cmake ${SSCDIR} -DCMAKE_BUILD_TYPE=Release -DSAM_SKIP_TOOLS=1 -DSAMAPI_EXPORT=1 -DSAM_SKIP_TESTS=1 ../ssc/ || exit
 make -j 6
 
 mkdir -p /io/build_linux_sam
 cd /io/build_linux_sam
 rm -rf *
-cmake ${SAMNTDIR}/api -DCMAKE_BUILD_TYPE=Release -DSAMAPI_EXPORT=1 -DSAM_SKIP_AUTOGEN=1 ../sam/api
+cmake ${SAMNTDIR}/api -DCMAKE_BUILD_TYPE=Release -DSAMAPI_EXPORT=1 -DSAM_SKIP_AUTOGEN=1 ../sam/api || exit
 make -j 6
 
 cd $PYSAMDIR
-for PYTHONENV in cp36-cp36m cp37-cp37m cp38-cp38 cp39-cp39
+for PYTHONENV in cp36-cp36m cp37-cp37m cp38-cp38 cp39-cp39 cp310-cp310
 do
    yes | /opt/python/$PYTHONENV/bin/pip install -r tests/requirements.txt
    yes | /opt/python/$PYTHONENV/bin/pip uninstall NREL-PySAM NREL-PySAM-stubs

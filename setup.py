@@ -12,6 +12,8 @@ from files.version import __version__
 
 latest_version = __version__
 
+DEBUG = False
+
 # defaults and include directories
 defaults_dir = os.environ['SAMNTDIR'] + "/api/api_autogen/library/defaults/"
 includepath = os.environ['SAMNTDIR'] + "/api/include"
@@ -27,32 +29,47 @@ with open(os.path.join(this_directory, 'RELEASE.md'), encoding='utf-8') as f:
 
 
 # prepare package
-libs = []
 libfiles = ['__init__.py', 'version.py']
 extra_compile_args = ["-Wno-implicit-function-declaration", "-Wno-unused-function", "-Wno-strict-prototypes"]
 extra_link_args = []
 defines = []
+libs = ['SAM_api']
+if DEBUG:
+    libs += ['sscd']
+else:
+    libs += ['ssc']
 
 if sys.platform == 'darwin':
     from distutils import sysconfig
     vars = sysconfig.get_config_vars()
     vars['LDSHARED'] = vars['LDSHARED'].replace('-bundle', '-dynamiclib')
-    libs = ['SAM_api', 'sscd']
-    libfiles += ['libSAM_api.so', 'libsscd.so']
+    libfiles += ['libSAM_api.so']
+    if DEBUG:
+        libfiles += ['libsscd.so']
+    else:
+        libfiles += ['libssc.so']
     extra_link_args = ["-headerpad_max_install_names", "-Wl,-rpath,@loader_path/"]
     extra_compile_args.append("-Wno-ignored-attributes")
 
 if sys.platform == 'linux':
-    libs = ['SAM_api', 'ssc']
-    libfiles += ['libSAM_api.so', 'libssc.so']
+    libfiles += ['libSAM_api.so']
+    if DEBUG:
+        libfiles += ['libsscd.so']
+    else:
+        libfiles += ['libssc.so']
     extra_link_args = ["-Wl,-rpath,$ORIGIN/"]
     extra_compile_args.append('-Wno-attributes')
 
 if sys.platform == 'win32':
-    libs = ['SAM_api', 'sscd']
-    libfiles += ['SAM_api.dll', 'sscd.dll', 'SAM_api.lib', 'sscd.lib']
+    libfiles += ['SAM_api.dll', 'SAM_api.lib']
+    if DEBUG:
+        libfiles += ['sscd.dll', 'sscd.lib']
+    else:
+        libfiles += ['ssc.dll', 'ssc.lib']
     defines = [('__WINDOWS__', '1')]
-    extra_compile_args = ["/DEBUG", "/Od"]
+    extra_compile_args = []
+    if DEBUG:
+        extra_compile_args = ["/DEBUG", "/Od"]
 
 
 ###################################################################################################

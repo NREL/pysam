@@ -43,6 +43,23 @@ MHKTidal_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+MHKTidal_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &MHKTidal_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "MhkTidal", "MHKTidal")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 MHKTidal_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &MHKTidal_Type;
@@ -52,7 +69,9 @@ MHKTidal_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef MHKTidal_methods[] = {
 		{"assign",            (PyCFunction)MHKTidal_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``MHKTidal_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``MHKTidal_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)MHKTidal_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``MHKTidal_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)MHKTidal_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -179,6 +198,18 @@ MHKTidal_set_number_devices(VarGroupObject *self, PyObject *value, void *closure
 }
 
 static PyObject *
+MHKTidal_get_system_capacity(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MhkTidal_MHKTidal_system_capacity_nget, self->data_ptr);
+}
+
+static int
+MHKTidal_set_system_capacity(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_MhkTidal_MHKTidal_system_capacity_nset, self->data_ptr);
+}
+
+static PyObject *
 MHKTidal_get_tidal_power_curve(VarGroupObject *self, void *closure)
 {
 	return PySAM_matrix_getter(SAM_MhkTidal_MHKTidal_tidal_power_curve_mget, self->data_ptr);
@@ -216,13 +247,13 @@ MHKTidal_set_total_operating_cost(VarGroupObject *self, PyObject *value, void *c
 
 static PyGetSetDef MHKTidal_getset[] = {
 {"balance_of_system_cost_total", (getter)MHKTidal_get_balance_of_system_cost_total,(setter)MHKTidal_set_balance_of_system_cost_total,
-	PyDoc_STR("*float*: BOS costs [$]\n\n*Required*: If not provided, assumed to be 1\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - device_costs_total\n\t - number_devices\n\t - tidal_power_curve\n"),
+	PyDoc_STR("*float*: BOS costs [$]\n\n*Required*: If not provided, assumed to be 1"),
  	NULL},
 {"device_costs_total", (getter)MHKTidal_get_device_costs_total,(setter)MHKTidal_set_device_costs_total,
-	PyDoc_STR("*float*: Device costs [$]\n\n*Required*: If not provided, assumed to be 1\n\n*Changes to this variable may require updating the values of the following*: \n\t - balance_of_system_cost_total\n\t - financial_cost_total\n\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - number_devices\n\t - tidal_power_curve\n"),
+	PyDoc_STR("*float*: Device costs [$]\n\n*Required*: If not provided, assumed to be 1"),
  	NULL},
 {"financial_cost_total", (getter)MHKTidal_get_financial_cost_total,(setter)MHKTidal_set_financial_cost_total,
-	PyDoc_STR("*float*: Financial costs [$]\n\n*Required*: If not provided, assumed to be 1\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - device_costs_total\n\t - number_devices\n\t - tidal_power_curve\n"),
+	PyDoc_STR("*float*: Financial costs [$]\n\n*Required*: If not provided, assumed to be 1"),
  	NULL},
 {"fixed_charge_rate", (getter)MHKTidal_get_fixed_charge_rate,(setter)MHKTidal_set_fixed_charge_rate,
 	PyDoc_STR("*float*: FCR from LCOE Cost page\n\n*Required*: If not provided, assumed to be 1"),
@@ -243,16 +274,19 @@ static PyGetSetDef MHKTidal_getset[] = {
 	PyDoc_STR("*float*: Transmission losses [%]\n\n*Required*: True"),
  	NULL},
 {"number_devices", (getter)MHKTidal_get_number_devices,(setter)MHKTidal_set_number_devices,
-	PyDoc_STR("*float*: Number of tidal devices in the system\n\n*Constraints*: INTEGER\n\n*Required*: If not provided, assumed to be 1\n\n*Changes to this variable may require updating the values of the following*: \n\t - balance_of_system_cost_total\n\t - device_costs_total\n\t - financial_cost_total\n\t - total_operating_cost\n\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - tidal_power_curve\n"),
+	PyDoc_STR("*float*: Number of tidal devices in the system\n\n*Constraints*: INTEGER\n\n*Required*: If not provided, assumed to be 1\n\n*Changes to this variable may require updating the values of the following*: \n\t - system_capacity\n\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - tidal_power_curve\n"),
+ 	NULL},
+{"system_capacity", (getter)MHKTidal_get_system_capacity,(setter)MHKTidal_set_system_capacity,
+	PyDoc_STR("*float*: System Nameplate Capacity [kW]\n\n*Required*: If not provided, assumed to be 0\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - number_devices\n\t - tidal_power_curve\n"),
  	NULL},
 {"tidal_power_curve", (getter)MHKTidal_get_tidal_power_curve,(setter)MHKTidal_set_tidal_power_curve,
-	PyDoc_STR("*sequence[sequence]*: Power curve of tidal energy device as function of stream speeds [kW]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - balance_of_system_cost_total\n\t - device_costs_total\n\t - financial_cost_total\n\t - number_devices\n\t - total_operating_cost\n"),
+	PyDoc_STR("*sequence[sequence]*: Power curve of tidal energy device as function of stream speeds [kW]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - number_devices\n\t - system_capacity\n"),
  	NULL},
 {"tidal_resource", (getter)MHKTidal_get_tidal_resource,(setter)MHKTidal_set_tidal_resource,
 	PyDoc_STR("*sequence[sequence]*: Frequency distribution of resource as a function of stream speeds\n\n*Required*: True"),
  	NULL},
 {"total_operating_cost", (getter)MHKTidal_get_total_operating_cost,(setter)MHKTidal_set_total_operating_cost,
-	PyDoc_STR("*float*: O&M costs [$]\n\n*Required*: If not provided, assumed to be 1\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - number_devices\n\t - tidal_power_curve\n"),
+	PyDoc_STR("*float*: O&M costs [$]\n\n*Required*: If not provided, assumed to be 1"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -341,6 +375,23 @@ Outputs_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+Outputs_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Outputs_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "MhkTidal", "Outputs")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 Outputs_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &Outputs_Type;
@@ -350,7 +401,9 @@ Outputs_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Outputs_methods[] = {
 		{"assign",            (PyCFunction)Outputs_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Outputs_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Outputs_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Outputs_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Outputs_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -429,6 +482,12 @@ Outputs_get_total_bos_cost_lcoe(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_total_bos_cost_per_kw(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MhkTidal_Outputs_total_bos_cost_per_kw_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_total_capital_cost_kwh(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_MhkTidal_Outputs_total_capital_cost_kwh_nget, self->data_ptr);
@@ -438,6 +497,12 @@ static PyObject *
 Outputs_get_total_capital_cost_lcoe(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_MhkTidal_Outputs_total_capital_cost_lcoe_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_total_capital_cost_per_kw(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MhkTidal_Outputs_total_capital_cost_per_kw_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -453,6 +518,12 @@ Outputs_get_total_device_cost_lcoe(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_total_device_cost_per_kw(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MhkTidal_Outputs_total_device_cost_per_kw_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_total_financial_cost_kwh(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_MhkTidal_Outputs_total_financial_cost_kwh_nget, self->data_ptr);
@@ -465,6 +536,12 @@ Outputs_get_total_financial_cost_lcoe(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_total_financial_cost_per_kw(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MhkTidal_Outputs_total_financial_cost_per_kw_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_total_om_cost_kwh(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_MhkTidal_Outputs_total_om_cost_kwh_nget, self->data_ptr);
@@ -474,6 +551,12 @@ static PyObject *
 Outputs_get_total_om_cost_lcoe(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_MhkTidal_Outputs_total_om_cost_lcoe_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_total_operations_cost_per_kw(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MhkTidal_Outputs_total_operations_cost_per_kw_nget, self->data_ptr);
 }
 
 static PyGetSetDef Outputs_getset[] = {
@@ -513,11 +596,17 @@ static PyGetSetDef Outputs_getset[] = {
 {"total_bos_cost_lcoe", (getter)Outputs_get_total_bos_cost_lcoe,(setter)0,
 	PyDoc_STR("*float*: BOS cost [%]"),
  	NULL},
+{"total_bos_cost_per_kw", (getter)Outputs_get_total_bos_cost_per_kw,(setter)0,
+	PyDoc_STR("*float*: Balance of Systems cost per kW [$/kW]"),
+ 	NULL},
 {"total_capital_cost_kwh", (getter)Outputs_get_total_capital_cost_kwh,(setter)0,
 	PyDoc_STR("*float*: Capital costs per unit annual energy [$/kWh]"),
  	NULL},
 {"total_capital_cost_lcoe", (getter)Outputs_get_total_capital_cost_lcoe,(setter)0,
 	PyDoc_STR("*float*: Capital cost as percentage of overall LCOE [%]"),
+ 	NULL},
+{"total_capital_cost_per_kw", (getter)Outputs_get_total_capital_cost_per_kw,(setter)0,
+	PyDoc_STR("*float*: Capital cost per kW [$/kW]"),
  	NULL},
 {"total_device_cost_kwh", (getter)Outputs_get_total_device_cost_kwh,(setter)0,
 	PyDoc_STR("*float*: Device costs per unit annual energy [$/kWh]"),
@@ -525,17 +614,26 @@ static PyGetSetDef Outputs_getset[] = {
 {"total_device_cost_lcoe", (getter)Outputs_get_total_device_cost_lcoe,(setter)0,
 	PyDoc_STR("*float*: Device cost [%]"),
  	NULL},
+{"total_device_cost_per_kw", (getter)Outputs_get_total_device_cost_per_kw,(setter)0,
+	PyDoc_STR("*float*: Device cost per kW [$/kW]"),
+ 	NULL},
 {"total_financial_cost_kwh", (getter)Outputs_get_total_financial_cost_kwh,(setter)0,
 	PyDoc_STR("*float*: Financial costs per unit annual energy [$/kWh]"),
  	NULL},
 {"total_financial_cost_lcoe", (getter)Outputs_get_total_financial_cost_lcoe,(setter)0,
 	PyDoc_STR("*float*: Financial cost [%]"),
  	NULL},
+{"total_financial_cost_per_kw", (getter)Outputs_get_total_financial_cost_per_kw,(setter)0,
+	PyDoc_STR("*float*: Financial cost per kW [$/kW]"),
+ 	NULL},
 {"total_om_cost_kwh", (getter)Outputs_get_total_om_cost_kwh,(setter)0,
 	PyDoc_STR("*float*: O&M costs per unit annual energy [$/kWh]"),
  	NULL},
 {"total_om_cost_lcoe", (getter)Outputs_get_total_om_cost_lcoe,(setter)0,
 	PyDoc_STR("*float*: O&M cost (annual) [%]"),
+ 	NULL},
+{"total_operations_cost_per_kw", (getter)Outputs_get_total_operations_cost_per_kw,(setter)0,
+	PyDoc_STR("*float*: O&M cost per kW [$/kW]"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -658,6 +756,20 @@ MhkTidal_assign(CmodObject *self, PyObject *args)
 	return Py_None;
 }
 
+static PyObject *
+MhkTidal_replace(CmodObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_replace_from_nested_dict((PyObject*)self, self->x_attr, self->data_ptr, dict, "MhkTidal"))
+		return NULL;
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
 
 static PyObject *
 MhkTidal_export(CmodObject *self, PyObject *args)
@@ -682,6 +794,8 @@ static PyMethodDef MhkTidal_methods[] = {
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
 		{"assign",            (PyCFunction)MhkTidal_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'MHKTidal': { var: val, ...}, ...}``")},
+		{"replace",            (PyCFunction)MhkTidal_replace,  METH_VARARGS,
+				PyDoc_STR("replace(dict) -> None\n Replace attributes from nested dictionary, except for Outputs. Unassigns all values in each Group then assigns from the input dict.\n\n``nested_dict = { 'MHKTidal': { var: val, ...}, ...}``")},
 		{"export",            (PyCFunction)MhkTidal_export,  METH_VARARGS,
 				PyDoc_STR("export() -> dict\n Export attributes into nested dictionary")},
 		{"value",             (PyCFunction)MhkTidal_value, METH_VARARGS,
@@ -847,7 +961,7 @@ static PyMethodDef MhkTidalModule_methods[] = {
 				PyDoc_STR("new() -> MhkTidal")},
 		{"default",             MhkTidal_default,         METH_VARARGS,
 				PyDoc_STR("default(config) -> MhkTidal\n\nUse default attributes\n"
-				"`config` options:\n\n- \"MEtidalLCOECalculator\"")},
+				"`config` options:\n\n- \"MEtidalLCOECalculator\"\n- \"MEtidalNone\"")},
 		{"wrap",             MhkTidal_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> MhkTidal\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   MhkTidal_from_existing,        METH_VARARGS,

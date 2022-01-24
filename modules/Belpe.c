@@ -43,6 +43,23 @@ LoadProfileEstimator_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+LoadProfileEstimator_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &LoadProfileEstimator_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Belpe", "LoadProfileEstimator")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 LoadProfileEstimator_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &LoadProfileEstimator_Type;
@@ -52,7 +69,9 @@ LoadProfileEstimator_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef LoadProfileEstimator_methods[] = {
 		{"assign",            (PyCFunction)LoadProfileEstimator_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``LoadProfileEstimator_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``LoadProfileEstimator_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)LoadProfileEstimator_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``LoadProfileEstimator_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)LoadProfileEstimator_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -521,6 +540,20 @@ Belpe_assign(CmodObject *self, PyObject *args)
 	return Py_None;
 }
 
+static PyObject *
+Belpe_replace(CmodObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_replace_from_nested_dict((PyObject*)self, self->x_attr, self->data_ptr, dict, "Belpe"))
+		return NULL;
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
 
 static PyObject *
 Belpe_export(CmodObject *self, PyObject *args)
@@ -545,6 +578,8 @@ static PyMethodDef Belpe_methods[] = {
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
 		{"assign",            (PyCFunction)Belpe_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Load Profile Estimator': { var: val, ...}, ...}``")},
+		{"replace",            (PyCFunction)Belpe_replace,  METH_VARARGS,
+				PyDoc_STR("replace(dict) -> None\n Replace attributes from nested dictionary, except for Outputs. Unassigns all values in each Group then assigns from the input dict.\n\n``nested_dict = { 'Load Profile Estimator': { var: val, ...}, ...}``")},
 		{"export",            (PyCFunction)Belpe_export,  METH_VARARGS,
 				PyDoc_STR("export() -> dict\n Export attributes into nested dictionary")},
 		{"value",             (PyCFunction)Belpe_value, METH_VARARGS,
@@ -710,7 +745,7 @@ static PyMethodDef BelpeModule_methods[] = {
 				PyDoc_STR("new() -> Belpe")},
 		{"default",             Belpe_default,         METH_VARARGS,
 				PyDoc_STR("default(config) -> Belpe\n\nUse default attributes\n"
-				"`config` options:\n\n- \"FlatPlatePVResidential\"\n- \"FlatPlatePVThirdParty\"\n- \"GenericBatteryResidential\"\n- \"GenericBatteryThirdParty\"\n- \"PVBatteryResidential\"\n- \"PVBatteryThirdParty\"\n- \"PVWattsBatteryResidential\"\n- \"PVWattsBatteryThirdParty\"\n- \"PVWattsResidential\"\n- \"PVWattsThirdParty\"\n- \"SolarWaterHeatingResidential\"")},
+				"`config` options:\n\n- \"FlatPlatePVResidential\"\n- \"FlatPlatePVThirdParty\"\n- \"GenericBatteryResidential\"\n- \"GenericBatteryThirdParty\"\n- \"PVBatteryResidential\"\n- \"PVBatteryThirdParty\"\n- \"PVWattsBatteryResidential\"\n- \"PVWattsBatteryThirdParty\"\n- \"PVWattsResidential\"\n- \"PVWattsThirdParty\"\n- \"SolarWaterHeatingResidential\"\n- \"StandaloneBatteryResidential\"\n- \"StandaloneBatteryThirdParty\"")},
 		{"wrap",             Belpe_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Belpe\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   Belpe_from_existing,        METH_VARARGS,

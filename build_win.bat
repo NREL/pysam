@@ -11,7 +11,7 @@ cd %PYSAMDIR%
 echo y | rmdir build /s
 echo y | del dist/*
 
-FOR %%i IN (pysam_build_3.6 pysam_build_3.7, pysam_build_3.8 pysam_build_3.9) DO (
+FOR %%i IN (pysam_build_3.6 pysam_build_3.7, pysam_build_3.8 pysam_build_3.9 pysam_build_3.10) DO (
 	call deactivate
     call activate %%i
     echo y | pip install -r tests/requirements.txt
@@ -25,7 +25,7 @@ FOR %%i IN (pysam_build_3.6 pysam_build_3.7, pysam_build_3.8 pysam_build_3.9) DO
     python setup.py bdist_wheel
 )
 REM twine upload dist/*.whl
-%bash% build_conda.sh
+REM %bash% build_conda.sh
 REM anaconda upload -u nrel dist/*.tar.bz2
 
 REM rmdir %SSCDIR%\..\build_pysam /s

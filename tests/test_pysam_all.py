@@ -1,10 +1,10 @@
 import os
+import sys
 from pathlib import Path
 import glob
 import importlib
 import PySAM.GenericSystem as GenericSystem
 from pympler.tracker import SummaryTracker
-import gc
 from PySAM.PySSC import PySSC
 
 ssc = PySSC()
@@ -218,6 +218,27 @@ def test_functionality():
         assert(a.value("energy_output_array")[1] == 1)
         assert(a.value("energy_output_array")[2] == 2)
 
+        # Test `replace` function
+        a.Plant.replace({"derate": 0})
+        assert(a.Plant.derate == 0)
+        try:
+            a.Plant.energy_output_array
+            assert False
+        except:
+            n_tests_passed += 1
+            assert True
+
+        a = GenericSystem.default("GenericSystemNone")
+        a.Lifetime.system_use_lifetime_output = 1
+        a.replace({"Plant": {"derate": 1}})
+        assert(a.Plant.derate == 1)
+        try:
+            a.Lifetime.system_use_lifetime_output
+            assert False
+        except:
+            n_tests_passed += 1
+            assert True
+
         if round == 3:
             tracker.print_diff()
 
@@ -248,8 +269,8 @@ wf = str(Path(__file__).parent / "AR Northwestern-Flat Lands.srw")
 
 
 def assign_values(mod, i):
-    defs_path = str(Path(__file__).parent.parent / "files" / "defaults" / ("*" + mod.lower())) + "*"
-    defaults = glob.glob(defs_path)
+    defaults = glob.glob(os.environ['SAMNTDIR'] + "/api/api_autogen/library/defaults/" + mod + "_*.json")
+
     for default in defaults:
         default = os.path.basename(default).split('.')[0].split('_')[1]
         m = i.default(default)
@@ -270,22 +291,48 @@ def assign_values(mod, i):
         elif mod == "Grid":
             m.SystemOutput.gen = [1 for i in range(8760)]
             m.Lifetime.system_use_lifetime_output = 0
+        elif mod == "Battwatts":
+            m.value("ac", [1] * 8760)
+            m.value("inverter_efficiency", 0.96)
+        elif mod == "Battery":
+            m.value("gen", [1] * 8760)
+        else:
+            try:
+                m.value("solar_resource_file", sf)
+            except:
+                try:
+                    m.value("file_name", sf)
+                except:
+                    pass
 
         try:
             m.SystemOutput.system_capacity = 10000
             m.TimeSeries.gen = [1 for i in range(8760)]
         except:
             pass
-        m.execute(0)
+        try:
+            m.value("analysis_period", 1)
+            m.value("batt_dispatch_choice", 0)
+        except:
+            pass
+        try:
+            m.execute(0)
+        except:
+            raise RuntimeError(f"Failed to run {mod} with default {default}")
 
 
 def test_run_all():
-    techs = ("Pvsamv1", "Pvwattsv7", "Pvwattsv5", "TcsmoltenSalt", "Hcpv", "Swh", "TcsdirectSteam",
-             "Tcsiscc", "Windpower", "GenericSystem", "Grid")
+    # only run test on first Python version to be built, since this test is very time consuming
+    minor_ver = sys.version_info[1]
+    if minor_ver != 6:
+        return
+    techs = (
+        "Battery", "Battwatts", "Biomass", "Geothermal", "LinearFresnelDsgIph", "MhkTidal", "MhkWave", "Windpower",
+        "Pvsamv1", "Pvwattsv7", "Pvwattsv5", "TcsmoltenSalt", "Hcpv", "Swh", "GenericSystem", "Grid",
+        "TroughPhysicalProcessHeat", "TcsMSLF", "TcsgenericSolar", "TcslinearFresnel", "TcstroughEmpirical",
+        "TroughPhysical", "EtesElectricResistance", )
     for mod in techs:
         mod_name = "PySAM." + mod
-        config = mod_name + "SingleOwner"
         i = importlib.import_module(mod_name)
         m = assign_values(mod, i)
-
-
+        print(f"{mod} passed")

@@ -70,8 +70,6 @@ class SolarField(object):
 	Rho_mirror_clean = tuple
 	Rough = tuple
 	Row_Distance = float
-	SCADefocusArray = tuple
-	SCAInfoArray = tuple
 	SCA_drives_elec = float
 	Shadowing = tuple
 	T_fp = float
@@ -128,7 +126,6 @@ class SolarField(object):
 	sf_rnr_diams = tuple
 	sf_rnr_lengths = tuple
 	sf_rnr_wallthicks = tuple
-	solar_mult = float
 	theta_dep = float
 	theta_stow = float
 	washing_frequency = float
@@ -147,10 +144,14 @@ class Controller(object):
 		pass
 
 
+	disp_wlim_maxspec = float
 	field_fl_props = tuple
+	non_solar_field_land_area_multiplier = float
 	pb_pump_coef = float
 	q_pb_design = float
+	specified_solar_multiple = float
 	tanks_in_parallel = float
+	trough_loop_control = tuple
 
 
 class SystemDesign(object):
@@ -252,9 +253,24 @@ class Tou(object):
 	ppa_multiplier_model = float
 	q_rec_heattrace = float
 	q_rec_standby = float
+	timestep_load_fractions = tuple
 	weekday_schedule = tuple
 	weekend_schedule = tuple
 	wlim_series = tuple
+
+
+class SystemControl(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> dict:
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
+	disp_inventory_incentive = float
 
 
 class System(object):
@@ -339,6 +355,7 @@ class Outputs(object):
 	W_dot_sca_track = tuple
 	annual_electricity_consumption = float
 	annual_energy = float
+	annual_energy_distribution_time = tuple
 	annual_field_freeze_protection = float
 	annual_gross_energy = float
 	annual_tes_freeze_protection = float
@@ -350,6 +367,7 @@ class Outputs(object):
 	dni_costh = tuple
 	e_ch_tes = tuple
 	e_dot_field_int_energy = tuple
+	gen = tuple
 	hour_day = tuple
 	kwh_per_kw = float
 	m_dot_balance = tuple
@@ -383,6 +401,7 @@ class Outputs(object):
 	q_inc_sf_tot = tuple
 	q_tes_heater = tuple
 	qinc_costh = tuple
+	solar_multiple_actual = float
 	solazi = tuple
 	solzen = tuple
 	tank_losses = tuple
@@ -421,6 +440,7 @@ class TroughPhysicalProcessHeat(object):
 	TES = TES
 	TES2tank = TES2tank
 	Tou = Tou
+	SystemControl = SystemControl
 	System = System
 	Powerblock = Powerblock
 	AdjustmentFactors = AdjustmentFactors

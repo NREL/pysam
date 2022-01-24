@@ -7,17 +7,20 @@ c_number = c_double  # must be c_double or c_float depending on how defined in s
 
 
 class PySSC:
-    def __init__(self):
+    def __init__(self, pdll_path=None):
         this_directory = os.path.abspath(os.path.dirname(__file__))
 
-        if sys.platform == 'win32' or sys.platform == 'cygwin':
-            self.pdll = CDLL(os.path.join(this_directory, "ssc.dll"))
-        elif sys.platform == 'darwin':
-            self.pdll = CDLL(os.path.join(this_directory, "libssc.so"))
-        elif sys.platform == 'linux':
-            self.pdll = CDLL(os.path.join(this_directory, 'libssc.so'))
+        if pdll_path == None:
+            if sys.platform == 'win32' or sys.platform == 'cygwin':
+                self.pdll = CDLL(os.path.join(this_directory, "ssc.dll"))
+            elif sys.platform == 'darwin':
+                self.pdll = CDLL(os.path.join(this_directory, "libssc.so"))
+            elif sys.platform == 'linux':
+                self.pdll = CDLL(os.path.join(this_directory, 'libssc.so'))
+            else:
+                print('Platform not supported ', sys.platform)
         else:
-            print('Platform not supported ', sys.platform)
+            self.pdll = CDLL(pdll_path)
 
     INVALID = 0
     STRING = 1
@@ -240,6 +243,7 @@ def ssc_sim_from_dict(data_pydict):
     -------
     (dict): dict
         keys are outputs from the selected compute module.
+
     """
     tech_model_name = data_pydict["tech_model"]
     # Convert python dictionary into ssc var info table

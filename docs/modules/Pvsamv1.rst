@@ -278,6 +278,12 @@ BatteryDispatch Group
 .. autoclass:: PySAM.Pvsamv1.Pvsamv1.BatteryDispatch
 	:members:
 
+SystemCosts Group
+======================================================
+
+.. autoclass:: PySAM.Pvsamv1.Pvsamv1.SystemCosts
+	:members:
+
 FuelCell Group
 ======================================================
 
@@ -294,6 +300,12 @@ ElectricityRates Group
 ======================================================
 
 .. autoclass:: PySAM.Pvsamv1.Pvsamv1.ElectricityRates
+	:members:
+
+GridLimits Group
+======================================================
+
+.. autoclass:: PySAM.Pvsamv1.Pvsamv1.GridLimits
 	:members:
 
 AdjustmentFactors Group

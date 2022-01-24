@@ -43,6 +43,23 @@ SolarPILOT_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+SolarPILOT_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &SolarPILOT_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Solarpilot", "SolarPILOT")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 SolarPILOT_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &SolarPILOT_Type;
@@ -52,7 +69,9 @@ SolarPILOT_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef SolarPILOT_methods[] = {
 		{"assign",            (PyCFunction)SolarPILOT_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``SolarPILOT_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``SolarPILOT_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)SolarPILOT_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``SolarPILOT_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)SolarPILOT_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -128,6 +147,42 @@ static int
 SolarPILOT_set_cant_type(VarGroupObject *self, PyObject *value, void *closure)
 {
 	return PySAM_double_setter(value, SAM_Solarpilot_SolarPILOT_cant_type_nset, self->data_ptr);
+}
+
+static PyObject *
+SolarPILOT_get_cav_rec_height(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Solarpilot_SolarPILOT_cav_rec_height_nget, self->data_ptr);
+}
+
+static int
+SolarPILOT_set_cav_rec_height(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Solarpilot_SolarPILOT_cav_rec_height_nset, self->data_ptr);
+}
+
+static PyObject *
+SolarPILOT_get_cav_rec_span(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Solarpilot_SolarPILOT_cav_rec_span_nget, self->data_ptr);
+}
+
+static int
+SolarPILOT_set_cav_rec_span(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Solarpilot_SolarPILOT_cav_rec_span_nset, self->data_ptr);
+}
+
+static PyObject *
+SolarPILOT_get_cav_rec_width(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Solarpilot_SolarPILOT_cav_rec_width_nget, self->data_ptr);
+}
+
+static int
+SolarPILOT_set_cav_rec_width(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Solarpilot_SolarPILOT_cav_rec_width_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -371,6 +426,18 @@ SolarPILOT_set_land_spec_cost(VarGroupObject *self, PyObject *value, void *closu
 }
 
 static PyObject *
+SolarPILOT_get_n_cav_rec_panels(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Solarpilot_SolarPILOT_n_cav_rec_panels_nget, self->data_ptr);
+}
+
+static int
+SolarPILOT_set_n_cav_rec_panels(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Solarpilot_SolarPILOT_n_cav_rec_panels_nset, self->data_ptr);
+}
+
+static PyObject *
 SolarPILOT_get_n_facet_x(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Solarpilot_SolarPILOT_n_facet_x_nget, self->data_ptr);
@@ -587,6 +654,18 @@ SolarPILOT_set_rec_ref_cost(VarGroupObject *self, PyObject *value, void *closure
 }
 
 static PyObject *
+SolarPILOT_get_receiver_type(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Solarpilot_SolarPILOT_receiver_type_nget, self->data_ptr);
+}
+
+static int
+SolarPILOT_set_receiver_type(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Solarpilot_SolarPILOT_receiver_type_nset, self->data_ptr);
+}
+
+static PyObject *
 SolarPILOT_get_sales_tax_frac(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Solarpilot_SolarPILOT_sales_tax_frac_nget, self->data_ptr);
@@ -677,6 +756,15 @@ static PyGetSetDef SolarPILOT_getset[] = {
 {"cant_type", (getter)SolarPILOT_get_cant_type,(setter)SolarPILOT_set_cant_type,
 	PyDoc_STR("*float*: Heliostat cant method\n\n*Required*: True"),
  	NULL},
+{"cav_rec_height", (getter)SolarPILOT_get_cav_rec_height,(setter)SolarPILOT_set_cav_rec_height,
+	PyDoc_STR("*float*: Cavity receiver height [m]\n\n*Required*: True if receiver_type=1"),
+ 	NULL},
+{"cav_rec_span", (getter)SolarPILOT_get_cav_rec_span,(setter)SolarPILOT_set_cav_rec_span,
+	PyDoc_STR("*float*: Cavity receiver span angle [deg]\n\n*Required*: True if receiver_type=1"),
+ 	NULL},
+{"cav_rec_width", (getter)SolarPILOT_get_cav_rec_width,(setter)SolarPILOT_set_cav_rec_width,
+	PyDoc_STR("*float*: Cavity receiver width [m]\n\n*Required*: True if receiver_type=1"),
+ 	NULL},
 {"check_max_flux", (getter)SolarPILOT_get_check_max_flux,(setter)SolarPILOT_set_check_max_flux,
 	PyDoc_STR("*float*: Check max flux at design point\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
@@ -737,6 +825,9 @@ static PyGetSetDef SolarPILOT_getset[] = {
 {"land_spec_cost", (getter)SolarPILOT_get_land_spec_cost,(setter)SolarPILOT_set_land_spec_cost,
 	PyDoc_STR("*float*: Total land area cost [$/acre]\n\n*Required*: True"),
  	NULL},
+{"n_cav_rec_panels", (getter)SolarPILOT_get_n_cav_rec_panels,(setter)SolarPILOT_set_n_cav_rec_panels,
+	PyDoc_STR("*float*: Cavity receiver number of panels\n\n*Required*: True if receiver_type=1"),
+ 	NULL},
 {"n_facet_x", (getter)SolarPILOT_get_n_facet_x,(setter)SolarPILOT_set_n_facet_x,
 	PyDoc_STR("*float*: Number of heliostat facets - X\n\n*Required*: True"),
  	NULL},
@@ -753,7 +844,7 @@ static PyGetSetDef SolarPILOT_getset[] = {
 	PyDoc_STR("*float*: Flux map Y resolution\n\n*Required*: If not provided, assumed to be 1"),
  	NULL},
 {"opt_algorithm", (getter)SolarPILOT_get_opt_algorithm,(setter)SolarPILOT_set_opt_algorithm,
-	PyDoc_STR("*float*: Optimization algorithm\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Optimization algorithm\n\n*Required*: If not provided, assumed to be 1"),
  	NULL},
 {"opt_conv_tol", (getter)SolarPILOT_get_opt_conv_tol,(setter)SolarPILOT_set_opt_conv_tol,
 	PyDoc_STR("*float*: Optimization convergence tol\n\n*Required*: If not provided, assumed to be 0.001"),
@@ -774,13 +865,13 @@ static PyGetSetDef SolarPILOT_getset[] = {
 	PyDoc_STR("*float*: Absorptance [frac]\n\n*Required*: True"),
  	NULL},
 {"rec_aspect", (getter)SolarPILOT_get_rec_aspect,(setter)SolarPILOT_set_rec_aspect,
-	PyDoc_STR("*float*: Receiver aspect ratio (H/W) [frac]\n\n*Required*: True"),
+	PyDoc_STR("*float*: External receiver aspect ratio (H/W) [frac]\n\n*Required*: True if receiver_type=0"),
  	NULL},
 {"rec_cost_exp", (getter)SolarPILOT_get_rec_cost_exp,(setter)SolarPILOT_set_rec_cost_exp,
 	PyDoc_STR("*float*: Receiver cost scaling exponent\n\n*Required*: True"),
  	NULL},
 {"rec_height", (getter)SolarPILOT_get_rec_height,(setter)SolarPILOT_set_rec_height,
-	PyDoc_STR("*float*: Receiver height [m]\n\n*Required*: True"),
+	PyDoc_STR("*float*: External receiver height [m]\n\n*Required*: True if receiver_type=0"),
  	NULL},
 {"rec_hl_perm2", (getter)SolarPILOT_get_rec_hl_perm2,(setter)SolarPILOT_set_rec_hl_perm2,
 	PyDoc_STR("*float*: Receiver design heat loss [kW/m2]\n\n*Required*: True"),
@@ -790,6 +881,9 @@ static PyGetSetDef SolarPILOT_getset[] = {
  	NULL},
 {"rec_ref_cost", (getter)SolarPILOT_get_rec_ref_cost,(setter)SolarPILOT_set_rec_ref_cost,
 	PyDoc_STR("*float*: Receiver reference cost [$]\n\n*Required*: True"),
+ 	NULL},
+{"receiver_type", (getter)SolarPILOT_get_receiver_type,(setter)SolarPILOT_set_receiver_type,
+	PyDoc_STR("*float*: 0: external (default), 1; cavity\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"sales_tax_frac", (getter)SolarPILOT_get_sales_tax_frac,(setter)SolarPILOT_set_sales_tax_frac,
 	PyDoc_STR("*float*: Percent of cost to which sales tax applies [%]\n\n*Required*: True"),
@@ -896,6 +990,23 @@ Outputs_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+Outputs_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Outputs_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Solarpilot", "Outputs")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 Outputs_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &Outputs_Type;
@@ -905,7 +1016,9 @@ Outputs_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Outputs_methods[] = {
 		{"assign",            (PyCFunction)Outputs_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Outputs_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Outputs_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Outputs_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Outputs_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -921,6 +1034,12 @@ static PyObject *
 Outputs_get_base_land_area(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Solarpilot_Outputs_base_land_area_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cav_rec_aper_width_opt(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Solarpilot_Outputs_cav_rec_aper_width_opt_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -1013,6 +1132,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"base_land_area", (getter)Outputs_get_base_land_area,(setter)0,
 	PyDoc_STR("*float*: Land area occupied by heliostats [acre]"),
+ 	NULL},
+{"cav_rec_aper_width_opt", (getter)Outputs_get_cav_rec_aper_width_opt,(setter)0,
+	PyDoc_STR("*float*: Optimized cavity receiver aperture width [-]"),
  	NULL},
 {"cost_land_tot", (getter)Outputs_get_cost_land_tot,(setter)0,
 	PyDoc_STR("*float*: Total land cost [$]"),
@@ -1177,6 +1299,20 @@ Solarpilot_assign(CmodObject *self, PyObject *args)
 	return Py_None;
 }
 
+static PyObject *
+Solarpilot_replace(CmodObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_replace_from_nested_dict((PyObject*)self, self->x_attr, self->data_ptr, dict, "Solarpilot"))
+		return NULL;
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
 
 static PyObject *
 Solarpilot_export(CmodObject *self, PyObject *args)
@@ -1201,6 +1337,8 @@ static PyMethodDef Solarpilot_methods[] = {
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
 		{"assign",            (PyCFunction)Solarpilot_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'SolarPILOT': { var: val, ...}, ...}``")},
+		{"replace",            (PyCFunction)Solarpilot_replace,  METH_VARARGS,
+				PyDoc_STR("replace(dict) -> None\n Replace attributes from nested dictionary, except for Outputs. Unassigns all values in each Group then assigns from the input dict.\n\n``nested_dict = { 'SolarPILOT': { var: val, ...}, ...}``")},
 		{"export",            (PyCFunction)Solarpilot_export,  METH_VARARGS,
 				PyDoc_STR("export() -> dict\n Export attributes into nested dictionary")},
 		{"value",             (PyCFunction)Solarpilot_value, METH_VARARGS,

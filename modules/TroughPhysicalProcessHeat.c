@@ -43,6 +43,23 @@ Weather_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+Weather_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Weather_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "TroughPhysicalProcessHeat", "Weather")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 Weather_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &Weather_Type;
@@ -52,7 +69,9 @@ Weather_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Weather_methods[] = {
 		{"assign",            (PyCFunction)Weather_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Weather_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Weather_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Weather_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Weather_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Weather_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -221,6 +240,23 @@ SolarField_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+SolarField_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &SolarField_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "TroughPhysicalProcessHeat", "SolarField")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 SolarField_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &SolarField_Type;
@@ -230,7 +266,9 @@ SolarField_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef SolarField_methods[] = {
 		{"assign",            (PyCFunction)SolarField_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``SolarField_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``SolarField_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)SolarField_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``SolarField_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)SolarField_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -750,30 +788,6 @@ static int
 SolarField_set_Row_Distance(VarGroupObject *self, PyObject *value, void *closure)
 {
 	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_SolarField_Row_Distance_nset, self->data_ptr);
-}
-
-static PyObject *
-SolarField_get_SCADefocusArray(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_TroughPhysicalProcessHeat_SolarField_SCADefocusArray_aget, self->data_ptr);
-}
-
-static int
-SolarField_set_SCADefocusArray(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_TroughPhysicalProcessHeat_SolarField_SCADefocusArray_aset, self->data_ptr);
-}
-
-static PyObject *
-SolarField_get_SCAInfoArray(VarGroupObject *self, void *closure)
-{
-	return PySAM_matrix_getter(SAM_TroughPhysicalProcessHeat_SolarField_SCAInfoArray_mget, self->data_ptr);
-}
-
-static int
-SolarField_set_SCAInfoArray(VarGroupObject *self, PyObject *value, void *closure)
-{
-		return PySAM_matrix_setter(value, SAM_TroughPhysicalProcessHeat_SolarField_SCAInfoArray_mset, self->data_ptr);
 }
 
 static PyObject *
@@ -1449,18 +1463,6 @@ SolarField_set_sf_rnr_wallthicks(VarGroupObject *self, PyObject *value, void *cl
 }
 
 static PyObject *
-SolarField_get_solar_mult(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_SolarField_solar_mult_nget, self->data_ptr);
-}
-
-static int
-SolarField_set_solar_mult(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_SolarField_solar_mult_nset, self->data_ptr);
-}
-
-static PyObject *
 SolarField_get_theta_dep(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_SolarField_theta_dep_nget, self->data_ptr);
@@ -1522,7 +1524,7 @@ SolarField_set_wind_stow_speed(VarGroupObject *self, PyObject *value, void *clos
 
 static PyGetSetDef SolarField_getset[] = {
 {"A_aperture", (getter)SolarField_get_A_aperture,(setter)SolarField_set_A_aperture,
-	PyDoc_STR("*sequence*: Reflective aperture area of the collector [m2]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - SCAInfoArray\n\t - nColt\n"),
+	PyDoc_STR("*sequence*: Reflective aperture area of the collector [m2]\n\n*Required*: True"),
  	NULL},
 {"AbsorberMaterial", (getter)SolarField_get_AbsorberMaterial,(setter)SolarField_set_AbsorberMaterial,
 	PyDoc_STR("*sequence[sequence]*: Absorber material type [none]\n\n*Required*: True"),
@@ -1531,10 +1533,10 @@ static PyGetSetDef SolarField_getset[] = {
 	PyDoc_STR("*sequence[sequence]*: Annulus gas type (1=air, 26=Ar, 27=H2) [none]\n\n*Required*: True"),
  	NULL},
 {"Ave_Focal_Length", (getter)SolarField_get_Ave_Focal_Length,(setter)SolarField_set_Ave_Focal_Length,
-	PyDoc_STR("*sequence*: Average focal length of the collector  [m]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - SCAInfoArray\n\t - nColt\n"),
+	PyDoc_STR("*sequence*: Average focal length of the collector  [m]\n\n*Required*: True"),
  	NULL},
 {"ColperSCA", (getter)SolarField_get_ColperSCA,(setter)SolarField_set_ColperSCA,
-	PyDoc_STR("*sequence*: Number of individual collector sections in an SCA  [none]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - SCAInfoArray\n\t - nColt\n"),
+	PyDoc_STR("*sequence*: Number of individual collector sections in an SCA  [none]\n\n*Required*: True"),
  	NULL},
 {"D_2", (getter)SolarField_get_D_2,(setter)SolarField_set_D_2,
 	PyDoc_STR("*sequence[sequence]*: Inner absorber tube diameter [m]\n\n*Required*: True"),
@@ -1549,7 +1551,7 @@ static PyGetSetDef SolarField_getset[] = {
 	PyDoc_STR("*sequence[sequence]*: Outer glass envelope diameter  [m]\n\n*Required*: True"),
  	NULL},
 {"D_cpnt", (getter)SolarField_get_D_cpnt,(setter)SolarField_set_D_cpnt,
-	PyDoc_STR("*sequence[sequence]*: Interconnect component diameters, row=intc, col=cpnt [none]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - nSCA\n"),
+	PyDoc_STR("*sequence[sequence]*: Interconnect component diameters, row=intc, col=cpnt [none]\n\n*Required*: True"),
  	NULL},
 {"D_p", (getter)SolarField_get_D_p,(setter)SolarField_set_D_p,
 	PyDoc_STR("*sequence[sequence]*: Diameter of the absorber flow plug (optional)  [m]\n\n*Required*: True"),
@@ -1561,10 +1563,10 @@ static PyGetSetDef SolarField_getset[] = {
 	PyDoc_STR("*sequence[sequence]*: Loss due to dirt on the receiver envelope [none]\n\n*Required*: True"),
  	NULL},
 {"Dirt_mirror", (getter)SolarField_get_Dirt_mirror,(setter)SolarField_set_Dirt_mirror,
-	PyDoc_STR("*sequence*: User-defined dirt on mirror derate [none]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - SCAInfoArray\n\t - nColt\n"),
+	PyDoc_STR("*sequence*: User-defined dirt on mirror derate [none]\n\n*Required*: True"),
  	NULL},
 {"Distance_SCA", (getter)SolarField_get_Distance_SCA,(setter)SolarField_set_Distance_SCA,
-	PyDoc_STR("*sequence*: Piping distance between SCA's in the field [m]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - SCAInfoArray\n\t - nColt\n"),
+	PyDoc_STR("*sequence*: Piping distance between SCA's in the field [m]\n\n*Required*: True"),
  	NULL},
 {"EPSILON_4", (getter)SolarField_get_EPSILON_4,(setter)SolarField_set_EPSILON_4,
 	PyDoc_STR("*sequence[sequence]*: Inner glass envelope emissivities (Pyrex)  [none]\n\n*Required*: True"),
@@ -1573,7 +1575,7 @@ static PyGetSetDef SolarField_getset[] = {
 	PyDoc_STR("*sequence[sequence]*: Outer glass envelope emissivities (Pyrex)  [none]\n\n*Required*: True"),
  	NULL},
 {"Error", (getter)SolarField_get_Error,(setter)SolarField_set_Error,
-	PyDoc_STR("*sequence*: User-defined general optical error derate  [none]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - SCAInfoArray\n\t - nColt\n"),
+	PyDoc_STR("*sequence*: User-defined general optical error derate  [none]\n\n*Required*: True"),
  	NULL},
 {"FieldConfig", (getter)SolarField_get_FieldConfig,(setter)SolarField_set_FieldConfig,
 	PyDoc_STR("*float*: Number of subfield headers [none]\n\n*Required*: True"),
@@ -1585,7 +1587,7 @@ static PyGetSetDef SolarField_getset[] = {
 	PyDoc_STR("*float*: Field HTF fluid ID number [none]\n\n*Required*: True"),
  	NULL},
 {"GeomEffects", (getter)SolarField_get_GeomEffects,(setter)SolarField_set_GeomEffects,
-	PyDoc_STR("*sequence*: User-defined geometry effects derate [none]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - SCAInfoArray\n\t - nColt\n"),
+	PyDoc_STR("*sequence*: User-defined geometry effects derate [none]\n\n*Required*: True"),
  	NULL},
 {"GlazingIntactIn", (getter)SolarField_get_GlazingIntactIn,(setter)SolarField_set_GlazingIntactIn,
 	PyDoc_STR("*sequence[sequence]*: Glazing intact (broken glass) flag {1=true, else=false} [none]\n\n*Required*: True"),
@@ -1600,19 +1602,19 @@ static PyGetSetDef SolarField_getset[] = {
 	PyDoc_STR("*sequence[sequence]*: IAM coefficients, matrix for 4 collectors [none]\n\n*Required*: True"),
  	NULL},
 {"I_bn_des", (getter)SolarField_get_I_bn_des,(setter)SolarField_set_I_bn_des,
-	PyDoc_STR("*float*: Solar irradiation at design [C]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - nLoops\n\t - solar_mult\n"),
+	PyDoc_STR("*float*: Solar irradiation at design [C]\n\n*Required*: True"),
  	NULL},
 {"K_cpnt", (getter)SolarField_get_K_cpnt,(setter)SolarField_set_K_cpnt,
-	PyDoc_STR("*sequence[sequence]*: Interconnect component minor loss coefficients, row=intc, col=cpnt [none]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - nSCA\n"),
+	PyDoc_STR("*sequence[sequence]*: Interconnect component minor loss coefficients, row=intc, col=cpnt [none]\n\n*Required*: True"),
  	NULL},
 {"L_SCA", (getter)SolarField_get_L_SCA,(setter)SolarField_set_L_SCA,
-	PyDoc_STR("*sequence*: Length of the SCA  [m]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - SCAInfoArray\n\t - nColt\n"),
+	PyDoc_STR("*sequence*: Length of the SCA  [m]\n\n*Required*: True"),
  	NULL},
 {"L_aperture", (getter)SolarField_get_L_aperture,(setter)SolarField_set_L_aperture,
-	PyDoc_STR("*sequence*: Length of a single mirror/HCE unit [m]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - SCAInfoArray\n\t - nColt\n"),
+	PyDoc_STR("*sequence*: Length of a single mirror/HCE unit [m]\n\n*Required*: True"),
  	NULL},
 {"L_cpnt", (getter)SolarField_get_L_cpnt,(setter)SolarField_set_L_cpnt,
-	PyDoc_STR("*sequence[sequence]*: Interconnect component lengths, row=intc, col=cpnt [none]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - nSCA\n"),
+	PyDoc_STR("*sequence[sequence]*: Interconnect component lengths, row=intc, col=cpnt [none]\n\n*Required*: True"),
  	NULL},
 {"L_heat_sink_piping", (getter)SolarField_get_L_heat_sink_piping,(setter)SolarField_set_L_heat_sink_piping,
 	PyDoc_STR("*float*: Length of piping (full mass flow) through heat sink (if applicable) [none]\n\n*Required*: True"),
@@ -1642,19 +1644,13 @@ static PyGetSetDef SolarField_getset[] = {
 	PyDoc_STR("*float*: Loss coefficient from the header, runner pipe, and non-HCE piping [m/s]\n\n*Required*: True"),
  	NULL},
 {"Rho_mirror_clean", (getter)SolarField_get_Rho_mirror_clean,(setter)SolarField_set_Rho_mirror_clean,
-	PyDoc_STR("*sequence*: User-defined clean mirror reflectivity [none]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - SCAInfoArray\n\t - nColt\n"),
+	PyDoc_STR("*sequence*: User-defined clean mirror reflectivity [none]\n\n*Required*: True"),
  	NULL},
 {"Rough", (getter)SolarField_get_Rough,(setter)SolarField_set_Rough,
 	PyDoc_STR("*sequence[sequence]*: Roughness of the internal surface  [m]\n\n*Required*: True"),
  	NULL},
 {"Row_Distance", (getter)SolarField_get_Row_Distance,(setter)SolarField_set_Row_Distance,
 	PyDoc_STR("*float*: Spacing between rows (centerline to centerline) [m]\n\n*Required*: True"),
- 	NULL},
-{"SCADefocusArray", (getter)SolarField_get_SCADefocusArray,(setter)SolarField_set_SCADefocusArray,
-	PyDoc_STR("*sequence*: Collector defocus order [none]\n\n*Required*: True"),
- 	NULL},
-{"SCAInfoArray", (getter)SolarField_get_SCAInfoArray,(setter)SolarField_set_SCAInfoArray,
-	PyDoc_STR("*sequence[sequence]*: Receiver (,1) and collector (,2) type for each assembly in loop [none]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - A_aperture\n\t - Ave_Focal_Length\n\t - ColperSCA\n\t - Dirt_mirror\n\t - Distance_SCA\n\t - Error\n\t - GeomEffects\n\t - L_SCA\n\t - L_aperture\n\t - Rho_mirror_clean\n\t - TrackingError\n\t - W_aperture\n"),
  	NULL},
 {"SCA_drives_elec", (getter)SolarField_get_SCA_drives_elec,(setter)SolarField_set_SCA_drives_elec,
 	PyDoc_STR("*float*: Tracking power, in Watts per SCA drive [W/m2-K]\n\n*Required*: True"),
@@ -1675,10 +1671,10 @@ static PyGetSetDef SolarField_getset[] = {
 	PyDoc_STR("*sequence[sequence]*: Envelope transmittance [none]\n\n*Required*: True"),
  	NULL},
 {"TrackingError", (getter)SolarField_get_TrackingError,(setter)SolarField_set_TrackingError,
-	PyDoc_STR("*sequence*: User-defined tracking error derate [none]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - SCAInfoArray\n\t - nColt\n"),
+	PyDoc_STR("*sequence*: User-defined tracking error derate [none]\n\n*Required*: True"),
  	NULL},
 {"Type_cpnt", (getter)SolarField_get_Type_cpnt,(setter)SolarField_set_Type_cpnt,
-	PyDoc_STR("*sequence[sequence]*: Interconnect component type, row=intc, col=cpnt [none]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - nSCA\n"),
+	PyDoc_STR("*sequence[sequence]*: Interconnect component type, row=intc, col=cpnt [none]\n\n*Required*: True"),
  	NULL},
 {"V_hdr_cold_max", (getter)SolarField_get_V_hdr_cold_max,(setter)SolarField_set_V_hdr_cold_max,
 	PyDoc_STR("*float*: Maximum HTF velocity in the cold headers at design [m/s]\n\n*Required*: True"),
@@ -1693,7 +1689,7 @@ static PyGetSetDef SolarField_getset[] = {
 	PyDoc_STR("*float*: Minimum HTF velocity in the hot headers at design [m/s]\n\n*Required*: True"),
  	NULL},
 {"W_aperture", (getter)SolarField_get_W_aperture,(setter)SolarField_set_W_aperture,
-	PyDoc_STR("*sequence*: The collector aperture width (Total structural area used for shadowing) [m]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - SCAInfoArray\n\t - nColt\n"),
+	PyDoc_STR("*sequence*: The collector aperture width (Total structural area used for shadowing) [m]\n\n*Required*: True"),
  	NULL},
 {"accept_init", (getter)SolarField_get_accept_init,(setter)SolarField_set_accept_init,
 	PyDoc_STR("*float*: In acceptance testing mode - require steady-state startup [none]\n\n*Required*: True"),
@@ -1786,7 +1782,7 @@ static PyGetSetDef SolarField_getset[] = {
 	PyDoc_STR("*float*: Non-HTF heat capacity associated with each SCA - per meter basis [Wht/K-m]\n\n*Required*: True"),
  	NULL},
 {"nColt", (getter)SolarField_get_nColt,(setter)SolarField_set_nColt,
-	PyDoc_STR("*float*: Number of collector types [none]\n\n*Options*: constant=4\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - A_aperture\n\t - Ave_Focal_Length\n\t - ColperSCA\n\t - Dirt_mirror\n\t - Distance_SCA\n\t - Error\n\t - GeomEffects\n\t - L_SCA\n\t - L_aperture\n\t - Rho_mirror_clean\n\t - TrackingError\n\t - W_aperture\n"),
+	PyDoc_STR("*float*: Number of collector types [none]\n\n*Options*: constant=4\n\n*Required*: True"),
  	NULL},
 {"nHCEVar", (getter)SolarField_get_nHCEVar,(setter)SolarField_set_nHCEVar,
 	PyDoc_STR("*float*: Number of HCE variants per type [none]\n\n*Required*: True"),
@@ -1795,10 +1791,10 @@ static PyGetSetDef SolarField_getset[] = {
 	PyDoc_STR("*float*: Number of HCE types [none]\n\n*Required*: True"),
  	NULL},
 {"nLoops", (getter)SolarField_get_nLoops,(setter)SolarField_set_nLoops,
-	PyDoc_STR("*float*: Number of loops in the field [none]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - solar_mult\n\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - I_bn_des\n\t - q_pb_design\n"),
+	PyDoc_STR("*float*: Number of loops in the field [none]\n\n*Required*: True"),
  	NULL},
 {"nSCA", (getter)SolarField_get_nSCA,(setter)SolarField_set_nSCA,
-	PyDoc_STR("*float*: Number of SCAs in a loop [none]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - D_cpnt\n\t - K_cpnt\n\t - L_cpnt\n\t - Type_cpnt\n"),
+	PyDoc_STR("*float*: Number of SCAs in a loop [none]\n\n*Required*: True"),
  	NULL},
 {"northsouth_field_sep", (getter)SolarField_get_northsouth_field_sep,(setter)SolarField_set_northsouth_field_sep,
 	PyDoc_STR("*float*: North/south separation between subfields. 0 = SCAs are touching [m]\n\n*Required*: True"),
@@ -1823,9 +1819,6 @@ static PyGetSetDef SolarField_getset[] = {
  	NULL},
 {"sf_rnr_wallthicks", (getter)SolarField_get_sf_rnr_wallthicks,(setter)SolarField_set_sf_rnr_wallthicks,
 	PyDoc_STR("*sequence[sequence]*: Custom runner wall thicknesses [m]\n\n*Required*: True"),
- 	NULL},
-{"solar_mult", (getter)SolarField_get_solar_mult,(setter)SolarField_set_solar_mult,
-	PyDoc_STR("*float*: Solar multiple [none]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - I_bn_des\n\t - nLoops\n\t - q_pb_design\n"),
  	NULL},
 {"theta_dep", (getter)SolarField_get_theta_dep,(setter)SolarField_set_theta_dep,
 	PyDoc_STR("*float*: Deploy angle [deg]\n\n*Required*: True"),
@@ -1929,6 +1922,23 @@ Controller_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+Controller_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Controller_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "TroughPhysicalProcessHeat", "Controller")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 Controller_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &Controller_Type;
@@ -1938,11 +1948,25 @@ Controller_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Controller_methods[] = {
 		{"assign",            (PyCFunction)Controller_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Controller_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Controller_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Controller_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Controller_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Controller_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
+
+static PyObject *
+Controller_get_disp_wlim_maxspec(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_Controller_disp_wlim_maxspec_nget, self->data_ptr);
+}
+
+static int
+Controller_set_disp_wlim_maxspec(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_Controller_disp_wlim_maxspec_nset, self->data_ptr);
+}
 
 static PyObject *
 Controller_get_field_fl_props(VarGroupObject *self, void *closure)
@@ -1954,6 +1978,18 @@ static int
 Controller_set_field_fl_props(VarGroupObject *self, PyObject *value, void *closure)
 {
 		return PySAM_matrix_setter(value, SAM_TroughPhysicalProcessHeat_Controller_field_fl_props_mset, self->data_ptr);
+}
+
+static PyObject *
+Controller_get_non_solar_field_land_area_multiplier(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_Controller_non_solar_field_land_area_multiplier_nget, self->data_ptr);
+}
+
+static int
+Controller_set_non_solar_field_land_area_multiplier(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_Controller_non_solar_field_land_area_multiplier_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -1981,6 +2017,18 @@ Controller_set_q_pb_design(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyObject *
+Controller_get_specified_solar_multiple(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_Controller_specified_solar_multiple_nget, self->data_ptr);
+}
+
+static int
+Controller_set_specified_solar_multiple(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_Controller_specified_solar_multiple_nset, self->data_ptr);
+}
+
+static PyObject *
 Controller_get_tanks_in_parallel(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_Controller_tanks_in_parallel_nget, self->data_ptr);
@@ -1992,18 +2040,42 @@ Controller_set_tanks_in_parallel(VarGroupObject *self, PyObject *value, void *cl
 	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_Controller_tanks_in_parallel_nset, self->data_ptr);
 }
 
+static PyObject *
+Controller_get_trough_loop_control(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_TroughPhysicalProcessHeat_Controller_trough_loop_control_aget, self->data_ptr);
+}
+
+static int
+Controller_set_trough_loop_control(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_TroughPhysicalProcessHeat_Controller_trough_loop_control_aset, self->data_ptr);
+}
+
 static PyGetSetDef Controller_getset[] = {
+{"disp_wlim_maxspec", (getter)Controller_get_disp_wlim_maxspec,(setter)Controller_set_disp_wlim_maxspec,
+	PyDoc_STR("*float*: disp_wlim_maxspec [-]\n\n*Required*: True"),
+ 	NULL},
 {"field_fl_props", (getter)Controller_get_field_fl_props,(setter)Controller_set_field_fl_props,
 	PyDoc_STR("*sequence[sequence]*: User defined field fluid property data [-]\n\n*Required*: True"),
+ 	NULL},
+{"non_solar_field_land_area_multiplier", (getter)Controller_get_non_solar_field_land_area_multiplier,(setter)Controller_set_non_solar_field_land_area_multiplier,
+	PyDoc_STR("*float*: non_solar_field_land_area_multiplier [-]\n\n*Required*: True"),
  	NULL},
 {"pb_pump_coef", (getter)Controller_get_pb_pump_coef,(setter)Controller_set_pb_pump_coef,
 	PyDoc_STR("*float*: Pumping power to move 1kg of HTF through PB loop [kW/kg]\n\n*Required*: True"),
  	NULL},
 {"q_pb_design", (getter)Controller_get_q_pb_design,(setter)Controller_set_q_pb_design,
-	PyDoc_STR("*float*: Design heat input to power block [MWt]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - nLoops\n\t - solar_mult\n"),
+	PyDoc_STR("*float*: Design heat input to power block [MWt]\n\n*Required*: True"),
+ 	NULL},
+{"specified_solar_multiple", (getter)Controller_get_specified_solar_multiple,(setter)Controller_set_specified_solar_multiple,
+	PyDoc_STR("*float*: specified_solar_multiple [-]\n\n*Required*: True"),
  	NULL},
 {"tanks_in_parallel", (getter)Controller_get_tanks_in_parallel,(setter)Controller_set_tanks_in_parallel,
 	PyDoc_STR("*float*: Tanks are in parallel, not in series, with solar field [-]\n\n*Required*: True"),
+ 	NULL},
+{"trough_loop_control", (getter)Controller_get_trough_loop_control,(setter)Controller_set_trough_loop_control,
+	PyDoc_STR("*sequence*: trough_loop_control [-]\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -2092,6 +2164,23 @@ SystemDesign_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+SystemDesign_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &SystemDesign_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "TroughPhysicalProcessHeat", "SystemDesign")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 SystemDesign_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &SystemDesign_Type;
@@ -2101,7 +2190,9 @@ SystemDesign_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef SystemDesign_methods[] = {
 		{"assign",            (PyCFunction)SystemDesign_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``SystemDesign_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``SystemDesign_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)SystemDesign_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``SystemDesign_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)SystemDesign_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -2210,6 +2301,23 @@ TES_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+TES_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &TES_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "TroughPhysicalProcessHeat", "TES")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 TES_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &TES_Type;
@@ -2219,7 +2327,9 @@ TES_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef TES_methods[] = {
 		{"assign",            (PyCFunction)TES_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``TES_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``TES_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)TES_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``TES_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)TES_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -2403,6 +2513,23 @@ TES2tank_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+TES2tank_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &TES2tank_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "TroughPhysicalProcessHeat", "TES2tank")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 TES2tank_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &TES2tank_Type;
@@ -2412,7 +2539,9 @@ TES2tank_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef TES2tank_methods[] = {
 		{"assign",            (PyCFunction)TES2tank_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``TES2tank_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``TES2tank_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)TES2tank_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``TES2tank_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)TES2tank_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -2551,6 +2680,23 @@ Tou_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+Tou_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Tou_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "TroughPhysicalProcessHeat", "Tou")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 Tou_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &Tou_Type;
@@ -2560,7 +2706,9 @@ Tou_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Tou_methods[] = {
 		{"assign",            (PyCFunction)Tou_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Tou_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Tou_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Tou_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Tou_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Tou_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -3035,6 +3183,18 @@ Tou_set_q_rec_standby(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyObject *
+Tou_get_timestep_load_fractions(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_TroughPhysicalProcessHeat_Tou_timestep_load_fractions_aget, self->data_ptr);
+}
+
+static int
+Tou_set_timestep_load_fractions(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_TroughPhysicalProcessHeat_Tou_timestep_load_fractions_aset, self->data_ptr);
+}
+
+static PyObject *
 Tou_get_weekday_schedule(VarGroupObject *self, void *closure)
 {
 	return PySAM_matrix_getter(SAM_TroughPhysicalProcessHeat_Tou_weekday_schedule_mget, self->data_ptr);
@@ -3165,7 +3325,7 @@ static PyGetSetDef Tou_getset[] = {
 	PyDoc_STR("*float*: Run dispatch optimization with external AMPL engine [-]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"is_dispatch", (getter)Tou_get_is_dispatch,(setter)Tou_set_is_dispatch,
-	PyDoc_STR("*float*: Allow dispatch optimization? [-]\n\n*Required*: If not provided, assumed to be 0\n\n*Changes to this variable may require updating the values of the following*: \n\t - is_wlim_series\n"),
+	PyDoc_STR("*float*: Allow dispatch optimization? [-]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"is_dispatch_series", (getter)Tou_get_is_dispatch_series,(setter)Tou_set_is_dispatch_series,
 	PyDoc_STR("*float*: Use time-series dispatch factors\n\n*Required*: If not provided, assumed to be 1"),
@@ -3174,7 +3334,7 @@ static PyGetSetDef Tou_getset[] = {
 	PyDoc_STR("*float*: Is the TOD target cycle heat input also the max cycle heat input?\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"is_wlim_series", (getter)Tou_get_is_wlim_series,(setter)Tou_set_is_wlim_series,
-	PyDoc_STR("*float*: Use time-series net heat generation limits\n\n*Required*: If not provided, assumed to be 0\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - is_dispatch\n"),
+	PyDoc_STR("*float*: Use time-series net heat generation limits\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"is_write_ampl_dat", (getter)Tou_get_is_write_ampl_dat,(setter)Tou_set_is_write_ampl_dat,
 	PyDoc_STR("*float*: Write AMPL data files for dispatch run [-]\n\n*Required*: If not provided, assumed to be 0"),
@@ -3187,6 +3347,9 @@ static PyGetSetDef Tou_getset[] = {
  	NULL},
 {"q_rec_standby", (getter)Tou_get_q_rec_standby,(setter)Tou_set_q_rec_standby,
 	PyDoc_STR("*float*: Receiver standby energy consumption [kWt]\n\n*Required*: If not provided, assumed to be 9e99"),
+ 	NULL},
+{"timestep_load_fractions", (getter)Tou_get_timestep_load_fractions,(setter)Tou_set_timestep_load_fractions,
+	PyDoc_STR("*sequence*: Turbine load fraction for each timestep, alternative to block dispatch\n\n*Required*: False"),
  	NULL},
 {"weekday_schedule", (getter)Tou_get_weekday_schedule,(setter)Tou_set_weekday_schedule,
 	PyDoc_STR("*sequence[sequence]*: 12x24 CSP operation Time-of-Use Weekday schedule [-]\n\n*Required*: True"),
@@ -3248,6 +3411,143 @@ static PyTypeObject Tou_Type = {
 
 
 /*
+ * SystemControl Group
+ */ 
+
+static PyTypeObject SystemControl_Type;
+
+static PyObject *
+SystemControl_new(SAM_TroughPhysicalProcessHeat data_ptr)
+{
+	PyObject* new_obj = SystemControl_Type.tp_alloc(&SystemControl_Type,0);
+
+	VarGroupObject* SystemControl_obj = (VarGroupObject*)new_obj;
+
+	SystemControl_obj->data_ptr = (SAM_table)data_ptr;
+
+	return new_obj;
+}
+
+/* SystemControl methods */
+
+static PyObject *
+SystemControl_assign(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "TroughPhysicalProcessHeat", "SystemControl")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+SystemControl_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &SystemControl_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "TroughPhysicalProcessHeat", "SystemControl")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+SystemControl_export(VarGroupObject *self, PyObject *args)
+{
+	PyTypeObject* tp = &SystemControl_Type;
+	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
+	return dict;
+}
+
+static PyMethodDef SystemControl_methods[] = {
+		{"assign",            (PyCFunction)SystemControl_assign,  METH_VARARGS,
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``SystemControl_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)SystemControl_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``SystemControl_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)SystemControl_export,  METH_VARARGS,
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+		{NULL,              NULL}           /* sentinel */
+};
+
+static PyObject *
+SystemControl_get_disp_inventory_incentive(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_SystemControl_disp_inventory_incentive_nget, self->data_ptr);
+}
+
+static int
+SystemControl_set_disp_inventory_incentive(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_SystemControl_disp_inventory_incentive_nset, self->data_ptr);
+}
+
+static PyGetSetDef SystemControl_getset[] = {
+{"disp_inventory_incentive", (getter)SystemControl_get_disp_inventory_incentive,(setter)SystemControl_set_disp_inventory_incentive,
+	PyDoc_STR("*float*: Dispatch storage terminal inventory incentive multiplier\n\n*Required*: If not provided, assumed to be 0.0"),
+ 	NULL},
+	{NULL}  /* Sentinel */
+};
+
+static PyTypeObject SystemControl_Type = {
+		/* The ob_type field must be initialized in the module init function
+		 * to be portable to Windows without using C++. */
+		PyVarObject_HEAD_INIT(NULL, 0)
+		"TroughPhysicalProcessHeat.SystemControl",             /*tp_name*/
+		sizeof(VarGroupObject),          /*tp_basicsize*/
+		0,                          /*tp_itemsize*/
+		/* methods */
+		0,    /*tp_dealloc*/
+		0,                          /*tp_print*/
+		(getattrfunc)0,             /*tp_getattr*/
+		0,                          /*tp_setattr*/
+		0,                          /*tp_reserved*/
+		0,                          /*tp_repr*/
+		0,                          /*tp_as_number*/
+		0,                          /*tp_as_sequence*/
+		0,                          /*tp_as_mapping*/
+		0,                          /*tp_hash*/
+		0,                          /*tp_call*/
+		0,                          /*tp_str*/
+		0,                          /*tp_getattro*/
+		0,                          /*tp_setattro*/
+		0,                          /*tp_as_buffer*/
+		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
+		0,                          /*tp_doc*/
+		0,                          /*tp_traverse*/
+		0,                          /*tp_clear*/
+		0,                          /*tp_richcompare*/
+		0,                          /*tp_weaklistofnset*/
+		0,                          /*tp_iter*/
+		0,                          /*tp_iternext*/
+		SystemControl_methods,         /*tp_methods*/
+		0,                          /*tp_members*/
+		SystemControl_getset,          /*tp_getset*/
+		0,                          /*tp_base*/
+		0,                          /*tp_dict*/
+		0,                          /*tp_descr_get*/
+		0,                          /*tp_descr_set*/
+		0,                          /*tp_dictofnset*/
+		0,                          /*tp_init*/
+		0,                          /*tp_alloc*/
+		0,             /*tp_new*/
+		0,                          /*tp_free*/
+		0,                          /*tp_is_gc*/
+};
+
+
+/*
  * System Group
  */ 
 
@@ -3284,6 +3584,23 @@ System_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+System_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &System_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "TroughPhysicalProcessHeat", "System")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 System_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &System_Type;
@@ -3293,7 +3610,9 @@ System_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef System_methods[] = {
 		{"assign",            (PyCFunction)System_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``System_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``System_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)System_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``System_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)System_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -3432,6 +3751,23 @@ Powerblock_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+Powerblock_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Powerblock_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "TroughPhysicalProcessHeat", "Powerblock")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 Powerblock_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &Powerblock_Type;
@@ -3441,7 +3777,9 @@ Powerblock_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Powerblock_methods[] = {
 		{"assign",            (PyCFunction)Powerblock_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Powerblock_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Powerblock_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Powerblock_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Powerblock_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Powerblock_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -3550,6 +3888,23 @@ Outputs_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+Outputs_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Outputs_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "TroughPhysicalProcessHeat", "Outputs")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 Outputs_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &Outputs_Type;
@@ -3559,7 +3914,9 @@ Outputs_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Outputs_methods[] = {
 		{"assign",            (PyCFunction)Outputs_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Outputs_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Outputs_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Outputs_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Outputs_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -3692,6 +4049,12 @@ Outputs_get_annual_energy(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_annual_energy_distribution_time(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_TroughPhysicalProcessHeat_Outputs_annual_energy_distribution_time_mget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_annual_field_freeze_protection(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_Outputs_annual_field_freeze_protection_nget, self->data_ptr);
@@ -3755,6 +4118,12 @@ static PyObject *
 Outputs_get_e_dot_field_int_energy(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_TroughPhysicalProcessHeat_Outputs_e_dot_field_int_energy_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_gen(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_TroughPhysicalProcessHeat_Outputs_gen_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -3956,6 +4325,12 @@ Outputs_get_qinc_costh(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_solar_multiple_actual(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_Outputs_solar_multiple_actual_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_solazi(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_TroughPhysicalProcessHeat_Outputs_solazi_aget, self->data_ptr);
@@ -4061,6 +4436,9 @@ static PyGetSetDef Outputs_getset[] = {
 {"annual_energy", (getter)Outputs_get_annual_energy,(setter)0,
 	PyDoc_STR("*float*: Annual Net Thermal Energy Production w/ avail derate [kWt-hr]"),
  	NULL},
+{"annual_energy_distribution_time", (getter)Outputs_get_annual_energy_distribution_time,(setter)0,
+	PyDoc_STR("*sequence[sequence]*: Annual energy production as function of time [kW]"),
+ 	NULL},
 {"annual_field_freeze_protection", (getter)Outputs_get_annual_field_freeze_protection,(setter)0,
 	PyDoc_STR("*float*: Annual thermal power for field freeze protection [kWt-hr]"),
  	NULL},
@@ -4093,6 +4471,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"e_dot_field_int_energy", (getter)Outputs_get_e_dot_field_int_energy,(setter)0,
 	PyDoc_STR("*sequence*: Field change in material/htf internal energy [MWt]"),
+ 	NULL},
+{"gen", (getter)Outputs_get_gen,(setter)0,
+	PyDoc_STR("*sequence*: System power generated [kW]"),
  	NULL},
 {"hour_day", (getter)Outputs_get_hour_day,(setter)0,
 	PyDoc_STR("*sequence*: Resource Hour of Day"),
@@ -4192,6 +4573,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"qinc_costh", (getter)Outputs_get_qinc_costh,(setter)0,
 	PyDoc_STR("*sequence*: Field thermal power incident after cosine [MWt]"),
+ 	NULL},
+{"solar_multiple_actual", (getter)Outputs_get_solar_multiple_actual,(setter)0,
+	PyDoc_STR("*float*: Actual solar multiple of system [-]"),
  	NULL},
 {"solazi", (getter)Outputs_get_solazi,(setter)0,
 	PyDoc_STR("*sequence*: Resource Solar Azimuth [deg]"),
@@ -4305,6 +4689,10 @@ newTroughPhysicalProcessHeatObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "Tou", Tou_obj);
 	Py_DECREF(Tou_obj);
 
+	PyObject* SystemControl_obj = SystemControl_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "SystemControl", SystemControl_obj);
+	Py_DECREF(SystemControl_obj);
+
 	PyObject* System_obj = System_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "System", System_obj);
 	Py_DECREF(System_obj);
@@ -4382,6 +4770,20 @@ TroughPhysicalProcessHeat_assign(CmodObject *self, PyObject *args)
 	return Py_None;
 }
 
+static PyObject *
+TroughPhysicalProcessHeat_replace(CmodObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_replace_from_nested_dict((PyObject*)self, self->x_attr, self->data_ptr, dict, "TroughPhysicalProcessHeat"))
+		return NULL;
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
 
 static PyObject *
 TroughPhysicalProcessHeat_export(CmodObject *self, PyObject *args)
@@ -4406,6 +4808,8 @@ static PyMethodDef TroughPhysicalProcessHeat_methods[] = {
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
 		{"assign",            (PyCFunction)TroughPhysicalProcessHeat_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Weather': { var: val, ...}, ...}``")},
+		{"replace",            (PyCFunction)TroughPhysicalProcessHeat_replace,  METH_VARARGS,
+				PyDoc_STR("replace(dict) -> None\n Replace attributes from nested dictionary, except for Outputs. Unassigns all values in each Group then assigns from the input dict.\n\n``nested_dict = { 'Weather': { var: val, ...}, ...}``")},
 		{"export",            (PyCFunction)TroughPhysicalProcessHeat_export,  METH_VARARGS,
 				PyDoc_STR("export() -> dict\n Export attributes into nested dictionary")},
 		{"value",             (PyCFunction)TroughPhysicalProcessHeat_value, METH_VARARGS,
@@ -4661,6 +5065,13 @@ TroughPhysicalProcessHeatModule_exec(PyObject *m)
 				"Tou",
 				(PyObject*)&Tou_Type);
 	Py_DECREF(&Tou_Type);
+
+	/// Add the SystemControl type object to TroughPhysicalProcessHeat_Type
+	if (PyType_Ready(&SystemControl_Type) < 0) { goto fail; }
+	PyDict_SetItemString(TroughPhysicalProcessHeat_Type.tp_dict,
+				"SystemControl",
+				(PyObject*)&SystemControl_Type);
+	Py_DECREF(&SystemControl_Type);
 
 	/// Add the System type object to TroughPhysicalProcessHeat_Type
 	if (PyType_Ready(&System_Type) < 0) { goto fail; }

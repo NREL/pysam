@@ -43,6 +43,23 @@ Depreciation_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+Depreciation_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Depreciation_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Thirdpartyownership", "Depreciation")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 Depreciation_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &Depreciation_Type;
@@ -52,7 +69,9 @@ Depreciation_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Depreciation_methods[] = {
 		{"assign",            (PyCFunction)Depreciation_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Depreciation_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Depreciation_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Depreciation_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Depreciation_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Depreciation_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -236,6 +255,23 @@ Financials_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+Financials_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Financials_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Thirdpartyownership", "Financials")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 Financials_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &Financials_Type;
@@ -245,7 +281,9 @@ Financials_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Financials_methods[] = {
 		{"assign",            (PyCFunction)Financials_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Financials_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Financials_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Financials_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Financials_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Financials_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -384,6 +422,23 @@ FinancialThirdPartyOwnership_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+FinancialThirdPartyOwnership_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &FinancialThirdPartyOwnership_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Thirdpartyownership", "FinancialThirdPartyOwnership")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 FinancialThirdPartyOwnership_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &FinancialThirdPartyOwnership_Type;
@@ -393,7 +448,9 @@ FinancialThirdPartyOwnership_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef FinancialThirdPartyOwnership_methods[] = {
 		{"assign",            (PyCFunction)FinancialThirdPartyOwnership_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``FinancialThirdPartyOwnership_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``FinancialThirdPartyOwnership_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)FinancialThirdPartyOwnership_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``FinancialThirdPartyOwnership_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)FinancialThirdPartyOwnership_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -502,6 +559,23 @@ Common_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+Common_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Common_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Thirdpartyownership", "Common")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 Common_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &Common_Type;
@@ -511,7 +585,9 @@ Common_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Common_methods[] = {
 		{"assign",            (PyCFunction)Common_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Common_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Common_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Common_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Common_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Common_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -635,6 +711,23 @@ AnnualOutput_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+AnnualOutput_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &AnnualOutput_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Thirdpartyownership", "AnnualOutput")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 AnnualOutput_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &AnnualOutput_Type;
@@ -644,7 +737,9 @@ AnnualOutput_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef AnnualOutput_methods[] = {
 		{"assign",            (PyCFunction)AnnualOutput_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``AnnualOutput_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``AnnualOutput_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)AnnualOutput_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``AnnualOutput_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)AnnualOutput_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -768,6 +863,23 @@ CashFlow_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+CashFlow_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &CashFlow_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Thirdpartyownership", "CashFlow")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 CashFlow_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &CashFlow_Type;
@@ -777,7 +889,9 @@ CashFlow_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef CashFlow_methods[] = {
 		{"assign",            (PyCFunction)CashFlow_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``CashFlow_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``CashFlow_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)CashFlow_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``CashFlow_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)CashFlow_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -931,6 +1045,23 @@ ElectricityCost_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+ElectricityCost_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &ElectricityCost_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Thirdpartyownership", "ElectricityCost")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 ElectricityCost_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &ElectricityCost_Type;
@@ -940,7 +1071,9 @@ ElectricityCost_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef ElectricityCost_methods[] = {
 		{"assign",            (PyCFunction)ElectricityCost_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``ElectricityCost_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``ElectricityCost_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)ElectricityCost_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``ElectricityCost_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)ElectricityCost_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -1064,6 +1197,23 @@ Outputs_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+Outputs_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Outputs_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Thirdpartyownership", "Outputs")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 Outputs_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &Outputs_Type;
@@ -1073,7 +1223,9 @@ Outputs_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Outputs_methods[] = {
 		{"assign",            (PyCFunction)Outputs_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Outputs_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Outputs_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Outputs_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Outputs_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -1333,6 +1485,20 @@ Thirdpartyownership_assign(CmodObject *self, PyObject *args)
 	return Py_None;
 }
 
+static PyObject *
+Thirdpartyownership_replace(CmodObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_replace_from_nested_dict((PyObject*)self, self->x_attr, self->data_ptr, dict, "Thirdpartyownership"))
+		return NULL;
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
 
 static PyObject *
 Thirdpartyownership_export(CmodObject *self, PyObject *args)
@@ -1357,6 +1523,8 @@ static PyMethodDef Thirdpartyownership_methods[] = {
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
 		{"assign",            (PyCFunction)Thirdpartyownership_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Depreciation': { var: val, ...}, ...}``")},
+		{"replace",            (PyCFunction)Thirdpartyownership_replace,  METH_VARARGS,
+				PyDoc_STR("replace(dict) -> None\n Replace attributes from nested dictionary, except for Outputs. Unassigns all values in each Group then assigns from the input dict.\n\n``nested_dict = { 'Depreciation': { var: val, ...}, ...}``")},
 		{"export",            (PyCFunction)Thirdpartyownership_export,  METH_VARARGS,
 				PyDoc_STR("export() -> dict\n Export attributes into nested dictionary")},
 		{"value",             (PyCFunction)Thirdpartyownership_value, METH_VARARGS,
@@ -1522,7 +1690,7 @@ static PyMethodDef ThirdpartyownershipModule_methods[] = {
 				PyDoc_STR("new() -> Thirdpartyownership")},
 		{"default",             Thirdpartyownership_default,         METH_VARARGS,
 				PyDoc_STR("default(config) -> Thirdpartyownership\n\nUse default attributes\n"
-				"`config` options:\n\n- \"FlatPlatePVThirdParty\"\n- \"GenericBatteryThirdParty\"\n- \"GenericSystemThirdParty\"\n- \"PVBatteryThirdParty\"\n- \"PVWattsBatteryThirdParty\"\n- \"PVWattsThirdParty\"")},
+				"`config` options:\n\n- \"FlatPlatePVThirdParty\"\n- \"GenericBatteryThirdParty\"\n- \"GenericSystemThirdParty\"\n- \"PVBatteryThirdParty\"\n- \"PVWattsBatteryThirdParty\"\n- \"PVWattsThirdParty\"\n- \"StandaloneBatteryThirdParty\"")},
 		{"wrap",             Thirdpartyownership_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Thirdpartyownership\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   Thirdpartyownership_from_existing,        METH_VARARGS,

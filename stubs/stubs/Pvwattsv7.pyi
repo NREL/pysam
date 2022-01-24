@@ -113,7 +113,6 @@ class Outputs(object):
 	df = tuple
 	dn = tuple
 	elev = float
-	estimated_rows = float
 	gen = tuple
 	gh = tuple
 	inverter_efficiency = float
@@ -129,6 +128,9 @@ class Outputs(object):
 	snow = tuple
 	solrad_annual = float
 	solrad_monthly = tuple
+	ss_beam_factor = tuple
+	ss_gnd_diffuse_factor = tuple
+	ss_sky_diffuse_factor = tuple
 	state = str
 	sunup = tuple
 	tamb = tuple

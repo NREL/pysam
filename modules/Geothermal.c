@@ -43,6 +43,23 @@ GeoHourly_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+GeoHourly_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &GeoHourly_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Geothermal", "GeoHourly")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 GeoHourly_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &GeoHourly_Type;
@@ -52,7 +69,9 @@ GeoHourly_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef GeoHourly_methods[] = {
 		{"assign",            (PyCFunction)GeoHourly_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``GeoHourly_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``GeoHourly_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)GeoHourly_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``GeoHourly_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)GeoHourly_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -284,6 +303,18 @@ static int
 GeoHourly_set_design_temp(VarGroupObject *self, PyObject *value, void *closure)
 {
 	return PySAM_double_setter(value, SAM_Geothermal_GeoHourly_design_temp_nset, self->data_ptr);
+}
+
+static PyObject *
+GeoHourly_get_dt_prod_well(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Geothermal_GeoHourly_dt_prod_well_nget, self->data_ptr);
+}
+
+static int
+GeoHourly_set_dt_prod_well(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Geothermal_GeoHourly_dt_prod_well_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -980,6 +1011,9 @@ static PyGetSetDef GeoHourly_getset[] = {
 {"design_temp", (getter)GeoHourly_get_design_temp,(setter)GeoHourly_set_design_temp,
 	PyDoc_STR("*float*: Power block design temperature [C]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - T_htf_hot_ref\n\t - num_wells_getem\n\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - resource_temp\n"),
  	NULL},
+{"dt_prod_well", (getter)GeoHourly_get_dt_prod_well,(setter)GeoHourly_set_dt_prod_well,
+	PyDoc_STR("*float*: Temperature loss in production well [C]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - num_wells_getem\n"),
+ 	NULL},
 {"eta_ref", (getter)GeoHourly_get_eta_ref,(setter)GeoHourly_set_eta_ref,
 	PyDoc_STR("*float*: Desgin conversion efficiency [%]\n\n*Required*: True if ui_calculations_only=0"),
  	NULL},
@@ -1053,7 +1087,7 @@ static PyGetSetDef GeoHourly_getset[] = {
 	PyDoc_STR("*float*: Number of Wells\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - num_wells_getem\n"),
  	NULL},
 {"num_wells_getem", (getter)GeoHourly_get_num_wells_getem,(setter)GeoHourly_set_num_wells_getem,
-	PyDoc_STR("*float*: Number of Wells GETEM calc'd\n\n*Required*: True if ui_calculations_only=0\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - ambient_pressure\n\t - analysis_type\n\t - casing_size\n\t - conversion_subtype\n\t - conversion_type\n\t - decline_type\n\t - delta_pressure_equip\n\t - design_temp\n\t - excess_pressure_pump\n\t - fracture_angle\n\t - fracture_aperature\n\t - fracture_width\n\t - geothermal_analysis_period\n\t - hr_pl_nlev\n\t - inj_prod_well_distance\n\t - inj_well_diam\n\t - model_choice\n\t - nameplate\n\t - num_fractures\n\t - num_wells\n\t - plant_efficiency_input\n\t - pump_efficiency\n\t - reservoir_height\n\t - reservoir_permeability\n\t - reservoir_pressure_change\n\t - reservoir_pressure_change_type\n\t - reservoir_width\n\t - resource_depth\n\t - resource_temp\n\t - resource_type\n\t - rock_density\n\t - rock_specific_heat\n\t - rock_thermal_conductivity\n\t - specified_pump_work_amount\n\t - specify_pump_work\n\t - subsurface_water_loss\n\t - temp_decline_max\n\t - temp_decline_rate\n\t - well_diameter\n\t - well_flow_rate\n\t - wet_bulb_temp\n"),
+	PyDoc_STR("*float*: Number of Wells GETEM calc'd\n\n*Required*: True if ui_calculations_only=0\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - ambient_pressure\n\t - analysis_type\n\t - casing_size\n\t - conversion_subtype\n\t - conversion_type\n\t - decline_type\n\t - delta_pressure_equip\n\t - design_temp\n\t - dt_prod_well\n\t - excess_pressure_pump\n\t - fracture_angle\n\t - fracture_aperature\n\t - fracture_width\n\t - geothermal_analysis_period\n\t - hr_pl_nlev\n\t - inj_prod_well_distance\n\t - inj_well_diam\n\t - model_choice\n\t - nameplate\n\t - num_fractures\n\t - num_wells\n\t - plant_efficiency_input\n\t - pump_efficiency\n\t - reservoir_height\n\t - reservoir_permeability\n\t - reservoir_pressure_change\n\t - reservoir_pressure_change_type\n\t - reservoir_width\n\t - resource_depth\n\t - resource_temp\n\t - resource_type\n\t - rock_density\n\t - rock_specific_heat\n\t - rock_thermal_conductivity\n\t - specified_pump_work_amount\n\t - specify_pump_work\n\t - subsurface_water_loss\n\t - temp_decline_max\n\t - temp_decline_rate\n\t - well_diameter\n\t - well_flow_rate\n\t - wet_bulb_temp\n"),
  	NULL},
 {"pb_bd_frac", (getter)GeoHourly_get_pb_bd_frac,(setter)GeoHourly_set_pb_bd_frac,
 	PyDoc_STR("*float*: Blowdown steam fraction [%]\n\n*Required*: True if ui_calculations_only=0"),
@@ -1226,6 +1260,23 @@ Outputs_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+Outputs_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Outputs_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Geothermal", "Outputs")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 Outputs_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &Outputs_Type;
@@ -1235,7 +1286,9 @@ Outputs_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Outputs_methods[] = {
 		{"assign",            (PyCFunction)Outputs_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Outputs_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Outputs_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Outputs_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Outputs_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -1251,6 +1304,12 @@ static PyObject *
 Outputs_get_annual_energy(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Geothermal_Outputs_annual_energy_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_annual_energy_distribution_time(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Geothermal_Outputs_annual_energy_distribution_time_mget, self->data_ptr);
 }
 
 static PyObject *
@@ -1542,6 +1601,9 @@ static PyGetSetDef Outputs_getset[] = {
 {"annual_energy", (getter)Outputs_get_annual_energy,(setter)0,
 	PyDoc_STR("*float*: Annual Energy [kWh]"),
  	NULL},
+{"annual_energy_distribution_time", (getter)Outputs_get_annual_energy_distribution_time,(setter)0,
+	PyDoc_STR("*sequence[sequence]*: Annual energy production as function of Time"),
+ 	NULL},
 {"bottom_hole_pressure", (getter)Outputs_get_bottom_hole_pressure,(setter)0,
 	PyDoc_STR("*float*: Bottom hole pres calculated by GETEM"),
  	NULL},
@@ -1819,6 +1881,20 @@ Geothermal_assign(CmodObject *self, PyObject *args)
 	return Py_None;
 }
 
+static PyObject *
+Geothermal_replace(CmodObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_replace_from_nested_dict((PyObject*)self, self->x_attr, self->data_ptr, dict, "Geothermal"))
+		return NULL;
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
 
 static PyObject *
 Geothermal_export(CmodObject *self, PyObject *args)
@@ -1843,6 +1919,8 @@ static PyMethodDef Geothermal_methods[] = {
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
 		{"assign",            (PyCFunction)Geothermal_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'GeoHourly': { var: val, ...}, ...}``")},
+		{"replace",            (PyCFunction)Geothermal_replace,  METH_VARARGS,
+				PyDoc_STR("replace(dict) -> None\n Replace attributes from nested dictionary, except for Outputs. Unassigns all values in each Group then assigns from the input dict.\n\n``nested_dict = { 'GeoHourly': { var: val, ...}, ...}``")},
 		{"export",            (PyCFunction)Geothermal_export,  METH_VARARGS,
 				PyDoc_STR("export() -> dict\n Export attributes into nested dictionary")},
 		{"value",             (PyCFunction)Geothermal_value, METH_VARARGS,

@@ -43,6 +43,23 @@ Lifetime_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+Lifetime_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Lifetime_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Battwatts", "Lifetime")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 Lifetime_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &Lifetime_Type;
@@ -52,7 +69,9 @@ Lifetime_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Lifetime_methods[] = {
 		{"assign",            (PyCFunction)Lifetime_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Lifetime_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Lifetime_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Lifetime_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Lifetime_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Lifetime_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -176,6 +195,23 @@ Battery_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+Battery_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Battery_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Battwatts", "Battery")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 Battery_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &Battery_Type;
@@ -185,7 +221,9 @@ Battery_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Battery_methods[] = {
 		{"assign",            (PyCFunction)Battery_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Battery_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Battery_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Battery_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Battery_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Battery_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -459,6 +497,23 @@ Load_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+Load_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Load_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Battwatts", "Load")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 Load_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &Load_Type;
@@ -468,11 +523,25 @@ Load_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Load_methods[] = {
 		{"assign",            (PyCFunction)Load_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Load_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Load_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Load_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Load_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Load_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
+
+static PyObject *
+Load_get_grid_outage(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Battwatts_Load_grid_outage_aget, self->data_ptr);
+}
+
+static int
+Load_set_grid_outage(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Battwatts_Load_grid_outage_aset, self->data_ptr);
+}
 
 static PyObject *
 Load_get_load_escalation(VarGroupObject *self, void *closure)
@@ -486,9 +555,27 @@ Load_set_load_escalation(VarGroupObject *self, PyObject *value, void *closure)
 	return PySAM_array_setter(value, SAM_Battwatts_Load_load_escalation_aset, self->data_ptr);
 }
 
+static PyObject *
+Load_get_run_resiliency_calcs(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Battwatts_Load_run_resiliency_calcs_nget, self->data_ptr);
+}
+
+static int
+Load_set_run_resiliency_calcs(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Battwatts_Load_run_resiliency_calcs_nset, self->data_ptr);
+}
+
 static PyGetSetDef Load_getset[] = {
+{"grid_outage", (getter)Load_get_grid_outage,(setter)Load_set_grid_outage,
+	PyDoc_STR("*sequence*: Timesteps with grid outage [0/1]\n\n*Options*: 0=GridAvailable,1=GridUnavailable,Length=load"),
+ 	NULL},
 {"load_escalation", (getter)Load_get_load_escalation,(setter)Load_set_load_escalation,
 	PyDoc_STR("*sequence*: Annual load escalation [%/year]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"run_resiliency_calcs", (getter)Load_get_run_resiliency_calcs,(setter)Load_set_run_resiliency_calcs,
+	PyDoc_STR("*float*: Enable resilence calculations for every timestep [0/1]\n\n*Options*: 0=DisableCalcs,1=EnableCalcs\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -541,6 +628,173 @@ static PyTypeObject Load_Type = {
 
 
 /*
+ * GridLimits Group
+ */ 
+
+static PyTypeObject GridLimits_Type;
+
+static PyObject *
+GridLimits_new(SAM_Battwatts data_ptr)
+{
+	PyObject* new_obj = GridLimits_Type.tp_alloc(&GridLimits_Type,0);
+
+	VarGroupObject* GridLimits_obj = (VarGroupObject*)new_obj;
+
+	GridLimits_obj->data_ptr = (SAM_table)data_ptr;
+
+	return new_obj;
+}
+
+/* GridLimits methods */
+
+static PyObject *
+GridLimits_assign(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Battwatts", "GridLimits")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+GridLimits_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &GridLimits_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Battwatts", "GridLimits")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+GridLimits_export(VarGroupObject *self, PyObject *args)
+{
+	PyTypeObject* tp = &GridLimits_Type;
+	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
+	return dict;
+}
+
+static PyMethodDef GridLimits_methods[] = {
+		{"assign",            (PyCFunction)GridLimits_assign,  METH_VARARGS,
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``GridLimits_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)GridLimits_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``GridLimits_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)GridLimits_export,  METH_VARARGS,
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+		{NULL,              NULL}           /* sentinel */
+};
+
+static PyObject *
+GridLimits_get_enable_interconnection_limit(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Battwatts_GridLimits_enable_interconnection_limit_nget, self->data_ptr);
+}
+
+static int
+GridLimits_set_enable_interconnection_limit(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Battwatts_GridLimits_enable_interconnection_limit_nset, self->data_ptr);
+}
+
+static PyObject *
+GridLimits_get_grid_curtailment(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Battwatts_GridLimits_grid_curtailment_aget, self->data_ptr);
+}
+
+static int
+GridLimits_set_grid_curtailment(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Battwatts_GridLimits_grid_curtailment_aset, self->data_ptr);
+}
+
+static PyObject *
+GridLimits_get_grid_interconnection_limit_kwac(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Battwatts_GridLimits_grid_interconnection_limit_kwac_nget, self->data_ptr);
+}
+
+static int
+GridLimits_set_grid_interconnection_limit_kwac(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Battwatts_GridLimits_grid_interconnection_limit_kwac_nset, self->data_ptr);
+}
+
+static PyGetSetDef GridLimits_getset[] = {
+{"enable_interconnection_limit", (getter)GridLimits_get_enable_interconnection_limit,(setter)GridLimits_set_enable_interconnection_limit,
+	PyDoc_STR("*float*: Enable grid interconnection limit [0/1]\n\n*Info*: Enable a grid interconnection limit"),
+ 	NULL},
+{"grid_curtailment", (getter)GridLimits_get_grid_curtailment,(setter)GridLimits_set_grid_curtailment,
+	PyDoc_STR("*sequence*: Grid curtailment as energy delivery limit (first year) [MW]\n\n*Required*: False"),
+ 	NULL},
+{"grid_interconnection_limit_kwac", (getter)GridLimits_get_grid_interconnection_limit_kwac,(setter)GridLimits_set_grid_interconnection_limit_kwac,
+	PyDoc_STR("*float*: Grid interconnection limit [kWac]"),
+ 	NULL},
+	{NULL}  /* Sentinel */
+};
+
+static PyTypeObject GridLimits_Type = {
+		/* The ob_type field must be initialized in the module init function
+		 * to be portable to Windows without using C++. */
+		PyVarObject_HEAD_INIT(NULL, 0)
+		"Battwatts.GridLimits",             /*tp_name*/
+		sizeof(VarGroupObject),          /*tp_basicsize*/
+		0,                          /*tp_itemsize*/
+		/* methods */
+		0,    /*tp_dealloc*/
+		0,                          /*tp_print*/
+		(getattrfunc)0,             /*tp_getattr*/
+		0,                          /*tp_setattr*/
+		0,                          /*tp_reserved*/
+		0,                          /*tp_repr*/
+		0,                          /*tp_as_number*/
+		0,                          /*tp_as_sequence*/
+		0,                          /*tp_as_mapping*/
+		0,                          /*tp_hash*/
+		0,                          /*tp_call*/
+		0,                          /*tp_str*/
+		0,                          /*tp_getattro*/
+		0,                          /*tp_setattro*/
+		0,                          /*tp_as_buffer*/
+		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
+		0,                          /*tp_doc*/
+		0,                          /*tp_traverse*/
+		0,                          /*tp_clear*/
+		0,                          /*tp_richcompare*/
+		0,                          /*tp_weaklistofnset*/
+		0,                          /*tp_iter*/
+		0,                          /*tp_iternext*/
+		GridLimits_methods,         /*tp_methods*/
+		0,                          /*tp_members*/
+		GridLimits_getset,          /*tp_getset*/
+		0,                          /*tp_base*/
+		0,                          /*tp_dict*/
+		0,                          /*tp_descr_get*/
+		0,                          /*tp_descr_set*/
+		0,                          /*tp_dictofnset*/
+		0,                          /*tp_init*/
+		0,                          /*tp_alloc*/
+		0,             /*tp_new*/
+		0,                          /*tp_free*/
+		0,                          /*tp_is_gc*/
+};
+
+
+/*
  * Outputs Group
  */ 
 
@@ -577,6 +831,23 @@ Outputs_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+Outputs_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Outputs_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Battwatts", "Outputs")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 Outputs_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &Outputs_Type;
@@ -586,11 +857,31 @@ Outputs_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Outputs_methods[] = {
 		{"assign",            (PyCFunction)Outputs_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Outputs_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Outputs_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Outputs_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Outputs_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
+
+static PyObject *
+Outputs_get_annual_crit_load(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Battwatts_Outputs_annual_crit_load_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_annual_crit_load_unmet(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Battwatts_Outputs_annual_crit_load_unmet_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_annual_crit_load_unmet_percentage(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Battwatts_Outputs_annual_crit_load_unmet_percentage_nget, self->data_ptr);
+}
 
 static PyObject *
 Outputs_get_annual_energy_distribution_time(VarGroupObject *self, void *closure)
@@ -608,6 +899,12 @@ static PyObject *
 Outputs_get_annual_import_to_grid_energy(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Battwatts_Outputs_annual_import_to_grid_energy_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_annual_outage_losses_unmet(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Battwatts_Outputs_annual_outage_losses_unmet_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -761,6 +1058,78 @@ Outputs_get_batt_power_target(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_batt_pvs_PV_ramp_interval(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Battwatts_Outputs_batt_pvs_PV_ramp_interval_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_batt_pvs_P_pv_ac(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Battwatts_Outputs_batt_pvs_P_pv_ac_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_batt_pvs_battpower(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Battwatts_Outputs_batt_pvs_battpower_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_batt_pvs_battsoc(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Battwatts_Outputs_batt_pvs_battsoc_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_batt_pvs_curtail(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Battwatts_Outputs_batt_pvs_curtail_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_batt_pvs_energy_to_grid_percent(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Battwatts_Outputs_batt_pvs_energy_to_grid_percent_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_batt_pvs_energy_to_grid_percent_sam(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Battwatts_Outputs_batt_pvs_energy_to_grid_percent_sam_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_batt_pvs_forecast_pv_energy(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Battwatts_Outputs_batt_pvs_forecast_pv_energy_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_batt_pvs_outpower(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Battwatts_Outputs_batt_pvs_outpower_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_batt_pvs_violation_count(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Battwatts_Outputs_batt_pvs_violation_count_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_batt_pvs_violation_list(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Battwatts_Outputs_batt_pvs_violation_list_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_batt_pvs_violation_percent(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Battwatts_Outputs_batt_pvs_violation_percent_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_batt_q0(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Battwatts_Outputs_batt_q0_aget, self->data_ptr);
@@ -851,6 +1220,12 @@ Outputs_get_batt_to_load(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_batt_to_system_load(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Battwatts_Outputs_batt_to_system_load_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_batt_voltage(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Battwatts_Outputs_batt_voltage_aget, self->data_ptr);
@@ -866,6 +1241,18 @@ static PyObject *
 Outputs_get_cdf_of_surviving(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Battwatts_Outputs_cdf_of_surviving_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_crit_load(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Battwatts_Outputs_crit_load_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_crit_load_unmet(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Battwatts_Outputs_crit_load_unmet_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -911,6 +1298,12 @@ Outputs_get_grid_to_load(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_interconnection_loss(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Battwatts_Outputs_interconnection_loss_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_market_sell_rate_series_yr1(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Battwatts_Outputs_market_sell_rate_series_yr1_aget, self->data_ptr);
@@ -929,6 +1322,30 @@ Outputs_get_monthly_batt_to_load(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_monthly_batt_to_system_load(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Battwatts_Outputs_monthly_batt_to_system_load_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_monthly_crit_load(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Battwatts_Outputs_monthly_crit_load_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_monthly_crit_load_unmet(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Battwatts_Outputs_monthly_crit_load_unmet_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_monthly_crit_load_unmet_percentage(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Battwatts_Outputs_monthly_crit_load_unmet_percentage_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_monthly_grid_to_batt(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Battwatts_Outputs_monthly_grid_to_batt_aget, self->data_ptr);
@@ -938,6 +1355,18 @@ static PyObject *
 Outputs_get_monthly_grid_to_load(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Battwatts_Outputs_monthly_grid_to_load_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_monthly_interconnection_loss(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Battwatts_Outputs_monthly_interconnection_loss_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_monthly_outage_losses_unmet(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Battwatts_Outputs_monthly_outage_losses_unmet_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -962,6 +1391,12 @@ static PyObject *
 Outputs_get_outage_durations(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Battwatts_Outputs_outage_durations_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_outage_losses_unmet(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Battwatts_Outputs_outage_losses_unmet_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -1019,6 +1454,15 @@ Outputs_get_system_to_load(VarGroupObject *self, void *closure)
 }
 
 static PyGetSetDef Outputs_getset[] = {
+{"annual_crit_load", (getter)Outputs_get_annual_crit_load,(setter)0,
+	PyDoc_STR("*float*: Critical load energy (year 1) [kWh]"),
+ 	NULL},
+{"annual_crit_load_unmet", (getter)Outputs_get_annual_crit_load_unmet,(setter)0,
+	PyDoc_STR("*float*: Critical load energy unmet (year 1) [kWh]"),
+ 	NULL},
+{"annual_crit_load_unmet_percentage", (getter)Outputs_get_annual_crit_load_unmet_percentage,(setter)0,
+	PyDoc_STR("*float*: Critical load unmet percentage (year 1) [%]"),
+ 	NULL},
 {"annual_energy_distribution_time", (getter)Outputs_get_annual_energy_distribution_time,(setter)0,
 	PyDoc_STR("*sequence[sequence]*: Annual energy production as function of time [kW]"),
  	NULL},
@@ -1027,6 +1471,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"annual_import_to_grid_energy", (getter)Outputs_get_annual_import_to_grid_energy,(setter)0,
 	PyDoc_STR("*sequence*: Annual energy imported from grid [kWh]"),
+ 	NULL},
+{"annual_outage_losses_unmet", (getter)Outputs_get_annual_outage_losses_unmet,(setter)0,
+	PyDoc_STR("*float*: Battery and system losses unmet energy (year 1) [kWh]"),
  	NULL},
 {"average_battery_conversion_efficiency", (getter)Outputs_get_average_battery_conversion_efficiency,(setter)0,
 	PyDoc_STR("*float*: Battery average cycle conversion efficiency [%]"),
@@ -1086,7 +1533,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Battery capacity percent for temperature [%]"),
  	NULL},
 {"batt_conversion_loss", (getter)Outputs_get_batt_conversion_loss,(setter)0,
-	PyDoc_STR("*sequence*: Electricity loss in battery power electronics [kW]"),
+	PyDoc_STR("*sequence*: Battery loss from power electronics [kW]"),
  	NULL},
 {"batt_cost_to_cycle", (getter)Outputs_get_batt_cost_to_cycle,(setter)0,
 	PyDoc_STR("*sequence*: Battery computed cycle degradation penalty [$/cycle-kWh]"),
@@ -1102,6 +1549,42 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"batt_power_target", (getter)Outputs_get_batt_power_target,(setter)0,
 	PyDoc_STR("*sequence*: Electricity battery power target for automated dispatch [kW]"),
+ 	NULL},
+{"batt_pvs_PV_ramp_interval", (getter)Outputs_get_batt_pvs_PV_ramp_interval,(setter)0,
+	PyDoc_STR("*sequence*: PV smoothing PV power sampled [kW]"),
+ 	NULL},
+{"batt_pvs_P_pv_ac", (getter)Outputs_get_batt_pvs_P_pv_ac,(setter)0,
+	PyDoc_STR("*sequence*: PV smoothing PV power before smoothing [kW]"),
+ 	NULL},
+{"batt_pvs_battpower", (getter)Outputs_get_batt_pvs_battpower,(setter)0,
+	PyDoc_STR("*sequence*: PV smoothing battpower [kW]"),
+ 	NULL},
+{"batt_pvs_battsoc", (getter)Outputs_get_batt_pvs_battsoc,(setter)0,
+	PyDoc_STR("*sequence*: PV smoothing battery SOC [%]"),
+ 	NULL},
+{"batt_pvs_curtail", (getter)Outputs_get_batt_pvs_curtail,(setter)0,
+	PyDoc_STR("*sequence*: PV smoothing curtailed power [kW]"),
+ 	NULL},
+{"batt_pvs_energy_to_grid_percent", (getter)Outputs_get_batt_pvs_energy_to_grid_percent,(setter)0,
+	PyDoc_STR("*float*: PV smoothing energy to grid percent (loss due to curtail and battery loss) [%]"),
+ 	NULL},
+{"batt_pvs_energy_to_grid_percent_sam", (getter)Outputs_get_batt_pvs_energy_to_grid_percent_sam,(setter)0,
+	PyDoc_STR("*float*: PV smoothing energy to grid percent actual (loss due to curtail and battery loss) [%]"),
+ 	NULL},
+{"batt_pvs_forecast_pv_energy", (getter)Outputs_get_batt_pvs_forecast_pv_energy,(setter)0,
+	PyDoc_STR("*sequence*: PV smoothing PV power forecast [kW]"),
+ 	NULL},
+{"batt_pvs_outpower", (getter)Outputs_get_batt_pvs_outpower,(setter)0,
+	PyDoc_STR("*sequence*: PV smoothing outpower [kW]"),
+ 	NULL},
+{"batt_pvs_violation_count", (getter)Outputs_get_batt_pvs_violation_count,(setter)0,
+	PyDoc_STR("*float*: PV smoothing violation count"),
+ 	NULL},
+{"batt_pvs_violation_list", (getter)Outputs_get_batt_pvs_violation_list,(setter)0,
+	PyDoc_STR("*sequence*: PV smoothing violation"),
+ 	NULL},
+{"batt_pvs_violation_percent", (getter)Outputs_get_batt_pvs_violation_percent,(setter)0,
+	PyDoc_STR("*float*: PV smoothing violation percent (of all intervals-including nighttime) [%]"),
  	NULL},
 {"batt_q0", (getter)Outputs_get_batt_q0,(setter)0,
 	PyDoc_STR("*sequence*: Battery total charge [Ah]"),
@@ -1137,7 +1620,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*float*: Battery charge energy charged from system [%]"),
  	NULL},
 {"batt_system_loss", (getter)Outputs_get_batt_system_loss,(setter)0,
-	PyDoc_STR("*sequence*: Electricity loss from battery ancillary equipment (kW DC for DC connected, AC for AC connected) [kW]"),
+	PyDoc_STR("*sequence*: Battery loss from ancillary equipment [kW]"),
  	NULL},
 {"batt_temperature", (getter)Outputs_get_batt_temperature,(setter)0,
 	PyDoc_STR("*sequence*: Battery temperature [C]"),
@@ -1148,6 +1631,9 @@ static PyGetSetDef Outputs_getset[] = {
 {"batt_to_load", (getter)Outputs_get_batt_to_load,(setter)0,
 	PyDoc_STR("*sequence*: Electricity to load from battery [kW]"),
  	NULL},
+{"batt_to_system_load", (getter)Outputs_get_batt_to_system_load,(setter)0,
+	PyDoc_STR("*sequence*: Electricity to system loads from battery [kW]"),
+ 	NULL},
 {"batt_voltage", (getter)Outputs_get_batt_voltage,(setter)0,
 	PyDoc_STR("*sequence*: Battery voltage [V]"),
  	NULL},
@@ -1157,6 +1643,12 @@ static PyGetSetDef Outputs_getset[] = {
 {"cdf_of_surviving", (getter)Outputs_get_cdf_of_surviving,(setter)0,
 	PyDoc_STR("*sequence*: Cumulative probabilities of autonomous hours for resilience"),
  	NULL},
+{"crit_load", (getter)Outputs_get_crit_load,(setter)0,
+	PyDoc_STR("*sequence*: Critical load in this timestep [kW]"),
+ 	NULL},
+{"crit_load_unmet", (getter)Outputs_get_crit_load_unmet,(setter)0,
+	PyDoc_STR("*sequence*: Critical load unmet in this timestep [kW]"),
+ 	NULL},
 {"fuelcell_to_batt", (getter)Outputs_get_fuelcell_to_batt,(setter)0,
 	PyDoc_STR("*sequence*: Electricity to battery from fuel cell [kW]"),
  	NULL},
@@ -1164,7 +1656,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: System power generated [kW]"),
  	NULL},
 {"gen_without_battery", (getter)Outputs_get_gen_without_battery,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced without the battery or curtailment [kW]"),
+	PyDoc_STR("*sequence*: Power produced without the battery or curtailment [kW]"),
  	NULL},
 {"grid_power", (getter)Outputs_get_grid_power,(setter)0,
 	PyDoc_STR("*sequence*: Electricity to/from grid [kW]"),
@@ -1178,6 +1670,9 @@ static PyGetSetDef Outputs_getset[] = {
 {"grid_to_load", (getter)Outputs_get_grid_to_load,(setter)0,
 	PyDoc_STR("*sequence*: Electricity to load from grid [kW]"),
  	NULL},
+{"interconnection_loss", (getter)Outputs_get_interconnection_loss,(setter)0,
+	PyDoc_STR("*sequence*: Electricity loss due to curtailment, interconnection, or outage [kW]"),
+ 	NULL},
 {"market_sell_rate_series_yr1", (getter)Outputs_get_market_sell_rate_series_yr1,(setter)0,
 	PyDoc_STR("*sequence*: Market sell rate (Year 1) [$/MWh]"),
  	NULL},
@@ -1187,11 +1682,29 @@ static PyGetSetDef Outputs_getset[] = {
 {"monthly_batt_to_load", (getter)Outputs_get_monthly_batt_to_load,(setter)0,
 	PyDoc_STR("*sequence*: Energy to load from battery [kWh]"),
  	NULL},
+{"monthly_batt_to_system_load", (getter)Outputs_get_monthly_batt_to_system_load,(setter)0,
+	PyDoc_STR("*sequence*: Energy to system loads from battery [kWh]"),
+ 	NULL},
+{"monthly_crit_load", (getter)Outputs_get_monthly_crit_load,(setter)0,
+	PyDoc_STR("*sequence*: Critical load energy [kWh]"),
+ 	NULL},
+{"monthly_crit_load_unmet", (getter)Outputs_get_monthly_crit_load_unmet,(setter)0,
+	PyDoc_STR("*sequence*: Critical load energy unmet [kWh]"),
+ 	NULL},
+{"monthly_crit_load_unmet_percentage", (getter)Outputs_get_monthly_crit_load_unmet_percentage,(setter)0,
+	PyDoc_STR("*sequence*: Critical load unmet percentage [%]"),
+ 	NULL},
 {"monthly_grid_to_batt", (getter)Outputs_get_monthly_grid_to_batt,(setter)0,
 	PyDoc_STR("*sequence*: Energy to battery from grid [kWh]"),
  	NULL},
 {"monthly_grid_to_load", (getter)Outputs_get_monthly_grid_to_load,(setter)0,
 	PyDoc_STR("*sequence*: Energy to load from grid [kWh]"),
+ 	NULL},
+{"monthly_interconnection_loss", (getter)Outputs_get_monthly_interconnection_loss,(setter)0,
+	PyDoc_STR("*sequence*: Energy loss due to curtailment, interconnection, or outage [kWh]"),
+ 	NULL},
+{"monthly_outage_losses_unmet", (getter)Outputs_get_monthly_outage_losses_unmet,(setter)0,
+	PyDoc_STR("*sequence*: Battery and system losses unmet energy [kWh]"),
  	NULL},
 {"monthly_system_to_batt", (getter)Outputs_get_monthly_system_to_batt,(setter)0,
 	PyDoc_STR("*sequence*: Energy to battery from system [kWh]"),
@@ -1204,6 +1717,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"outage_durations", (getter)Outputs_get_outage_durations,(setter)0,
 	PyDoc_STR("*sequence*: List of autonomous hours for resilience from min to max [hr]"),
+ 	NULL},
+{"outage_losses_unmet", (getter)Outputs_get_outage_losses_unmet,(setter)0,
+	PyDoc_STR("*sequence*: Battery and system losses unmet in this timestep [kW]"),
  	NULL},
 {"pdf_of_surviving", (getter)Outputs_get_pdf_of_surviving,(setter)0,
 	PyDoc_STR("*sequence*: Probabilities of autonomous hours for resilience "),
@@ -1307,6 +1823,10 @@ newBattwattsObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "Load", Load_obj);
 	Py_DECREF(Load_obj);
 
+	PyObject* GridLimits_obj = GridLimits_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "GridLimits", GridLimits_obj);
+	Py_DECREF(GridLimits_obj);
+
 	PyObject* Outputs_obj = Outputs_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
 	Py_DECREF(Outputs_obj);
@@ -1361,6 +1881,20 @@ Battwatts_assign(CmodObject *self, PyObject *args)
 	return Py_None;
 }
 
+static PyObject *
+Battwatts_replace(CmodObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_replace_from_nested_dict((PyObject*)self, self->x_attr, self->data_ptr, dict, "Battwatts"))
+		return NULL;
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
 
 static PyObject *
 Battwatts_export(CmodObject *self, PyObject *args)
@@ -1385,6 +1919,8 @@ static PyMethodDef Battwatts_methods[] = {
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
 		{"assign",            (PyCFunction)Battwatts_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Lifetime': { var: val, ...}, ...}``")},
+		{"replace",            (PyCFunction)Battwatts_replace,  METH_VARARGS,
+				PyDoc_STR("replace(dict) -> None\n Replace attributes from nested dictionary, except for Outputs. Unassigns all values in each Group then assigns from the input dict.\n\n``nested_dict = { 'Lifetime': { var: val, ...}, ...}``")},
 		{"export",            (PyCFunction)Battwatts_export,  METH_VARARGS,
 				PyDoc_STR("export() -> dict\n Export attributes into nested dictionary")},
 		{"value",             (PyCFunction)Battwatts_value, METH_VARARGS,
@@ -1593,6 +2129,13 @@ BattwattsModule_exec(PyObject *m)
 				"Load",
 				(PyObject*)&Load_Type);
 	Py_DECREF(&Load_Type);
+
+	/// Add the GridLimits type object to Battwatts_Type
+	if (PyType_Ready(&GridLimits_Type) < 0) { goto fail; }
+	PyDict_SetItemString(Battwatts_Type.tp_dict,
+				"GridLimits",
+				(PyObject*)&GridLimits_Type);
+	Py_DECREF(&GridLimits_Type);
 
 	/// Add the Outputs type object to Battwatts_Type
 	if (PyType_Ready(&Outputs_Type) < 0) { goto fail; }

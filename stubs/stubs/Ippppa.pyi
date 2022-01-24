@@ -39,18 +39,23 @@ class SystemCosts(object):
 	add_om_num_types = float
 	annual_fuel_usage = float
 	annual_fuel_usage_lifetime = tuple
+	fuelcell_annual_energy_discharged = tuple
+	om_batt_capacity_cost = tuple
+	om_batt_fixed_cost = tuple
+	om_batt_nameplate = float
+	om_batt_replacement_cost = tuple
+	om_batt_variable_cost = tuple
 	om_capacity = tuple
-	om_capacity1 = tuple
-	om_capacity1_nameplate = float
-	om_capacity2 = tuple
-	om_capacity2_nameplate = float
 	om_capacity_escal = float
 	om_fixed = tuple
-	om_fixed1 = tuple
-	om_fixed2 = tuple
 	om_fixed_escal = float
 	om_fuel_cost = tuple
 	om_fuel_cost_escal = float
+	om_fuelcell_capacity_cost = tuple
+	om_fuelcell_fixed_cost = tuple
+	om_fuelcell_nameplate = float
+	om_fuelcell_replacement_cost = tuple
+	om_fuelcell_variable_cost = tuple
 	om_opt_fuel_1_cost = tuple
 	om_opt_fuel_1_cost_escal = float
 	om_opt_fuel_1_usage = float
@@ -58,14 +63,26 @@ class SystemCosts(object):
 	om_opt_fuel_2_cost_escal = float
 	om_opt_fuel_2_usage = float
 	om_production = tuple
-	om_production1 = tuple
 	om_production1_values = tuple
-	om_production2 = tuple
 	om_production2_values = tuple
 	om_production_escal = float
-	om_replacement_cost1 = tuple
-	om_replacement_cost2 = tuple
 	om_replacement_cost_escal = float
+
+
+class LandLease(object):
+	def assign(self): 
+		pass
+
+	def export(self) -> dict:
+		pass
+
+	def __init__(self, *args, **kwargs): 
+		pass
+
+
+	land_area = float
+	om_land_lease = tuple
+	om_land_lease_escal = float
 
 
 class Depreciation(object):
@@ -342,6 +359,7 @@ class Outputs(object):
 	cf_fed_taxable_income_less_deductions = tuple
 	cf_federal_tax_frac = tuple
 	cf_insurance_expense = tuple
+	cf_land_lease_expense = tuple
 	cf_length = float
 	cf_net_salvage_value = tuple
 	cf_om_capacity_expense = tuple
@@ -493,6 +511,7 @@ class Ippppa(object):
 
 	FinancialParameters = FinancialParameters
 	SystemCosts = SystemCosts
+	LandLease = LandLease
 	Depreciation = Depreciation
 	TaxCreditIncentives = TaxCreditIncentives
 	PaymentIncentives = PaymentIncentives

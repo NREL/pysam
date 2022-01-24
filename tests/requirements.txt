@@ -1,5 +1,7 @@
 mypy
-pytest
+numpy==1.21.0
 pandas
+pytest
+python-dotenv
 pympler
 requests

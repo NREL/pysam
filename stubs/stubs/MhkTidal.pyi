@@ -19,6 +19,7 @@ class MHKTidal(object):
 	loss_resource_overprediction = float
 	loss_transmission = float
 	number_devices = float
+	system_capacity = float
 	tidal_power_curve = tuple
 	tidal_resource = tuple
 	total_operating_cost = float
@@ -47,14 +48,19 @@ class Outputs(object):
 	tidal_resource_start_velocity = float
 	total_bos_cost_kwh = float
 	total_bos_cost_lcoe = float
+	total_bos_cost_per_kw = float
 	total_capital_cost_kwh = float
 	total_capital_cost_lcoe = float
+	total_capital_cost_per_kw = float
 	total_device_cost_kwh = float
 	total_device_cost_lcoe = float
+	total_device_cost_per_kw = float
 	total_financial_cost_kwh = float
 	total_financial_cost_lcoe = float
+	total_financial_cost_per_kw = float
 	total_om_cost_kwh = float
 	total_om_cost_lcoe = float
+	total_operations_cost_per_kw = float
 
 
 class MhkTidal(object):

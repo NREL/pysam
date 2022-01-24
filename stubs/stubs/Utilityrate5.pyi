@@ -13,6 +13,10 @@ class ElectricityRates(object):
 	en_electricity_rates = float
 	rate_escalation = tuple
 	ur_annual_min_charge = float
+	ur_billing_demand_lookback_percentages = tuple
+	ur_billing_demand_lookback_period = float
+	ur_billing_demand_minimum = float
+	ur_dc_billing_demand_periods = tuple
 	ur_dc_enable = float
 	ur_dc_flat_mat = tuple
 	ur_dc_sched_weekday = tuple
@@ -23,6 +27,7 @@ class ElectricityRates(object):
 	ur_ec_tou_mat = tuple
 	ur_en_ts_buy_rate = float
 	ur_en_ts_sell_rate = float
+	ur_enable_billing_demand = float
 	ur_metering_option = float
 	ur_monthly_fixed_charge = float
 	ur_monthly_min_charge = float
@@ -32,6 +37,7 @@ class ElectricityRates(object):
 	ur_sell_eq_buy = float
 	ur_ts_buy_rate = tuple
 	ur_ts_sell_rate = tuple
+	ur_yearzero_usage_peaks = tuple
 
 
 class Lifetime(object):
@@ -94,6 +100,8 @@ class Outputs(object):
 	annual_electric_load = tuple
 	annual_energy_value = tuple
 	bill_load = tuple
+	billing_demand_w_sys_ym = tuple
+	billing_demand_wo_sys_ym = tuple
 	charge_w_sys_dc_fixed = tuple
 	charge_w_sys_dc_fixed_ym = tuple
 	charge_w_sys_dc_tou = tuple
@@ -194,6 +202,8 @@ class Outputs(object):
 	utility_bill_w_sys_ym = tuple
 	utility_bill_wo_sys = tuple
 	utility_bill_wo_sys_ym = tuple
+	year1_billing_demand_w_sys = tuple
+	year1_billing_demand_wo_sys = tuple
 	year1_electric_load = float
 	year1_excess_kwhs_earned = tuple
 	year1_hourly_dc_peak_per_period = tuple

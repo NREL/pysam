@@ -55,6 +55,12 @@ SystemCosts Group
 .. autoclass:: PySAM.Singleowner.Singleowner.SystemCosts
 	:members:
 
+LandLease Group
+======================================================
+
+.. autoclass:: PySAM.Singleowner.Singleowner.LandLease
+	:members:
+
 TaxCreditIncentives Group
 ======================================================
 
@@ -119,6 +125,18 @@ GridLimits Group
 ======================================================
 
 .. autoclass:: PySAM.Singleowner.Singleowner.GridLimits
+	:members:
+
+LCOS Group
+======================================================
+
+.. autoclass:: PySAM.Singleowner.Singleowner.LCOS
+	:members:
+
+ChargesByMonth Group
+======================================================
+
+.. autoclass:: PySAM.Singleowner.Singleowner.ChargesByMonth
 	:members:
 
 Outputs Group

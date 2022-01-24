@@ -45,6 +45,23 @@ SolarResource_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+SolarResource_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &SolarResource_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Pvwattsv7", "SolarResource")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 SolarResource_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &SolarResource_Type;
@@ -54,7 +71,9 @@ SolarResource_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef SolarResource_methods[] = {
 		{"assign",            (PyCFunction)SolarResource_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``SolarResource_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``SolarResource_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)SolarResource_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``SolarResource_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)SolarResource_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -101,10 +120,10 @@ static PyGetSetDef SolarResource_getset[] = {
 	PyDoc_STR("*sequence*: Albedo [frac]\n\n*Info*: if provided, will overwrite weather file albedo"),
  	NULL},
 {"solar_resource_data", (getter)SolarResource_get_solar_resource_data,(setter)SolarResource_set_solar_resource_data,
-	PyDoc_STR("*dict*: Weather data\n\n*Info*: dn,df,tdry,wspd,lat,lon,tz,elev\n\n*Required*: False"),
+	PyDoc_STR("*dict*: Weather data\n\n*Info*: dn,df,tdry,wspd,lat,lon,tz,elev"),
  	NULL},
 {"solar_resource_file", (getter)SolarResource_get_solar_resource_file,(setter)SolarResource_set_solar_resource_file,
-	PyDoc_STR("*str*: Weather file path\n\n*Required*: False"),
+	PyDoc_STR("*str*: Weather file path"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -193,6 +212,23 @@ Lifetime_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+Lifetime_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Lifetime_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Pvwattsv7", "Lifetime")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 Lifetime_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &Lifetime_Type;
@@ -202,7 +238,9 @@ Lifetime_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Lifetime_methods[] = {
 		{"assign",            (PyCFunction)Lifetime_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Lifetime_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Lifetime_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Lifetime_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Lifetime_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Lifetime_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -341,6 +379,23 @@ SystemDesign_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+SystemDesign_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &SystemDesign_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Pvwattsv7", "SystemDesign")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 SystemDesign_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &SystemDesign_Type;
@@ -350,7 +405,9 @@ SystemDesign_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef SystemDesign_methods[] = {
 		{"assign",            (PyCFunction)SystemDesign_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``SystemDesign_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``SystemDesign_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)SystemDesign_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``SystemDesign_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)SystemDesign_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -819,6 +876,23 @@ Outputs_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+Outputs_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Outputs_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Pvwattsv7", "Outputs")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 Outputs_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &Outputs_Type;
@@ -828,7 +902,9 @@ Outputs_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Outputs_methods[] = {
 		{"assign",            (PyCFunction)Outputs_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Outputs_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Outputs_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Outputs_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Outputs_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -916,12 +992,6 @@ static PyObject *
 Outputs_get_elev(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Pvwattsv7_Outputs_elev_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_estimated_rows(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Pvwattsv7_Outputs_estimated_rows_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -1015,6 +1085,24 @@ Outputs_get_solrad_monthly(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_ss_beam_factor(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvwattsv7_Outputs_ss_beam_factor_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_ss_gnd_diffuse_factor(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvwattsv7_Outputs_ss_gnd_diffuse_factor_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_ss_sky_diffuse_factor(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvwattsv7_Outputs_ss_sky_diffuse_factor_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_state(VarGroupObject *self, void *closure)
 {
 	return PySAM_string_getter(SAM_Pvwattsv7_Outputs_state_sget, self->data_ptr);
@@ -1105,9 +1193,6 @@ static PyGetSetDef Outputs_getset[] = {
 {"elev", (getter)Outputs_get_elev,(setter)0,
 	PyDoc_STR("*float*: Site elevation [m]"),
  	NULL},
-{"estimated_rows", (getter)Outputs_get_estimated_rows,(setter)0,
-	PyDoc_STR("*float*: Estimated number of rows in the system"),
- 	NULL},
 {"gen", (getter)Outputs_get_gen,(setter)0,
 	PyDoc_STR("*sequence*: System power generated [kW]"),
  	NULL},
@@ -1142,7 +1227,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Plane of array irradiance [kWh/m2]"),
  	NULL},
 {"shad_beam_factor", (getter)Outputs_get_shad_beam_factor,(setter)0,
-	PyDoc_STR("*sequence*: Shading factor for beam radiation"),
+	PyDoc_STR("*sequence*: External shading factor for beam radiation"),
  	NULL},
 {"snow", (getter)Outputs_get_snow,(setter)0,
 	PyDoc_STR("*sequence*: Weather file snow depth [cm]"),
@@ -1152,6 +1237,15 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"solrad_monthly", (getter)Outputs_get_solrad_monthly,(setter)0,
 	PyDoc_STR("*sequence*: Daily average solar irradiance [kWh/m2/day]"),
+ 	NULL},
+{"ss_beam_factor", (getter)Outputs_get_ss_beam_factor,(setter)0,
+	PyDoc_STR("*sequence*: Calculated self-shading factor for beam radiation"),
+ 	NULL},
+{"ss_gnd_diffuse_factor", (getter)Outputs_get_ss_gnd_diffuse_factor,(setter)0,
+	PyDoc_STR("*sequence*: Calculated self-shading factor for ground-reflected diffuse radiation"),
+ 	NULL},
+{"ss_sky_diffuse_factor", (getter)Outputs_get_ss_sky_diffuse_factor,(setter)0,
+	PyDoc_STR("*sequence*: Calculated self-shading factor for sky diffuse radiation"),
  	NULL},
 {"state", (getter)Outputs_get_state,(setter)0,
 	PyDoc_STR("*str*: State"),
@@ -1321,6 +1415,20 @@ Pvwattsv7_assign(CmodObject *self, PyObject *args)
 	return Py_None;
 }
 
+static PyObject *
+Pvwattsv7_replace(CmodObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_replace_from_nested_dict((PyObject*)self, self->x_attr, self->data_ptr, dict, "Pvwattsv7"))
+		return NULL;
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
 
 static PyObject *
 Pvwattsv7_export(CmodObject *self, PyObject *args)
@@ -1345,6 +1453,8 @@ static PyMethodDef Pvwattsv7_methods[] = {
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
 		{"assign",            (PyCFunction)Pvwattsv7_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Solar Resource': { var: val, ...}, ...}``")},
+		{"replace",            (PyCFunction)Pvwattsv7_replace,  METH_VARARGS,
+				PyDoc_STR("replace(dict) -> None\n Replace attributes from nested dictionary, except for Outputs. Unassigns all values in each Group then assigns from the input dict.\n\n``nested_dict = { 'Solar Resource': { var: val, ...}, ...}``")},
 		{"export",            (PyCFunction)Pvwattsv7_export,  METH_VARARGS,
 				PyDoc_STR("export() -> dict\n Export attributes into nested dictionary")},
 		{"value",             (PyCFunction)Pvwattsv7_value, METH_VARARGS,
@@ -1512,7 +1622,7 @@ static PyMethodDef Pvwattsv7Module_methods[] = {
 				PyDoc_STR("new() -> Pvwattsv7")},
 		{"default",             Pvwattsv7_default,         METH_VARARGS,
 				PyDoc_STR("default(config) -> Pvwattsv7\n\nUse default attributes\n"
-				"`config` options:\n\n- \"FuelCellCommercial\"\n- \"FuelCellSingleOwner\"\n- \"PVWattsBatteryCommercial\"\n- \"PVWattsBatteryHostDeveloper\"\n- \"PVWattsBatteryResidential\"\n- \"PVWattsBatteryThirdParty\"\n- \"PVWattsAllEquityPartnershipFlip\"\n- \"PVWattsCommercial\"\n- \"PVWattsHostDeveloper\"\n- \"PVWattsLCOECalculator\"\n- \"PVWattsLeveragedPartnershipFlip\"\n- \"PVWattsMerchantPlant\"\n- \"PVWattsNone\"\n- \"PVWattsResidential\"\n- \"PVWattsSaleLeaseback\"\n- \"PVWattsSingleOwner\"\n- \"PVWattsThirdParty\"")},
+				"None")},
 		{"wrap",             Pvwattsv7_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Pvwattsv7\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   Pvwattsv7_from_existing,        METH_VARARGS,
@@ -1521,7 +1631,7 @@ static PyMethodDef Pvwattsv7Module_methods[] = {
 };
 
 PyDoc_STRVAR(module_doc,
-			 "Photovoltaic system using basic NREL PVWatts V7 algorithm. Does not do detailed degradation or loss modeling. If those are important, please use pvsamv1.");
+			 "Pvwattsv7");
 
 
 static int

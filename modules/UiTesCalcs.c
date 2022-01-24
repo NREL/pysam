@@ -43,6 +43,23 @@ Common_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+Common_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Common_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "UiTesCalcs", "Common")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 Common_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &Common_Type;
@@ -52,7 +69,9 @@ Common_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Common_methods[] = {
 		{"assign",            (PyCFunction)Common_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Common_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Common_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Common_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Common_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Common_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -107,6 +126,18 @@ Common_set_design_eff(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyObject *
+Common_get_dt_hot(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_UiTesCalcs_Common_dt_hot_nget, self->data_ptr);
+}
+
+static int
+Common_set_dt_hot(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_UiTesCalcs_Common_dt_hot_nset, self->data_ptr);
+}
+
+static PyObject *
 Common_get_field_fl_props(VarGroupObject *self, void *closure)
 {
 	return PySAM_matrix_getter(SAM_UiTesCalcs_Common_field_fl_props_mget, self->data_ptr);
@@ -116,6 +147,18 @@ static int
 Common_set_field_fl_props(VarGroupObject *self, PyObject *value, void *closure)
 {
 		return PySAM_matrix_setter(value, SAM_UiTesCalcs_Common_field_fl_props_mset, self->data_ptr);
+}
+
+static PyObject *
+Common_get_field_fluid(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_UiTesCalcs_Common_field_fluid_nget, self->data_ptr);
+}
+
+static int
+Common_set_field_fluid(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_UiTesCalcs_Common_field_fluid_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -143,15 +186,27 @@ Common_set_h_tank_min(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyObject *
-Common_get_rec_htf(VarGroupObject *self, void *closure)
+Common_get_store_fl_props(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_UiTesCalcs_Common_rec_htf_nget, self->data_ptr);
+	return PySAM_matrix_getter(SAM_UiTesCalcs_Common_store_fl_props_mget, self->data_ptr);
 }
 
 static int
-Common_set_rec_htf(VarGroupObject *self, PyObject *value, void *closure)
+Common_set_store_fl_props(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_UiTesCalcs_Common_rec_htf_nset, self->data_ptr);
+		return PySAM_matrix_setter(value, SAM_UiTesCalcs_Common_store_fl_props_mset, self->data_ptr);
+}
+
+static PyObject *
+Common_get_store_fluid(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_UiTesCalcs_Common_store_fluid_nget, self->data_ptr);
+}
+
+static int
+Common_set_store_fluid(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_UiTesCalcs_Common_store_fluid_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -195,16 +250,22 @@ static PyGetSetDef Common_getset[] = {
 	PyDoc_STR("*float*: Power cycle output at design [MWe]\n\n*Required*: True"),
  	NULL},
 {"T_htf_cold_des", (getter)Common_get_T_htf_cold_des,(setter)Common_set_T_htf_cold_des,
-	PyDoc_STR("*float*: Cold HTF temp (out of TES HX, if applicable) [C]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Cold design HTF temp into field [C]\n\n*Required*: True"),
  	NULL},
 {"T_htf_hot_des", (getter)Common_get_T_htf_hot_des,(setter)Common_set_T_htf_hot_des,
-	PyDoc_STR("*float*: Hot HTF temp (into TES HX, if applicable) [C]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Hot design HTF temp from field [C]\n\n*Required*: True"),
  	NULL},
 {"design_eff", (getter)Common_get_design_eff,(setter)Common_set_design_eff,
 	PyDoc_STR("*float*: Power cycle thermal efficiency\n\n*Required*: True"),
  	NULL},
+{"dt_hot", (getter)Common_get_dt_hot,(setter)Common_set_dt_hot,
+	PyDoc_STR("*float*: Heat exchanger approach temperature\n\n*Required*: True"),
+ 	NULL},
 {"field_fl_props", (getter)Common_get_field_fl_props,(setter)Common_set_field_fl_props,
-	PyDoc_STR("*sequence[sequence]*: User defined tes storage fluid prop data\n\n*Info*: 7 columns (T,Cp,dens,visc,kvisc,cond,h), at least 3 rows\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: User defined field fluid prop data\n\n*Info*: 7 columns (T,Cp,dens,visc,kvisc,cond,h), at least 3 rows\n\n*Required*: True"),
+ 	NULL},
+{"field_fluid", (getter)Common_get_field_fluid,(setter)Common_set_field_fluid,
+	PyDoc_STR("*float*: Field fluid code\n\n*Required*: True"),
  	NULL},
 {"h_tank", (getter)Common_get_h_tank,(setter)Common_set_h_tank,
 	PyDoc_STR("*float*: Total height of tank (HTF when tank is full [m]\n\n*Required*: True"),
@@ -212,7 +273,10 @@ static PyGetSetDef Common_getset[] = {
 {"h_tank_min", (getter)Common_get_h_tank_min,(setter)Common_set_h_tank_min,
 	PyDoc_STR("*float*: Min. allowable HTF height in storage tank [m]\n\n*Required*: True"),
  	NULL},
-{"rec_htf", (getter)Common_get_rec_htf,(setter)Common_set_rec_htf,
+{"store_fl_props", (getter)Common_get_store_fl_props,(setter)Common_set_store_fl_props,
+	PyDoc_STR("*sequence[sequence]*: User defined tes storage fluid prop data\n\n*Info*: 7 columns (T,Cp,dens,visc,kvisc,cond,h), at least 3 rows\n\n*Required*: True"),
+ 	NULL},
+{"store_fluid", (getter)Common_get_store_fluid,(setter)Common_set_store_fluid,
 	PyDoc_STR("*float*: TES storage fluid code\n\n*Required*: True"),
  	NULL},
 {"tank_pairs", (getter)Common_get_tank_pairs,(setter)Common_set_tank_pairs,
@@ -311,6 +375,23 @@ Outputs_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+Outputs_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Outputs_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "UiTesCalcs", "Outputs")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 Outputs_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &Outputs_Type;
@@ -320,11 +401,19 @@ Outputs_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Outputs_methods[] = {
 		{"assign",            (PyCFunction)Outputs_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Outputs_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Outputs_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Outputs_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Outputs_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
 };
+
+static PyObject *
+Outputs_get_are_htfs_equal(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_UiTesCalcs_Outputs_are_htfs_equal_nget, self->data_ptr);
+}
 
 static PyObject *
 Outputs_get_csp_pt_tes_htf_density(VarGroupObject *self, void *closure)
@@ -363,6 +452,9 @@ Outputs_get_vol_tank(VarGroupObject *self, void *closure)
 }
 
 static PyGetSetDef Outputs_getset[] = {
+{"are_htfs_equal", (getter)Outputs_get_are_htfs_equal,(setter)0,
+	PyDoc_STR("*float*: 0: no, 1: yes"),
+ 	NULL},
 {"csp_pt_tes_htf_density", (getter)Outputs_get_csp_pt_tes_htf_density,(setter)0,
 	PyDoc_STR("*float*: HTF dens [kg/m^3]"),
  	NULL},
@@ -502,6 +594,20 @@ UiTesCalcs_assign(CmodObject *self, PyObject *args)
 	return Py_None;
 }
 
+static PyObject *
+UiTesCalcs_replace(CmodObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_replace_from_nested_dict((PyObject*)self, self->x_attr, self->data_ptr, dict, "UiTesCalcs"))
+		return NULL;
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
 
 static PyObject *
 UiTesCalcs_export(CmodObject *self, PyObject *args)
@@ -526,6 +632,8 @@ static PyMethodDef UiTesCalcs_methods[] = {
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
 		{"assign",            (PyCFunction)UiTesCalcs_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Common': { var: val, ...}, ...}``")},
+		{"replace",            (PyCFunction)UiTesCalcs_replace,  METH_VARARGS,
+				PyDoc_STR("replace(dict) -> None\n Replace attributes from nested dictionary, except for Outputs. Unassigns all values in each Group then assigns from the input dict.\n\n``nested_dict = { 'Common': { var: val, ...}, ...}``")},
 		{"export",            (PyCFunction)UiTesCalcs_export,  METH_VARARGS,
 				PyDoc_STR("export() -> dict\n Export attributes into nested dictionary")},
 		{"value",             (PyCFunction)UiTesCalcs_value, METH_VARARGS,

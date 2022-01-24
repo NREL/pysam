@@ -11,6 +11,8 @@ class WeatherReader(object):
 
 	use_specific_wf_wave = float
 	wave_resource_filename = str
+	wave_resource_filename_ts = str
+	wave_resource_model_choice = float
 
 
 class Outputs(object):
@@ -29,15 +31,27 @@ class Outputs(object):
 	city = str
 	country = str
 	data_source = str
+	day = tuple
+	distance_to_shore_file = float
+	energy_period = tuple
+	hour = tuple
 	lat = float
+	location_id = float
 	lon = float
+	minute = tuple
+	month = tuple
 	name = str
 	nearby_buoy_number = str
 	notes = str
+	number_hours = float
+	number_records = float
 	sea_bed = str
+	significant_wave_height = tuple
 	state = str
 	tz = float
+	water_depth_file = float
 	wave_resource_matrix = tuple
+	year = tuple
 
 
 class WaveFileReader(object):

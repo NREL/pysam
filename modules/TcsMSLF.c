@@ -43,6 +43,23 @@ Weather_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+Weather_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Weather_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "TcsMSLF", "Weather")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 Weather_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &Weather_Type;
@@ -52,7 +69,9 @@ Weather_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Weather_methods[] = {
 		{"assign",            (PyCFunction)Weather_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Weather_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Weather_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Weather_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Weather_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Weather_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -206,6 +225,23 @@ Mslf_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+Mslf_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Mslf_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "TcsMSLF", "Mslf")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 Mslf_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &Mslf_Type;
@@ -215,7 +251,9 @@ Mslf_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Mslf_methods[] = {
 		{"assign",            (PyCFunction)Mslf_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Mslf_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Mslf_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Mslf_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Mslf_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Mslf_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -324,6 +362,23 @@ TouTranslator_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+TouTranslator_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &TouTranslator_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "TcsMSLF", "TouTranslator")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 TouTranslator_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &TouTranslator_Type;
@@ -333,7 +388,9 @@ TouTranslator_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef TouTranslator_methods[] = {
 		{"assign",            (PyCFunction)TouTranslator_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``TouTranslator_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``TouTranslator_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)TouTranslator_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``TouTranslator_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)TouTranslator_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -457,6 +514,23 @@ Controller_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+Controller_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Controller_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "TcsMSLF", "Controller")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 Controller_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &Controller_Type;
@@ -466,7 +540,9 @@ Controller_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Controller_methods[] = {
 		{"assign",            (PyCFunction)Controller_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Controller_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Controller_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Controller_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Controller_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Controller_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -2705,6 +2781,23 @@ SolarField_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+SolarField_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &SolarField_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "TcsMSLF", "SolarField")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 SolarField_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &SolarField_Type;
@@ -2714,7 +2807,9 @@ SolarField_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef SolarField_methods[] = {
 		{"assign",            (PyCFunction)SolarField_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``SolarField_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``SolarField_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)SolarField_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``SolarField_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)SolarField_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -2838,6 +2933,23 @@ Powerblock_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+Powerblock_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Powerblock_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "TcsMSLF", "Powerblock")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 Powerblock_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &Powerblock_Type;
@@ -2847,7 +2959,9 @@ Powerblock_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Powerblock_methods[] = {
 		{"assign",            (PyCFunction)Powerblock_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Powerblock_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Powerblock_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Powerblock_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Powerblock_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Powerblock_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -3241,6 +3355,23 @@ UserDefinedPC_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+UserDefinedPC_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &UserDefinedPC_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "TcsMSLF", "UserDefinedPC")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 UserDefinedPC_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &UserDefinedPC_Type;
@@ -3250,7 +3381,9 @@ UserDefinedPC_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef UserDefinedPC_methods[] = {
 		{"assign",            (PyCFunction)UserDefinedPC_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``UserDefinedPC_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``UserDefinedPC_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)UserDefinedPC_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``UserDefinedPC_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)UserDefinedPC_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -3389,6 +3522,23 @@ Enet_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+Enet_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Enet_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "TcsMSLF", "Enet")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 Enet_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &Enet_Type;
@@ -3398,7 +3548,9 @@ Enet_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Enet_methods[] = {
 		{"assign",            (PyCFunction)Enet_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Enet_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Enet_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Enet_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Enet_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Enet_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -3537,6 +3689,23 @@ Outputs_assign(VarGroupObject *self, PyObject *args)
 }
 
 static PyObject *
+Outputs_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Outputs_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "TcsMSLF", "Outputs")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
 Outputs_export(VarGroupObject *self, PyObject *args)
 {
 	PyTypeObject* tp = &Outputs_Type;
@@ -3546,7 +3715,9 @@ Outputs_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Outputs_methods[] = {
 		{"assign",            (PyCFunction)Outputs_assign,  METH_VARARGS,
-			PyDoc_STR("assign() -> None\n Assign attributes from dictionary\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Outputs_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Outputs_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Outputs_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Outputs_export,  METH_VARARGS,
 			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
 		{NULL,              NULL}           /* sentinel */
@@ -4437,6 +4608,20 @@ TcsMSLF_assign(CmodObject *self, PyObject *args)
 	return Py_None;
 }
 
+static PyObject *
+TcsMSLF_replace(CmodObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_replace_from_nested_dict((PyObject*)self, self->x_attr, self->data_ptr, dict, "TcsMSLF"))
+		return NULL;
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
 
 static PyObject *
 TcsMSLF_export(CmodObject *self, PyObject *args)
@@ -4461,6 +4646,8 @@ static PyMethodDef TcsMSLF_methods[] = {
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
 		{"assign",            (PyCFunction)TcsMSLF_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Weather': { var: val, ...}, ...}``")},
+		{"replace",            (PyCFunction)TcsMSLF_replace,  METH_VARARGS,
+				PyDoc_STR("replace(dict) -> None\n Replace attributes from nested dictionary, except for Outputs. Unassigns all values in each Group then assigns from the input dict.\n\n``nested_dict = { 'Weather': { var: val, ...}, ...}``")},
 		{"export",            (PyCFunction)TcsMSLF_export,  METH_VARARGS,
 				PyDoc_STR("export() -> dict\n Export attributes into nested dictionary")},
 		{"value",             (PyCFunction)TcsMSLF_value, METH_VARARGS,

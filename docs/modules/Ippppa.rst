@@ -44,6 +44,12 @@ SystemCosts Group
 .. autoclass:: PySAM.Ippppa.Ippppa.SystemCosts
 	:members:
 
+LandLease Group
+======================================================
+
+.. autoclass:: PySAM.Ippppa.Ippppa.LandLease
+	:members:
+
 Depreciation Group
 ======================================================
 
