@@ -177,6 +177,7 @@ class StateCell(object):
 	rainflow_jlt = float
 	rainflow_peaks = tuple
 	temp_avg = float
+	temp_dt = float
 
 
 class Outputs(object):
