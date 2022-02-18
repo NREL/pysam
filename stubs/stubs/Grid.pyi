@@ -81,6 +81,7 @@ class Outputs(object):
 	annual_energy_pre_interconnect_ac = float
 	capacity_factor_curtailment_ac = float
 	capacity_factor_interconnect_ac = float
+	full_load = tuple
 	gen = tuple
 	system_pre_curtailment_kwac = tuple
 	system_pre_interconnect_kwac = tuple

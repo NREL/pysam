@@ -147,7 +147,6 @@ class StateCell(object):
 	cum_dt = float
 	cycle_DOD = float
 	cycle_DOD_max = tuple
-	cycle_DOD_range = tuple
 	cycle_counts = tuple
 	cycle_range = float
 	day_age_of_battery = float

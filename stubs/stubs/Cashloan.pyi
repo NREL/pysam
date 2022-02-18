@@ -451,7 +451,10 @@ class Outputs(object):
 	cf_discounted_savings = tuple
 	cf_effective_tax_frac = tuple
 	cf_energy_net = tuple
+	cf_energy_purchases = tuple
+	cf_energy_sales = tuple
 	cf_energy_value = tuple
+	cf_energy_without_battery = tuple
 	cf_fed_depr_sched = tuple
 	cf_fed_depreciation = tuple
 	cf_fed_incentive_income_less_deductions = tuple
@@ -468,7 +471,6 @@ class Outputs(object):
 	cf_nte = tuple
 	cf_om_batt_capacity_expense = tuple
 	cf_om_batt_fixed_expense = tuple
-	cf_om_batt_production_expense = tuple
 	cf_om_capacity1_expense = tuple
 	cf_om_capacity2_expense = tuple
 	cf_om_capacity_expense = tuple

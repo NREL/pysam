@@ -577,6 +577,8 @@ class Outputs(object):
 	cf_energy_curtailed = tuple
 	cf_energy_market_revenue = tuple
 	cf_energy_net = tuple
+	cf_energy_purchases = tuple
+	cf_energy_sales = tuple
 	cf_feddepr_custom = tuple
 	cf_feddepr_macrs_15 = tuple
 	cf_feddepr_macrs_5 = tuple
@@ -607,7 +609,6 @@ class Outputs(object):
 	cf_net_salvage_value = tuple
 	cf_om_batt_capacity_expense = tuple
 	cf_om_batt_fixed_expense = tuple
-	cf_om_batt_production_expense = tuple
 	cf_om_capacity1_expense = tuple
 	cf_om_capacity2_expense = tuple
 	cf_om_capacity_expense = tuple

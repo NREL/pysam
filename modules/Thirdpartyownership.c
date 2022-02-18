@@ -1262,6 +1262,18 @@ Outputs_get_cf_energy_net(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_cf_energy_purchases(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Thirdpartyownership_Outputs_cf_energy_purchases_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Thirdpartyownership_Outputs_cf_energy_sales_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_cf_length(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Thirdpartyownership_Outputs_cf_length_nget, self->data_ptr);
@@ -1317,7 +1329,13 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Cumulative simple payback with expenses [$]"),
  	NULL},
 {"cf_energy_net", (getter)Outputs_get_cf_energy_net,(setter)0,
-	PyDoc_STR("*sequence*: Energy [kWh]"),
+	PyDoc_STR("*sequence*: Electricity net generation [kWh]"),
+ 	NULL},
+{"cf_energy_purchases", (getter)Outputs_get_cf_energy_purchases,(setter)0,
+	PyDoc_STR("*sequence*: Electricity from grid to system [kWh]"),
+ 	NULL},
+{"cf_energy_sales", (getter)Outputs_get_cf_energy_sales,(setter)0,
+	PyDoc_STR("*sequence*: Electricity generation [kWh]"),
  	NULL},
 {"cf_length", (getter)Outputs_get_cf_length,(setter)0,
 	PyDoc_STR("*float*: Agreement period"),

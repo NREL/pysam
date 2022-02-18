@@ -5,8 +5,6 @@
 
 #include "PySAM_utils.h"
 
-#include "Pvwattsv8_eqns.c"
-
 
 /*
  * SolarResource Group
@@ -953,6 +951,12 @@ Outputs_get_capacity_factor(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_capacity_factor_ac(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvwattsv8_Outputs_capacity_factor_ac_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_city(VarGroupObject *self, void *closure)
 {
 	return PySAM_string_getter(SAM_Pvwattsv8_Outputs_city_sget, self->data_ptr);
@@ -1170,7 +1174,10 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Angle of incidence [deg]"),
  	NULL},
 {"capacity_factor", (getter)Outputs_get_capacity_factor,(setter)0,
-	PyDoc_STR("*float*: Capacity factor [%]"),
+	PyDoc_STR("*float*: Capacity factor based on DC system capacity [%]"),
+ 	NULL},
+{"capacity_factor_ac", (getter)Outputs_get_capacity_factor_ac,(setter)0,
+	PyDoc_STR("*float*: Capacity factor based on AC system capacity [%]"),
  	NULL},
 {"city", (getter)Outputs_get_city,(setter)0,
 	PyDoc_STR("*str*: City"),
@@ -1461,8 +1468,6 @@ static PyMethodDef Pvwattsv8_methods[] = {
 				PyDoc_STR("value(name, optional value) -> Union[None, float, dict, sequence, str]\n Get or set by name a value in any of the variable groups.")},
 		{"unassign",          (PyCFunction)Pvwattsv8_unassign, METH_VARARGS,
 				PyDoc_STR("unassign(name) -> None\n Unassign a value in any of the variable groups.")},
-		{"Reopt_size_battery_post", (PyCFunction)Reopt_size_battery_post, METH_VARARGS | METH_KEYWORDS,
-			Reopt_size_battery_post_doc},
 		{NULL,              NULL}           /* sentinel */
 };
 

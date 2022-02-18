@@ -434,7 +434,7 @@ static PyGetSetDef Load_getset[] = {
 	PyDoc_STR("*sequence*: Critical electricity load (year 1) [kW]"),
  	NULL},
 {"grid_outage", (getter)Load_get_grid_outage,(setter)Load_set_grid_outage,
-	PyDoc_STR("*sequence*: Timesteps with grid outage [0/1]\n\n*Options*: 0=GridAvailable,1=GridUnavailable,Length=load"),
+	PyDoc_STR("*sequence*: Grid outage in this time step [0/1]\n\n*Options*: 0=GridAvailable,1=GridUnavailable,Length=load"),
  	NULL},
 {"load", (getter)Load_get_load,(setter)Load_set_load,
 	PyDoc_STR("*sequence*: Electricity load (year 1) [kW]"),
@@ -785,6 +785,12 @@ Outputs_get_capacity_factor_interconnect_ac(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_full_load(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Grid_Outputs_full_load_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_gen(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Grid_Outputs_gen_aget, self->data_ptr);
@@ -829,6 +835,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"capacity_factor_interconnect_ac", (getter)Outputs_get_capacity_factor_interconnect_ac,(setter)0,
 	PyDoc_STR("*float*: Capacity factor of the interconnection (year 1) [%]"),
+ 	NULL},
+{"full_load", (getter)Outputs_get_full_load,(setter)0,
+	PyDoc_STR("*sequence*: Electricity load prior to grid outage (year 1) [kW]"),
  	NULL},
 {"gen", (getter)Outputs_get_gen,(setter)0,
 	PyDoc_STR("*sequence*: System power generated [kW]"),

@@ -1649,7 +1649,7 @@ static PyGetSetDef SystemCosts_getset[] = {
 	PyDoc_STR("*sequence*: Fuel usage (lifetime) [kWht]"),
  	NULL},
 {"fuelcell_annual_energy_discharged", (getter)SystemCosts_get_fuelcell_annual_energy_discharged,(setter)SystemCosts_set_fuelcell_annual_energy_discharged,
-	PyDoc_STR("*sequence*: Annual energy from fuelcell [kWh]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*sequence*: Fuel cell annual energy discharged [kWh]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"om_batt_capacity_cost", (getter)SystemCosts_get_om_batt_capacity_cost,(setter)SystemCosts_set_om_batt_capacity_cost,
 	PyDoc_STR("*sequence*: Battery capacity-based System Costs amount [$/kWcap]\n\n*Required*: If not provided, assumed to be 0.0"),
@@ -7060,12 +7060,6 @@ Outputs_get_cf_energy_sales(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_cf_energy_sales_value(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_energy_sales_value_aget, self->data_ptr);
-}
-
-static PyObject *
 Outputs_get_cf_energy_value(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_energy_value_aget, self->data_ptr);
@@ -7255,12 +7249,6 @@ static PyObject *
 Outputs_get_cf_om_batt_fixed_expense(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_om_batt_fixed_expense_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_om_batt_production_expense(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Singleowner_Outputs_cf_om_batt_production_expense_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -10133,10 +10121,10 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Effective income tax rate [frac]"),
  	NULL},
 {"cf_energy_curtailed", (getter)Outputs_get_cf_energy_curtailed,(setter)0,
-	PyDoc_STR("*sequence*: Curtailed energy [kWh]"),
+	PyDoc_STR("*sequence*: Electricity curtailed [kWh]"),
  	NULL},
 {"cf_energy_net", (getter)Outputs_get_cf_energy_net,(setter)0,
-	PyDoc_STR("*sequence*: Net energy to grid [kWh]"),
+	PyDoc_STR("*sequence*: Electricity to grid net [kWh]"),
  	NULL},
 {"cf_energy_net_apr", (getter)Outputs_get_cf_energy_net_apr,(setter)0,
 	PyDoc_STR("*sequence*: Energy produced by year in April [kWh]"),
@@ -10229,19 +10217,16 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Energy produced by year in September [kWh]"),
  	NULL},
 {"cf_energy_purchases", (getter)Outputs_get_cf_energy_purchases,(setter)0,
-	PyDoc_STR("*sequence*: Energy from grid [kWh]"),
+	PyDoc_STR("*sequence*: Electricity from grid [kWh]"),
  	NULL},
 {"cf_energy_sales", (getter)Outputs_get_cf_energy_sales,(setter)0,
-	PyDoc_STR("*sequence*: Energy to grid [kWh]"),
- 	NULL},
-{"cf_energy_sales_value", (getter)Outputs_get_cf_energy_sales_value,(setter)0,
-	PyDoc_STR("*sequence*: PPA revenue gross [$]"),
+	PyDoc_STR("*sequence*: Electricity to grid [kWh]"),
  	NULL},
 {"cf_energy_value", (getter)Outputs_get_cf_energy_value,(setter)0,
-	PyDoc_STR("*sequence*: PPA revenue net [$]"),
+	PyDoc_STR("*sequence*: PPA revenue [$]"),
  	NULL},
 {"cf_energy_without_battery", (getter)Outputs_get_cf_energy_without_battery,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced without the battery or curtailment [kWh]"),
+	PyDoc_STR("*sequence*: Electricity generated without storage [kWh]"),
  	NULL},
 {"cf_feddepr_custom", (getter)Outputs_get_cf_feddepr_custom,(setter)0,
 	PyDoc_STR("*sequence*: Federal depreciation from custom [$]"),
@@ -10333,41 +10318,38 @@ static PyGetSetDef Outputs_getset[] = {
 {"cf_om_batt_fixed_expense", (getter)Outputs_get_cf_om_batt_fixed_expense,(setter)0,
 	PyDoc_STR("*sequence*: Annual fixed cost for battery maintenance [$]"),
  	NULL},
-{"cf_om_batt_production_expense", (getter)Outputs_get_cf_om_batt_production_expense,(setter)0,
-	PyDoc_STR("*sequence*: Annual cost to for battery production based maintenance [$]"),
- 	NULL},
 {"cf_om_capacity1_expense", (getter)Outputs_get_cf_om_capacity1_expense,(setter)0,
-	PyDoc_STR("*sequence*: Battery capacity-based expense [$]"),
+	PyDoc_STR("*sequence*: O&M battery capacity-based expense [$]"),
  	NULL},
 {"cf_om_capacity2_expense", (getter)Outputs_get_cf_om_capacity2_expense,(setter)0,
-	PyDoc_STR("*sequence*: Fuel cell capacity-based expense [$]"),
+	PyDoc_STR("*sequence*: O&M fuel cell capacity-based expense [$]"),
  	NULL},
 {"cf_om_capacity_expense", (getter)Outputs_get_cf_om_capacity_expense,(setter)0,
 	PyDoc_STR("*sequence*: O&M capacity-based expense [$]"),
  	NULL},
 {"cf_om_fixed1_expense", (getter)Outputs_get_cf_om_fixed1_expense,(setter)0,
-	PyDoc_STR("*sequence*: Battery fixed expense [$]"),
+	PyDoc_STR("*sequence*: O&M battery fixed expense [$]"),
  	NULL},
 {"cf_om_fixed2_expense", (getter)Outputs_get_cf_om_fixed2_expense,(setter)0,
-	PyDoc_STR("*sequence*: Fuel cell fixed expense [$]"),
+	PyDoc_STR("*sequence*: O&M fuel cell fixed expense [$]"),
  	NULL},
 {"cf_om_fixed_expense", (getter)Outputs_get_cf_om_fixed_expense,(setter)0,
 	PyDoc_STR("*sequence*: O&M fixed expense [$]"),
  	NULL},
 {"cf_om_fuel_expense", (getter)Outputs_get_cf_om_fuel_expense,(setter)0,
-	PyDoc_STR("*sequence*: O&M fuel expense [$]"),
+	PyDoc_STR("*sequence*: Fuel expense [$]"),
  	NULL},
 {"cf_om_opt_fuel_1_expense", (getter)Outputs_get_cf_om_opt_fuel_1_expense,(setter)0,
-	PyDoc_STR("*sequence*: O&M biomass feedstock expense [$]"),
+	PyDoc_STR("*sequence*: Feedstock biomass expense [$]"),
  	NULL},
 {"cf_om_opt_fuel_2_expense", (getter)Outputs_get_cf_om_opt_fuel_2_expense,(setter)0,
-	PyDoc_STR("*sequence*: O&M coal feedstock expense [$]"),
+	PyDoc_STR("*sequence*: Feedstock coal expense [$]"),
  	NULL},
 {"cf_om_production1_expense", (getter)Outputs_get_cf_om_production1_expense,(setter)0,
-	PyDoc_STR("*sequence*: Battery production-based expense [$]"),
+	PyDoc_STR("*sequence*: O&M battery production-based expense [$]"),
  	NULL},
 {"cf_om_production2_expense", (getter)Outputs_get_cf_om_production2_expense,(setter)0,
-	PyDoc_STR("*sequence*: Fuel cell production-based expense [$]"),
+	PyDoc_STR("*sequence*: O&M fuel cell production-based expense [$]"),
  	NULL},
 {"cf_om_production_expense", (getter)Outputs_get_cf_om_production_expense,(setter)0,
 	PyDoc_STR("*sequence*: O&M production-based expense [$]"),

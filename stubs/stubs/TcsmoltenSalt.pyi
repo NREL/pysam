@@ -723,6 +723,7 @@ class Outputs(object):
 	total_direct_cost = float
 	total_indirect_cost = float
 	total_installed_cost = float
+	total_land_area = float
 	tou_value = tuple
 	twet = tuple
 	ui_direct_subtotal = float

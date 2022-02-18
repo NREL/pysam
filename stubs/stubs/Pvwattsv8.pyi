@@ -106,6 +106,7 @@ class Outputs(object):
 	annual_energy_distribution_time = tuple
 	aoi = tuple
 	capacity_factor = float
+	capacity_factor_ac = float
 	city = str
 	dc = tuple
 	dc_monthly = tuple
@@ -163,8 +164,6 @@ class Pvwattsv8(object):
 	def __init__(self, *args, **kwargs):
 		pass
 
-	def Reopt_size_battery_post(self, args):
-		pass
 	SolarResource = SolarResource
 	Lifetime = Lifetime
 	SystemDesign = SystemDesign

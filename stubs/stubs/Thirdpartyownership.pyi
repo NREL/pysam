@@ -125,6 +125,8 @@ class Outputs(object):
 	cf_agreement_cost = tuple
 	cf_cumulative_payback_with_expenses = tuple
 	cf_energy_net = tuple
+	cf_energy_purchases = tuple
+	cf_energy_sales = tuple
 	cf_length = float
 	cf_nte = tuple
 	cf_payback_with_expenses = tuple

@@ -434,6 +434,7 @@ class Outputs(object):
 	total_direct_cost_calc = float
 	total_indirect_cost_calc = float
 	total_installed_cost = float
+	total_land_area = float
 	tou_period = tuple
 	tshours_heater = float
 	twet = tuple
