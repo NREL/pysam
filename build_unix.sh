@@ -8,7 +8,7 @@
 # requires SAM-Dev/CMakeList.txt that contains lk, wex, ssc and sam as subdirectories
 
 mkdir -p ~/SAM-Dev/cmake-build-export
-cd ~/SAM-Dev/cmake-build-export || exit
+cd ~/SAM-Dev/cmake-build-release || exit
 cmake .. -DCMAKE_BUILD_TYPE=Release -DSAMAPI_EXPORT=1 -DSAM_SKIP_AUTOGEN=0
 cmake --build . --target SAM_api -j 6
 
@@ -50,6 +50,8 @@ yes | $PYSAMDIR/build_conda.sh || exit
 cd ..
 docker pull quay.io/pypa/manylinux2010_x86_64
 docker run --rm -dit -v $(pwd):/io quay.io/pypa/manylinux2010_x86_64 /bin/bash
+#docker run --rm -v $(pwd):/io quay.io/pypa/manylinux2010_x86_64 /io/pysam/build_manylinux.sh
+
 rename -s linux manylinux1 $PYSAMDIR/dist/*-linux_*
 
 docker pull continuumio/anaconda

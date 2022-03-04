@@ -1,0 +1,30 @@
+.. 3.0.1:
+
+Version 3.0.1
+===============================================
+
+This page compares the PySAM Modules' input variables and the defaults for these input variables 
+between the current release and the last release.
+
+This helps track which variables and defaults have changed between releases to make it easier to notify users during version upgrade.
+
+Below are lists for each PySAM Module:
+    1. New Default configurations
+    2. Removed Default configurations
+    3. Modified Variables: New variables, Removed variables and Type-changed variables
+    4. Modified Default Values
+
+BatteryStateful
+************************************************
+
+:doc:`../modules/BatteryStateful` Modified Input Variables:
+
+    New variables:
+
+         - temp_dt
+
+    Removed variables:
+
+         - cycle_DOD_range
+
+

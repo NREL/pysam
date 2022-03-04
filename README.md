@@ -24,7 +24,7 @@ https://nrel-pysam.readthedocs.io
 	pip install nrel-pysam
 	```
 
-2. Anaconda (<1.2.1 only):
+2. Anaconda (Versions > 1.2.1 only):
 	```
 	conda install -c nrel nrel-pysam nrel-pysam-stubs
 	```

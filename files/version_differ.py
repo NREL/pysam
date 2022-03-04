@@ -292,8 +292,8 @@ doc_dict = OrderedDict(sorted(doc_dict.items()))
 
 pysam_dir = os.environ.get("PYSAMDIR")
 
-with open(os.path.join(pysam_dir, "docs", "VersionChanges.rst"), "w") as f:
-    f.write('.. Version Changes:\n\n')
+with open(os.path.join(pysam_dir, "docs", "version_changes", __version__ + ".rst"), "w") as f:
+    f.write(f'.. {__version__}:\n\n')
     f.write(f'Changes to Modules with Version {__version__}\n')
     f.write('===============================================\n\n')
     f.write(f'{doc_str}\n\n')
