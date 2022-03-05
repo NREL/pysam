@@ -118,6 +118,10 @@ for filename in os.listdir(defaults_dir):
 for filename in os.listdir(defaults_df_dir):
     libfiles.append('defaults/' + os.path.splitext(filename)[0] + '.df')
 
+stub_files = []
+for filename in os.listdir(os.path.join(this_directory, "stubs", "stubs")):
+    stub_files.append(os.path.join("stubs", "stubs", filename))
+
 # make list of all extension modules
 extension_modules = [Extension('PySAM.AdjustmentFactors',
                      ['src/AdjustmentFactors.c'],
@@ -181,7 +185,7 @@ setup(
     package_dir={'PySAM': 'files'},
     package_data={
         '': libfiles},
-    install_requires=['NREL-PySAM-stubs'],
+    data_files=[('PySAM', stub_files)],
     setup_requires=["pytest-runner"],
     tests_require=["pytest"],
     cmdclass={

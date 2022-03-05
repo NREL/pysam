@@ -1,30 +1,3 @@
-class WeatherFileChecker(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> dict:
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	input_file = str
-
-
-class Outputs(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> dict:
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-
-
 class Wfcheck(object):
 	def assign(self, dict):
 		pass
@@ -47,8 +20,33 @@ class Wfcheck(object):
 	def __init__(self, *args, **kwargs):
 		pass
 
-	WeatherFileChecker = WeatherFileChecker
-	Outputs = Outputs
+	class WeatherFileChecker(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		input_file = str
+
+
+	class Outputs(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+
+
 
 
 def default(config) -> Wfcheck:

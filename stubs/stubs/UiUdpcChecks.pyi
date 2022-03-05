@@ -1,60 +1,3 @@
-class UserDefinedPowerCycle(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> dict:
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	ud_ind_od = tuple
-
-
-class Common(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> dict:
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	T_htf_des_in = float
-
-
-class Outputs(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> dict:
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	Q_dot_HTF_ND_des = float
-	T_amb_des = float
-	T_amb_high = float
-	T_amb_low = float
-	T_htf_des = float
-	T_htf_high = float
-	T_htf_low = float
-	W_dot_cooling_ND_des = float
-	W_dot_gross_ND_des = float
-	m_dot_des = float
-	m_dot_high = float
-	m_dot_low = float
-	m_dot_water_ND_des = float
-	n_T_amb_pars = float
-	n_T_htf_pars = float
-	n_m_dot_pars = float
-
-
 class UiUdpcChecks(object):
 	def assign(self, dict):
 		pass
@@ -77,9 +20,63 @@ class UiUdpcChecks(object):
 	def __init__(self, *args, **kwargs):
 		pass
 
-	UserDefinedPowerCycle = UserDefinedPowerCycle
-	Common = Common
-	Outputs = Outputs
+	class UserDefinedPowerCycle(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		ud_ind_od = tuple
+
+
+	class Common(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		T_htf_des_in = float
+
+
+	class Outputs(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		Q_dot_HTF_ND_des = float
+		T_amb_des = float
+		T_amb_high = float
+		T_amb_low = float
+		T_htf_des = float
+		T_htf_high = float
+		T_htf_low = float
+		W_dot_cooling_ND_des = float
+		W_dot_gross_ND_des = float
+		m_dot_des = float
+		m_dot_high = float
+		m_dot_low = float
+		m_dot_water_ND_des = float
+		n_T_amb_pars = float
+		n_T_htf_pars = float
+		n_m_dot_pars = float
+
+
 
 
 def default(config) -> UiUdpcChecks:

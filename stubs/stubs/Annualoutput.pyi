@@ -1,40 +1,3 @@
-class AnnualOutput(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> dict:
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	analysis_period = float
-	energy_availability = tuple
-	energy_curtailment = tuple
-	energy_degradation = tuple
-	system_hourly_energy = tuple
-	system_use_lifetime_output = float
-
-
-class Outputs(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> dict:
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	annual_availability = tuple
-	annual_degradation = tuple
-	annual_energy = tuple
-	hourly_energy = tuple
-	monthly_energy = tuple
-
-
 class Annualoutput(object):
 	def assign(self, dict):
 		pass
@@ -57,8 +20,43 @@ class Annualoutput(object):
 	def __init__(self, *args, **kwargs):
 		pass
 
-	AnnualOutput = AnnualOutput
-	Outputs = Outputs
+	class AnnualOutput(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		analysis_period = float
+		energy_availability = tuple
+		energy_curtailment = tuple
+		energy_degradation = tuple
+		system_hourly_energy = tuple
+		system_use_lifetime_output = float
+
+
+	class Outputs(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		annual_availability = tuple
+		annual_degradation = tuple
+		annual_energy = tuple
+		hourly_energy = tuple
+		monthly_energy = tuple
+
+
 
 
 def default(config) -> Annualoutput:
