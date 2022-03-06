@@ -1,51 +1,3 @@
-class IEC61853(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> dict:
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	input = tuple
-	param = tuple
-
-
-class SingleDiodeModel(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> dict:
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	I = float
-	T = float
-
-
-class Outputs(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> dict:
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	Il = float
-	Io = float
-	Rs = float
-	Rsh = float
-	a = float
-
-
 class Iec61853interp(object):
 	def assign(self, dict):
 		pass
@@ -68,9 +20,54 @@ class Iec61853interp(object):
 	def __init__(self, *args, **kwargs):
 		pass
 
-	IEC61853 = IEC61853
-	SingleDiodeModel = SingleDiodeModel
-	Outputs = Outputs
+	class IEC61853(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		input = tuple
+		param = tuple
+
+
+	class SingleDiodeModel(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		I = float
+		T = float
+
+
+	class Outputs(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		Il = float
+		Io = float
+		Rs = float
+		Rsh = float
+		a = float
+
+
 
 
 def default(config) -> Iec61853interp:

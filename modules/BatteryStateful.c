@@ -1796,18 +1796,6 @@ StateCell_set_cycle_DOD_max(VarGroupObject *self, PyObject *value, void *closure
 }
 
 static PyObject *
-StateCell_get_cycle_DOD_range(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_BatteryStateful_StateCell_cycle_DOD_range_aget, self->data_ptr);
-}
-
-static int
-StateCell_set_cycle_DOD_range(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_BatteryStateful_StateCell_cycle_DOD_range_aset, self->data_ptr);
-}
-
-static PyObject *
 StateCell_get_cycle_counts(VarGroupObject *self, void *closure)
 {
 	return PySAM_matrix_getter(SAM_BatteryStateful_StateCell_cycle_counts_mget, self->data_ptr);
@@ -2167,6 +2155,18 @@ StateCell_set_temp_avg(VarGroupObject *self, PyObject *value, void *closure)
 	return PySAM_double_setter(value, SAM_BatteryStateful_StateCell_temp_avg_nset, self->data_ptr);
 }
 
+static PyObject *
+StateCell_get_temp_dt(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_BatteryStateful_StateCell_temp_dt_nget, self->data_ptr);
+}
+
+static int
+StateCell_set_temp_dt(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_BatteryStateful_StateCell_temp_dt_nset, self->data_ptr);
+}
+
 static PyGetSetDef StateCell_getset[] = {
 {"DOD_max", (getter)StateCell_get_DOD_max,(setter)StateCell_set_DOD_max,
 	PyDoc_STR("*float*: Max DOD of battery for current day [%]\n\n*Info*: Cycles for Life Model"),
@@ -2228,11 +2228,8 @@ static PyGetSetDef StateCell_getset[] = {
 {"cycle_DOD_max", (getter)StateCell_get_cycle_DOD_max,(setter)StateCell_set_cycle_DOD_max,
 	PyDoc_STR("*sequence*: Max DODs of cycles concluded in current day [%]\n\n*Info*: Cycles for Life Model"),
  	NULL},
-{"cycle_DOD_range", (getter)StateCell_get_cycle_DOD_range,(setter)StateCell_set_cycle_DOD_range,
-	PyDoc_STR("*sequence*: DOD cycle_range of each cycle [%]\n\n*Info*: NMC Life Model"),
- 	NULL},
 {"cycle_counts", (getter)StateCell_get_cycle_counts,(setter)StateCell_set_cycle_counts,
-	PyDoc_STR("*sequence[sequence]*: Counts of cycles by DOD categories in cycle matrix"),
+	PyDoc_STR("*sequence[sequence]*: Counts of cycles by DOD [[%, cycles]]\n\n*Options*: If life_model=0, counts all cycles in simulation; else, cycles per day"),
  	NULL},
 {"cycle_range", (getter)StateCell_get_cycle_range,(setter)StateCell_set_cycle_range,
 	PyDoc_STR("*float*: Range of last cycle [%]"),
@@ -2320,6 +2317,9 @@ static PyGetSetDef StateCell_getset[] = {
  	NULL},
 {"temp_avg", (getter)StateCell_get_temp_avg,(setter)StateCell_set_temp_avg,
 	PyDoc_STR("*float*: Average temperature for current day [K]\n\n*Info*: LMO/LTO Life Model"),
+ 	NULL},
+{"temp_dt", (getter)StateCell_get_temp_dt,(setter)StateCell_set_temp_dt,
+	PyDoc_STR("*float*: Temperature cumulated for current day [K]\n\n*Info*: NMC Life Model"),
  	NULL},
 	{NULL}  /* Sentinel */
 };

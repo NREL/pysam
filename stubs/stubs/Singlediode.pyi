@@ -1,39 +1,3 @@
-class SingleDiodeModel(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> dict:
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	Il = float
-	Io = float
-	Rs = float
-	Rsh = float
-	Vop = float
-	a = float
-
-
-class Outputs(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> dict:
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	I = float
-	Isc = float
-	V = float
-	Voc = float
-
-
 class Singlediode(object):
 	def assign(self, dict):
 		pass
@@ -56,8 +20,42 @@ class Singlediode(object):
 	def __init__(self, *args, **kwargs):
 		pass
 
-	SingleDiodeModel = SingleDiodeModel
-	Outputs = Outputs
+	class SingleDiodeModel(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		Il = float
+		Io = float
+		Rs = float
+		Rsh = float
+		Vop = float
+		a = float
+
+
+	class Outputs(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		I = float
+		Isc = float
+		V = float
+		Voc = float
+
+
 
 
 def default(config) -> Singlediode:

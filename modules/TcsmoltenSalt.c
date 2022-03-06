@@ -7572,6 +7572,12 @@ Outputs_get_total_installed_cost(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_total_land_area(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TcsmoltenSalt_Outputs_total_land_area_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_tou_value(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_TcsmoltenSalt_Outputs_tou_value_aget, self->data_ptr);
@@ -8129,6 +8135,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"total_installed_cost", (getter)Outputs_get_total_installed_cost,(setter)0,
 	PyDoc_STR("*float*: Total installed cost [$]"),
+ 	NULL},
+{"total_land_area", (getter)Outputs_get_total_land_area,(setter)0,
+	PyDoc_STR("*float*: Total land area [acre]"),
  	NULL},
 {"tou_value", (getter)Outputs_get_tou_value,(setter)0,
 	PyDoc_STR("*sequence*: CSP operating time-of-use value"),

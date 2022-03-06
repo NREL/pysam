@@ -7,8 +7,8 @@
 # Building libssc and libSAM_api
 # requires SAM-Dev/CMakeList.txt that contains lk, wex, ssc and sam as subdirectories
 
-mkdir -p ~/SAM-Dev/cmake-build-export
-cd ~/SAM-Dev/cmake-build-export || exit
+mkdir -p ~/SAM-Dev/cmake-build-release
+cd ~/SAM-Dev/cmake-build-release || exit
 cmake .. -DCMAKE_BUILD_TYPE=Release -DSAMAPI_EXPORT=1 -DSAM_SKIP_AUTOGEN=0
 cmake --build . --target SAM_api -j 6
 
@@ -26,7 +26,7 @@ for PYTHONENV in pysam_build_3.6 pysam_build_3.7 pysam_build_3.8 pysam_build_3.9
 do
    conda activate $PYTHONENV
    yes | pip install -r tests/requirements.txt
-   yes | pip uninstall NREL-PySAM NREL-PySAM-stubs
+   yes | pip uninstall NREL-PySAM
    python setup.py install || exit
    pytest -s tests
    retVal=$?
@@ -36,10 +36,6 @@ do
    fi
    python setup.py bdist_wheel
 done
-mypy stubs/stubs || exit
-python stubs/setup.py bdist_wheel
-
-twine upload $PYSAMDIR/dist/*stubs*.whl
 
 yes | $PYSAMDIR/build_conda.sh || exit
 
@@ -49,6 +45,7 @@ yes | $PYSAMDIR/build_conda.sh || exit
 
 cd ..
 docker pull quay.io/pypa/manylinux2010_x86_64
+# docker run --rm -dit -v $(pwd):/io quay.io/pypa/manylinux2010_x86_64 /bin/bash
 docker run --rm -v $(pwd):/io quay.io/pypa/manylinux2010_x86_64 /io/pysam/build_manylinux.sh
 
 rename -s linux manylinux1 $PYSAMDIR/dist/*-linux_*

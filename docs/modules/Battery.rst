@@ -40,11 +40,13 @@ additional logic include:
  - batt_power_charge_max_kwdc
  - batt_power_discharge_max_kwac
  - batt_power_discharge_max_kwdc
+ - batt_room_temperature_celsius
  - batt_surface_area
  - dispatch_manual_discharge
  - dispatch_manual_gridcharge
  - dispatch_manual_percent_discharge
  - dispatch_manual_percent_gridcharge
+ - grid_curtailment
  - load_escalation
 
 Provided for each of these inputs is a list of other inputs that are potentially interdependent. 

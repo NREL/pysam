@@ -1,41 +1,3 @@
-class Common(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> dict:
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	HTF_code = float
-	elev = float
-	field_fl_props = tuple
-	ngcc_model = float
-	pinch_point_cold = float
-	pinch_point_hot = float
-	q_pb_design = float
-
-
-class Outputs(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> dict:
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	T_htf_cold = float
-	T_st_inject = float
-	W_dot_fossil = float
-	W_dot_solar = float
-	q_solar_max = float
-
-
 class IsccDesignPoint(object):
 	def assign(self, dict):
 		pass
@@ -58,8 +20,44 @@ class IsccDesignPoint(object):
 	def __init__(self, *args, **kwargs):
 		pass
 
-	Common = Common
-	Outputs = Outputs
+	class Common(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		HTF_code = float
+		elev = float
+		field_fl_props = tuple
+		ngcc_model = float
+		pinch_point_cold = float
+		pinch_point_hot = float
+		q_pb_design = float
+
+
+	class Outputs(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		T_htf_cold = float
+		T_st_inject = float
+		W_dot_fossil = float
+		W_dot_solar = float
+		q_solar_max = float
+
+
 
 
 def default(config) -> IsccDesignPoint:

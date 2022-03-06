@@ -953,6 +953,12 @@ Outputs_get_capacity_factor(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_capacity_factor_ac(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvwattsv8_Outputs_capacity_factor_ac_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_city(VarGroupObject *self, void *closure)
 {
 	return PySAM_string_getter(SAM_Pvwattsv8_Outputs_city_sget, self->data_ptr);
@@ -1170,7 +1176,10 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Angle of incidence [deg]"),
  	NULL},
 {"capacity_factor", (getter)Outputs_get_capacity_factor,(setter)0,
-	PyDoc_STR("*float*: Capacity factor [%]"),
+	PyDoc_STR("*float*: Capacity factor based on DC system capacity [%]"),
+ 	NULL},
+{"capacity_factor_ac", (getter)Outputs_get_capacity_factor_ac,(setter)0,
+	PyDoc_STR("*float*: Capacity factor based on AC system capacity [%]"),
  	NULL},
 {"city", (getter)Outputs_get_city,(setter)0,
 	PyDoc_STR("*str*: City"),

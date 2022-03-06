@@ -1,43 +1,3 @@
-class POACalibrate(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> dict:
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	albedo = float
-	array_az = float
-	array_tilt = float
-	beam = tuple
-	diffuse = tuple
-	elevation = float
-	latitude = float
-	longitude = float
-	poa = tuple
-	pressure = float
-	tamb = float
-	time_zone = float
-	year = float
-
-
-class Outputs(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> dict:
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	pcalc = tuple
-
-
 class Poacalib(object):
 	def assign(self, dict):
 		pass
@@ -60,8 +20,46 @@ class Poacalib(object):
 	def __init__(self, *args, **kwargs):
 		pass
 
-	POACalibrate = POACalibrate
-	Outputs = Outputs
+	class POACalibrate(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		albedo = float
+		array_az = float
+		array_tilt = float
+		beam = tuple
+		diffuse = tuple
+		elevation = float
+		latitude = float
+		longitude = float
+		poa = tuple
+		pressure = float
+		tamb = float
+		time_zone = float
+		year = float
+
+
+	class Outputs(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		pcalc = tuple
+
+
 
 
 def default(config) -> Poacalib:

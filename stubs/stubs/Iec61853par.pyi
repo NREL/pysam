@@ -1,46 +1,3 @@
-class IEC61853(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> dict:
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	input = tuple
-	nser = float
-	type = float
-	verbose = float
-
-
-class Outputs(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> dict:
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	C1 = float
-	C2 = float
-	C3 = float
-	D1 = float
-	D2 = float
-	D3 = float
-	Egref = float
-	Il = float
-	Io = float
-	alphaIsc = float
-	betaVoc = float
-	gammaPmp = float
-	n = float
-
-
 class Iec61853par(object):
 	def assign(self, dict):
 		pass
@@ -63,8 +20,49 @@ class Iec61853par(object):
 	def __init__(self, *args, **kwargs):
 		pass
 
-	IEC61853 = IEC61853
-	Outputs = Outputs
+	class IEC61853(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		input = tuple
+		nser = float
+		type = float
+		verbose = float
+
+
+	class Outputs(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		C1 = float
+		C2 = float
+		C3 = float
+		D1 = float
+		D2 = float
+		D3 = float
+		Egref = float
+		Il = float
+		Io = float
+		alphaIsc = float
+		betaVoc = float
+		gammaPmp = float
+		n = float
+
+
 
 
 def default(config) -> Iec61853par:

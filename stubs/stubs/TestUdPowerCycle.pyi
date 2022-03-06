@@ -1,31 +1,3 @@
-class Common(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> dict:
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	q_pb_design = float
-
-
-class Outputs(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> dict:
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	udpc_table_out = tuple
-
-
 class TestUdPowerCycle(object):
 	def assign(self, dict):
 		pass
@@ -48,8 +20,34 @@ class TestUdPowerCycle(object):
 	def __init__(self, *args, **kwargs):
 		pass
 
-	Common = Common
-	Outputs = Outputs
+	class Common(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		q_pb_design = float
+
+
+	class Outputs(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		udpc_table_out = tuple
+
+
 
 
 def default(config) -> TestUdPowerCycle:

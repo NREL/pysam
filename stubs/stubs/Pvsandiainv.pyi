@@ -1,47 +1,3 @@
-class SandiaInverterModel(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> dict:
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	c0 = float
-	c1 = float
-	c2 = float
-	c3 = float
-	dc = tuple
-	dc_voltage = tuple
-	paco = float
-	pdco = float
-	pntare = float
-	pso = float
-	vdco = float
-
-
-class Outputs(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> dict:
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	ac = tuple
-	acpar = tuple
-	cliploss = tuple
-	eff_inv = tuple
-	ntloss = tuple
-	plr = tuple
-	soloss = tuple
-
-
 class Pvsandiainv(object):
 	def assign(self, dict):
 		pass
@@ -64,8 +20,50 @@ class Pvsandiainv(object):
 	def __init__(self, *args, **kwargs):
 		pass
 
-	SandiaInverterModel = SandiaInverterModel
-	Outputs = Outputs
+	class SandiaInverterModel(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		c0 = float
+		c1 = float
+		c2 = float
+		c3 = float
+		dc = tuple
+		dc_voltage = tuple
+		paco = float
+		pdco = float
+		pntare = float
+		pso = float
+		vdco = float
+
+
+	class Outputs(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		ac = tuple
+		acpar = tuple
+		cliploss = tuple
+		eff_inv = tuple
+		ntloss = tuple
+		plr = tuple
+		soloss = tuple
+
+
 
 
 def default(config) -> Pvsandiainv:

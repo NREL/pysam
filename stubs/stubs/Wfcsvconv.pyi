@@ -1,33 +1,3 @@
-class WeatherFileConverter(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> dict:
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-	input_file = str
-	output_file = str
-	output_filename_format = str
-	output_folder = str
-
-
-class Outputs(object):
-	def assign(self): 
-		pass
-
-	def export(self) -> dict:
-		pass
-
-	def __init__(self, *args, **kwargs): 
-		pass
-
-
-
-
 class Wfcsvconv(object):
 	def assign(self, dict):
 		pass
@@ -50,8 +20,36 @@ class Wfcsvconv(object):
 	def __init__(self, *args, **kwargs):
 		pass
 
-	WeatherFileConverter = WeatherFileConverter
-	Outputs = Outputs
+	class WeatherFileConverter(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		input_file = str
+		output_file = str
+		output_filename_format = str
+		output_folder = str
+
+
+	class Outputs(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+
+
 
 
 def default(config) -> Wfcsvconv:
