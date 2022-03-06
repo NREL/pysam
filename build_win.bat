@@ -15,7 +15,7 @@ FOR %%i IN (pysam_build_3.6 pysam_build_3.7, pysam_build_3.8 pysam_build_3.9 pys
 	call deactivate
     call activate %%i
     echo y | pip install -r tests/requirements.txt
-    echo y | pip uninstall NREL-PySAM NREL-PySAM-stubs
+    echo y | pip uninstall NREL-PySAM
     python setup.py install
     pytest -s tests
 	if errorlevel 1 (

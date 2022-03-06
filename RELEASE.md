@@ -4,6 +4,7 @@
 * [SSC Release Notes](https://nrel.github.io/ssc/doc/releasenotes.html) for description of functionality and
  variable changes
 * [SAM Release updates for Version 2020.12.02](https://nrel.github.io/SAM/doc/releasenotes.html)
+* Moved all stub files from NREL-PySAM-stubs package into NREL-PySAM (#109)
 
 ## Version 3.0.0, Dec 23, 2021 ~ SAM 2021.12.02, SSC Version 267
 * __Warning: Significant changes to Battery and UtilityRate5 Modules, including redefinition of some variables.__

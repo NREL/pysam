@@ -26,7 +26,7 @@ for PYTHONENV in pysam_build_3.6 pysam_build_3.7 pysam_build_3.8 pysam_build_3.9
 do
    conda activate $PYTHONENV
    yes | pip install -r tests/requirements.txt
-   yes | pip uninstall NREL-PySAM NREL-PySAM-stubs
+   yes | pip uninstall NREL-PySAM
    python setup.py install || exit
    pytest -s tests
    retVal=$?
@@ -36,10 +36,6 @@ do
    fi
    python setup.py bdist_wheel
 done
-# mypy stubs/stubs || exit
-# python stubs/setup.py bdist_wheel
-
-# twine upload $PYSAMDIR/dist/*stubs*.whl
 
 yes | $PYSAMDIR/build_conda.sh || exit
 

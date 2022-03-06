@@ -22,7 +22,7 @@ cd $PYSAMDIR
 for PYTHONENV in cp36-cp36m cp37-cp37m cp38-cp38 cp39-cp39 cp310-cp310
 do
    yes | /opt/python/$PYTHONENV/bin/pip install -r tests/requirements.txt
-   yes | /opt/python/$PYTHONENV/bin/pip uninstall NREL-PySAM NREL-PySAM-stubs
+   yes | /opt/python/$PYTHONENV/bin/pip uninstall NREL-PySAM
    /opt/python/$PYTHONENV/bin/python setup.py install
    /opt/python/$PYTHONENV/bin/python -m pytest -s tests
    retVal=$?
