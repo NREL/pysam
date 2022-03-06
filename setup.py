@@ -118,9 +118,17 @@ for filename in os.listdir(defaults_dir):
 for filename in os.listdir(defaults_df_dir):
     libfiles.append('defaults/' + os.path.splitext(filename)[0] + '.df')
 
+# copy over stub pyi files into "files" folder for export
 stub_files = []
+shutil.copyfile(os.path.join(this_directory, "stubs", 'AdjustmentFactors.pyi'),
+                os.path.join(this_directory, 'stubs', 'stubs', 'AdjustmentFactors.pyi'))
 for filename in os.listdir(os.path.join(this_directory, "stubs", "stubs")):
-    stub_files.append(os.path.join("stubs", "stubs", filename))
+    if ".pyi" not in filename:
+        continue
+    shutil.copy(os.path.join(this_directory, "stubs", "stubs", filename), os.path.join(this_directory, "files"))
+    stub_files.append(os.path.join(filename))
+
+libfiles += stub_files
 
 # make list of all extension modules
 extension_modules = [Extension('PySAM.AdjustmentFactors',
@@ -163,7 +171,7 @@ class PostProcess(Command):
         newname = "NREL_PySAM-" + latest_version + "-" + "cp37-cp37m-macosx_10_12_x86_64.whl"
         os.system('mv ./dist/' + name + ' ./dist/' + newname)
 
-    ###################################################################################################
+###################################################################################################
 #
 # setup script
 #
@@ -185,7 +193,6 @@ setup(
     package_dir={'PySAM': 'files'},
     package_data={
         '': libfiles},
-    data_files=[('PySAM', stub_files)],
     setup_requires=["pytest-runner"],
     tests_require=["pytest"],
     cmdclass={
@@ -197,3 +204,5 @@ setup(
 
 # Clean up
 shutil.rmtree(defaults_df_dir)
+for f in stub_files:
+    os.remove(os.path.join(this_directory, "files", f))
