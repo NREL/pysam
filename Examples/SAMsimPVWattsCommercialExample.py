@@ -13,13 +13,13 @@ The steps are:
     Run the simulations.
     Print the results.
 
-Most recently tested against PySAM 2.2.3
+Most recently tested against PySAM 3.0.1
 
 @author: frohro
 """
 
 import json
-import PySAM.Pvwattsv7 as PVWatts
+import PySAM.Pvwattsv8 as PVWatts
 import PySAM.Grid as Grid
 import PySAM.Utilityrate5 as UtilityRate
 import PySAM.Cashloan as Cashloan
@@ -42,7 +42,7 @@ with open(json_file_path) as f:
         dic = json.load(f)
 # The next seven lines are needed to load the PySAM data structures with the
 # inputs from the json file.
-pv_dat = pssc.dict_to_ssc_table(dic, "pvwattsv7")
+pv_dat = pssc.dict_to_ssc_table(dic, "pvwattsv8")
 grid_dat = pssc.dict_to_ssc_table(dic, "grid")
 ur_dat = pssc.dict_to_ssc_table(dic, "utilityrate5")
 cl_dat = pssc.dict_to_ssc_table(dic, "cashloan")

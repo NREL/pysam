@@ -10,6 +10,8 @@ to `data`.
 To use the `FetchResourceFile` function, register an email address to receive a
 free API key at at https://developer.nrel.gov/signup/.
 
+Most recently tested against PySAM 3.0.1
+
 @authors: skoeb, cpaulgilman
 '''
 
@@ -17,7 +19,7 @@ import os
 import PySAM.ResourceTools as tools  # MOVE BACK TO FILES FOLDER
 import PySAM.Windpower as wp
 import PySAM.Singleowner as so
-import PySAM.Pvwattsv7 as pv
+import PySAM.Pvwattsv8 as pv
 
 import geocoder
 
