@@ -66,6 +66,8 @@ PySAM offers all the technology and financial models available in SAM as separat
 and how to chain them together to represent a specific configuration such as Distributed Wind or Single Owner PV + Battery.
 PySAM also includes tools that provide design and resource functionality.
 
+Technical help documentation for the SAM models is available from the `SAM Help Website <https://samrepo.nrelcloud.org/help/index.html>_`.
+
 * **Models**:
   :doc:`Technology and financial Unit Modules <Models>`
 
@@ -78,5 +80,3 @@ PySAM also includes tools that provide design and resource functionality.
 * **Tools**:
   :doc:`Design & Resource Tools <Tools>` |
   :doc:`PySSC Wrapper <PySSC>`
-
-
