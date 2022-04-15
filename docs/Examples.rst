@@ -15,7 +15,7 @@ and descriptions are given in the :doc:`Models` documentation.
 Variables may be accessed directly as `<class>.<subclass>.<variable>`.
 For example, `the solar_resource_file` which is part of the subclass `SolarResource` group in Pvwattsv7::
 
-    import PySAM.Pvwattsv7 as pv
+    import PySAM.Pvwattsv8 as pv
 
     system_model = pv.new()
     system_model.SolarResource.solar_resource_file
@@ -60,7 +60,7 @@ PVwattsv7 model.  This means when the Pvwattsv7 model is executed, the data for
 the financial Singleowner model is loaded from its outputs. The execute
 functions for each model are called sequentially to do the simulation.::
 
-    import PySAM.Pvwattsv7 as pv
+    import PySAM.Pvwattsv8 as pv
     import PySAM.Singleowner as so
 
     system_model = pv.default('PVWattsSingleOwner')
@@ -88,7 +88,7 @@ For an example of how to import the modules and variables from a SAM GUI Case, s
 Sizing a PV + Battery system with ReOpt
 ***************************************
 
-Pvwattsv7 and Pvsamv1 have the option to size and dispatch a StandAloneBattery
+Pvwattsv8 and Pvsamv1 have the option to size and dispatch a StandAloneBattery
 or Battwatts model from `ReOpt Lite's <https://developer.nrel.gov/docs/energy-optimization/reopt-v1/>`_ optimization.
 The Utilityrate5 model is also required to provide electric tariff
 info, and other financial models
