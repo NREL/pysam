@@ -124,10 +124,8 @@ def SRW_to_wind_data(filename):
         # sets appropriate field names for NASA POWER vs Wind Toolkit data
         if source == 'NASA/POWER':
             field_names = ('temperature', 'pres', 'speed', 'direction')
-        elif str(source[0:4]) == 'WIND':
-            field_names = ('temperature', 'pressure', 'speed', 'direction')
         else:
-            raise NameError("PySAM is not configured to handle the data source: " + source)
+            field_names = ('temperature', 'pressure', 'speed', 'direction')
 
         for field_name in fields:
             if field_name.lower() not in field_names:
@@ -162,7 +160,7 @@ def SRW_to_wind_data(filename):
             nasa_data_dict['fields'] = [1, 2, 3, 4]
             if data_dict['heights'][-1] == 10: 
                 nasa_data_dict['data'][:, 3] = full_data[:, 5] # overwrites 50 m direction data with 10 m direction data
-            
+            nasa_data_dict['data'] = nasa_data_dict['data'].tolist()
             return nasa_data_dict
             
         else:

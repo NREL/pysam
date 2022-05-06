@@ -75,6 +75,7 @@ def test_wind_nasa():
     data = tools.SRW_to_wind_data(wind)
     assert (data['fields'] == [1, 2, 3, 4])
     assert (data['heights'] == [80.0, 80.0, 80.0, 80.0])
+    print(data['data'][0])
     assert (data['data'][0] == [17.569, 0.996, 1.84, 154.564])
 
     wind_model = wp.new()
