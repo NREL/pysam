@@ -14,14 +14,12 @@ the onus is on the PySAM user to check that interdependencies are correctly hand
 additional logic include:
 
  - I_bn_des
- - P_turb_des
  - T_amb_des_sf
  - T_cold_ref
- - deltaT_subcooled
+ - T_hot
  - nLoops
  - nModBoil
  - q_pb_des
- - use_quality_or_subcooled
 
 Provided for each of these inputs is a list of other inputs that are potentially interdependent. 
 

@@ -1674,7 +1674,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Electricity loss due to curtailment, interconnection, or outage [kW]"),
  	NULL},
 {"market_sell_rate_series_yr1", (getter)Outputs_get_market_sell_rate_series_yr1,(setter)0,
-	PyDoc_STR("*sequence*: Power price for battery dispatch [$/MWh]"),
+	PyDoc_STR("*sequence*: Power price for battery dispatch (year 1) [$/MWh]"),
  	NULL},
 {"monthly_batt_to_grid", (getter)Outputs_get_monthly_batt_to_grid,(setter)0,
 	PyDoc_STR("*sequence*: Energy to grid from battery [kWh]"),

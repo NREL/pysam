@@ -139,12 +139,6 @@ PriceSignal Group
 .. autoclass:: PySAM.Battery.Battery.PriceSignal
 	:members:
 
-Revenue Group
-======================================================
-
-.. autoclass:: PySAM.Battery.Battery.Revenue
-	:members:
-
 ElectricityRates Group
 ======================================================
 

@@ -1,4 +1,3 @@
 pandas
 python-dotenv
 requests
-pympler

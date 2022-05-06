@@ -326,32 +326,8 @@ class Battery(object):
 		mp_enable_ancserv4 = float
 		mp_enable_energy_market_revenue = float
 		mp_energy_market_revenue = tuple
-		ppa_escalation = float
 		ppa_multiplier_model = float
 		ppa_price_input = tuple
-
-
-	class Revenue(object):
-		def assign(self): 
-			pass
-	
-		def export(self) -> dict:
-			pass
-	
-		def __init__(self, *args, **kwargs): 
-			pass
-
-
-		mp_ancserv1_revenue_single = tuple
-		mp_ancserv2_revenue_single = tuple
-		mp_ancserv3_revenue_single = tuple
-		mp_ancserv4_revenue_single = tuple
-		mp_enable_ancserv1_percent_gen = float
-		mp_enable_ancserv2_percent_gen = float
-		mp_enable_ancserv3_percent_gen = float
-		mp_enable_ancserv4_percent_gen = float
-		mp_enable_market_percent_gen = float
-		mp_energy_market_revenue_single = tuple
 
 
 	class ElectricityRates(object):
