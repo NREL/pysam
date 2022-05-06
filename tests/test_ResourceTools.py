@@ -13,7 +13,6 @@ import PySAM.ResourceTools as tools  # change back to module import
 import PySAM.Windpower as wp
 import PySAM.Pvwattsv8 as pv
 
-
 def test_solar_nrel():
     solar = str(Path(__file__).parent / "blythe_ca_33.617773_-114.588261_psmv3_60_tmy.csv")
     data = tools.SAM_CSV_to_solar_data(solar)
@@ -74,9 +73,9 @@ def test_wind_nrel():
 def test_wind_nasa():
     wind = str(Path(__file__).parent / "nasa_blythe_test_wind_data.srw")
     data = tools.SRW_to_wind_data(wind)
-    assert (data['fields'] == [1, 2, 3, 4, 3, 4, 3, 4, 3, 2])
-    assert (data['heights'] == [2, 2, 2, 2, 10, 10, 50, 50, 80.0, 80.0])
-    assert (data['data'][0] == [17.569, 0.97, 0.338, 146.31, 0.514, 151.876, 0.709, 154.564, 1.84, 0.996])
+    assert (data['fields'] == [1, 2, 3, 4])
+    assert (data['heights'] == [80.0, 80.0, 80.0, 80.0])
+    assert (data['data'][0] == [17.569, 0.996, 1.84, 154.564])
 
     wind_model = wp.new()
     wind_model.Resource.wind_resource_data = data

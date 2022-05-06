@@ -84,6 +84,7 @@ def SAM_CSV_to_solar_data(filename):
         # handles averaged hourly data with no minute column provided by NASA POWER and removes 2/29 data for leap years
         # this is a workaround so PySAM/SAM processes as instantaneous data (not setup to handle data w/ no minute column)
         # if in the future all solar models can handle data with no minute column and leap days, this can be removed
+
         if source == 'NASA/POWER':
             weather['minute'] = [30] * len(weather['hour'])
             if len(weather['hour']) == 8784:
@@ -164,10 +165,9 @@ def SRW_to_wind_data(filename):
             
             return nasa_data_dict
             
-        elif source[0:4] == 'WIND':
-            return data_dict
         else:
-            raise NameError("PySAM is not configured to handle the data source: " + source)
+            return data_dict
+
 
 def URDBv7_to_ElectricityRates(urdb_response):
     """
