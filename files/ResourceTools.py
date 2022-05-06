@@ -82,7 +82,8 @@ def SAM_CSV_to_solar_data(filename):
                     break
 
         # handles averaged hourly data with no minute column provided by NASA POWER and removes 2/29 data for leap years
-        # this is a workaround so PySAM/SAM processes as instantaneous data (not setup to handle no minute column)
+        # this is a workaround so PySAM/SAM processes as instantaneous data (not setup to handle data w/ no minute column)
+        # if in the future all solar models can handle data with no minute column and leap days, this can be removed
         if source == 'NASA/POWER':
             weather['minute'] = [30] * len(weather['hour'])
             if len(weather['hour']) == 8784:
@@ -108,7 +109,6 @@ def SRW_to_wind_data(filename):
         raise FileNotFoundError(filename + " does not exist.")
     data_dict = dict()
  
-
     with open(filename) as file_in:
         file_in.readline()
         source = str(file_in.readline().strip())
@@ -123,8 +123,11 @@ def SRW_to_wind_data(filename):
         # sets appropriate field names for NASA POWER vs Wind Toolkit data
         if source == 'NASA/POWER':
             field_names = ('temperature', 'pres', 'speed', 'direction')
-        else:
+        elif str(source[0:4]) == 'WIND':
             field_names = ('temperature', 'pressure', 'speed', 'direction')
+        else:
+            raise NameError("PySAM is not configured to handle the data source: " + source)
+
         for field_name in fields:
             if field_name.lower() not in field_names:
                 raise ValueError(field_name.lower() + " required for wind data")
@@ -136,7 +139,35 @@ def SRW_to_wind_data(filename):
             row = [i for i in row if i] #remove empty strings
             data_dict['data'].append([float(i) for i in row])
         
-        return data_dict
+        # removes 2/29 data for leap years. PySAM Wind model can handle leap years, other modules like solar cannot
+        # If in the future all component modules can handle leap years, then this logic can be removed
+        if source == 'NASA/POWER':
+            if len(data_dict['data']) == 8784:
+                del data_dict['data'][1416:1440]
+            
+            # Simplifications to allow use of NASA POWER Wind data when data points are > 10 m away from hub height of interest
+            # This methodology assumes the NASA POWER API is called with all arguments (wind-surface, wind-elevation, site-elevation) as detailed in example below
+            # https://power.larc.nasa.gov/api/temporal/hourly/point?start=20120101&end=20121231&latitude=35.2018&longitude=-101.9450&community=RE&parameters=T2M&format=srw&wind-surface=vegtype_4&wind-elevation=80&site-elevation=80
+            # Can be removed in future if NASA POWER can provide all data points at specified hub height
+            nasa_data_dict = {}
+            full_data = np.array(data_dict['data'])
+            num_datapoints = full_data.shape[0]
+            nasa_data_dict['data'] = np.zeros((num_datapoints, 4))
+            nasa_data_dict['data'][:, 0] = full_data[:, 0] # Grab the temp at 2 m
+            nasa_data_dict['data'][:, 1] = full_data[:, 9] # Grab the corrected pressure at user specified hub height
+            nasa_data_dict['data'][:, 2] = full_data[:, 8] # Grab the corrected speed at user specified hub height
+            nasa_data_dict['data'][:, 3] = full_data[:, 7] # Grab the direction at 50 m
+            nasa_data_dict['heights'] = [data_dict['heights'][-1]] * 4
+            nasa_data_dict['fields'] = [1, 2, 3, 4]
+            if data_dict['heights'][-1] == 10: 
+                nasa_data_dict['data'][:, 3] = full_data[:, 5] # overwrites 50 m direction data with 10 m direction data
+            
+            return nasa_data_dict
+            
+        elif source[0:4] == 'WIND':
+            return data_dict
+        else:
+            raise NameError("PySAM is not configured to handle the data source: " + source)
 
 def URDBv7_to_ElectricityRates(urdb_response):
     """
