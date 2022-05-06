@@ -33,7 +33,7 @@ def SAM_CSV_to_solar_data(filename):
     with open(filename) as file_in:
         info = []
         for i in range(2):
-            info.append(file_in.readline())
+            info.append(file_in.readline().rstrip())
             info[i] = info[i].split(",")
         if "Time Zone" not in info[0]:
             raise ValueError("`Time Zone` field not found in solar resource file.")
@@ -41,6 +41,7 @@ def SAM_CSV_to_solar_data(filename):
         longitude = info[1][info[0].index("Longitude")]
         tz = info[1][info[0].index("Time Zone")]
         elev = info[1][info[0].index("Elevation")]
+        source = info[1][info[0].index("Source")]
         reader = csv.DictReader(file_in)
         for row in reader:
             for col, dat in row.items():
@@ -52,30 +53,44 @@ def SAM_CSV_to_solar_data(filename):
         weather['elev'] = float(elev)
         weather['lat'] = float(latitude)
         weather['lon'] = float(longitude)
-        weather['year'] = wfd.pop('Year')
-        weather['month'] = wfd.pop('Month')
-        weather['day'] = wfd.pop('Day')
-        weather['hour'] = wfd.pop('Hour')
-        weather['minute'] = wfd.pop('Minute')
-        weather['dn'] = wfd.pop('DNI')
-        weather['df'] = wfd.pop('DHI')
-        weather['gh'] = wfd.pop('GHI')
-        weather['wspd'] = wfd.pop('Wind Speed')
-        weather['tdry'] = wfd.pop('Temperature')
-        if 'Wind Direction' in wfd.keys():
-            weather['wdir'] = wfd.pop('Wind Direction')
-        if 'Pressure' in wfd.keys():
-            weather['pres'] = wfd.pop('Pressure')
-        if 'Dew Point' in wfd.keys():
-            weather['tdew'] = wfd.pop('Dew Point')
-        if 'Relative Humidity' in wfd.keys():
-            weather['rhum'] = wfd.pop('Relative Humidity')
-        if 'RH' in wfd.keys():
-            weather['rhum'] = wfd.pop('RH')
-        if 'Surface Albedo' in wfd.keys():
-            weather['alb'] = wfd.pop('Surface Albedo')
-        if 'Snow Depth' in wfd.keys():
-            weather['snow'] = wfd.pop('Snow Depth')
+
+        # Create dict with keys = keys passed to SAM and values = list of possible key versions found in resource files (NREL / NASA POWER)
+        acceptable_keys = {
+            'year' : ['year', 'Year', 'yr'],
+            'month' : ['month', 'Month', 'mo'],
+            'day' : ['day', 'Day'],
+            'hour' : ['hour', 'Hour', 'hr'],
+            'minute' : ['minute', 'Minute', 'min'],
+            'dn' : ['dn', 'DNI','dni', 'beam', 'direct normal', 'direct normal irradiance'],
+            'df' : ['df', 'DHI', 'dhi', 'diffuse', 'diffuse horizontal', 'diffuse horizontal irradiance'],
+            'gh' : ['gh', 'GHI','ghi', 'global', 'global horizontal', 'global horizontal irradiance'],
+            'wspd' : ['wspd', 'Wind Speed', 'wind speed'],
+            'tdry' : ['tdry', 'Temperature', 'dry bulb', 'dry bulb temp', 'temperature', 'ambient', 'ambient temp'],
+            'wdir' : ['wdir', 'Wind Direction', 'wind direction'],
+            'pres' : ['pres', 'Pressure', 'pressure'],
+            'tdew' : ['tdew', 'Dew Point', 'Tdew', 'dew point', 'dew point temperature'],
+            'rhum' : ['rhum', 'Relative Humidity', 'rh', 'RH', 'relative humidity', 'humidity'],
+            'alb' : ['alb', 'Surface Albedo', 'albedo', 'surface albedo'],
+            'snow' : ['snow', 'Snow Depth', 'snow depth', 'snow cover']
+        }
+        
+        # enumerates acceptable_keys, inserts key and values into weather dictionary if found in the resource file
+        for key, list_of_keys in acceptable_keys.items():
+            for good_key in list_of_keys:
+                if good_key in wfd.keys():
+                    weather[key] = wfd.pop(good_key)
+                    break
+
+        # handles averaged hourly data with no minute column provided by NASA POWER and removes 2/29 data for leap years
+        # this is a workaround so PySAM/SAM processes as instantaneous data (not setup to handle data w/ no minute column)
+        # if in the future all solar models can handle data with no minute column and leap days, this can be removed
+        if source == 'NASA/POWER':
+            weather['minute'] = [30] * len(weather['hour'])
+            if len(weather['hour']) == 8784:
+                for key in weather.keys():
+                    if key not in ['tz','elev','lat','lon']:
+                        del weather[key][1416:1440]
+
 
         return weather
 
@@ -93,10 +108,10 @@ def SRW_to_wind_data(filename):
     if not os.path.isfile(filename):
         raise FileNotFoundError(filename + " does not exist.")
     data_dict = dict()
-    field_names = ('temperature', 'pressure', 'speed', 'direction')
+ 
     with open(filename) as file_in:
         file_in.readline()
-        file_in.readline()
+        source = str(file_in.readline().strip())
         fields = str(file_in.readline().strip()).split(',')
         fields = [i for i in fields if i] #remove empty strings
         file_in.readline()
@@ -104,6 +119,14 @@ def SRW_to_wind_data(filename):
         heights = [i for i in heights if i] #remove empty strings
         data_dict['heights'] = [float(i) for i in heights]
         data_dict['fields'] = []
+
+        # sets appropriate field names for NASA POWER vs Wind Toolkit data
+        if source == 'NASA/POWER':
+            field_names = ('temperature', 'pres', 'speed', 'direction')
+        elif str(source[0:4]) == 'WIND':
+            field_names = ('temperature', 'pressure', 'speed', 'direction')
+        else:
+            raise NameError("PySAM is not configured to handle the data source: " + source)
 
         for field_name in fields:
             if field_name.lower() not in field_names:
@@ -115,9 +138,36 @@ def SRW_to_wind_data(filename):
         for row in reader:
             row = [i for i in row if i] #remove empty strings
             data_dict['data'].append([float(i) for i in row])
-
-        return data_dict
-
+        
+        # removes 2/29 data for leap years. PySAM Wind model can handle leap years, other modules like solar cannot
+        # If in the future all component modules can handle leap years, then this logic can be removed
+        if source == 'NASA/POWER':
+            if len(data_dict['data']) == 8784:
+                del data_dict['data'][1416:1440]
+            
+            # Simplifications to allow use of NASA POWER Wind data when data points are > 10 m away from hub height of interest
+            # This methodology assumes the NASA POWER API is called with all arguments (wind-surface, wind-elevation, site-elevation) as detailed in example below
+            # https://power.larc.nasa.gov/api/temporal/hourly/point?start=20120101&end=20121231&latitude=35.2018&longitude=-101.9450&community=RE&parameters=T2M&format=srw&wind-surface=vegtype_4&wind-elevation=80&site-elevation=80
+            # Can be removed in future if NASA POWER can provide all data points at specified hub height
+            nasa_data_dict = {}
+            full_data = np.array(data_dict['data'])
+            num_datapoints = full_data.shape[0]
+            nasa_data_dict['data'] = np.zeros((num_datapoints, 4))
+            nasa_data_dict['data'][:, 0] = full_data[:, 0] # Grab the temp at 2 m
+            nasa_data_dict['data'][:, 1] = full_data[:, 9] # Grab the corrected pressure at user specified hub height
+            nasa_data_dict['data'][:, 2] = full_data[:, 8] # Grab the corrected speed at user specified hub height
+            nasa_data_dict['data'][:, 3] = full_data[:, 7] # Grab the direction at 50 m
+            nasa_data_dict['heights'] = [data_dict['heights'][-1]] * 4
+            nasa_data_dict['fields'] = [1, 2, 3, 4]
+            if data_dict['heights'][-1] == 10: 
+                nasa_data_dict['data'][:, 3] = full_data[:, 5] # overwrites 50 m direction data with 10 m direction data
+            
+            return nasa_data_dict
+            
+        elif source[0:4] == 'WIND':
+            return data_dict
+        else:
+            raise NameError("PySAM is not configured to handle the data source: " + source)
 
 def URDBv7_to_ElectricityRates(urdb_response):
     """

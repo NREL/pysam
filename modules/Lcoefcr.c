@@ -282,7 +282,7 @@ Outputs_get_lcoe_fcr(VarGroupObject *self, void *closure)
 
 static PyGetSetDef Outputs_getset[] = {
 {"lcoe_fcr", (getter)Outputs_get_lcoe_fcr,(setter)0,
-	PyDoc_STR("*float*: Levelized cost of energy [$/kWh]"),
+	PyDoc_STR("*float*: LCOE Levelized cost of energy [$/kWh]"),
  	NULL},
 	{NULL}  /* Sentinel */
 };

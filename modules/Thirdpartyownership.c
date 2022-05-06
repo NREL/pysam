@@ -1353,7 +1353,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*float*: Host indifference point nominal levelized value [cents/kWh]"),
  	NULL},
 {"npv", (getter)Outputs_get_npv,(setter)0,
-	PyDoc_STR("*float*: Net present value [$]"),
+	PyDoc_STR("*float*: NPV Net present value [$]"),
  	NULL},
 {"year1_nte", (getter)Outputs_get_year1_nte,(setter)0,
 	PyDoc_STR("*float*: Host indifference point in Year 1 [cents/kWh]"),

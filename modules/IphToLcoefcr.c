@@ -103,10 +103,10 @@ IPHLCOH_set_electricity_rate(VarGroupObject *self, PyObject *value, void *closur
 
 static PyGetSetDef IPHLCOH_getset[] = {
 {"annual_electricity_consumption", (getter)IPHLCOH_get_annual_electricity_consumption,(setter)IPHLCOH_set_annual_electricity_consumption,
-	PyDoc_STR("*float*: Annual electricity consumptoin w/ avail derate [kWe-hr]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Annual electricity consumption with avail derate [kWe-hr]\n\n*Required*: True"),
  	NULL},
 {"electricity_rate", (getter)IPHLCOH_get_electricity_rate,(setter)IPHLCOH_set_electricity_rate,
-	PyDoc_STR("*float*: Cost of electricity used to operate pumps/trackers [$/kWe]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Cost of electricity used to operate pumps and trackers [$/kWe]\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };

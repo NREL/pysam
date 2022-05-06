@@ -734,6 +734,18 @@ Solarfield_set_b_eps_HCE4(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyObject *
+Solarfield_get_deltaT_subcooled(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_LinearFresnelDsgIph_Solarfield_deltaT_subcooled_nget, self->data_ptr);
+}
+
+static int
+Solarfield_set_deltaT_subcooled(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_LinearFresnelDsgIph_Solarfield_deltaT_subcooled_nset, self->data_ptr);
+}
+
+static PyObject *
 Solarfield_get_dirt_mirror(VarGroupObject *self, void *closure)
 {
 	return PySAM_matrix_getter(SAM_LinearFresnelDsgIph_Solarfield_dirt_mirror_mget, self->data_ptr);
@@ -950,6 +962,18 @@ Solarfield_set_theta_stow(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyObject *
+Solarfield_get_use_quality_or_subcooled(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_LinearFresnelDsgIph_Solarfield_use_quality_or_subcooled_nget, self->data_ptr);
+}
+
+static int
+Solarfield_set_use_quality_or_subcooled(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_LinearFresnelDsgIph_Solarfield_use_quality_or_subcooled_nset, self->data_ptr);
+}
+
+static PyObject *
 Solarfield_get_x_b_des(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_LinearFresnelDsgIph_Solarfield_x_b_des_nget, self->data_ptr);
@@ -1038,7 +1062,7 @@ static PyGetSetDef Solarfield_getset[] = {
 	PyDoc_STR("*sequence[sequence]*: (boiler, SH) Annulus gas pressure (4: # field fracs) [torr]\n\n*Required*: True"),
  	NULL},
 {"P_turb_des", (getter)Solarfield_get_P_turb_des,(setter)Solarfield_set_P_turb_des,
-	PyDoc_STR("*float*: Design-point turbine inlet pressure [bar]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Design-point turbine inlet pressure [bar]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - nLoops\n"),
  	NULL},
 {"Pipe_hl_coef", (getter)Solarfield_get_Pipe_hl_coef,(setter)Solarfield_set_Pipe_hl_coef,
 	PyDoc_STR("*float*: Loss coefficient from the header.. runner pipe.. and non-HCE pipin [W/m2-K]\n\n*Required*: True"),
@@ -1088,6 +1112,9 @@ static PyGetSetDef Solarfield_getset[] = {
 {"b_eps_HCE4", (getter)Solarfield_get_b_eps_HCE4,(setter)Solarfield_set_b_eps_HCE4,
 	PyDoc_STR("*sequence[sequence]*: (temperature) Absorber emittance (eps) [none]\n\n*Required*: True"),
  	NULL},
+{"deltaT_subcooled", (getter)Solarfield_get_deltaT_subcooled,(setter)Solarfield_set_deltaT_subcooled,
+	PyDoc_STR("*float*: Subcooled temperature difference from saturation temp [C]\n\n*Required*: If not provided, assumed to be 1.23\n\n*Changes to this variable may require updating the values of the following*: \n\t - nLoops\n"),
+ 	NULL},
 {"dirt_mirror", (getter)Solarfield_get_dirt_mirror,(setter)Solarfield_set_dirt_mirror,
 	PyDoc_STR("*sequence[sequence]*: (boiler, SH) User-defined dirt on mirror derate [none]\n\n*Required*: True"),
  	NULL},
@@ -1110,7 +1137,7 @@ static PyGetSetDef Solarfield_getset[] = {
 	PyDoc_STR("*float*: Design-point pressure drop across the solar field boiler fraction [none]\n\n*Required*: True"),
  	NULL},
 {"nLoops", (getter)Solarfield_get_nLoops,(setter)Solarfield_set_nLoops,
-	PyDoc_STR("*float*: Number of loops [none]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - I_bn_des\n\t - T_amb_des_sf\n\t - T_cold_ref\n\t - T_hot\n\t - nModBoil\n\t - q_pb_des\n"),
+	PyDoc_STR("*float*: Number of loops [none]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - I_bn_des\n\t - P_turb_des\n\t - T_amb_des_sf\n\t - T_cold_ref\n\t - deltaT_subcooled\n\t - nModBoil\n\t - q_pb_des\n\t - use_quality_or_subcooled\n"),
  	NULL},
 {"nModBoil", (getter)Solarfield_get_nModBoil,(setter)Solarfield_set_nModBoil,
 	PyDoc_STR("*float*: Number of modules in the boiler section [none]\n\n*Constraints*: INTEGER\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - nLoops\n"),
@@ -1141,6 +1168,9 @@ static PyGetSetDef Solarfield_getset[] = {
  	NULL},
 {"theta_stow", (getter)Solarfield_get_theta_stow,(setter)Solarfield_set_theta_stow,
 	PyDoc_STR("*float*: stow angle [deg]\n\n*Required*: True"),
+ 	NULL},
+{"use_quality_or_subcooled", (getter)Solarfield_get_use_quality_or_subcooled,(setter)Solarfield_set_use_quality_or_subcooled,
+	PyDoc_STR("*float*: 0 = 2 phase outlet, 1 = subcooled\n\n*Required*: If not provided, assumed to be 0\n\n*Changes to this variable may require updating the values of the following*: \n\t - nLoops\n"),
  	NULL},
 {"x_b_des", (getter)Solarfield_get_x_b_des,(setter)Solarfield_set_x_b_des,
 	PyDoc_STR("*float*: Design point boiler outlet steam quality [none]\n\n*Required*: True"),
@@ -1278,24 +1308,9 @@ Powerblock_set_T_cold_ref(VarGroupObject *self, PyObject *value, void *closure)
 	return PySAM_double_setter(value, SAM_LinearFresnelDsgIph_Powerblock_T_cold_ref_nset, self->data_ptr);
 }
 
-static PyObject *
-Powerblock_get_T_hot(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_LinearFresnelDsgIph_Powerblock_T_hot_nget, self->data_ptr);
-}
-
-static int
-Powerblock_set_T_hot(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_LinearFresnelDsgIph_Powerblock_T_hot_nset, self->data_ptr);
-}
-
 static PyGetSetDef Powerblock_getset[] = {
 {"T_cold_ref", (getter)Powerblock_get_T_cold_ref,(setter)Powerblock_set_T_cold_ref,
 	PyDoc_STR("*float*: Reference HTF outlet temperature at design [C]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - nLoops\n"),
- 	NULL},
-{"T_hot", (getter)Powerblock_get_T_hot,(setter)Powerblock_set_T_hot,
-	PyDoc_STR("*float*: Hot HTF inlet temperature, from storage tank [C]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - nLoops\n"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
