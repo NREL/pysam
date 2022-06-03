@@ -3,7 +3,7 @@
 
 Installation
 ************
-PySAM for Python 3.5 to 3.8, as NREL-PySAM, is available on PyPi. It is also available on Anaconda for MacOSX up to 3.8 and on Windows and Linux up to 3.7.
+PySAM for Python 3.6 to 3.10, as NREL-PySAM, is available on PyPi and Anaconda.
 
 To install from PyPi::
 
