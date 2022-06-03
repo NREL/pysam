@@ -9,8 +9,7 @@ To install from PyPi::
 
 	pip install nrel-pysam
 
-To install from Anaconda, the NREL channel needs to be appended::
+To install from Anaconda, the NREL channel needs to be specified::
 
-    conda config --env --append channels nrel
-    conda install nrel-pysam
+    conda install -c nrel nrel-pysam
 
