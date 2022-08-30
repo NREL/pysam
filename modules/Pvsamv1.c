@@ -1054,7 +1054,7 @@ static PyGetSetDef Lifetime_getset[] = {
 	PyDoc_STR("*float*: Inflation rate [%]\n\n*Constraints*: MIN=-99\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"save_full_lifetime_variables", (getter)Lifetime_get_save_full_lifetime_variables,(setter)Lifetime_set_save_full_lifetime_variables,
-	PyDoc_STR("*float*: Save and display vars for full lifetime [0/1]\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: True if system_use_lifetime_output=1"),
+	PyDoc_STR("*float*: Save and display vars for full lifetime [0/1]\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: If not provided, assumed to be 1"),
  	NULL},
 {"system_use_lifetime_output", (getter)Lifetime_get_system_use_lifetime_output,(setter)Lifetime_set_system_use_lifetime_output,
 	PyDoc_STR("*float*: PV lifetime simulation [0/1]\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: If not provided, assumed to be 0"),
@@ -11088,6 +11088,30 @@ SystemCosts_set_om_batt_replacement_cost(VarGroupObject *self, PyObject *value, 
 }
 
 static PyObject *
+SystemCosts_get_om_batt_variable_cost(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvsamv1_SystemCosts_om_batt_variable_cost_aget, self->data_ptr);
+}
+
+static int
+SystemCosts_set_om_batt_variable_cost(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Pvsamv1_SystemCosts_om_batt_variable_cost_aset, self->data_ptr);
+}
+
+static PyObject *
+SystemCosts_get_om_production_escal(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_SystemCosts_om_production_escal_nget, self->data_ptr);
+}
+
+static int
+SystemCosts_set_om_production_escal(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_SystemCosts_om_production_escal_nset, self->data_ptr);
+}
+
+static PyObject *
 SystemCosts_get_om_replacement_cost_escal(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Pvsamv1_SystemCosts_om_replacement_cost_escal_nget, self->data_ptr);
@@ -11102,6 +11126,12 @@ SystemCosts_set_om_replacement_cost_escal(VarGroupObject *self, PyObject *value,
 static PyGetSetDef SystemCosts_getset[] = {
 {"om_batt_replacement_cost", (getter)SystemCosts_get_om_batt_replacement_cost,(setter)SystemCosts_set_om_batt_replacement_cost,
 	PyDoc_STR("*sequence*: Replacement cost 1 [$/kWh]\n\n*Required*: If not provided, assumed to be 0.0"),
+ 	NULL},
+{"om_batt_variable_cost", (getter)SystemCosts_get_om_batt_variable_cost,(setter)SystemCosts_set_om_batt_variable_cost,
+	PyDoc_STR("*sequence*: Battery production-based System Costs amount [$/MWh]\n\n*Required*: If not provided, assumed to be 0.0"),
+ 	NULL},
+{"om_production_escal", (getter)SystemCosts_get_om_production_escal,(setter)SystemCosts_set_om_production_escal,
+	PyDoc_STR("*float*: Production-based O&M escalation [%/year]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
 {"om_replacement_cost_escal", (getter)SystemCosts_get_om_replacement_cost_escal,(setter)SystemCosts_set_om_replacement_cost_escal,
 	PyDoc_STR("*float*: Replacement cost escalation [%/year]\n\n*Required*: If not provided, assumed to be 0.0"),
@@ -11545,6 +11575,18 @@ PriceSignal_set_mp_energy_market_revenue(VarGroupObject *self, PyObject *value, 
 }
 
 static PyObject *
+PriceSignal_get_ppa_escalation(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_PriceSignal_ppa_escalation_nget, self->data_ptr);
+}
+
+static int
+PriceSignal_set_ppa_escalation(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_PriceSignal_ppa_escalation_nset, self->data_ptr);
+}
+
+static PyObject *
 PriceSignal_get_ppa_multiplier_model(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Pvsamv1_PriceSignal_ppa_multiplier_model_nget, self->data_ptr);
@@ -11614,11 +11656,14 @@ static PyGetSetDef PriceSignal_getset[] = {
 {"mp_energy_market_revenue", (getter)PriceSignal_get_mp_energy_market_revenue,(setter)PriceSignal_set_mp_energy_market_revenue,
 	PyDoc_STR("*sequence[sequence]*: Energy market revenue input [ [MW, $/MW]]\n\n*Required*: True if en_batt=1&batt_meter_position=1&forecast_price_signal_model=1"),
  	NULL},
+{"ppa_escalation", (getter)PriceSignal_get_ppa_escalation,(setter)PriceSignal_set_ppa_escalation,
+	PyDoc_STR("*float*: PPA escalation rate [%/year]\n\n*Required*: True if forecast_price_signal_model=0&en_batt=1&batt_meter_position=1"),
+ 	NULL},
 {"ppa_multiplier_model", (getter)PriceSignal_get_ppa_multiplier_model,(setter)PriceSignal_set_ppa_multiplier_model,
 	PyDoc_STR("*float*: PPA multiplier model [0/1]\n\n*Options*: 0=diurnal,1=timestep\n\n*Constraints*: INTEGER,MIN=0\n\n*Required*: True if forecast_price_signal_model=0&en_batt=1&batt_meter_position=1"),
  	NULL},
 {"ppa_price_input", (getter)PriceSignal_get_ppa_price_input,(setter)PriceSignal_set_ppa_price_input,
-	PyDoc_STR("*sequence*: PPA Price Input\n\n*Required*: True if forecast_price_signal_model=0&en_batt=1&batt_meter_position=1"),
+	PyDoc_STR("*sequence*: PPA Price Input [$/kWh]\n\n*Required*: True if forecast_price_signal_model=0&en_batt=1&batt_meter_position=1"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -11657,6 +11702,278 @@ static PyTypeObject PriceSignal_Type = {
 		PriceSignal_methods,         /*tp_methods*/
 		0,                          /*tp_members*/
 		PriceSignal_getset,          /*tp_getset*/
+		0,                          /*tp_base*/
+		0,                          /*tp_dict*/
+		0,                          /*tp_descr_get*/
+		0,                          /*tp_descr_set*/
+		0,                          /*tp_dictofnset*/
+		0,                          /*tp_init*/
+		0,                          /*tp_alloc*/
+		0,             /*tp_new*/
+		0,                          /*tp_free*/
+		0,                          /*tp_is_gc*/
+};
+
+
+/*
+ * Revenue Group
+ */ 
+
+static PyTypeObject Revenue_Type;
+
+static PyObject *
+Revenue_new(SAM_Pvsamv1 data_ptr)
+{
+	PyObject* new_obj = Revenue_Type.tp_alloc(&Revenue_Type,0);
+
+	VarGroupObject* Revenue_obj = (VarGroupObject*)new_obj;
+
+	Revenue_obj->data_ptr = (SAM_table)data_ptr;
+
+	return new_obj;
+}
+
+/* Revenue methods */
+
+static PyObject *
+Revenue_assign(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Pvsamv1", "Revenue")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+Revenue_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Revenue_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Pvsamv1", "Revenue")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+Revenue_export(VarGroupObject *self, PyObject *args)
+{
+	PyTypeObject* tp = &Revenue_Type;
+	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
+	return dict;
+}
+
+static PyMethodDef Revenue_methods[] = {
+		{"assign",            (PyCFunction)Revenue_assign,  METH_VARARGS,
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Revenue_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Revenue_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Revenue_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)Revenue_export,  METH_VARARGS,
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+		{NULL,              NULL}           /* sentinel */
+};
+
+static PyObject *
+Revenue_get_mp_ancserv1_revenue_single(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Pvsamv1_Revenue_mp_ancserv1_revenue_single_mget, self->data_ptr);
+}
+
+static int
+Revenue_set_mp_ancserv1_revenue_single(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Pvsamv1_Revenue_mp_ancserv1_revenue_single_mset, self->data_ptr);
+}
+
+static PyObject *
+Revenue_get_mp_ancserv2_revenue_single(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Pvsamv1_Revenue_mp_ancserv2_revenue_single_mget, self->data_ptr);
+}
+
+static int
+Revenue_set_mp_ancserv2_revenue_single(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Pvsamv1_Revenue_mp_ancserv2_revenue_single_mset, self->data_ptr);
+}
+
+static PyObject *
+Revenue_get_mp_ancserv3_revenue_single(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Pvsamv1_Revenue_mp_ancserv3_revenue_single_mget, self->data_ptr);
+}
+
+static int
+Revenue_set_mp_ancserv3_revenue_single(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Pvsamv1_Revenue_mp_ancserv3_revenue_single_mset, self->data_ptr);
+}
+
+static PyObject *
+Revenue_get_mp_ancserv4_revenue_single(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Pvsamv1_Revenue_mp_ancserv4_revenue_single_mget, self->data_ptr);
+}
+
+static int
+Revenue_set_mp_ancserv4_revenue_single(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Pvsamv1_Revenue_mp_ancserv4_revenue_single_mset, self->data_ptr);
+}
+
+static PyObject *
+Revenue_get_mp_enable_ancserv1_percent_gen(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_Revenue_mp_enable_ancserv1_percent_gen_nget, self->data_ptr);
+}
+
+static int
+Revenue_set_mp_enable_ancserv1_percent_gen(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_Revenue_mp_enable_ancserv1_percent_gen_nset, self->data_ptr);
+}
+
+static PyObject *
+Revenue_get_mp_enable_ancserv2_percent_gen(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_Revenue_mp_enable_ancserv2_percent_gen_nget, self->data_ptr);
+}
+
+static int
+Revenue_set_mp_enable_ancserv2_percent_gen(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_Revenue_mp_enable_ancserv2_percent_gen_nset, self->data_ptr);
+}
+
+static PyObject *
+Revenue_get_mp_enable_ancserv3_percent_gen(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_Revenue_mp_enable_ancserv3_percent_gen_nget, self->data_ptr);
+}
+
+static int
+Revenue_set_mp_enable_ancserv3_percent_gen(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_Revenue_mp_enable_ancserv3_percent_gen_nset, self->data_ptr);
+}
+
+static PyObject *
+Revenue_get_mp_enable_ancserv4_percent_gen(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_Revenue_mp_enable_ancserv4_percent_gen_nget, self->data_ptr);
+}
+
+static int
+Revenue_set_mp_enable_ancserv4_percent_gen(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_Revenue_mp_enable_ancserv4_percent_gen_nset, self->data_ptr);
+}
+
+static PyObject *
+Revenue_get_mp_enable_market_percent_gen(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_Revenue_mp_enable_market_percent_gen_nget, self->data_ptr);
+}
+
+static int
+Revenue_set_mp_enable_market_percent_gen(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_Revenue_mp_enable_market_percent_gen_nset, self->data_ptr);
+}
+
+static PyObject *
+Revenue_get_mp_energy_market_revenue_single(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Pvsamv1_Revenue_mp_energy_market_revenue_single_mget, self->data_ptr);
+}
+
+static int
+Revenue_set_mp_energy_market_revenue_single(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Pvsamv1_Revenue_mp_energy_market_revenue_single_mset, self->data_ptr);
+}
+
+static PyGetSetDef Revenue_getset[] = {
+{"mp_ancserv1_revenue_single", (getter)Revenue_get_mp_ancserv1_revenue_single,(setter)Revenue_set_mp_ancserv1_revenue_single,
+	PyDoc_STR("*sequence[sequence]*: Ancillary services 1 revenue input\n\n*Info*: Lifetime x 1[Price($/MWh)]\n\n*Required*: True if forecast_price_signal_model=1&mp_enable_ancserv1_percent_gen=1"),
+ 	NULL},
+{"mp_ancserv2_revenue_single", (getter)Revenue_get_mp_ancserv2_revenue_single,(setter)Revenue_set_mp_ancserv2_revenue_single,
+	PyDoc_STR("*sequence[sequence]*: Ancillary services 2 revenue input\n\n*Info*: Lifetime x 1[Price($/MWh)]\n\n*Required*: True if forecast_price_signal_model=1&mp_enable_ancserv2_percent_gen=1"),
+ 	NULL},
+{"mp_ancserv3_revenue_single", (getter)Revenue_get_mp_ancserv3_revenue_single,(setter)Revenue_set_mp_ancserv3_revenue_single,
+	PyDoc_STR("*sequence[sequence]*: Ancillary services 3 revenue input\n\n*Info*: Lifetime x 1[Price($/MWh)]\n\n*Required*: True if forecast_price_signal_model=1&mp_enable_ancserv3_percent_gen=1"),
+ 	NULL},
+{"mp_ancserv4_revenue_single", (getter)Revenue_get_mp_ancserv4_revenue_single,(setter)Revenue_set_mp_ancserv4_revenue_single,
+	PyDoc_STR("*sequence[sequence]*: Ancillary services 4 revenue input\n\n*Info*: Lifetime x 1[Price($/MWh)]\n\n*Required*: True if forecast_price_signal_model=1&mp_enable_ancserv4_percent_gen=1"),
+ 	NULL},
+{"mp_enable_ancserv1_percent_gen", (getter)Revenue_get_mp_enable_ancserv1_percent_gen,(setter)Revenue_set_mp_enable_ancserv1_percent_gen,
+	PyDoc_STR("*float*: Enable percent demand cleared capacity option for ancillary service 1 [0/1]\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: True if forecast_price_signal_model=1"),
+ 	NULL},
+{"mp_enable_ancserv2_percent_gen", (getter)Revenue_get_mp_enable_ancserv2_percent_gen,(setter)Revenue_set_mp_enable_ancserv2_percent_gen,
+	PyDoc_STR("*float*: Enable percent demand cleared capacity option for ancillary service 2 [0/1]\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: True if forecast_price_signal_model=1"),
+ 	NULL},
+{"mp_enable_ancserv3_percent_gen", (getter)Revenue_get_mp_enable_ancserv3_percent_gen,(setter)Revenue_set_mp_enable_ancserv3_percent_gen,
+	PyDoc_STR("*float*: Enable percent demand cleared capacity option for ancillary service 3 [0/1]\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: True if forecast_price_signal_model=1"),
+ 	NULL},
+{"mp_enable_ancserv4_percent_gen", (getter)Revenue_get_mp_enable_ancserv4_percent_gen,(setter)Revenue_set_mp_enable_ancserv4_percent_gen,
+	PyDoc_STR("*float*: Enable percent demand cleared capacity option for ancillary service 4 [0/1]\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: True if forecast_price_signal_model=1"),
+ 	NULL},
+{"mp_enable_market_percent_gen", (getter)Revenue_get_mp_enable_market_percent_gen,(setter)Revenue_set_mp_enable_market_percent_gen,
+	PyDoc_STR("*float*: Enable percent demand cleared capacity option for market revenue [0/1]\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: True if forecast_price_signal_model=1"),
+ 	NULL},
+{"mp_energy_market_revenue_single", (getter)Revenue_get_mp_energy_market_revenue_single,(setter)Revenue_set_mp_energy_market_revenue_single,
+	PyDoc_STR("*sequence[sequence]*: Energy market revenue input\n\n*Info*: Lifetime x 1 [Price($/MWh)]\n\n*Required*: True if forecast_price_signal_model=1&mp_enable_market_percent_gen=1"),
+ 	NULL},
+	{NULL}  /* Sentinel */
+};
+
+static PyTypeObject Revenue_Type = {
+		/* The ob_type field must be initialized in the module init function
+		 * to be portable to Windows without using C++. */
+		PyVarObject_HEAD_INIT(NULL, 0)
+		"Pvsamv1.Revenue",             /*tp_name*/
+		sizeof(VarGroupObject),          /*tp_basicsize*/
+		0,                          /*tp_itemsize*/
+		/* methods */
+		0,    /*tp_dealloc*/
+		0,                          /*tp_print*/
+		(getattrfunc)0,             /*tp_getattr*/
+		0,                          /*tp_setattr*/
+		0,                          /*tp_reserved*/
+		0,                          /*tp_repr*/
+		0,                          /*tp_as_number*/
+		0,                          /*tp_as_sequence*/
+		0,                          /*tp_as_mapping*/
+		0,                          /*tp_hash*/
+		0,                          /*tp_call*/
+		0,                          /*tp_str*/
+		0,                          /*tp_getattro*/
+		0,                          /*tp_setattro*/
+		0,                          /*tp_as_buffer*/
+		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
+		0,                          /*tp_doc*/
+		0,                          /*tp_traverse*/
+		0,                          /*tp_clear*/
+		0,                          /*tp_richcompare*/
+		0,                          /*tp_weaklistofnset*/
+		0,                          /*tp_iter*/
+		0,                          /*tp_iternext*/
+		Revenue_methods,         /*tp_methods*/
+		0,                          /*tp_members*/
+		Revenue_getset,          /*tp_getset*/
 		0,                          /*tp_base*/
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
@@ -12436,15 +12753,15 @@ static PyMethodDef Outputs_methods[] = {
 };
 
 static PyObject *
-Outputs_get_ac_lifetime_loss(VarGroupObject *self, void *closure)
+Outputs_get_ac_gross(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Pvsamv1_Outputs_ac_lifetime_loss_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Pvsamv1_Outputs_ac_gross_aget, self->data_ptr);
 }
 
 static PyObject *
-Outputs_get_ac_loss(VarGroupObject *self, void *closure)
+Outputs_get_ac_lifetime_loss(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Pvsamv1_Outputs_ac_loss_nget, self->data_ptr);
+	return PySAM_array_getter(SAM_Pvsamv1_Outputs_ac_lifetime_loss_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -13381,6 +13698,12 @@ static PyObject *
 Outputs_get_dc_invmppt_loss(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Pvsamv1_Outputs_dc_invmppt_loss_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_dc_lifetime_loss(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvsamv1_Outputs_dc_lifetime_loss_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -14686,11 +15009,11 @@ Outputs_get_xfmr_nll_year1(VarGroupObject *self, void *closure)
 }
 
 static PyGetSetDef Outputs_getset[] = {
+{"ac_gross", (getter)Outputs_get_ac_gross,(setter)0,
+	PyDoc_STR("*sequence*: Inverter AC output power [kW]"),
+ 	NULL},
 {"ac_lifetime_loss", (getter)Outputs_get_ac_lifetime_loss,(setter)0,
 	PyDoc_STR("*sequence*: AC lifetime daily loss [kW]"),
- 	NULL},
-{"ac_loss", (getter)Outputs_get_ac_loss,(setter)0,
-	PyDoc_STR("*float*: AC wiring loss [%]"),
  	NULL},
 {"ac_perf_adj_loss", (getter)Outputs_get_ac_perf_adj_loss,(setter)0,
 	PyDoc_STR("*sequence*: AC performance adjustment loss [kW]"),
@@ -14705,7 +15028,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Absolute air mass"),
  	NULL},
 {"alb", (getter)Outputs_get_alb,(setter)0,
-	PyDoc_STR("*sequence*: Weather file albedo"),
+	PyDoc_STR("*sequence*: Albedo"),
  	NULL},
 {"annual_ac_battery_loss_percent", (getter)Outputs_get_annual_ac_battery_loss_percent,(setter)0,
 	PyDoc_STR("*float*: AC-connected battery loss - year 1 [%]"),
@@ -15140,10 +15463,10 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Battery cell voltage [V]"),
  	NULL},
 {"capacity_factor", (getter)Outputs_get_capacity_factor,(setter)0,
-	PyDoc_STR("*float*: Capacity factor based on DC system capacity [%]"),
+	PyDoc_STR("*float*: Capacity factor based on nameplate DC capacity [%]"),
  	NULL},
 {"capacity_factor_ac", (getter)Outputs_get_capacity_factor_ac,(setter)0,
-	PyDoc_STR("*float*: Capacity factor based on AC system capacity [%]"),
+	PyDoc_STR("*float*: Capacity factor based on total AC capacity [%]"),
  	NULL},
 {"cdf_of_surviving", (getter)Outputs_get_cdf_of_surviving,(setter)0,
 	PyDoc_STR("*sequence*: Hours of autonomy during grid outage cumulative probabilities"),
@@ -15159,6 +15482,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"dc_invmppt_loss", (getter)Outputs_get_dc_invmppt_loss,(setter)0,
 	PyDoc_STR("*sequence*: Inverter clipping loss DC MPPT voltage limits [kW]"),
+ 	NULL},
+{"dc_lifetime_loss", (getter)Outputs_get_dc_lifetime_loss,(setter)0,
+	PyDoc_STR("*sequence*: DC lifetime daily loss [kW]"),
  	NULL},
 {"dc_net", (getter)Outputs_get_dc_net,(setter)0,
 	PyDoc_STR("*sequence*: Inverter DC input power [kW]"),
@@ -15242,7 +15568,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*float*: Energy yield [kWh/kW]"),
  	NULL},
 {"market_sell_rate_series_yr1", (getter)Outputs_get_market_sell_rate_series_yr1,(setter)0,
-	PyDoc_STR("*sequence*: Power price for battery dispatch (year 1) [$/MWh]"),
+	PyDoc_STR("*sequence*: Power price for battery dispatch [$/MWh]"),
  	NULL},
 {"monthly_batt_to_grid", (getter)Outputs_get_monthly_batt_to_grid,(setter)0,
 	PyDoc_STR("*sequence*: Energy to grid from battery [kWh]"),
@@ -15978,6 +16304,10 @@ newPvsamv1Object(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "PriceSignal", PriceSignal_obj);
 	Py_DECREF(PriceSignal_obj);
 
+	PyObject* Revenue_obj = Revenue_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "Revenue", Revenue_obj);
+	Py_DECREF(Revenue_obj);
+
 	PyObject* ElectricityRates_obj = ElectricityRates_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "ElectricityRates", ElectricityRates_obj);
 	Py_DECREF(ElectricityRates_obj);
@@ -16261,8 +16591,7 @@ static PyMethodDef Pvsamv1Module_methods[] = {
 		{"new",             Pvsamv1_new,         METH_VARARGS,
 				PyDoc_STR("new() -> Pvsamv1")},
 		{"default",             Pvsamv1_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Pvsamv1\n\nUse default attributes\n"
-				"`config` options:\n\n- \"FlatPlatePVAllEquityPartnershipFlip\"\n- \"FlatPlatePVCommercial\"\n- \"FlatPlatePVHostDeveloper\"\n- \"FlatPlatePVLCOECalculator\"\n- \"FlatPlatePVLeveragedPartnershipFlip\"\n- \"FlatPlatePVMerchantPlant\"\n- \"FlatPlatePVNone\"\n- \"FlatPlatePVResidential\"\n- \"FlatPlatePVSaleLeaseback\"\n- \"FlatPlatePVSingleOwner\"\n- \"FlatPlatePVThirdParty\"\n- \"PVBatteryAllEquityPartnershipFlip\"\n- \"PVBatteryCommercial\"\n- \"PVBatteryHostDeveloper\"\n- \"PVBatteryLeveragedPartnershipFlip\"\n- \"PVBatteryMerchantPlant\"\n- \"PVBatteryResidential\"\n- \"PVBatterySaleLeaseback\"\n- \"PVBatterySingleOwner\"\n- \"PVBatteryThirdParty\"")},
+				PyDoc_STR("default(config) -> Pvsamv1\n\nLoad values from SAM default configurations to provide as inputs to the model. \n\n			`config` options:\n\n- \"FlatPlatePVAllEquityPartnershipFlip\"\n- \"FlatPlatePVCommercial\"\n- \"FlatPlatePVHostDeveloper\"\n- \"FlatPlatePVLCOECalculator\"\n- \"FlatPlatePVLeveragedPartnershipFlip\"\n- \"FlatPlatePVMerchantPlant\"\n- \"FlatPlatePVNone\"\n- \"FlatPlatePVResidential\"\n- \"FlatPlatePVSaleLeaseback\"\n- \"FlatPlatePVSingleOwner\"\n- \"FlatPlatePVThirdParty\"\n- \"PVBatteryAllEquityPartnershipFlip\"\n- \"PVBatteryCommercial\"\n- \"PVBatteryHostDeveloper\"\n- \"PVBatteryLeveragedPartnershipFlip\"\n- \"PVBatteryMerchantPlant\"\n- \"PVBatteryResidential\"\n- \"PVBatterySaleLeaseback\"\n- \"PVBatterySingleOwner\"\n- \"PVBatteryThirdParty\"\n\n.. note::\n\n	The default configuration is a collection of default values for the module inputs. Some inputs may not be included in the default configuration and are automatically assigned the value indicated by the variable's 'Required' attribute.")},
 		{"wrap",             Pvsamv1_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Pvsamv1\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   Pvsamv1_from_existing,        METH_VARARGS,
@@ -16485,6 +16814,13 @@ Pvsamv1Module_exec(PyObject *m)
 				"PriceSignal",
 				(PyObject*)&PriceSignal_Type);
 	Py_DECREF(&PriceSignal_Type);
+
+	/// Add the Revenue type object to Pvsamv1_Type
+	if (PyType_Ready(&Revenue_Type) < 0) { goto fail; }
+	PyDict_SetItemString(Pvsamv1_Type.tp_dict,
+				"Revenue",
+				(PyObject*)&Revenue_Type);
+	Py_DECREF(&Revenue_Type);
 
 	/// Add the ElectricityRates type object to Pvsamv1_Type
 	if (PyType_Ready(&ElectricityRates_Type) < 0) { goto fail; }

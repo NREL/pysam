@@ -1,9 +1,9 @@
-.. _LinearFresnelDsgIph:
+.. _MsptSfAndRecIsolated:
 
-LinearFresnelDsgIph
+MsptSfAndRecIsolated
 ***********************************
 
-Wrapper for SAM Simulation Core model: `cmod_linear_fresnel_dsg_iph.cpp <https://github.com/NREL/ssc/blob/develop/ssc/cmod_linear_fresnel_dsg_iph.cpp>`_
+Wrapper for SAM Simulation Core model: `cmod_mspt_sf_and_rec_isolated.cpp <https://github.com/NREL/ssc/blob/develop/ssc/cmod_mspt_sf_and_rec_isolated.cpp>`_
 
 Input Consistency Warning
 ==================================
@@ -13,15 +13,6 @@ that enforce consistency are not available in this PySAM module. Therefore,
 the onus is on the PySAM user to check that interdependencies are correctly handled. The variables which may require
 additional logic include:
 
- - I_bn_des
- - P_turb_des
- - T_amb_des_sf
- - T_cold_ref
- - deltaT_subcooled
- - nLoops
- - nModBoil
- - q_pb_des
- - use_quality_or_subcooled
 
 Provided for each of these inputs is a list of other inputs that are potentially interdependent. 
 
@@ -30,56 +21,56 @@ Creating an Instance
 
 Refer to the :ref:`Initializing a Model <initializing>` page for details on the different ways to create an instance of a PySAM class.
 
-**LinearFresnelDsgIph model description**
+**MsptSfAndRecIsolated model description**
 
-.. automodule:: PySAM.LinearFresnelDsgIph
+.. automodule:: PySAM.MsptSfAndRecIsolated
 	:members:
 
 Functions
 ===================================
 
-.. autoclass:: PySAM.LinearFresnelDsgIph.LinearFresnelDsgIph
+.. autoclass:: PySAM.MsptSfAndRecIsolated.MsptSfAndRecIsolated
+	:members:
+
+Simulation Group
+======================================================
+
+.. autoclass:: PySAM.MsptSfAndRecIsolated.MsptSfAndRecIsolated.Simulation
+	:members:
+
+TowerAndReceiver Group
+======================================================
+
+.. autoclass:: PySAM.MsptSfAndRecIsolated.MsptSfAndRecIsolated.TowerAndReceiver
+	:members:
+
+ReceiverControl Group
+======================================================
+
+.. autoclass:: PySAM.MsptSfAndRecIsolated.MsptSfAndRecIsolated.ReceiverControl
+	:members:
+
+Timeseries Group
+======================================================
+
+.. autoclass:: PySAM.MsptSfAndRecIsolated.MsptSfAndRecIsolated.Timeseries
 	:members:
 
 Weather Group
 ======================================================
 
-.. autoclass:: PySAM.LinearFresnelDsgIph.LinearFresnelDsgIph.Weather
+.. autoclass:: PySAM.MsptSfAndRecIsolated.MsptSfAndRecIsolated.Weather
 	:members:
 
-Solarfield Group
+Flux Group
 ======================================================
 
-.. autoclass:: PySAM.LinearFresnelDsgIph.LinearFresnelDsgIph.Solarfield
-	:members:
-
-Powerblock Group
-======================================================
-
-.. autoclass:: PySAM.LinearFresnelDsgIph.LinearFresnelDsgIph.Powerblock
-	:members:
-
-Heliostat Group
-======================================================
-
-.. autoclass:: PySAM.LinearFresnelDsgIph.LinearFresnelDsgIph.Heliostat
-	:members:
-
-HeatSink Group
-======================================================
-
-.. autoclass:: PySAM.LinearFresnelDsgIph.LinearFresnelDsgIph.HeatSink
-	:members:
-
-AdjustmentFactors Group
-======================================================
-
-.. autoclass:: PySAM.LinearFresnelDsgIph.LinearFresnelDsgIph.AdjustmentFactors
+.. autoclass:: PySAM.MsptSfAndRecIsolated.MsptSfAndRecIsolated.Flux
 	:members:
 
 Outputs Group
 ======================================================
 
-.. autoclass:: PySAM.LinearFresnelDsgIph.LinearFresnelDsgIph.Outputs
+.. autoclass:: PySAM.MsptSfAndRecIsolated.MsptSfAndRecIsolated.Outputs
 	:members:
 

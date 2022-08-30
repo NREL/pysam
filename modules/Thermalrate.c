@@ -547,6 +547,12 @@ static PyMethodDef Outputs_methods[] = {
 };
 
 static PyObject *
+Outputs_get_annual_thermal_value(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Thermalrate_Outputs_annual_thermal_value_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_thermal_cost_with_system_year1(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Thermalrate_Outputs_thermal_cost_with_system_year1_nget, self->data_ptr);
@@ -583,6 +589,9 @@ Outputs_get_thermal_savings_year1(VarGroupObject *self, void *closure)
 }
 
 static PyGetSetDef Outputs_getset[] = {
+{"annual_thermal_value", (getter)Outputs_get_annual_thermal_value,(setter)0,
+	PyDoc_STR("*sequence*: Thermal value [$]"),
+ 	NULL},
 {"thermal_cost_with_system_year1", (getter)Outputs_get_thermal_cost_with_system_year1,(setter)0,
 	PyDoc_STR("*float*: Thermal cost with sytem (year 1) [$]"),
  	NULL},
@@ -930,8 +939,7 @@ static PyMethodDef ThermalrateModule_methods[] = {
 		{"new",             Thermalrate_new,         METH_VARARGS,
 				PyDoc_STR("new() -> Thermalrate")},
 		{"default",             Thermalrate_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Thermalrate\n\nUse default attributes\n"
-				"`config` options:\n\n- \"FuelCellCommercial\"\n- \"FuelCellSingleOwner\"")},
+				PyDoc_STR("default(config) -> Thermalrate\n\nLoad values from SAM default configurations to provide as inputs to the model. \n\n			`config` options:\n\n- \"FuelCellCommercial\"\n- \"FuelCellSingleOwner\"\n\n.. note::\n\n	The default configuration is a collection of default values for the module inputs. Some inputs may not be included in the default configuration and are automatically assigned the value indicated by the variable's 'Required' attribute.")},
 		{"wrap",             Thermalrate_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Thermalrate\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   Thermalrate_from_existing,        METH_VARARGS,
