@@ -41,6 +41,7 @@ def test_reopt_sizing_pvsam(solar_resource):
     fin = ur.from_existing(sys, "FlatPlatePVCommercial")
     bt = stbt.from_existing(sys, "GenericBatteryCommercial")
 
+    sys.SolarResource.use_wf_albedo = 0
     sys.SolarResource.solar_resource_file = solar_resource
     bt.Load.crit_load = [0] * 8760
     post = sys.Reopt_size_battery_post()
