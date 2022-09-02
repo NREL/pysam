@@ -17,6 +17,7 @@ The modules with "SAM Desktop" names are used in the SAM GUI's technology-financ
 
 The modules without a "SAM Desktop" entry provide helper functions or are older versions of above modules.
 
+Technical help documentation for the SAM models is available from the `SAM Help Website <https://samrepo.nrelcloud.org/help/index.html>`_.
 
 .. list-table::
     :widths: 50 50 100

@@ -5,6 +5,8 @@ SAM Simulation Configurations
 
 A SAM simulation is a combination of unit compute_modules that models a type of system (performance model) or project (performance model plus financial models).
 
+Technical help documentation for the SAM models is available from the `SAM Help Website <https://samrepo.nrelcloud.org/help/index.html>`_.
+
 .. list-table::
     :widths: 100 100 100
     :header-rows: 1
