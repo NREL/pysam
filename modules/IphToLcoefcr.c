@@ -103,10 +103,10 @@ IPHLCOH_set_electricity_rate(VarGroupObject *self, PyObject *value, void *closur
 
 static PyGetSetDef IPHLCOH_getset[] = {
 {"annual_electricity_consumption", (getter)IPHLCOH_get_annual_electricity_consumption,(setter)IPHLCOH_set_annual_electricity_consumption,
-	PyDoc_STR("*float*: Annual electricity consumptoin w/ avail derate [kWe-hr]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Annual electricity consumption with avail derate [kWe-hr]\n\n*Required*: True"),
  	NULL},
 {"electricity_rate", (getter)IPHLCOH_get_electricity_rate,(setter)IPHLCOH_set_electricity_rate,
-	PyDoc_STR("*float*: Cost of electricity used to operate pumps/trackers [$/kWe]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Cost of electricity used to operate pumps and trackers [$/kWe]\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -570,8 +570,7 @@ static PyMethodDef IphToLcoefcrModule_methods[] = {
 		{"new",             IphToLcoefcr_new,         METH_VARARGS,
 				PyDoc_STR("new() -> IphToLcoefcr")},
 		{"default",             IphToLcoefcr_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> IphToLcoefcr\n\nUse default attributes\n"
-				"`config` options:\n\n- \"DSGLIPHLCOHCalculator\"\n- \"PhysicalTroughIPHLCOHCalculator\"")},
+				PyDoc_STR("default(config) -> IphToLcoefcr\n\nLoad values from SAM default configurations to provide as inputs to the model. \n\n			`config` options:\n\n- \"DSGLIPHLCOHCalculator\"\n- \"PhysicalTroughIPHLCOHCalculator\"\n\n.. note::\n\n	The default configuration is a collection of default values for the module inputs. Some inputs may not be included in the default configuration and are automatically assigned the value indicated by the variable's 'Required' attribute.")},
 		{"wrap",             IphToLcoefcr_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> IphToLcoefcr\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   IphToLcoefcr_from_existing,        METH_VARARGS,

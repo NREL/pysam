@@ -3778,9 +3778,21 @@ Outputs_get_contingency_cost_calc(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_cp_battery_capacity(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesElectricResistance_Outputs_cp_battery_capacity_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_cp_htf_cycle_des(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_EtesElectricResistance_Outputs_cp_htf_cycle_des_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cp_system_capacity(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesElectricResistance_Outputs_cp_system_capacity_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -4162,6 +4174,12 @@ Outputs_get_sales_tax_cost_calc(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_sim_cpu_run_time(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesElectricResistance_Outputs_sim_cpu_run_time_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_system_capacity(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_EtesElectricResistance_Outputs_system_capacity_nget, self->data_ptr);
@@ -4324,8 +4342,14 @@ static PyGetSetDef Outputs_getset[] = {
 {"contingency_cost_calc", (getter)Outputs_get_contingency_cost_calc,(setter)0,
 	PyDoc_STR("*float*: Contingency cost [$]"),
  	NULL},
+{"cp_battery_capacity", (getter)Outputs_get_cp_battery_capacity,(setter)0,
+	PyDoc_STR("*float*: Battery nameplate [MWe]"),
+ 	NULL},
 {"cp_htf_cycle_des", (getter)Outputs_get_cp_htf_cycle_des,(setter)0,
 	PyDoc_STR("*float*: Cycle htf cp at T ave at design [kJ/kg-K]"),
+ 	NULL},
+{"cp_system_capacity", (getter)Outputs_get_cp_system_capacity,(setter)0,
+	PyDoc_STR("*float*: System capacity for capacity payments [MWe]"),
  	NULL},
 {"cycle_cost_calc", (getter)Outputs_get_cycle_cost_calc,(setter)0,
 	PyDoc_STR("*float*: Cycle cost [$]"),
@@ -4515,6 +4539,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"sales_tax_cost_calc", (getter)Outputs_get_sales_tax_cost_calc,(setter)0,
 	PyDoc_STR("*float*: Sales tax cost [$]"),
+ 	NULL},
+{"sim_cpu_run_time", (getter)Outputs_get_sim_cpu_run_time,(setter)0,
+	PyDoc_STR("*float*: Simulation duration clock time [s]"),
  	NULL},
 {"system_capacity", (getter)Outputs_get_system_capacity,(setter)0,
 	PyDoc_STR("*float*: System capacity [kWe]"),
@@ -4941,8 +4968,7 @@ static PyMethodDef EtesElectricResistanceModule_methods[] = {
 		{"new",             EtesElectricResistance_new,         METH_VARARGS,
 				PyDoc_STR("new() -> EtesElectricResistance")},
 		{"default",             EtesElectricResistance_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> EtesElectricResistance\n\nUse default attributes\n"
-				"`config` options:\n\n- \"ETESSingleOwner\"")},
+				PyDoc_STR("default(config) -> EtesElectricResistance\n\nLoad values from SAM default configurations to provide as inputs to the model. \n\n			`config` options:\n\n- \"ETESSingleOwner\"\n\n.. note::\n\n	The default configuration is a collection of default values for the module inputs. Some inputs may not be included in the default configuration and are automatically assigned the value indicated by the variable's 'Required' attribute.")},
 		{"wrap",             EtesElectricResistance_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> EtesElectricResistance\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   EtesElectricResistance_from_existing,        METH_VARARGS,
@@ -4951,7 +4977,7 @@ static PyMethodDef EtesElectricResistanceModule_methods[] = {
 };
 
 PyDoc_STRVAR(module_doc,
-			 "EtesElectricResistance");
+			 "Electric thermal energy storage");
 
 
 static int

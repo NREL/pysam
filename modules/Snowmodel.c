@@ -855,8 +855,7 @@ static PyMethodDef SnowmodelModule_methods[] = {
 		{"new",             Snowmodel_new,         METH_VARARGS,
 				PyDoc_STR("new() -> Snowmodel")},
 		{"default",             Snowmodel_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Snowmodel\n\nUse default attributes\n"
-				"None")},
+				PyDoc_STR("default(config) -> Snowmodel\n\nLoad values from SAM default configurations to provide as inputs to the model. \n\n			None\n\n.. note::\n\n	The default configuration is a collection of default values for the module inputs. Some inputs may not be included in the default configuration and are automatically assigned the value indicated by the variable's 'Required' attribute.")},
 		{"wrap",             Snowmodel_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Snowmodel\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   Snowmodel_from_existing,        METH_VARARGS,

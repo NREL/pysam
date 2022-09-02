@@ -386,11 +386,13 @@ class HostDeveloper(object):
 			pass
 
 
+		charge_w_sys_dc_tou_ym = tuple
 		charge_w_sys_ec_ym = tuple
 		charge_w_sys_fixed_ym = tuple
 		net_billing_credits_ym = tuple
 		nm_dollars_applied_ym = tuple
 		true_up_credits_ym = tuple
+		utility_bill_w_sys = tuple
 
 
 	class SystemOutput(object):
@@ -404,7 +406,10 @@ class HostDeveloper(object):
 			pass
 
 
+		annual_energy_value = tuple
+		annual_thermal_value = tuple
 		degradation = tuple
+		gen = tuple
 		gen_purchases = tuple
 		system_capacity = float
 
@@ -528,6 +533,20 @@ class HostDeveloper(object):
 		year1_monthly_ec_charge_gross_with_system = tuple
 		year1_monthly_ec_charge_with_system = tuple
 		year1_monthly_electricity_to_grid = tuple
+
+
+	class ElectricityRates(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		rate_escalation = tuple
 
 
 	class Outputs(object):
@@ -993,7 +1012,6 @@ class HostDeveloper(object):
 		flip_actual_year = float
 		flip_target_irr = float
 		flip_target_year = float
-		gen_purchases = tuple
 		host_nominal_discount_rate = float
 		ibi_fedtax_total = float
 		ibi_statax_total = float

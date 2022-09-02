@@ -196,7 +196,7 @@ static PyGetSetDef Revenue_getset[] = {
 	PyDoc_STR("*float*: PPA escalation rate [%/year]\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"ppa_price_input", (getter)Revenue_get_ppa_price_input,(setter)Revenue_set_ppa_price_input,
-	PyDoc_STR("*sequence*: PPA price in first year [$/kWh]\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: PPA price in first year input [$/kWh]\n\n*Required*: True"),
  	NULL},
 {"ppa_soln_max", (getter)Revenue_get_ppa_soln_max,(setter)Revenue_set_ppa_soln_max,
 	PyDoc_STR("*float*: PPA solution maximum ppa [cents/kWh]\n\n*Required*: If not provided, assumed to be 100"),
@@ -4746,6 +4746,18 @@ static PyMethodDef ChargesByMonth_methods[] = {
 };
 
 static PyObject *
+ChargesByMonth_get_charge_w_sys_dc_tou_ym(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_HostDeveloper_ChargesByMonth_charge_w_sys_dc_tou_ym_mget, self->data_ptr);
+}
+
+static int
+ChargesByMonth_set_charge_w_sys_dc_tou_ym(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_HostDeveloper_ChargesByMonth_charge_w_sys_dc_tou_ym_mset, self->data_ptr);
+}
+
+static PyObject *
 ChargesByMonth_get_charge_w_sys_ec_ym(VarGroupObject *self, void *closure)
 {
 	return PySAM_matrix_getter(SAM_HostDeveloper_ChargesByMonth_charge_w_sys_ec_ym_mget, self->data_ptr);
@@ -4805,7 +4817,22 @@ ChargesByMonth_set_true_up_credits_ym(VarGroupObject *self, PyObject *value, voi
 		return PySAM_matrix_setter(value, SAM_HostDeveloper_ChargesByMonth_true_up_credits_ym_mset, self->data_ptr);
 }
 
+static PyObject *
+ChargesByMonth_get_utility_bill_w_sys(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_HostDeveloper_ChargesByMonth_utility_bill_w_sys_aget, self->data_ptr);
+}
+
+static int
+ChargesByMonth_set_utility_bill_w_sys(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_HostDeveloper_ChargesByMonth_utility_bill_w_sys_aset, self->data_ptr);
+}
+
 static PyGetSetDef ChargesByMonth_getset[] = {
+{"charge_w_sys_dc_tou_ym", (getter)ChargesByMonth_get_charge_w_sys_dc_tou_ym,(setter)ChargesByMonth_set_charge_w_sys_dc_tou_ym,
+	PyDoc_STR("*sequence[sequence]*: Demand charge with system (TOU) [$]\n\n*Required*: True"),
+ 	NULL},
 {"charge_w_sys_ec_ym", (getter)ChargesByMonth_get_charge_w_sys_ec_ym,(setter)ChargesByMonth_set_charge_w_sys_ec_ym,
 	PyDoc_STR("*sequence[sequence]*: Energy charge with system [$]"),
  	NULL},
@@ -4820,6 +4847,9 @@ static PyGetSetDef ChargesByMonth_getset[] = {
  	NULL},
 {"true_up_credits_ym", (getter)ChargesByMonth_get_true_up_credits_ym,(setter)ChargesByMonth_set_true_up_credits_ym,
 	PyDoc_STR("*sequence[sequence]*: Net annual true-up payments [$]"),
+ 	NULL},
+{"utility_bill_w_sys", (getter)ChargesByMonth_get_utility_bill_w_sys,(setter)ChargesByMonth_set_utility_bill_w_sys,
+	PyDoc_STR("*sequence*: Electricity bill for system [$]\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -4943,6 +4973,30 @@ static PyMethodDef SystemOutput_methods[] = {
 };
 
 static PyObject *
+SystemOutput_get_annual_energy_value(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_HostDeveloper_SystemOutput_annual_energy_value_aget, self->data_ptr);
+}
+
+static int
+SystemOutput_set_annual_energy_value(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_HostDeveloper_SystemOutput_annual_energy_value_aset, self->data_ptr);
+}
+
+static PyObject *
+SystemOutput_get_annual_thermal_value(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_HostDeveloper_SystemOutput_annual_thermal_value_aget, self->data_ptr);
+}
+
+static int
+SystemOutput_set_annual_thermal_value(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_HostDeveloper_SystemOutput_annual_thermal_value_aset, self->data_ptr);
+}
+
+static PyObject *
 SystemOutput_get_degradation(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_HostDeveloper_SystemOutput_degradation_aget, self->data_ptr);
@@ -4952,6 +5006,18 @@ static int
 SystemOutput_set_degradation(VarGroupObject *self, PyObject *value, void *closure)
 {
 	return PySAM_array_setter(value, SAM_HostDeveloper_SystemOutput_degradation_aset, self->data_ptr);
+}
+
+static PyObject *
+SystemOutput_get_gen(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_HostDeveloper_SystemOutput_gen_aget, self->data_ptr);
+}
+
+static int
+SystemOutput_set_gen(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_HostDeveloper_SystemOutput_gen_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -4979,8 +5045,17 @@ SystemOutput_set_system_capacity(VarGroupObject *self, PyObject *value, void *cl
 }
 
 static PyGetSetDef SystemOutput_getset[] = {
+{"annual_energy_value", (getter)SystemOutput_get_annual_energy_value,(setter)SystemOutput_set_annual_energy_value,
+	PyDoc_STR("*sequence*: Energy value [$]\n\n*Required*: True"),
+ 	NULL},
+{"annual_thermal_value", (getter)SystemOutput_get_annual_thermal_value,(setter)SystemOutput_set_annual_thermal_value,
+	PyDoc_STR("*sequence*: Energy value [$]"),
+ 	NULL},
 {"degradation", (getter)SystemOutput_get_degradation,(setter)SystemOutput_set_degradation,
 	PyDoc_STR("*sequence*: Annual energy degradation\n\n*Required*: True"),
+ 	NULL},
+{"gen", (getter)SystemOutput_get_gen,(setter)SystemOutput_set_gen,
+	PyDoc_STR("*sequence*: Power generated by renewable resource [kW]\n\n*Required*: True"),
  	NULL},
 {"gen_purchases", (getter)SystemOutput_get_gen_purchases,(setter)SystemOutput_set_gen_purchases,
 	PyDoc_STR("*sequence*: Electricity from grid [kW]"),
@@ -6402,6 +6477,143 @@ static PyTypeObject LCOS_Type = {
 		LCOS_methods,         /*tp_methods*/
 		0,                          /*tp_members*/
 		LCOS_getset,          /*tp_getset*/
+		0,                          /*tp_base*/
+		0,                          /*tp_dict*/
+		0,                          /*tp_descr_get*/
+		0,                          /*tp_descr_set*/
+		0,                          /*tp_dictofnset*/
+		0,                          /*tp_init*/
+		0,                          /*tp_alloc*/
+		0,             /*tp_new*/
+		0,                          /*tp_free*/
+		0,                          /*tp_is_gc*/
+};
+
+
+/*
+ * ElectricityRates Group
+ */ 
+
+static PyTypeObject ElectricityRates_Type;
+
+static PyObject *
+ElectricityRates_new(SAM_HostDeveloper data_ptr)
+{
+	PyObject* new_obj = ElectricityRates_Type.tp_alloc(&ElectricityRates_Type,0);
+
+	VarGroupObject* ElectricityRates_obj = (VarGroupObject*)new_obj;
+
+	ElectricityRates_obj->data_ptr = (SAM_table)data_ptr;
+
+	return new_obj;
+}
+
+/* ElectricityRates methods */
+
+static PyObject *
+ElectricityRates_assign(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "HostDeveloper", "ElectricityRates")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+ElectricityRates_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &ElectricityRates_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "HostDeveloper", "ElectricityRates")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+ElectricityRates_export(VarGroupObject *self, PyObject *args)
+{
+	PyTypeObject* tp = &ElectricityRates_Type;
+	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
+	return dict;
+}
+
+static PyMethodDef ElectricityRates_methods[] = {
+		{"assign",            (PyCFunction)ElectricityRates_assign,  METH_VARARGS,
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``ElectricityRates_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)ElectricityRates_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``ElectricityRates_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)ElectricityRates_export,  METH_VARARGS,
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+		{NULL,              NULL}           /* sentinel */
+};
+
+static PyObject *
+ElectricityRates_get_rate_escalation(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_HostDeveloper_ElectricityRates_rate_escalation_aget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_rate_escalation(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_HostDeveloper_ElectricityRates_rate_escalation_aset, self->data_ptr);
+}
+
+static PyGetSetDef ElectricityRates_getset[] = {
+{"rate_escalation", (getter)ElectricityRates_get_rate_escalation,(setter)ElectricityRates_set_rate_escalation,
+	PyDoc_STR("*sequence*: Annual electricity rate escalation [%/year]"),
+ 	NULL},
+	{NULL}  /* Sentinel */
+};
+
+static PyTypeObject ElectricityRates_Type = {
+		/* The ob_type field must be initialized in the module init function
+		 * to be portable to Windows without using C++. */
+		PyVarObject_HEAD_INIT(NULL, 0)
+		"HostDeveloper.ElectricityRates",             /*tp_name*/
+		sizeof(VarGroupObject),          /*tp_basicsize*/
+		0,                          /*tp_itemsize*/
+		/* methods */
+		0,    /*tp_dealloc*/
+		0,                          /*tp_print*/
+		(getattrfunc)0,             /*tp_getattr*/
+		0,                          /*tp_setattr*/
+		0,                          /*tp_reserved*/
+		0,                          /*tp_repr*/
+		0,                          /*tp_as_number*/
+		0,                          /*tp_as_sequence*/
+		0,                          /*tp_as_mapping*/
+		0,                          /*tp_hash*/
+		0,                          /*tp_call*/
+		0,                          /*tp_str*/
+		0,                          /*tp_getattro*/
+		0,                          /*tp_setattro*/
+		0,                          /*tp_as_buffer*/
+		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
+		0,                          /*tp_doc*/
+		0,                          /*tp_traverse*/
+		0,                          /*tp_clear*/
+		0,                          /*tp_richcompare*/
+		0,                          /*tp_weaklistofnset*/
+		0,                          /*tp_iter*/
+		0,                          /*tp_iternext*/
+		ElectricityRates_methods,         /*tp_methods*/
+		0,                          /*tp_members*/
+		ElectricityRates_getset,          /*tp_getset*/
 		0,                          /*tp_base*/
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
@@ -9199,12 +9411,6 @@ Outputs_get_flip_target_year(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_gen_purchases(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_HostDeveloper_Outputs_gen_purchases_aget, self->data_ptr);
-}
-
-static PyObject *
 Outputs_get_host_nominal_discount_rate(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_HostDeveloper_Outputs_host_nominal_discount_rate_nget, self->data_ptr);
@@ -10463,7 +10669,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Total revenue [$]"),
  	NULL},
 {"cf_util_escal_rate", (getter)Outputs_get_cf_util_escal_rate,(setter)0,
-	PyDoc_STR("*sequence*: Annual battery salvage value costs [$]"),
+	PyDoc_STR("*sequence*: Utility escalation rate"),
  	NULL},
 {"cost_debt_upfront", (getter)Outputs_get_cost_debt_upfront,(setter)0,
 	PyDoc_STR("*float*: Debt up-front fee [$]"),
@@ -11185,9 +11391,6 @@ static PyGetSetDef Outputs_getset[] = {
 {"flip_target_year", (getter)Outputs_get_flip_target_year,(setter)0,
 	PyDoc_STR("*float*: Target year to meet IRR"),
  	NULL},
-{"gen_purchases", (getter)Outputs_get_gen_purchases,(setter)0,
-	PyDoc_STR("*sequence*: Electricity from grid [kW]"),
- 	NULL},
 {"host_nominal_discount_rate", (getter)Outputs_get_host_nominal_discount_rate,(setter)0,
 	PyDoc_STR("*float*: Host nominal discount rate [%]"),
  	NULL},
@@ -11381,40 +11584,40 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*float*: State ITC income [$]"),
  	NULL},
 {"lcoe_nom", (getter)Outputs_get_lcoe_nom,(setter)0,
-	PyDoc_STR("*float*: Levelized cost (nominal) [cents/kWh]"),
+	PyDoc_STR("*float*: LCOE Levelized cost of energy nominal [cents/kWh]"),
  	NULL},
 {"lcoe_real", (getter)Outputs_get_lcoe_real,(setter)0,
-	PyDoc_STR("*float*: Levelized cost (real) [cents/kWh]"),
+	PyDoc_STR("*float*: LCOE Levelized cost of energy real [cents/kWh]"),
  	NULL},
 {"lcoptc_fed_nom", (getter)Outputs_get_lcoptc_fed_nom,(setter)0,
-	PyDoc_STR("*float*: Levelized federal PTC (nominal) [cents/kWh]"),
+	PyDoc_STR("*float*: Levelized federal PTC nominal [cents/kWh]"),
  	NULL},
 {"lcoptc_fed_real", (getter)Outputs_get_lcoptc_fed_real,(setter)0,
-	PyDoc_STR("*float*: Levelized federal PTC (real) [cents/kWh]"),
+	PyDoc_STR("*float*: Levelized federal PTC real [cents/kWh]"),
  	NULL},
 {"lcoptc_sta_nom", (getter)Outputs_get_lcoptc_sta_nom,(setter)0,
-	PyDoc_STR("*float*: Levelized state PTC (nominal) [cents/kWh]"),
+	PyDoc_STR("*float*: Levelized state PTC nominal [cents/kWh]"),
  	NULL},
 {"lcoptc_sta_real", (getter)Outputs_get_lcoptc_sta_real,(setter)0,
-	PyDoc_STR("*float*: Levelized state PTC (real) [cents/kWh]"),
+	PyDoc_STR("*float*: Levelized state PTC real [cents/kWh]"),
  	NULL},
 {"lcos_nom", (getter)Outputs_get_lcos_nom,(setter)0,
-	PyDoc_STR("*float*: Levelized cost of storage (nominal) [cents/kWh]"),
+	PyDoc_STR("*float*: LCOS Levelized cost of storage nominal [cents/kWh]"),
  	NULL},
 {"lcos_real", (getter)Outputs_get_lcos_real,(setter)0,
-	PyDoc_STR("*float*: Levelized cost of storage (real) [cents/kWh]"),
+	PyDoc_STR("*float*: LCOS Levelized cost of storage real [cents/kWh]"),
  	NULL},
 {"lnte_nom", (getter)Outputs_get_lnte_nom,(setter)0,
-	PyDoc_STR("*float*: Host indifference point nominal levelized value [cents/kWh]"),
+	PyDoc_STR("*float*: Host indifference point levelized nominal [cents/kWh]"),
  	NULL},
 {"lnte_real", (getter)Outputs_get_lnte_real,(setter)0,
-	PyDoc_STR("*float*: Host indifference point real levelized value [cents/kWh]"),
+	PyDoc_STR("*float*: Host indifference point levelized real [cents/kWh]"),
  	NULL},
 {"lppa_nom", (getter)Outputs_get_lppa_nom,(setter)0,
-	PyDoc_STR("*float*: Levelized PPA price (nominal) [cents/kWh]"),
+	PyDoc_STR("*float*: LPPA Levelized PPA price nominal [cents/kWh]"),
  	NULL},
 {"lppa_real", (getter)Outputs_get_lppa_real,(setter)0,
-	PyDoc_STR("*float*: Levelized PPA price (real) [cents/kWh]"),
+	PyDoc_STR("*float*: LPPA Levelized PPA price real [cents/kWh]"),
  	NULL},
 {"min_dscr", (getter)Outputs_get_min_dscr,(setter)0,
 	PyDoc_STR("*float*: Minimum DSCR"),
@@ -11423,7 +11626,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*float*: Nominal discount rate [%]"),
  	NULL},
 {"npv", (getter)Outputs_get_npv,(setter)0,
-	PyDoc_STR("*float*: Host net present value [$]"),
+	PyDoc_STR("*float*: Host NPV Net present value [$]"),
  	NULL},
 {"npv_annual_costs", (getter)Outputs_get_npv_annual_costs,(setter)0,
 	PyDoc_STR("*float*: Present value of annual costs [$]"),
@@ -11438,16 +11641,16 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*float*: Present value of annual stored energy (real) [kWh]"),
  	NULL},
 {"npv_energy_nom", (getter)Outputs_get_npv_energy_nom,(setter)0,
-	PyDoc_STR("*float*: Present value of annual energy (nominal) [kWh]"),
+	PyDoc_STR("*float*: Present value of annual energy nominal [kWh]"),
  	NULL},
 {"npv_energy_real", (getter)Outputs_get_npv_energy_real,(setter)0,
-	PyDoc_STR("*float*: Present value of annual energy (real) [kWh]"),
+	PyDoc_STR("*float*: Present value of annual energy real [kWh]"),
  	NULL},
 {"npv_ppa_revenue", (getter)Outputs_get_npv_ppa_revenue,(setter)0,
 	PyDoc_STR("*float*: Present value of PPA revenue [$]"),
  	NULL},
 {"ppa", (getter)Outputs_get_ppa,(setter)0,
-	PyDoc_STR("*float*: PPA price (Year 1) [cents/kWh]"),
+	PyDoc_STR("*float*: PPA price in Year 1 [cents/kWh]"),
  	NULL},
 {"ppa_escalation", (getter)Outputs_get_ppa_escalation,(setter)0,
 	PyDoc_STR("*float*: PPA price escalation [%/year]"),
@@ -11471,10 +11674,10 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*float*: Present value of non-fuel O&M [$]"),
  	NULL},
 {"project_return_aftertax_irr", (getter)Outputs_get_project_return_aftertax_irr,(setter)0,
-	PyDoc_STR("*float*: Internal rate of return (after-tax) [%]"),
+	PyDoc_STR("*float*: IRR Internal rate of return [%]"),
  	NULL},
 {"project_return_aftertax_npv", (getter)Outputs_get_project_return_aftertax_npv,(setter)0,
-	PyDoc_STR("*float*: Net present value (after-tax) [$]"),
+	PyDoc_STR("*float*: NPV Net present value [$]"),
  	NULL},
 {"prop_tax_assessed_value", (getter)Outputs_get_prop_tax_assessed_value,(setter)0,
 	PyDoc_STR("*float*: Assessed value of property for tax purposes [$]"),
@@ -11495,7 +11698,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*float*: Equity [$]"),
  	NULL},
 {"wacc", (getter)Outputs_get_wacc,(setter)0,
-	PyDoc_STR("*float*: Weighted average cost of capital (WACC) [$]"),
+	PyDoc_STR("*float*: WACC Weighted average cost of capital [$]"),
  	NULL},
 {"year1_nte", (getter)Outputs_get_year1_nte,(setter)0,
 	PyDoc_STR("*float*: Host indifference point in Year 1 [cents/kWh]"),
@@ -11630,6 +11833,10 @@ newHostDeveloperObject(void* data_ptr)
 	PyObject* LCOS_obj = LCOS_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "LCOS", LCOS_obj);
 	Py_DECREF(LCOS_obj);
+
+	PyObject* ElectricityRates_obj = ElectricityRates_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "ElectricityRates", ElectricityRates_obj);
+	Py_DECREF(ElectricityRates_obj);
 
 	PyObject* Outputs_obj = Outputs_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
@@ -11889,8 +12096,7 @@ static PyMethodDef HostDeveloperModule_methods[] = {
 		{"new",             HostDeveloper_new,         METH_VARARGS,
 				PyDoc_STR("new() -> HostDeveloper")},
 		{"default",             HostDeveloper_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> HostDeveloper\n\nUse default attributes\n"
-				"`config` options:\n\n- \"FlatPlatePVHostDeveloper\"\n- \"GenericBatteryHostDeveloper\"\n- \"GenericSystemHostDeveloper\"\n- \"PVBatteryHostDeveloper\"\n- \"PVWattsBatteryHostDeveloper\"\n- \"PVWattsHostDeveloper\"\n- \"StandaloneBatteryHostDeveloper\"")},
+				PyDoc_STR("default(config) -> HostDeveloper\n\nLoad values from SAM default configurations to provide as inputs to the model. \n\n			`config` options:\n\n- \"FlatPlatePVHostDeveloper\"\n- \"GenericBatteryHostDeveloper\"\n- \"GenericSystemHostDeveloper\"\n- \"PVBatteryHostDeveloper\"\n- \"PVWattsBatteryHostDeveloper\"\n- \"PVWattsHostDeveloper\"\n- \"StandaloneBatteryHostDeveloper\"\n\n.. note::\n\n	The default configuration is a collection of default values for the module inputs. Some inputs may not be included in the default configuration and are automatically assigned the value indicated by the variable's 'Required' attribute.")},
 		{"wrap",             HostDeveloper_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> HostDeveloper\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   HostDeveloper_from_existing,        METH_VARARGS,
@@ -12031,6 +12237,13 @@ HostDeveloperModule_exec(PyObject *m)
 				"LCOS",
 				(PyObject*)&LCOS_Type);
 	Py_DECREF(&LCOS_Type);
+
+	/// Add the ElectricityRates type object to HostDeveloper_Type
+	if (PyType_Ready(&ElectricityRates_Type) < 0) { goto fail; }
+	PyDict_SetItemString(HostDeveloper_Type.tp_dict,
+				"ElectricityRates",
+				(PyObject*)&ElectricityRates_Type);
+	Py_DECREF(&ElectricityRates_Type);
 
 	/// Add the Outputs type object to HostDeveloper_Type
 	if (PyType_Ready(&Outputs_Type) < 0) { goto fail; }

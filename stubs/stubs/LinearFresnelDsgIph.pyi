@@ -88,6 +88,7 @@ class LinearFresnelDsgIph(object):
 		b_eps_HCE2 = tuple
 		b_eps_HCE3 = tuple
 		b_eps_HCE4 = tuple
+		deltaT_subcooled = float
 		dirt_mirror = tuple
 		e_startup = float
 		error = tuple
@@ -106,6 +107,7 @@ class LinearFresnelDsgIph(object):
 		sh_eps_HCE4 = tuple
 		theta_dep = float
 		theta_stow = float
+		use_quality_or_subcooled = float
 		x_b_des = float
 
 
@@ -121,7 +123,6 @@ class LinearFresnelDsgIph(object):
 
 
 		T_cold_ref = float
-		T_hot = float
 
 
 	class Heliostat(object):

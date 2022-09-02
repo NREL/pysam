@@ -1,6 +1,6 @@
 #include <Python.h>
 
-#include <SAM_IsccDesignPoint.h>
+#include <SAM_CspDsgLfUi.h>
 #include <SAM_api.h>
 
 #include "PySAM_utils.h"
@@ -13,7 +13,7 @@
 static PyTypeObject Common_Type;
 
 static PyObject *
-Common_new(SAM_IsccDesignPoint data_ptr)
+Common_new(SAM_CspDsgLfUi data_ptr)
 {
 	PyObject* new_obj = Common_Type.tp_alloc(&Common_Type,0);
 
@@ -34,7 +34,7 @@ Common_assign(VarGroupObject *self, PyObject *args)
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "IsccDesignPoint", "Common")){
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "CspDsgLfUi", "Common")){
 		return NULL;
 	}
 
@@ -51,7 +51,7 @@ Common_replace(VarGroupObject *self, PyObject *args)
 	}
 	PyTypeObject* tp = &Common_Type;
 
-	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "IsccDesignPoint", "Common")){
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "CspDsgLfUi", "Common")){
 		return NULL;
 	}
 
@@ -78,110 +78,50 @@ static PyMethodDef Common_methods[] = {
 };
 
 static PyObject *
-Common_get_HTF_code(VarGroupObject *self, void *closure)
+Common_get_P_boil(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_IsccDesignPoint_Common_HTF_code_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_CspDsgLfUi_Common_P_boil_nget, self->data_ptr);
 }
 
 static int
-Common_set_HTF_code(VarGroupObject *self, PyObject *value, void *closure)
+Common_set_P_boil(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_IsccDesignPoint_Common_HTF_code_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_CspDsgLfUi_Common_P_boil_nset, self->data_ptr);
 }
 
 static PyObject *
-Common_get_elev(VarGroupObject *self, void *closure)
+Common_get_deltaT_subcooled(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_IsccDesignPoint_Common_elev_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_CspDsgLfUi_Common_deltaT_subcooled_nget, self->data_ptr);
 }
 
 static int
-Common_set_elev(VarGroupObject *self, PyObject *value, void *closure)
+Common_set_deltaT_subcooled(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_IsccDesignPoint_Common_elev_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_CspDsgLfUi_Common_deltaT_subcooled_nset, self->data_ptr);
 }
 
 static PyObject *
-Common_get_field_fl_props(VarGroupObject *self, void *closure)
+Common_get_use_quality_or_subcooled(VarGroupObject *self, void *closure)
 {
-	return PySAM_matrix_getter(SAM_IsccDesignPoint_Common_field_fl_props_mget, self->data_ptr);
+	return PySAM_double_getter(SAM_CspDsgLfUi_Common_use_quality_or_subcooled_nget, self->data_ptr);
 }
 
 static int
-Common_set_field_fl_props(VarGroupObject *self, PyObject *value, void *closure)
+Common_set_use_quality_or_subcooled(VarGroupObject *self, PyObject *value, void *closure)
 {
-		return PySAM_matrix_setter(value, SAM_IsccDesignPoint_Common_field_fl_props_mset, self->data_ptr);
-}
-
-static PyObject *
-Common_get_ngcc_model(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_IsccDesignPoint_Common_ngcc_model_nget, self->data_ptr);
-}
-
-static int
-Common_set_ngcc_model(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_IsccDesignPoint_Common_ngcc_model_nset, self->data_ptr);
-}
-
-static PyObject *
-Common_get_pinch_point_cold(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_IsccDesignPoint_Common_pinch_point_cold_nget, self->data_ptr);
-}
-
-static int
-Common_set_pinch_point_cold(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_IsccDesignPoint_Common_pinch_point_cold_nset, self->data_ptr);
-}
-
-static PyObject *
-Common_get_pinch_point_hot(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_IsccDesignPoint_Common_pinch_point_hot_nget, self->data_ptr);
-}
-
-static int
-Common_set_pinch_point_hot(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_IsccDesignPoint_Common_pinch_point_hot_nset, self->data_ptr);
-}
-
-static PyObject *
-Common_get_q_pb_design(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_IsccDesignPoint_Common_q_pb_design_nget, self->data_ptr);
-}
-
-static int
-Common_set_q_pb_design(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_IsccDesignPoint_Common_q_pb_design_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_CspDsgLfUi_Common_use_quality_or_subcooled_nset, self->data_ptr);
 }
 
 static PyGetSetDef Common_getset[] = {
-{"HTF_code", (getter)Common_get_HTF_code,(setter)Common_set_HTF_code,
-	PyDoc_STR("*float*: HTF fluid code [-]\n\n*Required*: True"),
+{"P_boil", (getter)Common_get_P_boil,(setter)Common_set_P_boil,
+	PyDoc_STR("*float*: Boiling pressure [bar]\n\n*Required*: True"),
  	NULL},
-{"elev", (getter)Common_get_elev,(setter)Common_set_elev,
-	PyDoc_STR("*float*: Plant elevation [m]\n\n*Required*: True"),
+{"deltaT_subcooled", (getter)Common_get_deltaT_subcooled,(setter)Common_set_deltaT_subcooled,
+	PyDoc_STR("*float*: Subcooled temperature difference from saturation temp [C]\n\n*Required*: True"),
  	NULL},
-{"field_fl_props", (getter)Common_get_field_fl_props,(setter)Common_set_field_fl_props,
-	PyDoc_STR("*sequence[sequence]*: User defined field fluid property data [-]\n\n*Info*: 7 columns (T,Cp,dens,visc,kvisc,cond,h), at least 3 rows\n\n*Required*: True"),
- 	NULL},
-{"ngcc_model", (getter)Common_get_ngcc_model,(setter)Common_set_ngcc_model,
-	PyDoc_STR("*float*: 1: NREL, 2: GE\n\n*Required*: True"),
- 	NULL},
-{"pinch_point_cold", (getter)Common_get_pinch_point_cold,(setter)Common_set_pinch_point_cold,
-	PyDoc_STR("*float*: Cold side pinch point [C]\n\n*Required*: True"),
- 	NULL},
-{"pinch_point_hot", (getter)Common_get_pinch_point_hot,(setter)Common_set_pinch_point_hot,
-	PyDoc_STR("*float*: Hot side pinch point [C]\n\n*Required*: True"),
- 	NULL},
-{"q_pb_design", (getter)Common_get_q_pb_design,(setter)Common_set_q_pb_design,
-	PyDoc_STR("*float*: Design point power block thermal power [MWt]\n\n*Required*: True"),
+{"use_quality_or_subcooled", (getter)Common_get_use_quality_or_subcooled,(setter)Common_set_use_quality_or_subcooled,
+	PyDoc_STR("*float*: 0 = 2 phase outlet, 1 = subcooled\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -190,7 +130,7 @@ static PyTypeObject Common_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"IsccDesignPoint.Common",             /*tp_name*/
+		"CspDsgLfUi.Common",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -240,7 +180,7 @@ static PyTypeObject Common_Type = {
 static PyTypeObject Outputs_Type;
 
 static PyObject *
-Outputs_new(SAM_IsccDesignPoint data_ptr)
+Outputs_new(SAM_CspDsgLfUi data_ptr)
 {
 	PyObject* new_obj = Outputs_Type.tp_alloc(&Outputs_Type,0);
 
@@ -261,7 +201,7 @@ Outputs_assign(VarGroupObject *self, PyObject *args)
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "IsccDesignPoint", "Outputs")){
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "CspDsgLfUi", "Outputs")){
 		return NULL;
 	}
 
@@ -278,7 +218,7 @@ Outputs_replace(VarGroupObject *self, PyObject *args)
 	}
 	PyTypeObject* tp = &Outputs_Type;
 
-	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "IsccDesignPoint", "Outputs")){
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "CspDsgLfUi", "Outputs")){
 		return NULL;
 	}
 
@@ -305,50 +245,23 @@ static PyMethodDef Outputs_methods[] = {
 };
 
 static PyObject *
-Outputs_get_T_htf_cold(VarGroupObject *self, void *closure)
+Outputs_get_T_hot_out_target(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_IsccDesignPoint_Outputs_T_htf_cold_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_CspDsgLfUi_Outputs_T_hot_out_target_nget, self->data_ptr);
 }
 
 static PyObject *
-Outputs_get_T_st_inject(VarGroupObject *self, void *closure)
+Outputs_get_T_saturation(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_IsccDesignPoint_Outputs_T_st_inject_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_W_dot_fossil(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_IsccDesignPoint_Outputs_W_dot_fossil_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_W_dot_solar(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_IsccDesignPoint_Outputs_W_dot_solar_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_q_solar_max(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_IsccDesignPoint_Outputs_q_solar_max_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_CspDsgLfUi_Outputs_T_saturation_nget, self->data_ptr);
 }
 
 static PyGetSetDef Outputs_getset[] = {
-{"T_htf_cold", (getter)Outputs_get_T_htf_cold,(setter)0,
-	PyDoc_STR("*float*: HTF return temp from HRSG [C]"),
+{"T_hot_out_target", (getter)Outputs_get_T_hot_out_target,(setter)0,
+	PyDoc_STR("*float*: Target outlet temperature [C]"),
  	NULL},
-{"T_st_inject", (getter)Outputs_get_T_st_inject,(setter)0,
-	PyDoc_STR("*float*: Steam injection temp into HRSG [C]"),
- 	NULL},
-{"W_dot_fossil", (getter)Outputs_get_W_dot_fossil,(setter)0,
-	PyDoc_STR("*float*: Electric output with no solar contribution [MWe]"),
- 	NULL},
-{"W_dot_solar", (getter)Outputs_get_W_dot_solar,(setter)0,
-	PyDoc_STR("*float*: Solar contribution to hybrid output [MWe]"),
- 	NULL},
-{"q_solar_max", (getter)Outputs_get_q_solar_max,(setter)0,
-	PyDoc_STR("*float*: Max. solar thermal input at design [MWt]"),
+{"T_saturation", (getter)Outputs_get_T_saturation,(setter)0,
+	PyDoc_STR("*float*: Saturation pressure [C]"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -357,7 +270,7 @@ static PyTypeObject Outputs_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"IsccDesignPoint.Outputs",             /*tp_name*/
+		"CspDsgLfUi.Outputs",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -400,16 +313,16 @@ static PyTypeObject Outputs_Type = {
 };
 
 /*
- * IsccDesignPoint
+ * CspDsgLfUi
  */
 
-static PyTypeObject IsccDesignPoint_Type;
+static PyTypeObject CspDsgLfUi_Type;
 
 static CmodObject *
-newIsccDesignPointObject(void* data_ptr)
+newCspDsgLfUiObject(void* data_ptr)
 {
 	CmodObject *self;
-	self = PyObject_New(CmodObject, &IsccDesignPoint_Type);
+	self = PyObject_New(CmodObject, &CspDsgLfUi_Type);
 
 	PySAM_TECH_ATTR()
 
@@ -424,10 +337,10 @@ newIsccDesignPointObject(void* data_ptr)
 	return self;
 }
 
-/* IsccDesignPoint methods */
+/* CspDsgLfUi methods */
 
 static void
-IsccDesignPoint_dealloc(CmodObject *self)
+CspDsgLfUi_dealloc(CmodObject *self)
 {
 	Py_XDECREF(self->x_attr);
 
@@ -441,7 +354,7 @@ IsccDesignPoint_dealloc(CmodObject *self)
 
 
 static PyObject *
-IsccDesignPoint_execute(CmodObject *self, PyObject *args)
+CspDsgLfUi_execute(CmodObject *self, PyObject *args)
 {
 	int verbosity = 0;
 
@@ -449,7 +362,7 @@ IsccDesignPoint_execute(CmodObject *self, PyObject *args)
 		return NULL;
 
 	SAM_error error = new_error();
-	SAM_IsccDesignPoint_execute(self->data_ptr, verbosity, &error);
+	SAM_CspDsgLfUi_execute(self->data_ptr, verbosity, &error);
 	if (PySAM_has_error(error )) return NULL;
 	Py_INCREF(Py_None);
 	return Py_None;
@@ -457,14 +370,14 @@ IsccDesignPoint_execute(CmodObject *self, PyObject *args)
 
 
 static PyObject *
-IsccDesignPoint_assign(CmodObject *self, PyObject *args)
+CspDsgLfUi_assign(CmodObject *self, PyObject *args)
 {
 	PyObject* dict;
 	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_nested_dict((PyObject*)self, self->x_attr, self->data_ptr, dict, "IsccDesignPoint"))
+	if (!PySAM_assign_from_nested_dict((PyObject*)self, self->x_attr, self->data_ptr, dict, "CspDsgLfUi"))
 		return NULL;
 
 	Py_INCREF(Py_None);
@@ -472,14 +385,14 @@ IsccDesignPoint_assign(CmodObject *self, PyObject *args)
 }
 
 static PyObject *
-IsccDesignPoint_replace(CmodObject *self, PyObject *args)
+CspDsgLfUi_replace(CmodObject *self, PyObject *args)
 {
 	PyObject* dict;
 	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
 		return NULL;
 	}
 
-	if (!PySAM_replace_from_nested_dict((PyObject*)self, self->x_attr, self->data_ptr, dict, "IsccDesignPoint"))
+	if (!PySAM_replace_from_nested_dict((PyObject*)self, self->x_attr, self->data_ptr, dict, "CspDsgLfUi"))
 		return NULL;
 
 	Py_INCREF(Py_None);
@@ -487,63 +400,63 @@ IsccDesignPoint_replace(CmodObject *self, PyObject *args)
 }
 
 static PyObject *
-IsccDesignPoint_export(CmodObject *self, PyObject *args)
+CspDsgLfUi_export(CmodObject *self, PyObject *args)
 {
 	return PySAM_export_to_nested_dict((PyObject *) self, self->x_attr);
 }
 
 static PyObject *
-IsccDesignPoint_value(CmodObject *self, PyObject *args)
+CspDsgLfUi_value(CmodObject *self, PyObject *args)
 {
 	return Cmod_value(self, args);
 }
 
 static PyObject *
-IsccDesignPoint_unassign(CmodObject *self, PyObject *args)
+CspDsgLfUi_unassign(CmodObject *self, PyObject *args)
 {
 	return Cmod_unassign(self, args);
 }
 
-static PyMethodDef IsccDesignPoint_methods[] = {
-		{"execute",           (PyCFunction)IsccDesignPoint_execute,  METH_VARARGS,
+static PyMethodDef CspDsgLfUi_methods[] = {
+		{"execute",           (PyCFunction)CspDsgLfUi_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
-		{"assign",            (PyCFunction)IsccDesignPoint_assign,  METH_VARARGS,
+		{"assign",            (PyCFunction)CspDsgLfUi_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Common': { var: val, ...}, ...}``")},
-		{"replace",            (PyCFunction)IsccDesignPoint_replace,  METH_VARARGS,
+		{"replace",            (PyCFunction)CspDsgLfUi_replace,  METH_VARARGS,
 				PyDoc_STR("replace(dict) -> None\n Replace attributes from nested dictionary, except for Outputs. Unassigns all values in each Group then assigns from the input dict.\n\n``nested_dict = { 'Common': { var: val, ...}, ...}``")},
-		{"export",            (PyCFunction)IsccDesignPoint_export,  METH_VARARGS,
+		{"export",            (PyCFunction)CspDsgLfUi_export,  METH_VARARGS,
 				PyDoc_STR("export() -> dict\n Export attributes into nested dictionary")},
-		{"value",             (PyCFunction)IsccDesignPoint_value, METH_VARARGS,
+		{"value",             (PyCFunction)CspDsgLfUi_value, METH_VARARGS,
 				PyDoc_STR("value(name, optional value) -> Union[None, float, dict, sequence, str]\n Get or set by name a value in any of the variable groups.")},
-		{"unassign",          (PyCFunction)IsccDesignPoint_unassign, METH_VARARGS,
+		{"unassign",          (PyCFunction)CspDsgLfUi_unassign, METH_VARARGS,
 				PyDoc_STR("unassign(name) -> None\n Unassign a value in any of the variable groups.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 static PyObject *
-IsccDesignPoint_getattro(CmodObject *self, PyObject *name)
+CspDsgLfUi_getattro(CmodObject *self, PyObject *name)
 {
 	return PySAM_get_attr((PyObject*) self, (PyObject*) self->x_attr, name);
 }
 
 static int
-IsccDesignPoint_setattr(CmodObject *self, const char *name, PyObject *v)
+CspDsgLfUi_setattr(CmodObject *self, const char *name, PyObject *v)
 {
 	return PySAM_set_attr((PyObject*)self, (PyObject*)self->x_attr, name, v);
 }
 
-static PyTypeObject IsccDesignPoint_Type = {
+static PyTypeObject CspDsgLfUi_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"IsccDesignPoint",            /*tp_name*/
+		"CspDsgLfUi",            /*tp_name*/
 		sizeof(CmodObject),/*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
-		(destructor)IsccDesignPoint_dealloc,    /*tp_dealloc*/
+		(destructor)CspDsgLfUi_dealloc,    /*tp_dealloc*/
 		0,                          /*tp_print*/
 		(getattrfunc)0,             /*tp_getattr*/
-		(setattrfunc)IsccDesignPoint_setattr,   /*tp_setattr*/
+		(setattrfunc)CspDsgLfUi_setattr,   /*tp_setattr*/
 		0,                          /*tp_reserved*/
 		0,                          /*tp_repr*/
 		0,                          /*tp_as_number*/
@@ -552,7 +465,7 @@ static PyTypeObject IsccDesignPoint_Type = {
 		0,                          /*tp_hash*/
 		0,                          /*tp_call*/
 		0,                          /*tp_str*/
-		(getattrofunc)IsccDesignPoint_getattro, /*tp_getattro*/
+		(getattrofunc)CspDsgLfUi_getattro, /*tp_getattro*/
 		0,                          /*tp_setattro*/
 		0,                          /*tp_as_buffer*/
 		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
@@ -563,7 +476,7 @@ static PyTypeObject IsccDesignPoint_Type = {
 		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
-		IsccDesignPoint_methods,      /*tp_methods*/
+		CspDsgLfUi_methods,      /*tp_methods*/
 		0,                          /*tp_members*/
 		0,       /*tp_getset*/
 		0,                          /*tp_base*/
@@ -581,13 +494,13 @@ static PyTypeObject IsccDesignPoint_Type = {
 /* --------------------------------------------------------------------- */
 
 
-/* Function of no arguments returning new IsccDesignPoint object */
+/* Function of no arguments returning new CspDsgLfUi object */
 
 static PyObject *
-IsccDesignPoint_new(PyObject *self, PyObject *args)
+CspDsgLfUi_new(PyObject *self, PyObject *args)
 {
 	CmodObject *rv;
-	rv = newIsccDesignPointObject(0);
+	rv = newCspDsgLfUiObject(0);
 	if (rv == NULL)
 		return NULL;
 
@@ -596,7 +509,7 @@ IsccDesignPoint_new(PyObject *self, PyObject *args)
 }
 
 static PyObject *
-IsccDesignPoint_wrap(PyObject *self, PyObject *args)
+CspDsgLfUi_wrap(PyObject *self, PyObject *args)
 {
 	CmodObject *rv;
 	long long int ptr = 0;  // 64 bit arch
@@ -604,7 +517,7 @@ IsccDesignPoint_wrap(PyObject *self, PyObject *args)
 		PyErr_BadArgument();
 		return NULL;
 	}
-	rv = newIsccDesignPointObject((void*)ptr);
+	rv = newCspDsgLfUiObject((void*)ptr);
 	if (rv == NULL)
 		return NULL;
 
@@ -613,7 +526,7 @@ IsccDesignPoint_wrap(PyObject *self, PyObject *args)
 }
 
 static PyObject *
-IsccDesignPoint_default(PyObject *self, PyObject *args)
+CspDsgLfUi_default(PyObject *self, PyObject *args)
 {
 	CmodObject *rv;
 	char* def = 0;
@@ -621,20 +534,20 @@ IsccDesignPoint_default(PyObject *self, PyObject *args)
 		PyErr_BadArgument();
 		return NULL;
 	}
-	rv = newIsccDesignPointObject(0);
+	rv = newCspDsgLfUiObject(0);
 	if (rv == NULL)
 		return NULL;
 
 	rv->data_owner_ptr = NULL;
-	if (PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "IsccDesignPoint", def) < 0) {
-		IsccDesignPoint_dealloc(rv);
+	if (PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "CspDsgLfUi", def) < 0) {
+		CspDsgLfUi_dealloc(rv);
 		return NULL;
 	}
 	return (PyObject *)rv;
 }
 
 static PyObject *
-IsccDesignPoint_from_existing(PyObject *self, PyObject *args)
+CspDsgLfUi_from_existing(PyObject *self, PyObject *args)
 {
 	CmodObject *rv;
 	PyObject * module = 0;
@@ -654,13 +567,13 @@ IsccDesignPoint_from_existing(PyObject *self, PyObject *args)
 	if (data_size < 0)
 		goto fail;
 
-	rv = newIsccDesignPointObject((void*)ptr);
+	rv = newCspDsgLfUiObject((void*)ptr);
 	if (rv == NULL)
 		goto fail;
 	rv->data_owner_ptr = module;
 	if (!def)
 		return (PyObject *)rv;
-	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "IsccDesignPoint", def);
+	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "CspDsgLfUi", def);
 	return (PyObject *)rv;
 
 	fail:
@@ -671,53 +584,52 @@ IsccDesignPoint_from_existing(PyObject *self, PyObject *args)
 
 /* List of functions defined in the module */
 
-static PyMethodDef IsccDesignPointModule_methods[] = {
-		{"new",             IsccDesignPoint_new,         METH_VARARGS,
-				PyDoc_STR("new() -> IsccDesignPoint")},
-		{"default",             IsccDesignPoint_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> IsccDesignPoint\n\nUse default attributes\n"
-				"None")},
-		{"wrap",             IsccDesignPoint_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> IsccDesignPoint\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
-		{"from_existing",   IsccDesignPoint_from_existing,        METH_VARARGS,
-				PyDoc_STR("from_existing(data, optional config) -> IsccDesignPoint\n\nShare underlying data with an existing PySAM class. If config provided, default attributes are loaded otherwise.")},
+static PyMethodDef CspDsgLfUiModule_methods[] = {
+		{"new",             CspDsgLfUi_new,         METH_VARARGS,
+				PyDoc_STR("new() -> CspDsgLfUi")},
+		{"default",             CspDsgLfUi_default,         METH_VARARGS,
+				PyDoc_STR("default(config) -> CspDsgLfUi\n\nLoad values from SAM default configurations to provide as inputs to the model. \n\n			None\n\n.. note::\n\n	The default configuration is a collection of default values for the module inputs. Some inputs may not be included in the default configuration and are automatically assigned the value indicated by the variable's 'Required' attribute.")},
+		{"wrap",             CspDsgLfUi_wrap,         METH_VARARGS,
+				PyDoc_STR("wrap(ssc_data_t) -> CspDsgLfUi\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
+		{"from_existing",   CspDsgLfUi_from_existing,        METH_VARARGS,
+				PyDoc_STR("from_existing(data, optional config) -> CspDsgLfUi\n\nShare underlying data with an existing PySAM class. If config provided, default attributes are loaded otherwise.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 PyDoc_STRVAR(module_doc,
-			 "IsccDesignPoint");
+			 "CspDsgLfUi");
 
 
 static int
-IsccDesignPointModule_exec(PyObject *m)
+CspDsgLfUiModule_exec(PyObject *m)
 {
 	/* Finalize the type object including setting type of the new type
 	 * object; doing it here is required for portability, too. */
 
 	if (PySAM_load_lib(m) < 0) goto fail;
 
-	IsccDesignPoint_Type.tp_dict = PyDict_New();
-	if (!IsccDesignPoint_Type.tp_dict) { goto fail; }
+	CspDsgLfUi_Type.tp_dict = PyDict_New();
+	if (!CspDsgLfUi_Type.tp_dict) { goto fail; }
 
-	/// Add the Common type object to IsccDesignPoint_Type
+	/// Add the Common type object to CspDsgLfUi_Type
 	if (PyType_Ready(&Common_Type) < 0) { goto fail; }
-	PyDict_SetItemString(IsccDesignPoint_Type.tp_dict,
+	PyDict_SetItemString(CspDsgLfUi_Type.tp_dict,
 				"Common",
 				(PyObject*)&Common_Type);
 	Py_DECREF(&Common_Type);
 
-	/// Add the Outputs type object to IsccDesignPoint_Type
+	/// Add the Outputs type object to CspDsgLfUi_Type
 	if (PyType_Ready(&Outputs_Type) < 0) { goto fail; }
-	PyDict_SetItemString(IsccDesignPoint_Type.tp_dict,
+	PyDict_SetItemString(CspDsgLfUi_Type.tp_dict,
 				"Outputs",
 				(PyObject*)&Outputs_Type);
 	Py_DECREF(&Outputs_Type);
 
-	/// Add the IsccDesignPoint type object to the module
-	if (PyType_Ready(&IsccDesignPoint_Type) < 0) { goto fail; }
+	/// Add the CspDsgLfUi type object to the module
+	if (PyType_Ready(&CspDsgLfUi_Type) < 0) { goto fail; }
 	PyModule_AddObject(m,
-				"IsccDesignPoint",
-				(PyObject*)&IsccDesignPoint_Type);
+				"CspDsgLfUi",
+				(PyObject*)&CspDsgLfUi_Type);
 
 	return 0;
 	fail:
@@ -725,18 +637,18 @@ IsccDesignPointModule_exec(PyObject *m)
 	return -1;
 }
 
-static struct PyModuleDef_Slot IsccDesignPointModule_slots[] = {
-		{Py_mod_exec, IsccDesignPointModule_exec},
+static struct PyModuleDef_Slot CspDsgLfUiModule_slots[] = {
+		{Py_mod_exec, CspDsgLfUiModule_exec},
 		{0, NULL},
 };
 
-static struct PyModuleDef IsccDesignPointModule = {
+static struct PyModuleDef CspDsgLfUiModule = {
 		PyModuleDef_HEAD_INIT,
-		"IsccDesignPoint",
+		"CspDsgLfUi",
 		module_doc,
 		0,
-		IsccDesignPointModule_methods,
-		IsccDesignPointModule_slots,
+		CspDsgLfUiModule_methods,
+		CspDsgLfUiModule_slots,
 		NULL,
 		NULL,
 		NULL
@@ -745,7 +657,7 @@ static struct PyModuleDef IsccDesignPointModule = {
 /* Export function for the module */
 
 PyMODINIT_FUNC
-PyInit_IsccDesignPoint(void)
+PyInit_CspDsgLfUi(void)
 {
-	return PyModuleDef_Init(&IsccDesignPointModule);
+	return PyModuleDef_Init(&CspDsgLfUiModule);
 }

@@ -1,0 +1,1 @@
+"{\n  \"error\": {\n    \"code\": \"API_KEY_INVALID\",\n    \"message\": \"An invalid api_key was supplied. Get one at https://api.openei.org:443\"\n  }\n}"
