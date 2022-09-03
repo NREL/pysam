@@ -19,100 +19,100 @@ jobs:
       - name: Install cibuildwheel
         run: python -m pip install cibuildwheel==2.9.0
 
-    - name: Set relative paths
-      run: | 
-        LKDIR=$GITHUB_WORKSPACE/lk
-        echo "LKDIR=$LKDIR" >> $GITHUB_ENV
-        WEXDIR=$GITHUB_WORKSPACE/wex
-        echo "WEXDIR=$WEXDIR" >> $GITHUB_ENV
-        SSCDIR=$GITHUB_WORKSPACE/ssc
-        echo "SSCDIR=$SSCDIR" >> $GITHUB_ENV
-        SAMNTDIR=$GITHUB_WORKSPACE/sam
-        echo "SAMNTDIR=$SAMNTDIR" >> $GITHUB_ENV
+      - name: Set relative paths
+        run: | 
+          LKDIR=$GITHUB_WORKSPACE/lk
+          echo "LKDIR=$LKDIR" >> $GITHUB_ENV
+          WEXDIR=$GITHUB_WORKSPACE/wex
+          echo "WEXDIR=$WEXDIR" >> $GITHUB_ENV
+          SSCDIR=$GITHUB_WORKSPACE/ssc
+          echo "SSCDIR=$SSCDIR" >> $GITHUB_ENV
+          SAMNTDIR=$GITHUB_WORKSPACE/sam
+          echo "SAMNTDIR=$SAMNTDIR" >> $GITHUB_ENV
+      
+      - name: Get branch name
+        run:  |
+            # Short name for current branch. base ref is set on push builds, head ref is for pull request builds
+            if [ -z ${GITHUB_HEAD_REF+x} ]; then GIT_BRANCH=${GITHUB_BASE_REF:-${GITHUB_REF#refs/heads/}}; else GIT_BRANCH=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}; fi
+            echo "GIT_BRANCH=$GIT_BRANCH" >> $GITHUB_ENV
+
+      - name: Determine branches for other repos
+        shell: bash {0}
+        run: |
+          echo "GITHUB_REPOSITORY_OWNER=${GITHUB_REPOSITORY_OWNER}" >> $GITHUB_ENV
+          git ls-remote --heads --exit-code https://github.com/${GITHUB_REPOSITORY_OWNER}/lk.git $GIT_BRANCH
+          if [[ $? != "0" ]]; then echo "LK_BRANCH=develop" >> $GITHUB_ENV; else echo "LK_BRANCH=$GIT_BRANCH" >> $GITHUB_ENV; fi
+          git ls-remote --heads --exit-code https://github.com/${GITHUB_REPOSITORY_OWNER}/wex.git $GIT_BRANCH
+          if [[ $? != "0" ]]; then echo "WEX_BRANCH=develop" >> $GITHUB_ENV; else echo "WEX_BRANCH=$GIT_BRANCH" >> $GITHUB_ENV; fi
+          git ls-remote --heads --exit-code https://github.com/${GITHUB_REPOSITORY_OWNER}/ssc.git $GIT_BRANCH
+          if [[ $? != "0" ]]; then echo "SSC_BRANCH=develop" >> $GITHUB_ENV; else echo "SSC_BRANCH=$GIT_BRANCH" >> $GITHUB_ENV; fi
+      
+      - name: Install wxWidgets
+        run: |
+             wget -q https://github.com/wxWidgets/wxWidgets/releases/download/v3.2.0/wxWidgets-3.2.0.tar.bz2
+             tar jxf wxWidgets-3.2.0.tar.bz2
+             cd wxWidgets-3.2.0
+             ./configure --prefix=$HOME/local/wx-3.2.0/Release --enable-stl=yes --enable-shared=no --disable-debug_flag --with-cocoa --enable-universal_binary=x86_64,arm64 --enable-unicode --enable-webview --disable-mediactrl --with-cxx=11 --with-macosx-version-min=10.15  --with-libjpeg=builtin --with-libpng=builtin --with-regex=builtin --with-libtiff=builtin --with-zlib=builtin --with-expat=builtin
+             make clean
+             make -j4
+             make install
+             ln -s $HOME/local/wx-3.2.0/Release/bin/wx-config /usr/local/bin/wx-config-3
+             wx-config-3 --cflags
+
+      - name: Checkout lk
+        uses: actions/checkout@v2
+        with:
+          path: lk
+          repository: ${{ env.GITHUB_REPOSITORY_OWNER }}/lk
+          ref: ${{ env.LK_BRANCH }}
+
+      - name: Checkout wex
+        uses: actions/checkout@v2
+        with:
+          path: wex
+          repository: ${{ env.GITHUB_REPOSITORY_OWNER }}/wex
+          ref: ${{ env.WEX_BRANCH }}
+
+      - name: Checkout ssc
+        uses: actions/checkout@v2
+        with:
+          path: ssc
+          repository: ${{ env.GITHUB_REPOSITORY_OWNER }}/ssc
+          ref: ${{ env.SSC_BRANCH }}
+
+      - name: Checkout SAM
+        uses: actions/checkout@v2
+        with:
+          path: sam
+
+      - name: Build lk
+        run: |
+            cd ${LKDIR}
+            mkdir ${LKDIR}/build
+            cd ${LKDIR}/build
+            cmake .. -DCMAKE_BUILD_TYPE=Release
+            cmake --build . -j 4 --target lk
+
+      - name: Build wex
+        run: |
+            mkdir ${WEXDIR}/build
+            cd ${WEXDIR}/build
+            cmake .. -DCMAKE_BUILD_TYPE=Release
+            cmake --build . -j 4 --target wex
+
+      - name: Build ssc
+        run: |
+            mkdir ${SSCDIR}/build
+            cd ${SSCDIR}/build
+            cmake .. -DCMAKE_BUILD_TYPE=Release -DSAM_SKIP_TESTS=1 -DSAM_SKIP_TOOLS=1 -DSAMAPI_EXPORT=0
+            cmake --build . -j 4 --target ssc
+
+      - name: Build sam
+        run: |
+            mkdir ${SAMNTDIR}/build
+            cd ${SAMNTDIR}/build
+            cmake .. -DCMAKE_BUILD_TYPE=Release -DSAMAPI_EXPORT=0 && make -j 4
     
-    - name: Get branch name
-      run:  |
-          # Short name for current branch. base ref is set on push builds, head ref is for pull request builds
-          if [ -z ${GITHUB_HEAD_REF+x} ]; then GIT_BRANCH=${GITHUB_BASE_REF:-${GITHUB_REF#refs/heads/}}; else GIT_BRANCH=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}; fi
-          echo "GIT_BRANCH=$GIT_BRANCH" >> $GITHUB_ENV
-
-    - name: Determine branches for other repos
-      shell: bash {0}
-      run: |
-        echo "GITHUB_REPOSITORY_OWNER=${GITHUB_REPOSITORY_OWNER}" >> $GITHUB_ENV
-        git ls-remote --heads --exit-code https://github.com/${GITHUB_REPOSITORY_OWNER}/lk.git $GIT_BRANCH
-        if [[ $? != "0" ]]; then echo "LK_BRANCH=develop" >> $GITHUB_ENV; else echo "LK_BRANCH=$GIT_BRANCH" >> $GITHUB_ENV; fi
-        git ls-remote --heads --exit-code https://github.com/${GITHUB_REPOSITORY_OWNER}/wex.git $GIT_BRANCH
-        if [[ $? != "0" ]]; then echo "WEX_BRANCH=develop" >> $GITHUB_ENV; else echo "WEX_BRANCH=$GIT_BRANCH" >> $GITHUB_ENV; fi
-        git ls-remote --heads --exit-code https://github.com/${GITHUB_REPOSITORY_OWNER}/ssc.git $GIT_BRANCH
-        if [[ $? != "0" ]]; then echo "SSC_BRANCH=develop" >> $GITHUB_ENV; else echo "SSC_BRANCH=$GIT_BRANCH" >> $GITHUB_ENV; fi
-    
-    - name: Install wxWidgets
-      run: |
-           wget -q https://github.com/wxWidgets/wxWidgets/releases/download/v3.2.0/wxWidgets-3.2.0.tar.bz2
-           tar jxf wxWidgets-3.2.0.tar.bz2
-           cd wxWidgets-3.2.0
-           ./configure --prefix=$HOME/local/wx-3.2.0/Release --enable-stl=yes --enable-shared=no --disable-debug_flag --with-cocoa --enable-universal_binary=x86_64,arm64 --enable-unicode --enable-webview --disable-mediactrl --with-cxx=11 --with-macosx-version-min=10.15  --with-libjpeg=builtin --with-libpng=builtin --with-regex=builtin --with-libtiff=builtin --with-zlib=builtin --with-expat=builtin
-           make clean
-           make -j4
-           make install
-           ln -s $HOME/local/wx-3.2.0/Release/bin/wx-config /usr/local/bin/wx-config-3
-           wx-config-3 --cflags
-
-    - name: Checkout lk
-      uses: actions/checkout@v2
-      with:
-        path: lk
-        repository: ${{ env.GITHUB_REPOSITORY_OWNER }}/lk
-        ref: ${{ env.LK_BRANCH }}
-
-    - name: Checkout wex
-      uses: actions/checkout@v2
-      with:
-        path: wex
-        repository: ${{ env.GITHUB_REPOSITORY_OWNER }}/wex
-        ref: ${{ env.WEX_BRANCH }}
-
-    - name: Checkout ssc
-      uses: actions/checkout@v2
-      with:
-        path: ssc
-        repository: ${{ env.GITHUB_REPOSITORY_OWNER }}/ssc
-        ref: ${{ env.SSC_BRANCH }}
-
-    - name: Checkout SAM
-      uses: actions/checkout@v2
-      with:
-        path: sam
-
-    - name: Build lk
-      run: |
-          cd ${LKDIR}
-          mkdir ${LKDIR}/build
-          cd ${LKDIR}/build
-          cmake .. -DCMAKE_BUILD_TYPE=Release
-          cmake --build . -j 4 --target lk
-
-    - name: Build wex
-      run: |
-          mkdir ${WEXDIR}/build
-          cd ${WEXDIR}/build
-          cmake .. -DCMAKE_BUILD_TYPE=Release
-          cmake --build . -j 4 --target wex
-
-    - name: Build ssc
-      run: |
-          mkdir ${SSCDIR}/build
-          cd ${SSCDIR}/build
-          cmake .. -DCMAKE_BUILD_TYPE=Release -DSAM_SKIP_TESTS=1 -DSAM_SKIP_TOOLS=1 -DSAMAPI_EXPORT=0
-          cmake --build . -j 4 --target ssc
-
-    - name: Build sam
-      run: |
-          mkdir ${SAMNTDIR}/build
-          cd ${SAMNTDIR}/build
-          cmake .. -DCMAKE_BUILD_TYPE=Release -DSAMAPI_EXPORT=0 && make -j 4
-  
 
 
       - name: Build wheels
