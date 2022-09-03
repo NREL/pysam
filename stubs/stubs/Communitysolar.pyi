@@ -375,6 +375,7 @@ class Communitysolar(object):
 
 
 		en_electricity_rates = float
+		rate_escalation = tuple
 
 
 	class SystemOutput(object):
@@ -997,7 +998,6 @@ class Communitysolar(object):
 		flip_actual_year = float
 		flip_target_irr = float
 		flip_target_year = float
-		gen_purchases = tuple
 		ibi_fedtax_total = float
 		ibi_statax_total = float
 		ibi_total = float
@@ -1091,7 +1091,6 @@ class Communitysolar(object):
 		npv_sta_pbi_income = float
 		npv_thermal_value = float
 		npv_uti_pbi_income = float
-		ppa_price = float
 		present_value_fuel = float
 		present_value_insandproptax = float
 		present_value_oandm = float

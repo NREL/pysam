@@ -923,9 +923,21 @@ Outputs_get_ac_annual(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_ac_annual_pre_adjust(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvwattsv8_Outputs_ac_annual_pre_adjust_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_ac_monthly(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Pvwattsv8_Outputs_ac_monthly_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_ac_pre_adjust(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvwattsv8_Outputs_ac_pre_adjust_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -1163,8 +1175,14 @@ static PyGetSetDef Outputs_getset[] = {
 {"ac_annual", (getter)Outputs_get_ac_annual,(setter)0,
 	PyDoc_STR("*float*: Annual AC output [kWh]"),
  	NULL},
+{"ac_annual_pre_adjust", (getter)Outputs_get_ac_annual_pre_adjust,(setter)0,
+	PyDoc_STR("*float*: Annual AC output before system availability [kWh]"),
+ 	NULL},
 {"ac_monthly", (getter)Outputs_get_ac_monthly,(setter)0,
 	PyDoc_STR("*sequence*: AC output [kWh]"),
+ 	NULL},
+{"ac_pre_adjust", (getter)Outputs_get_ac_pre_adjust,(setter)0,
+	PyDoc_STR("*sequence*: AC inverter output power before system availability [W]"),
  	NULL},
 {"annual_energy", (getter)Outputs_get_annual_energy,(setter)0,
 	PyDoc_STR("*float*: Annual energy [kWh]"),
@@ -1176,10 +1194,10 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Angle of incidence [deg]"),
  	NULL},
 {"capacity_factor", (getter)Outputs_get_capacity_factor,(setter)0,
-	PyDoc_STR("*float*: Capacity factor based on DC system capacity [%]"),
+	PyDoc_STR("*float*: Capacity factor based on nameplate DC capacity [%]"),
  	NULL},
 {"capacity_factor_ac", (getter)Outputs_get_capacity_factor_ac,(setter)0,
-	PyDoc_STR("*float*: Capacity factor based on AC system capacity [%]"),
+	PyDoc_STR("*float*: Capacity factor based on total AC capacity [%]"),
  	NULL},
 {"city", (getter)Outputs_get_city,(setter)0,
 	PyDoc_STR("*str*: City"),
@@ -1630,8 +1648,7 @@ static PyMethodDef Pvwattsv8Module_methods[] = {
 		{"new",             Pvwattsv8_new,         METH_VARARGS,
 				PyDoc_STR("new() -> Pvwattsv8")},
 		{"default",             Pvwattsv8_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Pvwattsv8\n\nUse default attributes\n"
-				"`config` options:\n\n- \"FuelCellCommercial\"\n- \"FuelCellSingleOwner\"\n- \"PVWattsBatteryCommercial\"\n- \"PVWattsBatteryHostDeveloper\"\n- \"PVWattsBatteryResidential\"\n- \"PVWattsBatteryThirdParty\"\n- \"PVWattsAllEquityPartnershipFlip\"\n- \"PVWattsCommercial\"\n- \"PVWattsCommunitySolar\"\n- \"PVWattsHostDeveloper\"\n- \"PVWattsLCOECalculator\"\n- \"PVWattsLeveragedPartnershipFlip\"\n- \"PVWattsMerchantPlant\"\n- \"PVWattsNone\"\n- \"PVWattsResidential\"\n- \"PVWattsSaleLeaseback\"\n- \"PVWattsSingleOwner\"\n- \"PVWattsThirdParty\"")},
+				PyDoc_STR("default(config) -> Pvwattsv8\n\nLoad values from SAM default configurations to provide as inputs to the model. \n\n			`config` options:\n\n- \"FuelCellCommercial\"\n- \"FuelCellSingleOwner\"\n- \"PVWattsBatteryCommercial\"\n- \"PVWattsBatteryHostDeveloper\"\n- \"PVWattsBatteryResidential\"\n- \"PVWattsBatteryThirdParty\"\n- \"PVWattsAllEquityPartnershipFlip\"\n- \"PVWattsCommercial\"\n- \"PVWattsCommunitySolar\"\n- \"PVWattsHostDeveloper\"\n- \"PVWattsLCOECalculator\"\n- \"PVWattsLeveragedPartnershipFlip\"\n- \"PVWattsMerchantPlant\"\n- \"PVWattsNone\"\n- \"PVWattsResidential\"\n- \"PVWattsSaleLeaseback\"\n- \"PVWattsSingleOwner\"\n- \"PVWattsThirdParty\"\n\n.. note::\n\n	The default configuration is a collection of default values for the module inputs. Some inputs may not be included in the default configuration and are automatically assigned the value indicated by the variable's 'Required' attribute.")},
 		{"wrap",             Pvwattsv8_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Pvwattsv8\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   Pvwattsv8_from_existing,        METH_VARARGS,

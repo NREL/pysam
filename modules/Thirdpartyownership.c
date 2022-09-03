@@ -1353,7 +1353,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*float*: Host indifference point nominal levelized value [cents/kWh]"),
  	NULL},
 {"npv", (getter)Outputs_get_npv,(setter)0,
-	PyDoc_STR("*float*: Net present value [$]"),
+	PyDoc_STR("*float*: NPV Net present value [$]"),
  	NULL},
 {"year1_nte", (getter)Outputs_get_year1_nte,(setter)0,
 	PyDoc_STR("*float*: Host indifference point in Year 1 [cents/kWh]"),
@@ -1707,8 +1707,7 @@ static PyMethodDef ThirdpartyownershipModule_methods[] = {
 		{"new",             Thirdpartyownership_new,         METH_VARARGS,
 				PyDoc_STR("new() -> Thirdpartyownership")},
 		{"default",             Thirdpartyownership_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Thirdpartyownership\n\nUse default attributes\n"
-				"`config` options:\n\n- \"FlatPlatePVThirdParty\"\n- \"GenericBatteryThirdParty\"\n- \"GenericSystemThirdParty\"\n- \"PVBatteryThirdParty\"\n- \"PVWattsBatteryThirdParty\"\n- \"PVWattsThirdParty\"\n- \"StandaloneBatteryThirdParty\"")},
+				PyDoc_STR("default(config) -> Thirdpartyownership\n\nLoad values from SAM default configurations to provide as inputs to the model. \n\n			`config` options:\n\n- \"FlatPlatePVThirdParty\"\n- \"GenericBatteryThirdParty\"\n- \"GenericSystemThirdParty\"\n- \"PVBatteryThirdParty\"\n- \"PVWattsBatteryThirdParty\"\n- \"PVWattsThirdParty\"\n- \"StandaloneBatteryThirdParty\"\n\n.. note::\n\n	The default configuration is a collection of default values for the module inputs. Some inputs may not be included in the default configuration and are automatically assigned the value indicated by the variable's 'Required' attribute.")},
 		{"wrap",             Thirdpartyownership_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Thirdpartyownership\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   Thirdpartyownership_from_existing,        METH_VARARGS,

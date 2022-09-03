@@ -39,10 +39,10 @@ FinancialModel Group
 .. autoclass:: PySAM.TcsmoltenSalt.TcsmoltenSalt.FinancialModel
 	:members:
 
-TimeOfDeliveryFactors Group
+SystemDesign Group
 ======================================================
 
-.. autoclass:: PySAM.TcsmoltenSalt.TcsmoltenSalt.TimeOfDeliveryFactors
+.. autoclass:: PySAM.TcsmoltenSalt.TcsmoltenSalt.SystemDesign
 	:members:
 
 HeliostatField Group
@@ -51,34 +51,22 @@ HeliostatField Group
 .. autoclass:: PySAM.TcsmoltenSalt.TcsmoltenSalt.HeliostatField
 	:members:
 
-SystemDesign Group
-======================================================
-
-.. autoclass:: PySAM.TcsmoltenSalt.TcsmoltenSalt.SystemDesign
-	:members:
-
 TowerAndReceiver Group
 ======================================================
 
 .. autoclass:: PySAM.TcsmoltenSalt.TcsmoltenSalt.TowerAndReceiver
 	:members:
 
-SystemCosts Group
-======================================================
-
-.. autoclass:: PySAM.TcsmoltenSalt.TcsmoltenSalt.SystemCosts
-	:members:
-
-FinancialParameters Group
-======================================================
-
-.. autoclass:: PySAM.TcsmoltenSalt.TcsmoltenSalt.FinancialParameters
-	:members:
-
 ParallelHeater Group
 ======================================================
 
 .. autoclass:: PySAM.TcsmoltenSalt.TcsmoltenSalt.ParallelHeater
+	:members:
+
+SystemCosts Group
+======================================================
+
+.. autoclass:: PySAM.TcsmoltenSalt.TcsmoltenSalt.SystemCosts
 	:members:
 
 ThermalStorage Group
@@ -111,6 +99,12 @@ UserDefinedPowerCycle Group
 .. autoclass:: PySAM.TcsmoltenSalt.TcsmoltenSalt.UserDefinedPowerCycle
 	:members:
 
+TimeOfDeliveryFactors Group
+======================================================
+
+.. autoclass:: PySAM.TcsmoltenSalt.TcsmoltenSalt.TimeOfDeliveryFactors
+	:members:
+
 FinancialSolutionMode Group
 ======================================================
 
@@ -127,6 +121,12 @@ Revenue Group
 ======================================================
 
 .. autoclass:: PySAM.TcsmoltenSalt.TcsmoltenSalt.Revenue
+	:members:
+
+FinancialParameters Group
+======================================================
+
+.. autoclass:: PySAM.TcsmoltenSalt.TcsmoltenSalt.FinancialParameters
 	:members:
 
 AdjustmentFactors Group

@@ -864,8 +864,7 @@ static PyMethodDef Sco2AirCoolerModule_methods[] = {
 		{"new",             Sco2AirCooler_new,         METH_VARARGS,
 				PyDoc_STR("new() -> Sco2AirCooler")},
 		{"default",             Sco2AirCooler_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Sco2AirCooler\n\nUse default attributes\n"
-				"None")},
+				PyDoc_STR("default(config) -> Sco2AirCooler\n\nLoad values from SAM default configurations to provide as inputs to the model. \n\n			None\n\n.. note::\n\n	The default configuration is a collection of default values for the module inputs. Some inputs may not be included in the default configuration and are automatically assigned the value indicated by the variable's 'Required' attribute.")},
 		{"wrap",             Sco2AirCooler_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Sco2AirCooler\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   Sco2AirCooler_from_existing,        METH_VARARGS,

@@ -4884,7 +4884,7 @@ static PyGetSetDef BatterySystem_getset[] = {
 	PyDoc_STR("*sequence*: Battery bank replacements per year [number/year]"),
  	NULL},
 {"batt_computed_bank_capacity", (getter)BatterySystem_get_batt_computed_bank_capacity,(setter)BatterySystem_set_batt_computed_bank_capacity,
-	PyDoc_STR("*float*: Battery bank capacity [kWh]\n\n*Required*: If not provided, assumed to be 0.0\n\n*Changes to this variable may require updating the values of the following*: \n\t - cp_battery_nameplate\n"),
+	PyDoc_STR("*float*: Battery bank capacity [kWh]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
 {"batt_meter_position", (getter)BatterySystem_get_batt_meter_position,(setter)BatterySystem_set_batt_meter_position,
 	PyDoc_STR("*float*: Position of battery relative to electric meter"),
@@ -5040,9 +5040,24 @@ ElectricityRates_set_en_electricity_rates(VarGroupObject *self, PyObject *value,
 	return PySAM_double_setter(value, SAM_Merchantplant_ElectricityRates_en_electricity_rates_nset, self->data_ptr);
 }
 
+static PyObject *
+ElectricityRates_get_rate_escalation(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Merchantplant_ElectricityRates_rate_escalation_aget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_rate_escalation(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Merchantplant_ElectricityRates_rate_escalation_aset, self->data_ptr);
+}
+
 static PyGetSetDef ElectricityRates_getset[] = {
 {"en_electricity_rates", (getter)ElectricityRates_get_en_electricity_rates,(setter)ElectricityRates_set_en_electricity_rates,
 	PyDoc_STR("*float*: Enable electricity rates for grid purchase [0/1]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"rate_escalation", (getter)ElectricityRates_get_rate_escalation,(setter)ElectricityRates_set_rate_escalation,
+	PyDoc_STR("*sequence*: Annual electricity rate escalation [%/year]"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -5214,6 +5229,18 @@ SystemOutput_set_gen_purchases(VarGroupObject *self, PyObject *value, void *clos
 }
 
 static PyObject *
+SystemOutput_get_gen_without_battery(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Merchantplant_SystemOutput_gen_without_battery_aget, self->data_ptr);
+}
+
+static int
+SystemOutput_set_gen_without_battery(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Merchantplant_SystemOutput_gen_without_battery_aset, self->data_ptr);
+}
+
+static PyObject *
 SystemOutput_get_system_capacity(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Merchantplant_SystemOutput_system_capacity_nget, self->data_ptr);
@@ -5249,6 +5276,9 @@ static PyGetSetDef SystemOutput_getset[] = {
  	NULL},
 {"gen_purchases", (getter)SystemOutput_get_gen_purchases,(setter)SystemOutput_set_gen_purchases,
 	PyDoc_STR("*sequence*: Electricity from grid [kW]"),
+ 	NULL},
+{"gen_without_battery", (getter)SystemOutput_get_gen_without_battery,(setter)SystemOutput_set_gen_without_battery,
+	PyDoc_STR("*sequence*: Electricity to or from the renewable system, without the battery [kW]"),
  	NULL},
 {"system_capacity", (getter)SystemOutput_get_system_capacity,(setter)SystemOutput_set_system_capacity,
 	PyDoc_STR("*float*: System nameplate capacity [kW]\n\n*Constraints*: MIN=1e-3\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - cp_battery_nameplate\n\t - cp_system_nameplate\n"),
@@ -6997,6 +7027,12 @@ static PyObject *
 Outputs_get_cf_energy_sales(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Merchantplant_Outputs_cf_energy_sales_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_without_battery(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Merchantplant_Outputs_cf_energy_without_battery_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -9382,6 +9418,12 @@ Outputs_get_mp_ancillary_services1_cleared_capacity(VarGroupObject *self, void *
 }
 
 static PyObject *
+Outputs_get_mp_ancillary_services1_consumed_cost(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Merchantplant_Outputs_mp_ancillary_services1_consumed_cost_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_mp_ancillary_services1_generated_revenue(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Merchantplant_Outputs_mp_ancillary_services1_generated_revenue_aget, self->data_ptr);
@@ -9397,6 +9439,12 @@ static PyObject *
 Outputs_get_mp_ancillary_services2_cleared_capacity(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Merchantplant_Outputs_mp_ancillary_services2_cleared_capacity_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_mp_ancillary_services2_consumed_cost(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Merchantplant_Outputs_mp_ancillary_services2_consumed_cost_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -9418,6 +9466,12 @@ Outputs_get_mp_ancillary_services3_cleared_capacity(VarGroupObject *self, void *
 }
 
 static PyObject *
+Outputs_get_mp_ancillary_services3_consumed_cost(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Merchantplant_Outputs_mp_ancillary_services3_consumed_cost_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_mp_ancillary_services3_generated_revenue(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Merchantplant_Outputs_mp_ancillary_services3_generated_revenue_aget, self->data_ptr);
@@ -9436,6 +9490,12 @@ Outputs_get_mp_ancillary_services4_cleared_capacity(VarGroupObject *self, void *
 }
 
 static PyObject *
+Outputs_get_mp_ancillary_services4_consumed_cost(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Merchantplant_Outputs_mp_ancillary_services4_consumed_cost_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_mp_ancillary_services4_generated_revenue(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Merchantplant_Outputs_mp_ancillary_services4_generated_revenue_aget, self->data_ptr);
@@ -9451,6 +9511,12 @@ static PyObject *
 Outputs_get_mp_energy_market_cleared_capacity(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Merchantplant_Outputs_mp_energy_market_cleared_capacity_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_mp_energy_market_consumed_cost(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Merchantplant_Outputs_mp_energy_market_consumed_cost_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -9805,6 +9871,9 @@ static PyGetSetDef Outputs_getset[] = {
 {"cf_energy_sales", (getter)Outputs_get_cf_energy_sales,(setter)0,
 	PyDoc_STR("*sequence*: Electricity to grid [kWh]"),
  	NULL},
+{"cf_energy_without_battery", (getter)Outputs_get_cf_energy_without_battery,(setter)0,
+	PyDoc_STR("*sequence*: Electricity generated without storage [kWh]"),
+ 	NULL},
 {"cf_feddepr_custom", (getter)Outputs_get_cf_feddepr_custom,(setter)0,
 	PyDoc_STR("*sequence*: Federal depreciation from custom [$]"),
  	NULL},
@@ -10133,7 +10202,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Total revenue [$]"),
  	NULL},
 {"cf_util_escal_rate", (getter)Outputs_get_cf_util_escal_rate,(setter)0,
-	PyDoc_STR("*sequence*: Annual battery salvage value costs [$]"),
+	PyDoc_STR("*sequence*: Utility escalation rate"),
  	NULL},
 {"cf_utility_bill", (getter)Outputs_get_cf_utility_bill,(setter)0,
 	PyDoc_STR("*sequence*: Electricity purchase [$]"),
@@ -10967,34 +11036,37 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*float*: State ITC income [$]"),
  	NULL},
 {"lcoe_nom", (getter)Outputs_get_lcoe_nom,(setter)0,
-	PyDoc_STR("*float*: Levelized cost (nominal) [cents/kWh]"),
+	PyDoc_STR("*float*: LCOE Levelized cost of energy nominal [cents/kWh]"),
  	NULL},
 {"lcoe_real", (getter)Outputs_get_lcoe_real,(setter)0,
-	PyDoc_STR("*float*: Levelized cost (real) [cents/kWh]"),
+	PyDoc_STR("*float*: LCOE Levelized cost of energy real [cents/kWh]"),
  	NULL},
 {"lcoptc_fed_nom", (getter)Outputs_get_lcoptc_fed_nom,(setter)0,
-	PyDoc_STR("*float*: Levelized federal PTC (nominal) [cents/kWh]"),
+	PyDoc_STR("*float*: Levelized federal PTC nominal [cents/kWh]"),
  	NULL},
 {"lcoptc_fed_real", (getter)Outputs_get_lcoptc_fed_real,(setter)0,
-	PyDoc_STR("*float*: Levelized federal PTC (real) [cents/kWh]"),
+	PyDoc_STR("*float*: Levelized federal PTC real [cents/kWh]"),
  	NULL},
 {"lcoptc_sta_nom", (getter)Outputs_get_lcoptc_sta_nom,(setter)0,
-	PyDoc_STR("*float*: Levelized state PTC (nominal) [cents/kWh]"),
+	PyDoc_STR("*float*: Levelized state PTC nominal [cents/kWh]"),
  	NULL},
 {"lcoptc_sta_real", (getter)Outputs_get_lcoptc_sta_real,(setter)0,
-	PyDoc_STR("*float*: Levelized state PTC (real) [cents/kWh]"),
+	PyDoc_STR("*float*: Levelized state PTC real [cents/kWh]"),
  	NULL},
 {"lcos_nom", (getter)Outputs_get_lcos_nom,(setter)0,
-	PyDoc_STR("*float*: Levelized cost of storage (nominal) [cents/kWh]"),
+	PyDoc_STR("*float*: LCOS Levelized cost of storage nominal [cents/kWh]"),
  	NULL},
 {"lcos_real", (getter)Outputs_get_lcos_real,(setter)0,
-	PyDoc_STR("*float*: Levelized cost of storage (real) [cents/kWh]"),
+	PyDoc_STR("*float*: LCOS Levelized cost of storage real [cents/kWh]"),
  	NULL},
 {"min_dscr", (getter)Outputs_get_min_dscr,(setter)0,
 	PyDoc_STR("*float*: Minimum DSCR"),
  	NULL},
 {"mp_ancillary_services1_cleared_capacity", (getter)Outputs_get_mp_ancillary_services1_cleared_capacity,(setter)0,
 	PyDoc_STR("*sequence*: Ancillary services 1 cleared capacity [MW]"),
+ 	NULL},
+{"mp_ancillary_services1_consumed_cost", (getter)Outputs_get_mp_ancillary_services1_consumed_cost,(setter)0,
+	PyDoc_STR("*sequence*: Ancillary services 1 electricity purchases [$]"),
  	NULL},
 {"mp_ancillary_services1_generated_revenue", (getter)Outputs_get_mp_ancillary_services1_generated_revenue,(setter)0,
 	PyDoc_STR("*sequence*: Ancillary services 1 generated revenue [$]"),
@@ -11005,6 +11077,9 @@ static PyGetSetDef Outputs_getset[] = {
 {"mp_ancillary_services2_cleared_capacity", (getter)Outputs_get_mp_ancillary_services2_cleared_capacity,(setter)0,
 	PyDoc_STR("*sequence*: Ancillary services 2 cleared capacity [MW]"),
  	NULL},
+{"mp_ancillary_services2_consumed_cost", (getter)Outputs_get_mp_ancillary_services2_consumed_cost,(setter)0,
+	PyDoc_STR("*sequence*: Ancillary services 2 electricity purchases [$]"),
+ 	NULL},
 {"mp_ancillary_services2_generated_revenue", (getter)Outputs_get_mp_ancillary_services2_generated_revenue,(setter)0,
 	PyDoc_STR("*sequence*: Ancillary services 2 generated revenue [$]"),
  	NULL},
@@ -11013,6 +11088,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"mp_ancillary_services3_cleared_capacity", (getter)Outputs_get_mp_ancillary_services3_cleared_capacity,(setter)0,
 	PyDoc_STR("*sequence*: Ancillary services 3 cleared capacity [MW]"),
+ 	NULL},
+{"mp_ancillary_services3_consumed_cost", (getter)Outputs_get_mp_ancillary_services3_consumed_cost,(setter)0,
+	PyDoc_STR("*sequence*: Ancillary services 3 electricity purchases [$]"),
  	NULL},
 {"mp_ancillary_services3_generated_revenue", (getter)Outputs_get_mp_ancillary_services3_generated_revenue,(setter)0,
 	PyDoc_STR("*sequence*: Ancillary services 3 generated revenue [$]"),
@@ -11023,6 +11101,9 @@ static PyGetSetDef Outputs_getset[] = {
 {"mp_ancillary_services4_cleared_capacity", (getter)Outputs_get_mp_ancillary_services4_cleared_capacity,(setter)0,
 	PyDoc_STR("*sequence*: Ancillary services 4 cleared capacity [MW]"),
  	NULL},
+{"mp_ancillary_services4_consumed_cost", (getter)Outputs_get_mp_ancillary_services4_consumed_cost,(setter)0,
+	PyDoc_STR("*sequence*: Ancillary services 4 electricity purchases [$]"),
+ 	NULL},
 {"mp_ancillary_services4_generated_revenue", (getter)Outputs_get_mp_ancillary_services4_generated_revenue,(setter)0,
 	PyDoc_STR("*sequence*: Ancillary services 4 generated revenue [$]"),
  	NULL},
@@ -11031,6 +11112,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"mp_energy_market_cleared_capacity", (getter)Outputs_get_mp_energy_market_cleared_capacity,(setter)0,
 	PyDoc_STR("*sequence*: Energy market cleared capacity [MW]"),
+ 	NULL},
+{"mp_energy_market_consumed_cost", (getter)Outputs_get_mp_energy_market_consumed_cost,(setter)0,
+	PyDoc_STR("*sequence*: Energy market electricity purchases [$]"),
  	NULL},
 {"mp_energy_market_generated_revenue", (getter)Outputs_get_mp_energy_market_generated_revenue,(setter)0,
 	PyDoc_STR("*sequence*: Energy market generated revenue [$]"),
@@ -11078,10 +11162,10 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*float*: Present value of energy market revenue [$]"),
  	NULL},
 {"npv_energy_nom", (getter)Outputs_get_npv_energy_nom,(setter)0,
-	PyDoc_STR("*float*: Present value of annual energy (nominal) [kWh]"),
+	PyDoc_STR("*float*: Present value of annual energy nominal [kWh]"),
  	NULL},
 {"npv_energy_real", (getter)Outputs_get_npv_energy_real,(setter)0,
-	PyDoc_STR("*float*: Present value of annual energy (real) [kWh]"),
+	PyDoc_STR("*float*: Present value of annual energy real [kWh]"),
  	NULL},
 {"npv_fed_pbi_income", (getter)Outputs_get_npv_fed_pbi_income,(setter)0,
 	PyDoc_STR("*float*: Present value of federal PBI income [$]"),
@@ -11114,10 +11198,10 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*float*: Present value of non-fuel O&M [$]"),
  	NULL},
 {"project_return_aftertax_irr", (getter)Outputs_get_project_return_aftertax_irr,(setter)0,
-	PyDoc_STR("*float*: Internal rate of return (after-tax) [%]"),
+	PyDoc_STR("*float*: IRR Internal rate of return [%]"),
  	NULL},
 {"project_return_aftertax_npv", (getter)Outputs_get_project_return_aftertax_npv,(setter)0,
-	PyDoc_STR("*float*: Net present value (after-tax) [$]"),
+	PyDoc_STR("*float*: NPV Net present value [$]"),
  	NULL},
 {"prop_tax_assessed_value", (getter)Outputs_get_prop_tax_assessed_value,(setter)0,
 	PyDoc_STR("*float*: Assessed value of property for tax purposes [$]"),
@@ -11141,7 +11225,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*float*: Equity [$]"),
  	NULL},
 {"wacc", (getter)Outputs_get_wacc,(setter)0,
-	PyDoc_STR("*float*: Weighted average cost of capital (WACC) [$]"),
+	PyDoc_STR("*float*: WACC Weighted average cost of capital [$]"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -11532,8 +11616,7 @@ static PyMethodDef MerchantplantModule_methods[] = {
 		{"new",             Merchantplant_new,         METH_VARARGS,
 				PyDoc_STR("new() -> Merchantplant")},
 		{"default",             Merchantplant_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Merchantplant\n\nUse default attributes\n"
-				"`config` options:\n\n- \"BiopowerMerchantPlant\"\n- \"DSLFMerchantPlant\"\n- \"EmpiricalTroughMerchantPlant\"\n- \"FlatPlatePVMerchantPlant\"\n- \"GenericBatteryMerchantPlant\"\n- \"GenericCSPSystemMerchantPlant\"\n- \"GenericSystemMerchantPlant\"\n- \"GeothermalPowerMerchantPlant\"\n- \"HighXConcentratingPVMerchantPlant\"\n- \"MSLFMerchantPlant\"\n- \"MSPTMerchantPlant\"\n- \"PVBatteryMerchantPlant\"\n- \"PVWattsMerchantPlant\"\n- \"PhysicalTroughMerchantPlant\"\n- \"StandaloneBatteryMerchantPlant\"\n- \"WindPowerMerchantPlant\"")},
+				PyDoc_STR("default(config) -> Merchantplant\n\nLoad values from SAM default configurations to provide as inputs to the model. \n\n			`config` options:\n\n- \"BiopowerMerchantPlant\"\n- \"DSLFMerchantPlant\"\n- \"EmpiricalTroughMerchantPlant\"\n- \"FlatPlatePVMerchantPlant\"\n- \"GenericBatteryMerchantPlant\"\n- \"GenericCSPSystemMerchantPlant\"\n- \"GenericSystemMerchantPlant\"\n- \"GeothermalPowerMerchantPlant\"\n- \"HighXConcentratingPVMerchantPlant\"\n- \"MSLFMerchantPlant\"\n- \"MSPTMerchantPlant\"\n- \"PVBatteryMerchantPlant\"\n- \"PVWattsMerchantPlant\"\n- \"PhysicalTroughMerchantPlant\"\n- \"StandaloneBatteryMerchantPlant\"\n- \"WindPowerMerchantPlant\"\n\n.. note::\n\n	The default configuration is a collection of default values for the module inputs. Some inputs may not be included in the default configuration and are automatically assigned the value indicated by the variable's 'Required' attribute.")},
 		{"wrap",             Merchantplant_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Merchantplant\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   Merchantplant_from_existing,        METH_VARARGS,

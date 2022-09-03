@@ -296,6 +296,12 @@ PriceSignal Group
 .. autoclass:: PySAM.Pvsamv1.Pvsamv1.PriceSignal
 	:members:
 
+Revenue Group
+======================================================
+
+.. autoclass:: PySAM.Pvsamv1.Pvsamv1.Revenue
+	:members:
+
 ElectricityRates Group
 ======================================================
 

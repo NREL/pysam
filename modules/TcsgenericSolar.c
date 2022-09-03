@@ -2472,8 +2472,7 @@ static PyMethodDef TcsgenericSolarModule_methods[] = {
 		{"new",             TcsgenericSolar_new,         METH_VARARGS,
 				PyDoc_STR("new() -> TcsgenericSolar")},
 		{"default",             TcsgenericSolar_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> TcsgenericSolar\n\nUse default attributes\n"
-				"`config` options:\n\n- \"GenericCSPSystemAllEquityPartnershipFlip\"\n- \"GenericCSPSystemCommercial\"\n- \"GenericCSPSystemLCOECalculator\"\n- \"GenericCSPSystemLeveragedPartnershipFlip\"\n- \"GenericCSPSystemMerchantPlant\"\n- \"GenericCSPSystemNone\"\n- \"GenericCSPSystemSaleLeaseback\"\n- \"GenericCSPSystemSingleOwner\"")},
+				PyDoc_STR("default(config) -> TcsgenericSolar\n\nLoad values from SAM default configurations to provide as inputs to the model. \n\n			`config` options:\n\n- \"GenericCSPSystemAllEquityPartnershipFlip\"\n- \"GenericCSPSystemCommercial\"\n- \"GenericCSPSystemLCOECalculator\"\n- \"GenericCSPSystemLeveragedPartnershipFlip\"\n- \"GenericCSPSystemMerchantPlant\"\n- \"GenericCSPSystemNone\"\n- \"GenericCSPSystemSaleLeaseback\"\n- \"GenericCSPSystemSingleOwner\"\n\n.. note::\n\n	The default configuration is a collection of default values for the module inputs. Some inputs may not be included in the default configuration and are automatically assigned the value indicated by the variable's 'Required' attribute.")},
 		{"wrap",             TcsgenericSolar_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> TcsgenericSolar\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   TcsgenericSolar_from_existing,        METH_VARARGS,

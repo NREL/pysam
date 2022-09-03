@@ -2091,8 +2091,7 @@ static PyMethodDef HcpvModule_methods[] = {
 		{"new",             Hcpv_new,         METH_VARARGS,
 				PyDoc_STR("new() -> Hcpv")},
 		{"default",             Hcpv_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Hcpv\n\nUse default attributes\n"
-				"`config` options:\n\n- \"HighXConcentratingPVAllEquityPartnershipFlip\"\n- \"HighXConcentratingPVLCOECalculator\"\n- \"HighXConcentratingPVLeveragedPartnershipFlip\"\n- \"HighXConcentratingPVMerchantPlant\"\n- \"HighXConcentratingPVNone\"\n- \"HighXConcentratingPVSaleLeaseback\"\n- \"HighXConcentratingPVSingleOwner\"")},
+				PyDoc_STR("default(config) -> Hcpv\n\nLoad values from SAM default configurations to provide as inputs to the model. \n\n			`config` options:\n\n- \"HighXConcentratingPVAllEquityPartnershipFlip\"\n- \"HighXConcentratingPVLCOECalculator\"\n- \"HighXConcentratingPVLeveragedPartnershipFlip\"\n- \"HighXConcentratingPVMerchantPlant\"\n- \"HighXConcentratingPVNone\"\n- \"HighXConcentratingPVSaleLeaseback\"\n- \"HighXConcentratingPVSingleOwner\"\n\n.. note::\n\n	The default configuration is a collection of default values for the module inputs. Some inputs may not be included in the default configuration and are automatically assigned the value indicated by the variable's 'Required' attribute.")},
 		{"wrap",             Hcpv_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Hcpv\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   Hcpv_from_existing,        METH_VARARGS,
