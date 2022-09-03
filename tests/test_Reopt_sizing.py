@@ -43,6 +43,7 @@ def test_reopt_sizing_pvsam(solar_resource):
 
     sys.SolarResource.use_wf_albedo = 0
     sys.SolarResource.solar_resource_file = solar_resource
+    sys.SolarResource.use_wf_albedo = 0
     bt.Load.crit_load = [0] * 8760
     post = sys.Reopt_size_battery_post()
 
