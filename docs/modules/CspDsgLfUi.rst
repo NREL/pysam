@@ -1,9 +1,9 @@
-.. _IsccDesignPoint:
+.. _CspDsgLfUi:
 
-IsccDesignPoint
+CspDsgLfUi
 ***********************************
 
-Wrapper for SAM Simulation Core model: `cmod_iscc_design_point.cpp <https://github.com/NREL/ssc/blob/develop/ssc/cmod_iscc_design_point.cpp>`_
+Wrapper for SAM Simulation Core model: `cmod_csp_dsg_lf_ui.cpp <https://github.com/NREL/ssc/blob/develop/ssc/cmod_csp_dsg_lf_ui.cpp>`_
 
 Input Consistency Warning
 ==================================
@@ -21,26 +21,26 @@ Creating an Instance
 
 Refer to the :ref:`Initializing a Model <initializing>` page for details on the different ways to create an instance of a PySAM class.
 
-**IsccDesignPoint model description**
+**CspDsgLfUi model description**
 
-.. automodule:: PySAM.IsccDesignPoint
+.. automodule:: PySAM.CspDsgLfUi
 	:members:
 
 Functions
 ===================================
 
-.. autoclass:: PySAM.IsccDesignPoint.IsccDesignPoint
+.. autoclass:: PySAM.CspDsgLfUi.CspDsgLfUi
 	:members:
 
 Common Group
 ======================================================
 
-.. autoclass:: PySAM.IsccDesignPoint.IsccDesignPoint.Common
+.. autoclass:: PySAM.CspDsgLfUi.CspDsgLfUi.Common
 	:members:
 
 Outputs Group
 ======================================================
 
-.. autoclass:: PySAM.IsccDesignPoint.IsccDesignPoint.Outputs
+.. autoclass:: PySAM.CspDsgLfUi.CspDsgLfUi.Outputs
 	:members:
 

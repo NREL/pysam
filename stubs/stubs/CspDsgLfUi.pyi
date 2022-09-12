@@ -1,4 +1,4 @@
-class IsccDesignPoint(object):
+class CspDsgLfUi(object):
 	def assign(self, dict):
 		pass
 
@@ -31,13 +31,9 @@ class IsccDesignPoint(object):
 			pass
 
 
-		HTF_code = float
-		elev = float
-		field_fl_props = tuple
-		ngcc_model = float
-		pinch_point_cold = float
-		pinch_point_hot = float
-		q_pb_design = float
+		P_boil = float
+		deltaT_subcooled = float
+		use_quality_or_subcooled = float
 
 
 	class Outputs(object):
@@ -51,25 +47,22 @@ class IsccDesignPoint(object):
 			pass
 
 
-		T_htf_cold = float
-		T_st_inject = float
-		W_dot_fossil = float
-		W_dot_solar = float
-		q_solar_max = float
+		T_hot_out_target = float
+		T_saturation = float
 
 
 
 
-def default(config) -> IsccDesignPoint:
+def default(config) -> CspDsgLfUi:
 	pass
 
-def new() -> IsccDesignPoint:
+def new() -> CspDsgLfUi:
 	pass
 
-def wrap(ssc_data_t) -> IsccDesignPoint:
+def wrap(ssc_data_t) -> CspDsgLfUi:
 	pass
 
-def from_existing(model, config="") -> IsccDesignPoint:
+def from_existing(model, config="") -> CspDsgLfUi:
 	pass
 
 __loader__ = None 

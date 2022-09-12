@@ -530,6 +530,20 @@ class HostDeveloper(object):
 		year1_monthly_electricity_to_grid = tuple
 
 
+	class ElectricityRates(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		rate_escalation = tuple
+
+
 	class Outputs(object):
 		def assign(self): 
 			pass
@@ -993,7 +1007,6 @@ class HostDeveloper(object):
 		flip_actual_year = float
 		flip_target_irr = float
 		flip_target_year = float
-		gen_purchases = tuple
 		host_nominal_discount_rate = float
 		ibi_fedtax_total = float
 		ibi_statax_total = float

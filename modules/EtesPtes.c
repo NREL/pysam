@@ -1,6 +1,6 @@
 #include <Python.h>
 
-#include <SAM_EtesElectricResistance.h>
+#include <SAM_EtesPtes.h>
 #include <SAM_api.h>
 
 #include "PySAM_utils.h"
@@ -13,7 +13,7 @@
 static PyTypeObject SolarResource_Type;
 
 static PyObject *
-SolarResource_new(SAM_EtesElectricResistance data_ptr)
+SolarResource_new(SAM_EtesPtes data_ptr)
 {
 	PyObject* new_obj = SolarResource_Type.tp_alloc(&SolarResource_Type,0);
 
@@ -34,7 +34,7 @@ SolarResource_assign(VarGroupObject *self, PyObject *args)
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "EtesElectricResistance", "SolarResource")){
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "EtesPtes", "SolarResource")){
 		return NULL;
 	}
 
@@ -51,7 +51,7 @@ SolarResource_replace(VarGroupObject *self, PyObject *args)
 	}
 	PyTypeObject* tp = &SolarResource_Type;
 
-	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "EtesElectricResistance", "SolarResource")){
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "EtesPtes", "SolarResource")){
 		return NULL;
 	}
 
@@ -80,13 +80,13 @@ static PyMethodDef SolarResource_methods[] = {
 static PyObject *
 SolarResource_get_solar_resource_file(VarGroupObject *self, void *closure)
 {
-	return PySAM_string_getter(SAM_EtesElectricResistance_SolarResource_solar_resource_file_sget, self->data_ptr);
+	return PySAM_string_getter(SAM_EtesPtes_SolarResource_solar_resource_file_sget, self->data_ptr);
 }
 
 static int
 SolarResource_set_solar_resource_file(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_string_setter(value, SAM_EtesElectricResistance_SolarResource_solar_resource_file_sset, self->data_ptr);
+	return PySAM_string_setter(value, SAM_EtesPtes_SolarResource_solar_resource_file_sset, self->data_ptr);
 }
 
 static PyGetSetDef SolarResource_getset[] = {
@@ -100,7 +100,7 @@ static PyTypeObject SolarResource_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"EtesElectricResistance.SolarResource",             /*tp_name*/
+		"EtesPtes.SolarResource",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -150,7 +150,7 @@ static PyTypeObject SolarResource_Type = {
 static PyTypeObject SystemControl_Type;
 
 static PyObject *
-SystemControl_new(SAM_EtesElectricResistance data_ptr)
+SystemControl_new(SAM_EtesPtes data_ptr)
 {
 	PyObject* new_obj = SystemControl_Type.tp_alloc(&SystemControl_Type,0);
 
@@ -171,7 +171,7 @@ SystemControl_assign(VarGroupObject *self, PyObject *args)
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "EtesElectricResistance", "SystemControl")){
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "EtesPtes", "SystemControl")){
 		return NULL;
 	}
 
@@ -188,7 +188,7 @@ SystemControl_replace(VarGroupObject *self, PyObject *args)
 	}
 	PyTypeObject* tp = &SystemControl_Type;
 
-	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "EtesElectricResistance", "SystemControl")){
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "EtesPtes", "SystemControl")){
 		return NULL;
 	}
 
@@ -217,337 +217,337 @@ static PyMethodDef SystemControl_methods[] = {
 static PyObject *
 SystemControl_get_bop_par(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_SystemControl_bop_par_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_SystemControl_bop_par_nget, self->data_ptr);
 }
 
 static int
 SystemControl_set_bop_par(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_SystemControl_bop_par_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_SystemControl_bop_par_nset, self->data_ptr);
 }
 
 static PyObject *
 SystemControl_get_bop_par_0(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_SystemControl_bop_par_0_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_SystemControl_bop_par_0_nget, self->data_ptr);
 }
 
 static int
 SystemControl_set_bop_par_0(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_SystemControl_bop_par_0_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_SystemControl_bop_par_0_nset, self->data_ptr);
 }
 
 static PyObject *
 SystemControl_get_bop_par_1(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_SystemControl_bop_par_1_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_SystemControl_bop_par_1_nget, self->data_ptr);
 }
 
 static int
 SystemControl_set_bop_par_1(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_SystemControl_bop_par_1_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_SystemControl_bop_par_1_nset, self->data_ptr);
 }
 
 static PyObject *
 SystemControl_get_bop_par_2(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_SystemControl_bop_par_2_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_SystemControl_bop_par_2_nget, self->data_ptr);
 }
 
 static int
 SystemControl_set_bop_par_2(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_SystemControl_bop_par_2_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_SystemControl_bop_par_2_nset, self->data_ptr);
 }
 
 static PyObject *
 SystemControl_get_bop_par_f(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_SystemControl_bop_par_f_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_SystemControl_bop_par_f_nget, self->data_ptr);
 }
 
 static int
 SystemControl_set_bop_par_f(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_SystemControl_bop_par_f_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_SystemControl_bop_par_f_nset, self->data_ptr);
 }
 
 static PyObject *
 SystemControl_get_disp_csu_cost(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_SystemControl_disp_csu_cost_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_SystemControl_disp_csu_cost_nget, self->data_ptr);
 }
 
 static int
 SystemControl_set_disp_csu_cost(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_SystemControl_disp_csu_cost_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_SystemControl_disp_csu_cost_nset, self->data_ptr);
 }
 
 static PyObject *
 SystemControl_get_disp_down_time_min(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_SystemControl_disp_down_time_min_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_SystemControl_disp_down_time_min_nget, self->data_ptr);
 }
 
 static int
 SystemControl_set_disp_down_time_min(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_SystemControl_disp_down_time_min_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_SystemControl_disp_down_time_min_nset, self->data_ptr);
 }
 
 static PyObject *
 SystemControl_get_disp_frequency(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_SystemControl_disp_frequency_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_SystemControl_disp_frequency_nget, self->data_ptr);
 }
 
 static int
 SystemControl_set_disp_frequency(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_SystemControl_disp_frequency_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_SystemControl_disp_frequency_nset, self->data_ptr);
 }
 
 static PyObject *
 SystemControl_get_disp_horizon(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_SystemControl_disp_horizon_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_SystemControl_disp_horizon_nget, self->data_ptr);
 }
 
 static int
 SystemControl_set_disp_horizon(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_SystemControl_disp_horizon_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_SystemControl_disp_horizon_nset, self->data_ptr);
 }
 
 static PyObject *
 SystemControl_get_disp_hsu_cost(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_SystemControl_disp_hsu_cost_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_SystemControl_disp_hsu_cost_nget, self->data_ptr);
 }
 
 static int
 SystemControl_set_disp_hsu_cost(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_SystemControl_disp_hsu_cost_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_SystemControl_disp_hsu_cost_nset, self->data_ptr);
 }
 
 static PyObject *
 SystemControl_get_disp_max_iter(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_SystemControl_disp_max_iter_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_SystemControl_disp_max_iter_nget, self->data_ptr);
 }
 
 static int
 SystemControl_set_disp_max_iter(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_SystemControl_disp_max_iter_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_SystemControl_disp_max_iter_nset, self->data_ptr);
 }
 
 static PyObject *
 SystemControl_get_disp_mip_gap(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_SystemControl_disp_mip_gap_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_SystemControl_disp_mip_gap_nget, self->data_ptr);
 }
 
 static int
 SystemControl_set_disp_mip_gap(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_SystemControl_disp_mip_gap_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_SystemControl_disp_mip_gap_nset, self->data_ptr);
 }
 
 static PyObject *
 SystemControl_get_disp_pen_delta_w(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_SystemControl_disp_pen_delta_w_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_SystemControl_disp_pen_delta_w_nget, self->data_ptr);
 }
 
 static int
 SystemControl_set_disp_pen_delta_w(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_SystemControl_disp_pen_delta_w_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_SystemControl_disp_pen_delta_w_nset, self->data_ptr);
 }
 
 static PyObject *
 SystemControl_get_disp_reporting(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_SystemControl_disp_reporting_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_SystemControl_disp_reporting_nget, self->data_ptr);
 }
 
 static int
 SystemControl_set_disp_reporting(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_SystemControl_disp_reporting_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_SystemControl_disp_reporting_nset, self->data_ptr);
 }
 
 static PyObject *
 SystemControl_get_disp_spec_bb(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_SystemControl_disp_spec_bb_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_SystemControl_disp_spec_bb_nget, self->data_ptr);
 }
 
 static int
 SystemControl_set_disp_spec_bb(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_SystemControl_disp_spec_bb_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_SystemControl_disp_spec_bb_nset, self->data_ptr);
 }
 
 static PyObject *
 SystemControl_get_disp_spec_presolve(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_SystemControl_disp_spec_presolve_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_SystemControl_disp_spec_presolve_nget, self->data_ptr);
 }
 
 static int
 SystemControl_set_disp_spec_presolve(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_SystemControl_disp_spec_presolve_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_SystemControl_disp_spec_presolve_nset, self->data_ptr);
 }
 
 static PyObject *
 SystemControl_get_disp_spec_scaling(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_SystemControl_disp_spec_scaling_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_SystemControl_disp_spec_scaling_nget, self->data_ptr);
 }
 
 static int
 SystemControl_set_disp_spec_scaling(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_SystemControl_disp_spec_scaling_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_SystemControl_disp_spec_scaling_nset, self->data_ptr);
 }
 
 static PyObject *
 SystemControl_get_disp_steps_per_hour(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_SystemControl_disp_steps_per_hour_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_SystemControl_disp_steps_per_hour_nget, self->data_ptr);
 }
 
 static int
 SystemControl_set_disp_steps_per_hour(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_SystemControl_disp_steps_per_hour_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_SystemControl_disp_steps_per_hour_nset, self->data_ptr);
 }
 
 static PyObject *
 SystemControl_get_disp_time_weighting(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_SystemControl_disp_time_weighting_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_SystemControl_disp_time_weighting_nget, self->data_ptr);
 }
 
 static int
 SystemControl_set_disp_time_weighting(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_SystemControl_disp_time_weighting_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_SystemControl_disp_time_weighting_nset, self->data_ptr);
 }
 
 static PyObject *
 SystemControl_get_disp_timeout(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_SystemControl_disp_timeout_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_SystemControl_disp_timeout_nget, self->data_ptr);
 }
 
 static int
 SystemControl_set_disp_timeout(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_SystemControl_disp_timeout_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_SystemControl_disp_timeout_nset, self->data_ptr);
 }
 
 static PyObject *
 SystemControl_get_disp_up_time_min(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_SystemControl_disp_up_time_min_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_SystemControl_disp_up_time_min_nget, self->data_ptr);
 }
 
 static int
 SystemControl_set_disp_up_time_min(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_SystemControl_disp_up_time_min_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_SystemControl_disp_up_time_min_nset, self->data_ptr);
 }
 
 static PyObject *
 SystemControl_get_is_dispatch(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_SystemControl_is_dispatch_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_SystemControl_is_dispatch_nget, self->data_ptr);
 }
 
 static int
 SystemControl_set_is_dispatch(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_SystemControl_is_dispatch_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_SystemControl_is_dispatch_nset, self->data_ptr);
 }
 
 static PyObject *
 SystemControl_get_pb_fixed_par(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_SystemControl_pb_fixed_par_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_SystemControl_pb_fixed_par_nget, self->data_ptr);
 }
 
 static int
 SystemControl_set_pb_fixed_par(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_SystemControl_pb_fixed_par_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_SystemControl_pb_fixed_par_nset, self->data_ptr);
 }
 
 static PyObject *
 SystemControl_get_sim_type(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_SystemControl_sim_type_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_SystemControl_sim_type_nget, self->data_ptr);
 }
 
 static int
 SystemControl_set_sim_type(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_SystemControl_sim_type_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_SystemControl_sim_type_nset, self->data_ptr);
 }
 
 static PyObject *
 SystemControl_get_time_start(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_SystemControl_time_start_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_SystemControl_time_start_nget, self->data_ptr);
 }
 
 static int
 SystemControl_set_time_start(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_SystemControl_time_start_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_SystemControl_time_start_nset, self->data_ptr);
 }
 
 static PyObject *
 SystemControl_get_time_steps_per_hour(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_SystemControl_time_steps_per_hour_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_SystemControl_time_steps_per_hour_nget, self->data_ptr);
 }
 
 static int
 SystemControl_set_time_steps_per_hour(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_SystemControl_time_steps_per_hour_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_SystemControl_time_steps_per_hour_nset, self->data_ptr);
 }
 
 static PyObject *
 SystemControl_get_time_stop(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_SystemControl_time_stop_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_SystemControl_time_stop_nget, self->data_ptr);
 }
 
 static int
 SystemControl_set_time_stop(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_SystemControl_time_stop_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_SystemControl_time_stop_nset, self->data_ptr);
 }
 
 static PyObject *
 SystemControl_get_vacuum_arrays(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_SystemControl_vacuum_arrays_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_SystemControl_vacuum_arrays_nget, self->data_ptr);
 }
 
 static int
 SystemControl_set_vacuum_arrays(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_SystemControl_vacuum_arrays_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_SystemControl_vacuum_arrays_nset, self->data_ptr);
 }
 
 static PyGetSetDef SystemControl_getset[] = {
@@ -642,7 +642,7 @@ static PyTypeObject SystemControl_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"EtesElectricResistance.SystemControl",             /*tp_name*/
+		"EtesPtes.SystemControl",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -692,7 +692,7 @@ static PyTypeObject SystemControl_Type = {
 static PyTypeObject FinancialModel_Type;
 
 static PyObject *
-FinancialModel_new(SAM_EtesElectricResistance data_ptr)
+FinancialModel_new(SAM_EtesPtes data_ptr)
 {
 	PyObject* new_obj = FinancialModel_Type.tp_alloc(&FinancialModel_Type,0);
 
@@ -713,7 +713,7 @@ FinancialModel_assign(VarGroupObject *self, PyObject *args)
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "EtesElectricResistance", "FinancialModel")){
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "EtesPtes", "FinancialModel")){
 		return NULL;
 	}
 
@@ -730,7 +730,7 @@ FinancialModel_replace(VarGroupObject *self, PyObject *args)
 	}
 	PyTypeObject* tp = &FinancialModel_Type;
 
-	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "EtesElectricResistance", "FinancialModel")){
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "EtesPtes", "FinancialModel")){
 		return NULL;
 	}
 
@@ -759,13 +759,13 @@ static PyMethodDef FinancialModel_methods[] = {
 static PyObject *
 FinancialModel_get_etes_financial_model(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_FinancialModel_etes_financial_model_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_FinancialModel_etes_financial_model_nget, self->data_ptr);
 }
 
 static int
 FinancialModel_set_etes_financial_model(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_FinancialModel_etes_financial_model_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_FinancialModel_etes_financial_model_nset, self->data_ptr);
 }
 
 static PyGetSetDef FinancialModel_getset[] = {
@@ -779,7 +779,7 @@ static PyTypeObject FinancialModel_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"EtesElectricResistance.FinancialModel",             /*tp_name*/
+		"EtesPtes.FinancialModel",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -829,7 +829,7 @@ static PyTypeObject FinancialModel_Type = {
 static PyTypeObject SystemDesign_Type;
 
 static PyObject *
-SystemDesign_new(SAM_EtesElectricResistance data_ptr)
+SystemDesign_new(SAM_EtesPtes data_ptr)
 {
 	PyObject* new_obj = SystemDesign_Type.tp_alloc(&SystemDesign_Type,0);
 
@@ -850,7 +850,7 @@ SystemDesign_assign(VarGroupObject *self, PyObject *args)
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "EtesElectricResistance", "SystemDesign")){
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "EtesPtes", "SystemDesign")){
 		return NULL;
 	}
 
@@ -867,7 +867,7 @@ SystemDesign_replace(VarGroupObject *self, PyObject *args)
 	}
 	PyTypeObject* tp = &SystemDesign_Type;
 
-	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "EtesElectricResistance", "SystemDesign")){
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "EtesPtes", "SystemDesign")){
 		return NULL;
 	}
 
@@ -894,104 +894,164 @@ static PyMethodDef SystemDesign_methods[] = {
 };
 
 static PyObject *
-SystemDesign_get_P_ref(VarGroupObject *self, void *closure)
+SystemDesign_get_T_CT_cold_htf_des(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_SystemDesign_P_ref_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_SystemDesign_T_CT_cold_htf_des_nget, self->data_ptr);
 }
 
 static int
-SystemDesign_set_P_ref(VarGroupObject *self, PyObject *value, void *closure)
+SystemDesign_set_T_CT_cold_htf_des(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_SystemDesign_P_ref_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_SystemDesign_T_CT_cold_htf_des_nset, self->data_ptr);
 }
 
 static PyObject *
-SystemDesign_get_T_htf_cold_des(VarGroupObject *self, void *closure)
+SystemDesign_get_T_CT_hot_htf_des(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_SystemDesign_T_htf_cold_des_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_SystemDesign_T_CT_hot_htf_des_nget, self->data_ptr);
 }
 
 static int
-SystemDesign_set_T_htf_cold_des(VarGroupObject *self, PyObject *value, void *closure)
+SystemDesign_set_T_CT_hot_htf_des(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_SystemDesign_T_htf_cold_des_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_SystemDesign_T_CT_hot_htf_des_nset, self->data_ptr);
 }
 
 static PyObject *
-SystemDesign_get_T_htf_hot_des(VarGroupObject *self, void *closure)
+SystemDesign_get_T_HT_cold_htf_des(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_SystemDesign_T_htf_hot_des_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_SystemDesign_T_HT_cold_htf_des_nget, self->data_ptr);
 }
 
 static int
-SystemDesign_set_T_htf_hot_des(VarGroupObject *self, PyObject *value, void *closure)
+SystemDesign_set_T_HT_cold_htf_des(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_SystemDesign_T_htf_hot_des_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_SystemDesign_T_HT_cold_htf_des_nset, self->data_ptr);
 }
 
 static PyObject *
-SystemDesign_get_design_eff(VarGroupObject *self, void *closure)
+SystemDesign_get_T_HT_hot_htf_des(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_SystemDesign_design_eff_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_SystemDesign_T_HT_hot_htf_des_nget, self->data_ptr);
 }
 
 static int
-SystemDesign_set_design_eff(VarGroupObject *self, PyObject *value, void *closure)
+SystemDesign_set_T_HT_hot_htf_des(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_SystemDesign_design_eff_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_SystemDesign_T_HT_hot_htf_des_nset, self->data_ptr);
 }
 
 static PyObject *
-SystemDesign_get_gross_net_conversion_factor(VarGroupObject *self, void *closure)
+SystemDesign_get_W_dot_pc_thermo_des(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_SystemDesign_gross_net_conversion_factor_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_SystemDesign_W_dot_pc_thermo_des_nget, self->data_ptr);
 }
 
 static int
-SystemDesign_set_gross_net_conversion_factor(VarGroupObject *self, PyObject *value, void *closure)
+SystemDesign_set_W_dot_pc_thermo_des(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_SystemDesign_gross_net_conversion_factor_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_SystemDesign_W_dot_pc_thermo_des_nset, self->data_ptr);
+}
+
+static PyObject *
+SystemDesign_get_cop_hp_thermo_des(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesPtes_SystemDesign_cop_hp_thermo_des_nget, self->data_ptr);
+}
+
+static int
+SystemDesign_set_cop_hp_thermo_des(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_EtesPtes_SystemDesign_cop_hp_thermo_des_nset, self->data_ptr);
+}
+
+static PyObject *
+SystemDesign_get_eta_pc_thermo_des(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesPtes_SystemDesign_eta_pc_thermo_des_nget, self->data_ptr);
+}
+
+static int
+SystemDesign_set_eta_pc_thermo_des(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_EtesPtes_SystemDesign_eta_pc_thermo_des_nset, self->data_ptr);
+}
+
+static PyObject *
+SystemDesign_get_f_hp_parasitic_des(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesPtes_SystemDesign_f_hp_parasitic_des_nget, self->data_ptr);
+}
+
+static int
+SystemDesign_set_f_hp_parasitic_des(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_EtesPtes_SystemDesign_f_hp_parasitic_des_nset, self->data_ptr);
+}
+
+static PyObject *
+SystemDesign_get_f_pc_parasitic_des(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesPtes_SystemDesign_f_pc_parasitic_des_nget, self->data_ptr);
+}
+
+static int
+SystemDesign_set_f_pc_parasitic_des(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_EtesPtes_SystemDesign_f_pc_parasitic_des_nset, self->data_ptr);
 }
 
 static PyObject *
 SystemDesign_get_heater_mult(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_SystemDesign_heater_mult_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_SystemDesign_heater_mult_nget, self->data_ptr);
 }
 
 static int
 SystemDesign_set_heater_mult(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_SystemDesign_heater_mult_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_SystemDesign_heater_mult_nset, self->data_ptr);
 }
 
 static PyObject *
 SystemDesign_get_tshours(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_SystemDesign_tshours_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_SystemDesign_tshours_nget, self->data_ptr);
 }
 
 static int
 SystemDesign_set_tshours(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_SystemDesign_tshours_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_SystemDesign_tshours_nset, self->data_ptr);
 }
 
 static PyGetSetDef SystemDesign_getset[] = {
-{"P_ref", (getter)SystemDesign_get_P_ref,(setter)SystemDesign_set_P_ref,
-	PyDoc_STR("*float*: Reference output electric power at design condition [MW]\n\n*Required*: True"),
+{"T_CT_cold_htf_des", (getter)SystemDesign_get_T_CT_cold_htf_des,(setter)SystemDesign_set_T_CT_cold_htf_des,
+	PyDoc_STR("*float*: CT TES cold temperature [C]\n\n*Required*: True"),
  	NULL},
-{"T_htf_cold_des", (getter)SystemDesign_get_T_htf_cold_des,(setter)SystemDesign_set_T_htf_cold_des,
-	PyDoc_STR("*float*: Cold HTF inlet temperature at design conditions [C]\n\n*Required*: True"),
+{"T_CT_hot_htf_des", (getter)SystemDesign_get_T_CT_hot_htf_des,(setter)SystemDesign_set_T_CT_hot_htf_des,
+	PyDoc_STR("*float*: CT TES hot temperature [C]\n\n*Required*: True"),
  	NULL},
-{"T_htf_hot_des", (getter)SystemDesign_get_T_htf_hot_des,(setter)SystemDesign_set_T_htf_hot_des,
-	PyDoc_STR("*float*: Hot HTF outlet temperature at design conditions [C]\n\n*Required*: True"),
+{"T_HT_cold_htf_des", (getter)SystemDesign_get_T_HT_cold_htf_des,(setter)SystemDesign_set_T_HT_cold_htf_des,
+	PyDoc_STR("*float*: HT TES cold temperature [C]\n\n*Required*: True"),
  	NULL},
-{"design_eff", (getter)SystemDesign_get_design_eff,(setter)SystemDesign_set_design_eff,
-	PyDoc_STR("*float*: Power cycle efficiency at design [none]\n\n*Required*: True"),
+{"T_HT_hot_htf_des", (getter)SystemDesign_get_T_HT_hot_htf_des,(setter)SystemDesign_set_T_HT_hot_htf_des,
+	PyDoc_STR("*float*: HT TES hot temperature [C]\n\n*Required*: True"),
  	NULL},
-{"gross_net_conversion_factor", (getter)SystemDesign_get_gross_net_conversion_factor,(setter)SystemDesign_set_gross_net_conversion_factor,
-	PyDoc_STR("*float*: Estimated gross to net conversion factor\n\n*Required*: True"),
+{"W_dot_pc_thermo_des", (getter)SystemDesign_get_W_dot_pc_thermo_des,(setter)SystemDesign_set_W_dot_pc_thermo_des,
+	PyDoc_STR("*float*: PC design thermodynamic power [MWe]\n\n*Required*: True"),
+ 	NULL},
+{"cop_hp_thermo_des", (getter)SystemDesign_get_cop_hp_thermo_des,(setter)SystemDesign_set_cop_hp_thermo_des,
+	PyDoc_STR("*float*: Heat pump design thermodynamic heat COP [-]\n\n*Required*: True"),
+ 	NULL},
+{"eta_pc_thermo_des", (getter)SystemDesign_get_eta_pc_thermo_des,(setter)SystemDesign_set_eta_pc_thermo_des,
+	PyDoc_STR("*float*: PC design thermodynamic efficiency [-]\n\n*Required*: True"),
+ 	NULL},
+{"f_hp_parasitic_des", (getter)SystemDesign_get_f_hp_parasitic_des,(setter)SystemDesign_set_f_hp_parasitic_des,
+	PyDoc_STR("*float*: Heat pump parasitics as fraction of design thermo power in [-]\n\n*Required*: True"),
+ 	NULL},
+{"f_pc_parasitic_des", (getter)SystemDesign_get_f_pc_parasitic_des,(setter)SystemDesign_set_f_pc_parasitic_des,
+	PyDoc_STR("*float*: PC parasitics as fraction of design thermo power out [-]\n\n*Required*: True"),
  	NULL},
 {"heater_mult", (getter)SystemDesign_get_heater_mult,(setter)SystemDesign_set_heater_mult,
 	PyDoc_STR("*float*: Heater multiple relative to design cycle thermal power [-]\n\n*Required*: True"),
@@ -1006,7 +1066,7 @@ static PyTypeObject SystemDesign_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"EtesElectricResistance.SystemDesign",             /*tp_name*/
+		"EtesPtes.SystemDesign",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -1050,694 +1110,13 @@ static PyTypeObject SystemDesign_Type = {
 
 
 /*
- * PowerCycle Group
- */ 
-
-static PyTypeObject PowerCycle_Type;
-
-static PyObject *
-PowerCycle_new(SAM_EtesElectricResistance data_ptr)
-{
-	PyObject* new_obj = PowerCycle_Type.tp_alloc(&PowerCycle_Type,0);
-
-	VarGroupObject* PowerCycle_obj = (VarGroupObject*)new_obj;
-
-	PowerCycle_obj->data_ptr = (SAM_table)data_ptr;
-
-	return new_obj;
-}
-
-/* PowerCycle methods */
-
-static PyObject *
-PowerCycle_assign(VarGroupObject *self, PyObject *args)
-{
-	PyObject* dict;
-	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
-		return NULL;
-	}
-
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "EtesElectricResistance", "PowerCycle")){
-		return NULL;
-	}
-
-	Py_INCREF(Py_None);
-	return Py_None;
-}
-
-static PyObject *
-PowerCycle_replace(VarGroupObject *self, PyObject *args)
-{
-	PyObject* dict;
-	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
-		return NULL;
-	}
-	PyTypeObject* tp = &PowerCycle_Type;
-
-	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "EtesElectricResistance", "PowerCycle")){
-		return NULL;
-	}
-
-	Py_INCREF(Py_None);
-	return Py_None;
-}
-
-static PyObject *
-PowerCycle_export(VarGroupObject *self, PyObject *args)
-{
-	PyTypeObject* tp = &PowerCycle_Type;
-	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
-	return dict;
-}
-
-static PyMethodDef PowerCycle_methods[] = {
-		{"assign",            (PyCFunction)PowerCycle_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``PowerCycle_vals = { var: val, ...}``")},
-		{"replace",            (PyCFunction)PowerCycle_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``PowerCycle_vals = { var: val, ...}``")},
-		{"export",            (PyCFunction)PowerCycle_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
-		{NULL,              NULL}           /* sentinel */
-};
-
-static PyObject *
-PowerCycle_get_cycle_cutoff_frac(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_EtesElectricResistance_PowerCycle_cycle_cutoff_frac_nget, self->data_ptr);
-}
-
-static int
-PowerCycle_set_cycle_cutoff_frac(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_PowerCycle_cycle_cutoff_frac_nset, self->data_ptr);
-}
-
-static PyObject *
-PowerCycle_get_cycle_max_frac(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_EtesElectricResistance_PowerCycle_cycle_max_frac_nget, self->data_ptr);
-}
-
-static int
-PowerCycle_set_cycle_max_frac(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_PowerCycle_cycle_max_frac_nset, self->data_ptr);
-}
-
-static PyObject *
-PowerCycle_get_pb_pump_coef(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_EtesElectricResistance_PowerCycle_pb_pump_coef_nget, self->data_ptr);
-}
-
-static int
-PowerCycle_set_pb_pump_coef(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_PowerCycle_pb_pump_coef_nset, self->data_ptr);
-}
-
-static PyObject *
-PowerCycle_get_pc_config(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_EtesElectricResistance_PowerCycle_pc_config_nget, self->data_ptr);
-}
-
-static int
-PowerCycle_set_pc_config(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_PowerCycle_pc_config_nset, self->data_ptr);
-}
-
-static PyObject *
-PowerCycle_get_q_sby_frac(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_EtesElectricResistance_PowerCycle_q_sby_frac_nget, self->data_ptr);
-}
-
-static int
-PowerCycle_set_q_sby_frac(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_PowerCycle_q_sby_frac_nset, self->data_ptr);
-}
-
-static PyObject *
-PowerCycle_get_startup_frac(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_EtesElectricResistance_PowerCycle_startup_frac_nget, self->data_ptr);
-}
-
-static int
-PowerCycle_set_startup_frac(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_PowerCycle_startup_frac_nset, self->data_ptr);
-}
-
-static PyObject *
-PowerCycle_get_startup_time(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_EtesElectricResistance_PowerCycle_startup_time_nget, self->data_ptr);
-}
-
-static int
-PowerCycle_set_startup_time(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_PowerCycle_startup_time_nset, self->data_ptr);
-}
-
-static PyGetSetDef PowerCycle_getset[] = {
-{"cycle_cutoff_frac", (getter)PowerCycle_get_cycle_cutoff_frac,(setter)PowerCycle_set_cycle_cutoff_frac,
-	PyDoc_STR("*float*: Minimum turbine operation fraction before shutdown\n\n*Required*: True"),
- 	NULL},
-{"cycle_max_frac", (getter)PowerCycle_get_cycle_max_frac,(setter)PowerCycle_set_cycle_max_frac,
-	PyDoc_STR("*float*: Maximum turbine over design operation fraction\n\n*Required*: True"),
- 	NULL},
-{"pb_pump_coef", (getter)PowerCycle_get_pb_pump_coef,(setter)PowerCycle_set_pb_pump_coef,
-	PyDoc_STR("*float*: Pumping power to move 1kg of HTF through PB loop [kW/kg]\n\n*Required*: True"),
- 	NULL},
-{"pc_config", (getter)PowerCycle_get_pc_config,(setter)PowerCycle_set_pc_config,
-	PyDoc_STR("*float*: PC configuration 0=Steam Rankine, 1=user defined\n\n*Constraints*: INTEGER\n\n*Required*: If not provided, assumed to be 0"),
- 	NULL},
-{"q_sby_frac", (getter)PowerCycle_get_q_sby_frac,(setter)PowerCycle_set_q_sby_frac,
-	PyDoc_STR("*float*: Fraction of thermal power required for standby\n\n*Required*: True"),
- 	NULL},
-{"startup_frac", (getter)PowerCycle_get_startup_frac,(setter)PowerCycle_set_startup_frac,
-	PyDoc_STR("*float*: Fraction of design thermal power needed for startup [none]\n\n*Required*: True"),
- 	NULL},
-{"startup_time", (getter)PowerCycle_get_startup_time,(setter)PowerCycle_set_startup_time,
-	PyDoc_STR("*float*: Time needed for power block startup [hr]\n\n*Required*: True"),
- 	NULL},
-	{NULL}  /* Sentinel */
-};
-
-static PyTypeObject PowerCycle_Type = {
-		/* The ob_type field must be initialized in the module init function
-		 * to be portable to Windows without using C++. */
-		PyVarObject_HEAD_INIT(NULL, 0)
-		"EtesElectricResistance.PowerCycle",             /*tp_name*/
-		sizeof(VarGroupObject),          /*tp_basicsize*/
-		0,                          /*tp_itemsize*/
-		/* methods */
-		0,    /*tp_dealloc*/
-		0,                          /*tp_print*/
-		(getattrfunc)0,             /*tp_getattr*/
-		0,                          /*tp_setattr*/
-		0,                          /*tp_reserved*/
-		0,                          /*tp_repr*/
-		0,                          /*tp_as_number*/
-		0,                          /*tp_as_sequence*/
-		0,                          /*tp_as_mapping*/
-		0,                          /*tp_hash*/
-		0,                          /*tp_call*/
-		0,                          /*tp_str*/
-		0,                          /*tp_getattro*/
-		0,                          /*tp_setattro*/
-		0,                          /*tp_as_buffer*/
-		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
-		0,                          /*tp_doc*/
-		0,                          /*tp_traverse*/
-		0,                          /*tp_clear*/
-		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistofnset*/
-		0,                          /*tp_iter*/
-		0,                          /*tp_iternext*/
-		PowerCycle_methods,         /*tp_methods*/
-		0,                          /*tp_members*/
-		PowerCycle_getset,          /*tp_getset*/
-		0,                          /*tp_base*/
-		0,                          /*tp_dict*/
-		0,                          /*tp_descr_get*/
-		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictofnset*/
-		0,                          /*tp_init*/
-		0,                          /*tp_alloc*/
-		0,             /*tp_new*/
-		0,                          /*tp_free*/
-		0,                          /*tp_is_gc*/
-};
-
-
-/*
- * RankineCycle Group
- */ 
-
-static PyTypeObject RankineCycle_Type;
-
-static PyObject *
-RankineCycle_new(SAM_EtesElectricResistance data_ptr)
-{
-	PyObject* new_obj = RankineCycle_Type.tp_alloc(&RankineCycle_Type,0);
-
-	VarGroupObject* RankineCycle_obj = (VarGroupObject*)new_obj;
-
-	RankineCycle_obj->data_ptr = (SAM_table)data_ptr;
-
-	return new_obj;
-}
-
-/* RankineCycle methods */
-
-static PyObject *
-RankineCycle_assign(VarGroupObject *self, PyObject *args)
-{
-	PyObject* dict;
-	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
-		return NULL;
-	}
-
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "EtesElectricResistance", "RankineCycle")){
-		return NULL;
-	}
-
-	Py_INCREF(Py_None);
-	return Py_None;
-}
-
-static PyObject *
-RankineCycle_replace(VarGroupObject *self, PyObject *args)
-{
-	PyObject* dict;
-	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
-		return NULL;
-	}
-	PyTypeObject* tp = &RankineCycle_Type;
-
-	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "EtesElectricResistance", "RankineCycle")){
-		return NULL;
-	}
-
-	Py_INCREF(Py_None);
-	return Py_None;
-}
-
-static PyObject *
-RankineCycle_export(VarGroupObject *self, PyObject *args)
-{
-	PyTypeObject* tp = &RankineCycle_Type;
-	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
-	return dict;
-}
-
-static PyMethodDef RankineCycle_methods[] = {
-		{"assign",            (PyCFunction)RankineCycle_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``RankineCycle_vals = { var: val, ...}``")},
-		{"replace",            (PyCFunction)RankineCycle_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``RankineCycle_vals = { var: val, ...}``")},
-		{"export",            (PyCFunction)RankineCycle_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
-		{NULL,              NULL}           /* sentinel */
-};
-
-static PyObject *
-RankineCycle_get_CT(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_EtesElectricResistance_RankineCycle_CT_nget, self->data_ptr);
-}
-
-static int
-RankineCycle_set_CT(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_RankineCycle_CT_nset, self->data_ptr);
-}
-
-static PyObject *
-RankineCycle_get_P_boil(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_EtesElectricResistance_RankineCycle_P_boil_nget, self->data_ptr);
-}
-
-static int
-RankineCycle_set_P_boil(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_RankineCycle_P_boil_nset, self->data_ptr);
-}
-
-static PyObject *
-RankineCycle_get_P_cond_min(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_EtesElectricResistance_RankineCycle_P_cond_min_nget, self->data_ptr);
-}
-
-static int
-RankineCycle_set_P_cond_min(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_RankineCycle_P_cond_min_nset, self->data_ptr);
-}
-
-static PyObject *
-RankineCycle_get_P_cond_ratio(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_EtesElectricResistance_RankineCycle_P_cond_ratio_nget, self->data_ptr);
-}
-
-static int
-RankineCycle_set_P_cond_ratio(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_RankineCycle_P_cond_ratio_nset, self->data_ptr);
-}
-
-static PyObject *
-RankineCycle_get_T_ITD_des(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_EtesElectricResistance_RankineCycle_T_ITD_des_nget, self->data_ptr);
-}
-
-static int
-RankineCycle_set_T_ITD_des(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_RankineCycle_T_ITD_des_nset, self->data_ptr);
-}
-
-static PyObject *
-RankineCycle_get_T_amb_des(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_EtesElectricResistance_RankineCycle_T_amb_des_nget, self->data_ptr);
-}
-
-static int
-RankineCycle_set_T_amb_des(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_RankineCycle_T_amb_des_nset, self->data_ptr);
-}
-
-static PyObject *
-RankineCycle_get_T_approach(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_EtesElectricResistance_RankineCycle_T_approach_nget, self->data_ptr);
-}
-
-static int
-RankineCycle_set_T_approach(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_RankineCycle_T_approach_nset, self->data_ptr);
-}
-
-static PyObject *
-RankineCycle_get_dT_cw_ref(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_EtesElectricResistance_RankineCycle_dT_cw_ref_nget, self->data_ptr);
-}
-
-static int
-RankineCycle_set_dT_cw_ref(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_RankineCycle_dT_cw_ref_nset, self->data_ptr);
-}
-
-static PyObject *
-RankineCycle_get_n_pl_inc(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_EtesElectricResistance_RankineCycle_n_pl_inc_nget, self->data_ptr);
-}
-
-static int
-RankineCycle_set_n_pl_inc(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_RankineCycle_n_pl_inc_nset, self->data_ptr);
-}
-
-static PyObject *
-RankineCycle_get_pb_bd_frac(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_EtesElectricResistance_RankineCycle_pb_bd_frac_nget, self->data_ptr);
-}
-
-static int
-RankineCycle_set_pb_bd_frac(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_RankineCycle_pb_bd_frac_nset, self->data_ptr);
-}
-
-static PyObject *
-RankineCycle_get_tech_type(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_EtesElectricResistance_RankineCycle_tech_type_nget, self->data_ptr);
-}
-
-static int
-RankineCycle_set_tech_type(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_RankineCycle_tech_type_nset, self->data_ptr);
-}
-
-static PyGetSetDef RankineCycle_getset[] = {
-{"CT", (getter)RankineCycle_get_CT,(setter)RankineCycle_set_CT,
-	PyDoc_STR("*float*: Condensor type: 1=evaporative, 2=air\n\n*Required*: True if pc_config=0"),
- 	NULL},
-{"P_boil", (getter)RankineCycle_get_P_boil,(setter)RankineCycle_set_P_boil,
-	PyDoc_STR("*float*: Boiler operating pressure [bar]\n\n*Required*: True if pc_config=0"),
- 	NULL},
-{"P_cond_min", (getter)RankineCycle_get_P_cond_min,(setter)RankineCycle_set_P_cond_min,
-	PyDoc_STR("*float*: Minimum condenser pressure [inHg]\n\n*Required*: True if pc_config=0"),
- 	NULL},
-{"P_cond_ratio", (getter)RankineCycle_get_P_cond_ratio,(setter)RankineCycle_set_P_cond_ratio,
-	PyDoc_STR("*float*: Condenser pressure ratio\n\n*Required*: True if pc_config=0"),
- 	NULL},
-{"T_ITD_des", (getter)RankineCycle_get_T_ITD_des,(setter)RankineCycle_set_T_ITD_des,
-	PyDoc_STR("*float*: ITD at design for dry system [C]\n\n*Required*: True if pc_config=0"),
- 	NULL},
-{"T_amb_des", (getter)RankineCycle_get_T_amb_des,(setter)RankineCycle_set_T_amb_des,
-	PyDoc_STR("*float*: Reference ambient temperature at design point [C]\n\n*Required*: True if pc_config=0"),
- 	NULL},
-{"T_approach", (getter)RankineCycle_get_T_approach,(setter)RankineCycle_set_T_approach,
-	PyDoc_STR("*float*: Cooling tower approach temperature [C]\n\n*Required*: True if pc_config=0"),
- 	NULL},
-{"dT_cw_ref", (getter)RankineCycle_get_dT_cw_ref,(setter)RankineCycle_set_dT_cw_ref,
-	PyDoc_STR("*float*: Reference condenser cooling water inlet/outlet temperature difference [C]\n\n*Required*: True if pc_config=0"),
- 	NULL},
-{"n_pl_inc", (getter)RankineCycle_get_n_pl_inc,(setter)RankineCycle_set_n_pl_inc,
-	PyDoc_STR("*float*: Number of part-load increments for the heat rejection system [none]\n\n*Constraints*: INTEGER\n\n*Required*: True if pc_config=0"),
- 	NULL},
-{"pb_bd_frac", (getter)RankineCycle_get_pb_bd_frac,(setter)RankineCycle_set_pb_bd_frac,
-	PyDoc_STR("*float*: Power block blowdown steam fraction\n\n*Required*: True if pc_config=0"),
- 	NULL},
-{"tech_type", (getter)RankineCycle_get_tech_type,(setter)RankineCycle_set_tech_type,
-	PyDoc_STR("*float*: Turbine inlet pressure control 1=Fixed, 3=Sliding\n\n*Required*: True if pc_config=0"),
- 	NULL},
-	{NULL}  /* Sentinel */
-};
-
-static PyTypeObject RankineCycle_Type = {
-		/* The ob_type field must be initialized in the module init function
-		 * to be portable to Windows without using C++. */
-		PyVarObject_HEAD_INIT(NULL, 0)
-		"EtesElectricResistance.RankineCycle",             /*tp_name*/
-		sizeof(VarGroupObject),          /*tp_basicsize*/
-		0,                          /*tp_itemsize*/
-		/* methods */
-		0,    /*tp_dealloc*/
-		0,                          /*tp_print*/
-		(getattrfunc)0,             /*tp_getattr*/
-		0,                          /*tp_setattr*/
-		0,                          /*tp_reserved*/
-		0,                          /*tp_repr*/
-		0,                          /*tp_as_number*/
-		0,                          /*tp_as_sequence*/
-		0,                          /*tp_as_mapping*/
-		0,                          /*tp_hash*/
-		0,                          /*tp_call*/
-		0,                          /*tp_str*/
-		0,                          /*tp_getattro*/
-		0,                          /*tp_setattro*/
-		0,                          /*tp_as_buffer*/
-		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
-		0,                          /*tp_doc*/
-		0,                          /*tp_traverse*/
-		0,                          /*tp_clear*/
-		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistofnset*/
-		0,                          /*tp_iter*/
-		0,                          /*tp_iternext*/
-		RankineCycle_methods,         /*tp_methods*/
-		0,                          /*tp_members*/
-		RankineCycle_getset,          /*tp_getset*/
-		0,                          /*tp_base*/
-		0,                          /*tp_dict*/
-		0,                          /*tp_descr_get*/
-		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictofnset*/
-		0,                          /*tp_init*/
-		0,                          /*tp_alloc*/
-		0,             /*tp_new*/
-		0,                          /*tp_free*/
-		0,                          /*tp_is_gc*/
-};
-
-
-/*
- * UserDefinedPowerCycle Group
- */ 
-
-static PyTypeObject UserDefinedPowerCycle_Type;
-
-static PyObject *
-UserDefinedPowerCycle_new(SAM_EtesElectricResistance data_ptr)
-{
-	PyObject* new_obj = UserDefinedPowerCycle_Type.tp_alloc(&UserDefinedPowerCycle_Type,0);
-
-	VarGroupObject* UserDefinedPowerCycle_obj = (VarGroupObject*)new_obj;
-
-	UserDefinedPowerCycle_obj->data_ptr = (SAM_table)data_ptr;
-
-	return new_obj;
-}
-
-/* UserDefinedPowerCycle methods */
-
-static PyObject *
-UserDefinedPowerCycle_assign(VarGroupObject *self, PyObject *args)
-{
-	PyObject* dict;
-	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
-		return NULL;
-	}
-
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "EtesElectricResistance", "UserDefinedPowerCycle")){
-		return NULL;
-	}
-
-	Py_INCREF(Py_None);
-	return Py_None;
-}
-
-static PyObject *
-UserDefinedPowerCycle_replace(VarGroupObject *self, PyObject *args)
-{
-	PyObject* dict;
-	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
-		return NULL;
-	}
-	PyTypeObject* tp = &UserDefinedPowerCycle_Type;
-
-	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "EtesElectricResistance", "UserDefinedPowerCycle")){
-		return NULL;
-	}
-
-	Py_INCREF(Py_None);
-	return Py_None;
-}
-
-static PyObject *
-UserDefinedPowerCycle_export(VarGroupObject *self, PyObject *args)
-{
-	PyTypeObject* tp = &UserDefinedPowerCycle_Type;
-	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
-	return dict;
-}
-
-static PyMethodDef UserDefinedPowerCycle_methods[] = {
-		{"assign",            (PyCFunction)UserDefinedPowerCycle_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``UserDefinedPowerCycle_vals = { var: val, ...}``")},
-		{"replace",            (PyCFunction)UserDefinedPowerCycle_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``UserDefinedPowerCycle_vals = { var: val, ...}``")},
-		{"export",            (PyCFunction)UserDefinedPowerCycle_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
-		{NULL,              NULL}           /* sentinel */
-};
-
-static PyObject *
-UserDefinedPowerCycle_get_ud_f_W_dot_cool_des(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_EtesElectricResistance_UserDefinedPowerCycle_ud_f_W_dot_cool_des_nget, self->data_ptr);
-}
-
-static int
-UserDefinedPowerCycle_set_ud_f_W_dot_cool_des(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_UserDefinedPowerCycle_ud_f_W_dot_cool_des_nset, self->data_ptr);
-}
-
-static PyObject *
-UserDefinedPowerCycle_get_ud_ind_od(VarGroupObject *self, void *closure)
-{
-	return PySAM_matrix_getter(SAM_EtesElectricResistance_UserDefinedPowerCycle_ud_ind_od_mget, self->data_ptr);
-}
-
-static int
-UserDefinedPowerCycle_set_ud_ind_od(VarGroupObject *self, PyObject *value, void *closure)
-{
-		return PySAM_matrix_setter(value, SAM_EtesElectricResistance_UserDefinedPowerCycle_ud_ind_od_mset, self->data_ptr);
-}
-
-static PyObject *
-UserDefinedPowerCycle_get_ud_m_dot_water_cool_des(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_EtesElectricResistance_UserDefinedPowerCycle_ud_m_dot_water_cool_des_nget, self->data_ptr);
-}
-
-static int
-UserDefinedPowerCycle_set_ud_m_dot_water_cool_des(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_UserDefinedPowerCycle_ud_m_dot_water_cool_des_nset, self->data_ptr);
-}
-
-static PyGetSetDef UserDefinedPowerCycle_getset[] = {
-{"ud_f_W_dot_cool_des", (getter)UserDefinedPowerCycle_get_ud_f_W_dot_cool_des,(setter)UserDefinedPowerCycle_set_ud_f_W_dot_cool_des,
-	PyDoc_STR("*float*: Percent of user-defined power cycle design gross output consumed by cooling [%]\n\n*Required*: True if pc_config=1"),
- 	NULL},
-{"ud_ind_od", (getter)UserDefinedPowerCycle_get_ud_ind_od,(setter)UserDefinedPowerCycle_set_ud_ind_od,
-	PyDoc_STR("*sequence[sequence]*: Off design user-defined power cycle performance as function of T_htf, m_dot_htf [ND], and T_amb\n\n*Required*: True if pc_config=1"),
- 	NULL},
-{"ud_m_dot_water_cool_des", (getter)UserDefinedPowerCycle_get_ud_m_dot_water_cool_des,(setter)UserDefinedPowerCycle_set_ud_m_dot_water_cool_des,
-	PyDoc_STR("*float*: Mass flow rate of water required at user-defined power cycle design point [kg/s]\n\n*Required*: True if pc_config=1"),
- 	NULL},
-	{NULL}  /* Sentinel */
-};
-
-static PyTypeObject UserDefinedPowerCycle_Type = {
-		/* The ob_type field must be initialized in the module init function
-		 * to be portable to Windows without using C++. */
-		PyVarObject_HEAD_INIT(NULL, 0)
-		"EtesElectricResistance.UserDefinedPowerCycle",             /*tp_name*/
-		sizeof(VarGroupObject),          /*tp_basicsize*/
-		0,                          /*tp_itemsize*/
-		/* methods */
-		0,    /*tp_dealloc*/
-		0,                          /*tp_print*/
-		(getattrfunc)0,             /*tp_getattr*/
-		0,                          /*tp_setattr*/
-		0,                          /*tp_reserved*/
-		0,                          /*tp_repr*/
-		0,                          /*tp_as_number*/
-		0,                          /*tp_as_sequence*/
-		0,                          /*tp_as_mapping*/
-		0,                          /*tp_hash*/
-		0,                          /*tp_call*/
-		0,                          /*tp_str*/
-		0,                          /*tp_getattro*/
-		0,                          /*tp_setattro*/
-		0,                          /*tp_as_buffer*/
-		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
-		0,                          /*tp_doc*/
-		0,                          /*tp_traverse*/
-		0,                          /*tp_clear*/
-		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistofnset*/
-		0,                          /*tp_iter*/
-		0,                          /*tp_iternext*/
-		UserDefinedPowerCycle_methods,         /*tp_methods*/
-		0,                          /*tp_members*/
-		UserDefinedPowerCycle_getset,          /*tp_getset*/
-		0,                          /*tp_base*/
-		0,                          /*tp_dict*/
-		0,                          /*tp_descr_get*/
-		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictofnset*/
-		0,                          /*tp_init*/
-		0,                          /*tp_alloc*/
-		0,             /*tp_new*/
-		0,                          /*tp_free*/
-		0,                          /*tp_is_gc*/
-};
-
-
-/*
  * ThermalStorage Group
  */ 
 
 static PyTypeObject ThermalStorage_Type;
 
 static PyObject *
-ThermalStorage_new(SAM_EtesElectricResistance data_ptr)
+ThermalStorage_new(SAM_EtesPtes data_ptr)
 {
 	PyObject* new_obj = ThermalStorage_Type.tp_alloc(&ThermalStorage_Type,0);
 
@@ -1758,7 +1137,7 @@ ThermalStorage_assign(VarGroupObject *self, PyObject *args)
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "EtesElectricResistance", "ThermalStorage")){
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "EtesPtes", "ThermalStorage")){
 		return NULL;
 	}
 
@@ -1775,7 +1154,7 @@ ThermalStorage_replace(VarGroupObject *self, PyObject *args)
 	}
 	PyTypeObject* tp = &ThermalStorage_Type;
 
-	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "EtesElectricResistance", "ThermalStorage")){
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "EtesPtes", "ThermalStorage")){
 		return NULL;
 	}
 
@@ -1802,170 +1181,65 @@ static PyMethodDef ThermalStorage_methods[] = {
 };
 
 static PyObject *
-ThermalStorage_get_cold_tank_Thtr(VarGroupObject *self, void *closure)
+ThermalStorage_get_cold_htf_code(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_ThermalStorage_cold_tank_Thtr_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_ThermalStorage_cold_htf_code_nget, self->data_ptr);
 }
 
 static int
-ThermalStorage_set_cold_tank_Thtr(VarGroupObject *self, PyObject *value, void *closure)
+ThermalStorage_set_cold_htf_code(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_ThermalStorage_cold_tank_Thtr_nset, self->data_ptr);
-}
-
-static PyObject *
-ThermalStorage_get_cold_tank_max_heat(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_EtesElectricResistance_ThermalStorage_cold_tank_max_heat_nget, self->data_ptr);
-}
-
-static int
-ThermalStorage_set_cold_tank_max_heat(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_ThermalStorage_cold_tank_max_heat_nset, self->data_ptr);
-}
-
-static PyObject *
-ThermalStorage_get_h_tank(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_EtesElectricResistance_ThermalStorage_h_tank_nget, self->data_ptr);
-}
-
-static int
-ThermalStorage_set_h_tank(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_ThermalStorage_h_tank_nset, self->data_ptr);
-}
-
-static PyObject *
-ThermalStorage_get_h_tank_min(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_EtesElectricResistance_ThermalStorage_h_tank_min_nget, self->data_ptr);
-}
-
-static int
-ThermalStorage_set_h_tank_min(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_ThermalStorage_h_tank_min_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_ThermalStorage_cold_htf_code_nset, self->data_ptr);
 }
 
 static PyObject *
 ThermalStorage_get_hot_htf_code(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_ThermalStorage_hot_htf_code_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_ThermalStorage_hot_htf_code_nget, self->data_ptr);
 }
 
 static int
 ThermalStorage_set_hot_htf_code(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_ThermalStorage_hot_htf_code_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_ThermalStorage_hot_htf_code_nset, self->data_ptr);
 }
 
 static PyObject *
-ThermalStorage_get_hot_tank_Thtr(VarGroupObject *self, void *closure)
+ThermalStorage_get_ud_cold_htf_props(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_ThermalStorage_hot_tank_Thtr_nget, self->data_ptr);
+	return PySAM_matrix_getter(SAM_EtesPtes_ThermalStorage_ud_cold_htf_props_mget, self->data_ptr);
 }
 
 static int
-ThermalStorage_set_hot_tank_Thtr(VarGroupObject *self, PyObject *value, void *closure)
+ThermalStorage_set_ud_cold_htf_props(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_ThermalStorage_hot_tank_Thtr_nset, self->data_ptr);
-}
-
-static PyObject *
-ThermalStorage_get_hot_tank_max_heat(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_EtesElectricResistance_ThermalStorage_hot_tank_max_heat_nget, self->data_ptr);
-}
-
-static int
-ThermalStorage_set_hot_tank_max_heat(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_ThermalStorage_hot_tank_max_heat_nset, self->data_ptr);
-}
-
-static PyObject *
-ThermalStorage_get_tank_pairs(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_EtesElectricResistance_ThermalStorage_tank_pairs_nget, self->data_ptr);
-}
-
-static int
-ThermalStorage_set_tank_pairs(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_ThermalStorage_tank_pairs_nset, self->data_ptr);
-}
-
-static PyObject *
-ThermalStorage_get_tes_init_hot_htf_percent(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_EtesElectricResistance_ThermalStorage_tes_init_hot_htf_percent_nget, self->data_ptr);
-}
-
-static int
-ThermalStorage_set_tes_init_hot_htf_percent(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_ThermalStorage_tes_init_hot_htf_percent_nset, self->data_ptr);
-}
-
-static PyObject *
-ThermalStorage_get_u_tank(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_EtesElectricResistance_ThermalStorage_u_tank_nget, self->data_ptr);
-}
-
-static int
-ThermalStorage_set_u_tank(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_ThermalStorage_u_tank_nset, self->data_ptr);
+		return PySAM_matrix_setter(value, SAM_EtesPtes_ThermalStorage_ud_cold_htf_props_mset, self->data_ptr);
 }
 
 static PyObject *
 ThermalStorage_get_ud_hot_htf_props(VarGroupObject *self, void *closure)
 {
-	return PySAM_matrix_getter(SAM_EtesElectricResistance_ThermalStorage_ud_hot_htf_props_mget, self->data_ptr);
+	return PySAM_matrix_getter(SAM_EtesPtes_ThermalStorage_ud_hot_htf_props_mget, self->data_ptr);
 }
 
 static int
 ThermalStorage_set_ud_hot_htf_props(VarGroupObject *self, PyObject *value, void *closure)
 {
-		return PySAM_matrix_setter(value, SAM_EtesElectricResistance_ThermalStorage_ud_hot_htf_props_mset, self->data_ptr);
+		return PySAM_matrix_setter(value, SAM_EtesPtes_ThermalStorage_ud_hot_htf_props_mset, self->data_ptr);
 }
 
 static PyGetSetDef ThermalStorage_getset[] = {
-{"cold_tank_Thtr", (getter)ThermalStorage_get_cold_tank_Thtr,(setter)ThermalStorage_set_cold_tank_Thtr,
-	PyDoc_STR("*float*: Minimum allowable cold tank HTF temperature [C]\n\n*Required*: True"),
- 	NULL},
-{"cold_tank_max_heat", (getter)ThermalStorage_get_cold_tank_max_heat,(setter)ThermalStorage_set_cold_tank_max_heat,
-	PyDoc_STR("*float*: Rated heater capacity for cold tank heating [MW]\n\n*Required*: True"),
- 	NULL},
-{"h_tank", (getter)ThermalStorage_get_h_tank,(setter)ThermalStorage_set_h_tank,
-	PyDoc_STR("*float*: Total height of tank (height of HTF when tank is full) [m]\n\n*Required*: True"),
- 	NULL},
-{"h_tank_min", (getter)ThermalStorage_get_h_tank_min,(setter)ThermalStorage_set_h_tank_min,
-	PyDoc_STR("*float*: Minimum allowable HTF height in storage tank [m]\n\n*Required*: True"),
+{"cold_htf_code", (getter)ThermalStorage_get_cold_htf_code,(setter)ThermalStorage_set_cold_htf_code,
+	PyDoc_STR("*float*: Cold HTF code - see htf_props.h for list\n\n*Required*: True"),
  	NULL},
 {"hot_htf_code", (getter)ThermalStorage_get_hot_htf_code,(setter)ThermalStorage_set_hot_htf_code,
-	PyDoc_STR("*float*: Receiver HTF, 17=Salt (60% NaNO3, 40% KNO3) 10=Salt (46.5% LiF 11.5% NaF 42% KF) 50=Lookup tables\n\n*Required*: True"),
+	PyDoc_STR("*float*: Hot HTF code - see htf_props.h for list\n\n*Required*: True"),
  	NULL},
-{"hot_tank_Thtr", (getter)ThermalStorage_get_hot_tank_Thtr,(setter)ThermalStorage_set_hot_tank_Thtr,
-	PyDoc_STR("*float*: Minimum allowable hot tank HTF temperature [C]\n\n*Required*: True"),
- 	NULL},
-{"hot_tank_max_heat", (getter)ThermalStorage_get_hot_tank_max_heat,(setter)ThermalStorage_set_hot_tank_max_heat,
-	PyDoc_STR("*float*: Rated heater capacity for hot tank heating [MW]\n\n*Required*: True"),
- 	NULL},
-{"tank_pairs", (getter)ThermalStorage_get_tank_pairs,(setter)ThermalStorage_set_tank_pairs,
-	PyDoc_STR("*float*: Number of equivalent tank pairs\n\n*Constraints*: INTEGER\n\n*Required*: True"),
- 	NULL},
-{"tes_init_hot_htf_percent", (getter)ThermalStorage_get_tes_init_hot_htf_percent,(setter)ThermalStorage_set_tes_init_hot_htf_percent,
-	PyDoc_STR("*float*: Initial fraction of available volume that is hot [%]\n\n*Required*: True"),
- 	NULL},
-{"u_tank", (getter)ThermalStorage_get_u_tank,(setter)ThermalStorage_set_u_tank,
-	PyDoc_STR("*float*: Loss coefficient from the tank [W/m2-K]\n\n*Required*: True"),
+{"ud_cold_htf_props", (getter)ThermalStorage_get_ud_cold_htf_props,(setter)ThermalStorage_set_ud_cold_htf_props,
+	PyDoc_STR("*sequence[sequence]*: User-defined Cold HTF fluid property data [-]\n\n*Required*: True"),
  	NULL},
 {"ud_hot_htf_props", (getter)ThermalStorage_get_ud_hot_htf_props,(setter)ThermalStorage_set_ud_hot_htf_props,
-	PyDoc_STR("*sequence[sequence]*: User-defined TES fluid property data [-]\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: User-defined Hot HTF fluid property data [-]\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1974,7 +1248,7 @@ static PyTypeObject ThermalStorage_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"EtesElectricResistance.ThermalStorage",             /*tp_name*/
+		"EtesPtes.ThermalStorage",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -2024,7 +1298,7 @@ static PyTypeObject ThermalStorage_Type = {
 static PyTypeObject Heater_Type;
 
 static PyObject *
-Heater_new(SAM_EtesElectricResistance data_ptr)
+Heater_new(SAM_EtesPtes data_ptr)
 {
 	PyObject* new_obj = Heater_Type.tp_alloc(&Heater_Type,0);
 
@@ -2045,7 +1319,7 @@ Heater_assign(VarGroupObject *self, PyObject *args)
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "EtesElectricResistance", "Heater")){
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "EtesPtes", "Heater")){
 		return NULL;
 	}
 
@@ -2062,7 +1336,7 @@ Heater_replace(VarGroupObject *self, PyObject *args)
 	}
 	PyTypeObject* tp = &Heater_Type;
 
-	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "EtesElectricResistance", "Heater")){
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "EtesPtes", "Heater")){
 		return NULL;
 	}
 
@@ -2091,37 +1365,37 @@ static PyMethodDef Heater_methods[] = {
 static PyObject *
 Heater_get_f_q_dot_des_allowable_su(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_Heater_f_q_dot_des_allowable_su_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_Heater_f_q_dot_des_allowable_su_nget, self->data_ptr);
 }
 
 static int
 Heater_set_f_q_dot_des_allowable_su(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_Heater_f_q_dot_des_allowable_su_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_Heater_f_q_dot_des_allowable_su_nset, self->data_ptr);
 }
 
 static PyObject *
 Heater_get_f_q_dot_heater_min(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_Heater_f_q_dot_heater_min_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_Heater_f_q_dot_heater_min_nget, self->data_ptr);
 }
 
 static int
 Heater_set_f_q_dot_heater_min(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_Heater_f_q_dot_heater_min_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_Heater_f_q_dot_heater_min_nset, self->data_ptr);
 }
 
 static PyObject *
 Heater_get_hrs_startup_at_max_rate(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_Heater_hrs_startup_at_max_rate_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_Heater_hrs_startup_at_max_rate_nget, self->data_ptr);
 }
 
 static int
 Heater_set_hrs_startup_at_max_rate(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_Heater_hrs_startup_at_max_rate_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_Heater_hrs_startup_at_max_rate_nset, self->data_ptr);
 }
 
 static PyGetSetDef Heater_getset[] = {
@@ -2141,7 +1415,7 @@ static PyTypeObject Heater_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"EtesElectricResistance.Heater",             /*tp_name*/
+		"EtesPtes.Heater",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -2185,13 +1459,709 @@ static PyTypeObject Heater_Type = {
 
 
 /*
+ * PowerCycle Group
+ */ 
+
+static PyTypeObject PowerCycle_Type;
+
+static PyObject *
+PowerCycle_new(SAM_EtesPtes data_ptr)
+{
+	PyObject* new_obj = PowerCycle_Type.tp_alloc(&PowerCycle_Type,0);
+
+	VarGroupObject* PowerCycle_obj = (VarGroupObject*)new_obj;
+
+	PowerCycle_obj->data_ptr = (SAM_table)data_ptr;
+
+	return new_obj;
+}
+
+/* PowerCycle methods */
+
+static PyObject *
+PowerCycle_assign(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "EtesPtes", "PowerCycle")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+PowerCycle_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &PowerCycle_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "EtesPtes", "PowerCycle")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+PowerCycle_export(VarGroupObject *self, PyObject *args)
+{
+	PyTypeObject* tp = &PowerCycle_Type;
+	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
+	return dict;
+}
+
+static PyMethodDef PowerCycle_methods[] = {
+		{"assign",            (PyCFunction)PowerCycle_assign,  METH_VARARGS,
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``PowerCycle_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)PowerCycle_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``PowerCycle_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)PowerCycle_export,  METH_VARARGS,
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+		{NULL,              NULL}           /* sentinel */
+};
+
+static PyObject *
+PowerCycle_get_CT_pb_pump_coef(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesPtes_PowerCycle_CT_pb_pump_coef_nget, self->data_ptr);
+}
+
+static int
+PowerCycle_set_CT_pb_pump_coef(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_EtesPtes_PowerCycle_CT_pb_pump_coef_nset, self->data_ptr);
+}
+
+static PyObject *
+PowerCycle_get_cycle_cutoff_frac(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesPtes_PowerCycle_cycle_cutoff_frac_nget, self->data_ptr);
+}
+
+static int
+PowerCycle_set_cycle_cutoff_frac(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_EtesPtes_PowerCycle_cycle_cutoff_frac_nset, self->data_ptr);
+}
+
+static PyObject *
+PowerCycle_get_cycle_max_frac(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesPtes_PowerCycle_cycle_max_frac_nget, self->data_ptr);
+}
+
+static int
+PowerCycle_set_cycle_max_frac(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_EtesPtes_PowerCycle_cycle_max_frac_nset, self->data_ptr);
+}
+
+static PyObject *
+PowerCycle_get_heat_pump_CT_HTF_pump_coef(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesPtes_PowerCycle_heat_pump_CT_HTF_pump_coef_nget, self->data_ptr);
+}
+
+static int
+PowerCycle_set_heat_pump_CT_HTF_pump_coef(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_EtesPtes_PowerCycle_heat_pump_CT_HTF_pump_coef_nset, self->data_ptr);
+}
+
+static PyObject *
+PowerCycle_get_heat_pump_HT_HTF_pump_coef(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesPtes_PowerCycle_heat_pump_HT_HTF_pump_coef_nget, self->data_ptr);
+}
+
+static int
+PowerCycle_set_heat_pump_HT_HTF_pump_coef(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_EtesPtes_PowerCycle_heat_pump_HT_HTF_pump_coef_nset, self->data_ptr);
+}
+
+static PyObject *
+PowerCycle_get_pb_pump_coef(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesPtes_PowerCycle_pb_pump_coef_nget, self->data_ptr);
+}
+
+static int
+PowerCycle_set_pb_pump_coef(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_EtesPtes_PowerCycle_pb_pump_coef_nset, self->data_ptr);
+}
+
+static PyObject *
+PowerCycle_get_q_sby_frac(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesPtes_PowerCycle_q_sby_frac_nget, self->data_ptr);
+}
+
+static int
+PowerCycle_set_q_sby_frac(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_EtesPtes_PowerCycle_q_sby_frac_nset, self->data_ptr);
+}
+
+static PyObject *
+PowerCycle_get_startup_frac(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesPtes_PowerCycle_startup_frac_nget, self->data_ptr);
+}
+
+static int
+PowerCycle_set_startup_frac(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_EtesPtes_PowerCycle_startup_frac_nset, self->data_ptr);
+}
+
+static PyObject *
+PowerCycle_get_startup_time(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesPtes_PowerCycle_startup_time_nget, self->data_ptr);
+}
+
+static int
+PowerCycle_set_startup_time(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_EtesPtes_PowerCycle_startup_time_nset, self->data_ptr);
+}
+
+static PyGetSetDef PowerCycle_getset[] = {
+{"CT_pb_pump_coef", (getter)PowerCycle_get_CT_pb_pump_coef,(setter)PowerCycle_set_CT_pb_pump_coef,
+	PyDoc_STR("*float*: COLD TES pumping power to move 1kg of HTF through PB loop [kW/kg/s]\n\n*Required*: True"),
+ 	NULL},
+{"cycle_cutoff_frac", (getter)PowerCycle_get_cycle_cutoff_frac,(setter)PowerCycle_set_cycle_cutoff_frac,
+	PyDoc_STR("*float*: Minimum turbine operation fraction before shutdown\n\n*Required*: True"),
+ 	NULL},
+{"cycle_max_frac", (getter)PowerCycle_get_cycle_max_frac,(setter)PowerCycle_set_cycle_max_frac,
+	PyDoc_STR("*float*: Maximum turbine over design operation fraction\n\n*Required*: True"),
+ 	NULL},
+{"heat_pump_CT_HTF_pump_coef", (getter)PowerCycle_get_heat_pump_CT_HTF_pump_coef,(setter)PowerCycle_set_heat_pump_CT_HTF_pump_coef,
+	PyDoc_STR("*float*: Cold temp HX pumping power to move 1 kg/s [kW/kg/s]\n\n*Required*: True"),
+ 	NULL},
+{"heat_pump_HT_HTF_pump_coef", (getter)PowerCycle_get_heat_pump_HT_HTF_pump_coef,(setter)PowerCycle_set_heat_pump_HT_HTF_pump_coef,
+	PyDoc_STR("*float*: High temp HX pumping power to move 1 kg/s [kW/kg/s]\n\n*Required*: True"),
+ 	NULL},
+{"pb_pump_coef", (getter)PowerCycle_get_pb_pump_coef,(setter)PowerCycle_set_pb_pump_coef,
+	PyDoc_STR("*float*: COLD TES pumping power to move 1kg of HTF through PB loop [kW/kg/s]\n\n*Required*: True"),
+ 	NULL},
+{"q_sby_frac", (getter)PowerCycle_get_q_sby_frac,(setter)PowerCycle_set_q_sby_frac,
+	PyDoc_STR("*float*: Fraction of thermal power required for standby\n\n*Required*: True"),
+ 	NULL},
+{"startup_frac", (getter)PowerCycle_get_startup_frac,(setter)PowerCycle_set_startup_frac,
+	PyDoc_STR("*float*: Fraction of design thermal power needed for startup [none]\n\n*Required*: True"),
+ 	NULL},
+{"startup_time", (getter)PowerCycle_get_startup_time,(setter)PowerCycle_set_startup_time,
+	PyDoc_STR("*float*: Time needed for power block startup [hr]\n\n*Required*: True"),
+ 	NULL},
+	{NULL}  /* Sentinel */
+};
+
+static PyTypeObject PowerCycle_Type = {
+		/* The ob_type field must be initialized in the module init function
+		 * to be portable to Windows without using C++. */
+		PyVarObject_HEAD_INIT(NULL, 0)
+		"EtesPtes.PowerCycle",             /*tp_name*/
+		sizeof(VarGroupObject),          /*tp_basicsize*/
+		0,                          /*tp_itemsize*/
+		/* methods */
+		0,    /*tp_dealloc*/
+		0,                          /*tp_print*/
+		(getattrfunc)0,             /*tp_getattr*/
+		0,                          /*tp_setattr*/
+		0,                          /*tp_reserved*/
+		0,                          /*tp_repr*/
+		0,                          /*tp_as_number*/
+		0,                          /*tp_as_sequence*/
+		0,                          /*tp_as_mapping*/
+		0,                          /*tp_hash*/
+		0,                          /*tp_call*/
+		0,                          /*tp_str*/
+		0,                          /*tp_getattro*/
+		0,                          /*tp_setattro*/
+		0,                          /*tp_as_buffer*/
+		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
+		0,                          /*tp_doc*/
+		0,                          /*tp_traverse*/
+		0,                          /*tp_clear*/
+		0,                          /*tp_richcompare*/
+		0,                          /*tp_weaklistofnset*/
+		0,                          /*tp_iter*/
+		0,                          /*tp_iternext*/
+		PowerCycle_methods,         /*tp_methods*/
+		0,                          /*tp_members*/
+		PowerCycle_getset,          /*tp_getset*/
+		0,                          /*tp_base*/
+		0,                          /*tp_dict*/
+		0,                          /*tp_descr_get*/
+		0,                          /*tp_descr_set*/
+		0,                          /*tp_dictofnset*/
+		0,                          /*tp_init*/
+		0,                          /*tp_alloc*/
+		0,             /*tp_new*/
+		0,                          /*tp_free*/
+		0,                          /*tp_is_gc*/
+};
+
+
+/*
+ * HotThermalStorage Group
+ */ 
+
+static PyTypeObject HotThermalStorage_Type;
+
+static PyObject *
+HotThermalStorage_new(SAM_EtesPtes data_ptr)
+{
+	PyObject* new_obj = HotThermalStorage_Type.tp_alloc(&HotThermalStorage_Type,0);
+
+	VarGroupObject* HotThermalStorage_obj = (VarGroupObject*)new_obj;
+
+	HotThermalStorage_obj->data_ptr = (SAM_table)data_ptr;
+
+	return new_obj;
+}
+
+/* HotThermalStorage methods */
+
+static PyObject *
+HotThermalStorage_assign(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "EtesPtes", "HotThermalStorage")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+HotThermalStorage_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &HotThermalStorage_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "EtesPtes", "HotThermalStorage")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+HotThermalStorage_export(VarGroupObject *self, PyObject *args)
+{
+	PyTypeObject* tp = &HotThermalStorage_Type;
+	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
+	return dict;
+}
+
+static PyMethodDef HotThermalStorage_methods[] = {
+		{"assign",            (PyCFunction)HotThermalStorage_assign,  METH_VARARGS,
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``HotThermalStorage_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)HotThermalStorage_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``HotThermalStorage_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)HotThermalStorage_export,  METH_VARARGS,
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+		{NULL,              NULL}           /* sentinel */
+};
+
+static PyObject *
+HotThermalStorage_get_cold_tank_Thtr(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesPtes_HotThermalStorage_cold_tank_Thtr_nget, self->data_ptr);
+}
+
+static int
+HotThermalStorage_set_cold_tank_Thtr(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_EtesPtes_HotThermalStorage_cold_tank_Thtr_nset, self->data_ptr);
+}
+
+static PyObject *
+HotThermalStorage_get_cold_tank_max_heat(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesPtes_HotThermalStorage_cold_tank_max_heat_nget, self->data_ptr);
+}
+
+static int
+HotThermalStorage_set_cold_tank_max_heat(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_EtesPtes_HotThermalStorage_cold_tank_max_heat_nset, self->data_ptr);
+}
+
+static PyObject *
+HotThermalStorage_get_h_tank(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesPtes_HotThermalStorage_h_tank_nget, self->data_ptr);
+}
+
+static int
+HotThermalStorage_set_h_tank(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_EtesPtes_HotThermalStorage_h_tank_nset, self->data_ptr);
+}
+
+static PyObject *
+HotThermalStorage_get_h_tank_min(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesPtes_HotThermalStorage_h_tank_min_nget, self->data_ptr);
+}
+
+static int
+HotThermalStorage_set_h_tank_min(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_EtesPtes_HotThermalStorage_h_tank_min_nset, self->data_ptr);
+}
+
+static PyObject *
+HotThermalStorage_get_hot_tank_Thtr(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesPtes_HotThermalStorage_hot_tank_Thtr_nget, self->data_ptr);
+}
+
+static int
+HotThermalStorage_set_hot_tank_Thtr(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_EtesPtes_HotThermalStorage_hot_tank_Thtr_nset, self->data_ptr);
+}
+
+static PyObject *
+HotThermalStorage_get_hot_tank_max_heat(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesPtes_HotThermalStorage_hot_tank_max_heat_nget, self->data_ptr);
+}
+
+static int
+HotThermalStorage_set_hot_tank_max_heat(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_EtesPtes_HotThermalStorage_hot_tank_max_heat_nset, self->data_ptr);
+}
+
+static PyObject *
+HotThermalStorage_get_tank_pairs(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesPtes_HotThermalStorage_tank_pairs_nget, self->data_ptr);
+}
+
+static int
+HotThermalStorage_set_tank_pairs(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_EtesPtes_HotThermalStorage_tank_pairs_nset, self->data_ptr);
+}
+
+static PyObject *
+HotThermalStorage_get_tes_init_hot_htf_percent(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesPtes_HotThermalStorage_tes_init_hot_htf_percent_nget, self->data_ptr);
+}
+
+static int
+HotThermalStorage_set_tes_init_hot_htf_percent(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_EtesPtes_HotThermalStorage_tes_init_hot_htf_percent_nset, self->data_ptr);
+}
+
+static PyObject *
+HotThermalStorage_get_u_tank(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesPtes_HotThermalStorage_u_tank_nget, self->data_ptr);
+}
+
+static int
+HotThermalStorage_set_u_tank(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_EtesPtes_HotThermalStorage_u_tank_nset, self->data_ptr);
+}
+
+static PyGetSetDef HotThermalStorage_getset[] = {
+{"cold_tank_Thtr", (getter)HotThermalStorage_get_cold_tank_Thtr,(setter)HotThermalStorage_set_cold_tank_Thtr,
+	PyDoc_STR("*float*: HOT TES Minimum allowable cold tank HTF temperature [C]\n\n*Required*: True"),
+ 	NULL},
+{"cold_tank_max_heat", (getter)HotThermalStorage_get_cold_tank_max_heat,(setter)HotThermalStorage_set_cold_tank_max_heat,
+	PyDoc_STR("*float*: HOT TES Rated heater capacity for cold tank heating [MW]\n\n*Required*: True"),
+ 	NULL},
+{"h_tank", (getter)HotThermalStorage_get_h_tank,(setter)HotThermalStorage_set_h_tank,
+	PyDoc_STR("*float*: HOT TES Total height of tank (height of HTF when tank is full) [m]\n\n*Required*: True"),
+ 	NULL},
+{"h_tank_min", (getter)HotThermalStorage_get_h_tank_min,(setter)HotThermalStorage_set_h_tank_min,
+	PyDoc_STR("*float*: HOT TES Minimum allowable HTF height in storage tank [m]\n\n*Required*: True"),
+ 	NULL},
+{"hot_tank_Thtr", (getter)HotThermalStorage_get_hot_tank_Thtr,(setter)HotThermalStorage_set_hot_tank_Thtr,
+	PyDoc_STR("*float*: HOT TES Minimum allowable hot tank HTF temperature [C]\n\n*Required*: True"),
+ 	NULL},
+{"hot_tank_max_heat", (getter)HotThermalStorage_get_hot_tank_max_heat,(setter)HotThermalStorage_set_hot_tank_max_heat,
+	PyDoc_STR("*float*: HOT TES Rated heater capacity for hot tank heating [MW]\n\n*Required*: True"),
+ 	NULL},
+{"tank_pairs", (getter)HotThermalStorage_get_tank_pairs,(setter)HotThermalStorage_set_tank_pairs,
+	PyDoc_STR("*float*: HOT TES Number of equivalent tank pairs\n\n*Constraints*: INTEGER\n\n*Required*: True"),
+ 	NULL},
+{"tes_init_hot_htf_percent", (getter)HotThermalStorage_get_tes_init_hot_htf_percent,(setter)HotThermalStorage_set_tes_init_hot_htf_percent,
+	PyDoc_STR("*float*: HOT TES Initial fraction of available volume that is hot [%]\n\n*Required*: True"),
+ 	NULL},
+{"u_tank", (getter)HotThermalStorage_get_u_tank,(setter)HotThermalStorage_set_u_tank,
+	PyDoc_STR("*float*: HOT TES Loss coefficient from the tank [W/m2-K]\n\n*Required*: True"),
+ 	NULL},
+	{NULL}  /* Sentinel */
+};
+
+static PyTypeObject HotThermalStorage_Type = {
+		/* The ob_type field must be initialized in the module init function
+		 * to be portable to Windows without using C++. */
+		PyVarObject_HEAD_INIT(NULL, 0)
+		"EtesPtes.HotThermalStorage",             /*tp_name*/
+		sizeof(VarGroupObject),          /*tp_basicsize*/
+		0,                          /*tp_itemsize*/
+		/* methods */
+		0,    /*tp_dealloc*/
+		0,                          /*tp_print*/
+		(getattrfunc)0,             /*tp_getattr*/
+		0,                          /*tp_setattr*/
+		0,                          /*tp_reserved*/
+		0,                          /*tp_repr*/
+		0,                          /*tp_as_number*/
+		0,                          /*tp_as_sequence*/
+		0,                          /*tp_as_mapping*/
+		0,                          /*tp_hash*/
+		0,                          /*tp_call*/
+		0,                          /*tp_str*/
+		0,                          /*tp_getattro*/
+		0,                          /*tp_setattro*/
+		0,                          /*tp_as_buffer*/
+		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
+		0,                          /*tp_doc*/
+		0,                          /*tp_traverse*/
+		0,                          /*tp_clear*/
+		0,                          /*tp_richcompare*/
+		0,                          /*tp_weaklistofnset*/
+		0,                          /*tp_iter*/
+		0,                          /*tp_iternext*/
+		HotThermalStorage_methods,         /*tp_methods*/
+		0,                          /*tp_members*/
+		HotThermalStorage_getset,          /*tp_getset*/
+		0,                          /*tp_base*/
+		0,                          /*tp_dict*/
+		0,                          /*tp_descr_get*/
+		0,                          /*tp_descr_set*/
+		0,                          /*tp_dictofnset*/
+		0,                          /*tp_init*/
+		0,                          /*tp_alloc*/
+		0,             /*tp_new*/
+		0,                          /*tp_free*/
+		0,                          /*tp_is_gc*/
+};
+
+
+/*
+ * ColdThermalStorage Group
+ */ 
+
+static PyTypeObject ColdThermalStorage_Type;
+
+static PyObject *
+ColdThermalStorage_new(SAM_EtesPtes data_ptr)
+{
+	PyObject* new_obj = ColdThermalStorage_Type.tp_alloc(&ColdThermalStorage_Type,0);
+
+	VarGroupObject* ColdThermalStorage_obj = (VarGroupObject*)new_obj;
+
+	ColdThermalStorage_obj->data_ptr = (SAM_table)data_ptr;
+
+	return new_obj;
+}
+
+/* ColdThermalStorage methods */
+
+static PyObject *
+ColdThermalStorage_assign(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "EtesPtes", "ColdThermalStorage")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+ColdThermalStorage_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &ColdThermalStorage_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "EtesPtes", "ColdThermalStorage")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+ColdThermalStorage_export(VarGroupObject *self, PyObject *args)
+{
+	PyTypeObject* tp = &ColdThermalStorage_Type;
+	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
+	return dict;
+}
+
+static PyMethodDef ColdThermalStorage_methods[] = {
+		{"assign",            (PyCFunction)ColdThermalStorage_assign,  METH_VARARGS,
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``ColdThermalStorage_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)ColdThermalStorage_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``ColdThermalStorage_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)ColdThermalStorage_export,  METH_VARARGS,
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+		{NULL,              NULL}           /* sentinel */
+};
+
+static PyObject *
+ColdThermalStorage_get_CT_h_tank(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesPtes_ColdThermalStorage_CT_h_tank_nget, self->data_ptr);
+}
+
+static int
+ColdThermalStorage_set_CT_h_tank(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_EtesPtes_ColdThermalStorage_CT_h_tank_nset, self->data_ptr);
+}
+
+static PyObject *
+ColdThermalStorage_get_CT_h_tank_min(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesPtes_ColdThermalStorage_CT_h_tank_min_nget, self->data_ptr);
+}
+
+static int
+ColdThermalStorage_set_CT_h_tank_min(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_EtesPtes_ColdThermalStorage_CT_h_tank_min_nset, self->data_ptr);
+}
+
+static PyObject *
+ColdThermalStorage_get_CT_tank_pairs(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesPtes_ColdThermalStorage_CT_tank_pairs_nget, self->data_ptr);
+}
+
+static int
+ColdThermalStorage_set_CT_tank_pairs(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_EtesPtes_ColdThermalStorage_CT_tank_pairs_nset, self->data_ptr);
+}
+
+static PyObject *
+ColdThermalStorage_get_CT_u_tank(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesPtes_ColdThermalStorage_CT_u_tank_nget, self->data_ptr);
+}
+
+static int
+ColdThermalStorage_set_CT_u_tank(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_EtesPtes_ColdThermalStorage_CT_u_tank_nset, self->data_ptr);
+}
+
+static PyGetSetDef ColdThermalStorage_getset[] = {
+{"CT_h_tank", (getter)ColdThermalStorage_get_CT_h_tank,(setter)ColdThermalStorage_set_CT_h_tank,
+	PyDoc_STR("*float*: COLD TES Total height of tank (height of HTF when tank is full) [m]\n\n*Required*: True"),
+ 	NULL},
+{"CT_h_tank_min", (getter)ColdThermalStorage_get_CT_h_tank_min,(setter)ColdThermalStorage_set_CT_h_tank_min,
+	PyDoc_STR("*float*: COLD TES Minimum allowable HTF height in storage tank [m]\n\n*Required*: True"),
+ 	NULL},
+{"CT_tank_pairs", (getter)ColdThermalStorage_get_CT_tank_pairs,(setter)ColdThermalStorage_set_CT_tank_pairs,
+	PyDoc_STR("*float*: COLD TES Number of equivalent tank pairs\n\n*Constraints*: INTEGER\n\n*Required*: True"),
+ 	NULL},
+{"CT_u_tank", (getter)ColdThermalStorage_get_CT_u_tank,(setter)ColdThermalStorage_set_CT_u_tank,
+	PyDoc_STR("*float*: COLD TES Loss coefficient from the tank [W/m2-K]\n\n*Required*: True"),
+ 	NULL},
+	{NULL}  /* Sentinel */
+};
+
+static PyTypeObject ColdThermalStorage_Type = {
+		/* The ob_type field must be initialized in the module init function
+		 * to be portable to Windows without using C++. */
+		PyVarObject_HEAD_INIT(NULL, 0)
+		"EtesPtes.ColdThermalStorage",             /*tp_name*/
+		sizeof(VarGroupObject),          /*tp_basicsize*/
+		0,                          /*tp_itemsize*/
+		/* methods */
+		0,    /*tp_dealloc*/
+		0,                          /*tp_print*/
+		(getattrfunc)0,             /*tp_getattr*/
+		0,                          /*tp_setattr*/
+		0,                          /*tp_reserved*/
+		0,                          /*tp_repr*/
+		0,                          /*tp_as_number*/
+		0,                          /*tp_as_sequence*/
+		0,                          /*tp_as_mapping*/
+		0,                          /*tp_hash*/
+		0,                          /*tp_call*/
+		0,                          /*tp_str*/
+		0,                          /*tp_getattro*/
+		0,                          /*tp_setattro*/
+		0,                          /*tp_as_buffer*/
+		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
+		0,                          /*tp_doc*/
+		0,                          /*tp_traverse*/
+		0,                          /*tp_clear*/
+		0,                          /*tp_richcompare*/
+		0,                          /*tp_weaklistofnset*/
+		0,                          /*tp_iter*/
+		0,                          /*tp_iternext*/
+		ColdThermalStorage_methods,         /*tp_methods*/
+		0,                          /*tp_members*/
+		ColdThermalStorage_getset,          /*tp_getset*/
+		0,                          /*tp_base*/
+		0,                          /*tp_dict*/
+		0,                          /*tp_descr_get*/
+		0,                          /*tp_descr_set*/
+		0,                          /*tp_dictofnset*/
+		0,                          /*tp_init*/
+		0,                          /*tp_alloc*/
+		0,             /*tp_new*/
+		0,                          /*tp_free*/
+		0,                          /*tp_is_gc*/
+};
+
+
+/*
  * TimeOfDeliveryFactors Group
  */ 
 
 static PyTypeObject TimeOfDeliveryFactors_Type;
 
 static PyObject *
-TimeOfDeliveryFactors_new(SAM_EtesElectricResistance data_ptr)
+TimeOfDeliveryFactors_new(SAM_EtesPtes data_ptr)
 {
 	PyObject* new_obj = TimeOfDeliveryFactors_Type.tp_alloc(&TimeOfDeliveryFactors_Type,0);
 
@@ -2212,7 +2182,7 @@ TimeOfDeliveryFactors_assign(VarGroupObject *self, PyObject *args)
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "EtesElectricResistance", "TimeOfDeliveryFactors")){
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "EtesPtes", "TimeOfDeliveryFactors")){
 		return NULL;
 	}
 
@@ -2229,7 +2199,7 @@ TimeOfDeliveryFactors_replace(VarGroupObject *self, PyObject *args)
 	}
 	PyTypeObject* tp = &TimeOfDeliveryFactors_Type;
 
-	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "EtesElectricResistance", "TimeOfDeliveryFactors")){
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "EtesPtes", "TimeOfDeliveryFactors")){
 		return NULL;
 	}
 
@@ -2258,157 +2228,157 @@ static PyMethodDef TimeOfDeliveryFactors_methods[] = {
 static PyObject *
 TimeOfDeliveryFactors_get_dispatch_factor1(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_TimeOfDeliveryFactors_dispatch_factor1_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_TimeOfDeliveryFactors_dispatch_factor1_nget, self->data_ptr);
 }
 
 static int
 TimeOfDeliveryFactors_set_dispatch_factor1(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_TimeOfDeliveryFactors_dispatch_factor1_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_TimeOfDeliveryFactors_dispatch_factor1_nset, self->data_ptr);
 }
 
 static PyObject *
 TimeOfDeliveryFactors_get_dispatch_factor2(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_TimeOfDeliveryFactors_dispatch_factor2_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_TimeOfDeliveryFactors_dispatch_factor2_nget, self->data_ptr);
 }
 
 static int
 TimeOfDeliveryFactors_set_dispatch_factor2(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_TimeOfDeliveryFactors_dispatch_factor2_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_TimeOfDeliveryFactors_dispatch_factor2_nset, self->data_ptr);
 }
 
 static PyObject *
 TimeOfDeliveryFactors_get_dispatch_factor3(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_TimeOfDeliveryFactors_dispatch_factor3_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_TimeOfDeliveryFactors_dispatch_factor3_nget, self->data_ptr);
 }
 
 static int
 TimeOfDeliveryFactors_set_dispatch_factor3(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_TimeOfDeliveryFactors_dispatch_factor3_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_TimeOfDeliveryFactors_dispatch_factor3_nset, self->data_ptr);
 }
 
 static PyObject *
 TimeOfDeliveryFactors_get_dispatch_factor4(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_TimeOfDeliveryFactors_dispatch_factor4_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_TimeOfDeliveryFactors_dispatch_factor4_nget, self->data_ptr);
 }
 
 static int
 TimeOfDeliveryFactors_set_dispatch_factor4(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_TimeOfDeliveryFactors_dispatch_factor4_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_TimeOfDeliveryFactors_dispatch_factor4_nset, self->data_ptr);
 }
 
 static PyObject *
 TimeOfDeliveryFactors_get_dispatch_factor5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_TimeOfDeliveryFactors_dispatch_factor5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_TimeOfDeliveryFactors_dispatch_factor5_nget, self->data_ptr);
 }
 
 static int
 TimeOfDeliveryFactors_set_dispatch_factor5(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_TimeOfDeliveryFactors_dispatch_factor5_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_TimeOfDeliveryFactors_dispatch_factor5_nset, self->data_ptr);
 }
 
 static PyObject *
 TimeOfDeliveryFactors_get_dispatch_factor6(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_TimeOfDeliveryFactors_dispatch_factor6_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_TimeOfDeliveryFactors_dispatch_factor6_nget, self->data_ptr);
 }
 
 static int
 TimeOfDeliveryFactors_set_dispatch_factor6(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_TimeOfDeliveryFactors_dispatch_factor6_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_TimeOfDeliveryFactors_dispatch_factor6_nset, self->data_ptr);
 }
 
 static PyObject *
 TimeOfDeliveryFactors_get_dispatch_factor7(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_TimeOfDeliveryFactors_dispatch_factor7_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_TimeOfDeliveryFactors_dispatch_factor7_nget, self->data_ptr);
 }
 
 static int
 TimeOfDeliveryFactors_set_dispatch_factor7(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_TimeOfDeliveryFactors_dispatch_factor7_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_TimeOfDeliveryFactors_dispatch_factor7_nset, self->data_ptr);
 }
 
 static PyObject *
 TimeOfDeliveryFactors_get_dispatch_factor8(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_TimeOfDeliveryFactors_dispatch_factor8_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_TimeOfDeliveryFactors_dispatch_factor8_nget, self->data_ptr);
 }
 
 static int
 TimeOfDeliveryFactors_set_dispatch_factor8(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_TimeOfDeliveryFactors_dispatch_factor8_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_TimeOfDeliveryFactors_dispatch_factor8_nset, self->data_ptr);
 }
 
 static PyObject *
 TimeOfDeliveryFactors_get_dispatch_factor9(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_TimeOfDeliveryFactors_dispatch_factor9_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_TimeOfDeliveryFactors_dispatch_factor9_nget, self->data_ptr);
 }
 
 static int
 TimeOfDeliveryFactors_set_dispatch_factor9(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_TimeOfDeliveryFactors_dispatch_factor9_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_TimeOfDeliveryFactors_dispatch_factor9_nset, self->data_ptr);
 }
 
 static PyObject *
 TimeOfDeliveryFactors_get_dispatch_factors_ts(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_EtesElectricResistance_TimeOfDeliveryFactors_dispatch_factors_ts_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_EtesPtes_TimeOfDeliveryFactors_dispatch_factors_ts_aget, self->data_ptr);
 }
 
 static int
 TimeOfDeliveryFactors_set_dispatch_factors_ts(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_EtesElectricResistance_TimeOfDeliveryFactors_dispatch_factors_ts_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_EtesPtes_TimeOfDeliveryFactors_dispatch_factors_ts_aset, self->data_ptr);
 }
 
 static PyObject *
 TimeOfDeliveryFactors_get_dispatch_sched_weekday(VarGroupObject *self, void *closure)
 {
-	return PySAM_matrix_getter(SAM_EtesElectricResistance_TimeOfDeliveryFactors_dispatch_sched_weekday_mget, self->data_ptr);
+	return PySAM_matrix_getter(SAM_EtesPtes_TimeOfDeliveryFactors_dispatch_sched_weekday_mget, self->data_ptr);
 }
 
 static int
 TimeOfDeliveryFactors_set_dispatch_sched_weekday(VarGroupObject *self, PyObject *value, void *closure)
 {
-		return PySAM_matrix_setter(value, SAM_EtesElectricResistance_TimeOfDeliveryFactors_dispatch_sched_weekday_mset, self->data_ptr);
+		return PySAM_matrix_setter(value, SAM_EtesPtes_TimeOfDeliveryFactors_dispatch_sched_weekday_mset, self->data_ptr);
 }
 
 static PyObject *
 TimeOfDeliveryFactors_get_dispatch_sched_weekend(VarGroupObject *self, void *closure)
 {
-	return PySAM_matrix_getter(SAM_EtesElectricResistance_TimeOfDeliveryFactors_dispatch_sched_weekend_mget, self->data_ptr);
+	return PySAM_matrix_getter(SAM_EtesPtes_TimeOfDeliveryFactors_dispatch_sched_weekend_mget, self->data_ptr);
 }
 
 static int
 TimeOfDeliveryFactors_set_dispatch_sched_weekend(VarGroupObject *self, PyObject *value, void *closure)
 {
-		return PySAM_matrix_setter(value, SAM_EtesElectricResistance_TimeOfDeliveryFactors_dispatch_sched_weekend_mset, self->data_ptr);
+		return PySAM_matrix_setter(value, SAM_EtesPtes_TimeOfDeliveryFactors_dispatch_sched_weekend_mset, self->data_ptr);
 }
 
 static PyObject *
 TimeOfDeliveryFactors_get_ppa_multiplier_model(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_TimeOfDeliveryFactors_ppa_multiplier_model_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_TimeOfDeliveryFactors_ppa_multiplier_model_nget, self->data_ptr);
 }
 
 static int
 TimeOfDeliveryFactors_set_ppa_multiplier_model(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_TimeOfDeliveryFactors_ppa_multiplier_model_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_TimeOfDeliveryFactors_ppa_multiplier_model_nset, self->data_ptr);
 }
 
 static PyGetSetDef TimeOfDeliveryFactors_getset[] = {
@@ -2458,7 +2428,7 @@ static PyTypeObject TimeOfDeliveryFactors_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"EtesElectricResistance.TimeOfDeliveryFactors",             /*tp_name*/
+		"EtesPtes.TimeOfDeliveryFactors",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -2508,7 +2478,7 @@ static PyTypeObject TimeOfDeliveryFactors_Type = {
 static PyTypeObject Revenue_Type;
 
 static PyObject *
-Revenue_new(SAM_EtesElectricResistance data_ptr)
+Revenue_new(SAM_EtesPtes data_ptr)
 {
 	PyObject* new_obj = Revenue_Type.tp_alloc(&Revenue_Type,0);
 
@@ -2529,7 +2499,7 @@ Revenue_assign(VarGroupObject *self, PyObject *args)
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "EtesElectricResistance", "Revenue")){
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "EtesPtes", "Revenue")){
 		return NULL;
 	}
 
@@ -2546,7 +2516,7 @@ Revenue_replace(VarGroupObject *self, PyObject *args)
 	}
 	PyTypeObject* tp = &Revenue_Type;
 
-	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "EtesElectricResistance", "Revenue")){
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "EtesPtes", "Revenue")){
 		return NULL;
 	}
 
@@ -2573,33 +2543,18 @@ static PyMethodDef Revenue_methods[] = {
 };
 
 static PyObject *
-Revenue_get_mp_energy_market_revenue(VarGroupObject *self, void *closure)
-{
-	return PySAM_matrix_getter(SAM_EtesElectricResistance_Revenue_mp_energy_market_revenue_mget, self->data_ptr);
-}
-
-static int
-Revenue_set_mp_energy_market_revenue(VarGroupObject *self, PyObject *value, void *closure)
-{
-		return PySAM_matrix_setter(value, SAM_EtesElectricResistance_Revenue_mp_energy_market_revenue_mset, self->data_ptr);
-}
-
-static PyObject *
 Revenue_get_ppa_price_input(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_EtesElectricResistance_Revenue_ppa_price_input_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_EtesPtes_Revenue_ppa_price_input_aget, self->data_ptr);
 }
 
 static int
 Revenue_set_ppa_price_input(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_EtesElectricResistance_Revenue_ppa_price_input_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_EtesPtes_Revenue_ppa_price_input_aset, self->data_ptr);
 }
 
 static PyGetSetDef Revenue_getset[] = {
-{"mp_energy_market_revenue", (getter)Revenue_get_mp_energy_market_revenue,(setter)Revenue_set_mp_energy_market_revenue,
-	PyDoc_STR("*sequence[sequence]*: Energy market revenue input\n\n*Info*: Lifetime x 2[Cleared Capacity(MW),Price($/MWh)]\n\n*Required*: True if etes_financial_model=6&is_dispatch=1&sim_type=1"),
- 	NULL},
 {"ppa_price_input", (getter)Revenue_get_ppa_price_input,(setter)Revenue_set_ppa_price_input,
 	PyDoc_STR("*sequence*: PPA prices - yearly [$/kWh]\n\n*Required*: True if ppa_multiplier_model=0&etes_financial_model<5&is_dispatch=1&sim_type=1"),
  	NULL},
@@ -2610,7 +2565,7 @@ static PyTypeObject Revenue_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"EtesElectricResistance.Revenue",             /*tp_name*/
+		"EtesPtes.Revenue",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -2654,150 +2609,13 @@ static PyTypeObject Revenue_Type = {
 
 
 /*
- * SystemCost Group
- */ 
-
-static PyTypeObject SystemCost_Type;
-
-static PyObject *
-SystemCost_new(SAM_EtesElectricResistance data_ptr)
-{
-	PyObject* new_obj = SystemCost_Type.tp_alloc(&SystemCost_Type,0);
-
-	VarGroupObject* SystemCost_obj = (VarGroupObject*)new_obj;
-
-	SystemCost_obj->data_ptr = (SAM_table)data_ptr;
-
-	return new_obj;
-}
-
-/* SystemCost methods */
-
-static PyObject *
-SystemCost_assign(VarGroupObject *self, PyObject *args)
-{
-	PyObject* dict;
-	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
-		return NULL;
-	}
-
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "EtesElectricResistance", "SystemCost")){
-		return NULL;
-	}
-
-	Py_INCREF(Py_None);
-	return Py_None;
-}
-
-static PyObject *
-SystemCost_replace(VarGroupObject *self, PyObject *args)
-{
-	PyObject* dict;
-	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
-		return NULL;
-	}
-	PyTypeObject* tp = &SystemCost_Type;
-
-	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "EtesElectricResistance", "SystemCost")){
-		return NULL;
-	}
-
-	Py_INCREF(Py_None);
-	return Py_None;
-}
-
-static PyObject *
-SystemCost_export(VarGroupObject *self, PyObject *args)
-{
-	PyTypeObject* tp = &SystemCost_Type;
-	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
-	return dict;
-}
-
-static PyMethodDef SystemCost_methods[] = {
-		{"assign",            (PyCFunction)SystemCost_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``SystemCost_vals = { var: val, ...}``")},
-		{"replace",            (PyCFunction)SystemCost_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``SystemCost_vals = { var: val, ...}``")},
-		{"export",            (PyCFunction)SystemCost_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
-		{NULL,              NULL}           /* sentinel */
-};
-
-static PyObject *
-SystemCost_get_cycle_spec_cost(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_EtesElectricResistance_SystemCost_cycle_spec_cost_nget, self->data_ptr);
-}
-
-static int
-SystemCost_set_cycle_spec_cost(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_SystemCost_cycle_spec_cost_nset, self->data_ptr);
-}
-
-static PyGetSetDef SystemCost_getset[] = {
-{"cycle_spec_cost", (getter)SystemCost_get_cycle_spec_cost,(setter)SystemCost_set_cycle_spec_cost,
-	PyDoc_STR("*float*: Power cycle specific cost [$/kWe]\n\n*Required*: True"),
- 	NULL},
-	{NULL}  /* Sentinel */
-};
-
-static PyTypeObject SystemCost_Type = {
-		/* The ob_type field must be initialized in the module init function
-		 * to be portable to Windows without using C++. */
-		PyVarObject_HEAD_INIT(NULL, 0)
-		"EtesElectricResistance.SystemCost",             /*tp_name*/
-		sizeof(VarGroupObject),          /*tp_basicsize*/
-		0,                          /*tp_itemsize*/
-		/* methods */
-		0,    /*tp_dealloc*/
-		0,                          /*tp_print*/
-		(getattrfunc)0,             /*tp_getattr*/
-		0,                          /*tp_setattr*/
-		0,                          /*tp_reserved*/
-		0,                          /*tp_repr*/
-		0,                          /*tp_as_number*/
-		0,                          /*tp_as_sequence*/
-		0,                          /*tp_as_mapping*/
-		0,                          /*tp_hash*/
-		0,                          /*tp_call*/
-		0,                          /*tp_str*/
-		0,                          /*tp_getattro*/
-		0,                          /*tp_setattro*/
-		0,                          /*tp_as_buffer*/
-		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
-		0,                          /*tp_doc*/
-		0,                          /*tp_traverse*/
-		0,                          /*tp_clear*/
-		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistofnset*/
-		0,                          /*tp_iter*/
-		0,                          /*tp_iternext*/
-		SystemCost_methods,         /*tp_methods*/
-		0,                          /*tp_members*/
-		SystemCost_getset,          /*tp_getset*/
-		0,                          /*tp_base*/
-		0,                          /*tp_dict*/
-		0,                          /*tp_descr_get*/
-		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictofnset*/
-		0,                          /*tp_init*/
-		0,                          /*tp_alloc*/
-		0,             /*tp_new*/
-		0,                          /*tp_free*/
-		0,                          /*tp_is_gc*/
-};
-
-
-/*
  * SystemCosts Group
  */ 
 
 static PyTypeObject SystemCosts_Type;
 
 static PyObject *
-SystemCosts_new(SAM_EtesElectricResistance data_ptr)
+SystemCosts_new(SAM_EtesPtes data_ptr)
 {
 	PyObject* new_obj = SystemCosts_Type.tp_alloc(&SystemCosts_Type,0);
 
@@ -2818,7 +2636,7 @@ SystemCosts_assign(VarGroupObject *self, PyObject *args)
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "EtesElectricResistance", "SystemCosts")){
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "EtesPtes", "SystemCosts")){
 		return NULL;
 	}
 
@@ -2835,7 +2653,7 @@ SystemCosts_replace(VarGroupObject *self, PyObject *args)
 	}
 	PyTypeObject* tp = &SystemCosts_Type;
 
-	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "EtesElectricResistance", "SystemCosts")){
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "EtesPtes", "SystemCosts")){
 		return NULL;
 	}
 
@@ -2862,143 +2680,173 @@ static PyMethodDef SystemCosts_methods[] = {
 };
 
 static PyObject *
+SystemCosts_get_CT_tes_spec_cost(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesPtes_SystemCosts_CT_tes_spec_cost_nget, self->data_ptr);
+}
+
+static int
+SystemCosts_set_CT_tes_spec_cost(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_EtesPtes_SystemCosts_CT_tes_spec_cost_nset, self->data_ptr);
+}
+
+static PyObject *
 SystemCosts_get_bop_spec_cost(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_SystemCosts_bop_spec_cost_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_SystemCosts_bop_spec_cost_nget, self->data_ptr);
 }
 
 static int
 SystemCosts_set_bop_spec_cost(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_SystemCosts_bop_spec_cost_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_SystemCosts_bop_spec_cost_nset, self->data_ptr);
 }
 
 static PyObject *
 SystemCosts_get_contingency_rate(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_SystemCosts_contingency_rate_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_SystemCosts_contingency_rate_nget, self->data_ptr);
 }
 
 static int
 SystemCosts_set_contingency_rate(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_SystemCosts_contingency_rate_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_SystemCosts_contingency_rate_nset, self->data_ptr);
+}
+
+static PyObject *
+SystemCosts_get_cycle_spec_cost(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesPtes_SystemCosts_cycle_spec_cost_nget, self->data_ptr);
+}
+
+static int
+SystemCosts_set_cycle_spec_cost(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_EtesPtes_SystemCosts_cycle_spec_cost_nset, self->data_ptr);
 }
 
 static PyObject *
 SystemCosts_get_epc_cost_fixed(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_SystemCosts_epc_cost_fixed_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_SystemCosts_epc_cost_fixed_nget, self->data_ptr);
 }
 
 static int
 SystemCosts_set_epc_cost_fixed(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_SystemCosts_epc_cost_fixed_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_SystemCosts_epc_cost_fixed_nset, self->data_ptr);
 }
 
 static PyObject *
 SystemCosts_get_epc_cost_per_watt(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_SystemCosts_epc_cost_per_watt_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_SystemCosts_epc_cost_per_watt_nget, self->data_ptr);
 }
 
 static int
 SystemCosts_set_epc_cost_per_watt(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_SystemCosts_epc_cost_per_watt_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_SystemCosts_epc_cost_per_watt_nset, self->data_ptr);
 }
 
 static PyObject *
 SystemCosts_get_epc_cost_perc_of_direct(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_SystemCosts_epc_cost_perc_of_direct_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_SystemCosts_epc_cost_perc_of_direct_nget, self->data_ptr);
 }
 
 static int
 SystemCosts_set_epc_cost_perc_of_direct(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_SystemCosts_epc_cost_perc_of_direct_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_SystemCosts_epc_cost_perc_of_direct_nset, self->data_ptr);
 }
 
 static PyObject *
-SystemCosts_get_heater_spec_cost(VarGroupObject *self, void *closure)
+SystemCosts_get_heat_pump_spec_cost(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_SystemCosts_heater_spec_cost_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_SystemCosts_heat_pump_spec_cost_nget, self->data_ptr);
 }
 
 static int
-SystemCosts_set_heater_spec_cost(VarGroupObject *self, PyObject *value, void *closure)
+SystemCosts_set_heat_pump_spec_cost(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_SystemCosts_heater_spec_cost_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_SystemCosts_heat_pump_spec_cost_nset, self->data_ptr);
 }
 
 static PyObject *
 SystemCosts_get_land_cost_fixed(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_SystemCosts_land_cost_fixed_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_SystemCosts_land_cost_fixed_nget, self->data_ptr);
 }
 
 static int
 SystemCosts_set_land_cost_fixed(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_SystemCosts_land_cost_fixed_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_SystemCosts_land_cost_fixed_nset, self->data_ptr);
 }
 
 static PyObject *
 SystemCosts_get_land_cost_per_watt(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_SystemCosts_land_cost_per_watt_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_SystemCosts_land_cost_per_watt_nget, self->data_ptr);
 }
 
 static int
 SystemCosts_set_land_cost_per_watt(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_SystemCosts_land_cost_per_watt_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_SystemCosts_land_cost_per_watt_nset, self->data_ptr);
 }
 
 static PyObject *
 SystemCosts_get_land_cost_perc_of_direct(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_SystemCosts_land_cost_perc_of_direct_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_SystemCosts_land_cost_perc_of_direct_nget, self->data_ptr);
 }
 
 static int
 SystemCosts_set_land_cost_perc_of_direct(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_SystemCosts_land_cost_perc_of_direct_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_SystemCosts_land_cost_perc_of_direct_nset, self->data_ptr);
 }
 
 static PyObject *
 SystemCosts_get_sales_tax_frac(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_SystemCosts_sales_tax_frac_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_SystemCosts_sales_tax_frac_nget, self->data_ptr);
 }
 
 static int
 SystemCosts_set_sales_tax_frac(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_SystemCosts_sales_tax_frac_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_SystemCosts_sales_tax_frac_nset, self->data_ptr);
 }
 
 static PyObject *
 SystemCosts_get_tes_spec_cost(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_SystemCosts_tes_spec_cost_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_SystemCosts_tes_spec_cost_nget, self->data_ptr);
 }
 
 static int
 SystemCosts_set_tes_spec_cost(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_SystemCosts_tes_spec_cost_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_SystemCosts_tes_spec_cost_nset, self->data_ptr);
 }
 
 static PyGetSetDef SystemCosts_getset[] = {
+{"CT_tes_spec_cost", (getter)SystemCosts_get_CT_tes_spec_cost,(setter)SystemCosts_set_CT_tes_spec_cost,
+	PyDoc_STR("*float*: Cold Temp thermal energy storage specific cost [$/kWht]\n\n*Required*: True"),
+ 	NULL},
 {"bop_spec_cost", (getter)SystemCosts_get_bop_spec_cost,(setter)SystemCosts_set_bop_spec_cost,
 	PyDoc_STR("*float*: Balance of plant specific cost [$/kWe]\n\n*Required*: True"),
  	NULL},
 {"contingency_rate", (getter)SystemCosts_get_contingency_rate,(setter)SystemCosts_set_contingency_rate,
 	PyDoc_STR("*float*: Contingency for cost overrun [%]\n\n*Required*: True"),
+ 	NULL},
+{"cycle_spec_cost", (getter)SystemCosts_get_cycle_spec_cost,(setter)SystemCosts_set_cycle_spec_cost,
+	PyDoc_STR("*float*: Power cycle specific cost [$/kWe]\n\n*Required*: True"),
  	NULL},
 {"epc_cost_fixed", (getter)SystemCosts_get_epc_cost_fixed,(setter)SystemCosts_set_epc_cost_fixed,
 	PyDoc_STR("*float*: EPC fixed [$]\n\n*Required*: True"),
@@ -3009,8 +2857,8 @@ static PyGetSetDef SystemCosts_getset[] = {
 {"epc_cost_perc_of_direct", (getter)SystemCosts_get_epc_cost_perc_of_direct,(setter)SystemCosts_set_epc_cost_perc_of_direct,
 	PyDoc_STR("*float*: EPC cost percent of direct [%]\n\n*Required*: True"),
  	NULL},
-{"heater_spec_cost", (getter)SystemCosts_get_heater_spec_cost,(setter)SystemCosts_set_heater_spec_cost,
-	PyDoc_STR("*float*: Heater specific cost [$/kWht]\n\n*Required*: True"),
+{"heat_pump_spec_cost", (getter)SystemCosts_get_heat_pump_spec_cost,(setter)SystemCosts_set_heat_pump_spec_cost,
+	PyDoc_STR("*float*: Heater pump specific cost [$/kWht]\n\n*Required*: True"),
  	NULL},
 {"land_cost_fixed", (getter)SystemCosts_get_land_cost_fixed,(setter)SystemCosts_set_land_cost_fixed,
 	PyDoc_STR("*float*: Land fixed [$]\n\n*Required*: True"),
@@ -3025,7 +2873,7 @@ static PyGetSetDef SystemCosts_getset[] = {
 	PyDoc_STR("*float*: Percent of cost to which sales tax applies [%]\n\n*Required*: True"),
  	NULL},
 {"tes_spec_cost", (getter)SystemCosts_get_tes_spec_cost,(setter)SystemCosts_set_tes_spec_cost,
-	PyDoc_STR("*float*: Thermal energy storage specific cost [$/kWht]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Hot Temp thermal energy storage specific cost [$/kWht]\n\n*Required*: True"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -3034,7 +2882,7 @@ static PyTypeObject SystemCosts_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"EtesElectricResistance.SystemCosts",             /*tp_name*/
+		"EtesPtes.SystemCosts",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -3084,7 +2932,7 @@ static PyTypeObject SystemCosts_Type = {
 static PyTypeObject FinancialParameters_Type;
 
 static PyObject *
-FinancialParameters_new(SAM_EtesElectricResistance data_ptr)
+FinancialParameters_new(SAM_EtesPtes data_ptr)
 {
 	PyObject* new_obj = FinancialParameters_Type.tp_alloc(&FinancialParameters_Type,0);
 
@@ -3105,7 +2953,7 @@ FinancialParameters_assign(VarGroupObject *self, PyObject *args)
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "EtesElectricResistance", "FinancialParameters")){
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "EtesPtes", "FinancialParameters")){
 		return NULL;
 	}
 
@@ -3122,7 +2970,7 @@ FinancialParameters_replace(VarGroupObject *self, PyObject *args)
 	}
 	PyTypeObject* tp = &FinancialParameters_Type;
 
-	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "EtesElectricResistance", "FinancialParameters")){
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "EtesPtes", "FinancialParameters")){
 		return NULL;
 	}
 
@@ -3151,253 +2999,253 @@ static PyMethodDef FinancialParameters_methods[] = {
 static PyObject *
 FinancialParameters_get_const_per_interest_rate1(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_FinancialParameters_const_per_interest_rate1_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_FinancialParameters_const_per_interest_rate1_nget, self->data_ptr);
 }
 
 static int
 FinancialParameters_set_const_per_interest_rate1(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_FinancialParameters_const_per_interest_rate1_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_FinancialParameters_const_per_interest_rate1_nset, self->data_ptr);
 }
 
 static PyObject *
 FinancialParameters_get_const_per_interest_rate2(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_FinancialParameters_const_per_interest_rate2_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_FinancialParameters_const_per_interest_rate2_nget, self->data_ptr);
 }
 
 static int
 FinancialParameters_set_const_per_interest_rate2(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_FinancialParameters_const_per_interest_rate2_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_FinancialParameters_const_per_interest_rate2_nset, self->data_ptr);
 }
 
 static PyObject *
 FinancialParameters_get_const_per_interest_rate3(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_FinancialParameters_const_per_interest_rate3_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_FinancialParameters_const_per_interest_rate3_nget, self->data_ptr);
 }
 
 static int
 FinancialParameters_set_const_per_interest_rate3(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_FinancialParameters_const_per_interest_rate3_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_FinancialParameters_const_per_interest_rate3_nset, self->data_ptr);
 }
 
 static PyObject *
 FinancialParameters_get_const_per_interest_rate4(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_FinancialParameters_const_per_interest_rate4_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_FinancialParameters_const_per_interest_rate4_nget, self->data_ptr);
 }
 
 static int
 FinancialParameters_set_const_per_interest_rate4(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_FinancialParameters_const_per_interest_rate4_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_FinancialParameters_const_per_interest_rate4_nset, self->data_ptr);
 }
 
 static PyObject *
 FinancialParameters_get_const_per_interest_rate5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_FinancialParameters_const_per_interest_rate5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_FinancialParameters_const_per_interest_rate5_nget, self->data_ptr);
 }
 
 static int
 FinancialParameters_set_const_per_interest_rate5(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_FinancialParameters_const_per_interest_rate5_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_FinancialParameters_const_per_interest_rate5_nset, self->data_ptr);
 }
 
 static PyObject *
 FinancialParameters_get_const_per_months1(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_FinancialParameters_const_per_months1_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_FinancialParameters_const_per_months1_nget, self->data_ptr);
 }
 
 static int
 FinancialParameters_set_const_per_months1(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_FinancialParameters_const_per_months1_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_FinancialParameters_const_per_months1_nset, self->data_ptr);
 }
 
 static PyObject *
 FinancialParameters_get_const_per_months2(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_FinancialParameters_const_per_months2_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_FinancialParameters_const_per_months2_nget, self->data_ptr);
 }
 
 static int
 FinancialParameters_set_const_per_months2(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_FinancialParameters_const_per_months2_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_FinancialParameters_const_per_months2_nset, self->data_ptr);
 }
 
 static PyObject *
 FinancialParameters_get_const_per_months3(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_FinancialParameters_const_per_months3_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_FinancialParameters_const_per_months3_nget, self->data_ptr);
 }
 
 static int
 FinancialParameters_set_const_per_months3(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_FinancialParameters_const_per_months3_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_FinancialParameters_const_per_months3_nset, self->data_ptr);
 }
 
 static PyObject *
 FinancialParameters_get_const_per_months4(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_FinancialParameters_const_per_months4_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_FinancialParameters_const_per_months4_nget, self->data_ptr);
 }
 
 static int
 FinancialParameters_set_const_per_months4(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_FinancialParameters_const_per_months4_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_FinancialParameters_const_per_months4_nset, self->data_ptr);
 }
 
 static PyObject *
 FinancialParameters_get_const_per_months5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_FinancialParameters_const_per_months5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_FinancialParameters_const_per_months5_nget, self->data_ptr);
 }
 
 static int
 FinancialParameters_set_const_per_months5(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_FinancialParameters_const_per_months5_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_FinancialParameters_const_per_months5_nset, self->data_ptr);
 }
 
 static PyObject *
 FinancialParameters_get_const_per_percent1(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_FinancialParameters_const_per_percent1_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_FinancialParameters_const_per_percent1_nget, self->data_ptr);
 }
 
 static int
 FinancialParameters_set_const_per_percent1(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_FinancialParameters_const_per_percent1_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_FinancialParameters_const_per_percent1_nset, self->data_ptr);
 }
 
 static PyObject *
 FinancialParameters_get_const_per_percent2(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_FinancialParameters_const_per_percent2_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_FinancialParameters_const_per_percent2_nget, self->data_ptr);
 }
 
 static int
 FinancialParameters_set_const_per_percent2(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_FinancialParameters_const_per_percent2_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_FinancialParameters_const_per_percent2_nset, self->data_ptr);
 }
 
 static PyObject *
 FinancialParameters_get_const_per_percent3(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_FinancialParameters_const_per_percent3_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_FinancialParameters_const_per_percent3_nget, self->data_ptr);
 }
 
 static int
 FinancialParameters_set_const_per_percent3(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_FinancialParameters_const_per_percent3_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_FinancialParameters_const_per_percent3_nset, self->data_ptr);
 }
 
 static PyObject *
 FinancialParameters_get_const_per_percent4(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_FinancialParameters_const_per_percent4_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_FinancialParameters_const_per_percent4_nget, self->data_ptr);
 }
 
 static int
 FinancialParameters_set_const_per_percent4(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_FinancialParameters_const_per_percent4_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_FinancialParameters_const_per_percent4_nset, self->data_ptr);
 }
 
 static PyObject *
 FinancialParameters_get_const_per_percent5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_FinancialParameters_const_per_percent5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_FinancialParameters_const_per_percent5_nget, self->data_ptr);
 }
 
 static int
 FinancialParameters_set_const_per_percent5(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_FinancialParameters_const_per_percent5_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_FinancialParameters_const_per_percent5_nset, self->data_ptr);
 }
 
 static PyObject *
 FinancialParameters_get_const_per_upfront_rate1(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_FinancialParameters_const_per_upfront_rate1_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_FinancialParameters_const_per_upfront_rate1_nget, self->data_ptr);
 }
 
 static int
 FinancialParameters_set_const_per_upfront_rate1(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_FinancialParameters_const_per_upfront_rate1_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_FinancialParameters_const_per_upfront_rate1_nset, self->data_ptr);
 }
 
 static PyObject *
 FinancialParameters_get_const_per_upfront_rate2(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_FinancialParameters_const_per_upfront_rate2_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_FinancialParameters_const_per_upfront_rate2_nget, self->data_ptr);
 }
 
 static int
 FinancialParameters_set_const_per_upfront_rate2(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_FinancialParameters_const_per_upfront_rate2_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_FinancialParameters_const_per_upfront_rate2_nset, self->data_ptr);
 }
 
 static PyObject *
 FinancialParameters_get_const_per_upfront_rate3(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_FinancialParameters_const_per_upfront_rate3_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_FinancialParameters_const_per_upfront_rate3_nget, self->data_ptr);
 }
 
 static int
 FinancialParameters_set_const_per_upfront_rate3(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_FinancialParameters_const_per_upfront_rate3_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_FinancialParameters_const_per_upfront_rate3_nset, self->data_ptr);
 }
 
 static PyObject *
 FinancialParameters_get_const_per_upfront_rate4(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_FinancialParameters_const_per_upfront_rate4_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_FinancialParameters_const_per_upfront_rate4_nget, self->data_ptr);
 }
 
 static int
 FinancialParameters_set_const_per_upfront_rate4(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_FinancialParameters_const_per_upfront_rate4_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_FinancialParameters_const_per_upfront_rate4_nset, self->data_ptr);
 }
 
 static PyObject *
 FinancialParameters_get_const_per_upfront_rate5(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_FinancialParameters_const_per_upfront_rate5_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_FinancialParameters_const_per_upfront_rate5_nget, self->data_ptr);
 }
 
 static int
 FinancialParameters_set_const_per_upfront_rate5(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_FinancialParameters_const_per_upfront_rate5_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_FinancialParameters_const_per_upfront_rate5_nset, self->data_ptr);
 }
 
 static PyObject *
 FinancialParameters_get_sales_tax_rate(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_FinancialParameters_sales_tax_rate_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_FinancialParameters_sales_tax_rate_nget, self->data_ptr);
 }
 
 static int
 FinancialParameters_set_sales_tax_rate(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_FinancialParameters_sales_tax_rate_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_EtesPtes_FinancialParameters_sales_tax_rate_nset, self->data_ptr);
 }
 
 static PyGetSetDef FinancialParameters_getset[] = {
@@ -3471,7 +3319,7 @@ static PyTypeObject FinancialParameters_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"EtesElectricResistance.FinancialParameters",             /*tp_name*/
+		"EtesPtes.FinancialParameters",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -3521,7 +3369,7 @@ static PyTypeObject FinancialParameters_Type = {
 static PyTypeObject Outputs_Type;
 
 static PyObject *
-Outputs_new(SAM_EtesElectricResistance data_ptr)
+Outputs_new(SAM_EtesPtes data_ptr)
 {
 	PyObject* new_obj = Outputs_Type.tp_alloc(&Outputs_Type,0);
 
@@ -3542,7 +3390,7 @@ Outputs_assign(VarGroupObject *self, PyObject *args)
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "EtesElectricResistance", "Outputs")){
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "EtesPtes", "Outputs")){
 		return NULL;
 	}
 
@@ -3559,7 +3407,7 @@ Outputs_replace(VarGroupObject *self, PyObject *args)
 	}
 	PyTypeObject* tp = &Outputs_Type;
 
-	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "EtesElectricResistance", "Outputs")){
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "EtesPtes", "Outputs")){
 		return NULL;
 	}
 
@@ -3586,689 +3434,794 @@ static PyMethodDef Outputs_methods[] = {
 };
 
 static PyObject *
-Outputs_get_E_heater_su_des(VarGroupObject *self, void *closure)
+Outputs_get_COP_net_des(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_Outputs_E_heater_su_des_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_Outputs_COP_net_des_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_CT_tes_cost_calc(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesPtes_Outputs_CT_tes_cost_calc_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_E_hp_su_des(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesPtes_Outputs_E_hp_su_des_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_Q_CT_tes_des(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesPtes_Outputs_Q_CT_tes_des_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_Q_tes_des(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_Outputs_Q_tes_des_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_Outputs_Q_tes_des_nget, self->data_ptr);
 }
 
 static PyObject *
-Outputs_get_T_htf_cycle_in(VarGroupObject *self, void *closure)
+Outputs_get_T_CT_tes_cold(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_EtesElectricResistance_Outputs_T_htf_cycle_in_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_T_CT_tes_cold_aget, self->data_ptr);
 }
 
 static PyObject *
-Outputs_get_T_htf_cycle_out(VarGroupObject *self, void *closure)
+Outputs_get_T_CT_tes_hot(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_EtesElectricResistance_Outputs_T_htf_cycle_out_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_T_CT_tes_hot_aget, self->data_ptr);
 }
 
 static PyObject *
-Outputs_get_T_htf_heater_in(VarGroupObject *self, void *closure)
+Outputs_get_T_hp_CT_htf_cold_out(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_EtesElectricResistance_Outputs_T_htf_heater_in_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_T_hp_CT_htf_cold_out_aget, self->data_ptr);
 }
 
 static PyObject *
-Outputs_get_T_htf_heater_out(VarGroupObject *self, void *closure)
+Outputs_get_T_hp_CT_htf_hot_in(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_EtesElectricResistance_Outputs_T_htf_heater_out_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_T_hp_CT_htf_hot_in_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_T_hp_HT_htf_cold_in(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_T_hp_HT_htf_cold_in_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_T_hp_HT_htf_hot_out(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_T_hp_HT_htf_hot_out_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_T_pc_CT_htf_cold_in(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_T_pc_CT_htf_cold_in_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_T_pc_CT_htf_hot_out(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_T_pc_CT_htf_hot_out_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_T_pc_HT_htf_cold_out(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_T_pc_HT_htf_cold_out_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_T_pc_HT_htf_hot_in(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_T_pc_HT_htf_hot_in_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_T_tes_cold(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_EtesElectricResistance_Outputs_T_tes_cold_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_T_tes_cold_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_T_tes_hot(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_EtesElectricResistance_Outputs_T_tes_hot_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_T_tes_hot_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_V_CT_tes_htf_avail(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesPtes_Outputs_V_CT_tes_htf_avail_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_V_CT_tes_htf_total(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesPtes_Outputs_V_CT_tes_htf_total_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_V_tes_htf_avail(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_Outputs_V_tes_htf_avail_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_Outputs_V_tes_htf_avail_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_V_tes_htf_total(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_Outputs_V_tes_htf_total_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_Outputs_V_tes_htf_total_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_W_dot_bop_design(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_Outputs_W_dot_bop_design_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_Outputs_W_dot_bop_design_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_W_dot_bop_parasitics(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_EtesElectricResistance_Outputs_W_dot_bop_parasitics_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_W_dot_bop_parasitics_aget, self->data_ptr);
 }
 
 static PyObject *
-Outputs_get_W_dot_cycle_cooling(VarGroupObject *self, void *closure)
+Outputs_get_W_dot_fixed(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_EtesElectricResistance_Outputs_W_dot_cycle_cooling_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_W_dot_cycle_gross(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_EtesElectricResistance_Outputs_W_dot_cycle_gross_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_W_dot_cycle_htf_pump(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_EtesElectricResistance_Outputs_W_dot_cycle_htf_pump_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_W_dot_cycle_net(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_EtesElectricResistance_Outputs_W_dot_cycle_net_aget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_Outputs_W_dot_fixed_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_W_dot_fixed_parasitics(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_EtesElectricResistance_Outputs_W_dot_fixed_parasitics_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_W_dot_fixed_parasitics_aget, self->data_ptr);
 }
 
 static PyObject *
-Outputs_get_W_dot_heater(VarGroupObject *self, void *closure)
+Outputs_get_W_dot_hp_CT_htf_pump(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_EtesElectricResistance_Outputs_W_dot_heater_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_W_dot_hp_CT_htf_pump_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_W_dot_hp_CT_htf_pump_des(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesPtes_Outputs_W_dot_hp_CT_htf_pump_des_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_W_dot_hp_HT_htf_pump(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_W_dot_hp_HT_htf_pump_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_W_dot_hp_HT_htf_pump_des(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesPtes_Outputs_W_dot_hp_HT_htf_pump_des_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_W_dot_hp_elec_parasitic_des(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesPtes_Outputs_W_dot_hp_elec_parasitic_des_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_W_dot_hp_in_net_des(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesPtes_Outputs_W_dot_hp_in_net_des_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_W_dot_hp_in_thermo_des(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesPtes_Outputs_W_dot_hp_in_thermo_des_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_W_dot_hp_net(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_W_dot_hp_net_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_W_dot_hp_parasitics(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_W_dot_hp_parasitics_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_W_dot_hp_thermo(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_W_dot_hp_thermo_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_W_dot_out_net(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_EtesElectricResistance_Outputs_W_dot_out_net_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_W_dot_out_net_aget, self->data_ptr);
 }
 
 static PyObject *
-Outputs_get_annual_E_cycle_gross(VarGroupObject *self, void *closure)
+Outputs_get_W_dot_pc_CT_htf_pump(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_Outputs_annual_E_cycle_gross_nget, self->data_ptr);
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_W_dot_pc_CT_htf_pump_aget, self->data_ptr);
 }
 
 static PyObject *
-Outputs_get_annual_E_heater(VarGroupObject *self, void *closure)
+Outputs_get_W_dot_pc_CT_htf_pump_des(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_Outputs_annual_E_heater_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_Outputs_W_dot_pc_CT_htf_pump_des_nget, self->data_ptr);
 }
 
 static PyObject *
-Outputs_get_annual_E_tes_heater(VarGroupObject *self, void *closure)
+Outputs_get_W_dot_pc_HT_htf_pump(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_Outputs_annual_E_tes_heater_nget, self->data_ptr);
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_W_dot_pc_HT_htf_pump_aget, self->data_ptr);
 }
 
 static PyObject *
-Outputs_get_annual_Q_cycle_thermal_in(VarGroupObject *self, void *closure)
+Outputs_get_W_dot_pc_HT_htf_pump_des(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_Outputs_annual_Q_cycle_thermal_in_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_Outputs_W_dot_pc_HT_htf_pump_des_nget, self->data_ptr);
 }
 
 static PyObject *
-Outputs_get_annual_Q_cycle_thermal_startup(VarGroupObject *self, void *closure)
+Outputs_get_W_dot_pc_elec_parasitic_des(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_Outputs_annual_Q_cycle_thermal_startup_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_Outputs_W_dot_pc_elec_parasitic_des_nget, self->data_ptr);
 }
 
 static PyObject *
-Outputs_get_annual_Q_heater_startup(VarGroupObject *self, void *closure)
+Outputs_get_W_dot_pc_net_des(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_Outputs_annual_Q_heater_startup_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_Outputs_W_dot_pc_net_des_nget, self->data_ptr);
 }
 
 static PyObject *
-Outputs_get_annual_Q_heater_to_htf(VarGroupObject *self, void *closure)
+Outputs_get_W_dot_pc_parasitics(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_Outputs_annual_Q_heater_to_htf_nget, self->data_ptr);
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_W_dot_pc_parasitics_aget, self->data_ptr);
 }
 
 static PyObject *
-Outputs_get_annual_Q_tes_losses(VarGroupObject *self, void *closure)
+Outputs_get_W_dot_pc_thermo_out(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_Outputs_annual_Q_tes_losses_nget, self->data_ptr);
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_W_dot_pc_thermo_out_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_annual_energy(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_Outputs_annual_energy_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_annual_energy_full_availability(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_EtesElectricResistance_Outputs_annual_energy_full_availability_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_Outputs_annual_energy_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_bop_cost_calc(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_Outputs_bop_cost_calc_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_Outputs_bop_cost_calc_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_charge_capacity(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesPtes_Outputs_charge_capacity_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_construction_financing_cost(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_Outputs_construction_financing_cost_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_Outputs_construction_financing_cost_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_contingency_cost_calc(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_Outputs_contingency_cost_calc_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_Outputs_contingency_cost_calc_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cop_hot_hp_thermo(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_cop_hot_hp_thermo_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cp_battery_capacity(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_Outputs_cp_battery_capacity_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cp_htf_cycle_des(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_EtesElectricResistance_Outputs_cp_htf_cycle_des_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_Outputs_cp_battery_capacity_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cp_system_capacity(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_Outputs_cp_system_capacity_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_Outputs_cp_system_capacity_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_cycle_cost_calc(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_Outputs_cycle_cost_calc_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_Outputs_cycle_cost_calc_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_d_CT_tank_tes(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesPtes_Outputs_d_CT_tank_tes_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_d_tank_tes(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_Outputs_d_tank_tes_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_dens_store_htf_at_T_ave(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_EtesElectricResistance_Outputs_dens_store_htf_at_T_ave_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_Outputs_d_tank_tes_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_direct_subtotal_cost_calc(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_Outputs_direct_subtotal_cost_calc_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_disp_iter_ann(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_EtesElectricResistance_Outputs_disp_iter_ann_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_disp_obj_relax(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_EtesElectricResistance_Outputs_disp_obj_relax_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_disp_objective(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_EtesElectricResistance_Outputs_disp_objective_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_disp_objective_ann(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_EtesElectricResistance_Outputs_disp_objective_ann_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_disp_pceff_expected(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_EtesElectricResistance_Outputs_disp_pceff_expected_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_disp_presolve_nconstr(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_EtesElectricResistance_Outputs_disp_presolve_nconstr_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_disp_presolve_nconstr_ann(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_EtesElectricResistance_Outputs_disp_presolve_nconstr_ann_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_disp_presolve_nvar(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_EtesElectricResistance_Outputs_disp_presolve_nvar_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_disp_presolve_nvar_ann(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_EtesElectricResistance_Outputs_disp_presolve_nvar_ann_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_disp_qpbsu_expected(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_EtesElectricResistance_Outputs_disp_qpbsu_expected_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_disp_qsf_expected(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_EtesElectricResistance_Outputs_disp_qsf_expected_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_disp_qsfprod_expected(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_EtesElectricResistance_Outputs_disp_qsfprod_expected_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_disp_qsfsu_expected(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_EtesElectricResistance_Outputs_disp_qsfsu_expected_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_disp_rel_mip_gap(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_EtesElectricResistance_Outputs_disp_rel_mip_gap_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_disp_rev_expected(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_EtesElectricResistance_Outputs_disp_rev_expected_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_disp_solve_iter(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_EtesElectricResistance_Outputs_disp_solve_iter_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_disp_solve_state(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_EtesElectricResistance_Outputs_disp_solve_state_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_disp_solve_state_ann(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_EtesElectricResistance_Outputs_disp_solve_state_ann_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_disp_solve_time(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_EtesElectricResistance_Outputs_disp_solve_time_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_disp_solve_time_ann(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_EtesElectricResistance_Outputs_disp_solve_time_ann_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_disp_subopt_flag(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_EtesElectricResistance_Outputs_disp_subopt_flag_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_disp_tes_expected(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_EtesElectricResistance_Outputs_disp_tes_expected_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_disp_wpb_expected(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_EtesElectricResistance_Outputs_disp_wpb_expected_aget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_Outputs_direct_subtotal_cost_calc_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_e_ch_tes(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_EtesElectricResistance_Outputs_e_ch_tes_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_e_ch_tes_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_elec_purchase_price_mult(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_EtesElectricResistance_Outputs_elec_purchase_price_mult_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_elec_purchase_price_mult_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_epc_cost_calc(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_Outputs_epc_cost_calc_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_Outputs_epc_cost_calc_nget, self->data_ptr);
 }
 
 static PyObject *
-Outputs_get_eta_cycle_gross(VarGroupObject *self, void *closure)
+Outputs_get_eta_pc_net_des(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_EtesElectricResistance_Outputs_eta_cycle_gross_aget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_Outputs_eta_pc_net_des_nget, self->data_ptr);
 }
 
 static PyObject *
-Outputs_get_eta_cycle_net(VarGroupObject *self, void *closure)
+Outputs_get_eta_pc_thermo(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_EtesElectricResistance_Outputs_eta_cycle_net_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_eta_pc_thermo_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_flip_target_percent(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_Outputs_flip_target_percent_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_Outputs_flip_target_percent_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_gen(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_EtesElectricResistance_Outputs_gen_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_gen_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_heater_cost_calc(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_Outputs_heater_cost_calc_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_Outputs_heater_cost_calc_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_installed_per_cap_cost_calc(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_Outputs_installed_per_cap_cost_calc_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_Outputs_installed_per_cap_cost_calc_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_land_cost_calc(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_Outputs_land_cost_calc_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_Outputs_land_cost_calc_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_m_dot_balance(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_EtesElectricResistance_Outputs_m_dot_balance_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_m_dot_balance_aget, self->data_ptr);
 }
 
 static PyObject *
-Outputs_get_m_dot_htf_cycle(VarGroupObject *self, void *closure)
+Outputs_get_m_dot_hp_CT_htf(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_EtesElectricResistance_Outputs_m_dot_htf_cycle_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_m_dot_hp_CT_htf_aget, self->data_ptr);
 }
 
 static PyObject *
-Outputs_get_m_dot_htf_cycle_des(VarGroupObject *self, void *closure)
+Outputs_get_m_dot_hp_CT_htf_des(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_Outputs_m_dot_htf_cycle_des_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_Outputs_m_dot_hp_CT_htf_des_nget, self->data_ptr);
 }
 
 static PyObject *
-Outputs_get_m_dot_htf_heater(VarGroupObject *self, void *closure)
+Outputs_get_m_dot_hp_HT_htf(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_EtesElectricResistance_Outputs_m_dot_htf_heater_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_m_dot_hp_HT_htf_aget, self->data_ptr);
 }
 
 static PyObject *
-Outputs_get_m_dot_water_cycle(VarGroupObject *self, void *closure)
+Outputs_get_m_dot_hp_HT_htf_des(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_EtesElectricResistance_Outputs_m_dot_water_cycle_aget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_Outputs_m_dot_hp_HT_htf_des_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_m_dot_pc_CT_htf(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_m_dot_pc_CT_htf_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_m_dot_pc_CT_htf_des(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesPtes_Outputs_m_dot_pc_CT_htf_des_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_m_dot_pc_HT_htf(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_m_dot_pc_HT_htf_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_m_dot_pc_HT_htf_des(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesPtes_Outputs_m_dot_pc_HT_htf_des_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_mass_CT_tes_cold(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_mass_CT_tes_cold_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_mass_CT_tes_hot(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_mass_CT_tes_hot_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_mass_tes_cold(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_EtesElectricResistance_Outputs_mass_tes_cold_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_mass_tes_cold_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_mass_tes_hot(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_EtesElectricResistance_Outputs_mass_tes_hot_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_mass_tes_hot_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_n_op_modes(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_EtesElectricResistance_Outputs_n_op_modes_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_n_op_modes_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_nameplate(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_Outputs_nameplate_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_Outputs_nameplate_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_op_mode_1(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_EtesElectricResistance_Outputs_op_mode_1_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_op_mode_1_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_op_mode_2(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_EtesElectricResistance_Outputs_op_mode_2_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_op_mode_2_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_op_mode_3(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_EtesElectricResistance_Outputs_op_mode_3_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_op_mode_3_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_ppa_soln_mode(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_Outputs_ppa_soln_mode_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_Outputs_ppa_soln_mode_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_q_balance(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_EtesElectricResistance_Outputs_q_balance_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_q_balance_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_q_dot_CT_tes_heater(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_q_dot_CT_tes_heater_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_q_dot_CT_tes_losses(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_q_dot_CT_tes_losses_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_q_dot_ch_tes(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_EtesElectricResistance_Outputs_q_dot_ch_tes_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_q_dot_cycle(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_EtesElectricResistance_Outputs_q_dot_cycle_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_q_dot_cycle_startup(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_EtesElectricResistance_Outputs_q_dot_cycle_startup_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_q_dot_ch_tes_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_q_dot_dc_tes(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_EtesElectricResistance_Outputs_q_dot_dc_tes_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_q_dot_dc_tes_aget, self->data_ptr);
 }
 
 static PyObject *
-Outputs_get_q_dot_heater_design(VarGroupObject *self, void *closure)
+Outputs_get_q_dot_hp_cold_in_des(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_Outputs_q_dot_heater_design_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_Outputs_q_dot_hp_cold_in_des_nget, self->data_ptr);
 }
 
 static PyObject *
-Outputs_get_q_dot_heater_startup(VarGroupObject *self, void *closure)
+Outputs_get_q_dot_hp_from_CT_htf(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_EtesElectricResistance_Outputs_q_dot_heater_startup_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_q_dot_hp_from_CT_htf_aget, self->data_ptr);
 }
 
 static PyObject *
-Outputs_get_q_dot_heater_to_htf(VarGroupObject *self, void *closure)
+Outputs_get_q_dot_hp_hot_out_des(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_EtesElectricResistance_Outputs_q_dot_heater_to_htf_aget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_Outputs_q_dot_hp_hot_out_des_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_q_dot_hp_startup(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_q_dot_hp_startup_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_q_dot_hp_to_HT_htf(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_q_dot_hp_to_HT_htf_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_q_dot_loss_CT_tes_des(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesPtes_Outputs_q_dot_loss_CT_tes_des_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_q_dot_loss_tes_des(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_Outputs_q_dot_loss_tes_des_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_Outputs_q_dot_loss_tes_des_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_q_dot_pc_cold_out_thermo_des(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesPtes_Outputs_q_dot_pc_cold_out_thermo_des_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_q_dot_pc_cold_to_CTES_des(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesPtes_Outputs_q_dot_pc_cold_to_CTES_des_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_q_dot_pc_cold_to_surroundings_des(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesPtes_Outputs_q_dot_pc_cold_to_surroundings_des_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_q_dot_pc_from_HT_htf(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_q_dot_pc_from_HT_htf_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_q_dot_pc_hot_in_des(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesPtes_Outputs_q_dot_pc_hot_in_des_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_q_dot_pc_rejected(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_q_dot_pc_rejected_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_q_dot_pc_startup(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_q_dot_pc_startup_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_q_dot_pc_thermo_out(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_q_dot_pc_thermo_out_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_q_dot_pc_to_CT_htf(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_q_dot_pc_to_CT_htf_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_q_dot_tes_heater(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_EtesElectricResistance_Outputs_q_dot_tes_heater_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_q_dot_tes_heater_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_q_dot_tes_losses(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_EtesElectricResistance_Outputs_q_dot_tes_losses_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_q_dot_tes_losses_aget, self->data_ptr);
 }
 
 static PyObject *
-Outputs_get_q_pb_design(VarGroupObject *self, void *closure)
+Outputs_get_q_pc_target(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_Outputs_q_pb_design_nget, self->data_ptr);
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_q_pc_target_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_rte_net(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesPtes_Outputs_rte_net_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_rte_thermo(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesPtes_Outputs_rte_thermo_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_sales_tax_cost_calc(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_Outputs_sales_tax_cost_calc_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_sim_cpu_run_time(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_EtesElectricResistance_Outputs_sim_cpu_run_time_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_Outputs_sales_tax_cost_calc_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_system_capacity(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_Outputs_system_capacity_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_Outputs_system_capacity_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_tdry(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_EtesElectricResistance_Outputs_tdry_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_tdry_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_tes_cost_calc(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_Outputs_tes_cost_calc_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_Outputs_tes_cost_calc_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_time_hr(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_EtesElectricResistance_Outputs_time_hr_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_time_hr_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_total_direct_cost_calc(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_Outputs_total_direct_cost_calc_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_Outputs_total_direct_cost_calc_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_total_indirect_cost_calc(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_Outputs_total_indirect_cost_calc_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_Outputs_total_indirect_cost_calc_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_total_installed_cost(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_Outputs_total_installed_cost_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_total_land_area(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_EtesElectricResistance_Outputs_total_land_area_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_Outputs_total_installed_cost_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_tou_period(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_EtesElectricResistance_Outputs_tou_period_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_tou_period_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_tshours_heater(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_EtesElectricResistance_Outputs_tshours_heater_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_EtesPtes_Outputs_tshours_heater_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_twet(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_EtesElectricResistance_Outputs_twet_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_twet_aget, self->data_ptr);
 }
 
 static PyGetSetDef Outputs_getset[] = {
-{"E_heater_su_des", (getter)Outputs_get_E_heater_su_des,(setter)0,
-	PyDoc_STR("*float*: Heater startup energy [MWt-hr]"),
+{"COP_net_des", (getter)Outputs_get_COP_net_des,(setter)0,
+	PyDoc_STR("*float*: Heat pump net COP [MWe]"),
+ 	NULL},
+{"CT_tes_cost_calc", (getter)Outputs_get_CT_tes_cost_calc,(setter)0,
+	PyDoc_STR("*float*: Cold TES cost [$]"),
+ 	NULL},
+{"E_hp_su_des", (getter)Outputs_get_E_hp_su_des,(setter)0,
+	PyDoc_STR("*float*: Heat pump startup energy [MWt-hr]"),
+ 	NULL},
+{"Q_CT_tes_des", (getter)Outputs_get_Q_CT_tes_des,(setter)0,
+	PyDoc_STR("*float*: Cold TES design capacity [MWt-hr]"),
  	NULL},
 {"Q_tes_des", (getter)Outputs_get_Q_tes_des,(setter)0,
 	PyDoc_STR("*float*: TES design capacity [MWt-hr]"),
  	NULL},
-{"T_htf_cycle_in", (getter)Outputs_get_T_htf_cycle_in,(setter)0,
-	PyDoc_STR("*sequence*: PC HTF inlet temperature [C]"),
+{"T_CT_tes_cold", (getter)Outputs_get_T_CT_tes_cold,(setter)0,
+	PyDoc_STR("*sequence*: TES cold temperature [C]"),
  	NULL},
-{"T_htf_cycle_out", (getter)Outputs_get_T_htf_cycle_out,(setter)0,
-	PyDoc_STR("*sequence*: PC HTF outlet temperature [C]"),
+{"T_CT_tes_hot", (getter)Outputs_get_T_CT_tes_hot,(setter)0,
+	PyDoc_STR("*sequence*: TES hot temperature [C]"),
  	NULL},
-{"T_htf_heater_in", (getter)Outputs_get_T_htf_heater_in,(setter)0,
-	PyDoc_STR("*sequence*: Heater HTF inlet temperature [C]"),
+{"T_hp_CT_htf_cold_out", (getter)Outputs_get_T_hp_CT_htf_cold_out,(setter)0,
+	PyDoc_STR("*sequence*: Heat pump cold tes HTF outlet temperature [C]"),
  	NULL},
-{"T_htf_heater_out", (getter)Outputs_get_T_htf_heater_out,(setter)0,
-	PyDoc_STR("*sequence*: Heater HTF outlet temperature [C]"),
+{"T_hp_CT_htf_hot_in", (getter)Outputs_get_T_hp_CT_htf_hot_in,(setter)0,
+	PyDoc_STR("*sequence*: Heat pump cold tes HTF inlet temperature [C]"),
+ 	NULL},
+{"T_hp_HT_htf_cold_in", (getter)Outputs_get_T_hp_HT_htf_cold_in,(setter)0,
+	PyDoc_STR("*sequence*: Heat pump hot tes HTF inlet temperature [C]"),
+ 	NULL},
+{"T_hp_HT_htf_hot_out", (getter)Outputs_get_T_hp_HT_htf_hot_out,(setter)0,
+	PyDoc_STR("*sequence*: Heat pump hot tes HTF outlet temperature [C]"),
+ 	NULL},
+{"T_pc_CT_htf_cold_in", (getter)Outputs_get_T_pc_CT_htf_cold_in,(setter)0,
+	PyDoc_STR("*sequence*: PC cold tes HTF inlet temperature [C]"),
+ 	NULL},
+{"T_pc_CT_htf_hot_out", (getter)Outputs_get_T_pc_CT_htf_hot_out,(setter)0,
+	PyDoc_STR("*sequence*: PC cold tes HTF outlet temperature [C]"),
+ 	NULL},
+{"T_pc_HT_htf_cold_out", (getter)Outputs_get_T_pc_HT_htf_cold_out,(setter)0,
+	PyDoc_STR("*sequence*: PC hot tes HTF outlet temperature [C]"),
+ 	NULL},
+{"T_pc_HT_htf_hot_in", (getter)Outputs_get_T_pc_HT_htf_hot_in,(setter)0,
+	PyDoc_STR("*sequence*: PC hot tes HTF inlet temperature [C]"),
  	NULL},
 {"T_tes_cold", (getter)Outputs_get_T_tes_cold,(setter)0,
 	PyDoc_STR("*sequence*: TES cold temperature [C]"),
  	NULL},
 {"T_tes_hot", (getter)Outputs_get_T_tes_hot,(setter)0,
 	PyDoc_STR("*sequence*: TES hot temperature [C]"),
+ 	NULL},
+{"V_CT_tes_htf_avail", (getter)Outputs_get_V_CT_tes_htf_avail,(setter)0,
+	PyDoc_STR("*float*: Volume of cold TES HTF available for heat transfer [m3]"),
+ 	NULL},
+{"V_CT_tes_htf_total", (getter)Outputs_get_V_CT_tes_htf_total,(setter)0,
+	PyDoc_STR("*float*: Total cold TES HTF volume [m3]"),
  	NULL},
 {"V_tes_htf_avail", (getter)Outputs_get_V_tes_htf_avail,(setter)0,
 	PyDoc_STR("*float*: Volume of TES HTF available for heat transfer [m3]"),
@@ -4282,59 +4235,77 @@ static PyGetSetDef Outputs_getset[] = {
 {"W_dot_bop_parasitics", (getter)Outputs_get_W_dot_bop_parasitics,(setter)0,
 	PyDoc_STR("*sequence*: Parasitic power plant generation-dependent laod [MWe]"),
  	NULL},
-{"W_dot_cycle_cooling", (getter)Outputs_get_W_dot_cycle_cooling,(setter)0,
-	PyDoc_STR("*sequence*: PC cooling parasitics [MWe]"),
- 	NULL},
-{"W_dot_cycle_gross", (getter)Outputs_get_W_dot_cycle_gross,(setter)0,
-	PyDoc_STR("*sequence*: PC electrical power gross (no cooling parasitics) [MWe]"),
- 	NULL},
-{"W_dot_cycle_htf_pump", (getter)Outputs_get_W_dot_cycle_htf_pump,(setter)0,
-	PyDoc_STR("*sequence*: PC HTF pumping power [MWe]"),
- 	NULL},
-{"W_dot_cycle_net", (getter)Outputs_get_W_dot_cycle_net,(setter)0,
-	PyDoc_STR("*sequence*: PC electrical power net (with cooling parasitics) [MWe]"),
+{"W_dot_fixed", (getter)Outputs_get_W_dot_fixed,(setter)0,
+	PyDoc_STR("*float*: Fixed parasitic at design [MWe]"),
  	NULL},
 {"W_dot_fixed_parasitics", (getter)Outputs_get_W_dot_fixed_parasitics,(setter)0,
 	PyDoc_STR("*sequence*: Parasitic power plant fixed load [MWe]"),
  	NULL},
-{"W_dot_heater", (getter)Outputs_get_W_dot_heater,(setter)0,
-	PyDoc_STR("*sequence*: Heater electricity consumption [MWe]"),
+{"W_dot_hp_CT_htf_pump", (getter)Outputs_get_W_dot_hp_CT_htf_pump,(setter)0,
+	PyDoc_STR("*sequence*: Heat pump cold tes HTF pump power [MWe]"),
+ 	NULL},
+{"W_dot_hp_CT_htf_pump_des", (getter)Outputs_get_W_dot_hp_CT_htf_pump_des,(setter)0,
+	PyDoc_STR("*float*: Heat pump CT HTF pump power [MWe]"),
+ 	NULL},
+{"W_dot_hp_HT_htf_pump", (getter)Outputs_get_W_dot_hp_HT_htf_pump,(setter)0,
+	PyDoc_STR("*sequence*: Heat pump hot tes HTF pump power [MWe]"),
+ 	NULL},
+{"W_dot_hp_HT_htf_pump_des", (getter)Outputs_get_W_dot_hp_HT_htf_pump_des,(setter)0,
+	PyDoc_STR("*float*: Heat pump HT HTF pump power [MWe]"),
+ 	NULL},
+{"W_dot_hp_elec_parasitic_des", (getter)Outputs_get_W_dot_hp_elec_parasitic_des,(setter)0,
+	PyDoc_STR("*float*: Heat pump parasitic power [MWe]"),
+ 	NULL},
+{"W_dot_hp_in_net_des", (getter)Outputs_get_W_dot_hp_in_net_des,(setter)0,
+	PyDoc_STR("*float*: Heat pump total power consumption [MWe]"),
+ 	NULL},
+{"W_dot_hp_in_thermo_des", (getter)Outputs_get_W_dot_hp_in_thermo_des,(setter)0,
+	PyDoc_STR("*float*: Heat pump power into working fluid [MWe]"),
+ 	NULL},
+{"W_dot_hp_net", (getter)Outputs_get_W_dot_hp_net,(setter)0,
+	PyDoc_STR("*sequence*: Heat pump total power in [MWe]"),
+ 	NULL},
+{"W_dot_hp_parasitics", (getter)Outputs_get_W_dot_hp_parasitics,(setter)0,
+	PyDoc_STR("*sequence*: Heat pump thermodynamic parasitics [MWe]"),
+ 	NULL},
+{"W_dot_hp_thermo", (getter)Outputs_get_W_dot_hp_thermo,(setter)0,
+	PyDoc_STR("*sequence*: Heat pump thermodynamic power in [MWe]"),
  	NULL},
 {"W_dot_out_net", (getter)Outputs_get_W_dot_out_net,(setter)0,
 	PyDoc_STR("*sequence*: Total electric power to grid [MWe]"),
  	NULL},
-{"annual_E_cycle_gross", (getter)Outputs_get_annual_E_cycle_gross,(setter)0,
-	PyDoc_STR("*float*: Annual cycle gross electric energy generation [MWhe]"),
+{"W_dot_pc_CT_htf_pump", (getter)Outputs_get_W_dot_pc_CT_htf_pump,(setter)0,
+	PyDoc_STR("*sequence*: PC cold tes HTF pump power [MWe]"),
  	NULL},
-{"annual_E_heater", (getter)Outputs_get_annual_E_heater,(setter)0,
-	PyDoc_STR("*float*: Annual heater electric energy consumption [MWhe]"),
+{"W_dot_pc_CT_htf_pump_des", (getter)Outputs_get_W_dot_pc_CT_htf_pump_des,(setter)0,
+	PyDoc_STR("*float*: Cycle CT HTF pump power [MWe]"),
  	NULL},
-{"annual_E_tes_heater", (getter)Outputs_get_annual_E_tes_heater,(setter)0,
-	PyDoc_STR("*float*: Annual TES freeze heater electric energy consumption [MWhe]"),
+{"W_dot_pc_HT_htf_pump", (getter)Outputs_get_W_dot_pc_HT_htf_pump,(setter)0,
+	PyDoc_STR("*sequence*: PC hot tes HTF pump power [MWe]"),
  	NULL},
-{"annual_Q_cycle_thermal_in", (getter)Outputs_get_annual_Q_cycle_thermal_in,(setter)0,
-	PyDoc_STR("*float*: Annual cycle thermal energy input [MWht]"),
+{"W_dot_pc_HT_htf_pump_des", (getter)Outputs_get_W_dot_pc_HT_htf_pump_des,(setter)0,
+	PyDoc_STR("*float*: Cycle HT HTF pump power [MWe]"),
  	NULL},
-{"annual_Q_cycle_thermal_startup", (getter)Outputs_get_annual_Q_cycle_thermal_startup,(setter)0,
-	PyDoc_STR("*float*: Annual cycle thermal energy consumed by startup [MWht]"),
+{"W_dot_pc_elec_parasitic_des", (getter)Outputs_get_W_dot_pc_elec_parasitic_des,(setter)0,
+	PyDoc_STR("*float*: Cycle parasitic power [MWe]"),
  	NULL},
-{"annual_Q_heater_startup", (getter)Outputs_get_annual_Q_heater_startup,(setter)0,
-	PyDoc_STR("*float*: Annual heater thermal energy consumed by startup [MWht]"),
+{"W_dot_pc_net_des", (getter)Outputs_get_W_dot_pc_net_des,(setter)0,
+	PyDoc_STR("*float*: Cycle net power generation [MWe]"),
  	NULL},
-{"annual_Q_heater_to_htf", (getter)Outputs_get_annual_Q_heater_to_htf,(setter)0,
-	PyDoc_STR("*float*: Annual heater thermal power to HTF [MWhe]"),
+{"W_dot_pc_parasitics", (getter)Outputs_get_W_dot_pc_parasitics,(setter)0,
+	PyDoc_STR("*sequence*: PC parasitics including cooling power [MWe]"),
  	NULL},
-{"annual_Q_tes_losses", (getter)Outputs_get_annual_Q_tes_losses,(setter)0,
-	PyDoc_STR("*float*: Annual TES thermal energy lost to ambient [MWht]"),
+{"W_dot_pc_thermo_out", (getter)Outputs_get_W_dot_pc_thermo_out,(setter)0,
+	PyDoc_STR("*sequence*: PC thermodynamic power out [MWe]"),
  	NULL},
 {"annual_energy", (getter)Outputs_get_annual_energy,(setter)0,
 	PyDoc_STR("*float*: Annual total electric power to grid [kWhe]"),
  	NULL},
-{"annual_energy_full_availability", (getter)Outputs_get_annual_energy_full_availability,(setter)0,
-	PyDoc_STR("*float*: Annual total electric power to grid w/ full availability [MWhe]"),
- 	NULL},
 {"bop_cost_calc", (getter)Outputs_get_bop_cost_calc,(setter)0,
 	PyDoc_STR("*float*: BOP cost [$]"),
+ 	NULL},
+{"charge_capacity", (getter)Outputs_get_charge_capacity,(setter)0,
+	PyDoc_STR("*float*: Total electricity consumption at design-point charge [MWe]"),
  	NULL},
 {"construction_financing_cost", (getter)Outputs_get_construction_financing_cost,(setter)0,
 	PyDoc_STR("*float*: Total construction financing cost [$]"),
@@ -4342,11 +4313,11 @@ static PyGetSetDef Outputs_getset[] = {
 {"contingency_cost_calc", (getter)Outputs_get_contingency_cost_calc,(setter)0,
 	PyDoc_STR("*float*: Contingency cost [$]"),
  	NULL},
+{"cop_hot_hp_thermo", (getter)Outputs_get_cop_hot_hp_thermo,(setter)0,
+	PyDoc_STR("*sequence*: Heat pump thermodynamic hot COP"),
+ 	NULL},
 {"cp_battery_capacity", (getter)Outputs_get_cp_battery_capacity,(setter)0,
 	PyDoc_STR("*float*: Battery nameplate [MWe]"),
- 	NULL},
-{"cp_htf_cycle_des", (getter)Outputs_get_cp_htf_cycle_des,(setter)0,
-	PyDoc_STR("*float*: Cycle htf cp at T ave at design [kJ/kg-K]"),
  	NULL},
 {"cp_system_capacity", (getter)Outputs_get_cp_system_capacity,(setter)0,
 	PyDoc_STR("*float*: System capacity for capacity payments [MWe]"),
@@ -4354,83 +4325,14 @@ static PyGetSetDef Outputs_getset[] = {
 {"cycle_cost_calc", (getter)Outputs_get_cycle_cost_calc,(setter)0,
 	PyDoc_STR("*float*: Cycle cost [$]"),
  	NULL},
+{"d_CT_tank_tes", (getter)Outputs_get_d_CT_tank_tes,(setter)0,
+	PyDoc_STR("*float*: Diameter of cold TES tank [m]"),
+ 	NULL},
 {"d_tank_tes", (getter)Outputs_get_d_tank_tes,(setter)0,
 	PyDoc_STR("*float*: Diameter of TES tank [m]"),
  	NULL},
-{"dens_store_htf_at_T_ave", (getter)Outputs_get_dens_store_htf_at_T_ave,(setter)0,
-	PyDoc_STR("*float*: Density of TES HTF at avg temps [kg/m3]"),
- 	NULL},
 {"direct_subtotal_cost_calc", (getter)Outputs_get_direct_subtotal_cost_calc,(setter)0,
 	PyDoc_STR("*float*: Direct subtotal cost [$]"),
- 	NULL},
-{"disp_iter_ann", (getter)Outputs_get_disp_iter_ann,(setter)0,
-	PyDoc_STR("*float*: Annual sum of dispatch solver iterations"),
- 	NULL},
-{"disp_obj_relax", (getter)Outputs_get_disp_obj_relax,(setter)0,
-	PyDoc_STR("*sequence*: Dispatch objective function - relaxed max"),
- 	NULL},
-{"disp_objective", (getter)Outputs_get_disp_objective,(setter)0,
-	PyDoc_STR("*sequence*: Dispatch objective function value"),
- 	NULL},
-{"disp_objective_ann", (getter)Outputs_get_disp_objective_ann,(setter)0,
-	PyDoc_STR("*float*: Annual sum of dispatch objective function value [$]"),
- 	NULL},
-{"disp_pceff_expected", (getter)Outputs_get_disp_pceff_expected,(setter)0,
-	PyDoc_STR("*sequence*: Dispatch expected power cycle efficiency adj."),
- 	NULL},
-{"disp_presolve_nconstr", (getter)Outputs_get_disp_presolve_nconstr,(setter)0,
-	PyDoc_STR("*sequence*: Dispatch number of constraints in problem"),
- 	NULL},
-{"disp_presolve_nconstr_ann", (getter)Outputs_get_disp_presolve_nconstr_ann,(setter)0,
-	PyDoc_STR("*float*: Annual sum of dispatch problem constraint count"),
- 	NULL},
-{"disp_presolve_nvar", (getter)Outputs_get_disp_presolve_nvar,(setter)0,
-	PyDoc_STR("*sequence*: Dispatch number of variables in problem"),
- 	NULL},
-{"disp_presolve_nvar_ann", (getter)Outputs_get_disp_presolve_nvar_ann,(setter)0,
-	PyDoc_STR("*float*: Annual sum of dispatch problem variable count"),
- 	NULL},
-{"disp_qpbsu_expected", (getter)Outputs_get_disp_qpbsu_expected,(setter)0,
-	PyDoc_STR("*sequence*: Dispatch expected power cycle startup energy [MWht]"),
- 	NULL},
-{"disp_qsf_expected", (getter)Outputs_get_disp_qsf_expected,(setter)0,
-	PyDoc_STR("*sequence*: Dispatch expected solar field available energy [MWt]"),
- 	NULL},
-{"disp_qsfprod_expected", (getter)Outputs_get_disp_qsfprod_expected,(setter)0,
-	PyDoc_STR("*sequence*: Dispatch expected solar field generation [MWt]"),
- 	NULL},
-{"disp_qsfsu_expected", (getter)Outputs_get_disp_qsfsu_expected,(setter)0,
-	PyDoc_STR("*sequence*: Dispatch expected solar field startup enegy [MWt]"),
- 	NULL},
-{"disp_rel_mip_gap", (getter)Outputs_get_disp_rel_mip_gap,(setter)0,
-	PyDoc_STR("*sequence*: Dispatch relative MIP gap"),
- 	NULL},
-{"disp_rev_expected", (getter)Outputs_get_disp_rev_expected,(setter)0,
-	PyDoc_STR("*sequence*: Dispatch expected revenue factor"),
- 	NULL},
-{"disp_solve_iter", (getter)Outputs_get_disp_solve_iter,(setter)0,
-	PyDoc_STR("*sequence*: Dispatch iterations count"),
- 	NULL},
-{"disp_solve_state", (getter)Outputs_get_disp_solve_state,(setter)0,
-	PyDoc_STR("*sequence*: Dispatch solver state"),
- 	NULL},
-{"disp_solve_state_ann", (getter)Outputs_get_disp_solve_state_ann,(setter)0,
-	PyDoc_STR("*float*: Annual sum of dispatch solve state"),
- 	NULL},
-{"disp_solve_time", (getter)Outputs_get_disp_solve_time,(setter)0,
-	PyDoc_STR("*sequence*: Dispatch solver time [sec]"),
- 	NULL},
-{"disp_solve_time_ann", (getter)Outputs_get_disp_solve_time_ann,(setter)0,
-	PyDoc_STR("*float*: Annual sum of dispatch solver time [sec]"),
- 	NULL},
-{"disp_subopt_flag", (getter)Outputs_get_disp_subopt_flag,(setter)0,
-	PyDoc_STR("*sequence*: Dispatch suboptimal solution flag"),
- 	NULL},
-{"disp_tes_expected", (getter)Outputs_get_disp_tes_expected,(setter)0,
-	PyDoc_STR("*sequence*: Dispatch expected TES charge level [MWht]"),
- 	NULL},
-{"disp_wpb_expected", (getter)Outputs_get_disp_wpb_expected,(setter)0,
-	PyDoc_STR("*sequence*: Dispatch expected power generation [MWe]"),
  	NULL},
 {"e_ch_tes", (getter)Outputs_get_e_ch_tes,(setter)0,
 	PyDoc_STR("*sequence*: TES charge state [MWht]"),
@@ -4441,11 +4343,11 @@ static PyGetSetDef Outputs_getset[] = {
 {"epc_cost_calc", (getter)Outputs_get_epc_cost_calc,(setter)0,
 	PyDoc_STR("*float*: EPC cost [$]"),
  	NULL},
-{"eta_cycle_gross", (getter)Outputs_get_eta_cycle_gross,(setter)0,
-	PyDoc_STR("*sequence*: PC efficiency gross (no cooling parasitics)"),
+{"eta_pc_net_des", (getter)Outputs_get_eta_pc_net_des,(setter)0,
+	PyDoc_STR("*float*: Cycle net efficiency [-]"),
  	NULL},
-{"eta_cycle_net", (getter)Outputs_get_eta_cycle_net,(setter)0,
-	PyDoc_STR("*sequence*: PC efficiency net (with cooling parasitics)"),
+{"eta_pc_thermo", (getter)Outputs_get_eta_pc_thermo,(setter)0,
+	PyDoc_STR("*sequence*: PC thermodynamic efficiency"),
  	NULL},
 {"flip_target_percent", (getter)Outputs_get_flip_target_percent,(setter)0,
 	PyDoc_STR("*float*: After-tax IRR target [%]"),
@@ -4465,17 +4367,35 @@ static PyGetSetDef Outputs_getset[] = {
 {"m_dot_balance", (getter)Outputs_get_m_dot_balance,(setter)0,
 	PyDoc_STR("*sequence*: Relative mass flow balance error"),
  	NULL},
-{"m_dot_htf_cycle", (getter)Outputs_get_m_dot_htf_cycle,(setter)0,
-	PyDoc_STR("*sequence*: PC HTF mass flow rate [kg/s]"),
+{"m_dot_hp_CT_htf", (getter)Outputs_get_m_dot_hp_CT_htf,(setter)0,
+	PyDoc_STR("*sequence*: Heat pump cold tes HTF mass flow rate [kg/s]"),
  	NULL},
-{"m_dot_htf_cycle_des", (getter)Outputs_get_m_dot_htf_cycle_des,(setter)0,
-	PyDoc_STR("*float*: Cycle htf mass flow rate at design [kg/s]"),
+{"m_dot_hp_CT_htf_des", (getter)Outputs_get_m_dot_hp_CT_htf_des,(setter)0,
+	PyDoc_STR("*float*: Heat pump CT HTF mass flow rate [kg/s]"),
  	NULL},
-{"m_dot_htf_heater", (getter)Outputs_get_m_dot_htf_heater,(setter)0,
-	PyDoc_STR("*sequence*: Heater HTF mass flow rate [kg/s]"),
+{"m_dot_hp_HT_htf", (getter)Outputs_get_m_dot_hp_HT_htf,(setter)0,
+	PyDoc_STR("*sequence*: Heat pump hot tes HTF mass flow rate [kg/s]"),
  	NULL},
-{"m_dot_water_cycle", (getter)Outputs_get_m_dot_water_cycle,(setter)0,
-	PyDoc_STR("*sequence*: PC water consumption, makeup + cooling [kg/s]"),
+{"m_dot_hp_HT_htf_des", (getter)Outputs_get_m_dot_hp_HT_htf_des,(setter)0,
+	PyDoc_STR("*float*: Heat pump HT HTF mass flow rate [kg/s]"),
+ 	NULL},
+{"m_dot_pc_CT_htf", (getter)Outputs_get_m_dot_pc_CT_htf,(setter)0,
+	PyDoc_STR("*sequence*: PC cold tes HTF mass flow rate [kg/s]"),
+ 	NULL},
+{"m_dot_pc_CT_htf_des", (getter)Outputs_get_m_dot_pc_CT_htf_des,(setter)0,
+	PyDoc_STR("*float*: Cycle CT HTF mass flow rate [kg/s]"),
+ 	NULL},
+{"m_dot_pc_HT_htf", (getter)Outputs_get_m_dot_pc_HT_htf,(setter)0,
+	PyDoc_STR("*sequence*: PC hot tes HTF mass flow rate [kg/s]"),
+ 	NULL},
+{"m_dot_pc_HT_htf_des", (getter)Outputs_get_m_dot_pc_HT_htf_des,(setter)0,
+	PyDoc_STR("*float*: Cycle HT HTF mass flow rate [kg/s]"),
+ 	NULL},
+{"mass_CT_tes_cold", (getter)Outputs_get_mass_CT_tes_cold,(setter)0,
+	PyDoc_STR("*sequence*: TES cold tank mass (end) [kg]"),
+ 	NULL},
+{"mass_CT_tes_hot", (getter)Outputs_get_mass_CT_tes_hot,(setter)0,
+	PyDoc_STR("*sequence*: TES hot tank mass (end) [kg]"),
  	NULL},
 {"mass_tes_cold", (getter)Outputs_get_mass_tes_cold,(setter)0,
 	PyDoc_STR("*sequence*: TES cold tank mass (end) [kg]"),
@@ -4487,7 +4407,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Operating modes in reporting timestep"),
  	NULL},
 {"nameplate", (getter)Outputs_get_nameplate,(setter)0,
-	PyDoc_STR("*float*: Nameplate capacity [MWe]"),
+	PyDoc_STR("*float*: Nameplate capacity (discharge) [MWe]"),
  	NULL},
 {"op_mode_1", (getter)Outputs_get_op_mode_1,(setter)0,
 	PyDoc_STR("*sequence*: 1st operating mode"),
@@ -4504,29 +4424,65 @@ static PyGetSetDef Outputs_getset[] = {
 {"q_balance", (getter)Outputs_get_q_balance,(setter)0,
 	PyDoc_STR("*sequence*: Relative energy balance error"),
  	NULL},
+{"q_dot_CT_tes_heater", (getter)Outputs_get_q_dot_CT_tes_heater,(setter)0,
+	PyDoc_STR("*sequence*: TES freeze protection power [MWe]"),
+ 	NULL},
+{"q_dot_CT_tes_losses", (getter)Outputs_get_q_dot_CT_tes_losses,(setter)0,
+	PyDoc_STR("*sequence*: TES thermal losses [MWt]"),
+ 	NULL},
 {"q_dot_ch_tes", (getter)Outputs_get_q_dot_ch_tes,(setter)0,
 	PyDoc_STR("*sequence*: TES charge thermal power [MWt]"),
- 	NULL},
-{"q_dot_cycle", (getter)Outputs_get_q_dot_cycle,(setter)0,
-	PyDoc_STR("*sequence*: PC thermal power [MWt]"),
- 	NULL},
-{"q_dot_cycle_startup", (getter)Outputs_get_q_dot_cycle_startup,(setter)0,
-	PyDoc_STR("*sequence*: PC startup thermal power [MWt]"),
  	NULL},
 {"q_dot_dc_tes", (getter)Outputs_get_q_dot_dc_tes,(setter)0,
 	PyDoc_STR("*sequence*: TES discharge thermal power [MWt]"),
  	NULL},
-{"q_dot_heater_design", (getter)Outputs_get_q_dot_heater_design,(setter)0,
-	PyDoc_STR("*float*: Heater thermal output at design [MWt]"),
+{"q_dot_hp_cold_in_des", (getter)Outputs_get_q_dot_hp_cold_in_des,(setter)0,
+	PyDoc_STR("*float*: Heat pump heat input [MWt]"),
  	NULL},
-{"q_dot_heater_startup", (getter)Outputs_get_q_dot_heater_startup,(setter)0,
-	PyDoc_STR("*sequence*: Heater thermal power consumed during startup [MWt]"),
+{"q_dot_hp_from_CT_htf", (getter)Outputs_get_q_dot_hp_from_CT_htf,(setter)0,
+	PyDoc_STR("*sequence*: Heat pump thermal power from cold tes HTF [MWt]"),
  	NULL},
-{"q_dot_heater_to_htf", (getter)Outputs_get_q_dot_heater_to_htf,(setter)0,
-	PyDoc_STR("*sequence*: Heater thermal power to HTF [MWt]"),
+{"q_dot_hp_hot_out_des", (getter)Outputs_get_q_dot_hp_hot_out_des,(setter)0,
+	PyDoc_STR("*float*: Heat pump heat output [MWt]"),
+ 	NULL},
+{"q_dot_hp_startup", (getter)Outputs_get_q_dot_hp_startup,(setter)0,
+	PyDoc_STR("*sequence*: Heat pump startup power [MWt]"),
+ 	NULL},
+{"q_dot_hp_to_HT_htf", (getter)Outputs_get_q_dot_hp_to_HT_htf,(setter)0,
+	PyDoc_STR("*sequence*: Heat pump thermal power to hot tes HTF [MWt]"),
+ 	NULL},
+{"q_dot_loss_CT_tes_des", (getter)Outputs_get_q_dot_loss_CT_tes_des,(setter)0,
+	PyDoc_STR("*float*: Cold TES thermal loss at design [MWt]"),
  	NULL},
 {"q_dot_loss_tes_des", (getter)Outputs_get_q_dot_loss_tes_des,(setter)0,
 	PyDoc_STR("*float*: TES thermal loss at design [MWt]"),
+ 	NULL},
+{"q_dot_pc_cold_out_thermo_des", (getter)Outputs_get_q_dot_pc_cold_out_thermo_des,(setter)0,
+	PyDoc_STR("*float*: Cycle total heat rejection [MWt]"),
+ 	NULL},
+{"q_dot_pc_cold_to_CTES_des", (getter)Outputs_get_q_dot_pc_cold_to_CTES_des,(setter)0,
+	PyDoc_STR("*float*: Cycle heat to cold TES [MWt]"),
+ 	NULL},
+{"q_dot_pc_cold_to_surroundings_des", (getter)Outputs_get_q_dot_pc_cold_to_surroundings_des,(setter)0,
+	PyDoc_STR("*float*: Cycle heat to surroundings [MWt]"),
+ 	NULL},
+{"q_dot_pc_from_HT_htf", (getter)Outputs_get_q_dot_pc_from_HT_htf,(setter)0,
+	PyDoc_STR("*sequence*: PC thermal power from hot tes HTF [MWt]"),
+ 	NULL},
+{"q_dot_pc_hot_in_des", (getter)Outputs_get_q_dot_pc_hot_in_des,(setter)0,
+	PyDoc_STR("*float*: Cycle heat input [MWt]"),
+ 	NULL},
+{"q_dot_pc_rejected", (getter)Outputs_get_q_dot_pc_rejected,(setter)0,
+	PyDoc_STR("*sequence*: PC thermal power rejected to surroundings [MWt]"),
+ 	NULL},
+{"q_dot_pc_startup", (getter)Outputs_get_q_dot_pc_startup,(setter)0,
+	PyDoc_STR("*sequence*: PC startup power [MWt]"),
+ 	NULL},
+{"q_dot_pc_thermo_out", (getter)Outputs_get_q_dot_pc_thermo_out,(setter)0,
+	PyDoc_STR("*sequence*: PC total heat leaving cycle [MWt]"),
+ 	NULL},
+{"q_dot_pc_to_CT_htf", (getter)Outputs_get_q_dot_pc_to_CT_htf,(setter)0,
+	PyDoc_STR("*sequence*: PC thermal power to cold tes HTF [MWt]"),
  	NULL},
 {"q_dot_tes_heater", (getter)Outputs_get_q_dot_tes_heater,(setter)0,
 	PyDoc_STR("*sequence*: TES freeze protection power [MWe]"),
@@ -4534,17 +4490,20 @@ static PyGetSetDef Outputs_getset[] = {
 {"q_dot_tes_losses", (getter)Outputs_get_q_dot_tes_losses,(setter)0,
 	PyDoc_STR("*sequence*: TES thermal losses [MWt]"),
  	NULL},
-{"q_pb_design", (getter)Outputs_get_q_pb_design,(setter)0,
-	PyDoc_STR("*float*: Cycle thermal input at designMWt"),
+{"q_pc_target", (getter)Outputs_get_q_pc_target,(setter)0,
+	PyDoc_STR("*sequence*: Controller target pc heat input [MWt]"),
+ 	NULL},
+{"rte_net", (getter)Outputs_get_rte_net,(setter)0,
+	PyDoc_STR("*float*: Net round-trip efficiency considering all parasitics [MWe]"),
+ 	NULL},
+{"rte_thermo", (getter)Outputs_get_rte_thermo,(setter)0,
+	PyDoc_STR("*float*: Round-trip efficiency of working fluid cycles [MWe]"),
  	NULL},
 {"sales_tax_cost_calc", (getter)Outputs_get_sales_tax_cost_calc,(setter)0,
 	PyDoc_STR("*float*: Sales tax cost [$]"),
  	NULL},
-{"sim_cpu_run_time", (getter)Outputs_get_sim_cpu_run_time,(setter)0,
-	PyDoc_STR("*float*: Simulation duration clock time [s]"),
- 	NULL},
 {"system_capacity", (getter)Outputs_get_system_capacity,(setter)0,
-	PyDoc_STR("*float*: System capacity [kWe]"),
+	PyDoc_STR("*float*: System capacity (discharge) [kWe]"),
  	NULL},
 {"tdry", (getter)Outputs_get_tdry,(setter)0,
 	PyDoc_STR("*sequence*: Resource dry Bulb temperature [C]"),
@@ -4564,9 +4523,6 @@ static PyGetSetDef Outputs_getset[] = {
 {"total_installed_cost", (getter)Outputs_get_total_installed_cost,(setter)0,
 	PyDoc_STR("*float*: Total installed cost [$]"),
  	NULL},
-{"total_land_area", (getter)Outputs_get_total_land_area,(setter)0,
-	PyDoc_STR("*float*: Total land area [acre]"),
- 	NULL},
 {"tou_period", (getter)Outputs_get_tou_period,(setter)0,
 	PyDoc_STR("*sequence*: Time of use period"),
  	NULL},
@@ -4583,7 +4539,7 @@ static PyTypeObject Outputs_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"EtesElectricResistance.Outputs",             /*tp_name*/
+		"EtesPtes.Outputs",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -4626,16 +4582,16 @@ static PyTypeObject Outputs_Type = {
 };
 
 /*
- * EtesElectricResistance
+ * EtesPtes
  */
 
-static PyTypeObject EtesElectricResistance_Type;
+static PyTypeObject EtesPtes_Type;
 
 static CmodObject *
-newEtesElectricResistanceObject(void* data_ptr)
+newEtesPtesObject(void* data_ptr)
 {
 	CmodObject *self;
-	self = PyObject_New(CmodObject, &EtesElectricResistance_Type);
+	self = PyObject_New(CmodObject, &EtesPtes_Type);
 
 	PySAM_TECH_ATTR()
 
@@ -4655,18 +4611,6 @@ newEtesElectricResistanceObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "SystemDesign", SystemDesign_obj);
 	Py_DECREF(SystemDesign_obj);
 
-	PyObject* PowerCycle_obj = PowerCycle_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "PowerCycle", PowerCycle_obj);
-	Py_DECREF(PowerCycle_obj);
-
-	PyObject* RankineCycle_obj = RankineCycle_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "RankineCycle", RankineCycle_obj);
-	Py_DECREF(RankineCycle_obj);
-
-	PyObject* UserDefinedPowerCycle_obj = UserDefinedPowerCycle_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "UserDefinedPowerCycle", UserDefinedPowerCycle_obj);
-	Py_DECREF(UserDefinedPowerCycle_obj);
-
 	PyObject* ThermalStorage_obj = ThermalStorage_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "ThermalStorage", ThermalStorage_obj);
 	Py_DECREF(ThermalStorage_obj);
@@ -4675,6 +4619,18 @@ newEtesElectricResistanceObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "Heater", Heater_obj);
 	Py_DECREF(Heater_obj);
 
+	PyObject* PowerCycle_obj = PowerCycle_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "PowerCycle", PowerCycle_obj);
+	Py_DECREF(PowerCycle_obj);
+
+	PyObject* HotThermalStorage_obj = HotThermalStorage_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "HotThermalStorage", HotThermalStorage_obj);
+	Py_DECREF(HotThermalStorage_obj);
+
+	PyObject* ColdThermalStorage_obj = ColdThermalStorage_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "ColdThermalStorage", ColdThermalStorage_obj);
+	Py_DECREF(ColdThermalStorage_obj);
+
 	PyObject* TimeOfDeliveryFactors_obj = TimeOfDeliveryFactors_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "TimeOfDeliveryFactors", TimeOfDeliveryFactors_obj);
 	Py_DECREF(TimeOfDeliveryFactors_obj);
@@ -4682,10 +4638,6 @@ newEtesElectricResistanceObject(void* data_ptr)
 	PyObject* Revenue_obj = Revenue_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Revenue", Revenue_obj);
 	Py_DECREF(Revenue_obj);
-
-	PyObject* SystemCost_obj = SystemCost_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "SystemCost", SystemCost_obj);
-	Py_DECREF(SystemCost_obj);
 
 	PyObject* SystemCosts_obj = SystemCosts_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "SystemCosts", SystemCosts_obj);
@@ -4717,10 +4669,10 @@ newEtesElectricResistanceObject(void* data_ptr)
 	return self;
 }
 
-/* EtesElectricResistance methods */
+/* EtesPtes methods */
 
 static void
-EtesElectricResistance_dealloc(CmodObject *self)
+EtesPtes_dealloc(CmodObject *self)
 {
 	Py_XDECREF(self->x_attr);
 
@@ -4734,7 +4686,7 @@ EtesElectricResistance_dealloc(CmodObject *self)
 
 
 static PyObject *
-EtesElectricResistance_execute(CmodObject *self, PyObject *args)
+EtesPtes_execute(CmodObject *self, PyObject *args)
 {
 	int verbosity = 0;
 
@@ -4742,7 +4694,7 @@ EtesElectricResistance_execute(CmodObject *self, PyObject *args)
 		return NULL;
 
 	SAM_error error = new_error();
-	SAM_EtesElectricResistance_execute(self->data_ptr, verbosity, &error);
+	SAM_EtesPtes_execute(self->data_ptr, verbosity, &error);
 	if (PySAM_has_error(error )) return NULL;
 	Py_INCREF(Py_None);
 	return Py_None;
@@ -4750,14 +4702,14 @@ EtesElectricResistance_execute(CmodObject *self, PyObject *args)
 
 
 static PyObject *
-EtesElectricResistance_assign(CmodObject *self, PyObject *args)
+EtesPtes_assign(CmodObject *self, PyObject *args)
 {
 	PyObject* dict;
 	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_nested_dict((PyObject*)self, self->x_attr, self->data_ptr, dict, "EtesElectricResistance"))
+	if (!PySAM_assign_from_nested_dict((PyObject*)self, self->x_attr, self->data_ptr, dict, "EtesPtes"))
 		return NULL;
 
 	Py_INCREF(Py_None);
@@ -4765,14 +4717,14 @@ EtesElectricResistance_assign(CmodObject *self, PyObject *args)
 }
 
 static PyObject *
-EtesElectricResistance_replace(CmodObject *self, PyObject *args)
+EtesPtes_replace(CmodObject *self, PyObject *args)
 {
 	PyObject* dict;
 	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
 		return NULL;
 	}
 
-	if (!PySAM_replace_from_nested_dict((PyObject*)self, self->x_attr, self->data_ptr, dict, "EtesElectricResistance"))
+	if (!PySAM_replace_from_nested_dict((PyObject*)self, self->x_attr, self->data_ptr, dict, "EtesPtes"))
 		return NULL;
 
 	Py_INCREF(Py_None);
@@ -4780,63 +4732,63 @@ EtesElectricResistance_replace(CmodObject *self, PyObject *args)
 }
 
 static PyObject *
-EtesElectricResistance_export(CmodObject *self, PyObject *args)
+EtesPtes_export(CmodObject *self, PyObject *args)
 {
 	return PySAM_export_to_nested_dict((PyObject *) self, self->x_attr);
 }
 
 static PyObject *
-EtesElectricResistance_value(CmodObject *self, PyObject *args)
+EtesPtes_value(CmodObject *self, PyObject *args)
 {
 	return Cmod_value(self, args);
 }
 
 static PyObject *
-EtesElectricResistance_unassign(CmodObject *self, PyObject *args)
+EtesPtes_unassign(CmodObject *self, PyObject *args)
 {
 	return Cmod_unassign(self, args);
 }
 
-static PyMethodDef EtesElectricResistance_methods[] = {
-		{"execute",           (PyCFunction)EtesElectricResistance_execute,  METH_VARARGS,
+static PyMethodDef EtesPtes_methods[] = {
+		{"execute",           (PyCFunction)EtesPtes_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
-		{"assign",            (PyCFunction)EtesElectricResistance_assign,  METH_VARARGS,
+		{"assign",            (PyCFunction)EtesPtes_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Solar Resource': { var: val, ...}, ...}``")},
-		{"replace",            (PyCFunction)EtesElectricResistance_replace,  METH_VARARGS,
+		{"replace",            (PyCFunction)EtesPtes_replace,  METH_VARARGS,
 				PyDoc_STR("replace(dict) -> None\n Replace attributes from nested dictionary, except for Outputs. Unassigns all values in each Group then assigns from the input dict.\n\n``nested_dict = { 'Solar Resource': { var: val, ...}, ...}``")},
-		{"export",            (PyCFunction)EtesElectricResistance_export,  METH_VARARGS,
+		{"export",            (PyCFunction)EtesPtes_export,  METH_VARARGS,
 				PyDoc_STR("export() -> dict\n Export attributes into nested dictionary")},
-		{"value",             (PyCFunction)EtesElectricResistance_value, METH_VARARGS,
+		{"value",             (PyCFunction)EtesPtes_value, METH_VARARGS,
 				PyDoc_STR("value(name, optional value) -> Union[None, float, dict, sequence, str]\n Get or set by name a value in any of the variable groups.")},
-		{"unassign",          (PyCFunction)EtesElectricResistance_unassign, METH_VARARGS,
+		{"unassign",          (PyCFunction)EtesPtes_unassign, METH_VARARGS,
 				PyDoc_STR("unassign(name) -> None\n Unassign a value in any of the variable groups.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 static PyObject *
-EtesElectricResistance_getattro(CmodObject *self, PyObject *name)
+EtesPtes_getattro(CmodObject *self, PyObject *name)
 {
 	return PySAM_get_attr((PyObject*) self, (PyObject*) self->x_attr, name);
 }
 
 static int
-EtesElectricResistance_setattr(CmodObject *self, const char *name, PyObject *v)
+EtesPtes_setattr(CmodObject *self, const char *name, PyObject *v)
 {
 	return PySAM_set_attr((PyObject*)self, (PyObject*)self->x_attr, name, v);
 }
 
-static PyTypeObject EtesElectricResistance_Type = {
+static PyTypeObject EtesPtes_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"EtesElectricResistance",            /*tp_name*/
+		"EtesPtes",            /*tp_name*/
 		sizeof(CmodObject),/*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
-		(destructor)EtesElectricResistance_dealloc,    /*tp_dealloc*/
+		(destructor)EtesPtes_dealloc,    /*tp_dealloc*/
 		0,                          /*tp_print*/
 		(getattrfunc)0,             /*tp_getattr*/
-		(setattrfunc)EtesElectricResistance_setattr,   /*tp_setattr*/
+		(setattrfunc)EtesPtes_setattr,   /*tp_setattr*/
 		0,                          /*tp_reserved*/
 		0,                          /*tp_repr*/
 		0,                          /*tp_as_number*/
@@ -4845,7 +4797,7 @@ static PyTypeObject EtesElectricResistance_Type = {
 		0,                          /*tp_hash*/
 		0,                          /*tp_call*/
 		0,                          /*tp_str*/
-		(getattrofunc)EtesElectricResistance_getattro, /*tp_getattro*/
+		(getattrofunc)EtesPtes_getattro, /*tp_getattro*/
 		0,                          /*tp_setattro*/
 		0,                          /*tp_as_buffer*/
 		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
@@ -4856,7 +4808,7 @@ static PyTypeObject EtesElectricResistance_Type = {
 		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
-		EtesElectricResistance_methods,      /*tp_methods*/
+		EtesPtes_methods,      /*tp_methods*/
 		0,                          /*tp_members*/
 		0,       /*tp_getset*/
 		0,                          /*tp_base*/
@@ -4874,13 +4826,13 @@ static PyTypeObject EtesElectricResistance_Type = {
 /* --------------------------------------------------------------------- */
 
 
-/* Function of no arguments returning new EtesElectricResistance object */
+/* Function of no arguments returning new EtesPtes object */
 
 static PyObject *
-EtesElectricResistance_new(PyObject *self, PyObject *args)
+EtesPtes_new(PyObject *self, PyObject *args)
 {
 	CmodObject *rv;
-	rv = newEtesElectricResistanceObject(0);
+	rv = newEtesPtesObject(0);
 	if (rv == NULL)
 		return NULL;
 
@@ -4889,7 +4841,7 @@ EtesElectricResistance_new(PyObject *self, PyObject *args)
 }
 
 static PyObject *
-EtesElectricResistance_wrap(PyObject *self, PyObject *args)
+EtesPtes_wrap(PyObject *self, PyObject *args)
 {
 	CmodObject *rv;
 	long long int ptr = 0;  // 64 bit arch
@@ -4897,7 +4849,7 @@ EtesElectricResistance_wrap(PyObject *self, PyObject *args)
 		PyErr_BadArgument();
 		return NULL;
 	}
-	rv = newEtesElectricResistanceObject((void*)ptr);
+	rv = newEtesPtesObject((void*)ptr);
 	if (rv == NULL)
 		return NULL;
 
@@ -4906,7 +4858,7 @@ EtesElectricResistance_wrap(PyObject *self, PyObject *args)
 }
 
 static PyObject *
-EtesElectricResistance_default(PyObject *self, PyObject *args)
+EtesPtes_default(PyObject *self, PyObject *args)
 {
 	CmodObject *rv;
 	char* def = 0;
@@ -4914,20 +4866,20 @@ EtesElectricResistance_default(PyObject *self, PyObject *args)
 		PyErr_BadArgument();
 		return NULL;
 	}
-	rv = newEtesElectricResistanceObject(0);
+	rv = newEtesPtesObject(0);
 	if (rv == NULL)
 		return NULL;
 
 	rv->data_owner_ptr = NULL;
-	if (PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "EtesElectricResistance", def) < 0) {
-		EtesElectricResistance_dealloc(rv);
+	if (PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "EtesPtes", def) < 0) {
+		EtesPtes_dealloc(rv);
 		return NULL;
 	}
 	return (PyObject *)rv;
 }
 
 static PyObject *
-EtesElectricResistance_from_existing(PyObject *self, PyObject *args)
+EtesPtes_from_existing(PyObject *self, PyObject *args)
 {
 	CmodObject *rv;
 	PyObject * module = 0;
@@ -4947,13 +4899,13 @@ EtesElectricResistance_from_existing(PyObject *self, PyObject *args)
 	if (data_size < 0)
 		goto fail;
 
-	rv = newEtesElectricResistanceObject((void*)ptr);
+	rv = newEtesPtesObject((void*)ptr);
 	if (rv == NULL)
 		goto fail;
 	rv->data_owner_ptr = module;
 	if (!def)
 		return (PyObject *)rv;
-	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "EtesElectricResistance", def);
+	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "EtesPtes", def);
 	return (PyObject *)rv;
 
 	fail:
@@ -4964,34 +4916,34 @@ EtesElectricResistance_from_existing(PyObject *self, PyObject *args)
 
 /* List of functions defined in the module */
 
-static PyMethodDef EtesElectricResistanceModule_methods[] = {
-		{"new",             EtesElectricResistance_new,         METH_VARARGS,
-				PyDoc_STR("new() -> EtesElectricResistance")},
-		{"default",             EtesElectricResistance_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> EtesElectricResistance\n\nLoad values from SAM default configurations to provide as inputs to the model. \n\n			`config` options:\n\n- \"ETESSingleOwner\"\n\n.. note::\n\n	The default configuration is a collection of default values for the module inputs. Some inputs may not be included in the default configuration and are automatically assigned the value indicated by the variable's 'Required' attribute.")},
-		{"wrap",             EtesElectricResistance_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> EtesElectricResistance\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
-		{"from_existing",   EtesElectricResistance_from_existing,        METH_VARARGS,
-				PyDoc_STR("from_existing(data, optional config) -> EtesElectricResistance\n\nShare underlying data with an existing PySAM class. If config provided, default attributes are loaded otherwise.")},
+static PyMethodDef EtesPtesModule_methods[] = {
+		{"new",             EtesPtes_new,         METH_VARARGS,
+				PyDoc_STR("new() -> EtesPtes")},
+		{"default",             EtesPtes_default,         METH_VARARGS,
+				PyDoc_STR("default(config) -> EtesPtes\n\nLoad values from SAM default configurations to provide as inputs to the model. \n\n			`config` options:\n\n- \"PTESSingleOwner\"\n\n.. note::\n\n	The default configuration is a collection of default values for the module inputs. Some inputs may not be included in the default configuration and are automatically assigned the value indicated by the variable's 'Required' attribute.")},
+		{"wrap",             EtesPtes_wrap,         METH_VARARGS,
+				PyDoc_STR("wrap(ssc_data_t) -> EtesPtes\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
+		{"from_existing",   EtesPtes_from_existing,        METH_VARARGS,
+				PyDoc_STR("from_existing(data, optional config) -> EtesPtes\n\nShare underlying data with an existing PySAM class. If config provided, default attributes are loaded otherwise.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 PyDoc_STRVAR(module_doc,
-			 "Electric thermal energy storage");
+			 "Pumped thermal energy storage");
 
 
 static int
-EtesElectricResistanceModule_exec(PyObject *m)
+EtesPtesModule_exec(PyObject *m)
 {
 	/* Finalize the type object including setting type of the new type
 	 * object; doing it here is required for portability, too. */
 
 	if (PySAM_load_lib(m) < 0) goto fail;
 
-	EtesElectricResistance_Type.tp_dict = PyDict_New();
-	if (!EtesElectricResistance_Type.tp_dict) { goto fail; }
+	EtesPtes_Type.tp_dict = PyDict_New();
+	if (!EtesPtes_Type.tp_dict) { goto fail; }
 
-	/// Add the AdjustmentFactors type object to EtesElectricResistance_Type
+	/// Add the AdjustmentFactors type object to EtesPtes_Type
 	PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
 	if (!AdjustmentFactorsModule){
 		PyErr_SetImportError(PyUnicode_FromString("Could not import AdjustmentFactors module."), NULL, NULL);
@@ -5004,122 +4956,115 @@ EtesElectricResistanceModule_exec(PyObject *m)
 	Py_XDECREF(AdjustmentFactorsModule);
 
 	if (PyType_Ready(AdjustmentFactors_Type) < 0) { goto fail; }
-	PyDict_SetItemString(EtesElectricResistance_Type.tp_dict,
+	PyDict_SetItemString(EtesPtes_Type.tp_dict,
 						 "AdjustmentFactors",
 						 (PyObject*)AdjustmentFactors_Type);
 	Py_DECREF(&AdjustmentFactors_Type);
 	Py_XDECREF(AdjustmentFactors_Type);
 
-	/// Add the SolarResource type object to EtesElectricResistance_Type
+	/// Add the SolarResource type object to EtesPtes_Type
 	if (PyType_Ready(&SolarResource_Type) < 0) { goto fail; }
-	PyDict_SetItemString(EtesElectricResistance_Type.tp_dict,
+	PyDict_SetItemString(EtesPtes_Type.tp_dict,
 				"SolarResource",
 				(PyObject*)&SolarResource_Type);
 	Py_DECREF(&SolarResource_Type);
 
-	/// Add the SystemControl type object to EtesElectricResistance_Type
+	/// Add the SystemControl type object to EtesPtes_Type
 	if (PyType_Ready(&SystemControl_Type) < 0) { goto fail; }
-	PyDict_SetItemString(EtesElectricResistance_Type.tp_dict,
+	PyDict_SetItemString(EtesPtes_Type.tp_dict,
 				"SystemControl",
 				(PyObject*)&SystemControl_Type);
 	Py_DECREF(&SystemControl_Type);
 
-	/// Add the FinancialModel type object to EtesElectricResistance_Type
+	/// Add the FinancialModel type object to EtesPtes_Type
 	if (PyType_Ready(&FinancialModel_Type) < 0) { goto fail; }
-	PyDict_SetItemString(EtesElectricResistance_Type.tp_dict,
+	PyDict_SetItemString(EtesPtes_Type.tp_dict,
 				"FinancialModel",
 				(PyObject*)&FinancialModel_Type);
 	Py_DECREF(&FinancialModel_Type);
 
-	/// Add the SystemDesign type object to EtesElectricResistance_Type
+	/// Add the SystemDesign type object to EtesPtes_Type
 	if (PyType_Ready(&SystemDesign_Type) < 0) { goto fail; }
-	PyDict_SetItemString(EtesElectricResistance_Type.tp_dict,
+	PyDict_SetItemString(EtesPtes_Type.tp_dict,
 				"SystemDesign",
 				(PyObject*)&SystemDesign_Type);
 	Py_DECREF(&SystemDesign_Type);
 
-	/// Add the PowerCycle type object to EtesElectricResistance_Type
-	if (PyType_Ready(&PowerCycle_Type) < 0) { goto fail; }
-	PyDict_SetItemString(EtesElectricResistance_Type.tp_dict,
-				"PowerCycle",
-				(PyObject*)&PowerCycle_Type);
-	Py_DECREF(&PowerCycle_Type);
-
-	/// Add the RankineCycle type object to EtesElectricResistance_Type
-	if (PyType_Ready(&RankineCycle_Type) < 0) { goto fail; }
-	PyDict_SetItemString(EtesElectricResistance_Type.tp_dict,
-				"RankineCycle",
-				(PyObject*)&RankineCycle_Type);
-	Py_DECREF(&RankineCycle_Type);
-
-	/// Add the UserDefinedPowerCycle type object to EtesElectricResistance_Type
-	if (PyType_Ready(&UserDefinedPowerCycle_Type) < 0) { goto fail; }
-	PyDict_SetItemString(EtesElectricResistance_Type.tp_dict,
-				"UserDefinedPowerCycle",
-				(PyObject*)&UserDefinedPowerCycle_Type);
-	Py_DECREF(&UserDefinedPowerCycle_Type);
-
-	/// Add the ThermalStorage type object to EtesElectricResistance_Type
+	/// Add the ThermalStorage type object to EtesPtes_Type
 	if (PyType_Ready(&ThermalStorage_Type) < 0) { goto fail; }
-	PyDict_SetItemString(EtesElectricResistance_Type.tp_dict,
+	PyDict_SetItemString(EtesPtes_Type.tp_dict,
 				"ThermalStorage",
 				(PyObject*)&ThermalStorage_Type);
 	Py_DECREF(&ThermalStorage_Type);
 
-	/// Add the Heater type object to EtesElectricResistance_Type
+	/// Add the Heater type object to EtesPtes_Type
 	if (PyType_Ready(&Heater_Type) < 0) { goto fail; }
-	PyDict_SetItemString(EtesElectricResistance_Type.tp_dict,
+	PyDict_SetItemString(EtesPtes_Type.tp_dict,
 				"Heater",
 				(PyObject*)&Heater_Type);
 	Py_DECREF(&Heater_Type);
 
-	/// Add the TimeOfDeliveryFactors type object to EtesElectricResistance_Type
+	/// Add the PowerCycle type object to EtesPtes_Type
+	if (PyType_Ready(&PowerCycle_Type) < 0) { goto fail; }
+	PyDict_SetItemString(EtesPtes_Type.tp_dict,
+				"PowerCycle",
+				(PyObject*)&PowerCycle_Type);
+	Py_DECREF(&PowerCycle_Type);
+
+	/// Add the HotThermalStorage type object to EtesPtes_Type
+	if (PyType_Ready(&HotThermalStorage_Type) < 0) { goto fail; }
+	PyDict_SetItemString(EtesPtes_Type.tp_dict,
+				"HotThermalStorage",
+				(PyObject*)&HotThermalStorage_Type);
+	Py_DECREF(&HotThermalStorage_Type);
+
+	/// Add the ColdThermalStorage type object to EtesPtes_Type
+	if (PyType_Ready(&ColdThermalStorage_Type) < 0) { goto fail; }
+	PyDict_SetItemString(EtesPtes_Type.tp_dict,
+				"ColdThermalStorage",
+				(PyObject*)&ColdThermalStorage_Type);
+	Py_DECREF(&ColdThermalStorage_Type);
+
+	/// Add the TimeOfDeliveryFactors type object to EtesPtes_Type
 	if (PyType_Ready(&TimeOfDeliveryFactors_Type) < 0) { goto fail; }
-	PyDict_SetItemString(EtesElectricResistance_Type.tp_dict,
+	PyDict_SetItemString(EtesPtes_Type.tp_dict,
 				"TimeOfDeliveryFactors",
 				(PyObject*)&TimeOfDeliveryFactors_Type);
 	Py_DECREF(&TimeOfDeliveryFactors_Type);
 
-	/// Add the Revenue type object to EtesElectricResistance_Type
+	/// Add the Revenue type object to EtesPtes_Type
 	if (PyType_Ready(&Revenue_Type) < 0) { goto fail; }
-	PyDict_SetItemString(EtesElectricResistance_Type.tp_dict,
+	PyDict_SetItemString(EtesPtes_Type.tp_dict,
 				"Revenue",
 				(PyObject*)&Revenue_Type);
 	Py_DECREF(&Revenue_Type);
 
-	/// Add the SystemCost type object to EtesElectricResistance_Type
-	if (PyType_Ready(&SystemCost_Type) < 0) { goto fail; }
-	PyDict_SetItemString(EtesElectricResistance_Type.tp_dict,
-				"SystemCost",
-				(PyObject*)&SystemCost_Type);
-	Py_DECREF(&SystemCost_Type);
-
-	/// Add the SystemCosts type object to EtesElectricResistance_Type
+	/// Add the SystemCosts type object to EtesPtes_Type
 	if (PyType_Ready(&SystemCosts_Type) < 0) { goto fail; }
-	PyDict_SetItemString(EtesElectricResistance_Type.tp_dict,
+	PyDict_SetItemString(EtesPtes_Type.tp_dict,
 				"SystemCosts",
 				(PyObject*)&SystemCosts_Type);
 	Py_DECREF(&SystemCosts_Type);
 
-	/// Add the FinancialParameters type object to EtesElectricResistance_Type
+	/// Add the FinancialParameters type object to EtesPtes_Type
 	if (PyType_Ready(&FinancialParameters_Type) < 0) { goto fail; }
-	PyDict_SetItemString(EtesElectricResistance_Type.tp_dict,
+	PyDict_SetItemString(EtesPtes_Type.tp_dict,
 				"FinancialParameters",
 				(PyObject*)&FinancialParameters_Type);
 	Py_DECREF(&FinancialParameters_Type);
 
-	/// Add the Outputs type object to EtesElectricResistance_Type
+	/// Add the Outputs type object to EtesPtes_Type
 	if (PyType_Ready(&Outputs_Type) < 0) { goto fail; }
-	PyDict_SetItemString(EtesElectricResistance_Type.tp_dict,
+	PyDict_SetItemString(EtesPtes_Type.tp_dict,
 				"Outputs",
 				(PyObject*)&Outputs_Type);
 	Py_DECREF(&Outputs_Type);
 
-	/// Add the EtesElectricResistance type object to the module
-	if (PyType_Ready(&EtesElectricResistance_Type) < 0) { goto fail; }
+	/// Add the EtesPtes type object to the module
+	if (PyType_Ready(&EtesPtes_Type) < 0) { goto fail; }
 	PyModule_AddObject(m,
-				"EtesElectricResistance",
-				(PyObject*)&EtesElectricResistance_Type);
+				"EtesPtes",
+				(PyObject*)&EtesPtes_Type);
 
 	return 0;
 	fail:
@@ -5127,18 +5072,18 @@ EtesElectricResistanceModule_exec(PyObject *m)
 	return -1;
 }
 
-static struct PyModuleDef_Slot EtesElectricResistanceModule_slots[] = {
-		{Py_mod_exec, EtesElectricResistanceModule_exec},
+static struct PyModuleDef_Slot EtesPtesModule_slots[] = {
+		{Py_mod_exec, EtesPtesModule_exec},
 		{0, NULL},
 };
 
-static struct PyModuleDef EtesElectricResistanceModule = {
+static struct PyModuleDef EtesPtesModule = {
 		PyModuleDef_HEAD_INIT,
-		"EtesElectricResistance",
+		"EtesPtes",
 		module_doc,
 		0,
-		EtesElectricResistanceModule_methods,
-		EtesElectricResistanceModule_slots,
+		EtesPtesModule_methods,
+		EtesPtesModule_slots,
 		NULL,
 		NULL,
 		NULL
@@ -5147,7 +5092,7 @@ static struct PyModuleDef EtesElectricResistanceModule = {
 /* Export function for the module */
 
 PyMODINIT_FUNC
-PyInit_EtesElectricResistance(void)
+PyInit_EtesPtes(void)
 {
-	return PyModuleDef_Init(&EtesElectricResistanceModule);
+	return PyModuleDef_Init(&EtesPtesModule);
 }

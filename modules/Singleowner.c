@@ -391,7 +391,7 @@ static PyGetSetDef Revenue_getset[] = {
 	PyDoc_STR("*float*: PPA multiplier model [0/1]\n\n*Options*: 0=diurnal,1=timestep\n\n*Constraints*: INTEGER,MIN=0\n\n*Required*: If not provided, assumed to be 0"),
  	NULL},
 {"ppa_price_input", (getter)Revenue_get_ppa_price_input,(setter)Revenue_set_ppa_price_input,
-	PyDoc_STR("*sequence*: PPA price in first year [$/kWh]\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: PPA price in first year input [$/kWh]\n\n*Required*: True"),
  	NULL},
 {"ppa_soln_max", (getter)Revenue_get_ppa_soln_max,(setter)Revenue_set_ppa_soln_max,
 	PyDoc_STR("*float*: PPA solution maximum ppa [cents/kWh]\n\n*Required*: If not provided, assumed to be 100"),
@@ -4782,7 +4782,7 @@ static PyGetSetDef BatterySystem_getset[] = {
 	PyDoc_STR("*sequence*: Battery bank replacements per year [number/year]"),
  	NULL},
 {"batt_computed_bank_capacity", (getter)BatterySystem_get_batt_computed_bank_capacity,(setter)BatterySystem_set_batt_computed_bank_capacity,
-	PyDoc_STR("*float*: Battery bank capacity [kWh]\n\n*Required*: If not provided, assumed to be 0.0\n\n*Changes to this variable may require updating the values of the following*: \n\t - cp_battery_nameplate\n"),
+	PyDoc_STR("*float*: Battery bank capacity [kWh]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
 {"batt_meter_position", (getter)BatterySystem_get_batt_meter_position,(setter)BatterySystem_set_batt_meter_position,
 	PyDoc_STR("*float*: Position of battery relative to electric meter"),
@@ -4935,9 +4935,24 @@ ElectricityRates_set_en_electricity_rates(VarGroupObject *self, PyObject *value,
 	return PySAM_double_setter(value, SAM_Singleowner_ElectricityRates_en_electricity_rates_nset, self->data_ptr);
 }
 
+static PyObject *
+ElectricityRates_get_rate_escalation(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Singleowner_ElectricityRates_rate_escalation_aget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_rate_escalation(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Singleowner_ElectricityRates_rate_escalation_aset, self->data_ptr);
+}
+
 static PyGetSetDef ElectricityRates_getset[] = {
 {"en_electricity_rates", (getter)ElectricityRates_get_en_electricity_rates,(setter)ElectricityRates_set_en_electricity_rates,
 	PyDoc_STR("*float*: Enable electricity rates for grid purchase [0/1]\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"rate_escalation", (getter)ElectricityRates_get_rate_escalation,(setter)ElectricityRates_set_rate_escalation,
+	PyDoc_STR("*sequence*: Annual electricity rate escalation [%/year]"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -9364,12 +9379,6 @@ Outputs_get_flip_target_year(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_gen_purchases(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Singleowner_Outputs_gen_purchases_aget, self->data_ptr);
-}
-
-static PyObject *
 Outputs_get_ibi_fedtax_total(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Singleowner_Outputs_ibi_fedtax_total_nget, self->data_ptr);
@@ -10649,7 +10658,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Total revenue [$]"),
  	NULL},
 {"cf_util_escal_rate", (getter)Outputs_get_cf_util_escal_rate,(setter)0,
-	PyDoc_STR("*sequence*: Annual battery salvage value costs [$]"),
+	PyDoc_STR("*sequence*: Utility escalation rate"),
  	NULL},
 {"cf_utility_bill", (getter)Outputs_get_cf_utility_bill,(setter)0,
 	PyDoc_STR("*sequence*: Electricity purchase [$]"),
@@ -11374,9 +11383,6 @@ static PyGetSetDef Outputs_getset[] = {
 {"flip_target_year", (getter)Outputs_get_flip_target_year,(setter)0,
 	PyDoc_STR("*float*: Target year to meet IRR"),
  	NULL},
-{"gen_purchases", (getter)Outputs_get_gen_purchases,(setter)0,
-	PyDoc_STR("*sequence*: Electricity from grid [kW]"),
- 	NULL},
 {"ibi_fedtax_total", (getter)Outputs_get_ibi_fedtax_total,(setter)0,
 	PyDoc_STR("*float*: Federal taxable IBI income [$]"),
  	NULL},
@@ -11567,34 +11573,34 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*float*: State ITC income [$]"),
  	NULL},
 {"lcoe_nom", (getter)Outputs_get_lcoe_nom,(setter)0,
-	PyDoc_STR("*float*: Levelized cost (nominal) [cents/kWh]"),
+	PyDoc_STR("*float*: LCOE Levelized cost of energy nominal [cents/kWh]"),
  	NULL},
 {"lcoe_real", (getter)Outputs_get_lcoe_real,(setter)0,
-	PyDoc_STR("*float*: Levelized cost (real) [cents/kWh]"),
+	PyDoc_STR("*float*: LCOE Levelized cost of energy real [cents/kWh]"),
  	NULL},
 {"lcoptc_fed_nom", (getter)Outputs_get_lcoptc_fed_nom,(setter)0,
-	PyDoc_STR("*float*: Levelized federal PTC (nominal) [cents/kWh]"),
+	PyDoc_STR("*float*: Levelized federal PTC nominal [cents/kWh]"),
  	NULL},
 {"lcoptc_fed_real", (getter)Outputs_get_lcoptc_fed_real,(setter)0,
-	PyDoc_STR("*float*: Levelized federal PTC (real) [cents/kWh]"),
+	PyDoc_STR("*float*: Levelized federal PTC real [cents/kWh]"),
  	NULL},
 {"lcoptc_sta_nom", (getter)Outputs_get_lcoptc_sta_nom,(setter)0,
-	PyDoc_STR("*float*: Levelized state PTC (nominal) [cents/kWh]"),
+	PyDoc_STR("*float*: Levelized state PTC nominal [cents/kWh]"),
  	NULL},
 {"lcoptc_sta_real", (getter)Outputs_get_lcoptc_sta_real,(setter)0,
-	PyDoc_STR("*float*: Levelized state PTC (real) [cents/kWh]"),
+	PyDoc_STR("*float*: Levelized state PTC real [cents/kWh]"),
  	NULL},
 {"lcos_nom", (getter)Outputs_get_lcos_nom,(setter)0,
-	PyDoc_STR("*float*: Levelized cost of storage (nominal) [cents/kWh]"),
+	PyDoc_STR("*float*: LCOS Levelized cost of storage nominal [cents/kWh]"),
  	NULL},
 {"lcos_real", (getter)Outputs_get_lcos_real,(setter)0,
-	PyDoc_STR("*float*: Levelized cost of storage (real) [cents/kWh]"),
+	PyDoc_STR("*float*: LCOS Levelized cost of storage real [cents/kWh]"),
  	NULL},
 {"lppa_nom", (getter)Outputs_get_lppa_nom,(setter)0,
-	PyDoc_STR("*float*: Levelized PPA price (nominal) [cents/kWh]"),
+	PyDoc_STR("*float*: LPPA Levelized PPA price nominal [cents/kWh]"),
  	NULL},
 {"lppa_real", (getter)Outputs_get_lppa_real,(setter)0,
-	PyDoc_STR("*float*: Levelized PPA price (real) [cents/kWh]"),
+	PyDoc_STR("*float*: LPPA Levelized PPA price real [cents/kWh]"),
  	NULL},
 {"min_dscr", (getter)Outputs_get_min_dscr,(setter)0,
 	PyDoc_STR("*float*: Minimum DSCR"),
@@ -11621,10 +11627,10 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*float*: Present value of annual stored energy (real) [kWh]"),
  	NULL},
 {"npv_energy_nom", (getter)Outputs_get_npv_energy_nom,(setter)0,
-	PyDoc_STR("*float*: Present value of annual energy (nominal) [kWh]"),
+	PyDoc_STR("*float*: Present value of annual energy nominal [kWh]"),
  	NULL},
 {"npv_energy_real", (getter)Outputs_get_npv_energy_real,(setter)0,
-	PyDoc_STR("*float*: Present value of annual energy (real) [kWh]"),
+	PyDoc_STR("*float*: Present value of annual energy real [kWh]"),
  	NULL},
 {"npv_fed_pbi_income", (getter)Outputs_get_npv_fed_pbi_income,(setter)0,
 	PyDoc_STR("*float*: Present value of federal PBI income [$]"),
@@ -11648,7 +11654,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*float*: Present value of utility PBI income [$]"),
  	NULL},
 {"ppa", (getter)Outputs_get_ppa,(setter)0,
-	PyDoc_STR("*float*: PPA price (Year 1) [cents/kWh]"),
+	PyDoc_STR("*float*: PPA price in Year 1 [cents/kWh]"),
  	NULL},
 {"ppa_escalation", (getter)Outputs_get_ppa_escalation,(setter)0,
 	PyDoc_STR("*float*: PPA price escalation [%/year]"),
@@ -11672,10 +11678,10 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*float*: Present value of non-fuel O&M [$]"),
  	NULL},
 {"project_return_aftertax_irr", (getter)Outputs_get_project_return_aftertax_irr,(setter)0,
-	PyDoc_STR("*float*: Internal rate of return (after-tax) [%]"),
+	PyDoc_STR("*float*: IRR Internal rate of return [%]"),
  	NULL},
 {"project_return_aftertax_npv", (getter)Outputs_get_project_return_aftertax_npv,(setter)0,
-	PyDoc_STR("*float*: Net present value (after-tax) [$]"),
+	PyDoc_STR("*float*: NPV Net present value [$]"),
  	NULL},
 {"prop_tax_assessed_value", (getter)Outputs_get_prop_tax_assessed_value,(setter)0,
 	PyDoc_STR("*float*: Assessed value of property for tax purposes [$]"),
@@ -11699,7 +11705,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*float*: Equity [$]"),
  	NULL},
 {"wacc", (getter)Outputs_get_wacc,(setter)0,
-	PyDoc_STR("*float*: Weighted average cost of capital (WACC) [$]"),
+	PyDoc_STR("*float*: WACC Weighted average cost of capital [$]"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -12090,8 +12096,7 @@ static PyMethodDef SingleownerModule_methods[] = {
 		{"new",             Singleowner_new,         METH_VARARGS,
 				PyDoc_STR("new() -> Singleowner")},
 		{"default",             Singleowner_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Singleowner\n\nUse default attributes\n"
-				"`config` options:\n\n- \"BiopowerSingleOwner\"\n- \"DSLFSingleOwner\"\n- \"ETESSingleOwner\"\n- \"EmpiricalTroughSingleOwner\"\n- \"FlatPlatePVSingleOwner\"\n- \"FuelCellSingleOwner\"\n- \"GenericBatterySingleOwner\"\n- \"GenericCSPSystemSingleOwner\"\n- \"GenericSystemSingleOwner\"\n- \"GeothermalPowerSingleOwner\"\n- \"HighXConcentratingPVSingleOwner\"\n- \"MSLFSingleOwner\"\n- \"MSPTSingleOwner\"\n- \"PVBatterySingleOwner\"\n- \"PVWattsSingleOwner\"\n- \"PhysicalTroughSingleOwner\"\n- \"StandaloneBatterySingleOwner\"\n- \"WindPowerSingleOwner\"")},
+				PyDoc_STR("default(config) -> Singleowner\n\nLoad values from SAM default configurations to provide as inputs to the model. \n\n			`config` options:\n\n- \"BiopowerSingleOwner\"\n- \"DSLFSingleOwner\"\n- \"ETESSingleOwner\"\n- \"EmpiricalTroughSingleOwner\"\n- \"FlatPlatePVSingleOwner\"\n- \"FuelCellSingleOwner\"\n- \"GenericBatterySingleOwner\"\n- \"GenericCSPSystemSingleOwner\"\n- \"GenericSystemSingleOwner\"\n- \"GeothermalPowerSingleOwner\"\n- \"HighXConcentratingPVSingleOwner\"\n- \"MSLFSingleOwner\"\n- \"MSPTSingleOwner\"\n- \"PTESSingleOwner\"\n- \"PVBatterySingleOwner\"\n- \"PVWattsSingleOwner\"\n- \"PhysicalTroughSingleOwner\"\n- \"StandaloneBatterySingleOwner\"\n- \"WindPowerSingleOwner\"\n\n.. note::\n\n	The default configuration is a collection of default values for the module inputs. Some inputs may not be included in the default configuration and are automatically assigned the value indicated by the variable's 'Required' attribute.")},
 		{"wrap",             Singleowner_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> Singleowner\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   Singleowner_from_existing,        METH_VARARGS,

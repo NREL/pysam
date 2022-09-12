@@ -2795,15 +2795,27 @@ Tou_set_ampl_exec_call(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyObject *
-Tou_get_disp_csu_cost(VarGroupObject *self, void *closure)
+Tou_get_can_cycle_use_standby(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TroughPhysical_Tou_disp_csu_cost_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_TroughPhysical_Tou_can_cycle_use_standby_nget, self->data_ptr);
 }
 
 static int
-Tou_set_disp_csu_cost(VarGroupObject *self, PyObject *value, void *closure)
+Tou_set_can_cycle_use_standby(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TroughPhysical_Tou_disp_csu_cost_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TroughPhysical_Tou_can_cycle_use_standby_nset, self->data_ptr);
+}
+
+static PyObject *
+Tou_get_disp_csu_cost_rel(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TroughPhysical_Tou_disp_csu_cost_rel_nget, self->data_ptr);
+}
+
+static int
+Tou_set_disp_csu_cost_rel(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TroughPhysical_Tou_disp_csu_cost_rel_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -2867,6 +2879,18 @@ Tou_set_disp_pen_delta_w(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyObject *
+Tou_get_disp_pen_ramping(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TroughPhysical_Tou_disp_pen_ramping_nget, self->data_ptr);
+}
+
+static int
+Tou_set_disp_pen_ramping(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TroughPhysical_Tou_disp_pen_ramping_nset, self->data_ptr);
+}
+
+static PyObject *
 Tou_get_disp_reporting(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_TroughPhysical_Tou_disp_reporting_nget, self->data_ptr);
@@ -2879,15 +2903,15 @@ Tou_set_disp_reporting(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyObject *
-Tou_get_disp_rsu_cost(VarGroupObject *self, void *closure)
+Tou_get_disp_rsu_cost_rel(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TroughPhysical_Tou_disp_rsu_cost_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_TroughPhysical_Tou_disp_rsu_cost_rel_nget, self->data_ptr);
 }
 
 static int
-Tou_set_disp_rsu_cost(VarGroupObject *self, PyObject *value, void *closure)
+Tou_set_disp_rsu_cost_rel(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TroughPhysical_Tou_disp_rsu_cost_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TroughPhysical_Tou_disp_rsu_cost_rel_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -3293,8 +3317,11 @@ static PyGetSetDef Tou_getset[] = {
 {"ampl_exec_call", (getter)Tou_get_ampl_exec_call,(setter)Tou_set_ampl_exec_call,
 	PyDoc_STR("*str*: System command to run AMPL code [-]\n\n*Required*: If not provided, assumed to be 'ampl sdk_solution.run'"),
  	NULL},
-{"disp_csu_cost", (getter)Tou_get_disp_csu_cost,(setter)Tou_set_disp_csu_cost,
-	PyDoc_STR("*float*: Cycle startup cost [$]\n\n*Required*: True if is_dispatch=1"),
+{"can_cycle_use_standby", (getter)Tou_get_can_cycle_use_standby,(setter)Tou_set_can_cycle_use_standby,
+	PyDoc_STR("*float*: Can the cycle use standby operation?\n\n*Required*: If not provided, assumed to be 0"),
+ 	NULL},
+{"disp_csu_cost_rel", (getter)Tou_get_disp_csu_cost_rel,(setter)Tou_set_disp_csu_cost_rel,
+	PyDoc_STR("*float*: Cycle startup cost [$/MWe-cycle/start]\n\n*Required*: True if is_dispatch=1"),
  	NULL},
 {"disp_frequency", (getter)Tou_get_disp_frequency,(setter)Tou_set_disp_frequency,
 	PyDoc_STR("*float*: Frequency for dispatch optimization calculations [hour]\n\n*Required*: True if is_dispatch=1"),
@@ -3309,13 +3336,16 @@ static PyGetSetDef Tou_getset[] = {
 	PyDoc_STR("*float*: Dispatch optimization solution tolerance [-]\n\n*Required*: True if is_dispatch=1"),
  	NULL},
 {"disp_pen_delta_w", (getter)Tou_get_disp_pen_delta_w,(setter)Tou_set_disp_pen_delta_w,
-	PyDoc_STR("*float*: Dispatch cycle production change penalty [$/kWe-change]\n\n*Required*: True if is_dispatch=1"),
+	PyDoc_STR("*float*: Dispatch cycle production change penalty [$/kWe-change]"),
+ 	NULL},
+{"disp_pen_ramping", (getter)Tou_get_disp_pen_ramping,(setter)Tou_set_disp_pen_ramping,
+	PyDoc_STR("*float*: Dispatch cycle production change penalty [$/MWe-change]\n\n*Required*: True if is_dispatch=1"),
  	NULL},
 {"disp_reporting", (getter)Tou_get_disp_reporting,(setter)Tou_set_disp_reporting,
 	PyDoc_STR("*float*: Dispatch optimization reporting level [-]\n\n*Required*: If not provided, assumed to be -1"),
  	NULL},
-{"disp_rsu_cost", (getter)Tou_get_disp_rsu_cost,(setter)Tou_set_disp_rsu_cost,
-	PyDoc_STR("*float*: Receiver startup cost [$]\n\n*Required*: True if is_dispatch=1"),
+{"disp_rsu_cost_rel", (getter)Tou_get_disp_rsu_cost_rel,(setter)Tou_set_disp_rsu_cost_rel,
+	PyDoc_STR("*float*: Receiver startup cost [$/MWt/start]\n\n*Required*: True if is_dispatch=1"),
  	NULL},
 {"disp_spec_bb", (getter)Tou_get_disp_spec_bb,(setter)Tou_set_disp_spec_bb,
 	PyDoc_STR("*float*: Dispatch optimization B&B heuristic [-]\n\n*Required*: If not provided, assumed to be -1"),
@@ -3538,6 +3568,18 @@ static PyMethodDef SystemControl_methods[] = {
 };
 
 static PyObject *
+SystemControl_get_disp_csu_cost(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TroughPhysical_SystemControl_disp_csu_cost_nget, self->data_ptr);
+}
+
+static int
+SystemControl_set_disp_csu_cost(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TroughPhysical_SystemControl_disp_csu_cost_nset, self->data_ptr);
+}
+
+static PyObject *
 SystemControl_get_disp_inventory_incentive(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_TroughPhysical_SystemControl_disp_inventory_incentive_nget, self->data_ptr);
@@ -3549,9 +3591,27 @@ SystemControl_set_disp_inventory_incentive(VarGroupObject *self, PyObject *value
 	return PySAM_double_setter(value, SAM_TroughPhysical_SystemControl_disp_inventory_incentive_nset, self->data_ptr);
 }
 
+static PyObject *
+SystemControl_get_disp_rsu_cost(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TroughPhysical_SystemControl_disp_rsu_cost_nget, self->data_ptr);
+}
+
+static int
+SystemControl_set_disp_rsu_cost(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TroughPhysical_SystemControl_disp_rsu_cost_nset, self->data_ptr);
+}
+
 static PyGetSetDef SystemControl_getset[] = {
+{"disp_csu_cost", (getter)SystemControl_get_disp_csu_cost,(setter)SystemControl_set_disp_csu_cost,
+	PyDoc_STR("*float*: Cycle startup cost [$]"),
+ 	NULL},
 {"disp_inventory_incentive", (getter)SystemControl_get_disp_inventory_incentive,(setter)SystemControl_set_disp_inventory_incentive,
 	PyDoc_STR("*float*: Dispatch storage terminal inventory incentive multiplier\n\n*Required*: If not provided, assumed to be 0.0"),
+ 	NULL},
+{"disp_rsu_cost", (getter)SystemControl_get_disp_rsu_cost,(setter)SystemControl_set_disp_rsu_cost,
+	PyDoc_STR("*float*: Receiver startup cost [$]"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -4097,9 +4157,24 @@ Revenue_set_mp_energy_market_revenue(VarGroupObject *self, PyObject *value, void
 		return PySAM_matrix_setter(value, SAM_TroughPhysical_Revenue_mp_energy_market_revenue_mset, self->data_ptr);
 }
 
+static PyObject *
+Revenue_get_ppa_price_input(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_TroughPhysical_Revenue_ppa_price_input_aget, self->data_ptr);
+}
+
+static int
+Revenue_set_ppa_price_input(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_TroughPhysical_Revenue_ppa_price_input_aset, self->data_ptr);
+}
+
 static PyGetSetDef Revenue_getset[] = {
 {"mp_energy_market_revenue", (getter)Revenue_get_mp_energy_market_revenue,(setter)Revenue_set_mp_energy_market_revenue,
 	PyDoc_STR("*sequence[sequence]*: Energy market revenue input\n\n*Info*: Lifetime x 2[Cleared Capacity(MW),Price($/MWh)]\n\n*Required*: True if csp_financial_model=6&is_dispatch=1"),
+ 	NULL},
+{"ppa_price_input", (getter)Revenue_get_ppa_price_input,(setter)Revenue_set_ppa_price_input,
+	PyDoc_STR("*sequence*: PPA prices - yearly [$/kWh]\n\n*Required*: True if ppa_multiplier_model=0&csp_financial_model<5&is_dispatch=1"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -4756,6 +4831,143 @@ static PyTypeObject Controller_Type = {
 
 
 /*
+ * TowerAndReceiver Group
+ */ 
+
+static PyTypeObject TowerAndReceiver_Type;
+
+static PyObject *
+TowerAndReceiver_new(SAM_TroughPhysical data_ptr)
+{
+	PyObject* new_obj = TowerAndReceiver_Type.tp_alloc(&TowerAndReceiver_Type,0);
+
+	VarGroupObject* TowerAndReceiver_obj = (VarGroupObject*)new_obj;
+
+	TowerAndReceiver_obj->data_ptr = (SAM_table)data_ptr;
+
+	return new_obj;
+}
+
+/* TowerAndReceiver methods */
+
+static PyObject *
+TowerAndReceiver_assign(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "TroughPhysical", "TowerAndReceiver")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+TowerAndReceiver_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &TowerAndReceiver_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "TroughPhysical", "TowerAndReceiver")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+TowerAndReceiver_export(VarGroupObject *self, PyObject *args)
+{
+	PyTypeObject* tp = &TowerAndReceiver_Type;
+	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
+	return dict;
+}
+
+static PyMethodDef TowerAndReceiver_methods[] = {
+		{"assign",            (PyCFunction)TowerAndReceiver_assign,  METH_VARARGS,
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``TowerAndReceiver_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)TowerAndReceiver_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``TowerAndReceiver_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)TowerAndReceiver_export,  METH_VARARGS,
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+		{NULL,              NULL}           /* sentinel */
+};
+
+static PyObject *
+TowerAndReceiver_get_piping_loss(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TroughPhysical_TowerAndReceiver_piping_loss_nget, self->data_ptr);
+}
+
+static int
+TowerAndReceiver_set_piping_loss(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TroughPhysical_TowerAndReceiver_piping_loss_nset, self->data_ptr);
+}
+
+static PyGetSetDef TowerAndReceiver_getset[] = {
+{"piping_loss", (getter)TowerAndReceiver_get_piping_loss,(setter)TowerAndReceiver_set_piping_loss,
+	PyDoc_STR("*float*: Thermal loss per meter of piping [Wt/m]"),
+ 	NULL},
+	{NULL}  /* Sentinel */
+};
+
+static PyTypeObject TowerAndReceiver_Type = {
+		/* The ob_type field must be initialized in the module init function
+		 * to be portable to Windows without using C++. */
+		PyVarObject_HEAD_INIT(NULL, 0)
+		"TroughPhysical.TowerAndReceiver",             /*tp_name*/
+		sizeof(VarGroupObject),          /*tp_basicsize*/
+		0,                          /*tp_itemsize*/
+		/* methods */
+		0,    /*tp_dealloc*/
+		0,                          /*tp_print*/
+		(getattrfunc)0,             /*tp_getattr*/
+		0,                          /*tp_setattr*/
+		0,                          /*tp_reserved*/
+		0,                          /*tp_repr*/
+		0,                          /*tp_as_number*/
+		0,                          /*tp_as_sequence*/
+		0,                          /*tp_as_mapping*/
+		0,                          /*tp_hash*/
+		0,                          /*tp_call*/
+		0,                          /*tp_str*/
+		0,                          /*tp_getattro*/
+		0,                          /*tp_setattro*/
+		0,                          /*tp_as_buffer*/
+		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
+		0,                          /*tp_doc*/
+		0,                          /*tp_traverse*/
+		0,                          /*tp_clear*/
+		0,                          /*tp_richcompare*/
+		0,                          /*tp_weaklistofnset*/
+		0,                          /*tp_iter*/
+		0,                          /*tp_iternext*/
+		TowerAndReceiver_methods,         /*tp_methods*/
+		0,                          /*tp_members*/
+		TowerAndReceiver_getset,          /*tp_getset*/
+		0,                          /*tp_base*/
+		0,                          /*tp_dict*/
+		0,                          /*tp_descr_get*/
+		0,                          /*tp_descr_set*/
+		0,                          /*tp_dictofnset*/
+		0,                          /*tp_init*/
+		0,                          /*tp_alloc*/
+		0,             /*tp_new*/
+		0,                          /*tp_free*/
+		0,                          /*tp_is_gc*/
+};
+
+
+/*
  * Outputs Group
  */ 
 
@@ -5013,6 +5225,12 @@ Outputs_get_conversion_factor(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_cycle_htf_pump_power(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_TroughPhysical_Outputs_cycle_htf_pump_power_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_defocus(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_TroughPhysical_Outputs_defocus_aget, self->data_ptr);
@@ -5166,12 +5384,6 @@ static PyObject *
 Outputs_get_hour_day(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_TroughPhysical_Outputs_hour_day_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_htf_pump_power(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_TroughPhysical_Outputs_htf_pump_power_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -5691,6 +5903,12 @@ Outputs_get_tdry(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_tes_htf_pump_power(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_TroughPhysical_Outputs_tes_htf_pump_power_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_time_hr(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_TroughPhysical_Outputs_time_hr_aget, self->data_ptr);
@@ -5808,6 +6026,9 @@ static PyGetSetDef Outputs_getset[] = {
 {"conversion_factor", (getter)Outputs_get_conversion_factor,(setter)0,
 	PyDoc_STR("*float*: Gross to Net Conversion Factor [%]"),
  	NULL},
+{"cycle_htf_pump_power", (getter)Outputs_get_cycle_htf_pump_power,(setter)0,
+	PyDoc_STR("*sequence*: PC HTF pump power [MWe]"),
+ 	NULL},
 {"defocus", (getter)Outputs_get_defocus,(setter)0,
 	PyDoc_STR("*sequence*: Field optical focus fraction"),
  	NULL},
@@ -5885,9 +6106,6 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"hour_day", (getter)Outputs_get_hour_day,(setter)0,
 	PyDoc_STR("*sequence*: Resource Hour of Day"),
- 	NULL},
-{"htf_pump_power", (getter)Outputs_get_htf_pump_power,(setter)0,
-	PyDoc_STR("*sequence*: Parasitic power TES and Cycle HTF pump [MWe]"),
  	NULL},
 {"is_pc_sb_allowed", (getter)Outputs_get_is_pc_sb_allowed,(setter)0,
 	PyDoc_STR("*sequence*: is power cycle standby allowed"),
@@ -6147,6 +6365,9 @@ static PyGetSetDef Outputs_getset[] = {
 {"tdry", (getter)Outputs_get_tdry,(setter)0,
 	PyDoc_STR("*sequence*: Resource Dry bulb temperature [C]"),
  	NULL},
+{"tes_htf_pump_power", (getter)Outputs_get_tes_htf_pump_power,(setter)0,
+	PyDoc_STR("*sequence*: TES HTF pump power [MWe]"),
+ 	NULL},
 {"time_hr", (getter)Outputs_get_time_hr,(setter)0,
 	PyDoc_STR("*sequence*: Time at end of timestep [hr]"),
  	NULL},
@@ -6269,6 +6490,10 @@ newTroughPhysicalObject(void* data_ptr)
 	PyObject* Controller_obj = Controller_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Controller", Controller_obj);
 	Py_DECREF(Controller_obj);
+
+	PyObject* TowerAndReceiver_obj = TowerAndReceiver_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "TowerAndReceiver", TowerAndReceiver_obj);
+	Py_DECREF(TowerAndReceiver_obj);
 
 	PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
 
@@ -6543,8 +6768,7 @@ static PyMethodDef TroughPhysicalModule_methods[] = {
 		{"new",             TroughPhysical_new,         METH_VARARGS,
 				PyDoc_STR("new() -> TroughPhysical")},
 		{"default",             TroughPhysical_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> TroughPhysical\n\nUse default attributes\n"
-				"`config` options:\n\n- \"PhysicalTroughAllEquityPartnershipFlip\"\n- \"PhysicalTroughLCOECalculator\"\n- \"PhysicalTroughLeveragedPartnershipFlip\"\n- \"PhysicalTroughMerchantPlant\"\n- \"PhysicalTroughNone\"\n- \"PhysicalTroughSaleLeaseback\"\n- \"PhysicalTroughSingleOwner\"")},
+				PyDoc_STR("default(config) -> TroughPhysical\n\nLoad values from SAM default configurations to provide as inputs to the model. \n\n			`config` options:\n\n- \"PhysicalTroughAllEquityPartnershipFlip\"\n- \"PhysicalTroughLCOECalculator\"\n- \"PhysicalTroughLeveragedPartnershipFlip\"\n- \"PhysicalTroughMerchantPlant\"\n- \"PhysicalTroughNone\"\n- \"PhysicalTroughSaleLeaseback\"\n- \"PhysicalTroughSingleOwner\"\n\n.. note::\n\n	The default configuration is a collection of default values for the module inputs. Some inputs may not be included in the default configuration and are automatically assigned the value indicated by the variable's 'Required' attribute.")},
 		{"wrap",             TroughPhysical_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> TroughPhysical\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
 		{"from_existing",   TroughPhysical_from_existing,        METH_VARARGS,
@@ -6669,6 +6893,13 @@ TroughPhysicalModule_exec(PyObject *m)
 				"Controller",
 				(PyObject*)&Controller_Type);
 	Py_DECREF(&Controller_Type);
+
+	/// Add the TowerAndReceiver type object to TroughPhysical_Type
+	if (PyType_Ready(&TowerAndReceiver_Type) < 0) { goto fail; }
+	PyDict_SetItemString(TroughPhysical_Type.tp_dict,
+				"TowerAndReceiver",
+				(PyObject*)&TowerAndReceiver_Type);
+	Py_DECREF(&TowerAndReceiver_Type);
 
 	/// Add the Outputs type object to TroughPhysical_Type
 	if (PyType_Ready(&Outputs_Type) < 0) { goto fail; }
