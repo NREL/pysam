@@ -1684,15 +1684,9 @@ Outputs_get_HTR_UA_calculated(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_HTR_cost_bare_erected(VarGroupObject *self, void *closure)
+Outputs_get_HTR_cost(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Sco2CspUdPcTables_Outputs_HTR_cost_bare_erected_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_HTR_cost_equipment(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Sco2CspUdPcTables_Outputs_HTR_cost_equipment_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Sco2CspUdPcTables_Outputs_HTR_cost_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -1732,15 +1726,9 @@ Outputs_get_LTR_UA_calculated(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_LTR_cost_bare_erected(VarGroupObject *self, void *closure)
+Outputs_get_LTR_cost(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Sco2CspUdPcTables_Outputs_LTR_cost_bare_erected_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_LTR_cost_equipment(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Sco2CspUdPcTables_Outputs_LTR_cost_equipment_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Sco2CspUdPcTables_Outputs_LTR_cost_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -1774,15 +1762,9 @@ Outputs_get_PHX_co2_deltaP_des(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_PHX_cost_bare_erected(VarGroupObject *self, void *closure)
+Outputs_get_PHX_cost(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Sco2CspUdPcTables_Outputs_PHX_cost_bare_erected_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_PHX_cost_equipment(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Sco2CspUdPcTables_Outputs_PHX_cost_equipment_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Sco2CspUdPcTables_Outputs_PHX_cost_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -1936,9 +1918,9 @@ Outputs_get_c_tot_W_dot(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_c_tot_cost_equip(VarGroupObject *self, void *closure)
+Outputs_get_c_tot_cost(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Sco2CspUdPcTables_Outputs_c_tot_cost_equip_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Sco2CspUdPcTables_Outputs_c_tot_cost_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -1954,15 +1936,9 @@ Outputs_get_cooler_tot_W_dot_fan(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_cooler_tot_cost_bare_erected(VarGroupObject *self, void *closure)
+Outputs_get_cooler_tot_cost(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Sco2CspUdPcTables_Outputs_cooler_tot_cost_bare_erected_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cooler_tot_cost_equipment(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Sco2CspUdPcTables_Outputs_cooler_tot_cost_equipment_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Sco2CspUdPcTables_Outputs_cooler_tot_cost_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -2122,15 +2098,9 @@ Outputs_get_mc_cooler_co2_deltaP_des(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_mc_cooler_cost_bare_erected(VarGroupObject *self, void *closure)
+Outputs_get_mc_cooler_cost(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Sco2CspUdPcTables_Outputs_mc_cooler_cost_bare_erected_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_mc_cooler_cost_equipment(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Sco2CspUdPcTables_Outputs_mc_cooler_cost_equipment_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Sco2CspUdPcTables_Outputs_mc_cooler_cost_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -2158,15 +2128,9 @@ Outputs_get_mc_cooler_rho_in(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_mc_cost_bare_erected(VarGroupObject *self, void *closure)
+Outputs_get_mc_cost(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Sco2CspUdPcTables_Outputs_mc_cost_bare_erected_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_mc_cost_equipment(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Sco2CspUdPcTables_Outputs_mc_cost_equipment_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Sco2CspUdPcTables_Outputs_mc_cost_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -2284,15 +2248,9 @@ Outputs_get_pc_cooler_W_dot_fan(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_pc_cooler_cost_bare_erected(VarGroupObject *self, void *closure)
+Outputs_get_pc_cooler_cost(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Sco2CspUdPcTables_Outputs_pc_cooler_cost_bare_erected_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_pc_cooler_cost_equipment(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Sco2CspUdPcTables_Outputs_pc_cooler_cost_equipment_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Sco2CspUdPcTables_Outputs_pc_cooler_cost_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -2308,15 +2266,9 @@ Outputs_get_pc_cooler_q_dot(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_pc_cost_bare_erected(VarGroupObject *self, void *closure)
+Outputs_get_pc_cost(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Sco2CspUdPcTables_Outputs_pc_cost_bare_erected_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_pc_cost_equipment(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Sco2CspUdPcTables_Outputs_pc_cost_equipment_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Sco2CspUdPcTables_Outputs_pc_cost_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -2365,12 +2317,6 @@ static PyObject *
 Outputs_get_pc_tip_ratio_des(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Sco2CspUdPcTables_Outputs_pc_tip_ratio_des_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_piping_inventory_etc_cost(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Sco2CspUdPcTables_Outputs_piping_inventory_etc_cost_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -2434,15 +2380,9 @@ Outputs_get_rc_W_dot(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_rc_cost_bare_erected(VarGroupObject *self, void *closure)
+Outputs_get_rc_cost(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Sco2CspUdPcTables_Outputs_rc_cost_bare_erected_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_rc_cost_equipment(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Sco2CspUdPcTables_Outputs_rc_cost_equipment_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Sco2CspUdPcTables_Outputs_rc_cost_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -2518,15 +2458,9 @@ Outputs_get_recup_total_UA_calculated(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_recup_total_cost_bare_erected(VarGroupObject *self, void *closure)
+Outputs_get_recup_total_cost(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Sco2CspUdPcTables_Outputs_recup_total_cost_bare_erected_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_recup_total_cost_equipment(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Sco2CspUdPcTables_Outputs_recup_total_cost_equipment_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Sco2CspUdPcTables_Outputs_recup_total_cost_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -2614,15 +2548,9 @@ Outputs_get_t_W_dot(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_t_cost_bare_erected(VarGroupObject *self, void *closure)
+Outputs_get_t_cost(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Sco2CspUdPcTables_Outputs_t_cost_bare_erected_nget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_t_cost_equipment(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Sco2CspUdPcTables_Outputs_t_cost_equipment_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Sco2CspUdPcTables_Outputs_t_cost_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -2674,11 +2602,8 @@ static PyGetSetDef Outputs_getset[] = {
 {"HTR_UA_calculated", (getter)Outputs_get_HTR_UA_calculated,(setter)0,
 	PyDoc_STR("*float*: High temp recuperator UA calculated considering max eff and/or min temp diff parameter [MW/K]"),
  	NULL},
-{"HTR_cost_bare_erected", (getter)Outputs_get_HTR_cost_bare_erected,(setter)0,
-	PyDoc_STR("*float*: High temp recuperator cost equipment and install [M$]"),
- 	NULL},
-{"HTR_cost_equipment", (getter)Outputs_get_HTR_cost_equipment,(setter)0,
-	PyDoc_STR("*float*: High temp recuperator cost equipment [M$]"),
+{"HTR_cost", (getter)Outputs_get_HTR_cost,(setter)0,
+	PyDoc_STR("*float*: High temp recuperator cost [M$]"),
  	NULL},
 {"HTR_min_dT", (getter)Outputs_get_HTR_min_dT,(setter)0,
 	PyDoc_STR("*float*: High temp recuperator min temperature difference [C]"),
@@ -2698,11 +2623,8 @@ static PyGetSetDef Outputs_getset[] = {
 {"LTR_UA_calculated", (getter)Outputs_get_LTR_UA_calculated,(setter)0,
 	PyDoc_STR("*float*: Low temp recuperator UA calculated considering max eff and/or min temp diff parameter [MW/K]"),
  	NULL},
-{"LTR_cost_bare_erected", (getter)Outputs_get_LTR_cost_bare_erected,(setter)0,
-	PyDoc_STR("*float*: Low temp recuperator cost equipment and install [M$]"),
- 	NULL},
-{"LTR_cost_equipment", (getter)Outputs_get_LTR_cost_equipment,(setter)0,
-	PyDoc_STR("*float*: Low temp recuperator cost equipment [M$]"),
+{"LTR_cost", (getter)Outputs_get_LTR_cost,(setter)0,
+	PyDoc_STR("*float*: Low temp recuperator cost [M$]"),
  	NULL},
 {"LTR_min_dT", (getter)Outputs_get_LTR_min_dT,(setter)0,
 	PyDoc_STR("*float*: Low temp recuperator min temperature difference [C]"),
@@ -2719,11 +2641,8 @@ static PyGetSetDef Outputs_getset[] = {
 {"PHX_co2_deltaP_des", (getter)Outputs_get_PHX_co2_deltaP_des,(setter)0,
 	PyDoc_STR("*float*: PHX co2 side design pressure drop [-]"),
  	NULL},
-{"PHX_cost_bare_erected", (getter)Outputs_get_PHX_cost_bare_erected,(setter)0,
-	PyDoc_STR("*float*: PHX cost equipment and install [M$]"),
- 	NULL},
-{"PHX_cost_equipment", (getter)Outputs_get_PHX_cost_equipment,(setter)0,
-	PyDoc_STR("*float*: PHX cost equipment [M$]"),
+{"PHX_cost", (getter)Outputs_get_PHX_cost,(setter)0,
+	PyDoc_STR("*float*: PHX cost [M$]"),
  	NULL},
 {"P_co2_PHX_in", (getter)Outputs_get_P_co2_PHX_in,(setter)0,
 	PyDoc_STR("*float*: CO2 pressure at PHX inlet [MPa]"),
@@ -2800,7 +2719,7 @@ static PyGetSetDef Outputs_getset[] = {
 {"c_tot_W_dot", (getter)Outputs_get_c_tot_W_dot,(setter)0,
 	PyDoc_STR("*float*: Compressor total summed power [MWe]"),
  	NULL},
-{"c_tot_cost_equip", (getter)Outputs_get_c_tot_cost_equip,(setter)0,
+{"c_tot_cost", (getter)Outputs_get_c_tot_cost,(setter)0,
 	PyDoc_STR("*float*: Compressor total cost [M$]"),
  	NULL},
 {"cooler_tot_UA", (getter)Outputs_get_cooler_tot_UA,(setter)0,
@@ -2809,20 +2728,17 @@ static PyGetSetDef Outputs_getset[] = {
 {"cooler_tot_W_dot_fan", (getter)Outputs_get_cooler_tot_W_dot_fan,(setter)0,
 	PyDoc_STR("*float*: Total cooler fan power [MWe]"),
  	NULL},
-{"cooler_tot_cost_bare_erected", (getter)Outputs_get_cooler_tot_cost_bare_erected,(setter)0,
-	PyDoc_STR("*float*: Total cooler cost equipment and install [M$]"),
- 	NULL},
-{"cooler_tot_cost_equipment", (getter)Outputs_get_cooler_tot_cost_equipment,(setter)0,
-	PyDoc_STR("*float*: Total cooler cost equipment [M$]"),
+{"cooler_tot_cost", (getter)Outputs_get_cooler_tot_cost,(setter)0,
+	PyDoc_STR("*float*: Total cooler cost [M$]"),
  	NULL},
 {"cycle_cost", (getter)Outputs_get_cycle_cost,(setter)0,
-	PyDoc_STR("*float*: Cycle cost bare erected [M$]"),
+	PyDoc_STR("*float*: Cycle cost [M$]"),
  	NULL},
 {"cycle_spec_cost", (getter)Outputs_get_cycle_spec_cost,(setter)0,
-	PyDoc_STR("*float*: Cycle specific cost bare erected [$/kWe]"),
+	PyDoc_STR("*float*: Cycle specific cost [$/kWe]"),
  	NULL},
 {"cycle_spec_cost_thermal", (getter)Outputs_get_cycle_spec_cost_thermal,(setter)0,
-	PyDoc_STR("*float*: Cycle specific (thermal) cost bare erected [$/kWt]"),
+	PyDoc_STR("*float*: Cycle specific cost - thermal [$/kWt]"),
  	NULL},
 {"deltaT_HTF_PHX", (getter)Outputs_get_deltaT_HTF_PHX,(setter)0,
 	PyDoc_STR("*float*: HTF temp difference across PHX [C]"),
@@ -2893,11 +2809,8 @@ static PyGetSetDef Outputs_getset[] = {
 {"mc_cooler_co2_deltaP_des", (getter)Outputs_get_mc_cooler_co2_deltaP_des,(setter)0,
 	PyDoc_STR("*float*: Low pressure cooler co2 side design pressure drop [-]"),
  	NULL},
-{"mc_cooler_cost_bare_erected", (getter)Outputs_get_mc_cooler_cost_bare_erected,(setter)0,
-	PyDoc_STR("*float*: Low pressure cooler cost equipment and install [M$]"),
- 	NULL},
-{"mc_cooler_cost_equipment", (getter)Outputs_get_mc_cooler_cost_equipment,(setter)0,
-	PyDoc_STR("*float*: Low pressure cooler cost equipment [M$]"),
+{"mc_cooler_cost", (getter)Outputs_get_mc_cooler_cost,(setter)0,
+	PyDoc_STR("*float*: Low pressure cooler cost [M$]"),
  	NULL},
 {"mc_cooler_in_isen_deltah_to_P_mc_out", (getter)Outputs_get_mc_cooler_in_isen_deltah_to_P_mc_out,(setter)0,
 	PyDoc_STR("*float*: Low pressure cross flow cooler inlet isen enthalpy rise to mc outlet pressure [kJ/kg]"),
@@ -2911,11 +2824,8 @@ static PyGetSetDef Outputs_getset[] = {
 {"mc_cooler_rho_in", (getter)Outputs_get_mc_cooler_rho_in,(setter)0,
 	PyDoc_STR("*float*: Low pressure cross flow cooler inlet density [kg/m3]"),
  	NULL},
-{"mc_cost_bare_erected", (getter)Outputs_get_mc_cost_bare_erected,(setter)0,
-	PyDoc_STR("*float*: Compressor cost equipment plus install [M$]"),
- 	NULL},
-{"mc_cost_equipment", (getter)Outputs_get_mc_cost_equipment,(setter)0,
-	PyDoc_STR("*float*: Compressor cost equipment [M$]"),
+{"mc_cost", (getter)Outputs_get_mc_cost,(setter)0,
+	PyDoc_STR("*float*: Compressor cost [M$]"),
  	NULL},
 {"mc_eta_stages_des", (getter)Outputs_get_mc_eta_stages_des,(setter)0,
 	PyDoc_STR("*sequence*: Compressor design stage isentropic efficiencies"),
@@ -2974,11 +2884,8 @@ static PyGetSetDef Outputs_getset[] = {
 {"pc_cooler_W_dot_fan", (getter)Outputs_get_pc_cooler_W_dot_fan,(setter)0,
 	PyDoc_STR("*float*: Intermediate pressure cooler fan power [MWe]"),
  	NULL},
-{"pc_cooler_cost_bare_erected", (getter)Outputs_get_pc_cooler_cost_bare_erected,(setter)0,
-	PyDoc_STR("*float*: Intermediate pressure cooler cost equipment and install [M$]"),
- 	NULL},
-{"pc_cooler_cost_equipment", (getter)Outputs_get_pc_cooler_cost_equipment,(setter)0,
-	PyDoc_STR("*float*: Intermediate pressure cooler cost equipment [M$]"),
+{"pc_cooler_cost", (getter)Outputs_get_pc_cooler_cost,(setter)0,
+	PyDoc_STR("*float*: Intermediate pressure cooler cost [M$]"),
  	NULL},
 {"pc_cooler_m_dot_co2", (getter)Outputs_get_pc_cooler_m_dot_co2,(setter)0,
 	PyDoc_STR("*float*: Intermediate pressure cross flow cooler CO2 mass flow rate [kg/s]"),
@@ -2986,11 +2893,8 @@ static PyGetSetDef Outputs_getset[] = {
 {"pc_cooler_q_dot", (getter)Outputs_get_pc_cooler_q_dot,(setter)0,
 	PyDoc_STR("*float*: Intermediate pressure cooler heat transfer [MWt]"),
  	NULL},
-{"pc_cost_bare_erected", (getter)Outputs_get_pc_cost_bare_erected,(setter)0,
-	PyDoc_STR("*float*: Precompressor cost equipment plus install [M$]"),
- 	NULL},
-{"pc_cost_equipment", (getter)Outputs_get_pc_cost_equipment,(setter)0,
-	PyDoc_STR("*float*: Precompressor cost equipment [M$]"),
+{"pc_cost", (getter)Outputs_get_pc_cost,(setter)0,
+	PyDoc_STR("*float*: Precompressor cost [M$]"),
  	NULL},
 {"pc_eta_stages_des", (getter)Outputs_get_pc_eta_stages_des,(setter)0,
 	PyDoc_STR("*sequence*: Precompressor design stage isenstropic efficiencies"),
@@ -3015,9 +2919,6 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"pc_tip_ratio_des", (getter)Outputs_get_pc_tip_ratio_des,(setter)0,
 	PyDoc_STR("*sequence*: Precompressor design stage tip speed ratio"),
- 	NULL},
-{"piping_inventory_etc_cost", (getter)Outputs_get_piping_inventory_etc_cost,(setter)0,
-	PyDoc_STR("*float*: Cost of remaining cycle equipment on BEC basis [M$]"),
  	NULL},
 {"q_dot_HTR", (getter)Outputs_get_q_dot_HTR,(setter)0,
 	PyDoc_STR("*float*: High temp recuperator heat transfer [MWt]"),
@@ -3049,11 +2950,8 @@ static PyGetSetDef Outputs_getset[] = {
 {"rc_W_dot", (getter)Outputs_get_rc_W_dot,(setter)0,
 	PyDoc_STR("*float*: Recompressor power [MWe]"),
  	NULL},
-{"rc_cost_bare_erected", (getter)Outputs_get_rc_cost_bare_erected,(setter)0,
-	PyDoc_STR("*float*: Recompressor cost equipment plus install [M$]"),
- 	NULL},
-{"rc_cost_equipment", (getter)Outputs_get_rc_cost_equipment,(setter)0,
-	PyDoc_STR("*float*: Recompressor cost equipment [M$]"),
+{"rc_cost", (getter)Outputs_get_rc_cost,(setter)0,
+	PyDoc_STR("*float*: Recompressor cost [M$]"),
  	NULL},
 {"rc_eta_stages_des", (getter)Outputs_get_rc_eta_stages_des,(setter)0,
 	PyDoc_STR("*sequence*: Recompressor design stage isenstropic efficiencies"),
@@ -3091,11 +2989,8 @@ static PyGetSetDef Outputs_getset[] = {
 {"recup_total_UA_calculated", (getter)Outputs_get_recup_total_UA_calculated,(setter)0,
 	PyDoc_STR("*float*: Total recuperator UA calculated considering max eff and/or min temp diff parameter [MW/K]"),
  	NULL},
-{"recup_total_cost_bare_erected", (getter)Outputs_get_recup_total_cost_bare_erected,(setter)0,
-	PyDoc_STR("*float*: Total recuperator cost bare erected [M$]"),
- 	NULL},
-{"recup_total_cost_equipment", (getter)Outputs_get_recup_total_cost_equipment,(setter)0,
-	PyDoc_STR("*float*: Total recuperator cost equipment [M$]"),
+{"recup_total_cost", (getter)Outputs_get_recup_total_cost,(setter)0,
+	PyDoc_STR("*float*: Total recuperator cost [M$]"),
  	NULL},
 {"s_HTR_HP_data", (getter)Outputs_get_s_HTR_HP_data,(setter)0,
 	PyDoc_STR("*sequence*: Entropy points along HTR HP stream [kJ/kg-K]"),
@@ -3139,11 +3034,8 @@ static PyGetSetDef Outputs_getset[] = {
 {"t_W_dot", (getter)Outputs_get_t_W_dot,(setter)0,
 	PyDoc_STR("*float*: Turbine power [MWe]"),
  	NULL},
-{"t_cost_bare_erected", (getter)Outputs_get_t_cost_bare_erected,(setter)0,
-	PyDoc_STR("*float*: Tubine cost - equipment plus install [M$]"),
- 	NULL},
-{"t_cost_equipment", (getter)Outputs_get_t_cost_equipment,(setter)0,
-	PyDoc_STR("*float*: Tubine cost - equipment [M$]"),
+{"t_cost", (getter)Outputs_get_t_cost,(setter)0,
+	PyDoc_STR("*float*: Tubine cost [M$]"),
  	NULL},
 {"t_delta_h_isen_des", (getter)Outputs_get_t_delta_h_isen_des,(setter)0,
 	PyDoc_STR("*float*: Turbine isentropic specific work [kJ/kg]"),

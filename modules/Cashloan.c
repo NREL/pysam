@@ -4327,15 +4327,15 @@ SystemOutput_set_annual_energy_value(VarGroupObject *self, PyObject *value, void
 }
 
 static PyObject *
-SystemOutput_get_annual_thermal_value(VarGroupObject *self, void *closure)
+SystemOutput_get_annual_themal_value(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_Cashloan_SystemOutput_annual_thermal_value_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Cashloan_SystemOutput_annual_themal_value_aget, self->data_ptr);
 }
 
 static int
-SystemOutput_set_annual_thermal_value(VarGroupObject *self, PyObject *value, void *closure)
+SystemOutput_set_annual_themal_value(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_Cashloan_SystemOutput_annual_thermal_value_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Cashloan_SystemOutput_annual_themal_value_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -4378,7 +4378,7 @@ static PyGetSetDef SystemOutput_getset[] = {
 {"annual_energy_value", (getter)SystemOutput_get_annual_energy_value,(setter)SystemOutput_set_annual_energy_value,
 	PyDoc_STR("*sequence*: Energy value [$]\n\n*Required*: True"),
  	NULL},
-{"annual_thermal_value", (getter)SystemOutput_get_annual_thermal_value,(setter)SystemOutput_set_annual_thermal_value,
+{"annual_themal_value", (getter)SystemOutput_get_annual_themal_value,(setter)SystemOutput_set_annual_themal_value,
 	PyDoc_STR("*sequence*: Energy value [$]"),
  	NULL},
 {"degradation", (getter)SystemOutput_get_degradation,(setter)SystemOutput_set_degradation,
@@ -5092,143 +5092,6 @@ static PyTypeObject LCOS_Type = {
 
 
 /*
- * ElectricityRates Group
- */ 
-
-static PyTypeObject ElectricityRates_Type;
-
-static PyObject *
-ElectricityRates_new(SAM_Cashloan data_ptr)
-{
-	PyObject* new_obj = ElectricityRates_Type.tp_alloc(&ElectricityRates_Type,0);
-
-	VarGroupObject* ElectricityRates_obj = (VarGroupObject*)new_obj;
-
-	ElectricityRates_obj->data_ptr = (SAM_table)data_ptr;
-
-	return new_obj;
-}
-
-/* ElectricityRates methods */
-
-static PyObject *
-ElectricityRates_assign(VarGroupObject *self, PyObject *args)
-{
-	PyObject* dict;
-	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
-		return NULL;
-	}
-
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Cashloan", "ElectricityRates")){
-		return NULL;
-	}
-
-	Py_INCREF(Py_None);
-	return Py_None;
-}
-
-static PyObject *
-ElectricityRates_replace(VarGroupObject *self, PyObject *args)
-{
-	PyObject* dict;
-	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
-		return NULL;
-	}
-	PyTypeObject* tp = &ElectricityRates_Type;
-
-	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Cashloan", "ElectricityRates")){
-		return NULL;
-	}
-
-	Py_INCREF(Py_None);
-	return Py_None;
-}
-
-static PyObject *
-ElectricityRates_export(VarGroupObject *self, PyObject *args)
-{
-	PyTypeObject* tp = &ElectricityRates_Type;
-	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
-	return dict;
-}
-
-static PyMethodDef ElectricityRates_methods[] = {
-		{"assign",            (PyCFunction)ElectricityRates_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``ElectricityRates_vals = { var: val, ...}``")},
-		{"replace",            (PyCFunction)ElectricityRates_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``ElectricityRates_vals = { var: val, ...}``")},
-		{"export",            (PyCFunction)ElectricityRates_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
-		{NULL,              NULL}           /* sentinel */
-};
-
-static PyObject *
-ElectricityRates_get_rate_escalation(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Cashloan_ElectricityRates_rate_escalation_aget, self->data_ptr);
-}
-
-static int
-ElectricityRates_set_rate_escalation(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_Cashloan_ElectricityRates_rate_escalation_aset, self->data_ptr);
-}
-
-static PyGetSetDef ElectricityRates_getset[] = {
-{"rate_escalation", (getter)ElectricityRates_get_rate_escalation,(setter)ElectricityRates_set_rate_escalation,
-	PyDoc_STR("*sequence*: Annual electricity rate escalation [%/year]"),
- 	NULL},
-	{NULL}  /* Sentinel */
-};
-
-static PyTypeObject ElectricityRates_Type = {
-		/* The ob_type field must be initialized in the module init function
-		 * to be portable to Windows without using C++. */
-		PyVarObject_HEAD_INIT(NULL, 0)
-		"Cashloan.ElectricityRates",             /*tp_name*/
-		sizeof(VarGroupObject),          /*tp_basicsize*/
-		0,                          /*tp_itemsize*/
-		/* methods */
-		0,    /*tp_dealloc*/
-		0,                          /*tp_print*/
-		(getattrfunc)0,             /*tp_getattr*/
-		0,                          /*tp_setattr*/
-		0,                          /*tp_reserved*/
-		0,                          /*tp_repr*/
-		0,                          /*tp_as_number*/
-		0,                          /*tp_as_sequence*/
-		0,                          /*tp_as_mapping*/
-		0,                          /*tp_hash*/
-		0,                          /*tp_call*/
-		0,                          /*tp_str*/
-		0,                          /*tp_getattro*/
-		0,                          /*tp_setattro*/
-		0,                          /*tp_as_buffer*/
-		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
-		0,                          /*tp_doc*/
-		0,                          /*tp_traverse*/
-		0,                          /*tp_clear*/
-		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistofnset*/
-		0,                          /*tp_iter*/
-		0,                          /*tp_iternext*/
-		ElectricityRates_methods,         /*tp_methods*/
-		0,                          /*tp_members*/
-		ElectricityRates_getset,          /*tp_getset*/
-		0,                          /*tp_base*/
-		0,                          /*tp_dict*/
-		0,                          /*tp_descr_get*/
-		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictofnset*/
-		0,                          /*tp_init*/
-		0,                          /*tp_alloc*/
-		0,             /*tp_new*/
-		0,                          /*tp_free*/
-		0,                          /*tp_is_gc*/
-};
-
-
-/*
  * Outputs Group
  */ 
 
@@ -5864,6 +5727,12 @@ Outputs_get_first_cost(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_gen_purchases(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Cashloan_Outputs_gen_purchases_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_ibi_fedtax_total(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Cashloan_Outputs_ibi_fedtax_total_nget, self->data_ptr);
@@ -6327,7 +6196,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Value of thermal savings [$]"),
  	NULL},
 {"cf_util_escal_rate", (getter)Outputs_get_cf_util_escal_rate,(setter)0,
-	PyDoc_STR("*sequence*: Utility escalation rate"),
+	PyDoc_STR("*sequence*: Annual battery salvage value costs [$]"),
  	NULL},
 {"cf_utility_bill", (getter)Outputs_get_cf_utility_bill,(setter)0,
 	PyDoc_STR("*sequence*: Electricity purchase [$]"),
@@ -6343,6 +6212,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"first_cost", (getter)Outputs_get_first_cost,(setter)0,
 	PyDoc_STR("*float*: Equity [$]"),
+ 	NULL},
+{"gen_purchases", (getter)Outputs_get_gen_purchases,(setter)0,
+	PyDoc_STR("*sequence*: Electricity from grid [kW]"),
  	NULL},
 {"ibi_fedtax_total", (getter)Outputs_get_ibi_fedtax_total,(setter)0,
 	PyDoc_STR("*float*: Federal taxable IBI income [$]"),
@@ -6565,10 +6437,6 @@ newCashloanObject(void* data_ptr)
 	PyObject* LCOS_obj = LCOS_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "LCOS", LCOS_obj);
 	Py_DECREF(LCOS_obj);
-
-	PyObject* ElectricityRates_obj = ElectricityRates_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "ElectricityRates", ElectricityRates_obj);
-	Py_DECREF(ElectricityRates_obj);
 
 	PyObject* Outputs_obj = Outputs_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
@@ -6955,13 +6823,6 @@ CashloanModule_exec(PyObject *m)
 				"LCOS",
 				(PyObject*)&LCOS_Type);
 	Py_DECREF(&LCOS_Type);
-
-	/// Add the ElectricityRates type object to Cashloan_Type
-	if (PyType_Ready(&ElectricityRates_Type) < 0) { goto fail; }
-	PyDict_SetItemString(Cashloan_Type.tp_dict,
-				"ElectricityRates",
-				(PyObject*)&ElectricityRates_Type);
-	Py_DECREF(&ElectricityRates_Type);
 
 	/// Add the Outputs type object to Cashloan_Type
 	if (PyType_Ready(&Outputs_Type) < 0) { goto fail; }

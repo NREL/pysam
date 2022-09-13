@@ -352,7 +352,6 @@ class Equpartflip(object):
 
 
 		en_electricity_rates = float
-		rate_escalation = tuple
 
 
 	class Recapitalization(object):

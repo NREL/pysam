@@ -401,7 +401,6 @@ class Merchantplant(object):
 
 
 		en_electricity_rates = float
-		rate_escalation = tuple
 
 
 	class SystemOutput(object):

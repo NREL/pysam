@@ -276,6 +276,8 @@ def assign_values(mod, i):
         m = i.default(default)
         if mod == "Pvsamv1" or mod == "Pvwattsv7" or mod == "TcsmoltenSalt" or mod == "Pvwattsv5" or mod == "Swh":
             m.SolarResource.solar_resource_file = sf
+            m.SolarResource.use_wf_albedo = 0
+            m.SolarResource.albedo = (0.1) * 12
         elif mod == "Biomass":
             m.Biopower.file_name = sf
         elif mod == "Hcpv":

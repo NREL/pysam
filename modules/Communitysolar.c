@@ -4650,24 +4650,9 @@ ElectricityRates_set_en_electricity_rates(VarGroupObject *self, PyObject *value,
 	return PySAM_double_setter(value, SAM_Communitysolar_ElectricityRates_en_electricity_rates_nset, self->data_ptr);
 }
 
-static PyObject *
-ElectricityRates_get_rate_escalation(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Communitysolar_ElectricityRates_rate_escalation_aget, self->data_ptr);
-}
-
-static int
-ElectricityRates_set_rate_escalation(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_Communitysolar_ElectricityRates_rate_escalation_aset, self->data_ptr);
-}
-
 static PyGetSetDef ElectricityRates_getset[] = {
 {"en_electricity_rates", (getter)ElectricityRates_get_en_electricity_rates,(setter)ElectricityRates_set_en_electricity_rates,
 	PyDoc_STR("*float*: Enable electricity rates for grid purchase [0/1]\n\n*Required*: If not provided, assumed to be 0"),
- 	NULL},
-{"rate_escalation", (getter)ElectricityRates_get_rate_escalation,(setter)ElectricityRates_set_rate_escalation,
-	PyDoc_STR("*sequence*: Annual electricity rate escalation [%/year]"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -9526,6 +9511,12 @@ Outputs_get_flip_target_year(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_gen_purchases(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Communitysolar_Outputs_gen_purchases_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_ibi_fedtax_total(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Communitysolar_Outputs_ibi_fedtax_total_nget, self->data_ptr);
@@ -10814,7 +10805,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Unsubscribed share of generation [kWh]"),
  	NULL},
 {"cf_util_escal_rate", (getter)Outputs_get_cf_util_escal_rate,(setter)0,
-	PyDoc_STR("*sequence*: Utility escalation rate"),
+	PyDoc_STR("*sequence*: Annual battery salvage value costs [$]"),
  	NULL},
 {"cf_utility_bill", (getter)Outputs_get_cf_utility_bill,(setter)0,
 	PyDoc_STR("*sequence*: Electricity purchase [$]"),
@@ -11463,6 +11454,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"flip_target_year", (getter)Outputs_get_flip_target_year,(setter)0,
 	PyDoc_STR("*float*: Target year to meet IRR"),
+ 	NULL},
+{"gen_purchases", (getter)Outputs_get_gen_purchases,(setter)0,
+	PyDoc_STR("*sequence*: Electricity from grid [kW]"),
  	NULL},
 {"ibi_fedtax_total", (getter)Outputs_get_ibi_fedtax_total,(setter)0,
 	PyDoc_STR("*float*: Federal taxable IBI income [$]"),

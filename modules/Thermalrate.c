@@ -547,12 +547,6 @@ static PyMethodDef Outputs_methods[] = {
 };
 
 static PyObject *
-Outputs_get_annual_thermal_value(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Thermalrate_Outputs_annual_thermal_value_aget, self->data_ptr);
-}
-
-static PyObject *
 Outputs_get_thermal_cost_with_system_year1(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Thermalrate_Outputs_thermal_cost_with_system_year1_nget, self->data_ptr);
@@ -589,9 +583,6 @@ Outputs_get_thermal_savings_year1(VarGroupObject *self, void *closure)
 }
 
 static PyGetSetDef Outputs_getset[] = {
-{"annual_thermal_value", (getter)Outputs_get_annual_thermal_value,(setter)0,
-	PyDoc_STR("*sequence*: Thermal value [$]"),
- 	NULL},
 {"thermal_cost_with_system_year1", (getter)Outputs_get_thermal_cost_with_system_year1,(setter)0,
 	PyDoc_STR("*float*: Thermal cost with sytem (year 1) [$]"),
  	NULL},

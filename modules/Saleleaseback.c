@@ -4230,24 +4230,9 @@ ElectricityRates_set_en_electricity_rates(VarGroupObject *self, PyObject *value,
 	return PySAM_double_setter(value, SAM_Saleleaseback_ElectricityRates_en_electricity_rates_nset, self->data_ptr);
 }
 
-static PyObject *
-ElectricityRates_get_rate_escalation(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Saleleaseback_ElectricityRates_rate_escalation_aget, self->data_ptr);
-}
-
-static int
-ElectricityRates_set_rate_escalation(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_Saleleaseback_ElectricityRates_rate_escalation_aset, self->data_ptr);
-}
-
 static PyGetSetDef ElectricityRates_getset[] = {
 {"en_electricity_rates", (getter)ElectricityRates_get_en_electricity_rates,(setter)ElectricityRates_set_en_electricity_rates,
 	PyDoc_STR("*float*: Enable electricity rates for grid purchase [0/1]\n\n*Required*: If not provided, assumed to be 0"),
- 	NULL},
-{"rate_escalation", (getter)ElectricityRates_get_rate_escalation,(setter)ElectricityRates_set_rate_escalation,
-	PyDoc_STR("*sequence*: Annual electricity rate escalation [%/year]"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -10200,7 +10185,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Total revenue [$]"),
  	NULL},
 {"cf_util_escal_rate", (getter)Outputs_get_cf_util_escal_rate,(setter)0,
-	PyDoc_STR("*sequence*: Utility escalation rate"),
+	PyDoc_STR("*sequence*: Annual battery salvage value costs [$]"),
  	NULL},
 {"cf_utility_bill", (getter)Outputs_get_cf_utility_bill,(setter)0,
 	PyDoc_STR("*sequence*: Electricity purchase [$]"),

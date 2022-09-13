@@ -368,7 +368,7 @@ class Cashloan(object):
 
 
 		annual_energy_value = tuple
-		annual_thermal_value = tuple
+		annual_themal_value = tuple
 		degradation = tuple
 		gen = tuple
 		gen_purchases = tuple
@@ -430,20 +430,6 @@ class Cashloan(object):
 		year1_monthly_ec_charge_gross_with_system = tuple
 		year1_monthly_ec_charge_with_system = tuple
 		year1_monthly_electricity_to_grid = tuple
-
-
-	class ElectricityRates(object):
-		def assign(self): 
-			pass
-	
-		def export(self) -> dict:
-			pass
-	
-		def __init__(self, *args, **kwargs): 
-			pass
-
-
-		rate_escalation = tuple
 
 
 	class Outputs(object):
@@ -551,6 +537,7 @@ class Cashloan(object):
 		discounted_payback = float
 		effective_tax_rate = float
 		first_cost = float
+		gen_purchases = tuple
 		ibi_fedtax_total = float
 		ibi_statax_total = float
 		ibi_total = float

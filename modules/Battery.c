@@ -3198,30 +3198,6 @@ SystemCosts_set_om_batt_replacement_cost(VarGroupObject *self, PyObject *value, 
 }
 
 static PyObject *
-SystemCosts_get_om_batt_variable_cost(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Battery_SystemCosts_om_batt_variable_cost_aget, self->data_ptr);
-}
-
-static int
-SystemCosts_set_om_batt_variable_cost(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_Battery_SystemCosts_om_batt_variable_cost_aset, self->data_ptr);
-}
-
-static PyObject *
-SystemCosts_get_om_production_escal(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Battery_SystemCosts_om_production_escal_nget, self->data_ptr);
-}
-
-static int
-SystemCosts_set_om_production_escal(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Battery_SystemCosts_om_production_escal_nset, self->data_ptr);
-}
-
-static PyObject *
 SystemCosts_get_om_replacement_cost_escal(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Battery_SystemCosts_om_replacement_cost_escal_nget, self->data_ptr);
@@ -3236,12 +3212,6 @@ SystemCosts_set_om_replacement_cost_escal(VarGroupObject *self, PyObject *value,
 static PyGetSetDef SystemCosts_getset[] = {
 {"om_batt_replacement_cost", (getter)SystemCosts_get_om_batt_replacement_cost,(setter)SystemCosts_set_om_batt_replacement_cost,
 	PyDoc_STR("*sequence*: Replacement cost 1 [$/kWh]\n\n*Required*: If not provided, assumed to be 0.0"),
- 	NULL},
-{"om_batt_variable_cost", (getter)SystemCosts_get_om_batt_variable_cost,(setter)SystemCosts_set_om_batt_variable_cost,
-	PyDoc_STR("*sequence*: Battery production-based System Costs amount [$/MWh]\n\n*Required*: If not provided, assumed to be 0.0"),
- 	NULL},
-{"om_production_escal", (getter)SystemCosts_get_om_production_escal,(setter)SystemCosts_set_om_production_escal,
-	PyDoc_STR("*float*: Production-based O&M escalation [%/year]\n\n*Required*: If not provided, assumed to be 0.0"),
  	NULL},
 {"om_replacement_cost_escal", (getter)SystemCosts_get_om_replacement_cost_escal,(setter)SystemCosts_set_om_replacement_cost_escal,
 	PyDoc_STR("*float*: Replacement cost escalation [%/year]\n\n*Required*: If not provided, assumed to be 0.0"),
