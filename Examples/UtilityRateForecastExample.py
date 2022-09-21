@@ -7,6 +7,13 @@ import pandas as pd
 import PySAM.Utilityrateforecast as utility_rate_forecast
 import PySAM.ResourceTools
 
+"""
+This script provides an example of downloading a rate from URDB and processing it in "forecast" mode
+The forecast code looks at the step-by-step (default hourly) costs of the rate, based on forecasts of generation and load
+This can either be run with all of the steps at once (single call to execute()) to generate an array of prices
+or by calling execute repeateadly, potentially in the loop with a model-predictive controller for energy storage
+"""
+
 # Get a key from https://developer.nrel.gov/signup/
 key = "<YOUR_API_KEY>"
 
@@ -35,7 +42,7 @@ def get_urdb_rate_data(page, key):
 
 if __name__ == "__main__":
     path = os.getcwd() + os.path.sep
-    page = "618940545457a35a1c4097ec"  # https://apps.openei.org/USURDB/rate/view/618940545457a35a1c4097ec (DG-R Primary (Above 500kW))
+    page = "618940545457a35a1c4097ec"  # https://apps.openei.org/USURDB/rate/view/618940545457a35a1c4097ec Residential time of use from Xcel Colorado
     urdb_response = get_urdb_rate_data(page, key)
     urdb_response_json = json.loads(urdb_response)["items"][0]
     rates = PySAM.ResourceTools.URDBv7_to_ElectricityRates(urdb_response_json) # To see status of version discrepancy, see https://github.com/NREL/pysam/issues/116. There's no difference between V7 and V8 for 99.9% of rates
@@ -59,22 +66,22 @@ if __name__ == "__main__":
     # Lifetime length for the forecast class
     gen = [0] * int(8760 * analysis_period)# No renewable generation, run a technology compute module such as PVWatts8 to get this
     load = load * analysis_period # Repeat the load every year (could consider load escalation in the future)
-    grid_power = [-1] * 8760
+    grid_power = -1 * load
 
     rate_forecast.value("gen", gen) # Hourly kW
     rate_forecast.value("load", load) # Hourly kW
     rate_forecast.value("grid_power", grid_power[0:8760]) # Hourly kW
     rate_forecast.value("idx", 0)
 
+    # Default example - call once and get back an array or total bill
     rate_forecast.setup()
     rate_forecast.execute()
     print(rate_forecast.export().keys())
     print(rate_forecast.export()["ElectricityRates"]["ur_dc_peaks"])
     print(rate_forecast.export()["Outputs"]["ur_total_bill"]) # Note that this does not include fixed charges
-    print(rate_forecast.export()["Controls"]["idx"])
 
     price_series = rate_forecast.export()["Outputs"]["ur_price_series"]
-    print(sum(np.array(load) * np.array(price_series)))
+    print(sum(np.array(price_series)))
 
     #rate_forecast.value("grid_power", grid_power[4380:8760]) # Hourly kW
     #rate_forecast.execute()
