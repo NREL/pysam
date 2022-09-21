@@ -61,12 +61,12 @@ if __name__ == "__main__":
     rate_forecast.value("steps_per_hour", 1) 
 
     df = pd.read_csv("sample_load.csv", dtype=float)
-    load = pd.to_numeric(df.iloc[:, 0]).values # TODO: check length of array in case of subhourly data
+    load = pd.to_numeric(df.iloc[:, 0]).values # Consider checking length of array in case of subhourly data
 
     # Lifetime length for the forecast class
     gen = [0] * int(8760 * analysis_period)# No renewable generation, run a technology compute module such as PVWatts8 to get this
     load = load * analysis_period # Repeat the load every year (could consider load escalation in the future)
-    grid_power = -1 * load
+    grid_power = -1 * load # Grid usage is the same as load. One could also use an array of "-1" to generate per-kWh pricing
 
     rate_forecast.value("gen", gen) # Hourly kW
     rate_forecast.value("load", load) # Hourly kW
@@ -76,15 +76,8 @@ if __name__ == "__main__":
     # Default example - call once and get back an array or total bill
     rate_forecast.setup()
     rate_forecast.execute()
-    print(rate_forecast.export().keys())
-    print(rate_forecast.export()["ElectricityRates"]["ur_dc_peaks"])
+    print(rate_forecast.export().keys()) # High level dictionary keys
     print(rate_forecast.export()["Outputs"]["ur_total_bill"]) # Note that this does not include fixed charges
 
     price_series = rate_forecast.export()["Outputs"]["ur_price_series"]
-    print(sum(np.array(price_series)))
-
-    #rate_forecast.value("grid_power", grid_power[4380:8760]) # Hourly kW
-    #rate_forecast.execute()
-
-    #print(rate_forecast.export()["Outputs"]["ur_total_bill"])
-    #print(rate_forecast.export()["StatePack"]["idx"])
+    print(sum(np.array(price_series))) # Since grid usage is the same as load, this is the same as ur_total_bill
