@@ -225,7 +225,8 @@ class PySSC:
 
 # Functions to simulate compute modules through dictionaries
 def ssc_sim_from_dict(data_pydict):
-    """ Run a technology compute module using parameters in a dict.
+    """
+    Run a technology compute module using parameters in a dict.
 
     Parameters
     ----------
@@ -238,13 +239,13 @@ def ssc_sim_from_dict(data_pydict):
                 model is used.
         Other keys are names of args for the selected tech_model or
         financial_model.
-
+    
     Returns
     -------
     (dict): dict
         keys are outputs from the selected compute module.
-
     """
+
     tech_model_name = data_pydict["tech_model"]
     # Convert python dictionary into ssc var info table
     data_ssc_tech_model = dict_to_ssc_table(data_pydict, tech_model_name)

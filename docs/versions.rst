@@ -1,7 +1,5 @@
-.. Version Changes:
-
-PySAM Version Changes
-=====================
+PySAM Versions
+==========================================
 
 These pages track for each PySAM Release changes in the variables for the PySAM Modules.
 
