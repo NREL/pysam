@@ -7,7 +7,7 @@ import tempfile
 import os
 import json
 import tarfile
-from files.version import __version__
+from version import __version__
 
 if old_version.__version__ == __version__:
     raise RuntimeError("Script needs to be run with old release installed and new release's ssc lib under files")
@@ -294,7 +294,7 @@ pysam_dir = os.environ.get("PYSAMDIR")
 
 with open(os.path.join(pysam_dir, "docs", "version_changes", __version__ + ".rst"), "w") as f:
     f.write(f'.. {__version__}:\n\n')
-    f.write(f'Changes to Modules with Version {__version__}\n')
+    f.write(f'Version {__version__}\n')
     f.write('===============================================\n\n')
     f.write(f'{doc_str}\n\n')
     for cmod, changes in doc_dict.items():
