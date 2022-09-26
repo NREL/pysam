@@ -291,7 +291,7 @@ class FetchResourceFiles():
         'wind' for NREL WIND Toolkit at https://developer.nrel.gov/docs/wind/wind-toolkit/wtk-download/.
         'solar' for NREL NSRDB at https://developer.nrel.gov/docs/solar/nsrdb/nsrdb_data_query/
 
-    !param str nrel_api_key: *Required* NREL developer API key, available at https://developer.nrel.gov/signup/.
+    :param str nrel_api_key: *Required* NREL developer API key, available at https://developer.nrel.gov/signup/.
 
     :param str nrel_api_email: *Required* Email address associated with nrel_api_key.
 

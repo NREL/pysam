@@ -9,34 +9,24 @@ available_chems = ['leadacid', 'lfpgraphite', 'nmcgraphite', 'lmolto']
 
 
 def battery_model_sizing(model, desired_power, desired_capacity, desired_voltage, size_by_ac_not_dc=None, module_specs: dict=None):
-    """
-    Sizes the battery model using its current configuration such as chemistry, cell properties, etc
-    and modifies the model's power, capacity and voltage without changing its fundamental properties
-
-    The battery's thermal parameters (surface area and mass) are modified according to assumptions
-    about the mass and volume per specific energy and assuming the battery is a cube. If the battery's
-    thermal parameters should be sized according to a particular module's capacity and surface area,
+    """Sizes the battery model using its current configuration such as chemistry, cell properties, etc and modifies the model's power, capacity and voltage without changing its fundamental properties. The battery's thermal parameters (surface area and mass) are modified according to assumptions
+    about the mass and volume per specific energy and assuming the battery is a cube. If the battery's thermal parameters should be sized according to a particular module's capacity and surface area,
     use the module_specs input.
-
+    
     :param model: PySAM.Battery.Battery or PySAM.BatteryStateful.BatteryStateful
-    :param desired_power: float
-        Battery: kWAC if AC-connected, kWDC otherwise. BatteryStateful: battery kWDC
-    :param desired_capacity: float
-        Battery: kWhAC if AC-connected, kWhDC otherwise. BatteryStateful: battery kWhDC
-    :param desired_voltage: float
-        volts
-    :param size_by_ac_not_dc: optional bool
-        Sizes for power and capacity are on AC side not DC side of battery-inverter regardless of connection type
-    :param module_specs: optional dict
-        Module specifications for scaling surface area assuming the battery is made of inividual modules.
-            capacity: float
-                Single battery module capacity for scaling surface area
-                Battery: kWhAC if AC-connected, kWhDC otherwise
-                BatteryStateful: battery kWhDC
-            surface_area: float
-                Single battery module surface area m^2
-                m^2 of module battery
+    :param float desired_power: For Battery, kWAC if AC-connected, kWDC otherwise. For BatteryStateful, battery kWDC.
+    :param float desired_capacity: For Battery, kWhAC if AC-connected, kWhDC otherwise. For BatteryStateful, battery kWhDC.
+    :param float desired_voltage: Volts
+    :param bool, optional size_by_ac_not_dc: Sizes for power and capacity are on AC side not DC side of battery-inverter regardless of connection type.
+    :param dict, optional module_specs: {capacity (float), surface_area (float)} Dictionary of battery module specifications for scaling surface area, assuming the battery is made of individual modules.
+
+        capacity: float
+            Capacity of a single battery module. For the Battery model, use kWhAC if AC-connected, use kWhDC otherwise. For the BatteryStateful model, use battery kWhDC.
+        surface_area: float
+            Surface area of as single battery module in m^2.
     """
+
+
     if module_specs is not None:
         if not module_specs.keys() == {'capacity', 'surface_area'}:
             raise TypeError("module_specs must contain 'capacity' and 'surface_area' keys only." )
@@ -50,13 +40,12 @@ def battery_model_sizing(model, desired_power, desired_capacity, desired_voltage
 
 
 def battery_model_change_chemistry(model, chem):
-    """
-    Changes the chemistry and cell properties of the battery to use defaults for that chemistry from BatteryStateful
-
+    """Changes the chemistry and cell properties of the battery to use defaults for that chemistry from BatteryStateful
+    
     :param model: PySAM.Battery.Battery or PySAM.BatteryStateful.BatteryStateful
-    :param chem: string
-        'leadacid', 'lfpgraphite', 'nmcgraphite', 'lmolto'
+    :param str chem: Battery chemistry, 'leadacid', 'lfpgraphite', 'nmcgraphite', or 'lmolto'.
     """
+
     chem = chem.lower()
     if chem not in available_chems:
         raise NotImplementedError
@@ -70,29 +59,24 @@ def battery_model_change_chemistry(model, chem):
 
 
 def size_battery(model, desired_power, desired_capacity, desired_voltage, size_by_ac_not_dc=None, module_dict=None):
-    """
-    Helper function for battery_model_sizing
-    Modifies Battery model with new sizing. For BatteryStateful use size_batterystateful
-
+    """Helper function for battery_model_sizing. Modifies Battery model with new sizing. For BatteryStateful use size_batterystateful.
+    
     :param model: PySAM.Battery model
-    :param desired_power: float
-        kWAC if AC-connected, kWDC otherwise
-    :param desired_capacity: float
-        kWhAC if AC-connected, kWhDC otherwise
-    :param desired_voltage: float
-        volts
-    :param size_by_ac_not_dc: optional bool
-        Sizes for power and capacity are on AC side not DC side of battery-inverter
-    :param module_dict: optional dict
-        Module specs for scaling surface area
-            capacity: float
-                Single battery module capacity for scaling surface area
-                kWhAC if AC-connected, kWhDC otherwise
-            surface_area: float
-                Single battery module surface area m^2
-                m^2 of module battery
-    :return: output_dictionary of sizing parameters
+    :param float desired_power: Desired battery power, kWAC if AC-connected, kWDC otherwise.
+    :param float desired_capacity: Desired battery capacity,  kWhAC if AC-connected, kWhDC otherwise.
+    :param float desired_voltage: Desired battery voltage, V.
+    :param bool,optional size_by_ac_not_dc: `True` sizes for power and capacity based on AC cpacities, `False` sizes for DC capacities.
+    :param dict module_dict: {capacity (float), surface_area (float)} Battery module specs for scaling surface area.
+
+        capacity: float
+            Capacity of a single battery module in kWhAC if AC-connected or kWhDC if DC-connected.
+        surface_area: float
+            Surface area is of single battery module in m^2.
+    
+    :returns: Dictionary of of sizing parameters.
+    :rtype: dict
     """
+
     if type(model) != Batt.Battery and type(model) != PVBatt.Pvsamv1:
         raise TypeError
 
@@ -174,29 +158,23 @@ def size_battery(model, desired_power, desired_capacity, desired_voltage, size_b
 
 
 def size_batterystateful(model: BattStfl.BatteryStateful, _, desired_capacity, desired_voltage, module_dict=None):
-    """
-    Helper function for battery_model_sizing
-
-    Modifies BatteryStateful model with new sizing. For Battery use size_battery
-
-    Only battery side DC sizing
-
+    """Helper function for ``battery_model_sizing()``. Modifies BatteryStateful model with new sizing. For Battery model, use ``size_battery()`` instead. Only battery side DC sizing.
+    
     :param model: PySAM.Battery model
-    :param _: not used
-    :param desired_capacity: float
-        kWhAC if AC-connected, kWhDC otherwise
-    :param desired_voltage: float
-        volts
-    :param module_dict: optional dict
-        Module specs for scaling surface area
-            capacity: float
-                Single battery module capacity for scaling surface area
-                kWhAC if AC-connected, kWhDC otherwise
-            surface_area: float
-                Single battery module surface area m^2
-                m^2 of module battery
-    :return: output_dictionary of sizing parameters
+    :param _: Not used.
+    :param float desired_capacity: kWhAC if AC-connected, kWhDC otherwise.
+    :param float desired_voltage: Volts.
+    :param dict module_dict: {capacity (float), surface_area (float)} Optional, module specs for scaling surface area.
+    
+        capacity: float
+            Capacity of a single battery module in kWhAC if AC-connected, kWhDC otherwise.
+        surface_area: float
+            Surface area is of single battery module in m^2.
+
+    :returns: Dictionary of sizing parameters.
+    :rtype: dict
     """
+
     #
     # calculate size
     #
@@ -228,80 +206,68 @@ def size_batterystateful(model: BattStfl.BatteryStateful, _, desired_capacity, d
 
 
 def calculate_battery_size(input_dict):
-    """
-    Helper function to `battery_model_sizing`
+    """Helper function to battery_model_sizing. All efficiencies and rates in percentages, 0-100. Inverter efficiency depends on which inverter model is being used, inverter_model.
+    
+    :param dict input_dict: Dictionary of battery parameters. {batt_chem (int), batt_Qfull (float), batt_Vnom_default (float)} 
 
-    All efficiencies and rates in percentages, 0-100.
-
-    Inverter efficiency depends on which inverter model is being used, `inverter_model`.
-
-    :param input_dict:
         batt_chem: int
-            Lithium-ion (1) or Lead-Acid (0)
-        batt_Qfull: float, Ah
-            capacity of single cell
-        batt_Vnom_default: float, V
-            voltage of single cell
+            Lithium-ion (1) or Lead acid (0)
+        batt_Qfull: float
+            capacity of single cell in Ah
+        batt_Vnom_default: float
+            voltage of single cell in V
+    :param bool batt_ac_or_dc:
+    :param float desired_power:
+    :param float desired_capacity:
+    :param float desired_voltage:
+    :param bool size_by_ac_not_dc:
+    :param float batt_dc_ac_efficiency:
+    :param float inverter_eff: 
+    :param float batt_dc_dc_efficiency:
+    :param float LeadAcid_q10: *Required if batt_chem = 0*. 10-hour disharge rate in Ah, between 0 and 100.
+    :param float LeadAcid_q20: *Required if batt_chem = 0*. 20-hour discharge rate in Ah, between 0 and 100.
+    :param float LeadAcid_qn: *Required if batt_chem = 0*. n-hour discharge rate in Ah, between 0 and 100.
+    :param int LeadAcid_tn: *Required if batt_chem = 0*. Hour for custom hour discharge rate.
+    :param bool batt_ac_or_dc: Set to True if ac-connected, set to False otherwise.
+    :param float desired_power: Power of the battery in kW.
+    :param float desired_capacity: Desired battery capacity in kWh.
+    :param float desired_voltage: Desired battery voltage in V.
+    :param bool size_by_ac_not_dc: Set to True for sizing battery as kWAC and kWhAC. Default is False.
+    :param float batt_dc_ac_efficiency: *Required only if size_by_ac_not_dc = True* AC to DC power in conversion, between 0 and 100.
+    :param float inverter_eff: Required only if batt_ac_or_dc = False. Inverter DC to AC conversion efficiency, between 0 and 100.
+    :param float, optional batt_dc_dc_efficiency: DC to DC power conversion in battery management system, between 0 and 100.
 
-        Required only if batt_chem is False:
-            LeadAcid_q10: float 0-100, Ah
-                10 hour discharge rate
-            LeadAcid_q20: float 0-100, Ah
-                20 hour discharge rate
-            LeadAcid_tn: int, hour
-                hour for custom hour discharge rate
-            LeadAcid_qn: float 0-100, Ah
-                n-hour discharge rate
+    
+    :returns: Dictionary of battery size parameters.
+    :rtype: dict {voltage (float), power (float), batt_computed_bank_capacity (float), batt_computed_series (int), batt_computed_string0250s (int), time_capacity (float), batt_current_charge_max (float), batt_current_discharge_max (float), batt_power_charge_max_kwac (float), batt_power_discharge_max_kwac (float), batt_power_charge_max_kwdc (float), 
+        batt_power_discharge_max_kwdc (float), LeadAcid_q10_computed (float), LeadAcid_q20_computed (float), LeadAcid_qn_computed (float)}
 
-        batt_ac_or_dc: bool
-            True if ac-connected
-        desired_power: float, kW
-            power of the battery
-        desired_capacity: float, kWh
-            capacity
-        desired_voltage: float, V
-            voltage
-        size_by_ac_not_dc: bool, default False
-            True for sizing battery as kWAC and kWhAC
-        batt_dc_ac_efficiency: float 0-100, required only if size_by_ac_not_dc is True
-            AC to DC power in conversion
-        inverter_eff: float 0-100, required only if batt_ac_or_dc is False
-            AC to DC power from inverter
-        batt_dc_dc_efficiency: float 0-100, optional
-            DC to DC power conversion in battery management system
-
-    :return: output_dict:
-        voltage: float, V
-            computed
+        voltage: float
+            Computed voltage.
         power: float
-            computed
+            Computed power.
         batt_computed_bank_capacity: float
-            computed
+            Computed bank capacity.
         batt_computed_series: int
-            number of cells connected in series
+            Computed number of cells connected in series.
         batt_computed_strings: int
-            number of strings connected in parallel
-        time_capacity: float 0-1
-
-        batt_current_charge_max: float, A
-
-        batt_current_discharge_max: float, A
-
-        batt_power_charge_max_kwac: float, kWAC
-
-        batt_power_discharge_max_kwac: float, kWAC
-
-        batt_power_charge_max_kwdc: float, kWDC
-
-        batt_power_discharge_max_kwdc: float, kWDC
-
-        only if batt_chem is False:
-            LeadAcid_q10_computed: float 0-100, Ah
-
-            LeadAcid_q20_computed: float 0-100, Ah
-
-            LeadAcid_qn_computed: float 0-100, Ah
-
+            Computed number of cell strings connected in parallel.
+        time_capacity: float
+            0-1
+        batt_current_charge_max: float
+            A
+        batt_current_discharge_max: float
+            A
+        batt_power_charge_max_kwac: float
+            kWAC
+        batt_power_discharge_max_kwac: float
+            kWAC
+        batt_power_charge_max_kwdc: float
+            kWDC
+        batt_power_discharge_max_kwdc: float
+            kWDC
+        Lead acid parameters returned if batt_chem = 0:
+            LeadAcid_q10_computed, LeadAcid_q20_computed, LeadAcid_qn_computed, all in Ah between 0 and 100.
     """
 
     def check_keys(keys):
@@ -384,34 +350,34 @@ def calculate_battery_size(input_dict):
 
 
 def calculate_thermal_params(input_dict):
-    """
-    Calculates the mass and surface area of a battery by calculating from its current parameters the
-    mass / specific energy and volume / specific energy ratios.
-
-    If module_capacity and module_surface_area are provided, battery surface area is calculated by
+    """Calculates the mass and surface area of a battery by calculating from its current parameters the
+    mass / specific energy and volume / specific energy ratios. If module_capacity and module_surface_area are provided, battery surface area is calculated by
     scaling module_surface_area by the number of modules required to fulfill desired capacity.
+   
+    :param dict input_dict: A dictionary of battery thermal parameters at original size. {mass (float), surface_area (float), original_capacity (float), desired_capacity (float), module_capacity (float, optional), surface_area (float, optional)}
 
-    :param:
-        input_dict:
-            mass: float
-                kg of battery at original size
-            surface_area: float
-                m^2 of battery at original size
-            original_capacity: float
-                Wh of battery
-            desired_capacity: float
-                Wh of new battery size
-            module_capacity: optional float
-                Wh of module battery size
-            module_surface_area: optional float
-                m^2 of module battery
-    Returns:
-        output_dict:
-            mass: float
-                kg of battery at desired size
-            surface_area: float
-                m^2 of battery at desired size
+        mass: float
+            kg of battery at original size
+        surface_area: float
+            m^2 of battery at original size
+        original_capacity: float
+            Wh of battery
+        desired_capacity: float
+            Wh of new battery size
+        module_capacity: float, optional
+            Wh of module battery size
+        module_surface_area: float, optional
+            m^2 of module battery
+
+    :returns: Dictionary of battery mass and surface area at desired size.
+    :rtype: dict {mass (float), surface_area (float)} 
+
+        mass: float
+            kg of battery at desired size
+        surface_area: float
+            m^2 of battery at desired size
     """
+
     mass = input_dict['mass']
     surface_area = input_dict['surface_area']
     original_capacity = input_dict['original_capacity']
@@ -437,9 +403,9 @@ def calculate_thermal_params(input_dict):
 
 
 def chem_battery(model: Union[Batt.Battery, PVBatt.Pvsamv1], chem):
+    """Helper function for battery_model_change_chemistry().
     """
-    Helper function for battery_model_change_chemistry
-    """
+
     if type(model) != Batt.Battery and type(model) != PVBatt.Pvsamv1:
         raise TypeError
 
@@ -489,6 +455,7 @@ def chem_batterystateful(model: BattStfl.BatteryStateful, chem):
     """
     Helper function for battery_model_change_chemistry
     """
+
     if type(model) != BattStfl.BatteryStateful:
         raise TypeError
 
