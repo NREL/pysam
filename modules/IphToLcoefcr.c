@@ -69,11 +69,11 @@ IPHLCOH_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef IPHLCOH_methods[] = {
 		{"assign",            (PyCFunction)IPHLCOH_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``IPHLCOH_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``IPHLCOH_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)IPHLCOH_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``IPHLCOH_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``IPHLCOH_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)IPHLCOH_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -103,10 +103,10 @@ IPHLCOH_set_electricity_rate(VarGroupObject *self, PyObject *value, void *closur
 
 static PyGetSetDef IPHLCOH_getset[] = {
 {"annual_electricity_consumption", (getter)IPHLCOH_get_annual_electricity_consumption,(setter)IPHLCOH_set_annual_electricity_consumption,
-	PyDoc_STR("*float*: Annual electricity consumption with avail derate [kWe-hr]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Annual electricity consumption with avail derate [kWe-hr]\n\n**Required:**\nTrue"),
  	NULL},
 {"electricity_rate", (getter)IPHLCOH_get_electricity_rate,(setter)IPHLCOH_set_electricity_rate,
-	PyDoc_STR("*float*: Cost of electricity used to operate pumps and trackers [$/kWe]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Cost of electricity used to operate pumps and trackers [$/kWe]\n\n**Required:**\nTrue"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -221,11 +221,11 @@ SimpleLCOE_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef SimpleLCOE_methods[] = {
 		{"assign",            (PyCFunction)SimpleLCOE_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``SimpleLCOE_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``SimpleLCOE_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)SimpleLCOE_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``SimpleLCOE_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``SimpleLCOE_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)SimpleLCOE_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -243,7 +243,7 @@ SimpleLCOE_set_fixed_operating_cost(VarGroupObject *self, PyObject *value, void 
 
 static PyGetSetDef SimpleLCOE_getset[] = {
 {"fixed_operating_cost", (getter)SimpleLCOE_get_fixed_operating_cost,(setter)SimpleLCOE_set_fixed_operating_cost,
-	PyDoc_STR("*float*: Annual fixed operating cost [$/kW]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Annual fixed operating cost [$/kW]\n\n**Required:**\nTrue"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -570,11 +570,11 @@ static PyMethodDef IphToLcoefcrModule_methods[] = {
 		{"new",             IphToLcoefcr_new,         METH_VARARGS,
 				PyDoc_STR("new() -> IphToLcoefcr")},
 		{"default",             IphToLcoefcr_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> IphToLcoefcr\n\nLoad values from SAM default configurations to provide as inputs to the model. \n\n			`config` options:\n\n- \"DSGLIPHLCOHCalculator\"\n- \"PhysicalTroughIPHLCOHCalculator\"\n\n.. note::\n\n	The default configuration is a collection of default values for the module inputs. Some inputs may not be included in the default configuration and are automatically assigned the value indicated by the variable's 'Required' attribute.")},
+				PyDoc_STR("default(config) -> IphToLcoefcr\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n		- *\"DSGLIPHLCOHCalculator\"*\n\n		- *\"PhysicalTroughIPHLCOHCalculator\"*\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
 		{"wrap",             IphToLcoefcr_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> IphToLcoefcr\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
+				PyDoc_STR("wrap(ssc_data_t) -> IphToLcoefcr\n\nLoad data from a PySSC object.\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap()``")},
 		{"from_existing",   IphToLcoefcr_from_existing,        METH_VARARGS,
-				PyDoc_STR("from_existing(data, optional config) -> IphToLcoefcr\n\nShare underlying data with an existing PySAM class. If config provided, default attributes are loaded otherwise.")},
+				PyDoc_STR("from_existing(data, optional config) -> IphToLcoefcr\n\nShare data with an existing PySAM class. If ``optional config`` is a valid configuration name, load the module's defaults for that configuration.")},
 		{NULL,              NULL}           /* sentinel */
 };
 

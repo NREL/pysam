@@ -69,11 +69,11 @@ WeatherReader_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef WeatherReader_methods[] = {
 		{"assign",            (PyCFunction)WeatherReader_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``WeatherReader_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``WeatherReader_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)WeatherReader_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``WeatherReader_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``WeatherReader_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)WeatherReader_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -127,16 +127,16 @@ WeatherReader_set_scan_header_only(VarGroupObject *self, PyObject *value, void *
 
 static PyGetSetDef WeatherReader_getset[] = {
 {"file_name", (getter)WeatherReader_get_file_name,(setter)WeatherReader_set_file_name,
-	PyDoc_STR("*str*: local weather file path\n\n*Constraints*: LOCAL_FILE\n\n*Required*: True"),
+	PyDoc_STR("*str*: local weather file path\n\n**Constraints:**\nLOCAL_FILE\n\n**Required:**\nTrue"),
  	NULL},
 {"interpolate", (getter)WeatherReader_get_interpolate,(setter)WeatherReader_set_interpolate,
-	PyDoc_STR("*float*: interpolate to closest height measured? [m]\n\n*Constraints*: BOOLEAN\n\n*Required*: True if scan_header_only=0"),
+	PyDoc_STR("*float*: interpolate to closest height measured? [m]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nRequired if scan_header_only=0"),
  	NULL},
 {"requested_ht", (getter)WeatherReader_get_requested_ht,(setter)WeatherReader_set_requested_ht,
-	PyDoc_STR("*float*: requested measurement height [m]\n\n*Required*: True"),
+	PyDoc_STR("*float*: requested measurement height [m]\n\n**Required:**\nTrue"),
  	NULL},
 {"scan_header_only", (getter)WeatherReader_get_scan_header_only,(setter)WeatherReader_set_scan_header_only,
-	PyDoc_STR("*float*: only reader headers [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: only reader headers [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -251,11 +251,11 @@ Outputs_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Outputs_methods[] = {
 		{"assign",            (PyCFunction)Outputs_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Outputs_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Outputs_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -720,11 +720,11 @@ static PyMethodDef WindFileReaderModule_methods[] = {
 		{"new",             WindFileReader_new,         METH_VARARGS,
 				PyDoc_STR("new() -> WindFileReader")},
 		{"default",             WindFileReader_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> WindFileReader\n\nLoad values from SAM default configurations to provide as inputs to the model. \n\n			None\n\n.. note::\n\n	The default configuration is a collection of default values for the module inputs. Some inputs may not be included in the default configuration and are automatically assigned the value indicated by the variable's 'Required' attribute.")},
+				PyDoc_STR("default(config) -> WindFileReader\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n- None\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
 		{"wrap",             WindFileReader_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> WindFileReader\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
+				PyDoc_STR("wrap(ssc_data_t) -> WindFileReader\n\nLoad data from a PySSC object.\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap()``")},
 		{"from_existing",   WindFileReader_from_existing,        METH_VARARGS,
-				PyDoc_STR("from_existing(data, optional config) -> WindFileReader\n\nShare underlying data with an existing PySAM class. If config provided, default attributes are loaded otherwise.")},
+				PyDoc_STR("from_existing(data, optional config) -> WindFileReader\n\nShare data with an existing PySAM class. If ``optional config`` is a valid configuration name, load the module's defaults for that configuration.")},
 		{NULL,              NULL}           /* sentinel */
 };
 

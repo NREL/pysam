@@ -69,11 +69,11 @@ SystemCosts_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef SystemCosts_methods[] = {
 		{"assign",            (PyCFunction)SystemCosts_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``SystemCosts_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``SystemCosts_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)SystemCosts_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``SystemCosts_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``SystemCosts_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)SystemCosts_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -91,7 +91,7 @@ SystemCosts_set_total_installed_cost(VarGroupObject *self, PyObject *value, void
 
 static PyGetSetDef SystemCosts_getset[] = {
 {"total_installed_cost", (getter)SystemCosts_get_total_installed_cost,(setter)SystemCosts_set_total_installed_cost,
-	PyDoc_STR("*float*: Total installed cost [$]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Total installed cost [$]\n\n**Required:**\nTrue"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -206,11 +206,11 @@ FinancialParameters_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef FinancialParameters_methods[] = {
 		{"assign",            (PyCFunction)FinancialParameters_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``FinancialParameters_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``FinancialParameters_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)FinancialParameters_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``FinancialParameters_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``FinancialParameters_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)FinancialParameters_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -456,64 +456,64 @@ FinancialParameters_set_const_per_upfront_rate5(VarGroupObject *self, PyObject *
 
 static PyGetSetDef FinancialParameters_getset[] = {
 {"const_per_interest_rate1", (getter)FinancialParameters_get_const_per_interest_rate1,(setter)FinancialParameters_set_const_per_interest_rate1,
-	PyDoc_STR("*float*: Interest rate, loan 1 [%]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Interest rate, loan 1 [%]\n\n**Required:**\nTrue"),
  	NULL},
 {"const_per_interest_rate2", (getter)FinancialParameters_get_const_per_interest_rate2,(setter)FinancialParameters_set_const_per_interest_rate2,
-	PyDoc_STR("*float*: Interest rate, loan 2 [%]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Interest rate, loan 2 [%]\n\n**Required:**\nTrue"),
  	NULL},
 {"const_per_interest_rate3", (getter)FinancialParameters_get_const_per_interest_rate3,(setter)FinancialParameters_set_const_per_interest_rate3,
-	PyDoc_STR("*float*: Interest rate, loan 3 [%]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Interest rate, loan 3 [%]\n\n**Required:**\nTrue"),
  	NULL},
 {"const_per_interest_rate4", (getter)FinancialParameters_get_const_per_interest_rate4,(setter)FinancialParameters_set_const_per_interest_rate4,
-	PyDoc_STR("*float*: Interest rate, loan 4 [%]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Interest rate, loan 4 [%]\n\n**Required:**\nTrue"),
  	NULL},
 {"const_per_interest_rate5", (getter)FinancialParameters_get_const_per_interest_rate5,(setter)FinancialParameters_set_const_per_interest_rate5,
-	PyDoc_STR("*float*: Interest rate, loan 5 [%]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Interest rate, loan 5 [%]\n\n**Required:**\nTrue"),
  	NULL},
 {"const_per_months1", (getter)FinancialParameters_get_const_per_months1,(setter)FinancialParameters_set_const_per_months1,
-	PyDoc_STR("*float*: Months prior to operation, loan 1\n\n*Required*: True"),
+	PyDoc_STR("*float*: Months prior to operation, loan 1\n\n**Required:**\nTrue"),
  	NULL},
 {"const_per_months2", (getter)FinancialParameters_get_const_per_months2,(setter)FinancialParameters_set_const_per_months2,
-	PyDoc_STR("*float*: Months prior to operation, loan 2\n\n*Required*: True"),
+	PyDoc_STR("*float*: Months prior to operation, loan 2\n\n**Required:**\nTrue"),
  	NULL},
 {"const_per_months3", (getter)FinancialParameters_get_const_per_months3,(setter)FinancialParameters_set_const_per_months3,
-	PyDoc_STR("*float*: Months prior to operation, loan 3\n\n*Required*: True"),
+	PyDoc_STR("*float*: Months prior to operation, loan 3\n\n**Required:**\nTrue"),
  	NULL},
 {"const_per_months4", (getter)FinancialParameters_get_const_per_months4,(setter)FinancialParameters_set_const_per_months4,
-	PyDoc_STR("*float*: Months prior to operation, loan 4\n\n*Required*: True"),
+	PyDoc_STR("*float*: Months prior to operation, loan 4\n\n**Required:**\nTrue"),
  	NULL},
 {"const_per_months5", (getter)FinancialParameters_get_const_per_months5,(setter)FinancialParameters_set_const_per_months5,
-	PyDoc_STR("*float*: Months prior to operation, loan 5\n\n*Required*: True"),
+	PyDoc_STR("*float*: Months prior to operation, loan 5\n\n**Required:**\nTrue"),
  	NULL},
 {"const_per_percent1", (getter)FinancialParameters_get_const_per_percent1,(setter)FinancialParameters_set_const_per_percent1,
-	PyDoc_STR("*float*: Percent of tot. installed cost, loan 1 [%]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Percent of tot. installed cost, loan 1 [%]\n\n**Required:**\nTrue"),
  	NULL},
 {"const_per_percent2", (getter)FinancialParameters_get_const_per_percent2,(setter)FinancialParameters_set_const_per_percent2,
-	PyDoc_STR("*float*: Percent of tot. installed cost, loan 2 [%]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Percent of tot. installed cost, loan 2 [%]\n\n**Required:**\nTrue"),
  	NULL},
 {"const_per_percent3", (getter)FinancialParameters_get_const_per_percent3,(setter)FinancialParameters_set_const_per_percent3,
-	PyDoc_STR("*float*: Percent of tot. installed cost, loan 3 [%]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Percent of tot. installed cost, loan 3 [%]\n\n**Required:**\nTrue"),
  	NULL},
 {"const_per_percent4", (getter)FinancialParameters_get_const_per_percent4,(setter)FinancialParameters_set_const_per_percent4,
-	PyDoc_STR("*float*: Percent of tot. installed cost, loan 4 [%]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Percent of tot. installed cost, loan 4 [%]\n\n**Required:**\nTrue"),
  	NULL},
 {"const_per_percent5", (getter)FinancialParameters_get_const_per_percent5,(setter)FinancialParameters_set_const_per_percent5,
-	PyDoc_STR("*float*: Percent of tot. installed cost, loan 5 [%]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Percent of tot. installed cost, loan 5 [%]\n\n**Required:**\nTrue"),
  	NULL},
 {"const_per_upfront_rate1", (getter)FinancialParameters_get_const_per_upfront_rate1,(setter)FinancialParameters_set_const_per_upfront_rate1,
-	PyDoc_STR("*float*: Upfront fee on principal, loan 1 [%]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Upfront fee on principal, loan 1 [%]\n\n**Required:**\nTrue"),
  	NULL},
 {"const_per_upfront_rate2", (getter)FinancialParameters_get_const_per_upfront_rate2,(setter)FinancialParameters_set_const_per_upfront_rate2,
-	PyDoc_STR("*float*: Upfront fee on principal, loan 2 [%]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Upfront fee on principal, loan 2 [%]\n\n**Required:**\nTrue"),
  	NULL},
 {"const_per_upfront_rate3", (getter)FinancialParameters_get_const_per_upfront_rate3,(setter)FinancialParameters_set_const_per_upfront_rate3,
-	PyDoc_STR("*float*: Upfront fee on principal, loan 3 [%]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Upfront fee on principal, loan 3 [%]\n\n**Required:**\nTrue"),
  	NULL},
 {"const_per_upfront_rate4", (getter)FinancialParameters_get_const_per_upfront_rate4,(setter)FinancialParameters_set_const_per_upfront_rate4,
-	PyDoc_STR("*float*: Upfront fee on principal, loan 4 [%]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Upfront fee on principal, loan 4 [%]\n\n**Required:**\nTrue"),
  	NULL},
 {"const_per_upfront_rate5", (getter)FinancialParameters_get_const_per_upfront_rate5,(setter)FinancialParameters_set_const_per_upfront_rate5,
-	PyDoc_STR("*float*: Upfront fee on principal, loan 5 [%]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Upfront fee on principal, loan 5 [%]\n\n**Required:**\nTrue"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -628,11 +628,11 @@ Outputs_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Outputs_methods[] = {
 		{"assign",            (PyCFunction)Outputs_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Outputs_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Outputs_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -1137,11 +1137,11 @@ static PyMethodDef CbConstructionFinancingModule_methods[] = {
 		{"new",             CbConstructionFinancing_new,         METH_VARARGS,
 				PyDoc_STR("new() -> CbConstructionFinancing")},
 		{"default",             CbConstructionFinancing_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> CbConstructionFinancing\n\nLoad values from SAM default configurations to provide as inputs to the model. \n\n			None\n\n.. note::\n\n	The default configuration is a collection of default values for the module inputs. Some inputs may not be included in the default configuration and are automatically assigned the value indicated by the variable's 'Required' attribute.")},
+				PyDoc_STR("default(config) -> CbConstructionFinancing\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n- None\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
 		{"wrap",             CbConstructionFinancing_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> CbConstructionFinancing\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
+				PyDoc_STR("wrap(ssc_data_t) -> CbConstructionFinancing\n\nLoad data from a PySSC object.\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap()``")},
 		{"from_existing",   CbConstructionFinancing_from_existing,        METH_VARARGS,
-				PyDoc_STR("from_existing(data, optional config) -> CbConstructionFinancing\n\nShare underlying data with an existing PySAM class. If config provided, default attributes are loaded otherwise.")},
+				PyDoc_STR("from_existing(data, optional config) -> CbConstructionFinancing\n\nShare data with an existing PySAM class. If ``optional config`` is a valid configuration name, load the module's defaults for that configuration.")},
 		{NULL,              NULL}           /* sentinel */
 };
 

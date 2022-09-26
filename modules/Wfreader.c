@@ -69,11 +69,11 @@ WeatherReader_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef WeatherReader_methods[] = {
 		{"assign",            (PyCFunction)WeatherReader_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``WeatherReader_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``WeatherReader_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)WeatherReader_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``WeatherReader_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``WeatherReader_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)WeatherReader_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -103,10 +103,10 @@ WeatherReader_set_header_only(VarGroupObject *self, PyObject *value, void *closu
 
 static PyGetSetDef WeatherReader_getset[] = {
 {"file_name", (getter)WeatherReader_get_file_name,(setter)WeatherReader_set_file_name,
-	PyDoc_STR("*str*: local weather file path\n\n*Constraints*: LOCAL_FILE\n\n*Required*: True"),
+	PyDoc_STR("*str*: local weather file path\n\n**Constraints:**\nLOCAL_FILE\n\n**Required:**\nTrue"),
  	NULL},
 {"header_only", (getter)WeatherReader_get_header_only,(setter)WeatherReader_set_header_only,
-	PyDoc_STR("*float*: read header only [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: read header only [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -221,11 +221,11 @@ Outputs_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Outputs_methods[] = {
 		{"assign",            (PyCFunction)Outputs_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Outputs_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Outputs_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -915,11 +915,11 @@ static PyMethodDef WfreaderModule_methods[] = {
 		{"new",             Wfreader_new,         METH_VARARGS,
 				PyDoc_STR("new() -> Wfreader")},
 		{"default",             Wfreader_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Wfreader\n\nLoad values from SAM default configurations to provide as inputs to the model. \n\n			None\n\n.. note::\n\n	The default configuration is a collection of default values for the module inputs. Some inputs may not be included in the default configuration and are automatically assigned the value indicated by the variable's 'Required' attribute.")},
+				PyDoc_STR("default(config) -> Wfreader\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n- None\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
 		{"wrap",             Wfreader_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> Wfreader\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
+				PyDoc_STR("wrap(ssc_data_t) -> Wfreader\n\nLoad data from a PySSC object.\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap()``")},
 		{"from_existing",   Wfreader_from_existing,        METH_VARARGS,
-				PyDoc_STR("from_existing(data, optional config) -> Wfreader\n\nShare underlying data with an existing PySAM class. If config provided, default attributes are loaded otherwise.")},
+				PyDoc_STR("from_existing(data, optional config) -> Wfreader\n\nShare data with an existing PySAM class. If ``optional config`` is a valid configuration name, load the module's defaults for that configuration.")},
 		{NULL,              NULL}           /* sentinel */
 };
 

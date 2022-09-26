@@ -69,11 +69,11 @@ PVShadeLossDB_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef PVShadeLossDB_methods[] = {
 		{"assign",            (PyCFunction)PVShadeLossDB_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``PVShadeLossDB_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``PVShadeLossDB_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)PVShadeLossDB_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``PVShadeLossDB_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``PVShadeLossDB_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)PVShadeLossDB_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -175,28 +175,28 @@ PVShadeLossDB_set_v_mppt_low(VarGroupObject *self, PyObject *value, void *closur
 
 static PyGetSetDef PVShadeLossDB_getset[] = {
 {"diffuse_irrad", (getter)PVShadeLossDB_get_diffuse_irrad,(setter)PVShadeLossDB_set_diffuse_irrad,
-	PyDoc_STR("*sequence*: Diffuse irradiance\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: Diffuse irradiance\n\n**Required:**\nTrue"),
  	NULL},
 {"global_poa_irrad", (getter)PVShadeLossDB_get_global_poa_irrad,(setter)PVShadeLossDB_set_global_poa_irrad,
-	PyDoc_STR("*sequence*: Global POA irradiance\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: Global POA irradiance\n\n**Required:**\nTrue"),
  	NULL},
 {"mods_per_string", (getter)PVShadeLossDB_get_mods_per_string,(setter)PVShadeLossDB_set_mods_per_string,
-	PyDoc_STR("*sequence*: Modules per string\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: Modules per string\n\n**Required:**\nTrue"),
  	NULL},
 {"pv_cell_temp", (getter)PVShadeLossDB_get_pv_cell_temp,(setter)PVShadeLossDB_set_pv_cell_temp,
-	PyDoc_STR("*sequence*: PV cell temperature\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: PV cell temperature\n\n**Required:**\nTrue"),
  	NULL},
 {"str_shade_fracs", (getter)PVShadeLossDB_get_str_shade_fracs,(setter)PVShadeLossDB_set_str_shade_fracs,
-	PyDoc_STR("*sequence[sequence]*: Shading fractions for each string\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: Shading fractions for each string\n\n**Required:**\nTrue"),
  	NULL},
 {"str_vmp_stc", (getter)PVShadeLossDB_get_str_vmp_stc,(setter)PVShadeLossDB_set_str_vmp_stc,
-	PyDoc_STR("*sequence*: Unshaded Vmp of the string at STC\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: Unshaded Vmp of the string at STC\n\n**Required:**\nTrue"),
  	NULL},
 {"v_mppt_high", (getter)PVShadeLossDB_get_v_mppt_high,(setter)PVShadeLossDB_set_v_mppt_high,
-	PyDoc_STR("*sequence*: Upper bound of inverter MPPT range\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: Upper bound of inverter MPPT range\n\n**Required:**\nTrue"),
  	NULL},
 {"v_mppt_low", (getter)PVShadeLossDB_get_v_mppt_low,(setter)PVShadeLossDB_set_v_mppt_low,
-	PyDoc_STR("*sequence*: Lower bound of inverter MPPT range\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: Lower bound of inverter MPPT range\n\n**Required:**\nTrue"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -311,11 +311,11 @@ Outputs_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Outputs_methods[] = {
 		{"assign",            (PyCFunction)Outputs_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Outputs_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Outputs_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -690,11 +690,11 @@ static PyMethodDef PvGetShadeLossMppModule_methods[] = {
 		{"new",             PvGetShadeLossMpp_new,         METH_VARARGS,
 				PyDoc_STR("new() -> PvGetShadeLossMpp")},
 		{"default",             PvGetShadeLossMpp_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> PvGetShadeLossMpp\n\nLoad values from SAM default configurations to provide as inputs to the model. \n\n			None\n\n.. note::\n\n	The default configuration is a collection of default values for the module inputs. Some inputs may not be included in the default configuration and are automatically assigned the value indicated by the variable's 'Required' attribute.")},
+				PyDoc_STR("default(config) -> PvGetShadeLossMpp\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n- None\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
 		{"wrap",             PvGetShadeLossMpp_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> PvGetShadeLossMpp\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
+				PyDoc_STR("wrap(ssc_data_t) -> PvGetShadeLossMpp\n\nLoad data from a PySSC object.\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap()``")},
 		{"from_existing",   PvGetShadeLossMpp_from_existing,        METH_VARARGS,
-				PyDoc_STR("from_existing(data, optional config) -> PvGetShadeLossMpp\n\nShare underlying data with an existing PySAM class. If config provided, default attributes are loaded otherwise.")},
+				PyDoc_STR("from_existing(data, optional config) -> PvGetShadeLossMpp\n\nShare data with an existing PySAM class. If ``optional config`` is a valid configuration name, load the module's defaults for that configuration.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
