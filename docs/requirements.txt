@@ -1,2 +1,3 @@
 NREL-PySAM
 pandas
+sphinx_rtd_theme
