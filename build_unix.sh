@@ -47,7 +47,7 @@ yes | $PYSAMDIR/build_conda.sh || exit
 cd ..
 docker pull quay.io/pypa/manylinux2010_x86_64
 # docker run --rm -dit -v $(pwd):/io quay.io/pypa/manylinux2010_x86_64 /bin/bash
-docker run --rm -v $(pwd):/io quay.io/pypa/manylinux2010_x86_64 /io/pysam/build_manylinux.sh
+docker run --rm -v $(pwd):/io quay.io/pypa/manylinux2010_x86_64 /io/pysam/build_manylinux.sh || exit
 
 rename -s linux manylinux1 $PYSAMDIR/dist/*-linux_*
 

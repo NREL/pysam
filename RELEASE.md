@@ -1,9 +1,11 @@
 # Release Notes
 
+## Version 3.0.2, Sep 27, 2022 - SAM 2021.12.02, Revision 2, SSC Version 274
+* [SAM Release updates for Version 2020.12.02 Revision 2](https://nrel.github.io/SAM/doc/releasenotes.html)
+* Added support for Apple Silicon (#108)
+
 ## Version 3.0.1, Mar 4, 2022 - SAM 2021.12.02, Revision 1, SSC Version 268
-* [SSC Release Notes](https://nrel.github.io/ssc/doc/releasenotes.html) for description of functionality and
- variable changes
-* [SAM Release updates for Version 2020.12.02](https://nrel.github.io/SAM/doc/releasenotes.html)
+* [SAM Release updates for Version 2020.12.02 Revision 1](https://nrel.github.io/SAM/doc/releasenotes.html)
 * Moved all stub files from NREL-PySAM-stubs package into NREL-PySAM (#109)
 
 ## Version 3.0.0, Dec 23, 2021 ~ SAM 2021.12.02, SSC Version 267
