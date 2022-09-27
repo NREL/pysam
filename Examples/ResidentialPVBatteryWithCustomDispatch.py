@@ -8,7 +8,7 @@ Additional financial models, inputs, and outputs can be found at:
 * PV: https://nrel-pysam.readthedocs.io/en/master/modules/Pvsamv1.html
 * Battery: https://nrel-pysam.readthedocs.io/en/master/modules/Battery.html
 
-Most recently tested against PySAM 3.0.1
+Most recently tested against PySAM 3.0.2
 
 @author: brtietz
 """
@@ -29,6 +29,7 @@ battery = battery_model.from_existing(system_model, "GenericBatteryResidential")
 
 # Default model does not include a weather file, so set that based on the command line path
 system_model.SolarResource.solar_resource_file = weather_file
+system_model.SolarResource.use_wf_albedo = 0
 
 # 24 hours of dispatch data, duplicated for each day. Would need to extend daily_dispatch for subhourly
 lifetime_dispatch = []
