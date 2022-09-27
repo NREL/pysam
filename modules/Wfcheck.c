@@ -69,11 +69,11 @@ WeatherFileChecker_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef WeatherFileChecker_methods[] = {
 		{"assign",            (PyCFunction)WeatherFileChecker_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``WeatherFileChecker_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``WeatherFileChecker_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)WeatherFileChecker_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``WeatherFileChecker_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``WeatherFileChecker_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)WeatherFileChecker_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -91,7 +91,7 @@ WeatherFileChecker_set_input_file(VarGroupObject *self, PyObject *value, void *c
 
 static PyGetSetDef WeatherFileChecker_getset[] = {
 {"input_file", (getter)WeatherFileChecker_get_input_file,(setter)WeatherFileChecker_set_input_file,
-	PyDoc_STR("*str*: Input weather file name\n\n*Info*: wfcsv format\n\n*Required*: True"),
+	PyDoc_STR("*str*: Input weather file name\n\n**Info:**\nwfcsv format\n\n**Required:**\nTrue"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -414,12 +414,11 @@ static PyMethodDef WfcheckModule_methods[] = {
 		{"new",             Wfcheck_new,         METH_VARARGS,
 				PyDoc_STR("new() -> Wfcheck")},
 		{"default",             Wfcheck_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Wfcheck\n\nUse default attributes\n"
-				"None")},
+				PyDoc_STR("default(config) -> Wfcheck\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n- None\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
 		{"wrap",             Wfcheck_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> Wfcheck\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
+				PyDoc_STR("wrap(ssc_data_t) -> Wfcheck\n\nLoad data from a PySSC object.\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap()``")},
 		{"from_existing",   Wfcheck_from_existing,        METH_VARARGS,
-				PyDoc_STR("from_existing(data, optional config) -> Wfcheck\n\nShare underlying data with an existing PySAM class. If config provided, default attributes are loaded otherwise.")},
+				PyDoc_STR("from_existing(data, optional config) -> Wfcheck\n\nShare data with an existing PySAM class. If ``optional config`` is a valid configuration name, load the module's defaults for that configuration.")},
 		{NULL,              NULL}           /* sentinel */
 };
 

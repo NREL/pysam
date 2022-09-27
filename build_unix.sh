@@ -7,6 +7,7 @@
 # Building libssc and libSAM_api
 # requires SAM-Dev/CMakeList.txt that contains lk, wex, ssc and sam as subdirectories
 
+rm -rf ~/SAM-Dev/cmake-build-release
 mkdir -p ~/SAM-Dev/cmake-build-release
 cd ~/SAM-Dev/cmake-build-release || exit
 cmake .. -DCMAKE_BUILD_TYPE=Release -DSAMAPI_EXPORT=1 -DSAM_SKIP_AUTOGEN=0
@@ -46,7 +47,7 @@ yes | $PYSAMDIR/build_conda.sh || exit
 cd ..
 docker pull quay.io/pypa/manylinux2010_x86_64
 # docker run --rm -dit -v $(pwd):/io quay.io/pypa/manylinux2010_x86_64 /bin/bash
-docker run --rm -v $(pwd):/io quay.io/pypa/manylinux2010_x86_64 /io/pysam/build_manylinux.sh
+docker run --rm -v $(pwd):/io quay.io/pypa/manylinux2010_x86_64 /io/pysam/build_manylinux.sh || exit
 
 rename -s linux manylinux1 $PYSAMDIR/dist/*-linux_*
 

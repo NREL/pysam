@@ -69,11 +69,11 @@ Common_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Common_methods[] = {
 		{"assign",            (PyCFunction)Common_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Common_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Common_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Common_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Common_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Common_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Common_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -127,16 +127,16 @@ Common_set_fl_props2(VarGroupObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef Common_getset[] = {
 {"HTF_code1", (getter)Common_get_HTF_code1,(setter)Common_set_HTF_code1,
-	PyDoc_STR("*float*: HTF fluid code: Fluid 1 [-]\n\n*Required*: True"),
+	PyDoc_STR("*float*: HTF fluid code: Fluid 1 [-]\n\n**Required:**\nTrue"),
  	NULL},
 {"HTF_code2", (getter)Common_get_HTF_code2,(setter)Common_set_HTF_code2,
-	PyDoc_STR("*float*: HTF fluid code: Fluid 2 [-]\n\n*Required*: True"),
+	PyDoc_STR("*float*: HTF fluid code: Fluid 2 [-]\n\n**Required:**\nTrue"),
  	NULL},
 {"fl_props1", (getter)Common_get_fl_props1,(setter)Common_set_fl_props1,
-	PyDoc_STR("*sequence[sequence]*: User defined field fluid property data, Fluid 1 [-]\n\n*Info*: 7 columns (T,Cp,dens,visc,kvisc,cond,h), at least 3 rows\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: User defined field fluid property data, Fluid 1 [-]\n\n**Info:**\n7 columns (T,Cp,dens,visc,kvisc,cond,h), at least 3 rows\n\n**Required:**\nTrue"),
  	NULL},
 {"fl_props2", (getter)Common_get_fl_props2,(setter)Common_set_fl_props2,
-	PyDoc_STR("*sequence[sequence]*: User defined field fluid property data, Fluid 2 [-]\n\n*Info*: 7 columns (T,Cp,dens,visc,kvisc,cond,h), at least 3 rows\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: User defined field fluid property data, Fluid 2 [-]\n\n**Info:**\n7 columns (T,Cp,dens,visc,kvisc,cond,h), at least 3 rows\n\n**Required:**\nTrue"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -251,11 +251,11 @@ Outputs_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Outputs_methods[] = {
 		{"assign",            (PyCFunction)Outputs_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Outputs_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Outputs_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -594,12 +594,11 @@ static PyMethodDef UserHtfComparisonModule_methods[] = {
 		{"new",             UserHtfComparison_new,         METH_VARARGS,
 				PyDoc_STR("new() -> UserHtfComparison")},
 		{"default",             UserHtfComparison_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> UserHtfComparison\n\nUse default attributes\n"
-				"None")},
+				PyDoc_STR("default(config) -> UserHtfComparison\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n- None\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
 		{"wrap",             UserHtfComparison_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> UserHtfComparison\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
+				PyDoc_STR("wrap(ssc_data_t) -> UserHtfComparison\n\nLoad data from a PySSC object.\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap()``")},
 		{"from_existing",   UserHtfComparison_from_existing,        METH_VARARGS,
-				PyDoc_STR("from_existing(data, optional config) -> UserHtfComparison\n\nShare underlying data with an existing PySAM class. If config provided, default attributes are loaded otherwise.")},
+				PyDoc_STR("from_existing(data, optional config) -> UserHtfComparison\n\nShare data with an existing PySAM class. If ``optional config`` is a valid configuration name, load the module's defaults for that configuration.")},
 		{NULL,              NULL}           /* sentinel */
 };
 

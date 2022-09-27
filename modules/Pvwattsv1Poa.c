@@ -69,11 +69,11 @@ Weather_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Weather_methods[] = {
 		{"assign",            (PyCFunction)Weather_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Weather_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Weather_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Weather_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Weather_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Weather_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Weather_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -163,25 +163,25 @@ Weather_set_wspd(VarGroupObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef Weather_getset[] = {
 {"beam", (getter)Weather_get_beam,(setter)Weather_set_beam,
-	PyDoc_STR("*sequence*: Direct normal radiation [W/m2]\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: Direct normal radiation [W/m2]\n\n**Required:**\nTrue"),
  	NULL},
 {"incidence", (getter)Weather_get_incidence,(setter)Weather_set_incidence,
-	PyDoc_STR("*sequence*: Incidence angle to surface [deg]\n\n*Constraints*: LENGTH_EQUAL=beam\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: Incidence angle to surface [deg]\n\n**Constraints:**\nLENGTH_EQUAL=beam\n\n**Required:**\nTrue"),
  	NULL},
 {"poa_beam", (getter)Weather_get_poa_beam,(setter)Weather_set_poa_beam,
-	PyDoc_STR("*sequence*: Incident direct normal radiation [W/m2]\n\n*Constraints*: LENGTH_EQUAL=beam\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: Incident direct normal radiation [W/m2]\n\n**Constraints:**\nLENGTH_EQUAL=beam\n\n**Required:**\nTrue"),
  	NULL},
 {"poa_gnddiff", (getter)Weather_get_poa_gnddiff,(setter)Weather_set_poa_gnddiff,
-	PyDoc_STR("*sequence*: Incident ground diffuse irradiance [W/m2]\n\n*Constraints*: LENGTH_EQUAL=beam\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: Incident ground diffuse irradiance [W/m2]\n\n**Constraints:**\nLENGTH_EQUAL=beam\n\n**Required:**\nTrue"),
  	NULL},
 {"poa_skydiff", (getter)Weather_get_poa_skydiff,(setter)Weather_set_poa_skydiff,
-	PyDoc_STR("*sequence*: Incident sky diffuse radiation [W/m2]\n\n*Constraints*: LENGTH_EQUAL=beam\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: Incident sky diffuse radiation [W/m2]\n\n**Constraints:**\nLENGTH_EQUAL=beam\n\n**Required:**\nTrue"),
  	NULL},
 {"tdry", (getter)Weather_get_tdry,(setter)Weather_set_tdry,
-	PyDoc_STR("*sequence*: Dry bulb temperature ['C]\n\n*Constraints*: LENGTH_EQUAL=beam\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: Dry bulb temperature ['C]\n\n**Constraints:**\nLENGTH_EQUAL=beam\n\n**Required:**\nTrue"),
  	NULL},
 {"wspd", (getter)Weather_get_wspd,(setter)Weather_set_wspd,
-	PyDoc_STR("*sequence*: Wind speed [m/s]\n\n*Constraints*: LENGTH_EQUAL=beam\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: Wind speed [m/s]\n\n**Constraints:**\nLENGTH_EQUAL=beam\n\n**Required:**\nTrue"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -296,11 +296,11 @@ PVWatts_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef PVWatts_methods[] = {
 		{"assign",            (PyCFunction)PVWatts_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``PVWatts_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``PVWatts_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)PVWatts_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``PVWatts_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``PVWatts_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)PVWatts_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -390,25 +390,25 @@ PVWatts_set_t_ref(VarGroupObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef PVWatts_getset[] = {
 {"derate", (getter)PVWatts_get_derate,(setter)PVWatts_set_derate,
-	PyDoc_STR("*float*: System derate value [frac]\n\n*Constraints*: MIN=0,MAX=1\n\n*Required*: True"),
+	PyDoc_STR("*float*: System derate value [frac]\n\n**Constraints:**\nMIN=0,MAX=1\n\n**Required:**\nTrue"),
  	NULL},
 {"gamma", (getter)PVWatts_get_gamma,(setter)PVWatts_set_gamma,
-	PyDoc_STR("*float*: Max power temperature coefficient [%/'C]\n\n*Required*: If not provided, assumed to be -0.5"),
+	PyDoc_STR("*float*: Max power temperature coefficient [%/'C]\n\n**Required:**\nFalse. Automatically set to -0.5 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"inoct", (getter)PVWatts_get_inoct,(setter)PVWatts_set_inoct,
-	PyDoc_STR("*float*: Nominal operating cell temperature ['C]\n\n*Constraints*: POSITIVE\n\n*Required*: If not provided, assumed to be 45.0"),
+	PyDoc_STR("*float*: Nominal operating cell temperature ['C]\n\n**Constraints:**\nPOSITIVE\n\n**Required:**\nFalse. Automatically set to 45.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"inv_eff", (getter)PVWatts_get_inv_eff,(setter)PVWatts_set_inv_eff,
-	PyDoc_STR("*float*: Inverter efficiency at rated power [frac]\n\n*Constraints*: MIN=0,MAX=1\n\n*Required*: If not provided, assumed to be 0.92"),
+	PyDoc_STR("*float*: Inverter efficiency at rated power [frac]\n\n**Constraints:**\nMIN=0,MAX=1\n\n**Required:**\nFalse. Automatically set to 0.92 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"step", (getter)PVWatts_get_step,(setter)PVWatts_set_step,
-	PyDoc_STR("*float*: Time step of input data [sec]\n\n*Constraints*: POSITIVE\n\n*Required*: If not provided, assumed to be 3600"),
+	PyDoc_STR("*float*: Time step of input data [sec]\n\n**Constraints:**\nPOSITIVE\n\n**Required:**\nFalse. Automatically set to 3600 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"system_size", (getter)PVWatts_get_system_size,(setter)PVWatts_set_system_size,
-	PyDoc_STR("*float*: Nameplate capacity [kW]\n\n*Constraints*: MIN=0.5,MAX=100000\n\n*Required*: True"),
+	PyDoc_STR("*float*: Nameplate capacity [kW]\n\n**Constraints:**\nMIN=0.5,MAX=100000\n\n**Required:**\nTrue"),
  	NULL},
 {"t_ref", (getter)PVWatts_get_t_ref,(setter)PVWatts_set_t_ref,
-	PyDoc_STR("*float*: Reference cell temperature ['C]\n\n*Constraints*: POSITIVE\n\n*Required*: If not provided, assumed to be 25.0"),
+	PyDoc_STR("*float*: Reference cell temperature ['C]\n\n**Constraints:**\nPOSITIVE\n\n**Required:**\nFalse. Automatically set to 25.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -523,11 +523,11 @@ Outputs_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Outputs_methods[] = {
 		{"assign",            (PyCFunction)Outputs_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Outputs_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Outputs_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -888,12 +888,11 @@ static PyMethodDef Pvwattsv1PoaModule_methods[] = {
 		{"new",             Pvwattsv1Poa_new,         METH_VARARGS,
 				PyDoc_STR("new() -> Pvwattsv1Poa")},
 		{"default",             Pvwattsv1Poa_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Pvwattsv1Poa\n\nUse default attributes\n"
-				"None")},
+				PyDoc_STR("default(config) -> Pvwattsv1Poa\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n- None\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
 		{"wrap",             Pvwattsv1Poa_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> Pvwattsv1Poa\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
+				PyDoc_STR("wrap(ssc_data_t) -> Pvwattsv1Poa\n\nLoad data from a PySSC object.\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap()``")},
 		{"from_existing",   Pvwattsv1Poa_from_existing,        METH_VARARGS,
-				PyDoc_STR("from_existing(data, optional config) -> Pvwattsv1Poa\n\nShare underlying data with an existing PySAM class. If config provided, default attributes are loaded otherwise.")},
+				PyDoc_STR("from_existing(data, optional config) -> Pvwattsv1Poa\n\nShare data with an existing PySAM class. If ``optional config`` is a valid configuration name, load the module's defaults for that configuration.")},
 		{NULL,              NULL}           /* sentinel */
 };
 

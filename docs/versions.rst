@@ -11,5 +11,6 @@ This helps track which variables and defaults have changed between releases to m
 .. toctree::
     :maxdepth: 2
 
+    version_changes/3.0.2.rst
     version_changes/3.0.1.rst
     version_changes/3.0.0.rst

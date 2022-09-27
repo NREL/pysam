@@ -3,6 +3,7 @@ from setuptools import setup, Extension
 import sys
 from distutils.core import Command
 from files.version import __version__
+from pathlib import Path
 
 ###################################################################################################
 #
@@ -177,6 +178,9 @@ class PostProcess(Command):
 #
 ###################################################################################################
 
+def read_lines(filename):
+    with open(filename) as f_in:
+        return f_in.readlines()
 
 setup(
     name='NREL-PySAM',
@@ -195,6 +199,7 @@ setup(
         '': libfiles},
     setup_requires=["pytest-runner"],
     tests_require=["pytest"],
+    install_requires=read_lines(Path(__file__).parent / "requirements.txt"),
     cmdclass={
         'post': PostProcess
     },

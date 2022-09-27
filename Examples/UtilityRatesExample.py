@@ -47,9 +47,13 @@ def get_urdb_rate_data(page, key):
 if __name__ == "__main__":
     path = os.getcwd() + os.path.sep
     page = "618940545457a35a1c4097ec"  # https://apps.openei.org/USURDB/rate/view/618940545457a35a1c4097ec (DG-R Primary (Above 500kW))
+    if "YOUR_API_KEY" in key:
+        raise Exception("Please replace the `key` with your URDB API key.")
     urdb_response = get_urdb_rate_data(page, key)
-    urdb_response_json = json.loads(urdb_response)["items"][0]
-    rates = PySAM.ResourceTools.URDBv7_to_ElectricityRates(urdb_response_json) # To see status of version discrepancy, see https://github.com/NREL/pysam/issues/116. There's no difference between V7 and V8 for 99.9% of rates
+    urdb_response_json = json.loads(urdb_response)
+    if 'error' in urdb_response_json.keys():
+        raise Exception(urdb_response_json['error'])
+    rates = PySAM.ResourceTools.URDBv7_to_ElectricityRates(urdb_response_json["items"][0]) # To see status of version discrepancy, see https://github.com/NREL/pysam/issues/116. There's no difference between V7 and V8 for 99.9% of rates
 
     ur = utility_rate.new()
     for k, v in rates.items():

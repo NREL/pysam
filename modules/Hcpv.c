@@ -69,11 +69,11 @@ SolarResourceData_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef SolarResourceData_methods[] = {
 		{"assign",            (PyCFunction)SolarResourceData_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``SolarResourceData_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``SolarResourceData_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)SolarResourceData_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``SolarResourceData_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``SolarResourceData_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)SolarResourceData_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -91,7 +91,7 @@ SolarResourceData_set_file_name(VarGroupObject *self, PyObject *value, void *clo
 
 static PyGetSetDef SolarResourceData_getset[] = {
 {"file_name", (getter)SolarResourceData_get_file_name,(setter)SolarResourceData_set_file_name,
-	PyDoc_STR("*str*: Weather file in TMY2, TMY3, EPW, or SMW.\n\n*Constraints*: LOCAL_FILE\n\n*Required*: True"),
+	PyDoc_STR("*str*: Weather file in TMY2, TMY3, EPW, or SMW.\n\n**Constraints:**\nLOCAL_FILE\n\n**Required:**\nTrue"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -206,11 +206,11 @@ PVWatts_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef PVWatts_methods[] = {
 		{"assign",            (PyCFunction)PVWatts_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``PVWatts_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``PVWatts_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)PVWatts_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``PVWatts_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``PVWatts_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)PVWatts_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -228,7 +228,7 @@ PVWatts_set_system_capacity(VarGroupObject *self, PyObject *value, void *closure
 
 static PyGetSetDef PVWatts_getset[] = {
 {"system_capacity", (getter)PVWatts_get_system_capacity,(setter)PVWatts_set_system_capacity,
-	PyDoc_STR("*float*: Nameplate capacity [kW]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - array_modules_per_tracker\n\t - array_num_trackers\n\t - module_a0\n\t - module_a1\n\t - module_a2\n\t - module_a3\n\t - module_a4\n\t - module_alignment_error\n\t - module_cell_area\n\t - module_concentration\n\t - module_flutter_loss_coeff\n\t - module_ncells\n\t - module_optical_error\n\t - module_reference\n"),
+	PyDoc_STR("*float*: Nameplate capacity [kW]\n\n**Required:**\nTrue\n\nThe value of ``system_capacity`` depends on the following variables:\n\n\t - array_modules_per_tracker\n\t - array_num_trackers\n\t - module_a0\n\t - module_a1\n\t - module_a2\n\t - module_a3\n\t - module_a4\n\t - module_alignment_error\n\t - module_cell_area\n\t - module_concentration\n\t - module_flutter_loss_coeff\n\t - module_ncells\n\t - module_optical_error\n\t - module_reference\n"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -343,11 +343,11 @@ HCPVModule_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef HCPVModule_methods[] = {
 		{"assign",            (PyCFunction)HCPVModule_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``HCPVModule_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``HCPVModule_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)HCPVModule_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``HCPVModule_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``HCPVModule_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)HCPVModule_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -569,58 +569,58 @@ HCPVModule_set_module_temp_coeff(VarGroupObject *self, PyObject *value, void *cl
 
 static PyGetSetDef HCPVModule_getset[] = {
 {"module_a", (getter)HCPVModule_get_module_a,(setter)HCPVModule_set_module_a,
-	PyDoc_STR("*float*: Equation variable (a), at high irradiance & low wind speed [none]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Equation variable (a), at high irradiance & low wind speed [none]\n\n**Required:**\nTrue"),
  	NULL},
 {"module_a0", (getter)HCPVModule_get_module_a0,(setter)HCPVModule_set_module_a0,
-	PyDoc_STR("*float*: Air mass modifier coefficient 0 [none]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - array_num_inverters\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Air mass modifier coefficient 0 [none]\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``module_a0``:\n\n\t - array_num_inverters\n\t - system_capacity\n"),
  	NULL},
 {"module_a1", (getter)HCPVModule_get_module_a1,(setter)HCPVModule_set_module_a1,
-	PyDoc_STR("*float*: Air mass modifier coefficient 1 [none]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - array_num_inverters\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Air mass modifier coefficient 1 [none]\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``module_a1``:\n\n\t - array_num_inverters\n\t - system_capacity\n"),
  	NULL},
 {"module_a2", (getter)HCPVModule_get_module_a2,(setter)HCPVModule_set_module_a2,
-	PyDoc_STR("*float*: Air mass modifier coefficient 2 [none]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - array_num_inverters\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Air mass modifier coefficient 2 [none]\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``module_a2``:\n\n\t - array_num_inverters\n\t - system_capacity\n"),
  	NULL},
 {"module_a3", (getter)HCPVModule_get_module_a3,(setter)HCPVModule_set_module_a3,
-	PyDoc_STR("*float*: Air mass modifier coefficient 3 [none]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - array_num_inverters\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Air mass modifier coefficient 3 [none]\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``module_a3``:\n\n\t - array_num_inverters\n\t - system_capacity\n"),
  	NULL},
 {"module_a4", (getter)HCPVModule_get_module_a4,(setter)HCPVModule_set_module_a4,
-	PyDoc_STR("*float*: Air mass modifier coefficient 4 [none]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - array_num_inverters\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Air mass modifier coefficient 4 [none]\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``module_a4``:\n\n\t - array_num_inverters\n\t - system_capacity\n"),
  	NULL},
 {"module_alignment_error", (getter)HCPVModule_get_module_alignment_error,(setter)HCPVModule_set_module_alignment_error,
-	PyDoc_STR("*float*: Alignment loss factor [0..1]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - array_num_inverters\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Alignment loss factor [0..1]\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``module_alignment_error``:\n\n\t - array_num_inverters\n\t - system_capacity\n"),
  	NULL},
 {"module_b", (getter)HCPVModule_get_module_b,(setter)HCPVModule_set_module_b,
-	PyDoc_STR("*float*: Equation variable (b), rate at which module temp drops [none]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Equation variable (b), rate at which module temp drops [none]\n\n**Required:**\nTrue"),
  	NULL},
 {"module_cell_area", (getter)HCPVModule_get_module_cell_area,(setter)HCPVModule_set_module_cell_area,
-	PyDoc_STR("*float*: Single cell area [cm^2]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - array_num_inverters\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Single cell area [cm^2]\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``module_cell_area``:\n\n\t - array_num_inverters\n\t - system_capacity\n"),
  	NULL},
 {"module_concentration", (getter)HCPVModule_get_module_concentration,(setter)HCPVModule_set_module_concentration,
-	PyDoc_STR("*float*: Concentration ratio [none]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - array_num_inverters\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Concentration ratio [none]\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``module_concentration``:\n\n\t - array_num_inverters\n\t - system_capacity\n"),
  	NULL},
 {"module_dT", (getter)HCPVModule_get_module_dT,(setter)HCPVModule_set_module_dT,
-	PyDoc_STR("*float*: Equation variable (dT), temp diff between heat sink & cell [C]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Equation variable (dT), temp diff between heat sink & cell [C]\n\n**Required:**\nTrue"),
  	NULL},
 {"module_flutter_loss_coeff", (getter)HCPVModule_get_module_flutter_loss_coeff,(setter)HCPVModule_set_module_flutter_loss_coeff,
-	PyDoc_STR("*float*: Wind flutter loss factor [0..1 per m/s]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - array_num_inverters\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Wind flutter loss factor [0..1 per m/s]\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``module_flutter_loss_coeff``:\n\n\t - array_num_inverters\n\t - system_capacity\n"),
  	NULL},
 {"module_mjeff", (getter)HCPVModule_get_module_mjeff,(setter)HCPVModule_set_module_mjeff,
-	PyDoc_STR("*sequence*: Module junction efficiency array [percent]\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: Module junction efficiency array [percent]\n\n**Required:**\nTrue"),
  	NULL},
 {"module_ncells", (getter)HCPVModule_get_module_ncells,(setter)HCPVModule_set_module_ncells,
-	PyDoc_STR("*float*: Number of cells [none]\n\n*Constraints*: INTEGER\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - array_num_inverters\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Number of cells [none]\n\n**Constraints:**\nINTEGER\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``module_ncells``:\n\n\t - array_num_inverters\n\t - system_capacity\n"),
  	NULL},
 {"module_optical_error", (getter)HCPVModule_get_module_optical_error,(setter)HCPVModule_set_module_optical_error,
-	PyDoc_STR("*float*: Optical error factor [0..1]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - array_num_inverters\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Optical error factor [0..1]\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``module_optical_error``:\n\n\t - array_num_inverters\n\t - system_capacity\n"),
  	NULL},
 {"module_rad", (getter)HCPVModule_get_module_rad,(setter)HCPVModule_set_module_rad,
-	PyDoc_STR("*sequence*: POA irradiance array [W/m^2]\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: POA irradiance array [W/m^2]\n\n**Required:**\nTrue"),
  	NULL},
 {"module_reference", (getter)HCPVModule_get_module_reference,(setter)HCPVModule_set_module_reference,
-	PyDoc_STR("*float*: Index in arrays of the reference condition [none]\n\n*Constraints*: INTEGER\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - array_num_inverters\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Index in arrays of the reference condition [none]\n\n**Constraints:**\nINTEGER\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``module_reference``:\n\n\t - array_num_inverters\n\t - system_capacity\n"),
  	NULL},
 {"module_temp_coeff", (getter)HCPVModule_get_module_temp_coeff,(setter)HCPVModule_set_module_temp_coeff,
-	PyDoc_STR("*float*: Temperature coefficient [%/C]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Temperature coefficient [%/C]\n\n**Required:**\nTrue"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -735,11 +735,11 @@ InverterCECDatabase_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef InverterCECDatabase_methods[] = {
 		{"assign",            (PyCFunction)InverterCECDatabase_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``InverterCECDatabase_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``InverterCECDatabase_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)InverterCECDatabase_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``InverterCECDatabase_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``InverterCECDatabase_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)InverterCECDatabase_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -865,34 +865,34 @@ InverterCECDatabase_set_inv_snl_vdco(VarGroupObject *self, PyObject *value, void
 
 static PyGetSetDef InverterCECDatabase_getset[] = {
 {"inv_snl_c0", (getter)InverterCECDatabase_get_inv_snl_c0,(setter)InverterCECDatabase_set_inv_snl_c0,
-	PyDoc_STR("*float*: Parameter defining the curvature (parabolic) of the relationship between ac-power and dc-power at the reference operating condition, default value of zero gives a linear relationship, (1/W) [xxx]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Parameter defining the curvature (parabolic) of the relationship between ac-power and dc-power at the reference operating condition, default value of zero gives a linear relationship, (1/W) [xxx]\n\n**Required:**\nTrue"),
  	NULL},
 {"inv_snl_c1", (getter)InverterCECDatabase_get_inv_snl_c1,(setter)InverterCECDatabase_set_inv_snl_c1,
-	PyDoc_STR("*float*: Empirical coefficient allowing Pdco to vary linearly with dc-voltage input, default value is zero, (1/V) [xxx]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Empirical coefficient allowing Pdco to vary linearly with dc-voltage input, default value is zero, (1/V) [xxx]\n\n**Required:**\nTrue"),
  	NULL},
 {"inv_snl_c2", (getter)InverterCECDatabase_get_inv_snl_c2,(setter)InverterCECDatabase_set_inv_snl_c2,
-	PyDoc_STR("*float*: Empirical coefficient allowing Pso to vary linearly with dc-voltage input, default value is zero, (1/V) [xxx]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Empirical coefficient allowing Pso to vary linearly with dc-voltage input, default value is zero, (1/V) [xxx]\n\n**Required:**\nTrue"),
  	NULL},
 {"inv_snl_c3", (getter)InverterCECDatabase_get_inv_snl_c3,(setter)InverterCECDatabase_set_inv_snl_c3,
-	PyDoc_STR("*float*: Empirical coefficient allowing Co to vary linearly with dc-voltage input, default value is zero, (1/V) [xxx]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Empirical coefficient allowing Co to vary linearly with dc-voltage input, default value is zero, (1/V) [xxx]\n\n**Required:**\nTrue"),
  	NULL},
 {"inv_snl_paco", (getter)InverterCECDatabase_get_inv_snl_paco,(setter)InverterCECDatabase_set_inv_snl_paco,
-	PyDoc_STR("*float*: W maximum ac-power rating for inverter at reference or nominal operating condition, assumed to be an upper limit value, (W) [xxx]\n\n*Required*: True"),
+	PyDoc_STR("*float*: W maximum ac-power rating for inverter at reference or nominal operating condition, assumed to be an upper limit value, (W) [xxx]\n\n**Required:**\nTrue"),
  	NULL},
 {"inv_snl_pdco", (getter)InverterCECDatabase_get_inv_snl_pdco,(setter)InverterCECDatabase_set_inv_snl_pdco,
-	PyDoc_STR("*float*: W dc-power level at which the ac-power rating is achieved at the reference operating condition, (W) [xxx]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - array_num_inverters\n"),
+	PyDoc_STR("*float*: W dc-power level at which the ac-power rating is achieved at the reference operating condition, (W) [xxx]\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``inv_snl_pdco``:\n\n\t - array_num_inverters\n"),
  	NULL},
 {"inv_snl_pnt", (getter)InverterCECDatabase_get_inv_snl_pnt,(setter)InverterCECDatabase_set_inv_snl_pnt,
-	PyDoc_STR("*float*: W ac-power consumed by inverter at night (night tare) to maintain circuitry required to sense PV array voltage, (W) [xxx]\n\n*Required*: True"),
+	PyDoc_STR("*float*: W ac-power consumed by inverter at night (night tare) to maintain circuitry required to sense PV array voltage, (W) [xxx]\n\n**Required:**\nTrue"),
  	NULL},
 {"inv_snl_pso", (getter)InverterCECDatabase_get_inv_snl_pso,(setter)InverterCECDatabase_set_inv_snl_pso,
-	PyDoc_STR("*float*: W dc-power required to start the inversion process, or self-consumption by inverter, strongly influences inverter efficiency at low power levels, (W) [xxx]\n\n*Required*: True"),
+	PyDoc_STR("*float*: W dc-power required to start the inversion process, or self-consumption by inverter, strongly influences inverter efficiency at low power levels, (W) [xxx]\n\n**Required:**\nTrue"),
  	NULL},
 {"inv_snl_vdcmax", (getter)InverterCECDatabase_get_inv_snl_vdcmax,(setter)InverterCECDatabase_set_inv_snl_vdcmax,
-	PyDoc_STR("*float*: V (Vdcmax) dc-voltage maximum operating voltage, (V) [xxx]\n\n*Required*: True"),
+	PyDoc_STR("*float*: V (Vdcmax) dc-voltage maximum operating voltage, (V) [xxx]\n\n**Required:**\nTrue"),
  	NULL},
 {"inv_snl_vdco", (getter)InverterCECDatabase_get_inv_snl_vdco,(setter)InverterCECDatabase_set_inv_snl_vdco,
-	PyDoc_STR("*float*: V (Vnom) dc-voltage level at which the ac-power rating is achieved at the reference operating condition, (V) [xxx]\n\n*Required*: True"),
+	PyDoc_STR("*float*: V (Vnom) dc-voltage level at which the ac-power rating is achieved at the reference operating condition, (V) [xxx]\n\n**Required:**\nTrue"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1007,11 +1007,11 @@ HCPVArray_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef HCPVArray_methods[] = {
 		{"assign",            (PyCFunction)HCPVArray_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``HCPVArray_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``HCPVArray_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)HCPVArray_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``HCPVArray_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``HCPVArray_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)HCPVArray_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -1221,55 +1221,55 @@ HCPVArray_set_azaltsf(VarGroupObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef HCPVArray_getset[] = {
 {"array_ac_wiring_loss", (getter)HCPVArray_get_array_ac_wiring_loss,(setter)HCPVArray_set_array_ac_wiring_loss,
-	PyDoc_STR("*float*: AC wiring loss factor [0..1]\n\n*Required*: True"),
+	PyDoc_STR("*float*: AC wiring loss factor [0..1]\n\n**Required:**\nTrue"),
  	NULL},
 {"array_dc_mismatch_loss", (getter)HCPVArray_get_array_dc_mismatch_loss,(setter)HCPVArray_set_array_dc_mismatch_loss,
-	PyDoc_STR("*float*: DC module mismatch loss factor [0..1]\n\n*Required*: True"),
+	PyDoc_STR("*float*: DC module mismatch loss factor [0..1]\n\n**Required:**\nTrue"),
  	NULL},
 {"array_dc_wiring_loss", (getter)HCPVArray_get_array_dc_wiring_loss,(setter)HCPVArray_set_array_dc_wiring_loss,
-	PyDoc_STR("*float*: DC Wiring loss factor [0..1]\n\n*Required*: True"),
+	PyDoc_STR("*float*: DC Wiring loss factor [0..1]\n\n**Required:**\nTrue"),
  	NULL},
 {"array_diode_conn_loss", (getter)HCPVArray_get_array_diode_conn_loss,(setter)HCPVArray_set_array_diode_conn_loss,
-	PyDoc_STR("*float*: Diodes and connections loss factor [0..1]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Diodes and connections loss factor [0..1]\n\n**Required:**\nTrue"),
  	NULL},
 {"array_enable_azalt_sf", (getter)HCPVArray_get_array_enable_azalt_sf,(setter)HCPVArray_set_array_enable_azalt_sf,
-	PyDoc_STR("*float*: Boolean for irradiance derate [0-1]\n\n*Constraints*: INTEGER\n\n*Required*: True"),
+	PyDoc_STR("*float*: Boolean for irradiance derate [0-1]\n\n**Constraints:**\nINTEGER\n\n**Required:**\nTrue"),
  	NULL},
 {"array_modules_per_tracker", (getter)HCPVArray_get_array_modules_per_tracker,(setter)HCPVArray_set_array_modules_per_tracker,
-	PyDoc_STR("*float*: Modules on each tracker [none]\n\n*Constraints*: INTEGER\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - array_num_inverters\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Modules on each tracker [none]\n\n**Constraints:**\nINTEGER\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``array_modules_per_tracker``:\n\n\t - array_num_inverters\n\t - system_capacity\n"),
  	NULL},
 {"array_monthly_soiling", (getter)HCPVArray_get_array_monthly_soiling,(setter)HCPVArray_set_array_monthly_soiling,
-	PyDoc_STR("*sequence*: Monthly soiling factors array [0..1]\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: Monthly soiling factors array [0..1]\n\n**Required:**\nTrue"),
  	NULL},
 {"array_num_inverters", (getter)HCPVArray_get_array_num_inverters,(setter)HCPVArray_set_array_num_inverters,
-	PyDoc_STR("*float*: Number of inverters [none]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - array_modules_per_tracker\n\t - array_num_trackers\n\t - inv_snl_pdco\n\t - module_a0\n\t - module_a1\n\t - module_a2\n\t - module_a3\n\t - module_a4\n\t - module_alignment_error\n\t - module_cell_area\n\t - module_concentration\n\t - module_flutter_loss_coeff\n\t - module_ncells\n\t - module_optical_error\n\t - module_reference\n"),
+	PyDoc_STR("*float*: Number of inverters [none]\n\n**Required:**\nTrue\n\nThe value of ``array_num_inverters`` depends on the following variables:\n\n\t - array_modules_per_tracker\n\t - array_num_trackers\n\t - inv_snl_pdco\n\t - module_a0\n\t - module_a1\n\t - module_a2\n\t - module_a3\n\t - module_a4\n\t - module_alignment_error\n\t - module_cell_area\n\t - module_concentration\n\t - module_flutter_loss_coeff\n\t - module_ncells\n\t - module_optical_error\n\t - module_reference\n"),
  	NULL},
 {"array_num_trackers", (getter)HCPVArray_get_array_num_trackers,(setter)HCPVArray_set_array_num_trackers,
-	PyDoc_STR("*float*: Number of trackers [none]\n\n*Constraints*: INTEGER\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - array_num_inverters\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Number of trackers [none]\n\n**Constraints:**\nINTEGER\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``array_num_trackers``:\n\n\t - array_num_inverters\n\t - system_capacity\n"),
  	NULL},
 {"array_rlim_az_max", (getter)HCPVArray_get_array_rlim_az_max,(setter)HCPVArray_set_array_rlim_az_max,
-	PyDoc_STR("*float*: Tracker maximum azimuth angle [deg]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Tracker maximum azimuth angle [deg]\n\n**Required:**\nTrue"),
  	NULL},
 {"array_rlim_az_min", (getter)HCPVArray_get_array_rlim_az_min,(setter)HCPVArray_set_array_rlim_az_min,
-	PyDoc_STR("*float*: Tracker minimum azimuth angle [deg]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Tracker minimum azimuth angle [deg]\n\n**Required:**\nTrue"),
  	NULL},
 {"array_rlim_el_max", (getter)HCPVArray_get_array_rlim_el_max,(setter)HCPVArray_set_array_rlim_el_max,
-	PyDoc_STR("*float*: Tracker maximum elevation angle [deg]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Tracker maximum elevation angle [deg]\n\n**Required:**\nTrue"),
  	NULL},
 {"array_rlim_el_min", (getter)HCPVArray_get_array_rlim_el_min,(setter)HCPVArray_set_array_rlim_el_min,
-	PyDoc_STR("*float*: Tracker minimum elevation angle [deg]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Tracker minimum elevation angle [deg]\n\n**Required:**\nTrue"),
  	NULL},
 {"array_tracker_power_fraction", (getter)HCPVArray_get_array_tracker_power_fraction,(setter)HCPVArray_set_array_tracker_power_fraction,
-	PyDoc_STR("*float*: Single tracker power fraction [0..1]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Single tracker power fraction [0..1]\n\n**Required:**\nTrue"),
  	NULL},
 {"array_tracking_error", (getter)HCPVArray_get_array_tracking_error,(setter)HCPVArray_set_array_tracking_error,
-	PyDoc_STR("*float*: General racking error [0..1]\n\n*Required*: True"),
+	PyDoc_STR("*float*: General racking error [0..1]\n\n**Required:**\nTrue"),
  	NULL},
 {"array_wind_stow_speed", (getter)HCPVArray_get_array_wind_stow_speed,(setter)HCPVArray_set_array_wind_stow_speed,
-	PyDoc_STR("*float*: Allowed wind speed before stowing [m/s]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Allowed wind speed before stowing [m/s]\n\n**Required:**\nTrue"),
  	NULL},
 {"azaltsf", (getter)HCPVArray_get_azaltsf,(setter)HCPVArray_set_azaltsf,
-	PyDoc_STR("*sequence[sequence]*: Azimuth-Altitude Shading Table\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: Azimuth-Altitude Shading Table\n\n**Required:**\nTrue"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1384,11 +1384,11 @@ Outputs_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Outputs_methods[] = {
 		{"assign",            (PyCFunction)Outputs_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Outputs_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Outputs_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -2091,12 +2091,11 @@ static PyMethodDef HcpvModule_methods[] = {
 		{"new",             Hcpv_new,         METH_VARARGS,
 				PyDoc_STR("new() -> Hcpv")},
 		{"default",             Hcpv_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Hcpv\n\nUse default attributes\n"
-				"`config` options:\n\n- \"HighXConcentratingPVAllEquityPartnershipFlip\"\n- \"HighXConcentratingPVLCOECalculator\"\n- \"HighXConcentratingPVLeveragedPartnershipFlip\"\n- \"HighXConcentratingPVMerchantPlant\"\n- \"HighXConcentratingPVNone\"\n- \"HighXConcentratingPVSaleLeaseback\"\n- \"HighXConcentratingPVSingleOwner\"")},
+				PyDoc_STR("default(config) -> Hcpv\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n		- *\"HighXConcentratingPVAllEquityPartnershipFlip\"*\n\n		- *\"HighXConcentratingPVLCOECalculator\"*\n\n		- *\"HighXConcentratingPVLeveragedPartnershipFlip\"*\n\n		- *\"HighXConcentratingPVMerchantPlant\"*\n\n		- *\"HighXConcentratingPVNone\"*\n\n		- *\"HighXConcentratingPVSaleLeaseback\"*\n\n		- *\"HighXConcentratingPVSingleOwner\"*\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
 		{"wrap",             Hcpv_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> Hcpv\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
+				PyDoc_STR("wrap(ssc_data_t) -> Hcpv\n\nLoad data from a PySSC object.\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap()``")},
 		{"from_existing",   Hcpv_from_existing,        METH_VARARGS,
-				PyDoc_STR("from_existing(data, optional config) -> Hcpv\n\nShare underlying data with an existing PySAM class. If config provided, default attributes are loaded otherwise.")},
+				PyDoc_STR("from_existing(data, optional config) -> Hcpv\n\nShare data with an existing PySAM class. If ``optional config`` is a valid configuration name, load the module's defaults for that configuration.")},
 		{NULL,              NULL}           /* sentinel */
 };
 

@@ -69,11 +69,11 @@ Hce_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Hce_methods[] = {
 		{"assign",            (PyCFunction)Hce_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Hce_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Hce_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Hce_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Hce_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Hce_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Hce_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -259,49 +259,49 @@ Hce_set_ui_reference_wind_speed(VarGroupObject *self, PyObject *value, void *clo
 
 static PyGetSetDef Hce_getset[] = {
 {"HCEFrac", (getter)Hce_get_HCEFrac,(setter)Hce_set_HCEFrac,
-	PyDoc_STR("*sequence*: Fraction of field that is this type of HCE\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: Fraction of field that is this type of HCE\n\n**Required:**\nTrue"),
  	NULL},
 {"HCE_A0", (getter)Hce_get_HCE_A0,(setter)Hce_set_HCE_A0,
-	PyDoc_STR("*sequence*: label\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: label\n\n**Required:**\nTrue"),
  	NULL},
 {"HCE_A1", (getter)Hce_get_HCE_A1,(setter)Hce_set_HCE_A1,
-	PyDoc_STR("*sequence*: label\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: label\n\n**Required:**\nTrue"),
  	NULL},
 {"HCE_A2", (getter)Hce_get_HCE_A2,(setter)Hce_set_HCE_A2,
-	PyDoc_STR("*sequence*: label\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: label\n\n**Required:**\nTrue"),
  	NULL},
 {"HCE_A3", (getter)Hce_get_HCE_A3,(setter)Hce_set_HCE_A3,
-	PyDoc_STR("*sequence*: label\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: label\n\n**Required:**\nTrue"),
  	NULL},
 {"HCE_A4", (getter)Hce_get_HCE_A4,(setter)Hce_set_HCE_A4,
-	PyDoc_STR("*sequence*: label\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: label\n\n**Required:**\nTrue"),
  	NULL},
 {"HCE_A5", (getter)Hce_get_HCE_A5,(setter)Hce_set_HCE_A5,
-	PyDoc_STR("*sequence*: label\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: label\n\n**Required:**\nTrue"),
  	NULL},
 {"HCE_A6", (getter)Hce_get_HCE_A6,(setter)Hce_set_HCE_A6,
-	PyDoc_STR("*sequence*: label\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: label\n\n**Required:**\nTrue"),
  	NULL},
 {"PerfFac", (getter)Hce_get_PerfFac,(setter)Hce_set_PerfFac,
-	PyDoc_STR("*sequence*: label\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: label\n\n**Required:**\nTrue"),
  	NULL},
 {"RefMirrAper", (getter)Hce_get_RefMirrAper,(setter)Hce_set_RefMirrAper,
-	PyDoc_STR("*sequence*: label\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: label\n\n**Required:**\nTrue"),
  	NULL},
 {"SfInTempD", (getter)Hce_get_SfInTempD,(setter)Hce_set_SfInTempD,
-	PyDoc_STR("*float*: Solar Field Inlet Temp at design [C]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Solar Field Inlet Temp at design [C]\n\n**Required:**\nTrue"),
  	NULL},
 {"SfOutTempD", (getter)Hce_get_SfOutTempD,(setter)Hce_set_SfOutTempD,
-	PyDoc_STR("*float*: Solar Field Outlet Temp at design [C]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Solar Field Outlet Temp at design [C]\n\n**Required:**\nTrue"),
  	NULL},
 {"ui_reference_ambient_temperature", (getter)Hce_get_ui_reference_ambient_temperature,(setter)Hce_set_ui_reference_ambient_temperature,
-	PyDoc_STR("*float*: Ambient temp at design heat loss [C]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Ambient temp at design heat loss [C]\n\n**Required:**\nTrue"),
  	NULL},
 {"ui_reference_direct_normal_irradiance", (getter)Hce_get_ui_reference_direct_normal_irradiance,(setter)Hce_set_ui_reference_direct_normal_irradiance,
-	PyDoc_STR("*float*: DNI at design [W/m2]\n\n*Required*: True"),
+	PyDoc_STR("*float*: DNI at design [W/m2]\n\n**Required:**\nTrue"),
  	NULL},
 {"ui_reference_wind_speed", (getter)Hce_get_ui_reference_wind_speed,(setter)Hce_set_ui_reference_wind_speed,
-	PyDoc_STR("*float*: Wind speed for design heat loss [m/s]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Wind speed for design heat loss [m/s]\n\n**Required:**\nTrue"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -416,11 +416,11 @@ Outputs_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Outputs_methods[] = {
 		{"assign",            (PyCFunction)Outputs_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Outputs_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Outputs_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -777,12 +777,11 @@ static PyMethodDef CbEmpiricalHceHeatLossModule_methods[] = {
 		{"new",             CbEmpiricalHceHeatLoss_new,         METH_VARARGS,
 				PyDoc_STR("new() -> CbEmpiricalHceHeatLoss")},
 		{"default",             CbEmpiricalHceHeatLoss_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> CbEmpiricalHceHeatLoss\n\nUse default attributes\n"
-				"None")},
+				PyDoc_STR("default(config) -> CbEmpiricalHceHeatLoss\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n- None\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
 		{"wrap",             CbEmpiricalHceHeatLoss_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> CbEmpiricalHceHeatLoss\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
+				PyDoc_STR("wrap(ssc_data_t) -> CbEmpiricalHceHeatLoss\n\nLoad data from a PySSC object.\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap()``")},
 		{"from_existing",   CbEmpiricalHceHeatLoss_from_existing,        METH_VARARGS,
-				PyDoc_STR("from_existing(data, optional config) -> CbEmpiricalHceHeatLoss\n\nShare underlying data with an existing PySAM class. If config provided, default attributes are loaded otherwise.")},
+				PyDoc_STR("from_existing(data, optional config) -> CbEmpiricalHceHeatLoss\n\nShare data with an existing PySAM class. If ``optional config`` is a valid configuration name, load the module's defaults for that configuration.")},
 		{NULL,              NULL}           /* sentinel */
 };
 

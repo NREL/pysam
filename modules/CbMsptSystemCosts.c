@@ -69,11 +69,11 @@ Heliostat_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Heliostat_methods[] = {
 		{"assign",            (PyCFunction)Heliostat_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Heliostat_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Heliostat_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Heliostat_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Heliostat_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Heliostat_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Heliostat_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -91,7 +91,7 @@ Heliostat_set_A_sf(VarGroupObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef Heliostat_getset[] = {
 {"A_sf", (getter)Heliostat_get_A_sf,(setter)Heliostat_set_A_sf,
-	PyDoc_STR("*float*: Total reflective solar field area [m2]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Total reflective solar field area [m2]\n\n**Required:**\nTrue"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -206,11 +206,11 @@ SystemCosts_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef SystemCosts_methods[] = {
 		{"assign",            (PyCFunction)SystemCosts_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``SystemCosts_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``SystemCosts_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)SystemCosts_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``SystemCosts_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``SystemCosts_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)SystemCosts_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -504,76 +504,76 @@ SystemCosts_set_tower_fixed_cost(VarGroupObject *self, PyObject *value, void *cl
 
 static PyGetSetDef SystemCosts_getset[] = {
 {"bop_spec_cost", (getter)SystemCosts_get_bop_spec_cost,(setter)SystemCosts_set_bop_spec_cost,
-	PyDoc_STR("*float*: BOP specific cost [$/kWe]\n\n*Required*: True"),
+	PyDoc_STR("*float*: BOP specific cost [$/kWe]\n\n**Required:**\nTrue"),
  	NULL},
 {"contingency_rate", (getter)SystemCosts_get_contingency_rate,(setter)SystemCosts_set_contingency_rate,
-	PyDoc_STR("*float*: Contingency for cost overrun [%]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Contingency for cost overrun [%]\n\n**Required:**\nTrue"),
  	NULL},
 {"csp_pt_cost_epc_fixed", (getter)SystemCosts_get_csp_pt_cost_epc_fixed,(setter)SystemCosts_set_csp_pt_cost_epc_fixed,
-	PyDoc_STR("*float*: EPC fixed [$]\n\n*Required*: True"),
+	PyDoc_STR("*float*: EPC fixed [$]\n\n**Required:**\nTrue"),
  	NULL},
 {"csp_pt_cost_epc_per_acre", (getter)SystemCosts_get_csp_pt_cost_epc_per_acre,(setter)SystemCosts_set_csp_pt_cost_epc_per_acre,
-	PyDoc_STR("*float*: EPC cost per acre [$/acre]\n\n*Required*: True"),
+	PyDoc_STR("*float*: EPC cost per acre [$/acre]\n\n**Required:**\nTrue"),
  	NULL},
 {"csp_pt_cost_epc_per_watt", (getter)SystemCosts_get_csp_pt_cost_epc_per_watt,(setter)SystemCosts_set_csp_pt_cost_epc_per_watt,
-	PyDoc_STR("*float*: EPC cost per watt [$/W]\n\n*Required*: True"),
+	PyDoc_STR("*float*: EPC cost per watt [$/W]\n\n**Required:**\nTrue"),
  	NULL},
 {"csp_pt_cost_epc_percent", (getter)SystemCosts_get_csp_pt_cost_epc_percent,(setter)SystemCosts_set_csp_pt_cost_epc_percent,
-	PyDoc_STR("*float*: EPC cost percent of direct [%]\n\n*Required*: True"),
+	PyDoc_STR("*float*: EPC cost percent of direct [%]\n\n**Required:**\nTrue"),
  	NULL},
 {"csp_pt_cost_fixed_sf", (getter)SystemCosts_get_csp_pt_cost_fixed_sf,(setter)SystemCosts_set_csp_pt_cost_fixed_sf,
-	PyDoc_STR("*float*: Heliostat field cost fixed [$]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Heliostat field cost fixed [$]\n\n**Required:**\nTrue"),
  	NULL},
 {"csp_pt_cost_plm_fixed", (getter)SystemCosts_get_csp_pt_cost_plm_fixed,(setter)SystemCosts_set_csp_pt_cost_plm_fixed,
-	PyDoc_STR("*float*: PLM fixed [$]\n\n*Required*: True"),
+	PyDoc_STR("*float*: PLM fixed [$]\n\n**Required:**\nTrue"),
  	NULL},
 {"csp_pt_cost_plm_per_acre", (getter)SystemCosts_get_csp_pt_cost_plm_per_acre,(setter)SystemCosts_set_csp_pt_cost_plm_per_acre,
-	PyDoc_STR("*float*: PLM cost per acre [$/acre]\n\n*Required*: True"),
+	PyDoc_STR("*float*: PLM cost per acre [$/acre]\n\n**Required:**\nTrue"),
  	NULL},
 {"csp_pt_cost_plm_per_watt", (getter)SystemCosts_get_csp_pt_cost_plm_per_watt,(setter)SystemCosts_set_csp_pt_cost_plm_per_watt,
-	PyDoc_STR("*float*: PLM cost per watt [$/W]\n\n*Required*: True"),
+	PyDoc_STR("*float*: PLM cost per watt [$/W]\n\n**Required:**\nTrue"),
  	NULL},
 {"csp_pt_cost_plm_percent", (getter)SystemCosts_get_csp_pt_cost_plm_percent,(setter)SystemCosts_set_csp_pt_cost_plm_percent,
-	PyDoc_STR("*float*: PLM cost percent of direct [%]\n\n*Required*: True"),
+	PyDoc_STR("*float*: PLM cost percent of direct [%]\n\n**Required:**\nTrue"),
  	NULL},
 {"csp_pt_cost_power_block_per_kwe", (getter)SystemCosts_get_csp_pt_cost_power_block_per_kwe,(setter)SystemCosts_set_csp_pt_cost_power_block_per_kwe,
-	PyDoc_STR("*float*: Power cycle specific cost [$/kWe]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Power cycle specific cost [$/kWe]\n\n**Required:**\nTrue"),
  	NULL},
 {"csp_pt_cost_total_land_area", (getter)SystemCosts_get_csp_pt_cost_total_land_area,(setter)SystemCosts_set_csp_pt_cost_total_land_area,
-	PyDoc_STR("*float*: Total land area [acre]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Total land area [acre]\n\n**Required:**\nTrue"),
  	NULL},
 {"fossil_spec_cost", (getter)SystemCosts_get_fossil_spec_cost,(setter)SystemCosts_set_fossil_spec_cost,
-	PyDoc_STR("*float*: Fossil system specific cost [$/kWe]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Fossil system specific cost [$/kWe]\n\n**Required:**\nTrue"),
  	NULL},
 {"heliostat_spec_cost", (getter)SystemCosts_get_heliostat_spec_cost,(setter)SystemCosts_set_heliostat_spec_cost,
-	PyDoc_STR("*float*: Heliostat field cost [$/m2]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Heliostat field cost [$/m2]\n\n**Required:**\nTrue"),
  	NULL},
 {"rec_cost_exp", (getter)SystemCosts_get_rec_cost_exp,(setter)SystemCosts_set_rec_cost_exp,
-	PyDoc_STR("*float*: Receiver cost scaling exponent\n\n*Required*: True"),
+	PyDoc_STR("*float*: Receiver cost scaling exponent\n\n**Required:**\nTrue"),
  	NULL},
 {"rec_ref_area", (getter)SystemCosts_get_rec_ref_area,(setter)SystemCosts_set_rec_ref_area,
-	PyDoc_STR("*float*: Receiver reference area for cost scale\n\n*Required*: True"),
+	PyDoc_STR("*float*: Receiver reference area for cost scale\n\n**Required:**\nTrue"),
  	NULL},
 {"rec_ref_cost", (getter)SystemCosts_get_rec_ref_cost,(setter)SystemCosts_set_rec_ref_cost,
-	PyDoc_STR("*float*: Receiver reference cost [$]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Receiver reference cost [$]\n\n**Required:**\nTrue"),
  	NULL},
 {"sales_tax_frac", (getter)SystemCosts_get_sales_tax_frac,(setter)SystemCosts_set_sales_tax_frac,
-	PyDoc_STR("*float*: Percent of cost to which sales tax applies [%]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Percent of cost to which sales tax applies [%]\n\n**Required:**\nTrue"),
  	NULL},
 {"sales_tax_rate", (getter)SystemCosts_get_sales_tax_rate,(setter)SystemCosts_set_sales_tax_rate,
-	PyDoc_STR("*float*: Sales tax rate [%]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Sales tax rate [%]\n\n**Required:**\nTrue"),
  	NULL},
 {"site_spec_cost", (getter)SystemCosts_get_site_spec_cost,(setter)SystemCosts_set_site_spec_cost,
-	PyDoc_STR("*float*: Site improvement cost [$/m2]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Site improvement cost [$/m2]\n\n**Required:**\nTrue"),
  	NULL},
 {"tes_spec_cost", (getter)SystemCosts_get_tes_spec_cost,(setter)SystemCosts_set_tes_spec_cost,
-	PyDoc_STR("*float*: Thermal energy storage cost [$/kWht]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Thermal energy storage cost [$/kWht]\n\n**Required:**\nTrue"),
  	NULL},
 {"tower_exp", (getter)SystemCosts_get_tower_exp,(setter)SystemCosts_set_tower_exp,
-	PyDoc_STR("*float*: Tower cost scaling exponent\n\n*Required*: True"),
+	PyDoc_STR("*float*: Tower cost scaling exponent\n\n**Required:**\nTrue"),
  	NULL},
 {"tower_fixed_cost", (getter)SystemCosts_get_tower_fixed_cost,(setter)SystemCosts_set_tower_fixed_cost,
-	PyDoc_STR("*float*: Tower fixed cost [$]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Tower fixed cost [$]\n\n**Required:**\nTrue"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -688,11 +688,11 @@ Receiver_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Receiver_methods[] = {
 		{"assign",            (PyCFunction)Receiver_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Receiver_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Receiver_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Receiver_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Receiver_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Receiver_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Receiver_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -746,16 +746,16 @@ Receiver_set_helio_height(VarGroupObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef Receiver_getset[] = {
 {"H_rec", (getter)Receiver_get_H_rec,(setter)Receiver_set_H_rec,
-	PyDoc_STR("*float*: The height of the receiver [m]\n\n*Required*: True"),
+	PyDoc_STR("*float*: The height of the receiver [m]\n\n**Required:**\nTrue"),
  	NULL},
 {"csp_pt_cost_receiver_area", (getter)Receiver_get_csp_pt_cost_receiver_area,(setter)Receiver_set_csp_pt_cost_receiver_area,
-	PyDoc_STR("*float*: Receiver area [m2]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Receiver area [m2]\n\n**Required:**\nTrue"),
  	NULL},
 {"h_tower", (getter)Receiver_get_h_tower,(setter)Receiver_set_h_tower,
-	PyDoc_STR("*float*: Tower height [m]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Tower height [m]\n\n**Required:**\nTrue"),
  	NULL},
 {"helio_height", (getter)Receiver_get_helio_height,(setter)Receiver_set_helio_height,
-	PyDoc_STR("*float*: Heliostat height [m]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Heliostat height [m]\n\n**Required:**\nTrue"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -870,11 +870,11 @@ TES_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef TES_methods[] = {
 		{"assign",            (PyCFunction)TES_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``TES_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``TES_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)TES_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``TES_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``TES_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)TES_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -892,7 +892,7 @@ TES_set_csp_pt_cost_storage_mwht(VarGroupObject *self, PyObject *value, void *cl
 
 static PyGetSetDef TES_getset[] = {
 {"csp_pt_cost_storage_mwht", (getter)TES_get_csp_pt_cost_storage_mwht,(setter)TES_set_csp_pt_cost_storage_mwht,
-	PyDoc_STR("*float*: Storage capacity [MWt-hr]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Storage capacity [MWt-hr]\n\n**Required:**\nTrue"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1007,11 +1007,11 @@ SystemDesign_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef SystemDesign_methods[] = {
 		{"assign",            (PyCFunction)SystemDesign_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``SystemDesign_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``SystemDesign_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)SystemDesign_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``SystemDesign_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``SystemDesign_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)SystemDesign_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -1041,10 +1041,10 @@ SystemDesign_set_system_capacity(VarGroupObject *self, PyObject *value, void *cl
 
 static PyGetSetDef SystemDesign_getset[] = {
 {"P_ref", (getter)SystemDesign_get_P_ref,(setter)SystemDesign_set_P_ref,
-	PyDoc_STR("*float*: Reference output electric power at design condition [MWe]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Reference output electric power at design condition [MWe]\n\n**Required:**\nTrue"),
  	NULL},
 {"system_capacity", (getter)SystemDesign_get_system_capacity,(setter)SystemDesign_set_system_capacity,
-	PyDoc_STR("*float*: Nameplate capacity [MWe]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Nameplate capacity [MWe]\n\n**Required:**\nTrue"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1159,11 +1159,11 @@ Outputs_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Outputs_methods[] = {
 		{"assign",            (PyCFunction)Outputs_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Outputs_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Outputs_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -1662,12 +1662,11 @@ static PyMethodDef CbMsptSystemCostsModule_methods[] = {
 		{"new",             CbMsptSystemCosts_new,         METH_VARARGS,
 				PyDoc_STR("new() -> CbMsptSystemCosts")},
 		{"default",             CbMsptSystemCosts_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> CbMsptSystemCosts\n\nUse default attributes\n"
-				"None")},
+				PyDoc_STR("default(config) -> CbMsptSystemCosts\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n- None\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
 		{"wrap",             CbMsptSystemCosts_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> CbMsptSystemCosts\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
+				PyDoc_STR("wrap(ssc_data_t) -> CbMsptSystemCosts\n\nLoad data from a PySSC object.\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap()``")},
 		{"from_existing",   CbMsptSystemCosts_from_existing,        METH_VARARGS,
-				PyDoc_STR("from_existing(data, optional config) -> CbMsptSystemCosts\n\nShare underlying data with an existing PySAM class. If config provided, default attributes are loaded otherwise.")},
+				PyDoc_STR("from_existing(data, optional config) -> CbMsptSystemCosts\n\nShare data with an existing PySAM class. If ``optional config`` is a valid configuration name, load the module's defaults for that configuration.")},
 		{NULL,              NULL}           /* sentinel */
 };
 

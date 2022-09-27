@@ -69,11 +69,11 @@ SingleDiodeModel_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef SingleDiodeModel_methods[] = {
 		{"assign",            (PyCFunction)SingleDiodeModel_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``SingleDiodeModel_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``SingleDiodeModel_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)SingleDiodeModel_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``SingleDiodeModel_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``SingleDiodeModel_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)SingleDiodeModel_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -151,22 +151,22 @@ SingleDiodeModel_set_a(VarGroupObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef SingleDiodeModel_getset[] = {
 {"Il", (getter)SingleDiodeModel_get_Il,(setter)SingleDiodeModel_set_Il,
-	PyDoc_STR("*float*: Light current [A]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Light current [A]\n\n**Required:**\nTrue"),
  	NULL},
 {"Io", (getter)SingleDiodeModel_get_Io,(setter)SingleDiodeModel_set_Io,
-	PyDoc_STR("*float*: Saturation current [A]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Saturation current [A]\n\n**Required:**\nTrue"),
  	NULL},
 {"Rs", (getter)SingleDiodeModel_get_Rs,(setter)SingleDiodeModel_set_Rs,
-	PyDoc_STR("*float*: Series resistance [ohm]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Series resistance [ohm]\n\n**Required:**\nTrue"),
  	NULL},
 {"Rsh", (getter)SingleDiodeModel_get_Rsh,(setter)SingleDiodeModel_set_Rsh,
-	PyDoc_STR("*float*: Shunt resistance [ohm]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Shunt resistance [ohm]\n\n**Required:**\nTrue"),
  	NULL},
 {"Vop", (getter)SingleDiodeModel_get_Vop,(setter)SingleDiodeModel_set_Vop,
-	PyDoc_STR("*float*: Module operating voltage [V]\n\n*Required*: False"),
+	PyDoc_STR("*float*: Module operating voltage [V]\n\n**Required:**\nFalse for configuration with default inputs. May be required if a variable dependent on its value changes. Example: For the Detailed PV - Single Owner configuration, only Subarray 1 is enabled in the configuration defaults, so Subarray 2 inputs would not be required; if Subarray 2 is enabled, then Subarray 2 inputs is required."),
  	NULL},
 {"a", (getter)SingleDiodeModel_get_a,(setter)SingleDiodeModel_set_a,
-	PyDoc_STR("*float*: Modified nonideality factor [1/V]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Modified nonideality factor [1/V]\n\n**Required:**\nTrue"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -281,11 +281,11 @@ Outputs_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Outputs_methods[] = {
 		{"assign",            (PyCFunction)Outputs_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Outputs_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Outputs_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -651,12 +651,11 @@ static PyMethodDef SinglediodeModule_methods[] = {
 		{"new",             Singlediode_new,         METH_VARARGS,
 				PyDoc_STR("new() -> Singlediode")},
 		{"default",             Singlediode_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Singlediode\n\nUse default attributes\n"
-				"None")},
+				PyDoc_STR("default(config) -> Singlediode\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n- None\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
 		{"wrap",             Singlediode_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> Singlediode\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
+				PyDoc_STR("wrap(ssc_data_t) -> Singlediode\n\nLoad data from a PySSC object.\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap()``")},
 		{"from_existing",   Singlediode_from_existing,        METH_VARARGS,
-				PyDoc_STR("from_existing(data, optional config) -> Singlediode\n\nShare underlying data with an existing PySAM class. If config provided, default attributes are loaded otherwise.")},
+				PyDoc_STR("from_existing(data, optional config) -> Singlediode\n\nShare data with an existing PySAM class. If ``optional config`` is a valid configuration name, load the module's defaults for that configuration.")},
 		{NULL,              NULL}           /* sentinel */
 };
 

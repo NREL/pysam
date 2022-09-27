@@ -69,11 +69,11 @@ TimeSequence_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef TimeSequence_methods[] = {
 		{"assign",            (PyCFunction)TimeSequence_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``TimeSequence_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``TimeSequence_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)TimeSequence_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``TimeSequence_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``TimeSequence_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)TimeSequence_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -115,13 +115,13 @@ TimeSequence_set_time_step(VarGroupObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef TimeSequence_getset[] = {
 {"end_time", (getter)TimeSequence_get_end_time,(setter)TimeSequence_set_end_time,
-	PyDoc_STR("*float*: End time [seconds]\n\n*Options*: 0=jan1st 12am\n\n*Constraints*: MIN=0,MAX=31536000\n\n*Required*: True"),
+	PyDoc_STR("*float*: End time [seconds]\n\n**Options:**\n0=jan1st 12am\n\n**Constraints:**\nMIN=0,MAX=31536000\n\n**Required:**\nTrue"),
  	NULL},
 {"start_time", (getter)TimeSequence_get_start_time,(setter)TimeSequence_set_start_time,
-	PyDoc_STR("*float*: Start time [seconds]\n\n*Options*: 0=jan1st 12am\n\n*Constraints*: MIN=0,MAX=31536000\n\n*Required*: True"),
+	PyDoc_STR("*float*: Start time [seconds]\n\n**Options:**\n0=jan1st 12am\n\n**Constraints:**\nMIN=0,MAX=31536000\n\n**Required:**\nTrue"),
  	NULL},
 {"time_step", (getter)TimeSequence_get_time_step,(setter)TimeSequence_set_time_step,
-	PyDoc_STR("*float*: Time step [seconds]\n\n*Constraints*: MIN=1,MAX=3600\n\n*Required*: True"),
+	PyDoc_STR("*float*: Time step [seconds]\n\n**Constraints:**\nMIN=1,MAX=3600\n\n**Required:**\nTrue"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -236,11 +236,11 @@ Outputs_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Outputs_methods[] = {
 		{"assign",            (PyCFunction)Outputs_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Outputs_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Outputs_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -624,12 +624,11 @@ static PyMethodDef TimeseqModule_methods[] = {
 		{"new",             Timeseq_new,         METH_VARARGS,
 				PyDoc_STR("new() -> Timeseq")},
 		{"default",             Timeseq_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Timeseq\n\nUse default attributes\n"
-				"None")},
+				PyDoc_STR("default(config) -> Timeseq\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n- None\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
 		{"wrap",             Timeseq_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> Timeseq\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
+				PyDoc_STR("wrap(ssc_data_t) -> Timeseq\n\nLoad data from a PySSC object.\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap()``")},
 		{"from_existing",   Timeseq_from_existing,        METH_VARARGS,
-				PyDoc_STR("from_existing(data, optional config) -> Timeseq\n\nShare underlying data with an existing PySAM class. If config provided, default attributes are loaded otherwise.")},
+				PyDoc_STR("from_existing(data, optional config) -> Timeseq\n\nShare data with an existing PySAM class. If ``optional config`` is a valid configuration name, load the module's defaults for that configuration.")},
 		{NULL,              NULL}           /* sentinel */
 };
 

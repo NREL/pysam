@@ -69,11 +69,11 @@ POACalibrate_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef POACalibrate_methods[] = {
 		{"assign",            (PyCFunction)POACalibrate_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``POACalibrate_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``POACalibrate_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)POACalibrate_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``POACalibrate_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``POACalibrate_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)POACalibrate_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -235,43 +235,43 @@ POACalibrate_set_year(VarGroupObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef POACalibrate_getset[] = {
 {"albedo", (getter)POACalibrate_get_albedo,(setter)POACalibrate_set_albedo,
-	PyDoc_STR("*float*: Albedo\n\n*Constraints*: MIN=0,MAX=1\n\n*Required*: True"),
+	PyDoc_STR("*float*: Albedo\n\n**Constraints:**\nMIN=0,MAX=1\n\n**Required:**\nTrue"),
  	NULL},
 {"array_az", (getter)POACalibrate_get_array_az,(setter)POACalibrate_set_array_az,
-	PyDoc_STR("*float*: Array Azimuth [degrees]\n\n*Options*: 0=N, 90=E, 180=S\n\n*Constraints*: MIN=0,MAX=360\n\n*Required*: True"),
+	PyDoc_STR("*float*: Array Azimuth [degrees]\n\n**Options:**\n0=N, 90=E, 180=S\n\n**Constraints:**\nMIN=0,MAX=360\n\n**Required:**\nTrue"),
  	NULL},
 {"array_tilt", (getter)POACalibrate_get_array_tilt,(setter)POACalibrate_set_array_tilt,
-	PyDoc_STR("*float*: Array tilt [degrees]\n\n*Info*: 0-90\n\n*Constraints*: MIN=0,MAX=90\n\n*Required*: True"),
+	PyDoc_STR("*float*: Array tilt [degrees]\n\n**Info:**\n0-90\n\n**Constraints:**\nMIN=0,MAX=90\n\n**Required:**\nTrue"),
  	NULL},
 {"beam", (getter)POACalibrate_get_beam,(setter)POACalibrate_set_beam,
-	PyDoc_STR("*sequence*: Beam Irradiation [W/m^2]\n\n*Constraints*: LENGTH=8760\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: Beam Irradiation [W/m^2]\n\n**Constraints:**\nLENGTH=8760\n\n**Required:**\nTrue"),
  	NULL},
 {"diffuse", (getter)POACalibrate_get_diffuse,(setter)POACalibrate_set_diffuse,
-	PyDoc_STR("*sequence*: Diffuse Irradiation [W/m^2]\n\n*Constraints*: LENGTH=8760\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: Diffuse Irradiation [W/m^2]\n\n**Constraints:**\nLENGTH=8760\n\n**Required:**\nTrue"),
  	NULL},
 {"elevation", (getter)POACalibrate_get_elevation,(setter)POACalibrate_set_elevation,
-	PyDoc_STR("*float*: Elevation [m]\n\n*Required*: False"),
+	PyDoc_STR("*float*: Elevation [m]\n\n**Required:**\nFalse for configuration with default inputs. May be required if a variable dependent on its value changes. Example: For the Detailed PV - Single Owner configuration, only Subarray 1 is enabled in the configuration defaults, so Subarray 2 inputs would not be required; if Subarray 2 is enabled, then Subarray 2 inputs is required."),
  	NULL},
 {"latitude", (getter)POACalibrate_get_latitude,(setter)POACalibrate_set_latitude,
-	PyDoc_STR("*float*: Latitude [decimal degrees]\n\n*Options*: N= positive\n\n*Required*: True"),
+	PyDoc_STR("*float*: Latitude [decimal degrees]\n\n**Options:**\nN= positive\n\n**Required:**\nTrue"),
  	NULL},
 {"longitude", (getter)POACalibrate_get_longitude,(setter)POACalibrate_set_longitude,
-	PyDoc_STR("*float*: Longitude [decimal degrees]\n\n*Options*: E= positive\n\n*Required*: True"),
+	PyDoc_STR("*float*: Longitude [decimal degrees]\n\n**Options:**\nE= positive\n\n**Required:**\nTrue"),
  	NULL},
 {"poa", (getter)POACalibrate_get_poa,(setter)POACalibrate_set_poa,
-	PyDoc_STR("*sequence*: Plane of Array [W/m^2]\n\n*Constraints*: LENGTH=8760\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: Plane of Array [W/m^2]\n\n**Constraints:**\nLENGTH=8760\n\n**Required:**\nTrue"),
  	NULL},
 {"pressure", (getter)POACalibrate_get_pressure,(setter)POACalibrate_set_pressure,
-	PyDoc_STR("*float*: Pressure [millibars]\n\n*Required*: False"),
+	PyDoc_STR("*float*: Pressure [millibars]\n\n**Required:**\nFalse for configuration with default inputs. May be required if a variable dependent on its value changes. Example: For the Detailed PV - Single Owner configuration, only Subarray 1 is enabled in the configuration defaults, so Subarray 2 inputs would not be required; if Subarray 2 is enabled, then Subarray 2 inputs is required."),
  	NULL},
 {"tamb", (getter)POACalibrate_get_tamb,(setter)POACalibrate_set_tamb,
-	PyDoc_STR("*float*: Ambient Temperature (dry bulb temperature) [°C]\n\n*Required*: False"),
+	PyDoc_STR("*float*: Ambient Temperature (dry bulb temperature) [°C]\n\n**Required:**\nFalse for configuration with default inputs. May be required if a variable dependent on its value changes. Example: For the Detailed PV - Single Owner configuration, only Subarray 1 is enabled in the configuration defaults, so Subarray 2 inputs would not be required; if Subarray 2 is enabled, then Subarray 2 inputs is required."),
  	NULL},
 {"time_zone", (getter)POACalibrate_get_time_zone,(setter)POACalibrate_set_time_zone,
-	PyDoc_STR("*float*: Time Zone\n\n*Options*: -7= Denver\n\n*Constraints*: MIN=-12,MAX=12\n\n*Required*: True"),
+	PyDoc_STR("*float*: Time Zone\n\n**Options:**\n-7= Denver\n\n**Constraints:**\nMIN=-12,MAX=12\n\n**Required:**\nTrue"),
  	NULL},
 {"year", (getter)POACalibrate_get_year,(setter)POACalibrate_set_year,
-	PyDoc_STR("*float*: Year\n\n*Required*: True"),
+	PyDoc_STR("*float*: Year\n\n**Required:**\nTrue"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -386,11 +386,11 @@ Outputs_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Outputs_methods[] = {
 		{"assign",            (PyCFunction)Outputs_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Outputs_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Outputs_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -729,12 +729,11 @@ static PyMethodDef PoacalibModule_methods[] = {
 		{"new",             Poacalib_new,         METH_VARARGS,
 				PyDoc_STR("new() -> Poacalib")},
 		{"default",             Poacalib_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Poacalib\n\nUse default attributes\n"
-				"None")},
+				PyDoc_STR("default(config) -> Poacalib\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n- None\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
 		{"wrap",             Poacalib_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> Poacalib\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
+				PyDoc_STR("wrap(ssc_data_t) -> Poacalib\n\nLoad data from a PySSC object.\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap()``")},
 		{"from_existing",   Poacalib_from_existing,        METH_VARARGS,
-				PyDoc_STR("from_existing(data, optional config) -> Poacalib\n\nShare underlying data with an existing PySAM class. If config provided, default attributes are loaded otherwise.")},
+				PyDoc_STR("from_existing(data, optional config) -> Poacalib\n\nShare data with an existing PySAM class. If ``optional config`` is a valid configuration name, load the module's defaults for that configuration.")},
 		{NULL,              NULL}           /* sentinel */
 };
 

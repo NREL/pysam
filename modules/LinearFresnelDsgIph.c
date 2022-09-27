@@ -69,11 +69,11 @@ Weather_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Weather_methods[] = {
 		{"assign",            (PyCFunction)Weather_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Weather_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Weather_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Weather_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Weather_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Weather_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Weather_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -103,10 +103,10 @@ Weather_set_solar_resource_data(VarGroupObject *self, PyObject *value, void *clo
 
 static PyGetSetDef Weather_getset[] = {
 {"file_name", (getter)Weather_get_file_name,(setter)Weather_set_file_name,
-	PyDoc_STR("*str*: local weather file path\n\n*Constraints*: LOCAL_FILE\n\n*Required*: True"),
+	PyDoc_STR("*str*: local weather file path\n\n**Constraints:**\nLOCAL_FILE\n\n**Required:**\nTrue"),
  	NULL},
 {"solar_resource_data", (getter)Weather_get_solar_resource_data,(setter)Weather_set_solar_resource_data,
-	PyDoc_STR("*dict*: Weather resource data in memory\n\n*Required*: False"),
+	PyDoc_STR("*dict*: Weather resource data in memory\n\n**Required:**\nFalse for configuration with default inputs. May be required if a variable dependent on its value changes. Example: For the Detailed PV - Single Owner configuration, only Subarray 1 is enabled in the configuration defaults, so Subarray 2 inputs would not be required; if Subarray 2 is enabled, then Subarray 2 inputs is required."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -221,11 +221,11 @@ Solarfield_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Solarfield_methods[] = {
 		{"assign",            (PyCFunction)Solarfield_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Solarfield_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Solarfield_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Solarfield_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Solarfield_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Solarfield_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Solarfield_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -734,6 +734,18 @@ Solarfield_set_b_eps_HCE4(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyObject *
+Solarfield_get_deltaT_subcooled(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_LinearFresnelDsgIph_Solarfield_deltaT_subcooled_nget, self->data_ptr);
+}
+
+static int
+Solarfield_set_deltaT_subcooled(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_LinearFresnelDsgIph_Solarfield_deltaT_subcooled_nset, self->data_ptr);
+}
+
+static PyObject *
 Solarfield_get_dirt_mirror(VarGroupObject *self, void *closure)
 {
 	return PySAM_matrix_getter(SAM_LinearFresnelDsgIph_Solarfield_dirt_mirror_mget, self->data_ptr);
@@ -950,6 +962,18 @@ Solarfield_set_theta_stow(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyObject *
+Solarfield_get_use_quality_or_subcooled(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_LinearFresnelDsgIph_Solarfield_use_quality_or_subcooled_nget, self->data_ptr);
+}
+
+static int
+Solarfield_set_use_quality_or_subcooled(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_LinearFresnelDsgIph_Solarfield_use_quality_or_subcooled_nset, self->data_ptr);
+}
+
+static PyObject *
 Solarfield_get_x_b_des(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_LinearFresnelDsgIph_Solarfield_x_b_des_nget, self->data_ptr);
@@ -963,187 +987,193 @@ Solarfield_set_x_b_des(VarGroupObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef Solarfield_getset[] = {
 {"A_aperture", (getter)Solarfield_get_A_aperture,(setter)Solarfield_set_A_aperture,
-	PyDoc_STR("*sequence[sequence]*: (boiler, SH) Reflective aperture area of the collector module [m^2]\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: (boiler, SH) Reflective aperture area of the collector module [m^2]\n\n**Required:**\nTrue"),
  	NULL},
 {"AbsorberMaterial", (getter)Solarfield_get_AbsorberMaterial,(setter)Solarfield_set_AbsorberMaterial,
-	PyDoc_STR("*sequence[sequence]*: (boiler, SH) Absorber material type [none]\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: (boiler, SH) Absorber material type [none]\n\n**Required:**\nTrue"),
  	NULL},
 {"AnnulusGas", (getter)Solarfield_get_AnnulusGas,(setter)Solarfield_set_AnnulusGas,
-	PyDoc_STR("*sequence[sequence]*: (boiler, SH) Annulus gas type {1=air; 26=Ar; 27=H2} (4: # field fracs) [none]\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: (boiler, SH) Annulus gas type {1=air; 26=Ar; 27=H2} (4: # field fracs) [none]\n\n**Required:**\nTrue"),
  	NULL},
 {"ColAz", (getter)Solarfield_get_ColAz,(setter)Solarfield_set_ColAz,
-	PyDoc_STR("*float*: Collector azimuth angle [deg]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Collector azimuth angle [deg]\n\n**Required:**\nTrue"),
  	NULL},
 {"D_2", (getter)Solarfield_get_D_2,(setter)Solarfield_set_D_2,
-	PyDoc_STR("*sequence[sequence]*: (boiler, SH) The inner absorber tube diameter [m]\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: (boiler, SH) The inner absorber tube diameter [m]\n\n**Required:**\nTrue"),
  	NULL},
 {"D_3", (getter)Solarfield_get_D_3,(setter)Solarfield_set_D_3,
-	PyDoc_STR("*sequence[sequence]*: (boiler, SH) The outer absorber tube diameter [m]\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: (boiler, SH) The outer absorber tube diameter [m]\n\n**Required:**\nTrue"),
  	NULL},
 {"D_4", (getter)Solarfield_get_D_4,(setter)Solarfield_set_D_4,
-	PyDoc_STR("*sequence[sequence]*: (boiler, SH) The inner glass envelope diameter [m]\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: (boiler, SH) The inner glass envelope diameter [m]\n\n**Required:**\nTrue"),
  	NULL},
 {"D_5", (getter)Solarfield_get_D_5,(setter)Solarfield_set_D_5,
-	PyDoc_STR("*sequence[sequence]*: (boiler, SH) The outer glass envelope diameter [m]\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: (boiler, SH) The outer glass envelope diameter [m]\n\n**Required:**\nTrue"),
  	NULL},
 {"D_p", (getter)Solarfield_get_D_p,(setter)Solarfield_set_D_p,
-	PyDoc_STR("*sequence[sequence]*: (boiler, SH) The diameter of the absorber flow plug (optional) [m]\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: (boiler, SH) The diameter of the absorber flow plug (optional) [m]\n\n**Required:**\nTrue"),
  	NULL},
 {"Design_loss", (getter)Solarfield_get_Design_loss,(setter)Solarfield_set_Design_loss,
-	PyDoc_STR("*sequence[sequence]*: (boiler, SH) Receiver heat loss at design (4: # field fracs) [W/m]\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: (boiler, SH) Receiver heat loss at design (4: # field fracs) [W/m]\n\n**Required:**\nTrue"),
  	NULL},
 {"Dirt_HCE", (getter)Solarfield_get_Dirt_HCE,(setter)Solarfield_set_Dirt_HCE,
-	PyDoc_STR("*sequence[sequence]*: (boiler, SH) Loss due to dirt on the receiver envelope (4: # field fracs) [none]\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: (boiler, SH) Loss due to dirt on the receiver envelope (4: # field fracs) [none]\n\n**Required:**\nTrue"),
  	NULL},
 {"EPSILON_4", (getter)Solarfield_get_EPSILON_4,(setter)Solarfield_set_EPSILON_4,
-	PyDoc_STR("*sequence[sequence]*: (boiler, SH) Inner glass envelope emissivities (Pyrex) (4: # field fracs) [none]\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: (boiler, SH) Inner glass envelope emissivities (Pyrex) (4: # field fracs) [none]\n\n**Required:**\nTrue"),
  	NULL},
 {"Flow_type", (getter)Solarfield_get_Flow_type,(setter)Solarfield_set_Flow_type,
-	PyDoc_STR("*sequence[sequence]*: (boiler, SH) The flow type through the absorber [none]\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: (boiler, SH) The flow type through the absorber [none]\n\n**Required:**\nTrue"),
  	NULL},
 {"GeomEffects", (getter)Solarfield_get_GeomEffects,(setter)Solarfield_set_GeomEffects,
-	PyDoc_STR("*sequence[sequence]*: (boiler, SH) User-defined geometry effects derate [none]\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: (boiler, SH) User-defined geometry effects derate [none]\n\n**Required:**\nTrue"),
  	NULL},
 {"GlazingIntactIn", (getter)Solarfield_get_GlazingIntactIn,(setter)Solarfield_set_GlazingIntactIn,
-	PyDoc_STR("*sequence[sequence]*: (boiler, SH) The glazing intact flag {true=0; false=1} (4: # field fracs) [none]\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: (boiler, SH) The glazing intact flag {true=0; false=1} (4: # field fracs) [none]\n\n**Required:**\nTrue"),
  	NULL},
 {"HCE_FieldFrac", (getter)Solarfield_get_HCE_FieldFrac,(setter)Solarfield_set_HCE_FieldFrac,
-	PyDoc_STR("*sequence[sequence]*: (boiler, SH) The fraction of the field occupied by this HCE type (4: # field fracs) [none]\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: (boiler, SH) The fraction of the field occupied by this HCE type (4: # field fracs) [none]\n\n**Required:**\nTrue"),
  	NULL},
 {"HLCharType", (getter)Solarfield_get_HLCharType,(setter)Solarfield_set_HLCharType,
-	PyDoc_STR("*sequence[sequence]*: (boiler, SH) Flag indicating the heat loss model type {1=poly.; 2=Forristall} [none]\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: (boiler, SH) Flag indicating the heat loss model type {1=poly.; 2=Forristall} [none]\n\n**Required:**\nTrue"),
  	NULL},
 {"HL_W", (getter)Solarfield_get_HL_W,(setter)Solarfield_set_HL_W,
-	PyDoc_STR("*sequence[sequence]*: (boiler, SH) Heat loss coef adj wind velocity (0,1,2,3,4 order terms) [1/(m/s)^order]\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: (boiler, SH) Heat loss coef adj wind velocity (0,1,2,3,4 order terms) [1/(m/s)^order]\n\n**Required:**\nTrue"),
  	NULL},
 {"HL_dT", (getter)Solarfield_get_HL_dT,(setter)Solarfield_set_HL_dT,
-	PyDoc_STR("*sequence[sequence]*: (boiler, SH) Heat loss coefficient - HTF temperature (0,1,2,3,4 order terms) [W/m-K^order]\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: (boiler, SH) Heat loss coefficient - HTF temperature (0,1,2,3,4 order terms) [W/m-K^order]\n\n**Required:**\nTrue"),
  	NULL},
 {"IAM_L", (getter)Solarfield_get_IAM_L,(setter)Solarfield_set_IAM_L,
-	PyDoc_STR("*sequence[sequence]*: (boiler, SH) Longitudinal Incident angle modifiers (0,1,2,3,4 order terms) [none]\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: (boiler, SH) Longitudinal Incident angle modifiers (0,1,2,3,4 order terms) [none]\n\n**Required:**\nTrue"),
  	NULL},
 {"IAM_T", (getter)Solarfield_get_IAM_T,(setter)Solarfield_set_IAM_T,
-	PyDoc_STR("*sequence[sequence]*: (boiler, SH) Transverse Incident angle modifiers (0,1,2,3,4 order terms) [none]\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: (boiler, SH) Transverse Incident angle modifiers (0,1,2,3,4 order terms) [none]\n\n**Required:**\nTrue"),
  	NULL},
 {"I_bn_des", (getter)Solarfield_get_I_bn_des,(setter)Solarfield_set_I_bn_des,
-	PyDoc_STR("*float*: Design point irradiation value [W/m2]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - nLoops\n"),
+	PyDoc_STR("*float*: Design point irradiation value [W/m2]\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``I_bn_des``:\n\n\t - nLoops\n"),
  	NULL},
 {"L_col", (getter)Solarfield_get_L_col,(setter)Solarfield_set_L_col,
-	PyDoc_STR("*sequence[sequence]*: (boiler, SH) Active length of the superheater section collector module [m]\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: (boiler, SH) Active length of the superheater section collector module [m]\n\n**Required:**\nTrue"),
  	NULL},
 {"OptCharType", (getter)Solarfield_get_OptCharType,(setter)Solarfield_set_OptCharType,
-	PyDoc_STR("*sequence[sequence]*: (boiler, SH) The optical characterization method [none]\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: (boiler, SH) The optical characterization method [none]\n\n**Required:**\nTrue"),
  	NULL},
 {"P_a", (getter)Solarfield_get_P_a,(setter)Solarfield_set_P_a,
-	PyDoc_STR("*sequence[sequence]*: (boiler, SH) Annulus gas pressure (4: # field fracs) [torr]\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: (boiler, SH) Annulus gas pressure (4: # field fracs) [torr]\n\n**Required:**\nTrue"),
  	NULL},
 {"P_turb_des", (getter)Solarfield_get_P_turb_des,(setter)Solarfield_set_P_turb_des,
-	PyDoc_STR("*float*: Design-point turbine inlet pressure [bar]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Design-point turbine inlet pressure [bar]\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``P_turb_des``:\n\n\t - nLoops\n"),
  	NULL},
 {"Pipe_hl_coef", (getter)Solarfield_get_Pipe_hl_coef,(setter)Solarfield_set_Pipe_hl_coef,
-	PyDoc_STR("*float*: Loss coefficient from the header.. runner pipe.. and non-HCE pipin [W/m2-K]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Loss coefficient from the header.. runner pipe.. and non-HCE pipin [W/m2-K]\n\n**Required:**\nTrue"),
  	NULL},
 {"Rough", (getter)Solarfield_get_Rough,(setter)Solarfield_set_Rough,
-	PyDoc_STR("*sequence[sequence]*: (boiler, SH) Roughness of the internal surface [m]\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: (boiler, SH) Roughness of the internal surface [m]\n\n**Required:**\nTrue"),
  	NULL},
 {"SCA_drives_elec", (getter)Solarfield_get_SCA_drives_elec,(setter)Solarfield_set_SCA_drives_elec,
-	PyDoc_STR("*float*: Tracking power.. in Watts per m2 [W/m2]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Tracking power.. in Watts per m2 [W/m2]\n\n**Required:**\nTrue"),
  	NULL},
 {"Shadowing", (getter)Solarfield_get_Shadowing,(setter)Solarfield_set_Shadowing,
-	PyDoc_STR("*sequence[sequence]*: (boiler, SH) Receiver bellows shadowing loss factor (4: # field fracs) [none]\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: (boiler, SH) Receiver bellows shadowing loss factor (4: # field fracs) [none]\n\n**Required:**\nTrue"),
  	NULL},
 {"T_amb_des_sf", (getter)Solarfield_get_T_amb_des_sf,(setter)Solarfield_set_T_amb_des_sf,
-	PyDoc_STR("*float*: Design-point ambient temperature [C]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - nLoops\n"),
+	PyDoc_STR("*float*: Design-point ambient temperature [C]\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``T_amb_des_sf``:\n\n\t - nLoops\n"),
  	NULL},
 {"T_fp", (getter)Solarfield_get_T_fp,(setter)Solarfield_set_T_fp,
-	PyDoc_STR("*float*: Freeze protection temperature (heat trace activation temperature) [C]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Freeze protection temperature (heat trace activation temperature) [C]\n\n**Required:**\nTrue"),
  	NULL},
 {"Tau_envelope", (getter)Solarfield_get_Tau_envelope,(setter)Solarfield_set_Tau_envelope,
-	PyDoc_STR("*sequence[sequence]*: (boiler, SH) Envelope transmittance (4: # field fracs) [none]\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: (boiler, SH) Envelope transmittance (4: # field fracs) [none]\n\n**Required:**\nTrue"),
  	NULL},
 {"TrackingError", (getter)Solarfield_get_TrackingError,(setter)Solarfield_set_TrackingError,
-	PyDoc_STR("*sequence[sequence]*: (boiler, SH) User-defined tracking error derate [none]\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: (boiler, SH) User-defined tracking error derate [none]\n\n**Required:**\nTrue"),
  	NULL},
 {"V_wind_max", (getter)Solarfield_get_V_wind_max,(setter)Solarfield_set_V_wind_max,
-	PyDoc_STR("*float*: Maximum allowable wind velocity before safety stow [m/s]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Maximum allowable wind velocity before safety stow [m/s]\n\n**Required:**\nTrue"),
  	NULL},
 {"alpha_abs", (getter)Solarfield_get_alpha_abs,(setter)Solarfield_set_alpha_abs,
-	PyDoc_STR("*sequence[sequence]*: (boiler, SH) Absorber absorptance (4: # field fracs) [none]\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: (boiler, SH) Absorber absorptance (4: # field fracs) [none]\n\n**Required:**\nTrue"),
  	NULL},
 {"alpha_env", (getter)Solarfield_get_alpha_env,(setter)Solarfield_set_alpha_env,
-	PyDoc_STR("*sequence[sequence]*: (boiler, SH) Envelope absorptance (4: # field fracs) [none]\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: (boiler, SH) Envelope absorptance (4: # field fracs) [none]\n\n**Required:**\nTrue"),
  	NULL},
 {"b_OpticalTable", (getter)Solarfield_get_b_OpticalTable,(setter)Solarfield_set_b_OpticalTable,
-	PyDoc_STR("*sequence[sequence]*: Values of the optical efficiency table [none]\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: Values of the optical efficiency table [none]\n\n**Required:**\nTrue"),
  	NULL},
 {"b_eps_HCE1", (getter)Solarfield_get_b_eps_HCE1,(setter)Solarfield_set_b_eps_HCE1,
-	PyDoc_STR("*sequence[sequence]*: (temperature) Absorber emittance (eps) [none]\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: (temperature) Absorber emittance (eps) [none]\n\n**Required:**\nTrue"),
  	NULL},
 {"b_eps_HCE2", (getter)Solarfield_get_b_eps_HCE2,(setter)Solarfield_set_b_eps_HCE2,
-	PyDoc_STR("*sequence[sequence]*: (temperature) Absorber emittance (eps) [none]\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: (temperature) Absorber emittance (eps) [none]\n\n**Required:**\nTrue"),
  	NULL},
 {"b_eps_HCE3", (getter)Solarfield_get_b_eps_HCE3,(setter)Solarfield_set_b_eps_HCE3,
-	PyDoc_STR("*sequence[sequence]*: (temperature) Absorber emittance (eps) [none]\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: (temperature) Absorber emittance (eps) [none]\n\n**Required:**\nTrue"),
  	NULL},
 {"b_eps_HCE4", (getter)Solarfield_get_b_eps_HCE4,(setter)Solarfield_set_b_eps_HCE4,
-	PyDoc_STR("*sequence[sequence]*: (temperature) Absorber emittance (eps) [none]\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: (temperature) Absorber emittance (eps) [none]\n\n**Required:**\nTrue"),
+ 	NULL},
+{"deltaT_subcooled", (getter)Solarfield_get_deltaT_subcooled,(setter)Solarfield_set_deltaT_subcooled,
+	PyDoc_STR("*float*: Subcooled temperature difference from saturation temp [C]\n\n**Required:**\nFalse. Automatically set to 1.23 if not assigned explicitly or loaded from defaults.\n\nThe value of the following variables depends on ``deltaT_subcooled``:\n\n\t - nLoops\n"),
  	NULL},
 {"dirt_mirror", (getter)Solarfield_get_dirt_mirror,(setter)Solarfield_set_dirt_mirror,
-	PyDoc_STR("*sequence[sequence]*: (boiler, SH) User-defined dirt on mirror derate [none]\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: (boiler, SH) User-defined dirt on mirror derate [none]\n\n**Required:**\nTrue"),
  	NULL},
 {"e_startup", (getter)Solarfield_get_e_startup,(setter)Solarfield_set_e_startup,
-	PyDoc_STR("*float*: Thermal inertia contribution per sq meter of solar field [kJ/K-m2]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Thermal inertia contribution per sq meter of solar field [kJ/K-m2]\n\n**Required:**\nTrue"),
  	NULL},
 {"error", (getter)Solarfield_get_error,(setter)Solarfield_set_error,
-	PyDoc_STR("*sequence[sequence]*: (boiler, SH) User-defined general optical error derate [none]\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: (boiler, SH) User-defined general optical error derate [none]\n\n**Required:**\nTrue"),
  	NULL},
 {"eta_pump", (getter)Solarfield_get_eta_pump,(setter)Solarfield_set_eta_pump,
-	PyDoc_STR("*float*: Feedwater pump efficiency [none]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Feedwater pump efficiency [none]\n\n**Required:**\nTrue"),
  	NULL},
 {"fP_hdr_c", (getter)Solarfield_get_fP_hdr_c,(setter)Solarfield_set_fP_hdr_c,
-	PyDoc_STR("*float*: Average design-point cold header pressure drop fraction [none]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Average design-point cold header pressure drop fraction [none]\n\n**Required:**\nTrue"),
  	NULL},
 {"fP_hdr_h", (getter)Solarfield_get_fP_hdr_h,(setter)Solarfield_set_fP_hdr_h,
-	PyDoc_STR("*float*: Average design-point hot header pressure drop fraction [none]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Average design-point hot header pressure drop fraction [none]\n\n**Required:**\nTrue"),
  	NULL},
 {"fP_sf_boil", (getter)Solarfield_get_fP_sf_boil,(setter)Solarfield_set_fP_sf_boil,
-	PyDoc_STR("*float*: Design-point pressure drop across the solar field boiler fraction [none]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Design-point pressure drop across the solar field boiler fraction [none]\n\n**Required:**\nTrue"),
  	NULL},
 {"nLoops", (getter)Solarfield_get_nLoops,(setter)Solarfield_set_nLoops,
-	PyDoc_STR("*float*: Number of loops [none]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - I_bn_des\n\t - T_amb_des_sf\n\t - T_cold_ref\n\t - T_hot\n\t - nModBoil\n\t - q_pb_des\n"),
+	PyDoc_STR("*float*: Number of loops [none]\n\n**Required:**\nTrue\n\nThe value of ``nLoops`` depends on the following variables:\n\n\t - I_bn_des\n\t - P_turb_des\n\t - T_amb_des_sf\n\t - T_cold_ref\n\t - deltaT_subcooled\n\t - nModBoil\n\t - q_pb_des\n\t - use_quality_or_subcooled\n"),
  	NULL},
 {"nModBoil", (getter)Solarfield_get_nModBoil,(setter)Solarfield_set_nModBoil,
-	PyDoc_STR("*float*: Number of modules in the boiler section [none]\n\n*Constraints*: INTEGER\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - nLoops\n"),
+	PyDoc_STR("*float*: Number of modules in the boiler section [none]\n\n**Constraints:**\nINTEGER\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``nModBoil``:\n\n\t - nLoops\n"),
  	NULL},
 {"q_pb_des", (getter)Solarfield_get_q_pb_des,(setter)Solarfield_set_q_pb_des,
-	PyDoc_STR("*float*: Design heat input to the power block [MW]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - nLoops\n"),
+	PyDoc_STR("*float*: Design heat input to the power block [MW]\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``q_pb_des``:\n\n\t - nLoops\n"),
  	NULL},
 {"rho_mirror_clean", (getter)Solarfield_get_rho_mirror_clean,(setter)Solarfield_set_rho_mirror_clean,
-	PyDoc_STR("*sequence[sequence]*: (boiler, SH) User-defined clean mirror reflectivity [none]\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: (boiler, SH) User-defined clean mirror reflectivity [none]\n\n**Required:**\nTrue"),
  	NULL},
 {"sh_OpticalTable", (getter)Solarfield_get_sh_OpticalTable,(setter)Solarfield_set_sh_OpticalTable,
-	PyDoc_STR("*sequence[sequence]*: Values of the optical efficiency table [none]\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: Values of the optical efficiency table [none]\n\n**Required:**\nTrue"),
  	NULL},
 {"sh_eps_HCE1", (getter)Solarfield_get_sh_eps_HCE1,(setter)Solarfield_set_sh_eps_HCE1,
-	PyDoc_STR("*sequence[sequence]*: (temperature) Absorber emittance (eps) [none]\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: (temperature) Absorber emittance (eps) [none]\n\n**Required:**\nTrue"),
  	NULL},
 {"sh_eps_HCE2", (getter)Solarfield_get_sh_eps_HCE2,(setter)Solarfield_set_sh_eps_HCE2,
-	PyDoc_STR("*sequence[sequence]*: (temperature) Absorber emittance (eps) [none]\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: (temperature) Absorber emittance (eps) [none]\n\n**Required:**\nTrue"),
  	NULL},
 {"sh_eps_HCE3", (getter)Solarfield_get_sh_eps_HCE3,(setter)Solarfield_set_sh_eps_HCE3,
-	PyDoc_STR("*sequence[sequence]*: (temperature) Absorber emittance (eps) [none]\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: (temperature) Absorber emittance (eps) [none]\n\n**Required:**\nTrue"),
  	NULL},
 {"sh_eps_HCE4", (getter)Solarfield_get_sh_eps_HCE4,(setter)Solarfield_set_sh_eps_HCE4,
-	PyDoc_STR("*sequence[sequence]*: (temperature) Absorber emittance (eps) [none]\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: (temperature) Absorber emittance (eps) [none]\n\n**Required:**\nTrue"),
  	NULL},
 {"theta_dep", (getter)Solarfield_get_theta_dep,(setter)Solarfield_set_theta_dep,
-	PyDoc_STR("*float*: deploy angle [deg]\n\n*Required*: True"),
+	PyDoc_STR("*float*: deploy angle [deg]\n\n**Required:**\nTrue"),
  	NULL},
 {"theta_stow", (getter)Solarfield_get_theta_stow,(setter)Solarfield_set_theta_stow,
-	PyDoc_STR("*float*: stow angle [deg]\n\n*Required*: True"),
+	PyDoc_STR("*float*: stow angle [deg]\n\n**Required:**\nTrue"),
+ 	NULL},
+{"use_quality_or_subcooled", (getter)Solarfield_get_use_quality_or_subcooled,(setter)Solarfield_set_use_quality_or_subcooled,
+	PyDoc_STR("*float*: 0 = 2 phase outlet, 1 = subcooled\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults.\n\nThe value of the following variables depends on ``use_quality_or_subcooled``:\n\n\t - nLoops\n"),
  	NULL},
 {"x_b_des", (getter)Solarfield_get_x_b_des,(setter)Solarfield_set_x_b_des,
-	PyDoc_STR("*float*: Design point boiler outlet steam quality [none]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Design point boiler outlet steam quality [none]\n\n**Required:**\nTrue"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1258,11 +1288,11 @@ Powerblock_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Powerblock_methods[] = {
 		{"assign",            (PyCFunction)Powerblock_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Powerblock_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Powerblock_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Powerblock_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Powerblock_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Powerblock_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Powerblock_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -1278,24 +1308,9 @@ Powerblock_set_T_cold_ref(VarGroupObject *self, PyObject *value, void *closure)
 	return PySAM_double_setter(value, SAM_LinearFresnelDsgIph_Powerblock_T_cold_ref_nset, self->data_ptr);
 }
 
-static PyObject *
-Powerblock_get_T_hot(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_LinearFresnelDsgIph_Powerblock_T_hot_nget, self->data_ptr);
-}
-
-static int
-Powerblock_set_T_hot(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_LinearFresnelDsgIph_Powerblock_T_hot_nset, self->data_ptr);
-}
-
 static PyGetSetDef Powerblock_getset[] = {
 {"T_cold_ref", (getter)Powerblock_get_T_cold_ref,(setter)Powerblock_set_T_cold_ref,
-	PyDoc_STR("*float*: Reference HTF outlet temperature at design [C]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - nLoops\n"),
- 	NULL},
-{"T_hot", (getter)Powerblock_get_T_hot,(setter)Powerblock_set_T_hot,
-	PyDoc_STR("*float*: Hot HTF inlet temperature, from storage tank [C]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - nLoops\n"),
+	PyDoc_STR("*float*: Reference HTF outlet temperature at design [C]\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``T_cold_ref``:\n\n\t - nLoops\n"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1410,11 +1425,11 @@ Heliostat_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Heliostat_methods[] = {
 		{"assign",            (PyCFunction)Heliostat_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Heliostat_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Heliostat_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Heliostat_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Heliostat_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Heliostat_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Heliostat_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -1444,10 +1459,10 @@ Heliostat_set_csp_lf_sf_water_per_wash(VarGroupObject *self, PyObject *value, vo
 
 static PyGetSetDef Heliostat_getset[] = {
 {"csp_lf_sf_washes_per_year", (getter)Heliostat_get_csp_lf_sf_washes_per_year,(setter)Heliostat_set_csp_lf_sf_washes_per_year,
-	PyDoc_STR("*float*: Mirror washing frequency [-/year]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Mirror washing frequency [-/year]\n\n**Required:**\nTrue"),
  	NULL},
 {"csp_lf_sf_water_per_wash", (getter)Heliostat_get_csp_lf_sf_water_per_wash,(setter)Heliostat_set_csp_lf_sf_water_per_wash,
-	PyDoc_STR("*float*: Water usage per wash [L/m2_aper]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Water usage per wash [L/m2_aper]\n\n**Required:**\nTrue"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1562,11 +1577,11 @@ HeatSink_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef HeatSink_methods[] = {
 		{"assign",            (PyCFunction)HeatSink_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``HeatSink_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``HeatSink_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)HeatSink_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``HeatSink_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``HeatSink_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)HeatSink_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -1584,7 +1599,7 @@ HeatSink_set_heat_sink_dP_frac(VarGroupObject *self, PyObject *value, void *clos
 
 static PyGetSetDef HeatSink_getset[] = {
 {"heat_sink_dP_frac", (getter)HeatSink_get_heat_sink_dP_frac,(setter)HeatSink_set_heat_sink_dP_frac,
-	PyDoc_STR("*float*: Fractional pressure drop through heat sink\n\n*Required*: True"),
+	PyDoc_STR("*float*: Fractional pressure drop through heat sink\n\n**Required:**\nTrue"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1699,11 +1714,11 @@ Outputs_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Outputs_methods[] = {
 		{"assign",            (PyCFunction)Outputs_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Outputs_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Outputs_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -2496,12 +2511,11 @@ static PyMethodDef LinearFresnelDsgIphModule_methods[] = {
 		{"new",             LinearFresnelDsgIph_new,         METH_VARARGS,
 				PyDoc_STR("new() -> LinearFresnelDsgIph")},
 		{"default",             LinearFresnelDsgIph_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> LinearFresnelDsgIph\n\nUse default attributes\n"
-				"`config` options:\n\n- \"DSGLIPHLCOHCalculator\"\n- \"DSGLIPHNone\"")},
+				PyDoc_STR("default(config) -> LinearFresnelDsgIph\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n		- *\"DSGLIPHLCOHCalculator\"*\n\n		- *\"DSGLIPHNone\"*\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
 		{"wrap",             LinearFresnelDsgIph_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> LinearFresnelDsgIph\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
+				PyDoc_STR("wrap(ssc_data_t) -> LinearFresnelDsgIph\n\nLoad data from a PySSC object.\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap()``")},
 		{"from_existing",   LinearFresnelDsgIph_from_existing,        METH_VARARGS,
-				PyDoc_STR("from_existing(data, optional config) -> LinearFresnelDsgIph\n\nShare underlying data with an existing PySAM class. If config provided, default attributes are loaded otherwise.")},
+				PyDoc_STR("from_existing(data, optional config) -> LinearFresnelDsgIph\n\nShare data with an existing PySAM class. If ``optional config`` is a valid configuration name, load the module's defaults for that configuration.")},
 		{NULL,              NULL}           /* sentinel */
 };
 

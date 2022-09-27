@@ -418,6 +418,7 @@ class Merchantplant(object):
 		degradation = tuple
 		gen = tuple
 		gen_purchases = tuple
+		gen_without_battery = tuple
 		system_capacity = float
 		system_pre_curtailment_kwac = tuple
 
@@ -601,6 +602,7 @@ class Merchantplant(object):
 		cf_energy_net = tuple
 		cf_energy_purchases = tuple
 		cf_energy_sales = tuple
+		cf_energy_without_battery = tuple
 		cf_feddepr_custom = tuple
 		cf_feddepr_macrs_15 = tuple
 		cf_feddepr_macrs_5 = tuple
@@ -998,18 +1000,23 @@ class Merchantplant(object):
 		lcos_real = float
 		min_dscr = float
 		mp_ancillary_services1_cleared_capacity = tuple
+		mp_ancillary_services1_consumed_cost = tuple
 		mp_ancillary_services1_generated_revenue = tuple
 		mp_ancillary_services1_price = tuple
 		mp_ancillary_services2_cleared_capacity = tuple
+		mp_ancillary_services2_consumed_cost = tuple
 		mp_ancillary_services2_generated_revenue = tuple
 		mp_ancillary_services2_price = tuple
 		mp_ancillary_services3_cleared_capacity = tuple
+		mp_ancillary_services3_consumed_cost = tuple
 		mp_ancillary_services3_generated_revenue = tuple
 		mp_ancillary_services3_price = tuple
 		mp_ancillary_services4_cleared_capacity = tuple
+		mp_ancillary_services4_consumed_cost = tuple
 		mp_ancillary_services4_generated_revenue = tuple
 		mp_ancillary_services4_price = tuple
 		mp_energy_market_cleared_capacity = tuple
+		mp_energy_market_consumed_cost = tuple
 		mp_energy_market_generated_revenue = tuple
 		mp_energy_market_price = tuple
 		mp_total_cleared_capacity = tuple

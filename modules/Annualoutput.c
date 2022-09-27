@@ -69,11 +69,11 @@ AnnualOutput_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef AnnualOutput_methods[] = {
 		{"assign",            (PyCFunction)AnnualOutput_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``AnnualOutput_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``AnnualOutput_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)AnnualOutput_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``AnnualOutput_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``AnnualOutput_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)AnnualOutput_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -151,22 +151,22 @@ AnnualOutput_set_system_use_lifetime_output(VarGroupObject *self, PyObject *valu
 
 static PyGetSetDef AnnualOutput_getset[] = {
 {"analysis_period", (getter)AnnualOutput_get_analysis_period,(setter)AnnualOutput_set_analysis_period,
-	PyDoc_STR("*float*: Analyis period [years]\n\n*Constraints*: INTEGER,MIN=0,MAX=50\n\n*Required*: If not provided, assumed to be 30"),
+	PyDoc_STR("*float*: Analyis period [years]\n\n**Constraints:**\nINTEGER,MIN=0,MAX=50\n\n**Required:**\nFalse. Automatically set to 30 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"energy_availability", (getter)AnnualOutput_get_energy_availability,(setter)AnnualOutput_set_energy_availability,
-	PyDoc_STR("*sequence*: Annual energy availability [%]\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: Annual energy availability [%]\n\n**Required:**\nTrue"),
  	NULL},
 {"energy_curtailment", (getter)AnnualOutput_get_energy_curtailment,(setter)AnnualOutput_set_energy_curtailment,
-	PyDoc_STR("*sequence[sequence]*: First year energy curtailment\n\n*Info*: (0..1)\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: First year energy curtailment\n\n**Info:**\n(0..1)\n\n**Required:**\nTrue"),
  	NULL},
 {"energy_degradation", (getter)AnnualOutput_get_energy_degradation,(setter)AnnualOutput_set_energy_degradation,
-	PyDoc_STR("*sequence*: Annual energy degradation [%]\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: Annual energy degradation [%]\n\n**Required:**\nTrue"),
  	NULL},
 {"system_hourly_energy", (getter)AnnualOutput_get_system_hourly_energy,(setter)AnnualOutput_set_system_hourly_energy,
-	PyDoc_STR("*sequence*: Hourly energy produced by the system [kW]\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: Hourly energy produced by the system [kW]\n\n**Required:**\nTrue"),
  	NULL},
 {"system_use_lifetime_output", (getter)AnnualOutput_get_system_use_lifetime_output,(setter)AnnualOutput_set_system_use_lifetime_output,
-	PyDoc_STR("*float*: Lifetime hourly system outputs [0/1]\n\n*Options*: 0=hourly first year,1=hourly lifetime\n\n*Constraints*: INTEGER,MIN=0\n\n*Required*: True"),
+	PyDoc_STR("*float*: Lifetime hourly system outputs [0/1]\n\n**Options:**\n0=hourly first year,1=hourly lifetime\n\n**Constraints:**\nINTEGER,MIN=0\n\n**Required:**\nTrue"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -281,11 +281,11 @@ Outputs_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Outputs_methods[] = {
 		{"assign",            (PyCFunction)Outputs_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Outputs_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Outputs_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -660,12 +660,11 @@ static PyMethodDef AnnualoutputModule_methods[] = {
 		{"new",             Annualoutput_new,         METH_VARARGS,
 				PyDoc_STR("new() -> Annualoutput")},
 		{"default",             Annualoutput_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Annualoutput\n\nUse default attributes\n"
-				"None")},
+				PyDoc_STR("default(config) -> Annualoutput\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n- None\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
 		{"wrap",             Annualoutput_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> Annualoutput\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
+				PyDoc_STR("wrap(ssc_data_t) -> Annualoutput\n\nLoad data from a PySSC object.\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap()``")},
 		{"from_existing",   Annualoutput_from_existing,        METH_VARARGS,
-				PyDoc_STR("from_existing(data, optional config) -> Annualoutput\n\nShare underlying data with an existing PySAM class. If config provided, default attributes are loaded otherwise.")},
+				PyDoc_STR("from_existing(data, optional config) -> Annualoutput\n\nShare data with an existing PySAM class. If ``optional config`` is a valid configuration name, load the module's defaults for that configuration.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
