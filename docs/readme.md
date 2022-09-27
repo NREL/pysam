@@ -18,7 +18,7 @@ Python docstrings use Sphinx format: https://sphinx-rtd-tutorial.readthedocs.io/
 
 2. Run export_config:
 
-    * For Windows, in Visual Studio Community, set the export_config project as the startup project (right-click in Solution Explorer) and use the Visual Studio debugger (**Debug, Start without Debugging**).
+    * For Windows, in Visual Studio Community, set the export_config project as the startup project (right-click in Solution Explorer) and use the Visual Studio debugger (**Debug, Start without Debugging**). Press any key to close the debug window when it fisnishes.
 
 3. Open a terminal window.    
 
