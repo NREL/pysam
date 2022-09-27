@@ -1,15 +1,12 @@
-.. Tools:
-
-Tools
-=======
+Helper Functions (Tools)
+=========================
 
 These helper functions provide additional functionality for working with specific models.
 
-
 Resource Tools
-**************
+---------------
 
-These can be accessed via **import PySAM.ResourceTools**
+Access resource tools with ``import PySAM.ResourceTools``.
 
 These functions help with solar resource, wind resource and utility rate data, downloads and formatting.
 See how to download solar resource data from the National Solar Radiation Database or wind resource data from the WindToolKit.
@@ -21,13 +18,11 @@ Please see an example of FetchResource `here <https://github.com/NREL/pysam/blob
     :members:
     :undoc-members:
 
-
 Battery Tools
-*************
+---------------
 
-These can be accessed via **import PySAM.BatteryTools**
+Access battery tools with ``import PySAM.BatteryTools``.
 
 .. automodule:: files.BatteryTools
     :members:
     :undoc-members:
-

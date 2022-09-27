@@ -232,16 +232,14 @@ class TroughPhysical(object):
 
 		ampl_data_dir = str
 		ampl_exec_call = str
-		can_cycle_use_standby = float
-		disp_csu_cost_rel = float
+		disp_csu_cost = float
 		disp_frequency = float
 		disp_horizon = float
 		disp_max_iter = float
 		disp_mip_gap = float
 		disp_pen_delta_w = float
-		disp_pen_ramping = float
 		disp_reporting = float
-		disp_rsu_cost_rel = float
+		disp_rsu_cost = float
 		disp_spec_bb = float
 		disp_spec_presolve = float
 		disp_spec_scaling = float
@@ -288,9 +286,7 @@ class TroughPhysical(object):
 			pass
 
 
-		disp_csu_cost = float
 		disp_inventory_incentive = float
-		disp_rsu_cost = float
 
 
 	class FinancialModel(object):
@@ -347,7 +343,6 @@ class TroughPhysical(object):
 
 
 		mp_energy_market_revenue = tuple
-		ppa_price_input = tuple
 
 
 	class System(object):
@@ -398,20 +393,6 @@ class TroughPhysical(object):
 		tes_wallthicks = tuple
 		trough_loop_control = tuple
 		use_solar_mult_or_aperture_area = float
-
-
-	class TowerAndReceiver(object):
-		def assign(self): 
-			pass
-	
-		def export(self) -> dict:
-			pass
-	
-		def __init__(self, *args, **kwargs): 
-			pass
-
-
-		piping_loss = float
 
 
 	class AdjustmentFactors(object):
@@ -476,7 +457,6 @@ class TroughPhysical(object):
 		beam = tuple
 		capacity_factor = float
 		conversion_factor = float
-		cycle_htf_pump_power = tuple
 		defocus = tuple
 		deltaP_field = tuple
 		disp_obj_relax = tuple
@@ -503,6 +483,7 @@ class TroughPhysical(object):
 		eta = tuple
 		gen = tuple
 		hour_day = tuple
+		htf_pump_power = tuple
 		is_pc_sb_allowed = tuple
 		is_pc_su_allowed = tuple
 		is_rec_su_allowed = tuple
@@ -589,7 +570,6 @@ class TroughPhysical(object):
 		solzen = tuple
 		tank_losses = tuple
 		tdry = tuple
-		tes_htf_pump_power = tuple
 		time_hr = tuple
 		tou_value = tuple
 		twet = tuple

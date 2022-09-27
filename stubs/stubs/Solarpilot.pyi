@@ -43,8 +43,6 @@ class Solarpilot(object):
 		check_max_flux = float
 		contingency_rate = float
 		cost_sf_fixed = float
-		csp_pt_sf_fixed_land_area = float
-		csp_pt_sf_land_overhead_factor = float
 		delta_flux_hrs = float
 		dens_mirror = float
 		dni_des = float

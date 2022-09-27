@@ -372,7 +372,6 @@ class Levpartflip(object):
 
 
 		en_electricity_rates = float
-		rate_escalation = tuple
 
 
 	class Moratorium(object):

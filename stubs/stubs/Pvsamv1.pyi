@@ -879,8 +879,6 @@ class Pvsamv1(object):
 
 
 		om_batt_replacement_cost = tuple
-		om_batt_variable_cost = tuple
-		om_production_escal = float
 		om_replacement_cost_escal = float
 
 

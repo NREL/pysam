@@ -274,7 +274,11 @@ def assign_values(mod, i):
     for default in defaults:
         default = os.path.basename(default).split('.')[0].split('_')[1]
         m = i.default(default)
-        if mod == "Pvsamv1" or mod == "Pvwattsv7" or mod == "TcsmoltenSalt" or mod == "Pvwattsv5" or mod == "Swh":
+        if mod == "Pvsamv1" or mod == "Pvwattsv7" or mod == "Pvwattsv5" or mod =="Pvwattsv8":
+            m.SolarResource.solar_resource_file = sf
+            m.SolarResource.use_wf_albedo = 0
+            m.SolarResource.albedo = (0.1,) * 12
+        elif mod == "TcsmoltenSalt" or mod == "Swh":
             m.SolarResource.solar_resource_file = sf
         elif mod == "Biomass":
             m.Biopower.file_name = sf
@@ -328,7 +332,7 @@ def test_run_all():
         return
     techs = (
         "Battery", "Battwatts", "Biomass", "Geothermal", "LinearFresnelDsgIph", "MhkTidal", "MhkWave", "Windpower",
-        "Pvsamv1", "Pvwattsv7", "Pvwattsv5", "TcsmoltenSalt", "Hcpv", "Swh", "GenericSystem", "Grid",
+        "Pvsamv1", "Pvwattsv8", "Pvwattsv7", "Pvwattsv5", "TcsmoltenSalt", "Hcpv", "Swh", "GenericSystem", "Grid",
         "TroughPhysicalProcessHeat", "TcsMSLF", "TcsgenericSolar", "TcslinearFresnel", "TcstroughEmpirical",
         "TroughPhysical", "EtesElectricResistance", )
     for mod in techs:

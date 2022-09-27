@@ -69,11 +69,11 @@ Lifetime_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Lifetime_methods[] = {
 		{"assign",            (PyCFunction)Lifetime_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Lifetime_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Lifetime_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Lifetime_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Lifetime_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Lifetime_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Lifetime_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -103,10 +103,10 @@ Lifetime_set_system_use_lifetime_output(VarGroupObject *self, PyObject *value, v
 
 static PyGetSetDef Lifetime_getset[] = {
 {"analysis_period", (getter)Lifetime_get_analysis_period,(setter)Lifetime_set_analysis_period,
-	PyDoc_STR("*float*: Lifetime analysis period [years]\n\n*Info*: The number of years in the simulation\n\n*Required*: True if system_use_lifetime_output=1"),
+	PyDoc_STR("*float*: Lifetime analysis period [years]\n\n**Info:**\nThe number of years in the simulation\n\n**Required:**\nRequired if system_use_lifetime_output=1"),
  	NULL},
 {"system_use_lifetime_output", (getter)Lifetime_get_system_use_lifetime_output,(setter)Lifetime_set_system_use_lifetime_output,
-	PyDoc_STR("*float*: Lifetime simulation [0/1]\n\n*Options*: 0=SingleYearRepeated,1=RunEveryYear\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Lifetime simulation [0/1]\n\n**Options:**\n0=SingleYearRepeated,1=RunEveryYear\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -221,11 +221,11 @@ Common_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Common_methods[] = {
 		{"assign",            (PyCFunction)Common_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Common_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Common_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Common_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Common_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Common_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Common_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -267,13 +267,13 @@ Common_set_gen(VarGroupObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef Common_getset[] = {
 {"annual_energy", (getter)Common_get_annual_energy,(setter)Common_set_annual_energy,
-	PyDoc_STR("*float*: Annual Energy [kWh]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Annual Energy [kWh]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"capacity_factor", (getter)Common_get_capacity_factor,(setter)Common_set_capacity_factor,
-	PyDoc_STR("*float*: Capacity factor [%]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Capacity factor [%]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"gen", (getter)Common_get_gen,(setter)Common_set_gen,
-	PyDoc_STR("*sequence*: System power generated [kW]\n\n*Info*: Lifetime system generation"),
+	PyDoc_STR("*sequence*: System power generated [kW]\n\n**Info:**\nLifetime system generation"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -388,11 +388,11 @@ Load_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Load_methods[] = {
 		{"assign",            (PyCFunction)Load_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Load_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Load_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Load_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Load_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Load_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Load_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -525,11 +525,11 @@ FuelCell_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef FuelCell_methods[] = {
 		{"assign",            (PyCFunction)FuelCell_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``FuelCell_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``FuelCell_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)FuelCell_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``FuelCell_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``FuelCell_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)FuelCell_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -934,10 +934,10 @@ static PyGetSetDef FuelCell_getset[] = {
 	PyDoc_STR("*sequence*: Periods 1-6 charging allowed?"),
  	NULL},
 {"dispatch_manual_fuelcelldischarge", (getter)FuelCell_get_dispatch_manual_fuelcelldischarge,(setter)FuelCell_set_dispatch_manual_fuelcelldischarge,
-	PyDoc_STR("*sequence*: Periods 1-6 discharging allowed?\n\n*Changes to this variable may require updating the values of the following*: \n\t - dispatch_manual_percent_fc_discharge\n\t - dispatch_manual_units_fc_discharge\n"),
+	PyDoc_STR("*sequence*: Periods 1-6 discharging allowed?\n\nThe value of the following variables depends on ``dispatch_manual_fuelcelldischarge``:\n\n\t - dispatch_manual_percent_fc_discharge\n\t - dispatch_manual_units_fc_discharge\n"),
  	NULL},
 {"dispatch_manual_percent_fc_discharge", (getter)FuelCell_get_dispatch_manual_percent_fc_discharge,(setter)FuelCell_set_dispatch_manual_percent_fc_discharge,
-	PyDoc_STR("*sequence*: Periods 1-6 percent of max fuelcell output\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - dispatch_manual_fuelcelldischarge\n"),
+	PyDoc_STR("*sequence*: Periods 1-6 percent of max fuelcell output\n\nThe value of ``dispatch_manual_percent_fc_discharge`` depends on the following variables:\n\n\t - dispatch_manual_fuelcelldischarge\n"),
  	NULL},
 {"dispatch_manual_sched", (getter)FuelCell_get_dispatch_manual_sched,(setter)FuelCell_set_dispatch_manual_sched,
 	PyDoc_STR("*sequence[sequence]*: Dispatch schedule for weekday"),
@@ -946,13 +946,13 @@ static PyGetSetDef FuelCell_getset[] = {
 	PyDoc_STR("*sequence[sequence]*: Dispatch schedule for weekend"),
  	NULL},
 {"dispatch_manual_units_fc_discharge", (getter)FuelCell_get_dispatch_manual_units_fc_discharge,(setter)FuelCell_set_dispatch_manual_units_fc_discharge,
-	PyDoc_STR("*sequence*: Periods 1-6 number of fuel cell units?\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - dispatch_manual_fuelcelldischarge\n"),
+	PyDoc_STR("*sequence*: Periods 1-6 number of fuel cell units?\n\nThe value of ``dispatch_manual_units_fc_discharge`` depends on the following variables:\n\n\t - dispatch_manual_fuelcelldischarge\n"),
  	NULL},
 {"fuelcell_availability_schedule", (getter)FuelCell_get_fuelcell_availability_schedule,(setter)FuelCell_set_fuelcell_availability_schedule,
 	PyDoc_STR("*sequence[sequence]*: Fuel cell availability schedule  [Column 1: Hour of year start shutdown/Column 2: Hours duration of shutdown ]"),
  	NULL},
 {"fuelcell_degradation", (getter)FuelCell_get_fuelcell_degradation,(setter)FuelCell_set_fuelcell_degradation,
-	PyDoc_STR("*float*: Fuel cell degradation per hour [kW/h]\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - fuelcell_unit_max_power\n"),
+	PyDoc_STR("*float*: Fuel cell degradation per hour [kW/h]\n\nThe value of ``fuelcell_degradation`` depends on the following variables:\n\n\t - fuelcell_unit_max_power\n"),
  	NULL},
 {"fuelcell_degradation_restart", (getter)FuelCell_get_fuelcell_degradation_restart,(setter)FuelCell_set_fuelcell_degradation_restart,
 	PyDoc_STR("*float*: Fuel cell degradation at restart [kW]"),
@@ -964,43 +964,43 @@ static PyGetSetDef FuelCell_getset[] = {
 	PyDoc_STR("*float*: Fuel cell scheduled restarts per year"),
  	NULL},
 {"fuelcell_dispatch", (getter)FuelCell_get_fuelcell_dispatch,(setter)FuelCell_set_fuelcell_dispatch,
-	PyDoc_STR("*sequence*: Fuel cell dispatch input per unit [kW]\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - fuelcell_unit_max_power\n"),
+	PyDoc_STR("*sequence*: Fuel cell dispatch input per unit [kW]\n\nThe value of ``fuelcell_dispatch`` depends on the following variables:\n\n\t - fuelcell_unit_max_power\n"),
  	NULL},
 {"fuelcell_dispatch_choice", (getter)FuelCell_get_fuelcell_dispatch_choice,(setter)FuelCell_set_fuelcell_dispatch_choice,
 	PyDoc_STR("*float*: Fuel cell dispatch choice [0/1/2]"),
  	NULL},
 {"fuelcell_dynamic_response_down", (getter)FuelCell_get_fuelcell_dynamic_response_down,(setter)FuelCell_set_fuelcell_dynamic_response_down,
-	PyDoc_STR("*float*: Fuel cell ramp rate limit down [kW/h]\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - fuelcell_number_of_units\n\t - fuelcell_unit_max_power\n"),
+	PyDoc_STR("*float*: Fuel cell ramp rate limit down [kW/h]\n\nThe value of ``fuelcell_dynamic_response_down`` depends on the following variables:\n\n\t - fuelcell_number_of_units\n\t - fuelcell_unit_max_power\n"),
  	NULL},
 {"fuelcell_dynamic_response_up", (getter)FuelCell_get_fuelcell_dynamic_response_up,(setter)FuelCell_set_fuelcell_dynamic_response_up,
-	PyDoc_STR("*float*: Fuel cell ramp rate limit up [kW/h]\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - fuelcell_number_of_units\n\t - fuelcell_unit_max_power\n"),
+	PyDoc_STR("*float*: Fuel cell ramp rate limit up [kW/h]\n\nThe value of ``fuelcell_dynamic_response_up`` depends on the following variables:\n\n\t - fuelcell_number_of_units\n\t - fuelcell_unit_max_power\n"),
  	NULL},
 {"fuelcell_efficiency", (getter)FuelCell_get_fuelcell_efficiency,(setter)FuelCell_set_fuelcell_efficiency,
 	PyDoc_STR("*sequence[sequence]*: Fuel cell efficiency table "),
  	NULL},
 {"fuelcell_efficiency_choice", (getter)FuelCell_get_fuelcell_efficiency_choice,(setter)FuelCell_set_fuelcell_efficiency_choice,
-	PyDoc_STR("*float*: Fuel cell efficiency definition choice  [0/1]\n\n*Options*: 0=OriginalNameplate,1=DegradedNameplate"),
+	PyDoc_STR("*float*: Fuel cell efficiency definition choice  [0/1]\n\n**Options:**\n0=OriginalNameplate,1=DegradedNameplate"),
  	NULL},
 {"fuelcell_fixed_pct", (getter)FuelCell_get_fuelcell_fixed_pct,(setter)FuelCell_set_fuelcell_fixed_pct,
 	PyDoc_STR("*float*: Fuel cell fixed operation percent [%]"),
  	NULL},
 {"fuelcell_fuel_available", (getter)FuelCell_get_fuelcell_fuel_available,(setter)FuelCell_set_fuelcell_fuel_available,
-	PyDoc_STR("*float*: Fuel cell available fuel quantity [MCf]\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - fuelcell_fuel_type\n"),
+	PyDoc_STR("*float*: Fuel cell available fuel quantity [MCf]\n\nThe value of ``fuelcell_fuel_available`` depends on the following variables:\n\n\t - fuelcell_fuel_type\n"),
  	NULL},
 {"fuelcell_fuel_price", (getter)FuelCell_get_fuelcell_fuel_price,(setter)FuelCell_set_fuelcell_fuel_price,
 	PyDoc_STR("*float*: Fuel cell price [$/MCf]"),
  	NULL},
 {"fuelcell_fuel_type", (getter)FuelCell_get_fuelcell_fuel_type,(setter)FuelCell_set_fuelcell_fuel_type,
-	PyDoc_STR("*float*: Fuel cell type [0/1]\n\n*Changes to this variable may require updating the values of the following*: \n\t - fuelcell_fuel_available\n\t - fuelcell_lhv\n"),
+	PyDoc_STR("*float*: Fuel cell type [0/1]\n\nThe value of the following variables depends on ``fuelcell_fuel_type``:\n\n\t - fuelcell_fuel_available\n\t - fuelcell_lhv\n"),
  	NULL},
 {"fuelcell_is_started", (getter)FuelCell_get_fuelcell_is_started,(setter)FuelCell_set_fuelcell_is_started,
 	PyDoc_STR("*float*: Fuel cell is started [0/1]"),
  	NULL},
 {"fuelcell_lhv", (getter)FuelCell_get_fuelcell_lhv,(setter)FuelCell_set_fuelcell_lhv,
-	PyDoc_STR("*float*: Fuel cell lower heating value [Btu/ft3]\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - fuelcell_fuel_type\n"),
+	PyDoc_STR("*float*: Fuel cell lower heating value [Btu/ft3]\n\nThe value of ``fuelcell_lhv`` depends on the following variables:\n\n\t - fuelcell_fuel_type\n"),
  	NULL},
 {"fuelcell_number_of_units", (getter)FuelCell_get_fuelcell_number_of_units,(setter)FuelCell_set_fuelcell_number_of_units,
-	PyDoc_STR("*float*: Fuel cell number of units\n\n*Changes to this variable may require updating the values of the following*: \n\t - fuelcell_dynamic_response_down\n\t - fuelcell_dynamic_response_up\n"),
+	PyDoc_STR("*float*: Fuel cell number of units\n\nThe value of the following variables depends on ``fuelcell_number_of_units``:\n\n\t - fuelcell_dynamic_response_down\n\t - fuelcell_dynamic_response_up\n"),
  	NULL},
 {"fuelcell_operation_options", (getter)FuelCell_get_fuelcell_operation_options,(setter)FuelCell_set_fuelcell_operation_options,
 	PyDoc_STR("*float*: Fuel cell turn off options [0/1]"),
@@ -1024,10 +1024,10 @@ static PyGetSetDef FuelCell_getset[] = {
 	PyDoc_STR("*float*: Fuel cell type [0/1/2]"),
  	NULL},
 {"fuelcell_unit_max_power", (getter)FuelCell_get_fuelcell_unit_max_power,(setter)FuelCell_set_fuelcell_unit_max_power,
-	PyDoc_STR("*float*: Fuel cell max power per unit [kW]\n\n*Changes to this variable may require updating the values of the following*: \n\t - fuelcell_degradation\n\t - fuelcell_dispatch\n\t - fuelcell_dynamic_response_down\n\t - fuelcell_dynamic_response_up\n\t - fuelcell_unit_min_power\n"),
+	PyDoc_STR("*float*: Fuel cell max power per unit [kW]\n\nThe value of the following variables depends on ``fuelcell_unit_max_power``:\n\n\t - fuelcell_degradation\n\t - fuelcell_dispatch\n\t - fuelcell_dynamic_response_down\n\t - fuelcell_dynamic_response_up\n\t - fuelcell_unit_min_power\n"),
  	NULL},
 {"fuelcell_unit_min_power", (getter)FuelCell_get_fuelcell_unit_min_power,(setter)FuelCell_set_fuelcell_unit_min_power,
-	PyDoc_STR("*float*: Fuel cell min power per unit [kW]\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - fuelcell_unit_max_power\n"),
+	PyDoc_STR("*float*: Fuel cell min power per unit [kW]\n\nThe value of ``fuelcell_unit_min_power`` depends on the following variables:\n\n\t - fuelcell_unit_max_power\n"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1142,11 +1142,11 @@ Outputs_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Outputs_methods[] = {
 		{"assign",            (PyCFunction)Outputs_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Outputs_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Outputs_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -1632,11 +1632,11 @@ static PyMethodDef FuelcellModule_methods[] = {
 		{"new",             Fuelcell_new,         METH_VARARGS,
 				PyDoc_STR("new() -> Fuelcell")},
 		{"default",             Fuelcell_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Fuelcell\n\nLoad values from SAM default configurations to provide as inputs to the model. \n\n			`config` options:\n\n- \"FuelCellCommercial\"\n- \"FuelCellSingleOwner\"\n\n.. note::\n\n	The default configuration is a collection of default values for the module inputs. Some inputs may not be included in the default configuration and are automatically assigned the value indicated by the variable's 'Required' attribute.")},
+				PyDoc_STR("default(config) -> Fuelcell\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n		- *\"FuelCellCommercial\"*\n\n		- *\"FuelCellSingleOwner\"*\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
 		{"wrap",             Fuelcell_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> Fuelcell\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
+				PyDoc_STR("wrap(ssc_data_t) -> Fuelcell\n\nLoad data from a PySSC object.\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap()``")},
 		{"from_existing",   Fuelcell_from_existing,        METH_VARARGS,
-				PyDoc_STR("from_existing(data, optional config) -> Fuelcell\n\nShare underlying data with an existing PySAM class. If config provided, default attributes are loaded otherwise.")},
+				PyDoc_STR("from_existing(data, optional config) -> Fuelcell\n\nShare data with an existing PySAM class. If ``optional config`` is a valid configuration name, load the module's defaults for that configuration.")},
 		{NULL,              NULL}           /* sentinel */
 };
 

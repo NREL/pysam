@@ -69,11 +69,11 @@ Common_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Common_methods[] = {
 		{"assign",            (PyCFunction)Common_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Common_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Common_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Common_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Common_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Common_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Common_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -295,58 +295,58 @@ Common_set_ur_sell_eq_buy(VarGroupObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef Common_getset[] = {
 {"analysis_period", (getter)Common_get_analysis_period,(setter)Common_set_analysis_period,
-	PyDoc_STR("*float*: Number of years in analysis [years]\n\n*Constraints*: INTEGER,POSITIVE\n\n*Required*: True"),
+	PyDoc_STR("*float*: Number of years in analysis [years]\n\n**Constraints:**\nINTEGER,POSITIVE\n\n**Required:**\nTrue"),
  	NULL},
 {"load_escalation", (getter)Common_get_load_escalation,(setter)Common_set_load_escalation,
-	PyDoc_STR("*sequence*: Annual load escalation [%/year]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*sequence*: Annual load escalation [%/year]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"rate_escalation", (getter)Common_get_rate_escalation,(setter)Common_set_rate_escalation,
-	PyDoc_STR("*sequence*: Annual electricity rate escalation [%/year]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*sequence*: Annual electricity rate escalation [%/year]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"system_use_lifetime_output", (getter)Common_get_system_use_lifetime_output,(setter)Common_set_system_use_lifetime_output,
-	PyDoc_STR("*float*: Lifetime hourly system outputs [0/1]\n\n*Options*: 0=hourly first year,1=hourly lifetime\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: True"),
+	PyDoc_STR("*float*: Lifetime hourly system outputs [0/1]\n\n**Options:**\n0=hourly first year,1=hourly lifetime\n\n**Constraints:**\nINTEGER,MIN=0,MAX=1\n\n**Required:**\nTrue"),
  	NULL},
 {"ur_annual_min_charge", (getter)Common_get_ur_annual_min_charge,(setter)Common_set_ur_annual_min_charge,
-	PyDoc_STR("*float*: Annual minimum charge [$]\n\n*Required*: If not provided, assumed to be 0.0"),
+	PyDoc_STR("*float*: Annual minimum charge [$]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ur_dc_enable", (getter)Common_get_ur_dc_enable,(setter)Common_set_ur_dc_enable,
-	PyDoc_STR("*float*: Enable demand charge [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Enable demand charge [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ur_dc_flat_mat", (getter)Common_get_ur_dc_flat_mat,(setter)Common_set_ur_dc_flat_mat,
-	PyDoc_STR("*sequence[sequence]*: Demand rates (flat) table\n\n*Required*: True if ur_dc_enable=1"),
+	PyDoc_STR("*sequence[sequence]*: Demand rates (flat) table\n\n**Required:**\nRequired if ur_dc_enable=1"),
  	NULL},
 {"ur_dc_sched_weekday", (getter)Common_get_ur_dc_sched_weekday,(setter)Common_set_ur_dc_sched_weekday,
-	PyDoc_STR("*sequence[sequence]*: Demand charge weekday schedule\n\n*Info*: 12x24"),
+	PyDoc_STR("*sequence[sequence]*: Demand charge weekday schedule\n\n**Info:**\n12x24"),
  	NULL},
 {"ur_dc_sched_weekend", (getter)Common_get_ur_dc_sched_weekend,(setter)Common_set_ur_dc_sched_weekend,
-	PyDoc_STR("*sequence[sequence]*: Demand charge weekend schedule\n\n*Info*: 12x24"),
+	PyDoc_STR("*sequence[sequence]*: Demand charge weekend schedule\n\n**Info:**\n12x24"),
  	NULL},
 {"ur_dc_tou_mat", (getter)Common_get_ur_dc_tou_mat,(setter)Common_set_ur_dc_tou_mat,
-	PyDoc_STR("*sequence[sequence]*: Demand rates (TOU) table\n\n*Required*: True if ur_dc_enable=1"),
+	PyDoc_STR("*sequence[sequence]*: Demand rates (TOU) table\n\n**Required:**\nRequired if ur_dc_enable=1"),
  	NULL},
 {"ur_ec_sched_weekday", (getter)Common_get_ur_ec_sched_weekday,(setter)Common_set_ur_ec_sched_weekday,
-	PyDoc_STR("*sequence[sequence]*: Energy charge weekday schedule\n\n*Info*: 12x24\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: Energy charge weekday schedule\n\n**Info:**\n12x24\n\n**Required:**\nTrue"),
  	NULL},
 {"ur_ec_sched_weekend", (getter)Common_get_ur_ec_sched_weekend,(setter)Common_set_ur_ec_sched_weekend,
-	PyDoc_STR("*sequence[sequence]*: Energy charge weekend schedule\n\n*Info*: 12x24\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: Energy charge weekend schedule\n\n**Info:**\n12x24\n\n**Required:**\nTrue"),
  	NULL},
 {"ur_ec_tou_mat", (getter)Common_get_ur_ec_tou_mat,(setter)Common_set_ur_ec_tou_mat,
-	PyDoc_STR("*sequence[sequence]*: Energy rates table\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: Energy rates table\n\n**Required:**\nTrue"),
  	NULL},
 {"ur_metering_option", (getter)Common_get_ur_metering_option,(setter)Common_set_ur_metering_option,
-	PyDoc_STR("*float*: Metering options [0=Single meter with monthly rollover credits in kWh,1=Single meter with monthly rollover credits in $,2=Single meter with no monthly rollover credits,3=Two meters with all generation sold and all load purchased]\n\n*Info*: Net metering monthly excess\n\n*Constraints*: INTEGER\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Metering options [0=Single meter with monthly rollover credits in kWh,1=Single meter with monthly rollover credits in $,2=Single meter with no monthly rollover credits,3=Two meters with all generation sold and all load purchased]\n\n**Info:**\nNet metering monthly excess\n\n**Constraints:**\nINTEGER\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ur_monthly_fixed_charge", (getter)Common_get_ur_monthly_fixed_charge,(setter)Common_set_ur_monthly_fixed_charge,
-	PyDoc_STR("*float*: Monthly fixed charge [$]\n\n*Required*: If not provided, assumed to be 0.0"),
+	PyDoc_STR("*float*: Monthly fixed charge [$]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ur_monthly_min_charge", (getter)Common_get_ur_monthly_min_charge,(setter)Common_set_ur_monthly_min_charge,
-	PyDoc_STR("*float*: Monthly minimum charge [$]\n\n*Required*: If not provided, assumed to be 0.0"),
+	PyDoc_STR("*float*: Monthly minimum charge [$]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ur_nm_yearend_sell_rate", (getter)Common_get_ur_nm_yearend_sell_rate,(setter)Common_set_ur_nm_yearend_sell_rate,
-	PyDoc_STR("*float*: Year end sell rate [$/kWh]\n\n*Required*: If not provided, assumed to be 0.0"),
+	PyDoc_STR("*float*: Year end sell rate [$/kWh]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ur_sell_eq_buy", (getter)Common_get_ur_sell_eq_buy,(setter)Common_set_ur_sell_eq_buy,
-	PyDoc_STR("*float*: Set sell rate equal to buy rate [0/1]\n\n*Info*: Optional override\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Set sell rate equal to buy rate [0/1]\n\n**Info:**\nOptional override\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -461,11 +461,11 @@ TimeSeries_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef TimeSeries_methods[] = {
 		{"assign",            (PyCFunction)TimeSeries_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``TimeSeries_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``TimeSeries_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)TimeSeries_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``TimeSeries_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``TimeSeries_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)TimeSeries_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -495,10 +495,10 @@ TimeSeries_set_load(VarGroupObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef TimeSeries_getset[] = {
 {"gen", (getter)TimeSeries_get_gen,(setter)TimeSeries_set_gen,
-	PyDoc_STR("*sequence*: System power generated [kW]\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: System power generated [kW]\n\n**Required:**\nTrue"),
  	NULL},
 {"load", (getter)TimeSeries_get_load,(setter)TimeSeries_set_load,
-	PyDoc_STR("*sequence*: Electricity load (year 1) [kW]\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: Electricity load (year 1) [kW]\n\n**Required:**\nTrue"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -613,11 +613,11 @@ Financials_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Financials_methods[] = {
 		{"assign",            (PyCFunction)Financials_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Financials_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Financials_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Financials_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Financials_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Financials_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Financials_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -635,7 +635,7 @@ Financials_set_inflation_rate(VarGroupObject *self, PyObject *value, void *closu
 
 static PyGetSetDef Financials_getset[] = {
 {"inflation_rate", (getter)Financials_get_inflation_rate,(setter)Financials_set_inflation_rate,
-	PyDoc_STR("*float*: Inflation rate [%]\n\n*Constraints*: MIN=-99\n\n*Required*: True"),
+	PyDoc_STR("*float*: Inflation rate [%]\n\n**Constraints:**\nMIN=-99\n\n**Required:**\nTrue"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -750,11 +750,11 @@ AnnualOutput_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef AnnualOutput_methods[] = {
 		{"assign",            (PyCFunction)AnnualOutput_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``AnnualOutput_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``AnnualOutput_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)AnnualOutput_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``AnnualOutput_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``AnnualOutput_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)AnnualOutput_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -772,7 +772,7 @@ AnnualOutput_set_degradation(VarGroupObject *self, PyObject *value, void *closur
 
 static PyGetSetDef AnnualOutput_getset[] = {
 {"degradation", (getter)AnnualOutput_get_degradation,(setter)AnnualOutput_set_degradation,
-	PyDoc_STR("*sequence*: Annual energy degradation [%]\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: Annual energy degradation [%]\n\n**Required:**\nTrue"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -887,11 +887,11 @@ Outputs_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Outputs_methods[] = {
 		{"assign",            (PyCFunction)Outputs_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Outputs_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Outputs_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -2385,11 +2385,11 @@ static PyMethodDef Utilityrate4Module_methods[] = {
 		{"new",             Utilityrate4_new,         METH_VARARGS,
 				PyDoc_STR("new() -> Utilityrate4")},
 		{"default",             Utilityrate4_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Utilityrate4\n\nLoad values from SAM default configurations to provide as inputs to the model. \n\n			None\n\n.. note::\n\n	The default configuration is a collection of default values for the module inputs. Some inputs may not be included in the default configuration and are automatically assigned the value indicated by the variable's 'Required' attribute.")},
+				PyDoc_STR("default(config) -> Utilityrate4\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n- None\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
 		{"wrap",             Utilityrate4_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> Utilityrate4\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
+				PyDoc_STR("wrap(ssc_data_t) -> Utilityrate4\n\nLoad data from a PySSC object.\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap()``")},
 		{"from_existing",   Utilityrate4_from_existing,        METH_VARARGS,
-				PyDoc_STR("from_existing(data, optional config) -> Utilityrate4\n\nShare underlying data with an existing PySAM class. If config provided, default attributes are loaded otherwise.")},
+				PyDoc_STR("from_existing(data, optional config) -> Utilityrate4\n\nShare data with an existing PySAM class. If ``optional config`` is a valid configuration name, load the module's defaults for that configuration.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
