@@ -301,7 +301,7 @@ with open(os.path.join(pysam_dir, "docs", "version_changes", __version__ + ".rst
         f.write(cmod + "\n")
         f.write('************************************************\n\n')
         if 'mod_variables' in changes.keys():
-            f.write(f':doc:`modules/{cmod}` Modified Input Variables:\n\n')
+            f.write(f':doc:`../modules/{cmod}` Modified Input Variables:\n\n')
             if 'Added variables' in changes['mod_variables']:
                 f.write('    New variables:\n\n')
                 for v in changes['mod_variables']['Added variables']:
