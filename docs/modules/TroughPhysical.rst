@@ -86,6 +86,12 @@ Controller Group
 .. autoclass:: PySAM.TroughPhysical.TroughPhysical.Controller
 	:members:
 
+TowerAndReceiver Group
+-----------------------
+
+.. autoclass:: PySAM.TroughPhysical.TroughPhysical.TowerAndReceiver
+	:members:
+
 AdjustmentFactors Group
 ------------------------
 

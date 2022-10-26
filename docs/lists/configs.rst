@@ -1150,6 +1150,15 @@ Power Tower Molten Salt -- Single Owner
 
       :doc:`../modules/TcsmoltenSalt`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Singleowner`
 
+Pumped Thermal Energy Storage -- Single Owner
+-----------------------------------------------------------------------
+
+      Pumped thermal energy storage. Single owner PPA with constant DSCR and IRR target year, reserve accounts and depreciation allocations.
+
+      Configuration name for defaults: *"PTESSingleOwner"*
+
+      :doc:`../modules/EtesPtes`, :doc:`../modules/Singleowner`
+
 Solar Water Heating -- Commercial Owner
 -----------------------------------------------------------------------
 
@@ -1302,6 +1311,24 @@ Wave -- No Financial Model
       Configuration name for defaults: *"MEwaveNone"*
 
       :doc:`../modules/WaveFileReader`, :doc:`../modules/MhkWave`
+
+Wave -- Single Owner
+-----------------------------------------------------------------------
+
+      Marine energy wave system. Single owner PPA with constant DSCR and IRR target year, reserve accounts and depreciation allocations.
+
+      Configuration name for defaults: *"MEwaveSingleOwner"*
+
+      :doc:`../modules/WaveFileReader`, :doc:`../modules/MhkWave`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Singleowner`
+
+Wave Battery -- Single Owner
+-----------------------------------------------------------------------
+
+      Marine energy wave system with battery. Single owner PPA with constant DSCR and IRR target year, reserve accounts and depreciation allocations.
+
+      Configuration name for defaults: *"MEwaveBatterySingleOwner"*
+
+      :doc:`../modules/WaveFileReader`, :doc:`../modules/MhkWave`, :doc:`../modules/Battery`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Singleowner`
 
 Wind -- Commercial Owner
 -----------------------------------------------------------------------

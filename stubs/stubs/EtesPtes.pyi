@@ -1,4 +1,4 @@
-class EtesElectricResistance(object):
+class EtesPtes(object):
 	def assign(self, dict):
 		pass
 
@@ -100,72 +100,17 @@ class EtesElectricResistance(object):
 			pass
 
 
-		P_ref = float
-		T_htf_cold_des = float
-		T_htf_hot_des = float
-		design_eff = float
+		T_CT_cold_htf_des = float
+		T_CT_hot_htf_des = float
+		T_HT_cold_htf_des = float
+		T_HT_hot_htf_des = float
+		W_dot_pc_thermo_des = float
+		cop_hp_thermo_des = float
+		eta_pc_thermo_des = float
+		f_hp_parasitic_des = float
+		f_pc_parasitic_des = float
 		heater_mult = float
 		tshours = float
-
-
-	class PowerCycle(object):
-		def assign(self): 
-			pass
-	
-		def export(self) -> dict:
-			pass
-	
-		def __init__(self, *args, **kwargs): 
-			pass
-
-
-		cycle_cutoff_frac = float
-		cycle_max_frac = float
-		pb_pump_coef = float
-		pc_config = float
-		q_sby_frac = float
-		startup_frac = float
-		startup_time = float
-
-
-	class RankineCycle(object):
-		def assign(self): 
-			pass
-	
-		def export(self) -> dict:
-			pass
-	
-		def __init__(self, *args, **kwargs): 
-			pass
-
-
-		CT = float
-		P_boil = float
-		P_cond_min = float
-		P_cond_ratio = float
-		T_ITD_des = float
-		T_amb_des = float
-		T_approach = float
-		dT_cw_ref = float
-		n_pl_inc = float
-		pb_bd_frac = float
-		tech_type = float
-
-
-	class UserDefinedPowerCycle(object):
-		def assign(self): 
-			pass
-	
-		def export(self) -> dict:
-			pass
-	
-		def __init__(self, *args, **kwargs): 
-			pass
-
-
-		ud_f_W_dot_cool_des = float
-		ud_ind_od = tuple
-		ud_m_dot_water_cool_des = float
 
 
 	class ThermalStorage(object):
@@ -179,16 +124,9 @@ class EtesElectricResistance(object):
 			pass
 
 
-		cold_tank_Thtr = float
-		cold_tank_max_heat = float
-		h_tank = float
-		h_tank_min = float
+		cold_htf_code = float
 		hot_htf_code = float
-		hot_tank_Thtr = float
-		hot_tank_max_heat = float
-		tank_pairs = float
-		tes_init_hot_htf_percent = float
-		u_tank = float
+		ud_cold_htf_props = tuple
 		ud_hot_htf_props = tuple
 
 
@@ -205,8 +143,68 @@ class EtesElectricResistance(object):
 
 		f_q_dot_des_allowable_su = float
 		f_q_dot_heater_min = float
-		heater_efficiency = float
 		hrs_startup_at_max_rate = float
+
+
+	class PowerCycle(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		CT_pb_pump_coef = float
+		cycle_cutoff_frac = float
+		cycle_max_frac = float
+		heat_pump_CT_HTF_pump_coef = float
+		heat_pump_HT_HTF_pump_coef = float
+		pb_pump_coef = float
+		q_sby_frac = float
+		startup_frac = float
+		startup_time = float
+
+
+	class HotThermalStorage(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		cold_tank_Thtr = float
+		cold_tank_max_heat = float
+		h_tank = float
+		h_tank_min = float
+		hot_tank_Thtr = float
+		hot_tank_max_heat = float
+		tank_pairs = float
+		tes_init_hot_htf_percent = float
+		u_tank = float
+
+
+	class ColdThermalStorage(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		CT_h_tank = float
+		CT_h_tank_min = float
+		CT_tank_pairs = float
+		CT_u_tank = float
 
 
 	class TimeOfDeliveryFactors(object):
@@ -246,22 +244,7 @@ class EtesElectricResistance(object):
 			pass
 
 
-		mp_energy_market_revenue = tuple
 		ppa_price_input = tuple
-
-
-	class SystemCost(object):
-		def assign(self): 
-			pass
-	
-		def export(self) -> dict:
-			pass
-	
-		def __init__(self, *args, **kwargs): 
-			pass
-
-
-		cycle_spec_cost = float
 
 
 	class SystemCosts(object):
@@ -275,12 +258,14 @@ class EtesElectricResistance(object):
 			pass
 
 
+		CT_tes_spec_cost = float
 		bop_spec_cost = float
 		contingency_rate = float
+		cycle_spec_cost = float
 		epc_cost_fixed = float
 		epc_cost_per_watt = float
 		epc_cost_perc_of_direct = float
-		heater_spec_cost = float
+		heat_pump_spec_cost = float
 		land_cost_fixed = float
 		land_cost_per_watt = float
 		land_cost_perc_of_direct = float
@@ -353,56 +338,63 @@ class EtesElectricResistance(object):
 			pass
 
 
-		E_heater_su_des = float
-		Q_dot_HTF_ND_des_calc = float
+		COP_net_des = float
+		CT_tes_cost_calc = float
+		E_hp_su_des = float
+		Q_CT_tes_des = float
 		Q_tes_des = float
-		T_amb_high_calc = float
-		T_amb_low_calc = float
-		T_amb_ref_calc = float
-		T_htf_cycle_in = tuple
-		T_htf_cycle_out = tuple
-		T_htf_heater_in = tuple
-		T_htf_heater_out = tuple
-		T_htf_high_calc = float
-		T_htf_low_calc = float
-		T_htf_ref_calc = float
+		T_CT_tes_cold = tuple
+		T_CT_tes_hot = tuple
+		T_hp_CT_htf_cold_out = tuple
+		T_hp_CT_htf_hot_in = tuple
+		T_hp_HT_htf_cold_in = tuple
+		T_hp_HT_htf_hot_out = tuple
+		T_pc_CT_htf_cold_in = tuple
+		T_pc_CT_htf_hot_out = tuple
+		T_pc_HT_htf_cold_out = tuple
+		T_pc_HT_htf_hot_in = tuple
 		T_tes_cold = tuple
 		T_tes_hot = tuple
+		V_CT_tes_htf_avail = float
+		V_CT_tes_htf_total = float
 		V_tes_htf_avail = float
 		V_tes_htf_total = float
 		W_dot_bop_design = float
 		W_dot_bop_parasitics = tuple
-		W_dot_cooling_ND_des_calc = float
-		W_dot_cycle_cooling = tuple
-		W_dot_cycle_gross = tuple
-		W_dot_cycle_htf_pump = tuple
-		W_dot_cycle_net = tuple
+		W_dot_fixed = float
 		W_dot_fixed_parasitics = tuple
-		W_dot_gross_ND_des_calc = float
-		W_dot_heater = tuple
-		W_dot_heater_des = float
+		W_dot_hp_CT_htf_pump = tuple
+		W_dot_hp_CT_htf_pump_des = float
+		W_dot_hp_HT_htf_pump = tuple
+		W_dot_hp_HT_htf_pump_des = float
+		W_dot_hp_elec_parasitic_des = float
+		W_dot_hp_in_net_des = float
+		W_dot_hp_in_thermo_des = float
+		W_dot_hp_net = tuple
+		W_dot_hp_parasitics = tuple
+		W_dot_hp_thermo = tuple
 		W_dot_out_net = tuple
-		annual_E_cycle_gross = float
-		annual_E_heater = float
-		annual_E_tes_heater = float
-		annual_Q_cycle_thermal_in = float
-		annual_Q_cycle_thermal_startup = float
-		annual_Q_heater_startup = float
-		annual_Q_heater_to_htf = float
-		annual_Q_tes_losses = float
+		W_dot_pc_CT_htf_pump = tuple
+		W_dot_pc_CT_htf_pump_des = float
+		W_dot_pc_HT_htf_pump = tuple
+		W_dot_pc_HT_htf_pump_des = float
+		W_dot_pc_elec_parasitic_des = float
+		W_dot_pc_net_des = float
+		W_dot_pc_parasitics = tuple
+		W_dot_pc_thermo_out = tuple
 		annual_energy = float
 		annual_energy_distribution_time = tuple
-		annual_energy_full_availability = float
 		avg_suboptimal_rel_mip_gap = float
 		bop_cost_calc = float
+		charge_capacity = float
 		construction_financing_cost = float
 		contingency_cost_calc = float
+		cop_hot_hp_thermo = tuple
 		cp_battery_capacity = float
-		cp_htf_cycle_des = float
 		cp_system_capacity = float
 		cycle_cost_calc = float
+		d_CT_tank_tes = float
 		d_tank_tes = float
-		dens_store_htf_at_T_ave = float
 		direct_subtotal_cost_calc = float
 		disp_iter_ann = float
 		disp_obj_relax = tuple
@@ -429,27 +421,26 @@ class EtesElectricResistance(object):
 		e_ch_tes = tuple
 		elec_purchase_price_mult = tuple
 		epc_cost_calc = float
-		eta_cycle_gross = tuple
-		eta_cycle_net = tuple
+		eta_pc_net_des = float
+		eta_pc_thermo = tuple
 		flip_target_percent = float
 		gen = tuple
 		heater_cost_calc = float
 		installed_per_cap_cost_calc = float
 		land_cost_calc = float
 		m_dot_balance = tuple
-		m_dot_htf_ND_high_calc = float
-		m_dot_htf_ND_low_calc = float
-		m_dot_htf_ND_ref_calc = float
-		m_dot_htf_cycle = tuple
-		m_dot_htf_cycle_des = float
-		m_dot_htf_heater = tuple
-		m_dot_water_ND_des_calc = float
-		m_dot_water_cycle = tuple
+		m_dot_hp_CT_htf = tuple
+		m_dot_hp_CT_htf_des = float
+		m_dot_hp_HT_htf = tuple
+		m_dot_hp_HT_htf_des = float
+		m_dot_pc_CT_htf = tuple
+		m_dot_pc_CT_htf_des = float
+		m_dot_pc_HT_htf = tuple
+		m_dot_pc_HT_htf_des = float
+		mass_CT_tes_cold = tuple
+		mass_CT_tes_hot = tuple
 		mass_tes_cold = tuple
 		mass_tes_hot = tuple
-		n_T_amb_pars_calc = float
-		n_T_htf_pars_calc = float
-		n_m_dot_pars_calc = float
 		n_op_modes = tuple
 		nameplate = float
 		op_mode_1 = tuple
@@ -457,19 +448,32 @@ class EtesElectricResistance(object):
 		op_mode_3 = tuple
 		ppa_soln_mode = float
 		q_balance = tuple
+		q_dot_CT_tes_heater = tuple
+		q_dot_CT_tes_losses = tuple
 		q_dot_ch_tes = tuple
-		q_dot_cycle = tuple
-		q_dot_cycle_startup = tuple
 		q_dot_dc_tes = tuple
-		q_dot_heater_design = float
-		q_dot_heater_startup = tuple
-		q_dot_heater_to_htf = tuple
+		q_dot_hp_cold_in_des = float
+		q_dot_hp_from_CT_htf = tuple
+		q_dot_hp_hot_out_des = float
+		q_dot_hp_startup = tuple
+		q_dot_hp_to_HT_htf = tuple
+		q_dot_loss_CT_tes_des = float
 		q_dot_loss_tes_des = float
+		q_dot_pc_cold_out_thermo_des = float
+		q_dot_pc_cold_to_CTES_des = float
+		q_dot_pc_cold_to_surroundings_des = float
+		q_dot_pc_from_HT_htf = tuple
+		q_dot_pc_hot_in_des = float
+		q_dot_pc_rejected = tuple
+		q_dot_pc_startup = tuple
+		q_dot_pc_thermo_out = tuple
+		q_dot_pc_to_CT_htf = tuple
 		q_dot_tes_heater = tuple
 		q_dot_tes_losses = tuple
-		q_pb_design = float
+		q_pc_target = tuple
+		rte_net = float
+		rte_thermo = float
 		sales_tax_cost_calc = float
-		sim_cpu_run_time = float
 		system_capacity = float
 		tdry = tuple
 		tes_cost_calc = float
@@ -477,7 +481,6 @@ class EtesElectricResistance(object):
 		total_direct_cost_calc = float
 		total_indirect_cost_calc = float
 		total_installed_cost = float
-		total_land_area = float
 		tou_period = tuple
 		tshours_heater = float
 		twet = tuple
@@ -485,16 +488,16 @@ class EtesElectricResistance(object):
 
 
 
-def default(config) -> EtesElectricResistance:
+def default(config) -> EtesPtes:
 	pass
 
-def new() -> EtesElectricResistance:
+def new() -> EtesPtes:
 	pass
 
-def wrap(ssc_data_t) -> EtesElectricResistance:
+def wrap(ssc_data_t) -> EtesPtes:
 	pass
 
-def from_existing(model, config="") -> EtesElectricResistance:
+def from_existing(model, config="") -> EtesPtes:
 	pass
 
 __loader__ = None 

@@ -238,14 +238,14 @@ class TroughPhysicalProcessHeat(object):
 
 		ampl_data_dir = str
 		ampl_exec_call = str
-		disp_csu_cost = float
+		disp_csu_cost_rel = float
 		disp_frequency = float
 		disp_horizon = float
 		disp_max_iter = float
 		disp_mip_gap = float
-		disp_pen_delta_w = float
+		disp_pen_ramping = float
 		disp_reporting = float
-		disp_rsu_cost = float
+		disp_rsu_cost_rel = float
 		disp_spec_bb = float
 		disp_spec_presolve = float
 		disp_spec_scaling = float

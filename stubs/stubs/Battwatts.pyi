@@ -134,6 +134,7 @@ class Battwatts(object):
 		batt_cycles = tuple
 		batt_dispatch_sched = tuple
 		batt_power = tuple
+		batt_power_dc = tuple
 		batt_power_target = tuple
 		batt_pvs_PV_ramp_interval = tuple
 		batt_pvs_P_pv_ac = tuple
@@ -161,6 +162,7 @@ class Battwatts(object):
 		batt_system_loss = tuple
 		batt_temperature = tuple
 		batt_to_grid = tuple
+		batt_to_inverter_dc = tuple
 		batt_to_load = tuple
 		batt_to_system_load = tuple
 		batt_voltage = tuple
@@ -199,6 +201,7 @@ class Battwatts(object):
 		resilience_hrs_min = float
 		survival_function = tuple
 		system_to_batt = tuple
+		system_to_batt_dc = tuple
 		system_to_grid = tuple
 		system_to_load = tuple
 

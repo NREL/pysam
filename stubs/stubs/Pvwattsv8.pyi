@@ -34,6 +34,8 @@ class Pvwattsv8(object):
 
 
 		albedo = tuple
+		albedo_default = float
+		albedo_default_snow = float
 		solar_resource_data = dict
 		solar_resource_file = str
 		use_wf_albedo = float
@@ -128,6 +130,7 @@ class Pvwattsv8(object):
 		ac_annual_pre_adjust = float
 		ac_monthly = tuple
 		ac_pre_adjust = tuple
+		alb = tuple
 		annual_energy = float
 		annual_energy_distribution_time = tuple
 		aoi = tuple
@@ -142,6 +145,7 @@ class Pvwattsv8(object):
 		elev = float
 		gen = tuple
 		gh = tuple
+		inv_eff_output = tuple
 		inverter_efficiency = float
 		kwh_per_kw = float
 		lat = float
@@ -153,6 +157,7 @@ class Pvwattsv8(object):
 		poa_monthly = tuple
 		shad_beam_factor = tuple
 		snow = tuple
+		soiling_f = tuple
 		solrad_annual = float
 		solrad_monthly = tuple
 		ss_beam_factor = tuple

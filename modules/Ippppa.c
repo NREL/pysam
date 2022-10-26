@@ -1378,13 +1378,13 @@ static PyMethodDef TaxCreditIncentives_methods[] = {
 static PyObject *
 TaxCreditIncentives_get_itc_fed_amount(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Ippppa_TaxCreditIncentives_itc_fed_amount_nget, self->data_ptr);
+	return PySAM_array_getter(SAM_Ippppa_TaxCreditIncentives_itc_fed_amount_aget, self->data_ptr);
 }
 
 static int
 TaxCreditIncentives_set_itc_fed_amount(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Ippppa_TaxCreditIncentives_itc_fed_amount_nset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Ippppa_TaxCreditIncentives_itc_fed_amount_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -1414,13 +1414,13 @@ TaxCreditIncentives_set_itc_fed_amount_deprbas_sta(VarGroupObject *self, PyObjec
 static PyObject *
 TaxCreditIncentives_get_itc_fed_percent(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Ippppa_TaxCreditIncentives_itc_fed_percent_nget, self->data_ptr);
+	return PySAM_array_getter(SAM_Ippppa_TaxCreditIncentives_itc_fed_percent_aget, self->data_ptr);
 }
 
 static int
 TaxCreditIncentives_set_itc_fed_percent(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Ippppa_TaxCreditIncentives_itc_fed_percent_nset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Ippppa_TaxCreditIncentives_itc_fed_percent_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -1450,25 +1450,25 @@ TaxCreditIncentives_set_itc_fed_percent_deprbas_sta(VarGroupObject *self, PyObje
 static PyObject *
 TaxCreditIncentives_get_itc_fed_percent_maxvalue(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Ippppa_TaxCreditIncentives_itc_fed_percent_maxvalue_nget, self->data_ptr);
+	return PySAM_array_getter(SAM_Ippppa_TaxCreditIncentives_itc_fed_percent_maxvalue_aget, self->data_ptr);
 }
 
 static int
 TaxCreditIncentives_set_itc_fed_percent_maxvalue(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Ippppa_TaxCreditIncentives_itc_fed_percent_maxvalue_nset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Ippppa_TaxCreditIncentives_itc_fed_percent_maxvalue_aset, self->data_ptr);
 }
 
 static PyObject *
 TaxCreditIncentives_get_itc_sta_amount(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Ippppa_TaxCreditIncentives_itc_sta_amount_nget, self->data_ptr);
+	return PySAM_array_getter(SAM_Ippppa_TaxCreditIncentives_itc_sta_amount_aget, self->data_ptr);
 }
 
 static int
 TaxCreditIncentives_set_itc_sta_amount(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Ippppa_TaxCreditIncentives_itc_sta_amount_nset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Ippppa_TaxCreditIncentives_itc_sta_amount_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -1498,13 +1498,13 @@ TaxCreditIncentives_set_itc_sta_amount_deprbas_sta(VarGroupObject *self, PyObjec
 static PyObject *
 TaxCreditIncentives_get_itc_sta_percent(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Ippppa_TaxCreditIncentives_itc_sta_percent_nget, self->data_ptr);
+	return PySAM_array_getter(SAM_Ippppa_TaxCreditIncentives_itc_sta_percent_aget, self->data_ptr);
 }
 
 static int
 TaxCreditIncentives_set_itc_sta_percent(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Ippppa_TaxCreditIncentives_itc_sta_percent_nset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Ippppa_TaxCreditIncentives_itc_sta_percent_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -1534,13 +1534,13 @@ TaxCreditIncentives_set_itc_sta_percent_deprbas_sta(VarGroupObject *self, PyObje
 static PyObject *
 TaxCreditIncentives_get_itc_sta_percent_maxvalue(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Ippppa_TaxCreditIncentives_itc_sta_percent_maxvalue_nget, self->data_ptr);
+	return PySAM_array_getter(SAM_Ippppa_TaxCreditIncentives_itc_sta_percent_maxvalue_aget, self->data_ptr);
 }
 
 static int
 TaxCreditIncentives_set_itc_sta_percent_maxvalue(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Ippppa_TaxCreditIncentives_itc_sta_percent_maxvalue_nset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Ippppa_TaxCreditIncentives_itc_sta_percent_maxvalue_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -1617,7 +1617,7 @@ TaxCreditIncentives_set_ptc_sta_term(VarGroupObject *self, PyObject *value, void
 
 static PyGetSetDef TaxCreditIncentives_getset[] = {
 {"itc_fed_amount", (getter)TaxCreditIncentives_get_itc_fed_amount,(setter)TaxCreditIncentives_set_itc_fed_amount,
-	PyDoc_STR("*float*: Federal amount-based ITC amount [$]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*sequence*: Federal amount-based ITC amount [$]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"itc_fed_amount_deprbas_fed", (getter)TaxCreditIncentives_get_itc_fed_amount_deprbas_fed,(setter)TaxCreditIncentives_set_itc_fed_amount_deprbas_fed,
 	PyDoc_STR("*float*: Federal amount-based ITC reduces federal depreciation basis [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
@@ -1626,7 +1626,7 @@ static PyGetSetDef TaxCreditIncentives_getset[] = {
 	PyDoc_STR("*float*: Federal amount-based ITC reduces state depreciation basis [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"itc_fed_percent", (getter)TaxCreditIncentives_get_itc_fed_percent,(setter)TaxCreditIncentives_set_itc_fed_percent,
-	PyDoc_STR("*float*: Federal percentage-based ITC percent [%]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*sequence*: Federal percentage-based ITC percent [%]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"itc_fed_percent_deprbas_fed", (getter)TaxCreditIncentives_get_itc_fed_percent_deprbas_fed,(setter)TaxCreditIncentives_set_itc_fed_percent_deprbas_fed,
 	PyDoc_STR("*float*: Federal percentage-based ITC reduces federal depreciation basis [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
@@ -1635,10 +1635,10 @@ static PyGetSetDef TaxCreditIncentives_getset[] = {
 	PyDoc_STR("*float*: Federal percentage-based ITC reduces state depreciation basis [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"itc_fed_percent_maxvalue", (getter)TaxCreditIncentives_get_itc_fed_percent_maxvalue,(setter)TaxCreditIncentives_set_itc_fed_percent_maxvalue,
-	PyDoc_STR("*float*: Federal percentage-based ITC maximum value [$]\n\n**Required:**\nFalse. Automatically set to 1e99 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*sequence*: Federal percentage-based ITC maximum value [$]\n\n**Required:**\nFalse. Automatically set to 1e99 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"itc_sta_amount", (getter)TaxCreditIncentives_get_itc_sta_amount,(setter)TaxCreditIncentives_set_itc_sta_amount,
-	PyDoc_STR("*float*: State amount-based ITC amount [$]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*sequence*: State amount-based ITC amount [$]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"itc_sta_amount_deprbas_fed", (getter)TaxCreditIncentives_get_itc_sta_amount_deprbas_fed,(setter)TaxCreditIncentives_set_itc_sta_amount_deprbas_fed,
 	PyDoc_STR("*float*: State amount-based ITC reduces federal depreciation basis [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
@@ -1647,7 +1647,7 @@ static PyGetSetDef TaxCreditIncentives_getset[] = {
 	PyDoc_STR("*float*: State amount-based ITC reduces state depreciation basis [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"itc_sta_percent", (getter)TaxCreditIncentives_get_itc_sta_percent,(setter)TaxCreditIncentives_set_itc_sta_percent,
-	PyDoc_STR("*float*: State percentage-based ITC percent [%]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*sequence*: State percentage-based ITC percent [%]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"itc_sta_percent_deprbas_fed", (getter)TaxCreditIncentives_get_itc_sta_percent_deprbas_fed,(setter)TaxCreditIncentives_set_itc_sta_percent_deprbas_fed,
 	PyDoc_STR("*float*: State percentage-based ITC reduces federal depreciation basis [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
@@ -1656,7 +1656,7 @@ static PyGetSetDef TaxCreditIncentives_getset[] = {
 	PyDoc_STR("*float*: State percentage-based ITC reduces state depreciation basis [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"itc_sta_percent_maxvalue", (getter)TaxCreditIncentives_get_itc_sta_percent_maxvalue,(setter)TaxCreditIncentives_set_itc_sta_percent_maxvalue,
-	PyDoc_STR("*float*: State percentage-based ITC maximum Value [$]\n\n**Required:**\nFalse. Automatically set to 1e99 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*sequence*: State percentage-based ITC maximum Value [$]\n\n**Required:**\nFalse. Automatically set to 1e99 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ptc_fed_amount", (getter)TaxCreditIncentives_get_ptc_fed_amount,(setter)TaxCreditIncentives_set_ptc_fed_amount,
 	PyDoc_STR("*sequence*: Federal PTC amount [$/kWh]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),

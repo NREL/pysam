@@ -141,20 +141,20 @@ class Cashloan(object):
 			pass
 
 
-		itc_fed_amount = float
+		itc_fed_amount = tuple
 		itc_fed_amount_deprbas_fed = float
 		itc_fed_amount_deprbas_sta = float
-		itc_fed_percent = float
+		itc_fed_percent = tuple
 		itc_fed_percent_deprbas_fed = float
 		itc_fed_percent_deprbas_sta = float
-		itc_fed_percent_maxvalue = float
-		itc_sta_amount = float
+		itc_fed_percent_maxvalue = tuple
+		itc_sta_amount = tuple
 		itc_sta_amount_deprbas_fed = float
 		itc_sta_amount_deprbas_sta = float
-		itc_sta_percent = float
+		itc_sta_percent = tuple
 		itc_sta_percent_deprbas_fed = float
 		itc_sta_percent_deprbas_sta = float
-		itc_sta_percent_maxvalue = float
+		itc_sta_percent_maxvalue = tuple
 		ptc_fed_amount = tuple
 		ptc_fed_escal = float
 		ptc_fed_term = float
@@ -282,6 +282,7 @@ class Cashloan(object):
 		battery_per_kWh = float
 		en_batt = float
 		en_standalone_batt = float
+		en_wave_batt = float
 
 
 	class FuelCell(object):
@@ -368,7 +369,7 @@ class Cashloan(object):
 
 
 		annual_energy_value = tuple
-		annual_themal_value = tuple
+		annual_thermal_value = tuple
 		degradation = tuple
 		gen = tuple
 		gen_purchases = tuple
@@ -430,6 +431,20 @@ class Cashloan(object):
 		year1_monthly_ec_charge_gross_with_system = tuple
 		year1_monthly_ec_charge_with_system = tuple
 		year1_monthly_electricity_to_grid = tuple
+
+
+	class ElectricityRates(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		rate_escalation = tuple
 
 
 	class Outputs(object):
@@ -537,7 +552,6 @@ class Cashloan(object):
 		discounted_payback = float
 		effective_tax_rate = float
 		first_cost = float
-		gen_purchases = tuple
 		ibi_fedtax_total = float
 		ibi_statax_total = float
 		ibi_total = float

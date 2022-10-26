@@ -47,6 +47,7 @@ class Grid(object):
 
 
 		annual_energy = float
+		energy_hourly_kW = tuple
 		gen = tuple
 
 

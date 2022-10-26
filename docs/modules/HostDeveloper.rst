@@ -125,6 +125,12 @@ LCOS Group
 .. autoclass:: PySAM.HostDeveloper.HostDeveloper.LCOS
 	:members:
 
+ElectricityRates Group
+-----------------------
+
+.. autoclass:: PySAM.HostDeveloper.HostDeveloper.ElectricityRates
+	:members:
+
 Outputs Group
 --------------
 

@@ -136,7 +136,7 @@ static PyGetSetDef WeatherReader_getset[] = {
 	PyDoc_STR("*str*: File path with 3-hour Wave Height and Period data as Time Series array\n\n**Constraints:**\nLOCAL_FILE\n\n**Required:**\nRequired if wave_resource_model_choice=1"),
  	NULL},
 {"wave_resource_model_choice", (getter)WeatherReader_get_wave_resource_model_choice,(setter)WeatherReader_set_wave_resource_model_choice,
-	PyDoc_STR("*float*: Joint PDF or 3-hour wave resource data [0/1]\n\n**Constraints:**\nINTEGER\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*float*: Joint PDF or 3-hour wave resource data [0/1]\n\n**Constraints:**\nINTEGER\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -819,7 +819,7 @@ static PyMethodDef WaveFileReaderModule_methods[] = {
 		{"new",             WaveFileReader_new,         METH_VARARGS,
 				PyDoc_STR("new() -> WaveFileReader")},
 		{"default",             WaveFileReader_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> WaveFileReader\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n		- *\"MEwaveLCOECalculator\"*\n\n		- *\"MEwaveNone\"*\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
+				PyDoc_STR("default(config) -> WaveFileReader\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n		- *\"MEwaveBatterySingleOwner\"*\n\n		- *\"MEwaveLCOECalculator\"*\n\n		- *\"MEwaveNone\"*\n\n		- *\"MEwaveSingleOwner\"*\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
 		{"wrap",             WaveFileReader_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> WaveFileReader\n\nLoad data from a PySSC object.\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap()``")},
 		{"from_existing",   WaveFileReader_from_existing,        METH_VARARGS,

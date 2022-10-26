@@ -519,6 +519,173 @@ static PyTypeObject MHKWave_Type = {
 
 
 /*
+ * Lifetime Group
+ */ 
+
+static PyTypeObject Lifetime_Type;
+
+static PyObject *
+Lifetime_new(SAM_MhkWave data_ptr)
+{
+	PyObject* new_obj = Lifetime_Type.tp_alloc(&Lifetime_Type,0);
+
+	VarGroupObject* Lifetime_obj = (VarGroupObject*)new_obj;
+
+	Lifetime_obj->data_ptr = (SAM_table)data_ptr;
+
+	return new_obj;
+}
+
+/* Lifetime methods */
+
+static PyObject *
+Lifetime_assign(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "MhkWave", "Lifetime")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+Lifetime_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Lifetime_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "MhkWave", "Lifetime")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+Lifetime_export(VarGroupObject *self, PyObject *args)
+{
+	PyTypeObject* tp = &Lifetime_Type;
+	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
+	return dict;
+}
+
+static PyMethodDef Lifetime_methods[] = {
+		{"assign",            (PyCFunction)Lifetime_assign,  METH_VARARGS,
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Lifetime_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Lifetime_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Lifetime_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)Lifetime_export,  METH_VARARGS,
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
+		{NULL,              NULL}           /* sentinel */
+};
+
+static PyObject *
+Lifetime_get_analysis_period(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MhkWave_Lifetime_analysis_period_nget, self->data_ptr);
+}
+
+static int
+Lifetime_set_analysis_period(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_MhkWave_Lifetime_analysis_period_nset, self->data_ptr);
+}
+
+static PyObject *
+Lifetime_get_generic_degradation(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_MhkWave_Lifetime_generic_degradation_aget, self->data_ptr);
+}
+
+static int
+Lifetime_set_generic_degradation(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_MhkWave_Lifetime_generic_degradation_aset, self->data_ptr);
+}
+
+static PyObject *
+Lifetime_get_system_use_lifetime_output(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MhkWave_Lifetime_system_use_lifetime_output_nget, self->data_ptr);
+}
+
+static int
+Lifetime_set_system_use_lifetime_output(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_MhkWave_Lifetime_system_use_lifetime_output_nset, self->data_ptr);
+}
+
+static PyGetSetDef Lifetime_getset[] = {
+{"analysis_period", (getter)Lifetime_get_analysis_period,(setter)Lifetime_set_analysis_period,
+	PyDoc_STR("*float*: Lifetime analysis period [years]\n\n**Required:**\nRequired if system_use_lifetime_output=1"),
+ 	NULL},
+{"generic_degradation", (getter)Lifetime_get_generic_degradation,(setter)Lifetime_set_generic_degradation,
+	PyDoc_STR("*sequence*: Annual AC degradation [%/year]\n\n**Required:**\nRequired if system_use_lifetime_output=1"),
+ 	NULL},
+{"system_use_lifetime_output", (getter)Lifetime_get_system_use_lifetime_output,(setter)Lifetime_set_system_use_lifetime_output,
+	PyDoc_STR("*float*: Generic lifetime simulation [0/1]\n\n**Constraints:**\nINTEGER,MIN=0,MAX=1\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+	{NULL}  /* Sentinel */
+};
+
+static PyTypeObject Lifetime_Type = {
+		/* The ob_type field must be initialized in the module init function
+		 * to be portable to Windows without using C++. */
+		PyVarObject_HEAD_INIT(NULL, 0)
+		"MhkWave.Lifetime",             /*tp_name*/
+		sizeof(VarGroupObject),          /*tp_basicsize*/
+		0,                          /*tp_itemsize*/
+		/* methods */
+		0,    /*tp_dealloc*/
+		0,                          /*tp_print*/
+		(getattrfunc)0,             /*tp_getattr*/
+		0,                          /*tp_setattr*/
+		0,                          /*tp_reserved*/
+		0,                          /*tp_repr*/
+		0,                          /*tp_as_number*/
+		0,                          /*tp_as_sequence*/
+		0,                          /*tp_as_mapping*/
+		0,                          /*tp_hash*/
+		0,                          /*tp_call*/
+		0,                          /*tp_str*/
+		0,                          /*tp_getattro*/
+		0,                          /*tp_setattro*/
+		0,                          /*tp_as_buffer*/
+		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
+		0,                          /*tp_doc*/
+		0,                          /*tp_traverse*/
+		0,                          /*tp_clear*/
+		0,                          /*tp_richcompare*/
+		0,                          /*tp_weaklistofnset*/
+		0,                          /*tp_iter*/
+		0,                          /*tp_iternext*/
+		Lifetime_methods,         /*tp_methods*/
+		0,                          /*tp_members*/
+		Lifetime_getset,          /*tp_getset*/
+		0,                          /*tp_base*/
+		0,                          /*tp_dict*/
+		0,                          /*tp_descr_get*/
+		0,                          /*tp_descr_set*/
+		0,                          /*tp_dictofnset*/
+		0,                          /*tp_init*/
+		0,                          /*tp_alloc*/
+		0,             /*tp_new*/
+		0,                          /*tp_free*/
+		0,                          /*tp_is_gc*/
+};
+
+
+/*
  * Outputs Group
  */ 
 
@@ -617,6 +784,12 @@ static PyObject *
 Outputs_get_device_average_power(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_MhkWave_Outputs_device_average_power_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_energy_hourly_kW(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_MhkWave_Outputs_energy_hourly_kW_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -827,6 +1000,9 @@ static PyGetSetDef Outputs_getset[] = {
 {"device_average_power", (getter)Outputs_get_device_average_power,(setter)0,
 	PyDoc_STR("*float*: Average power production of a single device [kW]"),
  	NULL},
+{"energy_hourly_kW", (getter)Outputs_get_energy_hourly_kW,(setter)0,
+	PyDoc_STR("*sequence*: Power output of array [kW]"),
+ 	NULL},
 {"energy_hourly_kWh", (getter)Outputs_get_energy_hourly_kWh,(setter)0,
 	PyDoc_STR("*sequence*: Energy production of array [kWh]"),
  	NULL},
@@ -989,6 +1165,25 @@ newMhkWaveObject(void* data_ptr)
 	PyObject* MHKWave_obj = MHKWave_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "MHKWave", MHKWave_obj);
 	Py_DECREF(MHKWave_obj);
+
+	PyObject* Lifetime_obj = Lifetime_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "Lifetime", Lifetime_obj);
+	Py_DECREF(Lifetime_obj);
+
+	PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
+
+	PyObject* data_cap = PyCapsule_New(self->data_ptr, NULL, NULL);
+	PyObject* Adjust_obj = PyObject_CallMethod(AdjustmentFactorsModule, "new", "(O)", data_cap);
+	Py_XDECREF(data_cap);
+	Py_XDECREF(AdjustmentFactorsModule);
+
+	if (!Adjust_obj){
+		PyErr_SetString(PyExc_Exception, "Couldn't create AdjustmentFactorsObject\n");
+		return NULL;
+	}
+
+	PyDict_SetItemString(attr_dict, "AdjustmentFactors", Adjust_obj);
+	Py_DECREF(Adjust_obj);
 
 	PyObject* Outputs_obj = Outputs_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
@@ -1248,7 +1443,7 @@ static PyMethodDef MhkWaveModule_methods[] = {
 		{"new",             MhkWave_new,         METH_VARARGS,
 				PyDoc_STR("new() -> MhkWave")},
 		{"default",             MhkWave_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> MhkWave\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n		- *\"MEwaveLCOECalculator\"*\n\n		- *\"MEwaveNone\"*\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
+				PyDoc_STR("default(config) -> MhkWave\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n		- *\"MEwaveBatterySingleOwner\"*\n\n		- *\"MEwaveLCOECalculator\"*\n\n		- *\"MEwaveNone\"*\n\n		- *\"MEwaveSingleOwner\"*\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
 		{"wrap",             MhkWave_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> MhkWave\n\nLoad data from a PySSC object.\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap()``")},
 		{"from_existing",   MhkWave_from_existing,        METH_VARARGS,
@@ -1271,12 +1466,38 @@ MhkWaveModule_exec(PyObject *m)
 	MhkWave_Type.tp_dict = PyDict_New();
 	if (!MhkWave_Type.tp_dict) { goto fail; }
 
+	/// Add the AdjustmentFactors type object to MhkWave_Type
+	PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
+	if (!AdjustmentFactorsModule){
+		PyErr_SetImportError(PyUnicode_FromString("Could not import AdjustmentFactors module."), NULL, NULL);
+	}
+
+	PyTypeObject* AdjustmentFactors_Type = (PyTypeObject*)PyObject_GetAttrString(AdjustmentFactorsModule, "AdjustmentFactors");
+	if (!AdjustmentFactors_Type){
+		PyErr_SetImportError(PyUnicode_FromString("Could not import AdjustmentFactors type."), NULL, NULL);
+	}
+	Py_XDECREF(AdjustmentFactorsModule);
+
+	if (PyType_Ready(AdjustmentFactors_Type) < 0) { goto fail; }
+	PyDict_SetItemString(MhkWave_Type.tp_dict,
+						 "AdjustmentFactors",
+						 (PyObject*)AdjustmentFactors_Type);
+	Py_DECREF(&AdjustmentFactors_Type);
+	Py_XDECREF(AdjustmentFactors_Type);
+
 	/// Add the MHKWave type object to MhkWave_Type
 	if (PyType_Ready(&MHKWave_Type) < 0) { goto fail; }
 	PyDict_SetItemString(MhkWave_Type.tp_dict,
 				"MHKWave",
 				(PyObject*)&MHKWave_Type);
 	Py_DECREF(&MHKWave_Type);
+
+	/// Add the Lifetime type object to MhkWave_Type
+	if (PyType_Ready(&Lifetime_Type) < 0) { goto fail; }
+	PyDict_SetItemString(MhkWave_Type.tp_dict,
+				"Lifetime",
+				(PyObject*)&Lifetime_Type);
+	Py_DECREF(&Lifetime_Type);
 
 	/// Add the Outputs type object to MhkWave_Type
 	if (PyType_Ready(&Outputs_Type) < 0) { goto fail; }

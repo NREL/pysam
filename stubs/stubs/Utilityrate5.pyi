@@ -20,6 +20,22 @@ class Utilityrate5(object):
 	def __init__(self, *args, **kwargs):
 		pass
 
+	class Lifetime(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		analysis_period = float
+		inflation_rate = float
+		system_use_lifetime_output = float
+
+
 	class ElectricityRates(object):
 		def assign(self): 
 			pass
@@ -60,22 +76,6 @@ class Utilityrate5(object):
 		ur_ts_buy_rate = tuple
 		ur_ts_sell_rate = tuple
 		ur_yearzero_usage_peaks = tuple
-
-
-	class Lifetime(object):
-		def assign(self): 
-			pass
-	
-		def export(self) -> dict:
-			pass
-	
-		def __init__(self, *args, **kwargs): 
-			pass
-
-
-		analysis_period = float
-		inflation_rate = float
-		system_use_lifetime_output = float
 
 
 	class SystemOutput(object):

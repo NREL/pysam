@@ -250,7 +250,6 @@ class TroughPhysicalCspSolver(object):
 
 		CT = float
 		F_wc = tuple
-		P_boil = float
 		P_cond_min = float
 		P_cond_ratio = float
 		T_ITD_des = float

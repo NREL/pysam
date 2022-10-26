@@ -69,11 +69,11 @@ System_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef System_methods[] = {
 		{"assign",            (PyCFunction)System_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``System_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``System_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)System_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``System_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``System_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)System_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -103,10 +103,10 @@ System_set_t_step(VarGroupObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef System_getset[] = {
 {"solar_mult", (getter)System_get_solar_mult,(setter)System_set_solar_mult,
-	PyDoc_STR("*float*: Actual solar multiple of system [-]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Actual solar multiple of system [-]\n\n**Required:**\nTrue"),
  	NULL},
 {"t_step", (getter)System_get_t_step,(setter)System_set_t_step,
-	PyDoc_STR("*float*: Timestep duration [s]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Timestep duration [s]\n\n**Required:**\nTrue"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -221,11 +221,11 @@ Weather_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Weather_methods[] = {
 		{"assign",            (PyCFunction)Weather_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Weather_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Weather_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Weather_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Weather_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Weather_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Weather_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -243,7 +243,7 @@ Weather_set_T_amb(VarGroupObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef Weather_getset[] = {
 {"T_amb", (getter)Weather_get_T_amb,(setter)Weather_set_T_amb,
-	PyDoc_STR("*sequence*: Ambient temperature [C]\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: Ambient temperature [C]\n\n**Required:**\nTrue"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -358,11 +358,11 @@ TES_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef TES_methods[] = {
 		{"assign",            (PyCFunction)TES_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``TES_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``TES_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)TES_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``TES_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``TES_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)TES_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -584,58 +584,58 @@ TES_set_u_tank(VarGroupObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef TES_getset[] = {
 {"T_sink_out", (getter)TES_get_T_sink_out,(setter)TES_set_T_sink_out,
-	PyDoc_STR("*sequence*: Temperature from heat sink or power block [C]\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: Temperature from heat sink or power block [C]\n\n**Required:**\nTrue"),
  	NULL},
 {"T_src_out", (getter)TES_get_T_src_out,(setter)TES_set_T_src_out,
-	PyDoc_STR("*sequence*: Temperature from heat source [C]\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: Temperature from heat source [C]\n\n**Required:**\nTrue"),
  	NULL},
 {"cold_tank_Thtr", (getter)TES_get_cold_tank_Thtr,(setter)TES_set_cold_tank_Thtr,
-	PyDoc_STR("*float*: Minimum allowable cold tank HTF temp [C]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Minimum allowable cold tank HTF temp [C]\n\n**Required:**\nTrue"),
  	NULL},
 {"cold_tank_max_heat", (getter)TES_get_cold_tank_max_heat,(setter)TES_set_cold_tank_max_heat,
-	PyDoc_STR("*float*: Rated heater capacity for cold tank heating [MWe]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Rated heater capacity for cold tank heating [MWe]\n\n**Required:**\nTrue"),
  	NULL},
 {"dt_hot", (getter)TES_get_dt_hot,(setter)TES_set_dt_hot,
-	PyDoc_STR("*float*: Hot side HX approach temp [C]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Hot side HX approach temp [C]\n\n**Required:**\nTrue"),
  	NULL},
 {"h_tank", (getter)TES_get_h_tank,(setter)TES_set_h_tank,
-	PyDoc_STR("*float*: Total height of tank (height of HTF when tank is full [m]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Total height of tank (height of HTF when tank is full [m]\n\n**Required:**\nTrue"),
  	NULL},
 {"h_tank_min", (getter)TES_get_h_tank_min,(setter)TES_set_h_tank_min,
-	PyDoc_STR("*float*: Minimum allowable HTF height in storage tank [m]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Minimum allowable HTF height in storage tank [m]\n\n**Required:**\nTrue"),
  	NULL},
 {"hot_tank_Thtr", (getter)TES_get_hot_tank_Thtr,(setter)TES_set_hot_tank_Thtr,
-	PyDoc_STR("*float*: Minimum allowable hot tank HTF temp [C]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Minimum allowable hot tank HTF temp [C]\n\n**Required:**\nTrue"),
  	NULL},
 {"hot_tank_bypassed", (getter)TES_get_hot_tank_bypassed,(setter)TES_set_hot_tank_bypassed,
-	PyDoc_STR("*sequence*: Is mass flow from source going straight to cold tank? [-]\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: Is mass flow from source going straight to cold tank? [-]\n\n**Required:**\nTrue"),
  	NULL},
 {"hot_tank_max_heat", (getter)TES_get_hot_tank_max_heat,(setter)TES_set_hot_tank_max_heat,
-	PyDoc_STR("*float*: Rated heater capacity for hot tank heating [MWe]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Rated heater capacity for hot tank heating [MWe]\n\n**Required:**\nTrue"),
  	NULL},
 {"init_hot_htf_percent", (getter)TES_get_init_hot_htf_percent,(setter)TES_set_init_hot_htf_percent,
-	PyDoc_STR("*float*: Initial fraction of avail. vol that is hot [%]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Initial fraction of avail. vol that is hot [%]\n\n**Required:**\nTrue"),
  	NULL},
 {"mdot_sink", (getter)TES_get_mdot_sink,(setter)TES_set_mdot_sink,
-	PyDoc_STR("*sequence*: Mass flow to heat sink or power block [kg/s]\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: Mass flow to heat sink or power block [kg/s]\n\n**Required:**\nTrue"),
  	NULL},
 {"mdot_src", (getter)TES_get_mdot_src,(setter)TES_set_mdot_src,
-	PyDoc_STR("*sequence*: Mass flow from heat source [kg/s]\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: Mass flow from heat source [kg/s]\n\n**Required:**\nTrue"),
  	NULL},
 {"store_fl_props", (getter)TES_get_store_fl_props,(setter)TES_set_store_fl_props,
-	PyDoc_STR("*sequence[sequence]*: User defined storage fluid property data [-]\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: User defined storage fluid property data [-]\n\n**Required:**\nTrue"),
  	NULL},
 {"store_fluid", (getter)TES_get_store_fluid,(setter)TES_set_store_fluid,
-	PyDoc_STR("*float*: Material number for storage fluid [-]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Material number for storage fluid [-]\n\n**Required:**\nTrue"),
  	NULL},
 {"tank_pairs", (getter)TES_get_tank_pairs,(setter)TES_set_tank_pairs,
-	PyDoc_STR("*float*: Number of equivalent tank pairs [-]\n\n*Constraints*: INTEGER\n\n*Required*: True"),
+	PyDoc_STR("*float*: Number of equivalent tank pairs [-]\n\n**Constraints:**\nINTEGER\n\n**Required:**\nTrue"),
  	NULL},
 {"tshours", (getter)TES_get_tshours,(setter)TES_set_tshours,
-	PyDoc_STR("*float*: Equivalent full-load thermal storage hours [hr]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Equivalent full-load thermal storage hours [hr]\n\n**Required:**\nTrue"),
  	NULL},
 {"u_tank", (getter)TES_get_u_tank,(setter)TES_set_u_tank,
-	PyDoc_STR("*float*: Loss coefficient from the tank [W/m2-K]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Loss coefficient from the tank [W/m2-K]\n\n**Required:**\nTrue"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -750,11 +750,11 @@ SolarField_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef SolarField_methods[] = {
 		{"assign",            (PyCFunction)SolarField_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``SolarField_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``SolarField_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)SolarField_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``SolarField_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``SolarField_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)SolarField_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -844,25 +844,25 @@ SolarField_set_field_fl_props(VarGroupObject *self, PyObject *value, void *closu
 
 static PyGetSetDef SolarField_getset[] = {
 {"Fluid", (getter)SolarField_get_Fluid,(setter)SolarField_set_Fluid,
-	PyDoc_STR("*float*: Field HTF fluid ID number [-]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Field HTF fluid ID number [-]\n\n**Required:**\nTrue"),
  	NULL},
 {"HDR_rough", (getter)SolarField_get_HDR_rough,(setter)SolarField_set_HDR_rough,
-	PyDoc_STR("*float*: Header pipe roughness [m]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Header pipe roughness [m]\n\n**Required:**\nTrue"),
  	NULL},
 {"T_loop_in_des", (getter)SolarField_get_T_loop_in_des,(setter)SolarField_set_T_loop_in_des,
-	PyDoc_STR("*float*: Design loop inlet temperature [C]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Design loop inlet temperature [C]\n\n**Required:**\nTrue"),
  	NULL},
 {"T_loop_out", (getter)SolarField_get_T_loop_out,(setter)SolarField_set_T_loop_out,
-	PyDoc_STR("*float*: Target loop outlet temperature [C]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Target loop outlet temperature [C]\n\n**Required:**\nTrue"),
  	NULL},
 {"calc_design_pipe_vals", (getter)SolarField_get_calc_design_pipe_vals,(setter)SolarField_set_calc_design_pipe_vals,
-	PyDoc_STR("*float*: Calculate temps and pressures at design conditions for runners and headers [none]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Calculate temps and pressures at design conditions for runners and headers [none]\n\n**Required:**\nTrue"),
  	NULL},
 {"eta_pump", (getter)SolarField_get_eta_pump,(setter)SolarField_set_eta_pump,
-	PyDoc_STR("*float*: HTF pump efficiency [none]\n\n*Required*: True"),
+	PyDoc_STR("*float*: HTF pump efficiency [none]\n\n**Required:**\nTrue"),
  	NULL},
 {"field_fl_props", (getter)SolarField_get_field_fl_props,(setter)SolarField_set_field_fl_props,
-	PyDoc_STR("*sequence[sequence]*: User defined field fluid property data [-]\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: User defined field fluid property data [-]\n\n**Required:**\nTrue"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -977,11 +977,11 @@ Powerblock_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Powerblock_methods[] = {
 		{"assign",            (PyCFunction)Powerblock_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Powerblock_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Powerblock_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Powerblock_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Powerblock_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Powerblock_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Powerblock_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -1023,13 +1023,13 @@ Powerblock_set_pb_pump_coef(VarGroupObject *self, PyObject *value, void *closure
 
 static PyGetSetDef Powerblock_getset[] = {
 {"P_ref", (getter)Powerblock_get_P_ref,(setter)Powerblock_set_P_ref,
-	PyDoc_STR("*float*: Rated plant capacity [MWe]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Rated plant capacity [MWe]\n\n**Required:**\nTrue"),
  	NULL},
 {"eta_ref", (getter)Powerblock_get_eta_ref,(setter)Powerblock_set_eta_ref,
-	PyDoc_STR("*float*: Power cycle efficiency at design [none]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Power cycle efficiency at design [none]\n\n**Required:**\nTrue"),
  	NULL},
 {"pb_pump_coef", (getter)Powerblock_get_pb_pump_coef,(setter)Powerblock_set_pb_pump_coef,
-	PyDoc_STR("*float*: Pumping power to move 1kg of HTF through PB loop [kW/kg]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Pumping power to move 1kg of HTF through PB loop [kW/kg]\n\n**Required:**\nTrue"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1144,11 +1144,11 @@ Controller_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Controller_methods[] = {
 		{"assign",            (PyCFunction)Controller_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Controller_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Controller_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Controller_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Controller_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Controller_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Controller_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -1298,40 +1298,40 @@ Controller_set_tes_wallthicks(VarGroupObject *self, PyObject *value, void *closu
 
 static PyGetSetDef Controller_getset[] = {
 {"DP_SGS", (getter)Controller_get_DP_SGS,(setter)Controller_set_DP_SGS,
-	PyDoc_STR("*float*: Pressure drop within the steam generator [bar]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Pressure drop within the steam generator [bar]\n\n**Required:**\nTrue"),
  	NULL},
 {"T_tank_hot_inlet_min", (getter)Controller_get_T_tank_hot_inlet_min,(setter)Controller_set_T_tank_hot_inlet_min,
-	PyDoc_STR("*float*: Minimum hot tank htf inlet temperature [C]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Minimum hot tank htf inlet temperature [C]\n\n**Required:**\nTrue"),
  	NULL},
 {"V_tes_des", (getter)Controller_get_V_tes_des,(setter)Controller_set_V_tes_des,
-	PyDoc_STR("*float*: Design-point velocity to size the TES pipe diameters [m/s]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Design-point velocity to size the TES pipe diameters [m/s]\n\n**Required:**\nTrue"),
  	NULL},
 {"custom_tes_p_loss", (getter)Controller_get_custom_tes_p_loss,(setter)Controller_set_custom_tes_p_loss,
-	PyDoc_STR("*float*: TES pipe losses are based on custom lengths and coeffs [-]\n\n*Required*: True"),
+	PyDoc_STR("*float*: TES pipe losses are based on custom lengths and coeffs [-]\n\n**Required:**\nTrue"),
  	NULL},
 {"custom_tes_pipe_sizes", (getter)Controller_get_custom_tes_pipe_sizes,(setter)Controller_set_custom_tes_pipe_sizes,
-	PyDoc_STR("*float*: Use custom TES pipe diams, wallthks, and lengths [-]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Use custom TES pipe diams, wallthks, and lengths [-]\n\n**Required:**\nTrue"),
  	NULL},
 {"has_hot_tank_bypass", (getter)Controller_get_has_hot_tank_bypass,(setter)Controller_set_has_hot_tank_bypass,
-	PyDoc_STR("*float*: Bypass valve connects field outlet to cold tank [-]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Bypass valve connects field outlet to cold tank [-]\n\n**Required:**\nTrue"),
  	NULL},
 {"k_tes_loss_coeffs", (getter)Controller_get_k_tes_loss_coeffs,(setter)Controller_set_k_tes_loss_coeffs,
-	PyDoc_STR("*sequence[sequence]*: Minor loss coeffs for the coll, gen, and bypass loops [-]\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: Minor loss coeffs for the coll, gen, and bypass loops [-]\n\n**Required:**\nTrue"),
  	NULL},
 {"tanks_in_parallel", (getter)Controller_get_tanks_in_parallel,(setter)Controller_set_tanks_in_parallel,
-	PyDoc_STR("*float*: Tanks are in parallel, not in series, with solar field [-]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Tanks are in parallel, not in series, with solar field [-]\n\n**Required:**\nTrue"),
  	NULL},
 {"tes_diams", (getter)Controller_get_tes_diams,(setter)Controller_set_tes_diams,
-	PyDoc_STR("*sequence[sequence]*: Custom TES diameters [m]\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: Custom TES diameters [m]\n\n**Required:**\nTrue"),
  	NULL},
 {"tes_lengths", (getter)Controller_get_tes_lengths,(setter)Controller_set_tes_lengths,
 	PyDoc_STR("*sequence[sequence]*: Custom TES lengths [m]"),
  	NULL},
 {"tes_pump_coef", (getter)Controller_get_tes_pump_coef,(setter)Controller_set_tes_pump_coef,
-	PyDoc_STR("*float*: Pumping power to move 1kg of HTF through tes loop [kW/(kg/s)]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Pumping power to move 1kg of HTF through tes loop [kW/(kg/s)]\n\n**Required:**\nTrue"),
  	NULL},
 {"tes_wallthicks", (getter)Controller_get_tes_wallthicks,(setter)Controller_set_tes_wallthicks,
-	PyDoc_STR("*sequence[sequence]*: Custom TES wall thicknesses [m]\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: Custom TES wall thicknesses [m]\n\n**Required:**\nTrue"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1446,11 +1446,11 @@ Outputs_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Outputs_methods[] = {
 		{"assign",            (PyCFunction)Outputs_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Outputs_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Outputs_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -1836,16 +1836,16 @@ static PyMethodDef CspSubcomponentModule_methods[] = {
 		{"new",             CspSubcomponent_new,         METH_VARARGS,
 				PyDoc_STR("new() -> CspSubcomponent")},
 		{"default",             CspSubcomponent_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> CspSubcomponent\n\nLoad values from SAM default configurations to provide as inputs to the model. \n\n			None\n\n.. note::\n\n	The default configuration is a collection of default values for the module inputs. Some inputs may not be included in the default configuration and are automatically assigned the value indicated by the variable's 'Required' attribute.")},
+				PyDoc_STR("default(config) -> CspSubcomponent\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n- None\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
 		{"wrap",             CspSubcomponent_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> CspSubcomponent\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
+				PyDoc_STR("wrap(ssc_data_t) -> CspSubcomponent\n\nLoad data from a PySSC object.\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap()``")},
 		{"from_existing",   CspSubcomponent_from_existing,        METH_VARARGS,
-				PyDoc_STR("from_existing(data, optional config) -> CspSubcomponent\n\nShare underlying data with an existing PySAM class. If config provided, default attributes are loaded otherwise.")},
+				PyDoc_STR("from_existing(data, optional config) -> CspSubcomponent\n\nShare data with an existing PySAM class. If ``optional config`` is a valid configuration name, load the module's defaults for that configuration.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 PyDoc_STRVAR(module_doc,
-			 "CSP subcomponents");
+			 "CspSubcomponent");
 
 
 static int
