@@ -230,7 +230,7 @@ def URDBv7_to_ElectricityRates(urdb_response):
         fixed_charge = urdb_response['fixedchargefirstmeter']
         fixed_charge_units = urdb_response['fixedchargeunits']
         if fixed_charge_units == "$/day":
-            fixed_charge *= 365 / 30
+            fixed_charge *= 365 / 12
         elif fixed_charge_units == "$/year":
             fixed_charge /= 12
         urdb_data['ur_monthly_fixed_charge'] = fixed_charge
