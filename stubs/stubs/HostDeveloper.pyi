@@ -162,20 +162,20 @@ class HostDeveloper(object):
 			pass
 
 
-		itc_fed_amount = float
+		itc_fed_amount = tuple
 		itc_fed_amount_deprbas_fed = float
 		itc_fed_amount_deprbas_sta = float
-		itc_fed_percent = float
+		itc_fed_percent = tuple
 		itc_fed_percent_deprbas_fed = float
 		itc_fed_percent_deprbas_sta = float
-		itc_fed_percent_maxvalue = float
-		itc_sta_amount = float
+		itc_fed_percent_maxvalue = tuple
+		itc_sta_amount = tuple
 		itc_sta_amount_deprbas_fed = float
 		itc_sta_amount_deprbas_sta = float
-		itc_sta_percent = float
+		itc_sta_percent = tuple
 		itc_sta_percent_deprbas_fed = float
 		itc_sta_percent_deprbas_sta = float
-		itc_sta_percent_maxvalue = float
+		itc_sta_percent_maxvalue = tuple
 		ptc_fed_amount = tuple
 		ptc_fed_escal = float
 		ptc_fed_term = float
@@ -504,6 +504,7 @@ class HostDeveloper(object):
 		battery_per_kWh = float
 		en_batt = float
 		en_standalone_batt = float
+		en_wave_batt = float
 
 
 	class LCOS(object):
@@ -533,6 +534,20 @@ class HostDeveloper(object):
 		year1_monthly_ec_charge_gross_with_system = tuple
 		year1_monthly_ec_charge_with_system = tuple
 		year1_monthly_electricity_to_grid = tuple
+
+
+	class ElectricityRates(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		rate_escalation = tuple
 
 
 	class Outputs(object):
@@ -998,7 +1013,6 @@ class HostDeveloper(object):
 		flip_actual_year = float
 		flip_target_irr = float
 		flip_target_year = float
-		gen_purchases = tuple
 		host_nominal_discount_rate = float
 		ibi_fedtax_total = float
 		ibi_statax_total = float

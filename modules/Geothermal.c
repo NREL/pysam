@@ -378,6 +378,30 @@ GeoHourly_set_fracture_aperature(VarGroupObject *self, PyObject *value, void *cl
 }
 
 static PyObject *
+GeoHourly_get_fracture_length(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Geothermal_GeoHourly_fracture_length_nget, self->data_ptr);
+}
+
+static int
+GeoHourly_set_fracture_length(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Geothermal_GeoHourly_fracture_length_nset, self->data_ptr);
+}
+
+static PyObject *
+GeoHourly_get_fracture_spacing(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Geothermal_GeoHourly_fracture_spacing_nget, self->data_ptr);
+}
+
+static int
+GeoHourly_set_fracture_spacing(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Geothermal_GeoHourly_fracture_spacing_nset, self->data_ptr);
+}
+
+static PyObject *
 GeoHourly_get_fracture_width(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Geothermal_GeoHourly_fracture_width_nget, self->data_ptr);
@@ -387,6 +411,42 @@ static int
 GeoHourly_set_fracture_width(VarGroupObject *self, PyObject *value, void *closure)
 {
 	return PySAM_double_setter(value, SAM_Geothermal_GeoHourly_fracture_width_nset, self->data_ptr);
+}
+
+static PyObject *
+GeoHourly_get_geotherm_cost_inj_cost_curve_welltype(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Geothermal_GeoHourly_geotherm_cost_inj_cost_curve_welltype_nget, self->data_ptr);
+}
+
+static int
+GeoHourly_set_geotherm_cost_inj_cost_curve_welltype(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Geothermal_GeoHourly_geotherm_cost_inj_cost_curve_welltype_nset, self->data_ptr);
+}
+
+static PyObject *
+GeoHourly_get_geotherm_cost_inj_prod_well_ratio(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Geothermal_GeoHourly_geotherm_cost_inj_prod_well_ratio_nget, self->data_ptr);
+}
+
+static int
+GeoHourly_set_geotherm_cost_inj_prod_well_ratio(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Geothermal_GeoHourly_geotherm_cost_inj_prod_well_ratio_nset, self->data_ptr);
+}
+
+static PyObject *
+GeoHourly_get_geotherm_cost_prod_cost_curve_welltype(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Geothermal_GeoHourly_geotherm_cost_prod_cost_curve_welltype_nget, self->data_ptr);
+}
+
+static int
+GeoHourly_set_geotherm_cost_prod_cost_curve_welltype(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Geothermal_GeoHourly_geotherm_cost_prod_cost_curve_welltype_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -534,6 +594,18 @@ GeoHourly_set_hybrid_dispatch_schedule(VarGroupObject *self, PyObject *value, vo
 }
 
 static PyObject *
+GeoHourly_get_inj_casing_size(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Geothermal_GeoHourly_inj_casing_size_nget, self->data_ptr);
+}
+
+static int
+GeoHourly_set_inj_casing_size(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Geothermal_GeoHourly_inj_casing_size_nset, self->data_ptr);
+}
+
+static PyObject *
 GeoHourly_get_inj_prod_well_distance(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Geothermal_GeoHourly_inj_prod_well_distance_nget, self->data_ptr);
@@ -642,6 +714,18 @@ GeoHourly_set_plant_efficiency_input(VarGroupObject *self, PyObject *value, void
 }
 
 static PyObject *
+GeoHourly_get_prod_well_choice(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Geothermal_GeoHourly_prod_well_choice_nget, self->data_ptr);
+}
+
+static int
+GeoHourly_set_prod_well_choice(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Geothermal_GeoHourly_prod_well_choice_nset, self->data_ptr);
+}
+
+static PyObject *
 GeoHourly_get_pump_efficiency(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Geothermal_GeoHourly_pump_efficiency_nget, self->data_ptr);
@@ -675,6 +759,18 @@ static int
 GeoHourly_set_reservoir_height(VarGroupObject *self, PyObject *value, void *closure)
 {
 	return PySAM_double_setter(value, SAM_Geothermal_GeoHourly_reservoir_height_nset, self->data_ptr);
+}
+
+static PyObject *
+GeoHourly_get_reservoir_model_inputs(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Geothermal_GeoHourly_reservoir_model_inputs_mget, self->data_ptr);
+}
+
+static int
+GeoHourly_set_reservoir_model_inputs(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Geothermal_GeoHourly_reservoir_model_inputs_mset, self->data_ptr);
 }
 
 static PyObject *
@@ -982,7 +1078,7 @@ static PyGetSetDef GeoHourly_getset[] = {
 	PyDoc_STR("*float*: Outlet design temp [C]\n\n**Required:**\nRequired if ui_calculations_only=0"),
  	NULL},
 {"T_htf_hot_ref", (getter)GeoHourly_get_T_htf_hot_ref,(setter)GeoHourly_set_T_htf_hot_ref,
-	PyDoc_STR("*float*: Inlet design temp [C]\n\n**Required:**\nRequired if ui_calculations_only=0\n\nThe value of ``T_htf_hot_ref`` depends on the following variables:\n\n\t - design_temp\n\t - resource_temp\n"),
+	PyDoc_STR("*float*: Inlet design temp [C]\n\n**Required:**\nRequired if ui_calculations_only=0\n\nThe value of ``T_htf_hot_ref`` depends on the following variables:\n\n\t - design_temp\n\t - resource_temp\n\t - resource_type\n"),
  	NULL},
 {"ambient_pressure", (getter)GeoHourly_get_ambient_pressure,(setter)GeoHourly_set_ambient_pressure,
 	PyDoc_STR("*float*: Ambient pressure [psi]\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``ambient_pressure``:\n\n\t - num_wells_getem\n"),
@@ -1009,7 +1105,7 @@ static PyGetSetDef GeoHourly_getset[] = {
 	PyDoc_STR("*float*: Delta pressure across surface equipment [psi]\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``delta_pressure_equip``:\n\n\t - num_wells_getem\n"),
  	NULL},
 {"design_temp", (getter)GeoHourly_get_design_temp,(setter)GeoHourly_set_design_temp,
-	PyDoc_STR("*float*: Power block design temperature [C]\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``design_temp``:\n\n\t - T_htf_hot_ref\n\t - num_wells_getem\n\n\nThe value of ``design_temp`` depends on the following variables:\n\n\t - resource_temp\n"),
+	PyDoc_STR("*float*: Power block design temperature [C]\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``design_temp``:\n\n\t - T_htf_hot_ref\n\t - num_wells_getem\n\n\nThe value of ``design_temp`` depends on the following variables:\n\n\t - resource_temp\n\t - resource_type\n"),
  	NULL},
 {"dt_prod_well", (getter)GeoHourly_get_dt_prod_well,(setter)GeoHourly_set_dt_prod_well,
 	PyDoc_STR("*float*: Temperature loss in production well [C]\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``dt_prod_well``:\n\n\t - num_wells_getem\n"),
@@ -1029,8 +1125,23 @@ static PyGetSetDef GeoHourly_getset[] = {
 {"fracture_aperature", (getter)GeoHourly_get_fracture_aperature,(setter)GeoHourly_set_fracture_aperature,
 	PyDoc_STR("*float*: Fracture aperature [m]\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``fracture_aperature``:\n\n\t - num_wells_getem\n"),
  	NULL},
+{"fracture_length", (getter)GeoHourly_get_fracture_length,(setter)GeoHourly_set_fracture_length,
+	PyDoc_STR("*float*: Fracture length [m]\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``fracture_length``:\n\n\t - num_wells_getem\n"),
+ 	NULL},
+{"fracture_spacing", (getter)GeoHourly_get_fracture_spacing,(setter)GeoHourly_set_fracture_spacing,
+	PyDoc_STR("*float*: Fracture spacing [m]\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``fracture_spacing``:\n\n\t - num_wells_getem\n"),
+ 	NULL},
 {"fracture_width", (getter)GeoHourly_get_fracture_width,(setter)GeoHourly_set_fracture_width,
 	PyDoc_STR("*float*: Fracture width [m]\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``fracture_width``:\n\n\t - num_wells_getem\n"),
+ 	NULL},
+{"geotherm_cost_inj_cost_curve_welltype", (getter)GeoHourly_get_geotherm_cost_inj_cost_curve_welltype,(setter)GeoHourly_set_geotherm_cost_inj_cost_curve_welltype,
+	PyDoc_STR("*float*: Injection well type [0/1]\n\n**Required:**\nTrue"),
+ 	NULL},
+{"geotherm_cost_inj_prod_well_ratio", (getter)GeoHourly_get_geotherm_cost_inj_prod_well_ratio,(setter)GeoHourly_set_geotherm_cost_inj_prod_well_ratio,
+	PyDoc_STR("*float*: Ratio of injection wells to production wells"),
+ 	NULL},
+{"geotherm_cost_prod_cost_curve_welltype", (getter)GeoHourly_get_geotherm_cost_prod_cost_curve_welltype,(setter)GeoHourly_set_geotherm_cost_prod_cost_curve_welltype,
+	PyDoc_STR("*float*: Production well type [0/1]\n\n**Required:**\nTrue"),
  	NULL},
 {"geothermal_analysis_period", (getter)GeoHourly_get_geothermal_analysis_period,(setter)GeoHourly_set_geothermal_analysis_period,
 	PyDoc_STR("*float*: Analysis Lifetime [years]\n\n**Constraints:**\nINTEGER\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``geothermal_analysis_period``:\n\n\t - num_wells_getem\n"),
@@ -1068,6 +1179,9 @@ static PyGetSetDef GeoHourly_getset[] = {
 {"hybrid_dispatch_schedule", (getter)GeoHourly_get_hybrid_dispatch_schedule,(setter)GeoHourly_set_hybrid_dispatch_schedule,
 	PyDoc_STR("*str*: Daily dispatch schedule\n\n**Constraints:**\nTOUSCHED\n\n**Required:**\nRequired if ui_calculations_only=0"),
  	NULL},
+{"inj_casing_size", (getter)GeoHourly_get_inj_casing_size,(setter)GeoHourly_set_inj_casing_size,
+	PyDoc_STR("*float*: Injection pump casing size [in]\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``inj_casing_size``:\n\n\t - num_wells_getem\n"),
+ 	NULL},
 {"inj_prod_well_distance", (getter)GeoHourly_get_inj_prod_well_distance,(setter)GeoHourly_set_inj_prod_well_distance,
 	PyDoc_STR("*float*: Distance from injection to production wells [m]\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``inj_prod_well_distance``:\n\n\t - num_wells_getem\n"),
  	NULL},
@@ -1087,13 +1201,16 @@ static PyGetSetDef GeoHourly_getset[] = {
 	PyDoc_STR("*float*: Number of Wells\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``num_wells``:\n\n\t - num_wells_getem\n"),
  	NULL},
 {"num_wells_getem", (getter)GeoHourly_get_num_wells_getem,(setter)GeoHourly_set_num_wells_getem,
-	PyDoc_STR("*float*: Number of Wells GETEM calc'd\n\n**Required:**\nRequired if ui_calculations_only=0\n\nThe value of ``num_wells_getem`` depends on the following variables:\n\n\t - ambient_pressure\n\t - analysis_type\n\t - casing_size\n\t - conversion_subtype\n\t - conversion_type\n\t - decline_type\n\t - delta_pressure_equip\n\t - design_temp\n\t - dt_prod_well\n\t - excess_pressure_pump\n\t - fracture_angle\n\t - fracture_aperature\n\t - fracture_width\n\t - geothermal_analysis_period\n\t - hr_pl_nlev\n\t - inj_prod_well_distance\n\t - inj_well_diam\n\t - model_choice\n\t - nameplate\n\t - num_fractures\n\t - num_wells\n\t - plant_efficiency_input\n\t - pump_efficiency\n\t - reservoir_height\n\t - reservoir_permeability\n\t - reservoir_pressure_change\n\t - reservoir_pressure_change_type\n\t - reservoir_width\n\t - resource_depth\n\t - resource_temp\n\t - resource_type\n\t - rock_density\n\t - rock_specific_heat\n\t - rock_thermal_conductivity\n\t - specified_pump_work_amount\n\t - specify_pump_work\n\t - subsurface_water_loss\n\t - temp_decline_max\n\t - temp_decline_rate\n\t - well_diameter\n\t - well_flow_rate\n\t - wet_bulb_temp\n"),
+	PyDoc_STR("*float*: Number of Wells GETEM calc'd\n\n**Required:**\nRequired if ui_calculations_only=0\n\nThe value of ``num_wells_getem`` depends on the following variables:\n\n\t - ambient_pressure\n\t - analysis_type\n\t - casing_size\n\t - conversion_subtype\n\t - conversion_type\n\t - decline_type\n\t - delta_pressure_equip\n\t - design_temp\n\t - dt_prod_well\n\t - excess_pressure_pump\n\t - fracture_angle\n\t - fracture_aperature\n\t - fracture_length\n\t - fracture_spacing\n\t - fracture_width\n\t - geothermal_analysis_period\n\t - hr_pl_nlev\n\t - inj_casing_size\n\t - inj_prod_well_distance\n\t - inj_well_diam\n\t - model_choice\n\t - nameplate\n\t - num_fractures\n\t - num_wells\n\t - plant_efficiency_input\n\t - prod_well_choice\n\t - pump_efficiency\n\t - reservoir_height\n\t - reservoir_model_inputs\n\t - reservoir_permeability\n\t - reservoir_pressure_change\n\t - reservoir_pressure_change_type\n\t - reservoir_width\n\t - resource_depth\n\t - resource_temp\n\t - resource_type\n\t - rock_density\n\t - rock_specific_heat\n\t - rock_thermal_conductivity\n\t - specified_pump_work_amount\n\t - specify_pump_work\n\t - subsurface_water_loss\n\t - temp_decline_max\n\t - temp_decline_rate\n\t - well_diameter\n\t - well_flow_rate\n\t - wet_bulb_temp\n"),
  	NULL},
 {"pb_bd_frac", (getter)GeoHourly_get_pb_bd_frac,(setter)GeoHourly_set_pb_bd_frac,
 	PyDoc_STR("*float*: Blowdown steam fraction [%]\n\n**Required:**\nRequired if ui_calculations_only=0"),
  	NULL},
 {"plant_efficiency_input", (getter)GeoHourly_get_plant_efficiency_input,(setter)GeoHourly_set_plant_efficiency_input,
 	PyDoc_STR("*float*: Plant efficiency\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``plant_efficiency_input``:\n\n\t - num_wells_getem\n"),
+ 	NULL},
+{"prod_well_choice", (getter)GeoHourly_get_prod_well_choice,(setter)GeoHourly_set_prod_well_choice,
+	PyDoc_STR("*float*: Temperature loss in production well choice [0/1]\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``prod_well_choice``:\n\n\t - num_wells_getem\n"),
  	NULL},
 {"pump_efficiency", (getter)GeoHourly_get_pump_efficiency,(setter)GeoHourly_set_pump_efficiency,
 	PyDoc_STR("*float*: Pump efficiency [%]\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``pump_efficiency``:\n\n\t - num_wells_getem\n"),
@@ -1103,6 +1220,9 @@ static PyGetSetDef GeoHourly_getset[] = {
  	NULL},
 {"reservoir_height", (getter)GeoHourly_get_reservoir_height,(setter)GeoHourly_set_reservoir_height,
 	PyDoc_STR("*float*: Reservoir height [m]\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``reservoir_height``:\n\n\t - num_wells_getem\n"),
+ 	NULL},
+{"reservoir_model_inputs", (getter)GeoHourly_get_reservoir_model_inputs,(setter)GeoHourly_set_reservoir_model_inputs,
+	PyDoc_STR("*sequence[sequence]*: Reservoir temperatures over time\n\n**Required:**\nRequired if reservoir_pressure_change_type=3\n\nThe value of the following variables depends on ``reservoir_model_inputs``:\n\n\t - num_wells_getem\n"),
  	NULL},
 {"reservoir_permeability", (getter)GeoHourly_get_reservoir_permeability,(setter)GeoHourly_set_reservoir_permeability,
 	PyDoc_STR("*float*: Reservoir Permeability [darcys]\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``reservoir_permeability``:\n\n\t - num_wells_getem\n"),
@@ -1126,7 +1246,7 @@ static PyGetSetDef GeoHourly_getset[] = {
 	PyDoc_STR("*float*: Resource Temperature [C]\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``resource_temp``:\n\n\t - T_htf_hot_ref\n\t - design_temp\n\t - num_wells_getem\n"),
  	NULL},
 {"resource_type", (getter)GeoHourly_get_resource_type,(setter)GeoHourly_set_resource_type,
-	PyDoc_STR("*float*: Type of Resource\n\n**Constraints:**\nINTEGER\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``resource_type``:\n\n\t - num_wells_getem\n"),
+	PyDoc_STR("*float*: Type of Resource\n\n**Constraints:**\nINTEGER\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``resource_type``:\n\n\t - T_htf_hot_ref\n\t - design_temp\n\t - num_wells_getem\n"),
  	NULL},
 {"rock_density", (getter)GeoHourly_get_rock_density,(setter)GeoHourly_set_rock_density,
 	PyDoc_STR("*float*: Rock density [kg/m^3]\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``rock_density``:\n\n\t - num_wells_getem\n"),
@@ -1373,6 +1493,12 @@ Outputs_get_gen(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_gross_cost_output(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Geothermal_Outputs_gross_cost_output_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_gross_output(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Geothermal_Outputs_gross_output_nget, self->data_ptr);
@@ -1382,6 +1508,12 @@ static PyObject *
 Outputs_get_hp_flash_pressure(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Geothermal_Outputs_hp_flash_pressure_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_inj_pump_hp(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Geothermal_Outputs_inj_pump_hp_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -1427,6 +1559,12 @@ Outputs_get_ncg_condensate_pump(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_num_wells_getem_inj(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Geothermal_Outputs_num_wells_getem_inj_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_num_wells_getem_output(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Geothermal_Outputs_num_wells_getem_output_nget, self->data_ptr);
@@ -1469,9 +1607,27 @@ Outputs_get_pump_hp(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_pump_watthr_per_lb(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Geothermal_Outputs_pump_watthr_per_lb_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_pump_work(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Geothermal_Outputs_pump_work_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_pumpwork_inj(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Geothermal_Outputs_pumpwork_inj_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_pumpwork_prod(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Geothermal_Outputs_pumpwork_prod_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -1634,11 +1790,17 @@ static PyGetSetDef Outputs_getset[] = {
 {"gen", (getter)Outputs_get_gen,(setter)0,
 	PyDoc_STR("*sequence*: System power generated [kW]"),
  	NULL},
+{"gross_cost_output", (getter)Outputs_get_gross_cost_output,(setter)0,
+	PyDoc_STR("*float*: Gross output from GETEM for cost"),
+ 	NULL},
 {"gross_output", (getter)Outputs_get_gross_output,(setter)0,
 	PyDoc_STR("*float*: Gross output from GETEM"),
  	NULL},
 {"hp_flash_pressure", (getter)Outputs_get_hp_flash_pressure,(setter)0,
 	PyDoc_STR("*float*: HP Flash Pressure [psia]"),
+ 	NULL},
+{"inj_pump_hp", (getter)Outputs_get_inj_pump_hp,(setter)0,
+	PyDoc_STR("*float*: Injection Pump horsepower [hp]"),
  	NULL},
 {"kwh_per_kw", (getter)Outputs_get_kwh_per_kw,(setter)0,
 	PyDoc_STR("*float*: First year kWh/kW"),
@@ -1661,6 +1823,9 @@ static PyGetSetDef Outputs_getset[] = {
 {"ncg_condensate_pump", (getter)Outputs_get_ncg_condensate_pump,(setter)0,
 	PyDoc_STR("*float*: Condensate Pump Work [kW]"),
  	NULL},
+{"num_wells_getem_inj", (getter)Outputs_get_num_wells_getem_inj,(setter)0,
+	PyDoc_STR("*float*: Number of wells calculated by GETEM"),
+ 	NULL},
 {"num_wells_getem_output", (getter)Outputs_get_num_wells_getem_output,(setter)0,
 	PyDoc_STR("*float*: Number of wells calculated by GETEM"),
  	NULL},
@@ -1682,8 +1847,17 @@ static PyGetSetDef Outputs_getset[] = {
 {"pump_hp", (getter)Outputs_get_pump_hp,(setter)0,
 	PyDoc_STR("*float*: Pump hp calculated by GETEM [hp]"),
  	NULL},
+{"pump_watthr_per_lb", (getter)Outputs_get_pump_watthr_per_lb,(setter)0,
+	PyDoc_STR("*float*: Pump work Efficiency"),
+ 	NULL},
 {"pump_work", (getter)Outputs_get_pump_work,(setter)0,
 	PyDoc_STR("*float*: Pump work calculated by GETEM [MW]"),
+ 	NULL},
+{"pumpwork_inj", (getter)Outputs_get_pumpwork_inj,(setter)0,
+	PyDoc_STR("*float*: Injection Pump work Efficiency"),
+ 	NULL},
+{"pumpwork_prod", (getter)Outputs_get_pumpwork_prod,(setter)0,
+	PyDoc_STR("*float*: Production Pump work Efficiency"),
  	NULL},
 {"qCondenser", (getter)Outputs_get_qCondenser,(setter)0,
 	PyDoc_STR("*float*: Condenser Heat Rejected [btu/h]"),
@@ -1716,19 +1890,19 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Resource replacement? (1=yes)"),
  	NULL},
 {"timestep_dry_bulb", (getter)Outputs_get_timestep_dry_bulb,(setter)0,
-	PyDoc_STR("*sequence*: Dry bulb temperature in each time step [C]"),
+	PyDoc_STR("*sequence*: Dry bulb temperature [C]"),
  	NULL},
 {"timestep_pressure", (getter)Outputs_get_timestep_pressure,(setter)0,
-	PyDoc_STR("*sequence*: Atmospheric pressure in each time step [atm]"),
+	PyDoc_STR("*sequence*: Atmospheric pressure [atm]"),
  	NULL},
 {"timestep_resource_temperature", (getter)Outputs_get_timestep_resource_temperature,(setter)0,
-	PyDoc_STR("*sequence*: Resource temperature in each time step [C]"),
+	PyDoc_STR("*sequence*: Resource temperature [C]"),
  	NULL},
 {"timestep_test_values", (getter)Outputs_get_timestep_test_values,(setter)0,
 	PyDoc_STR("*sequence*: Test output values in each time step"),
  	NULL},
 {"timestep_wet_bulb", (getter)Outputs_get_timestep_wet_bulb,(setter)0,
-	PyDoc_STR("*sequence*: Wet bulb temperature in each time step [C]"),
+	PyDoc_STR("*sequence*: Wet bulb temperature [C]"),
  	NULL},
 {"v_stage_1", (getter)Outputs_get_v_stage_1,(setter)0,
 	PyDoc_STR("*float*: Vacumm Pump Stage 1 [kW]"),

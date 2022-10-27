@@ -34,10 +34,12 @@ class Pvsamv1(object):
 
 
 		albedo = tuple
+		albedo_spatial = tuple
 		irrad_mode = float
 		sky_model = float
 		solar_resource_data = dict
 		solar_resource_file = str
+		use_spatial_albedos = float
 		use_wf_albedo = float
 
 
@@ -53,34 +55,44 @@ class Pvsamv1(object):
 
 
 		acwiring_loss = float
+		calculate_bifacial_electrical_mismatch = float
+		calculate_rack_shading = float
 		dcoptimizer_loss = float
 		en_snow_model = float
 		subarray1_dcwiring_loss = float
 		subarray1_diodeconn_loss = float
+		subarray1_electrical_mismatch = float
 		subarray1_mismatch_loss = float
 		subarray1_nameplate_loss = float
-		subarray1_rear_irradiance_loss = float
+		subarray1_rack_shading = float
+		subarray1_rear_soiling_loss = float
 		subarray1_soiling = tuple
 		subarray1_tracking_loss = float
 		subarray2_dcwiring_loss = float
 		subarray2_diodeconn_loss = float
+		subarray2_electrical_mismatch = float
 		subarray2_mismatch_loss = float
 		subarray2_nameplate_loss = float
-		subarray2_rear_irradiance_loss = float
+		subarray2_rack_shading = float
+		subarray2_rear_soiling_loss = float
 		subarray2_soiling = tuple
 		subarray2_tracking_loss = float
 		subarray3_dcwiring_loss = float
 		subarray3_diodeconn_loss = float
+		subarray3_electrical_mismatch = float
 		subarray3_mismatch_loss = float
 		subarray3_nameplate_loss = float
-		subarray3_rear_irradiance_loss = float
+		subarray3_rack_shading = float
+		subarray3_rear_soiling_loss = float
 		subarray3_soiling = tuple
 		subarray3_tracking_loss = float
 		subarray4_dcwiring_loss = float
 		subarray4_diodeconn_loss = float
+		subarray4_electrical_mismatch = float
 		subarray4_mismatch_loss = float
 		subarray4_nameplate_loss = float
-		subarray4_rear_irradiance_loss = float
+		subarray4_rack_shading = float
+		subarray4_rear_soiling_loss = float
 		subarray4_soiling = tuple
 		subarray4_tracking_loss = float
 		transformer_load_loss = float
@@ -123,6 +135,7 @@ class Pvsamv1(object):
 
 		enable_mismatch_vmax_calc = float
 		inverter_count = float
+		measured_temp_array = tuple
 		subarray1_azimuth = float
 		subarray1_backtrack = float
 		subarray1_gcr = float
@@ -179,6 +192,7 @@ class Pvsamv1(object):
 		subarray4_tilt_eq_lat = float
 		subarray4_track_mode = float
 		system_capacity = float
+		use_measured_temp = float
 
 
 	class Shading(object):
@@ -319,6 +333,7 @@ class Pvsamv1(object):
 		cec_bifaciality = float
 		cec_gamma_r = float
 		cec_gap_spacing = float
+		cec_ground_clearance_height = float
 		cec_heat_transfer = float
 		cec_height = float
 		cec_i_l_ref = float
@@ -326,6 +341,8 @@ class Pvsamv1(object):
 		cec_i_o_ref = float
 		cec_i_sc_ref = float
 		cec_is_bifacial = float
+		cec_lacunarity_enable = float
+		cec_lacunarity_length = float
 		cec_module_length = float
 		cec_module_width = float
 		cec_mounting_config = float
@@ -865,6 +882,7 @@ class Pvsamv1(object):
 		dispatch_manual_percent_gridcharge = tuple
 		dispatch_manual_sched = tuple
 		dispatch_manual_sched_weekend = tuple
+		dispatch_manual_system_charge_first = float
 
 
 	class SystemCosts(object):
@@ -879,6 +897,8 @@ class Pvsamv1(object):
 
 
 		om_batt_replacement_cost = tuple
+		om_batt_variable_cost = tuple
+		om_production_escal = float
 		om_replacement_cost_escal = float
 
 
@@ -961,6 +981,7 @@ class Pvsamv1(object):
 			pass
 
 
+		en_electricity_rates = float
 		rate_escalation = tuple
 		ur_annual_min_charge = float
 		ur_billing_demand_lookback_percentages = tuple
@@ -1044,6 +1065,7 @@ class Pvsamv1(object):
 		ac_wiring_loss = tuple
 		airmass = tuple
 		alb = tuple
+		alb_spatial = tuple
 		annual_ac_battery_loss_percent = float
 		annual_ac_gross = float
 		annual_ac_inv_clip_loss_percent = float
@@ -1055,6 +1077,8 @@ class Pvsamv1(object):
 		annual_ac_perf_adj_loss_percent = float
 		annual_ac_wiring_loss = float
 		annual_ac_wiring_loss_percent = float
+		annual_bifacial_electrical_mismatch = float
+		annual_bifacial_electrical_mismatch_percent = float
 		annual_crit_load = float
 		annual_crit_load_unmet = float
 		annual_crit_load_unmet_percentage = float
@@ -1086,6 +1110,10 @@ class Pvsamv1(object):
 		annual_energy_distribution_time = tuple
 		annual_export_to_grid_energy = tuple
 		annual_gh = float
+		annual_ground_absorbed = float
+		annual_ground_absorbed_percent = float
+		annual_ground_incident = float
+		annual_ground_incident_percent = float
 		annual_import_to_grid_energy = tuple
 		annual_inv_cliploss = float
 		annual_inv_pntloss = float
@@ -1099,11 +1127,22 @@ class Pvsamv1(object):
 		annual_poa_front = float
 		annual_poa_nom = float
 		annual_poa_rear = float
-		annual_poa_rear_gain_percent = float
+		annual_poa_rear_direct_diffuse = float
+		annual_poa_rear_ground_reflected = float
+		annual_poa_rear_rack_shaded = float
+		annual_poa_rear_row_reflections = float
+		annual_poa_rear_self_shaded = float
+		annual_poa_rear_soiled = float
 		annual_poa_shaded = float
 		annual_poa_shaded_soiled = float
 		annual_poa_shading_loss_percent = float
 		annual_poa_soiling_loss_percent = float
+		annual_rack_shaded_percent = float
+		annual_rear_direct_diffuse_percent = float
+		annual_rear_ground_reflected_percent = float
+		annual_rear_row_reflections_percent = float
+		annual_rear_self_shaded_percent = float
+		annual_rear_soiled_percent = float
 		annual_snow_loss = float
 		annual_subarray1_dc_diodes_loss = float
 		annual_subarray1_dc_gross = float
@@ -1157,6 +1196,7 @@ class Pvsamv1(object):
 		batt_cycles = tuple
 		batt_dispatch_sched = tuple
 		batt_power = tuple
+		batt_power_dc = tuple
 		batt_power_target = tuple
 		batt_pvs_PV_ramp_interval = tuple
 		batt_pvs_P_pv_ac = tuple
@@ -1184,10 +1224,12 @@ class Pvsamv1(object):
 		batt_system_loss = tuple
 		batt_temperature = tuple
 		batt_to_grid = tuple
+		batt_to_inverter_dc = tuple
 		batt_to_load = tuple
 		batt_to_system_load = tuple
 		batt_voltage = tuple
 		batt_voltage_cell = tuple
+		bifacial_electrical_mismatch = tuple
 		capacity_factor = float
 		capacity_factor_ac = float
 		cdf_of_surviving = tuple
@@ -1211,6 +1253,8 @@ class Pvsamv1(object):
 		grid_power_target = tuple
 		grid_to_batt = tuple
 		grid_to_load = tuple
+		ground_absorbed = tuple
+		ground_incident = tuple
 		interconnection_loss = tuple
 		inv_cliploss = tuple
 		inv_eff = tuple
@@ -1257,6 +1301,12 @@ class Pvsamv1(object):
 		poa_front = tuple
 		poa_nom = tuple
 		poa_rear = tuple
+		poa_rear_direct_diffuse = tuple
+		poa_rear_ground_reflected = tuple
+		poa_rear_rack_shaded = tuple
+		poa_rear_row_reflections = tuple
+		poa_rear_self_shaded = tuple
+		poa_rear_soiled = tuple
 		poa_shaded = tuple
 		poa_shaded_soiled = tuple
 		resilience_hrs = tuple
@@ -1286,6 +1336,7 @@ class Pvsamv1(object):
 		subarray1_dc_gross = tuple
 		subarray1_dc_voltage = tuple
 		subarray1_dcloss = float
+		subarray1_ground_rear_spatial = tuple
 		subarray1_idealrot = tuple
 		subarray1_isc = tuple
 		subarray1_linear_derate = tuple
@@ -1296,6 +1347,7 @@ class Pvsamv1(object):
 		subarray1_poa_front = tuple
 		subarray1_poa_nom = tuple
 		subarray1_poa_rear = tuple
+		subarray1_poa_rear_spatial = tuple
 		subarray1_poa_shaded = tuple
 		subarray1_poa_shaded_soiled = tuple
 		subarray1_snow_coverage = tuple
@@ -1316,6 +1368,7 @@ class Pvsamv1(object):
 		subarray2_dc_gross = tuple
 		subarray2_dc_voltage = tuple
 		subarray2_dcloss = float
+		subarray2_ground_rear_spatial = tuple
 		subarray2_idealrot = tuple
 		subarray2_isc = tuple
 		subarray2_linear_derate = tuple
@@ -1326,6 +1379,7 @@ class Pvsamv1(object):
 		subarray2_poa_front = tuple
 		subarray2_poa_nom = tuple
 		subarray2_poa_rear = tuple
+		subarray2_poa_rear_spatial = tuple
 		subarray2_poa_shaded = tuple
 		subarray2_poa_shaded_soiled = tuple
 		subarray2_snow_coverage = tuple
@@ -1346,6 +1400,7 @@ class Pvsamv1(object):
 		subarray3_dc_gross = tuple
 		subarray3_dc_voltage = tuple
 		subarray3_dcloss = float
+		subarray3_ground_rear_spatial = tuple
 		subarray3_idealrot = tuple
 		subarray3_isc = tuple
 		subarray3_linear_derate = tuple
@@ -1356,6 +1411,7 @@ class Pvsamv1(object):
 		subarray3_poa_front = tuple
 		subarray3_poa_nom = tuple
 		subarray3_poa_rear = tuple
+		subarray3_poa_rear_spatial = tuple
 		subarray3_poa_shaded = tuple
 		subarray3_poa_shaded_soiled = tuple
 		subarray3_snow_coverage = tuple
@@ -1376,6 +1432,7 @@ class Pvsamv1(object):
 		subarray4_dc_gross = tuple
 		subarray4_dc_voltage = tuple
 		subarray4_dcloss = float
+		subarray4_ground_rear_spatial = tuple
 		subarray4_idealrot = tuple
 		subarray4_isc = tuple
 		subarray4_linear_derate = tuple
@@ -1386,6 +1443,7 @@ class Pvsamv1(object):
 		subarray4_poa_front = tuple
 		subarray4_poa_nom = tuple
 		subarray4_poa_rear = tuple
+		subarray4_poa_rear_spatial = tuple
 		subarray4_poa_shaded = tuple
 		subarray4_poa_shaded_soiled = tuple
 		subarray4_snow_coverage = tuple
@@ -1401,6 +1459,7 @@ class Pvsamv1(object):
 		sunup = tuple
 		survival_function = tuple
 		system_to_batt = tuple
+		system_to_batt_dc = tuple
 		system_to_grid = tuple
 		system_to_load = tuple
 		tdry = tuple

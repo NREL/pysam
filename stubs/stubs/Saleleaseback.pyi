@@ -144,20 +144,20 @@ class Saleleaseback(object):
 			pass
 
 
-		itc_fed_amount = float
+		itc_fed_amount = tuple
 		itc_fed_amount_deprbas_fed = float
 		itc_fed_amount_deprbas_sta = float
-		itc_fed_percent = float
+		itc_fed_percent = tuple
 		itc_fed_percent_deprbas_fed = float
 		itc_fed_percent_deprbas_sta = float
-		itc_fed_percent_maxvalue = float
-		itc_sta_amount = float
+		itc_fed_percent_maxvalue = tuple
+		itc_sta_amount = tuple
 		itc_sta_amount_deprbas_fed = float
 		itc_sta_amount_deprbas_sta = float
-		itc_sta_percent = float
+		itc_sta_percent = tuple
 		itc_sta_percent_deprbas_fed = float
 		itc_sta_percent_deprbas_sta = float
-		itc_sta_percent_maxvalue = float
+		itc_sta_percent_maxvalue = tuple
 		ptc_fed_amount = tuple
 		ptc_fed_escal = float
 		ptc_fed_term = float
@@ -347,6 +347,7 @@ class Saleleaseback(object):
 
 
 		en_electricity_rates = float
+		rate_escalation = tuple
 
 
 	class SaleLeaseback(object):
@@ -497,6 +498,7 @@ class Saleleaseback(object):
 		battery_per_kWh = float
 		en_batt = float
 		en_standalone_batt = float
+		en_wave_batt = float
 
 
 	class Outputs(object):

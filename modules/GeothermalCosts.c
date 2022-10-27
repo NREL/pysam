@@ -162,6 +162,18 @@ GeoHourly_set_design_temp(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyObject *
+GeoHourly_get_dt_prod_well(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_GeothermalCosts_GeoHourly_dt_prod_well_nget, self->data_ptr);
+}
+
+static int
+GeoHourly_set_dt_prod_well(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_GeothermalCosts_GeoHourly_dt_prod_well_nset, self->data_ptr);
+}
+
+static PyObject *
 GeoHourly_get_eff_secondlaw(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_GeothermalCosts_GeoHourly_eff_secondlaw_nget, self->data_ptr);
@@ -183,6 +195,18 @@ static int
 GeoHourly_set_flash_count(VarGroupObject *self, PyObject *value, void *closure)
 {
 	return PySAM_double_setter(value, SAM_GeothermalCosts_GeoHourly_flash_count_nset, self->data_ptr);
+}
+
+static PyObject *
+GeoHourly_get_gross_cost_output(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_GeothermalCosts_GeoHourly_gross_cost_output_nget, self->data_ptr);
+}
+
+static int
+GeoHourly_set_gross_cost_output(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_GeothermalCosts_GeoHourly_gross_cost_output_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -231,6 +255,18 @@ static int
 GeoHourly_set_ncg_condensate_pump(VarGroupObject *self, PyObject *value, void *closure)
 {
 	return PySAM_double_setter(value, SAM_GeothermalCosts_GeoHourly_ncg_condensate_pump_nset, self->data_ptr);
+}
+
+static PyObject *
+GeoHourly_get_ppi_base_year(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_GeothermalCosts_GeoHourly_ppi_base_year_nget, self->data_ptr);
+}
+
+static int
+GeoHourly_set_ppi_base_year(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_GeothermalCosts_GeoHourly_ppi_base_year_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -435,11 +471,17 @@ static PyGetSetDef GeoHourly_getset[] = {
 {"design_temp", (getter)GeoHourly_get_design_temp,(setter)GeoHourly_set_design_temp,
 	PyDoc_STR("*float*: Power block design temperature [C]\n\n**Required:**\nTrue"),
  	NULL},
+{"dt_prod_well", (getter)GeoHourly_get_dt_prod_well,(setter)GeoHourly_set_dt_prod_well,
+	PyDoc_STR("*float*: Temperature loss in production well [C]\n\n**Required:**\nTrue"),
+ 	NULL},
 {"eff_secondlaw", (getter)GeoHourly_get_eff_secondlaw,(setter)GeoHourly_set_eff_secondlaw,
 	PyDoc_STR("*float*: Second Law Efficiency [%]\n\n**Required:**\nTrue"),
  	NULL},
 {"flash_count", (getter)GeoHourly_get_flash_count,(setter)GeoHourly_set_flash_count,
 	PyDoc_STR("*float*: Flash Count [(1 -2)]\n\n**Required:**\nRequired if conversion_type=1"),
+ 	NULL},
+{"gross_cost_output", (getter)GeoHourly_get_gross_cost_output,(setter)GeoHourly_set_gross_cost_output,
+	PyDoc_STR("*float*: Gross output from GETEM for cost calculations [MW]\n\n**Required:**\nTrue"),
  	NULL},
 {"gross_output", (getter)GeoHourly_get_gross_output,(setter)GeoHourly_set_gross_output,
 	PyDoc_STR("*float*: Gross output from GETEM [kW]\n\n**Required:**\nTrue"),
@@ -452,6 +494,9 @@ static PyGetSetDef GeoHourly_getset[] = {
  	NULL},
 {"ncg_condensate_pump", (getter)GeoHourly_get_ncg_condensate_pump,(setter)GeoHourly_set_ncg_condensate_pump,
 	PyDoc_STR("*float*: Condensate Pump Work [kW]\n\n**Required:**\nRequired if conversion_type=1"),
+ 	NULL},
+{"ppi_base_year", (getter)GeoHourly_get_ppi_base_year,(setter)GeoHourly_set_ppi_base_year,
+	PyDoc_STR("*float*: PPI Base Year\n\n**Required:**\nFalse. Automatically set to 19 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"pressure_ratio_1", (getter)GeoHourly_get_pressure_ratio_1,(setter)GeoHourly_set_pressure_ratio_1,
 	PyDoc_STR("*float*: Suction Steam Ratio 1\n\n**Required:**\nRequired if conversion_type=1"),

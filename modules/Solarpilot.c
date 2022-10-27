@@ -222,6 +222,30 @@ SolarPILOT_set_cost_sf_fixed(VarGroupObject *self, PyObject *value, void *closur
 }
 
 static PyObject *
+SolarPILOT_get_csp_pt_sf_fixed_land_area(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Solarpilot_SolarPILOT_csp_pt_sf_fixed_land_area_nget, self->data_ptr);
+}
+
+static int
+SolarPILOT_set_csp_pt_sf_fixed_land_area(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Solarpilot_SolarPILOT_csp_pt_sf_fixed_land_area_nset, self->data_ptr);
+}
+
+static PyObject *
+SolarPILOT_get_csp_pt_sf_land_overhead_factor(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Solarpilot_SolarPILOT_csp_pt_sf_land_overhead_factor_nget, self->data_ptr);
+}
+
+static int
+SolarPILOT_set_csp_pt_sf_land_overhead_factor(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Solarpilot_SolarPILOT_csp_pt_sf_land_overhead_factor_nset, self->data_ptr);
+}
+
+static PyObject *
 SolarPILOT_get_delta_flux_hrs(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Solarpilot_SolarPILOT_delta_flux_hrs_nget, self->data_ptr);
@@ -773,6 +797,12 @@ static PyGetSetDef SolarPILOT_getset[] = {
  	NULL},
 {"cost_sf_fixed", (getter)SolarPILOT_get_cost_sf_fixed,(setter)SolarPILOT_set_cost_sf_fixed,
 	PyDoc_STR("*float*: Soalr field fixed cost [$]\n\n**Required:**\nTrue"),
+ 	NULL},
+{"csp_pt_sf_fixed_land_area", (getter)SolarPILOT_get_csp_pt_sf_fixed_land_area,(setter)SolarPILOT_set_csp_pt_sf_fixed_land_area,
+	PyDoc_STR("*float*: Fixed land area [acre]\n\n**Required:**\nTrue"),
+ 	NULL},
+{"csp_pt_sf_land_overhead_factor", (getter)SolarPILOT_get_csp_pt_sf_land_overhead_factor,(setter)SolarPILOT_set_csp_pt_sf_land_overhead_factor,
+	PyDoc_STR("*float*: Land overhead factor\n\n**Required:**\nTrue"),
  	NULL},
 {"delta_flux_hrs", (getter)SolarPILOT_get_delta_flux_hrs,(setter)SolarPILOT_set_delta_flux_hrs,
 	PyDoc_STR("*float*: Hourly frequency in flux map lookup\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),

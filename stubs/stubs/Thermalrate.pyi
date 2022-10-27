@@ -72,6 +72,7 @@ class Thermalrate(object):
 			pass
 
 
+		annual_thermal_value = tuple
 		thermal_cost_with_system_year1 = float
 		thermal_cost_without_system_year1 = float
 		thermal_load_year1 = float

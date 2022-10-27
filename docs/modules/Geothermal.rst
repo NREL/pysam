@@ -39,11 +39,17 @@ The variables listed below are interdependent with other variables. If you chang
 
  - fracture_aperature
 
+ - fracture_length
+
+ - fracture_spacing
+
  - fracture_width
 
  - geothermal_analysis_period
 
  - hr_pl_nlev
+
+ - inj_casing_size
 
  - inj_prod_well_distance
 
@@ -61,9 +67,13 @@ The variables listed below are interdependent with other variables. If you chang
 
  - plant_efficiency_input
 
+ - prod_well_choice
+
  - pump_efficiency
 
  - reservoir_height
+
+ - reservoir_model_inputs
 
  - reservoir_permeability
 

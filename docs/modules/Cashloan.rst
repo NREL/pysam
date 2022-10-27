@@ -111,6 +111,12 @@ LCOS Group
 .. autoclass:: PySAM.Cashloan.Cashloan.LCOS
 	:members:
 
+ElectricityRates Group
+-----------------------
+
+.. autoclass:: PySAM.Cashloan.Cashloan.ElectricityRates
+	:members:
+
 Outputs Group
 --------------
 

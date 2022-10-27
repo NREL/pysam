@@ -21,16 +21,16 @@ Functions
 .. autoclass:: PySAM.Utilityrate5.Utilityrate5
 	:members:
 
-ElectricityRates Group
------------------------
-
-.. autoclass:: PySAM.Utilityrate5.Utilityrate5.ElectricityRates
-	:members:
-
 Lifetime Group
 ---------------
 
 .. autoclass:: PySAM.Utilityrate5.Utilityrate5.Lifetime
+	:members:
+
+ElectricityRates Group
+-----------------------
+
+.. autoclass:: PySAM.Utilityrate5.Utilityrate5.ElectricityRates
 	:members:
 
 SystemOutput Group

@@ -59,21 +59,24 @@ class TcsmoltenSalt(object):
 		bop_par_1 = float
 		bop_par_2 = float
 		bop_par_f = float
-		disp_csu_cost = float
+		can_cycle_use_standby = float
+		disp_csu_cost_rel = float
 		disp_frequency = float
 		disp_horizon = float
+		disp_hsu_cost_rel = float
 		disp_inventory_incentive = float
 		disp_max_iter = float
 		disp_mip_gap = float
-		disp_pen_delta_w = float
+		disp_pen_ramping = float
 		disp_reporting = float
-		disp_rsu_cost = float
+		disp_rsu_cost_rel = float
 		disp_spec_bb = float
 		disp_spec_presolve = float
 		disp_spec_scaling = float
 		disp_steps_per_hour = float
 		disp_time_weighting = float
 		disp_timeout = float
+		disp_wlim_maxspec = float
 		dispatch_series = tuple
 		f_turb_tou_periods = tuple
 		is_ampl_engine = float
@@ -81,11 +84,13 @@ class TcsmoltenSalt(object):
 		is_dispatch_series = float
 		is_parallel_htr = float
 		is_tod_pc_target_also_pc_max = float
+		is_wlim_design = float
 		is_wlim_series = float
 		is_write_ampl_dat = float
 		pb_fixed_par = float
 		q_rec_heattrace = float
 		q_rec_standby = float
+		sim_type = float
 		time_start = float
 		time_steps_per_hour = float
 		time_stop = float
@@ -110,7 +115,7 @@ class TcsmoltenSalt(object):
 		csp_financial_model = float
 
 
-	class TimeOfDeliveryFactors(object):
+	class SystemDesign(object):
 		def assign(self): 
 			pass
 	
@@ -121,19 +126,14 @@ class TcsmoltenSalt(object):
 			pass
 
 
-		dispatch_factor1 = float
-		dispatch_factor2 = float
-		dispatch_factor3 = float
-		dispatch_factor4 = float
-		dispatch_factor5 = float
-		dispatch_factor6 = float
-		dispatch_factor7 = float
-		dispatch_factor8 = float
-		dispatch_factor9 = float
-		dispatch_factors_ts = tuple
-		dispatch_sched_weekday = tuple
-		dispatch_sched_weekend = tuple
-		ppa_multiplier_model = float
+		P_ref = float
+		T_htf_cold_des = float
+		T_htf_hot_des = float
+		design_eff = float
+		dni_des = float
+		sf_excess = float
+		solarm = float
+		tshours = float
 
 
 	class HeliostatField(object):
@@ -153,7 +153,6 @@ class TcsmoltenSalt(object):
 		c_atm_1 = float
 		c_atm_2 = float
 		c_atm_3 = float
-		calc_fluxmaps = float
 		cant_type = float
 		check_max_flux = float
 		csp_pt_sf_fixed_land_area = float
@@ -174,7 +173,6 @@ class TcsmoltenSalt(object):
 		helio_width = float
 		interp_beta = float
 		interp_nug = float
-		land_area_base = float
 		land_bound_list = tuple
 		land_bound_table = tuple
 		land_max = float
@@ -189,31 +187,10 @@ class TcsmoltenSalt(object):
 		p_start = float
 		p_track = float
 		receiver_type = float
+		total_land_area_before_rad_cooling_in = float
 		v_wind_max = float
 		washing_frequency = float
 		water_usage_per_wash = float
-
-
-	class SystemDesign(object):
-		def assign(self): 
-			pass
-	
-		def export(self) -> dict:
-			pass
-	
-		def __init__(self, *args, **kwargs): 
-			pass
-
-
-		P_ref = float
-		T_htf_cold_des = float
-		T_htf_hot_des = float
-		design_eff = float
-		dni_des = float
-		gross_net_conversion_factor = float
-		sf_excess = float
-		solarm = float
-		tshours = float
 
 
 	class TowerAndReceiver(object):
@@ -259,7 +236,6 @@ class TcsmoltenSalt(object):
 		n_flux_days = float
 		piping_length_const = float
 		piping_length_mult = float
-		piping_loss = float
 		piping_loss_coefficient = float
 		preheat_flux = float
 		rec_absorptance = float
@@ -280,75 +256,6 @@ class TcsmoltenSalt(object):
 		u_riser = float
 
 
-	class SystemCosts(object):
-		def assign(self): 
-			pass
-	
-		def export(self) -> dict:
-			pass
-	
-		def __init__(self, *args, **kwargs): 
-			pass
-
-
-		bop_spec_cost = float
-		contingency_rate = float
-		cost_sf_fixed = float
-		csp_pt_cost_epc_fixed = float
-		csp_pt_cost_epc_per_acre = float
-		csp_pt_cost_epc_per_watt = float
-		csp_pt_cost_epc_percent = float
-		csp_pt_cost_plm_fixed = float
-		csp_pt_cost_plm_per_watt = float
-		csp_pt_cost_plm_percent = float
-		fossil_spec_cost = float
-		heliostat_spec_cost = float
-		land_spec_cost = float
-		plant_spec_cost = float
-		rec_cost_exp = float
-		rec_ref_area = float
-		rec_ref_cost = float
-		sales_tax_frac = float
-		site_spec_cost = float
-		tes_spec_cost = float
-		tower_exp = float
-		tower_fixed_cost = float
-
-
-	class FinancialParameters(object):
-		def assign(self): 
-			pass
-	
-		def export(self) -> dict:
-			pass
-	
-		def __init__(self, *args, **kwargs): 
-			pass
-
-
-		const_per_interest_rate1 = float
-		const_per_interest_rate2 = float
-		const_per_interest_rate3 = float
-		const_per_interest_rate4 = float
-		const_per_interest_rate5 = float
-		const_per_months1 = float
-		const_per_months2 = float
-		const_per_months3 = float
-		const_per_months4 = float
-		const_per_months5 = float
-		const_per_percent1 = float
-		const_per_percent2 = float
-		const_per_percent3 = float
-		const_per_percent4 = float
-		const_per_percent5 = float
-		const_per_upfront_rate1 = float
-		const_per_upfront_rate2 = float
-		const_per_upfront_rate3 = float
-		const_per_upfront_rate4 = float
-		const_per_upfront_rate5 = float
-		sales_tax_rate = float
-
-
 	class ParallelHeater(object):
 		def assign(self): 
 			pass
@@ -362,8 +269,46 @@ class TcsmoltenSalt(object):
 
 		f_q_dot_des_allowable_su = float
 		f_q_dot_heater_min = float
+		heater_efficiency = float
 		heater_mult = float
 		hrs_startup_at_max_rate = float
+
+
+	class SystemCosts(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		allow_heater_no_dispatch_opt = float
+		bop_spec_cost = float
+		contingency_rate = float
+		cost_sf_fixed = float
+		csp_pt_cost_epc_fixed = float
+		csp_pt_cost_epc_per_acre = float
+		csp_pt_cost_epc_per_watt = float
+		csp_pt_cost_epc_percent = float
+		csp_pt_cost_plm_fixed = float
+		csp_pt_cost_plm_per_watt = float
+		csp_pt_cost_plm_percent = float
+		fossil_spec_cost = float
+		heater_spec_cost = float
+		heliostat_spec_cost = float
+		land_spec_cost = float
+		plant_spec_cost = float
+		rec_cost_exp = float
+		rec_ref_area = float
+		rec_ref_cost = float
+		sales_tax_frac = float
+		site_spec_cost = float
+		tes_spec_cost = float
+		tower_exp = float
+		tower_fixed_cost = float
 
 
 	class ThermalStorage(object):
@@ -379,13 +324,13 @@ class TcsmoltenSalt(object):
 
 		cold_tank_Thtr = float
 		cold_tank_max_heat = float
-		csp_pt_tes_init_hot_htf_percent = float
 		h_tank = float
 		h_tank_min = float
 		hot_tank_Thtr = float
 		hot_tank_max_heat = float
 		tank_pairs = float
 		tanks_in_parallel = float
+		tes_init_hot_htf_percent = float
 		u_tank = float
 
 
@@ -420,7 +365,6 @@ class TcsmoltenSalt(object):
 		f_ctes_warm_ini = float
 		h_ctes_tank = float
 		h_ctes_tank_min = float
-		helio_area_tot = float
 		k_panel = float
 		m_dot_radpanel = float
 		n_rad_tubes = float
@@ -466,7 +410,6 @@ class TcsmoltenSalt(object):
 
 
 		CT = float
-		P_boil = float
 		P_cond_min = float
 		P_cond_ratio = float
 		T_ITD_des = float
@@ -492,6 +435,32 @@ class TcsmoltenSalt(object):
 		ud_f_W_dot_cool_des = float
 		ud_ind_od = tuple
 		ud_m_dot_water_cool_des = float
+
+
+	class TimeOfDeliveryFactors(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		dispatch_factor1 = float
+		dispatch_factor2 = float
+		dispatch_factor3 = float
+		dispatch_factor4 = float
+		dispatch_factor5 = float
+		dispatch_factor6 = float
+		dispatch_factor7 = float
+		dispatch_factor8 = float
+		dispatch_factor9 = float
+		dispatch_factors_ts = tuple
+		dispatch_sched_weekday = tuple
+		dispatch_sched_weekend = tuple
+		ppa_multiplier_model = float
 
 
 	class FinancialSolutionMode(object):
@@ -534,6 +503,60 @@ class TcsmoltenSalt(object):
 
 
 		mp_energy_market_revenue = tuple
+		ppa_price_input = tuple
+
+
+	class FinancialParameters(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		const_per_interest_rate1 = float
+		const_per_interest_rate2 = float
+		const_per_interest_rate3 = float
+		const_per_interest_rate4 = float
+		const_per_interest_rate5 = float
+		const_per_months1 = float
+		const_per_months2 = float
+		const_per_months3 = float
+		const_per_months4 = float
+		const_per_months5 = float
+		const_per_percent1 = float
+		const_per_percent2 = float
+		const_per_percent3 = float
+		const_per_percent4 = float
+		const_per_percent5 = float
+		const_per_upfront_rate1 = float
+		const_per_upfront_rate2 = float
+		const_per_upfront_rate3 = float
+		const_per_upfront_rate4 = float
+		const_per_upfront_rate5 = float
+		sales_tax_rate = float
+
+
+	class Deprecated(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		P_boil = float
+		csp_pt_tes_init_hot_htf_percent = float
+		disp_csu_cost = float
+		disp_pen_delta_w = float
+		disp_rsu_cost = float
+		piping_loss = float
 
 
 	class AdjustmentFactors(object):
@@ -568,8 +591,14 @@ class TcsmoltenSalt(object):
 
 
 		A_radfield = float
+		A_rec = float
 		A_sf = float
+		D_rec_calc = float
+		E_heater_su_des = float
+		L_tower_piping_calc = float
+		N_hel_calc = float
 		P_cond = tuple
+		P_cond_iter_err = tuple
 		P_cooling_tower_tot = tuple
 		P_cycle = tuple
 		P_fixed = tuple
@@ -577,13 +606,21 @@ class TcsmoltenSalt(object):
 		P_plant_balance_tot = tuple
 		P_rec_heattrace = tuple
 		P_tower_pump = tuple
+		Q_dot_HTF_ND_des_calc = float
+		Q_tes_des = float
 		Q_thermal = tuple
 		Q_thermal_ss = tuple
 		Q_thermal_ss_csky = tuple
+		T_amb_high_calc = float
+		T_amb_low_calc = float
+		T_amb_ref_calc = float
 		T_cold = tuple
 		T_cond_out = tuple
 		T_htf_heater_in = tuple
 		T_htf_heater_out = tuple
+		T_htf_high_calc = float
+		T_htf_low_calc = float
+		T_htf_ref_calc = float
 		T_panel_out_max = tuple
 		T_pc_in = tuple
 		T_pc_out = tuple
@@ -599,7 +636,20 @@ class TcsmoltenSalt(object):
 		T_wall_rec_outlet = tuple
 		T_wall_riser = tuple
 		T_warm = tuple
+		V_tes_htf_avail_des = float
+		V_tes_htf_total_des = float
+		W_dot_bop_design = float
+		W_dot_col_tracking_des = float
+		W_dot_cooling_ND_des_calc = float
+		W_dot_cycle_cooling_des = float
+		W_dot_cycle_pump_des = float
+		W_dot_fixed = float
+		W_dot_gross_ND_des_calc = float
 		W_dot_heater = tuple
+		W_dot_heater_des = float
+		W_dot_rec_pump_des = float
+		W_dot_rec_pump_rec_share_des = float
+		W_dot_rec_pump_tower_share_des = float
 		annual_W_cooling_tower = float
 		annual_W_cycle_gross = float
 		annual_energy = float
@@ -608,8 +658,17 @@ class TcsmoltenSalt(object):
 		annual_q_rec_inc = float
 		annual_q_rec_loss = float
 		annual_total_water_use = float
+		average_attenuation = float
+		avg_suboptimal_rel_mip_gap = float
 		beam = tuple
 		capacity_factor = float
+		capacity_factor_highest_1000_ppas = float
+		capacity_factor_highest_2000_ppas = float
+		cav_panel_width = float
+		cav_radius = float
+		cav_rec_area = float
+		cav_rec_height_calc = float
+		cav_rec_width_calc = float
 		clearsky = tuple
 		const_per_interest1 = float
 		const_per_interest2 = float
@@ -631,6 +690,8 @@ class TcsmoltenSalt(object):
 		const_per_total5 = float
 		construction_financing_cost = float
 		conversion_factor = float
+		cp_battery_capacity = float
+		cp_system_capacity = float
 		csp_pt_cost_bop = float
 		csp_pt_cost_contingency = float
 		csp_pt_cost_epc_total = float
@@ -646,9 +707,11 @@ class TcsmoltenSalt(object):
 		csp_pt_cost_sales_tax_total = float
 		csp_pt_cost_site_improvements = float
 		csp_pt_cost_storage = float
-		csp_pt_cost_total_land_area = float
 		csp_pt_cost_tower = float
+		cycle_htf_pump_power = tuple
+		d_tank_tes = float
 		defocus = tuple
+		dens_store_htf_at_T_ave = float
 		disp_iter_ann = float
 		disp_obj_relax = tuple
 		disp_objective = tuple
@@ -666,6 +729,7 @@ class TcsmoltenSalt(object):
 		disp_rev_expected = tuple
 		disp_solve_iter = tuple
 		disp_solve_state = tuple
+		disp_solve_state_ann = float
 		disp_solve_time = tuple
 		disp_solve_time_ann = float
 		disp_subopt_flag = tuple
@@ -676,31 +740,53 @@ class TcsmoltenSalt(object):
 		eta = tuple
 		eta_field = tuple
 		eta_map_out = tuple
+		eta_rec_thermal_des = float
 		eta_therm = tuple
+		ext_rec_area = float
+		ext_rec_aspect = float
 		flux_maps_for_import = tuple
 		flux_maps_out = tuple
 		gen = tuple
-		htf_pump_power = tuple
+		h_rec_input_to_cost_model = float
+		h_tower_calc = float
+		heater_cost = float
+		helio_positions_calc = tuple
+		heliostat_area = float
+		is_PAR_HTR_allowed = tuple
 		is_pc_sb_allowed = tuple
 		is_pc_su_allowed = tuple
 		is_rec_su_allowed = tuple
 		kwh_per_kw = float
+		land_area_base_calc = float
+		land_max_abs = float
+		land_min_abs = float
 		m_cold = tuple
 		m_dot_balance = tuple
 		m_dot_cr_to_tes_hot = tuple
 		m_dot_cycle_to_field = tuple
 		m_dot_field_to_cycle = tuple
+		m_dot_htf_ND_high_calc = float
+		m_dot_htf_ND_low_calc = float
+		m_dot_htf_ND_ref_calc = float
+		m_dot_htf_cycle_des = float
 		m_dot_htf_heater = tuple
+		m_dot_htf_rec_des = float
+		m_dot_htf_rec_max = float
 		m_dot_pc = tuple
 		m_dot_pc_to_tes_cold = tuple
 		m_dot_rec = tuple
 		m_dot_tes_cold_out = tuple
 		m_dot_tes_hot_out = tuple
+		m_dot_water_ND_des_calc = float
 		m_dot_water_pc = tuple
 		m_warm = tuple
 		mass_tes_cold = tuple
 		mass_tes_hot = tuple
+		n_T_amb_pars_calc = float
+		n_T_htf_pars_calc = float
+		n_m_dot_pars_calc = float
 		n_op_modes = tuple
+		nameplate = float
 		op_mode_1 = tuple
 		op_mode_2 = tuple
 		op_mode_3 = tuple
@@ -712,17 +798,23 @@ class TcsmoltenSalt(object):
 		q_balance = tuple
 		q_ch_tes = tuple
 		q_dc_tes = tuple
+		q_dot_cycle_des = float
+		q_dot_elec_to_PAR_HTR = tuple
 		q_dot_est_cr_on = tuple
 		q_dot_est_cr_su = tuple
 		q_dot_est_tes_ch = tuple
 		q_dot_est_tes_dc = tuple
+		q_dot_heater_des = float
 		q_dot_heater_startup = tuple
 		q_dot_heater_to_htf = tuple
+		q_dot_loss_tes_des = float
 		q_dot_pc_max = tuple
 		q_dot_pc_min = tuple
 		q_dot_pc_sb = tuple
 		q_dot_pc_startup = tuple
 		q_dot_pc_target = tuple
+		q_dot_piping_loss_des = float
+		q_dot_rec_des = float
 		q_dot_rec_inc = tuple
 		q_dot_reflection_loss = tuple
 		q_heater = tuple
@@ -733,7 +825,11 @@ class TcsmoltenSalt(object):
 		q_startup = tuple
 		q_thermal_loss = tuple
 		radcool_control = tuple
+		rec_defocus = tuple
+		rec_height_calc = float
+		refl_image_error = float
 		rh = tuple
+		sales_energy_capacity_factor = float
 		sf_adjust_out = tuple
 		sim_cpu_run_time = float
 		solaz = tuple
@@ -741,14 +837,19 @@ class TcsmoltenSalt(object):
 		system_capacity = float
 		tank_losses = tuple
 		tdry = tuple
+		tes_htf_pump_power = tuple
 		time_hr = tuple
 		total_direct_cost = float
 		total_indirect_cost = float
 		total_installed_cost = float
 		total_land_area = float
+		total_land_area_before_rad_cooling_calc = float
 		tou_value = tuple
+		tshours_heater = float
+		tshours_rec = float
 		twet = tuple
 		ui_direct_subtotal = float
+		vel_rec_htf_des = float
 		wspd = tuple
 
 
