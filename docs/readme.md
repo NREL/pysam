@@ -39,6 +39,8 @@ Python docstrings use Sphinx format: https://sphinx-rtd-tutorial.readthedocs.io/
     make html
     ```
 
+6. Open `.../docs/_build/html/index.html` in a web browser.
+
 ### Folder Structure
 
 The top-level `/docs` folder contains documentation pages written in reStructuredText (`.rst` files), and Sphinx configuration files.
