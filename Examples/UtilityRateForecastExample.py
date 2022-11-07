@@ -3,6 +3,7 @@ import os
 import requests
 import numpy as np
 import pandas as pd
+import certifi
 
 import PySAM.Utilityrateforecast as utility_rate_forecast
 import PySAM.ResourceTools
@@ -14,7 +15,7 @@ This can either be run with all of the steps at once (single call to execute()) 
 or by calling execute repeateadly, potentially in the loop with a model-predictive controller for energy storage
 """
 
-# Get a key from https://developer.nrel.gov/signup/
+# Get a key from https://api.openei.org:443
 key = "<YOUR_API_KEY>"
 
 # Download rate from URDB and save as file. If rate has already been downloaded, use file
@@ -29,11 +30,12 @@ def get_urdb_rate_data(page, key):
 
     if not os.path.isfile(filename):
         print(get_url)
-        resp = requests.get(get_url, verify=False)
+        resp = requests.get(get_url, verify=certifi.where())
         data = resp.text
         # Cache rate as file
-        with open(filename, 'w') as f:
-            f.write(json.dumps(data, sort_keys=True, indent=2, separators=(',', ': ')))
+        if "error" not in data:
+            with open(filename, 'w') as f:
+                f.write(json.dumps(data, sort_keys=True, indent=2, separators=(',', ': ')))
     else:
         with open(filename, 'r') as f:
             data = json.load(f)
@@ -45,7 +47,7 @@ if __name__ == "__main__":
     page = "618940545457a35a1c4097ec"  # https://apps.openei.org/USURDB/rate/view/618940545457a35a1c4097ec Residential time of use from Xcel Colorado
     urdb_response = get_urdb_rate_data(page, key)
     urdb_response_json = json.loads(urdb_response)["items"][0]
-    rates = PySAM.ResourceTools.URDBv7_to_ElectricityRates(urdb_response_json) # To see status of version discrepancy, see https://github.com/NREL/pysam/issues/116. There's no difference between V7 and V8 for 99.9% of rates
+    rates = PySAM.ResourceTools.URDBv8_to_ElectricityRates(urdb_response_json) 
 
     rate_forecast = utility_rate_forecast.new()
     for k, v in rates.items():

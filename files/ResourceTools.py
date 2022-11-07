@@ -271,6 +271,12 @@ def URDBv7_to_ElectricityRates(urdb_response):
         urdb_data['ur_dc_flat_mat'] = flat_mat
     elif "demandratestructure" in urdb_response.keys():
         urdb_data['ur_dc_enable'] = 1
+        # Enumerate a dc_flat table with $0/kW in 12 months
+        flat_mat = []
+        for i in range(0, 12):
+            month_mat = [i, 1, 1e38, 0]
+            flat_mat.append(month_mat)
+        urdb_data['ur_dc_flat_mat'] = flat_mat
     else:
         urdb_data['ur_dc_enable'] = 0
 
@@ -281,6 +287,69 @@ def URDBv7_to_ElectricityRates(urdb_response):
 
     return urdb_data
 
+def URDBv8_to_ElectricityRates(urdb_response):
+    """
+    Formats response from Utility Rate Database API version 8 for use in PySAM
+        i.e.
+            model = PySAM.UtilityRate5.new()
+            rates = PySAM.ResourceTools.URDBv8_to_ElectricityRates(urdb_response)
+            model.ElectricityRates.assign(rates)
+
+    Note that both URDBv7_to_ElectricityRates and this function are equally valid
+    for rates that do not have demand ratchets/billing demand.
+    This function does the additional processing when these rate features
+    are present. 
+
+    :param: urdb_response:
+        dictionary with response fields following
+        https://openei.org/services/doc/rest/util_rates/?version=7
+    :return: dictionary for PySAM.UtilityRate5.UtilityRate5.ElectricityRates
+    """
+    #Everything except the below billing demand variables is the same between versions
+    urdb_data = URDBv7_to_ElectricityRates(urdb_response)
+    has_billing_demand = False
+
+    if 'lookbackrange' in urdb_response.keys():
+        urdb_data['ur_billing_demand_lookback_period'] = urdb_response['lookbackrange']
+    
+    lbp = 0
+    if 'lookbackpercent' in urdb_response.keys():
+        lbp = urdb_response['lookbackpercent'] * 100.0
+        
+        # Some demand ratchets apply in every month - use this as the default if lookbackmonths is not specified
+        lbm = [True] * 12
+        if 'lookbackmonths' in urdb_response.keys():
+            lbm = urdb_response['lookbackmonths']
+        
+        lookback_percentages = [ [0, 0] ] * 12
+        for i in range(0, len(lookback_percentages)):
+            if lbm[i]:
+                lookback_percentages[i][0] = lbp
+
+        urdb_data['ur_enable_billing_demand'] = True
+        urdb_data['ur_billing_demand_lookback_percentages'] = lookback_percentages
+    
+    has_billing_demand = urdb_data['ur_billing_demand_lookback_period'] > 0 or lbp > 0
+
+    if has_billing_demand:
+        # Handle variables that aren't currently in URDB but are in SAM
+        urdb_data['ur_billing_demand_minimum'] = 0
+
+        dc_tou = urdb_data['ur_dc_tou_mat']
+        max_period = 0
+        for i in range(0, len(dc_tou)):
+            if dc_tou[i][0] > max_period:
+                max_period = dc_tou[i][0] 
+        
+        bd_periods = []
+        for i in range(0, max_period):
+            bd_periods.append([i+1, 1])
+        
+        urdb_data['ur_dc_billing_demand_periods'] = bd_periods
+
+        print("Billing Demand Notice.\nThis rate includes billing demand adjustments and/or demand ratchets that may not be accurately reflected in the data downloaded from the URDB. Please check the information in the Description under Description and Applicability and review the rate sheet to be sure the billing demand inputs are correct.")
+
+    return urdb_data
 
 class FetchResourceFiles():
     """
