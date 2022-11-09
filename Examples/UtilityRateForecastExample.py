@@ -4,9 +4,10 @@ import requests
 import numpy as np
 import pandas as pd
 import certifi
+from pathlib import Path
 
 import PySAM.Utilityrateforecast as utility_rate_forecast
-import PySAM.ResourceTools
+import PySAM.UtilityRateTools
 
 """
 This script provides an example of downloading a rate from URDB and processing it in "forecast" mode
@@ -47,7 +48,7 @@ if __name__ == "__main__":
     page = "618940545457a35a1c4097ec"  # https://apps.openei.org/USURDB/rate/view/618940545457a35a1c4097ec Residential time of use from Xcel Colorado
     urdb_response = get_urdb_rate_data(page, key)
     urdb_response_json = json.loads(urdb_response)["items"][0]
-    rates = PySAM.ResourceTools.URDBv8_to_ElectricityRates(urdb_response_json) 
+    rates = PySAM.UtilityRateTools.URDBv8_to_ElectricityRates(urdb_response_json) 
 
     rate_forecast = utility_rate_forecast.new()
     for k, v in rates.items():
@@ -62,7 +63,7 @@ if __name__ == "__main__":
     rate_forecast.value("inflation_rate", 2.5) # Units of %
     rate_forecast.value("steps_per_hour", 1) 
 
-    df = pd.read_csv("sample_load.csv", dtype=float)
+    df = pd.read_csv(str(Path(__file__).parent /"sample_load.csv"), dtype=float)
     load = pd.to_numeric(df.iloc[:, 0]).values # Consider checking length of array in case of subhourly data
 
     # Lifetime length for the forecast class

@@ -30,12 +30,25 @@ Access battery tools with ``import PySAM.BatteryTools``.
 Load Tools
 ---------------
 
-Access battery tools with ``import PySAM.LoadTools``.
+Access load tools with ``import PySAM.LoadTools``.
 
 These functions help manipulate load data for local analysis and the utility rate functions
 
 Please see an example of get_monthly_peaks `here <https://github.com/NREL/pysam/blob/master/Examples/LoadToolsExample.py>`_
 
-.. automodule:: files.BatteryTools
+.. automodule:: files.LoadTools
+    :members:
+    :undoc-members:
+
+Utility Rate Tools
+---------------
+
+Access utility rate tools with ``import PySAM.UtilityRateTools``.
+
+These functions translate URDB data into the SAM format
+
+Please see an example of URDBv8_to_ElectricityRates `here <https://github.com/NREL/pysam/blob/master/Examples/UtilityRatesExample.py>`_
+
+.. automodule:: files.UtilityRateTools
     :members:
     :undoc-members:

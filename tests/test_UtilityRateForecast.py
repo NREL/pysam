@@ -4,14 +4,14 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 import PySAM.Utilityrateforecast as utility_rate_forecast
-import PySAM.ResourceTools
+import PySAM.UtilityRateTools
 
 @pytest.fixture
 def setup_rate():
     urdb = str(Path(__file__).parent / "urdbv7.json")
     with open(urdb, 'r') as file:
         urdb_data = json.load(file)
-    rates = PySAM.ResourceTools.URDBv7_to_ElectricityRates(urdb_data) # To see status of version discrepancy, see https://github.com/NREL/pysam/issues/116. There's no difference between V7 and V8 for 99.9% of rates
+    rates = PySAM.UtilityRateTools.URDBv8_to_ElectricityRates(urdb_data)
 
     rate_forecast = utility_rate_forecast.new()
     for k, v in rates.items():

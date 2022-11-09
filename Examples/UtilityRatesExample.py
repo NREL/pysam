@@ -17,7 +17,8 @@ import certifi
 import requests
 
 import PySAM.Utilityrate5 as utility_rate
-import PySAM.ResourceTools
+import PySAM.UtilityRateTools
+import PySAM.LoadTools
 
 # Get a key from https://api.openei.org:443
 key = "<YOUR_API_KEY>"
@@ -56,7 +57,7 @@ if __name__ == "__main__":
     urdb_response_json = json.loads(urdb_response)
     if 'error' in urdb_response_json.keys():
         raise Exception(urdb_response_json['error'])
-    rates = PySAM.ResourceTools.URDBv8_to_ElectricityRates(urdb_response_json["items"][0]) 
+    rates = PySAM.UtilityRateTools.URDBv8_to_ElectricityRates(urdb_response_json["items"][0]) 
 
     ur = utility_rate.new()
     for k, v in rates.items():
@@ -74,6 +75,10 @@ if __name__ == "__main__":
 
     ur.value("gen", gen) # Hourly kW
     ur.value("load", load) # Hourly kW
+
+    # Not used for the rate above but leave this here for rates with billing demand
+    monthly_peaks = PySAM.LoadTools.get_monthly_peaks(load, 1)
+    ur.value("ur_yearzero_usage_peaks", monthly_peaks)
 
     ur.execute() # Run the utility rate module
 
