@@ -26,3 +26,16 @@ Access battery tools with ``import PySAM.BatteryTools``.
 .. automodule:: files.BatteryTools
     :members:
     :undoc-members:
+
+Load Tools
+---------------
+
+Access battery tools with ``import PySAM.LoadTools``.
+
+These functions help manipulate load data for local analysis and the utility rate functions
+
+Please see an example of get_monthly_peaks `here <https://github.com/NREL/pysam/blob/master/Examples/LoadToolsExample.py>`_
+
+.. automodule:: files.BatteryTools
+    :members:
+    :undoc-members:
