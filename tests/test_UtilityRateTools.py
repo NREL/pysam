@@ -63,3 +63,16 @@ def test_urdb_2():
 
     assert(ec_tou_tested == ec_tou)
     assert(dc_tou_tested == dc_tou)
+
+def test_dc_flat_mat():
+    urdb = str(Path(__file__).parent / "urdb_rate_539f6a23ec4f024411ec8beb.json") # V7 and V8 are the same for most rates
+    with open(urdb, 'r') as file:
+        urdb_data = json.load(file) # Brings in a string
+        urdb_data = json.loads(urdb_data) # Converts string to JSON
+
+    ur5 = tools.URDBv8_to_ElectricityRates(urdb_data['items'][0])
+
+    flat_demand = ur5["ur_dc_flat_mat"]
+
+    assert(len(flat_demand) == 24) # 12 months, 2 tiers per month
+    assert(flat_demand[0][2] == 100) # Tier max in kW
