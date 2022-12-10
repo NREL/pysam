@@ -17,7 +17,7 @@ Below are lists for each PySAM Module:
 Battery
 ************************************************
 
-:doc:`modules/Battery` Modified Input Variables:
+:doc:`../modules/Battery` Modified Input Variables:
 
     New variables:
 
@@ -28,11 +28,11 @@ Battery
          - om_batt_variable_cost
          - om_production_escal
 
-:doc:`modules/Battery` New Default files:
+:doc:`../modules/Battery` New Default files:
 
      - MEwaveBatterySingleOwner
 
-:doc:`modules/Battery` Modified Default Values:
+:doc:`../modules/Battery` Modified Default Values:
 
      - Utilityrate5_PVWattsBatteryHostDeveloper
 
@@ -299,7 +299,7 @@ Battery
 Biomass
 ************************************************
 
-:doc:`modules/Biomass` Modified Input Variables:
+:doc:`../modules/Biomass` Modified Input Variables:
 
     New variables:
 
@@ -309,7 +309,7 @@ Biomass
 Cashloan
 ************************************************
 
-:doc:`modules/Cashloan` Modified Input Variables:
+:doc:`../modules/Cashloan` Modified Input Variables:
 
     New variables:
 
@@ -334,7 +334,7 @@ Cashloan
 Communitysolar
 ************************************************
 
-:doc:`modules/Communitysolar` Modified Input Variables:
+:doc:`../modules/Communitysolar` Modified Input Variables:
 
     New variables:
 
@@ -354,7 +354,7 @@ Communitysolar
 Equpartflip
 ************************************************
 
-:doc:`modules/Equpartflip` Modified Input Variables:
+:doc:`../modules/Equpartflip` Modified Input Variables:
 
     New variables:
 
@@ -374,7 +374,7 @@ Equpartflip
 EtesElectricResistance
 ************************************************
 
-:doc:`modules/EtesElectricResistance` Modified Input Variables:
+:doc:`../modules/EtesElectricResistance` Modified Input Variables:
 
     New variables:
 
@@ -389,7 +389,7 @@ EtesElectricResistance
 EtesPtes
 ************************************************
 
-:doc:`modules/EtesPtes` New Default files:
+:doc:`../modules/EtesPtes` New Default files:
 
      - PTESSingleOwner
 
@@ -397,7 +397,7 @@ EtesPtes
 GenericSystem
 ************************************************
 
-:doc:`modules/GenericSystem` Modified Input Variables:
+:doc:`../modules/GenericSystem` Modified Input Variables:
 
     New variables:
 
@@ -407,7 +407,7 @@ GenericSystem
 Geothermal
 ************************************************
 
-:doc:`modules/Geothermal` Modified Input Variables:
+:doc:`../modules/Geothermal` Modified Input Variables:
 
     New variables:
 
@@ -425,7 +425,7 @@ Geothermal
 GeothermalCosts
 ************************************************
 
-:doc:`modules/GeothermalCosts` Modified Input Variables:
+:doc:`../modules/GeothermalCosts` Modified Input Variables:
 
     New variables:
 
@@ -437,13 +437,13 @@ GeothermalCosts
 Grid
 ************************************************
 
-:doc:`modules/Grid` Modified Input Variables:
+:doc:`../modules/Grid` Modified Input Variables:
 
     New variables:
 
          - energy_hourly_kW
 
-:doc:`modules/Grid` New Default files:
+:doc:`../modules/Grid` New Default files:
 
      - MEwaveBatterySingleOwner
      - MEwaveSingleOwner
@@ -452,7 +452,7 @@ Grid
 Hcpv
 ************************************************
 
-:doc:`modules/Hcpv` Modified Input Variables:
+:doc:`../modules/Hcpv` Modified Input Variables:
 
     New variables:
 
@@ -462,7 +462,7 @@ Hcpv
 HostDeveloper
 ************************************************
 
-:doc:`modules/HostDeveloper` Modified Input Variables:
+:doc:`../modules/HostDeveloper` Modified Input Variables:
 
     New variables:
 
@@ -486,7 +486,7 @@ HostDeveloper
 Ippppa
 ************************************************
 
-:doc:`modules/Ippppa` Modified Input Variables:
+:doc:`../modules/Ippppa` Modified Input Variables:
 
     Type-changed variables:
 
@@ -501,7 +501,7 @@ Ippppa
 Levpartflip
 ************************************************
 
-:doc:`modules/Levpartflip` Modified Input Variables:
+:doc:`../modules/Levpartflip` Modified Input Variables:
 
     New variables:
 
@@ -521,7 +521,7 @@ Levpartflip
 LinearFresnelDsgIph
 ************************************************
 
-:doc:`modules/LinearFresnelDsgIph` Modified Input Variables:
+:doc:`../modules/LinearFresnelDsgIph` Modified Input Variables:
 
     New variables:
 
@@ -531,7 +531,7 @@ LinearFresnelDsgIph
 Merchantplant
 ************************************************
 
-:doc:`modules/Merchantplant` Modified Input Variables:
+:doc:`../modules/Merchantplant` Modified Input Variables:
 
     New variables:
 
@@ -551,7 +551,7 @@ Merchantplant
 MhkWave
 ************************************************
 
-:doc:`modules/MhkWave` Modified Input Variables:
+:doc:`../modules/MhkWave` Modified Input Variables:
 
     New variables:
 
@@ -563,12 +563,12 @@ MhkWave
          - me_adjust:timeindex
          - system_use_lifetime_output
 
-:doc:`modules/MhkWave` New Default files:
+:doc:`../modules/MhkWave` New Default files:
 
      - MEwaveBatterySingleOwner
      - MEwaveSingleOwner
 
-:doc:`modules/MhkWave` Modified Default Values:
+:doc:`../modules/MhkWave` Modified Default Values:
 
      - MhkWave_MEwaveNone
 
@@ -583,7 +583,7 @@ MhkWave
 Pvsamv1
 ************************************************
 
-:doc:`modules/Pvsamv1` Modified Input Variables:
+:doc:`../modules/Pvsamv1` Modified Input Variables:
 
     New variables:
 
@@ -626,7 +626,7 @@ Pvsamv1
 Pvwattsv1
 ************************************************
 
-:doc:`modules/Pvwattsv1` Modified Input Variables:
+:doc:`../modules/Pvwattsv1` Modified Input Variables:
 
     New variables:
 
@@ -636,7 +636,7 @@ Pvwattsv1
 Pvwattsv5
 ************************************************
 
-:doc:`modules/Pvwattsv5` Modified Input Variables:
+:doc:`../modules/Pvwattsv5` Modified Input Variables:
 
     New variables:
 
@@ -646,7 +646,7 @@ Pvwattsv5
 Pvwattsv7
 ************************************************
 
-:doc:`modules/Pvwattsv7` Modified Input Variables:
+:doc:`../modules/Pvwattsv7` Modified Input Variables:
 
     New variables:
 
@@ -656,7 +656,7 @@ Pvwattsv7
 Pvwattsv8
 ************************************************
 
-:doc:`modules/Pvwattsv8` Modified Input Variables:
+:doc:`../modules/Pvwattsv8` Modified Input Variables:
 
     New variables:
 
@@ -668,7 +668,7 @@ Pvwattsv8
 Saleleaseback
 ************************************************
 
-:doc:`modules/Saleleaseback` Modified Input Variables:
+:doc:`../modules/Saleleaseback` Modified Input Variables:
 
     New variables:
 
@@ -688,7 +688,7 @@ Saleleaseback
 Singleowner
 ************************************************
 
-:doc:`modules/Singleowner` Modified Input Variables:
+:doc:`../modules/Singleowner` Modified Input Variables:
 
     New variables:
 
@@ -704,13 +704,13 @@ Singleowner
          - itc_sta_percent
          - itc_sta_percent_maxvalue
 
-:doc:`modules/Singleowner` New Default files:
+:doc:`../modules/Singleowner` New Default files:
 
      - MEwaveBatterySingleOwner
      - MEwaveSingleOwner
      - PTESSingleOwner
 
-:doc:`modules/Singleowner` Modified Default Values:
+:doc:`../modules/Singleowner` Modified Default Values:
 
      - Singleowner_EmpiricalTroughSingleOwner
 
@@ -789,7 +789,7 @@ Singleowner
 Solarpilot
 ************************************************
 
-:doc:`modules/Solarpilot` Modified Input Variables:
+:doc:`../modules/Solarpilot` Modified Input Variables:
 
     New variables:
 
@@ -800,7 +800,7 @@ Solarpilot
 Swh
 ************************************************
 
-:doc:`modules/Swh` Modified Input Variables:
+:doc:`../modules/Swh` Modified Input Variables:
 
     New variables:
 
@@ -810,7 +810,7 @@ Swh
 TcsgenericSolar
 ************************************************
 
-:doc:`modules/TcsgenericSolar` Modified Input Variables:
+:doc:`../modules/TcsgenericSolar` Modified Input Variables:
 
     New variables:
 
@@ -821,7 +821,7 @@ TcsgenericSolar
 TcslinearFresnel
 ************************************************
 
-:doc:`modules/TcslinearFresnel` Modified Input Variables:
+:doc:`../modules/TcslinearFresnel` Modified Input Variables:
 
     New variables:
 
@@ -831,7 +831,7 @@ TcslinearFresnel
 TcsmoltenSalt
 ************************************************
 
-:doc:`modules/TcsmoltenSalt` Modified Input Variables:
+:doc:`../modules/TcsmoltenSalt` Modified Input Variables:
 
     New variables:
 
@@ -863,7 +863,7 @@ TcsmoltenSalt
 Tcsmslf
 ************************************************
 
-:doc:`modules/Tcsmslf` Modified Input Variables:
+:doc:`../modules/TcsMSLF` Modified Input Variables:
 
     New variables:
 
@@ -877,7 +877,7 @@ Tcsmslf
 TcstroughEmpirical
 ************************************************
 
-:doc:`modules/TcstroughEmpirical` Modified Input Variables:
+:doc:`../modules/TcstroughEmpirical` Modified Input Variables:
 
     New variables:
 
@@ -887,7 +887,7 @@ TcstroughEmpirical
 TcstroughPhysical
 ************************************************
 
-:doc:`modules/TcstroughPhysical` Modified Input Variables:
+:doc:`../modules/TcstroughPhysical` Modified Input Variables:
 
     New variables:
 
@@ -901,7 +901,7 @@ TcstroughPhysical
 TroughPhysical
 ************************************************
 
-:doc:`modules/TroughPhysical` Modified Input Variables:
+:doc:`../modules/TroughPhysical` Modified Input Variables:
 
     New variables:
 
@@ -917,7 +917,7 @@ TroughPhysical
 TroughPhysicalCspSolver
 ************************************************
 
-:doc:`modules/TroughPhysicalCspSolver` Modified Input Variables:
+:doc:`../modules/TroughPhysicalCspSolver` Modified Input Variables:
 
     New variables:
 
@@ -931,7 +931,7 @@ TroughPhysicalCspSolver
 TroughPhysicalProcessHeat
 ************************************************
 
-:doc:`modules/TroughPhysicalProcessHeat` Modified Input Variables:
+:doc:`../modules/TroughPhysicalProcessHeat` Modified Input Variables:
 
     New variables:
 
@@ -950,12 +950,12 @@ TroughPhysicalProcessHeat
 Utilityrate5
 ************************************************
 
-:doc:`modules/Utilityrate5` New Default files:
+:doc:`../modules/Utilityrate5` New Default files:
 
      - MEwaveBatterySingleOwner
      - MEwaveSingleOwner
 
-:doc:`modules/Utilityrate5` Modified Default Values:
+:doc:`../modules/Utilityrate5` Modified Default Values:
 
      - Utilityrate5_PVWattsBatteryHostDeveloper
 
@@ -990,7 +990,7 @@ Utilityrate5
 WaveFileReader
 ************************************************
 
-:doc:`modules/WaveFileReader` New Default files:
+:doc:`../modules/WaveFileReader` New Default files:
 
      - MEwaveBatterySingleOwner
      - MEwaveSingleOwner
@@ -999,7 +999,7 @@ WaveFileReader
 Windpower
 ************************************************
 
-:doc:`modules/Windpower` Modified Input Variables:
+:doc:`../modules/Windpower` Modified Input Variables:
 
     New variables:
 

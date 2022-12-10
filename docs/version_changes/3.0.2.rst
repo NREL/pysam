@@ -17,7 +17,7 @@ Below are lists for each PySAM Module:
 Battery
 ************************************************
 
-:doc:`modules/Battery` Modified Input Variables:
+:doc:`../modules/Battery` Modified Input Variables:
 
     New variables:
 
@@ -37,7 +37,7 @@ Battery
 LinearFresnelDsgIph
 ************************************************
 
-:doc:`modules/LinearFresnelDsgIph` Modified Input Variables:
+:doc:`../modules/LinearFresnelDsgIph` Modified Input Variables:
 
     New variables:
 
@@ -52,7 +52,7 @@ LinearFresnelDsgIph
 Merchantplant
 ************************************************
 
-:doc:`modules/Merchantplant` Modified Input Variables:
+:doc:`../modules/Merchantplant` Modified Input Variables:
 
     New variables:
 
@@ -62,7 +62,7 @@ Merchantplant
 Pvsamv1
 ************************************************
 
-:doc:`modules/Pvsamv1` Modified Input Variables:
+:doc:`../modules/Pvsamv1` Modified Input Variables:
 
     New variables:
 
