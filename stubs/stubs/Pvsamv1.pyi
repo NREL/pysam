@@ -1244,6 +1244,7 @@ class Pvsamv1(object):
 		df_calc = tuple
 		dn = tuple
 		dn_calc = tuple
+		elev = float
 		fuelcell_to_batt = tuple
 		gen = tuple
 		gen_without_battery = tuple
@@ -1267,6 +1268,8 @@ class Pvsamv1(object):
 		inverterMPPT3_DCVoltage = tuple
 		inverterMPPT4_DCVoltage = tuple
 		kwh_per_kw = float
+		lat = float
+		lon = float
 		market_sell_rate_series_yr1 = tuple
 		monthly_batt_to_grid = tuple
 		monthly_batt_to_load = tuple
@@ -1464,6 +1467,7 @@ class Pvsamv1(object):
 		system_to_load = tuple
 		tdry = tuple
 		ts_shift_hours = float
+		tz = float
 		wfpoa = tuple
 		wspd = tuple
 		xfmr_ll_ts = tuple

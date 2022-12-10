@@ -455,6 +455,9 @@ class EtesElectricResistance(object):
 		op_mode_1 = tuple
 		op_mode_2 = tuple
 		op_mode_3 = tuple
+		operating_modes_a = tuple
+		operating_modes_b = tuple
+		operating_modes_c = tuple
 		ppa_soln_mode = float
 		q_balance = tuple
 		q_dot_ch_tes = tuple

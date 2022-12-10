@@ -502,6 +502,13 @@ class Cashloan(object):
 		cf_fuelcell_replacement_cost = tuple
 		cf_fuelcell_replacement_cost_schedule = tuple
 		cf_insurance_expense = tuple
+		cf_itc_fed = tuple
+		cf_itc_fed_amount = tuple
+		cf_itc_fed_percent_amount = tuple
+		cf_itc_sta = tuple
+		cf_itc_sta_amount = tuple
+		cf_itc_sta_percent_amount = tuple
+		cf_itc_total = tuple
 		cf_land_lease_expense = tuple
 		cf_length = float
 		cf_net_salvage_value = tuple

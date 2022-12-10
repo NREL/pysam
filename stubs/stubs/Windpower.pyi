@@ -173,9 +173,12 @@ class Windpower(object):
 		capacity_factor = float
 		cutoff_losses = float
 		elec_losses = float
+		elev = float
 		env_losses = float
 		gen = tuple
 		kwh_per_kw = float
+		lat = float
+		lon = float
 		monthly_energy = tuple
 		ops_losses = float
 		pressure = tuple
@@ -186,6 +189,7 @@ class Windpower(object):
 		wind_direction = tuple
 		wind_speed = tuple
 		wind_speed_average = float
+		year = float
 
 
 

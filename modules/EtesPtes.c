@@ -1236,10 +1236,10 @@ static PyGetSetDef ThermalStorage_getset[] = {
 	PyDoc_STR("*float*: Hot HTF code - see htf_props.h for list\n\n**Required:**\nTrue"),
  	NULL},
 {"ud_cold_htf_props", (getter)ThermalStorage_get_ud_cold_htf_props,(setter)ThermalStorage_set_ud_cold_htf_props,
-	PyDoc_STR("*sequence[sequence]*: User-defined Cold HTF fluid property data [-]\n\n**Required:**\nTrue"),
+	PyDoc_STR("*sequence[sequence]*: User-defined Cold HTF fluid property data [-]\n\n**Required:**\nRequired if cold_htf_code=50"),
  	NULL},
 {"ud_hot_htf_props", (getter)ThermalStorage_get_ud_hot_htf_props,(setter)ThermalStorage_set_ud_hot_htf_props,
-	PyDoc_STR("*sequence[sequence]*: User-defined Hot HTF fluid property data [-]\n\n**Required:**\nTrue"),
+	PyDoc_STR("*sequence[sequence]*: User-defined Hot HTF fluid property data [-]\n\n**Required:**\nRequired if hot_htf_code=50"),
  	NULL},
 	{NULL}  /* Sentinel */
 };

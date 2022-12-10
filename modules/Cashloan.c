@@ -5579,6 +5579,48 @@ Outputs_get_cf_insurance_expense(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_cf_itc_fed(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Cashloan_Outputs_cf_itc_fed_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_itc_fed_amount(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Cashloan_Outputs_cf_itc_fed_amount_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_itc_fed_percent_amount(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Cashloan_Outputs_cf_itc_fed_percent_amount_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_itc_sta(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Cashloan_Outputs_cf_itc_sta_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_itc_sta_amount(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Cashloan_Outputs_cf_itc_sta_amount_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_itc_sta_percent_amount(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Cashloan_Outputs_cf_itc_sta_percent_amount_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_itc_total(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Cashloan_Outputs_cf_itc_total_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_cf_land_lease_expense(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Cashloan_Outputs_cf_land_lease_expense_aget, self->data_ptr);
@@ -6209,6 +6251,27 @@ static PyGetSetDef Outputs_getset[] = {
 {"cf_insurance_expense", (getter)Outputs_get_cf_insurance_expense,(setter)0,
 	PyDoc_STR("*sequence*: Insurance expense [$]"),
  	NULL},
+{"cf_itc_fed", (getter)Outputs_get_cf_itc_fed,(setter)0,
+	PyDoc_STR("*sequence*: Federal ITC total income [$]"),
+ 	NULL},
+{"cf_itc_fed_amount", (getter)Outputs_get_cf_itc_fed_amount,(setter)0,
+	PyDoc_STR("*sequence*: Federal ITC amount income [$]"),
+ 	NULL},
+{"cf_itc_fed_percent_amount", (getter)Outputs_get_cf_itc_fed_percent_amount,(setter)0,
+	PyDoc_STR("*sequence*: Federal ITC percent income [$]"),
+ 	NULL},
+{"cf_itc_sta", (getter)Outputs_get_cf_itc_sta,(setter)0,
+	PyDoc_STR("*sequence*: State ITC total income [$]"),
+ 	NULL},
+{"cf_itc_sta_amount", (getter)Outputs_get_cf_itc_sta_amount,(setter)0,
+	PyDoc_STR("*sequence*: State ITC amount income [$]"),
+ 	NULL},
+{"cf_itc_sta_percent_amount", (getter)Outputs_get_cf_itc_sta_percent_amount,(setter)0,
+	PyDoc_STR("*sequence*: State ITC percent income [$]"),
+ 	NULL},
+{"cf_itc_total", (getter)Outputs_get_cf_itc_total,(setter)0,
+	PyDoc_STR("*sequence*: Total ITC income [$]"),
+ 	NULL},
 {"cf_land_lease_expense", (getter)Outputs_get_cf_land_lease_expense,(setter)0,
 	PyDoc_STR("*sequence*: Land lease expense [$]"),
  	NULL},
@@ -6309,7 +6372,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: State PTC income [$]"),
  	NULL},
 {"cf_ptc_total", (getter)Outputs_get_cf_ptc_total,(setter)0,
-	PyDoc_STR("*sequence*: Total PTC [$]"),
+	PyDoc_STR("*sequence*: Total PTC income [$]"),
  	NULL},
 {"cf_salvage_cost_lcos", (getter)Outputs_get_cf_salvage_cost_lcos,(setter)0,
 	PyDoc_STR("*sequence*: Annual battery salvage value costs [$]"),

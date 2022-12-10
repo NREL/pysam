@@ -152,7 +152,7 @@ def URDBv7_to_ElectricityRates(urdb_response):
         https://openei.org/services/doc/rest/util_rates/?version=7
     :return: dictionary for PySAM.UtilityRate5.UtilityRate5.ElectricityRates
     """
-    warnings.warn("ResourceTools.URDBv7_to_ElectricityRates is depricated. Please use UtilityRateTools.URDBv8_to_ElectricityRates instead.", DeprecationWarning)
+    warnings.warn("ResourceTools.URDBv7_to_ElectricityRates is deprecated. Please use UtilityRateTools.URDBv8_to_ElectricityRates instead.", DeprecationWarning)
 
     urdb_data = dict()
     urdb_data['en_electricity_rates'] = 1

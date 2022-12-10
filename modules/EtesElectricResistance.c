@@ -1950,7 +1950,7 @@ static PyGetSetDef ThermalStorage_getset[] = {
 	PyDoc_STR("*float*: Loss coefficient from the tank [W/m2-K]\n\n**Required:**\nTrue"),
  	NULL},
 {"ud_hot_htf_props", (getter)ThermalStorage_get_ud_hot_htf_props,(setter)ThermalStorage_set_ud_hot_htf_props,
-	PyDoc_STR("*sequence[sequence]*: User-defined TES fluid property data [-]\n\n**Required:**\nTrue"),
+	PyDoc_STR("*sequence[sequence]*: User-defined TES fluid property data [-]\n\n**Required:**\nRequired if hot_htf_code=50"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -4198,6 +4198,24 @@ Outputs_get_op_mode_3(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_operating_modes_a(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_EtesElectricResistance_Outputs_operating_modes_a_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_operating_modes_b(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_EtesElectricResistance_Outputs_operating_modes_b_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_operating_modes_c(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_EtesElectricResistance_Outputs_operating_modes_c_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_ppa_soln_mode(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_EtesElectricResistance_Outputs_ppa_soln_mode_nget, self->data_ptr);
@@ -4659,6 +4677,15 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"op_mode_3", (getter)Outputs_get_op_mode_3,(setter)0,
 	PyDoc_STR("*sequence*: 3rd operating mode, if applicable"),
+ 	NULL},
+{"operating_modes_a", (getter)Outputs_get_operating_modes_a,(setter)0,
+	PyDoc_STR("*sequence*: First 3 operating modes tried"),
+ 	NULL},
+{"operating_modes_b", (getter)Outputs_get_operating_modes_b,(setter)0,
+	PyDoc_STR("*sequence*: Next 3 operating modes tried"),
+ 	NULL},
+{"operating_modes_c", (getter)Outputs_get_operating_modes_c,(setter)0,
+	PyDoc_STR("*sequence*: Final 3 operating modes tried"),
  	NULL},
 {"ppa_soln_mode", (getter)Outputs_get_ppa_soln_mode,(setter)0,
 	PyDoc_STR("*float*: PPA solution mode [0/1]"),

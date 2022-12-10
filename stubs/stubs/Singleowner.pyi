@@ -649,6 +649,13 @@ class Singleowner(object):
 		cf_funding_om = tuple
 		cf_funding_receivables = tuple
 		cf_insurance_expense = tuple
+		cf_itc_fed = tuple
+		cf_itc_fed_amount = tuple
+		cf_itc_fed_percent_amount = tuple
+		cf_itc_sta = tuple
+		cf_itc_sta_amount = tuple
+		cf_itc_sta_percent_amount = tuple
+		cf_itc_total = tuple
 		cf_land_lease_expense = tuple
 		cf_length = float
 		cf_net_salvage_value = tuple

@@ -1,0 +1,1008 @@
+.. 4.0.0:
+
+Version 4.0.0
+===============================================
+
+This page compares the PySAM Modules' input variables and the defaults for these input variables 
+between the current release and the last release.
+
+This helps track which variables and defaults have changed between releases to make it easier to notify users during version upgrade.
+
+Below are lists for each PySAM Module:
+    1. New Default configurations
+    2. Removed Default configurations
+    3. Modified Variables: New variables, Removed variables and Type-changed variables
+    4. Modified Default Values
+
+Battery
+************************************************
+
+:doc:`modules/Battery` Modified Input Variables:
+
+    New variables:
+
+         - dispatch_manual_system_charge_first
+         - en_electricity_rates
+         - en_wave_batt
+         - energy_hourly_kW
+         - om_batt_variable_cost
+         - om_production_escal
+
+:doc:`modules/Battery` New Default files:
+
+     - MEwaveBatterySingleOwner
+
+:doc:`modules/Battery` Modified Default Values:
+
+     - Utilityrate5_PVWattsBatteryHostDeveloper
+
+        ['ur_dc_tou_mat']
+
+     - Cashloan_PVBatteryCommercial
+
+        ['om_batt_replacement_cost', 'total_installed_cost', 'itc_sta_percent', 'battery_per_kWh', 'om_capacity', 'itc_fed_percent_maxvalue', 'itc_sta_percent_maxvalue', 'itc_sta_amount', 'itc_fed_amount', 'battery_total_cost_lcos', 'itc_fed_percent']
+
+     - Equpartflip_GenericBatteryAllEquityPartnershipFlip
+
+        ['om_batt_replacement_cost', 'construction_financing_cost', 'total_installed_cost', 'batt_computed_bank_capacity', 'itc_sta_percent', 'om_batt_nameplate', 'battery_per_kWh', 'itc_fed_percent_maxvalue', 'itc_sta_percent_maxvalue', 'itc_sta_amount', 'itc_fed_amount', 'battery_total_cost_lcos', 'itc_fed_percent']
+
+     - Battery_StandaloneBatteryResidential
+
+        ['batt_current_charge_max', 'batt_power_discharge_max_kwac', 'batt_computed_bank_capacity', 'batt_Qfull_flow', 'batt_power_charge_max_kwdc', 'batt_surface_area', 'LeadAcid_q20_computed', 'batt_power_discharge_max_kwdc', 'LeadAcid_q10_computed', 'batt_power_charge_max_kwac', 'batt_computed_strings', 'batt_mass', 'batt_current_discharge_max', 'LeadAcid_qn_computed']
+
+     - Pvwattsv8_PVWattsBatteryCommercial
+
+        ['albedo']
+
+     - Battery_GenericBatteryThirdParty
+
+        ['batt_current_charge_max', 'batt_power_discharge_max_kwac', 'batt_computed_bank_capacity', 'batt_Qfull_flow', 'batt_power_charge_max_kwdc', 'batt_surface_area', 'LeadAcid_q20_computed', 'batt_power_discharge_max_kwdc', 'LeadAcid_q10_computed', 'batt_power_charge_max_kwac', 'batt_computed_strings', 'batt_mass', 'batt_current_discharge_max', 'LeadAcid_qn_computed']
+
+     - Cashloan_StandaloneBatteryCommercial
+
+        ['om_batt_replacement_cost', 'total_installed_cost', 'batt_computed_bank_capacity', 'itc_sta_percent', 'om_batt_nameplate', 'battery_per_kWh', 'itc_fed_percent_maxvalue', 'itc_sta_percent_maxvalue', 'itc_sta_amount', 'itc_fed_amount', 'battery_total_cost_lcos', 'itc_fed_percent', 'system_capacity']
+
+     - Pvsamv1_PVBatteryResidential
+
+        ['batt_Qfull_flow', 'cec_bifaciality', 'batt_mass', 'cec_i_o_ref', 'subarray1_nstrings', 'batt_surface_area', 'batt_power_discharge_max_kwdc', 'batt_power_charge_max_kwac', 'batt_computed_strings', 'system_capacity', 'batt_current_charge_max', 'batt_power_discharge_max_kwac', 'batt_computed_bank_capacity', 'batt_power_charge_max_kwdc', 'sixpar_bifaciality', 'LeadAcid_q20_computed', 'LeadAcid_q10_computed', 'batt_current_discharge_max', 'spe_bifaciality', 'LeadAcid_qn_computed']
+
+     - HostDeveloper_GenericBatteryHostDeveloper
+
+        ['om_batt_replacement_cost', 'construction_financing_cost', 'total_installed_cost', 'batt_computed_bank_capacity', 'itc_sta_percent', 'om_batt_nameplate', 'battery_per_kWh', 'itc_fed_percent_maxvalue', 'itc_sta_percent_maxvalue', 'itc_sta_amount', 'itc_fed_amount', 'ppa_price_input', 'battery_total_cost_lcos', 'itc_fed_percent']
+
+     - Battery_GenericBatteryAllEquityPartnershipFlip
+
+        ['batt_current_charge_max', 'om_batt_replacement_cost', 'batt_power_discharge_max_kwac', 'batt_computed_bank_capacity', 'batt_Qfull_flow', 'batt_power_charge_max_kwdc', 'batt_surface_area', 'LeadAcid_q20_computed', 'batt_power_discharge_max_kwdc', 'LeadAcid_q10_computed', 'batt_power_charge_max_kwac', 'batt_computed_strings', 'batt_mass', 'batt_current_discharge_max', 'LeadAcid_qn_computed']
+
+     - Levpartflip_PVBatteryLeveragedPartnershipFlip
+
+        ['om_batt_replacement_cost', 'construction_financing_cost', 'total_installed_cost', 'batt_computed_bank_capacity', 'land_area', 'itc_sta_percent', 'om_batt_nameplate', 'battery_per_kWh', 'itc_fed_percent_maxvalue', 'itc_sta_percent_maxvalue', 'itc_sta_amount', 'itc_fed_amount', 'ppa_price_input', 'battery_total_cost_lcos', 'itc_fed_percent', 'system_capacity']
+
+     - Battery_GenericBatterySingleOwner
+
+        ['batt_current_charge_max', 'om_batt_replacement_cost', 'batt_power_discharge_max_kwac', 'batt_computed_bank_capacity', 'batt_Qfull_flow', 'batt_power_charge_max_kwdc', 'batt_surface_area', 'LeadAcid_q20_computed', 'batt_power_discharge_max_kwdc', 'LeadAcid_q10_computed', 'batt_power_charge_max_kwac', 'batt_computed_strings', 'batt_mass', 'batt_current_discharge_max', 'LeadAcid_qn_computed']
+
+     - Saleleaseback_StandaloneBatterySaleLeaseback
+
+        ['om_batt_replacement_cost', 'construction_financing_cost', 'total_installed_cost', 'itc_sta_percent', 'battery_per_kWh', 'itc_fed_percent_maxvalue', 'itc_sta_percent_maxvalue', 'itc_sta_amount', 'itc_fed_amount', 'battery_total_cost_lcos', 'itc_fed_percent', 'system_capacity']
+
+     - Merchantplant_GenericBatteryMerchantPlant
+
+        ['om_batt_replacement_cost', 'construction_financing_cost', 'mp_enable_market_percent_gen', 'total_installed_cost', 'batt_computed_bank_capacity', 'itc_sta_percent', 'om_batt_nameplate', 'battery_per_kWh', 'mp_ancserv3_revenue', 'itc_fed_percent_maxvalue', 'mp_energy_market_revenue_single', 'mp_ancserv1_revenue', 'itc_sta_percent_maxvalue', 'cp_battery_nameplate', 'mp_ancserv4_revenue', 'mp_ancserv2_revenue', 'itc_sta_amount', 'itc_fed_amount', 'battery_total_cost_lcos', 'mp_energy_market_revenue', 'mp_market_percent_gen', 'itc_fed_percent']
+
+     - Pvwattsv8_PVWattsBatteryThirdParty
+
+        ['albedo']
+
+     - Battery_GenericBatteryCommercial
+
+        ['batt_current_charge_max', 'om_batt_replacement_cost', 'batt_power_discharge_max_kwac', 'batt_computed_bank_capacity', 'batt_Qfull_flow', 'batt_power_charge_max_kwdc', 'batt_surface_area', 'LeadAcid_q20_computed', 'batt_power_discharge_max_kwdc', 'LeadAcid_q10_computed', 'batt_power_charge_max_kwac', 'batt_computed_strings', 'batt_mass', 'batt_current_discharge_max', 'LeadAcid_qn_computed']
+
+     - Singleowner_PVBatterySingleOwner
+
+        ['om_batt_replacement_cost', 'construction_financing_cost', 'total_installed_cost', 'batt_computed_bank_capacity', 'land_area', 'itc_sta_percent', 'om_batt_nameplate', 'battery_per_kWh', 'itc_fed_percent_maxvalue', 'itc_sta_percent_maxvalue', 'cp_battery_nameplate', 'cp_system_nameplate', 'itc_sta_amount', 'itc_fed_amount', 'ppa_price_input', 'battery_total_cost_lcos', 'itc_fed_percent', 'system_capacity']
+
+     - HostDeveloper_PVBatteryHostDeveloper
+
+        ['om_batt_replacement_cost', 'construction_financing_cost', 'total_installed_cost', 'itc_sta_percent', 'battery_per_kWh', 'om_capacity', 'itc_fed_percent_maxvalue', 'itc_sta_percent_maxvalue', 'itc_sta_amount', 'itc_fed_amount', 'ppa_price_input', 'battery_total_cost_lcos', 'itc_fed_percent']
+
+     - Equpartflip_PVBatteryAllEquityPartnershipFlip
+
+        ['om_batt_replacement_cost', 'construction_financing_cost', 'total_installed_cost', 'batt_computed_bank_capacity', 'land_area', 'itc_sta_percent', 'om_batt_nameplate', 'battery_per_kWh', 'itc_fed_percent_maxvalue', 'itc_sta_percent_maxvalue', 'itc_sta_amount', 'itc_fed_amount', 'ppa_price_input', 'battery_total_cost_lcos', 'itc_fed_percent', 'system_capacity']
+
+     - Battery_StandaloneBatteryMerchantPlant
+
+        ['om_batt_replacement_cost', 'mp_enable_market_percent_gen', 'mp_energy_market_revenue_single', 'mp_energy_market_revenue']
+
+     - Pvsamv1_PVBatteryMerchantPlant
+
+        ['mp_enable_market_percent_gen', 'batt_Qfull_flow', 'mp_ancserv3_revenue', 'mp_energy_market_revenue_single', 'mp_ancserv1_revenue', 'cec_bifaciality', 'batt_mass', 'cec_i_o_ref', 'subarray1_nstrings', 'batt_surface_area', 'batt_power_discharge_max_kwdc', 'batt_power_charge_max_kwac', 'batt_computed_strings', 'mp_energy_market_revenue', 'system_capacity', 'batt_current_charge_max', 'inverter_count', 'batt_power_discharge_max_kwac', 'batt_computed_bank_capacity', 'batt_power_charge_max_kwdc', 'sixpar_bifaciality', 'LeadAcid_q20_computed', 'batt_dispatch_pvs_nameplate_ac', 'LeadAcid_q10_computed', 'mp_ancserv4_revenue', 'batt_current_discharge_max', 'om_batt_replacement_cost', 'spe_bifaciality', 'mp_ancserv2_revenue', 'LeadAcid_qn_computed']
+
+     - Pvsamv1_PVBatteryCommercial
+
+        ['cec_bifaciality', 'cec_i_o_ref', 'sixpar_bifaciality', 'om_batt_replacement_cost', 'spe_bifaciality']
+
+     - Utilityrate5_StandaloneBatteryHostDeveloper
+
+        ['ur_dc_tou_mat']
+
+     - Battery_GenericBatteryResidential
+
+        ['batt_current_charge_max', 'batt_power_discharge_max_kwac', 'batt_computed_bank_capacity', 'batt_Qfull_flow', 'batt_power_charge_max_kwdc', 'batt_surface_area', 'LeadAcid_q20_computed', 'batt_power_discharge_max_kwdc', 'LeadAcid_q10_computed', 'batt_power_charge_max_kwac', 'batt_computed_strings', 'batt_mass', 'batt_current_discharge_max', 'LeadAcid_qn_computed']
+
+     - Battery_GenericBatteryLeveragedPartnershipFlip
+
+        ['batt_current_charge_max', 'om_batt_replacement_cost', 'batt_power_discharge_max_kwac', 'batt_computed_bank_capacity', 'batt_Qfull_flow', 'batt_power_charge_max_kwdc', 'batt_surface_area', 'LeadAcid_q20_computed', 'batt_power_discharge_max_kwdc', 'LeadAcid_q10_computed', 'batt_power_charge_max_kwac', 'batt_computed_strings', 'batt_mass', 'batt_current_discharge_max', 'LeadAcid_qn_computed']
+
+     - Pvsamv1_PVBatterySingleOwner
+
+        ['batt_Qfull_flow', 'cec_bifaciality', 'batt_mass', 'cec_i_o_ref', 'subarray1_nstrings', 'batt_surface_area', 'batt_power_discharge_max_kwdc', 'batt_power_charge_max_kwac', 'batt_computed_strings', 'system_capacity', 'batt_current_charge_max', 'inverter_count', 'batt_power_discharge_max_kwac', 'batt_computed_bank_capacity', 'batt_power_charge_max_kwdc', 'sixpar_bifaciality', 'LeadAcid_q20_computed', 'batt_dispatch_pvs_nameplate_ac', 'LeadAcid_q10_computed', 'batt_current_discharge_max', 'om_batt_replacement_cost', 'spe_bifaciality', 'ppa_price_input', 'LeadAcid_qn_computed']
+
+     - Battery_StandaloneBatterySingleOwner
+
+        ['om_batt_replacement_cost']
+
+     - Pvsamv1_PVBatteryThirdParty
+
+        ['cec_bifaciality', 'cec_i_o_ref', 'sixpar_bifaciality', 'spe_bifaciality']
+
+     - Battery_StandaloneBatteryHostDeveloper
+
+        ['batt_current_charge_max', 'om_batt_replacement_cost', 'batt_power_discharge_max_kwac', 'batt_computed_bank_capacity', 'batt_Qfull_flow', 'batt_power_charge_max_kwdc', 'batt_surface_area', 'LeadAcid_q20_computed', 'batt_power_discharge_max_kwdc', 'LeadAcid_q10_computed', 'batt_power_charge_max_kwac', 'ur_dc_tou_mat', 'batt_computed_strings', 'ppa_price_input', 'batt_mass', 'batt_current_discharge_max', 'LeadAcid_qn_computed']
+
+     - Merchantplant_StandaloneBatteryMerchantPlant
+
+        ['om_batt_replacement_cost', 'construction_financing_cost', 'mp_enable_market_percent_gen', 'total_installed_cost', 'itc_sta_percent', 'battery_per_kWh', 'itc_fed_percent_maxvalue', 'mp_energy_market_revenue_single', 'itc_sta_percent_maxvalue', 'itc_sta_amount', 'itc_fed_amount', 'battery_total_cost_lcos', 'mp_energy_market_revenue', 'mp_market_percent_gen', 'cp_capacity_credit_percent', 'cp_capacity_payment_amount', 'itc_fed_percent']
+
+     - Pvsamv1_PVBatteryHostDeveloper
+
+        ['cec_bifaciality', 'cec_i_o_ref', 'sixpar_bifaciality', 'om_batt_replacement_cost', 'spe_bifaciality', 'ur_dc_tou_mat', 'ppa_price_input']
+
+     - Levpartflip_StandaloneBatteryLeveragedPartnershipFlip
+
+        ['om_batt_replacement_cost', 'construction_financing_cost', 'total_installed_cost', 'itc_sta_percent', 'battery_per_kWh', 'itc_fed_percent_maxvalue', 'itc_sta_percent_maxvalue', 'itc_sta_amount', 'itc_fed_amount', 'battery_total_cost_lcos', 'itc_fed_percent', 'system_capacity']
+
+     - Singleowner_StandaloneBatterySingleOwner
+
+        ['om_batt_replacement_cost', 'construction_financing_cost', 'total_installed_cost', 'itc_sta_percent', 'battery_per_kWh', 'itc_fed_percent_maxvalue', 'itc_sta_percent_maxvalue', 'itc_sta_amount', 'itc_fed_amount', 'battery_total_cost_lcos', 'cp_capacity_credit_percent', 'cp_capacity_payment_amount', 'itc_fed_percent']
+
+     - Battery_GenericBatterySaleLeaseback
+
+        ['batt_current_charge_max', 'om_batt_replacement_cost', 'batt_power_discharge_max_kwac', 'batt_computed_bank_capacity', 'batt_Qfull_flow', 'batt_power_charge_max_kwdc', 'batt_surface_area', 'LeadAcid_q20_computed', 'batt_power_discharge_max_kwdc', 'LeadAcid_q10_computed', 'batt_power_charge_max_kwac', 'batt_computed_strings', 'batt_mass', 'batt_current_discharge_max', 'LeadAcid_qn_computed']
+
+     - Levpartflip_GenericBatteryLeveragedPartnershipFlip
+
+        ['om_batt_replacement_cost', 'construction_financing_cost', 'total_installed_cost', 'batt_computed_bank_capacity', 'itc_sta_percent', 'om_batt_nameplate', 'battery_per_kWh', 'itc_fed_percent_maxvalue', 'itc_sta_percent_maxvalue', 'itc_sta_amount', 'itc_fed_amount', 'battery_total_cost_lcos', 'itc_fed_percent']
+
+     - Equpartflip_StandaloneBatteryAllEquityPartnershipFlip
+
+        ['om_batt_replacement_cost', 'construction_financing_cost', 'total_installed_cost', 'itc_sta_percent', 'battery_per_kWh', 'itc_fed_percent_maxvalue', 'itc_sta_percent_maxvalue', 'itc_sta_amount', 'itc_fed_amount', 'battery_total_cost_lcos', 'itc_fed_percent', 'system_capacity']
+
+     - Pvsamv1_PVBatteryAllEquityPartnershipFlip
+
+        ['batt_Qfull_flow', 'cec_bifaciality', 'batt_mass', 'cec_i_o_ref', 'subarray1_nstrings', 'batt_surface_area', 'batt_power_discharge_max_kwdc', 'batt_power_charge_max_kwac', 'batt_computed_strings', 'system_capacity', 'batt_current_charge_max', 'inverter_count', 'batt_power_discharge_max_kwac', 'batt_computed_bank_capacity', 'batt_power_charge_max_kwdc', 'sixpar_bifaciality', 'LeadAcid_q20_computed', 'batt_dispatch_pvs_nameplate_ac', 'LeadAcid_q10_computed', 'batt_current_discharge_max', 'om_batt_replacement_cost', 'spe_bifaciality', 'ppa_price_input', 'LeadAcid_qn_computed']
+
+     - Cashloan_GenericBatteryCommercial
+
+        ['om_batt_replacement_cost', 'total_installed_cost', 'batt_computed_bank_capacity', 'itc_sta_percent', 'om_batt_nameplate', 'battery_per_kWh', 'itc_fed_percent_maxvalue', 'itc_sta_percent_maxvalue', 'itc_sta_amount', 'itc_fed_amount', 'battery_total_cost_lcos', 'itc_fed_percent']
+
+     - Battery_FuelCellCommercial
+
+        ['om_batt_replacement_cost', 'LeadAcid_q10_computed', 'batt_room_temperature_celsius', 'batt_mass']
+
+     - Pvwattsv8_PVWattsBatteryResidential
+
+        ['system_capacity', 'albedo']
+
+     - Utilityrate5_PVBatteryHostDeveloper
+
+        ['ur_dc_tou_mat']
+
+     - Cashloan_PVWattsBatteryResidential
+
+        ['total_installed_cost', 'itc_sta_percent', 'om_capacity', 'itc_fed_percent_maxvalue', 'itc_sta_percent_maxvalue', 'itc_sta_amount', 'itc_fed_amount', 'battery_total_cost_lcos', 'itc_fed_percent', 'system_capacity']
+
+     - Cashloan_PVBatteryResidential
+
+        ['total_installed_cost', 'batt_computed_bank_capacity', 'itc_sta_percent', 'om_batt_nameplate', 'om_capacity', 'itc_fed_percent_maxvalue', 'itc_sta_percent_maxvalue', 'itc_sta_amount', 'itc_fed_amount', 'battery_total_cost_lcos', 'itc_fed_percent', 'system_capacity']
+
+     - Battery_StandaloneBatteryAllEquityPartnershipFlip
+
+        ['om_batt_replacement_cost', 'batt_surface_area']
+
+     - Cashloan_PVWattsBatteryCommercial
+
+        ['total_installed_cost', 'itc_sta_percent', 'battery_per_kWh', 'om_capacity', 'itc_fed_percent_maxvalue', 'itc_sta_percent_maxvalue', 'itc_sta_amount', 'itc_fed_amount', 'battery_total_cost_lcos', 'itc_fed_percent']
+
+     - Battery_StandaloneBatteryLeveragedPartnershipFlip
+
+        ['om_batt_replacement_cost', 'batt_surface_area']
+
+     - Cashloan_StandaloneBatteryResidential
+
+        ['total_installed_cost', 'batt_computed_bank_capacity', 'itc_sta_percent', 'om_batt_nameplate', 'battery_per_kWh', 'itc_fed_percent_maxvalue', 'itc_sta_percent_maxvalue', 'itc_sta_amount', 'itc_fed_amount', 'battery_total_cost_lcos', 'itc_fed_percent', 'system_capacity']
+
+     - Battery_StandaloneBatteryCommercial
+
+        ['batt_current_charge_max', 'om_batt_replacement_cost', 'batt_power_discharge_max_kwac', 'batt_computed_bank_capacity', 'batt_Qfull_flow', 'batt_power_charge_max_kwdc', 'batt_surface_area', 'LeadAcid_q20_computed', 'batt_power_discharge_max_kwdc', 'LeadAcid_q10_computed', 'batt_power_charge_max_kwac', 'batt_room_temperature_celsius', 'batt_computed_strings', 'batt_mass', 'batt_current_discharge_max', 'LeadAcid_qn_computed']
+
+     - HostDeveloper_PVWattsBatteryHostDeveloper
+
+        ['construction_financing_cost', 'total_installed_cost', 'itc_sta_percent', 'battery_per_kWh', 'om_capacity', 'itc_fed_percent_maxvalue', 'itc_sta_percent_maxvalue', 'itc_sta_amount', 'itc_fed_amount', 'ppa_price_input', 'battery_total_cost_lcos', 'itc_fed_percent']
+
+     - Pvwattsv8_PVWattsBatteryHostDeveloper
+
+        ['albedo']
+
+     - Saleleaseback_PVBatterySaleLeaseback
+
+        ['om_batt_replacement_cost', 'construction_financing_cost', 'total_installed_cost', 'batt_computed_bank_capacity', 'land_area', 'itc_sta_percent', 'om_batt_nameplate', 'battery_per_kWh', 'itc_fed_percent_maxvalue', 'itc_sta_percent_maxvalue', 'itc_sta_amount', 'itc_fed_amount', 'ppa_price_input', 'battery_total_cost_lcos', 'itc_fed_percent', 'system_capacity']
+
+     - HostDeveloper_StandaloneBatteryHostDeveloper
+
+        ['om_batt_replacement_cost', 'construction_financing_cost', 'total_installed_cost', 'batt_computed_bank_capacity', 'itc_sta_percent', 'om_batt_nameplate', 'battery_per_kWh', 'itc_fed_percent_maxvalue', 'itc_sta_percent_maxvalue', 'itc_sta_amount', 'itc_fed_amount', 'ppa_price_input', 'battery_total_cost_lcos', 'itc_fed_percent', 'system_capacity']
+
+     - Utilityrate5_GenericBatteryHostDeveloper
+
+        ['ur_dc_tou_mat']
+
+     - Battery_GenericBatteryMerchantPlant
+
+        ['batt_current_charge_max', 'om_batt_replacement_cost', 'mp_enable_market_percent_gen', 'batt_power_discharge_max_kwac', 'batt_computed_bank_capacity', 'batt_Qfull_flow', 'batt_power_charge_max_kwdc', 'mp_ancserv3_revenue', 'batt_surface_area', 'mp_energy_market_revenue_single', 'LeadAcid_q20_computed', 'mp_ancserv1_revenue', 'batt_power_discharge_max_kwdc', 'LeadAcid_q10_computed', 'batt_power_charge_max_kwac', 'mp_ancserv4_revenue', 'mp_ancserv2_revenue', 'batt_computed_strings', 'mp_energy_market_revenue', 'batt_mass', 'batt_current_discharge_max', 'LeadAcid_qn_computed']
+
+     - Merchantplant_PVBatteryMerchantPlant
+
+        ['om_batt_replacement_cost', 'construction_financing_cost', 'mp_enable_market_percent_gen', 'total_installed_cost', 'batt_computed_bank_capacity', 'land_area', 'itc_sta_percent', 'om_batt_nameplate', 'battery_per_kWh', 'mp_ancserv3_revenue', 'itc_fed_percent_maxvalue', 'mp_energy_market_revenue_single', 'mp_ancserv1_revenue', 'itc_sta_percent_maxvalue', 'cp_battery_nameplate', 'mp_ancserv4_revenue', 'cp_system_nameplate', 'mp_ancserv2_revenue', 'itc_sta_amount', 'itc_fed_amount', 'battery_total_cost_lcos', 'mp_energy_market_revenue', 'mp_market_percent_gen', 'itc_fed_percent', 'system_capacity']
+
+     - Cashloan_GenericBatteryResidential
+
+        ['total_installed_cost', 'batt_computed_bank_capacity', 'itc_sta_percent', 'om_batt_nameplate', 'battery_per_kWh', 'itc_fed_percent_maxvalue', 'itc_sta_percent_maxvalue', 'itc_sta_amount', 'itc_fed_amount', 'battery_total_cost_lcos', 'itc_fed_percent']
+
+     - Battery_GenericBatteryHostDeveloper
+
+        ['batt_current_charge_max', 'om_batt_replacement_cost', 'batt_power_discharge_max_kwac', 'batt_computed_bank_capacity', 'batt_Qfull_flow', 'batt_power_charge_max_kwdc', 'batt_surface_area', 'LeadAcid_q20_computed', 'batt_power_discharge_max_kwdc', 'LeadAcid_q10_computed', 'batt_power_charge_max_kwac', 'ur_dc_tou_mat', 'batt_computed_strings', 'ppa_price_input', 'batt_mass', 'batt_current_discharge_max', 'LeadAcid_qn_computed']
+
+     - Battery_StandaloneBatterySaleLeaseback
+
+        ['om_batt_replacement_cost', 'batt_surface_area']
+
+     - Pvsamv1_PVBatterySaleLeaseback
+
+        ['batt_Qfull_flow', 'cec_bifaciality', 'batt_mass', 'cec_i_o_ref', 'subarray1_nstrings', 'batt_surface_area', 'batt_power_discharge_max_kwdc', 'batt_power_charge_max_kwac', 'batt_computed_strings', 'system_capacity', 'batt_current_charge_max', 'inverter_count', 'batt_power_discharge_max_kwac', 'batt_computed_bank_capacity', 'batt_power_charge_max_kwdc', 'sixpar_bifaciality', 'LeadAcid_q20_computed', 'batt_dispatch_pvs_nameplate_ac', 'LeadAcid_q10_computed', 'batt_current_discharge_max', 'om_batt_replacement_cost', 'spe_bifaciality', 'ppa_price_input', 'LeadAcid_qn_computed']
+
+     - Battery_StandaloneBatteryThirdParty
+
+        ['batt_room_temperature_celsius']
+
+     - Battery_FuelCellSingleOwner
+
+        ['batt_current_charge_max', 'om_batt_replacement_cost', 'batt_power_discharge_max_kwac', 'batt_computed_bank_capacity', 'batt_Qfull_flow', 'batt_power_charge_max_kwdc', 'batt_surface_area', 'LeadAcid_q20_computed', 'batt_dispatch_pvs_nameplate_ac', 'batt_power_discharge_max_kwdc', 'LeadAcid_q10_computed', 'batt_power_charge_max_kwac', 'batt_computed_strings', 'ppa_price_input', 'batt_mass', 'batt_current_discharge_max', 'LeadAcid_qn_computed']
+
+     - Singleowner_GenericBatterySingleOwner
+
+        ['om_batt_replacement_cost', 'construction_financing_cost', 'total_installed_cost', 'batt_computed_bank_capacity', 'itc_sta_percent', 'om_batt_nameplate', 'battery_per_kWh', 'itc_fed_percent_maxvalue', 'itc_sta_percent_maxvalue', 'cp_battery_nameplate', 'itc_sta_amount', 'itc_fed_amount', 'battery_total_cost_lcos', 'itc_fed_percent']
+
+     - Pvsamv1_PVBatteryLeveragedPartnershipFlip
+
+        ['batt_Qfull_flow', 'cec_bifaciality', 'batt_mass', 'cec_i_o_ref', 'subarray1_nstrings', 'batt_surface_area', 'batt_power_discharge_max_kwdc', 'batt_power_charge_max_kwac', 'batt_computed_strings', 'system_capacity', 'batt_current_charge_max', 'inverter_count', 'batt_power_discharge_max_kwac', 'batt_computed_bank_capacity', 'batt_power_charge_max_kwdc', 'sixpar_bifaciality', 'LeadAcid_q20_computed', 'batt_dispatch_pvs_nameplate_ac', 'LeadAcid_q10_computed', 'batt_current_discharge_max', 'om_batt_replacement_cost', 'spe_bifaciality', 'ppa_price_input', 'LeadAcid_qn_computed']
+
+     - Saleleaseback_GenericBatterySaleLeaseback
+
+        ['om_batt_replacement_cost', 'construction_financing_cost', 'total_installed_cost', 'batt_computed_bank_capacity', 'itc_sta_percent', 'om_batt_nameplate', 'battery_per_kWh', 'itc_fed_percent_maxvalue', 'itc_sta_percent_maxvalue', 'itc_sta_amount', 'itc_fed_amount', 'battery_total_cost_lcos', 'itc_fed_percent']
+
+     - Battwatts_PVWattsBatteryResidential
+
+        ['batt_simple_kwh', 'batt_simple_kw']
+
+
+
+Biomass
+************************************************
+
+:doc:`modules/Biomass` Modified Input Variables:
+
+    New variables:
+
+         - adjust:timeindex
+
+
+Cashloan
+************************************************
+
+:doc:`modules/Cashloan` Modified Input Variables:
+
+    New variables:
+
+         - annual_thermal_value
+         - en_wave_batt
+         - rate_escalation
+
+    Removed variables:
+
+         - annual_themal_value
+
+    Type-changed variables:
+
+         - itc_fed_amount
+         - itc_fed_percent
+         - itc_fed_percent_maxvalue
+         - itc_sta_amount
+         - itc_sta_percent
+         - itc_sta_percent_maxvalue
+
+
+Communitysolar
+************************************************
+
+:doc:`modules/Communitysolar` Modified Input Variables:
+
+    New variables:
+
+         - en_wave_batt
+         - rate_escalation
+
+    Type-changed variables:
+
+         - itc_fed_amount
+         - itc_fed_percent
+         - itc_fed_percent_maxvalue
+         - itc_sta_amount
+         - itc_sta_percent
+         - itc_sta_percent_maxvalue
+
+
+Equpartflip
+************************************************
+
+:doc:`modules/Equpartflip` Modified Input Variables:
+
+    New variables:
+
+         - en_wave_batt
+         - rate_escalation
+
+    Type-changed variables:
+
+         - itc_fed_amount
+         - itc_fed_percent
+         - itc_fed_percent_maxvalue
+         - itc_sta_amount
+         - itc_sta_percent
+         - itc_sta_percent_maxvalue
+
+
+EtesElectricResistance
+************************************************
+
+:doc:`modules/EtesElectricResistance` Modified Input Variables:
+
+    New variables:
+
+         - adjust:timeindex
+         - heater_efficiency
+
+    Removed variables:
+
+         - gross_net_conversion_factor
+
+
+EtesPtes
+************************************************
+
+:doc:`modules/EtesPtes` New Default files:
+
+     - PTESSingleOwner
+
+
+GenericSystem
+************************************************
+
+:doc:`modules/GenericSystem` Modified Input Variables:
+
+    New variables:
+
+         - adjust:timeindex
+
+
+Geothermal
+************************************************
+
+:doc:`modules/Geothermal` Modified Input Variables:
+
+    New variables:
+
+         - adjust:timeindex
+         - fracture_length
+         - fracture_spacing
+         - geotherm.cost.inj_cost_curve_welltype
+         - geotherm.cost.inj_prod_well_ratio
+         - geotherm.cost.prod_cost_curve_welltype
+         - inj_casing_size
+         - prod_well_choice
+         - reservoir_model_inputs
+
+
+GeothermalCosts
+************************************************
+
+:doc:`modules/GeothermalCosts` Modified Input Variables:
+
+    New variables:
+
+         - dt_prod_well
+         - gross_cost_output
+         - ppi_base_year
+
+
+Grid
+************************************************
+
+:doc:`modules/Grid` Modified Input Variables:
+
+    New variables:
+
+         - energy_hourly_kW
+
+:doc:`modules/Grid` New Default files:
+
+     - MEwaveBatterySingleOwner
+     - MEwaveSingleOwner
+
+
+Hcpv
+************************************************
+
+:doc:`modules/Hcpv` Modified Input Variables:
+
+    New variables:
+
+         - adjust:timeindex
+
+
+HostDeveloper
+************************************************
+
+:doc:`modules/HostDeveloper` Modified Input Variables:
+
+    New variables:
+
+         - annual_thermal_value
+         - charge_w_sys_dc_tou_ym
+         - en_wave_batt
+         - gen
+         - rate_escalation
+         - utility_bill_w_sys
+
+    Type-changed variables:
+
+         - itc_fed_amount
+         - itc_fed_percent
+         - itc_fed_percent_maxvalue
+         - itc_sta_amount
+         - itc_sta_percent
+         - itc_sta_percent_maxvalue
+
+
+Ippppa
+************************************************
+
+:doc:`modules/Ippppa` Modified Input Variables:
+
+    Type-changed variables:
+
+         - itc_fed_amount
+         - itc_fed_percent
+         - itc_fed_percent_maxvalue
+         - itc_sta_amount
+         - itc_sta_percent
+         - itc_sta_percent_maxvalue
+
+
+Levpartflip
+************************************************
+
+:doc:`modules/Levpartflip` Modified Input Variables:
+
+    New variables:
+
+         - en_wave_batt
+         - rate_escalation
+
+    Type-changed variables:
+
+         - itc_fed_amount
+         - itc_fed_percent
+         - itc_fed_percent_maxvalue
+         - itc_sta_amount
+         - itc_sta_percent
+         - itc_sta_percent_maxvalue
+
+
+LinearFresnelDsgIph
+************************************************
+
+:doc:`modules/LinearFresnelDsgIph` Modified Input Variables:
+
+    New variables:
+
+         - adjust:timeindex
+
+
+Merchantplant
+************************************************
+
+:doc:`modules/Merchantplant` Modified Input Variables:
+
+    New variables:
+
+         - en_wave_batt
+         - rate_escalation
+
+    Type-changed variables:
+
+         - itc_fed_amount
+         - itc_fed_percent
+         - itc_fed_percent_maxvalue
+         - itc_sta_amount
+         - itc_sta_percent
+         - itc_sta_percent_maxvalue
+
+
+MhkWave
+************************************************
+
+:doc:`modules/MhkWave` Modified Input Variables:
+
+    New variables:
+
+         - analysis_period
+         - generic_degradation
+         - me_adjust:constant
+         - me_adjust:hourly
+         - me_adjust:periods
+         - me_adjust:timeindex
+         - system_use_lifetime_output
+
+:doc:`modules/MhkWave` New Default files:
+
+     - MEwaveBatterySingleOwner
+     - MEwaveSingleOwner
+
+:doc:`modules/MhkWave` Modified Default Values:
+
+     - MhkWave_MEwaveNone
+
+        ['energy_period', 'significant_wave_height']
+
+     - MhkWave_MEwaveLCOECalculator
+
+        ['energy_period', 'significant_wave_height']
+
+
+
+Pvsamv1
+************************************************
+
+:doc:`modules/Pvsamv1` Modified Input Variables:
+
+    New variables:
+
+         - adjust:timeindex
+         - albedo_spatial
+         - calculate_bifacial_electrical_mismatch
+         - calculate_rack_shading
+         - cec_ground_clearance_height
+         - cec_lacunarity_enable
+         - cec_lacunarity_length
+         - dc_adjust:timeindex
+         - dispatch_manual_system_charge_first
+         - en_electricity_rates
+         - measured_temp_array
+         - om_batt_variable_cost
+         - om_production_escal
+         - subarray1_electrical_mismatch
+         - subarray1_rack_shading
+         - subarray1_rear_soiling_loss
+         - subarray2_electrical_mismatch
+         - subarray2_rack_shading
+         - subarray2_rear_soiling_loss
+         - subarray3_electrical_mismatch
+         - subarray3_rack_shading
+         - subarray3_rear_soiling_loss
+         - subarray4_electrical_mismatch
+         - subarray4_rack_shading
+         - subarray4_rear_soiling_loss
+         - use_measured_temp
+         - use_spatial_albedos
+
+    Removed variables:
+
+         - subarray1_rear_irradiance_loss
+         - subarray2_rear_irradiance_loss
+         - subarray3_rear_irradiance_loss
+         - subarray4_rear_irradiance_loss
+
+
+Pvwattsv1
+************************************************
+
+:doc:`modules/Pvwattsv1` Modified Input Variables:
+
+    New variables:
+
+         - adjust:timeindex
+
+
+Pvwattsv5
+************************************************
+
+:doc:`modules/Pvwattsv5` Modified Input Variables:
+
+    New variables:
+
+         - adjust:timeindex
+
+
+Pvwattsv7
+************************************************
+
+:doc:`modules/Pvwattsv7` Modified Input Variables:
+
+    New variables:
+
+         - adjust:timeindex
+
+
+Pvwattsv8
+************************************************
+
+:doc:`modules/Pvwattsv8` Modified Input Variables:
+
+    New variables:
+
+         - adjust:timeindex
+         - albedo_default
+         - albedo_default_snow
+
+
+Saleleaseback
+************************************************
+
+:doc:`modules/Saleleaseback` Modified Input Variables:
+
+    New variables:
+
+         - en_wave_batt
+         - rate_escalation
+
+    Type-changed variables:
+
+         - itc_fed_amount
+         - itc_fed_percent
+         - itc_fed_percent_maxvalue
+         - itc_sta_amount
+         - itc_sta_percent
+         - itc_sta_percent_maxvalue
+
+
+Singleowner
+************************************************
+
+:doc:`modules/Singleowner` Modified Input Variables:
+
+    New variables:
+
+         - en_wave_batt
+         - rate_escalation
+
+    Type-changed variables:
+
+         - itc_fed_amount
+         - itc_fed_percent
+         - itc_fed_percent_maxvalue
+         - itc_sta_amount
+         - itc_sta_percent
+         - itc_sta_percent_maxvalue
+
+:doc:`modules/Singleowner` New Default files:
+
+     - MEwaveBatterySingleOwner
+     - MEwaveSingleOwner
+     - PTESSingleOwner
+
+:doc:`modules/Singleowner` Modified Default Values:
+
+     - Singleowner_EmpiricalTroughSingleOwner
+
+        ['itc_sta_percent', 'itc_fed_percent_maxvalue', 'dispatch_factor1', 'dispatch_sched_weekend', 'dispatch_sched_weekday', 'dispatch_factor6', 'itc_sta_percent_maxvalue', 'dispatch_factor4', 'dispatch_factor2', 'dispatch_factor5', 'itc_sta_amount', 'itc_fed_amount', 'ppa_price_input', 'itc_fed_percent']
+
+     - Singleowner_FlatPlatePVSingleOwner
+
+        ['construction_financing_cost', 'total_installed_cost', 'land_area', 'itc_sta_percent', 'itc_fed_percent_maxvalue', 'itc_sta_percent_maxvalue', 'cp_system_nameplate', 'itc_sta_amount', 'itc_fed_amount', 'itc_fed_percent', 'system_capacity']
+
+     - Singleowner_MSLFSingleOwner
+
+        ['itc_sta_percent', 'itc_fed_percent_maxvalue', 'dispatch_factor1', 'dispatch_sched_weekend', 'dispatch_sched_weekday', 'dispatch_factor6', 'itc_sta_percent_maxvalue', 'dispatch_factor4', 'dispatch_factor2', 'dispatch_factor5', 'itc_sta_amount', 'itc_fed_amount', 'ppa_price_input', 'itc_fed_percent']
+
+     - Singleowner_PVWattsSingleOwner
+
+        ['construction_financing_cost', 'total_installed_cost', 'land_area', 'itc_sta_percent', 'itc_fed_percent_maxvalue', 'itc_sta_percent_maxvalue', 'cp_system_nameplate', 'itc_sta_amount', 'itc_fed_amount', 'itc_fed_percent', 'system_capacity']
+
+     - Singleowner_PVBatterySingleOwner
+
+        ['om_batt_replacement_cost', 'construction_financing_cost', 'total_installed_cost', 'batt_computed_bank_capacity', 'land_area', 'itc_sta_percent', 'om_batt_nameplate', 'battery_per_kWh', 'itc_fed_percent_maxvalue', 'itc_sta_percent_maxvalue', 'cp_battery_nameplate', 'cp_system_nameplate', 'itc_sta_amount', 'itc_fed_amount', 'ppa_price_input', 'battery_total_cost_lcos', 'itc_fed_percent', 'system_capacity']
+
+     - Singleowner_GenericSystemSingleOwner
+
+        ['itc_sta_percent', 'itc_fed_percent_maxvalue', 'itc_sta_percent_maxvalue', 'itc_sta_amount', 'itc_fed_amount', 'itc_fed_percent']
+
+     - Singleowner_GeothermalPowerSingleOwner
+
+        ['construction_financing_cost', 'total_installed_cost', 'itc_sta_percent', 'itc_fed_percent_maxvalue', 'itc_sta_percent_maxvalue', 'system_recapitalization_cost', 'cp_system_nameplate', 'itc_sta_amount', 'itc_fed_amount', 'itc_fed_percent', 'system_capacity']
+
+     - Singleowner_BiopowerSingleOwner
+
+        ['itc_sta_percent', 'itc_fed_percent_maxvalue', 'itc_sta_percent_maxvalue', 'itc_sta_amount', 'itc_fed_amount', 'itc_fed_percent']
+
+     - Singleowner_StandaloneBatterySingleOwner
+
+        ['om_batt_replacement_cost', 'construction_financing_cost', 'total_installed_cost', 'itc_sta_percent', 'battery_per_kWh', 'itc_fed_percent_maxvalue', 'itc_sta_percent_maxvalue', 'itc_sta_amount', 'itc_fed_amount', 'battery_total_cost_lcos', 'cp_capacity_credit_percent', 'cp_capacity_payment_amount', 'itc_fed_percent']
+
+     - Singleowner_DSLFSingleOwner
+
+        ['itc_sta_percent', 'itc_fed_percent_maxvalue', 'dispatch_factor1', 'dispatch_sched_weekend', 'dispatch_sched_weekday', 'dispatch_factor6', 'itc_sta_percent_maxvalue', 'dispatch_factor4', 'dispatch_factor2', 'dispatch_factor5', 'itc_sta_amount', 'itc_fed_amount', 'ppa_price_input', 'itc_fed_percent']
+
+     - Singleowner_WindPowerSingleOwner
+
+        ['construction_financing_cost', 'total_installed_cost', 'itc_sta_percent', 'om_capacity', 'itc_fed_percent_maxvalue', 'itc_sta_percent_maxvalue', 'ptc_fed_amount', 'itc_sta_amount', 'itc_fed_amount', 'itc_fed_percent']
+
+     - Singleowner_GenericCSPSystemSingleOwner
+
+        ['itc_sta_percent', 'itc_fed_percent_maxvalue', 'dispatch_factor1', 'dispatch_sched_weekend', 'dispatch_sched_weekday', 'dispatch_factor6', 'itc_sta_percent_maxvalue', 'dispatch_factor4', 'dispatch_factor2', 'dispatch_factor5', 'itc_sta_amount', 'itc_fed_amount', 'ppa_price_input', 'itc_fed_percent']
+
+     - Singleowner_HighXConcentratingPVSingleOwner
+
+        ['itc_sta_percent', 'itc_fed_percent_maxvalue', 'itc_sta_percent_maxvalue', 'itc_sta_amount', 'itc_fed_amount', 'itc_fed_percent']
+
+     - Singleowner_PhysicalTroughSingleOwner
+
+        ['itc_sta_percent', 'itc_fed_percent_maxvalue', 'dispatch_factor1', 'dispatch_sched_weekend', 'dispatch_sched_weekday', 'dispatch_factor6', 'itc_sta_percent_maxvalue', 'dispatch_factor4', 'dispatch_factor2', 'dispatch_factor5', 'itc_sta_amount', 'itc_fed_amount', 'ppa_price_input', 'itc_fed_percent']
+
+     - Singleowner_ETESSingleOwner
+
+        ['construction_financing_cost', 'itc_sta_percent', 'itc_fed_percent_maxvalue', 'itc_sta_percent_maxvalue', 'cp_battery_nameplate', 'cp_system_nameplate', 'itc_sta_amount', 'itc_fed_amount', 'ppa_price_input', 'itc_fed_percent', 'system_capacity']
+
+     - Singleowner_MSPTSingleOwner
+
+        ['construction_financing_cost', 'total_installed_cost', 'land_area', 'itc_sta_percent', 'itc_fed_percent_maxvalue', 'dispatch_factor1', 'dispatch_sched_weekend', 'dispatch_sched_weekday', 'dispatch_factor6', 'itc_sta_percent_maxvalue', 'dispatch_factor4', 'dispatch_factor2', 'dispatch_factor5', 'cp_system_nameplate', 'itc_sta_amount', 'itc_fed_amount', 'ppa_price_input', 'itc_fed_percent', 'system_capacity']
+
+     - Singleowner_GenericBatterySingleOwner
+
+        ['om_batt_replacement_cost', 'construction_financing_cost', 'total_installed_cost', 'batt_computed_bank_capacity', 'itc_sta_percent', 'om_batt_nameplate', 'battery_per_kWh', 'itc_fed_percent_maxvalue', 'itc_sta_percent_maxvalue', 'cp_battery_nameplate', 'itc_sta_amount', 'itc_fed_amount', 'battery_total_cost_lcos', 'itc_fed_percent']
+
+     - Singleowner_FuelCellSingleOwner
+
+        ['om_batt_replacement_cost', 'construction_financing_cost', 'total_installed_cost', 'batt_computed_bank_capacity', 'land_area', 'itc_sta_percent', 'om_batt_nameplate', 'battery_per_kWh', 'itc_fed_percent_maxvalue', 'itc_sta_percent_maxvalue', 'cp_system_nameplate', 'itc_sta_amount', 'itc_fed_amount', 'ppa_price_input', 'itc_fed_percent', 'system_capacity']
+
+
+
+Solarpilot
+************************************************
+
+:doc:`modules/Solarpilot` Modified Input Variables:
+
+    New variables:
+
+         - csp.pt.sf.fixed_land_area
+         - csp.pt.sf.land_overhead_factor
+
+
+Swh
+************************************************
+
+:doc:`modules/Swh` Modified Input Variables:
+
+    New variables:
+
+         - adjust:timeindex
+
+
+TcsgenericSolar
+************************************************
+
+:doc:`modules/TcsgenericSolar` Modified Input Variables:
+
+    New variables:
+
+         - adjust:timeindex
+         - sf_adjust:timeindex
+
+
+TcslinearFresnel
+************************************************
+
+:doc:`modules/TcslinearFresnel` Modified Input Variables:
+
+    New variables:
+
+         - adjust:timeindex
+
+
+TcsmoltenSalt
+************************************************
+
+:doc:`modules/TcsmoltenSalt` Modified Input Variables:
+
+    New variables:
+
+         - adjust:timeindex
+         - allow_heater_no_dispatch_opt
+         - can_cycle_use_standby
+         - disp_csu_cost_rel
+         - disp_hsu_cost_rel
+         - disp_pen_ramping
+         - disp_rsu_cost_rel
+         - disp_wlim_maxspec
+         - heater_efficiency
+         - heater_spec_cost
+         - is_wlim_design
+         - ppa_price_input
+         - sf_adjust:timeindex
+         - sim_type
+         - tes_init_hot_htf_percent
+         - total_land_area_before_rad_cooling_in
+
+    Removed variables:
+
+         - calc_fluxmaps
+         - gross_net_conversion_factor
+         - helio_area_tot
+         - land_area_base
+
+
+Tcsmslf
+************************************************
+
+:doc:`modules/Tcsmslf` Modified Input Variables:
+
+    New variables:
+
+         - adjust:timeindex
+
+    Removed variables:
+
+         - P_boil
+
+
+TcstroughEmpirical
+************************************************
+
+:doc:`modules/TcstroughEmpirical` Modified Input Variables:
+
+    New variables:
+
+         - adjust:timeindex
+
+
+TcstroughPhysical
+************************************************
+
+:doc:`modules/TcstroughPhysical` Modified Input Variables:
+
+    New variables:
+
+         - adjust:timeindex
+
+    Removed variables:
+
+         - P_boil
+
+
+TroughPhysical
+************************************************
+
+:doc:`modules/TroughPhysical` Modified Input Variables:
+
+    New variables:
+
+         - adjust:timeindex
+         - can_cycle_use_standby
+         - disp_csu_cost_rel
+         - disp_pen_ramping
+         - disp_rsu_cost_rel
+         - piping_loss
+         - ppa_price_input
+
+
+TroughPhysicalCspSolver
+************************************************
+
+:doc:`modules/TroughPhysicalCspSolver` Modified Input Variables:
+
+    New variables:
+
+         - adjust:timeindex
+
+    Removed variables:
+
+         - P_boil
+
+
+TroughPhysicalProcessHeat
+************************************************
+
+:doc:`modules/TroughPhysicalProcessHeat` Modified Input Variables:
+
+    New variables:
+
+         - adjust:timeindex
+         - disp_csu_cost_rel
+         - disp_pen_ramping
+         - disp_rsu_cost_rel
+
+    Removed variables:
+
+         - disp_csu_cost
+         - disp_pen_delta_w
+         - disp_rsu_cost
+
+
+Utilityrate5
+************************************************
+
+:doc:`modules/Utilityrate5` New Default files:
+
+     - MEwaveBatterySingleOwner
+     - MEwaveSingleOwner
+
+:doc:`modules/Utilityrate5` Modified Default Values:
+
+     - Utilityrate5_PVWattsBatteryHostDeveloper
+
+        ['ur_dc_tou_mat']
+
+     - Utilityrate5_StandaloneBatteryHostDeveloper
+
+        ['ur_dc_tou_mat']
+
+     - Utilityrate5_EmpiricalTroughLeveragedPartnershipFlip
+
+        ['en_electricity_rates']
+
+     - Utilityrate5_PVBatteryHostDeveloper
+
+        ['ur_dc_tou_mat']
+
+     - Utilityrate5_MSLFLeveragedPartnershipFlip
+
+        ['en_electricity_rates']
+
+     - Utilityrate5_MSPTSaleLeaseback
+
+        ['en_electricity_rates']
+
+     - Utilityrate5_GenericBatteryHostDeveloper
+
+        ['ur_dc_tou_mat']
+
+
+
+WaveFileReader
+************************************************
+
+:doc:`modules/WaveFileReader` New Default files:
+
+     - MEwaveBatterySingleOwner
+     - MEwaveSingleOwner
+
+
+Windpower
+************************************************
+
+:doc:`modules/Windpower` Modified Input Variables:
+
+    New variables:
+
+         - adjust:timeindex
+
+
