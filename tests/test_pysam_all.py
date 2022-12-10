@@ -266,7 +266,13 @@ def test_import_all():
 
 sf = str(Path(__file__).parent / "blythe_ca_33.617773_-114.588261_psmv3_60_tmy.csv")
 wf = str(Path(__file__).parent / "AR Northwestern-Flat Lands.srw")
+wave_f = str(Path(__file__).parent.parent / "Examples" / "Marine energy examples" / "CalWave_California_Wave Resource _SAM CSV.csv")
 
+import PySAM.WaveFileReader as wavefile
+wavefile_model = wavefile.new()
+wavefile_model.WeatherReader.wave_resource_filename = wave_f
+wavefile_model.WeatherReader.wave_resource_model_choice = 0
+wavefile_model.execute()
 
 def assign_values(mod, i):
     defaults = glob.glob(os.environ['SAMNTDIR'] + "/api/api_autogen/library/defaults/" + mod + "_*.json")
@@ -299,7 +305,13 @@ def assign_values(mod, i):
             m.value("ac", [1] * 8760)
             m.value("inverter_efficiency", 0.96)
         elif mod == "Battery":
-            m.value("gen", [1] * 8760)
+            m.value("gen", [1] * 8760 * 2)
+            m.value("energy_hourly_kW", [1] * 8760 * 2)
+            m.value("system_use_lifetime_output", 1)
+            m.value("analysis_period", 2)
+        elif mod == "MhkWave":
+            m.value("wave_resource_matrix", wavefile_model.Outputs.wave_resource_matrix)
+            m.value("wave_resource_model_choice", 0)
         else:
             try:
                 m.value("solar_resource_file", sf)
@@ -315,7 +327,8 @@ def assign_values(mod, i):
         except:
             pass
         try:
-            m.value("analysis_period", 1)
+            if mod != "Battery":
+                m.value("analysis_period", 1)
             m.value("batt_dispatch_choice", 0)
         except:
             pass

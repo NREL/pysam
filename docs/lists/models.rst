@@ -34,14 +34,17 @@
 :doc:`../modules/CspDsgLfUi` (HD)
       Calculates values for all calculated values on UI TES page(s)
 
-:doc:`../modules/DsgFluxPreprocess` (HD)
-      Calculate receiver max flux and absorber (boiler, etc.) fractions
+:doc:`../modules/CspSubcomponent`
+      CSP subcomponents
 
 :doc:`../modules/Equpartflip`
       All Equity Partnership Flip Financial Model
 
 :doc:`../modules/EtesElectricResistance`
       Electric resistance heater charging TES from grid, discharge with power cycle
+
+:doc:`../modules/EtesPtes`
+      Heat pump charging two two-tank TES from grid, discharge with power cycle
 
 :doc:`../modules/Fuelcell`
       Fuel cell model
@@ -82,9 +85,6 @@
 :doc:`../modules/Irradproc` (HD)
       Irradiance Processor
 
-:doc:`../modules/IsccDesignPoint` (HD)
-      Calculates design point inject, extraction, fossil output
-
 :doc:`../modules/Layoutarea` (HD)
       Layout Area Calculation
 
@@ -108,6 +108,9 @@
 
 :doc:`../modules/MhkWave` (HD)
       MHK Wave power calculation model using power distribution.
+
+:doc:`../modules/MsptSfAndRecIsolated` (HD)
+      MSPT solar field and tower/receiver model
 
 :doc:`../modules/Poacalib` (HD)
       Calibrates beam and diffuse to give POA input
@@ -244,6 +247,9 @@
 :doc:`../modules/Utilityrate5`
       Electricity bill calculator based on OpenEI Version 8
 
+:doc:`../modules/Utilityrateforecast`
+      Compute the utility rate costs associated with a given rate and time series array of grid usage.
+
 :doc:`../modules/WaveFileReader` (HD)
       SAM Wave Resource File Reader
 
@@ -287,9 +293,10 @@
     ../modules/CbMsptSystemCosts.rst
     ../modules/Communitysolar.rst
     ../modules/CspDsgLfUi.rst
-    ../modules/DsgFluxPreprocess.rst
+    ../modules/CspSubcomponent.rst
     ../modules/Equpartflip.rst
     ../modules/EtesElectricResistance.rst
+    ../modules/EtesPtes.rst
     ../modules/Fuelcell.rst
     ../modules/GenericSystem.rst
     ../modules/Geothermal.rst
@@ -303,7 +310,6 @@
     ../modules/IphToLcoefcr.rst
     ../modules/Ippppa.rst
     ../modules/Irradproc.rst
-    ../modules/IsccDesignPoint.rst
     ../modules/Layoutarea.rst
     ../modules/Lcoefcr.rst
     ../modules/Levpartflip.rst
@@ -312,6 +318,7 @@
     ../modules/MhkCosts.rst
     ../modules/MhkTidal.rst
     ../modules/MhkWave.rst
+    ../modules/MsptSfAndRecIsolated.rst
     ../modules/Poacalib.rst
     ../modules/Pv6parmod.rst
     ../modules/PvGetShadeLossMpp.rst
@@ -357,6 +364,7 @@
     ../modules/Utilityrate3.rst
     ../modules/Utilityrate4.rst
     ../modules/Utilityrate5.rst
+    ../modules/Utilityrateforecast.rst
     ../modules/WaveFileReader.rst
     ../modules/Wfcheck.rst
     ../modules/Wfcsvconv.rst

@@ -318,17 +318,17 @@ with open(os.path.join(pysam_dir, "docs", "version_changes", __version__ + ".rst
                     f.write(f"         - {v}\n")
                 f.write('\n')
         if 'new_defaults' in changes.keys():
-            f.write(f':doc:`modules/{cmod}` New Default files:\n\n')
+            f.write(f':doc:`../modules/{cmod}` New Default files:\n\n')
             for v in changes['new_defaults']:
                 f.write(f"     - {v}\n")
             f.write("\n")
         if 'del_defaults' in changes.keys():
-            f.write(f':doc:`modules/{cmod}` Removed Default files\n\n')
+            f.write(f':doc:`../modules/{cmod}` Removed Default files\n\n')
             for v in changes['del_defaults']:
                 f.write(f"     - {v}\n")
             f.write("\n")
         if 'mod_defaults' in changes.keys():
-            f.write(f':doc:`modules/{cmod}` Modified Default Values:\n\n')
+            f.write(f':doc:`../modules/{cmod}` Modified Default Values:\n\n')
             for k, v in changes['mod_defaults'].items():
                 f.write(f"     - {k}\n\n        {list(v.keys())}\n\n")
             f.write("\n")

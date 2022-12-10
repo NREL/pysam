@@ -1052,6 +1052,12 @@ Outputs_get_batt_power(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_batt_power_dc(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Battwatts_Outputs_batt_power_dc_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_batt_power_target(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Battwatts_Outputs_batt_power_target_aget, self->data_ptr);
@@ -1211,6 +1217,12 @@ static PyObject *
 Outputs_get_batt_to_grid(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Battwatts_Outputs_batt_to_grid_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_batt_to_inverter_dc(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Battwatts_Outputs_batt_to_inverter_dc_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -1442,6 +1454,12 @@ Outputs_get_system_to_batt(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_system_to_batt_dc(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Battwatts_Outputs_system_to_batt_dc_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_system_to_grid(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Battwatts_Outputs_system_to_grid_aget, self->data_ptr);
@@ -1545,7 +1563,10 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence[sequence]*: Battery dispatch schedule"),
  	NULL},
 {"batt_power", (getter)Outputs_get_batt_power,(setter)0,
-	PyDoc_STR("*sequence*: Electricity to/from battery [kW]"),
+	PyDoc_STR("*sequence*: Electricity to/from battery AC [kW]"),
+ 	NULL},
+{"batt_power_dc", (getter)Outputs_get_batt_power_dc,(setter)0,
+	PyDoc_STR("*sequence*: Electricity to/from battery DC [kW]"),
  	NULL},
 {"batt_power_target", (getter)Outputs_get_batt_power_target,(setter)0,
 	PyDoc_STR("*sequence*: Electricity battery power target for automated dispatch [kW]"),
@@ -1626,13 +1647,16 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Battery temperature [C]"),
  	NULL},
 {"batt_to_grid", (getter)Outputs_get_batt_to_grid,(setter)0,
-	PyDoc_STR("*sequence*: Electricity to grid from battery [kW]"),
+	PyDoc_STR("*sequence*: Electricity to grid from battery AC [kW]"),
+ 	NULL},
+{"batt_to_inverter_dc", (getter)Outputs_get_batt_to_inverter_dc,(setter)0,
+	PyDoc_STR("*sequence*: Electricity to inverter from battery DC [kW]"),
  	NULL},
 {"batt_to_load", (getter)Outputs_get_batt_to_load,(setter)0,
-	PyDoc_STR("*sequence*: Electricity to load from battery [kW]"),
+	PyDoc_STR("*sequence*: Electricity to load from battery AC [kW]"),
  	NULL},
 {"batt_to_system_load", (getter)Outputs_get_batt_to_system_load,(setter)0,
-	PyDoc_STR("*sequence*: Electricity to system loads from battery [kW]"),
+	PyDoc_STR("*sequence*: Electricity to system loads from battery AC [kW]"),
  	NULL},
 {"batt_voltage", (getter)Outputs_get_batt_voltage,(setter)0,
 	PyDoc_STR("*sequence*: Battery voltage [V]"),
@@ -1650,7 +1674,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Critical load unmet in this timestep [kW]"),
  	NULL},
 {"fuelcell_to_batt", (getter)Outputs_get_fuelcell_to_batt,(setter)0,
-	PyDoc_STR("*sequence*: Electricity to battery from fuel cell [kW]"),
+	PyDoc_STR("*sequence*: Electricity to battery from fuel cell AC [kW]"),
  	NULL},
 {"gen", (getter)Outputs_get_gen,(setter)0,
 	PyDoc_STR("*sequence*: System power generated [kW]"),
@@ -1659,19 +1683,19 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Power produced without the battery or curtailment [kW]"),
  	NULL},
 {"grid_power", (getter)Outputs_get_grid_power,(setter)0,
-	PyDoc_STR("*sequence*: Electricity to/from grid [kW]"),
+	PyDoc_STR("*sequence*: Electricity to/from grid AC [kW]"),
  	NULL},
 {"grid_power_target", (getter)Outputs_get_grid_power_target,(setter)0,
 	PyDoc_STR("*sequence*: Electricity grid power target for automated dispatch [kW]"),
  	NULL},
 {"grid_to_batt", (getter)Outputs_get_grid_to_batt,(setter)0,
-	PyDoc_STR("*sequence*: Electricity to battery from grid [kW]"),
+	PyDoc_STR("*sequence*: Electricity to battery from grid AC [kW]"),
  	NULL},
 {"grid_to_load", (getter)Outputs_get_grid_to_load,(setter)0,
-	PyDoc_STR("*sequence*: Electricity to load from grid [kW]"),
+	PyDoc_STR("*sequence*: Electricity to load from grid AC [kW]"),
  	NULL},
 {"interconnection_loss", (getter)Outputs_get_interconnection_loss,(setter)0,
-	PyDoc_STR("*sequence*: Electricity loss due to curtailment, interconnection, or outage [kW]"),
+	PyDoc_STR("*sequence*: Electricity loss due to curtailment interconnection outage [kW]"),
  	NULL},
 {"market_sell_rate_series_yr1", (getter)Outputs_get_market_sell_rate_series_yr1,(setter)0,
 	PyDoc_STR("*sequence*: Power price for battery dispatch [$/MWh]"),
@@ -1740,13 +1764,16 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Hours of autonomy during grid outage survival function"),
  	NULL},
 {"system_to_batt", (getter)Outputs_get_system_to_batt,(setter)0,
-	PyDoc_STR("*sequence*: Electricity to battery from system [kW]"),
+	PyDoc_STR("*sequence*: Electricity to battery from system AC [kW]"),
+ 	NULL},
+{"system_to_batt_dc", (getter)Outputs_get_system_to_batt_dc,(setter)0,
+	PyDoc_STR("*sequence*: Electricity to battery from system DC [kW]"),
  	NULL},
 {"system_to_grid", (getter)Outputs_get_system_to_grid,(setter)0,
-	PyDoc_STR("*sequence*: Electricity to grid from system [kW]"),
+	PyDoc_STR("*sequence*: Electricity to grid from system AC [kW]"),
  	NULL},
 {"system_to_load", (getter)Outputs_get_system_to_load,(setter)0,
-	PyDoc_STR("*sequence*: Electricity to load from system [kW]"),
+	PyDoc_STR("*sequence*: Electricity to load from system AC [kW]"),
  	NULL},
 	{NULL}  /* Sentinel */
 };

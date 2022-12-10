@@ -2739,15 +2739,15 @@ Tou_set_ampl_exec_call(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyObject *
-Tou_get_disp_csu_cost(VarGroupObject *self, void *closure)
+Tou_get_disp_csu_cost_rel(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_Tou_disp_csu_cost_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_Tou_disp_csu_cost_rel_nget, self->data_ptr);
 }
 
 static int
-Tou_set_disp_csu_cost(VarGroupObject *self, PyObject *value, void *closure)
+Tou_set_disp_csu_cost_rel(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_Tou_disp_csu_cost_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_Tou_disp_csu_cost_rel_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -2799,15 +2799,15 @@ Tou_set_disp_mip_gap(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyObject *
-Tou_get_disp_pen_delta_w(VarGroupObject *self, void *closure)
+Tou_get_disp_pen_ramping(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_Tou_disp_pen_delta_w_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_Tou_disp_pen_ramping_nget, self->data_ptr);
 }
 
 static int
-Tou_set_disp_pen_delta_w(VarGroupObject *self, PyObject *value, void *closure)
+Tou_set_disp_pen_ramping(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_Tou_disp_pen_delta_w_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_Tou_disp_pen_ramping_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -2823,15 +2823,15 @@ Tou_set_disp_reporting(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyObject *
-Tou_get_disp_rsu_cost(VarGroupObject *self, void *closure)
+Tou_get_disp_rsu_cost_rel(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_Tou_disp_rsu_cost_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_TroughPhysicalProcessHeat_Tou_disp_rsu_cost_rel_nget, self->data_ptr);
 }
 
 static int
-Tou_set_disp_rsu_cost(VarGroupObject *self, PyObject *value, void *closure)
+Tou_set_disp_rsu_cost_rel(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_Tou_disp_rsu_cost_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_TroughPhysicalProcessHeat_Tou_disp_rsu_cost_rel_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -3237,8 +3237,8 @@ static PyGetSetDef Tou_getset[] = {
 {"ampl_exec_call", (getter)Tou_get_ampl_exec_call,(setter)Tou_set_ampl_exec_call,
 	PyDoc_STR("*str*: System command to run AMPL code [-]\n\n**Required:**\nFalse. Automatically set to 'ampl sdk_solution.run' if not assigned explicitly or loaded from defaults."),
  	NULL},
-{"disp_csu_cost", (getter)Tou_get_disp_csu_cost,(setter)Tou_set_disp_csu_cost,
-	PyDoc_STR("*float*: Heat sink startup cost [$]\n\n**Required:**\nRequired if is_dispatch=1"),
+{"disp_csu_cost_rel", (getter)Tou_get_disp_csu_cost_rel,(setter)Tou_set_disp_csu_cost_rel,
+	PyDoc_STR("*float*: Heat sink startup cost [$/MWe-cycle/start]\n\n**Required:**\nRequired if is_dispatch=1"),
  	NULL},
 {"disp_frequency", (getter)Tou_get_disp_frequency,(setter)Tou_set_disp_frequency,
 	PyDoc_STR("*float*: Frequency for dispatch optimization calculations [hour]\n\n**Required:**\nRequired if is_dispatch=1"),
@@ -3252,14 +3252,14 @@ static PyGetSetDef Tou_getset[] = {
 {"disp_mip_gap", (getter)Tou_get_disp_mip_gap,(setter)Tou_set_disp_mip_gap,
 	PyDoc_STR("*float*: Dispatch optimization solution tolerance [-]\n\n**Required:**\nRequired if is_dispatch=1"),
  	NULL},
-{"disp_pen_delta_w", (getter)Tou_get_disp_pen_delta_w,(setter)Tou_set_disp_pen_delta_w,
-	PyDoc_STR("*float*: Dispatch heat production change penalty [$/kWt-change]\n\n**Required:**\nRequired if is_dispatch=1"),
+{"disp_pen_ramping", (getter)Tou_get_disp_pen_ramping,(setter)Tou_set_disp_pen_ramping,
+	PyDoc_STR("*float*: Dispatch heat production change penalty [$/MWt-change]\n\n**Required:**\nRequired if is_dispatch=1"),
  	NULL},
 {"disp_reporting", (getter)Tou_get_disp_reporting,(setter)Tou_set_disp_reporting,
 	PyDoc_STR("*float*: Dispatch optimization reporting level [-]\n\n**Required:**\nFalse. Automatically set to -1 if not assigned explicitly or loaded from defaults."),
  	NULL},
-{"disp_rsu_cost", (getter)Tou_get_disp_rsu_cost,(setter)Tou_set_disp_rsu_cost,
-	PyDoc_STR("*float*: Receiver startup cost [$]\n\n**Required:**\nRequired if is_dispatch=1"),
+{"disp_rsu_cost_rel", (getter)Tou_get_disp_rsu_cost_rel,(setter)Tou_set_disp_rsu_cost_rel,
+	PyDoc_STR("*float*: Receiver startup cost [$/MWt/start]\n\n**Required:**\nRequired if is_dispatch=1"),
  	NULL},
 {"disp_spec_bb", (getter)Tou_get_disp_spec_bb,(setter)Tou_set_disp_spec_bb,
 	PyDoc_STR("*float*: Dispatch optimization B&B heuristic [-]\n\n**Required:**\nFalse. Automatically set to -1 if not assigned explicitly or loaded from defaults."),

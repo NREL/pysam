@@ -2919,18 +2919,6 @@ Powerblock_set_F_wc(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyObject *
-Powerblock_get_P_boil(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TroughPhysicalCspSolver_Powerblock_P_boil_nget, self->data_ptr);
-}
-
-static int
-Powerblock_set_P_boil(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TroughPhysicalCspSolver_Powerblock_P_boil_nset, self->data_ptr);
-}
-
-static PyObject *
 Powerblock_get_P_cond_min(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_TroughPhysicalCspSolver_Powerblock_P_cond_min_nget, self->data_ptr);
@@ -3104,9 +3092,6 @@ static PyGetSetDef Powerblock_getset[] = {
  	NULL},
 {"F_wc", (getter)Powerblock_get_F_wc,(setter)Powerblock_set_F_wc,
 	PyDoc_STR("*sequence*: Fraction indicating wet cooling use for hybrid system [none]\n\n**Options:**\nconstant=[0,0,0,0,0,0,0,0,0]\n\n**Required:**\nRequired if pc_config=0"),
- 	NULL},
-{"P_boil", (getter)Powerblock_get_P_boil,(setter)Powerblock_set_P_boil,
-	PyDoc_STR("*float*: Boiler operating pressure [bar]\n\n**Required:**\nRequired if pc_config=0"),
  	NULL},
 {"P_cond_min", (getter)Powerblock_get_P_cond_min,(setter)Powerblock_set_P_cond_min,
 	PyDoc_STR("*float*: Minimum condenser pressure [inHg]\n\n**Required:**\nRequired if pc_config=0"),

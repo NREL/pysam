@@ -9,6 +9,7 @@ import copy
 from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.util.retry import Retry
 import certifi
+import warnings
 
 import json
 
@@ -151,6 +152,8 @@ def URDBv7_to_ElectricityRates(urdb_response):
         https://openei.org/services/doc/rest/util_rates/?version=7
     :return: dictionary for PySAM.UtilityRate5.UtilityRate5.ElectricityRates
     """
+    warnings.warn("ResourceTools.URDBv7_to_ElectricityRates is deprecated. Please use UtilityRateTools.URDBv8_to_ElectricityRates instead.", DeprecationWarning)
+
     urdb_data = dict()
     urdb_data['en_electricity_rates'] = 1
 
@@ -259,18 +262,29 @@ def URDBv7_to_ElectricityRates(urdb_response):
         urdb_data['ur_dc_enable'] = 1
         flat_mat = []
         flat_demand = urdb_response['flatdemandmonths']
-        for month, tier in enumerate(flat_demand):
-            periods = [r for r in flat_demand_structure if r[0] == int(tier + 1)]
-            if len(periods) > 1:
-                raise ValueError("flat demand rate structure does not support multiple periods per month")
-            month_row = []
-            for p in periods:
+        for month, period in enumerate(flat_demand):
+            tiers = []
+            for r in flat_demand_structure:
+                if r[0] == int(period + 1):
+                    tiers.append(r)
+                    
+            if len(tiers) == 0:
+                raise ValueError("flatdemandstructure missing period number ", period)
+            for t in tiers:
+                month_row = []
                 month_row.append(month)
-                month_row += [p[i] for i in (1, 2, 3)]
-            flat_mat.append(month_row)
+                month_row += [t[i] for i in (1, 2, 3)]
+                flat_mat.append(month_row)
         urdb_data['ur_dc_flat_mat'] = flat_mat
+    # Fill out an empty flat rate structure if the rate has TOU demand but not flat demand    
     elif "demandratestructure" in urdb_response.keys():
         urdb_data['ur_dc_enable'] = 1
+        # Enumerate a dc_flat table with $0/kW in 12 months
+        flat_mat = []
+        for i in range(0, 12):
+            month_mat = [i, 1, 1e38, 0]
+            flat_mat.append(month_mat)
+        urdb_data['ur_dc_flat_mat'] = flat_mat
     else:
         urdb_data['ur_dc_enable'] = 0
 
@@ -280,7 +294,6 @@ def URDBv7_to_ElectricityRates(urdb_response):
         urdb_data['ur_dc_sched_weekend'] = urdb_data['ur_dc_sched_weekday']
 
     return urdb_data
-
 
 class FetchResourceFiles():
     """

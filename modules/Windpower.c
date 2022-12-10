@@ -1427,6 +1427,12 @@ Outputs_get_elec_losses(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_elev(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Windpower_Outputs_elev_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_env_losses(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Windpower_Outputs_env_losses_nget, self->data_ptr);
@@ -1442,6 +1448,18 @@ static PyObject *
 Outputs_get_kwh_per_kw(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Windpower_Outputs_kwh_per_kw_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_lat(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Windpower_Outputs_lat_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_lon(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Windpower_Outputs_lon_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -1504,6 +1522,12 @@ Outputs_get_wind_speed_average(VarGroupObject *self, void *closure)
 	return PySAM_double_getter(SAM_Windpower_Outputs_wind_speed_average_nget, self->data_ptr);
 }
 
+static PyObject *
+Outputs_get_year(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Windpower_Outputs_year_nget, self->data_ptr);
+}
+
 static PyGetSetDef Outputs_getset[] = {
 {"annual_energy", (getter)Outputs_get_annual_energy,(setter)0,
 	PyDoc_STR("*float*: Annual Energy [kWh]"),
@@ -1535,6 +1559,9 @@ static PyGetSetDef Outputs_getset[] = {
 {"elec_losses", (getter)Outputs_get_elec_losses,(setter)0,
 	PyDoc_STR("*float*: Electrical losses [%]"),
  	NULL},
+{"elev", (getter)Outputs_get_elev,(setter)0,
+	PyDoc_STR("*float*: Site elevation [m]"),
+ 	NULL},
 {"env_losses", (getter)Outputs_get_env_losses,(setter)0,
 	PyDoc_STR("*float*: Environmental losses [%]"),
  	NULL},
@@ -1543,6 +1570,12 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"kwh_per_kw", (getter)Outputs_get_kwh_per_kw,(setter)0,
 	PyDoc_STR("*float*: First year kWh/kW [kWh/kW]"),
+ 	NULL},
+{"lat", (getter)Outputs_get_lat,(setter)0,
+	PyDoc_STR("*float*: Latitude [degrees]"),
+ 	NULL},
+{"lon", (getter)Outputs_get_lon,(setter)0,
+	PyDoc_STR("*float*: Longitude [degrees]"),
  	NULL},
 {"monthly_energy", (getter)Outputs_get_monthly_energy,(setter)0,
 	PyDoc_STR("*sequence*: Monthly Energy [kWh]"),
@@ -1566,13 +1599,16 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*float*: Wake losses [%]"),
  	NULL},
 {"wind_direction", (getter)Outputs_get_wind_direction,(setter)0,
-	PyDoc_STR("*sequence*: Wind direction [deg]"),
+	PyDoc_STR("*sequence*: Wind direction [degrees]"),
  	NULL},
 {"wind_speed", (getter)Outputs_get_wind_speed,(setter)0,
 	PyDoc_STR("*sequence*: Wind speed [m/s]"),
  	NULL},
 {"wind_speed_average", (getter)Outputs_get_wind_speed_average,(setter)0,
 	PyDoc_STR("*float*: Average Wind speed [m/s]"),
+ 	NULL},
+{"year", (getter)Outputs_get_year,(setter)0,
+	PyDoc_STR("*float*: Year"),
  	NULL},
 	{NULL}  /* Sentinel */
 };

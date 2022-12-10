@@ -1,11 +1,17 @@
 # Release Notes
 
+## Version 4.0.0, Dec 10, 2022 - SAM 2022.11.21, SSC Version 278
+* [SAM Release updates for Version 2022.11.21 Revision 0](https://nrel.github.io/SAM/doc/releasenotes.html)
+* Added LoadTools, URDBv8 support and utility rate fixes (#126, 128)
+* License update (#127)
+* PySSC modifications for arrays (#125)
+
 ## Version 3.0.2, Sep 27, 2022 - SAM 2021.12.02, Revision 2, SSC Version 274
-* [SAM Release updates for Version 2020.12.02 Revision 2](https://nrel.github.io/SAM/doc/releasenotes.html)
+* [SAM Release updates for Version 2021.12.02 Revision 2](https://nrel.github.io/SAM/doc/releasenotes.html)
 * Added support for Apple Silicon (#108)
 
 ## Version 3.0.1, Mar 4, 2022 - SAM 2021.12.02, Revision 1, SSC Version 268
-* [SAM Release updates for Version 2020.12.02 Revision 1](https://nrel.github.io/SAM/doc/releasenotes.html)
+* [SAM Release updates for Version 2021.12.02 Revision 1](https://nrel.github.io/SAM/doc/releasenotes.html)
 * Moved all stub files from NREL-PySAM-stubs package into NREL-PySAM (#109)
 
 ## Version 3.0.0, Dec 23, 2021 ~ SAM 2021.12.02, SSC Version 267
@@ -18,7 +24,7 @@
 * Fix URDBv7_to_ElectricityRates error for certain demand structures (#99)
 * Add Python 3.10 Support (#104)
 * New Example for Selecting Modules and Inverter from the SAM Library (#103)
-* [SAM Release updates for Version 2020.12.02](https://nrel.github.io/SAM/doc/releasenotes.html)
+* [SAM Release updates for Version 2021.12.02](https://nrel.github.io/SAM/doc/releasenotes.html)
 
 ## Version 2.2.4, Aug 20, 2021 ~ SAM 2020.11.29, Revision 2, SSC Version 259
 * Fix bug in Battery LMO/LTO life model

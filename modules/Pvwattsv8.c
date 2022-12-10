@@ -92,6 +92,30 @@ SolarResource_set_albedo(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyObject *
+SolarResource_get_albedo_default(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvwattsv8_SolarResource_albedo_default_nget, self->data_ptr);
+}
+
+static int
+SolarResource_set_albedo_default(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvwattsv8_SolarResource_albedo_default_nset, self->data_ptr);
+}
+
+static PyObject *
+SolarResource_get_albedo_default_snow(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvwattsv8_SolarResource_albedo_default_snow_nget, self->data_ptr);
+}
+
+static int
+SolarResource_set_albedo_default_snow(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvwattsv8_SolarResource_albedo_default_snow_nset, self->data_ptr);
+}
+
+static PyObject *
 SolarResource_get_solar_resource_data(VarGroupObject *self, void *closure)
 {
 	return PySAM_table_getter(SAM_Pvwattsv8_SolarResource_solar_resource_data_tget, self->data_ptr);
@@ -129,7 +153,13 @@ SolarResource_set_use_wf_albedo(VarGroupObject *self, PyObject *value, void *clo
 
 static PyGetSetDef SolarResource_getset[] = {
 {"albedo", (getter)SolarResource_get_albedo,(setter)SolarResource_set_albedo,
-	PyDoc_STR("*sequence*: Albedo [frac]\n\n**Info:**\nif provided, will overwrite weather file albedo"),
+	PyDoc_STR("*sequence*: Albedo [0..1]\n\n**Info:**\nalbedo input array of 1 constant value or 12 monthly values"),
+ 	NULL},
+{"albedo_default", (getter)SolarResource_get_albedo_default,(setter)SolarResource_set_albedo_default,
+	PyDoc_STR("*float*: Albedo default [0..1]\n\n**Info:**\ndefault when albedo invalid\n\n**Required:**\nFalse. Automatically set to 0.2 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"albedo_default_snow", (getter)SolarResource_get_albedo_default_snow,(setter)SolarResource_set_albedo_default_snow,
+	PyDoc_STR("*float*: Albedo default for snow [0..1]\n\n**Info:**\ndefault when albedo invalid and snow model enabled\n\n**Required:**\nFalse. Automatically set to 0.6 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"solar_resource_data", (getter)SolarResource_get_solar_resource_data,(setter)SolarResource_set_solar_resource_data,
 	PyDoc_STR("*dict*: Weather data\n\n**Info:**\ndn,df,tdry,wspd,lat,lon,tz,elev"),
@@ -138,7 +168,7 @@ static PyGetSetDef SolarResource_getset[] = {
 	PyDoc_STR("*str*: Weather file path"),
  	NULL},
 {"use_wf_albedo", (getter)SolarResource_get_use_wf_albedo,(setter)SolarResource_set_use_wf_albedo,
-	PyDoc_STR("*float*: Use albedo from weather file [0/1]\n\n**Info:**\nwill use weather file albedo instead of albedo input\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*float*: Use albedo from weather file [0/1]\n\n**Options:**\n0=albedo input, 1=albedo from weather file (use albedo default if invalid)\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -718,10 +748,10 @@ SystemDesign_set_xfmr_nll(VarGroupObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef SystemDesign_getset[] = {
 {"array_type", (getter)SystemDesign_get_array_type,(setter)SystemDesign_set_array_type,
-	PyDoc_STR("*float*: Array type [0/1/2/3/4]\n\n**Info:**\nFixed Rack,Fixed Roof,1Axis,Backtracked,2Axis\n\n**Constraints:**\nMIN=0,MAX=4,INTEGER\n\n**Required:**\nTrue"),
+	PyDoc_STR("*float*: Array type [0/1/2/3/4]\n\n**Info:**\nfixed open rack,fixed roof mount,1-axis tracking,1-axis backtracking,2-axis tracking\n\n**Constraints:**\nMIN=0,MAX=4,INTEGER\n\n**Required:**\nTrue"),
  	NULL},
 {"azimuth", (getter)SystemDesign_get_azimuth,(setter)SystemDesign_set_azimuth,
-	PyDoc_STR("*float*: Azimuth angle [deg]\n\n**Options:**\nE=90,S=180,W=270\n\n**Constraints:**\nMIN=0,MAX=360\n\n**Required:**\narray_type<4"),
+	PyDoc_STR("*float*: Azimuth angle [degrees]\n\n**Options:**\nE=90,S=180,W=270\n\n**Constraints:**\nMIN=0,MAX=360\n\n**Required:**\narray_type<4"),
  	NULL},
 {"batt_simple_enable", (getter)SystemDesign_get_batt_simple_enable,(setter)SystemDesign_set_batt_simple_enable,
 	PyDoc_STR("*float*: Enable Battery [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
@@ -739,7 +769,7 @@ static PyGetSetDef SystemDesign_getset[] = {
 	PyDoc_STR("*float*: Enable tracker stow at high wind speeds [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"gcr", (getter)SystemDesign_get_gcr,(setter)SystemDesign_set_gcr,
-	PyDoc_STR("*float*: Ground coverage ratio [0..1]\n\n**Constraints:**\nMIN=0.01,MAX=0.99\n\n**Required:**\nFalse. Automatically set to 0.4 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*float*: Ground coverage ratio [0..1]\n\n**Constraints:**\nMIN=0.01,MAX=0.99\n\n**Required:**\nFalse. Automatically set to 0.3 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"gust_factor", (getter)SystemDesign_get_gust_factor,(setter)SystemDesign_set_gust_factor,
 	PyDoc_STR("*float*: Wind gust estimation factor\n\n**Required:**\nFalse for configuration with default inputs. May be required if a variable dependent on its value changes. Example: For the Detailed PV - Single Owner configuration, only Subarray 1 is enabled in the configuration defaults, so Subarray 2 inputs would not be required; if Subarray 2 is enabled, then Subarray 2 inputs is required."),
@@ -748,13 +778,13 @@ static PyGetSetDef SystemDesign_getset[] = {
 	PyDoc_STR("*float*: Inverter efficiency at rated power [%]\n\n**Constraints:**\nMIN=90,MAX=99.5\n\n**Required:**\nFalse. Automatically set to 96 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"losses", (getter)SystemDesign_get_losses,(setter)SystemDesign_set_losses,
-	PyDoc_STR("*float*: Other DC losses [%]\n\n**Info:**\nTotal system losses\n\n**Constraints:**\nMIN=-5,MAX=99\n\n**Required:**\nTrue"),
+	PyDoc_STR("*float*: Other DC losses [%]\n\n**Info:**\ntotal system losses\n\n**Constraints:**\nMIN=-5,MAX=99\n\n**Required:**\nTrue"),
  	NULL},
 {"module_type", (getter)SystemDesign_get_module_type,(setter)SystemDesign_set_module_type,
-	PyDoc_STR("*float*: Module type [0/1/2]\n\n**Info:**\nStandard,Premium,Thin film\n\n**Constraints:**\nMIN=0,MAX=2,INTEGER\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*float*: Module type [0/1/2]\n\n**Info:**\nstandard,premium,thin film\n\n**Constraints:**\nMIN=0,MAX=2,INTEGER\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"rotlim", (getter)SystemDesign_get_rotlim,(setter)SystemDesign_set_rotlim,
-	PyDoc_STR("*float*: Tracker rotation angle limit [deg]\n\n**Required:**\nFalse. Automatically set to 45.0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*float*: Tracker rotation angle limit [degrees]\n\n**Required:**\nFalse. Automatically set to 45.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"shading_azal", (getter)SystemDesign_get_shading_azal,(setter)SystemDesign_set_shading_azal,
 	PyDoc_STR("*sequence[sequence]*: Azimuth x altitude beam shading loss [%]\n\n**Required:**\nFalse for configuration with default inputs. May be required if a variable dependent on its value changes. Example: For the Detailed PV - Single Owner configuration, only Subarray 1 is enabled in the configuration defaults, so Subarray 2 inputs would not be required; if Subarray 2 is enabled, then Subarray 2 inputs is required."),
@@ -778,10 +808,10 @@ static PyGetSetDef SystemDesign_getset[] = {
 	PyDoc_STR("*float*: System size (DC nameplate) [kW]\n\n**Required:**\nTrue"),
  	NULL},
 {"tilt", (getter)SystemDesign_get_tilt,(setter)SystemDesign_set_tilt,
-	PyDoc_STR("*float*: Tilt angle [deg]\n\n**Options:**\nH=0,V=90\n\n**Constraints:**\nMIN=0,MAX=90\n\n**Required:**\narray_type<4"),
+	PyDoc_STR("*float*: Tilt angle [degrees]\n\n**Options:**\nH=0,V=90\n\n**Constraints:**\nMIN=0,MAX=90\n\n**Required:**\narray_type<4"),
  	NULL},
 {"wind_stow_angle", (getter)SystemDesign_get_wind_stow_angle,(setter)SystemDesign_set_wind_stow_angle,
-	PyDoc_STR("*float*: Tracker angle for wind stow [deg]\n\n**Required:**\nFalse. Automatically set to 30.0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*float*: Tracker angle for wind stow [degrees]\n\n**Required:**\nFalse. Automatically set to 30.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"xfmr_ll", (getter)SystemDesign_get_xfmr_ll,(setter)SystemDesign_set_xfmr_ll,
 	PyDoc_STR("*float*: GSU transformer load loss (resistive) [%(ac)]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
@@ -941,6 +971,12 @@ Outputs_get_ac_pre_adjust(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_alb(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvwattsv8_Outputs_alb_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_annual_energy(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Pvwattsv8_Outputs_annual_energy_nget, self->data_ptr);
@@ -1025,6 +1061,12 @@ Outputs_get_gh(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_inv_eff_output(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvwattsv8_Outputs_inv_eff_output_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_inverter_efficiency(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Pvwattsv8_Outputs_inverter_efficiency_nget, self->data_ptr);
@@ -1088,6 +1130,12 @@ static PyObject *
 Outputs_get_snow(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Pvwattsv8_Outputs_snow_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_soiling_f(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvwattsv8_Outputs_soiling_f_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -1184,6 +1232,9 @@ static PyGetSetDef Outputs_getset[] = {
 {"ac_pre_adjust", (getter)Outputs_get_ac_pre_adjust,(setter)0,
 	PyDoc_STR("*sequence*: AC inverter output power before system availability [W]"),
  	NULL},
+{"alb", (getter)Outputs_get_alb,(setter)0,
+	PyDoc_STR("*sequence*: Albedo"),
+ 	NULL},
 {"annual_energy", (getter)Outputs_get_annual_energy,(setter)0,
 	PyDoc_STR("*float*: Annual energy [kWh]"),
  	NULL},
@@ -1191,7 +1242,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence[sequence]*: Annual energy production as function of time [kW]"),
  	NULL},
 {"aoi", (getter)Outputs_get_aoi,(setter)0,
-	PyDoc_STR("*sequence*: Angle of incidence [deg]"),
+	PyDoc_STR("*sequence*: Angle of incidence [degrees]"),
  	NULL},
 {"capacity_factor", (getter)Outputs_get_capacity_factor,(setter)0,
 	PyDoc_STR("*float*: Capacity factor based on nameplate DC capacity [%]"),
@@ -1226,6 +1277,9 @@ static PyGetSetDef Outputs_getset[] = {
 {"gh", (getter)Outputs_get_gh,(setter)0,
 	PyDoc_STR("*sequence*: Weather file global horizontal irradiance [W/m2]"),
  	NULL},
+{"inv_eff_output", (getter)Outputs_get_inv_eff_output,(setter)0,
+	PyDoc_STR("*sequence*: Inverter efficiency [%]"),
+ 	NULL},
 {"inverter_efficiency", (getter)Outputs_get_inverter_efficiency,(setter)0,
 	PyDoc_STR("*float*: Inverter efficiency at rated power [%]"),
  	NULL},
@@ -1233,13 +1287,13 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*float*: Energy yield [kWh/kW]"),
  	NULL},
 {"lat", (getter)Outputs_get_lat,(setter)0,
-	PyDoc_STR("*float*: Latitude [deg]"),
+	PyDoc_STR("*float*: Latitude [degrees]"),
  	NULL},
 {"location", (getter)Outputs_get_location,(setter)0,
 	PyDoc_STR("*str*: Location ID"),
  	NULL},
 {"lon", (getter)Outputs_get_lon,(setter)0,
-	PyDoc_STR("*float*: Longitude [deg]"),
+	PyDoc_STR("*float*: Longitude [degrees]"),
  	NULL},
 {"monthly_energy", (getter)Outputs_get_monthly_energy,(setter)0,
 	PyDoc_STR("*sequence*: Monthly energy [kWh]"),
@@ -1258,6 +1312,9 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"snow", (getter)Outputs_get_snow,(setter)0,
 	PyDoc_STR("*sequence*: Weather file snow depth [cm]"),
+ 	NULL},
+{"soiling_f", (getter)Outputs_get_soiling_f,(setter)0,
+	PyDoc_STR("*sequence*: Soiling factor"),
  	NULL},
 {"solrad_annual", (getter)Outputs_get_solrad_annual,(setter)0,
 	PyDoc_STR("*float*: Daily average solar irradiance [kWh/m2/day]"),
@@ -1293,7 +1350,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*float*: Time offset for interpreting time series outputs [hours]"),
  	NULL},
 {"tz", (getter)Outputs_get_tz,(setter)0,
-	PyDoc_STR("*float*: Time zone [hr]"),
+	PyDoc_STR("*float*: Time zone [UTC offset]"),
  	NULL},
 {"wspd", (getter)Outputs_get_wspd,(setter)0,
 	PyDoc_STR("*sequence*: Weather file wind speed [m/s]"),

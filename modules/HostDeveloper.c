@@ -1753,13 +1753,13 @@ static PyMethodDef TaxCreditIncentives_methods[] = {
 static PyObject *
 TaxCreditIncentives_get_itc_fed_amount(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_HostDeveloper_TaxCreditIncentives_itc_fed_amount_nget, self->data_ptr);
+	return PySAM_array_getter(SAM_HostDeveloper_TaxCreditIncentives_itc_fed_amount_aget, self->data_ptr);
 }
 
 static int
 TaxCreditIncentives_set_itc_fed_amount(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_HostDeveloper_TaxCreditIncentives_itc_fed_amount_nset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_HostDeveloper_TaxCreditIncentives_itc_fed_amount_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -1789,13 +1789,13 @@ TaxCreditIncentives_set_itc_fed_amount_deprbas_sta(VarGroupObject *self, PyObjec
 static PyObject *
 TaxCreditIncentives_get_itc_fed_percent(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_HostDeveloper_TaxCreditIncentives_itc_fed_percent_nget, self->data_ptr);
+	return PySAM_array_getter(SAM_HostDeveloper_TaxCreditIncentives_itc_fed_percent_aget, self->data_ptr);
 }
 
 static int
 TaxCreditIncentives_set_itc_fed_percent(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_HostDeveloper_TaxCreditIncentives_itc_fed_percent_nset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_HostDeveloper_TaxCreditIncentives_itc_fed_percent_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -1825,25 +1825,25 @@ TaxCreditIncentives_set_itc_fed_percent_deprbas_sta(VarGroupObject *self, PyObje
 static PyObject *
 TaxCreditIncentives_get_itc_fed_percent_maxvalue(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_HostDeveloper_TaxCreditIncentives_itc_fed_percent_maxvalue_nget, self->data_ptr);
+	return PySAM_array_getter(SAM_HostDeveloper_TaxCreditIncentives_itc_fed_percent_maxvalue_aget, self->data_ptr);
 }
 
 static int
 TaxCreditIncentives_set_itc_fed_percent_maxvalue(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_HostDeveloper_TaxCreditIncentives_itc_fed_percent_maxvalue_nset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_HostDeveloper_TaxCreditIncentives_itc_fed_percent_maxvalue_aset, self->data_ptr);
 }
 
 static PyObject *
 TaxCreditIncentives_get_itc_sta_amount(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_HostDeveloper_TaxCreditIncentives_itc_sta_amount_nget, self->data_ptr);
+	return PySAM_array_getter(SAM_HostDeveloper_TaxCreditIncentives_itc_sta_amount_aget, self->data_ptr);
 }
 
 static int
 TaxCreditIncentives_set_itc_sta_amount(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_HostDeveloper_TaxCreditIncentives_itc_sta_amount_nset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_HostDeveloper_TaxCreditIncentives_itc_sta_amount_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -1873,13 +1873,13 @@ TaxCreditIncentives_set_itc_sta_amount_deprbas_sta(VarGroupObject *self, PyObjec
 static PyObject *
 TaxCreditIncentives_get_itc_sta_percent(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_HostDeveloper_TaxCreditIncentives_itc_sta_percent_nget, self->data_ptr);
+	return PySAM_array_getter(SAM_HostDeveloper_TaxCreditIncentives_itc_sta_percent_aget, self->data_ptr);
 }
 
 static int
 TaxCreditIncentives_set_itc_sta_percent(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_HostDeveloper_TaxCreditIncentives_itc_sta_percent_nset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_HostDeveloper_TaxCreditIncentives_itc_sta_percent_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -1909,13 +1909,13 @@ TaxCreditIncentives_set_itc_sta_percent_deprbas_sta(VarGroupObject *self, PyObje
 static PyObject *
 TaxCreditIncentives_get_itc_sta_percent_maxvalue(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_HostDeveloper_TaxCreditIncentives_itc_sta_percent_maxvalue_nget, self->data_ptr);
+	return PySAM_array_getter(SAM_HostDeveloper_TaxCreditIncentives_itc_sta_percent_maxvalue_aget, self->data_ptr);
 }
 
 static int
 TaxCreditIncentives_set_itc_sta_percent_maxvalue(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_HostDeveloper_TaxCreditIncentives_itc_sta_percent_maxvalue_nset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_HostDeveloper_TaxCreditIncentives_itc_sta_percent_maxvalue_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -1992,7 +1992,7 @@ TaxCreditIncentives_set_ptc_sta_term(VarGroupObject *self, PyObject *value, void
 
 static PyGetSetDef TaxCreditIncentives_getset[] = {
 {"itc_fed_amount", (getter)TaxCreditIncentives_get_itc_fed_amount,(setter)TaxCreditIncentives_set_itc_fed_amount,
-	PyDoc_STR("*float*: Federal amount-based ITC amount [$]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*sequence*: Federal amount-based ITC amount [$]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"itc_fed_amount_deprbas_fed", (getter)TaxCreditIncentives_get_itc_fed_amount_deprbas_fed,(setter)TaxCreditIncentives_set_itc_fed_amount_deprbas_fed,
 	PyDoc_STR("*float*: Federal amount-based ITC reduces federal depreciation basis [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
@@ -2001,7 +2001,7 @@ static PyGetSetDef TaxCreditIncentives_getset[] = {
 	PyDoc_STR("*float*: Federal amount-based ITC reduces state depreciation basis [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"itc_fed_percent", (getter)TaxCreditIncentives_get_itc_fed_percent,(setter)TaxCreditIncentives_set_itc_fed_percent,
-	PyDoc_STR("*float*: Federal percentage-based ITC percent [%]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*sequence*: Federal percentage-based ITC percent [%]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"itc_fed_percent_deprbas_fed", (getter)TaxCreditIncentives_get_itc_fed_percent_deprbas_fed,(setter)TaxCreditIncentives_set_itc_fed_percent_deprbas_fed,
 	PyDoc_STR("*float*: Federal percentage-based ITC reduces federal depreciation basis [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
@@ -2010,10 +2010,10 @@ static PyGetSetDef TaxCreditIncentives_getset[] = {
 	PyDoc_STR("*float*: Federal percentage-based ITC reduces state depreciation basis [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"itc_fed_percent_maxvalue", (getter)TaxCreditIncentives_get_itc_fed_percent_maxvalue,(setter)TaxCreditIncentives_set_itc_fed_percent_maxvalue,
-	PyDoc_STR("*float*: Federal percentage-based ITC maximum value [$]\n\n**Required:**\nFalse. Automatically set to 1e99 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*sequence*: Federal percentage-based ITC maximum value [$]\n\n**Required:**\nFalse. Automatically set to 1e99 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"itc_sta_amount", (getter)TaxCreditIncentives_get_itc_sta_amount,(setter)TaxCreditIncentives_set_itc_sta_amount,
-	PyDoc_STR("*float*: State amount-based ITC amount [$]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*sequence*: State amount-based ITC amount [$]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"itc_sta_amount_deprbas_fed", (getter)TaxCreditIncentives_get_itc_sta_amount_deprbas_fed,(setter)TaxCreditIncentives_set_itc_sta_amount_deprbas_fed,
 	PyDoc_STR("*float*: State amount-based ITC reduces federal depreciation basis [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
@@ -2022,7 +2022,7 @@ static PyGetSetDef TaxCreditIncentives_getset[] = {
 	PyDoc_STR("*float*: State amount-based ITC reduces state depreciation basis [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"itc_sta_percent", (getter)TaxCreditIncentives_get_itc_sta_percent,(setter)TaxCreditIncentives_set_itc_sta_percent,
-	PyDoc_STR("*float*: State percentage-based ITC percent [%]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*sequence*: State percentage-based ITC percent [%]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"itc_sta_percent_deprbas_fed", (getter)TaxCreditIncentives_get_itc_sta_percent_deprbas_fed,(setter)TaxCreditIncentives_set_itc_sta_percent_deprbas_fed,
 	PyDoc_STR("*float*: State percentage-based ITC reduces federal depreciation basis [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
@@ -2031,7 +2031,7 @@ static PyGetSetDef TaxCreditIncentives_getset[] = {
 	PyDoc_STR("*float*: State percentage-based ITC reduces state depreciation basis [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"itc_sta_percent_maxvalue", (getter)TaxCreditIncentives_get_itc_sta_percent_maxvalue,(setter)TaxCreditIncentives_set_itc_sta_percent_maxvalue,
-	PyDoc_STR("*float*: State percentage-based ITC maximum Value [$]\n\n**Required:**\nFalse. Automatically set to 1e99 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*sequence*: State percentage-based ITC maximum Value [$]\n\n**Required:**\nFalse. Automatically set to 1e99 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ptc_fed_amount", (getter)TaxCreditIncentives_get_ptc_fed_amount,(setter)TaxCreditIncentives_set_ptc_fed_amount,
 	PyDoc_STR("*sequence*: Federal PTC amount [$/kWh]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
@@ -4746,6 +4746,18 @@ static PyMethodDef ChargesByMonth_methods[] = {
 };
 
 static PyObject *
+ChargesByMonth_get_charge_w_sys_dc_tou_ym(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_HostDeveloper_ChargesByMonth_charge_w_sys_dc_tou_ym_mget, self->data_ptr);
+}
+
+static int
+ChargesByMonth_set_charge_w_sys_dc_tou_ym(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_HostDeveloper_ChargesByMonth_charge_w_sys_dc_tou_ym_mset, self->data_ptr);
+}
+
+static PyObject *
 ChargesByMonth_get_charge_w_sys_ec_ym(VarGroupObject *self, void *closure)
 {
 	return PySAM_matrix_getter(SAM_HostDeveloper_ChargesByMonth_charge_w_sys_ec_ym_mget, self->data_ptr);
@@ -4805,7 +4817,22 @@ ChargesByMonth_set_true_up_credits_ym(VarGroupObject *self, PyObject *value, voi
 		return PySAM_matrix_setter(value, SAM_HostDeveloper_ChargesByMonth_true_up_credits_ym_mset, self->data_ptr);
 }
 
+static PyObject *
+ChargesByMonth_get_utility_bill_w_sys(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_HostDeveloper_ChargesByMonth_utility_bill_w_sys_aget, self->data_ptr);
+}
+
+static int
+ChargesByMonth_set_utility_bill_w_sys(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_HostDeveloper_ChargesByMonth_utility_bill_w_sys_aset, self->data_ptr);
+}
+
 static PyGetSetDef ChargesByMonth_getset[] = {
+{"charge_w_sys_dc_tou_ym", (getter)ChargesByMonth_get_charge_w_sys_dc_tou_ym,(setter)ChargesByMonth_set_charge_w_sys_dc_tou_ym,
+	PyDoc_STR("*sequence[sequence]*: Demand charge with system (TOU) [$]\n\n**Required:**\nTrue"),
+ 	NULL},
 {"charge_w_sys_ec_ym", (getter)ChargesByMonth_get_charge_w_sys_ec_ym,(setter)ChargesByMonth_set_charge_w_sys_ec_ym,
 	PyDoc_STR("*sequence[sequence]*: Energy charge with system [$]"),
  	NULL},
@@ -4820,6 +4847,9 @@ static PyGetSetDef ChargesByMonth_getset[] = {
  	NULL},
 {"true_up_credits_ym", (getter)ChargesByMonth_get_true_up_credits_ym,(setter)ChargesByMonth_set_true_up_credits_ym,
 	PyDoc_STR("*sequence[sequence]*: Net annual true-up payments [$]"),
+ 	NULL},
+{"utility_bill_w_sys", (getter)ChargesByMonth_get_utility_bill_w_sys,(setter)ChargesByMonth_set_utility_bill_w_sys,
+	PyDoc_STR("*sequence*: Electricity bill for system [$]\n\n**Required:**\nTrue"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -4943,6 +4973,30 @@ static PyMethodDef SystemOutput_methods[] = {
 };
 
 static PyObject *
+SystemOutput_get_annual_energy_value(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_HostDeveloper_SystemOutput_annual_energy_value_aget, self->data_ptr);
+}
+
+static int
+SystemOutput_set_annual_energy_value(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_HostDeveloper_SystemOutput_annual_energy_value_aset, self->data_ptr);
+}
+
+static PyObject *
+SystemOutput_get_annual_thermal_value(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_HostDeveloper_SystemOutput_annual_thermal_value_aget, self->data_ptr);
+}
+
+static int
+SystemOutput_set_annual_thermal_value(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_HostDeveloper_SystemOutput_annual_thermal_value_aset, self->data_ptr);
+}
+
+static PyObject *
 SystemOutput_get_degradation(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_HostDeveloper_SystemOutput_degradation_aget, self->data_ptr);
@@ -4952,6 +5006,18 @@ static int
 SystemOutput_set_degradation(VarGroupObject *self, PyObject *value, void *closure)
 {
 	return PySAM_array_setter(value, SAM_HostDeveloper_SystemOutput_degradation_aset, self->data_ptr);
+}
+
+static PyObject *
+SystemOutput_get_gen(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_HostDeveloper_SystemOutput_gen_aget, self->data_ptr);
+}
+
+static int
+SystemOutput_set_gen(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_HostDeveloper_SystemOutput_gen_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -4979,8 +5045,17 @@ SystemOutput_set_system_capacity(VarGroupObject *self, PyObject *value, void *cl
 }
 
 static PyGetSetDef SystemOutput_getset[] = {
+{"annual_energy_value", (getter)SystemOutput_get_annual_energy_value,(setter)SystemOutput_set_annual_energy_value,
+	PyDoc_STR("*sequence*: Energy value [$]\n\n**Required:**\nTrue"),
+ 	NULL},
+{"annual_thermal_value", (getter)SystemOutput_get_annual_thermal_value,(setter)SystemOutput_set_annual_thermal_value,
+	PyDoc_STR("*sequence*: Energy value [$]"),
+ 	NULL},
 {"degradation", (getter)SystemOutput_get_degradation,(setter)SystemOutput_set_degradation,
 	PyDoc_STR("*sequence*: Annual energy degradation\n\n**Required:**\nTrue"),
+ 	NULL},
+{"gen", (getter)SystemOutput_get_gen,(setter)SystemOutput_set_gen,
+	PyDoc_STR("*sequence*: Power generated by renewable resource [kW]\n\n**Required:**\nTrue"),
  	NULL},
 {"gen_purchases", (getter)SystemOutput_get_gen_purchases,(setter)SystemOutput_set_gen_purchases,
 	PyDoc_STR("*sequence*: Electricity from grid [kW]"),
@@ -5981,6 +6056,18 @@ BatterySystem_set_en_standalone_batt(VarGroupObject *self, PyObject *value, void
 	return PySAM_double_setter(value, SAM_HostDeveloper_BatterySystem_en_standalone_batt_nset, self->data_ptr);
 }
 
+static PyObject *
+BatterySystem_get_en_wave_batt(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_HostDeveloper_BatterySystem_en_wave_batt_nget, self->data_ptr);
+}
+
+static int
+BatterySystem_set_en_wave_batt(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_HostDeveloper_BatterySystem_en_wave_batt_nset, self->data_ptr);
+}
+
 static PyGetSetDef BatterySystem_getset[] = {
 {"batt_bank_replacement", (getter)BatterySystem_get_batt_bank_replacement,(setter)BatterySystem_set_batt_bank_replacement,
 	PyDoc_STR("*sequence*: Battery bank replacements per year [number/year]"),
@@ -6001,6 +6088,9 @@ static PyGetSetDef BatterySystem_getset[] = {
 	PyDoc_STR("*float*: Enable battery storage model [0/1]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"en_standalone_batt", (getter)BatterySystem_get_en_standalone_batt,(setter)BatterySystem_set_en_standalone_batt,
+	PyDoc_STR("*float*: Enable standalone battery storage model [0/1]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"en_wave_batt", (getter)BatterySystem_get_en_wave_batt,(setter)BatterySystem_set_en_wave_batt,
 	PyDoc_STR("*float*: Enable standalone battery storage model [0/1]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 	{NULL}  /* Sentinel */
@@ -6402,6 +6492,143 @@ static PyTypeObject LCOS_Type = {
 		LCOS_methods,         /*tp_methods*/
 		0,                          /*tp_members*/
 		LCOS_getset,          /*tp_getset*/
+		0,                          /*tp_base*/
+		0,                          /*tp_dict*/
+		0,                          /*tp_descr_get*/
+		0,                          /*tp_descr_set*/
+		0,                          /*tp_dictofnset*/
+		0,                          /*tp_init*/
+		0,                          /*tp_alloc*/
+		0,             /*tp_new*/
+		0,                          /*tp_free*/
+		0,                          /*tp_is_gc*/
+};
+
+
+/*
+ * ElectricityRates Group
+ */ 
+
+static PyTypeObject ElectricityRates_Type;
+
+static PyObject *
+ElectricityRates_new(SAM_HostDeveloper data_ptr)
+{
+	PyObject* new_obj = ElectricityRates_Type.tp_alloc(&ElectricityRates_Type,0);
+
+	VarGroupObject* ElectricityRates_obj = (VarGroupObject*)new_obj;
+
+	ElectricityRates_obj->data_ptr = (SAM_table)data_ptr;
+
+	return new_obj;
+}
+
+/* ElectricityRates methods */
+
+static PyObject *
+ElectricityRates_assign(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "HostDeveloper", "ElectricityRates")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+ElectricityRates_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &ElectricityRates_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "HostDeveloper", "ElectricityRates")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+ElectricityRates_export(VarGroupObject *self, PyObject *args)
+{
+	PyTypeObject* tp = &ElectricityRates_Type;
+	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
+	return dict;
+}
+
+static PyMethodDef ElectricityRates_methods[] = {
+		{"assign",            (PyCFunction)ElectricityRates_assign,  METH_VARARGS,
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``ElectricityRates_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)ElectricityRates_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``ElectricityRates_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)ElectricityRates_export,  METH_VARARGS,
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
+		{NULL,              NULL}           /* sentinel */
+};
+
+static PyObject *
+ElectricityRates_get_rate_escalation(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_HostDeveloper_ElectricityRates_rate_escalation_aget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_rate_escalation(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_HostDeveloper_ElectricityRates_rate_escalation_aset, self->data_ptr);
+}
+
+static PyGetSetDef ElectricityRates_getset[] = {
+{"rate_escalation", (getter)ElectricityRates_get_rate_escalation,(setter)ElectricityRates_set_rate_escalation,
+	PyDoc_STR("*sequence*: Annual electricity rate escalation [%/year]"),
+ 	NULL},
+	{NULL}  /* Sentinel */
+};
+
+static PyTypeObject ElectricityRates_Type = {
+		/* The ob_type field must be initialized in the module init function
+		 * to be portable to Windows without using C++. */
+		PyVarObject_HEAD_INIT(NULL, 0)
+		"HostDeveloper.ElectricityRates",             /*tp_name*/
+		sizeof(VarGroupObject),          /*tp_basicsize*/
+		0,                          /*tp_itemsize*/
+		/* methods */
+		0,    /*tp_dealloc*/
+		0,                          /*tp_print*/
+		(getattrfunc)0,             /*tp_getattr*/
+		0,                          /*tp_setattr*/
+		0,                          /*tp_reserved*/
+		0,                          /*tp_repr*/
+		0,                          /*tp_as_number*/
+		0,                          /*tp_as_sequence*/
+		0,                          /*tp_as_mapping*/
+		0,                          /*tp_hash*/
+		0,                          /*tp_call*/
+		0,                          /*tp_str*/
+		0,                          /*tp_getattro*/
+		0,                          /*tp_setattro*/
+		0,                          /*tp_as_buffer*/
+		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
+		0,                          /*tp_doc*/
+		0,                          /*tp_traverse*/
+		0,                          /*tp_clear*/
+		0,                          /*tp_richcompare*/
+		0,                          /*tp_weaklistofnset*/
+		0,                          /*tp_iter*/
+		0,                          /*tp_iternext*/
+		ElectricityRates_methods,         /*tp_methods*/
+		0,                          /*tp_members*/
+		ElectricityRates_getset,          /*tp_getset*/
 		0,                          /*tp_base*/
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
@@ -7048,6 +7275,48 @@ static PyObject *
 Outputs_get_cf_insurance_expense(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_HostDeveloper_Outputs_cf_insurance_expense_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_itc_fed(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_HostDeveloper_Outputs_cf_itc_fed_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_itc_fed_amount(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_HostDeveloper_Outputs_cf_itc_fed_amount_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_itc_fed_percent_amount(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_HostDeveloper_Outputs_cf_itc_fed_percent_amount_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_itc_sta(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_HostDeveloper_Outputs_cf_itc_sta_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_itc_sta_amount(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_HostDeveloper_Outputs_cf_itc_sta_amount_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_itc_sta_percent_amount(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_HostDeveloper_Outputs_cf_itc_sta_percent_amount_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_itc_total(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_HostDeveloper_Outputs_cf_itc_total_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -9199,12 +9468,6 @@ Outputs_get_flip_target_year(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_gen_purchases(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_HostDeveloper_Outputs_gen_purchases_aget, self->data_ptr);
-}
-
-static PyObject *
 Outputs_get_host_nominal_discount_rate(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_HostDeveloper_Outputs_host_nominal_discount_rate_nget, self->data_ptr);
@@ -10111,6 +10374,27 @@ static PyGetSetDef Outputs_getset[] = {
 {"cf_insurance_expense", (getter)Outputs_get_cf_insurance_expense,(setter)0,
 	PyDoc_STR("*sequence*: Insurance expense [$]"),
  	NULL},
+{"cf_itc_fed", (getter)Outputs_get_cf_itc_fed,(setter)0,
+	PyDoc_STR("*sequence*: Federal ITC total income [$]"),
+ 	NULL},
+{"cf_itc_fed_amount", (getter)Outputs_get_cf_itc_fed_amount,(setter)0,
+	PyDoc_STR("*sequence*: Federal ITC amount income [$]"),
+ 	NULL},
+{"cf_itc_fed_percent_amount", (getter)Outputs_get_cf_itc_fed_percent_amount,(setter)0,
+	PyDoc_STR("*sequence*: Federal ITC percent income [$]"),
+ 	NULL},
+{"cf_itc_sta", (getter)Outputs_get_cf_itc_sta,(setter)0,
+	PyDoc_STR("*sequence*: State ITC total income [$]"),
+ 	NULL},
+{"cf_itc_sta_amount", (getter)Outputs_get_cf_itc_sta_amount,(setter)0,
+	PyDoc_STR("*sequence*: State ITC amount income [$]"),
+ 	NULL},
+{"cf_itc_sta_percent_amount", (getter)Outputs_get_cf_itc_sta_percent_amount,(setter)0,
+	PyDoc_STR("*sequence*: State ITC percent income [$]"),
+ 	NULL},
+{"cf_itc_total", (getter)Outputs_get_cf_itc_total,(setter)0,
+	PyDoc_STR("*sequence*: Total ITC income [$]"),
+ 	NULL},
 {"cf_land_lease_expense", (getter)Outputs_get_cf_land_lease_expense,(setter)0,
 	PyDoc_STR("*sequence*: Land lease expense [$]"),
  	NULL},
@@ -10283,7 +10567,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: State PTC income [$]"),
  	NULL},
 {"cf_ptc_total", (getter)Outputs_get_cf_ptc_total,(setter)0,
-	PyDoc_STR("*sequence*: Total PTC [$]"),
+	PyDoc_STR("*sequence*: Total PTC income [$]"),
  	NULL},
 {"cf_pv_cash_for_ds", (getter)Outputs_get_cf_pv_cash_for_ds,(setter)0,
 	PyDoc_STR("*sequence*: Present value of CAFDS [$]"),
@@ -10463,7 +10747,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Total revenue [$]"),
  	NULL},
 {"cf_util_escal_rate", (getter)Outputs_get_cf_util_escal_rate,(setter)0,
-	PyDoc_STR("*sequence*: Annual battery salvage value costs [$]"),
+	PyDoc_STR("*sequence*: Utility escalation rate"),
  	NULL},
 {"cost_debt_upfront", (getter)Outputs_get_cost_debt_upfront,(setter)0,
 	PyDoc_STR("*float*: Debt up-front fee [$]"),
@@ -11185,9 +11469,6 @@ static PyGetSetDef Outputs_getset[] = {
 {"flip_target_year", (getter)Outputs_get_flip_target_year,(setter)0,
 	PyDoc_STR("*float*: Target year to meet IRR"),
  	NULL},
-{"gen_purchases", (getter)Outputs_get_gen_purchases,(setter)0,
-	PyDoc_STR("*sequence*: Electricity from grid [kW]"),
- 	NULL},
 {"host_nominal_discount_rate", (getter)Outputs_get_host_nominal_discount_rate,(setter)0,
 	PyDoc_STR("*float*: Host nominal discount rate [%]"),
  	NULL},
@@ -11631,6 +11912,10 @@ newHostDeveloperObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "LCOS", LCOS_obj);
 	Py_DECREF(LCOS_obj);
 
+	PyObject* ElectricityRates_obj = ElectricityRates_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "ElectricityRates", ElectricityRates_obj);
+	Py_DECREF(ElectricityRates_obj);
+
 	PyObject* Outputs_obj = Outputs_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
 	Py_DECREF(Outputs_obj);
@@ -12030,6 +12315,13 @@ HostDeveloperModule_exec(PyObject *m)
 				"LCOS",
 				(PyObject*)&LCOS_Type);
 	Py_DECREF(&LCOS_Type);
+
+	/// Add the ElectricityRates type object to HostDeveloper_Type
+	if (PyType_Ready(&ElectricityRates_Type) < 0) { goto fail; }
+	PyDict_SetItemString(HostDeveloper_Type.tp_dict,
+				"ElectricityRates",
+				(PyObject*)&ElectricityRates_Type);
+	Py_DECREF(&ElectricityRates_Type);
 
 	/// Add the Outputs type object to HostDeveloper_Type
 	if (PyType_Ready(&Outputs_Type) < 0) { goto fail; }

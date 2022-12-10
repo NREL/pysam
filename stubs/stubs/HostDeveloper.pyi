@@ -162,20 +162,20 @@ class HostDeveloper(object):
 			pass
 
 
-		itc_fed_amount = float
+		itc_fed_amount = tuple
 		itc_fed_amount_deprbas_fed = float
 		itc_fed_amount_deprbas_sta = float
-		itc_fed_percent = float
+		itc_fed_percent = tuple
 		itc_fed_percent_deprbas_fed = float
 		itc_fed_percent_deprbas_sta = float
-		itc_fed_percent_maxvalue = float
-		itc_sta_amount = float
+		itc_fed_percent_maxvalue = tuple
+		itc_sta_amount = tuple
 		itc_sta_amount_deprbas_fed = float
 		itc_sta_amount_deprbas_sta = float
-		itc_sta_percent = float
+		itc_sta_percent = tuple
 		itc_sta_percent_deprbas_fed = float
 		itc_sta_percent_deprbas_sta = float
-		itc_sta_percent_maxvalue = float
+		itc_sta_percent_maxvalue = tuple
 		ptc_fed_amount = tuple
 		ptc_fed_escal = float
 		ptc_fed_term = float
@@ -386,11 +386,13 @@ class HostDeveloper(object):
 			pass
 
 
+		charge_w_sys_dc_tou_ym = tuple
 		charge_w_sys_ec_ym = tuple
 		charge_w_sys_fixed_ym = tuple
 		net_billing_credits_ym = tuple
 		nm_dollars_applied_ym = tuple
 		true_up_credits_ym = tuple
+		utility_bill_w_sys = tuple
 
 
 	class SystemOutput(object):
@@ -404,7 +406,10 @@ class HostDeveloper(object):
 			pass
 
 
+		annual_energy_value = tuple
+		annual_thermal_value = tuple
 		degradation = tuple
+		gen = tuple
 		gen_purchases = tuple
 		system_capacity = float
 
@@ -499,6 +504,7 @@ class HostDeveloper(object):
 		battery_per_kWh = float
 		en_batt = float
 		en_standalone_batt = float
+		en_wave_batt = float
 
 
 	class LCOS(object):
@@ -528,6 +534,20 @@ class HostDeveloper(object):
 		year1_monthly_ec_charge_gross_with_system = tuple
 		year1_monthly_ec_charge_with_system = tuple
 		year1_monthly_electricity_to_grid = tuple
+
+
+	class ElectricityRates(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		rate_escalation = tuple
 
 
 	class Outputs(object):
@@ -635,6 +655,13 @@ class HostDeveloper(object):
 		cf_funding_om = tuple
 		cf_funding_receivables = tuple
 		cf_insurance_expense = tuple
+		cf_itc_fed = tuple
+		cf_itc_fed_amount = tuple
+		cf_itc_fed_percent_amount = tuple
+		cf_itc_sta = tuple
+		cf_itc_sta_amount = tuple
+		cf_itc_sta_percent_amount = tuple
+		cf_itc_total = tuple
 		cf_land_lease_expense = tuple
 		cf_length = float
 		cf_net_salvage_value = tuple
@@ -993,7 +1020,6 @@ class HostDeveloper(object):
 		flip_actual_year = float
 		flip_target_irr = float
 		flip_target_year = float
-		gen_purchases = tuple
 		host_nominal_discount_rate = float
 		ibi_fedtax_total = float
 		ibi_statax_total = float
