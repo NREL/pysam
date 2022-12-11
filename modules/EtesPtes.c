@@ -69,11 +69,11 @@ SolarResource_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef SolarResource_methods[] = {
 		{"assign",            (PyCFunction)SolarResource_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``SolarResource_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``SolarResource_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)SolarResource_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``SolarResource_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``SolarResource_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)SolarResource_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -91,7 +91,7 @@ SolarResource_set_solar_resource_file(VarGroupObject *self, PyObject *value, voi
 
 static PyGetSetDef SolarResource_getset[] = {
 {"solar_resource_file", (getter)SolarResource_get_solar_resource_file,(setter)SolarResource_set_solar_resource_file,
-	PyDoc_STR("*str*: Local weather file path\n\n*Constraints*: LOCAL_FILE\n\n*Required*: False"),
+	PyDoc_STR("*str*: Local weather file path\n\n**Constraints:**\nLOCAL_FILE\n\n**Required:**\nFalse for configuration with default inputs. May be required if a variable dependent on its value changes. Example: For the Detailed PV - Single Owner configuration, only Subarray 1 is enabled in the configuration defaults, so Subarray 2 inputs would not be required; if Subarray 2 is enabled, then Subarray 2 inputs is required."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -206,11 +206,11 @@ SystemControl_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef SystemControl_methods[] = {
 		{"assign",            (PyCFunction)SystemControl_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``SystemControl_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``SystemControl_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)SystemControl_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``SystemControl_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``SystemControl_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)SystemControl_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -552,88 +552,88 @@ SystemControl_set_vacuum_arrays(VarGroupObject *self, PyObject *value, void *clo
 
 static PyGetSetDef SystemControl_getset[] = {
 {"bop_par", (getter)SystemControl_get_bop_par,(setter)SystemControl_set_bop_par,
-	PyDoc_STR("*float*: Balance of plant parasitic power fraction [MWe/MWcap]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Balance of plant parasitic power fraction [MWe/MWcap]\n\n**Required:**\nTrue"),
  	NULL},
 {"bop_par_0", (getter)SystemControl_get_bop_par_0,(setter)SystemControl_set_bop_par_0,
-	PyDoc_STR("*float*: Balance of plant parasitic power fraction - const coeff\n\n*Required*: True"),
+	PyDoc_STR("*float*: Balance of plant parasitic power fraction - const coeff\n\n**Required:**\nTrue"),
  	NULL},
 {"bop_par_1", (getter)SystemControl_get_bop_par_1,(setter)SystemControl_set_bop_par_1,
-	PyDoc_STR("*float*: Balance of plant parasitic power fraction - linear coeff\n\n*Required*: True"),
+	PyDoc_STR("*float*: Balance of plant parasitic power fraction - linear coeff\n\n**Required:**\nTrue"),
  	NULL},
 {"bop_par_2", (getter)SystemControl_get_bop_par_2,(setter)SystemControl_set_bop_par_2,
-	PyDoc_STR("*float*: Balance of plant parasitic power fraction - quadratic coeff\n\n*Required*: True"),
+	PyDoc_STR("*float*: Balance of plant parasitic power fraction - quadratic coeff\n\n**Required:**\nTrue"),
  	NULL},
 {"bop_par_f", (getter)SystemControl_get_bop_par_f,(setter)SystemControl_set_bop_par_f,
-	PyDoc_STR("*float*: Balance of plant parasitic power fraction - mult frac\n\n*Required*: True"),
+	PyDoc_STR("*float*: Balance of plant parasitic power fraction - mult frac\n\n**Required:**\nTrue"),
  	NULL},
 {"disp_csu_cost", (getter)SystemControl_get_disp_csu_cost,(setter)SystemControl_set_disp_csu_cost,
-	PyDoc_STR("*float*: Cycle startup cost [$/MWe-cycle/start]\n\n*Required*: True if is_dispatch=1"),
+	PyDoc_STR("*float*: Cycle startup cost [$/MWe-cycle/start]\n\n**Required:**\nRequired if is_dispatch=1"),
  	NULL},
 {"disp_down_time_min", (getter)SystemControl_get_disp_down_time_min,(setter)SystemControl_set_disp_down_time_min,
-	PyDoc_STR("*float*: Minimum time requirement for cycle to not generate power [hr]\n\n*Required*: True if is_dispatch=1"),
+	PyDoc_STR("*float*: Minimum time requirement for cycle to not generate power [hr]\n\n**Required:**\nRequired if is_dispatch=1"),
  	NULL},
 {"disp_frequency", (getter)SystemControl_get_disp_frequency,(setter)SystemControl_set_disp_frequency,
-	PyDoc_STR("*float*: Frequency for dispatch optimization calculations [hour]\n\n*Required*: True if is_dispatch=1"),
+	PyDoc_STR("*float*: Frequency for dispatch optimization calculations [hour]\n\n**Required:**\nRequired if is_dispatch=1"),
  	NULL},
 {"disp_horizon", (getter)SystemControl_get_disp_horizon,(setter)SystemControl_set_disp_horizon,
-	PyDoc_STR("*float*: Time horizon for dispatch optimization [hour]\n\n*Required*: True if is_dispatch=1"),
+	PyDoc_STR("*float*: Time horizon for dispatch optimization [hour]\n\n**Required:**\nRequired if is_dispatch=1"),
  	NULL},
 {"disp_hsu_cost", (getter)SystemControl_get_disp_hsu_cost,(setter)SystemControl_set_disp_hsu_cost,
-	PyDoc_STR("*float*: Heater startup cost [$/MWe-cycle/start]\n\n*Required*: True if is_dispatch=1"),
+	PyDoc_STR("*float*: Heater startup cost [$/MWe-cycle/start]\n\n**Required:**\nRequired if is_dispatch=1"),
  	NULL},
 {"disp_max_iter", (getter)SystemControl_get_disp_max_iter,(setter)SystemControl_set_disp_max_iter,
-	PyDoc_STR("*float*: Max number of dispatch optimization iterations\n\n*Required*: True if is_dispatch=1"),
+	PyDoc_STR("*float*: Max number of dispatch optimization iterations\n\n**Required:**\nRequired if is_dispatch=1"),
  	NULL},
 {"disp_mip_gap", (getter)SystemControl_get_disp_mip_gap,(setter)SystemControl_set_disp_mip_gap,
-	PyDoc_STR("*float*: Dispatch optimization solution tolerance\n\n*Required*: True if is_dispatch=1"),
+	PyDoc_STR("*float*: Dispatch optimization solution tolerance\n\n**Required:**\nRequired if is_dispatch=1"),
  	NULL},
 {"disp_pen_delta_w", (getter)SystemControl_get_disp_pen_delta_w,(setter)SystemControl_set_disp_pen_delta_w,
-	PyDoc_STR("*float*: Dispatch cycle production change penalty [$/MWe-change]\n\n*Required*: True if is_dispatch=1"),
+	PyDoc_STR("*float*: Dispatch cycle production change penalty [$/MWe-change]\n\n**Required:**\nRequired if is_dispatch=1"),
  	NULL},
 {"disp_reporting", (getter)SystemControl_get_disp_reporting,(setter)SystemControl_set_disp_reporting,
-	PyDoc_STR("*float*: Dispatch optimization reporting level\n\n*Required*: If not provided, assumed to be -1"),
+	PyDoc_STR("*float*: Dispatch optimization reporting level\n\n**Required:**\nFalse. Automatically set to -1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"disp_spec_bb", (getter)SystemControl_get_disp_spec_bb,(setter)SystemControl_set_disp_spec_bb,
-	PyDoc_STR("*float*: Dispatch optimization B&B heuristic\n\n*Required*: If not provided, assumed to be -1"),
+	PyDoc_STR("*float*: Dispatch optimization B&B heuristic\n\n**Required:**\nFalse. Automatically set to -1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"disp_spec_presolve", (getter)SystemControl_get_disp_spec_presolve,(setter)SystemControl_set_disp_spec_presolve,
-	PyDoc_STR("*float*: Dispatch optimization presolve heuristic\n\n*Required*: If not provided, assumed to be -1"),
+	PyDoc_STR("*float*: Dispatch optimization presolve heuristic\n\n**Required:**\nFalse. Automatically set to -1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"disp_spec_scaling", (getter)SystemControl_get_disp_spec_scaling,(setter)SystemControl_set_disp_spec_scaling,
-	PyDoc_STR("*float*: Dispatch optimization scaling heuristic\n\n*Required*: If not provided, assumed to be -1"),
+	PyDoc_STR("*float*: Dispatch optimization scaling heuristic\n\n**Required:**\nFalse. Automatically set to -1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"disp_steps_per_hour", (getter)SystemControl_get_disp_steps_per_hour,(setter)SystemControl_set_disp_steps_per_hour,
-	PyDoc_STR("*float*: Time steps per hour for dispatch optimization calculations\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: Time steps per hour for dispatch optimization calculations\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"disp_time_weighting", (getter)SystemControl_get_disp_time_weighting,(setter)SystemControl_set_disp_time_weighting,
-	PyDoc_STR("*float*: Dispatch optimization future time discounting factor\n\n*Required*: True if is_dispatch=1"),
+	PyDoc_STR("*float*: Dispatch optimization future time discounting factor\n\n**Required:**\nRequired if is_dispatch=1"),
  	NULL},
 {"disp_timeout", (getter)SystemControl_get_disp_timeout,(setter)SystemControl_set_disp_timeout,
-	PyDoc_STR("*float*: Max dispatch optimization solve duration [s]\n\n*Required*: True if is_dispatch=1"),
+	PyDoc_STR("*float*: Max dispatch optimization solve duration [s]\n\n**Required:**\nRequired if is_dispatch=1"),
  	NULL},
 {"disp_up_time_min", (getter)SystemControl_get_disp_up_time_min,(setter)SystemControl_set_disp_up_time_min,
-	PyDoc_STR("*float*: Minimum time requirement for cycle to generate power [hr]\n\n*Required*: True if is_dispatch=1"),
+	PyDoc_STR("*float*: Minimum time requirement for cycle to generate power [hr]\n\n**Required:**\nRequired if is_dispatch=1"),
  	NULL},
 {"is_dispatch", (getter)SystemControl_get_is_dispatch,(setter)SystemControl_set_is_dispatch,
-	PyDoc_STR("*float*: Allow dispatch optimization?\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Allow dispatch optimization?\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"pb_fixed_par", (getter)SystemControl_get_pb_fixed_par,(setter)SystemControl_set_pb_fixed_par,
-	PyDoc_STR("*float*: Fixed parasitic load that don't generate heat - runs at all times [MWe/MWcap]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Fixed parasitic load that don't generate heat - runs at all times [MWe/MWcap]\n\n**Required:**\nTrue"),
  	NULL},
 {"sim_type", (getter)SystemControl_get_sim_type,(setter)SystemControl_set_sim_type,
-	PyDoc_STR("*float*: 1 (default): timeseries, 2: design only\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: 1 (default): timeseries, 2: design only\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"time_start", (getter)SystemControl_get_time_start,(setter)SystemControl_set_time_start,
-	PyDoc_STR("*float*: Simulation start time [s]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Simulation start time [s]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"time_steps_per_hour", (getter)SystemControl_get_time_steps_per_hour,(setter)SystemControl_set_time_steps_per_hour,
-	PyDoc_STR("*float*: Number of simulation time steps per hour\n\n*Required*: If not provided, assumed to be -1"),
+	PyDoc_STR("*float*: Number of simulation time steps per hour\n\n**Required:**\nFalse. Automatically set to -1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"time_stop", (getter)SystemControl_get_time_stop,(setter)SystemControl_set_time_stop,
-	PyDoc_STR("*float*: Simulation stop time [s]\n\n*Required*: If not provided, assumed to be 31536000"),
+	PyDoc_STR("*float*: Simulation stop time [s]\n\n**Required:**\nFalse. Automatically set to 31536000 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"vacuum_arrays", (getter)SystemControl_get_vacuum_arrays,(setter)SystemControl_set_vacuum_arrays,
-	PyDoc_STR("*float*: Allocate arrays for only the required number of steps\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Allocate arrays for only the required number of steps\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -748,11 +748,11 @@ FinancialModel_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef FinancialModel_methods[] = {
 		{"assign",            (PyCFunction)FinancialModel_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``FinancialModel_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``FinancialModel_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)FinancialModel_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``FinancialModel_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``FinancialModel_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)FinancialModel_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -770,7 +770,7 @@ FinancialModel_set_etes_financial_model(VarGroupObject *self, PyObject *value, v
 
 static PyGetSetDef FinancialModel_getset[] = {
 {"etes_financial_model", (getter)FinancialModel_get_etes_financial_model,(setter)FinancialModel_set_etes_financial_model,
-	PyDoc_STR("*float*:  [1-8]\n\n*Constraints*: INTEGER,MIN=0\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*:  [1-8]\n\n**Constraints:**\nINTEGER,MIN=0\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -885,11 +885,11 @@ SystemDesign_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef SystemDesign_methods[] = {
 		{"assign",            (PyCFunction)SystemDesign_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``SystemDesign_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``SystemDesign_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)SystemDesign_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``SystemDesign_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``SystemDesign_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)SystemDesign_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -1027,37 +1027,37 @@ SystemDesign_set_tshours(VarGroupObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef SystemDesign_getset[] = {
 {"T_CT_cold_htf_des", (getter)SystemDesign_get_T_CT_cold_htf_des,(setter)SystemDesign_set_T_CT_cold_htf_des,
-	PyDoc_STR("*float*: CT TES cold temperature [C]\n\n*Required*: True"),
+	PyDoc_STR("*float*: CT TES cold temperature [C]\n\n**Required:**\nTrue"),
  	NULL},
 {"T_CT_hot_htf_des", (getter)SystemDesign_get_T_CT_hot_htf_des,(setter)SystemDesign_set_T_CT_hot_htf_des,
-	PyDoc_STR("*float*: CT TES hot temperature [C]\n\n*Required*: True"),
+	PyDoc_STR("*float*: CT TES hot temperature [C]\n\n**Required:**\nTrue"),
  	NULL},
 {"T_HT_cold_htf_des", (getter)SystemDesign_get_T_HT_cold_htf_des,(setter)SystemDesign_set_T_HT_cold_htf_des,
-	PyDoc_STR("*float*: HT TES cold temperature [C]\n\n*Required*: True"),
+	PyDoc_STR("*float*: HT TES cold temperature [C]\n\n**Required:**\nTrue"),
  	NULL},
 {"T_HT_hot_htf_des", (getter)SystemDesign_get_T_HT_hot_htf_des,(setter)SystemDesign_set_T_HT_hot_htf_des,
-	PyDoc_STR("*float*: HT TES hot temperature [C]\n\n*Required*: True"),
+	PyDoc_STR("*float*: HT TES hot temperature [C]\n\n**Required:**\nTrue"),
  	NULL},
 {"W_dot_pc_thermo_des", (getter)SystemDesign_get_W_dot_pc_thermo_des,(setter)SystemDesign_set_W_dot_pc_thermo_des,
-	PyDoc_STR("*float*: PC design thermodynamic power [MWe]\n\n*Required*: True"),
+	PyDoc_STR("*float*: PC design thermodynamic power [MWe]\n\n**Required:**\nTrue"),
  	NULL},
 {"cop_hp_thermo_des", (getter)SystemDesign_get_cop_hp_thermo_des,(setter)SystemDesign_set_cop_hp_thermo_des,
-	PyDoc_STR("*float*: Heat pump design thermodynamic heat COP [-]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Heat pump design thermodynamic heat COP [-]\n\n**Required:**\nTrue"),
  	NULL},
 {"eta_pc_thermo_des", (getter)SystemDesign_get_eta_pc_thermo_des,(setter)SystemDesign_set_eta_pc_thermo_des,
-	PyDoc_STR("*float*: PC design thermodynamic efficiency [-]\n\n*Required*: True"),
+	PyDoc_STR("*float*: PC design thermodynamic efficiency [-]\n\n**Required:**\nTrue"),
  	NULL},
 {"f_hp_parasitic_des", (getter)SystemDesign_get_f_hp_parasitic_des,(setter)SystemDesign_set_f_hp_parasitic_des,
-	PyDoc_STR("*float*: Heat pump parasitics as fraction of design thermo power in [-]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Heat pump parasitics as fraction of design thermo power in [-]\n\n**Required:**\nTrue"),
  	NULL},
 {"f_pc_parasitic_des", (getter)SystemDesign_get_f_pc_parasitic_des,(setter)SystemDesign_set_f_pc_parasitic_des,
-	PyDoc_STR("*float*: PC parasitics as fraction of design thermo power out [-]\n\n*Required*: True"),
+	PyDoc_STR("*float*: PC parasitics as fraction of design thermo power out [-]\n\n**Required:**\nTrue"),
  	NULL},
 {"heater_mult", (getter)SystemDesign_get_heater_mult,(setter)SystemDesign_set_heater_mult,
-	PyDoc_STR("*float*: Heater multiple relative to design cycle thermal power [-]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Heater multiple relative to design cycle thermal power [-]\n\n**Required:**\nTrue"),
  	NULL},
 {"tshours", (getter)SystemDesign_get_tshours,(setter)SystemDesign_set_tshours,
-	PyDoc_STR("*float*: Equivalent full-load thermal storage hours [hr]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Equivalent full-load thermal storage hours [hr]\n\n**Required:**\nTrue"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1172,11 +1172,11 @@ ThermalStorage_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef ThermalStorage_methods[] = {
 		{"assign",            (PyCFunction)ThermalStorage_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``ThermalStorage_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``ThermalStorage_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)ThermalStorage_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``ThermalStorage_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``ThermalStorage_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)ThermalStorage_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -1230,16 +1230,16 @@ ThermalStorage_set_ud_hot_htf_props(VarGroupObject *self, PyObject *value, void 
 
 static PyGetSetDef ThermalStorage_getset[] = {
 {"cold_htf_code", (getter)ThermalStorage_get_cold_htf_code,(setter)ThermalStorage_set_cold_htf_code,
-	PyDoc_STR("*float*: Cold HTF code - see htf_props.h for list\n\n*Required*: True"),
+	PyDoc_STR("*float*: Cold HTF code - see htf_props.h for list\n\n**Required:**\nTrue"),
  	NULL},
 {"hot_htf_code", (getter)ThermalStorage_get_hot_htf_code,(setter)ThermalStorage_set_hot_htf_code,
-	PyDoc_STR("*float*: Hot HTF code - see htf_props.h for list\n\n*Required*: True"),
+	PyDoc_STR("*float*: Hot HTF code - see htf_props.h for list\n\n**Required:**\nTrue"),
  	NULL},
 {"ud_cold_htf_props", (getter)ThermalStorage_get_ud_cold_htf_props,(setter)ThermalStorage_set_ud_cold_htf_props,
-	PyDoc_STR("*sequence[sequence]*: User-defined Cold HTF fluid property data [-]\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: User-defined Cold HTF fluid property data [-]\n\n**Required:**\nRequired if cold_htf_code=50"),
  	NULL},
 {"ud_hot_htf_props", (getter)ThermalStorage_get_ud_hot_htf_props,(setter)ThermalStorage_set_ud_hot_htf_props,
-	PyDoc_STR("*sequence[sequence]*: User-defined Hot HTF fluid property data [-]\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: User-defined Hot HTF fluid property data [-]\n\n**Required:**\nRequired if hot_htf_code=50"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1354,11 +1354,11 @@ Heater_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Heater_methods[] = {
 		{"assign",            (PyCFunction)Heater_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Heater_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Heater_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Heater_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Heater_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Heater_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Heater_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -1400,13 +1400,13 @@ Heater_set_hrs_startup_at_max_rate(VarGroupObject *self, PyObject *value, void *
 
 static PyGetSetDef Heater_getset[] = {
 {"f_q_dot_des_allowable_su", (getter)Heater_get_f_q_dot_des_allowable_su,(setter)Heater_set_f_q_dot_des_allowable_su,
-	PyDoc_STR("*float*: Fraction of design power allowed during startup [-]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Fraction of design power allowed during startup [-]\n\n**Required:**\nTrue"),
  	NULL},
 {"f_q_dot_heater_min", (getter)Heater_get_f_q_dot_heater_min,(setter)Heater_set_f_q_dot_heater_min,
-	PyDoc_STR("*float*: Minimum allowable heater output as fraction of design\n\n*Required*: True"),
+	PyDoc_STR("*float*: Minimum allowable heater output as fraction of design\n\n**Required:**\nTrue"),
  	NULL},
 {"hrs_startup_at_max_rate", (getter)Heater_get_hrs_startup_at_max_rate,(setter)Heater_set_hrs_startup_at_max_rate,
-	PyDoc_STR("*float*: Duration of startup at max startup power [hr]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Duration of startup at max startup power [hr]\n\n**Required:**\nTrue"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1521,11 +1521,11 @@ PowerCycle_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef PowerCycle_methods[] = {
 		{"assign",            (PyCFunction)PowerCycle_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``PowerCycle_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``PowerCycle_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)PowerCycle_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``PowerCycle_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``PowerCycle_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)PowerCycle_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -1639,31 +1639,31 @@ PowerCycle_set_startup_time(VarGroupObject *self, PyObject *value, void *closure
 
 static PyGetSetDef PowerCycle_getset[] = {
 {"CT_pb_pump_coef", (getter)PowerCycle_get_CT_pb_pump_coef,(setter)PowerCycle_set_CT_pb_pump_coef,
-	PyDoc_STR("*float*: COLD TES pumping power to move 1kg of HTF through PB loop [kW/kg/s]\n\n*Required*: True"),
+	PyDoc_STR("*float*: COLD TES pumping power to move 1kg of HTF through PB loop [kW/kg/s]\n\n**Required:**\nTrue"),
  	NULL},
 {"cycle_cutoff_frac", (getter)PowerCycle_get_cycle_cutoff_frac,(setter)PowerCycle_set_cycle_cutoff_frac,
-	PyDoc_STR("*float*: Minimum turbine operation fraction before shutdown\n\n*Required*: True"),
+	PyDoc_STR("*float*: Minimum turbine operation fraction before shutdown\n\n**Required:**\nTrue"),
  	NULL},
 {"cycle_max_frac", (getter)PowerCycle_get_cycle_max_frac,(setter)PowerCycle_set_cycle_max_frac,
-	PyDoc_STR("*float*: Maximum turbine over design operation fraction\n\n*Required*: True"),
+	PyDoc_STR("*float*: Maximum turbine over design operation fraction\n\n**Required:**\nTrue"),
  	NULL},
 {"heat_pump_CT_HTF_pump_coef", (getter)PowerCycle_get_heat_pump_CT_HTF_pump_coef,(setter)PowerCycle_set_heat_pump_CT_HTF_pump_coef,
-	PyDoc_STR("*float*: Cold temp HX pumping power to move 1 kg/s [kW/kg/s]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Cold temp HX pumping power to move 1 kg/s [kW/kg/s]\n\n**Required:**\nTrue"),
  	NULL},
 {"heat_pump_HT_HTF_pump_coef", (getter)PowerCycle_get_heat_pump_HT_HTF_pump_coef,(setter)PowerCycle_set_heat_pump_HT_HTF_pump_coef,
-	PyDoc_STR("*float*: High temp HX pumping power to move 1 kg/s [kW/kg/s]\n\n*Required*: True"),
+	PyDoc_STR("*float*: High temp HX pumping power to move 1 kg/s [kW/kg/s]\n\n**Required:**\nTrue"),
  	NULL},
 {"pb_pump_coef", (getter)PowerCycle_get_pb_pump_coef,(setter)PowerCycle_set_pb_pump_coef,
-	PyDoc_STR("*float*: COLD TES pumping power to move 1kg of HTF through PB loop [kW/kg/s]\n\n*Required*: True"),
+	PyDoc_STR("*float*: COLD TES pumping power to move 1kg of HTF through PB loop [kW/kg/s]\n\n**Required:**\nTrue"),
  	NULL},
 {"q_sby_frac", (getter)PowerCycle_get_q_sby_frac,(setter)PowerCycle_set_q_sby_frac,
-	PyDoc_STR("*float*: Fraction of thermal power required for standby\n\n*Required*: True"),
+	PyDoc_STR("*float*: Fraction of thermal power required for standby\n\n**Required:**\nTrue"),
  	NULL},
 {"startup_frac", (getter)PowerCycle_get_startup_frac,(setter)PowerCycle_set_startup_frac,
-	PyDoc_STR("*float*: Fraction of design thermal power needed for startup [none]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Fraction of design thermal power needed for startup [none]\n\n**Required:**\nTrue"),
  	NULL},
 {"startup_time", (getter)PowerCycle_get_startup_time,(setter)PowerCycle_set_startup_time,
-	PyDoc_STR("*float*: Time needed for power block startup [hr]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Time needed for power block startup [hr]\n\n**Required:**\nTrue"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1778,11 +1778,11 @@ HotThermalStorage_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef HotThermalStorage_methods[] = {
 		{"assign",            (PyCFunction)HotThermalStorage_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``HotThermalStorage_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``HotThermalStorage_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)HotThermalStorage_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``HotThermalStorage_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``HotThermalStorage_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)HotThermalStorage_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -1896,31 +1896,31 @@ HotThermalStorage_set_u_tank(VarGroupObject *self, PyObject *value, void *closur
 
 static PyGetSetDef HotThermalStorage_getset[] = {
 {"cold_tank_Thtr", (getter)HotThermalStorage_get_cold_tank_Thtr,(setter)HotThermalStorage_set_cold_tank_Thtr,
-	PyDoc_STR("*float*: HOT TES Minimum allowable cold tank HTF temperature [C]\n\n*Required*: True"),
+	PyDoc_STR("*float*: HOT TES Minimum allowable cold tank HTF temperature [C]\n\n**Required:**\nTrue"),
  	NULL},
 {"cold_tank_max_heat", (getter)HotThermalStorage_get_cold_tank_max_heat,(setter)HotThermalStorage_set_cold_tank_max_heat,
-	PyDoc_STR("*float*: HOT TES Rated heater capacity for cold tank heating [MW]\n\n*Required*: True"),
+	PyDoc_STR("*float*: HOT TES Rated heater capacity for cold tank heating [MW]\n\n**Required:**\nTrue"),
  	NULL},
 {"h_tank", (getter)HotThermalStorage_get_h_tank,(setter)HotThermalStorage_set_h_tank,
-	PyDoc_STR("*float*: HOT TES Total height of tank (height of HTF when tank is full) [m]\n\n*Required*: True"),
+	PyDoc_STR("*float*: HOT TES Total height of tank (height of HTF when tank is full) [m]\n\n**Required:**\nTrue"),
  	NULL},
 {"h_tank_min", (getter)HotThermalStorage_get_h_tank_min,(setter)HotThermalStorage_set_h_tank_min,
-	PyDoc_STR("*float*: HOT TES Minimum allowable HTF height in storage tank [m]\n\n*Required*: True"),
+	PyDoc_STR("*float*: HOT TES Minimum allowable HTF height in storage tank [m]\n\n**Required:**\nTrue"),
  	NULL},
 {"hot_tank_Thtr", (getter)HotThermalStorage_get_hot_tank_Thtr,(setter)HotThermalStorage_set_hot_tank_Thtr,
-	PyDoc_STR("*float*: HOT TES Minimum allowable hot tank HTF temperature [C]\n\n*Required*: True"),
+	PyDoc_STR("*float*: HOT TES Minimum allowable hot tank HTF temperature [C]\n\n**Required:**\nTrue"),
  	NULL},
 {"hot_tank_max_heat", (getter)HotThermalStorage_get_hot_tank_max_heat,(setter)HotThermalStorage_set_hot_tank_max_heat,
-	PyDoc_STR("*float*: HOT TES Rated heater capacity for hot tank heating [MW]\n\n*Required*: True"),
+	PyDoc_STR("*float*: HOT TES Rated heater capacity for hot tank heating [MW]\n\n**Required:**\nTrue"),
  	NULL},
 {"tank_pairs", (getter)HotThermalStorage_get_tank_pairs,(setter)HotThermalStorage_set_tank_pairs,
-	PyDoc_STR("*float*: HOT TES Number of equivalent tank pairs\n\n*Constraints*: INTEGER\n\n*Required*: True"),
+	PyDoc_STR("*float*: HOT TES Number of equivalent tank pairs\n\n**Constraints:**\nINTEGER\n\n**Required:**\nTrue"),
  	NULL},
 {"tes_init_hot_htf_percent", (getter)HotThermalStorage_get_tes_init_hot_htf_percent,(setter)HotThermalStorage_set_tes_init_hot_htf_percent,
-	PyDoc_STR("*float*: HOT TES Initial fraction of available volume that is hot [%]\n\n*Required*: True"),
+	PyDoc_STR("*float*: HOT TES Initial fraction of available volume that is hot [%]\n\n**Required:**\nTrue"),
  	NULL},
 {"u_tank", (getter)HotThermalStorage_get_u_tank,(setter)HotThermalStorage_set_u_tank,
-	PyDoc_STR("*float*: HOT TES Loss coefficient from the tank [W/m2-K]\n\n*Required*: True"),
+	PyDoc_STR("*float*: HOT TES Loss coefficient from the tank [W/m2-K]\n\n**Required:**\nTrue"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -2035,11 +2035,11 @@ ColdThermalStorage_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef ColdThermalStorage_methods[] = {
 		{"assign",            (PyCFunction)ColdThermalStorage_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``ColdThermalStorage_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``ColdThermalStorage_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)ColdThermalStorage_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``ColdThermalStorage_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``ColdThermalStorage_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)ColdThermalStorage_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -2093,16 +2093,16 @@ ColdThermalStorage_set_CT_u_tank(VarGroupObject *self, PyObject *value, void *cl
 
 static PyGetSetDef ColdThermalStorage_getset[] = {
 {"CT_h_tank", (getter)ColdThermalStorage_get_CT_h_tank,(setter)ColdThermalStorage_set_CT_h_tank,
-	PyDoc_STR("*float*: COLD TES Total height of tank (height of HTF when tank is full) [m]\n\n*Required*: True"),
+	PyDoc_STR("*float*: COLD TES Total height of tank (height of HTF when tank is full) [m]\n\n**Required:**\nTrue"),
  	NULL},
 {"CT_h_tank_min", (getter)ColdThermalStorage_get_CT_h_tank_min,(setter)ColdThermalStorage_set_CT_h_tank_min,
-	PyDoc_STR("*float*: COLD TES Minimum allowable HTF height in storage tank [m]\n\n*Required*: True"),
+	PyDoc_STR("*float*: COLD TES Minimum allowable HTF height in storage tank [m]\n\n**Required:**\nTrue"),
  	NULL},
 {"CT_tank_pairs", (getter)ColdThermalStorage_get_CT_tank_pairs,(setter)ColdThermalStorage_set_CT_tank_pairs,
-	PyDoc_STR("*float*: COLD TES Number of equivalent tank pairs\n\n*Constraints*: INTEGER\n\n*Required*: True"),
+	PyDoc_STR("*float*: COLD TES Number of equivalent tank pairs\n\n**Constraints:**\nINTEGER\n\n**Required:**\nTrue"),
  	NULL},
 {"CT_u_tank", (getter)ColdThermalStorage_get_CT_u_tank,(setter)ColdThermalStorage_set_CT_u_tank,
-	PyDoc_STR("*float*: COLD TES Loss coefficient from the tank [W/m2-K]\n\n*Required*: True"),
+	PyDoc_STR("*float*: COLD TES Loss coefficient from the tank [W/m2-K]\n\n**Required:**\nTrue"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -2217,11 +2217,11 @@ TimeOfDeliveryFactors_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef TimeOfDeliveryFactors_methods[] = {
 		{"assign",            (PyCFunction)TimeOfDeliveryFactors_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``TimeOfDeliveryFactors_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``TimeOfDeliveryFactors_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)TimeOfDeliveryFactors_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``TimeOfDeliveryFactors_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``TimeOfDeliveryFactors_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)TimeOfDeliveryFactors_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -2383,43 +2383,43 @@ TimeOfDeliveryFactors_set_ppa_multiplier_model(VarGroupObject *self, PyObject *v
 
 static PyGetSetDef TimeOfDeliveryFactors_getset[] = {
 {"dispatch_factor1", (getter)TimeOfDeliveryFactors_get_dispatch_factor1,(setter)TimeOfDeliveryFactors_set_dispatch_factor1,
-	PyDoc_STR("*float*: Dispatch payment factor 1\n\n*Required*: True if ppa_multiplier_model=0&etes_financial_model<5&is_dispatch=1&sim_type=1"),
+	PyDoc_STR("*float*: Dispatch payment factor 1\n\n**Required:**\nRequired if ppa_multiplier_model=0&etes_financial_model<5&is_dispatch=1&sim_type=1"),
  	NULL},
 {"dispatch_factor2", (getter)TimeOfDeliveryFactors_get_dispatch_factor2,(setter)TimeOfDeliveryFactors_set_dispatch_factor2,
-	PyDoc_STR("*float*: Dispatch payment factor 2\n\n*Required*: True if ppa_multiplier_model=0&etes_financial_model<5&is_dispatch=1&sim_type=1"),
+	PyDoc_STR("*float*: Dispatch payment factor 2\n\n**Required:**\nRequired if ppa_multiplier_model=0&etes_financial_model<5&is_dispatch=1&sim_type=1"),
  	NULL},
 {"dispatch_factor3", (getter)TimeOfDeliveryFactors_get_dispatch_factor3,(setter)TimeOfDeliveryFactors_set_dispatch_factor3,
-	PyDoc_STR("*float*: Dispatch payment factor 3\n\n*Required*: True if ppa_multiplier_model=0&etes_financial_model<5&is_dispatch=1&sim_type=1"),
+	PyDoc_STR("*float*: Dispatch payment factor 3\n\n**Required:**\nRequired if ppa_multiplier_model=0&etes_financial_model<5&is_dispatch=1&sim_type=1"),
  	NULL},
 {"dispatch_factor4", (getter)TimeOfDeliveryFactors_get_dispatch_factor4,(setter)TimeOfDeliveryFactors_set_dispatch_factor4,
-	PyDoc_STR("*float*: Dispatch payment factor 4\n\n*Required*: True if ppa_multiplier_model=0&etes_financial_model<5&is_dispatch=1&sim_type=1"),
+	PyDoc_STR("*float*: Dispatch payment factor 4\n\n**Required:**\nRequired if ppa_multiplier_model=0&etes_financial_model<5&is_dispatch=1&sim_type=1"),
  	NULL},
 {"dispatch_factor5", (getter)TimeOfDeliveryFactors_get_dispatch_factor5,(setter)TimeOfDeliveryFactors_set_dispatch_factor5,
-	PyDoc_STR("*float*: Dispatch payment factor 5\n\n*Required*: True if ppa_multiplier_model=0&etes_financial_model<5&is_dispatch=1&sim_type=1"),
+	PyDoc_STR("*float*: Dispatch payment factor 5\n\n**Required:**\nRequired if ppa_multiplier_model=0&etes_financial_model<5&is_dispatch=1&sim_type=1"),
  	NULL},
 {"dispatch_factor6", (getter)TimeOfDeliveryFactors_get_dispatch_factor6,(setter)TimeOfDeliveryFactors_set_dispatch_factor6,
-	PyDoc_STR("*float*: Dispatch payment factor 6\n\n*Required*: True if ppa_multiplier_model=0&etes_financial_model<5&is_dispatch=1&sim_type=1"),
+	PyDoc_STR("*float*: Dispatch payment factor 6\n\n**Required:**\nRequired if ppa_multiplier_model=0&etes_financial_model<5&is_dispatch=1&sim_type=1"),
  	NULL},
 {"dispatch_factor7", (getter)TimeOfDeliveryFactors_get_dispatch_factor7,(setter)TimeOfDeliveryFactors_set_dispatch_factor7,
-	PyDoc_STR("*float*: Dispatch payment factor 7\n\n*Required*: True if ppa_multiplier_model=0&etes_financial_model<5&is_dispatch=1&sim_type=1"),
+	PyDoc_STR("*float*: Dispatch payment factor 7\n\n**Required:**\nRequired if ppa_multiplier_model=0&etes_financial_model<5&is_dispatch=1&sim_type=1"),
  	NULL},
 {"dispatch_factor8", (getter)TimeOfDeliveryFactors_get_dispatch_factor8,(setter)TimeOfDeliveryFactors_set_dispatch_factor8,
-	PyDoc_STR("*float*: Dispatch payment factor 8\n\n*Required*: True if ppa_multiplier_model=0&etes_financial_model<5&is_dispatch=1&sim_type=1"),
+	PyDoc_STR("*float*: Dispatch payment factor 8\n\n**Required:**\nRequired if ppa_multiplier_model=0&etes_financial_model<5&is_dispatch=1&sim_type=1"),
  	NULL},
 {"dispatch_factor9", (getter)TimeOfDeliveryFactors_get_dispatch_factor9,(setter)TimeOfDeliveryFactors_set_dispatch_factor9,
-	PyDoc_STR("*float*: Dispatch payment factor 9\n\n*Required*: True if ppa_multiplier_model=0&etes_financial_model<5&is_dispatch=1&sim_type=1"),
+	PyDoc_STR("*float*: Dispatch payment factor 9\n\n**Required:**\nRequired if ppa_multiplier_model=0&etes_financial_model<5&is_dispatch=1&sim_type=1"),
  	NULL},
 {"dispatch_factors_ts", (getter)TimeOfDeliveryFactors_get_dispatch_factors_ts,(setter)TimeOfDeliveryFactors_set_dispatch_factors_ts,
-	PyDoc_STR("*sequence*: Dispatch payment factor timeseries array\n\n*Required*: True if ppa_multiplier_model=1&etes_financial_model<5&is_dispatch=1&sim_type=1"),
+	PyDoc_STR("*sequence*: Dispatch payment factor timeseries array\n\n**Required:**\nRequired if ppa_multiplier_model=1&etes_financial_model<5&is_dispatch=1&sim_type=1"),
  	NULL},
 {"dispatch_sched_weekday", (getter)TimeOfDeliveryFactors_get_dispatch_sched_weekday,(setter)TimeOfDeliveryFactors_set_dispatch_sched_weekday,
-	PyDoc_STR("*sequence[sequence]*: PPA pricing weekday schedule, 12x24\n\n*Required*: True if ppa_multiplier_model=0&etes_financial_model<5&is_dispatch=1&sim_type=1"),
+	PyDoc_STR("*sequence[sequence]*: PPA pricing weekday schedule, 12x24\n\n**Required:**\nRequired if ppa_multiplier_model=0&etes_financial_model<5&is_dispatch=1&sim_type=1"),
  	NULL},
 {"dispatch_sched_weekend", (getter)TimeOfDeliveryFactors_get_dispatch_sched_weekend,(setter)TimeOfDeliveryFactors_set_dispatch_sched_weekend,
-	PyDoc_STR("*sequence[sequence]*: PPA pricing weekend schedule, 12x24\n\n*Required*: True if ppa_multiplier_model=0&etes_financial_model<5&is_dispatch=1&sim_type=1"),
+	PyDoc_STR("*sequence[sequence]*: PPA pricing weekend schedule, 12x24\n\n**Required:**\nRequired if ppa_multiplier_model=0&etes_financial_model<5&is_dispatch=1&sim_type=1"),
  	NULL},
 {"ppa_multiplier_model", (getter)TimeOfDeliveryFactors_get_ppa_multiplier_model,(setter)TimeOfDeliveryFactors_set_ppa_multiplier_model,
-	PyDoc_STR("*float*: PPA multiplier model [0/1]\n\n*Options*: 0=diurnal,1=timestep\n\n*Constraints*: INTEGER,MIN=0\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: PPA multiplier model [0/1]\n\n**Options:**\n0=diurnal,1=timestep\n\n**Constraints:**\nINTEGER,MIN=0\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -2534,11 +2534,11 @@ Revenue_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Revenue_methods[] = {
 		{"assign",            (PyCFunction)Revenue_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Revenue_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Revenue_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Revenue_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Revenue_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Revenue_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Revenue_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -2556,7 +2556,7 @@ Revenue_set_ppa_price_input(VarGroupObject *self, PyObject *value, void *closure
 
 static PyGetSetDef Revenue_getset[] = {
 {"ppa_price_input", (getter)Revenue_get_ppa_price_input,(setter)Revenue_set_ppa_price_input,
-	PyDoc_STR("*sequence*: PPA prices - yearly [$/kWh]\n\n*Required*: True if ppa_multiplier_model=0&etes_financial_model<5&is_dispatch=1&sim_type=1"),
+	PyDoc_STR("*sequence*: PPA prices - yearly [$/kWh]\n\n**Required:**\nRequired if ppa_multiplier_model=0&etes_financial_model<5&is_dispatch=1&sim_type=1"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -2671,11 +2671,11 @@ SystemCosts_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef SystemCosts_methods[] = {
 		{"assign",            (PyCFunction)SystemCosts_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``SystemCosts_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``SystemCosts_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)SystemCosts_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``SystemCosts_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``SystemCosts_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)SystemCosts_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -2837,43 +2837,43 @@ SystemCosts_set_tes_spec_cost(VarGroupObject *self, PyObject *value, void *closu
 
 static PyGetSetDef SystemCosts_getset[] = {
 {"CT_tes_spec_cost", (getter)SystemCosts_get_CT_tes_spec_cost,(setter)SystemCosts_set_CT_tes_spec_cost,
-	PyDoc_STR("*float*: Cold Temp thermal energy storage specific cost [$/kWht]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Cold Temp thermal energy storage specific cost [$/kWht]\n\n**Required:**\nTrue"),
  	NULL},
 {"bop_spec_cost", (getter)SystemCosts_get_bop_spec_cost,(setter)SystemCosts_set_bop_spec_cost,
-	PyDoc_STR("*float*: Balance of plant specific cost [$/kWe]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Balance of plant specific cost [$/kWe]\n\n**Required:**\nTrue"),
  	NULL},
 {"contingency_rate", (getter)SystemCosts_get_contingency_rate,(setter)SystemCosts_set_contingency_rate,
-	PyDoc_STR("*float*: Contingency for cost overrun [%]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Contingency for cost overrun [%]\n\n**Required:**\nTrue"),
  	NULL},
 {"cycle_spec_cost", (getter)SystemCosts_get_cycle_spec_cost,(setter)SystemCosts_set_cycle_spec_cost,
-	PyDoc_STR("*float*: Power cycle specific cost [$/kWe]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Power cycle specific cost [$/kWe]\n\n**Required:**\nTrue"),
  	NULL},
 {"epc_cost_fixed", (getter)SystemCosts_get_epc_cost_fixed,(setter)SystemCosts_set_epc_cost_fixed,
-	PyDoc_STR("*float*: EPC fixed [$]\n\n*Required*: True"),
+	PyDoc_STR("*float*: EPC fixed [$]\n\n**Required:**\nTrue"),
  	NULL},
 {"epc_cost_per_watt", (getter)SystemCosts_get_epc_cost_per_watt,(setter)SystemCosts_set_epc_cost_per_watt,
-	PyDoc_STR("*float*: EPC cost per watt [$/W]\n\n*Required*: True"),
+	PyDoc_STR("*float*: EPC cost per watt [$/W]\n\n**Required:**\nTrue"),
  	NULL},
 {"epc_cost_perc_of_direct", (getter)SystemCosts_get_epc_cost_perc_of_direct,(setter)SystemCosts_set_epc_cost_perc_of_direct,
-	PyDoc_STR("*float*: EPC cost percent of direct [%]\n\n*Required*: True"),
+	PyDoc_STR("*float*: EPC cost percent of direct [%]\n\n**Required:**\nTrue"),
  	NULL},
 {"heat_pump_spec_cost", (getter)SystemCosts_get_heat_pump_spec_cost,(setter)SystemCosts_set_heat_pump_spec_cost,
-	PyDoc_STR("*float*: Heater pump specific cost [$/kWht]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Heater pump specific cost [$/kWht]\n\n**Required:**\nTrue"),
  	NULL},
 {"land_cost_fixed", (getter)SystemCosts_get_land_cost_fixed,(setter)SystemCosts_set_land_cost_fixed,
-	PyDoc_STR("*float*: Land fixed [$]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Land fixed [$]\n\n**Required:**\nTrue"),
  	NULL},
 {"land_cost_per_watt", (getter)SystemCosts_get_land_cost_per_watt,(setter)SystemCosts_set_land_cost_per_watt,
-	PyDoc_STR("*float*: Land cost per watt [$/W]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Land cost per watt [$/W]\n\n**Required:**\nTrue"),
  	NULL},
 {"land_cost_perc_of_direct", (getter)SystemCosts_get_land_cost_perc_of_direct,(setter)SystemCosts_set_land_cost_perc_of_direct,
-	PyDoc_STR("*float*: Land cost percent of direct [%]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Land cost percent of direct [%]\n\n**Required:**\nTrue"),
  	NULL},
 {"sales_tax_frac", (getter)SystemCosts_get_sales_tax_frac,(setter)SystemCosts_set_sales_tax_frac,
-	PyDoc_STR("*float*: Percent of cost to which sales tax applies [%]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Percent of cost to which sales tax applies [%]\n\n**Required:**\nTrue"),
  	NULL},
 {"tes_spec_cost", (getter)SystemCosts_get_tes_spec_cost,(setter)SystemCosts_set_tes_spec_cost,
-	PyDoc_STR("*float*: Hot Temp thermal energy storage specific cost [$/kWht]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Hot Temp thermal energy storage specific cost [$/kWht]\n\n**Required:**\nTrue"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -2988,11 +2988,11 @@ FinancialParameters_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef FinancialParameters_methods[] = {
 		{"assign",            (PyCFunction)FinancialParameters_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``FinancialParameters_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``FinancialParameters_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)FinancialParameters_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``FinancialParameters_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``FinancialParameters_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)FinancialParameters_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -3250,67 +3250,67 @@ FinancialParameters_set_sales_tax_rate(VarGroupObject *self, PyObject *value, vo
 
 static PyGetSetDef FinancialParameters_getset[] = {
 {"const_per_interest_rate1", (getter)FinancialParameters_get_const_per_interest_rate1,(setter)FinancialParameters_set_const_per_interest_rate1,
-	PyDoc_STR("*float*: Interest rate, loan 1 [%]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Interest rate, loan 1 [%]\n\n**Required:**\nTrue"),
  	NULL},
 {"const_per_interest_rate2", (getter)FinancialParameters_get_const_per_interest_rate2,(setter)FinancialParameters_set_const_per_interest_rate2,
-	PyDoc_STR("*float*: Interest rate, loan 2 [%]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Interest rate, loan 2 [%]\n\n**Required:**\nTrue"),
  	NULL},
 {"const_per_interest_rate3", (getter)FinancialParameters_get_const_per_interest_rate3,(setter)FinancialParameters_set_const_per_interest_rate3,
-	PyDoc_STR("*float*: Interest rate, loan 3 [%]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Interest rate, loan 3 [%]\n\n**Required:**\nTrue"),
  	NULL},
 {"const_per_interest_rate4", (getter)FinancialParameters_get_const_per_interest_rate4,(setter)FinancialParameters_set_const_per_interest_rate4,
-	PyDoc_STR("*float*: Interest rate, loan 4 [%]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Interest rate, loan 4 [%]\n\n**Required:**\nTrue"),
  	NULL},
 {"const_per_interest_rate5", (getter)FinancialParameters_get_const_per_interest_rate5,(setter)FinancialParameters_set_const_per_interest_rate5,
-	PyDoc_STR("*float*: Interest rate, loan 5 [%]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Interest rate, loan 5 [%]\n\n**Required:**\nTrue"),
  	NULL},
 {"const_per_months1", (getter)FinancialParameters_get_const_per_months1,(setter)FinancialParameters_set_const_per_months1,
-	PyDoc_STR("*float*: Months prior to operation, loan 1\n\n*Required*: True"),
+	PyDoc_STR("*float*: Months prior to operation, loan 1\n\n**Required:**\nTrue"),
  	NULL},
 {"const_per_months2", (getter)FinancialParameters_get_const_per_months2,(setter)FinancialParameters_set_const_per_months2,
-	PyDoc_STR("*float*: Months prior to operation, loan 2\n\n*Required*: True"),
+	PyDoc_STR("*float*: Months prior to operation, loan 2\n\n**Required:**\nTrue"),
  	NULL},
 {"const_per_months3", (getter)FinancialParameters_get_const_per_months3,(setter)FinancialParameters_set_const_per_months3,
-	PyDoc_STR("*float*: Months prior to operation, loan 3\n\n*Required*: True"),
+	PyDoc_STR("*float*: Months prior to operation, loan 3\n\n**Required:**\nTrue"),
  	NULL},
 {"const_per_months4", (getter)FinancialParameters_get_const_per_months4,(setter)FinancialParameters_set_const_per_months4,
-	PyDoc_STR("*float*: Months prior to operation, loan 4\n\n*Required*: True"),
+	PyDoc_STR("*float*: Months prior to operation, loan 4\n\n**Required:**\nTrue"),
  	NULL},
 {"const_per_months5", (getter)FinancialParameters_get_const_per_months5,(setter)FinancialParameters_set_const_per_months5,
-	PyDoc_STR("*float*: Months prior to operation, loan 5\n\n*Required*: True"),
+	PyDoc_STR("*float*: Months prior to operation, loan 5\n\n**Required:**\nTrue"),
  	NULL},
 {"const_per_percent1", (getter)FinancialParameters_get_const_per_percent1,(setter)FinancialParameters_set_const_per_percent1,
-	PyDoc_STR("*float*: Percent of total installed cost, loan 1 [%]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Percent of total installed cost, loan 1 [%]\n\n**Required:**\nTrue"),
  	NULL},
 {"const_per_percent2", (getter)FinancialParameters_get_const_per_percent2,(setter)FinancialParameters_set_const_per_percent2,
-	PyDoc_STR("*float*: Percent of total installed cost, loan 2 [%]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Percent of total installed cost, loan 2 [%]\n\n**Required:**\nTrue"),
  	NULL},
 {"const_per_percent3", (getter)FinancialParameters_get_const_per_percent3,(setter)FinancialParameters_set_const_per_percent3,
-	PyDoc_STR("*float*: Percent of total installed cost, loan 3 [%]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Percent of total installed cost, loan 3 [%]\n\n**Required:**\nTrue"),
  	NULL},
 {"const_per_percent4", (getter)FinancialParameters_get_const_per_percent4,(setter)FinancialParameters_set_const_per_percent4,
-	PyDoc_STR("*float*: Percent of total installed cost, loan 4 [%]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Percent of total installed cost, loan 4 [%]\n\n**Required:**\nTrue"),
  	NULL},
 {"const_per_percent5", (getter)FinancialParameters_get_const_per_percent5,(setter)FinancialParameters_set_const_per_percent5,
-	PyDoc_STR("*float*: Percent of total installed cost, loan 5 [%]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Percent of total installed cost, loan 5 [%]\n\n**Required:**\nTrue"),
  	NULL},
 {"const_per_upfront_rate1", (getter)FinancialParameters_get_const_per_upfront_rate1,(setter)FinancialParameters_set_const_per_upfront_rate1,
-	PyDoc_STR("*float*: Upfront fee on principal, loan 1 [%]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Upfront fee on principal, loan 1 [%]\n\n**Required:**\nTrue"),
  	NULL},
 {"const_per_upfront_rate2", (getter)FinancialParameters_get_const_per_upfront_rate2,(setter)FinancialParameters_set_const_per_upfront_rate2,
-	PyDoc_STR("*float*: Upfront fee on principal, loan 2 [%]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Upfront fee on principal, loan 2 [%]\n\n**Required:**\nTrue"),
  	NULL},
 {"const_per_upfront_rate3", (getter)FinancialParameters_get_const_per_upfront_rate3,(setter)FinancialParameters_set_const_per_upfront_rate3,
-	PyDoc_STR("*float*: Upfront fee on principal, loan 3 [%]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Upfront fee on principal, loan 3 [%]\n\n**Required:**\nTrue"),
  	NULL},
 {"const_per_upfront_rate4", (getter)FinancialParameters_get_const_per_upfront_rate4,(setter)FinancialParameters_set_const_per_upfront_rate4,
-	PyDoc_STR("*float*: Upfront fee on principal, loan 4 [%]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Upfront fee on principal, loan 4 [%]\n\n**Required:**\nTrue"),
  	NULL},
 {"const_per_upfront_rate5", (getter)FinancialParameters_get_const_per_upfront_rate5,(setter)FinancialParameters_set_const_per_upfront_rate5,
-	PyDoc_STR("*float*: Upfront fee on principal, loan 5 [%]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Upfront fee on principal, loan 5 [%]\n\n**Required:**\nTrue"),
  	NULL},
 {"sales_tax_rate", (getter)FinancialParameters_get_sales_tax_rate,(setter)FinancialParameters_set_sales_tax_rate,
-	PyDoc_STR("*float*: Sales tax rate [%]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Sales tax rate [%]\n\n**Required:**\nTrue"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -3425,11 +3425,11 @@ Outputs_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Outputs_methods[] = {
 		{"assign",            (PyCFunction)Outputs_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Outputs_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Outputs_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -3704,6 +3704,18 @@ Outputs_get_annual_energy(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_annual_energy_distribution_time(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_EtesPtes_Outputs_annual_energy_distribution_time_mget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_avg_suboptimal_rel_mip_gap(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesPtes_Outputs_avg_suboptimal_rel_mip_gap_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_bop_cost_calc(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_EtesPtes_Outputs_bop_cost_calc_nget, self->data_ptr);
@@ -3767,6 +3779,138 @@ static PyObject *
 Outputs_get_direct_subtotal_cost_calc(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_EtesPtes_Outputs_direct_subtotal_cost_calc_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_disp_iter_ann(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesPtes_Outputs_disp_iter_ann_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_disp_obj_relax(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_disp_obj_relax_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_disp_objective(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_disp_objective_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_disp_objective_ann(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesPtes_Outputs_disp_objective_ann_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_disp_pceff_expected(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_disp_pceff_expected_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_disp_presolve_nconstr(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_disp_presolve_nconstr_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_disp_presolve_nconstr_ann(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesPtes_Outputs_disp_presolve_nconstr_ann_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_disp_presolve_nvar(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_disp_presolve_nvar_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_disp_presolve_nvar_ann(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesPtes_Outputs_disp_presolve_nvar_ann_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_disp_qpbsu_expected(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_disp_qpbsu_expected_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_disp_qsfprod_expected(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_disp_qsfprod_expected_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_disp_qsfsu_expected(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_disp_qsfsu_expected_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_disp_rel_mip_gap(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_disp_rel_mip_gap_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_disp_rev_expected(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_disp_rev_expected_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_disp_solve_iter(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_disp_solve_iter_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_disp_solve_state(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_disp_solve_state_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_disp_solve_state_ann(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesPtes_Outputs_disp_solve_state_ann_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_disp_solve_time(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_disp_solve_time_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_disp_solve_time_ann(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesPtes_Outputs_disp_solve_time_ann_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_disp_subopt_flag(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_disp_subopt_flag_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_disp_tes_expected(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_disp_tes_expected_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_disp_wpb_expected(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_disp_wpb_expected_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -4301,6 +4445,12 @@ static PyGetSetDef Outputs_getset[] = {
 {"annual_energy", (getter)Outputs_get_annual_energy,(setter)0,
 	PyDoc_STR("*float*: Annual total electric power to grid [kWhe]"),
  	NULL},
+{"annual_energy_distribution_time", (getter)Outputs_get_annual_energy_distribution_time,(setter)0,
+	PyDoc_STR("*sequence[sequence]*: Annual energy production as function of time [kW]"),
+ 	NULL},
+{"avg_suboptimal_rel_mip_gap", (getter)Outputs_get_avg_suboptimal_rel_mip_gap,(setter)0,
+	PyDoc_STR("*float*: Average suboptimal relative MIP gap [%]"),
+ 	NULL},
 {"bop_cost_calc", (getter)Outputs_get_bop_cost_calc,(setter)0,
 	PyDoc_STR("*float*: BOP cost [$]"),
  	NULL},
@@ -4333,6 +4483,72 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"direct_subtotal_cost_calc", (getter)Outputs_get_direct_subtotal_cost_calc,(setter)0,
 	PyDoc_STR("*float*: Direct subtotal cost [$]"),
+ 	NULL},
+{"disp_iter_ann", (getter)Outputs_get_disp_iter_ann,(setter)0,
+	PyDoc_STR("*float*: Annual sum of dispatch solver iterations"),
+ 	NULL},
+{"disp_obj_relax", (getter)Outputs_get_disp_obj_relax,(setter)0,
+	PyDoc_STR("*sequence*: Dispatch objective function - relaxed max"),
+ 	NULL},
+{"disp_objective", (getter)Outputs_get_disp_objective,(setter)0,
+	PyDoc_STR("*sequence*: Dispatch objective function value"),
+ 	NULL},
+{"disp_objective_ann", (getter)Outputs_get_disp_objective_ann,(setter)0,
+	PyDoc_STR("*float*: Annual sum of dispatch objective function value [$]"),
+ 	NULL},
+{"disp_pceff_expected", (getter)Outputs_get_disp_pceff_expected,(setter)0,
+	PyDoc_STR("*sequence*: Dispatch expected power cycle efficiency adj."),
+ 	NULL},
+{"disp_presolve_nconstr", (getter)Outputs_get_disp_presolve_nconstr,(setter)0,
+	PyDoc_STR("*sequence*: Dispatch number of constraints in problem"),
+ 	NULL},
+{"disp_presolve_nconstr_ann", (getter)Outputs_get_disp_presolve_nconstr_ann,(setter)0,
+	PyDoc_STR("*float*: Annual sum of dispatch problem constraint count"),
+ 	NULL},
+{"disp_presolve_nvar", (getter)Outputs_get_disp_presolve_nvar,(setter)0,
+	PyDoc_STR("*sequence*: Dispatch number of variables in problem"),
+ 	NULL},
+{"disp_presolve_nvar_ann", (getter)Outputs_get_disp_presolve_nvar_ann,(setter)0,
+	PyDoc_STR("*float*: Annual sum of dispatch problem variable count"),
+ 	NULL},
+{"disp_qpbsu_expected", (getter)Outputs_get_disp_qpbsu_expected,(setter)0,
+	PyDoc_STR("*sequence*: Dispatch expected power cycle startup energy [MWht]"),
+ 	NULL},
+{"disp_qsfprod_expected", (getter)Outputs_get_disp_qsfprod_expected,(setter)0,
+	PyDoc_STR("*sequence*: Dispatch expected heat pump heat generation [MWt]"),
+ 	NULL},
+{"disp_qsfsu_expected", (getter)Outputs_get_disp_qsfsu_expected,(setter)0,
+	PyDoc_STR("*sequence*: Dispatch expected heat pump startup enegy [MWt]"),
+ 	NULL},
+{"disp_rel_mip_gap", (getter)Outputs_get_disp_rel_mip_gap,(setter)0,
+	PyDoc_STR("*sequence*: Dispatch relative MIP gap"),
+ 	NULL},
+{"disp_rev_expected", (getter)Outputs_get_disp_rev_expected,(setter)0,
+	PyDoc_STR("*sequence*: Dispatch expected revenue factor"),
+ 	NULL},
+{"disp_solve_iter", (getter)Outputs_get_disp_solve_iter,(setter)0,
+	PyDoc_STR("*sequence*: Dispatch iterations count"),
+ 	NULL},
+{"disp_solve_state", (getter)Outputs_get_disp_solve_state,(setter)0,
+	PyDoc_STR("*sequence*: Dispatch solver state"),
+ 	NULL},
+{"disp_solve_state_ann", (getter)Outputs_get_disp_solve_state_ann,(setter)0,
+	PyDoc_STR("*float*: Annual sum of dispatch solve state"),
+ 	NULL},
+{"disp_solve_time", (getter)Outputs_get_disp_solve_time,(setter)0,
+	PyDoc_STR("*sequence*: Dispatch solver time [sec]"),
+ 	NULL},
+{"disp_solve_time_ann", (getter)Outputs_get_disp_solve_time_ann,(setter)0,
+	PyDoc_STR("*float*: Annual sum of dispatch solver time [sec]"),
+ 	NULL},
+{"disp_subopt_flag", (getter)Outputs_get_disp_subopt_flag,(setter)0,
+	PyDoc_STR("*sequence*: Dispatch suboptimal solution flag"),
+ 	NULL},
+{"disp_tes_expected", (getter)Outputs_get_disp_tes_expected,(setter)0,
+	PyDoc_STR("*sequence*: Dispatch expected TES charge level [MWht]"),
+ 	NULL},
+{"disp_wpb_expected", (getter)Outputs_get_disp_wpb_expected,(setter)0,
+	PyDoc_STR("*sequence*: Dispatch expected power generation [MWe]"),
  	NULL},
 {"e_ch_tes", (getter)Outputs_get_e_ch_tes,(setter)0,
 	PyDoc_STR("*sequence*: TES charge state [MWht]"),
@@ -4920,11 +5136,11 @@ static PyMethodDef EtesPtesModule_methods[] = {
 		{"new",             EtesPtes_new,         METH_VARARGS,
 				PyDoc_STR("new() -> EtesPtes")},
 		{"default",             EtesPtes_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> EtesPtes\n\nLoad values from SAM default configurations to provide as inputs to the model. \n\n			`config` options:\n\n- \"PTESSingleOwner\"\n\n.. note::\n\n	The default configuration is a collection of default values for the module inputs. Some inputs may not be included in the default configuration and are automatically assigned the value indicated by the variable's 'Required' attribute.")},
+				PyDoc_STR("default(config) -> EtesPtes\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n		- *\"PTESSingleOwner\"*\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
 		{"wrap",             EtesPtes_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> EtesPtes\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
+				PyDoc_STR("wrap(ssc_data_t) -> EtesPtes\n\nLoad data from a PySSC object.\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap()``")},
 		{"from_existing",   EtesPtes_from_existing,        METH_VARARGS,
-				PyDoc_STR("from_existing(data, optional config) -> EtesPtes\n\nShare underlying data with an existing PySAM class. If config provided, default attributes are loaded otherwise.")},
+				PyDoc_STR("from_existing(data, optional config) -> EtesPtes\n\nShare data with an existing PySAM class. If ``optional config`` is a valid configuration name, load the module's defaults for that configuration.")},
 		{NULL,              NULL}           /* sentinel */
 };
 

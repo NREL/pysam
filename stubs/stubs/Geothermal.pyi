@@ -56,7 +56,12 @@ class Geothermal(object):
 		file_name = str
 		fracture_angle = float
 		fracture_aperature = float
+		fracture_length = float
+		fracture_spacing = float
 		fracture_width = float
+		geotherm_cost_inj_cost_curve_welltype = float
+		geotherm_cost_inj_prod_well_ratio = float
+		geotherm_cost_prod_cost_curve_welltype = float
 		geothermal_analysis_period = float
 		hc_ctl1 = float
 		hc_ctl2 = float
@@ -69,6 +74,7 @@ class Geothermal(object):
 		hc_ctl9 = float
 		hr_pl_nlev = float
 		hybrid_dispatch_schedule = str
+		inj_casing_size = float
 		inj_prod_well_distance = float
 		inj_well_diam = float
 		model_choice = float
@@ -78,9 +84,11 @@ class Geothermal(object):
 		num_wells_getem = float
 		pb_bd_frac = float
 		plant_efficiency_input = float
+		prod_well_choice = float
 		pump_efficiency = float
 		q_sby_frac = float
 		reservoir_height = float
+		reservoir_model_inputs = tuple
 		reservoir_permeability = float
 		reservoir_pressure_change = float
 		reservoir_pressure_change_type = float
@@ -150,8 +158,10 @@ class Geothermal(object):
 		first_year_output = float
 		flash_count = float
 		gen = tuple
+		gross_cost_output = float
 		gross_output = float
 		hp_flash_pressure = float
+		inj_pump_hp = float
 		kwh_per_kw = float
 		lifetime_output = float
 		lp_flash_pressure = float
@@ -159,6 +169,7 @@ class Geothermal(object):
 		monthly_power = tuple
 		monthly_resource_temperature = tuple
 		ncg_condensate_pump = float
+		num_wells_getem_inj = float
 		num_wells_getem_output = float
 		plant_brine_eff = float
 		pressure_ratio_1 = float
@@ -166,7 +177,10 @@ class Geothermal(object):
 		pressure_ratio_3 = float
 		pump_depth_ft = float
 		pump_hp = float
+		pump_watthr_per_lb = float
 		pump_work = float
+		pumpwork_inj = float
+		pumpwork_prod = float
 		qCondenser = float
 		qRejectByStage_1 = float
 		qRejectByStage_2 = float

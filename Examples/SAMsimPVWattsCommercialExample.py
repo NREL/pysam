@@ -13,7 +13,7 @@ The steps are:
     Run the simulations.
     Print the results.
 
-Most recently tested against PySAM 3.0.1
+Most recently tested against PySAM 4.0.0
 
 @author: frohro
 """

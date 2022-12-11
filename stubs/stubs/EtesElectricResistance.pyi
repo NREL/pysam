@@ -104,7 +104,6 @@ class EtesElectricResistance(object):
 		T_htf_cold_des = float
 		T_htf_hot_des = float
 		design_eff = float
-		gross_net_conversion_factor = float
 		heater_mult = float
 		tshours = float
 
@@ -206,6 +205,7 @@ class EtesElectricResistance(object):
 
 		f_q_dot_des_allowable_su = float
 		f_q_dot_heater_min = float
+		heater_efficiency = float
 		hrs_startup_at_max_rate = float
 
 
@@ -354,23 +354,33 @@ class EtesElectricResistance(object):
 
 
 		E_heater_su_des = float
+		Q_dot_HTF_ND_des_calc = float
 		Q_tes_des = float
+		T_amb_high_calc = float
+		T_amb_low_calc = float
+		T_amb_ref_calc = float
 		T_htf_cycle_in = tuple
 		T_htf_cycle_out = tuple
 		T_htf_heater_in = tuple
 		T_htf_heater_out = tuple
+		T_htf_high_calc = float
+		T_htf_low_calc = float
+		T_htf_ref_calc = float
 		T_tes_cold = tuple
 		T_tes_hot = tuple
 		V_tes_htf_avail = float
 		V_tes_htf_total = float
 		W_dot_bop_design = float
 		W_dot_bop_parasitics = tuple
+		W_dot_cooling_ND_des_calc = float
 		W_dot_cycle_cooling = tuple
 		W_dot_cycle_gross = tuple
 		W_dot_cycle_htf_pump = tuple
 		W_dot_cycle_net = tuple
 		W_dot_fixed_parasitics = tuple
+		W_dot_gross_ND_des_calc = float
 		W_dot_heater = tuple
+		W_dot_heater_des = float
 		W_dot_out_net = tuple
 		annual_E_cycle_gross = float
 		annual_E_heater = float
@@ -381,7 +391,9 @@ class EtesElectricResistance(object):
 		annual_Q_heater_to_htf = float
 		annual_Q_tes_losses = float
 		annual_energy = float
+		annual_energy_distribution_time = tuple
 		annual_energy_full_availability = float
+		avg_suboptimal_rel_mip_gap = float
 		bop_cost_calc = float
 		construction_financing_cost = float
 		contingency_cost_calc = float
@@ -402,7 +414,6 @@ class EtesElectricResistance(object):
 		disp_presolve_nvar = tuple
 		disp_presolve_nvar_ann = float
 		disp_qpbsu_expected = tuple
-		disp_qsf_expected = tuple
 		disp_qsfprod_expected = tuple
 		disp_qsfsu_expected = tuple
 		disp_rel_mip_gap = tuple
@@ -426,17 +437,27 @@ class EtesElectricResistance(object):
 		installed_per_cap_cost_calc = float
 		land_cost_calc = float
 		m_dot_balance = tuple
+		m_dot_htf_ND_high_calc = float
+		m_dot_htf_ND_low_calc = float
+		m_dot_htf_ND_ref_calc = float
 		m_dot_htf_cycle = tuple
 		m_dot_htf_cycle_des = float
 		m_dot_htf_heater = tuple
+		m_dot_water_ND_des_calc = float
 		m_dot_water_cycle = tuple
 		mass_tes_cold = tuple
 		mass_tes_hot = tuple
+		n_T_amb_pars_calc = float
+		n_T_htf_pars_calc = float
+		n_m_dot_pars_calc = float
 		n_op_modes = tuple
 		nameplate = float
 		op_mode_1 = tuple
 		op_mode_2 = tuple
 		op_mode_3 = tuple
+		operating_modes_a = tuple
+		operating_modes_b = tuple
+		operating_modes_c = tuple
 		ppa_soln_mode = float
 		q_balance = tuple
 		q_dot_ch_tes = tuple

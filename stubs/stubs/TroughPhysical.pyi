@@ -473,6 +473,7 @@ class TroughPhysical(object):
 		annual_tes_freeze_protection = float
 		annual_thermal_consumption = float
 		annual_total_water_use = float
+		avg_suboptimal_rel_mip_gap = float
 		beam = tuple
 		capacity_factor = float
 		conversion_factor = float

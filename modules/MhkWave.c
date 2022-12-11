@@ -69,11 +69,11 @@ MHKWave_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef MHKWave_methods[] = {
 		{"assign",            (PyCFunction)MHKWave_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``MHKWave_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``MHKWave_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)MHKWave_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``MHKWave_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``MHKWave_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)MHKWave_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -391,79 +391,79 @@ MHKWave_set_year(VarGroupObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef MHKWave_getset[] = {
 {"balance_of_system_cost_total", (getter)MHKWave_get_balance_of_system_cost_total,(setter)MHKWave_set_balance_of_system_cost_total,
-	PyDoc_STR("*float*: BOS costs [$]\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: BOS costs [$]\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"day", (getter)MHKWave_get_day,(setter)MHKWave_set_day,
-	PyDoc_STR("*sequence*: Day [dy]\n\n*Info*: 1-365"),
+	PyDoc_STR("*sequence*: Day [dy]\n\n**Info:**\n1-365"),
  	NULL},
 {"device_costs_total", (getter)MHKWave_get_device_costs_total,(setter)MHKWave_set_device_costs_total,
-	PyDoc_STR("*float*: Device costs [$]\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: Device costs [$]\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"device_rated_power", (getter)MHKWave_get_device_rated_power,(setter)MHKWave_set_device_rated_power,
-	PyDoc_STR("*float*: Rated capacity of device [kW]\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - number_devices\n\t - system_capacity\n\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - wave_power_matrix\n"),
+	PyDoc_STR("*float*: Rated capacity of device [kW]\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``device_rated_power``:\n\n\t - number_devices\n\t - system_capacity\n\n\nThe value of ``device_rated_power`` depends on the following variables:\n\n\t - wave_power_matrix\n"),
  	NULL},
 {"energy_period", (getter)MHKWave_get_energy_period,(setter)MHKWave_set_energy_period,
-	PyDoc_STR("*sequence*: Wave period time series data [s]\n\n*Required*: False"),
+	PyDoc_STR("*sequence*: Wave period time series data [s]\n\n**Required:**\nFalse for configuration with default inputs. May be required if a variable dependent on its value changes. Example: For the Detailed PV - Single Owner configuration, only Subarray 1 is enabled in the configuration defaults, so Subarray 2 inputs would not be required; if Subarray 2 is enabled, then Subarray 2 inputs is required."),
  	NULL},
 {"financial_cost_total", (getter)MHKWave_get_financial_cost_total,(setter)MHKWave_set_financial_cost_total,
-	PyDoc_STR("*float*: Financial costs [$]\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: Financial costs [$]\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"fixed_charge_rate", (getter)MHKWave_get_fixed_charge_rate,(setter)MHKWave_set_fixed_charge_rate,
-	PyDoc_STR("*float*: FCR from LCOE Cost page\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: FCR from LCOE Cost page\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"hour", (getter)MHKWave_get_hour,(setter)MHKWave_set_hour,
-	PyDoc_STR("*sequence*: Hour [hr]\n\n*Info*: 0-23"),
+	PyDoc_STR("*sequence*: Hour [hr]\n\n**Info:**\n0-23"),
  	NULL},
 {"loss_additional", (getter)MHKWave_get_loss_additional,(setter)MHKWave_set_loss_additional,
-	PyDoc_STR("*float*: Additional losses [%]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Additional losses [%]\n\n**Required:**\nTrue"),
  	NULL},
 {"loss_array_spacing", (getter)MHKWave_get_loss_array_spacing,(setter)MHKWave_set_loss_array_spacing,
-	PyDoc_STR("*float*: Array spacing loss [%]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Array spacing loss [%]\n\n**Required:**\nTrue"),
  	NULL},
 {"loss_downtime", (getter)MHKWave_get_loss_downtime,(setter)MHKWave_set_loss_downtime,
-	PyDoc_STR("*float*: Array/WEC downtime loss [%]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Array/WEC downtime loss [%]\n\n**Required:**\nTrue"),
  	NULL},
 {"loss_resource_overprediction", (getter)MHKWave_get_loss_resource_overprediction,(setter)MHKWave_set_loss_resource_overprediction,
-	PyDoc_STR("*float*: Resource overprediction loss [%]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Resource overprediction loss [%]\n\n**Required:**\nTrue"),
  	NULL},
 {"loss_transmission", (getter)MHKWave_get_loss_transmission,(setter)MHKWave_set_loss_transmission,
-	PyDoc_STR("*float*: Transmission losses [%]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Transmission losses [%]\n\n**Required:**\nTrue"),
  	NULL},
 {"minute", (getter)MHKWave_get_minute,(setter)MHKWave_set_minute,
-	PyDoc_STR("*sequence*: Minute [min]\n\n*Info*: 0-59"),
+	PyDoc_STR("*sequence*: Minute [min]\n\n**Info:**\n0-59"),
  	NULL},
 {"month", (getter)MHKWave_get_month,(setter)MHKWave_set_month,
-	PyDoc_STR("*sequence*: Month [mn]\n\n*Info*: 1-12"),
+	PyDoc_STR("*sequence*: Month [mn]\n\n**Info:**\n1-12"),
  	NULL},
 {"number_devices", (getter)MHKWave_get_number_devices,(setter)MHKWave_set_number_devices,
-	PyDoc_STR("*float*: Number of wave devices in the system\n\n*Constraints*: INTEGER\n\n*Required*: If not provided, assumed to be 1\n\n*Changes to this variable may require updating the values of the following*: \n\t - system_capacity\n\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - device_rated_power\n\t - wave_power_matrix\n"),
+	PyDoc_STR("*float*: Number of wave devices in the system\n\n**Constraints:**\nINTEGER\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults.\n\nThe value of the following variables depends on ``number_devices``:\n\n\t - system_capacity\n\n\nThe value of ``number_devices`` depends on the following variables:\n\n\t - device_rated_power\n\t - wave_power_matrix\n"),
  	NULL},
 {"number_hours", (getter)MHKWave_get_number_hours,(setter)MHKWave_set_number_hours,
-	PyDoc_STR("*float*: Number of hours in wave time series\n\n*Required*: False"),
+	PyDoc_STR("*float*: Number of hours in wave time series\n\n**Required:**\nFalse for configuration with default inputs. May be required if a variable dependent on its value changes. Example: For the Detailed PV - Single Owner configuration, only Subarray 1 is enabled in the configuration defaults, so Subarray 2 inputs would not be required; if Subarray 2 is enabled, then Subarray 2 inputs is required."),
  	NULL},
 {"number_records", (getter)MHKWave_get_number_records,(setter)MHKWave_set_number_records,
-	PyDoc_STR("*float*: Number of records in wave time series\n\n*Required*: False"),
+	PyDoc_STR("*float*: Number of records in wave time series\n\n**Required:**\nFalse for configuration with default inputs. May be required if a variable dependent on its value changes. Example: For the Detailed PV - Single Owner configuration, only Subarray 1 is enabled in the configuration defaults, so Subarray 2 inputs would not be required; if Subarray 2 is enabled, then Subarray 2 inputs is required."),
  	NULL},
 {"significant_wave_height", (getter)MHKWave_get_significant_wave_height,(setter)MHKWave_set_significant_wave_height,
-	PyDoc_STR("*sequence*: Significant wave height time series data [m]\n\n*Required*: False"),
+	PyDoc_STR("*sequence*: Significant wave height time series data [m]\n\n**Required:**\nFalse for configuration with default inputs. May be required if a variable dependent on its value changes. Example: For the Detailed PV - Single Owner configuration, only Subarray 1 is enabled in the configuration defaults, so Subarray 2 inputs would not be required; if Subarray 2 is enabled, then Subarray 2 inputs is required."),
  	NULL},
 {"system_capacity", (getter)MHKWave_get_system_capacity,(setter)MHKWave_set_system_capacity,
-	PyDoc_STR("*float*: System Nameplate Capacity [kW]\n\n*Required*: If not provided, assumed to be 0\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - device_rated_power\n\t - number_devices\n\t - wave_power_matrix\n"),
+	PyDoc_STR("*float*: System Nameplate Capacity [kW]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults.\n\nThe value of ``system_capacity`` depends on the following variables:\n\n\t - device_rated_power\n\t - number_devices\n\t - wave_power_matrix\n"),
  	NULL},
 {"total_operating_cost", (getter)MHKWave_get_total_operating_cost,(setter)MHKWave_set_total_operating_cost,
-	PyDoc_STR("*float*: O&M costs [$]\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: O&M costs [$]\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"wave_power_matrix", (getter)MHKWave_get_wave_power_matrix,(setter)MHKWave_set_wave_power_matrix,
-	PyDoc_STR("*sequence[sequence]*: Wave Power Matrix\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - device_rated_power\n\t - number_devices\n\t - system_capacity\n"),
+	PyDoc_STR("*sequence[sequence]*: Wave Power Matrix\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``wave_power_matrix``:\n\n\t - device_rated_power\n\t - number_devices\n\t - system_capacity\n"),
  	NULL},
 {"wave_resource_data", (getter)MHKWave_get_wave_resource_data,(setter)MHKWave_set_wave_resource_data,
-	PyDoc_STR("*dict*: Array input of wave_resource_matrix (JPD) or time series (significant_wave_height and energy_period) data\n\n*Required*: False"),
+	PyDoc_STR("*dict*: Array input of wave_resource_matrix (JPD) or time series (significant_wave_height and energy_period) data\n\n**Required:**\nFalse for configuration with default inputs. May be required if a variable dependent on its value changes. Example: For the Detailed PV - Single Owner configuration, only Subarray 1 is enabled in the configuration defaults, so Subarray 2 inputs would not be required; if Subarray 2 is enabled, then Subarray 2 inputs is required."),
  	NULL},
 {"wave_resource_matrix", (getter)MHKWave_get_wave_resource_matrix,(setter)MHKWave_set_wave_resource_matrix,
-	PyDoc_STR("*sequence[sequence]*: Frequency distribution of wave resource as a function of Hs and Te\n\n*Required*: False"),
+	PyDoc_STR("*sequence[sequence]*: Frequency distribution of wave resource as a function of Hs and Te\n\n**Required:**\nFalse for configuration with default inputs. May be required if a variable dependent on its value changes. Example: For the Detailed PV - Single Owner configuration, only Subarray 1 is enabled in the configuration defaults, so Subarray 2 inputs would not be required; if Subarray 2 is enabled, then Subarray 2 inputs is required."),
  	NULL},
 {"wave_resource_model_choice", (getter)MHKWave_get_wave_resource_model_choice,(setter)MHKWave_set_wave_resource_model_choice,
-	PyDoc_STR("*float*: Hourly or JPD wave resource data [0/1]\n\n*Constraints*: INTEGER\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Hourly or JPD wave resource data [0/1]\n\n**Constraints:**\nINTEGER\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"year", (getter)MHKWave_get_year,(setter)MHKWave_set_year,
 	PyDoc_STR("*sequence*: Year [yr]"),
@@ -505,6 +505,173 @@ static PyTypeObject MHKWave_Type = {
 		MHKWave_methods,         /*tp_methods*/
 		0,                          /*tp_members*/
 		MHKWave_getset,          /*tp_getset*/
+		0,                          /*tp_base*/
+		0,                          /*tp_dict*/
+		0,                          /*tp_descr_get*/
+		0,                          /*tp_descr_set*/
+		0,                          /*tp_dictofnset*/
+		0,                          /*tp_init*/
+		0,                          /*tp_alloc*/
+		0,             /*tp_new*/
+		0,                          /*tp_free*/
+		0,                          /*tp_is_gc*/
+};
+
+
+/*
+ * Lifetime Group
+ */ 
+
+static PyTypeObject Lifetime_Type;
+
+static PyObject *
+Lifetime_new(SAM_MhkWave data_ptr)
+{
+	PyObject* new_obj = Lifetime_Type.tp_alloc(&Lifetime_Type,0);
+
+	VarGroupObject* Lifetime_obj = (VarGroupObject*)new_obj;
+
+	Lifetime_obj->data_ptr = (SAM_table)data_ptr;
+
+	return new_obj;
+}
+
+/* Lifetime methods */
+
+static PyObject *
+Lifetime_assign(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "MhkWave", "Lifetime")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+Lifetime_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Lifetime_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "MhkWave", "Lifetime")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+Lifetime_export(VarGroupObject *self, PyObject *args)
+{
+	PyTypeObject* tp = &Lifetime_Type;
+	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
+	return dict;
+}
+
+static PyMethodDef Lifetime_methods[] = {
+		{"assign",            (PyCFunction)Lifetime_assign,  METH_VARARGS,
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Lifetime_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Lifetime_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Lifetime_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)Lifetime_export,  METH_VARARGS,
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
+		{NULL,              NULL}           /* sentinel */
+};
+
+static PyObject *
+Lifetime_get_analysis_period(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MhkWave_Lifetime_analysis_period_nget, self->data_ptr);
+}
+
+static int
+Lifetime_set_analysis_period(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_MhkWave_Lifetime_analysis_period_nset, self->data_ptr);
+}
+
+static PyObject *
+Lifetime_get_generic_degradation(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_MhkWave_Lifetime_generic_degradation_aget, self->data_ptr);
+}
+
+static int
+Lifetime_set_generic_degradation(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_MhkWave_Lifetime_generic_degradation_aset, self->data_ptr);
+}
+
+static PyObject *
+Lifetime_get_system_use_lifetime_output(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MhkWave_Lifetime_system_use_lifetime_output_nget, self->data_ptr);
+}
+
+static int
+Lifetime_set_system_use_lifetime_output(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_MhkWave_Lifetime_system_use_lifetime_output_nset, self->data_ptr);
+}
+
+static PyGetSetDef Lifetime_getset[] = {
+{"analysis_period", (getter)Lifetime_get_analysis_period,(setter)Lifetime_set_analysis_period,
+	PyDoc_STR("*float*: Lifetime analysis period [years]\n\n**Required:**\nRequired if system_use_lifetime_output=1"),
+ 	NULL},
+{"generic_degradation", (getter)Lifetime_get_generic_degradation,(setter)Lifetime_set_generic_degradation,
+	PyDoc_STR("*sequence*: Annual AC degradation [%/year]\n\n**Required:**\nRequired if system_use_lifetime_output=1"),
+ 	NULL},
+{"system_use_lifetime_output", (getter)Lifetime_get_system_use_lifetime_output,(setter)Lifetime_set_system_use_lifetime_output,
+	PyDoc_STR("*float*: Generic lifetime simulation [0/1]\n\n**Constraints:**\nINTEGER,MIN=0,MAX=1\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+	{NULL}  /* Sentinel */
+};
+
+static PyTypeObject Lifetime_Type = {
+		/* The ob_type field must be initialized in the module init function
+		 * to be portable to Windows without using C++. */
+		PyVarObject_HEAD_INIT(NULL, 0)
+		"MhkWave.Lifetime",             /*tp_name*/
+		sizeof(VarGroupObject),          /*tp_basicsize*/
+		0,                          /*tp_itemsize*/
+		/* methods */
+		0,    /*tp_dealloc*/
+		0,                          /*tp_print*/
+		(getattrfunc)0,             /*tp_getattr*/
+		0,                          /*tp_setattr*/
+		0,                          /*tp_reserved*/
+		0,                          /*tp_repr*/
+		0,                          /*tp_as_number*/
+		0,                          /*tp_as_sequence*/
+		0,                          /*tp_as_mapping*/
+		0,                          /*tp_hash*/
+		0,                          /*tp_call*/
+		0,                          /*tp_str*/
+		0,                          /*tp_getattro*/
+		0,                          /*tp_setattro*/
+		0,                          /*tp_as_buffer*/
+		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
+		0,                          /*tp_doc*/
+		0,                          /*tp_traverse*/
+		0,                          /*tp_clear*/
+		0,                          /*tp_richcompare*/
+		0,                          /*tp_weaklistofnset*/
+		0,                          /*tp_iter*/
+		0,                          /*tp_iternext*/
+		Lifetime_methods,         /*tp_methods*/
+		0,                          /*tp_members*/
+		Lifetime_getset,          /*tp_getset*/
 		0,                          /*tp_base*/
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
@@ -581,11 +748,11 @@ Outputs_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Outputs_methods[] = {
 		{"assign",            (PyCFunction)Outputs_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Outputs_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Outputs_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -617,6 +784,12 @@ static PyObject *
 Outputs_get_device_average_power(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_MhkWave_Outputs_device_average_power_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_energy_hourly_kW(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_MhkWave_Outputs_energy_hourly_kW_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -827,6 +1000,9 @@ static PyGetSetDef Outputs_getset[] = {
 {"device_average_power", (getter)Outputs_get_device_average_power,(setter)0,
 	PyDoc_STR("*float*: Average power production of a single device [kW]"),
  	NULL},
+{"energy_hourly_kW", (getter)Outputs_get_energy_hourly_kW,(setter)0,
+	PyDoc_STR("*sequence*: Power output of array [kW]"),
+ 	NULL},
 {"energy_hourly_kWh", (getter)Outputs_get_energy_hourly_kWh,(setter)0,
 	PyDoc_STR("*sequence*: Energy production of array [kWh]"),
  	NULL},
@@ -989,6 +1165,25 @@ newMhkWaveObject(void* data_ptr)
 	PyObject* MHKWave_obj = MHKWave_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "MHKWave", MHKWave_obj);
 	Py_DECREF(MHKWave_obj);
+
+	PyObject* Lifetime_obj = Lifetime_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "Lifetime", Lifetime_obj);
+	Py_DECREF(Lifetime_obj);
+
+	PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
+
+	PyObject* data_cap = PyCapsule_New(self->data_ptr, NULL, NULL);
+	PyObject* Adjust_obj = PyObject_CallMethod(AdjustmentFactorsModule, "new", "(O)", data_cap);
+	Py_XDECREF(data_cap);
+	Py_XDECREF(AdjustmentFactorsModule);
+
+	if (!Adjust_obj){
+		PyErr_SetString(PyExc_Exception, "Couldn't create AdjustmentFactorsObject\n");
+		return NULL;
+	}
+
+	PyDict_SetItemString(attr_dict, "AdjustmentFactors", Adjust_obj);
+	Py_DECREF(Adjust_obj);
 
 	PyObject* Outputs_obj = Outputs_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
@@ -1248,11 +1443,11 @@ static PyMethodDef MhkWaveModule_methods[] = {
 		{"new",             MhkWave_new,         METH_VARARGS,
 				PyDoc_STR("new() -> MhkWave")},
 		{"default",             MhkWave_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> MhkWave\n\nLoad values from SAM default configurations to provide as inputs to the model. \n\n			`config` options:\n\n- \"MEwaveLCOECalculator\"\n- \"MEwaveNone\"\n\n.. note::\n\n	The default configuration is a collection of default values for the module inputs. Some inputs may not be included in the default configuration and are automatically assigned the value indicated by the variable's 'Required' attribute.")},
+				PyDoc_STR("default(config) -> MhkWave\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n		- *\"MEwaveBatterySingleOwner\"*\n\n		- *\"MEwaveLCOECalculator\"*\n\n		- *\"MEwaveNone\"*\n\n		- *\"MEwaveSingleOwner\"*\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
 		{"wrap",             MhkWave_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> MhkWave\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
+				PyDoc_STR("wrap(ssc_data_t) -> MhkWave\n\nLoad data from a PySSC object.\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap()``")},
 		{"from_existing",   MhkWave_from_existing,        METH_VARARGS,
-				PyDoc_STR("from_existing(data, optional config) -> MhkWave\n\nShare underlying data with an existing PySAM class. If config provided, default attributes are loaded otherwise.")},
+				PyDoc_STR("from_existing(data, optional config) -> MhkWave\n\nShare data with an existing PySAM class. If ``optional config`` is a valid configuration name, load the module's defaults for that configuration.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -1271,12 +1466,38 @@ MhkWaveModule_exec(PyObject *m)
 	MhkWave_Type.tp_dict = PyDict_New();
 	if (!MhkWave_Type.tp_dict) { goto fail; }
 
+	/// Add the AdjustmentFactors type object to MhkWave_Type
+	PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
+	if (!AdjustmentFactorsModule){
+		PyErr_SetImportError(PyUnicode_FromString("Could not import AdjustmentFactors module."), NULL, NULL);
+	}
+
+	PyTypeObject* AdjustmentFactors_Type = (PyTypeObject*)PyObject_GetAttrString(AdjustmentFactorsModule, "AdjustmentFactors");
+	if (!AdjustmentFactors_Type){
+		PyErr_SetImportError(PyUnicode_FromString("Could not import AdjustmentFactors type."), NULL, NULL);
+	}
+	Py_XDECREF(AdjustmentFactorsModule);
+
+	if (PyType_Ready(AdjustmentFactors_Type) < 0) { goto fail; }
+	PyDict_SetItemString(MhkWave_Type.tp_dict,
+						 "AdjustmentFactors",
+						 (PyObject*)AdjustmentFactors_Type);
+	Py_DECREF(&AdjustmentFactors_Type);
+	Py_XDECREF(AdjustmentFactors_Type);
+
 	/// Add the MHKWave type object to MhkWave_Type
 	if (PyType_Ready(&MHKWave_Type) < 0) { goto fail; }
 	PyDict_SetItemString(MhkWave_Type.tp_dict,
 				"MHKWave",
 				(PyObject*)&MHKWave_Type);
 	Py_DECREF(&MHKWave_Type);
+
+	/// Add the Lifetime type object to MhkWave_Type
+	if (PyType_Ready(&Lifetime_Type) < 0) { goto fail; }
+	PyDict_SetItemString(MhkWave_Type.tp_dict,
+				"Lifetime",
+				(PyObject*)&Lifetime_Type);
+	Py_DECREF(&Lifetime_Type);
 
 	/// Add the Outputs type object to MhkWave_Type
 	if (PyType_Ready(&Outputs_Type) < 0) { goto fail; }

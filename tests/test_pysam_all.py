@@ -266,7 +266,13 @@ def test_import_all():
 
 sf = str(Path(__file__).parent / "blythe_ca_33.617773_-114.588261_psmv3_60_tmy.csv")
 wf = str(Path(__file__).parent / "AR Northwestern-Flat Lands.srw")
+wave_f = str(Path(__file__).parent.parent / "Examples" / "Marine energy examples" / "CalWave_California_Wave Resource _SAM CSV.csv")
 
+import PySAM.WaveFileReader as wavefile
+wavefile_model = wavefile.new()
+wavefile_model.WeatherReader.wave_resource_filename = wave_f
+wavefile_model.WeatherReader.wave_resource_model_choice = 0
+wavefile_model.execute()
 
 def assign_values(mod, i):
     defaults = glob.glob(os.environ['SAMNTDIR'] + "/api/api_autogen/library/defaults/" + mod + "_*.json")
@@ -274,7 +280,11 @@ def assign_values(mod, i):
     for default in defaults:
         default = os.path.basename(default).split('.')[0].split('_')[1]
         m = i.default(default)
-        if mod == "Pvsamv1" or mod == "Pvwattsv7" or mod == "TcsmoltenSalt" or mod == "Pvwattsv5" or mod == "Swh":
+        if mod == "Pvsamv1" or mod == "Pvwattsv7" or mod == "Pvwattsv5" or mod =="Pvwattsv8":
+            m.SolarResource.solar_resource_file = sf
+            m.SolarResource.use_wf_albedo = 0
+            m.SolarResource.albedo = (0.1,) * 12
+        elif mod == "TcsmoltenSalt" or mod == "Swh":
             m.SolarResource.solar_resource_file = sf
         elif mod == "Biomass":
             m.Biopower.file_name = sf
@@ -295,7 +305,13 @@ def assign_values(mod, i):
             m.value("ac", [1] * 8760)
             m.value("inverter_efficiency", 0.96)
         elif mod == "Battery":
-            m.value("gen", [1] * 8760)
+            m.value("gen", [1] * 8760 * 2)
+            m.value("energy_hourly_kW", [1] * 8760 * 2)
+            m.value("system_use_lifetime_output", 1)
+            m.value("analysis_period", 2)
+        elif mod == "MhkWave":
+            m.value("wave_resource_matrix", wavefile_model.Outputs.wave_resource_matrix)
+            m.value("wave_resource_model_choice", 0)
         else:
             try:
                 m.value("solar_resource_file", sf)
@@ -311,7 +327,8 @@ def assign_values(mod, i):
         except:
             pass
         try:
-            m.value("analysis_period", 1)
+            if mod != "Battery":
+                m.value("analysis_period", 1)
             m.value("batt_dispatch_choice", 0)
         except:
             pass
@@ -328,7 +345,7 @@ def test_run_all():
         return
     techs = (
         "Battery", "Battwatts", "Biomass", "Geothermal", "LinearFresnelDsgIph", "MhkTidal", "MhkWave", "Windpower",
-        "Pvsamv1", "Pvwattsv7", "Pvwattsv5", "TcsmoltenSalt", "Hcpv", "Swh", "GenericSystem", "Grid",
+        "Pvsamv1", "Pvwattsv8", "Pvwattsv7", "Pvwattsv5", "TcsmoltenSalt", "Hcpv", "Swh", "GenericSystem", "Grid",
         "TroughPhysicalProcessHeat", "TcsMSLF", "TcsgenericSolar", "TcslinearFresnel", "TcstroughEmpirical",
         "TroughPhysical", "EtesElectricResistance", )
     for mod in techs:

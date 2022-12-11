@@ -38,12 +38,15 @@ class GeothermalCosts(object):
 		cw_pump_work = float
 		cwflow = float
 		design_temp = float
+		dt_prod_well = float
 		eff_secondlaw = float
 		flash_count = float
+		gross_cost_output = float
 		gross_output = float
 		hp_flash_pressure = float
 		lp_flash_pressure = float
 		ncg_condensate_pump = float
+		ppi_base_year = float
 		pressure_ratio_1 = float
 		pressure_ratio_2 = float
 		pressure_ratio_3 = float

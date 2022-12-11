@@ -181,20 +181,20 @@ class Singleowner(object):
 			pass
 
 
-		itc_fed_amount = float
+		itc_fed_amount = tuple
 		itc_fed_amount_deprbas_fed = float
 		itc_fed_amount_deprbas_sta = float
-		itc_fed_percent = float
+		itc_fed_percent = tuple
 		itc_fed_percent_deprbas_fed = float
 		itc_fed_percent_deprbas_sta = float
-		itc_fed_percent_maxvalue = float
-		itc_sta_amount = float
+		itc_fed_percent_maxvalue = tuple
+		itc_sta_amount = tuple
 		itc_sta_amount_deprbas_fed = float
 		itc_sta_amount_deprbas_sta = float
-		itc_sta_percent = float
+		itc_sta_percent = tuple
 		itc_sta_percent_deprbas_fed = float
 		itc_sta_percent_deprbas_sta = float
-		itc_sta_percent_maxvalue = float
+		itc_sta_percent_maxvalue = tuple
 		ptc_fed_amount = tuple
 		ptc_fed_escal = float
 		ptc_fed_term = float
@@ -380,6 +380,7 @@ class Singleowner(object):
 		battery_per_kWh = float
 		en_batt = float
 		en_standalone_batt = float
+		en_wave_batt = float
 
 
 	class ElectricityRates(object):
@@ -648,6 +649,13 @@ class Singleowner(object):
 		cf_funding_om = tuple
 		cf_funding_receivables = tuple
 		cf_insurance_expense = tuple
+		cf_itc_fed = tuple
+		cf_itc_fed_amount = tuple
+		cf_itc_fed_percent_amount = tuple
+		cf_itc_sta = tuple
+		cf_itc_sta_amount = tuple
+		cf_itc_sta_percent_amount = tuple
+		cf_itc_total = tuple
 		cf_land_lease_expense = tuple
 		cf_length = float
 		cf_net_salvage_value = tuple

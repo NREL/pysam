@@ -10,7 +10,7 @@ https://nrel-pysam.readthedocs.io
 
 
 ## Requirements
-1. Python 3.5+, 64 bit
+1. Python 3.6+, 64 bit
 2. Operating system:
 	- MacOSX 10.7+
 	- Most Linux
@@ -32,7 +32,6 @@ https://nrel-pysam.readthedocs.io
 May not be compatible with different builds of the CPython reference interpreter, and not with alternative interpreters such as PyPy, IronPython or Jython
 
 ## Usage Examples
-- [Importing a SAM case](https://nrel-pysam.readthedocs.io/en/latest/Import.html)
 - [Examples](https://github.com/NREL/pysam/blob/master/Examples)
 
 

@@ -69,11 +69,11 @@ Simulation_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Simulation_methods[] = {
 		{"assign",            (PyCFunction)Simulation_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Simulation_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Simulation_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Simulation_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Simulation_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Simulation_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Simulation_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -91,7 +91,7 @@ Simulation_set_sim_type(VarGroupObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef Simulation_getset[] = {
 {"sim_type", (getter)Simulation_get_sim_type,(setter)Simulation_set_sim_type,
-	PyDoc_STR("*float*: 1 (default): timeseries, 2: design only\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: 1 (default): timeseries, 2: design only\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -206,11 +206,11 @@ TowerAndReceiver_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef TowerAndReceiver_methods[] = {
 		{"assign",            (PyCFunction)TowerAndReceiver_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``TowerAndReceiver_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``TowerAndReceiver_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)TowerAndReceiver_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``TowerAndReceiver_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``TowerAndReceiver_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)TowerAndReceiver_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -588,97 +588,97 @@ TowerAndReceiver_set_u_riser(VarGroupObject *self, PyObject *value, void *closur
 
 static PyGetSetDef TowerAndReceiver_getset[] = {
 {"D_rec", (getter)TowerAndReceiver_get_D_rec,(setter)TowerAndReceiver_set_D_rec,
-	PyDoc_STR("*float*: The overall outer diameter of the receiver [m]\n\n*Required*: True"),
+	PyDoc_STR("*float*: The overall outer diameter of the receiver [m]\n\n**Required:**\nTrue"),
  	NULL},
 {"Flow_type", (getter)TowerAndReceiver_get_Flow_type,(setter)TowerAndReceiver_set_Flow_type,
-	PyDoc_STR("*float*: Receiver flow pattern: see figure on SAM Receiver page\n\n*Required*: True"),
+	PyDoc_STR("*float*: Receiver flow pattern: see figure on SAM Receiver page\n\n**Required:**\nTrue"),
  	NULL},
 {"N_panels", (getter)TowerAndReceiver_get_N_panels,(setter)TowerAndReceiver_set_N_panels,
-	PyDoc_STR("*float*: Number of individual panels on the receiver\n\n*Constraints*: INTEGER\n\n*Required*: True"),
+	PyDoc_STR("*float*: Number of individual panels on the receiver\n\n**Constraints:**\nINTEGER\n\n**Required:**\nTrue"),
  	NULL},
 {"T_htf_cold_des", (getter)TowerAndReceiver_get_T_htf_cold_des,(setter)TowerAndReceiver_set_T_htf_cold_des,
-	PyDoc_STR("*float*: Cold HTF inlet temperature at design conditions [C]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Cold HTF inlet temperature at design conditions [C]\n\n**Required:**\nTrue"),
  	NULL},
 {"T_htf_hot_des", (getter)TowerAndReceiver_get_T_htf_hot_des,(setter)TowerAndReceiver_set_T_htf_hot_des,
-	PyDoc_STR("*float*: Hot HTF outlet temperature at design conditions [C]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Hot HTF outlet temperature at design conditions [C]\n\n**Required:**\nTrue"),
  	NULL},
 {"crossover_shift", (getter)TowerAndReceiver_get_crossover_shift,(setter)TowerAndReceiver_set_crossover_shift,
-	PyDoc_STR("*float*: Number of panels shift in receiver crossover position\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Number of panels shift in receiver crossover position\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"csp_pt_rec_max_oper_frac", (getter)TowerAndReceiver_get_csp_pt_rec_max_oper_frac,(setter)TowerAndReceiver_set_csp_pt_rec_max_oper_frac,
-	PyDoc_STR("*float*: Maximum receiver mass flow rate fraction\n\n*Required*: True"),
+	PyDoc_STR("*float*: Maximum receiver mass flow rate fraction\n\n**Required:**\nTrue"),
  	NULL},
 {"d_tube_out", (getter)TowerAndReceiver_get_d_tube_out,(setter)TowerAndReceiver_set_d_tube_out,
-	PyDoc_STR("*float*: The outer diameter of an individual receiver tube [mm]\n\n*Required*: True"),
+	PyDoc_STR("*float*: The outer diameter of an individual receiver tube [mm]\n\n**Required:**\nTrue"),
  	NULL},
 {"downc_tm_mult", (getter)TowerAndReceiver_get_downc_tm_mult,(setter)TowerAndReceiver_set_downc_tm_mult,
-	PyDoc_STR("*float*: Downcomer thermal mass multiplier\n\n*Required*: True if is_rec_model_trans=1"),
+	PyDoc_STR("*float*: Downcomer thermal mass multiplier\n\n**Required:**\nRequired if is_rec_model_trans=1"),
  	NULL},
 {"epsilon", (getter)TowerAndReceiver_get_epsilon,(setter)TowerAndReceiver_set_epsilon,
-	PyDoc_STR("*float*: The emissivity of the receiver surface coating\n\n*Required*: True"),
+	PyDoc_STR("*float*: The emissivity of the receiver surface coating\n\n**Required:**\nTrue"),
  	NULL},
 {"eta_pump", (getter)TowerAndReceiver_get_eta_pump,(setter)TowerAndReceiver_set_eta_pump,
-	PyDoc_STR("*float*: Receiver HTF pump efficiency\n\n*Required*: True"),
+	PyDoc_STR("*float*: Receiver HTF pump efficiency\n\n**Required:**\nTrue"),
  	NULL},
 {"f_rec_min", (getter)TowerAndReceiver_get_f_rec_min,(setter)TowerAndReceiver_set_f_rec_min,
-	PyDoc_STR("*float*: Minimum receiver mass flow rate turn down fraction\n\n*Required*: True"),
+	PyDoc_STR("*float*: Minimum receiver mass flow rate turn down fraction\n\n**Required:**\nTrue"),
  	NULL},
 {"field_fl_props", (getter)TowerAndReceiver_get_field_fl_props,(setter)TowerAndReceiver_set_field_fl_props,
-	PyDoc_STR("*sequence[sequence]*: User defined field fluid property data [-]\n\n*Required*: True"),
+	PyDoc_STR("*sequence[sequence]*: User defined field fluid property data [-]\n\n**Required:**\nTrue"),
  	NULL},
 {"h_tower", (getter)TowerAndReceiver_get_h_tower,(setter)TowerAndReceiver_set_h_tower,
-	PyDoc_STR("*float*: Tower height [m]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Tower height [m]\n\n**Required:**\nTrue"),
  	NULL},
 {"hl_ffact", (getter)TowerAndReceiver_get_hl_ffact,(setter)TowerAndReceiver_set_hl_ffact,
-	PyDoc_STR("*float*: The heat loss factor (thermal loss fudge factor)\n\n*Required*: True"),
+	PyDoc_STR("*float*: The heat loss factor (thermal loss fudge factor)\n\n**Required:**\nTrue"),
  	NULL},
 {"is_rec_clearsky_control", (getter)TowerAndReceiver_get_is_rec_clearsky_control,(setter)TowerAndReceiver_set_is_rec_clearsky_control,
-	PyDoc_STR("*float*: 0: use measured dni, 1: use clear-sky control w/ rec_clearsky_frac input\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: 0: use measured dni, 1: use clear-sky control w/ rec_clearsky_frac input\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"is_rec_model_trans", (getter)TowerAndReceiver_get_is_rec_model_trans,(setter)TowerAndReceiver_set_is_rec_model_trans,
-	PyDoc_STR("*float*: Formulate receiver model as transient?\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Formulate receiver model as transient?\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"mat_tube", (getter)TowerAndReceiver_get_mat_tube,(setter)TowerAndReceiver_set_mat_tube,
-	PyDoc_STR("*float*: Receiver tube material, 2=Stainless AISI316\n\n*Required*: True"),
+	PyDoc_STR("*float*: Receiver tube material, 2=Stainless AISI316\n\n**Required:**\nTrue"),
  	NULL},
 {"piping_length_const", (getter)TowerAndReceiver_get_piping_length_const,(setter)TowerAndReceiver_set_piping_length_const,
-	PyDoc_STR("*float*: Piping constant length [m]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Piping constant length [m]\n\n**Required:**\nTrue"),
  	NULL},
 {"piping_length_mult", (getter)TowerAndReceiver_get_piping_length_mult,(setter)TowerAndReceiver_set_piping_length_mult,
-	PyDoc_STR("*float*: Piping length multiplier\n\n*Required*: True"),
+	PyDoc_STR("*float*: Piping length multiplier\n\n**Required:**\nTrue"),
  	NULL},
 {"piping_loss_coefficient", (getter)TowerAndReceiver_get_piping_loss_coefficient,(setter)TowerAndReceiver_set_piping_loss_coefficient,
 	PyDoc_STR("*float*: Thermal loss per meter of piping [Wt/m2-K]"),
  	NULL},
 {"q_dot_rec_des", (getter)TowerAndReceiver_get_q_dot_rec_des,(setter)TowerAndReceiver_set_q_dot_rec_des,
-	PyDoc_STR("*float*: Receiver thermal power to HTF at design [MWt]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Receiver thermal power to HTF at design [MWt]\n\n**Required:**\nTrue"),
  	NULL},
 {"rec_height", (getter)TowerAndReceiver_get_rec_height,(setter)TowerAndReceiver_set_rec_height,
-	PyDoc_STR("*float*: Receiver height [m]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Receiver height [m]\n\n**Required:**\nTrue"),
  	NULL},
 {"rec_htf", (getter)TowerAndReceiver_get_rec_htf,(setter)TowerAndReceiver_set_rec_htf,
-	PyDoc_STR("*float*: Receiver HTF, 17=Salt (60% NaNO3, 40% KNO3) 10=Salt (46.5% LiF 11.5% NaF 42% KF) 50=Lookup tables\n\n*Required*: True"),
+	PyDoc_STR("*float*: Receiver HTF, 17=Salt (60% NaNO3, 40% KNO3) 10=Salt (46.5% LiF 11.5% NaF 42% KF) 50=Lookup tables\n\n**Required:**\nTrue"),
  	NULL},
 {"rec_qf_delay", (getter)TowerAndReceiver_get_rec_qf_delay,(setter)TowerAndReceiver_set_rec_qf_delay,
-	PyDoc_STR("*float*: Energy-based receiver startup delay (fraction of rated thermal power)\n\n*Required*: True"),
+	PyDoc_STR("*float*: Energy-based receiver startup delay (fraction of rated thermal power)\n\n**Required:**\nTrue"),
  	NULL},
 {"rec_su_delay", (getter)TowerAndReceiver_get_rec_su_delay,(setter)TowerAndReceiver_set_rec_su_delay,
-	PyDoc_STR("*float*: Fixed startup delay time for the receiver [hr]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Fixed startup delay time for the receiver [hr]\n\n**Required:**\nTrue"),
  	NULL},
 {"rec_tm_mult", (getter)TowerAndReceiver_get_rec_tm_mult,(setter)TowerAndReceiver_set_rec_tm_mult,
-	PyDoc_STR("*float*: Receiver thermal mass multiplier\n\n*Required*: True if is_rec_model_trans=1"),
+	PyDoc_STR("*float*: Receiver thermal mass multiplier\n\n**Required:**\nRequired if is_rec_model_trans=1"),
  	NULL},
 {"riser_tm_mult", (getter)TowerAndReceiver_get_riser_tm_mult,(setter)TowerAndReceiver_set_riser_tm_mult,
-	PyDoc_STR("*float*: Riser thermal mass multiplier\n\n*Required*: True if is_rec_model_trans=1"),
+	PyDoc_STR("*float*: Riser thermal mass multiplier\n\n**Required:**\nRequired if is_rec_model_trans=1"),
  	NULL},
 {"th_riser", (getter)TowerAndReceiver_get_th_riser,(setter)TowerAndReceiver_set_th_riser,
-	PyDoc_STR("*float*: Riser or downcomer tube wall thickness [mm]\n\n*Required*: True if is_rec_model_trans=1"),
+	PyDoc_STR("*float*: Riser or downcomer tube wall thickness [mm]\n\n**Required:**\nRequired if is_rec_model_trans=1"),
  	NULL},
 {"th_tube", (getter)TowerAndReceiver_get_th_tube,(setter)TowerAndReceiver_set_th_tube,
-	PyDoc_STR("*float*: The wall thickness of a single receiver tube [mm]\n\n*Required*: True"),
+	PyDoc_STR("*float*: The wall thickness of a single receiver tube [mm]\n\n**Required:**\nTrue"),
  	NULL},
 {"u_riser", (getter)TowerAndReceiver_get_u_riser,(setter)TowerAndReceiver_set_u_riser,
-	PyDoc_STR("*float*: Design point HTF velocity in riser [m/s]\n\n*Required*: True if is_rec_model_trans=1"),
+	PyDoc_STR("*float*: Design point HTF velocity in riser [m/s]\n\n**Required:**\nRequired if is_rec_model_trans=1"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -793,11 +793,11 @@ ReceiverControl_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef ReceiverControl_methods[] = {
 		{"assign",            (PyCFunction)ReceiverControl_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``ReceiverControl_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``ReceiverControl_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)ReceiverControl_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``ReceiverControl_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``ReceiverControl_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)ReceiverControl_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -839,13 +839,13 @@ ReceiverControl_set_rec_clearsky_fraction(VarGroupObject *self, PyObject *value,
 
 static PyGetSetDef ReceiverControl_getset[] = {
 {"T_htf_cold_in_od", (getter)ReceiverControl_get_T_htf_cold_in_od,(setter)ReceiverControl_set_T_htf_cold_in_od,
-	PyDoc_STR("*sequence*: HTF inlet temperature [C]\n\n*Required*: True if sim_type=1"),
+	PyDoc_STR("*sequence*: HTF inlet temperature [C]\n\n**Required:**\nRequired if sim_type=1"),
  	NULL},
 {"plant_defocus_od", (getter)ReceiverControl_get_plant_defocus_od,(setter)ReceiverControl_set_plant_defocus_od,
-	PyDoc_STR("*sequence*: Plant defocus\n\n*Required*: True if sim_type=1"),
+	PyDoc_STR("*sequence*: Plant defocus\n\n**Required:**\nRequired if sim_type=1"),
  	NULL},
 {"rec_clearsky_fraction", (getter)ReceiverControl_get_rec_clearsky_fraction,(setter)ReceiverControl_set_rec_clearsky_fraction,
-	PyDoc_STR("*float*: Weighting fraction on clear-sky DNI for receiver flow control\n\n*Required*: True if is_rec_clearsky_control=1"),
+	PyDoc_STR("*float*: Weighting fraction on clear-sky DNI for receiver flow control\n\n**Required:**\nRequired if is_rec_clearsky_control=1"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -960,11 +960,11 @@ Timeseries_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Timeseries_methods[] = {
 		{"assign",            (PyCFunction)Timeseries_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Timeseries_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Timeseries_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Timeseries_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Timeseries_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Timeseries_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Timeseries_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -982,7 +982,7 @@ Timeseries_set_timestep_od(VarGroupObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef Timeseries_getset[] = {
 {"timestep_od", (getter)Timeseries_get_timestep_od,(setter)Timeseries_set_timestep_od,
-	PyDoc_STR("*sequence*: Timestep [s]\n\n*Required*: True if sim_type=1"),
+	PyDoc_STR("*sequence*: Timestep [s]\n\n**Required:**\nRequired if sim_type=1"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1097,11 +1097,11 @@ Weather_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Weather_methods[] = {
 		{"assign",            (PyCFunction)Weather_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Weather_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Weather_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Weather_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Weather_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Weather_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Weather_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -1167,19 +1167,19 @@ Weather_set_v_wind_10_od(VarGroupObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef Weather_getset[] = {
 {"P_amb_od", (getter)Weather_get_P_amb_od,(setter)Weather_set_P_amb_od,
-	PyDoc_STR("*sequence*: Ambient pressure [mbar]\n\n*Required*: True if sim_type=1"),
+	PyDoc_STR("*sequence*: Ambient pressure [mbar]\n\n**Required:**\nRequired if sim_type=1"),
  	NULL},
 {"T_amb_od", (getter)Weather_get_T_amb_od,(setter)Weather_set_T_amb_od,
-	PyDoc_STR("*sequence*: Ambient temperature [C]\n\n*Required*: True if sim_type=1"),
+	PyDoc_STR("*sequence*: Ambient temperature [C]\n\n**Required:**\nRequired if sim_type=1"),
  	NULL},
 {"clearsky_to_measured_dni_od", (getter)Weather_get_clearsky_to_measured_dni_od,(setter)Weather_set_clearsky_to_measured_dni_od,
-	PyDoc_STR("*sequence*: Ratio of clearsky to measured DNI\n\n*Required*: True if sim_type=1&is_rec_clearsky_control=1"),
+	PyDoc_STR("*sequence*: Ratio of clearsky to measured DNI\n\n**Required:**\nRequired if sim_type=1&is_rec_clearsky_control=1"),
  	NULL},
 {"deltaT_sky_od", (getter)Weather_get_deltaT_sky_od,(setter)Weather_set_deltaT_sky_od,
-	PyDoc_STR("*sequence*: Difference between ambient and sky temps [C]\n\n*Required*: True if sim_type=1"),
+	PyDoc_STR("*sequence*: Difference between ambient and sky temps [C]\n\n**Required:**\nRequired if sim_type=1"),
  	NULL},
 {"v_wind_10_od", (getter)Weather_get_v_wind_10_od,(setter)Weather_set_v_wind_10_od,
-	PyDoc_STR("*sequence*: Wind speed at 10 meters [m/s]\n\n*Required*: True if sim_type=1"),
+	PyDoc_STR("*sequence*: Wind speed at 10 meters [m/s]\n\n**Required:**\nRequired if sim_type=1"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1294,11 +1294,11 @@ Flux_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Flux_methods[] = {
 		{"assign",            (PyCFunction)Flux_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Flux_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Flux_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Flux_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Flux_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Flux_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Flux_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -1316,7 +1316,7 @@ Flux_set_flux_map_od(VarGroupObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef Flux_getset[] = {
 {"flux_map_od", (getter)Flux_get_flux_map_od,(setter)Flux_set_flux_map_od,
-	PyDoc_STR("*sequence[sequence]*: rows: timestep, columns: panels. Flux *after* rec reflectance losses [W/m2]\n\n*Required*: True if sim_type=1"),
+	PyDoc_STR("*sequence[sequence]*: rows: timestep, columns: panels. Flux *after* rec reflectance losses [W/m2]\n\n**Required:**\nRequired if sim_type=1"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1431,11 +1431,11 @@ Outputs_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Outputs_methods[] = {
 		{"assign",            (PyCFunction)Outputs_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Outputs_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Outputs_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -1893,11 +1893,11 @@ static PyMethodDef MsptSfAndRecIsolatedModule_methods[] = {
 		{"new",             MsptSfAndRecIsolated_new,         METH_VARARGS,
 				PyDoc_STR("new() -> MsptSfAndRecIsolated")},
 		{"default",             MsptSfAndRecIsolated_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> MsptSfAndRecIsolated\n\nLoad values from SAM default configurations to provide as inputs to the model. \n\n			None\n\n.. note::\n\n	The default configuration is a collection of default values for the module inputs. Some inputs may not be included in the default configuration and are automatically assigned the value indicated by the variable's 'Required' attribute.")},
+				PyDoc_STR("default(config) -> MsptSfAndRecIsolated\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n- None\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
 		{"wrap",             MsptSfAndRecIsolated_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> MsptSfAndRecIsolated\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
+				PyDoc_STR("wrap(ssc_data_t) -> MsptSfAndRecIsolated\n\nLoad data from a PySSC object.\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap()``")},
 		{"from_existing",   MsptSfAndRecIsolated_from_existing,        METH_VARARGS,
-				PyDoc_STR("from_existing(data, optional config) -> MsptSfAndRecIsolated\n\nShare underlying data with an existing PySAM class. If config provided, default attributes are loaded otherwise.")},
+				PyDoc_STR("from_existing(data, optional config) -> MsptSfAndRecIsolated\n\nShare data with an existing PySAM class. If ``optional config`` is a valid configuration name, load the module's defaults for that configuration.")},
 		{NULL,              NULL}           /* sentinel */
 };
 

@@ -3,6 +3,7 @@
 import os
 import sys
 from ctypes import *
+from tokenize import Number
 c_number = c_double  # must be c_double or c_float depending on how defined in sscapi.h
 
 
@@ -67,9 +68,17 @@ class PySSC:
         self.pdll.ssc_data_set_number(c_void_p(p_data), c_char_p(name), c_number(value))
 
     def data_set_array(self, p_data, name, parr):
-        count = len(parr)
-        arr = (c_number * count)()
-        arr[:] = parr  # set all at once instead of looping
+        try:
+            count = len(parr)
+            arr = (c_number * count)()
+            arr[:] = parr  # set all at once instead of looping
+        except TypeError:
+            if type(parr) == int or type(parr) == float:
+                count = 1
+                arr = (c_number * count)()
+                arr[:] = [parr]  # set all at once instead of looping
+                print(name, " input type should be array. Changing to single element array")
+
         return self.pdll.ssc_data_set_array(c_void_p(p_data), c_char_p(name), pointer(arr), c_int(count))
 
     def data_set_array_from_csv(self, p_data, name, fn):
@@ -225,7 +234,8 @@ class PySSC:
 
 # Functions to simulate compute modules through dictionaries
 def ssc_sim_from_dict(data_pydict):
-    """ Run a technology compute module using parameters in a dict.
+    """
+    Run a technology compute module using parameters in a dict.
 
     Parameters
     ----------
@@ -238,13 +248,13 @@ def ssc_sim_from_dict(data_pydict):
                 model is used.
         Other keys are names of args for the selected tech_model or
         financial_model.
-
+    
     Returns
     -------
     (dict): dict
         keys are outputs from the selected compute module.
-
     """
+
     tech_model_name = data_pydict["tech_model"]
     # Convert python dictionary into ssc var info table
     data_ssc_tech_model = dict_to_ssc_table(data_pydict, tech_model_name)

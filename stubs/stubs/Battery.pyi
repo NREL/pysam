@@ -89,6 +89,7 @@ class Battery(object):
 		batt_surface_area = float
 		en_batt = float
 		en_standalone_batt = float
+		en_wave_batt = float
 		om_replacement_cost1 = tuple
 
 
@@ -105,6 +106,7 @@ class Battery(object):
 
 		annual_energy = float
 		capacity_factor = float
+		energy_hourly_kW = tuple
 		gen = tuple
 
 
@@ -269,6 +271,7 @@ class Battery(object):
 		dispatch_manual_percent_gridcharge = tuple
 		dispatch_manual_sched = tuple
 		dispatch_manual_sched_weekend = tuple
+		dispatch_manual_system_charge_first = float
 
 
 	class SystemCosts(object):
@@ -367,6 +370,7 @@ class Battery(object):
 			pass
 
 
+		en_electricity_rates = float
 		rate_escalation = tuple
 		ur_annual_min_charge = float
 		ur_billing_demand_lookback_percentages = tuple
@@ -453,6 +457,7 @@ class Battery(object):
 		batt_cycles = tuple
 		batt_dispatch_sched = tuple
 		batt_power = tuple
+		batt_power_dc = tuple
 		batt_power_target = tuple
 		batt_pvs_PV_ramp_interval = tuple
 		batt_pvs_P_pv_ac = tuple
@@ -480,6 +485,7 @@ class Battery(object):
 		batt_system_loss = tuple
 		batt_temperature = tuple
 		batt_to_grid = tuple
+		batt_to_inverter_dc = tuple
 		batt_to_load = tuple
 		batt_to_system_load = tuple
 		batt_voltage = tuple
@@ -518,6 +524,7 @@ class Battery(object):
 		resilience_hrs_min = float
 		survival_function = tuple
 		system_to_batt = tuple
+		system_to_batt_dc = tuple
 		system_to_grid = tuple
 		system_to_load = tuple
 

@@ -71,11 +71,11 @@ SolarResource_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef SolarResource_methods[] = {
 		{"assign",            (PyCFunction)SolarResource_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``SolarResource_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``SolarResource_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)SolarResource_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``SolarResource_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``SolarResource_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)SolarResource_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -89,6 +89,18 @@ static int
 SolarResource_set_albedo(VarGroupObject *self, PyObject *value, void *closure)
 {
 	return PySAM_array_setter(value, SAM_Pvsamv1_SolarResource_albedo_aset, self->data_ptr);
+}
+
+static PyObject *
+SolarResource_get_albedo_spatial(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Pvsamv1_SolarResource_albedo_spatial_mget, self->data_ptr);
+}
+
+static int
+SolarResource_set_albedo_spatial(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Pvsamv1_SolarResource_albedo_spatial_mset, self->data_ptr);
 }
 
 static PyObject *
@@ -140,6 +152,18 @@ SolarResource_set_solar_resource_file(VarGroupObject *self, PyObject *value, voi
 }
 
 static PyObject *
+SolarResource_get_use_spatial_albedos(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_SolarResource_use_spatial_albedos_nget, self->data_ptr);
+}
+
+static int
+SolarResource_set_use_spatial_albedos(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_SolarResource_use_spatial_albedos_nset, self->data_ptr);
+}
+
+static PyObject *
 SolarResource_get_use_wf_albedo(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Pvsamv1_SolarResource_use_wf_albedo_nget, self->data_ptr);
@@ -153,22 +177,28 @@ SolarResource_set_use_wf_albedo(VarGroupObject *self, PyObject *value, void *clo
 
 static PyGetSetDef SolarResource_getset[] = {
 {"albedo", (getter)SolarResource_get_albedo,(setter)SolarResource_set_albedo,
-	PyDoc_STR("*sequence*: User specified ground albedo [0..1]\n\n*Constraints*: LENGTH=12\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: User specified monthly ground albedo (non-spatial) [0..1]\n\n**Constraints:**\nLENGTH=12\n\n**Required:**\nRequired if use_spatial_albedos=0"),
+ 	NULL},
+{"albedo_spatial", (getter)SolarResource_get_albedo_spatial,(setter)SolarResource_set_albedo_spatial,
+	PyDoc_STR("*sequence[sequence]*: User specified monthly ground albedo (spatial) [0..1]\n\n**Required:**\nRequired if use_spatial_albedos=1"),
  	NULL},
 {"irrad_mode", (getter)SolarResource_get_irrad_mode,(setter)SolarResource_set_irrad_mode,
-	PyDoc_STR("*float*: Irradiance input translation mode\n\n*Options*: 0=beam&diffuse,1=total&beam,2=total&diffuse,3=poa_reference,4=poa_pyranometer\n\n*Constraints*: INTEGER,MIN=0,MAX=4\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Irradiance input translation mode\n\n**Options:**\n0=beam&diffuse,1=total&beam,2=total&diffuse,3=poa_reference,4=poa_pyranometer\n\n**Constraints:**\nINTEGER,MIN=0,MAX=4\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"sky_model", (getter)SolarResource_get_sky_model,(setter)SolarResource_set_sky_model,
-	PyDoc_STR("*float*: Diffuse sky model\n\n*Options*: 0=isotropic,1=hkdr,2=perez\n\n*Constraints*: INTEGER,MIN=0,MAX=2\n\n*Required*: If not provided, assumed to be 2"),
+	PyDoc_STR("*float*: Diffuse sky model\n\n**Options:**\n0=isotropic,1=hkdr,2=perez\n\n**Constraints:**\nINTEGER,MIN=0,MAX=2\n\n**Required:**\nFalse. Automatically set to 2 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"solar_resource_data", (getter)SolarResource_get_solar_resource_data,(setter)SolarResource_set_solar_resource_data,
-	PyDoc_STR("*dict*: Weather data\n\n*Info*: lat,lon,tz,elev,year,month,hour,minute,gh,dn,df,poa,tdry,twet,tdew,rhum,pres,snow,alb,aod,wspd,wdir\n\n*Required*: False"),
+	PyDoc_STR("*dict*: Weather data\n\n**Info:**\nlat,lon,tz,elev,year,month,hour,minute,gh,dn,df,poa,tdry,twet,tdew,rhum,pres,snow,alb,aod,wspd,wdir\n\n**Required:**\nFalse for configuration with default inputs. May be required if a variable dependent on its value changes. Example: For the Detailed PV - Single Owner configuration, only Subarray 1 is enabled in the configuration defaults, so Subarray 2 inputs would not be required; if Subarray 2 is enabled, then Subarray 2 inputs is required."),
  	NULL},
 {"solar_resource_file", (getter)SolarResource_get_solar_resource_file,(setter)SolarResource_set_solar_resource_file,
-	PyDoc_STR("*str*: Weather file in TMY2, TMY3, EPW, or SAM CSV\n\n*Required*: False"),
+	PyDoc_STR("*str*: Weather file in TMY2, TMY3, EPW, or SAM CSV\n\n**Required:**\nFalse for configuration with default inputs. May be required if a variable dependent on its value changes. Example: For the Detailed PV - Single Owner configuration, only Subarray 1 is enabled in the configuration defaults, so Subarray 2 inputs would not be required; if Subarray 2 is enabled, then Subarray 2 inputs is required."),
+ 	NULL},
+{"use_spatial_albedos", (getter)SolarResource_get_use_spatial_albedos,(setter)SolarResource_set_use_spatial_albedos,
+	PyDoc_STR("*float*: Use spatial albedo values [0/1]\n\n**Options:**\n0=no,1=yes\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"use_wf_albedo", (getter)SolarResource_get_use_wf_albedo,(setter)SolarResource_set_use_wf_albedo,
-	PyDoc_STR("*float*: Use albedo in weather file if provided [0/1]\n\n*Options*: 0=user-specified,1=weatherfile\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: Use albedo in weather file if provided [0/1]\n\n**Options:**\n0=user-specified,1=weatherfile\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -283,11 +313,11 @@ Losses_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Losses_methods[] = {
 		{"assign",            (PyCFunction)Losses_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Losses_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Losses_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Losses_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Losses_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Losses_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Losses_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -301,6 +331,30 @@ static int
 Losses_set_acwiring_loss(VarGroupObject *self, PyObject *value, void *closure)
 {
 	return PySAM_double_setter(value, SAM_Pvsamv1_Losses_acwiring_loss_nset, self->data_ptr);
+}
+
+static PyObject *
+Losses_get_calculate_bifacial_electrical_mismatch(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_Losses_calculate_bifacial_electrical_mismatch_nget, self->data_ptr);
+}
+
+static int
+Losses_set_calculate_bifacial_electrical_mismatch(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_Losses_calculate_bifacial_electrical_mismatch_nset, self->data_ptr);
+}
+
+static PyObject *
+Losses_get_calculate_rack_shading(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_Losses_calculate_rack_shading_nget, self->data_ptr);
+}
+
+static int
+Losses_set_calculate_rack_shading(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_Losses_calculate_rack_shading_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -352,6 +406,18 @@ Losses_set_subarray1_diodeconn_loss(VarGroupObject *self, PyObject *value, void 
 }
 
 static PyObject *
+Losses_get_subarray1_electrical_mismatch(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_Losses_subarray1_electrical_mismatch_nget, self->data_ptr);
+}
+
+static int
+Losses_set_subarray1_electrical_mismatch(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_Losses_subarray1_electrical_mismatch_nset, self->data_ptr);
+}
+
+static PyObject *
 Losses_get_subarray1_mismatch_loss(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Pvsamv1_Losses_subarray1_mismatch_loss_nget, self->data_ptr);
@@ -376,15 +442,27 @@ Losses_set_subarray1_nameplate_loss(VarGroupObject *self, PyObject *value, void 
 }
 
 static PyObject *
-Losses_get_subarray1_rear_irradiance_loss(VarGroupObject *self, void *closure)
+Losses_get_subarray1_rack_shading(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Pvsamv1_Losses_subarray1_rear_irradiance_loss_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Pvsamv1_Losses_subarray1_rack_shading_nget, self->data_ptr);
 }
 
 static int
-Losses_set_subarray1_rear_irradiance_loss(VarGroupObject *self, PyObject *value, void *closure)
+Losses_set_subarray1_rack_shading(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Pvsamv1_Losses_subarray1_rear_irradiance_loss_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Pvsamv1_Losses_subarray1_rack_shading_nset, self->data_ptr);
+}
+
+static PyObject *
+Losses_get_subarray1_rear_soiling_loss(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_Losses_subarray1_rear_soiling_loss_nget, self->data_ptr);
+}
+
+static int
+Losses_set_subarray1_rear_soiling_loss(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_Losses_subarray1_rear_soiling_loss_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -436,6 +514,18 @@ Losses_set_subarray2_diodeconn_loss(VarGroupObject *self, PyObject *value, void 
 }
 
 static PyObject *
+Losses_get_subarray2_electrical_mismatch(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_Losses_subarray2_electrical_mismatch_nget, self->data_ptr);
+}
+
+static int
+Losses_set_subarray2_electrical_mismatch(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_Losses_subarray2_electrical_mismatch_nset, self->data_ptr);
+}
+
+static PyObject *
 Losses_get_subarray2_mismatch_loss(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Pvsamv1_Losses_subarray2_mismatch_loss_nget, self->data_ptr);
@@ -460,15 +550,27 @@ Losses_set_subarray2_nameplate_loss(VarGroupObject *self, PyObject *value, void 
 }
 
 static PyObject *
-Losses_get_subarray2_rear_irradiance_loss(VarGroupObject *self, void *closure)
+Losses_get_subarray2_rack_shading(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Pvsamv1_Losses_subarray2_rear_irradiance_loss_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Pvsamv1_Losses_subarray2_rack_shading_nget, self->data_ptr);
 }
 
 static int
-Losses_set_subarray2_rear_irradiance_loss(VarGroupObject *self, PyObject *value, void *closure)
+Losses_set_subarray2_rack_shading(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Pvsamv1_Losses_subarray2_rear_irradiance_loss_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Pvsamv1_Losses_subarray2_rack_shading_nset, self->data_ptr);
+}
+
+static PyObject *
+Losses_get_subarray2_rear_soiling_loss(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_Losses_subarray2_rear_soiling_loss_nget, self->data_ptr);
+}
+
+static int
+Losses_set_subarray2_rear_soiling_loss(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_Losses_subarray2_rear_soiling_loss_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -520,6 +622,18 @@ Losses_set_subarray3_diodeconn_loss(VarGroupObject *self, PyObject *value, void 
 }
 
 static PyObject *
+Losses_get_subarray3_electrical_mismatch(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_Losses_subarray3_electrical_mismatch_nget, self->data_ptr);
+}
+
+static int
+Losses_set_subarray3_electrical_mismatch(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_Losses_subarray3_electrical_mismatch_nset, self->data_ptr);
+}
+
+static PyObject *
 Losses_get_subarray3_mismatch_loss(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Pvsamv1_Losses_subarray3_mismatch_loss_nget, self->data_ptr);
@@ -544,15 +658,27 @@ Losses_set_subarray3_nameplate_loss(VarGroupObject *self, PyObject *value, void 
 }
 
 static PyObject *
-Losses_get_subarray3_rear_irradiance_loss(VarGroupObject *self, void *closure)
+Losses_get_subarray3_rack_shading(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Pvsamv1_Losses_subarray3_rear_irradiance_loss_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Pvsamv1_Losses_subarray3_rack_shading_nget, self->data_ptr);
 }
 
 static int
-Losses_set_subarray3_rear_irradiance_loss(VarGroupObject *self, PyObject *value, void *closure)
+Losses_set_subarray3_rack_shading(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Pvsamv1_Losses_subarray3_rear_irradiance_loss_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Pvsamv1_Losses_subarray3_rack_shading_nset, self->data_ptr);
+}
+
+static PyObject *
+Losses_get_subarray3_rear_soiling_loss(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_Losses_subarray3_rear_soiling_loss_nget, self->data_ptr);
+}
+
+static int
+Losses_set_subarray3_rear_soiling_loss(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_Losses_subarray3_rear_soiling_loss_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -604,6 +730,18 @@ Losses_set_subarray4_diodeconn_loss(VarGroupObject *self, PyObject *value, void 
 }
 
 static PyObject *
+Losses_get_subarray4_electrical_mismatch(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_Losses_subarray4_electrical_mismatch_nget, self->data_ptr);
+}
+
+static int
+Losses_set_subarray4_electrical_mismatch(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_Losses_subarray4_electrical_mismatch_nset, self->data_ptr);
+}
+
+static PyObject *
 Losses_get_subarray4_mismatch_loss(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Pvsamv1_Losses_subarray4_mismatch_loss_nget, self->data_ptr);
@@ -628,15 +766,27 @@ Losses_set_subarray4_nameplate_loss(VarGroupObject *self, PyObject *value, void 
 }
 
 static PyObject *
-Losses_get_subarray4_rear_irradiance_loss(VarGroupObject *self, void *closure)
+Losses_get_subarray4_rack_shading(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Pvsamv1_Losses_subarray4_rear_irradiance_loss_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Pvsamv1_Losses_subarray4_rack_shading_nget, self->data_ptr);
 }
 
 static int
-Losses_set_subarray4_rear_irradiance_loss(VarGroupObject *self, PyObject *value, void *closure)
+Losses_set_subarray4_rack_shading(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_Pvsamv1_Losses_subarray4_rear_irradiance_loss_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Pvsamv1_Losses_subarray4_rack_shading_nset, self->data_ptr);
+}
+
+static PyObject *
+Losses_get_subarray4_rear_soiling_loss(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_Losses_subarray4_rear_soiling_loss_nget, self->data_ptr);
+}
+
+static int
+Losses_set_subarray4_rear_soiling_loss(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_Losses_subarray4_rear_soiling_loss_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -701,106 +851,136 @@ Losses_set_transmission_loss(VarGroupObject *self, PyObject *value, void *closur
 
 static PyGetSetDef Losses_getset[] = {
 {"acwiring_loss", (getter)Losses_get_acwiring_loss,(setter)Losses_set_acwiring_loss,
-	PyDoc_STR("*float*: AC wiring loss [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: True"),
+	PyDoc_STR("*float*: AC wiring loss [%]\n\n**Info:**\npercent of inverter AC output\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nTrue"),
+ 	NULL},
+{"calculate_bifacial_electrical_mismatch", (getter)Losses_get_calculate_bifacial_electrical_mismatch,(setter)Losses_set_calculate_bifacial_electrical_mismatch,
+	PyDoc_STR("*float*: Calculate bifacial electrical mismatch\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"calculate_rack_shading", (getter)Losses_get_calculate_rack_shading,(setter)Losses_set_calculate_rack_shading,
+	PyDoc_STR("*float*: Calculate rack shading\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"dcoptimizer_loss", (getter)Losses_get_dcoptimizer_loss,(setter)Losses_set_dcoptimizer_loss,
-	PyDoc_STR("*float*: DC power optimizer loss [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: True"),
+	PyDoc_STR("*float*: DC power optimizer loss [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nTrue"),
  	NULL},
 {"en_snow_model", (getter)Losses_get_en_snow_model,(setter)Losses_set_en_snow_model,
-	PyDoc_STR("*float*: Toggle snow loss estimation [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Toggle snow loss estimation [0/1]\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"subarray1_dcwiring_loss", (getter)Losses_get_subarray1_dcwiring_loss,(setter)Losses_set_subarray1_dcwiring_loss,
-	PyDoc_STR("*float*: Sub-array 1 DC wiring loss [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: True"),
+	PyDoc_STR("*float*: Sub-array 1 DC wiring loss [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nTrue"),
  	NULL},
 {"subarray1_diodeconn_loss", (getter)Losses_get_subarray1_diodeconn_loss,(setter)Losses_set_subarray1_diodeconn_loss,
-	PyDoc_STR("*float*: Sub-array 1 DC diodes and connections loss [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: True"),
+	PyDoc_STR("*float*: Sub-array 1 DC diodes and connections loss [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nTrue"),
+ 	NULL},
+{"subarray1_electrical_mismatch", (getter)Losses_get_subarray1_electrical_mismatch,(setter)Losses_set_subarray1_electrical_mismatch,
+	PyDoc_STR("*float*: Sub-array 1 bifacial electrical mismatch loss [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nTrue"),
  	NULL},
 {"subarray1_mismatch_loss", (getter)Losses_get_subarray1_mismatch_loss,(setter)Losses_set_subarray1_mismatch_loss,
-	PyDoc_STR("*float*: Sub-array 1 DC mismatch loss [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: True"),
+	PyDoc_STR("*float*: Sub-array 1 DC mismatch loss [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nTrue"),
  	NULL},
 {"subarray1_nameplate_loss", (getter)Losses_get_subarray1_nameplate_loss,(setter)Losses_set_subarray1_nameplate_loss,
-	PyDoc_STR("*float*: Sub-array 1 DC nameplate loss [%]\n\n*Constraints*: MIN=-5,MAX=100\n\n*Required*: True"),
+	PyDoc_STR("*float*: Sub-array 1 DC nameplate loss [%]\n\n**Constraints:**\nMIN=-5,MAX=100\n\n**Required:**\nTrue"),
  	NULL},
-{"subarray1_rear_irradiance_loss", (getter)Losses_get_subarray1_rear_irradiance_loss,(setter)Losses_set_subarray1_rear_irradiance_loss,
-	PyDoc_STR("*float*: Sub-array 1 rear irradiance loss [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: True"),
+{"subarray1_rack_shading", (getter)Losses_get_subarray1_rack_shading,(setter)Losses_set_subarray1_rack_shading,
+	PyDoc_STR("*float*: Sub-array 1 rack shading loss [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nTrue"),
+ 	NULL},
+{"subarray1_rear_soiling_loss", (getter)Losses_get_subarray1_rear_soiling_loss,(setter)Losses_set_subarray1_rear_soiling_loss,
+	PyDoc_STR("*float*: Sub-array 1 rear soiling loss [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nTrue"),
  	NULL},
 {"subarray1_soiling", (getter)Losses_get_subarray1_soiling,(setter)Losses_set_subarray1_soiling,
-	PyDoc_STR("*sequence*: Sub-array 1 Monthly soiling loss [%]\n\n*Constraints*: LENGTH=12\n\n*Required*: True"),
+	PyDoc_STR("*sequence*: Sub-array 1 Monthly soiling loss [%]\n\n**Constraints:**\nLENGTH=12\n\n**Required:**\nTrue"),
  	NULL},
 {"subarray1_tracking_loss", (getter)Losses_get_subarray1_tracking_loss,(setter)Losses_set_subarray1_tracking_loss,
-	PyDoc_STR("*float*: Sub-array 1 DC tracking error loss [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: True"),
+	PyDoc_STR("*float*: Sub-array 1 DC tracking error loss [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nTrue"),
  	NULL},
 {"subarray2_dcwiring_loss", (getter)Losses_get_subarray2_dcwiring_loss,(setter)Losses_set_subarray2_dcwiring_loss,
-	PyDoc_STR("*float*: Sub-array 2 DC wiring loss [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: False"),
+	PyDoc_STR("*float*: Sub-array 2 DC wiring loss [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nRequired if subarray2_enable=1"),
  	NULL},
 {"subarray2_diodeconn_loss", (getter)Losses_get_subarray2_diodeconn_loss,(setter)Losses_set_subarray2_diodeconn_loss,
-	PyDoc_STR("*float*: Sub-array 2 DC diodes and connections loss [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: False"),
+	PyDoc_STR("*float*: Sub-array 2 DC diodes and connections loss [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nRequired if subarray2_enable=1"),
+ 	NULL},
+{"subarray2_electrical_mismatch", (getter)Losses_get_subarray2_electrical_mismatch,(setter)Losses_set_subarray2_electrical_mismatch,
+	PyDoc_STR("*float*: Sub-array 2 bifacial electrical mismatch loss [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nRequired if subarray2_enable=1"),
  	NULL},
 {"subarray2_mismatch_loss", (getter)Losses_get_subarray2_mismatch_loss,(setter)Losses_set_subarray2_mismatch_loss,
-	PyDoc_STR("*float*: Sub-array 2 DC mismatch loss [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: False"),
+	PyDoc_STR("*float*: Sub-array 2 DC mismatch loss [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nRequired if subarray2_enable=1"),
  	NULL},
 {"subarray2_nameplate_loss", (getter)Losses_get_subarray2_nameplate_loss,(setter)Losses_set_subarray2_nameplate_loss,
-	PyDoc_STR("*float*: Sub-array 2 DC nameplate loss [%]\n\n*Constraints*: MIN=-5,MAX=100\n\n*Required*: False"),
+	PyDoc_STR("*float*: Sub-array 2 DC nameplate loss [%]\n\n**Constraints:**\nMIN=-5,MAX=100\n\n**Required:**\nRequired if subarray2_enable=1"),
  	NULL},
-{"subarray2_rear_irradiance_loss", (getter)Losses_get_subarray2_rear_irradiance_loss,(setter)Losses_set_subarray2_rear_irradiance_loss,
-	PyDoc_STR("*float*: Sub-array 2 rear irradiance loss [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: True if subarray2_enable=1"),
+{"subarray2_rack_shading", (getter)Losses_get_subarray2_rack_shading,(setter)Losses_set_subarray2_rack_shading,
+	PyDoc_STR("*float*: Sub-array 2 rack shading loss [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nRequired if subarray2_enable=1"),
+ 	NULL},
+{"subarray2_rear_soiling_loss", (getter)Losses_get_subarray2_rear_soiling_loss,(setter)Losses_set_subarray2_rear_soiling_loss,
+	PyDoc_STR("*float*: Sub-array 2 rear soiling loss [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nRequired if subarray2_enable=1"),
  	NULL},
 {"subarray2_soiling", (getter)Losses_get_subarray2_soiling,(setter)Losses_set_subarray2_soiling,
-	PyDoc_STR("*sequence*: Sub-array 2 Monthly soiling loss [%]\n\n*Constraints*: LENGTH=12\n\n*Required*: True if subarray2_enable=1"),
+	PyDoc_STR("*sequence*: Sub-array 2 Monthly soiling loss [%]\n\n**Constraints:**\nLENGTH=12\n\n**Required:**\nRequired if subarray2_enable=1"),
  	NULL},
 {"subarray2_tracking_loss", (getter)Losses_get_subarray2_tracking_loss,(setter)Losses_set_subarray2_tracking_loss,
-	PyDoc_STR("*float*: Sub-array 2 DC tracking error loss [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: False"),
+	PyDoc_STR("*float*: Sub-array 2 DC tracking error loss [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nRequired if subarray2_enable=1"),
  	NULL},
 {"subarray3_dcwiring_loss", (getter)Losses_get_subarray3_dcwiring_loss,(setter)Losses_set_subarray3_dcwiring_loss,
-	PyDoc_STR("*float*: Sub-array 3 DC wiring loss [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: False"),
+	PyDoc_STR("*float*: Sub-array 3 DC wiring loss [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nRequired if subarray3_enable=1"),
  	NULL},
 {"subarray3_diodeconn_loss", (getter)Losses_get_subarray3_diodeconn_loss,(setter)Losses_set_subarray3_diodeconn_loss,
-	PyDoc_STR("*float*: Sub-array 3 DC diodes and connections loss [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: False"),
+	PyDoc_STR("*float*: Sub-array 3 DC diodes and connections loss [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nRequired if subarray3_enable=1"),
+ 	NULL},
+{"subarray3_electrical_mismatch", (getter)Losses_get_subarray3_electrical_mismatch,(setter)Losses_set_subarray3_electrical_mismatch,
+	PyDoc_STR("*float*: Sub-array 3 bifacial electrical mismatch loss [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nRequired if subarray3_enable=1"),
  	NULL},
 {"subarray3_mismatch_loss", (getter)Losses_get_subarray3_mismatch_loss,(setter)Losses_set_subarray3_mismatch_loss,
-	PyDoc_STR("*float*: Sub-array 3 DC mismatch loss [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: False"),
+	PyDoc_STR("*float*: Sub-array 3 DC mismatch loss [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nRequired if subarray3_enable=1"),
  	NULL},
 {"subarray3_nameplate_loss", (getter)Losses_get_subarray3_nameplate_loss,(setter)Losses_set_subarray3_nameplate_loss,
-	PyDoc_STR("*float*: Sub-array 3 DC nameplate loss [%]\n\n*Constraints*: MIN=-5,MAX=100\n\n*Required*: False"),
+	PyDoc_STR("*float*: Sub-array 3 DC nameplate loss [%]\n\n**Constraints:**\nMIN=-5,MAX=100\n\n**Required:**\nRequired if subarray3_enable=1"),
  	NULL},
-{"subarray3_rear_irradiance_loss", (getter)Losses_get_subarray3_rear_irradiance_loss,(setter)Losses_set_subarray3_rear_irradiance_loss,
-	PyDoc_STR("*float*: Sub-array 3 rear irradiance loss [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: True if subarray3_enable=1"),
+{"subarray3_rack_shading", (getter)Losses_get_subarray3_rack_shading,(setter)Losses_set_subarray3_rack_shading,
+	PyDoc_STR("*float*: Sub-array 3 rack shading loss [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nRequired if subarray3_enable=1"),
+ 	NULL},
+{"subarray3_rear_soiling_loss", (getter)Losses_get_subarray3_rear_soiling_loss,(setter)Losses_set_subarray3_rear_soiling_loss,
+	PyDoc_STR("*float*: Sub-array 3 rear soiling loss [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nRequired if subarray3_enable=1"),
  	NULL},
 {"subarray3_soiling", (getter)Losses_get_subarray3_soiling,(setter)Losses_set_subarray3_soiling,
-	PyDoc_STR("*sequence*: Sub-array 3 Monthly soiling loss [%]\n\n*Constraints*: LENGTH=12\n\n*Required*: True if subarray3_enable=1"),
+	PyDoc_STR("*sequence*: Sub-array 3 Monthly soiling loss [%]\n\n**Constraints:**\nLENGTH=12\n\n**Required:**\nRequired if subarray3_enable=1"),
  	NULL},
 {"subarray3_tracking_loss", (getter)Losses_get_subarray3_tracking_loss,(setter)Losses_set_subarray3_tracking_loss,
-	PyDoc_STR("*float*: Sub-array 3 DC tracking error loss [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: False"),
+	PyDoc_STR("*float*: Sub-array 3 DC tracking error loss [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nRequired if subarray3_enable=1"),
  	NULL},
 {"subarray4_dcwiring_loss", (getter)Losses_get_subarray4_dcwiring_loss,(setter)Losses_set_subarray4_dcwiring_loss,
-	PyDoc_STR("*float*: Sub-array 4 DC wiring loss [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: False"),
+	PyDoc_STR("*float*: Sub-array 4 DC wiring loss [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nRequired if subarray4_enable=1"),
  	NULL},
 {"subarray4_diodeconn_loss", (getter)Losses_get_subarray4_diodeconn_loss,(setter)Losses_set_subarray4_diodeconn_loss,
-	PyDoc_STR("*float*: Sub-array 4 DC diodes and connections loss [%]\n\n*Info*: ?\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: False"),
+	PyDoc_STR("*float*: Sub-array 4 DC diodes and connections loss [%]\n\n**Info:**\n?\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nRequired if subarray4_enable=1"),
+ 	NULL},
+{"subarray4_electrical_mismatch", (getter)Losses_get_subarray4_electrical_mismatch,(setter)Losses_set_subarray4_electrical_mismatch,
+	PyDoc_STR("*float*: Sub-array 4 bifacial electrical mismatch loss [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nRequired if subarray4_enable=1"),
  	NULL},
 {"subarray4_mismatch_loss", (getter)Losses_get_subarray4_mismatch_loss,(setter)Losses_set_subarray4_mismatch_loss,
-	PyDoc_STR("*float*: Sub-array 4 DC mismatch loss [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: False"),
+	PyDoc_STR("*float*: Sub-array 4 DC mismatch loss [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nRequired if subarray4_enable=1"),
  	NULL},
 {"subarray4_nameplate_loss", (getter)Losses_get_subarray4_nameplate_loss,(setter)Losses_set_subarray4_nameplate_loss,
-	PyDoc_STR("*float*: Sub-array 4 DC nameplate loss [%]\n\n*Constraints*: MIN=-5,MAX=100\n\n*Required*: False"),
+	PyDoc_STR("*float*: Sub-array 4 DC nameplate loss [%]\n\n**Constraints:**\nMIN=-5,MAX=100\n\n**Required:**\nRequired if subarray4_enable=1"),
  	NULL},
-{"subarray4_rear_irradiance_loss", (getter)Losses_get_subarray4_rear_irradiance_loss,(setter)Losses_set_subarray4_rear_irradiance_loss,
-	PyDoc_STR("*float*: Sub-array 4 rear irradiance loss [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: True if subarray4_enable=1"),
+{"subarray4_rack_shading", (getter)Losses_get_subarray4_rack_shading,(setter)Losses_set_subarray4_rack_shading,
+	PyDoc_STR("*float*: Sub-array 4 rack shading loss [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nRequired if subarray4_enable=1"),
+ 	NULL},
+{"subarray4_rear_soiling_loss", (getter)Losses_get_subarray4_rear_soiling_loss,(setter)Losses_set_subarray4_rear_soiling_loss,
+	PyDoc_STR("*float*: Sub-array 4 rear soiling loss [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nRequired if subarray4_enable=1"),
  	NULL},
 {"subarray4_soiling", (getter)Losses_get_subarray4_soiling,(setter)Losses_set_subarray4_soiling,
-	PyDoc_STR("*sequence*: Sub-array 4 Monthly soiling loss [%]\n\n*Constraints*: LENGTH=12\n\n*Required*: True if subarray4_enable=1"),
+	PyDoc_STR("*sequence*: Sub-array 4 Monthly soiling loss [%]\n\n**Constraints:**\nLENGTH=12\n\n**Required:**\nRequired if subarray4_enable=1"),
  	NULL},
 {"subarray4_tracking_loss", (getter)Losses_get_subarray4_tracking_loss,(setter)Losses_set_subarray4_tracking_loss,
-	PyDoc_STR("*float*: Sub-array 4 DC tracking error loss [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: False"),
+	PyDoc_STR("*float*: Sub-array 4 DC tracking error loss [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nRequired if subarray4_enable=1"),
  	NULL},
 {"transformer_load_loss", (getter)Losses_get_transformer_load_loss,(setter)Losses_set_transformer_load_loss,
-	PyDoc_STR("*float*: Power transformer load loss [%]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Power transformer load loss [%]\n\n**Info:**\npercent of AC output\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"transformer_no_load_loss", (getter)Losses_get_transformer_no_load_loss,(setter)Losses_set_transformer_no_load_loss,
-	PyDoc_STR("*float*: Power transformer no load loss [%]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Power transformer no load loss [%]\n\n**Info:**\npercent of inverter AC capacity\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"transmission_loss", (getter)Losses_get_transmission_loss,(setter)Losses_set_transmission_loss,
-	PyDoc_STR("*float*: Transmission loss [%]\n\n*Constraints*: MIN=0,MAX=100\n\n*Required*: True"),
+	PyDoc_STR("*float*: Transmission loss [%]\n\n**Info:**\npercent of AC output after transformer losses\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nTrue"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -915,11 +1095,11 @@ Lifetime_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Lifetime_methods[] = {
 		{"assign",            (PyCFunction)Lifetime_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Lifetime_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Lifetime_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Lifetime_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Lifetime_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Lifetime_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Lifetime_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -1033,31 +1213,31 @@ Lifetime_set_system_use_lifetime_output(VarGroupObject *self, PyObject *value, v
 
 static PyGetSetDef Lifetime_getset[] = {
 {"ac_lifetime_losses", (getter)Lifetime_get_ac_lifetime_losses,(setter)Lifetime_set_ac_lifetime_losses,
-	PyDoc_STR("*sequence*: Lifetime daily AC losses [%]\n\n*Required*: True if en_ac_lifetime_losses=1"),
+	PyDoc_STR("*sequence*: Lifetime daily AC losses [%]\n\n**Required:**\nRequired if en_ac_lifetime_losses=1"),
  	NULL},
 {"analysis_period", (getter)Lifetime_get_analysis_period,(setter)Lifetime_set_analysis_period,
-	PyDoc_STR("*float*: Lifetime analysis period [years]\n\n*Required*: True if system_use_lifetime_output=1"),
+	PyDoc_STR("*float*: Lifetime analysis period [years]\n\n**Required:**\nRequired if system_use_lifetime_output=1"),
  	NULL},
 {"dc_degradation", (getter)Lifetime_get_dc_degradation,(setter)Lifetime_set_dc_degradation,
-	PyDoc_STR("*sequence*: Annual DC degradation [%/year]\n\n*Required*: True if system_use_lifetime_output=1"),
+	PyDoc_STR("*sequence*: Annual DC degradation [%/year]\n\n**Required:**\nRequired if system_use_lifetime_output=1"),
  	NULL},
 {"dc_lifetime_losses", (getter)Lifetime_get_dc_lifetime_losses,(setter)Lifetime_set_dc_lifetime_losses,
-	PyDoc_STR("*sequence*: Lifetime daily DC losses [%]\n\n*Required*: True if en_dc_lifetime_losses=1"),
+	PyDoc_STR("*sequence*: Lifetime daily DC losses [%]\n\n**Required:**\nRequired if en_dc_lifetime_losses=1"),
  	NULL},
 {"en_ac_lifetime_losses", (getter)Lifetime_get_en_ac_lifetime_losses,(setter)Lifetime_set_en_ac_lifetime_losses,
-	PyDoc_STR("*float*: Enable lifetime daily AC losses [0/1]\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Enable lifetime daily AC losses [0/1]\n\n**Constraints:**\nINTEGER,MIN=0,MAX=1\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"en_dc_lifetime_losses", (getter)Lifetime_get_en_dc_lifetime_losses,(setter)Lifetime_set_en_dc_lifetime_losses,
-	PyDoc_STR("*float*: Enable lifetime daily DC losses [0/1]\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Enable lifetime daily DC losses [0/1]\n\n**Constraints:**\nINTEGER,MIN=0,MAX=1\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"inflation_rate", (getter)Lifetime_get_inflation_rate,(setter)Lifetime_set_inflation_rate,
-	PyDoc_STR("*float*: Inflation rate [%]\n\n*Constraints*: MIN=-99\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Inflation rate [%]\n\n**Constraints:**\nMIN=-99\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"save_full_lifetime_variables", (getter)Lifetime_get_save_full_lifetime_variables,(setter)Lifetime_set_save_full_lifetime_variables,
-	PyDoc_STR("*float*: Save and display vars for full lifetime [0/1]\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: Save and display vars for full lifetime [0/1]\n\n**Constraints:**\nINTEGER,MIN=0,MAX=1\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"system_use_lifetime_output", (getter)Lifetime_get_system_use_lifetime_output,(setter)Lifetime_set_system_use_lifetime_output,
-	PyDoc_STR("*float*: PV lifetime simulation [0/1]\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: PV lifetime simulation [0/1]\n\n**Constraints:**\nINTEGER,MIN=0,MAX=1\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -1172,11 +1352,11 @@ SystemDesign_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef SystemDesign_methods[] = {
 		{"assign",            (PyCFunction)SystemDesign_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``SystemDesign_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``SystemDesign_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)SystemDesign_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``SystemDesign_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``SystemDesign_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)SystemDesign_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -1202,6 +1382,18 @@ static int
 SystemDesign_set_inverter_count(VarGroupObject *self, PyObject *value, void *closure)
 {
 	return PySAM_double_setter(value, SAM_Pvsamv1_SystemDesign_inverter_count_nset, self->data_ptr);
+}
+
+static PyObject *
+SystemDesign_get_measured_temp_array(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvsamv1_SystemDesign_measured_temp_array_aget, self->data_ptr);
+}
+
+static int
+SystemDesign_set_measured_temp_array(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Pvsamv1_SystemDesign_measured_temp_array_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -1876,180 +2068,198 @@ SystemDesign_set_system_capacity(VarGroupObject *self, PyObject *value, void *cl
 	return PySAM_double_setter(value, SAM_Pvsamv1_SystemDesign_system_capacity_nset, self->data_ptr);
 }
 
+static PyObject *
+SystemDesign_get_use_measured_temp(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_SystemDesign_use_measured_temp_nget, self->data_ptr);
+}
+
+static int
+SystemDesign_set_use_measured_temp(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_SystemDesign_use_measured_temp_nset, self->data_ptr);
+}
+
 static PyGetSetDef SystemDesign_getset[] = {
 {"enable_mismatch_vmax_calc", (getter)SystemDesign_get_enable_mismatch_vmax_calc,(setter)SystemDesign_set_enable_mismatch_vmax_calc,
-	PyDoc_STR("*float*: Enable mismatched subarray Vmax calculation\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Enable mismatched subarray Vmax calculation\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"inverter_count", (getter)SystemDesign_get_inverter_count,(setter)SystemDesign_set_inverter_count,
-	PyDoc_STR("*float*: Number of inverters\n\n*Constraints*: INTEGER,POSITIVE\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - 6par_imp\n\t - 6par_vmp\n\t - 6par_voc\n\t - cec_i_mp_ref\n\t - cec_v_mp_ref\n\t - cec_v_oc_ref\n\t - inv_cec_cg_paco\n\t - inv_cec_cg_vdcmax\n\t - inv_ds_paco\n\t - inv_ds_vdcmax\n\t - inv_pd_paco\n\t - inv_pd_vdcmax\n\t - inv_snl_paco\n\t - inv_snl_vdcmax\n\t - inverter_model\n\t - module_model\n\t - sd11par_Vmp0\n\t - sd11par_Voc0\n\t - snl_a\n\t - snl_a0\n\t - snl_a1\n\t - snl_a2\n\t - snl_a3\n\t - snl_a4\n\t - snl_aimp\n\t - snl_aisc\n\t - snl_area\n\t - snl_b\n\t - snl_b0\n\t - snl_b1\n\t - snl_b2\n\t - snl_b3\n\t - snl_b4\n\t - snl_b5\n\t - snl_bvmpo\n\t - snl_bvoco\n\t - snl_c0\n\t - snl_c1\n\t - snl_c2\n\t - snl_c3\n\t - snl_dtc\n\t - snl_fd\n\t - snl_impo\n\t - snl_isco\n\t - snl_mbvmp\n\t - snl_mbvoc\n\t - snl_module_structure\n\t - snl_n\n\t - snl_series_cells\n\t - snl_vmpo\n\t - snl_voco\n\t - spe_area\n\t - spe_eff0\n\t - spe_eff1\n\t - spe_eff2\n\t - spe_eff3\n\t - spe_eff4\n\t - spe_rad0\n\t - spe_rad1\n\t - spe_rad2\n\t - spe_rad3\n\t - spe_rad4\n\t - spe_reference\n\t - spe_vmp\n\t - spe_voc\n"),
+	PyDoc_STR("*float*: Number of inverters\n\n**Constraints:**\nINTEGER,POSITIVE\n\n**Required:**\nTrue\n\nThe value of ``inverter_count`` depends on the following variables:\n\n\t - 6par_imp\n\t - 6par_vmp\n\t - 6par_voc\n\t - cec_i_mp_ref\n\t - cec_v_mp_ref\n\t - cec_v_oc_ref\n\t - inv_cec_cg_paco\n\t - inv_cec_cg_vdcmax\n\t - inv_ds_paco\n\t - inv_ds_vdcmax\n\t - inv_pd_paco\n\t - inv_pd_vdcmax\n\t - inv_snl_paco\n\t - inv_snl_vdcmax\n\t - inverter_model\n\t - module_model\n\t - sd11par_Vmp0\n\t - sd11par_Voc0\n\t - snl_a\n\t - snl_a0\n\t - snl_a1\n\t - snl_a2\n\t - snl_a3\n\t - snl_a4\n\t - snl_aimp\n\t - snl_aisc\n\t - snl_area\n\t - snl_b\n\t - snl_b0\n\t - snl_b1\n\t - snl_b2\n\t - snl_b3\n\t - snl_b4\n\t - snl_b5\n\t - snl_bvmpo\n\t - snl_bvoco\n\t - snl_c0\n\t - snl_c1\n\t - snl_c2\n\t - snl_c3\n\t - snl_dtc\n\t - snl_fd\n\t - snl_impo\n\t - snl_isco\n\t - snl_mbvmp\n\t - snl_mbvoc\n\t - snl_module_structure\n\t - snl_n\n\t - snl_series_cells\n\t - snl_vmpo\n\t - snl_voco\n\t - spe_area\n\t - spe_eff0\n\t - spe_eff1\n\t - spe_eff2\n\t - spe_eff3\n\t - spe_eff4\n\t - spe_rad0\n\t - spe_rad1\n\t - spe_rad2\n\t - spe_rad3\n\t - spe_rad4\n\t - spe_reference\n\t - spe_vmp\n\t - spe_voc\n"),
+ 	NULL},
+{"measured_temp_array", (getter)SystemDesign_get_measured_temp_array,(setter)SystemDesign_set_measured_temp_array,
+	PyDoc_STR("*sequence*: Measured module temperature [C]\n\n**Required:**\nRequired if use_measured_temp=1"),
  	NULL},
 {"subarray1_azimuth", (getter)SystemDesign_get_subarray1_azimuth,(setter)SystemDesign_set_subarray1_azimuth,
-	PyDoc_STR("*float*: Sub-array 1 Azimuth [deg]\n\n*Options*: 0=N,90=E,180=S,270=W\n\n*Constraints*: MIN=0,MAX=359.9"),
+	PyDoc_STR("*float*: Sub-array 1 Azimuth [degrees]\n\n**Options:**\n0=N,90=E,180=S,270=W\n\n**Constraints:**\nMIN=0,MAX=359.9\n\n**Required:**\nsubarray1_track_mode~2&subarray1_track_mode~3"),
  	NULL},
 {"subarray1_backtrack", (getter)SystemDesign_get_subarray1_backtrack,(setter)SystemDesign_set_subarray1_backtrack,
-	PyDoc_STR("*float*: Sub-array 1 Backtracking enabled\n\n*Options*: 0=no backtracking,1=backtrack\n\n*Constraints*: BOOLEAN\n\n*Required*: True if subarray1_track_mode=1"),
+	PyDoc_STR("*float*: Sub-array 1 Backtracking enabled\n\n**Options:**\n0=no backtracking,1=backtrack\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nRequired if subarray1_track_mode=1"),
  	NULL},
 {"subarray1_gcr", (getter)SystemDesign_get_subarray1_gcr,(setter)SystemDesign_set_subarray1_gcr,
-	PyDoc_STR("*float*: Sub-array 1 Ground coverage ratio [0..1]\n\n*Constraints*: MIN=0.01,MAX=0.99\n\n*Required*: If not provided, assumed to be 0.3"),
+	PyDoc_STR("*float*: Sub-array 1 Ground coverage ratio [0..1]\n\n**Constraints:**\nMIN=0.01,MAX=0.99\n\n**Required:**\nFalse. Automatically set to 0.3 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"subarray1_modules_per_string", (getter)SystemDesign_get_subarray1_modules_per_string,(setter)SystemDesign_set_subarray1_modules_per_string,
-	PyDoc_STR("*float*: Sub-array 1 Modules per string\n\n*Constraints*: INTEGER,POSITIVE\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - system_capacity\n\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - 6par_imp\n\t - 6par_vmp\n\t - 6par_voc\n\t - cec_i_mp_ref\n\t - cec_v_mp_ref\n\t - cec_v_oc_ref\n\t - inv_cec_cg_paco\n\t - inv_cec_cg_vdcmax\n\t - inv_ds_paco\n\t - inv_ds_vdcmax\n\t - inv_pd_paco\n\t - inv_pd_vdcmax\n\t - inv_snl_paco\n\t - inv_snl_vdcmax\n\t - inverter_model\n\t - module_model\n\t - sd11par_Vmp0\n\t - sd11par_Voc0\n\t - snl_a\n\t - snl_a0\n\t - snl_a1\n\t - snl_a2\n\t - snl_a3\n\t - snl_a4\n\t - snl_aimp\n\t - snl_aisc\n\t - snl_area\n\t - snl_b\n\t - snl_b0\n\t - snl_b1\n\t - snl_b2\n\t - snl_b3\n\t - snl_b4\n\t - snl_b5\n\t - snl_bvmpo\n\t - snl_bvoco\n\t - snl_c0\n\t - snl_c1\n\t - snl_c2\n\t - snl_c3\n\t - snl_dtc\n\t - snl_fd\n\t - snl_impo\n\t - snl_isco\n\t - snl_mbvmp\n\t - snl_mbvoc\n\t - snl_module_structure\n\t - snl_n\n\t - snl_series_cells\n\t - snl_vmpo\n\t - snl_voco\n\t - spe_area\n\t - spe_eff0\n\t - spe_eff1\n\t - spe_eff2\n\t - spe_eff3\n\t - spe_eff4\n\t - spe_rad0\n\t - spe_rad1\n\t - spe_rad2\n\t - spe_rad3\n\t - spe_rad4\n\t - spe_reference\n\t - spe_vmp\n\t - spe_voc\n"),
+	PyDoc_STR("*float*: Sub-array 1 Modules per string\n\n**Constraints:**\nINTEGER,POSITIVE\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``subarray1_modules_per_string``:\n\n\t - system_capacity\n\n\nThe value of ``subarray1_modules_per_string`` depends on the following variables:\n\n\t - 6par_imp\n\t - 6par_vmp\n\t - 6par_voc\n\t - cec_i_mp_ref\n\t - cec_v_mp_ref\n\t - cec_v_oc_ref\n\t - inv_cec_cg_paco\n\t - inv_cec_cg_vdcmax\n\t - inv_ds_paco\n\t - inv_ds_vdcmax\n\t - inv_pd_paco\n\t - inv_pd_vdcmax\n\t - inv_snl_paco\n\t - inv_snl_vdcmax\n\t - inverter_model\n\t - module_model\n\t - sd11par_Vmp0\n\t - sd11par_Voc0\n\t - snl_a\n\t - snl_a0\n\t - snl_a1\n\t - snl_a2\n\t - snl_a3\n\t - snl_a4\n\t - snl_aimp\n\t - snl_aisc\n\t - snl_area\n\t - snl_b\n\t - snl_b0\n\t - snl_b1\n\t - snl_b2\n\t - snl_b3\n\t - snl_b4\n\t - snl_b5\n\t - snl_bvmpo\n\t - snl_bvoco\n\t - snl_c0\n\t - snl_c1\n\t - snl_c2\n\t - snl_c3\n\t - snl_dtc\n\t - snl_fd\n\t - snl_impo\n\t - snl_isco\n\t - snl_mbvmp\n\t - snl_mbvoc\n\t - snl_module_structure\n\t - snl_n\n\t - snl_series_cells\n\t - snl_vmpo\n\t - snl_voco\n\t - spe_area\n\t - spe_eff0\n\t - spe_eff1\n\t - spe_eff2\n\t - spe_eff3\n\t - spe_eff4\n\t - spe_rad0\n\t - spe_rad1\n\t - spe_rad2\n\t - spe_rad3\n\t - spe_rad4\n\t - spe_reference\n\t - spe_vmp\n\t - spe_voc\n"),
  	NULL},
 {"subarray1_monthly_tilt", (getter)SystemDesign_get_subarray1_monthly_tilt,(setter)SystemDesign_set_subarray1_monthly_tilt,
-	PyDoc_STR("*sequence*: Sub-array 1 monthly tilt input [deg]\n\n*Constraints*: LENGTH=12\n\n*Required*: True if subarray1_track_mode=4"),
+	PyDoc_STR("*sequence*: Sub-array 1 monthly tilt input [degrees]\n\n**Constraints:**\nLENGTH=12\n\n**Required:**\nRequired if subarray1_track_mode=4"),
  	NULL},
 {"subarray1_mppt_input", (getter)SystemDesign_get_subarray1_mppt_input,(setter)SystemDesign_set_subarray1_mppt_input,
-	PyDoc_STR("*float*: Sub-array 1 Inverter MPPT input number\n\n*Constraints*: INTEGER,POSITIVE\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: Sub-array 1 Inverter MPPT input number\n\n**Constraints:**\nINTEGER,POSITIVE\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"subarray1_nstrings", (getter)SystemDesign_get_subarray1_nstrings,(setter)SystemDesign_set_subarray1_nstrings,
-	PyDoc_STR("*float*: Sub-array 1 Number of parallel strings\n\n*Constraints*: INTEGER\n\n*Changes to this variable may require updating the values of the following*: \n\t - system_capacity\n\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - 6par_imp\n\t - 6par_vmp\n\t - 6par_voc\n\t - cec_i_mp_ref\n\t - cec_v_mp_ref\n\t - cec_v_oc_ref\n\t - inv_cec_cg_paco\n\t - inv_cec_cg_vdcmax\n\t - inv_ds_paco\n\t - inv_ds_vdcmax\n\t - inv_pd_paco\n\t - inv_pd_vdcmax\n\t - inv_snl_paco\n\t - inv_snl_vdcmax\n\t - inverter_model\n\t - module_model\n\t - sd11par_Vmp0\n\t - sd11par_Voc0\n\t - snl_a\n\t - snl_a0\n\t - snl_a1\n\t - snl_a2\n\t - snl_a3\n\t - snl_a4\n\t - snl_aimp\n\t - snl_aisc\n\t - snl_area\n\t - snl_b\n\t - snl_b0\n\t - snl_b1\n\t - snl_b2\n\t - snl_b3\n\t - snl_b4\n\t - snl_b5\n\t - snl_bvmpo\n\t - snl_bvoco\n\t - snl_c0\n\t - snl_c1\n\t - snl_c2\n\t - snl_c3\n\t - snl_dtc\n\t - snl_fd\n\t - snl_impo\n\t - snl_isco\n\t - snl_mbvmp\n\t - snl_mbvoc\n\t - snl_module_structure\n\t - snl_n\n\t - snl_series_cells\n\t - snl_vmpo\n\t - snl_voco\n\t - spe_area\n\t - spe_eff0\n\t - spe_eff1\n\t - spe_eff2\n\t - spe_eff3\n\t - spe_eff4\n\t - spe_rad0\n\t - spe_rad1\n\t - spe_rad2\n\t - spe_rad3\n\t - spe_rad4\n\t - spe_reference\n\t - spe_vmp\n\t - spe_voc\n"),
+	PyDoc_STR("*float*: Sub-array 1 Number of parallel strings\n\n**Constraints:**\nINTEGER\n\nThe value of the following variables depends on ``subarray1_nstrings``:\n\n\t - system_capacity\n\n\nThe value of ``subarray1_nstrings`` depends on the following variables:\n\n\t - 6par_imp\n\t - 6par_vmp\n\t - 6par_voc\n\t - cec_i_mp_ref\n\t - cec_v_mp_ref\n\t - cec_v_oc_ref\n\t - inv_cec_cg_paco\n\t - inv_cec_cg_vdcmax\n\t - inv_ds_paco\n\t - inv_ds_vdcmax\n\t - inv_pd_paco\n\t - inv_pd_vdcmax\n\t - inv_snl_paco\n\t - inv_snl_vdcmax\n\t - inverter_model\n\t - module_model\n\t - sd11par_Vmp0\n\t - sd11par_Voc0\n\t - snl_a\n\t - snl_a0\n\t - snl_a1\n\t - snl_a2\n\t - snl_a3\n\t - snl_a4\n\t - snl_aimp\n\t - snl_aisc\n\t - snl_area\n\t - snl_b\n\t - snl_b0\n\t - snl_b1\n\t - snl_b2\n\t - snl_b3\n\t - snl_b4\n\t - snl_b5\n\t - snl_bvmpo\n\t - snl_bvoco\n\t - snl_c0\n\t - snl_c1\n\t - snl_c2\n\t - snl_c3\n\t - snl_dtc\n\t - snl_fd\n\t - snl_impo\n\t - snl_isco\n\t - snl_mbvmp\n\t - snl_mbvoc\n\t - snl_module_structure\n\t - snl_n\n\t - snl_series_cells\n\t - snl_vmpo\n\t - snl_voco\n\t - spe_area\n\t - spe_eff0\n\t - spe_eff1\n\t - spe_eff2\n\t - spe_eff3\n\t - spe_eff4\n\t - spe_rad0\n\t - spe_rad1\n\t - spe_rad2\n\t - spe_rad3\n\t - spe_rad4\n\t - spe_reference\n\t - spe_vmp\n\t - spe_voc\n"),
  	NULL},
 {"subarray1_rotlim", (getter)SystemDesign_get_subarray1_rotlim,(setter)SystemDesign_set_subarray1_rotlim,
-	PyDoc_STR("*float*: Sub-array 1 Tracker rotation limit [deg]\n\n*Constraints*: MIN=0,MAX=85\n\n*Required*: If not provided, assumed to be 45"),
+	PyDoc_STR("*float*: Sub-array 1 Tracker rotation limit [degrees]\n\n**Constraints:**\nMIN=0,MAX=85\n\n**Required:**\nFalse. Automatically set to 45 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"subarray1_slope_azm", (getter)SystemDesign_get_subarray1_slope_azm,(setter)SystemDesign_set_subarray1_slope_azm,
-	PyDoc_STR("*float*: Sub-array 1 terrain azimuth [deg]\n\n*Required*: If not provided, assumed to be 0.0"),
+	PyDoc_STR("*float*: Sub-array 1 terrain azimuth [degrees]\n\n**Constraints:**\nMIN=0,MAX=359.9\n\n**Required:**\nRequired if subarray1_track_mode=1"),
  	NULL},
 {"subarray1_slope_tilt", (getter)SystemDesign_get_subarray1_slope_tilt,(setter)SystemDesign_set_subarray1_slope_tilt,
-	PyDoc_STR("*float*: Sub-array 1 terrain tilt [deg]\n\n*Required*: If not provided, assumed to be 0.0"),
+	PyDoc_STR("*float*: Sub-array 1 terrain tilt [degrees]\n\n**Constraints:**\nMIN=0,MAX=90\n\n**Required:**\nRequired if subarray1_track_mode=1"),
  	NULL},
 {"subarray1_tilt", (getter)SystemDesign_get_subarray1_tilt,(setter)SystemDesign_set_subarray1_tilt,
-	PyDoc_STR("*float*: Sub-array 1 Tilt [deg]\n\n*Options*: 0=horizontal,90=vertical\n\n*Constraints*: MIN=0,MAX=90"),
+	PyDoc_STR("*float*: Sub-array 1 Tilt [degrees]\n\n**Options:**\n0=horizontal,90=vertical\n\n**Constraints:**\nMIN=0,MAX=90\n\n**Required:**\nsubarray1_track_mode~2&subarray1_track_mode~4"),
  	NULL},
 {"subarray1_tilt_eq_lat", (getter)SystemDesign_get_subarray1_tilt_eq_lat,(setter)SystemDesign_set_subarray1_tilt_eq_lat,
-	PyDoc_STR("*float*: Sub-array 1 Tilt=latitude override [0/1]\n\n*Options*: 0=false,1=override\n\n*Constraints*: BOOLEAN"),
+	PyDoc_STR("*float*: Sub-array 1 Tilt=latitude override [0/1]\n\n**Options:**\n0=false,1=override\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"subarray1_track_mode", (getter)SystemDesign_get_subarray1_track_mode,(setter)SystemDesign_set_subarray1_track_mode,
-	PyDoc_STR("*float*: Sub-array 1 Tracking mode\n\n*Options*: 0=fixed,1=1axis,2=2axis,3=azi,4=monthly\n\n*Constraints*: INTEGER,MIN=0,MAX=4\n\n*Required*: True"),
+	PyDoc_STR("*float*: Sub-array 1 Tracking mode\n\n**Options:**\n0=fixed,1=1axis,2=2axis,3=azi,4=monthly\n\n**Constraints:**\nINTEGER,MIN=0,MAX=4\n\n**Required:**\nTrue"),
  	NULL},
 {"subarray2_azimuth", (getter)SystemDesign_get_subarray2_azimuth,(setter)SystemDesign_set_subarray2_azimuth,
-	PyDoc_STR("*float*: Sub-array 2 Azimuth [deg]\n\n*Options*: 0=N,90=E,180=S,270=W\n\n*Constraints*: MIN=0,MAX=359.9"),
+	PyDoc_STR("*float*: Sub-array 2 Azimuth [degrees]\n\n**Options:**\n0=N,90=E,180=S,270=W\n\n**Constraints:**\nMIN=0,MAX=359.9\n\n**Required:**\nRequired if subarray2_enable=1&subarray2_track_mode~2&subarray2_track_mode~3"),
  	NULL},
 {"subarray2_backtrack", (getter)SystemDesign_get_subarray2_backtrack,(setter)SystemDesign_set_subarray2_backtrack,
-	PyDoc_STR("*float*: Sub-array 2 Backtracking enabled\n\n*Options*: 0=no backtracking,1=backtrack\n\n*Constraints*: BOOLEAN"),
+	PyDoc_STR("*float*: Sub-array 2 Backtracking enabled\n\n**Options:**\n0=no backtracking,1=backtrack\n\n**Constraints:**\nBOOLEAN"),
  	NULL},
 {"subarray2_enable", (getter)SystemDesign_get_subarray2_enable,(setter)SystemDesign_set_subarray2_enable,
-	PyDoc_STR("*float*: Sub-array 2 Enable [0/1]\n\n*Options*: 0=disabled,1=enabled\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0\n\n*Changes to this variable may require updating the values of the following*: \n\t - system_capacity\n\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - 6par_imp\n\t - 6par_vmp\n\t - 6par_voc\n\t - cec_i_mp_ref\n\t - cec_v_mp_ref\n\t - cec_v_oc_ref\n\t - inv_cec_cg_paco\n\t - inv_cec_cg_vdcmax\n\t - inv_ds_paco\n\t - inv_ds_vdcmax\n\t - inv_pd_paco\n\t - inv_pd_vdcmax\n\t - inv_snl_paco\n\t - inv_snl_vdcmax\n\t - inverter_model\n\t - module_model\n\t - sd11par_Vmp0\n\t - sd11par_Voc0\n\t - snl_a\n\t - snl_a0\n\t - snl_a1\n\t - snl_a2\n\t - snl_a3\n\t - snl_a4\n\t - snl_aimp\n\t - snl_aisc\n\t - snl_area\n\t - snl_b\n\t - snl_b0\n\t - snl_b1\n\t - snl_b2\n\t - snl_b3\n\t - snl_b4\n\t - snl_b5\n\t - snl_bvmpo\n\t - snl_bvoco\n\t - snl_c0\n\t - snl_c1\n\t - snl_c2\n\t - snl_c3\n\t - snl_dtc\n\t - snl_fd\n\t - snl_impo\n\t - snl_isco\n\t - snl_mbvmp\n\t - snl_mbvoc\n\t - snl_module_structure\n\t - snl_n\n\t - snl_series_cells\n\t - snl_vmpo\n\t - snl_voco\n\t - spe_area\n\t - spe_eff0\n\t - spe_eff1\n\t - spe_eff2\n\t - spe_eff3\n\t - spe_eff4\n\t - spe_rad0\n\t - spe_rad1\n\t - spe_rad2\n\t - spe_rad3\n\t - spe_rad4\n\t - spe_reference\n\t - spe_vmp\n\t - spe_voc\n"),
+	PyDoc_STR("*float*: Sub-array 2 Enable [0/1]\n\n**Options:**\n0=disabled,1=enabled\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults.\n\nThe value of the following variables depends on ``subarray2_enable``:\n\n\t - system_capacity\n\n\nThe value of ``subarray2_enable`` depends on the following variables:\n\n\t - 6par_imp\n\t - 6par_vmp\n\t - 6par_voc\n\t - cec_i_mp_ref\n\t - cec_v_mp_ref\n\t - cec_v_oc_ref\n\t - inv_cec_cg_paco\n\t - inv_cec_cg_vdcmax\n\t - inv_ds_paco\n\t - inv_ds_vdcmax\n\t - inv_pd_paco\n\t - inv_pd_vdcmax\n\t - inv_snl_paco\n\t - inv_snl_vdcmax\n\t - inverter_model\n\t - module_model\n\t - sd11par_Vmp0\n\t - sd11par_Voc0\n\t - snl_a\n\t - snl_a0\n\t - snl_a1\n\t - snl_a2\n\t - snl_a3\n\t - snl_a4\n\t - snl_aimp\n\t - snl_aisc\n\t - snl_area\n\t - snl_b\n\t - snl_b0\n\t - snl_b1\n\t - snl_b2\n\t - snl_b3\n\t - snl_b4\n\t - snl_b5\n\t - snl_bvmpo\n\t - snl_bvoco\n\t - snl_c0\n\t - snl_c1\n\t - snl_c2\n\t - snl_c3\n\t - snl_dtc\n\t - snl_fd\n\t - snl_impo\n\t - snl_isco\n\t - snl_mbvmp\n\t - snl_mbvoc\n\t - snl_module_structure\n\t - snl_n\n\t - snl_series_cells\n\t - snl_vmpo\n\t - snl_voco\n\t - spe_area\n\t - spe_eff0\n\t - spe_eff1\n\t - spe_eff2\n\t - spe_eff3\n\t - spe_eff4\n\t - spe_rad0\n\t - spe_rad1\n\t - spe_rad2\n\t - spe_rad3\n\t - spe_rad4\n\t - spe_reference\n\t - spe_vmp\n\t - spe_voc\n"),
  	NULL},
 {"subarray2_gcr", (getter)SystemDesign_get_subarray2_gcr,(setter)SystemDesign_set_subarray2_gcr,
-	PyDoc_STR("*float*: Sub-array 2 Ground coverage ratio [0..1]\n\n*Constraints*: MIN=0.01,MAX=0.99\n\n*Required*: If not provided, assumed to be 0.3"),
+	PyDoc_STR("*float*: Sub-array 2 Ground coverage ratio [0..1]\n\n**Constraints:**\nMIN=0.01,MAX=0.99\n\n**Required:**\nFalse. Automatically set to 0.3 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"subarray2_modules_per_string", (getter)SystemDesign_get_subarray2_modules_per_string,(setter)SystemDesign_set_subarray2_modules_per_string,
-	PyDoc_STR("*float*: Sub-array 2 Modules per string\n\n*Constraints*: INTEGER,MIN=1\n\n*Required*: True if subarray2_enable=1\n\n*Changes to this variable may require updating the values of the following*: \n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Sub-array 2 Modules per string\n\n**Constraints:**\nINTEGER,MIN=1\n\n**Required:**\nRequired if subarray2_enable=1\n\nThe value of the following variables depends on ``subarray2_modules_per_string``:\n\n\t - system_capacity\n"),
  	NULL},
 {"subarray2_monthly_tilt", (getter)SystemDesign_get_subarray2_monthly_tilt,(setter)SystemDesign_set_subarray2_monthly_tilt,
-	PyDoc_STR("*sequence*: Sub-array 2 Monthly tilt input [deg]\n\n*Constraints*: LENGTH=12"),
+	PyDoc_STR("*sequence*: Sub-array 2 Monthly tilt input [degrees]\n\n**Constraints:**\nLENGTH=12\n\n**Required:**\nRequired if subarray2_track_mode=4"),
  	NULL},
 {"subarray2_mppt_input", (getter)SystemDesign_get_subarray2_mppt_input,(setter)SystemDesign_set_subarray2_mppt_input,
-	PyDoc_STR("*float*: Sub-array 2 Inverter MPPT input number\n\n*Constraints*: INTEGER,POSITIVE\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: Sub-array 2 Inverter MPPT input number\n\n**Constraints:**\nINTEGER,POSITIVE\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"subarray2_nstrings", (getter)SystemDesign_get_subarray2_nstrings,(setter)SystemDesign_set_subarray2_nstrings,
-	PyDoc_STR("*float*: Sub-array 2 Number of parallel strings\n\n*Constraints*: INTEGER,MIN=1\n\n*Required*: True if subarray2_enable=1\n\n*Changes to this variable may require updating the values of the following*: \n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Sub-array 2 Number of parallel strings\n\n**Constraints:**\nINTEGER,MIN=1\n\n**Required:**\nRequired if subarray2_enable=1\n\nThe value of the following variables depends on ``subarray2_nstrings``:\n\n\t - system_capacity\n"),
  	NULL},
 {"subarray2_rotlim", (getter)SystemDesign_get_subarray2_rotlim,(setter)SystemDesign_set_subarray2_rotlim,
-	PyDoc_STR("*float*: Sub-array 2 Tracker rotation limit [deg]\n\n*Constraints*: MIN=0,MAX=85\n\n*Required*: If not provided, assumed to be 45"),
+	PyDoc_STR("*float*: Sub-array 2 Tracker rotation limit [degrees]\n\n**Constraints:**\nMIN=0,MAX=85\n\n**Required:**\nFalse. Automatically set to 45 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"subarray2_slope_azm", (getter)SystemDesign_get_subarray2_slope_azm,(setter)SystemDesign_set_subarray2_slope_azm,
-	PyDoc_STR("*float*: Sub-array 2 terrain azimuth [deg]\n\n*Required*: If not provided, assumed to be 0.0"),
+	PyDoc_STR("*float*: Sub-array 2 terrain azimuth [degrees]\n\n**Constraints:**\nMIN=0,MAX=359.9\n\n**Required:**\nRequired if subarray2_enable=1&subarray2_track_mode=1"),
  	NULL},
 {"subarray2_slope_tilt", (getter)SystemDesign_get_subarray2_slope_tilt,(setter)SystemDesign_set_subarray2_slope_tilt,
-	PyDoc_STR("*float*: Sub-array 2 terrain tilt [deg]\n\n*Required*: If not provided, assumed to be 0.0"),
+	PyDoc_STR("*float*: Sub-array 2 terrain tilt [degrees]\n\n**Constraints:**\nMIN=0,MAX=90\n\n**Required:**\nRequired if subarray2_enable=1&subarray2_track_mode=1"),
  	NULL},
 {"subarray2_tilt", (getter)SystemDesign_get_subarray2_tilt,(setter)SystemDesign_set_subarray2_tilt,
-	PyDoc_STR("*float*: Sub-array 2 Tilt [deg]\n\n*Options*: 0=horizontal,90=vertical\n\n*Constraints*: MIN=0,MAX=90"),
+	PyDoc_STR("*float*: Sub-array 2 Tilt [degrees]\n\n**Options:**\n0=horizontal,90=vertical\n\n**Constraints:**\nMIN=0,MAX=90\n\n**Required:**\nRequired if subarray2_enable=1&subarray2_track_mode~2&subarray2_track_mode~4"),
  	NULL},
 {"subarray2_tilt_eq_lat", (getter)SystemDesign_get_subarray2_tilt_eq_lat,(setter)SystemDesign_set_subarray2_tilt_eq_lat,
-	PyDoc_STR("*float*: Sub-array 2 Tilt=latitude override [0/1]\n\n*Options*: 0=false,1=override\n\n*Constraints*: BOOLEAN"),
+	PyDoc_STR("*float*: Sub-array 2 Tilt=latitude override [0/1]\n\n**Options:**\n0=false,1=override\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"subarray2_track_mode", (getter)SystemDesign_get_subarray2_track_mode,(setter)SystemDesign_set_subarray2_track_mode,
-	PyDoc_STR("*float*: Sub-array 2 Tracking mode\n\n*Options*: 0=fixed,1=1axis,2=2axis,3=azi,4=monthly\n\n*Constraints*: INTEGER,MIN=0,MAX=4\n\n*Required*: True if subarray2_enable=1"),
+	PyDoc_STR("*float*: Sub-array 2 Tracking mode\n\n**Options:**\n0=fixed,1=1axis,2=2axis,3=azi,4=monthly\n\n**Constraints:**\nINTEGER,MIN=0,MAX=4\n\n**Required:**\nRequired if subarray2_enable=1"),
  	NULL},
 {"subarray3_azimuth", (getter)SystemDesign_get_subarray3_azimuth,(setter)SystemDesign_set_subarray3_azimuth,
-	PyDoc_STR("*float*: Sub-array 3 Azimuth [deg]\n\n*Options*: 0=N,90=E,180=S,270=W\n\n*Constraints*: MIN=0,MAX=359.9"),
+	PyDoc_STR("*float*: Sub-array 3 Azimuth [degrees]\n\n**Options:**\n0=N,90=E,180=S,270=W\n\n**Constraints:**\nMIN=0,MAX=359.9\n\n**Required:**\nRequired if subarray3_enable=1&subarray3_track_mode~2&subarray3_track_mode~3"),
  	NULL},
 {"subarray3_backtrack", (getter)SystemDesign_get_subarray3_backtrack,(setter)SystemDesign_set_subarray3_backtrack,
-	PyDoc_STR("*float*: Sub-array 3 Backtracking enabled\n\n*Options*: 0=no backtracking,1=backtrack\n\n*Constraints*: BOOLEAN"),
+	PyDoc_STR("*float*: Sub-array 3 Backtracking enabled\n\n**Options:**\n0=no backtracking,1=backtrack\n\n**Constraints:**\nBOOLEAN"),
  	NULL},
 {"subarray3_enable", (getter)SystemDesign_get_subarray3_enable,(setter)SystemDesign_set_subarray3_enable,
-	PyDoc_STR("*float*: Sub-array 3 Enable [0/1]\n\n*Options*: 0=disabled,1=enabled\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0\n\n*Changes to this variable may require updating the values of the following*: \n\t - system_capacity\n\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - 6par_imp\n\t - 6par_vmp\n\t - 6par_voc\n\t - cec_i_mp_ref\n\t - cec_v_mp_ref\n\t - cec_v_oc_ref\n\t - inv_cec_cg_paco\n\t - inv_cec_cg_vdcmax\n\t - inv_ds_paco\n\t - inv_ds_vdcmax\n\t - inv_pd_paco\n\t - inv_pd_vdcmax\n\t - inv_snl_paco\n\t - inv_snl_vdcmax\n\t - inverter_model\n\t - module_model\n\t - sd11par_Vmp0\n\t - sd11par_Voc0\n\t - snl_a\n\t - snl_a0\n\t - snl_a1\n\t - snl_a2\n\t - snl_a3\n\t - snl_a4\n\t - snl_aimp\n\t - snl_aisc\n\t - snl_area\n\t - snl_b\n\t - snl_b0\n\t - snl_b1\n\t - snl_b2\n\t - snl_b3\n\t - snl_b4\n\t - snl_b5\n\t - snl_bvmpo\n\t - snl_bvoco\n\t - snl_c0\n\t - snl_c1\n\t - snl_c2\n\t - snl_c3\n\t - snl_dtc\n\t - snl_fd\n\t - snl_impo\n\t - snl_isco\n\t - snl_mbvmp\n\t - snl_mbvoc\n\t - snl_module_structure\n\t - snl_n\n\t - snl_series_cells\n\t - snl_vmpo\n\t - snl_voco\n\t - spe_area\n\t - spe_eff0\n\t - spe_eff1\n\t - spe_eff2\n\t - spe_eff3\n\t - spe_eff4\n\t - spe_rad0\n\t - spe_rad1\n\t - spe_rad2\n\t - spe_rad3\n\t - spe_rad4\n\t - spe_reference\n\t - spe_vmp\n\t - spe_voc\n"),
+	PyDoc_STR("*float*: Sub-array 3 Enable [0/1]\n\n**Options:**\n0=disabled,1=enabled\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults.\n\nThe value of the following variables depends on ``subarray3_enable``:\n\n\t - system_capacity\n\n\nThe value of ``subarray3_enable`` depends on the following variables:\n\n\t - 6par_imp\n\t - 6par_vmp\n\t - 6par_voc\n\t - cec_i_mp_ref\n\t - cec_v_mp_ref\n\t - cec_v_oc_ref\n\t - inv_cec_cg_paco\n\t - inv_cec_cg_vdcmax\n\t - inv_ds_paco\n\t - inv_ds_vdcmax\n\t - inv_pd_paco\n\t - inv_pd_vdcmax\n\t - inv_snl_paco\n\t - inv_snl_vdcmax\n\t - inverter_model\n\t - module_model\n\t - sd11par_Vmp0\n\t - sd11par_Voc0\n\t - snl_a\n\t - snl_a0\n\t - snl_a1\n\t - snl_a2\n\t - snl_a3\n\t - snl_a4\n\t - snl_aimp\n\t - snl_aisc\n\t - snl_area\n\t - snl_b\n\t - snl_b0\n\t - snl_b1\n\t - snl_b2\n\t - snl_b3\n\t - snl_b4\n\t - snl_b5\n\t - snl_bvmpo\n\t - snl_bvoco\n\t - snl_c0\n\t - snl_c1\n\t - snl_c2\n\t - snl_c3\n\t - snl_dtc\n\t - snl_fd\n\t - snl_impo\n\t - snl_isco\n\t - snl_mbvmp\n\t - snl_mbvoc\n\t - snl_module_structure\n\t - snl_n\n\t - snl_series_cells\n\t - snl_vmpo\n\t - snl_voco\n\t - spe_area\n\t - spe_eff0\n\t - spe_eff1\n\t - spe_eff2\n\t - spe_eff3\n\t - spe_eff4\n\t - spe_rad0\n\t - spe_rad1\n\t - spe_rad2\n\t - spe_rad3\n\t - spe_rad4\n\t - spe_reference\n\t - spe_vmp\n\t - spe_voc\n"),
  	NULL},
 {"subarray3_gcr", (getter)SystemDesign_get_subarray3_gcr,(setter)SystemDesign_set_subarray3_gcr,
-	PyDoc_STR("*float*: Sub-array 3 Ground coverage ratio [0..1]\n\n*Constraints*: MIN=0.01,MAX=0.99\n\n*Required*: If not provided, assumed to be 0.3"),
+	PyDoc_STR("*float*: Sub-array 3 Ground coverage ratio [0..1]\n\n**Constraints:**\nMIN=0.01,MAX=0.99\n\n**Required:**\nFalse. Automatically set to 0.3 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"subarray3_modules_per_string", (getter)SystemDesign_get_subarray3_modules_per_string,(setter)SystemDesign_set_subarray3_modules_per_string,
-	PyDoc_STR("*float*: Sub-array 3 Modules per string\n\n*Constraints*: INTEGER,MIN=1\n\n*Required*: True if subarray3_enable=1\n\n*Changes to this variable may require updating the values of the following*: \n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Sub-array 3 Modules per string\n\n**Constraints:**\nINTEGER,MIN=1\n\n**Required:**\nRequired if subarray3_enable=1\n\nThe value of the following variables depends on ``subarray3_modules_per_string``:\n\n\t - system_capacity\n"),
  	NULL},
 {"subarray3_monthly_tilt", (getter)SystemDesign_get_subarray3_monthly_tilt,(setter)SystemDesign_set_subarray3_monthly_tilt,
-	PyDoc_STR("*sequence*: Sub-array 3 Monthly tilt input [deg]\n\n*Constraints*: LENGTH=12"),
+	PyDoc_STR("*sequence*: Sub-array 3 Monthly tilt input [degrees]\n\n**Constraints:**\nLENGTH=12"),
  	NULL},
 {"subarray3_mppt_input", (getter)SystemDesign_get_subarray3_mppt_input,(setter)SystemDesign_set_subarray3_mppt_input,
-	PyDoc_STR("*float*: Sub-array 3 Inverter MPPT input number\n\n*Constraints*: INTEGER,POSITIVE\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: Sub-array 3 Inverter MPPT input number\n\n**Constraints:**\nINTEGER,POSITIVE\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"subarray3_nstrings", (getter)SystemDesign_get_subarray3_nstrings,(setter)SystemDesign_set_subarray3_nstrings,
-	PyDoc_STR("*float*: Sub-array 3 Number of parallel strings\n\n*Constraints*: INTEGER,MIN=1\n\n*Required*: True if subarray3_enable=1\n\n*Changes to this variable may require updating the values of the following*: \n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Sub-array 3 Number of parallel strings\n\n**Constraints:**\nINTEGER,MIN=1\n\n**Required:**\nRequired if subarray3_enable=1\n\nThe value of the following variables depends on ``subarray3_nstrings``:\n\n\t - system_capacity\n"),
  	NULL},
 {"subarray3_rotlim", (getter)SystemDesign_get_subarray3_rotlim,(setter)SystemDesign_set_subarray3_rotlim,
-	PyDoc_STR("*float*: Sub-array 3 Tracker rotation limit [deg]\n\n*Constraints*: MIN=0,MAX=85\n\n*Required*: If not provided, assumed to be 45"),
+	PyDoc_STR("*float*: Sub-array 3 Tracker rotation limit [degrees]\n\n**Constraints:**\nMIN=0,MAX=85\n\n**Required:**\nFalse. Automatically set to 45 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"subarray3_slope_azm", (getter)SystemDesign_get_subarray3_slope_azm,(setter)SystemDesign_set_subarray3_slope_azm,
-	PyDoc_STR("*float*: Sub-array 3 terrain azimuth [deg]\n\n*Required*: If not provided, assumed to be 0.0"),
+	PyDoc_STR("*float*: Sub-array 3 terrain azimuth [degrees]\n\n**Constraints:**\nMIN=0,MAX=359.9\n\n**Required:**\nRequired if subarray3_enable=1&subarray3_track_mode=1"),
  	NULL},
 {"subarray3_slope_tilt", (getter)SystemDesign_get_subarray3_slope_tilt,(setter)SystemDesign_set_subarray3_slope_tilt,
-	PyDoc_STR("*float*: Sub-array 3 terrain tilt [deg]\n\n*Required*: If not provided, assumed to be 0.0"),
+	PyDoc_STR("*float*: Sub-array 3 terrain tilt [degrees]\n\n**Constraints:**\nMIN=0,MAX=90\n\n**Required:**\nRequired if subarray3_enable=1&subarray3_track_mode=1"),
  	NULL},
 {"subarray3_tilt", (getter)SystemDesign_get_subarray3_tilt,(setter)SystemDesign_set_subarray3_tilt,
-	PyDoc_STR("*float*: Sub-array 3 Tilt [deg]\n\n*Options*: 0=horizontal,90=vertical\n\n*Constraints*: MIN=0,MAX=90"),
+	PyDoc_STR("*float*: Sub-array 3 Tilt [degrees]\n\n**Options:**\n0=horizontal,90=vertical\n\n**Constraints:**\nMIN=0,MAX=90\n\n**Required:**\nRequired if subarray3_enable=1&subarray3_track_mode~2&subarray3_track_mode~4"),
  	NULL},
 {"subarray3_tilt_eq_lat", (getter)SystemDesign_get_subarray3_tilt_eq_lat,(setter)SystemDesign_set_subarray3_tilt_eq_lat,
-	PyDoc_STR("*float*: Sub-array 3 Tilt=latitude override [0/1]\n\n*Options*: 0=false,1=override\n\n*Constraints*: BOOLEAN"),
+	PyDoc_STR("*float*: Sub-array 3 Tilt=latitude override [0/1]\n\n**Options:**\n0=false,1=override\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"subarray3_track_mode", (getter)SystemDesign_get_subarray3_track_mode,(setter)SystemDesign_set_subarray3_track_mode,
-	PyDoc_STR("*float*: Sub-array 3 Tracking mode\n\n*Options*: 0=fixed,1=1axis,2=2axis,3=azi,4=monthly\n\n*Constraints*: INTEGER,MIN=0,MAX=4\n\n*Required*: True if subarray3_enable=1"),
+	PyDoc_STR("*float*: Sub-array 3 Tracking mode\n\n**Options:**\n0=fixed,1=1axis,2=2axis,3=azi,4=monthly\n\n**Constraints:**\nINTEGER,MIN=0,MAX=4\n\n**Required:**\nRequired if subarray3_enable=1"),
  	NULL},
 {"subarray4_azimuth", (getter)SystemDesign_get_subarray4_azimuth,(setter)SystemDesign_set_subarray4_azimuth,
-	PyDoc_STR("*float*: Sub-array 4 Azimuth [deg]\n\n*Options*: 0=N,90=E,180=S,270=W\n\n*Constraints*: MIN=0,MAX=359.9"),
+	PyDoc_STR("*float*: Sub-array 4 Azimuth [degrees]\n\n**Options:**\n0=N,90=E,180=S,270=W\n\n**Constraints:**\nMIN=0,MAX=359.9\n\n**Required:**\nRequired if subarray4_enable=1&subarray4_track_mode~2&subarray4_track_mode~3"),
  	NULL},
 {"subarray4_backtrack", (getter)SystemDesign_get_subarray4_backtrack,(setter)SystemDesign_set_subarray4_backtrack,
-	PyDoc_STR("*float*: Sub-array 4 Backtracking enabled\n\n*Options*: 0=no backtracking,1=backtrack\n\n*Constraints*: BOOLEAN"),
+	PyDoc_STR("*float*: Sub-array 4 Backtracking enabled\n\n**Options:**\n0=no backtracking,1=backtrack\n\n**Constraints:**\nBOOLEAN"),
  	NULL},
 {"subarray4_enable", (getter)SystemDesign_get_subarray4_enable,(setter)SystemDesign_set_subarray4_enable,
-	PyDoc_STR("*float*: Sub-array 4 Enable [0/1]\n\n*Options*: 0=disabled,1=enabled\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0\n\n*Changes to this variable may require updating the values of the following*: \n\t - system_capacity\n\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - 6par_imp\n\t - 6par_vmp\n\t - 6par_voc\n\t - cec_i_mp_ref\n\t - cec_v_mp_ref\n\t - cec_v_oc_ref\n\t - inv_cec_cg_paco\n\t - inv_cec_cg_vdcmax\n\t - inv_ds_paco\n\t - inv_ds_vdcmax\n\t - inv_pd_paco\n\t - inv_pd_vdcmax\n\t - inv_snl_paco\n\t - inv_snl_vdcmax\n\t - inverter_model\n\t - module_model\n\t - sd11par_Vmp0\n\t - sd11par_Voc0\n\t - snl_a\n\t - snl_a0\n\t - snl_a1\n\t - snl_a2\n\t - snl_a3\n\t - snl_a4\n\t - snl_aimp\n\t - snl_aisc\n\t - snl_area\n\t - snl_b\n\t - snl_b0\n\t - snl_b1\n\t - snl_b2\n\t - snl_b3\n\t - snl_b4\n\t - snl_b5\n\t - snl_bvmpo\n\t - snl_bvoco\n\t - snl_c0\n\t - snl_c1\n\t - snl_c2\n\t - snl_c3\n\t - snl_dtc\n\t - snl_fd\n\t - snl_impo\n\t - snl_isco\n\t - snl_mbvmp\n\t - snl_mbvoc\n\t - snl_module_structure\n\t - snl_n\n\t - snl_series_cells\n\t - snl_vmpo\n\t - snl_voco\n\t - spe_area\n\t - spe_eff0\n\t - spe_eff1\n\t - spe_eff2\n\t - spe_eff3\n\t - spe_eff4\n\t - spe_rad0\n\t - spe_rad1\n\t - spe_rad2\n\t - spe_rad3\n\t - spe_rad4\n\t - spe_reference\n\t - spe_vmp\n\t - spe_voc\n"),
+	PyDoc_STR("*float*: Sub-array 4 Enable [0/1]\n\n**Options:**\n0=disabled,1=enabled\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults.\n\nThe value of the following variables depends on ``subarray4_enable``:\n\n\t - system_capacity\n\n\nThe value of ``subarray4_enable`` depends on the following variables:\n\n\t - 6par_imp\n\t - 6par_vmp\n\t - 6par_voc\n\t - cec_i_mp_ref\n\t - cec_v_mp_ref\n\t - cec_v_oc_ref\n\t - inv_cec_cg_paco\n\t - inv_cec_cg_vdcmax\n\t - inv_ds_paco\n\t - inv_ds_vdcmax\n\t - inv_pd_paco\n\t - inv_pd_vdcmax\n\t - inv_snl_paco\n\t - inv_snl_vdcmax\n\t - inverter_model\n\t - module_model\n\t - sd11par_Vmp0\n\t - sd11par_Voc0\n\t - snl_a\n\t - snl_a0\n\t - snl_a1\n\t - snl_a2\n\t - snl_a3\n\t - snl_a4\n\t - snl_aimp\n\t - snl_aisc\n\t - snl_area\n\t - snl_b\n\t - snl_b0\n\t - snl_b1\n\t - snl_b2\n\t - snl_b3\n\t - snl_b4\n\t - snl_b5\n\t - snl_bvmpo\n\t - snl_bvoco\n\t - snl_c0\n\t - snl_c1\n\t - snl_c2\n\t - snl_c3\n\t - snl_dtc\n\t - snl_fd\n\t - snl_impo\n\t - snl_isco\n\t - snl_mbvmp\n\t - snl_mbvoc\n\t - snl_module_structure\n\t - snl_n\n\t - snl_series_cells\n\t - snl_vmpo\n\t - snl_voco\n\t - spe_area\n\t - spe_eff0\n\t - spe_eff1\n\t - spe_eff2\n\t - spe_eff3\n\t - spe_eff4\n\t - spe_rad0\n\t - spe_rad1\n\t - spe_rad2\n\t - spe_rad3\n\t - spe_rad4\n\t - spe_reference\n\t - spe_vmp\n\t - spe_voc\n"),
  	NULL},
 {"subarray4_gcr", (getter)SystemDesign_get_subarray4_gcr,(setter)SystemDesign_set_subarray4_gcr,
-	PyDoc_STR("*float*: Sub-array 4 Ground coverage ratio [0..1]\n\n*Constraints*: MIN=0.01,MAX=0.99\n\n*Required*: If not provided, assumed to be 0.3"),
+	PyDoc_STR("*float*: Sub-array 4 Ground coverage ratio [0..1]\n\n**Constraints:**\nMIN=0.01,MAX=0.99\n\n**Required:**\nFalse. Automatically set to 0.3 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"subarray4_modules_per_string", (getter)SystemDesign_get_subarray4_modules_per_string,(setter)SystemDesign_set_subarray4_modules_per_string,
-	PyDoc_STR("*float*: Sub-array 4 Modules per string\n\n*Constraints*: INTEGER,MIN=1\n\n*Required*: True if subarray4_enable=1\n\n*Changes to this variable may require updating the values of the following*: \n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Sub-array 4 Modules per string\n\n**Constraints:**\nINTEGER,MIN=1\n\n**Required:**\nRequired if subarray4_enable=1\n\nThe value of the following variables depends on ``subarray4_modules_per_string``:\n\n\t - system_capacity\n"),
  	NULL},
 {"subarray4_monthly_tilt", (getter)SystemDesign_get_subarray4_monthly_tilt,(setter)SystemDesign_set_subarray4_monthly_tilt,
-	PyDoc_STR("*sequence*: Sub-array 4 Monthly tilt input [deg]\n\n*Constraints*: LENGTH=12"),
+	PyDoc_STR("*sequence*: Sub-array 4 Monthly tilt input [degrees]\n\n**Constraints:**\nLENGTH=12"),
  	NULL},
 {"subarray4_mppt_input", (getter)SystemDesign_get_subarray4_mppt_input,(setter)SystemDesign_set_subarray4_mppt_input,
-	PyDoc_STR("*float*: Sub-array 4 Inverter MPPT input number\n\n*Constraints*: INTEGER,POSITIVE\n\n*Required*: If not provided, assumed to be 1"),
+	PyDoc_STR("*float*: Sub-array 4 Inverter MPPT input number\n\n**Constraints:**\nINTEGER,POSITIVE\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"subarray4_nstrings", (getter)SystemDesign_get_subarray4_nstrings,(setter)SystemDesign_set_subarray4_nstrings,
-	PyDoc_STR("*float*: Sub-array 4 Number of parallel strings\n\n*Constraints*: INTEGER,MIN=1\n\n*Required*: True if subarray4_enable=1\n\n*Changes to this variable may require updating the values of the following*: \n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Sub-array 4 Number of parallel strings\n\n**Constraints:**\nINTEGER,MIN=1\n\n**Required:**\nRequired if subarray4_enable=1\n\nThe value of the following variables depends on ``subarray4_nstrings``:\n\n\t - system_capacity\n"),
  	NULL},
 {"subarray4_rotlim", (getter)SystemDesign_get_subarray4_rotlim,(setter)SystemDesign_set_subarray4_rotlim,
-	PyDoc_STR("*float*: Sub-array 4 Tracker rotation limit [deg]\n\n*Constraints*: MIN=0,MAX=85\n\n*Required*: If not provided, assumed to be 45"),
+	PyDoc_STR("*float*: Sub-array 4 Tracker rotation limit [degrees]\n\n**Constraints:**\nMIN=0,MAX=85\n\n**Required:**\nFalse. Automatically set to 45 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"subarray4_slope_azm", (getter)SystemDesign_get_subarray4_slope_azm,(setter)SystemDesign_set_subarray4_slope_azm,
-	PyDoc_STR("*float*: Sub-array 4 terrain azimuth [deg]\n\n*Required*: If not provided, assumed to be 0.0"),
+	PyDoc_STR("*float*: Sub-array 4 terrain azimuth [degrees]\n\n**Constraints:**\nMIN=0,MAX=359.9\n\n**Required:**\nRequired if subarray4_enable=1&subarray4_track_mode=1"),
  	NULL},
 {"subarray4_slope_tilt", (getter)SystemDesign_get_subarray4_slope_tilt,(setter)SystemDesign_set_subarray4_slope_tilt,
-	PyDoc_STR("*float*: Sub-array 4 terrain tilt [deg]\n\n*Required*: If not provided, assumed to be 0.0"),
+	PyDoc_STR("*float*: Sub-array 4 terrain tilt [degrees]\n\n**Constraints:**\nMIN=0,MAX=90\n\n**Required:**\nRequired if subarray4_enable=1&subarray4_track_mode=1"),
  	NULL},
 {"subarray4_tilt", (getter)SystemDesign_get_subarray4_tilt,(setter)SystemDesign_set_subarray4_tilt,
-	PyDoc_STR("*float*: Sub-array 4 Tilt [deg]\n\n*Options*: 0=horizontal,90=vertical\n\n*Constraints*: MIN=0,MAX=90"),
+	PyDoc_STR("*float*: Sub-array 4 Tilt [degrees]\n\n**Options:**\n0=horizontal,90=vertical\n\n**Constraints:**\nMIN=0,MAX=90\n\n**Required:**\nRequired if subarray4_enable=1&subarray4_track_mode~2&subarray4_track_mode~4"),
  	NULL},
 {"subarray4_tilt_eq_lat", (getter)SystemDesign_get_subarray4_tilt_eq_lat,(setter)SystemDesign_set_subarray4_tilt_eq_lat,
-	PyDoc_STR("*float*: Sub-array 4 Tilt=latitude override [0/1]\n\n*Options*: 0=false,1=override\n\n*Constraints*: BOOLEAN"),
+	PyDoc_STR("*float*: Sub-array 4 Tilt=latitude override [0/1]\n\n**Options:**\n0=false,1=override\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"subarray4_track_mode", (getter)SystemDesign_get_subarray4_track_mode,(setter)SystemDesign_set_subarray4_track_mode,
-	PyDoc_STR("*float*: Sub-array 4 Tracking mode\n\n*Options*: 0=fixed,1=1axis,2=2axis,3=azi,4=monthly\n\n*Constraints*: INTEGER,MIN=0,MAX=4\n\n*Required*: True if subarray4_enable=1"),
+	PyDoc_STR("*float*: Sub-array 4 Tracking mode\n\n**Options:**\n0=fixed,1=1axis,2=2axis,3=azi,4=monthly\n\n**Constraints:**\nINTEGER,MIN=0,MAX=4\n\n**Required:**\nRequired if subarray4_enable=1"),
  	NULL},
 {"system_capacity", (getter)SystemDesign_get_system_capacity,(setter)SystemDesign_set_system_capacity,
-	PyDoc_STR("*float*: DC Nameplate capacity [kWdc]\n\n*Required*: True\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - 6par_imp\n\t - 6par_vmp\n\t - 6par_voc\n\t - cec_i_mp_ref\n\t - cec_v_mp_ref\n\t - cec_v_oc_ref\n\t - inv_cec_cg_paco\n\t - inv_cec_cg_vdcmax\n\t - inv_ds_paco\n\t - inv_ds_vdcmax\n\t - inv_pd_paco\n\t - inv_pd_vdcmax\n\t - inv_snl_paco\n\t - inv_snl_vdcmax\n\t - inverter_model\n\t - module_model\n\t - sd11par_Vmp0\n\t - sd11par_Voc0\n\t - snl_a\n\t - snl_a0\n\t - snl_a1\n\t - snl_a2\n\t - snl_a3\n\t - snl_a4\n\t - snl_aimp\n\t - snl_aisc\n\t - snl_area\n\t - snl_b\n\t - snl_b0\n\t - snl_b1\n\t - snl_b2\n\t - snl_b3\n\t - snl_b4\n\t - snl_b5\n\t - snl_bvmpo\n\t - snl_bvoco\n\t - snl_c0\n\t - snl_c1\n\t - snl_c2\n\t - snl_c3\n\t - snl_dtc\n\t - snl_fd\n\t - snl_impo\n\t - snl_isco\n\t - snl_mbvmp\n\t - snl_mbvoc\n\t - snl_module_structure\n\t - snl_n\n\t - snl_series_cells\n\t - snl_vmpo\n\t - snl_voco\n\t - spe_area\n\t - spe_eff0\n\t - spe_eff1\n\t - spe_eff2\n\t - spe_eff3\n\t - spe_eff4\n\t - spe_rad0\n\t - spe_rad1\n\t - spe_rad2\n\t - spe_rad3\n\t - spe_rad4\n\t - spe_reference\n\t - spe_vmp\n\t - spe_voc\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray2_modules_per_string\n\t - subarray2_nstrings\n\t - subarray3_enable\n\t - subarray3_modules_per_string\n\t - subarray3_nstrings\n\t - subarray4_enable\n\t - subarray4_modules_per_string\n\t - subarray4_nstrings\n"),
+	PyDoc_STR("*float*: DC Nameplate capacity [kWdc]\n\n**Required:**\nTrue\n\nThe value of ``system_capacity`` depends on the following variables:\n\n\t - 6par_imp\n\t - 6par_vmp\n\t - 6par_voc\n\t - cec_i_mp_ref\n\t - cec_v_mp_ref\n\t - cec_v_oc_ref\n\t - inv_cec_cg_paco\n\t - inv_cec_cg_vdcmax\n\t - inv_ds_paco\n\t - inv_ds_vdcmax\n\t - inv_pd_paco\n\t - inv_pd_vdcmax\n\t - inv_snl_paco\n\t - inv_snl_vdcmax\n\t - inverter_model\n\t - module_model\n\t - sd11par_Vmp0\n\t - sd11par_Voc0\n\t - snl_a\n\t - snl_a0\n\t - snl_a1\n\t - snl_a2\n\t - snl_a3\n\t - snl_a4\n\t - snl_aimp\n\t - snl_aisc\n\t - snl_area\n\t - snl_b\n\t - snl_b0\n\t - snl_b1\n\t - snl_b2\n\t - snl_b3\n\t - snl_b4\n\t - snl_b5\n\t - snl_bvmpo\n\t - snl_bvoco\n\t - snl_c0\n\t - snl_c1\n\t - snl_c2\n\t - snl_c3\n\t - snl_dtc\n\t - snl_fd\n\t - snl_impo\n\t - snl_isco\n\t - snl_mbvmp\n\t - snl_mbvoc\n\t - snl_module_structure\n\t - snl_n\n\t - snl_series_cells\n\t - snl_vmpo\n\t - snl_voco\n\t - spe_area\n\t - spe_eff0\n\t - spe_eff1\n\t - spe_eff2\n\t - spe_eff3\n\t - spe_eff4\n\t - spe_rad0\n\t - spe_rad1\n\t - spe_rad2\n\t - spe_rad3\n\t - spe_rad4\n\t - spe_reference\n\t - spe_vmp\n\t - spe_voc\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray2_modules_per_string\n\t - subarray2_nstrings\n\t - subarray3_enable\n\t - subarray3_modules_per_string\n\t - subarray3_nstrings\n\t - subarray4_enable\n\t - subarray4_modules_per_string\n\t - subarray4_nstrings\n"),
+ 	NULL},
+{"use_measured_temp", (getter)SystemDesign_get_use_measured_temp,(setter)SystemDesign_set_use_measured_temp,
+	PyDoc_STR("*float*: Use measured temperatures [0/1]\n\n**Constraints:**\nINTEGER,MIN=0,MAX=1\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -2164,11 +2374,11 @@ Shading_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Shading_methods[] = {
 		{"assign",            (PyCFunction)Shading_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Shading_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Shading_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Shading_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Shading_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Shading_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Shading_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -2462,76 +2672,76 @@ Shading_set_subarray4_shading_timestep(VarGroupObject *self, PyObject *value, vo
 
 static PyGetSetDef Shading_getset[] = {
 {"subarray1_shade_mode", (getter)Shading_get_subarray1_shade_mode,(setter)Shading_set_subarray1_shade_mode,
-	PyDoc_STR("*float*: Sub-array 1 shading mode (fixed tilt or 1x tracking) [0/1/2]\n\n*Options*: 0=none,1=standard(non-linear),2=thin film(linear)\n\n*Constraints*: INTEGER,MIN=0,MAX=2\n\n*Required*: True"),
+	PyDoc_STR("*float*: Sub-array 1 shading mode (fixed tilt or 1x tracking) [0/1/2]\n\n**Options:**\n0=none,1=standard(non-linear),2=thin film(linear)\n\n**Constraints:**\nINTEGER,MIN=0,MAX=2\n\n**Required:**\nTrue"),
  	NULL},
 {"subarray1_shading_azal", (getter)Shading_get_subarray1_shading_azal,(setter)Shading_set_subarray1_shading_azal,
-	PyDoc_STR("*sequence[sequence]*: Sub-array 1 Azimuth x altitude beam shading losses [%]\n\n*Required*: False"),
+	PyDoc_STR("*sequence[sequence]*: Sub-array 1 Azimuth x altitude beam shading losses [%]\n\n**Required:**\nFalse for configuration with default inputs. May be required if a variable dependent on its value changes. Example: For the Detailed PV - Single Owner configuration, only Subarray 1 is enabled in the configuration defaults, so Subarray 2 inputs would not be required; if Subarray 2 is enabled, then Subarray 2 inputs is required."),
  	NULL},
 {"subarray1_shading_diff", (getter)Shading_get_subarray1_shading_diff,(setter)Shading_set_subarray1_shading_diff,
-	PyDoc_STR("*float*: Sub-array 1 Diffuse shading loss [%]\n\n*Required*: False"),
+	PyDoc_STR("*float*: Sub-array 1 Diffuse shading loss [%]\n\n**Required:**\nFalse for configuration with default inputs. May be required if a variable dependent on its value changes. Example: For the Detailed PV - Single Owner configuration, only Subarray 1 is enabled in the configuration defaults, so Subarray 2 inputs would not be required; if Subarray 2 is enabled, then Subarray 2 inputs is required."),
  	NULL},
 {"subarray1_shading_mxh", (getter)Shading_get_subarray1_shading_mxh,(setter)Shading_set_subarray1_shading_mxh,
-	PyDoc_STR("*sequence[sequence]*: Sub-array 1 Month x Hour beam shading losses [%]\n\n*Required*: False"),
+	PyDoc_STR("*sequence[sequence]*: Sub-array 1 Month x Hour beam shading losses [%]\n\n**Required:**\nFalse for configuration with default inputs. May be required if a variable dependent on its value changes. Example: For the Detailed PV - Single Owner configuration, only Subarray 1 is enabled in the configuration defaults, so Subarray 2 inputs would not be required; if Subarray 2 is enabled, then Subarray 2 inputs is required."),
  	NULL},
 {"subarray1_shading_string_option", (getter)Shading_get_subarray1_shading_string_option,(setter)Shading_set_subarray1_shading_string_option,
-	PyDoc_STR("*float*: Sub-array 1 shading string option\n\n*Options*: 0=shadingdb,1=average,2=maximum,3=minimum\n\n*Constraints*: INTEGER,MIN=-1,MAX=4\n\n*Required*: If not provided, assumed to be -1"),
+	PyDoc_STR("*float*: Sub-array 1 shading string option\n\n**Options:**\n0=shadingdb,1=average,2=maximum,3=minimum\n\n**Constraints:**\nINTEGER,MIN=-1,MAX=4\n\n**Required:**\nFalse. Automatically set to -1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"subarray1_shading_timestep", (getter)Shading_get_subarray1_shading_timestep,(setter)Shading_set_subarray1_shading_timestep,
-	PyDoc_STR("*sequence[sequence]*: Sub-array 1 timestep beam shading losses [%]\n\n*Required*: False"),
+	PyDoc_STR("*sequence[sequence]*: Sub-array 1 timestep beam shading losses [%]\n\n**Required:**\nFalse for configuration with default inputs. May be required if a variable dependent on its value changes. Example: For the Detailed PV - Single Owner configuration, only Subarray 1 is enabled in the configuration defaults, so Subarray 2 inputs would not be required; if Subarray 2 is enabled, then Subarray 2 inputs is required."),
  	NULL},
 {"subarray2_shade_mode", (getter)Shading_get_subarray2_shade_mode,(setter)Shading_set_subarray2_shade_mode,
-	PyDoc_STR("*float*: Sub-array 2 Shading mode (fixed tilt or 1x tracking) [0/1/2]\n\n*Options*: 0=none,1=standard(non-linear),2=thin film(linear)\n\n*Constraints*: INTEGER,MIN=0,MAX=2\n\n*Required*: True if subarray2_enable=1"),
+	PyDoc_STR("*float*: Sub-array 2 Shading mode (fixed tilt or 1x tracking) [0/1/2]\n\n**Options:**\n0=none,1=standard(non-linear),2=thin film(linear)\n\n**Constraints:**\nINTEGER,MIN=0,MAX=2\n\n**Required:**\nRequired if subarray2_enable=1"),
  	NULL},
 {"subarray2_shading_azal", (getter)Shading_get_subarray2_shading_azal,(setter)Shading_set_subarray2_shading_azal,
-	PyDoc_STR("*sequence[sequence]*: Sub-array 2 Azimuth x altitude beam shading losses [%]\n\n*Required*: False"),
+	PyDoc_STR("*sequence[sequence]*: Sub-array 2 Azimuth x altitude beam shading losses [%]\n\n**Required:**\nFalse for configuration with default inputs. May be required if a variable dependent on its value changes. Example: For the Detailed PV - Single Owner configuration, only Subarray 1 is enabled in the configuration defaults, so Subarray 2 inputs would not be required; if Subarray 2 is enabled, then Subarray 2 inputs is required."),
  	NULL},
 {"subarray2_shading_diff", (getter)Shading_get_subarray2_shading_diff,(setter)Shading_set_subarray2_shading_diff,
-	PyDoc_STR("*float*: Sub-array 2 Diffuse shading loss [%]\n\n*Required*: False"),
+	PyDoc_STR("*float*: Sub-array 2 Diffuse shading loss [%]\n\n**Required:**\nFalse for configuration with default inputs. May be required if a variable dependent on its value changes. Example: For the Detailed PV - Single Owner configuration, only Subarray 1 is enabled in the configuration defaults, so Subarray 2 inputs would not be required; if Subarray 2 is enabled, then Subarray 2 inputs is required."),
  	NULL},
 {"subarray2_shading_mxh", (getter)Shading_get_subarray2_shading_mxh,(setter)Shading_set_subarray2_shading_mxh,
-	PyDoc_STR("*sequence[sequence]*: Sub-array 2 Month x Hour beam shading losses [%]\n\n*Required*: False"),
+	PyDoc_STR("*sequence[sequence]*: Sub-array 2 Month x Hour beam shading losses [%]\n\n**Required:**\nFalse for configuration with default inputs. May be required if a variable dependent on its value changes. Example: For the Detailed PV - Single Owner configuration, only Subarray 1 is enabled in the configuration defaults, so Subarray 2 inputs would not be required; if Subarray 2 is enabled, then Subarray 2 inputs is required."),
  	NULL},
 {"subarray2_shading_string_option", (getter)Shading_get_subarray2_shading_string_option,(setter)Shading_set_subarray2_shading_string_option,
-	PyDoc_STR("*float*: Sub-array 2 Shading string option\n\n*Options*: 0=shadingdb,1=average,2=maximum,3=minimum\n\n*Constraints*: INTEGER,MIN=-1,MAX=4\n\n*Required*: If not provided, assumed to be -1"),
+	PyDoc_STR("*float*: Sub-array 2 Shading string option\n\n**Options:**\n0=shadingdb,1=average,2=maximum,3=minimum\n\n**Constraints:**\nINTEGER,MIN=-1,MAX=4\n\n**Required:**\nFalse. Automatically set to -1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"subarray2_shading_timestep", (getter)Shading_get_subarray2_shading_timestep,(setter)Shading_set_subarray2_shading_timestep,
-	PyDoc_STR("*sequence[sequence]*: Sub-array 2 Timestep beam shading losses [%]\n\n*Required*: False"),
+	PyDoc_STR("*sequence[sequence]*: Sub-array 2 Timestep beam shading losses [%]\n\n**Required:**\nFalse for configuration with default inputs. May be required if a variable dependent on its value changes. Example: For the Detailed PV - Single Owner configuration, only Subarray 1 is enabled in the configuration defaults, so Subarray 2 inputs would not be required; if Subarray 2 is enabled, then Subarray 2 inputs is required."),
  	NULL},
 {"subarray3_shade_mode", (getter)Shading_get_subarray3_shade_mode,(setter)Shading_set_subarray3_shade_mode,
-	PyDoc_STR("*float*: Sub-array 3 Shading mode (fixed tilt or 1x tracking) [0/1/2]\n\n*Options*: 0=none,1=standard(non-linear),2=thin film(linear)\n\n*Constraints*: INTEGER,MIN=0,MAX=2\n\n*Required*: True if subarray3_enable=1"),
+	PyDoc_STR("*float*: Sub-array 3 Shading mode (fixed tilt or 1x tracking) [0/1/2]\n\n**Options:**\n0=none,1=standard(non-linear),2=thin film(linear)\n\n**Constraints:**\nINTEGER,MIN=0,MAX=2\n\n**Required:**\nRequired if subarray3_enable=1"),
  	NULL},
 {"subarray3_shading_azal", (getter)Shading_get_subarray3_shading_azal,(setter)Shading_set_subarray3_shading_azal,
-	PyDoc_STR("*sequence[sequence]*: Sub-array 3 Azimuth x altitude beam shading losses [%]\n\n*Required*: False"),
+	PyDoc_STR("*sequence[sequence]*: Sub-array 3 Azimuth x altitude beam shading losses [%]\n\n**Required:**\nFalse for configuration with default inputs. May be required if a variable dependent on its value changes. Example: For the Detailed PV - Single Owner configuration, only Subarray 1 is enabled in the configuration defaults, so Subarray 2 inputs would not be required; if Subarray 2 is enabled, then Subarray 2 inputs is required."),
  	NULL},
 {"subarray3_shading_diff", (getter)Shading_get_subarray3_shading_diff,(setter)Shading_set_subarray3_shading_diff,
-	PyDoc_STR("*float*: Sub-array 3 Diffuse shading loss [%]\n\n*Required*: False"),
+	PyDoc_STR("*float*: Sub-array 3 Diffuse shading loss [%]\n\n**Required:**\nFalse for configuration with default inputs. May be required if a variable dependent on its value changes. Example: For the Detailed PV - Single Owner configuration, only Subarray 1 is enabled in the configuration defaults, so Subarray 2 inputs would not be required; if Subarray 2 is enabled, then Subarray 2 inputs is required."),
  	NULL},
 {"subarray3_shading_mxh", (getter)Shading_get_subarray3_shading_mxh,(setter)Shading_set_subarray3_shading_mxh,
-	PyDoc_STR("*sequence[sequence]*: Sub-array 3 Month x Hour beam shading losses [%]\n\n*Required*: False"),
+	PyDoc_STR("*sequence[sequence]*: Sub-array 3 Month x Hour beam shading losses [%]\n\n**Required:**\nFalse for configuration with default inputs. May be required if a variable dependent on its value changes. Example: For the Detailed PV - Single Owner configuration, only Subarray 1 is enabled in the configuration defaults, so Subarray 2 inputs would not be required; if Subarray 2 is enabled, then Subarray 2 inputs is required."),
  	NULL},
 {"subarray3_shading_string_option", (getter)Shading_get_subarray3_shading_string_option,(setter)Shading_set_subarray3_shading_string_option,
-	PyDoc_STR("*float*: Sub-array 3 Shading string option\n\n*Options*: 0=shadingdb,1=average,2=maximum,3=minimum\n\n*Constraints*: INTEGER,MIN=-1,MAX=4\n\n*Required*: If not provided, assumed to be -1"),
+	PyDoc_STR("*float*: Sub-array 3 Shading string option\n\n**Options:**\n0=shadingdb,1=average,2=maximum,3=minimum\n\n**Constraints:**\nINTEGER,MIN=-1,MAX=4\n\n**Required:**\nFalse. Automatically set to -1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"subarray3_shading_timestep", (getter)Shading_get_subarray3_shading_timestep,(setter)Shading_set_subarray3_shading_timestep,
-	PyDoc_STR("*sequence[sequence]*: Sub-array 3 Timestep beam shading losses [%]\n\n*Required*: False"),
+	PyDoc_STR("*sequence[sequence]*: Sub-array 3 Timestep beam shading losses [%]\n\n**Required:**\nFalse for configuration with default inputs. May be required if a variable dependent on its value changes. Example: For the Detailed PV - Single Owner configuration, only Subarray 1 is enabled in the configuration defaults, so Subarray 2 inputs would not be required; if Subarray 2 is enabled, then Subarray 2 inputs is required."),
  	NULL},
 {"subarray4_shade_mode", (getter)Shading_get_subarray4_shade_mode,(setter)Shading_set_subarray4_shade_mode,
-	PyDoc_STR("*float*: Sub-array 4 shading mode (fixed tilt or 1x tracking) [0/1/2]\n\n*Options*: 0=none,1=standard(non-linear),2=thin film(linear)\n\n*Constraints*: INTEGER,MIN=0,MAX=2\n\n*Required*: True if subarray4_enable=1"),
+	PyDoc_STR("*float*: Sub-array 4 shading mode (fixed tilt or 1x tracking) [0/1/2]\n\n**Options:**\n0=none,1=standard(non-linear),2=thin film(linear)\n\n**Constraints:**\nINTEGER,MIN=0,MAX=2\n\n**Required:**\nRequired if subarray4_enable=1"),
  	NULL},
 {"subarray4_shading_azal", (getter)Shading_get_subarray4_shading_azal,(setter)Shading_set_subarray4_shading_azal,
-	PyDoc_STR("*sequence[sequence]*: Sub-array 4 Azimuth x altitude beam shading losses [%]\n\n*Required*: False"),
+	PyDoc_STR("*sequence[sequence]*: Sub-array 4 Azimuth x altitude beam shading losses [%]\n\n**Required:**\nFalse for configuration with default inputs. May be required if a variable dependent on its value changes. Example: For the Detailed PV - Single Owner configuration, only Subarray 1 is enabled in the configuration defaults, so Subarray 2 inputs would not be required; if Subarray 2 is enabled, then Subarray 2 inputs is required."),
  	NULL},
 {"subarray4_shading_diff", (getter)Shading_get_subarray4_shading_diff,(setter)Shading_set_subarray4_shading_diff,
-	PyDoc_STR("*float*: Sub-array 4 Diffuse shading loss [%]\n\n*Required*: False"),
+	PyDoc_STR("*float*: Sub-array 4 Diffuse shading loss [%]\n\n**Required:**\nFalse for configuration with default inputs. May be required if a variable dependent on its value changes. Example: For the Detailed PV - Single Owner configuration, only Subarray 1 is enabled in the configuration defaults, so Subarray 2 inputs would not be required; if Subarray 2 is enabled, then Subarray 2 inputs is required."),
  	NULL},
 {"subarray4_shading_mxh", (getter)Shading_get_subarray4_shading_mxh,(setter)Shading_set_subarray4_shading_mxh,
-	PyDoc_STR("*sequence[sequence]*: Sub-array 4 Month x Hour beam shading losses [%]\n\n*Required*: False"),
+	PyDoc_STR("*sequence[sequence]*: Sub-array 4 Month x Hour beam shading losses [%]\n\n**Required:**\nFalse for configuration with default inputs. May be required if a variable dependent on its value changes. Example: For the Detailed PV - Single Owner configuration, only Subarray 1 is enabled in the configuration defaults, so Subarray 2 inputs would not be required; if Subarray 2 is enabled, then Subarray 2 inputs is required."),
  	NULL},
 {"subarray4_shading_string_option", (getter)Shading_get_subarray4_shading_string_option,(setter)Shading_set_subarray4_shading_string_option,
-	PyDoc_STR("*float*: Sub-array 4 Shading string option\n\n*Options*: 0=shadingdb,1=average,2=maximum,3=minimum\n\n*Constraints*: INTEGER,MIN=-1,MAX=4\n\n*Required*: If not provided, assumed to be -1"),
+	PyDoc_STR("*float*: Sub-array 4 Shading string option\n\n**Options:**\n0=shadingdb,1=average,2=maximum,3=minimum\n\n**Constraints:**\nINTEGER,MIN=-1,MAX=4\n\n**Required:**\nFalse. Automatically set to -1 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"subarray4_shading_timestep", (getter)Shading_get_subarray4_shading_timestep,(setter)Shading_set_subarray4_shading_timestep,
-	PyDoc_STR("*sequence[sequence]*: Sub-array 4 Timestep beam shading losses [%]\n\n*Required*: False"),
+	PyDoc_STR("*sequence[sequence]*: Sub-array 4 Timestep beam shading losses [%]\n\n**Required:**\nFalse for configuration with default inputs. May be required if a variable dependent on its value changes. Example: For the Detailed PV - Single Owner configuration, only Subarray 1 is enabled in the configuration defaults, so Subarray 2 inputs would not be required; if Subarray 2 is enabled, then Subarray 2 inputs is required."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -2646,11 +2856,11 @@ Layout_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Layout_methods[] = {
 		{"assign",            (PyCFunction)Layout_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Layout_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Layout_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Layout_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Layout_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Layout_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Layout_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -2812,43 +3022,43 @@ Layout_set_subarray4_nmody(VarGroupObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef Layout_getset[] = {
 {"module_aspect_ratio", (getter)Layout_get_module_aspect_ratio,(setter)Layout_set_module_aspect_ratio,
-	PyDoc_STR("*float*: Module aspect ratio\n\n*Constraints*: POSITIVE\n\n*Required*: If not provided, assumed to be 1.7"),
+	PyDoc_STR("*float*: Module aspect ratio\n\n**Constraints:**\nPOSITIVE\n\n**Required:**\nFalse. Automatically set to 1.7 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"subarray1_mod_orient", (getter)Layout_get_subarray1_mod_orient,(setter)Layout_set_subarray1_mod_orient,
-	PyDoc_STR("*float*: Sub-array 1 Module orientation [0/1]\n\n*Options*: 0=portrait,1=landscape\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: True"),
+	PyDoc_STR("*float*: Sub-array 1 Module orientation [0/1]\n\n**Options:**\n0=portrait,1=landscape\n\n**Constraints:**\nINTEGER,MIN=0,MAX=1\n\n**Required:**\nTrue"),
  	NULL},
 {"subarray1_nmodx", (getter)Layout_get_subarray1_nmodx,(setter)Layout_set_subarray1_nmodx,
-	PyDoc_STR("*float*: Sub-array 1 Number of modules along bottom of row\n\n*Constraints*: INTEGER,POSITIVE\n\n*Required*: True"),
+	PyDoc_STR("*float*: Sub-array 1 Number of modules along bottom of row\n\n**Constraints:**\nINTEGER,POSITIVE\n\n**Required:**\nTrue"),
  	NULL},
 {"subarray1_nmody", (getter)Layout_get_subarray1_nmody,(setter)Layout_set_subarray1_nmody,
-	PyDoc_STR("*float*: Sub-array 1 Number of modules along side of row\n\n*Constraints*: INTEGER,POSITIVE\n\n*Required*: True"),
+	PyDoc_STR("*float*: Sub-array 1 Number of modules along side of row\n\n**Constraints:**\nINTEGER,POSITIVE\n\n**Required:**\nTrue"),
  	NULL},
 {"subarray2_mod_orient", (getter)Layout_get_subarray2_mod_orient,(setter)Layout_set_subarray2_mod_orient,
-	PyDoc_STR("*float*: Sub-array 2 Module orientation [0/1]\n\n*Options*: 0=portrait,1=landscape\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: True if subarray2_enable=1"),
+	PyDoc_STR("*float*: Sub-array 2 Module orientation [0/1]\n\n**Options:**\n0=portrait,1=landscape\n\n**Constraints:**\nINTEGER,MIN=0,MAX=1\n\n**Required:**\nRequired if subarray2_enable=1"),
  	NULL},
 {"subarray2_nmodx", (getter)Layout_get_subarray2_nmodx,(setter)Layout_set_subarray2_nmodx,
-	PyDoc_STR("*float*: Sub-array 2 Number of modules along bottom of row\n\n*Constraints*: INTEGER,POSITIVE\n\n*Required*: True if subarray2_enable=1"),
+	PyDoc_STR("*float*: Sub-array 2 Number of modules along bottom of row\n\n**Constraints:**\nINTEGER,POSITIVE\n\n**Required:**\nRequired if subarray2_enable=1"),
  	NULL},
 {"subarray2_nmody", (getter)Layout_get_subarray2_nmody,(setter)Layout_set_subarray2_nmody,
-	PyDoc_STR("*float*: Sub-array 2 Number of modules along side of row\n\n*Constraints*: INTEGER,POSITIVE\n\n*Required*: True if subarray2_enable=1"),
+	PyDoc_STR("*float*: Sub-array 2 Number of modules along side of row\n\n**Constraints:**\nINTEGER,POSITIVE\n\n**Required:**\nRequired if subarray2_enable=1"),
  	NULL},
 {"subarray3_mod_orient", (getter)Layout_get_subarray3_mod_orient,(setter)Layout_set_subarray3_mod_orient,
-	PyDoc_STR("*float*: Sub-array 3 Module orientation [0/1]\n\n*Options*: 0=portrait,1=landscape\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: True if subarray3_enable=1"),
+	PyDoc_STR("*float*: Sub-array 3 Module orientation [0/1]\n\n**Options:**\n0=portrait,1=landscape\n\n**Constraints:**\nINTEGER,MIN=0,MAX=1\n\n**Required:**\nRequired if subarray3_enable=1"),
  	NULL},
 {"subarray3_nmodx", (getter)Layout_get_subarray3_nmodx,(setter)Layout_set_subarray3_nmodx,
-	PyDoc_STR("*float*: Sub-array 3 Number of modules along bottom of row\n\n*Constraints*: INTEGER,POSITIVE\n\n*Required*: True if subarray3_enable=1"),
+	PyDoc_STR("*float*: Sub-array 3 Number of modules along bottom of row\n\n**Constraints:**\nINTEGER,POSITIVE\n\n**Required:**\nRequired if subarray3_enable=1"),
  	NULL},
 {"subarray3_nmody", (getter)Layout_get_subarray3_nmody,(setter)Layout_set_subarray3_nmody,
-	PyDoc_STR("*float*: Sub-array 3 Number of modules along side of row\n\n*Constraints*: INTEGER,POSITIVE\n\n*Required*: True if subarray3_enable=1"),
+	PyDoc_STR("*float*: Sub-array 3 Number of modules along side of row\n\n**Constraints:**\nINTEGER,POSITIVE\n\n**Required:**\nRequired if subarray3_enable=1"),
  	NULL},
 {"subarray4_mod_orient", (getter)Layout_get_subarray4_mod_orient,(setter)Layout_set_subarray4_mod_orient,
-	PyDoc_STR("*float*: Sub-array 4 Module orientation [0/1]\n\n*Options*: 0=portrait,1=landscape\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: True if subarray4_enable=1"),
+	PyDoc_STR("*float*: Sub-array 4 Module orientation [0/1]\n\n**Options:**\n0=portrait,1=landscape\n\n**Constraints:**\nINTEGER,MIN=0,MAX=1\n\n**Required:**\nRequired if subarray4_enable=1"),
  	NULL},
 {"subarray4_nmodx", (getter)Layout_get_subarray4_nmodx,(setter)Layout_set_subarray4_nmodx,
-	PyDoc_STR("*float*: Sub-array 4 Number of modules along bottom of row\n\n*Constraints*: INTEGER,POSITIVE\n\n*Required*: True if subarray4_enable=1"),
+	PyDoc_STR("*float*: Sub-array 4 Number of modules along bottom of row\n\n**Constraints:**\nINTEGER,POSITIVE\n\n**Required:**\nRequired if subarray4_enable=1"),
  	NULL},
 {"subarray4_nmody", (getter)Layout_get_subarray4_nmody,(setter)Layout_set_subarray4_nmody,
-	PyDoc_STR("*float*: Sub-array 4 Number of modules along side of row\n\n*Constraints*: INTEGER,POSITIVE\n\n*Required*: True if subarray4_enable=1"),
+	PyDoc_STR("*float*: Sub-array 4 Number of modules along side of row\n\n**Constraints:**\nINTEGER,POSITIVE\n\n**Required:**\nRequired if subarray4_enable=1"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -2963,11 +3173,11 @@ Module_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Module_methods[] = {
 		{"assign",            (PyCFunction)Module_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Module_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Module_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Module_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Module_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Module_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Module_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -2985,7 +3195,7 @@ Module_set_module_model(VarGroupObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef Module_getset[] = {
 {"module_model", (getter)Module_get_module_model,(setter)Module_set_module_model,
-	PyDoc_STR("*float*: Photovoltaic module model specifier\n\n*Options*: 0=spe,1=cec,2=6par_user,3=snl,4=sd11-iec61853,5=PVYield\n\n*Constraints*: INTEGER,MIN=0,MAX=5\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Photovoltaic module model specifier\n\n**Options:**\n0=spe,1=cec,2=6par_user,3=snl,4=sd11-iec61853,5=PVYield\n\n**Constraints:**\nINTEGER,MIN=0,MAX=5\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``module_model``:\n\n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -3100,11 +3310,11 @@ SimpleEfficiencyModuleModel_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef SimpleEfficiencyModuleModel_methods[] = {
 		{"assign",            (PyCFunction)SimpleEfficiencyModuleModel_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``SimpleEfficiencyModuleModel_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``SimpleEfficiencyModuleModel_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)SimpleEfficiencyModuleModel_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``SimpleEfficiencyModuleModel_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``SimpleEfficiencyModuleModel_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)SimpleEfficiencyModuleModel_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -3398,76 +3608,76 @@ SimpleEfficiencyModuleModel_set_spe_voc(VarGroupObject *self, PyObject *value, v
 
 static PyGetSetDef SimpleEfficiencyModuleModel_getset[] = {
 {"spe_a", (getter)SimpleEfficiencyModuleModel_get_spe_a,(setter)SimpleEfficiencyModuleModel_set_spe_a,
-	PyDoc_STR("*float*: Cell temp parameter a\n\n*Required*: True if module_model=0"),
+	PyDoc_STR("*float*: Cell temp parameter a\n\n**Required:**\nRequired if module_model=0"),
  	NULL},
 {"spe_area", (getter)SimpleEfficiencyModuleModel_get_spe_area,(setter)SimpleEfficiencyModuleModel_set_spe_area,
-	PyDoc_STR("*float*: Module area [m2]\n\n*Required*: True if module_model=0\n\n*Changes to this variable may require updating the values of the following*: \n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Module area [m2]\n\n**Required:**\nRequired if module_model=0\n\nThe value of the following variables depends on ``spe_area``:\n\n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
 {"spe_b", (getter)SimpleEfficiencyModuleModel_get_spe_b,(setter)SimpleEfficiencyModuleModel_set_spe_b,
-	PyDoc_STR("*float*: Cell temp parameter b\n\n*Required*: True if module_model=0"),
+	PyDoc_STR("*float*: Cell temp parameter b\n\n**Required:**\nRequired if module_model=0"),
  	NULL},
 {"spe_bifacial_ground_clearance_height", (getter)SimpleEfficiencyModuleModel_get_spe_bifacial_ground_clearance_height,(setter)SimpleEfficiencyModuleModel_set_spe_bifacial_ground_clearance_height,
-	PyDoc_STR("*float*: Module ground clearance height [m]\n\n*Required*: True if module_model=0"),
+	PyDoc_STR("*float*: Module ground clearance height [m]\n\n**Required:**\nRequired if module_model=0"),
  	NULL},
 {"spe_bifacial_transmission_factor", (getter)SimpleEfficiencyModuleModel_get_spe_bifacial_transmission_factor,(setter)SimpleEfficiencyModuleModel_set_spe_bifacial_transmission_factor,
-	PyDoc_STR("*float*: Bifacial transmission factor [0-1]\n\n*Required*: True if module_model=0"),
+	PyDoc_STR("*float*: Bifacial transmission factor [0-1]\n\n**Required:**\nRequired if module_model=0"),
  	NULL},
 {"spe_bifaciality", (getter)SimpleEfficiencyModuleModel_get_spe_bifaciality,(setter)SimpleEfficiencyModuleModel_set_spe_bifaciality,
-	PyDoc_STR("*float*: Bifaciality factor [%]\n\n*Required*: True if module_model=0"),
+	PyDoc_STR("*float*: Bifaciality factor [%]\n\n**Required:**\nRequired if module_model=0"),
  	NULL},
 {"spe_dT", (getter)SimpleEfficiencyModuleModel_get_spe_dT,(setter)SimpleEfficiencyModuleModel_set_spe_dT,
-	PyDoc_STR("*float*: Cell temp parameter dT\n\n*Required*: True if module_model=0"),
+	PyDoc_STR("*float*: Cell temp parameter dT\n\n**Required:**\nRequired if module_model=0"),
  	NULL},
 {"spe_eff0", (getter)SimpleEfficiencyModuleModel_get_spe_eff0,(setter)SimpleEfficiencyModuleModel_set_spe_eff0,
-	PyDoc_STR("*float*: Efficiency at irradiance level 0 [%]\n\n*Required*: True if module_model=0\n\n*Changes to this variable may require updating the values of the following*: \n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Efficiency at irradiance level 0 [%]\n\n**Required:**\nRequired if module_model=0\n\nThe value of the following variables depends on ``spe_eff0``:\n\n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
 {"spe_eff1", (getter)SimpleEfficiencyModuleModel_get_spe_eff1,(setter)SimpleEfficiencyModuleModel_set_spe_eff1,
-	PyDoc_STR("*float*: Efficiency at irradiance level 1 [%]\n\n*Required*: True if module_model=0\n\n*Changes to this variable may require updating the values of the following*: \n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Efficiency at irradiance level 1 [%]\n\n**Required:**\nRequired if module_model=0\n\nThe value of the following variables depends on ``spe_eff1``:\n\n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
 {"spe_eff2", (getter)SimpleEfficiencyModuleModel_get_spe_eff2,(setter)SimpleEfficiencyModuleModel_set_spe_eff2,
-	PyDoc_STR("*float*: Efficiency at irradiance level 2 [%]\n\n*Required*: True if module_model=0\n\n*Changes to this variable may require updating the values of the following*: \n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Efficiency at irradiance level 2 [%]\n\n**Required:**\nRequired if module_model=0\n\nThe value of the following variables depends on ``spe_eff2``:\n\n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
 {"spe_eff3", (getter)SimpleEfficiencyModuleModel_get_spe_eff3,(setter)SimpleEfficiencyModuleModel_set_spe_eff3,
-	PyDoc_STR("*float*: Efficiency at irradiance level 3 [%]\n\n*Required*: True if module_model=0\n\n*Changes to this variable may require updating the values of the following*: \n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Efficiency at irradiance level 3 [%]\n\n**Required:**\nRequired if module_model=0\n\nThe value of the following variables depends on ``spe_eff3``:\n\n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
 {"spe_eff4", (getter)SimpleEfficiencyModuleModel_get_spe_eff4,(setter)SimpleEfficiencyModuleModel_set_spe_eff4,
-	PyDoc_STR("*float*: Efficiency at irradiance level 4 [%]\n\n*Required*: True if module_model=0\n\n*Changes to this variable may require updating the values of the following*: \n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Efficiency at irradiance level 4 [%]\n\n**Required:**\nRequired if module_model=0\n\nThe value of the following variables depends on ``spe_eff4``:\n\n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
 {"spe_fd", (getter)SimpleEfficiencyModuleModel_get_spe_fd,(setter)SimpleEfficiencyModuleModel_set_spe_fd,
-	PyDoc_STR("*float*: Diffuse fraction [0..1]\n\n*Constraints*: MIN=0,MAX=1\n\n*Required*: True if module_model=0"),
+	PyDoc_STR("*float*: Diffuse fraction [0..1]\n\n**Constraints:**\nMIN=0,MAX=1\n\n**Required:**\nRequired if module_model=0"),
  	NULL},
 {"spe_is_bifacial", (getter)SimpleEfficiencyModuleModel_get_spe_is_bifacial,(setter)SimpleEfficiencyModuleModel_set_spe_is_bifacial,
-	PyDoc_STR("*float*: Modules are bifacial [0/1]\n\n*Required*: True if module_model=0"),
+	PyDoc_STR("*float*: Modules are bifacial [0/1]\n\n**Options:**\n0=monofacial,1=bifacial\n\n**Required:**\nRequired if module_model=0"),
  	NULL},
 {"spe_module_structure", (getter)SimpleEfficiencyModuleModel_get_spe_module_structure,(setter)SimpleEfficiencyModuleModel_set_spe_module_structure,
-	PyDoc_STR("*float*: Mounting and module structure\n\n*Options*: 0=glass/cell/polymer sheet - open rack,1=glass/cell/glass - open rack,2=polymer/thin film/steel - open rack,3=Insulated back, building-integrated PV,4=close roof mount,5=user-defined\n\n*Constraints*: INTEGER,MIN=0,MAX=5\n\n*Required*: True if module_model=0"),
+	PyDoc_STR("*float*: Mounting and module structure\n\n**Options:**\n0=glass/cell/polymer sheet - open rack,1=glass/cell/glass - open rack,2=polymer/thin film/steel - open rack,3=Insulated back, building-integrated PV,4=close roof mount,5=user-defined\n\n**Constraints:**\nINTEGER,MIN=0,MAX=5\n\n**Required:**\nRequired if module_model=0"),
  	NULL},
 {"spe_rad0", (getter)SimpleEfficiencyModuleModel_get_spe_rad0,(setter)SimpleEfficiencyModuleModel_set_spe_rad0,
-	PyDoc_STR("*float*: Irradiance level 0 [W/m2]\n\n*Required*: True if module_model=0\n\n*Changes to this variable may require updating the values of the following*: \n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Irradiance level 0 [W/m2]\n\n**Required:**\nRequired if module_model=0\n\nThe value of the following variables depends on ``spe_rad0``:\n\n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
 {"spe_rad1", (getter)SimpleEfficiencyModuleModel_get_spe_rad1,(setter)SimpleEfficiencyModuleModel_set_spe_rad1,
-	PyDoc_STR("*float*: Irradiance level 1 [W/m2]\n\n*Required*: True if module_model=0\n\n*Changes to this variable may require updating the values of the following*: \n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Irradiance level 1 [W/m2]\n\n**Required:**\nRequired if module_model=0\n\nThe value of the following variables depends on ``spe_rad1``:\n\n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
 {"spe_rad2", (getter)SimpleEfficiencyModuleModel_get_spe_rad2,(setter)SimpleEfficiencyModuleModel_set_spe_rad2,
-	PyDoc_STR("*float*: Irradiance level 2 [W/m2]\n\n*Required*: True if module_model=0\n\n*Changes to this variable may require updating the values of the following*: \n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Irradiance level 2 [W/m2]\n\n**Required:**\nRequired if module_model=0\n\nThe value of the following variables depends on ``spe_rad2``:\n\n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
 {"spe_rad3", (getter)SimpleEfficiencyModuleModel_get_spe_rad3,(setter)SimpleEfficiencyModuleModel_set_spe_rad3,
-	PyDoc_STR("*float*: Irradiance level 3 [W/m2]\n\n*Required*: True if module_model=0\n\n*Changes to this variable may require updating the values of the following*: \n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Irradiance level 3 [W/m2]\n\n**Required:**\nRequired if module_model=0\n\nThe value of the following variables depends on ``spe_rad3``:\n\n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
 {"spe_rad4", (getter)SimpleEfficiencyModuleModel_get_spe_rad4,(setter)SimpleEfficiencyModuleModel_set_spe_rad4,
-	PyDoc_STR("*float*: Irradiance level 4 [W/m2]\n\n*Required*: True if module_model=0\n\n*Changes to this variable may require updating the values of the following*: \n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Irradiance level 4 [W/m2]\n\n**Required:**\nRequired if module_model=0\n\nThe value of the following variables depends on ``spe_rad4``:\n\n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
 {"spe_reference", (getter)SimpleEfficiencyModuleModel_get_spe_reference,(setter)SimpleEfficiencyModuleModel_set_spe_reference,
-	PyDoc_STR("*float*: Reference irradiance level\n\n*Constraints*: INTEGER,MIN=0,MAX=4\n\n*Required*: True if module_model=0\n\n*Changes to this variable may require updating the values of the following*: \n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Reference irradiance level\n\n**Constraints:**\nINTEGER,MIN=0,MAX=4\n\n**Required:**\nRequired if module_model=0\n\nThe value of the following variables depends on ``spe_reference``:\n\n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
 {"spe_temp_coeff", (getter)SimpleEfficiencyModuleModel_get_spe_temp_coeff,(setter)SimpleEfficiencyModuleModel_set_spe_temp_coeff,
-	PyDoc_STR("*float*: Temperature coefficient [%/C]\n\n*Required*: True if module_model=0"),
+	PyDoc_STR("*float*: Temperature coefficient [%/C]\n\n**Required:**\nRequired if module_model=0"),
  	NULL},
 {"spe_vmp", (getter)SimpleEfficiencyModuleModel_get_spe_vmp,(setter)SimpleEfficiencyModuleModel_set_spe_vmp,
-	PyDoc_STR("*float*: Nominal max power voltage [V]\n\n*Constraints*: POSITIVE\n\n*Required*: True if module_model=0\n\n*Changes to this variable may require updating the values of the following*: \n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Nominal max power voltage [V]\n\n**Constraints:**\nPOSITIVE\n\n**Required:**\nRequired if module_model=0\n\nThe value of the following variables depends on ``spe_vmp``:\n\n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
 {"spe_voc", (getter)SimpleEfficiencyModuleModel_get_spe_voc,(setter)SimpleEfficiencyModuleModel_set_spe_voc,
-	PyDoc_STR("*float*: Nominal open circuit voltage [V]\n\n*Constraints*: POSITIVE\n\n*Required*: True if module_model=0\n\n*Changes to this variable may require updating the values of the following*: \n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Nominal open circuit voltage [V]\n\n**Constraints:**\nPOSITIVE\n\n**Required:**\nRequired if module_model=0\n\nThe value of the following variables depends on ``spe_voc``:\n\n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -3582,11 +3792,11 @@ CECPerformanceModelWithModuleDatabase_export(VarGroupObject *self, PyObject *arg
 
 static PyMethodDef CECPerformanceModelWithModuleDatabase_methods[] = {
 		{"assign",            (PyCFunction)CECPerformanceModelWithModuleDatabase_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``CECPerformanceModelWithModuleDatabase_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``CECPerformanceModelWithModuleDatabase_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)CECPerformanceModelWithModuleDatabase_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``CECPerformanceModelWithModuleDatabase_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``CECPerformanceModelWithModuleDatabase_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)CECPerformanceModelWithModuleDatabase_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -3747,6 +3957,18 @@ CECPerformanceModelWithModuleDatabase_set_cec_gap_spacing(VarGroupObject *self, 
 }
 
 static PyObject *
+CECPerformanceModelWithModuleDatabase_get_cec_ground_clearance_height(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_CECPerformanceModelWithModuleDatabase_cec_ground_clearance_height_nget, self->data_ptr);
+}
+
+static int
+CECPerformanceModelWithModuleDatabase_set_cec_ground_clearance_height(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_CECPerformanceModelWithModuleDatabase_cec_ground_clearance_height_nset, self->data_ptr);
+}
+
+static PyObject *
 CECPerformanceModelWithModuleDatabase_get_cec_heat_transfer(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Pvsamv1_CECPerformanceModelWithModuleDatabase_cec_heat_transfer_nget, self->data_ptr);
@@ -3828,6 +4050,30 @@ static int
 CECPerformanceModelWithModuleDatabase_set_cec_is_bifacial(VarGroupObject *self, PyObject *value, void *closure)
 {
 	return PySAM_double_setter(value, SAM_Pvsamv1_CECPerformanceModelWithModuleDatabase_cec_is_bifacial_nset, self->data_ptr);
+}
+
+static PyObject *
+CECPerformanceModelWithModuleDatabase_get_cec_lacunarity_enable(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_CECPerformanceModelWithModuleDatabase_cec_lacunarity_enable_nget, self->data_ptr);
+}
+
+static int
+CECPerformanceModelWithModuleDatabase_set_cec_lacunarity_enable(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_CECPerformanceModelWithModuleDatabase_cec_lacunarity_enable_nset, self->data_ptr);
+}
+
+static PyObject *
+CECPerformanceModelWithModuleDatabase_get_cec_lacunarity_length(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_CECPerformanceModelWithModuleDatabase_cec_lacunarity_length_nget, self->data_ptr);
+}
+
+static int
+CECPerformanceModelWithModuleDatabase_set_cec_lacunarity_length(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_CECPerformanceModelWithModuleDatabase_cec_lacunarity_length_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -3988,103 +4234,112 @@ CECPerformanceModelWithModuleDatabase_set_cec_v_oc_ref(VarGroupObject *self, PyO
 
 static PyGetSetDef CECPerformanceModelWithModuleDatabase_getset[] = {
 {"cec_a_ref", (getter)CECPerformanceModelWithModuleDatabase_get_cec_a_ref,(setter)CECPerformanceModelWithModuleDatabase_set_cec_a_ref,
-	PyDoc_STR("*float*: Nonideality factor a\n\n*Required*: True if module_model=1"),
+	PyDoc_STR("*float*: Nonideality factor a\n\n**Required:**\nRequired if module_model=1"),
  	NULL},
 {"cec_adjust", (getter)CECPerformanceModelWithModuleDatabase_get_cec_adjust,(setter)CECPerformanceModelWithModuleDatabase_set_cec_adjust,
-	PyDoc_STR("*float*: Temperature coefficient adjustment [%]\n\n*Required*: True if module_model=1"),
+	PyDoc_STR("*float*: Temperature coefficient adjustment [%]\n\n**Required:**\nRequired if module_model=1"),
  	NULL},
 {"cec_alpha_sc", (getter)CECPerformanceModelWithModuleDatabase_get_cec_alpha_sc,(setter)CECPerformanceModelWithModuleDatabase_set_cec_alpha_sc,
-	PyDoc_STR("*float*: Short circuit current temperature coefficient [A/C]\n\n*Required*: True if module_model=1"),
+	PyDoc_STR("*float*: Short circuit current temperature coefficient [A/C]\n\n**Required:**\nRequired if module_model=1"),
  	NULL},
 {"cec_area", (getter)CECPerformanceModelWithModuleDatabase_get_cec_area,(setter)CECPerformanceModelWithModuleDatabase_set_cec_area,
-	PyDoc_STR("*float*: Module area [m2]\n\n*Required*: True if module_model=1\n\n*Changes to this variable may require updating the values of the following*: \n\t - cec_module_length\n"),
+	PyDoc_STR("*float*: Module area [m2]\n\n**Required:**\nRequired if module_model=1\n\nThe value of the following variables depends on ``cec_area``:\n\n\t - cec_module_length\n"),
  	NULL},
 {"cec_array_cols", (getter)CECPerformanceModelWithModuleDatabase_get_cec_array_cols,(setter)CECPerformanceModelWithModuleDatabase_set_cec_array_cols,
-	PyDoc_STR("*float*: Columns of modules in array\n\n*Required*: True if module_model=1&cec_temp_corr_mode=1"),
+	PyDoc_STR("*float*: Columns of modules in array\n\n**Required:**\nRequired if module_model=1&cec_temp_corr_mode=1"),
  	NULL},
 {"cec_array_rows", (getter)CECPerformanceModelWithModuleDatabase_get_cec_array_rows,(setter)CECPerformanceModelWithModuleDatabase_set_cec_array_rows,
-	PyDoc_STR("*float*: Rows of modules in array\n\n*Required*: True if module_model=1&cec_temp_corr_mode=1"),
+	PyDoc_STR("*float*: Rows of modules in array\n\n**Required:**\nRequired if module_model=1&cec_temp_corr_mode=1"),
  	NULL},
 {"cec_backside_temp", (getter)CECPerformanceModelWithModuleDatabase_get_cec_backside_temp,(setter)CECPerformanceModelWithModuleDatabase_set_cec_backside_temp,
-	PyDoc_STR("*float*: Module backside temperature [C]\n\n*Constraints*: POSITIVE\n\n*Required*: True if module_model=1&cec_temp_corr_mode=1"),
+	PyDoc_STR("*float*: Module backside temperature [C]\n\n**Constraints:**\nPOSITIVE\n\n**Required:**\nRequired if module_model=1&cec_temp_corr_mode=1"),
  	NULL},
 {"cec_beta_oc", (getter)CECPerformanceModelWithModuleDatabase_get_cec_beta_oc,(setter)CECPerformanceModelWithModuleDatabase_set_cec_beta_oc,
-	PyDoc_STR("*float*: Open circuit voltage temperature coefficient [V/C]\n\n*Required*: True if module_model=1"),
+	PyDoc_STR("*float*: Open circuit voltage temperature coefficient [V/C]\n\n**Required:**\nRequired if module_model=1"),
  	NULL},
 {"cec_bifacial_ground_clearance_height", (getter)CECPerformanceModelWithModuleDatabase_get_cec_bifacial_ground_clearance_height,(setter)CECPerformanceModelWithModuleDatabase_set_cec_bifacial_ground_clearance_height,
-	PyDoc_STR("*float*: Module ground clearance height [m]\n\n*Required*: True if module_model=1"),
+	PyDoc_STR("*float*: Module ground clearance height [m]\n\n**Required:**\nRequired if module_model=1"),
  	NULL},
 {"cec_bifacial_transmission_factor", (getter)CECPerformanceModelWithModuleDatabase_get_cec_bifacial_transmission_factor,(setter)CECPerformanceModelWithModuleDatabase_set_cec_bifacial_transmission_factor,
-	PyDoc_STR("*float*: Bifacial transmission factor [0-1]\n\n*Required*: True if module_model=1"),
+	PyDoc_STR("*float*: Bifacial transmission factor [0-1]\n\n**Constraints:**\nMIN=0,MAX=1\n\n**Required:**\nRequired if module_model=1"),
  	NULL},
 {"cec_bifaciality", (getter)CECPerformanceModelWithModuleDatabase_get_cec_bifaciality,(setter)CECPerformanceModelWithModuleDatabase_set_cec_bifaciality,
-	PyDoc_STR("*float*: Bifaciality factor [%]\n\n*Required*: True if module_model=1"),
+	PyDoc_STR("*float*: Bifaciality factor [%]\n\n**Required:**\nRequired if module_model=1"),
  	NULL},
 {"cec_gamma_r", (getter)CECPerformanceModelWithModuleDatabase_get_cec_gamma_r,(setter)CECPerformanceModelWithModuleDatabase_set_cec_gamma_r,
-	PyDoc_STR("*float*: Maximum power point temperature coefficient [%/C]\n\n*Required*: True if module_model=1"),
+	PyDoc_STR("*float*: Maximum power point temperature coefficient [%/C]\n\n**Required:**\nRequired if module_model=1"),
  	NULL},
 {"cec_gap_spacing", (getter)CECPerformanceModelWithModuleDatabase_get_cec_gap_spacing,(setter)CECPerformanceModelWithModuleDatabase_set_cec_gap_spacing,
-	PyDoc_STR("*float*: Gap spacing [m]\n\n*Required*: True if module_model=1&cec_temp_corr_mode=1"),
+	PyDoc_STR("*float*: Gap spacing [m]\n\n**Required:**\nRequired if module_model=1&cec_temp_corr_mode=1"),
+ 	NULL},
+{"cec_ground_clearance_height", (getter)CECPerformanceModelWithModuleDatabase_get_cec_ground_clearance_height,(setter)CECPerformanceModelWithModuleDatabase_set_cec_ground_clearance_height,
+	PyDoc_STR("*float*: Module ground clearance height for heat transfer coefficient [m]\n\n**Required:**\nRequired if cec_lacunarity_enable=1&cec_temp_corr_mode=1"),
  	NULL},
 {"cec_heat_transfer", (getter)CECPerformanceModelWithModuleDatabase_get_cec_heat_transfer,(setter)CECPerformanceModelWithModuleDatabase_set_cec_heat_transfer,
-	PyDoc_STR("*float*: Heat transfer dimensions\n\n*Options*: 0=module,1=array\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: True if module_model=1&cec_temp_corr_mode=1"),
+	PyDoc_STR("*float*: Heat transfer dimensions\n\n**Options:**\n0=module,1=array\n\n**Constraints:**\nINTEGER,MIN=0,MAX=1\n\n**Required:**\nRequired if module_model=1&cec_temp_corr_mode=1"),
  	NULL},
 {"cec_height", (getter)CECPerformanceModelWithModuleDatabase_get_cec_height,(setter)CECPerformanceModelWithModuleDatabase_set_cec_height,
-	PyDoc_STR("*float*: Array mounting height\n\n*Options*: 0=one story,1=two story\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: True if module_model=1"),
+	PyDoc_STR("*float*: Array mounting height\n\n**Options:**\n0=one story,1=two story\n\n**Constraints:**\nINTEGER,MIN=0,MAX=1\n\n**Required:**\nRequired if module_model=1"),
  	NULL},
 {"cec_i_l_ref", (getter)CECPerformanceModelWithModuleDatabase_get_cec_i_l_ref,(setter)CECPerformanceModelWithModuleDatabase_set_cec_i_l_ref,
-	PyDoc_STR("*float*: Light current [A]\n\n*Required*: True if module_model=1"),
+	PyDoc_STR("*float*: Light current [A]\n\n**Required:**\nRequired if module_model=1"),
  	NULL},
 {"cec_i_mp_ref", (getter)CECPerformanceModelWithModuleDatabase_get_cec_i_mp_ref,(setter)CECPerformanceModelWithModuleDatabase_set_cec_i_mp_ref,
-	PyDoc_STR("*float*: Maximum power point current [A]\n\n*Required*: True if module_model=1\n\n*Changes to this variable may require updating the values of the following*: \n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Maximum power point current [A]\n\n**Required:**\nRequired if module_model=1\n\nThe value of the following variables depends on ``cec_i_mp_ref``:\n\n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
 {"cec_i_o_ref", (getter)CECPerformanceModelWithModuleDatabase_get_cec_i_o_ref,(setter)CECPerformanceModelWithModuleDatabase_set_cec_i_o_ref,
-	PyDoc_STR("*float*: Saturation current [A]\n\n*Required*: True if module_model=1"),
+	PyDoc_STR("*float*: Saturation current [A]\n\n**Required:**\nRequired if module_model=1"),
  	NULL},
 {"cec_i_sc_ref", (getter)CECPerformanceModelWithModuleDatabase_get_cec_i_sc_ref,(setter)CECPerformanceModelWithModuleDatabase_set_cec_i_sc_ref,
-	PyDoc_STR("*float*: Short circuit current [A]\n\n*Required*: True if module_model=1"),
+	PyDoc_STR("*float*: Short circuit current [A]\n\n**Required:**\nRequired if module_model=1"),
  	NULL},
 {"cec_is_bifacial", (getter)CECPerformanceModelWithModuleDatabase_get_cec_is_bifacial,(setter)CECPerformanceModelWithModuleDatabase_set_cec_is_bifacial,
-	PyDoc_STR("*float*: Modules are bifacial [0/1]\n\n*Required*: True if module_model=1"),
+	PyDoc_STR("*float*: Modules are bifacial [0/1]\n\n**Options:**\n0=monofacial,1=bifacial\n\n**Constraints:**\nINTEGER,MIN=0,MAX=1\n\n**Required:**\nRequired if module_model=1"),
+ 	NULL},
+{"cec_lacunarity_enable", (getter)CECPerformanceModelWithModuleDatabase_get_cec_lacunarity_enable,(setter)CECPerformanceModelWithModuleDatabase_set_cec_lacunarity_enable,
+	PyDoc_STR("*float*: Enable lacunarity heat transfer model [0/1]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"cec_lacunarity_length", (getter)CECPerformanceModelWithModuleDatabase_get_cec_lacunarity_length,(setter)CECPerformanceModelWithModuleDatabase_set_cec_lacunarity_length,
+	PyDoc_STR("*float*: Module lacurnarity length for spatial heterogeneity [C]\n\n**Required:**\nRequired if cec_lacunarity_enable=1&cec_temp_corr_mode=1"),
  	NULL},
 {"cec_module_length", (getter)CECPerformanceModelWithModuleDatabase_get_cec_module_length,(setter)CECPerformanceModelWithModuleDatabase_set_cec_module_length,
-	PyDoc_STR("*float*: Module height [m]\n\n*Required*: True if module_model=1&cec_temp_corr_mode=1\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - cec_area\n\t - cec_module_width\n"),
+	PyDoc_STR("*float*: Module height [m]\n\n**Required:**\nRequired if module_model=1&cec_temp_corr_mode=1\n\nThe value of ``cec_module_length`` depends on the following variables:\n\n\t - cec_area\n\t - cec_module_width\n"),
  	NULL},
 {"cec_module_width", (getter)CECPerformanceModelWithModuleDatabase_get_cec_module_width,(setter)CECPerformanceModelWithModuleDatabase_set_cec_module_width,
-	PyDoc_STR("*float*: Module width [m]\n\n*Required*: True if module_model=1&cec_temp_corr_mode=1\n\n*Changes to this variable may require updating the values of the following*: \n\t - cec_module_length\n"),
+	PyDoc_STR("*float*: Module width [m]\n\n**Required:**\nRequired if module_model=1&cec_temp_corr_mode=1\n\nThe value of the following variables depends on ``cec_module_width``:\n\n\t - cec_module_length\n"),
  	NULL},
 {"cec_mounting_config", (getter)CECPerformanceModelWithModuleDatabase_get_cec_mounting_config,(setter)CECPerformanceModelWithModuleDatabase_set_cec_mounting_config,
-	PyDoc_STR("*float*: Mounting configuration\n\n*Options*: 0=rack,1=flush,2=integrated,3=gap\n\n*Constraints*: INTEGER,MIN=0,MAX=3\n\n*Required*: True if module_model=1&cec_temp_corr_mode=1"),
+	PyDoc_STR("*float*: Mounting configuration\n\n**Options:**\n0=rack,1=flush,2=integrated,3=gap\n\n**Constraints:**\nINTEGER,MIN=0,MAX=3\n\n**Required:**\nRequired if module_model=1&cec_temp_corr_mode=1"),
  	NULL},
 {"cec_mounting_orientation", (getter)CECPerformanceModelWithModuleDatabase_get_cec_mounting_orientation,(setter)CECPerformanceModelWithModuleDatabase_set_cec_mounting_orientation,
-	PyDoc_STR("*float*: Mounting structure orientation\n\n*Options*: 0=do not impede flow,1=vertical supports,2=horizontal supports\n\n*Constraints*: INTEGER,MIN=0,MAX=2\n\n*Required*: True if module_model=1&cec_temp_corr_mode=1"),
+	PyDoc_STR("*float*: Mounting structure orientation\n\n**Options:**\n0=do not impede flow,1=vertical supports,2=horizontal supports\n\n**Constraints:**\nINTEGER,MIN=0,MAX=2\n\n**Required:**\nRequired if module_model=1&cec_temp_corr_mode=1"),
  	NULL},
 {"cec_n_s", (getter)CECPerformanceModelWithModuleDatabase_get_cec_n_s,(setter)CECPerformanceModelWithModuleDatabase_set_cec_n_s,
-	PyDoc_STR("*float*: Number of cells in series\n\n*Constraints*: POSITIVE\n\n*Required*: True if module_model=1"),
+	PyDoc_STR("*float*: Number of cells in series\n\n**Constraints:**\nPOSITIVE\n\n**Required:**\nRequired if module_model=1"),
  	NULL},
 {"cec_r_s", (getter)CECPerformanceModelWithModuleDatabase_get_cec_r_s,(setter)CECPerformanceModelWithModuleDatabase_set_cec_r_s,
-	PyDoc_STR("*float*: Series resistance [ohm]\n\n*Required*: True if module_model=1"),
+	PyDoc_STR("*float*: Series resistance [ohm]\n\n**Required:**\nRequired if module_model=1"),
  	NULL},
 {"cec_r_sh_ref", (getter)CECPerformanceModelWithModuleDatabase_get_cec_r_sh_ref,(setter)CECPerformanceModelWithModuleDatabase_set_cec_r_sh_ref,
-	PyDoc_STR("*float*: Shunt resistance [ohm]\n\n*Required*: True if module_model=1"),
+	PyDoc_STR("*float*: Shunt resistance [ohm]\n\n**Required:**\nRequired if module_model=1"),
  	NULL},
 {"cec_standoff", (getter)CECPerformanceModelWithModuleDatabase_get_cec_standoff,(setter)CECPerformanceModelWithModuleDatabase_set_cec_standoff,
-	PyDoc_STR("*float*: Standoff mode\n\n*Options*: 0=bipv,1=>3.5in,2=2.5-3.5in,3=1.5-2.5in,4=0.5-1.5in,5=<0.5in,6=ground/rack\n\n*Constraints*: INTEGER,MIN=0,MAX=6\n\n*Required*: True if module_model=1"),
+	PyDoc_STR("*float*: Standoff mode\n\n**Options:**\n0=bipv,1=>3.5in,2=2.5-3.5in,3=1.5-2.5in,4=0.5-1.5in,5=<0.5in,6=ground/rack\n\n**Constraints:**\nINTEGER,MIN=0,MAX=6\n\n**Required:**\nRequired if module_model=1"),
  	NULL},
 {"cec_t_noct", (getter)CECPerformanceModelWithModuleDatabase_get_cec_t_noct,(setter)CECPerformanceModelWithModuleDatabase_set_cec_t_noct,
-	PyDoc_STR("*float*: Nominal operating cell temperature [C]\n\n*Required*: True if module_model=1"),
+	PyDoc_STR("*float*: Nominal operating cell temperature [C]\n\n**Required:**\nRequired if module_model=1"),
  	NULL},
 {"cec_temp_corr_mode", (getter)CECPerformanceModelWithModuleDatabase_get_cec_temp_corr_mode,(setter)CECPerformanceModelWithModuleDatabase_set_cec_temp_corr_mode,
-	PyDoc_STR("*float*: Cell temperature model selection\n\n*Options*: 0=noct,1=mc\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: True if module_model=1"),
+	PyDoc_STR("*float*: Cell temperature model selection\n\n**Options:**\n0=noct,1=mc\n\n**Constraints:**\nINTEGER,MIN=0,MAX=1\n\n**Required:**\nRequired if module_model=1"),
  	NULL},
 {"cec_transient_thermal_model_unit_mass", (getter)CECPerformanceModelWithModuleDatabase_get_cec_transient_thermal_model_unit_mass,(setter)CECPerformanceModelWithModuleDatabase_set_cec_transient_thermal_model_unit_mass,
-	PyDoc_STR("*float*: Module unit mass [kg/m^2]\n\n*Constraints*: POSITIVE\n\n*Required*: True if module_model=1"),
+	PyDoc_STR("*float*: Module unit mass [kg/m^2]\n\n**Constraints:**\nPOSITIVE\n\n**Required:**\nRequired if module_model=1"),
  	NULL},
 {"cec_v_mp_ref", (getter)CECPerformanceModelWithModuleDatabase_get_cec_v_mp_ref,(setter)CECPerformanceModelWithModuleDatabase_set_cec_v_mp_ref,
-	PyDoc_STR("*float*: Maximum power point voltage [V]\n\n*Required*: True if module_model=1\n\n*Changes to this variable may require updating the values of the following*: \n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Maximum power point voltage [V]\n\n**Required:**\nRequired if module_model=1\n\nThe value of the following variables depends on ``cec_v_mp_ref``:\n\n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
 {"cec_v_oc_ref", (getter)CECPerformanceModelWithModuleDatabase_get_cec_v_oc_ref,(setter)CECPerformanceModelWithModuleDatabase_set_cec_v_oc_ref,
-	PyDoc_STR("*float*: Open circuit voltage [V]\n\n*Required*: True if module_model=1\n\n*Changes to this variable may require updating the values of the following*: \n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Open circuit voltage [V]\n\n**Required:**\nRequired if module_model=1\n\nThe value of the following variables depends on ``cec_v_oc_ref``:\n\n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -4199,11 +4454,11 @@ CECPerformanceModelWithUserEnteredSpecifications_export(VarGroupObject *self, Py
 
 static PyMethodDef CECPerformanceModelWithUserEnteredSpecifications_methods[] = {
 		{"assign",            (PyCFunction)CECPerformanceModelWithUserEnteredSpecifications_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``CECPerformanceModelWithUserEnteredSpecifications_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``CECPerformanceModelWithUserEnteredSpecifications_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)CECPerformanceModelWithUserEnteredSpecifications_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``CECPerformanceModelWithUserEnteredSpecifications_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``CECPerformanceModelWithUserEnteredSpecifications_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)CECPerformanceModelWithUserEnteredSpecifications_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -4425,58 +4680,58 @@ CECPerformanceModelWithUserEnteredSpecifications_set_sixpar_voc(VarGroupObject *
 
 static PyGetSetDef CECPerformanceModelWithUserEnteredSpecifications_getset[] = {
 {"sixpar_aisc", (getter)CECPerformanceModelWithUserEnteredSpecifications_get_sixpar_aisc,(setter)CECPerformanceModelWithUserEnteredSpecifications_set_sixpar_aisc,
-	PyDoc_STR("*float*: Short circuit current temperature coefficient [A/C]\n\n*Required*: True if module_model=2\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - 6par_isc\n"),
+	PyDoc_STR("*float*: Short circuit current temperature coefficient [A/C]\n\n**Required:**\nRequired if module_model=2\n\nThe value of ``sixpar_aisc`` depends on the following variables:\n\n\t - 6par_isc\n"),
  	NULL},
 {"sixpar_area", (getter)CECPerformanceModelWithUserEnteredSpecifications_get_sixpar_area,(setter)CECPerformanceModelWithUserEnteredSpecifications_set_sixpar_area,
-	PyDoc_STR("*float*: Module area [m2]\n\n*Required*: True if module_model=2"),
+	PyDoc_STR("*float*: Module area [m2]\n\n**Required:**\nRequired if module_model=2"),
  	NULL},
 {"sixpar_bifacial_ground_clearance_height", (getter)CECPerformanceModelWithUserEnteredSpecifications_get_sixpar_bifacial_ground_clearance_height,(setter)CECPerformanceModelWithUserEnteredSpecifications_set_sixpar_bifacial_ground_clearance_height,
-	PyDoc_STR("*float*: Module ground clearance height [m]\n\n*Required*: True if module_model=2"),
+	PyDoc_STR("*float*: Module ground clearance height [m]\n\n**Required:**\nRequired if module_model=2"),
  	NULL},
 {"sixpar_bifacial_transmission_factor", (getter)CECPerformanceModelWithUserEnteredSpecifications_get_sixpar_bifacial_transmission_factor,(setter)CECPerformanceModelWithUserEnteredSpecifications_set_sixpar_bifacial_transmission_factor,
-	PyDoc_STR("*float*: Bifacial transmission factor [0-1]\n\n*Required*: True if module_model=2"),
+	PyDoc_STR("*float*: Bifacial transmission factor [0-1]\n\n**Required:**\nRequired if module_model=2"),
  	NULL},
 {"sixpar_bifaciality", (getter)CECPerformanceModelWithUserEnteredSpecifications_get_sixpar_bifaciality,(setter)CECPerformanceModelWithUserEnteredSpecifications_set_sixpar_bifaciality,
-	PyDoc_STR("*float*: Bifaciality factor [%]\n\n*Required*: True if module_model=2"),
+	PyDoc_STR("*float*: Bifaciality factor [%]\n\n**Required:**\nRequired if module_model=2"),
  	NULL},
 {"sixpar_bvoc", (getter)CECPerformanceModelWithUserEnteredSpecifications_get_sixpar_bvoc,(setter)CECPerformanceModelWithUserEnteredSpecifications_set_sixpar_bvoc,
-	PyDoc_STR("*float*: Open circuit voltage temperature coefficient [V/C]\n\n*Required*: True if module_model=2\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - 6par_voc\n"),
+	PyDoc_STR("*float*: Open circuit voltage temperature coefficient [V/C]\n\n**Required:**\nRequired if module_model=2\n\nThe value of ``sixpar_bvoc`` depends on the following variables:\n\n\t - 6par_voc\n"),
  	NULL},
 {"sixpar_celltech", (getter)CECPerformanceModelWithUserEnteredSpecifications_get_sixpar_celltech,(setter)CECPerformanceModelWithUserEnteredSpecifications_set_sixpar_celltech,
-	PyDoc_STR("*float*: Solar cell technology type\n\n*Options*: monoSi=0,multiSi=1,CdTe=2,CIS=3,CIGS=4,Amorphous=5\n\n*Constraints*: INTEGER,MIN=0,MAX=5\n\n*Required*: True if module_model=2"),
+	PyDoc_STR("*float*: Solar cell technology type\n\n**Options:**\nmonoSi=0,multiSi=1,CdTe=2,CIS=3,CIGS=4,Amorphous=5\n\n**Constraints:**\nINTEGER,MIN=0,MAX=5\n\n**Required:**\nRequired if module_model=2"),
  	NULL},
 {"sixpar_gpmp", (getter)CECPerformanceModelWithUserEnteredSpecifications_get_sixpar_gpmp,(setter)CECPerformanceModelWithUserEnteredSpecifications_set_sixpar_gpmp,
-	PyDoc_STR("*float*: Maximum power point temperature coefficient [%/C]\n\n*Required*: True if module_model=2"),
+	PyDoc_STR("*float*: Maximum power point temperature coefficient [%/C]\n\n**Required:**\nRequired if module_model=2"),
  	NULL},
 {"sixpar_imp", (getter)CECPerformanceModelWithUserEnteredSpecifications_get_sixpar_imp,(setter)CECPerformanceModelWithUserEnteredSpecifications_set_sixpar_imp,
-	PyDoc_STR("*float*: Imp [A]\n\n*Required*: True if module_model=2\n\n*Changes to this variable may require updating the values of the following*: \n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Imp [A]\n\n**Required:**\nRequired if module_model=2\n\nThe value of the following variables depends on ``sixpar_imp``:\n\n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
 {"sixpar_is_bifacial", (getter)CECPerformanceModelWithUserEnteredSpecifications_get_sixpar_is_bifacial,(setter)CECPerformanceModelWithUserEnteredSpecifications_set_sixpar_is_bifacial,
-	PyDoc_STR("*float*: Modules are bifacial [0/1]\n\n*Required*: True if module_model=2"),
+	PyDoc_STR("*float*: Modules are bifacial [0/1]\n\n**Options:**\n0=monofacial,1=bifacial\n\n**Constraints:**\nINTEGER,MIN=0,MAX=1\n\n**Required:**\nRequired if module_model=2"),
  	NULL},
 {"sixpar_isc", (getter)CECPerformanceModelWithUserEnteredSpecifications_get_sixpar_isc,(setter)CECPerformanceModelWithUserEnteredSpecifications_set_sixpar_isc,
-	PyDoc_STR("*float*: Isc [A]\n\n*Required*: True if module_model=2\n\n*Changes to this variable may require updating the values of the following*: \n\t - 6par_aisc\n"),
+	PyDoc_STR("*float*: Isc [A]\n\n**Required:**\nRequired if module_model=2\n\nThe value of the following variables depends on ``sixpar_isc``:\n\n\t - 6par_aisc\n"),
  	NULL},
 {"sixpar_mounting", (getter)CECPerformanceModelWithUserEnteredSpecifications_get_sixpar_mounting,(setter)CECPerformanceModelWithUserEnteredSpecifications_set_sixpar_mounting,
-	PyDoc_STR("*float*: Array mounting height\n\n*Options*: 0=one story,1=two story\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: True if module_model=2"),
+	PyDoc_STR("*float*: Array mounting height\n\n**Options:**\n0=one story,1=two story\n\n**Constraints:**\nINTEGER,MIN=0,MAX=1\n\n**Required:**\nRequired if module_model=2"),
  	NULL},
 {"sixpar_nser", (getter)CECPerformanceModelWithUserEnteredSpecifications_get_sixpar_nser,(setter)CECPerformanceModelWithUserEnteredSpecifications_set_sixpar_nser,
-	PyDoc_STR("*float*: Nseries\n\n*Constraints*: INTEGER,POSITIVE\n\n*Required*: True if module_model=2"),
+	PyDoc_STR("*float*: Nseries\n\n**Constraints:**\nINTEGER,POSITIVE\n\n**Required:**\nRequired if module_model=2"),
  	NULL},
 {"sixpar_standoff", (getter)CECPerformanceModelWithUserEnteredSpecifications_get_sixpar_standoff,(setter)CECPerformanceModelWithUserEnteredSpecifications_set_sixpar_standoff,
-	PyDoc_STR("*float*: Standoff mode\n\n*Options*: 0=bipv,1=>3.5in,2=2.5-3.5in,3=1.5-2.5in,4=0.5-1.5in,5=<0.5in,6=ground/rack\n\n*Constraints*: INTEGER,MIN=0,MAX=6\n\n*Required*: True if module_model=2"),
+	PyDoc_STR("*float*: Standoff mode\n\n**Options:**\n0=bipv,1=>3.5in,2=2.5-3.5in,3=1.5-2.5in,4=0.5-1.5in,5=<0.5in,6=ground/rack\n\n**Constraints:**\nINTEGER,MIN=0,MAX=6\n\n**Required:**\nRequired if module_model=2"),
  	NULL},
 {"sixpar_tnoct", (getter)CECPerformanceModelWithUserEnteredSpecifications_get_sixpar_tnoct,(setter)CECPerformanceModelWithUserEnteredSpecifications_set_sixpar_tnoct,
-	PyDoc_STR("*float*: Nominal operating cell temperature [C]\n\n*Required*: True if module_model=2"),
+	PyDoc_STR("*float*: Nominal operating cell temperature [C]\n\n**Required:**\nRequired if module_model=2"),
  	NULL},
 {"sixpar_transient_thermal_model_unit_mass", (getter)CECPerformanceModelWithUserEnteredSpecifications_get_sixpar_transient_thermal_model_unit_mass,(setter)CECPerformanceModelWithUserEnteredSpecifications_set_sixpar_transient_thermal_model_unit_mass,
-	PyDoc_STR("*float*: Module unit mass [kg/m^2]\n\n*Required*: True if module_model=2"),
+	PyDoc_STR("*float*: Module unit mass [kg/m^2]\n\n**Required:**\nRequired if module_model=2"),
  	NULL},
 {"sixpar_vmp", (getter)CECPerformanceModelWithUserEnteredSpecifications_get_sixpar_vmp,(setter)CECPerformanceModelWithUserEnteredSpecifications_set_sixpar_vmp,
-	PyDoc_STR("*float*: Maximum power point voltage [V]\n\n*Required*: True if module_model=2\n\n*Changes to this variable may require updating the values of the following*: \n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Maximum power point voltage [V]\n\n**Required:**\nRequired if module_model=2\n\nThe value of the following variables depends on ``sixpar_vmp``:\n\n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
 {"sixpar_voc", (getter)CECPerformanceModelWithUserEnteredSpecifications_get_sixpar_voc,(setter)CECPerformanceModelWithUserEnteredSpecifications_set_sixpar_voc,
-	PyDoc_STR("*float*: Voc [V]\n\n*Required*: True if module_model=2\n\n*Changes to this variable may require updating the values of the following*: \n\t - 6par_bvoc\n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Voc [V]\n\n**Required:**\nRequired if module_model=2\n\nThe value of the following variables depends on ``sixpar_voc``:\n\n\t - 6par_bvoc\n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -4591,11 +4846,11 @@ SandiaPVArrayPerformanceModelWithModuleDatabase_export(VarGroupObject *self, PyO
 
 static PyMethodDef SandiaPVArrayPerformanceModelWithModuleDatabase_methods[] = {
 		{"assign",            (PyCFunction)SandiaPVArrayPerformanceModelWithModuleDatabase_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``SandiaPVArrayPerformanceModelWithModuleDatabase_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``SandiaPVArrayPerformanceModelWithModuleDatabase_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)SandiaPVArrayPerformanceModelWithModuleDatabase_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``SandiaPVArrayPerformanceModelWithModuleDatabase_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``SandiaPVArrayPerformanceModelWithModuleDatabase_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)SandiaPVArrayPerformanceModelWithModuleDatabase_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -5117,133 +5372,133 @@ SandiaPVArrayPerformanceModelWithModuleDatabase_set_snl_voco(VarGroupObject *sel
 
 static PyGetSetDef SandiaPVArrayPerformanceModelWithModuleDatabase_getset[] = {
 {"snl_a", (getter)SandiaPVArrayPerformanceModelWithModuleDatabase_get_snl_a,(setter)SandiaPVArrayPerformanceModelWithModuleDatabase_set_snl_a,
-	PyDoc_STR("*float*: Temperature coefficient a\n\n*Required*: True if module_model=3\n\n*Changes to this variable may require updating the values of the following*: \n\t - inverter_count\n\t - snl_ref_a\n\t - snl_ref_b\n\t - snl_ref_dT\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Temperature coefficient a\n\n**Required:**\nRequired if module_model=3\n\nThe value of the following variables depends on ``snl_a``:\n\n\t - inverter_count\n\t - snl_ref_a\n\t - snl_ref_b\n\t - snl_ref_dT\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
 {"snl_a0", (getter)SandiaPVArrayPerformanceModelWithModuleDatabase_get_snl_a0,(setter)SandiaPVArrayPerformanceModelWithModuleDatabase_set_snl_a0,
-	PyDoc_STR("*float*: Air mass polynomial coeff 0\n\n*Required*: True if module_model=3\n\n*Changes to this variable may require updating the values of the following*: \n\t - inverter_count\n\t - snl_ref_a\n\t - snl_ref_b\n\t - snl_ref_dT\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Air mass polynomial coeff 0\n\n**Required:**\nRequired if module_model=3\n\nThe value of the following variables depends on ``snl_a0``:\n\n\t - inverter_count\n\t - snl_ref_a\n\t - snl_ref_b\n\t - snl_ref_dT\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
 {"snl_a1", (getter)SandiaPVArrayPerformanceModelWithModuleDatabase_get_snl_a1,(setter)SandiaPVArrayPerformanceModelWithModuleDatabase_set_snl_a1,
-	PyDoc_STR("*float*: Air mass polynomial coeff 1\n\n*Required*: True if module_model=3\n\n*Changes to this variable may require updating the values of the following*: \n\t - inverter_count\n\t - snl_ref_a\n\t - snl_ref_b\n\t - snl_ref_dT\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Air mass polynomial coeff 1\n\n**Required:**\nRequired if module_model=3\n\nThe value of the following variables depends on ``snl_a1``:\n\n\t - inverter_count\n\t - snl_ref_a\n\t - snl_ref_b\n\t - snl_ref_dT\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
 {"snl_a2", (getter)SandiaPVArrayPerformanceModelWithModuleDatabase_get_snl_a2,(setter)SandiaPVArrayPerformanceModelWithModuleDatabase_set_snl_a2,
-	PyDoc_STR("*float*: Air mass polynomial coeff 2\n\n*Required*: True if module_model=3\n\n*Changes to this variable may require updating the values of the following*: \n\t - inverter_count\n\t - snl_ref_a\n\t - snl_ref_b\n\t - snl_ref_dT\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Air mass polynomial coeff 2\n\n**Required:**\nRequired if module_model=3\n\nThe value of the following variables depends on ``snl_a2``:\n\n\t - inverter_count\n\t - snl_ref_a\n\t - snl_ref_b\n\t - snl_ref_dT\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
 {"snl_a3", (getter)SandiaPVArrayPerformanceModelWithModuleDatabase_get_snl_a3,(setter)SandiaPVArrayPerformanceModelWithModuleDatabase_set_snl_a3,
-	PyDoc_STR("*float*: Air mass polynomial coeff 3\n\n*Required*: True if module_model=3\n\n*Changes to this variable may require updating the values of the following*: \n\t - inverter_count\n\t - snl_ref_a\n\t - snl_ref_b\n\t - snl_ref_dT\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Air mass polynomial coeff 3\n\n**Required:**\nRequired if module_model=3\n\nThe value of the following variables depends on ``snl_a3``:\n\n\t - inverter_count\n\t - snl_ref_a\n\t - snl_ref_b\n\t - snl_ref_dT\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
 {"snl_a4", (getter)SandiaPVArrayPerformanceModelWithModuleDatabase_get_snl_a4,(setter)SandiaPVArrayPerformanceModelWithModuleDatabase_set_snl_a4,
-	PyDoc_STR("*float*: Air mass polynomial coeff 4\n\n*Required*: True if module_model=3\n\n*Changes to this variable may require updating the values of the following*: \n\t - inverter_count\n\t - snl_ref_a\n\t - snl_ref_b\n\t - snl_ref_dT\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Air mass polynomial coeff 4\n\n**Required:**\nRequired if module_model=3\n\nThe value of the following variables depends on ``snl_a4``:\n\n\t - inverter_count\n\t - snl_ref_a\n\t - snl_ref_b\n\t - snl_ref_dT\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
 {"snl_aimp", (getter)SandiaPVArrayPerformanceModelWithModuleDatabase_get_snl_aimp,(setter)SandiaPVArrayPerformanceModelWithModuleDatabase_set_snl_aimp,
-	PyDoc_STR("*float*: Max power point current temperature coefficient\n\n*Required*: True if module_model=3\n\n*Changes to this variable may require updating the values of the following*: \n\t - inverter_count\n\t - snl_ref_a\n\t - snl_ref_b\n\t - snl_ref_dT\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Max power point current temperature coefficient\n\n**Required:**\nRequired if module_model=3\n\nThe value of the following variables depends on ``snl_aimp``:\n\n\t - inverter_count\n\t - snl_ref_a\n\t - snl_ref_b\n\t - snl_ref_dT\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
 {"snl_aisc", (getter)SandiaPVArrayPerformanceModelWithModuleDatabase_get_snl_aisc,(setter)SandiaPVArrayPerformanceModelWithModuleDatabase_set_snl_aisc,
-	PyDoc_STR("*float*: Short circuit current temperature coefficient\n\n*Required*: True if module_model=3\n\n*Changes to this variable may require updating the values of the following*: \n\t - inverter_count\n\t - snl_ref_a\n\t - snl_ref_b\n\t - snl_ref_dT\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Short circuit current temperature coefficient\n\n**Required:**\nRequired if module_model=3\n\nThe value of the following variables depends on ``snl_aisc``:\n\n\t - inverter_count\n\t - snl_ref_a\n\t - snl_ref_b\n\t - snl_ref_dT\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
 {"snl_area", (getter)SandiaPVArrayPerformanceModelWithModuleDatabase_get_snl_area,(setter)SandiaPVArrayPerformanceModelWithModuleDatabase_set_snl_area,
-	PyDoc_STR("*float*: Module area\n\n*Required*: True if module_model=3\n\n*Changes to this variable may require updating the values of the following*: \n\t - inverter_count\n\t - snl_ref_a\n\t - snl_ref_b\n\t - snl_ref_dT\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Module area\n\n**Required:**\nRequired if module_model=3\n\nThe value of the following variables depends on ``snl_area``:\n\n\t - inverter_count\n\t - snl_ref_a\n\t - snl_ref_b\n\t - snl_ref_dT\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
 {"snl_b", (getter)SandiaPVArrayPerformanceModelWithModuleDatabase_get_snl_b,(setter)SandiaPVArrayPerformanceModelWithModuleDatabase_set_snl_b,
-	PyDoc_STR("*float*: Temperature coefficient b\n\n*Required*: True if module_model=3\n\n*Changes to this variable may require updating the values of the following*: \n\t - inverter_count\n\t - snl_ref_a\n\t - snl_ref_b\n\t - snl_ref_dT\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Temperature coefficient b\n\n**Required:**\nRequired if module_model=3\n\nThe value of the following variables depends on ``snl_b``:\n\n\t - inverter_count\n\t - snl_ref_a\n\t - snl_ref_b\n\t - snl_ref_dT\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
 {"snl_b0", (getter)SandiaPVArrayPerformanceModelWithModuleDatabase_get_snl_b0,(setter)SandiaPVArrayPerformanceModelWithModuleDatabase_set_snl_b0,
-	PyDoc_STR("*float*: Incidence angle modifier polynomial coeff 0\n\n*Required*: True if module_model=3\n\n*Changes to this variable may require updating the values of the following*: \n\t - inverter_count\n\t - snl_ref_a\n\t - snl_ref_b\n\t - snl_ref_dT\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Incidence angle modifier polynomial coeff 0\n\n**Required:**\nRequired if module_model=3\n\nThe value of the following variables depends on ``snl_b0``:\n\n\t - inverter_count\n\t - snl_ref_a\n\t - snl_ref_b\n\t - snl_ref_dT\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
 {"snl_b1", (getter)SandiaPVArrayPerformanceModelWithModuleDatabase_get_snl_b1,(setter)SandiaPVArrayPerformanceModelWithModuleDatabase_set_snl_b1,
-	PyDoc_STR("*float*: Incidence angle modifier polynomial coeff 1\n\n*Required*: True if module_model=3\n\n*Changes to this variable may require updating the values of the following*: \n\t - inverter_count\n\t - snl_ref_a\n\t - snl_ref_b\n\t - snl_ref_dT\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Incidence angle modifier polynomial coeff 1\n\n**Required:**\nRequired if module_model=3\n\nThe value of the following variables depends on ``snl_b1``:\n\n\t - inverter_count\n\t - snl_ref_a\n\t - snl_ref_b\n\t - snl_ref_dT\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
 {"snl_b2", (getter)SandiaPVArrayPerformanceModelWithModuleDatabase_get_snl_b2,(setter)SandiaPVArrayPerformanceModelWithModuleDatabase_set_snl_b2,
-	PyDoc_STR("*float*: Incidence angle modifier polynomial coeff 2\n\n*Required*: True if module_model=3\n\n*Changes to this variable may require updating the values of the following*: \n\t - inverter_count\n\t - snl_ref_a\n\t - snl_ref_b\n\t - snl_ref_dT\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Incidence angle modifier polynomial coeff 2\n\n**Required:**\nRequired if module_model=3\n\nThe value of the following variables depends on ``snl_b2``:\n\n\t - inverter_count\n\t - snl_ref_a\n\t - snl_ref_b\n\t - snl_ref_dT\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
 {"snl_b3", (getter)SandiaPVArrayPerformanceModelWithModuleDatabase_get_snl_b3,(setter)SandiaPVArrayPerformanceModelWithModuleDatabase_set_snl_b3,
-	PyDoc_STR("*float*: Incidence angle modifier polynomial coeff 3\n\n*Required*: True if module_model=3\n\n*Changes to this variable may require updating the values of the following*: \n\t - inverter_count\n\t - snl_ref_a\n\t - snl_ref_b\n\t - snl_ref_dT\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Incidence angle modifier polynomial coeff 3\n\n**Required:**\nRequired if module_model=3\n\nThe value of the following variables depends on ``snl_b3``:\n\n\t - inverter_count\n\t - snl_ref_a\n\t - snl_ref_b\n\t - snl_ref_dT\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
 {"snl_b4", (getter)SandiaPVArrayPerformanceModelWithModuleDatabase_get_snl_b4,(setter)SandiaPVArrayPerformanceModelWithModuleDatabase_set_snl_b4,
-	PyDoc_STR("*float*: Incidence angle modifier polynomial coeff 4\n\n*Required*: True if module_model=3\n\n*Changes to this variable may require updating the values of the following*: \n\t - inverter_count\n\t - snl_ref_a\n\t - snl_ref_b\n\t - snl_ref_dT\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Incidence angle modifier polynomial coeff 4\n\n**Required:**\nRequired if module_model=3\n\nThe value of the following variables depends on ``snl_b4``:\n\n\t - inverter_count\n\t - snl_ref_a\n\t - snl_ref_b\n\t - snl_ref_dT\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
 {"snl_b5", (getter)SandiaPVArrayPerformanceModelWithModuleDatabase_get_snl_b5,(setter)SandiaPVArrayPerformanceModelWithModuleDatabase_set_snl_b5,
-	PyDoc_STR("*float*: Incidence angle modifier polynomial coeff 5\n\n*Required*: True if module_model=3\n\n*Changes to this variable may require updating the values of the following*: \n\t - inverter_count\n\t - snl_ref_a\n\t - snl_ref_b\n\t - snl_ref_dT\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Incidence angle modifier polynomial coeff 5\n\n**Required:**\nRequired if module_model=3\n\nThe value of the following variables depends on ``snl_b5``:\n\n\t - inverter_count\n\t - snl_ref_a\n\t - snl_ref_b\n\t - snl_ref_dT\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
 {"snl_bvmpo", (getter)SandiaPVArrayPerformanceModelWithModuleDatabase_get_snl_bvmpo,(setter)SandiaPVArrayPerformanceModelWithModuleDatabase_set_snl_bvmpo,
-	PyDoc_STR("*float*: Max power point voltage temperature coefficient\n\n*Required*: True if module_model=3\n\n*Changes to this variable may require updating the values of the following*: \n\t - inverter_count\n\t - snl_ref_a\n\t - snl_ref_b\n\t - snl_ref_dT\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Max power point voltage temperature coefficient\n\n**Required:**\nRequired if module_model=3\n\nThe value of the following variables depends on ``snl_bvmpo``:\n\n\t - inverter_count\n\t - snl_ref_a\n\t - snl_ref_b\n\t - snl_ref_dT\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
 {"snl_bvoco", (getter)SandiaPVArrayPerformanceModelWithModuleDatabase_get_snl_bvoco,(setter)SandiaPVArrayPerformanceModelWithModuleDatabase_set_snl_bvoco,
-	PyDoc_STR("*float*: Open circuit voltage temperature coefficient\n\n*Required*: True if module_model=3\n\n*Changes to this variable may require updating the values of the following*: \n\t - inverter_count\n\t - snl_ref_a\n\t - snl_ref_b\n\t - snl_ref_dT\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Open circuit voltage temperature coefficient\n\n**Required:**\nRequired if module_model=3\n\nThe value of the following variables depends on ``snl_bvoco``:\n\n\t - inverter_count\n\t - snl_ref_a\n\t - snl_ref_b\n\t - snl_ref_dT\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
 {"snl_c0", (getter)SandiaPVArrayPerformanceModelWithModuleDatabase_get_snl_c0,(setter)SandiaPVArrayPerformanceModelWithModuleDatabase_set_snl_c0,
-	PyDoc_STR("*float*: C0\n\n*Required*: True if module_model=3\n\n*Changes to this variable may require updating the values of the following*: \n\t - inverter_count\n\t - snl_ref_a\n\t - snl_ref_b\n\t - snl_ref_dT\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: C0\n\n**Required:**\nRequired if module_model=3\n\nThe value of the following variables depends on ``snl_c0``:\n\n\t - inverter_count\n\t - snl_ref_a\n\t - snl_ref_b\n\t - snl_ref_dT\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
 {"snl_c1", (getter)SandiaPVArrayPerformanceModelWithModuleDatabase_get_snl_c1,(setter)SandiaPVArrayPerformanceModelWithModuleDatabase_set_snl_c1,
-	PyDoc_STR("*float*: C1\n\n*Required*: True if module_model=3\n\n*Changes to this variable may require updating the values of the following*: \n\t - inverter_count\n\t - snl_ref_a\n\t - snl_ref_b\n\t - snl_ref_dT\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: C1\n\n**Required:**\nRequired if module_model=3\n\nThe value of the following variables depends on ``snl_c1``:\n\n\t - inverter_count\n\t - snl_ref_a\n\t - snl_ref_b\n\t - snl_ref_dT\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
 {"snl_c2", (getter)SandiaPVArrayPerformanceModelWithModuleDatabase_get_snl_c2,(setter)SandiaPVArrayPerformanceModelWithModuleDatabase_set_snl_c2,
-	PyDoc_STR("*float*: C2\n\n*Required*: True if module_model=3\n\n*Changes to this variable may require updating the values of the following*: \n\t - inverter_count\n\t - snl_ref_a\n\t - snl_ref_b\n\t - snl_ref_dT\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: C2\n\n**Required:**\nRequired if module_model=3\n\nThe value of the following variables depends on ``snl_c2``:\n\n\t - inverter_count\n\t - snl_ref_a\n\t - snl_ref_b\n\t - snl_ref_dT\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
 {"snl_c3", (getter)SandiaPVArrayPerformanceModelWithModuleDatabase_get_snl_c3,(setter)SandiaPVArrayPerformanceModelWithModuleDatabase_set_snl_c3,
-	PyDoc_STR("*float*: C3\n\n*Required*: True if module_model=3\n\n*Changes to this variable may require updating the values of the following*: \n\t - inverter_count\n\t - snl_ref_a\n\t - snl_ref_b\n\t - snl_ref_dT\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: C3\n\n**Required:**\nRequired if module_model=3\n\nThe value of the following variables depends on ``snl_c3``:\n\n\t - inverter_count\n\t - snl_ref_a\n\t - snl_ref_b\n\t - snl_ref_dT\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
 {"snl_c4", (getter)SandiaPVArrayPerformanceModelWithModuleDatabase_get_snl_c4,(setter)SandiaPVArrayPerformanceModelWithModuleDatabase_set_snl_c4,
-	PyDoc_STR("*float*: C4\n\n*Required*: True if module_model=3"),
+	PyDoc_STR("*float*: C4\n\n**Required:**\nRequired if module_model=3"),
  	NULL},
 {"snl_c5", (getter)SandiaPVArrayPerformanceModelWithModuleDatabase_get_snl_c5,(setter)SandiaPVArrayPerformanceModelWithModuleDatabase_set_snl_c5,
-	PyDoc_STR("*float*: C5\n\n*Required*: True if module_model=3"),
+	PyDoc_STR("*float*: C5\n\n**Required:**\nRequired if module_model=3"),
  	NULL},
 {"snl_c6", (getter)SandiaPVArrayPerformanceModelWithModuleDatabase_get_snl_c6,(setter)SandiaPVArrayPerformanceModelWithModuleDatabase_set_snl_c6,
-	PyDoc_STR("*float*: C6\n\n*Required*: True if module_model=3"),
+	PyDoc_STR("*float*: C6\n\n**Required:**\nRequired if module_model=3"),
  	NULL},
 {"snl_c7", (getter)SandiaPVArrayPerformanceModelWithModuleDatabase_get_snl_c7,(setter)SandiaPVArrayPerformanceModelWithModuleDatabase_set_snl_c7,
-	PyDoc_STR("*float*: C7\n\n*Required*: True if module_model=3"),
+	PyDoc_STR("*float*: C7\n\n**Required:**\nRequired if module_model=3"),
  	NULL},
 {"snl_dtc", (getter)SandiaPVArrayPerformanceModelWithModuleDatabase_get_snl_dtc,(setter)SandiaPVArrayPerformanceModelWithModuleDatabase_set_snl_dtc,
-	PyDoc_STR("*float*: Temperature coefficient dT\n\n*Required*: True if module_model=3\n\n*Changes to this variable may require updating the values of the following*: \n\t - inverter_count\n\t - snl_ref_a\n\t - snl_ref_b\n\t - snl_ref_dT\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Temperature coefficient dT\n\n**Required:**\nRequired if module_model=3\n\nThe value of the following variables depends on ``snl_dtc``:\n\n\t - inverter_count\n\t - snl_ref_a\n\t - snl_ref_b\n\t - snl_ref_dT\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
 {"snl_fd", (getter)SandiaPVArrayPerformanceModelWithModuleDatabase_get_snl_fd,(setter)SandiaPVArrayPerformanceModelWithModuleDatabase_set_snl_fd,
-	PyDoc_STR("*float*: Diffuse fraction\n\n*Required*: True if module_model=3\n\n*Changes to this variable may require updating the values of the following*: \n\t - inverter_count\n\t - snl_ref_a\n\t - snl_ref_b\n\t - snl_ref_dT\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Diffuse fraction\n\n**Required:**\nRequired if module_model=3\n\nThe value of the following variables depends on ``snl_fd``:\n\n\t - inverter_count\n\t - snl_ref_a\n\t - snl_ref_b\n\t - snl_ref_dT\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
 {"snl_impo", (getter)SandiaPVArrayPerformanceModelWithModuleDatabase_get_snl_impo,(setter)SandiaPVArrayPerformanceModelWithModuleDatabase_set_snl_impo,
-	PyDoc_STR("*float*: Max power point current\n\n*Required*: True if module_model=3\n\n*Changes to this variable may require updating the values of the following*: \n\t - inverter_count\n\t - snl_ref_a\n\t - snl_ref_b\n\t - snl_ref_dT\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Max power point current\n\n**Required:**\nRequired if module_model=3\n\nThe value of the following variables depends on ``snl_impo``:\n\n\t - inverter_count\n\t - snl_ref_a\n\t - snl_ref_b\n\t - snl_ref_dT\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
 {"snl_isco", (getter)SandiaPVArrayPerformanceModelWithModuleDatabase_get_snl_isco,(setter)SandiaPVArrayPerformanceModelWithModuleDatabase_set_snl_isco,
-	PyDoc_STR("*float*: Short circuit current\n\n*Required*: True if module_model=3\n\n*Changes to this variable may require updating the values of the following*: \n\t - inverter_count\n\t - snl_ref_a\n\t - snl_ref_b\n\t - snl_ref_dT\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Short circuit current\n\n**Required:**\nRequired if module_model=3\n\nThe value of the following variables depends on ``snl_isco``:\n\n\t - inverter_count\n\t - snl_ref_a\n\t - snl_ref_b\n\t - snl_ref_dT\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
 {"snl_ixo", (getter)SandiaPVArrayPerformanceModelWithModuleDatabase_get_snl_ixo,(setter)SandiaPVArrayPerformanceModelWithModuleDatabase_set_snl_ixo,
-	PyDoc_STR("*float*: Ix midpoint current\n\n*Required*: True if module_model=3"),
+	PyDoc_STR("*float*: Ix midpoint current\n\n**Required:**\nRequired if module_model=3"),
  	NULL},
 {"snl_ixxo", (getter)SandiaPVArrayPerformanceModelWithModuleDatabase_get_snl_ixxo,(setter)SandiaPVArrayPerformanceModelWithModuleDatabase_set_snl_ixxo,
-	PyDoc_STR("*float*: Ixx midpoint current\n\n*Required*: True if module_model=3"),
+	PyDoc_STR("*float*: Ixx midpoint current\n\n**Required:**\nRequired if module_model=3"),
  	NULL},
 {"snl_mbvmp", (getter)SandiaPVArrayPerformanceModelWithModuleDatabase_get_snl_mbvmp,(setter)SandiaPVArrayPerformanceModelWithModuleDatabase_set_snl_mbvmp,
-	PyDoc_STR("*float*: Irradiance dependence of Vmp temperature coefficient\n\n*Required*: True if module_model=3\n\n*Changes to this variable may require updating the values of the following*: \n\t - inverter_count\n\t - snl_ref_a\n\t - snl_ref_b\n\t - snl_ref_dT\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Irradiance dependence of Vmp temperature coefficient\n\n**Required:**\nRequired if module_model=3\n\nThe value of the following variables depends on ``snl_mbvmp``:\n\n\t - inverter_count\n\t - snl_ref_a\n\t - snl_ref_b\n\t - snl_ref_dT\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
 {"snl_mbvoc", (getter)SandiaPVArrayPerformanceModelWithModuleDatabase_get_snl_mbvoc,(setter)SandiaPVArrayPerformanceModelWithModuleDatabase_set_snl_mbvoc,
-	PyDoc_STR("*float*: Irradiance dependence of Voc temperature coefficient\n\n*Required*: True if module_model=3\n\n*Changes to this variable may require updating the values of the following*: \n\t - inverter_count\n\t - snl_ref_a\n\t - snl_ref_b\n\t - snl_ref_dT\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Irradiance dependence of Voc temperature coefficient\n\n**Required:**\nRequired if module_model=3\n\nThe value of the following variables depends on ``snl_mbvoc``:\n\n\t - inverter_count\n\t - snl_ref_a\n\t - snl_ref_b\n\t - snl_ref_dT\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
 {"snl_module_structure", (getter)SandiaPVArrayPerformanceModelWithModuleDatabase_get_snl_module_structure,(setter)SandiaPVArrayPerformanceModelWithModuleDatabase_set_snl_module_structure,
-	PyDoc_STR("*float*: Module and mounting structure configuration\n\n*Options*: 0=Use Database Values,1=glass/cell/polymer sheet-open rack,2=glass/cell/glass-open rack,3=polymer/thin film/steel-open rack,4=Insulated back BIPV,5=close roof mount,6=user-defined\n\n*Constraints*: INTEGER,MIN=0,MAX=6\n\n*Required*: True if module_model=3\n\n*Changes to this variable may require updating the values of the following*: \n\t - inverter_count\n\t - snl_ref_a\n\t - snl_ref_b\n\t - snl_ref_dT\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Module and mounting structure configuration\n\n**Options:**\n0=Use Database Values,1=glass/cell/polymer sheet-open rack,2=glass/cell/glass-open rack,3=polymer/thin film/steel-open rack,4=Insulated back BIPV,5=close roof mount,6=user-defined\n\n**Constraints:**\nINTEGER,MIN=0,MAX=6\n\n**Required:**\nRequired if module_model=3\n\nThe value of the following variables depends on ``snl_module_structure``:\n\n\t - inverter_count\n\t - snl_ref_a\n\t - snl_ref_b\n\t - snl_ref_dT\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
 {"snl_n", (getter)SandiaPVArrayPerformanceModelWithModuleDatabase_get_snl_n,(setter)SandiaPVArrayPerformanceModelWithModuleDatabase_set_snl_n,
-	PyDoc_STR("*float*: Diode factor\n\n*Required*: True if module_model=3\n\n*Changes to this variable may require updating the values of the following*: \n\t - inverter_count\n\t - snl_ref_a\n\t - snl_ref_b\n\t - snl_ref_dT\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Diode factor\n\n**Required:**\nRequired if module_model=3\n\nThe value of the following variables depends on ``snl_n``:\n\n\t - inverter_count\n\t - snl_ref_a\n\t - snl_ref_b\n\t - snl_ref_dT\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
 {"snl_ref_a", (getter)SandiaPVArrayPerformanceModelWithModuleDatabase_get_snl_ref_a,(setter)SandiaPVArrayPerformanceModelWithModuleDatabase_set_snl_ref_a,
-	PyDoc_STR("*float*: User-specified a\n\n*Required*: True if module_model=3\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - snl_a\n\t - snl_a0\n\t - snl_a1\n\t - snl_a2\n\t - snl_a3\n\t - snl_a4\n\t - snl_aimp\n\t - snl_aisc\n\t - snl_area\n\t - snl_b\n\t - snl_b0\n\t - snl_b1\n\t - snl_b2\n\t - snl_b3\n\t - snl_b4\n\t - snl_b5\n\t - snl_bvmpo\n\t - snl_bvoco\n\t - snl_c0\n\t - snl_c1\n\t - snl_c2\n\t - snl_c3\n\t - snl_dtc\n\t - snl_fd\n\t - snl_impo\n\t - snl_isco\n\t - snl_mbvmp\n\t - snl_mbvoc\n\t - snl_module_structure\n\t - snl_n\n\t - snl_series_cells\n\t - snl_vmpo\n\t - snl_voco\n"),
+	PyDoc_STR("*float*: User-specified a\n\n**Required:**\nRequired if module_model=3\n\nThe value of ``snl_ref_a`` depends on the following variables:\n\n\t - snl_a\n\t - snl_a0\n\t - snl_a1\n\t - snl_a2\n\t - snl_a3\n\t - snl_a4\n\t - snl_aimp\n\t - snl_aisc\n\t - snl_area\n\t - snl_b\n\t - snl_b0\n\t - snl_b1\n\t - snl_b2\n\t - snl_b3\n\t - snl_b4\n\t - snl_b5\n\t - snl_bvmpo\n\t - snl_bvoco\n\t - snl_c0\n\t - snl_c1\n\t - snl_c2\n\t - snl_c3\n\t - snl_dtc\n\t - snl_fd\n\t - snl_impo\n\t - snl_isco\n\t - snl_mbvmp\n\t - snl_mbvoc\n\t - snl_module_structure\n\t - snl_n\n\t - snl_series_cells\n\t - snl_vmpo\n\t - snl_voco\n"),
  	NULL},
 {"snl_ref_b", (getter)SandiaPVArrayPerformanceModelWithModuleDatabase_get_snl_ref_b,(setter)SandiaPVArrayPerformanceModelWithModuleDatabase_set_snl_ref_b,
-	PyDoc_STR("*float*: User-specified b\n\n*Required*: True if module_model=3\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - snl_a\n\t - snl_a0\n\t - snl_a1\n\t - snl_a2\n\t - snl_a3\n\t - snl_a4\n\t - snl_aimp\n\t - snl_aisc\n\t - snl_area\n\t - snl_b\n\t - snl_b0\n\t - snl_b1\n\t - snl_b2\n\t - snl_b3\n\t - snl_b4\n\t - snl_b5\n\t - snl_bvmpo\n\t - snl_bvoco\n\t - snl_c0\n\t - snl_c1\n\t - snl_c2\n\t - snl_c3\n\t - snl_dtc\n\t - snl_fd\n\t - snl_impo\n\t - snl_isco\n\t - snl_mbvmp\n\t - snl_mbvoc\n\t - snl_module_structure\n\t - snl_n\n\t - snl_series_cells\n\t - snl_vmpo\n\t - snl_voco\n"),
+	PyDoc_STR("*float*: User-specified b\n\n**Required:**\nRequired if module_model=3\n\nThe value of ``snl_ref_b`` depends on the following variables:\n\n\t - snl_a\n\t - snl_a0\n\t - snl_a1\n\t - snl_a2\n\t - snl_a3\n\t - snl_a4\n\t - snl_aimp\n\t - snl_aisc\n\t - snl_area\n\t - snl_b\n\t - snl_b0\n\t - snl_b1\n\t - snl_b2\n\t - snl_b3\n\t - snl_b4\n\t - snl_b5\n\t - snl_bvmpo\n\t - snl_bvoco\n\t - snl_c0\n\t - snl_c1\n\t - snl_c2\n\t - snl_c3\n\t - snl_dtc\n\t - snl_fd\n\t - snl_impo\n\t - snl_isco\n\t - snl_mbvmp\n\t - snl_mbvoc\n\t - snl_module_structure\n\t - snl_n\n\t - snl_series_cells\n\t - snl_vmpo\n\t - snl_voco\n"),
  	NULL},
 {"snl_ref_dT", (getter)SandiaPVArrayPerformanceModelWithModuleDatabase_get_snl_ref_dT,(setter)SandiaPVArrayPerformanceModelWithModuleDatabase_set_snl_ref_dT,
-	PyDoc_STR("*float*: User-specified dT\n\n*Required*: True if module_model=3\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - snl_a\n\t - snl_a0\n\t - snl_a1\n\t - snl_a2\n\t - snl_a3\n\t - snl_a4\n\t - snl_aimp\n\t - snl_aisc\n\t - snl_area\n\t - snl_b\n\t - snl_b0\n\t - snl_b1\n\t - snl_b2\n\t - snl_b3\n\t - snl_b4\n\t - snl_b5\n\t - snl_bvmpo\n\t - snl_bvoco\n\t - snl_c0\n\t - snl_c1\n\t - snl_c2\n\t - snl_c3\n\t - snl_dtc\n\t - snl_fd\n\t - snl_impo\n\t - snl_isco\n\t - snl_mbvmp\n\t - snl_mbvoc\n\t - snl_module_structure\n\t - snl_n\n\t - snl_series_cells\n\t - snl_vmpo\n\t - snl_voco\n"),
+	PyDoc_STR("*float*: User-specified dT\n\n**Required:**\nRequired if module_model=3\n\nThe value of ``snl_ref_dT`` depends on the following variables:\n\n\t - snl_a\n\t - snl_a0\n\t - snl_a1\n\t - snl_a2\n\t - snl_a3\n\t - snl_a4\n\t - snl_aimp\n\t - snl_aisc\n\t - snl_area\n\t - snl_b\n\t - snl_b0\n\t - snl_b1\n\t - snl_b2\n\t - snl_b3\n\t - snl_b4\n\t - snl_b5\n\t - snl_bvmpo\n\t - snl_bvoco\n\t - snl_c0\n\t - snl_c1\n\t - snl_c2\n\t - snl_c3\n\t - snl_dtc\n\t - snl_fd\n\t - snl_impo\n\t - snl_isco\n\t - snl_mbvmp\n\t - snl_mbvoc\n\t - snl_module_structure\n\t - snl_n\n\t - snl_series_cells\n\t - snl_vmpo\n\t - snl_voco\n"),
  	NULL},
 {"snl_series_cells", (getter)SandiaPVArrayPerformanceModelWithModuleDatabase_get_snl_series_cells,(setter)SandiaPVArrayPerformanceModelWithModuleDatabase_set_snl_series_cells,
-	PyDoc_STR("*float*: Number of cells in series\n\n*Constraints*: INTEGER\n\n*Required*: True if module_model=3\n\n*Changes to this variable may require updating the values of the following*: \n\t - inverter_count\n\t - snl_ref_a\n\t - snl_ref_b\n\t - snl_ref_dT\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Number of cells in series\n\n**Constraints:**\nINTEGER\n\n**Required:**\nRequired if module_model=3\n\nThe value of the following variables depends on ``snl_series_cells``:\n\n\t - inverter_count\n\t - snl_ref_a\n\t - snl_ref_b\n\t - snl_ref_dT\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
 {"snl_transient_thermal_model_unit_mass", (getter)SandiaPVArrayPerformanceModelWithModuleDatabase_get_snl_transient_thermal_model_unit_mass,(setter)SandiaPVArrayPerformanceModelWithModuleDatabase_set_snl_transient_thermal_model_unit_mass,
-	PyDoc_STR("*float*: Module unit mass [kg/m^2]\n\n*Required*: True if module_model=3"),
+	PyDoc_STR("*float*: Module unit mass [kg/m^2]\n\n**Required:**\nRequired if module_model=3"),
  	NULL},
 {"snl_vmpo", (getter)SandiaPVArrayPerformanceModelWithModuleDatabase_get_snl_vmpo,(setter)SandiaPVArrayPerformanceModelWithModuleDatabase_set_snl_vmpo,
-	PyDoc_STR("*float*: Max power point voltage\n\n*Required*: True if module_model=3\n\n*Changes to this variable may require updating the values of the following*: \n\t - inverter_count\n\t - snl_ref_a\n\t - snl_ref_b\n\t - snl_ref_dT\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Max power point voltage\n\n**Required:**\nRequired if module_model=3\n\nThe value of the following variables depends on ``snl_vmpo``:\n\n\t - inverter_count\n\t - snl_ref_a\n\t - snl_ref_b\n\t - snl_ref_dT\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
 {"snl_voco", (getter)SandiaPVArrayPerformanceModelWithModuleDatabase_get_snl_voco,(setter)SandiaPVArrayPerformanceModelWithModuleDatabase_set_snl_voco,
-	PyDoc_STR("*float*: Open circuit voltage\n\n*Required*: True if module_model=3\n\n*Changes to this variable may require updating the values of the following*: \n\t - inverter_count\n\t - snl_ref_a\n\t - snl_ref_b\n\t - snl_ref_dT\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Open circuit voltage\n\n**Required:**\nRequired if module_model=3\n\nThe value of the following variables depends on ``snl_voco``:\n\n\t - inverter_count\n\t - snl_ref_a\n\t - snl_ref_b\n\t - snl_ref_dT\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -5358,11 +5613,11 @@ IEC61853SingleDiodeModel_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef IEC61853SingleDiodeModel_methods[] = {
 		{"assign",            (PyCFunction)IEC61853SingleDiodeModel_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``IEC61853SingleDiodeModel_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``IEC61853SingleDiodeModel_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)IEC61853SingleDiodeModel_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``IEC61853SingleDiodeModel_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``IEC61853SingleDiodeModel_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)IEC61853SingleDiodeModel_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -5680,82 +5935,82 @@ IEC61853SingleDiodeModel_set_sd11par_tnoct(VarGroupObject *self, PyObject *value
 
 static PyGetSetDef IEC61853SingleDiodeModel_getset[] = {
 {"sd11par_AMa0", (getter)IEC61853SingleDiodeModel_get_sd11par_AMa0,(setter)IEC61853SingleDiodeModel_set_sd11par_AMa0,
-	PyDoc_STR("*float*: Air mass modifier coeff 0\n\n*Required*: True if module_model=4"),
+	PyDoc_STR("*float*: Air mass modifier coeff 0\n\n**Required:**\nRequired if module_model=4"),
  	NULL},
 {"sd11par_AMa1", (getter)IEC61853SingleDiodeModel_get_sd11par_AMa1,(setter)IEC61853SingleDiodeModel_set_sd11par_AMa1,
-	PyDoc_STR("*float*: Air mass modifier coeff 1\n\n*Required*: True if module_model=4"),
+	PyDoc_STR("*float*: Air mass modifier coeff 1\n\n**Required:**\nRequired if module_model=4"),
  	NULL},
 {"sd11par_AMa2", (getter)IEC61853SingleDiodeModel_get_sd11par_AMa2,(setter)IEC61853SingleDiodeModel_set_sd11par_AMa2,
-	PyDoc_STR("*float*: Air mass modifier coeff 2\n\n*Required*: True if module_model=4"),
+	PyDoc_STR("*float*: Air mass modifier coeff 2\n\n**Required:**\nRequired if module_model=4"),
  	NULL},
 {"sd11par_AMa3", (getter)IEC61853SingleDiodeModel_get_sd11par_AMa3,(setter)IEC61853SingleDiodeModel_set_sd11par_AMa3,
-	PyDoc_STR("*float*: Air mass modifier coeff 3\n\n*Required*: True if module_model=4"),
+	PyDoc_STR("*float*: Air mass modifier coeff 3\n\n**Required:**\nRequired if module_model=4"),
  	NULL},
 {"sd11par_AMa4", (getter)IEC61853SingleDiodeModel_get_sd11par_AMa4,(setter)IEC61853SingleDiodeModel_set_sd11par_AMa4,
-	PyDoc_STR("*float*: Air mass modifier coeff 4\n\n*Required*: True if module_model=4"),
+	PyDoc_STR("*float*: Air mass modifier coeff 4\n\n**Required:**\nRequired if module_model=4"),
  	NULL},
 {"sd11par_Egref", (getter)IEC61853SingleDiodeModel_get_sd11par_Egref,(setter)IEC61853SingleDiodeModel_set_sd11par_Egref,
-	PyDoc_STR("*float*: Bandgap voltage [eV]\n\n*Required*: True if module_model=4"),
+	PyDoc_STR("*float*: Bandgap voltage [eV]\n\n**Required:**\nRequired if module_model=4"),
  	NULL},
 {"sd11par_Il", (getter)IEC61853SingleDiodeModel_get_sd11par_Il,(setter)IEC61853SingleDiodeModel_set_sd11par_Il,
-	PyDoc_STR("*float*: Light current [A]\n\n*Required*: True if module_model=4"),
+	PyDoc_STR("*float*: Light current [A]\n\n**Required:**\nRequired if module_model=4"),
  	NULL},
 {"sd11par_Imp0", (getter)IEC61853SingleDiodeModel_get_sd11par_Imp0,(setter)IEC61853SingleDiodeModel_set_sd11par_Imp0,
-	PyDoc_STR("*float*: Imp (STC) [A]\n\n*Required*: True if module_model=4"),
+	PyDoc_STR("*float*: Imp (STC) [A]\n\n**Required:**\nRequired if module_model=4"),
  	NULL},
 {"sd11par_Io", (getter)IEC61853SingleDiodeModel_get_sd11par_Io,(setter)IEC61853SingleDiodeModel_set_sd11par_Io,
-	PyDoc_STR("*float*: Saturation current [A]\n\n*Required*: True if module_model=4"),
+	PyDoc_STR("*float*: Saturation current [A]\n\n**Required:**\nRequired if module_model=4"),
  	NULL},
 {"sd11par_Isc0", (getter)IEC61853SingleDiodeModel_get_sd11par_Isc0,(setter)IEC61853SingleDiodeModel_set_sd11par_Isc0,
-	PyDoc_STR("*float*: Isc (STC) [A]\n\n*Required*: True if module_model=4"),
+	PyDoc_STR("*float*: Isc (STC) [A]\n\n**Required:**\nRequired if module_model=4"),
  	NULL},
 {"sd11par_Vmp0", (getter)IEC61853SingleDiodeModel_get_sd11par_Vmp0,(setter)IEC61853SingleDiodeModel_set_sd11par_Vmp0,
-	PyDoc_STR("*float*: Vmp (STC) [V]\n\n*Required*: True if module_model=4\n\n*Changes to this variable may require updating the values of the following*: \n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Vmp (STC) [V]\n\n**Required:**\nRequired if module_model=4\n\nThe value of the following variables depends on ``sd11par_Vmp0``:\n\n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
 {"sd11par_Voc0", (getter)IEC61853SingleDiodeModel_get_sd11par_Voc0,(setter)IEC61853SingleDiodeModel_set_sd11par_Voc0,
-	PyDoc_STR("*float*: Voc (STC) [V]\n\n*Required*: True if module_model=4\n\n*Changes to this variable may require updating the values of the following*: \n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Voc (STC) [V]\n\n**Required:**\nRequired if module_model=4\n\nThe value of the following variables depends on ``sd11par_Voc0``:\n\n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
 {"sd11par_alphaIsc", (getter)IEC61853SingleDiodeModel_get_sd11par_alphaIsc,(setter)IEC61853SingleDiodeModel_set_sd11par_alphaIsc,
-	PyDoc_STR("*float*: Short curcuit current temperature coefficient [A/C]\n\n*Required*: True if module_model=4"),
+	PyDoc_STR("*float*: Short curcuit current temperature coefficient [A/C]\n\n**Required:**\nRequired if module_model=4"),
  	NULL},
 {"sd11par_area", (getter)IEC61853SingleDiodeModel_get_sd11par_area,(setter)IEC61853SingleDiodeModel_set_sd11par_area,
-	PyDoc_STR("*float*: Module area [m2]\n\n*Required*: True if module_model=4"),
+	PyDoc_STR("*float*: Module area [m2]\n\n**Required:**\nRequired if module_model=4"),
  	NULL},
 {"sd11par_c1", (getter)IEC61853SingleDiodeModel_get_sd11par_c1,(setter)IEC61853SingleDiodeModel_set_sd11par_c1,
-	PyDoc_STR("*float*: Rsh fit parameter 1\n\n*Required*: True if module_model=4"),
+	PyDoc_STR("*float*: Rsh fit parameter 1\n\n**Required:**\nRequired if module_model=4"),
  	NULL},
 {"sd11par_c2", (getter)IEC61853SingleDiodeModel_get_sd11par_c2,(setter)IEC61853SingleDiodeModel_set_sd11par_c2,
-	PyDoc_STR("*float*: Rsh fit parameter 2\n\n*Required*: True if module_model=4"),
+	PyDoc_STR("*float*: Rsh fit parameter 2\n\n**Required:**\nRequired if module_model=4"),
  	NULL},
 {"sd11par_c3", (getter)IEC61853SingleDiodeModel_get_sd11par_c3,(setter)IEC61853SingleDiodeModel_set_sd11par_c3,
-	PyDoc_STR("*float*: Rsh fit parameter 3\n\n*Required*: True if module_model=4"),
+	PyDoc_STR("*float*: Rsh fit parameter 3\n\n**Required:**\nRequired if module_model=4"),
  	NULL},
 {"sd11par_d1", (getter)IEC61853SingleDiodeModel_get_sd11par_d1,(setter)IEC61853SingleDiodeModel_set_sd11par_d1,
-	PyDoc_STR("*float*: Rs fit parameter 1\n\n*Required*: True if module_model=4"),
+	PyDoc_STR("*float*: Rs fit parameter 1\n\n**Required:**\nRequired if module_model=4"),
  	NULL},
 {"sd11par_d2", (getter)IEC61853SingleDiodeModel_get_sd11par_d2,(setter)IEC61853SingleDiodeModel_set_sd11par_d2,
-	PyDoc_STR("*float*: Rs fit parameter 2\n\n*Required*: True if module_model=4"),
+	PyDoc_STR("*float*: Rs fit parameter 2\n\n**Required:**\nRequired if module_model=4"),
  	NULL},
 {"sd11par_d3", (getter)IEC61853SingleDiodeModel_get_sd11par_d3,(setter)IEC61853SingleDiodeModel_set_sd11par_d3,
-	PyDoc_STR("*float*: Rs fit parameter 3\n\n*Required*: True if module_model=4"),
+	PyDoc_STR("*float*: Rs fit parameter 3\n\n**Required:**\nRequired if module_model=4"),
  	NULL},
 {"sd11par_glass", (getter)IEC61853SingleDiodeModel_get_sd11par_glass,(setter)IEC61853SingleDiodeModel_set_sd11par_glass,
-	PyDoc_STR("*float*: Module cover glass type\n\n*Options*: 0=normal,1=AR glass\n\n*Required*: True if module_model=4"),
+	PyDoc_STR("*float*: Module cover glass type\n\n**Options:**\n0=normal,1=AR glass\n\n**Required:**\nRequired if module_model=4"),
  	NULL},
 {"sd11par_mounting", (getter)IEC61853SingleDiodeModel_get_sd11par_mounting,(setter)IEC61853SingleDiodeModel_set_sd11par_mounting,
-	PyDoc_STR("*float*: Array mounting height\n\n*Options*: 0=one story,1=two story\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: True if module_model=4"),
+	PyDoc_STR("*float*: Array mounting height\n\n**Options:**\n0=one story,1=two story\n\n**Constraints:**\nINTEGER,MIN=0,MAX=1\n\n**Required:**\nRequired if module_model=4"),
  	NULL},
 {"sd11par_n", (getter)IEC61853SingleDiodeModel_get_sd11par_n,(setter)IEC61853SingleDiodeModel_set_sd11par_n,
-	PyDoc_STR("*float*: Diode nonideality factor\n\n*Required*: True if module_model=4"),
+	PyDoc_STR("*float*: Diode nonideality factor\n\n**Required:**\nRequired if module_model=4"),
  	NULL},
 {"sd11par_nser", (getter)IEC61853SingleDiodeModel_get_sd11par_nser,(setter)IEC61853SingleDiodeModel_set_sd11par_nser,
-	PyDoc_STR("*float*: Nseries\n\n*Constraints*: INTEGER,POSITIVE\n\n*Required*: True if module_model=4"),
+	PyDoc_STR("*float*: Nseries\n\n**Constraints:**\nINTEGER,POSITIVE\n\n**Required:**\nRequired if module_model=4"),
  	NULL},
 {"sd11par_standoff", (getter)IEC61853SingleDiodeModel_get_sd11par_standoff,(setter)IEC61853SingleDiodeModel_set_sd11par_standoff,
-	PyDoc_STR("*float*: Standoff mode\n\n*Options*: 0=bipv,1=>3.5in,2=2.5-3.5in,3=1.5-2.5in,4=0.5-1.5in,5=<0.5in,6=ground/rack\n\n*Constraints*: INTEGER,MIN=0,MAX=6\n\n*Required*: True if module_model=4"),
+	PyDoc_STR("*float*: Standoff mode\n\n**Options:**\n0=bipv,1=>3.5in,2=2.5-3.5in,3=1.5-2.5in,4=0.5-1.5in,5=<0.5in,6=ground/rack\n\n**Constraints:**\nINTEGER,MIN=0,MAX=6\n\n**Required:**\nRequired if module_model=4"),
  	NULL},
 {"sd11par_tnoct", (getter)IEC61853SingleDiodeModel_get_sd11par_tnoct,(setter)IEC61853SingleDiodeModel_set_sd11par_tnoct,
-	PyDoc_STR("*float*: Nominal operating cell temperature [C]\n\n*Required*: True if module_model=4"),
+	PyDoc_STR("*float*: Nominal operating cell temperature [C]\n\n**Required:**\nRequired if module_model=4"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -5870,11 +6125,11 @@ MermoudLejeuneSingleDiodeModel_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef MermoudLejeuneSingleDiodeModel_methods[] = {
 		{"assign",            (PyCFunction)MermoudLejeuneSingleDiodeModel_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``MermoudLejeuneSingleDiodeModel_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``MermoudLejeuneSingleDiodeModel_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)MermoudLejeuneSingleDiodeModel_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``MermoudLejeuneSingleDiodeModel_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``MermoudLejeuneSingleDiodeModel_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)MermoudLejeuneSingleDiodeModel_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -6540,169 +6795,169 @@ MermoudLejeuneSingleDiodeModel_set_mlm_n_0(VarGroupObject *self, PyObject *value
 
 static PyGetSetDef MermoudLejeuneSingleDiodeModel_getset[] = {
 {"mlm_AM_c_lp0", (getter)MermoudLejeuneSingleDiodeModel_get_mlm_AM_c_lp0,(setter)MermoudLejeuneSingleDiodeModel_set_mlm_AM_c_lp0,
-	PyDoc_STR("*float*: Coefficient 0 for Lee/Panchula Air Mass Modifier [-]\n\n*Required*: True if module_model=5"),
+	PyDoc_STR("*float*: Coefficient 0 for Lee/Panchula Air Mass Modifier [-]\n\n**Required:**\nRequired if module_model=5"),
  	NULL},
 {"mlm_AM_c_lp1", (getter)MermoudLejeuneSingleDiodeModel_get_mlm_AM_c_lp1,(setter)MermoudLejeuneSingleDiodeModel_set_mlm_AM_c_lp1,
-	PyDoc_STR("*float*: Coefficient 1 for Lee/Panchula Air Mass Modifier [-]\n\n*Required*: True if module_model=5"),
+	PyDoc_STR("*float*: Coefficient 1 for Lee/Panchula Air Mass Modifier [-]\n\n**Required:**\nRequired if module_model=5"),
  	NULL},
 {"mlm_AM_c_lp2", (getter)MermoudLejeuneSingleDiodeModel_get_mlm_AM_c_lp2,(setter)MermoudLejeuneSingleDiodeModel_set_mlm_AM_c_lp2,
-	PyDoc_STR("*float*: Coefficient 2 for Lee/Panchula Air Mass Modifier [-]\n\n*Required*: True if module_model=5"),
+	PyDoc_STR("*float*: Coefficient 2 for Lee/Panchula Air Mass Modifier [-]\n\n**Required:**\nRequired if module_model=5"),
  	NULL},
 {"mlm_AM_c_lp3", (getter)MermoudLejeuneSingleDiodeModel_get_mlm_AM_c_lp3,(setter)MermoudLejeuneSingleDiodeModel_set_mlm_AM_c_lp3,
-	PyDoc_STR("*float*: Coefficient 3 for Lee/Panchula Air Mass Modifier [-]\n\n*Required*: True if module_model=5"),
+	PyDoc_STR("*float*: Coefficient 3 for Lee/Panchula Air Mass Modifier [-]\n\n**Required:**\nRequired if module_model=5"),
  	NULL},
 {"mlm_AM_c_lp4", (getter)MermoudLejeuneSingleDiodeModel_get_mlm_AM_c_lp4,(setter)MermoudLejeuneSingleDiodeModel_set_mlm_AM_c_lp4,
-	PyDoc_STR("*float*: Coefficient 4 for Lee/Panchula Air Mass Modifier [-]\n\n*Required*: True if module_model=5"),
+	PyDoc_STR("*float*: Coefficient 4 for Lee/Panchula Air Mass Modifier [-]\n\n**Required:**\nRequired if module_model=5"),
  	NULL},
 {"mlm_AM_c_lp5", (getter)MermoudLejeuneSingleDiodeModel_get_mlm_AM_c_lp5,(setter)MermoudLejeuneSingleDiodeModel_set_mlm_AM_c_lp5,
-	PyDoc_STR("*float*: Coefficient 5 for Lee/Panchula Air Mass Modifier [-]\n\n*Required*: True if module_model=5"),
+	PyDoc_STR("*float*: Coefficient 5 for Lee/Panchula Air Mass Modifier [-]\n\n**Required:**\nRequired if module_model=5"),
  	NULL},
 {"mlm_AM_c_sa0", (getter)MermoudLejeuneSingleDiodeModel_get_mlm_AM_c_sa0,(setter)MermoudLejeuneSingleDiodeModel_set_mlm_AM_c_sa0,
-	PyDoc_STR("*float*: Coefficient 0 for Sandia Air Mass Modifier [-]\n\n*Required*: True if module_model=5"),
+	PyDoc_STR("*float*: Coefficient 0 for Sandia Air Mass Modifier [-]\n\n**Required:**\nRequired if module_model=5"),
  	NULL},
 {"mlm_AM_c_sa1", (getter)MermoudLejeuneSingleDiodeModel_get_mlm_AM_c_sa1,(setter)MermoudLejeuneSingleDiodeModel_set_mlm_AM_c_sa1,
-	PyDoc_STR("*float*: Coefficient 1 for Sandia Air Mass Modifier [-]\n\n*Required*: True if module_model=5"),
+	PyDoc_STR("*float*: Coefficient 1 for Sandia Air Mass Modifier [-]\n\n**Required:**\nRequired if module_model=5"),
  	NULL},
 {"mlm_AM_c_sa2", (getter)MermoudLejeuneSingleDiodeModel_get_mlm_AM_c_sa2,(setter)MermoudLejeuneSingleDiodeModel_set_mlm_AM_c_sa2,
-	PyDoc_STR("*float*: Coefficient 2 for Sandia Air Mass Modifier [-]\n\n*Required*: True if module_model=5"),
+	PyDoc_STR("*float*: Coefficient 2 for Sandia Air Mass Modifier [-]\n\n**Required:**\nRequired if module_model=5"),
  	NULL},
 {"mlm_AM_c_sa3", (getter)MermoudLejeuneSingleDiodeModel_get_mlm_AM_c_sa3,(setter)MermoudLejeuneSingleDiodeModel_set_mlm_AM_c_sa3,
-	PyDoc_STR("*float*: Coefficient 3 for Sandia Air Mass Modifier [-]\n\n*Required*: True if module_model=5"),
+	PyDoc_STR("*float*: Coefficient 3 for Sandia Air Mass Modifier [-]\n\n**Required:**\nRequired if module_model=5"),
  	NULL},
 {"mlm_AM_c_sa4", (getter)MermoudLejeuneSingleDiodeModel_get_mlm_AM_c_sa4,(setter)MermoudLejeuneSingleDiodeModel_set_mlm_AM_c_sa4,
-	PyDoc_STR("*float*: Coefficient 4 for Sandia Air Mass Modifier [-]\n\n*Required*: True if module_model=5"),
+	PyDoc_STR("*float*: Coefficient 4 for Sandia Air Mass Modifier [-]\n\n**Required:**\nRequired if module_model=5"),
  	NULL},
 {"mlm_AM_mode", (getter)MermoudLejeuneSingleDiodeModel_get_mlm_AM_mode,(setter)MermoudLejeuneSingleDiodeModel_set_mlm_AM_mode,
-	PyDoc_STR("*float*: Air-mass modifier mode [-]\n\n*Options*: 1: Do not consider AM effects, 2: Use Sandia polynomial [corr=f(AM)], 3: Use standard coefficients from DeSoto model [corr=f(AM)], 4: Use First Solar polynomial [corr=f(AM, p_wat)]\n\n*Required*: True if module_model=5"),
+	PyDoc_STR("*float*: Air-mass modifier mode [-]\n\n**Options:**\n1: Do not consider AM effects, 2: Use Sandia polynomial [corr=f(AM)], 3: Use standard coefficients from DeSoto model [corr=f(AM)], 4: Use First Solar polynomial [corr=f(AM, p_wat)]\n\n**Required:**\nRequired if module_model=5"),
  	NULL},
 {"mlm_D2MuTau", (getter)MermoudLejeuneSingleDiodeModel_get_mlm_D2MuTau,(setter)MermoudLejeuneSingleDiodeModel_set_mlm_D2MuTau,
-	PyDoc_STR("*float*: Coefficient for recombination losses [V]\n\n*Required*: True if module_model=5"),
+	PyDoc_STR("*float*: Coefficient for recombination losses [V]\n\n**Required:**\nRequired if module_model=5"),
  	NULL},
 {"mlm_E_g", (getter)MermoudLejeuneSingleDiodeModel_get_mlm_E_g,(setter)MermoudLejeuneSingleDiodeModel_set_mlm_E_g,
-	PyDoc_STR("*float*: Reference bandgap energy [eV]\n\n*Required*: True if module_model=5"),
+	PyDoc_STR("*float*: Reference bandgap energy [eV]\n\n**Required:**\nRequired if module_model=5"),
  	NULL},
 {"mlm_IAM_c_as", (getter)MermoudLejeuneSingleDiodeModel_get_mlm_IAM_c_as,(setter)MermoudLejeuneSingleDiodeModel_set_mlm_IAM_c_as,
-	PyDoc_STR("*float*: ASHRAE incidence modifier coefficient b_0 [-]\n\n*Required*: True if module_model=5"),
+	PyDoc_STR("*float*: ASHRAE incidence modifier coefficient b_0 [-]\n\n**Required:**\nRequired if module_model=5"),
  	NULL},
 {"mlm_IAM_c_cs_iamValue", (getter)MermoudLejeuneSingleDiodeModel_get_mlm_IAM_c_cs_iamValue,(setter)MermoudLejeuneSingleDiodeModel_set_mlm_IAM_c_cs_iamValue,
-	PyDoc_STR("*sequence*: Spline IAM - IAM values [-]\n\n*Required*: True if module_model=5"),
+	PyDoc_STR("*sequence*: Spline IAM - IAM values [-]\n\n**Required:**\nRequired if module_model=5"),
  	NULL},
 {"mlm_IAM_c_cs_incAngle", (getter)MermoudLejeuneSingleDiodeModel_get_mlm_IAM_c_cs_incAngle,(setter)MermoudLejeuneSingleDiodeModel_set_mlm_IAM_c_cs_incAngle,
-	PyDoc_STR("*sequence*: Spline IAM - Incidence angles [deg]\n\n*Required*: True if module_model=5"),
+	PyDoc_STR("*sequence*: Spline IAM - Incidence angles [degrees]\n\n**Required:**\nRequired if module_model=5"),
  	NULL},
 {"mlm_IAM_c_sa0", (getter)MermoudLejeuneSingleDiodeModel_get_mlm_IAM_c_sa0,(setter)MermoudLejeuneSingleDiodeModel_set_mlm_IAM_c_sa0,
-	PyDoc_STR("*float*: Sandia IAM coefficient 0 [-]\n\n*Required*: True if module_model=5"),
+	PyDoc_STR("*float*: Sandia IAM coefficient 0 [-]\n\n**Required:**\nRequired if module_model=5"),
  	NULL},
 {"mlm_IAM_c_sa1", (getter)MermoudLejeuneSingleDiodeModel_get_mlm_IAM_c_sa1,(setter)MermoudLejeuneSingleDiodeModel_set_mlm_IAM_c_sa1,
-	PyDoc_STR("*float*: Sandia IAM coefficient 1 [-]\n\n*Required*: True if module_model=5"),
+	PyDoc_STR("*float*: Sandia IAM coefficient 1 [-]\n\n**Required:**\nRequired if module_model=5"),
  	NULL},
 {"mlm_IAM_c_sa2", (getter)MermoudLejeuneSingleDiodeModel_get_mlm_IAM_c_sa2,(setter)MermoudLejeuneSingleDiodeModel_set_mlm_IAM_c_sa2,
-	PyDoc_STR("*float*: Sandia IAM coefficient 2 [-]\n\n*Required*: True if module_model=5"),
+	PyDoc_STR("*float*: Sandia IAM coefficient 2 [-]\n\n**Required:**\nRequired if module_model=5"),
  	NULL},
 {"mlm_IAM_c_sa3", (getter)MermoudLejeuneSingleDiodeModel_get_mlm_IAM_c_sa3,(setter)MermoudLejeuneSingleDiodeModel_set_mlm_IAM_c_sa3,
-	PyDoc_STR("*float*: Sandia IAM coefficient 3 [-]\n\n*Required*: True if module_model=5"),
+	PyDoc_STR("*float*: Sandia IAM coefficient 3 [-]\n\n**Required:**\nRequired if module_model=5"),
  	NULL},
 {"mlm_IAM_c_sa4", (getter)MermoudLejeuneSingleDiodeModel_get_mlm_IAM_c_sa4,(setter)MermoudLejeuneSingleDiodeModel_set_mlm_IAM_c_sa4,
-	PyDoc_STR("*float*: Sandia IAM coefficient 4 [-]\n\n*Required*: True if module_model=5"),
+	PyDoc_STR("*float*: Sandia IAM coefficient 4 [-]\n\n**Required:**\nRequired if module_model=5"),
  	NULL},
 {"mlm_IAM_c_sa5", (getter)MermoudLejeuneSingleDiodeModel_get_mlm_IAM_c_sa5,(setter)MermoudLejeuneSingleDiodeModel_set_mlm_IAM_c_sa5,
-	PyDoc_STR("*float*: Sandia IAM coefficient 5 [-]\n\n*Required*: True if module_model=5"),
+	PyDoc_STR("*float*: Sandia IAM coefficient 5 [-]\n\n**Required:**\nRequired if module_model=5"),
  	NULL},
 {"mlm_IAM_mode", (getter)MermoudLejeuneSingleDiodeModel_get_mlm_IAM_mode,(setter)MermoudLejeuneSingleDiodeModel_set_mlm_IAM_mode,
-	PyDoc_STR("*float*: Incidence Angle Modifier mode [-]\n\n*Info*: 1: Use ASHRAE formula, 2: Use Sandia polynomial, 3: Use cubic spline with user-supplied data\n\n*Required*: True if module_model=5"),
+	PyDoc_STR("*float*: Incidence Angle Modifier mode [-]\n\n**Info:**\n1: Use ASHRAE formula, 2: Use Sandia polynomial, 3: Use cubic spline with user-supplied data\n\n**Required:**\nRequired if module_model=5"),
  	NULL},
 {"mlm_I_mp_ref", (getter)MermoudLejeuneSingleDiodeModel_get_mlm_I_mp_ref,(setter)MermoudLejeuneSingleDiodeModel_set_mlm_I_mp_ref,
-	PyDoc_STR("*float*: I_mp at STC [A]\n\n*Required*: True if module_model=5"),
+	PyDoc_STR("*float*: I_mp at STC [A]\n\n**Required:**\nRequired if module_model=5"),
  	NULL},
 {"mlm_I_sc_ref", (getter)MermoudLejeuneSingleDiodeModel_get_mlm_I_sc_ref,(setter)MermoudLejeuneSingleDiodeModel_set_mlm_I_sc_ref,
-	PyDoc_STR("*float*: I_sc at STC [A]\n\n*Required*: True if module_model=5"),
+	PyDoc_STR("*float*: I_sc at STC [A]\n\n**Required:**\nRequired if module_model=5"),
  	NULL},
 {"mlm_Length", (getter)MermoudLejeuneSingleDiodeModel_get_mlm_Length,(setter)MermoudLejeuneSingleDiodeModel_set_mlm_Length,
-	PyDoc_STR("*float*: Module length (long side) [m]\n\n*Required*: True if module_model=5"),
+	PyDoc_STR("*float*: Module length (long side) [m]\n\n**Required:**\nRequired if module_model=5"),
  	NULL},
 {"mlm_N_diodes", (getter)MermoudLejeuneSingleDiodeModel_get_mlm_N_diodes,(setter)MermoudLejeuneSingleDiodeModel_set_mlm_N_diodes,
-	PyDoc_STR("*float*: Number of diodes [-]\n\n*Required*: True if module_model=5"),
+	PyDoc_STR("*float*: Number of diodes [-]\n\n**Required:**\nRequired if module_model=5"),
  	NULL},
 {"mlm_N_parallel", (getter)MermoudLejeuneSingleDiodeModel_get_mlm_N_parallel,(setter)MermoudLejeuneSingleDiodeModel_set_mlm_N_parallel,
-	PyDoc_STR("*float*: Number of cells in parallel [-]\n\n*Required*: True if module_model=5"),
+	PyDoc_STR("*float*: Number of cells in parallel [-]\n\n**Required:**\nRequired if module_model=5"),
  	NULL},
 {"mlm_N_series", (getter)MermoudLejeuneSingleDiodeModel_get_mlm_N_series,(setter)MermoudLejeuneSingleDiodeModel_set_mlm_N_series,
-	PyDoc_STR("*float*: Number of cells in series [-]\n\n*Required*: True if module_model=5"),
+	PyDoc_STR("*float*: Number of cells in series [-]\n\n**Required:**\nRequired if module_model=5"),
  	NULL},
 {"mlm_R_s", (getter)MermoudLejeuneSingleDiodeModel_get_mlm_R_s,(setter)MermoudLejeuneSingleDiodeModel_set_mlm_R_s,
-	PyDoc_STR("*float*: Series resistance [V/A]\n\n*Required*: True if module_model=5"),
+	PyDoc_STR("*float*: Series resistance [V/A]\n\n**Required:**\nRequired if module_model=5"),
  	NULL},
 {"mlm_R_sh0", (getter)MermoudLejeuneSingleDiodeModel_get_mlm_R_sh0,(setter)MermoudLejeuneSingleDiodeModel_set_mlm_R_sh0,
-	PyDoc_STR("*float*: Rsh,0 [V/A]\n\n*Required*: True if module_model=5"),
+	PyDoc_STR("*float*: Rsh,0 [V/A]\n\n**Required:**\nRequired if module_model=5"),
  	NULL},
 {"mlm_R_shexp", (getter)MermoudLejeuneSingleDiodeModel_get_mlm_R_shexp,(setter)MermoudLejeuneSingleDiodeModel_set_mlm_R_shexp,
-	PyDoc_STR("*float*: Rsh exponential coefficient [-]\n\n*Required*: True if module_model=5"),
+	PyDoc_STR("*float*: Rsh exponential coefficient [-]\n\n**Required:**\nRequired if module_model=5"),
  	NULL},
 {"mlm_R_shref", (getter)MermoudLejeuneSingleDiodeModel_get_mlm_R_shref,(setter)MermoudLejeuneSingleDiodeModel_set_mlm_R_shref,
-	PyDoc_STR("*float*: Reference shunt resistance [V/A]\n\n*Required*: True if module_model=5"),
+	PyDoc_STR("*float*: Reference shunt resistance [V/A]\n\n**Required:**\nRequired if module_model=5"),
  	NULL},
 {"mlm_S_ref", (getter)MermoudLejeuneSingleDiodeModel_get_mlm_S_ref,(setter)MermoudLejeuneSingleDiodeModel_set_mlm_S_ref,
-	PyDoc_STR("*float*: Reference irradiance (Typically 1000W/m²) [W/m²]\n\n*Required*: True if module_model=5"),
+	PyDoc_STR("*float*: Reference irradiance (Typically 1000W/m²) [W/m²]\n\n**Required:**\nRequired if module_model=5"),
  	NULL},
 {"mlm_T_c_fa_U0", (getter)MermoudLejeuneSingleDiodeModel_get_mlm_T_c_fa_U0,(setter)MermoudLejeuneSingleDiodeModel_set_mlm_T_c_fa_U0,
-	PyDoc_STR("*float*: Extended Faiman model U_0 [W/m²K]\n\n*Required*: True if module_model=5"),
+	PyDoc_STR("*float*: Extended Faiman model U_0 [W/m²K]\n\n**Required:**\nRequired if module_model=5"),
  	NULL},
 {"mlm_T_c_fa_U1", (getter)MermoudLejeuneSingleDiodeModel_get_mlm_T_c_fa_U1,(setter)MermoudLejeuneSingleDiodeModel_set_mlm_T_c_fa_U1,
-	PyDoc_STR("*float*: Extended Faiman model U_1 [W/m³sK]\n\n*Required*: True if module_model=5"),
+	PyDoc_STR("*float*: Extended Faiman model U_1 [W/m³sK]\n\n**Required:**\nRequired if module_model=5"),
  	NULL},
 {"mlm_T_c_fa_alpha", (getter)MermoudLejeuneSingleDiodeModel_get_mlm_T_c_fa_alpha,(setter)MermoudLejeuneSingleDiodeModel_set_mlm_T_c_fa_alpha,
-	PyDoc_STR("*float*: Extended Faiman model absorptivity [-]\n\n*Required*: True if module_model=5"),
+	PyDoc_STR("*float*: Extended Faiman model absorptivity [-]\n\n**Required:**\nRequired if module_model=5"),
  	NULL},
 {"mlm_T_c_no_mounting", (getter)MermoudLejeuneSingleDiodeModel_get_mlm_T_c_no_mounting,(setter)MermoudLejeuneSingleDiodeModel_set_mlm_T_c_no_mounting,
-	PyDoc_STR("*float*: NOCT Array mounting height [-]\n\n*Options*: 0=one story,1=two story\n\n*Required*: True if module_model=5"),
+	PyDoc_STR("*float*: NOCT Array mounting height [-]\n\n**Options:**\n0=one story,1=two story\n\n**Required:**\nRequired if module_model=5"),
  	NULL},
 {"mlm_T_c_no_standoff", (getter)MermoudLejeuneSingleDiodeModel_get_mlm_T_c_no_standoff,(setter)MermoudLejeuneSingleDiodeModel_set_mlm_T_c_no_standoff,
-	PyDoc_STR("*float*: NOCT standoff mode [-]\n\n*Options*: 0=bipv,1=>3.5in,2=2.5-3.5in,3=1.5-2.5in,4=0.5-1.5in,5=<0.5in,6=ground/rack\n\n*Required*: True if module_model=5"),
+	PyDoc_STR("*float*: NOCT standoff mode [-]\n\n**Options:**\n0=bipv,1=>3.5in,2=2.5-3.5in,3=1.5-2.5in,4=0.5-1.5in,5=<0.5in,6=ground/rack\n\n**Required:**\nRequired if module_model=5"),
  	NULL},
 {"mlm_T_c_no_tnoct", (getter)MermoudLejeuneSingleDiodeModel_get_mlm_T_c_no_tnoct,(setter)MermoudLejeuneSingleDiodeModel_set_mlm_T_c_no_tnoct,
-	PyDoc_STR("*float*: NOCT cell temperature [°C]\n\n*Required*: True if module_model=5"),
+	PyDoc_STR("*float*: NOCT cell temperature [°C]\n\n**Required:**\nRequired if module_model=5"),
  	NULL},
 {"mlm_T_mode", (getter)MermoudLejeuneSingleDiodeModel_get_mlm_T_mode,(setter)MermoudLejeuneSingleDiodeModel_set_mlm_T_mode,
-	PyDoc_STR("*float*: Cell temperature model mode [-]\n\n*Info*: 1: NOCT\n\n*Required*: True if module_model=5"),
+	PyDoc_STR("*float*: Cell temperature model mode [-]\n\n**Info:**\n1: NOCT\n\n**Required:**\nRequired if module_model=5"),
  	NULL},
 {"mlm_T_ref", (getter)MermoudLejeuneSingleDiodeModel_get_mlm_T_ref,(setter)MermoudLejeuneSingleDiodeModel_set_mlm_T_ref,
-	PyDoc_STR("*float*: Reference temperature (Typically 25°C) [°C]\n\n*Required*: True if module_model=5"),
+	PyDoc_STR("*float*: Reference temperature (Typically 25°C) [°C]\n\n**Required:**\nRequired if module_model=5"),
  	NULL},
 {"mlm_V_mp_ref", (getter)MermoudLejeuneSingleDiodeModel_get_mlm_V_mp_ref,(setter)MermoudLejeuneSingleDiodeModel_set_mlm_V_mp_ref,
-	PyDoc_STR("*float*: V_mp at STC [V]\n\n*Required*: True if module_model=5"),
+	PyDoc_STR("*float*: V_mp at STC [V]\n\n**Required:**\nRequired if module_model=5"),
  	NULL},
 {"mlm_V_oc_ref", (getter)MermoudLejeuneSingleDiodeModel_get_mlm_V_oc_ref,(setter)MermoudLejeuneSingleDiodeModel_set_mlm_V_oc_ref,
-	PyDoc_STR("*float*: V_oc at STC [V]\n\n*Required*: True if module_model=5"),
+	PyDoc_STR("*float*: V_oc at STC [V]\n\n**Required:**\nRequired if module_model=5"),
  	NULL},
 {"mlm_Width", (getter)MermoudLejeuneSingleDiodeModel_get_mlm_Width,(setter)MermoudLejeuneSingleDiodeModel_set_mlm_Width,
-	PyDoc_STR("*float*: Module width (short side) [m]\n\n*Required*: True if module_model=5"),
+	PyDoc_STR("*float*: Module width (short side) [m]\n\n**Required:**\nRequired if module_model=5"),
  	NULL},
 {"mlm_alpha_isc", (getter)MermoudLejeuneSingleDiodeModel_get_mlm_alpha_isc,(setter)MermoudLejeuneSingleDiodeModel_set_mlm_alpha_isc,
-	PyDoc_STR("*float*: Temperature coefficient for I_sc [A/K]\n\n*Required*: True if module_model=5"),
+	PyDoc_STR("*float*: Temperature coefficient for I_sc [A/K]\n\n**Required:**\nRequired if module_model=5"),
  	NULL},
 {"mlm_beta_voc_spec", (getter)MermoudLejeuneSingleDiodeModel_get_mlm_beta_voc_spec,(setter)MermoudLejeuneSingleDiodeModel_set_mlm_beta_voc_spec,
-	PyDoc_STR("*float*: Temperature coefficient for V_oc [V/K]\n\n*Required*: True if module_model=5"),
+	PyDoc_STR("*float*: Temperature coefficient for V_oc [V/K]\n\n**Required:**\nRequired if module_model=5"),
  	NULL},
 {"mlm_bifacial_ground_clearance_height", (getter)MermoudLejeuneSingleDiodeModel_get_mlm_bifacial_ground_clearance_height,(setter)MermoudLejeuneSingleDiodeModel_set_mlm_bifacial_ground_clearance_height,
-	PyDoc_STR("*float*: Module ground clearance height [m]\n\n*Required*: True if module_model=5"),
+	PyDoc_STR("*float*: Module ground clearance height [m]\n\n**Required:**\nRequired if module_model=5"),
  	NULL},
 {"mlm_bifacial_transmission_factor", (getter)MermoudLejeuneSingleDiodeModel_get_mlm_bifacial_transmission_factor,(setter)MermoudLejeuneSingleDiodeModel_set_mlm_bifacial_transmission_factor,
-	PyDoc_STR("*float*: Bifacial transmission factor [0-1]\n\n*Required*: True if module_model=5"),
+	PyDoc_STR("*float*: Bifacial transmission factor [0-1]\n\n**Constraints:**\nMIN=0,MAX=1\n\n**Required:**\nRequired if module_model=5"),
  	NULL},
 {"mlm_bifaciality", (getter)MermoudLejeuneSingleDiodeModel_get_mlm_bifaciality,(setter)MermoudLejeuneSingleDiodeModel_set_mlm_bifaciality,
-	PyDoc_STR("*float*: Bifaciality factor [%]\n\n*Required*: True if module_model=5"),
+	PyDoc_STR("*float*: Bifaciality factor [%]\n\n**Required:**\nRequired if module_model=5"),
  	NULL},
 {"mlm_groundRelfectionFraction", (getter)MermoudLejeuneSingleDiodeModel_get_mlm_groundRelfectionFraction,(setter)MermoudLejeuneSingleDiodeModel_set_mlm_groundRelfectionFraction,
-	PyDoc_STR("*float*: Ground reflection fraction [-]\n\n*Required*: True if module_model=5"),
+	PyDoc_STR("*float*: Ground reflection fraction [-]\n\n**Required:**\nRequired if module_model=5"),
  	NULL},
 {"mlm_is_bifacial", (getter)MermoudLejeuneSingleDiodeModel_get_mlm_is_bifacial,(setter)MermoudLejeuneSingleDiodeModel_set_mlm_is_bifacial,
-	PyDoc_STR("*float*: Modules are bifacial [0/1]\n\n*Required*: True if module_model=5"),
+	PyDoc_STR("*float*: Modules are bifacial [0/1]\n\n**Options:**\n0=monofacial,1=bifacial\n\n**Constraints:**\nINTEGER,MIN=0,MAX=1\n\n**Required:**\nRequired if module_model=5"),
  	NULL},
 {"mlm_mu_n", (getter)MermoudLejeuneSingleDiodeModel_get_mlm_mu_n,(setter)MermoudLejeuneSingleDiodeModel_set_mlm_mu_n,
-	PyDoc_STR("*float*: Temperature coefficient of gamma [1/K]\n\n*Required*: True if module_model=5"),
+	PyDoc_STR("*float*: Temperature coefficient of gamma [1/K]\n\n**Required:**\nRequired if module_model=5"),
  	NULL},
 {"mlm_n_0", (getter)MermoudLejeuneSingleDiodeModel_get_mlm_n_0,(setter)MermoudLejeuneSingleDiodeModel_set_mlm_n_0,
-	PyDoc_STR("*float*: Gamma [-]\n\n*Required*: True if module_model=5"),
+	PyDoc_STR("*float*: Gamma [-]\n\n**Required:**\nRequired if module_model=5"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -6817,11 +7072,11 @@ Inverter_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Inverter_methods[] = {
 		{"assign",            (PyCFunction)Inverter_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Inverter_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Inverter_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Inverter_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Inverter_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Inverter_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Inverter_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -6983,43 +7238,43 @@ Inverter_set_mppt_low_inverter(VarGroupObject *self, PyObject *value, void *clos
 
 static PyGetSetDef Inverter_getset[] = {
 {"inv_cec_cg_eff_cec", (getter)Inverter_get_inv_cec_cg_eff_cec,(setter)Inverter_set_inv_cec_cg_eff_cec,
-	PyDoc_STR("*float*: Inverter Coefficient Generator CEC Efficiency [%]\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - inv_cec_cg_c0\n\t - inv_cec_cg_c1\n\t - inv_cec_cg_c2\n\t - inv_cec_cg_c3\n\t - inv_cec_cg_paco\n\t - inv_cec_cg_pdco\n\t - inv_cec_cg_psco\n\t - inv_cec_cg_vdco\n"),
+	PyDoc_STR("*float*: Inverter Coefficient Generator CEC Efficiency [%]\n\nThe value of ``inv_cec_cg_eff_cec`` depends on the following variables:\n\n\t - inv_cec_cg_c0\n\t - inv_cec_cg_c1\n\t - inv_cec_cg_c2\n\t - inv_cec_cg_c3\n\t - inv_cec_cg_paco\n\t - inv_cec_cg_pdco\n\t - inv_cec_cg_psco\n\t - inv_cec_cg_vdco\n"),
  	NULL},
 {"inv_cec_cg_paco", (getter)Inverter_get_inv_cec_cg_paco,(setter)Inverter_set_inv_cec_cg_paco,
-	PyDoc_STR("*float*: Inverter Coefficient Generator Max AC Power [Wac]\n\n*Changes to this variable may require updating the values of the following*: \n\t - inv_cec_cg_eff_cec\n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Inverter Coefficient Generator Max AC Power [Wac]\n\nThe value of the following variables depends on ``inv_cec_cg_paco``:\n\n\t - inv_cec_cg_eff_cec\n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
 {"inv_ds_eff", (getter)Inverter_get_inv_ds_eff,(setter)Inverter_set_inv_ds_eff,
 	PyDoc_STR("*float*: Inverter Datasheet Efficiency [%]"),
  	NULL},
 {"inv_ds_paco", (getter)Inverter_get_inv_ds_paco,(setter)Inverter_set_inv_ds_paco,
-	PyDoc_STR("*float*: Inverter Datasheet Maximum AC Power [Wac]\n\n*Changes to this variable may require updating the values of the following*: \n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Inverter Datasheet Maximum AC Power [Wac]\n\nThe value of the following variables depends on ``inv_ds_paco``:\n\n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
 {"inv_num_mppt", (getter)Inverter_get_inv_num_mppt,(setter)Inverter_set_inv_num_mppt,
-	PyDoc_STR("*float*: Number of MPPT inputs\n\n*Constraints*: INTEGER,MIN=0,MAX=4\n\n*Required*: If not provided, assumed to be 1\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - inverter_model\n"),
+	PyDoc_STR("*float*: Number of MPPT inputs\n\n**Constraints:**\nINTEGER,MIN=0,MAX=4\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults.\n\nThe value of ``inv_num_mppt`` depends on the following variables:\n\n\t - inverter_model\n"),
  	NULL},
 {"inv_pd_eff", (getter)Inverter_get_inv_pd_eff,(setter)Inverter_set_inv_pd_eff,
-	PyDoc_STR("*float*: Inverter Partload Efficiency [%]\n\n*Changes to this variable may require updating the values of the following*: \n\t - inv_pd_pdco\n"),
+	PyDoc_STR("*float*: Inverter Partload Efficiency [%]\n\nThe value of the following variables depends on ``inv_pd_eff``:\n\n\t - inv_pd_pdco\n"),
  	NULL},
 {"inv_pd_paco", (getter)Inverter_get_inv_pd_paco,(setter)Inverter_set_inv_pd_paco,
-	PyDoc_STR("*float*: Inverter Partload Maximum AC Power [Wac]\n\n*Changes to this variable may require updating the values of the following*: \n\t - inv_pd_pdco\n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Inverter Partload Maximum AC Power [Wac]\n\nThe value of the following variables depends on ``inv_pd_paco``:\n\n\t - inv_pd_pdco\n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
 {"inv_snl_eff_cec", (getter)Inverter_get_inv_snl_eff_cec,(setter)Inverter_set_inv_snl_eff_cec,
-	PyDoc_STR("*float*: Inverter Sandia CEC Efficiency [%]\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - inv_snl_c0\n\t - inv_snl_c1\n\t - inv_snl_c2\n\t - inv_snl_c3\n\t - inv_snl_paco\n\t - inv_snl_pdco\n\t - inv_snl_pso\n\t - inv_snl_vdco\n"),
+	PyDoc_STR("*float*: Inverter Sandia CEC Efficiency [%]\n\nThe value of ``inv_snl_eff_cec`` depends on the following variables:\n\n\t - inv_snl_c0\n\t - inv_snl_c1\n\t - inv_snl_c2\n\t - inv_snl_c3\n\t - inv_snl_paco\n\t - inv_snl_pdco\n\t - inv_snl_pso\n\t - inv_snl_vdco\n"),
  	NULL},
 {"inv_snl_paco", (getter)Inverter_get_inv_snl_paco,(setter)Inverter_set_inv_snl_paco,
-	PyDoc_STR("*float*: Inverter Sandia Maximum AC Power [Wac]\n\n*Changes to this variable may require updating the values of the following*: \n\t - inv_snl_eff_cec\n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Inverter Sandia Maximum AC Power [Wac]\n\nThe value of the following variables depends on ``inv_snl_paco``:\n\n\t - inv_snl_eff_cec\n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
 {"inverter_count", (getter)Inverter_get_inverter_count,(setter)Inverter_set_inverter_count,
-	PyDoc_STR("*float*: Number of inverters\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - 6par_imp\n\t - 6par_vmp\n\t - 6par_voc\n\t - cec_i_mp_ref\n\t - cec_v_mp_ref\n\t - cec_v_oc_ref\n\t - inv_cec_cg_paco\n\t - inv_cec_cg_vdcmax\n\t - inv_ds_paco\n\t - inv_ds_vdcmax\n\t - inv_pd_paco\n\t - inv_pd_vdcmax\n\t - inv_snl_paco\n\t - inv_snl_vdcmax\n\t - inverter_model\n\t - module_model\n\t - sd11par_Vmp0\n\t - sd11par_Voc0\n\t - snl_a\n\t - snl_a0\n\t - snl_a1\n\t - snl_a2\n\t - snl_a3\n\t - snl_a4\n\t - snl_aimp\n\t - snl_aisc\n\t - snl_area\n\t - snl_b\n\t - snl_b0\n\t - snl_b1\n\t - snl_b2\n\t - snl_b3\n\t - snl_b4\n\t - snl_b5\n\t - snl_bvmpo\n\t - snl_bvoco\n\t - snl_c0\n\t - snl_c1\n\t - snl_c2\n\t - snl_c3\n\t - snl_dtc\n\t - snl_fd\n\t - snl_impo\n\t - snl_isco\n\t - snl_mbvmp\n\t - snl_mbvoc\n\t - snl_module_structure\n\t - snl_n\n\t - snl_series_cells\n\t - snl_vmpo\n\t - snl_voco\n\t - spe_area\n\t - spe_eff0\n\t - spe_eff1\n\t - spe_eff2\n\t - spe_eff3\n\t - spe_eff4\n\t - spe_rad0\n\t - spe_rad1\n\t - spe_rad2\n\t - spe_rad3\n\t - spe_rad4\n\t - spe_reference\n\t - spe_vmp\n\t - spe_voc\n"),
+	PyDoc_STR("*float*: Number of inverters\n\nThe value of ``inverter_count`` depends on the following variables:\n\n\t - 6par_imp\n\t - 6par_vmp\n\t - 6par_voc\n\t - cec_i_mp_ref\n\t - cec_v_mp_ref\n\t - cec_v_oc_ref\n\t - inv_cec_cg_paco\n\t - inv_cec_cg_vdcmax\n\t - inv_ds_paco\n\t - inv_ds_vdcmax\n\t - inv_pd_paco\n\t - inv_pd_vdcmax\n\t - inv_snl_paco\n\t - inv_snl_vdcmax\n\t - inverter_model\n\t - module_model\n\t - sd11par_Vmp0\n\t - sd11par_Voc0\n\t - snl_a\n\t - snl_a0\n\t - snl_a1\n\t - snl_a2\n\t - snl_a3\n\t - snl_a4\n\t - snl_aimp\n\t - snl_aisc\n\t - snl_area\n\t - snl_b\n\t - snl_b0\n\t - snl_b1\n\t - snl_b2\n\t - snl_b3\n\t - snl_b4\n\t - snl_b5\n\t - snl_bvmpo\n\t - snl_bvoco\n\t - snl_c0\n\t - snl_c1\n\t - snl_c2\n\t - snl_c3\n\t - snl_dtc\n\t - snl_fd\n\t - snl_impo\n\t - snl_isco\n\t - snl_mbvmp\n\t - snl_mbvoc\n\t - snl_module_structure\n\t - snl_n\n\t - snl_series_cells\n\t - snl_vmpo\n\t - snl_voco\n\t - spe_area\n\t - spe_eff0\n\t - spe_eff1\n\t - spe_eff2\n\t - spe_eff3\n\t - spe_eff4\n\t - spe_rad0\n\t - spe_rad1\n\t - spe_rad2\n\t - spe_rad3\n\t - spe_rad4\n\t - spe_reference\n\t - spe_vmp\n\t - spe_voc\n"),
  	NULL},
 {"inverter_model", (getter)Inverter_get_inverter_model,(setter)Inverter_set_inverter_model,
-	PyDoc_STR("*float*: Inverter model specifier\n\n*Options*: 0=cec,1=datasheet,2=partload,3=coefficientgenerator,4=PVYield\n\n*Constraints*: INTEGER,MIN=0,MAX=4\n\n*Required*: True\n\n*Changes to this variable may require updating the values of the following*: \n\t - inv_num_mppt\n\t - inverter_count\n\t - mppt_hi_inverter\n\t - mppt_low_inverter\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Inverter model specifier\n\n**Options:**\n0=cec,1=datasheet,2=partload,3=coefficientgenerator,4=PVYield\n\n**Constraints:**\nINTEGER,MIN=0,MAX=4\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``inverter_model``:\n\n\t - inv_num_mppt\n\t - inverter_count\n\t - mppt_hi_inverter\n\t - mppt_low_inverter\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
 {"mppt_hi_inverter", (getter)Inverter_get_mppt_hi_inverter,(setter)Inverter_set_mppt_hi_inverter,
-	PyDoc_STR("*float*: Maximum inverter MPPT voltage window [Vdc]\n\n*Required*: If not provided, assumed to be 0\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - inverter_model\n"),
+	PyDoc_STR("*float*: Maximum inverter MPPT voltage window [Vdc]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults.\n\nThe value of ``mppt_hi_inverter`` depends on the following variables:\n\n\t - inverter_model\n"),
  	NULL},
 {"mppt_low_inverter", (getter)Inverter_get_mppt_low_inverter,(setter)Inverter_set_mppt_low_inverter,
-	PyDoc_STR("*float*: Minimum inverter MPPT voltage window [Vdc]\n\n*Required*: If not provided, assumed to be 0\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - inverter_model\n"),
+	PyDoc_STR("*float*: Minimum inverter MPPT voltage window [Vdc]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults.\n\nThe value of ``mppt_low_inverter`` depends on the following variables:\n\n\t - inverter_model\n"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -7134,11 +7389,11 @@ InverterCECDatabase_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef InverterCECDatabase_methods[] = {
 		{"assign",            (PyCFunction)InverterCECDatabase_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``InverterCECDatabase_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``InverterCECDatabase_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)InverterCECDatabase_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``InverterCECDatabase_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``InverterCECDatabase_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)InverterCECDatabase_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -7276,37 +7531,37 @@ InverterCECDatabase_set_inv_tdc_cec_db(VarGroupObject *self, PyObject *value, vo
 
 static PyGetSetDef InverterCECDatabase_getset[] = {
 {"inv_snl_c0", (getter)InverterCECDatabase_get_inv_snl_c0,(setter)InverterCECDatabase_set_inv_snl_c0,
-	PyDoc_STR("*float*: Curvature between AC power and DC power at ref [1/W]\n\n*Required*: True if inverter_model=0\n\n*Changes to this variable may require updating the values of the following*: \n\t - inv_snl_eff_cec\n"),
+	PyDoc_STR("*float*: Curvature between AC power and DC power at ref [1/W]\n\n**Required:**\nRequired if inverter_model=0\n\nThe value of the following variables depends on ``inv_snl_c0``:\n\n\t - inv_snl_eff_cec\n"),
  	NULL},
 {"inv_snl_c1", (getter)InverterCECDatabase_get_inv_snl_c1,(setter)InverterCECDatabase_set_inv_snl_c1,
-	PyDoc_STR("*float*: Coefficient of Pdco variation with DC input voltage [1/V]\n\n*Required*: True if inverter_model=0\n\n*Changes to this variable may require updating the values of the following*: \n\t - inv_snl_eff_cec\n"),
+	PyDoc_STR("*float*: Coefficient of Pdco variation with DC input voltage [1/V]\n\n**Required:**\nRequired if inverter_model=0\n\nThe value of the following variables depends on ``inv_snl_c1``:\n\n\t - inv_snl_eff_cec\n"),
  	NULL},
 {"inv_snl_c2", (getter)InverterCECDatabase_get_inv_snl_c2,(setter)InverterCECDatabase_set_inv_snl_c2,
-	PyDoc_STR("*float*: Coefficient of Pso variation with DC input voltage [1/V]\n\n*Required*: True if inverter_model=0\n\n*Changes to this variable may require updating the values of the following*: \n\t - inv_snl_eff_cec\n"),
+	PyDoc_STR("*float*: Coefficient of Pso variation with DC input voltage [1/V]\n\n**Required:**\nRequired if inverter_model=0\n\nThe value of the following variables depends on ``inv_snl_c2``:\n\n\t - inv_snl_eff_cec\n"),
  	NULL},
 {"inv_snl_c3", (getter)InverterCECDatabase_get_inv_snl_c3,(setter)InverterCECDatabase_set_inv_snl_c3,
-	PyDoc_STR("*float*: Coefficient of Co variation with DC input voltage [1/V]\n\n*Required*: True if inverter_model=0\n\n*Changes to this variable may require updating the values of the following*: \n\t - inv_snl_eff_cec\n"),
+	PyDoc_STR("*float*: Coefficient of Co variation with DC input voltage [1/V]\n\n**Required:**\nRequired if inverter_model=0\n\nThe value of the following variables depends on ``inv_snl_c3``:\n\n\t - inv_snl_eff_cec\n"),
  	NULL},
 {"inv_snl_paco", (getter)InverterCECDatabase_get_inv_snl_paco,(setter)InverterCECDatabase_set_inv_snl_paco,
-	PyDoc_STR("*float*: AC maximum power rating [Wac]\n\n*Required*: True if inverter_model=0\n\n*Changes to this variable may require updating the values of the following*: \n\t - inv_snl_eff_cec\n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: AC maximum power rating [Wac]\n\n**Required:**\nRequired if inverter_model=0\n\nThe value of the following variables depends on ``inv_snl_paco``:\n\n\t - inv_snl_eff_cec\n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
 {"inv_snl_pdco", (getter)InverterCECDatabase_get_inv_snl_pdco,(setter)InverterCECDatabase_set_inv_snl_pdco,
-	PyDoc_STR("*float*: DC input power at which AC power rating is achieved [Wdc]\n\n*Required*: True if inverter_model=0\n\n*Changes to this variable may require updating the values of the following*: \n\t - inv_snl_eff_cec\n"),
+	PyDoc_STR("*float*: DC input power at which AC power rating is achieved [Wdc]\n\n**Required:**\nRequired if inverter_model=0\n\nThe value of the following variables depends on ``inv_snl_pdco``:\n\n\t - inv_snl_eff_cec\n"),
  	NULL},
 {"inv_snl_pnt", (getter)InverterCECDatabase_get_inv_snl_pnt,(setter)InverterCECDatabase_set_inv_snl_pnt,
-	PyDoc_STR("*float*: AC power consumed by inverter at night [Wac]\n\n*Required*: True if inverter_model=0"),
+	PyDoc_STR("*float*: AC power consumed by inverter at night [Wac]\n\n**Required:**\nRequired if inverter_model=0"),
  	NULL},
 {"inv_snl_pso", (getter)InverterCECDatabase_get_inv_snl_pso,(setter)InverterCECDatabase_set_inv_snl_pso,
-	PyDoc_STR("*float*: DC power required to enable the inversion process [Wdc]\n\n*Required*: True if inverter_model=0\n\n*Changes to this variable may require updating the values of the following*: \n\t - inv_snl_eff_cec\n"),
+	PyDoc_STR("*float*: DC power required to enable the inversion process [Wdc]\n\n**Required:**\nRequired if inverter_model=0\n\nThe value of the following variables depends on ``inv_snl_pso``:\n\n\t - inv_snl_eff_cec\n"),
  	NULL},
 {"inv_snl_vdcmax", (getter)InverterCECDatabase_get_inv_snl_vdcmax,(setter)InverterCECDatabase_set_inv_snl_vdcmax,
-	PyDoc_STR("*float*: Maximum DC input operating voltage [Vdc]\n\n*Required*: True if inverter_model=0\n\n*Changes to this variable may require updating the values of the following*: \n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Maximum DC input operating voltage [Vdc]\n\n**Required:**\nRequired if inverter_model=0\n\nThe value of the following variables depends on ``inv_snl_vdcmax``:\n\n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
 {"inv_snl_vdco", (getter)InverterCECDatabase_get_inv_snl_vdco,(setter)InverterCECDatabase_set_inv_snl_vdco,
-	PyDoc_STR("*float*: DC input voltage for the rated AC power rating [Vdc]\n\n*Required*: True if inverter_model=0\n\n*Changes to this variable may require updating the values of the following*: \n\t - inv_snl_eff_cec\n"),
+	PyDoc_STR("*float*: DC input voltage for the rated AC power rating [Vdc]\n\n**Required:**\nRequired if inverter_model=0\n\nThe value of the following variables depends on ``inv_snl_vdco``:\n\n\t - inv_snl_eff_cec\n"),
  	NULL},
 {"inv_tdc_cec_db", (getter)InverterCECDatabase_get_inv_tdc_cec_db,(setter)InverterCECDatabase_set_inv_tdc_cec_db,
-	PyDoc_STR("*sequence[sequence]*: Temperature derate curves for CEC Database [(Vdc, C, %/C)]\n\n*Required*: True if inverter_model=0"),
+	PyDoc_STR("*sequence[sequence]*: Temperature derate curves for CEC Database [(Vdc, C, %/C)]\n\n**Required:**\nRequired if inverter_model=0"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -7421,11 +7676,11 @@ InverterCECCoefficientGenerator_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef InverterCECCoefficientGenerator_methods[] = {
 		{"assign",            (PyCFunction)InverterCECCoefficientGenerator_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``InverterCECCoefficientGenerator_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``InverterCECCoefficientGenerator_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)InverterCECCoefficientGenerator_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``InverterCECCoefficientGenerator_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``InverterCECCoefficientGenerator_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)InverterCECCoefficientGenerator_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -7563,37 +7818,37 @@ InverterCECCoefficientGenerator_set_inv_tdc_cec_cg(VarGroupObject *self, PyObjec
 
 static PyGetSetDef InverterCECCoefficientGenerator_getset[] = {
 {"inv_cec_cg_c0", (getter)InverterCECCoefficientGenerator_get_inv_cec_cg_c0,(setter)InverterCECCoefficientGenerator_set_inv_cec_cg_c0,
-	PyDoc_STR("*float*: Curvature between AC power and DC power at ref [1/W]\n\n*Required*: True if inverter_model=3\n\n*Changes to this variable may require updating the values of the following*: \n\t - inv_cec_cg_eff_cec\n"),
+	PyDoc_STR("*float*: Curvature between AC power and DC power at ref [1/W]\n\n**Required:**\nRequired if inverter_model=3\n\nThe value of the following variables depends on ``inv_cec_cg_c0``:\n\n\t - inv_cec_cg_eff_cec\n"),
  	NULL},
 {"inv_cec_cg_c1", (getter)InverterCECCoefficientGenerator_get_inv_cec_cg_c1,(setter)InverterCECCoefficientGenerator_set_inv_cec_cg_c1,
-	PyDoc_STR("*float*: Coefficient of Pdco variation with DC input voltage [1/V]\n\n*Required*: True if inverter_model=3\n\n*Changes to this variable may require updating the values of the following*: \n\t - inv_cec_cg_eff_cec\n"),
+	PyDoc_STR("*float*: Coefficient of Pdco variation with DC input voltage [1/V]\n\n**Required:**\nRequired if inverter_model=3\n\nThe value of the following variables depends on ``inv_cec_cg_c1``:\n\n\t - inv_cec_cg_eff_cec\n"),
  	NULL},
 {"inv_cec_cg_c2", (getter)InverterCECCoefficientGenerator_get_inv_cec_cg_c2,(setter)InverterCECCoefficientGenerator_set_inv_cec_cg_c2,
-	PyDoc_STR("*float*: Coefficient of Pso variation with DC input voltage [1/V]\n\n*Required*: True if inverter_model=3\n\n*Changes to this variable may require updating the values of the following*: \n\t - inv_cec_cg_eff_cec\n"),
+	PyDoc_STR("*float*: Coefficient of Pso variation with DC input voltage [1/V]\n\n**Required:**\nRequired if inverter_model=3\n\nThe value of the following variables depends on ``inv_cec_cg_c2``:\n\n\t - inv_cec_cg_eff_cec\n"),
  	NULL},
 {"inv_cec_cg_c3", (getter)InverterCECCoefficientGenerator_get_inv_cec_cg_c3,(setter)InverterCECCoefficientGenerator_set_inv_cec_cg_c3,
-	PyDoc_STR("*float*: Coefficient of Co variation with DC input voltage [1/V]\n\n*Required*: True if inverter_model=3\n\n*Changes to this variable may require updating the values of the following*: \n\t - inv_cec_cg_eff_cec\n"),
+	PyDoc_STR("*float*: Coefficient of Co variation with DC input voltage [1/V]\n\n**Required:**\nRequired if inverter_model=3\n\nThe value of the following variables depends on ``inv_cec_cg_c3``:\n\n\t - inv_cec_cg_eff_cec\n"),
  	NULL},
 {"inv_cec_cg_paco", (getter)InverterCECCoefficientGenerator_get_inv_cec_cg_paco,(setter)InverterCECCoefficientGenerator_set_inv_cec_cg_paco,
-	PyDoc_STR("*float*: AC maximum power rating [Wac]\n\n*Required*: True if inverter_model=3\n\n*Changes to this variable may require updating the values of the following*: \n\t - inv_cec_cg_eff_cec\n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: AC maximum power rating [Wac]\n\n**Required:**\nRequired if inverter_model=3\n\nThe value of the following variables depends on ``inv_cec_cg_paco``:\n\n\t - inv_cec_cg_eff_cec\n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
 {"inv_cec_cg_pdco", (getter)InverterCECCoefficientGenerator_get_inv_cec_cg_pdco,(setter)InverterCECCoefficientGenerator_set_inv_cec_cg_pdco,
-	PyDoc_STR("*float*: DC input power at which AC power rating is achieved [Wdc]\n\n*Required*: True if inverter_model=3\n\n*Changes to this variable may require updating the values of the following*: \n\t - inv_cec_cg_eff_cec\n"),
+	PyDoc_STR("*float*: DC input power at which AC power rating is achieved [Wdc]\n\n**Required:**\nRequired if inverter_model=3\n\nThe value of the following variables depends on ``inv_cec_cg_pdco``:\n\n\t - inv_cec_cg_eff_cec\n"),
  	NULL},
 {"inv_cec_cg_pnt", (getter)InverterCECCoefficientGenerator_get_inv_cec_cg_pnt,(setter)InverterCECCoefficientGenerator_set_inv_cec_cg_pnt,
-	PyDoc_STR("*float*: AC power consumed by inverter at night [Wac]\n\n*Required*: True if inverter_model=3"),
+	PyDoc_STR("*float*: AC power consumed by inverter at night [Wac]\n\n**Required:**\nRequired if inverter_model=3"),
  	NULL},
 {"inv_cec_cg_psco", (getter)InverterCECCoefficientGenerator_get_inv_cec_cg_psco,(setter)InverterCECCoefficientGenerator_set_inv_cec_cg_psco,
-	PyDoc_STR("*float*: DC power required to enable the inversion process [Wdc]\n\n*Required*: True if inverter_model=3\n\n*Changes to this variable may require updating the values of the following*: \n\t - inv_cec_cg_eff_cec\n"),
+	PyDoc_STR("*float*: DC power required to enable the inversion process [Wdc]\n\n**Required:**\nRequired if inverter_model=3\n\nThe value of the following variables depends on ``inv_cec_cg_psco``:\n\n\t - inv_cec_cg_eff_cec\n"),
  	NULL},
 {"inv_cec_cg_vdcmax", (getter)InverterCECCoefficientGenerator_get_inv_cec_cg_vdcmax,(setter)InverterCECCoefficientGenerator_set_inv_cec_cg_vdcmax,
-	PyDoc_STR("*float*: Maximum DC input operating voltage [Vdc]\n\n*Required*: True if inverter_model=3\n\n*Changes to this variable may require updating the values of the following*: \n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Maximum DC input operating voltage [Vdc]\n\n**Required:**\nRequired if inverter_model=3\n\nThe value of the following variables depends on ``inv_cec_cg_vdcmax``:\n\n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
 {"inv_cec_cg_vdco", (getter)InverterCECCoefficientGenerator_get_inv_cec_cg_vdco,(setter)InverterCECCoefficientGenerator_set_inv_cec_cg_vdco,
-	PyDoc_STR("*float*: DC input voltage for the rated AC power rating [Vdc]\n\n*Required*: True if inverter_model=3\n\n*Changes to this variable may require updating the values of the following*: \n\t - inv_cec_cg_eff_cec\n"),
+	PyDoc_STR("*float*: DC input voltage for the rated AC power rating [Vdc]\n\n**Required:**\nRequired if inverter_model=3\n\nThe value of the following variables depends on ``inv_cec_cg_vdco``:\n\n\t - inv_cec_cg_eff_cec\n"),
  	NULL},
 {"inv_tdc_cec_cg", (getter)InverterCECCoefficientGenerator_get_inv_tdc_cec_cg,(setter)InverterCECCoefficientGenerator_set_inv_tdc_cec_cg,
-	PyDoc_STR("*sequence[sequence]*: Temperature derate curves for CEC Coef Gen [(Vdc, C, %/C)]\n\n*Required*: True if inverter_model=3"),
+	PyDoc_STR("*sequence[sequence]*: Temperature derate curves for CEC Coef Gen [(Vdc, C, %/C)]\n\n**Required:**\nRequired if inverter_model=3"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -7708,11 +7963,11 @@ InverterDatasheet_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef InverterDatasheet_methods[] = {
 		{"assign",            (PyCFunction)InverterDatasheet_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``InverterDatasheet_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``InverterDatasheet_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)InverterDatasheet_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``InverterDatasheet_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``InverterDatasheet_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)InverterDatasheet_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -7802,25 +8057,25 @@ InverterDatasheet_set_inv_tdc_ds(VarGroupObject *self, PyObject *value, void *cl
 
 static PyGetSetDef InverterDatasheet_getset[] = {
 {"inv_ds_eff", (getter)InverterDatasheet_get_inv_ds_eff,(setter)InverterDatasheet_set_inv_ds_eff,
-	PyDoc_STR("*float*: Weighted or Peak or Nominal Efficiency [Wdc]\n\n*Required*: True if inverter_model=1"),
+	PyDoc_STR("*float*: Weighted or Peak or Nominal Efficiency [Wdc]\n\n**Required:**\nRequired if inverter_model=1"),
  	NULL},
 {"inv_ds_paco", (getter)InverterDatasheet_get_inv_ds_paco,(setter)InverterDatasheet_set_inv_ds_paco,
-	PyDoc_STR("*float*: AC maximum power rating [Wac]\n\n*Required*: True if inverter_model=1\n\n*Changes to this variable may require updating the values of the following*: \n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: AC maximum power rating [Wac]\n\n**Required:**\nRequired if inverter_model=1\n\nThe value of the following variables depends on ``inv_ds_paco``:\n\n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
 {"inv_ds_pnt", (getter)InverterDatasheet_get_inv_ds_pnt,(setter)InverterDatasheet_set_inv_ds_pnt,
-	PyDoc_STR("*float*: AC power consumed by inverter at night [Wac]\n\n*Required*: True if inverter_model=1"),
+	PyDoc_STR("*float*: AC power consumed by inverter at night [Wac]\n\n**Required:**\nRequired if inverter_model=1"),
  	NULL},
 {"inv_ds_pso", (getter)InverterDatasheet_get_inv_ds_pso,(setter)InverterDatasheet_set_inv_ds_pso,
-	PyDoc_STR("*float*: DC power required to enable the inversion process [Wdc]\n\n*Required*: True if inverter_model=1"),
+	PyDoc_STR("*float*: DC power required to enable the inversion process [Wdc]\n\n**Required:**\nRequired if inverter_model=1"),
  	NULL},
 {"inv_ds_vdcmax", (getter)InverterDatasheet_get_inv_ds_vdcmax,(setter)InverterDatasheet_set_inv_ds_vdcmax,
-	PyDoc_STR("*float*: Maximum DC input operating voltage [Vdc]\n\n*Required*: True if inverter_model=1\n\n*Changes to this variable may require updating the values of the following*: \n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Maximum DC input operating voltage [Vdc]\n\n**Required:**\nRequired if inverter_model=1\n\nThe value of the following variables depends on ``inv_ds_vdcmax``:\n\n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
 {"inv_ds_vdco", (getter)InverterDatasheet_get_inv_ds_vdco,(setter)InverterDatasheet_set_inv_ds_vdco,
-	PyDoc_STR("*float*: DC input voltage for the rated AC power rating [Vdc]\n\n*Required*: True if inverter_model=1"),
+	PyDoc_STR("*float*: DC input voltage for the rated AC power rating [Vdc]\n\n**Required:**\nRequired if inverter_model=1"),
  	NULL},
 {"inv_tdc_ds", (getter)InverterDatasheet_get_inv_tdc_ds,(setter)InverterDatasheet_set_inv_tdc_ds,
-	PyDoc_STR("*sequence[sequence]*: Temperature derate curves for Inv Datasheet [(Vdc, C, %/C)]\n\n*Required*: True if inverter_model=1"),
+	PyDoc_STR("*sequence[sequence]*: Temperature derate curves for Inv Datasheet [(Vdc, C, %/C)]\n\n**Required:**\nRequired if inverter_model=1"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -7935,11 +8190,11 @@ InverterPartLoadCurve_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef InverterPartLoadCurve_methods[] = {
 		{"assign",            (PyCFunction)InverterPartLoadCurve_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``InverterPartLoadCurve_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``InverterPartLoadCurve_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)InverterPartLoadCurve_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``InverterPartLoadCurve_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``InverterPartLoadCurve_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)InverterPartLoadCurve_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -8041,28 +8296,28 @@ InverterPartLoadCurve_set_inv_tdc_plc(VarGroupObject *self, PyObject *value, voi
 
 static PyGetSetDef InverterPartLoadCurve_getset[] = {
 {"inv_pd_efficiency", (getter)InverterPartLoadCurve_get_inv_pd_efficiency,(setter)InverterPartLoadCurve_set_inv_pd_efficiency,
-	PyDoc_STR("*sequence*: Partload curve efficiency values [%]\n\n*Required*: True if inverter_model=2"),
+	PyDoc_STR("*sequence*: Partload curve efficiency values [%]\n\n**Required:**\nRequired if inverter_model=2"),
  	NULL},
 {"inv_pd_paco", (getter)InverterPartLoadCurve_get_inv_pd_paco,(setter)InverterPartLoadCurve_set_inv_pd_paco,
-	PyDoc_STR("*float*: AC maximum power rating [Wac]\n\n*Required*: True if inverter_model=2\n\n*Changes to this variable may require updating the values of the following*: \n\t - inv_pd_pdco\n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: AC maximum power rating [Wac]\n\n**Required:**\nRequired if inverter_model=2\n\nThe value of the following variables depends on ``inv_pd_paco``:\n\n\t - inv_pd_pdco\n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
 {"inv_pd_partload", (getter)InverterPartLoadCurve_get_inv_pd_partload,(setter)InverterPartLoadCurve_set_inv_pd_partload,
-	PyDoc_STR("*sequence*: Partload curve partload values [%]\n\n*Required*: True if inverter_model=2"),
+	PyDoc_STR("*sequence*: Partload curve partload values [%]\n\n**Required:**\nRequired if inverter_model=2"),
  	NULL},
 {"inv_pd_pdco", (getter)InverterPartLoadCurve_get_inv_pd_pdco,(setter)InverterPartLoadCurve_set_inv_pd_pdco,
-	PyDoc_STR("*float*: DC input power at which AC power rating is achieved [Wdc]\n\n*Required*: True if inverter_model=2\n\n*This variable may need to be updated if the values of the following have changed*: \n\t - inv_pd_eff\n\t - inv_pd_paco\n"),
+	PyDoc_STR("*float*: DC input power at which AC power rating is achieved [Wdc]\n\n**Required:**\nRequired if inverter_model=2\n\nThe value of ``inv_pd_pdco`` depends on the following variables:\n\n\t - inv_pd_eff\n\t - inv_pd_paco\n"),
  	NULL},
 {"inv_pd_pnt", (getter)InverterPartLoadCurve_get_inv_pd_pnt,(setter)InverterPartLoadCurve_set_inv_pd_pnt,
-	PyDoc_STR("*float*: AC power consumed by inverter at night [Wac]\n\n*Required*: True if inverter_model=2"),
+	PyDoc_STR("*float*: AC power consumed by inverter at night [Wac]\n\n**Required:**\nRequired if inverter_model=2"),
  	NULL},
 {"inv_pd_vdcmax", (getter)InverterPartLoadCurve_get_inv_pd_vdcmax,(setter)InverterPartLoadCurve_set_inv_pd_vdcmax,
-	PyDoc_STR("*float*: Maximum DC input operating voltage [Vdc]\n\n*Required*: True if inverter_model=2\n\n*Changes to this variable may require updating the values of the following*: \n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Maximum DC input operating voltage [Vdc]\n\n**Required:**\nRequired if inverter_model=2\n\nThe value of the following variables depends on ``inv_pd_vdcmax``:\n\n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
 {"inv_pd_vdco", (getter)InverterPartLoadCurve_get_inv_pd_vdco,(setter)InverterPartLoadCurve_set_inv_pd_vdco,
-	PyDoc_STR("*float*: DC input voltage for the rated AC power rating [Vdc]\n\n*Required*: True if inverter_model=2"),
+	PyDoc_STR("*float*: DC input voltage for the rated AC power rating [Vdc]\n\n**Required:**\nRequired if inverter_model=2"),
  	NULL},
 {"inv_tdc_plc", (getter)InverterPartLoadCurve_get_inv_tdc_plc,(setter)InverterPartLoadCurve_set_inv_tdc_plc,
-	PyDoc_STR("*sequence[sequence]*: Temperature derate curves for Part Load Curve [(Vdc, C, %/C)]\n\n*Required*: True if inverter_model=2"),
+	PyDoc_STR("*sequence[sequence]*: Temperature derate curves for Part Load Curve [(Vdc, C, %/C)]\n\n**Required:**\nRequired if inverter_model=2"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -8177,11 +8432,11 @@ InverterMermoudLejeuneModel_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef InverterMermoudLejeuneModel_methods[] = {
 		{"assign",            (PyCFunction)InverterMermoudLejeuneModel_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``InverterMermoudLejeuneModel_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``InverterMermoudLejeuneModel_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)InverterMermoudLejeuneModel_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``InverterMermoudLejeuneModel_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``InverterMermoudLejeuneModel_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)InverterMermoudLejeuneModel_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -8619,112 +8874,112 @@ InverterMermoudLejeuneModel_set_ond_lossRDc(VarGroupObject *self, PyObject *valu
 
 static PyGetSetDef InverterMermoudLejeuneModel_getset[] = {
 {"ond_Aux_Loss", (getter)InverterMermoudLejeuneModel_get_ond_Aux_Loss,(setter)InverterMermoudLejeuneModel_set_ond_Aux_Loss,
-	PyDoc_STR("*float*:  [W]\n\n*Required*: True if inverter_model=4"),
+	PyDoc_STR("*float*:  [W]\n\n**Required:**\nRequired if inverter_model=4"),
  	NULL},
 {"ond_CompPMax", (getter)InverterMermoudLejeuneModel_get_ond_CompPMax,(setter)InverterMermoudLejeuneModel_set_ond_CompPMax,
-	PyDoc_STR("*str*:  [-]\n\n*Required*: True if inverter_model=4"),
+	PyDoc_STR("*str*:  [-]\n\n**Required:**\nRequired if inverter_model=4"),
  	NULL},
 {"ond_CompVMax", (getter)InverterMermoudLejeuneModel_get_ond_CompVMax,(setter)InverterMermoudLejeuneModel_set_ond_CompVMax,
-	PyDoc_STR("*str*:  [-]\n\n*Required*: True if inverter_model=4"),
+	PyDoc_STR("*str*:  [-]\n\n**Required:**\nRequired if inverter_model=4"),
  	NULL},
 {"ond_IMaxAC", (getter)InverterMermoudLejeuneModel_get_ond_IMaxAC,(setter)InverterMermoudLejeuneModel_set_ond_IMaxAC,
-	PyDoc_STR("*float*:  [A]\n\n*Required*: True if inverter_model=4"),
+	PyDoc_STR("*float*:  [A]\n\n**Required:**\nRequired if inverter_model=4"),
  	NULL},
 {"ond_IMaxDC", (getter)InverterMermoudLejeuneModel_get_ond_IMaxDC,(setter)InverterMermoudLejeuneModel_set_ond_IMaxDC,
-	PyDoc_STR("*float*:  [A]\n\n*Required*: True if inverter_model=4"),
+	PyDoc_STR("*float*:  [A]\n\n**Required:**\nRequired if inverter_model=4"),
  	NULL},
 {"ond_INomAC", (getter)InverterMermoudLejeuneModel_get_ond_INomAC,(setter)InverterMermoudLejeuneModel_set_ond_INomAC,
-	PyDoc_STR("*float*:  [A]\n\n*Required*: True if inverter_model=4"),
+	PyDoc_STR("*float*:  [A]\n\n**Required:**\nRequired if inverter_model=4"),
  	NULL},
 {"ond_INomDC", (getter)InverterMermoudLejeuneModel_get_ond_INomDC,(setter)InverterMermoudLejeuneModel_set_ond_INomDC,
-	PyDoc_STR("*float*:  [A]\n\n*Required*: True if inverter_model=4"),
+	PyDoc_STR("*float*:  [A]\n\n**Required:**\nRequired if inverter_model=4"),
  	NULL},
 {"ond_ModeAffEnum", (getter)InverterMermoudLejeuneModel_get_ond_ModeAffEnum,(setter)InverterMermoudLejeuneModel_set_ond_ModeAffEnum,
-	PyDoc_STR("*str*:  [-]\n\n*Required*: True if inverter_model=4"),
+	PyDoc_STR("*str*:  [-]\n\n**Required:**\nRequired if inverter_model=4"),
  	NULL},
 {"ond_ModeOper", (getter)InverterMermoudLejeuneModel_get_ond_ModeOper,(setter)InverterMermoudLejeuneModel_set_ond_ModeOper,
-	PyDoc_STR("*str*:  [-]\n\n*Required*: True if inverter_model=4"),
+	PyDoc_STR("*str*:  [-]\n\n**Required:**\nRequired if inverter_model=4"),
  	NULL},
 {"ond_NbInputs", (getter)InverterMermoudLejeuneModel_get_ond_NbInputs,(setter)InverterMermoudLejeuneModel_set_ond_NbInputs,
-	PyDoc_STR("*float*:  [-]\n\n*Required*: True if inverter_model=4"),
+	PyDoc_STR("*float*:  [-]\n\n**Required:**\nRequired if inverter_model=4"),
  	NULL},
 {"ond_NbMPPT", (getter)InverterMermoudLejeuneModel_get_ond_NbMPPT,(setter)InverterMermoudLejeuneModel_set_ond_NbMPPT,
-	PyDoc_STR("*float*:  [-]\n\n*Required*: True if inverter_model=4"),
+	PyDoc_STR("*float*:  [-]\n\n**Required:**\nRequired if inverter_model=4"),
  	NULL},
 {"ond_Night_Loss", (getter)InverterMermoudLejeuneModel_get_ond_Night_Loss,(setter)InverterMermoudLejeuneModel_set_ond_Night_Loss,
-	PyDoc_STR("*float*:  [W]\n\n*Required*: True if inverter_model=4"),
+	PyDoc_STR("*float*:  [W]\n\n**Required:**\nRequired if inverter_model=4"),
  	NULL},
 {"ond_PLim1", (getter)InverterMermoudLejeuneModel_get_ond_PLim1,(setter)InverterMermoudLejeuneModel_set_ond_PLim1,
-	PyDoc_STR("*float*:  [W]\n\n*Required*: True if inverter_model=4"),
+	PyDoc_STR("*float*:  [W]\n\n**Required:**\nRequired if inverter_model=4"),
  	NULL},
 {"ond_PLimAbs", (getter)InverterMermoudLejeuneModel_get_ond_PLimAbs,(setter)InverterMermoudLejeuneModel_set_ond_PLimAbs,
-	PyDoc_STR("*float*:  [W]\n\n*Required*: True if inverter_model=4"),
+	PyDoc_STR("*float*:  [W]\n\n**Required:**\nRequired if inverter_model=4"),
  	NULL},
 {"ond_PMaxDC", (getter)InverterMermoudLejeuneModel_get_ond_PMaxDC,(setter)InverterMermoudLejeuneModel_set_ond_PMaxDC,
-	PyDoc_STR("*float*:  [W]\n\n*Required*: True if inverter_model=4"),
+	PyDoc_STR("*float*:  [W]\n\n**Required:**\nRequired if inverter_model=4"),
  	NULL},
 {"ond_PMaxOUT", (getter)InverterMermoudLejeuneModel_get_ond_PMaxOUT,(setter)InverterMermoudLejeuneModel_set_ond_PMaxOUT,
-	PyDoc_STR("*float*:  [W]\n\n*Required*: True if inverter_model=4"),
+	PyDoc_STR("*float*:  [W]\n\n**Required:**\nRequired if inverter_model=4"),
  	NULL},
 {"ond_PNomConv", (getter)InverterMermoudLejeuneModel_get_ond_PNomConv,(setter)InverterMermoudLejeuneModel_set_ond_PNomConv,
-	PyDoc_STR("*float*:  [W]\n\n*Required*: True if inverter_model=4"),
+	PyDoc_STR("*float*:  [W]\n\n**Required:**\nRequired if inverter_model=4"),
  	NULL},
 {"ond_PNomDC", (getter)InverterMermoudLejeuneModel_get_ond_PNomDC,(setter)InverterMermoudLejeuneModel_set_ond_PNomDC,
-	PyDoc_STR("*float*:  [W]\n\n*Required*: True if inverter_model=4"),
+	PyDoc_STR("*float*:  [W]\n\n**Required:**\nRequired if inverter_model=4"),
  	NULL},
 {"ond_PSeuil", (getter)InverterMermoudLejeuneModel_get_ond_PSeuil,(setter)InverterMermoudLejeuneModel_set_ond_PSeuil,
-	PyDoc_STR("*float*:  [W]\n\n*Required*: True if inverter_model=4"),
+	PyDoc_STR("*float*:  [W]\n\n**Required:**\nRequired if inverter_model=4"),
  	NULL},
 {"ond_TPLim1", (getter)InverterMermoudLejeuneModel_get_ond_TPLim1,(setter)InverterMermoudLejeuneModel_set_ond_TPLim1,
-	PyDoc_STR("*float*:  [°C]\n\n*Required*: True if inverter_model=4"),
+	PyDoc_STR("*float*:  [°C]\n\n**Required:**\nRequired if inverter_model=4"),
  	NULL},
 {"ond_TPLimAbs", (getter)InverterMermoudLejeuneModel_get_ond_TPLimAbs,(setter)InverterMermoudLejeuneModel_set_ond_TPLimAbs,
-	PyDoc_STR("*float*:  [°C]\n\n*Required*: True if inverter_model=4"),
+	PyDoc_STR("*float*:  [°C]\n\n**Required:**\nRequired if inverter_model=4"),
  	NULL},
 {"ond_TPMax", (getter)InverterMermoudLejeuneModel_get_ond_TPMax,(setter)InverterMermoudLejeuneModel_set_ond_TPMax,
-	PyDoc_STR("*float*:  [°C]\n\n*Required*: True if inverter_model=4"),
+	PyDoc_STR("*float*:  [°C]\n\n**Required:**\nRequired if inverter_model=4"),
  	NULL},
 {"ond_TPNom", (getter)InverterMermoudLejeuneModel_get_ond_TPNom,(setter)InverterMermoudLejeuneModel_set_ond_TPNom,
-	PyDoc_STR("*float*:  [°C]\n\n*Required*: True if inverter_model=4"),
+	PyDoc_STR("*float*:  [°C]\n\n**Required:**\nRequired if inverter_model=4"),
  	NULL},
 {"ond_VAbsMax", (getter)InverterMermoudLejeuneModel_get_ond_VAbsMax,(setter)InverterMermoudLejeuneModel_set_ond_VAbsMax,
-	PyDoc_STR("*float*:  [V]\n\n*Required*: True if inverter_model=4"),
+	PyDoc_STR("*float*:  [V]\n\n**Required:**\nRequired if inverter_model=4"),
  	NULL},
 {"ond_VMPPMax", (getter)InverterMermoudLejeuneModel_get_ond_VMPPMax,(setter)InverterMermoudLejeuneModel_set_ond_VMPPMax,
-	PyDoc_STR("*float*:  [V]\n\n*Required*: True if inverter_model=4"),
+	PyDoc_STR("*float*:  [V]\n\n**Required:**\nRequired if inverter_model=4"),
  	NULL},
 {"ond_VMppMin", (getter)InverterMermoudLejeuneModel_get_ond_VMppMin,(setter)InverterMermoudLejeuneModel_set_ond_VMppMin,
-	PyDoc_STR("*float*:  [V]\n\n*Required*: True if inverter_model=4"),
+	PyDoc_STR("*float*:  [V]\n\n**Required:**\nRequired if inverter_model=4"),
  	NULL},
 {"ond_VNomEff", (getter)InverterMermoudLejeuneModel_get_ond_VNomEff,(setter)InverterMermoudLejeuneModel_set_ond_VNomEff,
-	PyDoc_STR("*sequence*:  [V]\n\n*Required*: True if inverter_model=4"),
+	PyDoc_STR("*sequence*:  [V]\n\n**Required:**\nRequired if inverter_model=4"),
  	NULL},
 {"ond_VOutConv", (getter)InverterMermoudLejeuneModel_get_ond_VOutConv,(setter)InverterMermoudLejeuneModel_set_ond_VOutConv,
-	PyDoc_STR("*float*:  [W]\n\n*Required*: True if inverter_model=4"),
+	PyDoc_STR("*float*:  [W]\n\n**Required:**\nRequired if inverter_model=4"),
  	NULL},
 {"ond_doAllowOverpower", (getter)InverterMermoudLejeuneModel_get_ond_doAllowOverpower,(setter)InverterMermoudLejeuneModel_set_ond_doAllowOverpower,
-	PyDoc_STR("*float*:  [-]\n\n*Required*: True if inverter_model=4"),
+	PyDoc_STR("*float*:  [-]\n\n**Required:**\nRequired if inverter_model=4"),
  	NULL},
 {"ond_doUseTemperatureLimit", (getter)InverterMermoudLejeuneModel_get_ond_doUseTemperatureLimit,(setter)InverterMermoudLejeuneModel_set_ond_doUseTemperatureLimit,
-	PyDoc_STR("*float*:  [-]\n\n*Required*: True if inverter_model=4"),
+	PyDoc_STR("*float*:  [-]\n\n**Required:**\nRequired if inverter_model=4"),
  	NULL},
 {"ond_effCurve_Pac", (getter)InverterMermoudLejeuneModel_get_ond_effCurve_Pac,(setter)InverterMermoudLejeuneModel_set_ond_effCurve_Pac,
-	PyDoc_STR("*sequence[sequence]*:  [W]\n\n*Required*: True if inverter_model=4"),
+	PyDoc_STR("*sequence[sequence]*:  [W]\n\n**Required:**\nRequired if inverter_model=4"),
  	NULL},
 {"ond_effCurve_Pdc", (getter)InverterMermoudLejeuneModel_get_ond_effCurve_Pdc,(setter)InverterMermoudLejeuneModel_set_ond_effCurve_Pdc,
-	PyDoc_STR("*sequence[sequence]*:  [W]\n\n*Required*: True if inverter_model=4"),
+	PyDoc_STR("*sequence[sequence]*:  [W]\n\n**Required:**\nRequired if inverter_model=4"),
  	NULL},
 {"ond_effCurve_elements", (getter)InverterMermoudLejeuneModel_get_ond_effCurve_elements,(setter)InverterMermoudLejeuneModel_set_ond_effCurve_elements,
-	PyDoc_STR("*float*:  [-]\n\n*Required*: True if inverter_model=4"),
+	PyDoc_STR("*float*:  [-]\n\n**Required:**\nRequired if inverter_model=4"),
  	NULL},
 {"ond_effCurve_eta", (getter)InverterMermoudLejeuneModel_get_ond_effCurve_eta,(setter)InverterMermoudLejeuneModel_set_ond_effCurve_eta,
-	PyDoc_STR("*sequence[sequence]*:  [-]\n\n*Required*: True if inverter_model=4"),
+	PyDoc_STR("*sequence[sequence]*:  [-]\n\n**Required:**\nRequired if inverter_model=4"),
  	NULL},
 {"ond_lossRAc", (getter)InverterMermoudLejeuneModel_get_ond_lossRAc,(setter)InverterMermoudLejeuneModel_set_ond_lossRAc,
-	PyDoc_STR("*float*:  [A]\n\n*Required*: True if inverter_model=4"),
+	PyDoc_STR("*float*:  [A]\n\n**Required:**\nRequired if inverter_model=4"),
  	NULL},
 {"ond_lossRDc", (getter)InverterMermoudLejeuneModel_get_ond_lossRDc,(setter)InverterMermoudLejeuneModel_set_ond_lossRDc,
-	PyDoc_STR("*float*:  [V/A]\n\n*Required*: True if inverter_model=4"),
+	PyDoc_STR("*float*:  [V/A]\n\n**Required:**\nRequired if inverter_model=4"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -8839,11 +9094,11 @@ BatterySystem_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef BatterySystem_methods[] = {
 		{"assign",            (PyCFunction)BatterySystem_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``BatterySystem_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``BatterySystem_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)BatterySystem_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``BatterySystem_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``BatterySystem_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)BatterySystem_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -9200,7 +9455,7 @@ static PyGetSetDef BatterySystem_getset[] = {
 	PyDoc_STR("*float*: Inverter AC to battery DC efficiency"),
  	NULL},
 {"batt_ac_or_dc", (getter)BatterySystem_get_batt_ac_or_dc,(setter)BatterySystem_set_batt_ac_or_dc,
-	PyDoc_STR("*float*: Battery interconnection (AC or DC)\n\n*Options*: 0=DC_Connected,1=AC_Connected\n\n*Changes to this variable may require updating the values of the following*: \n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Battery interconnection (AC or DC)\n\n**Options:**\n0=DC_Connected,1=AC_Connected\n\nThe value of the following variables depends on ``batt_ac_or_dc``:\n\n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
 {"batt_computed_bank_capacity", (getter)BatterySystem_get_batt_computed_bank_capacity,(setter)BatterySystem_set_batt_computed_bank_capacity,
 	PyDoc_STR("*float*: Battery computed bank capacity [kWh]"),
@@ -9230,25 +9485,25 @@ static PyGetSetDef BatterySystem_getset[] = {
 	PyDoc_STR("*float*: Inverter efficiency at which to cut battery charge or discharge off [%]"),
  	NULL},
 {"batt_loss_choice", (getter)BatterySystem_get_batt_loss_choice,(setter)BatterySystem_set_batt_loss_choice,
-	PyDoc_STR("*float*: Loss power input option [0/1]\n\n*Options*: 0=Monthly,1=TimeSeries\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Loss power input option [0/1]\n\n**Options:**\n0=Monthly,1=TimeSeries\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"batt_losses", (getter)BatterySystem_get_batt_losses,(setter)BatterySystem_set_batt_losses,
-	PyDoc_STR("*sequence*: Battery system losses at each timestep (kW DC for DC connected, AC for AC connected) [kW]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*sequence*: Battery system losses at each timestep (kW DC for DC connected, AC for AC connected) [kW]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"batt_losses_charging", (getter)BatterySystem_get_batt_losses_charging,(setter)BatterySystem_set_batt_losses_charging,
-	PyDoc_STR("*sequence*: Battery system losses when charging (kW DC for DC connected, AC for AC connected) [kW]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*sequence*: Battery system losses when charging (kW DC for DC connected, AC for AC connected) [kW]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"batt_losses_discharging", (getter)BatterySystem_get_batt_losses_discharging,(setter)BatterySystem_set_batt_losses_discharging,
-	PyDoc_STR("*sequence*: Battery system losses when discharging (kW DC for DC connected, AC for AC connected) [kW]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*sequence*: Battery system losses when discharging (kW DC for DC connected, AC for AC connected) [kW]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"batt_losses_idle", (getter)BatterySystem_get_batt_losses_idle,(setter)BatterySystem_set_batt_losses_idle,
-	PyDoc_STR("*sequence*: Battery system losses when idle (kW DC for DC connected, AC for AC connected) [kW]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*sequence*: Battery system losses when idle (kW DC for DC connected, AC for AC connected) [kW]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"batt_mass", (getter)BatterySystem_get_batt_mass,(setter)BatterySystem_set_batt_mass,
 	PyDoc_STR("*float*: Battery mass [kg]"),
  	NULL},
 {"batt_meter_position", (getter)BatterySystem_get_batt_meter_position,(setter)BatterySystem_set_batt_meter_position,
-	PyDoc_STR("*float*: Position of battery relative to electric meter\n\n*Options*: 0=BehindTheMeter,1=FrontOfMeter"),
+	PyDoc_STR("*float*: Position of battery relative to electric meter\n\n**Options:**\n0=BehindTheMeter,1=FrontOfMeter"),
  	NULL},
 {"batt_power_charge_max_kwac", (getter)BatterySystem_get_batt_power_charge_max_kwac,(setter)BatterySystem_set_batt_power_charge_max_kwac,
 	PyDoc_STR("*float*: Battery maximum charge power (AC) [kWac]"),
@@ -9260,25 +9515,25 @@ static PyGetSetDef BatterySystem_getset[] = {
 	PyDoc_STR("*float*: Battery maximum discharge power (AC) [kWac]"),
  	NULL},
 {"batt_power_discharge_max_kwdc", (getter)BatterySystem_get_batt_power_discharge_max_kwdc,(setter)BatterySystem_set_batt_power_discharge_max_kwdc,
-	PyDoc_STR("*float*: Battery maximum discharge power (DC) [kWdc]\n\n*Changes to this variable may require updating the values of the following*: \n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
+	PyDoc_STR("*float*: Battery maximum discharge power (DC) [kWdc]\n\nThe value of the following variables depends on ``batt_power_discharge_max_kwdc``:\n\n\t - inverter_count\n\t - subarray1_modules_per_string\n\t - subarray1_nstrings\n\t - subarray2_enable\n\t - subarray3_enable\n\t - subarray4_enable\n\t - system_capacity\n"),
  	NULL},
 {"batt_replacement_capacity", (getter)BatterySystem_get_batt_replacement_capacity,(setter)BatterySystem_set_batt_replacement_capacity,
 	PyDoc_STR("*float*: Capacity degradation at which to replace battery [%]"),
  	NULL},
 {"batt_replacement_option", (getter)BatterySystem_get_batt_replacement_option,(setter)BatterySystem_set_batt_replacement_option,
-	PyDoc_STR("*float*: Enable battery replacement? [0=none,1=capacity based,2=user schedule]\n\n*Constraints*: INTEGER,MIN=0,MAX=2\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Enable battery replacement? [0=none,1=capacity based,2=user schedule]\n\n**Constraints:**\nINTEGER,MIN=0,MAX=2\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"batt_replacement_schedule_percent", (getter)BatterySystem_get_batt_replacement_schedule_percent,(setter)BatterySystem_set_batt_replacement_schedule_percent,
-	PyDoc_STR("*sequence*: Percentage of battery capacity to replace in each year [%]\n\n*Options*: length <= analysis_period\n\n*Required*: True if batt_replacement_option=2"),
+	PyDoc_STR("*sequence*: Percentage of battery capacity to replace in each year [%]\n\n**Options:**\nlength <= analysis_period\n\n**Required:**\nRequired if batt_replacement_option=2"),
  	NULL},
 {"batt_surface_area", (getter)BatterySystem_get_batt_surface_area,(setter)BatterySystem_set_batt_surface_area,
 	PyDoc_STR("*float*: Battery surface area [m^2]"),
  	NULL},
 {"en_batt", (getter)BatterySystem_get_en_batt,(setter)BatterySystem_set_en_batt,
-	PyDoc_STR("*float*: Enable battery storage model [0/1]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Enable battery storage model [0/1]\n\n**Constraints:**\nINTEGER,MIN=0,MAX=1\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"en_standalone_batt", (getter)BatterySystem_get_en_standalone_batt,(setter)BatterySystem_set_en_standalone_batt,
-	PyDoc_STR("*float*: Enable standalone battery storage model [0/1]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Enable standalone battery storage model [0/1]\n\n**Constraints:**\nINTEGER,MIN=0,MAX=1\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_replacement_cost1", (getter)BatterySystem_get_om_replacement_cost1,(setter)BatterySystem_set_om_replacement_cost1,
 	PyDoc_STR("*sequence*: Cost to replace battery per kWh [$/kWh]"),
@@ -9396,11 +9651,11 @@ Load_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Load_methods[] = {
 		{"assign",            (PyCFunction)Load_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Load_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Load_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Load_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Load_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Load_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Load_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -9481,19 +9736,19 @@ static PyGetSetDef Load_getset[] = {
 	PyDoc_STR("*sequence*: Critical Electricity load (year 1) [kW]"),
  	NULL},
 {"crit_load_escalation", (getter)Load_get_crit_load_escalation,(setter)Load_set_crit_load_escalation,
-	PyDoc_STR("*sequence*: Annual critical load escalation [%/year]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*sequence*: Annual critical load escalation [%/year]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"grid_outage", (getter)Load_get_grid_outage,(setter)Load_set_grid_outage,
-	PyDoc_STR("*sequence*: Grid outage in this time step [0/1]\n\n*Options*: 0=GridAvailable,1=GridUnavailable,Length=load"),
+	PyDoc_STR("*sequence*: Grid outage in this time step [0/1]\n\n**Options:**\n0=GridAvailable,1=GridUnavailable,Length=load"),
  	NULL},
 {"load", (getter)Load_get_load,(setter)Load_set_load,
-	PyDoc_STR("*sequence*: Electricity load (year 1) [kW]\n\n*Required*: False"),
+	PyDoc_STR("*sequence*: Electricity load (year 1) [kW]\n\n**Required:**\nFalse for configuration with default inputs. May be required if a variable dependent on its value changes. Example: For the Detailed PV - Single Owner configuration, only Subarray 1 is enabled in the configuration defaults, so Subarray 2 inputs would not be required; if Subarray 2 is enabled, then Subarray 2 inputs is required."),
  	NULL},
 {"load_escalation", (getter)Load_get_load_escalation,(setter)Load_set_load_escalation,
-	PyDoc_STR("*sequence*: Annual load escalation [%/year]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*sequence*: Annual load escalation [%/year]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"run_resiliency_calcs", (getter)Load_get_run_resiliency_calcs,(setter)Load_set_run_resiliency_calcs,
-	PyDoc_STR("*float*: Enable resilence calculations for every timestep [0/1]\n\n*Options*: 0=DisableCalcs,1=EnableCalcs\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Enable resilence calculations for every timestep [0/1]\n\n**Options:**\n0=DisableCalcs,1=EnableCalcs\n\n**Constraints:**\nINTEGER,MIN=0,MAX=1\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -9608,11 +9863,11 @@ BatteryCell_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef BatteryCell_methods[] = {
 		{"assign",            (PyCFunction)BatteryCell_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``BatteryCell_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``BatteryCell_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)BatteryCell_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``BatteryCell_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``BatteryCell_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)BatteryCell_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -10068,7 +10323,7 @@ static PyGetSetDef BatteryCell_getset[] = {
 	PyDoc_STR("*float*: Cell capacity at end of nominal zone [Ah]"),
  	NULL},
 {"batt_Vcut", (getter)BatteryCell_get_batt_Vcut,(setter)BatteryCell_set_batt_Vcut,
-	PyDoc_STR("*float*: Cutoff voltage for battery rated capacity [V]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Cutoff voltage for battery rated capacity [V]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"batt_Vexp", (getter)BatteryCell_get_batt_Vexp,(setter)BatteryCell_set_batt_Vexp,
 	PyDoc_STR("*float*: Cell voltage at end of exponential zone [V]"),
@@ -10083,25 +10338,25 @@ static PyGetSetDef BatteryCell_getset[] = {
 	PyDoc_STR("*float*: Default nominal cell voltage [V]"),
  	NULL},
 {"batt_calendar_a", (getter)BatteryCell_get_batt_calendar_a,(setter)BatteryCell_set_batt_calendar_a,
-	PyDoc_STR("*float*: Calendar life model coefficient [1/sqrt(day)]\n\n*Required*: True if en_batt=1&batt_life_model=0&batt_calendar_choice=1"),
+	PyDoc_STR("*float*: Calendar life model coefficient [1/sqrt(day)]\n\n**Required:**\nRequired if en_batt=1&batt_life_model=0&batt_calendar_choice=1"),
  	NULL},
 {"batt_calendar_b", (getter)BatteryCell_get_batt_calendar_b,(setter)BatteryCell_set_batt_calendar_b,
-	PyDoc_STR("*float*: Calendar life model coefficient [K]\n\n*Required*: True if en_batt=1&batt_life_model=0&batt_calendar_choice=1"),
+	PyDoc_STR("*float*: Calendar life model coefficient [K]\n\n**Required:**\nRequired if en_batt=1&batt_life_model=0&batt_calendar_choice=1"),
  	NULL},
 {"batt_calendar_c", (getter)BatteryCell_get_batt_calendar_c,(setter)BatteryCell_set_batt_calendar_c,
-	PyDoc_STR("*float*: Calendar life model coefficient [K]\n\n*Required*: True if en_batt=1&batt_life_model=0&batt_calendar_choice=1"),
+	PyDoc_STR("*float*: Calendar life model coefficient [K]\n\n**Required:**\nRequired if en_batt=1&batt_life_model=0&batt_calendar_choice=1"),
  	NULL},
 {"batt_calendar_choice", (getter)BatteryCell_get_batt_calendar_choice,(setter)BatteryCell_set_batt_calendar_choice,
-	PyDoc_STR("*float*: Calendar life degradation input option [0/1/2]\n\n*Options*: 0=NoCalendarDegradation,1=LithiomIonModel,2=InputLossTable\n\n*Required*: True if en_batt=1&batt_life_model=0"),
+	PyDoc_STR("*float*: Calendar life degradation input option [0/1/2]\n\n**Options:**\n0=NoCalendarDegradation,1=LithiomIonModel,2=InputLossTable\n\n**Required:**\nRequired if en_batt=1&batt_life_model=0"),
  	NULL},
 {"batt_calendar_lifetime_matrix", (getter)BatteryCell_get_batt_calendar_lifetime_matrix,(setter)BatteryCell_set_batt_calendar_lifetime_matrix,
-	PyDoc_STR("*sequence[sequence]*: Days vs capacity\n\n*Required*: True if en_batt=1&batt_life_model=0&batt_calendar_choice=2"),
+	PyDoc_STR("*sequence[sequence]*: Days vs capacity\n\n**Required:**\nRequired if en_batt=1&batt_life_model=0&batt_calendar_choice=2"),
  	NULL},
 {"batt_calendar_q0", (getter)BatteryCell_get_batt_calendar_q0,(setter)BatteryCell_set_batt_calendar_q0,
-	PyDoc_STR("*float*: Calendar life model initial capacity cofficient\n\n*Required*: True if en_batt=1&batt_life_model=0&batt_calendar_choice=1"),
+	PyDoc_STR("*float*: Calendar life model initial capacity cofficient\n\n**Required:**\nRequired if en_batt=1&batt_life_model=0&batt_calendar_choice=1"),
  	NULL},
 {"batt_chem", (getter)BatteryCell_get_batt_chem,(setter)BatteryCell_set_batt_chem,
-	PyDoc_STR("*float*: Battery chemistry\n\n*Options*: 0=LeadAcid,1=LiIon"),
+	PyDoc_STR("*float*: Battery chemistry\n\n**Options:**\n0=LeadAcid,1=LiIon"),
  	NULL},
 {"batt_h_to_ambient", (getter)BatteryCell_get_batt_h_to_ambient,(setter)BatteryCell_set_batt_h_to_ambient,
 	PyDoc_STR("*float*: Heat transfer between battery and environment [W/m2K]"),
@@ -10110,10 +10365,10 @@ static PyGetSetDef BatteryCell_getset[] = {
 	PyDoc_STR("*float*: Initial state-of-charge [%]"),
  	NULL},
 {"batt_life_model", (getter)BatteryCell_get_batt_life_model,(setter)BatteryCell_set_batt_life_model,
-	PyDoc_STR("*float*: Battery life model specifier [0/1/2]\n\n*Options*: 0=calendar/cycle,1=NMC,2=LMO/LTO\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Battery life model specifier [0/1/2]\n\n**Options:**\n0=calendar/cycle,1=NMC,2=LMO/LTO\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"batt_lifetime_matrix", (getter)BatteryCell_get_batt_lifetime_matrix,(setter)BatteryCell_set_batt_lifetime_matrix,
-	PyDoc_STR("*sequence[sequence]*: Cycles vs capacity at different depths-of-discharge\n\n*Required*: True if en_batt=1&batt_life_model=0"),
+	PyDoc_STR("*sequence[sequence]*: Cycles vs capacity at different depths-of-discharge\n\n**Required:**\nRequired if en_batt=1&batt_life_model=0"),
  	NULL},
 {"batt_maximum_SOC", (getter)BatteryCell_get_batt_maximum_SOC,(setter)BatteryCell_set_batt_maximum_SOC,
 	PyDoc_STR("*float*: Maximum allowed state-of-charge [%]"),
@@ -10131,10 +10386,10 @@ static PyGetSetDef BatteryCell_getset[] = {
 	PyDoc_STR("*float*: Internal resistance [Ohm]"),
  	NULL},
 {"batt_room_temperature_celsius", (getter)BatteryCell_get_batt_room_temperature_celsius,(setter)BatteryCell_set_batt_room_temperature_celsius,
-	PyDoc_STR("*sequence*: Temperature of storage room [C]\n\n*Options*: length=1 for fixed, # of weatherfile records otherwise"),
+	PyDoc_STR("*sequence*: Temperature of storage room [C]\n\n**Options:**\nlength=1 for fixed, # of weatherfile records otherwise"),
  	NULL},
 {"batt_voltage_choice", (getter)BatteryCell_get_batt_voltage_choice,(setter)BatteryCell_set_batt_voltage_choice,
-	PyDoc_STR("*float*: Battery voltage input option [0/1]\n\n*Options*: 0=UseVoltageModel,1=InputVoltageTable\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Battery voltage input option [0/1]\n\n**Options:**\n0=UseVoltageModel,1=InputVoltageTable\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"batt_voltage_matrix", (getter)BatteryCell_get_batt_voltage_matrix,(setter)BatteryCell_set_batt_voltage_matrix,
 	PyDoc_STR("*sequence[sequence]*: Battery voltage vs. depth-of-discharge"),
@@ -10255,11 +10510,11 @@ BatteryDispatch_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef BatteryDispatch_methods[] = {
 		{"assign",            (PyCFunction)BatteryDispatch_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``BatteryDispatch_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``BatteryDispatch_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)BatteryDispatch_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``BatteryDispatch_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``BatteryDispatch_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)BatteryDispatch_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -10815,15 +11070,27 @@ BatteryDispatch_set_dispatch_manual_sched_weekend(VarGroupObject *self, PyObject
 		return PySAM_matrix_setter(value, SAM_Pvsamv1_BatteryDispatch_dispatch_manual_sched_weekend_mset, self->data_ptr);
 }
 
+static PyObject *
+BatteryDispatch_get_dispatch_manual_system_charge_first(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_BatteryDispatch_dispatch_manual_system_charge_first_nget, self->data_ptr);
+}
+
+static int
+BatteryDispatch_set_dispatch_manual_system_charge_first(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_BatteryDispatch_dispatch_manual_system_charge_first_nset, self->data_ptr);
+}
+
 static PyGetSetDef BatteryDispatch_getset[] = {
 {"batt_custom_dispatch", (getter)BatteryDispatch_get_batt_custom_dispatch,(setter)BatteryDispatch_set_batt_custom_dispatch,
-	PyDoc_STR("*sequence*: Custom battery power for every time step [kW]\n\n*Info*: kWAC if AC-connected, else kWDC\n\n*Required*: True if en_batt=1&en_standalone_batt=0&batt_dispatch_choice=2"),
+	PyDoc_STR("*sequence*: Custom battery power for every time step [kW]\n\n**Info:**\nkWAC if AC-connected, else kWDC\n\n**Required:**\nRequired if en_batt=1&en_standalone_batt=0&batt_dispatch_choice=2"),
  	NULL},
 {"batt_cycle_cost", (getter)BatteryDispatch_get_batt_cycle_cost,(setter)BatteryDispatch_set_batt_cycle_cost,
-	PyDoc_STR("*sequence*: Input battery cycle degradaton penalty per year [$/cycle-kWh]\n\n*Info*: length 1 or analysis_period, length 1 will be extended using inflation\n\n*Required*: True if batt_cycle_cost_choice=1"),
+	PyDoc_STR("*sequence*: Input battery cycle degradaton penalty per year [$/cycle-kWh]\n\n**Info:**\nlength 1 or analysis_period, length 1 will be extended using inflation\n\n**Required:**\nRequired if batt_cycle_cost_choice=1"),
  	NULL},
 {"batt_cycle_cost_choice", (getter)BatteryDispatch_get_batt_cycle_cost_choice,(setter)BatteryDispatch_set_batt_cycle_cost_choice,
-	PyDoc_STR("*float*: Use SAM cost model for degradaton penalty or input custom via batt_cycle_cost [0/1]\n\n*Options*: 0=UseCostModel,1=InputCost\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Use SAM cost model for degradaton penalty or input custom via batt_cycle_cost [0/1]\n\n**Options:**\n0=UseCostModel,1=InputCost\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"batt_dispatch_auto_btm_can_discharge_to_grid", (getter)BatteryDispatch_get_batt_dispatch_auto_btm_can_discharge_to_grid,(setter)BatteryDispatch_set_batt_dispatch_auto_btm_can_discharge_to_grid,
 	PyDoc_STR("*float*: Behind the meter battery can discharge to grid? [0/1]"),
@@ -10841,118 +11108,121 @@ static PyGetSetDef BatteryDispatch_getset[] = {
 	PyDoc_STR("*float*: Grid charging allowed for automated dispatch? [0/1]"),
  	NULL},
 {"batt_dispatch_charge_only_system_exceeds_load", (getter)BatteryDispatch_get_batt_dispatch_charge_only_system_exceeds_load,(setter)BatteryDispatch_set_batt_dispatch_charge_only_system_exceeds_load,
-	PyDoc_STR("*float*: Battery can charge from system only when system output exceeds load [0/1]\n\n*Required*: True if en_batt=1&en_standalone_batt=0&batt_meter_position=0"),
+	PyDoc_STR("*float*: Battery can charge from system only when system output exceeds load [0/1]\n\n**Required:**\nRequired if en_batt=1&en_standalone_batt=0&batt_meter_position=0"),
  	NULL},
 {"batt_dispatch_choice", (getter)BatteryDispatch_get_batt_dispatch_choice,(setter)BatteryDispatch_set_batt_dispatch_choice,
-	PyDoc_STR("*float*: Battery dispatch algorithm [0/1/2/3/4]\n\n*Options*: If behind the meter: 0=PeakShaving,1=InputGridTarget,2=InputBatteryPower,3=ManualDispatch,4=PriceSignalForecast if front of meter: 0=AutomatedEconomic,1=PV_Smoothing,2=InputBatteryPower,3=ManualDispatch\n\n*Required*: True if en_batt=1"),
+	PyDoc_STR("*float*: Battery dispatch algorithm [0/1/2/3/4]\n\n**Options:**\nIf behind the meter: 0=PeakShaving,1=InputGridTarget,2=InputBatteryPower,3=ManualDispatch,4=PriceSignalForecast if front of meter: 0=AutomatedEconomic,1=PV_Smoothing,2=InputBatteryPower,3=ManualDispatch\n\n**Required:**\nRequired if en_batt=1"),
  	NULL},
 {"batt_dispatch_discharge_only_load_exceeds_system", (getter)BatteryDispatch_get_batt_dispatch_discharge_only_load_exceeds_system,(setter)BatteryDispatch_set_batt_dispatch_discharge_only_load_exceeds_system,
-	PyDoc_STR("*float*: Battery can discharge battery only when load exceeds system output [0/1]\n\n*Required*: True if en_batt=1&en_standalone_batt=0&batt_meter_position=0"),
+	PyDoc_STR("*float*: Battery can discharge battery only when load exceeds system output [0/1]\n\n**Required:**\nRequired if en_batt=1&en_standalone_batt=0&batt_meter_position=0"),
  	NULL},
 {"batt_dispatch_load_forecast_choice", (getter)BatteryDispatch_get_batt_dispatch_load_forecast_choice,(setter)BatteryDispatch_set_batt_dispatch_load_forecast_choice,
-	PyDoc_STR("*float*: Load forecast choice for automatic dispatch [0/1/2]\n\n*Options*: 0=LookAhead,1=LookBehind,2=InputForecast\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Load forecast choice for automatic dispatch [0/1/2]\n\n**Options:**\n0=LookAhead,1=LookBehind,2=InputForecast\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"batt_dispatch_pvs_ac_lb", (getter)BatteryDispatch_get_batt_dispatch_pvs_ac_lb,(setter)BatteryDispatch_set_batt_dispatch_pvs_ac_lb,
-	PyDoc_STR("*float*: AC lower bound [fraction of nameplate]\n\n*Required*: True if en_batt=1&en_standalone_batt=0&batt_meter_position=1&batt_dispatch_choice=1"),
+	PyDoc_STR("*float*: AC lower bound [fraction of nameplate]\n\n**Required:**\nRequired if en_batt=1&en_standalone_batt=0&batt_meter_position=1&batt_dispatch_choice=1"),
  	NULL},
 {"batt_dispatch_pvs_ac_lb_enable", (getter)BatteryDispatch_get_batt_dispatch_pvs_ac_lb_enable,(setter)BatteryDispatch_set_batt_dispatch_pvs_ac_lb_enable,
-	PyDoc_STR("*float*: Enable AC lower bound [0/1]\n\n*Required*: True if en_batt=1&en_standalone_batt=0&batt_meter_position=1&batt_dispatch_choice=1"),
+	PyDoc_STR("*float*: Enable AC lower bound [0/1]\n\n**Required:**\nRequired if en_batt=1&en_standalone_batt=0&batt_meter_position=1&batt_dispatch_choice=1"),
  	NULL},
 {"batt_dispatch_pvs_ac_ub", (getter)BatteryDispatch_get_batt_dispatch_pvs_ac_ub,(setter)BatteryDispatch_set_batt_dispatch_pvs_ac_ub,
-	PyDoc_STR("*float*: AC upper bound [fraction of nameplate]\n\n*Required*: True if en_batt=1&en_standalone_batt=0&batt_meter_position=1&batt_dispatch_choice=1"),
+	PyDoc_STR("*float*: AC upper bound [fraction of nameplate]\n\n**Required:**\nRequired if en_batt=1&en_standalone_batt=0&batt_meter_position=1&batt_dispatch_choice=1"),
  	NULL},
 {"batt_dispatch_pvs_ac_ub_enable", (getter)BatteryDispatch_get_batt_dispatch_pvs_ac_ub_enable,(setter)BatteryDispatch_set_batt_dispatch_pvs_ac_ub_enable,
-	PyDoc_STR("*float*: Enable AC upper bound [0/1]\n\n*Required*: True if en_batt=1&en_standalone_batt=0&batt_meter_position=1&batt_dispatch_choice=1"),
+	PyDoc_STR("*float*: Enable AC upper bound [0/1]\n\n**Required:**\nRequired if en_batt=1&en_standalone_batt=0&batt_meter_position=1&batt_dispatch_choice=1"),
  	NULL},
 {"batt_dispatch_pvs_curtail_as_control", (getter)BatteryDispatch_get_batt_dispatch_pvs_curtail_as_control,(setter)BatteryDispatch_set_batt_dispatch_pvs_curtail_as_control,
-	PyDoc_STR("*float*: Correct up-ramp violations [0/1]\n\n*Required*: True if en_batt=1&en_standalone_batt=0&batt_meter_position=1&batt_dispatch_choice=1"),
+	PyDoc_STR("*float*: Correct up-ramp violations [0/1]\n\n**Required:**\nRequired if en_batt=1&en_standalone_batt=0&batt_meter_position=1&batt_dispatch_choice=1"),
  	NULL},
 {"batt_dispatch_pvs_curtail_if_violation", (getter)BatteryDispatch_get_batt_dispatch_pvs_curtail_if_violation,(setter)BatteryDispatch_set_batt_dispatch_pvs_curtail_if_violation,
-	PyDoc_STR("*float*: Curtail violations [0/1]\n\n*Required*: True if en_batt=1&en_standalone_batt=0&batt_meter_position=1&batt_dispatch_choice=1"),
+	PyDoc_STR("*float*: Curtail violations [0/1]\n\n**Required:**\nRequired if en_batt=1&en_standalone_batt=0&batt_meter_position=1&batt_dispatch_choice=1"),
  	NULL},
 {"batt_dispatch_pvs_forecast_shift_periods", (getter)BatteryDispatch_get_batt_dispatch_pvs_forecast_shift_periods,(setter)BatteryDispatch_set_batt_dispatch_pvs_forecast_shift_periods,
-	PyDoc_STR("*float*: Forecasting window [periods of ramp intervals]\n\n*Required*: True if en_batt=1&en_standalone_batt=0&batt_meter_position=1&batt_dispatch_choice=1"),
+	PyDoc_STR("*float*: Forecasting window [periods of ramp intervals]\n\n**Required:**\nRequired if en_batt=1&en_standalone_batt=0&batt_meter_position=1&batt_dispatch_choice=1"),
  	NULL},
 {"batt_dispatch_pvs_kf", (getter)BatteryDispatch_get_batt_dispatch_pvs_kf,(setter)BatteryDispatch_set_batt_dispatch_pvs_kf,
-	PyDoc_STR("*float*: Forecast accumulation error multiplier (kf)\n\n*Required*: True if en_batt=1&en_standalone_batt=0&batt_meter_position=1&batt_dispatch_choice=1"),
+	PyDoc_STR("*float*: Forecast accumulation error multiplier (kf)\n\n**Required:**\nRequired if en_batt=1&en_standalone_batt=0&batt_meter_position=1&batt_dispatch_choice=1"),
  	NULL},
 {"batt_dispatch_pvs_ki", (getter)BatteryDispatch_get_batt_dispatch_pvs_ki,(setter)BatteryDispatch_set_batt_dispatch_pvs_ki,
-	PyDoc_STR("*float*: Return to rest SOC multiplier (ki)\n\n*Required*: True if en_batt=1&en_standalone_batt=0&batt_meter_position=1&batt_dispatch_choice=1"),
+	PyDoc_STR("*float*: Return to rest SOC multiplier (ki)\n\n**Required:**\nRequired if en_batt=1&en_standalone_batt=0&batt_meter_position=1&batt_dispatch_choice=1"),
  	NULL},
 {"batt_dispatch_pvs_kp", (getter)BatteryDispatch_get_batt_dispatch_pvs_kp,(setter)BatteryDispatch_set_batt_dispatch_pvs_kp,
-	PyDoc_STR("*float*: Track PV power multiplier (kp)\n\n*Required*: True if en_batt=1&en_standalone_batt=0&batt_meter_position=1&batt_dispatch_choice=1"),
+	PyDoc_STR("*float*: Track PV power multiplier (kp)\n\n**Required:**\nRequired if en_batt=1&en_standalone_batt=0&batt_meter_position=1&batt_dispatch_choice=1"),
  	NULL},
 {"batt_dispatch_pvs_max_ramp", (getter)BatteryDispatch_get_batt_dispatch_pvs_max_ramp,(setter)BatteryDispatch_set_batt_dispatch_pvs_max_ramp,
-	PyDoc_STR("*float*: Maximum ramp rate [% of nameplate per ramp interval]\n\n*Required*: True if en_batt=1&en_standalone_batt=0&batt_meter_position=1&batt_dispatch_choice=1"),
+	PyDoc_STR("*float*: Maximum ramp rate [% of nameplate per ramp interval]\n\n**Required:**\nRequired if en_batt=1&en_standalone_batt=0&batt_meter_position=1&batt_dispatch_choice=1"),
  	NULL},
 {"batt_dispatch_pvs_nameplate_ac", (getter)BatteryDispatch_get_batt_dispatch_pvs_nameplate_ac,(setter)BatteryDispatch_set_batt_dispatch_pvs_nameplate_ac,
-	PyDoc_STR("*float*: Nameplate for pv smoothing [kWac]\n\n*Required*: True if en_batt=1&en_standalone_batt=0&batt_meter_position=1&batt_dispatch_choice=1"),
+	PyDoc_STR("*float*: Nameplate for pv smoothing [kWac]\n\n**Required:**\nRequired if en_batt=1&en_standalone_batt=0&batt_meter_position=1&batt_dispatch_choice=1"),
  	NULL},
 {"batt_dispatch_pvs_short_forecast_enable", (getter)BatteryDispatch_get_batt_dispatch_pvs_short_forecast_enable,(setter)BatteryDispatch_set_batt_dispatch_pvs_short_forecast_enable,
-	PyDoc_STR("*float*: Enable short term power forecast [0/1]\n\n*Required*: True if en_batt=1&en_standalone_batt=0&batt_meter_position=1&batt_dispatch_choice=1"),
+	PyDoc_STR("*float*: Enable short term power forecast [0/1]\n\n**Required:**\nRequired if en_batt=1&en_standalone_batt=0&batt_meter_position=1&batt_dispatch_choice=1"),
  	NULL},
 {"batt_dispatch_pvs_soc_rest", (getter)BatteryDispatch_get_batt_dispatch_pvs_soc_rest,(setter)BatteryDispatch_set_batt_dispatch_pvs_soc_rest,
-	PyDoc_STR("*float*: Battery resting SOC [%]\n\n*Required*: True if en_batt=1&en_standalone_batt=0&batt_meter_position=1&batt_dispatch_choice=1"),
+	PyDoc_STR("*float*: Battery resting SOC [%]\n\n**Required:**\nRequired if en_batt=1&en_standalone_batt=0&batt_meter_position=1&batt_dispatch_choice=1"),
  	NULL},
 {"batt_dispatch_pvs_timestep_multiplier", (getter)BatteryDispatch_get_batt_dispatch_pvs_timestep_multiplier,(setter)BatteryDispatch_set_batt_dispatch_pvs_timestep_multiplier,
-	PyDoc_STR("*float*: Ramp timestep multiplier\n\n*Required*: True if en_batt=1&en_standalone_batt=0&batt_meter_position=1&batt_dispatch_choice=1"),
+	PyDoc_STR("*float*: Ramp timestep multiplier\n\n**Required:**\nRequired if en_batt=1&en_standalone_batt=0&batt_meter_position=1&batt_dispatch_choice=1"),
  	NULL},
 {"batt_dispatch_update_frequency_hours", (getter)BatteryDispatch_get_batt_dispatch_update_frequency_hours,(setter)BatteryDispatch_set_batt_dispatch_update_frequency_hours,
 	PyDoc_STR("*float*: Frequency to update the look-ahead dispatch [hours]"),
  	NULL},
 {"batt_dispatch_wf_forecast_choice", (getter)BatteryDispatch_get_batt_dispatch_wf_forecast_choice,(setter)BatteryDispatch_set_batt_dispatch_wf_forecast_choice,
-	PyDoc_STR("*float*: Weather forecast choice for automatic dispatch [0/1/2]\n\n*Options*: 0=LookAhead,1=LookBehind,2=InputForecast\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Weather forecast choice for automatic dispatch [0/1/2]\n\n**Options:**\n0=LookAhead,1=LookBehind,2=InputForecast\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"batt_load_ac_forecast", (getter)BatteryDispatch_get_batt_load_ac_forecast,(setter)BatteryDispatch_set_batt_load_ac_forecast,
-	PyDoc_STR("*sequence*: Load ac power forecast [kW]\n\n*Info*: Length either 8760 or 8760 * steps per hour"),
+	PyDoc_STR("*sequence*: Load ac power forecast [kW]\n\n**Info:**\nLength either 8760 or 8760 * steps per hour"),
  	NULL},
 {"batt_load_ac_forecast_escalation", (getter)BatteryDispatch_get_batt_load_ac_forecast_escalation,(setter)BatteryDispatch_set_batt_load_ac_forecast_escalation,
-	PyDoc_STR("*sequence*: Annual load escalation for ac power forecast [kW]\n\n*Options*: length <= analysis_period"),
+	PyDoc_STR("*sequence*: Annual load escalation for ac power forecast [kW]\n\n**Options:**\nlength <= analysis_period"),
  	NULL},
 {"batt_look_ahead_hours", (getter)BatteryDispatch_get_batt_look_ahead_hours,(setter)BatteryDispatch_set_batt_look_ahead_hours,
 	PyDoc_STR("*float*: Hours to look ahead in automated dispatch [hours]"),
  	NULL},
 {"batt_pv_ac_forecast", (getter)BatteryDispatch_get_batt_pv_ac_forecast,(setter)BatteryDispatch_set_batt_pv_ac_forecast,
-	PyDoc_STR("*sequence*: PV ac power forecast [kW]\n\n*Info*: Length either 8760 * steps per hour (values repeat each year) or 8760 * steps per hour * analysis period"),
+	PyDoc_STR("*sequence*: PV ac power forecast [kW]\n\n**Info:**\nLength either 8760 * steps per hour (values repeat each year) or 8760 * steps per hour * analysis period"),
  	NULL},
 {"batt_pv_clipping_forecast", (getter)BatteryDispatch_get_batt_pv_clipping_forecast,(setter)BatteryDispatch_set_batt_pv_clipping_forecast,
-	PyDoc_STR("*sequence*: PV clipping forecast [kW]\n\n*Info*: Length either 8760 * steps per hour (values repeat each year) or 8760 * steps per hour * analysis period"),
+	PyDoc_STR("*sequence*: PV clipping forecast [kW]\n\n**Info:**\nLength either 8760 * steps per hour (values repeat each year) or 8760 * steps per hour * analysis period"),
  	NULL},
 {"batt_target_choice", (getter)BatteryDispatch_get_batt_target_choice,(setter)BatteryDispatch_set_batt_target_choice,
-	PyDoc_STR("*float*: Target power input option [0/1]\n\n*Options*: 0=InputMonthlyTarget,1=InputFullTimeSeries\n\n*Required*: True if en_batt=1&en_standalone_batt=0&batt_meter_position=0&batt_dispatch_choice=1"),
+	PyDoc_STR("*float*: Target power input option [0/1]\n\n**Options:**\n0=InputMonthlyTarget,1=InputFullTimeSeries\n\n**Required:**\nRequired if en_batt=1&en_standalone_batt=0&batt_meter_position=0&batt_dispatch_choice=1"),
  	NULL},
 {"batt_target_power", (getter)BatteryDispatch_get_batt_target_power,(setter)BatteryDispatch_set_batt_target_power,
-	PyDoc_STR("*sequence*: Grid target power for every time step [kW]\n\n*Required*: True if en_batt=1&batt_meter_position=0&batt_dispatch_choice=1"),
+	PyDoc_STR("*sequence*: Grid target power for every time step [kW]\n\n**Required:**\nRequired if en_batt=1&batt_meter_position=0&batt_dispatch_choice=1"),
  	NULL},
 {"batt_target_power_monthly", (getter)BatteryDispatch_get_batt_target_power_monthly,(setter)BatteryDispatch_set_batt_target_power_monthly,
-	PyDoc_STR("*sequence*: Grid target power on monthly basis [kW]\n\n*Required*: True if en_batt=1&batt_meter_position=0&batt_dispatch_choice=1"),
+	PyDoc_STR("*sequence*: Grid target power on monthly basis [kW]\n\n**Required:**\nRequired if en_batt=1&batt_meter_position=0&batt_dispatch_choice=1"),
  	NULL},
 {"dispatch_manual_btm_discharge_to_grid", (getter)BatteryDispatch_get_dispatch_manual_btm_discharge_to_grid,(setter)BatteryDispatch_set_dispatch_manual_btm_discharge_to_grid,
-	PyDoc_STR("*sequence*: Periods 1-6 behind the meter discharging to grid allowed?\n\n*Required*: True if en_batt=1&batt_dispatch_choice=3&batt_meter_position=0"),
+	PyDoc_STR("*sequence*: Periods 1-6 behind the meter discharging to grid allowed?\n\n**Required:**\nRequired if en_batt=1&batt_dispatch_choice=3&batt_meter_position=0"),
  	NULL},
 {"dispatch_manual_charge", (getter)BatteryDispatch_get_dispatch_manual_charge,(setter)BatteryDispatch_set_dispatch_manual_charge,
-	PyDoc_STR("*sequence*: Periods 1-6 charging from system allowed?\n\n*Required*: True if en_batt=1&en_standalone_batt=0&batt_dispatch_choice=3"),
+	PyDoc_STR("*sequence*: Periods 1-6 charging from system allowed?\n\n**Required:**\nRequired if en_batt=1&en_standalone_batt=0&batt_dispatch_choice=3"),
  	NULL},
 {"dispatch_manual_discharge", (getter)BatteryDispatch_get_dispatch_manual_discharge,(setter)BatteryDispatch_set_dispatch_manual_discharge,
-	PyDoc_STR("*sequence*: Periods 1-6 discharging allowed?\n\n*Required*: True if en_batt=1&batt_dispatch_choice=3"),
+	PyDoc_STR("*sequence*: Periods 1-6 discharging allowed?\n\n**Required:**\nRequired if en_batt=1&batt_dispatch_choice=3"),
  	NULL},
 {"dispatch_manual_fuelcellcharge", (getter)BatteryDispatch_get_dispatch_manual_fuelcellcharge,(setter)BatteryDispatch_set_dispatch_manual_fuelcellcharge,
 	PyDoc_STR("*sequence*: Periods 1-6 charging from fuel cell allowed?"),
  	NULL},
 {"dispatch_manual_gridcharge", (getter)BatteryDispatch_get_dispatch_manual_gridcharge,(setter)BatteryDispatch_set_dispatch_manual_gridcharge,
-	PyDoc_STR("*sequence*: Periods 1-6 grid charging allowed?\n\n*Required*: True if en_batt=1&batt_dispatch_choice=3"),
+	PyDoc_STR("*sequence*: Periods 1-6 grid charging allowed?\n\n**Required:**\nRequired if en_batt=1&batt_dispatch_choice=3"),
  	NULL},
 {"dispatch_manual_percent_discharge", (getter)BatteryDispatch_get_dispatch_manual_percent_discharge,(setter)BatteryDispatch_set_dispatch_manual_percent_discharge,
-	PyDoc_STR("*sequence*: Periods 1-6 discharge percent [%]\n\n*Required*: True if en_batt=1&batt_dispatch_choice=3"),
+	PyDoc_STR("*sequence*: Periods 1-6 discharge percent [%]\n\n**Required:**\nRequired if en_batt=1&batt_dispatch_choice=3"),
  	NULL},
 {"dispatch_manual_percent_gridcharge", (getter)BatteryDispatch_get_dispatch_manual_percent_gridcharge,(setter)BatteryDispatch_set_dispatch_manual_percent_gridcharge,
-	PyDoc_STR("*sequence*: Periods 1-6 gridcharge percent [%]\n\n*Required*: True if en_batt=1&batt_dispatch_choice=3"),
+	PyDoc_STR("*sequence*: Periods 1-6 gridcharge percent [%]\n\n**Required:**\nRequired if en_batt=1&batt_dispatch_choice=3"),
  	NULL},
 {"dispatch_manual_sched", (getter)BatteryDispatch_get_dispatch_manual_sched,(setter)BatteryDispatch_set_dispatch_manual_sched,
-	PyDoc_STR("*sequence[sequence]*: Battery dispatch schedule for weekday\n\n*Required*: True if en_batt=1&batt_dispatch_choice=3"),
+	PyDoc_STR("*sequence[sequence]*: Battery dispatch schedule for weekday\n\n**Required:**\nRequired if en_batt=1&batt_dispatch_choice=3"),
  	NULL},
 {"dispatch_manual_sched_weekend", (getter)BatteryDispatch_get_dispatch_manual_sched_weekend,(setter)BatteryDispatch_set_dispatch_manual_sched_weekend,
-	PyDoc_STR("*sequence[sequence]*: Battery dispatch schedule for weekend\n\n*Required*: True if en_batt=1&batt_dispatch_choice=3"),
+	PyDoc_STR("*sequence[sequence]*: Battery dispatch schedule for weekend\n\n**Required:**\nRequired if en_batt=1&batt_dispatch_choice=3"),
+ 	NULL},
+{"dispatch_manual_system_charge_first", (getter)BatteryDispatch_get_dispatch_manual_system_charge_first,(setter)BatteryDispatch_set_dispatch_manual_system_charge_first,
+	PyDoc_STR("*float*: System charges battery before meeting load [0/1]\n\n**Options:**\n0=LoadFirst,1=ChargeFirst\n\n**Required:**\nRequired if en_batt=1&en_standalone_batt=0&batt_meter_position=0&batt_dispatch_choice=3&batt_dispatch_charge_only_system_exceeds_load=0"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -11067,11 +11337,11 @@ SystemCosts_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef SystemCosts_methods[] = {
 		{"assign",            (PyCFunction)SystemCosts_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``SystemCosts_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``SystemCosts_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)SystemCosts_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``SystemCosts_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``SystemCosts_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)SystemCosts_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -11125,16 +11395,16 @@ SystemCosts_set_om_replacement_cost_escal(VarGroupObject *self, PyObject *value,
 
 static PyGetSetDef SystemCosts_getset[] = {
 {"om_batt_replacement_cost", (getter)SystemCosts_get_om_batt_replacement_cost,(setter)SystemCosts_set_om_batt_replacement_cost,
-	PyDoc_STR("*sequence*: Replacement cost 1 [$/kWh]\n\n*Required*: If not provided, assumed to be 0.0"),
+	PyDoc_STR("*sequence*: Replacement cost 1 [$/kWh]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_batt_variable_cost", (getter)SystemCosts_get_om_batt_variable_cost,(setter)SystemCosts_set_om_batt_variable_cost,
-	PyDoc_STR("*sequence*: Battery production-based System Costs amount [$/MWh]\n\n*Required*: If not provided, assumed to be 0.0"),
+	PyDoc_STR("*sequence*: Battery production-based System Costs amount [$/MWh]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_production_escal", (getter)SystemCosts_get_om_production_escal,(setter)SystemCosts_set_om_production_escal,
-	PyDoc_STR("*float*: Production-based O&M escalation [%/year]\n\n*Required*: If not provided, assumed to be 0.0"),
+	PyDoc_STR("*float*: Production-based O&M escalation [%/year]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_replacement_cost_escal", (getter)SystemCosts_get_om_replacement_cost_escal,(setter)SystemCosts_set_om_replacement_cost_escal,
-	PyDoc_STR("*float*: Replacement cost escalation [%/year]\n\n*Required*: If not provided, assumed to be 0.0"),
+	PyDoc_STR("*float*: Replacement cost escalation [%/year]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -11249,11 +11519,11 @@ FuelCell_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef FuelCell_methods[] = {
 		{"assign",            (PyCFunction)FuelCell_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``FuelCell_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``FuelCell_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)FuelCell_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``FuelCell_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``FuelCell_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)FuelCell_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -11271,7 +11541,7 @@ FuelCell_set_fuelcell_power(VarGroupObject *self, PyObject *value, void *closure
 
 static PyGetSetDef FuelCell_getset[] = {
 {"fuelcell_power", (getter)FuelCell_get_fuelcell_power,(setter)FuelCell_set_fuelcell_power,
-	PyDoc_STR("*sequence*: Electricity from fuel cell [kW]"),
+	PyDoc_STR("*sequence*: Electricity from fuel cell AC [kW]"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -11386,11 +11656,11 @@ PriceSignal_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef PriceSignal_methods[] = {
 		{"assign",            (PyCFunction)PriceSignal_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``PriceSignal_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``PriceSignal_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)PriceSignal_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``PriceSignal_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``PriceSignal_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)PriceSignal_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -11612,58 +11882,58 @@ PriceSignal_set_ppa_price_input(VarGroupObject *self, PyObject *value, void *clo
 
 static PyGetSetDef PriceSignal_getset[] = {
 {"dispatch_factors_ts", (getter)PriceSignal_get_dispatch_factors_ts,(setter)PriceSignal_set_dispatch_factors_ts,
-	PyDoc_STR("*sequence*: Dispatch payment factor time step\n\n*Required*: True if forecast_price_signal_model=0&en_batt=1&batt_meter_position=1&ppa_multiplier_model=1"),
+	PyDoc_STR("*sequence*: Dispatch payment factor time step\n\n**Required:**\nRequired if forecast_price_signal_model=0&en_batt=1&batt_meter_position=1&ppa_multiplier_model=1"),
  	NULL},
 {"dispatch_sched_weekday", (getter)PriceSignal_get_dispatch_sched_weekday,(setter)PriceSignal_set_dispatch_sched_weekday,
-	PyDoc_STR("*sequence[sequence]*: Diurnal weekday TOD periods [1..9]\n\n*Info*: 12 x 24 matrix\n\n*Required*: True if en_batt=1&batt_meter_position=1&forecast_price_signal_model=0&ppa_multiplier_model=0"),
+	PyDoc_STR("*sequence[sequence]*: Diurnal weekday TOD periods [1..9]\n\n**Info:**\n12 x 24 matrix\n\n**Required:**\nRequired if en_batt=1&batt_meter_position=1&forecast_price_signal_model=0&ppa_multiplier_model=0"),
  	NULL},
 {"dispatch_sched_weekend", (getter)PriceSignal_get_dispatch_sched_weekend,(setter)PriceSignal_set_dispatch_sched_weekend,
-	PyDoc_STR("*sequence[sequence]*: Diurnal weekend TOD periods [1..9]\n\n*Info*: 12 x 24 matrix\n\n*Required*: True if en_batt=1&batt_meter_position=1&forecast_price_signal_model=0&ppa_multiplier_model=0"),
+	PyDoc_STR("*sequence[sequence]*: Diurnal weekend TOD periods [1..9]\n\n**Info:**\n12 x 24 matrix\n\n**Required:**\nRequired if en_batt=1&batt_meter_position=1&forecast_price_signal_model=0&ppa_multiplier_model=0"),
  	NULL},
 {"dispatch_tod_factors", (getter)PriceSignal_get_dispatch_tod_factors,(setter)PriceSignal_set_dispatch_tod_factors,
-	PyDoc_STR("*sequence*: TOD factors for periods 1-9\n\n*Required*: True if en_batt=1&batt_meter_position=1&forecast_price_signal_model=0&ppa_multiplier_model=0"),
+	PyDoc_STR("*sequence*: TOD factors for periods 1-9\n\n**Required:**\nRequired if en_batt=1&batt_meter_position=1&forecast_price_signal_model=0&ppa_multiplier_model=0"),
  	NULL},
 {"forecast_price_signal_model", (getter)PriceSignal_get_forecast_price_signal_model,(setter)PriceSignal_set_forecast_price_signal_model,
-	PyDoc_STR("*float*: Forecast price signal model selected [0/1]\n\n*Options*: 0=PPA based,1=Merchant Plant\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Forecast price signal model selected [0/1]\n\n**Options:**\n0=PPA based,1=Merchant Plant\n\n**Constraints:**\nINTEGER,MIN=0,MAX=1\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"mp_ancserv1_revenue", (getter)PriceSignal_get_mp_ancserv1_revenue,(setter)PriceSignal_set_mp_ancserv1_revenue,
-	PyDoc_STR("*sequence[sequence]*: Ancillary services 1 revenue input [ [MW, $/MW]]\n\n*Required*: True if en_batt=1&batt_meter_position=1&forecast_price_signal_model=1"),
+	PyDoc_STR("*sequence[sequence]*: Ancillary services 1 revenue input [ [MW, $/MW]]\n\n**Required:**\nRequired if en_batt=1&batt_meter_position=1&forecast_price_signal_model=1"),
  	NULL},
 {"mp_ancserv2_revenue", (getter)PriceSignal_get_mp_ancserv2_revenue,(setter)PriceSignal_set_mp_ancserv2_revenue,
-	PyDoc_STR("*sequence[sequence]*: Ancillary services 2 revenue input [ [MW, $/MW]]\n\n*Required*: True if en_batt=1&batt_meter_position=1&forecast_price_signal_model=1"),
+	PyDoc_STR("*sequence[sequence]*: Ancillary services 2 revenue input [ [MW, $/MW]]\n\n**Required:**\nRequired if en_batt=1&batt_meter_position=1&forecast_price_signal_model=1"),
  	NULL},
 {"mp_ancserv3_revenue", (getter)PriceSignal_get_mp_ancserv3_revenue,(setter)PriceSignal_set_mp_ancserv3_revenue,
-	PyDoc_STR("*sequence[sequence]*: Ancillary services 3 revenue input [ [MW, $/MW]]\n\n*Required*: True if en_batt=1&batt_meter_position=1&forecast_price_signal_model=1"),
+	PyDoc_STR("*sequence[sequence]*: Ancillary services 3 revenue input [ [MW, $/MW]]\n\n**Required:**\nRequired if en_batt=1&batt_meter_position=1&forecast_price_signal_model=1"),
  	NULL},
 {"mp_ancserv4_revenue", (getter)PriceSignal_get_mp_ancserv4_revenue,(setter)PriceSignal_set_mp_ancserv4_revenue,
-	PyDoc_STR("*sequence[sequence]*: Ancillary services 4 revenue input [ [MW, $/MW]]\n\n*Required*: True if en_batt=1&batt_meter_position=1&forecast_price_signal_model=1"),
+	PyDoc_STR("*sequence[sequence]*: Ancillary services 4 revenue input [ [MW, $/MW]]\n\n**Required:**\nRequired if en_batt=1&batt_meter_position=1&forecast_price_signal_model=1"),
  	NULL},
 {"mp_enable_ancserv1", (getter)PriceSignal_get_mp_enable_ancserv1,(setter)PriceSignal_set_mp_enable_ancserv1,
-	PyDoc_STR("*float*: Enable ancillary services 1 revenue [0/1]\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: True if forecast_price_signal_model=1"),
+	PyDoc_STR("*float*: Enable ancillary services 1 revenue [0/1]\n\n**Constraints:**\nINTEGER,MIN=0,MAX=1\n\n**Required:**\nRequired if forecast_price_signal_model=1"),
  	NULL},
 {"mp_enable_ancserv2", (getter)PriceSignal_get_mp_enable_ancserv2,(setter)PriceSignal_set_mp_enable_ancserv2,
-	PyDoc_STR("*float*: Enable ancillary services 2 revenue [0/1]\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: True if forecast_price_signal_model=1"),
+	PyDoc_STR("*float*: Enable ancillary services 2 revenue [0/1]\n\n**Constraints:**\nINTEGER,MIN=0,MAX=1\n\n**Required:**\nRequired if forecast_price_signal_model=1"),
  	NULL},
 {"mp_enable_ancserv3", (getter)PriceSignal_get_mp_enable_ancserv3,(setter)PriceSignal_set_mp_enable_ancserv3,
-	PyDoc_STR("*float*: Enable ancillary services 3 revenue [0/1]\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: True if forecast_price_signal_model=1"),
+	PyDoc_STR("*float*: Enable ancillary services 3 revenue [0/1]\n\n**Constraints:**\nINTEGER,MIN=0,MAX=1\n\n**Required:**\nRequired if forecast_price_signal_model=1"),
  	NULL},
 {"mp_enable_ancserv4", (getter)PriceSignal_get_mp_enable_ancserv4,(setter)PriceSignal_set_mp_enable_ancserv4,
-	PyDoc_STR("*float*: Enable ancillary services 4 revenue [0/1]\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: True if forecast_price_signal_model=1"),
+	PyDoc_STR("*float*: Enable ancillary services 4 revenue [0/1]\n\n**Constraints:**\nINTEGER,MIN=0,MAX=1\n\n**Required:**\nRequired if forecast_price_signal_model=1"),
  	NULL},
 {"mp_enable_energy_market_revenue", (getter)PriceSignal_get_mp_enable_energy_market_revenue,(setter)PriceSignal_set_mp_enable_energy_market_revenue,
-	PyDoc_STR("*float*: Enable energy market revenue [0/1]\n\n*Options*: 0=false,1=true\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: True if en_batt=1&batt_meter_position=1&forecast_price_signal_model=1"),
+	PyDoc_STR("*float*: Enable energy market revenue [0/1]\n\n**Options:**\n0=false,1=true\n\n**Constraints:**\nINTEGER,MIN=0,MAX=1\n\n**Required:**\nRequired if en_batt=1&batt_meter_position=1&forecast_price_signal_model=1"),
  	NULL},
 {"mp_energy_market_revenue", (getter)PriceSignal_get_mp_energy_market_revenue,(setter)PriceSignal_set_mp_energy_market_revenue,
-	PyDoc_STR("*sequence[sequence]*: Energy market revenue input [ [MW, $/MW]]\n\n*Required*: True if en_batt=1&batt_meter_position=1&forecast_price_signal_model=1"),
+	PyDoc_STR("*sequence[sequence]*: Energy market revenue input [ [MW, $/MW]]\n\n**Required:**\nRequired if en_batt=1&batt_meter_position=1&forecast_price_signal_model=1"),
  	NULL},
 {"ppa_escalation", (getter)PriceSignal_get_ppa_escalation,(setter)PriceSignal_set_ppa_escalation,
-	PyDoc_STR("*float*: PPA escalation rate [%/year]\n\n*Required*: True if forecast_price_signal_model=0&en_batt=1&batt_meter_position=1"),
+	PyDoc_STR("*float*: PPA escalation rate [%/year]\n\n**Required:**\nRequired if forecast_price_signal_model=0&en_batt=1&batt_meter_position=1"),
  	NULL},
 {"ppa_multiplier_model", (getter)PriceSignal_get_ppa_multiplier_model,(setter)PriceSignal_set_ppa_multiplier_model,
-	PyDoc_STR("*float*: PPA multiplier model [0/1]\n\n*Options*: 0=diurnal,1=timestep\n\n*Constraints*: INTEGER,MIN=0\n\n*Required*: True if forecast_price_signal_model=0&en_batt=1&batt_meter_position=1"),
+	PyDoc_STR("*float*: PPA multiplier model [0/1]\n\n**Options:**\n0=diurnal,1=timestep\n\n**Constraints:**\nINTEGER,MIN=0\n\n**Required:**\nRequired if forecast_price_signal_model=0&en_batt=1&batt_meter_position=1"),
  	NULL},
 {"ppa_price_input", (getter)PriceSignal_get_ppa_price_input,(setter)PriceSignal_set_ppa_price_input,
-	PyDoc_STR("*sequence*: PPA Price Input [$/kWh]\n\n*Required*: True if forecast_price_signal_model=0&en_batt=1&batt_meter_position=1"),
+	PyDoc_STR("*sequence*: PPA Price Input [$/kWh]\n\n**Required:**\nRequired if forecast_price_signal_model=0&en_batt=1&batt_meter_position=1"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -11778,11 +12048,11 @@ Revenue_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Revenue_methods[] = {
 		{"assign",            (PyCFunction)Revenue_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Revenue_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Revenue_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Revenue_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Revenue_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Revenue_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Revenue_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -11908,34 +12178,34 @@ Revenue_set_mp_energy_market_revenue_single(VarGroupObject *self, PyObject *valu
 
 static PyGetSetDef Revenue_getset[] = {
 {"mp_ancserv1_revenue_single", (getter)Revenue_get_mp_ancserv1_revenue_single,(setter)Revenue_set_mp_ancserv1_revenue_single,
-	PyDoc_STR("*sequence[sequence]*: Ancillary services 1 revenue input\n\n*Info*: Lifetime x 1[Price($/MWh)]\n\n*Required*: True if forecast_price_signal_model=1&mp_enable_ancserv1_percent_gen=1"),
+	PyDoc_STR("*sequence[sequence]*: Ancillary services 1 revenue input\n\n**Info:**\nLifetime x 1[Price($/MWh)]\n\n**Required:**\nRequired if forecast_price_signal_model=1&mp_enable_ancserv1_percent_gen=1"),
  	NULL},
 {"mp_ancserv2_revenue_single", (getter)Revenue_get_mp_ancserv2_revenue_single,(setter)Revenue_set_mp_ancserv2_revenue_single,
-	PyDoc_STR("*sequence[sequence]*: Ancillary services 2 revenue input\n\n*Info*: Lifetime x 1[Price($/MWh)]\n\n*Required*: True if forecast_price_signal_model=1&mp_enable_ancserv2_percent_gen=1"),
+	PyDoc_STR("*sequence[sequence]*: Ancillary services 2 revenue input\n\n**Info:**\nLifetime x 1[Price($/MWh)]\n\n**Required:**\nRequired if forecast_price_signal_model=1&mp_enable_ancserv2_percent_gen=1"),
  	NULL},
 {"mp_ancserv3_revenue_single", (getter)Revenue_get_mp_ancserv3_revenue_single,(setter)Revenue_set_mp_ancserv3_revenue_single,
-	PyDoc_STR("*sequence[sequence]*: Ancillary services 3 revenue input\n\n*Info*: Lifetime x 1[Price($/MWh)]\n\n*Required*: True if forecast_price_signal_model=1&mp_enable_ancserv3_percent_gen=1"),
+	PyDoc_STR("*sequence[sequence]*: Ancillary services 3 revenue input\n\n**Info:**\nLifetime x 1[Price($/MWh)]\n\n**Required:**\nRequired if forecast_price_signal_model=1&mp_enable_ancserv3_percent_gen=1"),
  	NULL},
 {"mp_ancserv4_revenue_single", (getter)Revenue_get_mp_ancserv4_revenue_single,(setter)Revenue_set_mp_ancserv4_revenue_single,
-	PyDoc_STR("*sequence[sequence]*: Ancillary services 4 revenue input\n\n*Info*: Lifetime x 1[Price($/MWh)]\n\n*Required*: True if forecast_price_signal_model=1&mp_enable_ancserv4_percent_gen=1"),
+	PyDoc_STR("*sequence[sequence]*: Ancillary services 4 revenue input\n\n**Info:**\nLifetime x 1[Price($/MWh)]\n\n**Required:**\nRequired if forecast_price_signal_model=1&mp_enable_ancserv4_percent_gen=1"),
  	NULL},
 {"mp_enable_ancserv1_percent_gen", (getter)Revenue_get_mp_enable_ancserv1_percent_gen,(setter)Revenue_set_mp_enable_ancserv1_percent_gen,
-	PyDoc_STR("*float*: Enable percent demand cleared capacity option for ancillary service 1 [0/1]\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: True if forecast_price_signal_model=1"),
+	PyDoc_STR("*float*: Enable percent demand cleared capacity option for ancillary service 1 [0/1]\n\n**Constraints:**\nINTEGER,MIN=0,MAX=1\n\n**Required:**\nRequired if forecast_price_signal_model=1"),
  	NULL},
 {"mp_enable_ancserv2_percent_gen", (getter)Revenue_get_mp_enable_ancserv2_percent_gen,(setter)Revenue_set_mp_enable_ancserv2_percent_gen,
-	PyDoc_STR("*float*: Enable percent demand cleared capacity option for ancillary service 2 [0/1]\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: True if forecast_price_signal_model=1"),
+	PyDoc_STR("*float*: Enable percent demand cleared capacity option for ancillary service 2 [0/1]\n\n**Constraints:**\nINTEGER,MIN=0,MAX=1\n\n**Required:**\nRequired if forecast_price_signal_model=1"),
  	NULL},
 {"mp_enable_ancserv3_percent_gen", (getter)Revenue_get_mp_enable_ancserv3_percent_gen,(setter)Revenue_set_mp_enable_ancserv3_percent_gen,
-	PyDoc_STR("*float*: Enable percent demand cleared capacity option for ancillary service 3 [0/1]\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: True if forecast_price_signal_model=1"),
+	PyDoc_STR("*float*: Enable percent demand cleared capacity option for ancillary service 3 [0/1]\n\n**Constraints:**\nINTEGER,MIN=0,MAX=1\n\n**Required:**\nRequired if forecast_price_signal_model=1"),
  	NULL},
 {"mp_enable_ancserv4_percent_gen", (getter)Revenue_get_mp_enable_ancserv4_percent_gen,(setter)Revenue_set_mp_enable_ancserv4_percent_gen,
-	PyDoc_STR("*float*: Enable percent demand cleared capacity option for ancillary service 4 [0/1]\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: True if forecast_price_signal_model=1"),
+	PyDoc_STR("*float*: Enable percent demand cleared capacity option for ancillary service 4 [0/1]\n\n**Constraints:**\nINTEGER,MIN=0,MAX=1\n\n**Required:**\nRequired if forecast_price_signal_model=1"),
  	NULL},
 {"mp_enable_market_percent_gen", (getter)Revenue_get_mp_enable_market_percent_gen,(setter)Revenue_set_mp_enable_market_percent_gen,
-	PyDoc_STR("*float*: Enable percent demand cleared capacity option for market revenue [0/1]\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: True if forecast_price_signal_model=1"),
+	PyDoc_STR("*float*: Enable percent demand cleared capacity option for market revenue [0/1]\n\n**Constraints:**\nINTEGER,MIN=0,MAX=1\n\n**Required:**\nRequired if forecast_price_signal_model=1"),
  	NULL},
 {"mp_energy_market_revenue_single", (getter)Revenue_get_mp_energy_market_revenue_single,(setter)Revenue_set_mp_energy_market_revenue_single,
-	PyDoc_STR("*sequence[sequence]*: Energy market revenue input\n\n*Info*: Lifetime x 1 [Price($/MWh)]\n\n*Required*: True if forecast_price_signal_model=1&mp_enable_market_percent_gen=1"),
+	PyDoc_STR("*sequence[sequence]*: Energy market revenue input\n\n**Info:**\nLifetime x 1 [Price($/MWh)]\n\n**Required:**\nRequired if forecast_price_signal_model=1&mp_enable_market_percent_gen=1"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -12050,13 +12320,25 @@ ElectricityRates_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef ElectricityRates_methods[] = {
 		{"assign",            (PyCFunction)ElectricityRates_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``ElectricityRates_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``ElectricityRates_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)ElectricityRates_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``ElectricityRates_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``ElectricityRates_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)ElectricityRates_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
+
+static PyObject *
+ElectricityRates_get_en_electricity_rates(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_ElectricityRates_en_electricity_rates_nget, self->data_ptr);
+}
+
+static int
+ElectricityRates_set_en_electricity_rates(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Pvsamv1_ElectricityRates_en_electricity_rates_nset, self->data_ptr);
+}
 
 static PyObject *
 ElectricityRates_get_rate_escalation(VarGroupObject *self, void *closure)
@@ -12383,86 +12665,89 @@ ElectricityRates_set_ur_yearzero_usage_peaks(VarGroupObject *self, PyObject *val
 }
 
 static PyGetSetDef ElectricityRates_getset[] = {
+{"en_electricity_rates", (getter)ElectricityRates_get_en_electricity_rates,(setter)ElectricityRates_set_en_electricity_rates,
+	PyDoc_STR("*float*: Optionally enable/disable electricity_rate [years]\n\n**Constraints:**\nINTEGER,MIN=0,MAX=1"),
+ 	NULL},
 {"rate_escalation", (getter)ElectricityRates_get_rate_escalation,(setter)ElectricityRates_set_rate_escalation,
-	PyDoc_STR("*sequence*: Annual electricity rate escalation [%/year]\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*sequence*: Annual electricity rate escalation [%/year]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ur_annual_min_charge", (getter)ElectricityRates_get_ur_annual_min_charge,(setter)ElectricityRates_set_ur_annual_min_charge,
-	PyDoc_STR("*float*: Annual minimum charge [$]\n\n*Required*: If not provided, assumed to be 0.0"),
+	PyDoc_STR("*float*: Annual minimum charge [$]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ur_billing_demand_lookback_percentages", (getter)ElectricityRates_get_ur_billing_demand_lookback_percentages,(setter)ElectricityRates_set_ur_billing_demand_lookback_percentages,
-	PyDoc_STR("*sequence[sequence]*: Billing demand lookback percentages by month and consider actual peak demand\n\n*Info*: 12x2\n\n*Required*: True if ur_enable_billing_demand=1"),
+	PyDoc_STR("*sequence[sequence]*: Billing demand lookback percentages by month and consider actual peak demand [%]\n\n**Info:**\n12x2\n\n**Required:**\nRequired if ur_enable_billing_demand=1"),
  	NULL},
 {"ur_billing_demand_lookback_period", (getter)ElectricityRates_get_ur_billing_demand_lookback_period,(setter)ElectricityRates_set_ur_billing_demand_lookback_period,
-	PyDoc_STR("*float*: Billing demand lookback period [mn]\n\n*Constraints*: INTEGER,MIN=0,MAX=12\n\n*Required*: True if ur_enable_billing_demand=1"),
+	PyDoc_STR("*float*: Billing demand lookback period [mn]\n\n**Constraints:**\nINTEGER,MIN=0,MAX=12\n\n**Required:**\nRequired if ur_enable_billing_demand=1"),
  	NULL},
 {"ur_billing_demand_minimum", (getter)ElectricityRates_get_ur_billing_demand_minimum,(setter)ElectricityRates_set_ur_billing_demand_minimum,
-	PyDoc_STR("*float*: Minimum billing demand\n\n*Required*: True if ur_enable_billing_demand=1"),
+	PyDoc_STR("*float*: Minimum billing demand [kW]\n\n**Required:**\nRequired if ur_enable_billing_demand=1"),
  	NULL},
 {"ur_dc_billing_demand_periods", (getter)ElectricityRates_get_ur_dc_billing_demand_periods,(setter)ElectricityRates_set_ur_dc_billing_demand_periods,
-	PyDoc_STR("*sequence[sequence]*: Billing demand applicability to a given demand charge time of use period\n\n*Required*: True if ur_enable_billing_demand=1"),
+	PyDoc_STR("*sequence[sequence]*: Billing demand applicability to a given demand charge time of use period\n\n**Required:**\nRequired if ur_enable_billing_demand=1"),
  	NULL},
 {"ur_dc_enable", (getter)ElectricityRates_get_ur_dc_enable,(setter)ElectricityRates_set_ur_dc_enable,
-	PyDoc_STR("*float*: Enable demand charge [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Enable demand charge [0/1]\n\n**Options:**\n0=disable,1=enable\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ur_dc_flat_mat", (getter)ElectricityRates_get_ur_dc_flat_mat,(setter)ElectricityRates_set_ur_dc_flat_mat,
-	PyDoc_STR("*sequence[sequence]*: Demand rates (flat) table\n\n*Required*: True if ur_dc_enable=1"),
+	PyDoc_STR("*sequence[sequence]*: Demand rates (flat) table [col 0=month, col 1=tier no, col 2=tier peak (kW), col 3=charge ($/kW)]\n\n**Info:**\nnx4\n\n**Required:**\nRequired if ur_dc_enable=1"),
  	NULL},
 {"ur_dc_sched_weekday", (getter)ElectricityRates_get_ur_dc_sched_weekday,(setter)ElectricityRates_set_ur_dc_sched_weekday,
-	PyDoc_STR("*sequence[sequence]*: Demand charge weekday schedule\n\n*Info*: 12x24"),
+	PyDoc_STR("*sequence[sequence]*: Demand charge weekday schedule [Periods defined in ur_dc_tou_mat]\n\n**Info:**\n12x24"),
  	NULL},
 {"ur_dc_sched_weekend", (getter)ElectricityRates_get_ur_dc_sched_weekend,(setter)ElectricityRates_set_ur_dc_sched_weekend,
-	PyDoc_STR("*sequence[sequence]*: Demand charge weekend schedule\n\n*Info*: 12x24"),
+	PyDoc_STR("*sequence[sequence]*: Demand charge weekend schedule [Periods defined in ur_dc_tou_mat]\n\n**Info:**\n12x24"),
  	NULL},
 {"ur_dc_tou_mat", (getter)ElectricityRates_get_ur_dc_tou_mat,(setter)ElectricityRates_set_ur_dc_tou_mat,
-	PyDoc_STR("*sequence[sequence]*: Demand rates (TOU) table\n\n*Required*: True if ur_dc_enable=1"),
+	PyDoc_STR("*sequence[sequence]*: Demand rates (TOU) table [col 0=period no, col 1=tier no, col 2=tier peak (kW), col 3=charge ($/kW)]\n\n**Info:**\nnx4\n\n**Required:**\nRequired if ur_dc_enable=1"),
  	NULL},
 {"ur_ec_sched_weekday", (getter)ElectricityRates_get_ur_ec_sched_weekday,(setter)ElectricityRates_set_ur_ec_sched_weekday,
-	PyDoc_STR("*sequence[sequence]*: Energy charge weekday schedule\n\n*Info*: 12x24"),
+	PyDoc_STR("*sequence[sequence]*: Energy charge weekday schedule [Periods defined in ur_ec_tou_mat]\n\n**Info:**\n12x24"),
  	NULL},
 {"ur_ec_sched_weekend", (getter)ElectricityRates_get_ur_ec_sched_weekend,(setter)ElectricityRates_set_ur_ec_sched_weekend,
-	PyDoc_STR("*sequence[sequence]*: Energy charge weekend schedule\n\n*Info*: 12x24"),
+	PyDoc_STR("*sequence[sequence]*: Energy charge weekend schedule [Periods defined in ur_ec_tou_mat]\n\n**Info:**\n12x24"),
  	NULL},
 {"ur_ec_tou_mat", (getter)ElectricityRates_get_ur_ec_tou_mat,(setter)ElectricityRates_set_ur_ec_tou_mat,
-	PyDoc_STR("*sequence[sequence]*: Energy rates table"),
+	PyDoc_STR("*sequence[sequence]*: Energy rates table [col 0=period no, col 1=tier no, col 2=max usage, col 3=max usage units (0=kWh, 1=kWh/kW, 2=kWh daily, 3=kWh/kW daily), col 4=buy rate ($/kWh), col 5=sell rate ($/kWh)]\n\n**Info:**\nnx6"),
  	NULL},
 {"ur_en_ts_buy_rate", (getter)ElectricityRates_get_ur_en_ts_buy_rate,(setter)ElectricityRates_set_ur_en_ts_buy_rate,
-	PyDoc_STR("*float*: Enable time step buy rates [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Enable time step buy rates [0/1]\n\n**Options:**\n0=disable,1=enable\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ur_en_ts_sell_rate", (getter)ElectricityRates_get_ur_en_ts_sell_rate,(setter)ElectricityRates_set_ur_en_ts_sell_rate,
-	PyDoc_STR("*float*: Enable time step sell rates [0/1]\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Enable time step sell rates [0/1]\n\n**Options:**\n0=disable,1=enable\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ur_enable_billing_demand", (getter)ElectricityRates_get_ur_enable_billing_demand,(setter)ElectricityRates_set_ur_enable_billing_demand,
-	PyDoc_STR("*float*: Enable billing demand ratchets [0/1]\n\n*Options*: 0=disable,1=enable\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Enable billing demand ratchets [0/1]\n\n**Options:**\n0=disable,1=enable\n\n**Constraints:**\nINTEGER,MIN=0,MAX=1\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ur_metering_option", (getter)ElectricityRates_get_ur_metering_option,(setter)ElectricityRates_set_ur_metering_option,
-	PyDoc_STR("*float*: Metering options [0=net energy metering,1=net energy metering with $ credits,2=net billing,3=net billing with carryover to next month,4=buy all - sell all]\n\n*Info*: Net metering monthly excess\n\n*Constraints*: INTEGER,MIN=0,MAX=4\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Metering options [0=net energy metering,1=net energy metering with $ credits,2=net billing,3=net billing with carryover to next month,4=buy all - sell all]\n\n**Info:**\nNet metering monthly excess\n\n**Constraints:**\nINTEGER,MIN=0,MAX=4\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ur_monthly_fixed_charge", (getter)ElectricityRates_get_ur_monthly_fixed_charge,(setter)ElectricityRates_set_ur_monthly_fixed_charge,
-	PyDoc_STR("*float*: Monthly fixed charge [$]\n\n*Required*: If not provided, assumed to be 0.0"),
+	PyDoc_STR("*float*: Monthly fixed charge [$]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ur_monthly_min_charge", (getter)ElectricityRates_get_ur_monthly_min_charge,(setter)ElectricityRates_set_ur_monthly_min_charge,
-	PyDoc_STR("*float*: Monthly minimum charge [$]\n\n*Required*: If not provided, assumed to be 0.0"),
+	PyDoc_STR("*float*: Monthly minimum charge [$]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ur_nm_credit_month", (getter)ElectricityRates_get_ur_nm_credit_month,(setter)ElectricityRates_set_ur_nm_credit_month,
-	PyDoc_STR("*float*: Month of year end payout (true-up) [mn]\n\n*Constraints*: INTEGER,MIN=0,MAX=11\n\n*Required*: If not provided, assumed to be 11"),
+	PyDoc_STR("*float*: Month of year end payout (true-up) [mn]\n\n**Constraints:**\nINTEGER,MIN=0,MAX=11\n\n**Required:**\nFalse. Automatically set to 11 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ur_nm_credit_rollover", (getter)ElectricityRates_get_ur_nm_credit_rollover,(setter)ElectricityRates_set_ur_nm_credit_rollover,
-	PyDoc_STR("*float*: Apply net metering true-up credits to future bills [0/1]\n\n*Constraints*: INTEGER,MIN=0,MAX=1\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Apply net metering true-up credits to future bills [0/1]\n\n**Options:**\n0=disable,1=enable\n\n**Constraints:**\nINTEGER,MIN=0,MAX=1\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ur_nm_yearend_sell_rate", (getter)ElectricityRates_get_ur_nm_yearend_sell_rate,(setter)ElectricityRates_set_ur_nm_yearend_sell_rate,
-	PyDoc_STR("*float*: Net metering true-up credit sell rate [$/kWh]\n\n*Required*: If not provided, assumed to be 0.0"),
+	PyDoc_STR("*float*: Net metering true-up credit sell rate [$/kWh]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ur_sell_eq_buy", (getter)ElectricityRates_get_ur_sell_eq_buy,(setter)ElectricityRates_set_ur_sell_eq_buy,
-	PyDoc_STR("*float*: Set sell rate equal to buy rate [0/1]\n\n*Info*: Optional override\n\n*Constraints*: BOOLEAN\n\n*Required*: If not provided, assumed to be 0"),
+	PyDoc_STR("*float*: Set sell rate equal to buy rate [0/1]\n\n**Info:**\nOptional override\n\n**Constraints:**\nBOOLEAN\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ur_ts_buy_rate", (getter)ElectricityRates_get_ur_ts_buy_rate,(setter)ElectricityRates_set_ur_ts_buy_rate,
-	PyDoc_STR("*sequence*: Time step buy rates [0/1]"),
+	PyDoc_STR("*sequence*: Time step buy rates [$/kWh]"),
  	NULL},
 {"ur_ts_sell_rate", (getter)ElectricityRates_get_ur_ts_sell_rate,(setter)ElectricityRates_set_ur_ts_sell_rate,
-	PyDoc_STR("*sequence*: Time step sell rates [0/1]"),
+	PyDoc_STR("*sequence*: Time step sell rates [$/kWh]"),
  	NULL},
 {"ur_yearzero_usage_peaks", (getter)ElectricityRates_get_ur_yearzero_usage_peaks,(setter)ElectricityRates_set_ur_yearzero_usage_peaks,
-	PyDoc_STR("*sequence*: Peak usage by month for year zero\n\n*Info*: 12\n\n*Required*: True if ur_enable_billing_demand=1"),
+	PyDoc_STR("*sequence*: Peak usage by month for year zero [kW]\n\n**Info:**\n12\n\n**Required:**\nRequired if ur_enable_billing_demand=1"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -12577,11 +12862,11 @@ GridLimits_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef GridLimits_methods[] = {
 		{"assign",            (PyCFunction)GridLimits_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``GridLimits_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``GridLimits_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)GridLimits_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``GridLimits_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``GridLimits_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)GridLimits_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -12623,10 +12908,10 @@ GridLimits_set_grid_interconnection_limit_kwac(VarGroupObject *self, PyObject *v
 
 static PyGetSetDef GridLimits_getset[] = {
 {"enable_interconnection_limit", (getter)GridLimits_get_enable_interconnection_limit,(setter)GridLimits_set_enable_interconnection_limit,
-	PyDoc_STR("*float*: Enable grid interconnection limit [0/1]\n\n*Info*: Enable a grid interconnection limit"),
+	PyDoc_STR("*float*: Enable grid interconnection limit [0/1]\n\n**Info:**\nEnable a grid interconnection limit"),
  	NULL},
 {"grid_curtailment", (getter)GridLimits_get_grid_curtailment,(setter)GridLimits_set_grid_curtailment,
-	PyDoc_STR("*sequence*: Grid curtailment as energy delivery limit (first year) [MW]\n\n*Required*: False"),
+	PyDoc_STR("*sequence*: Grid curtailment as energy delivery limit (first year) [MW]\n\n**Required:**\nFalse for configuration with default inputs. May be required if a variable dependent on its value changes. Example: For the Detailed PV - Single Owner configuration, only Subarray 1 is enabled in the configuration defaults, so Subarray 2 inputs would not be required; if Subarray 2 is enabled, then Subarray 2 inputs is required."),
  	NULL},
 {"grid_interconnection_limit_kwac", (getter)GridLimits_get_grid_interconnection_limit_kwac,(setter)GridLimits_set_grid_interconnection_limit_kwac,
 	PyDoc_STR("*float*: Grid interconnection limit [kWac]"),
@@ -12744,11 +13029,11 @@ Outputs_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Outputs_methods[] = {
 		{"assign",            (PyCFunction)Outputs_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Outputs_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Outputs_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -12792,6 +13077,12 @@ static PyObject *
 Outputs_get_alb(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Pvsamv1_Outputs_alb_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_alb_spatial(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Pvsamv1_Outputs_alb_spatial_mget, self->data_ptr);
 }
 
 static PyObject *
@@ -12858,6 +13149,18 @@ static PyObject *
 Outputs_get_annual_ac_wiring_loss_percent(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Pvsamv1_Outputs_annual_ac_wiring_loss_percent_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_annual_bifacial_electrical_mismatch(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_Outputs_annual_bifacial_electrical_mismatch_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_annual_bifacial_electrical_mismatch_percent(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_Outputs_annual_bifacial_electrical_mismatch_percent_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -13047,6 +13350,30 @@ Outputs_get_annual_gh(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_annual_ground_absorbed(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_Outputs_annual_ground_absorbed_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_annual_ground_absorbed_percent(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_Outputs_annual_ground_absorbed_percent_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_annual_ground_incident(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_Outputs_annual_ground_incident_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_annual_ground_incident_percent(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_Outputs_annual_ground_incident_percent_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_annual_import_to_grid_energy(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Pvsamv1_Outputs_annual_import_to_grid_energy_aget, self->data_ptr);
@@ -13125,9 +13452,39 @@ Outputs_get_annual_poa_rear(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_annual_poa_rear_gain_percent(VarGroupObject *self, void *closure)
+Outputs_get_annual_poa_rear_direct_diffuse(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_Pvsamv1_Outputs_annual_poa_rear_gain_percent_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Pvsamv1_Outputs_annual_poa_rear_direct_diffuse_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_annual_poa_rear_ground_reflected(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_Outputs_annual_poa_rear_ground_reflected_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_annual_poa_rear_rack_shaded(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_Outputs_annual_poa_rear_rack_shaded_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_annual_poa_rear_row_reflections(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_Outputs_annual_poa_rear_row_reflections_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_annual_poa_rear_self_shaded(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_Outputs_annual_poa_rear_self_shaded_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_annual_poa_rear_soiled(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_Outputs_annual_poa_rear_soiled_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -13152,6 +13509,42 @@ static PyObject *
 Outputs_get_annual_poa_soiling_loss_percent(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Pvsamv1_Outputs_annual_poa_soiling_loss_percent_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_annual_rack_shaded_percent(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_Outputs_annual_rack_shaded_percent_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_annual_rear_direct_diffuse_percent(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_Outputs_annual_rear_direct_diffuse_percent_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_annual_rear_ground_reflected_percent(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_Outputs_annual_rear_ground_reflected_percent_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_annual_rear_row_reflections_percent(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_Outputs_annual_rear_row_reflections_percent_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_annual_rear_self_shaded_percent(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_Outputs_annual_rear_self_shaded_percent_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_annual_rear_soiled_percent(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_Outputs_annual_rear_soiled_percent_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -13473,6 +13866,12 @@ Outputs_get_batt_power(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_batt_power_dc(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvsamv1_Outputs_batt_power_dc_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_batt_power_target(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Pvsamv1_Outputs_batt_power_target_aget, self->data_ptr);
@@ -13635,6 +14034,12 @@ Outputs_get_batt_to_grid(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_batt_to_inverter_dc(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvsamv1_Outputs_batt_to_inverter_dc_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_batt_to_load(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Pvsamv1_Outputs_batt_to_load_aget, self->data_ptr);
@@ -13656,6 +14061,12 @@ static PyObject *
 Outputs_get_batt_voltage_cell(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Pvsamv1_Outputs_batt_voltage_cell_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_bifacial_electrical_mismatch(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvsamv1_Outputs_bifacial_electrical_mismatch_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -13743,6 +14154,12 @@ Outputs_get_dn_calc(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_elev(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_Outputs_elev_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_fuelcell_to_batt(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Pvsamv1_Outputs_fuelcell_to_batt_aget, self->data_ptr);
@@ -13794,6 +14211,18 @@ static PyObject *
 Outputs_get_grid_to_load(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Pvsamv1_Outputs_grid_to_load_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_ground_absorbed(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvsamv1_Outputs_ground_absorbed_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_ground_incident(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvsamv1_Outputs_ground_incident_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -13866,6 +14295,18 @@ static PyObject *
 Outputs_get_kwh_per_kw(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Pvsamv1_Outputs_kwh_per_kw_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_lat(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_Outputs_lat_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_lon(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_Outputs_lon_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -14073,6 +14514,42 @@ Outputs_get_poa_rear(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_poa_rear_direct_diffuse(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvsamv1_Outputs_poa_rear_direct_diffuse_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_poa_rear_ground_reflected(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvsamv1_Outputs_poa_rear_ground_reflected_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_poa_rear_rack_shaded(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvsamv1_Outputs_poa_rear_rack_shaded_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_poa_rear_row_reflections(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvsamv1_Outputs_poa_rear_row_reflections_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_poa_rear_self_shaded(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvsamv1_Outputs_poa_rear_self_shaded_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_poa_rear_soiled(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvsamv1_Outputs_poa_rear_soiled_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_poa_shaded(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Pvsamv1_Outputs_poa_shaded_aget, self->data_ptr);
@@ -14247,6 +14724,12 @@ Outputs_get_subarray1_dcloss(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_subarray1_ground_rear_spatial(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Pvsamv1_Outputs_subarray1_ground_rear_spatial_mget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_subarray1_idealrot(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Pvsamv1_Outputs_subarray1_idealrot_aget, self->data_ptr);
@@ -14304,6 +14787,12 @@ static PyObject *
 Outputs_get_subarray1_poa_rear(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Pvsamv1_Outputs_subarray1_poa_rear_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_subarray1_poa_rear_spatial(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Pvsamv1_Outputs_subarray1_poa_rear_spatial_mget, self->data_ptr);
 }
 
 static PyObject *
@@ -14427,6 +14916,12 @@ Outputs_get_subarray2_dcloss(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_subarray2_ground_rear_spatial(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Pvsamv1_Outputs_subarray2_ground_rear_spatial_mget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_subarray2_idealrot(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Pvsamv1_Outputs_subarray2_idealrot_aget, self->data_ptr);
@@ -14484,6 +14979,12 @@ static PyObject *
 Outputs_get_subarray2_poa_rear(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Pvsamv1_Outputs_subarray2_poa_rear_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_subarray2_poa_rear_spatial(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Pvsamv1_Outputs_subarray2_poa_rear_spatial_mget, self->data_ptr);
 }
 
 static PyObject *
@@ -14607,6 +15108,12 @@ Outputs_get_subarray3_dcloss(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_subarray3_ground_rear_spatial(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Pvsamv1_Outputs_subarray3_ground_rear_spatial_mget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_subarray3_idealrot(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Pvsamv1_Outputs_subarray3_idealrot_aget, self->data_ptr);
@@ -14664,6 +15171,12 @@ static PyObject *
 Outputs_get_subarray3_poa_rear(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Pvsamv1_Outputs_subarray3_poa_rear_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_subarray3_poa_rear_spatial(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Pvsamv1_Outputs_subarray3_poa_rear_spatial_mget, self->data_ptr);
 }
 
 static PyObject *
@@ -14787,6 +15300,12 @@ Outputs_get_subarray4_dcloss(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_subarray4_ground_rear_spatial(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Pvsamv1_Outputs_subarray4_ground_rear_spatial_mget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_subarray4_idealrot(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Pvsamv1_Outputs_subarray4_idealrot_aget, self->data_ptr);
@@ -14844,6 +15363,12 @@ static PyObject *
 Outputs_get_subarray4_poa_rear(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Pvsamv1_Outputs_subarray4_poa_rear_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_subarray4_poa_rear_spatial(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Pvsamv1_Outputs_subarray4_poa_rear_spatial_mget, self->data_ptr);
 }
 
 static PyObject *
@@ -14937,6 +15462,12 @@ Outputs_get_system_to_batt(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_system_to_batt_dc(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Pvsamv1_Outputs_system_to_batt_dc_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_system_to_grid(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Pvsamv1_Outputs_system_to_grid_aget, self->data_ptr);
@@ -14958,6 +15489,12 @@ static PyObject *
 Outputs_get_ts_shift_hours(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Pvsamv1_Outputs_ts_shift_hours_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_tz(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Pvsamv1_Outputs_tz_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -15030,6 +15567,9 @@ static PyGetSetDef Outputs_getset[] = {
 {"alb", (getter)Outputs_get_alb,(setter)0,
 	PyDoc_STR("*sequence*: Albedo"),
  	NULL},
+{"alb_spatial", (getter)Outputs_get_alb_spatial,(setter)0,
+	PyDoc_STR("*sequence[sequence]*: Albedo spatial"),
+ 	NULL},
 {"annual_ac_battery_loss_percent", (getter)Outputs_get_annual_ac_battery_loss_percent,(setter)0,
 	PyDoc_STR("*float*: AC-connected battery loss - year 1 [%]"),
  	NULL},
@@ -15062,6 +15602,12 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"annual_ac_wiring_loss_percent", (getter)Outputs_get_annual_ac_wiring_loss_percent,(setter)0,
 	PyDoc_STR("*float*: AC wiring loss [%]"),
+ 	NULL},
+{"annual_bifacial_electrical_mismatch", (getter)Outputs_get_annual_bifacial_electrical_mismatch,(setter)0,
+	PyDoc_STR("*float*: Bifacial electrical mismatch loss [kWh/yr]"),
+ 	NULL},
+{"annual_bifacial_electrical_mismatch_percent", (getter)Outputs_get_annual_bifacial_electrical_mismatch_percent,(setter)0,
+	PyDoc_STR("*float*: Bifacial electrical mismatch loss [%]"),
  	NULL},
 {"annual_crit_load", (getter)Outputs_get_annual_crit_load,(setter)0,
 	PyDoc_STR("*float*: Critical load energy (year 1) [kWh]"),
@@ -15156,6 +15702,18 @@ static PyGetSetDef Outputs_getset[] = {
 {"annual_gh", (getter)Outputs_get_annual_gh,(setter)0,
 	PyDoc_STR("*float*: Annual GHI [Wh/m2/yr]"),
  	NULL},
+{"annual_ground_absorbed", (getter)Outputs_get_annual_ground_absorbed,(setter)0,
+	PyDoc_STR("*float*: Irradiance absorbed by the ground within the array [kWh/yr]"),
+ 	NULL},
+{"annual_ground_absorbed_percent", (getter)Outputs_get_annual_ground_absorbed_percent,(setter)0,
+	PyDoc_STR("*float*: Ground absorbed loss [%]"),
+ 	NULL},
+{"annual_ground_incident", (getter)Outputs_get_annual_ground_incident,(setter)0,
+	PyDoc_STR("*float*: Irradiance incident on the ground within the array [kWh/yr]"),
+ 	NULL},
+{"annual_ground_incident_percent", (getter)Outputs_get_annual_ground_incident_percent,(setter)0,
+	PyDoc_STR("*float*: Ground incident gain [%]"),
+ 	NULL},
 {"annual_import_to_grid_energy", (getter)Outputs_get_annual_import_to_grid_energy,(setter)0,
 	PyDoc_STR("*sequence*: Annual energy imported from grid [kWh]"),
  	NULL},
@@ -15195,8 +15753,23 @@ static PyGetSetDef Outputs_getset[] = {
 {"annual_poa_rear", (getter)Outputs_get_annual_poa_rear,(setter)0,
 	PyDoc_STR("*float*: POA rear-side irradiance total after reflection (IAM) [kWh/yr]"),
  	NULL},
-{"annual_poa_rear_gain_percent", (getter)Outputs_get_annual_poa_rear_gain_percent,(setter)0,
-	PyDoc_STR("*float*: POA rear-side bifacial gain [%]"),
+{"annual_poa_rear_direct_diffuse", (getter)Outputs_get_annual_poa_rear_direct_diffuse,(setter)0,
+	PyDoc_STR("*float*: POA rear-side direct and diffuse radiation after reflection (IAM) [kWh/yr]"),
+ 	NULL},
+{"annual_poa_rear_ground_reflected", (getter)Outputs_get_annual_poa_rear_ground_reflected,(setter)0,
+	PyDoc_STR("*float*: POA rear-side radiation reflected from the ground after (IAM) [kWh/yr]"),
+ 	NULL},
+{"annual_poa_rear_rack_shaded", (getter)Outputs_get_annual_poa_rear_rack_shaded,(setter)0,
+	PyDoc_STR("*float*: POA blocked by racks [kWh/yr]"),
+ 	NULL},
+{"annual_poa_rear_row_reflections", (getter)Outputs_get_annual_poa_rear_row_reflections,(setter)0,
+	PyDoc_STR("*float*: POA rear-side radiation reflected from the rear row after (IAM) [kWh/yr]"),
+ 	NULL},
+{"annual_poa_rear_self_shaded", (getter)Outputs_get_annual_poa_rear_self_shaded,(setter)0,
+	PyDoc_STR("*float*: POA blocked by self shading [kWh/yr]"),
+ 	NULL},
+{"annual_poa_rear_soiled", (getter)Outputs_get_annual_poa_rear_soiled,(setter)0,
+	PyDoc_STR("*float*: POA blocked by rear soiling [kWh/yr]"),
  	NULL},
 {"annual_poa_shaded", (getter)Outputs_get_annual_poa_shaded,(setter)0,
 	PyDoc_STR("*float*: POA front-side irradiance total after shading [kWh/yr]"),
@@ -15209,6 +15782,24 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"annual_poa_soiling_loss_percent", (getter)Outputs_get_annual_poa_soiling_loss_percent,(setter)0,
 	PyDoc_STR("*float*: POA front-side soiling loss [%]"),
+ 	NULL},
+{"annual_rack_shaded_percent", (getter)Outputs_get_annual_rack_shaded_percent,(setter)0,
+	PyDoc_STR("*float*: POA rear-side rack shaded loss [%]"),
+ 	NULL},
+{"annual_rear_direct_diffuse_percent", (getter)Outputs_get_annual_rear_direct_diffuse_percent,(setter)0,
+	PyDoc_STR("*float*: POA rear-side direct and diffuse gain [%]"),
+ 	NULL},
+{"annual_rear_ground_reflected_percent", (getter)Outputs_get_annual_rear_ground_reflected_percent,(setter)0,
+	PyDoc_STR("*float*: POA rear-side view factor reflected from ground gain [%]"),
+ 	NULL},
+{"annual_rear_row_reflections_percent", (getter)Outputs_get_annual_rear_row_reflections_percent,(setter)0,
+	PyDoc_STR("*float*: POA rear-side rear row reflections gain [%]"),
+ 	NULL},
+{"annual_rear_self_shaded_percent", (getter)Outputs_get_annual_rear_self_shaded_percent,(setter)0,
+	PyDoc_STR("*float*: POA rear-side self shaded loss [%]"),
+ 	NULL},
+{"annual_rear_soiled_percent", (getter)Outputs_get_annual_rear_soiled_percent,(setter)0,
+	PyDoc_STR("*float*: POA rear-side soiled loss [%]"),
  	NULL},
 {"annual_snow_loss", (getter)Outputs_get_annual_snow_loss,(setter)0,
 	PyDoc_STR("*float*: Snow DC energy loss [kWh/yr]"),
@@ -15286,7 +15877,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*float*: Subarray 4 DC wiring loss [kWh]"),
  	NULL},
 {"annual_total_loss_percent", (getter)Outputs_get_annual_total_loss_percent,(setter)0,
-	PyDoc_STR("*float*: Total loss from nominal POA to net AC [kWh]"),
+	PyDoc_STR("*float*: Total loss from nominal POA to net AC [%]"),
  	NULL},
 {"annual_transmission_loss", (getter)Outputs_get_annual_transmission_loss,(setter)0,
 	PyDoc_STR("*float*: Transmission loss [kWh]"),
@@ -15367,7 +15958,10 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence[sequence]*: Battery dispatch schedule"),
  	NULL},
 {"batt_power", (getter)Outputs_get_batt_power,(setter)0,
-	PyDoc_STR("*sequence*: Electricity to/from battery [kW]"),
+	PyDoc_STR("*sequence*: Electricity to/from battery AC [kW]"),
+ 	NULL},
+{"batt_power_dc", (getter)Outputs_get_batt_power_dc,(setter)0,
+	PyDoc_STR("*sequence*: Electricity to/from battery DC [kW]"),
  	NULL},
 {"batt_power_target", (getter)Outputs_get_batt_power_target,(setter)0,
 	PyDoc_STR("*sequence*: Electricity battery power target for automated dispatch [kW]"),
@@ -15448,19 +16042,25 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Battery temperature [C]"),
  	NULL},
 {"batt_to_grid", (getter)Outputs_get_batt_to_grid,(setter)0,
-	PyDoc_STR("*sequence*: Electricity to grid from battery [kW]"),
+	PyDoc_STR("*sequence*: Electricity to grid from battery AC [kW]"),
+ 	NULL},
+{"batt_to_inverter_dc", (getter)Outputs_get_batt_to_inverter_dc,(setter)0,
+	PyDoc_STR("*sequence*: Electricity to inverter from battery DC [kW]"),
  	NULL},
 {"batt_to_load", (getter)Outputs_get_batt_to_load,(setter)0,
-	PyDoc_STR("*sequence*: Electricity to load from battery [kW]"),
+	PyDoc_STR("*sequence*: Electricity to load from battery AC [kW]"),
  	NULL},
 {"batt_to_system_load", (getter)Outputs_get_batt_to_system_load,(setter)0,
-	PyDoc_STR("*sequence*: Electricity to system loads from battery [kW]"),
+	PyDoc_STR("*sequence*: Electricity to system loads from battery AC [kW]"),
  	NULL},
 {"batt_voltage", (getter)Outputs_get_batt_voltage,(setter)0,
 	PyDoc_STR("*sequence*: Battery voltage [V]"),
  	NULL},
 {"batt_voltage_cell", (getter)Outputs_get_batt_voltage_cell,(setter)0,
 	PyDoc_STR("*sequence*: Battery cell voltage [V]"),
+ 	NULL},
+{"bifacial_electrical_mismatch", (getter)Outputs_get_bifacial_electrical_mismatch,(setter)0,
+	PyDoc_STR("*sequence*: Array bifacial electrical mismatch loss [kW]"),
  	NULL},
 {"capacity_factor", (getter)Outputs_get_capacity_factor,(setter)0,
 	PyDoc_STR("*float*: Capacity factor based on nameplate DC capacity [%]"),
@@ -15504,8 +16104,11 @@ static PyGetSetDef Outputs_getset[] = {
 {"dn_calc", (getter)Outputs_get_dn_calc,(setter)0,
 	PyDoc_STR("*sequence*: Irradiance DNI calculated [W/m2]"),
  	NULL},
+{"elev", (getter)Outputs_get_elev,(setter)0,
+	PyDoc_STR("*float*: Site elevation from weather file [m]"),
+ 	NULL},
 {"fuelcell_to_batt", (getter)Outputs_get_fuelcell_to_batt,(setter)0,
-	PyDoc_STR("*sequence*: Electricity to battery from fuel cell [kW]"),
+	PyDoc_STR("*sequence*: Electricity to battery from fuel cell AC [kW]"),
  	NULL},
 {"gen", (getter)Outputs_get_gen,(setter)0,
 	PyDoc_STR("*sequence*: System power generated [kW]"),
@@ -15520,19 +16123,25 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Irradiance GHI calculated [W/m2]"),
  	NULL},
 {"grid_power", (getter)Outputs_get_grid_power,(setter)0,
-	PyDoc_STR("*sequence*: Electricity to/from grid [kW]"),
+	PyDoc_STR("*sequence*: Electricity to/from grid AC [kW]"),
  	NULL},
 {"grid_power_target", (getter)Outputs_get_grid_power_target,(setter)0,
 	PyDoc_STR("*sequence*: Electricity grid power target for automated dispatch [kW]"),
  	NULL},
 {"grid_to_batt", (getter)Outputs_get_grid_to_batt,(setter)0,
-	PyDoc_STR("*sequence*: Electricity to battery from grid [kW]"),
+	PyDoc_STR("*sequence*: Electricity to battery from grid AC [kW]"),
  	NULL},
 {"grid_to_load", (getter)Outputs_get_grid_to_load,(setter)0,
-	PyDoc_STR("*sequence*: Electricity to load from grid [kW]"),
+	PyDoc_STR("*sequence*: Electricity to load from grid AC [kW]"),
+ 	NULL},
+{"ground_absorbed", (getter)Outputs_get_ground_absorbed,(setter)0,
+	PyDoc_STR("*sequence*: Irradiance absorbed by the ground within the array [kW]"),
+ 	NULL},
+{"ground_incident", (getter)Outputs_get_ground_incident,(setter)0,
+	PyDoc_STR("*sequence*: Irradiance incident on the ground within the array [kW]"),
  	NULL},
 {"interconnection_loss", (getter)Outputs_get_interconnection_loss,(setter)0,
-	PyDoc_STR("*sequence*: Electricity loss due to curtailment, interconnection, or outage [kW]"),
+	PyDoc_STR("*sequence*: Electricity loss due to curtailment interconnection outage [kW]"),
  	NULL},
 {"inv_cliploss", (getter)Outputs_get_inv_cliploss,(setter)0,
 	PyDoc_STR("*sequence*: Inverter clipping loss AC power limit [kW]"),
@@ -15566,6 +16175,12 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"kwh_per_kw", (getter)Outputs_get_kwh_per_kw,(setter)0,
 	PyDoc_STR("*float*: Energy yield [kWh/kW]"),
+ 	NULL},
+{"lat", (getter)Outputs_get_lat,(setter)0,
+	PyDoc_STR("*float*: Latitude from weather file [degrees]"),
+ 	NULL},
+{"lon", (getter)Outputs_get_lon,(setter)0,
+	PyDoc_STR("*float*: Longitude from weather file [degrees]"),
  	NULL},
 {"market_sell_rate_series_yr1", (getter)Outputs_get_market_sell_rate_series_yr1,(setter)0,
 	PyDoc_STR("*sequence*: Power price for battery dispatch [$/MWh]"),
@@ -15669,6 +16284,24 @@ static PyGetSetDef Outputs_getset[] = {
 {"poa_rear", (getter)Outputs_get_poa_rear,(setter)0,
 	PyDoc_STR("*sequence*: Array POA rear-side total radiation after reflection (IAM) [kW]"),
  	NULL},
+{"poa_rear_direct_diffuse", (getter)Outputs_get_poa_rear_direct_diffuse,(setter)0,
+	PyDoc_STR("*sequence*: Array POA rear-side direct and diffuse radiation after (IAM) [kW]"),
+ 	NULL},
+{"poa_rear_ground_reflected", (getter)Outputs_get_poa_rear_ground_reflected,(setter)0,
+	PyDoc_STR("*sequence*: Array POA rear-side radiation reflected from the ground after (IAM) [kW]"),
+ 	NULL},
+{"poa_rear_rack_shaded", (getter)Outputs_get_poa_rear_rack_shaded,(setter)0,
+	PyDoc_STR("*sequence*: Array POA rear-side radiation blocked by racks [kW]"),
+ 	NULL},
+{"poa_rear_row_reflections", (getter)Outputs_get_poa_rear_row_reflections,(setter)0,
+	PyDoc_STR("*sequence*: Array POA rear-side radiation reflected from the rear row after (IAM) [kW]"),
+ 	NULL},
+{"poa_rear_self_shaded", (getter)Outputs_get_poa_rear_self_shaded,(setter)0,
+	PyDoc_STR("*sequence*: Array POA rear-side radiation blocked by self shading [kW]"),
+ 	NULL},
+{"poa_rear_soiled", (getter)Outputs_get_poa_rear_soiled,(setter)0,
+	PyDoc_STR("*sequence*: Array POA rear-side radiation blocked by rear soiling [kW]"),
+ 	NULL},
 {"poa_shaded", (getter)Outputs_get_poa_shaded,(setter)0,
 	PyDoc_STR("*sequence*: Array POA front-side total radiation after shading only [kW]"),
  	NULL},
@@ -15721,22 +16354,22 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Weather file snow depth [cm]"),
  	NULL},
 {"sol_alt", (getter)Outputs_get_sol_alt,(setter)0,
-	PyDoc_STR("*sequence*: Sun altitude angle [deg]"),
+	PyDoc_STR("*sequence*: Sun altitude angle [degrees]"),
  	NULL},
 {"sol_azi", (getter)Outputs_get_sol_azi,(setter)0,
-	PyDoc_STR("*sequence*: Sun azimuth angle [deg]"),
+	PyDoc_STR("*sequence*: Sun azimuth angle [degrees]"),
  	NULL},
 {"sol_zen", (getter)Outputs_get_sol_zen,(setter)0,
-	PyDoc_STR("*sequence*: Sun zenith angle [deg]"),
+	PyDoc_STR("*sequence*: Sun zenith angle [degrees]"),
  	NULL},
 {"subarray1_aoi", (getter)Outputs_get_subarray1_aoi,(setter)0,
-	PyDoc_STR("*sequence*: Subarray 1 Angle of incidence [deg]"),
+	PyDoc_STR("*sequence*: Subarray 1 Angle of incidence [degrees]"),
  	NULL},
 {"subarray1_aoi_modifier", (getter)Outputs_get_subarray1_aoi_modifier,(setter)0,
 	PyDoc_STR("*sequence*: Subarray 1 Angle of incidence Modifier [0-1]"),
  	NULL},
 {"subarray1_axisrot", (getter)Outputs_get_subarray1_axisrot,(setter)0,
-	PyDoc_STR("*sequence*: Subarray 1 Axis rotation for 1 axis trackers [deg]"),
+	PyDoc_STR("*sequence*: Subarray 1 Axis rotation for 1 axis trackers [degrees]"),
  	NULL},
 {"subarray1_beam_shading_factor", (getter)Outputs_get_subarray1_beam_shading_factor,(setter)0,
 	PyDoc_STR("*sequence*: Subarray 1 External shading and soiling beam irradiance factor [frac]"),
@@ -15756,8 +16389,11 @@ static PyGetSetDef Outputs_getset[] = {
 {"subarray1_dcloss", (getter)Outputs_get_subarray1_dcloss,(setter)0,
 	PyDoc_STR("*float*: Subarray 1 Total DC power loss [%]"),
  	NULL},
+{"subarray1_ground_rear_spatial", (getter)Outputs_get_subarray1_ground_rear_spatial,(setter)0,
+	PyDoc_STR("*sequence[sequence]*: Subarray 1 spatial irradiance incident on the ground between rows [W/m2]"),
+ 	NULL},
 {"subarray1_idealrot", (getter)Outputs_get_subarray1_idealrot,(setter)0,
-	PyDoc_STR("*sequence*: Subarray 1 Axis rotation ideal for 1 axis trackers [deg]"),
+	PyDoc_STR("*sequence*: Subarray 1 Axis rotation ideal for 1 axis trackers [degrees]"),
  	NULL},
 {"subarray1_isc", (getter)Outputs_get_subarray1_isc,(setter)0,
 	PyDoc_STR("*sequence*: Subarray 1 String short circuit DC current [A]"),
@@ -15786,6 +16422,9 @@ static PyGetSetDef Outputs_getset[] = {
 {"subarray1_poa_rear", (getter)Outputs_get_subarray1_poa_rear,(setter)0,
 	PyDoc_STR("*sequence*: Subarray 1 POA rear total irradiance after reflection (IAM) [W/m2]"),
  	NULL},
+{"subarray1_poa_rear_spatial", (getter)Outputs_get_subarray1_poa_rear_spatial,(setter)0,
+	PyDoc_STR("*sequence[sequence]*: Subarray 1 POA spatial rear total irradiance after reflection (IAM) [W/m2]"),
+ 	NULL},
 {"subarray1_poa_shaded", (getter)Outputs_get_subarray1_poa_shaded,(setter)0,
 	PyDoc_STR("*sequence*: Subarray 1 POA front total irradiance after shading only [W/m2]"),
  	NULL},
@@ -15811,22 +16450,22 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Subarray 1 Self-shading non-linear ground diffuse irradiance factor [frac]"),
  	NULL},
 {"subarray1_surf_azi", (getter)Outputs_get_subarray1_surf_azi,(setter)0,
-	PyDoc_STR("*sequence*: Subarray 1 Surface azimuth [deg]"),
+	PyDoc_STR("*sequence*: Subarray 1 Surface azimuth [degrees]"),
  	NULL},
 {"subarray1_surf_tilt", (getter)Outputs_get_subarray1_surf_tilt,(setter)0,
-	PyDoc_STR("*sequence*: Subarray 1 Surface tilt [deg]"),
+	PyDoc_STR("*sequence*: Subarray 1 Surface tilt [degrees]"),
  	NULL},
 {"subarray1_voc", (getter)Outputs_get_subarray1_voc,(setter)0,
 	PyDoc_STR("*sequence*: Subarray 1 Open circuit DC voltage [V]"),
  	NULL},
 {"subarray2_aoi", (getter)Outputs_get_subarray2_aoi,(setter)0,
-	PyDoc_STR("*sequence*: Subarray 2 Angle of incidence [deg]"),
+	PyDoc_STR("*sequence*: Subarray 2 Angle of incidence [degrees]"),
  	NULL},
 {"subarray2_aoi_modifier", (getter)Outputs_get_subarray2_aoi_modifier,(setter)0,
 	PyDoc_STR("*sequence*: Subarray 2 Angle of incidence Modifier [0-1]"),
  	NULL},
 {"subarray2_axisrot", (getter)Outputs_get_subarray2_axisrot,(setter)0,
-	PyDoc_STR("*sequence*: Subarray 2 Axis rotation for 1 axis trackers [deg]"),
+	PyDoc_STR("*sequence*: Subarray 2 Axis rotation for 1 axis trackers [degrees]"),
  	NULL},
 {"subarray2_beam_shading_factor", (getter)Outputs_get_subarray2_beam_shading_factor,(setter)0,
 	PyDoc_STR("*sequence*: Subarray 2 External shading and soiling beam irradiance factor [frac]"),
@@ -15846,8 +16485,11 @@ static PyGetSetDef Outputs_getset[] = {
 {"subarray2_dcloss", (getter)Outputs_get_subarray2_dcloss,(setter)0,
 	PyDoc_STR("*float*: Subarray 2 Total DC power loss [%]"),
  	NULL},
+{"subarray2_ground_rear_spatial", (getter)Outputs_get_subarray2_ground_rear_spatial,(setter)0,
+	PyDoc_STR("*sequence[sequence]*: Subarray 2 spatial irradiance incident on the ground between rows [W/m2]"),
+ 	NULL},
 {"subarray2_idealrot", (getter)Outputs_get_subarray2_idealrot,(setter)0,
-	PyDoc_STR("*sequence*: Subarray 2 Axis rotation ideal for 1 axis trackers [deg]"),
+	PyDoc_STR("*sequence*: Subarray 2 Axis rotation ideal for 1 axis trackers [degrees]"),
  	NULL},
 {"subarray2_isc", (getter)Outputs_get_subarray2_isc,(setter)0,
 	PyDoc_STR("*sequence*: Subarray 2 String short circuit DC current [A]"),
@@ -15876,6 +16518,9 @@ static PyGetSetDef Outputs_getset[] = {
 {"subarray2_poa_rear", (getter)Outputs_get_subarray2_poa_rear,(setter)0,
 	PyDoc_STR("*sequence*: Subarray 2 POA rear irradiance after reflection (IAM) [W/m2]"),
  	NULL},
+{"subarray2_poa_rear_spatial", (getter)Outputs_get_subarray2_poa_rear_spatial,(setter)0,
+	PyDoc_STR("*sequence[sequence]*: Subarray 2 POA spatial rear total irradiance after reflection (IAM) [W/m2]"),
+ 	NULL},
 {"subarray2_poa_shaded", (getter)Outputs_get_subarray2_poa_shaded,(setter)0,
 	PyDoc_STR("*sequence*: Subarray 2 POA front total irradiance after shading only [W/m2]"),
  	NULL},
@@ -15901,22 +16546,22 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Subarray 2 Self-shading non-linear ground diffuse irradiance factor [frac]"),
  	NULL},
 {"subarray2_surf_azi", (getter)Outputs_get_subarray2_surf_azi,(setter)0,
-	PyDoc_STR("*sequence*: Subarray 2 Surface azimuth [deg]"),
+	PyDoc_STR("*sequence*: Subarray 2 Surface azimuth [degrees]"),
  	NULL},
 {"subarray2_surf_tilt", (getter)Outputs_get_subarray2_surf_tilt,(setter)0,
-	PyDoc_STR("*sequence*: Subarray 2 Surface tilt [deg]"),
+	PyDoc_STR("*sequence*: Subarray 2 Surface tilt [degrees]"),
  	NULL},
 {"subarray2_voc", (getter)Outputs_get_subarray2_voc,(setter)0,
 	PyDoc_STR("*sequence*: Subarray 2 Open circuit DC voltage [V]"),
  	NULL},
 {"subarray3_aoi", (getter)Outputs_get_subarray3_aoi,(setter)0,
-	PyDoc_STR("*sequence*: Subarray 3 Angle of incidence [deg]"),
+	PyDoc_STR("*sequence*: Subarray 3 Angle of incidence [degrees]"),
  	NULL},
 {"subarray3_aoi_modifier", (getter)Outputs_get_subarray3_aoi_modifier,(setter)0,
 	PyDoc_STR("*sequence*: Subarray 3 Angle of incidence Modifier [0-1]"),
  	NULL},
 {"subarray3_axisrot", (getter)Outputs_get_subarray3_axisrot,(setter)0,
-	PyDoc_STR("*sequence*: Subarray 3 Axis rotation for 1 axis trackers [deg]"),
+	PyDoc_STR("*sequence*: Subarray 3 Axis rotation for 1 axis trackers [degrees]"),
  	NULL},
 {"subarray3_beam_shading_factor", (getter)Outputs_get_subarray3_beam_shading_factor,(setter)0,
 	PyDoc_STR("*sequence*: Subarray 3 External shading and soiling beam irradiance factor [frac]"),
@@ -15936,8 +16581,11 @@ static PyGetSetDef Outputs_getset[] = {
 {"subarray3_dcloss", (getter)Outputs_get_subarray3_dcloss,(setter)0,
 	PyDoc_STR("*float*: Subarray 3 Total DC power loss [%]"),
  	NULL},
+{"subarray3_ground_rear_spatial", (getter)Outputs_get_subarray3_ground_rear_spatial,(setter)0,
+	PyDoc_STR("*sequence[sequence]*: Subarray 3 spatial irradiance incident on the ground between rows [W/m2]"),
+ 	NULL},
 {"subarray3_idealrot", (getter)Outputs_get_subarray3_idealrot,(setter)0,
-	PyDoc_STR("*sequence*: Subarray 3 Axis rotation ideal for 1 axis trackers [deg]"),
+	PyDoc_STR("*sequence*: Subarray 3 Axis rotation ideal for 1 axis trackers [degrees]"),
  	NULL},
 {"subarray3_isc", (getter)Outputs_get_subarray3_isc,(setter)0,
 	PyDoc_STR("*sequence*: Subarray 3 String short circuit DC current [A]"),
@@ -15966,6 +16614,9 @@ static PyGetSetDef Outputs_getset[] = {
 {"subarray3_poa_rear", (getter)Outputs_get_subarray3_poa_rear,(setter)0,
 	PyDoc_STR("*sequence*: Subarray 3 POA rear irradiance after reflection (IAM) [W/m2]"),
  	NULL},
+{"subarray3_poa_rear_spatial", (getter)Outputs_get_subarray3_poa_rear_spatial,(setter)0,
+	PyDoc_STR("*sequence[sequence]*: Subarray 3 POA spatial rear total irradiance after reflection (IAM) [W/m2]"),
+ 	NULL},
 {"subarray3_poa_shaded", (getter)Outputs_get_subarray3_poa_shaded,(setter)0,
 	PyDoc_STR("*sequence*: Subarray 3 POA front total irradiance after shading only [W/m2]"),
  	NULL},
@@ -15991,22 +16642,22 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Subarray 3 Self-shading non-linear ground diffuse irradiance factor [frac]"),
  	NULL},
 {"subarray3_surf_azi", (getter)Outputs_get_subarray3_surf_azi,(setter)0,
-	PyDoc_STR("*sequence*: Subarray 3 Surface azimuth [deg]"),
+	PyDoc_STR("*sequence*: Subarray 3 Surface azimuth [degrees]"),
  	NULL},
 {"subarray3_surf_tilt", (getter)Outputs_get_subarray3_surf_tilt,(setter)0,
-	PyDoc_STR("*sequence*: Subarray 3 Surface tilt [deg]"),
+	PyDoc_STR("*sequence*: Subarray 3 Surface tilt [degrees]"),
  	NULL},
 {"subarray3_voc", (getter)Outputs_get_subarray3_voc,(setter)0,
 	PyDoc_STR("*sequence*: Subarray 3 Open circuit DC voltage [V]"),
  	NULL},
 {"subarray4_aoi", (getter)Outputs_get_subarray4_aoi,(setter)0,
-	PyDoc_STR("*sequence*: Subarray 4 Angle of incidence [deg]"),
+	PyDoc_STR("*sequence*: Subarray 4 Angle of incidence [degrees]"),
  	NULL},
 {"subarray4_aoi_modifier", (getter)Outputs_get_subarray4_aoi_modifier,(setter)0,
 	PyDoc_STR("*sequence*: Subarray 4 Angle of incidence Modifier [0-1]"),
  	NULL},
 {"subarray4_axisrot", (getter)Outputs_get_subarray4_axisrot,(setter)0,
-	PyDoc_STR("*sequence*: Subarray 4 Axis rotation for 1 axis trackers [deg]"),
+	PyDoc_STR("*sequence*: Subarray 4 Axis rotation for 1 axis trackers [degrees]"),
  	NULL},
 {"subarray4_beam_shading_factor", (getter)Outputs_get_subarray4_beam_shading_factor,(setter)0,
 	PyDoc_STR("*sequence*: Subarray 4 External shading and soiling beam irradiance factor [frac]"),
@@ -16026,8 +16677,11 @@ static PyGetSetDef Outputs_getset[] = {
 {"subarray4_dcloss", (getter)Outputs_get_subarray4_dcloss,(setter)0,
 	PyDoc_STR("*float*: Subarray 4 Total DC power loss [%]"),
  	NULL},
+{"subarray4_ground_rear_spatial", (getter)Outputs_get_subarray4_ground_rear_spatial,(setter)0,
+	PyDoc_STR("*sequence[sequence]*: Subarray 4 spatial irradiance incident on the ground between rows [W/m2]"),
+ 	NULL},
 {"subarray4_idealrot", (getter)Outputs_get_subarray4_idealrot,(setter)0,
-	PyDoc_STR("*sequence*: Subarray 4 Axis rotation ideal for 1 axis trackers [deg]"),
+	PyDoc_STR("*sequence*: Subarray 4 Axis rotation ideal for 1 axis trackers [degrees]"),
  	NULL},
 {"subarray4_isc", (getter)Outputs_get_subarray4_isc,(setter)0,
 	PyDoc_STR("*sequence*: Subarray 4 String short circuit DC current [A]"),
@@ -16056,6 +16710,9 @@ static PyGetSetDef Outputs_getset[] = {
 {"subarray4_poa_rear", (getter)Outputs_get_subarray4_poa_rear,(setter)0,
 	PyDoc_STR("*sequence*: Subarray 4 POA rear irradiance after reflection (IAM) [W/m2]"),
  	NULL},
+{"subarray4_poa_rear_spatial", (getter)Outputs_get_subarray4_poa_rear_spatial,(setter)0,
+	PyDoc_STR("*sequence[sequence]*: Subarray 4 POA spatial rear total irradiance after reflection (IAM) [W/m2]"),
+ 	NULL},
 {"subarray4_poa_shaded", (getter)Outputs_get_subarray4_poa_shaded,(setter)0,
 	PyDoc_STR("*sequence*: Subarray 4 POA front total irradiance after shading only [W/m2]"),
  	NULL},
@@ -16081,10 +16738,10 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Subarray 4 Self-shading non-linear ground diffuse irradiance factor [frac]"),
  	NULL},
 {"subarray4_surf_azi", (getter)Outputs_get_subarray4_surf_azi,(setter)0,
-	PyDoc_STR("*sequence*: Subarray 4 Surface azimuth [deg]"),
+	PyDoc_STR("*sequence*: Subarray 4 Surface azimuth [degrees]"),
  	NULL},
 {"subarray4_surf_tilt", (getter)Outputs_get_subarray4_surf_tilt,(setter)0,
-	PyDoc_STR("*sequence*: Subarray 4 Surface tilt [deg]"),
+	PyDoc_STR("*sequence*: Subarray 4 Surface tilt [degrees]"),
  	NULL},
 {"subarray4_voc", (getter)Outputs_get_subarray4_voc,(setter)0,
 	PyDoc_STR("*sequence*: Subarray 4 Open circuit DC voltage [V]"),
@@ -16099,19 +16756,25 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Hours of autonomy during grid outage survival function"),
  	NULL},
 {"system_to_batt", (getter)Outputs_get_system_to_batt,(setter)0,
-	PyDoc_STR("*sequence*: Electricity to battery from system [kW]"),
+	PyDoc_STR("*sequence*: Electricity to battery from system AC [kW]"),
+ 	NULL},
+{"system_to_batt_dc", (getter)Outputs_get_system_to_batt_dc,(setter)0,
+	PyDoc_STR("*sequence*: Electricity to battery from system DC [kW]"),
  	NULL},
 {"system_to_grid", (getter)Outputs_get_system_to_grid,(setter)0,
-	PyDoc_STR("*sequence*: Electricity to grid from system [kW]"),
+	PyDoc_STR("*sequence*: Electricity to grid from system AC [kW]"),
  	NULL},
 {"system_to_load", (getter)Outputs_get_system_to_load,(setter)0,
-	PyDoc_STR("*sequence*: Electricity to load from system [kW]"),
+	PyDoc_STR("*sequence*: Electricity to load from system AC [kW]"),
  	NULL},
 {"tdry", (getter)Outputs_get_tdry,(setter)0,
 	PyDoc_STR("*sequence*: Weather file ambient temperature [C]"),
  	NULL},
 {"ts_shift_hours", (getter)Outputs_get_ts_shift_hours,(setter)0,
 	PyDoc_STR("*float*: Sun position time offset [hours]"),
+ 	NULL},
+{"tz", (getter)Outputs_get_tz,(setter)0,
+	PyDoc_STR("*float*: Time zone from weather file [UTC offset]"),
  	NULL},
 {"wfpoa", (getter)Outputs_get_wfpoa,(setter)0,
 	PyDoc_STR("*sequence*: Irradiance POA from weather file [W/m2]"),
@@ -16591,11 +17254,11 @@ static PyMethodDef Pvsamv1Module_methods[] = {
 		{"new",             Pvsamv1_new,         METH_VARARGS,
 				PyDoc_STR("new() -> Pvsamv1")},
 		{"default",             Pvsamv1_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> Pvsamv1\n\nLoad values from SAM default configurations to provide as inputs to the model. \n\n			`config` options:\n\n- \"FlatPlatePVAllEquityPartnershipFlip\"\n- \"FlatPlatePVCommercial\"\n- \"FlatPlatePVHostDeveloper\"\n- \"FlatPlatePVLCOECalculator\"\n- \"FlatPlatePVLeveragedPartnershipFlip\"\n- \"FlatPlatePVMerchantPlant\"\n- \"FlatPlatePVNone\"\n- \"FlatPlatePVResidential\"\n- \"FlatPlatePVSaleLeaseback\"\n- \"FlatPlatePVSingleOwner\"\n- \"FlatPlatePVThirdParty\"\n- \"PVBatteryAllEquityPartnershipFlip\"\n- \"PVBatteryCommercial\"\n- \"PVBatteryHostDeveloper\"\n- \"PVBatteryLeveragedPartnershipFlip\"\n- \"PVBatteryMerchantPlant\"\n- \"PVBatteryResidential\"\n- \"PVBatterySaleLeaseback\"\n- \"PVBatterySingleOwner\"\n- \"PVBatteryThirdParty\"\n\n.. note::\n\n	The default configuration is a collection of default values for the module inputs. Some inputs may not be included in the default configuration and are automatically assigned the value indicated by the variable's 'Required' attribute.")},
+				PyDoc_STR("default(config) -> Pvsamv1\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n		- *\"FlatPlatePVAllEquityPartnershipFlip\"*\n\n		- *\"FlatPlatePVCommercial\"*\n\n		- *\"FlatPlatePVHostDeveloper\"*\n\n		- *\"FlatPlatePVLCOECalculator\"*\n\n		- *\"FlatPlatePVLeveragedPartnershipFlip\"*\n\n		- *\"FlatPlatePVMerchantPlant\"*\n\n		- *\"FlatPlatePVNone\"*\n\n		- *\"FlatPlatePVResidential\"*\n\n		- *\"FlatPlatePVSaleLeaseback\"*\n\n		- *\"FlatPlatePVSingleOwner\"*\n\n		- *\"FlatPlatePVThirdParty\"*\n\n		- *\"PVBatteryAllEquityPartnershipFlip\"*\n\n		- *\"PVBatteryCommercial\"*\n\n		- *\"PVBatteryHostDeveloper\"*\n\n		- *\"PVBatteryLeveragedPartnershipFlip\"*\n\n		- *\"PVBatteryMerchantPlant\"*\n\n		- *\"PVBatteryResidential\"*\n\n		- *\"PVBatterySaleLeaseback\"*\n\n		- *\"PVBatterySingleOwner\"*\n\n		- *\"PVBatteryThirdParty\"*\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
 		{"wrap",             Pvsamv1_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> Pvsamv1\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
+				PyDoc_STR("wrap(ssc_data_t) -> Pvsamv1\n\nLoad data from a PySSC object.\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap()``")},
 		{"from_existing",   Pvsamv1_from_existing,        METH_VARARGS,
-				PyDoc_STR("from_existing(data, optional config) -> Pvsamv1\n\nShare underlying data with an existing PySAM class. If config provided, default attributes are loaded otherwise.")},
+				PyDoc_STR("from_existing(data, optional config) -> Pvsamv1\n\nShare data with an existing PySAM class. If ``optional config`` is a valid configuration name, load the module's defaults for that configuration.")},
 		{NULL,              NULL}           /* sentinel */
 };
 

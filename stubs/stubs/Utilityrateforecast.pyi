@@ -31,6 +31,7 @@ class Utilityrateforecast(object):
 			pass
 
 
+		en_electricity_rates = float
 		gen = tuple
 		grid_power = tuple
 		load = tuple

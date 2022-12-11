@@ -69,11 +69,11 @@ SixParameterSolver_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef SixParameterSolver_methods[] = {
 		{"assign",            (PyCFunction)SixParameterSolver_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``SixParameterSolver_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``SixParameterSolver_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)SixParameterSolver_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``SixParameterSolver_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``SixParameterSolver_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)SixParameterSolver_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -199,34 +199,34 @@ SixParameterSolver_set_gamma_pmp(VarGroupObject *self, PyObject *value, void *cl
 
 static PyGetSetDef SixParameterSolver_getset[] = {
 {"Imp", (getter)SixParameterSolver_get_Imp,(setter)SixParameterSolver_set_Imp,
-	PyDoc_STR("*float*: Maximum power point current [A]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Maximum power point current [A]\n\n**Required:**\nTrue"),
  	NULL},
 {"Isc", (getter)SixParameterSolver_get_Isc,(setter)SixParameterSolver_set_Isc,
-	PyDoc_STR("*float*: Short circuit current [A]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Short circuit current [A]\n\n**Required:**\nTrue"),
  	NULL},
 {"Nser", (getter)SixParameterSolver_get_Nser,(setter)SixParameterSolver_set_Nser,
-	PyDoc_STR("*float*: Number of cells in series\n\n*Constraints*: INTEGER,POSITIVE\n\n*Required*: True"),
+	PyDoc_STR("*float*: Number of cells in series\n\n**Constraints:**\nINTEGER,POSITIVE\n\n**Required:**\nTrue"),
  	NULL},
 {"Tref", (getter)SixParameterSolver_get_Tref,(setter)SixParameterSolver_set_Tref,
-	PyDoc_STR("*float*: Reference cell temperature ['C]\n\n*Required*: False"),
+	PyDoc_STR("*float*: Reference cell temperature ['C]\n\n**Required:**\nFalse for configuration with default inputs. May be required if a variable dependent on its value changes. Example: For the Detailed PV - Single Owner configuration, only Subarray 1 is enabled in the configuration defaults, so Subarray 2 inputs would not be required; if Subarray 2 is enabled, then Subarray 2 inputs is required."),
  	NULL},
 {"Vmp", (getter)SixParameterSolver_get_Vmp,(setter)SixParameterSolver_set_Vmp,
-	PyDoc_STR("*float*: Maximum power point voltage [V]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Maximum power point voltage [V]\n\n**Required:**\nTrue"),
  	NULL},
 {"Voc", (getter)SixParameterSolver_get_Voc,(setter)SixParameterSolver_set_Voc,
-	PyDoc_STR("*float*: Open circuit voltage [V]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Open circuit voltage [V]\n\n**Required:**\nTrue"),
  	NULL},
 {"alpha_isc", (getter)SixParameterSolver_get_alpha_isc,(setter)SixParameterSolver_set_alpha_isc,
-	PyDoc_STR("*float*: Temp coeff of current at SC [A/'C]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Temp coeff of current at SC [A/'C]\n\n**Required:**\nTrue"),
  	NULL},
 {"beta_voc", (getter)SixParameterSolver_get_beta_voc,(setter)SixParameterSolver_set_beta_voc,
-	PyDoc_STR("*float*: Temp coeff of voltage at OC [V/'C]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Temp coeff of voltage at OC [V/'C]\n\n**Required:**\nTrue"),
  	NULL},
 {"celltype", (getter)SixParameterSolver_get_celltype,(setter)SixParameterSolver_set_celltype,
-	PyDoc_STR("*str*: Cell technology type [monoSi,multiSi/polySi,cis,cigs,cdte,amorphous]\n\n*Required*: True"),
+	PyDoc_STR("*str*: Cell technology type [monoSi,multiSi/polySi,cis,cigs,cdte,amorphous]\n\n**Required:**\nTrue"),
  	NULL},
 {"gamma_pmp", (getter)SixParameterSolver_get_gamma_pmp,(setter)SixParameterSolver_set_gamma_pmp,
-	PyDoc_STR("*float*: Temp coeff of power at MP [%/'C]\n\n*Required*: True"),
+	PyDoc_STR("*float*: Temp coeff of power at MP [%/'C]\n\n**Required:**\nTrue"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -341,11 +341,11 @@ Outputs_export(VarGroupObject *self, PyObject *args)
 
 static PyMethodDef Outputs_methods[] = {
 		{"assign",            (PyCFunction)Outputs_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"replace",            (PyCFunction)Outputs_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input dict\n\n``Outputs_vals = { var: val, ...}``")},
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Outputs_vals = { var: val, ...}``")},
 		{"export",            (PyCFunction)Outputs_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary")},
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
@@ -729,16 +729,16 @@ static PyMethodDef SixParsolveModule_methods[] = {
 		{"new",             SixParsolve_new,         METH_VARARGS,
 				PyDoc_STR("new() -> SixParsolve")},
 		{"default",             SixParsolve_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> SixParsolve\n\nLoad values from SAM default configurations to provide as inputs to the model. \n\n			None\n\n.. note::\n\n	The default configuration is a collection of default values for the module inputs. Some inputs may not be included in the default configuration and are automatically assigned the value indicated by the variable's 'Required' attribute.")},
+				PyDoc_STR("default(config) -> SixParsolve\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n- None\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
 		{"wrap",             SixParsolve_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> SixParsolve\n\nUse existing PySSC data\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap``")},
+				PyDoc_STR("wrap(ssc_data_t) -> SixParsolve\n\nLoad data from a PySSC object.\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap()``")},
 		{"from_existing",   SixParsolve_from_existing,        METH_VARARGS,
-				PyDoc_STR("from_existing(data, optional config) -> SixParsolve\n\nShare underlying data with an existing PySAM class. If config provided, default attributes are loaded otherwise.")},
+				PyDoc_STR("from_existing(data, optional config) -> SixParsolve\n\nShare data with an existing PySAM class. If ``optional config`` is a valid configuration name, load the module's defaults for that configuration.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 PyDoc_STRVAR(module_doc,
-			 "SixParsolve");
+			 "Coefficient generator for six-parameter single diode module model");
 
 
 static int

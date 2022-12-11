@@ -7,7 +7,7 @@ import tempfile
 import os
 import json
 import tarfile
-from files.version import __version__
+from version import __version__
 
 if old_version.__version__ == __version__:
     raise RuntimeError("Script needs to be run with old release installed and new release's ssc lib under files")
@@ -294,14 +294,14 @@ pysam_dir = os.environ.get("PYSAMDIR")
 
 with open(os.path.join(pysam_dir, "docs", "version_changes", __version__ + ".rst"), "w") as f:
     f.write(f'.. {__version__}:\n\n')
-    f.write(f'Changes to Modules with Version {__version__}\n')
+    f.write(f'Version {__version__}\n')
     f.write('===============================================\n\n')
     f.write(f'{doc_str}\n\n')
     for cmod, changes in doc_dict.items():
         f.write(cmod + "\n")
         f.write('************************************************\n\n')
         if 'mod_variables' in changes.keys():
-            f.write(f':doc:`modules/{cmod}` Modified Input Variables:\n\n')
+            f.write(f':doc:`../modules/{cmod}` Modified Input Variables:\n\n')
             if 'Added variables' in changes['mod_variables']:
                 f.write('    New variables:\n\n')
                 for v in changes['mod_variables']['Added variables']:
@@ -318,17 +318,17 @@ with open(os.path.join(pysam_dir, "docs", "version_changes", __version__ + ".rst
                     f.write(f"         - {v}\n")
                 f.write('\n')
         if 'new_defaults' in changes.keys():
-            f.write(f':doc:`modules/{cmod}` New Default files:\n\n')
+            f.write(f':doc:`../modules/{cmod}` New Default files:\n\n')
             for v in changes['new_defaults']:
                 f.write(f"     - {v}\n")
             f.write("\n")
         if 'del_defaults' in changes.keys():
-            f.write(f':doc:`modules/{cmod}` Removed Default files\n\n')
+            f.write(f':doc:`../modules/{cmod}` Removed Default files\n\n')
             for v in changes['del_defaults']:
                 f.write(f"     - {v}\n")
             f.write("\n")
         if 'mod_defaults' in changes.keys():
-            f.write(f':doc:`modules/{cmod}` Modified Default Values:\n\n')
+            f.write(f':doc:`../modules/{cmod}` Modified Default Values:\n\n')
             for k, v in changes['mod_defaults'].items():
                 f.write(f"     - {k}\n\n        {list(v.keys())}\n\n")
             f.write("\n")
