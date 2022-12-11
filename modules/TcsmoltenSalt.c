@@ -494,18 +494,6 @@ SystemControl_set_disp_pen_ramping(VarGroupObject *self, PyObject *value, void *
 }
 
 static PyObject *
-SystemControl_get_disp_pen_ramping(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_disp_pen_ramping_nget, self->data_ptr);
-}
-
-static int
-SystemControl_set_disp_pen_ramping(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_disp_pen_ramping_nset, self->data_ptr);
-}
-
-static PyObject *
 SystemControl_get_disp_reporting(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_disp_reporting_nget, self->data_ptr);
@@ -515,18 +503,6 @@ static int
 SystemControl_set_disp_reporting(VarGroupObject *self, PyObject *value, void *closure)
 {
 	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_disp_reporting_nset, self->data_ptr);
-}
-
-static PyObject *
-SystemControl_get_disp_rsu_cost_rel(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_TcsmoltenSalt_SystemControl_disp_rsu_cost_rel_nget, self->data_ptr);
-}
-
-static int
-SystemControl_set_disp_rsu_cost_rel(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_TcsmoltenSalt_SystemControl_disp_rsu_cost_rel_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -956,14 +932,8 @@ static PyGetSetDef SystemControl_getset[] = {
 {"disp_pen_ramping", (getter)SystemControl_get_disp_pen_ramping,(setter)SystemControl_set_disp_pen_ramping,
 	PyDoc_STR("*float*: Dispatch cycle production change penalty [$/MWe-change]"),
  	NULL},
-{"disp_pen_ramping", (getter)SystemControl_get_disp_pen_ramping,(setter)SystemControl_set_disp_pen_ramping,
-	PyDoc_STR("*float*: Dispatch cycle production change penalty [$/MWe-change]"),
- 	NULL},
 {"disp_reporting", (getter)SystemControl_get_disp_reporting,(setter)SystemControl_set_disp_reporting,
 	PyDoc_STR("*float*: Dispatch optimization reporting level\n\n**Required:**\nFalse. Automatically set to -1 if not assigned explicitly or loaded from defaults."),
- 	NULL},
-{"disp_rsu_cost_rel", (getter)SystemControl_get_disp_rsu_cost_rel,(setter)SystemControl_set_disp_rsu_cost_rel,
-	PyDoc_STR("*float*: Receiver startup cost [$/MWt/start]"),
  	NULL},
 {"disp_rsu_cost_rel", (getter)SystemControl_get_disp_rsu_cost_rel,(setter)SystemControl_set_disp_rsu_cost_rel,
 	PyDoc_STR("*float*: Receiver startup cost [$/MWt/start]"),
