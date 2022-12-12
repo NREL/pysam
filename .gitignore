@@ -31,3 +31,5 @@ files/defaults/
 *.pyc
 
 .mypy_cache
+
+*.zip
