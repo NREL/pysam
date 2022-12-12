@@ -4,7 +4,7 @@ cd $PYSAMDIR || exit
 source $(conda info --base)/etc/profile.d/conda.sh
 
 # get `CONDA_TOKEN` env variable, required for authentication
-source .env || exit
+source ~/.env || exit
 
 DIST_NAME=''
 if [ `uname` = "Linux" ] ;
