@@ -178,7 +178,7 @@ static PyGetSetDef Plant_getset[] = {
 	PyDoc_STR("*float*: Spec mode: 0=constant CF,1=profile\n\n**Required:**\nTrue"),
  	NULL},
 {"system_capacity", (getter)Plant_get_system_capacity,(setter)Plant_set_system_capacity,
-	PyDoc_STR("*float*: Nameplace Capcity [kW]\n\n**Required:**\nTrue"),
+	PyDoc_STR("*float*: Nameplace Capcity [kW]\n\n**INOUT:** Also an Output variable.\n\n**Required:**\nTrue"),
  	NULL},
 {"user_capacity_factor", (getter)Plant_get_user_capacity_factor,(setter)Plant_set_user_capacity_factor,
 	PyDoc_STR("*float*: Capacity Factor [%]\n\n**Required:**\nTrue"),
