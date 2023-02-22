@@ -8,7 +8,7 @@ import PySAM.BatteryStateful as BattStfl
 available_chems = ['leadacid', 'lfpgraphite', 'nmcgraphite', 'lmolto']
 
 
-def battery_model_sizing(model, desired_power, desired_capacity, desired_voltage, size_by_ac_not_dc=None, module_specs: dict=None):
+def battery_model_sizing(model, desired_power, desired_capacity, desired_voltage, size_by_ac_not_dc=None, module_specs: dict=None, tol=0.05):
     """Sizes the battery model using its current configuration such as chemistry, cell properties, etc and modifies the model's power, capacity and voltage without changing its fundamental properties. The battery's thermal parameters (surface area and mass) are modified according to assumptions
     about the mass and volume per specific energy and assuming the battery is a cube. If the battery's thermal parameters should be sized according to a particular module's capacity and surface area,
     use the module_specs input.
@@ -32,7 +32,7 @@ def battery_model_sizing(model, desired_power, desired_capacity, desired_voltage
             raise TypeError("module_specs must contain 'capacity' and 'surface_area' keys only." )
 
     if type(model) == Batt.Battery or type(model) == PVBatt.Pvsamv1:
-        size_battery(model, desired_power, desired_capacity, desired_voltage, size_by_ac_not_dc, module_dict=module_specs)
+        size_battery(model, desired_power, desired_capacity, desired_voltage, size_by_ac_not_dc, module_dict=module_specs, tol=tol)
     elif type(model) == BattStfl.BatteryStateful:
         size_batterystateful(model, desired_power, desired_capacity, desired_voltage, module_dict=module_specs)
     else:
@@ -58,7 +58,7 @@ def battery_model_change_chemistry(model, chem):
         raise TypeError
 
 
-def size_battery(model, desired_power, desired_capacity, desired_voltage, size_by_ac_not_dc=None, module_dict=None):
+def size_battery(model, desired_power, desired_capacity, desired_voltage, size_by_ac_not_dc=None, module_dict=None, tol=0.05):
     """Helper function for battery_model_sizing. Modifies Battery model with new sizing. For BatteryStateful use size_batterystateful.
     
     :param model: PySAM.Battery model
@@ -127,7 +127,7 @@ def size_battery(model, desired_power, desired_capacity, desired_voltage, size_b
         else:
             raise ValueError
 
-    sizing_outputs = calculate_battery_size(sizing_inputs)
+    sizing_outputs = calculate_battery_size(sizing_inputs, tol)
 
     computed_inputs = ('batt_computed_bank_capacity', 'batt_computed_series', 'batt_computed_strings',
                        'batt_current_charge_max', 'batt_current_discharge_max', 'batt_power_charge_max_kwac',
@@ -205,7 +205,7 @@ def size_batterystateful(model: BattStfl.BatteryStateful, _, desired_capacity, d
     model.ParamsPack.surface_area = thermal_outputs['surface_area']
 
 
-def calculate_battery_size(input_dict):
+def calculate_battery_size(input_dict, tol=0.05):
     """Helper function to battery_model_sizing. All efficiencies and rates in percentages, 0-100. Inverter efficiency depends on which inverter model is being used, inverter_model.
     
     :param dict input_dict: Dictionary of battery parameters. {batt_chem (int), batt_Qfull (float), batt_Vnom_default (float)} 
@@ -289,7 +289,7 @@ def calculate_battery_size(input_dict):
 
     output_dict = dict()
 
-    def size_from_strings(capacity):
+    def size_from_strings(capacity, tol=0.05):
         num_series = math.ceil(desired_voltage / batt_Vnom_default)
         num_strings = math.ceil(capacity * 1000 / (batt_Qfull * batt_Vnom_default * num_series))
         computed_voltage = batt_Vnom_default * num_series
@@ -302,7 +302,7 @@ def calculate_battery_size(input_dict):
         output_dict['power'] = computed_capacity * max_rate
         output_dict['batt_computed_bank_capacity'] = computed_capacity
         output_dict['time_capacity'] = computed_capacity / computed_power
-        if abs(computed_capacity - capacity) / capacity > 0.05:
+        if abs(computed_capacity - capacity) / capacity > tol:
             raise ValueError("Could not meet desired battery capacity. Consider adjusting the desired voltage, "
                              "or battery cell properties")
         return computed_capacity, computed_power, max_rate
@@ -328,13 +328,13 @@ def calculate_battery_size(input_dict):
         desired_capacity /= conv_eff
         desired_power /= conv_eff
 
-        batt_capacity, batt_power, max_rate = size_from_strings(desired_capacity)
+        batt_capacity, batt_power, max_rate = size_from_strings(desired_capacity, tol)
         batt_bank_power_discharge_ac = batt_power * conv_eff
         batt_bank_power_charge_ac = batt_power * conv_eff
         batt_bank_power_discharge_dc = batt_bank_power_discharge_ac / conv_eff
         batt_bank_power_charge_dc = batt_bank_power_charge_ac * conv_eff
     else:
-        batt_capacity, batt_power, max_rate = size_from_strings(desired_capacity)
+        batt_capacity, batt_power, max_rate = size_from_strings(desired_capacity, tol)
         batt_bank_power_discharge_dc = batt_bank_power_charge_dc = batt_power
         batt_bank_power_discharge_ac = batt_bank_power_discharge_dc * conv_eff
         batt_bank_power_charge_ac = batt_bank_power_charge_dc / conv_eff
