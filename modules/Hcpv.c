@@ -1727,7 +1727,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: DC net [kWh]"),
  	NULL},
 {"monthly_energy", (getter)Outputs_get_monthly_energy,(setter)0,
-	PyDoc_STR("*sequence*: Monthly Energy [kWh]"),
+	PyDoc_STR("*sequence*: Monthly Energy Gross [kWh]"),
  	NULL},
 {"monthly_input_radiation", (getter)Outputs_get_monthly_input_radiation,(setter)0,
 	PyDoc_STR("*sequence*: Input radiation [kWh]"),

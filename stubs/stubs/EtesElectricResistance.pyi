@@ -397,9 +397,9 @@ class EtesElectricResistance(object):
 		bop_cost_calc = float
 		construction_financing_cost = float
 		contingency_cost_calc = float
-		cp_battery_capacity = float
+		cp_battery_nameplate = float
 		cp_htf_cycle_des = float
-		cp_system_capacity = float
+		cp_system_nameplate = float
 		cycle_cost_calc = float
 		d_tank_tes = float
 		dens_store_htf_at_T_ave = float

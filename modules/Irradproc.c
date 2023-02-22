@@ -424,7 +424,7 @@ static PyGetSetDef IrradianceProcessor_getset[] = {
 	PyDoc_STR("*sequence*: Hour [hr]\n\n**Info:**\n0-23\n\n**Constraints:**\nLENGTH_EQUAL=beam\n\n**Required:**\nTrue"),
  	NULL},
 {"irrad_mode", (getter)IrradianceProcessor_get_irrad_mode,(setter)IrradianceProcessor_set_irrad_mode,
-	PyDoc_STR("*float*: Irradiance input mode [0/1/2]\n\n**Info:**\nBeam+Diff,Global+Beam, Global+Diff\n\n**Constraints:**\nINTEGER,MIN=0,MAX=2\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*float*: Irradiance input mode [0/1/2/3/4]\n\n**Info:**\nBeam+Diff,Global+Beam, Global+Diff, POA Ref cell, POA Pyranometer \n\n**Constraints:**\nINTEGER,MIN=0,MAX=2\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"lat", (getter)IrradianceProcessor_get_lat,(setter)IrradianceProcessor_set_lat,
 	PyDoc_STR("*float*: Latitude [deg]\n\n**Required:**\nTrue"),

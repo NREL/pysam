@@ -3790,7 +3790,7 @@ static PyGetSetDef Common_getset[] = {
 	PyDoc_STR("*float*: Lifetime hourly system outputs [0/1]\n\n**Options:**\n0=hourly first year,1=hourly lifetime\n\n**Constraints:**\nINTEGER,MIN=0\n\n**Required:**\nTrue"),
  	NULL},
 {"system_use_recapitalization", (getter)Common_get_system_use_recapitalization,(setter)Common_set_system_use_recapitalization,
-	PyDoc_STR("*float*: Recapitalization expenses [0/1]\n\n**Options:**\n0=None,1=Recapitalize\n\n**Constraints:**\nINTEGER,MIN=0\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*float*: Recapitalization expenses [0/1]\n\n**Options:**\n0=None,1=Recapitalize\n\n**INOUT:** This variable is both an input and an output to the compute module.\n\n**Constraints:**\nINTEGER,MIN=0\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"total_installed_cost", (getter)Common_get_total_installed_cost,(setter)Common_set_total_installed_cost,
 	PyDoc_STR("*float*: Total installed cost [$]\n\n**Constraints:**\nMIN=0\n\n**Required:**\nTrue"),

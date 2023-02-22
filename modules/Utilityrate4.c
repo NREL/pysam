@@ -495,10 +495,10 @@ TimeSeries_set_load(VarGroupObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef TimeSeries_getset[] = {
 {"gen", (getter)TimeSeries_get_gen,(setter)TimeSeries_set_gen,
-	PyDoc_STR("*sequence*: System power generated [kW]\n\n**Required:**\nTrue"),
+	PyDoc_STR("*sequence*: System power generated [kW]\n\n**INOUT:** This variable is both an input and an output to the compute module.\n\n**Required:**\nTrue"),
  	NULL},
 {"load", (getter)TimeSeries_get_load,(setter)TimeSeries_set_load,
-	PyDoc_STR("*sequence*: Electricity load (year 1) [kW]\n\n**Required:**\nTrue"),
+	PyDoc_STR("*sequence*: Electricity load (year 1) [kW]\n\n**INOUT:** This variable is both an input and an output to the compute module.\n\n**Required:**\nTrue"),
  	NULL},
 	{NULL}  /* Sentinel */
 };

@@ -335,7 +335,7 @@ static PyGetSetDef Lifetime_getset[] = {
 	PyDoc_STR("*sequence*: Annual DC degradation for lifetime simulations [%/year]\n\n**Required:**\nRequired if system_use_lifetime_output=1"),
  	NULL},
 {"system_use_lifetime_output", (getter)Lifetime_get_system_use_lifetime_output,(setter)Lifetime_set_system_use_lifetime_output,
-	PyDoc_STR("*float*: Run lifetime simulation [0/1]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*float*: Run lifetime simulation [0/1]\n\n**INOUT:** This variable is both an input and an output to the compute module.\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 	{NULL}  /* Sentinel */
 };

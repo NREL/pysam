@@ -333,7 +333,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Hourly energy [kWh]"),
  	NULL},
 {"monthly_energy", (getter)Outputs_get_monthly_energy,(setter)0,
-	PyDoc_STR("*sequence*: Monthly energy [kWh]"),
+	PyDoc_STR("*sequence*: Monthly energy gross [kWh]"),
  	NULL},
 	{NULL}  /* Sentinel */
 };

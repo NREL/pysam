@@ -418,7 +418,7 @@ static PyGetSetDef LoadProfileEstimator_getset[] = {
 	PyDoc_STR("*float*: Building floor area [m2]\n\n**Required:**\nRequired if en_belpe=1"),
  	NULL},
 {"load", (getter)LoadProfileEstimator_get_load,(setter)LoadProfileEstimator_set_load,
-	PyDoc_STR("*sequence*: Electricity load (year 1) [kW]\n\n**Required:**\nRequired if en_belpe=0"),
+	PyDoc_STR("*sequence*: Electricity load (year 1) [kW]\n\n**INOUT:** This variable is both an input and an output to the compute module.\n\n**Required:**\nRequired if en_belpe=0"),
  	NULL},
 {"solar_resource_file", (getter)LoadProfileEstimator_get_solar_resource_file,(setter)LoadProfileEstimator_set_solar_resource_file,
 	PyDoc_STR("*str*: Weather Data file [n/a]\n\n**Constraints:**\nLOCAL_FILE\n\n**Required:**\nRequired if en_belpe=1"),
