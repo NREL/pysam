@@ -115,6 +115,9 @@
 :doc:`../modules/Poacalib` (HD)
       Calibrates beam and diffuse to give POA input
 
+:doc:`../modules/PtesDesignPoint` (HD)
+      PTES Design Point
+
 :doc:`../modules/Pv6parmod` (HD)
       CEC 6 Parameter PV module model performance calculator.  Does not include weather file reading or irradiance processing, or inverter (DC to AC) modeling.
 
@@ -320,6 +323,7 @@
     ../modules/MhkWave.rst
     ../modules/MsptSfAndRecIsolated.rst
     ../modules/Poacalib.rst
+    ../modules/PtesDesignPoint.rst
     ../modules/Pv6parmod.rst
     ../modules/PvGetShadeLossMpp.rst
     ../modules/Pvsamv1.rst

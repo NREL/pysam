@@ -690,8 +690,8 @@ class TcsmoltenSalt(object):
 		const_per_total5 = float
 		construction_financing_cost = float
 		conversion_factor = float
-		cp_battery_capacity = float
-		cp_system_capacity = float
+		cp_battery_nameplate = float
+		cp_system_nameplate = float
 		csp_pt_cost_bop = float
 		csp_pt_cost_contingency = float
 		csp_pt_cost_epc_total = float

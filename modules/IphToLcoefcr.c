@@ -243,7 +243,7 @@ SimpleLCOE_set_fixed_operating_cost(VarGroupObject *self, PyObject *value, void 
 
 static PyGetSetDef SimpleLCOE_getset[] = {
 {"fixed_operating_cost", (getter)SimpleLCOE_get_fixed_operating_cost,(setter)SimpleLCOE_set_fixed_operating_cost,
-	PyDoc_STR("*float*: Annual fixed operating cost [$/kW]\n\n**Required:**\nTrue"),
+	PyDoc_STR("*float*: Annual fixed operating cost [$/kW]\n\n**INOUT:** This variable is both an input and an output to the compute module.\n\n**Required:**\nTrue"),
  	NULL},
 	{NULL}  /* Sentinel */
 };

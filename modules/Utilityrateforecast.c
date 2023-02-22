@@ -511,7 +511,7 @@ static PyGetSetDef ElectricityRates_getset[] = {
 	PyDoc_STR("*sequence[sequence]*: Demand rates (flat) table [col 0=month, col 1=tier no, col 2=tier peak (kW), col 3=charge ($/kW)]\n\n**Info:**\nnx4\n\n**Required:**\nRequired if ur_dc_enable=1"),
  	NULL},
 {"ur_dc_peaks", (getter)ElectricityRates_get_ur_dc_peaks,(setter)ElectricityRates_set_ur_dc_peaks,
-	PyDoc_STR("*sequence[sequence]*: Peak demand by month and period"),
+	PyDoc_STR("*sequence[sequence]*: Peak demand by month and period\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"ur_dc_sched_weekday", (getter)ElectricityRates_get_ur_dc_sched_weekday,(setter)ElectricityRates_set_ur_dc_sched_weekday,
 	PyDoc_STR("*sequence[sequence]*: Demand charge weekday schedule [Periods defined in ur_dc_tou_mat]\n\n**Info:**\n12x24"),
@@ -541,7 +541,7 @@ static PyGetSetDef ElectricityRates_getset[] = {
 	PyDoc_STR("*float*: Enable billing demand ratchets [0/1]\n\n**Options:**\n0=disable,1=enable\n\n**Constraints:**\nINTEGER,MIN=0,MAX=1\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ur_energy_use", (getter)ElectricityRates_get_ur_energy_use,(setter)ElectricityRates_set_ur_energy_use,
-	PyDoc_STR("*sequence[sequence]*: Energy use or surplus by month and period"),
+	PyDoc_STR("*sequence[sequence]*: Energy use or surplus by month and period\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"ur_metering_option", (getter)ElectricityRates_get_ur_metering_option,(setter)ElectricityRates_set_ur_metering_option,
 	PyDoc_STR("*float*: Metering options [0=net energy metering,1=net energy metering with $ credits,2=net billing,3=net billing with carryover to next month,4=buy all - sell all]\n\n**Info:**\nNet metering monthly excess\n\n**Constraints:**\nINTEGER,MIN=0,MAX=4\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
@@ -872,7 +872,7 @@ Controls_set_steps_per_hour(VarGroupObject *self, PyObject *value, void *closure
 
 static PyGetSetDef Controls_getset[] = {
 {"idx", (getter)Controls_get_idx,(setter)Controls_set_idx,
-	PyDoc_STR("*float*: Starting index (lifetime)"),
+	PyDoc_STR("*float*: Starting index (lifetime)\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"steps_per_hour", (getter)Controls_get_steps_per_hour,(setter)Controls_set_steps_per_hour,
 	PyDoc_STR("*float*: Steps per hour [hr]\n\n**Required:**\nTrue"),

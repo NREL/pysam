@@ -1243,7 +1243,7 @@ static PyGetSetDef GeoHourly_getset[] = {
 	PyDoc_STR("*float*: Resource Potential [MW]\n\n**Required:**\nRequired if ui_calculations_only=0"),
  	NULL},
 {"resource_temp", (getter)GeoHourly_get_resource_temp,(setter)GeoHourly_set_resource_temp,
-	PyDoc_STR("*float*: Resource Temperature [C]\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``resource_temp``:\n\n\t - T_htf_hot_ref\n\t - design_temp\n\t - num_wells_getem\n"),
+	PyDoc_STR("*float*: Resource Temperature [C]\n\n**Constraints:**\nMAX=373\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``resource_temp``:\n\n\t - T_htf_hot_ref\n\t - design_temp\n\t - num_wells_getem\n"),
  	NULL},
 {"resource_type", (getter)GeoHourly_get_resource_type,(setter)GeoHourly_set_resource_type,
 	PyDoc_STR("*float*: Type of Resource\n\n**Constraints:**\nINTEGER\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``resource_type``:\n\n\t - T_htf_hot_ref\n\t - design_temp\n\t - num_wells_getem\n"),

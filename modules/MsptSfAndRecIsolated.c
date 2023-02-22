@@ -627,7 +627,7 @@ static PyGetSetDef TowerAndReceiver_getset[] = {
 	PyDoc_STR("*sequence[sequence]*: User defined field fluid property data [-]\n\n**Required:**\nTrue"),
  	NULL},
 {"h_tower", (getter)TowerAndReceiver_get_h_tower,(setter)TowerAndReceiver_set_h_tower,
-	PyDoc_STR("*float*: Tower height [m]\n\n**Required:**\nTrue"),
+	PyDoc_STR("*float*: Tower height [m]\n\n**INOUT:** This variable is both an input and an output to the compute module.\n\n**Required:**\nTrue"),
  	NULL},
 {"hl_ffact", (getter)TowerAndReceiver_get_hl_ffact,(setter)TowerAndReceiver_set_hl_ffact,
 	PyDoc_STR("*float*: The heat loss factor (thermal loss fudge factor)\n\n**Required:**\nTrue"),

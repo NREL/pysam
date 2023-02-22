@@ -7376,15 +7376,15 @@ Outputs_get_conversion_factor(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_cp_battery_capacity(VarGroupObject *self, void *closure)
+Outputs_get_cp_battery_nameplate(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsmoltenSalt_Outputs_cp_battery_capacity_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcsmoltenSalt_Outputs_cp_battery_nameplate_nget, self->data_ptr);
 }
 
 static PyObject *
-Outputs_get_cp_system_capacity(VarGroupObject *self, void *closure)
+Outputs_get_cp_system_nameplate(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsmoltenSalt_Outputs_cp_system_capacity_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_TcsmoltenSalt_Outputs_cp_system_nameplate_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -8642,10 +8642,10 @@ static PyGetSetDef Outputs_getset[] = {
 {"conversion_factor", (getter)Outputs_get_conversion_factor,(setter)0,
 	PyDoc_STR("*float*: Gross to net conversion factor [%]"),
  	NULL},
-{"cp_battery_capacity", (getter)Outputs_get_cp_battery_capacity,(setter)0,
+{"cp_battery_nameplate", (getter)Outputs_get_cp_battery_nameplate,(setter)0,
 	PyDoc_STR("*float*: Battery nameplate [MWe]"),
  	NULL},
-{"cp_system_capacity", (getter)Outputs_get_cp_system_capacity,(setter)0,
+{"cp_system_nameplate", (getter)Outputs_get_cp_system_nameplate,(setter)0,
 	PyDoc_STR("*float*: System capacity for capacity payments [MWe]"),
  	NULL},
 {"csp_pt_cost_bop", (getter)Outputs_get_csp_pt_cost_bop,(setter)0,

@@ -241,7 +241,7 @@ static PyGetSetDef ThermalRate_getset[] = {
 	PyDoc_STR("*sequence*: Annual energy degradation [%]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"thermal_load", (getter)ThermalRate_get_thermal_load,(setter)ThermalRate_set_thermal_load,
-	PyDoc_STR("*sequence*: Thermal load (year 1) [kW-t]"),
+	PyDoc_STR("*sequence*: Thermal load (year 1) [kW-t]\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"thermal_load_escalation", (getter)ThermalRate_get_thermal_load_escalation,(setter)ThermalRate_set_thermal_load_escalation,
 	PyDoc_STR("*sequence*: Annual load escalation [%/year]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),

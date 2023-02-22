@@ -390,8 +390,8 @@ class EtesPtes(object):
 		construction_financing_cost = float
 		contingency_cost_calc = float
 		cop_hot_hp_thermo = tuple
-		cp_battery_capacity = float
-		cp_system_capacity = float
+		cp_battery_nameplate = float
+		cp_system_nameplate = float
 		cycle_cost_calc = float
 		d_CT_tank_tes = float
 		d_tank_tes = float
