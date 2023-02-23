@@ -11,7 +11,7 @@ SSC, SAM, and PySAM are NREL open source code projects hosted on GitHub.com.
 
 `PySAM <https://github.com/nrel/pysam>`_ is a Python package built on the PySSC wrapper for SSC. PySAM provides access to SSC inputs and outputs with some additional functions for building renewable energy models in Python.
 
-The PySAM GitHub repository includes `code examples <https://github.com/NREL/pysam/tree/master/Examples>`_ of some common tasks.
+The PySAM GitHub repository includes `code examples <https://github.com/NREL/pysam/tree/main/Examples>`_ of some common tasks.
 
 .. important::
 
