@@ -4,7 +4,7 @@ Code Examples
 .. note::
     This section is a draft to be revised and expanded.
 
-For PySAM code examples see the `PySAM repository on GitHub <https://github.com/NREL/pysam/tree/master/Examples>`_.
+For PySAM code examples see the `PySAM repository on GitHub <https://github.com/NREL/pysam/tree/main/Examples>`_.
 
 Generate Inputs for a REopt API Call
 -------------------------------------

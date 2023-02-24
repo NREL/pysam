@@ -32,6 +32,7 @@ class TroughPhysical(object):
 
 
 		file_name = str
+		solar_resource_data = dict
 
 
 	class SolarField(object):

@@ -2190,7 +2190,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Total Boiler Efficiency - HHV (%) [%]"),
  	NULL},
 {"monthly_energy", (getter)Outputs_get_monthly_energy,(setter)0,
-	PyDoc_STR("*sequence*: Monthly Energy [kWh]"),
+	PyDoc_STR("*sequence*: Monthly Energy Gross [kWh]"),
  	NULL},
 {"monthly_forest_emc", (getter)Outputs_get_monthly_forest_emc,(setter)0,
 	PyDoc_STR("*sequence*: Monthly forest EMC (dry)"),

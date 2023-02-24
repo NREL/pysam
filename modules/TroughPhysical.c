@@ -89,9 +89,24 @@ Weather_set_file_name(VarGroupObject *self, PyObject *value, void *closure)
 	return PySAM_string_setter(value, SAM_TroughPhysical_Weather_file_name_sset, self->data_ptr);
 }
 
+static PyObject *
+Weather_get_solar_resource_data(VarGroupObject *self, void *closure)
+{
+	return PySAM_table_getter(SAM_TroughPhysical_Weather_solar_resource_data_tget, self->data_ptr);
+}
+
+static int
+Weather_set_solar_resource_data(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_table_setter(value, SAM_TroughPhysical_Weather_solar_resource_data_tset, self->data_ptr);
+}
+
 static PyGetSetDef Weather_getset[] = {
 {"file_name", (getter)Weather_get_file_name,(setter)Weather_set_file_name,
-	PyDoc_STR("*str*: Local weather file with path [none]\n\n**Constraints:**\nLOCAL_FILE\n\n**Required:**\nTrue"),
+	PyDoc_STR("*str*: Local weather file with path [none]\n\n**Constraints:**\nLOCAL_FILE\n\n**Required:**\nFalse for configuration with default inputs. May be required if a variable dependent on its value changes. Example: For the Detailed PV - Single Owner configuration, only Subarray 1 is enabled in the configuration defaults, so Subarray 2 inputs would not be required; if Subarray 2 is enabled, then Subarray 2 inputs is required."),
+ 	NULL},
+{"solar_resource_data", (getter)Weather_get_solar_resource_data,(setter)Weather_set_solar_resource_data,
+	PyDoc_STR("*dict*: Weather resource data in memory\n\n**Required:**\nFalse for configuration with default inputs. May be required if a variable dependent on its value changes. Example: For the Detailed PV - Single Owner configuration, only Subarray 1 is enabled in the configuration defaults, so Subarray 2 inputs would not be required; if Subarray 2 is enabled, then Subarray 2 inputs is required."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -6177,7 +6192,7 @@ static PyGetSetDef Outputs_getset[] = {
 	PyDoc_STR("*sequence*: Resource Month"),
  	NULL},
 {"monthly_energy", (getter)Outputs_get_monthly_energy,(setter)0,
-	PyDoc_STR("*sequence*: Monthly Energy [kWh]"),
+	PyDoc_STR("*sequence*: Monthly Energy Gross [kWh]"),
  	NULL},
 {"n_op_modes", (getter)Outputs_get_n_op_modes,(setter)0,
 	PyDoc_STR("*sequence*: Operating modes in reporting timestep"),

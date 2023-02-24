@@ -267,13 +267,13 @@ SystemOutput_set_gen(VarGroupObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef SystemOutput_getset[] = {
 {"annual_energy", (getter)SystemOutput_get_annual_energy,(setter)SystemOutput_set_annual_energy,
-	PyDoc_STR("*float*: Annual Energy AC (year 1) [kWh]"),
+	PyDoc_STR("*float*: Annual Energy AC (year 1) [kWh]\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"energy_hourly_kW", (getter)SystemOutput_get_energy_hourly_kW,(setter)SystemOutput_set_energy_hourly_kW,
-	PyDoc_STR("*sequence*: Power output of array [kW]\n\n**Info:**\nLifetime system generation"),
+	PyDoc_STR("*sequence*: Power output of array [kW]\n\n**Info:**\nLifetime system generation\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"gen", (getter)SystemOutput_get_gen,(setter)SystemOutput_set_gen,
-	PyDoc_STR("*sequence*: System power generated [kW]\n\n**Info:**\nLifetime system generation"),
+	PyDoc_STR("*sequence*: System power generated [kW]\n\n**Info:**\nLifetime system generation\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -449,10 +449,10 @@ static PyGetSetDef Load_getset[] = {
 	PyDoc_STR("*sequence*: Critical electricity load (year 1) [kW]"),
  	NULL},
 {"grid_outage", (getter)Load_get_grid_outage,(setter)Load_set_grid_outage,
-	PyDoc_STR("*sequence*: Grid outage in this time step [0/1]\n\n**Options:**\n0=GridAvailable,1=GridUnavailable,Length=load"),
+	PyDoc_STR("*sequence*: Grid outage in this time step [0/1]\n\n**Options:**\n0=GridAvailable,1=GridUnavailable,Length=load\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"load", (getter)Load_get_load,(setter)Load_set_load,
-	PyDoc_STR("*sequence*: Electricity load (year 1) [kW]"),
+	PyDoc_STR("*sequence*: Electricity load (year 1) [kW]\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 {"load_escalation", (getter)Load_get_load_escalation,(setter)Load_set_load_escalation,
 	PyDoc_STR("*sequence*: Annual load escalation [%/year]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),

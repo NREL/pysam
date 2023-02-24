@@ -130,7 +130,7 @@ static PyGetSetDef WeatherFileConverter_getset[] = {
 	PyDoc_STR("*str*: Input weather file name\n\n**Info:**\ntmy2,tmy3,intl,epw,smw\n\n**Required:**\nTrue"),
  	NULL},
 {"output_file", (getter)WeatherFileConverter_get_output_file,(setter)WeatherFileConverter_set_output_file,
-	PyDoc_STR("*str*: Output file name\n\n**Required:**\nFalse for configuration with default inputs. May be required if a variable dependent on its value changes. Example: For the Detailed PV - Single Owner configuration, only Subarray 1 is enabled in the configuration defaults, so Subarray 2 inputs would not be required; if Subarray 2 is enabled, then Subarray 2 inputs is required."),
+	PyDoc_STR("*str*: Output file name\n\n**INOUT:** This variable is both an input and an output to the compute module.\n\n**Required:**\nFalse for configuration with default inputs. May be required if a variable dependent on its value changes. Example: For the Detailed PV - Single Owner configuration, only Subarray 1 is enabled in the configuration defaults, so Subarray 2 inputs would not be required; if Subarray 2 is enabled, then Subarray 2 inputs is required."),
  	NULL},
 {"output_filename_format", (getter)WeatherFileConverter_get_output_filename_format,(setter)WeatherFileConverter_set_output_filename_format,
 	PyDoc_STR("*str*: Output file name format\n\n**Info:**\nrecognizes $city $state $country $type $loc\n\n**Required:**\nFalse for configuration with default inputs. May be required if a variable dependent on its value changes. Example: For the Detailed PV - Single Owner configuration, only Subarray 1 is enabled in the configuration defaults, so Subarray 2 inputs would not be required; if Subarray 2 is enabled, then Subarray 2 inputs is required."),

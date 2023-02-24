@@ -29,8 +29,6 @@ PySAM JSON
 
 The **PySAM JSON** code generator option creates a separate JSON file for each compute module. To use the option:
 
-
-
 .. warning::
 
     In some cases the output of one compute module may be the input to one or more downstream modules, and a downstream module may change its value. For example, the PVWatts -- Commercial configuration in the example below executes the Pvwattsv8, Grid, Utilityrate5, and Cashloan compute modules in that order. The time series power output of the system, ``gen`` is an output of :doc:`modules/Pvwattsv8`, both an input and output of :doc:`modules/Grid`, and an input to :doc:`modules/Utilityrate5` and :doc:`modules/Cashloan`. When you load inputs from a separate JSON file for each module, be sure your code loads inputs for all modules first, then sets the inputs for all modules, and finally executes the modules (in the correct order) to ensure the values of any shared variables are correctly assigned.
@@ -94,7 +92,7 @@ Now we are ready to run the modules in the correct order and get results:
     for m in modules:
         m.execute()
 
-    print('ac_annual: ', pv.Outputs.ac_annual)
+    print('ac_gross: ', pv.Outputs.ac_gross)
     print('ur_ec_tou_mat: ', ur.ElectricityRates.ur_ec_tou_mat)
     print('cl.Outputs.npv: ', cl.Outputs.npv)
 

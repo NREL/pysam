@@ -10,4 +10,4 @@ Use the following tools to get information about input and output variables:
 
 * SAM's script editor (**File > New script**, then click **Variables** in the script editor) lists all input and output variables by configuration.
 
-* SDK tool (See `SDK page <https://sam.nrel.gov/sdk>`_` on SAM website) module browser lists input and output variables and properties for SSC modules.
+* The SDK tool's module browser lists input and output variables and properties for SSC modules. See `SAM SDK <https://sam.nrel.gov/sdk>`_.

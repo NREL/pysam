@@ -267,13 +267,13 @@ Common_set_gen(VarGroupObject *self, PyObject *value, void *closure)
 
 static PyGetSetDef Common_getset[] = {
 {"annual_energy", (getter)Common_get_annual_energy,(setter)Common_set_annual_energy,
-	PyDoc_STR("*float*: Annual Energy [kWh]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*float*: Annual Energy [kWh]\n\n**INOUT:** This variable is both an input and an output to the compute module.\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"capacity_factor", (getter)Common_get_capacity_factor,(setter)Common_set_capacity_factor,
-	PyDoc_STR("*float*: Capacity factor [%]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+	PyDoc_STR("*float*: Capacity factor [%]\n\n**INOUT:** This variable is both an input and an output to the compute module.\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"gen", (getter)Common_get_gen,(setter)Common_set_gen,
-	PyDoc_STR("*sequence*: System power generated [kW]\n\n**Info:**\nLifetime system generation"),
+	PyDoc_STR("*sequence*: System power generated [kW]\n\n**Info:**\nLifetime system generation\n\n**INOUT:** This variable is both an input and an output to the compute module."),
  	NULL},
 	{NULL}  /* Sentinel */
 };

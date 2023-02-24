@@ -3,6 +3,10 @@ Working with Variables
 
 A compute module's input and output variables are organized into groups. You can find group names and other information about variables in the documentation of each compute module in :doc:`ssc-modules`.
 
+Input variables have a "Required" property, while output variables do not. Some compute modules have an "Output" or "SystemOutput" group for output variables.
+
+An "inout" variable is both an input and an output to the compute module. If an inout variable is required, you must assign it a value along with the other inputs. For example, ``gen`` is both an input to the :doc:`modules/Battery` module and an output.
+
 The following code examples show how to get and set a variable's value, and how to work with groups.
 
 For these examples, first import and create an instance of the :doc:`modules/Pvwattsv8` module with default values for the PVWatts -- No Financial configuration:

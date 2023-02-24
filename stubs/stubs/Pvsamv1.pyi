@@ -1128,6 +1128,7 @@ class Pvsamv1(object):
 		annual_poa_nom = float
 		annual_poa_rear = float
 		annual_poa_rear_direct_diffuse = float
+		annual_poa_rear_gain_percent = float
 		annual_poa_rear_ground_reflected = float
 		annual_poa_rear_rack_shaded = float
 		annual_poa_rear_row_reflections = float
