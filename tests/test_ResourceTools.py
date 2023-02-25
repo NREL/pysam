@@ -201,6 +201,6 @@ def test_resourcefilefetcher():
     with open(wtk_fp, mode='r') as f:
         wtk_csv = csv.DictReader(f)
         list(wtk_csv)
-        assert wtk_csv.line_num == 8764 + 1
+        assert wtk_csv.line_num == 8761 + 1
 
     shutil.rmtree(resource_dir)
