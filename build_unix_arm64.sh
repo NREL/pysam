@@ -55,7 +55,7 @@ docker pull continuumio/anaconda
 docker run --rm --env PYSAMDIR=/io/pysam -v $(pwd):/io continuumio/anaconda /io/pysam/build_conda_arm64.sh
 
 
-#twine upload $PYSAMDIR/dist/*.whl
-#anaconda upload -u nrel $PYSAMDIR/dist/osx-64/*.tar.bz2
+twine upload $PYSAMDIR/dist/*.whl
+anaconda upload -u nrel $PYSAMDIR/dist/osx-arm64/*.tar.bz2
 #anaconda upload -u nrel $PYSAMDIR/dist/linux-64/*.tar.bz2
 
