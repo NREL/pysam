@@ -3,17 +3,11 @@
 #
 # Building for Mac
 #
-export ROOTDIR=/Users/imacuser/Public/Projects/GitHub/NREL
-export LKDIR=/Users/imacuser/Public/Projects/GitHub/NREL/lk
-export WEXDIR=/Users/imacuser/Public/Projects/GitHub/NREL/wex
-export SSCDIR=/Users/imacuser/Public/Projects/GitHub/NREL/ssc
-export SAMNTDIR=/Users/imacuser/Public/Projects/GitHub/NREL/SAM
-export PYSAMDIR=/Users/imacuser/Public/Projects/GitHub/NREL/pysam
-
+source ~/.env
 
 # Building libssc and libSAM_api
 # requires $ROOTDIR/CMakeList.txt that contains lk, wex, ssc and sam as subdirectories
-
+rm -rf $ROOTDIR/cmake-build-release
 mkdir -p $ROOTDIR/cmake-build-release
 cd $ROOTDIR/cmake-build-release || exit
 cmake .. -DCMAKE_BUILD_TYPE=Release -DSAMAPI_EXPORT=1 -DSAM_SKIP_AUTOGEN=0 
@@ -61,7 +55,7 @@ docker pull continuumio/anaconda
 docker run --rm --env PYSAMDIR=/io/pysam -v $(pwd):/io continuumio/anaconda /io/pysam/build_conda_arm64.sh
 
 
-#twine upload $PYSAMDIR/dist/*.whl
-#anaconda upload -u nrel $PYSAMDIR/dist/osx-64/*.tar.bz2
+twine upload $PYSAMDIR/dist/*.whl
+anaconda upload -u nrel $PYSAMDIR/dist/osx-arm64/*.tar.bz2
 #anaconda upload -u nrel $PYSAMDIR/dist/linux-64/*.tar.bz2
 
