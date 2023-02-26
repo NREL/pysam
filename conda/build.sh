@@ -2,7 +2,7 @@ export PIP_NO_INDEX='False'
 
 case $(uname | tr '[:upper:]' '[:lower:]') in
   linux*)
-    export OS_NAME=manylinux1
+    export OS_NAME=manylinux
     ;;
   darwin*)
     export OS_NAME=macosx

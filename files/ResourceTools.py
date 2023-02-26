@@ -555,7 +555,7 @@ class FetchResourceFiles():
 
         # --- Intialize File Path ---
         file_path = os.path.join(
-            self.SAM_resource_dir, "windtoolkit_{}_{}_{}min_{}m_{}.srw".format(lat, lon, self.resource_interval_min, self.resource_height, self.resource_year))
+            self.SAM_resource_dir, "windtoolkit_{}_{}_{}min_{}m_{}.csv".format(lat, lon, self.resource_interval_min, self.resource_height, self.resource_year))
 
         # --- See if file path already exists ---
         if os.path.exists(file_path):
@@ -575,10 +575,9 @@ class FetchResourceFiles():
             data_response = retry_session.get(data_url, verify=certifi.where())
 
             if data_response.ok:
-                # --- Convert response to string, read as pandas df, write to csv ---
-                raw_csv = io.StringIO(data_response.text)
-                df = self._csv_to_srw(raw_csv)
-                df.to_csv(file_path, index=False, header=False, na_rep='')
+                # --- Write response to file ---
+                with open(file_path, 'w') as f:
+                    f.write(data_response.text)
                 if self.verbose:
                     print('Success! File downloaded to {}.'.format(file_path))
                 return file_path
