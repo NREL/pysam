@@ -23,7 +23,7 @@ source $(conda info --base)/etc/profile.d/conda.sh
 rm -rf build
 rm -rf dist/*
 
-for PYTHONENV in pysam_build_3.8 pysam_build_3.9 pysam_build_3.10
+for PYTHONENV in pysam_build_3.8 pysam_build_3.9 pysam_build_3.10 pysam_build_3.11
 do
    conda activate $PYTHONENV
    yes | pip install -r tests/requirements.txt
@@ -51,11 +51,11 @@ docker run --rm -v $(pwd):/io quay.io/pypa/manylinux2014_aarch64 /io/pysam/build
 
 rename -s linux manylinux1 $PYSAMDIR/dist/*-linux_*
 
-docker pull continuumio/anaconda
-docker run --rm --env PYSAMDIR=/io/pysam -v $(pwd):/io continuumio/anaconda /io/pysam/build_conda_arm64.sh
+docker pull continuumio/anaconda3
+docker run --rm --env PYSAMDIR=/io/pysam -v $(pwd):/io continuumio/anaconda3 /io/pysam/build_conda_arm64.sh
 
 
 twine upload $PYSAMDIR/dist/*.whl
 anaconda upload -u nrel $PYSAMDIR/dist/osx-arm64/*.tar.bz2
-#anaconda upload -u nrel $PYSAMDIR/dist/linux-64/*.tar.bz2
+anaconda upload -u nrel $PYSAMDIR/dist/linux-aarch64/*.tar.bz2
 
