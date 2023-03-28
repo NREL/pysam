@@ -5,6 +5,8 @@
 
 #include "PySAM_utils.h"
 
+#include "Battery_eqns.c"
+
 
 /*
  * Simulation Group
@@ -6046,6 +6048,8 @@ static PyMethodDef Battery_methods[] = {
 				PyDoc_STR("value(name, optional value) -> Union[None, float, dict, sequence, str]\n Get or set by name a value in any of the variable groups.")},
 		{"unassign",          (PyCFunction)Battery_unassign, METH_VARARGS,
 				PyDoc_STR("unassign(name) -> None\n Unassign a value in any of the variable groups.")},
+		{"Reopt_size_standalone_battery_post", (PyCFunction)Reopt_size_standalone_battery_post, METH_VARARGS | METH_KEYWORDS,
+			Reopt_size_standalone_battery_post_doc},
 		{NULL,              NULL}           /* sentinel */
 };
 
