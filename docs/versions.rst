@@ -1,12 +1,11 @@
 PySAM Versions
 ==========================================
 
-These pages track for each PySAM Release changes in the variables for the PySAM Modules.
+For a list of PySAM versions and their equivalent SAM and SSC versions, see https://github.com/NREL/pysam/releases.
 
-Each PySAM Modules' input variables and the defaults for these input variables are compared between the current release and the last release.
+The list below tracks changes in variables between consecutive PySAM versions.
 
-This helps track which variables and defaults have changed between releases to make it easier to notify users during version upgrade.
-
+For a list of 
 
 .. toctree::
     :maxdepth: 2
