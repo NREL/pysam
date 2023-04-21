@@ -218,18 +218,10 @@ class EtesPtes(object):
 			pass
 
 
-		dispatch_factor1 = float
-		dispatch_factor2 = float
-		dispatch_factor3 = float
-		dispatch_factor4 = float
-		dispatch_factor5 = float
-		dispatch_factor6 = float
-		dispatch_factor7 = float
-		dispatch_factor8 = float
-		dispatch_factor9 = float
 		dispatch_factors_ts = tuple
 		dispatch_sched_weekday = tuple
 		dispatch_sched_weekend = tuple
+		dispatch_tod_factors = tuple
 		ppa_multiplier_model = float
 
 
@@ -446,6 +438,9 @@ class EtesPtes(object):
 		op_mode_1 = tuple
 		op_mode_2 = tuple
 		op_mode_3 = tuple
+		operating_modes_a = tuple
+		operating_modes_b = tuple
+		operating_modes_c = tuple
 		ppa_soln_mode = float
 		q_balance = tuple
 		q_dot_CT_tes_heater = tuple

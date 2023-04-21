@@ -71,12 +71,6 @@ Uncertainty Group
 .. autoclass:: PySAM.Windpower.Windpower.Uncertainty
 	:members:
 
-AdjustmentFactors Group
-------------------------
-
-.. autoclass:: PySAM.Windpower.Windpower.AdjustmentFactors
-	:members:
-
 Outputs Group
 --------------
 

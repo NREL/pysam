@@ -53,9 +53,13 @@ The variables listed below are interdependent with other variables. If you chang
 
  - inv_cec_cg_psco
 
+ - inv_cec_cg_vdcmax
+
  - inv_cec_cg_vdco
 
  - inv_ds_paco
+
+ - inv_ds_vdcmax
 
  - inv_num_mppt
 
@@ -64,6 +68,8 @@ The variables listed below are interdependent with other variables. If you chang
  - inv_pd_paco
 
  - inv_pd_pdco
+
+ - inv_pd_vdcmax
 
  - inv_snl_c0
 
@@ -80,6 +86,8 @@ The variables listed below are interdependent with other variables. If you chang
  - inv_snl_pdco
 
  - inv_snl_pso
+
+ - inv_snl_vdcmax
 
  - inv_snl_vdco
 

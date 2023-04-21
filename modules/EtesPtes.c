@@ -2226,114 +2226,6 @@ static PyMethodDef TimeOfDeliveryFactors_methods[] = {
 };
 
 static PyObject *
-TimeOfDeliveryFactors_get_dispatch_factor1(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_EtesPtes_TimeOfDeliveryFactors_dispatch_factor1_nget, self->data_ptr);
-}
-
-static int
-TimeOfDeliveryFactors_set_dispatch_factor1(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_EtesPtes_TimeOfDeliveryFactors_dispatch_factor1_nset, self->data_ptr);
-}
-
-static PyObject *
-TimeOfDeliveryFactors_get_dispatch_factor2(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_EtesPtes_TimeOfDeliveryFactors_dispatch_factor2_nget, self->data_ptr);
-}
-
-static int
-TimeOfDeliveryFactors_set_dispatch_factor2(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_EtesPtes_TimeOfDeliveryFactors_dispatch_factor2_nset, self->data_ptr);
-}
-
-static PyObject *
-TimeOfDeliveryFactors_get_dispatch_factor3(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_EtesPtes_TimeOfDeliveryFactors_dispatch_factor3_nget, self->data_ptr);
-}
-
-static int
-TimeOfDeliveryFactors_set_dispatch_factor3(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_EtesPtes_TimeOfDeliveryFactors_dispatch_factor3_nset, self->data_ptr);
-}
-
-static PyObject *
-TimeOfDeliveryFactors_get_dispatch_factor4(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_EtesPtes_TimeOfDeliveryFactors_dispatch_factor4_nget, self->data_ptr);
-}
-
-static int
-TimeOfDeliveryFactors_set_dispatch_factor4(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_EtesPtes_TimeOfDeliveryFactors_dispatch_factor4_nset, self->data_ptr);
-}
-
-static PyObject *
-TimeOfDeliveryFactors_get_dispatch_factor5(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_EtesPtes_TimeOfDeliveryFactors_dispatch_factor5_nget, self->data_ptr);
-}
-
-static int
-TimeOfDeliveryFactors_set_dispatch_factor5(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_EtesPtes_TimeOfDeliveryFactors_dispatch_factor5_nset, self->data_ptr);
-}
-
-static PyObject *
-TimeOfDeliveryFactors_get_dispatch_factor6(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_EtesPtes_TimeOfDeliveryFactors_dispatch_factor6_nget, self->data_ptr);
-}
-
-static int
-TimeOfDeliveryFactors_set_dispatch_factor6(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_EtesPtes_TimeOfDeliveryFactors_dispatch_factor6_nset, self->data_ptr);
-}
-
-static PyObject *
-TimeOfDeliveryFactors_get_dispatch_factor7(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_EtesPtes_TimeOfDeliveryFactors_dispatch_factor7_nget, self->data_ptr);
-}
-
-static int
-TimeOfDeliveryFactors_set_dispatch_factor7(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_EtesPtes_TimeOfDeliveryFactors_dispatch_factor7_nset, self->data_ptr);
-}
-
-static PyObject *
-TimeOfDeliveryFactors_get_dispatch_factor8(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_EtesPtes_TimeOfDeliveryFactors_dispatch_factor8_nget, self->data_ptr);
-}
-
-static int
-TimeOfDeliveryFactors_set_dispatch_factor8(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_EtesPtes_TimeOfDeliveryFactors_dispatch_factor8_nset, self->data_ptr);
-}
-
-static PyObject *
-TimeOfDeliveryFactors_get_dispatch_factor9(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_EtesPtes_TimeOfDeliveryFactors_dispatch_factor9_nget, self->data_ptr);
-}
-
-static int
-TimeOfDeliveryFactors_set_dispatch_factor9(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_EtesPtes_TimeOfDeliveryFactors_dispatch_factor9_nset, self->data_ptr);
-}
-
-static PyObject *
 TimeOfDeliveryFactors_get_dispatch_factors_ts(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_EtesPtes_TimeOfDeliveryFactors_dispatch_factors_ts_aget, self->data_ptr);
@@ -2370,6 +2262,18 @@ TimeOfDeliveryFactors_set_dispatch_sched_weekend(VarGroupObject *self, PyObject 
 }
 
 static PyObject *
+TimeOfDeliveryFactors_get_dispatch_tod_factors(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_EtesPtes_TimeOfDeliveryFactors_dispatch_tod_factors_aget, self->data_ptr);
+}
+
+static int
+TimeOfDeliveryFactors_set_dispatch_tod_factors(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_EtesPtes_TimeOfDeliveryFactors_dispatch_tod_factors_aset, self->data_ptr);
+}
+
+static PyObject *
 TimeOfDeliveryFactors_get_ppa_multiplier_model(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_EtesPtes_TimeOfDeliveryFactors_ppa_multiplier_model_nget, self->data_ptr);
@@ -2382,33 +2286,6 @@ TimeOfDeliveryFactors_set_ppa_multiplier_model(VarGroupObject *self, PyObject *v
 }
 
 static PyGetSetDef TimeOfDeliveryFactors_getset[] = {
-{"dispatch_factor1", (getter)TimeOfDeliveryFactors_get_dispatch_factor1,(setter)TimeOfDeliveryFactors_set_dispatch_factor1,
-	PyDoc_STR("*float*: Dispatch payment factor 1\n\n**Required:**\nRequired if ppa_multiplier_model=0&etes_financial_model<5&is_dispatch=1&sim_type=1"),
- 	NULL},
-{"dispatch_factor2", (getter)TimeOfDeliveryFactors_get_dispatch_factor2,(setter)TimeOfDeliveryFactors_set_dispatch_factor2,
-	PyDoc_STR("*float*: Dispatch payment factor 2\n\n**Required:**\nRequired if ppa_multiplier_model=0&etes_financial_model<5&is_dispatch=1&sim_type=1"),
- 	NULL},
-{"dispatch_factor3", (getter)TimeOfDeliveryFactors_get_dispatch_factor3,(setter)TimeOfDeliveryFactors_set_dispatch_factor3,
-	PyDoc_STR("*float*: Dispatch payment factor 3\n\n**Required:**\nRequired if ppa_multiplier_model=0&etes_financial_model<5&is_dispatch=1&sim_type=1"),
- 	NULL},
-{"dispatch_factor4", (getter)TimeOfDeliveryFactors_get_dispatch_factor4,(setter)TimeOfDeliveryFactors_set_dispatch_factor4,
-	PyDoc_STR("*float*: Dispatch payment factor 4\n\n**Required:**\nRequired if ppa_multiplier_model=0&etes_financial_model<5&is_dispatch=1&sim_type=1"),
- 	NULL},
-{"dispatch_factor5", (getter)TimeOfDeliveryFactors_get_dispatch_factor5,(setter)TimeOfDeliveryFactors_set_dispatch_factor5,
-	PyDoc_STR("*float*: Dispatch payment factor 5\n\n**Required:**\nRequired if ppa_multiplier_model=0&etes_financial_model<5&is_dispatch=1&sim_type=1"),
- 	NULL},
-{"dispatch_factor6", (getter)TimeOfDeliveryFactors_get_dispatch_factor6,(setter)TimeOfDeliveryFactors_set_dispatch_factor6,
-	PyDoc_STR("*float*: Dispatch payment factor 6\n\n**Required:**\nRequired if ppa_multiplier_model=0&etes_financial_model<5&is_dispatch=1&sim_type=1"),
- 	NULL},
-{"dispatch_factor7", (getter)TimeOfDeliveryFactors_get_dispatch_factor7,(setter)TimeOfDeliveryFactors_set_dispatch_factor7,
-	PyDoc_STR("*float*: Dispatch payment factor 7\n\n**Required:**\nRequired if ppa_multiplier_model=0&etes_financial_model<5&is_dispatch=1&sim_type=1"),
- 	NULL},
-{"dispatch_factor8", (getter)TimeOfDeliveryFactors_get_dispatch_factor8,(setter)TimeOfDeliveryFactors_set_dispatch_factor8,
-	PyDoc_STR("*float*: Dispatch payment factor 8\n\n**Required:**\nRequired if ppa_multiplier_model=0&etes_financial_model<5&is_dispatch=1&sim_type=1"),
- 	NULL},
-{"dispatch_factor9", (getter)TimeOfDeliveryFactors_get_dispatch_factor9,(setter)TimeOfDeliveryFactors_set_dispatch_factor9,
-	PyDoc_STR("*float*: Dispatch payment factor 9\n\n**Required:**\nRequired if ppa_multiplier_model=0&etes_financial_model<5&is_dispatch=1&sim_type=1"),
- 	NULL},
 {"dispatch_factors_ts", (getter)TimeOfDeliveryFactors_get_dispatch_factors_ts,(setter)TimeOfDeliveryFactors_set_dispatch_factors_ts,
 	PyDoc_STR("*sequence*: Dispatch payment factor timeseries array\n\n**Required:**\nRequired if ppa_multiplier_model=1&etes_financial_model<5&is_dispatch=1&sim_type=1"),
  	NULL},
@@ -2417,6 +2294,9 @@ static PyGetSetDef TimeOfDeliveryFactors_getset[] = {
  	NULL},
 {"dispatch_sched_weekend", (getter)TimeOfDeliveryFactors_get_dispatch_sched_weekend,(setter)TimeOfDeliveryFactors_set_dispatch_sched_weekend,
 	PyDoc_STR("*sequence[sequence]*: PPA pricing weekend schedule, 12x24\n\n**Required:**\nRequired if ppa_multiplier_model=0&etes_financial_model<5&is_dispatch=1&sim_type=1"),
+ 	NULL},
+{"dispatch_tod_factors", (getter)TimeOfDeliveryFactors_get_dispatch_tod_factors,(setter)TimeOfDeliveryFactors_set_dispatch_tod_factors,
+	PyDoc_STR("*sequence*: TOD factors for periods 1 through 9\n\n**Info:**\nWe added this array input after SAM 2022.12.21 to replace the functionality of former single value inputs dispatch_factor1 through dispatch_factor9\n\n**Required:**\nRequired if ppa_multiplier_model=0&csp_financial_model<5&is_dispatch=1&sim_type=1"),
  	NULL},
 {"ppa_multiplier_model", (getter)TimeOfDeliveryFactors_get_ppa_multiplier_model,(setter)TimeOfDeliveryFactors_set_ppa_multiplier_model,
 	PyDoc_STR("*float*: PPA multiplier model [0/1]\n\n**Options:**\n0=diurnal,1=timestep\n\n**Constraints:**\nINTEGER,MIN=0\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
@@ -4082,6 +3962,24 @@ Outputs_get_op_mode_3(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_operating_modes_a(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_operating_modes_a_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_operating_modes_b(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_operating_modes_b_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_operating_modes_c(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_EtesPtes_Outputs_operating_modes_c_aget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_ppa_soln_mode(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_EtesPtes_Outputs_ppa_soln_mode_nget, self->data_ptr);
@@ -4633,6 +4531,15 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"op_mode_3", (getter)Outputs_get_op_mode_3,(setter)0,
 	PyDoc_STR("*sequence*: 3rd operating mode, if applicable"),
+ 	NULL},
+{"operating_modes_a", (getter)Outputs_get_operating_modes_a,(setter)0,
+	PyDoc_STR("*sequence*: First 3 operating modes tried"),
+ 	NULL},
+{"operating_modes_b", (getter)Outputs_get_operating_modes_b,(setter)0,
+	PyDoc_STR("*sequence*: Next 3 operating modes tried"),
+ 	NULL},
+{"operating_modes_c", (getter)Outputs_get_operating_modes_c,(setter)0,
+	PyDoc_STR("*sequence*: Final 3 operating modes tried"),
  	NULL},
 {"ppa_soln_mode", (getter)Outputs_get_ppa_soln_mode,(setter)0,
 	PyDoc_STR("*float*: PPA solution mode [0/1]"),
