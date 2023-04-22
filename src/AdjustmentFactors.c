@@ -132,18 +132,18 @@ AdjustmentFactors_set_sf_periods(AdjustmentFactorsObject *self, PyObject *value,
 }
 
 static PyGetSetDef AdjustmentFactors_getset[] = {
-        {"constant", (getter)AdjustmentFactors_get_constant, (setter)AdjustmentFactors_set_constant,
+        {"adjust_constant", (getter)AdjustmentFactors_get_constant, (setter)AdjustmentFactors_set_constant,
                 "type: float", NULL},
-        {"periods", (getter)AdjustmentFactors_get_periods, (setter)AdjustmentFactors_set_periods,
+        {"adjust_periods", (getter)AdjustmentFactors_get_periods, (setter)AdjustmentFactors_set_periods,
                 "AC Period-based Adjustment Factors [%]", NULL},
-        {"dc_constant", (getter)AdjustmentFactors_get_dc_constant, (setter)AdjustmentFactors_set_dc_constant,
+        {"dc_adjust_constant", (getter)AdjustmentFactors_get_dc_constant, (setter)AdjustmentFactors_set_dc_constant,
                 "DC Constant loss adjustment [%]", NULL},
-        {"dc_periods", (getter)AdjustmentFactors_get_dc_periods, (setter)AdjustmentFactors_set_dc_periods,
+        {"dc_adjust_periods", (getter)AdjustmentFactors_get_dc_periods, (setter)AdjustmentFactors_set_dc_periods,
                 "DC Period-based Adjustment Factors [%]", NULL},
-        {"sf_constant", (getter)AdjustmentFactors_get_sf_constant, (setter)AdjustmentFactors_set_sf_constant,
-                "DC Constant loss adjustment [%]", NULL},
-        {"sf_periods", (getter)AdjustmentFactors_get_sf_periods, (setter)AdjustmentFactors_set_sf_periods,
-                "DC Period-based Adjustment Factors [%]", NULL},
+        {"sf_adjust_constant", (getter)AdjustmentFactors_get_sf_constant, (setter)AdjustmentFactors_set_sf_constant,
+                "SF Constant loss adjustment [%]", NULL},
+        {"sf_adjust_periods", (getter)AdjustmentFactors_get_sf_periods, (setter)AdjustmentFactors_set_sf_periods,
+                "SF Period-based Adjustment Factors [%]", NULL},
         {NULL}  /* Sentinel */
 };
 

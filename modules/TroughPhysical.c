@@ -6821,25 +6821,6 @@ TroughPhysicalModule_exec(PyObject *m)
 	TroughPhysical_Type.tp_dict = PyDict_New();
 	if (!TroughPhysical_Type.tp_dict) { goto fail; }
 
-	/// Add the AdjustmentFactors type object to TroughPhysical_Type
-	PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
-	if (!AdjustmentFactorsModule){
-		PyErr_SetImportError(PyUnicode_FromString("Could not import AdjustmentFactors module."), NULL, NULL);
-	}
-
-	PyTypeObject* AdjustmentFactors_Type = (PyTypeObject*)PyObject_GetAttrString(AdjustmentFactorsModule, "AdjustmentFactors");
-	if (!AdjustmentFactors_Type){
-		PyErr_SetImportError(PyUnicode_FromString("Could not import AdjustmentFactors type."), NULL, NULL);
-	}
-	Py_XDECREF(AdjustmentFactorsModule);
-
-	if (PyType_Ready(AdjustmentFactors_Type) < 0) { goto fail; }
-	PyDict_SetItemString(TroughPhysical_Type.tp_dict,
-						 "AdjustmentFactors",
-						 (PyObject*)AdjustmentFactors_Type);
-	Py_DECREF(&AdjustmentFactors_Type);
-	Py_XDECREF(AdjustmentFactors_Type);
-
 	/// Add the Weather type object to TroughPhysical_Type
 	if (PyType_Ready(&Weather_Type) < 0) { goto fail; }
 	PyDict_SetItemString(TroughPhysical_Type.tp_dict,

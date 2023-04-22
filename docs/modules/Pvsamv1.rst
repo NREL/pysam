@@ -361,6 +361,12 @@ Load Group
 .. autoclass:: PySAM.Pvsamv1.Pvsamv1.Load
 	:members:
 
+AdjustmentFactors Group
+------------------------
+
+.. autoclass:: PySAM.Pvsamv1.Pvsamv1.AdjustmentFactors
+	:members:
+
 BatteryCell Group
 ------------------
 
@@ -407,12 +413,6 @@ GridLimits Group
 -----------------
 
 .. autoclass:: PySAM.Pvsamv1.Pvsamv1.GridLimits
-	:members:
-
-AdjustmentFactors Group
-------------------------
-
-.. autoclass:: PySAM.Pvsamv1.Pvsamv1.AdjustmentFactors
 	:members:
 
 Outputs Group

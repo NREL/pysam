@@ -17256,6 +17256,21 @@ newPvsamv1Object(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "Load", Load_obj);
 	Py_DECREF(Load_obj);
 
+	PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
+
+	PyObject* data_cap = PyCapsule_New(self->data_ptr, NULL, NULL);
+	PyObject* Adjust_obj = PyObject_CallMethod(AdjustmentFactorsModule, "new", "(O)", data_cap);
+	Py_XDECREF(data_cap);
+	Py_XDECREF(AdjustmentFactorsModule);
+
+	if (!Adjust_obj){
+		PyErr_SetString(PyExc_Exception, "Couldn't create AdjustmentFactorsObject\n");
+		return NULL;
+	}
+
+	PyDict_SetItemString(attr_dict, "AdjustmentFactors", Adjust_obj);
+	Py_DECREF(Adjust_obj);
+
 	PyObject* BatteryCell_obj = BatteryCell_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "BatteryCell", BatteryCell_obj);
 	Py_DECREF(BatteryCell_obj);
@@ -17287,21 +17302,6 @@ newPvsamv1Object(void* data_ptr)
 	PyObject* GridLimits_obj = GridLimits_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "GridLimits", GridLimits_obj);
 	Py_DECREF(GridLimits_obj);
-
-	PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
-
-	PyObject* data_cap = PyCapsule_New(self->data_ptr, NULL, NULL);
-	PyObject* Adjust_obj = PyObject_CallMethod(AdjustmentFactorsModule, "new", "(O)", data_cap);
-	Py_XDECREF(data_cap);
-	Py_XDECREF(AdjustmentFactorsModule);
-
-	if (!Adjust_obj){
-		PyErr_SetString(PyExc_Exception, "Couldn't create AdjustmentFactorsObject\n");
-		return NULL;
-	}
-
-	PyDict_SetItemString(attr_dict, "AdjustmentFactors", Adjust_obj);
-	Py_DECREF(Adjust_obj);
 
 	PyObject* Outputs_obj = Outputs_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
@@ -17585,25 +17585,6 @@ Pvsamv1Module_exec(PyObject *m)
 
 	Pvsamv1_Type.tp_dict = PyDict_New();
 	if (!Pvsamv1_Type.tp_dict) { goto fail; }
-
-	/// Add the AdjustmentFactors type object to Pvsamv1_Type
-	PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
-	if (!AdjustmentFactorsModule){
-		PyErr_SetImportError(PyUnicode_FromString("Could not import AdjustmentFactors module."), NULL, NULL);
-	}
-
-	PyTypeObject* AdjustmentFactors_Type = (PyTypeObject*)PyObject_GetAttrString(AdjustmentFactorsModule, "AdjustmentFactors");
-	if (!AdjustmentFactors_Type){
-		PyErr_SetImportError(PyUnicode_FromString("Could not import AdjustmentFactors type."), NULL, NULL);
-	}
-	Py_XDECREF(AdjustmentFactorsModule);
-
-	if (PyType_Ready(AdjustmentFactors_Type) < 0) { goto fail; }
-	PyDict_SetItemString(Pvsamv1_Type.tp_dict,
-						 "AdjustmentFactors",
-						 (PyObject*)AdjustmentFactors_Type);
-	Py_DECREF(&AdjustmentFactors_Type);
-	Py_XDECREF(AdjustmentFactors_Type);
 
 	/// Add the SolarResource type object to Pvsamv1_Type
 	if (PyType_Ready(&SolarResource_Type) < 0) { goto fail; }

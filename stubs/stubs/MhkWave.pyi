@@ -59,22 +59,6 @@ class MhkWave(object):
 		year = tuple
 
 
-	class Lifetime(object):
-		def assign(self): 
-			pass
-	
-		def export(self) -> dict:
-			pass
-	
-		def __init__(self, *args, **kwargs): 
-			pass
-
-
-		analysis_period = float
-		generic_degradation = tuple
-		system_use_lifetime_output = float
-
-
 	class AdjustmentFactors(object):
 		def assign(self): 
 			pass
@@ -94,6 +78,22 @@ class MhkWave(object):
 		sf_constant = float
 		sf_hourly = tuple
 		sf_periods = tuple
+
+	class Lifetime(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		analysis_period = float
+		generic_degradation = tuple
+		system_use_lifetime_output = float
+
 
 	class Outputs(object):
 		def assign(self): 
