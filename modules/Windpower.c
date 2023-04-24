@@ -1689,6 +1689,21 @@ newWindpowerObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "Losses", Losses_obj);
 	Py_DECREF(Losses_obj);
 
+	PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
+
+	PyObject* data_cap = PyCapsule_New(self->data_ptr, NULL, NULL);
+	PyObject* Adjust_obj = PyObject_CallMethod(AdjustmentFactorsModule, "new", "(O)", data_cap);
+	Py_XDECREF(data_cap);
+	Py_XDECREF(AdjustmentFactorsModule);
+
+	if (!Adjust_obj){
+		PyErr_SetString(PyExc_Exception, "Couldn't create AdjustmentFactorsObject\n");
+		return NULL;
+	}
+
+	PyDict_SetItemString(attr_dict, "AdjustmentFactors", Adjust_obj);
+	Py_DECREF(Adjust_obj);
+
 	PyObject* Uncertainty_obj = Uncertainty_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Uncertainty", Uncertainty_obj);
 	Py_DECREF(Uncertainty_obj);

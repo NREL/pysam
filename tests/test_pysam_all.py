@@ -106,7 +106,7 @@ def test_functionality():
         assert(d.adjust_constant == 1)
         n_tests_passed += 1
 
-        d.hourly = (1, 2)
+        d.adjust_hourly = (1, 2)
         assert(d.adjust_hourly == (1, 2))
         n_tests_passed += 1
 
@@ -123,7 +123,7 @@ def test_functionality():
         assert(ValDict['adjust_constant'] == 1 and ValDict['adjust_hourly'] == (1, 2) and ValDict['adjust_periods'] == ((1, 2), (3, 4)))
         n_tests_passed += 1
 
-        ValDict = {'constant': 10, 'adust_hourly': (10, 20), 'adjust_periods': ((10, 20), (30, 40))}
+        ValDict = {'adjust_constant': 10, 'adjust_hourly': (10, 20), 'adjust_periods': ((10, 20), (30, 40))}
         d.assign(ValDict)
         assert(ValDict['adjust_constant'] == 10 and ValDict['adjust_hourly'] == (10, 20) and ValDict['adjust_periods'] == ((10, 20), (30, 40)))
         n_tests_passed += 1
