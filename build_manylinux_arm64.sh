@@ -29,7 +29,7 @@ do
    retVal=$?
    if [ $retVal -ne 0 ]; then
        echo "Error in Tests"
-#       exit 1
+       exit 1
    fi
    /opt/python/$PYTHONENV/bin/python setup_arm64.py bdist_wheel
 done
