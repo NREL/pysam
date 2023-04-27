@@ -68,6 +68,12 @@ ElectricityRates Group
 .. autoclass:: PySAM.TroughPhysical.TroughPhysical.ElectricityRates
 	:members:
 
+TimeOfDeliveryFactors Group
+----------------------------
+
+.. autoclass:: PySAM.TroughPhysical.TroughPhysical.TimeOfDeliveryFactors
+	:members:
+
 Revenue Group
 --------------
 

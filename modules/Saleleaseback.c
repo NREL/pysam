@@ -78,6 +78,54 @@ static PyMethodDef Revenue_methods[] = {
 };
 
 static PyObject *
+Revenue_get_dispatch_factors_ts(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Saleleaseback_Revenue_dispatch_factors_ts_aget, self->data_ptr);
+}
+
+static int
+Revenue_set_dispatch_factors_ts(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Saleleaseback_Revenue_dispatch_factors_ts_aset, self->data_ptr);
+}
+
+static PyObject *
+Revenue_get_dispatch_sched_weekday(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Saleleaseback_Revenue_dispatch_sched_weekday_mget, self->data_ptr);
+}
+
+static int
+Revenue_set_dispatch_sched_weekday(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Saleleaseback_Revenue_dispatch_sched_weekday_mset, self->data_ptr);
+}
+
+static PyObject *
+Revenue_get_dispatch_sched_weekend(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_Saleleaseback_Revenue_dispatch_sched_weekend_mget, self->data_ptr);
+}
+
+static int
+Revenue_set_dispatch_sched_weekend(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_Saleleaseback_Revenue_dispatch_sched_weekend_mset, self->data_ptr);
+}
+
+static PyObject *
+Revenue_get_dispatch_tod_factors(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Saleleaseback_Revenue_dispatch_tod_factors_aget, self->data_ptr);
+}
+
+static int
+Revenue_set_dispatch_tod_factors(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Saleleaseback_Revenue_dispatch_tod_factors_aset, self->data_ptr);
+}
+
+static PyObject *
 Revenue_get_ppa_escalation(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_Saleleaseback_Revenue_ppa_escalation_nget, self->data_ptr);
@@ -87,6 +135,18 @@ static int
 Revenue_set_ppa_escalation(VarGroupObject *self, PyObject *value, void *closure)
 {
 	return PySAM_double_setter(value, SAM_Saleleaseback_Revenue_ppa_escalation_nset, self->data_ptr);
+}
+
+static PyObject *
+Revenue_get_ppa_multiplier_model(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Saleleaseback_Revenue_ppa_multiplier_model_nget, self->data_ptr);
+}
+
+static int
+Revenue_set_ppa_multiplier_model(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_Saleleaseback_Revenue_ppa_multiplier_model_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -162,8 +222,23 @@ Revenue_set_ppa_soln_tolerance(VarGroupObject *self, PyObject *value, void *clos
 }
 
 static PyGetSetDef Revenue_getset[] = {
+{"dispatch_factors_ts", (getter)Revenue_get_dispatch_factors_ts,(setter)Revenue_set_dispatch_factors_ts,
+	PyDoc_STR("*sequence*: Dispatch payment factor array\n\n**Required:**\nRequired if ppa_multiplier_model=1"),
+ 	NULL},
+{"dispatch_sched_weekday", (getter)Revenue_get_dispatch_sched_weekday,(setter)Revenue_set_dispatch_sched_weekday,
+	PyDoc_STR("*sequence[sequence]*: Diurnal weekday TOD periods [1..9]\n\n**Info:**\n12 x 24 matrix\n\n**Required:**\nRequired if ppa_multiplier_model=0"),
+ 	NULL},
+{"dispatch_sched_weekend", (getter)Revenue_get_dispatch_sched_weekend,(setter)Revenue_set_dispatch_sched_weekend,
+	PyDoc_STR("*sequence[sequence]*: Diurnal weekend TOD periods [1..9]\n\n**Info:**\n12 x 24 matrix\n\n**Required:**\nRequired if ppa_multiplier_model=0"),
+ 	NULL},
+{"dispatch_tod_factors", (getter)Revenue_get_dispatch_tod_factors,(setter)Revenue_set_dispatch_tod_factors,
+	PyDoc_STR("*sequence*: TOD factors for periods 1 through 9\n\n**Required:**\nRequired if ppa_multiplier_model=0"),
+ 	NULL},
 {"ppa_escalation", (getter)Revenue_get_ppa_escalation,(setter)Revenue_set_ppa_escalation,
 	PyDoc_STR("*float*: PPA escalation rate [%/year]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"ppa_multiplier_model", (getter)Revenue_get_ppa_multiplier_model,(setter)Revenue_set_ppa_multiplier_model,
+	PyDoc_STR("*float*: PPA multiplier model [0/1]\n\n**Options:**\n0=diurnal,1=timestep\n\n**Constraints:**\nINTEGER,MIN=0\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ppa_price_input", (getter)Revenue_get_ppa_price_input,(setter)Revenue_set_ppa_price_input,
 	PyDoc_STR("*sequence*: PPA price in first year input [$/kWh]\n\n**Required:**\nTrue"),
@@ -4678,323 +4753,6 @@ static PyTypeObject SaleLeaseback_Type = {
 		SaleLeaseback_methods,         /*tp_methods*/
 		0,                          /*tp_members*/
 		SaleLeaseback_getset,          /*tp_getset*/
-		0,                          /*tp_base*/
-		0,                          /*tp_dict*/
-		0,                          /*tp_descr_get*/
-		0,                          /*tp_descr_set*/
-		0,                          /*tp_dictofnset*/
-		0,                          /*tp_init*/
-		0,                          /*tp_alloc*/
-		0,             /*tp_new*/
-		0,                          /*tp_free*/
-		0,                          /*tp_is_gc*/
-};
-
-
-/*
- * TimeOfDelivery Group
- */ 
-
-static PyTypeObject TimeOfDelivery_Type;
-
-static PyObject *
-TimeOfDelivery_new(SAM_Saleleaseback data_ptr)
-{
-	PyObject* new_obj = TimeOfDelivery_Type.tp_alloc(&TimeOfDelivery_Type,0);
-
-	VarGroupObject* TimeOfDelivery_obj = (VarGroupObject*)new_obj;
-
-	TimeOfDelivery_obj->data_ptr = (SAM_table)data_ptr;
-
-	return new_obj;
-}
-
-/* TimeOfDelivery methods */
-
-static PyObject *
-TimeOfDelivery_assign(VarGroupObject *self, PyObject *args)
-{
-	PyObject* dict;
-	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
-		return NULL;
-	}
-
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Saleleaseback", "TimeOfDelivery")){
-		return NULL;
-	}
-
-	Py_INCREF(Py_None);
-	return Py_None;
-}
-
-static PyObject *
-TimeOfDelivery_replace(VarGroupObject *self, PyObject *args)
-{
-	PyObject* dict;
-	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
-		return NULL;
-	}
-	PyTypeObject* tp = &TimeOfDelivery_Type;
-
-	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Saleleaseback", "TimeOfDelivery")){
-		return NULL;
-	}
-
-	Py_INCREF(Py_None);
-	return Py_None;
-}
-
-static PyObject *
-TimeOfDelivery_export(VarGroupObject *self, PyObject *args)
-{
-	PyTypeObject* tp = &TimeOfDelivery_Type;
-	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
-	return dict;
-}
-
-static PyMethodDef TimeOfDelivery_methods[] = {
-		{"assign",            (PyCFunction)TimeOfDelivery_assign,  METH_VARARGS,
-			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``TimeOfDelivery_vals = { var: val, ...}``")},
-		{"replace",            (PyCFunction)TimeOfDelivery_replace,  METH_VARARGS,
-			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``TimeOfDelivery_vals = { var: val, ...}``")},
-		{"export",            (PyCFunction)TimeOfDelivery_export,  METH_VARARGS,
-			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
-		{NULL,              NULL}           /* sentinel */
-};
-
-static PyObject *
-TimeOfDelivery_get_dispatch_factor1(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Saleleaseback_TimeOfDelivery_dispatch_factor1_nget, self->data_ptr);
-}
-
-static int
-TimeOfDelivery_set_dispatch_factor1(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Saleleaseback_TimeOfDelivery_dispatch_factor1_nset, self->data_ptr);
-}
-
-static PyObject *
-TimeOfDelivery_get_dispatch_factor2(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Saleleaseback_TimeOfDelivery_dispatch_factor2_nget, self->data_ptr);
-}
-
-static int
-TimeOfDelivery_set_dispatch_factor2(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Saleleaseback_TimeOfDelivery_dispatch_factor2_nset, self->data_ptr);
-}
-
-static PyObject *
-TimeOfDelivery_get_dispatch_factor3(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Saleleaseback_TimeOfDelivery_dispatch_factor3_nget, self->data_ptr);
-}
-
-static int
-TimeOfDelivery_set_dispatch_factor3(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Saleleaseback_TimeOfDelivery_dispatch_factor3_nset, self->data_ptr);
-}
-
-static PyObject *
-TimeOfDelivery_get_dispatch_factor4(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Saleleaseback_TimeOfDelivery_dispatch_factor4_nget, self->data_ptr);
-}
-
-static int
-TimeOfDelivery_set_dispatch_factor4(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Saleleaseback_TimeOfDelivery_dispatch_factor4_nset, self->data_ptr);
-}
-
-static PyObject *
-TimeOfDelivery_get_dispatch_factor5(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Saleleaseback_TimeOfDelivery_dispatch_factor5_nget, self->data_ptr);
-}
-
-static int
-TimeOfDelivery_set_dispatch_factor5(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Saleleaseback_TimeOfDelivery_dispatch_factor5_nset, self->data_ptr);
-}
-
-static PyObject *
-TimeOfDelivery_get_dispatch_factor6(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Saleleaseback_TimeOfDelivery_dispatch_factor6_nget, self->data_ptr);
-}
-
-static int
-TimeOfDelivery_set_dispatch_factor6(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Saleleaseback_TimeOfDelivery_dispatch_factor6_nset, self->data_ptr);
-}
-
-static PyObject *
-TimeOfDelivery_get_dispatch_factor7(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Saleleaseback_TimeOfDelivery_dispatch_factor7_nget, self->data_ptr);
-}
-
-static int
-TimeOfDelivery_set_dispatch_factor7(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Saleleaseback_TimeOfDelivery_dispatch_factor7_nset, self->data_ptr);
-}
-
-static PyObject *
-TimeOfDelivery_get_dispatch_factor8(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Saleleaseback_TimeOfDelivery_dispatch_factor8_nget, self->data_ptr);
-}
-
-static int
-TimeOfDelivery_set_dispatch_factor8(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Saleleaseback_TimeOfDelivery_dispatch_factor8_nset, self->data_ptr);
-}
-
-static PyObject *
-TimeOfDelivery_get_dispatch_factor9(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Saleleaseback_TimeOfDelivery_dispatch_factor9_nget, self->data_ptr);
-}
-
-static int
-TimeOfDelivery_set_dispatch_factor9(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Saleleaseback_TimeOfDelivery_dispatch_factor9_nset, self->data_ptr);
-}
-
-static PyObject *
-TimeOfDelivery_get_dispatch_factors_ts(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_Saleleaseback_TimeOfDelivery_dispatch_factors_ts_aget, self->data_ptr);
-}
-
-static int
-TimeOfDelivery_set_dispatch_factors_ts(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_Saleleaseback_TimeOfDelivery_dispatch_factors_ts_aset, self->data_ptr);
-}
-
-static PyObject *
-TimeOfDelivery_get_dispatch_sched_weekday(VarGroupObject *self, void *closure)
-{
-	return PySAM_matrix_getter(SAM_Saleleaseback_TimeOfDelivery_dispatch_sched_weekday_mget, self->data_ptr);
-}
-
-static int
-TimeOfDelivery_set_dispatch_sched_weekday(VarGroupObject *self, PyObject *value, void *closure)
-{
-		return PySAM_matrix_setter(value, SAM_Saleleaseback_TimeOfDelivery_dispatch_sched_weekday_mset, self->data_ptr);
-}
-
-static PyObject *
-TimeOfDelivery_get_dispatch_sched_weekend(VarGroupObject *self, void *closure)
-{
-	return PySAM_matrix_getter(SAM_Saleleaseback_TimeOfDelivery_dispatch_sched_weekend_mget, self->data_ptr);
-}
-
-static int
-TimeOfDelivery_set_dispatch_sched_weekend(VarGroupObject *self, PyObject *value, void *closure)
-{
-		return PySAM_matrix_setter(value, SAM_Saleleaseback_TimeOfDelivery_dispatch_sched_weekend_mset, self->data_ptr);
-}
-
-static PyObject *
-TimeOfDelivery_get_ppa_multiplier_model(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Saleleaseback_TimeOfDelivery_ppa_multiplier_model_nget, self->data_ptr);
-}
-
-static int
-TimeOfDelivery_set_ppa_multiplier_model(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Saleleaseback_TimeOfDelivery_ppa_multiplier_model_nset, self->data_ptr);
-}
-
-static PyGetSetDef TimeOfDelivery_getset[] = {
-{"dispatch_factor1", (getter)TimeOfDelivery_get_dispatch_factor1,(setter)TimeOfDelivery_set_dispatch_factor1,
-	PyDoc_STR("*float*: TOD factor for period 1\n\n**Required:**\nRequired if ppa_multiplier_model=0"),
- 	NULL},
-{"dispatch_factor2", (getter)TimeOfDelivery_get_dispatch_factor2,(setter)TimeOfDelivery_set_dispatch_factor2,
-	PyDoc_STR("*float*: TOD factor for period 2\n\n**Required:**\nRequired if ppa_multiplier_model=0"),
- 	NULL},
-{"dispatch_factor3", (getter)TimeOfDelivery_get_dispatch_factor3,(setter)TimeOfDelivery_set_dispatch_factor3,
-	PyDoc_STR("*float*: TOD factor for period 3\n\n**Required:**\nRequired if ppa_multiplier_model=0"),
- 	NULL},
-{"dispatch_factor4", (getter)TimeOfDelivery_get_dispatch_factor4,(setter)TimeOfDelivery_set_dispatch_factor4,
-	PyDoc_STR("*float*: TOD factor for period 4\n\n**Required:**\nRequired if ppa_multiplier_model=0"),
- 	NULL},
-{"dispatch_factor5", (getter)TimeOfDelivery_get_dispatch_factor5,(setter)TimeOfDelivery_set_dispatch_factor5,
-	PyDoc_STR("*float*: TOD factor for period 5\n\n**Required:**\nRequired if ppa_multiplier_model=0"),
- 	NULL},
-{"dispatch_factor6", (getter)TimeOfDelivery_get_dispatch_factor6,(setter)TimeOfDelivery_set_dispatch_factor6,
-	PyDoc_STR("*float*: TOD factor for period 6\n\n**Required:**\nRequired if ppa_multiplier_model=0"),
- 	NULL},
-{"dispatch_factor7", (getter)TimeOfDelivery_get_dispatch_factor7,(setter)TimeOfDelivery_set_dispatch_factor7,
-	PyDoc_STR("*float*: TOD factor for period 7\n\n**Required:**\nRequired if ppa_multiplier_model=0"),
- 	NULL},
-{"dispatch_factor8", (getter)TimeOfDelivery_get_dispatch_factor8,(setter)TimeOfDelivery_set_dispatch_factor8,
-	PyDoc_STR("*float*: TOD factor for period 8\n\n**Required:**\nRequired if ppa_multiplier_model=0"),
- 	NULL},
-{"dispatch_factor9", (getter)TimeOfDelivery_get_dispatch_factor9,(setter)TimeOfDelivery_set_dispatch_factor9,
-	PyDoc_STR("*float*: TOD factor for period 9\n\n**Required:**\nRequired if ppa_multiplier_model=0"),
- 	NULL},
-{"dispatch_factors_ts", (getter)TimeOfDelivery_get_dispatch_factors_ts,(setter)TimeOfDelivery_set_dispatch_factors_ts,
-	PyDoc_STR("*sequence*: Dispatch payment factor array\n\n**Required:**\nRequired if ppa_multiplier_model=1"),
- 	NULL},
-{"dispatch_sched_weekday", (getter)TimeOfDelivery_get_dispatch_sched_weekday,(setter)TimeOfDelivery_set_dispatch_sched_weekday,
-	PyDoc_STR("*sequence[sequence]*: Diurnal weekday TOD periods [1..9]\n\n**Info:**\n12 x 24 matrix\n\n**Required:**\nRequired if ppa_multiplier_model=0"),
- 	NULL},
-{"dispatch_sched_weekend", (getter)TimeOfDelivery_get_dispatch_sched_weekend,(setter)TimeOfDelivery_set_dispatch_sched_weekend,
-	PyDoc_STR("*sequence[sequence]*: Diurnal weekend TOD periods [1..9]\n\n**Info:**\n12 x 24 matrix\n\n**Required:**\nRequired if ppa_multiplier_model=0"),
- 	NULL},
-{"ppa_multiplier_model", (getter)TimeOfDelivery_get_ppa_multiplier_model,(setter)TimeOfDelivery_set_ppa_multiplier_model,
-	PyDoc_STR("*float*: PPA multiplier model [0/1]\n\n**Options:**\n0=diurnal,1=timestep\n\n**Constraints:**\nINTEGER,MIN=0\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
- 	NULL},
-	{NULL}  /* Sentinel */
-};
-
-static PyTypeObject TimeOfDelivery_Type = {
-		/* The ob_type field must be initialized in the module init function
-		 * to be portable to Windows without using C++. */
-		PyVarObject_HEAD_INIT(NULL, 0)
-		"Saleleaseback.TimeOfDelivery",             /*tp_name*/
-		sizeof(VarGroupObject),          /*tp_basicsize*/
-		0,                          /*tp_itemsize*/
-		/* methods */
-		0,    /*tp_dealloc*/
-		0,                          /*tp_print*/
-		(getattrfunc)0,             /*tp_getattr*/
-		0,                          /*tp_setattr*/
-		0,                          /*tp_reserved*/
-		0,                          /*tp_repr*/
-		0,                          /*tp_as_number*/
-		0,                          /*tp_as_sequence*/
-		0,                          /*tp_as_mapping*/
-		0,                          /*tp_hash*/
-		0,                          /*tp_call*/
-		0,                          /*tp_str*/
-		0,                          /*tp_getattro*/
-		0,                          /*tp_setattro*/
-		0,                          /*tp_as_buffer*/
-		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
-		0,                          /*tp_doc*/
-		0,                          /*tp_traverse*/
-		0,                          /*tp_clear*/
-		0,                          /*tp_richcompare*/
-		0,                          /*tp_weaklistofnset*/
-		0,                          /*tp_iter*/
-		0,                          /*tp_iternext*/
-		TimeOfDelivery_methods,         /*tp_methods*/
-		0,                          /*tp_members*/
-		TimeOfDelivery_getset,          /*tp_getset*/
 		0,                          /*tp_base*/
 		0,                          /*tp_dict*/
 		0,                          /*tp_descr_get*/
@@ -11421,10 +11179,6 @@ newSaleleasebackObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "SaleLeaseback", SaleLeaseback_obj);
 	Py_DECREF(SaleLeaseback_obj);
 
-	PyObject* TimeOfDelivery_obj = TimeOfDelivery_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "TimeOfDelivery", TimeOfDelivery_obj);
-	Py_DECREF(TimeOfDelivery_obj);
-
 	PyObject* UtilityBill_obj = UtilityBill_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "UtilityBill", UtilityBill_obj);
 	Py_DECREF(UtilityBill_obj);
@@ -11795,13 +11549,6 @@ SaleleasebackModule_exec(PyObject *m)
 				"SaleLeaseback",
 				(PyObject*)&SaleLeaseback_Type);
 	Py_DECREF(&SaleLeaseback_Type);
-
-	/// Add the TimeOfDelivery type object to Saleleaseback_Type
-	if (PyType_Ready(&TimeOfDelivery_Type) < 0) { goto fail; }
-	PyDict_SetItemString(Saleleaseback_Type.tp_dict,
-				"TimeOfDelivery",
-				(PyObject*)&TimeOfDelivery_Type);
-	Py_DECREF(&TimeOfDelivery_Type);
 
 	/// Add the UtilityBill type object to Saleleaseback_Type
 	if (PyType_Ready(&UtilityBill_Type) < 0) { goto fail; }

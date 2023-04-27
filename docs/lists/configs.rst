@@ -1114,6 +1114,15 @@ Power Tower Molten Salt -- Merchant Plant
 
       :doc:`../modules/TcsmoltenSalt`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Merchantplant`
 
+Power Tower Molten Salt -- No Financial Model
+-----------------------------------------------------------------------
+
+      CSP molten salt power tower system using heat transfer and thermodynamic component models. Run the performance model with no financial model.
+
+      Configuration name for defaults: *"MSPTNone"*
+
+      :doc:`../modules/TcsmoltenSalt`
+
 Power Tower Molten Salt -- Partnership Flip with Debt
 -----------------------------------------------------------------------
 

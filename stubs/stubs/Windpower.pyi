@@ -118,20 +118,6 @@ class Windpower(object):
 		wake_int_loss = float
 
 
-	class Uncertainty(object):
-		def assign(self): 
-			pass
-	
-		def export(self) -> dict:
-			pass
-	
-		def __init__(self, *args, **kwargs): 
-			pass
-
-
-		total_uncert = float
-
-
 	class AdjustmentFactors(object):
 		def assign(self): 
 			pass
@@ -151,6 +137,20 @@ class Windpower(object):
 		sf_constant = float
 		sf_hourly = tuple
 		sf_periods = tuple
+
+	class Uncertainty(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		total_uncert = float
+
 
 	class Outputs(object):
 		def assign(self): 

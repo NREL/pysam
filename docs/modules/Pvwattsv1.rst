@@ -33,6 +33,12 @@ PVWatts Group
 .. autoclass:: PySAM.Pvwattsv1.Pvwattsv1.PVWatts
 	:members:
 
+Shading Group
+--------------
+
+.. autoclass:: PySAM.Pvwattsv1.Pvwattsv1.Shading
+	:members:
+
 AdjustmentFactors Group
 ------------------------
 

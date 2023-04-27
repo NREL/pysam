@@ -61,10 +61,6 @@ class Pvwattsv1(object):
 		poa_cutin = float
 		rotlim = float
 		shade_mode_1x = float
-		shading_azal = tuple
-		shading_diff = float
-		shading_mxh = tuple
-		shading_timestep = tuple
 		system_size = float
 		tilt = float
 		tilt_eq_lat = float
@@ -74,6 +70,29 @@ class Pvwattsv1(object):
 		u1 = float
 		user_poa = tuple
 		w_stow = float
+
+
+	class Shading(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		shading_azal = tuple
+		shading_diff = float
+		shading_en_azal = float
+		shading_en_diff = float
+		shading_en_mxh = float
+		shading_en_string_option = float
+		shading_en_timestep = float
+		shading_mxh = tuple
+		shading_string_option = float
+		shading_timestep = tuple
 
 
 	class AdjustmentFactors(object):
