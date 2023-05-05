@@ -245,7 +245,7 @@ def URDBv7_to_ElectricityRates(urdb_response):
             urdb_data['ur_annual_min_charge'] = min_charge
         else:
             if min_charge_units == "$/day":
-                min_charge *= 365 / 30
+                min_charge *= 365 / 12
             urdb_data['ur_monthly_min_charge'] = min_charge
 
     try_get_schedule('energyweekdayschedule', 'ur_ec_sched_weekday')
