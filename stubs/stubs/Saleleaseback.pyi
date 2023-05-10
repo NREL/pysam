@@ -31,7 +31,12 @@ class Saleleaseback(object):
 			pass
 
 
+		dispatch_factors_ts = tuple
+		dispatch_sched_weekday = tuple
+		dispatch_sched_weekend = tuple
+		dispatch_tod_factors = tuple
 		ppa_escalation = float
+		ppa_multiplier_model = float
 		ppa_price_input = tuple
 		ppa_soln_max = float
 		ppa_soln_max_iterations = float
@@ -379,32 +384,6 @@ class Saleleaseback(object):
 		system_use_recapitalization = float
 		tax_investor_required_lease_reserve = float
 		total_installed_cost = float
-
-
-	class TimeOfDelivery(object):
-		def assign(self): 
-			pass
-	
-		def export(self) -> dict:
-			pass
-	
-		def __init__(self, *args, **kwargs): 
-			pass
-
-
-		dispatch_factor1 = float
-		dispatch_factor2 = float
-		dispatch_factor3 = float
-		dispatch_factor4 = float
-		dispatch_factor5 = float
-		dispatch_factor6 = float
-		dispatch_factor7 = float
-		dispatch_factor8 = float
-		dispatch_factor9 = float
-		dispatch_factors_ts = tuple
-		dispatch_sched_weekday = tuple
-		dispatch_sched_weekend = tuple
-		ppa_multiplier_model = float
 
 
 	class UtilityBill(object):

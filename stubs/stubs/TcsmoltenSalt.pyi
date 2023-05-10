@@ -448,18 +448,10 @@ class TcsmoltenSalt(object):
 			pass
 
 
-		dispatch_factor1 = float
-		dispatch_factor2 = float
-		dispatch_factor3 = float
-		dispatch_factor4 = float
-		dispatch_factor5 = float
-		dispatch_factor6 = float
-		dispatch_factor7 = float
-		dispatch_factor8 = float
-		dispatch_factor9 = float
 		dispatch_factors_ts = tuple
 		dispatch_sched_weekday = tuple
 		dispatch_sched_weekend = tuple
+		dispatch_tod_factors = tuple
 		ppa_multiplier_model = float
 
 
@@ -653,6 +645,7 @@ class TcsmoltenSalt(object):
 		annual_W_cooling_tower = float
 		annual_W_cycle_gross = float
 		annual_energy = float
+		annual_energy_distribution_time = tuple
 		annual_eta_rec_th = float
 		annual_eta_rec_th_incl_refl = float
 		annual_q_rec_inc = float

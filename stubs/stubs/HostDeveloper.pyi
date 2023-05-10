@@ -31,9 +31,14 @@ class HostDeveloper(object):
 			pass
 
 
+		dispatch_factors_ts = tuple
+		dispatch_sched_weekday = tuple
+		dispatch_sched_weekend = tuple
+		dispatch_tod_factors = tuple
 		flip_target_percent = float
 		flip_target_year = float
 		ppa_escalation = float
+		ppa_multiplier_model = float
 		ppa_price_input = tuple
 		ppa_soln_max = float
 		ppa_soln_max_iterations = float
@@ -456,19 +461,6 @@ class HostDeveloper(object):
 			pass
 
 
-		dispatch_factor1 = float
-		dispatch_factor2 = float
-		dispatch_factor3 = float
-		dispatch_factor4 = float
-		dispatch_factor5 = float
-		dispatch_factor6 = float
-		dispatch_factor7 = float
-		dispatch_factor8 = float
-		dispatch_factor9 = float
-		dispatch_factors_ts = tuple
-		dispatch_sched_weekday = tuple
-		dispatch_sched_weekend = tuple
-		ppa_multiplier_model = float
 		system_use_lifetime_output = float
 
 

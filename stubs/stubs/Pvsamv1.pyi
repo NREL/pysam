@@ -209,24 +209,44 @@ class Pvsamv1(object):
 		subarray1_shade_mode = float
 		subarray1_shading_azal = tuple
 		subarray1_shading_diff = float
+		subarray1_shading_en_azal = float
+		subarray1_shading_en_diff = float
+		subarray1_shading_en_mxh = float
+		subarray1_shading_en_string_option = float
+		subarray1_shading_en_timestep = float
 		subarray1_shading_mxh = tuple
 		subarray1_shading_string_option = float
 		subarray1_shading_timestep = tuple
 		subarray2_shade_mode = float
 		subarray2_shading_azal = tuple
 		subarray2_shading_diff = float
+		subarray2_shading_en_azal = float
+		subarray2_shading_en_diff = float
+		subarray2_shading_en_mxh = float
+		subarray2_shading_en_string_option = float
+		subarray2_shading_en_timestep = float
 		subarray2_shading_mxh = tuple
 		subarray2_shading_string_option = float
 		subarray2_shading_timestep = tuple
 		subarray3_shade_mode = float
 		subarray3_shading_azal = tuple
 		subarray3_shading_diff = float
+		subarray3_shading_en_azal = float
+		subarray3_shading_en_diff = float
+		subarray3_shading_en_mxh = float
+		subarray3_shading_en_string_option = float
+		subarray3_shading_en_timestep = float
 		subarray3_shading_mxh = tuple
 		subarray3_shading_string_option = float
 		subarray3_shading_timestep = tuple
 		subarray4_shade_mode = float
 		subarray4_shading_azal = tuple
 		subarray4_shading_diff = float
+		subarray4_shading_en_azal = float
+		subarray4_shading_en_diff = float
+		subarray4_shading_en_mxh = float
+		subarray4_shading_en_string_option = float
+		subarray4_shading_en_timestep = float
 		subarray4_shading_mxh = tuple
 		subarray4_shading_string_option = float
 		subarray4_shading_timestep = tuple
@@ -777,6 +797,26 @@ class Pvsamv1(object):
 		run_resiliency_calcs = float
 
 
+	class AdjustmentFactors(object):
+		def assign(self): 
+			pass
+	
+		def export(self): 
+			return {}
+	
+		def __init__(self, *args, **kwargs): # real signature unknown
+			pass
+	
+		constant = float
+		dc_constant = float
+		dc_hourly = tuple
+		dc_periods = tuple
+		hourly = tuple
+		periods = tuple
+		sf_constant = float
+		sf_hourly = tuple
+		sf_periods = tuple
+
 	class BatteryCell(object):
 		def assign(self): 
 			pass
@@ -1026,26 +1066,6 @@ class Pvsamv1(object):
 		grid_curtailment = tuple
 		grid_interconnection_limit_kwac = float
 
-
-	class AdjustmentFactors(object):
-		def assign(self): 
-			pass
-	
-		def export(self): 
-			return {}
-	
-		def __init__(self, *args, **kwargs): # real signature unknown
-			pass
-	
-		constant = float
-		dc_constant = float
-		dc_hourly = tuple
-		dc_periods = tuple
-		hourly = tuple
-		periods = tuple
-		sf_constant = float
-		sf_hourly = tuple
-		sf_periods = tuple
 
 	class Outputs(object):
 		def assign(self): 

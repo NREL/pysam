@@ -78,114 +78,6 @@ static PyMethodDef Revenue_methods[] = {
 };
 
 static PyObject *
-Revenue_get_dispatch_factor1(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Singleowner_Revenue_dispatch_factor1_nget, self->data_ptr);
-}
-
-static int
-Revenue_set_dispatch_factor1(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Singleowner_Revenue_dispatch_factor1_nset, self->data_ptr);
-}
-
-static PyObject *
-Revenue_get_dispatch_factor2(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Singleowner_Revenue_dispatch_factor2_nget, self->data_ptr);
-}
-
-static int
-Revenue_set_dispatch_factor2(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Singleowner_Revenue_dispatch_factor2_nset, self->data_ptr);
-}
-
-static PyObject *
-Revenue_get_dispatch_factor3(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Singleowner_Revenue_dispatch_factor3_nget, self->data_ptr);
-}
-
-static int
-Revenue_set_dispatch_factor3(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Singleowner_Revenue_dispatch_factor3_nset, self->data_ptr);
-}
-
-static PyObject *
-Revenue_get_dispatch_factor4(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Singleowner_Revenue_dispatch_factor4_nget, self->data_ptr);
-}
-
-static int
-Revenue_set_dispatch_factor4(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Singleowner_Revenue_dispatch_factor4_nset, self->data_ptr);
-}
-
-static PyObject *
-Revenue_get_dispatch_factor5(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Singleowner_Revenue_dispatch_factor5_nget, self->data_ptr);
-}
-
-static int
-Revenue_set_dispatch_factor5(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Singleowner_Revenue_dispatch_factor5_nset, self->data_ptr);
-}
-
-static PyObject *
-Revenue_get_dispatch_factor6(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Singleowner_Revenue_dispatch_factor6_nget, self->data_ptr);
-}
-
-static int
-Revenue_set_dispatch_factor6(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Singleowner_Revenue_dispatch_factor6_nset, self->data_ptr);
-}
-
-static PyObject *
-Revenue_get_dispatch_factor7(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Singleowner_Revenue_dispatch_factor7_nget, self->data_ptr);
-}
-
-static int
-Revenue_set_dispatch_factor7(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Singleowner_Revenue_dispatch_factor7_nset, self->data_ptr);
-}
-
-static PyObject *
-Revenue_get_dispatch_factor8(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Singleowner_Revenue_dispatch_factor8_nget, self->data_ptr);
-}
-
-static int
-Revenue_set_dispatch_factor8(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Singleowner_Revenue_dispatch_factor8_nset, self->data_ptr);
-}
-
-static PyObject *
-Revenue_get_dispatch_factor9(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_Singleowner_Revenue_dispatch_factor9_nget, self->data_ptr);
-}
-
-static int
-Revenue_set_dispatch_factor9(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_Singleowner_Revenue_dispatch_factor9_nset, self->data_ptr);
-}
-
-static PyObject *
 Revenue_get_dispatch_factors_ts(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Singleowner_Revenue_dispatch_factors_ts_aget, self->data_ptr);
@@ -219,6 +111,18 @@ static int
 Revenue_set_dispatch_sched_weekend(VarGroupObject *self, PyObject *value, void *closure)
 {
 		return PySAM_matrix_setter(value, SAM_Singleowner_Revenue_dispatch_sched_weekend_mset, self->data_ptr);
+}
+
+static PyObject *
+Revenue_get_dispatch_tod_factors(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_Singleowner_Revenue_dispatch_tod_factors_aget, self->data_ptr);
+}
+
+static int
+Revenue_set_dispatch_tod_factors(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_Singleowner_Revenue_dispatch_tod_factors_aset, self->data_ptr);
 }
 
 static PyObject *
@@ -342,33 +246,6 @@ Revenue_set_ppa_soln_tolerance(VarGroupObject *self, PyObject *value, void *clos
 }
 
 static PyGetSetDef Revenue_getset[] = {
-{"dispatch_factor1", (getter)Revenue_get_dispatch_factor1,(setter)Revenue_set_dispatch_factor1,
-	PyDoc_STR("*float*: TOD factor for period 1\n\n**Required:**\nRequired if ppa_multiplier_model=0"),
- 	NULL},
-{"dispatch_factor2", (getter)Revenue_get_dispatch_factor2,(setter)Revenue_set_dispatch_factor2,
-	PyDoc_STR("*float*: TOD factor for period 2\n\n**Required:**\nRequired if ppa_multiplier_model=0"),
- 	NULL},
-{"dispatch_factor3", (getter)Revenue_get_dispatch_factor3,(setter)Revenue_set_dispatch_factor3,
-	PyDoc_STR("*float*: TOD factor for period 3\n\n**Required:**\nRequired if ppa_multiplier_model=0"),
- 	NULL},
-{"dispatch_factor4", (getter)Revenue_get_dispatch_factor4,(setter)Revenue_set_dispatch_factor4,
-	PyDoc_STR("*float*: TOD factor for period 4\n\n**Required:**\nRequired if ppa_multiplier_model=0"),
- 	NULL},
-{"dispatch_factor5", (getter)Revenue_get_dispatch_factor5,(setter)Revenue_set_dispatch_factor5,
-	PyDoc_STR("*float*: TOD factor for period 5\n\n**Required:**\nRequired if ppa_multiplier_model=0"),
- 	NULL},
-{"dispatch_factor6", (getter)Revenue_get_dispatch_factor6,(setter)Revenue_set_dispatch_factor6,
-	PyDoc_STR("*float*: TOD factor for period 6\n\n**Required:**\nRequired if ppa_multiplier_model=0"),
- 	NULL},
-{"dispatch_factor7", (getter)Revenue_get_dispatch_factor7,(setter)Revenue_set_dispatch_factor7,
-	PyDoc_STR("*float*: TOD factor for period 7\n\n**Required:**\nRequired if ppa_multiplier_model=0"),
- 	NULL},
-{"dispatch_factor8", (getter)Revenue_get_dispatch_factor8,(setter)Revenue_set_dispatch_factor8,
-	PyDoc_STR("*float*: TOD factor for period 8\n\n**Required:**\nRequired if ppa_multiplier_model=0"),
- 	NULL},
-{"dispatch_factor9", (getter)Revenue_get_dispatch_factor9,(setter)Revenue_set_dispatch_factor9,
-	PyDoc_STR("*float*: TOD factor for period 9\n\n**Required:**\nRequired if ppa_multiplier_model=0"),
- 	NULL},
 {"dispatch_factors_ts", (getter)Revenue_get_dispatch_factors_ts,(setter)Revenue_set_dispatch_factors_ts,
 	PyDoc_STR("*sequence*: Dispatch payment factor array\n\n**Required:**\nRequired if ppa_multiplier_model=1"),
  	NULL},
@@ -377,6 +254,9 @@ static PyGetSetDef Revenue_getset[] = {
  	NULL},
 {"dispatch_sched_weekend", (getter)Revenue_get_dispatch_sched_weekend,(setter)Revenue_set_dispatch_sched_weekend,
 	PyDoc_STR("*sequence[sequence]*: Diurnal weekend TOD periods [1..9]\n\n**Info:**\n12 x 24 matrix\n\n**Required:**\nRequired if ppa_multiplier_model=0"),
+ 	NULL},
+{"dispatch_tod_factors", (getter)Revenue_get_dispatch_tod_factors,(setter)Revenue_set_dispatch_tod_factors,
+	PyDoc_STR("*sequence*: TOD factors for periods 1 through 9\n\n**Required:**\nRequired if ppa_multiplier_model=0"),
  	NULL},
 {"flip_target_percent", (getter)Revenue_get_flip_target_percent,(setter)Revenue_set_flip_target_percent,
 	PyDoc_STR("*float*: After-tax IRR target [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nFalse. Automatically set to 11 if not assigned explicitly or loaded from defaults."),

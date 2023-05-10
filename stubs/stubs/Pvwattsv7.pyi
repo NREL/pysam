@@ -79,10 +79,6 @@ class Pvwattsv7(object):
 		losses = float
 		module_type = float
 		rotlim = float
-		shading_azal = tuple
-		shading_diff = float
-		shading_mxh = tuple
-		shading_timestep = tuple
 		soiling = tuple
 		stow_wspd = float
 		system_capacity = float
@@ -90,6 +86,29 @@ class Pvwattsv7(object):
 		wind_stow_angle = float
 		xfmr_ll = float
 		xfmr_nll = float
+
+
+	class Shading(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		shading_azal = tuple
+		shading_diff = float
+		shading_en_azal = float
+		shading_en_diff = float
+		shading_en_mxh = float
+		shading_en_string_option = float
+		shading_en_timestep = float
+		shading_mxh = tuple
+		shading_string_option = float
+		shading_timestep = tuple
 
 
 	class AdjustmentFactors(object):
