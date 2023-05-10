@@ -6,6 +6,7 @@ import PySAM.Battwatts as bt
 import PySAM.Utilityrate5 as ur
 import PySAM.Pvsamv1 as pvsam
 import PySAM.Battery as stbt
+import PySAM.Cashloan as loan
 
 
 @pytest.fixture
@@ -50,3 +51,12 @@ def test_reopt_sizing_pvsam(solar_resource):
     assert('Scenario' in post['reopt_post'])
     assert(post['reopt_post']['Scenario']['Site']['latitude'] == pytest.approx(33.6, 0.1))
 
+def test_repot_sizing_battery():
+    batt = stbt.default("GenericBatteryCommercial")
+    rate = ur.from_existing(batt, "GenericBatteryCommercial")
+    fin = loan.from_existing(batt, "GenericBatteryCommercial")
+
+    post = batt.Reopt_size_standalone_battery_post()
+
+    assert('Scenario' in post['reopt_post'])
+    assert(post['reopt_post']['Scenario']['Site']['Storage']['soc_init_pct'] == pytest.approx(0.5, 0.1))

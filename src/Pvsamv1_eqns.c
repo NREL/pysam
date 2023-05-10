@@ -2,7 +2,7 @@
 
 char Reopt_size_battery_post_doc[] =
         "Given a PV system with Utilityrate5 parameters, get the optimal battery size. Wind and additional PV are disabled.\n"
-        "Maps SAM compute module inputs to those of the ReOpt Lite API:\n"
+        "Maps SAM compute module inputs to those of the ReOpt API:\n"
         "Pvsamv1 model linked with Battery, Utilityrate5, with Cashloan optional.\n\n"
         "For more information on which PySAM variables are used, see: https://github.com/NREL/ssc/blob/develop/ssc/cmod_pvsamv1_eqns.h\n\n"
         "For an example, see the 'Examples' readthedocs page.";
@@ -39,7 +39,7 @@ static PyObject* Reopt_size_battery_post(PyObject *self, PyObject *args, PyObjec
             return NULL;
 
         if (strlen(resource_file) == 0){
-            PyErr_SetString(PyExc_Exception, "Reopt_size_battery_pot error: solar_resource_file or solar_resource_data must be provided.");
+            PyErr_SetString(PyExc_Exception, "Reopt_size_battery_post error: solar_resource_file or solar_resource_data must be provided.");
             return NULL;
         }
         SAM_table ssc_data = SAM_table_construct(NULL);
