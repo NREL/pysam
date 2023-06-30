@@ -8,7 +8,7 @@ Additional financial models, inputs, and outputs can be found at:
 * PV: https://nrel-pysam.readthedocs.io/en/master/modules/Pvsamv1.html
 * Battery: https://nrel-pysam.readthedocs.io/en/master/modules/Battery.html
 
-Most recently tested against PySAM 4.1.0
+Most recently tested against PySAM 4.2.0
 
 @author: brtietz
 """
