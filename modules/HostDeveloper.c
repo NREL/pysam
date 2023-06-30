@@ -78,54 +78,6 @@ static PyMethodDef Revenue_methods[] = {
 };
 
 static PyObject *
-Revenue_get_dispatch_factors_ts(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_HostDeveloper_Revenue_dispatch_factors_ts_aget, self->data_ptr);
-}
-
-static int
-Revenue_set_dispatch_factors_ts(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_HostDeveloper_Revenue_dispatch_factors_ts_aset, self->data_ptr);
-}
-
-static PyObject *
-Revenue_get_dispatch_sched_weekday(VarGroupObject *self, void *closure)
-{
-	return PySAM_matrix_getter(SAM_HostDeveloper_Revenue_dispatch_sched_weekday_mget, self->data_ptr);
-}
-
-static int
-Revenue_set_dispatch_sched_weekday(VarGroupObject *self, PyObject *value, void *closure)
-{
-		return PySAM_matrix_setter(value, SAM_HostDeveloper_Revenue_dispatch_sched_weekday_mset, self->data_ptr);
-}
-
-static PyObject *
-Revenue_get_dispatch_sched_weekend(VarGroupObject *self, void *closure)
-{
-	return PySAM_matrix_getter(SAM_HostDeveloper_Revenue_dispatch_sched_weekend_mget, self->data_ptr);
-}
-
-static int
-Revenue_set_dispatch_sched_weekend(VarGroupObject *self, PyObject *value, void *closure)
-{
-		return PySAM_matrix_setter(value, SAM_HostDeveloper_Revenue_dispatch_sched_weekend_mset, self->data_ptr);
-}
-
-static PyObject *
-Revenue_get_dispatch_tod_factors(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_HostDeveloper_Revenue_dispatch_tod_factors_aget, self->data_ptr);
-}
-
-static int
-Revenue_set_dispatch_tod_factors(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_HostDeveloper_Revenue_dispatch_tod_factors_aset, self->data_ptr);
-}
-
-static PyObject *
 Revenue_get_flip_target_percent(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_HostDeveloper_Revenue_flip_target_percent_nget, self->data_ptr);
@@ -159,18 +111,6 @@ static int
 Revenue_set_ppa_escalation(VarGroupObject *self, PyObject *value, void *closure)
 {
 	return PySAM_double_setter(value, SAM_HostDeveloper_Revenue_ppa_escalation_nset, self->data_ptr);
-}
-
-static PyObject *
-Revenue_get_ppa_multiplier_model(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_HostDeveloper_Revenue_ppa_multiplier_model_nget, self->data_ptr);
-}
-
-static int
-Revenue_set_ppa_multiplier_model(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_HostDeveloper_Revenue_ppa_multiplier_model_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -246,18 +186,6 @@ Revenue_set_ppa_soln_tolerance(VarGroupObject *self, PyObject *value, void *clos
 }
 
 static PyGetSetDef Revenue_getset[] = {
-{"dispatch_factors_ts", (getter)Revenue_get_dispatch_factors_ts,(setter)Revenue_set_dispatch_factors_ts,
-	PyDoc_STR("*sequence*: Dispatch payment factor array\n\n**Required:**\nRequired if ppa_multiplier_model=1"),
- 	NULL},
-{"dispatch_sched_weekday", (getter)Revenue_get_dispatch_sched_weekday,(setter)Revenue_set_dispatch_sched_weekday,
-	PyDoc_STR("*sequence[sequence]*: Diurnal weekday TOD periods [1..9]\n\n**Info:**\n12 x 24 matrix\n\n**Required:**\nRequired if ppa_multiplier_model=0"),
- 	NULL},
-{"dispatch_sched_weekend", (getter)Revenue_get_dispatch_sched_weekend,(setter)Revenue_set_dispatch_sched_weekend,
-	PyDoc_STR("*sequence[sequence]*: Diurnal weekend TOD periods [1..9]\n\n**Info:**\n12 x 24 matrix\n\n**Required:**\nRequired if ppa_multiplier_model=0"),
- 	NULL},
-{"dispatch_tod_factors", (getter)Revenue_get_dispatch_tod_factors,(setter)Revenue_set_dispatch_tod_factors,
-	PyDoc_STR("*sequence*: TOD factors for periods 1 through 9\n\n**Required:**\nRequired if ppa_multiplier_model=0"),
- 	NULL},
 {"flip_target_percent", (getter)Revenue_get_flip_target_percent,(setter)Revenue_set_flip_target_percent,
 	PyDoc_STR("*float*: After-tax IRR target [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nFalse. Automatically set to 11 if not assigned explicitly or loaded from defaults."),
  	NULL},
@@ -266,9 +194,6 @@ static PyGetSetDef Revenue_getset[] = {
  	NULL},
 {"ppa_escalation", (getter)Revenue_get_ppa_escalation,(setter)Revenue_set_ppa_escalation,
 	PyDoc_STR("*float*: PPA escalation rate [%/year]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
- 	NULL},
-{"ppa_multiplier_model", (getter)Revenue_get_ppa_multiplier_model,(setter)Revenue_set_ppa_multiplier_model,
-	PyDoc_STR("*float*: PPA multiplier model [0/1]\n\n**Options:**\n0=diurnal,1=timestep\n\n**Constraints:**\nINTEGER,MIN=0\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ppa_price_input", (getter)Revenue_get_ppa_price_input,(setter)Revenue_set_ppa_price_input,
 	PyDoc_STR("*sequence*: PPA price in first year input [$/kWh]\n\n**Required:**\nTrue"),
@@ -5579,6 +5504,162 @@ static PyMethodDef TimeOfDelivery_methods[] = {
 };
 
 static PyObject *
+TimeOfDelivery_get_dispatch_factor1(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_HostDeveloper_TimeOfDelivery_dispatch_factor1_nget, self->data_ptr);
+}
+
+static int
+TimeOfDelivery_set_dispatch_factor1(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_HostDeveloper_TimeOfDelivery_dispatch_factor1_nset, self->data_ptr);
+}
+
+static PyObject *
+TimeOfDelivery_get_dispatch_factor2(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_HostDeveloper_TimeOfDelivery_dispatch_factor2_nget, self->data_ptr);
+}
+
+static int
+TimeOfDelivery_set_dispatch_factor2(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_HostDeveloper_TimeOfDelivery_dispatch_factor2_nset, self->data_ptr);
+}
+
+static PyObject *
+TimeOfDelivery_get_dispatch_factor3(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_HostDeveloper_TimeOfDelivery_dispatch_factor3_nget, self->data_ptr);
+}
+
+static int
+TimeOfDelivery_set_dispatch_factor3(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_HostDeveloper_TimeOfDelivery_dispatch_factor3_nset, self->data_ptr);
+}
+
+static PyObject *
+TimeOfDelivery_get_dispatch_factor4(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_HostDeveloper_TimeOfDelivery_dispatch_factor4_nget, self->data_ptr);
+}
+
+static int
+TimeOfDelivery_set_dispatch_factor4(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_HostDeveloper_TimeOfDelivery_dispatch_factor4_nset, self->data_ptr);
+}
+
+static PyObject *
+TimeOfDelivery_get_dispatch_factor5(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_HostDeveloper_TimeOfDelivery_dispatch_factor5_nget, self->data_ptr);
+}
+
+static int
+TimeOfDelivery_set_dispatch_factor5(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_HostDeveloper_TimeOfDelivery_dispatch_factor5_nset, self->data_ptr);
+}
+
+static PyObject *
+TimeOfDelivery_get_dispatch_factor6(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_HostDeveloper_TimeOfDelivery_dispatch_factor6_nget, self->data_ptr);
+}
+
+static int
+TimeOfDelivery_set_dispatch_factor6(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_HostDeveloper_TimeOfDelivery_dispatch_factor6_nset, self->data_ptr);
+}
+
+static PyObject *
+TimeOfDelivery_get_dispatch_factor7(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_HostDeveloper_TimeOfDelivery_dispatch_factor7_nget, self->data_ptr);
+}
+
+static int
+TimeOfDelivery_set_dispatch_factor7(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_HostDeveloper_TimeOfDelivery_dispatch_factor7_nset, self->data_ptr);
+}
+
+static PyObject *
+TimeOfDelivery_get_dispatch_factor8(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_HostDeveloper_TimeOfDelivery_dispatch_factor8_nget, self->data_ptr);
+}
+
+static int
+TimeOfDelivery_set_dispatch_factor8(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_HostDeveloper_TimeOfDelivery_dispatch_factor8_nset, self->data_ptr);
+}
+
+static PyObject *
+TimeOfDelivery_get_dispatch_factor9(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_HostDeveloper_TimeOfDelivery_dispatch_factor9_nget, self->data_ptr);
+}
+
+static int
+TimeOfDelivery_set_dispatch_factor9(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_HostDeveloper_TimeOfDelivery_dispatch_factor9_nset, self->data_ptr);
+}
+
+static PyObject *
+TimeOfDelivery_get_dispatch_factors_ts(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_HostDeveloper_TimeOfDelivery_dispatch_factors_ts_aget, self->data_ptr);
+}
+
+static int
+TimeOfDelivery_set_dispatch_factors_ts(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_HostDeveloper_TimeOfDelivery_dispatch_factors_ts_aset, self->data_ptr);
+}
+
+static PyObject *
+TimeOfDelivery_get_dispatch_sched_weekday(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_HostDeveloper_TimeOfDelivery_dispatch_sched_weekday_mget, self->data_ptr);
+}
+
+static int
+TimeOfDelivery_set_dispatch_sched_weekday(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_HostDeveloper_TimeOfDelivery_dispatch_sched_weekday_mset, self->data_ptr);
+}
+
+static PyObject *
+TimeOfDelivery_get_dispatch_sched_weekend(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_HostDeveloper_TimeOfDelivery_dispatch_sched_weekend_mget, self->data_ptr);
+}
+
+static int
+TimeOfDelivery_set_dispatch_sched_weekend(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_HostDeveloper_TimeOfDelivery_dispatch_sched_weekend_mset, self->data_ptr);
+}
+
+static PyObject *
+TimeOfDelivery_get_ppa_multiplier_model(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_HostDeveloper_TimeOfDelivery_ppa_multiplier_model_nget, self->data_ptr);
+}
+
+static int
+TimeOfDelivery_set_ppa_multiplier_model(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_HostDeveloper_TimeOfDelivery_ppa_multiplier_model_nset, self->data_ptr);
+}
+
+static PyObject *
 TimeOfDelivery_get_system_use_lifetime_output(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_HostDeveloper_TimeOfDelivery_system_use_lifetime_output_nget, self->data_ptr);
@@ -5591,6 +5672,45 @@ TimeOfDelivery_set_system_use_lifetime_output(VarGroupObject *self, PyObject *va
 }
 
 static PyGetSetDef TimeOfDelivery_getset[] = {
+{"dispatch_factor1", (getter)TimeOfDelivery_get_dispatch_factor1,(setter)TimeOfDelivery_set_dispatch_factor1,
+	PyDoc_STR("*float*: TOD factor for period 1\n\n**Required:**\nRequired if ppa_multiplier_model=0"),
+ 	NULL},
+{"dispatch_factor2", (getter)TimeOfDelivery_get_dispatch_factor2,(setter)TimeOfDelivery_set_dispatch_factor2,
+	PyDoc_STR("*float*: TOD factor for period 2\n\n**Required:**\nRequired if ppa_multiplier_model=0"),
+ 	NULL},
+{"dispatch_factor3", (getter)TimeOfDelivery_get_dispatch_factor3,(setter)TimeOfDelivery_set_dispatch_factor3,
+	PyDoc_STR("*float*: TOD factor for period 3\n\n**Required:**\nRequired if ppa_multiplier_model=0"),
+ 	NULL},
+{"dispatch_factor4", (getter)TimeOfDelivery_get_dispatch_factor4,(setter)TimeOfDelivery_set_dispatch_factor4,
+	PyDoc_STR("*float*: TOD factor for period 4\n\n**Required:**\nRequired if ppa_multiplier_model=0"),
+ 	NULL},
+{"dispatch_factor5", (getter)TimeOfDelivery_get_dispatch_factor5,(setter)TimeOfDelivery_set_dispatch_factor5,
+	PyDoc_STR("*float*: TOD factor for period 5\n\n**Required:**\nRequired if ppa_multiplier_model=0"),
+ 	NULL},
+{"dispatch_factor6", (getter)TimeOfDelivery_get_dispatch_factor6,(setter)TimeOfDelivery_set_dispatch_factor6,
+	PyDoc_STR("*float*: TOD factor for period 6\n\n**Required:**\nRequired if ppa_multiplier_model=0"),
+ 	NULL},
+{"dispatch_factor7", (getter)TimeOfDelivery_get_dispatch_factor7,(setter)TimeOfDelivery_set_dispatch_factor7,
+	PyDoc_STR("*float*: TOD factor for period 7\n\n**Required:**\nRequired if ppa_multiplier_model=0"),
+ 	NULL},
+{"dispatch_factor8", (getter)TimeOfDelivery_get_dispatch_factor8,(setter)TimeOfDelivery_set_dispatch_factor8,
+	PyDoc_STR("*float*: TOD factor for period 8\n\n**Required:**\nRequired if ppa_multiplier_model=0"),
+ 	NULL},
+{"dispatch_factor9", (getter)TimeOfDelivery_get_dispatch_factor9,(setter)TimeOfDelivery_set_dispatch_factor9,
+	PyDoc_STR("*float*: TOD factor for period 9\n\n**Required:**\nRequired if ppa_multiplier_model=0"),
+ 	NULL},
+{"dispatch_factors_ts", (getter)TimeOfDelivery_get_dispatch_factors_ts,(setter)TimeOfDelivery_set_dispatch_factors_ts,
+	PyDoc_STR("*sequence*: Dispatch payment factor array\n\n**Required:**\nRequired if ppa_multiplier_model=1"),
+ 	NULL},
+{"dispatch_sched_weekday", (getter)TimeOfDelivery_get_dispatch_sched_weekday,(setter)TimeOfDelivery_set_dispatch_sched_weekday,
+	PyDoc_STR("*sequence[sequence]*: Diurnal weekday TOD periods [1..9]\n\n**Info:**\n12 x 24 matrix\n\n**Required:**\nRequired if ppa_multiplier_model=0"),
+ 	NULL},
+{"dispatch_sched_weekend", (getter)TimeOfDelivery_get_dispatch_sched_weekend,(setter)TimeOfDelivery_set_dispatch_sched_weekend,
+	PyDoc_STR("*sequence[sequence]*: Diurnal weekend TOD periods [1..9]\n\n**Info:**\n12 x 24 matrix\n\n**Required:**\nRequired if ppa_multiplier_model=0"),
+ 	NULL},
+{"ppa_multiplier_model", (getter)TimeOfDelivery_get_ppa_multiplier_model,(setter)TimeOfDelivery_set_ppa_multiplier_model,
+	PyDoc_STR("*float*: PPA multiplier model [0/1]\n\n**Options:**\n0=diurnal,1=timestep\n\n**Constraints:**\nINTEGER,MIN=0\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
 {"system_use_lifetime_output", (getter)TimeOfDelivery_get_system_use_lifetime_output,(setter)TimeOfDelivery_set_system_use_lifetime_output,
 	PyDoc_STR("*float*: Lifetime hourly system outputs [0/1]\n\n**Options:**\n0=hourly first year,1=hourly lifetime\n\n**Constraints:**\nINTEGER,MIN=0\n\n**Required:**\nTrue"),
  	NULL},

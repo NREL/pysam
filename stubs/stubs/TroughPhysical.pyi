@@ -249,6 +249,15 @@ class TroughPhysical(object):
 		disp_steps_per_hour = float
 		disp_time_weighting = float
 		disp_timeout = float
+		dispatch_factor1 = float
+		dispatch_factor2 = float
+		dispatch_factor3 = float
+		dispatch_factor4 = float
+		dispatch_factor5 = float
+		dispatch_factor6 = float
+		dispatch_factor7 = float
+		dispatch_factor8 = float
+		dispatch_factor9 = float
 		dispatch_factors_ts = tuple
 		dispatch_sched_weekday = tuple
 		dispatch_sched_weekend = tuple
@@ -325,20 +334,6 @@ class TroughPhysical(object):
 
 
 		en_electricity_rates = float
-
-
-	class TimeOfDeliveryFactors(object):
-		def assign(self): 
-			pass
-	
-		def export(self) -> dict:
-			pass
-	
-		def __init__(self, *args, **kwargs): 
-			pass
-
-
-		dispatch_tod_factors = tuple
 
 
 	class Revenue(object):

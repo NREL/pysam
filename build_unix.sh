@@ -7,8 +7,8 @@
 # Building libssc and libSAM_api
 # requires SAM-Dev/CMakeList.txt that contains lk, wex, ssc and sam as subdirectories
 
-rm -rf ~/SAM-Dev/cmake-build-release
-mkdir -p ~/SAM-Dev/cmake-build-release
+# rm -rf ~/SAM-Dev/cmake-build-release
+# mkdir -p ~/SAM-Dev/cmake-build-release
 cd ~/SAM-Dev/cmake-build-release || exit
 cmake .. -DCMAKE_BUILD_TYPE=Release -DSAMAPI_EXPORT=1 -DSAM_SKIP_AUTOGEN=0
 cmake --build . --target SAM_api -j 6

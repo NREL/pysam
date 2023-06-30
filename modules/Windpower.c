@@ -1689,6 +1689,10 @@ newWindpowerObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "Losses", Losses_obj);
 	Py_DECREF(Losses_obj);
 
+	PyObject* Uncertainty_obj = Uncertainty_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "Uncertainty", Uncertainty_obj);
+	Py_DECREF(Uncertainty_obj);
+
 	PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
 
 	PyObject* data_cap = PyCapsule_New(self->data_ptr, NULL, NULL);
@@ -1703,10 +1707,6 @@ newWindpowerObject(void* data_ptr)
 
 	PyDict_SetItemString(attr_dict, "AdjustmentFactors", Adjust_obj);
 	Py_DECREF(Adjust_obj);
-
-	PyObject* Uncertainty_obj = Uncertainty_new(self->data_ptr);
-	PyDict_SetItemString(attr_dict, "Uncertainty", Uncertainty_obj);
-	Py_DECREF(Uncertainty_obj);
 
 	PyObject* Outputs_obj = Outputs_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
@@ -1988,6 +1988,25 @@ WindpowerModule_exec(PyObject *m)
 
 	Windpower_Type.tp_dict = PyDict_New();
 	if (!Windpower_Type.tp_dict) { goto fail; }
+
+	/// Add the AdjustmentFactors type object to Windpower_Type
+	PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
+	if (!AdjustmentFactorsModule){
+		PyErr_SetImportError(PyUnicode_FromString("Could not import AdjustmentFactors module."), NULL, NULL);
+	}
+
+	PyTypeObject* AdjustmentFactors_Type = (PyTypeObject*)PyObject_GetAttrString(AdjustmentFactorsModule, "AdjustmentFactors");
+	if (!AdjustmentFactors_Type){
+		PyErr_SetImportError(PyUnicode_FromString("Could not import AdjustmentFactors type."), NULL, NULL);
+	}
+	Py_XDECREF(AdjustmentFactorsModule);
+
+	if (PyType_Ready(AdjustmentFactors_Type) < 0) { goto fail; }
+	PyDict_SetItemString(Windpower_Type.tp_dict,
+						 "AdjustmentFactors",
+						 (PyObject*)AdjustmentFactors_Type);
+	Py_DECREF(&AdjustmentFactors_Type);
+	Py_XDECREF(AdjustmentFactors_Type);
 
 	/// Add the Resource type object to Windpower_Type
 	if (PyType_Ready(&Resource_Type) < 0) { goto fail; }

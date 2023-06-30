@@ -62,12 +62,6 @@ SystemControl Group
 .. autoclass:: PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.SystemControl
 	:members:
 
-TimeOfDeliveryFactors Group
-----------------------------
-
-.. autoclass:: PySAM.TroughPhysicalProcessHeat.TroughPhysicalProcessHeat.TimeOfDeliveryFactors
-	:members:
-
 System Group
 -------------
 

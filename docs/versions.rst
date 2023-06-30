@@ -10,6 +10,7 @@ For a list of
 .. toctree::
     :maxdepth: 2
 
+    version_changes/4.2.0.rst
     version_changes/4.1.0.rst
     version_changes/4.0.0.rst
     version_changes/3.0.2.rst
