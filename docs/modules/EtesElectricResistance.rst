@@ -53,13 +53,29 @@ The variables listed below are interdependent with other variables. If you chang
 
  - const_per_upfront_rate5
 
+ - dispatch_factor1
+
+ - dispatch_factor2
+
+ - dispatch_factor3
+
+ - dispatch_factor4
+
+ - dispatch_factor5
+
+ - dispatch_factor6
+
+ - dispatch_factor7
+
+ - dispatch_factor8
+
+ - dispatch_factor9
+
  - dispatch_factors_ts
 
  - dispatch_sched_weekday
 
  - dispatch_sched_weekend
-
- - dispatch_tod_factors
 
  - ppa_multiplier_model
 

@@ -41,12 +41,6 @@ SWH Group
 .. autoclass:: PySAM.Swh.Swh.SWH
 	:members:
 
-Shading Group
---------------
-
-.. autoclass:: PySAM.Swh.Swh.Shading
-	:members:
-
 AdjustmentFactors Group
 ------------------------
 

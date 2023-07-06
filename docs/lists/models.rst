@@ -257,10 +257,10 @@
       SAM Wave Resource File Reader
 
 :doc:`../modules/Wfcheck` (HD)
-      Weather file checker.
+      Weather file checker for solar resource data.
 
 :doc:`../modules/Wfcsvconv` (HD)
-      Converter for TMY2, TMY3, INTL, EPW, SMW weather files to standard CSV format
+      Converter for TMY2, TMY3, INTL, EPW, SMW weather files with solar resource data to SAM CSV format
 
 :doc:`../modules/Wfreader` (HD)
       Standard Weather File Format Reader (TMY2, TMY3, EPW, SMW, WFCSV)

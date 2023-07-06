@@ -3,7 +3,7 @@
 """
 Created on Wed Mar  4 13:47:58 2020
 
-Most recently tested against PySAM 4.1.0
+Most recently tested against PySAM 4.2.0
 
 @author: frohro
 """
