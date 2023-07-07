@@ -49,10 +49,12 @@ docker pull quay.io/pypa/manylinux2014_aarch64
 # docker run --rm -dit -v $(pwd):/io quay.io/pypa/manylinux2010_x86_64 /bin/bash
 docker run --rm -v $(pwd):/io quay.io/pypa/manylinux2014_aarch64 /io/pysam/build_manylinux_arm64.sh
 
-rename -s linux manylinux1 $PYSAMDIR/dist/*-linux_*
+rename -s linux manylinux2014 $PYSAMDIR/dist/*-linux_*
 
 docker pull continuumio/anaconda3
 docker run --rm --env PYSAMDIR=/io/pysam -v $(pwd):/io continuumio/anaconda3 /io/pysam/build_conda_arm64.sh
+
+
 
 
 twine upload $PYSAMDIR/dist/*.whl
