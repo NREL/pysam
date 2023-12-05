@@ -268,7 +268,25 @@ Fuel Cell - PV - Battery -- Single Owner
 
       :doc:`../modules/Pvwattsv8`, :doc:`../modules/Fuelcell`, :doc:`../modules/Battery`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Thermalrate`, :doc:`../modules/Singleowner`
 
-Generic Model -- Commercial Owner
+Generic PVWatts Wind FuelCell Battery Hybrid -- Single Owner
+-----------------------------------------------------------------------
+
+      Hybrid power system with PVWatts and wind power generation and battery storage). Single owner PPA with constant DSCR and IRR target year, reserve accounts and depreciation allocations.
+
+      Configuration name for defaults: *"GenericPVWattsWindFuelCellBatteryHybridSingleOwner"*
+
+      :doc:`../modules/GenericSystem`, :doc:`../modules/Pvwattsv8`, :doc:`../modules/Windpower`, :doc:`../modules/Fuelcell`, :doc:`../modules/Battery`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Singleowner`
+
+Generic PVWatts Wind FuelCell Battery Hybrid -- Third Party - Host / Developer
+-----------------------------------------------------------------------
+
+      Hybrid power system with PVWatts and wind power generation and battery storage). Third party ownershop from host and developer perspective for PPA.
+
+      Configuration name for defaults: *"GenericPVWattsWindFuelCellBatteryHybridHostDeveloper"*
+
+      :doc:`../modules/GenericSystem`, :doc:`../modules/Pvwattsv8`, :doc:`../modules/Windpower`, :doc:`../modules/Fuelcell`, :doc:`../modules/Battery`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/HostDeveloper`
+
+Generic Solar Model -- Commercial Owner
 -----------------------------------------------------------------------
 
       CSP power system with solar field modeled using a table of optical efficiency values. Renewable energy system displaces commercial building electric load.

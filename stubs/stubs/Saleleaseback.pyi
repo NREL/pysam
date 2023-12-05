@@ -31,7 +31,12 @@ class Saleleaseback(object):
 			pass
 
 
+		dispatch_factors_ts = tuple
+		dispatch_sched_weekday = tuple
+		dispatch_sched_weekend = tuple
+		dispatch_tod_factors = tuple
 		ppa_escalation = float
+		ppa_multiplier_model = float
 		ppa_price_input = tuple
 		ppa_soln_max = float
 		ppa_soln_max_iterations = float
@@ -87,7 +92,6 @@ class Saleleaseback(object):
 		add_om_num_types = float
 		annual_fuel_usage = float
 		annual_fuel_usage_lifetime = tuple
-		fuelcell_annual_energy_discharged = tuple
 		om_batt_capacity_cost = tuple
 		om_batt_fixed_cost = tuple
 		om_batt_nameplate = float
@@ -381,32 +385,6 @@ class Saleleaseback(object):
 		total_installed_cost = float
 
 
-	class TimeOfDelivery(object):
-		def assign(self): 
-			pass
-	
-		def export(self) -> dict:
-			pass
-	
-		def __init__(self, *args, **kwargs): 
-			pass
-
-
-		dispatch_factor1 = float
-		dispatch_factor2 = float
-		dispatch_factor3 = float
-		dispatch_factor4 = float
-		dispatch_factor5 = float
-		dispatch_factor6 = float
-		dispatch_factor7 = float
-		dispatch_factor8 = float
-		dispatch_factor9 = float
-		dispatch_factors_ts = tuple
-		dispatch_sched_weekday = tuple
-		dispatch_sched_weekend = tuple
-		ppa_multiplier_model = float
-
-
 	class UtilityBill(object):
 		def assign(self): 
 			pass
@@ -501,6 +479,22 @@ class Saleleaseback(object):
 		en_wave_batt = float
 
 
+	class FuelCell(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		annual_fuel_usage_lifetime = tuple
+		fuelcell_annual_energy_discharged = tuple
+		fuelcell_replacement = tuple
+
+
 	class Outputs(object):
 		def assign(self): 
 			pass
@@ -538,38 +532,38 @@ class Saleleaseback(object):
 		cf_disbursement_receivables = tuple
 		cf_effective_tax_frac = tuple
 		cf_energy_net = tuple
-		cf_energy_net_apr = tuple
-		cf_energy_net_aug = tuple
-		cf_energy_net_dec = tuple
-		cf_energy_net_dispatch1 = tuple
-		cf_energy_net_dispatch2 = tuple
-		cf_energy_net_dispatch3 = tuple
-		cf_energy_net_dispatch4 = tuple
-		cf_energy_net_dispatch5 = tuple
-		cf_energy_net_dispatch6 = tuple
-		cf_energy_net_dispatch7 = tuple
-		cf_energy_net_dispatch8 = tuple
-		cf_energy_net_dispatch9 = tuple
-		cf_energy_net_feb = tuple
-		cf_energy_net_jan = tuple
-		cf_energy_net_jul = tuple
-		cf_energy_net_jun = tuple
-		cf_energy_net_mar = tuple
-		cf_energy_net_may = tuple
-		cf_energy_net_monthly_firstyear_TOD1 = tuple
-		cf_energy_net_monthly_firstyear_TOD2 = tuple
-		cf_energy_net_monthly_firstyear_TOD3 = tuple
-		cf_energy_net_monthly_firstyear_TOD4 = tuple
-		cf_energy_net_monthly_firstyear_TOD5 = tuple
-		cf_energy_net_monthly_firstyear_TOD6 = tuple
-		cf_energy_net_monthly_firstyear_TOD7 = tuple
-		cf_energy_net_monthly_firstyear_TOD8 = tuple
-		cf_energy_net_monthly_firstyear_TOD9 = tuple
-		cf_energy_net_nov = tuple
-		cf_energy_net_oct = tuple
-		cf_energy_net_sep = tuple
 		cf_energy_purchases = tuple
 		cf_energy_sales = tuple
+		cf_energy_sales_apr = tuple
+		cf_energy_sales_aug = tuple
+		cf_energy_sales_dec = tuple
+		cf_energy_sales_dispatch1 = tuple
+		cf_energy_sales_dispatch2 = tuple
+		cf_energy_sales_dispatch3 = tuple
+		cf_energy_sales_dispatch4 = tuple
+		cf_energy_sales_dispatch5 = tuple
+		cf_energy_sales_dispatch6 = tuple
+		cf_energy_sales_dispatch7 = tuple
+		cf_energy_sales_dispatch8 = tuple
+		cf_energy_sales_dispatch9 = tuple
+		cf_energy_sales_feb = tuple
+		cf_energy_sales_jan = tuple
+		cf_energy_sales_jul = tuple
+		cf_energy_sales_jun = tuple
+		cf_energy_sales_mar = tuple
+		cf_energy_sales_may = tuple
+		cf_energy_sales_monthly_firstyear_TOD1 = tuple
+		cf_energy_sales_monthly_firstyear_TOD2 = tuple
+		cf_energy_sales_monthly_firstyear_TOD3 = tuple
+		cf_energy_sales_monthly_firstyear_TOD4 = tuple
+		cf_energy_sales_monthly_firstyear_TOD5 = tuple
+		cf_energy_sales_monthly_firstyear_TOD6 = tuple
+		cf_energy_sales_monthly_firstyear_TOD7 = tuple
+		cf_energy_sales_monthly_firstyear_TOD8 = tuple
+		cf_energy_sales_monthly_firstyear_TOD9 = tuple
+		cf_energy_sales_nov = tuple
+		cf_energy_sales_oct = tuple
+		cf_energy_sales_sep = tuple
 		cf_energy_value = tuple
 		cf_energy_without_battery = tuple
 		cf_feddepr_custom = tuple
@@ -630,7 +624,6 @@ class Saleleaseback(object):
 		cf_property_tax_expense = tuple
 		cf_ptc_fed = tuple
 		cf_ptc_sta = tuple
-		cf_ptc_total = tuple
 		cf_recapitalization = tuple
 		cf_reserve_equip1 = tuple
 		cf_reserve_equip2 = tuple

@@ -1644,6 +1644,18 @@ UserDefinedPowerCycle_set_ud_ind_od(VarGroupObject *self, PyObject *value, void 
 }
 
 static PyObject *
+UserDefinedPowerCycle_get_ud_is_sco2_regr(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_EtesElectricResistance_UserDefinedPowerCycle_ud_is_sco2_regr_nget, self->data_ptr);
+}
+
+static int
+UserDefinedPowerCycle_set_ud_is_sco2_regr(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_EtesElectricResistance_UserDefinedPowerCycle_ud_is_sco2_regr_nset, self->data_ptr);
+}
+
+static PyObject *
 UserDefinedPowerCycle_get_ud_m_dot_water_cool_des(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_EtesElectricResistance_UserDefinedPowerCycle_ud_m_dot_water_cool_des_nget, self->data_ptr);
@@ -1661,6 +1673,9 @@ static PyGetSetDef UserDefinedPowerCycle_getset[] = {
  	NULL},
 {"ud_ind_od", (getter)UserDefinedPowerCycle_get_ud_ind_od,(setter)UserDefinedPowerCycle_set_ud_ind_od,
 	PyDoc_STR("*sequence[sequence]*: Off design user-defined power cycle performance as function of T_htf, m_dot_htf [ND], and T_amb\n\n**Required:**\nRequired if pc_config=1"),
+ 	NULL},
+{"ud_is_sco2_regr", (getter)UserDefinedPowerCycle_get_ud_is_sco2_regr,(setter)UserDefinedPowerCycle_set_ud_is_sco2_regr,
+	PyDoc_STR("*float*: False: default, base udpc interpolation, True: use sco2 heuristic regression\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ud_m_dot_water_cool_des", (getter)UserDefinedPowerCycle_get_ud_m_dot_water_cool_des,(setter)UserDefinedPowerCycle_set_ud_m_dot_water_cool_des,
 	PyDoc_STR("*float*: Mass flow rate of water required at user-defined power cycle design point [kg/s]\n\n**Required:**\nRequired if pc_config=1"),
@@ -2256,114 +2271,6 @@ static PyMethodDef TimeOfDeliveryFactors_methods[] = {
 };
 
 static PyObject *
-TimeOfDeliveryFactors_get_dispatch_factor1(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_EtesElectricResistance_TimeOfDeliveryFactors_dispatch_factor1_nget, self->data_ptr);
-}
-
-static int
-TimeOfDeliveryFactors_set_dispatch_factor1(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_TimeOfDeliveryFactors_dispatch_factor1_nset, self->data_ptr);
-}
-
-static PyObject *
-TimeOfDeliveryFactors_get_dispatch_factor2(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_EtesElectricResistance_TimeOfDeliveryFactors_dispatch_factor2_nget, self->data_ptr);
-}
-
-static int
-TimeOfDeliveryFactors_set_dispatch_factor2(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_TimeOfDeliveryFactors_dispatch_factor2_nset, self->data_ptr);
-}
-
-static PyObject *
-TimeOfDeliveryFactors_get_dispatch_factor3(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_EtesElectricResistance_TimeOfDeliveryFactors_dispatch_factor3_nget, self->data_ptr);
-}
-
-static int
-TimeOfDeliveryFactors_set_dispatch_factor3(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_TimeOfDeliveryFactors_dispatch_factor3_nset, self->data_ptr);
-}
-
-static PyObject *
-TimeOfDeliveryFactors_get_dispatch_factor4(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_EtesElectricResistance_TimeOfDeliveryFactors_dispatch_factor4_nget, self->data_ptr);
-}
-
-static int
-TimeOfDeliveryFactors_set_dispatch_factor4(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_TimeOfDeliveryFactors_dispatch_factor4_nset, self->data_ptr);
-}
-
-static PyObject *
-TimeOfDeliveryFactors_get_dispatch_factor5(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_EtesElectricResistance_TimeOfDeliveryFactors_dispatch_factor5_nget, self->data_ptr);
-}
-
-static int
-TimeOfDeliveryFactors_set_dispatch_factor5(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_TimeOfDeliveryFactors_dispatch_factor5_nset, self->data_ptr);
-}
-
-static PyObject *
-TimeOfDeliveryFactors_get_dispatch_factor6(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_EtesElectricResistance_TimeOfDeliveryFactors_dispatch_factor6_nget, self->data_ptr);
-}
-
-static int
-TimeOfDeliveryFactors_set_dispatch_factor6(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_TimeOfDeliveryFactors_dispatch_factor6_nset, self->data_ptr);
-}
-
-static PyObject *
-TimeOfDeliveryFactors_get_dispatch_factor7(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_EtesElectricResistance_TimeOfDeliveryFactors_dispatch_factor7_nget, self->data_ptr);
-}
-
-static int
-TimeOfDeliveryFactors_set_dispatch_factor7(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_TimeOfDeliveryFactors_dispatch_factor7_nset, self->data_ptr);
-}
-
-static PyObject *
-TimeOfDeliveryFactors_get_dispatch_factor8(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_EtesElectricResistance_TimeOfDeliveryFactors_dispatch_factor8_nget, self->data_ptr);
-}
-
-static int
-TimeOfDeliveryFactors_set_dispatch_factor8(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_TimeOfDeliveryFactors_dispatch_factor8_nset, self->data_ptr);
-}
-
-static PyObject *
-TimeOfDeliveryFactors_get_dispatch_factor9(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_EtesElectricResistance_TimeOfDeliveryFactors_dispatch_factor9_nget, self->data_ptr);
-}
-
-static int
-TimeOfDeliveryFactors_set_dispatch_factor9(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_EtesElectricResistance_TimeOfDeliveryFactors_dispatch_factor9_nset, self->data_ptr);
-}
-
-static PyObject *
 TimeOfDeliveryFactors_get_dispatch_factors_ts(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_EtesElectricResistance_TimeOfDeliveryFactors_dispatch_factors_ts_aget, self->data_ptr);
@@ -2400,6 +2307,18 @@ TimeOfDeliveryFactors_set_dispatch_sched_weekend(VarGroupObject *self, PyObject 
 }
 
 static PyObject *
+TimeOfDeliveryFactors_get_dispatch_tod_factors(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_EtesElectricResistance_TimeOfDeliveryFactors_dispatch_tod_factors_aget, self->data_ptr);
+}
+
+static int
+TimeOfDeliveryFactors_set_dispatch_tod_factors(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_EtesElectricResistance_TimeOfDeliveryFactors_dispatch_tod_factors_aset, self->data_ptr);
+}
+
+static PyObject *
 TimeOfDeliveryFactors_get_ppa_multiplier_model(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_EtesElectricResistance_TimeOfDeliveryFactors_ppa_multiplier_model_nget, self->data_ptr);
@@ -2412,33 +2331,6 @@ TimeOfDeliveryFactors_set_ppa_multiplier_model(VarGroupObject *self, PyObject *v
 }
 
 static PyGetSetDef TimeOfDeliveryFactors_getset[] = {
-{"dispatch_factor1", (getter)TimeOfDeliveryFactors_get_dispatch_factor1,(setter)TimeOfDeliveryFactors_set_dispatch_factor1,
-	PyDoc_STR("*float*: Dispatch payment factor 1\n\n**Required:**\nRequired if ppa_multiplier_model=0&etes_financial_model<5&is_dispatch=1&sim_type=1"),
- 	NULL},
-{"dispatch_factor2", (getter)TimeOfDeliveryFactors_get_dispatch_factor2,(setter)TimeOfDeliveryFactors_set_dispatch_factor2,
-	PyDoc_STR("*float*: Dispatch payment factor 2\n\n**Required:**\nRequired if ppa_multiplier_model=0&etes_financial_model<5&is_dispatch=1&sim_type=1"),
- 	NULL},
-{"dispatch_factor3", (getter)TimeOfDeliveryFactors_get_dispatch_factor3,(setter)TimeOfDeliveryFactors_set_dispatch_factor3,
-	PyDoc_STR("*float*: Dispatch payment factor 3\n\n**Required:**\nRequired if ppa_multiplier_model=0&etes_financial_model<5&is_dispatch=1&sim_type=1"),
- 	NULL},
-{"dispatch_factor4", (getter)TimeOfDeliveryFactors_get_dispatch_factor4,(setter)TimeOfDeliveryFactors_set_dispatch_factor4,
-	PyDoc_STR("*float*: Dispatch payment factor 4\n\n**Required:**\nRequired if ppa_multiplier_model=0&etes_financial_model<5&is_dispatch=1&sim_type=1"),
- 	NULL},
-{"dispatch_factor5", (getter)TimeOfDeliveryFactors_get_dispatch_factor5,(setter)TimeOfDeliveryFactors_set_dispatch_factor5,
-	PyDoc_STR("*float*: Dispatch payment factor 5\n\n**Required:**\nRequired if ppa_multiplier_model=0&etes_financial_model<5&is_dispatch=1&sim_type=1"),
- 	NULL},
-{"dispatch_factor6", (getter)TimeOfDeliveryFactors_get_dispatch_factor6,(setter)TimeOfDeliveryFactors_set_dispatch_factor6,
-	PyDoc_STR("*float*: Dispatch payment factor 6\n\n**Required:**\nRequired if ppa_multiplier_model=0&etes_financial_model<5&is_dispatch=1&sim_type=1"),
- 	NULL},
-{"dispatch_factor7", (getter)TimeOfDeliveryFactors_get_dispatch_factor7,(setter)TimeOfDeliveryFactors_set_dispatch_factor7,
-	PyDoc_STR("*float*: Dispatch payment factor 7\n\n**Required:**\nRequired if ppa_multiplier_model=0&etes_financial_model<5&is_dispatch=1&sim_type=1"),
- 	NULL},
-{"dispatch_factor8", (getter)TimeOfDeliveryFactors_get_dispatch_factor8,(setter)TimeOfDeliveryFactors_set_dispatch_factor8,
-	PyDoc_STR("*float*: Dispatch payment factor 8\n\n**Required:**\nRequired if ppa_multiplier_model=0&etes_financial_model<5&is_dispatch=1&sim_type=1"),
- 	NULL},
-{"dispatch_factor9", (getter)TimeOfDeliveryFactors_get_dispatch_factor9,(setter)TimeOfDeliveryFactors_set_dispatch_factor9,
-	PyDoc_STR("*float*: Dispatch payment factor 9\n\n**Required:**\nRequired if ppa_multiplier_model=0&etes_financial_model<5&is_dispatch=1&sim_type=1"),
- 	NULL},
 {"dispatch_factors_ts", (getter)TimeOfDeliveryFactors_get_dispatch_factors_ts,(setter)TimeOfDeliveryFactors_set_dispatch_factors_ts,
 	PyDoc_STR("*sequence*: Dispatch payment factor timeseries array\n\n**Required:**\nRequired if ppa_multiplier_model=1&etes_financial_model<5&is_dispatch=1&sim_type=1"),
  	NULL},
@@ -2447,6 +2339,9 @@ static PyGetSetDef TimeOfDeliveryFactors_getset[] = {
  	NULL},
 {"dispatch_sched_weekend", (getter)TimeOfDeliveryFactors_get_dispatch_sched_weekend,(setter)TimeOfDeliveryFactors_set_dispatch_sched_weekend,
 	PyDoc_STR("*sequence[sequence]*: PPA pricing weekend schedule, 12x24\n\n**Required:**\nRequired if ppa_multiplier_model=0&etes_financial_model<5&is_dispatch=1&sim_type=1"),
+ 	NULL},
+{"dispatch_tod_factors", (getter)TimeOfDeliveryFactors_get_dispatch_tod_factors,(setter)TimeOfDeliveryFactors_set_dispatch_tod_factors,
+	PyDoc_STR("*sequence*: TOD factors for periods 1 through 9\n\n**Info:**\nWe added this array input after SAM 2022.12.21 to replace the functionality of former single value inputs dispatch_factor1 through dispatch_factor9\n\n**Required:**\nRequired if ppa_multiplier_model=0&csp_financial_model<5&is_dispatch=1&sim_type=1"),
  	NULL},
 {"ppa_multiplier_model", (getter)TimeOfDeliveryFactors_get_ppa_multiplier_model,(setter)TimeOfDeliveryFactors_set_ppa_multiplier_model,
 	PyDoc_STR("*float*: PPA multiplier model [0/1]\n\n**Options:**\n0=diurnal,1=timestep\n\n**Constraints:**\nINTEGER,MIN=0\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
@@ -4923,6 +4818,14 @@ EtesElectricResistance_dealloc(CmodObject *self)
 
 
 static PyObject *
+EtesElectricResistance_get_data_ptr(CmodObject *self, PyObject *args)
+{
+	PyObject* ptr = PyLong_FromVoidPtr((void*)self->data_ptr);
+	return ptr;
+}
+
+
+static PyObject *
 EtesElectricResistance_execute(CmodObject *self, PyObject *args)
 {
 	int verbosity = 0;
@@ -4989,6 +4892,8 @@ EtesElectricResistance_unassign(CmodObject *self, PyObject *args)
 static PyMethodDef EtesElectricResistance_methods[] = {
 		{"execute",           (PyCFunction)EtesElectricResistance_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
+		{"get_data_ptr",           (PyCFunction)EtesElectricResistance_get_data_ptr,  METH_VARARGS,
+				PyDoc_STR("execute(int verbosity) -> Pointer\n Get ssc_data_t pointer")},
 		{"assign",            (PyCFunction)EtesElectricResistance_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Solar Resource': { var: val, ...}, ...}``")},
 		{"replace",            (PyCFunction)EtesElectricResistance_replace,  METH_VARARGS,
@@ -5179,25 +5084,6 @@ EtesElectricResistanceModule_exec(PyObject *m)
 
 	EtesElectricResistance_Type.tp_dict = PyDict_New();
 	if (!EtesElectricResistance_Type.tp_dict) { goto fail; }
-
-	/// Add the AdjustmentFactors type object to EtesElectricResistance_Type
-	PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
-	if (!AdjustmentFactorsModule){
-		PyErr_SetImportError(PyUnicode_FromString("Could not import AdjustmentFactors module."), NULL, NULL);
-	}
-
-	PyTypeObject* AdjustmentFactors_Type = (PyTypeObject*)PyObject_GetAttrString(AdjustmentFactorsModule, "AdjustmentFactors");
-	if (!AdjustmentFactors_Type){
-		PyErr_SetImportError(PyUnicode_FromString("Could not import AdjustmentFactors type."), NULL, NULL);
-	}
-	Py_XDECREF(AdjustmentFactorsModule);
-
-	if (PyType_Ready(AdjustmentFactors_Type) < 0) { goto fail; }
-	PyDict_SetItemString(EtesElectricResistance_Type.tp_dict,
-						 "AdjustmentFactors",
-						 (PyObject*)AdjustmentFactors_Type);
-	Py_DECREF(&AdjustmentFactors_Type);
-	Py_XDECREF(AdjustmentFactors_Type);
 
 	/// Add the SolarResource type object to EtesElectricResistance_Type
 	if (PyType_Ready(&SolarResource_Type) < 0) { goto fail; }

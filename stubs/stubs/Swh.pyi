@@ -73,10 +73,6 @@ class Swh(object):
 		pump_eff = float
 		pump_power = float
 		scaled_draw = tuple
-		shading_azal = tuple
-		shading_diff = float
-		shading_mxh = tuple
-		shading_timestep = tuple
 		sky_model = float
 		system_capacity = float
 		tank_h2d_ratio = float
@@ -85,6 +81,29 @@ class Swh(object):
 		tilt = float
 		use_custom_mains = float
 		use_custom_set = float
+
+
+	class Shading(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		shading_azal = tuple
+		shading_diff = float
+		shading_en_azal = float
+		shading_en_diff = float
+		shading_en_mxh = float
+		shading_en_string_option = float
+		shading_en_timestep = float
+		shading_mxh = tuple
+		shading_string_option = float
+		shading_timestep = tuple
 
 
 	class AdjustmentFactors(object):

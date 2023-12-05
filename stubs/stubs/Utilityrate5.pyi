@@ -104,6 +104,7 @@ class Utilityrate5(object):
 			pass
 
 
+		grid_outage = tuple
 		load = tuple
 		load_escalation = tuple
 

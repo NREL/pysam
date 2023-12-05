@@ -53,6 +53,7 @@ class Wfreader(object):
 		annual_glob = float
 		annual_snow = float
 		annual_tdry = float
+		annual_twet = float
 		annual_wspd = float
 		beam = tuple
 		city = str

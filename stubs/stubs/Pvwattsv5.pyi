@@ -70,12 +70,31 @@ class Pvwattsv5(object):
 		inv_eff = float
 		losses = float
 		module_type = float
-		shading_azal = tuple
-		shading_diff = float
-		shading_mxh = tuple
-		shading_timestep = tuple
 		system_capacity = float
 		tilt = float
+
+
+	class Shading(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		shading_azal = tuple
+		shading_diff = float
+		shading_en_azal = float
+		shading_en_diff = float
+		shading_en_mxh = float
+		shading_en_string_option = float
+		shading_en_timestep = float
+		shading_mxh = tuple
+		shading_string_option = float
+		shading_timestep = tuple
 
 
 	class AdjustmentFactors(object):

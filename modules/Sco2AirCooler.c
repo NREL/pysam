@@ -630,6 +630,14 @@ Sco2AirCooler_dealloc(CmodObject *self)
 
 
 static PyObject *
+Sco2AirCooler_get_data_ptr(CmodObject *self, PyObject *args)
+{
+	PyObject* ptr = PyLong_FromVoidPtr((void*)self->data_ptr);
+	return ptr;
+}
+
+
+static PyObject *
 Sco2AirCooler_execute(CmodObject *self, PyObject *args)
 {
 	int verbosity = 0;
@@ -696,6 +704,8 @@ Sco2AirCooler_unassign(CmodObject *self, PyObject *args)
 static PyMethodDef Sco2AirCooler_methods[] = {
 		{"execute",           (PyCFunction)Sco2AirCooler_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
+		{"get_data_ptr",           (PyCFunction)Sco2AirCooler_get_data_ptr,  METH_VARARGS,
+				PyDoc_STR("execute(int verbosity) -> Pointer\n Get ssc_data_t pointer")},
 		{"assign",            (PyCFunction)Sco2AirCooler_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Common': { var: val, ...}, ...}``")},
 		{"replace",            (PyCFunction)Sco2AirCooler_replace,  METH_VARARGS,

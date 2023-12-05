@@ -1,6 +1,6 @@
 #include <Python.h>
 
-#include <SAM_TcsMSLF.h>
+#include <SAM_Tcsmslf.h>
 #include <SAM_api.h>
 
 #include "PySAM_utils.h"
@@ -13,7 +13,7 @@
 static PyTypeObject Weather_Type;
 
 static PyObject *
-Weather_new(SAM_TcsMSLF data_ptr)
+Weather_new(SAM_Tcsmslf data_ptr)
 {
 	PyObject* new_obj = Weather_Type.tp_alloc(&Weather_Type,0);
 
@@ -34,7 +34,7 @@ Weather_assign(VarGroupObject *self, PyObject *args)
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "TcsMSLF", "Weather")){
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Tcsmslf", "Weather")){
 		return NULL;
 	}
 
@@ -51,7 +51,7 @@ Weather_replace(VarGroupObject *self, PyObject *args)
 	}
 	PyTypeObject* tp = &Weather_Type;
 
-	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "TcsMSLF", "Weather")){
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Tcsmslf", "Weather")){
 		return NULL;
 	}
 
@@ -80,49 +80,49 @@ static PyMethodDef Weather_methods[] = {
 static PyObject *
 Weather_get_azimuth(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Weather_azimuth_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Weather_azimuth_nget, self->data_ptr);
 }
 
 static int
 Weather_set_azimuth(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Weather_azimuth_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Weather_azimuth_nset, self->data_ptr);
 }
 
 static PyObject *
 Weather_get_file_name(VarGroupObject *self, void *closure)
 {
-	return PySAM_string_getter(SAM_TcsMSLF_Weather_file_name_sget, self->data_ptr);
+	return PySAM_string_getter(SAM_Tcsmslf_Weather_file_name_sget, self->data_ptr);
 }
 
 static int
 Weather_set_file_name(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_string_setter(value, SAM_TcsMSLF_Weather_file_name_sset, self->data_ptr);
+	return PySAM_string_setter(value, SAM_Tcsmslf_Weather_file_name_sset, self->data_ptr);
 }
 
 static PyObject *
 Weather_get_tilt(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Weather_tilt_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Weather_tilt_nget, self->data_ptr);
 }
 
 static int
 Weather_set_tilt(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Weather_tilt_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Weather_tilt_nset, self->data_ptr);
 }
 
 static PyObject *
 Weather_get_track_mode(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Weather_track_mode_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Weather_track_mode_nget, self->data_ptr);
 }
 
 static int
 Weather_set_track_mode(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Weather_track_mode_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Weather_track_mode_nset, self->data_ptr);
 }
 
 static PyGetSetDef Weather_getset[] = {
@@ -145,7 +145,7 @@ static PyTypeObject Weather_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"TcsMSLF.Weather",             /*tp_name*/
+		"Tcsmslf.Weather",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -195,7 +195,7 @@ static PyTypeObject Weather_Type = {
 static PyTypeObject Mslf_Type;
 
 static PyObject *
-Mslf_new(SAM_TcsMSLF data_ptr)
+Mslf_new(SAM_Tcsmslf data_ptr)
 {
 	PyObject* new_obj = Mslf_Type.tp_alloc(&Mslf_Type,0);
 
@@ -216,7 +216,7 @@ Mslf_assign(VarGroupObject *self, PyObject *args)
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "TcsMSLF", "Mslf")){
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Tcsmslf", "Mslf")){
 		return NULL;
 	}
 
@@ -233,7 +233,7 @@ Mslf_replace(VarGroupObject *self, PyObject *args)
 	}
 	PyTypeObject* tp = &Mslf_Type;
 
-	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "TcsMSLF", "Mslf")){
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Tcsmslf", "Mslf")){
 		return NULL;
 	}
 
@@ -262,18 +262,18 @@ static PyMethodDef Mslf_methods[] = {
 static PyObject *
 Mslf_get_system_capacity(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Mslf_system_capacity_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Mslf_system_capacity_nget, self->data_ptr);
 }
 
 static int
 Mslf_set_system_capacity(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Mslf_system_capacity_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Mslf_system_capacity_nset, self->data_ptr);
 }
 
 static PyGetSetDef Mslf_getset[] = {
 {"system_capacity", (getter)Mslf_get_system_capacity,(setter)Mslf_set_system_capacity,
-	PyDoc_STR("*float*: Nameplate capacity [kW]\n\n**Required:**\nTrue\n\nThe value of ``system_capacity`` depends on the following variables:\n\n\t - P_ref\n"),
+	PyDoc_STR("*float*: Nameplate capacity [kW]\n\n**Required:**\nTrue"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -282,7 +282,7 @@ static PyTypeObject Mslf_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"TcsMSLF.Mslf",             /*tp_name*/
+		"Tcsmslf.Mslf",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -332,7 +332,7 @@ static PyTypeObject Mslf_Type = {
 static PyTypeObject TouTranslator_Type;
 
 static PyObject *
-TouTranslator_new(SAM_TcsMSLF data_ptr)
+TouTranslator_new(SAM_Tcsmslf data_ptr)
 {
 	PyObject* new_obj = TouTranslator_Type.tp_alloc(&TouTranslator_Type,0);
 
@@ -353,7 +353,7 @@ TouTranslator_assign(VarGroupObject *self, PyObject *args)
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "TcsMSLF", "TouTranslator")){
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Tcsmslf", "TouTranslator")){
 		return NULL;
 	}
 
@@ -370,7 +370,7 @@ TouTranslator_replace(VarGroupObject *self, PyObject *args)
 	}
 	PyTypeObject* tp = &TouTranslator_Type;
 
-	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "TcsMSLF", "TouTranslator")){
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Tcsmslf", "TouTranslator")){
 		return NULL;
 	}
 
@@ -399,25 +399,25 @@ static PyMethodDef TouTranslator_methods[] = {
 static PyObject *
 TouTranslator_get_weekday_schedule(VarGroupObject *self, void *closure)
 {
-	return PySAM_matrix_getter(SAM_TcsMSLF_TouTranslator_weekday_schedule_mget, self->data_ptr);
+	return PySAM_matrix_getter(SAM_Tcsmslf_TouTranslator_weekday_schedule_mget, self->data_ptr);
 }
 
 static int
 TouTranslator_set_weekday_schedule(VarGroupObject *self, PyObject *value, void *closure)
 {
-		return PySAM_matrix_setter(value, SAM_TcsMSLF_TouTranslator_weekday_schedule_mset, self->data_ptr);
+		return PySAM_matrix_setter(value, SAM_Tcsmslf_TouTranslator_weekday_schedule_mset, self->data_ptr);
 }
 
 static PyObject *
 TouTranslator_get_weekend_schedule(VarGroupObject *self, void *closure)
 {
-	return PySAM_matrix_getter(SAM_TcsMSLF_TouTranslator_weekend_schedule_mget, self->data_ptr);
+	return PySAM_matrix_getter(SAM_Tcsmslf_TouTranslator_weekend_schedule_mget, self->data_ptr);
 }
 
 static int
 TouTranslator_set_weekend_schedule(VarGroupObject *self, PyObject *value, void *closure)
 {
-		return PySAM_matrix_setter(value, SAM_TcsMSLF_TouTranslator_weekend_schedule_mset, self->data_ptr);
+		return PySAM_matrix_setter(value, SAM_Tcsmslf_TouTranslator_weekend_schedule_mset, self->data_ptr);
 }
 
 static PyGetSetDef TouTranslator_getset[] = {
@@ -434,7 +434,7 @@ static PyTypeObject TouTranslator_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"TcsMSLF.TouTranslator",             /*tp_name*/
+		"Tcsmslf.TouTranslator",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -484,7 +484,7 @@ static PyTypeObject TouTranslator_Type = {
 static PyTypeObject Controller_Type;
 
 static PyObject *
-Controller_new(SAM_TcsMSLF data_ptr)
+Controller_new(SAM_Tcsmslf data_ptr)
 {
 	PyObject* new_obj = Controller_Type.tp_alloc(&Controller_Type,0);
 
@@ -505,7 +505,7 @@ Controller_assign(VarGroupObject *self, PyObject *args)
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "TcsMSLF", "Controller")){
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Tcsmslf", "Controller")){
 		return NULL;
 	}
 
@@ -522,7 +522,7 @@ Controller_replace(VarGroupObject *self, PyObject *args)
 	}
 	PyTypeObject* tp = &Controller_Type;
 
-	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "TcsMSLF", "Controller")){
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Tcsmslf", "Controller")){
 		return NULL;
 	}
 
@@ -551,1722 +551,1722 @@ static PyMethodDef Controller_methods[] = {
 static PyObject *
 Controller_get_A_aperture(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_A_aperture_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_A_aperture_nget, self->data_ptr);
 }
 
 static int
 Controller_set_A_aperture(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_A_aperture_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_A_aperture_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_AbsorberMaterial(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Controller_AbsorberMaterial_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Controller_AbsorberMaterial_aget, self->data_ptr);
 }
 
 static int
 Controller_set_AbsorberMaterial(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_TcsMSLF_Controller_AbsorberMaterial_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Tcsmslf_Controller_AbsorberMaterial_aset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_AnnulusGas(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Controller_AnnulusGas_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Controller_AnnulusGas_aget, self->data_ptr);
 }
 
 static int
 Controller_set_AnnulusGas(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_TcsMSLF_Controller_AnnulusGas_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Tcsmslf_Controller_AnnulusGas_aset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_ColAz(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_ColAz_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_ColAz_nget, self->data_ptr);
 }
 
 static int
 Controller_set_ColAz(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_ColAz_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_ColAz_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_DP_SGS(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_DP_SGS_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_DP_SGS_nget, self->data_ptr);
 }
 
 static int
 Controller_set_DP_SGS(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_DP_SGS_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_DP_SGS_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_DP_coefs(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Controller_DP_coefs_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Controller_DP_coefs_aget, self->data_ptr);
 }
 
 static int
 Controller_set_DP_coefs(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_TcsMSLF_Controller_DP_coefs_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Tcsmslf_Controller_DP_coefs_aset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_DP_nominal(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_DP_nominal_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_DP_nominal_nget, self->data_ptr);
 }
 
 static int
 Controller_set_DP_nominal(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_DP_nominal_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_DP_nominal_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_D_abs_in(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Controller_D_abs_in_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Controller_D_abs_in_aget, self->data_ptr);
 }
 
 static int
 Controller_set_D_abs_in(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_TcsMSLF_Controller_D_abs_in_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Tcsmslf_Controller_D_abs_in_aset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_D_abs_out(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Controller_D_abs_out_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Controller_D_abs_out_aget, self->data_ptr);
 }
 
 static int
 Controller_set_D_abs_out(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_TcsMSLF_Controller_D_abs_out_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Tcsmslf_Controller_D_abs_out_aset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_D_glass_in(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Controller_D_glass_in_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Controller_D_glass_in_aget, self->data_ptr);
 }
 
 static int
 Controller_set_D_glass_in(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_TcsMSLF_Controller_D_glass_in_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Tcsmslf_Controller_D_glass_in_aset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_D_glass_out(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Controller_D_glass_out_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Controller_D_glass_out_aget, self->data_ptr);
 }
 
 static int
 Controller_set_D_glass_out(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_TcsMSLF_Controller_D_glass_out_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Tcsmslf_Controller_D_glass_out_aset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_D_plug(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Controller_D_plug_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Controller_D_plug_aget, self->data_ptr);
 }
 
 static int
 Controller_set_D_plug(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_TcsMSLF_Controller_D_plug_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Tcsmslf_Controller_D_plug_aset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_Design_loss(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Controller_Design_loss_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Controller_Design_loss_aget, self->data_ptr);
 }
 
 static int
 Controller_set_Design_loss(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_TcsMSLF_Controller_Design_loss_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Tcsmslf_Controller_Design_loss_aset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_Dirt_mirror(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_Dirt_mirror_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_Dirt_mirror_nget, self->data_ptr);
 }
 
 static int
 Controller_set_Dirt_mirror(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_Dirt_mirror_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_Dirt_mirror_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_Error(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_Error_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_Error_nget, self->data_ptr);
 }
 
 static int
 Controller_set_Error(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_Error_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_Error_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_FieldConfig(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_FieldConfig_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_FieldConfig_nget, self->data_ptr);
 }
 
 static int
 Controller_set_FieldConfig(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_FieldConfig_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_FieldConfig_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_Flow_type(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Controller_Flow_type_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Controller_Flow_type_aget, self->data_ptr);
 }
 
 static int
 Controller_set_Flow_type(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_TcsMSLF_Controller_Flow_type_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Tcsmslf_Controller_Flow_type_aset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_Fluid(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_Fluid_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_Fluid_nget, self->data_ptr);
 }
 
 static int
 Controller_set_Fluid(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_Fluid_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_Fluid_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_GeomEffects(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_GeomEffects_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_GeomEffects_nget, self->data_ptr);
 }
 
 static int
 Controller_set_GeomEffects(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_GeomEffects_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_GeomEffects_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_GlazingIntactIn(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Controller_GlazingIntactIn_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Controller_GlazingIntactIn_aget, self->data_ptr);
 }
 
 static int
 Controller_set_GlazingIntactIn(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_TcsMSLF_Controller_GlazingIntactIn_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Tcsmslf_Controller_GlazingIntactIn_aset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_HCE_FieldFrac(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Controller_HCE_FieldFrac_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Controller_HCE_FieldFrac_aget, self->data_ptr);
 }
 
 static int
 Controller_set_HCE_FieldFrac(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_TcsMSLF_Controller_HCE_FieldFrac_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Tcsmslf_Controller_HCE_FieldFrac_aset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_HDR_rough(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_HDR_rough_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_HDR_rough_nget, self->data_ptr);
 }
 
 static int
 Controller_set_HDR_rough(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_HDR_rough_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_HDR_rough_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_HL_T_coefs(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Controller_HL_T_coefs_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Controller_HL_T_coefs_aget, self->data_ptr);
 }
 
 static int
 Controller_set_HL_T_coefs(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_TcsMSLF_Controller_HL_T_coefs_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Tcsmslf_Controller_HL_T_coefs_aset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_HL_w_coefs(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Controller_HL_w_coefs_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Controller_HL_w_coefs_aget, self->data_ptr);
 }
 
 static int
 Controller_set_HL_w_coefs(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_TcsMSLF_Controller_HL_w_coefs_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Tcsmslf_Controller_HL_w_coefs_aset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_IAM_L_coefs(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Controller_IAM_L_coefs_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Controller_IAM_L_coefs_aget, self->data_ptr);
 }
 
 static int
 Controller_set_IAM_L_coefs(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_TcsMSLF_Controller_IAM_L_coefs_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Tcsmslf_Controller_IAM_L_coefs_aset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_IAM_T_coefs(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Controller_IAM_T_coefs_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Controller_IAM_T_coefs_aget, self->data_ptr);
 }
 
 static int
 Controller_set_IAM_T_coefs(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_TcsMSLF_Controller_IAM_T_coefs_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Tcsmslf_Controller_IAM_T_coefs_aset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_I_b(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_I_b_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_I_b_nget, self->data_ptr);
 }
 
 static int
 Controller_set_I_b(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_I_b_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_I_b_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_I_bn_des(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_I_bn_des_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_I_bn_des_nget, self->data_ptr);
 }
 
 static int
 Controller_set_I_bn_des(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_I_bn_des_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_I_bn_des_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_L_crossover(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_L_crossover_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_L_crossover_nget, self->data_ptr);
 }
 
 static int
 Controller_set_L_crossover(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_L_crossover_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_L_crossover_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_L_mod(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_L_mod_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_L_mod_nget, self->data_ptr);
 }
 
 static int
 Controller_set_L_mod(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_L_mod_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_L_mod_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_L_mod_spacing(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_L_mod_spacing_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_L_mod_spacing_nget, self->data_ptr);
 }
 
 static int
 Controller_set_L_mod_spacing(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_L_mod_spacing_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_L_mod_spacing_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_OpticalTable(VarGroupObject *self, void *closure)
 {
-	return PySAM_matrix_getter(SAM_TcsMSLF_Controller_OpticalTable_mget, self->data_ptr);
+	return PySAM_matrix_getter(SAM_Tcsmslf_Controller_OpticalTable_mget, self->data_ptr);
 }
 
 static int
 Controller_set_OpticalTable(VarGroupObject *self, PyObject *value, void *closure)
 {
-		return PySAM_matrix_setter(value, SAM_TcsMSLF_Controller_OpticalTable_mset, self->data_ptr);
+		return PySAM_matrix_setter(value, SAM_Tcsmslf_Controller_OpticalTable_mset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_P_a(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Controller_P_a_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Controller_P_a_aget, self->data_ptr);
 }
 
 static int
 Controller_set_P_a(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_TcsMSLF_Controller_P_a_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Tcsmslf_Controller_P_a_aset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_P_amb(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_P_amb_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_P_amb_nget, self->data_ptr);
 }
 
 static int
 Controller_set_P_amb(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_P_amb_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_P_amb_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_Pipe_hl_coef(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_Pipe_hl_coef_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_Pipe_hl_coef_nget, self->data_ptr);
 }
 
 static int
 Controller_set_Pipe_hl_coef(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_Pipe_hl_coef_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_Pipe_hl_coef_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_Rough(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Controller_Rough_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Controller_Rough_aget, self->data_ptr);
 }
 
 static int
 Controller_set_Rough(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_TcsMSLF_Controller_Rough_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Tcsmslf_Controller_Rough_aset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_SCA_drives_elec(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_SCA_drives_elec_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_SCA_drives_elec_nget, self->data_ptr);
 }
 
 static int
 Controller_set_SCA_drives_elec(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_SCA_drives_elec_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_SCA_drives_elec_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_Shadowing(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Controller_Shadowing_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Controller_Shadowing_aget, self->data_ptr);
 }
 
 static int
 Controller_set_Shadowing(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_TcsMSLF_Controller_Shadowing_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Tcsmslf_Controller_Shadowing_aset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_T_amb_sf_des(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_T_amb_sf_des_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_T_amb_sf_des_nget, self->data_ptr);
 }
 
 static int
 Controller_set_T_amb_sf_des(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_T_amb_sf_des_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_T_amb_sf_des_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_T_cold_in(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_T_cold_in_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_T_cold_in_nget, self->data_ptr);
 }
 
 static int
 Controller_set_T_cold_in(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_T_cold_in_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_T_cold_in_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_T_db(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_T_db_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_T_db_nget, self->data_ptr);
 }
 
 static int
 Controller_set_T_db(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_T_db_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_T_db_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_T_dp(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_T_dp_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_T_dp_nget, self->data_ptr);
 }
 
 static int
 Controller_set_T_dp(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_T_dp_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_T_dp_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_T_field_in_des(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_T_field_in_des_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_T_field_in_des_nget, self->data_ptr);
 }
 
 static int
 Controller_set_T_field_in_des(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_T_field_in_des_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_T_field_in_des_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_T_field_ini(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_T_field_ini_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_T_field_ini_nget, self->data_ptr);
 }
 
 static int
 Controller_set_T_field_ini(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_T_field_ini_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_T_field_ini_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_T_field_out_des(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_T_field_out_des_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_T_field_out_des_nget, self->data_ptr);
 }
 
 static int
 Controller_set_T_field_out_des(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_T_field_out_des_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_T_field_out_des_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_T_fp(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_T_fp_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_T_fp_nget, self->data_ptr);
 }
 
 static int
 Controller_set_T_fp(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_T_fp_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_T_fp_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_T_loop_in_des(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_T_loop_in_des_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_T_loop_in_des_nget, self->data_ptr);
 }
 
 static int
 Controller_set_T_loop_in_des(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_T_loop_in_des_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_T_loop_in_des_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_T_loop_out(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_T_loop_out_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_T_loop_out_nget, self->data_ptr);
 }
 
 static int
 Controller_set_T_loop_out(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_T_loop_out_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_T_loop_out_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_T_set_aux(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_T_set_aux_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_T_set_aux_nget, self->data_ptr);
 }
 
 static int
 Controller_set_T_set_aux(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_T_set_aux_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_T_set_aux_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_T_startup(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_T_startup_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_T_startup_nget, self->data_ptr);
 }
 
 static int
 Controller_set_T_startup(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_T_startup_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_T_startup_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_T_tank_cold_ini(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_T_tank_cold_ini_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_T_tank_cold_ini_nget, self->data_ptr);
 }
 
 static int
 Controller_set_T_tank_cold_ini(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_T_tank_cold_ini_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_T_tank_cold_ini_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_T_tank_hot_ini(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_T_tank_hot_ini_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_T_tank_hot_ini_nget, self->data_ptr);
 }
 
 static int
 Controller_set_T_tank_hot_ini(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_T_tank_hot_ini_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_T_tank_hot_ini_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_T_tank_hot_inlet_min(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_T_tank_hot_inlet_min_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_T_tank_hot_inlet_min_nget, self->data_ptr);
 }
 
 static int
 Controller_set_T_tank_hot_inlet_min(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_T_tank_hot_inlet_min_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_T_tank_hot_inlet_min_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_Tau_envelope(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Controller_Tau_envelope_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Controller_Tau_envelope_aget, self->data_ptr);
 }
 
 static int
 Controller_set_Tau_envelope(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_TcsMSLF_Controller_Tau_envelope_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Tcsmslf_Controller_Tau_envelope_aset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_TrackingError(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_TrackingError_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_TrackingError_nget, self->data_ptr);
 }
 
 static int
 Controller_set_TrackingError(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_TrackingError_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_TrackingError_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_V_hdr_max(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_V_hdr_max_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_V_hdr_max_nget, self->data_ptr);
 }
 
 static int
 Controller_set_V_hdr_max(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_V_hdr_max_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_V_hdr_max_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_V_hdr_min(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_V_hdr_min_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_V_hdr_min_nget, self->data_ptr);
 }
 
 static int
 Controller_set_V_hdr_min(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_V_hdr_min_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_V_hdr_min_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_V_tank_hot_ini(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_V_tank_hot_ini_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_V_tank_hot_ini_nget, self->data_ptr);
 }
 
 static int
 Controller_set_V_tank_hot_ini(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_V_tank_hot_ini_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_V_tank_hot_ini_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_V_tes_des(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_V_tes_des_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_V_tes_des_nget, self->data_ptr);
 }
 
 static int
 Controller_set_V_tes_des(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_V_tes_des_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_V_tes_des_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_V_wind(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_V_wind_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_V_wind_nget, self->data_ptr);
 }
 
 static int
 Controller_set_V_wind(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_V_wind_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_V_wind_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_V_wind_des(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_V_wind_des_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_V_wind_des_nget, self->data_ptr);
 }
 
 static int
 Controller_set_V_wind_des(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_V_wind_des_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_V_wind_des_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_W_pb_design(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_W_pb_design_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_W_pb_design_nget, self->data_ptr);
 }
 
 static int
 Controller_set_W_pb_design(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_W_pb_design_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_W_pb_design_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_alpha_abs(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Controller_alpha_abs_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Controller_alpha_abs_aget, self->data_ptr);
 }
 
 static int
 Controller_set_alpha_abs(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_TcsMSLF_Controller_alpha_abs_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Tcsmslf_Controller_alpha_abs_aset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_alpha_env(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Controller_alpha_env_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Controller_alpha_env_aget, self->data_ptr);
 }
 
 static int
 Controller_set_alpha_env(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_TcsMSLF_Controller_alpha_env_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Tcsmslf_Controller_alpha_env_aset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_aux_array(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Controller_aux_array_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Controller_aux_array_aget, self->data_ptr);
 }
 
 static int
 Controller_set_aux_array(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_TcsMSLF_Controller_aux_array_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Tcsmslf_Controller_aux_array_aset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_bop_array(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Controller_bop_array_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Controller_bop_array_aget, self->data_ptr);
 }
 
 static int
 Controller_set_bop_array(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_TcsMSLF_Controller_bop_array_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Tcsmslf_Controller_bop_array_aset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_calc_design_pipe_vals(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_calc_design_pipe_vals_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_calc_design_pipe_vals_nget, self->data_ptr);
 }
 
 static int
 Controller_set_calc_design_pipe_vals(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_calc_design_pipe_vals_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_calc_design_pipe_vals_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_cold_tank_Thtr(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_cold_tank_Thtr_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_cold_tank_Thtr_nget, self->data_ptr);
 }
 
 static int
 Controller_set_cold_tank_Thtr(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_cold_tank_Thtr_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_cold_tank_Thtr_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_custom_sgs_pipe_sizes(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_custom_sgs_pipe_sizes_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_custom_sgs_pipe_sizes_nget, self->data_ptr);
 }
 
 static int
 Controller_set_custom_sgs_pipe_sizes(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_custom_sgs_pipe_sizes_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_custom_sgs_pipe_sizes_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_custom_tes_p_loss(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_custom_tes_p_loss_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_custom_tes_p_loss_nget, self->data_ptr);
 }
 
 static int
 Controller_set_custom_tes_p_loss(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_custom_tes_p_loss_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_custom_tes_p_loss_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_cycle_cutoff_frac(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_cycle_cutoff_frac_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_cycle_cutoff_frac_nget, self->data_ptr);
 }
 
 static int
 Controller_set_cycle_cutoff_frac(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_cycle_cutoff_frac_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_cycle_cutoff_frac_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_cycle_max_frac(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_cycle_max_frac_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_cycle_max_frac_nget, self->data_ptr);
 }
 
 static int
 Controller_set_cycle_max_frac(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_cycle_max_frac_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_cycle_max_frac_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_defocus(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_defocus_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_defocus_nget, self->data_ptr);
 }
 
 static int
 Controller_set_defocus(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_defocus_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_defocus_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_dirt_env(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Controller_dirt_env_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Controller_dirt_env_aget, self->data_ptr);
 }
 
 static int
 Controller_set_dirt_env(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_TcsMSLF_Controller_dirt_env_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Tcsmslf_Controller_dirt_env_aset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_dt_cold(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_dt_cold_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_dt_cold_nget, self->data_ptr);
 }
 
 static int
 Controller_set_dt_cold(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_dt_cold_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_dt_cold_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_dt_hot(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_dt_hot_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_dt_hot_nget, self->data_ptr);
 }
 
 static int
 Controller_set_dt_hot(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_dt_hot_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_dt_hot_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_epsilon_abs_1(VarGroupObject *self, void *closure)
 {
-	return PySAM_matrix_getter(SAM_TcsMSLF_Controller_epsilon_abs_1_mget, self->data_ptr);
+	return PySAM_matrix_getter(SAM_Tcsmslf_Controller_epsilon_abs_1_mget, self->data_ptr);
 }
 
 static int
 Controller_set_epsilon_abs_1(VarGroupObject *self, PyObject *value, void *closure)
 {
-		return PySAM_matrix_setter(value, SAM_TcsMSLF_Controller_epsilon_abs_1_mset, self->data_ptr);
+		return PySAM_matrix_setter(value, SAM_Tcsmslf_Controller_epsilon_abs_1_mset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_epsilon_abs_2(VarGroupObject *self, void *closure)
 {
-	return PySAM_matrix_getter(SAM_TcsMSLF_Controller_epsilon_abs_2_mget, self->data_ptr);
+	return PySAM_matrix_getter(SAM_Tcsmslf_Controller_epsilon_abs_2_mget, self->data_ptr);
 }
 
 static int
 Controller_set_epsilon_abs_2(VarGroupObject *self, PyObject *value, void *closure)
 {
-		return PySAM_matrix_setter(value, SAM_TcsMSLF_Controller_epsilon_abs_2_mset, self->data_ptr);
+		return PySAM_matrix_setter(value, SAM_Tcsmslf_Controller_epsilon_abs_2_mset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_epsilon_abs_3(VarGroupObject *self, void *closure)
 {
-	return PySAM_matrix_getter(SAM_TcsMSLF_Controller_epsilon_abs_3_mget, self->data_ptr);
+	return PySAM_matrix_getter(SAM_Tcsmslf_Controller_epsilon_abs_3_mget, self->data_ptr);
 }
 
 static int
 Controller_set_epsilon_abs_3(VarGroupObject *self, PyObject *value, void *closure)
 {
-		return PySAM_matrix_setter(value, SAM_TcsMSLF_Controller_epsilon_abs_3_mset, self->data_ptr);
+		return PySAM_matrix_setter(value, SAM_Tcsmslf_Controller_epsilon_abs_3_mset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_epsilon_abs_4(VarGroupObject *self, void *closure)
 {
-	return PySAM_matrix_getter(SAM_TcsMSLF_Controller_epsilon_abs_4_mget, self->data_ptr);
+	return PySAM_matrix_getter(SAM_Tcsmslf_Controller_epsilon_abs_4_mget, self->data_ptr);
 }
 
 static int
 Controller_set_epsilon_abs_4(VarGroupObject *self, PyObject *value, void *closure)
 {
-		return PySAM_matrix_setter(value, SAM_TcsMSLF_Controller_epsilon_abs_4_mset, self->data_ptr);
+		return PySAM_matrix_setter(value, SAM_Tcsmslf_Controller_epsilon_abs_4_mset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_epsilon_glass(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Controller_epsilon_glass_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Controller_epsilon_glass_aget, self->data_ptr);
 }
 
 static int
 Controller_set_epsilon_glass(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_TcsMSLF_Controller_epsilon_glass_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Tcsmslf_Controller_epsilon_glass_aset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_eta_pump(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_eta_pump_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_eta_pump_nget, self->data_ptr);
 }
 
 static int
 Controller_set_eta_pump(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_eta_pump_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_eta_pump_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_f_tc_cold(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_f_tc_cold_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_f_tc_cold_nget, self->data_ptr);
 }
 
 static int
 Controller_set_f_tc_cold(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_f_tc_cold_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_f_tc_cold_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_fc_on(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_fc_on_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_fc_on_nget, self->data_ptr);
 }
 
 static int
 Controller_set_fc_on(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_fc_on_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_fc_on_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_ffrac(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Controller_ffrac_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Controller_ffrac_aget, self->data_ptr);
 }
 
 static int
 Controller_set_ffrac(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_TcsMSLF_Controller_ffrac_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Tcsmslf_Controller_ffrac_aset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_field_fl_props(VarGroupObject *self, void *closure)
 {
-	return PySAM_matrix_getter(SAM_TcsMSLF_Controller_field_fl_props_mget, self->data_ptr);
+	return PySAM_matrix_getter(SAM_Tcsmslf_Controller_field_fl_props_mget, self->data_ptr);
 }
 
 static int
 Controller_set_field_fl_props(VarGroupObject *self, PyObject *value, void *closure)
 {
-		return PySAM_matrix_setter(value, SAM_TcsMSLF_Controller_field_fl_props_mset, self->data_ptr);
+		return PySAM_matrix_setter(value, SAM_Tcsmslf_Controller_field_fl_props_mset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_field_fluid(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_field_fluid_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_field_fluid_nget, self->data_ptr);
 }
 
 static int
 Controller_set_field_fluid(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_field_fluid_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_field_fluid_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_fossil_mode(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_fossil_mode_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_fossil_mode_nget, self->data_ptr);
 }
 
 static int
 Controller_set_fossil_mode(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_fossil_mode_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_fossil_mode_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_fthr_ok(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_fthr_ok_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_fthr_ok_nget, self->data_ptr);
 }
 
 static int
 Controller_set_fthr_ok(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_fthr_ok_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_fthr_ok_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_fthrctrl(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_fthrctrl_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_fthrctrl_nget, self->data_ptr);
 }
 
 static int
 Controller_set_fthrctrl(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_fthrctrl_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_fthrctrl_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_fthrok(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_fthrok_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_fthrok_nget, self->data_ptr);
 }
 
 static int
 Controller_set_fthrok(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_fthrok_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_fthrok_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_h_tank(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_h_tank_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_h_tank_nget, self->data_ptr);
 }
 
 static int
 Controller_set_h_tank(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_h_tank_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_h_tank_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_h_tank_min(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_h_tank_min_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_h_tank_min_nget, self->data_ptr);
 }
 
 static int
 Controller_set_h_tank_min(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_h_tank_min_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_h_tank_min_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_has_hot_tank_bypass(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_has_hot_tank_bypass_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_has_hot_tank_bypass_nget, self->data_ptr);
 }
 
 static int
 Controller_set_has_hot_tank_bypass(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_has_hot_tank_bypass_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_has_hot_tank_bypass_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_hot_tank_Thtr(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_hot_tank_Thtr_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_hot_tank_Thtr_nget, self->data_ptr);
 }
 
 static int
 Controller_set_hot_tank_Thtr(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_hot_tank_Thtr_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_hot_tank_Thtr_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_hx_config(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_hx_config_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_hx_config_nget, self->data_ptr);
 }
 
 static int
 Controller_set_hx_config(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_hx_config_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_hx_config_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_is_hx(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_is_hx_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_is_hx_nget, self->data_ptr);
 }
 
 static int
 Controller_set_is_hx(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_is_hx_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_is_hx_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_k_tes_loss_coeffs(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Controller_k_tes_loss_coeffs_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Controller_k_tes_loss_coeffs_aget, self->data_ptr);
 }
 
 static int
 Controller_set_k_tes_loss_coeffs(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_TcsMSLF_Controller_k_tes_loss_coeffs_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Tcsmslf_Controller_k_tes_loss_coeffs_aset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_m_dot_htfmax(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_m_dot_htfmax_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_m_dot_htfmax_nget, self->data_ptr);
 }
 
 static int
 Controller_set_m_dot_htfmax(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_m_dot_htfmax_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_m_dot_htfmax_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_m_dot_htfmin(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_m_dot_htfmin_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_m_dot_htfmin_nget, self->data_ptr);
 }
 
 static int
 Controller_set_m_dot_htfmin(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_m_dot_htfmin_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_m_dot_htfmin_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_mc_bal_cold(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_mc_bal_cold_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_mc_bal_cold_nget, self->data_ptr);
 }
 
 static int
 Controller_set_mc_bal_cold(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_mc_bal_cold_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_mc_bal_cold_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_mc_bal_hot(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_mc_bal_hot_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_mc_bal_hot_nget, self->data_ptr);
 }
 
 static int
 Controller_set_mc_bal_hot(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_mc_bal_hot_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_mc_bal_hot_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_mc_bal_sca(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_mc_bal_sca_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_mc_bal_sca_nget, self->data_ptr);
 }
 
 static int
 Controller_set_mc_bal_sca(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_mc_bal_sca_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_mc_bal_sca_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_nLoops(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_nLoops_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_nLoops_nget, self->data_ptr);
 }
 
 static int
 Controller_set_nLoops(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_nLoops_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_nLoops_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_nMod(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_nMod_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_nMod_nget, self->data_ptr);
 }
 
 static int
 Controller_set_nMod(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_nMod_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_nMod_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_nRecVar(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_nRecVar_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_nRecVar_nget, self->data_ptr);
 }
 
 static int
 Controller_set_nRecVar(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_nRecVar_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_nRecVar_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_nSCA(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_nSCA_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_nSCA_nget, self->data_ptr);
 }
 
 static int
 Controller_set_nSCA(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_nSCA_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_nSCA_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_nodes(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_nodes_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_nodes_nget, self->data_ptr);
 }
 
 static int
 Controller_set_nodes(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_nodes_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_nodes_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_opt_model(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_opt_model_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_opt_model_nget, self->data_ptr);
 }
 
 static int
 Controller_set_opt_model(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_opt_model_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_opt_model_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_pb_fixed_par(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_pb_fixed_par_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_pb_fixed_par_nget, self->data_ptr);
 }
 
 static int
 Controller_set_pb_fixed_par(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_pb_fixed_par_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_pb_fixed_par_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_pb_pump_coef(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_pb_pump_coef_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_pb_pump_coef_nget, self->data_ptr);
 }
 
 static int
 Controller_set_pb_pump_coef(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_pb_pump_coef_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_pb_pump_coef_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_pb_rated_cap(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_pb_rated_cap_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_pb_rated_cap_nget, self->data_ptr);
 }
 
 static int
 Controller_set_pb_rated_cap(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_pb_rated_cap_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_pb_rated_cap_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_q_max_aux(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_q_max_aux_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_q_max_aux_nget, self->data_ptr);
 }
 
 static int
 Controller_set_q_max_aux(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_q_max_aux_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_q_max_aux_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_q_pb_design(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_q_pb_design_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_q_pb_design_nget, self->data_ptr);
 }
 
 static int
 Controller_set_q_pb_design(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_q_pb_design_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_q_pb_design_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_rec_htf_vol(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_rec_htf_vol_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_rec_htf_vol_nget, self->data_ptr);
 }
 
 static int
 Controller_set_rec_htf_vol(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_rec_htf_vol_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_rec_htf_vol_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_rec_model(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_rec_model_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_rec_model_nget, self->data_ptr);
 }
 
 static int
 Controller_set_rec_model(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_rec_model_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_rec_model_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_reflectivity(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_reflectivity_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_reflectivity_nget, self->data_ptr);
 }
 
 static int
 Controller_set_reflectivity(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_reflectivity_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_reflectivity_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_sgs_diams(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Controller_sgs_diams_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Controller_sgs_diams_aget, self->data_ptr);
 }
 
 static int
 Controller_set_sgs_diams(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_TcsMSLF_Controller_sgs_diams_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Tcsmslf_Controller_sgs_diams_aset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_sgs_lengths(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Controller_sgs_lengths_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Controller_sgs_lengths_aget, self->data_ptr);
 }
 
 static int
 Controller_set_sgs_lengths(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_TcsMSLF_Controller_sgs_lengths_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Tcsmslf_Controller_sgs_lengths_aset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_sgs_wallthicks(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Controller_sgs_wallthicks_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Controller_sgs_wallthicks_aget, self->data_ptr);
 }
 
 static int
 Controller_set_sgs_wallthicks(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_TcsMSLF_Controller_sgs_wallthicks_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Tcsmslf_Controller_sgs_wallthicks_aset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_solar_mult(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_solar_mult_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_solar_mult_nget, self->data_ptr);
 }
 
 static int
 Controller_set_solar_mult(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_solar_mult_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_solar_mult_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_solarm(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_solarm_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_solarm_nget, self->data_ptr);
 }
 
 static int
 Controller_set_solarm(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_solarm_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_solarm_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_store_fl_props(VarGroupObject *self, void *closure)
 {
-	return PySAM_matrix_getter(SAM_TcsMSLF_Controller_store_fl_props_mget, self->data_ptr);
+	return PySAM_matrix_getter(SAM_Tcsmslf_Controller_store_fl_props_mget, self->data_ptr);
 }
 
 static int
 Controller_set_store_fl_props(VarGroupObject *self, PyObject *value, void *closure)
 {
-		return PySAM_matrix_setter(value, SAM_TcsMSLF_Controller_store_fl_props_mset, self->data_ptr);
+		return PySAM_matrix_setter(value, SAM_Tcsmslf_Controller_store_fl_props_mset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_store_fluid(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_store_fluid_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_store_fluid_nget, self->data_ptr);
 }
 
 static int
 Controller_set_store_fluid(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_store_fluid_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_store_fluid_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_t_ch_out_max(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_t_ch_out_max_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_t_ch_out_max_nget, self->data_ptr);
 }
 
 static int
 Controller_set_t_ch_out_max(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_t_ch_out_max_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_t_ch_out_max_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_t_dis_out_min(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_t_dis_out_min_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_t_dis_out_min_nget, self->data_ptr);
 }
 
 static int
 Controller_set_t_dis_out_min(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_t_dis_out_min_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_t_dis_out_min_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_t_standby_reset(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_t_standby_reset_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_t_standby_reset_nget, self->data_ptr);
 }
 
 static int
 Controller_set_t_standby_reset(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_t_standby_reset_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_t_standby_reset_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_tank_max_heat(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_tank_max_heat_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_tank_max_heat_nget, self->data_ptr);
 }
 
 static int
 Controller_set_tank_max_heat(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_tank_max_heat_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_tank_max_heat_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_tank_pairs(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_tank_pairs_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_tank_pairs_nget, self->data_ptr);
 }
 
 static int
 Controller_set_tank_pairs(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_tank_pairs_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_tank_pairs_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_tanks_in_parallel(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_tanks_in_parallel_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_tanks_in_parallel_nget, self->data_ptr);
 }
 
 static int
 Controller_set_tanks_in_parallel(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_tanks_in_parallel_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_tanks_in_parallel_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_tc_fill(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_tc_fill_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_tc_fill_nget, self->data_ptr);
 }
 
 static int
 Controller_set_tc_fill(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_tc_fill_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_tc_fill_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_tc_void(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_tc_void_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_tc_void_nget, self->data_ptr);
 }
 
 static int
 Controller_set_tc_void(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_tc_void_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_tc_void_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_tes_pump_coef(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_tes_pump_coef_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_tes_pump_coef_nget, self->data_ptr);
 }
 
 static int
 Controller_set_tes_pump_coef(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_tes_pump_coef_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_tes_pump_coef_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_tes_temp(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_tes_temp_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_tes_temp_nget, self->data_ptr);
 }
 
 static int
 Controller_set_tes_temp(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_tes_temp_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_tes_temp_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_tes_type(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_tes_type_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_tes_type_nget, self->data_ptr);
 }
 
 static int
 Controller_set_tes_type(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_tes_type_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_tes_type_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_theta_dep(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_theta_dep_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_theta_dep_nget, self->data_ptr);
 }
 
 static int
 Controller_set_theta_dep(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_theta_dep_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_theta_dep_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_theta_stow(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_theta_stow_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_theta_stow_nget, self->data_ptr);
 }
 
 static int
 Controller_set_theta_stow(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_theta_stow_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_theta_stow_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_tshours(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_tshours_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_tshours_nget, self->data_ptr);
 }
 
 static int
 Controller_set_tshours(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_tshours_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_tshours_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_tslogic_a(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Controller_tslogic_a_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Controller_tslogic_a_aget, self->data_ptr);
 }
 
 static int
 Controller_set_tslogic_a(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_TcsMSLF_Controller_tslogic_a_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Tcsmslf_Controller_tslogic_a_aset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_tslogic_b(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Controller_tslogic_b_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Controller_tslogic_b_aget, self->data_ptr);
 }
 
 static int
 Controller_set_tslogic_b(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_TcsMSLF_Controller_tslogic_b_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Tcsmslf_Controller_tslogic_b_aset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_tslogic_c(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Controller_tslogic_c_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Controller_tslogic_c_aget, self->data_ptr);
 }
 
 static int
 Controller_set_tslogic_c(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_TcsMSLF_Controller_tslogic_c_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Tcsmslf_Controller_tslogic_c_aset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_u_tank(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_u_tank_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_u_tank_nget, self->data_ptr);
 }
 
 static int
 Controller_set_u_tank(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_u_tank_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_u_tank_nset, self->data_ptr);
 }
 
 static PyObject *
 Controller_get_vol_tank(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Controller_vol_tank_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Controller_vol_tank_nget, self->data_ptr);
 }
 
 static int
 Controller_set_vol_tank(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Controller_vol_tank_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Controller_vol_tank_nset, self->data_ptr);
 }
 
 static PyGetSetDef Controller_getset[] = {
 {"A_aperture", (getter)Controller_get_A_aperture,(setter)Controller_set_A_aperture,
-	PyDoc_STR("*float*: Reflective aperture area of the collector [m2]\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``A_aperture``:\n\n\t - nLoops\n\t - q_max_aux\n\t - solar_mult\n\t - solarm\n"),
+	PyDoc_STR("*float*: Reflective aperture area of the collector [m2]\n\n**Required:**\nTrue"),
  	NULL},
 {"AbsorberMaterial", (getter)Controller_get_AbsorberMaterial,(setter)Controller_set_AbsorberMaterial,
 	PyDoc_STR("*sequence*: Absorber material type\n\n**Required:**\nTrue"),
@@ -2305,10 +2305,10 @@ static PyGetSetDef Controller_getset[] = {
 	PyDoc_STR("*sequence*: Receiver heat loss at design [W/m]\n\n**Required:**\nTrue"),
  	NULL},
 {"Dirt_mirror", (getter)Controller_get_Dirt_mirror,(setter)Controller_set_Dirt_mirror,
-	PyDoc_STR("*float*: User-defined dirt on mirror derate\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``Dirt_mirror``:\n\n\t - nLoops\n\t - q_max_aux\n\t - solar_mult\n\t - solarm\n"),
+	PyDoc_STR("*float*: User-defined dirt on mirror derate\n\n**Required:**\nTrue"),
  	NULL},
 {"Error", (getter)Controller_get_Error,(setter)Controller_set_Error,
-	PyDoc_STR("*float*: User-defined general optical error derate\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``Error``:\n\n\t - nLoops\n\t - q_max_aux\n\t - solar_mult\n\t - solarm\n"),
+	PyDoc_STR("*float*: User-defined general optical error derate\n\n**Required:**\nTrue"),
  	NULL},
 {"FieldConfig", (getter)Controller_get_FieldConfig,(setter)Controller_set_FieldConfig,
 	PyDoc_STR("*float*: Number of subfield headers\n\n**Required:**\nTrue"),
@@ -2317,10 +2317,10 @@ static PyGetSetDef Controller_getset[] = {
 	PyDoc_STR("*sequence*: The flow type through the absorber\n\n**Required:**\nTrue"),
  	NULL},
 {"Fluid", (getter)Controller_get_Fluid,(setter)Controller_set_Fluid,
-	PyDoc_STR("*float*: Field HTF fluid number\n\n**Constraints:**\nINTEGER\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``Fluid``:\n\n\t - field_fluid\n\t - is_hx\n"),
+	PyDoc_STR("*float*: Field HTF fluid number\n\n**Constraints:**\nINTEGER\n\n**Required:**\nTrue"),
  	NULL},
 {"GeomEffects", (getter)Controller_get_GeomEffects,(setter)Controller_set_GeomEffects,
-	PyDoc_STR("*float*: Geometry effects derate\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``GeomEffects``:\n\n\t - nLoops\n\t - q_max_aux\n\t - solar_mult\n\t - solarm\n"),
+	PyDoc_STR("*float*: Geometry effects derate\n\n**Required:**\nTrue"),
  	NULL},
 {"GlazingIntactIn", (getter)Controller_get_GlazingIntactIn,(setter)Controller_set_GlazingIntactIn,
 	PyDoc_STR("*sequence*: The glazing intact flag\n\n**Required:**\nTrue"),
@@ -2347,13 +2347,13 @@ static PyGetSetDef Controller_getset[] = {
 	PyDoc_STR("*float*: Direct normal incident solar irradiation [kJ/m2-hr]\n\n**Required:**\nTrue"),
  	NULL},
 {"I_bn_des", (getter)Controller_get_I_bn_des,(setter)Controller_set_I_bn_des,
-	PyDoc_STR("*float*: Solar irradiation at design [W/m2]\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``I_bn_des``:\n\n\t - nLoops\n\t - q_max_aux\n\t - solar_mult\n\t - solarm\n"),
+	PyDoc_STR("*float*: Solar irradiation at design [W/m2]\n\n**Required:**\nTrue"),
  	NULL},
 {"L_crossover", (getter)Controller_get_L_crossover,(setter)Controller_set_L_crossover,
 	PyDoc_STR("*float*: Length of crossover piping in a loop [m]\n\n**Required:**\nTrue"),
  	NULL},
 {"L_mod", (getter)Controller_get_L_mod,(setter)Controller_set_L_mod,
-	PyDoc_STR("*float*: The length of the collector module [m]\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``L_mod``:\n\n\t - nLoops\n\t - q_max_aux\n\t - solar_mult\n\t - solarm\n"),
+	PyDoc_STR("*float*: The length of the collector module [m]\n\n**Required:**\nTrue"),
  	NULL},
 {"L_mod_spacing", (getter)Controller_get_L_mod_spacing,(setter)Controller_set_L_mod_spacing,
 	PyDoc_STR("*float*: Piping distance between sequential modules in a loop [m]\n\n**Required:**\nTrue"),
@@ -2380,7 +2380,7 @@ static PyGetSetDef Controller_getset[] = {
 	PyDoc_STR("*sequence*: Receiver bellows shadowing loss factor\n\n**Required:**\nTrue"),
  	NULL},
 {"T_amb_sf_des", (getter)Controller_get_T_amb_sf_des,(setter)Controller_set_T_amb_sf_des,
-	PyDoc_STR("*float*: Ambient design-point temperature for the solar field [C]\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``T_amb_sf_des``:\n\n\t - nLoops\n\t - q_max_aux\n\t - solar_mult\n\t - solarm\n"),
+	PyDoc_STR("*float*: Ambient design-point temperature for the solar field [C]\n\n**Required:**\nTrue"),
  	NULL},
 {"T_cold_in", (getter)Controller_get_T_cold_in,(setter)Controller_set_T_cold_in,
 	PyDoc_STR("*float*: HTF return temperature [C]\n\n**Required:**\nTrue"),
@@ -2392,22 +2392,22 @@ static PyGetSetDef Controller_getset[] = {
 	PyDoc_STR("*float*: The dewpoint temperature [C]\n\n**Required:**\nTrue"),
  	NULL},
 {"T_field_in_des", (getter)Controller_get_T_field_in_des,(setter)Controller_set_T_field_in_des,
-	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue\n\nThe value of ``T_field_in_des`` depends on the following variables:\n\n\t - T_loop_in_des\n"),
+	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue"),
  	NULL},
 {"T_field_ini", (getter)Controller_get_T_field_ini,(setter)Controller_set_T_field_ini,
 	PyDoc_STR("*float*: Initial field temperature [C]\n\n**Required:**\nTrue"),
  	NULL},
 {"T_field_out_des", (getter)Controller_get_T_field_out_des,(setter)Controller_set_T_field_out_des,
-	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue\n\nThe value of ``T_field_out_des`` depends on the following variables:\n\n\t - T_loop_out\n"),
+	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue"),
  	NULL},
 {"T_fp", (getter)Controller_get_T_fp,(setter)Controller_set_T_fp,
 	PyDoc_STR("*float*: Freeze protection temperature (heat trace activation temperature) [C]\n\n**Required:**\nTrue"),
  	NULL},
 {"T_loop_in_des", (getter)Controller_get_T_loop_in_des,(setter)Controller_set_T_loop_in_des,
-	PyDoc_STR("*float*: Design loop inlet temperature [C]\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``T_loop_in_des``:\n\n\t - T_field_in_des\n\t - T_htf_cold_ref\n\t - T_tank_cold_ini\n\t - V_tank_hot_ini\n\t - nLoops\n\t - q_max_aux\n\t - solar_mult\n\t - solarm\n\t - tes_temp\n\t - vol_tank\n"),
+	PyDoc_STR("*float*: Design loop inlet temperature [C]\n\n**Required:**\nTrue"),
  	NULL},
 {"T_loop_out", (getter)Controller_get_T_loop_out,(setter)Controller_set_T_loop_out,
-	PyDoc_STR("*float*: Target loop outlet temperature [C]\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``T_loop_out``:\n\n\t - T_field_out_des\n\t - T_htf_hot_ref\n\t - T_tank_hot_ini\n\t - V_tank_hot_ini\n\t - nLoops\n\t - q_max_aux\n\t - solar_mult\n\t - solarm\n\t - tes_temp\n\t - vol_tank\n"),
+	PyDoc_STR("*float*: Target loop outlet temperature [C]\n\n**Required:**\nTrue"),
  	NULL},
 {"T_set_aux", (getter)Controller_get_T_set_aux,(setter)Controller_set_T_set_aux,
 	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue"),
@@ -2416,10 +2416,10 @@ static PyGetSetDef Controller_getset[] = {
 	PyDoc_STR("*float*: Power block startup temperature [C]\n\n**Required:**\nTrue"),
  	NULL},
 {"T_tank_cold_ini", (getter)Controller_get_T_tank_cold_ini,(setter)Controller_set_T_tank_cold_ini,
-	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue\n\nThe value of ``T_tank_cold_ini`` depends on the following variables:\n\n\t - T_loop_in_des\n"),
+	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue"),
  	NULL},
 {"T_tank_hot_ini", (getter)Controller_get_T_tank_hot_ini,(setter)Controller_set_T_tank_hot_ini,
-	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue\n\nThe value of ``T_tank_hot_ini`` depends on the following variables:\n\n\t - T_loop_out\n"),
+	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue"),
  	NULL},
 {"T_tank_hot_inlet_min", (getter)Controller_get_T_tank_hot_inlet_min,(setter)Controller_set_T_tank_hot_inlet_min,
 	PyDoc_STR("*float*: Minimum hot tank htf inlet temperature [C]\n\n**Required:**\nTrue"),
@@ -2428,7 +2428,7 @@ static PyGetSetDef Controller_getset[] = {
 	PyDoc_STR("*sequence*: Envelope transmittance\n\n**Required:**\nTrue"),
  	NULL},
 {"TrackingError", (getter)Controller_get_TrackingError,(setter)Controller_set_TrackingError,
-	PyDoc_STR("*float*: Tracking error derate\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``TrackingError``:\n\n\t - nLoops\n\t - q_max_aux\n\t - solar_mult\n\t - solarm\n"),
+	PyDoc_STR("*float*: Tracking error derate\n\n**Required:**\nTrue"),
  	NULL},
 {"V_hdr_max", (getter)Controller_get_V_hdr_max,(setter)Controller_set_V_hdr_max,
 	PyDoc_STR("*float*: Maximum HTF velocity in the header at design [m/s]\n\n**Required:**\nTrue"),
@@ -2437,7 +2437,7 @@ static PyGetSetDef Controller_getset[] = {
 	PyDoc_STR("*float*: Minimum HTF velocity in the header at design [m/s]\n\n**Required:**\nTrue"),
  	NULL},
 {"V_tank_hot_ini", (getter)Controller_get_V_tank_hot_ini,(setter)Controller_set_V_tank_hot_ini,
-	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue\n\nThe value of ``V_tank_hot_ini`` depends on the following variables:\n\n\t - P_ref\n\t - T_loop_in_des\n\t - T_loop_out\n\t - dt_cold\n\t - dt_hot\n\t - eta_ref\n\t - store_fl_props\n\t - tes_temp\n\t - tshours\n\t - vol_tank\n"),
+	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue"),
  	NULL},
 {"V_tes_des", (getter)Controller_get_V_tes_des,(setter)Controller_set_V_tes_des,
 	PyDoc_STR("*float*: Design-point velocity to size the TES pipe diameters [m/s]\n\n**Required:**\nTrue"),
@@ -2449,7 +2449,7 @@ static PyGetSetDef Controller_getset[] = {
 	PyDoc_STR("*float*: Design-point wind velocity [m/s]\n\n**Required:**\nTrue"),
  	NULL},
 {"W_pb_design", (getter)Controller_get_W_pb_design,(setter)Controller_set_W_pb_design,
-	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue\n\nThe value of ``W_pb_design`` depends on the following variables:\n\n\t - P_ref\n"),
+	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue"),
  	NULL},
 {"alpha_abs", (getter)Controller_get_alpha_abs,(setter)Controller_set_alpha_abs,
 	PyDoc_STR("*sequence*: Absorber absorptance\n\n**Required:**\nTrue"),
@@ -2488,10 +2488,10 @@ static PyGetSetDef Controller_getset[] = {
 	PyDoc_STR("*sequence*: Loss due to dirt on the receiver envelope\n\n**Required:**\nTrue"),
  	NULL},
 {"dt_cold", (getter)Controller_get_dt_cold,(setter)Controller_set_dt_cold,
-	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``dt_cold``:\n\n\t - V_tank_hot_ini\n\t - vol_tank\n\n\nThe value of ``dt_cold`` depends on the following variables:\n\n\t - dt_hot\n"),
+	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue"),
  	NULL},
 {"dt_hot", (getter)Controller_get_dt_hot,(setter)Controller_set_dt_hot,
-	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``dt_hot``:\n\n\t - V_tank_hot_ini\n\t - dt_cold\n\t - vol_tank\n"),
+	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue"),
  	NULL},
 {"epsilon_abs_1", (getter)Controller_get_epsilon_abs_1,(setter)Controller_set_epsilon_abs_1,
 	PyDoc_STR("*sequence[sequence]*: Absorber emittance - HCE variation 1\n\n**Required:**\nTrue"),
@@ -2524,19 +2524,19 @@ static PyGetSetDef Controller_getset[] = {
 	PyDoc_STR("*sequence[sequence]*: Fluid property data\n\n**Required:**\nTrue"),
  	NULL},
 {"field_fluid", (getter)Controller_get_field_fluid,(setter)Controller_set_field_fluid,
-	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue\n\nThe value of ``field_fluid`` depends on the following variables:\n\n\t - Fluid\n"),
+	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue"),
  	NULL},
 {"fossil_mode", (getter)Controller_get_fossil_mode,(setter)Controller_set_fossil_mode,
 	PyDoc_STR("*float*: Label\n\n**Constraints:**\nINTEGER\n\n**Required:**\nTrue"),
  	NULL},
 {"fthr_ok", (getter)Controller_get_fthr_ok,(setter)Controller_set_fthr_ok,
-	PyDoc_STR("*float*: Label\n\n**Constraints:**\nINTEGER\n\n**Required:**\nTrue\n\nThe value of ``fthr_ok`` depends on the following variables:\n\n\t - fthrok\n"),
+	PyDoc_STR("*float*: Label\n\n**Constraints:**\nINTEGER\n\n**Required:**\nTrue"),
  	NULL},
 {"fthrctrl", (getter)Controller_get_fthrctrl,(setter)Controller_set_fthrctrl,
 	PyDoc_STR("*float*: Defocusing strategy\n\n**Constraints:**\nINTEGER\n\n**Required:**\nTrue"),
  	NULL},
 {"fthrok", (getter)Controller_get_fthrok,(setter)Controller_set_fthrok,
-	PyDoc_STR("*float*: Flag to allow partial defocusing of the collectors\n\n**Constraints:**\nINTEGER\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``fthrok``:\n\n\t - fthr_ok\n"),
+	PyDoc_STR("*float*: Flag to allow partial defocusing of the collectors\n\n**Constraints:**\nINTEGER\n\n**Required:**\nTrue"),
  	NULL},
 {"h_tank", (getter)Controller_get_h_tank,(setter)Controller_set_h_tank,
 	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue"),
@@ -2554,7 +2554,7 @@ static PyGetSetDef Controller_getset[] = {
 	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue"),
  	NULL},
 {"is_hx", (getter)Controller_get_is_hx,(setter)Controller_set_is_hx,
-	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue\n\nThe value of ``is_hx`` depends on the following variables:\n\n\t - Fluid\n\t - store_fluid\n"),
+	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue"),
  	NULL},
 {"k_tes_loss_coeffs", (getter)Controller_get_k_tes_loss_coeffs,(setter)Controller_set_k_tes_loss_coeffs,
 	PyDoc_STR("*sequence*: Minor loss coeffs for the coll, gen, and bypass loops [-]\n\n**Required:**\nTrue"),
@@ -2575,16 +2575,16 @@ static PyGetSetDef Controller_getset[] = {
 	PyDoc_STR("*float*: Non-HTF heat capacity associated with each SCA - per meter basis [Wht/K-m]\n\n**Required:**\nTrue"),
  	NULL},
 {"nLoops", (getter)Controller_get_nLoops,(setter)Controller_set_nLoops,
-	PyDoc_STR("*float*: Number of loops in the field\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``nLoops``:\n\n\t - q_max_aux\n\t - solar_mult\n\t - solarm\n\n\nThe value of ``nLoops`` depends on the following variables:\n\n\t - A_aperture\n\t - Dirt_mirror\n\t - Error\n\t - GeomEffects\n\t - I_bn_des\n\t - L_mod\n\t - P_ref\n\t - T_amb_sf_des\n\t - T_loop_in_des\n\t - T_loop_out\n\t - TrackingError\n\t - eta_ref\n\t - nMod\n\t - reflectivity\n"),
+	PyDoc_STR("*float*: Number of loops in the field\n\n**Required:**\nTrue"),
  	NULL},
 {"nMod", (getter)Controller_get_nMod,(setter)Controller_set_nMod,
-	PyDoc_STR("*float*: Number of collector modules in a loop\n\n**Constraints:**\nINTEGER\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``nMod``:\n\n\t - nLoops\n\t - nSCA\n\t - q_max_aux\n\t - solar_mult\n\t - solarm\n"),
+	PyDoc_STR("*float*: Number of collector modules in a loop\n\n**Constraints:**\nINTEGER\n\n**Required:**\nTrue"),
  	NULL},
 {"nRecVar", (getter)Controller_get_nRecVar,(setter)Controller_set_nRecVar,
 	PyDoc_STR("*float*: Number of receiver variantions\n\n**Constraints:**\nINTEGER\n\n**Required:**\nFalse. Automatically set to 4 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"nSCA", (getter)Controller_get_nSCA,(setter)Controller_set_nSCA,
-	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue\n\nThe value of ``nSCA`` depends on the following variables:\n\n\t - nMod\n"),
+	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue"),
  	NULL},
 {"nodes", (getter)Controller_get_nodes,(setter)Controller_set_nodes,
 	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue"),
@@ -2599,13 +2599,13 @@ static PyGetSetDef Controller_getset[] = {
 	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue"),
  	NULL},
 {"pb_rated_cap", (getter)Controller_get_pb_rated_cap,(setter)Controller_set_pb_rated_cap,
-	PyDoc_STR("*float*: Rated plant capacity [MWe]\n\n**Required:**\nTrue\n\nThe value of ``pb_rated_cap`` depends on the following variables:\n\n\t - P_ref\n"),
+	PyDoc_STR("*float*: Rated plant capacity [MWe]\n\n**Required:**\nTrue"),
  	NULL},
 {"q_max_aux", (getter)Controller_get_q_max_aux,(setter)Controller_set_q_max_aux,
-	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue\n\nThe value of ``q_max_aux`` depends on the following variables:\n\n\t - A_aperture\n\t - Dirt_mirror\n\t - Error\n\t - GeomEffects\n\t - I_bn_des\n\t - L_mod\n\t - P_ref\n\t - T_amb_sf_des\n\t - T_loop_in_des\n\t - T_loop_out\n\t - TrackingError\n\t - eta_ref\n\t - nLoops\n\t - nMod\n\t - reflectivity\n\t - solar_mult\n"),
+	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue"),
  	NULL},
 {"q_pb_design", (getter)Controller_get_q_pb_design,(setter)Controller_set_q_pb_design,
-	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue\n\nThe value of ``q_pb_design`` depends on the following variables:\n\n\t - P_ref\n\t - eta_ref\n"),
+	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue"),
  	NULL},
 {"rec_htf_vol", (getter)Controller_get_rec_htf_vol,(setter)Controller_set_rec_htf_vol,
 	PyDoc_STR("*float*: Volume of HTF in a single collector unit per unit aperture area [L/m2-ap]\n\n**Required:**\nTrue"),
@@ -2614,7 +2614,7 @@ static PyGetSetDef Controller_getset[] = {
 	PyDoc_STR("*float*: Receiver model type (1=Polynomial ; 2=Evac tube)\n\n**Constraints:**\nINTEGER\n\n**Required:**\nTrue"),
  	NULL},
 {"reflectivity", (getter)Controller_get_reflectivity,(setter)Controller_set_reflectivity,
-	PyDoc_STR("*float*: Solar-weighted mirror reflectivity value\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``reflectivity``:\n\n\t - nLoops\n\t - q_max_aux\n\t - solar_mult\n\t - solarm\n"),
+	PyDoc_STR("*float*: Solar-weighted mirror reflectivity value\n\n**Required:**\nTrue"),
  	NULL},
 {"sgs_diams", (getter)Controller_get_sgs_diams,(setter)Controller_set_sgs_diams,
 	PyDoc_STR("*sequence*: Custom SGS diameters [m]\n\n**Required:**\nTrue"),
@@ -2626,16 +2626,16 @@ static PyGetSetDef Controller_getset[] = {
 	PyDoc_STR("*sequence*: Custom SGS wall thicknesses [m]\n\n**Required:**\nTrue"),
  	NULL},
 {"solar_mult", (getter)Controller_get_solar_mult,(setter)Controller_set_solar_mult,
-	PyDoc_STR("*float*: Solar multiple\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``solar_mult``:\n\n\t - q_max_aux\n\t - solarm\n\n\nThe value of ``solar_mult`` depends on the following variables:\n\n\t - A_aperture\n\t - Dirt_mirror\n\t - Error\n\t - GeomEffects\n\t - I_bn_des\n\t - L_mod\n\t - P_ref\n\t - T_amb_sf_des\n\t - T_loop_in_des\n\t - T_loop_out\n\t - TrackingError\n\t - eta_ref\n\t - nLoops\n\t - nMod\n\t - reflectivity\n"),
+	PyDoc_STR("*float*: Solar multiple\n\n**Required:**\nTrue"),
  	NULL},
 {"solarm", (getter)Controller_get_solarm,(setter)Controller_set_solarm,
-	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue\n\nThe value of ``solarm`` depends on the following variables:\n\n\t - A_aperture\n\t - Dirt_mirror\n\t - Error\n\t - GeomEffects\n\t - I_bn_des\n\t - L_mod\n\t - P_ref\n\t - T_amb_sf_des\n\t - T_loop_in_des\n\t - T_loop_out\n\t - TrackingError\n\t - eta_ref\n\t - nLoops\n\t - nMod\n\t - reflectivity\n\t - solar_mult\n"),
+	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue"),
  	NULL},
 {"store_fl_props", (getter)Controller_get_store_fl_props,(setter)Controller_set_store_fl_props,
-	PyDoc_STR("*sequence[sequence]*: Label\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``store_fl_props``:\n\n\t - V_tank_hot_ini\n\t - vol_tank\n"),
+	PyDoc_STR("*sequence[sequence]*: Label\n\n**Required:**\nTrue"),
  	NULL},
 {"store_fluid", (getter)Controller_get_store_fluid,(setter)Controller_set_store_fluid,
-	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``store_fluid``:\n\n\t - is_hx\n"),
+	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue"),
  	NULL},
 {"t_ch_out_max", (getter)Controller_get_t_ch_out_max,(setter)Controller_set_t_ch_out_max,
 	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue"),
@@ -2665,7 +2665,7 @@ static PyGetSetDef Controller_getset[] = {
 	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue"),
  	NULL},
 {"tes_temp", (getter)Controller_get_tes_temp,(setter)Controller_set_tes_temp,
-	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``tes_temp``:\n\n\t - V_tank_hot_ini\n\t - vol_tank\n\n\nThe value of ``tes_temp`` depends on the following variables:\n\n\t - T_loop_in_des\n\t - T_loop_out\n"),
+	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue"),
  	NULL},
 {"tes_type", (getter)Controller_get_tes_type,(setter)Controller_set_tes_type,
 	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue"),
@@ -2677,7 +2677,7 @@ static PyGetSetDef Controller_getset[] = {
 	PyDoc_STR("*float*: stow angle [deg]\n\n**Required:**\nTrue"),
  	NULL},
 {"tshours", (getter)Controller_get_tshours,(setter)Controller_set_tshours,
-	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``tshours``:\n\n\t - V_tank_hot_ini\n\t - vol_tank\n"),
+	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue"),
  	NULL},
 {"tslogic_a", (getter)Controller_get_tslogic_a,(setter)Controller_set_tslogic_a,
 	PyDoc_STR("*sequence*: Label\n\n**Required:**\nTrue"),
@@ -2692,7 +2692,7 @@ static PyGetSetDef Controller_getset[] = {
 	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue"),
  	NULL},
 {"vol_tank", (getter)Controller_get_vol_tank,(setter)Controller_set_vol_tank,
-	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``vol_tank``:\n\n\t - V_tank_hot_ini\n\n\nThe value of ``vol_tank`` depends on the following variables:\n\n\t - P_ref\n\t - T_loop_in_des\n\t - T_loop_out\n\t - dt_cold\n\t - dt_hot\n\t - eta_ref\n\t - store_fl_props\n\t - tes_temp\n\t - tshours\n"),
+	PyDoc_STR("*float*: Label\n\n**Required:**\nTrue"),
  	NULL},
 	{NULL}  /* Sentinel */
 };
@@ -2701,7 +2701,7 @@ static PyTypeObject Controller_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"TcsMSLF.Controller",             /*tp_name*/
+		"Tcsmslf.Controller",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -2751,7 +2751,7 @@ static PyTypeObject Controller_Type = {
 static PyTypeObject SolarField_Type;
 
 static PyObject *
-SolarField_new(SAM_TcsMSLF data_ptr)
+SolarField_new(SAM_Tcsmslf data_ptr)
 {
 	PyObject* new_obj = SolarField_Type.tp_alloc(&SolarField_Type,0);
 
@@ -2772,7 +2772,7 @@ SolarField_assign(VarGroupObject *self, PyObject *args)
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "TcsMSLF", "SolarField")){
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Tcsmslf", "SolarField")){
 		return NULL;
 	}
 
@@ -2789,7 +2789,7 @@ SolarField_replace(VarGroupObject *self, PyObject *args)
 	}
 	PyTypeObject* tp = &SolarField_Type;
 
-	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "TcsMSLF", "SolarField")){
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Tcsmslf", "SolarField")){
 		return NULL;
 	}
 
@@ -2818,25 +2818,25 @@ static PyMethodDef SolarField_methods[] = {
 static PyObject *
 SolarField_get_washes_per_year(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_SolarField_washes_per_year_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_SolarField_washes_per_year_nget, self->data_ptr);
 }
 
 static int
 SolarField_set_washes_per_year(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_SolarField_washes_per_year_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_SolarField_washes_per_year_nset, self->data_ptr);
 }
 
 static PyObject *
 SolarField_get_water_per_wash(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_SolarField_water_per_wash_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_SolarField_water_per_wash_nget, self->data_ptr);
 }
 
 static int
 SolarField_set_water_per_wash(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_SolarField_water_per_wash_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_SolarField_water_per_wash_nset, self->data_ptr);
 }
 
 static PyGetSetDef SolarField_getset[] = {
@@ -2853,7 +2853,7 @@ static PyTypeObject SolarField_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"TcsMSLF.SolarField",             /*tp_name*/
+		"Tcsmslf.SolarField",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -2903,7 +2903,7 @@ static PyTypeObject SolarField_Type = {
 static PyTypeObject Powerblock_Type;
 
 static PyObject *
-Powerblock_new(SAM_TcsMSLF data_ptr)
+Powerblock_new(SAM_Tcsmslf data_ptr)
 {
 	PyObject* new_obj = Powerblock_Type.tp_alloc(&Powerblock_Type,0);
 
@@ -2924,7 +2924,7 @@ Powerblock_assign(VarGroupObject *self, PyObject *args)
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "TcsMSLF", "Powerblock")){
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Tcsmslf", "Powerblock")){
 		return NULL;
 	}
 
@@ -2941,7 +2941,7 @@ Powerblock_replace(VarGroupObject *self, PyObject *args)
 	}
 	PyTypeObject* tp = &Powerblock_Type;
 
-	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "TcsMSLF", "Powerblock")){
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Tcsmslf", "Powerblock")){
 		return NULL;
 	}
 
@@ -2970,229 +2970,229 @@ static PyMethodDef Powerblock_methods[] = {
 static PyObject *
 Powerblock_get_CT(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Powerblock_CT_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Powerblock_CT_nget, self->data_ptr);
 }
 
 static int
 Powerblock_set_CT(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Powerblock_CT_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Powerblock_CT_nset, self->data_ptr);
 }
 
 static PyObject *
 Powerblock_get_F_wc(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Powerblock_F_wc_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Powerblock_F_wc_aget, self->data_ptr);
 }
 
 static int
 Powerblock_set_F_wc(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_array_setter(value, SAM_TcsMSLF_Powerblock_F_wc_aset, self->data_ptr);
+	return PySAM_array_setter(value, SAM_Tcsmslf_Powerblock_F_wc_aset, self->data_ptr);
 }
 
 static PyObject *
 Powerblock_get_P_cond_min(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Powerblock_P_cond_min_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Powerblock_P_cond_min_nget, self->data_ptr);
 }
 
 static int
 Powerblock_set_P_cond_min(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Powerblock_P_cond_min_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Powerblock_P_cond_min_nset, self->data_ptr);
 }
 
 static PyObject *
 Powerblock_get_P_cond_ratio(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Powerblock_P_cond_ratio_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Powerblock_P_cond_ratio_nget, self->data_ptr);
 }
 
 static int
 Powerblock_set_P_cond_ratio(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Powerblock_P_cond_ratio_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Powerblock_P_cond_ratio_nset, self->data_ptr);
 }
 
 static PyObject *
 Powerblock_get_P_ref(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Powerblock_P_ref_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Powerblock_P_ref_nget, self->data_ptr);
 }
 
 static int
 Powerblock_set_P_ref(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Powerblock_P_ref_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Powerblock_P_ref_nset, self->data_ptr);
 }
 
 static PyObject *
 Powerblock_get_T_ITD_des(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Powerblock_T_ITD_des_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Powerblock_T_ITD_des_nget, self->data_ptr);
 }
 
 static int
 Powerblock_set_T_ITD_des(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Powerblock_T_ITD_des_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Powerblock_T_ITD_des_nset, self->data_ptr);
 }
 
 static PyObject *
 Powerblock_get_T_amb_des(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Powerblock_T_amb_des_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Powerblock_T_amb_des_nget, self->data_ptr);
 }
 
 static int
 Powerblock_set_T_amb_des(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Powerblock_T_amb_des_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Powerblock_T_amb_des_nset, self->data_ptr);
 }
 
 static PyObject *
 Powerblock_get_T_approach(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Powerblock_T_approach_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Powerblock_T_approach_nget, self->data_ptr);
 }
 
 static int
 Powerblock_set_T_approach(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Powerblock_T_approach_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Powerblock_T_approach_nset, self->data_ptr);
 }
 
 static PyObject *
 Powerblock_get_T_htf_cold_ref(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Powerblock_T_htf_cold_ref_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Powerblock_T_htf_cold_ref_nget, self->data_ptr);
 }
 
 static int
 Powerblock_set_T_htf_cold_ref(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Powerblock_T_htf_cold_ref_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Powerblock_T_htf_cold_ref_nset, self->data_ptr);
 }
 
 static PyObject *
 Powerblock_get_T_htf_hot_ref(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Powerblock_T_htf_hot_ref_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Powerblock_T_htf_hot_ref_nget, self->data_ptr);
 }
 
 static int
 Powerblock_set_T_htf_hot_ref(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Powerblock_T_htf_hot_ref_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Powerblock_T_htf_hot_ref_nset, self->data_ptr);
 }
 
 static PyObject *
 Powerblock_get_dT_cw_ref(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Powerblock_dT_cw_ref_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Powerblock_dT_cw_ref_nget, self->data_ptr);
 }
 
 static int
 Powerblock_set_dT_cw_ref(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Powerblock_dT_cw_ref_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Powerblock_dT_cw_ref_nset, self->data_ptr);
 }
 
 static PyObject *
 Powerblock_get_eta_ref(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Powerblock_eta_ref_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Powerblock_eta_ref_nget, self->data_ptr);
 }
 
 static int
 Powerblock_set_eta_ref(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Powerblock_eta_ref_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Powerblock_eta_ref_nset, self->data_ptr);
 }
 
 static PyObject *
 Powerblock_get_n_pl_inc(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Powerblock_n_pl_inc_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Powerblock_n_pl_inc_nget, self->data_ptr);
 }
 
 static int
 Powerblock_set_n_pl_inc(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Powerblock_n_pl_inc_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Powerblock_n_pl_inc_nset, self->data_ptr);
 }
 
 static PyObject *
 Powerblock_get_pb_bd_frac(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Powerblock_pb_bd_frac_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Powerblock_pb_bd_frac_nget, self->data_ptr);
 }
 
 static int
 Powerblock_set_pb_bd_frac(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Powerblock_pb_bd_frac_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Powerblock_pb_bd_frac_nset, self->data_ptr);
 }
 
 static PyObject *
 Powerblock_get_pc_config(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Powerblock_pc_config_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Powerblock_pc_config_nget, self->data_ptr);
 }
 
 static int
 Powerblock_set_pc_config(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Powerblock_pc_config_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Powerblock_pc_config_nset, self->data_ptr);
 }
 
 static PyObject *
 Powerblock_get_q_sby_frac(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Powerblock_q_sby_frac_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Powerblock_q_sby_frac_nget, self->data_ptr);
 }
 
 static int
 Powerblock_set_q_sby_frac(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Powerblock_q_sby_frac_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Powerblock_q_sby_frac_nset, self->data_ptr);
 }
 
 static PyObject *
 Powerblock_get_startup_frac(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Powerblock_startup_frac_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Powerblock_startup_frac_nget, self->data_ptr);
 }
 
 static int
 Powerblock_set_startup_frac(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Powerblock_startup_frac_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Powerblock_startup_frac_nset, self->data_ptr);
 }
 
 static PyObject *
 Powerblock_get_startup_time(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Powerblock_startup_time_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Powerblock_startup_time_nget, self->data_ptr);
 }
 
 static int
 Powerblock_set_startup_time(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Powerblock_startup_time_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Powerblock_startup_time_nset, self->data_ptr);
 }
 
 static PyObject *
 Powerblock_get_tech_type(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Powerblock_tech_type_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Powerblock_tech_type_nget, self->data_ptr);
 }
 
 static int
 Powerblock_set_tech_type(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Powerblock_tech_type_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Powerblock_tech_type_nset, self->data_ptr);
 }
 
 static PyGetSetDef Powerblock_getset[] = {
@@ -3209,7 +3209,7 @@ static PyGetSetDef Powerblock_getset[] = {
 	PyDoc_STR("*float*: Condenser pressure ratio [none]\n\n**Required:**\nRequired if pc_config=0"),
  	NULL},
 {"P_ref", (getter)Powerblock_get_P_ref,(setter)Powerblock_set_P_ref,
-	PyDoc_STR("*float*: Label [-]\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``P_ref``:\n\n\t - V_tank_hot_ini\n\t - W_pb_design\n\t - nLoops\n\t - pb_rated_cap\n\t - q_max_aux\n\t - q_pb_design\n\t - solar_mult\n\t - solarm\n\t - system_capacity\n\t - vol_tank\n"),
+	PyDoc_STR("*float*: Label [-]\n\n**Required:**\nTrue"),
  	NULL},
 {"T_ITD_des", (getter)Powerblock_get_T_ITD_des,(setter)Powerblock_set_T_ITD_des,
 	PyDoc_STR("*float*: ITD at design for dry system [C]\n\n**Required:**\nRequired if pc_config=0"),
@@ -3221,16 +3221,16 @@ static PyGetSetDef Powerblock_getset[] = {
 	PyDoc_STR("*float*: Cooling tower approach temperature [C]\n\n**Required:**\nRequired if pc_config=0"),
  	NULL},
 {"T_htf_cold_ref", (getter)Powerblock_get_T_htf_cold_ref,(setter)Powerblock_set_T_htf_cold_ref,
-	PyDoc_STR("*float*: Label [-]\n\n**Required:**\nTrue\n\nThe value of ``T_htf_cold_ref`` depends on the following variables:\n\n\t - T_loop_in_des\n"),
+	PyDoc_STR("*float*: Label [-]\n\n**Required:**\nTrue"),
  	NULL},
 {"T_htf_hot_ref", (getter)Powerblock_get_T_htf_hot_ref,(setter)Powerblock_set_T_htf_hot_ref,
-	PyDoc_STR("*float*: Label [-]\n\n**Required:**\nTrue\n\nThe value of ``T_htf_hot_ref`` depends on the following variables:\n\n\t - T_loop_out\n"),
+	PyDoc_STR("*float*: Label [-]\n\n**Required:**\nTrue"),
  	NULL},
 {"dT_cw_ref", (getter)Powerblock_get_dT_cw_ref,(setter)Powerblock_set_dT_cw_ref,
 	PyDoc_STR("*float*: Reference condenser cooling water inlet/outlet T diff [C]\n\n**Required:**\nRequired if pc_config=0"),
  	NULL},
 {"eta_ref", (getter)Powerblock_get_eta_ref,(setter)Powerblock_set_eta_ref,
-	PyDoc_STR("*float*: Cycle thermal efficiency at design point [-]\n\n**Required:**\nTrue\n\nThe value of the following variables depends on ``eta_ref``:\n\n\t - V_tank_hot_ini\n\t - nLoops\n\t - q_max_aux\n\t - q_pb_design\n\t - solar_mult\n\t - solarm\n\t - vol_tank\n"),
+	PyDoc_STR("*float*: Cycle thermal efficiency at design point [-]\n\n**Required:**\nTrue"),
  	NULL},
 {"n_pl_inc", (getter)Powerblock_get_n_pl_inc,(setter)Powerblock_set_n_pl_inc,
 	PyDoc_STR("*float*: Number of part-load increments for the heat rejection system [none]\n\n**Required:**\nRequired if pc_config=0"),
@@ -3260,7 +3260,7 @@ static PyTypeObject Powerblock_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"TcsMSLF.Powerblock",             /*tp_name*/
+		"Tcsmslf.Powerblock",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -3310,7 +3310,7 @@ static PyTypeObject Powerblock_Type = {
 static PyTypeObject UserDefinedPC_Type;
 
 static PyObject *
-UserDefinedPC_new(SAM_TcsMSLF data_ptr)
+UserDefinedPC_new(SAM_Tcsmslf data_ptr)
 {
 	PyObject* new_obj = UserDefinedPC_Type.tp_alloc(&UserDefinedPC_Type,0);
 
@@ -3331,7 +3331,7 @@ UserDefinedPC_assign(VarGroupObject *self, PyObject *args)
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "TcsMSLF", "UserDefinedPC")){
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Tcsmslf", "UserDefinedPC")){
 		return NULL;
 	}
 
@@ -3348,7 +3348,7 @@ UserDefinedPC_replace(VarGroupObject *self, PyObject *args)
 	}
 	PyTypeObject* tp = &UserDefinedPC_Type;
 
-	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "TcsMSLF", "UserDefinedPC")){
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Tcsmslf", "UserDefinedPC")){
 		return NULL;
 	}
 
@@ -3377,37 +3377,37 @@ static PyMethodDef UserDefinedPC_methods[] = {
 static PyObject *
 UserDefinedPC_get_ud_f_W_dot_cool_des(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_UserDefinedPC_ud_f_W_dot_cool_des_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_UserDefinedPC_ud_f_W_dot_cool_des_nget, self->data_ptr);
 }
 
 static int
 UserDefinedPC_set_ud_f_W_dot_cool_des(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_UserDefinedPC_ud_f_W_dot_cool_des_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_UserDefinedPC_ud_f_W_dot_cool_des_nset, self->data_ptr);
 }
 
 static PyObject *
 UserDefinedPC_get_ud_ind_od(VarGroupObject *self, void *closure)
 {
-	return PySAM_matrix_getter(SAM_TcsMSLF_UserDefinedPC_ud_ind_od_mget, self->data_ptr);
+	return PySAM_matrix_getter(SAM_Tcsmslf_UserDefinedPC_ud_ind_od_mget, self->data_ptr);
 }
 
 static int
 UserDefinedPC_set_ud_ind_od(VarGroupObject *self, PyObject *value, void *closure)
 {
-		return PySAM_matrix_setter(value, SAM_TcsMSLF_UserDefinedPC_ud_ind_od_mset, self->data_ptr);
+		return PySAM_matrix_setter(value, SAM_Tcsmslf_UserDefinedPC_ud_ind_od_mset, self->data_ptr);
 }
 
 static PyObject *
 UserDefinedPC_get_ud_m_dot_water_cool_des(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_UserDefinedPC_ud_m_dot_water_cool_des_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_UserDefinedPC_ud_m_dot_water_cool_des_nget, self->data_ptr);
 }
 
 static int
 UserDefinedPC_set_ud_m_dot_water_cool_des(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_UserDefinedPC_ud_m_dot_water_cool_des_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_UserDefinedPC_ud_m_dot_water_cool_des_nset, self->data_ptr);
 }
 
 static PyGetSetDef UserDefinedPC_getset[] = {
@@ -3427,7 +3427,7 @@ static PyTypeObject UserDefinedPC_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"TcsMSLF.UserDefinedPC",             /*tp_name*/
+		"Tcsmslf.UserDefinedPC",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -3477,7 +3477,7 @@ static PyTypeObject UserDefinedPC_Type = {
 static PyTypeObject Enet_Type;
 
 static PyObject *
-Enet_new(SAM_TcsMSLF data_ptr)
+Enet_new(SAM_Tcsmslf data_ptr)
 {
 	PyObject* new_obj = Enet_Type.tp_alloc(&Enet_Type,0);
 
@@ -3498,7 +3498,7 @@ Enet_assign(VarGroupObject *self, PyObject *args)
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "TcsMSLF", "Enet")){
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Tcsmslf", "Enet")){
 		return NULL;
 	}
 
@@ -3515,7 +3515,7 @@ Enet_replace(VarGroupObject *self, PyObject *args)
 	}
 	PyTypeObject* tp = &Enet_Type;
 
-	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "TcsMSLF", "Enet")){
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Tcsmslf", "Enet")){
 		return NULL;
 	}
 
@@ -3544,37 +3544,37 @@ static PyMethodDef Enet_methods[] = {
 static PyObject *
 Enet_get_eta_lhv(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Enet_eta_lhv_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Enet_eta_lhv_nget, self->data_ptr);
 }
 
 static int
 Enet_set_eta_lhv(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Enet_eta_lhv_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Enet_eta_lhv_nset, self->data_ptr);
 }
 
 static PyObject *
 Enet_get_eta_tes_htr(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Enet_eta_tes_htr_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Enet_eta_tes_htr_nget, self->data_ptr);
 }
 
 static int
 Enet_set_eta_tes_htr(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Enet_eta_tes_htr_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Enet_eta_tes_htr_nset, self->data_ptr);
 }
 
 static PyObject *
 Enet_get_fp_mode(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Enet_fp_mode_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Enet_fp_mode_nget, self->data_ptr);
 }
 
 static int
 Enet_set_fp_mode(VarGroupObject *self, PyObject *value, void *closure)
 {
-	return PySAM_double_setter(value, SAM_TcsMSLF_Enet_fp_mode_nset, self->data_ptr);
+	return PySAM_double_setter(value, SAM_Tcsmslf_Enet_fp_mode_nset, self->data_ptr);
 }
 
 static PyGetSetDef Enet_getset[] = {
@@ -3594,7 +3594,7 @@ static PyTypeObject Enet_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"TcsMSLF.Enet",             /*tp_name*/
+		"Tcsmslf.Enet",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -3644,7 +3644,7 @@ static PyTypeObject Enet_Type = {
 static PyTypeObject Outputs_Type;
 
 static PyObject *
-Outputs_new(SAM_TcsMSLF data_ptr)
+Outputs_new(SAM_Tcsmslf data_ptr)
 {
 	PyObject* new_obj = Outputs_Type.tp_alloc(&Outputs_Type,0);
 
@@ -3665,7 +3665,7 @@ Outputs_assign(VarGroupObject *self, PyObject *args)
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_dict(self->data_ptr, dict, "TcsMSLF", "Outputs")){
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "Tcsmslf", "Outputs")){
 		return NULL;
 	}
 
@@ -3682,7 +3682,7 @@ Outputs_replace(VarGroupObject *self, PyObject *args)
 	}
 	PyTypeObject* tp = &Outputs_Type;
 
-	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "TcsMSLF", "Outputs")){
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "Tcsmslf", "Outputs")){
 		return NULL;
 	}
 
@@ -3711,481 +3711,481 @@ static PyMethodDef Outputs_methods[] = {
 static PyObject *
 Outputs_get_DP_tot(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Outputs_DP_tot_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Outputs_DP_tot_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_E_bal_startup(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Outputs_E_bal_startup_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Outputs_E_bal_startup_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_EqOptEff(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Outputs_EqOptEff_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Outputs_EqOptEff_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_P_cycle(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Outputs_P_cycle_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Outputs_P_cycle_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_Pipe_hl(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Outputs_Pipe_hl_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Outputs_Pipe_hl_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_Q_par_sf_fp(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Outputs_Q_par_sf_fp_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Outputs_Q_par_sf_fp_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_Q_par_tes_fp(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Outputs_Q_par_tes_fp_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Outputs_Q_par_tes_fp_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_T_pb_in(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Outputs_T_pb_in_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Outputs_T_pb_in_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_T_pb_out(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Outputs_T_pb_out_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Outputs_T_pb_out_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_T_sys_c(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Outputs_T_sys_c_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Outputs_T_sys_c_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_T_sys_h(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Outputs_T_sys_h_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Outputs_T_sys_h_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_T_tank_cold_fin(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Outputs_T_tank_cold_fin_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Outputs_T_tank_cold_fin_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_T_tank_cold_in(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Outputs_T_tank_cold_in_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Outputs_T_tank_cold_in_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_T_tank_hot_fin(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Outputs_T_tank_hot_fin_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Outputs_T_tank_hot_fin_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_T_tank_hot_in(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Outputs_T_tank_hot_in_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Outputs_T_tank_hot_in_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_Ts_cold(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Outputs_Ts_cold_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Outputs_Ts_cold_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_Ts_hot(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Outputs_Ts_hot_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Outputs_Ts_hot_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_W_cool_par(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Outputs_W_cool_par_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Outputs_W_cool_par_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_W_dot_pump(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Outputs_W_dot_pump_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Outputs_W_dot_pump_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_W_net(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Outputs_W_net_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Outputs_W_net_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_W_par_BOP(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Outputs_W_par_BOP_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Outputs_W_par_BOP_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_W_par_aux_boiler(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Outputs_W_par_aux_boiler_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Outputs_W_par_aux_boiler_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_annual_W_cycle_gross(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Outputs_annual_W_cycle_gross_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Outputs_annual_W_cycle_gross_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_annual_energy(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Outputs_annual_energy_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Outputs_annual_energy_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_annual_energy_distribution_time(VarGroupObject *self, void *closure)
 {
-	return PySAM_matrix_getter(SAM_TcsMSLF_Outputs_annual_energy_distribution_time_mget, self->data_ptr);
+	return PySAM_matrix_getter(SAM_Tcsmslf_Outputs_annual_energy_distribution_time_mget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_annual_fuel_usage(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Outputs_annual_fuel_usage_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Outputs_annual_fuel_usage_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_annual_total_water_use(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Outputs_annual_total_water_use_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Outputs_annual_total_water_use_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_beam(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Outputs_beam_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Outputs_beam_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_capacity_factor(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Outputs_capacity_factor_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Outputs_capacity_factor_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_conversion_factor(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Outputs_conversion_factor_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Outputs_conversion_factor_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_eta(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Outputs_eta_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Outputs_eta_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_eta_optical(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Outputs_eta_optical_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Outputs_eta_optical_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_eta_thermal(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Outputs_eta_thermal_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Outputs_eta_thermal_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_fixed_par(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Outputs_fixed_par_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Outputs_fixed_par_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_gen(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Outputs_gen_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Outputs_gen_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_hour(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Outputs_hour_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Outputs_hour_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_htf_pump_power(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Outputs_htf_pump_power_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Outputs_htf_pump_power_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_kwh_per_kw(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Outputs_kwh_per_kw_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Outputs_kwh_per_kw_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_m_dot_avail(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Outputs_m_dot_avail_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Outputs_m_dot_avail_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_m_dot_charge_field(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Outputs_m_dot_charge_field_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Outputs_m_dot_charge_field_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_m_dot_discharge_tank(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Outputs_m_dot_discharge_tank_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Outputs_m_dot_discharge_tank_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_m_dot_htf2(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Outputs_m_dot_htf2_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Outputs_m_dot_htf2_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_m_dot_makeup(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Outputs_m_dot_makeup_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Outputs_m_dot_makeup_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_m_dot_pb(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Outputs_m_dot_pb_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Outputs_m_dot_pb_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_mass_tank_cold(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Outputs_mass_tank_cold_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Outputs_mass_tank_cold_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_mass_tank_hot(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Outputs_mass_tank_hot_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Outputs_mass_tank_hot_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_month(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Outputs_month_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Outputs_month_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_monthly_energy(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Outputs_monthly_energy_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Outputs_monthly_energy_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_phi_t(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Outputs_phi_t_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Outputs_phi_t_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_pipe_sgs_P_dsn(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Outputs_pipe_sgs_P_dsn_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Outputs_pipe_sgs_P_dsn_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_pipe_sgs_T_dsn(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Outputs_pipe_sgs_T_dsn_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Outputs_pipe_sgs_T_dsn_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_pipe_sgs_diams(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Outputs_pipe_sgs_diams_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Outputs_pipe_sgs_diams_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_pipe_sgs_mdot_dsn(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Outputs_pipe_sgs_mdot_dsn_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Outputs_pipe_sgs_mdot_dsn_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_pipe_sgs_vel_dsn(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Outputs_pipe_sgs_vel_dsn_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Outputs_pipe_sgs_vel_dsn_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_pipe_sgs_wallthk(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Outputs_pipe_sgs_wallthk_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Outputs_pipe_sgs_wallthk_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_pres(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Outputs_pres_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Outputs_pres_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_q_abs_tot(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Outputs_q_abs_tot_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Outputs_q_abs_tot_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_q_aux_fuel(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Outputs_q_aux_fuel_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Outputs_q_aux_fuel_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_q_avail(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Outputs_q_avail_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Outputs_q_avail_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_q_dump(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Outputs_q_dump_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Outputs_q_dump_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_q_inc_sf_tot(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Outputs_q_inc_sf_tot_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Outputs_q_inc_sf_tot_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_q_loss_spec_tot(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Outputs_q_loss_spec_tot_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Outputs_q_loss_spec_tot_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_q_loss_tot(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Outputs_q_loss_tot_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Outputs_q_loss_tot_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_q_pb(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Outputs_q_pb_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Outputs_q_pb_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_q_to_tes(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Outputs_q_to_tes_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Outputs_q_to_tes_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_sf_def(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Outputs_sf_def_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Outputs_sf_def_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_solazi(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Outputs_solazi_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Outputs_solazi_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_solzen(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Outputs_solzen_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Outputs_solzen_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_system_heat_rate(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TcsMSLF_Outputs_system_heat_rate_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_Tcsmslf_Outputs_system_heat_rate_nget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_t_loop_outlet(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Outputs_t_loop_outlet_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Outputs_t_loop_outlet_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_tank_losses(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Outputs_tank_losses_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Outputs_tank_losses_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_tdry(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Outputs_tdry_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Outputs_tdry_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_theta_L(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Outputs_theta_L_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Outputs_theta_L_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_tou_value(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Outputs_tou_value_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Outputs_tou_value_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_track_par_tot(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Outputs_track_par_tot_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Outputs_track_par_tot_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_twet(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Outputs_twet_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Outputs_twet_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_vol_tank_cold_fin(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Outputs_vol_tank_cold_fin_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Outputs_vol_tank_cold_fin_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_vol_tank_hot_fin(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Outputs_vol_tank_hot_fin_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Outputs_vol_tank_hot_fin_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_vol_tank_total(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Outputs_vol_tank_total_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Outputs_vol_tank_total_aget, self->data_ptr);
 }
 
 static PyObject *
 Outputs_get_wspd(VarGroupObject *self, void *closure)
 {
-	return PySAM_array_getter(SAM_TcsMSLF_Outputs_wspd_aget, self->data_ptr);
+	return PySAM_array_getter(SAM_Tcsmslf_Outputs_wspd_aget, self->data_ptr);
 }
 
 static PyGetSetDef Outputs_getset[] = {
@@ -4436,7 +4436,7 @@ static PyTypeObject Outputs_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"TcsMSLF.Outputs",             /*tp_name*/
+		"Tcsmslf.Outputs",             /*tp_name*/
 		sizeof(VarGroupObject),          /*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
@@ -4479,16 +4479,16 @@ static PyTypeObject Outputs_Type = {
 };
 
 /*
- * TcsMSLF
+ * Tcsmslf
  */
 
-static PyTypeObject TcsMSLF_Type;
+static PyTypeObject Tcsmslf_Type;
 
 static CmodObject *
-newTcsMSLFObject(void* data_ptr)
+newTcsmslfObject(void* data_ptr)
 {
 	CmodObject *self;
-	self = PyObject_New(CmodObject, &TcsMSLF_Type);
+	self = PyObject_New(CmodObject, &Tcsmslf_Type);
 
 	PySAM_TECH_ATTR()
 
@@ -4546,10 +4546,10 @@ newTcsMSLFObject(void* data_ptr)
 	return self;
 }
 
-/* TcsMSLF methods */
+/* Tcsmslf methods */
 
 static void
-TcsMSLF_dealloc(CmodObject *self)
+Tcsmslf_dealloc(CmodObject *self)
 {
 	Py_XDECREF(self->x_attr);
 
@@ -4563,7 +4563,15 @@ TcsMSLF_dealloc(CmodObject *self)
 
 
 static PyObject *
-TcsMSLF_execute(CmodObject *self, PyObject *args)
+Tcsmslf_get_data_ptr(CmodObject *self, PyObject *args)
+{
+	PyObject* ptr = PyLong_FromVoidPtr((void*)self->data_ptr);
+	return ptr;
+}
+
+
+static PyObject *
+Tcsmslf_execute(CmodObject *self, PyObject *args)
 {
 	int verbosity = 0;
 
@@ -4571,7 +4579,7 @@ TcsMSLF_execute(CmodObject *self, PyObject *args)
 		return NULL;
 
 	SAM_error error = new_error();
-	SAM_TcsMSLF_execute(self->data_ptr, verbosity, &error);
+	SAM_Tcsmslf_execute(self->data_ptr, verbosity, &error);
 	if (PySAM_has_error(error )) return NULL;
 	Py_INCREF(Py_None);
 	return Py_None;
@@ -4579,14 +4587,14 @@ TcsMSLF_execute(CmodObject *self, PyObject *args)
 
 
 static PyObject *
-TcsMSLF_assign(CmodObject *self, PyObject *args)
+Tcsmslf_assign(CmodObject *self, PyObject *args)
 {
 	PyObject* dict;
 	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
 		return NULL;
 	}
 
-	if (!PySAM_assign_from_nested_dict((PyObject*)self, self->x_attr, self->data_ptr, dict, "TcsMSLF"))
+	if (!PySAM_assign_from_nested_dict((PyObject*)self, self->x_attr, self->data_ptr, dict, "Tcsmslf"))
 		return NULL;
 
 	Py_INCREF(Py_None);
@@ -4594,14 +4602,14 @@ TcsMSLF_assign(CmodObject *self, PyObject *args)
 }
 
 static PyObject *
-TcsMSLF_replace(CmodObject *self, PyObject *args)
+Tcsmslf_replace(CmodObject *self, PyObject *args)
 {
 	PyObject* dict;
 	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
 		return NULL;
 	}
 
-	if (!PySAM_replace_from_nested_dict((PyObject*)self, self->x_attr, self->data_ptr, dict, "TcsMSLF"))
+	if (!PySAM_replace_from_nested_dict((PyObject*)self, self->x_attr, self->data_ptr, dict, "Tcsmslf"))
 		return NULL;
 
 	Py_INCREF(Py_None);
@@ -4609,63 +4617,65 @@ TcsMSLF_replace(CmodObject *self, PyObject *args)
 }
 
 static PyObject *
-TcsMSLF_export(CmodObject *self, PyObject *args)
+Tcsmslf_export(CmodObject *self, PyObject *args)
 {
 	return PySAM_export_to_nested_dict((PyObject *) self, self->x_attr);
 }
 
 static PyObject *
-TcsMSLF_value(CmodObject *self, PyObject *args)
+Tcsmslf_value(CmodObject *self, PyObject *args)
 {
 	return Cmod_value(self, args);
 }
 
 static PyObject *
-TcsMSLF_unassign(CmodObject *self, PyObject *args)
+Tcsmslf_unassign(CmodObject *self, PyObject *args)
 {
 	return Cmod_unassign(self, args);
 }
 
-static PyMethodDef TcsMSLF_methods[] = {
-		{"execute",           (PyCFunction)TcsMSLF_execute,  METH_VARARGS,
+static PyMethodDef Tcsmslf_methods[] = {
+		{"execute",           (PyCFunction)Tcsmslf_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
-		{"assign",            (PyCFunction)TcsMSLF_assign,  METH_VARARGS,
+		{"get_data_ptr",           (PyCFunction)Tcsmslf_get_data_ptr,  METH_VARARGS,
+				PyDoc_STR("execute(int verbosity) -> Pointer\n Get ssc_data_t pointer")},
+		{"assign",            (PyCFunction)Tcsmslf_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'weather': { var: val, ...}, ...}``")},
-		{"replace",            (PyCFunction)TcsMSLF_replace,  METH_VARARGS,
+		{"replace",            (PyCFunction)Tcsmslf_replace,  METH_VARARGS,
 				PyDoc_STR("replace(dict) -> None\n Replace attributes from nested dictionary, except for Outputs. Unassigns all values in each Group then assigns from the input dict.\n\n``nested_dict = { 'weather': { var: val, ...}, ...}``")},
-		{"export",            (PyCFunction)TcsMSLF_export,  METH_VARARGS,
+		{"export",            (PyCFunction)Tcsmslf_export,  METH_VARARGS,
 				PyDoc_STR("export() -> dict\n Export attributes into nested dictionary")},
-		{"value",             (PyCFunction)TcsMSLF_value, METH_VARARGS,
+		{"value",             (PyCFunction)Tcsmslf_value, METH_VARARGS,
 				PyDoc_STR("value(name, optional value) -> Union[None, float, dict, sequence, str]\n Get or set by name a value in any of the variable groups.")},
-		{"unassign",          (PyCFunction)TcsMSLF_unassign, METH_VARARGS,
+		{"unassign",          (PyCFunction)Tcsmslf_unassign, METH_VARARGS,
 				PyDoc_STR("unassign(name) -> None\n Unassign a value in any of the variable groups.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 static PyObject *
-TcsMSLF_getattro(CmodObject *self, PyObject *name)
+Tcsmslf_getattro(CmodObject *self, PyObject *name)
 {
 	return PySAM_get_attr((PyObject*) self, (PyObject*) self->x_attr, name);
 }
 
 static int
-TcsMSLF_setattr(CmodObject *self, const char *name, PyObject *v)
+Tcsmslf_setattr(CmodObject *self, const char *name, PyObject *v)
 {
 	return PySAM_set_attr((PyObject*)self, (PyObject*)self->x_attr, name, v);
 }
 
-static PyTypeObject TcsMSLF_Type = {
+static PyTypeObject Tcsmslf_Type = {
 		/* The ob_type field must be initialized in the module init function
 		 * to be portable to Windows without using C++. */
 		PyVarObject_HEAD_INIT(NULL, 0)
-		"TcsMSLF",            /*tp_name*/
+		"Tcsmslf",            /*tp_name*/
 		sizeof(CmodObject),/*tp_basicsize*/
 		0,                          /*tp_itemsize*/
 		/* methods */
-		(destructor)TcsMSLF_dealloc,    /*tp_dealloc*/
+		(destructor)Tcsmslf_dealloc,    /*tp_dealloc*/
 		0,                          /*tp_print*/
 		(getattrfunc)0,             /*tp_getattr*/
-		(setattrfunc)TcsMSLF_setattr,   /*tp_setattr*/
+		(setattrfunc)Tcsmslf_setattr,   /*tp_setattr*/
 		0,                          /*tp_reserved*/
 		0,                          /*tp_repr*/
 		0,                          /*tp_as_number*/
@@ -4674,7 +4684,7 @@ static PyTypeObject TcsMSLF_Type = {
 		0,                          /*tp_hash*/
 		0,                          /*tp_call*/
 		0,                          /*tp_str*/
-		(getattrofunc)TcsMSLF_getattro, /*tp_getattro*/
+		(getattrofunc)Tcsmslf_getattro, /*tp_getattro*/
 		0,                          /*tp_setattro*/
 		0,                          /*tp_as_buffer*/
 		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
@@ -4685,7 +4695,7 @@ static PyTypeObject TcsMSLF_Type = {
 		0,                          /*tp_weaklistofnset*/
 		0,                          /*tp_iter*/
 		0,                          /*tp_iternext*/
-		TcsMSLF_methods,      /*tp_methods*/
+		Tcsmslf_methods,      /*tp_methods*/
 		0,                          /*tp_members*/
 		0,       /*tp_getset*/
 		0,                          /*tp_base*/
@@ -4703,13 +4713,13 @@ static PyTypeObject TcsMSLF_Type = {
 /* --------------------------------------------------------------------- */
 
 
-/* Function of no arguments returning new TcsMSLF object */
+/* Function of no arguments returning new Tcsmslf object */
 
 static PyObject *
-TcsMSLF_new(PyObject *self, PyObject *args)
+Tcsmslf_new(PyObject *self, PyObject *args)
 {
 	CmodObject *rv;
-	rv = newTcsMSLFObject(0);
+	rv = newTcsmslfObject(0);
 	if (rv == NULL)
 		return NULL;
 
@@ -4718,7 +4728,7 @@ TcsMSLF_new(PyObject *self, PyObject *args)
 }
 
 static PyObject *
-TcsMSLF_wrap(PyObject *self, PyObject *args)
+Tcsmslf_wrap(PyObject *self, PyObject *args)
 {
 	CmodObject *rv;
 	long long int ptr = 0;  // 64 bit arch
@@ -4726,7 +4736,7 @@ TcsMSLF_wrap(PyObject *self, PyObject *args)
 		PyErr_BadArgument();
 		return NULL;
 	}
-	rv = newTcsMSLFObject((void*)ptr);
+	rv = newTcsmslfObject((void*)ptr);
 	if (rv == NULL)
 		return NULL;
 
@@ -4735,7 +4745,7 @@ TcsMSLF_wrap(PyObject *self, PyObject *args)
 }
 
 static PyObject *
-TcsMSLF_default(PyObject *self, PyObject *args)
+Tcsmslf_default(PyObject *self, PyObject *args)
 {
 	CmodObject *rv;
 	char* def = 0;
@@ -4743,20 +4753,20 @@ TcsMSLF_default(PyObject *self, PyObject *args)
 		PyErr_BadArgument();
 		return NULL;
 	}
-	rv = newTcsMSLFObject(0);
+	rv = newTcsmslfObject(0);
 	if (rv == NULL)
 		return NULL;
 
 	rv->data_owner_ptr = NULL;
-	if (PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "TcsMSLF", def) < 0) {
-		TcsMSLF_dealloc(rv);
+	if (PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Tcsmslf", def) < 0) {
+		Tcsmslf_dealloc(rv);
 		return NULL;
 	}
 	return (PyObject *)rv;
 }
 
 static PyObject *
-TcsMSLF_from_existing(PyObject *self, PyObject *args)
+Tcsmslf_from_existing(PyObject *self, PyObject *args)
 {
 	CmodObject *rv;
 	PyObject * module = 0;
@@ -4776,13 +4786,13 @@ TcsMSLF_from_existing(PyObject *self, PyObject *args)
 	if (data_size < 0)
 		goto fail;
 
-	rv = newTcsMSLFObject((void*)ptr);
+	rv = newTcsmslfObject((void*)ptr);
 	if (rv == NULL)
 		goto fail;
 	rv->data_owner_ptr = module;
 	if (!def)
 		return (PyObject *)rv;
-	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "TcsMSLF", def);
+	PySAM_load_defaults((PyObject*)rv, rv->x_attr, rv->data_ptr, "Tcsmslf", def);
 	return (PyObject *)rv;
 
 	fail:
@@ -4793,120 +4803,101 @@ TcsMSLF_from_existing(PyObject *self, PyObject *args)
 
 /* List of functions defined in the module */
 
-static PyMethodDef TcsMSLFModule_methods[] = {
-		{"new",             TcsMSLF_new,         METH_VARARGS,
-				PyDoc_STR("new() -> TcsMSLF")},
-		{"default",             TcsMSLF_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> TcsMSLF\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n		- *\"MSLFAllEquityPartnershipFlip\"*\n\n		- *\"MSLFCommercial\"*\n\n		- *\"MSLFLCOECalculator\"*\n\n		- *\"MSLFLeveragedPartnershipFlip\"*\n\n		- *\"MSLFMerchantPlant\"*\n\n		- *\"MSLFNone\"*\n\n		- *\"MSLFSaleLeaseback\"*\n\n		- *\"MSLFSingleOwner\"*\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
-		{"wrap",             TcsMSLF_wrap,         METH_VARARGS,
-				PyDoc_STR("wrap(ssc_data_t) -> TcsMSLF\n\nLoad data from a PySSC object.\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap()``")},
-		{"from_existing",   TcsMSLF_from_existing,        METH_VARARGS,
-				PyDoc_STR("from_existing(data, optional config) -> TcsMSLF\n\nShare data with an existing PySAM class. If ``optional config`` is a valid configuration name, load the module's defaults for that configuration.")},
+static PyMethodDef TcsmslfModule_methods[] = {
+		{"new",             Tcsmslf_new,         METH_VARARGS,
+				PyDoc_STR("new() -> Tcsmslf")},
+		{"default",             Tcsmslf_default,         METH_VARARGS,
+				PyDoc_STR("default(config) -> Tcsmslf\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n- None\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
+		{"wrap",             Tcsmslf_wrap,         METH_VARARGS,
+				PyDoc_STR("wrap(ssc_data_t) -> Tcsmslf\n\nLoad data from a PySSC object.\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap()``")},
+		{"from_existing",   Tcsmslf_from_existing,        METH_VARARGS,
+				PyDoc_STR("from_existing(data, optional config) -> Tcsmslf\n\nShare data with an existing PySAM class. If ``optional config`` is a valid configuration name, load the module's defaults for that configuration.")},
 		{NULL,              NULL}           /* sentinel */
 };
 
 PyDoc_STRVAR(module_doc,
-			 "CSP linear Fresnel with molten salt heat transfer fluid for power generation");
+			 "Tcsmslf");
 
 
 static int
-TcsMSLFModule_exec(PyObject *m)
+TcsmslfModule_exec(PyObject *m)
 {
 	/* Finalize the type object including setting type of the new type
 	 * object; doing it here is required for portability, too. */
 
 	if (PySAM_load_lib(m) < 0) goto fail;
 
-	TcsMSLF_Type.tp_dict = PyDict_New();
-	if (!TcsMSLF_Type.tp_dict) { goto fail; }
+	Tcsmslf_Type.tp_dict = PyDict_New();
+	if (!Tcsmslf_Type.tp_dict) { goto fail; }
 
-	/// Add the AdjustmentFactors type object to TcsMSLF_Type
-	PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
-	if (!AdjustmentFactorsModule){
-		PyErr_SetImportError(PyUnicode_FromString("Could not import AdjustmentFactors module."), NULL, NULL);
-	}
-
-	PyTypeObject* AdjustmentFactors_Type = (PyTypeObject*)PyObject_GetAttrString(AdjustmentFactorsModule, "AdjustmentFactors");
-	if (!AdjustmentFactors_Type){
-		PyErr_SetImportError(PyUnicode_FromString("Could not import AdjustmentFactors type."), NULL, NULL);
-	}
-	Py_XDECREF(AdjustmentFactorsModule);
-
-	if (PyType_Ready(AdjustmentFactors_Type) < 0) { goto fail; }
-	PyDict_SetItemString(TcsMSLF_Type.tp_dict,
-						 "AdjustmentFactors",
-						 (PyObject*)AdjustmentFactors_Type);
-	Py_DECREF(&AdjustmentFactors_Type);
-	Py_XDECREF(AdjustmentFactors_Type);
-
-	/// Add the Weather type object to TcsMSLF_Type
+	/// Add the Weather type object to Tcsmslf_Type
 	if (PyType_Ready(&Weather_Type) < 0) { goto fail; }
-	PyDict_SetItemString(TcsMSLF_Type.tp_dict,
+	PyDict_SetItemString(Tcsmslf_Type.tp_dict,
 				"Weather",
 				(PyObject*)&Weather_Type);
 	Py_DECREF(&Weather_Type);
 
-	/// Add the Mslf type object to TcsMSLF_Type
+	/// Add the Mslf type object to Tcsmslf_Type
 	if (PyType_Ready(&Mslf_Type) < 0) { goto fail; }
-	PyDict_SetItemString(TcsMSLF_Type.tp_dict,
+	PyDict_SetItemString(Tcsmslf_Type.tp_dict,
 				"Mslf",
 				(PyObject*)&Mslf_Type);
 	Py_DECREF(&Mslf_Type);
 
-	/// Add the TouTranslator type object to TcsMSLF_Type
+	/// Add the TouTranslator type object to Tcsmslf_Type
 	if (PyType_Ready(&TouTranslator_Type) < 0) { goto fail; }
-	PyDict_SetItemString(TcsMSLF_Type.tp_dict,
+	PyDict_SetItemString(Tcsmslf_Type.tp_dict,
 				"TouTranslator",
 				(PyObject*)&TouTranslator_Type);
 	Py_DECREF(&TouTranslator_Type);
 
-	/// Add the Controller type object to TcsMSLF_Type
+	/// Add the Controller type object to Tcsmslf_Type
 	if (PyType_Ready(&Controller_Type) < 0) { goto fail; }
-	PyDict_SetItemString(TcsMSLF_Type.tp_dict,
+	PyDict_SetItemString(Tcsmslf_Type.tp_dict,
 				"Controller",
 				(PyObject*)&Controller_Type);
 	Py_DECREF(&Controller_Type);
 
-	/// Add the SolarField type object to TcsMSLF_Type
+	/// Add the SolarField type object to Tcsmslf_Type
 	if (PyType_Ready(&SolarField_Type) < 0) { goto fail; }
-	PyDict_SetItemString(TcsMSLF_Type.tp_dict,
+	PyDict_SetItemString(Tcsmslf_Type.tp_dict,
 				"SolarField",
 				(PyObject*)&SolarField_Type);
 	Py_DECREF(&SolarField_Type);
 
-	/// Add the Powerblock type object to TcsMSLF_Type
+	/// Add the Powerblock type object to Tcsmslf_Type
 	if (PyType_Ready(&Powerblock_Type) < 0) { goto fail; }
-	PyDict_SetItemString(TcsMSLF_Type.tp_dict,
+	PyDict_SetItemString(Tcsmslf_Type.tp_dict,
 				"Powerblock",
 				(PyObject*)&Powerblock_Type);
 	Py_DECREF(&Powerblock_Type);
 
-	/// Add the UserDefinedPC type object to TcsMSLF_Type
+	/// Add the UserDefinedPC type object to Tcsmslf_Type
 	if (PyType_Ready(&UserDefinedPC_Type) < 0) { goto fail; }
-	PyDict_SetItemString(TcsMSLF_Type.tp_dict,
+	PyDict_SetItemString(Tcsmslf_Type.tp_dict,
 				"UserDefinedPC",
 				(PyObject*)&UserDefinedPC_Type);
 	Py_DECREF(&UserDefinedPC_Type);
 
-	/// Add the Enet type object to TcsMSLF_Type
+	/// Add the Enet type object to Tcsmslf_Type
 	if (PyType_Ready(&Enet_Type) < 0) { goto fail; }
-	PyDict_SetItemString(TcsMSLF_Type.tp_dict,
+	PyDict_SetItemString(Tcsmslf_Type.tp_dict,
 				"Enet",
 				(PyObject*)&Enet_Type);
 	Py_DECREF(&Enet_Type);
 
-	/// Add the Outputs type object to TcsMSLF_Type
+	/// Add the Outputs type object to Tcsmslf_Type
 	if (PyType_Ready(&Outputs_Type) < 0) { goto fail; }
-	PyDict_SetItemString(TcsMSLF_Type.tp_dict,
+	PyDict_SetItemString(Tcsmslf_Type.tp_dict,
 				"Outputs",
 				(PyObject*)&Outputs_Type);
 	Py_DECREF(&Outputs_Type);
 
-	/// Add the TcsMSLF type object to the module
-	if (PyType_Ready(&TcsMSLF_Type) < 0) { goto fail; }
+	/// Add the Tcsmslf type object to the module
+	if (PyType_Ready(&Tcsmslf_Type) < 0) { goto fail; }
 	PyModule_AddObject(m,
-				"TcsMSLF",
-				(PyObject*)&TcsMSLF_Type);
+				"Tcsmslf",
+				(PyObject*)&Tcsmslf_Type);
 
 	return 0;
 	fail:
@@ -4914,18 +4905,18 @@ TcsMSLFModule_exec(PyObject *m)
 	return -1;
 }
 
-static struct PyModuleDef_Slot TcsMSLFModule_slots[] = {
-		{Py_mod_exec, TcsMSLFModule_exec},
+static struct PyModuleDef_Slot TcsmslfModule_slots[] = {
+		{Py_mod_exec, TcsmslfModule_exec},
 		{0, NULL},
 };
 
-static struct PyModuleDef TcsMSLFModule = {
+static struct PyModuleDef TcsmslfModule = {
 		PyModuleDef_HEAD_INIT,
-		"TcsMSLF",
+		"Tcsmslf",
 		module_doc,
 		0,
-		TcsMSLFModule_methods,
-		TcsMSLFModule_slots,
+		TcsmslfModule_methods,
+		TcsmslfModule_slots,
 		NULL,
 		NULL,
 		NULL
@@ -4934,7 +4925,7 @@ static struct PyModuleDef TcsMSLFModule = {
 /* Export function for the module */
 
 PyMODINIT_FUNC
-PyInit_TcsMSLF(void)
+PyInit_Tcsmslf(void)
 {
-	return PyModuleDef_Init(&TcsMSLFModule);
+	return PyModuleDef_Init(&TcsmslfModule);
 }

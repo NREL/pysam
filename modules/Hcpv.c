@@ -1857,6 +1857,14 @@ Hcpv_dealloc(CmodObject *self)
 
 
 static PyObject *
+Hcpv_get_data_ptr(CmodObject *self, PyObject *args)
+{
+	PyObject* ptr = PyLong_FromVoidPtr((void*)self->data_ptr);
+	return ptr;
+}
+
+
+static PyObject *
 Hcpv_execute(CmodObject *self, PyObject *args)
 {
 	int verbosity = 0;
@@ -1923,6 +1931,8 @@ Hcpv_unassign(CmodObject *self, PyObject *args)
 static PyMethodDef Hcpv_methods[] = {
 		{"execute",           (PyCFunction)Hcpv_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
+		{"get_data_ptr",           (PyCFunction)Hcpv_get_data_ptr,  METH_VARARGS,
+				PyDoc_STR("execute(int verbosity) -> Pointer\n Get ssc_data_t pointer")},
 		{"assign",            (PyCFunction)Hcpv_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'SolarResourceData': { var: val, ...}, ...}``")},
 		{"replace",            (PyCFunction)Hcpv_replace,  METH_VARARGS,
@@ -2113,25 +2123,6 @@ HcpvModule_exec(PyObject *m)
 
 	Hcpv_Type.tp_dict = PyDict_New();
 	if (!Hcpv_Type.tp_dict) { goto fail; }
-
-	/// Add the AdjustmentFactors type object to Hcpv_Type
-	PyObject* AdjustmentFactorsModule = PyImport_ImportModule("AdjustmentFactors");
-	if (!AdjustmentFactorsModule){
-		PyErr_SetImportError(PyUnicode_FromString("Could not import AdjustmentFactors module."), NULL, NULL);
-	}
-
-	PyTypeObject* AdjustmentFactors_Type = (PyTypeObject*)PyObject_GetAttrString(AdjustmentFactorsModule, "AdjustmentFactors");
-	if (!AdjustmentFactors_Type){
-		PyErr_SetImportError(PyUnicode_FromString("Could not import AdjustmentFactors type."), NULL, NULL);
-	}
-	Py_XDECREF(AdjustmentFactorsModule);
-
-	if (PyType_Ready(AdjustmentFactors_Type) < 0) { goto fail; }
-	PyDict_SetItemString(Hcpv_Type.tp_dict,
-						 "AdjustmentFactors",
-						 (PyObject*)AdjustmentFactors_Type);
-	Py_DECREF(&AdjustmentFactors_Type);
-	Py_XDECREF(AdjustmentFactors_Type);
 
 	/// Add the SolarResourceData type object to Hcpv_Type
 	if (PyType_Ready(&SolarResourceData_Type) < 0) { goto fail; }

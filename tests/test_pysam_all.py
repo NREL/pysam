@@ -11,6 +11,53 @@ ssc = PySSC()
 
 check_error_cases = True
 
+def test_pyssc():
+    var = ssc.var_create()
+    ssc.var_set_value(var, 0)
+    assert int(ssc.var_get_number(var)) == 0
+    test_dat = ssc.data_create()
+    ssc.data_set_var(test_dat, b"test", var)
+    assert ssc.data_get_number(test_dat, b"test") == 0
+
+    var = ssc.var_create()
+    ssc.var_set_value(var, 'zero')
+    assert ssc.var_get_string(var) == b'zero'
+    test_dat = ssc.data_create()
+    ssc.data_set_var(test_dat, b"test", var)
+    assert ssc.data_get_string(test_dat, b"test") == b"zero"
+
+    var = ssc.var_create()
+    ssc.var_set_value(var, [0, 1])
+    assert ssc.var_get_array(var) == [0, 1]
+    test_dat = ssc.data_create()
+    ssc.data_set_var(test_dat, b"test", var)
+    assert ssc.data_get_array(test_dat, b"test") == [0, 1]
+
+    var = ssc.var_create()
+    ssc.var_set_value(var, [[0, 0], [1, 1]])
+    assert ssc.var_get_matrix(var) == [[0, 0], [1, 1]]
+    test_dat = ssc.data_create()
+    ssc.data_set_var(test_dat, b"test", var)
+    assert ssc.data_get_matrix(test_dat, b"test") == [[0, 0], [1, 1]]
+
+    var = ssc.var_create()
+    ssc.var_set_value(var, ["zero", "one"])
+    assert ssc.var_get_data_array(var, 0, ssc.STRING) == b"zero"
+    assert ssc.var_get_data_array(var, 1, ssc.STRING) == b"one"
+    test_dat = ssc.data_create()
+    ssc.data_set_var(test_dat, b"test", var)
+    var0 = ssc.data_get_data_array(test_dat, b"test", [ssc.STRING, ssc.STRING])
+    assert var0 == [b"zero", b"one"]
+
+    var = ssc.var_create()
+    ssc.var_set_value(var, [["zero", "one"], ["zero", "one"]])
+    assert ssc.var_get_data_matrix(var, 0, 0, ssc.STRING) == b"zero"
+    assert ssc.var_get_data_matrix(var, 1, 1, ssc.STRING) == b"one"
+    test_dat = ssc.data_create()
+    ssc.data_set_var(test_dat, b"test", var)
+    var0 = ssc.data_get_data_matrix(test_dat, b"test", [[ssc.STRING, ssc.STRING], [ssc.STRING, ssc.STRING]])
+    assert var0 == [[b'zero', b'one'], [b'zero', b'one']]
+
 
 def test_functionality():
     n_tests_passed = 0

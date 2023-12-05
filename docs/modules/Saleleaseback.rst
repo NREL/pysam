@@ -83,12 +83,6 @@ SaleLeaseback Group
 .. autoclass:: PySAM.Saleleaseback.Saleleaseback.SaleLeaseback
 	:members:
 
-TimeOfDelivery Group
----------------------
-
-.. autoclass:: PySAM.Saleleaseback.Saleleaseback.TimeOfDelivery
-	:members:
-
 UtilityBill Group
 ------------------
 
@@ -117,6 +111,12 @@ BatterySystem Group
 --------------------
 
 .. autoclass:: PySAM.Saleleaseback.Saleleaseback.BatterySystem
+	:members:
+
+FuelCell Group
+---------------
+
+.. autoclass:: PySAM.Saleleaseback.Saleleaseback.FuelCell
 	:members:
 
 Outputs Group

@@ -1,12 +1,12 @@
-.. _Pvwattsv1Poa:
+.. _Hybrid:
 
-Pvwattsv1Poa
-=============
+Hybrid
+=======
 
-.. automodule:: PySAM.Pvwattsv1Poa
+.. automodule:: PySAM.Hybrid
 	:members:
 
-Pvwattsv1Poa is a wrapper for the SSC compute module `cmod_pvwattsv1_poa.cpp <https://github.com/NREL/ssc/blob/develop/ssc/cmod_pvwattsv1_poa.cpp>`_
+Hybrid is a wrapper for the SSC compute module `cmod_hybrid.cpp <https://github.com/NREL/ssc/blob/develop/ssc/cmod_hybrid.cpp>`_
 
 Interdependent Variables
 --------------------------
@@ -18,24 +18,18 @@ The variables listed below are interdependent with other variables. If you chang
 Functions
 -----------
 
-.. autoclass:: PySAM.Pvwattsv1Poa.Pvwattsv1Poa
+.. autoclass:: PySAM.Hybrid.Hybrid
 	:members:
 
-Weather Group
---------------
+Common Group
+-------------
 
-.. autoclass:: PySAM.Pvwattsv1Poa.Pvwattsv1Poa.Weather
-	:members:
-
-PVWatts Group
---------------
-
-.. autoclass:: PySAM.Pvwattsv1Poa.Pvwattsv1Poa.PVWatts
+.. autoclass:: PySAM.Hybrid.Hybrid.Common
 	:members:
 
 Outputs Group
 --------------
 
-.. autoclass:: PySAM.Pvwattsv1Poa.Pvwattsv1Poa.Outputs
+.. autoclass:: PySAM.Hybrid.Hybrid.Outputs
 	:members:
 

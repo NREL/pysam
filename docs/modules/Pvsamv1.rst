@@ -87,6 +87,8 @@ The variables listed below are interdependent with other variables. If you chang
 
  - inverter_model
 
+ - module_aspect_ratio
+
  - module_model
 
  - mppt_hi_inverter
@@ -353,6 +355,18 @@ Load Group
 .. autoclass:: PySAM.Pvsamv1.Pvsamv1.Load
 	:members:
 
+PVLosses Group
+---------------
+
+.. autoclass:: PySAM.Pvsamv1.Pvsamv1.PVLosses
+	:members:
+
+AdjustmentFactors Group
+------------------------
+
+.. autoclass:: PySAM.Pvsamv1.Pvsamv1.AdjustmentFactors
+	:members:
+
 BatteryCell Group
 ------------------
 
@@ -399,12 +413,6 @@ GridLimits Group
 -----------------
 
 .. autoclass:: PySAM.Pvsamv1.Pvsamv1.GridLimits
-	:members:
-
-AdjustmentFactors Group
-------------------------
-
-.. autoclass:: PySAM.Pvsamv1.Pvsamv1.AdjustmentFactors
 	:members:
 
 Outputs Group

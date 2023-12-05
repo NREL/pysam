@@ -20,6 +20,23 @@ class TroughPhysical(object):
 	def __init__(self, *args, **kwargs):
 		pass
 
+	class SystemControl(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		disp_csu_cost = float
+		disp_inventory_incentive = float
+		disp_rsu_cost = float
+		sim_type = float
+
+
 	class Weather(object):
 		def assign(self): 
 			pass
@@ -55,7 +72,6 @@ class TroughPhysical(object):
 		D_3 = tuple
 		D_4 = tuple
 		D_5 = tuple
-		D_cpnt = tuple
 		D_p = tuple
 		Design_loss = tuple
 		Dirt_HCE = tuple
@@ -73,10 +89,8 @@ class TroughPhysical(object):
 		HDR_rough = float
 		IAM_matrix = tuple
 		I_bn_des = float
-		K_cpnt = tuple
 		L_SCA = tuple
 		L_aperture = tuple
-		L_cpnt = tuple
 		L_power_block_piping = float
 		L_rnr_per_xpan = float
 		L_xpan_hdr = float
@@ -96,7 +110,6 @@ class TroughPhysical(object):
 		T_loop_out = float
 		Tau_envelope = tuple
 		TrackingError = tuple
-		Type_cpnt = tuple
 		V_hdr_cold_max = float
 		V_hdr_cold_min = float
 		V_hdr_hot_max = float
@@ -137,7 +150,6 @@ class TroughPhysical(object):
 		nColt = float
 		nHCEVar = float
 		nHCEt = float
-		nLoops = float
 		nSCA = float
 		northsouth_field_sep = float
 		offset_xpan_hdr = float
@@ -249,15 +261,6 @@ class TroughPhysical(object):
 		disp_steps_per_hour = float
 		disp_time_weighting = float
 		disp_timeout = float
-		dispatch_factor1 = float
-		dispatch_factor2 = float
-		dispatch_factor3 = float
-		dispatch_factor4 = float
-		dispatch_factor5 = float
-		dispatch_factor6 = float
-		dispatch_factor7 = float
-		dispatch_factor8 = float
-		dispatch_factor9 = float
 		dispatch_factors_ts = tuple
 		dispatch_sched_weekday = tuple
 		dispatch_sched_weekend = tuple
@@ -267,7 +270,6 @@ class TroughPhysical(object):
 		is_dispatch = float
 		is_dispatch_series = float
 		is_tod_pc_target_also_pc_max = float
-		is_wlim_series = float
 		is_write_ampl_dat = float
 		ppa_multiplier_model = float
 		q_rec_heattrace = float
@@ -275,23 +277,6 @@ class TroughPhysical(object):
 		timestep_load_fractions = tuple
 		weekday_schedule = tuple
 		weekend_schedule = tuple
-		wlim_series = tuple
-
-
-	class SystemControl(object):
-		def assign(self): 
-			pass
-	
-		def export(self) -> dict:
-			pass
-	
-		def __init__(self, *args, **kwargs): 
-			pass
-
-
-		disp_csu_cost = float
-		disp_inventory_incentive = float
-		disp_rsu_cost = float
 
 
 	class FinancialModel(object):
@@ -334,6 +319,20 @@ class TroughPhysical(object):
 
 
 		en_electricity_rates = float
+
+
+	class TimeOfDeliveryFactors(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		dispatch_tod_factors = tuple
 
 
 	class Revenue(object):
@@ -415,6 +414,51 @@ class TroughPhysical(object):
 		piping_loss = float
 
 
+	class SolarResourceData(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		lat = float
+
+
+	class CapitalCosts(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		csp_dtr_cost_bop_per_kwe = float
+		csp_dtr_cost_contingency_percent = float
+		csp_dtr_cost_epc_fixed = float
+		csp_dtr_cost_epc_per_acre = float
+		csp_dtr_cost_epc_per_watt = float
+		csp_dtr_cost_epc_percent = float
+		csp_dtr_cost_fossil_backup_cost_per_kwe = float
+		csp_dtr_cost_htf_system_cost_per_m2 = float
+		csp_dtr_cost_plm_fixed = float
+		csp_dtr_cost_plm_per_acre = float
+		csp_dtr_cost_plm_per_watt = float
+		csp_dtr_cost_plm_percent = float
+		csp_dtr_cost_power_plant_cost_per_kwe = float
+		csp_dtr_cost_sales_tax_percent = float
+		csp_dtr_cost_site_improvements_cost_per_m2 = float
+		csp_dtr_cost_solar_field_cost_per_m2 = float
+		csp_dtr_cost_storage_cost_per_kwht = float
+		sales_tax_rate = float
+
+
 	class AdjustmentFactors(object):
 		def assign(self): 
 			pass
@@ -447,15 +491,20 @@ class TroughPhysical(object):
 
 
 		CosTh_ave = tuple
+		D_cpnt = tuple
 		EndLoss_ave = tuple
 		EqOpteff = tuple
 		IAM_ave = tuple
+		K_cpnt = tuple
+		L_cpnt = tuple
 		P_cooling_tower_tot = tuple
 		P_cycle = tuple
 		P_fixed = tuple
 		P_out_net = tuple
 		P_plant_balance_tot = tuple
 		RowShadow_ave = tuple
+		SCADefocusArray = tuple
+		SCAInfoArray = tuple
 		SCAs_def = tuple
 		T_field_cold_in = tuple
 		T_field_hot_out = tuple
@@ -466,6 +515,8 @@ class TroughPhysical(object):
 		T_tes_cold = tuple
 		T_tes_hot = tuple
 		Theta_ave = tuple
+		Type_cpnt = tuple
+		V_tank_hot_ini = float
 		W_dot_field_pump = tuple
 		W_dot_sca_track = tuple
 		annual_W_cycle_gross = float
@@ -474,13 +525,42 @@ class TroughPhysical(object):
 		annual_tes_freeze_protection = float
 		annual_thermal_consumption = float
 		annual_total_water_use = float
+		aux_design = float
 		avg_suboptimal_rel_mip_gap = float
 		beam = tuple
+		bop_design = float
 		capacity_factor = float
 		conversion_factor = float
+		csp_dtr_cost_bop = float
+		csp_dtr_cost_contingency = float
+		csp_dtr_cost_epc_total = float
+		csp_dtr_cost_fossil_backup = float
+		csp_dtr_cost_htf_system = float
+		csp_dtr_cost_installed_per_capacity = float
+		csp_dtr_cost_plm_total = float
+		csp_dtr_cost_power_plant = float
+		csp_dtr_cost_sales_tax_total = float
+		csp_dtr_cost_site_improvements = float
+		csp_dtr_cost_solar_field = float
+		csp_dtr_cost_storage = float
+		csp_dtr_hce_design_heat_losses = tuple
+		csp_dtr_hce_optical_effs = tuple
+		csp_dtr_loop_hce_heat_loss = float
+		csp_dtr_sca_ap_lengths = tuple
+		csp_dtr_sca_calc_costh = float
+		csp_dtr_sca_calc_end_gains = tuple
+		csp_dtr_sca_calc_end_losses = tuple
+		csp_dtr_sca_calc_iams = tuple
+		csp_dtr_sca_calc_latitude = float
+		csp_dtr_sca_calc_sca_effs = tuple
+		csp_dtr_sca_calc_theta = float
+		csp_dtr_sca_calc_zenith = float
+		csp_pt_tes_htf_density = float
+		csp_pt_tes_tank_diameter = float
 		cycle_htf_pump_power = tuple
 		defocus = tuple
 		deltaP_field = tuple
+		direct_subtotal = float
 		disp_obj_relax = tuple
 		disp_objective = tuple
 		disp_pceff_expected = tuple
@@ -498,17 +578,26 @@ class TroughPhysical(object):
 		disp_subopt_flag = tuple
 		disp_tes_expected = tuple
 		disp_thermeff_expected = tuple
+		disp_wlim_max = float
 		disp_wpb_expected = tuple
 		dni_costh = tuple
 		e_ch_tes = tuple
 		e_dot_field_int_energy = tuple
 		eta = tuple
+		field_htf_cp_avg_des = float
+		field_htf_max_temp = float
+		field_htf_min_temp = float
+		field_thermal_output = float
+		fixed_land_area = float
 		gen = tuple
 		hour_day = tuple
+		is_hx = float
 		is_pc_sb_allowed = tuple
 		is_pc_su_allowed = tuple
 		is_rec_su_allowed = tuple
+		is_wlim_series = float
 		kwh_per_kw = float
+		loop_optical_efficiency = float
 		m_dot_balance = tuple
 		m_dot_cold_tank_to_hot_tank = tuple
 		m_dot_cr_to_tes_hot = tuple
@@ -516,6 +605,7 @@ class TroughPhysical(object):
 		m_dot_field_delivered = tuple
 		m_dot_field_recirc = tuple
 		m_dot_field_to_cycle = tuple
+		m_dot_htf_cycle_des = float
 		m_dot_loop = tuple
 		m_dot_pc = tuple
 		m_dot_pc_to_tes_cold = tuple
@@ -524,9 +614,14 @@ class TroughPhysical(object):
 		m_dot_water_pc = tuple
 		mass_tes_cold = tuple
 		mass_tes_hot = tuple
+		max_field_flow_velocity = float
+		min_field_flow_velocity = float
+		min_inner_diameter = float
 		month = tuple
 		monthly_energy = tuple
+		nLoops = float
 		n_op_modes = tuple
+		nameplate = float
 		op_mode_1 = tuple
 		op_mode_2 = tuple
 		op_mode_3 = tuple
@@ -563,6 +658,7 @@ class TroughPhysical(object):
 		q_balance = tuple
 		q_ch_tes = tuple
 		q_dc_tes = tuple
+		q_dot_cycle_des = float
 		q_dot_est_cr_on = tuple
 		q_dot_est_cr_su = tuple
 		q_dot_est_tes_ch = tuple
@@ -578,23 +674,42 @@ class TroughPhysical(object):
 		q_dot_rec_abs = tuple
 		q_dot_rec_inc = tuple
 		q_dot_rec_thermal_loss = tuple
+		q_dot_tes_est = float
 		q_inc_sf_tot = tuple
 		q_pb = tuple
 		q_pc_startup = tuple
+		q_tes = float
 		q_tes_heater = tuple
 		qinc_costh = tuple
 		recirculating = tuple
+		required_number_of_loops_for_SM1 = float
 		rh = tuple
 		sim_duration = float
-		solar_multiple_actual = float
+		single_loop_aperture = float
+		solar_mult = float
 		solazi = tuple
 		solzen = tuple
 		tank_losses = tuple
 		tdry = tuple
+		tes_avail_vol = float
+		tes_htf_avg_temp = float
+		tes_htf_max_temp = float
+		tes_htf_min_temp = float
 		tes_htf_pump_power = tuple
 		time_hr = tuple
+		total_aperture = float
+		total_direct_cost = float
+		total_indirect_cost = float
+		total_installed_cost = float
+		total_land_area = float
+		total_loop_conversion_efficiency = float
+		total_required_aperture_for_SM1 = float
+		total_tracking_power = float
 		tou_value = tuple
 		twet = tuple
+		vol_min = float
+		vol_tank = float
+		wlim_series = tuple
 		wspd = tuple
 
 

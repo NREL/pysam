@@ -33,16 +33,16 @@ MHKWave Group
 .. autoclass:: PySAM.MhkWave.MhkWave.MHKWave
 	:members:
 
-Lifetime Group
----------------
-
-.. autoclass:: PySAM.MhkWave.MhkWave.Lifetime
-	:members:
-
 AdjustmentFactors Group
 ------------------------
 
 .. autoclass:: PySAM.MhkWave.MhkWave.AdjustmentFactors
+	:members:
+
+Lifetime Group
+---------------
+
+.. autoclass:: PySAM.MhkWave.MhkWave.Lifetime
 	:members:
 
 Outputs Group

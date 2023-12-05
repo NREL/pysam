@@ -1400,6 +1400,18 @@ Outputs_get_monthly_system_to_load(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
+Outputs_get_num_ts_load_met_by_system_lifetime(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Battwatts_Outputs_num_ts_load_met_by_system_lifetime_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_num_ts_load_met_by_system_yr1(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Battwatts_Outputs_num_ts_load_met_by_system_yr1_nget, self->data_ptr);
+}
+
+static PyObject *
 Outputs_get_outage_durations(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Battwatts_Outputs_outage_durations_aget, self->data_ptr);
@@ -1415,6 +1427,18 @@ static PyObject *
 Outputs_get_pdf_of_surviving(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_Battwatts_Outputs_pdf_of_surviving_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_percent_ts_load_met_by_system_lifetime(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Battwatts_Outputs_percent_ts_load_met_by_system_lifetime_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_percent_ts_load_met_by_system_yr1(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_Battwatts_Outputs_percent_ts_load_met_by_system_yr1_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -1739,6 +1763,12 @@ static PyGetSetDef Outputs_getset[] = {
 {"monthly_system_to_load", (getter)Outputs_get_monthly_system_to_load,(setter)0,
 	PyDoc_STR("*sequence*: Energy to load from system [kWh]"),
  	NULL},
+{"num_ts_load_met_by_system_lifetime", (getter)Outputs_get_num_ts_load_met_by_system_lifetime,(setter)0,
+	PyDoc_STR("*float*: Number of timesteps electric load met by system (lifetime)"),
+ 	NULL},
+{"num_ts_load_met_by_system_yr1", (getter)Outputs_get_num_ts_load_met_by_system_yr1,(setter)0,
+	PyDoc_STR("*float*: Number of timesteps electric load met by system (year 1)"),
+ 	NULL},
 {"outage_durations", (getter)Outputs_get_outage_durations,(setter)0,
 	PyDoc_STR("*sequence*: Hours of autonomy during grid outage hour list from min to max [hr]"),
  	NULL},
@@ -1747,6 +1777,12 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"pdf_of_surviving", (getter)Outputs_get_pdf_of_surviving,(setter)0,
 	PyDoc_STR("*sequence*: Hours of autonomy during grid outage probabilities"),
+ 	NULL},
+{"percent_ts_load_met_by_system_lifetime", (getter)Outputs_get_percent_ts_load_met_by_system_lifetime,(setter)0,
+	PyDoc_STR("*float*: Percent of timesteps electric load met by system (lifetime)"),
+ 	NULL},
+{"percent_ts_load_met_by_system_yr1", (getter)Outputs_get_percent_ts_load_met_by_system_yr1,(setter)0,
+	PyDoc_STR("*float*: Percent of timesteps electric load met by system (year 1)"),
  	NULL},
 {"resilience_hrs", (getter)Outputs_get_resilience_hrs,(setter)0,
 	PyDoc_STR("*sequence*: Hours of autonomy during grid outage at each timestep [hr]"),
@@ -1878,6 +1914,14 @@ Battwatts_dealloc(CmodObject *self)
 
 
 static PyObject *
+Battwatts_get_data_ptr(CmodObject *self, PyObject *args)
+{
+	PyObject* ptr = PyLong_FromVoidPtr((void*)self->data_ptr);
+	return ptr;
+}
+
+
+static PyObject *
 Battwatts_execute(CmodObject *self, PyObject *args)
 {
 	int verbosity = 0;
@@ -1944,6 +1988,8 @@ Battwatts_unassign(CmodObject *self, PyObject *args)
 static PyMethodDef Battwatts_methods[] = {
 		{"execute",           (PyCFunction)Battwatts_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
+		{"get_data_ptr",           (PyCFunction)Battwatts_get_data_ptr,  METH_VARARGS,
+				PyDoc_STR("execute(int verbosity) -> Pointer\n Get ssc_data_t pointer")},
 		{"assign",            (PyCFunction)Battwatts_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Lifetime': { var: val, ...}, ...}``")},
 		{"replace",            (PyCFunction)Battwatts_replace,  METH_VARARGS,

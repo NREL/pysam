@@ -44,6 +44,8 @@ class MhkTidal(object):
 		system_capacity = float
 		tidal_power_curve = tuple
 		tidal_resource = tuple
+		tidal_resource_model_choice = float
+		tidal_velocity = tuple
 		total_operating_cost = float
 
 
@@ -64,6 +66,7 @@ class MhkTidal(object):
 		capacity_factor = float
 		device_average_power = float
 		device_rated_capacity = float
+		gen = tuple
 		tidal_power_end_velocity = float
 		tidal_power_start_velocity = float
 		tidal_resource_end_velocity = float

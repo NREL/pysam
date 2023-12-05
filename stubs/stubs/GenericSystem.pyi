@@ -91,6 +91,14 @@ class GenericSystem(object):
 		annual_energy_distribution_time = tuple
 		annual_fuel_usage = float
 		capacity_factor = float
+		cf_battery_replacement_cost_schedule = tuple
+		cf_energy_net = tuple
+		cf_fuelcell_replacement_cost_schedule = tuple
+		cf_om_capacity = tuple
+		cf_om_fixed = tuple
+		cf_om_fuel_cost = tuple
+		cf_om_land_lease = tuple
+		cf_om_production = tuple
 		gen = tuple
 		kwh_per_kw = float
 		monthly_energy = tuple

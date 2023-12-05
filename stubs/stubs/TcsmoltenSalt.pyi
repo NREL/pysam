@@ -136,6 +136,75 @@ class TcsmoltenSalt(object):
 		tshours = float
 
 
+	class TowerAndReceiver(object):
+		def assign(self): 
+			pass
+	
+		def export(self) -> dict:
+			pass
+	
+		def __init__(self, *args, **kwargs): 
+			pass
+
+
+		D_rec = float
+		Flow_type = float
+		N_panels = float
+		W_dot_pb_pump_target = float
+		W_dot_rec_target = float
+		cav_rec_height = float
+		cav_rec_passive_abs = float
+		cav_rec_passive_eps = float
+		cav_rec_span = float
+		cav_rec_width = float
+		crossover_shift = float
+		csp_pt_rec_max_oper_frac = float
+		d_tube_out = float
+		delta_flux_hrs = float
+		downc_tm_mult = float
+		epsilon = float
+		eta_pump = float
+		f_rec_min = float
+		field_fl_props = tuple
+		flux_max = float
+		h_tower = float
+		heat_trace_power = float
+		hl_ffact = float
+		is_calc_od_tube = float
+		is_calc_pb_pump_coef = float
+		is_calc_sm = float
+		is_rec_enforce_min_startup = float
+		is_rec_model_trans = float
+		is_rec_startup_from_T_soln = float
+		is_rec_startup_trans = float
+		mat_tube = float
+		min_fill_time = float
+		min_preheat_time = float
+		n_cav_rec_panels = float
+		n_flux_days = float
+		piping_length_const = float
+		piping_length_mult = float
+		piping_loss_coefficient = float
+		preheat_flux = float
+		q_dot_rec_des_target = float
+		rec_absorptance = float
+		rec_clearsky_dni = tuple
+		rec_clearsky_fraction = float
+		rec_clearsky_model = float
+		rec_height = float
+		rec_hl_perm2 = float
+		rec_htf = float
+		rec_qf_delay = float
+		rec_su_delay = float
+		rec_tm_mult = float
+		riser_tm_mult = float
+		startup_ramp_time = float
+		startup_target_Tdiff = float
+		th_riser = float
+		th_tube = float
+		u_riser = float
+
+
 	class HeliostatField(object):
 		def assign(self): 
 			pass
@@ -191,69 +260,6 @@ class TcsmoltenSalt(object):
 		v_wind_max = float
 		washing_frequency = float
 		water_usage_per_wash = float
-
-
-	class TowerAndReceiver(object):
-		def assign(self): 
-			pass
-	
-		def export(self) -> dict:
-			pass
-	
-		def __init__(self, *args, **kwargs): 
-			pass
-
-
-		D_rec = float
-		Flow_type = float
-		N_panels = float
-		cav_rec_height = float
-		cav_rec_passive_abs = float
-		cav_rec_passive_eps = float
-		cav_rec_span = float
-		cav_rec_width = float
-		crossover_shift = float
-		csp_pt_rec_max_oper_frac = float
-		d_tube_out = float
-		delta_flux_hrs = float
-		downc_tm_mult = float
-		epsilon = float
-		eta_pump = float
-		f_rec_min = float
-		field_fl_props = tuple
-		flux_max = float
-		h_tower = float
-		heat_trace_power = float
-		hl_ffact = float
-		is_rec_enforce_min_startup = float
-		is_rec_model_trans = float
-		is_rec_startup_from_T_soln = float
-		is_rec_startup_trans = float
-		mat_tube = float
-		min_fill_time = float
-		min_preheat_time = float
-		n_cav_rec_panels = float
-		n_flux_days = float
-		piping_length_const = float
-		piping_length_mult = float
-		piping_loss_coefficient = float
-		preheat_flux = float
-		rec_absorptance = float
-		rec_clearsky_dni = tuple
-		rec_clearsky_fraction = float
-		rec_clearsky_model = float
-		rec_height = float
-		rec_hl_perm2 = float
-		rec_htf = float
-		rec_qf_delay = float
-		rec_su_delay = float
-		rec_tm_mult = float
-		riser_tm_mult = float
-		startup_ramp_time = float
-		startup_target_Tdiff = float
-		th_riser = float
-		th_tube = float
-		u_riser = float
 
 
 	class ParallelHeater(object):
@@ -434,7 +440,9 @@ class TcsmoltenSalt(object):
 
 		ud_f_W_dot_cool_des = float
 		ud_ind_od = tuple
+		ud_is_sco2_regr = float
 		ud_m_dot_water_cool_des = float
+		use_net_cycle_output_as_capacity = float
 
 
 	class TimeOfDeliveryFactors(object):
@@ -448,18 +456,10 @@ class TcsmoltenSalt(object):
 			pass
 
 
-		dispatch_factor1 = float
-		dispatch_factor2 = float
-		dispatch_factor3 = float
-		dispatch_factor4 = float
-		dispatch_factor5 = float
-		dispatch_factor6 = float
-		dispatch_factor7 = float
-		dispatch_factor8 = float
-		dispatch_factor9 = float
 		dispatch_factors_ts = tuple
 		dispatch_sched_weekday = tuple
 		dispatch_sched_weekend = tuple
+		dispatch_tod_factors = tuple
 		ppa_multiplier_model = float
 
 
@@ -650,13 +650,21 @@ class TcsmoltenSalt(object):
 		W_dot_rec_pump_des = float
 		W_dot_rec_pump_rec_share_des = float
 		W_dot_rec_pump_tower_share_des = float
+		all_hours_electricity_sales = float
+		all_hours_revenue_fraction = float
+		annual_E_tower_pump = float
 		annual_W_cooling_tower = float
 		annual_W_cycle_gross = float
 		annual_energy = float
+		annual_energy_distribution_time = tuple
 		annual_eta_rec_th = float
 		annual_eta_rec_th_incl_refl = float
+		annual_q_defocus_est = float
+		annual_q_piping_loss = float
+		annual_q_rec_htf = float
 		annual_q_rec_inc = float
 		annual_q_rec_loss = float
+		annual_q_rec_startup = float
 		annual_total_water_use = float
 		average_attenuation = float
 		avg_suboptimal_rel_mip_gap = float
@@ -664,6 +672,7 @@ class TcsmoltenSalt(object):
 		capacity_factor = float
 		capacity_factor_highest_1000_ppas = float
 		capacity_factor_highest_2000_ppas = float
+		capacity_factor_warmest_100_Tambs = float
 		cav_panel_width = float
 		cav_radius = float
 		cav_rec_area = float
@@ -752,6 +761,8 @@ class TcsmoltenSalt(object):
 		heater_cost = float
 		helio_positions_calc = tuple
 		heliostat_area = float
+		hot_hours_electricity_sales = float
+		hot_hours_revenue_fraction = float
 		is_PAR_HTR_allowed = tuple
 		is_pc_sb_allowed = tuple
 		is_pc_su_allowed = tuple
@@ -787,6 +798,7 @@ class TcsmoltenSalt(object):
 		n_m_dot_pars_calc = float
 		n_op_modes = tuple
 		nameplate = float
+		od_tube_calc = float
 		op_mode_1 = tuple
 		op_mode_2 = tuple
 		op_mode_3 = tuple
@@ -832,6 +844,7 @@ class TcsmoltenSalt(object):
 		sales_energy_capacity_factor = float
 		sf_adjust_out = tuple
 		sim_cpu_run_time = float
+		solar_mult_calc = float
 		solaz = tuple
 		solzen = tuple
 		system_capacity = float

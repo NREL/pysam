@@ -1,6 +1,3 @@
-:doc:`../modules/Annualoutput` (HD)
-      Annual Output
-
 :doc:`../modules/Battery`
       Battery storage standalone model .
 

@@ -78,6 +78,54 @@ static PyMethodDef Revenue_methods[] = {
 };
 
 static PyObject *
+Revenue_get_dispatch_factors_ts(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_HostDeveloper_Revenue_dispatch_factors_ts_aget, self->data_ptr);
+}
+
+static int
+Revenue_set_dispatch_factors_ts(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_HostDeveloper_Revenue_dispatch_factors_ts_aset, self->data_ptr);
+}
+
+static PyObject *
+Revenue_get_dispatch_sched_weekday(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_HostDeveloper_Revenue_dispatch_sched_weekday_mget, self->data_ptr);
+}
+
+static int
+Revenue_set_dispatch_sched_weekday(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_HostDeveloper_Revenue_dispatch_sched_weekday_mset, self->data_ptr);
+}
+
+static PyObject *
+Revenue_get_dispatch_sched_weekend(VarGroupObject *self, void *closure)
+{
+	return PySAM_matrix_getter(SAM_HostDeveloper_Revenue_dispatch_sched_weekend_mget, self->data_ptr);
+}
+
+static int
+Revenue_set_dispatch_sched_weekend(VarGroupObject *self, PyObject *value, void *closure)
+{
+		return PySAM_matrix_setter(value, SAM_HostDeveloper_Revenue_dispatch_sched_weekend_mset, self->data_ptr);
+}
+
+static PyObject *
+Revenue_get_dispatch_tod_factors(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_HostDeveloper_Revenue_dispatch_tod_factors_aget, self->data_ptr);
+}
+
+static int
+Revenue_set_dispatch_tod_factors(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_HostDeveloper_Revenue_dispatch_tod_factors_aset, self->data_ptr);
+}
+
+static PyObject *
 Revenue_get_flip_target_percent(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_HostDeveloper_Revenue_flip_target_percent_nget, self->data_ptr);
@@ -111,6 +159,18 @@ static int
 Revenue_set_ppa_escalation(VarGroupObject *self, PyObject *value, void *closure)
 {
 	return PySAM_double_setter(value, SAM_HostDeveloper_Revenue_ppa_escalation_nset, self->data_ptr);
+}
+
+static PyObject *
+Revenue_get_ppa_multiplier_model(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_HostDeveloper_Revenue_ppa_multiplier_model_nget, self->data_ptr);
+}
+
+static int
+Revenue_set_ppa_multiplier_model(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_HostDeveloper_Revenue_ppa_multiplier_model_nset, self->data_ptr);
 }
 
 static PyObject *
@@ -186,6 +246,18 @@ Revenue_set_ppa_soln_tolerance(VarGroupObject *self, PyObject *value, void *clos
 }
 
 static PyGetSetDef Revenue_getset[] = {
+{"dispatch_factors_ts", (getter)Revenue_get_dispatch_factors_ts,(setter)Revenue_set_dispatch_factors_ts,
+	PyDoc_STR("*sequence*: Dispatch payment factor array\n\n**Required:**\nRequired if ppa_multiplier_model=1"),
+ 	NULL},
+{"dispatch_sched_weekday", (getter)Revenue_get_dispatch_sched_weekday,(setter)Revenue_set_dispatch_sched_weekday,
+	PyDoc_STR("*sequence[sequence]*: Diurnal weekday TOD periods [1..9]\n\n**Info:**\n12 x 24 matrix\n\n**Required:**\nRequired if ppa_multiplier_model=0"),
+ 	NULL},
+{"dispatch_sched_weekend", (getter)Revenue_get_dispatch_sched_weekend,(setter)Revenue_set_dispatch_sched_weekend,
+	PyDoc_STR("*sequence[sequence]*: Diurnal weekend TOD periods [1..9]\n\n**Info:**\n12 x 24 matrix\n\n**Required:**\nRequired if ppa_multiplier_model=0"),
+ 	NULL},
+{"dispatch_tod_factors", (getter)Revenue_get_dispatch_tod_factors,(setter)Revenue_set_dispatch_tod_factors,
+	PyDoc_STR("*sequence*: TOD factors for periods 1 through 9\n\n**Required:**\nRequired if ppa_multiplier_model=0"),
+ 	NULL},
 {"flip_target_percent", (getter)Revenue_get_flip_target_percent,(setter)Revenue_set_flip_target_percent,
 	PyDoc_STR("*float*: After-tax IRR target [%]\n\n**Constraints:**\nMIN=0,MAX=100\n\n**Required:**\nFalse. Automatically set to 11 if not assigned explicitly or loaded from defaults."),
  	NULL},
@@ -194,6 +266,9 @@ static PyGetSetDef Revenue_getset[] = {
  	NULL},
 {"ppa_escalation", (getter)Revenue_get_ppa_escalation,(setter)Revenue_set_ppa_escalation,
 	PyDoc_STR("*float*: PPA escalation rate [%/year]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"ppa_multiplier_model", (getter)Revenue_get_ppa_multiplier_model,(setter)Revenue_set_ppa_multiplier_model,
+	PyDoc_STR("*float*: PPA multiplier model [0/1]\n\n**Options:**\n0=diurnal,1=timestep\n\n**Constraints:**\nINTEGER,MIN=0\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"ppa_price_input", (getter)Revenue_get_ppa_price_input,(setter)Revenue_set_ppa_price_input,
 	PyDoc_STR("*sequence*: PPA price in first year input [$/kWh]\n\n**Required:**\nTrue"),
@@ -1018,18 +1093,6 @@ SystemCosts_set_annual_fuel_usage_lifetime(VarGroupObject *self, PyObject *value
 }
 
 static PyObject *
-SystemCosts_get_fuelcell_annual_energy_discharged(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_HostDeveloper_SystemCosts_fuelcell_annual_energy_discharged_aget, self->data_ptr);
-}
-
-static int
-SystemCosts_set_fuelcell_annual_energy_discharged(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_HostDeveloper_SystemCosts_fuelcell_annual_energy_discharged_aset, self->data_ptr);
-}
-
-static PyObject *
 SystemCosts_get_om_batt_capacity_cost(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_HostDeveloper_SystemCosts_om_batt_capacity_cost_aget, self->data_ptr);
@@ -1374,9 +1437,6 @@ static PyGetSetDef SystemCosts_getset[] = {
  	NULL},
 {"annual_fuel_usage_lifetime", (getter)SystemCosts_get_annual_fuel_usage_lifetime,(setter)SystemCosts_set_annual_fuel_usage_lifetime,
 	PyDoc_STR("*sequence*: Fuel usage (lifetime) [kWht]"),
- 	NULL},
-{"fuelcell_annual_energy_discharged", (getter)SystemCosts_get_fuelcell_annual_energy_discharged,(setter)SystemCosts_set_fuelcell_annual_energy_discharged,
-	PyDoc_STR("*sequence*: Fuel cell annual energy discharged [kWh]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"om_batt_capacity_cost", (getter)SystemCosts_get_om_batt_capacity_cost,(setter)SystemCosts_set_om_batt_capacity_cost,
 	PyDoc_STR("*sequence*: Battery capacity-based System Costs amount [$/kWcap]\n\n**Required:**\nFalse. Automatically set to 0.0 if not assigned explicitly or loaded from defaults."),
@@ -5052,7 +5112,7 @@ static PyGetSetDef SystemOutput_getset[] = {
 	PyDoc_STR("*sequence*: Energy value [$]"),
  	NULL},
 {"degradation", (getter)SystemOutput_get_degradation,(setter)SystemOutput_set_degradation,
-	PyDoc_STR("*sequence*: Annual energy degradation\n\n**Required:**\nTrue"),
+	PyDoc_STR("*sequence*: Annual energy degradation\n\n**Required:**\nRequired if system_use_lifetime_output=0"),
  	NULL},
 {"gen", (getter)SystemOutput_get_gen,(setter)SystemOutput_set_gen,
 	PyDoc_STR("*sequence*: Power generated by renewable resource [kW]\n\n**Required:**\nTrue"),
@@ -5504,162 +5564,6 @@ static PyMethodDef TimeOfDelivery_methods[] = {
 };
 
 static PyObject *
-TimeOfDelivery_get_dispatch_factor1(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_HostDeveloper_TimeOfDelivery_dispatch_factor1_nget, self->data_ptr);
-}
-
-static int
-TimeOfDelivery_set_dispatch_factor1(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_HostDeveloper_TimeOfDelivery_dispatch_factor1_nset, self->data_ptr);
-}
-
-static PyObject *
-TimeOfDelivery_get_dispatch_factor2(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_HostDeveloper_TimeOfDelivery_dispatch_factor2_nget, self->data_ptr);
-}
-
-static int
-TimeOfDelivery_set_dispatch_factor2(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_HostDeveloper_TimeOfDelivery_dispatch_factor2_nset, self->data_ptr);
-}
-
-static PyObject *
-TimeOfDelivery_get_dispatch_factor3(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_HostDeveloper_TimeOfDelivery_dispatch_factor3_nget, self->data_ptr);
-}
-
-static int
-TimeOfDelivery_set_dispatch_factor3(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_HostDeveloper_TimeOfDelivery_dispatch_factor3_nset, self->data_ptr);
-}
-
-static PyObject *
-TimeOfDelivery_get_dispatch_factor4(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_HostDeveloper_TimeOfDelivery_dispatch_factor4_nget, self->data_ptr);
-}
-
-static int
-TimeOfDelivery_set_dispatch_factor4(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_HostDeveloper_TimeOfDelivery_dispatch_factor4_nset, self->data_ptr);
-}
-
-static PyObject *
-TimeOfDelivery_get_dispatch_factor5(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_HostDeveloper_TimeOfDelivery_dispatch_factor5_nget, self->data_ptr);
-}
-
-static int
-TimeOfDelivery_set_dispatch_factor5(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_HostDeveloper_TimeOfDelivery_dispatch_factor5_nset, self->data_ptr);
-}
-
-static PyObject *
-TimeOfDelivery_get_dispatch_factor6(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_HostDeveloper_TimeOfDelivery_dispatch_factor6_nget, self->data_ptr);
-}
-
-static int
-TimeOfDelivery_set_dispatch_factor6(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_HostDeveloper_TimeOfDelivery_dispatch_factor6_nset, self->data_ptr);
-}
-
-static PyObject *
-TimeOfDelivery_get_dispatch_factor7(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_HostDeveloper_TimeOfDelivery_dispatch_factor7_nget, self->data_ptr);
-}
-
-static int
-TimeOfDelivery_set_dispatch_factor7(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_HostDeveloper_TimeOfDelivery_dispatch_factor7_nset, self->data_ptr);
-}
-
-static PyObject *
-TimeOfDelivery_get_dispatch_factor8(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_HostDeveloper_TimeOfDelivery_dispatch_factor8_nget, self->data_ptr);
-}
-
-static int
-TimeOfDelivery_set_dispatch_factor8(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_HostDeveloper_TimeOfDelivery_dispatch_factor8_nset, self->data_ptr);
-}
-
-static PyObject *
-TimeOfDelivery_get_dispatch_factor9(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_HostDeveloper_TimeOfDelivery_dispatch_factor9_nget, self->data_ptr);
-}
-
-static int
-TimeOfDelivery_set_dispatch_factor9(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_HostDeveloper_TimeOfDelivery_dispatch_factor9_nset, self->data_ptr);
-}
-
-static PyObject *
-TimeOfDelivery_get_dispatch_factors_ts(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_HostDeveloper_TimeOfDelivery_dispatch_factors_ts_aget, self->data_ptr);
-}
-
-static int
-TimeOfDelivery_set_dispatch_factors_ts(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_array_setter(value, SAM_HostDeveloper_TimeOfDelivery_dispatch_factors_ts_aset, self->data_ptr);
-}
-
-static PyObject *
-TimeOfDelivery_get_dispatch_sched_weekday(VarGroupObject *self, void *closure)
-{
-	return PySAM_matrix_getter(SAM_HostDeveloper_TimeOfDelivery_dispatch_sched_weekday_mget, self->data_ptr);
-}
-
-static int
-TimeOfDelivery_set_dispatch_sched_weekday(VarGroupObject *self, PyObject *value, void *closure)
-{
-		return PySAM_matrix_setter(value, SAM_HostDeveloper_TimeOfDelivery_dispatch_sched_weekday_mset, self->data_ptr);
-}
-
-static PyObject *
-TimeOfDelivery_get_dispatch_sched_weekend(VarGroupObject *self, void *closure)
-{
-	return PySAM_matrix_getter(SAM_HostDeveloper_TimeOfDelivery_dispatch_sched_weekend_mget, self->data_ptr);
-}
-
-static int
-TimeOfDelivery_set_dispatch_sched_weekend(VarGroupObject *self, PyObject *value, void *closure)
-{
-		return PySAM_matrix_setter(value, SAM_HostDeveloper_TimeOfDelivery_dispatch_sched_weekend_mset, self->data_ptr);
-}
-
-static PyObject *
-TimeOfDelivery_get_ppa_multiplier_model(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_HostDeveloper_TimeOfDelivery_ppa_multiplier_model_nget, self->data_ptr);
-}
-
-static int
-TimeOfDelivery_set_ppa_multiplier_model(VarGroupObject *self, PyObject *value, void *closure)
-{
-	return PySAM_double_setter(value, SAM_HostDeveloper_TimeOfDelivery_ppa_multiplier_model_nset, self->data_ptr);
-}
-
-static PyObject *
 TimeOfDelivery_get_system_use_lifetime_output(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_HostDeveloper_TimeOfDelivery_system_use_lifetime_output_nget, self->data_ptr);
@@ -5672,45 +5576,6 @@ TimeOfDelivery_set_system_use_lifetime_output(VarGroupObject *self, PyObject *va
 }
 
 static PyGetSetDef TimeOfDelivery_getset[] = {
-{"dispatch_factor1", (getter)TimeOfDelivery_get_dispatch_factor1,(setter)TimeOfDelivery_set_dispatch_factor1,
-	PyDoc_STR("*float*: TOD factor for period 1\n\n**Required:**\nRequired if ppa_multiplier_model=0"),
- 	NULL},
-{"dispatch_factor2", (getter)TimeOfDelivery_get_dispatch_factor2,(setter)TimeOfDelivery_set_dispatch_factor2,
-	PyDoc_STR("*float*: TOD factor for period 2\n\n**Required:**\nRequired if ppa_multiplier_model=0"),
- 	NULL},
-{"dispatch_factor3", (getter)TimeOfDelivery_get_dispatch_factor3,(setter)TimeOfDelivery_set_dispatch_factor3,
-	PyDoc_STR("*float*: TOD factor for period 3\n\n**Required:**\nRequired if ppa_multiplier_model=0"),
- 	NULL},
-{"dispatch_factor4", (getter)TimeOfDelivery_get_dispatch_factor4,(setter)TimeOfDelivery_set_dispatch_factor4,
-	PyDoc_STR("*float*: TOD factor for period 4\n\n**Required:**\nRequired if ppa_multiplier_model=0"),
- 	NULL},
-{"dispatch_factor5", (getter)TimeOfDelivery_get_dispatch_factor5,(setter)TimeOfDelivery_set_dispatch_factor5,
-	PyDoc_STR("*float*: TOD factor for period 5\n\n**Required:**\nRequired if ppa_multiplier_model=0"),
- 	NULL},
-{"dispatch_factor6", (getter)TimeOfDelivery_get_dispatch_factor6,(setter)TimeOfDelivery_set_dispatch_factor6,
-	PyDoc_STR("*float*: TOD factor for period 6\n\n**Required:**\nRequired if ppa_multiplier_model=0"),
- 	NULL},
-{"dispatch_factor7", (getter)TimeOfDelivery_get_dispatch_factor7,(setter)TimeOfDelivery_set_dispatch_factor7,
-	PyDoc_STR("*float*: TOD factor for period 7\n\n**Required:**\nRequired if ppa_multiplier_model=0"),
- 	NULL},
-{"dispatch_factor8", (getter)TimeOfDelivery_get_dispatch_factor8,(setter)TimeOfDelivery_set_dispatch_factor8,
-	PyDoc_STR("*float*: TOD factor for period 8\n\n**Required:**\nRequired if ppa_multiplier_model=0"),
- 	NULL},
-{"dispatch_factor9", (getter)TimeOfDelivery_get_dispatch_factor9,(setter)TimeOfDelivery_set_dispatch_factor9,
-	PyDoc_STR("*float*: TOD factor for period 9\n\n**Required:**\nRequired if ppa_multiplier_model=0"),
- 	NULL},
-{"dispatch_factors_ts", (getter)TimeOfDelivery_get_dispatch_factors_ts,(setter)TimeOfDelivery_set_dispatch_factors_ts,
-	PyDoc_STR("*sequence*: Dispatch payment factor array\n\n**Required:**\nRequired if ppa_multiplier_model=1"),
- 	NULL},
-{"dispatch_sched_weekday", (getter)TimeOfDelivery_get_dispatch_sched_weekday,(setter)TimeOfDelivery_set_dispatch_sched_weekday,
-	PyDoc_STR("*sequence[sequence]*: Diurnal weekday TOD periods [1..9]\n\n**Info:**\n12 x 24 matrix\n\n**Required:**\nRequired if ppa_multiplier_model=0"),
- 	NULL},
-{"dispatch_sched_weekend", (getter)TimeOfDelivery_get_dispatch_sched_weekend,(setter)TimeOfDelivery_set_dispatch_sched_weekend,
-	PyDoc_STR("*sequence[sequence]*: Diurnal weekend TOD periods [1..9]\n\n**Info:**\n12 x 24 matrix\n\n**Required:**\nRequired if ppa_multiplier_model=0"),
- 	NULL},
-{"ppa_multiplier_model", (getter)TimeOfDelivery_get_ppa_multiplier_model,(setter)TimeOfDelivery_set_ppa_multiplier_model,
-	PyDoc_STR("*float*: PPA multiplier model [0/1]\n\n**Options:**\n0=diurnal,1=timestep\n\n**Constraints:**\nINTEGER,MIN=0\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
- 	NULL},
 {"system_use_lifetime_output", (getter)TimeOfDelivery_get_system_use_lifetime_output,(setter)TimeOfDelivery_set_system_use_lifetime_output,
 	PyDoc_STR("*float*: Lifetime hourly system outputs [0/1]\n\n**Options:**\n0=hourly first year,1=hourly lifetime\n\n**Constraints:**\nINTEGER,MIN=0\n\n**Required:**\nTrue"),
  	NULL},
@@ -6643,6 +6508,462 @@ static PyTypeObject ElectricityRates_Type = {
 
 
 /*
+ * HybridFin Group
+ */ 
+
+static PyTypeObject HybridFin_Type;
+
+static PyObject *
+HybridFin_new(SAM_HostDeveloper data_ptr)
+{
+	PyObject* new_obj = HybridFin_Type.tp_alloc(&HybridFin_Type,0);
+
+	VarGroupObject* HybridFin_obj = (VarGroupObject*)new_obj;
+
+	HybridFin_obj->data_ptr = (SAM_table)data_ptr;
+
+	return new_obj;
+}
+
+/* HybridFin methods */
+
+static PyObject *
+HybridFin_assign(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "HostDeveloper", "HybridFin")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+HybridFin_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &HybridFin_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "HostDeveloper", "HybridFin")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+HybridFin_export(VarGroupObject *self, PyObject *args)
+{
+	PyTypeObject* tp = &HybridFin_Type;
+	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
+	return dict;
+}
+
+static PyMethodDef HybridFin_methods[] = {
+		{"assign",            (PyCFunction)HybridFin_assign,  METH_VARARGS,
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``HybridFin_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)HybridFin_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``HybridFin_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)HybridFin_export,  METH_VARARGS,
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
+		{NULL,              NULL}           /* sentinel */
+};
+
+static PyObject *
+HybridFin_get_cf_hybrid_om_sum(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_HostDeveloper_HybridFin_cf_hybrid_om_sum_aget, self->data_ptr);
+}
+
+static int
+HybridFin_set_cf_hybrid_om_sum(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_HostDeveloper_HybridFin_cf_hybrid_om_sum_aset, self->data_ptr);
+}
+
+static PyObject *
+HybridFin_get_is_hybrid(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_HostDeveloper_HybridFin_is_hybrid_nget, self->data_ptr);
+}
+
+static int
+HybridFin_set_is_hybrid(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_HostDeveloper_HybridFin_is_hybrid_nset, self->data_ptr);
+}
+
+static PyGetSetDef HybridFin_getset[] = {
+{"cf_hybrid_om_sum", (getter)HybridFin_get_cf_hybrid_om_sum,(setter)HybridFin_set_cf_hybrid_om_sum,
+	PyDoc_STR("*sequence*: Hybrid O&M costs [$]"),
+ 	NULL},
+{"is_hybrid", (getter)HybridFin_get_is_hybrid,(setter)HybridFin_set_is_hybrid,
+	PyDoc_STR("*float*: hybrid configuration [0/1]\n\n**Options:**\n0=singletech,1=hybrid\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+	{NULL}  /* Sentinel */
+};
+
+static PyTypeObject HybridFin_Type = {
+		/* The ob_type field must be initialized in the module init function
+		 * to be portable to Windows without using C++. */
+		PyVarObject_HEAD_INIT(NULL, 0)
+		"HostDeveloper.HybridFin",             /*tp_name*/
+		sizeof(VarGroupObject),          /*tp_basicsize*/
+		0,                          /*tp_itemsize*/
+		/* methods */
+		0,    /*tp_dealloc*/
+		0,                          /*tp_print*/
+		(getattrfunc)0,             /*tp_getattr*/
+		0,                          /*tp_setattr*/
+		0,                          /*tp_reserved*/
+		0,                          /*tp_repr*/
+		0,                          /*tp_as_number*/
+		0,                          /*tp_as_sequence*/
+		0,                          /*tp_as_mapping*/
+		0,                          /*tp_hash*/
+		0,                          /*tp_call*/
+		0,                          /*tp_str*/
+		0,                          /*tp_getattro*/
+		0,                          /*tp_setattro*/
+		0,                          /*tp_as_buffer*/
+		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
+		0,                          /*tp_doc*/
+		0,                          /*tp_traverse*/
+		0,                          /*tp_clear*/
+		0,                          /*tp_richcompare*/
+		0,                          /*tp_weaklistofnset*/
+		0,                          /*tp_iter*/
+		0,                          /*tp_iternext*/
+		HybridFin_methods,         /*tp_methods*/
+		0,                          /*tp_members*/
+		HybridFin_getset,          /*tp_getset*/
+		0,                          /*tp_base*/
+		0,                          /*tp_dict*/
+		0,                          /*tp_descr_get*/
+		0,                          /*tp_descr_set*/
+		0,                          /*tp_dictofnset*/
+		0,                          /*tp_init*/
+		0,                          /*tp_alloc*/
+		0,             /*tp_new*/
+		0,                          /*tp_free*/
+		0,                          /*tp_is_gc*/
+};
+
+
+/*
+ * Monthly Group
+ */ 
+
+static PyTypeObject Monthly_Type;
+
+static PyObject *
+Monthly_new(SAM_HostDeveloper data_ptr)
+{
+	PyObject* new_obj = Monthly_Type.tp_alloc(&Monthly_Type,0);
+
+	VarGroupObject* Monthly_obj = (VarGroupObject*)new_obj;
+
+	Monthly_obj->data_ptr = (SAM_table)data_ptr;
+
+	return new_obj;
+}
+
+/* Monthly methods */
+
+static PyObject *
+Monthly_assign(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "HostDeveloper", "Monthly")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+Monthly_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &Monthly_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "HostDeveloper", "Monthly")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+Monthly_export(VarGroupObject *self, PyObject *args)
+{
+	PyTypeObject* tp = &Monthly_Type;
+	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
+	return dict;
+}
+
+static PyMethodDef Monthly_methods[] = {
+		{"assign",            (PyCFunction)Monthly_assign,  METH_VARARGS,
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``Monthly_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)Monthly_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``Monthly_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)Monthly_export,  METH_VARARGS,
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
+		{NULL,              NULL}           /* sentinel */
+};
+
+static PyObject *
+Monthly_get_monthly_energy(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_HostDeveloper_Monthly_monthly_energy_aget, self->data_ptr);
+}
+
+static int
+Monthly_set_monthly_energy(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_HostDeveloper_Monthly_monthly_energy_aset, self->data_ptr);
+}
+
+static PyGetSetDef Monthly_getset[] = {
+{"monthly_energy", (getter)Monthly_get_monthly_energy,(setter)Monthly_set_monthly_energy,
+	PyDoc_STR("*sequence*: Monthly energy [kWh]\n\n**INOUT:** This variable is both an input and an output to the compute module.\n\n**Constraints:**\nLENGTH = 12"),
+ 	NULL},
+	{NULL}  /* Sentinel */
+};
+
+static PyTypeObject Monthly_Type = {
+		/* The ob_type field must be initialized in the module init function
+		 * to be portable to Windows without using C++. */
+		PyVarObject_HEAD_INIT(NULL, 0)
+		"HostDeveloper.Monthly",             /*tp_name*/
+		sizeof(VarGroupObject),          /*tp_basicsize*/
+		0,                          /*tp_itemsize*/
+		/* methods */
+		0,    /*tp_dealloc*/
+		0,                          /*tp_print*/
+		(getattrfunc)0,             /*tp_getattr*/
+		0,                          /*tp_setattr*/
+		0,                          /*tp_reserved*/
+		0,                          /*tp_repr*/
+		0,                          /*tp_as_number*/
+		0,                          /*tp_as_sequence*/
+		0,                          /*tp_as_mapping*/
+		0,                          /*tp_hash*/
+		0,                          /*tp_call*/
+		0,                          /*tp_str*/
+		0,                          /*tp_getattro*/
+		0,                          /*tp_setattro*/
+		0,                          /*tp_as_buffer*/
+		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
+		0,                          /*tp_doc*/
+		0,                          /*tp_traverse*/
+		0,                          /*tp_clear*/
+		0,                          /*tp_richcompare*/
+		0,                          /*tp_weaklistofnset*/
+		0,                          /*tp_iter*/
+		0,                          /*tp_iternext*/
+		Monthly_methods,         /*tp_methods*/
+		0,                          /*tp_members*/
+		Monthly_getset,          /*tp_getset*/
+		0,                          /*tp_base*/
+		0,                          /*tp_dict*/
+		0,                          /*tp_descr_get*/
+		0,                          /*tp_descr_set*/
+		0,                          /*tp_dictofnset*/
+		0,                          /*tp_init*/
+		0,                          /*tp_alloc*/
+		0,             /*tp_new*/
+		0,                          /*tp_free*/
+		0,                          /*tp_is_gc*/
+};
+
+
+/*
+ * FuelCell Group
+ */ 
+
+static PyTypeObject FuelCell_Type;
+
+static PyObject *
+FuelCell_new(SAM_HostDeveloper data_ptr)
+{
+	PyObject* new_obj = FuelCell_Type.tp_alloc(&FuelCell_Type,0);
+
+	VarGroupObject* FuelCell_obj = (VarGroupObject*)new_obj;
+
+	FuelCell_obj->data_ptr = (SAM_table)data_ptr;
+
+	return new_obj;
+}
+
+/* FuelCell methods */
+
+static PyObject *
+FuelCell_assign(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+
+	if (!PySAM_assign_from_dict(self->data_ptr, dict, "HostDeveloper", "FuelCell")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+FuelCell_replace(VarGroupObject *self, PyObject *args)
+{
+	PyObject* dict;
+	if (!PyArg_ParseTuple(args, "O:assign", &dict)){
+		return NULL;
+	}
+	PyTypeObject* tp = &FuelCell_Type;
+
+	if (!PySAM_replace_from_dict(tp, self->data_ptr, dict, "HostDeveloper", "FuelCell")){
+		return NULL;
+	}
+
+	Py_INCREF(Py_None);
+	return Py_None;
+}
+
+static PyObject *
+FuelCell_export(VarGroupObject *self, PyObject *args)
+{
+	PyTypeObject* tp = &FuelCell_Type;
+	PyObject* dict = PySAM_export_to_dict((PyObject *) self, tp);
+	return dict;
+}
+
+static PyMethodDef FuelCell_methods[] = {
+		{"assign",            (PyCFunction)FuelCell_assign,  METH_VARARGS,
+			PyDoc_STR("assign(dict) -> None\n Assign attributes from dictionary, overwriting but not removing values.\n\n``FuelCell_vals = { var: val, ...}``")},
+		{"replace",            (PyCFunction)FuelCell_replace,  METH_VARARGS,
+			PyDoc_STR("replace(dict) -> None\n Replace attributes from dictionary, unassigning values not present in input ``dict``.\n\n``FuelCell_vals = { var: val, ...}``")},
+		{"export",            (PyCFunction)FuelCell_export,  METH_VARARGS,
+			PyDoc_STR("export() -> dict\n Export attributes into dictionary.")},
+		{NULL,              NULL}           /* sentinel */
+};
+
+static PyObject *
+FuelCell_get_annual_fuel_usage_lifetime(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_HostDeveloper_FuelCell_annual_fuel_usage_lifetime_aget, self->data_ptr);
+}
+
+static int
+FuelCell_set_annual_fuel_usage_lifetime(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_HostDeveloper_FuelCell_annual_fuel_usage_lifetime_aset, self->data_ptr);
+}
+
+static PyObject *
+FuelCell_get_fuelcell_annual_energy_discharged(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_HostDeveloper_FuelCell_fuelcell_annual_energy_discharged_aget, self->data_ptr);
+}
+
+static int
+FuelCell_set_fuelcell_annual_energy_discharged(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_HostDeveloper_FuelCell_fuelcell_annual_energy_discharged_aset, self->data_ptr);
+}
+
+static PyObject *
+FuelCell_get_fuelcell_replacement(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_HostDeveloper_FuelCell_fuelcell_replacement_aget, self->data_ptr);
+}
+
+static int
+FuelCell_set_fuelcell_replacement(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_array_setter(value, SAM_HostDeveloper_FuelCell_fuelcell_replacement_aset, self->data_ptr);
+}
+
+static PyGetSetDef FuelCell_getset[] = {
+{"annual_fuel_usage_lifetime", (getter)FuelCell_get_annual_fuel_usage_lifetime,(setter)FuelCell_set_annual_fuel_usage_lifetime,
+	PyDoc_STR("*sequence*: Annual Fuel Usage (lifetime) [kWht]\n\n**INOUT:** This variable is both an input and an output to the compute module."),
+ 	NULL},
+{"fuelcell_annual_energy_discharged", (getter)FuelCell_get_fuelcell_annual_energy_discharged,(setter)FuelCell_set_fuelcell_annual_energy_discharged,
+	PyDoc_STR("*sequence*: Fuel cell annual energy discharged [kWh]\n\n**INOUT:** This variable is both an input and an output to the compute module."),
+ 	NULL},
+{"fuelcell_replacement", (getter)FuelCell_get_fuelcell_replacement,(setter)FuelCell_set_fuelcell_replacement,
+	PyDoc_STR("*sequence*: Fuel cell replacements per year [number/year]\n\n**INOUT:** This variable is both an input and an output to the compute module."),
+ 	NULL},
+	{NULL}  /* Sentinel */
+};
+
+static PyTypeObject FuelCell_Type = {
+		/* The ob_type field must be initialized in the module init function
+		 * to be portable to Windows without using C++. */
+		PyVarObject_HEAD_INIT(NULL, 0)
+		"HostDeveloper.FuelCell",             /*tp_name*/
+		sizeof(VarGroupObject),          /*tp_basicsize*/
+		0,                          /*tp_itemsize*/
+		/* methods */
+		0,    /*tp_dealloc*/
+		0,                          /*tp_print*/
+		(getattrfunc)0,             /*tp_getattr*/
+		0,                          /*tp_setattr*/
+		0,                          /*tp_reserved*/
+		0,                          /*tp_repr*/
+		0,                          /*tp_as_number*/
+		0,                          /*tp_as_sequence*/
+		0,                          /*tp_as_mapping*/
+		0,                          /*tp_hash*/
+		0,                          /*tp_call*/
+		0,                          /*tp_str*/
+		0,                          /*tp_getattro*/
+		0,                          /*tp_setattro*/
+		0,                          /*tp_as_buffer*/
+		Py_TPFLAGS_DEFAULT,         /*tp_flags*/
+		0,                          /*tp_doc*/
+		0,                          /*tp_traverse*/
+		0,                          /*tp_clear*/
+		0,                          /*tp_richcompare*/
+		0,                          /*tp_weaklistofnset*/
+		0,                          /*tp_iter*/
+		0,                          /*tp_iternext*/
+		FuelCell_methods,         /*tp_methods*/
+		0,                          /*tp_members*/
+		FuelCell_getset,          /*tp_getset*/
+		0,                          /*tp_base*/
+		0,                          /*tp_dict*/
+		0,                          /*tp_descr_get*/
+		0,                          /*tp_descr_set*/
+		0,                          /*tp_dictofnset*/
+		0,                          /*tp_init*/
+		0,                          /*tp_alloc*/
+		0,             /*tp_new*/
+		0,                          /*tp_free*/
+		0,                          /*tp_is_gc*/
+};
+
+
+/*
  * Outputs Group
  */ 
 
@@ -6936,186 +7257,6 @@ Outputs_get_cf_energy_net(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_cf_energy_net_apr(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_HostDeveloper_Outputs_cf_energy_net_apr_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_aug(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_HostDeveloper_Outputs_cf_energy_net_aug_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_dec(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_HostDeveloper_Outputs_cf_energy_net_dec_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_dispatch1(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_HostDeveloper_Outputs_cf_energy_net_dispatch1_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_dispatch2(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_HostDeveloper_Outputs_cf_energy_net_dispatch2_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_dispatch3(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_HostDeveloper_Outputs_cf_energy_net_dispatch3_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_dispatch4(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_HostDeveloper_Outputs_cf_energy_net_dispatch4_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_dispatch5(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_HostDeveloper_Outputs_cf_energy_net_dispatch5_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_dispatch6(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_HostDeveloper_Outputs_cf_energy_net_dispatch6_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_dispatch7(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_HostDeveloper_Outputs_cf_energy_net_dispatch7_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_dispatch8(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_HostDeveloper_Outputs_cf_energy_net_dispatch8_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_dispatch9(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_HostDeveloper_Outputs_cf_energy_net_dispatch9_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_feb(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_HostDeveloper_Outputs_cf_energy_net_feb_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_jan(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_HostDeveloper_Outputs_cf_energy_net_jan_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_jul(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_HostDeveloper_Outputs_cf_energy_net_jul_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_jun(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_HostDeveloper_Outputs_cf_energy_net_jun_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_mar(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_HostDeveloper_Outputs_cf_energy_net_mar_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_may(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_HostDeveloper_Outputs_cf_energy_net_may_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_monthly_firstyear_TOD1(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_HostDeveloper_Outputs_cf_energy_net_monthly_firstyear_TOD1_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_monthly_firstyear_TOD2(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_HostDeveloper_Outputs_cf_energy_net_monthly_firstyear_TOD2_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_monthly_firstyear_TOD3(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_HostDeveloper_Outputs_cf_energy_net_monthly_firstyear_TOD3_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_monthly_firstyear_TOD4(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_HostDeveloper_Outputs_cf_energy_net_monthly_firstyear_TOD4_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_monthly_firstyear_TOD5(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_HostDeveloper_Outputs_cf_energy_net_monthly_firstyear_TOD5_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_monthly_firstyear_TOD6(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_HostDeveloper_Outputs_cf_energy_net_monthly_firstyear_TOD6_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_monthly_firstyear_TOD7(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_HostDeveloper_Outputs_cf_energy_net_monthly_firstyear_TOD7_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_monthly_firstyear_TOD8(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_HostDeveloper_Outputs_cf_energy_net_monthly_firstyear_TOD8_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_monthly_firstyear_TOD9(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_HostDeveloper_Outputs_cf_energy_net_monthly_firstyear_TOD9_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_nov(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_HostDeveloper_Outputs_cf_energy_net_nov_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_oct(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_HostDeveloper_Outputs_cf_energy_net_oct_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_energy_net_sep(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_HostDeveloper_Outputs_cf_energy_net_sep_aget, self->data_ptr);
-}
-
-static PyObject *
 Outputs_get_cf_energy_purchases(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_HostDeveloper_Outputs_cf_energy_purchases_aget, self->data_ptr);
@@ -7125,6 +7266,186 @@ static PyObject *
 Outputs_get_cf_energy_sales(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_HostDeveloper_Outputs_cf_energy_sales_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_apr(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_HostDeveloper_Outputs_cf_energy_sales_apr_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_aug(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_HostDeveloper_Outputs_cf_energy_sales_aug_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_dec(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_HostDeveloper_Outputs_cf_energy_sales_dec_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_dispatch1(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_HostDeveloper_Outputs_cf_energy_sales_dispatch1_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_dispatch2(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_HostDeveloper_Outputs_cf_energy_sales_dispatch2_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_dispatch3(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_HostDeveloper_Outputs_cf_energy_sales_dispatch3_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_dispatch4(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_HostDeveloper_Outputs_cf_energy_sales_dispatch4_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_dispatch5(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_HostDeveloper_Outputs_cf_energy_sales_dispatch5_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_dispatch6(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_HostDeveloper_Outputs_cf_energy_sales_dispatch6_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_dispatch7(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_HostDeveloper_Outputs_cf_energy_sales_dispatch7_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_dispatch8(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_HostDeveloper_Outputs_cf_energy_sales_dispatch8_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_dispatch9(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_HostDeveloper_Outputs_cf_energy_sales_dispatch9_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_feb(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_HostDeveloper_Outputs_cf_energy_sales_feb_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_jan(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_HostDeveloper_Outputs_cf_energy_sales_jan_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_jul(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_HostDeveloper_Outputs_cf_energy_sales_jul_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_jun(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_HostDeveloper_Outputs_cf_energy_sales_jun_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_mar(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_HostDeveloper_Outputs_cf_energy_sales_mar_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_may(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_HostDeveloper_Outputs_cf_energy_sales_may_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_monthly_firstyear_TOD1(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_HostDeveloper_Outputs_cf_energy_sales_monthly_firstyear_TOD1_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_monthly_firstyear_TOD2(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_HostDeveloper_Outputs_cf_energy_sales_monthly_firstyear_TOD2_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_monthly_firstyear_TOD3(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_HostDeveloper_Outputs_cf_energy_sales_monthly_firstyear_TOD3_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_monthly_firstyear_TOD4(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_HostDeveloper_Outputs_cf_energy_sales_monthly_firstyear_TOD4_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_monthly_firstyear_TOD5(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_HostDeveloper_Outputs_cf_energy_sales_monthly_firstyear_TOD5_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_monthly_firstyear_TOD6(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_HostDeveloper_Outputs_cf_energy_sales_monthly_firstyear_TOD6_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_monthly_firstyear_TOD7(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_HostDeveloper_Outputs_cf_energy_sales_monthly_firstyear_TOD7_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_monthly_firstyear_TOD8(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_HostDeveloper_Outputs_cf_energy_sales_monthly_firstyear_TOD8_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_monthly_firstyear_TOD9(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_HostDeveloper_Outputs_cf_energy_sales_monthly_firstyear_TOD9_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_nov(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_HostDeveloper_Outputs_cf_energy_sales_nov_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_oct(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_HostDeveloper_Outputs_cf_energy_sales_oct_aget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_cf_energy_sales_sep(VarGroupObject *self, void *closure)
+{
+	return PySAM_array_getter(SAM_HostDeveloper_Outputs_cf_energy_sales_sep_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -7659,12 +7980,6 @@ static PyObject *
 Outputs_get_cf_ptc_sta(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_HostDeveloper_Outputs_cf_ptc_sta_aget, self->data_ptr);
-}
-
-static PyObject *
-Outputs_get_cf_ptc_total(VarGroupObject *self, void *closure)
-{
-	return PySAM_array_getter(SAM_HostDeveloper_Outputs_cf_ptc_total_aget, self->data_ptr);
 }
 
 static PyObject *
@@ -10203,101 +10518,101 @@ static PyGetSetDef Outputs_getset[] = {
 {"cf_energy_net", (getter)Outputs_get_cf_energy_net,(setter)0,
 	PyDoc_STR("*sequence*: Electricity net generation [kWh]"),
  	NULL},
-{"cf_energy_net_apr", (getter)Outputs_get_cf_energy_net_apr,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by the system in April [kWh]"),
- 	NULL},
-{"cf_energy_net_aug", (getter)Outputs_get_cf_energy_net_aug,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by the system in August [kWh]"),
- 	NULL},
-{"cf_energy_net_dec", (getter)Outputs_get_cf_energy_net_dec,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by the system in December [kWh]"),
- 	NULL},
-{"cf_energy_net_dispatch1", (getter)Outputs_get_cf_energy_net_dispatch1,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by the system in TOD period 1 [kWh]"),
- 	NULL},
-{"cf_energy_net_dispatch2", (getter)Outputs_get_cf_energy_net_dispatch2,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by the system in TOD period 2 [kWh]"),
- 	NULL},
-{"cf_energy_net_dispatch3", (getter)Outputs_get_cf_energy_net_dispatch3,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by the system in TOD period 3 [kWh]"),
- 	NULL},
-{"cf_energy_net_dispatch4", (getter)Outputs_get_cf_energy_net_dispatch4,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by the system in TOD period 4 [kWh]"),
- 	NULL},
-{"cf_energy_net_dispatch5", (getter)Outputs_get_cf_energy_net_dispatch5,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by the system in TOD period 5 [kWh]"),
- 	NULL},
-{"cf_energy_net_dispatch6", (getter)Outputs_get_cf_energy_net_dispatch6,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by the system in TOD period 6 [kWh]"),
- 	NULL},
-{"cf_energy_net_dispatch7", (getter)Outputs_get_cf_energy_net_dispatch7,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by the system in TOD period 7 [kWh]"),
- 	NULL},
-{"cf_energy_net_dispatch8", (getter)Outputs_get_cf_energy_net_dispatch8,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by the system in TOD period 8 [kWh]"),
- 	NULL},
-{"cf_energy_net_dispatch9", (getter)Outputs_get_cf_energy_net_dispatch9,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by the system in TOD period 9 [kWh]"),
- 	NULL},
-{"cf_energy_net_feb", (getter)Outputs_get_cf_energy_net_feb,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by the system in February [kWh]"),
- 	NULL},
-{"cf_energy_net_jan", (getter)Outputs_get_cf_energy_net_jan,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by the system in January [kWh]"),
- 	NULL},
-{"cf_energy_net_jul", (getter)Outputs_get_cf_energy_net_jul,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by the system in July [kWh]"),
- 	NULL},
-{"cf_energy_net_jun", (getter)Outputs_get_cf_energy_net_jun,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by the system in June [kWh]"),
- 	NULL},
-{"cf_energy_net_mar", (getter)Outputs_get_cf_energy_net_mar,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by the system in March [kWh]"),
- 	NULL},
-{"cf_energy_net_may", (getter)Outputs_get_cf_energy_net_may,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by the system in May [kWh]"),
- 	NULL},
-{"cf_energy_net_monthly_firstyear_TOD1", (getter)Outputs_get_cf_energy_net_monthly_firstyear_TOD1,(setter)0,
-	PyDoc_STR("*sequence*: First year energy from the system by month for TOD period 1 [kWh]"),
- 	NULL},
-{"cf_energy_net_monthly_firstyear_TOD2", (getter)Outputs_get_cf_energy_net_monthly_firstyear_TOD2,(setter)0,
-	PyDoc_STR("*sequence*: First year energy from the system by month for TOD period 2 [kWh]"),
- 	NULL},
-{"cf_energy_net_monthly_firstyear_TOD3", (getter)Outputs_get_cf_energy_net_monthly_firstyear_TOD3,(setter)0,
-	PyDoc_STR("*sequence*: First year energy from the system by month for TOD period 3 [kWh]"),
- 	NULL},
-{"cf_energy_net_monthly_firstyear_TOD4", (getter)Outputs_get_cf_energy_net_monthly_firstyear_TOD4,(setter)0,
-	PyDoc_STR("*sequence*: First year energy from the system by month for TOD period 4 [kWh]"),
- 	NULL},
-{"cf_energy_net_monthly_firstyear_TOD5", (getter)Outputs_get_cf_energy_net_monthly_firstyear_TOD5,(setter)0,
-	PyDoc_STR("*sequence*: First year energy from the system by month for TOD period 5 [kWh]"),
- 	NULL},
-{"cf_energy_net_monthly_firstyear_TOD6", (getter)Outputs_get_cf_energy_net_monthly_firstyear_TOD6,(setter)0,
-	PyDoc_STR("*sequence*: First year energy from the system by month for TOD period 6 [kWh]"),
- 	NULL},
-{"cf_energy_net_monthly_firstyear_TOD7", (getter)Outputs_get_cf_energy_net_monthly_firstyear_TOD7,(setter)0,
-	PyDoc_STR("*sequence*: First year energy from the system by month for TOD period 7 [kWh]"),
- 	NULL},
-{"cf_energy_net_monthly_firstyear_TOD8", (getter)Outputs_get_cf_energy_net_monthly_firstyear_TOD8,(setter)0,
-	PyDoc_STR("*sequence*: First year energy from the system by month for TOD period 8 [kWh]"),
- 	NULL},
-{"cf_energy_net_monthly_firstyear_TOD9", (getter)Outputs_get_cf_energy_net_monthly_firstyear_TOD9,(setter)0,
-	PyDoc_STR("*sequence*: First year energy from the system by month for TOD period 9 [kWh]"),
- 	NULL},
-{"cf_energy_net_nov", (getter)Outputs_get_cf_energy_net_nov,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by the system in November [kWh]"),
- 	NULL},
-{"cf_energy_net_oct", (getter)Outputs_get_cf_energy_net_oct,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by the system in October [kWh]"),
- 	NULL},
-{"cf_energy_net_sep", (getter)Outputs_get_cf_energy_net_sep,(setter)0,
-	PyDoc_STR("*sequence*: Energy produced by the system in September [kWh]"),
- 	NULL},
 {"cf_energy_purchases", (getter)Outputs_get_cf_energy_purchases,(setter)0,
 	PyDoc_STR("*sequence*: Electricity from grid to system [kWh]"),
  	NULL},
 {"cf_energy_sales", (getter)Outputs_get_cf_energy_sales,(setter)0,
 	PyDoc_STR("*sequence*: Electricity generation [kWh]"),
+ 	NULL},
+{"cf_energy_sales_apr", (getter)Outputs_get_cf_energy_sales_apr,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced by the system in April [kWh]"),
+ 	NULL},
+{"cf_energy_sales_aug", (getter)Outputs_get_cf_energy_sales_aug,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced by the system in August [kWh]"),
+ 	NULL},
+{"cf_energy_sales_dec", (getter)Outputs_get_cf_energy_sales_dec,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced by the system in December [kWh]"),
+ 	NULL},
+{"cf_energy_sales_dispatch1", (getter)Outputs_get_cf_energy_sales_dispatch1,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced by the system in TOD period 1 [kWh]"),
+ 	NULL},
+{"cf_energy_sales_dispatch2", (getter)Outputs_get_cf_energy_sales_dispatch2,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced by the system in TOD period 2 [kWh]"),
+ 	NULL},
+{"cf_energy_sales_dispatch3", (getter)Outputs_get_cf_energy_sales_dispatch3,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced by the system in TOD period 3 [kWh]"),
+ 	NULL},
+{"cf_energy_sales_dispatch4", (getter)Outputs_get_cf_energy_sales_dispatch4,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced by the system in TOD period 4 [kWh]"),
+ 	NULL},
+{"cf_energy_sales_dispatch5", (getter)Outputs_get_cf_energy_sales_dispatch5,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced by the system in TOD period 5 [kWh]"),
+ 	NULL},
+{"cf_energy_sales_dispatch6", (getter)Outputs_get_cf_energy_sales_dispatch6,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced by the system in TOD period 6 [kWh]"),
+ 	NULL},
+{"cf_energy_sales_dispatch7", (getter)Outputs_get_cf_energy_sales_dispatch7,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced by the system in TOD period 7 [kWh]"),
+ 	NULL},
+{"cf_energy_sales_dispatch8", (getter)Outputs_get_cf_energy_sales_dispatch8,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced by the system in TOD period 8 [kWh]"),
+ 	NULL},
+{"cf_energy_sales_dispatch9", (getter)Outputs_get_cf_energy_sales_dispatch9,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced by the system in TOD period 9 [kWh]"),
+ 	NULL},
+{"cf_energy_sales_feb", (getter)Outputs_get_cf_energy_sales_feb,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced by the system in February [kWh]"),
+ 	NULL},
+{"cf_energy_sales_jan", (getter)Outputs_get_cf_energy_sales_jan,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced by the system in January [kWh]"),
+ 	NULL},
+{"cf_energy_sales_jul", (getter)Outputs_get_cf_energy_sales_jul,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced by the system in July [kWh]"),
+ 	NULL},
+{"cf_energy_sales_jun", (getter)Outputs_get_cf_energy_sales_jun,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced by the system in June [kWh]"),
+ 	NULL},
+{"cf_energy_sales_mar", (getter)Outputs_get_cf_energy_sales_mar,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced by the system in March [kWh]"),
+ 	NULL},
+{"cf_energy_sales_may", (getter)Outputs_get_cf_energy_sales_may,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced by the system in May [kWh]"),
+ 	NULL},
+{"cf_energy_sales_monthly_firstyear_TOD1", (getter)Outputs_get_cf_energy_sales_monthly_firstyear_TOD1,(setter)0,
+	PyDoc_STR("*sequence*: First year energy from the system by month for TOD period 1 [kWh]"),
+ 	NULL},
+{"cf_energy_sales_monthly_firstyear_TOD2", (getter)Outputs_get_cf_energy_sales_monthly_firstyear_TOD2,(setter)0,
+	PyDoc_STR("*sequence*: First year energy from the system by month for TOD period 2 [kWh]"),
+ 	NULL},
+{"cf_energy_sales_monthly_firstyear_TOD3", (getter)Outputs_get_cf_energy_sales_monthly_firstyear_TOD3,(setter)0,
+	PyDoc_STR("*sequence*: First year energy from the system by month for TOD period 3 [kWh]"),
+ 	NULL},
+{"cf_energy_sales_monthly_firstyear_TOD4", (getter)Outputs_get_cf_energy_sales_monthly_firstyear_TOD4,(setter)0,
+	PyDoc_STR("*sequence*: First year energy from the system by month for TOD period 4 [kWh]"),
+ 	NULL},
+{"cf_energy_sales_monthly_firstyear_TOD5", (getter)Outputs_get_cf_energy_sales_monthly_firstyear_TOD5,(setter)0,
+	PyDoc_STR("*sequence*: First year energy from the system by month for TOD period 5 [kWh]"),
+ 	NULL},
+{"cf_energy_sales_monthly_firstyear_TOD6", (getter)Outputs_get_cf_energy_sales_monthly_firstyear_TOD6,(setter)0,
+	PyDoc_STR("*sequence*: First year energy from the system by month for TOD period 6 [kWh]"),
+ 	NULL},
+{"cf_energy_sales_monthly_firstyear_TOD7", (getter)Outputs_get_cf_energy_sales_monthly_firstyear_TOD7,(setter)0,
+	PyDoc_STR("*sequence*: First year energy from the system by month for TOD period 7 [kWh]"),
+ 	NULL},
+{"cf_energy_sales_monthly_firstyear_TOD8", (getter)Outputs_get_cf_energy_sales_monthly_firstyear_TOD8,(setter)0,
+	PyDoc_STR("*sequence*: First year energy from the system by month for TOD period 8 [kWh]"),
+ 	NULL},
+{"cf_energy_sales_monthly_firstyear_TOD9", (getter)Outputs_get_cf_energy_sales_monthly_firstyear_TOD9,(setter)0,
+	PyDoc_STR("*sequence*: First year energy from the system by month for TOD period 9 [kWh]"),
+ 	NULL},
+{"cf_energy_sales_nov", (getter)Outputs_get_cf_energy_sales_nov,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced by the system in November [kWh]"),
+ 	NULL},
+{"cf_energy_sales_oct", (getter)Outputs_get_cf_energy_sales_oct,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced by the system in October [kWh]"),
+ 	NULL},
+{"cf_energy_sales_sep", (getter)Outputs_get_cf_energy_sales_sep,(setter)0,
+	PyDoc_STR("*sequence*: Energy produced by the system in September [kWh]"),
  	NULL},
 {"cf_energy_value", (getter)Outputs_get_cf_energy_value,(setter)0,
 	PyDoc_STR("*sequence*: PPA revenue [$]"),
@@ -10565,9 +10880,6 @@ static PyGetSetDef Outputs_getset[] = {
  	NULL},
 {"cf_ptc_sta", (getter)Outputs_get_cf_ptc_sta,(setter)0,
 	PyDoc_STR("*sequence*: State PTC income [$]"),
- 	NULL},
-{"cf_ptc_total", (getter)Outputs_get_cf_ptc_total,(setter)0,
-	PyDoc_STR("*sequence*: Total PTC income [$]"),
  	NULL},
 {"cf_pv_cash_for_ds", (getter)Outputs_get_cf_pv_cash_for_ds,(setter)0,
 	PyDoc_STR("*sequence*: Present value of CAFDS [$]"),
@@ -11916,6 +12228,18 @@ newHostDeveloperObject(void* data_ptr)
 	PyDict_SetItemString(attr_dict, "ElectricityRates", ElectricityRates_obj);
 	Py_DECREF(ElectricityRates_obj);
 
+	PyObject* HybridFin_obj = HybridFin_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "HybridFin", HybridFin_obj);
+	Py_DECREF(HybridFin_obj);
+
+	PyObject* Monthly_obj = Monthly_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "Monthly", Monthly_obj);
+	Py_DECREF(Monthly_obj);
+
+	PyObject* FuelCell_obj = FuelCell_new(self->data_ptr);
+	PyDict_SetItemString(attr_dict, "FuelCell", FuelCell_obj);
+	Py_DECREF(FuelCell_obj);
+
 	PyObject* Outputs_obj = Outputs_new(self->data_ptr);
 	PyDict_SetItemString(attr_dict, "Outputs", Outputs_obj);
 	Py_DECREF(Outputs_obj);
@@ -11936,6 +12260,14 @@ HostDeveloper_dealloc(CmodObject *self)
 		PySAM_has_error(error);
 	}
 	PyObject_Del(self);
+}
+
+
+static PyObject *
+HostDeveloper_get_data_ptr(CmodObject *self, PyObject *args)
+{
+	PyObject* ptr = PyLong_FromVoidPtr((void*)self->data_ptr);
+	return ptr;
 }
 
 
@@ -12006,6 +12338,8 @@ HostDeveloper_unassign(CmodObject *self, PyObject *args)
 static PyMethodDef HostDeveloper_methods[] = {
 		{"execute",           (PyCFunction)HostDeveloper_execute,  METH_VARARGS,
 				PyDoc_STR("execute(int verbosity) -> None\n Execute simulation with verbosity level 0 (default) or 1")},
+		{"get_data_ptr",           (PyCFunction)HostDeveloper_get_data_ptr,  METH_VARARGS,
+				PyDoc_STR("execute(int verbosity) -> Pointer\n Get ssc_data_t pointer")},
 		{"assign",            (PyCFunction)HostDeveloper_assign,  METH_VARARGS,
 				PyDoc_STR("assign(dict) -> None\n Assign attributes from nested dictionary, except for Outputs\n\n``nested_dict = { 'Revenue': { var: val, ...}, ...}``")},
 		{"replace",            (PyCFunction)HostDeveloper_replace,  METH_VARARGS,
@@ -12174,7 +12508,7 @@ static PyMethodDef HostDeveloperModule_methods[] = {
 		{"new",             HostDeveloper_new,         METH_VARARGS,
 				PyDoc_STR("new() -> HostDeveloper")},
 		{"default",             HostDeveloper_default,         METH_VARARGS,
-				PyDoc_STR("default(config) -> HostDeveloper\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n		- *\"FlatPlatePVHostDeveloper\"*\n\n		- *\"GenericBatteryHostDeveloper\"*\n\n		- *\"GenericSystemHostDeveloper\"*\n\n		- *\"PVBatteryHostDeveloper\"*\n\n		- *\"PVWattsBatteryHostDeveloper\"*\n\n		- *\"PVWattsHostDeveloper\"*\n\n		- *\"StandaloneBatteryHostDeveloper\"*\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
+				PyDoc_STR("default(config) -> HostDeveloper\n\nLoad defaults for the configuration ``config``. Available configurations are:\n\n		- *\"FlatPlatePVHostDeveloper\"*\n\n		- *\"GenericBatteryHostDeveloper\"*\n\n		- *\"GenericPVWattsWindFuelCellBatteryHybridHostDeveloper\"*\n\n		- *\"GenericSystemHostDeveloper\"*\n\n		- *\"PVBatteryHostDeveloper\"*\n\n		- *\"PVWattsBatteryHostDeveloper\"*\n\n		- *\"PVWattsWindBatteryHybridHostDeveloper\"*\n\n		- *\"PVWattsWindFuelCellBatteryHybridHostDeveloper\"*\n\n		- *\"PVWattsHostDeveloper\"*\n\n		- *\"PhotovoltaicWindBatteryHybridHostDeveloper\"*\n\n		- *\"StandaloneBatteryHostDeveloper\"*\n\n.. note::\n\n	Some inputs do not have default values and may be assigned a value from the variable's **Required** attribute. See variable attribute descriptions below.")},
 		{"wrap",             HostDeveloper_wrap,         METH_VARARGS,
 				PyDoc_STR("wrap(ssc_data_t) -> HostDeveloper\n\nLoad data from a PySSC object.\n\n.. warning::\n\n	Do not call PySSC.data_free on the ssc_data_t provided to ``wrap()``")},
 		{"from_existing",   HostDeveloper_from_existing,        METH_VARARGS,
@@ -12322,6 +12656,27 @@ HostDeveloperModule_exec(PyObject *m)
 				"ElectricityRates",
 				(PyObject*)&ElectricityRates_Type);
 	Py_DECREF(&ElectricityRates_Type);
+
+	/// Add the HybridFin type object to HostDeveloper_Type
+	if (PyType_Ready(&HybridFin_Type) < 0) { goto fail; }
+	PyDict_SetItemString(HostDeveloper_Type.tp_dict,
+				"HybridFin",
+				(PyObject*)&HybridFin_Type);
+	Py_DECREF(&HybridFin_Type);
+
+	/// Add the Monthly type object to HostDeveloper_Type
+	if (PyType_Ready(&Monthly_Type) < 0) { goto fail; }
+	PyDict_SetItemString(HostDeveloper_Type.tp_dict,
+				"Monthly",
+				(PyObject*)&Monthly_Type);
+	Py_DECREF(&Monthly_Type);
+
+	/// Add the FuelCell type object to HostDeveloper_Type
+	if (PyType_Ready(&FuelCell_Type) < 0) { goto fail; }
+	PyDict_SetItemString(HostDeveloper_Type.tp_dict,
+				"FuelCell",
+				(PyObject*)&FuelCell_Type);
+	Py_DECREF(&FuelCell_Type);
 
 	/// Add the Outputs type object to HostDeveloper_Type
 	if (PyType_Ready(&Outputs_Type) < 0) { goto fail; }
