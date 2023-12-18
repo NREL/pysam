@@ -3,17 +3,6 @@
 cd $PYSAMDIR || exit
 source $(conda info --base)/etc/profile.d/conda.sh
 
-DIST_NAME=''
-if [ `uname` = "Linux" ] ;
-then
-    DIST_NAME='linux-64'
-elif [ `uname` = "Darwin" ] ;
-then
-    DIST_NAME='osx-64'
-else
-    DIST_NAME='win-64'
-fi
-
 # read version
 VERSION="$(python -c 'from files.version import __version__; print(__version__)' 2>&1)"
 export VERSION

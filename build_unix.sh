@@ -45,9 +45,16 @@ yes | $PYSAMDIR/build_conda.sh || exit
 #
 
 cd ..
-docker pull quay.io/pypa/manylinux2014_x86_64
-# docker run --rm -dit -v $(pwd):/io quay.io/pypa/manylinux2014_x86_64 /bin/bash
-docker run --rm -v $(pwd):/io quay.io/pypa/manylinux2014_x86_64 /io/pysam/build_manylinux.sh || exit
+if [ "$(python3 -c "import platform; print(platform.processor())")" = "arm" ]
+then
+    docker pull quay.io/pypa/manylinux2014_aarch64
+    # docker run --rm -dit -v $(pwd):/io quay.io/pypa/manylinux2010_x86_64 /bin/bash
+    docker run --rm -v $(pwd):/io quay.io/pypa/manylinux2014_aarch64 /io/pysam/build_manylinux.sh
+else
+    docker pull quay.io/pypa/manylinux2014_x86_64
+    # docker run --rm -dit -v $(pwd):/io quay.io/pypa/manylinux2014_x86_64 /bin/bash
+    docker run --rm -v $(pwd):/io quay.io/pypa/manylinux2014_x86_64 /io/pysam/build_manylinux.sh || exit
+fi
 
 rename -s linux manylinux2014 $PYSAMDIR/dist/*-linux_*
 
