@@ -4816,7 +4816,7 @@ static PyMethodDef TcsMSLFModule_methods[] = {
 };
 
 PyDoc_STRVAR(module_doc,
-			 "TcsMSLF");
+			 "CSP linear Fresnel with molten salt heat transfer fluid for power generation");
 
 
 static int
