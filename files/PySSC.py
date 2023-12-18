@@ -33,7 +33,7 @@ class PySSC:
         self.pdll.ssc_data_get_data_matrix.restype = c_void_p
 
         self.pdll.ssc_var_get_string.restype = c_char_p
-        self.pdll.ssc_var_get_number.restype = POINTER(c_number)
+        self.pdll.ssc_var_get_number.restype = c_float
         self.pdll.ssc_var_get_array.restype = POINTER(c_number)
         self.pdll.ssc_var_get_matrix.restype = POINTER(c_number)
         self.pdll.ssc_var_get_var_array.restype = c_void_p
@@ -73,7 +73,7 @@ class PySSC:
                 count = 1
                 arr = (c_number * count)()
                 arr[:] = [parr]  # set all at once instead of looping
-                print(name, " input type should be array. Changing to single element array")
+                print("input type should be array. Changing to single element array")
         return self.pdll.ssc_var_set_array(c_void_p(p_var), pointer(arr), c_int(count))
 
     def var_set_matrix(self, p_var, mat):
@@ -95,14 +95,13 @@ class PySSC:
         self.pdll.ssc_var_set_data_matrix(c_void_p(p_var), c_void_p(p_mat), c_int(r), c_int(c))
 
     def var_set_table(self, p_var, p_tab):
-        return self.pdll.ssc_var_set_table(c_void_p(p_var), c_void_p(table))
+        return self.pdll.ssc_var_set_table(c_void_p(p_var), c_void_p(p_tab))
 
     def var_get_string(self, p_var):
         return self.pdll.ssc_var_get_string(c_void_p(p_var))
     
     def var_get_number(self, p_var):
-        ptr = self.pdll.ssc_var_get_number(c_void_p(p_var))
-        return ptr.contents.value
+        return self.pdll.ssc_var_get_number(c_void_p(p_var))
     
     def var_get_array(self, p_var):
         count = c_int()

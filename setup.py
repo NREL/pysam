@@ -143,6 +143,8 @@ extension_modules = [Extension('PySAM.AdjustmentFactors',
                     )]
 
 for filename in os.listdir(this_directory + "/modules"):
+    if "Hybrid" in filename:
+        continue
     extension_modules.append(Extension('PySAM.' + os.path.splitext(filename)[0],
                              ['modules/' + filename],
                             define_macros=defines,
