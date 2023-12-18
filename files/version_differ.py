@@ -34,7 +34,7 @@ resp = requests.get("https://api.github.com/repos/NREL/pysam/releases").json()
 old_release = resp[previous_release]['name']
 sam_resp = requests.get("https://api.github.com/repos/NREL/sam/tags").json()
 for r in sam_resp:
-    if r['name'] == old_release.lower().replace(' ', '-'):
+    if old_release.lower().replace(' ', '-') in r['name']:
         old_release = r['tarball_url']
         break
 print(
