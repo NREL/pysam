@@ -76,6 +76,7 @@ class MsptIph(object):
 		is_ampl_engine = float
 		is_dispatch = float
 		is_parallel_htr = float
+		is_timestep_load_fractions = float
 		is_tod_pc_target_also_pc_max = float
 		is_write_ampl_dat = float
 		pb_fixed_par = float

@@ -587,7 +587,8 @@ class TroughPhysical(object):
 		field_htf_cp_avg_des = float
 		field_htf_max_temp = float
 		field_htf_min_temp = float
-		field_thermal_output = float
+		field_thermal_output_actual = float
+		field_thermal_output_ideal = float
 		fixed_land_area = float
 		gen = tuple
 		hour_day = tuple

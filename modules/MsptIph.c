@@ -590,6 +590,18 @@ SystemControl_set_is_parallel_htr(VarGroupObject *self, PyObject *value, void *c
 }
 
 static PyObject *
+SystemControl_get_is_timestep_load_fractions(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_MsptIph_SystemControl_is_timestep_load_fractions_nget, self->data_ptr);
+}
+
+static int
+SystemControl_set_is_timestep_load_fractions(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_MsptIph_SystemControl_is_timestep_load_fractions_nset, self->data_ptr);
+}
+
+static PyObject *
 SystemControl_get_is_tod_pc_target_also_pc_max(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_MsptIph_SystemControl_is_tod_pc_target_also_pc_max_nget, self->data_ptr);
@@ -835,6 +847,9 @@ static PyGetSetDef SystemControl_getset[] = {
  	NULL},
 {"is_parallel_htr", (getter)SystemControl_get_is_parallel_htr,(setter)SystemControl_set_is_parallel_htr,
 	PyDoc_STR("*float*: Does plant include a HTF heater parallel to solar field?\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"is_timestep_load_fractions", (getter)SystemControl_get_is_timestep_load_fractions,(setter)SystemControl_set_is_timestep_load_fractions,
+	PyDoc_STR("*float*: Use turbine load fraction for each timestep instead of block dispatch?\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"is_tod_pc_target_also_pc_max", (getter)SystemControl_get_is_tod_pc_target_also_pc_max,(setter)SystemControl_set_is_tod_pc_target_also_pc_max,
 	PyDoc_STR("*float*: Is the TOD target cycle heat input also the max cycle heat input?\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),

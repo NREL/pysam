@@ -6241,12 +6241,6 @@ Outputs_get_q_dot_rec_abs(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_q_dot_rec_des(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_FresnelPhysical_Outputs_q_dot_rec_des_nget, self->data_ptr);
-}
-
-static PyObject *
 Outputs_get_q_dot_rec_inc(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_FresnelPhysical_Outputs_q_dot_rec_inc_aget, self->data_ptr);
@@ -6259,9 +6253,15 @@ Outputs_get_q_dot_rec_thermal_loss(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_q_field_des(VarGroupObject *self, void *closure)
+Outputs_get_q_field_des_actual(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_FresnelPhysical_Outputs_q_field_des_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_FresnelPhysical_Outputs_q_field_des_actual_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_q_field_des_ideal(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysical_Outputs_q_field_des_ideal_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -7021,17 +7021,17 @@ static PyGetSetDef Outputs_getset[] = {
 {"q_dot_rec_abs", (getter)Outputs_get_q_dot_rec_abs,(setter)0,
 	PyDoc_STR("*sequence*: Receiver thermal power absorbed [MWt]"),
  	NULL},
-{"q_dot_rec_des", (getter)Outputs_get_q_dot_rec_des,(setter)0,
-	PyDoc_STR("*float*: Receiver thermal output at design [MWt]"),
- 	NULL},
 {"q_dot_rec_inc", (getter)Outputs_get_q_dot_rec_inc,(setter)0,
 	PyDoc_STR("*sequence*: Receiver thermal power incident [MWt]"),
  	NULL},
 {"q_dot_rec_thermal_loss", (getter)Outputs_get_q_dot_rec_thermal_loss,(setter)0,
 	PyDoc_STR("*sequence*: Receiver thermal losses [MWt]"),
  	NULL},
-{"q_field_des", (getter)Outputs_get_q_field_des,(setter)0,
-	PyDoc_STR("*float*: Design field power output [MW]"),
+{"q_field_des_actual", (getter)Outputs_get_q_field_des_actual,(setter)0,
+	PyDoc_STR("*float*: Design-point thermal power from the solar field limited by mass flow [MW]"),
+ 	NULL},
+{"q_field_des_ideal", (getter)Outputs_get_q_field_des_ideal,(setter)0,
+	PyDoc_STR("*float*: Design-point thermal power from the solar field with no limit [MW]"),
  	NULL},
 {"q_inc_sf_tot", (getter)Outputs_get_q_inc_sf_tot,(setter)0,
 	PyDoc_STR("*sequence*: Field thermal power incident [MWt]"),

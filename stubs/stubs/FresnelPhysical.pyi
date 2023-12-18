@@ -649,10 +649,10 @@ class FresnelPhysical(object):
 		q_dot_pc_target = tuple
 		q_dot_piping_loss = tuple
 		q_dot_rec_abs = tuple
-		q_dot_rec_des = float
 		q_dot_rec_inc = tuple
 		q_dot_rec_thermal_loss = tuple
-		q_field_des = float
+		q_field_des_actual = float
+		q_field_des_ideal = float
 		q_inc_sf_tot = tuple
 		q_pb = tuple
 		q_pc_startup = tuple

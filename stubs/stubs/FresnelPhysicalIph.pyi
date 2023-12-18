@@ -232,6 +232,7 @@ class FresnelPhysicalIph(object):
 		dispatch_factors_ts = tuple
 		f_turb_tou_periods = tuple
 		is_ampl_engine = float
+		is_timestep_load_fractions = float
 		is_tod_pc_target_also_pc_max = float
 		is_write_ampl_dat = float
 		ppa_multiplier_model = float
@@ -571,11 +572,11 @@ class FresnelPhysicalIph(object):
 		q_dot_pc_target = tuple
 		q_dot_piping_loss = tuple
 		q_dot_rec_abs = tuple
-		q_dot_rec_des = float
 		q_dot_rec_inc = tuple
 		q_dot_rec_thermal_loss = tuple
 		q_dot_to_heat_sink = tuple
-		q_field_des = float
+		q_field_des_actual = float
+		q_field_des_ideal = float
 		q_inc_sf_tot = tuple
 		q_tes_heater = tuple
 		rec_thermal_eff = tuple

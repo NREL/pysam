@@ -6077,9 +6077,15 @@ Outputs_get_field_htf_min_temp(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_field_thermal_output(VarGroupObject *self, void *closure)
+Outputs_get_field_thermal_output_actual(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TroughPhysical_Outputs_field_thermal_output_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_TroughPhysical_Outputs_field_thermal_output_actual_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_field_thermal_output_ideal(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TroughPhysical_Outputs_field_thermal_output_ideal_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -7112,8 +7118,11 @@ static PyGetSetDef Outputs_getset[] = {
 {"field_htf_min_temp", (getter)Outputs_get_field_htf_min_temp,(setter)0,
 	PyDoc_STR("*float*: Minimum field htf temp [C]"),
  	NULL},
-{"field_thermal_output", (getter)Outputs_get_field_thermal_output,(setter)0,
-	PyDoc_STR("*float*: Design-point thermal power from the solar field [MWt]"),
+{"field_thermal_output_actual", (getter)Outputs_get_field_thermal_output_actual,(setter)0,
+	PyDoc_STR("*float*: Design-point thermal power from the solar field limited by mass flow [MW]"),
+ 	NULL},
+{"field_thermal_output_ideal", (getter)Outputs_get_field_thermal_output_ideal,(setter)0,
+	PyDoc_STR("*float*: Design-point thermal power from the solar field with no limit [MW]"),
  	NULL},
 {"fixed_land_area", (getter)Outputs_get_fixed_land_area,(setter)0,
 	PyDoc_STR("*float*: Fixed Land Area [acre]"),

@@ -43,6 +43,12 @@
 :doc:`../modules/EtesPtes`
       Heat pump charging two two-tank TES from grid, discharge with power cycle
 
+:doc:`../modules/FresnelPhysical`
+      Physical Fresnel applications
+
+:doc:`../modules/FresnelPhysicalIph`
+      Physical Fresnel IPH applications
+
 :doc:`../modules/Fuelcell`
       Fuel cell model
 
@@ -63,6 +69,12 @@
 
 :doc:`../modules/HostDeveloper`
       Host Developer Financial Model
+
+:doc:`../modules/Hybrid` (HD)
+      Hybrid processing
+
+:doc:`../modules/HybridSteps` (HD)
+      Hybrid processing with 'steps' passed in on how to combine
 
 :doc:`../modules/Iec61853interp` (HD)
       Determine single diode model parameters from IEC 61853 solution matrix at a given temperature and irradiance.
@@ -88,6 +100,9 @@
 :doc:`../modules/Lcoefcr`
       Calculate levelized cost of energy using fixed charge rate method.
 
+:doc:`../modules/LcoefcrDesign` (HD)
+      Calculate levelized cost of energy using fixed charge rate method.
+
 :doc:`../modules/Levpartflip`
       Leveraged Partnership Flip Financial Model
 
@@ -106,11 +121,11 @@
 :doc:`../modules/MhkWave` (HD)
       MHK Wave power calculation model using power distribution.
 
+:doc:`../modules/MsptIph`
+      CSP molten salt power tower with hierarchical controller and dispatch optimization
+
 :doc:`../modules/MsptSfAndRecIsolated` (HD)
       MSPT solar field and tower/receiver model
-
-:doc:`../modules/Poacalib` (HD)
-      Calibrates beam and diffuse to give POA input
 
 :doc:`../modules/PtesDesignPoint` (HD)
       PTES Design Point
@@ -126,15 +141,6 @@
 
 :doc:`../modules/Pvsandiainv` (HD)
       Sandia PV inverter performance calculator.
-
-:doc:`../modules/Pvwattsv1` (HD)
-      PVWatts V.1 - integrated hourly weather reader and PV system simulator.
-
-:doc:`../modules/Pvwattsv11ts` (HD)
-      pvwattsv1_1ts- single timestep calculation of PV system performance.
-
-:doc:`../modules/Pvwattsv1Poa` (HD)
-      PVWatts system performance calculator.  Does not include weather file reading or irradiance processing - user must supply arrays of precalculated POA irradiance data.
 
 :doc:`../modules/Pvwattsv5` (HD)
       PVWatts V5 - integrated hourly weather reader and PV system simulator.
@@ -184,7 +190,7 @@
 :doc:`../modules/Swh`
       Solar water heating model using multi-mode tank node model.
 
-:doc:`../modules/TcsMSLF`
+:doc:`../modules/TcsMSLF` (HD)
       CSP model using the molten salt linear fresnel TCS types.
 
 :doc:`../modules/TcsgenericSolar`
@@ -211,6 +217,9 @@
 :doc:`../modules/Thirdpartyownership`
       Residential/Commercial 3rd Party Ownership Finance model.
 
+:doc:`../modules/TidalFileReader` (HD)
+      SAM Tidal Resource File Reader
+
 :doc:`../modules/Timeseq` (HD)
       Time sequence generator
 
@@ -219,6 +228,9 @@
 
 :doc:`../modules/TroughPhysicalCspSolver` (HD)
       Physical trough using CSP Solver
+
+:doc:`../modules/TroughPhysicalIph` (HD)
+      Physical trough iph applications
 
 :doc:`../modules/TroughPhysicalProcessHeat`
       Physical trough process heat applications
@@ -281,7 +293,6 @@
     :maxdepth: 2
     :hidden:
 
-    ../modules/Annualoutput.rst
     ../modules/Battery.rst
     ../modules/BatteryStateful.rst
     ../modules/Battwatts.rst
@@ -297,6 +308,8 @@
     ../modules/Equpartflip.rst
     ../modules/EtesElectricResistance.rst
     ../modules/EtesPtes.rst
+    ../modules/FresnelPhysical.rst
+    ../modules/FresnelPhysicalIph.rst
     ../modules/Fuelcell.rst
     ../modules/GenericSystem.rst
     ../modules/Geothermal.rst
@@ -304,6 +317,8 @@
     ../modules/Grid.rst
     ../modules/Hcpv.rst
     ../modules/HostDeveloper.rst
+    ../modules/Hybrid.rst
+    ../modules/HybridSteps.rst
     ../modules/Iec61853interp.rst
     ../modules/Iec61853par.rst
     ../modules/InvCecCg.rst
@@ -312,22 +327,20 @@
     ../modules/Irradproc.rst
     ../modules/Layoutarea.rst
     ../modules/Lcoefcr.rst
+    ../modules/LcoefcrDesign.rst
     ../modules/Levpartflip.rst
     ../modules/LinearFresnelDsgIph.rst
     ../modules/Merchantplant.rst
     ../modules/MhkCosts.rst
     ../modules/MhkTidal.rst
     ../modules/MhkWave.rst
+    ../modules/MsptIph.rst
     ../modules/MsptSfAndRecIsolated.rst
-    ../modules/Poacalib.rst
     ../modules/PtesDesignPoint.rst
     ../modules/Pv6parmod.rst
     ../modules/PvGetShadeLossMpp.rst
     ../modules/Pvsamv1.rst
     ../modules/Pvsandiainv.rst
-    ../modules/Pvwattsv1.rst
-    ../modules/Pvwattsv11ts.rst
-    ../modules/Pvwattsv1Poa.rst
     ../modules/Pvwattsv5.rst
     ../modules/Pvwattsv51ts.rst
     ../modules/Pvwattsv7.rst
@@ -353,9 +366,11 @@
     ../modules/TestUdPowerCycle.rst
     ../modules/Thermalrate.rst
     ../modules/Thirdpartyownership.rst
+    ../modules/TidalFileReader.rst
     ../modules/Timeseq.rst
     ../modules/TroughPhysical.rst
     ../modules/TroughPhysicalCspSolver.rst
+    ../modules/TroughPhysicalIph.rst
     ../modules/TroughPhysicalProcessHeat.rst
     ../modules/UiTesCalcs.rst
     ../modules/UiUdpcChecks.rst

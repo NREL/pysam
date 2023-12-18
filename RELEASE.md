@@ -1,5 +1,10 @@
 # Release Notes
 
+## Version 5.0.0, Dec 13, 2023 - SAM 2023.12.17, SSC Version 288
+* [SAM Release updates for Version 2023.12.17](https://nrel.github.io/SAM/doc/releasenotes.html)
+* Fix AdjustmentFactors (#158)
+* Fix Non-annual Pvwatts simulations (#159)
+
 ## Version 4.2.0, June 30, 2023 - SAM 2022.11.21, SSC Version 280
 * [SAM Release updates for Version 2022.11.21 Revision 3](https://nrel.github.io/SAM/doc/releasenotes.html)
 * Fix support for arm64 and aarch64 (#143, #144)

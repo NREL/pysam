@@ -11,6 +11,32 @@ ssc = PySSC()
 
 check_error_cases = True
 
+def test_adjustment_factors():
+    m = GenericSystem.new()
+    adj = m.AdjustmentFactors
+    adj.constant = 0
+    adj.en_hourly = 0
+    adj.hourly = [0]
+    adj.en_periods = 0
+    adj.periods = [[0, 0]]
+    adj.en_timeindex = 0
+    adj.timeindex = [0]
+    adj.dc_constant = 0
+    adj.dc_en_hourly = 0
+    adj.dc_hourly = [0]
+    adj.dc_en_periods = 0
+    adj.dc_periods = [[0, 0]]
+    adj.dc_en_timeindex = 0
+    adj.dc_timeindex = [0]
+    adj.sf_constant = 0
+    adj.sf_en_hourly = 0
+    adj.sf_hourly = [0]
+    adj.sf_en_periods = 0
+    adj.sf_periods = [[0, 0]]
+    adj.sf_en_timeindex = 0
+    adj.sf_timeindex = [0]
+    adj.export()
+
 def test_pyssc():
     var = ssc.var_create()
     ssc.var_set_value(var, 0)

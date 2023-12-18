@@ -2552,6 +2552,18 @@ Tou_set_is_ampl_engine(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyObject *
+Tou_get_is_timestep_load_fractions(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_Tou_is_timestep_load_fractions_nget, self->data_ptr);
+}
+
+static int
+Tou_set_is_timestep_load_fractions(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_FresnelPhysicalIph_Tou_is_timestep_load_fractions_nset, self->data_ptr);
+}
+
+static PyObject *
 Tou_get_is_tod_pc_target_also_pc_max(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_FresnelPhysicalIph_Tou_is_tod_pc_target_also_pc_max_nget, self->data_ptr);
@@ -2653,6 +2665,9 @@ static PyGetSetDef Tou_getset[] = {
  	NULL},
 {"is_ampl_engine", (getter)Tou_get_is_ampl_engine,(setter)Tou_set_is_ampl_engine,
 	PyDoc_STR("*float*: Run dispatch optimization with external AMPL engine [-]\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"is_timestep_load_fractions", (getter)Tou_get_is_timestep_load_fractions,(setter)Tou_set_is_timestep_load_fractions,
+	PyDoc_STR("*float*: Use turbine load fraction for each timestep instead of block dispatch?\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"is_tod_pc_target_also_pc_max", (getter)Tou_get_is_tod_pc_target_also_pc_max,(setter)Tou_set_is_tod_pc_target_also_pc_max,
 	PyDoc_STR("*float*: Is the TOD target cycle heat input also the max cycle heat input?\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
@@ -5362,12 +5377,6 @@ Outputs_get_q_dot_rec_abs(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_q_dot_rec_des(VarGroupObject *self, void *closure)
-{
-	return PySAM_double_getter(SAM_FresnelPhysicalIph_Outputs_q_dot_rec_des_nget, self->data_ptr);
-}
-
-static PyObject *
 Outputs_get_q_dot_rec_inc(VarGroupObject *self, void *closure)
 {
 	return PySAM_array_getter(SAM_FresnelPhysicalIph_Outputs_q_dot_rec_inc_aget, self->data_ptr);
@@ -5386,9 +5395,15 @@ Outputs_get_q_dot_to_heat_sink(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_q_field_des(VarGroupObject *self, void *closure)
+Outputs_get_q_field_des_actual(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_FresnelPhysicalIph_Outputs_q_field_des_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_Outputs_q_field_des_actual_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_q_field_des_ideal(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_FresnelPhysicalIph_Outputs_q_field_des_ideal_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -6112,9 +6127,6 @@ static PyGetSetDef Outputs_getset[] = {
 {"q_dot_rec_abs", (getter)Outputs_get_q_dot_rec_abs,(setter)0,
 	PyDoc_STR("*sequence*: Receiver thermal power absorbed [MWt]"),
  	NULL},
-{"q_dot_rec_des", (getter)Outputs_get_q_dot_rec_des,(setter)0,
-	PyDoc_STR("*float*: Receiver thermal output at design [MWt]"),
- 	NULL},
 {"q_dot_rec_inc", (getter)Outputs_get_q_dot_rec_inc,(setter)0,
 	PyDoc_STR("*sequence*: Receiver thermal power incident [MWt]"),
  	NULL},
@@ -6124,8 +6136,11 @@ static PyGetSetDef Outputs_getset[] = {
 {"q_dot_to_heat_sink", (getter)Outputs_get_q_dot_to_heat_sink,(setter)0,
 	PyDoc_STR("*sequence*: Heat sink thermal power [MWt]"),
  	NULL},
-{"q_field_des", (getter)Outputs_get_q_field_des,(setter)0,
-	PyDoc_STR("*float*: Design field power output [MW]"),
+{"q_field_des_actual", (getter)Outputs_get_q_field_des_actual,(setter)0,
+	PyDoc_STR("*float*: Design-point thermal power from the solar field limited by mass flow [MW]"),
+ 	NULL},
+{"q_field_des_ideal", (getter)Outputs_get_q_field_des_ideal,(setter)0,
+	PyDoc_STR("*float*: Design-point thermal power from the solar field with no limit [MW]"),
  	NULL},
 {"q_inc_sf_tot", (getter)Outputs_get_q_inc_sf_tot,(setter)0,
 	PyDoc_STR("*sequence*: Field thermal power incident [MWt]"),

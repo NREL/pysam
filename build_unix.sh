@@ -7,9 +7,9 @@
 # Building libssc and libSAM_api
 # requires SAM-Dev/CMakeList.txt that contains lk, wex, ssc and sam as subdirectories
 
-# rm -rf ~/SAM-Dev/cmake-build-release
-# mkdir -p ~/SAM-Dev/cmake-build-release
-cd ~/SAM-Dev/cmake-build-release || exit
+# rm -rf ${SAMNTDIR}/../cmake-build-release
+# mkdir -p ${SAMNTDIR}/../cmake-build-release
+cd ${SAMNTDIR}/../cmake-build-release || exit
 cmake .. -DCMAKE_BUILD_TYPE=Release -DSAMAPI_EXPORT=1 -DSAM_SKIP_AUTOGEN=0
 cmake --build . --target SAM_api -j 6
 
@@ -23,7 +23,7 @@ source $(conda info --base)/etc/profile.d/conda.sh
 rm -rf build
 rm -rf dist/*
 
-for PYTHONENV in pysam_build_3.6 pysam_build_3.7 pysam_build_3.8 pysam_build_3.9 pysam_build_3.10 pysam_build_3.11
+for PYTHONENV in pysam_build_3.8 pysam_build_3.9 pysam_build_3.10 pysam_build_3.11 pysam_build_3.12
 do
    conda activate $PYTHONENV
    yes | pip install -r tests/requirements.txt

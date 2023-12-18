@@ -241,6 +241,7 @@ class TroughPhysicalIph(object):
 		f_turb_tou_periods = tuple
 		is_ampl_engine = float
 		is_dispatch_series = float
+		is_timestep_load_fractions = float
 		is_tod_pc_target_also_pc_max = float
 		is_write_ampl_dat = float
 		ppa_multiplier_model = float
@@ -602,7 +603,8 @@ class TroughPhysicalIph(object):
 		field_htf_cp_avg_des = float
 		field_htf_max_temp = float
 		field_htf_min_temp = float
-		field_thermal_output = float
+		field_thermal_output_actual = float
+		field_thermal_output_ideal = float
 		fixed_land_area = float
 		gen = tuple
 		hour_day = tuple

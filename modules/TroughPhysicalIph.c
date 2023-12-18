@@ -2757,6 +2757,18 @@ Tou_set_is_dispatch_series(VarGroupObject *self, PyObject *value, void *closure)
 }
 
 static PyObject *
+Tou_get_is_timestep_load_fractions(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TroughPhysicalIph_Tou_is_timestep_load_fractions_nget, self->data_ptr);
+}
+
+static int
+Tou_set_is_timestep_load_fractions(VarGroupObject *self, PyObject *value, void *closure)
+{
+	return PySAM_double_setter(value, SAM_TroughPhysicalIph_Tou_is_timestep_load_fractions_nset, self->data_ptr);
+}
+
+static PyObject *
 Tou_get_is_tod_pc_target_also_pc_max(VarGroupObject *self, void *closure)
 {
 	return PySAM_double_getter(SAM_TroughPhysicalIph_Tou_is_tod_pc_target_also_pc_max_nget, self->data_ptr);
@@ -2885,6 +2897,9 @@ static PyGetSetDef Tou_getset[] = {
  	NULL},
 {"is_dispatch_series", (getter)Tou_get_is_dispatch_series,(setter)Tou_set_is_dispatch_series,
 	PyDoc_STR("*float*: Use time-series dispatch factors\n\n**Required:**\nFalse. Automatically set to 1 if not assigned explicitly or loaded from defaults."),
+ 	NULL},
+{"is_timestep_load_fractions", (getter)Tou_get_is_timestep_load_fractions,(setter)Tou_set_is_timestep_load_fractions,
+	PyDoc_STR("*float*: Use turbine load fraction for each timestep instead of block dispatch?\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
  	NULL},
 {"is_tod_pc_target_also_pc_max", (getter)Tou_get_is_tod_pc_target_also_pc_max,(setter)Tou_set_is_tod_pc_target_also_pc_max,
 	PyDoc_STR("*float*: Is the TOD target cycle heat input also the max cycle heat input?\n\n**Required:**\nFalse. Automatically set to 0 if not assigned explicitly or loaded from defaults."),
@@ -6092,9 +6107,15 @@ Outputs_get_field_htf_min_temp(VarGroupObject *self, void *closure)
 }
 
 static PyObject *
-Outputs_get_field_thermal_output(VarGroupObject *self, void *closure)
+Outputs_get_field_thermal_output_actual(VarGroupObject *self, void *closure)
 {
-	return PySAM_double_getter(SAM_TroughPhysicalIph_Outputs_field_thermal_output_nget, self->data_ptr);
+	return PySAM_double_getter(SAM_TroughPhysicalIph_Outputs_field_thermal_output_actual_nget, self->data_ptr);
+}
+
+static PyObject *
+Outputs_get_field_thermal_output_ideal(VarGroupObject *self, void *closure)
+{
+	return PySAM_double_getter(SAM_TroughPhysicalIph_Outputs_field_thermal_output_ideal_nget, self->data_ptr);
 }
 
 static PyObject *
@@ -7088,8 +7109,11 @@ static PyGetSetDef Outputs_getset[] = {
 {"field_htf_min_temp", (getter)Outputs_get_field_htf_min_temp,(setter)0,
 	PyDoc_STR("*float*: Minimum field htf temp [C]"),
  	NULL},
-{"field_thermal_output", (getter)Outputs_get_field_thermal_output,(setter)0,
-	PyDoc_STR("*float*: Design-point thermal power from the solar field [MWt]"),
+{"field_thermal_output_actual", (getter)Outputs_get_field_thermal_output_actual,(setter)0,
+	PyDoc_STR("*float*: Design-point thermal power from the solar field limited by mass flow [MW]"),
+ 	NULL},
+{"field_thermal_output_ideal", (getter)Outputs_get_field_thermal_output_ideal,(setter)0,
+	PyDoc_STR("*float*: Design-point thermal power from the solar field with no limit [MW]"),
  	NULL},
 {"fixed_land_area", (getter)Outputs_get_fixed_land_area,(setter)0,
 	PyDoc_STR("*float*: Fixed Land Area [acre]"),

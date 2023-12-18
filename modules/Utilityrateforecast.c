@@ -1121,6 +1121,14 @@ Utilityrateforecast_dealloc(CmodStatefulObject *self)
 
 
 static PyObject *
+Utilityrateforecast_get_data_ptr(CmodStatefulObject *self, PyObject *args)
+{
+	PyObject* ptr = PyLong_FromVoidPtr((void*)self->data_ptr);
+	return ptr;
+}
+
+
+static PyObject *
 Utilityrateforecast_setup(CmodStatefulObject *self, PyObject *args)
 {
 	SAM_error error = new_error();
