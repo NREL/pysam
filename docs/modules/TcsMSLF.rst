@@ -1,12 +1,12 @@
-.. _Tcsmslf:
+.. _TcsMSLF:
 
-Tcsmslf
+TcsMSLF
 ========
 
-.. automodule:: PySAM.Tcsmslf
+.. automodule:: PySAM.TcsMSLF
 	:members:
 
-Tcsmslf is a wrapper for the SSC compute module `cmod_tcsmslf.cpp <https://github.com/NREL/ssc/blob/develop/ssc/cmod_tcsmslf.cpp>`_
+TcsMSLF is a wrapper for the SSC compute module `cmod_tcsmslf.cpp <https://github.com/NREL/ssc/blob/develop/ssc/cmod_tcsmslf.cpp>`_
 
 Interdependent Variables
 --------------------------
@@ -18,66 +18,66 @@ The variables listed below are interdependent with other variables. If you chang
 Functions
 -----------
 
-.. autoclass:: PySAM.Tcsmslf.Tcsmslf
+.. autoclass:: PySAM.TcsMSLF.TcsMSLF
 	:members:
 
 Weather Group
 --------------
 
-.. autoclass:: PySAM.Tcsmslf.Tcsmslf.Weather
+.. autoclass:: PySAM.TcsMSLF.TcsMSLF.Weather
 	:members:
 
 Mslf Group
 -----------
 
-.. autoclass:: PySAM.Tcsmslf.Tcsmslf.Mslf
+.. autoclass:: PySAM.TcsMSLF.TcsMSLF.Mslf
 	:members:
 
 TouTranslator Group
 --------------------
 
-.. autoclass:: PySAM.Tcsmslf.Tcsmslf.TouTranslator
+.. autoclass:: PySAM.TcsMSLF.TcsMSLF.TouTranslator
 	:members:
 
 Controller Group
 -----------------
 
-.. autoclass:: PySAM.Tcsmslf.Tcsmslf.Controller
+.. autoclass:: PySAM.TcsMSLF.TcsMSLF.Controller
 	:members:
 
 SolarField Group
 -----------------
 
-.. autoclass:: PySAM.Tcsmslf.Tcsmslf.SolarField
+.. autoclass:: PySAM.TcsMSLF.TcsMSLF.SolarField
 	:members:
 
 Powerblock Group
 -----------------
 
-.. autoclass:: PySAM.Tcsmslf.Tcsmslf.Powerblock
+.. autoclass:: PySAM.TcsMSLF.TcsMSLF.Powerblock
 	:members:
 
 UserDefinedPC Group
 --------------------
 
-.. autoclass:: PySAM.Tcsmslf.Tcsmslf.UserDefinedPC
+.. autoclass:: PySAM.TcsMSLF.TcsMSLF.UserDefinedPC
 	:members:
 
 Enet Group
 -----------
 
-.. autoclass:: PySAM.Tcsmslf.Tcsmslf.Enet
+.. autoclass:: PySAM.TcsMSLF.TcsMSLF.Enet
 	:members:
 
 AdjustmentFactors Group
 ------------------------
 
-.. autoclass:: PySAM.Tcsmslf.Tcsmslf.AdjustmentFactors
+.. autoclass:: PySAM.TcsMSLF.TcsMSLF.AdjustmentFactors
 	:members:
 
 Outputs Group
 --------------
 
-.. autoclass:: PySAM.Tcsmslf.Tcsmslf.Outputs
+.. autoclass:: PySAM.TcsMSLF.TcsMSLF.Outputs
 	:members:
 

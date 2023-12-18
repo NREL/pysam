@@ -1,4 +1,4 @@
-class Tcsmslf(object):
+class TcsMSLF(object):
 	def assign(self, dict):
 		pass
 
@@ -416,16 +416,16 @@ class Tcsmslf(object):
 
 
 
-def default(config) -> Tcsmslf:
+def default(config) -> TcsMSLF:
 	pass
 
-def new() -> Tcsmslf:
+def new() -> TcsMSLF:
 	pass
 
-def wrap(ssc_data_t) -> Tcsmslf:
+def wrap(ssc_data_t) -> TcsMSLF:
 	pass
 
-def from_existing(model, config="") -> Tcsmslf:
+def from_existing(model, config="") -> TcsMSLF:
 	pass
 
 __loader__ = None 

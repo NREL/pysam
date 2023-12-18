@@ -428,7 +428,7 @@ def test_run_all():
         "MsptIph",
         "Pvsamv1", "Pvwattsv8", "Pvwattsv7", "Pvwattsv5", "TcsmoltenSalt", "Hcpv", "Swh", "GenericSystem", "Grid",
         "TroughPhysicalProcessHeat", 
-        "Tcsmslf", "TcsgenericSolar", "TcslinearFresnel", "TcstroughEmpirical",
+        "TcsMSLF", "TcsgenericSolar", "TcslinearFresnel", "TcstroughEmpirical",
         "TroughPhysical", "TroughPhysicalIph", "Windpower")
     for mod in techs:
         mod_name = "PySAM." + mod
