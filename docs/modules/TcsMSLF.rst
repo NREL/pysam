@@ -72,8 +72,9 @@ Enet Group
 AdjustmentFactors Group
 ------------------------
 
-.. autoclass:: PySAM.TcsMSLF.TcsMSLF.AdjustmentFactors
+.. autoclass:: PySAM.AdjustmentFactors.AdjustmentFactors
 	:members:
+	:noindex:
 
 Outputs Group
 --------------

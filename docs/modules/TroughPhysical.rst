@@ -113,8 +113,9 @@ CapitalCosts Group
 AdjustmentFactors Group
 ------------------------
 
-.. autoclass:: PySAM.TroughPhysical.TroughPhysical.AdjustmentFactors
+.. autoclass:: PySAM.AdjustmentFactors.AdjustmentFactors
 	:members:
+	:noindex:
 
 Outputs Group
 --------------

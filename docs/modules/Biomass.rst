@@ -30,8 +30,9 @@ Biopower Group
 AdjustmentFactors Group
 ------------------------
 
-.. autoclass:: PySAM.Biomass.Biomass.AdjustmentFactors
+.. autoclass:: PySAM.AdjustmentFactors.AdjustmentFactors
 	:members:
+	:noindex:
 
 Outputs Group
 --------------

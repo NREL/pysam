@@ -364,8 +364,9 @@ PVLosses Group
 AdjustmentFactors Group
 ------------------------
 
-.. autoclass:: PySAM.Pvsamv1.Pvsamv1.AdjustmentFactors
+.. autoclass:: PySAM.AdjustmentFactors.AdjustmentFactors
 	:members:
+	:noindex:
 
 BatteryCell Group
 ------------------

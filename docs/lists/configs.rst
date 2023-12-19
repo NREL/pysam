@@ -278,9 +278,9 @@ Generic PVWatts Wind FuelCell Battery Hybrid -- Single Owner
       :doc:`../modules/GenericSystem`, :doc:`../modules/Pvwattsv8`, :doc:`../modules/Windpower`, :doc:`../modules/Fuelcell`, :doc:`../modules/Battery`, :doc:`../modules/Grid`, :doc:`../modules/Utilityrate5`, :doc:`../modules/Singleowner`
 
 Generic PVWatts Wind FuelCell Battery Hybrid -- Third Party - Host / Developer
------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 
-      Hybrid power system with PVWatts and wind power generation and battery storage). Third party ownershop from host and developer perspective for PPA.
+      Hybrid power system with PVWatts and wind power generation and battery storage. Third party ownershop from host and developer perspective for PPA.
 
       Configuration name for defaults: *"GenericPVWattsWindFuelCellBatteryHybridHostDeveloper"*
 
